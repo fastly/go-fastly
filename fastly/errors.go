@@ -52,8 +52,16 @@ var ErrMissingTo = errors.New("Missing required field 'To'")
 var ErrMissingDirector = errors.New("Missing required field 'Director'")
 
 // ErrMissingBackend is an error that is returned when an input struct
-// requires a "To" key, but one was not set.
+// requires a "Backend" key, but one was not set.
 var ErrMissingBackend = errors.New("Missing required field 'Backend'")
+
+// ErrMissingYear is an error that is returned when an input struct
+// requires a "Year" key, but one was not set.
+var ErrMissingYear = errors.New("Missing required field 'Year'")
+
+// ErrMissingMonth is an error that is returned when an input struct
+// requires a "Month" key, but one was not set.
+var ErrMissingMonth = errors.New("Missing required field 'Month'")
 
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
