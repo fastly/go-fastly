@@ -7,8 +7,10 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"reflect"
 	"runtime"
 	"strings"
+	"time"
 
 	"github.com/ajg/form"
 	"github.com/hashicorp/cleanhttp"
@@ -26,8 +28,8 @@ const APIKeyHeader = "Fastly-Key"
 // support an on-premise solution, this is likely to always be the default.
 const DefaultEndpoint = "https://api.fastly.com"
 
-// ProjectURL will be filled in by the compiler.
-var ProjectURL = ""
+// ProjectURL is the url for this library.
+var ProjectURL = "github.com/sethvargo/fastly"
 
 // ProjectVersion is the version of this library.
 var ProjectVersion = "0.1"
@@ -70,20 +72,6 @@ func DefaultClient() *Client {
 func NewClient(key string) (*Client, error) {
 	client := &Client{apiKey: key}
 	return client.init()
-}
-
-// NewCookieClient creates a new client from the given username and password.
-// This is a very rare API and is only required on certain requests. Most use
-// cases are covered by `DefaultClient()` or `NewClient()`. If the username or
-// password are blank, an error will be returned.
-func NewCookieClient(user, pass string) (*Client, error) {
-	if len(user) == 0 || len(pass) == 0 {
-		return nil, fmt.Errorf("Missing username or password!")
-	}
-
-	// https://docs.fastly.com/api/#Auth
-	// rawRequest("POST", "/login")
-	return nil, nil
 }
 
 func (c *Client) init() (*Client, error) {
@@ -211,5 +199,34 @@ func decodeJSON(out interface{}, body io.ReadCloser) error {
 		return err
 	}
 
-	return mapstructure.WeakDecode(parsed, out)
+	decoder, err := mapstructure.NewDecoder(&mapstructure.DecoderConfig{
+		DecodeHook: mapstructure.ComposeDecodeHookFunc(
+			StringToTimeHookFunc(),
+		),
+		WeaklyTypedInput: true,
+		Result:           out,
+	})
+	if err != nil {
+		return err
+	}
+	return decoder.Decode(parsed)
+}
+
+// StringToTimeHookFunc returns a function that converts strings to a time.Time
+// value.
+func StringToTimeHookFunc() mapstructure.DecodeHookFunc {
+	return func(
+		f reflect.Type,
+		t reflect.Type,
+		data interface{}) (interface{}, error) {
+		if f.Kind() != reflect.String {
+			return data, nil
+		}
+		if t != reflect.TypeOf(time.Now()) {
+			return data, nil
+		}
+
+		// Convert it by parsing
+		return time.Parse(time.RFC3339, data.(string))
+	}
 }
