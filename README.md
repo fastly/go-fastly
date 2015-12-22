@@ -44,7 +44,7 @@ if err != nil {
 var serviceID = "SU1Z0isxPaozGVKXdv0eY"
 
 // Get the latest active version
-latest, err := client.LatestVersion(&LatestVersionInput{
+latest, err := client.LatestVersion(&fastly.LatestVersionInput{
   Service: serviceID,
 })
 if err != nil {
@@ -53,7 +53,7 @@ if err != nil {
 
 // Clone the latest version so we can make changes without affecting the
 // active configuration.
-version, err := client.CloneVersion(&CloneVersionInput{
+version, err := client.CloneVersion(&fastly.CloneVersionInput{
   Service: serviceID,
   Version: latest.Number,
 })
@@ -63,7 +63,7 @@ if err != nil {
 
 // Now you can make any changes to the new version. In this example, we will add
 // a new domain.
-domain, err := client.CreateDomain(&CreateDomainInput{
+domain, err := client.CreateDomain(&fastly.CreateDomainInput{
   Service: serviceID,
   Version: version.Number,
   Name: "example.com",
@@ -76,7 +76,7 @@ if err != nil {
 fmt.Println(domain.Name)
 
 // Now we can validate that our version is valid.
-valid, err := client.ValidateVersion(&ValidateVersionInput{
+valid, err := client.ValidateVersion(&fastly.ValidateVersionInput{
   Service: serviceID,
   Version: version.Number,
 })
@@ -88,7 +88,7 @@ if !valid {
 }
 
 // Finally, activate this new version.
-activeVersion, err := client.ActivateVersion(&ActivateVersionInput{
+activeVersion, err := client.ActivateVersion(&fastly.ActivateVersionInput{
   Service: serviceID,
   Version: version.Number,
 })
