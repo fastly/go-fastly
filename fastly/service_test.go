@@ -3,6 +3,8 @@ package fastly
 import "testing"
 
 func TestClient_Services(t *testing.T) {
+	t.Parallel()
+
 	// Create
 	s, err := testClient.CreateService(&CreateServiceInput{
 		Name:    "test-service",

@@ -3,7 +3,10 @@ package fastly
 import "testing"
 
 func createTestDictionary(t *testing.T) *Dictionary {
+	t.Parallel()
+
 	tv := testVersion(t)
+
 	d, err := testClient.CreateDictionary(&CreateDictionaryInput{
 		Service: testServiceID,
 		Version: tv.Number,

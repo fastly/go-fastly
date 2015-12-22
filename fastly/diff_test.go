@@ -3,6 +3,8 @@ package fastly
 import "testing"
 
 func TestClient_Diff(t *testing.T) {
+	t.Parallel()
+
 	tv1 := testVersion(t)
 	tv2 := testVersion(t)
 

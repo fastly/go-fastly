@@ -3,6 +3,8 @@ package fastly
 import "testing"
 
 func TestClient_GetBilling(t *testing.T) {
+	t.Parallel()
+
 	b, err := testClient.GetBilling(&GetBillingInput{
 		Year:  2015,
 		Month: 11,

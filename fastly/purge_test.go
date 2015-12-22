@@ -3,6 +3,8 @@ package fastly
 import "testing"
 
 func TestClient_Purge(t *testing.T) {
+	t.Parallel()
+
 	resp, err := testClient.Purge(&PurgeInput{
 		URL: "https://releases.hashicorp.com",
 	})

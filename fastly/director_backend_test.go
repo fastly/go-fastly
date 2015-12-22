@@ -3,6 +3,8 @@ package fastly
 import "testing"
 
 func TestClient_DirectorBackends(t *testing.T) {
+	t.Parallel()
+
 	tv := testVersion(t)
 
 	// Create

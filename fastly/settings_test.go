@@ -3,6 +3,8 @@ package fastly
 import "testing"
 
 func TestClient_Settings(t *testing.T) {
+	t.Parallel()
+
 	tv := testVersion(t)
 
 	// Get

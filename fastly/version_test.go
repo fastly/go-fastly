@@ -3,6 +3,11 @@ package fastly
 import "testing"
 
 func TestClient_Versions(t *testing.T) {
+	t.Parallel()
+
+	// Lock because we are creating a new version.
+	testVersionLock.Lock()
+
 	// Create
 	v, err := testClient.CreateVersion(&CreateVersionInput{
 		Service: testServiceID,
@@ -13,6 +18,9 @@ func TestClient_Versions(t *testing.T) {
 	if v.Number == "" {
 		t.Errorf("bad number: %q", v.Number)
 	}
+
+	// Unlock and let other parallel tests go!
+	testVersionLock.Unlock()
 
 	// List
 	vs, err := testClient.ListVersions(&ListVersionsInput{
