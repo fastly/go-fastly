@@ -16,7 +16,7 @@ Download the library into your `$GOPATH`:
 Import the library into your tool:
 
 ```go
-import "github.com/sethvargo/fastly"
+import "github.com/sethvargo/go-fastly"
 ```
 
 Examples

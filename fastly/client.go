@@ -11,7 +11,7 @@ import (
 	"strings"
 
 	"github.com/ajg/form"
-	"github.com/hashicorp/cleanhttp"
+	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
 )
 
