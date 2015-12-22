@@ -59,12 +59,12 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 		return nil, err
 	}
 
-	var bs []*HealthCheck
-	if err := decodeJSON(&bs, resp.Body); err != nil {
+	var hcs []*HealthCheck
+	if err := decodeJSON(&hcs, resp.Body); err != nil {
 		return nil, err
 	}
-	sort.Stable(healthChecksByName(bs))
-	return bs, nil
+	sort.Stable(healthChecksByName(hcs))
+	return hcs, nil
 }
 
 // CreateHealthCheckInput is used as input to the CreateHealthCheck function.
@@ -103,11 +103,11 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 		return nil, err
 	}
 
-	var b *HealthCheck
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	var h *HealthCheck
+	if err := decodeJSON(&h, resp.Body); err != nil {
 		return nil, err
 	}
-	return b, nil
+	return h, nil
 }
 
 // GetHealthCheckInput is used as input to the GetHealthCheck function.
@@ -141,11 +141,11 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 		return nil, err
 	}
 
-	var b *HealthCheck
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	var h *HealthCheck
+	if err := decodeJSON(&h, resp.Body); err != nil {
 		return nil, err
 	}
-	return b, nil
+	return h, nil
 }
 
 // UpdateHealthCheckInput is used as input to the UpdateHealthCheck function.
@@ -191,11 +191,11 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 		return nil, err
 	}
 
-	var b *HealthCheck
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	var h *HealthCheck
+	if err := decodeJSON(&h, resp.Body); err != nil {
 		return nil, err
 	}
-	return b, nil
+	return h, nil
 }
 
 // DeleteHealthCheckInput is the input parameter to DeleteHealthCheck.
