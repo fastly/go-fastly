@@ -1,5 +1,11 @@
 Go Fastly
 =========
+[![Build Status](http://img.shields.io/travis/sethvargo/go-fastly.svg?style=flat-square)][travis]
+[![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
+
+[travis]: http://travis-ci.org/sethvargo/go-fastly
+[godocs]: http://godoc.org/github.com/sethvargo/go-fastly
+
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
 
