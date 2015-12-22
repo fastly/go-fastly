@@ -3,15 +3,19 @@ package fastly
 import (
 	"fmt"
 	"sort"
+	"time"
 )
 
 // Service represents a single service for the Fastly account.
 type Service struct {
-	ID            string `mapstructure:"id"`
-	Name          string `mapstructure:"name"`
-	Comment       string `mapstructure:"comment"`
-	CustomerID    string `mapstructure:"customer_id"`
-	ActiveVersion uint   `mapstructure:"active_version"`
+	ID            string     `mapstructure:"id"`
+	Name          string     `mapstructure:"name"`
+	Comment       string     `mapstructure:"comment"`
+	CustomerID    string     `mapstructure:"customer_id"`
+	ActiveVersion uint       `mapstructure:"active_version"`
+	CreatedAt     *time.Time `mapstructure:"created_at"`
+	UpdatedAt     *time.Time `mapstructure:"updated_at"`
+	DeletedAt     *time.Time `mapstructure:"deleted_at"`
 }
 
 // servicesByName is a sortable list of services.

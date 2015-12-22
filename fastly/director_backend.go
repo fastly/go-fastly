@@ -1,6 +1,9 @@
 package fastly
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // DirectorBackend is the relationship between a director and a backend in the
 // Fastly API.
@@ -8,8 +11,11 @@ type DirectorBackend struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   string `mapstructure:"version"`
 
-	Director string `mapstructure:"director_name"`
-	Backend  string `mapstructure:"backend_name"`
+	Director  string     `mapstructure:"director_name"`
+	Backend   string     `mapstructure:"backend_name"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // CreateDirectorBackendInput is used as input to the CreateDirectorBackend
