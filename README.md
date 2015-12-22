@@ -11,12 +11,12 @@ Usage
 -----
 Download the library into your `$GOPATH`:
 
-    $ go get github.com/sethvargo/go-fastly
+    $ go get github.com/sethvargo/fastly
 
 Import the library into your tool:
 
 ```go
-import "github.com/sethvargo/go-fastly"
+import "github.com/sethvargo/fastly"
 ```
 
 Examples

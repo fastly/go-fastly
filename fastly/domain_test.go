@@ -11,7 +11,7 @@ func TestClient_Domains(t *testing.T) {
 	d, err := testClient.CreateDomain(&CreateDomainInput{
 		Service: testServiceID,
 		Version: tv.Number,
-		Name:    "integ-test.hashicorp.com",
+		Name:    "integ-test.go-fastly.com",
 		Comment: "comment",
 	})
 	if err != nil {
@@ -23,17 +23,17 @@ func TestClient_Domains(t *testing.T) {
 		testClient.DeleteDomain(&DeleteDomainInput{
 			Service: testServiceID,
 			Version: tv.Number,
-			Name:    "integ-test.hashicorp.com",
+			Name:    "integ-test.go-fastly.com",
 		})
 
 		testClient.DeleteDomain(&DeleteDomainInput{
 			Service: testServiceID,
 			Version: tv.Number,
-			Name:    "new-integ-test.hashicorp.com",
+			Name:    "new-integ-test.go-fastly.com",
 		})
 	}()
 
-	if d.Name != "integ-test.hashicorp.com" {
+	if d.Name != "integ-test.go-fastly.com" {
 		t.Errorf("bad name: %q", d.Name)
 	}
 	if d.Comment != "comment" {
@@ -56,7 +56,7 @@ func TestClient_Domains(t *testing.T) {
 	nd, err := testClient.GetDomain(&GetDomainInput{
 		Service: testServiceID,
 		Version: tv.Number,
-		Name:    "integ-test.hashicorp.com",
+		Name:    "integ-test.go-fastly.com",
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -72,13 +72,13 @@ func TestClient_Domains(t *testing.T) {
 	ud, err := testClient.UpdateDomain(&UpdateDomainInput{
 		Service: testServiceID,
 		Version: tv.Number,
-		Name:    "integ-test.hashicorp.com",
-		NewName: "new-integ-test.hashicorp.com",
+		Name:    "integ-test.go-fastly.com",
+		NewName: "new-integ-test.go-fastly.com",
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.Name != "new-integ-test.hashicorp.com" {
+	if ud.Name != "new-integ-test.go-fastly.com" {
 		t.Errorf("bad name: %q", ud.Name)
 	}
 
@@ -86,7 +86,7 @@ func TestClient_Domains(t *testing.T) {
 	if err := testClient.DeleteDomain(&DeleteDomainInput{
 		Service: testServiceID,
 		Version: tv.Number,
-		Name:    "new-integ-test.hashicorp.com",
+		Name:    "new-integ-test.go-fastly.com",
 	}); err != nil {
 		t.Fatal(err)
 	}

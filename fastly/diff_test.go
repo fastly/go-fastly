@@ -23,7 +23,7 @@ func TestClient_Diff(t *testing.T) {
 		Service: testServiceID,
 		Version: tv2.Number,
 		Name:    "test-backend",
-		Address: "integ-test.hashicorp.com",
+		Address: "integ-test.go-fastly.com",
 	})
 	if err != nil {
 		t.Fatal(err)

@@ -12,7 +12,7 @@ func TestClient_Backends(t *testing.T) {
 		Service:        testServiceID,
 		Version:        tv.Number,
 		Name:           "test-backend",
-		Address:        "integ-test.hashicorp.com",
+		Address:        "integ-test.go-fastly.com",
 		Port:           1234,
 		ConnectTimeout: 1500,
 	})
@@ -38,7 +38,7 @@ func TestClient_Backends(t *testing.T) {
 	if b.Name != "test-backend" {
 		t.Errorf("bad name: %q", b.Name)
 	}
-	if b.Address != "integ-test.hashicorp.com" {
+	if b.Address != "integ-test.go-fastly.com" {
 		t.Errorf("bad address: %q", b.Address)
 	}
 	if b.Port != 1234 {

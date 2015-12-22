@@ -9,7 +9,7 @@ import (
 var testClient = DefaultClient()
 
 // testServiceID is the ID of the testing service.
-var testServiceID = "3ywicaizKdg7GxRdRJL58Q"
+var testServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.

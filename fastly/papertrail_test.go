@@ -12,7 +12,7 @@ func TestClient_Papertrails(t *testing.T) {
 		Service: testServiceID,
 		Version: tv.Number,
 		Name:    "test-papertrail",
-		Address: "integ-test.hashicorp.com",
+		Address: "integ-test.go-fastly.com",
 		Port:    1234,
 		Format:  "format",
 	})
@@ -38,7 +38,7 @@ func TestClient_Papertrails(t *testing.T) {
 	if p.Name != "test-papertrail" {
 		t.Errorf("bad name: %q", p.Name)
 	}
-	if p.Address != "integ-test.hashicorp.com" {
+	if p.Address != "integ-test.go-fastly.com" {
 		t.Errorf("bad address: %q", p.Address)
 	}
 	if p.Port != 1234 {
