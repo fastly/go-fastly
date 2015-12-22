@@ -7,10 +7,8 @@ import (
 	"net/http"
 	"net/url"
 	"os"
-	"reflect"
 	"runtime"
 	"strings"
-	"time"
 
 	"github.com/ajg/form"
 	"github.com/hashicorp/cleanhttp"
@@ -201,6 +199,7 @@ func decodeJSON(out interface{}, body io.ReadCloser) error {
 
 	decoder, err := mapstructure.NewDecoder(&mapstructure.DecoderConfig{
 		DecodeHook: mapstructure.ComposeDecodeHookFunc(
+			mapToHTTPHeaderHookFunc(),
 			stringToTimeHookFunc(),
 		),
 		WeaklyTypedInput: true,
@@ -210,23 +209,4 @@ func decodeJSON(out interface{}, body io.ReadCloser) error {
 		return err
 	}
 	return decoder.Decode(parsed)
-}
-
-// stringToTimeHookFunc returns a function that converts strings to a time.Time
-// value.
-func stringToTimeHookFunc() mapstructure.DecodeHookFunc {
-	return func(
-		f reflect.Type,
-		t reflect.Type,
-		data interface{}) (interface{}, error) {
-		if f.Kind() != reflect.String {
-			return data, nil
-		}
-		if t != reflect.TypeOf(time.Now()) {
-			return data, nil
-		}
-
-		// Convert it by parsing
-		return time.Parse(time.RFC3339, data.(string))
-	}
 }
