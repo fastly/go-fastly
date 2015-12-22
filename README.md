@@ -17,7 +17,7 @@ Usage
 -----
 Download the library into your `$GOPATH`:
 
-    $ go get github.com/sethvargo/fastly
+    $ go get github.com/sethvargo/go-fastly
 
 Import the library into your tool:
 
