@@ -201,7 +201,7 @@ func decodeJSON(out interface{}, body io.ReadCloser) error {
 
 	decoder, err := mapstructure.NewDecoder(&mapstructure.DecoderConfig{
 		DecodeHook: mapstructure.ComposeDecodeHookFunc(
-			StringToTimeHookFunc(),
+			stringToTimeHookFunc(),
 		),
 		WeaklyTypedInput: true,
 		Result:           out,
@@ -212,9 +212,9 @@ func decodeJSON(out interface{}, body io.ReadCloser) error {
 	return decoder.Decode(parsed)
 }
 
-// StringToTimeHookFunc returns a function that converts strings to a time.Time
+// stringToTimeHookFunc returns a function that converts strings to a time.Time
 // value.
-func StringToTimeHookFunc() mapstructure.DecodeHookFunc {
+func stringToTimeHookFunc() mapstructure.DecodeHookFunc {
 	return func(
 		f reflect.Type,
 		t reflect.Type,
