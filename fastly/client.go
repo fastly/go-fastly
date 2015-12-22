@@ -27,7 +27,7 @@ const APIKeyHeader = "Fastly-Key"
 const DefaultEndpoint = "https://api.fastly.com"
 
 // ProjectURL is the url for this library.
-var ProjectURL = "github.com/sethvargo/fastly"
+var ProjectURL = "github.com/sethvargo/go-fastly"
 
 // ProjectVersion is the version of this library.
 var ProjectVersion = "0.1"
