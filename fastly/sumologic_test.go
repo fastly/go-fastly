@@ -1,0 +1,217 @@
+package fastly
+
+import "testing"
+
+func TestClient_Sumologics(t *testing.T) {
+	t.Parallel()
+
+	tv := testVersion(t)
+
+	// Create
+	s, err := testClient.CreateSumologic(&CreateSumologicInput{
+		Service: testServiceID,
+		Version: tv.Number,
+		Name:    "test-sumologic",
+		URL:     "example.com",
+		Format:  "format",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure deleted
+	defer func() {
+		testClient.DeleteSumologic(&DeleteSumologicInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-sumologic",
+		})
+
+		testClient.DeleteSumologic(&DeleteSumologicInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-sumologic",
+		})
+	}()
+
+	if s.Name != "test-sumologic" {
+		t.Errorf("bad name: %q", s.Name)
+	}
+	if s.URL != "example.com" {
+		t.Errorf("bad url: %q", s.URL)
+	}
+	if s.Format != "format" {
+		t.Errorf("bad format: %q", s.Format)
+	}
+
+	// List
+	ss, err := testClient.ListSumologics(&ListSumologicsInput{
+		Service: testServiceID,
+		Version: tv.Number,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ss) < 1 {
+		t.Errorf("bad sumologics: %v", ss)
+	}
+
+	// Get
+	ns, err := testClient.GetSumologic(&GetSumologicInput{
+		Service: testServiceID,
+		Version: tv.Number,
+		Name:    "test-sumologic",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if s.Name != ns.Name {
+		t.Errorf("bad name: %q", s.Name)
+	}
+	if s.URL != ns.URL {
+		t.Errorf("bad url: %q", s.URL)
+	}
+	if s.Format != ns.Format {
+		t.Errorf("bad format: %q", s.Format)
+	}
+
+	// Update
+	us, err := testClient.UpdateSumologic(&UpdateSumologicInput{
+		Service: testServiceID,
+		Version: tv.Number,
+		Name:    "test-sumologic",
+		NewName: "new-test-sumologic",
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if us.Name != "new-test-sumologic" {
+		t.Errorf("bad name: %q", us.Name)
+	}
+
+	// Delete
+	if err := testClient.DeleteSumologic(&DeleteSumologicInput{
+		Service: testServiceID,
+		Version: tv.Number,
+		Name:    "new-test-sumologic",
+	}); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestClient_ListSumologics_validation(t *testing.T) {
+	var err error
+	_, err = testClient.ListSumologics(&ListSumologicsInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListSumologics(&ListSumologicsInput{
+		Service: "foo",
+		Version: "",
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_CreateSumologic_validation(t *testing.T) {
+	var err error
+	_, err = testClient.CreateSumologic(&CreateSumologicInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateSumologic(&CreateSumologicInput{
+		Service: "foo",
+		Version: "",
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_GetSumologic_validation(t *testing.T) {
+	var err error
+	_, err = testClient.GetSumologic(&GetSumologicInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetSumologic(&GetSumologicInput{
+		Service: "foo",
+		Version: "",
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetSumologic(&GetSumologicInput{
+		Service: "foo",
+		Version: "1",
+		Name:    "",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_UpdateSumologic_validation(t *testing.T) {
+	var err error
+	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
+		Service: "foo",
+		Version: "",
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
+		Service: "foo",
+		Version: "1",
+		Name:    "",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_DeleteSumologic_validation(t *testing.T) {
+	var err error
+	err = testClient.DeleteSumologic(&DeleteSumologicInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteSumologic(&DeleteSumologicInput{
+		Service: "foo",
+		Version: "",
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteSumologic(&DeleteSumologicInput{
+		Service: "foo",
+		Version: "1",
+		Name:    "",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+}
