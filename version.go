@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"sort"
-	"time"
 )
 
 // Version represents a distinct configuration version.
@@ -16,9 +15,6 @@ type Version struct {
 	Deployed  bool       `mapstructure:"deployed"`
 	Staging   bool       `mapstructure:"staging"`
 	Testing   bool       `mapstructure:"testing"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // versionsByNumber is a sortable list of versions. This is used by the version

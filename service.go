@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"sort"
-	"time"
 )
 
 // Service represents a single service for the Fastly account.
@@ -12,10 +11,18 @@ type Service struct {
 	Name          string     `mapstructure:"name"`
 	Comment       string     `mapstructure:"comment"`
 	CustomerID    string     `mapstructure:"customer_id"`
-	ActiveVersion uint       `mapstructure:"active_version"`
-	CreatedAt     *time.Time `mapstructure:"created_at"`
-	UpdatedAt     *time.Time `mapstructure:"updated_at"`
-	DeletedAt     *time.Time `mapstructure:"deleted_at"`
+	ActiveVersion uint       `mapstructure:"version"`
+	Versions      []*Version `mapstructure:"versions"`
+}
+
+type ServiceDetail struct {
+	ID            string     `mapstructure:"id"`
+	Name          string     `mapstructure:"name"`
+	Comment       string     `mapstructure:"comment"`
+	CustomerID    string     `mapstructure:"customer_id"`
+	ActiveVersion Version    `mapstructure:"active_version"`
+	Version       Version    `mapstructure:"version"`
+	Versions      []*Version `mapstructure:"versions"`
 }
 
 // servicesByName is a sortable list of services.
@@ -73,7 +80,7 @@ type GetServiceInput struct {
 
 // GetService retrieves the details for the service with the given id. If no
 // service exists for the given id, the API returns a 400 response (not a 404).
-func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
+func (c *Client) GetService(i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -84,10 +91,11 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 		return nil, err
 	}
 
-	var s *Service
+	var s *ServiceDetail
 	if err := decodeJSON(&s, resp.Body); err != nil {
 		return nil, err
 	}
+
 	return s, nil
 }
 
