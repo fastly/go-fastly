@@ -195,14 +195,14 @@ func TestClient_CloneVersion_validation(t *testing.T) {
 
 func TestClient_ValidateVersion_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ValidateVersion(&ValidateVersionInput{
+	_, _, err = testClient.ValidateVersion(&ValidateVersionInput{
 		Service: "",
 	})
 	if err != ErrMissingService {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ValidateVersion(&ValidateVersionInput{
+	_, _, err = testClient.ValidateVersion(&ValidateVersionInput{
 		Service: "foo",
 		Version: "",
 	})

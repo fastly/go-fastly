@@ -7,6 +7,7 @@ import (
 
 type statusResp struct {
 	Status string
+	Msg    string
 }
 
 func (t *statusResp) Ok() bool {

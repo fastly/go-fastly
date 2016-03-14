@@ -281,26 +281,30 @@ type ValidateVersionInput struct {
 }
 
 // ValidateVersion validates if the given version is okay.
-func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, error) {
+func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) {
+	var msg string
+
 	if i.Service == "" {
-		return false, ErrMissingService
+		return false, msg, ErrMissingService
 	}
 
 	if i.Version == "" {
-		return false, ErrMissingVersion
+		return false, msg, ErrMissingVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%s/validate", i.Service, i.Version)
-	resp, err := c.Put(path, nil)
+	resp, err := c.Get(path, nil)
 	if err != nil {
-		return false, err
+		return false, msg, err
 	}
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {
-		return false, err
+		return false, msg, err
 	}
-	return r.Ok(), nil
+
+	msg = r.Msg
+	return r.Ok(), msg, nil
 }
 
 // LockVersionInput is the input to the LockVersion function.
