@@ -78,9 +78,31 @@ type GetServiceInput struct {
 	ID string
 }
 
+// GetService retrieves the service information for the service with the given
+// id. If no service exists for the given id, the API returns a 400 response
+// (not a 404).
+func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
+	if i.ID == "" {
+		return nil, ErrMissingID
+	}
+
+	path := fmt.Sprintf("/service/%s", i.ID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var s *Service
+	if err := decodeJSON(&s, resp.Body); err != nil {
+		return nil, err
+	}
+
+	return s, nil
+}
+
 // GetService retrieves the details for the service with the given id. If no
 // service exists for the given id, the API returns a 400 response (not a 404).
-func (c *Client) GetService(i *GetServiceInput) (*ServiceDetail, error) {
+func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
