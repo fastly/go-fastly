@@ -55,6 +55,24 @@ func TestClient_Services(t *testing.T) {
 		t.Errorf("bad comment: %q (%q)", s.Comment, ns.Comment)
 	}
 
+	// Get Details
+	nsd, err := testClient.GetServiceDetails(&GetServiceInput{
+		ID: s.ID,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if s.Name != nsd.Name {
+		t.Errorf("bad name: %q (%q)", s.Name, nsd.Name)
+	}
+	if s.Comment != nsd.Comment {
+		t.Errorf("bad comment: %q (%q)", s.Comment, nsd.Comment)
+	}
+	if nsd.Version.Number == "" {
+		t.Errorf("Service Detail Version is empty: (%#v)", nsd)
+	}
+
 	// Search
 	nb, err := testClient.SearchService(&SearchServiceInput{
 		Name: "test-service",
