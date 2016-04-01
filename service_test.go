@@ -55,6 +55,18 @@ func TestClient_Services(t *testing.T) {
 		t.Errorf("bad comment: %q (%q)", s.Comment, ns.Comment)
 	}
 
+	if ns.CreatedAt == "" {
+		t.Errorf("Bad created at: empty")
+	}
+
+	if ns.UpdatedAt == "" {
+		t.Errorf("Bad updated at: empty")
+	}
+
+	if ns.DeletedAt != "" {
+		t.Errorf("Bad deleted at: %s", ns.DeletedAt)
+	}
+
 	// Get Details
 	nsd, err := testClient.GetServiceDetails(&GetServiceInput{
 		ID: s.ID,

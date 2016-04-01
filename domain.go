@@ -33,7 +33,7 @@ type ListDomainsInput struct {
 	Version string
 }
 
-// ListDomains returns the list of domains for this account.
+// ListDomains returns the list of domains for this Service.
 func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
