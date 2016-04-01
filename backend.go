@@ -22,6 +22,7 @@ type Backend struct {
 	Weight              uint     `mapstructure:"weight"`
 	RequestCondition    string   `mapstructure:"request_condition"`
 	HealthCheck         string   `mapstructure:"healthcheck"`
+	Hostname            string   `mapstructure:"hostname"`
 	UseSSL              bool     `mapstructure:"use_ssl"`
 	SSLCheckCert        bool     `mapstructure:"ssl_check_cert"`
 	SSLHostname         string   `mapstructure:"ssl_hostname"`

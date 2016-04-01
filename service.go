@@ -11,6 +11,9 @@ type Service struct {
 	Name          string     `mapstructure:"name"`
 	Comment       string     `mapstructure:"comment"`
 	CustomerID    string     `mapstructure:"customer_id"`
+	CreatedAt     string     `mapstructure:"created_at"`
+	UpdatedAt     string     `mapstructure:"updated_at"`
+	DeletedAt     string     `mapstructure:"deleted_at"`
 	ActiveVersion uint       `mapstructure:"version"`
 	Versions      []*Version `mapstructure:"versions"`
 }
