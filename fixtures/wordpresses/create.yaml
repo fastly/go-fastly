@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=575&comment=comment&name=test-wordpress&path=%2Ffoo
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "575"
+      comment:
+      - comment
+      name:
+      - test-wordpress
+      path:
+      - /foo
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/575/wordpress
+    method: POST
+  response:
+    body: '{"comment":"comment","name":"test-wordpress","path":"/foo","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":575}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:23 GMT
+      Fastly-Ratelimit-Remaining:
+      - "892"
+      Fastly-Ratelimit-Reset:
+      - "1459702800"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-iad2137-IAD
+    status: 200 OK
+    code: 200

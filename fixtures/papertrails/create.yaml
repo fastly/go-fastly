@@ -1,0 +1,59 @@
+---
+version: 1
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=566&address=integ-test.go-fastly.com&format=format&name=test-papertrail&port=1234
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "566"
+      address:
+      - integ-test.go-fastly.com
+      format:
+      - format
+      name:
+      - test-papertrail
+      port:
+      - "1234"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/566/logging/papertrail
+    method: POST
+  response:
+    body: '{"address":"integ-test.go-fastly.com","format":"format","name":"test-papertrail","port":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"566","format_version":"1","hostname":"integ-test.go-fastly.com","response_condition":"","updated_at":"2016-04-03T16:46:20+00:00","deleted_at":null,"created_at":"2016-04-03T16:46:20+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:21 GMT
+      Fastly-Ratelimit-Remaining:
+      - "943"
+      Fastly-Ratelimit-Reset:
+      - "1459702800"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-iad2125-IAD
+    status: 200 OK
+    code: 200

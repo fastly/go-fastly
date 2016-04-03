@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/4eAa9QYCQAZhqDIh5JW3Sk/details
+    method: GET
+  response:
+    body: '{"name":"test-service","versions":[{"testing":null,"locked":false,"number":1,"active":null,"service_id":"4eAa9QYCQAZhqDIh5JW3Sk","staging":null,"created_at":"2016-04-03T16:46:22+00:00","deleted_at":null,"comment":"","updated_at":"2016-04-03T16:46:22+00:00","deployed":null,"inherit_service_id":null}],"customer_id":"7Tdn3IoAG8ATIy3P3XTZrY","comment":"comment","id":"4eAa9QYCQAZhqDIh5JW3Sk","version":{"testing":null,"number":1,"service_id":"4eAa9QYCQAZhqDIh5JW3Sk","staging":null,"inherit_service_id":null,"deployed":null,"locked":false,"active":null,"comment":"","backends":[],"directors":[],"domains":[],"healthchecks":[],"matches":[],"origins":[],"vcls":[],"wordpress":[],"settings":{"general.default_ttl":3600,"general.default_host":"","general.default_pci":0},"conditions":[],"request_settings":[],"cache_settings":[],"response_objects":[],"headers":[],"gzips":[]},"active_version":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:22 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-iad2124-IAD
+    status: 200 OK
+    code: 200

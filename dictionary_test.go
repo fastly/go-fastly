@@ -5,13 +5,20 @@ import "testing"
 func TestClient_Dictionaries(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "dictionaries/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	d, err := testClient.CreateDictionary(&CreateDictionaryInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test_dictionary",
+	var d *Dictionary
+	record(t, "dictionaries/create", func(c *Client) {
+		d, err = c.CreateDictionary(&CreateDictionaryInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test_dictionary",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -19,16 +26,18 @@ func TestClient_Dictionaries(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteDictionary(&DeleteDictionaryInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test_dictionary",
-		})
+		record(t, "dictionaries/cleanup", func(c *Client) {
+			c.DeleteDictionary(&DeleteDictionaryInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test_dictionary",
+			})
 
-		testClient.DeleteDictionary(&DeleteDictionaryInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new_test_dictionary",
+			c.DeleteDictionary(&DeleteDictionaryInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new_test_dictionary",
+			})
 		})
 	}()
 
@@ -37,9 +46,12 @@ func TestClient_Dictionaries(t *testing.T) {
 	}
 
 	// List
-	ds, err := testClient.ListDictionaries(&ListDictionariesInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var ds []*Dictionary
+	record(t, "dictionaries/list", func(c *Client) {
+		ds, err = c.ListDictionaries(&ListDictionariesInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -49,10 +61,13 @@ func TestClient_Dictionaries(t *testing.T) {
 	}
 
 	// Get
-	nd, err := testClient.GetDictionary(&GetDictionaryInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test_dictionary",
+	var nd *Dictionary
+	record(t, "dictionaries/get", func(c *Client) {
+		nd, err = c.GetDictionary(&GetDictionaryInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test_dictionary",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -62,11 +77,14 @@ func TestClient_Dictionaries(t *testing.T) {
 	}
 
 	// Update
-	ud, err := testClient.UpdateDictionary(&UpdateDictionaryInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test_dictionary",
-		NewName: "new_test_dictionary",
+	var ud *Dictionary
+	record(t, "dictionaries/update", func(c *Client) {
+		ud, err = c.UpdateDictionary(&UpdateDictionaryInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test_dictionary",
+			NewName: "new_test_dictionary",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -76,11 +94,14 @@ func TestClient_Dictionaries(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteDictionary(&DeleteDictionaryInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new_test_dictionary",
-	}); err != nil {
+	record(t, "dictionaries/delete", func(c *Client) {
+		err = c.DeleteDictionary(&DeleteDictionaryInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new_test_dictionary",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

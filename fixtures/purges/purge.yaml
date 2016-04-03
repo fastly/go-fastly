@@ -1,0 +1,33 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/https:/releases.hashicorp.com
+    method: PURGE
+  response:
+    body: |
+      {"status": "ok", "id": "156-1458121612-4067809"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Length:
+      - "49"
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:20 GMT
+      Via:
+      - 1.1 varnish
+      X-Varnish:
+      - "1816031031"
+    status: 200 OK
+    code: 200

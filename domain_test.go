@@ -5,14 +5,21 @@ import "testing"
 func TestClient_Domains(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "domains/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	d, err := testClient.CreateDomain(&CreateDomainInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "integ-test.go-fastly.com",
-		Comment: "comment",
+	var d *Domain
+	record(t, "domains/create", func(c *Client) {
+		d, err = c.CreateDomain(&CreateDomainInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "integ-test.go-fastly.com",
+			Comment: "comment",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -20,16 +27,18 @@ func TestClient_Domains(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteDomain(&DeleteDomainInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "integ-test.go-fastly.com",
-		})
+		record(t, "domains/cleanup", func(c *Client) {
+			c.DeleteDomain(&DeleteDomainInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "integ-test.go-fastly.com",
+			})
 
-		testClient.DeleteDomain(&DeleteDomainInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-integ-test.go-fastly.com",
+			c.DeleteDomain(&DeleteDomainInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-integ-test.go-fastly.com",
+			})
 		})
 	}()
 
@@ -41,9 +50,12 @@ func TestClient_Domains(t *testing.T) {
 	}
 
 	// List
-	ds, err := testClient.ListDomains(&ListDomainsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var ds []*Domain
+	record(t, "domains/list", func(c *Client) {
+		ds, err = c.ListDomains(&ListDomainsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -53,10 +65,13 @@ func TestClient_Domains(t *testing.T) {
 	}
 
 	// Get
-	nd, err := testClient.GetDomain(&GetDomainInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "integ-test.go-fastly.com",
+	var nd *Domain
+	record(t, "domains/get", func(c *Client) {
+		nd, err = c.GetDomain(&GetDomainInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "integ-test.go-fastly.com",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -69,11 +84,14 @@ func TestClient_Domains(t *testing.T) {
 	}
 
 	// Update
-	ud, err := testClient.UpdateDomain(&UpdateDomainInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "integ-test.go-fastly.com",
-		NewName: "new-integ-test.go-fastly.com",
+	var ud *Domain
+	record(t, "domains/update", func(c *Client) {
+		ud, err = c.UpdateDomain(&UpdateDomainInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "integ-test.go-fastly.com",
+			NewName: "new-integ-test.go-fastly.com",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -83,11 +101,14 @@ func TestClient_Domains(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteDomain(&DeleteDomainInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-integ-test.go-fastly.com",
-	}); err != nil {
+	record(t, "domains/delete", func(c *Client) {
+		err = c.DeleteDomain(&DeleteDomainInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-integ-test.go-fastly.com",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

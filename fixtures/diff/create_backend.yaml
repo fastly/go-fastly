@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=560&address=integ-test.go-fastly.com&name=test-backend
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "560"
+      address:
+      - integ-test.go-fastly.com
+      name:
+      - test-backend
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/560/backend
+    method: POST
+  response:
+    body: '{"address":"integ-test.go-fastly.com","name":"test-backend","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":560,"max_tls_version":null,"ssl_client_cert":null,"hostname":"integ-test.go-fastly.com","error_threshold":0,"first_byte_timeout":15000,"client_cert":null,"weight":100,"connect_timeout":1000,"ipv4":null,"ssl_ciphers":null,"port":80,"between_bytes_timeout":10000,"ssl_client_key":null,"ssl_ca_cert":null,"auto_loadbalance":false,"ssl_check_cert":null,"shield":null,"request_condition":"","ssl_cert_hostname":null,"ssl_hostname":null,"ssl_sni_hostname":null,"min_tls_version":null,"ipv6":null,"healthcheck":null,"max_conn":200,"use_ssl":false,"comment":""}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:19 GMT
+      Fastly-Ratelimit-Remaining:
+      - "962"
+      Fastly-Ratelimit-Reset:
+      - "1459702800"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-iad2128-IAD
+    status: 200 OK
+    code: 200

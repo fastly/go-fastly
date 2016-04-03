@@ -1,0 +1,89 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/575/wordpress/test-wordpress
+    method: DELETE
+  response:
+    body: '{"msg":"An error occurred while connecting to the fastly API, please try
+      your request again.","detail":"Couldn''t find WordPress ''{ version => 575,
+      name => test-wordpress, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+      }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:25 GMT
+      Fastly-Ratelimit-Remaining:
+      - "873"
+      Fastly-Ratelimit-Reset:
+      - "1459702800"
+      Status:
+      - 400 Bad Request
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-iad2137-IAD
+    status: 400 Bad Request
+    code: 400
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/575/wordpress/new-test-wordpress
+    method: DELETE
+  response:
+    body: '{"msg":"An error occurred while connecting to the fastly API, please try
+      your request again.","detail":"Couldn''t find WordPress ''{ version => 575,
+      name => new-test-wordpress, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+      }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Connection:
+      - keep-alive
+      Content-Type:
+      - text/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:25 GMT
+      Fastly-Ratelimit-Remaining:
+      - "868"
+      Fastly-Ratelimit-Reset:
+      - "1459702800"
+      Status:
+      - 400 Bad Request
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-iad2143-IAD
+    status: 400 Bad Request
+    code: 400

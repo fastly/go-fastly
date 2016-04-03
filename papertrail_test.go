@@ -5,16 +5,23 @@ import "testing"
 func TestClient_Papertrails(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "papertrails/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	p, err := testClient.CreatePapertrail(&CreatePapertrailInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-papertrail",
-		Address: "integ-test.go-fastly.com",
-		Port:    1234,
-		Format:  "format",
+	var p *Papertrail
+	record(t, "papertrails/create", func(c *Client) {
+		p, err = c.CreatePapertrail(&CreatePapertrailInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-papertrail",
+			Address: "integ-test.go-fastly.com",
+			Port:    1234,
+			Format:  "format",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -22,16 +29,18 @@ func TestClient_Papertrails(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeletePapertrail(&DeletePapertrailInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-papertrail",
-		})
+		record(t, "papertrails/cleanup", func(c *Client) {
+			c.DeletePapertrail(&DeletePapertrailInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-papertrail",
+			})
 
-		testClient.DeletePapertrail(&DeletePapertrailInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-papertrail",
+			c.DeletePapertrail(&DeletePapertrailInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-papertrail",
+			})
 		})
 	}()
 
@@ -49,9 +58,12 @@ func TestClient_Papertrails(t *testing.T) {
 	}
 
 	// List
-	ps, err := testClient.ListPapertrails(&ListPapertrailsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var ps []*Papertrail
+	record(t, "papertrails/list", func(c *Client) {
+		ps, err = c.ListPapertrails(&ListPapertrailsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -61,10 +73,13 @@ func TestClient_Papertrails(t *testing.T) {
 	}
 
 	// Get
-	np, err := testClient.GetPapertrail(&GetPapertrailInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-papertrail",
+	var np *Papertrail
+	record(t, "papertrails/get", func(c *Client) {
+		np, err = c.GetPapertrail(&GetPapertrailInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-papertrail",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -83,11 +98,14 @@ func TestClient_Papertrails(t *testing.T) {
 	}
 
 	// Update
-	up, err := testClient.UpdatePapertrail(&UpdatePapertrailInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-papertrail",
-		NewName: "new-test-papertrail",
+	var up *Papertrail
+	record(t, "papertrails/update", func(c *Client) {
+		up, err = c.UpdatePapertrail(&UpdatePapertrailInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-papertrail",
+			NewName: "new-test-papertrail",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -97,11 +115,14 @@ func TestClient_Papertrails(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeletePapertrail(&DeletePapertrailInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-papertrail",
-	}); err != nil {
+	record(t, "papertrails/delete", func(c *Client) {
+		err = c.DeletePapertrail(&DeletePapertrailInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-papertrail",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

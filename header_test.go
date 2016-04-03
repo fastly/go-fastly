@@ -5,21 +5,28 @@ import "testing"
 func TestClient_Headers(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "headers/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	h, err := testClient.CreateHeader(&CreateHeaderInput{
-		Service:      testServiceID,
-		Version:      tv.Number,
-		Name:         "test-header",
-		Action:       HeaderActionSet,
-		IgnoreIfSet:  false,
-		Type:         HeaderTypeRequest,
-		Destination:  "http.foo",
-		Source:       "client.ip",
-		Regex:        "foobar",
-		Substitution: "123",
-		Priority:     50,
+	var h *Header
+	record(t, "headers/create", func(c *Client) {
+		h, err = c.CreateHeader(&CreateHeaderInput{
+			Service:      testServiceID,
+			Version:      tv.Number,
+			Name:         "test-header",
+			Action:       HeaderActionSet,
+			IgnoreIfSet:  false,
+			Type:         HeaderTypeRequest,
+			Destination:  "http.foo",
+			Source:       "client.ip",
+			Regex:        "foobar",
+			Substitution: "123",
+			Priority:     50,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -27,16 +34,18 @@ func TestClient_Headers(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteHeader(&DeleteHeaderInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-header",
-		})
+		record(t, "headers/cleanup", func(c *Client) {
+			c.DeleteHeader(&DeleteHeaderInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-header",
+			})
 
-		testClient.DeleteHeader(&DeleteHeaderInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-header",
+			c.DeleteHeader(&DeleteHeaderInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-header",
+			})
 		})
 	}()
 
@@ -47,7 +56,7 @@ func TestClient_Headers(t *testing.T) {
 		t.Errorf("bad header_action_set: %q", h.Action)
 	}
 	if h.IgnoreIfSet != false {
-		t.Errorf("bad ignore_if_set: %b", h.IgnoreIfSet)
+		t.Errorf("bad ignore_if_set: %t", h.IgnoreIfSet)
 	}
 	if h.Type != HeaderTypeRequest {
 		t.Errorf("bad type: %q", h.Type)
@@ -69,9 +78,12 @@ func TestClient_Headers(t *testing.T) {
 	}
 
 	// List
-	hs, err := testClient.ListHeaders(&ListHeadersInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var hs []*Header
+	record(t, "headers/list", func(c *Client) {
+		hs, err = c.ListHeaders(&ListHeadersInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -81,10 +93,13 @@ func TestClient_Headers(t *testing.T) {
 	}
 
 	// Get
-	nh, err := testClient.GetHeader(&GetHeaderInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-header",
+	var nh *Header
+	record(t, "headers/get", func(c *Client) {
+		nh, err = c.GetHeader(&GetHeaderInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-header",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -96,7 +111,7 @@ func TestClient_Headers(t *testing.T) {
 		t.Errorf("bad header_action_set: %q", h.Action)
 	}
 	if h.IgnoreIfSet != nh.IgnoreIfSet {
-		t.Errorf("bad ignore_if_set: %b", h.IgnoreIfSet)
+		t.Errorf("bad ignore_if_set: %t", h.IgnoreIfSet)
 	}
 	if h.Type != nh.Type {
 		t.Errorf("bad type: %q", h.Type)
@@ -118,11 +133,14 @@ func TestClient_Headers(t *testing.T) {
 	}
 
 	// Update
-	uh, err := testClient.UpdateHeader(&UpdateHeaderInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-header",
-		NewName: "new-test-header",
+	var uh *Header
+	record(t, "headers/update", func(c *Client) {
+		uh, err = c.UpdateHeader(&UpdateHeaderInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-header",
+			NewName: "new-test-header",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -132,11 +150,14 @@ func TestClient_Headers(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteHeader(&DeleteHeaderInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-header",
-	}); err != nil {
+	record(t, "headers/delete", func(c *Client) {
+		err = c.DeleteHeader(&DeleteHeaderInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-header",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

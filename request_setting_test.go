@@ -5,23 +5,30 @@ import "testing"
 func TestClient_RequestSettings(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "request_settings/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	rs, err := testClient.CreateRequestSetting(&CreateRequestSettingInput{
-		Service:        testServiceID,
-		Version:        tv.Number,
-		Name:           "test-request-setting",
-		ForceMiss:      true,
-		ForceSSL:       true,
-		Action:         RequestSettingActionLookup,
-		BypassBusyWait: true,
-		MaxStaleAge:    30,
-		HashKeys:       "a,b,c",
-		XForwardedFor:  RequestSettingXFFLeave,
-		TimerSupport:   true,
-		GeoHeaders:     true,
-		DefaultHost:    "example.com",
+	var rs *RequestSetting
+	record(t, "request_settings/create", func(c *Client) {
+		rs, err = c.CreateRequestSetting(&CreateRequestSettingInput{
+			Service:        testServiceID,
+			Version:        tv.Number,
+			Name:           "test-request-setting",
+			ForceMiss:      true,
+			ForceSSL:       true,
+			Action:         RequestSettingActionLookup,
+			BypassBusyWait: true,
+			MaxStaleAge:    30,
+			HashKeys:       "a,b,c",
+			XForwardedFor:  RequestSettingXFFLeave,
+			TimerSupport:   true,
+			GeoHeaders:     true,
+			DefaultHost:    "example.com",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -29,16 +36,18 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-request-setting",
-		})
+		record(t, "request_settings/cleanup", func(c *Client) {
+			c.DeleteRequestSetting(&DeleteRequestSettingInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-request-setting",
+			})
 
-		testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-request-setting",
+			c.DeleteRequestSetting(&DeleteRequestSettingInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-request-setting",
+			})
 		})
 	}()
 
@@ -46,16 +55,16 @@ func TestClient_RequestSettings(t *testing.T) {
 		t.Errorf("bad name: %q", rs.Name)
 	}
 	if rs.ForceMiss != true {
-		t.Errorf("bad force_miss: %b", rs.ForceMiss)
+		t.Errorf("bad force_miss: %t", rs.ForceMiss)
 	}
 	if rs.ForceSSL != true {
-		t.Errorf("bad force_ssl: %b", rs.ForceSSL)
+		t.Errorf("bad force_ssl: %t", rs.ForceSSL)
 	}
 	if rs.Action != RequestSettingActionLookup {
 		t.Errorf("bad action: %q", rs.Action)
 	}
 	if rs.BypassBusyWait != true {
-		t.Errorf("bad bypass_busy_wait: %b", rs.BypassBusyWait)
+		t.Errorf("bad bypass_busy_wait: %t", rs.BypassBusyWait)
 	}
 	if rs.MaxStaleAge != 30 {
 		t.Errorf("bad max_stale_age: %d", rs.MaxStaleAge)
@@ -67,19 +76,22 @@ func TestClient_RequestSettings(t *testing.T) {
 		t.Errorf("bad xff: %q", rs.XForwardedFor)
 	}
 	if rs.TimerSupport != true {
-		t.Errorf("bad timer_support: %b", rs.TimerSupport)
+		t.Errorf("bad timer_support: %t", rs.TimerSupport)
 	}
 	if rs.GeoHeaders != true {
-		t.Errorf("bad geo_headers: %b", rs.GeoHeaders)
+		t.Errorf("bad geo_headers: %t", rs.GeoHeaders)
 	}
 	if rs.DefaultHost != "example.com" {
 		t.Errorf("bad default_host: %q", rs.DefaultHost)
 	}
 
 	// List
-	rss, err := testClient.ListRequestSettings(&ListRequestSettingsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var rss []*RequestSetting
+	record(t, "request_settings/list", func(c *Client) {
+		rss, err = c.ListRequestSettings(&ListRequestSettingsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -89,10 +101,13 @@ func TestClient_RequestSettings(t *testing.T) {
 	}
 
 	// Get
-	nrs, err := testClient.GetRequestSetting(&GetRequestSettingInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-request-setting",
+	var nrs *RequestSetting
+	record(t, "request_settings/get", func(c *Client) {
+		nrs, err = c.GetRequestSetting(&GetRequestSettingInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-request-setting",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -101,16 +116,16 @@ func TestClient_RequestSettings(t *testing.T) {
 		t.Errorf("bad name: %q (%q)", rs.Name, nrs.Name)
 	}
 	if rs.ForceMiss != nrs.ForceMiss {
-		t.Errorf("bad force_miss: %b (%b)", rs.ForceMiss, nrs.ForceMiss)
+		t.Errorf("bad force_miss: %t (%t)", rs.ForceMiss, nrs.ForceMiss)
 	}
 	if rs.ForceSSL != rs.ForceSSL {
-		t.Errorf("bad force_ssl: %b (%b)", rs.ForceSSL, nrs.ForceSSL)
+		t.Errorf("bad force_ssl: %t (%t)", rs.ForceSSL, nrs.ForceSSL)
 	}
 	if rs.Action != nrs.Action {
 		t.Errorf("bad action: %q (%q)", rs.Action, nrs.Action)
 	}
 	if rs.BypassBusyWait != nrs.BypassBusyWait {
-		t.Errorf("bad bypass_busy_wait: %b (%b)", rs.BypassBusyWait, nrs.BypassBusyWait)
+		t.Errorf("bad bypass_busy_wait: %t (%t)", rs.BypassBusyWait, nrs.BypassBusyWait)
 	}
 	if rs.MaxStaleAge != nrs.MaxStaleAge {
 		t.Errorf("bad max_stale_age: %d (%d)", rs.MaxStaleAge, nrs.MaxStaleAge)
@@ -122,21 +137,24 @@ func TestClient_RequestSettings(t *testing.T) {
 		t.Errorf("bad xff: %q (%q)", rs.XForwardedFor, nrs.XForwardedFor)
 	}
 	if rs.TimerSupport != nrs.TimerSupport {
-		t.Errorf("bad timer_support: %b (%b)", rs.TimerSupport, nrs.TimerSupport)
+		t.Errorf("bad timer_support: %t (%t)", rs.TimerSupport, nrs.TimerSupport)
 	}
 	if rs.GeoHeaders != nrs.GeoHeaders {
-		t.Errorf("bad geo_headers: %b (%b)", rs.GeoHeaders, nrs.GeoHeaders)
+		t.Errorf("bad geo_headers: %t (%t)", rs.GeoHeaders, nrs.GeoHeaders)
 	}
 	if rs.DefaultHost != nrs.DefaultHost {
 		t.Errorf("bad default_host: %q (%q)", rs.DefaultHost, nrs.DefaultHost)
 	}
 
 	// Update
-	urs, err := testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-request-setting",
-		NewName: "new-test-request-setting",
+	var urs *RequestSetting
+	record(t, "request_settings/update", func(c *Client) {
+		urs, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-request-setting",
+			NewName: "new-test-request-setting",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -146,11 +164,14 @@ func TestClient_RequestSettings(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-request-setting",
-	}); err != nil {
+	record(t, "request_settings/delete", func(c *Client) {
+		err = c.DeleteRequestSetting(&DeleteRequestSettingInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-request-setting",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

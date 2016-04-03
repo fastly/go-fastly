@@ -5,10 +5,15 @@ import "testing"
 func TestClient_Services(t *testing.T) {
 	t.Parallel()
 
+	var err error
+
 	// Create
-	s, err := testClient.CreateService(&CreateServiceInput{
-		Name:    "test-service",
-		Comment: "comment",
+	var s *Service
+	record(t, "services/create", func(c *Client) {
+		s, err = c.CreateService(&CreateServiceInput{
+			Name:    "test-service",
+			Comment: "comment",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -16,12 +21,14 @@ func TestClient_Services(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteService(&DeleteServiceInput{
-			ID: s.ID,
-		})
+		record(t, "services/cleanup", func(c *Client) {
+			c.DeleteService(&DeleteServiceInput{
+				ID: s.ID,
+			})
 
-		testClient.DeleteService(&DeleteServiceInput{
-			ID: s.ID,
+			c.DeleteService(&DeleteServiceInput{
+				ID: s.ID,
+			})
 		})
 	}()
 
@@ -33,17 +40,23 @@ func TestClient_Services(t *testing.T) {
 	}
 
 	// List
-	bs, err := testClient.ListServices(&ListServicesInput{})
+	var ss []*Service
+	record(t, "services/list", func(c *Client) {
+		ss, err = c.ListServices(&ListServicesInput{})
+	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(bs) < 1 {
-		t.Errorf("bad services: %v", bs)
+	if len(ss) < 1 {
+		t.Errorf("bad services: %v", ss)
 	}
 
 	// Get
-	ns, err := testClient.GetService(&GetServiceInput{
-		ID: s.ID,
+	var ns *Service
+	record(t, "services/get", func(c *Client) {
+		ns, err = c.GetService(&GetServiceInput{
+			ID: s.ID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -68,8 +81,11 @@ func TestClient_Services(t *testing.T) {
 	}
 
 	// Get Details
-	nsd, err := testClient.GetServiceDetails(&GetServiceInput{
-		ID: s.ID,
+	var nsd *ServiceDetail
+	record(t, "services/details", func(c *Client) {
+		nsd, err = c.GetServiceDetails(&GetServiceInput{
+			ID: s.ID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -86,23 +102,29 @@ func TestClient_Services(t *testing.T) {
 	}
 
 	// Search
-	nb, err := testClient.SearchService(&SearchServiceInput{
-		Name: "test-service",
+	var fs *Service
+	record(t, "services/search", func(c *Client) {
+		fs, err = c.SearchService(&SearchServiceInput{
+			Name: "test-service",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if s.Name != nb.Name {
-		t.Errorf("bad name: %q (%q)", s.Name, nb.Name)
+	if s.Name != fs.Name {
+		t.Errorf("bad name: %q (%q)", s.Name, fs.Name)
 	}
-	if s.Comment != nb.Comment {
-		t.Errorf("bad comment: %q (%q)", s.Comment, nb.Comment)
+	if s.Comment != fs.Comment {
+		t.Errorf("bad comment: %q (%q)", s.Comment, fs.Comment)
 	}
 
 	// Update
-	us, err := testClient.UpdateService(&UpdateServiceInput{
-		ID:   s.ID,
-		Name: "new-test-service",
+	var us *Service
+	record(t, "services/update", func(c *Client) {
+		us, err = c.UpdateService(&UpdateServiceInput{
+			ID:   s.ID,
+			Name: "new-test-service",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -112,9 +134,12 @@ func TestClient_Services(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteService(&DeleteServiceInput{
-		ID: s.ID,
-	}); err != nil {
+	record(t, "services/delete", func(c *Client) {
+		err = c.DeleteService(&DeleteServiceInput{
+			ID: s.ID,
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

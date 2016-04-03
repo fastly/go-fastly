@@ -5,7 +5,11 @@ import "testing"
 func TestClient_VCLs(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "vcls/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	content := `
 backend default {
@@ -25,11 +29,14 @@ sub vcl_hash {
 `
 
 	// Create
-	vcl, err := testClient.CreateVCL(&CreateVCLInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-vcl",
-		Content: content,
+	var vcl *VCL
+	record(t, "vcls/create", func(c *Client) {
+		vcl, err = c.CreateVCL(&CreateVCLInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-vcl",
+			Content: content,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -37,16 +44,18 @@ sub vcl_hash {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteVCL(&DeleteVCLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-vcl",
-		})
+		record(t, "vcls/cleanup", func(c *Client) {
+			c.DeleteVCL(&DeleteVCLInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-vcl",
+			})
 
-		testClient.DeleteVCL(&DeleteVCLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-vcl",
+			c.DeleteVCL(&DeleteVCLInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-vcl",
+			})
 		})
 	}()
 
@@ -58,9 +67,12 @@ sub vcl_hash {
 	}
 
 	// List
-	vcls, err := testClient.ListVCLs(&ListVCLsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var vcls []*VCL
+	record(t, "vcls/list", func(c *Client) {
+		vcls, err = c.ListVCLs(&ListVCLsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -70,10 +82,13 @@ sub vcl_hash {
 	}
 
 	// Get
-	nvcl, err := testClient.GetVCL(&GetVCLInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-vcl",
+	var nvcl *VCL
+	record(t, "vcls/get", func(c *Client) {
+		nvcl, err = c.GetVCL(&GetVCLInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-vcl",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -86,11 +101,14 @@ sub vcl_hash {
 	}
 
 	// Update
-	uvcl, err := testClient.UpdateVCL(&UpdateVCLInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-vcl",
-		NewName: "new-test-vcl",
+	var uvcl *VCL
+	record(t, "vcls/update", func(c *Client) {
+		uvcl, err = c.UpdateVCL(&UpdateVCLInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-vcl",
+			NewName: "new-test-vcl",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -100,24 +118,30 @@ sub vcl_hash {
 	}
 
 	// Activate
-	avcl, err := testClient.ActivateVCL(&ActivateVCLInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-vcl",
+	var avcl *VCL
+	record(t, "vcls/activate", func(c *Client) {
+		avcl, err = c.ActivateVCL(&ActivateVCLInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-vcl",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if avcl.Main != true {
-		t.Errorf("bad main: %b", avcl.Main)
+		t.Errorf("bad main: %t", avcl.Main)
 	}
 
 	// Delete
-	if err := testClient.DeleteVCL(&DeleteVCLInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-vcl",
-	}); err != nil {
+	record(t, "vcls/delete", func(c *Client) {
+		err = c.DeleteVCL(&DeleteVCLInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-vcl",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

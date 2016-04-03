@@ -5,16 +5,23 @@ import "testing"
 func TestClient_Backends(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "backends/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	b, err := testClient.CreateBackend(&CreateBackendInput{
-		Service:        testServiceID,
-		Version:        tv.Number,
-		Name:           "test-backend",
-		Address:        "integ-test.go-fastly.com",
-		Port:           1234,
-		ConnectTimeout: 1500,
+	var b *Backend
+	record(t, "backends/create", func(c *Client) {
+		b, err = c.CreateBackend(&CreateBackendInput{
+			Service:        testServiceID,
+			Version:        tv.Number,
+			Name:           "test-backend",
+			Address:        "integ-test.go-fastly.com",
+			Port:           1234,
+			ConnectTimeout: 1500,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -22,16 +29,18 @@ func TestClient_Backends(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteBackend(&DeleteBackendInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-backend",
-		})
+		record(t, "backends/cleanup", func(c *Client) {
+			c.DeleteBackend(&DeleteBackendInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-backend",
+			})
 
-		testClient.DeleteBackend(&DeleteBackendInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-backend",
+			c.DeleteBackend(&DeleteBackendInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-backend",
+			})
 		})
 	}()
 
@@ -49,9 +58,12 @@ func TestClient_Backends(t *testing.T) {
 	}
 
 	// List
-	bs, err := testClient.ListBackends(&ListBackendsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var bs []*Backend
+	record(t, "backends/list", func(c *Client) {
+		bs, err = c.ListBackends(&ListBackendsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -61,10 +73,13 @@ func TestClient_Backends(t *testing.T) {
 	}
 
 	// Get
-	nb, err := testClient.GetBackend(&GetBackendInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-backend",
+	var nb *Backend
+	record(t, "backends/get", func(c *Client) {
+		nb, err = c.GetBackend(&GetBackendInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-backend",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -83,11 +98,14 @@ func TestClient_Backends(t *testing.T) {
 	}
 
 	// Update
-	ub, err := testClient.UpdateBackend(&UpdateBackendInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-backend",
-		NewName: "new-test-backend",
+	var ub *Backend
+	record(t, "backends/update", func(c *Client) {
+		ub, err = c.UpdateBackend(&UpdateBackendInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-backend",
+			NewName: "new-test-backend",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -97,11 +115,14 @@ func TestClient_Backends(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteBackend(&DeleteBackendInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-backend",
-	}); err != nil {
+	record(t, "backends/delete", func(c *Client) {
+		err = c.DeleteBackend(&DeleteBackendInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-backend",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

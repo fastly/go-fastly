@@ -5,21 +5,28 @@ import "testing"
 func TestClient_S3s(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "s3s/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	s3, err := testClient.CreateS3(&CreateS3Input{
-		Service:         testServiceID,
-		Version:         tv.Number,
-		Name:            "test-s3",
-		BucketName:      "bucket-name",
-		AccessKey:       "access_key",
-		SecretKey:       "secret_key",
-		Path:            "/path",
-		Period:          12,
-		GzipLevel:       9,
-		Format:          "format",
-		TimestampFormat: "%Y",
+	var s3 *S3
+	record(t, "s3s/create", func(c *Client) {
+		s3, err = c.CreateS3(&CreateS3Input{
+			Service:         testServiceID,
+			Version:         tv.Number,
+			Name:            "test-s3",
+			BucketName:      "bucket-name",
+			AccessKey:       "access_key",
+			SecretKey:       "secret_key",
+			Path:            "/path",
+			Period:          12,
+			GzipLevel:       9,
+			Format:          "format",
+			TimestampFormat: "%Y",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -27,16 +34,18 @@ func TestClient_S3s(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteS3(&DeleteS3Input{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-s3",
-		})
+		record(t, "s3s/cleanup", func(c *Client) {
+			c.DeleteS3(&DeleteS3Input{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-s3",
+			})
 
-		testClient.DeleteS3(&DeleteS3Input{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-s3",
+			c.DeleteS3(&DeleteS3Input{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-s3",
+			})
 		})
 	}()
 
@@ -69,9 +78,12 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// List
-	s3s, err := testClient.ListS3s(&ListS3sInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var s3s []*S3
+	record(t, "s3s/list", func(c *Client) {
+		s3s, err = c.ListS3s(&ListS3sInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -81,10 +93,13 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// Get
-	ns3, err := testClient.GetS3(&GetS3Input{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-s3",
+	var ns3 *S3
+	record(t, "s3s/get", func(c *Client) {
+		ns3, err = c.GetS3(&GetS3Input{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-s3",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -118,11 +133,14 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// Update
-	us3, err := testClient.UpdateS3(&UpdateS3Input{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-s3",
-		NewName: "new-test-s3",
+	var us3 *S3
+	record(t, "s3s/update", func(c *Client) {
+		us3, err = c.UpdateS3(&UpdateS3Input{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-s3",
+			NewName: "new-test-s3",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -132,11 +150,14 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteS3(&DeleteS3Input{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-s3",
-	}); err != nil {
+	record(t, "s3s/delete", func(c *Client) {
+		err = c.DeleteS3(&DeleteS3Input{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-s3",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

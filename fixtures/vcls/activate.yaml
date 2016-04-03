@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/573/vcl/new-test-vcl/main
+    method: PUT
+  response:
+    body: '{"version":573,"name":"new-test-vcl","content":"\nbackend default {\n  .host
+      = \"127.0.0.1\";\n  .port = \"9092\";\n}\n\nsub vcl_recv {\n  set req.backend
+      = default;\n}\n\nsub vcl_hash {\n  set req.hash += req.url;\n  set req.hash
+      += req.http.host;\n  set req.hash += \"0\";\n}\n","service_id":"7i6HN3TK9wS159v2gPAZ8A","main":true}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:24 GMT
+      Fastly-Ratelimit-Remaining:
+      - "883"
+      Fastly-Ratelimit-Reset:
+      - "1459702800"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-iad2125-IAD
+    status: 200 OK
+    code: 200
