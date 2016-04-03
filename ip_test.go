@@ -5,7 +5,11 @@ import "testing"
 func TestClient_IPs(t *testing.T) {
 	t.Parallel()
 
-	ips, err := testClient.IPs()
+	var err error
+	var ips IPAddrs
+	record(t, "ips/list", func(c *Client) {
+		ips, err = c.IPs()
+	})
 	if err != nil {
 		t.Fatal(err)
 	}

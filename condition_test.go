@@ -5,97 +5,118 @@ import "testing"
 func TestClient_Conditions(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "conditions/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	c, err := testClient.CreateCondition(&CreateConditionInput{
-		Service:   testServiceID,
-		Version:   tv.Number,
-		Name:      "test-condition",
-		Statement: "req.url~+\"index.html\"",
-		Type:      "REQUEST",
-		Priority:  1,
+	var condition *Condition
+	record(t, "conditions/create", func(c *Client) {
+		condition, err = c.CreateCondition(&CreateConditionInput{
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-condition",
+			Statement: "req.url~+\"index.html\"",
+			Type:      "REQUEST",
+			Priority:  1,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// Ensure deleted
+	// // Ensure deleted
 	defer func() {
-		testClient.DeleteCondition(&DeleteConditionInput{
+		record(t, "conditions/cleanup", func(c *Client) {
+			c.DeleteCondition(&DeleteConditionInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-condition",
+			})
+		})
+	}()
+
+	if condition.Name != "test-condition" {
+		t.Errorf("bad name: %q", condition.Name)
+	}
+	if condition.Statement != "req.url~+\"index.html\"" {
+		t.Errorf("bad statement: %q", condition.Statement)
+	}
+	if condition.Type != "REQUEST" {
+		t.Errorf("bad type: %s", condition.Type)
+	}
+	if condition.Priority != 1 {
+		t.Errorf("bad priority: %d", condition.Priority)
+	}
+
+	// List
+	var conditions []*Condition
+	record(t, "conditions/list", func(c *Client) {
+		conditions, err = c.ListConditions(&ListConditionsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(conditions) < 1 {
+		t.Errorf("bad conditions: %v", conditions)
+	}
+
+	// Get
+	var newCondition *Condition
+	record(t, "conditions/get", func(c *Client) {
+		newCondition, err = c.GetCondition(&GetConditionInput{
 			Service: testServiceID,
 			Version: tv.Number,
 			Name:    "test-condition",
 		})
-	}()
-
-	if c.Name != "test-condition" {
-		t.Errorf("bad name: %q", c.Name)
-	}
-	if c.Statement != "req.url~+\"index.html\"" {
-		t.Errorf("bad statement: %q", c.Statement)
-	}
-	if c.Type != "REQUEST" {
-		t.Errorf("bad type: %d", c.Type)
-	}
-	if c.Priority != 1 {
-		t.Errorf("bad priority: %d", c.Priority)
-	}
-
-	// List
-	cs, err := testClient.ListConditions(&ListConditionsInput{
-		Service: testServiceID,
-		Version: tv.Number,
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(cs) < 1 {
-		t.Errorf("bad conditions: %v", cs)
+	if condition.Name != newCondition.Name {
+		t.Errorf("bad name: %q (%q)", condition.Name, newCondition.Name)
 	}
-
-	// Get
-	nc, err := testClient.GetCondition(&GetConditionInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-condition",
-	})
-	if err != nil {
-		t.Fatal(err)
+	if condition.Statement != "req.url~+\"index.html\"" {
+		t.Errorf("bad statement: %q", condition.Statement)
 	}
-	if c.Name != nc.Name {
-		t.Errorf("bad name: %q (%q)", c.Name, nc.Name)
+	if condition.Type != "REQUEST" {
+		t.Errorf("bad type: %s", condition.Type)
 	}
-	if c.Statement != "req.url~+\"index.html\"" {
-		t.Errorf("bad statement: %q", c.Statement)
-	}
-	if c.Type != "REQUEST" {
-		t.Errorf("bad type: %d", c.Type)
-	}
-	if c.Priority != 1 {
-		t.Errorf("bad priority: %d", c.Priority)
+	if condition.Priority != 1 {
+		t.Errorf("bad priority: %d", condition.Priority)
 	}
 
 	// Update
-	uc, err := testClient.UpdateCondition(&UpdateConditionInput{
-		Service:   testServiceID,
-		Version:   tv.Number,
-		Name:      "test-condition",
-		Statement: "req.url~+\"updated.html\"",
+	var updatedCondition *Condition
+	record(t, "conditions/update", func(c *Client) {
+		updatedCondition, err = c.UpdateCondition(&UpdateConditionInput{
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-condition",
+			Statement: "req.url~+\"updated.html\"",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uc.Statement != "req.url~+\"updated.html\"" {
-		t.Errorf("bad statement: %q", uc.Statement)
+	if updatedCondition.Statement != "req.url~+\"updated.html\"" {
+		t.Errorf("bad statement: %q", updatedCondition.Statement)
 	}
 
 	// Delete
-	if err := testClient.DeleteCondition(&DeleteConditionInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-condition",
-	}); err != nil {
+	record(t, "conditions/delete", func(c *Client) {
+		err = c.DeleteCondition(&DeleteConditionInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-condition",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

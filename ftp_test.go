@@ -5,22 +5,29 @@ import "testing"
 func TestClient_FTPs(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "ftps/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	ftp, err := testClient.CreateFTP(&CreateFTPInput{
-		Service:         testServiceID,
-		Version:         tv.Number,
-		Name:            "test-ftp",
-		Address:         "example.com",
-		Port:            1234,
-		Username:        "username",
-		Password:        "password",
-		Directory:       "/dir",
-		Period:          12,
-		GzipLevel:       9,
-		Format:          "format",
-		TimestampFormat: "%Y",
+	var ftp *FTP
+	record(t, "ftps/create", func(c *Client) {
+		ftp, err = c.CreateFTP(&CreateFTPInput{
+			Service:         testServiceID,
+			Version:         tv.Number,
+			Name:            "test-ftp",
+			Address:         "example.com",
+			Port:            1234,
+			Username:        "username",
+			Password:        "password",
+			Directory:       "/",
+			Period:          12,
+			GzipLevel:       9,
+			Format:          "format",
+			TimestampFormat: "%Y",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -28,16 +35,18 @@ func TestClient_FTPs(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteFTP(&DeleteFTPInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-ftp",
-		})
+		record(t, "ftps/cleanup", func(c *Client) {
+			c.DeleteFTP(&DeleteFTPInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-ftp",
+			})
 
-		testClient.DeleteFTP(&DeleteFTPInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-ftp",
+			c.DeleteFTP(&DeleteFTPInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-ftp",
+			})
 		})
 	}()
 
@@ -73,9 +82,12 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	// List
-	ftps, err := testClient.ListFTPs(&ListFTPsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var ftps []*FTP
+	record(t, "ftps/list", func(c *Client) {
+		ftps, err = c.ListFTPs(&ListFTPsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -85,10 +97,13 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	// Get
-	nftp, err := testClient.GetFTP(&GetFTPInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-ftp",
+	var nftp *FTP
+	record(t, "ftps/get", func(c *Client) {
+		nftp, err = c.GetFTP(&GetFTPInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-ftp",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -125,11 +140,14 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	// Update
-	uftp, err := testClient.UpdateFTP(&UpdateFTPInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-ftp",
-		NewName: "new-test-ftp",
+	var uftp *FTP
+	record(t, "ftps/update", func(c *Client) {
+		uftp, err = c.UpdateFTP(&UpdateFTPInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-ftp",
+			NewName: "new-test-ftp",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -139,11 +157,14 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteFTP(&DeleteFTPInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-ftp",
-	}); err != nil {
+	record(t, "ftps/delete", func(c *Client) {
+		err = c.DeleteFTP(&DeleteFTPInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-ftp",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

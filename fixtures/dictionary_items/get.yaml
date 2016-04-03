@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/4a7dgMi9ijAuNzvY1Nr4ZW/item/test-dictionary-item
+    method: GET
+  response:
+    body: '{"dictionary_id":"4a7dgMi9ijAuNzvY1Nr4ZW","item_key":"test-dictionary-item","item_value":"value","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:19 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-iad2140-IAD
+    status: 200 OK
+    code: 200

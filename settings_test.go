@@ -5,31 +5,41 @@ import "testing"
 func TestClient_Settings(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "settings/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Get
-	nb, err := testClient.GetSettings(&GetSettingsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var ns *Settings
+	record(t, "settings/get", func(c *Client) {
+		ns, err = c.GetSettings(&GetSettingsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if nb.DefaultTTL == 0 {
-		t.Errorf("bad default_ttl: %d", nb.DefaultTTL)
+	if ns.DefaultTTL == 0 {
+		t.Errorf("bad default_ttl: %d", ns.DefaultTTL)
 	}
 
 	// Update
-	ub, err := testClient.UpdateSettings(&UpdateSettingsInput{
-		Service:    testServiceID,
-		Version:    tv.Number,
-		DefaultTTL: 1800,
+	var us *Settings
+	record(t, "settings/update", func(c *Client) {
+		us, err = c.UpdateSettings(&UpdateSettingsInput{
+			Service:    testServiceID,
+			Version:    tv.Number,
+			DefaultTTL: 1800,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ub.DefaultTTL != 1800 {
-		t.Errorf("bad default_ttl: %d", ub.DefaultTTL)
+	if us.DefaultTTL != 1800 {
+		t.Errorf("bad default_ttl: %d", us.DefaultTTL)
 	}
 }
 

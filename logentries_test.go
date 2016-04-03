@@ -5,17 +5,24 @@ import "testing"
 func TestClient_Logentries(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "logentries/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	le, err := testClient.CreateLogentries(&CreateLogentriesInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-logentries",
-		Port:    1234,
-		UseTLS:  true,
-		Token:   "abcd1234",
-		Format:  "format",
+	var le *Logentries
+	record(t, "logentries/create", func(c *Client) {
+		le, err = c.CreateLogentries(&CreateLogentriesInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-logentries",
+			Port:    1234,
+			UseTLS:  true,
+			Token:   "abcd1234",
+			Format:  "format",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -23,16 +30,18 @@ func TestClient_Logentries(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteLogentries(&DeleteLogentriesInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-logentries",
-		})
+		record(t, "logentries/delete", func(c *Client) {
+			c.DeleteLogentries(&DeleteLogentriesInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-logentries",
+			})
 
-		testClient.DeleteLogentries(&DeleteLogentriesInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-logentries",
+			c.DeleteLogentries(&DeleteLogentriesInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-logentries",
+			})
 		})
 	}()
 
@@ -43,7 +52,7 @@ func TestClient_Logentries(t *testing.T) {
 		t.Errorf("bad port: %q", le.Port)
 	}
 	if le.UseTLS != true {
-		t.Errorf("bad use_tls: %q", le.UseTLS)
+		t.Errorf("bad use_tls: %t", le.UseTLS)
 	}
 	if le.Token != "abcd1234" {
 		t.Errorf("bad token: %q", le.Token)
@@ -53,9 +62,12 @@ func TestClient_Logentries(t *testing.T) {
 	}
 
 	// List
-	les, err := testClient.ListLogentries(&ListLogentriesInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var les []*Logentries
+	record(t, "logentries/list", func(c *Client) {
+		les, err = c.ListLogentries(&ListLogentriesInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -65,10 +77,13 @@ func TestClient_Logentries(t *testing.T) {
 	}
 
 	// Get
-	nle, err := testClient.GetLogentries(&GetLogentriesInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-logentries",
+	var nle *Logentries
+	record(t, "logentries/get", func(c *Client) {
+		nle, err = c.GetLogentries(&GetLogentriesInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-logentries",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -80,7 +95,7 @@ func TestClient_Logentries(t *testing.T) {
 		t.Errorf("bad port: %q", le.Port)
 	}
 	if le.UseTLS != nle.UseTLS {
-		t.Errorf("bad use_tls: %q", le.UseTLS)
+		t.Errorf("bad use_tls: %t", le.UseTLS)
 	}
 	if le.Token != nle.Token {
 		t.Errorf("bad token: %q", le.Token)
@@ -90,11 +105,14 @@ func TestClient_Logentries(t *testing.T) {
 	}
 
 	// Update
-	ule, err := testClient.UpdateLogentries(&UpdateLogentriesInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-logentries",
-		NewName: "new-test-logentries",
+	var ule *Logentries
+	record(t, "logentries/update", func(c *Client) {
+		ule, err = c.UpdateLogentries(&UpdateLogentriesInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-logentries",
+			NewName: "new-test-logentries",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -104,11 +122,14 @@ func TestClient_Logentries(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteLogentries(&DeleteLogentriesInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-logentries",
-	}); err != nil {
+	record(t, "logentries/delete", func(c *Client) {
+		err = c.DeleteLogentries(&DeleteLogentriesInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-logentries",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

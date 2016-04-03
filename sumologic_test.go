@@ -5,15 +5,22 @@ import "testing"
 func TestClient_Sumologics(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "sumologics/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	s, err := testClient.CreateSumologic(&CreateSumologicInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-sumologic",
-		URL:     "example.com",
-		Format:  "format",
+	var s *Sumologic
+	record(t, "sumologics/create", func(c *Client) {
+		s, err = c.CreateSumologic(&CreateSumologicInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-sumologic",
+			URL:     "example.com",
+			Format:  "format",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -21,16 +28,18 @@ func TestClient_Sumologics(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteSumologic(&DeleteSumologicInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-sumologic",
-		})
+		record(t, "sumologics/cleanup", func(c *Client) {
+			c.DeleteSumologic(&DeleteSumologicInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-sumologic",
+			})
 
-		testClient.DeleteSumologic(&DeleteSumologicInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-sumologic",
+			c.DeleteSumologic(&DeleteSumologicInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-sumologic",
+			})
 		})
 	}()
 
@@ -45,9 +54,12 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 
 	// List
-	ss, err := testClient.ListSumologics(&ListSumologicsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var ss []*Sumologic
+	record(t, "sumologics/list", func(c *Client) {
+		ss, err = c.ListSumologics(&ListSumologicsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -57,10 +69,13 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 
 	// Get
-	ns, err := testClient.GetSumologic(&GetSumologicInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-sumologic",
+	var ns *Sumologic
+	record(t, "sumologics/get", func(c *Client) {
+		ns, err = c.GetSumologic(&GetSumologicInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-sumologic",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -76,11 +91,14 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 
 	// Update
-	us, err := testClient.UpdateSumologic(&UpdateSumologicInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-sumologic",
-		NewName: "new-test-sumologic",
+	var us *Sumologic
+	record(t, "sumologics/update", func(c *Client) {
+		us, err = c.UpdateSumologic(&UpdateSumologicInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-sumologic",
+			NewName: "new-test-sumologic",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -90,11 +108,14 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteSumologic(&DeleteSumologicInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-sumologic",
-	}); err != nil {
+	record(t, "sumologics/delete", func(c *Client) {
+		err = c.DeleteSumologic(&DeleteSumologicInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-sumologic",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

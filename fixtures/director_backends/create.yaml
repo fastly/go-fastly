@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: Backend=backend&Director=director&Service=7i6HN3TK9wS159v2gPAZ8A&Version=552
+    form:
+      Backend:
+      - backend
+      Director:
+      - director
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "552"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - 3b6d8ef6b4426178d951788d45cc1bdc
+      User-Agent:
+      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/552/director/director/backend/backend
+    method: POST
+  response:
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":552,"director_name":"director","backend_name":"backend","created_at":"2016-04-03T16:46:18+00:00","deleted_at":null,"updated_at":"2016-04-03T16:46:18+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Connection:
+      - keep-alive
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 03 Apr 2016 16:46:18 GMT
+      Fastly-Ratelimit-Remaining:
+      - "997"
+      Fastly-Ratelimit-Reset:
+      - "1459702800"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-iad2140-IAD
+    status: 200 OK
+    code: 200

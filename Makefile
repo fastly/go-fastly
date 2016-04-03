@@ -4,7 +4,7 @@ default: test
 
 # test runs the test suite and vets the code
 test: generate
-	go list $(TEST) | xargs -n1 go test -timeout=30s -parallel=8 $(TESTARGS)
+	go list $(TEST) | xargs -n1 go test -timeout=30s -parallel=12 $(TESTARGS)
 
 # updatedeps installs all the dependencies the library needs to run and build
 updatedeps:

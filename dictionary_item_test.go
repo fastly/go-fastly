@@ -5,12 +5,19 @@ import "testing"
 func createTestDictionary(t *testing.T) *Dictionary {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "dictionary_items/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
-	d, err := testClient.CreateDictionary(&CreateDictionaryInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test_dictionary",
+	var d *Dictionary
+	record(t, "dictionary_items/dictionary", func(c *Client) {
+		d, err = c.CreateDictionary(&CreateDictionaryInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test_dictionary",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -19,11 +26,15 @@ func createTestDictionary(t *testing.T) *Dictionary {
 }
 
 func deleteTestDictionary(d *Dictionary, t *testing.T) {
-	if err := testClient.DeleteDictionary(&DeleteDictionaryInput{
-		Service: d.ServiceID,
-		Version: d.Version,
-		Name:    "test_dictionary",
-	}); err != nil {
+	var err error
+	record(t, "dictionary_items/delete_dictionary", func(c *Client) {
+		err = c.DeleteDictionary(&DeleteDictionaryInput{
+			Service: d.ServiceID,
+			Version: d.Version,
+			Name:    "test_dictionary",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }
@@ -33,11 +44,15 @@ func TestClient_DictionaryItems(t *testing.T) {
 	defer deleteTestDictionary(td, t)
 
 	// Create
-	d, err := testClient.CreateDictionaryItem(&CreateDictionaryItemInput{
-		Service:    testServiceID,
-		Dictionary: td.ID,
-		ItemKey:    "test-dictionary-item",
-		ItemValue:  "value",
+	var err error
+	var d *DictionaryItem
+	record(t, "dictionary_items/create", func(c *Client) {
+		d, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
+			Service:    testServiceID,
+			Dictionary: td.ID,
+			ItemKey:    "test-dictionary-item",
+			ItemValue:  "value",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -45,10 +60,12 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
-			Service:    testServiceID,
-			Dictionary: td.ID,
-			ItemKey:    "test-dictionary-item",
+		record(t, "dictionary_items/cleanup", func(c *Client) {
+			c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+				Service:    testServiceID,
+				Dictionary: td.ID,
+				ItemKey:    "test-dictionary-item",
+			})
 		})
 	}()
 
@@ -60,9 +77,12 @@ func TestClient_DictionaryItems(t *testing.T) {
 	}
 
 	// List
-	ds, err := testClient.ListDictionaryItems(&ListDictionaryItemsInput{
-		Service:    testServiceID,
-		Dictionary: td.ID,
+	var ds []*DictionaryItem
+	record(t, "dictionary_items/list", func(c *Client) {
+		ds, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
+			Service:    testServiceID,
+			Dictionary: td.ID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -72,10 +92,13 @@ func TestClient_DictionaryItems(t *testing.T) {
 	}
 
 	// Get
-	nd, err := testClient.GetDictionaryItem(&GetDictionaryItemInput{
-		Service:    testServiceID,
-		Dictionary: td.ID,
-		ItemKey:    "test-dictionary-item",
+	var nd *DictionaryItem
+	record(t, "dictionary_items/get", func(c *Client) {
+		nd, err = c.GetDictionaryItem(&GetDictionaryItemInput{
+			Service:    testServiceID,
+			Dictionary: td.ID,
+			ItemKey:    "test-dictionary-item",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -88,11 +111,14 @@ func TestClient_DictionaryItems(t *testing.T) {
 	}
 
 	// Update
-	ud, err := testClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{
-		Service:    testServiceID,
-		Dictionary: td.ID,
-		ItemKey:    "test-dictionary-item",
-		ItemValue:  "new-value",
+	var ud *DictionaryItem
+	record(t, "dictionary_items/update", func(c *Client) {
+		ud, err = c.UpdateDictionaryItem(&UpdateDictionaryItemInput{
+			Service:    testServiceID,
+			Dictionary: td.ID,
+			ItemKey:    "test-dictionary-item",
+			ItemValue:  "new-value",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -102,11 +128,14 @@ func TestClient_DictionaryItems(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
-		Service:    testServiceID,
-		Dictionary: td.ID,
-		ItemKey:    "test-dictionary-item",
-	}); err != nil {
+	record(t, "dictionary_items/delete", func(c *Client) {
+		err = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+			Service:    testServiceID,
+			Dictionary: td.ID,
+			ItemKey:    "test-dictionary-item",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

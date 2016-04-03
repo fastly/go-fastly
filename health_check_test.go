@@ -5,23 +5,30 @@ import "testing"
 func TestClient_HealthChecks(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "health_checks/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	hc, err := testClient.CreateHealthCheck(&CreateHealthCheckInput{
-		Service:          testServiceID,
-		Version:          tv.Number,
-		Name:             "test-healthcheck",
-		Method:           "HEAD",
-		Host:             "example.com",
-		Path:             "/foo",
-		HTTPVersion:      "1.1",
-		Timeout:          1500,
-		CheckInterval:    2500,
-		ExpectedResponse: 200,
-		Window:           5000,
-		Threshold:        10,
-		Initial:          10,
+	var hc *HealthCheck
+	record(t, "health_checks/create", func(c *Client) {
+		hc, err = c.CreateHealthCheck(&CreateHealthCheckInput{
+			Service:          testServiceID,
+			Version:          tv.Number,
+			Name:             "test-healthcheck",
+			Method:           "HEAD",
+			Host:             "example.com",
+			Path:             "/foo",
+			HTTPVersion:      "1.1",
+			Timeout:          1500,
+			CheckInterval:    2500,
+			ExpectedResponse: 200,
+			Window:           5000,
+			Threshold:        10,
+			Initial:          10,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -29,16 +36,18 @@ func TestClient_HealthChecks(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-healthcheck",
-		})
+		record(t, "health_checks/cleanup", func(c *Client) {
+			c.DeleteHealthCheck(&DeleteHealthCheckInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-healthcheck",
+			})
 
-		testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-healthcheck",
+			c.DeleteHealthCheck(&DeleteHealthCheckInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-healthcheck",
+			})
 		})
 	}()
 
@@ -77,9 +86,12 @@ func TestClient_HealthChecks(t *testing.T) {
 	}
 
 	// List
-	hcs, err := testClient.ListHealthChecks(&ListHealthChecksInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var hcs []*HealthCheck
+	record(t, "health_checks/list", func(c *Client) {
+		hcs, err = c.ListHealthChecks(&ListHealthChecksInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -89,10 +101,13 @@ func TestClient_HealthChecks(t *testing.T) {
 	}
 
 	// Get
-	nhc, err := testClient.GetHealthCheck(&GetHealthCheckInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-healthcheck",
+	var nhc *HealthCheck
+	record(t, "health_checks/get", func(c *Client) {
+		nhc, err = c.GetHealthCheck(&GetHealthCheckInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-healthcheck",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -132,25 +147,31 @@ func TestClient_HealthChecks(t *testing.T) {
 	}
 
 	// Update
-	ub, err := testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-healthcheck",
-		NewName: "new-test-healthcheck",
+	var uhc *HealthCheck
+	record(t, "health_checks/update", func(c *Client) {
+		uhc, err = c.UpdateHealthCheck(&UpdateHealthCheckInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-healthcheck",
+			NewName: "new-test-healthcheck",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ub.Name != "new-test-healthcheck" {
-		t.Errorf("bad name: %q", ub.Name)
+	if uhc.Name != "new-test-healthcheck" {
+		t.Errorf("bad name: %q", uhc.Name)
 	}
 
 	// Delete
-	if err := testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-healthcheck",
-	}); err != nil {
+	record(t, "health_checks/delete", func(c *Client) {
+		err = c.DeleteHealthCheck(&DeleteHealthCheckInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-healthcheck",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

@@ -5,14 +5,21 @@ import "testing"
 func TestClient_DirectorBackends(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "director_backends/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	b, err := testClient.CreateDirectorBackend(&CreateDirectorBackendInput{
-		Service:  testServiceID,
-		Version:  tv.Number,
-		Director: "director",
-		Backend:  "backend",
+	var b *DirectorBackend
+	record(t, "director_backends/create", func(c *Client) {
+		b, err = c.CreateDirectorBackend(&CreateDirectorBackendInput{
+			Service:  testServiceID,
+			Version:  tv.Number,
+			Director: "director",
+			Backend:  "backend",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -20,11 +27,13 @@ func TestClient_DirectorBackends(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
-			Service:  testServiceID,
-			Version:  tv.Number,
-			Director: "director",
-			Backend:  "backend",
+		record(t, "director_backends/cleanup", func(c *Client) {
+			c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+				Service:  testServiceID,
+				Version:  tv.Number,
+				Director: "director",
+				Backend:  "backend",
+			})
 		})
 	}()
 
@@ -36,11 +45,14 @@ func TestClient_DirectorBackends(t *testing.T) {
 	}
 
 	// Get
-	nb, err := testClient.GetDirectorBackend(&GetDirectorBackendInput{
-		Service:  testServiceID,
-		Version:  tv.Number,
-		Director: "director",
-		Backend:  "backend",
+	var nb *DirectorBackend
+	record(t, "director_backends/get", func(c *Client) {
+		nb, err = c.GetDirectorBackend(&GetDirectorBackendInput{
+			Service:  testServiceID,
+			Version:  tv.Number,
+			Director: "director",
+			Backend:  "backend",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -54,12 +66,15 @@ func TestClient_DirectorBackends(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
-		Service:  testServiceID,
-		Version:  tv.Number,
-		Director: "director",
-		Backend:  "backend",
-	}); err != nil {
+	record(t, "director_backends/delete", func(c *Client) {
+		err = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+			Service:  testServiceID,
+			Version:  tv.Number,
+			Director: "director",
+			Backend:  "backend",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

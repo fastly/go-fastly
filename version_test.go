@@ -5,12 +5,17 @@ import "testing"
 func TestClient_Versions(t *testing.T) {
 	t.Parallel()
 
+	var err error
+
 	// Lock because we are creating a new version.
 	testVersionLock.Lock()
 
 	// Create
-	v, err := testClient.CreateVersion(&CreateVersionInput{
-		Service: testServiceID,
+	var v *Version
+	record(t, "versions/create", func(c *Client) {
+		v, err = c.CreateVersion(&CreateVersionInput{
+			Service: testServiceID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -23,8 +28,11 @@ func TestClient_Versions(t *testing.T) {
 	testVersionLock.Unlock()
 
 	// List
-	vs, err := testClient.ListVersions(&ListVersionsInput{
-		Service: testServiceID,
+	var vs []*Version
+	record(t, "versions/list", func(c *Client) {
+		vs, err = c.ListVersions(&ListVersionsInput{
+			Service: testServiceID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -34,9 +42,12 @@ func TestClient_Versions(t *testing.T) {
 	}
 
 	// Get
-	nv, err := testClient.GetVersion(&GetVersionInput{
-		Service: testServiceID,
-		Version: v.Number,
+	var nv *Version
+	record(t, "versions/get", func(c *Client) {
+		nv, err = c.GetVersion(&GetVersionInput{
+			Service: testServiceID,
+			Version: v.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -46,10 +57,13 @@ func TestClient_Versions(t *testing.T) {
 	}
 
 	// Update
-	uv, err := testClient.UpdateVersion(&UpdateVersionInput{
-		Service: testServiceID,
-		Version: v.Number,
-		Comment: "new comment",
+	var uv *Version
+	record(t, "versions/update", func(c *Client) {
+		uv, err = c.UpdateVersion(&UpdateVersionInput{
+			Service: testServiceID,
+			Version: v.Number,
+			Comment: "new comment",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -59,27 +73,33 @@ func TestClient_Versions(t *testing.T) {
 	}
 
 	// Lock
-	v, err = testClient.LockVersion(&LockVersionInput{
-		Service: testServiceID,
-		Version: v.Number,
+	var vl *Version
+	record(t, "versions/lock", func(c *Client) {
+		vl, err = c.LockVersion(&LockVersionInput{
+			Service: testServiceID,
+			Version: v.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if v.Locked != true {
-		t.Errorf("bad lock: %d", v.Locked)
+	if vl.Locked != true {
+		t.Errorf("bad lock: %t", vl.Locked)
 	}
 
 	// Clone
-	nv, err = testClient.CloneVersion(&CloneVersionInput{
-		Service: testServiceID,
-		Version: v.Number,
+	var cv *Version
+	record(t, "versions/clone", func(c *Client) {
+		cv, err = c.CloneVersion(&CloneVersionInput{
+			Service: testServiceID,
+			Version: v.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if v.Active != false {
-		t.Errorf("bad clone: %d", v.Active)
+	if cv.Active != false {
+		t.Errorf("bad clone: %t", cv.Active)
 	}
 }
 

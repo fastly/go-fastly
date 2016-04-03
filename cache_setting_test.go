@@ -5,16 +5,23 @@ import "testing"
 func TestClient_CacheSettings(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "cache_settings/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	c, err := testClient.CreateCacheSetting(&CreateCacheSettingInput{
-		Service:  testServiceID,
-		Version:  tv.Number,
-		Name:     "test-cache-setting",
-		Action:   CacheSettingActionCache,
-		TTL:      1234,
-		StaleTTL: 1500,
+	var cacheSetting *CacheSetting
+	record(t, "cache_settings/create", func(c *Client) {
+		cacheSetting, err = c.CreateCacheSetting(&CreateCacheSettingInput{
+			Service:  testServiceID,
+			Version:  tv.Number,
+			Name:     "test-cache-setting",
+			Action:   CacheSettingActionCache,
+			TTL:      1234,
+			StaleTTL: 1500,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -22,86 +29,100 @@ func TestClient_CacheSettings(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteCacheSetting(&DeleteCacheSettingInput{
+		record(t, "cache_settings/cleanup", func(c *Client) {
+			c.DeleteCacheSetting(&DeleteCacheSettingInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-cache-setting",
+			})
+
+			c.DeleteCacheSetting(&DeleteCacheSettingInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-cache-setting",
+			})
+		})
+	}()
+
+	if cacheSetting.Name != "test-cache-setting" {
+		t.Errorf("bad name: %q", cacheSetting.Name)
+	}
+	if cacheSetting.Action != CacheSettingActionCache {
+		t.Errorf("bad action: %q", cacheSetting.Action)
+	}
+	if cacheSetting.TTL != 1234 {
+		t.Errorf("bad ttl: %d", cacheSetting.TTL)
+	}
+	if cacheSetting.StaleTTL != 1500 {
+		t.Errorf("bad stale_ttl: %d", cacheSetting.StaleTTL)
+	}
+
+	// List
+	var cacheSettings []*CacheSetting
+	record(t, "cache_settings/list", func(c *Client) {
+		cacheSettings, err = c.ListCacheSettings(&ListCacheSettingsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(cacheSettings) < 1 {
+		t.Errorf("bad cache settings: %v", cacheSettings)
+	}
+
+	// Get
+	var newCacheSetting *CacheSetting
+	record(t, "cache_settings/get", func(c *Client) {
+		newCacheSetting, err = c.GetCacheSetting(&GetCacheSettingInput{
 			Service: testServiceID,
 			Version: tv.Number,
 			Name:    "test-cache-setting",
 		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if cacheSetting.Name != newCacheSetting.Name {
+		t.Errorf("bad name: %q (%q)", cacheSetting.Name, newCacheSetting.Name)
+	}
+	if cacheSetting.Action != CacheSettingActionCache {
+		t.Errorf("bad action: %q", cacheSetting.Action)
+	}
+	if cacheSetting.TTL != 1234 {
+		t.Errorf("bad ttl: %d", cacheSetting.TTL)
+	}
+	if cacheSetting.StaleTTL != 1500 {
+		t.Errorf("bad stale_ttl: %d", cacheSetting.StaleTTL)
+	}
 
-		testClient.DeleteCacheSetting(&DeleteCacheSettingInput{
+	// Update
+	var updatedCacheSetting *CacheSetting
+	record(t, "cache_settings/update", func(c *Client) {
+		updatedCacheSetting, err = c.UpdateCacheSetting(&UpdateCacheSettingInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-cache-setting",
+			NewName: "new-test-cache-setting",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if updatedCacheSetting.Name != "new-test-cache-setting" {
+		t.Errorf("bad name: %q", updatedCacheSetting.Name)
+	}
+
+	// Delete
+	record(t, "cache_settings/delete", func(c *Client) {
+		err = c.DeleteCacheSetting(&DeleteCacheSettingInput{
 			Service: testServiceID,
 			Version: tv.Number,
 			Name:    "new-test-cache-setting",
 		})
-	}()
-
-	if c.Name != "test-cache-setting" {
-		t.Errorf("bad name: %q", c.Name)
-	}
-	if c.Action != CacheSettingActionCache {
-		t.Errorf("bad action: %q", c.Action)
-	}
-	if c.TTL != 1234 {
-		t.Errorf("bad ttl: %d", c.TTL)
-	}
-	if c.StaleTTL != 1500 {
-		t.Errorf("bad stale_ttl: %d", c.StaleTTL)
-	}
-
-	// List
-	cs, err := testClient.ListCacheSettings(&ListCacheSettingsInput{
-		Service: testServiceID,
-		Version: tv.Number,
 	})
 	if err != nil {
-		t.Fatal(err)
-	}
-	if len(cs) < 1 {
-		t.Errorf("bad cache settings: %v", cs)
-	}
-
-	// Get
-	nc, err := testClient.GetCacheSetting(&GetCacheSettingInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-cache-setting",
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if c.Name != nc.Name {
-		t.Errorf("bad name: %q (%q)", c.Name, nc.Name)
-	}
-	if c.Action != CacheSettingActionCache {
-		t.Errorf("bad action: %q", c.Action)
-	}
-	if c.TTL != 1234 {
-		t.Errorf("bad ttl: %d", c.TTL)
-	}
-	if c.StaleTTL != 1500 {
-		t.Errorf("bad stale_ttl: %d", c.StaleTTL)
-	}
-
-	// Update
-	uc, err := testClient.UpdateCacheSetting(&UpdateCacheSettingInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-cache-setting",
-		NewName: "new-test-cache-setting",
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if uc.Name != "new-test-cache-setting" {
-		t.Errorf("bad name: %q", uc.Name)
-	}
-
-	// Delete
-	if err := testClient.DeleteCacheSetting(&DeleteCacheSettingInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-cache-setting",
-	}); err != nil {
 		t.Fatal(err)
 	}
 }

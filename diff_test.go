@@ -5,25 +5,38 @@ import "testing"
 func TestClient_Diff(t *testing.T) {
 	t.Parallel()
 
-	tv1 := testVersion(t)
-	tv2 := testVersion(t)
+	var err error
+	var tv1 *Version
+	record(t, "diff/version_1", func(c *Client) {
+		tv1 = testNewVersion(t, c)
+	})
+
+	var tv2 *Version
+	record(t, "diff/version_2", func(c *Client) {
+		tv2 = testNewVersion(t, c)
+	})
 
 	// Diff should be empty
-	d, err := testClient.GetDiff(&GetDiffInput{
-		Service: testServiceID,
-		From:    tv1.Number,
-		To:      tv2.Number,
+	var d *Diff
+	record(t, "diff/get", func(c *Client) {
+		d, err = c.GetDiff(&GetDiffInput{
+			Service: testServiceID,
+			From:    tv1.Number,
+			To:      tv2.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
 	// Create a diff
-	_, err = testClient.CreateBackend(&CreateBackendInput{
-		Service: testServiceID,
-		Version: tv2.Number,
-		Name:    "test-backend",
-		Address: "integ-test.go-fastly.com",
+	record(t, "diff/create_backend", func(c *Client) {
+		_, err = c.CreateBackend(&CreateBackendInput{
+			Service: testServiceID,
+			Version: tv2.Number,
+			Name:    "test-backend",
+			Address: "integ-test.go-fastly.com",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -31,18 +44,22 @@ func TestClient_Diff(t *testing.T) {
 
 	// Ensure we delete the backend we just created
 	defer func() {
-		testClient.DeleteBackend(&DeleteBackendInput{
-			Service: testServiceID,
-			Version: tv2.Number,
-			Name:    "test-backend",
+		record(t, "diff/cleanup", func(c *Client) {
+			c.DeleteBackend(&DeleteBackendInput{
+				Service: testServiceID,
+				Version: tv2.Number,
+				Name:    "test-backend",
+			})
 		})
 	}()
 
 	// Diff should mot be empty
-	d, err = testClient.GetDiff(&GetDiffInput{
-		Service: testServiceID,
-		From:    tv1.Number,
-		To:      tv2.Number,
+	record(t, "diff/get_again", func(c *Client) {
+		d, err = c.GetDiff(&GetDiffInput{
+			Service: testServiceID,
+			From:    tv1.Number,
+			To:      tv2.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)

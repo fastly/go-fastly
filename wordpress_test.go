@@ -5,15 +5,22 @@ import "testing"
 func TestClient_Wordpresses(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "wordpresses/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	wp, err := testClient.CreateWordpress(&CreateWordpressInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-wordpress",
-		Path:    "/foo",
-		Comment: "comment",
+	var wp *Wordpress
+	record(t, "wordpresses/create", func(c *Client) {
+		wp, err = c.CreateWordpress(&CreateWordpressInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-wordpress",
+			Path:    "/foo",
+			Comment: "comment",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -21,16 +28,18 @@ func TestClient_Wordpresses(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteWordpress(&DeleteWordpressInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-wordpress",
-		})
+		record(t, "wordpresses/cleanup", func(c *Client) {
+			c.DeleteWordpress(&DeleteWordpressInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-wordpress",
+			})
 
-		testClient.DeleteWordpress(&DeleteWordpressInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-wordpress",
+			c.DeleteWordpress(&DeleteWordpressInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-wordpress",
+			})
 		})
 	}()
 
@@ -45,9 +54,12 @@ func TestClient_Wordpresses(t *testing.T) {
 	}
 
 	// List
-	wps, err := testClient.ListWordpresses(&ListWordpressesInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var wps []*Wordpress
+	record(t, "wordpresses/list", func(c *Client) {
+		wps, err = c.ListWordpresses(&ListWordpressesInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -57,10 +69,13 @@ func TestClient_Wordpresses(t *testing.T) {
 	}
 
 	// Get
-	nwp, err := testClient.GetWordpress(&GetWordpressInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-wordpress",
+	var nwp *Wordpress
+	record(t, "wordpresses/get", func(c *Client) {
+		nwp, err = c.GetWordpress(&GetWordpressInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-wordpress",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -76,11 +91,14 @@ func TestClient_Wordpresses(t *testing.T) {
 	}
 
 	// Update
-	uwp, err := testClient.UpdateWordpress(&UpdateWordpressInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-wordpress",
-		NewName: "new-test-wordpress",
+	var uwp *Wordpress
+	record(t, "wordpresses/update", func(c *Client) {
+		uwp, err = c.UpdateWordpress(&UpdateWordpressInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-wordpress",
+			NewName: "new-test-wordpress",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -90,11 +108,14 @@ func TestClient_Wordpresses(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteWordpress(&DeleteWordpressInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-wordpress",
-	}); err != nil {
+	record(t, "wordpresses/delete", func(c *Client) {
+		err = c.DeleteWordpress(&DeleteWordpressInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-wordpress",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

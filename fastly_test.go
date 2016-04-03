@@ -3,6 +3,8 @@ package fastly
 import (
 	"sync"
 	"testing"
+
+	"github.com/dnaeon/go-vcr/recorder"
 )
 
 // testClient is the test client.
@@ -27,4 +29,34 @@ func testVersion(t *testing.T) *Version {
 		t.Fatal(err)
 	}
 	return v
+}
+
+func testNewVersion(t *testing.T, c *Client) *Version {
+	testVersionLock.Lock()
+	defer testVersionLock.Unlock()
+
+	v, err := c.CreateVersion(&CreateVersionInput{
+		Service: testServiceID,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return v
+}
+
+func record(t *testing.T, fixture string, f func(*Client)) {
+	r, err := recorder.New("fixtures/" + fixture)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() {
+		if err := r.Stop(); err != nil {
+			t.Fatal(err)
+		}
+	}()
+
+	client := DefaultClient()
+	client.HTTPClient.Transport = r.Transport
+
+	f(client)
 }

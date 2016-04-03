@@ -5,16 +5,23 @@ import "testing"
 func TestClient_Directors(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "directors/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	// Create
-	b, err := testClient.CreateDirector(&CreateDirectorInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-director",
-		Quorum:  50,
-		Type:    DirectorTypeRandom,
-		Retries: 5,
+	var b *Director
+	record(t, "directors/create", func(c *Client) {
+		b, err = c.CreateDirector(&CreateDirectorInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-director",
+			Quorum:  50,
+			Type:    DirectorTypeRandom,
+			Retries: 5,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -22,16 +29,18 @@ func TestClient_Directors(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteDirector(&DeleteDirectorInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-director",
-		})
+		record(t, "directors/cleanup", func(c *Client) {
+			c.DeleteDirector(&DeleteDirectorInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-director",
+			})
 
-		testClient.DeleteDirector(&DeleteDirectorInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-director",
+			c.DeleteDirector(&DeleteDirectorInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-director",
+			})
 		})
 	}()
 
@@ -49,9 +58,12 @@ func TestClient_Directors(t *testing.T) {
 	}
 
 	// List
-	bs, err := testClient.ListDirectors(&ListDirectorsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var bs []*Director
+	record(t, "directors/list", func(c *Client) {
+		bs, err = c.ListDirectors(&ListDirectorsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -61,10 +73,13 @@ func TestClient_Directors(t *testing.T) {
 	}
 
 	// Get
-	nb, err := testClient.GetDirector(&GetDirectorInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-director",
+	var nb *Director
+	record(t, "directors/get", func(c *Client) {
+		nb, err = c.GetDirector(&GetDirectorInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-director",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -83,11 +98,14 @@ func TestClient_Directors(t *testing.T) {
 	}
 
 	// Update
-	ub, err := testClient.UpdateDirector(&UpdateDirectorInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-director",
-		Quorum:  100,
+	var ub *Director
+	record(t, "directors/update", func(c *Client) {
+		ub, err = c.UpdateDirector(&UpdateDirectorInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-director",
+			Quorum:  100,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -97,11 +115,14 @@ func TestClient_Directors(t *testing.T) {
 	}
 
 	// Delete
-	if err := testClient.DeleteDirector(&DeleteDirectorInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-director",
-	}); err != nil {
+	record(t, "directors/delete", func(c *Client) {
+		err = c.DeleteDirector(&DeleteDirectorInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-director",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }

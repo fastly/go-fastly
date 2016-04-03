@@ -8,7 +8,11 @@ import (
 func TestClient_Syslogs(t *testing.T) {
 	t.Parallel()
 
-	tv := testVersion(t)
+	var err error
+	var tv *Version
+	record(t, "syslogs/version", func(c *Client) {
+		tv = testNewVersion(t, c)
+	})
 
 	cert := strings.TrimSpace(`
 -----BEGIN CERTIFICATE-----
@@ -29,16 +33,19 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 `)
 
 	// Create
-	s, err := testClient.CreateSyslog(&CreateSyslogInput{
-		Service:   testServiceID,
-		Version:   tv.Number,
-		Name:      "test-syslog",
-		Address:   "example.com",
-		Port:      1234,
-		UseTLS:    true,
-		TLSCACert: cert,
-		Token:     "abcd1234",
-		Format:    "format",
+	var s *Syslog
+	record(t, "syslogs/create", func(c *Client) {
+		s, err = c.CreateSyslog(&CreateSyslogInput{
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-syslog",
+			Address:   "example.com",
+			Port:      1234,
+			UseTLS:    true,
+			TLSCACert: cert,
+			Token:     "abcd1234",
+			Format:    "format",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -46,16 +53,18 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteSyslog(&DeleteSyslogInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-syslog",
-		})
+		record(t, "syslogs/cleanup", func(c *Client) {
+			c.DeleteSyslog(&DeleteSyslogInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-syslog",
+			})
 
-		testClient.DeleteSyslog(&DeleteSyslogInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-syslog",
+			c.DeleteSyslog(&DeleteSyslogInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "new-test-syslog",
+			})
 		})
 	}()
 
@@ -69,7 +78,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad port: %q", s.Port)
 	}
 	if s.UseTLS != true {
-		t.Errorf("bad use_tls: %q", s.UseTLS)
+		t.Errorf("bad use_tls: %t", s.UseTLS)
 	}
 	if s.TLSCACert != cert {
 		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
@@ -82,9 +91,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 
 	// List
-	ss, err := testClient.ListSyslogs(&ListSyslogsInput{
-		Service: testServiceID,
-		Version: tv.Number,
+	var ss []*Syslog
+	record(t, "syslogs/list", func(c *Client) {
+		ss, err = c.ListSyslogs(&ListSyslogsInput{
+			Service: testServiceID,
+			Version: tv.Number,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -94,10 +106,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 
 	// Get
-	ns, err := testClient.GetSyslog(&GetSyslogInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-syslog",
+	var ns *Syslog
+	record(t, "syslogs/get", func(c *Client) {
+		ns, err = c.GetSyslog(&GetSyslogInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-syslog",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -112,7 +127,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		t.Errorf("bad port: %q", s.Port)
 	}
 	if s.UseTLS != ns.UseTLS {
-		t.Errorf("bad use_tls: %q", s.UseTLS)
+		t.Errorf("bad use_tls: %t", s.UseTLS)
 	}
 	if s.TLSCACert != ns.TLSCACert {
 		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
@@ -125,11 +140,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 
 	// Update
-	us, err := testClient.UpdateSyslog(&UpdateSyslogInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "test-syslog",
-		NewName: "new-test-syslog",
+	var us *Syslog
+	record(t, "syslogs/update", func(c *Client) {
+		us, err = c.UpdateSyslog(&UpdateSyslogInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-syslog",
+			NewName: "new-test-syslog",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -139,11 +157,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 
 	// Delete
-	if err := testClient.DeleteSyslog(&DeleteSyslogInput{
-		Service: testServiceID,
-		Version: tv.Number,
-		Name:    "new-test-syslog",
-	}); err != nil {
+	record(t, "syslogs/delete", func(c *Client) {
+		err = c.DeleteSyslog(&DeleteSyslogInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "new-test-syslog",
+		})
+	})
+	if err != nil {
 		t.Fatal(err)
 	}
 }
