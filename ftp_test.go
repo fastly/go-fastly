@@ -22,7 +22,7 @@ func TestClient_FTPs(t *testing.T) {
 			Port:            1234,
 			Username:        "username",
 			Password:        "password",
-			Directory:       "/",
+			Path:            "/dir",
 			Period:          12,
 			GzipLevel:       9,
 			Format:          "format",
@@ -65,8 +65,8 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.Password != "password" {
 		t.Errorf("bad password: %q", ftp.Password)
 	}
-	if ftp.Directory != "/dir" {
-		t.Errorf("bad directory: %q", ftp.Directory)
+	if ftp.Path != "/dir" {
+		t.Errorf("bad path: %q", ftp.Path)
 	}
 	if ftp.Period != 12 {
 		t.Errorf("bad period: %q", ftp.Period)
@@ -123,8 +123,8 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.Password != nftp.Password {
 		t.Errorf("bad password: %q", ftp.Password)
 	}
-	if ftp.Directory != nftp.Directory {
-		t.Errorf("bad directory: %q", ftp.Directory)
+	if ftp.Path != nftp.Path {
+		t.Errorf("bad path: %q", ftp.Path)
 	}
 	if ftp.Period != nftp.Period {
 		t.Errorf("bad period: %q", ftp.Period)
