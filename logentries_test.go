@@ -8,7 +8,7 @@ func TestClient_Logentries(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "logentries/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create

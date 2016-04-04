@@ -18,20 +18,7 @@ var testServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 var testVersionLock sync.Mutex
 
 // testVersion is a new, blank version suitable for testing.
-func testVersion(t *testing.T) *Version {
-	testVersionLock.Lock()
-	defer testVersionLock.Unlock()
-
-	v, err := testClient.CreateVersion(&CreateVersionInput{
-		Service: testServiceID,
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return v
-}
-
-func testNewVersion(t *testing.T, c *Client) *Version {
+func testVersion(t *testing.T, c *Client) *Version {
 	testVersionLock.Lock()
 	defer testVersionLock.Unlock()
 

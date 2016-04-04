@@ -8,12 +8,12 @@ func TestClient_Diff(t *testing.T) {
 	var err error
 	var tv1 *Version
 	record(t, "diff/version_1", func(c *Client) {
-		tv1 = testNewVersion(t, c)
+		tv1 = testVersion(t, c)
 	})
 
 	var tv2 *Version
 	record(t, "diff/version_2", func(c *Client) {
-		tv2 = testNewVersion(t, c)
+		tv2 = testVersion(t, c)
 	})
 
 	// Diff should be empty

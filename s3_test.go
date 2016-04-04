@@ -8,7 +8,7 @@ func TestClient_S3s(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "s3s/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create

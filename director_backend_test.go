@@ -8,7 +8,7 @@ func TestClient_DirectorBackends(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "director_backends/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create

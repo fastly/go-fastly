@@ -8,7 +8,7 @@ func createTestDictionary(t *testing.T) *Dictionary {
 	var err error
 	var tv *Version
 	record(t, "dictionary_items/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	var d *Dictionary

@@ -8,7 +8,7 @@ func TestClient_Sumologics(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "sumologics/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create

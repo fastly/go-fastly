@@ -8,7 +8,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "response_objects/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create

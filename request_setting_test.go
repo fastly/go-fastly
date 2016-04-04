@@ -8,7 +8,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "request_settings/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create

@@ -11,7 +11,7 @@ func TestClient_Syslogs(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "syslogs/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	cert := strings.TrimSpace(`

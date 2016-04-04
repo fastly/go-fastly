@@ -8,7 +8,7 @@ func TestClient_Domains(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "domains/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create

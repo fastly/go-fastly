@@ -8,7 +8,7 @@ func TestClient_VCLs(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "vcls/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	content := `

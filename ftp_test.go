@@ -8,7 +8,7 @@ func TestClient_FTPs(t *testing.T) {
 	var err error
 	var tv *Version
 	record(t, "ftps/version", func(c *Client) {
-		tv = testNewVersion(t, c)
+		tv = testVersion(t, c)
 	})
 
 	// Create
