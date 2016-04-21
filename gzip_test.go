@@ -26,6 +26,25 @@ func TestClient_Gzips(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// Create omissions (GH-7)
+	var gzipomit *Gzip
+	record(t, "gzips/create_omissions", func(c *Client) {
+		gzipomit, err = c.CreateGzip(&CreateGzipInput{
+			Service: testServiceID,
+			Version: tv.Number,
+			Name:    "test-gzip-omit",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if gzipomit.ContentTypes != "" {
+		t.Errorf("bad content_types: %q", gzipomit.ContentTypes)
+	}
+	if gzipomit.Extensions != "" {
+		t.Errorf("bad extensions: %q", gzipomit.Extensions)
+	}
+
 	// Ensure deleted
 	defer func() {
 		record(t, "gzips/cleanup", func(c *Client) {
@@ -33,6 +52,12 @@ func TestClient_Gzips(t *testing.T) {
 				Service: testServiceID,
 				Version: tv.Number,
 				Name:    "test-gzip",
+			})
+
+			c.DeleteGzip(&DeleteGzipInput{
+				Service: testServiceID,
+				Version: tv.Number,
+				Name:    "test-gzip-omit",
 			})
 
 			c.DeleteGzip(&DeleteGzipInput{
@@ -80,14 +105,14 @@ func TestClient_Gzips(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if gzip.Name != ngzip.Name {
-		t.Errorf("bad name: %q", gzip.Name)
+	if ngzip.Name != gzip.Name {
+		t.Errorf("bad name: %q", ngzip.Name)
 	}
-	if gzip.ContentTypes != "text/html text/css" {
-		t.Errorf("bad content_types: %q", gzip.ContentTypes)
+	if ngzip.ContentTypes != gzip.ContentTypes {
+		t.Errorf("bad content_types: %q", ngzip.ContentTypes)
 	}
-	if gzip.Extensions != "html css" {
-		t.Errorf("bad extensions: %q", gzip.Extensions)
+	if ngzip.Extensions != gzip.Extensions {
+		t.Errorf("bad extensions: %q", ngzip.Extensions)
 	}
 
 	// Update

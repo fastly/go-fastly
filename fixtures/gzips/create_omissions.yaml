@@ -2,18 +2,18 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=584&content_types=text%2Fhtml+text%2Fcss&extensions=html+css&name=test-gzip
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=584&content_types=&extensions=&name=test-gzip-omit
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
       - "584"
       content_types:
-      - text/html text/css
+      - ""
       extensions:
-      - html css
+      - ""
       name:
-      - test-gzip
+      - test-gzip-omit
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -24,7 +24,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/584/gzip
     method: POST
   response:
-    body: '{"content_types":"text/html text/css","extensions":"html css","name":"test-gzip","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"584","cache_condition":""}'
+    body: '{"content_types":"","extensions":"","name":"test-gzip-omit","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"584","cache_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,9 +35,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 20 Apr 2016 21:44:24 GMT
+      - Wed, 20 Apr 2016 21:44:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "997"
       Fastly-Ratelimit-Reset:
       - "1461189600"
       Status:
@@ -52,6 +52,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1738-ORD
+      - app-slwdc9050-SL, cache-ord1738-ORD
     status: 200 OK
     code: 200
