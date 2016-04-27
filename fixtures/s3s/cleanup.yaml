@@ -6,15 +6,14 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - 993bc901e64210d5463be6e8f77d4b9e
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/569/logging/s3/test-s3
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/585/logging/s3/test-s3
     method: DELETE
   response:
-    body: '{"msg":"An error occurred while connecting to the fastly API, please try
-      your request again.","detail":"Couldn''t find syslog ''{ version => 569, name
-      => test-s3, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =>
+      585, name => test-s3, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
       }''"}'
     headers:
       Accept-Ranges:
@@ -22,15 +21,15 @@ interactions:
       Connection:
       - keep-alive
       Content-Type:
-      - text/json
+      - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:23 GMT
+      - Wed, 27 Apr 2016 15:52:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "891"
+      - "995"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1461772800"
       Status:
-      - 400 Bad Request
+      - 404 Not Found
       Vary:
       - Accept-Encoding
       Via:
@@ -41,23 +40,22 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-iad2136-IAD
-    status: 400 Bad Request
-    code: 400
+      - app-slwdc9051-SL, cache-iad2125-IAD
+    status: 404 Not Found
+    code: 404
 - request:
     body: ""
     form: {}
     headers:
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - 993bc901e64210d5463be6e8f77d4b9e
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/569/logging/s3/new-test-s3
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/585/logging/s3/new-test-s3
     method: DELETE
   response:
-    body: '{"msg":"An error occurred while connecting to the fastly API, please try
-      your request again.","detail":"Couldn''t find syslog ''{ version => 569, name
-      => new-test-s3, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =>
+      585, name => new-test-s3, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
       }''"}'
     headers:
       Accept-Ranges:
@@ -65,15 +63,15 @@ interactions:
       Connection:
       - keep-alive
       Content-Type:
-      - text/json
+      - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:24 GMT
+      - Wed, 27 Apr 2016 15:52:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "886"
+      - "994"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1461772800"
       Status:
-      - 400 Bad Request
+      - 404 Not Found
       Vary:
       - Accept-Encoding
       Via:
@@ -84,6 +82,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2136-IAD
-    status: 400 Bad Request
-    code: 400
+      - app-slwdc9050-SL, cache-iad2125-IAD
+    status: 404 Not Found
+    code: 404
