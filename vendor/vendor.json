@@ -1,0 +1,43 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "y+bM8zNs62zFYd3RXhb3yjWfYF0=",
+			"path": "github.com/ajg/form",
+			"revision": "e7b99d6ea9c58e7bb6b2c1059b9ba748cdff22b0",
+			"revisionTime": "2016-04-29T22:15:17Z"
+		},
+		{
+			"checksumSHA1": "wa+KnISONB4UkVWePMG9dcg8ves=",
+			"path": "github.com/dnaeon/go-vcr/cassette",
+			"revision": "9d71b8a6df86e00127f96bc8dabc09856ab8afdb",
+			"revisionTime": "2016-06-02T19:51:44Z"
+		},
+		{
+			"checksumSHA1": "AmYjVgImjFG5wbdgZzV3qO0Dcwc=",
+			"path": "github.com/dnaeon/go-vcr/recorder",
+			"revision": "9d71b8a6df86e00127f96bc8dabc09856ab8afdb",
+			"revisionTime": "2016-06-02T19:51:44Z"
+		},
+		{
+			"checksumSHA1": "Uzyon2091lmwacNsl1hCytjhHtg=",
+			"path": "github.com/hashicorp/go-cleanhttp",
+			"revision": "ad28ea4487f05916463e2423a55166280e8254b5",
+			"revisionTime": "2016-04-07T17:41:26Z"
+		},
+		{
+			"checksumSHA1": "KCJhN9Dx329wAN/SeL4CxeypPyk=",
+			"path": "github.com/mitchellh/mapstructure",
+			"revision": "d2dd0262208475919e1a362f675cfc0e7c10e905",
+			"revisionTime": "2016-02-12T03:18:39Z"
+		},
+		{
+			"checksumSHA1": "+OgOXBoiQ+X+C2dsAeiOHwBIEH0=",
+			"path": "gopkg.in/yaml.v2",
+			"revision": "a83829b6f1293c91addabc89d0571c246397bbf4",
+			"revisionTime": "2016-03-01T20:40:22Z"
+		}
+	],
+	"rootPath": "github.com/sethvargo/go-fastly"
+}
