@@ -158,10 +158,17 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	}
 	ro.Headers["Content-Type"] = "application/x-www-form-urlencoded"
 
-	// There is a super-jank implementation in the form library where fields with
-	// a "dot" are replaced with "/.". That is then URL encoded and Fastly just
-	// dies. We fix that here.
-	body := strings.Replace(values.Encode(), "%5C.", ".", -1)
+	// Field names containing '.'s are replaced with '\.' in the form library.
+	// Since the Fastly API relies upon field names with periods, such as
+	// general.default_ttl, we must undo form's replace here.
+	for k, v := range values {
+		if strings.Contains(k, "\\.") {
+			newkey := strings.Replace(k, "\\.", ".", -1)
+			delete(values, k)
+			values[newkey] = v
+		}
+	}
+	body := values.Encode()
 
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))
