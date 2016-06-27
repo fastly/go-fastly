@@ -144,11 +144,6 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 // RequestForm makes an HTTP request with the given interface being encoded as
 // form data.
 func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
-	values, err := form.EncodeToValues(i)
-	if err != nil {
-		return nil, err
-	}
-
 	if ro == nil {
 		ro = new(RequestOptions)
 	}
@@ -158,15 +153,39 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	}
 	ro.Headers["Content-Type"] = "application/x-www-form-urlencoded"
 
-	// There is a super-jank implementation in the form library where fields with
-	// a "dot" are replaced with "/.". That is then URL encoded and Fastly just
-	// dies. We fix that here.
-	body := strings.Replace(values.Encode(), "%5C.", ".", -1)
+	body, err := encodeFormValues(i)
+	if err != nil {
+		return nil, err
+	}
 
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))
 
 	return c.Request(verb, p, ro)
+}
+
+// encodeFormValues encodes the given interface into a string that is ready
+// to be submitted as a form. We use a third-party library here, and that
+// library has some opinions that clash with Fastly's API, so we massage the
+// data a bit here.
+func encodeFormValues(i interface{}) (string, error) {
+	values, err := form.EncodeToValues(i)
+	if err != nil {
+		return "", err
+	}
+
+	// Field names containing '.'s are replaced with '\.' in the form library.
+	// Since the Fastly API relies upon field names with periods, such as
+	// general.default_ttl, we must undo form's replace here.
+	for k, v := range values {
+		if strings.Contains(k, "\\.") {
+			newkey := strings.Replace(k, "\\.", ".", -1)
+			delete(values, k)
+			values[newkey] = v
+		}
+	}
+
+	return values.Encode(), nil
 }
 
 // checkResp wraps an HTTP request from the default client and verifies that the
