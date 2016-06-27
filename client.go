@@ -144,11 +144,6 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 // RequestForm makes an HTTP request with the given interface being encoded as
 // form data.
 func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
-	values, err := form.EncodeToValues(i)
-	if err != nil {
-		return nil, err
-	}
-
 	if ro == nil {
 		ro = new(RequestOptions)
 	}
@@ -157,6 +152,27 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 		ro.Headers = make(map[string]string)
 	}
 	ro.Headers["Content-Type"] = "application/x-www-form-urlencoded"
+
+	body, err := encodeFormValues(i)
+	if err != nil {
+		return nil, err
+	}
+
+	ro.Body = strings.NewReader(body)
+	ro.BodyLength = int64(len(body))
+
+	return c.Request(verb, p, ro)
+}
+
+// encodeFormValues encodes the given interface into a string that is ready
+// to be submitted as a form. We use a third-party library here, and that
+// library has some opinions that clash with Fastly's API, so we massage the
+// data a bit here.
+func encodeFormValues(i interface{}) (string, error) {
+	values, err := form.EncodeToValues(i)
+	if err != nil {
+		return "", err
+	}
 
 	// Field names containing '.'s are replaced with '\.' in the form library.
 	// Since the Fastly API relies upon field names with periods, such as
@@ -168,12 +184,8 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 			values[newkey] = v
 		}
 	}
-	body := values.Encode()
 
-	ro.Body = strings.NewReader(body)
-	ro.BodyLength = int64(len(body))
-
-	return c.Request(verb, p, ro)
+	return values.Encode(), nil
 }
 
 // checkResp wraps an HTTP request from the default client and verifies that the
