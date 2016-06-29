@@ -12,7 +12,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/585/logging/s3
     method: GET
   response:
-    body: '[{"format_version":"1","response_condition":"","gzip_level":"9","secret_key":"secret_key","updated_at":"2016-04-27T15:52:43+00:00","period":"12","message_type":"classic","name":"test-s3","bucket_name":"bucket-name","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","domain":"s3-website-us-west-2.amazonaws.com","redundancy":null,"version":"585","deleted_at":null,"path":"/path","created_at":"2016-04-27T15:52:43+00:00","access_key":"access_key","format":"format"}]'
+    body: '[{"format_version":"1","response_condition":"","gzip_level":"9","secret_key":"secret_key","updated_at":"2016-04-27T15:52:43+00:00","period":"12","message_type":"classic","name":"test-s3","bucket_name":"bucket-name","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","domain":"s3-website-us-west-2.amazonaws.com","redundancy":"reduced_redundancy","version":"585","deleted_at":null,"path":"/path","created_at":"2016-04-27T15:52:43+00:00","access_key":"access_key","format":"format"}]'
     headers:
       Accept-Ranges:
       - bytes
