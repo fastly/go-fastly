@@ -2,27 +2,27 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-condition&Service=7i6HN3TK9wS159v2gPAZ8A&Version=557&statement=req.url~%2B%22updated.html%22
+    body: Name=test-condition&Service=7i6HN3TK9wS159v2gPAZ8A&Version=595&statement=req.url~%2B%22updated.html%22
     form:
       Name:
       - test-condition
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "557"
+      - "595"
       statement:
       - req.url~+"updated.html"
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/557/condition/test-condition
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/595/condition/test-condition
     method: PUT
   response:
-    body: '{"priority":"1","version":"557","name":"test-condition","service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"","statement":"req.url~+\"updated.html\"","type":"REQUEST"}'
+    body: '{"priority":"1","version":"595","name":"test-condition","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2016-06-29T22:27:30+00:00","comment":"","statement":"req.url~+\"updated.html\"","updated_at":"2016-06-29T22:27:30+00:00","type":"REQUEST"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:19 GMT
+      - Wed, 29 Jun 2016 22:27:31 GMT
       Fastly-Ratelimit-Remaining:
-      - "971"
+      - "961"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -50,6 +50,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2134-IAD
+      - app-slwdc9051-SL, cache-ord1747-ORD
     status: 200 OK
     code: 200

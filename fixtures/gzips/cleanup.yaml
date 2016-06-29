@@ -6,14 +6,14 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - ebaf0a44097ef70502cb03a2247d6d60
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/584/gzip/test-gzip
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/600/gzip/test-gzip
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ version =>
-      584, name => test-gzip, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+      600, name => test-gzip, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
       }''"}'
     headers:
       Accept-Ranges:
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 20 Apr 2016 21:44:28 GMT
+      - Wed, 29 Jun 2016 22:27:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "918"
       Fastly-Ratelimit-Reset:
-      - "1461189600"
+      - "1467241200"
       Status:
       - 404 Not Found
       Vary:
@@ -40,7 +40,7 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-ord1738-ORD
+      - app-slwdc9051-SL, cache-ord1727-ORD
     status: 404 Not Found
     code: 404
 - request:
@@ -48,10 +48,10 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - ebaf0a44097ef70502cb03a2247d6d60
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/584/gzip/test-gzip-omit
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/600/gzip/test-gzip-omit
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 20 Apr 2016 21:44:30 GMT
+      - Wed, 29 Jun 2016 22:27:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "993"
+      - "914"
       Fastly-Ratelimit-Reset:
-      - "1461189600"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -82,7 +82,7 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1738-ORD
+      - app-slwdc9050-SL, cache-ord1727-ORD
     status: 200 OK
     code: 200
 - request:
@@ -90,14 +90,14 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - ebaf0a44097ef70502cb03a2247d6d60
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/584/gzip/new-test-gzip
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/600/gzip/new-test-gzip
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ version =>
-      584, name => new-test-gzip, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+      600, name => new-test-gzip, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
       }''"}'
     headers:
       Accept-Ranges:
@@ -107,11 +107,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 20 Apr 2016 21:44:30 GMT
+      - Wed, 29 Jun 2016 22:27:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "992"
+      - "909"
       Fastly-Ratelimit-Reset:
-      - "1461189600"
+      - "1467241200"
       Status:
       - 404 Not Found
       Vary:
@@ -124,6 +124,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-ord1738-ORD
+      - app-slwdc9050-SL, cache-ord1727-ORD
     status: 404 Not Found
     code: 404

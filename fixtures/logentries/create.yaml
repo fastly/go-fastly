@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=565&format=format&name=test-logentries&port=1234&token=abcd1234&use_tls=1
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=603&format=format&name=test-logentries&port=1234&token=abcd1234&use_tls=1
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "565"
+      - "603"
       format:
       - format
       name:
@@ -22,13 +22,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/565/logging/logentries
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/603/logging/logentries
     method: POST
   response:
-    body: '{"format":"format","name":"test-logentries","port":"1234","token":"abcd1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"565","format_version":"1","response_condition":"","updated_at":"2016-04-03T16:46:20+00:00","deleted_at":null,"created_at":"2016-04-03T16:46:20+00:00"}'
+    body: '{"format":"format","name":"test-logentries","port":"1234","token":"abcd1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"603","format_version":"1","response_condition":"","public_key":null,"updated_at":"2016-06-29T22:27:38+00:00","deleted_at":null,"created_at":"2016-06-29T22:27:38+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -39,11 +39,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:20 GMT
+      - Wed, 29 Jun 2016 22:27:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "946"
+      - "919"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -56,6 +56,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2128-IAD
+      - app-slwdc9050-SL, cache-ord1728-ORD
     status: 200 OK
     code: 200

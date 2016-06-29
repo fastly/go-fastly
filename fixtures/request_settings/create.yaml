@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=567&action=lookup&bypass_busy_wait=1&default_host=example.com&force_miss=1&force_ssl=1&geo_headers=1&hash_keys=a%2Cb%2Cc&max_stale_age=30&name=test-request-setting&timer_support=1&xff=leave
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=605&action=lookup&bypass_busy_wait=1&default_host=example.com&force_miss=1&force_ssl=1&geo_headers=1&hash_keys=a%2Cb%2Cc&max_stale_age=30&name=test-request-setting&timer_support=1&xff=leave
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "567"
+      - "605"
       action:
       - lookup
       bypass_busy_wait:
@@ -34,13 +34,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/567/request_settings
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/605/request_settings
     method: POST
   response:
-    body: '{"action":"lookup","bypass_busy_wait":"1","default_host":"example.com","force_miss":"1","force_ssl":"1","geo_headers":"1","hash_keys":"a,b,c","max_stale_age":"30","name":"test-request-setting","timer_support":"1","xff":"leave","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"567","request_condition":""}'
+    body: '{"action":"lookup","bypass_busy_wait":"1","default_host":"example.com","force_miss":"1","force_ssl":"1","geo_headers":"1","hash_keys":"a,b,c","max_stale_age":"30","name":"test-request-setting","timer_support":"1","xff":"leave","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"605","request_condition":"","updated_at":"2016-06-29T22:27:41+00:00","deleted_at":null,"created_at":"2016-06-29T22:27:41+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -51,11 +51,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:21 GMT
+      - Wed, 29 Jun 2016 22:27:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "940"
+      - "907"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -68,6 +68,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-iad2137-IAD
+      - app-slwdc9050-SL, cache-ord1727-ORD
     status: 200 OK
     code: 200

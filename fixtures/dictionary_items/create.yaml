@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: Dictionary=4a7dgMi9ijAuNzvY1Nr4ZW&Service=7i6HN3TK9wS159v2gPAZ8A&item_key=test-dictionary-item&item_value=value
+    body: Dictionary=56a6BGJ3NRGeb8NFmbwX8v&Service=7i6HN3TK9wS159v2gPAZ8A&item_key=test-dictionary-item&item_value=value
     form:
       Dictionary:
-      - 4a7dgMi9ijAuNzvY1Nr4ZW
+      - 56a6BGJ3NRGeb8NFmbwX8v
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       item_key:
@@ -16,13 +16,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/4a7dgMi9ijAuNzvY1Nr4ZW/item
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/56a6BGJ3NRGeb8NFmbwX8v/item
     method: POST
   response:
-    body: '{"dictionary_id":"4a7dgMi9ijAuNzvY1Nr4ZW","service_id":"7i6HN3TK9wS159v2gPAZ8A","item_key":"test-dictionary-item","item_value":"value"}'
+    body: '{"dictionary_id":"56a6BGJ3NRGeb8NFmbwX8v","service_id":"7i6HN3TK9wS159v2gPAZ8A","item_key":"test-dictionary-item","item_value":"value","created_at":"2016-06-29T22:27:26+00:00","deleted_at":null,"updated_at":"2016-06-29T22:27:26+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:18 GMT
+      - Wed, 29 Jun 2016 22:27:26 GMT
       Fastly-Ratelimit-Remaining:
-      - "987"
+      - "993"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -50,6 +50,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2140-IAD
+      - app-slwdc9051-SL, cache-ord1742-ORD
     status: 200 OK
     code: 200

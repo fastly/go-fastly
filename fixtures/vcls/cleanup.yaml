@@ -6,15 +6,14 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/573/vcl/test-vcl
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/611/vcl/test-vcl
     method: DELETE
   response:
-    body: '{"msg":"An error occurred while connecting to the fastly API, please try
-      your request again.","detail":"Couldn''t find VCL ''{ version => 573, name =>
-      test-vcl, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+    body: '{"msg":"Record not found","detail":"Couldn''t find VCL ''{ version => 611,
+      name => test-vcl, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
       }''"}'
     headers:
       Accept-Ranges:
@@ -22,15 +21,15 @@ interactions:
       Connection:
       - keep-alive
       Content-Type:
-      - text/json
+      - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:25 GMT
+      - Wed, 29 Jun 2016 22:27:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "874"
+      - "861"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
-      - 400 Bad Request
+      - 404 Not Found
       Vary:
       - Accept-Encoding
       Via:
@@ -41,23 +40,22 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-iad2134-IAD
-    status: 400 Bad Request
-    code: 400
+      - app-slwdc9050-SL, cache-ord1733-ORD
+    status: 404 Not Found
+    code: 404
 - request:
     body: ""
     form: {}
     headers:
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/573/vcl/new-test-vcl
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/611/vcl/new-test-vcl
     method: DELETE
   response:
-    body: '{"msg":"An error occurred while connecting to the fastly API, please try
-      your request again.","detail":"Couldn''t find VCL ''{ version => 573, name =>
-      new-test-vcl, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
+    body: '{"msg":"Record not found","detail":"Couldn''t find VCL ''{ version => 611,
+      name => new-test-vcl, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
       }''"}'
     headers:
       Accept-Ranges:
@@ -65,15 +63,15 @@ interactions:
       Connection:
       - keep-alive
       Content-Type:
-      - text/json
+      - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:25 GMT
+      - Wed, 29 Jun 2016 22:27:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "871"
+      - "859"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
-      - 400 Bad Request
+      - 404 Not Found
       Vary:
       - Accept-Encoding
       Via:
@@ -84,6 +82,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2142-IAD
-    status: 400 Bad Request
-    code: 400
+      - app-slwdc9050-SL, cache-ord1733-ORD
+    status: 404 Not Found
+    code: 404

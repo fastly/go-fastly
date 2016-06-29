@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":553}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":593}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:17 GMT
+      - Wed, 29 Jun 2016 22:27:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "989"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -40,6 +40,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2125-IAD
+      - app-slwdc9051-SL, cache-ord1735-ORD
     status: 200 OK
     code: 200

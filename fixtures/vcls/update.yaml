@@ -2,30 +2,30 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-vcl&Service=7i6HN3TK9wS159v2gPAZ8A&Version=573&name=new-test-vcl
+    body: Name=test-vcl&Service=7i6HN3TK9wS159v2gPAZ8A&Version=611&name=new-test-vcl
     form:
       Name:
       - test-vcl
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "573"
+      - "611"
       name:
       - new-test-vcl
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/573/vcl/test-vcl
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/611/vcl/test-vcl
     method: PUT
   response:
-    body: '{"version":573,"name":"new-test-vcl","content":"\nbackend default {\n  .host
+    body: '{"version":611,"name":"new-test-vcl","content":"\nbackend default {\n  .host
       = \"127.0.0.1\";\n  .port = \"9092\";\n}\n\nsub vcl_recv {\n  set req.backend
       = default;\n}\n\nsub vcl_hash {\n  set req.hash += req.url;\n  set req.hash
-      += req.http.host;\n  set req.hash += \"0\";\n}\n","service_id":"7i6HN3TK9wS159v2gPAZ8A","main":false}'
+      += req.http.host;\n  set req.hash += \"0\";\n}\n","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","main":false,"created_at":"2016-06-29T22:27:47+00:00","updated_at":"2016-06-29T22:27:47+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,11 +36,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:24 GMT
+      - Wed, 29 Jun 2016 22:27:49 GMT
       Fastly-Ratelimit-Remaining:
-      - "890"
+      - "868"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -53,6 +53,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2125-IAD
+      - app-slwdc9050-SL, cache-ord1733-ORD
     status: 200 OK
     code: 200

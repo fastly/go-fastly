@@ -2,27 +2,27 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-header&Service=7i6HN3TK9wS159v2gPAZ8A&Version=563&name=new-test-header
+    body: Name=test-header&Service=7i6HN3TK9wS159v2gPAZ8A&Version=601&name=new-test-header
     form:
       Name:
       - test-header
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "563"
+      - "601"
       name:
       - new-test-header
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/563/header/test-header
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/601/header/test-header
     method: PUT
   response:
-    body: '{"priority":"50","service_id":"7i6HN3TK9wS159v2gPAZ8A","ignore_if_set":"0","request_condition":null,"response_condition":null,"src":"client.ip","version":"563","name":"new-test-header","substitution":"123","cache_condition":null,"regex":"foobar","action":"set","type":"request","dst":"http.foo"}'
+    body: '{"priority":"50","service_id":"7i6HN3TK9wS159v2gPAZ8A","ignore_if_set":"0","request_condition":null,"response_condition":null,"updated_at":"2016-06-29T22:27:36+00:00","src":"client.ip","version":"601","name":"new-test-header","deleted_at":null,"substitution":"123","cache_condition":null,"created_at":"2016-06-29T22:27:36+00:00","regex":"foobar","action":"set","type":"request","dst":"http.foo"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:21 GMT
+      - Wed, 29 Jun 2016 22:27:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "941"
+      - "923"
       Fastly-Ratelimit-Reset:
-      - "1459702800"
+      - "1467241200"
       Status:
       - 200 OK
       Vary:
@@ -50,6 +50,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2145-IAD
+      - app-slwdc9051-SL, cache-ord1748-ORD
     status: 200 OK
     code: 200

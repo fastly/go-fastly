@@ -6,19 +6,18 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - 3b6d8ef6b4426178d951788d45cc1bdc
+      - d631487398e146a8593ddd71d384c7e6
       User-Agent:
-      - FastlyGo/0.1 (+github.com/sethvargo/go-fastly; go1.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/558/to/560
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/589/to/598
     method: GET
   response:
-    body: '{"from":"558","to":"560","format":"text","diff":" backends: []\n cache_settings:
-      []\n comment: ''''\n conditions: []\n deployed:\n directors: []\n domains: []\n
-      gzips: []\n headers: []\n healthchecks: []\n inherit_service_id:\n matches:
-      []\n origins: []\n request_settings: []\n response_objects: []\n service_id:
-      7i6HN3TK9wS159v2gPAZ8A\n settings:\n   general.default_host: ''''\n   general.default_pci:
-      0\n   general.default_ttl: 3600\n staging:\n testing:\n vcls: []\n wordpress:
-      []\n"}'
+    body: '{"from":"589","to":"598","format":"text","diff":" backends: []\n cache_settings:
+      []\n comment: ''''\n conditions: []\n deployed: false\n directors: []\n domains:
+      []\n gzips: []\n headers: []\n healthchecks: []\n matches: []\n request_settings:
+      []\n response_objects: []\n service_id: 7i6HN3TK9wS159v2gPAZ8A\n settings:\n   general.default_host:
+      ''''\n   general.default_pci: 0\n   general.default_ttl: 3600\n staging: false\n
+      testing: false\n vcls: []\n wordpress: []\n"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,7 +30,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 03 Apr 2016 16:46:19 GMT
+      - Wed, 29 Jun 2016 22:27:33 GMT
       Status:
       - 200 OK
       Vary:
@@ -44,6 +43,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-iad2128-IAD
+      - app-slwdc9050-SL, cache-ord1747-ORD
     status: 200 OK
     code: 200
