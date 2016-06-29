@@ -38,7 +38,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/585/logging/s3
     method: POST
   response:
-    body: '{"access_key":"access_key","bucket_name":"bucket-name","domain":"s3-website-us-west-2.amazonaws.com","format":"format","gzip_level":"9","name":"test-s3","path":"/path","period":"12","secret_key":"secret_key","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"585","format_version":"1","response_condition":"","updated_at":"2016-04-27T15:52:43+00:00","message_type":"classic","redundancy":null,"deleted_at":null,"created_at":"2016-04-27T15:52:43+00:00"}'
+    body: '{"access_key":"access_key","bucket_name":"bucket-name","domain":"s3-website-us-west-2.amazonaws.com","format":"format","gzip_level":"9","name":"test-s3","path":"/path","period":"12","secret_key":"secret_key","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"585","format_version":"1","response_condition":"","updated_at":"2016-04-27T15:52:43+00:00","message_type":"classic","redundancy":"reduced_redundancy","deleted_at":null,"created_at":"2016-04-27T15:52:43+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
