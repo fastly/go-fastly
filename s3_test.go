@@ -27,6 +27,7 @@ func TestClient_S3s(t *testing.T) {
 			GzipLevel:       9,
 			Format:          "format",
 			TimestampFormat: "%Y",
+			Redundancy:      S3RedundancyReduced,
 		})
 	})
 	if err != nil {
@@ -79,6 +80,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", s3.TimestampFormat)
+	}
+	if s3.Redundancy != S3RedundancyReduced {
+		t.Errorf("bad redundancy: %q", s3.Redundancy)
 	}
 
 	// List
@@ -137,6 +141,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.TimestampFormat != ns3.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", s3.TimestampFormat)
+	}
+	if s3.Redundancy != ns3.Redundancy {
+		t.Errorf("bad redundancy: %q", s3.Redundancy)
 	}
 
 	// Update
