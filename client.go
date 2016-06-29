@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -153,39 +154,16 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	}
 	ro.Headers["Content-Type"] = "application/x-www-form-urlencoded"
 
-	body, err := encodeFormValues(i)
-	if err != nil {
+	buf := new(bytes.Buffer)
+	if err := form.NewEncoder(buf).DelimitWith('|').Encode(i); err != nil {
 		return nil, err
 	}
+	body := buf.String()
 
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))
 
 	return c.Request(verb, p, ro)
-}
-
-// encodeFormValues encodes the given interface into a string that is ready
-// to be submitted as a form. We use a third-party library here, and that
-// library has some opinions that clash with Fastly's API, so we massage the
-// data a bit here.
-func encodeFormValues(i interface{}) (string, error) {
-	values, err := form.EncodeToValues(i)
-	if err != nil {
-		return "", err
-	}
-
-	// Field names containing '.'s are replaced with '\.' in the form library.
-	// Since the Fastly API relies upon field names with periods, such as
-	// general.default_ttl, we must undo form's replace here.
-	for k, v := range values {
-		if strings.Contains(k, "\\.") {
-			newkey := strings.Replace(k, "\\.", ".", -1)
-			delete(values, k)
-			values[newkey] = v
-		}
-	}
-
-	return values.Encode(), nil
 }
 
 // checkResp wraps an HTTP request from the default client and verifies that the
