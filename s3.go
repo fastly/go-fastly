@@ -69,6 +69,7 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s3s []*S3
 	if err := decodeJSON(&s3s, resp.Body); err != nil {
@@ -114,6 +115,7 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s3 *S3
 	if err := decodeJSON(&s3, resp.Body); err != nil {
@@ -152,6 +154,7 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s3 *S3
 	if err := decodeJSON(&s3, resp.Body); err != nil {
@@ -203,6 +206,7 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s3 *S3
 	if err := decodeJSON(&s3, resp.Body); err != nil {
@@ -241,6 +245,7 @@ func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

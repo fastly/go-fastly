@@ -39,6 +39,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var r *Purge
 	if err := decodeJSON(&r, resp.Body); err != nil {
@@ -83,6 +84,7 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var r *Purge
 	if err := decodeJSON(&r, resp.Body); err != nil {
@@ -120,6 +122,7 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var r *Purge
 	if err := decodeJSON(&r, resp.Body); err != nil {

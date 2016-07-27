@@ -66,6 +66,7 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cs []*CacheSetting
 	if err := decodeJSON(&cs, resp.Body); err != nil {
@@ -104,6 +105,7 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cs *CacheSetting
 	if err := decodeJSON(&cs, resp.Body); err != nil {
@@ -143,6 +145,7 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cs *CacheSetting
 	if err := decodeJSON(&cs, resp.Body); err != nil {
@@ -187,6 +190,7 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cs *CacheSetting
 	if err := decodeJSON(&cs, resp.Body); err != nil {
@@ -225,6 +229,7 @@ func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

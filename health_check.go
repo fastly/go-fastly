@@ -58,6 +58,7 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var hcs []*HealthCheck
 	if err := decodeJSON(&hcs, resp.Body); err != nil {
@@ -102,6 +103,7 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *HealthCheck
 	if err := decodeJSON(&h, resp.Body); err != nil {
@@ -140,6 +142,7 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *HealthCheck
 	if err := decodeJSON(&h, resp.Body); err != nil {
@@ -190,6 +193,7 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *HealthCheck
 	if err := decodeJSON(&h, resp.Body); err != nil {
@@ -228,6 +232,7 @@ func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

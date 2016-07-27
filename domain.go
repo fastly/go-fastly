@@ -48,6 +48,7 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ds []*Domain
 	if err := decodeJSON(&ds, resp.Body); err != nil {
@@ -86,6 +87,7 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var d *Domain
 	if err := decodeJSON(&d, resp.Body); err != nil {
@@ -124,6 +126,7 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var d *Domain
 	if err := decodeJSON(&d, resp.Body); err != nil {
@@ -169,6 +172,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var d *Domain
 	if err := decodeJSON(&d, resp.Body); err != nil {

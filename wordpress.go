@@ -48,6 +48,7 @@ func (c *Client) ListWordpresses(i *ListWordpressesInput) ([]*Wordpress, error) 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*Wordpress
 	if err := decodeJSON(&bs, resp.Body); err != nil {
@@ -84,6 +85,7 @@ func (c *Client) CreateWordpress(i *CreateWordpressInput) (*Wordpress, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Wordpress
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -122,6 +124,7 @@ func (c *Client) GetWordpress(i *GetWordpressInput) (*Wordpress, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Wordpress
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -164,6 +167,7 @@ func (c *Client) UpdateWordpress(i *UpdateWordpressInput) (*Wordpress, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Wordpress
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -202,6 +206,7 @@ func (c *Client) DeleteWordpress(i *DeleteWordpressInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

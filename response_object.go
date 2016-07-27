@@ -55,6 +55,7 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*ResponseObject
 	if err := decodeJSON(&bs, resp.Body); err != nil {
@@ -96,6 +97,7 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -135,6 +137,7 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -182,6 +185,7 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -220,6 +224,7 @@ func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

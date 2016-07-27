@@ -9,6 +9,7 @@ func (c *Client) IPs() (IPAddrs, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var m map[string][]string
 	if err := decodeJSON(&m, resp.Body); err != nil {

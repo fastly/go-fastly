@@ -56,6 +56,7 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ls []*Logentries
 	if err := decodeJSON(&ls, resp.Body); err != nil {
@@ -95,6 +96,7 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := decodeJSON(&l, resp.Body); err != nil {
@@ -133,6 +135,7 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := decodeJSON(&l, resp.Body); err != nil {
@@ -178,6 +181,7 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := decodeJSON(&l, resp.Body); err != nil {
@@ -216,6 +220,7 @@ func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

@@ -61,6 +61,7 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ftps []*FTP
 	if err := decodeJSON(&ftps, resp.Body); err != nil {
@@ -105,6 +106,7 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ftp *FTP
 	if err := decodeJSON(&ftp, resp.Body); err != nil {
@@ -143,6 +145,7 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *FTP
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -193,6 +196,7 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *FTP
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -231,6 +235,7 @@ func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {
