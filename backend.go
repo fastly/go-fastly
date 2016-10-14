@@ -96,7 +96,7 @@ type CreateBackendInput struct {
 	Weight              uint     `form:"weight,omitempty"`
 	RequestCondition    string   `form:"request_condition,omitempty"`
 	HealthCheck         string   `form:"healthcheck,omitempty"`
-	Shield              string   `mapstructure:"shield"`
+	Shield              string   `form:"shield,omitempty"`
 	UseSSL              bool     `form:"use_ssl,omitempty"`
 	SSLCheckCert        bool     `form:"ssl_check_cert,omitempty"`
 	SSLHostname         string   `form:"ssl_hostname,omitempty"`
@@ -190,7 +190,7 @@ type UpdateBackendInput struct {
 	Weight              uint     `form:"weight,omitempty"`
 	RequestCondition    string   `form:"request_condition,omitempty"`
 	HealthCheck         string   `form:"healthcheck,omitempty"`
-	Shield              string   `mapstructure:"shield"`
+	Shield              string   `form:"shield,omitempty"`
 	UseSSL              bool     `form:"use_ssl,omitempty"`
 	SSLCheckCert        bool     `form:"ssl_check_cert,omitempty"`
 	SSLHostname         string   `form:"ssl_hostname,omitempty"`
