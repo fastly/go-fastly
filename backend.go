@@ -23,6 +23,7 @@ type Backend struct {
 	RequestCondition    string   `mapstructure:"request_condition"`
 	HealthCheck         string   `mapstructure:"healthcheck"`
 	Hostname            string   `mapstructure:"hostname"`
+	Shield              string   `mapstructure:"shield"`
 	UseSSL              bool     `mapstructure:"use_ssl"`
 	SSLCheckCert        bool     `mapstructure:"ssl_check_cert"`
 	SSLHostname         string   `mapstructure:"ssl_hostname"`
@@ -95,6 +96,7 @@ type CreateBackendInput struct {
 	Weight              uint     `form:"weight,omitempty"`
 	RequestCondition    string   `form:"request_condition,omitempty"`
 	HealthCheck         string   `form:"healthcheck,omitempty"`
+	Shield              string   `mapstructure:"shield"`
 	UseSSL              bool     `form:"use_ssl,omitempty"`
 	SSLCheckCert        bool     `form:"ssl_check_cert,omitempty"`
 	SSLHostname         string   `form:"ssl_hostname,omitempty"`
@@ -188,6 +190,7 @@ type UpdateBackendInput struct {
 	Weight              uint     `form:"weight,omitempty"`
 	RequestCondition    string   `form:"request_condition,omitempty"`
 	HealthCheck         string   `form:"healthcheck,omitempty"`
+	Shield              string   `mapstructure:"shield"`
 	UseSSL              bool     `form:"use_ssl,omitempty"`
 	SSLCheckCert        bool     `form:"ssl_check_cert,omitempty"`
 	SSLHostname         string   `form:"ssl_hostname,omitempty"`
