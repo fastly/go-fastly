@@ -92,13 +92,13 @@ type CreateBackendInput struct {
 	ErrorThreshold      uint     `form:"error_threshold,omitempty"`
 	FirstByteTimeout    uint     `form:"first_byte_timeout,omitempty"`
 	BetweenBytesTimeout uint     `form:"between_bytes_timeout,omitempty"`
-	AutoLoadbalance     bool     `form:"auto_loadbalance,omitempty"`
+	AutoLoadbalance     *bool    `form:"auto_loadbalance,omitempty"`
 	Weight              uint     `form:"weight,omitempty"`
 	RequestCondition    string   `form:"request_condition,omitempty"`
 	HealthCheck         string   `form:"healthcheck,omitempty"`
 	Shield              string   `form:"shield,omitempty"`
-	UseSSL              bool     `form:"use_ssl,omitempty"`
-	SSLCheckCert        bool     `form:"ssl_check_cert,omitempty"`
+	UseSSL              *bool    `form:"use_ssl,omitempty"`
+	SSLCheckCert        *bool    `form:"ssl_check_cert,omitempty"`
 	SSLHostname         string   `form:"ssl_hostname,omitempty"`
 	SSLCertHostname     string   `form:"ssl_cert_hostname,omitempty"`
 	SSLSNIHostname      string   `form:"ssl_sni_hostname,omitempty"`
@@ -186,13 +186,13 @@ type UpdateBackendInput struct {
 	ErrorThreshold      uint     `form:"error_threshold,omitempty"`
 	FirstByteTimeout    uint     `form:"first_byte_timeout,omitempty"`
 	BetweenBytesTimeout uint     `form:"between_bytes_timeout,omitempty"`
-	AutoLoadbalance     bool     `form:"auto_loadbalance,omitempty"`
+	AutoLoadbalance     *bool    `form:"auto_loadbalance,omitempty"`
 	Weight              uint     `form:"weight,omitempty"`
 	RequestCondition    string   `form:"request_condition,omitempty"`
 	HealthCheck         string   `form:"healthcheck,omitempty"`
 	Shield              string   `form:"shield,omitempty"`
-	UseSSL              bool     `form:"use_ssl,omitempty"`
-	SSLCheckCert        bool     `form:"ssl_check_cert,omitempty"`
+	UseSSL              *bool    `form:"use_ssl,omitempty"`
+	SSLCheckCert        *bool    `form:"ssl_check_cert,omitempty"`
 	SSLHostname         string   `form:"ssl_hostname,omitempty"`
 	SSLCertHostname     string   `form:"ssl_cert_hostname,omitempty"`
 	SSLSNIHostname      string   `form:"ssl_sni_hostname,omitempty"`
