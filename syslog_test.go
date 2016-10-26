@@ -41,7 +41,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Name:      "test-syslog",
 			Address:   "example.com",
 			Port:      1234,
-			UseTLS:    true,
+			UseTLS:    CBool(true),
 			TLSCACert: cert,
 			Token:     "abcd1234",
 			Format:    "format",

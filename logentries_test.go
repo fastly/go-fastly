@@ -19,7 +19,7 @@ func TestClient_Logentries(t *testing.T) {
 			Version: tv.Number,
 			Name:    "test-logentries",
 			Port:    1234,
-			UseTLS:  true,
+			UseTLS:  CBool(true),
 			Token:   "abcd1234",
 			Format:  "format",
 		})
