@@ -6,15 +6,15 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 2d150df799bdabefa664a2182f85820a
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/607/logging/s3/test-s3
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8rc2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/615/logging/s3/test-s3
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =>
-      607, name => test-s3, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
-      }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
+      615, name =\u003e test-s3, deleted =\u003e 0000-00-00 00:00:00, service =\u003e
+      7i6HN3TK9wS159v2gPAZ8A }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:46 GMT
+      - Sat, 04 Feb 2017 17:03:14 GMT
       Fastly-Ratelimit-Remaining:
-      - "879"
+      - "995"
       Fastly-Ratelimit-Reset:
-      - "1467241200"
+      - "1486231200"
       Status:
       - 404 Not Found
       Vary:
@@ -40,7 +40,7 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1730-ORD
+      - app-slwdc9050-SL, cache-iad2621-IAD
     status: 404 Not Found
     code: 404
 - request:
@@ -48,15 +48,15 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 2d150df799bdabefa664a2182f85820a
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/607/logging/s3/new-test-s3
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8rc2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/615/logging/s3/new-test-s3
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =>
-      607, name => new-test-s3, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
-      }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
+      615, name =\u003e new-test-s3, deleted =\u003e 0000-00-00 00:00:00, service
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:47 GMT
+      - Sat, 04 Feb 2017 17:03:14 GMT
       Fastly-Ratelimit-Remaining:
-      - "877"
+      - "994"
       Fastly-Ratelimit-Reset:
-      - "1467241200"
+      - "1486231200"
       Status:
       - 404 Not Found
       Vary:
@@ -82,6 +82,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1730-ORD
+      - app-slwdc9050-SL, cache-iad2621-IAD
     status: 404 Not Found
     code: 404
