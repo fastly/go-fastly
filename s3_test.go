@@ -26,6 +26,7 @@ func TestClient_S3s(t *testing.T) {
 			Period:          12,
 			GzipLevel:       9,
 			Format:          "format",
+			FormatVersion:   2,
 			TimestampFormat: "%Y",
 			Redundancy:      S3RedundancyReduced,
 		})
@@ -77,6 +78,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.Format != "format" {
 		t.Errorf("bad format: %q", s3.Format)
+	}
+	if s3.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", s3.FormatVersion)
 	}
 	if s3.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", s3.TimestampFormat)
@@ -138,6 +142,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.Format != ns3.Format {
 		t.Errorf("bad format: %q", s3.Format)
+	}
+	if s3.FormatVersion != ns3.FormatVersion {
+		t.Errorf("bad format_version: %q", s3.FormatVersion)
 	}
 	if s3.TimestampFormat != ns3.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", s3.TimestampFormat)
