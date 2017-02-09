@@ -36,15 +36,16 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var s *Syslog
 	record(t, "syslogs/create", func(c *Client) {
 		s, err = c.CreateSyslog(&CreateSyslogInput{
-			Service:   testServiceID,
-			Version:   tv.Number,
-			Name:      "test-syslog",
-			Address:   "example.com",
-			Port:      1234,
-			UseTLS:    CBool(true),
-			TLSCACert: cert,
-			Token:     "abcd1234",
-			Format:    "format",
+			Service:       testServiceID,
+			Version:       tv.Number,
+			Name:          "test-syslog",
+			Address:       "example.com",
+			Port:          1234,
+			UseTLS:        CBool(true),
+			TLSCACert:     cert,
+			Token:         "abcd1234",
+			Format:        "format",
+			FormatVersion: 2,
 		})
 	})
 	if err != nil {
@@ -88,6 +89,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.Format != "format" {
 		t.Errorf("bad format: %q", s.Format)
+	}
+	if s.FormatVersion != 2 {
+		t.Errorf("bad format_version: %d", s.FormatVersion)
 	}
 
 	// List
@@ -138,15 +142,19 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.Format != ns.Format {
 		t.Errorf("bad format: %q", s.Format)
 	}
+	if s.FormatVersion != ns.FormatVersion {
+		t.Errorf("bad format_version: %q", s.FormatVersion)
+	}
 
 	// Update
 	var us *Syslog
 	record(t, "syslogs/update", func(c *Client) {
 		us, err = c.UpdateSyslog(&UpdateSyslogInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-syslog",
-			NewName: "new-test-syslog",
+			Service:       testServiceID,
+			Version:       tv.Number,
+			Name:          "test-syslog",
+			NewName:       "new-test-syslog",
+			FormatVersion: 2,
 		})
 	})
 	if err != nil {
@@ -154,6 +162,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if us.Name != "new-test-syslog" {
 		t.Errorf("bad name: %q", us.Name)
+	}
+
+	if us.FormatVersion != 2 {
+		t.Errorf("bad format_version: %d", us.FormatVersion)
 	}
 
 	// Delete
