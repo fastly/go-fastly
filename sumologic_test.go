@@ -15,11 +15,13 @@ func TestClient_Sumologics(t *testing.T) {
 	var s *Sumologic
 	record(t, "sumologics/create", func(c *Client) {
 		s, err = c.CreateSumologic(&CreateSumologicInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-sumologic",
-			URL:     "example.com",
-			Format:  "format",
+			Service:       testServiceID,
+			Version:       tv.Number,
+			Name:          "test-sumologic",
+			URL:           "example.com",
+			Format:        "format",
+			FormatVersion: 1,
+			MessageType:   "classic",
 		})
 	})
 	if err != nil {
@@ -51,6 +53,12 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 	if s.Format != "format" {
 		t.Errorf("bad format: %q", s.Format)
+	}
+	if s.FormatVersion != 1 {
+		t.Error("bad format version: %q", s.FormatVersion)
+	}
+	if s.MessageType != "classic" {
+		t.Error("bad message type: %q", s.MessageType)
 	}
 
 	// List
@@ -88,6 +96,12 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 	if s.Format != ns.Format {
 		t.Errorf("bad format: %q", s.Format)
+	}
+	if s.FormatVersion != ns.FormatVersion {
+		t.Error("bad format version: %q", s.FormatVersion)
+	}
+	if s.MessageType != ns.MessageType {
+		t.Error("bad message type: %q", s.MessageType)
 	}
 
 	// Update
