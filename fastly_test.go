@@ -43,7 +43,7 @@ func record(t *testing.T, fixture string, f func(*Client)) {
 	}()
 
 	client := DefaultClient()
-	client.HTTPClient.Transport = r.Transport
+	client.HTTPClient.Transport = r
 
 	f(client)
 }
