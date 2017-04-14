@@ -49,7 +49,7 @@ type UpdateSettingsInput struct {
 	Service string
 	Version string
 
-	DefaultTTL  uint   `form:"general.default_ttl,omitempty"`
+	DefaultTTL  uint   `form:"general.default_ttl"`
 	DefaultHost string `form:"general.default_host,omitempty"`
 }
 

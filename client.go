@@ -159,7 +159,7 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	ro.Headers["Content-Type"] = "application/x-www-form-urlencoded"
 
 	buf := new(bytes.Buffer)
-	if err := form.NewEncoder(buf).DelimitWith('|').Encode(i); err != nil {
+	if err := form.NewEncoder(buf).KeepZeros(true).DelimitWith('|').Encode(i); err != nil {
 		return nil, err
 	}
 	body := buf.String()

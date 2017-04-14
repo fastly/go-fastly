@@ -1,6 +1,10 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+	"bytes"
+	"github.com/ajg/form"
+)
 
 func TestClient_Settings(t *testing.T) {
 	t.Parallel()
@@ -40,6 +44,17 @@ func TestClient_Settings(t *testing.T) {
 	}
 	if us.DefaultTTL != 1800 {
 		t.Errorf("bad default_ttl: %d", us.DefaultTTL)
+	}
+}
+
+// Tests if we can update a default_ttl to 0 as reported in issue #20
+func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
+	t.Parallel()
+	s := UpdateSettingsInput{ Service: "foo", Version: "1", DefaultTTL: 0 }
+	buf := new(bytes.Buffer)
+	form.NewEncoder(buf).KeepZeros(true).DelimitWith('|').Encode(s)
+	if buf.String() != "Service=foo&Version=1&general.default_ttl=0" {
+		t.Errorf("Update request should contain a default_ttl. Got: %s", buf.String())
 	}
 }
 
