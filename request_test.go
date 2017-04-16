@@ -22,7 +22,11 @@ func TestClient_RawRequest(t *testing.T) {
 	}
 	c := &Client{}
 	for _, h := range validAPIHosts {
-		c.url = &url.URL{Path: h}
+		var err error
+		c.url, err = url.Parse(h)
+		if err != nil {
+			t.Fatalf("Unable to parse url %s: %s\n", h, err)
+		}
 		for _, p := range purgeAPIPaths {
 			for _, k := range cacheKeys {
 				r, err := c.RawRequest("GET", p+k, nil)
@@ -39,11 +43,11 @@ func TestClient_RawRequest(t *testing.T) {
 				// Insure we don't get a path starting with an extra slash
 				// e.g. //service/myservice/purge/mykey
 				if r.URL.Path[1] == '/' {
-					t.Fatal("Host and APIPath were joined incorrectly.")
+					t.Fatalf("Host and APIPath were joined incorrectly. Got: %s\n", r.URL.Path)
 				}
 				// Insure the cache key isn't altered
 				if strings.Index(r.URL.Path, p+k) == -1 {
-					t.Fatal("RawRequest altered the cache key")
+					t.Fatalf("RawRequest altered the cache key. New URL path=%s, expecting %s\n", p+k)
 				}
 			}
 		}
