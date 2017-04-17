@@ -1,28 +1,29 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/589/to/598
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/661/to/667
     method: GET
   response:
-    body: '{"from":"589","to":"598","format":"text","diff":"-backends: []\n+backends:\n+-
-      name: test-backend\n+  address: integ-test.go-fastly.com\n+  auto_loadbalance:
+    body: '{"from":"661","to":"667","format":"text","diff":" acls: []\n-backends:
+      []\n+backends:\n+- name: test-backend\n+  address: integ-test.go-fastly.com\n+  auto_loadbalance:
       false\n+  between_bytes_timeout: 10000\n+  client_cert:\n+  comment: ''''\n+  connect_timeout:
       1000\n+  error_threshold: 0\n+  first_byte_timeout: 15000\n+  healthcheck:\n+  hostname:
       integ-test.go-fastly.com\n+  ipv4:\n+  ipv6:\n+  max_conn: 200\n+  max_tls_version:\n+  min_tls_version:\n+  port:
       80\n+  request_condition: ''''\n+  shield:\n+  ssl_ca_cert:\n+  ssl_cert_hostname:\n+  ssl_check_cert:
       true\n+  ssl_ciphers:\n+  ssl_client_cert:\n+  ssl_client_key:\n+  ssl_hostname:\n+  ssl_sni_hostname:\n+  use_ssl:
       false\n+  weight: 100\n cache_settings: []\n comment: ''''\n conditions: []\n
-      deployed: false\n directors: []\n domains: []\n gzips: []\n headers: []\n healthchecks:
-      []\n matches: []\n request_settings: []\n response_objects: []\n service_id:
-      7i6HN3TK9wS159v2gPAZ8A\n settings:\n   general.default_host: ''''\n   general.default_pci:
+      deployed: false\n dictionaries: []\n directors: []\n domains: []\n gzips: []\n
+      headers: []\n healthchecks: []\n request_settings: []\n response_objects: []\n
+      service_id: 7i6HN3TK9wS159v2gPAZ8A\n settings:\n   general.default_host: ''''\n   general.default_pci:
       0\n   general.default_ttl: 3600\n staging: false\n testing: false\n vcls: []\n
       wordpress: []\n"}'
     headers:
@@ -30,12 +31,10 @@ interactions:
       - bytes
       Cache-Control:
       - no-cache
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:35 GMT
+      - Mon, 17 Apr 2017 16:01:04 GMT
       Status:
       - 200 OK
       Vary:
@@ -48,6 +47,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1747-ORD
+      - app-slwdc9050-SL, cache-iad2635-IAD
     status: 200 OK
     code: 200

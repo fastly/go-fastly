@@ -1,18 +1,19 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/588/domain
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/669/domain
     method: GET
   response:
-    body: '[{"created_at":"2016-06-29T22:27:25+00:00","comment":"comment","version":588,"name":"integ-test.go-fastly.com","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2016-06-29T22:27:25+00:00"}]'
+    body: '[{"version":669,"name":"integ-test.go-fastly.com","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2017-04-17T16:01:04+00:00","comment":"comment","updated_at":"2017-04-17T16:01:04+00:00"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,12 +21,10 @@ interactions:
       - "0"
       Cache-Control:
       - no-cache
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:26 GMT
+      - Mon, 17 Apr 2017 16:01:04 GMT
       Status:
       - 200 OK
       Vary:
@@ -38,6 +37,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-ord1730-ORD
+      - app-slwdc9051-SL, cache-iad2635-IAD
     status: 200 OK
     code: 200

@@ -1,20 +1,21 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/610/logging/syslog
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/644/logging/syslog
     method: GET
   response:
-    body: '[{"format_version":"1","hostname":"example.com","response_condition":"","address":"example.com","public_key":null,"updated_at":"2016-06-29T22:27:46+00:00","ipv4":null,"tls_hostname":null,"name":"test-syslog","port":"1234","use_tls":"1","tls_ca_cert":"-----BEGIN
+    body: '[{"placement":null,"format_version":"2","hostname":"example.com","response_condition":"","address":"example.com","public_key":null,"updated_at":"2017-04-17T16:00:53+00:00","message_type":"classic","ipv4":null,"tls_hostname":null,"name":"test-syslog","port":"1234","use_tls":"1","tls_ca_cert":"-----BEGIN
       CERTIFICATE-----\nMIICUTCCAfugAwIBAgIBADANBgkqhkiG9w0BAQQFADBXMQswCQYDVQQGEwJDTjEL\nMAkGA1UECBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMC\nVU4xFDASBgNVBAMTC0hlcm9uZyBZYW5nMB4XDTA1MDcxNTIxMTk0N1oXDTA1MDgx\nNDIxMTk0N1owVzELMAkGA1UEBhMCQ04xCzAJBgNVBAgTAlBOMQswCQYDVQQHEwJD\nTjELMAkGA1UEChMCT04xCzAJBgNVBAsTAlVOMRQwEgYDVQQDEwtIZXJvbmcgWWFu\nZzBcMA0GCSqGSIb3DQEBAQUAA0sAMEgCQQCp5hnG7ogBhtlynpOS21cBewKE/B7j\nV14qeyslnr26xZUsSVko36ZnhiaO/zbMOoRcKK9vEcgMtcLFuQTWDl3RAgMBAAGj\ngbEwga4wHQYDVR0OBBYEFFXI70krXeQDxZgbaCQoR4jUDncEMH8GA1UdIwR4MHaA\nFFXI70krXeQDxZgbaCQoR4jUDncEoVukWTBXMQswCQYDVQQGEwJDTjELMAkGA1UE\nCBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMCVU4xFDAS\nBgNVBAMTC0hlcm9uZyBZYW5nggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEE\nBQADQQA/ugzBrjjK9jcWnDVfGHlk3icNRq0oV7Ri32z/+HQX67aRfgZu7KWdI+Ju\nWm7DCfrPNGVwFWUQOmsPue9rZBgO\n-----END
-      CERTIFICATE-----","service_id":"7i6HN3TK9wS159v2gPAZ8A","token":"abcd1234","version":"610","deleted_at":null,"created_at":"2016-06-29T22:27:46+00:00","format":"format"}]'
+      CERTIFICATE-----","service_id":"7i6HN3TK9wS159v2gPAZ8A","token":"abcd1234","version":"644","deleted_at":null,"created_at":"2017-04-17T16:00:53+00:00","format":"format"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,12 +23,10 @@ interactions:
       - "0"
       Cache-Control:
       - no-cache
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:46 GMT
+      - Mon, 17 Apr 2017 16:00:53 GMT
       Status:
       - 200 OK
       Vary:
@@ -40,6 +39,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1740-ORD
+      - app-slwdc9051-SL, cache-iad2635-IAD
     status: 200 OK
     code: 200

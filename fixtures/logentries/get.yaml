@@ -1,18 +1,19 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/603/logging/logentries/test-logentries
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/659/logging/logentries/test-logentries
     method: GET
   response:
-    body: '{"format_version":"1","response_condition":"","public_key":null,"updated_at":"2016-06-29T22:27:38+00:00","name":"test-logentries","port":"1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","token":"abcd1234","version":"603","deleted_at":null,"created_at":"2016-06-29T22:27:38+00:00","format":"format"}'
+    body: '{"placement":null,"format_version":"2","response_condition":"","public_key":null,"updated_at":"2017-04-17T16:00:59+00:00","name":"test-logentries","port":"1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","token":"abcd1234","version":"659","deleted_at":null,"created_at":"2017-04-17T16:00:59+00:00","format":"format"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,12 +21,10 @@ interactions:
       - "0"
       Cache-Control:
       - no-cache
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:40 GMT
+      - Mon, 17 Apr 2017 16:01:00 GMT
       Status:
       - 200 OK
       Vary:
@@ -38,6 +37,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-ord1728-ORD
+      - app-slwdc9051-SL, cache-iad2635-IAD
     status: 200 OK
     code: 200

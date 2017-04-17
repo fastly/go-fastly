@@ -1,33 +1,34 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/597/logging/ftp/test-ftp
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/650/logging/ftp/test-ftp
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =>
-      597, name => test-ftp, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
-      }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
+      650, name =\u003e test-ftp, deleted =\u003e 0000-00-00 00:00:00, service =\u003e
+      7i6HN3TK9wS159v2gPAZ8A }''"}'
     headers:
       Accept-Ranges:
       - bytes
-      Connection:
-      - keep-alive
+      Cache-Control:
+      - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:35 GMT
+      - Mon, 17 Apr 2017 16:00:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "941"
+      - "939"
       Fastly-Ratelimit-Reset:
-      - "1467241200"
+      - "1492448400"
       Status:
       - 404 Not Found
       Vary:
@@ -40,7 +41,7 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-ord1730-ORD
+      - app-slwdc9050-SL, cache-iad2635-IAD
     status: 404 Not Found
     code: 404
 - request:
@@ -48,28 +49,28 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/597/logging/ftp/new-test-ftp
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/650/logging/ftp/new-test-ftp
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =>
-      597, name => new-test-ftp, deleted => 0000-00-00 00:00:00, service => 7i6HN3TK9wS159v2gPAZ8A
-      }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
+      650, name =\u003e new-test-ftp, deleted =\u003e 0000-00-00 00:00:00, service
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
     headers:
       Accept-Ranges:
       - bytes
-      Connection:
-      - keep-alive
+      Cache-Control:
+      - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:36 GMT
+      - Mon, 17 Apr 2017 16:00:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "938"
+      - "936"
       Fastly-Ratelimit-Reset:
-      - "1467241200"
+      - "1492448400"
       Status:
       - 404 Not Found
       Vary:
@@ -82,6 +83,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-ord1730-ORD
+      - app-slwdc9051-SL, cache-iad2635-IAD
     status: 404 Not Found
     code: 404

@@ -1,17 +1,20 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=601&action=set&dst=http.foo&name=test-header&priority=50&regex=foobar&src=client.ip&substitution=123&type=request
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=648&action=set&dst=http.foo&ignore_if_set=0&name=test-header&priority=50&regex=foobar&src=client.ip&substitution=123&type=request
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "601"
+      - "648"
       action:
       - set
       dst:
       - http.foo
+      ignore_if_set:
+      - "0"
       name:
       - test-header
       priority:
@@ -28,28 +31,26 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/601/header
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/648/header
     method: POST
   response:
-    body: '{"action":"set","dst":"http.foo","name":"test-header","priority":"50","regex":"foobar","src":"client.ip","substitution":"123","type":"request","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"601","ignore_if_set":"0","request_condition":null,"response_condition":null,"updated_at":"2016-06-29T22:27:36+00:00","deleted_at":null,"cache_condition":null,"created_at":"2016-06-29T22:27:36+00:00"}'
+    body: '{"action":"set","dst":"http.foo","ignore_if_set":"0","name":"test-header","priority":"50","regex":"foobar","src":"client.ip","substitution":"123","type":"request","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"648","request_condition":null,"response_condition":null,"updated_at":"2017-04-17T16:00:55+00:00","deleted_at":null,"cache_condition":null,"created_at":"2017-04-17T16:00:55+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-cache
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:36 GMT
+      - Mon, 17 Apr 2017 16:00:55 GMT
       Fastly-Ratelimit-Remaining:
-      - "935"
+      - "976"
       Fastly-Ratelimit-Reset:
-      - "1467241200"
+      - "1492448400"
       Status:
       - 200 OK
       Vary:
@@ -62,6 +63,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1748-ORD
+      - app-slwdc9051-SL, cache-iad2635-IAD
     status: 200 OK
     code: 200

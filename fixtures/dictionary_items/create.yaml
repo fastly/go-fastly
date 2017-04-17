@@ -1,11 +1,12 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
-    body: Dictionary=56a6BGJ3NRGeb8NFmbwX8v&Service=7i6HN3TK9wS159v2gPAZ8A&item_key=test-dictionary-item&item_value=value
+    body: Dictionary=Pja9hdZa0oe4cOgkKcvVc&Service=7i6HN3TK9wS159v2gPAZ8A&item_key=test-dictionary-item&item_value=value
     form:
       Dictionary:
-      - 56a6BGJ3NRGeb8NFmbwX8v
+      - Pja9hdZa0oe4cOgkKcvVc
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       item_key:
@@ -16,28 +17,26 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/56a6BGJ3NRGeb8NFmbwX8v/item
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/Pja9hdZa0oe4cOgkKcvVc/item
     method: POST
   response:
-    body: '{"dictionary_id":"56a6BGJ3NRGeb8NFmbwX8v","service_id":"7i6HN3TK9wS159v2gPAZ8A","item_key":"test-dictionary-item","item_value":"value","created_at":"2016-06-29T22:27:26+00:00","deleted_at":null,"updated_at":"2016-06-29T22:27:26+00:00"}'
+    body: '{"dictionary_id":"Pja9hdZa0oe4cOgkKcvVc","service_id":"7i6HN3TK9wS159v2gPAZ8A","item_key":"test-dictionary-item","item_value":"value","created_at":"2017-04-17T16:01:01+00:00","deleted_at":null,"updated_at":"2017-04-17T16:01:01+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-cache
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:26 GMT
+      - Mon, 17 Apr 2017 16:01:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "993"
+      - "893"
       Fastly-Ratelimit-Reset:
-      - "1467241200"
+      - "1492448400"
       Status:
       - 200 OK
       Vary:
@@ -50,6 +49,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-ord1742-ORD
+      - app-slwdc9050-SL, cache-iad2635-IAD
     status: 200 OK
     code: 200

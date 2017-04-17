@@ -1,13 +1,14 @@
 ---
 version: 1
+rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=602&check_interval=2500&expected_response=200&host=example.com&http_version=1.1&initial=10&method=HEAD&name=test-healthcheck&path=%2Ffoo&threshold=10&timeout=1500&window=5000
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=664&check_interval=2500&expected_response=200&host=example.com&http_version=1.1&initial=10&method=HEAD&name=test-healthcheck&path=%2Ffoo&threshold=10&timeout=1500&window=5000
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "602"
+      - "664"
       check_interval:
       - "2500"
       expected_response:
@@ -34,28 +35,26 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - d631487398e146a8593ddd71d384c7e6
+      - 3ef62116e8f979e10430a453bb5f7083
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.6.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/602/healthcheck
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/664/healthcheck
     method: POST
   response:
-    body: '{"check_interval":2500,"expected_response":200,"host":"example.com","http_version":"1.1","initial":10,"method":"HEAD","name":"test-healthcheck","path":"/foo","threshold":10,"timeout":1500,"window":5000,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":602,"updated_at":"2016-06-29T22:27:37+00:00","deleted_at":null,"created_at":"2016-06-29T22:27:37+00:00","comment":""}'
+    body: '{"check_interval":2500,"expected_response":200,"host":"example.com","http_version":"1.1","initial":10,"method":"HEAD","name":"test-healthcheck","path":"/foo","threshold":10,"timeout":1500,"window":5000,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":664,"updated_at":"2017-04-17T16:01:02+00:00","deleted_at":null,"created_at":"2017-04-17T16:01:02+00:00","comment":""}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-cache
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jun 2016 22:27:38 GMT
+      - Mon, 17 Apr 2017 16:01:02 GMT
       Fastly-Ratelimit-Remaining:
-      - "925"
+      - "887"
       Fastly-Ratelimit-Reset:
-      - "1467241200"
+      - "1492448400"
       Status:
       - 200 OK
       Vary:
@@ -68,6 +67,6 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-ord1728-ORD
+      - app-slwdc9050-SL, cache-iad2635-IAD
     status: 200 OK
     code: 200
