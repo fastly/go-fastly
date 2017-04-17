@@ -117,7 +117,7 @@ func TestClient_ListDictionaries_validation(t *testing.T) {
 
 	_, err = testClient.ListDictionaries(&ListDictionariesInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -135,7 +135,7 @@ func TestClient_CreateDictionary_validation(t *testing.T) {
 
 	_, err = testClient.CreateDictionary(&CreateDictionaryInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -153,7 +153,7 @@ func TestClient_GetDictionary_validation(t *testing.T) {
 
 	_, err = testClient.GetDictionary(&GetDictionaryInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -161,7 +161,7 @@ func TestClient_GetDictionary_validation(t *testing.T) {
 
 	_, err = testClient.GetDictionary(&GetDictionaryInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -180,7 +180,7 @@ func TestClient_UpdateDictionary_validation(t *testing.T) {
 
 	_, err = testClient.UpdateDictionary(&UpdateDictionaryInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -188,7 +188,7 @@ func TestClient_UpdateDictionary_validation(t *testing.T) {
 
 	_, err = testClient.UpdateDictionary(&UpdateDictionaryInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -207,7 +207,7 @@ func TestClient_DeleteDictionary_validation(t *testing.T) {
 
 	err = testClient.DeleteDictionary(&DeleteDictionaryInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -215,7 +215,7 @@ func TestClient_DeleteDictionary_validation(t *testing.T) {
 
 	err = testClient.DeleteDictionary(&DeleteDictionaryInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

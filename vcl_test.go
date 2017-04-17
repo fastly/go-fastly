@@ -157,7 +157,7 @@ func TestClient_ListVCLs_validation(t *testing.T) {
 
 	_, err = testClient.ListVCLs(&ListVCLsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -175,7 +175,7 @@ func TestClient_CreateVCL_validation(t *testing.T) {
 
 	_, err = testClient.CreateVCL(&CreateVCLInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -193,7 +193,7 @@ func TestClient_GetVCL_validation(t *testing.T) {
 
 	_, err = testClient.GetVCL(&GetVCLInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -201,7 +201,7 @@ func TestClient_GetVCL_validation(t *testing.T) {
 
 	_, err = testClient.GetVCL(&GetVCLInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -220,7 +220,7 @@ func TestClient_UpdateVCL_validation(t *testing.T) {
 
 	_, err = testClient.UpdateVCL(&UpdateVCLInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -228,7 +228,7 @@ func TestClient_UpdateVCL_validation(t *testing.T) {
 
 	_, err = testClient.UpdateVCL(&UpdateVCLInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -247,7 +247,7 @@ func TestClient_ActivateVCL_validation(t *testing.T) {
 
 	_, err = testClient.ActivateVCL(&ActivateVCLInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -255,7 +255,7 @@ func TestClient_ActivateVCL_validation(t *testing.T) {
 
 	_, err = testClient.ActivateVCL(&ActivateVCLInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -274,7 +274,7 @@ func TestClient_DeleteVCL_validation(t *testing.T) {
 
 	err = testClient.DeleteVCL(&DeleteVCLInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -282,7 +282,7 @@ func TestClient_DeleteVCL_validation(t *testing.T) {
 
 	err = testClient.DeleteVCL(&DeleteVCLInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

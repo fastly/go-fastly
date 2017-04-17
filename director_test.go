@@ -138,7 +138,7 @@ func TestClient_ListDirectors_validation(t *testing.T) {
 
 	_, err = testClient.ListDirectors(&ListDirectorsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -156,7 +156,7 @@ func TestClient_CreateDirector_validation(t *testing.T) {
 
 	_, err = testClient.CreateDirector(&CreateDirectorInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -174,7 +174,7 @@ func TestClient_GetDirector_validation(t *testing.T) {
 
 	_, err = testClient.GetDirector(&GetDirectorInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -182,7 +182,7 @@ func TestClient_GetDirector_validation(t *testing.T) {
 
 	_, err = testClient.GetDirector(&GetDirectorInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -201,7 +201,7 @@ func TestClient_UpdateDirector_validation(t *testing.T) {
 
 	_, err = testClient.UpdateDirector(&UpdateDirectorInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -209,7 +209,7 @@ func TestClient_UpdateDirector_validation(t *testing.T) {
 
 	_, err = testClient.UpdateDirector(&UpdateDirectorInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -228,7 +228,7 @@ func TestClient_DeleteDirector_validation(t *testing.T) {
 
 	err = testClient.DeleteDirector(&DeleteDirectorInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -236,7 +236,7 @@ func TestClient_DeleteDirector_validation(t *testing.T) {
 
 	err = testClient.DeleteDirector(&DeleteDirectorInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

@@ -138,7 +138,7 @@ func TestClient_ListBackends_validation(t *testing.T) {
 
 	_, err = testClient.ListBackends(&ListBackendsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -156,7 +156,7 @@ func TestClient_CreateBackend_validation(t *testing.T) {
 
 	_, err = testClient.CreateBackend(&CreateBackendInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -174,7 +174,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 
 	_, err = testClient.GetBackend(&GetBackendInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -182,7 +182,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 
 	_, err = testClient.GetBackend(&GetBackendInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -201,7 +201,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 
 	_, err = testClient.UpdateBackend(&UpdateBackendInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -209,7 +209,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 
 	_, err = testClient.UpdateBackend(&UpdateBackendInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -228,7 +228,7 @@ func TestClient_DeleteBackend_validation(t *testing.T) {
 
 	err = testClient.DeleteBackend(&DeleteBackendInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -236,7 +236,7 @@ func TestClient_DeleteBackend_validation(t *testing.T) {
 
 	err = testClient.DeleteBackend(&DeleteBackendInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

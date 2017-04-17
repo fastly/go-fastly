@@ -180,7 +180,7 @@ func TestClient_ListFTPs_validation(t *testing.T) {
 
 	_, err = testClient.ListFTPs(&ListFTPsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -198,7 +198,7 @@ func TestClient_CreateFTP_validation(t *testing.T) {
 
 	_, err = testClient.CreateFTP(&CreateFTPInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -216,7 +216,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 
 	_, err = testClient.GetFTP(&GetFTPInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -224,7 +224,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 
 	_, err = testClient.GetFTP(&GetFTPInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -243,7 +243,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 
 	_, err = testClient.UpdateFTP(&UpdateFTPInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -251,7 +251,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 
 	_, err = testClient.UpdateFTP(&UpdateFTPInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -270,7 +270,7 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 
 	err = testClient.DeleteFTP(&DeleteFTPInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -278,7 +278,7 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 
 	err = testClient.DeleteFTP(&DeleteFTPInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

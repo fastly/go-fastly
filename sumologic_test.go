@@ -145,7 +145,7 @@ func TestClient_ListSumologics_validation(t *testing.T) {
 
 	_, err = testClient.ListSumologics(&ListSumologicsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -163,7 +163,7 @@ func TestClient_CreateSumologic_validation(t *testing.T) {
 
 	_, err = testClient.CreateSumologic(&CreateSumologicInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -181,7 +181,7 @@ func TestClient_GetSumologic_validation(t *testing.T) {
 
 	_, err = testClient.GetSumologic(&GetSumologicInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -189,7 +189,7 @@ func TestClient_GetSumologic_validation(t *testing.T) {
 
 	_, err = testClient.GetSumologic(&GetSumologicInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -208,7 +208,7 @@ func TestClient_UpdateSumologic_validation(t *testing.T) {
 
 	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -216,7 +216,7 @@ func TestClient_UpdateSumologic_validation(t *testing.T) {
 
 	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -235,7 +235,7 @@ func TestClient_DeleteSumologic_validation(t *testing.T) {
 
 	err = testClient.DeleteSumologic(&DeleteSumologicInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -243,7 +243,7 @@ func TestClient_DeleteSumologic_validation(t *testing.T) {
 
 	err = testClient.DeleteSumologic(&DeleteSumologicInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

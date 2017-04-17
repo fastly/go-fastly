@@ -145,7 +145,7 @@ func TestClient_ListLogentries_validation(t *testing.T) {
 
 	_, err = testClient.ListLogentries(&ListLogentriesInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -163,7 +163,7 @@ func TestClient_CreateLogentries_validation(t *testing.T) {
 
 	_, err = testClient.CreateLogentries(&CreateLogentriesInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -181,7 +181,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 
 	_, err = testClient.GetLogentries(&GetLogentriesInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -189,7 +189,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 
 	_, err = testClient.GetLogentries(&GetLogentriesInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -208,7 +208,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 
 	_, err = testClient.UpdateLogentries(&UpdateLogentriesInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -216,7 +216,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 
 	_, err = testClient.UpdateLogentries(&UpdateLogentriesInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -235,7 +235,7 @@ func TestClient_DeleteLogentries_validation(t *testing.T) {
 
 	err = testClient.DeleteLogentries(&DeleteLogentriesInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -243,7 +243,7 @@ func TestClient_DeleteLogentries_validation(t *testing.T) {
 
 	err = testClient.DeleteLogentries(&DeleteLogentriesInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

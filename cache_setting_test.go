@@ -138,7 +138,7 @@ func TestClient_ListCacheSettings_validation(t *testing.T) {
 
 	_, err = testClient.ListCacheSettings(&ListCacheSettingsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -156,7 +156,7 @@ func TestClient_CreateCacheSetting_validation(t *testing.T) {
 
 	_, err = testClient.CreateCacheSetting(&CreateCacheSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -174,7 +174,7 @@ func TestClient_GetCacheSetting_validation(t *testing.T) {
 
 	_, err = testClient.GetCacheSetting(&GetCacheSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -182,7 +182,7 @@ func TestClient_GetCacheSetting_validation(t *testing.T) {
 
 	_, err = testClient.GetCacheSetting(&GetCacheSettingInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -201,7 +201,7 @@ func TestClient_UpdateCacheSetting_validation(t *testing.T) {
 
 	_, err = testClient.UpdateCacheSetting(&UpdateCacheSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -209,7 +209,7 @@ func TestClient_UpdateCacheSetting_validation(t *testing.T) {
 
 	_, err = testClient.UpdateCacheSetting(&UpdateCacheSettingInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -228,7 +228,7 @@ func TestClient_DeleteCacheSetting_validation(t *testing.T) {
 
 	err = testClient.DeleteCacheSetting(&DeleteCacheSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -236,7 +236,7 @@ func TestClient_DeleteCacheSetting_validation(t *testing.T) {
 
 	err = testClient.DeleteCacheSetting(&DeleteCacheSettingInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

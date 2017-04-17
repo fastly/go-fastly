@@ -80,7 +80,7 @@ func TestClient_Diff_validation(t *testing.T) {
 
 	_, err = testClient.GetDiff(&GetDiffInput{
 		Service: "foo",
-		From:    "",
+		From:    0,
 	})
 	if err != ErrMissingFrom {
 		t.Errorf("bad error: %s", err)
@@ -88,8 +88,8 @@ func TestClient_Diff_validation(t *testing.T) {
 
 	_, err = testClient.GetDiff(&GetDiffInput{
 		Service: "foo",
-		From:    "1",
-		To:      "",
+		From:    1,
+		To:      0,
 	})
 	if err != ErrMissingTo {
 		t.Errorf("bad error: %s", err)

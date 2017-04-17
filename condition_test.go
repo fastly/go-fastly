@@ -132,7 +132,7 @@ func TestClient_ListConditions_validation(t *testing.T) {
 
 	_, err = testClient.ListConditions(&ListConditionsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -150,7 +150,7 @@ func TestClient_CreateCondition_validation(t *testing.T) {
 
 	_, err = testClient.CreateCondition(&CreateConditionInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -168,7 +168,7 @@ func TestClient_GetCondition_validation(t *testing.T) {
 
 	_, err = testClient.GetCondition(&GetConditionInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -176,7 +176,7 @@ func TestClient_GetCondition_validation(t *testing.T) {
 
 	_, err = testClient.GetCondition(&GetConditionInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -195,7 +195,7 @@ func TestClient_UpdateCondition_validation(t *testing.T) {
 
 	_, err = testClient.UpdateCondition(&UpdateConditionInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -203,7 +203,7 @@ func TestClient_UpdateCondition_validation(t *testing.T) {
 
 	_, err = testClient.UpdateCondition(&UpdateConditionInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -222,7 +222,7 @@ func TestClient_DeleteCondition_validation(t *testing.T) {
 
 	err = testClient.DeleteCondition(&DeleteConditionInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -230,7 +230,7 @@ func TestClient_DeleteCondition_validation(t *testing.T) {
 
 	err = testClient.DeleteCondition(&DeleteConditionInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

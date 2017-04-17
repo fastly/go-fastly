@@ -173,7 +173,7 @@ func TestClient_ListHeaders_validation(t *testing.T) {
 
 	_, err = testClient.ListHeaders(&ListHeadersInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -191,7 +191,7 @@ func TestClient_CreateHeader_validation(t *testing.T) {
 
 	_, err = testClient.CreateHeader(&CreateHeaderInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -209,7 +209,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 
 	_, err = testClient.GetHeader(&GetHeaderInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -217,7 +217,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 
 	_, err = testClient.GetHeader(&GetHeaderInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -236,7 +236,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 
 	_, err = testClient.UpdateHeader(&UpdateHeaderInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -244,7 +244,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 
 	_, err = testClient.UpdateHeader(&UpdateHeaderInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -263,7 +263,7 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 
 	err = testClient.DeleteHeader(&DeleteHeaderInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -271,7 +271,7 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 
 	err = testClient.DeleteHeader(&DeleteHeaderInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

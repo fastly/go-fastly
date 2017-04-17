@@ -187,7 +187,7 @@ func TestClient_ListHealthChecks_validation(t *testing.T) {
 
 	_, err = testClient.ListHealthChecks(&ListHealthChecksInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -205,7 +205,7 @@ func TestClient_CreateHealthCheck_validation(t *testing.T) {
 
 	_, err = testClient.CreateHealthCheck(&CreateHealthCheckInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -223,7 +223,7 @@ func TestClient_GetHealthCheck_validation(t *testing.T) {
 
 	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -231,7 +231,7 @@ func TestClient_GetHealthCheck_validation(t *testing.T) {
 
 	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -250,7 +250,7 @@ func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 
 	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -258,7 +258,7 @@ func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 
 	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -277,7 +277,7 @@ func TestClient_DeleteHealthCheck_validation(t *testing.T) {
 
 	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -285,7 +285,7 @@ func TestClient_DeleteHealthCheck_validation(t *testing.T) {
 
 	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

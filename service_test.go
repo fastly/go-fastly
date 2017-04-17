@@ -97,7 +97,7 @@ func TestClient_Services(t *testing.T) {
 	if s.Comment != nsd.Comment {
 		t.Errorf("bad comment: %q (%q)", s.Comment, nsd.Comment)
 	}
-	if nsd.Version.Number == "" {
+	if nsd.Version.Number == 0 {
 		t.Errorf("Service Detail Version is empty: (%#v)", nsd)
 	}
 

@@ -194,7 +194,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 
 	_, err = testClient.ListS3s(&ListS3sInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -212,7 +212,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 
 	_, err = testClient.CreateS3(&CreateS3Input{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -230,7 +230,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 
 	_, err = testClient.GetS3(&GetS3Input{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -238,7 +238,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 
 	_, err = testClient.GetS3(&GetS3Input{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -257,7 +257,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 
 	_, err = testClient.UpdateS3(&UpdateS3Input{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -265,7 +265,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 
 	_, err = testClient.UpdateS3(&UpdateS3Input{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -284,7 +284,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 
 	err = testClient.DeleteS3(&DeleteS3Input{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -292,7 +292,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 
 	err = testClient.DeleteS3(&DeleteS3Input{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

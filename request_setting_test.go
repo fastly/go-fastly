@@ -187,7 +187,7 @@ func TestClient_ListRequestSettings_validation(t *testing.T) {
 
 	_, err = testClient.ListRequestSettings(&ListRequestSettingsInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -205,7 +205,7 @@ func TestClient_CreateRequestSetting_validation(t *testing.T) {
 
 	_, err = testClient.CreateRequestSetting(&CreateRequestSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -223,7 +223,7 @@ func TestClient_GetRequestSetting_validation(t *testing.T) {
 
 	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -231,7 +231,7 @@ func TestClient_GetRequestSetting_validation(t *testing.T) {
 
 	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -250,7 +250,7 @@ func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 
 	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -258,7 +258,7 @@ func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 
 	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -277,7 +277,7 @@ func TestClient_DeleteRequestSetting_validation(t *testing.T) {
 
 	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -285,7 +285,7 @@ func TestClient_DeleteRequestSetting_validation(t *testing.T) {
 
 	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {

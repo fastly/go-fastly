@@ -131,7 +131,7 @@ func TestClient_ListWordpresses_validation(t *testing.T) {
 
 	_, err = testClient.ListWordpresses(&ListWordpressesInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -149,7 +149,7 @@ func TestClient_CreateWordpress_validation(t *testing.T) {
 
 	_, err = testClient.CreateWordpress(&CreateWordpressInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -167,7 +167,7 @@ func TestClient_GetWordpress_validation(t *testing.T) {
 
 	_, err = testClient.GetWordpress(&GetWordpressInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -175,7 +175,7 @@ func TestClient_GetWordpress_validation(t *testing.T) {
 
 	_, err = testClient.GetWordpress(&GetWordpressInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -194,7 +194,7 @@ func TestClient_UpdateWordpress_validation(t *testing.T) {
 
 	_, err = testClient.UpdateWordpress(&UpdateWordpressInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -202,7 +202,7 @@ func TestClient_UpdateWordpress_validation(t *testing.T) {
 
 	_, err = testClient.UpdateWordpress(&UpdateWordpressInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
@@ -221,7 +221,7 @@ func TestClient_DeleteWordpress_validation(t *testing.T) {
 
 	err = testClient.DeleteWordpress(&DeleteWordpressInput{
 		Service: "foo",
-		Version: "",
+		Version: 0,
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -229,7 +229,7 @@ func TestClient_DeleteWordpress_validation(t *testing.T) {
 
 	err = testClient.DeleteWordpress(&DeleteWordpressInput{
 		Service: "foo",
-		Version: "1",
+		Version: 1,
 		Name:    "",
 	})
 	if err != ErrMissingName {
