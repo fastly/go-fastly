@@ -59,6 +59,7 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ss []*Syslog
 	if err := decodeJSON(&ss, resp.Body); err != nil {
@@ -101,6 +102,7 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Syslog
 	if err := decodeJSON(&s, resp.Body); err != nil {
@@ -139,6 +141,7 @@ func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Syslog
 	if err := decodeJSON(&s, resp.Body); err != nil {
@@ -187,6 +190,7 @@ func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Syslog
 	if err := decodeJSON(&s, resp.Body); err != nil {
@@ -225,6 +229,7 @@ func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

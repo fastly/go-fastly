@@ -40,6 +40,7 @@ func (c *Client) EdgeCheck(i *EdgeCheckInput) ([]*EdgeCheck, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e []*EdgeCheck
 	if err := decodeJSON(&e, resp.Body); err != nil {

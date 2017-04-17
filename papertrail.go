@@ -55,6 +55,7 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ps []*Papertrail
 	if err := decodeJSON(&ps, resp.Body); err != nil {
@@ -96,6 +97,7 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var p *Papertrail
 	if err := decodeJSON(&p, resp.Body); err != nil {
@@ -134,6 +136,7 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var p *Papertrail
 	if err := decodeJSON(&p, resp.Body); err != nil {
@@ -181,6 +184,7 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var p *Papertrail
 	if err := decodeJSON(&p, resp.Body); err != nil {
@@ -219,6 +223,7 @@ func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

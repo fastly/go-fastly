@@ -49,6 +49,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*DictionaryItem
 	if err := decodeJSON(&bs, resp.Body); err != nil {
@@ -84,6 +85,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -122,6 +124,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -162,6 +165,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := decodeJSON(&b, resp.Body); err != nil {

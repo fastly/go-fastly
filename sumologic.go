@@ -57,6 +57,7 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ss []*Sumologic
 	if err := decodeJSON(&ss, resp.Body); err != nil {
@@ -97,6 +98,7 @@ func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Sumologic
 	if err := decodeJSON(&s, resp.Body); err != nil {
@@ -135,6 +137,7 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Sumologic
 	if err := decodeJSON(&s, resp.Body); err != nil {
@@ -181,6 +184,7 @@ func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Sumologic
 	if err := decodeJSON(&s, resp.Body); err != nil {
@@ -219,6 +223,7 @@ func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {

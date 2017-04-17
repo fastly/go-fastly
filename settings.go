@@ -34,6 +34,7 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Settings
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -68,6 +69,7 @@ func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Settings
 	if err := decodeJSON(&b, resp.Body); err != nil {

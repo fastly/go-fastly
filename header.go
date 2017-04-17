@@ -101,6 +101,7 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*Header
 	if err := decodeJSON(&bs, resp.Body); err != nil {
@@ -146,6 +147,7 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Header
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -184,6 +186,7 @@ func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Header
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -235,6 +238,7 @@ func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Header
 	if err := decodeJSON(&b, resp.Body); err != nil {
@@ -273,6 +277,7 @@ func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeJSON(&r, resp.Body); err != nil {
