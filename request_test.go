@@ -47,7 +47,7 @@ func TestClient_RawRequest(t *testing.T) {
 				}
 				// Insure the cache key isn't altered
 				if strings.Index(r.URL.Path, p+k) == -1 {
-					t.Fatalf("RawRequest altered the cache key. New URL path=%s, expecting %s\n", p+k)
+					t.Fatalf("RawRequest altered the cache key. New URL path=%s, expecting %s\n", r.URL.Path, p+k)
 				}
 			}
 		}

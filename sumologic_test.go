@@ -55,10 +55,10 @@ func TestClient_Sumologics(t *testing.T) {
 		t.Errorf("bad format: %q", s.Format)
 	}
 	if s.FormatVersion != 1 {
-		t.Error("bad format version: %q", s.FormatVersion)
+		t.Errorf("bad format version: %q", s.FormatVersion)
 	}
 	if s.MessageType != "classic" {
-		t.Error("bad message type: %q", s.MessageType)
+		t.Errorf("bad message type: %q", s.MessageType)
 	}
 
 	// List
@@ -98,10 +98,10 @@ func TestClient_Sumologics(t *testing.T) {
 		t.Errorf("bad format: %q", s.Format)
 	}
 	if s.FormatVersion != ns.FormatVersion {
-		t.Error("bad format version: %q", s.FormatVersion)
+		t.Errorf("bad format version: %q", s.FormatVersion)
 	}
 	if s.MessageType != ns.MessageType {
-		t.Error("bad message type: %q", s.MessageType)
+		t.Errorf("bad message type: %q", s.MessageType)
 	}
 
 	// Update

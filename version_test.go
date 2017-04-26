@@ -116,7 +116,7 @@ func TestClient_SortVersions(t *testing.T) {
 	}
 	sort.Sort(versionsByNumber(versionsData))
 	if versionsData[0].Number != 1 || versionsData[1].Number != 2 || versionsData[2].Number != 10 || versionsData[3].Number != 197 || versionsData[4].Number != 201 {
-		t.Fatalf("The sort.Sort did not work properly. Got: %s\n", versionsData)
+		t.Fatalf("The sort.Sort did not work properly. Got: %#v\n", versionsData)
 	}
 }
 
