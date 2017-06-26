@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strings"
 )
 
 // ErrMissingService is an error that is returned when an input struct requires
@@ -62,6 +63,10 @@ var ErrMissingYear = errors.New("Missing required field 'Year'")
 // ErrMissingMonth is an error that is returned when an input struct
 // requires a "Month" key, but one was not set.
 var ErrMissingMonth = errors.New("Missing required field 'Month'")
+
+func ErrInvalidVCL(vclErrors []string) error {
+	return errors.New(strings.Join(vclErrors, "\n"))
+}
 
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
