@@ -281,19 +281,21 @@ func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	return nil
 }
 
+// ValidateVCLInput is the input parameter to ValidateVCL.
 type ValidateVCLInput struct {
 	Service string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	Version int    `mapstructure:"version"`
 }
+
+// ValidateVCLResponse is the response struct for ValidateVCL
 type ValidateVCLResponse struct {
-	Status string `mapstructure:"status"`
-	Message string `mapstructure:"msg"`
+	Status   string   `mapstructure:"status"`
+	Message  string   `mapstructure:"msg"`
 	Warnings []string `mapstructure:"warnings"`
-	Errors []string `mapstructure:"warnings"`
+	Errors   []string `mapstructure:"warnings"`
 }
 
 // ValidateVCL validates the given VCL version.
-// /service/service_id/version/number/validate
 func (c *Client) ValidateVCL(i *ValidateVCLInput) (*ValidateVCLResponse, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
@@ -303,6 +305,7 @@ func (c *Client) ValidateVCL(i *ValidateVCLInput) (*ValidateVCLResponse, error) 
 		return nil, ErrMissingVersion
 	}
 
+	// Validate VCL
 	path := fmt.Sprintf("/service/%s/version/%d/validate", i.Service, i.Version)
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -320,4 +323,3 @@ func (c *Client) ValidateVCL(i *ValidateVCLInput) (*ValidateVCLResponse, error) 
 
 	return r, nil
 }
-
