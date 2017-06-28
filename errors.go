@@ -64,6 +64,7 @@ var ErrMissingYear = errors.New("Missing required field 'Year'")
 // requires a "Month" key, but one was not set.
 var ErrMissingMonth = errors.New("Missing required field 'Month'")
 
+// ErrInvalidVCL creates a error by joining a slice of error strings.
 func ErrInvalidVCL(vclErrors []string) error {
 	return errors.New(strings.Join(vclErrors, "\n"))
 }
