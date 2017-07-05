@@ -88,6 +88,9 @@ func TestClient_S3s(t *testing.T) {
 	if s3.Redundancy != S3RedundancyReduced {
 		t.Errorf("bad redundancy: %q", s3.Redundancy)
 	}
+	if s3.MessageType != "blank" {
+		t.Errorf("bad message_type: %q", s3.MessageType)
+	}
 
 	// List
 	var s3s []*S3

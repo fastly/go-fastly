@@ -29,6 +29,7 @@ type S3 struct {
 	Format            string       `mapstructure:"format"`
 	FormatVersion     uint         `mapstructure:"format_version"`
 	ResponseCondition string       `mapstructure:"response_condition"`
+	MessageType       string       `mapstructure:"message_type"`
 	TimestampFormat   string       `mapstructure:"timestamp_format"`
 	Redundancy        S3Redundancy `mapstructure:"redundancy"`
 	CreatedAt         *time.Time   `mapstructure:"created_at"`
@@ -95,6 +96,7 @@ type CreateS3Input struct {
 	Period            uint         `form:"period,omitempty"`
 	GzipLevel         uint         `form:"gzip_level,omitempty"`
 	Format            string       `form:"format,omitempty"`
+	MessageType       string       `form:"message_type,omitempty"`
 	FormatVersion     uint         `form:"format_version,omitempty"`
 	ResponseCondition string       `form:"response_condition,omitempty"`
 	TimestampFormat   string       `form:"timestamp_format,omitempty"`
@@ -183,6 +185,7 @@ type UpdateS3Input struct {
 	Format            string       `form:"format,omitempty"`
 	FormatVersion     uint         `form:"format_version,omitempty"`
 	ResponseCondition string       `form:"response_condition,omitempty"`
+	MessageType       string       `form:"message_type,omitempty"`
 	TimestampFormat   string       `form:"timestamp_format,omitempty"`
 	Redundancy        S3Redundancy `form:"redundancy,omitempty"`
 }
