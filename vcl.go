@@ -280,3 +280,46 @@ func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	}
 	return nil
 }
+
+// ValidateVCLInput is the input parameter to ValidateVCL.
+type ValidateVCLInput struct {
+	Service string `mapstructure:"service_id"`
+	Version int    `mapstructure:"version"`
+}
+
+// ValidateVCLResponse is the response struct for ValidateVCL
+type ValidateVCLResponse struct {
+	Status   string   `mapstructure:"status"`
+	Message  string   `mapstructure:"msg"`
+	Warnings []string `mapstructure:"warnings"`
+	Errors   []string `mapstructure:"warnings"`
+}
+
+// ValidateVCL validates the given VCL version.
+func (c *Client) ValidateVCL(i *ValidateVCLInput) (*ValidateVCLResponse, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.Version == 0 {
+		return nil, ErrMissingVersion
+	}
+
+	// Validate VCL
+	path := fmt.Sprintf("/service/%s/version/%d/validate", i.Service, i.Version)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var r *ValidateVCLResponse
+	if err := decodeJSON(&r, resp.Body); err != nil {
+		return nil, err
+	}
+
+	if r.Errors != nil {
+		return r, ErrInvalidVCL(r.Errors)
+	}
+
+	return r, nil
+}
