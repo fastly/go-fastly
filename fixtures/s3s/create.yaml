@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=657&access_key=access_key&bucket_name=bucket-name&domain=s3-website-us-west-2.amazonaws.com&format=format&format_version=2&gzip_level=9&name=test-s3&path=%2Fpath&period=12&redundancy=reduced_redundancy&secret_key=secret_key&timestamp_format=%25Y
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=698&access_key=access_key&bucket_name=bucket-name&domain=s3-website-us-west-2.amazonaws.com&format=format&format_version=2&gzip_level=9&message_type=classic&name=test-s3&path=%2Fpath&period=12&redundancy=reduced_redundancy&secret_key=secret_key&timestamp_format=%25Y
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "657"
+      - "698"
       access_key:
       - access_key
       bucket_name:
@@ -21,6 +21,8 @@ interactions:
       - "2"
       gzip_level:
       - "9"
+      message_type:
+      - classic
       name:
       - test-s3
       path:
@@ -33,19 +35,17 @@ interactions:
       - secret_key
       timestamp_format:
       - '%Y'
-      message_type:
-      - "blank"
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3ef62116e8f979e10430a453bb5f7083
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/657/logging/s3
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/698/logging/s3
     method: POST
   response:
-    body: '{"access_key":"access_key","bucket_name":"bucket-name","domain":"s3-website-us-west-2.amazonaws.com","format":"format","format_version":"2","gzip_level":"9","name":"test-s3","path":"/path","period":"12","redundancy":"reduced_redundancy","secret_key":"secret_key","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"657","placement":null,"response_condition":"","server_side_encryption_kms_key_id":null,"public_key":null,"updated_at":"2017-04-17T16:00:59+00:00","message_type":"blank","server_side_encryption":null,"deleted_at":null,"created_at":"2017-04-17T16:00:59+00:00"}'
+    body: '{"access_key":"access_key","bucket_name":"bucket-name","domain":"s3-website-us-west-2.amazonaws.com","format":"format","format_version":"2","gzip_level":"9","message_type":"classic","name":"test-s3","path":"/path","period":"12","redundancy":"reduced_redundancy","secret_key":"secret_key","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"698","placement":null,"response_condition":"","server_side_encryption_kms_key_id":null,"public_key":null,"updated_at":"2017-07-20T01:19:42+00:00","server_side_encryption":null,"deleted_at":null,"created_at":"2017-07-20T01:19:42+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -54,11 +54,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 17 Apr 2017 16:00:59 GMT
+      - Thu, 20 Jul 2017 01:19:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "925"
+      - "836"
       Fastly-Ratelimit-Reset:
-      - "1492448400"
+      - "1500516000"
       Status:
       - 200 OK
       Vary:
@@ -71,6 +71,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2635-IAD
+      - app-slwdc9051-SL, cache-dca17724-DCA
+      X-Timer:
+      - S1500513582.410280,VS0,VE471
     status: 200 OK
     code: 200

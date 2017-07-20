@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=658&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=686&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "658"
+      - "686"
       content:
       - abcd
       content_type:
@@ -23,13 +23,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3ef62116e8f979e10430a453bb5f7083
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/658/response_object
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/686/response_object
     method: POST
   response:
-    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"658","deleted_at":null,"cache_condition":"","created_at":"2017-04-17T16:00:59+00:00","request_condition":"","updated_at":"2017-04-17T16:00:59+00:00"}'
+    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"686","deleted_at":null,"cache_condition":"","created_at":"2017-07-20T01:15:09+00:00","request_condition":"","updated_at":"2017-07-20T01:15:09+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -38,11 +38,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 17 Apr 2017 16:00:59 GMT
+      - Thu, 20 Jul 2017 01:15:10 GMT
       Fastly-Ratelimit-Remaining:
-      - "918"
+      - "905"
       Fastly-Ratelimit-Reset:
-      - "1492448400"
+      - "1500516000"
       Status:
       - 200 OK
       Vary:
@@ -55,6 +55,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-iad2635-IAD
+      - app-slwdc9050-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513310.671207,VS0,VE471
     status: 200 OK
     code: 200

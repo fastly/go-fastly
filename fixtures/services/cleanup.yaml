@@ -7,10 +7,10 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - 3ef62116e8f979e10430a453bb5f7083
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
-    url: https://api.fastly.com/service/KejLJtckrFM6HKnBUujiA
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/6cqczz91loS2dnXX5w9UIC
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 17 Apr 2017 16:00:57 GMT
+      - Thu, 20 Jul 2017 01:15:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "943"
+      - "976"
       Fastly-Ratelimit-Reset:
-      - "1492448400"
+      - "1500516000"
       Status:
       - 200 OK
       Vary:
@@ -39,7 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2635-IAD
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513301.060767,VS0,VE51
     status: 200 OK
     code: 200
 - request:
@@ -47,10 +49,10 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - 3ef62116e8f979e10430a453bb5f7083
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
-    url: https://api.fastly.com/service/KejLJtckrFM6HKnBUujiA
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/6cqczz91loS2dnXX5w9UIC
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -62,11 +64,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 17 Apr 2017 16:00:57 GMT
+      - Thu, 20 Jul 2017 01:15:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "940"
+      - "975"
       Fastly-Ratelimit-Reset:
-      - "1492448400"
+      - "1500516000"
       Status:
       - 200 OK
       Vary:
@@ -79,6 +81,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-iad2635-IAD
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513301.127828,VS0,VE54
     status: 200 OK
     code: 200

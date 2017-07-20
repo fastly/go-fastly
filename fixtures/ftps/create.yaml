@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=650&address=example.com&format=format&gzip_level=9&name=test-ftp&password=password&path=%2Fdir&period=12&port=1234&timestamp_format=%25Y&user=username
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=678&address=example.com&format=format&gzip_level=9&name=test-ftp&password=password&path=%2Fdir&period=12&port=1234&timestamp_format=%25Y&user=username
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "650"
+      - "678"
       address:
       - example.com
       format:
@@ -33,13 +33,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - 3ef62116e8f979e10430a453bb5f7083
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/650/logging/ftp
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/678/logging/ftp
     method: POST
   response:
-    body: '{"address":"example.com","format":"format","gzip_level":"9","name":"test-ftp","password":"password","path":"/dir","period":"12","port":"1234","timestamp_format":"%Y","user":"username","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"650","placement":null,"format_version":"2","hostname":"example.com","response_condition":"","public_key":null,"updated_at":"2017-04-17T16:00:56+00:00","message_type":"classic","ipv4":null,"deleted_at":null,"created_at":"2017-04-17T16:00:56+00:00"}'
+    body: '{"address":"example.com","format":"format","gzip_level":"9","name":"test-ftp","password":"password","path":"/dir","period":"12","port":"1234","timestamp_format":"%Y","user":"username","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"678","placement":null,"format_version":"2","hostname":"example.com","response_condition":"","public_key":null,"updated_at":"2017-07-20T01:15:06+00:00","message_type":"classic","ipv4":null,"deleted_at":null,"created_at":"2017-07-20T01:15:06+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -48,11 +48,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 17 Apr 2017 16:00:56 GMT
+      - Thu, 20 Jul 2017 01:15:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "965"
+      - "950"
       Fastly-Ratelimit-Reset:
-      - "1492448400"
+      - "1500516000"
       Status:
       - 200 OK
       Vary:
@@ -65,6 +65,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-iad2635-IAD
+      - app-slwdc9050-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513306.781442,VS0,VE581
     status: 200 OK
     code: 200
