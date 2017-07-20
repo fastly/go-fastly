@@ -2,7 +2,7 @@ package fastly
 
 import "testing"
 
-func TestClient_AclEntries(t *testing.T) {
+func TestClient_ACLEntries(t *testing.T) {
 
 	var err error
 	var tv *Version
@@ -11,9 +11,9 @@ func TestClient_AclEntries(t *testing.T) {
 	})
 
 	// Create ACL before adding entries to it
-	var a *Acl
+	var a *ACL
 	record(t, "acl_entries/create_acl", func(c *Client) {
-		a, err = c.CreateAcl(&CreateAclInput{
+		a, err = c.CreateACL(&CreateACLInput{
 			Service: testServiceID,
 			Version: tv.Number,
 			Name:    "entry_acl",
@@ -23,10 +23,10 @@ func TestClient_AclEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	// Clean up helper Acl
+	// Clean up helper ACL
 	defer func() {
 		record(t, "acl_entries/cleanup", func(c *Client) {
-			err = c.DeleteAcl(&DeleteAclInput{
+			err = c.DeleteACL(&DeleteACLInput{
 				Service: testServiceID,
 				Version: tv.Number,
 				Name:    "entry_acl",
@@ -35,11 +35,11 @@ func TestClient_AclEntries(t *testing.T) {
 	}()
 
 	// Create
-	var e *AclEntry
+	var e *ACLEntry
 	record(t, "acl_entries/create", func(c *Client) {
-		e, err = c.CreateAclEntry(&CreateAclEntryInput{
+		e, err = c.CreateACLEntry(&CreateACLEntryInput{
 			Service: testServiceID,
-			Acl:     a.ID,
+			ACL:     a.ID,
 			IP:      "10.0.0.3",
 			Subnet:  "8",
 			Negated: false,
@@ -67,11 +67,11 @@ func TestClient_AclEntries(t *testing.T) {
 	}
 
 	// List
-	var es []*AclEntry
+	var es []*ACLEntry
 	record(t, "acl_entries/list", func(c *Client) {
-		es, err = c.ListAclEntries(&ListAclEntriesInput{
+		es, err = c.ListACLEntries(&ListACLEntriesInput{
 			Service: testServiceID,
-			Acl:     a.ID,
+			ACL:     a.ID,
 		})
 	})
 	if err != nil {
@@ -83,11 +83,11 @@ func TestClient_AclEntries(t *testing.T) {
 	}
 
 	// Get
-	var ne *AclEntry
+	var ne *ACLEntry
 	record(t, "acl_entries/get", func(c *Client) {
-		ne, err = c.GetAclEntry(&GetAclEntryInput{
+		ne, err = c.GetACLEntry(&GetACLEntryInput{
 			Service: testServiceID,
-			Acl:     a.ID,
+			ACL:     a.ID,
 			ID:      e.ID,
 		})
 	})
@@ -109,11 +109,11 @@ func TestClient_AclEntries(t *testing.T) {
 	}
 
 	// Update
-	var ue *AclEntry
+	var ue *ACLEntry
 	record(t, "acl_entries/update", func(c *Client) {
-		ue, err = c.UpdateAclEntry(&UpdateAclEntryInput{
+		ue, err = c.UpdateACLEntry(&UpdateACLEntryInput{
 			Service: testServiceID,
-			Acl:     a.ID,
+			ACL:     a.ID,
 			ID:      e.ID,
 			IP:      "10.0.0.4",
 			Negated: true,
@@ -140,9 +140,9 @@ func TestClient_AclEntries(t *testing.T) {
 
 	// Delete
 	record(t, "acl_entries/delete", func(c *Client) {
-		err = c.DeleteAclEntry(&DeleteAclEntryInput{
+		err = c.DeleteACLEntry(&DeleteACLEntryInput{
 			Service: testServiceID,
-			Acl:     a.ID,
+			ACL:     a.ID,
 			ID:      e.ID,
 		})
 	})
@@ -152,62 +152,62 @@ func TestClient_AclEntries(t *testing.T) {
 
 }
 
-func TestClient_ListAclEntries_validation(t *testing.T) {
+func TestClient_ListACLEntries_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListAclEntries(&ListAclEntriesInput{
+	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
 		Service: "",
 	})
 	if err != ErrMissingService {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListAclEntries(&ListAclEntriesInput{
+	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
 		Service: "foo",
-		Acl:     "",
+		ACL:     "",
 	})
-	if err != ErrMissingAcl {
+	if err != ErrMissingACL {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestClient_CreateAclEntry_validation(t *testing.T) {
+func TestClient_CreateACLEntry_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateAclEntry(&CreateAclEntryInput{
+	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{
 		Service: "",
 	})
 	if err != ErrMissingService {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateAclEntry(&CreateAclEntryInput{
+	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{
 		Service: "foo",
-		Acl:     "",
+		ACL:     "",
 	})
-	if err != ErrMissingAcl {
+	if err != ErrMissingACL {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestClient_GetAclEntry_validation(t *testing.T) {
+func TestClient_GetACLEntry_validation(t *testing.T) {
 	var err error
-	_, err = testClient.GetAclEntry(&GetAclEntryInput{
+	_, err = testClient.GetACLEntry(&GetACLEntryInput{
 		Service: "",
 	})
 	if err != ErrMissingService {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetAclEntry(&GetAclEntryInput{
+	_, err = testClient.GetACLEntry(&GetACLEntryInput{
 		Service: "foo",
-		Acl:     "",
+		ACL:     "",
 	})
-	if err != ErrMissingAcl {
+	if err != ErrMissingACL {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetAclEntry(&GetAclEntryInput{
+	_, err = testClient.GetACLEntry(&GetACLEntryInput{
 		Service: "foo",
-		Acl:     "acl",
+		ACL:     "acl",
 		ID:      "",
 	})
 	if err != ErrMissingID {
@@ -215,26 +215,26 @@ func TestClient_GetAclEntry_validation(t *testing.T) {
 	}
 }
 
-func TestClient_UpdateAclEntry_validation(t *testing.T) {
+func TestClient_UpdateACLEntry_validation(t *testing.T) {
 	var err error
-	_, err = testClient.UpdateAclEntry(&UpdateAclEntryInput{
+	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
 		Service: "",
 	})
 	if err != ErrMissingService {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateAclEntry(&UpdateAclEntryInput{
+	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
 		Service: "foo",
-		Acl:     "",
+		ACL:     "",
 	})
-	if err != ErrMissingAcl {
+	if err != ErrMissingACL {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateAclEntry(&UpdateAclEntryInput{
+	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
 		Service: "foo",
-		Acl:     "acl",
+		ACL:     "acl",
 		ID:      "",
 	})
 	if err != ErrMissingID {
@@ -242,26 +242,26 @@ func TestClient_UpdateAclEntry_validation(t *testing.T) {
 	}
 }
 
-func TestClient_DeleteAclEntry_validation(t *testing.T) {
+func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	var err error
-	err = testClient.DeleteAclEntry(&DeleteAclEntryInput{
+	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
 		Service: "",
 	})
 	if err != ErrMissingService {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteAclEntry(&DeleteAclEntryInput{
+	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
 		Service: "foo",
-		Acl:     "",
+		ACL:     "",
 	})
-	if err != ErrMissingAcl {
+	if err != ErrMissingACL {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteAclEntry(&DeleteAclEntryInput{
+	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
 		Service: "foo",
-		Acl:     "acl",
+		ACL:     "acl",
 		ID:      "",
 	})
 	if err != ErrMissingID {
