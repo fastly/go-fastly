@@ -5,9 +5,9 @@ import (
 	"sort"
 )
 
-type AclEntry struct {
+type ACLEntry struct {
 	ServiceID string `mapstructure:"service_id"`
-	AclID     string `mapstructure:"acl_id"`
+	ACLID     string `mapstructure:"acl_id"`
 
 	ID      string `mapstructure:"id"`
 	IP      string `mapstructure:"ip"`
@@ -16,8 +16,8 @@ type AclEntry struct {
 	Comment string `mapstructure:"comment"`
 }
 
-// entriesById is a sortable list of Acl entries.
-type entriesById []*AclEntry
+// entriesById is a sortable list of ACL entries.
+type entriesById []*ACLEntry
 
 // Len, Swap, and Less implements the sortable interface.
 func (s entriesById) Len() int      { return len(s) }
@@ -26,30 +26,30 @@ func (s entriesById) Less(i, j int) bool {
 	return s[i].ID < s[j].ID
 }
 
-// ListAclEntriesInput is the input parameter to ListAclEntries function.
-type ListAclEntriesInput struct {
+// ListACLEntriesInput is the input parameter to ListACLEntries function.
+type ListACLEntriesInput struct {
 	Service string
-	Acl     string
+	ACL     string
 }
 
-// ListAclEntries return a list of entries for an Acl
-func (c *Client) ListAclEntries(i *ListAclEntriesInput) ([]*AclEntry, error) {
+// ListACLEntries return a list of entries for an ACL
+func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
 
-	if i.Acl == "" {
-		return nil, ErrMissingAcl
+	if i.ACL == "" {
+		return nil, ErrMissingACL
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.Service, i.Acl)
+	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.Service, i.ACL)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var es []*AclEntry
+	var es []*ACLEntry
 	if err := decodeJSON(&es, resp.Body); err != nil {
 		return nil, err
 	}
@@ -59,35 +59,35 @@ func (c *Client) ListAclEntries(i *ListAclEntriesInput) ([]*AclEntry, error) {
 	return es, nil
 }
 
-// GetAclEntryInput is the input parameter to GetAclEntry function.
-type GetAclEntryInput struct {
+// GetACLEntryInput is the input parameter to GetACLEntry function.
+type GetACLEntryInput struct {
 	Service string
-	Acl     string
+	ACL     string
 	ID      string
 }
 
-// GetAclEntry returns a single Acl entry based on its ID.
-func (c *Client) GetAclEntry(i *GetAclEntryInput) (*AclEntry, error) {
+// GetACLEntry returns a single ACL entry based on its ID.
+func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
 
-	if i.Acl == "" {
-		return nil, ErrMissingAcl
+	if i.ACL == "" {
+		return nil, ErrMissingACL
 	}
 
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.Acl, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.ACL, i.ID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var e *AclEntry
+	var e *ACLEntry
 	if err := decodeJSON(&e, resp.Body); err != nil {
 		return nil, err
 	}
@@ -95,11 +95,11 @@ func (c *Client) GetAclEntry(i *GetAclEntryInput) (*AclEntry, error) {
 	return e, nil
 }
 
-// CreateAclEntryInput the input parameter to CreateAclEntry function.
-type CreateAclEntryInput struct {
+// CreateACLEntryInput the input parameter to CreateACLEntry function.
+type CreateACLEntryInput struct {
 	// Required fields
 	Service string
-	Acl     string
+	ACL     string
 	IP      string `form:"ip"`
 
 	// Optional fields
@@ -108,28 +108,28 @@ type CreateAclEntryInput struct {
 	Comment string `form:"comment,omitempty"`
 }
 
-// CreateAclEntry creates and returns a new Acl entry.
-func (c *Client) CreateAclEntry(i *CreateAclEntryInput) (*AclEntry, error) {
+// CreateACLEntry creates and returns a new ACL entry.
+func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
 
-	if i.Acl == "" {
-		return nil, ErrMissingAcl
+	if i.ACL == "" {
+		return nil, ErrMissingACL
 	}
 
 	if i.IP == "" {
 		return nil, ErrMissingIP
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.Service, i.Acl)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.Service, i.ACL)
 
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var e *AclEntry
+	var e *ACLEntry
 	if err := decodeJSON(&e, resp.Body); err != nil {
 		return nil, err
 	}
@@ -137,28 +137,28 @@ func (c *Client) CreateAclEntry(i *CreateAclEntryInput) (*AclEntry, error) {
 	return e, nil
 }
 
-// DeleteAclEntryInput the input parameter to DeleteAclEntry function.
-type DeleteAclEntryInput struct {
+// DeleteACLEntryInput the input parameter to DeleteACLEntry function.
+type DeleteACLEntryInput struct {
 	Service string
-	Acl     string
+	ACL     string
 	ID      string
 }
 
-// DeleteAclEntry deletes an entry from an Acl based on its ID
-func (c *Client) DeleteAclEntry(i *DeleteAclEntryInput) error {
+// DeleteACLEntry deletes an entry from an ACL based on its ID
+func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if i.Service == "" {
 		return ErrMissingService
 	}
 
-	if i.Acl == "" {
-		return ErrMissingAcl
+	if i.ACL == "" {
+		return ErrMissingACL
 	}
 
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.Acl, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.ACL, i.ID)
 
 	resp, err := c.Delete(path, nil)
 	if err != nil {
@@ -178,11 +178,11 @@ func (c *Client) DeleteAclEntry(i *DeleteAclEntryInput) error {
 
 }
 
-// UpdateAclEntryInput is the input parameter to UpdateAclEntry function.
-type UpdateAclEntryInput struct {
+// UpdateACLEntryInput is the input parameter to UpdateACLEntry function.
+type UpdateACLEntryInput struct {
 	// Required fields
 	Service string
-	Acl     string
+	ACL     string
 	ID      string
 
 	// Optional fields
@@ -192,28 +192,28 @@ type UpdateAclEntryInput struct {
 	Comment string `form:"comment,omitempty"`
 }
 
-// UpdateAclEntry updates an Acl entry
-func (c *Client) UpdateAclEntry(i *UpdateAclEntryInput) (*AclEntry, error) {
+// UpdateACLEntry updates an ACL entry
+func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
 
-	if i.Acl == "" {
-		return nil, ErrMissingAcl
+	if i.ACL == "" {
+		return nil, ErrMissingACL
 	}
 
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.Acl, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.ACL, i.ID)
 
 	resp, err := c.RequestForm("PATCH", path, i, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var e *AclEntry
+	var e *ACLEntry
 	if err := decodeJSON(&e, resp.Body); err != nil {
 		return nil, err
 	}

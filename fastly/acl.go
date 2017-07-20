@@ -5,7 +5,7 @@ import (
 	"sort"
 )
 
-type Acl struct {
+type ACL struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
@@ -13,18 +13,18 @@ type Acl struct {
 	ID   string `mapstructure:"id"`
 }
 
-// aclsByName is a sortable list of ACLs.
-type aclsByName []*Acl
+// ACLsByName is a sortable list of ACLs.
+type ACLsByName []*ACL
 
 // Len, Swap, and Less implement the sortable interface.
-func (s aclsByName) Len() int      { return len(s) }
-func (s aclsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-func (s aclsByName) Less(i, j int) bool {
+func (s ACLsByName) Len() int      { return len(s) }
+func (s ACLsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s ACLsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListAclsInput is used as input to the ListAcls function.
-type ListAclsInput struct {
+// ListACLsInput is used as input to the ListACLs function.
+type ListACLsInput struct {
 	// Service is the ID of the service (required).
 	Service string
 
@@ -32,8 +32,8 @@ type ListAclsInput struct {
 	Version int
 }
 
-// ListAcls returns the list of ACLs for the configuration version.
-func (c *Client) ListAcls(i *ListAclsInput) ([]*Acl, error) {
+// ListACLs returns the list of ACLs for the configuration version.
+func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
@@ -48,16 +48,16 @@ func (c *Client) ListAcls(i *ListAclsInput) ([]*Acl, error) {
 		return nil, err
 	}
 
-	var as []*Acl
+	var as []*ACL
 	if err := decodeJSON(&as, resp.Body); err != nil {
 		return nil, err
 	}
-	sort.Stable(aclsByName(as))
+	sort.Stable(ACLsByName(as))
 	return as, nil
 }
 
-// CreateAclInput is used as input to the CreateAcl function.
-type CreateAclInput struct {
+// CreateACLInput is used as input to the CreateACL function.
+type CreateACLInput struct {
 	// Service is the ID of the service. Version is the specific configuration
 	// version. Both fields are required.
 	Service string
@@ -67,7 +67,7 @@ type CreateAclInput struct {
 	Name string `form:"name"`
 }
 
-func (c *Client) CreateAcl(i *CreateAclInput) (*Acl, error) {
+func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
@@ -82,26 +82,26 @@ func (c *Client) CreateAcl(i *CreateAclInput) (*Acl, error) {
 		return nil, err
 	}
 
-	var a *Acl
+	var a *ACL
 	if err := decodeJSON(&a, resp.Body); err != nil {
 		return nil, err
 	}
 	return a, nil
 }
 
-// DeleteAclInput is the input parameter to DeleteAcl function.
-type DeleteAclInput struct {
+// DeleteACLInput is the input parameter to DeleteACL function.
+type DeleteACLInput struct {
 	// Service is the ID of the service. Version is the specific configuration
 	// version. Both fields are required.
 	Service string
 	Version int
 
-	// Name is the name of the acl to delete (required).
+	// Name is the name of the ACL to delete (required).
 	Name string
 }
 
-// DeleteAcl deletes the given acl version.
-func (c *Client) DeleteAcl(i *DeleteAclInput) error {
+// DeleteACL deletes the given ACL version.
+func (c *Client) DeleteACL(i *DeleteACLInput) error {
 	if i.Service == "" {
 		return ErrMissingService
 	}
@@ -130,19 +130,19 @@ func (c *Client) DeleteAcl(i *DeleteAclInput) error {
 	return nil
 }
 
-// GetAclInput is the input parameter to GetAcl function.
-type GetAclInput struct {
+// GetACLInput is the input parameter to GetACL function.
+type GetACLInput struct {
 	// Service is the ID of the service. Version is the specific configuration
 	// version. Both fields are required.
 	Service string
 	Version int
 
-	// Name is the name of the acl to get (required).
+	// Name is the name of the ACL to get (required).
 	Name string
 }
 
-// GetAcl gets the ACL configuration with the given parameters.
-func (c *Client) GetAcl(i *GetAclInput) (*Acl, error) {
+// GetACL gets the ACL configuration with the given parameters.
+func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
@@ -161,29 +161,29 @@ func (c *Client) GetAcl(i *GetAclInput) (*Acl, error) {
 		return nil, err
 	}
 
-	var a *Acl
+	var a *ACL
 	if err := decodeJSON(&a, resp.Body); err != nil {
 		return nil, err
 	}
 	return a, nil
 }
 
-// UpdateAclInput is the input parameter to UpdateAcl function.
-type UpdateAclInput struct {
+// UpdateACLInput is the input parameter to UpdateACL function.
+type UpdateACLInput struct {
 	// Service is the ID of the service. Version is the specific configuration
 	// version. Both fields are required.
 	Service string
 	Version int
 
-	// Name is the name of the acl to update (required).
+	// Name is the name of the ACL to update (required).
 	Name string
 
-	// NewName is the new name of the acl to update (required).
+	// NewName is the new name of the ACL to update (required).
 	NewName string `form:"name"`
 }
 
-// UpdateAcl updates the name of the ACL with the given parameters.
-func (c *Client) UpdateAcl(i *UpdateAclInput) (*Acl, error) {
+// UpdateACL updates the name of the ACL with the given parameters.
+func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
@@ -207,7 +207,7 @@ func (c *Client) UpdateAcl(i *UpdateAclInput) (*Acl, error) {
 		return nil, err
 	}
 
-	var a *Acl
+	var a *ACL
 	if err := decodeJSON(&a, resp.Body); err != nil {
 		return nil, err
 	}
