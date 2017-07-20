@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"sort"
 )
 
@@ -120,7 +121,7 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.Service, i.Version, i.Name)
+	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.Service, i.Version, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -162,7 +163,7 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.Service, i.Version, i.Name)
+	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.Service, i.Version, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -200,7 +201,7 @@ func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.Service, i.Version, i.Name)
+	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.Service, i.Version, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

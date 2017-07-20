@@ -17,7 +17,7 @@ func TestClient_Conditions(t *testing.T) {
 		condition, err = c.CreateCondition(&CreateConditionInput{
 			Service:   testServiceID,
 			Version:   tv.Number,
-			Name:      "test-condition",
+			Name:      "test/condition",
 			Statement: "req.url~+\"index.html\"",
 			Type:      "REQUEST",
 			Priority:  1,
@@ -33,12 +33,12 @@ func TestClient_Conditions(t *testing.T) {
 			c.DeleteCondition(&DeleteConditionInput{
 				Service: testServiceID,
 				Version: tv.Number,
-				Name:    "test-condition",
+				Name:    "test/condition",
 			})
 		})
 	}()
 
-	if condition.Name != "test-condition" {
+	if condition.Name != "test/condition" {
 		t.Errorf("bad name: %q", condition.Name)
 	}
 	if condition.Statement != "req.url~+\"index.html\"" {
@@ -72,7 +72,7 @@ func TestClient_Conditions(t *testing.T) {
 		newCondition, err = c.GetCondition(&GetConditionInput{
 			Service: testServiceID,
 			Version: tv.Number,
-			Name:    "test-condition",
+			Name:    "test/condition",
 		})
 	})
 	if err != nil {
@@ -97,7 +97,7 @@ func TestClient_Conditions(t *testing.T) {
 		updatedCondition, err = c.UpdateCondition(&UpdateConditionInput{
 			Service:   testServiceID,
 			Version:   tv.Number,
-			Name:      "test-condition",
+			Name:      "test/condition",
 			Statement: "req.url~+\"updated.html\"",
 		})
 	})
@@ -113,7 +113,7 @@ func TestClient_Conditions(t *testing.T) {
 		err = c.DeleteCondition(&DeleteConditionInput{
 			Service: testServiceID,
 			Version: tv.Number,
-			Name:    "test-condition",
+			Name:    "test/condition",
 		})
 	})
 	if err != nil {
