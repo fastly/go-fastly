@@ -63,6 +63,18 @@ var ErrMissingYear = errors.New("Missing required field 'Year'")
 // requires a "Month" key, but one was not set.
 var ErrMissingMonth = errors.New("Missing required field 'Month'")
 
+// ErrMissingNewName is an erorr that is returned when an input struct
+// requires a "NewName" key, but one was not set
+var ErrMissingNewName = errors.New("Missing required field 'NewName'")
+
+// ErrMissingAcl is an error that is returned when an unout struct
+// required an "Acl" key, but one is not set
+var ErrMissingAcl = errors.New("Missing required field 'Acl'")
+
+// ErrMissingIP is an error that is returned when an unout struct
+// required an "IP" key, but one is not set
+var ErrMissingIP = errors.New("Missing requried field 'IP'")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
