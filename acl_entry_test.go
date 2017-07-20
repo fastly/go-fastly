@@ -59,7 +59,7 @@ func TestClient_AclEntries(t *testing.T) {
 	}
 
 	if e.Negated != false {
-		t.Errorf("Bad negated flag: %q", e.Negated)
+		t.Errorf("Bad negated flag: %t", e.Negated)
 	}
 
 	if e.Comment != "test entry" {
