@@ -1,0 +1,45 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/stats/regions
+    method: GET
+  response:
+    body: '{"data":["anzac","asia","europe","latam","south_africa","usa"],"status":"success","msg":null,"meta":{"from":"2017-06-27
+      15:02:28 UTC","to":"2017-07-27 15:02:28 UTC","by":"day","region":"all"}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Content-Length:
+      - "192"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 27 Jul 2017 15:02:29 GMT
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17736-DCA
+      X-Timer:
+      - S1501167749.928391,VS0,VE158
+    status: 200 OK
+    code: 200

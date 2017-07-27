@@ -1,0 +1,45 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/stats/usage?by=minute&from=10+days+ago&region=usa&to=now
+    method: GET
+  response:
+    body: '{"data":{"anzac":{"bandwidth":0,"requests":0},"asia":{"bandwidth":0,"requests":0},"europe":{"bandwidth":0,"requests":0},"latam":{"bandwidth":0,"requests":0},"south_africa":{"bandwidth":0,"requests":0},"usa":{"bandwidth":0,"requests":0}},"status":"success","msg":null,"meta":{"from":"2017-07-17
+      15:02:28 UTC","to":"2017-07-27 15:02:28 UTC","by":"minute","region":"usa"}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Content-Length:
+      - "369"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 27 Jul 2017 15:02:29 GMT
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17736-DCA
+      X-Timer:
+      - S1501167749.928372,VS0,VE209
+    status: 200 OK
+    code: 200

@@ -63,7 +63,7 @@ func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 	}()
 
 	client := NewRealtimeStatsClient()
-	client.HTTPClient.Transport = r
+	client.client.HTTPClient.Transport = r
 
 	f(client)
 }

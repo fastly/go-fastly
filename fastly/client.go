@@ -56,9 +56,9 @@ type Client struct {
 	url *url.URL
 }
 
-// RTSClient is the entrypoint to the Fastly's Realtime Stats API
+// RTSClient is the entrypoint to the Fastly's Realtime Stats API.
 type RTSClient struct {
-	*Client
+	client *Client
 }
 
 // DefaultClient instantiates a new Fastly API client. This function requires
@@ -97,7 +97,7 @@ func NewRealtimeStatsClient() *RTSClient {
 	if err != nil {
 		panic(err)
 	}
-	return &RTSClient{Client: c}
+	return &RTSClient{client: c}
 }
 
 func (c *Client) init() (*Client, error) {

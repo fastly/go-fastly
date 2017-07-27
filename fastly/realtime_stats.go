@@ -40,7 +40,7 @@ func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsRe
 		path = fmt.Sprintf("%s/limit/%d", path, i.Limit)
 	}
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.client.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
