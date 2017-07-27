@@ -10,6 +10,9 @@ import (
 // testClient is the test client.
 var testClient = DefaultClient()
 
+// testStatsClient is the test client for realtime stats.
+var testStatsClient = NewRealtimeStatsClient()
+
 // testServiceID is the ID of the testing service.
 var testServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 
@@ -43,6 +46,23 @@ func record(t *testing.T, fixture string, f func(*Client)) {
 	}()
 
 	client := DefaultClient()
+	client.HTTPClient.Transport = r
+
+	f(client)
+}
+
+func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
+	r, err := recorder.New("fixtures/" + fixture)
+	if err != nil {
+		t.Fatal(err)
+	}
+	defer func() {
+		if err := r.Stop(); err != nil {
+			t.Fatal(err)
+		}
+	}()
+
+	client := NewRealtimeStatsClient()
 	client.HTTPClient.Transport = r
 
 	f(client)

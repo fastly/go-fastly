@@ -27,6 +27,9 @@ const APIKeyHeader = "Fastly-Key"
 // support an on-premise solution, this is likely to always be the default.
 const DefaultEndpoint = "https://api.fastly.com"
 
+// RealtimeStatsEndpoint is the realtime stats endpoint for Fastly.
+const RealtimeStatsEndpoint = "https://rt.fastly.com"
+
 // ProjectURL is the url for this library.
 var ProjectURL = "github.com/sethvargo/go-fastly"
 
@@ -51,6 +54,11 @@ type Client struct {
 
 	// url is the parsed URL from Address
 	url *url.URL
+}
+
+// RTSClient is the entrypoint to the Fastly's Realtime Stats API
+type RTSClient struct {
+	*Client
 }
 
 // DefaultClient instantiates a new Fastly API client. This function requires
@@ -79,6 +87,17 @@ func NewClient(key string) (*Client, error) {
 func NewClientForEndpoint(key string, endpoint string) (*Client, error) {
 	client := &Client{apiKey: key, Address: endpoint}
 	return client.init()
+}
+
+// NewRealtimeStatsClient instantiates a new Fastly API client for the realtime stats.
+// This function requires the environment variable `FASTLY_API_KEY` is set and contains
+// a valid API key to authenticate with Fastly.
+func NewRealtimeStatsClient() *RTSClient {
+	c, err := NewClientForEndpoint(os.Getenv(APIKeyEnvVar), RealtimeStatsEndpoint)
+	if err != nil {
+		panic(err)
+	}
+	return &RTSClient{Client: c}
 }
 
 func (c *Client) init() (*Client, error) {
