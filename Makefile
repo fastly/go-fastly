@@ -15,7 +15,7 @@ GOTAGS ?=
 GOMAXPROCS ?= 4
 
 PROJECT := $(CURRENT_DIR:$(GOPATH)/src/%=%)
-OWNER := $(dir $(PROJECT))
+OWNER := $(notdir $(patsubst %/,%,$(dir $(PROJECT))))
 NAME := $(notdir $(PROJECT))
 EXTERNAL_TOOLS = \
 	github.com/golang/dep/cmd/dep
