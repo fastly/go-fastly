@@ -56,6 +56,11 @@ type Client struct {
 	url *url.URL
 }
 
+// RTSClient is the entrypoint to the Fastly's Realtime Stats API
+type RTSClient struct {
+	*Client
+}
+
 // DefaultClient instantiates a new Fastly API client. This function requires
 // the environment variable `FASTLY_API_KEY` is set and contains a valid API key
 // to authenticate with Fastly.
@@ -84,15 +89,15 @@ func NewClientForEndpoint(key string, endpoint string) (*Client, error) {
 	return client.init()
 }
 
-// RealtimeStatsClient instantiates a new Fastly API client for the realtime stats.
+// NewRealtimeStatsClient instantiates a new Fastly API client for the realtime stats.
 // This function requires the environment variable `FASTLY_API_KEY` is set and contains
 // a valid API key to authenticate with Fastly.
-func RealtimeStatsClient() *Client {
+func NewRealtimeStatsClient() *RTSClient {
 	c, err := NewClientForEndpoint(os.Getenv(APIKeyEnvVar), RealtimeStatsEndpoint)
 	if err != nil {
 		panic(err)
 	}
-	return c
+	return &RTSClient{Client: c}
 }
 
 func (c *Client) init() (*Client, error) {

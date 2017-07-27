@@ -4,8 +4,10 @@ import "fmt"
 
 // RealtimeStats is a response from Fastly's real-time analytics endpoint
 type RealtimeStatsResponse struct {
-	Timestamp uint64          `mapstructure:"Timestamp"`
-	Data      []*RealtimeData `mapstructure:"Data"`
+	Timestamp      uint64          `mapstructure:"Timestamp"`
+	Data           []*RealtimeData `mapstructure:"Data"`
+	Error          string          `mapstructure:"Error"`
+	AggregateDelay uint32          `mapstructure:"AggregateDelay"`
 }
 
 // RealtimeData represents combined stats for all Fastly's POPs and aggregate of them.
@@ -20,15 +22,14 @@ type RealtimeData struct {
 type GetRealtimeStatsInput struct {
 	Service   string
 	Timestamp uint64
-	Limit     uint64
+	Limit     uint32
 }
 
 // GetRealtimeStats returns realtime stats for a service based on the GetRealtimeStatsInput
 // parameter. The realtime stats work in a rolling fasion where first request will return
 // a timestamp which should be passed to consequentive call and so on.
 // More details at https://docs.fastly.com/api/analytics
-// Requires a client instantiated with RealtimeStatsClient function
-func (c *Client) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
+func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}

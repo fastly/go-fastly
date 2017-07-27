@@ -19,7 +19,7 @@ func TestStatsClient_GetRealtimeStats(t *testing.T) {
 
 	// Get
 	var s *RealtimeStatsResponse
-	recordRealtimeStats(t, "realtime_stats/get", func(c *Client) {
+	recordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
 		s, err = c.GetRealtimeStats(&GetRealtimeStatsInput{
 			Service:   testServiceID,
 			Timestamp: 0,
