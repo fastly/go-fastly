@@ -11,7 +11,8 @@ Go Fastly is a Golang API client for interacting with most facets of the
 
 Installation
 ------------
-This is a client library, so there is nothing to install.
+This is a client library, so there is nothing to install. You must be running Go
+1.8 or higher.
 
 Usage
 -----
