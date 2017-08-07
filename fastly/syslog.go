@@ -13,12 +13,16 @@ type Syslog struct {
 
 	Name              string     `mapstructure:"name"`
 	Address           string     `mapstructure:"address"`
+	Hostname          string     `mapstructure:"hostname"`
 	Port              uint       `mapstructure:"port"`
 	UseTLS            bool       `mapstructure:"use_tls"`
+	IPV4              string     `mapstructure:"ipv4"`
 	TLSCACert         string     `mapstructure:"tls_ca_cert"`
+	TLSHostname       string     `mapstructure:"tls_hostname"`
 	Token             string     `mapstructure:"token"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
+	MessageType       string     `mapstructure:"message_type"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
@@ -77,12 +81,16 @@ type CreateSyslogInput struct {
 
 	Name              string       `form:"name,omitempty"`
 	Address           string       `form:"address,omitempty"`
+	Hostname          string       `form:"hostname,omitempty"`
 	Port              uint         `form:"port,omitempty"`
 	UseTLS            *Compatibool `form:"use_tls,omitempty"`
+	IPV4              string       `form:"ipv4,omitempty"`
 	TLSCACert         string       `form:"tls_ca_cert,omitempty"`
+	TLSHostname       string       `form:"tls_hostname,omitempty"`
 	Token             string       `form:"token,omitempty"`
 	Format            string       `form:"format,omitempty"`
 	FormatVersion     uint         `form:"format_version,omitempty"`
+	MessageType       string       `form:"message_type,omitempty"`
 	ResponseCondition string       `form:"response_condition,omitempty"`
 }
 
@@ -159,12 +167,16 @@ type UpdateSyslogInput struct {
 
 	NewName           string       `form:"name,omitempty"`
 	Address           string       `form:"address,omitempty"`
+	Hostname          string       `form:"hostname,omitempty"`
 	Port              uint         `form:"port,omitempty"`
 	UseTLS            *Compatibool `form:"use_tls,omitempty"`
+	IPV4              string       `form:"ipv4,omitempty"`
 	TLSCACert         string       `form:"tls_ca_cert,omitempty"`
+	TLSHostname       string       `form:"tls_hostname,omitempty"`
 	Token             string       `form:"token,omitempty"`
 	Format            string       `form:"format,omitempty"`
 	FormatVersion     uint         `form:"format_version,omitempty"`
+	MessageType       string       `form:"message_type,omitempty"`
 	ResponseCondition string       `form:"response_condition,omitempty"`
 }
 

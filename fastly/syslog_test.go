@@ -40,12 +40,15 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Version:       tv.Number,
 			Name:          "test-syslog",
 			Address:       "example.com",
+			Hostname:      "example.com",
 			Port:          1234,
 			UseTLS:        CBool(true),
 			TLSCACert:     cert,
+			TLSHostname:   "example.com",
 			Token:         "abcd1234",
 			Format:        "format",
 			FormatVersion: 2,
+			MessageType:   "classic",
 		})
 	})
 	if err != nil {
@@ -75,6 +78,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.Address != "example.com" {
 		t.Errorf("bad address: %q", s.Address)
 	}
+	if s.Hostname != "example.com" {
+		t.Errorf("bad hostname: %q", s.Hostname)
+	}
 	if s.Port != 1234 {
 		t.Errorf("bad port: %q", s.Port)
 	}
@@ -84,6 +90,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.TLSCACert != cert {
 		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
 	}
+	if s.TLSHostname != "example.com" {
+		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	}
 	if s.Token != "abcd1234" {
 		t.Errorf("bad token: %q", s.Token)
 	}
@@ -92,6 +101,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.FormatVersion != 2 {
 		t.Errorf("bad format_version: %d", s.FormatVersion)
+	}
+	if s.MessageType != "classic" {
+		t.Errorf("bad message_type: %s", s.MessageType)
 	}
 
 	// List
@@ -127,6 +139,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.Address != ns.Address {
 		t.Errorf("bad address: %q", s.Address)
 	}
+	if s.Hostname != ns.Hostname {
+		t.Errorf("bad hostname: %q", s.Hostname)
+	}
 	if s.Port != ns.Port {
 		t.Errorf("bad port: %q", s.Port)
 	}
@@ -136,6 +151,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.TLSCACert != ns.TLSCACert {
 		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
 	}
+	if s.TLSHostname != ns.TLSHostname {
+		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	}
 	if s.Token != ns.Token {
 		t.Errorf("bad token: %q", s.Token)
 	}
@@ -144,6 +162,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.FormatVersion != ns.FormatVersion {
 		t.Errorf("bad format_version: %q", s.FormatVersion)
+	}
+	if s.MessageType != ns.MessageType {
+		t.Errorf("bad message_type: %q", s.MessageType)
 	}
 
 	// Update
