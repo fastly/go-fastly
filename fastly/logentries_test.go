@@ -60,6 +60,9 @@ func TestClient_Logentries(t *testing.T) {
 	if le.Format != "format" {
 		t.Errorf("bad format: %q", le.Format)
 	}
+	if le.FormatVersion != 1 {
+		t.Errorf("bad format_version: %q", le.FormatVersion)
+	}
 
 	// List
 	var les []*Logentries
@@ -103,15 +106,19 @@ func TestClient_Logentries(t *testing.T) {
 	if le.Format != nle.Format {
 		t.Errorf("bad format: %q", le.Format)
 	}
+	if le.FormatVersion != nle.FormatVersion {
+		t.Errorf("bad format_version: %q", le.FormatVersion)
+	}
 
 	// Update
 	var ule *Logentries
 	record(t, "logentries/update", func(c *Client) {
 		ule, err = c.UpdateLogentries(&UpdateLogentriesInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-logentries",
-			NewName: "new-test-logentries",
+			Service:       testServiceID,
+			Version:       tv.Number,
+			Name:          "test-logentries",
+			NewName:       "new-test-logentries",
+			FormatVersion: 2,
 		})
 	})
 	if err != nil {
@@ -119,6 +126,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if ule.Name != "new-test-logentries" {
 		t.Errorf("bad name: %q", ule.Name)
+	}
+	if ule.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", ule.FormatVersion)
 	}
 
 	// Delete
