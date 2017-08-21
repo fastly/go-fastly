@@ -56,10 +56,10 @@ type FirewallObjects struct {
 // GetFirewallObjectsInput is the input needed to list firewall objects.
 type GetFirewallObjectsInput struct {
 	// Service is the ID of the service (required).
-	Service string
+	Service string `form:"field,omitempty"`
 
 	// Version is the specific configuration version (required).
-	Version int
+	Version int `form:"field,omitempty"`
 }
 
 // GetFirewallObjects lists all firewall objects for a service and version.
@@ -89,13 +89,13 @@ func (c *Client) GetFirewallObjects(i *GetFirewallObjectsInput) (*FirewallObject
 // GetFirewallObjectInput is the input needed to get a firewall object.
 type GetFirewallObjectInput struct {
 	// Service is the ID of the service (required).
-	Service string
+	Service string `form:"field,omitempty"`
 
 	// Version is the specific configuration version (required).
-	Version int
+	Version int `form:"field,omitempty"`
 
 	// WafID is the sepcific WAF ID for the firewall object you want to get (required).
-	WafID string
+	WafID string `form:"field,omitempty"`
 }
 
 // FirewallObject represents a firewall object returned from Fastly's API.
