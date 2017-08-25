@@ -37,7 +37,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/685/logging/gcs
     method: POST
   response:
-    body: '{"bucket_name":"bucket","format":"format","gzip_level":"9","name":"test-gcs","path":"/path","period":"12","secret_key":"key","timestamp_format":"%Y","user":"user","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"685","placement":null,"format_version":"2","response_condition":"","public_key":null,"updated_at":"2017-07-20T01:15:09+00:00","message_type":"classic","deleted_at":null,"created_at":"2017-07-20T01:15:09+00:00"}'
+    body: '{"bucket_name":"bucket","format":"format","gzip_level":"9","name":"test-gcs","path":"/path","period":"12","secret_key":"key","timestamp_format":"%Y","user":"user","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"685","placement":null,"format_version":"2","response_condition":"","public_key":null,"updated_at":"2017-07-20T01:15:09+00:00","message_type":"blank","deleted_at":null,"created_at":"2017-07-20T01:15:09+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
