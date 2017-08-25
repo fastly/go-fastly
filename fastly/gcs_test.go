@@ -25,6 +25,7 @@ func TestClient_GCSs(t *testing.T) {
 			Period:          12,
 			GzipLevel:       9,
 			Format:          "format",
+			MessageType:     "blank",
 			TimestampFormat: "%Y",
 		})
 	})
@@ -75,6 +76,9 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if gcs.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", gcs.TimestampFormat)
+	}
+	if gcs.MessageType != "blank" {
+		t.Errorf("bad message_type: %q", gcs.MessageType)
 	}
 
 	// List
@@ -130,6 +134,9 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if gcs.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", gcs.TimestampFormat)
+	}
+	if gcs.MessageType != "blank" {
+		t.Errorf("bad message_type: %q", gcs.MessageType)
 	}
 
 	// Update

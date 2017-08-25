@@ -18,6 +18,7 @@ type GCS struct {
 	Period            uint   `mapstructure:"period"`
 	GzipLevel         uint8  `mapstructure:"gzip_level"`
 	Format            string `mapstructure:"format"`
+	MessageType       string `mapstructure:"message_type"`
 	ResponseCondition string `mapstructure:"response_condition"`
 	TimestampFormat   string `mapstructure:"timestamp_format"`
 }
@@ -80,6 +81,7 @@ type CreateGCSInput struct {
 	Period            uint   `form:"period,omitempty"`
 	GzipLevel         uint8  `form:"gzip_level,omitempty"`
 	Format            string `form:"format,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
 }
