@@ -1,0 +1,44 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs
+    method: GET
+  response:
+    body: '{"data":[{"id":"4fuxZ7bpag8laOjYwxlqZM","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object","version":786}}],"links":{"last":"http://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs?page[number]=1&page[size]=100","first":"http://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs?page[number]=1&page[size]=100"}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Content-Length:
+      - "406"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Tue, 05 Sep 2017 17:56:53 GMT
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17730-DCA
+      X-Timer:
+      - S1504634214.837456,VS0,VE111
+    status: 200 OK
+    code: 200
