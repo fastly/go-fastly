@@ -1,69 +1,44 @@
 package fastly
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"time"
 
-// SetData represents information about a configuration_set.
-type SetData struct {
-	Type string `mapstructure:"type"`
-	ID   string `mapstructure:"id"`
+	"github.com/google/jsonapi"
+)
+
+// WAFConfigurationSet represents information about a configuration_set.
+type WAFConfigurationSet struct {
+	ID string `jsonapi:"primary,configuration_set"`
 }
 
-// FirewallConfigurationSet is the data inside of a configuration_set relationship.
-type FirewallConfigurationSet struct {
-	Data SetData `mapstructure:"data"`
+// WAF is the information about a firewall object.
+type WAF struct {
+	ID                string     `jsonapi:"primary,waf"`
+	Version           int        `jsonapi:"attr,version"`
+	PrefetchCondition string     `jsonapi:"attr,prefetch_condition"`
+	Response          string     `jsonapi:"attr,response"`
+	LastPush          *time.Time `jsonapi:"attr,last_push"`
+
+	ConfigurationSet *WAFConfigurationSet `jsonapi:"relation,configuration_set"`
 }
 
-// FirewallRelationships holds the relationships of a firewall object (currently just `configuration_set`).
-type FirewallRelationships struct {
-	ConfigurationSet FirewallConfigurationSet `mapstructure:"configuration_set"`
-}
+// wafType is used for reflection because JSONAPI wants to know what it's
+// decoding into.
+var wafType = reflect.TypeOf(new(WAF))
 
-// FirewallAttributes holds the attributes of a firewall object.
-type FirewallAttributes struct {
-	PrefetchCondition string `mapstructure:"prefetch_condition"`
-	Response          string `mapstructure:"response"`
-	LastPush          string `mapstructure:"last_push"`
-	Version           string `mapstructure:"version"`
-}
-
-// FirewallData is the information about a firewall object.
-type FirewallData struct {
-	ID            string                `mapstructure:"id"`
-	Type          string                `mapstructure:"type"`
-	Attributes    FirewallAttributes    `mapstructure:"attributes"`
-	Relationships FirewallRelationships `mapstructure:"relationships"`
-}
-
-// FirewallLinks specifies first, last, and previous (if applicable) page links.
-type FirewallLinks struct {
-	Last     string `mapstructure:"last"`
-	First    string `mapstructure:"first"`
-	Previous string `mapstructure:"previous"`
-}
-
-// FirewallObjects represents a response from Fastly's API for listing firewall objects.
-type FirewallObjects struct {
-	// Data lists all of the firewall objects.
-	Data []FirewallData `mapstructure:"data"`
-
-	// Included lists relationships.
-	Included []FirewallData `mapstructure:"included"`
-
-	// Lists links in relation to your current page.
-	Links FirewallLinks `mapstructure:"links"`
-}
-
-// GetFirewallObjectsInput is the input needed to list firewall objects.
-type GetFirewallObjectsInput struct {
+// ListWAFsInput is used as input to the ListWAFs function.
+type ListWAFsInput struct {
 	// Service is the ID of the service (required).
-	Service string `form:"field,omitempty"`
+	Service string
 
 	// Version is the specific configuration version (required).
-	Version int `form:"field,omitempty"`
+	Version int
 }
 
-// GetFirewallObjects lists all firewall objects for a service and version.
-func (c *Client) GetFirewallObjects(i *GetFirewallObjectsInput) (*FirewallObjects, error) {
+// ListWAFs returns the list of wafs for the configuration version.
+func (c *Client) ListWAFs(i *ListWAFsInput) ([]*WAF, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
@@ -78,34 +53,36 @@ func (c *Client) GetFirewallObjects(i *GetFirewallObjectsInput) (*FirewallObject
 		return nil, err
 	}
 
-	var fo *FirewallObjects
-	if err := decodeJSON(&fo, resp.Body); err != nil {
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, wafType)
+	if err != nil {
 		return nil, err
 	}
 
-	return fo, nil
+	wafs := make([]*WAF, len(data))
+	for i := range data {
+		typed, ok := data[i].(*WAF)
+		if !ok {
+			return nil, fmt.Errorf("got back a non-WAF response")
+		}
+		wafs[i] = typed
+	}
+	return wafs, nil
 }
 
-// GetFirewallObjectInput is the input needed to get a firewall object.
-type GetFirewallObjectInput struct {
-	// Service is the ID of the service (required).
-	Service string `form:"field,omitempty"`
+// CreateWAFInput is used as input to the CreateWAF function.
+type CreateWAFInput struct {
+	// Service is the ID of the service. Version is the specific configuration
+	// version. Both fields are required.
+	Service string
+	Version int
 
-	// Version is the specific configuration version (required).
-	Version int `form:"field,omitempty"`
-
-	// WafID is the sepcific WAF ID for the firewall object you want to get (required).
-	WafID string `form:"field,omitempty"`
+	ID                string `jsonapi:"primary,waf"`
+	PrefetchCondition string `jsonapi:"attr,prefetch_condition,omitempty"`
+	Response          string `jsonapi:"attr,response,omitempty"`
 }
 
-// FirewallObject represents a firewall object returned from Fastly's API.
-type FirewallObject struct {
-	// Data contains the requested firewall object.
-	Data FirewallData `mapstructure:"data"`
-}
-
-// GetFirewallObject returns a specific firewall object.
-func (c *Client) GetFirewallObject(i *GetFirewallObjectInput) (*FirewallObject, error) {
+// CreateWAF creates a new Fastly WAF.
+func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
@@ -114,20 +91,120 @@ func (c *Client) GetFirewallObject(i *GetFirewallObjectInput) (*FirewallObject, 
 		return nil, ErrMissingVersion
 	}
 
-	if i.WafID == "" {
-		return nil, ErrMissingWafID
+	path := fmt.Sprintf("/service/%s/version/%d/wafs", i.Service, i.Version)
+	resp, err := c.PostJSONAPI(path, i, nil)
+	if err != nil {
+		return nil, err
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/wafs/%s", i.Service, i.Version, i.WafID)
+	var waf WAF
+	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
+		return nil, err
+	}
+	return &waf, nil
+}
+
+// GetWAFInput is used as input to the GetWAF function.
+type GetWAFInput struct {
+	// Service is the ID of the service. Version is the specific configuration
+	// version. Both fields are required.
+	Service string
+	Version int
+
+	// ID is the id of the WAF to get.
+	ID string
+}
+
+func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.Version == 0 {
+		return nil, ErrMissingVersion
+	}
+
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/version/%d/wafs/%s", i.Service, i.Version, i.ID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var fo *FirewallObject
-	if err := decodeJSON(&fo, resp.Body); err != nil {
+	var waf WAF
+	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
+		return nil, err
+	}
+	return &waf, nil
+}
+
+// UpdateWAFInput is used as input to the UpdateWAF function.
+type UpdateWAFInput struct {
+	// Service is the ID of the service. Version is the specific configuration
+	// version. Both fields are required.
+	Service string
+	Version int
+
+	ID                string `jsonapi:"primary,waf"`
+	PrefetchCondition string `jsonapi:"attr,prefetch_condition,omitempty"`
+	Response          string `jsonapi:"attr,response,omitempty"`
+}
+
+// UpdateWAF updates a specific WAF.
+func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.Version == 0 {
+		return nil, ErrMissingVersion
+	}
+
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/version/%d/wafs/%s", i.Service, i.Version, i.ID)
+	resp, err := c.PatchJSONAPI(path, i, nil)
+	if err != nil {
 		return nil, err
 	}
 
-	return fo, nil
+	var waf WAF
+	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
+		return nil, err
+	}
+	return &waf, nil
+}
+
+// DeleteWAFInput is used as input to the GetWAF function.
+type DeleteWAFInput struct {
+	// Service is the ID of the service. Version is the specific configuration
+	// version. Both fields are required.
+	Service string
+	Version int
+
+	// ID is the id of the WAF to delete.
+	ID string
+}
+
+func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
+	if i.Service == "" {
+		return ErrMissingService
+	}
+
+	if i.Version == 0 {
+		return ErrMissingVersion
+	}
+
+	if i.ID == "" {
+		return ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/version/%d/wafs/%s", i.Service, i.Version, i.ID)
+	_, err := c.Delete(path, nil)
+	return err
 }
