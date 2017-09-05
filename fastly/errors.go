@@ -5,6 +5,8 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+
+	"github.com/google/jsonapi"
 )
 
 // ErrMissingService is an error that is returned when an input struct requires
@@ -77,7 +79,7 @@ var ErrMissingIP = errors.New("Missing requried field 'IP'")
 
 // ErrMissingWafID is an error that is returned was an input struct
 // requires a "WafID" key, but one was not set
-var ErrMissingWafID = errors.New("Missing required field 'WafID'")
+var ErrMissingWAFID = errors.New("Missing required field 'WAFID'")
 
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
@@ -88,7 +90,23 @@ type HTTPError struct {
 	// StatusCode is the HTTP status code (2xx-5xx).
 	StatusCode int
 
-	// Message and Detail are information returned by the Fastly API.
+	Errors []*ErrorObject `mapstructure:"errors"`
+}
+
+// ErrorObject is a single error.
+type ErrorObject struct {
+	ID     string `mapstructure:"id"`
+	Title  string `mapstructure:"title"`
+	Detail string `mapstructure:"detail"`
+	Status string `mapstructure:"status"`
+	Code   string `mapstructure:"code"`
+
+	Meta *map[string]interface{} `mapstructure:"meta"`
+}
+
+// legacyError represents the older-style errors from Fastly. It is private
+// because it is automatically converted to a jsonapi error.
+type legacyError struct {
 	Message string `mapstructure:"msg"`
 	Detail  string `mapstructure:"detail"`
 }
@@ -96,28 +114,63 @@ type HTTPError struct {
 // NewHTTPError creates a new HTTP error from the given code.
 func NewHTTPError(resp *http.Response) *HTTPError {
 	var e HTTPError
-	if resp.Body != nil {
-		decodeJSON(&e, resp.Body)
-	}
 	e.StatusCode = resp.StatusCode
+
+	if resp.Body == nil {
+		return &e
+	}
+
+	// If this is a jsonapi response, decode it accordingly
+	if resp.Header.Get("Content-Type") == jsonapi.MediaType {
+		if err := decodeJSON(&e, resp.Body); err != nil {
+			panic(err)
+		}
+	} else {
+		var lerr *legacyError
+		decodeJSON(&lerr, resp.Body)
+		if lerr != nil {
+			e.Errors = append(e.Errors, &ErrorObject{
+				Title:  lerr.Message,
+				Detail: lerr.Detail,
+			})
+		}
+	}
+
 	return &e
 }
 
 // Error implements the error interface and returns the string representing the
 // error text that includes the status code and the corresponding status text.
 func (e *HTTPError) Error() string {
-	var r bytes.Buffer
-	fmt.Fprintf(&r, "%d - %s", e.StatusCode, http.StatusText(e.StatusCode))
+	var b bytes.Buffer
 
-	if e.Message != "" {
-		fmt.Fprintf(&r, "\nMessage: %s", e.Message)
+	fmt.Fprintf(&b, "%d - %s:", e.StatusCode, http.StatusText(e.StatusCode))
+
+	for _, e := range e.Errors {
+		fmt.Fprintf(&b, "\n")
+
+		if e.ID != "" {
+			fmt.Fprintf(&b, "\n    ID:     %s", e.ID)
+		}
+
+		if e.Title != "" {
+			fmt.Fprintf(&b, "\n    Title:  %s", e.Title)
+		}
+
+		if e.Detail != "" {
+			fmt.Fprintf(&b, "\n    Detail: %s", e.Detail)
+		}
+
+		if e.Code != "" {
+			fmt.Fprintf(&b, "\n    Code:   %s", e.Code)
+		}
+
+		if e.Meta != nil {
+			fmt.Fprintf(&b, "\n    Meta:   %v", *e.Meta)
+		}
 	}
 
-	if e.Detail != "" {
-		fmt.Fprintf(&r, "\nDetail: %s", e.Detail)
-	}
-
-	return r.String()
+	return b.String()
 }
 
 // String implements the stringer interface and returns the string representing

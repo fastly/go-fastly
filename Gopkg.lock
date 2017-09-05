@@ -14,6 +14,12 @@
   revision = "87d4990451a858cc210399285be976e63bc3c364"
 
 [[projects]]
+  name = "github.com/google/jsonapi"
+  packages = ["."]
+  revision = "46d3ced0434461be12e555852e2f1a9ed382e139"
+  version = "1.0.0"
+
+[[projects]]
   branch = "master"
   name = "github.com/hashicorp/go-cleanhttp"
   packages = ["."]
@@ -34,6 +40,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "868da49a356a7aab20b6fa8bfe2e3e3f776cefe09a33aef1a896f2ab0a998e39"
+  inputs-digest = "03e647bbda0583bbdd216cfd709d083ee4eaaf54ac9547aa9ba81151a79eebb0"
   solver-name = "gps-cdcl"
   solver-version = 1
