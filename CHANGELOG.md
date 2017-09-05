@@ -1,6 +1,8 @@
 # go-fastly CHANGELOG
 
-## v0.4.2 (Unreleased)
+## v0.4.3 (Uneleased)
+
+## v0.4.2 (September 5, 2017)
 
 - Add support for specifying `message_type` in GCS [GH-52]
 - Add support for WAF [GH-35, GH-55]
