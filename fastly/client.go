@@ -12,6 +12,7 @@ import (
 	"strings"
 
 	"github.com/ajg/form"
+	"github.com/google/jsonapi"
 	"github.com/hashicorp/go-cleanhttp"
 	"github.com/mitchellh/mapstructure"
 )
@@ -124,6 +125,26 @@ func (c *Client) Head(p string, ro *RequestOptions) (*http.Response, error) {
 	return c.Request("HEAD", p, ro)
 }
 
+// Patch issues an HTTP PATCH request.
+func (c *Client) Patch(p string, ro *RequestOptions) (*http.Response, error) {
+	return c.Request("PATCH", p, ro)
+}
+
+// PatchForm issues an HTTP PUT request with the given interface form-encoded.
+func (c *Client) PatchForm(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestForm("PATCH", p, i, ro)
+}
+
+// PatchJSON issues an HTTP PUT request with the given interface json-encoded.
+func (c *Client) PatchJSON(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSON("PATCH", p, i, ro)
+}
+
+// PatchJSONAPI issues an HTTP PUT request with the given interface json-encoded.
+func (c *Client) PatchJSONAPI(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI("PATCH", p, i, ro)
+}
+
 // Post issues an HTTP POST request.
 func (c *Client) Post(p string, ro *RequestOptions) (*http.Response, error) {
 	return c.Request("POST", p, ro)
@@ -134,6 +155,16 @@ func (c *Client) PostForm(p string, i interface{}, ro *RequestOptions) (*http.Re
 	return c.RequestForm("POST", p, i, ro)
 }
 
+// PostJSON issues an HTTP POST request with the given interface json-encoded.
+func (c *Client) PostJSON(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSON("POST", p, i, ro)
+}
+
+// PostJSONAPI issues an HTTP POST request with the given interface json-encoded.
+func (c *Client) PostJSONAPI(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI("POST", p, i, ro)
+}
+
 // Put issues an HTTP PUT request.
 func (c *Client) Put(p string, ro *RequestOptions) (*http.Response, error) {
 	return c.Request("PUT", p, ro)
@@ -142,6 +173,16 @@ func (c *Client) Put(p string, ro *RequestOptions) (*http.Response, error) {
 // PutForm issues an HTTP PUT request with the given interface form-encoded.
 func (c *Client) PutForm(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	return c.RequestForm("PUT", p, i, ro)
+}
+
+// PutJSON issues an HTTP PUT request with the given interface json-encoded.
+func (c *Client) PutJSON(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSON("PUT", p, i, ro)
+}
+
+// PutJSONAPI issues an HTTP PUT request with the given interface json-encoded.
+func (c *Client) PutJSONAPI(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI("PUT", p, i, ro)
 }
 
 // Delete issues an HTTP DELETE request.
@@ -185,6 +226,50 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))
+
+	return c.Request(verb, p, ro)
+}
+
+func (c *Client) RequestJSON(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	if ro == nil {
+		ro = new(RequestOptions)
+	}
+
+	if ro.Headers == nil {
+		ro.Headers = make(map[string]string)
+	}
+	ro.Headers["Content-Type"] = "application/json"
+	ro.Headers["Accept"] = "application/json"
+
+	body, err := json.Marshal(i)
+	if err != nil {
+		return nil, err
+	}
+
+	ro.Body = bytes.NewReader(body)
+	ro.BodyLength = int64(len(body))
+
+	return c.Request(verb, p, ro)
+}
+
+func (c *Client) RequestJSONAPI(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	if ro == nil {
+		ro = new(RequestOptions)
+	}
+
+	if ro.Headers == nil {
+		ro.Headers = make(map[string]string)
+	}
+	ro.Headers["Content-Type"] = jsonapi.MediaType
+	ro.Headers["Accept"] = jsonapi.MediaType
+
+	var buf bytes.Buffer
+	if err := jsonapi.MarshalPayload(&buf, i); err != nil {
+		return nil, err
+	}
+
+	ro.Body = &buf
+	ro.BodyLength = int64(buf.Len())
 
 	return c.Request(verb, p, ro)
 }
