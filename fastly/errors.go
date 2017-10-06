@@ -85,6 +85,10 @@ var ErrMissingWAFID = errors.New("Missing required field 'WAFID'")
 // requires a "OWASPID" key, but one was not set
 var ErrMissingOWASPID = errors.New("Missing required field 'OWASPID'")
 
+// ErrMissingRuleID is an error that is returned was an input struct
+// requires a "RuleID" key, but one was not set
+var ErrMissingRuleID = errors.New("Missing required field 'RuleID'")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
