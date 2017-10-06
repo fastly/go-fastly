@@ -276,7 +276,7 @@ func (c *Client) GetOWASP(i *GetOWASPInput) (*OWASP, error) {
 
 // CreateOWASPInput is used as input to the CreateOWASP function.
 type CreateOWASPInput struct {
-	// Service is the ID of the service. WafID is the ID of the firewall.
+	// Service is the ID of the service. ID is the ID of the firewall.
 	// Both fields are required.
 	Service string
 	ID      string `jsonapi:"primary,owasp"`
@@ -372,4 +372,66 @@ func (c *Client) UpdateOWASP(i *UpdateOWASPInput) (*OWASP, error) {
 		return nil, err
 	}
 	return &owasp, nil
+}
+
+// RuleVCL is the information about a Rule's VCL.
+type RuleVCL struct {
+	ID  string `jsonapi:"primary,rule_vcl"`
+	VCL string `jsonapi:"attr,vcl,omitempty"`
+}
+
+// GetRuleVCLInput is used as input to the GetRuleVCL function.
+type GetRuleVCLInput struct {
+	// RuleID is the ID of the rule and is required.
+	RuleID string
+}
+
+// GetRuleVCL gets the VCL for a Rule.
+func (c *Client) GetRuleVCL(i *GetRuleVCLInput) (*RuleVCL, error) {
+	if i.RuleID == "" {
+		return nil, ErrMissingRuleID
+	}
+
+	path := fmt.Sprintf("/wafs/rules/%s/vcl", i.RuleID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var vcl RuleVCL
+	if err := jsonapi.UnmarshalPayload(resp.Body, &vcl); err != nil {
+		return nil, err
+	}
+	return &vcl, nil
+}
+
+// GetWAFRuleVCLInput is used as input to the GetWAFRuleVCL function.
+type GetWAFRuleVCLInput struct {
+	// ID is the ID of the firewall. RuleID is the ID of the rule.
+	// Both are required.
+	ID     string
+	RuleID string
+}
+
+// GetWAFRuleVCL gets the VCL for a role associated with a firewall WAF.
+func (c *Client) GetWAFRuleVCL(i *GetWAFRuleVCLInput) (*RuleVCL, error) {
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+
+	if i.RuleID == "" {
+		return nil, ErrMissingRuleID
+	}
+
+	path := fmt.Sprintf("/wafs/%s/rules/%s/vcl", i.ID, i.RuleID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var vcl RuleVCL
+	if err := jsonapi.UnmarshalPayload(resp.Body, &vcl); err != nil {
+		return nil, err
+	}
+	return &vcl, nil
 }
