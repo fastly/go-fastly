@@ -435,3 +435,72 @@ func (c *Client) GetWAFRuleVCL(i *GetWAFRuleVCLInput) (*RuleVCL, error) {
 	}
 	return &vcl, nil
 }
+
+// Ruleset is the information about a firewall object's ruleset.
+type Ruleset struct {
+	ID       string `jsonapi:"primary,ruleset"`
+	VCL      string `jsonapi:"attr,vcl,omitempty"`
+	LastPush string `jsonapi:"attr,last_push,omitempty"`
+}
+
+// GetWAFRuleRuleSetsInput is used as input to the GetWAFRuleRuleSets function.
+type GetWAFRuleRuleSetsInput struct {
+	// Service is the ID of the service. ID is the ID of the firewall.
+	// Both fields are required.
+	Service string
+	ID      string
+}
+
+// GetWAFRuleRuleSets gets the VCL for rulesets associated with a firewall WAF.
+func (c *Client) GetWAFRuleRuleSets(i *GetWAFRuleRuleSetsInput) (*Ruleset, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/ruleset", i.Service, i.ID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var ruleset Ruleset
+	if err := jsonapi.UnmarshalPayload(resp.Body, &ruleset); err != nil {
+		return nil, err
+	}
+	return &ruleset, nil
+}
+
+// UpdateWAFRuleRuleSetsInput is used as input to the UpdateWafRuleSets function.
+type UpdateWAFRuleRuleSetsInput struct {
+	// Service is the ID of the service. ID is the ID of the firewall.
+	// Both fields are required.
+	Service string
+	ID      string `jsonapi:"primary,ruleset"`
+}
+
+// UpdateWafRuleSets updates the rulesets for a role associated with a firewall WAF.
+func (c *Client) UpdateWafRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/ruleset", i.Service, i.ID)
+	resp, err := c.PatchJSONAPI(path, i, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var ruleset Ruleset
+	if err := jsonapi.UnmarshalPayload(resp.Body, &ruleset); err != nil {
+		return nil, err
+	}
+	return &ruleset, nil
+}
