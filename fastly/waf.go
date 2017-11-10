@@ -374,20 +374,76 @@ func (c *Client) UpdateOWASP(i *UpdateOWASPInput) (*OWASP, error) {
 	return &owasp, nil
 }
 
+// Rules is the information about an WAF rules.
+type Rule struct {
+	ID       string `jsonapi:"primary,rule"`
+	RuleID   string `jsonapi:"attr,rule_id,omitempty"`
+	Severity int    `jsonapi:"attr,severity,omitempty"`
+	Message  string `jsonapi:"attr,message,omitempty"`
+}
+
+// rulesType is used for reflection because JSONAPI wants to know what it's
+// decoding into.
+var rulesType = reflect.TypeOf(new(Rule))
+
+// GetRules returns the list of wafs for the configuration version.
+func (c *Client) GetRules() ([]*Rule, error) {
+	path := fmt.Sprintf("/wafs/rules")
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, rulesType)
+	if err != nil {
+		return nil, err
+	}
+
+	rules := make([]*Rule, len(data))
+	for i := range data {
+		typed, ok := data[i].(*Rule)
+		if !ok {
+			return nil, fmt.Errorf("got back a non-Rules response")
+		}
+		rules[i] = typed
+	}
+
+	return rules, nil
+}
+
+// GetRuleVCLInput is used as input to the GetRuleVCL function.
+type GetRuleInput struct {
+	// RuleID is the ID of the rule and is required.
+	RuleID string
+}
+
+// GetRule gets a Rule using the Rule ID.
+func (c *Client) GetRule(i *GetRuleInput) (*Rule, error) {
+	if i.RuleID == "" {
+		return nil, ErrMissingRuleID
+	}
+
+	path := fmt.Sprintf("/wafs/rules/%s", i.RuleID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var rule Rule
+	if err := jsonapi.UnmarshalPayload(resp.Body, &rule); err != nil {
+		return nil, err
+	}
+	return &rule, nil
+}
+
 // RuleVCL is the information about a Rule's VCL.
 type RuleVCL struct {
 	ID  string `jsonapi:"primary,rule_vcl"`
 	VCL string `jsonapi:"attr,vcl,omitempty"`
 }
 
-// GetRuleVCLInput is used as input to the GetRuleVCL function.
-type GetRuleVCLInput struct {
-	// RuleID is the ID of the rule and is required.
-	RuleID string
-}
-
 // GetRuleVCL gets the VCL for a Rule.
-func (c *Client) GetRuleVCL(i *GetRuleVCLInput) (*RuleVCL, error) {
+func (c *Client) GetRuleVCL(i *GetRuleInput) (*RuleVCL, error) {
 	if i.RuleID == "" {
 		return nil, ErrMissingRuleID
 	}
