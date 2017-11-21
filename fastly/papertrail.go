@@ -79,6 +79,7 @@ type CreatePapertrailInput struct {
 	CreatedAt         *time.Time `form:"created_at,omitempty"`
 	UpdatedAt         *time.Time `form:"updated_at,omitempty"`
 	DeletedAt         *time.Time `form:"deleted_at,omitempty"`
+	Placement         string     `form:"placement,omitempty"`
 }
 
 // CreatePapertrail creates a new Fastly papertrail.
