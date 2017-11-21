@@ -92,6 +92,7 @@ type CreateSyslogInput struct {
 	FormatVersion     uint         `form:"format_version,omitempty"`
 	MessageType       string       `form:"message_type,omitempty"`
 	ResponseCondition string       `form:"response_condition,omitempty"`
+	Placement         string       `form:"placement,omitempty"`
 }
 
 // CreateSyslog creates a new Fastly syslog.
