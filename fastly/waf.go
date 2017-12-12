@@ -244,7 +244,7 @@ type OWASP struct {
 
 // GetOWASPInput is used as input to the GetOWASP function.
 type GetOWASPInput struct {
-	// Service is the ID of the service. WafID is the ID of the firewall.
+	// Service is the ID of the service. ID is the ID of the firewall.
 	// Both fields are required.
 	Service string
 	ID      string
@@ -307,9 +307,9 @@ func (c *Client) CreateOWASP(i *CreateOWASPInput) (*OWASP, error) {
 	return &owasp, nil
 }
 
-// CreateOWASPInput is used as input to the CreateOWASP function.
+// UpdateOWASPInput is used as input to the CreateOWASP function.
 type UpdateOWASPInput struct {
-	// Service is the ID of the service. WafID is the ID of the firewall.
+	// Service is the ID of the service. ID is the ID of the firewall.
 	// Both fields are required.
 	Service string
 	ID      string
@@ -374,7 +374,7 @@ func (c *Client) UpdateOWASP(i *UpdateOWASPInput) (*OWASP, error) {
 	return &owasp, nil
 }
 
-// Rules is the information about an WAF rules.
+// Rule is the information about a WAF rule.
 type Rule struct {
 	ID       string `jsonapi:"primary,rule"`
 	RuleID   string `jsonapi:"attr,rule_id,omitempty"`
@@ -530,7 +530,7 @@ func (c *Client) GetWAFRuleRuleSets(i *GetWAFRuleRuleSetsInput) (*Ruleset, error
 	return &ruleset, nil
 }
 
-// UpdateWAFRuleRuleSetsInput is used as input to the UpdateWafRuleSets function.
+// UpdateWAFRuleRuleSetsInput is used as input to the UpdateWAFRuleSets function.
 type UpdateWAFRuleRuleSetsInput struct {
 	// Service is the ID of the service. ID is the ID of the firewall.
 	// Both fields are required.
@@ -538,8 +538,8 @@ type UpdateWAFRuleRuleSetsInput struct {
 	ID      string `jsonapi:"primary,ruleset"`
 }
 
-// UpdateWafRuleSets updates the rulesets for a role associated with a firewall WAF.
-func (c *Client) UpdateWafRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, error) {
+// UpdateWAFRuleSets updates the rulesets for a role associated with a firewall WAF.
+func (c *Client) UpdateWAFRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
