@@ -2,6 +2,7 @@
 
 ## v0.4.3 (Unreleased)
 
+- WAF methods added for fetching status of rules
 - Rename `UpdateWafRuleSets` function to `UpdateWAFRuleSets` to match other names
 
 ## v0.4.2 (September 5, 2017)

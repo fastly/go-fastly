@@ -3,6 +3,8 @@ package fastly
 import (
 	"fmt"
 	"reflect"
+	"strconv"
+	"strings"
 
 	"github.com/google/jsonapi"
 )
@@ -559,4 +561,166 @@ func (c *Client) UpdateWAFRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, err
 		return nil, err
 	}
 	return &ruleset, nil
+}
+
+// GetWAFRuleStatusesInput specifies the parameters for the GetWAFRuleStatuses call
+type GetWAFRuleStatusesInput struct {
+	Service string
+	WAF     string
+	Filters GetWAFRuleStatusesFilters
+}
+
+// receivedWAFRuleStatus stores the information about a rule received from Fastly
+type receivedWAFRuleStatus struct {
+	id     string                  `jsonapi:"primary,rule_status"`
+	rule   *ruleStatusRuleRelation `jsonapi:"relation,rule"`
+	waf    *ruleStatusWAFRelation  `jsonapi:"relation,waf"`
+	status string                  `jsonapi:"attr,status"`
+}
+
+// ruleStatusRuleRelation is the information about a rule stored inside of
+// its status, as sent by Fastly
+type ruleStatusRuleRelation struct {
+	id int `jsonapi:"primary,rule"` // NOTE: Rule ID is int, all others are strings
+}
+
+// ruleStatusWAFRelation is the information received within a rule status
+// about the WAF in which the rule exists
+type ruleStatusWAFRelation struct {
+	id string `jsonapi:"primary,waf"`
+}
+
+// WAFRuleStatus is the convenience type provided to gofastly users that
+// flattens the structure of a rule status received from the Fastly API
+type WAFRuleStatus struct {
+	RuleID   int
+	WAFID    string
+	StatusID string
+	Status   string
+}
+
+// simplify converts a rule status object from fastly into a more logical
+// structure for use elsewhere
+func (received receivedWAFRuleStatus) simplify() WAFRuleStatus {
+	return WAFRuleStatus{
+		RuleID:   received.rule.id,
+		WAFID:    received.waf.id,
+		StatusID: received.id,
+		Status:   received.status,
+	}
+}
+
+// GetWAFRuleStatusesFilters provides a set of parameters for filtering the
+// results of the call to get the rules associated with a WAF.
+type GetWAFRuleStatusesFilters struct {
+	Status     string
+	Accuracy   int
+	Maturity   int
+	Message    string
+	Revision   int
+	RuleID     string
+	TagID      int    // filter by single tag ID
+	TagName    string // filter by single tag name
+	Version    string
+	Tags       []int // return all rules with any of the specified tag IDs
+	MaxResults int   // max number of returned results
+	Page       int   // which page of results to return
+}
+
+// formatFilters converts user input into query parameters for filtering
+// Fastly results for rules in a WAF.
+func (i *GetWAFRuleStatusesInput) formatFilters() map[string]string {
+	input := i.Filters
+	result := map[string]string{}
+	pairings := map[string]interface{}{
+		"filter[status]":           input.Status,
+		"filter[rule][accuracy]":   input.Accuracy,
+		"filter[rule][maturity]":   input.Maturity,
+		"filter[rule][message]":    input.Message,
+		"filter[rule][revision]":   input.Revision,
+		"filter[rule][rule_id]":    input.RuleID,
+		"filter[rule][tags]":       input.TagID,
+		"filter[rule][tags][name]": input.TagName,
+		"filter[rule][version]":    input.Version,
+		"include":                  input.Tags,
+		"page[size]":               input.MaxResults,
+		"page[number]":             input.Page, // starts at 1, not 0
+	}
+	// NOTE: This setup means we will not be able to send the zero value
+	// of any of these filters. It doesn't appear we would need to at present.
+	for key, value := range pairings {
+		switch t := reflect.TypeOf(value).String(); t {
+		case "string":
+			if value != "" {
+				result[key] = value.(string)
+			}
+		case "int":
+			if value != 0 {
+				result[key] = strconv.Itoa(value.(int))
+			}
+		case "[]int":
+			// convert ints to strings
+			toStrings := []string{}
+			values := value.([]int)
+			for _, i := range values {
+				toStrings = append(toStrings, strconv.Itoa(i))
+			}
+			// concat strings
+			if len(values) > 0 {
+				result[key] = strings.Join(toStrings, ",")
+			}
+		}
+	}
+	return result
+}
+
+// PaginationInfo stores links to searches related to the current one, showing
+// any information about additional results being stored on another page
+type PaginationInfo struct {
+	First string
+	Last  string
+	Next  string
+}
+
+// GetWAFRuleStatusesResponse is the data returned to the user from a GetWAFRuleStatus call
+type GetWAFRuleStatusesResponse struct {
+	Rules []WAFRuleStatus
+	Links PaginationInfo
+}
+
+// GetWAFRuleStatuses fetches the status of a subset of rules associated with a WAF.
+func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatusesResponse, error) {
+	var statusResponse GetWAFRuleStatusesResponse
+	if i.Service == "" {
+		return statusResponse, ErrMissingService
+	}
+	if i.WAF == "" {
+		return statusResponse, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", i.Service, i.WAF)
+	filters := &RequestOptions{
+		Params: i.formatFilters(),
+	}
+	resp, err := c.Get(path, filters)
+	if err != nil {
+		return statusResponse, err
+	}
+
+	var statusType = reflect.TypeOf(new(receivedWAFRuleStatus))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, statusType)
+	if err != nil {
+		return statusResponse, err
+	}
+
+	statusResponse.Rules = make([]WAFRuleStatus, len(data))
+	for i := range data {
+		typed, ok := data[i].(*receivedWAFRuleStatus)
+		if !ok {
+			return statusResponse, fmt.Errorf("got back response of unexpected type")
+		}
+		statusResponse.Rules[i] = typed.simplify()
+	}
+
+	return statusResponse, err
 }
