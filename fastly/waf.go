@@ -1,7 +1,11 @@
 package fastly
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io"
+	"io/ioutil"
 	"reflect"
 	"strconv"
 	"strings"
@@ -674,53 +678,96 @@ func (i *GetWAFRuleStatusesInput) formatFilters() map[string]string {
 	return result
 }
 
-// PaginationInfo stores links to searches related to the current one, showing
-// any information about additional results being stored on another page
-type PaginationInfo struct {
-	First string
-	Last  string
-	Next  string
-}
-
-// GetWAFRuleStatusesResponse is the data returned to the user from a GetWAFRuleStatus call
-type GetWAFRuleStatusesResponse struct {
-	Rules []WAFRuleStatus
-	Links PaginationInfo
-}
-
 // GetWAFRuleStatuses fetches the status of a subset of rules associated with a WAF.
 func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatusesResponse, error) {
-	var statusResponse GetWAFRuleStatusesResponse
+	statusResponse := GetWAFRuleStatusesResponse{
+		Rules: []WAFRuleStatus{},
+	}
 	if i.Service == "" {
 		return statusResponse, ErrMissingService
 	}
 	if i.WAF == "" {
 		return statusResponse, ErrMissingWAFID
 	}
-
-	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", i.Service, i.WAF)
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 	}
+	err := c.fetchWAFRuleStatusesPage(&statusResponse, fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", i.Service, i.WAF), filters)
+	// NOTE: It's possible for statusResponse to be partially completed before an error
+	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
+	// an error.
+	return statusResponse, err
+}
+
+// fetchWAFRuleStatusesPage recursively calls the fastly rules status endpoint until there
+// are no more results to request.
+func (c *Client) fetchWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse, path string, filters *RequestOptions) error {
 	resp, err := c.Get(path, filters)
 	if err != nil {
-		return statusResponse, err
+		return err
 	}
 
-	var statusType = reflect.TypeOf(new(receivedWAFRuleStatus))
-	data, err := jsonapi.UnmarshalManyPayload(resp.Body, statusType)
+	// before we pull the status info out of the response body, fetch
+	// pagination info from it:
+	pages, body, err := getPages(resp.Body)
 	if err != nil {
-		return statusResponse, err
+		return err
 	}
 
-	statusResponse.Rules = make([]WAFRuleStatus, len(data))
+	// then grab all the rule status objects out of the response:
+	var statusType = reflect.TypeOf(new(receivedWAFRuleStatus))
+	data, err := jsonapi.UnmarshalManyPayload(body, statusType)
+	if err != nil {
+		return err
+	}
+
 	for i := range data {
 		typed, ok := data[i].(*receivedWAFRuleStatus)
 		if !ok {
-			return statusResponse, fmt.Errorf("got back response of unexpected type")
+			return fmt.Errorf("got back response of unexpected type")
 		}
-		statusResponse.Rules[i] = typed.simplify()
+		answer.Rules = append(answer.Rules, typed.simplify())
+	}
+	if pages.Next != "" {
+		c.fetchWAFRuleStatusesPage(answer, pages.Next, filters) // TODO: Does the "next" link include the filters already?
+	}
+	return nil
+}
+
+// linksResponse is used to pull the "Links" pagination fields from
+// a call to Fastly; these are excluded from the results of the jsonapi
+// call to `UnmarshalManyPayload()`, so we have to fetch them separately.
+type linksResponse struct {
+	Links paginationInfo `json:"links"`
+}
+
+// paginationInfo stores links to searches related to the current one, showing
+// any information about additional results being stored on another page
+type paginationInfo struct {
+	First string `json:"first,omitempty"`
+	Last  string `json:"last,omitempty"`
+	Next  string `json:"next,omitempty"`
+}
+
+// GetWAFRuleStatusesResponse is the data returned to the user from a GetWAFRuleStatus call
+type GetWAFRuleStatusesResponse struct {
+	Rules []WAFRuleStatus
+	Links paginationInfo
+}
+
+// getPages parses a response to get the pagination data without destroying
+// the reader we receive as "resp.Body"; this essentially copies resp.Body
+// and returns it so we can use it again.
+func getPages(body io.ReadCloser) (paginationInfo, io.Reader, error) {
+	var buf bytes.Buffer
+	tee := io.TeeReader(body, &buf)
+
+	bodyBytes, err := ioutil.ReadAll(tee)
+	if err != nil {
+		return paginationInfo{}, nil, err
 	}
 
-	return statusResponse, err
+	var pages linksResponse
+	json.Unmarshal(bodyBytes, &pages)
+	return pages.Links, bytes.NewReader(buf.Bytes()), nil
 }
