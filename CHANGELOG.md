@@ -2,7 +2,7 @@
 
 ## v0.4.3 (Unreleased)
 
-- WAF methods added for fetching status of rules
+- Add WAF methods for fetching status of rules, both one at a time and in lists
 - Rename `UpdateWafRuleSets` function to `UpdateWAFRuleSets` to match other names
 
 ## v0.4.2 (September 5, 2017)
@@ -18,7 +18,7 @@
 
 FEATURES:
 
-  - Add support for real-time stats [GH-48]
+- Add support for real-time stats [GH-48]
 
 ## v0.3.0 (July 19, 2017)
 
