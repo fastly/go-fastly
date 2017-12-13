@@ -752,7 +752,6 @@ type paginationInfo struct {
 // GetWAFRuleStatusesResponse is the data returned to the user from a GetWAFRuleStatus call
 type GetWAFRuleStatusesResponse struct {
 	Rules []WAFRuleStatus
-	Links paginationInfo
 }
 
 // getPages parses a response to get the pagination data without destroying
@@ -770,4 +769,35 @@ func getPages(body io.ReadCloser) (paginationInfo, io.Reader, error) {
 	var pages linksResponse
 	json.Unmarshal(bodyBytes, &pages)
 	return pages.Links, bytes.NewReader(buf.Bytes()), nil
+}
+
+// GetWAFRuleStatusInput specifies the parameters for the GetWAFRuleStatus call
+type GetWAFRuleStatusInput struct {
+	ID      int
+	Service string
+	WAF     string
+}
+
+// GetWAFRuleStatus fetches the status of a single rule associated with a WAF.
+func (c *Client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (WAFRuleStatus, error) {
+	if i.ID == 0 {
+		return WAFRuleStatus{}, ErrMissingRuleID
+	}
+	if i.Service == "" {
+		return WAFRuleStatus{}, ErrMissingService
+	}
+	if i.WAF == "" {
+		return WAFRuleStatus{}, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rules/%d/rule_status", i.Service, i.WAF, i.ID)
+
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	var status receivedWAFRuleStatus
+	err = jsonapi.UnmarshalPayload(resp.Body, &status)
+	return status.simplify(), err
 }
