@@ -1,6 +1,8 @@
 package fastly
 
 import (
+	"bytes"
+	"io/ioutil"
 	"testing"
 )
 
@@ -322,3 +324,125 @@ func TestClient_GetWAF_validation(t *testing.T) {
 // 		t.Errorf("bad error: %s", err)
 // 	}
 // }
+
+func TestReceivedWAFRuleStatus_simplify(t *testing.T) {
+	tests := []struct {
+		input    receivedWAFRuleStatus
+		expected WAFRuleStatus
+	}{
+		{
+			input: receivedWAFRuleStatus{
+				id:     "71a9qq1",
+				rule:   &ruleStatusRuleRelation{id: 7},
+				waf:    &ruleStatusWAFRelation{id: "a18"},
+				status: "log",
+			},
+			expected: WAFRuleStatus{
+				RuleID:   7,
+				WAFID:    "a18",
+				StatusID: "71a9qq1",
+				Status:   "log",
+			},
+		},
+	}
+	for _, testcase := range tests {
+		answer := testcase.input.simplify()
+		if answer != testcase.expected {
+			t.Errorf("Expected %+v,got %+v", testcase.expected, answer)
+		}
+	}
+}
+
+func TestGetWAFRuleStatusesInput_formatFilters(t *testing.T) {
+	tests := []struct {
+		description string
+		filters     GetWAFRuleStatusesFilters
+		expected    map[string]string
+	}{
+		{
+			description: "converts both strings and ints to strings",
+			filters: GetWAFRuleStatusesFilters{
+				Status:   "log",
+				Accuracy: 10,
+				Version:  "180ad",
+			},
+			expected: map[string]string{
+				"filter[status]":         "log",
+				"filter[rule][accuracy]": "10",
+				"filter[rule][version]":  "180ad",
+			},
+		},
+		{
+			description: "converts arrays to strings",
+			filters: GetWAFRuleStatusesFilters{
+				Status:  "log",
+				Version: "181ad",
+				Tags:    []int{18, 1, 1093, 86308},
+			},
+			expected: map[string]string{
+				"filter[status]":        "log",
+				"filter[rule][version]": "181ad",
+				"include":               "18,1,1093,86308",
+			},
+		},
+	}
+	for _, testcase := range tests {
+		input := GetWAFRuleStatusesInput{
+			Filters: testcase.filters,
+		}
+		answer := input.formatFilters()
+		if len(answer) != len(testcase.expected) {
+			t.Errorf("In test %s: Expected map with %d entries,got one with %d", testcase.description, len(testcase.expected), len(answer))
+		}
+		for key, value := range testcase.expected {
+			if answer[key] != value {
+				t.Errorf("In test %s: Expected %s key to have value %s, got %s", testcase.description, key, value, answer[key])
+			}
+		}
+	}
+}
+
+func TestGetPages(t *testing.T) {
+	tests := []struct {
+		description   string
+		input         string
+		expectedPages paginationInfo
+		expectedErr   error
+	}{
+		{
+			description: "returns the next page",
+			input:       `{"links": {"next": "https://google.com/2"}, "data": []}`,
+			expectedPages: paginationInfo{
+				Next: "https://google.com/2",
+			},
+		},
+		{
+			description: "returns multiple pages",
+			input:       `{"links": {"next": "https://google.com/2", "first": "https://google.com/1"}, "data": []}`,
+			expectedPages: paginationInfo{
+				First: "https://google.com/1",
+				Next:  "https://google.com/2",
+			},
+		},
+		{
+			description:   "returns no pages",
+			input:         `{"data": []}`,
+			expectedPages: paginationInfo{},
+		},
+	}
+	for _, testcase := range tests {
+		pages, reader, err := getPages(bytes.NewReader([]byte(testcase.input)))
+		if pages != testcase.expectedPages {
+			t.Errorf("Test %s: Expected pages %+v, got %+v", testcase.description, testcase.expectedPages, pages)
+		}
+
+		// we expect to be able to get the original input out again
+		resultBytes, _ := ioutil.ReadAll(reader)
+		if string(resultBytes) != testcase.input {
+			t.Errorf("Test %s: Expected body %s, got %s", testcase.description, testcase.input, string(resultBytes))
+		}
+		if err != testcase.expectedErr {
+			t.Errorf("Test %s: Expected error %v, got %v", testcase.description, testcase.expectedErr, err)
+		}
+	}
+}

@@ -757,7 +757,7 @@ type GetWAFRuleStatusesResponse struct {
 // getPages parses a response to get the pagination data without destroying
 // the reader we receive as "resp.Body"; this essentially copies resp.Body
 // and returns it so we can use it again.
-func getPages(body io.ReadCloser) (paginationInfo, io.Reader, error) {
+func getPages(body io.Reader) (paginationInfo, io.Reader, error) {
 	var buf bytes.Buffer
 	tee := io.TeeReader(body, &buf)
 
