@@ -597,7 +597,7 @@ type receivedWAFRuleStatus struct {
 type WAFRuleStatus struct {
 	RuleID   string
 	WAFID    string
-	StatusID string
+	StatusID string // NOTE: This is the ID of the status, not the ID of the rule.
 	Status   string
 }
 
@@ -805,6 +805,75 @@ func (c *Client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (WAFRuleStatus, erro
 	path := fmt.Sprintf("/service/%s/wafs/%s/rules/%d/rule_status", i.Service, i.WAF, i.ID)
 
 	resp, err := c.Get(path, nil)
+	if err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	var status receivedWAFRuleStatus
+	err = jsonapi.UnmarshalPayload(resp.Body, &status)
+	return status.simplify(), err
+}
+
+// UpdateWAFRuleStatusInput specifies the parameters for the UpdateWAFRuleStatus call
+type UpdateWAFRuleStatusInput struct {
+	ID      int
+	Service string
+	WAF     string
+	Status  string
+}
+
+// validate makes sure the UpdateWAFRuleStatusInput instance has all
+// fields we need to request a change.
+func (i UpdateWAFRuleStatusInput) validate() error {
+	if i.ID == 0 {
+		return ErrMissingRuleID
+	}
+	if i.Service == "" {
+		return ErrMissingService
+	}
+	if i.WAF == "" {
+		return ErrMissingWAFID
+	}
+	if i.Status == "" {
+		return ErrMissingStatus
+	}
+	return nil
+}
+
+// updateWAFRuleStatusBody is the reformatted content of a UpdateWAFRuleStatusInput
+// to be sent to Fastly.
+type updateWAFRuleStatusBody struct {
+	ID     string `jsonapi:"primary,rule_status"`
+	Status string `jsonapi:"attr,status"`
+}
+
+// UpdateWAFRuleStatus changes the status of a single rule associated with a WAF.
+func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (WAFRuleStatus, error) {
+	if err := i.validate(); err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rules/%d/rule_status", i.Service, i.WAF, i.ID)
+	toSend := new(updateWAFRuleStatusBody)
+	toSend = &updateWAFRuleStatusBody{
+		ID:     fmt.Sprintf("%s-%d", i.WAF, i.ID),
+		Status: i.Status,
+	}
+	var buf bytes.Buffer
+	err := jsonapi.MarshalPayload(&buf, toSend)
+	if err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	options := &RequestOptions{
+		Body: &buf,
+		Headers: map[string]string{
+			"Content-Type": jsonapi.MediaType,
+			"Accept":       jsonapi.MediaType,
+		},
+	}
+
+	resp, err := c.Patch(path, options)
 	if err != nil {
 		return WAFRuleStatus{}, err
 	}
