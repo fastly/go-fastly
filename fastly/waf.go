@@ -6,6 +6,7 @@ import (
 
 	"github.com/google/jsonapi"
 
+	"go/ast"
 )
 
 // WAFConfigurationSet represents information about a configuration_set.
@@ -515,13 +516,6 @@ type RuleStatus struct {
 	Status    string `jsonapi:"attr,status,omitempty"`
 }
 
-//// GetRuleStatusesResponse is the response from GetWAFRuleStatuses
-//type GetWafRuleStatusesResponse struct {
-//	Links  RuleStatusesLinks `jsonapi:"links"`
-//	Meta   RuleStatusesMeta  `jsonapi:"meta"`
-//	Data   map[string]interface{} `jsonapi:"data"`
-//}
-
 // GetWAFRuleStatusInput is used as input to the GetWAFRuleStatusesInput
 type GetWAFRuleStatusesInput struct {
 	Service  string
@@ -539,6 +533,7 @@ func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) ([]*RuleStatus, 
 	if i.ID == "" {
 		return nil, ErrMissingWAFID
 	}
+	// TODO add filter and page params
 	path := fmt.Sprintf( "/service/%s/wafs/%s/rule_statuses", i.Service, i.ID)
     resp, err := c.Get(path, nil)
     if err != nil {
@@ -554,11 +549,41 @@ func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) ([]*RuleStatus, 
 	for i := range data {
 		typed, ok := data[i].(*RuleStatus)
 		if !ok {
-			return nil, fmt.Errorf("got back a non-WAF response")
+			return nil, fmt.Errorf("got back a non-RuleStatus response")
 		}
 		rule_statuses[i] = typed
 	}
 	return rule_statuses, nil
+}
+
+// GetWAFRuleStatusInput is the input to get a rule status
+type GetWAFRuleStatusInput struct {
+	Service     string
+	RuleID      int
+	ID        string
+}
+
+// GetWafRuleStatus will get the RuleStatus for a RuleID and WAF in a Service.
+func (c *client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (*RuleStatus, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+	if i.RuleID == 0 {
+		return nil, ErrMissingRuleID
+	}
+	path := fmt.Sprintf( "/service/%s/wafs/%s/rules/%i/rule_status", i.Service, i.ID, i.RuleID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+	var rule_status RuleStatus
+	if err := jsonapi.UnmarshalPayload(resp.Body, &rule_status); err != nil {
+		return nil, err
+	}
+	return &rule_status, nil
 }
 
 // Ruleset is the information about a firewall object's ruleset.
@@ -566,6 +591,36 @@ type Ruleset struct {
 	ID       string `jsonapi:"primary,ruleset"`
 	VCL      string `jsonapi:"attr,vcl,omitempty"`
 	LastPush string `jsonapi:"attr,last_push,omitempty"`
+}
+
+// UpdateWAFRuleStatusInput is the input to update a rule status.
+type UpdateWAFRuleStatusInput struct {
+	Service string
+	ID      string
+	RuleID  int
+}
+
+// UpdateWAFRuleStatus will update a rule status for a waf.
+func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (*RuleStatus, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+	if i.RuleID == 0 {
+		return nil, ErrMissingRuleID
+	}
+	path := fmt.Sprintf( "/service/%s/wafs/%s/rules/%i/rule_status", i.Service, i.ID, i.RuleID)
+	resp, err := c.PatchJSONAPI(path, i,nil)
+	if err != nil {
+		return nil, err
+	}
+	var rule_status RuleStatus
+	if err := jsonapi.UnmarshalPayload(resp.Body, &rule_status); err != nil {
+		return nil, err
+	}
+	return &rule_status, nil
 }
 
 // GetWAFRuleRuleSetsInput is used as input to the GetWAFRuleRuleSets function.

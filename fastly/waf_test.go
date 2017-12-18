@@ -210,8 +210,8 @@ func TestClient_WAFs(t *testing.T) {
 	record(t, "rule_statuses/get", func(c *Client) {
 
 		ruleStatuses, err = c.GetWAFRuleStatuses(&GetWAFRuleStatusesInput{
-			Service: "53jg0Rvgh8XYZqvqBeKp16",
-            ID: "2E8deD8vRTub0LTUUL4EMf",
+			Service: testServiceID,
+            ID: waf.ID,
 		})
 	})
 	if err != nil {
@@ -290,14 +290,13 @@ func TestClient_GetWAFRuleStatuses_validation(t *testing.T) {
 	var err error
 	var rule_statuses []*RuleStatus
 	rule_statuses, err = testClient.GetWAFRuleStatuses(&GetWAFRuleStatusesInput{
-		Service: "53jg0Rvgh8XYZqvqBeKp16",
-		ID:      "2E8deD8vRTub0LTUUL4EMf",
+		Service: testServiceID,
+		ID:      "6cqczz91loS2dnXX5w9UIC",
 	})
     // Happy Path check
 	if err != nil {
 		t.Error("bad error %s", err)
 	}
-	spew.Dump(rule_statuses)
 	if rule_statuses[1].ID != "555" {
 		t.Error("something wrong with vcr fixture setup in fixtures/rule_statues/get.yaml : %s", err)
 	}
