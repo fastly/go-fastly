@@ -5,6 +5,7 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
+
 )
 
 // WAFConfigurationSet represents information about a configuration_set.
@@ -26,6 +27,7 @@ type WAF struct {
 // wafType is used for reflection because JSONAPI wants to know what it's
 // decoding into.
 var wafType = reflect.TypeOf(new(WAF))
+
 
 // ListWAFsInput is used as input to the ListWAFs function.
 type ListWAFsInput struct {
@@ -490,6 +492,73 @@ func (c *Client) GetWAFRuleVCL(i *GetWAFRuleVCLInput) (*RuleVCL, error) {
 		return nil, err
 	}
 	return &vcl, nil
+}
+
+// RuleStatus Links are the links for a GetWafRuleStatusesResponse.
+type RuleStatusesLinks struct {
+	Last    string `jsonapi:"last"`
+	First   string `jsonapi:"first"`
+	Next    string `jsonapi:"next"`
+}
+
+// RuleStatusesMeta is the meta data for a RuleStatuses response.
+type RuleStatusesMeta struct {
+  CurrentPage int `jsonapi:"current_page"`
+  PerPage     int `jsonapi:"per_page"`
+  RecordCount int `jsonapi:"record_count"`
+  TotalPages  int `jsonapi:"test_pages"`
+}
+
+// RuleStatus is the status of a rule for a particular service.
+type RuleStatus struct {
+	ID        string `jsonapi:"primary,rule_status"`
+	Status    string `jsonapi:"attr,status,omitempty"`
+}
+
+//// GetRuleStatusesResponse is the response from GetWAFRuleStatuses
+//type GetWafRuleStatusesResponse struct {
+//	Links  RuleStatusesLinks `jsonapi:"links"`
+//	Meta   RuleStatusesMeta  `jsonapi:"meta"`
+//	Data   map[string]interface{} `jsonapi:"data"`
+//}
+
+// GetWAFRuleStatusInput is used as input to the GetWAFRuleStatusesInput
+type GetWAFRuleStatusesInput struct {
+	Service  string
+	ID       string
+}
+
+// Needed for jsonapi to parse rule_statuses response
+var ruleStatusType = reflect.TypeOf(new(RuleStatus))
+
+// GetWAFRuleStatuses gets the rule_statuses for a firewall.
+func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) ([]*RuleStatus, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+	path := fmt.Sprintf( "/service/%s/wafs/%s/rule_statuses", i.Service, i.ID)
+    resp, err := c.Get(path, nil)
+    if err != nil {
+    	return nil, err
+	}
+
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, ruleStatusType)
+	if err != nil {
+		return nil, err
+	}
+
+	rule_statuses := make([]*RuleStatus, len(data))
+	for i := range data {
+		typed, ok := data[i].(*RuleStatus)
+		if !ok {
+			return nil, fmt.Errorf("got back a non-WAF response")
+		}
+		rule_statuses[i] = typed
+	}
+	return rule_statuses, nil
 }
 
 // Ruleset is the information about a firewall object's ruleset.
