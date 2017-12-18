@@ -13,6 +13,10 @@ import (
 // a "Service" key, but one was not set.
 var ErrMissingService = errors.New("Missing required field 'Service'")
 
+// ErrMissingService is an error that is returned when an input struct requires
+// a "Service" key, but one was not set.
+var ErrMissingStatus = errors.New("Missing required field 'Status'")
+
 // ErrMissingVersion is an error that is returned when an input struct requires
 // a "Version" key, but one was not set.
 var ErrMissingVersion = errors.New("Missing required field 'Version'")
