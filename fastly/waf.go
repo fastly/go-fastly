@@ -713,8 +713,10 @@ func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatu
 	return statusResponse, err
 }
 
-// fetchWAFRuleStatusesPage recursively calls the fastly rules status endpoint until there
-// are no more results to request.
+// interpretWAFRuleStatusesPage accepts a Fastly response for a set of WAF rule statuses
+// and unmarshals the results. If there are more pages of results, it fetches the next
+// page, adds that response to the array of results, and repeats until all results have
+// been fetched.
 func (c *Client) interpretWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse, received *http.Response) error {
 	// before we pull the status info out of the response body, fetch
 	// pagination info from it:
@@ -737,7 +739,7 @@ func (c *Client) interpretWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse
 	}
 	if pages.Next != "" {
 		// NOTE: pages.Next URL includes filters already
-		resp, err := c.StraightGet(pages.Next)
+		resp, err := c.SimpleGet(pages.Next)
 		if err != nil {
 			return err
 		}
@@ -783,7 +785,7 @@ func getPages(body io.Reader) (paginationInfo, io.Reader, error) {
 	return pages.Links, bytes.NewReader(buf.Bytes()), nil
 }
 
-// GetWAFRuleStatusInput specifies the parameters for the GetWAFRuleStatus call
+// GetWAFRuleStatusInput specifies the parameters for the GetWAFRuleStatus call.
 type GetWAFRuleStatusInput struct {
 	ID      int
 	Service string
@@ -814,7 +816,7 @@ func (c *Client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (WAFRuleStatus, erro
 	return status.simplify(), err
 }
 
-// UpdateWAFRuleStatusInput specifies the parameters for the UpdateWAFRuleStatus call
+// UpdateWAFRuleStatusInput specifies the parameters for the UpdateWAFRuleStatus call.
 type UpdateWAFRuleStatusInput struct {
 	ID      int
 	Service string
@@ -854,8 +856,7 @@ func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (WAFRuleStatus
 	}
 
 	path := fmt.Sprintf("/service/%s/wafs/%s/rules/%d/rule_status", i.Service, i.WAF, i.ID)
-	toSend := new(updateWAFRuleStatusBody)
-	toSend = &updateWAFRuleStatusBody{
+	toSend := &updateWAFRuleStatusBody{
 		ID:     fmt.Sprintf("%s-%d", i.WAF, i.ID),
 		Status: i.Status,
 	}
@@ -881,4 +882,91 @@ func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (WAFRuleStatus
 	var status receivedWAFRuleStatus
 	err = jsonapi.UnmarshalPayload(resp.Body, &status)
 	return status.simplify(), err
+}
+
+// UpdateWAFRuleTagStatusInput specifies the parameters for the UpdateWAFRuleStatus call.
+type UpdateWAFRuleTagStatusInput struct {
+	Service string
+	WAF     string
+	Status  string `json:"status"` // `jsonapi:"attr,status"`
+	Tag     string `json:"name"`   // `jsonapi:"attr,name"`
+	Force   bool   `json:"force"`  // `jsonapi:"attr,force"`
+	// HACK: This won't work with the jsonapi struct tags, because the POST body expected by
+	// Fastly doesn't conform to the jsonapi spec -- there's no ID field at the top level,
+	// and there's no way for us to indicate the "type" of the entity without a primary key.
+	// ID field is required: http://jsonapi.org/format/#document-resource-objects
+}
+
+// updateWAFRuleTagStatusBody is the top-level object sent to Fastly based on
+// UpdateWAFRuleTagStatusInput from the user.
+type updateWAFRuleTagStatusBody struct {
+	Data updateWAFRuleTagStatusData `json:"data"`
+}
+
+type updateWAFRuleTagStatusData struct {
+	Type       string                       `json:"type"`       // hard-coded because we can't use jsonapi
+	Attributes *UpdateWAFRuleTagStatusInput `json:"attributes"` // supplied by user as input
+}
+
+// validate makes sure the UpdateWAFRuleStatusInput instance has all
+// fields we need to request a change.
+func (i UpdateWAFRuleTagStatusInput) validate() error {
+	if i.Tag == "" {
+		return ErrMissingTag
+	}
+	if i.Service == "" {
+		return ErrMissingService
+	}
+	if i.WAF == "" {
+		return ErrMissingWAFID
+	}
+	if i.Status == "" {
+		return ErrMissingStatus
+	}
+	return nil
+}
+
+// ReceivedWAFRuleTagStatus is the response from Fastly when a tag's
+// status is updated for a WAF.
+type ReceivedWAFRuleTagStatus struct {
+	ID     string `jsonapi:"primary,rule_status"`
+	Status string `jsonapi:"attr,status"`
+	Name   string `jsonapi:"attr,name"`
+}
+
+// UpdateWAFRuleTagStatus changes the status of a single rule associated with a WAF.
+func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (ReceivedWAFRuleTagStatus, error) {
+	if err := input.validate(); err != nil {
+		return ReceivedWAFRuleTagStatus{}, err
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", input.Service, input.WAF)
+
+	body := updateWAFRuleTagStatusBody{
+		Data: updateWAFRuleTagStatusData{
+			Type:       "rule_status",
+			Attributes: input,
+		},
+	}
+	encoded, err := json.Marshal(body)
+	if err != nil {
+		return ReceivedWAFRuleTagStatus{}, err
+	}
+
+	options := &RequestOptions{
+		Body: bytes.NewReader(encoded),
+		Headers: map[string]string{
+			"Content-Type": jsonapi.MediaType,
+			"Accept":       jsonapi.MediaType,
+		},
+	}
+
+	resp, err := c.Post(path, options)
+	if err != nil {
+		return ReceivedWAFRuleTagStatus{}, err
+	}
+
+	var status ReceivedWAFRuleTagStatus
+	err = jsonapi.UnmarshalPayload(resp.Body, &status)
+	return status, err
 }
