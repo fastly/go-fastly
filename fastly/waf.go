@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"io"
 	"io/ioutil"
+	"net/http"
 	"reflect"
 	"strconv"
 	"strings"
@@ -27,6 +28,10 @@ type WAF struct {
 	LastPush          string `jsonapi:"attr,last_push"`
 
 	ConfigurationSet *WAFConfigurationSet `jsonapi:"relation,configuration_set"`
+}
+
+func (waf *WAF) String() string {
+	return fmt.Sprintf("<ID: |%v|, Version: |%v|>", waf.ID, waf.Version)
 }
 
 // wafType is used for reflection because JSONAPI wants to know what it's
@@ -576,41 +581,43 @@ type GetWAFRuleStatusesInput struct {
 
 // receivedWAFRuleStatus stores the information about a rule received from Fastly
 type receivedWAFRuleStatus struct {
-	id     string                  `jsonapi:"primary,rule_status"`
-	rule   *ruleStatusRuleRelation `jsonapi:"relation,rule"`
-	waf    *ruleStatusWAFRelation  `jsonapi:"relation,waf"`
-	status string                  `jsonapi:"attr,status"`
-}
+	ID     string `jsonapi:"primary,rule_status"`
+	Status string `jsonapi:"attr,status"`
 
-// ruleStatusRuleRelation is the information about a rule stored inside of
-// its status, as sent by Fastly
-type ruleStatusRuleRelation struct {
-	id int `jsonapi:"primary,rule"` // NOTE: Rule ID is int, all others are strings
-}
-
-// ruleStatusWAFRelation is the information received within a rule status
-// about the WAF in which the rule exists
-type ruleStatusWAFRelation struct {
-	id string `jsonapi:"primary,waf"`
+	// HACK: These two fields are supposed to be sent in response
+	// to requests for rule status data, but the entire "Relationships"
+	// field is currently missing from Fastly responses, so they are
+	// instead inferred from the status ID (see inferIDs method).
+	// waf  newTypeThatDoesntExistNow `jsonapi:"relation,waf"`
+	// rule newTypeThatDoesntExistNow `jsonapi:"relation,rule"`
 }
 
 // WAFRuleStatus is the convenience type provided to gofastly users that
 // flattens the structure of a rule status received from the Fastly API
 type WAFRuleStatus struct {
-	RuleID   int
+	RuleID   string
 	WAFID    string
 	StatusID string
 	Status   string
 }
 
+func (r *WAFRuleStatus) String() string {
+	return fmt.Sprintf("<RuleID: %v, Status: %v>", r.RuleID, r.Status)
+}
+
 // simplify converts a rule status object from fastly into a more logical
 // structure for use elsewhere
-func (received receivedWAFRuleStatus) simplify() WAFRuleStatus {
+func (r receivedWAFRuleStatus) simplify() WAFRuleStatus {
+	splitIt := strings.Split(r.ID, "-")
+	if len(splitIt) < 2 {
+		splitIt = []string{"", ""}
+	}
+
 	return WAFRuleStatus{
-		RuleID:   received.rule.id,
-		WAFID:    received.waf.id,
-		StatusID: received.id,
-		Status:   received.status,
+		WAFID:    splitIt[0],
+		RuleID:   splitIt[1],
+		StatusID: r.ID,
+		Status:   r.Status,
 	}
 }
 
@@ -689,10 +696,17 @@ func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatu
 	if i.WAF == "" {
 		return statusResponse, ErrMissingWAFID
 	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", i.Service, i.WAF)
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 	}
-	err := c.fetchWAFRuleStatusesPage(&statusResponse, fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", i.Service, i.WAF), filters)
+
+	resp, err := c.Get(path, filters)
+	if err != nil {
+		return GetWAFRuleStatusesResponse{}, err
+	}
+	err = c.interpretWAFRuleStatusesPage(&statusResponse, resp)
 	// NOTE: It's possible for statusResponse to be partially completed before an error
 	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
 	// an error.
@@ -701,20 +715,13 @@ func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatu
 
 // fetchWAFRuleStatusesPage recursively calls the fastly rules status endpoint until there
 // are no more results to request.
-func (c *Client) fetchWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse, path string, filters *RequestOptions) error {
-	resp, err := c.Get(path, filters)
-	if err != nil {
-		return err
-	}
-
+func (c *Client) interpretWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse, received *http.Response) error {
 	// before we pull the status info out of the response body, fetch
 	// pagination info from it:
-	pages, body, err := getPages(resp.Body)
+	pages, body, err := getPages(received.Body)
 	if err != nil {
 		return err
 	}
-
-	// then grab all the rule status objects out of the response:
 	var statusType = reflect.TypeOf(new(receivedWAFRuleStatus))
 	data, err := jsonapi.UnmarshalManyPayload(body, statusType)
 	if err != nil {
@@ -729,7 +736,12 @@ func (c *Client) fetchWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse, pa
 		answer.Rules = append(answer.Rules, typed.simplify())
 	}
 	if pages.Next != "" {
-		c.fetchWAFRuleStatusesPage(answer, pages.Next, filters) // TODO: Does the "next" link include the filters already?
+		// NOTE: pages.Next URL includes filters already
+		resp, err := c.StraightGet(pages.Next)
+		if err != nil {
+			return err
+		}
+		c.interpretWAFRuleStatusesPage(answer, resp)
 	}
 	return nil
 }

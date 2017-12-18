@@ -39,7 +39,6 @@ func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, 
 		params.Add(k, v)
 	}
 	u.RawQuery = params.Encode()
-
 	// Create the request object.
 	request, err := http.NewRequest(verb, u.String(), ro.Body)
 	if err != nil {
@@ -65,4 +64,36 @@ func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, 
 	}
 
 	return request, nil
+}
+
+// StraightGet combines the RawRequest and Request methods,
+// but doesn't add any parameters or change any encoding in the URL
+// passed to it. It's mostly for calling the URLs given to us
+// directly from Fastly without mangling them.
+func (c *Client) StraightGet(target string) (*http.Response, error) {
+	// We parse the URL and then convert it right back to a string
+	// later; this just acts as a check that Fastly isn't sending
+	// us nonsense.
+	url, err := url.Parse(target)
+	if err != nil {
+		return nil, err
+	}
+
+	// Create the request object.
+	request, err := http.NewRequest("GET", url.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	// Set the API key.
+	if len(c.apiKey) > 0 {
+		request.Header.Set(APIKeyHeader, c.apiKey)
+	}
+	request.Header.Set("User-Agent", UserAgent)
+
+	resp, err := checkResp(c.HTTPClient.Do(request))
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
 }
