@@ -596,8 +596,9 @@ type Ruleset struct {
 // UpdateWAFRuleStatusInput is the input to update a rule status.
 type UpdateWAFRuleStatusInput struct {
 	Service string
-	ID      string
+	ID      string  `jsonapi:"primary, rule_status"`
 	RuleID  int
+	Status  string
 }
 
 // UpdateWAFRuleStatus will update a rule status for a waf.
