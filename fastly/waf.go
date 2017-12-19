@@ -492,11 +492,138 @@ func (c *Client) GetWAFRuleVCL(i *GetWAFRuleVCLInput) (*RuleVCL, error) {
 	return &vcl, nil
 }
 
+// RuleStatus Links are the links for a GetWafRuleStatusesResponse.
+type RuleStatusesLinks struct {
+	Last    string `jsonapi:"last"`
+	First   string `jsonapi:"first"`
+	Next    string `jsonapi:"next"`
+}
+
+// RuleStatusesMeta is the meta data for a RuleStatuses response.
+type RuleStatusesMeta struct {
+  CurrentPage int `jsonapi:"current_page"`
+  PerPage     int `jsonapi:"per_page"`
+  RecordCount int `jsonapi:"record_count"`
+  TotalPages  int `jsonapi:"test_pages"`
+}
+
+// RuleStatus is the status of a rule for a particular service.
+type RuleStatus struct {
+	ID        string `jsonapi:"primary,rule_status"`
+	Status    string `jsonapi:"attr,status,omitempty"`
+}
+
+// GetWAFRuleStatusInput is used as input to the GetWAFRuleStatusesInput
+type GetWAFRuleStatusesInput struct {
+	Service  string
+	ID       string
+}
+
+// Needed for jsonapi to parse rule_statuses response
+var ruleStatusType = reflect.TypeOf(new(RuleStatus))
+
+// GetWAFRuleStatuses gets the rule_statuses for a firewall.
+func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) ([]*RuleStatus, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+	// TODO add filter and page params
+	path := fmt.Sprintf( "/service/%s/wafs/%s/rule_statuses", i.Service, i.ID)
+    resp, err := c.Get(path, nil)
+    if err != nil {
+    	return nil, err
+	}
+
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, ruleStatusType)
+	if err != nil {
+		return nil, err
+	}
+
+	rule_statuses := make([]*RuleStatus, len(data))
+	for i := range data {
+		typed, ok := data[i].(*RuleStatus)
+		if !ok {
+			return nil, fmt.Errorf("got back a non-RuleStatus response")
+		}
+		rule_statuses[i] = typed
+	}
+	return rule_statuses, nil
+}
+
+// GetWAFRuleStatusInput is the input to get a rule status
+type GetWAFRuleStatusInput struct {
+	Service     string
+	RuleID      int
+	ID        string
+}
+
+// GetWafRuleStatus will get the RuleStatus for a RuleID and WAF in a Service.
+func (c *Client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (*RuleStatus, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+	if i.RuleID == 0 {
+		return nil, ErrMissingRuleID
+	}
+	path := fmt.Sprintf( "/service/%s/wafs/%s/rules/%i/rule_status", i.Service, i.ID, i.RuleID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+	var rule_status RuleStatus
+	if err := jsonapi.UnmarshalPayload(resp.Body, &rule_status); err != nil {
+		return nil, err
+	}
+	return &rule_status, nil
+}
+
 // Ruleset is the information about a firewall object's ruleset.
 type Ruleset struct {
 	ID       string `jsonapi:"primary,ruleset"`
 	VCL      string `jsonapi:"attr,vcl,omitempty"`
 	LastPush string `jsonapi:"attr,last_push,omitempty"`
+}
+
+// UpdateWAFRuleStatusInput is the input to update a rule status.
+type UpdateWAFRuleStatusInput struct {
+	Service string
+	WafID   string
+	RuleID  string
+	Status  string  `jsonapi:"attr,status"`
+}
+
+// UpdateRuleStatusInput is the ID of a RuleStatus which is Service-WafID
+func (i *UpdateWAFRuleStatusInput) ID() string {
+	return fmt.Sprintf("%s-%s", i.Service, i.WafID)
+}
+
+// UpdateWAFRuleStatus will update a rule status for a waf.
+func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (*RuleStatus, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+	if i.WafID == "" {
+		return nil, ErrMissingWAFID
+	}
+	if i.RuleID == "" {
+		return nil, ErrMissingRuleID
+	}
+	path := fmt.Sprintf( "/service/%s/wafs/%s/rules/%i/rule_status", i.Service, i.WafID, i.RuleID)
+	resp, err := c.PatchJSONAPI(path,i ,nil)
+	if err != nil {
+		return nil, err
+	}
+	var rule_status RuleStatus
+	if err := jsonapi.UnmarshalPayload(resp.Body, &rule_status); err != nil {
+		return nil, err
+	}
+	return &rule_status, nil
 }
 
 // GetWAFRuleRuleSetsInput is used as input to the GetWAFRuleRuleSets function.

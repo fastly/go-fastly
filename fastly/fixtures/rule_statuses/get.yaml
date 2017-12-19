@@ -1,0 +1,44 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - 074af2ace7883623972e898335ad62d7
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/6cqczz91loS2dnXX5w9UIC/wafs/4fuxZ7bpag8laOjYwxlqZM/rule_statuses
+    method: GET
+  response:
+    body: '{"data":[{ "type":"rule_status", "id":"3243", "attributes":{"status":"log"}},{ "type":"rule_status", "id":"555", "attributes":{"status":"log"}}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:11 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513311.296949,VS0,VE77
+    status: 200 OK
+    code: 200
