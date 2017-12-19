@@ -30,10 +30,6 @@ type WAF struct {
 	ConfigurationSet *WAFConfigurationSet `jsonapi:"relation,configuration_set"`
 }
 
-func (waf *WAF) String() string {
-	return fmt.Sprintf("<ID: |%v|, Version: |%v|>", waf.ID, waf.Version)
-}
-
 // wafType is used for reflection because JSONAPI wants to know what it's
 // decoding into.
 var wafType = reflect.TypeOf(new(WAF))
@@ -584,7 +580,7 @@ type WAFRuleStatus struct {
 	ID     string `jsonapi:"primary,rule_status"` // This is the ID of the status, not the ID of the rule. Currently, it is of the format ${WAF_ID}-${rule_ID}, if you want to infer those based on this field.
 	Status string `jsonapi:"attr,status"`
 
-	Tag string `jsonapi:"attr,name,omitempty"` // NOTE: This will only be set in a response for modifying rules based on tag.
+	Tag string `jsonapi:"attr,name,omitempty"` // This will only be set in a response for modifying rules based on tag.
 
 	// HACK: These two fields are supposed to be sent in response
 	// to requests for rule status data, but the entire "Relationships"
@@ -603,12 +599,12 @@ type GetWAFRuleStatusesFilters struct {
 	Message    string
 	Revision   int
 	RuleID     string
-	TagID      int    // filter by single tag ID
-	TagName    string // filter by single tag name
+	TagID      int    // Filter by a single tag ID.
+	TagName    string // Filter by single tag name.
 	Version    string
-	Tags       []int // return all rules with any of the specified tag IDs
-	MaxResults int   // max number of returned results
-	Page       int   // which page of results to return
+	Tags       []int // Return all rules with any of the specified tag IDs.
+	MaxResults int   // Max number of returned results per request.
+	Page       int   // Which page of results to return.
 }
 
 // formatFilters converts user input into query parameters for filtering
@@ -671,9 +667,7 @@ func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatu
 	}
 
 	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", i.Service, i.WAF)
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
-	}
+	filters := &RequestOptions{Params: i.formatFilters()}
 
 	resp, err := c.Get(path, filters)
 	if err != nil {
@@ -697,8 +691,7 @@ func (c *Client) interpretWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse
 	if err != nil {
 		return err
 	}
-	var statusType = reflect.TypeOf(new(WAFRuleStatus))
-	data, err := jsonapi.UnmarshalManyPayload(body, statusType)
+	data, err := jsonapi.UnmarshalManyPayload(body, reflect.TypeOf(new(WAFRuleStatus)))
 	if err != nil {
 		return err
 	}
@@ -882,7 +875,8 @@ type updateWAFRuleTagStatusData struct {
 }
 
 // validate makes sure the UpdateWAFRuleStatusInput instance has all
-// fields we need to request a change.
+// fields we need to request a change. Almost, but not quite, identical to
+// UpdateWAFRuleStatusInput.validate()
 func (i UpdateWAFRuleTagStatusInput) validate() error {
 	if i.Tag == "" {
 		return ErrMissingTag
