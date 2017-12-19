@@ -39,6 +39,7 @@ func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, 
 		params.Add(k, v)
 	}
 	u.RawQuery = params.Encode()
+
 	// Create the request object.
 	request, err := http.NewRequest(verb, u.String(), ro.Body)
 	if err != nil {

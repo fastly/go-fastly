@@ -325,30 +325,79 @@ func TestClient_GetWAF_validation(t *testing.T) {
 // 	}
 // }
 
-func TestReceivedWAFRuleStatus_simplify(t *testing.T) {
+func TestUpdateWAFRuleStatusesInput_validate(t *testing.T) {
 	tests := []struct {
-		input    receivedWAFRuleStatus
-		expected WAFRuleStatus
+		description string
+		input       UpdateWAFRuleStatusInput
+		expected    error
 	}{
 		{
-			input: receivedWAFRuleStatus{
-				id:     "71a9qq1",
-				rule:   &ruleStatusRuleRelation{id: 7},
-				waf:    &ruleStatusWAFRelation{id: "a18"},
-				status: "log",
+			description: "Accepts valid input",
+			input: UpdateWAFRuleStatusInput{
+				ID:      8104,
+				Service: "108asj1",
+				WAF:     "as098k",
+				Status:  "block",
 			},
-			expected: WAFRuleStatus{
-				RuleID:   7,
-				WAFID:    "a18",
-				StatusID: "71a9qq1",
-				Status:   "log",
+			expected: nil,
+		},
+		{
+			description: "Rejects input with missing int field",
+			input: UpdateWAFRuleStatusInput{
+				Service: "108asj1",
+				WAF:     "as098k",
+				Status:  "block",
 			},
+			expected: ErrMissingRuleID,
+		},
+		{
+			description: "Rejects input with missing string field",
+			input: UpdateWAFRuleStatusInput{
+				ID:     8104,
+				WAF:    "as098k",
+				Status: "block",
+			},
+			expected: ErrMissingService,
 		},
 	}
 	for _, testcase := range tests {
-		answer := testcase.input.simplify()
-		if answer != testcase.expected {
-			t.Errorf("Expected %+v,got %+v", testcase.expected, answer)
+		err := testcase.input.validate()
+		if err != testcase.expected {
+			t.Errorf("In test %s: Expected %v,got %v", testcase.description, testcase.expected, err)
+		}
+	}
+}
+
+func TestUpdateWAFRuleTagStatusInput_validate(t *testing.T) {
+	tests := []struct {
+		description string
+		input       UpdateWAFRuleTagStatusInput
+		expected    error
+	}{
+		{
+			description: "Accepts valid input",
+			input: UpdateWAFRuleTagStatusInput{
+				Tag:     "lala tag la",
+				Service: "108asj1",
+				WAF:     "as098k",
+				Status:  "block",
+			},
+			expected: nil,
+		},
+		{
+			description: "Rejects input with missing string field",
+			input: UpdateWAFRuleTagStatusInput{
+				Service: "108asj1",
+				WAF:     "as098k",
+				Status:  "block",
+			},
+			expected: ErrMissingTag,
+		},
+	}
+	for _, testcase := range tests {
+		err := testcase.input.validate()
+		if err != testcase.expected {
+			t.Errorf("In test %s: Expected %v,got %v", testcase.description, testcase.expected, err)
 		}
 	}
 }

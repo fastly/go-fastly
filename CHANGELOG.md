@@ -2,7 +2,8 @@
 
 ## v0.4.3 (Unreleased)
 
-- Add WAF methods for fetching status of rules, both one at a time and in lists
+- Add WAF methods for fetching status of rules, both one at a time and in filtered lists
+- Add WAF methods for modifying the status of rules, both one at a time and based on tags
 - Rename `UpdateWafRuleSets` function to `UpdateWAFRuleSets` to match other names
 
 ## v0.4.2 (September 5, 2017)
