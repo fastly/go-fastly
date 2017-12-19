@@ -583,6 +583,7 @@ type GetWAFRuleStatusesInput struct {
 type receivedWAFRuleStatus struct {
 	ID     string `jsonapi:"primary,rule_status"`
 	Status string `jsonapi:"attr,status"`
+	Tag    string `jsonapi:"attr,name,omitempty"` // NOTE: This should only be set when modifying rules based on tag
 
 	// HACK: These two fields are supposed to be sent in response
 	// to requests for rule status data, but the entire "Relationships"
@@ -599,11 +600,12 @@ type WAFRuleStatus struct {
 	WAFID    string
 	StatusID string // NOTE: This is the ID of the status, not the ID of the rule.
 	Status   string
+	TagName  string
 }
 
-func (r *WAFRuleStatus) String() string {
-	return fmt.Sprintf("<RuleID: %v, Status: %v>", r.RuleID, r.Status)
-}
+// func (r *WAFRuleStatus) String() string {
+// 	return fmt.Sprintf("<RuleID: %v, Status: %v>", r.RuleID, r.Status)
+// }
 
 // simplify converts a rule status object from fastly into a more logical
 // structure for use elsewhere
@@ -618,6 +620,7 @@ func (r receivedWAFRuleStatus) simplify() WAFRuleStatus {
 		RuleID:   splitIt[1],
 		StatusID: r.ID,
 		Status:   r.Status,
+		TagName:  r.Tag,
 	}
 }
 
@@ -926,18 +929,12 @@ func (i UpdateWAFRuleTagStatusInput) validate() error {
 	return nil
 }
 
-// ReceivedWAFRuleTagStatus is the response from Fastly when a tag's
-// status is updated for a WAF.
-type ReceivedWAFRuleTagStatus struct {
-	ID     string `jsonapi:"primary,rule_status"`
-	Status string `jsonapi:"attr,status"`
-	Name   string `jsonapi:"attr,name"`
-}
-
 // UpdateWAFRuleTagStatus changes the status of a single rule associated with a WAF.
-func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (ReceivedWAFRuleTagStatus, error) {
+// NOTE: This call currently appears to return *all* rules attached to the WAF, rather
+// than just the ones that were modified by the call.
+func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (GetWAFRuleStatusesResponse, error) {
 	if err := input.validate(); err != nil {
-		return ReceivedWAFRuleTagStatus{}, err
+		return GetWAFRuleStatusesResponse{}, err
 	}
 
 	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", input.Service, input.WAF)
@@ -950,7 +947,7 @@ func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (Rec
 	}
 	encoded, err := json.Marshal(body)
 	if err != nil {
-		return ReceivedWAFRuleTagStatus{}, err
+		return GetWAFRuleStatusesResponse{}, err
 	}
 
 	options := &RequestOptions{
@@ -963,10 +960,13 @@ func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (Rec
 
 	resp, err := c.Post(path, options)
 	if err != nil {
-		return ReceivedWAFRuleTagStatus{}, err
+		return GetWAFRuleStatusesResponse{}, err
 	}
 
-	var status ReceivedWAFRuleTagStatus
-	err = jsonapi.UnmarshalPayload(resp.Body, &status)
-	return status, err
+	statusResponse := GetWAFRuleStatusesResponse{
+		Rules: []WAFRuleStatus{},
+	}
+	err = c.interpretWAFRuleStatusesPage(&statusResponse, resp)
+
+	return statusResponse, err
 }
