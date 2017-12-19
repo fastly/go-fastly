@@ -579,49 +579,19 @@ type GetWAFRuleStatusesInput struct {
 	Filters GetWAFRuleStatusesFilters
 }
 
-// receivedWAFRuleStatus stores the information about a rule received from Fastly
-type receivedWAFRuleStatus struct {
-	ID     string `jsonapi:"primary,rule_status"`
+// WAFRuleStatus stores the information about a rule received from Fastly
+type WAFRuleStatus struct {
+	ID     string `jsonapi:"primary,rule_status"` // This is the ID of the status, not the ID of the rule. Currently, it is of the format ${WAF_ID}-${rule_ID}, if you want to infer those based on this field.
 	Status string `jsonapi:"attr,status"`
-	Tag    string `jsonapi:"attr,name,omitempty"` // NOTE: This should only be set when modifying rules based on tag
+
+	Tag string `jsonapi:"attr,name,omitempty"` // NOTE: This will only be set in a response for modifying rules based on tag.
 
 	// HACK: These two fields are supposed to be sent in response
 	// to requests for rule status data, but the entire "Relationships"
 	// field is currently missing from Fastly responses, so they are
 	// instead inferred from the status ID (see inferIDs method).
-	// waf  newTypeThatDoesntExistNow `jsonapi:"relation,waf"`
-	// rule newTypeThatDoesntExistNow `jsonapi:"relation,rule"`
-}
-
-// WAFRuleStatus is the convenience type provided to gofastly users that
-// flattens the structure of a rule status received from the Fastly API
-type WAFRuleStatus struct {
-	RuleID   string
-	WAFID    string
-	StatusID string // NOTE: This is the ID of the status, not the ID of the rule.
-	Status   string
-	TagName  string
-}
-
-// func (r *WAFRuleStatus) String() string {
-// 	return fmt.Sprintf("<RuleID: %v, Status: %v>", r.RuleID, r.Status)
-// }
-
-// simplify converts a rule status object from fastly into a more logical
-// structure for use elsewhere
-func (r receivedWAFRuleStatus) simplify() WAFRuleStatus {
-	splitIt := strings.Split(r.ID, "-")
-	if len(splitIt) < 2 {
-		splitIt = []string{"", ""}
-	}
-
-	return WAFRuleStatus{
-		WAFID:    splitIt[0],
-		RuleID:   splitIt[1],
-		StatusID: r.ID,
-		Status:   r.Status,
-		TagName:  r.Tag,
-	}
+	// WAF  newTypeThatDoesntExistNow `jsonapi:"relation,waf"`
+	// Rule newTypeThatDoesntExistNow `jsonapi:"relation,rule"`
 }
 
 // GetWAFRuleStatusesFilters provides a set of parameters for filtering the
@@ -691,7 +661,7 @@ func (i *GetWAFRuleStatusesInput) formatFilters() map[string]string {
 // GetWAFRuleStatuses fetches the status of a subset of rules associated with a WAF.
 func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatusesResponse, error) {
 	statusResponse := GetWAFRuleStatusesResponse{
-		Rules: []WAFRuleStatus{},
+		Rules: []*WAFRuleStatus{},
 	}
 	if i.Service == "" {
 		return statusResponse, ErrMissingService
@@ -727,18 +697,18 @@ func (c *Client) interpretWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse
 	if err != nil {
 		return err
 	}
-	var statusType = reflect.TypeOf(new(receivedWAFRuleStatus))
+	var statusType = reflect.TypeOf(new(WAFRuleStatus))
 	data, err := jsonapi.UnmarshalManyPayload(body, statusType)
 	if err != nil {
 		return err
 	}
 
 	for i := range data {
-		typed, ok := data[i].(*receivedWAFRuleStatus)
+		typed, ok := data[i].(*WAFRuleStatus)
 		if !ok {
 			return fmt.Errorf("got back response of unexpected type")
 		}
-		answer.Rules = append(answer.Rules, typed.simplify())
+		answer.Rules = append(answer.Rules, typed)
 	}
 	if pages.Next != "" {
 		// NOTE: pages.Next URL includes filters already
@@ -768,7 +738,7 @@ type paginationInfo struct {
 
 // GetWAFRuleStatusesResponse is the data returned to the user from a GetWAFRuleStatus call
 type GetWAFRuleStatusesResponse struct {
-	Rules []WAFRuleStatus
+	Rules []*WAFRuleStatus
 }
 
 // getPages parses a response to get the pagination data without destroying
@@ -814,9 +784,9 @@ func (c *Client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (WAFRuleStatus, erro
 		return WAFRuleStatus{}, err
 	}
 
-	var status receivedWAFRuleStatus
+	var status WAFRuleStatus
 	err = jsonapi.UnmarshalPayload(resp.Body, &status)
-	return status.simplify(), err
+	return status, err
 }
 
 // UpdateWAFRuleStatusInput specifies the parameters for the UpdateWAFRuleStatus call.
@@ -882,9 +852,9 @@ func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (WAFRuleStatus
 		return WAFRuleStatus{}, err
 	}
 
-	var status receivedWAFRuleStatus
+	var status WAFRuleStatus
 	err = jsonapi.UnmarshalPayload(resp.Body, &status)
-	return status.simplify(), err
+	return status, err
 }
 
 // UpdateWAFRuleTagStatusInput specifies the parameters for the UpdateWAFRuleStatus call.
@@ -964,7 +934,7 @@ func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (Get
 	}
 
 	statusResponse := GetWAFRuleStatusesResponse{
-		Rules: []WAFRuleStatus{},
+		Rules: []*WAFRuleStatus{},
 	}
 	err = c.interpretWAFRuleStatusesPage(&statusResponse, resp)
 
