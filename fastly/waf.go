@@ -595,9 +595,14 @@ type Ruleset struct {
 // UpdateWAFRuleStatusInput is the input to update a rule status.
 type UpdateWAFRuleStatusInput struct {
 	Service string
-	ID      string  `jsonapi:"primary, rule_status"`
-	RuleID  int
-	Status  string
+	WafID   string
+	RuleID  string
+	Status  string  `jsonapi:"attr,status"`
+}
+
+// UpdateRuleStatusInput is the ID of a RuleStatus which is Service-WafID
+func (i *UpdateWAFRuleStatusInput) ID() string {
+	return fmt.Sprintf("%s-%s", i.Service, i.WafID)
 }
 
 // UpdateWAFRuleStatus will update a rule status for a waf.
@@ -605,14 +610,14 @@ func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (*RuleStatus, 
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
-	if i.ID == "" {
+	if i.WafID == "" {
 		return nil, ErrMissingWAFID
 	}
-	if i.RuleID == 0 {
+	if i.RuleID == "" {
 		return nil, ErrMissingRuleID
 	}
-	path := fmt.Sprintf( "/service/%s/wafs/%s/rules/%i/rule_status", i.Service, i.ID, i.RuleID)
-	resp, err := c.PatchJSONAPI(path, i,nil)
+	path := fmt.Sprintf( "/service/%s/wafs/%s/rules/%i/rule_status", i.Service, i.WafID, i.RuleID)
+	resp, err := c.PatchJSONAPI(path,i ,nil)
 	if err != nil {
 		return nil, err
 	}
