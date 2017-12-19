@@ -1,9 +1,6 @@
 package fastly
 
-import (
-	"testing"
-	"github.com/davecgh/go-spew/spew"
-)
+import "testing"
 
 func TestClient_WAFs(t *testing.T) {
 	t.Parallel()

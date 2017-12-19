@@ -5,7 +5,6 @@ import (
 	"reflect"
 
 	"github.com/google/jsonapi"
-
 )
 
 // WAFConfigurationSet represents information about a configuration_set.
@@ -27,7 +26,6 @@ type WAF struct {
 // wafType is used for reflection because JSONAPI wants to know what it's
 // decoding into.
 var wafType = reflect.TypeOf(new(WAF))
-
 
 // ListWAFsInput is used as input to the ListWAFs function.
 type ListWAFsInput struct {
