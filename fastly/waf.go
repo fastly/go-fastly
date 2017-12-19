@@ -6,7 +6,6 @@ import (
 
 	"github.com/google/jsonapi"
 
-	"go/ast"
 )
 
 // WAFConfigurationSet represents information about a configuration_set.
@@ -564,7 +563,7 @@ type GetWAFRuleStatusInput struct {
 }
 
 // GetWafRuleStatus will get the RuleStatus for a RuleID and WAF in a Service.
-func (c *client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (*RuleStatus, error) {
+func (c *Client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (*RuleStatus, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
