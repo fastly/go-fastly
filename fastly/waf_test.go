@@ -334,7 +334,8 @@ func TestUpdateWAFRuleStatusesInput_validate(t *testing.T) {
 		{
 			description: "Accepts valid input",
 			input: UpdateWAFRuleStatusInput{
-				ID:      8104,
+				ID:      "as098k-8104",
+				RuleID:  8104,
 				Service: "108asj1",
 				WAF:     "as098k",
 				Status:  "block",
@@ -344,6 +345,7 @@ func TestUpdateWAFRuleStatusesInput_validate(t *testing.T) {
 		{
 			description: "Rejects input with missing int field",
 			input: UpdateWAFRuleStatusInput{
+				ID:      "as098k-8104",
 				Service: "108asj1",
 				WAF:     "as098k",
 				Status:  "block",
@@ -353,7 +355,8 @@ func TestUpdateWAFRuleStatusesInput_validate(t *testing.T) {
 		{
 			description: "Rejects input with missing string field",
 			input: UpdateWAFRuleStatusInput{
-				ID:     8104,
+				ID:     "as098k-8104",
+				RuleID: 8104,
 				WAF:    "as098k",
 				Status: "block",
 			},
