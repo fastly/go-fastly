@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"io/ioutil"
 	"testing"
+	"fmt"
+	"strconv"
 )
 
 func TestClient_WAFs(t *testing.T) {
@@ -205,6 +207,33 @@ func TestClient_WAFs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	var rsro *RuleStatus
+	record(t, "wafs/rule_status/get", func(c *Client) {
+		rsro, err = c.GetWAFRuleStatus(&GetWAFRuleStatusInput{
+			Service: testServiceID,
+			RuleID: 933120,
+			ID: waf.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	expectedID := fmt.Sprintf("%v-%v", waf.ID, strconv.Itoa(933120))
+
+	if rsro.ID !=  expectedID {
+		t.Errorf("Get RuleStatus failed %s\n", rsro.ID)
+	}
+
+	var urs *RuleStatus
+	record(t, "wafs/rule_status/update", func(c *Client) {
+		urs, err = c.UpdateWAFRuleStatus(&UpdateWAFRuleStatusInput{
+			Service: testServiceID,
+			RuleID: 933120,
+			ID: waf.ID,
+		})
+	})
+
 }
 
 func TestClient_ListWAFs_validation(t *testing.T) {
@@ -269,6 +298,9 @@ func TestClient_GetWAF_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 }
+
+
+
 
 //
 // func TestClient_UpdateWAF_validation(t *testing.T) {
