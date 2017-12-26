@@ -66,3 +66,33 @@ func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, 
 
 	return request, nil
 }
+
+// SimpleGet combines the RawRequest and Request methods,
+// but doesn't add any parameters or change any encoding in the URL
+// passed to it. It's mostly for calling the URLs given to us
+// directly from Fastly without mangling them.
+func (c *Client) SimpleGet(target string) (*http.Response, error) {
+	// We parse the URL and then convert it right back to a string
+	// later; this just acts as a check that Fastly isn't sending
+	// us nonsense.
+	url, err := url.Parse(target)
+	if err != nil {
+		return nil, err
+	}
+
+	request, err := http.NewRequest("GET", url.String(), nil)
+	if err != nil {
+		return nil, err
+	}
+
+	if len(c.apiKey) > 0 {
+		request.Header.Set(APIKeyHeader, c.apiKey)
+	}
+	request.Header.Set("User-Agent", UserAgent)
+
+	resp, err := checkResp(c.HTTPClient.Do(request))
+	if err != nil {
+		return resp, err
+	}
+	return resp, nil
+}

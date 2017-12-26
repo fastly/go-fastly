@@ -1,8 +1,15 @@
 package fastly
 
 import (
+	"bytes"
+	"encoding/json"
 	"fmt"
+	"io"
+	"io/ioutil"
+	"net/http"
 	"reflect"
+	"strconv"
+	"strings"
 
 	"github.com/google/jsonapi"
 	"strconv"
@@ -245,7 +252,7 @@ type OWASP struct {
 
 // GetOWASPInput is used as input to the GetOWASP function.
 type GetOWASPInput struct {
-	// Service is the ID of the service. WafID is the ID of the firewall.
+	// Service is the ID of the service. ID is the ID of the firewall.
 	// Both fields are required.
 	Service string
 	ID      string
@@ -308,9 +315,9 @@ func (c *Client) CreateOWASP(i *CreateOWASPInput) (*OWASP, error) {
 	return &owasp, nil
 }
 
-// CreateOWASPInput is used as input to the CreateOWASP function.
+// UpdateOWASPInput is used as input to the CreateOWASP function.
 type UpdateOWASPInput struct {
-	// Service is the ID of the service. WafID is the ID of the firewall.
+	// Service is the ID of the service. ID is the ID of the firewall.
 	// Both fields are required.
 	Service string
 	ID      string
@@ -375,7 +382,7 @@ func (c *Client) UpdateOWASP(i *UpdateOWASPInput) (*OWASP, error) {
 	return &owasp, nil
 }
 
-// Rules is the information about an WAF rules.
+// Rule is the information about a WAF rule.
 type Rule struct {
 	ID       string `jsonapi:"primary,rule"`
 	RuleID   string `jsonapi:"attr,rule_id,omitempty"`
@@ -640,7 +647,7 @@ func (c *Client) GetWAFRuleRuleSets(i *GetWAFRuleRuleSetsInput) (*Ruleset, error
 	return &ruleset, nil
 }
 
-// UpdateWAFRuleRuleSetsInput is used as input to the UpdateWafRuleSets function.
+// UpdateWAFRuleRuleSetsInput is used as input to the UpdateWAFRuleSets function.
 type UpdateWAFRuleRuleSetsInput struct {
 	// Service is the ID of the service. ID is the ID of the firewall.
 	// Both fields are required.
@@ -648,8 +655,8 @@ type UpdateWAFRuleRuleSetsInput struct {
 	ID      string `jsonapi:"primary,ruleset"`
 }
 
-// UpdateWafRuleSets updates the rulesets for a role associated with a firewall WAF.
-func (c *Client) UpdateWafRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, error) {
+// UpdateWAFRuleSets updates the rulesets for a role associated with a firewall WAF.
+func (c *Client) UpdateWAFRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
 	}
@@ -669,4 +676,360 @@ func (c *Client) UpdateWafRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, err
 		return nil, err
 	}
 	return &ruleset, nil
+}
+
+// GetWAFRuleStatusesInput specifies the parameters for the GetWAFRuleStatuses call
+type GetWAFRuleStatusesInput struct {
+	Service string
+	WAF     string
+	Filters GetWAFRuleStatusesFilters
+}
+
+// WAFRuleStatus stores the information about a rule received from Fastly
+type WAFRuleStatus struct {
+	ID     string `jsonapi:"primary,rule_status"` // This is the ID of the status, not the ID of the rule. Currently, it is of the format ${WAF_ID}-${rule_ID}, if you want to infer those based on this field.
+	Status string `jsonapi:"attr,status"`
+
+	Tag string `jsonapi:"attr,name,omitempty"` // This will only be set in a response for modifying rules based on tag.
+
+	// HACK: These two fields are supposed to be sent in response
+	// to requests for rule status data, but the entire "Relationships"
+	// field is currently missing from Fastly responses, so they are
+	// instead inferred from the status ID (see inferIDs method).
+	// WAF  newTypeThatDoesntExistNow `jsonapi:"relation,waf"`
+	// Rule newTypeThatDoesntExistNow `jsonapi:"relation,rule"`
+}
+
+// GetWAFRuleStatusesFilters provides a set of parameters for filtering the
+// results of the call to get the rules associated with a WAF.
+type GetWAFRuleStatusesFilters struct {
+	Status     string
+	Accuracy   int
+	Maturity   int
+	Message    string
+	Revision   int
+	RuleID     string
+	TagID      int    // Filter by a single tag ID.
+	TagName    string // Filter by single tag name.
+	Version    string
+	Tags       []int // Return all rules with any of the specified tag IDs.
+	MaxResults int   // Max number of returned results per request.
+	Page       int   // Which page of results to return.
+}
+
+// formatFilters converts user input into query parameters for filtering
+// Fastly results for rules in a WAF.
+func (i *GetWAFRuleStatusesInput) formatFilters() map[string]string {
+	input := i.Filters
+	result := map[string]string{}
+	pairings := map[string]interface{}{
+		"filter[status]":           input.Status,
+		"filter[rule][accuracy]":   input.Accuracy,
+		"filter[rule][maturity]":   input.Maturity,
+		"filter[rule][message]":    input.Message,
+		"filter[rule][revision]":   input.Revision,
+		"filter[rule][rule_id]":    input.RuleID,
+		"filter[rule][tags]":       input.TagID,
+		"filter[rule][tags][name]": input.TagName,
+		"filter[rule][version]":    input.Version,
+		"include":                  input.Tags,
+		"page[size]":               input.MaxResults,
+		"page[number]":             input.Page, // starts at 1, not 0
+	}
+	// NOTE: This setup means we will not be able to send the zero value
+	// of any of these filters. It doesn't appear we would need to at present.
+	for key, value := range pairings {
+		switch t := reflect.TypeOf(value).String(); t {
+		case "string":
+			if value != "" {
+				result[key] = value.(string)
+			}
+		case "int":
+			if value != 0 {
+				result[key] = strconv.Itoa(value.(int))
+			}
+		case "[]int":
+			// convert ints to strings
+			toStrings := []string{}
+			values := value.([]int)
+			for _, i := range values {
+				toStrings = append(toStrings, strconv.Itoa(i))
+			}
+			// concat strings
+			if len(values) > 0 {
+				result[key] = strings.Join(toStrings, ",")
+			}
+		}
+	}
+	return result
+}
+
+// GetWAFRuleStatuses fetches the status of a subset of rules associated with a WAF.
+func (c *Client) GetWAFRuleStatuses(i *GetWAFRuleStatusesInput) (GetWAFRuleStatusesResponse, error) {
+	statusResponse := GetWAFRuleStatusesResponse{Rules: []*WAFRuleStatus{}}
+	if i.Service == "" {
+		return statusResponse, ErrMissingService
+	}
+	if i.WAF == "" {
+		return statusResponse, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", i.Service, i.WAF)
+	filters := &RequestOptions{Params: i.formatFilters()}
+
+	resp, err := c.Get(path, filters)
+	if err != nil {
+		return statusResponse, err
+	}
+	err = c.interpretWAFRuleStatusesPage(&statusResponse, resp)
+	// NOTE: It's possible for statusResponse to be partially completed before an error
+	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
+	// an error.
+	return statusResponse, err
+}
+
+// interpretWAFRuleStatusesPage accepts a Fastly response for a set of WAF rule statuses
+// and unmarshals the results. If there are more pages of results, it fetches the next
+// page, adds that response to the array of results, and repeats until all results have
+// been fetched.
+func (c *Client) interpretWAFRuleStatusesPage(answer *GetWAFRuleStatusesResponse, received *http.Response) error {
+	// before we pull the status info out of the response body, fetch
+	// pagination info from it:
+	pages, body, err := getPages(received.Body)
+	if err != nil {
+		return err
+	}
+	data, err := jsonapi.UnmarshalManyPayload(body, reflect.TypeOf(new(WAFRuleStatus)))
+	if err != nil {
+		return err
+	}
+
+	for i := range data {
+		typed, ok := data[i].(*WAFRuleStatus)
+		if !ok {
+			return fmt.Errorf("got back response of unexpected type")
+		}
+		answer.Rules = append(answer.Rules, typed)
+	}
+	if pages.Next != "" {
+		// NOTE: pages.Next URL includes filters already
+		resp, err := c.SimpleGet(pages.Next)
+		if err != nil {
+			return err
+		}
+		c.interpretWAFRuleStatusesPage(answer, resp)
+	}
+	return nil
+}
+
+// linksResponse is used to pull the "Links" pagination fields from
+// a call to Fastly; these are excluded from the results of the jsonapi
+// call to `UnmarshalManyPayload()`, so we have to fetch them separately.
+type linksResponse struct {
+	Links paginationInfo `json:"links"`
+}
+
+// paginationInfo stores links to searches related to the current one, showing
+// any information about additional results being stored on another page
+type paginationInfo struct {
+	First string `json:"first,omitempty"`
+	Last  string `json:"last,omitempty"`
+	Next  string `json:"next,omitempty"`
+}
+
+// GetWAFRuleStatusesResponse is the data returned to the user from a GetWAFRuleStatus call
+type GetWAFRuleStatusesResponse struct {
+	Rules []*WAFRuleStatus
+}
+
+// getPages parses a response to get the pagination data without destroying
+// the reader we receive as "resp.Body"; this essentially copies resp.Body
+// and returns it so we can use it again.
+func getPages(body io.Reader) (paginationInfo, io.Reader, error) {
+	var buf bytes.Buffer
+	tee := io.TeeReader(body, &buf)
+
+	bodyBytes, err := ioutil.ReadAll(tee)
+	if err != nil {
+		return paginationInfo{}, nil, err
+	}
+
+	var pages linksResponse
+	json.Unmarshal(bodyBytes, &pages)
+	return pages.Links, bytes.NewReader(buf.Bytes()), nil
+}
+
+// GetWAFRuleStatusInput specifies the parameters for the GetWAFRuleStatus call.
+type GetWAFRuleStatusInput struct {
+	ID      int
+	Service string
+	WAF     string
+}
+
+// GetWAFRuleStatus fetches the status of a single rule associated with a WAF.
+func (c *Client) GetWAFRuleStatus(i *GetWAFRuleStatusInput) (WAFRuleStatus, error) {
+	if i.ID == 0 {
+		return WAFRuleStatus{}, ErrMissingRuleID
+	}
+	if i.Service == "" {
+		return WAFRuleStatus{}, ErrMissingService
+	}
+	if i.WAF == "" {
+		return WAFRuleStatus{}, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rules/%d/rule_status", i.Service, i.WAF, i.ID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	var status WAFRuleStatus
+	err = jsonapi.UnmarshalPayload(resp.Body, &status)
+	return status, err
+}
+
+// UpdateWAFRuleStatusInput specifies the parameters for the UpdateWAFRuleStatus call.
+type UpdateWAFRuleStatusInput struct {
+	ID      string `jsonapi:"primary,rule_status"` // The ID of the rule status. Currently in the format ${WAF_ID}-${rule_ID}.
+	RuleID  int
+	Service string
+	WAF     string
+	Status  string `jsonapi:"attr,status"`
+}
+
+// validate makes sure the UpdateWAFRuleStatusInput instance has all
+// fields we need to request a change.
+func (i UpdateWAFRuleStatusInput) validate() error {
+	if i.ID == "" {
+		return ErrMissingID
+	}
+	if i.RuleID == 0 {
+		return ErrMissingRuleID
+	}
+	if i.Service == "" {
+		return ErrMissingService
+	}
+	if i.WAF == "" {
+		return ErrMissingWAFID
+	}
+	if i.Status == "" {
+		return ErrMissingStatus
+	}
+	return nil
+}
+
+// UpdateWAFRuleStatus changes the status of a single rule associated with a WAF.
+func (c *Client) UpdateWAFRuleStatus(i *UpdateWAFRuleStatusInput) (WAFRuleStatus, error) {
+	if err := i.validate(); err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rules/%d/rule_status", i.Service, i.WAF, i.RuleID)
+
+	var buf bytes.Buffer
+	err := jsonapi.MarshalPayload(&buf, i)
+	if err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	options := &RequestOptions{
+		Body: &buf,
+		Headers: map[string]string{
+			"Content-Type": jsonapi.MediaType,
+			"Accept":       jsonapi.MediaType,
+		},
+	}
+
+	resp, err := c.Patch(path, options)
+	if err != nil {
+		return WAFRuleStatus{}, err
+	}
+
+	var status WAFRuleStatus
+	err = jsonapi.UnmarshalPayload(resp.Body, &status)
+	return status, err
+}
+
+// UpdateWAFRuleTagStatusInput specifies the parameters for the UpdateWAFRuleStatus call.
+type UpdateWAFRuleTagStatusInput struct {
+	Service string
+	WAF     string
+	Status  string `json:"status"` // `jsonapi:"attr,status"`
+	Tag     string `json:"name"`   // `jsonapi:"attr,name"`
+	Force   bool   `json:"force"`  // `jsonapi:"attr,force"`
+	// HACK: This won't work with the jsonapi struct tags, because the POST body expected by
+	// Fastly doesn't conform to the jsonapi spec -- there's no ID field at the top level,
+	// and there's no way for us to indicate the "type" of the entity without a primary key.
+	// ID field is required: http://jsonapi.org/format/#document-resource-objects
+}
+
+// updateWAFRuleTagStatusBody is the top-level object sent to Fastly based on
+// UpdateWAFRuleTagStatusInput from the user.
+type updateWAFRuleTagStatusBody struct {
+	Data updateWAFRuleTagStatusData `json:"data"`
+}
+
+type updateWAFRuleTagStatusData struct {
+	Type       string                       `json:"type"`       // hard-coded because we can't use jsonapi
+	Attributes *UpdateWAFRuleTagStatusInput `json:"attributes"` // supplied by user as input
+}
+
+// validate makes sure the UpdateWAFRuleStatusInput instance has all
+// fields we need to request a change. Almost, but not quite, identical to
+// UpdateWAFRuleStatusInput.validate()
+func (i UpdateWAFRuleTagStatusInput) validate() error {
+	if i.Tag == "" {
+		return ErrMissingTag
+	}
+	if i.Service == "" {
+		return ErrMissingService
+	}
+	if i.WAF == "" {
+		return ErrMissingWAFID
+	}
+	if i.Status == "" {
+		return ErrMissingStatus
+	}
+	return nil
+}
+
+// UpdateWAFRuleTagStatus changes the status of a single rule associated with a WAF.
+// NOTE: This call currently appears to return *all* rules attached to the WAF, rather
+// than just the ones that were modified by the call.
+func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (GetWAFRuleStatusesResponse, error) {
+	if err := input.validate(); err != nil {
+		return GetWAFRuleStatusesResponse{}, err
+	}
+
+	path := fmt.Sprintf("/service/%s/wafs/%s/rule_statuses", input.Service, input.WAF)
+
+	body := updateWAFRuleTagStatusBody{
+		Data: updateWAFRuleTagStatusData{
+			Type:       "rule_status",
+			Attributes: input,
+		},
+	}
+	encoded, err := json.Marshal(body)
+	if err != nil {
+		return GetWAFRuleStatusesResponse{}, err
+	}
+
+	options := &RequestOptions{
+		Body: bytes.NewReader(encoded),
+		Headers: map[string]string{
+			"Content-Type": jsonapi.MediaType,
+			"Accept":       jsonapi.MediaType,
+		},
+	}
+
+	resp, err := c.Post(path, options)
+	if err != nil {
+		return GetWAFRuleStatusesResponse{}, err
+	}
+
+	statusResponse := GetWAFRuleStatusesResponse{Rules: []*WAFRuleStatus{}}
+	err = c.interpretWAFRuleStatusesPage(&statusResponse, resp)
+
+	return statusResponse, err
 }
