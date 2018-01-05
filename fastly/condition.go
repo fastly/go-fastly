@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"fmt"
-	"net/url"
 	"sort"
 )
 
