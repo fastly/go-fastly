@@ -72,7 +72,7 @@ func TestClient_Conditions(t *testing.T) {
 		newCondition, err = c.GetCondition(&GetConditionInput{
 			Service: testServiceID,
 			Version: tv.Number,
-			Name:    "test/condition",
+			Name:    "test condition",
 		})
 	})
 	if err != nil {
@@ -97,7 +97,7 @@ func TestClient_Conditions(t *testing.T) {
 		updatedCondition, err = c.UpdateCondition(&UpdateConditionInput{
 			Service:   testServiceID,
 			Version:   tv.Number,
-			Name:      "test/condition",
+			Name:      "test condition",
 			Statement: "req.url~+\"updated.html\"",
 		})
 	})
@@ -113,7 +113,7 @@ func TestClient_Conditions(t *testing.T) {
 		err = c.DeleteCondition(&DeleteConditionInput{
 			Service: testServiceID,
 			Version: tv.Number,
-			Name:    "test/condition",
+			Name:    "test condition",
 		})
 	})
 	if err != nil {
