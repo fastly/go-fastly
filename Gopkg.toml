@@ -1,0 +1,12 @@
+
+[[constraint]]
+  name = "github.com/ajg/form"
+  version = "1.5.0"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/hashicorp/go-cleanhttp"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/mitchellh/mapstructure"

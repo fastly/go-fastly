@@ -1,0 +1,47 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/688/vcl/test-vcl
+    method: GET
+  response:
+    body: '{"version":688,"name":"test-vcl","content":"\nbackend default {\n  .host
+      = \"127.0.0.1\";\n  .port = \"9092\";\n}\n\nsub vcl_recv {\n  set req.backend
+      = default;\n}\n\nsub vcl_hash {\n  set req.hash += req.url;\n  set req.hash
+      += req.http.host;\n  set req.hash += \"0\";\n}\n","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","main":false,"created_at":"2017-07-20T01:15:10+00:00","updated_at":"2017-07-20T01:15:10+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:11 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513311.296949,VS0,VE77
+    status: 200 OK
+    code: 200

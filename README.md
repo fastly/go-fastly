@@ -11,18 +11,19 @@ Go Fastly is a Golang API client for interacting with most facets of the
 
 Installation
 ------------
-This is a client library, so there is nothing to install.
+This is a client library, so there is nothing to install. You must be running Go
+1.8 or higher.
 
 Usage
 -----
 Download the library into your `$GOPATH`:
 
-    $ go get github.com/sethvargo/go-fastly
+    $ go get github.com/sethvargo/go-fastly/fastly
 
 Import the library into your tool:
 
 ```go
-import "github.com/sethvargo/go-fastly"
+import "github.com/sethvargo/go-fastly/fastly"
 ```
 
 Examples
@@ -82,7 +83,7 @@ if err != nil {
 fmt.Println(domain.Name)
 
 // Now we can validate that our version is valid.
-valid, err := client.ValidateVersion(&fastly.ValidateVersionInput{
+valid, _, err := client.ValidateVersion(&fastly.ValidateVersionInput{
   Service: serviceID,
   Version: version.Number,
 })

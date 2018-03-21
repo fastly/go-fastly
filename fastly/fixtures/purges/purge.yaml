@@ -1,0 +1,32 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/https://releases.hashicorp.com
+    method: PURGE
+  response:
+    body: |
+      {"status": "ok", "id": "17722-1500509140-5286"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "48"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:14:59 GMT
+      Via:
+      - 1.1 varnish
+      X-Varnish:
+      - "4247201073"
+    status: 200 OK
+    code: 200

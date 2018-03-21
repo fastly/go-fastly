@@ -28,7 +28,6 @@ Usage
 
 ```go
 import "github.com/ajg/form"
-// or: "gopkg.in/ajg/form.v1"
 ```
 
 Given a type like the following...

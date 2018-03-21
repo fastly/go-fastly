@@ -1,0 +1,68 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=786&address=example.com&format=format&format_version=2&hostname=example.com&message_type=classic&name=test-syslog&port=1234&token=abcd1234
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "786"
+      address:
+      - example.com
+      format:
+      - format
+      format_version:
+      - "2"
+      hostname:
+      - example.com
+      message_type:
+      - classic
+      name:
+      - test-syslog
+      port:
+      - "1234"
+      token:
+      - abcd1234
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/logging/syslog
+    method: POST
+  response:
+    body: '{"address":"example.com","format":"format","format_version":"2","hostname":"example.com","message_type":"classic","name":"test-syslog","port":"1234","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"786","placement":null,"response_condition":"","public_key":null,"updated_at":"2017-09-05T17:56:52+00:00","ipv4":null,"tls_hostname":null,"use_tls":"0","tls_ca_cert":null,"deleted_at":null,"created_at":"2017-09-05T17:56:52+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 05 Sep 2017 17:56:52 GMT
+      Fastly-Ratelimit-Remaining:
+      - "883"
+      Fastly-Ratelimit-Reset:
+      - "1504634400"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17730-DCA
+      X-Timer:
+      - S1504634212.342848,VS0,VE350
+    status: 200 OK
+    code: 200

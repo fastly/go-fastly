@@ -1,0 +1,134 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/677/gzip/test-gzip
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ version =\u003e
+      677, name =\u003e test-gzip, deleted =\u003e 0000-00-00 00:00:00, service =\u003e
+      7i6HN3TK9wS159v2gPAZ8A }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:07 GMT
+      Fastly-Ratelimit-Remaining:
+      - "935"
+      Fastly-Ratelimit-Reset:
+      - "1500516000"
+      Status:
+      - 404 Not Found
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513308.525221,VS0,VE93
+    status: 404 Not Found
+    code: 404
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/677/gzip/test-gzip-omit
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:08 GMT
+      Fastly-Ratelimit-Remaining:
+      - "934"
+      Fastly-Ratelimit-Reset:
+      - "1500516000"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513308.633632,VS0,VE389
+    status: 200 OK
+    code: 200
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/677/gzip/new-test-gzip
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ version =\u003e
+      677, name =\u003e new-test-gzip, deleted =\u003e 0000-00-00 00:00:00, service
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:08 GMT
+      Fastly-Ratelimit-Remaining:
+      - "929"
+      Fastly-Ratelimit-Reset:
+      - "1500516000"
+      Status:
+      - 404 Not Found
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513308.039130,VS0,VE201
+    status: 404 Not Found
+    code: 404

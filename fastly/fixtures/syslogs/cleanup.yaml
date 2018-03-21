@@ -1,0 +1,92 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      User-Agent:
+      - FastlyGo/0.4.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/704/logging/syslog/test-syslog
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
+      704, name =\u003e test-syslog, deleted =\u003e 0000-00-00 00:00:00, service
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 07 Aug 2017 16:30:21 GMT
+      Fastly-Ratelimit-Remaining:
+      - "985"
+      Fastly-Ratelimit-Reset:
+      - "1502125200"
+      Status:
+      - 404 Not Found
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-den6026-DEN
+      X-Timer:
+      - S1502123421.405708,VS0,VE136
+    status: 404 Not Found
+    code: 404
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+      User-Agent:
+      - FastlyGo/0.4.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/704/logging/syslog/new-test-syslog
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
+      704, name =\u003e new-test-syslog, deleted =\u003e 0000-00-00 00:00:00, service
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 07 Aug 2017 16:30:22 GMT
+      Fastly-Ratelimit-Remaining:
+      - "984"
+      Fastly-Ratelimit-Reset:
+      - "1502125200"
+      Status:
+      - 404 Not Found
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-den6026-DEN
+      X-Timer:
+      - S1502123422.403725,VS0,VE167
+    status: 404 Not Found
+    code: 404

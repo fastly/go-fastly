@@ -1,0 +1,56 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: Name=test-ftp&Service=7i6HN3TK9wS159v2gPAZ8A&Version=678&name=new-test-ftp
+    form:
+      Name:
+      - test-ftp
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "678"
+      name:
+      - new-test-ftp
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/678/logging/ftp/test-ftp
+    method: PUT
+  response:
+    body: '{"placement":null,"format_version":"2","hostname":"example.com","password":"password","gzip_level":"9","response_condition":"","user":"username","address":"example.com","public_key":null,"updated_at":"2017-07-20T01:15:06+00:00","message_type":"classic","period":"12","ipv4":null,"name":"new-test-ftp","port":"1234","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"678","path":"/dir","deleted_at":null,"created_at":"2017-07-20T01:15:06+00:00","format":"format"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:07 GMT
+      Fastly-Ratelimit-Remaining:
+      - "942"
+      Fastly-Ratelimit-Reset:
+      - "1500516000"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513307.062881,VS0,VE438
+    status: 200 OK
+    code: 200

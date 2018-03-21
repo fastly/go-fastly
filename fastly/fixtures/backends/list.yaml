@@ -1,0 +1,44 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/693/backend
+    method: GET
+  response:
+    body: '[{"max_tls_version":null,"ssl_client_cert":null,"hostname":"integ-test.go-fastly.com","error_threshold":0,"first_byte_timeout":15000,"client_cert":null,"weight":100,"address":"integ-test.go-fastly.com","updated_at":"2017-07-20T01:15:13+00:00","connect_timeout":1500,"ipv4":null,"ssl_ciphers":null,"name":"test-backend","port":1234,"between_bytes_timeout":10000,"ssl_client_key":null,"ssl_ca_cert":null,"auto_loadbalance":false,"ssl_check_cert":true,"shield":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","request_condition":"","ssl_cert_hostname":null,"ssl_hostname":null,"ssl_sni_hostname":null,"min_tls_version":null,"ipv6":null,"version":693,"deleted_at":null,"healthcheck":null,"max_conn":200,"use_ssl":false,"created_at":"2017-07-20T01:15:13+00:00","comment":""}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:13 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513313.403467,VS0,VE277
+    status: 200 OK
+    code: 200

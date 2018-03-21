@@ -1,0 +1,55 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://rt.fastly.com/v1/channel/7i6HN3TK9wS159v2gPAZ8A/ts/0/limit/3
+    method: GET
+  response:
+    body: '{"Data":[],"Timestamp":1501167749,"AggregateDelay":9,"Error":"No data available,
+      please retry"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Access-Control-Allow-Headers:
+      - Fastly-Key, Content-Type
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Request-Headers:
+      - Fastly-Key, Content-Type, Fastly-Client
+      Age:
+      - "0"
+      Cache-Control:
+      - max-age=1
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 27 Jul 2017 15:02:29 GMT
+      Fastly-Debug-Digest:
+      - 7c87051cd549c7d23b25466bf564a7bcdd0b3f54a98aee21e309e3dc56f343ba
+      Strict-Transport-Security:
+      - max-age=63072000; includeSubDomains
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Fastly-Rts:
+      - whistler-iad2500
+      X-Served-By:
+      - cache-iad2133-IAD, cache-dca17750-DCA
+      X-Timer:
+      - S1501167749.928462,VS0,VE1031
+    status: 200 OK
+    code: 200

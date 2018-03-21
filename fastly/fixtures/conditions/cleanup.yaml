@@ -1,0 +1,48 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/700/condition/test%252Fcondition
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find Condition ''{ version
+      =\u003e 700, name =\u003e test/condition, deleted =\u003e 0000-00-00 00:00:00,
+      service =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 02:25:47 GMT
+      Fastly-Ratelimit-Remaining:
+      - "990"
+      Fastly-Ratelimit-Reset:
+      - "1500519600"
+      Status:
+      - 404 Not Found
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-dca17738-DCA
+      X-Timer:
+      - S1500517547.044761,VS0,VE220
+    status: 404 Not Found
+    code: 404

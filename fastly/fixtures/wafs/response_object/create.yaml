@@ -1,0 +1,62 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=786&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "786"
+      content:
+      - abcd
+      content_type:
+      - text/plain
+      name:
+      - test-response-object
+      response:
+      - Ok
+      status:
+      - "200"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/response_object
+    method: POST
+  response:
+    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"786","deleted_at":null,"cache_condition":"","created_at":"2017-09-05T17:56:53+00:00","request_condition":"","updated_at":"2017-09-05T17:56:53+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 05 Sep 2017 17:56:53 GMT
+      Fastly-Ratelimit-Remaining:
+      - "881"
+      Fastly-Ratelimit-Reset:
+      - "1504634400"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17730-DCA
+      X-Timer:
+      - S1504634213.865023,VS0,VE513
+    status: 200 OK
+    code: 200

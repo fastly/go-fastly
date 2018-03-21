@@ -1,0 +1,45 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/6aWRuJBATbCeLKOQ4BCLJU/entries
+    method: GET
+  response:
+    body: '[{"ip":"10.0.0.3","negated":"0","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2017-07-20T01:14:58+00:00","acl_id":"6aWRuJBATbCeLKOQ4BCLJU","comment":"test
+      entry","updated_at":"2017-07-20T01:14:58+00:00","id":"6amW9mve05f7SlE0YZKQqC","subnet":8}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:14:58 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513298.131099,VS0,VE290
+    status: 200 OK
+    code: 200

@@ -1,0 +1,45 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/stats/service/7i6HN3TK9wS159v2gPAZ8A?by=minute&from=10+days+ago&region=europe&to=now
+    method: GET
+  response:
+    body: '{"data":[],"status":"success","msg":null,"meta":{"from":"2017-07-17 15:02:28
+      UTC","to":"2017-07-27 15:02:28 UTC","by":"minute","region":"europe"}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Content-Length:
+      - "146"
+      Content-Type:
+      - application/json;charset=utf-8
+      Date:
+      - Thu, 27 Jul 2017 15:02:29 GMT
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17736-DCA
+      X-Timer:
+      - S1501167749.928317,VS0,VE439
+    status: 200 OK
+    code: 200

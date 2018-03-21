@@ -1,0 +1,52 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: |
+      {"data":{"type":"waf","id":"4fuxZ7bpag8laOjYwxlqZM","attributes":{"response":"test-response-object-2"}}}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs/4fuxZ7bpag8laOjYwxlqZM
+    method: PATCH
+  response:
+    body: '{"data":{"id":"4fuxZ7bpag8laOjYwxlqZM","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object-2","version":786},"relationships":{"configuration_set":{"data":{"id":"4Z09wgjp7do8NrOIzlckFS","type":"configuration_set"}}}},"meta":{"warnings":[{"title":"This
+      version of this service must be active","detail":"You may only update the WAF
+      VCL on an active version of a service.  The version 786 of service 7i6HN3TK9wS159v2gPAZ8A
+      is not active.  You may activate it through https://app.fastly.com or through
+      the API: https://docs.fastly.com/api/config#version  Be sure to review the version''s
+      changes before activating it."}]}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "683"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Tue, 05 Sep 2017 17:56:54 GMT
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17730-DCA
+      X-Timer:
+      - S1504634215.586816,VS0,VE156
+    status: 200 OK
+    code: 200

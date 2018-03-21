@@ -1,0 +1,62 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=674&format=format&name=test-logentries&port=1234&token=abcd1234&use_tls=1
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "674"
+      format:
+      - format
+      name:
+      - test-logentries
+      port:
+      - "1234"
+      token:
+      - abcd1234
+      use_tls:
+      - "1"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/674/logging/logentries
+    method: POST
+  response:
+    body: '{"format":"format","name":"test-logentries","port":"1234","token":"abcd1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"674","placement":null,"format_version":"1","response_condition":"","public_key":null,"updated_at":"2017-07-20T01:15:03+00:00","deleted_at":null,"created_at":"2017-07-20T01:15:03+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:04 GMT
+      Fastly-Ratelimit-Remaining:
+      - "968"
+      Fastly-Ratelimit-Reset:
+      - "1500516000"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9050-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513303.308101,VS0,VE970
+    status: 200 OK
+    code: 200
