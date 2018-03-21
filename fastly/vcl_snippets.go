@@ -330,7 +330,7 @@ func (c *Client) UpdateVCLSnippetName(i *UpdateVCLSnippetInput) (*VCLSnippet, er
 	}
 
 	// Update a specific snippet for a particular service and version
-	path := fmt.Sprintf("/service/%s/version/%dsnippet/%s", i.Service, i.Version, i.OldName)
+	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.Service, i.Version, i.OldName)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
