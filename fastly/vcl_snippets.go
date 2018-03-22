@@ -174,12 +174,12 @@ type CreateVCLSnippetInput struct {
 }
 
 // setDefaults sets the defaults for the CreateVCLSnippetInput.
-func (self *CreateVCLSnippetInput) setDefaults() {
-	if self.Type == "" {
-		self.Type = "none"
+func (i *CreateVCLSnippetInput) setDefaults() {
+	if i.Type == "" {
+		i.Type = "none"
 	}
-	if self.Priority == 0 {
-		self.Priority = 100
+	if i.Priority == 0 {
+		i.Priority = 100
 	}
 }
 
