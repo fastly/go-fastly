@@ -292,7 +292,7 @@ type ValidateVCLResponse struct {
 	Status   string   `mapstructure:"status"`
 	Message  string   `mapstructure:"msg"`
 	Warnings []string `mapstructure:"warnings"`
-	Errors   []string `mapstructure:"warnings"`
+	Errors   []string `mapstructure:"errors"`
 }
 
 // ValidateVCL validates the given VCL version.
