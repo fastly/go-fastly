@@ -248,7 +248,7 @@ func (c *Client) CreateVCLSnippet(i *CreateVCLSnippetInput) (*VCLSnippet, error)
 	return vclSnippet, nil
 }
 
-// UpdateVclSnippetInput is used as input to the UpdateVCL function.
+// UpdateDynamicVCLSnippetInput is used as input to the UpdateVCL function.
 type UpdateDynamicVCLSnippetInput struct {
 	// Service is the ID of the service (required).
 	Service string
@@ -280,7 +280,7 @@ type UpdateDynamicVCLSnippetInput struct {
 	Activate bool `form:"activate,omitempty"`
 }
 
-// UpdateVCLSnippet updates a dynamic snippet for a particular service.
+// UpdateDynamicVCLSnippet updates a dynamic snippet for a particular service.
 func (c *Client) UpdateDynamicVCLSnippet(i *UpdateDynamicVCLSnippetInput) (*VCLSnippet, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
@@ -304,7 +304,7 @@ func (c *Client) UpdateDynamicVCLSnippet(i *UpdateDynamicVCLSnippetInput) (*VCLS
 	return vclSnippet, nil
 }
 
-// UpdateVclSnippetInput is used as input to the UpdateVCLSnippetName function.
+// UpdateVCLSnippetInput is used as input to the UpdateVCLSnippetName function.
 type UpdateVCLSnippetInput struct {
 	// Service is the ID of the service (required).
 	Service string
@@ -319,7 +319,7 @@ type UpdateVCLSnippetInput struct {
 	NewName string `form:"name,omitempty"`
 }
 
-// UpdateVCLSnippet updates a dynamic snippet for a particular service.
+// UpdateVCLSnippetName updates a dynamic snippet for a particular service.
 func (c *Client) UpdateVCLSnippetName(i *UpdateVCLSnippetInput) (*VCLSnippet, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
@@ -345,7 +345,7 @@ func (c *Client) UpdateVCLSnippetName(i *UpdateVCLSnippetInput) (*VCLSnippet, er
 	return vclSnippet, nil
 }
 
-// DeleteVclSnippetInput is the input parameter to DeleteVCLSnippet.
+// DeleteVCLSnippetInput is the input parameter to DeleteVCLSnippet.
 type DeleteVCLSnippetInput struct {
 	// Service is the ID of the service. Version is the specific configuration
 	// version. Both fields are required.
