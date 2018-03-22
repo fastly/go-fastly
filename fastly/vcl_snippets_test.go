@@ -14,7 +14,7 @@ func TestClient_VCLSnippets(t *testing.T) {
 	vclSnippetName := "test-vcl-snippet"
 	content := `
 if ( req.url ) {
-    set req.http.my-snippet-test-header = \"true\";
+    set req.http.my-snippet-test-header = "true";
 }
 `
 
