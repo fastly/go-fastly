@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/google/jsonapi"
 )
@@ -96,6 +97,11 @@ var ErrMissingOWASPID = errors.New("Missing required field 'OWASPID'")
 // ErrMissingRuleID is an error that is returned was an input struct
 // requires a "RuleID" key, but one was not set
 var ErrMissingRuleID = errors.New("Missing required field 'RuleID'")
+
+// ErrInvalidVCL creates a error by joining a slice of error strings.
+func ErrInvalidVCL(vclErrors []string) error {
+	return errors.New(strings.Join(vclErrors, "\n"))
+}
 
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
