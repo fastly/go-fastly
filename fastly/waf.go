@@ -923,3 +923,93 @@ func (c *Client) UpdateWAFRuleTagStatus(input *UpdateWAFRuleTagStatusInput) (Get
 
 	return statusResponse, err
 }
+
+// UpdateWAFConfigSetInput is used as input to the UpdateWAFConfigSet function.
+type UpdateWAFConfigSetInput struct {
+	WAFList     []ConfigSetWAFs
+	ConfigSetID string
+}
+
+// ConfigSetWAFs used to store the ID of a WAF needed to update config set relationships
+type ConfigSetWAFs struct {
+	ID string `jsonapi:"primary,waf"`
+}
+
+// UpdateWAFConfigSetResponse stores the list of WAFs returned from the call to update its config set
+type UpdateWAFConfigSetResponse struct {
+	IDs []ConfigSetWAFs `jsonapi:"primary,waf"`
+}
+
+// UpdateWAFConfigSet updates a list of WAFs with the given configset
+func (c *Client) UpdateWAFConfigSet(i *UpdateWAFConfigSetInput) (UpdateWAFConfigSetResponse, error) {
+	if err := i.validate(); err != nil {
+		return UpdateWAFConfigSetResponse{}, err
+	}
+	var wafs []interface{}
+	for _, w := range i.WAFList {
+		wafs = append(wafs, &w)
+	}
+
+	path := fmt.Sprintf("/wafs/configuration_sets/%s/relationships/wafs", i.ConfigSetID)
+	resp, err := c.PatchJSONAPI(path, wafs, nil)
+	if err != nil {
+		return UpdateWAFConfigSetResponse{}, err
+	}
+
+	wafConfigSetResponse := UpdateWAFConfigSetResponse{}
+
+	err = c.interpretWAFCongfigSetResponse(&wafConfigSetResponse, resp)
+	if err != nil {
+		return UpdateWAFConfigSetResponse{}, err
+	}
+
+	return wafConfigSetResponse, nil
+}
+
+// validate makes sure the UpdateWAFConfigSetInput instance has all
+// fields we need to assign the config set to the WAF(s)
+func (i UpdateWAFConfigSetInput) validate() error {
+	if i.ConfigSetID == "" {
+		return ErrMissingConfigSetID
+	}
+
+	if len(i.WAFList) == 0 {
+		return ErrMissingWAFList
+	}
+
+	return nil
+}
+
+// interpretWAFCongfigSetResponse accepts a Fastly response containing a set of WAF ID's that
+// where given to associate with the config set and unmarshals the results.
+// If there are more pages of results, it fetches the next
+// page, adds that response to the array of results, and repeats until all results have
+// been fetched.
+func (c *Client) interpretWAFCongfigSetResponse(answer *UpdateWAFConfigSetResponse, received *http.Response) error {
+	pages, body, err := getPages(received.Body)
+	if err != nil {
+		return err
+	}
+	data, err := jsonapi.UnmarshalManyPayload(body, reflect.TypeOf([]ConfigSetWAFs{}))
+	if err != nil {
+		return err
+	}
+
+	for i := range data {
+		typed, ok := data[i].(*ConfigSetWAFs)
+		if !ok {
+			return fmt.Errorf("got back response of unexpected type")
+		}
+		answer.IDs = append(answer.IDs, *typed)
+	}
+
+	if pages.Next != "" {
+		resp, err := c.SimpleGet(pages.Next)
+		if err != nil {
+			return err
+		}
+		c.interpretWAFCongfigSetResponse(answer, resp)
+	}
+
+	return nil
+}
