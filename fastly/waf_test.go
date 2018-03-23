@@ -271,9 +271,6 @@ func TestClient_GetWAF_validation(t *testing.T) {
 	}
 }
 
-
-
-
 //
 // func TestClient_UpdateWAF_validation(t *testing.T) {
 // 	var err error
@@ -499,6 +496,29 @@ func TestGetPages(t *testing.T) {
 		}
 		if err != testcase.expectedErr {
 			t.Errorf("Test %s: Expected error %v, got %v", testcase.description, testcase.expectedErr, err)
+		}
+	}
+}
+
+func TestUpdateWAFConfigSetInput_validate(t *testing.T) {
+	tests := []struct {
+		description string
+		input       UpdateWAFConfigSetInput
+		expected    error
+	}{
+		{
+			description: "Accepts valid input",
+			input: UpdateWAFConfigSetInput{
+				WAFList:     []ConfigSetWAFs{{ID: "derpID"}},
+				ConfigSetID: "derpConfigSet",
+			},
+			expected: nil,
+		},
+	}
+	for _, testcase := range tests {
+		err := testcase.input.validate()
+		if err != testcase.expected {
+			t.Errorf("In test %s: Expected %v,got %v", testcase.description, testcase.expected, err)
 		}
 	}
 }
