@@ -246,7 +246,7 @@ type OWASP struct {
 	TotalArgLength                int    `jsonapi:"attr,total_arg_length"`
 	UpdatedAt                     string `jsonapi:"attr,updated_at"`
 	WarningAnomalyScore           int    `jsonapi:"attr,warning_anomaly_score"`
-	XDDScoreThreshold             int    `jsonapi:"attr,xss_score_threshold"`
+	XSSScoreThreshold             int    `jsonapi:"attr,xss_score_threshold"`
 }
 
 // GetOWASPInput is used as input to the GetOWASP function.
@@ -351,7 +351,7 @@ type UpdateOWASPInput struct {
 	TotalArgLength                int    `jsonapi:"attr,total_arg_length,omitempty"`
 	UpdatedAt                     string `jsonapi:"attr,updated_at,omitempty"`
 	WarningAnomalyScore           int    `jsonapi:"attr,warning_anomaly_score,omitempty"`
-	XDDScoreThreshold             int    `jsonapi:"attr,xss_score_threshold,omitempty"`
+	XSSScoreThreshold             int    `jsonapi:"attr,xss_score_threshold,omitempty"`
 }
 
 // CreateOWASP creates an OWASP settings object for a service firewall object.
