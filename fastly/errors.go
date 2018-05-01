@@ -105,6 +105,26 @@ var ErrMissingConfigSetID = errors.New("Missing required field 'ConfigSetID'")
 // requires a list of WAF id's, but it is empty
 var ErrMissingWAFList = errors.New("WAF slice is empty")
 
+// ErrMissingProjectID is an error that is returned was an input struct
+// requires a Project ID, but one was not set
+var ErrMissingProjectID = errors.New("Missing required field 'ProjectID'")
+
+// ErrMissingDataset is an error that is returned was an input struct
+// requires a Dataset, but one was not set
+var ErrMissingDataset = errors.New("Missing required field 'Dataset'")
+
+// ErrMissingTable is an error that is returned was an input struct
+// requires a Table, but one was not set
+var ErrMissingTable = errors.New("Missing required field 'Table'")
+
+// ErrMissingUser is an error that is returned was an input struct
+// requires a User, but one was not set
+var ErrMissingUser = errors.New("Missing required field 'User'")
+
+// ErrMissingSecretKey is an error that is returned was an input struct
+// requires a Secret Key, but one was not set
+var ErrMissingSecretKey = errors.New("Missing required field 'SecretKey'")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
