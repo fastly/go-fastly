@@ -121,7 +121,7 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	params["user"] = i.User
 	params["secret_key"] = i.SecretKey
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.Service, i.Version)
 	resp, err := c.PostForm(path, i, &RequestOptions{
 		Params: params,
 	})
