@@ -20,7 +20,7 @@ type BigQuery struct {
 	ResponseCondition string `mapstructure:"response_condition"`
 }
 
-// GetBigQueryInput is used as input to the GetBQs function.
+// GetBigQueryInput is used as input to the GetBigQuery function.
 type GetBigQueryInput struct {
 	// Service is the ID of the service. Version is the specific configuration
 	// version. Both fields are required.
