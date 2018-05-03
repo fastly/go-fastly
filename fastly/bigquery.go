@@ -52,8 +52,8 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) ([]*BigQuery, error) {
 }
 
 // CreateBigQueryInput is used as input to the CreateBigQuery function.
-// All fields are required.
 type CreateBigQueryInput struct {
+	// All fields other than format are required.
 	// Service is the ID of the service.
 	Service string
 
@@ -77,6 +77,10 @@ type CreateBigQueryInput struct {
 
 	// Secret key is the user's secret key.
 	SecretKey string
+
+	// Format is the log formatting desired for your BigQuery dataset.
+	// Optional.
+	Format string
 }
 
 // CreateBigQuery creates a new Fastly BigQuery logging endpoint.
@@ -120,6 +124,9 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	params["table"] = i.Table
 	params["user"] = i.User
 	params["secret_key"] = i.SecretKey
+	if i.Format != "" {
+		params["format"] = i.Format
+	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.Service, i.Version)
 	resp, err := c.PostForm(path, i, &RequestOptions{
@@ -137,21 +144,43 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 }
 
 // UpdateBigQueryInput is used as input to the UpdateBigQuery function.
-// All fields are required.
 type UpdateBigQueryInput struct {
 	// Service is the ID of the service.
+	// This field is required.
 	Service string
 
 	//Version is the specific configuration version.
+	// This field is required.
 	Version int
 
 	// Name is the old name if your bigquery logging endpoint.
 	// Used to identify the correct BigQuery logging endpoint if there
 	// is a name change.
+	// This field is required.
 	Name string
 
 	// NewName is the new name of your BigQuery logging endpoint.
+	// This field is required.
 	NewName string
+
+	// Project ID your GCP project ID.
+	ProjectID string
+
+	// Dataset is your BigQuery dataset.
+	Dataset string
+
+	// Table is your BigQuery table.
+	Table string
+
+	// User is the user with access to write to your BigQuery dataset.
+	User string
+
+	// Secret key is the user's secret key.
+	SecretKey string
+
+	// Format is the log formatting desired for your BigQuery dataset.
+	// Optional.
+	Format string
 }
 
 // UpdateBigQuery updates a BigQuery logging endpoint.
@@ -174,6 +203,24 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 
 	params := make(map[string]string)
 	params["name"] = i.NewName
+	if i.ProjectID != "" {
+		params["project_id"] = i.ProjectID
+	}
+	if i.Dataset != "" {
+		params["dataset"] = i.Dataset
+	}
+	if i.Table != "" {
+		params["table"] = i.Table
+	}
+	if i.User != "" {
+		params["user"] = i.User
+	}
+	if i.SecretKey != "" {
+		params["secret_key"] = i.SecretKey
+	}
+	if i.Format != "" {
+		params["format"] = i.Format
+	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.Service, i.Version, i.Name)
 	resp, err := c.PutForm(path, i, &RequestOptions{
