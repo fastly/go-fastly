@@ -81,11 +81,19 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 	if err != nil {
 		return eventsResponse, err
 	}
+	// if i.PageNumber != 0 {
+	// data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Event)))
+	// if err != nil {
+	// 	return eventsResponse, err
+	// }
 
-	err = c.interpretAPIEventsPage(&eventsResponse, resp)
+	// 	return eventsResponse, err
+	// }
+	err = c.interpretAPIEventsPage(&eventsResponse, i.PageNumber, resp)
 	// NOTE: It's possible for eventsResponse to be partially completed before an error
 	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
 	// an error.
+	// }
 	return eventsResponse, err
 }
 
@@ -117,7 +125,7 @@ func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 // and unmarshals the results. If there are more pages of results, it fetches the next
 // page, adds that response to the array of results, and repeats until all results have
 // been fetched.
-func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, received *http.Response) error {
+func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum int, received *http.Response) error {
 	// before we pull the status info out of the response body, fetch
 	// pagination info from it:
 	pages, body, err := getEventsPages(received.Body)
@@ -137,14 +145,16 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, received *
 		}
 		answer.Events = append(answer.Events, typed)
 	}
-
-	if pages.Next != "" {
-		// NOTE: pages.Next URL includes filters already
-		resp, err := c.SimpleGet(pages.Next)
-		if err != nil {
-			return err
+	if pageNum == 0 {
+		if pages.Next != "" {
+			// NOTE: pages.Next URL includes filters already
+			resp, err := c.SimpleGet(pages.Next)
+			if err != nil {
+				return err
+			}
+			c.interpretAPIEventsPage(answer, pageNum, resp)
 		}
-		c.interpretAPIEventsPage(answer, resp)
+		return nil
 	}
 	return nil
 }
