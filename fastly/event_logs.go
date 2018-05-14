@@ -11,15 +11,9 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
-	// "time"
 )
 
 // Events represents an event_logs item response from the Fastly API.
-// type Event struct {
-// 	Data  []*Data `mapstructure:"data"`
-// 	Links Links   `mapstructure:"links"`
-// }
-
 type Event struct {
 	ID          string                 `jsonapi:"primary,event"`
 	CustomerID  string                 `jsonapi:"attr,customer_id"`
@@ -31,31 +25,7 @@ type Event struct {
 	UserID      string                 `jsonapi:"attr,user_id"`
 	CreatedAt   string                 `jsonapi:"attr,created_at"`
 	Admin       bool                   `jsonapi:"attr,admin"`
-	// Type       string     `mapstructure:"type"`
-	// Attributes Attributes `mapstructure:"attributes"`
 }
-
-// eventType is used for reflection because JSONAPI wants to know what it's
-// decoding into.
-// var eventType = reflect.TypeOf(new(Event))
-//
-// type Event struct {
-// 	CustomerID  string                  `mapstructure:"customer_id"`
-// 	Description string                  `mapstructure:"description"`
-// 	EventType   string                  `mapstructure:"event_type"`
-// 	IP          string                  `mapstructure:"ip"`
-// 	Metadata    *map[string]interface{} `mapstructure:"metadata"`
-// 	ServiceID   string                  `mapstructure:"service_id"`
-// 	UserID      string                  `mapstructure:"user_id"`
-// 	CreatedAt   time.Time               `mapstructure:"created_at"`
-// 	Admin       bool                    `mapstructure:"admin"`
-// }
-
-// type GetAPIEventsInput struct {
-// 	CustomerID string
-// 	ServiceId  string
-// 	Filters    GetAPIEventsFilter
-// }
 
 // GetAPIEventsFilter is used as input to the GetAPIEvents function.
 type GetAPIEventsFilterInput struct {
@@ -78,11 +48,6 @@ type GetAPIEventsFilterInput struct {
 	MaxResults int
 }
 
-// type Links struct {
-// 	Next string `mapstructure:"next"`
-// 	Last string `mapstructure:"last"`
-// }
-
 // eventLinksResponse is used to pull the "Links" pagination fields from
 // a call to Fastly; these are excluded from the results of the jsonapi
 // call to `UnmarshalManyPayload()`, so we have to fetch them separately.
@@ -98,7 +63,7 @@ type eventsPaginationInfo struct {
 	Next  string `json:"next,omitempty"`
 }
 
-// GetWAFRuleStatusesResponse is the data returned to the user from a GetAPIEvents call
+// GetAPIEventsResponse is the data returned to the user from a GetAPIEvents call
 type GetAPIEventsResponse struct {
 	Events []*Event
 }
@@ -106,35 +71,49 @@ type GetAPIEventsResponse struct {
 // GetAPIEvents gets the events for a particular customer
 func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
 	eventsResponse := GetAPIEventsResponse{Events: []*Event{}}
-	//
-	// if i.CustomerID == "" {
-	// 	return eventsResponse, ErrMissingCustomerID
-	// }
-	// if i. == "" {
-	// 	return eventsResponse, ErrMissingService
-	// }
 
 	path := fmt.Sprintf("/events")
-	// fmt.Println(i.CustomerID)
-	filters := &RequestOptions{Params: i.formatFilters()}
-	// if filters.Params != nil {
-	// 	path = fmt.Sprintln("/events?")
-	// }
-	// fmt.Println(filters)
+
+	filters := &RequestOptions{Params: i.formatEventFilters()}
+
 	resp, err := c.Get(path, filters)
 	fmt.Println(resp.Request.URL)
 	if err != nil {
 		return eventsResponse, err
 	}
+
 	err = c.interpretAPIEventsPage(&eventsResponse, resp)
-	// NOTE: It's possible for statusResponse to be partially completed before an error
+	// NOTE: It's possible for eventsResponse to be partially completed before an error
 	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
 	// an error.
-
 	return eventsResponse, err
 }
 
-// interpretWAFRuleStatusesPage accepts a Fastly response for a set of WAF rule statuses
+// GetAPIEventInput is used as input to the GetAPIEvent function.
+type GetAPIEventInput struct {
+	// EventID is the ID of the event and is required.
+	EventID string
+}
+
+func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
+	if i.EventID == "" {
+		return nil, ErrMissingEventID
+	}
+
+	path := fmt.Sprintf("/events/%s", i.EventID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var event Event
+	if err := jsonapi.UnmarshalPayload(resp.Body, &event); err != nil {
+		return nil, err
+	}
+	return &event, nil
+}
+
+// interpretAPIEventsPage accepts a Fastly response for a set of WAF rule statuses
 // and unmarshals the results. If there are more pages of results, it fetches the next
 // page, adds that response to the array of results, and repeats until all results have
 // been fetched.
@@ -145,21 +124,11 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, received *
 	if err != nil {
 		return err
 	}
+
 	data, err := jsonapi.UnmarshalManyPayload(body, reflect.TypeOf(new(Event)))
 	if err != nil {
 		return err
 	}
-	// e := &Events{}
-	// body, readErr := ioutil.ReadAll(c.res.Body)
-	// if readErr != nil {
-	// 	c.readErr = readErr
-	// 	log.Fatal(readErr)
-	// }
-	//
-	// data := json.Unmarshal(body, &e)
-	// if err != nil {
-	// 	return err
-	// }
 
 	for i := range data {
 		typed, ok := data[i].(*Event)
@@ -168,6 +137,7 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, received *
 		}
 		answer.Events = append(answer.Events, typed)
 	}
+
 	if pages.Next != "" {
 		// NOTE: pages.Next URL includes filters already
 		resp, err := c.SimpleGet(pages.Next)
@@ -196,9 +166,9 @@ func getEventsPages(body io.Reader) (eventsPaginationInfo, io.Reader, error) {
 	return pages.Links, bytes.NewReader(buf.Bytes()), nil
 }
 
-func (i *GetAPIEventsFilterInput) formatFilters() map[string]string {
-	// fmt.Printf("input is %v\n", i)
-	// fmt.Printf("CID is %v\n", i.CustomerID)
+// formatEventFilters converts user input into query parameters for filtering
+// Fastly results for rules in an Event.
+func (i *GetAPIEventsFilterInput) formatEventFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[customer_id]": i.CustomerID,
@@ -208,32 +178,18 @@ func (i *GetAPIEventsFilterInput) formatFilters() map[string]string {
 		"page[size]":          i.MaxResults,
 		"page[number]":        i.PageNumber, // starts at 1, not 0
 	}
-	// input := i.Filters
-	// fmt.Printf("input is %v\n", input)
-	// fmt.Printf("CID is %v\n", input.CustomerID)
-	// result := map[string]string{}
-	// pairings := map[string]interface{}{
-	// 	"filter[customer_id]": input.CustomerID,
-	// 	"filter[service_id]":  input.ServiceID,
-	// 	"filter[event_type]":  input.EventType,
-	// 	"filter[user_id]":     input.UserID,
-	// 	"page[size]":          input.MaxResults,
-	// 	"page[number]":        input.PageNumber, // starts at 1, not 0
-	// }
 	// NOTE: This setup means we will not be able to send the zero value
 	// of any of these filters. It doesn't appear we would need to at present.
+
 	for key, value := range pairings {
-		// fmt.Printf("key is %v and Value is %v\n", key, value)
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
 				result[key] = value.(string)
-				// fmt.Println("String ran")
 			}
 		case "int":
 			if value != 0 {
 				result[key] = strconv.Itoa(value.(int))
-				// fmt.Println("int ran")
 			}
 		case "[]int":
 			// convert ints to strings
@@ -246,159 +202,8 @@ func (i *GetAPIEventsFilterInput) formatFilters() map[string]string {
 			if len(values) > 0 {
 				result[key] = strings.Join(toStrings, ",")
 			}
-			// fmt.Println("sliceofints ran")
 		}
 
 	}
-
-	// fmt.Printf("result is %v", result)
 	return result
-
 }
-
-// // CreateDictionaryInput is used as input to the CreateDictionary function.
-// type CreateDictionaryInput struct {
-// 	// Service is the ID of the service. Version is the specific configuration
-// 	// version. Both fields are required.
-// 	Service string
-// 	Version int
-//
-// 	Name string `form:"name,omitempty"`
-// }
-// // CreateDictionary creates a new Fastly dictionary.
-// func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error) {
-// 	if i.Service == "" {
-// 		return nil, ErrMissingService
-// 	}
-//
-// 	if i.Version == 0 {
-// 		return nil, ErrMissingVersion
-// 	}
-//
-// 	path := fmt.Sprintf("/service/%s/version/%d/dictionary", i.Service, i.Version)
-// 	resp, err := c.PostForm(path, i, nil)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-//
-// 	var b *Dictionary
-// 	if err := decodeJSON(&b, resp.Body); err != nil {
-// 		return nil, err
-// 	}
-// 	return b, nil
-// }
-//
-// // GetDictionaryInput is used as input to the GetDictionary function.
-// type GetDictionaryInput struct {
-// 	// Service is the ID of the service. Version is the specific configuration
-// 	// version. Both fields are required.
-// 	Service string
-// 	Version int
-//
-// 	// Name is the name of the dictionary to fetch.
-// 	Name string
-// }
-//
-// // GetDictionary gets the dictionary configuration with the given parameters.
-// func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
-// 	if i.Service == "" {
-// 		return nil, ErrMissingService
-// 	}
-//
-// 	if i.Version == 0 {
-// 		return nil, ErrMissingVersion
-// 	}
-//
-// 	if i.Name == "" {
-// 		return nil, ErrMissingName
-// 	}
-//
-// 	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.Service, i.Version, i.Name)
-// 	resp, err := c.Get(path, nil)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-//
-// 	var b *Dictionary
-// 	if err := decodeJSON(&b, resp.Body); err != nil {
-// 		return nil, err
-// 	}
-// 	return b, nil
-// }
-//
-// // UpdateDictionaryInput is used as input to the UpdateDictionary function.
-// type UpdateDictionaryInput struct {
-// 	// Service is the ID of the service. Version is the specific configuration
-// 	// version. Both fields are required.
-// 	Service string
-// 	Version int
-//
-// 	// Name is the name of the dictionary to update.
-// 	Name string
-//
-// 	NewName string `form:"name,omitempty"`
-// }
-//
-// // UpdateDictionary updates a specific dictionary.
-// func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error) {
-// 	if i.Service == "" {
-// 		return nil, ErrMissingService
-// 	}
-//
-// 	if i.Version == 0 {
-// 		return nil, ErrMissingVersion
-// 	}
-//
-// 	if i.Name == "" {
-// 		return nil, ErrMissingName
-// 	}
-//
-// 	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.Service, i.Version, i.Name)
-// 	resp, err := c.PutForm(path, i, nil)
-// 	if err != nil {
-// 		return nil, err
-// 	}
-//
-// 	var b *Dictionary
-// 	if err := decodeJSON(&b, resp.Body); err != nil {
-// 		return nil, err
-// 	}
-// 	return b, nil
-// }
-//
-// // DeleteDictionaryInput is the input parameter to DeleteDictionary.
-// type DeleteDictionaryInput struct {
-// 	// Service is the ID of the service. Version is the specific configuration
-// 	// version. Both fields are required.
-// 	Service string
-// 	Version int
-//
-// 	// Name is the name of the dictionary to delete (required).
-// 	Name string
-// }
-//
-// // DeleteDictionary deletes the given dictionary version.
-// func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
-// 	if i.Service == "" {
-// 		return ErrMissingService
-// 	}
-//
-// 	if i.Version == 0 {
-// 		return ErrMissingVersion
-// 	}
-//
-// 	if i.Name == "" {
-// 		return ErrMissingName
-// 	}
-//
-// 	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.Service, i.Version, i.Name)
-// 	resp, err := c.Delete(path, nil)
-// 	if err != nil {
-// 		return err
-// 	}
-// 	defer resp.Body.Close()
-//
-// 	// Unlike other endpoints, the dictionary endpoint does not return a status
-// 	// response - it just returns a 200 OK.
-// 	return nil
-// }
