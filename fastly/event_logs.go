@@ -11,7 +11,7 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
-	"time"
+	// "time"
 )
 
 // Events represents an event_logs item response from the Fastly API.
@@ -21,16 +21,16 @@ import (
 // }
 
 type Event struct {
-	ID          string                  `jsonapi:"primary,event"`
-	CustomerID  string                  `jsonapi:"attr,customer_id"`
-	Description string                  `jsonapi:"attr,description"`
-	EventType   string                  `jsonapi:"attr,event_type"`
-	IP          string                  `jsonapi:"attr,ip"`
-	Metadata    *map[string]interface{} `jsonapi:"attr,metadata"`
-	ServiceID   string                  `jsonapi:"attr,service_id"`
-	UserID      string                  `jsonapi:"attr,user_id"`
-	CreatedAt   time.Time               `jsonapi:"attr,created_at"`
-	Admin       bool                    `jsonapi:"attr,admin"`
+	ID          string                 `jsonapi:"primary,event"`
+	CustomerID  string                 `jsonapi:"attr,customer_id"`
+	Description string                 `jsonapi:"attr,description"`
+	EventType   string                 `jsonapi:"attr,event_type"`
+	IP          string                 `jsonapi:"attr,ip"`
+	Metadata    map[string]interface{} `jsonapi:"attr,metadata,omitempty"`
+	ServiceID   string                 `jsonapi:"attr,service_id"`
+	UserID      string                 `jsonapi:"attr,user_id"`
+	CreatedAt   string                 `jsonapi:"attr,created_at"`
+	Admin       bool                   `jsonapi:"attr,admin"`
 	// Type       string     `mapstructure:"type"`
 	// Attributes Attributes `mapstructure:"attributes"`
 }
@@ -38,8 +38,8 @@ type Event struct {
 // eventType is used for reflection because JSONAPI wants to know what it's
 // decoding into.
 // var eventType = reflect.TypeOf(new(Event))
-
-// type Attributes struct {
+//
+// type Event struct {
 // 	CustomerID  string                  `mapstructure:"customer_id"`
 // 	Description string                  `mapstructure:"description"`
 // 	EventType   string                  `mapstructure:"event_type"`
@@ -51,14 +51,14 @@ type Event struct {
 // 	Admin       bool                    `mapstructure:"admin"`
 // }
 
-type GetAPIEventsInput struct {
-	CustomerID string
-	ServiceId  string
-	Filters    GetAPIEventsFilter
-}
+// type GetAPIEventsInput struct {
+// 	CustomerID string
+// 	ServiceId  string
+// 	Filters    GetAPIEventsFilter
+// }
 
 // GetAPIEventsFilter is used as input to the GetAPIEvents function.
-type GetAPIEventsFilter struct {
+type GetAPIEventsFilterInput struct {
 	// CustomerID to Limit the returned events to a specific customer.
 	CustomerID string
 
@@ -103,61 +103,26 @@ type GetAPIEventsResponse struct {
 	Events []*Event
 }
 
-func (i *GetAPIEventsInput) formatFilters() map[string]string {
-	input := i.Filters
-	result := map[string]string{}
-	pairings := map[string]interface{}{
-		"filter[customer_id]": input.CustomerID,
-		"filter[service_id]":  input.ServiceID,
-		"filter[event_type]":  input.EventType,
-		"filter[user_id]":     input.UserID,
-		"page[size]":          input.MaxResults,
-		"page[number]":        input.PageNumber, // starts at 1, not 0
-	}
-	// NOTE: This setup means we will not be able to send the zero value
-	// of any of these filters. It doesn't appear we would need to at present.
-	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
-			if value != "" {
-				result[key] = value.(string)
-			}
-		case "int":
-			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
-			}
-		case "[]int":
-			// convert ints to strings
-			toStrings := []string{}
-			values := value.([]int)
-			for _, i := range values {
-				toStrings = append(toStrings, strconv.Itoa(i))
-			}
-			// concat strings
-			if len(values) > 0 {
-				result[key] = strings.Join(toStrings, ",")
-			}
-		}
-	}
-	return result
-
-}
-
 // GetAPIEvents gets the events for a particular customer
-func (c *Client) GetAPIEvents(i *GetAPIEventsInput) (GetAPIEventsResponse, error) {
+func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
 	eventsResponse := GetAPIEventsResponse{Events: []*Event{}}
 	//
 	// if i.CustomerID == "" {
 	// 	return eventsResponse, ErrMissingCustomerID
 	// }
-	// if i.ServiceId == "" {
+	// if i. == "" {
 	// 	return eventsResponse, ErrMissingService
 	// }
 
-	path := fmt.Sprintln("/events")
+	path := fmt.Sprintf("/events")
+	// fmt.Println(i.CustomerID)
 	filters := &RequestOptions{Params: i.formatFilters()}
-
+	// if filters.Params != nil {
+	// 	path = fmt.Sprintln("/events?")
+	// }
+	// fmt.Println(filters)
 	resp, err := c.Get(path, filters)
+	fmt.Println(resp.Request.URL)
 	if err != nil {
 		return eventsResponse, err
 	}
@@ -165,6 +130,7 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsInput) (GetAPIEventsResponse, error
 	// NOTE: It's possible for statusResponse to be partially completed before an error
 	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
 	// an error.
+
 	return eventsResponse, err
 }
 
@@ -183,6 +149,17 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, received *
 	if err != nil {
 		return err
 	}
+	// e := &Events{}
+	// body, readErr := ioutil.ReadAll(c.res.Body)
+	// if readErr != nil {
+	// 	c.readErr = readErr
+	// 	log.Fatal(readErr)
+	// }
+	//
+	// data := json.Unmarshal(body, &e)
+	// if err != nil {
+	// 	return err
+	// }
 
 	for i := range data {
 		typed, ok := data[i].(*Event)
@@ -217,6 +194,66 @@ func getEventsPages(body io.Reader) (eventsPaginationInfo, io.Reader, error) {
 	var pages eventLinksResponse
 	json.Unmarshal(bodyBytes, &pages)
 	return pages.Links, bytes.NewReader(buf.Bytes()), nil
+}
+
+func (i *GetAPIEventsFilterInput) formatFilters() map[string]string {
+	// fmt.Printf("input is %v\n", i)
+	// fmt.Printf("CID is %v\n", i.CustomerID)
+	result := map[string]string{}
+	pairings := map[string]interface{}{
+		"filter[customer_id]": i.CustomerID,
+		"filter[service_id]":  i.ServiceID,
+		"filter[event_type]":  i.EventType,
+		"filter[user_id]":     i.UserID,
+		"page[size]":          i.MaxResults,
+		"page[number]":        i.PageNumber, // starts at 1, not 0
+	}
+	// input := i.Filters
+	// fmt.Printf("input is %v\n", input)
+	// fmt.Printf("CID is %v\n", input.CustomerID)
+	// result := map[string]string{}
+	// pairings := map[string]interface{}{
+	// 	"filter[customer_id]": input.CustomerID,
+	// 	"filter[service_id]":  input.ServiceID,
+	// 	"filter[event_type]":  input.EventType,
+	// 	"filter[user_id]":     input.UserID,
+	// 	"page[size]":          input.MaxResults,
+	// 	"page[number]":        input.PageNumber, // starts at 1, not 0
+	// }
+	// NOTE: This setup means we will not be able to send the zero value
+	// of any of these filters. It doesn't appear we would need to at present.
+	for key, value := range pairings {
+		// fmt.Printf("key is %v and Value is %v\n", key, value)
+		switch t := reflect.TypeOf(value).String(); t {
+		case "string":
+			if value != "" {
+				result[key] = value.(string)
+				// fmt.Println("String ran")
+			}
+		case "int":
+			if value != 0 {
+				result[key] = strconv.Itoa(value.(int))
+				// fmt.Println("int ran")
+			}
+		case "[]int":
+			// convert ints to strings
+			toStrings := []string{}
+			values := value.([]int)
+			for _, i := range values {
+				toStrings = append(toStrings, strconv.Itoa(i))
+			}
+			// concat strings
+			if len(values) > 0 {
+				result[key] = strings.Join(toStrings, ",")
+			}
+			// fmt.Println("sliceofints ran")
+		}
+
+	}
+
+	// fmt.Printf("result is %v", result)
+	return result
+
 }
 
 // // CreateDictionaryInput is used as input to the CreateDictionary function.
