@@ -51,13 +51,13 @@ type GetAPIEventsFilterInput struct {
 // eventLinksResponse is used to pull the "Links" pagination fields from
 // a call to Fastly; these are excluded from the results of the jsonapi
 // call to `UnmarshalManyPayload()`, so we have to fetch them separately.
-type eventLinksResponse struct {
-	Links eventsPaginationInfo `json:"links"`
-}
+// type EventLinksResponse struct {
+// 	Links EventsPaginationInfo `json:"links"`
+// }
 
 // eventsPaginationInfo stores links to searches related to the current one, showing
 // any information about additional results being stored on another page
-type eventsPaginationInfo struct {
+type EventsPaginationInfo struct {
 	First string `json:"first,omitempty"`
 	Last  string `json:"last,omitempty"`
 	Next  string `json:"next,omitempty"`
@@ -66,11 +66,15 @@ type eventsPaginationInfo struct {
 // GetAPIEventsResponse is the data returned to the user from a GetAPIEvents call
 type GetAPIEventsResponse struct {
 	Events []*Event
+	Links  EventsPaginationInfo `json:"links"`
 }
 
 // GetAPIEvents gets the events for a particular customer
 func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
-	eventsResponse := GetAPIEventsResponse{Events: []*Event{}}
+	eventsResponse := GetAPIEventsResponse{
+		Events: []*Event{},
+		Links:  EventsPaginationInfo{},
+	}
 
 	path := fmt.Sprintf("/events")
 
@@ -132,7 +136,7 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum in
 	if err != nil {
 		return err
 	}
-
+	answer.Links = pages
 	data, err := jsonapi.UnmarshalManyPayload(body, reflect.TypeOf(new(Event)))
 	if err != nil {
 		return err
@@ -162,16 +166,16 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum in
 // getEventsPages parses a response to get the pagination data without destroying
 // the reader we receive as "resp.Body"; this essentially copies resp.Body
 // and returns it so we can use it again.
-func getEventsPages(body io.Reader) (eventsPaginationInfo, io.Reader, error) {
+func getEventsPages(body io.Reader) (EventsPaginationInfo, io.Reader, error) {
 	var buf bytes.Buffer
 	tee := io.TeeReader(body, &buf)
 
 	bodyBytes, err := ioutil.ReadAll(tee)
 	if err != nil {
-		return eventsPaginationInfo{}, nil, err
+		return EventsPaginationInfo{}, nil, err
 	}
 
-	var pages eventLinksResponse
+	var pages GetAPIEventsResponse
 	json.Unmarshal(bodyBytes, &pages)
 	return pages.Links, bytes.NewReader(buf.Bytes()), nil
 }

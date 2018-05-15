@@ -1,0 +1,44 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
+    url: https://api.fastly.com/events?filter[customer_id]=zwBncFVs2Ixrhd8xxxxxx
+    method: GET
+  response:
+    body: '{"ID":"3OMewexIMbzrQj77xxxxxx","CustomerID":"zwBncFVs2Ixrhd8xxxxxx","Description":"API Token (manage.fastly.com browser session) has been created","EventType":"token.create","IP":"10.10.10.1, 10.10.10.2, 10.10.10.3","Metadata":{"owner_id":"7HsR9TFmwNV3YAxxxxxxxx","scope":"global","services":[]},"ServiceID":"","UserID":"7HsR9TFmwNV3YAxxxxxxxx","CreatedAt":"2018-05-02T16:01:04Z","Admin":false}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Content-Length:
+      - "281"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Tue, 05 Sep 2017 17:56:54 GMT
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17730-DCA
+      X-Timer:
+      - S1504634214.963647,VS0,VE133
+    status: 200 OK
+    code: 200
