@@ -175,7 +175,7 @@ func getEventsPages(body io.Reader) (EventsPaginationInfo, io.Reader, error) {
 		return EventsPaginationInfo{}, nil, err
 	}
 
-	var pages GetAPIEventsResponse
+	var pages *GetAPIEventsResponse
 	json.Unmarshal(bodyBytes, &pages)
 	return pages.Links, bytes.NewReader(buf.Bytes()), nil
 }
