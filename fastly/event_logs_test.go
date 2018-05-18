@@ -26,7 +26,6 @@ func TestClient_APIEvents(t *testing.T) {
 		t.Errorf("bad event: %v", event)
 	}
 
-	// List
 	var events GetAPIEventsResponse
 	record(t, "events/get_events", func(c *Client) {
 		events, err = c.GetAPIEvents(&GetAPIEventsFilterInput{
@@ -55,61 +54,6 @@ func TestClient_GetAPIEvent_validation(t *testing.T) {
 
 }
 
-//
-// func TestClient_UpdateWAF_validation(t *testing.T) {
-// 	var err error
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "",
-// 	})
-// 	if err != ErrMissingService {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "foo",
-// 		Version: 0,
-// 	})
-// 	if err != ErrMissingVersion {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "foo",
-// 		Version: 1,
-// 		WAFID:   "",
-// 	})
-// 	if err != ErrMissingWAFID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// }
-//
-// func TestClient_DeleteWAF_validation(t *testing.T) {
-// 	var err error
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "",
-// 	})
-// 	if err != ErrMissingService {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "foo",
-// 		Version: 0,
-// 	})
-// 	if err != ErrMissingVersion {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "foo",
-// 		Version: 1,
-// 		WAFID:   "",
-// 	})
-// 	if err != ErrMissingWAFID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// }
-
 func TestGetAPIEventsFilterInput_formatFilters(t *testing.T) {
 	tests := []struct {
 		description string
@@ -137,7 +81,6 @@ func TestGetAPIEventsFilterInput_formatFilters(t *testing.T) {
 		},
 	}
 	for _, testcase := range tests {
-		// input := testcase.filters
 		answer := testcase.filters.formatEventFilters()
 		if len(answer) != len(testcase.expected) {
 			t.Errorf("In test %s: Expected map with %d entries,got one with %d", testcase.description, len(testcase.expected), len(answer))
