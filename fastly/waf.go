@@ -287,8 +287,7 @@ type CreateOWASPInput struct {
 	// Both fields are required.
 	Service string
 	ID      string `jsonapi:"primary,owasp"`
-
-	Type string `jsonapi:"attr,type`
+	Type    string `jsonapi:"attr,type"`
 }
 
 // CreateOWASP creates an OWASP settings object for a service firewall object.
@@ -322,7 +321,7 @@ type UpdateOWASPInput struct {
 	ID      string
 	OWASPID string `jsonapi:"primary,owasp,omitempty"`
 
-	Type                          string `jsonapi:"attr,type`
+	Type                          string `jsonapi:"attr,type"`
 	AllowedHTTPVersions           string `jsonapi:"attr,allowed_http_versions,omitempty"`
 	AllowedMethods                string `jsonapi:"attr,allowed_methods,omitempty"`
 	AllowedRequestContentType     string `jsonapi:"attr,allowed_request_content_type,omitempty"`

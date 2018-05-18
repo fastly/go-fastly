@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"reflect"
 	"strconv"
-	"strings"
 )
 
 // Events represents an event_logs item response from the Fastly API.
@@ -55,7 +54,7 @@ type GetAPIEventsFilterInput struct {
 // 	Links EventsPaginationInfo `json:"links"`
 // }
 
-// eventsPaginationInfo stores links to searches related to the current one, showing
+// EventsPaginationInfo stores links to searches related to the current one, showing
 // any information about additional results being stored on another page
 type EventsPaginationInfo struct {
 	First string `json:"first,omitempty"`
@@ -69,7 +68,7 @@ type GetAPIEventsResponse struct {
 	Links  EventsPaginationInfo `json:"links"`
 }
 
-// GetAPIEvents gets the events for a particular customer
+// GetAPIEvents lists all the events for a particular customer
 func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
 	eventsResponse := GetAPIEventsResponse{
 		Events: []*Event{},
@@ -81,18 +80,11 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 	filters := &RequestOptions{Params: i.formatEventFilters()}
 
 	resp, err := c.Get(path, filters)
-	fmt.Println(resp.Request.URL)
+
 	if err != nil {
 		return eventsResponse, err
 	}
-	// if i.PageNumber != 0 {
-	// data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(Event)))
-	// if err != nil {
-	// 	return eventsResponse, err
-	// }
 
-	// 	return eventsResponse, err
-	// }
 	err = c.interpretAPIEventsPage(&eventsResponse, i.PageNumber, resp)
 	// NOTE: It's possible for eventsResponse to be partially completed before an error
 	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
@@ -107,6 +99,7 @@ type GetAPIEventInput struct {
 	EventID string
 }
 
+// GetAPIEvent gets a specific event
 func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 	if i.EventID == "" {
 		return nil, ErrMissingEventID
@@ -181,7 +174,7 @@ func getEventsPages(body io.Reader) (EventsPaginationInfo, io.Reader, error) {
 }
 
 // formatEventFilters converts user input into query parameters for filtering
-// Fastly results for rules in an Event.
+// Fastly events.
 func (i *GetAPIEventsFilterInput) formatEventFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
@@ -204,17 +197,6 @@ func (i *GetAPIEventsFilterInput) formatEventFilters() map[string]string {
 		case "int":
 			if value != 0 {
 				result[key] = strconv.Itoa(value.(int))
-			}
-		case "[]int":
-			// convert ints to strings
-			toStrings := []string{}
-			values := value.([]int)
-			for _, i := range values {
-				toStrings = append(toStrings, strconv.Itoa(i))
-			}
-			// concat strings
-			if len(values) > 0 {
-				result[key] = strings.Join(toStrings, ",")
 			}
 		}
 
