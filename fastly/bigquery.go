@@ -81,6 +81,10 @@ type CreateBigQueryInput struct {
 	// Format is the log formatting desired for your BigQuery dataset.
 	// Optional.
 	Format string
+
+	// ResponseCondition allows you to attach a response condition to your BigQuery logging endpoint.
+	// Optional.
+	ResponseCondition string
 }
 
 // CreateBigQuery creates a new Fastly BigQuery logging endpoint.
@@ -126,6 +130,9 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	params["secret_key"] = i.SecretKey
 	if i.Format != "" {
 		params["format"] = i.Format
+	}
+	if i.ResponseCondition != "" {
+		params["response_condition"] = i.ResponseCondition
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.Service, i.Version)
@@ -181,6 +188,10 @@ type UpdateBigQueryInput struct {
 	// Format is the log formatting desired for your BigQuery dataset.
 	// Optional.
 	Format string
+
+	// ResponseCondition allows you to attach a response condition to your BigQuery logging endpoint.
+	// Optional.
+	ResponseCondition string
 }
 
 // UpdateBigQuery updates a BigQuery logging endpoint.
@@ -220,6 +231,9 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	}
 	if i.Format != "" {
 		params["format"] = i.Format
+	}
+	if i.ResponseCondition != "" {
+		params["response_condition"] = i.ResponseCondition
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.Service, i.Version, i.Name)
