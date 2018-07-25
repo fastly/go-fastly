@@ -107,6 +107,20 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	return b, nil
 }
 
+// CreateDictionaryItems creates new Fastly dictionary items from a slice.
+func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
+
+	var b []DictionaryItem
+	for _, cdii := range i {
+		di, err := c.CreateDictionaryItem(&cdii)
+		if err != nil {
+			return nil, err
+		}
+		b = append(b, *di)
+	}
+	return b, nil
+}
+
 // GetDictionaryItemInput is used as input to the GetDictionaryItem function.
 type GetDictionaryItemInput struct {
 	// Service is the ID of the service. Dictionary is the ID of the dictionary.
