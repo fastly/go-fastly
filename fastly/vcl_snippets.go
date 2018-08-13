@@ -4,32 +4,32 @@ import "fmt"
 
 type Snippet struct {
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `json:"priority"`
+	Priority int `mapstructure:"priority"`
 
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
-	Dynamic int `json:"dynamic"`
+	Dynamic int `mapstructure:"dynamic"`
 
 	// Name is the name for the snippet.
-	Name string `json:"name"`
+	Name string `mapstructure:"name"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `json:"content"`
+	Content string `mapstructure:"content"`
 
 	// ID is the snippet ID
-	ID string `json:"id"`
+	ID string `mapstructure:"id"`
 
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type string `json:"type"`
+	Type string `mapstructure:"type"`
 
 	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string `json:"service_id"`
+	ServiceID string `mapstructure:"service_id"`
 
 	// Version is the editable version of the service.
-	Version int `json:"version"`
+	Version int `mapstructure:"version"`
 
-	DeletedAt string `json:"deleted_at"`
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	DeletedAt string `mapstructure:"deleted_at"`
+	CreatedAt string `mapstructure:"created_at"`
+	UpdatedAt string `mapstructure:"updated_at"`
 }
 
 type CreateSnippetInput struct {
@@ -37,7 +37,7 @@ type CreateSnippetInput struct {
 	Priority int `form:"priority"`
 
 	// Version is the editable version of the service
-	Version int `json:"version"`
+	Version int
 
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic int `form:"dynamic"`
@@ -49,7 +49,7 @@ type CreateSnippetInput struct {
 	Content string `form:"content"`
 
 	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string `json:"service_id"`
+	ServiceID string
 
 	// Type is the location in generated VCL where the snippet should be placed.
 	Type string `form:"type"`
@@ -80,25 +80,25 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 // UpdateSnippet is the object returned when updating a Dynamic Snippet
 type UpdateSnippet struct {
 	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string `json:"service_id"`
+	ServiceID string `mapstructure:"service_id"`
 
 	// SnippetID is the ID of the Snippet to modify
-	SnippetID string `json:"snippet_id"`
+	SnippetID string `mapstructure:"snippet_id"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `json:"content"`
+	Content string `mapstructure:"content"`
 
-	CreatedAt string `json:"created_at"`
-	UpdatedAt string `json:"updated_at"`
+	CreatedAt string `mapstructure:"created_at"`
+	UpdatedAt string `mapstructure:"updated_at"`
 }
 
 // UpdateSnippetInput is the input for updating a dynamic snippet
 type UpdateSnippetInput struct {
 	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string `json:"service_id"`
+	ServiceID string
 
 	// SnippetID is the ID of the Snippet to modify
-	SnippetID string `json:"snippet_id"`
+	SnippetID string
 
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content string `form:"content"`
@@ -128,13 +128,13 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*UpdateSnippet, error) {
 
 type DeleteSnippetInput struct {
 	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string `json:"service_id"`
+	ServiceID string
 
 	// SnippetName is the Name of the Snippet to Delete
-	SnippetName string `json:"snippet"`
+	SnippetName string
 
 	// Version is the editable version of the service
-	Version int `json:"version"`
+	Version int
 }
 
 func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
