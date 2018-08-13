@@ -25,6 +25,14 @@ var ErrMissingTag = errors.New("Missing required field 'Tag'")
 // a "Version" key, but one was not set.
 var ErrMissingVersion = errors.New("Missing required field 'Version'")
 
+// ErrMissingSnippetID is an error that is returned when an input struct requires
+// a "SnippetID" key, but one was not set.
+var ErrMissingSnippetID = errors.New("Missing required field 'SnippetID'")
+
+// ErrMissingSnippetName is an error that is returned when an input struct requires
+// a "SnippetID" key, but one was not set.
+var ErrMissingSnippetName = errors.New("Missing required field 'SnippetName'")
+
 // ErrMissingName is an error that is returned when an input struct requires a
 // "Name" key, but one was not set.
 var ErrMissingName = errors.New("Missing required field 'Name'")
