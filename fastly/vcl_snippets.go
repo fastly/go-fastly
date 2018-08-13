@@ -34,25 +34,25 @@ type Snippet struct {
 
 type CreateSnippetInput struct {
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `json:"priority"`
+	Priority int `form:"priority"`
 
 	// Version is the editable version of the service
 	Version int `json:"version"`
 
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
-	Dynamic int `json:"dynamic"`
+	Dynamic int `form:"dynamic"`
 
 	// Name is the name for the snippet.
-	Name string `json:"name"`
+	Name string `form:"name"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `json:"content"`
+	Content string `form:"content"`
 
 	// ServiceID is the ID of the Service to add the snippet to.
 	ServiceID string `json:"service_id"`
 
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type string `json:"type"`
+	Type string `form:"type"`
 }
 
 func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
@@ -101,7 +101,7 @@ type UpdateSnippetInput struct {
 	SnippetID string `json:"snippet_id"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `json:"content"`
+	Content string `form:"content"`
 }
 
 func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*UpdateSnippet, error) {
