@@ -12,11 +12,6 @@ func TestClient_Snippets(t *testing.T) {
 		testSnippetName = "testsnip5"
 	)
 
-	// var tv *Version
-	// record(t, "vcls/version", func(c *Client) {
-	// 	tv = testVersion(t, c)
-	// })
-
 	content := `
 	 # testing EdgeACL6 and EdgeDictionary6
 	  declare local var.number6 STRING;
