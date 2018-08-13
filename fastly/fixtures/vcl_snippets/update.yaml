@@ -1,0 +1,63 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: Content=%0A+%23+testing+EdgeACL6+and+EdgeDictionary6%0A++declare+local+var.number6+STRING%3B%0A++set+var.number6+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A++if+%28var.number6+%3D%3D+%22true%22%29+%7B%0A++++set+req.http.securityruleid+%3D+%22num6-block%22%3B%0A+error+403+%22Access+Denied%22%3B%0A++%7D%0A&ServiceID=7i6HN3TK9wS159v2gPAZ8A&Snippet=XwYm8yjU5QLLDvgXXXXXX
+    form:
+      Content:
+      - |2
+
+         # testing EdgeACL6 and EdgeDictionary6
+          declare local var.number6 STRING;
+          set var.number6 = table.lookup(demoDICTtest, client.as.number);
+
+          if (var.number6 == "true") {
+            set req.http.securityruleid = "num6-block";
+         error 403 "Access Denied";
+          }
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Snippet:
+      - XwYm8yjU5QLLDvgXXXXXX
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/snippet/XwYm8yjU5QLLDvgXXXXXX
+    method: PUT
+  response:
+    body: '{"snippet_id":"XwYm8yjU5QLLDvgXXXXXX","created_at":"2018-08-01T19:56:03Z","content":" # testing EdgeACL6 and EdgeDictionary6\n  declare local var.asn_number6 STRING;\n  set var.asn_number6 = table.lookup(demoDICTtest, client.as.number);\n\n  if (var.asn_number6 == \"true\") {\n    set req.http.securityruleid = \"num6-block\";\n error 403 \"Access Denied\";\n  }","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2018-08-02T18:15:09Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:11 GMT
+      Fastly-Ratelimit-Remaining:
+      - "892"
+      Fastly-Ratelimit-Reset:
+      - "1500516000"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513311.712694,VS0,VE456
+    status: 200 OK
+    code: 200
