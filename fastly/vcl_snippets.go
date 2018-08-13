@@ -77,8 +77,8 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	return snippet, err
 }
 
-// UpdateSnippet is the object returned when updating a Dynamic Snippet
-type UpdateSnippet struct {
+// DynamicSnippet is the object returned when updating a Dynamic Snippet
+type DynamicSnippet struct {
 	// ServiceID is the ID of the Service to add the snippet to.
 	ServiceID string `mapstructure:"service_id"`
 
@@ -104,7 +104,7 @@ type UpdateSnippetInput struct {
 	Content string `form:"content"`
 }
 
-func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*UpdateSnippet, error) {
+func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*DynamicSnippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingService
 	}
@@ -119,7 +119,7 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*UpdateSnippet, error) {
 		return nil, err
 	}
 
-	var updateSnippet *UpdateSnippet
+	var updateSnippet *DynamicSnippet
 	if err := decodeJSON(&updateSnippet, resp.Body); err != nil {
 		return nil, err
 	}
@@ -164,4 +164,106 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 		return fmt.Errorf("Not Ok")
 	}
 	return nil
+}
+
+// ListSnippetsInput is used as input to the ListSnippets function.
+type ListSnippetsInput struct {
+	// Service is the ID of the service (required).
+	Service string
+
+	// Version is the specific configuration version (required).
+	Version int
+}
+
+// ListSnippets returns the list of Snippets for the configuration version.
+func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.Version == 0 {
+		return nil, ErrMissingVersion
+	}
+
+	path := fmt.Sprintf("/service/%s/version/%d/snippet", i.Service, i.Version)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var snippets []*Snippet
+	if err := decodeJSON(&snippets, resp.Body); err != nil {
+		return nil, err
+	}
+	return snippets, nil
+}
+
+// GetSnippetbyNameInput is used as input to the GetSnippet function.
+type GetSnippetbyNameInput struct {
+	// Service is the ID of the service. Version is the specific configuration
+	// version. Both fields are required.
+	Service string
+	Version int
+
+	// Name is the name of the Snippet to fetch.
+	Name string
+}
+
+// GetSnippetByName gets the Snippet configuration with the given parameters.
+func (c *Client) GetSnippetByName(i *GetSnippetbyNameInput) (*Snippet, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.Version == 0 {
+		return nil, ErrMissingVersion
+	}
+
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
+
+	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.Service, i.Version, i.Name)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var snippet *Snippet
+	if err := decodeJSON(&snippet, resp.Body); err != nil {
+		return nil, err
+	}
+	return snippet, nil
+}
+
+// GetSnippetByIDInput is used as input to the GetSnippet function.
+type GetSnippetByIDInput struct {
+	// Service is the ID of the service.
+	Service string
+
+	// ID is the ID of the Snippet to fetch.
+	ID string
+}
+
+// GetSnippetByID gets the Snippet configuration with the given parameters.
+func (c *Client) GetSnippetByID(i *GetSnippetByIDInput) (*DynamicSnippet, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.ID == "" {
+		return nil, ErrMissingSnippetID
+	}
+
+	path := fmt.Sprintf("/service/%s/snippet/%s", i.Service, i.ID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var snippet *DynamicSnippet
+	if err := decodeJSON(&snippet, resp.Body); err != nil {
+		return nil, err
+	}
+	return snippet, nil
 }
