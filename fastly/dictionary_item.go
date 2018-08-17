@@ -235,3 +235,15 @@ func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 	// response - it just returns a 200 OK.
 	return nil
 }
+
+// DeleteDictionaryItems deletes a list of Fastly dictionary items from a slice.
+func (c *Client) DeleteDictionaryItems(i []DeleteDictionaryItemInput) error {
+
+	for _, ddii := range i {
+		err := c.DeleteDictionaryItem(&ddii)
+		if err != nil {
+			return err
+		}
+	}
+	return nil
+}
