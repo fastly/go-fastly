@@ -223,35 +223,3 @@ func Test_Snippets(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 }
-
-// func TestClient_error_validation(t *testing.T) {
-// 	var err error
-
-// 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
-// 		ServiceID: "",
-// 	})
-// 	if err != ErrMissingServiceID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
-// 		ServiceID: testServiceID,
-// 		SnippetID: "",
-// 	})
-// 	if err != ErrMissingSnippetID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-
-// 	_, err = testClient.CreateSnippet(&CreateSnippetInput{
-// 		ServiceID:   testServiceID,
-// 		Version:     tv,
-// 		SnippetName: testSnippetName,
-// 		Type:        "recv",
-// 		Priority:    100,
-// 		Dynamic:     0,
-// 		Content:     "",
-// 	})
-
-// 	if err != ErrMissingSnippetContent {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// }
