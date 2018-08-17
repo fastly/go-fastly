@@ -13,6 +13,10 @@ import (
 // a "Service" key, but one was not set.
 var ErrMissingService = errors.New("Missing required field 'Service'")
 
+// ErrMissingServiceID is an error that is returned when an input struct requires
+// a "ServiceID" key, but one was not set.
+var ErrMissingServiceID = errors.New("Missing required field 'ServiceID'")
+
 // ErrMissingStatus is an error that is returned when an input struct requires
 // a "Status" key, but one was not set.
 var ErrMissingStatus = errors.New("Missing required field 'Status'")
@@ -32,6 +36,14 @@ var ErrMissingSnippetID = errors.New("Missing required field 'SnippetID'")
 // ErrMissingSnippetName is an error that is returned when an input struct requires
 // a "SnippetID" key, but one was not set.
 var ErrMissingSnippetName = errors.New("Missing required field 'SnippetName'")
+
+// ErrMissingSnippetContent s an error that is returned when an input struct requires a
+// "Content" key, but one was not set.
+var ErrMissingSnippetContent = errors.New("Missing required content for a non-Dynamic Snippet")
+
+// ErrMissingSnippetType s an error that is returned when an input struct requires a
+// "Type" key, but one was not set.
+var ErrMissingSnippetType = errors.New("Missing required field 'Type'")
 
 // ErrMissingName is an error that is returned when an input struct requires a
 // "Name" key, but one was not set.

@@ -1,0 +1,50 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/688/snippet
+    method: GET
+  response:
+    body: '[{"priority":"100","version":"688","dynamic":"0","name":"testsnip","content":"  #
+      testing EdgeACL2 and EdgeDictionary2\n  declare local var.asn_number2 STRING;\n  set
+      var.asn_number2 = table.lookup(demoDICTtest, client.as.number);\n\n  if (var.asn_number2
+      == \"true\") {\n    set req.http.securityruleid = \"num2-block\";\n    error
+      403 \"Access Denied\";\n  }","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2018-08-01T18:01:33Z","updated_at":"2018-08-01T19:40:53Z","id":"snipxxxxxxxxxxxxxxxxid","type":"recv"},{"priority":"100","version":"688","dynamic":"1","name":"testsnip5","content":null,"deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2018-08-15T17:12:48Z","updated_at":"2018-08-15T17:12:48Z","id":"dynsnipxxxxxxxxxxxxxid","type":"recv"}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 Aug 2018 18:32:58 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-mdw17345-MDW
+      X-Timer:
+      - S1534357978.047958,VS0,VE149
+    status: 200 OK
+    code: 200

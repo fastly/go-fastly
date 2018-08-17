@@ -3,31 +3,25 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Content=%0A+%23+testing+EdgeACL6+and+EdgeDictionary6%0A++declare+local+var.number6+STRING%3B%0A++set+var.number6+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A++if+%28var.number6+%3D%3D+%22true%22%29+%7B%0A++++set+req.http.securityruleid+%3D+%22num6-block%22%3B%0A+error+403+%22Access+Denied%22%3B%0A++%7D%0A&Dynamic=1&Name=test-vcl-snippet&Priority=100&ServiceID=7i6HN3TK9wS159v2gPAZ8A&Type=recv&Version=688
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&Version=688&content=%0A%09%23+testing+EdgeACL2+and+EdgeDictionary2%0A%09+declare+local+var.number2+STRING%3B%0A%09+set+var.number2+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09+if+%28var.number2+%3D%3D+%22true%22%29+%7B%0A%09+++set+req.http.securityruleid+%3D+%22num2-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A++++&dynamic=0&name=testsnip0&priority=100&type=recv
     form:
-      Content:
-      - |2
-
-         # testing EdgeACL6 and EdgeDictionary6
-          declare local var.number6 STRING;
-          set var.number6 = table.lookup(demoDICTtest, client.as.number);
-
-          if (var.number6 == "true") {
-            set req.http.securityruleid = "num6-block";
-         error 403 "Access Denied";
-          }
-      Dynamic:
-      - "1"
-      Name:
-      - test-vcl-snippet
-      Priority:
-      - "100"
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Type:
-      - recv
       Version:
       - "688"
+      content:
+      - "\n\t# testing EdgeACL2 and EdgeDictionary2\n\t declare local var.number2
+        STRING;\n\t set var.number2 = table.lookup(demoDICTtest, client.as.number);\n\n\t
+        if (var.number2 == \"true\") {\n\t   set req.http.securityruleid = \"num2-block\";\n\t
+        error 403 \"Access Denied\";\n\t  }\n    "
+      dynamic:
+      - "0"
+      name:
+      - testsnip0
+      priority:
+      - "100"
+      type:
+      - recv
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -38,7 +32,10 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/688/snippet
     method: POST
   response:
-    body: '{"name":"test-vcl-snippet","priority":"10","dynamic":1,"content":null,"type":"recv","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"688","deleted_at":null,"created_at":"2018-08-02T18:30:02Z","updated_at":"2018-08-02T18:30:02Z","id":"XwYm8yjU5QLLDvgXXXXXX"}'
+    body: '{"content":"\n\t# testing EdgeACL2 and EdgeDictionary2\n\t declare local
+      var.number2 STRING;\n\t set var.number2 = table.lookup(demoDICTtest, client.as.number);\n\n\t
+      if (var.number2 == \"true\") {\n\t   set req.http.securityruleid = \"num2-block\";\n\t
+      error 403 \"Access Denied\";\n\t  }\n    ","dynamic":0,"name":"testsnip0","priority":"100","type":"recv","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"688","deleted_at":null,"created_at":"2018-08-15T19:24:56Z","updated_at":"2018-08-15T19:24:56Z","id":"6xU4LMOPEAhapB8ZOa0QqG"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -47,11 +44,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:11 GMT
+      - Wed, 15 Aug 2018 19:24:56 GMT
       Fastly-Ratelimit-Remaining:
-      - "892"
+      - "999"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1534363200"
       Status:
       - 200 OK
       Vary:
@@ -64,8 +61,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - app-slwdc9051-SL, cache-mdw17356-MDW
       X-Timer:
-      - S1500513311.712694,VS0,VE456
+      - S1534361096.358762,VS0,VE222
     status: 200 OK
     code: 200

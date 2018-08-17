@@ -3,23 +3,17 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Content=%0A+%23+testing+EdgeACL6+and+EdgeDictionary6%0A++declare+local+var.number6+STRING%3B%0A++set+var.number6+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A++if+%28var.number6+%3D%3D+%22true%22%29+%7B%0A++++set+req.http.securityruleid+%3D+%22num6-block%22%3B%0A+error+403+%22Access+Denied%22%3B%0A++%7D%0A&ServiceID=7i6HN3TK9wS159v2gPAZ8A&Snippet=XwYm8yjU5QLLDvgXXXXXX
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&SnippetID=dynsnipxxxxxxxxxxxxxid&content=%0A%09+%23+testing+EdgeACL5+and+EdgeDictionary5%0A%09+declare+local+var.number5+STRING%3B%0A%09+set+var.number5+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09+if+%28var.number5+%3D%3D+%22true%22%29+%7B%0A%09+set+req.http.securityruleid+%3D+%22num5-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A++++
     form:
-      Content:
-      - |2
-
-         # testing EdgeACL6 and EdgeDictionary6
-          declare local var.number6 STRING;
-          set var.number6 = table.lookup(demoDICTtest, client.as.number);
-
-          if (var.number6 == "true") {
-            set req.http.securityruleid = "num6-block";
-         error 403 "Access Denied";
-          }
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Snippet:
-      - XwYm8yjU5QLLDvgXXXXXX
+      SnippetID:
+      - dynsnipxxxxxxxxxxxxxid
+      content:
+      - "\n\t # testing EdgeACL5 and EdgeDictionary5\n\t declare local var.number5
+        STRING;\n\t set var.number5 = table.lookup(demoDICTtest, client.as.number);\n\n\t
+        if (var.number5 == \"true\") {\n\t set req.http.securityruleid = \"num5-block\";\n\t
+        error 403 \"Access Denied\";\n\t  }\n    "
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -27,10 +21,14 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/snippet/XwYm8yjU5QLLDvgXXXXXX
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/snippet/dynsnipxxxxxxxxxxxxxid
     method: PUT
   response:
-    body: '{"snippet_id":"XwYm8yjU5QLLDvgXXXXXX","created_at":"2018-08-01T19:56:03Z","content":" # testing EdgeACL6 and EdgeDictionary6\n  declare local var.asn_number6 STRING;\n  set var.asn_number6 = table.lookup(demoDICTtest, client.as.number);\n\n  if (var.asn_number6 == \"true\") {\n    set req.http.securityruleid = \"num6-block\";\n error 403 \"Access Denied\";\n  }","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2018-08-02T18:15:09Z"}'
+    body: '{"snippet_id":"dynsnipxxxxxxxxxxxxxid","created_at":"2018-08-15T17:12:48Z","content":"\n\t
+      # testing EdgeACL5 and EdgeDictionary5\n\t declare local var.number5 STRING;\n\t
+      set var.number5 = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number5
+      == \"true\") {\n\t set req.http.securityruleid = \"num5-block\";\n\t error 403
+      \"Access Denied\";\n\t  }\n    ","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2018-08-15T17:12:48Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -39,11 +37,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:11 GMT
+      - Wed, 15 Aug 2018 17:32:28 GMT
       Fastly-Ratelimit-Remaining:
-      - "892"
+      - "998"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1534356000"
       Status:
       - 200 OK
       Vary:
@@ -56,8 +54,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - app-slwdc9051-SL, cache-mdw17340-MDW
       X-Timer:
-      - S1500513311.712694,VS0,VE456
+      - S1534354345.379573,VS0,VE3311
     status: 200 OK
     code: 200
