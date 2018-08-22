@@ -1,0 +1,54 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form:
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "688"
+      Snippet:
+      - testsnip5
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/688/snippet/testsnip5
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Jul 2017 01:15:11 GMT
+      Fastly-Ratelimit-Remaining:
+      - "892"
+      Fastly-Ratelimit-Reset:
+      - "1500516000"
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17722-DCA
+      X-Timer:
+      - S1500513311.712694,VS0,VE456
+    status: 200 OK
+    code: 200

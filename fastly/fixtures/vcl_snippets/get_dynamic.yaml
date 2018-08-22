@@ -1,0 +1,50 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/snippet/dynsnipxxxxxxxxxxxxxid
+    method: GET
+  response:
+    body: '{"snippet_id":"dynsnipxxxxxxxxxxxxxid","created_at":"2018-08-15T17:12:48Z","content":"\n\t
+      # testing EdgeACL5 and EdgeDictionary5\n\t declare local var.number5 STRING;\n\t
+      set var.number5 = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number5
+      == \"true\") {\n\t set req.http.securityruleid = \"num5-block\";\n\t error 403
+      \"Access Denied\";\n\t  }\n    ","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2018-08-15T17:32:25Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 Aug 2018 18:32:57 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - app-slwdc9051-SL, cache-mdw17345-MDW
+      X-Timer:
+      - S1534357978.786430,VS0,VE113
+    status: 200 OK
+    code: 200
