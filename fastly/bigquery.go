@@ -13,6 +13,7 @@ type BigQuery struct {
 	ProjectID         string `mapstructure:"project_id"`
 	Dataset           string `mapstructure:"dataset"`
 	Table             string `mapstructure:"table"`
+	Template          string `mapstructure:"template_suffix"`
 	SecretKey         string `mapstructure:"secret_key"`
 	CreatedAt         string `mapstructure:"created_at"`
 	UpdatedAt         string `mapstructure:"updated_at"`
@@ -71,6 +72,9 @@ type CreateBigQueryInput struct {
 
 	// Table is your BigQuery table.
 	Table string
+
+	// Template is your BigQuery template suffix.
+	Template string
 
 	// User is the user with access to write to your BigQuery dataset.
 	User string
@@ -134,6 +138,9 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	if i.ResponseCondition != "" {
 		params["response_condition"] = i.ResponseCondition
 	}
+	if i.Template != "" {
+		params["template_suffix"] = i.Template
+	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.Service, i.Version)
 	resp, err := c.PostForm(path, i, &RequestOptions{
@@ -179,6 +186,9 @@ type UpdateBigQueryInput struct {
 	// Table is your BigQuery table.
 	Table string
 
+	// Template is your BigQuery template suffix.
+	Template string
+
 	// User is the user with access to write to your BigQuery dataset.
 	User string
 
@@ -222,6 +232,9 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	}
 	if i.Table != "" {
 		params["table"] = i.Table
+	}
+	if i.Template != "" {
+		params["template_suffix"] = i.Template
 	}
 	if i.User != "" {
 		params["user"] = i.User
