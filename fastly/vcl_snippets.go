@@ -5,31 +5,66 @@ import (
 	"sort"
 )
 
+const (
+	// SnippetTypeInit sets the type to init
+	SnippetTypeInit SnippetType = "init"
+
+	// SnippetTypeRecv sets the type to recv
+	SnippetTypeRecv SnippetType = "recv"
+
+	// SnippetTypeHit sets the type to hit
+	SnippetTypeHit SnippetType = "hit"
+
+	// SnippetTypeMiss sets the type to miss
+	SnippetTypeMiss SnippetType = "miss"
+
+	// SnippetTypePass sets the type to pass
+	SnippetTypePass SnippetType = "pass"
+
+	// SnippetTypeFetch sets the type to fetch
+	SnippetTypeFetch SnippetType = "fetch"
+
+	// SnippetTypeError sets the type to error
+	SnippetTypeError SnippetType = "error"
+
+	// SnippetTypeDeliver sets the type to deliver
+	SnippetTypeDeliver SnippetType = "deliver"
+
+	// SnippetTypeLog sets the type to log
+	SnippetTypeLog SnippetType = "log"
+
+	// SnippetTypeNone sets the type to none
+	SnippetTypeNone SnippetType = "none"
+)
+
+// SnippetType is the type of VCL Snippet
+type SnippetType string
+
 // Snippet is the Fastly Snippet object
 type Snippet struct {
+	// ServiceID is the ID of the Service to add the snippet to.
+	ServiceID string `mapstructure:"service_id"`
+
+	// Version is the editable version of the service.
+	Version int `mapstructure:"version"`
+
+	// Name is the name for the snippet.
+	Name string `mapstructure:"name"`
+
+	// ID is the snippet ID
+	ID string `mapstructure:"snippet_id"`
+
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
 	Priority int `mapstructure:"priority"`
 
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic int `mapstructure:"dynamic"`
 
-	// SnippetName is the name for the snippet.
-	SnippetName string `mapstructure:"name"`
-
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content string `mapstructure:"content"`
 
-	// SnippetID is the snippet ID
-	SnippetID string `mapstructure:"id"`
-
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type string `mapstructure:"type"`
-
-	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string `mapstructure:"service_id"`
-
-	// Version is the editable version of the service.
-	Version int `mapstructure:"version"`
+	Type SnippetType `mapstructure:"type"`
 
 	DeletedAt string `mapstructure:"deleted_at"`
 	CreatedAt string `mapstructure:"created_at"`
@@ -38,26 +73,26 @@ type Snippet struct {
 
 // CreateSnippetInput is the input for CreateSnippet
 type CreateSnippetInput struct {
-	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `form:"priority"`
+	// Service is the ID of the Service to add the snippet to.
+	Service string
 
 	// Version is the editable version of the service
 	Version int
 
+	// Name is the name for the snippet.
+	Name string `form:"name"`
+
+	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
+	Priority int `form:"priority"`
+
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic int `form:"dynamic"`
-
-	// SnippetName is the name for the snippet.
-	SnippetName string `form:"name"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content string `form:"content"`
 
-	// Service is the ID of the Service to add the snippet to.
-	Service string
-
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type string `form:"type"`
+	Type SnippetType `form:"type"`
 }
 
 // CreateSnippet creates a new snippet or dynamic snippet on a unlocked version
@@ -70,16 +105,12 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 		return nil, ErrMissingVersion
 	}
 
-	if i.SnippetName == "" {
-		return nil, ErrMissingSnippetName
+	if i.Name == "" {
+		return nil, ErrMissingName
 	}
 
 	if i.Dynamic == 0 && i.Content == "" {
-		return nil, ErrMissingSnippetContent
-	}
-
-	if i.Type == "" {
-		return nil, ErrMissingSnippetType
+		return nil, ErrMissingContent
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet", i.Service, i.Version)
@@ -100,8 +131,8 @@ type DynamicSnippet struct {
 	// Service is the ID of the Service to add the snippet to.
 	ServiceID string `mapstructure:"service_id"`
 
-	// SnippetID is the ID of the Snippet to modify
-	SnippetID string `mapstructure:"snippet_id"`
+	// ID is the ID of the Snippet to modify
+	ID string `mapstructure:"snippet_id"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content string `mapstructure:"content"`
@@ -115,8 +146,8 @@ type UpdateDynamicSnippetInput struct {
 	// Service is the ID of the Service to add the snippet to.
 	Service string
 
-	// SnippetID is the ID of the Snippet to modify
-	SnippetID string
+	// ID is the ID of the Snippet to modify
+	ID string
 
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content string `form:"content"`
@@ -128,11 +159,11 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 		return nil, ErrMissingService
 	}
 
-	if i.SnippetID == "" {
-		return nil, ErrMissingSnippetID
+	if i.ID == "" {
+		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/snippet/%s", i.Service, i.SnippetID)
+	path := fmt.Sprintf("/service/%s/snippet/%s", i.Service, i.ID)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -149,8 +180,8 @@ type DeleteSnippetInput struct {
 	// Service is the ID of the Service to add the snippet to.
 	Service string
 
-	// SnippetName is the Name of the Snippet to Delete
-	SnippetName string
+	// Name is the Name of the Snippet to Delete
+	Name string
 
 	// Version is the editable version of the service
 	Version int
@@ -165,11 +196,11 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 		return ErrMissingVersion
 	}
 
-	if i.SnippetName == "" {
-		return ErrMissingSnippetName
+	if i.Name == "" {
+		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.Service, i.Version, i.SnippetName)
+	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.Service, i.Version, i.Name)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
@@ -201,7 +232,7 @@ type snippetsByName []*Snippet
 func (s snippetsByName) Len() int      { return len(s) }
 func (s snippetsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
 func (s snippetsByName) Less(i, j int) bool {
-	return s[i].SnippetName < s[j].SnippetName
+	return s[i].Name < s[j].Name
 }
 
 // ListSnippets returns the list of Snippets for the configuration version. Content is not displayed for Dynmanic Snippets due to them being
@@ -236,8 +267,8 @@ type GetSnippetInput struct {
 	Service string
 	Version int
 
-	// SnippetName is the name of the Snippet to fetch.
-	SnippetName string
+	// Name is the name of the Snippet to fetch.
+	Name string
 }
 
 // GetSnippet gets the Snippet configuration with the given parameters. Dynamic Snippets will not show content due to them
@@ -251,11 +282,11 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 		return nil, ErrMissingVersion
 	}
 
-	if i.SnippetName == "" {
-		return nil, ErrMissingSnippetName
+	if i.Name == "" {
+		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.Service, i.Version, i.SnippetName)
+	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.Service, i.Version, i.Name)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -273,8 +304,8 @@ type GetDynamicSnippetInput struct {
 	// Service is the ID of the service.
 	Service string
 
-	// SnippetID is the ID of the Snippet to fetch.
-	SnippetID string
+	// ID is the ID of the Snippet to fetch.
+	ID string
 }
 
 // GetDynamicSnippet gets the Snippet configuration with the given parameters. This will show the current content
@@ -284,11 +315,11 @@ func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, 
 		return nil, ErrMissingService
 	}
 
-	if i.SnippetID == "" {
-		return nil, ErrMissingSnippetID
+	if i.ID == "" {
+		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/snippet/%s", i.Service, i.SnippetID)
+	path := fmt.Sprintf("/service/%s/snippet/%s", i.Service, i.ID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
