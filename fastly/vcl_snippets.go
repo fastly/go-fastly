@@ -5,6 +5,41 @@ import (
 	"sort"
 )
 
+const (
+	// SnippetTypeInit sets the type to init
+	SnippetTypeInit SnippetType = "init"
+
+	// SnippetTypeRecv sets the type to recv
+	SnippetTypeRecv SnippetType = "recv"
+
+	// SnippetTypeHit sets the type to hit
+	SnippetTypeHit SnippetType = "hit"
+
+	// SnippetTypeMiss sets the type to miss
+	SnippetTypeMiss SnippetType = "miss"
+
+	// SnippetTypePass sets the type to pass
+	SnippetTypePass SnippetType = "pass"
+
+	// SnippetTypeFetch sets the type to fetch
+	SnippetTypeFetch SnippetType = "fetch"
+
+	// SnippetTypeError sets the type to error
+	SnippetTypeError SnippetType = "error"
+
+	// SnippetTypeDeliver sets the type to deliver
+	SnippetTypeDeliver SnippetType = "deliver"
+
+	// SnippetTypeLog sets the type to log
+	SnippetTypeLog SnippetType = "log"
+
+	// SnippetTypeNone sets the type to none
+	SnippetTypeNone SnippetType = "none"
+)
+
+// SnippetType is the type of VCL Snippet
+type SnippetType string
+
 // Snippet is the Fastly Snippet object
 type Snippet struct {
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
@@ -23,7 +58,7 @@ type Snippet struct {
 	SnippetID string `mapstructure:"id"`
 
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type string `mapstructure:"type"`
+	Type SnippetType `mapstructure:"type"`
 
 	// ServiceID is the ID of the Service to add the snippet to.
 	ServiceID string `mapstructure:"service_id"`
@@ -57,7 +92,7 @@ type CreateSnippetInput struct {
 	Service string
 
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type string `form:"type"`
+	Type SnippetType `form:"type"`
 }
 
 // CreateSnippet creates a new snippet or dynamic snippet on a unlocked version
@@ -76,10 +111,6 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 
 	if i.Dynamic == 0 && i.Content == "" {
 		return nil, ErrMissingSnippetContent
-	}
-
-	if i.Type == "" {
-		return nil, ErrMissingSnippetType
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet", i.Service, i.Version)
