@@ -52,7 +52,7 @@ type Snippet struct {
 	Name string `mapstructure:"name"`
 
 	// ID is the snippet ID
-	ID string `mapstructure:"snippet_id"`
+	ID string `mapstructure:"id"`
 
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
 	Priority int `mapstructure:"priority"`
