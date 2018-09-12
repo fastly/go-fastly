@@ -11,6 +11,10 @@ type ACL struct {
 
 	Name string `mapstructure:"name"`
 	ID   string `mapstructure:"id"`
+
+	DeletedAt string `mapstructure:"deleted_at"`
+	CreatedAt string `mapstructure:"created_at"`
+	UpdatedAt string `mapstructure:"updated_at"`
 }
 
 // ACLsByName is a sortable list of ACLs.

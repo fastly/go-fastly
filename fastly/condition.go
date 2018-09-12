@@ -12,6 +12,7 @@ type Condition struct {
 	Version   int    `mapstructure:"version"`
 
 	Name      string `mapstructure:"name"`
+	Comment   string `mapstructure:"comment"`
 	Statement string `mapstructure:"statement"`
 	Type      string `mapstructure:"type"`
 	Priority  int    `mapstructure:"priority"`
@@ -144,6 +145,8 @@ type UpdateConditionInput struct {
 	// Name is the name of the condition to update.
 	Name string
 
+	NewName   string `form:"name,omitempty"`
+	Comment   string `form:"comment,omitempty"`
 	Statement string `form:"statement,omitempty"`
 	Type      string `form:"type,omitempty"`
 	Priority  int    `form:"priority,omitempty"`

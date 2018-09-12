@@ -12,7 +12,6 @@ type Domain struct {
 
 	Name    string `mapstructure:"name"`
 	Comment string `mapstructure:"comment"`
-	Locked  bool   `mapstructure:"locked"`
 }
 
 // domainsByName is a sortable list of backends.

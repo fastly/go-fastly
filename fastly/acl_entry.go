@@ -14,6 +14,10 @@ type ACLEntry struct {
 	Subnet  string `mapstructure:"subnet"`
 	Negated bool   `mapstructure:"negated"`
 	Comment string `mapstructure:"comment"`
+
+	DeletedAt string `mapstructure:"deleted_at"`
+	CreatedAt string `mapstructure:"created_at"`
+	UpdatedAt string `mapstructure:"updated_at"`
 }
 
 // entriesById is a sortable list of ACL entries.
