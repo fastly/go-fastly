@@ -11,6 +11,7 @@ type HealthCheck struct {
 	Version   int    `mapstructure:"version"`
 
 	Name             string `mapstructure:"name"`
+	Comment          string `mapstructure:"comment"`
 	Method           string `mapstructure:"method"`
 	Host             string `mapstructure:"host"`
 	Path             string `mapstructure:"path"`
@@ -75,6 +76,7 @@ type CreateHealthCheckInput struct {
 	Version int
 
 	Name             string `form:"name,omitempty"`
+	Comment          string `form:"comment,omitempty"`
 	Method           string `form:"method,omitempty"`
 	Host             string `form:"host,omitempty"`
 	Path             string `form:"path,omitempty"`
@@ -159,6 +161,7 @@ type UpdateHealthCheckInput struct {
 	Name string
 
 	NewName          string `form:"name,omitempty"`
+	Comment          string `form:"comment,omitempty"`
 	Method           string `form:"method,omitempty"`
 	Host             string `form:"host,omitempty"`
 	Path             string `form:"path,omitempty"`

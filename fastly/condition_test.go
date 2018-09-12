@@ -98,6 +98,7 @@ func TestClient_Conditions(t *testing.T) {
 			Service:   testServiceID,
 			Version:   tv.Number,
 			Name:      "test/condition",
+			NewName:   "new-test/condition",
 			Statement: "req.url~+\"updated.html\"",
 		})
 	})

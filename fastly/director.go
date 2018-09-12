@@ -29,10 +29,15 @@ type Director struct {
 
 	Name     string       `mapstructure:"name"`
 	Comment  string       `mapstructure:"comment"`
+	Shield   string       `mapstructure:"shield"`
 	Quorum   uint         `mapstructure:"quorum"`
 	Type     DirectorType `mapstructure:"type"`
 	Retries  uint         `mapstructure:"retries"`
 	Capacity uint         `mapstructure:"capacity"`
+
+	DeletedAt string `mapstructure:"deleted_at"`
+	CreatedAt string `mapstructure:"created_at"`
+	UpdatedAt string `mapstructure:"updated_at"`
 }
 
 // directorsByName is a sortable list of directors.
@@ -85,11 +90,13 @@ type CreateDirectorInput struct {
 	Service string
 	Version int
 
-	Name    string       `form:"name,omitempty"`
-	Comment string       `form:"comment,omitempty"`
-	Quorum  uint         `form:"quorum,omitempty"`
-	Type    DirectorType `form:"type,omitempty"`
-	Retries uint         `form:"retries,omitempty"`
+	Name     string       `form:"name,omitempty"`
+	Comment  string       `form:"comment,omitempty"`
+	Shield   string       `form:"shield,omitempty"`
+	Quorum   uint         `form:"quorum,omitempty"`
+	Type     DirectorType `form:"type,omitempty"`
+	Retries  uint         `form:"retries,omitempty"`
+	Capacity uint         `form:"capacity,omitempty"`
 }
 
 // CreateDirector creates a new Fastly director.
@@ -163,10 +170,13 @@ type UpdateDirectorInput struct {
 	// Name is the name of the director to update.
 	Name string
 
-	Comment string       `form:"comment,omitempty"`
-	Quorum  uint         `form:"quorum,omitempty"`
-	Type    DirectorType `form:"type,omitempty"`
-	Retries uint         `form:"retries,omitempty"`
+	NewName  string       `form:"name,omitempty"`
+	Comment  string       `form:"comment,omitempty"`
+	Shield   string       `form:"shield,omitempty"`
+	Quorum   uint         `form:"quorum,omitempty"`
+	Type     DirectorType `form:"type,omitempty"`
+	Retries  uint         `form:"retries,omitempty"`
+	Capacity uint         `form:"capacity,omitempty"`
 }
 
 // UpdateDirector updates a specific director.

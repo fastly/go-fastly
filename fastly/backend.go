@@ -11,6 +11,7 @@ type Backend struct {
 	Version   int    `mapstructure:"version"`
 
 	Name                string   `mapstructure:"name"`
+	Comment             string   `mapstructure:"comment"`
 	Address             string   `mapstructure:"address"`
 	Port                uint     `mapstructure:"port"`
 	ConnectTimeout      uint     `mapstructure:"connect_timeout"`
@@ -88,6 +89,7 @@ type CreateBackendInput struct {
 	Version int
 
 	Name                string       `form:"name,omitempty"`
+	Comment             string       `form:"comment,omitempty"`
 	Address             string       `form:"address,omitempty"`
 	Port                uint         `form:"port,omitempty"`
 	ConnectTimeout      uint         `form:"connect_timeout,omitempty"`
@@ -185,6 +187,7 @@ type UpdateBackendInput struct {
 	Name string
 
 	NewName             string       `form:"name,omitempty"`
+	Comment             string       `form:"comment,omitempty"`
 	Address             string       `form:"address,omitempty"`
 	Port                uint         `form:"port,omitempty"`
 	ConnectTimeout      uint         `form:"connect_timeout,omitempty"`
