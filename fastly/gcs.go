@@ -84,6 +84,7 @@ type CreateGCSInput struct {
 	MessageType       string `form:"message_type,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateGCS creates a new Fastly GCS.
