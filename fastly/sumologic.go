@@ -21,6 +21,7 @@ type Sumologic struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	
 }
 
 // sumologicsByName is a sortable list of sumologics.
