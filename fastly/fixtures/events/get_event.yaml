@@ -1,0 +1,44 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
+    url: https://api.fastly.com/events/7RVP7RfHYD7r0CYRxxxxxx
+    method: GET
+  response:
+    body: '{"data":{"id":"7RVP7RfHYD7r0CYRxxxxxx","type":"event","attributes":{"customer_id":"zwBncFVs2Ixrhd8xxxxxx","description":"Version 68 was activated","event_type":"version.activate","ip":"10.10.10.15, 10.10.10.16","metadata":{"version_number":68},"service_id":"7kQfFIWFhi3TS1y8xxxxxx","user_id":"6TGNjlv1QUstI5iMxxxxxx","created_at":"2018-05-17T03:47:26Z","admin":false}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Content-Length:
+      - "281"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Tue, 05 Sep 2017 17:56:54 GMT
+      Status:
+      - 200 OK
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - app-slwdc9051-SL, cache-dca17730-DCA
+      X-Timer:
+      - S1504634214.963647,VS0,VE133
+    status: 200 OK
+    code: 200

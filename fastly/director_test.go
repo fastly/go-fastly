@@ -104,6 +104,7 @@ func TestClient_Directors(t *testing.T) {
 			Service: testServiceID,
 			Version: tv.Number,
 			Name:    "test-director",
+			NewName: "new-test-director",
 			Quorum:  100,
 		})
 	})

@@ -83,7 +83,7 @@ if err != nil {
 fmt.Println(domain.Name)
 
 // Now we can validate that our version is valid.
-valid, err := client.ValidateVersion(&fastly.ValidateVersionInput{
+valid, _, err := client.ValidateVersion(&fastly.ValidateVersionInput{
   Service: serviceID,
   Version: version.Number,
 })

@@ -7,12 +7,29 @@ import (
 
 // Dictionary represents a dictionary response from the Fastly API.
 type Dictionary struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	// CreatedAt is the Time-stamp (GMT) when the dictionary was created.
+	CreatedAt string `mapstructure:"created_at"`
 
-	ID      string `mapstructure:"id"`
-	Name    string `mapstructure:"name"`
-	Address string `mapstructure:"address"`
+	// DeletedAt is the Time-stamp (GMT) when the dictionary was deleted.
+	DeletedAt string `mapstructure:"deleted_at"`
+
+	// ID is the alphanumeric string identifying a dictionary.
+	ID string `mapstructure:"id"`
+
+	// Name is the name for the Dictionary.
+	Name string `mapstructure:"name"`
+
+	// ServiceID is the alphanumeric string identifying a service.
+	ServiceID string `mapstructure:"service_id"`
+
+	// UpdatedAt is the Time-stamp (GMT) when the dictionary was updated.
+	UpdatedAt string `mapstructure:"updated_at"`
+
+	// Version is the current version of the service.
+	Version int `mapstructure:"version"`
+
+	// WriteOnly Determines if items in the dictionary are readable or not.
+	WriteOnly bool `mapstructure:"write_only"`
 }
 
 // dictionariesByName is a sortable list of dictionaries.
@@ -65,7 +82,8 @@ type CreateDictionaryInput struct {
 	Service string
 	Version int
 
-	Name string `form:"name,omitempty"`
+	Name      string       `form:"name,omitempty"`
+	WriteOnly *Compatibool `form:"write_only,omitempty"`
 }
 
 // CreateDictionary creates a new Fastly dictionary.
@@ -139,7 +157,8 @@ type UpdateDictionaryInput struct {
 	// Name is the name of the dictionary to update.
 	Name string
 
-	NewName string `form:"name,omitempty"`
+	NewName   string       `form:"name,omitempty"`
+	WriteOnly *Compatibool `form:"write_only,omitempty"`
 }
 
 // UpdateDictionary updates a specific dictionary.

@@ -7,11 +7,26 @@ import (
 
 // DictionaryItem represents a dictionary item response from the Fastly API.
 type DictionaryItem struct {
-	ServiceID    string `mapstructure:"service_id"`
+	// DictionaryID is the alphanumeric string identifying the dictionary for this Item.
 	DictionaryID string `mapstructure:"dictionary_id"`
 
-	ItemKey   string `mapstructure:"item_key"`
+	// ServiceID is the service the Dictionary belongs to.
+	ServiceID string `mapstructure:"service_id"`
+
+	// ItemKey is the value for the DictionaryKey.
+	ItemKey string `mapstructure:"item_key"`
+
+	// ItemValue is the value for the DictionaryItem.
 	ItemValue string `mapstructure:"item_value"`
+
+	// CreatedAt is the Time-stamp (GMT) when the dictionary was created.
+	CreatedAt string `mapstructure:"created_at"`
+
+	// DeletedAt is the Time-stamp (GMT) when the dictionary was deleted.
+	DeletedAt string `mapstructure:"deleted_at"`
+
+	// UpdatedAt is the Time-stamp (GMT) when the dictionary was updated.
+	UpdatedAt string `mapstructure:"updated_at"`
 }
 
 // dictionaryItemsByKey is a sortable list of dictionary items.
@@ -88,6 +103,20 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	var b *DictionaryItem
 	if err := decodeJSON(&b, resp.Body); err != nil {
 		return nil, err
+	}
+	return b, nil
+}
+
+// CreateDictionaryItems creates new Fastly dictionary items from a slice.
+func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
+
+	var b []DictionaryItem
+	for _, cdii := range i {
+		di, err := c.CreateDictionaryItem(&cdii)
+		if err != nil {
+			return nil, err
+		}
+		b = append(b, *di)
 	}
 	return b, nil
 }
