@@ -19,7 +19,7 @@ type BigQuery struct {
 	UpdatedAt         string `mapstructure:"updated_at"`
 	DeletedAt         string `mapstructure:"deleted_at"`
 	ResponseCondition string `mapstructure:"response_condition"`
-	Placement 		  string `mapstructure:"placement"`
+	Placement         string `mapstructure:"placement"`
 }
 
 // GetBigQueryInput is used as input to the GetBigQuery function.
