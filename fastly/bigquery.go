@@ -19,6 +19,7 @@ type BigQuery struct {
 	UpdatedAt         string `mapstructure:"updated_at"`
 	DeletedAt         string `mapstructure:"deleted_at"`
 	ResponseCondition string `mapstructure:"response_condition"`
+	Placement         string `mapstructure:"placement"`
 }
 
 // GetBigQueryInput is used as input to the GetBigQuery function.
@@ -89,6 +90,10 @@ type CreateBigQueryInput struct {
 	// ResponseCondition allows you to attach a response condition to your BigQuery logging endpoint.
 	// Optional.
 	ResponseCondition string
+
+	// Placement is the log placement desired for your BigQuery logging endpoint.
+	// Optional.
+	Placement string
 }
 
 // CreateBigQuery creates a new Fastly BigQuery logging endpoint.
@@ -140,6 +145,10 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	}
 	if i.Template != "" {
 		params["template_suffix"] = i.Template
+	}
+
+	if i.Placement != "" {
+		params["placement"] = i.Placement
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.Service, i.Version)
@@ -202,6 +211,10 @@ type UpdateBigQueryInput struct {
 	// ResponseCondition allows you to attach a response condition to your BigQuery logging endpoint.
 	// Optional.
 	ResponseCondition string
+
+	// Placement is the log placement desired for your BigQuery logging endpoint.
+	// Optional.
+	Placement string
 }
 
 // UpdateBigQuery updates a BigQuery logging endpoint.
@@ -247,6 +260,10 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	}
 	if i.ResponseCondition != "" {
 		params["response_condition"] = i.ResponseCondition
+	}
+
+	if i.Placement != "" {
+		params["placement"] = i.Placement
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.Service, i.Version, i.Name)
