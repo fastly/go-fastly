@@ -142,6 +142,21 @@ func TestClient_Services(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	//	List Domains
+	var ds ServiceDomainsList
+	record(t, "services/domain", func(c *Client) {
+		ds, err = c.ListDomain(&ListServiceDomainInput{
+			ID: s.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ds) < 1 {
+		t.Fatal("bad services: %v", ds)
+	}
+
 }
 
 func TestClient_GetService_validation(t *testing.T) {
