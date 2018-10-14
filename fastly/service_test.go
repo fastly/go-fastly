@@ -156,7 +156,6 @@ func TestClient_Services(t *testing.T) {
 	if len(ds) < 1 {
 		t.Fatal("bad services: %v", ds)
 	}
-
 }
 
 func TestClient_GetService_validation(t *testing.T) {

@@ -220,16 +220,15 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	return s, nil
 }
 
-type ListServiceDomainInput struct{
+type ListServiceDomainInput struct {
 	ID string
 }
 
-
+// ListDomain lists all domains associated with a given service
 func (c *Client) ListDomain(i *ListServiceDomainInput) (ServiceDomainsList, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
-
 	path := fmt.Sprintf("/service/%s/domain", i.ID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -237,6 +236,7 @@ func (c *Client) ListDomain(i *ListServiceDomainInput) (ServiceDomainsList, erro
 	}
 
 	var ds ServiceDomainsList
+
 	if err := decodeJSON(&ds, resp.Body); err != nil {
 		return nil, err
 	}
