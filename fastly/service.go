@@ -224,8 +224,8 @@ type ListServiceDomainInput struct {
 	ID string
 }
 
-// ListDomain lists all domains associated with a given service
-func (c *Client) ListDomain(i *ListServiceDomainInput) (ServiceDomainsList, error) {
+// ListServiceDomains lists all domains associated with a given service
+func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}

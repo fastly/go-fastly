@@ -146,7 +146,7 @@ func TestClient_Services(t *testing.T) {
 	//	List Domains
 	var ds ServiceDomainsList
 	record(t, "services/domain", func(c *Client) {
-		ds, err = c.ListDomain(&ListServiceDomainInput{
+		ds, err = c.ListServiceDomains(&ListServiceDomainInput{
 			ID: s.ID,
 		})
 	})
