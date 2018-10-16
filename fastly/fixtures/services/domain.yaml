@@ -1,0 +1,64 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.1)
+    url: https://api.fastly.com/service/6cqczz91loS2dnXX5w9UIC/domain
+    method: GET
+  response:
+    body: '[
+    {
+        "locked": true,
+        "version": 1,
+        "name": "abc.com",
+        "deleted_at": null,
+        "service_id": "6cqczz91loS2dnXX5w9UIC",
+        "created_at": "2017-05-06T04:53:04Z",
+        "comment": "",
+        "updated_at": "2017-05-06T04:53:04Z"
+    },
+    {
+        "locked": true,
+        "version": 1,
+        "name": "def.com",
+        "deleted_at": null,
+        "service_id": "6cqczz91loS2dnXX5w9UIC",
+        "created_at": "2017-05-07T05:28:19Z",
+        "comment": "",
+        "updated_at": "2017-05-07T05:28:19Z"
+    }]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 14 Oct 2018 21:50:04 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lax8630-LAX
+      X-Timer:
+      - S1539553804.712884,VS0,VE332
+    status: 200 OK
+    code: 200

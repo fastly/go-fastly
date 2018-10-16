@@ -3,6 +3,7 @@ package fastly
 import (
 	"fmt"
 	"sort"
+	"time"
 )
 
 // Service represents a single service for the Fastly account.
@@ -27,6 +28,18 @@ type ServiceDetail struct {
 	Version       Version    `mapstructure:"version"`
 	Versions      []*Version `mapstructure:"versions"`
 }
+
+type ServiceDomain struct {
+	Locked    bool       `mapstructure:"locked"`
+	Version   int64      `mapstructure:"version"`
+	Name      string     `mapstructure:"name"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	ServiceID string     `mapstructure: "service_id"`
+	CreatedAt time.Time  `mapstructure: "created_at"`
+	Comment   string     `mapstructure:"comment"`
+	UpdatedAt time.Time  `mapstructure:"updated_at"`
+}
+type ServiceDomainsList []*ServiceDomain
 
 // servicesByName is a sortable list of services.
 type servicesByName []*Service
@@ -205,4 +218,28 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	}
 
 	return s, nil
+}
+
+type ListServiceDomainInput struct {
+	ID string
+}
+
+// ListServiceDomains lists all domains associated with a given service
+func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
+	if i.ID == "" {
+		return nil, ErrMissingID
+	}
+	path := fmt.Sprintf("/service/%s/domain", i.ID)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var ds ServiceDomainsList
+
+	if err := decodeJSON(&ds, resp.Body); err != nil {
+		return nil, err
+	}
+
+	return ds, nil
 }
