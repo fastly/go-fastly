@@ -13,7 +13,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/685/logging/gcs/test-gcs
     method: GET
   response:
-    body: '{"placement":null,"format_version":"2","gzip_level":"9","response_condition":"","user":"user","secret_key":"key","public_key":null,"updated_at":"2017-07-20T01:15:09+00:00","message_type":"classic","period":"12","name":"test-gcs","bucket_name":"bucket","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"685","path":"/path","deleted_at":null,"created_at":"2017-07-20T01:15:09+00:00","format":"format"}'
+    body: '{"placement":"waf_debug","format_version":"2","gzip_level":"9","response_condition":"","user":"user","secret_key":"key","public_key":null,"updated_at":"2017-07-20T01:15:09+00:00","message_type":"blank","period":"12","name":"test-gcs","bucket_name":"bucket","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"685","path":"/path","deleted_at":null,"created_at":"2017-07-20T01:15:09+00:00","format":"format"}'
     headers:
       Accept-Ranges:
       - bytes

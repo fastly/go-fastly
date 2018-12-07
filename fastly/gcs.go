@@ -21,6 +21,7 @@ type GCS struct {
 	MessageType       string `mapstructure:"message_type"`
 	ResponseCondition string `mapstructure:"response_condition"`
 	TimestampFormat   string `mapstructure:"timestamp_format"`
+	Placement         string `mapstructure:"placement"`
 }
 
 // gcsesByName is a sortable list of gcses.
@@ -168,6 +169,7 @@ type UpdateGCSInput struct {
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // UpdateGCS updates a specific GCS.

@@ -22,6 +22,7 @@ type FTP struct {
 	Format            string     `mapstructure:"format"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Placement         string     `mapstructure:"placement"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -88,6 +89,7 @@ type CreateFTPInput struct {
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateFTP creates a new Fastly FTP.
@@ -172,6 +174,7 @@ type UpdateFTPInput struct {
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // UpdateFTP updates a specific FTP.

@@ -45,7 +45,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/698/logging/s3
     method: POST
   response:
-    body: '{"access_key":"access_key","bucket_name":"bucket-name","domain":"s3-website-us-west-2.amazonaws.com","format":"format","format_version":"2","gzip_level":"9","message_type":"classic","name":"test-s3","path":"/path","period":"12","redundancy":"reduced_redundancy","secret_key":"secret_key","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"698","placement":null,"response_condition":"","server_side_encryption_kms_key_id":null,"public_key":null,"updated_at":"2017-07-20T01:19:42+00:00","server_side_encryption":null,"deleted_at":null,"created_at":"2017-07-20T01:19:42+00:00"}'
+    body: '{"access_key":"access_key","bucket_name":"bucket-name","domain":"s3-website-us-west-2.amazonaws.com","format":"format","format_version":"2","gzip_level":"9","message_type":"classic","name":"test-s3","path":"/path","period":"12","redundancy":"reduced_redundancy","secret_key":"secret_key","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"698","placement":"waf_debug","response_condition":"","server_side_encryption_kms_key_id":null,"public_key":null,"updated_at":"2017-07-20T01:19:42+00:00","server_side_encryption":null,"deleted_at":null,"created_at":"2017-07-20T01:19:42+00:00"}'
     headers:
       Accept-Ranges:
       - bytes

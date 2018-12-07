@@ -15,12 +15,13 @@ func TestClient_Papertrails(t *testing.T) {
 	var p *Papertrail
 	record(t, "papertrails/create", func(c *Client) {
 		p, err = c.CreatePapertrail(&CreatePapertrailInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-papertrail",
-			Address: "integ-test.go-fastly.com",
-			Port:    1234,
-			Format:  "format",
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-papertrail",
+			Address:   "integ-test.go-fastly.com",
+			Port:      1234,
+			Format:    "format",
+			Placement: "waf_debug",
 		})
 	})
 	if err != nil {
@@ -55,6 +56,9 @@ func TestClient_Papertrails(t *testing.T) {
 	}
 	if p.Format != "format" {
 		t.Errorf("bad format: %q", p.Format)
+	}
+	if p.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", p.Placement)
 	}
 
 	// List
@@ -95,6 +99,9 @@ func TestClient_Papertrails(t *testing.T) {
 	}
 	if p.Format != np.Format {
 		t.Errorf("bad format: %q", p.Format)
+	}
+	if p.Placement != np.Placement {
+		t.Errorf("bad placement: %q", p.Placement)
 	}
 
 	// Update

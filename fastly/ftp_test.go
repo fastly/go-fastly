@@ -27,6 +27,7 @@ func TestClient_FTPs(t *testing.T) {
 			GzipLevel:       9,
 			Format:          "format",
 			TimestampFormat: "%Y",
+			Placement:       "waf_debug",
 		})
 	})
 	if err != nil {
@@ -79,6 +80,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftp.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", ftp.TimestampFormat)
+	}
+	if ftp.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", ftp.Placement)
 	}
 
 	// List
@@ -137,6 +141,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftp.TimestampFormat != nftp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", ftp.TimestampFormat)
+	}
+	if ftp.Placement != nftp.Placement {
+		t.Errorf("bad placement: %q", ftp.Placement)
 	}
 
 	// Update

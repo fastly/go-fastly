@@ -29,7 +29,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/692/logging/sumologic
     method: POST
   response:
-    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","url":"example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"692","placement":null,"response_condition":"","updated_at":"2017-07-20T01:15:12+00:00","deleted_at":null,"created_at":"2017-07-20T01:15:12+00:00"}'
+    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","url":"example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"692","placement":"waf_debug","response_condition":"","updated_at":"2017-07-20T01:15:12+00:00","deleted_at":null,"created_at":"2017-07-20T01:15:12+00:00"}'
     headers:
       Accept-Ranges:
       - bytes

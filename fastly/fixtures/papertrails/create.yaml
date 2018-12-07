@@ -27,7 +27,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/676/logging/papertrail
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","format":"format","name":"test-papertrail","port":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"676","placement":null,"format_version":"2","hostname":"integ-test.go-fastly.com","response_condition":"","public_key":null,"updated_at":"2017-07-20T01:15:05+00:00","deleted_at":null,"created_at":"2017-07-20T01:15:05+00:00"}'
+    body: '{"address":"integ-test.go-fastly.com","format":"format","name":"test-papertrail","port":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"676","placement":"waf_debug","format_version":"2","hostname":"integ-test.go-fastly.com","response_condition":"","public_key":null,"updated_at":"2017-07-20T01:15:05+00:00","deleted_at":null,"created_at":"2017-07-20T01:15:05+00:00"}'
     headers:
       Accept-Ranges:
       - bytes

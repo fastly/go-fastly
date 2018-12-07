@@ -19,6 +19,7 @@ type Papertrail struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Placement         string     `mapstructure:"placement"`
 }
 
 // papertrailsByName is a sortable list of papertrails.
@@ -161,6 +162,7 @@ type UpdatePapertrailInput struct {
 	CreatedAt         *time.Time `form:"created_at,omitempty"`
 	UpdatedAt         *time.Time `form:"updated_at,omitempty"`
 	DeletedAt         *time.Time `form:"deleted_at,omitempty"`
+	Placement         string     `form:"placement,omitempty"`
 }
 
 // UpdatePapertrail updates a specific papertrail.

@@ -49,6 +49,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Format:        "format",
 			FormatVersion: 2,
 			MessageType:   "classic",
+			Placement:     "waf_debug",
 		})
 	})
 	if err != nil {
@@ -104,6 +105,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.MessageType != "classic" {
 		t.Errorf("bad message_type: %s", s.MessageType)
+	}
+	if s.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", s.Placement)
 	}
 
 	// List
@@ -165,6 +169,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.MessageType != ns.MessageType {
 		t.Errorf("bad message_type: %q", s.MessageType)
+	}
+	if s.Placement != ns.Placement {
+		t.Errorf("bad placement: %q", s.Placement)
 	}
 
 	// Update

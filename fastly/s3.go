@@ -31,6 +31,7 @@ type S3 struct {
 	ResponseCondition string       `mapstructure:"response_condition"`
 	MessageType       string       `mapstructure:"message_type"`
 	TimestampFormat   string       `mapstructure:"timestamp_format"`
+	Placement         string       `mapstructure:"placement"`
 	Redundancy        S3Redundancy `mapstructure:"redundancy"`
 	CreatedAt         *time.Time   `mapstructure:"created_at"`
 	UpdatedAt         *time.Time   `mapstructure:"updated_at"`
@@ -189,6 +190,7 @@ type UpdateS3Input struct {
 	MessageType       string       `form:"message_type,omitempty"`
 	TimestampFormat   string       `form:"timestamp_format,omitempty"`
 	Redundancy        S3Redundancy `form:"redundancy,omitempty"`
+	Placement         string       `form:"placement,omitempty"`
 }
 
 // UpdateS3 updates a specific S3.
