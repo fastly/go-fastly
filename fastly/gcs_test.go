@@ -27,6 +27,7 @@ func TestClient_GCSs(t *testing.T) {
 			Format:          "format",
 			MessageType:     "blank",
 			TimestampFormat: "%Y",
+			Placement:       "waf_debug",
 		})
 	})
 	if err != nil {
@@ -80,6 +81,9 @@ func TestClient_GCSs(t *testing.T) {
 	if gcs.MessageType != "blank" {
 		t.Errorf("bad message_type: %q", gcs.MessageType)
 	}
+	if gcs.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", gcs.Placement)
+	}
 
 	// List
 	var gcses []*GCS
@@ -108,35 +112,38 @@ func TestClient_GCSs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if gcs.Name != "test-gcs" {
+	if gcs.Name != ngcs.Name {
 		t.Errorf("bad name: %q", gcs.Name)
 	}
-	if gcs.Bucket != "bucket" {
+	if gcs.Bucket != ngcs.Bucket {
 		t.Errorf("bad bucket: %q", gcs.Bucket)
 	}
-	if gcs.User != "user" {
+	if gcs.User != ngcs.User {
 		t.Errorf("bad user: %q", gcs.User)
 	}
-	if gcs.SecretKey != "key" {
+	if gcs.SecretKey != ngcs.SecretKey {
 		t.Errorf("bad secret_key: %q", gcs.SecretKey)
 	}
-	if gcs.Path != "/path" {
+	if gcs.Path != ngcs.Path {
 		t.Errorf("bad path: %q", gcs.Path)
 	}
-	if gcs.Period != 12 {
+	if gcs.Period != ngcs.Period {
 		t.Errorf("bad period: %q", gcs.Period)
 	}
-	if gcs.GzipLevel != 9 {
+	if gcs.GzipLevel != ngcs.GzipLevel {
 		t.Errorf("bad gzip_level: %q", gcs.GzipLevel)
 	}
-	if gcs.Format != "format" {
+	if gcs.Format != ngcs.Format {
 		t.Errorf("bad format: %q", gcs.Format)
 	}
-	if gcs.TimestampFormat != "%Y" {
+	if gcs.TimestampFormat != ngcs.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", gcs.TimestampFormat)
 	}
-	if gcs.MessageType != "blank" {
+	if gcs.MessageType != ngcs.MessageType {
 		t.Errorf("bad message_type: %q", gcs.MessageType)
+	}
+	if gcs.Placement != ngcs.Placement {
+		t.Errorf("bad placement: %q", gcs.Placement)
 	}
 
 	// Update

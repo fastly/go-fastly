@@ -24,6 +24,7 @@ type Syslog struct {
 	FormatVersion     uint       `mapstructure:"format_version"`
 	MessageType       string     `mapstructure:"message_type"`
 	ResponseCondition string     `mapstructure:"response_condition"`
+	Placement         string     `mapstructure:"placement"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -179,6 +180,7 @@ type UpdateSyslogInput struct {
 	FormatVersion     uint         `form:"format_version,omitempty"`
 	MessageType       string       `form:"message_type,omitempty"`
 	ResponseCondition string       `form:"response_condition,omitempty"`
+	Placement         string       `form:"placement,omitempty"`
 }
 
 // UpdateSyslog updates a specific syslog.

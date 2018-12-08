@@ -21,7 +21,7 @@ type Sumologic struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	
+	Placement         string     `mapstructure:"placement"`
 }
 
 // sumologicsByName is a sortable list of sumologics.
@@ -162,6 +162,7 @@ type UpdateSumologicInput struct {
 	ResponseCondition string `form:"response_condition,omitempty"`
 	MessageType       string `form:"message_type,omitempty"`
 	FormatVersion     int    `form:"format_version,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // UpdateSumologic updates a specific sumologic.

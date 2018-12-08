@@ -15,13 +15,14 @@ func TestClient_Logentries(t *testing.T) {
 	var le *Logentries
 	record(t, "logentries/create", func(c *Client) {
 		le, err = c.CreateLogentries(&CreateLogentriesInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-logentries",
-			Port:    1234,
-			UseTLS:  CBool(true),
-			Token:   "abcd1234",
-			Format:  "format",
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-logentries",
+			Port:      1234,
+			UseTLS:    CBool(true),
+			Token:     "abcd1234",
+			Format:    "format",
+			Placement: "waf_debug",
 		})
 	})
 	if err != nil {
@@ -62,6 +63,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if le.FormatVersion != 1 {
 		t.Errorf("bad format_version: %q", le.FormatVersion)
+	}
+	if le.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", le.Placement)
 	}
 
 	// List
@@ -108,6 +112,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if le.FormatVersion != nle.FormatVersion {
 		t.Errorf("bad format_version: %q", le.FormatVersion)
+	}
+	if le.Placement != nle.Placement {
+		t.Errorf("bad placement: %q", le.Placement)
 	}
 
 	// Update

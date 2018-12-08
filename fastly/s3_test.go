@@ -30,6 +30,7 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat: "%Y",
 			MessageType:     "classic",
 			Redundancy:      S3RedundancyReduced,
+			Placement:       "waf_debug",
 		})
 	})
 	if err != nil {
@@ -91,6 +92,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", s3.MessageType)
+	}
+	if s3.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", s3.Placement)
 	}
 
 	// List
@@ -155,6 +159,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.Redundancy != ns3.Redundancy {
 		t.Errorf("bad redundancy: %q", s3.Redundancy)
+	}
+	if s3.Placement != ns3.Placement {
+		t.Errorf("bad placement: %q", s3.Placement)
 	}
 
 	// Update
