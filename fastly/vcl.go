@@ -136,6 +136,7 @@ type CreateVCLInput struct {
 
 	Name    string `form:"name,omitempty"`
 	Content string `form:"content,omitempty"`
+	Main    bool   `form:"main,omitempty"`
 }
 
 // CreateVCL creates a new Fastly VCL.
