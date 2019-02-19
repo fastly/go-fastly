@@ -18,9 +18,8 @@ func TestStatsClient_GetRealtimeStats(t *testing.T) {
 	var err error
 
 	// Get
-	var s *RealtimeStatsResponse
 	recordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
-		s, err = c.GetRealtimeStats(&GetRealtimeStatsInput{
+		_, err = c.GetRealtimeStats(&GetRealtimeStatsInput{
 			Service:   testServiceID,
 			Timestamp: 0,
 			Limit:     3,
