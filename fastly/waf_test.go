@@ -17,9 +17,8 @@ func TestClient_WAFs(t *testing.T) {
 
 	// Enable logging on the service - we cannot create wafs without logging
 	// enabled
-	var s *Syslog
 	record(t, "wafs/logging/create", func(c *Client) {
-		s, err = c.CreateSyslog(&CreateSyslogInput{
+		_, err = c.CreateSyslog(&CreateSyslogInput{
 			Service:       testServiceID,
 			Version:       tv.Number,
 			Name:          "test-syslog",
