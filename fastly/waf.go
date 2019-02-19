@@ -217,36 +217,37 @@ func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 
 // OWASP is the information about an OWASP object.
 type OWASP struct {
-	ID                            string `jsonapi:"primary,owasp"`
-	AllowedHTTPVersions           string `jsonapi:"attr,allowed_http_versions"`
-	AllowedMethods                string `jsonapi:"attr,allowed_methods"`
-	AllowedRequestContentType     string `jsonapi:"attr,allowed_request_content_type"`
-	ArgLength                     int    `jsonapi:"attr,arg_length"`
-	ArgNameLength                 int    `jsonapi:"attr,arg_name_length"`
-	CombinedFileSizes             int    `jsonapi:"attr,combined_file_sizes"`
-	CreatedAt                     string `jsonapi:"attr,created_at"`
-	CriticalAnomalyScore          int    `jsonapi:"attr,critical_anomaly_score"`
-	CRSValidateUTF8Encoding       bool   `jsonapi:"attr,crs_validate_utf8_encoding"`
-	ErrorAnomalyScore             int    `jsonapi:"attr,error_anomaly_score"`
-	HighRiskCountryCodes          string `jsonapi:"attr,high_risk_country_codes"`
-	HTTPViolationScoreThreshold   int    `jsonapi:"attr,http_violation_score_threshold"`
-	InboundAnomalyScoreThreshold  int    `jsonapi:"attr,inbound_anomaly_score_threshold"`
-	LFIScoreThreshold             int    `jsonapi:"attr,lfi_score_threshold"`
-	MaxFileSize                   int    `jsonapi:"attr,max_file_size"`
-	MaxNumArgs                    int    `jsonapi:"attr,max_num_args"`
-	NoticeAnomalyScore            int    `jsonapi:"attr,notice_anomaly_score"`
-	ParanoiaLevel                 int    `jsonapi:"attr,paranoia_level"`
-	PHPInjectionScoreThreshold    int    `jsonapi:"attr,php_injection_score_threshold"`
-	RCEScoreThreshold             int    `jsonapi:"attr,rce_score_threshold"`
-	RestrictedExtensions          string `jsonapi:"attr,restricted_extensions"`
-	RestrictedHeaders             string `jsonapi:"attr,restricted_headers"`
-	RFIScoreThreshold             int    `jsonapi:"attr,rfi_score_threshold"`
-	SessionFixationScoreThreshold int    `jsonapi:"attr,session_fixation_score_threshold"`
-	SQLInjectionScoreThreshold    int    `jsonapi:"attr,sql_injection_score_threshold"`
-	TotalArgLength                int    `jsonapi:"attr,total_arg_length"`
-	UpdatedAt                     string `jsonapi:"attr,updated_at"`
-	WarningAnomalyScore           int    `jsonapi:"attr,warning_anomaly_score"`
-	XSSScoreThreshold             int    `jsonapi:"attr,xss_score_threshold"`
+	ID                               string `jsonapi:"primary,owasp"`
+	AllowedHTTPVersions              string `jsonapi:"attr,allowed_http_versions"`
+	AllowedMethods                   string `jsonapi:"attr,allowed_methods"`
+	AllowedRequestContentType        string `jsonapi:"attr,allowed_request_content_type"`
+	AllowedRequestContentTypeCharset string `jsonapi:"attr,allowed_request_content_type_charset"`
+	ArgLength                        int    `jsonapi:"attr,arg_length"`
+	ArgNameLength                    int    `jsonapi:"attr,arg_name_length"`
+	CombinedFileSizes                int    `jsonapi:"attr,combined_file_sizes"`
+	CreatedAt                        string `jsonapi:"attr,created_at"`
+	CriticalAnomalyScore             int    `jsonapi:"attr,critical_anomaly_score"`
+	CRSValidateUTF8Encoding          bool   `jsonapi:"attr,crs_validate_utf8_encoding"`
+	ErrorAnomalyScore                int    `jsonapi:"attr,error_anomaly_score"`
+	HighRiskCountryCodes             string `jsonapi:"attr,high_risk_country_codes"`
+	HTTPViolationScoreThreshold      int    `jsonapi:"attr,http_violation_score_threshold"`
+	InboundAnomalyScoreThreshold     int    `jsonapi:"attr,inbound_anomaly_score_threshold"`
+	LFIScoreThreshold                int    `jsonapi:"attr,lfi_score_threshold"`
+	MaxFileSize                      int    `jsonapi:"attr,max_file_size"`
+	MaxNumArgs                       int    `jsonapi:"attr,max_num_args"`
+	NoticeAnomalyScore               int    `jsonapi:"attr,notice_anomaly_score"`
+	ParanoiaLevel                    int    `jsonapi:"attr,paranoia_level"`
+	PHPInjectionScoreThreshold       int    `jsonapi:"attr,php_injection_score_threshold"`
+	RCEScoreThreshold                int    `jsonapi:"attr,rce_score_threshold"`
+	RestrictedExtensions             string `jsonapi:"attr,restricted_extensions"`
+	RestrictedHeaders                string `jsonapi:"attr,restricted_headers"`
+	RFIScoreThreshold                int    `jsonapi:"attr,rfi_score_threshold"`
+	SessionFixationScoreThreshold    int    `jsonapi:"attr,session_fixation_score_threshold"`
+	SQLInjectionScoreThreshold       int    `jsonapi:"attr,sql_injection_score_threshold"`
+	TotalArgLength                   int    `jsonapi:"attr,total_arg_length"`
+	UpdatedAt                        string `jsonapi:"attr,updated_at"`
+	WarningAnomalyScore              int    `jsonapi:"attr,warning_anomaly_score"`
+	XSSScoreThreshold                int    `jsonapi:"attr,xss_score_threshold"`
 }
 
 // GetOWASPInput is used as input to the GetOWASP function.
@@ -321,36 +322,37 @@ type UpdateOWASPInput struct {
 	ID      string
 	OWASPID string `jsonapi:"primary,owasp,omitempty"`
 
-	Type                          string `jsonapi:"attr,type"`
-	AllowedHTTPVersions           string `jsonapi:"attr,allowed_http_versions,omitempty"`
-	AllowedMethods                string `jsonapi:"attr,allowed_methods,omitempty"`
-	AllowedRequestContentType     string `jsonapi:"attr,allowed_request_content_type,omitempty"`
-	ArgLength                     int    `jsonapi:"attr,arg_length,omitempty"`
-	ArgNameLength                 int    `jsonapi:"attr,arg_name_length,omitempty"`
-	CombinedFileSizes             int    `jsonapi:"attr,combined_file_sizes,omitempty"`
-	CreatedAt                     string `jsonapi:"attr,created_at,omitempty"`
-	CriticalAnomalyScore          int    `jsonapi:"attr,critical_anomaly_score,omitempty"`
-	CRSValidateUTF8Encoding       bool   `jsonapi:"attr,crs_validate_utf8_encoding,omitempty"`
-	ErrorAnomalyScore             int    `jsonapi:"attr,error_anomaly_score,omitempty"`
-	HighRiskCountryCodes          string `jsonapi:"attr,high_risk_country_codes,omitempty"`
-	HTTPViolationScoreThreshold   int    `jsonapi:"attr,http_violation_score_threshold,omitempty"`
-	InboundAnomalyScoreThreshold  int    `jsonapi:"attr,inbound_anomaly_score_threshold,omitempty"`
-	LFIScoreThreshold             int    `jsonapi:"attr,lfi_score_threshold,omitempty"`
-	MaxFileSize                   int    `jsonapi:"attr,max_file_size,omitempty"`
-	MaxNumArgs                    int    `jsonapi:"attr,max_num_args,omitempty"`
-	NoticeAnomalyScore            int    `jsonapi:"attr,notice_anomaly_score,omitempty"`
-	ParanoiaLevel                 int    `jsonapi:"attr,paranoia_level,omitempty"`
-	PHPInjectionScoreThreshold    int    `jsonapi:"attr,php_injection_score_threshold,omitempty"`
-	RCEScoreThreshold             int    `jsonapi:"attr,rce_score_threshold,omitempty"`
-	RestrictedExtensions          string `jsonapi:"attr,restricted_extensions,omitempty"`
-	RestrictedHeaders             string `jsonapi:"attr,restricted_headers,omitempty"`
-	RFIScoreThreshold             int    `jsonapi:"attr,rfi_score_threshold,omitempty"`
-	SessionFixationScoreThreshold int    `jsonapi:"attr,session_fixation_score_threshold,omitempty"`
-	SQLInjectionScoreThreshold    int    `jsonapi:"attr,sql_injection_score_threshold,omitempty"`
-	TotalArgLength                int    `jsonapi:"attr,total_arg_length,omitempty"`
-	UpdatedAt                     string `jsonapi:"attr,updated_at,omitempty"`
-	WarningAnomalyScore           int    `jsonapi:"attr,warning_anomaly_score,omitempty"`
-	XSSScoreThreshold             int    `jsonapi:"attr,xss_score_threshold,omitempty"`
+	Type                             string `jsonapi:"attr,type"`
+	AllowedHTTPVersions              string `jsonapi:"attr,allowed_http_versions,omitempty"`
+	AllowedMethods                   string `jsonapi:"attr,allowed_methods,omitempty"`
+	AllowedRequestContentType        string `jsonapi:"attr,allowed_request_content_type,omitempty"`
+	AllowedRequestContentTypeCharset string `jsonapi:"attr,allowed_request_content_type_charset,omitempty"`
+	ArgLength                        int    `jsonapi:"attr,arg_length,omitempty"`
+	ArgNameLength                    int    `jsonapi:"attr,arg_name_length,omitempty"`
+	CombinedFileSizes                int    `jsonapi:"attr,combined_file_sizes,omitempty"`
+	CreatedAt                        string `jsonapi:"attr,created_at,omitempty"`
+	CriticalAnomalyScore             int    `jsonapi:"attr,critical_anomaly_score,omitempty"`
+	CRSValidateUTF8Encoding          bool   `jsonapi:"attr,crs_validate_utf8_encoding,omitempty"`
+	ErrorAnomalyScore                int    `jsonapi:"attr,error_anomaly_score,omitempty"`
+	HighRiskCountryCodes             string `jsonapi:"attr,high_risk_country_codes,omitempty"`
+	HTTPViolationScoreThreshold      int    `jsonapi:"attr,http_violation_score_threshold,omitempty"`
+	InboundAnomalyScoreThreshold     int    `jsonapi:"attr,inbound_anomaly_score_threshold,omitempty"`
+	LFIScoreThreshold                int    `jsonapi:"attr,lfi_score_threshold,omitempty"`
+	MaxFileSize                      int    `jsonapi:"attr,max_file_size,omitempty"`
+	MaxNumArgs                       int    `jsonapi:"attr,max_num_args,omitempty"`
+	NoticeAnomalyScore               int    `jsonapi:"attr,notice_anomaly_score,omitempty"`
+	ParanoiaLevel                    int    `jsonapi:"attr,paranoia_level,omitempty"`
+	PHPInjectionScoreThreshold       int    `jsonapi:"attr,php_injection_score_threshold,omitempty"`
+	RCEScoreThreshold                int    `jsonapi:"attr,rce_score_threshold,omitempty"`
+	RestrictedExtensions             string `jsonapi:"attr,restricted_extensions,omitempty"`
+	RestrictedHeaders                string `jsonapi:"attr,restricted_headers,omitempty"`
+	RFIScoreThreshold                int    `jsonapi:"attr,rfi_score_threshold,omitempty"`
+	SessionFixationScoreThreshold    int    `jsonapi:"attr,session_fixation_score_threshold,omitempty"`
+	SQLInjectionScoreThreshold       int    `jsonapi:"attr,sql_injection_score_threshold,omitempty"`
+	TotalArgLength                   int    `jsonapi:"attr,total_arg_length,omitempty"`
+	UpdatedAt                        string `jsonapi:"attr,updated_at,omitempty"`
+	WarningAnomalyScore              int    `jsonapi:"attr,warning_anomaly_score,omitempty"`
+	XSSScoreThreshold                int    `jsonapi:"attr,xss_score_threshold,omitempty"`
 }
 
 // CreateOWASP creates an OWASP settings object for a service firewall object.
