@@ -104,6 +104,34 @@ func Test_Snippets(t *testing.T) {
 	}
 
 	// Update
+	var us *Snippet
+	record(t, "vcl_snippets/update", func(c *Client) {
+		us, err = c.UpdateSnippet(&UpdateSnippetInput{
+			Service:  testServiceID,
+			Name:     testSnippetName,
+			NewName:  "newTestSnippetName",
+			Content:  updatedDynContent,
+			Dynamic:  1,
+			Type:     "none",
+			Priority: 50,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if us.Name != "newTestSnippetName" {
+		t.Errorf("bad updated name")
+	}
+	if us.Priority != 50 {
+		t.Errorf("bad priority: %d", us.Priority)
+	}
+
+	if us.Content != updatedDynContent {
+		t.Errorf("bad content: %q", us.Content)
+	}
+
+	// Update Dynamic
 	var uds *DynamicSnippet
 	record(t, "vcl_snippets/update", func(c *Client) {
 		uds, err = c.UpdateDynamicSnippet(&UpdateDynamicSnippetInput{
