@@ -114,6 +114,7 @@ func Test_Snippets(t *testing.T) {
 			Dynamic:  1,
 			Type:     "none",
 			Priority: 50,
+			Version:  tv,
 		})
 	})
 	if err != nil {
@@ -129,6 +130,10 @@ func Test_Snippets(t *testing.T) {
 
 	if us.Content != updatedDynContent {
 		t.Errorf("bad content: %q", us.Content)
+	}
+
+	if us.Type != "none" {
+		t.Errorf("bad type: %s", us.Type)
 	}
 
 	// Update Dynamic
