@@ -22,6 +22,7 @@ type BigQuery struct {
 	SecretKey         string     `mapstructure:"secret_key"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	Placement         string     `mapstructure:"placement"`
+	FormatVersion     uint       `mapstructure:"format_version"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -87,6 +88,7 @@ type CreateBigQueryInput struct {
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	Placement         string `form:"placement,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
 }
 
 // CreateBigQuery creates a new Fastly BigQuery.
@@ -170,6 +172,7 @@ type UpdateBigQueryInput struct {
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	Placement         string `form:"placement,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
 }
 
 // UpdateBigQuery updates a specific BigQuery.

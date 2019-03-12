@@ -10,7 +10,7 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/logging/gcs/new-test-gcs
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/logging/gcs/new-test-gcs
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 17:19:58 GMT
+      - Thu, 06 Jun 2019 22:12:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "988"
+      - "984"
       Fastly-Ratelimit-Reset:
-      - "1557424800"
+      - "1559862000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,8 +41,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3640-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3624-SJC
       X-Timer:
-      - S1557422398.353748,VS0,VE523
+      - S1559859153.272850,VS0,VE259
     status: 200 OK
     code: 200

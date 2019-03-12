@@ -85,6 +85,9 @@ func TestClient_Bigqueries(t *testing.T) {
 	if bq.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", bq.Placement)
 	}
+	if bq.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", bq.FormatVersion)
+	}
 
 	// List
 	var bqs []*BigQuery
@@ -142,6 +145,9 @@ func TestClient_Bigqueries(t *testing.T) {
 	}
 	if bq.Placement != nbq.Placement {
 		t.Errorf("bad placement: %q", bq.Placement)
+	}
+	if bq.FormatVersion != nbq.FormatVersion {
+		t.Errorf("bad format_version: %q", bq.FormatVersion)
 	}
 
 	// Update

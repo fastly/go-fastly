@@ -10,12 +10,12 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/logging/papertrail/test-papertrail
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/65/logging/bigquery/test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 68 }''"}'
+      0000-00-00 00:00:00, name =\u003e test-bigquery, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 65 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,9 +24,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:12:57 GMT
+      - Thu, 06 Jun 2019 22:10:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "977"
+      - "995"
       Fastly-Ratelimit-Reset:
       - "1559862000"
       Status:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3621-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3644-SJC
       X-Timer:
-      - S1559859177.346567,VS0,VE183
+      - S1559859053.119865,VS0,VE401
     status: 404 Not Found
     code: 404
 - request:
@@ -56,12 +56,12 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/logging/papertrail/new-test-papertrail
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/65/logging/bigquery/new-test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 68 }''"}'
+      0000-00-00 00:00:00, name =\u003e new-test-bigquery, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 65 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -70,9 +70,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:12:57 GMT
+      - Thu, 06 Jun 2019 22:10:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "976"
+      - "994"
       Fastly-Ratelimit-Reset:
       - "1559862000"
       Status:
@@ -89,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3621-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3644-SJC
       X-Timer:
-      - S1559859178.535212,VS0,VE175
+      - S1559859054.526670,VS0,VE186
     status: 404 Not Found
     code: 404

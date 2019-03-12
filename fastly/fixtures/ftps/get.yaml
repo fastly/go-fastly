@@ -10,10 +10,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/19/logging/ftp/test-ftp
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/ftp/test-ftp
     method: GET
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","password":"password","path":"/dir","placement":"waf_debug","created_at":"2019-05-08T23:35:12Z","period":"12","version":"19","ipv4":null,"address":"example.com","updated_at":"2019-05-08T23:35:12Z","name":"test-ftp","port":"1234","timestamp_format":"%Y","format_version":"2","response_condition":"","hostname":"example.com","message_type":"classic","deleted_at":null,"public_key":null,"user":"username","gzip_level":"9","format":"format"}'
+    body: '{"created_at":"2019-06-06T22:11:24Z","deleted_at":null,"user":"username","public_key":null,"version":"66","ipv4":null,"period":"12","hostname":"example.com","path":"/dir","port":"1234","password":"password","response_condition":"","placement":"waf_debug","message_type":"classic","timestamp_format":"%Y","address":"example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","gzip_level":"9","format":"format","name":"test-ftp","updated_at":"2019-06-06T22:11:24Z","format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 08 May 2019 23:35:13 GMT
+      - Thu, 06 Jun 2019 22:11:25 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,8 +39,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17438-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3641-SJC
       X-Timer:
-      - S1557358514.697182,VS0,VE172
+      - S1559859086.518640,VS0,VE440
     status: 200 OK
     code: 200

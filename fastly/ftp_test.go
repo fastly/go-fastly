@@ -25,6 +25,7 @@ func TestClient_FTPs(t *testing.T) {
 			Path:            "/dir",
 			Period:          12,
 			GzipLevel:       9,
+			FormatVersion:   2,
 			Format:          "format",
 			TimestampFormat: "%Y",
 			Placement:       "waf_debug",
@@ -74,6 +75,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftp.GzipLevel != 9 {
 		t.Errorf("bad gzip_level: %q", ftp.GzipLevel)
+	}
+	if ftp.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", ftp.FormatVersion)
 	}
 	if ftp.Format != "format" {
 		t.Errorf("bad format: %q", ftp.Format)
@@ -135,6 +139,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftp.GzipLevel != nftp.GzipLevel {
 		t.Errorf("bad gzip_level: %q", ftp.GzipLevel)
+	}
+	if ftp.FormatVersion != nftp.FormatVersion {
+		t.Errorf("bad format_version: %q", ftp.FormatVersion)
 	}
 	if ftp.Format != nftp.Format {
 		t.Errorf("bad format: %q", ftp.Format)
