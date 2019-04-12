@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&Version=688&content=%0A%09+%23+testing+EdgeACL6+and+EdgeDictionary6%0A%09++declare+local+var.number6+STRING%3B%0A%09++set+var.number6+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09++if+%28var.number6+%3D%3D+%22true%22%29+%7B%0A%09++++set+req.http.securityruleid+%3D+%22num6-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A%09&dynamic=1&name=testsnip5&priority=100&type=recv
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=3&content=%0A%09+%23+testing+EdgeACL6+and+EdgeDictionary6%0A%09++declare+local+var.number6+STRING%3B%0A%09++set+var.number6+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09++if+%28var.number6+%3D%3D+%22true%22%29+%7B%0A%09++++set+req.http.securityruleid+%3D+%22num6-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A%09&dynamic=1&name=testsnip6&priority=100&type=recv
     form:
-      ServiceID:
+      Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "688"
+      - "3"
       content:
       - "\n\t # testing EdgeACL6 and EdgeDictionary6\n\t  declare local var.number6
         STRING;\n\t  set var.number6 = table.lookup(demoDICTtest, client.as.number);\n\n\t
@@ -28,26 +28,29 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/688/snippet
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.11.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/snippet
     method: POST
   response:
-    body: '{"content":null,"dynamic":1,"name":"testsnip5","priority":"100","type":"recv","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"688","deleted_at":null,"created_at":"2018-08-15T17:12:48Z","updated_at":"2018-08-15T17:12:48Z","id":"dynsnipxxxxxxxxxxxxxid"}'
+    body: '{"content":null,"dynamic":1,"name":"testsnip5","priority":"100","type":"recv","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"3","deleted_at":null,"created_at":"2019-04-12T14:04:36Z","updated_at":"2019-04-12T14:04:36Z","id":"5U9t9k5YbRHRmq5wmwIl2Z"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 15 Aug 2018 17:12:48 GMT
+      - Fri, 12 Apr 2019 14:04:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "999"
+      - "992"
       Fastly-Ratelimit-Reset:
-      - "1534356000"
+      - "1555081200"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -58,8 +61,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-mdw17329-MDW
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-fra19162-FRA
       X-Timer:
-      - S1534353169.593643,VS0,VE255
+      - S1555077876.235585,VS0,VE229
     status: 200 OK
     code: 200

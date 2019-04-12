@@ -4,39 +4,34 @@ rwmutex: {}
 interactions:
 - request:
     body: ""
-    form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "688"
-      Snippet:
-      - testsnip5
+    form: {}
     headers:
-      Content-Type:
-      - application/x-www-form-urlencoded
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/688/snippet/testsnip5
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.11.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/snippet/testsnip5
     method: DELETE
   response:
     body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:11 GMT
+      - Fri, 12 Apr 2019 14:04:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "892"
+      - "990"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1555081200"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -47,8 +42,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-fra19162-FRA
       X-Timer:
-      - S1500513311.712694,VS0,VE456
+      - S1555077877.075968,VS0,VE322
     status: 200 OK
     code: 200

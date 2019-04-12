@@ -7,7 +7,7 @@ func Test_Snippets(t *testing.T) {
 
 	var err error
 	const (
-		tv                 = 688
+		tv                 = 3
 		testDynSnippetID   = "dynsnipxxxxxxxxxxxxxid"
 		testSnippetID      = "snipxxxxxxxxxxxxxxxxid"
 		testDynSnippetName = "testsnip5"
@@ -103,9 +103,9 @@ func Test_Snippets(t *testing.T) {
 		t.Errorf("bad type: %q", cds.Type)
 	}
 
-	// Update
+	// Update Dynamic
 	var uds *DynamicSnippet
-	record(t, "vcl_snippets/update", func(c *Client) {
+	record(t, "vcl_snippets/update_dyn", func(c *Client) {
 		uds, err = c.UpdateDynamicSnippet(&UpdateDynamicSnippetInput{
 			Service: testServiceID,
 			ID:      testDynSnippetID,
@@ -172,6 +172,39 @@ func Test_Snippets(t *testing.T) {
 	}
 	if gs.Content != content {
 		t.Errorf("bad content: %q", gs.Content)
+	}
+
+	// Update
+	var us *Snippet
+	record(t, "vcl_snippets/update", func(c *Client) {
+		us, err = c.UpdateSnippet(&UpdateSnippetInput{
+			Service:  testServiceID,
+			Name:     testSnippetName,
+			NewName:  "newTestSnippetName",
+			Content:  updatedDynContent,
+			Dynamic:  0,
+			Type:     "none",
+			Priority: 50,
+			Version:  tv,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if us.Name != "newTestSnippetName" {
+		t.Errorf("bad updated name")
+	}
+	if us.Priority != 50 {
+		t.Errorf("bad priority: %d", us.Priority)
+	}
+
+	if us.Content != updatedDynContent {
+		t.Errorf("bad content: %q", us.Content)
+	}
+
+	if us.Type != "none" {
+		t.Errorf("bad type: %s", us.Type)
 	}
 
 	// ListSnippets

@@ -126,6 +126,63 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	return snippet, err
 }
 
+// UpdateSnippetInput is the input for UpdateSnippet
+type UpdateSnippetInput struct {
+	// Service is the ID of the Service to add the snippet to.
+	Service string
+
+	// Version is the editable version of the service
+	Version int
+
+	Name string
+
+	// Name is the name for the snippet.
+	NewName string `form:"name"`
+
+	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
+	Priority int `form:"priority"`
+
+	// Dynamic sets the snippet version to regular (0) or dynamic (1).
+	Dynamic int `form:"dynamic"`
+
+	// Content is the VCL code that specifies exactly what the snippet does.
+	Content string `form:"content"`
+
+	// Type is the location in generated VCL where the snippet should be placed.
+	Type SnippetType `form:"type"`
+}
+
+// UpdateSnippet updates a snippet on a unlocked version
+func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
+	if i.Service == "" {
+		return nil, ErrMissingService
+	}
+
+	if i.Version == 0 {
+		return nil, ErrMissingVersion
+	}
+
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
+
+	if i.Dynamic == 0 && i.Content == "" {
+		return nil, ErrMissingContent
+	}
+
+	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.Service, i.Version, i.Name)
+	resp, err := c.PutForm(path, i, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var snippet *Snippet
+	if err := decodeJSON(&snippet, resp.Body); err != nil {
+		return nil, err
+	}
+	return snippet, err
+}
+
 // DynamicSnippet is the object returned when updating or retrieving a Dynamic Snippet
 type DynamicSnippet struct {
 	// Service is the ID of the Service to add the snippet to.
