@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&Version=688&content=%0A%09%23+testing+EdgeACL2+and+EdgeDictionary2%0A%09+declare+local+var.number2+STRING%3B%0A%09+set+var.number2+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09+if+%28var.number2+%3D%3D+%22true%22%29+%7B%0A%09+++set+req.http.securityruleid+%3D+%22num2-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A++++&dynamic=0&name=testsnip0&priority=100&type=recv
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=3&content=%0A%09%23+testing+EdgeACL2+and+EdgeDictionary2%0A%09+declare+local+var.number2+STRING%3B%0A%09+set+var.number2+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09+if+%28var.number2+%3D%3D+%22true%22%29+%7B%0A%09+++set+req.http.securityruleid+%3D+%22num2-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A++++&dynamic=0&name=testsnip0&priority=100&type=recv
     form:
-      ServiceID:
+      Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "688"
+      - "3"
       content:
       - "\n\t# testing EdgeACL2 and EdgeDictionary2\n\t declare local var.number2
         STRING;\n\t set var.number2 = table.lookup(demoDICTtest, client.as.number);\n\n\t
@@ -28,29 +28,32 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.10.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/688/snippet
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.11.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/snippet
     method: POST
   response:
     body: '{"content":"\n\t# testing EdgeACL2 and EdgeDictionary2\n\t declare local
       var.number2 STRING;\n\t set var.number2 = table.lookup(demoDICTtest, client.as.number);\n\n\t
       if (var.number2 == \"true\") {\n\t   set req.http.securityruleid = \"num2-block\";\n\t
-      error 403 \"Access Denied\";\n\t  }\n    ","dynamic":0,"name":"testsnip0","priority":"100","type":"recv","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"688","deleted_at":null,"created_at":"2018-08-15T19:24:56Z","updated_at":"2018-08-15T19:24:56Z","id":"6xU4LMOPEAhapB8ZOa0QqG"}'
+      error 403 \"Access Denied\";\n\t  }\n    ","dynamic":0,"name":"testsnip0","priority":"100","type":"recv","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"3","deleted_at":null,"created_at":"2019-04-12T14:04:36Z","updated_at":"2019-04-12T14:04:36Z","id":"4uUKgsjWz7hmPCLDTIkj8j"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 15 Aug 2018 19:24:56 GMT
+      - Fri, 12 Apr 2019 14:04:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "999"
+      - "993"
       Fastly-Ratelimit-Reset:
-      - "1534363200"
+      - "1555081200"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -61,8 +64,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-mdw17356-MDW
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-fra19162-FRA
       X-Timer:
-      - S1534361096.358762,VS0,VE222
+      - S1555077876.679397,VS0,VE542
     status: 200 OK
     code: 200
