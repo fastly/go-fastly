@@ -84,10 +84,12 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 type CreateVersionInput struct {
 	// Service is the ID of the service (required).
 	Service string
+
+	// A personal freeform descriptive note.
+	Comment string `form:"comment,omitempty"`
 }
 
-// CreateVersion constructs a new version. There are no request parameters, but
-// you should consult the resulting version number. Note that `CloneVersion` is
+// CreateVersion constructs a new version. Note that `CloneVersion` is
 // preferred in almost all scenarios, since `Create()` creates a _blank_
 // configuration where `Clone()` builds off of an existing configuration.
 func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
@@ -96,7 +98,7 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 	}
 
 	path := fmt.Sprintf("/service/%s/version", i.Service)
-	resp, err := c.Post(path, nil)
+	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -147,6 +149,7 @@ type UpdateVersionInput struct {
 	Service string
 	Version int
 
+	// A personal freeform descriptive note.
 	Comment string `form:"comment,omitempty"`
 }
 

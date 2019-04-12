@@ -18,6 +18,7 @@ func TestClient_Versions(t *testing.T) {
 	record(t, "versions/create", func(c *Client) {
 		v, err = c.CreateVersion(&CreateVersionInput{
 			Service: testServiceID,
+			Comment: "test comment",
 		})
 	})
 	if err != nil {
@@ -25,6 +26,9 @@ func TestClient_Versions(t *testing.T) {
 	}
 	if v.Number == 0 {
 		t.Errorf("bad number: %q", v.Number)
+	}
+	if v.Comment != "test comment" {
+		t.Errorf("bad comment: %q", v.Comment)
 	}
 
 	// Unlock and let other parallel tests go!
@@ -58,6 +62,9 @@ func TestClient_Versions(t *testing.T) {
 	if nv.Number == 0 {
 		t.Errorf("bad number: %q", nv.Number)
 	}
+	if nv.Comment != v.Comment {
+		t.Errorf("bad comment: %q", v.Comment)
+	}
 
 	// Update
 	var uv *Version
@@ -72,7 +79,7 @@ func TestClient_Versions(t *testing.T) {
 		t.Fatal(err)
 	}
 	if uv.Comment != "new comment" {
-		t.Errorf("bad name: %q", uv.Comment)
+		t.Errorf("bad comment: %q", uv.Comment)
 	}
 
 	// Lock
@@ -103,6 +110,9 @@ func TestClient_Versions(t *testing.T) {
 	}
 	if cv.Active != false {
 		t.Errorf("bad clone: %t", cv.Active)
+	}
+	if cv.Comment != uv.Comment {
+		t.Errorf("bad comment: %q", uv.Comment)
 	}
 }
 
