@@ -2,8 +2,9 @@ package fastly
 
 import (
 	"bytes"
-	"github.com/ajg/form"
 	"testing"
+
+	"github.com/ajg/form"
 )
 
 func TestClient_Settings(t *testing.T) {
@@ -34,9 +35,11 @@ func TestClient_Settings(t *testing.T) {
 	var us *Settings
 	record(t, "settings/update", func(c *Client) {
 		us, err = c.UpdateSettings(&UpdateSettingsInput{
-			Service:    testServiceID,
-			Version:    tv.Number,
-			DefaultTTL: 1800,
+			Service:         testServiceID,
+			Version:         tv.Number,
+			DefaultTTL:      1800,
+			StaleIfError:    true,
+			StaleIfErrorTTL: 57600,
 		})
 	})
 	if err != nil {
@@ -44,6 +47,12 @@ func TestClient_Settings(t *testing.T) {
 	}
 	if us.DefaultTTL != 1800 {
 		t.Errorf("bad default_ttl: %d", us.DefaultTTL)
+	}
+	if us.StaleIfError != true {
+		t.Errorf("bad stale_if_error: %t", us.StaleIfError)
+	}
+	if us.StaleIfErrorTTL != 57600 {
+		t.Errorf("bad stale_if_error_ttl %d", us.StaleIfErrorTTL)
 	}
 }
 

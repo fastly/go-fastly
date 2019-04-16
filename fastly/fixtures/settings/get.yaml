@@ -9,24 +9,29 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/694/settings
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.11.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/5/settings
     method: GET
   response:
-    body: '{"general.default_ttl":3600,"version":694,"general.default_host":"","general.default_pci":0,"service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+    body: '{"general.stale_if_error_ttl":43200,"general.stale_if_error":false,"general.default_ttl":3600,"version":5,"general.default_host":"","general.default_pci":0,"service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
+      - bytes
       Age:
+      - "0"
       - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:13 GMT
+      - Tue, 16 Apr 2019 10:53:03 GMT
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -37,8 +42,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-fra19142-FRA
       X-Timer:
-      - S1500513313.419612,VS0,VE231
+      - S1555411983.742069,VS0,VE529
     status: 200 OK
     code: 200
