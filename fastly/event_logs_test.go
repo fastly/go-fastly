@@ -12,24 +12,9 @@ func TestClient_APIEvents(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	var event *Event
-
-	record(t, "events/get_event", func(c *Client) {
-		event, err = c.GetAPIEvent(&GetAPIEventInput{
-			EventID: "7RVP7RfHYD7r0CYRxxxxxx",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(event.ID) < 1 {
-		t.Errorf("bad event: %v", event)
-	}
-
 	var events GetAPIEventsResponse
 	record(t, "events/get_events", func(c *Client) {
 		events, err = c.GetAPIEvents(&GetAPIEventsFilterInput{
-			CustomerID: "zwBncFVs2Ixrhd8xxxxxx",
 			PageNumber: 1,
 			MaxResults: 1,
 		})
@@ -38,7 +23,20 @@ func TestClient_APIEvents(t *testing.T) {
 		t.Fatal(err)
 	}
 	if len(events.Events) < 1 {
-		t.Errorf("bad wafs: %v", events.Events)
+		t.Errorf("bad events: %v", events.Events)
+	}
+
+	var event *Event
+	record(t, "events/get_event", func(c *Client) {
+		event, err = c.GetAPIEvent(&GetAPIEventInput{
+			EventID: events.Events[0].ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(event.ID) < 1 {
+		t.Errorf("bad event: %v", event)
 	}
 
 }
