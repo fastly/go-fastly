@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=695&address=integ-test.go-fastly.com&name=test-backend
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=27&address=integ-test.go-fastly.com&name=test-backend
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "695"
+      - "27"
       address:
       - integ-test.go-fastly.com
       name:
@@ -19,11 +19,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/695/backend
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/27/backend
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","name":"test-backend","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":695,"max_tls_version":null,"ssl_client_cert":null,"hostname":"integ-test.go-fastly.com","error_threshold":0,"first_byte_timeout":15000,"client_cert":null,"weight":100,"updated_at":"2017-07-20T01:15:14+00:00","connect_timeout":1000,"ipv4":null,"ssl_ciphers":null,"port":80,"between_bytes_timeout":10000,"ssl_client_key":null,"ssl_ca_cert":null,"auto_loadbalance":false,"ssl_check_cert":true,"shield":null,"request_condition":"","ssl_cert_hostname":null,"ssl_hostname":null,"ssl_sni_hostname":null,"min_tls_version":null,"ipv6":null,"deleted_at":null,"healthcheck":null,"max_conn":200,"use_ssl":false,"created_at":"2017-07-20T01:15:14+00:00","comment":""}'
+    body: '{"address":"integ-test.go-fastly.com","name":"test-backend","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":27,"ssl_client_key":null,"max_tls_version":null,"ssl_sni_hostname":null,"min_tls_version":null,"use_ssl":false,"ipv6":null,"updated_at":"2019-05-09T19:53:12Z","auto_loadbalance":false,"port":80,"comment":"","override_host":null,"weight":100,"hostname":"integ-test.go-fastly.com","first_byte_timeout":15000,"between_bytes_timeout":10000,"ssl_ca_cert":null,"connect_timeout":1000,"ssl_client_cert":null,"ipv4":null,"error_threshold":0,"deleted_at":null,"client_cert":null,"ssl_check_cert":true,"ssl_hostname":null,"healthcheck":null,"ssl_cert_hostname":null,"created_at":"2019-05-09T19:53:12Z","max_conn":200,"ssl_ciphers":null,"request_condition":"","shield":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,13 +32,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:14 GMT
+      - Thu, 09 May 2019 19:53:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "845"
+      - "19997"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557432000"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -49,8 +51,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3644-SJC
       X-Timer:
-      - S1500513314.493484,VS0,VE460
+      - S1557431592.056504,VS0,VE283
     status: 200 OK
     code: 200

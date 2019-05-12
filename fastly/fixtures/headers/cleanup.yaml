@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/675/header/test-header
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/28/header/test-header
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Header ''{ version =\u003e
-      675, name =\u003e test-header, deleted =\u003e 0000-00-00 00:00:00, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find Header ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-header, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 28 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:05 GMT
+      - Thu, 09 May 2019 20:01:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "954"
+      - "19995"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557435600"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17432-PAO
       X-Timer:
-      - S1500513306.735847,VS0,VE87
+      - S1557432075.174346,VS0,VE175
     status: 404 Not Found
     code: 404
 - request:
@@ -53,13 +55,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/675/header/new-test-header
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/28/header/new-test-header
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Header ''{ version =\u003e
-      675, name =\u003e new-test-header, deleted =\u003e 0000-00-00 00:00:00, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find Header ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-header, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 28 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,13 +70,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:06 GMT
+      - Thu, 09 May 2019 20:01:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "949"
+      - "19994"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557435600"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -85,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17432-PAO
       X-Timer:
-      - S1500513306.838852,VS0,VE227
+      - S1557432075.356828,VS0,VE166
     status: 404 Not Found
     code: 404

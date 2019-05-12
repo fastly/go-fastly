@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=786&address=example.com&format=format&format_version=2&hostname=example.com&message_type=classic&name=test-syslog&port=1234&token=abcd1234
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=54&address=example.com&format=format&format_version=2&hostname=example.com&message_type=classic&name=test-syslog&port=1234&token=abcd1234
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "786"
+      - "54"
       address:
       - example.com
       format:
@@ -31,11 +31,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/logging/syslog
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/logging/syslog
     method: POST
   response:
-    body: '{"address":"example.com","format":"format","format_version":"2","hostname":"example.com","message_type":"classic","name":"test-syslog","port":"1234","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"786","placement":null,"response_condition":"","public_key":null,"updated_at":"2017-09-05T17:56:52+00:00","ipv4":null,"tls_hostname":null,"use_tls":"0","tls_ca_cert":null,"deleted_at":null,"created_at":"2017-09-05T17:56:52+00:00"}'
+    body: '{"address":"example.com","format":"format","format_version":"2","hostname":"example.com","message_type":"classic","name":"test-syslog","port":"1234","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"54","tls_hostname":null,"use_tls":"0","created_at":"2019-05-11T21:44:58Z","response_condition":"","updated_at":"2019-05-11T21:44:59Z","tls_ca_cert":null,"placement":null,"deleted_at":null,"ipv4":null,"public_key":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -44,13 +44,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 Sep 2017 17:56:52 GMT
+      - Sat, 11 May 2019 21:44:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "883"
+      - "991"
       Fastly-Ratelimit-Reset:
-      - "1504634400"
+      - "1557612000"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -61,8 +63,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17730-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lax8631-LAX
       X-Timer:
-      - S1504634212.342848,VS0,VE350
+      - S1557611099.652892,VS0,VE682
     status: 200 OK
     code: 200

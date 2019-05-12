@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"sort"
 )
 
@@ -146,7 +147,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 		return nil, ErrMissingItemKey
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.Service, i.Dictionary, i.ItemKey)
+	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.Service, i.Dictionary, url.PathEscape(i.ItemKey))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -186,7 +187,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 		return nil, ErrMissingItemKey
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.Service, i.Dictionary, i.ItemKey)
+	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.Service, i.Dictionary, url.PathEscape(i.ItemKey))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -224,7 +225,7 @@ func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 		return ErrMissingItemKey
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.Service, i.Dictionary, i.ItemKey)
+	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.Service, i.Dictionary, url.PathEscape(i.ItemKey))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

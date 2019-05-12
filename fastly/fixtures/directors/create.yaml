@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=681&name=test-director&quorum=50&retries=5&type=1
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=17&name=test-director&quorum=50&retries=5&type=1
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "681"
+      - "17"
       name:
       - test-director
       quorum:
@@ -23,11 +23,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/681/director
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/17/director
     method: POST
   response:
-    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":681,"shield":null,"deleted_at":null,"capacity":100,"created_at":"2017-07-20T01:15:07+00:00","backends":[],"comment":"","updated_at":"2017-07-20T01:15:07+00:00"}'
+    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":17,"comment":"","deleted_at":null,"capacity":100,"updated_at":"2019-05-08T22:55:00Z","created_at":"2019-05-08T22:55:00Z","backends":[],"shield":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,13 +36,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:07 GMT
+      - Wed, 08 May 2019 22:55:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "937"
+      - "987"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557356400"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -53,8 +55,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3629-SJC
       X-Timer:
-      - S1500513307.356369,VS0,VE453
+      - S1557356100.702169,VS0,VE513
     status: 200 OK
     code: 200

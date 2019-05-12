@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/671/acl/test_acl
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/acl/test_acl
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find ACL ''{ version =\u003e
-      671, name =\u003e test_acl, deleted =\u003e 0000-00-00 00:00:00, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find ACL ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test_acl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 6 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:11 GMT
+      - Tue, 07 May 2019 21:51:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "889"
+      - "992"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557266400"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17422-PAO
       X-Timer:
-      - S1500513311.004356,VS0,VE175
+      - S1557265864.454172,VS0,VE161
     status: 404 Not Found
     code: 404
 - request:
@@ -53,28 +55,31 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/671/acl/new_test_acl
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/acl/new_test_acl
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find ACL ''{ version =\u003e
-      671, name =\u003e new_test_acl, deleted =\u003e 0000-00-00 00:00:00, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find ACL ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new_test_acl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 6 }''"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:11 GMT
+      - Tue, 07 May 2019 21:51:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "888"
+      - "991"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557266400"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -85,8 +90,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17422-PAO
       X-Timer:
-      - S1500513311.194636,VS0,VE94
+      - S1557265865.626073,VS0,VE423
     status: 404 Not Found
     code: 404

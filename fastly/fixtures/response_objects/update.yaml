@@ -3,14 +3,14 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Name=test-response-object&Service=7i6HN3TK9wS159v2gPAZ8A&Version=686&name=new-test-response-object
+    body: Name=test-response-object&Service=7i6HN3TK9wS159v2gPAZ8A&Version=36&name=new-test-response-object
     form:
       Name:
       - test-response-object
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "686"
+      - "36"
       name:
       - new-test-response-object
     headers:
@@ -19,11 +19,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/686/response_object/test-response-object
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/response_object/test-response-object
     method: PUT
   response:
-    body: '{"response":"Ok","version":"686","status":"200","name":"new-test-response-object","content":"abcd","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","cache_condition":"","created_at":"2017-07-20T01:15:09+00:00","content_type":"text/plain","request_condition":"","updated_at":"2017-07-20T01:15:09+00:00"}'
+    body: '{"updated_at":"2019-05-09T22:07:01Z","cache_condition":"","request_condition":"","name":"new-test-response-object","deleted_at":null,"created_at":"2019-05-09T22:07:01Z","response":"Ok","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"36","content_type":"text/plain","content":"abcd","status":"200"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,13 +32,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:11 GMT
+      - Thu, 09 May 2019 22:07:02 GMT
       Fastly-Ratelimit-Remaining:
-      - "895"
+      - "997"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557442800"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -49,8 +51,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3644-SJC
       X-Timer:
-      - S1500513311.661397,VS0,VE572
+      - S1557439622.316864,VS0,VE256
     status: 200 OK
     code: 200

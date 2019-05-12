@@ -3,14 +3,14 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Name=test-splunk&Service=7i6HN3TK9wS159v2gPAZ8A&Version=6&name=new-test-splunk
+    body: Name=test-splunk&Service=7i6HN3TK9wS159v2gPAZ8A&Version=42&name=new-test-splunk
     form:
       Name:
       - test-splunk
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "6"
+      - "42"
       name:
       - new-test-splunk
     headers:
@@ -20,25 +20,24 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/logging/splunk/test-splunk
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/logging/splunk/test-splunk
     method: PUT
   response:
-    body: '{"placement":"waf_debug","format_version":"2","response_condition":"","url":"https://mysplunkendpoint.example.com/services/collector/event","updated_at":"2019-03-15T05:03:38Z","tls_hostname":null,"name":"new-test-splunk","service_id":"7i6HN3TK9wS159v2gPAZ8A","tls_ca_cert":null,"tls_allow_insecure":"0","token":"super-secure-token","version":"6","deleted_at":null,"created_at":"2019-03-15T05:03:38Z","content_type":null,"format":"%h
+    body: '{"url":"https://mysplunkendpoint.example.com/services/collector/event","tls_hostname":null,"tls_allow_insecure":"0","created_at":"2019-05-09T22:50:15Z","name":"new-test-splunk","response_condition":"","version":"42","deleted_at":null,"placement":"waf_debug","updated_at":"2019-05-09T22:50:15Z","token":"super-secure-token","format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","tls_ca_cert":null,"content_type":null,"format":"%h
       %l %u %t \"%r\" %\u003es %b"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 15 Mar 2019 05:03:40 GMT
+      - Thu, 09 May 2019 22:50:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "997"
+      - "985"
       Fastly-Ratelimit-Reset:
-      - "1552629600"
+      - "1557442800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,8 +52,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-bur17528-BUR
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3647-SJC
       X-Timer:
-      - S1552626220.756533,VS0,VE498
+      - S1557442217.399163,VS0,VE515
     status: 200 OK
     code: 200

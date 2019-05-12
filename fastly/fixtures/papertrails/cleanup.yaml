@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/676/logging/papertrail/test-papertrail
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/34/logging/papertrail/test-papertrail
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
-      676, name =\u003e test-papertrail, deleted =\u003e 0000-00-00 00:00:00, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 34 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:07 GMT
+      - Thu, 09 May 2019 20:34:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "943"
+      - "987"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557435600"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17450-PAO
       X-Timer:
-      - S1500513307.023481,VS0,VE89
+      - S1557434056.913883,VS0,VE216
     status: 404 Not Found
     code: 404
 - request:
@@ -53,13 +55,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/676/logging/papertrail/new-test-papertrail
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/34/logging/papertrail/new-test-papertrail
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
-      676, name =\u003e new-test-papertrail, deleted =\u003e 0000-00-00 00:00:00,
-      service =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 34 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,13 +70,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:07 GMT
+      - Thu, 09 May 2019 20:34:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "941"
+      - "986"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557435600"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -85,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17450-PAO
       X-Timer:
-      - S1500513307.128571,VS0,VE153
+      - S1557434056.220847,VS0,VE164
     status: 404 Not Found
     code: 404

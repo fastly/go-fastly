@@ -9,11 +9,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
     url: https://api.fastly.com/public-ip-list
     method: GET
   response:
-    body: '{"addresses":["23.235.32.0/20","43.249.72.0/22","103.244.50.0/24","103.245.222.0/23","103.245.224.0/24","104.156.80.0/20","151.101.0.0/16","157.52.64.0/18","172.111.64.0/18","185.31.16.0/22","199.27.72.0/21","199.232.0.0/16","202.21.128.11/32","202.21.128.12/32","203.57.145.11/32","203.57.145.12/32"]}'
+    body: '{"addresses":["23.235.32.0/20","43.249.72.0/22","103.244.50.0/24","103.245.222.0/23","103.245.224.0/24","104.156.80.0/20","151.101.0.0/16","157.52.64.0/18","172.111.64.0/18","185.31.16.0/22","199.27.72.0/21","199.232.0.0/16"],"ipv6_addresses":["2a04:4e40::/32","2a04:4e42::/32"]}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,9 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:00 GMT
+      - Thu, 09 May 2019 20:16:27 GMT
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -37,8 +39,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17439-PAO
       X-Timer:
-      - S1500513300.889937,VS0,VE388
+      - S1557432988.581415,VS0,VE405
     status: 200 OK
     code: 200
