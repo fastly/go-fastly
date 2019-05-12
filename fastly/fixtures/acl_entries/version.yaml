@@ -3,14 +3,10 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=25&name=entry_acl
+    body: Service=7i6HN3TK9wS159v2gPAZ8A
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "25"
-      name:
-      - entry_acl
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -18,10 +14,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/25/acl
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"25","name":"entry_acl","id":"3xMPlUKElxNy5JAd2HQkhZ","deleted_at":null,"created_at":"2019-05-09T18:07:24Z","updated_at":"2019-05-09T18:07:24Z"}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":25}'
     headers:
       Accept-Ranges:
       - bytes
@@ -30,9 +26,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 18:07:24 GMT
+      - Thu, 09 May 2019 18:07:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "999"
       Fastly-Ratelimit-Reset:
       - "1557428400"
       Status:
@@ -51,6 +47,6 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17433-PAO
       X-Timer:
-      - S1557425244.935705,VS0,VE240
+      - S1557425243.451642,VS0,VE477
     status: 200 OK
     code: 200
