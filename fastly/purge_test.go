@@ -7,9 +7,10 @@ func TestClient_Purge(t *testing.T) {
 
 	var err error
 	var purge *Purge
-	record(t, "purges/purge", func(c *Client) {
-		purge, err = c.Purge(&PurgeInput{
-			URL: "https://releases.hashicorp.com",
+	record(t, "purges/purge_by_key", func(c *Client) {
+		purge, err = c.PurgeKey(&PurgeKeyInput{
+			Service: testServiceID,
+			Key:     "foo",
 		})
 	})
 	if err != nil {
