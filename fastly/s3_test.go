@@ -19,9 +19,9 @@ func TestClient_S3s(t *testing.T) {
 			Version:         tv.Number,
 			Name:            "test-s3",
 			BucketName:      "bucket-name",
-			Domain:          "s3-website-us-west-2.amazonaws.com",
-			AccessKey:       "access_key",
-			SecretKey:       "secret_key",
+			Domain:          "s3.us-east-1.amazonaws.com",
+			AccessKey:       "AKIAIOSFODNN7EXAMPLE",
+			SecretKey:       "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
 			Path:            "/path",
 			Period:          12,
 			GzipLevel:       9,
@@ -60,13 +60,13 @@ func TestClient_S3s(t *testing.T) {
 	if s3.BucketName != "bucket-name" {
 		t.Errorf("bad bucket_name: %q", s3.BucketName)
 	}
-	if s3.AccessKey != "access_key" {
+	if s3.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
 		t.Errorf("bad access_key: %q", s3.AccessKey)
 	}
-	if s3.SecretKey != "secret_key" {
+	if s3.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
 		t.Errorf("bad secret_key: %q", s3.SecretKey)
 	}
-	if s3.Domain != "s3-website-us-west-2.amazonaws.com" {
+	if s3.Domain != "s3.us-east-1.amazonaws.com" {
 		t.Errorf("bad domain: %q", s3.Domain)
 	}
 	if s3.Path != "/path" {

@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/698/logging/s3/test-s3
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/41/logging/s3/test-s3
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
-      698, name =\u003e test-s3, deleted =\u003e 0000-00-00 00:00:00, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-s3, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 41 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:19:44 GMT
+      - Thu, 09 May 2019 22:30:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "833"
+      - "989"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557442800"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17724-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3633-SJC
       X-Timer:
-      - S1500513584.350867,VS0,VE543
+      - S1557441060.555473,VS0,VE172
     status: 404 Not Found
     code: 404
 - request:
@@ -53,13 +55,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/698/logging/s3/new-test-s3
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/41/logging/s3/new-test-s3
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ version =\u003e
-      698, name =\u003e new-test-s3, deleted =\u003e 0000-00-00 00:00:00, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-s3, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 41 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,13 +70,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:19:45 GMT
+      - Thu, 09 May 2019 22:30:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "832"
+      - "988"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557442800"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -85,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17724-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3633-SJC
       X-Timer:
-      - S1500513585.962227,VS0,VE604
+      - S1557441060.738397,VS0,VE171
     status: 404 Not Found
     code: 404
