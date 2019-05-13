@@ -18,7 +18,7 @@ func TestClient_Sumologics(t *testing.T) {
 			Service:       testServiceID,
 			Version:       tv.Number,
 			Name:          "test-sumologic",
-			URL:           "example.com",
+			URL:           "https://foo.sumologic.com",
 			Format:        "format",
 			FormatVersion: 1,
 			MessageType:   "classic",
@@ -49,7 +49,7 @@ func TestClient_Sumologics(t *testing.T) {
 	if s.Name != "test-sumologic" {
 		t.Errorf("bad name: %q", s.Name)
 	}
-	if s.URL != "example.com" {
+	if s.URL != "https://foo.sumologic.com" {
 		t.Errorf("bad url: %q", s.URL)
 	}
 	if s.Format != "format" {
