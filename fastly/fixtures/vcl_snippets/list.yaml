@@ -9,29 +9,26 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.11.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/snippet
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/48/snippet
     method: GET
   response:
-    body: '[{"priority":"50","version":"3","dynamic":"0","name":"newTestSnippetName","content":"\n\t
+    body: '[{"created_at":"2019-05-10T18:17:55Z","dynamic":"0","priority":"50","version":"48","type":"none","name":"newTestSnippetName","updated_at":"2019-05-10T18:17:58Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"content":"\n\t
       # testing EdgeACL5 and EdgeDictionary5\n\t declare local var.number5 STRING;\n\t
       set var.number5 = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number5
       == \"true\") {\n\t set req.http.securityruleid = \"num5-block\";\n\t error 403
-      \"Access Denied\";\n\t  }\n    ","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2019-04-12T14:04:36Z","updated_at":"2019-04-12T14:04:38Z","id":"4uUKgsjWz7hmPCLDTIkj8j","type":"none"}]'
+      \"Access Denied\";\n\t  }\n    ","id":"0PJ48WhuJVqxpqIAldWQ4E"}]'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
       Age:
-      - "0"
       - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 12 Apr 2019 14:04:39 GMT
+      - Fri, 10 May 2019 18:17:58 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,8 +43,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-fra19162-FRA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lax8628-LAX
       X-Timer:
-      - S1555077879.008422,VS0,VE548
+      - S1557512278.392849,VS0,VE480
     status: 200 OK
     code: 200
