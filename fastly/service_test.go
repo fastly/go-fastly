@@ -153,7 +153,7 @@ func TestClient_Services(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(ds) < 1 {
+	if len(ds) != 0 {
 		t.Fatalf("bad services: %v", ds)
 	}
 }
