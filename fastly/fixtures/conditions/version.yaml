@@ -3,17 +3,21 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ""
-    form: {}
+    body: Service=7i6HN3TK9wS159v2gPAZ8A
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
     headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":700}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":57}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,13 +26,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 02:25:45 GMT
+      - Mon, 13 May 2019 17:29:56 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "999"
       Fastly-Ratelimit-Reset:
-      - "1500519600"
+      - "1557770400"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -39,8 +45,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17738-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3625-SJC
       X-Timer:
-      - S1500517545.045518,VS0,VE660
+      - S1557768596.994120,VS0,VE635
     status: 200 OK
     code: 200
