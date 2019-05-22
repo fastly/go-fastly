@@ -1,10 +1,10 @@
 Go Fastly
 =========
-[![Build Status](http://img.shields.io/travis/sethvargo/go-fastly.svg?style=flat-square)][travis]
+[![Build Status](http://img.shields.io/travis/fastly/go-fastly.svg?style=flat-square)][travis]
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
-[travis]: http://travis-ci.org/sethvargo/go-fastly
-[godocs]: http://godoc.org/github.com/sethvargo/go-fastly
+[travis]: http://travis-ci.org/fastly/go-fastly
+[godocs]: http://godoc.org/github.com/fastly/go-fastly
 
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
@@ -18,12 +18,12 @@ Usage
 -----
 Download the library into your `$GOPATH`:
 
-    $ go get github.com/sethvargo/go-fastly/fastly
+    $ go get github.com/fastly/go-fastly/fastly
 
 Import the library into your tool:
 
 ```go
-import "github.com/sethvargo/go-fastly/fastly"
+import "github.com/fastly/go-fastly/fastly"
 ```
 
 Examples
@@ -108,7 +108,7 @@ fmt.Printf("%b", activeVersion.Locked)
 ```
 
 More information can be found in the
-[Fastly Godoc](https://godoc.org/github.com/sethvargo/go-fastly).
+[Fastly Godoc](https://godoc.org/github.com/fastly/go-fastly).
 
 License
 -------
