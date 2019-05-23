@@ -9,7 +9,7 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
+      - FastlyGo/0.4.1 (+github.com/fastly/go-fastly; go1.9)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/response_object/test-response-object
     method: DELETE
   response:

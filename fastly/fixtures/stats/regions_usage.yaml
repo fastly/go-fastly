@@ -9,7 +9,7 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
+      - FastlyGo/0.3.0 (+github.com/fastly/go-fastly; go1.8.3)
     url: https://api.fastly.com/stats/usage?by=minute&from=10+days+ago&region=usa&to=now
     method: GET
   response:
