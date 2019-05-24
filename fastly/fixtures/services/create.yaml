@@ -15,7 +15,7 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
     url: https://api.fastly.com/service
     method: POST
   response:

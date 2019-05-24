@@ -9,7 +9,7 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/3xMPlUKElxNy5JAd2HQkhZ/entry/1P5vZXb4sHxFXE2IF473SI
     method: GET
   response:
