@@ -32,6 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - splunk: Support for Splunk ([#101](https://github.com/fastly/go-fastly/pull/101)).
 - blobstorage: Support for Azure Blob Storage ([#99](https://github.com/fastly/go-fastly/pull/99)).
 - settings: Support for `stale_if_error` and `stale_if_error_ttl` fields ([#104](https://github.com/fastly/go-fastly/pull/104)).
+- Updates the client.go and fixtures to reference fastly in the user-agent ([#109](https://github.com/fastly/go-fastly/pull/113).
 
 ### Changed
 - dictionary: Response struct to align with API ([6a8a1c6](https://github.com/fastly/go-fastly/commit/6a8a1c62e61097da752bae838375cb139f4e9cc3)).
