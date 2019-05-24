@@ -6,7 +6,7 @@ CURRENT_DIR := $(patsubst %/,%,$(dir $(realpath $(MKFILE_PATH))))
 GOPATH ?= $(HOME)/go
 
 # List all our actual files, excluding vendor
-GOFILES ?= $(shell go list $(TEST) | grep -v /vendor/)
+GOFILES ?= $(shell go list $(FILES) | grep -v /vendor/)
 
 # Tags specific for building
 GOTAGS ?=
@@ -23,9 +23,10 @@ EXTERNAL_TOOLS = \
 # Current system information
 GOOS ?= $(shell go env GOOS)
 GOARCH ?= $(shell go env GOARCH)
+GOCACHE ?= $(shell go env GOCACHE)
 
 # List of tests to run
-TEST ?= ./...
+FILES ?= ./...
 
 # bootstrap installs the necessary go tools for development or build.
 bootstrap:
@@ -36,6 +37,11 @@ bootstrap:
 	done
 .PHONY: bootstrap
 
+clean:
+	@echo "==> Cleaning ${NAME}"
+	@rm -rf pkg
+.PHONY: clean
+
 # build builds the binary into pkg/
 build:
 	@echo "==> Building ${NAME} for ${GOOS}/${GOARCH}"
@@ -45,8 +51,9 @@ build:
 		CGO_ENABLED="0" \
 		GOOS="${GOOS}" \
 		GOARCH="${GOARCH}" \
+		GOCACHE="${GOCACHE}" \
 		GOPATH="${GOPATH}" \
-		go build -a -o "pkg/${GOOS}_${GOARCH}/${NAME}"
+		go build -a -o "pkg/${GOOS}_${GOARCH}/${NAME}" ${GOFILES}
 .PHONY: build
 
 # deps updates all dependencies for this project.
@@ -65,8 +72,9 @@ dev:
 		CGO_ENABLED="0" \
 		GOOS="${GOOS}" \
 		GOARCH="${GOARCH}" \
+		GOCACHE="${GOCACHE}" \
 		GOPATH="${GOPATH}" \
-		go install
+		go install ${GOFILES}
 .PHONY: dev
 
 # linux builds the linux binary

@@ -6,9 +6,10 @@ language: go
 go:
   - "1.10"
   - "1.11"
+  - "1.12"
 
 branches:
   only:
     - master
 
-script: make test test-race
+script: make build test test-race
