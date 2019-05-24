@@ -9,24 +9,26 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs
     method: GET
   response:
-    body: '{"data":[{"id":"4fuxZ7bpag8laOjYwxlqZM","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object","version":786}}],"links":{"last":"http://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs?page[number]=1&page[size]=100","first":"http://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs?page[number]=1&page[size]=100"}}'
+    body: '{"data":[{"id":"2WK9ofHfHcPi3s6S2X0Z8m","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object","version":54,"service_id":"7i6HN3TK9wS159v2gPAZ8A","disabled":false,"rule_statuses_log_count":0,"rule_statuses_block_count":0,"rule_statuses_disabled_count":0}}],"links":{"last":"https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs?page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs?page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":1,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Age:
       - "0"
       Content-Length:
-      - "406"
+      - "635"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Tue, 05 Sep 2017 17:56:53 GMT
+      - Sat, 11 May 2019 21:45:01 GMT
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Via:
       - 1.1 varnish
       - 1.1 varnish
@@ -37,8 +39,8 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17730-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lax8631-LAX
       X-Timer:
-      - S1504634214.837456,VS0,VE111
+      - S1557611101.825257,VS0,VE468
     status: 200 OK
     code: 200

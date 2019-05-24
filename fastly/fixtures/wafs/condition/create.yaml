@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=786&name=test-waf-condition&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=54&name=test-waf-condition&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "786"
+      - "54"
       name:
       - test-waf-condition
       priority:
@@ -23,11 +23,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/condition
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/condition
     method: POST
   response:
-    body: '{"name":"test-waf-condition","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"786","deleted_at":null,"created_at":"2017-09-05T17:56:52+00:00","comment":"","updated_at":"2017-09-05T17:56:52+00:00"}'
+    body: '{"name":"test-waf-condition","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"54","created_at":"2019-05-11T21:44:59Z","updated_at":"2019-05-11T21:44:59Z","deleted_at":null,"comment":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,13 +36,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 Sep 2017 17:56:52 GMT
+      - Sat, 11 May 2019 21:44:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "882"
+      - "990"
       Fastly-Ratelimit-Reset:
-      - "1504634400"
+      - "1557612000"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -53,8 +55,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17730-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lax8631-LAX
       X-Timer:
-      - S1504634213.708252,VS0,VE142
+      - S1557611099.476242,VS0,VE199
     status: 200 OK
     code: 200

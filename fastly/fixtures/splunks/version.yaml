@@ -3,9 +3,13 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ""
-    form: {}
+    body: Service=7i6HN3TK9wS159v2gPAZ8A
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
     headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
@@ -13,21 +17,20 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":6}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":42}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 15 Mar 2019 05:03:37 GMT
+      - Thu, 09 May 2019 22:50:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "999"
+      - "987"
       Fastly-Ratelimit-Reset:
-      - "1552629600"
+      - "1557442800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,8 +45,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bur17528-BUR
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3647-SJC
       X-Timer:
-      - S1552626217.337119,VS0,VE483
+      - S1557442215.030683,VS0,VE490
     status: 200 OK
     code: 200

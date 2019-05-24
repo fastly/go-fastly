@@ -15,11 +15,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"7Tdn3IoAG8ATIy3P3XTZrY","comment":"comment","name":"test-service","publish_key":"cb8567ea1ecb0fff07fef679093bf914a8258812","versions":[{"testing":false,"locked":false,"number":1,"active":false,"service_id":"6cqczz91loS2dnXX5w9UIC","staging":false,"created_at":"2017-07-20T01:14:59+00:00","deleted_at":null,"comment":"","updated_at":"2017-07-20T01:14:59+00:00","deployed":false}],"deleted_at":null,"created_at":"2017-07-20T01:14:59+00:00","updated_at":"2017-07-20T01:14:59+00:00","id":"6cqczz91loS2dnXX5w9UIC"}'
+    body: '{"customer_id":"76eo17QE8I25lqXy9uJqbd","comment":"comment","name":"test-service","created_at":"2019-05-11T17:03:47Z","publish_key":"ff100f0c03c61271b4052b07878159c721c4e897","deleted_at":null,"versions":[{"staging":false,"updated_at":"2019-05-11T17:03:47Z","deployed":false,"comment":"","service_id":"4cyy8qad5xykKfjyTCkGnq","locked":false,"number":1,"deleted_at":null,"testing":false,"created_at":"2019-05-11T17:03:47Z","active":false}],"id":"4cyy8qad5xykKfjyTCkGnq","updated_at":"2019-05-11T17:03:47Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,13 +28,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:14:59 GMT
+      - Sat, 11 May 2019 17:03:47 GMT
       Fastly-Ratelimit-Remaining:
-      - "982"
+      - "999"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557597600"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -45,8 +47,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bur17542-BUR
       X-Timer:
-      - S1500513300.889919,VS0,VE45
+      - S1557594227.171564,VS0,VE380
     status: 200 OK
     code: 200

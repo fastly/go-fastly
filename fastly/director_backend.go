@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"time"
 )
 
@@ -52,7 +53,7 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.Service, i.Version, i.Director, i.Backend)
+		i.Service, i.Version, url.PathEscape(i.Director), url.PathEscape(i.Backend))
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -98,7 +99,7 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.Service, i.Version, i.Director, i.Backend)
+		i.Service, i.Version, url.PathEscape(i.Director), url.PathEscape(i.Backend))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -144,7 +145,7 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.Service, i.Version, i.Director, i.Backend)
+		i.Service, i.Version, url.PathEscape(i.Director), url.PathEscape(i.Backend))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

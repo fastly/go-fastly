@@ -9,24 +9,26 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs/4fuxZ7bpag8laOjYwxlqZM
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs/2WK9ofHfHcPi3s6S2X0Z8m
     method: GET
   response:
-    body: '{"data":{"id":"4fuxZ7bpag8laOjYwxlqZM","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object","version":786},"relationships":{"configuration_set":{"data":{"id":"4Z09wgjp7do8NrOIzlckFS","type":"configuration_set"}}}}}'
+    body: '{"data":{"id":"2WK9ofHfHcPi3s6S2X0Z8m","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object","version":54,"service_id":"7i6HN3TK9wS159v2gPAZ8A","disabled":false,"rule_statuses_log_count":0,"rule_statuses_block_count":0,"rule_statuses_disabled_count":0},"relationships":{"configuration_set":{"data":{"id":"3vnl3cwPda9Q3WYCDRuGW","type":"configuration_set"}}}}}'
     headers:
       Accept-Ranges:
       - bytes
       Age:
       - "0"
       Content-Length:
-      - "281"
+      - "425"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Tue, 05 Sep 2017 17:56:54 GMT
+      - Sat, 11 May 2019 21:45:01 GMT
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Via:
       - 1.1 varnish
       - 1.1 varnish
@@ -37,8 +39,8 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17730-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lax8631-LAX
       X-Timer:
-      - S1504634214.963647,VS0,VE133
+      - S1557611101.328100,VS0,VE372
     status: 200 OK
     code: 200

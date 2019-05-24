@@ -145,7 +145,6 @@ type UpdateConditionInput struct {
 	// Name is the name of the condition to update.
 	Name string
 
-	NewName   string `form:"name,omitempty"`
 	Comment   string `form:"comment,omitempty"`
 	Statement string `form:"statement,omitempty"`
 	Type      string `form:"type,omitempty"`

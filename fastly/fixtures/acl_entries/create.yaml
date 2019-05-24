@@ -3,10 +3,10 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Acl=6aWRuJBATbCeLKOQ4BCLJU&Service=7i6HN3TK9wS159v2gPAZ8A&comment=test+entry&ip=10.0.0.3&subnet=8
+    body: ACL=3xMPlUKElxNy5JAd2HQkhZ&Service=7i6HN3TK9wS159v2gPAZ8A&comment=test+entry&ip=10.0.0.3&subnet=8
     form:
-      Acl:
-      - 6aWRuJBATbCeLKOQ4BCLJU
+      ACL:
+      - 3xMPlUKElxNy5JAd2HQkhZ
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       comment:
@@ -21,12 +21,12 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/6aWRuJBATbCeLKOQ4BCLJU/entry
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/3xMPlUKElxNy5JAd2HQkhZ/entry
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","acl_id":"6aWRuJBATbCeLKOQ4BCLJU","ip":"10.0.0.3","subnet":8,"comment":"test
-      entry","negated":0,"deleted_at":null,"created_at":"2017-07-20T01:14:58+00:00","updated_at":"2017-07-20T01:14:58+00:00","id":"6amW9mve05f7SlE0YZKQqC"}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","acl_id":"3xMPlUKElxNy5JAd2HQkhZ","ip":"10.0.0.3","subnet":8,"comment":"test
+      entry","negated":0,"created_at":"2019-05-09T18:07:24Z","id":"1P5vZXb4sHxFXE2IF473SI","deleted_at":null,"updated_at":"2019-05-09T18:07:24Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,13 +35,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:14:58 GMT
+      - Thu, 09 May 2019 18:07:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "986"
+      - "997"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557428400"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -52,8 +54,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17433-PAO
       X-Timer:
-      - S1500513298.883461,VS0,VE230
+      - S1557425244.182695,VS0,VE905
     status: 200 OK
     code: 200

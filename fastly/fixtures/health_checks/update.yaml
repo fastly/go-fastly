@@ -3,14 +3,14 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Name=test-healthcheck&Service=7i6HN3TK9wS159v2gPAZ8A&Version=672&name=new-test-healthcheck
+    body: Name=test-healthcheck&Service=7i6HN3TK9wS159v2gPAZ8A&Version=29&name=new-test-healthcheck
     form:
       Name:
       - test-healthcheck
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "672"
+      - "29"
       name:
       - new-test-healthcheck
     headers:
@@ -19,11 +19,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/672/healthcheck/test-healthcheck
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/29/healthcheck/test-healthcheck
     method: PUT
   response:
-    body: '{"threshold":10,"window":5000,"service_id":"7i6HN3TK9wS159v2gPAZ8A","http_version":"1.1","timeout":1500,"method":"HEAD","updated_at":"2017-07-20T01:15:00+00:00","expected_response":200,"version":672,"name":"new-test-healthcheck","deleted_at":null,"path":"/foo","host":"example.com","created_at":"2017-07-20T01:15:00+00:00","comment":"","check_interval":2500,"initial":10}'
+    body: '{"path":"/foo","method":"HEAD","initial":10,"created_at":"2019-05-09T20:06:51Z","expected_response":200,"window":5000,"host":"example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"","name":"new-test-healthcheck","deleted_at":null,"timeout":1500,"http_version":"1.1","updated_at":"2019-05-09T20:06:51Z","version":29,"check_interval":2500,"threshold":10}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,13 +32,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:02 GMT
+      - Thu, 09 May 2019 20:06:52 GMT
       Fastly-Ratelimit-Remaining:
-      - "972"
+      - "19991"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557435600"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -49,8 +51,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17444-PAO
       X-Timer:
-      - S1500513302.005695,VS0,VE431
+      - S1557432413.587634,VS0,VE258
     status: 200 OK
     code: 200

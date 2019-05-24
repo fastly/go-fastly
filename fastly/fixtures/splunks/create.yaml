@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=6&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-splunk&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2Fmysplunkendpoint.example.com%2Fservices%2Fcollector%2Fevent
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=42&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-splunk&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2Fmysplunkendpoint.example.com%2Fservices%2Fcollector%2Fevent
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "6"
+      - "42"
       format:
       - '%h %l %u %t "%r" %>s %b'
       format_version:
@@ -28,24 +28,23 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/logging/splunk
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/logging/splunk
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-splunk","placement":"waf_debug","token":"super-secure-token","url":"https://mysplunkendpoint.example.com/services/collector/event","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"6","response_condition":"","updated_at":"2019-03-15T05:03:38Z","tls_hostname":null,"tls_ca_cert":null,"tls_allow_insecure":"0","deleted_at":null,"created_at":"2019-03-15T05:03:38Z","content_type":null}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-splunk","placement":"waf_debug","token":"super-secure-token","url":"https://mysplunkendpoint.example.com/services/collector/event","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"42","created_at":"2019-05-09T22:50:15Z","tls_allow_insecure":"0","tls_ca_cert":null,"tls_hostname":null,"deleted_at":null,"response_condition":"","updated_at":"2019-05-09T22:50:15Z","content_type":null}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 15 Mar 2019 05:03:38 GMT
+      - Thu, 09 May 2019 22:50:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "986"
       Fastly-Ratelimit-Reset:
-      - "1552629600"
+      - "1557442800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -60,8 +59,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-bur17528-BUR
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3647-SJC
       X-Timer:
-      - S1552626218.847407,VS0,VE678
+      - S1557442216.561112,VS0,VE764
     status: 200 OK
     code: 200

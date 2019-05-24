@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.3.0 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/700/condition/test%252Fcondition
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/57/condition/test%2Fcondition
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Condition ''{ version
-      =\u003e 700, name =\u003e test/condition, deleted =\u003e 0000-00-00 00:00:00,
-      service =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find Condition ''{ deleted
+      =\u003e 0000-00-00 00:00:00, name =\u003e test/condition, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 57 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 02:25:47 GMT
+      - Mon, 13 May 2019 17:29:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "995"
       Fastly-Ratelimit-Reset:
-      - "1500519600"
+      - "1557770400"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,8 +43,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17738-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3625-SJC
       X-Timer:
-      - S1500517547.044761,VS0,VE220
+      - S1557768599.907929,VS0,VE186
     status: 404 Not Found
     code: 404

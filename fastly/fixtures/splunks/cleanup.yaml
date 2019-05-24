@@ -10,26 +10,25 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/logging/splunk/test-splunk
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/logging/splunk/test-splunk
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-splunk, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 6 }''"}'
+      version =\u003e 42 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 15 Mar 2019 05:03:40 GMT
+      - Thu, 09 May 2019 22:50:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "995"
+      - "983"
       Fastly-Ratelimit-Reset:
-      - "1552629600"
+      - "1557442800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -44,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-bur17528-BUR
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3647-SJC
       X-Timer:
-      - S1552626221.652714,VS0,VE163
+      - S1557442218.325510,VS0,VE189
     status: 404 Not Found
     code: 404
 - request:
@@ -57,26 +56,25 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/logging/splunk/new-test-splunk
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/logging/splunk/new-test-splunk
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-splunk, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 6 }''"}'
+      version =\u003e 42 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 15 Mar 2019 05:03:40 GMT
+      - Thu, 09 May 2019 22:50:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "982"
       Fastly-Ratelimit-Reset:
-      - "1552629600"
+      - "1557442800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -91,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bur17528-BUR
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3647-SJC
       X-Timer:
-      - S1552626221.844470,VS0,VE151
+      - S1557442219.520622,VS0,VE180
     status: 404 Not Found
     code: 404

@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/677/gzip/test-gzip
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/gzip/test-gzip
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ version =\u003e
-      677, name =\u003e test-gzip, deleted =\u003e 0000-00-00 00:00:00, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-gzip, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 21 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:07 GMT
+      - Thu, 09 May 2019 00:00:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "935"
+      - "994"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557363600"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17429-PAO
       X-Timer:
-      - S1500513308.525221,VS0,VE93
+      - S1557360016.326917,VS0,VE405
     status: 404 Not Found
     code: 404
 - request:
@@ -53,8 +55,8 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/677/gzip/test-gzip-omit
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/gzip/test-gzip-omit
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -66,13 +68,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:08 GMT
+      - Thu, 09 May 2019 00:00:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "934"
+      - "993"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557363600"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -83,9 +87,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17429-PAO
       X-Timer:
-      - S1500513308.633632,VS0,VE389
+      - S1557360017.840679,VS0,VE268
     status: 200 OK
     code: 200
 - request:
@@ -95,13 +99,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/677/gzip/new-test-gzip
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/gzip/new-test-gzip
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ version =\u003e
-      677, name =\u003e new-test-gzip, deleted =\u003e 0000-00-00 00:00:00, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-gzip, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 21 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -110,13 +114,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:08 GMT
+      - Thu, 09 May 2019 00:00:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "929"
+      - "992"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557363600"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -127,8 +133,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17429-PAO
       X-Timer:
-      - S1500513308.039130,VS0,VE201
+      - S1557360017.144018,VS0,VE178
     status: 404 Not Found
     code: 404

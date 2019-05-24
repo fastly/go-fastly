@@ -9,8 +9,8 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.1 (+github.com/sethvargo/go-fastly; go1.9)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/786/wafs/4fuxZ7bpag8laOjYwxlqZM
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs/2WK9ofHfHcPi3s6S2X0Z8m
     method: DELETE
   response:
     body: ""
@@ -18,9 +18,11 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Tue, 05 Sep 2017 17:56:55 GMT
+      - Sat, 11 May 2019 21:45:03 GMT
       Status:
       - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
       Via:
       - 1.1 varnish
       - 1.1 varnish
@@ -31,8 +33,8 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17730-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lax8631-LAX
       X-Timer:
-      - S1504634215.393412,VS0,VE89
+      - S1557611103.468691,VS0,VE153
     status: 204 No Content
     code: 204

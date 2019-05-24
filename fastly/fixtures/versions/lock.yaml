@@ -10,25 +10,24 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16/lock
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49/lock
     method: PUT
   response:
-    body: '{"testing":false,"locked":true,"number":16,"active":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","staging":false,"created_at":"2019-03-29T00:33:36Z","deleted_at":null,"comment":"new
-      comment","updated_at":"2019-03-29T00:33:37Z","deployed":false}'
+    body: '{"staging":false,"deleted_at":null,"number":49,"updated_at":"2019-05-11T00:21:35Z","deployed":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","testing":false,"comment":"new
+      comment","locked":true,"created_at":"2019-05-11T00:21:34Z","active":false}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 29 Mar 2019 00:33:38 GMT
+      - Sat, 11 May 2019 00:21:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "997"
       Fastly-Ratelimit-Reset:
-      - "1553821200"
+      - "1557536400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,8 +42,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lax8651-LAX
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17444-PAO
       X-Timer:
-      - S1553819618.413072,VS0,VE501
+      - S1557534096.964478,VS0,VE261
     status: 200 OK
     code: 200

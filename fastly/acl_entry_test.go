@@ -6,7 +6,7 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "acls/version", func(c *Client) {
+	record(t, "acl_entries/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 

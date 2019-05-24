@@ -9,12 +9,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/6aWRuJBATbCeLKOQ4BCLJU/entries
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/3xMPlUKElxNy5JAd2HQkhZ/entries
     method: GET
   response:
-    body: '[{"ip":"10.0.0.3","negated":"0","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2017-07-20T01:14:58+00:00","acl_id":"6aWRuJBATbCeLKOQ4BCLJU","comment":"test
-      entry","updated_at":"2017-07-20T01:14:58+00:00","id":"6amW9mve05f7SlE0YZKQqC","subnet":8}]'
+    body: '[{"comment":"test entry","updated_at":"2019-05-09T18:07:24Z","ip":"10.0.0.3","service_id":"7i6HN3TK9wS159v2gPAZ8A","acl_id":"3xMPlUKElxNy5JAd2HQkhZ","id":"1P5vZXb4sHxFXE2IF473SI","deleted_at":null,"created_at":"2019-05-09T18:07:24Z","negated":"0","subnet":8}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,9 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:14:58 GMT
+      - Thu, 09 May 2019 18:07:25 GMT
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -38,8 +39,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17433-PAO
       X-Timer:
-      - S1500513298.131099,VS0,VE290
+      - S1557425245.095722,VS0,VE179
     status: 200 OK
     code: 200

@@ -9,13 +9,12 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/677/gzip/test-gzip
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/gzip/test-gzip
     method: GET
   response:
-    body: '{"version":"677","name":"test-gzip","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","content_types":"text/html
-      text/css","cache_condition":"","created_at":"2017-07-20T01:15:05+00:00","extensions":"html
-      css","updated_at":"2017-07-20T01:15:05+00:00"}'
+    body: '{"deleted_at":null,"cache_condition":"","name":"test-gzip","updated_at":"2019-05-09T00:00:13Z","extensions":"html
+      css","created_at":"2019-05-09T00:00:13Z","content_types":"text/html text/css","version":"21","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -26,9 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:06 GMT
+      - Thu, 09 May 2019 00:00:15 GMT
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -39,8 +40,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17429-PAO
       X-Timer:
-      - S1500513306.170209,VS0,VE289
+      - S1557360015.218331,VS0,VE408
     status: 200 OK
     code: 200

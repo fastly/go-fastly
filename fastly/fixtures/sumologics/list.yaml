@@ -9,11 +9,11 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/692/logging/sumologic
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/sumologic
     method: GET
   response:
-    body: '[{"placement":"waf_debug","format_version":"1","response_condition":"","url":"example.com","updated_at":"2017-07-20T01:15:12+00:00","message_type":"classic","name":"test-sumologic","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"692","deleted_at":null,"created_at":"2017-07-20T01:15:12+00:00","format":"format"}]'
+    body: '[{"deleted_at":null,"url":"https://foo.sumologic.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"46","response_condition":"","updated_at":"2019-05-09T23:21:58Z","message_type":"classic","placement":"waf_debug","format":"format","format_version":"1","created_at":"2019-05-09T23:21:58Z","name":"test-sumologic"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,9 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:13 GMT
+      - Thu, 09 May 2019 23:21:58 GMT
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -37,8 +39,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3649-SJC
       X-Timer:
-      - S1500513313.892965,VS0,VE250
+      - S1557444118.451647,VS0,VE402
     status: 200 OK
     code: 200

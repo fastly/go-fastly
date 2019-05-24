@@ -5,14 +5,16 @@ import "testing"
 func Test_Snippets(t *testing.T) {
 	t.Parallel()
 
-	var err error
 	const (
-		tv                 = 3
-		testDynSnippetID   = "dynsnipxxxxxxxxxxxxxid"
-		testSnippetID      = "snipxxxxxxxxxxxxxxxxid"
 		testDynSnippetName = "testsnip5"
 		testSnippetName    = "testsnip0"
 	)
+
+	var err error
+	var tv *Version
+	record(t, "vcl_snippets/version", func(c *Client) {
+		tv = testVersion(t, c)
+	})
 
 	content := `
 	# testing EdgeACL2 and EdgeDictionary2
@@ -51,7 +53,7 @@ func Test_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/create", func(c *Client) {
 		cs, err = c.CreateSnippet(&CreateSnippetInput{
 			Service:  testServiceID,
-			Version:  tv,
+			Version:  tv.Number,
 			Name:     testSnippetName,
 			Type:     SnippetTypeRecv,
 			Priority: 100,
@@ -81,7 +83,7 @@ func Test_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/create_dyn", func(c *Client) {
 		cds, err = c.CreateSnippet(&CreateSnippetInput{
 			Service:  testServiceID,
-			Version:  tv,
+			Version:  tv.Number,
 			Name:     testDynSnippetName,
 			Type:     SnippetTypeRecv,
 			Priority: 100,
@@ -108,7 +110,7 @@ func Test_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/update_dyn", func(c *Client) {
 		uds, err = c.UpdateDynamicSnippet(&UpdateDynamicSnippetInput{
 			Service: testServiceID,
-			ID:      testDynSnippetID,
+			ID:      cds.ID,
 			Content: updatedDynContent,
 		})
 	})
@@ -125,7 +127,7 @@ func Test_Snippets(t *testing.T) {
 		err = c.DeleteSnippet(&DeleteSnippetInput{
 			Service: testServiceID,
 			Name:    testDynSnippetName,
-			Version: tv,
+			Version: tv.Number,
 		})
 	})
 	if err != nil {
@@ -137,7 +139,7 @@ func Test_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/get_dynamic", func(c *Client) {
 		ds, err = c.GetDynamicSnippet(&GetDynamicSnippetInput{
 			Service: testServiceID,
-			ID:      testDynSnippetID,
+			ID:      cds.ID,
 		})
 
 	})
@@ -147,7 +149,7 @@ func Test_Snippets(t *testing.T) {
 	if ds.ServiceID != testServiceID {
 		t.Errorf("bad sID: %q", ds.ServiceID)
 	}
-	if ds.ID != testDynSnippetID {
+	if ds.ID != cds.ID {
 		t.Errorf("bad snipID: %q", ds.ID)
 	}
 
@@ -157,7 +159,7 @@ func Test_Snippets(t *testing.T) {
 		gs, err = c.GetSnippet(&GetSnippetInput{
 			Service: testServiceID,
 			Name:    testSnippetName,
-			Version: tv,
+			Version: tv.Number,
 		})
 
 	})
@@ -185,7 +187,7 @@ func Test_Snippets(t *testing.T) {
 			Dynamic:  0,
 			Type:     "none",
 			Priority: 50,
-			Version:  tv,
+			Version:  tv.Number,
 		})
 	})
 	if err != nil {
@@ -212,7 +214,7 @@ func Test_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/list", func(c *Client) {
 		sl, err = c.ListSnippets(&ListSnippetsInput{
 			Service: testServiceID,
-			Version: tv,
+			Version: tv.Number,
 		})
 
 	})
@@ -223,7 +225,7 @@ func Test_Snippets(t *testing.T) {
 		if x.ServiceID != testServiceID {
 			t.Errorf("bad service: %q", x.ServiceID)
 		}
-		if x.Version != tv {
+		if x.Version != tv.Number {
 			t.Errorf("bad Version: %q", x.Version)
 		}
 	}
@@ -244,7 +246,7 @@ func Test_Snippets(t *testing.T) {
 
 	_, err = testClient.CreateSnippet(&CreateSnippetInput{
 		Service:  testServiceID,
-		Version:  tv,
+		Version:  tv.Number,
 		Name:     testSnippetName,
 		Type:     SnippetTypeRecv,
 		Priority: 100,

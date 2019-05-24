@@ -30,21 +30,19 @@ func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, 
 	}
 
 	// Append the path to the URL.
-	u := *c.url
-	u.Path = strings.TrimRight(c.url.Path, "/") + "/" + strings.TrimLeft(p, "/")
+	u := strings.TrimRight(c.url.String(), "/") + "/" + strings.TrimLeft(p, "/")
 
-	// Add the token and other params.
+	// Create the request object.
+	request, err := http.NewRequest(verb, u, ro.Body)
+	if err != nil {
+		return nil, err
+	}
+
 	var params = make(url.Values)
 	for k, v := range ro.Params {
 		params.Add(k, v)
 	}
-	u.RawQuery = params.Encode()
-
-	// Create the request object.
-	request, err := http.NewRequest(verb, u.String(), ro.Body)
-	if err != nil {
-		return nil, err
-	}
+	request.URL.RawQuery = params.Encode()
 
 	// Set the API key.
 	if len(c.apiKey) > 0 {

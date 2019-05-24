@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/682/dictionary/test_dictionary
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/dictionary/test_dictionary
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Dictionary ''{ version
-      =\u003e 682, name =\u003e test_dictionary, deleted =\u003e 0000-00-00 00:00:00,
-      service =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find Dictionary ''{ deleted
+      =\u003e 0000-00-00 00:00:00, name =\u003e test_dictionary, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 14 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:09 GMT
+      - Wed, 08 May 2019 21:53:08 GMT
       Fastly-Ratelimit-Remaining:
-      - "916"
+      - "993"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557352800"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3647-SJC
       X-Timer:
-      - S1500513309.939471,VS0,VE271
+      - S1557352389.584839,VS0,VE185
     status: 404 Not Found
     code: 404
 - request:
@@ -53,13 +55,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/682/dictionary/new_test_dictionary
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/dictionary/new_test_dictionary
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Dictionary ''{ version
-      =\u003e 682, name =\u003e new_test_dictionary, deleted =\u003e 0000-00-00 00:00:00,
-      service =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find Dictionary ''{ deleted
+      =\u003e 0000-00-00 00:00:00, name =\u003e new_test_dictionary, service =\u003e
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 14 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,13 +70,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:09 GMT
+      - Wed, 08 May 2019 21:53:08 GMT
       Fastly-Ratelimit-Remaining:
-      - "914"
+      - "992"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557352800"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -85,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3647-SJC
       X-Timer:
-      - S1500513309.234369,VS0,VE100
+      - S1557352389.774751,VS0,VE177
     status: 404 Not Found
     code: 404

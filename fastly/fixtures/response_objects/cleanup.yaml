@@ -9,13 +9,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/686/response_object/test-response-object
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/response_object/test-response-object
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find ResponseObject ''{ version
-      =\u003e 686, name =\u003e test-response-object, deleted =\u003e 0000-00-00 00:00:00,
-      service =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find ResponseObject ''{ deleted
+      =\u003e 0000-00-00 00:00:00, name =\u003e test-response-object, service =\u003e
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 36 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,13 +24,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:11 GMT
+      - Thu, 09 May 2019 22:07:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "877"
+      - "995"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557442800"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3644-SJC
       X-Timer:
-      - S1500513312.777086,VS0,VE90
+      - S1557439623.890757,VS0,VE175
     status: 404 Not Found
     code: 404
 - request:
@@ -53,13 +55,13 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/686/response_object/new-test-response-object
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/response_object/new-test-response-object
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find ResponseObject ''{ version
-      =\u003e 686, name =\u003e new-test-response-object, deleted =\u003e 0000-00-00
-      00:00:00, service =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find ResponseObject ''{ deleted
+      =\u003e 0000-00-00 00:00:00, name =\u003e new-test-response-object, service
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 36 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,13 +70,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:12 GMT
+      - Thu, 09 May 2019 22:07:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "875"
+      - "994"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557442800"
       Status:
       - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -85,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9050-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3644-SJC
       X-Timer:
-      - S1500513312.881875,VS0,VE177
+      - S1557439623.071313,VS0,VE452
     status: 404 Not Found
     code: 404

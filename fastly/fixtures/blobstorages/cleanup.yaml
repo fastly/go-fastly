@@ -10,26 +10,25 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/9/logging/azureblob/test-blobstorage
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/8/logging/azureblob/test-blobstorage
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-blobstorage, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 9 }''"}'
+      version =\u003e 8 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 22 Mar 2019 22:17:57 GMT
+      - Tue, 07 May 2019 23:54:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "995"
       Fastly-Ratelimit-Reset:
-      - "1553295600"
+      - "1557273600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -44,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3620-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3622-SJC
       X-Timer:
-      - S1553293077.100440,VS0,VE168
+      - S1557273281.949241,VS0,VE399
     status: 404 Not Found
     code: 404
 - request:
@@ -57,26 +56,25 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/9/logging/azureblob/new-test-blobstorage
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/8/logging/azureblob/new-test-blobstorage
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-blobstorage, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 9 }''"}'
+      version =\u003e 8 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 22 Mar 2019 22:17:57 GMT
+      - Tue, 07 May 2019 23:54:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "988"
+      - "994"
       Fastly-Ratelimit-Reset:
-      - "1553295600"
+      - "1557273600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -91,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3620-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3622-SJC
       X-Timer:
-      - S1553293077.274878,VS0,VE161
+      - S1557273281.470988,VS0,VE163
     status: 404 Not Found
     code: 404

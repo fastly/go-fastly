@@ -9,8 +9,8 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/6cqczz91loS2dnXX5w9UIC
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/4cyy8qad5xykKfjyTCkGnq
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -22,13 +22,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:01 GMT
+      - Sat, 11 May 2019 17:03:50 GMT
       Fastly-Ratelimit-Remaining:
-      - "976"
+      - "996"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557597600"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -39,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bur17542-BUR
       X-Timer:
-      - S1500513301.060767,VS0,VE51
+      - S1557594231.755198,VS0,VE195
     status: 200 OK
     code: 200
 - request:
@@ -51,8 +53,8 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.2 (+github.com/sethvargo/go-fastly; go1.8.3)
-    url: https://api.fastly.com/service/6cqczz91loS2dnXX5w9UIC
+      - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
+    url: https://api.fastly.com/service/4cyy8qad5xykKfjyTCkGnq
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -64,13 +66,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Jul 2017 01:15:01 GMT
+      - Sat, 11 May 2019 17:03:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "975"
+      - "995"
       Fastly-Ratelimit-Reset:
-      - "1500516000"
+      - "1557597600"
       Status:
       - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
@@ -81,8 +85,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - app-slwdc9051-SL, cache-dca17722-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bur17542-BUR
       X-Timer:
-      - S1500513301.127828,VS0,VE54
+      - S1557594231.975351,VS0,VE215
     status: 200 OK
     code: 200

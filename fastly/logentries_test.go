@@ -61,7 +61,7 @@ func TestClient_Logentries(t *testing.T) {
 	if le.Format != "format" {
 		t.Errorf("bad format: %q", le.Format)
 	}
-	if le.FormatVersion != 1 {
+	if le.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", le.FormatVersion)
 	}
 	if le.Placement != "waf_debug" {

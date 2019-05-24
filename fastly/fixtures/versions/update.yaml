@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=16&comment=new+comment
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=49&comment=new+comment
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "16"
+      - "49"
       comment:
       - new comment
     headers:
@@ -18,25 +18,24 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/sethvargo/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49
     method: PUT
   response:
-    body: '{"testing":false,"locked":false,"number":16,"active":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","staging":false,"created_at":"2019-03-29T00:33:36Z","deleted_at":null,"comment":"new
-      comment","updated_at":"2019-03-29T00:33:36Z","deployed":false}'
+    body: '{"testing":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":49,"created_at":"2019-05-11T00:21:34Z","updated_at":"2019-05-11T00:21:34Z","comment":"new
+      comment","active":false,"staging":false,"deleted_at":null,"locked":false,"deployed":false}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 29 Mar 2019 00:33:38 GMT
+      - Sat, 11 May 2019 00:21:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "998"
       Fastly-Ratelimit-Reset:
-      - "1553821200"
+      - "1557536400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,8 +50,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lax8651-LAX
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17444-PAO
       X-Timer:
-      - S1553819618.596018,VS0,VE485
+      - S1557534095.416700,VS0,VE498
     status: 200 OK
     code: 200
