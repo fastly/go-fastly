@@ -36,6 +36,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - dictionary: Response struct to align with API ([6a8a1c6](https://github.com/fastly/go-fastly/commit/6a8a1c62e61097da752bae838375cb139f4e9cc3)).
 - dictionary_item: Response struct to align with API ([7d31c4a](https://github.com/fastly/go-fastly/commit/7d31c4aa34ef904f4426ef8af4be915c2c373e70)).
+- user-agent: client.go and fixtures to reference fastly in the user-agent ([#109](https://github.com/fastly/go-fastly/pull/113).
 
 ### Removed
 - domain: `locked` field ([#86](https://github.com/fastly/go-fastly/pull/86)).
