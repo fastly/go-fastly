@@ -26,7 +26,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, ErrMissingURL
 	}
 
-	req, err := c.RawRequest("PURGE", i.URL, nil)
+	req, err := c.RawRequest("POST", "purge/" + i.URL, nil)
 	if err != nil {
 		return nil, err
 	}
