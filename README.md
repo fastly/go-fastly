@@ -48,7 +48,7 @@ if err != nil {
 }
 
 // You can find the service ID in the Fastly web console.
-var serviceID = "SU1Z0isxPaozGVKXdv0eY"
+var serviceID = "SERVICE_ID"
 
 // Get the latest active version
 latest, err := client.LatestVersion(&fastly.LatestVersionInput{
@@ -82,6 +82,21 @@ if err != nil {
 // Output: "example.com"
 fmt.Println(domain.Name)
 
+// And we will also add a new backend.
+backend, err := client.CreateBackend(&fastly.CreateBackendInput{
+  Service: serviceID,
+  Version: version.Number,
+  Name:    "example-backend",
+  Address: "127.0.0.1",
+  Port:    80,
+})
+if err != nil {
+  log.Fatal(err)
+}
+
+// Output: "example-backend"
+fmt.Println(backend.Name)
+
 // Now we can validate that our version is valid.
 valid, _, err := client.ValidateVersion(&fastly.ValidateVersionInput{
   Service: serviceID,
@@ -104,7 +119,7 @@ if err != nil {
 }
 
 // Output: true
-fmt.Printf("%b", activeVersion.Locked)
+fmt.Printf("%t\n", activeVersion.Locked)
 ```
 
 More information can be found in the
