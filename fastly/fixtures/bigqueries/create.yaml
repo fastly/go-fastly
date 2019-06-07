@@ -1,0 +1,107 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=65&dataset=fastly_log_test&format=%7B%0A+%22timestamp%22%3A%22%25%7Bbegin%3A%25Y-%25m-%25dT%25H%3A%25M%3A%25S%7Dt%22%2C%0A++%22time_elapsed%22%3A%25%7Btime.elapsed.usec%7DV%2C%0A++%22is_tls%22%3A%25%7Bif%28req.is_ssl%2C+%22true%22%2C+%22false%22%29%7DV%2C%0A++%22client_ip%22%3A%22%25%7Breq.http.Fastly-Client-IP%7DV%22%2C%0A++%22geo_city%22%3A%22%25%7Bclient.geo.city%7DV%22%2C%0A++%22geo_country_code%22%3A%22%25%7Bclient.geo.country_code%7DV%22%2C%0A++%22request%22%3A%22%25%7Breq.request%7DV%22%2C%0A++%22host%22%3A%22%25%7Breq.http.Fastly-Orig-Host%7DV%22%2C%0A++%22url%22%3A%22%25%7Bjson.escape%28req.url%29%7DV%22%2C%0A++%22request_referer%22%3A%22%25%7Bjson.escape%28req.http.Referer%29%7DV%22%2C%0A++%22request_user_agent%22%3A%22%25%7Bjson.escape%28req.http.User-Agent%29%7DV%22%2C%0A++%22request_accept_language%22%3A%22%25%7Bjson.escape%28req.http.Accept-Language%29%7DV%22%2C%0A++%22request_accept_charset%22%3A%22%25%7Bjson.escape%28req.http.Accept-Charset%29%7DV%22%2C%0A++%22cache_status%22%3A%22%25%7Bregsub%28fastly_info.state%2C+%22%5E%28HIT-%28SYNTH%29%7C%28HITPASS%7CHIT%7CMISS%7CPASS%7CERROR%7CPIPE%29%29.%2A%22%2C+%22%5C%5C2%5C%5C3%22%29+%7DV%22%0A%7D&format_version=2&name=test-bigquery&placement=waf_debug&project_id=example-fastly-log&secret_key=-----BEGIN+PRIVATE+KEY-----%0AMIICXAIBAAKBgQCukSu6ece%2F5jlgnNiLK7mIxJuLLeZ1FI%2Frn0PK8XTO%2BvSZjV%2Bo%0AvXpiSiXavXv2XhQymAf%2FtOpDV%2BuBxIzM3E1wyQ2qUxFjZ1zJHqBlmK%2BQJeg7pKmD%0AgVQrzdtfUYGTlpizMiucWyYJYHNdfIkoD9N%2BwSw%2FcM%2FkxHa8fYtGsN3M7wIDAQAB%0AAoGAOXiBtPqy0HKzISOCBw92HZjcvI13%2BcOzPhdI8l9b3WixbnwkqiD3UbSnkcQg%0AM5P1glKbD4w4M8OWPTrAQBGnTJa2iA7z9IqTGL7dwhVnQ04NYq14CpPs%2BXCKwOxK%0AO0gEjgbjlPNyE3OsMNBFMB5rnsVEI8uUukBmm%2Fh6l8x7HUECQQDCeatYbfZZ8ra3%0AtwTCmuc4qEXMzLhxBq7Ogyst90mC1fhfxFKiXwu0WVJqeGSFrK1upHPDfPJ3JN75%0ACDskG9YzAkEA5csoxhmPblUOG3e%2FVt8dzjPlk%2FZTgxEOKPb86BUprsR2J1aJVHVH%0AEoZjlAj5yo7iNSphp4cVXJd8I%2BZsYSeaVQJBAJIF%2B5N9lcG6Tlop0SgyWbWgHDEH%0A8uHjS7SCpxRvnsHf2gxGhGmpBkfX3dtWJNx%2BaQcv8kBx%2FDlb9RR2irm1MSMCQCmM%0AxICdWovuoTBiRJymlzMTuy032v3V9aN%2BlVg5i2HocBzIzugQlJtK5XJ89P2lPE20%0Arhemmzw0v%2BOV5H7ktEkCQDqLUZyqnGHX6qV%2B8eJMafLyy1AUfzSkbuZ%2FnX6hed8T%0AcfzsfBxi4bN4JOkJcA77FpXDecX%2FGDwzRN%2ByfwNs3%2B0%3D%0A-----END+PRIVATE+KEY-----%0A&table=fastly_logs&user=fastly-bigquery-log%40example-fastly-log.iam.gserviceaccount.com
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "65"
+      dataset:
+      - fastly_log_test
+      format:
+      - |-
+        {
+         "timestamp":"%{begin:%Y-%m-%dT%H:%M:%S}t",
+          "time_elapsed":%{time.elapsed.usec}V,
+          "is_tls":%{if(req.is_ssl, "true", "false")}V,
+          "client_ip":"%{req.http.Fastly-Client-IP}V",
+          "geo_city":"%{client.geo.city}V",
+          "geo_country_code":"%{client.geo.country_code}V",
+          "request":"%{req.request}V",
+          "host":"%{req.http.Fastly-Orig-Host}V",
+          "url":"%{json.escape(req.url)}V",
+          "request_referer":"%{json.escape(req.http.Referer)}V",
+          "request_user_agent":"%{json.escape(req.http.User-Agent)}V",
+          "request_accept_language":"%{json.escape(req.http.Accept-Language)}V",
+          "request_accept_charset":"%{json.escape(req.http.Accept-Charset)}V",
+          "cache_status":"%{regsub(fastly_info.state, "^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*", "\\2\\3") }V"
+        }
+      format_version:
+      - "2"
+      name:
+      - test-bigquery
+      placement:
+      - waf_debug
+      project_id:
+      - example-fastly-log
+      secret_key:
+      - |
+        -----BEGIN PRIVATE KEY-----
+        MIICXAIBAAKBgQCukSu6ece/5jlgnNiLK7mIxJuLLeZ1FI/rn0PK8XTO+vSZjV+o
+        vXpiSiXavXv2XhQymAf/tOpDV+uBxIzM3E1wyQ2qUxFjZ1zJHqBlmK+QJeg7pKmD
+        gVQrzdtfUYGTlpizMiucWyYJYHNdfIkoD9N+wSw/cM/kxHa8fYtGsN3M7wIDAQAB
+        AoGAOXiBtPqy0HKzISOCBw92HZjcvI13+cOzPhdI8l9b3WixbnwkqiD3UbSnkcQg
+        M5P1glKbD4w4M8OWPTrAQBGnTJa2iA7z9IqTGL7dwhVnQ04NYq14CpPs+XCKwOxK
+        O0gEjgbjlPNyE3OsMNBFMB5rnsVEI8uUukBmm/h6l8x7HUECQQDCeatYbfZZ8ra3
+        twTCmuc4qEXMzLhxBq7Ogyst90mC1fhfxFKiXwu0WVJqeGSFrK1upHPDfPJ3JN75
+        CDskG9YzAkEA5csoxhmPblUOG3e/Vt8dzjPlk/ZTgxEOKPb86BUprsR2J1aJVHVH
+        EoZjlAj5yo7iNSphp4cVXJd8I+ZsYSeaVQJBAJIF+5N9lcG6Tlop0SgyWbWgHDEH
+        8uHjS7SCpxRvnsHf2gxGhGmpBkfX3dtWJNx+aQcv8kBx/Dlb9RR2irm1MSMCQCmM
+        xICdWovuoTBiRJymlzMTuy032v3V9aN+lVg5i2HocBzIzugQlJtK5XJ89P2lPE20
+        rhemmzw0v+OV5H7ktEkCQDqLUZyqnGHX6qV+8eJMafLyy1AUfzSkbuZ/nX6hed8T
+        cfzsfBxi4bN4JOkJcA77FpXDecX/GDwzRN+yfwNs3+0=
+        -----END PRIVATE KEY-----
+      table:
+      - fastly_logs
+      user:
+      - fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/65/logging/bigquery
+    method: POST
+  response:
+    body: '{"dataset":"fastly_log_test","format":"{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl,
+      \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state,
+      \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}","format_version":"2","name":"test-bigquery","placement":"waf_debug","project_id":"example-fastly-log","secret_key":"-----BEGIN
+      PRIVATE KEY-----\nMIICXAIBAAKBgQCukSu6ece/5jlgnNiLK7mIxJuLLeZ1FI/rn0PK8XTO+vSZjV+o\nvXpiSiXavXv2XhQymAf/tOpDV+uBxIzM3E1wyQ2qUxFjZ1zJHqBlmK+QJeg7pKmD\ngVQrzdtfUYGTlpizMiucWyYJYHNdfIkoD9N+wSw/cM/kxHa8fYtGsN3M7wIDAQAB\nAoGAOXiBtPqy0HKzISOCBw92HZjcvI13+cOzPhdI8l9b3WixbnwkqiD3UbSnkcQg\nM5P1glKbD4w4M8OWPTrAQBGnTJa2iA7z9IqTGL7dwhVnQ04NYq14CpPs+XCKwOxK\nO0gEjgbjlPNyE3OsMNBFMB5rnsVEI8uUukBmm/h6l8x7HUECQQDCeatYbfZZ8ra3\ntwTCmuc4qEXMzLhxBq7Ogyst90mC1fhfxFKiXwu0WVJqeGSFrK1upHPDfPJ3JN75\nCDskG9YzAkEA5csoxhmPblUOG3e/Vt8dzjPlk/ZTgxEOKPb86BUprsR2J1aJVHVH\nEoZjlAj5yo7iNSphp4cVXJd8I+ZsYSeaVQJBAJIF+5N9lcG6Tlop0SgyWbWgHDEH\n8uHjS7SCpxRvnsHf2gxGhGmpBkfX3dtWJNx+aQcv8kBx/Dlb9RR2irm1MSMCQCmM\nxICdWovuoTBiRJymlzMTuy032v3V9aN+lVg5i2HocBzIzugQlJtK5XJ89P2lPE20\nrhemmzw0v+OV5H7ktEkCQDqLUZyqnGHX6qV+8eJMafLyy1AUfzSkbuZ/nX6hed8T\ncfzsfBxi4bN4JOkJcA77FpXDecX/GDwzRN+yfwNs3+0=\n-----END
+      PRIVATE KEY-----\n","table":"fastly_logs","user":"fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"65","updated_at":"2019-06-06T22:10:49Z","response_condition":"","deleted_at":null,"template_suffix":null,"created_at":"2019-06-06T22:10:49Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 06 Jun 2019 22:10:49 GMT
+      Fastly-Ratelimit-Remaining:
+      - "998"
+      Fastly-Ratelimit-Reset:
+      - "1559862000"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3644-SJC
+      X-Timer:
+      - S1559859049.437688,VS0,VE453
+    status: 200 OK
+    code: 200

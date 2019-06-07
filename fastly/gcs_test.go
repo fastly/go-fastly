@@ -24,6 +24,7 @@ func TestClient_GCSs(t *testing.T) {
 			Path:            "/path",
 			Period:          12,
 			GzipLevel:       9,
+			FormatVersion:   2,
 			Format:          "format",
 			MessageType:     "blank",
 			TimestampFormat: "%Y",
@@ -71,6 +72,9 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if gcs.GzipLevel != 9 {
 		t.Errorf("bad gzip_level: %q", gcs.GzipLevel)
+	}
+	if gcs.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", gcs.FormatVersion)
 	}
 	if gcs.Format != "format" {
 		t.Errorf("bad format: %q", gcs.Format)
@@ -132,6 +136,9 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if gcs.GzipLevel != ngcs.GzipLevel {
 		t.Errorf("bad gzip_level: %q", gcs.GzipLevel)
+	}
+	if gcs.FormatVersion != ngcs.FormatVersion {
+		t.Errorf("bad format_version: %q", gcs.FormatVersion)
 	}
 	if gcs.Format != ngcs.Format {
 		t.Errorf("bad format: %q", gcs.Format)

@@ -16,6 +16,7 @@ type Papertrail struct {
 	Address           string     `mapstructure:"address"`
 	Port              uint       `mapstructure:"port"`
 	Format            string     `mapstructure:"format"`
+	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
@@ -76,6 +77,7 @@ type CreatePapertrailInput struct {
 	Name              string     `form:"name,omitempty"`
 	Address           string     `form:"address,omitempty"`
 	Port              uint       `form:"port,omitempty"`
+	FormatVersion     uint       `form:"format_version,omitempty"`
 	Format            string     `form:"format,omitempty"`
 	ResponseCondition string     `form:"response_condition,omitempty"`
 	CreatedAt         *time.Time `form:"created_at,omitempty"`
@@ -158,6 +160,7 @@ type UpdatePapertrailInput struct {
 	NewName           string     `form:"name,omitempty"`
 	Address           string     `form:"address,omitempty"`
 	Port              uint       `form:"port,omitempty"`
+	FormatVersion     uint       `form:"format_version,omitempty"`
 	Format            string     `form:"format,omitempty"`
 	ResponseCondition string     `form:"response_condition,omitempty"`
 	CreatedAt         *time.Time `form:"created_at,omitempty"`

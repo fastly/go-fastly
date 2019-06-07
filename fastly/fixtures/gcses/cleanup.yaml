@@ -10,12 +10,12 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/logging/gcs/test-gcs
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/logging/gcs/test-gcs
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-gcs, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 24 }''"}'
+      version =\u003e 67 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 17:19:59 GMT
+      - Thu, 06 Jun 2019 22:12:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "987"
+      - "983"
       Fastly-Ratelimit-Reset:
-      - "1557424800"
+      - "1559862000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3640-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3624-SJC
       X-Timer:
-      - S1557422399.907492,VS0,VE167
+      - S1559859154.540010,VS0,VE161
     status: 404 Not Found
     code: 404
 - request:
@@ -56,12 +56,12 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/logging/gcs/new-test-gcs
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/logging/gcs/new-test-gcs
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-gcs, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 24 }''"}'
+      version =\u003e 67 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -70,11 +70,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 17:19:59 GMT
+      - Thu, 06 Jun 2019 22:12:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "986"
+      - "982"
       Fastly-Ratelimit-Reset:
-      - "1557424800"
+      - "1559862000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -89,8 +89,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3640-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3624-SJC
       X-Timer:
-      - S1557422399.083442,VS0,VE182
+      - S1559859154.713609,VS0,VE164
     status: 404 Not Found
     code: 404
