@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 const (
@@ -55,6 +56,9 @@ type RequestSetting struct {
 	GeoHeaders       bool                 `mapstructure:"geo_headers"`
 	DefaultHost      string               `mapstructure:"default_host"`
 	RequestCondition string               `mapstructure:"request_condition"`
+	CreatedAt        *time.Time           `mapstructure:"created_at"`
+	UpdatedAt        *time.Time           `mapstructure:"updated_at"`
+	DeletedAt        *time.Time           `mapstructure:"deleted_at"`
 }
 
 // requestSettingsByName is a sortable list of request settings.
