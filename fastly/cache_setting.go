@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 const (
@@ -30,6 +31,9 @@ type CacheSetting struct {
 	TTL            uint               `mapstructure:"ttl"`
 	StaleTTL       uint               `mapstructure:"stale_ttl"`
 	CacheCondition string             `mapstructure:"cache_condition"`
+	CreatedAt      *time.Time         `mapstructure:"created_at"`
+	UpdatedAt      *time.Time         `mapstructure:"updated_at"`
+	DeletedAt      *time.Time         `mapstructure:"deleted_at"`
 }
 
 // cacheSettingsByName is a sortable list of cache settings.
