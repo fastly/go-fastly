@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // ResponseObject represents a response object response from the Fastly API.
@@ -11,13 +12,16 @@ type ResponseObject struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name             string `mapstructure:"name"`
-	Status           uint   `mapstructure:"status"`
-	Response         string `mapstructure:"response"`
-	Content          string `mapstructure:"content"`
-	ContentType      string `mapstructure:"content_type"`
-	RequestCondition string `mapstructure:"request_condition"`
-	CacheCondition   string `mapstructure:"cache_condition"`
+	Name             string     `mapstructure:"name"`
+	Status           uint       `mapstructure:"status"`
+	Response         string     `mapstructure:"response"`
+	Content          string     `mapstructure:"content"`
+	ContentType      string     `mapstructure:"content_type"`
+	RequestCondition string     `mapstructure:"request_condition"`
+	CacheCondition   string     `mapstructure:"cache_condition"`
+	CreatedAt        *time.Time `mapstructure:"created_at"`
+	UpdatedAt        *time.Time `mapstructure:"updated_at"`
+	DeletedAt        *time.Time `mapstructure:"deleted_at"`
 }
 
 // responseObjectsByName is a sortable list of response objects.
