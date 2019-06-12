@@ -68,15 +68,15 @@ func TestClient_Services(t *testing.T) {
 		t.Errorf("bad comment: %q (%q)", s.Comment, ns.Comment)
 	}
 
-	if ns.CreatedAt == "" {
+	if ns.CreatedAt == nil {
 		t.Errorf("Bad created at: empty")
 	}
 
-	if ns.UpdatedAt == "" {
+	if ns.UpdatedAt == nil {
 		t.Errorf("Bad updated at: empty")
 	}
 
-	if ns.DeletedAt != "" {
+	if ns.DeletedAt != nil {
 		t.Errorf("Bad deleted at: %s", ns.DeletedAt)
 	}
 
