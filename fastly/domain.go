@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // Domain represents the the domain name Fastly will serve content for.
@@ -11,8 +12,11 @@ type Domain struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name    string `mapstructure:"name"`
-	Comment string `mapstructure:"comment"`
+	Name      string     `mapstructure:"name"`
+	Comment   string     `mapstructure:"comment"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // domainsByName is a sortable list of backends.
