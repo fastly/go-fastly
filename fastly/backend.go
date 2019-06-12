@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // Backend represents a backend response from the Fastly API.
@@ -11,32 +12,35 @@ type Backend struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name                string   `mapstructure:"name"`
-	Comment             string   `mapstructure:"comment"`
-	Address             string   `mapstructure:"address"`
-	Port                uint     `mapstructure:"port"`
-	ConnectTimeout      uint     `mapstructure:"connect_timeout"`
-	MaxConn             uint     `mapstructure:"max_conn"`
-	ErrorThreshold      uint     `mapstructure:"error_threshold"`
-	FirstByteTimeout    uint     `mapstructure:"first_byte_timeout"`
-	BetweenBytesTimeout uint     `mapstructure:"between_bytes_timeout"`
-	AutoLoadbalance     bool     `mapstructure:"auto_loadbalance"`
-	Weight              uint     `mapstructure:"weight"`
-	RequestCondition    string   `mapstructure:"request_condition"`
-	HealthCheck         string   `mapstructure:"healthcheck"`
-	Hostname            string   `mapstructure:"hostname"`
-	Shield              string   `mapstructure:"shield"`
-	UseSSL              bool     `mapstructure:"use_ssl"`
-	SSLCheckCert        bool     `mapstructure:"ssl_check_cert"`
-	SSLCACert           string   `mapstructure:"ssl_ca_cert"`
-	SSLClientCert       string   `mapstructure:"ssl_client_cert"`
-	SSLClientKey        string   `mapstructure:"ssl_client_key"`
-	SSLHostname         string   `mapstructure:"ssl_hostname"`
-	SSLCertHostname     string   `mapstructure:"ssl_cert_hostname"`
-	SSLSNIHostname      string   `mapstructure:"ssl_sni_hostname"`
-	MinTLSVersion       string   `mapstructure:"min_tls_version"`
-	MaxTLSVersion       string   `mapstructure:"max_tls_version"`
-	SSLCiphers          []string `mapstructure:"ssl_ciphers"`
+	Name                string     `mapstructure:"name"`
+	Comment             string     `mapstructure:"comment"`
+	Address             string     `mapstructure:"address"`
+	Port                uint       `mapstructure:"port"`
+	ConnectTimeout      uint       `mapstructure:"connect_timeout"`
+	MaxConn             uint       `mapstructure:"max_conn"`
+	ErrorThreshold      uint       `mapstructure:"error_threshold"`
+	FirstByteTimeout    uint       `mapstructure:"first_byte_timeout"`
+	BetweenBytesTimeout uint       `mapstructure:"between_bytes_timeout"`
+	AutoLoadbalance     bool       `mapstructure:"auto_loadbalance"`
+	Weight              uint       `mapstructure:"weight"`
+	RequestCondition    string     `mapstructure:"request_condition"`
+	HealthCheck         string     `mapstructure:"healthcheck"`
+	Hostname            string     `mapstructure:"hostname"`
+	Shield              string     `mapstructure:"shield"`
+	UseSSL              bool       `mapstructure:"use_ssl"`
+	SSLCheckCert        bool       `mapstructure:"ssl_check_cert"`
+	SSLCACert           string     `mapstructure:"ssl_ca_cert"`
+	SSLClientCert       string     `mapstructure:"ssl_client_cert"`
+	SSLClientKey        string     `mapstructure:"ssl_client_key"`
+	SSLHostname         string     `mapstructure:"ssl_hostname"`
+	SSLCertHostname     string     `mapstructure:"ssl_cert_hostname"`
+	SSLSNIHostname      string     `mapstructure:"ssl_sni_hostname"`
+	MinTLSVersion       string     `mapstructure:"min_tls_version"`
+	MaxTLSVersion       string     `mapstructure:"max_tls_version"`
+	SSLCiphers          []string   `mapstructure:"ssl_ciphers"`
+	CreatedAt           *time.Time `mapstructure:"created_at"`
+	UpdatedAt           *time.Time `mapstructure:"updated_at"`
+	DeletedAt           *time.Time `mapstructure:"deleted_at"`
 }
 
 // backendsByName is a sortable list of backends.
