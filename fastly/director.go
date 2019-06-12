@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 const (
@@ -28,17 +29,16 @@ type Director struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name     string       `mapstructure:"name"`
-	Comment  string       `mapstructure:"comment"`
-	Shield   string       `mapstructure:"shield"`
-	Quorum   uint         `mapstructure:"quorum"`
-	Type     DirectorType `mapstructure:"type"`
-	Retries  uint         `mapstructure:"retries"`
-	Capacity uint         `mapstructure:"capacity"`
-
-	DeletedAt string `mapstructure:"deleted_at"`
-	CreatedAt string `mapstructure:"created_at"`
-	UpdatedAt string `mapstructure:"updated_at"`
+	Name      string       `mapstructure:"name"`
+	Comment   string       `mapstructure:"comment"`
+	Shield    string       `mapstructure:"shield"`
+	Quorum    uint         `mapstructure:"quorum"`
+	Type      DirectorType `mapstructure:"type"`
+	Retries   uint         `mapstructure:"retries"`
+	Capacity  uint         `mapstructure:"capacity"`
+	CreatedAt *time.Time   `mapstructure:"created_at"`
+	UpdatedAt *time.Time   `mapstructure:"updated_at"`
+	DeletedAt *time.Time   `mapstructure:"deleted_at"`
 }
 
 // directorsByName is a sortable list of directors.
