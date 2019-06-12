@@ -13,7 +13,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/682/dictionary/6mJXuCi2Mf19uHRefZJZBg/info
     method: GET
   response:
-    body: '{"last_updated": "2016-05-03T16:11:41+00:00", "digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a", "item_count": 4}'
+    body: '{"last_updated": "2019-06-04 19:23:11", "digest": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a", "item_count": 4}'
     headers:
       Accept-Ranges:
       - bytes

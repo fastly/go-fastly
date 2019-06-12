@@ -20,8 +20,7 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	if !nd.LastUpdated.Equal(time.Date(2016, time.May, 3, 16, 11, 41, 0, time.UTC)) {
+	if !nd.LastUpdated.Equal(time.Date(2019, time.June, 4, 19, 23, 11, 0, time.UTC)) {
 		t.Errorf("bad last_updated: %v", nd.LastUpdated)
 	}
 	if nd.ItemCount != 4 {
