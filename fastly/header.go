@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 const (
@@ -66,6 +67,9 @@ type Header struct {
 	RequestCondition  string       `mapstructure:"request_condition"`
 	CacheCondition    string       `mapstructure:"cache_condition"`
 	ResponseCondition string       `mapstructure:"response_condition"`
+	CreatedAt         *time.Time   `mapstructure:"created_at"`
+	UpdatedAt         *time.Time   `mapstructure:"updated_at"`
+	DeletedAt         *time.Time   `mapstructure:"deleted_at"`
 }
 
 // headersByName is a sortable list of headers.

@@ -4,18 +4,18 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 type ACL struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name string `mapstructure:"name"`
-	ID   string `mapstructure:"id"`
-
-	DeletedAt string `mapstructure:"deleted_at"`
-	CreatedAt string `mapstructure:"created_at"`
-	UpdatedAt string `mapstructure:"updated_at"`
+	Name      string     `mapstructure:"name"`
+	ID        string     `mapstructure:"id"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // ACLsByName is a sortable list of ACLs.

@@ -4,33 +4,20 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // Dictionary represents a dictionary response from the Fastly API.
 type Dictionary struct {
-	// CreatedAt is the Time-stamp (GMT) when the dictionary was created.
-	CreatedAt string `mapstructure:"created_at"`
-
-	// DeletedAt is the Time-stamp (GMT) when the dictionary was deleted.
-	DeletedAt string `mapstructure:"deleted_at"`
-
-	// ID is the alphanumeric string identifying a dictionary.
-	ID string `mapstructure:"id"`
-
-	// Name is the name for the Dictionary.
-	Name string `mapstructure:"name"`
-
-	// ServiceID is the alphanumeric string identifying a service.
 	ServiceID string `mapstructure:"service_id"`
+	Version   int    `mapstructure:"version"`
 
-	// UpdatedAt is the Time-stamp (GMT) when the dictionary was updated.
-	UpdatedAt string `mapstructure:"updated_at"`
-
-	// Version is the current version of the service.
-	Version int `mapstructure:"version"`
-
-	// WriteOnly Determines if items in the dictionary are readable or not.
-	WriteOnly bool `mapstructure:"write_only"`
+	ID        string     `mapstructure:"id"`
+	Name      string     `mapstructure:"name"`
+	WriteOnly bool       `mapstructure:"write_only"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // dictionariesByName is a sortable list of dictionaries.

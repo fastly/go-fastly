@@ -3,21 +3,21 @@ package fastly
 import (
 	"fmt"
 	"sort"
+	"time"
 )
 
 type ACLEntry struct {
 	ServiceID string `mapstructure:"service_id"`
 	ACLID     string `mapstructure:"acl_id"`
 
-	ID      string `mapstructure:"id"`
-	IP      string `mapstructure:"ip"`
-	Subnet  string `mapstructure:"subnet"`
-	Negated bool   `mapstructure:"negated"`
-	Comment string `mapstructure:"comment"`
-
-	DeletedAt string `mapstructure:"deleted_at"`
-	CreatedAt string `mapstructure:"created_at"`
-	UpdatedAt string `mapstructure:"updated_at"`
+	ID        string     `mapstructure:"id"`
+	IP        string     `mapstructure:"ip"`
+	Subnet    string     `mapstructure:"subnet"`
+	Negated   bool       `mapstructure:"negated"`
+	Comment   string     `mapstructure:"comment"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // entriesById is a sortable list of ACL entries.

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // HealthCheck represents a health check response from the Fastly API.
@@ -11,18 +12,21 @@ type HealthCheck struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name             string `mapstructure:"name"`
-	Comment          string `mapstructure:"comment"`
-	Method           string `mapstructure:"method"`
-	Host             string `mapstructure:"host"`
-	Path             string `mapstructure:"path"`
-	HTTPVersion      string `mapstructure:"http_version"`
-	Timeout          uint   `mapstructure:"timeout"`
-	CheckInterval    uint   `mapstructure:"check_interval"`
-	ExpectedResponse uint   `mapstructure:"expected_response"`
-	Window           uint   `mapstructure:"window"`
-	Threshold        uint   `mapstructure:"threshold"`
-	Initial          uint   `mapstructure:"initial"`
+	Name             string     `mapstructure:"name"`
+	Comment          string     `mapstructure:"comment"`
+	Method           string     `mapstructure:"method"`
+	Host             string     `mapstructure:"host"`
+	Path             string     `mapstructure:"path"`
+	HTTPVersion      string     `mapstructure:"http_version"`
+	Timeout          uint       `mapstructure:"timeout"`
+	CheckInterval    uint       `mapstructure:"check_interval"`
+	ExpectedResponse uint       `mapstructure:"expected_response"`
+	Window           uint       `mapstructure:"window"`
+	Threshold        uint       `mapstructure:"threshold"`
+	Initial          uint       `mapstructure:"initial"`
+	CreatedAt        *time.Time `mapstructure:"created_at"`
+	UpdatedAt        *time.Time `mapstructure:"updated_at"`
+	DeletedAt        *time.Time `mapstructure:"deleted_at"`
 }
 
 // healthChecksByName is a sortable list of health checks.

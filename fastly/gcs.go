@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // GCS represents an GCS logging response from the Fastly API.
@@ -11,19 +12,22 @@ type GCS struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name              string `mapstructure:"name"`
-	Bucket            string `mapstructure:"bucket_name"`
-	User              string `mapstructure:"user"`
-	SecretKey         string `mapstructure:"secret_key"`
-	Path              string `mapstructure:"path"`
-	Period            uint   `mapstructure:"period"`
-	GzipLevel         uint8  `mapstructure:"gzip_level"`
-	Format            string `mapstructure:"format"`
-	FormatVersion     uint   `mapstructure:"format_version"`
-	MessageType       string `mapstructure:"message_type"`
-	ResponseCondition string `mapstructure:"response_condition"`
-	TimestampFormat   string `mapstructure:"timestamp_format"`
-	Placement         string `mapstructure:"placement"`
+	Name              string     `mapstructure:"name"`
+	Bucket            string     `mapstructure:"bucket_name"`
+	User              string     `mapstructure:"user"`
+	SecretKey         string     `mapstructure:"secret_key"`
+	Path              string     `mapstructure:"path"`
+	Period            uint       `mapstructure:"period"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	Format            string     `mapstructure:"format"`
+	FormatVersion     uint       `mapstructure:"format_version"`
+	MessageType       string     `mapstructure:"message_type"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Placement         string     `mapstructure:"placement"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	UpdatedAt         *time.Time `mapstructure:"updated_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // gcsesByName is a sortable list of gcses.

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // Gzip represents an Gzip logging response from the Fastly API.
@@ -11,10 +12,13 @@ type Gzip struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name           string `mapstructure:"name"`
-	ContentTypes   string `mapstructure:"content_types"`
-	Extensions     string `mapstructure:"extensions"`
-	CacheCondition string `mapstructure:"cache_condition"`
+	Name           string     `mapstructure:"name"`
+	ContentTypes   string     `mapstructure:"content_types"`
+	Extensions     string     `mapstructure:"extensions"`
+	CacheCondition string     `mapstructure:"cache_condition"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
 }
 
 // gzipsByName is a sortable list of gzips.

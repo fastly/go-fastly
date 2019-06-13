@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // Condition represents a condition response from the Fastly API.
@@ -11,11 +12,14 @@ type Condition struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name      string `mapstructure:"name"`
-	Comment   string `mapstructure:"comment"`
-	Statement string `mapstructure:"statement"`
-	Type      string `mapstructure:"type"`
-	Priority  int    `mapstructure:"priority"`
+	Name      string     `mapstructure:"name"`
+	Comment   string     `mapstructure:"comment"`
+	Statement string     `mapstructure:"statement"`
+	Type      string     `mapstructure:"type"`
+	Priority  int        `mapstructure:"priority"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // conditionsByName is a sortable list of conditions.

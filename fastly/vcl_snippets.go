@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 const (
@@ -43,33 +44,18 @@ type SnippetType string
 
 // Snippet is the Fastly Snippet object
 type Snippet struct {
-	// ServiceID is the ID of the Service to add the snippet to.
 	ServiceID string `mapstructure:"service_id"`
+	Version   int    `mapstructure:"version"`
 
-	// Version is the editable version of the service.
-	Version int `mapstructure:"version"`
-
-	// Name is the name for the snippet.
-	Name string `mapstructure:"name"`
-
-	// ID is the snippet ID
-	ID string `mapstructure:"id"`
-
-	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `mapstructure:"priority"`
-
-	// Dynamic sets the snippet version to regular (0) or dynamic (1).
-	Dynamic int `mapstructure:"dynamic"`
-
-	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `mapstructure:"content"`
-
-	// Type is the location in generated VCL where the snippet should be placed.
-	Type SnippetType `mapstructure:"type"`
-
-	DeletedAt string `mapstructure:"deleted_at"`
-	CreatedAt string `mapstructure:"created_at"`
-	UpdatedAt string `mapstructure:"updated_at"`
+	Name      string      `mapstructure:"name"`
+	ID        string      `mapstructure:"id"`
+	Priority  int         `mapstructure:"priority"`
+	Dynamic   int         `mapstructure:"dynamic"`
+	Content   string      `mapstructure:"content"`
+	Type      SnippetType `mapstructure:"type"`
+	CreatedAt *time.Time  `mapstructure:"created_at"`
+	UpdatedAt *time.Time  `mapstructure:"updated_at"`
+	DeletedAt *time.Time  `mapstructure:"deleted_at"`
 }
 
 // CreateSnippetInput is the input for CreateSnippet
@@ -186,17 +172,12 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 
 // DynamicSnippet is the object returned when updating or retrieving a Dynamic Snippet
 type DynamicSnippet struct {
-	// Service is the ID of the Service to add the snippet to.
 	ServiceID string `mapstructure:"service_id"`
+	ID        string `mapstructure:"snippet_id"`
 
-	// ID is the ID of the Snippet to modify
-	ID string `mapstructure:"snippet_id"`
-
-	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `mapstructure:"content"`
-
-	CreatedAt string `mapstructure:"created_at"`
-	UpdatedAt string `mapstructure:"updated_at"`
+	Content   string     `mapstructure:"content"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
 // UpdateDynamicSnippetInput is the input for UpdateDynamicSnippet

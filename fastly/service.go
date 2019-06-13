@@ -12,9 +12,9 @@ type Service struct {
 	Name          string     `mapstructure:"name"`
 	Comment       string     `mapstructure:"comment"`
 	CustomerID    string     `mapstructure:"customer_id"`
-	CreatedAt     string     `mapstructure:"created_at"`
-	UpdatedAt     string     `mapstructure:"updated_at"`
-	DeletedAt     string     `mapstructure:"deleted_at"`
+	CreatedAt     *time.Time `mapstructure:"created_at"`
+	UpdatedAt     *time.Time `mapstructure:"updated_at"`
+	DeletedAt     *time.Time `mapstructure:"deleted_at"`
 	ActiveVersion uint       `mapstructure:"version"`
 	Versions      []*Version `mapstructure:"versions"`
 }
@@ -27,6 +27,9 @@ type ServiceDetail struct {
 	ActiveVersion Version    `mapstructure:"active_version"`
 	Version       Version    `mapstructure:"version"`
 	Versions      []*Version `mapstructure:"versions"`
+	CreatedAt     *time.Time `mapstructure:"created_at"`
+	UpdatedAt     *time.Time `mapstructure:"updated_at"`
+	DeletedAt     *time.Time `mapstructure:"deleted_at"`
 }
 
 type ServiceDomain struct {
@@ -34,10 +37,10 @@ type ServiceDomain struct {
 	Version   int64      `mapstructure:"version"`
 	Name      string     `mapstructure:"name"`
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	ServiceID string     `mapstructure: "service_id"`
-	CreatedAt time.Time  `mapstructure: "created_at"`
+	ServiceID string     `mapstructure:"service_id"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
 	Comment   string     `mapstructure:"comment"`
-	UpdatedAt time.Time  `mapstructure:"updated_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 type ServiceDomainsList []*ServiceDomain
 

@@ -4,12 +4,14 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"github.com/google/jsonapi"
 	"io"
 	"io/ioutil"
 	"net/http"
 	"reflect"
 	"strconv"
+	"time"
+
+	"github.com/google/jsonapi"
 )
 
 // Events represents an event_logs item response from the Fastly API.
@@ -22,7 +24,7 @@ type Event struct {
 	Metadata    map[string]interface{} `jsonapi:"attr,metadata,omitempty"`
 	ServiceID   string                 `jsonapi:"attr,service_id"`
 	UserID      string                 `jsonapi:"attr,user_id"`
-	CreatedAt   string                 `jsonapi:"attr,created_at"`
+	CreatedAt   *time.Time             `jsonapi:"attr,created_at,iso8601"`
 	Admin       bool                   `jsonapi:"attr,admin"`
 }
 

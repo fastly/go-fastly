@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 // VCL represents a response about VCL from the Fastly API.
@@ -11,9 +12,12 @@ type VCL struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	Name    string `mapstructure:"name"`
-	Main    bool   `mapstructure:"main"`
-	Content string `mapstructure:"content"`
+	Name      string     `mapstructure:"name"`
+	Main      bool       `mapstructure:"main"`
+	Content   string     `mapstructure:"content"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // vclsByName is a sortable list of VCLs.
