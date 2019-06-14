@@ -16,6 +16,7 @@ type Backend struct {
 	Comment             string     `mapstructure:"comment"`
 	Address             string     `mapstructure:"address"`
 	Port                uint       `mapstructure:"port"`
+	OverrideHost        string     `mapstructure:"override_host"`
 	ConnectTimeout      uint       `mapstructure:"connect_timeout"`
 	MaxConn             uint       `mapstructure:"max_conn"`
 	ErrorThreshold      uint       `mapstructure:"error_threshold"`
@@ -97,6 +98,7 @@ type CreateBackendInput struct {
 	Comment             string       `form:"comment,omitempty"`
 	Address             string       `form:"address,omitempty"`
 	Port                uint         `form:"port,omitempty"`
+	OverrideHost        string       `form:"override_host,omitempty"`
 	ConnectTimeout      uint         `form:"connect_timeout,omitempty"`
 	MaxConn             uint         `form:"max_conn,omitempty"`
 	ErrorThreshold      uint         `form:"error_threshold,omitempty"`
@@ -195,6 +197,7 @@ type UpdateBackendInput struct {
 	Comment             string       `form:"comment,omitempty"`
 	Address             string       `form:"address,omitempty"`
 	Port                uint         `form:"port,omitempty"`
+	OverrideHost        string       `form:"override_host,omitempty"`
 	ConnectTimeout      uint         `form:"connect_timeout,omitempty"`
 	MaxConn             uint         `form:"max_conn,omitempty"`
 	ErrorThreshold      uint         `form:"error_threshold,omitempty"`

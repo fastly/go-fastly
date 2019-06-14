@@ -21,6 +21,7 @@ func TestClient_Backends(t *testing.T) {
 			Address:        "integ-test.go-fastly.com",
 			Port:           1234,
 			ConnectTimeout: 1500,
+			OverrideHost:   "origin.example.com",
 		})
 	})
 	if err != nil {
@@ -55,6 +56,9 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if b.ConnectTimeout != 1500 {
 		t.Errorf("bad connect_timeout: %d", b.ConnectTimeout)
+	}
+	if b.OverrideHost != "origin.example.com" {
+		t.Errorf("bad override_host: %q", b.OverrideHost)
 	}
 
 	// List
@@ -96,15 +100,19 @@ func TestClient_Backends(t *testing.T) {
 	if b.ConnectTimeout != nb.ConnectTimeout {
 		t.Errorf("bad connect_timeout: %q (%q)", b.ConnectTimeout, nb.ConnectTimeout)
 	}
+	if b.OverrideHost != nb.OverrideHost {
+		t.Errorf("bad override_host: %q (%q)", b.OverrideHost, nb.OverrideHost)
+	}
 
 	// Update
 	var ub *Backend
 	record(t, "backends/update", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-backend",
-			NewName: "new-test-backend",
+			Service:      testServiceID,
+			Version:      tv.Number,
+			Name:         "test-backend",
+			NewName:      "new-test-backend",
+			OverrideHost: "www.example.com",
 		})
 	})
 	if err != nil {
@@ -112,6 +120,9 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if ub.Name != "new-test-backend" {
 		t.Errorf("bad name: %q", ub.Name)
+	}
+	if ub.OverrideHost != "www.example.com" {
+		t.Errorf("bad override_host: %q", ub.OverrideHost)
 	}
 
 	// Delete
