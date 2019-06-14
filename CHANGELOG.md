@@ -7,6 +7,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0] - 2019-06-14
+### Added
+- bigquery: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).
+- ftp: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).
+- gcs: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).
+- papertrail: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).
+- backend: Support for `override_host` field ([#120](https://github.com/fastly/go-fastly/pull/120)).
+- backend: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- cache_setting: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- condition: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- domain: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- gcs: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- gzip: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- header: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- health_check: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- request_setting: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- response_object: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- vcl: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- version: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+
+### Changed
+- bigquery: Function signature to list all of the BigQuery logging objects ([#97](https://github.com/fastly/go-fastly/pull/97)).
+- acl: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- acl_entry: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- dictionary: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- dictionary_item: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- director: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- event_logs: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- service: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+- vcl_snippets: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
+
 ## [0.4.3] - 2019-05-24
 ### Added
 - waf: Support for OWASP ([74c03ce](https://github.com/fastly/go-fastly/commit/74c03cec4549738bb1fc20fd881fbd9c750f6928), [cf4b60f](https://github.com/fastly/go-fastly/commit/cf4b60fa9e61358753b9cafa4481adc5977d8432), [cee4e1d](https://github.com/fastly/go-fastly/commit/cee4e1df35a27e507ef0809991fe8ffb462a94d4)).
@@ -69,7 +100,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v0.4.3...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/fastly/go-fastly/compare/v0.4.3...v1.0.0
 [0.4.3]: https://github.com/fastly/go-fastly/compare/v0.4.2...v0.4.3
 [0.4.2]: https://github.com/fastly/go-fastly/compare/v0.4.1...v0.4.2
 [0.4.1]: https://github.com/fastly/go-fastly/compare/v0.4.0...v0.4.1
