@@ -256,3 +256,31 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 }
+
+func TestClient_BatchUpdatDictionaryItem_validation(t *testing.T) {
+	var err error
+	err = testClient.BatchUpdateDictionaryItems(&BatchUpdateDictionaryItemsInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+	err = testClient.BatchUpdateDictionaryItems(&BatchUpdateDictionaryItemsInput{
+		Service:    "foo",
+		Dictionary: "",
+	})
+	if err != ErrMissingDictionary {
+		t.Errorf("bad error: %s", err)
+	}
+
+	tooMany := make([]BatchUpdateDictionaryItem, BatchUpdateMaximumItems+1)
+	err = testClient.BatchUpdateDictionaryItems(&BatchUpdateDictionaryItemsInput{
+		Service:    "foo",
+		Dictionary: "bar",
+		Items:      tooMany,
+	})
+	if err != ErrBatchUpdateMaximumItemsExceeded {
+		t.Errorf("bad error: %s", err)
+	}
+
+}
