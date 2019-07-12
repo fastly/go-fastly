@@ -2,46 +2,12 @@ package fastly
 
 import "testing"
 
-func createTestDictionary(t *testing.T) *Dictionary {
-	t.Parallel()
-
-	var err error
-	var tv *Version
-	record(t, "dictionary_items/version", func(c *Client) {
-		tv = testVersion(t, c)
-	})
-
-	var d *Dictionary
-	record(t, "dictionary_items/dictionary", func(c *Client) {
-		d, err = c.CreateDictionary(&CreateDictionaryInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test_dictionary",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return d
-}
-
-func deleteTestDictionary(d *Dictionary, t *testing.T) {
-	var err error
-	record(t, "dictionary_items/delete_dictionary", func(c *Client) {
-		err = c.DeleteDictionary(&DeleteDictionaryInput{
-			Service: d.ServiceID,
-			Version: d.Version,
-			Name:    "test_dictionary",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
 
 func TestClient_DictionaryItems(t *testing.T) {
-	td := createTestDictionary(t)
-	defer deleteTestDictionary(td, t)
+	tv := createTestVersion(t,"dictionary_items/version", testServiceID)
+
+	td := createTestDictionary(t, "dictionary_items/dictionary", testServiceID, tv.Number)
+	defer deleteTestDictionary(t, td, "dictionary_items/delete_dictionary")
 
 	// Create
 	var err error

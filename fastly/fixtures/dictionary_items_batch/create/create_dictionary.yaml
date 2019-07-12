@@ -1,0 +1,57 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: Service=3alzQnsw4J7Nz6xKMdaMF2&Version=2&name=test_dictionary_1562949843
+    form:
+      Service:
+      - 3alzQnsw4J7Nz6xKMdaMF2
+      Version:
+      - "2"
+      name:
+      - test_dictionary_1562949843
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - zvk45NN9y28SUfa29P9sMqm9PDax8doD
+      User-Agent:
+      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service/3alzQnsw4J7Nz6xKMdaMF2/version/2/dictionary
+    method: POST
+  response:
+    body: '{"name":"test_dictionary_1562949843","service_id":"3alzQnsw4J7Nz6xKMdaMF2","version":2,"updated_at":"2019-07-12T16:44:04Z","created_at":"2019-07-12T16:44:04Z","id":"4q0bga3ev2pgiACH7t5UgC","write_only":false,"deleted_at":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 12 Jul 2019 16:44:04 GMT
+      Fastly-Ratelimit-Remaining:
+      - "957"
+      Fastly-Ratelimit-Reset:
+      - "1562950800"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19245-LCY
+      X-Timer:
+      - S1562949844.901958,VS0,VE244
+    status: 200 OK
+    code: 200

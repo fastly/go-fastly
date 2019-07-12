@@ -162,6 +162,55 @@ type UpdateDictionaryItemInput struct {
 	ItemValue string `form:"item_value,omitempty"`
 }
 
+type PatchOperation string
+
+const (
+	Create PatchOperation = "create"
+	Update PatchOperation = "update"
+	Upsert PatchOperation = "upsert"
+	Delete PatchOperation = "delete"
+)
+
+type BatchModifyDictionaryItemsInput struct {
+	Service    string `json:"-,"`
+	Dictionary string `json:"-,"`
+
+	Items []BatchDictionaryItem `json:"items"`
+}
+
+type BatchDictionaryItem struct {
+
+
+	Operation PatchOperation `json:"op"`
+	ItemKey      string `json:"item_key"`
+	ItemValue string     `json:"item_value"`
+}
+
+func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
+
+	if i.Service == "" {
+		return ErrMissingService
+	}
+
+	if i.Dictionary == "" {
+		return ErrMissingDictionary
+	}
+
+	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.Service, i.Dictionary)
+	resp, err := c.PatchJSON(path, i, nil)
+	if err != nil {
+		return err
+	}
+
+	var batchModifyResult map[string]string
+	if err := decodeJSON(&batchModifyResult, resp.Body); err != nil {
+		return err
+	}
+
+	return nil
+}
+
+
 // UpdateDictionaryItem updates a specific dictionary item.
 func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.Service == "" {

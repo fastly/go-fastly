@@ -1,0 +1,49 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - zvk45NN9y28SUfa29P9sMqm9PDax8doD
+      User-Agent:
+      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service/3alzQnsw4J7Nz6xKMdaMF2/version/2/dictionary/test_dictionary_1562949843
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 12 Jul 2019 16:44:05 GMT
+      Fastly-Ratelimit-Remaining:
+      - "955"
+      Fastly-Ratelimit-Reset:
+      - "1562950800"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
+      X-Timer:
+      - S1562949845.246819,VS0,VE294
+    status: 200 OK
+    code: 200

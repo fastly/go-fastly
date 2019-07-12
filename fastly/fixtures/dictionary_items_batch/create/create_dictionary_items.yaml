@@ -1,0 +1,53 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: '{"items":[{"op":"create","item_key":"key1","item_value":"val1"},{"op":"create","item_key":"key2","item_value":"val2"}]}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      Fastly-Key:
+      - zvk45NN9y28SUfa29P9sMqm9PDax8doD
+      User-Agent:
+      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service/3alzQnsw4J7Nz6xKMdaMF2/dictionary/4q0bga3ev2pgiACH7t5UgC/items
+    method: PATCH
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 12 Jul 2019 16:44:04 GMT
+      Fastly-Ratelimit-Remaining:
+      - "956"
+      Fastly-Ratelimit-Reset:
+      - "1562950800"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19245-LCY
+      X-Timer:
+      - S1562949844.149353,VS0,VE605
+    status: 200 OK
+    code: 200
