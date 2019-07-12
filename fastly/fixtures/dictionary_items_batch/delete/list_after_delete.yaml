@@ -7,7 +7,7 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - zvk45NN9y28SUfa29P9sMqm9PDax8doD
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
     url: https://api.fastly.com/service/4K6WUUxrfTR8urIIFAUhpy/dictionary/2bajlozWQ6MUdGFWoRXVpX/items

@@ -11,7 +11,7 @@ interactions:
       Content-Type:
       - application/json
       Fastly-Key:
-      - zvk45NN9y28SUfa29P9sMqm9PDax8doD
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
     url: https://api.fastly.com/service/39T7Vjp7fNrix3vVv2ymFj/dictionary/4ISQpb704RsyST4If2wji3/items
