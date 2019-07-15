@@ -1,8 +1,10 @@
 package fastly
 
 import (
+	"fmt"
 	"sync"
 	"testing"
+	"time"
 
 	"github.com/dnaeon/go-vcr/recorder"
 )
@@ -19,20 +21,6 @@ var testServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.
 var testVersionLock sync.Mutex
-
-// testVersion is a new, blank version suitable for testing.
-func testVersion(t *testing.T, c *Client) *Version {
-	testVersionLock.Lock()
-	defer testVersionLock.Unlock()
-
-	v, err := c.CreateVersion(&CreateVersionInput{
-		Service: testServiceID,
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return v
-}
 
 func record(t *testing.T, fixture string, f func(*Client)) {
 	r, err := recorder.New("fixtures/" + fixture)
@@ -66,6 +54,106 @@ func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 	client.client.HTTPClient.Transport = r
 
 	f(client)
+}
+
+func createTestService(t *testing.T, serviceFixture string) *Service {
+
+	var err error
+	var service *Service
+
+	record(t, serviceFixture, func(client *Client) {
+		service, err = client.CreateService(&CreateServiceInput{
+			Name: fmt.Sprintf("test_service_%d", time.Now().Unix()),
+			Comment: "go-fastly client test",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return service
+}
+
+// testVersion is a new, blank version suitable for testing.
+func testVersion(t *testing.T, c *Client) *Version {
+	testVersionLock.Lock()
+	defer testVersionLock.Unlock()
+
+	v, err := c.CreateVersion(&CreateVersionInput{
+		Service: testServiceID,
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return v
+}
+
+func createTestVersion(t *testing.T, versionFixture string, serviceId string) *Version {
+
+	var err error
+	var version *Version
+
+	record(t, versionFixture, func(client *Client) {
+		testVersionLock.Lock()
+		defer testVersionLock.Unlock()
+
+		version, err = client.CreateVersion(&CreateVersionInput{
+			Service: serviceId,
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+	})
+
+	return version
+}
+
+func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId string, version int) *Dictionary {
+
+	var err error
+	var dictionary *Dictionary
+
+	record(t, dictionaryFixture, func(client *Client) {
+		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
+			Service: serviceId,
+			Version: version,
+			Name: fmt.Sprintf("test_dictionary_%d", time.Now().Unix()),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return dictionary
+}
+
+func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture string) {
+
+	var err error
+
+	record(t, deleteFixture, func(client *Client) {
+		err = client.DeleteDictionary(&DeleteDictionaryInput{
+			Service: dictionary.ServiceID,
+			Version: dictionary.Version,
+			Name:    dictionary.Name,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func deleteTestService(t *testing.T, cleanupFixture string, serviceId string){
+
+	var err error
+
+	record(t, cleanupFixture, func(client *Client) {
+		err = client.DeleteService(&DeleteServiceInput{
+			ID: serviceId,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
 }
 
 // privatekey returns a ASN.1 DER encoded key suitable for testing.
