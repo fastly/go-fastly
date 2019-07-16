@@ -17,9 +17,9 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	// Create
 	var err error
-	var createDictionaryItem *DictionaryItem
+	var createdDictionaryItem *DictionaryItem
 	record(t, fixtureBase+"create", func(c *Client) {
-		createDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
+		createdDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
 			Service:    testService.ID,
 			Dictionary: testDictionary.ID,
 			ItemKey:    "test-dictionary-item",
@@ -41,11 +41,11 @@ func TestClient_DictionaryItems(t *testing.T) {
 		})
 	}()
 
-	if createDictionaryItem.ItemKey != "test-dictionary-item" {
-		t.Errorf("bad item_key: %q", createDictionaryItem.ItemKey)
+	if createdDictionaryItem.ItemKey != "test-dictionary-item" {
+		t.Errorf("bad item_key: %q", createdDictionaryItem.ItemKey)
 	}
-	if createDictionaryItem.ItemValue != "value" {
-		t.Errorf("bad item_value: %q", createDictionaryItem.ItemValue)
+	if createdDictionaryItem.ItemValue != "value" {
+		t.Errorf("bad item_value: %q", createdDictionaryItem.ItemValue)
 	}
 
 	// List
