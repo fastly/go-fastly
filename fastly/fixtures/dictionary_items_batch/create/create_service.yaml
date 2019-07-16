@@ -3,12 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: comment=go-fastly+client+test&name=test_service_1562949842
+    body: comment=go-fastly+client+test&name=test_service_BatchModifyDictionaryItems_Create
     form:
       comment:
       - go-fastly client test
       name:
-      - test_service_1562949842
+      - test_service_BatchModifyDictionaryItems_Create
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -19,7 +19,7 @@ interactions:
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_1562949842","versions":[{"service_id":"3alzQnsw4J7Nz6xKMdaMF2","staging":false,"active":false,"comment":"","locked":false,"deployed":false,"deleted_at":null,"testing":false,"created_at":"2019-07-12T16:44:03Z","updated_at":"2019-07-12T16:44:03Z","number":1}],"updated_at":"2019-07-12T16:44:03Z","id":"3alzQnsw4J7Nz6xKMdaMF2","created_at":"2019-07-12T16:44:03Z","publish_key":"c7a316f731dfbb385f3bfc01353f77afa57d290d","deleted_at":null}'
+    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_BatchModifyDictionaryItems_Create","publish_key":"0362bac8e489860773693155aa65fc5642e5e946","id":"3TnEEqlzShR8CjRaAaMBPG","versions":[{"testing":false,"comment":"","service_id":"3TnEEqlzShR8CjRaAaMBPG","locked":false,"deleted_at":null,"updated_at":"2019-07-16T11:30:12Z","staging":false,"deployed":false,"active":false,"number":1,"created_at":"2019-07-16T11:30:12Z"}],"deleted_at":null,"updated_at":"2019-07-16T11:30:12Z","created_at":"2019-07-16T11:30:12Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 12 Jul 2019 16:44:03 GMT
+      - Tue, 16 Jul 2019 11:30:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "959"
+      - "963"
       Fastly-Ratelimit-Reset:
-      - "1562950800"
+      - "1563278400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,6 +50,6 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1562949843.788774,VS0,VE500
+      - S1563276612.053706,VS0,VE537
     status: 200 OK
     code: 200

@@ -9,14 +9,15 @@ import (
 func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 
 	fixtureBase := "dictionary_items_batch/create/"
+	nameSuffix := "BatchModifyDictionaryItems_Create"
 
 	// Given: a test service with a dictionary and a batch of create operations,
-	testService := createTestService(t, fixtureBase + "create_service")
+	testService := createTestService(t, fixtureBase + "create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase +"delete_service", testService.ID)
 
 	testVersion := createTestVersion(t,fixtureBase + "create_version", testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number)
+	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase + "delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {
@@ -85,14 +86,15 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	fixtureBase := "dictionary_items_batch/delete/"
+	nameSuffix := "BatchModifyDictionaryItems_Delete"
 
 	// Given: a test service with a dictionary and dictionary items,
-	testService := createTestService(t, fixtureBase + "create_service")
+	testService := createTestService(t, fixtureBase + "create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase + "delete_service", testService.ID)
 
 	testVersion := createTestVersion(t,fixtureBase + "create_version", testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number)
+	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase + "delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {
@@ -164,14 +166,15 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	fixtureBase := "dictionary_items_batch/update/"
+	nameSuffix := "BatchModifyDictionaryItems_Update"
 
 	// Given: a test service with a dictionary and dictionary items,
-	testService := createTestService(t, fixtureBase + "create_service")
+	testService := createTestService(t, fixtureBase + "create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase + "delete_service", testService.ID)
 
 	testVersion := createTestVersion(t,fixtureBase + "create_version", testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number)
+	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase + "delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {
@@ -275,14 +278,15 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	fixtureBase := "dictionary_items_batch/upsert/"
+	nameSuffix := "BatchModifyDictionaryItems_Upsert"
 
 	// Given: a test service with a dictionary and dictionary items,
-	testService := createTestService(t, fixtureBase + "create_service")
+	testService := createTestService(t, fixtureBase + "create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase + "delete_service", testService.ID)
 
 	testVersion := createTestVersion(t,fixtureBase + "create_version", testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number)
+	testDictionary := createTestDictionary(t, fixtureBase + "create_dictionary", testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase + "delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {

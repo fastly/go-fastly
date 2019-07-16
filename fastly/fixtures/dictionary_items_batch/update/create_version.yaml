@@ -3,10 +3,10 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=1AH66RPYdxhlCNijKcEMl7
+    body: Service=6q3QkVUjl4q6L3UwavMQ91
     form:
       Service:
-      - 1AH66RPYdxhlCNijKcEMl7
+      - 6q3QkVUjl4q6L3UwavMQ91
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -14,10 +14,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/1AH66RPYdxhlCNijKcEMl7/version
+    url: https://api.fastly.com/service/6q3QkVUjl4q6L3UwavMQ91/version
     method: POST
   response:
-    body: '{"service_id":"1AH66RPYdxhlCNijKcEMl7","number":2}'
+    body: '{"service_id":"6q3QkVUjl4q6L3UwavMQ91","number":2}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 12 Jul 2019 16:44:08 GMT
+      - Tue, 16 Jul 2019 11:30:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "945"
+      - "949"
       Fastly-Ratelimit-Reset:
-      - "1562950800"
+      - "1563278400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,8 +46,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19245-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1562949849.561186,VS0,VE296
+      - S1563276618.948535,VS0,VE314
     status: 200 OK
     code: 200

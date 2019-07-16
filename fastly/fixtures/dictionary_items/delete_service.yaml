@@ -3,19 +3,15 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: '{"items":[{"op":"delete","item_key":"key2","item_value":"val2"}]}'
+    body: ""
     form: {}
     headers:
-      Accept:
-      - application/json
-      Content-Type:
-      - application/json
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/7BETwKaHgBudYYud5D8kUv/dictionary/1d3q6SOskD5WKWbHAH3OXL/items
-    method: PATCH
+    url: https://api.fastly.com/service/17Cozi1mqUCWuTgyYvipeW
+    method: DELETE
   response:
     body: '{"status":"ok"}'
     headers:
@@ -27,9 +23,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:16 GMT
+      - Tue, 16 Jul 2019 11:30:26 GMT
       Fastly-Ratelimit-Remaining:
-      - "953"
+      - "928"
       Fastly-Ratelimit-Reset:
       - "1563278400"
       Status:
@@ -48,6 +44,6 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1563276616.333307,VS0,VE220
+      - S1563276626.927372,VS0,VE273
     status: 200 OK
     code: 200

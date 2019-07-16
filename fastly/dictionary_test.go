@@ -5,18 +5,17 @@ import "testing"
 func TestClient_Dictionaries(t *testing.T) {
 	t.Parallel()
 
-	var err error
-	var tv *Version
-	record(t, "dictionaries/version", func(c *Client) {
-		tv = testVersion(t, c)
-	})
+	fixtureBase := "dictionaries/"
+
+	testVersion := createTestVersion(t, fixtureBase+"version", testServiceID)
 
 	// Create
+	var err error
 	var d *Dictionary
-	record(t, "dictionaries/create", func(c *Client) {
+	record(t, fixtureBase+"create", func(c *Client) {
 		d, err = c.CreateDictionary(&CreateDictionaryInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "test_dictionary",
 		})
 	})
@@ -26,16 +25,16 @@ func TestClient_Dictionaries(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "dictionaries/cleanup", func(c *Client) {
+		record(t, fixtureBase+"cleanup", func(c *Client) {
 			c.DeleteDictionary(&DeleteDictionaryInput{
 				Service: testServiceID,
-				Version: tv.Number,
+				Version: testVersion.Number,
 				Name:    "test_dictionary",
 			})
 
 			c.DeleteDictionary(&DeleteDictionaryInput{
 				Service: testServiceID,
-				Version: tv.Number,
+				Version: testVersion.Number,
 				Name:    "new_test_dictionary",
 			})
 		})
@@ -47,10 +46,10 @@ func TestClient_Dictionaries(t *testing.T) {
 
 	// List
 	var ds []*Dictionary
-	record(t, "dictionaries/list", func(c *Client) {
+	record(t, fixtureBase+"list", func(c *Client) {
 		ds, err = c.ListDictionaries(&ListDictionariesInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 		})
 	})
 	if err != nil {
@@ -62,10 +61,10 @@ func TestClient_Dictionaries(t *testing.T) {
 
 	// Get
 	var nd *Dictionary
-	record(t, "dictionaries/get", func(c *Client) {
+	record(t, fixtureBase+"get", func(c *Client) {
 		nd, err = c.GetDictionary(&GetDictionaryInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "test_dictionary",
 		})
 	})
@@ -78,10 +77,10 @@ func TestClient_Dictionaries(t *testing.T) {
 
 	// Update
 	var ud *Dictionary
-	record(t, "dictionaries/update", func(c *Client) {
+	record(t, fixtureBase+"update", func(c *Client) {
 		ud, err = c.UpdateDictionary(&UpdateDictionaryInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "test_dictionary",
 			NewName: "new_test_dictionary",
 		})
@@ -94,10 +93,10 @@ func TestClient_Dictionaries(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "dictionaries/delete", func(c *Client) {
+	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteDictionary(&DeleteDictionaryInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "new_test_dictionary",
 		})
 	})

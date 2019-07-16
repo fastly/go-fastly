@@ -3,10 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=1wd7ccxeYiH5A8RAtwWKLG
+    body: comment=go-fastly+client+test&name=test_service_DictionaryItems
     form:
-      Service:
-      - 1wd7ccxeYiH5A8RAtwWKLG
+      comment:
+      - go-fastly client test
+      name:
+      - test_service_DictionaryItems
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -14,10 +16,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/1wd7ccxeYiH5A8RAtwWKLG/version
+    url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"service_id":"1wd7ccxeYiH5A8RAtwWKLG","number":2}'
+    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_DictionaryItems","deleted_at":null,"publish_key":"3030b46cf2bc8d2e52401f45b676c3f03c45c3d9","created_at":"2019-07-16T11:30:22Z","id":"17Cozi1mqUCWuTgyYvipeW","updated_at":"2019-07-16T11:30:22Z","versions":[{"updated_at":"2019-07-16T11:30:22Z","testing":false,"created_at":"2019-07-16T11:30:22Z","number":1,"service_id":"17Cozi1mqUCWuTgyYvipeW","comment":"","active":false,"staging":false,"deployed":false,"deleted_at":null,"locked":false}]}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,9 +29,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:20 GMT
+      - Tue, 16 Jul 2019 11:30:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "942"
+      - "936"
       Fastly-Ratelimit-Reset:
       - "1563278400"
       Status:
@@ -48,6 +50,6 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1563276620.379192,VS0,VE376
+      - S1563276623.761390,VS0,VE274
     status: 200 OK
     code: 200

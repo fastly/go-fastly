@@ -2,20 +2,26 @@ package fastly
 
 import "testing"
 
-
 func TestClient_DictionaryItems(t *testing.T) {
-	tv := createTestVersion(t,"dictionary_items/version", testServiceID)
 
-	td := createTestDictionary(t, "dictionary_items/dictionary", testServiceID, tv.Number)
-	defer deleteTestDictionary(t, td, "dictionary_items/delete_dictionary")
+	fixtureBase := "dictionary_items/"
+	nameSuffix := "DictionaryItems"
+
+	testService := createTestService(t, fixtureBase + "create_service", nameSuffix)
+	defer deleteTestService(t, fixtureBase +"delete_service", testService.ID)
+
+	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
+
+	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", testService.ID, testVersion.Number, nameSuffix)
+	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	// Create
 	var err error
-	var d *DictionaryItem
-	record(t, "dictionary_items/create", func(c *Client) {
-		d, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
-			Service:    testServiceID,
-			Dictionary: td.ID,
+	var createDictionaryItem *DictionaryItem
+	record(t, fixtureBase+"create", func(c *Client) {
+		createDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
+			Service:    testService.ID,
+			Dictionary: testDictionary.ID,
 			ItemKey:    "test-dictionary-item",
 			ItemValue:  "value",
 		})
@@ -26,62 +32,62 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "dictionary_items/cleanup", func(c *Client) {
+		record(t, fixtureBase+"cleanup", func(c *Client) {
 			c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
-				Service:    testServiceID,
-				Dictionary: td.ID,
+				Service:    testService.ID,
+				Dictionary: testDictionary.ID,
 				ItemKey:    "test-dictionary-item",
 			})
 		})
 	}()
 
-	if d.ItemKey != "test-dictionary-item" {
-		t.Errorf("bad item_key: %q", d.ItemKey)
+	if createDictionaryItem.ItemKey != "test-dictionary-item" {
+		t.Errorf("bad item_key: %q", createDictionaryItem.ItemKey)
 	}
-	if d.ItemValue != "value" {
-		t.Errorf("bad item_value: %q", d.ItemValue)
+	if createDictionaryItem.ItemValue != "value" {
+		t.Errorf("bad item_value: %q", createDictionaryItem.ItemValue)
 	}
 
 	// List
-	var ds []*DictionaryItem
-	record(t, "dictionary_items/list", func(c *Client) {
-		ds, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			Service:    testServiceID,
-			Dictionary: td.ID,
+	var dictionaryItems []*DictionaryItem
+	record(t, fixtureBase+"list", func(c *Client) {
+		dictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
+			Service:    testService.ID,
+			Dictionary: testDictionary.ID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(ds) < 1 {
-		t.Errorf("bad dictionary items: %v", ds)
+	if len(dictionaryItems) < 1 {
+		t.Errorf("bad dictionary items: %v", dictionaryItems)
 	}
 
 	// Get
-	var nd *DictionaryItem
-	record(t, "dictionary_items/get", func(c *Client) {
-		nd, err = c.GetDictionaryItem(&GetDictionaryItemInput{
-			Service:    testServiceID,
-			Dictionary: td.ID,
+	var retrievedDictionaryItem *DictionaryItem
+	record(t, fixtureBase+"get", func(c *Client) {
+		retrievedDictionaryItem, err = c.GetDictionaryItem(&GetDictionaryItemInput{
+			Service:    testService.ID,
+			Dictionary: testDictionary.ID,
 			ItemKey:    "test-dictionary-item",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if nd.ItemKey != "test-dictionary-item" {
-		t.Errorf("bad item_key: %q", nd.ItemKey)
+	if retrievedDictionaryItem.ItemKey != "test-dictionary-item" {
+		t.Errorf("bad item_key: %q", retrievedDictionaryItem.ItemKey)
 	}
-	if nd.ItemValue != "value" {
-		t.Errorf("bad item_value: %q", nd.ItemValue)
+	if retrievedDictionaryItem.ItemValue != "value" {
+		t.Errorf("bad item_value: %q", retrievedDictionaryItem.ItemValue)
 	}
 
 	// Update
-	var ud *DictionaryItem
-	record(t, "dictionary_items/update", func(c *Client) {
-		ud, err = c.UpdateDictionaryItem(&UpdateDictionaryItemInput{
-			Service:    testServiceID,
-			Dictionary: td.ID,
+	var updatedDictionaryItem *DictionaryItem
+	record(t, fixtureBase+"update", func(c *Client) {
+		updatedDictionaryItem, err = c.UpdateDictionaryItem(&UpdateDictionaryItemInput{
+			Service:    testService.ID,
+			Dictionary: testDictionary.ID,
 			ItemKey:    "test-dictionary-item",
 			ItemValue:  "new-value",
 		})
@@ -89,15 +95,15 @@ func TestClient_DictionaryItems(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.ItemValue != "new-value" {
-		t.Errorf("bad item_value: %q", ud.ItemValue)
+	if updatedDictionaryItem.ItemValue != "new-value" {
+		t.Errorf("bad item_value: %q", updatedDictionaryItem.ItemValue)
 	}
 
 	// Delete
-	record(t, "dictionary_items/delete", func(c *Client) {
+	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
-			Service:    testServiceID,
-			Dictionary: td.ID,
+			Service:    testService.ID,
+			Dictionary: testDictionary.ID,
 			ItemKey:    "test-dictionary-item",
 		})
 	})

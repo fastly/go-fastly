@@ -3,14 +3,14 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Dictionary=2PSSfhzn58nbURuobYGT3I&ItemKey=test-dictionary-item&Service=7i6HN3TK9wS159v2gPAZ8A&item_value=new-value
+    body: Dictionary=2qpiTjYtwgTuLyB2N6vFAq&ItemKey=test-dictionary-item&Service=17Cozi1mqUCWuTgyYvipeW&item_value=new-value
     form:
       Dictionary:
-      - 2PSSfhzn58nbURuobYGT3I
+      - 2qpiTjYtwgTuLyB2N6vFAq
       ItemKey:
       - test-dictionary-item
       Service:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 17Cozi1mqUCWuTgyYvipeW
       item_value:
       - new-value
     headers:
@@ -19,24 +19,25 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/2PSSfhzn58nbURuobYGT3I/item/test-dictionary-item
+      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service/17Cozi1mqUCWuTgyYvipeW/dictionary/2qpiTjYtwgTuLyB2N6vFAq/item/test-dictionary-item
     method: PUT
   response:
-    body: '{"dictionary_id":"2PSSfhzn58nbURuobYGT3I","service_id":"7i6HN3TK9wS159v2gPAZ8A","item_key":"test-dictionary-item","item_value":"new-value"}'
+    body: '{"dictionary_id":"2qpiTjYtwgTuLyB2N6vFAq","service_id":"17Cozi1mqUCWuTgyYvipeW","item_key":"test-dictionary-item","item_value":"new-value"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 08 May 2019 22:01:04 GMT
+      - Tue, 16 Jul 2019 11:30:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "996"
+      - "932"
       Fastly-Ratelimit-Reset:
-      - "1557356400"
+      - "1563278400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,8 +52,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3635-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1557352864.134603,VS0,VE732
+      - S1563276625.943349,VS0,VE253
     status: 200 OK
     code: 200

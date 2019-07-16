@@ -2,11 +2,9 @@ package fastly
 
 import (
 	"fmt"
+	"github.com/dnaeon/go-vcr/recorder"
 	"sync"
 	"testing"
-	"time"
-
-	"github.com/dnaeon/go-vcr/recorder"
 )
 
 // testClient is the test client.
@@ -56,14 +54,14 @@ func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 	f(client)
 }
 
-func createTestService(t *testing.T, serviceFixture string) *Service {
+func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
 
 	var err error
 	var service *Service
 
 	record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
-			Name: fmt.Sprintf("test_service_%d", time.Now().Unix()),
+			Name: fmt.Sprintf("test_service_%s", serviceNameSuffix),
 			Comment: "go-fastly client test",
 		})
 	})
@@ -108,7 +106,7 @@ func createTestVersion(t *testing.T, versionFixture string, serviceId string) *V
 	return version
 }
 
-func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId string, version int) *Dictionary {
+func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId string, version int, dictionaryNameSuffix string) *Dictionary {
 
 	var err error
 	var dictionary *Dictionary
@@ -117,7 +115,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId stri
 		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
 			Service: serviceId,
 			Version: version,
-			Name: fmt.Sprintf("test_dictionary_%d", time.Now().Unix()),
+			Name: fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix),
 		})
 	})
 	if err != nil {

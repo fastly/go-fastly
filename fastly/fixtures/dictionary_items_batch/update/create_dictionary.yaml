@@ -3,14 +3,14 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Service=1AH66RPYdxhlCNijKcEMl7&Version=2&name=test_dictionary_1562949848
+    body: Service=6q3QkVUjl4q6L3UwavMQ91&Version=2&name=test_dictionary_BatchModifyDictionaryItems_Update
     form:
       Service:
-      - 1AH66RPYdxhlCNijKcEMl7
+      - 6q3QkVUjl4q6L3UwavMQ91
       Version:
       - "2"
       name:
-      - test_dictionary_1562949848
+      - test_dictionary_BatchModifyDictionaryItems_Update
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -18,10 +18,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/1AH66RPYdxhlCNijKcEMl7/version/2/dictionary
+    url: https://api.fastly.com/service/6q3QkVUjl4q6L3UwavMQ91/version/2/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary_1562949848","service_id":"1AH66RPYdxhlCNijKcEMl7","version":2,"updated_at":"2019-07-12T16:44:08Z","created_at":"2019-07-12T16:44:08Z","write_only":false,"deleted_at":null,"id":"4jZYWXocB5KeGNbTosY29H"}'
+    body: '{"name":"test_dictionary_BatchModifyDictionaryItems_Update","service_id":"6q3QkVUjl4q6L3UwavMQ91","version":2,"id":"7RmRuJYKwpn2hMqNWqVR1s","updated_at":"2019-07-16T11:30:18Z","write_only":false,"deleted_at":null,"created_at":"2019-07-16T11:30:18Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,11 +31,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 12 Jul 2019 16:44:09 GMT
+      - Tue, 16 Jul 2019 11:30:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "944"
+      - "948"
       Fastly-Ratelimit-Reset:
-      - "1562950800"
+      - "1563278400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,8 +50,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1562949849.859407,VS0,VE204
+      - S1563276618.264669,VS0,VE213
     status: 200 OK
     code: 200
