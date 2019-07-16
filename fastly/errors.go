@@ -113,6 +113,10 @@ var ErrMissingConfigSetID = errors.New("Missing required field 'ConfigSetID'")
 // requires a list of WAF id's, but it is empty
 var ErrMissingWAFList = errors.New("WAF slice is empty")
 
+// ErrBatchUpdateMaximumItemsExceeded is an error that indicates that too many batch operations are being executed.
+// The Fastly API specifies an maximum limit.
+var ErrBatchUpdateMaximumItemsExceeded = errors.New("batch modify maximum items exceeded")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 

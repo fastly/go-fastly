@@ -5,6 +5,17 @@ import (
 	"encoding"
 )
 
+type BatchOperation string
+
+const (
+	Create BatchOperation = "create"
+	Update BatchOperation = "update"
+	Upsert BatchOperation = "upsert"
+	Delete BatchOperation = "delete"
+
+	BatchModifyMaximumItems = 1000
+)
+
 type statusResp struct {
 	Status string
 	Msg    string
