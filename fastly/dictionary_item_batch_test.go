@@ -23,15 +23,15 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {
 		Service:    testService.ID,
 		Dictionary: testDictionary.ID,
-		Items: []BatchDictionaryItem{
+		Items: []*BatchDictionaryItem{
 			{
-				Operation:Create,
-				ItemKey: "key1",
+				Operation: CreateBatchOperation,
+				ItemKey:   "key1",
 				ItemValue: "val1",
 			},
 			{
-				Operation:Create,
-				ItemKey: "key2",
+				Operation: CreateBatchOperation,
+				ItemKey:   "key2",
 				ItemValue: "val2",
 			},
 		},
@@ -100,15 +100,15 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {
 		Service:    testService.ID,
 		Dictionary: testDictionary.ID,
-		Items: []BatchDictionaryItem{
+		Items: []*BatchDictionaryItem{
 			{
-				Operation:Create,
-				ItemKey: "key1",
+				Operation: CreateBatchOperation,
+				ItemKey:   "key1",
 				ItemValue: "val1",
 			},
 			{
-				Operation:Create,
-				ItemKey: "key2",
+				Operation: CreateBatchOperation,
+				ItemKey:   "key2",
 				ItemValue: "val2",
 			},
 		},
@@ -127,10 +127,10 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	batchDeleteOperations := &BatchModifyDictionaryItemsInput {
 		Service:    testService.ID,
 		Dictionary: testDictionary.ID,
-		Items: []BatchDictionaryItem{
+		Items: []*BatchDictionaryItem{
 			{
-				Operation:Delete,
-				ItemKey: "key2",
+				Operation: DeleteBatchOperation,
+				ItemKey:   "key2",
 				ItemValue: "val2",
 			},
 		},
@@ -180,15 +180,15 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {
 		Service:    testService.ID,
 		Dictionary: testDictionary.ID,
-		Items: []BatchDictionaryItem{
+		Items: []*BatchDictionaryItem{
 			{
-				Operation:Create,
-				ItemKey: "key1",
+				Operation: CreateBatchOperation,
+				ItemKey:   "key1",
 				ItemValue: "val1",
 			},
 			{
-				Operation:Create,
-				ItemKey: "key2",
+				Operation: CreateBatchOperation,
+				ItemKey:   "key2",
 				ItemValue: "val2",
 			},
 		},
@@ -207,10 +207,10 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	batchUpdateOperations := &BatchModifyDictionaryItemsInput {
 		Service:    testService.ID,
 		Dictionary: testDictionary.ID,
-		Items: []BatchDictionaryItem{
+		Items: []*BatchDictionaryItem{
 			{
-				Operation:Update,
-				ItemKey: "key2",
+				Operation: UpdateBatchOperation,
+				ItemKey:   "key2",
 				ItemValue: "val2Updated",
 			},
 		},
@@ -292,10 +292,10 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	batchCreateOperations := &BatchModifyDictionaryItemsInput {
 		Service:    testService.ID,
 		Dictionary: testDictionary.ID,
-		Items: []BatchDictionaryItem{
+		Items: []*BatchDictionaryItem{
 			{
-				Operation:Create,
-				ItemKey: "key1",
+				Operation: CreateBatchOperation,
+				ItemKey:   "key1",
 				ItemValue: "val1",
 			},
 		},
@@ -314,15 +314,15 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	batchUpsertOperations := &BatchModifyDictionaryItemsInput {
 		Service:    testService.ID,
 		Dictionary: testDictionary.ID,
-		Items: []BatchDictionaryItem{
+		Items: []*BatchDictionaryItem{
 			{
-				Operation:Upsert,
-				ItemKey: "key1",
+				Operation: UpsertBatchOperation,
+				ItemKey:   "key1",
 				ItemValue: "val1Updated",
 			},
 			{
-				Operation:Upsert,
-				ItemKey: "key2",
+				Operation: UpsertBatchOperation,
+				ItemKey:   "key2",
 				ItemValue: "val2",
 			},
 		},

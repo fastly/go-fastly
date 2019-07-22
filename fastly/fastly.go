@@ -8,10 +8,10 @@ import (
 type BatchOperation string
 
 const (
-	Create BatchOperation = "create"
-	Update BatchOperation = "update"
-	Upsert BatchOperation = "upsert"
-	Delete BatchOperation = "delete"
+	CreateBatchOperation BatchOperation = "create"
+	UpdateBatchOperation BatchOperation = "update"
+	UpsertBatchOperation BatchOperation = "upsert"
+	DeleteBatchOperation BatchOperation = "delete"
 
 	BatchModifyMaximumItems = 1000
 )

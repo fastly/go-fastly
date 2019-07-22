@@ -193,7 +193,7 @@ type BatchModifyDictionaryItemsInput struct {
 	Service    string `json:"-,"`
 	Dictionary string `json:"-,"`
 
-	Items []BatchDictionaryItem `json:"items"`
+	Items []*BatchDictionaryItem `json:"items"`
 }
 
 type BatchDictionaryItem struct {

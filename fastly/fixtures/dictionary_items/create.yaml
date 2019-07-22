@@ -27,7 +27,6 @@ interactions:
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
       Cache-Control:
       - no-cache
       Content-Type:
@@ -45,7 +44,6 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS
