@@ -3,17 +3,21 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ""
-    form: {}
+    body: Service=6q3QkVUjl4q6L3UwavMQ91
+    form:
+      Service:
+      - 6q3QkVUjl4q6L3UwavMQ91
     headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/17Cozi1mqUCWuTgyYvipeW/version/2/dictionary/test_dictionary_DictionaryItems
-    method: DELETE
+    url: https://api.fastly.com/service/6q3QkVUjl4q6L3UwavMQ91/version
+    method: POST
   response:
-    body: '{"status":"ok"}'
+    body: '{"service_id":"6q3QkVUjl4q6L3UwavMQ91","number":2}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,9 +26,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:25 GMT
+      - Tue, 16 Jul 2019 11:30:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "929"
+      - "949"
       Fastly-Ratelimit-Reset:
       - "1563278400"
       Status:
@@ -40,8 +44,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1563276626.695956,VS0,VE225
+      - S1563276618.948535,VS0,VE314
     status: 200 OK
     code: 200

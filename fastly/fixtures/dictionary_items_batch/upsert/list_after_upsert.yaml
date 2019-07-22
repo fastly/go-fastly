@@ -10,10 +10,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/17Cozi1mqUCWuTgyYvipeW/dictionary/2qpiTjYtwgTuLyB2N6vFAq/item/test-dictionary-item
+    url: https://api.fastly.com/service/1wd7ccxeYiH5A8RAtwWKLG/dictionary/6GCyMEkHHJSUExaEP0VT4F/items
     method: GET
   response:
-    body: '{"created_at":"2019-07-16T11:30:23Z","item_value":"value","dictionary_id":"2qpiTjYtwgTuLyB2N6vFAq","service_id":"17Cozi1mqUCWuTgyYvipeW","updated_at":"2019-07-16T11:30:23Z","item_key":"test-dictionary-item","deleted_at":null}'
+    body: '[{"updated_at":"2019-07-16T11:30:21Z","created_at":"2019-07-16T11:30:21Z","dictionary_id":"6GCyMEkHHJSUExaEP0VT4F","item_value":"val1Updated","deleted_at":null,"item_key":"key1","service_id":"1wd7ccxeYiH5A8RAtwWKLG"},{"service_id":"1wd7ccxeYiH5A8RAtwWKLG","dictionary_id":"6GCyMEkHHJSUExaEP0VT4F","item_value":"val2","deleted_at":null,"item_key":"key2","created_at":"2019-07-16T11:30:21Z","updated_at":"2019-07-16T11:30:21Z"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:24 GMT
+      - Tue, 16 Jul 2019 11:30:22 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -38,8 +38,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1563276624.449729,VS0,VE491
+      - S1563276622.555343,VS0,VE514
     status: 200 OK
     code: 200

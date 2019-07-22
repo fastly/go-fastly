@@ -189,6 +189,49 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	return b, nil
 }
 
+type BatchModifyDictionaryItemsInput struct {
+	Service    string `json:"-,"`
+	Dictionary string `json:"-,"`
+
+	Items []*BatchDictionaryItem `json:"items"`
+}
+
+type BatchDictionaryItem struct {
+
+
+	Operation BatchOperation `json:"op"`
+	ItemKey   string         `json:"item_key"`
+	ItemValue string         `json:"item_value"`
+}
+
+func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
+
+	if i.Service == "" {
+		return ErrMissingService
+	}
+
+	if i.Dictionary == "" {
+		return ErrMissingDictionary
+	}
+
+	if len(i.Items) > BatchModifyMaximumOperations {
+		return ErrBatchUpdateMaximumItemsExceeded
+	}
+
+	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.Service, i.Dictionary)
+	resp, err := c.PatchJSON(path, i, nil)
+	if err != nil {
+		return err
+	}
+
+	var batchModifyResult map[string]string
+	if err := decodeJSON(&batchModifyResult, resp.Body); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // DeleteDictionaryItemInput is the input parameter to DeleteDictionaryItem.
 type DeleteDictionaryItemInput struct {
 	// Service is the ID of the service. Dictionary is the ID of the dictionary.

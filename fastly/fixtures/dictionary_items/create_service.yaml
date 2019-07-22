@@ -3,16 +3,12 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: Dictionary=2qpiTjYtwgTuLyB2N6vFAq&ItemKey=test-dictionary-item&Service=17Cozi1mqUCWuTgyYvipeW&item_value=new-value
+    body: comment=go-fastly+client+test&name=test_service_DictionaryItems
     form:
-      Dictionary:
-      - 2qpiTjYtwgTuLyB2N6vFAq
-      ItemKey:
-      - test-dictionary-item
-      Service:
-      - 17Cozi1mqUCWuTgyYvipeW
-      item_value:
-      - new-value
+      comment:
+      - go-fastly client test
+      name:
+      - test_service_DictionaryItems
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -20,10 +16,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/17Cozi1mqUCWuTgyYvipeW/dictionary/2qpiTjYtwgTuLyB2N6vFAq/item/test-dictionary-item
-    method: PUT
+    url: https://api.fastly.com/service
+    method: POST
   response:
-    body: '{"dictionary_id":"2qpiTjYtwgTuLyB2N6vFAq","service_id":"17Cozi1mqUCWuTgyYvipeW","item_key":"test-dictionary-item","item_value":"new-value"}'
+    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_DictionaryItems","deleted_at":null,"publish_key":"3030b46cf2bc8d2e52401f45b676c3f03c45c3d9","created_at":"2019-07-16T11:30:22Z","id":"17Cozi1mqUCWuTgyYvipeW","updated_at":"2019-07-16T11:30:22Z","versions":[{"updated_at":"2019-07-16T11:30:22Z","testing":false,"created_at":"2019-07-16T11:30:22Z","number":1,"service_id":"17Cozi1mqUCWuTgyYvipeW","comment":"","active":false,"staging":false,"deployed":false,"deleted_at":null,"locked":false}]}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,9 +28,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:25 GMT
+      - Tue, 16 Jul 2019 11:30:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "932"
+      - "936"
       Fastly-Ratelimit-Reset:
       - "1563278400"
       Status:
@@ -52,6 +48,6 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1563276625.943349,VS0,VE253
+      - S1563276623.761390,VS0,VE274
     status: 200 OK
     code: 200

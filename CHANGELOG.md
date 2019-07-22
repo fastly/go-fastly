@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+- dictionary: Surpport for Create, Delete, Update and Upsert BatchOperations ([#125](https://github.com/fastly/go-fastly/pull/125)).
+
 ## [1.0.0] - 2019-06-14
 ### Added
 - bigquery: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).

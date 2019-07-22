@@ -1,0 +1,53 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: comment=go-fastly+client+test&name=test_service_BatchModifyDictionaryItems_Upsert
+    form:
+      comment:
+      - go-fastly client test
+      name:
+      - test_service_BatchModifyDictionaryItems_Upsert
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service
+    method: POST
+  response:
+    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_BatchModifyDictionaryItems_Upsert","versions":[{"locked":false,"service_id":"1wd7ccxeYiH5A8RAtwWKLG","created_at":"2019-07-16T11:30:20Z","deployed":false,"staging":false,"active":false,"testing":false,"deleted_at":null,"number":1,"updated_at":"2019-07-16T11:30:20Z","comment":""}],"created_at":"2019-07-16T11:30:20Z","deleted_at":null,"publish_key":"d1dfec7991058ee74d8cd7cbac331df8dd897cae","updated_at":"2019-07-16T11:30:20Z","id":"1wd7ccxeYiH5A8RAtwWKLG"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 16 Jul 2019 11:30:20 GMT
+      Fastly-Ratelimit-Remaining:
+      - "943"
+      Fastly-Ratelimit-Reset:
+      - "1563278400"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
+      X-Timer:
+      - S1563276620.152917,VS0,VE211
+    status: 200 OK
+    code: 200

@@ -10,7 +10,7 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/17Cozi1mqUCWuTgyYvipeW/version/2/dictionary/test_dictionary_DictionaryItems
+    url: https://api.fastly.com/service/7BETwKaHgBudYYud5D8kUv/version/2/dictionary/test_dictionary_BatchModifyDictionaryItems_Delete
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -22,9 +22,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:25 GMT
+      - Tue, 16 Jul 2019 11:30:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "929"
+      - "952"
       Fastly-Ratelimit-Reset:
       - "1563278400"
       Status:
@@ -42,6 +42,6 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
       X-Timer:
-      - S1563276626.695956,VS0,VE225
+      - S1563276617.001401,VS0,VE343
     status: 200 OK
     code: 200
