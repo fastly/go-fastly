@@ -245,7 +245,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	oversizedDictionaryItems := make([]*BatchDictionaryItem, BatchModifyMaximumItems+1)
+	oversizedDictionaryItems := make([]*BatchDictionaryItem, BatchModifyMaximumOperations+1)
 	err = testClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
 		Service:    "foo",
 		Dictionary: "bar",

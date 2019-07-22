@@ -214,7 +214,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 		return ErrMissingDictionary
 	}
 
-	if len(i.Items) > BatchModifyMaximumItems {
+	if len(i.Items) > BatchModifyMaximumOperations {
 		return ErrBatchUpdateMaximumItemsExceeded
 	}
 
