@@ -3,18 +3,14 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ACL=1d7GeY6Ky6eeqSsO5c1r29&ID=5z5nqKm0IGS8ovR512rSaT&Service=2voeSM5z6889qin6D9waPl&ip=10.0.0.4&negated=true
+    body: Service=2voeSM5z6889qin6D9waPl&Version=2&name=test_acl_ACLEntries
     form:
-      ACL:
-      - 1d7GeY6Ky6eeqSsO5c1r29
-      ID:
-      - 5z5nqKm0IGS8ovR512rSaT
       Service:
       - 2voeSM5z6889qin6D9waPl
-      ip:
-      - 10.0.0.4
-      negated:
-      - "true"
+      Version:
+      - "2"
+      name:
+      - test_acl_ACLEntries
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -22,10 +18,10 @@ interactions:
       - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
       User-Agent:
       - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/2voeSM5z6889qin6D9waPl/acl/1d7GeY6Ky6eeqSsO5c1r29/entry/5z5nqKm0IGS8ovR512rSaT
-    method: PATCH
+    url: https://api.fastly.com/service/2voeSM5z6889qin6D9waPl/version/2/acl
+    method: POST
   response:
-    body: '{"ip":"10.0.0.4","updated_at":"2019-07-23T10:47:07Z","comment":"test entry","acl_id":"1d7GeY6Ky6eeqSsO5c1r29","created_at":"2019-07-23T10:47:07Z","negated":"true","service_id":"2voeSM5z6889qin6D9waPl","id":"5z5nqKm0IGS8ovR512rSaT","subnet":8,"deleted_at":null}'
+    body: '{"service_id":"2voeSM5z6889qin6D9waPl","version":"2","name":"test_acl_ACLEntries","deleted_at":null,"id":"1d7GeY6Ky6eeqSsO5c1r29","created_at":"2019-07-23T10:47:06Z","updated_at":"2019-07-23T10:47:06Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,9 +31,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jul 2019 10:47:08 GMT
+      - Tue, 23 Jul 2019 10:47:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "980"
+      - "982"
       Fastly-Ratelimit-Reset:
       - "1563879600"
       Status:
@@ -54,8 +50,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19277-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19277-LCY
       X-Timer:
-      - S1563878828.855404,VS0,VE260
+      - S1563878826.351704,VS0,VE310
     status: 200 OK
     code: 200

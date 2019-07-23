@@ -140,6 +140,40 @@ func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture st
 	}
 }
 
+func createTestACL(t *testing.T, createFixture string, serviceId string, version int, aclNameSuffix string) *ACL {
+
+	var err error
+	var acl *ACL
+
+	record(t, createFixture, func(client *Client) {
+		acl, err = client.CreateACL(&CreateACLInput{
+			Service: serviceId,
+			Version: version,
+			Name: fmt.Sprintf("test_acl_%s", aclNameSuffix),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return acl
+}
+
+func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
+
+	var err error
+
+	record(t, deleteFixture, func(client *Client) {
+		err = client.DeleteACL(&DeleteACLInput{
+			Service: acl.ServiceID,
+			Version: acl.Version,
+			Name:    acl.Name,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func deleteTestService(t *testing.T, cleanupFixture string, serviceId string){
 
 	var err error

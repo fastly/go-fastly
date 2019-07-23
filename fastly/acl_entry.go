@@ -224,3 +224,47 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 
 	return e, nil
 }
+
+type BatchModifyACLEntriesInput struct {
+	Service string `json:"-,"`
+	ACL     string `json:"-,"`
+
+	Entries []*BatchACLEntry `json:"entries"`
+}
+
+type BatchACLEntry struct {
+	Operation BatchOperation `json:"op"`
+	ID        string         `json:"id,omitempty"`
+	IP        string         `json:"ip,omitempty"`
+	Subnet    string         `json:"subnet,omitempty"`
+	Negated   bool           `json:"negated,omitempty"`
+	Comment   string         `json:"comment,omitempty"`
+}
+
+func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
+
+	if i.Service == "" {
+		return ErrMissingService
+	}
+
+	if i.ACL == "" {
+		return ErrMissingACL
+	}
+
+	if len(i.Entries) > BatchModifyMaximumOperations {
+		return ErrBatchUpdateMaximumOperationsExceeded
+	}
+
+	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.Service, i.ACL)
+	resp, err := c.PatchJSON(path, i, nil)
+	if err != nil {
+		return err
+	}
+
+	var batchModifyResult map[string]string
+	if err := decodeJSON(&batchModifyResult, resp.Body); err != nil {
+		return err
+	}
+
+	return nil
+}

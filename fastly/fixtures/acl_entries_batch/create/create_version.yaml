@@ -3,30 +3,35 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ""
-    form: {}
+    body: Service=3MYXdSsO9U0dulSgjNLvMq
+    form:
+      Service:
+      - 3MYXdSsO9U0dulSgjNLvMq
     headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
       Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/25/acl/entry_acl
-    method: DELETE
+      - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service/3MYXdSsO9U0dulSgjNLvMq/version
+    method: POST
   response:
-    body: '{"status":"ok"}'
+    body: '{"service_id":"3MYXdSsO9U0dulSgjNLvMq","number":2}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 18:07:27 GMT
+      - Tue, 23 Jul 2019 09:37:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "982"
       Fastly-Ratelimit-Reset:
-      - "1557428400"
+      - "1563876000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,8 +46,8 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17433-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19226-LCY
       X-Timer:
-      - S1557425248.667395,VS0,VE266
+      - S1563874655.258344,VS0,VE643
     status: 200 OK
     code: 200

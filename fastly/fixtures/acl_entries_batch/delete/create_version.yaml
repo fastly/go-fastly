@@ -3,18 +3,10 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ACL=1d7GeY6Ky6eeqSsO5c1r29&Service=2voeSM5z6889qin6D9waPl&comment=test+entry&ip=10.0.0.3&subnet=8
+    body: Service=1fn1uiuo7LwssNl2EH2gBI
     form:
-      ACL:
-      - 1d7GeY6Ky6eeqSsO5c1r29
       Service:
-      - 2voeSM5z6889qin6D9waPl
-      comment:
-      - test entry
-      ip:
-      - 10.0.0.3
-      subnet:
-      - "8"
+      - 1fn1uiuo7LwssNl2EH2gBI
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -22,11 +14,10 @@ interactions:
       - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
       User-Agent:
       - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/2voeSM5z6889qin6D9waPl/acl/1d7GeY6Ky6eeqSsO5c1r29/entry
+    url: https://api.fastly.com/service/1fn1uiuo7LwssNl2EH2gBI/version
     method: POST
   response:
-    body: '{"service_id":"2voeSM5z6889qin6D9waPl","acl_id":"1d7GeY6Ky6eeqSsO5c1r29","ip":"10.0.0.3","subnet":8,"comment":"test
-      entry","updated_at":"2019-07-23T10:47:07Z","deleted_at":null,"id":"5z5nqKm0IGS8ovR512rSaT","negated":0,"created_at":"2019-07-23T10:47:07Z"}'
+    body: '{"service_id":"1fn1uiuo7LwssNl2EH2gBI","number":2}'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jul 2019 10:47:07 GMT
+      - Tue, 23 Jul 2019 09:37:49 GMT
       Fastly-Ratelimit-Remaining:
-      - "981"
+      - "976"
       Fastly-Ratelimit-Reset:
-      - "1563879600"
+      - "1563876000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -57,6 +48,6 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19277-LCY
       X-Timer:
-      - S1563878827.664010,VS0,VE481
+      - S1563874669.786338,VS0,VE668
     status: 200 OK
     code: 200

@@ -5,35 +5,17 @@ import "testing"
 func TestClient_ACLs(t *testing.T) {
 	t.Parallel()
 
-	var err error
-	var tv *Version
-	record(t, "acls/version", func(c *Client) {
-		tv = testVersion(t, c)
-	})
+	fixtureBase := "acls/"
 
-	// Clean up
-	defer func() {
-		record(t, "acls/cleanup", func(c *Client) {
-			c.DeleteACL(&DeleteACLInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test_acl",
-			})
-
-			c.DeleteACL(&DeleteACLInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new_test_acl",
-			})
-		})
-	}()
-
+	testVersion := createTestVersion(t, fixtureBase+"version", testServiceID)
+	
 	// Create
+	var err error
 	var a *ACL
-	record(t, "acls/create", func(c *Client) {
+	record(t, fixtureBase+"create", func(c *Client) {
 		a, err = c.CreateACL(&CreateACLInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "test_acl",
 		})
 	})
@@ -41,16 +23,33 @@ func TestClient_ACLs(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// Ensure deleted
+	defer func() {
+		record(t, fixtureBase+"cleanup", func(c *Client) {
+			c.DeleteACL(&DeleteACLInput{
+				Service: testServiceID,
+				Version: testVersion.Number,
+				Name:    "test_acl",
+			})
+
+			c.DeleteACL(&DeleteACLInput{
+				Service: testServiceID,
+				Version: testVersion.Number,
+				Name:    "new_test_acl",
+			})
+		})
+	}()
+	
 	if a.Name != "test_acl" {
 		t.Errorf("bad name: %q", a.Name)
 	}
 
 	// List
 	var as []*ACL
-	record(t, "acls/list", func(c *Client) {
+	record(t, fixtureBase+"list", func(c *Client) {
 		as, err = c.ListACLs(&ListACLsInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 		})
 	})
 	if err != nil {
@@ -62,10 +61,10 @@ func TestClient_ACLs(t *testing.T) {
 
 	// Get
 	var na *ACL
-	record(t, "acls/get", func(c *Client) {
+	record(t, fixtureBase+"get", func(c *Client) {
 		na, err = c.GetACL(&GetACLInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "test_acl",
 		})
 	})
@@ -78,10 +77,10 @@ func TestClient_ACLs(t *testing.T) {
 
 	// Update
 	var ua *ACL
-	record(t, "acls/update", func(c *Client) {
+	record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateACL(&UpdateACLInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "test_acl",
 			NewName: "new_test_acl",
 		})
@@ -98,10 +97,10 @@ func TestClient_ACLs(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "acls/delete", func(c *Client) {
+	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteACL(&DeleteACLInput{
 			Service: testServiceID,
-			Version: tv.Number,
+			Version: testVersion.Number,
 			Name:    "new_test_acl",
 		})
 	})
