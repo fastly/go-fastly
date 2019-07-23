@@ -7,7 +7,7 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
     url: https://api.fastly.com/service/2voeSM5z6889qin6D9waPl/version/2/acl/test_acl_ACLEntries
@@ -16,7 +16,6 @@ interactions:
     body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
@@ -35,7 +34,6 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS

@@ -12,7 +12,7 @@ interactions:
       Content-Type:
       - application/json
       Fastly-Key:
-      - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
     url: https://api.fastly.com/service/5RZUouxF6dQkKd6RQSla8P/acl/3Q5Oel6HFcUP0gxxSEkxlJ/entries
@@ -21,7 +21,6 @@ interactions:
     body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
@@ -40,7 +39,6 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS

@@ -7,7 +7,7 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
     url: https://api.fastly.com/service/5RZUouxF6dQkKd6RQSla8P/acl/3Q5Oel6HFcUP0gxxSEkxlJ/entries
@@ -18,7 +18,6 @@ interactions:
       Entry 2","service_id":"5RZUouxF6dQkKd6RQSla8P","id":"4BuyRhMCxnU23tnyw63zCa","created_at":"2019-07-23T09:37:59Z","ip":"192.168.0.1","updated_at":"2019-07-23T09:37:59Z","acl_id":"3Q5Oel6HFcUP0gxxSEkxlJ"}]'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
@@ -33,7 +32,6 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS

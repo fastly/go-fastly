@@ -15,7 +15,7 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
     url: https://api.fastly.com/service/1fn1uiuo7LwssNl2EH2gBI/version/2/acl
@@ -24,7 +24,6 @@ interactions:
     body: '{"service_id":"1fn1uiuo7LwssNl2EH2gBI","version":"2","name":"test_acl_BatchModifyAclEntries_Delete","deleted_at":null,"id":"2WOimUJEh3AE0iFaE3E5JL","updated_at":"2019-07-23T09:37:49Z","created_at":"2019-07-23T09:37:49Z"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
@@ -43,7 +42,6 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS

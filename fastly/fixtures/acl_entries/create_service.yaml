@@ -13,7 +13,7 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       Fastly-Key:
-      - Q96iQhxXh4S08JmV1kIGddpLPtgd_Wp6
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
     url: https://api.fastly.com/service
@@ -22,7 +22,6 @@ interactions:
     body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_ACLEntries","created_at":"2019-07-23T10:47:05Z","versions":[{"active":false,"number":1,"staging":false,"testing":false,"created_at":"2019-07-23T10:47:05Z","service_id":"2voeSM5z6889qin6D9waPl","deployed":false,"comment":"","deleted_at":null,"updated_at":"2019-07-23T10:47:05Z","locked":false}],"id":"2voeSM5z6889qin6D9waPl","deleted_at":null,"publish_key":"7325baa561b97bdb5ee97af05b50630c4e9a3cf2","updated_at":"2019-07-23T10:47:05Z"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
@@ -41,7 +40,6 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS
