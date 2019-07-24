@@ -6,12 +6,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.2.0] - 2019-07-24
 ### Added
-- acl: Surpport for Create, Delete and Update BatchOperations ([#126](https://github.com/fastly/go-fastly/pull/126)).
+- acl: Support for Create, Delete and Update BatchOperations ([#126](https://github.com/fastly/go-fastly/pull/126)).
 
 ## [1.1.0] - 2019-07-22
 ### Added
-- dictionary: Surpport for Create, Delete, Update and Upsert BatchOperations ([#125](https://github.com/fastly/go-fastly/pull/125)).
+- dictionary: Support for Create, Delete, Update and Upsert BatchOperations ([#125](https://github.com/fastly/go-fastly/pull/125)).
 
 ## [1.0.0] - 2019-06-14
 ### Added
