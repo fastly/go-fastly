@@ -251,7 +251,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 		Dictionary: "bar",
 		Items:      oversizedDictionaryItems,
 	})
-	if err != ErrBatchUpdateMaximumItemsExceeded {
+	if err != ErrBatchUpdateMaximumOperationsExceeded {
 		t.Errorf("bad error: %s", err)
 	}
 

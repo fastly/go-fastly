@@ -4,42 +4,24 @@ import "testing"
 
 func TestClient_ACLEntries(t *testing.T) {
 
-	var err error
-	var tv *Version
-	record(t, "acl_entries/version", func(c *Client) {
-		tv = testVersion(t, c)
-	})
+	fixtureBase := "acl_entries/"
+	nameSuffix := "ACLEntries"
 
-	// Create ACL before adding entries to it
-	var a *ACL
-	record(t, "acl_entries/create_acl", func(c *Client) {
-		a, err = c.CreateACL(&CreateACLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "entry_acl",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
+	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
+	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
 
-	// Clean up helper ACL
-	defer func() {
-		record(t, "acl_entries/cleanup", func(c *Client) {
-			err = c.DeleteACL(&DeleteACLInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "entry_acl",
-			})
-		})
-	}()
+	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
+
+	testACL := createTestACL(t, fixtureBase+"acl", testService.ID, testVersion.Number, nameSuffix)
+	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	// Create
+	var err error
 	var e *ACLEntry
-	record(t, "acl_entries/create", func(c *Client) {
+	record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateACLEntry(&CreateACLEntryInput{
-			Service: testServiceID,
-			ACL:     a.ID,
+			Service: testService.ID,
+			ACL:     testACL.ID,
 			IP:      "10.0.0.3",
 			Subnet:  "8",
 			Negated: false,
@@ -68,10 +50,10 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	// List
 	var es []*ACLEntry
-	record(t, "acl_entries/list", func(c *Client) {
+	record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
-			Service: testServiceID,
-			ACL:     a.ID,
+			Service: testService.ID,
+			ACL:     testACL.ID,
 		})
 	})
 	if err != nil {
@@ -84,10 +66,10 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	// Get
 	var ne *ACLEntry
-	record(t, "acl_entries/get", func(c *Client) {
+	record(t, fixtureBase+"get", func(c *Client) {
 		ne, err = c.GetACLEntry(&GetACLEntryInput{
-			Service: testServiceID,
-			ACL:     a.ID,
+			Service: testService.ID,
+			ACL:     testACL.ID,
 			ID:      e.ID,
 		})
 	})
@@ -110,10 +92,10 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	// Update
 	var ue *ACLEntry
-	record(t, "acl_entries/update", func(c *Client) {
+	record(t, fixtureBase+"update", func(c *Client) {
 		ue, err = c.UpdateACLEntry(&UpdateACLEntryInput{
-			Service: testServiceID,
-			ACL:     a.ID,
+			Service: testService.ID,
+			ACL:     testACL.ID,
 			ID:      e.ID,
 			IP:      "10.0.0.4",
 			Negated: true,
@@ -139,10 +121,10 @@ func TestClient_ACLEntries(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "acl_entries/delete", func(c *Client) {
+	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteACLEntry(&DeleteACLEntryInput{
-			Service: testServiceID,
-			ACL:     a.ID,
+			Service: testService.ID,
+			ACL:     testACL.ID,
 			ID:      e.ID,
 		})
 	})
@@ -267,4 +249,32 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
+}
+
+func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
+	var err error
+	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
+		Service: "foo",
+		ACL:     "",
+	})
+	if err != ErrMissingACL {
+		t.Errorf("bad error: %s", err)
+	}
+
+	oversizedACLEntries := make([]*BatchACLEntry, BatchModifyMaximumOperations+1)
+	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
+		Service: "foo",
+		ACL:     "bar",
+		Entries: oversizedACLEntries,
+	})
+	if err != ErrBatchUpdateMaximumOperationsExceeded {
+		t.Errorf("bad error: %s", err)
+	}
+
 }

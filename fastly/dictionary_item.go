@@ -215,7 +215,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	}
 
 	if len(i.Items) > BatchModifyMaximumOperations {
-		return ErrBatchUpdateMaximumItemsExceeded
+		return ErrBatchUpdateMaximumOperationsExceeded
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.Service, i.Dictionary)

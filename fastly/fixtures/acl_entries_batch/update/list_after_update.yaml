@@ -1,0 +1,45 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service/5RZUouxF6dQkKd6RQSla8P/acl/3Q5Oel6HFcUP0gxxSEkxlJ/entries
+    method: GET
+  response:
+    body: '[{"id":"4Ex37PIt2oESevIFfYKdur","created_at":"2019-07-23T09:37:59Z","ip":"127.0.0.2","updated_at":"2019-07-23T09:38:00Z","acl_id":"3Q5Oel6HFcUP0gxxSEkxlJ","deleted_at":null,"negated":"1","comment":"Updated
+      ACL Entry 1","subnet":16,"service_id":"5RZUouxF6dQkKd6RQSla8P"},{"deleted_at":null,"negated":"0","subnet":24,"comment":"ACL
+      Entry 2","service_id":"5RZUouxF6dQkKd6RQSla8P","id":"4BuyRhMCxnU23tnyw63zCa","created_at":"2019-07-23T09:37:59Z","ip":"192.168.0.1","updated_at":"2019-07-23T09:37:59Z","acl_id":"3Q5Oel6HFcUP0gxxSEkxlJ"}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 23 Jul 2019 09:38:00 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19226-LCY
+      X-Timer:
+      - S1563874681.588596,VS0,VE249
+    status: 200 OK
+    code: 200

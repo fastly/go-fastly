@@ -9,12 +9,12 @@ interactions:
       Fastly-Key:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/3xMPlUKElxNy5JAd2HQkhZ/entry/1P5vZXb4sHxFXE2IF473SI
+      - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
+    url: https://api.fastly.com/service/2voeSM5z6889qin6D9waPl/acl/1d7GeY6Ky6eeqSsO5c1r29/entry/5z5nqKm0IGS8ovR512rSaT
     method: GET
   response:
-    body: '{"acl_id":"3xMPlUKElxNy5JAd2HQkhZ","ip":"10.0.0.3","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"id":"1P5vZXb4sHxFXE2IF473SI","comment":"test
-      entry","updated_at":"2019-05-09T18:07:24Z","created_at":"2019-05-09T18:07:24Z","subnet":8,"negated":"0"}'
+    body: '{"service_id":"2voeSM5z6889qin6D9waPl","id":"5z5nqKm0IGS8ovR512rSaT","created_at":"2019-07-23T10:47:07Z","negated":"0","updated_at":"2019-07-23T10:47:07Z","comment":"test
+      entry","acl_id":"1d7GeY6Ky6eeqSsO5c1r29","ip":"10.0.0.3","subnet":8,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 18:07:25 GMT
+      - Tue, 23 Jul 2019 10:47:07 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,14 +34,13 @@ interactions:
       - Accept-Encoding
       Via:
       - 1.1 varnish
-      - 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17433-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19277-LCY
       X-Timer:
-      - S1557425245.283749,VS0,VE404
+      - S1563878827.370844,VS0,VE482
     status: 200 OK
     code: 200
