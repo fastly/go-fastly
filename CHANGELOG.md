@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.1] - 2019-07-25
+### Added
+- acl: Constant to represent the maximum number of entries that can be placed within an ACL ([#129](https://github.com/fastly/go-fastly/pull/129)).
+- dictionary: Constant to represent the maximum number of items that can be placed within an Edge Dictionary ([#129](https://github.com/fastly/go-fastly/pull/129)).
+
 ## [1.2.0] - 2019-07-24
 ### Added
 - acl: Support for Create, Delete and Update BatchOperations ([#126](https://github.com/fastly/go-fastly/pull/126)).
@@ -108,7 +113,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.2.1...HEAD
+[1.2.1]: https://github.com/fastly/go-fastly/compare/v1.2.0...v1.2.1
+[1.2.0]: https://github.com/fastly/go-fastly/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/fastly/go-fastly/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/fastly/go-fastly/compare/v0.4.3...v1.0.0
 [0.4.3]: https://github.com/fastly/go-fastly/compare/v0.4.2...v0.4.3
