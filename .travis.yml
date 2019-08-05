@@ -13,3 +13,6 @@ branches:
     - master
 
 script: make build test test-race
+
+env: GO111MODULE=on
+
