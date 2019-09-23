@@ -2,9 +2,11 @@ package fastly
 
 import (
 	"fmt"
-	"github.com/dnaeon/go-vcr/recorder"
 	"sync"
 	"testing"
+
+	"github.com/dnaeon/go-vcr/cassette"
+	"github.com/dnaeon/go-vcr/recorder"
 )
 
 // testClient is the test client.
@@ -30,6 +32,12 @@ func record(t *testing.T, fixture string, f func(*Client)) {
 			t.Fatal(err)
 		}
 	}()
+
+	// Add a filter which removes Fastly-Key header from all recorded requests.
+	r.AddFilter(func(i *cassette.Interaction) error {
+		delete(i.Request.Headers, "Fastly-Key")
+		return nil
+	})
 
 	client := DefaultClient()
 	client.HTTPClient.Transport = r
@@ -61,7 +69,7 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 
 	record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
-			Name: fmt.Sprintf("test_service_%s", serviceNameSuffix),
+			Name:    fmt.Sprintf("test_service_%s", serviceNameSuffix),
 			Comment: "go-fastly client test",
 		})
 	})
@@ -115,7 +123,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId stri
 		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
 			Service: serviceId,
 			Version: version,
-			Name: fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix),
+			Name:    fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix),
 		})
 	})
 	if err != nil {
@@ -149,7 +157,7 @@ func createTestACL(t *testing.T, createFixture string, serviceId string, version
 		acl, err = client.CreateACL(&CreateACLInput{
 			Service: serviceId,
 			Version: version,
-			Name: fmt.Sprintf("test_acl_%s", aclNameSuffix),
+			Name:    fmt.Sprintf("test_acl_%s", aclNameSuffix),
 		})
 	})
 	if err != nil {
@@ -174,7 +182,7 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 	}
 }
 
-func deleteTestService(t *testing.T, cleanupFixture string, serviceId string){
+func deleteTestService(t *testing.T, cleanupFixture string, serviceId string) {
 
 	var err error
 

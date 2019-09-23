@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.2.1 (+github.com/fastly/go-fastly; go1.13)
+    url: https://api.fastly.com/tokens/xxxxxxxxxxxxxxxxxxxxx
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Date:
+      - Wed, 25 Sep 2019 12:51:58 GMT
+      Fastly-Ratelimit-Remaining:
+      - "995"
+      Fastly-Ratelimit-Reset:
+      - "1569416400"
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-cdg20759-CDG
+      X-Timer:
+      - S1569415918.693164,VS0,VE570
+    status: 204 No Content
+    code: 204
+    duration: ""
