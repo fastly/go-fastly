@@ -10,6 +10,7 @@ import (
 type Service struct {
 	ID            string     `mapstructure:"id"`
 	Name          string     `mapstructure:"name"`
+	Type          string     `mapstructure:"type"`
 	Comment       string     `mapstructure:"comment"`
 	CustomerID    string     `mapstructure:"customer_id"`
 	CreatedAt     *time.Time `mapstructure:"created_at"`
@@ -22,6 +23,7 @@ type Service struct {
 type ServiceDetail struct {
 	ID            string     `mapstructure:"id"`
 	Name          string     `mapstructure:"name"`
+	Type          string     `mapstructure:"type"`
 	Comment       string     `mapstructure:"comment"`
 	CustomerID    string     `mapstructure:"customer_id"`
 	ActiveVersion Version    `mapstructure:"active_version"`
@@ -75,6 +77,7 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 // CreateServiceInput is used as input to the CreateService function.
 type CreateServiceInput struct {
 	Name    string `form:"name,omitempty"`
+	Type    string `form:"type,omitempty"`
 	Comment string `form:"comment,omitempty"`
 }
 
