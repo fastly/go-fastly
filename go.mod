@@ -2,7 +2,7 @@ module github.com/fastly/go-fastly
 
 require (
 	github.com/ajg/form v0.0.0-20160802194845-cc2954064ec9
-	github.com/dnaeon/go-vcr v0.0.0-20170218072653-87d4990451a8
+	github.com/dnaeon/go-vcr v1.0.1
 	github.com/google/jsonapi v0.0.0-20170708005851-46d3ced04344
 	github.com/hashicorp/go-cleanhttp v0.0.0-20170211013415-3573b8b52aa7
 	github.com/kr/pretty v0.1.0 // indirect

@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.2.1 (+github.com/fastly/go-fastly; go1.13)
+    url: https://api.fastly.com/tokens
+    method: GET
+  response:
+    body: '[{"id":"xxxxxxxxxxxxxxxxxxxx","user_id":"xxxxxxxxxxxxxxxxxxxx","customer_id":"xxxxxxxxxxxxxxxxxxxx","name":"go-fastly-tests","last_used_at":"2019-09-25T10:26:59Z","created_at":"2019-09-25T10:15:12Z","expires_at":null,"ip":"127.0.0.1","user_agent":"FastlyGo/1.2.1
+      (+github.com/fastly/go-fastly; go1.13)","sudo_expires_at":null,"scopes":["global"],"scope":"global","services":[],"service_id":null}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 25 Sep 2019 10:26:59 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-cdg20780-CDG
+      X-Timer:
+      - S1569407219.321177,VS0,VE481
+    status: 200 OK
+    code: 200
+    duration: ""

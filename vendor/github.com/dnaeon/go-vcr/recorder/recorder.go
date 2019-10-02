@@ -34,6 +34,8 @@ import (
 	"net/http"
 	"net/http/httputil"
 	"os"
+	"strconv"
+	"time"
 
 	"github.com/dnaeon/go-vcr/cassette"
 )
@@ -70,6 +72,9 @@ func (r *Recorder) SetTransport(t http.RoundTripper) {
 func requestHandler(r *http.Request, c *cassette.Cassette, mode Mode, realTransport http.RoundTripper) (*cassette.Interaction, error) {
 	// Return interaction from cassette if in replay mode
 	if mode == ModeReplaying {
+		if err := r.Context().Err(); err != nil {
+			return nil, err
+		}
 		return c.GetInteraction(r)
 	}
 
@@ -91,7 +96,7 @@ func requestHandler(r *http.Request, c *cassette.Cassette, mode Mode, realTransp
 	}
 
 	reqBody := &bytes.Buffer{}
-	if r.Body != nil {
+	if r.Body != nil && !isNoBody(r.Body) {
 		// Record the request body so we can add it to the cassette
 		r.Body = ioutil.NopCloser(io.TeeReader(r.Body, reqBody))
 	}
@@ -102,6 +107,7 @@ func requestHandler(r *http.Request, c *cassette.Cassette, mode Mode, realTransp
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	respBody, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
@@ -123,6 +129,12 @@ func requestHandler(r *http.Request, c *cassette.Cassette, mode Mode, realTransp
 			Status:  resp.Status,
 			Code:    resp.StatusCode,
 		},
+	}
+	for _, filter := range c.Filters {
+		err = filter(interaction)
+		if err != nil {
+			return nil, err
+		}
 	}
 	c.AddInteraction(interaction)
 
@@ -194,30 +206,70 @@ func (r *Recorder) RoundTrip(req *http.Request) (*http.Response, error) {
 		return nil, err
 	}
 
-	buf := bytes.NewBuffer([]byte(interaction.Response.Body))
+	select {
+	case <-req.Context().Done():
+		return nil, req.Context().Err()
+	default:
+		buf := bytes.NewBuffer([]byte(interaction.Response.Body))
+		// apply the duration defined in the interaction
+		if interaction.Response.Duration != "" {
+			d, err := time.ParseDuration(interaction.Duration)
+			if err != nil {
+				return nil, err
+			}
+			// block for the configured 'duration' to simulate the network latency and server processing time.
+			<-time.After(d)
+		}
 
-	return &http.Response{
-		Status:        interaction.Response.Status,
-		StatusCode:    interaction.Response.Code,
-		Proto:         "HTTP/1.0",
-		ProtoMajor:    1,
-		ProtoMinor:    0,
-		Request:       req,
-		Header:        interaction.Response.Headers,
-		Close:         true,
-		ContentLength: int64(buf.Len()),
-		Body:          ioutil.NopCloser(buf),
-	}, nil
+		contentLength := int64(buf.Len())
+		// For HTTP HEAD requests, the ContentLength should be set to the size
+		// of the body that would have been sent for a GET.
+		// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.13
+		if req.Method == "HEAD" {
+			if hdr := interaction.Response.Headers.Get("Content-Length"); hdr != "" {
+				cl, err := strconv.ParseInt(hdr, 10, 64)
+				if err == nil {
+					contentLength = cl
+				}
+			}
+		}
+		return &http.Response{
+			Status:        interaction.Response.Status,
+			StatusCode:    interaction.Response.Code,
+			Proto:         "HTTP/1.0",
+			ProtoMajor:    1,
+			ProtoMinor:    0,
+			Request:       req,
+			Header:        interaction.Response.Headers,
+			Close:         true,
+			ContentLength: contentLength,
+			Body:          ioutil.NopCloser(buf),
+		}, nil
+	}
 }
 
 // CancelRequest implements the github.com/coreos/etcd/client.CancelableTransport interface
 func (r *Recorder) CancelRequest(req *http.Request) {
-	r.CancelRequest(req)
+	type cancelableTransport interface {
+		CancelRequest(req *http.Request)
+	}
+	if ct, ok := r.realTransport.(cancelableTransport); ok {
+		ct.CancelRequest(req)
+	}
 }
 
 // SetMatcher sets a function to match requests against recorded HTTP interactions.
 func (r *Recorder) SetMatcher(matcher cassette.Matcher) {
 	if r.cassette != nil {
 		r.cassette.Matcher = matcher
+	}
+}
+
+// AddFilter appends a hook to modify a request before it is recorded.
+//
+// Filters are useful for filtering out sensitive parameters from the recorded data.
+func (r *Recorder) AddFilter(filter cassette.Filter) {
+	if r.cassette != nil {
+		r.cassette.Filters = append(r.cassette.Filters, filter)
 	}
 }

@@ -81,6 +81,11 @@ type Response struct {
 
 	// Response status code
 	Code int `yaml:"code"`
+
+	// Response duration (something like "100ms" or "10s")
+	Duration string `yaml:"duration"`
+
+	replayed bool
 }
 
 // Interaction type contains a pair of request/response for a
@@ -95,11 +100,14 @@ type Interaction struct {
 // own criteria.
 type Matcher func(*http.Request, Request) bool
 
-// Default Matcher is used when a custom matcher is not defined
+// DefaultMatcher is used when a custom matcher is not defined
 // and compares only the method and URL.
 func DefaultMatcher(r *http.Request, i Request) bool {
 	return r.Method == i.Method && r.URL.String() == i.URL
 }
+
+// Filter function allows modification of an interaction before saving.
+type Filter func(*Interaction) error
 
 // Cassette type
 type Cassette struct {
@@ -112,12 +120,17 @@ type Cassette struct {
 	// Cassette format version
 	Version int `yaml:"version"`
 
-	sync.RWMutex
+	// Mutex to lock accessing Interactions. omitempty is set
+	// to prevent the mutex appearing in the recorded YAML.
+	Mu sync.RWMutex `yaml:"mu,omitempty"`
 	// Interactions between client and server
 	Interactions []*Interaction `yaml:"interactions"`
 
 	// Matches actual request with interaction requests.
 	Matcher Matcher `yaml:"-"`
+
+	// Filters interactions before being saved.
+	Filters []Filter `yaml:"-"`
 }
 
 // New creates a new empty cassette
@@ -128,6 +141,7 @@ func New(name string) *Cassette {
 		Version:      cassetteFormatV1,
 		Interactions: make([]*Interaction, 0),
 		Matcher:      DefaultMatcher,
+		Filters:      make([]Filter, 0),
 	}
 
 	return c
@@ -148,17 +162,18 @@ func Load(name string) (*Cassette, error) {
 
 // AddInteraction appends a new interaction to the cassette
 func (c *Cassette) AddInteraction(i *Interaction) {
-	c.Lock()
+	c.Mu.Lock()
 	c.Interactions = append(c.Interactions, i)
-	c.Unlock()
+	c.Mu.Unlock()
 }
 
 // GetInteraction retrieves a recorded request/response interaction
 func (c *Cassette) GetInteraction(r *http.Request) (*Interaction, error) {
-	c.RLock()
-	defer c.RUnlock()
+	c.Mu.Lock()
+	defer c.Mu.Unlock()
 	for _, i := range c.Interactions {
-		if c.Matcher(r, i.Request) {
+		if !i.replayed && c.Matcher(r, i.Request) {
+			i.replayed = true
 			return i, nil
 		}
 	}
@@ -168,8 +183,8 @@ func (c *Cassette) GetInteraction(r *http.Request) (*Interaction, error) {
 
 // Save writes the cassette data on disk for future re-use
 func (c *Cassette) Save() error {
-	c.RLock()
-	defer c.RUnlock()
+	c.Mu.RLock()
+	defer c.Mu.RUnlock()
 	// Save cassette file only if there were any interactions made
 	if len(c.Interactions) == 0 {
 		return nil
