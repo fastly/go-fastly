@@ -14,6 +14,9 @@ const (
 	// SnippetTypeRecv sets the type to recv
 	SnippetTypeRecv SnippetType = "recv"
 
+	// SnippetTypeHash sets the type to hash
+	SnippetTypeHash SnippetType = "hash"
+
 	// SnippetTypeHit sets the type to hit
 	SnippetTypeHit SnippetType = "hit"
 
