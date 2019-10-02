@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2019-10-02
+### Added
+- vcl_snippets: Support for `hash` type ([#133](https://github.com/fastly/go-fastly/pull/133)).
+- service: Support for `type` field ([#132](https://github.com/fastly/go-fastly/pull/132)).
+- token: Support for API tokens ([#131](https://github.com/fastly/go-fastly/pull/131)).
+
+### Changed
+- client: Codebase dependency management from `dep` to Go modules ([#130](https://github.com/fastly/go-fastly/pull/130)).
+
 ## [1.2.1] - 2019-07-25
 ### Added
 - acl: Constant to represent the maximum number of entries that can be placed within an ACL ([#129](https://github.com/fastly/go-fastly/pull/129)).
@@ -113,7 +122,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.2.1...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.3.0...HEAD
+[1.3.0]: https://github.com/fastly/go-fastly/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/fastly/go-fastly/compare/v1.2.0...v1.2.1
 [1.2.0]: https://github.com/fastly/go-fastly/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/fastly/go-fastly/compare/v1.0.0...v1.1.0
