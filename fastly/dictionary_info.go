@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-// DictionaryInfo represents a dictionary metasata response from the Fastly API.
+// DictionaryInfo represents a dictionary metadata response from the Fastly API.
 type DictionaryInfo struct {
 	// LastUpdated is the Time-stamp (GMT) when the dictionary was last updated.
 	LastUpdated time.Time `mapstructure:"last_updated"`
