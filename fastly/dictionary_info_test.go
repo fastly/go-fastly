@@ -2,32 +2,61 @@ package fastly
 
 import (
 	"testing"
-	"time"
 )
 
 func TestClient_GetDictionaryInfo(t *testing.T) {
+
+	fixtureBase := "dictionary_info/"
+	nameSuffix := "DictionaryInfo"
+
+	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
+	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+
+	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
+
+	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", testService.ID, testVersion.Number, nameSuffix)
+	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
+
 	var (
-		nd  *DictionaryInfo
-		err error
+		err  error
+		info *DictionaryInfo
 	)
-	record(t, "dictionary_info/get", func(c *Client) {
-		nd, err = c.GetDictionaryInfo(&GetDictionaryInfoInput{
-			ServiceID: testServiceID,
-			Version:   682,
-			ID:        "6mJXuCi2Mf19uHRefZJZBg",
+
+	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
+		err = c.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
+			Service:    testService.ID,
+			Dictionary: testDictionary.ID,
+			Items: []*BatchDictionaryItem{
+				{
+					Operation: CreateBatchOperation,
+					ItemKey:   "test-dictionary-item-0",
+					ItemValue: "value",
+				},
+				{
+					Operation: CreateBatchOperation,
+					ItemKey:   "test-dictionary-item-1",
+					ItemValue: "value",
+				},
+			},
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !nd.LastUpdated.Equal(time.Date(2019, time.June, 4, 19, 23, 11, 0, time.UTC)) {
-		t.Errorf("bad last_updated: %v", nd.LastUpdated)
+
+	record(t, fixtureBase+"get", func(c *Client) {
+		info, err = c.GetDictionaryInfo(&GetDictionaryInfoInput{
+			ServiceID: testService.ID,
+			Version:   testVersion.Number,
+			ID:        testDictionary.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-	if nd.ItemCount != 4 {
-		t.Errorf("bad item_count: %d", nd.ItemCount)
-	}
-	if nd.Digest != "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a" {
-		t.Errorf("bad digest: %q", nd.Digest)
+
+	if info.ItemCount != 2 {
+		t.Errorf("bad item_count: %d", info.ItemCount)
 	}
 }
 
