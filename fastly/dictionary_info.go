@@ -8,7 +8,7 @@ import (
 // DictionaryInfo represents a dictionary metadata response from the Fastly API.
 type DictionaryInfo struct {
 	// LastUpdated is the Time-stamp (GMT) when the dictionary was last updated.
-	LastUpdated time.Time `mapstructure:"last_updated"`
+	LastUpdated *time.Time `mapstructure:"last_updated"`
 
 	// Digest is the hash of the dictionary content.
 	Digest string `mapstructure:"digest"`
