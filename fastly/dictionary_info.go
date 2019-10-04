@@ -19,10 +19,11 @@ type DictionaryInfo struct {
 
 // GetDictionaryInfoInput is used as input to the GetDictionary function.
 type GetDictionaryInfoInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
+	// ServiceID is the ID of the service (required).
 	ServiceID string
-	Version   int
+
+	// Version is the specific configuration version (required).
+	Version int
 
 	// ID is the alphanumeric string identifying a dictionary.
 	ID string
