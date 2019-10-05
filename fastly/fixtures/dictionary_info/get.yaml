@@ -1,0 +1,47 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.12.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/dictionary/6FKsD88tVMhbomod52CWRH/info
+    method: GET
+  response:
+    body: '{"item_count":2,"last_updated":"2019-10-05 21:12:15","digest":"fceb7f5ab6b6fe843228d1b0879cf5cafc8631c44038ea143fa97ea82b8da810"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 05 Oct 2019 21:12:15 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-msp20851-MSP
+      X-Timer:
+      - S1570309935.466003,VS0,VE342
+    status: 200 OK
+    code: 200
+    duration: ""
