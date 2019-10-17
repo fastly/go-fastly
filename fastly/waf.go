@@ -387,9 +387,11 @@ func (c *Client) UpdateOWASP(i *UpdateOWASPInput) (*OWASP, error) {
 // Rule is the information about a WAF rule.
 type Rule struct {
 	ID       string `jsonapi:"primary,rule"`
+	Message  string `jsonapi:"attr,message,omitempty"`
 	RuleID   string `jsonapi:"attr,rule_id,omitempty"`
 	Severity int    `jsonapi:"attr,severity,omitempty"`
-	Message  string `jsonapi:"attr,message,omitempty"`
+	Source   string `jsonapi:"attr,source,omitempty"`
+	VCL      string `jsonapi:"attr,vcl,omitempty"`
 }
 
 // rulesType is used for reflection because JSONAPI wants to know what it's
