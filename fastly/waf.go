@@ -27,6 +27,7 @@ type WAF struct {
 	PrefetchCondition string     `jsonapi:"attr,prefetch_condition"`
 	Response          string     `jsonapi:"attr,response"`
 	LastPush          *time.Time `jsonapi:"attr,last_push,iso8601"`
+	Disabled          bool       `jsonapi:"attr,disabled"`
 
 	ConfigurationSet *WAFConfigurationSet `jsonapi:"relation,configuration_set"`
 }
