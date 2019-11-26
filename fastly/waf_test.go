@@ -3,23 +3,27 @@ package fastly
 import (
 	"bytes"
 	"io/ioutil"
+	"reflect"
+	"strconv"
 	"testing"
 )
 
 func TestClient_WAFs(t *testing.T) {
 	t.Parallel()
 
-	var err error
-	var tv *Version
-	record(t, "wafs/version", func(c *Client) {
-		tv = testVersion(t, c)
-	})
+	fixtureBase := "wafs/"
 
+	testService := createTestService(t, fixtureBase+"create_service", "service")
+	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+
+	tv := createTestVersion(t, fixtureBase+"/version", testService.ID)
+
+	var err error
 	// Enable logging on the service - we cannot create wafs without logging
 	// enabled
-	record(t, "wafs/logging/create", func(c *Client) {
+	record(t, fixtureBase+"/logging/create", func(c *Client) {
 		_, err = c.CreateSyslog(&CreateSyslogInput{
-			Service:       testServiceID,
+			Service:       testService.ID,
 			Version:       tv.Number,
 			Name:          "test-syslog",
 			Address:       "example.com",
@@ -35,9 +39,9 @@ func TestClient_WAFs(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() {
-		record(t, "wafs/logging/cleanup", func(c *Client) {
+		record(t, fixtureBase+"/logging/cleanup", func(c *Client) {
 			c.DeleteSyslog(&DeleteSyslogInput{
-				Service: testServiceID,
+				Service: testService.ID,
 				Version: tv.Number,
 				Name:    "test-syslog",
 			})
@@ -46,11 +50,11 @@ func TestClient_WAFs(t *testing.T) {
 
 	// Create a condition - we cannot create a waf without attaching a condition
 	var condition *Condition
-	record(t, "wafs/condition/create", func(c *Client) {
+	record(t, fixtureBase+"/condition/create", func(c *Client) {
 		condition, err = c.CreateCondition(&CreateConditionInput{
-			Service:   testServiceID,
+			Service:   testService.ID,
 			Version:   tv.Number,
-			Name:      "test-waf-condition",
+			Name:      "WAF_Prefetch",
 			Statement: "req.url~+\"index.html\"",
 			Type:      "PREFETCH", // This must be a prefetch condition
 			Priority:  1,
@@ -60,22 +64,22 @@ func TestClient_WAFs(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() {
-		record(t, "wafs/condition/cleanup", func(c *Client) {
+		record(t, fixtureBase+"/condition/cleanup", func(c *Client) {
 			c.DeleteCondition(&DeleteConditionInput{
-				Service: testServiceID,
+				Service: testService.ID,
 				Version: tv.Number,
-				Name:    "test-waf-condition",
+				Name:    condition.Name,
 			})
 		})
 	}()
 
 	// Create a response object
 	var ro *ResponseObject
-	record(t, "wafs/response_object/create", func(c *Client) {
+	record(t, fixtureBase+"/response_object/create", func(c *Client) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
-			Service:     testServiceID,
+			Service:     testService.ID,
 			Version:     tv.Number,
-			Name:        "test-response-object",
+			Name:        "WAf_Response",
 			Status:      200,
 			Response:    "Ok",
 			Content:     "abcd",
@@ -86,9 +90,9 @@ func TestClient_WAFs(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() {
-		record(t, "wafs/response_object/cleanup", func(c *Client) {
+		record(t, fixtureBase+"/response_object/cleanup", func(c *Client) {
 			c.DeleteResponseObject(&DeleteResponseObjectInput{
-				Service: testServiceID,
+				Service: testService.ID,
 				Version: tv.Number,
 				Name:    ro.Name,
 			})
@@ -97,10 +101,10 @@ func TestClient_WAFs(t *testing.T) {
 
 	// Create
 	var waf *WAF
-	record(t, "wafs/create", func(c *Client) {
+	record(t, fixtureBase+"/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
-			Service:           testServiceID,
-			Version:           tv.Number,
+			Service:           testService.ID,
+			Version:           strconv.Itoa(tv.Number),
 			PrefetchCondition: condition.Name,
 			Response:          ro.Name,
 		})
@@ -110,26 +114,25 @@ func TestClient_WAFs(t *testing.T) {
 	}
 
 	// List
-	var wafs []*WAF
-	record(t, "wafs/list", func(c *Client) {
-		wafs, err = c.ListWAFs(&ListWAFsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+	var wafsResp *WAFResponse
+	record(t, fixtureBase+"/list", func(c *Client) {
+		wafsResp, err = c.ListWAFs(&ListWAFsInput{
+			FilterService: testService.ID,
+			FilterVersion: tv.Number,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(wafs) < 1 {
-		t.Errorf("bad wafs: %v", wafs)
+	if len(wafsResp.Items) < 0 {
+		t.Errorf("bad wafs: %v", wafsResp.Items)
 	}
 
 	// Ensure deleted
 	defer func() {
-		record(t, "wafs/cleanup", func(c *Client) {
+		record(t, fixtureBase+"/cleanup", func(c *Client) {
 			c.DeleteWAF(&DeleteWAFInput{
-				Service: testServiceID,
-				Version: tv.Number,
+				Version: strconv.Itoa(tv.Number),
 				ID:      waf.ID,
 			})
 		})
@@ -137,10 +140,10 @@ func TestClient_WAFs(t *testing.T) {
 
 	// Get
 	var nwaf *WAF
-	record(t, "wafs/get", func(c *Client) {
+	record(t, fixtureBase+"/get", func(c *Client) {
 		nwaf, err = c.GetWAF(&GetWAFInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			Service: testService.ID,
+			Version: strconv.Itoa(tv.Number),
 			ID:      waf.ID,
 		})
 	})
@@ -178,9 +181,9 @@ func TestClient_WAFs(t *testing.T) {
 	// Update
 	// Create a new response object to attach
 	var nro *ResponseObject
-	record(t, "wafs/response_object/create_another", func(c *Client) {
+	record(t, fixtureBase+"/response_object/create_another", func(c *Client) {
 		nro, err = c.CreateResponseObject(&CreateResponseObjectInput{
-			Service:     testServiceID,
+			Service:     testService.ID,
 			Version:     tv.Number,
 			Name:        "test-response-object-2",
 			Status:      200,
@@ -193,19 +196,19 @@ func TestClient_WAFs(t *testing.T) {
 		t.Fatal(err)
 	}
 	defer func() {
-		record(t, "wafs/response_object/cleanup_another", func(c *Client) {
+		record(t, fixtureBase+"/response_object/cleanup_another", func(c *Client) {
 			c.DeleteResponseObject(&DeleteResponseObjectInput{
-				Service: testServiceID,
+				Service: testService.ID,
 				Version: tv.Number,
 				Name:    nro.Name,
 			})
 		})
 	}()
 	var uwaf *WAF
-	record(t, "wafs/update", func(c *Client) {
+	record(t, fixtureBase+"/update", func(c *Client) {
 		uwaf, err = c.UpdateWAF(&UpdateWAFInput{
-			Service:  testServiceID,
-			Version:  tv.Number,
+			Service:  testService.ID,
+			Version:  strconv.Itoa(tv.Number),
 			ID:       waf.ID,
 			Response: nro.Name,
 		})
@@ -242,10 +245,9 @@ func TestClient_WAFs(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "wafs/delete", func(c *Client) {
+	record(t, fixtureBase+"/delete", func(c *Client) {
 		err = c.DeleteWAF(&DeleteWAFInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			Version: strconv.Itoa(tv.Number),
 			ID:      waf.ID,
 		})
 	})
@@ -253,24 +255,6 @@ func TestClient_WAFs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-}
-
-func TestClient_ListWAFs_validation(t *testing.T) {
-	var err error
-	_, err = testClient.ListWAFs(&ListWAFsInput{
-		Service: "",
-	})
-	if err != ErrMissingService {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListWAFs(&ListWAFsInput{
-		Service: "foo",
-		Version: 0,
-	})
-	if err != ErrMissingVersion {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func TestClient_CreateWAF_validation(t *testing.T) {
@@ -284,7 +268,7 @@ func TestClient_CreateWAF_validation(t *testing.T) {
 
 	_, err = testClient.CreateWAF(&CreateWAFInput{
 		Service: "foo",
-		Version: 0,
+		Version: "",
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -302,7 +286,7 @@ func TestClient_GetWAF_validation(t *testing.T) {
 
 	_, err = testClient.GetWAF(&GetWAFInput{
 		Service: "foo",
-		Version: 0,
+		Version: "",
 	})
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
@@ -310,7 +294,33 @@ func TestClient_GetWAF_validation(t *testing.T) {
 
 	_, err = testClient.GetWAF(&GetWAFInput{
 		Service: "foo",
-		Version: 1,
+		Version: "1",
+	})
+	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_UpdateWAF_validation(t *testing.T) {
+	var err error
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		Service: "foo",
+		Version: "",
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		Service: "foo",
+		Version: "1",
 		ID:      "",
 	})
 	if err != ErrMissingWAFID {
@@ -318,60 +328,63 @@ func TestClient_GetWAF_validation(t *testing.T) {
 	}
 }
 
-//
-// func TestClient_UpdateWAF_validation(t *testing.T) {
-// 	var err error
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "",
-// 	})
-// 	if err != ErrMissingService {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "foo",
-// 		Version: 0,
-// 	})
-// 	if err != ErrMissingVersion {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "foo",
-// 		Version: 1,
-// 		WAFID:   "",
-// 	})
-// 	if err != ErrMissingWAFID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// }
-//
-// func TestClient_DeleteWAF_validation(t *testing.T) {
-// 	var err error
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "",
-// 	})
-// 	if err != ErrMissingService {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "foo",
-// 		Version: 0,
-// 	})
-// 	if err != ErrMissingVersion {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "foo",
-// 		Version: 1,
-// 		WAFID:   "",
-// 	})
-// 	if err != ErrMissingWAFID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// }
+func TestClient_DeleteWAF_validation(t *testing.T) {
+	var err error
+	err = testClient.DeleteWAF(&DeleteWAFInput{
+		Version: "",
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteWAF(&DeleteWAFInput{
+		Version: "1",
+		ID:      "",
+	})
+	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_listWAFs_formatFilters(t *testing.T) {
+	cases := []struct {
+		remote *ListWAFsInput
+		local  map[string]string
+	}{
+		{
+			remote: &ListWAFsInput{
+				FilterService: "service1",
+				FilterVersion: 1,
+			},
+			local: map[string]string{
+				"filter[service_id]":             "service1",
+				"filter[service_version_number]": "1",
+			},
+		},
+		{
+			remote: &ListWAFsInput{
+				FilterService: "service1",
+				FilterVersion: 1,
+				PageSize:      2,
+				PageNumber:    2,
+				Include:       "included",
+			},
+			local: map[string]string{
+				"filter[service_id]":             "service1",
+				"filter[service_version_number]": "1",
+				"page[size]":                     "2",
+				"page[number]":                   "2",
+				"include":                        "included",
+			},
+		},
+	}
+	for _, c := range cases {
+		out := c.remote.formatFilters()
+		if !reflect.DeepEqual(out, c.local) {
+			t.Fatalf("Error matching:\nexpected: %#v\n     got: %#v", c.local, out)
+		}
+	}
+}
 
 func TestUpdateWAFRuleStatusesInput_validate(t *testing.T) {
 	tests := []struct {
