@@ -241,6 +241,11 @@ func (c *Client) Delete(p string, ro *RequestOptions) (*http.Response, error) {
 	return c.Request("DELETE", p, ro)
 }
 
+// DeleteJSON issues an HTTP DELETE request.
+func (c *Client) DeleteJSON(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPI("DELETE", p, i, ro)
+}
+
 // Request makes an HTTP request against the HTTPClient using the given verb,
 // Path, and request options.
 func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, error) {
