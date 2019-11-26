@@ -1,16 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: ""
+    body: |
+      {"data":{"type":"waf_firewall","id":"59onHkuKX28AMcf0gOojis","attributes":{"service_version_number":"2"}}}
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs/2WK9ofHfHcPi3s6S2X0Z8m
+      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
+    url: https://api.fastly.com/waf/firewalls/59onHkuKX28AMcf0gOojis
     method: DELETE
   response:
     body: ""
@@ -18,13 +20,12 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Sat, 11 May 2019 21:45:02 GMT
+      - Tue, 12 Nov 2019 16:10:24 GMT
       Status:
       - 204 No Content
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS
@@ -33,8 +34,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lax8631-LAX
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19279-LCY
       X-Timer:
-      - S1557611103.608075,VS0,VE254
+      - S1573575025.533117,VS0,VE317
     status: 204 No Content
     code: 204
+    duration: ""

@@ -1,16 +1,15 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=54&name=test-waf-condition&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
+    body: Service=6gkEdARZ3mPzhQvdi2YH3j&Version=2&name=WAF_Prefetch&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
     form:
       Service:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 6gkEdARZ3mPzhQvdi2YH3j
       Version:
-      - "54"
+      - "2"
       name:
-      - test-waf-condition
+      - WAF_Prefetch
       priority:
       - "1"
       statement:
@@ -20,14 +19,12 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/condition
+      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
+    url: https://api.fastly.com/service/6gkEdARZ3mPzhQvdi2YH3j/version/2/condition
     method: POST
   response:
-    body: '{"name":"test-waf-condition","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"54","created_at":"2019-05-11T21:44:59Z","updated_at":"2019-05-11T21:44:59Z","deleted_at":null,"comment":""}'
+    body: '{"name":"WAF_Prefetch","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"6gkEdARZ3mPzhQvdi2YH3j","version":"2","comment":"","deleted_at":null,"updated_at":"2019-11-12T16:10:22Z","created_at":"2019-11-12T16:10:22Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 11 May 2019 21:44:59 GMT
+      - Tue, 12 Nov 2019 16:10:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "974"
       Fastly-Ratelimit-Reset:
-      - "1557612000"
+      - "1573578000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,14 +46,14 @@ interactions:
       - Accept-Encoding
       Via:
       - 1.1 varnish
-      - 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lax8631-LAX
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19279-LCY
       X-Timer:
-      - S1557611099.476242,VS0,VE199
+      - S1573575022.958487,VS0,VE181
     status: 200 OK
     code: 200
+    duration: ""
