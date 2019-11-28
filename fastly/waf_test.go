@@ -13,93 +13,20 @@ func TestClient_WAFs(t *testing.T) {
 
 	fixtureBase := "wafs/"
 
-	testService := createTestService(t, fixtureBase+"create_service", "service")
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	testService := createTestService(t, fixtureBase+"service/create", "service")
+	defer deleteTestService(t, fixtureBase+"/service/delete", testService.ID)
 
-	tv := createTestVersion(t, fixtureBase+"/version", testService.ID)
+	tv := createTestVersion(t, fixtureBase+"/service/version", testService.ID)
+
+	prefetch := "WAF_Prefetch"
+	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", testService.ID, prefetch, tv.Number)
+	defer deleteTestWAFCondition(t, fixtureBase+"/condition/delete", testService.ID, prefetch, tv.Number)
+
+	responseName := "WAf_Response"
+	ro := createTestResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
+	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", testService.ID, responseName, tv.Number)
 
 	var err error
-	// Enable logging on the service - we cannot create wafs without logging
-	// enabled
-	record(t, fixtureBase+"/logging/create", func(c *Client) {
-		_, err = c.CreateSyslog(&CreateSyslogInput{
-			Service:       testService.ID,
-			Version:       tv.Number,
-			Name:          "test-syslog",
-			Address:       "example.com",
-			Hostname:      "example.com",
-			Port:          1234,
-			Token:         "abcd1234",
-			Format:        "format",
-			FormatVersion: 2,
-			MessageType:   "classic",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer func() {
-		record(t, fixtureBase+"/logging/cleanup", func(c *Client) {
-			c.DeleteSyslog(&DeleteSyslogInput{
-				Service: testService.ID,
-				Version: tv.Number,
-				Name:    "test-syslog",
-			})
-		})
-	}()
-
-	// Create a condition - we cannot create a waf without attaching a condition
-	var condition *Condition
-	record(t, fixtureBase+"/condition/create", func(c *Client) {
-		condition, err = c.CreateCondition(&CreateConditionInput{
-			Service:   testService.ID,
-			Version:   tv.Number,
-			Name:      "WAF_Prefetch",
-			Statement: "req.url~+\"index.html\"",
-			Type:      "PREFETCH", // This must be a prefetch condition
-			Priority:  1,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer func() {
-		record(t, fixtureBase+"/condition/cleanup", func(c *Client) {
-			c.DeleteCondition(&DeleteConditionInput{
-				Service: testService.ID,
-				Version: tv.Number,
-				Name:    condition.Name,
-			})
-		})
-	}()
-
-	// Create a response object
-	var ro *ResponseObject
-	record(t, fixtureBase+"/response_object/create", func(c *Client) {
-		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
-			Service:     testService.ID,
-			Version:     tv.Number,
-			Name:        "WAf_Response",
-			Status:      200,
-			Response:    "Ok",
-			Content:     "abcd",
-			ContentType: "text/plain",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer func() {
-		record(t, fixtureBase+"/response_object/cleanup", func(c *Client) {
-			c.DeleteResponseObject(&DeleteResponseObjectInput{
-				Service: testService.ID,
-				Version: tv.Number,
-				Name:    ro.Name,
-			})
-		})
-	}()
-
-	// Create
 	var waf *WAF
 	record(t, fixtureBase+"/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
@@ -254,7 +181,6 @@ func TestClient_WAFs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 }
 
 func TestClient_CreateWAF_validation(t *testing.T) {
