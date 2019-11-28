@@ -182,6 +182,122 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 	}
 }
 
+func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) *Syslog {
+
+	var err error
+	var log *Syslog
+
+	record(t, fixture, func(c *Client) {
+		log, err = c.CreateSyslog(&CreateSyslogInput{
+			Service:       serviceID,
+			Version:       serviceNumber,
+			Name:          "test-syslog",
+			Address:       "example.com",
+			Hostname:      "example.com",
+			Port:          1234,
+			Token:         "abcd1234",
+			Format:        "format",
+			FormatVersion: 2,
+			MessageType:   "classic",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return log
+}
+
+func deleteTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteSyslog(&DeleteSyslogInput{
+			Service: serviceID,
+			Version: serviceNumber,
+			Name:    "test-syslog",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) *Condition {
+
+	var err error
+	var condition *Condition
+
+	record(t, fixture, func(c *Client) {
+		condition, err = c.CreateCondition(&CreateConditionInput{
+			Service:   serviceID,
+			Version:   serviceNumber,
+			Name:      name,
+			Statement: "req.url~+\"index.html\"",
+			Type:      "PREFETCH", // This must be a prefetch condition
+			Priority:  1,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return condition
+}
+
+func deleteTestWAFCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteCondition(&DeleteConditionInput{
+			Service: serviceID,
+			Version: serviceNumber,
+			Name:    name,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func createTestResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) *ResponseObject {
+
+	var err error
+	var ro *ResponseObject
+
+	record(t, fixture, func(c *Client) {
+		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
+			Service:     serviceID,
+			Version:     serviceNumber,
+			Name:        name,
+			Status:      200,
+			Response:    "Ok",
+			Content:     "abcd",
+			ContentType: "text/plain",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return ro
+}
+
+func deleteTestResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteResponseObject(&DeleteResponseObjectInput{
+			Service: serviceID,
+			Version: serviceNumber,
+			Name:    name,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func deleteTestService(t *testing.T, cleanupFixture string, serviceId string) {
 
 	var err error
