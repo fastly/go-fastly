@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
-    url: https://api.fastly.com/service/6gkEdARZ3mPzhQvdi2YH3j
+    url: https://api.fastly.com/service/3qt0xLYGlOxt19jpAQ0LJM/version/2/response_object/WAf_Response
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 12 Nov 2019 16:10:27 GMT
+      - Wed, 20 Nov 2019 12:59:08 GMT
       Fastly-Ratelimit-Remaining:
-      - "967"
+      - "966"
       Fastly-Ratelimit-Reset:
-      - "1573578000"
+      - "1574254800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19279-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19265-LCY
       X-Timer:
-      - S1573575027.804178,VS0,VE215
+      - S1574254748.207257,VS0,VE316
     status: 200 OK
     code: 200
     duration: ""

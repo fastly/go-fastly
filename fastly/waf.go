@@ -20,7 +20,7 @@ type WAFConfigurationSet struct {
 	ID string `jsonapi:"primary,configuration_set"`
 }
 
-// WAF is the information about a firewall object.
+// WAF  is the information about a firewall object.
 type WAF struct {
 	ID                             string     `jsonapi:"primary,waf_firewall"`
 	ServiceID                      string     `jsonapi:"attr,service_id"`
@@ -274,32 +274,6 @@ func (c *Client) DisableWAF(id string) error {
 
 	var waf WAF
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
-		return err
-	}
-	return nil
-}
-
-// DeployWAFInput is the input configuration used to deploy a WAF.
-type DeployWAFInput struct {
-	// These are the ID and version of the WAF.
-	ID      string
-	Version int
-}
-
-// DeployWAFVersion deploys (i.e. activates) a WAF by version.
-func (c *Client) DeployWAFVersion(i *DeployWAFInput) error {
-
-	if i.ID == "" {
-		return ErrMissingWAFID
-	}
-
-	if i.Version == 0 {
-		return ErrMissingVersion
-	}
-
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.ID, i.Version)
-	_, err := c.PostJSONAPI(path, i, nil)
-	if err != nil {
 		return err
 	}
 	return nil
@@ -911,6 +885,7 @@ func getResponseInfo(body io.Reader) (infoResponse, error) {
 		return infoResponse{}, err
 	}
 	return info, nil
+
 }
 
 // GetWAFRuleStatusInput specifies the parameters for the GetWAFRuleStatus call.

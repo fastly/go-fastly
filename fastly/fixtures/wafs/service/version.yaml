@@ -2,41 +2,32 @@
 version: 1
 interactions:
 - request:
-    body: Service=6gkEdARZ3mPzhQvdi2YH3j
+    body: Service=3qt0xLYGlOxt19jpAQ0LJM
     form:
       Service:
-      - 6gkEdARZ3mPzhQvdi2YH3j
+      - 3qt0xLYGlOxt19jpAQ0LJM
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-<<<<<<< HEAD
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
-    method: POST
-  response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":34}'
-=======
       - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
-    url: https://api.fastly.com/service/6gkEdARZ3mPzhQvdi2YH3j/version
+    url: https://api.fastly.com/service/3qt0xLYGlOxt19jpAQ0LJM/version
     method: POST
   response:
-    body: '{"service_id":"6gkEdARZ3mPzhQvdi2YH3j","number":2}'
->>>>>>> Service waf component (#5)
+    body: '{"service_id":"3qt0xLYGlOxt19jpAQ0LJM","number":2}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Tue, 12 Nov 2019 16:10:21 GMT
+      - Wed, 20 Nov 2019 12:59:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "976"
+      - "971"
       Fastly-Ratelimit-Reset:
-      - "1573578000"
+      - "1574254800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19279-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19265-LCY
       X-Timer:
-      - S1573575021.764746,VS0,VE374
+      - S1574254744.878101,VS0,VE349
     status: 200 OK
     code: 200
     duration: ""
