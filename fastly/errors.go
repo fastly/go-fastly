@@ -87,7 +87,7 @@ var ErrMissingACL = errors.New("Missing required field 'ACL'")
 
 // ErrMissingIP is an error that is returned when an unout struct
 // required an "IP" key, but one is not set
-var ErrMissingIP = errors.New("Missing requried field 'IP'")
+var ErrMissingIP = errors.New("Missing required field 'IP'")
 
 // ErrMissingEventID is an error that is returned was an input struct
 // requires a "EventID" key, but one was not set

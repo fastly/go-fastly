@@ -46,7 +46,7 @@ func CBool(b bool) *Compatibool {
 }
 
 // Compatibool is a boolean value that marshalls to 0/1 instead of true/false
-// for compatability with Fastly's API.
+// for compatibility with Fastly's API.
 type Compatibool bool
 
 // MarshalText implements the encoding.TextMarshaler interface.
