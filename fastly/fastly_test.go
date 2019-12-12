@@ -410,6 +410,40 @@ func deleteTestResponseObject(t *testing.T, fixture, serviceID, name string, ser
 	}
 }
 
+func createWAF(t *testing.T, fixture, serviceID, serviceNumber, condition, response string) *WAF {
+
+	var err error
+	var waf *WAF
+
+	record(t, fixture, func(c *Client) {
+		waf, err = c.CreateWAF(&CreateWAFInput{
+			Service:           serviceID,
+			Version:           serviceNumber,
+			PrefetchCondition: condition,
+			Response:          response,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return waf
+}
+
+func deleteWAF(t *testing.T, fixture, WAFID, WAFVersion string) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteWAF(&DeleteWAFInput{
+			ID:      WAFID,
+			Version: WAFVersion,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func deleteTestService(t *testing.T, cleanupFixture string, serviceId string) {
 
 	var err error

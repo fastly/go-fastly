@@ -211,6 +211,11 @@ func (c *Client) PostJSONAPI(p string, i interface{}, ro *RequestOptions) (*http
 	return c.RequestJSONAPI("POST", p, i, ro)
 }
 
+// PostJSONAPIBulk issues an HTTP POST request with the given interface json-encoded and bulk requests.
+func (c *Client) PostJSONAPIBulk(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPIBulk("POST", p, i, ro)
+}
+
 // Put issues an HTTP PUT request.
 func (c *Client) Put(p string, ro *RequestOptions) (*http.Response, error) {
 	return c.Request("PUT", p, ro)
@@ -241,9 +246,14 @@ func (c *Client) Delete(p string, ro *RequestOptions) (*http.Response, error) {
 	return c.Request("DELETE", p, ro)
 }
 
-// DeleteJSON issues an HTTP DELETE request.
-func (c *Client) DeleteJSON(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+// DeleteJSONAPI issues an HTTP DELETE request with the given interface json-encoded.
+func (c *Client) DeleteJSONAPI(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	return c.RequestJSONAPI("DELETE", p, i, ro)
+}
+
+// DeleteJSONAPIBulk issues an HTTP DELETE request with the given interface json-encoded and bulk requests.
+func (c *Client) DeleteJSONAPIBulk(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestJSONAPIBulk("DELETE", p, i, ro)
 }
 
 // Request makes an HTTP request against the HTTPClient using the given verb,
@@ -363,6 +373,29 @@ func (c *Client) RequestJSONAPI(verb, p string, i interface{}, ro *RequestOption
 	}
 	ro.Headers["Content-Type"] = jsonapi.MediaType
 	ro.Headers["Accept"] = jsonapi.MediaType
+
+	if i != nil {
+		var buf bytes.Buffer
+		if err := jsonapi.MarshalPayload(&buf, i); err != nil {
+			return nil, err
+		}
+
+		ro.Body = &buf
+		ro.BodyLength = int64(buf.Len())
+	}
+	return c.Request(verb, p, ro)
+}
+
+func (c *Client) RequestJSONAPIBulk(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
+	if ro == nil {
+		ro = new(RequestOptions)
+	}
+
+	if ro.Headers == nil {
+		ro.Headers = make(map[string]string)
+	}
+	ro.Headers["Content-Type"] = jsonapi.MediaType
+	ro.Headers["Accept"] = jsonapi.MediaType + "; ext=bulk"
 
 	var buf bytes.Buffer
 	if err := jsonapi.MarshalPayload(&buf, i); err != nil {
