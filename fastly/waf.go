@@ -299,7 +299,7 @@ func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
-	_, err := c.DeleteJSON(path, i, nil)
+	_, err := c.DeleteJSONAPI(path, i, nil)
 	return err
 }
 

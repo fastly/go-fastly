@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
+    url: https://api.fastly.com/waf/firewalls/5n9TykpTt7zn0KFJ4k9bMz/versions/1/rules
+    method: GET
+  response:
+    body: '{"data":[],"links":{"last":"https://api.fastly.com/waf/firewalls/5n9TykpTt7zn0KFJ4k9bMz/versions/1/rules?page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/5n9TykpTt7zn0KFJ4k9bMz/versions/1/rules?page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":0,"total_pages":1}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Content-Length:
+      - "338"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Thu, 28 Nov 2019 12:43:23 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19243-LCY
+      X-Timer:
+      - S1574945004.636936,VS0,VE140
+    status: 200 OK
+    code: 200
+    duration: ""
