@@ -315,15 +315,6 @@ func TestClient_ListAllWAFVersions_validation(t *testing.T) {
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
-
-	resp, err := testClient.ListAllWAFVersions(&ListAllWAFVersionsInput{
-		WAFID: "4QXAURauMXa4KHQ3kRn5Yr",
-	})
-	if err != nil {
-		t.Errorf("bad error: %s", err)
-	}
-
-	print(resp)
 }
 
 func TestClient_GetWAFVersion_validation(t *testing.T) {
@@ -332,6 +323,14 @@ func TestClient_GetWAFVersion_validation(t *testing.T) {
 		WAFID: "",
 	})
 	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetWAFVersion(&GetWAFVersionInput{
+		WAFID:            "1",
+		WAFVersionNumber: 0,
+	})
+	if err != ErrMissingWAFVersionNumber {
 		t.Errorf("bad error: %s", err)
 	}
 }
