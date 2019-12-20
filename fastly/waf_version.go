@@ -15,8 +15,13 @@ import (
 // decoding into.
 var WAFVersionType = reflect.TypeOf(new(WAFVersion))
 
-// WAFPaginationPageSize used as the default pagination page size by the WAF related requests.
-const WAFPaginationPageSize = 100
+const (
+	// WAFPaginationPageSize is used as the default pagination page size by the WAF related requests.
+	WAFPaginationPageSize = 100
+
+	// WAFBatchModifyMaximumOperations is used as the default batch maximum operations.
+	WAFBatchModifyMaximumOperations = 500
+)
 
 // WAFVersion is the information about a WAF version object.
 type WAFVersion struct {
