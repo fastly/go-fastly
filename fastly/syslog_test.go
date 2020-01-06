@@ -14,7 +14,7 @@ func TestClient_Syslogs(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
-	cert := strings.TrimSpace(`
+	caCert := strings.TrimSpace(`
 -----BEGIN CERTIFICATE-----
 MIICUTCCAfugAwIBAgIBADANBgkqhkiG9w0BAQQFADBXMQswCQYDVQQGEwJDTjEL
 MAkGA1UECBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMC
@@ -31,6 +31,8 @@ BQADQQA/ugzBrjjK9jcWnDVfGHlk3icNRq0oV7Ri32z/+HQX67aRfgZu7KWdI+Ju
 Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 -----END CERTIFICATE-----
 `)
+	clientCert := strings.TrimSpace(certificate())
+	clientKey := strings.TrimSpace(privateKey())
 
 	// Create
 	var s *Syslog
@@ -43,8 +45,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Hostname:      "example.com",
 			Port:          1234,
 			UseTLS:        CBool(true),
-			TLSCACert:     cert,
+			TLSCACert:     caCert,
 			TLSHostname:   "example.com",
+			TLSClientCert: clientCert,
+			TLSClientKey:  clientKey,
 			Token:         "abcd1234",
 			Format:        "format",
 			FormatVersion: 2,
@@ -88,11 +92,17 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.UseTLS != true {
 		t.Errorf("bad use_tls: %t", s.UseTLS)
 	}
-	if s.TLSCACert != cert {
+	if s.TLSCACert != caCert {
 		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
 	}
 	if s.TLSHostname != "example.com" {
 		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	}
+	if s.TLSClientCert != clientCert {
+		t.Errorf("bad tls_client_cert: %q", s.TLSClientCert)
+	}
+	if s.TLSClientKey != clientKey {
+		t.Errorf("bad tls_client_key: %q", s.TLSClientKey)
 	}
 	if s.Token != "abcd1234" {
 		t.Errorf("bad token: %q", s.Token)
@@ -157,6 +167,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.TLSHostname != ns.TLSHostname {
 		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	}
+	if s.TLSClientCert != ns.TLSClientCert {
+		t.Errorf("bad tls_client_cert: %q", s.TLSClientCert)
+	}
+	if s.TLSClientKey != ns.TLSClientKey {
+		t.Errorf("bad tls_client_key: %q", s.TLSClientKey)
 	}
 	if s.Token != ns.Token {
 		t.Errorf("bad token: %q", s.Token)
