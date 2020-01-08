@@ -64,6 +64,7 @@ type WAFVersion struct {
 	ActiveRulesFastlyBlockCount      int        `jsonapi:"attr,active_rules_fastly_block_count"`
 	ActiveRulesOWASPLogCount         int        `jsonapi:"attr,active_rules_owasp_log_count"`
 	ActiveRulesOWASPBlockCount       int        `jsonapi:"attr,active_rules_owasp_block_count"`
+	ActiveRulesOWASPScoreCount       int        `jsonapi:"attr,active_rules_owasp_score_count"`
 }
 
 // WAFVersionResponse represents a list WAF versions full response.
@@ -373,4 +374,31 @@ func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 		return err
 	}
 	return nil
+}
+
+// CreateEmptyWAFVersionInput used as input for creating an empty WAF version.
+type CreateEmptyWAFVersionInput struct {
+	// The Web Application Firewall's ID.
+	WAFID string
+}
+
+// CreateEmptyWAFVersion creates an empty WAF version,
+//  which means a version without rules and all config options set to their default values.
+func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersion, error) {
+
+	if i.WAFID == "" {
+		return nil, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/waf/firewalls/%s/versions", i.WAFID)
+	resp, err := c.PostJSONAPI(path, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var waf WAFVersion
+	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
+		return nil, err
+	}
+	return &waf, nil
 }
