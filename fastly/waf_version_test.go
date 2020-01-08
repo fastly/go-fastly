@@ -143,6 +143,19 @@ func TestClient_WAF_Versions(t *testing.T) {
 	if len(wafVerResp.Items) != 2 {
 		t.Errorf("expected 2 waf: got %d", len(wafVerResp.Items))
 	}
+
+	record(t, fixtureBase+"/create_empty", func(c *Client) {
+		wafVer, err = c.CreateEmptyWAFVersion(&CreateEmptyWAFVersionInput{
+			WAFID: waf.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if wafVer == nil {
+		t.Error("expected waf, got nil")
+	}
+	verifyEmptyWAFVersion(t, wafVer)
 }
 
 func verifyWAFVersionUpdate(t *testing.T, i *UpdateWAFVersionInput, o *WAFVersion) {
@@ -234,7 +247,45 @@ func verifyWAFVersionUpdate(t *testing.T, i *UpdateWAFVersionInput, o *WAFVersio
 	if i.XSSScoreThreshold != o.XSSScoreThreshold {
 		t.Errorf("expected %d waf: got %d", i.XSSScoreThreshold, o.XSSScoreThreshold)
 	}
+}
 
+func verifyEmptyWAFVersion(t *testing.T, o *WAFVersion) {
+
+	threshold := 999
+	if threshold != o.HTTPViolationScoreThreshold {
+		t.Errorf("expected  %d HTTPViolationScoreThreshold: got %d", threshold, o.HTTPViolationScoreThreshold)
+	}
+	if threshold != o.InboundAnomalyScoreThreshold {
+		t.Errorf("expected %d InboundAnomalyScoreThreshold: got %d", threshold, o.InboundAnomalyScoreThreshold)
+	}
+	if threshold != o.InboundAnomalyScoreThreshold {
+		t.Errorf("expected %d InboundAnomalyScoreThreshold: got %d", threshold, o.InboundAnomalyScoreThreshold)
+	}
+	if threshold != o.PHPInjectionScoreThreshold {
+		t.Errorf("expected %d PHPInjectionScoreThreshold: got %d", threshold, o.PHPInjectionScoreThreshold)
+	}
+	if threshold != o.RCEScoreThreshold {
+		t.Errorf("expected %d RCEScoreThreshold: got %d", threshold, o.RCEScoreThreshold)
+	}
+	if threshold != o.RFIScoreThreshold {
+		t.Errorf("expected %d waf: RFIScoreThreshold %d", threshold, o.RFIScoreThreshold)
+	}
+	if threshold != o.SessionFixationScoreThreshold {
+		t.Errorf("expected %d SessionFixationScoreThreshold: got %d", threshold, o.SessionFixationScoreThreshold)
+	}
+	if threshold != o.SQLInjectionScoreThreshold {
+		t.Errorf("expected %d SQLInjectionScoreThreshold: got %d", threshold, o.SQLInjectionScoreThreshold)
+	}
+	if threshold != o.XSSScoreThreshold {
+		t.Errorf("expected %d XSSScoreThreshold: got %d", threshold, o.XSSScoreThreshold)
+	}
+
+	totalRules := o.ActiveRulesFastlyBlockCount + o.ActiveRulesFastlyLogCount + o.ActiveRulesOWASPBlockCount +
+		o.ActiveRulesOWASPLogCount + o.ActiveRulesOWASPScoreCount + o.ActiveRulesTrustwaveBlockCount + o.ActiveRulesTrustwaveLogCount
+
+	if totalRules != 0 {
+		t.Errorf("expected no active rules rules: got %d", totalRules)
+	}
 }
 
 func buildUpdateInput() *UpdateWAFVersionInput {
@@ -410,6 +461,15 @@ func TestClient_DeployWAFVersion_validation(t *testing.T) {
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	}); err != ErrMissingWAFVersionNumber {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_CreateEmptyWAFVersion_validation(t *testing.T) {
+	var err error
+	if _, err = testClient.CreateEmptyWAFVersion(&CreateEmptyWAFVersionInput{
+		WAFID: "",
+	}); err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 }
