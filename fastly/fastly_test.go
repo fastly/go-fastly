@@ -356,7 +356,7 @@ func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 	return condition
 }
 
-func deleteTestWAFCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
+func deleteTestCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
 
 	var err error
 
@@ -372,20 +372,17 @@ func deleteTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 	}
 }
 
-func createTestResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) *ResponseObject {
+func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) *ResponseObject {
 
 	var err error
 	var ro *ResponseObject
 
 	record(t, fixture, func(c *Client) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
-			Service:     serviceID,
-			Version:     serviceNumber,
-			Name:        name,
-			Status:      200,
-			Response:    "Ok",
-			Content:     "abcd",
-			ContentType: "text/plain",
+			Service: serviceID,
+			Version: serviceNumber,
+			Name:    name,
+			Status:  403,
 		})
 	})
 	if err != nil {
@@ -444,13 +441,13 @@ func deleteWAF(t *testing.T, fixture, WAFID, WAFVersion string) {
 	}
 }
 
-func deleteTestService(t *testing.T, cleanupFixture string, serviceId string) {
+func deleteTestService(t *testing.T, cleanupFixture, serviceID string) {
 
 	var err error
 
 	record(t, cleanupFixture, func(client *Client) {
 		err = client.DeleteService(&DeleteServiceInput{
-			ID: serviceId,
+			ID: serviceID,
 		})
 	})
 	if err != nil {

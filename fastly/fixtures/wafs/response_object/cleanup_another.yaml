@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
-    url: https://api.fastly.com/service/3qt0xLYGlOxt19jpAQ0LJM/version/2/response_object/test-response-object-2
+    url: https://api.fastly.com/service/3qt0xLYGlOxt19jpAQ0LJM/version/2/response_object/WAF_Response2
     method: DELETE
   response:
     body: '{"status":"ok"}'
