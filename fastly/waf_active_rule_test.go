@@ -22,7 +22,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	createTestWAFCondition(t, fixtureBase+"/condition/create", testService.ID, prefetch, tv.Number)
 
 	responseName := "WAf_Response"
-	createTestResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
+	createTestWAFResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
 
 	waf := createWAF(t, fixtureBase+"/waf/create", testService.ID, strconv.Itoa(tv.Number), prefetch, responseName)
 	defer deleteWAF(t, fixtureBase+"/waf/delete", waf.ID, "1")

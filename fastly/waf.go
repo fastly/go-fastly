@@ -166,7 +166,7 @@ type GetWAFInput struct {
 	// version. Both fields are required.
 	Service string
 	Version string
-	// ID is the id of the WAF to get.
+	// ID is the WAF's ID.
 	ID string
 }
 
@@ -239,44 +239,56 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	return &waf, nil
 }
 
-// EnableWAF updates a specific WAF.
-func (c *Client) EnableWAF(id string) error {
-
-	if id == "" {
-		return ErrMissingWAFID
-	}
-
-	path := fmt.Sprintf("/waf/firewalls/%s/enable", id)
-	resp, err := c.PatchJSONAPI(path, &UpdateWAFInput{}, nil)
-	if err != nil {
-		return err
-	}
-
-	var waf WAF
-	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
-		return err
-	}
-	return nil
+// EnableWAFInput is used as input to the EnableWAF function.
+type EnableWAFInput struct {
+	// ID is the WAF's ID.
+	ID string
 }
 
-// DisableWAF disables a WAF.
-func (c *Client) DisableWAF(id string) error {
+// EnableWAF enables a specific WAF.
+func (c *Client) EnableWAF(i *EnableWAFInput) (*WAF, error) {
 
-	if id == "" {
-		return ErrMissingWAFID
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/disable", id)
-	resp, err := c.PatchJSONAPI(path, &UpdateWAFInput{}, nil)
+	path := fmt.Sprintf("/waf/firewalls/%s/enable", i.ID)
+	resp, err := c.PatchJSONAPI(path, nil, nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
 	var waf WAF
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
-		return err
+		return nil, err
 	}
-	return nil
+	return &waf, nil
+}
+
+// DisableWAFInput is used as input to the DisableWAF function.
+type DisableWAFInput struct {
+	// ID is the WAF's ID.
+	ID string
+}
+
+// DisableWAF disables a specific WAF.
+func (c *Client) DisableWAF(i *DisableWAFInput) (*WAF, error) {
+
+	if i.ID == "" {
+		return nil, ErrMissingWAFID
+	}
+
+	path := fmt.Sprintf("/waf/firewalls/%s/disable", i.ID)
+	resp, err := c.PatchJSONAPI(path, nil, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var waf WAF
+	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
+		return nil, err
+	}
+	return &waf, nil
 }
 
 // DeleteWAFInput is used as input to the DeleteWAFInput function.
