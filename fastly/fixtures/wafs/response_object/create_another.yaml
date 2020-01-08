@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: Service=3qt0xLYGlOxt19jpAQ0LJM&Version=2&content=efgh&content_type=text%2Fplain&name=test-response-object-2&response=Ok&status=200
+    body: Service=3qt0xLYGlOxt19jpAQ0LJM&Version=2&content=efgh&content_type=text%2Fplain&name=WAF_Response2&response=Ok&status=200
     form:
       Service:
       - 3qt0xLYGlOxt19jpAQ0LJM
@@ -13,7 +13,7 @@ interactions:
       content_type:
       - text/plain
       name:
-      - test-response-object-2
+      - WAF_Response2
       response:
       - Ok
       status:
@@ -26,7 +26,7 @@ interactions:
     url: https://api.fastly.com/service/3qt0xLYGlOxt19jpAQ0LJM/version/2/response_object
     method: POST
   response:
-    body: '{"content":"efgh","content_type":"text/plain","name":"test-response-object-2","response":"Ok","status":"200","service_id":"3qt0xLYGlOxt19jpAQ0LJM","version":"2","request_condition":"","updated_at":"2019-11-20T12:59:06Z","deleted_at":null,"created_at":"2019-11-20T12:59:06Z","cache_condition":""}'
+    body: '{"content":"efgh","content_type":"text/plain","name":"WAF_Response2","response":"Ok","status":"200","service_id":"3qt0xLYGlOxt19jpAQ0LJM","version":"2","request_condition":"","updated_at":"2019-11-20T12:59:06Z","deleted_at":null,"created_at":"2019-11-20T12:59:06Z","cache_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
