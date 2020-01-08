@@ -21,10 +21,10 @@ func TestClient_WAF_Versions(t *testing.T) {
 
 	prefetch := "WAF_Prefetch"
 	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", testService.ID, prefetch, tv.Number)
-	defer deleteTestWAFCondition(t, fixtureBase+"/condition/delete", testService.ID, prefetch, tv.Number)
+	defer deleteTestCondition(t, fixtureBase+"/condition/delete", testService.ID, prefetch, tv.Number)
 
 	responseName := "WAf_Response"
-	ro := createTestResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
+	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
 	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", testService.ID, responseName, tv.Number)
 
 	var err error
