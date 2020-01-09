@@ -1,0 +1,39 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/pool/test-pool
+    method: DELETE
+  response:
+    body: '{"msg":"Provided credentials are missing or invalid"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "53"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 09 Jan 2020 14:53:15 GMT
+      Retry-After:
+      - "0"
+      Server:
+      - Varnish
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-lcy19229-LCY
+    status: 401 Unauthorized
+    code: 401
+    duration: ""

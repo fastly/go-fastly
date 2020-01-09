@@ -18,6 +18,9 @@ var testStatsClient = NewRealtimeStatsClient()
 // testServiceID is the ID of the testing service.
 var testServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 
+// testPool is the ID of the test pool (dynamic servers)
+var testPoolID = "61L1XqByD5TuEVNbaC0R4D"
+
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.
 var testVersionLock sync.Mutex
@@ -78,6 +81,25 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 	}
 
 	return service
+}
+
+func createTestPool(t *testing.T, poolFixture string, serviceId string, version int, poolNameSuffix string) *Pool {
+
+	var err error
+	var pool *Pool
+
+	record(t, poolFixture, func(client *Client) {
+		pool, err = client.CreatePool(&CreatePoolInput{
+                     Service: serviceId,
+                     Version: version,
+                     Name:    fmt.Sprintf("test_service_pool_%s", poolNameSuffix),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return pool
 }
 
 // testVersion is a new, blank version suitable for testing.
@@ -194,6 +216,22 @@ func deleteTestService(t *testing.T, cleanupFixture string, serviceId string) {
 	if err != nil {
 		t.Fatal(err)
 	}
+}
+
+func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
+
+        var err error
+
+        record(t, deleteFixture, func(client *Client) {
+                err = client.DeletePool(&DeletePoolInput{
+                        Service: pool.Service,
+                        Version: pool.Version,
+                        Name:    pool.Name,
+                })
+        })
+        if err != nil {
+                t.Fatal(err)
+        }
 }
 
 // privatekey returns a ASN.1 DER encoded key suitable for testing.

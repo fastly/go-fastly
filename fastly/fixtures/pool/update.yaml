@@ -1,0 +1,56 @@
+---
+version: 1
+interactions:
+- request:
+    body: Name=test-pool&Service=7i6HN3TK9wS159v2gPAZ8A&Version=2&name=new-test-pool&override_host=www.example.com
+    form:
+      Name:
+      - test-pool
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "2"
+      name:
+      - new-test-pool
+      override_host:
+      - www.example.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/pool/test-pool
+    method: PUT
+  response:
+    body: '{"id":"2Yd1WfiCBPENLloXfXmlO","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"2","name":"new-test-pool","shield":null,"override_host":"www.example.com","use_tls":"0","type":"random","request_condition":null,"max_conn_default":"200","connect_timeout":"1000","first_byte_timeout":"15000","quorum":"75","tls_ca_cert":null,"tls_ciphers":null,"tls_client_key":null,"tls_client_cert":null,"tls_sni_hostname":null,"tls_check_cert":"1","tls_cert_hostname":null,"min_tls_version":null,"max_tls_version":null,"healthcheck":null,"comment":"","created_at":"2016-06-20T03:55:06+00:00","updated_at":"2016-06-20T03:55:06+00:00","deleted_at":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 23 Jul 2019 10:47:05 GMT
+      Fastly-Ratelimit-Remaining:
+      - "984"
+      Fastly-Ratelimit-Reset:
+      - "1563879600"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19277-LCY
+      X-Timer:
+      - S1563878825.257544,VS0,VE529
+    status: 200 OK
+    code: 200

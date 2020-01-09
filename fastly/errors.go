@@ -117,6 +117,10 @@ var ErrMissingWAFList = errors.New("WAF slice is empty")
 // The Fastly API specifies an maximum limit.
 var ErrBatchUpdateMaximumOperationsExceeded = errors.New("batch modify maximum operations exceeded")
 
+// ErrMissingPool is an error that is returned when an input struct requires
+// a "Pool" key, but one was not set.
+var ErrMissingPool = errors.New("Missing required field 'Pool'")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
