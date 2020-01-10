@@ -9,21 +9,21 @@ import (
 
 // Server represents a server response from the Fastly API.
 type Server struct {
-        Id               string     `mapstructure:"id"`
-	Service          string     `mapstructure:"service_id"`
-	Pool             string     `mapstructure:"pool_id"`
+	Id      string `mapstructure:"id"`
+	Service string `mapstructure:"service_id"`
+	Pool    string `mapstructure:"pool_id"`
 
-	Weight           string     `mapstructure:"weight"`
-	MaxConn          string     `mapstructure:"max_conn"`
-	Port             string     `mapstructure:"port"`
-	Address          string     `mapstructure:"address"`
-        Comment          string     `mapstructure:"comment"`
-        Disabled         bool       `mapstructure:"disabled"`
-	OverrideHost     string     `mapstructure:"override_host"`
+	Weight       string `mapstructure:"weight"`
+	MaxConn      string `mapstructure:"max_conn"`
+	Port         string `mapstructure:"port"`
+	Address      string `mapstructure:"address"`
+	Comment      string `mapstructure:"comment"`
+	Disabled     bool   `mapstructure:"disabled"`
+	OverrideHost string `mapstructure:"override_host"`
 
-	CreatedAt        *time.Time `mapstructure:"created_at"`
-	UpdatedAt        *time.Time `mapstructure:"updated_at"`
-	DeletedAt        *time.Time `mapstructure:"deleted_at"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // serversById is a sortable list of servers.
@@ -42,8 +42,7 @@ type ListServersInput struct {
 	Service string
 
 	// Pool is the ID of the server pool (required).
-        Pool string
-
+	Pool string
 }
 
 // ListServers returns the list of Servers for the service configuration
@@ -74,18 +73,18 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 // CreateServerInput is used as input to the CreateServer function.
 type CreateServerInput struct {
 	// Service is the ID of the service.
-        // Pool is the ID of the pool that the server is associated with
-        // Both fields are required.
+	// Pool is the ID of the pool that the server is associated with
+	// Both fields are required.
 	Service string
 	Pool    string
 
-        Weight           string     `form:"weight,omitempty"`
-	MaxConn          string     `form:"max_conn,omitempty"`
-	Port             string     `form:"port,omitempty"`
-	Address          string     `form:"address,omitempty"`
-        Comment          string     `form:"comment,omitempty"`
-        Disabled         bool       `form:"disabled,omitempty"`
-	OverrideHost     string     `form:"override_host,omitempty"`
+	Weight       string `form:"weight,omitempty"`
+	MaxConn      string `form:"max_conn,omitempty"`
+	Port         string `form:"port,omitempty"`
+	Address      string `form:"address,omitempty"`
+	Comment      string `form:"comment,omitempty"`
+	Disabled     bool   `form:"disabled,omitempty"`
+	OverrideHost string `form:"override_host,omitempty"`
 }
 
 // CreateServer creates a new Fastly health check.
@@ -94,11 +93,11 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 		return nil, ErrMissingService
 	}
 
-        if i.Pool == "" {
+	if i.Pool == "" {
 		return nil, ErrMissingPool
 	}
 
-        path := fmt.Sprintf("/service/%s/pool/%s/server", i.Service, i.Pool)
+	path := fmt.Sprintf("/service/%s/pool/%s/server", i.Service, i.Pool)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -113,23 +112,23 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 
 // GetServerInput is used as input to the GetServer function.
 type GetServerInput struct {
-  // Service is the ID of the service (required).
-  Service string
+	// Service is the ID of the service (required).
+	Service string
 
-  // Pool is the ID of the server pool (required).
-  Pool string
-  
-  // Id of the server to fetch.
-  Id string
+	// Pool is the ID of the server pool (required).
+	Pool string
+
+	// Id of the server to fetch.
+	Id string
 }
 
 // GetServer gets the Server configuration with the given parameters.
 func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	if i.Service == "" {
-                return nil, ErrMissingService
+		return nil, ErrMissingService
 	}
 
-        if i.Pool == "" {
+	if i.Pool == "" {
 		return nil, ErrMissingPool
 	}
 
@@ -153,20 +152,20 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 // UpdateServerInput is used as input to the UpdateServer function.
 type UpdateServerInput struct {
 	// ServiceiID is the ID of the service.
-        // Pool is the ID of the pool that the server is associated with
+	// Pool is the ID of the pool that the server is associated with
 	// Id of the server to update
-        // These 3 fields are required.
+	// These 3 fields are required.
 	Service string
 	Pool    string
-	Id        string
+	Id      string
 
-        Weight           string     `form:"weight,omitempty"`
-	MaxConn          string     `form:"max_conn,omitempty"`
-	Port             string     `form:"port,omitempty"`
-	Address          string     `form:"address,omitempty"`
-        Comment          string     `form:"comment,omitempty"`
-        Disabled         bool       `form:"disabled,omitempty"`
-	OverrideHost     string     `form:"override_host,omitempty"`
+	Weight       string `form:"weight,omitempty"`
+	MaxConn      string `form:"max_conn,omitempty"`
+	Port         string `form:"port,omitempty"`
+	Address      string `form:"address,omitempty"`
+	Comment      string `form:"comment,omitempty"`
+	Disabled     bool   `form:"disabled,omitempty"`
+	OverrideHost string `form:"override_host,omitempty"`
 }
 
 // UpdateServerInput updates a specific server configuration.
@@ -175,7 +174,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 		return nil, ErrMissingService
 	}
 
-        if i.Pool == "" {
+	if i.Pool == "" {
 		return nil, ErrMissingPool
 	}
 
@@ -199,9 +198,9 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 // DeleteServerInput is the input parameter to DeleteServer.
 type DeleteServerInput struct {
 	// Service is the ID of the service.
-        // Pool is the ID of the pool that the server is associated with
+	// Pool is the ID of the pool that the server is associated with
 	// Server is the ID of the server to delete
-        // These 3 fields are required.
+	// These 3 fields are required.
 	Service string
 	Pool    string
 	Id      string
@@ -213,7 +212,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 		return ErrMissingService
 	}
 
-        if i.Pool == "" {
+	if i.Pool == "" {
 		return ErrMissingPool
 	}
 
@@ -236,4 +235,3 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	}
 	return nil
 }
-

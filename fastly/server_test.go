@@ -5,35 +5,32 @@ import "testing"
 func TestClient_server(t *testing.T) {
 	t.Parallel()
 
-
-        var serverID = "srvsrvsrvsrvsrvsrv"
+	var serverID = "srvsrvsrvsrvsrvsrv"
 	var err error
 
+	fixtureBase := "server/"
+	nameSuffix := "test_pool"
 
-        fixtureBase := "server/"
-        nameSuffix := "test_pool"
+	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
+	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
 
-        testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-        defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
 
-        testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
-
-        testPool := createTestPool(t, fixtureBase+"create_pool", testService.ID, testVersion.Number, nameSuffix)
-        defer deleteTestPool(t, testPool, fixtureBase+"delete_pool")
-
+	testPool := createTestPool(t, fixtureBase+"create_pool", testService.ID, testVersion.Number, nameSuffix)
+	defer deleteTestPool(t, testPool, fixtureBase+"delete_pool")
 
 	// Create
 	var s *Server
 	record(t, fixtureBase+"create_server", func(c *Client) {
 		s, err = c.CreateServer(&CreateServerInput{
-			Service:        testService.ID,
-			Pool:           testPool.Id,
-                        Weight:         "75",
-        		MaxConn:        "777",
-        		Port:           "1234",
-        		Address:        "integ-test.go-fastly.com",
-        		Disabled:       false,
-        		OverrideHost:   "origin.example.com",
+			Service:      testService.ID,
+			Pool:         testPool.Id,
+			Weight:       "75",
+			MaxConn:      "777",
+			Port:         "1234",
+			Address:      "integ-test.go-fastly.com",
+			Disabled:     false,
+			OverrideHost: "origin.example.com",
 		})
 	})
 	if err != nil {
@@ -46,27 +43,27 @@ func TestClient_server(t *testing.T) {
 			c.DeleteServer(&DeleteServerInput{
 				Service: testServiceID,
 				Pool:    testPoolID,
-                                Id:      serverID,
+				Id:      serverID,
 			})
 
 		})
 	}()
 
-        if s.Weight != "75" {
-                t.Errorf("bad weight: %q", s.Weight)
-        }
-        if s.MaxConn != "777" {
-                t.Errorf("bad maxconn: %q", s.MaxConn)
-        }
+	if s.Weight != "75" {
+		t.Errorf("bad weight: %q", s.Weight)
+	}
+	if s.MaxConn != "777" {
+		t.Errorf("bad maxconn: %q", s.MaxConn)
+	}
 	if s.Port != "1234" {
 		t.Errorf("bad port: %q", s.Port)
 	}
-        if s.Address != "integ-test.go-fastly.com" {
-                t.Errorf("bad address: %q", s.Address)
-        }
-        if s.Disabled != false {
-                t.Errorf("bad disabled: %t", s.Disabled)
-        }
+	if s.Address != "integ-test.go-fastly.com" {
+		t.Errorf("bad address: %q", s.Address)
+	}
+	if s.Disabled != false {
+		t.Errorf("bad disabled: %t", s.Disabled)
+	}
 	if s.OverrideHost != "origin.example.com" {
 		t.Errorf("bad override_host: %q", s.OverrideHost)
 	}
@@ -75,8 +72,8 @@ func TestClient_server(t *testing.T) {
 	var servers []*Server
 	record(t, fixtureBase+"list_servers", func(c *Client) {
 		servers, err = c.ListServers(&ListServersInput{
-                                 Service:        testService.ID,
-                                 Pool:           testPool.Id,
+			Service: testService.ID,
+			Pool:    testPool.Id,
 		})
 	})
 	if err != nil {
@@ -101,21 +98,21 @@ func TestClient_server(t *testing.T) {
 	if s.Id != ns.Id {
 		t.Errorf("bad id: %q (%q)", s.Id, ns.Id)
 	}
-        if s.Weight != ns.Weight {
-                t.Errorf("bad weigth: %q (%q)", s.Weight, ns.Weight)
-        }
-        if s.MaxConn != ns.MaxConn {
-                t.Errorf("bad maxconn: %q (%q)", s.MaxConn, ns.MaxConn)
-        }
-        if s.Port != ns.Port {
-                t.Errorf("bad port: %q (%q)", s.Port, ns.Port)
-        }
+	if s.Weight != ns.Weight {
+		t.Errorf("bad weigth: %q (%q)", s.Weight, ns.Weight)
+	}
+	if s.MaxConn != ns.MaxConn {
+		t.Errorf("bad maxconn: %q (%q)", s.MaxConn, ns.MaxConn)
+	}
+	if s.Port != ns.Port {
+		t.Errorf("bad port: %q (%q)", s.Port, ns.Port)
+	}
 	if s.Address != ns.Address {
 		t.Errorf("bad address: %q (%q)", s.Address, ns.Address)
 	}
-        if s.Disabled != ns.Disabled {
-                t.Errorf("bad disabled: %t (%t)", s.Disabled, ns.Disabled)
-        }
+	if s.Disabled != ns.Disabled {
+		t.Errorf("bad disabled: %t (%t)", s.Disabled, ns.Disabled)
+	}
 	if s.OverrideHost != ns.OverrideHost {
 		t.Errorf("bad override_host: %q (%q)", s.OverrideHost, ns.OverrideHost)
 	}
@@ -237,13 +234,12 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 	_, err = testClient.UpdateServer(&UpdateServerInput{
 		Service: "foo",
 		Pool:    "bar",
-		Id:        "",
+		Id:      "",
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
-
 
 func TestClient_DeleteServer_validation(t *testing.T) {
 	var err error
@@ -265,7 +261,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 	err = testClient.DeleteServer(&DeleteServerInput{
 		Service: "foo",
 		Pool:    "bar",
-		Id:        "",
+		Id:      "",
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)

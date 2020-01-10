@@ -9,31 +9,31 @@ import (
 
 // Pool represents a pool response from the Fastly API.
 type Pool struct {
-	Id               string `mapstructure:"id"`
-	Service          string `mapstructure:"service_id"`
-	Version          int    `mapstructure:"version"`
+	Id      string `mapstructure:"id"`
+	Service string `mapstructure:"service_id"`
+	Version int    `mapstructure:"version"`
 
-	Name             string `mapstructure:"name"`
-	Shield           string `mapstructure:"shield"`
-	OverrideHost     string `mapstructure:"override_host"`
-	UseTls           bool   `mapstructure:"use_tls"`
-	Type             string `mapstructure:"type"`
-	RequestCondition string `mapstructure:"request_condition"`
-	MaxConnDefault   uint   `mapstructure:"max_conn_default"`
-	ConnectTimeout   uint   `mapstructure:"connect_timeout"`
-	FirstByteTimeout uint   `mapstructure:"first_byte_timeout"`
-	Quorum           uint   `mapstructure:"quorum"`
-	TlsCaCert        string `mapstructure:"tls_ca_cert"`
-	TlsCiphers       string `mapstructure:"tls_ciphers"`
-	TlsClientKey     string `mapstructure:"tls_client_key"`
-	TlsClientCert    string `mapstructure:"tls_client_cert"`
-	TlsSniHostname   string `mapstructure:"tls_sni_hostname"`
-	TlsCheckCert     string `mapstructure:"tls_check_cert"`
-	TlsCertHostname  string `mapstructure:"tls_cert_hostname"`
-	MinTlsVersion    string `mapstructure:"min_tls_version"`
-	MaxTlsVersion    string `mapstructure:"max_tls_version"`
-	HealthCheck      string `mapstructure:"healthcheck"`
-	Comment          string `mapstructure:"comment"`
+	Name             string     `mapstructure:"name"`
+	Shield           string     `mapstructure:"shield"`
+	OverrideHost     string     `mapstructure:"override_host"`
+	UseTls           bool       `mapstructure:"use_tls"`
+	Type             string     `mapstructure:"type"`
+	RequestCondition string     `mapstructure:"request_condition"`
+	MaxConnDefault   uint       `mapstructure:"max_conn_default"`
+	ConnectTimeout   uint       `mapstructure:"connect_timeout"`
+	FirstByteTimeout uint       `mapstructure:"first_byte_timeout"`
+	Quorum           uint       `mapstructure:"quorum"`
+	TlsCaCert        string     `mapstructure:"tls_ca_cert"`
+	TlsCiphers       string     `mapstructure:"tls_ciphers"`
+	TlsClientKey     string     `mapstructure:"tls_client_key"`
+	TlsClientCert    string     `mapstructure:"tls_client_cert"`
+	TlsSniHostname   string     `mapstructure:"tls_sni_hostname"`
+	TlsCheckCert     string     `mapstructure:"tls_check_cert"`
+	TlsCertHostname  string     `mapstructure:"tls_cert_hostname"`
+	MinTlsVersion    string     `mapstructure:"min_tls_version"`
+	MaxTlsVersion    string     `mapstructure:"max_tls_version"`
+	HealthCheck      string     `mapstructure:"healthcheck"`
+	Comment          string     `mapstructure:"comment"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
@@ -90,8 +90,8 @@ type CreatePoolInput struct {
 	Service string
 	Version int
 
-        // Name is the name of the pool to create.
-	Name             string `form:"name"`
+	// Name is the name of the pool to create.
+	Name string `form:"name"`
 
 	Shield           string `form:"shield,omitempty"`
 	OverrideHost     string `form:"override_host,omitempty"`
@@ -125,9 +125,9 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 		return nil, ErrMissingVersion
 	}
 
-        if i.Name == "" {
-                return nil, ErrMissingName
-        }
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool", i.Service, i.Version)
 	resp, err := c.PostForm(path, i, nil)
@@ -190,7 +190,7 @@ type UpdatePoolInput struct {
 	// Name is the name of the pool to update.
 	Name string
 
-        NewName          string `form:"name,omitempty"`
+	NewName          string `form:"name,omitempty"`
 	Shield           string `form:"shield,omitempty"`
 	OverrideHost     string `form:"override_host,omitempty"`
 	UseTls           bool   `form:"use_tls,omitempty"`
@@ -280,5 +280,3 @@ func (c *Client) DeletePool(i *DeletePoolInput) error {
 	}
 	return nil
 }
-
-

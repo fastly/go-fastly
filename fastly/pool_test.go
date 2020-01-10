@@ -18,8 +18,8 @@ func TestClient_Pool(t *testing.T) {
 			Service:        testServiceID,
 			Version:        tv.Number,
 			Name:           "test-pool",
-                        Quorum:         75,
-                        MaxConnDefault: 200,
+			Quorum:         75,
+			MaxConnDefault: 200,
 			ConnectTimeout: 1000,
 		})
 	})
@@ -29,7 +29,7 @@ func TestClient_Pool(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "pool/cleanup", func(c *Client) {
+		record(t, "pool/delete", func(c *Client) {
 			c.DeletePool(&DeletePoolInput{
 				Service: testServiceID,
 				Version: tv.Number,
@@ -42,9 +42,9 @@ func TestClient_Pool(t *testing.T) {
 	if p.Name != "test-pool" {
 		t.Errorf("bad name: %q", p.Name)
 	}
-        if p.Quorum != 75 {
-                t.Errorf("bad quorum: %d", p.Quorum)
-        }
+	if p.Quorum != 75 {
+		t.Errorf("bad quorum: %d", p.Quorum)
+	}
 	if p.MaxConnDefault != 200 {
 		t.Errorf("bad max_conn_default: %d", p.MaxConnDefault)
 	}
@@ -82,12 +82,12 @@ func TestClient_Pool(t *testing.T) {
 	if p.Name != np.Name {
 		t.Errorf("bad name: %q (%q)", p.Name, np.Name)
 	}
-        if p.Quorum != np.Quorum {
-                t.Errorf("bad quorum: %d (%d)", p.Quorum, np.Quorum)
-        }
-        if p.MaxConnDefault != np.MaxConnDefault {
-                t.Errorf("bad max_conn_default: %d (%d)", p.MaxConnDefault, np.MaxConnDefault)
-        }
+	if p.Quorum != np.Quorum {
+		t.Errorf("bad quorum: %d (%d)", p.Quorum, np.Quorum)
+	}
+	if p.MaxConnDefault != np.MaxConnDefault {
+		t.Errorf("bad max_conn_default: %d (%d)", p.MaxConnDefault, np.MaxConnDefault)
+	}
 	if p.ConnectTimeout != np.ConnectTimeout {
 		t.Errorf("bad connect_timeout: %q (%q)", p.ConnectTimeout, np.ConnectTimeout)
 	}
@@ -164,14 +164,14 @@ func TestClient_CreatePool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-        _, err = testClient.CreatePool(&CreatePoolInput{
-                Service: "foo",
-                Version: 1,
-                Name:    "",
-        })
-        if err != ErrMissingName {
-                t.Errorf("bad error: %s", err)
-        }
+	_, err = testClient.CreatePool(&CreatePoolInput{
+		Service: "foo",
+		Version: 1,
+		Name:    "",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_GetPool_validation(t *testing.T) {
