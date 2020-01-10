@@ -49,7 +49,7 @@ type Pool struct {
 	OverrideHost     string   `mapstructure:"override_host"`
 }
 
-// poolsByName is a sortable list of directors.
+// poolsByName is a sortable list of pools.
 type poolsByName []*Pool
 
 // Len, Swap, and Less implement the sortable interface.

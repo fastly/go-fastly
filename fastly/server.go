@@ -54,6 +54,7 @@ type ListServersInput struct {
 	Pool string
 }
 
+// ListServers lists all servers for a particular service and pool.
 func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
