@@ -15,12 +15,14 @@ func TestClient_Pools(t *testing.T) {
 	var p *Pool
 	record(t, "pools/create", func(c *Client) {
 		p, err = c.CreatePool(&CreatePoolInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test_pool",
-			Comment: "test pool",
-			Quorum:  50,
-			Type:    PoolTypeRandom,
+			Service:         testServiceID,
+			Version:         tv.Number,
+			Name:            "test_pool",
+			Comment:         "test pool",
+			Quorum:          50,
+			UseTLS:          CBool(true),
+			TLSCertHostname: "example.com",
+			Type:            PoolTypeRandom,
 		})
 	})
 	if err != nil {
@@ -50,6 +52,14 @@ func TestClient_Pools(t *testing.T) {
 
 	if p.Quorum != 50 {
 		t.Errorf("bad quorum: %q", p.Quorum)
+	}
+
+	if p.UseTLS != true {
+		t.Errorf("bad use_tls: %t", p.UseTLS)
+	}
+
+	if p.TLSCertHostname != "example.com" {
+		t.Errorf("bad tls_cert_hostname: %q", p.TLSCertHostname)
 	}
 
 	if p.Type != PoolTypeRandom {
