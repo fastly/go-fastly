@@ -34,17 +34,6 @@ func (s serversByAddress) Less(i, j int) bool {
 	return s[i].Address < s[j].Address
 }
 
-// ServerOptionsInput is used to define the optional fields for a server. It is
-// used as part of create and update server operations.
-type ServerOptionsInput struct {
-	Comment      string `form:"comment,omitempty"`
-	Weight       uint   `form:"weight,omitempty"`
-	MaxConn      uint   `form:"max_conn,omitempty"`
-	Port         uint   `form:"port,omitempty"`
-	Disabled     bool   `form:"disabled,omitempty"`
-	OverrideHost string `form:"override_host,omitempty"`
-}
-
 // ListServersInput is used as input to the ListServers function.
 type ListServersInput struct {
 	// Service is the ID of the service (required).
