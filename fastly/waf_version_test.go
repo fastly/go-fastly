@@ -102,9 +102,9 @@ func TestClient_WAF_Versions(t *testing.T) {
 	}
 
 	input := buildUpdateInput()
-	input.WAFID = waf.ID
-	input.WAFVersionNumber = 2
-	input.WAFVersionID = wafVer.ID
+	input.WAFID = &waf.ID
+	input.WAFVersionNumber = intToPtr(2)
+	input.WAFVersionID = &wafVer.ID
 	record(t, fixtureBase+"/update", func(c *Client) {
 		wafVer, err = c.UpdateWAFVersion(input)
 	})
@@ -160,92 +160,92 @@ func TestClient_WAF_Versions(t *testing.T) {
 
 func verifyWAFVersionUpdate(t *testing.T, i *UpdateWAFVersionInput, o *WAFVersion) {
 
-	if i.WAFVersionID != o.ID {
-		t.Errorf("expected %s waf: got %s", i.WAFVersionID, o.ID)
+	if *i.WAFVersionID != o.ID {
+		t.Errorf("expected %s waf: got %s", *i.WAFVersionID, o.ID)
 	}
-	if i.AllowedHTTPVersions != o.AllowedHTTPVersions {
-		t.Errorf("expected %s waf: got %s", i.AllowedHTTPVersions, o.AllowedHTTPVersions)
+	if *i.AllowedHTTPVersions != o.AllowedHTTPVersions {
+		t.Errorf("expected %s waf: got %s", *i.AllowedHTTPVersions, o.AllowedHTTPVersions)
 	}
-	if i.AllowedMethods != o.AllowedMethods {
-		t.Errorf("expected %s waf: got %s", i.AllowedMethods, o.AllowedMethods)
+	if *i.AllowedMethods != o.AllowedMethods {
+		t.Errorf("expected %s waf: got %s", *i.AllowedMethods, o.AllowedMethods)
 	}
-	if i.AllowedRequestContentType != o.AllowedRequestContentType {
-		t.Errorf("expected %s waf: got %s", i.AllowedRequestContentType, o.AllowedRequestContentType)
+	if *i.AllowedRequestContentType != o.AllowedRequestContentType {
+		t.Errorf("expected %s waf: got %s", *i.AllowedRequestContentType, o.AllowedRequestContentType)
 	}
-	if i.AllowedRequestContentTypeCharset != o.AllowedRequestContentTypeCharset {
-		t.Errorf("expected %s waf: got %s", i.AllowedRequestContentTypeCharset, o.AllowedRequestContentTypeCharset)
+	if *i.AllowedRequestContentTypeCharset != o.AllowedRequestContentTypeCharset {
+		t.Errorf("expected %s waf: got %s", *i.AllowedRequestContentTypeCharset, o.AllowedRequestContentTypeCharset)
 	}
-	if i.ArgLength != o.ArgLength {
-		t.Errorf("expected %d waf: got %d", i.ArgLength, o.ArgLength)
+	if *i.ArgLength != o.ArgLength {
+		t.Errorf("expected %d waf: got %d", *i.ArgLength, o.ArgLength)
 	}
-	if i.ArgNameLength != o.ArgNameLength {
-		t.Errorf("expected %d waf: got %d", i.ArgNameLength, o.ArgNameLength)
+	if *i.ArgNameLength != o.ArgNameLength {
+		t.Errorf("expected %d waf: got %d", *i.ArgNameLength, o.ArgNameLength)
 	}
-	if i.CombinedFileSizes != o.CombinedFileSizes {
-		t.Errorf("expected %d waf: got %d", i.CombinedFileSizes, o.CombinedFileSizes)
+	if *i.CombinedFileSizes != o.CombinedFileSizes {
+		t.Errorf("expected %d waf: got %d", *i.CombinedFileSizes, o.CombinedFileSizes)
 	}
-	if i.CriticalAnomalyScore != o.CriticalAnomalyScore {
-		t.Errorf("expected %d waf: got %d", i.CriticalAnomalyScore, o.CriticalAnomalyScore)
+	if *i.CriticalAnomalyScore != o.CriticalAnomalyScore {
+		t.Errorf("expected %d waf: got %d", *i.CriticalAnomalyScore, o.CriticalAnomalyScore)
 	}
-	if i.CRSValidateUTF8Encoding != o.CRSValidateUTF8Encoding {
-		t.Errorf("expected %v waf: got %v", i.CRSValidateUTF8Encoding, o.CRSValidateUTF8Encoding)
+	if *i.CRSValidateUTF8Encoding != o.CRSValidateUTF8Encoding {
+		t.Errorf("expected %v waf: got %v", *i.CRSValidateUTF8Encoding, o.CRSValidateUTF8Encoding)
 	}
-	if i.ErrorAnomalyScore != o.ErrorAnomalyScore {
-		t.Errorf("expected %d waf: got %d", i.ErrorAnomalyScore, o.ErrorAnomalyScore)
+	if *i.ErrorAnomalyScore != o.ErrorAnomalyScore {
+		t.Errorf("expected %d waf: got %d", *i.ErrorAnomalyScore, o.ErrorAnomalyScore)
 	}
-	if i.HighRiskCountryCodes != o.HighRiskCountryCodes {
-		t.Errorf("expected %s waf: got %s", i.HighRiskCountryCodes, o.HighRiskCountryCodes)
+	if *i.HighRiskCountryCodes != o.HighRiskCountryCodes {
+		t.Errorf("expected %s waf: got %s", *i.HighRiskCountryCodes, o.HighRiskCountryCodes)
 	}
-	if i.HTTPViolationScoreThreshold != o.HTTPViolationScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.HTTPViolationScoreThreshold, o.HTTPViolationScoreThreshold)
+	if *i.HTTPViolationScoreThreshold != o.HTTPViolationScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.HTTPViolationScoreThreshold, o.HTTPViolationScoreThreshold)
 	}
-	if i.InboundAnomalyScoreThreshold != o.InboundAnomalyScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.InboundAnomalyScoreThreshold, o.InboundAnomalyScoreThreshold)
+	if *i.InboundAnomalyScoreThreshold != o.InboundAnomalyScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.InboundAnomalyScoreThreshold, o.InboundAnomalyScoreThreshold)
 	}
-	if i.LFIScoreThreshold != o.LFIScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.LFIScoreThreshold, o.LFIScoreThreshold)
+	if *i.LFIScoreThreshold != o.LFIScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.LFIScoreThreshold, o.LFIScoreThreshold)
 	}
-	if i.MaxFileSize != o.MaxFileSize {
-		t.Errorf("expected %d waf: got %d", i.MaxFileSize, o.MaxFileSize)
+	if *i.MaxFileSize != o.MaxFileSize {
+		t.Errorf("expected %d waf: got %d", *i.MaxFileSize, o.MaxFileSize)
 	}
-	if i.MaxNumArgs != o.MaxNumArgs {
-		t.Errorf("expected %d waf: got %d", i.MaxNumArgs, o.MaxNumArgs)
+	if *i.MaxNumArgs != o.MaxNumArgs {
+		t.Errorf("expected %d waf: got %d", *i.MaxNumArgs, o.MaxNumArgs)
 	}
-	if i.NoticeAnomalyScore != o.NoticeAnomalyScore {
-		t.Errorf("expected %d waf: got %d", i.NoticeAnomalyScore, o.NoticeAnomalyScore)
+	if *i.NoticeAnomalyScore != o.NoticeAnomalyScore {
+		t.Errorf("expected %d waf: got %d", *i.NoticeAnomalyScore, o.NoticeAnomalyScore)
 	}
-	if i.ParanoiaLevel != o.ParanoiaLevel {
-		t.Errorf("expected %d waf: got %d", i.ParanoiaLevel, o.ParanoiaLevel)
+	if *i.ParanoiaLevel != o.ParanoiaLevel {
+		t.Errorf("expected %d waf: got %d", *i.ParanoiaLevel, o.ParanoiaLevel)
 	}
-	if i.PHPInjectionScoreThreshold != o.PHPInjectionScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.PHPInjectionScoreThreshold, o.PHPInjectionScoreThreshold)
+	if *i.PHPInjectionScoreThreshold != o.PHPInjectionScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.PHPInjectionScoreThreshold, o.PHPInjectionScoreThreshold)
 	}
-	if i.RCEScoreThreshold != o.RCEScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.RCEScoreThreshold, o.RCEScoreThreshold)
+	if *i.RCEScoreThreshold != o.RCEScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.RCEScoreThreshold, o.RCEScoreThreshold)
 	}
-	if i.RestrictedExtensions != o.RestrictedExtensions {
-		t.Errorf("expected %s waf: got %s", i.RestrictedExtensions, o.RestrictedExtensions)
+	if *i.RestrictedExtensions != o.RestrictedExtensions {
+		t.Errorf("expected %s waf: got %s", *i.RestrictedExtensions, o.RestrictedExtensions)
 	}
-	if i.RestrictedHeaders != o.RestrictedHeaders {
-		t.Errorf("expected %s waf: got %s", i.RestrictedHeaders, o.RestrictedHeaders)
+	if *i.RestrictedHeaders != o.RestrictedHeaders {
+		t.Errorf("expected %s waf: got %s", *i.RestrictedHeaders, o.RestrictedHeaders)
 	}
-	if i.RFIScoreThreshold != o.RFIScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.RFIScoreThreshold, o.RFIScoreThreshold)
+	if *i.RFIScoreThreshold != o.RFIScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.RFIScoreThreshold, o.RFIScoreThreshold)
 	}
-	if i.SessionFixationScoreThreshold != o.SessionFixationScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.SessionFixationScoreThreshold, o.SessionFixationScoreThreshold)
+	if *i.SessionFixationScoreThreshold != o.SessionFixationScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.SessionFixationScoreThreshold, o.SessionFixationScoreThreshold)
 	}
-	if i.SQLInjectionScoreThreshold != o.SQLInjectionScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.SQLInjectionScoreThreshold, o.SQLInjectionScoreThreshold)
+	if *i.SQLInjectionScoreThreshold != o.SQLInjectionScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.SQLInjectionScoreThreshold, o.SQLInjectionScoreThreshold)
 	}
-	if i.TotalArgLength != o.TotalArgLength {
-		t.Errorf("expected %d waf: got %d", i.TotalArgLength, o.TotalArgLength)
+	if *i.TotalArgLength != o.TotalArgLength {
+		t.Errorf("expected %d waf: got %d", *i.TotalArgLength, o.TotalArgLength)
 	}
-	if i.WarningAnomalyScore != o.WarningAnomalyScore {
-		t.Errorf("expected %d waf: got %d", i.WarningAnomalyScore, o.WarningAnomalyScore)
+	if *i.WarningAnomalyScore != o.WarningAnomalyScore {
+		t.Errorf("expected %d waf: got %d", *i.WarningAnomalyScore, o.WarningAnomalyScore)
 	}
-	if i.XSSScoreThreshold != o.XSSScoreThreshold {
-		t.Errorf("expected %d waf: got %d", i.XSSScoreThreshold, o.XSSScoreThreshold)
+	if *i.XSSScoreThreshold != o.XSSScoreThreshold {
+		t.Errorf("expected %d waf: got %d", *i.XSSScoreThreshold, o.XSSScoreThreshold)
 	}
 }
 
@@ -290,35 +290,35 @@ func verifyEmptyWAFVersion(t *testing.T, o *WAFVersion) {
 
 func buildUpdateInput() *UpdateWAFVersionInput {
 	return &UpdateWAFVersionInput{
-		Comment:                          "my comment",
-		AllowedHTTPVersions:              "HTTP/1.0 HTTP/1.1",
-		AllowedMethods:                   "GET HEAD POST",
-		AllowedRequestContentType:        "application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml",
-		AllowedRequestContentTypeCharset: "utf-8|iso-8859-1",
-		ArgLength:                        800,
-		ArgNameLength:                    200,
-		CombinedFileSizes:                20000000,
-		CriticalAnomalyScore:             12,
-		CRSValidateUTF8Encoding:          true,
-		ErrorAnomalyScore:                10,
-		HighRiskCountryCodes:             "gb",
-		HTTPViolationScoreThreshold:      20,
-		InboundAnomalyScoreThreshold:     20,
-		LFIScoreThreshold:                20,
-		MaxFileSize:                      20000000,
-		MaxNumArgs:                       510,
-		NoticeAnomalyScore:               8,
-		ParanoiaLevel:                    2,
-		PHPInjectionScoreThreshold:       20,
-		RCEScoreThreshold:                20,
-		RestrictedExtensions:             ".asa/ .asax/ .ascx/ .axd/ .backup/ .bak/ .bat/ .cdx/ .cer/ .cfg/ .cmd/ .com/",
-		RestrictedHeaders:                "/proxy/ /lock-token/",
-		RFIScoreThreshold:                20,
-		SessionFixationScoreThreshold:    20,
-		SQLInjectionScoreThreshold:       20,
-		TotalArgLength:                   12800,
-		WarningAnomalyScore:              20,
-		XSSScoreThreshold:                20,
+		Comment:                          strToPtr("my comment"),
+		AllowedHTTPVersions:              strToPtr("HTTP/1.0 HTTP/1.1"),
+		AllowedMethods:                   strToPtr("GET HEAD POST"),
+		AllowedRequestContentType:        strToPtr("application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml"),
+		AllowedRequestContentTypeCharset: strToPtr("utf-8|iso-8859-1"),
+		ArgLength:                        intToPtr(800),
+		ArgNameLength:                    intToPtr(200),
+		CombinedFileSizes:                intToPtr(20000000),
+		CriticalAnomalyScore:             intToPtr(12),
+		CRSValidateUTF8Encoding:          boolToPtr(true),
+		ErrorAnomalyScore:                intToPtr(10),
+		HighRiskCountryCodes:             strToPtr("gb"),
+		HTTPViolationScoreThreshold:      intToPtr(20),
+		InboundAnomalyScoreThreshold:     intToPtr(20),
+		LFIScoreThreshold:                intToPtr(20),
+		MaxFileSize:                      intToPtr(20000000),
+		MaxNumArgs:                       intToPtr(510),
+		NoticeAnomalyScore:               intToPtr(8),
+		ParanoiaLevel:                    intToPtr(2),
+		PHPInjectionScoreThreshold:       intToPtr(20),
+		RCEScoreThreshold:                intToPtr(20),
+		RestrictedExtensions:             strToPtr(".asa/ .asax/ .ascx/ .axd/ .backup/ .bak/ .bat/ .cdx/ .cer/ .cfg/ .cmd/ .com/"),
+		RestrictedHeaders:                strToPtr("/proxy/ /lock-token/"),
+		RFIScoreThreshold:                intToPtr(20),
+		SessionFixationScoreThreshold:    intToPtr(20),
+		SQLInjectionScoreThreshold:       intToPtr(20),
+		TotalArgLength:                   intToPtr(12800),
+		WarningAnomalyScore:              intToPtr(20),
+		XSSScoreThreshold:                intToPtr(20),
 	}
 }
 
@@ -389,24 +389,24 @@ func TestClient_GetWAFVersion_validation(t *testing.T) {
 func TestClient_UpdateWAFVersion_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateWAFVersion(&UpdateWAFVersionInput{
-		WAFID: "",
+		WAFID: strToPtr(""),
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateWAFVersion(&UpdateWAFVersionInput{
-		WAFID:            "1",
-		WAFVersionNumber: 0,
+		WAFID:            strToPtr("1"),
+		WAFVersionNumber: intToPtr(0),
 	})
 	if err != ErrMissingWAFVersionNumber {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateWAFVersion(&UpdateWAFVersionInput{
-		WAFID:            "1",
-		WAFVersionNumber: 1,
-		WAFVersionID:     "",
+		WAFID:            strToPtr("1"),
+		WAFVersionNumber: intToPtr(1),
+		WAFVersionID:     strToPtr(""),
 	})
 	if err != ErrMissingWAFVersionID {
 		t.Errorf("bad error: %s", err)
@@ -465,6 +465,38 @@ func TestClient_DeployWAFVersion_validation(t *testing.T) {
 	}
 }
 
+func TestClient_UpdateWAFVersionInput_HasChanges(t *testing.T) {
+
+	cases := []struct {
+		in  UpdateWAFVersionInput
+		out bool
+	}{
+		{
+			in: UpdateWAFVersionInput{
+				WAFID:            strToPtr("ID"),
+				WAFVersionNumber: intToPtr(1),
+				WAFVersionID:     strToPtr("versionID"),
+			},
+			out: false,
+		},
+		{
+			in: UpdateWAFVersionInput{
+				WAFID:            strToPtr("ID"),
+				WAFVersionNumber: intToPtr(1),
+				WAFVersionID:     strToPtr("versionID"),
+				AllowedMethods:   strToPtr("any"),
+			},
+			out: true,
+		},
+	}
+	for _, c := range cases {
+		empty := c.in.HasChanges()
+		if empty != c.out {
+			t.Fatalf("Error matching:\nexpected: %#v\n     got: %#v", c.out, empty)
+		}
+	}
+}
+
 func TestClient_CreateEmptyWAFVersion_validation(t *testing.T) {
 	var err error
 	if _, err = testClient.CreateEmptyWAFVersion(&CreateEmptyWAFVersionInput{
@@ -473,3 +505,17 @@ func TestClient_CreateEmptyWAFVersion_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 }
+
+func strToPtr(s string) *string {
+	return &s
+}
+
+func intToPtr(i int) *int {
+	return &i
+}
+
+func boolToPtr(i bool) *bool {
+	return &i
+}
+
+
