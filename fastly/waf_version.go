@@ -226,60 +226,72 @@ func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
 	return &wafVer, nil
 }
 
-// UpdateWAFVersionInput is used as input to the UpdateWAFVersion function.
+// UpdateWAFVersionInput is used as input to the UpdateWAFVersion function. This struct uses pointers due to the problem
+// detailed on this issue https://github.com/opencredo/go-fastly/pull/17.
 type UpdateWAFVersionInput struct {
 	// The Web Application Firewall's ID.
-	WAFID string
+	WAFID *string
 	// The Web Application Firewall's version number.
-	WAFVersionNumber int
+	WAFVersionNumber *int
 	// The Web Application Firewall's version ID.
-	WAFVersionID                     string `jsonapi:"primary,waf_firewall"`
-	Comment                          string `jsonapi:"attr,comment,omitempty"`
-	CRSValidateUTF8Encoding          bool   `jsonapi:"attr,crs_validate_utf8_encoding,omitempty"`
-	AllowedHTTPVersions              string `jsonapi:"attr,allowed_http_versions,omitempty"`
-	AllowedMethods                   string `jsonapi:"attr,allowed_methods,omitempty"`
-	AllowedRequestContentType        string `jsonapi:"attr,allowed_request_content_type,omitempty"`
-	AllowedRequestContentTypeCharset string `jsonapi:"attr,allowed_request_content_type_charset,omitempty"`
-	HighRiskCountryCodes             string `jsonapi:"attr,high_risk_country_codes,omitempty"`
-	RestrictedExtensions             string `jsonapi:"attr,restricted_extensions,omitempty"`
-	RestrictedHeaders                string `jsonapi:"attr,restricted_headers,omitempty"`
-	ArgLength                        int    `jsonapi:"attr,arg_length,omitempty"`
-	ArgNameLength                    int    `jsonapi:"attr,arg_name_length,omitempty"`
-	CombinedFileSizes                int    `jsonapi:"attr,combined_file_sizes,omitempty"`
-	CriticalAnomalyScore             int    `jsonapi:"attr,critical_anomaly_score,omitempty"`
-	ErrorAnomalyScore                int    `jsonapi:"attr,error_anomaly_score,omitempty"`
-	HTTPViolationScoreThreshold      int    `jsonapi:"attr,http_violation_score_threshold,omitempty"`
-	InboundAnomalyScoreThreshold     int    `jsonapi:"attr,inbound_anomaly_score_threshold,omitempty"`
-	LFIScoreThreshold                int    `jsonapi:"attr,lfi_score_threshold,omitempty"`
-	MaxFileSize                      int    `jsonapi:"attr,max_file_size,omitempty"`
-	MaxNumArgs                       int    `jsonapi:"attr,max_num_args,omitempty"`
-	NoticeAnomalyScore               int    `jsonapi:"attr,notice_anomaly_score,omitempty"`
-	ParanoiaLevel                    int    `jsonapi:"attr,paranoia_level,omitempty"`
-	PHPInjectionScoreThreshold       int    `jsonapi:"attr,php_injection_score_threshold,omitempty"`
-	RCEScoreThreshold                int    `jsonapi:"attr,rce_score_threshold,omitempty"`
-	RFIScoreThreshold                int    `jsonapi:"attr,rfi_score_threshold,omitempty"`
-	SessionFixationScoreThreshold    int    `jsonapi:"attr,session_fixation_score_threshold,omitempty"`
-	SQLInjectionScoreThreshold       int    `jsonapi:"attr,sql_injection_score_threshold,omitempty"`
-	TotalArgLength                   int    `jsonapi:"attr,total_arg_length,omitempty"`
-	WarningAnomalyScore              int    `jsonapi:"attr,warning_anomaly_score,omitempty"`
-	XSSScoreThreshold                int    `jsonapi:"attr,xss_score_threshold,omitempty"`
+	WAFVersionID                     *string `jsonapi:"primary,waf_firewall_version"`
+	Comment                          *string `jsonapi:"attr,comment,omitempty"`
+	CRSValidateUTF8Encoding          *bool   `jsonapi:"attr,crs_validate_utf8_encoding,omitempty"`
+	AllowedHTTPVersions              *string `jsonapi:"attr,allowed_http_versions,omitempty"`
+	AllowedMethods                   *string `jsonapi:"attr,allowed_methods,omitempty"`
+	AllowedRequestContentType        *string `jsonapi:"attr,allowed_request_content_type,omitempty"`
+	AllowedRequestContentTypeCharset *string `jsonapi:"attr,allowed_request_content_type_charset,omitempty"`
+	HighRiskCountryCodes             *string `jsonapi:"attr,high_risk_country_codes,omitempty"`
+	RestrictedExtensions             *string `jsonapi:"attr,restricted_extensions,omitempty"`
+	RestrictedHeaders                *string `jsonapi:"attr,restricted_headers,omitempty"`
+	ArgLength                        *int    `jsonapi:"attr,arg_length,omitempty"`
+	ArgNameLength                    *int    `jsonapi:"attr,arg_name_length,omitempty"`
+	CombinedFileSizes                *int    `jsonapi:"attr,combined_file_sizes,omitempty"`
+	CriticalAnomalyScore             *int    `jsonapi:"attr,critical_anomaly_score,omitempty"`
+	ErrorAnomalyScore                *int    `jsonapi:"attr,error_anomaly_score,omitempty"`
+	HTTPViolationScoreThreshold      *int    `jsonapi:"attr,http_violation_score_threshold,omitempty"`
+	InboundAnomalyScoreThreshold     *int    `jsonapi:"attr,inbound_anomaly_score_threshold,omitempty"`
+	LFIScoreThreshold                *int    `jsonapi:"attr,lfi_score_threshold,omitempty"`
+	MaxFileSize                      *int    `jsonapi:"attr,max_file_size,omitempty"`
+	MaxNumArgs                       *int    `jsonapi:"attr,max_num_args,omitempty"`
+	NoticeAnomalyScore               *int    `jsonapi:"attr,notice_anomaly_score,omitempty"`
+	ParanoiaLevel                    *int    `jsonapi:"attr,paranoia_level,omitempty"`
+	PHPInjectionScoreThreshold       *int    `jsonapi:"attr,php_injection_score_threshold,omitempty"`
+	RCEScoreThreshold                *int    `jsonapi:"attr,rce_score_threshold,omitempty"`
+	RFIScoreThreshold                *int    `jsonapi:"attr,rfi_score_threshold,omitempty"`
+	SessionFixationScoreThreshold    *int    `jsonapi:"attr,session_fixation_score_threshold,omitempty"`
+	SQLInjectionScoreThreshold       *int    `jsonapi:"attr,sql_injection_score_threshold,omitempty"`
+	TotalArgLength                   *int    `jsonapi:"attr,total_arg_length,omitempty"`
+	WarningAnomalyScore              *int    `jsonapi:"attr,warning_anomaly_score,omitempty"`
+	XSSScoreThreshold                *int    `jsonapi:"attr,xss_score_threshold,omitempty"`
+}
+
+// HasChanges checks that UpdateWAFVersionInput has changed in terms of configuration, which means - if it has configuration fields populated.
+// if UpdateWAFVersionInput is updated to have a slice this method will not longer work as it is.
+// if a slice is introduced the "!=" must be replaced with !DeepEquals
+func (i UpdateWAFVersionInput) HasChanges() bool {
+	return i != UpdateWAFVersionInput{
+		WAFID:            i.WAFID,
+		WAFVersionNumber: i.WAFVersionNumber,
+		WAFVersionID:     i.WAFVersionID,
+	}
 }
 
 // UpdateWAFVersion updates a specific WAF version.
 func (c *Client) UpdateWAFVersion(i *UpdateWAFVersionInput) (*WAFVersion, error) {
-	if i.WAFID == "" {
+	if i.WAFID == nil || *i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
 
-	if i.WAFVersionNumber == 0 {
+	if i.WAFVersionNumber == nil || *i.WAFVersionNumber == 0 {
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	if i.WAFVersionID == "" {
+	if i.WAFVersionID == nil || *i.WAFVersionID == "" {
 		return nil, ErrMissingWAFVersionID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", *i.WAFID, *i.WAFVersionNumber)
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
