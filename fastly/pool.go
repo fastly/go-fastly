@@ -14,7 +14,7 @@ const (
 	PoolTypeHash PoolType = "hash"
 
 	// PoolTypeClient ins a pool that does client direction.
-	PoolTypeClient = "client"
+	PoolTypeClient PoolType = "client"
 )
 
 // PoolType is a type of pool.
@@ -99,29 +99,30 @@ type CreatePoolInput struct {
 	Service string
 	Version int
 
-	// Name of the pool (required).
+	// Name is the name of the pool to create (required).
 	Name string `form:"name"`
 
-	Comment          string       `form:"comment,omitempty"`
-	Shield           string       `form:"shield,omitempty"`
-	RequestCondition string       `form:"request_condition,omitempty"`
-	MaxConnDefault   uint         `form:"max_conn_default,omitempty"`
-	ConnectTimeout   uint         `form:"connect_timeout,omitempty"`
-	FirstByteTimeout uint         `form:"first_byte_timeout,omitempty"`
-	Quorum           uint         `form:"quorum,omitempty"`
+	// Optional fields.
+	Comment          *string      `form:"comment,omitempty"`
+	Shield           *string      `form:"shield,omitempty"`
+	RequestCondition *string      `form:"request_condition,omitempty"`
+	MaxConnDefault   *uint        `form:"max_conn_default,omitempty"`
+	ConnectTimeout   *uint        `form:"connect_timeout,omitempty"`
+	FirstByteTimeout *uint        `form:"first_byte_timeout,omitempty"`
+	Quorum           *uint        `form:"quorum,omitempty"`
 	UseTLS           *Compatibool `form:"use_tls,omitempty"`
-	TLSCACert        string       `form:"tls_ca_cert,omitempty"`
-	TLSCiphers       string       `form:"tls_ciphers,omitempty"`
-	TLSClientKey     string       `form:"tls_client_key,omitempty"`
-	TLSClientCert    string       `form:"tls_client_cert,omitempty"`
-	TLSSNIHostname   string       `form:"tls_sni_hostname,omitempty"`
-	TLSCheckCert     bool         `form:"tls_check_cert,omitempty"`
-	TLSCertHostname  string       `form:"tls_cert_hostname,omitempty"`
-	MinTLSVersion    string       `form:"min_tls_version,omitempty"`
-	MaxTLSVersion    string       `form:"max_tls_version,omitempty"`
-	Healthcheck      string       `form:"healthcheck,omitempty"`
+	TLSCACert        *string      `form:"tls_ca_cert,omitempty"`
+	TLSCiphers       *string      `form:"tls_ciphers,omitempty"`
+	TLSClientKey     *string      `form:"tls_client_key,omitempty"`
+	TLSClientCert    *string      `form:"tls_client_cert,omitempty"`
+	TLSSNIHostname   *string      `form:"tls_sni_hostname,omitempty"`
+	TLSCheckCert     *bool        `form:"tls_check_cert,omitempty"`
+	TLSCertHostname  *string      `form:"tls_cert_hostname,omitempty"`
+	MinTLSVersion    *string      `form:"min_tls_version,omitempty"`
+	MaxTLSVersion    *string      `form:"max_tls_version,omitempty"`
+	Healthcheck      *string      `form:"healthcheck,omitempty"`
 	Type             PoolType     `form:"type,omitempty"`
-	OverrideHost     string       `form:"override_host,omitempty"`
+	OverrideHost     *string      `form:"override_host,omitempty"`
 }
 
 // CreatePool creates a pool for a particular service and version.
@@ -193,34 +194,34 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 // UpdatePoolInput is used as input to the UpdatePool function.
 type UpdatePoolInput struct {
 	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
+	// version. Name is the name of the pool to update. All three fields
+	// are required.
 	Service string
 	Version int
+	Name    string
 
-	// Name is the name of the pool to update (required).
-	Name string
-
-	NewName          string       `form:"name,omitempty"`
-	Comment          string       `form:"comment,omitempty"`
-	Shield           string       `form:"shield,omitempty"`
-	RequestCondition string       `form:"request_condition,omitempty"`
-	MaxConnDefault   uint         `form:"max_conn_default,omitempty"`
-	ConnectTimeout   uint         `form:"connect_timeout,omitempty"`
-	FirstByteTimeout uint         `form:"first_byte_timeout,omitempty"`
-	Quorum           uint         `form:"quorum,omitempty"`
+	// Optional fields.
+	NewName          *string      `form:"name,omitempty"`
+	Comment          *string      `form:"comment,omitempty"`
+	Shield           *string      `form:"shield,omitempty"`
+	RequestCondition *string      `form:"request_condition,omitempty"`
+	MaxConnDefault   *uint        `form:"max_conn_default,omitempty"`
+	ConnectTimeout   *uint        `form:"connect_timeout,omitempty"`
+	FirstByteTimeout *uint        `form:"first_byte_timeout,omitempty"`
+	Quorum           *uint        `form:"quorum,omitempty"`
 	UseTLS           *Compatibool `form:"use_tls,omitempty"`
-	TLSCACert        string       `form:"tls_ca_cert,omitempty"`
-	TLSCiphers       string       `form:"tls_ciphers,omitempty"`
-	TLSClientKey     string       `form:"tls_client_key,omitempty"`
-	TLSClientCert    string       `form:"tls_client_cert,omitempty"`
-	TLSSNIHostname   string       `form:"tls_sni_hostname,omitempty"`
-	TLSCheckCert     bool         `form:"tls_check_cert,omitempty"`
-	TLSCertHostname  string       `form:"tls_cert_hostname,omitempty"`
-	MinTLSVersion    string       `form:"min_tls_version,omitempty"`
-	MaxTLSVersion    string       `form:"max_tls_version,omitempty"`
-	Healthcheck      string       `form:"healthcheck,omitempty"`
+	TLSCACert        *string      `form:"tls_ca_cert,omitempty"`
+	TLSCiphers       *string      `form:"tls_ciphers,omitempty"`
+	TLSClientKey     *string      `form:"tls_client_key,omitempty"`
+	TLSClientCert    *string      `form:"tls_client_cert,omitempty"`
+	TLSSNIHostname   *string      `form:"tls_sni_hostname,omitempty"`
+	TLSCheckCert     *bool        `form:"tls_check_cert,omitempty"`
+	TLSCertHostname  *string      `form:"tls_cert_hostname,omitempty"`
+	MinTLSVersion    *string      `form:"min_tls_version,omitempty"`
+	MaxTLSVersion    *string      `form:"max_tls_version,omitempty"`
+	Healthcheck      *string      `form:"healthcheck,omitempty"`
 	Type             PoolType     `form:"type,omitempty"`
-	OverrideHost     string       `form:"override_host,omitempty"`
+	OverrideHost     *string      `form:"override_host,omitempty"`
 }
 
 // UpdatePool updates a specufic pool for a particular service and version.
@@ -253,12 +254,11 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 // DeletePoolInput is used as input to the DeletePool function.
 type DeletePoolInput struct {
 	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
+	// version. Name is the name of the pool to delete. All three fields
+	// are required.
 	Service string
 	Version int
-
-	// Name is the name of the pool to delete (required).
-	Name string
+	Name    string
 }
 
 // DeletePool deletes a specific pool for a particular service and version.

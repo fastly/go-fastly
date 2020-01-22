@@ -77,12 +77,13 @@ type CreateServerInput struct {
 	// Address is the hostname or IP of the origin server (required).
 	Address string `form:"address"`
 
-	Comment      string `form:"comment,omitempty"`
-	Weight       uint   `form:"weight,omitempty"`
-	MaxConn      uint   `form:"max_conn,omitempty"`
-	Port         uint   `form:"port,omitempty"`
-	Disabled     bool   `form:"disabled,omitempty"`
-	OverrideHost string `form:"override_host,omitempty"`
+	// Optional fields.
+	Comment      *string `form:"comment,omitempty"`
+	Weight       *uint   `form:"weight,omitempty"`
+	MaxConn      *uint   `form:"max_conn,omitempty"`
+	Port         *uint   `form:"port,omitempty"`
+	Disabled     *bool   `form:"disabled,omitempty"`
+	OverrideHost *string `form:"override_host,omitempty"`
 }
 
 // CreateServer creates a single server for a particular service and pool.
@@ -157,13 +158,14 @@ type UpdateServerInput struct {
 	Pool    string
 	Server  string
 
-	Address      string `form:"address,omitempty"`
-	Comment      string `form:"comment,omitempty"`
-	Weight       uint   `form:"weight,omitempty"`
-	MaxConn      uint   `form:"max_conn,omitempty"`
-	Port         uint   `form:"port,omitempty"`
-	Disabled     bool   `form:"disabled,omitempty"`
-	OverrideHost string `form:"override_host,omitempty"`
+	// Optional fields.
+	Address      *string `form:"address,omitempty"`
+	Comment      *string `form:"comment,omitempty"`
+	Weight       *uint   `form:"weight,omitempty"`
+	MaxConn      *uint   `form:"max_conn,omitempty"`
+	Port         *uint   `form:"port,omitempty"`
+	Disabled     *bool   `form:"disabled,omitempty"`
+	OverrideHost *string `form:"override_host,omitempty"`
 }
 
 // UpdateServer updates a single server for a particular service and pool.

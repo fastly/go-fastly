@@ -18,10 +18,10 @@ func TestClient_Pools(t *testing.T) {
 			Service:         testServiceID,
 			Version:         tv.Number,
 			Name:            "test_pool",
-			Comment:         "test pool",
-			Quorum:          50,
+			Comment:         String("test pool"),
+			Quorum:          Uint(50),
 			UseTLS:          CBool(true),
-			TLSCertHostname: "example.com",
+			TLSCertHostname: String("example.com"),
 			Type:            PoolTypeRandom,
 		})
 	})
@@ -110,8 +110,8 @@ func TestClient_Pools(t *testing.T) {
 			Service: testServiceID,
 			Version: tv.Number,
 			Name:    "test_pool",
-			NewName: "new_test_pool",
-			Quorum:  100,
+			NewName: String("new_test_pool"),
+			Quorum:  Uint(0),
 		})
 	})
 	if err != nil {
@@ -120,7 +120,7 @@ func TestClient_Pools(t *testing.T) {
 	if up.Name != "new_test_pool" {
 		t.Errorf("bad name: %q", up.Name)
 	}
-	if up.Quorum != 100 {
+	if up.Quorum != 0 {
 		t.Errorf("bad quorum: %q", up.Quorum)
 	}
 

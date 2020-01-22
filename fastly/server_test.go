@@ -107,8 +107,8 @@ func TestClient_Servers(t *testing.T) {
 			Service: testServiceID,
 			Pool:    testPool.ID,
 			Server:  server.ID,
-			Address: "0.0.0.0",
-			Weight:  50,
+			Address: String("0.0.0.0"),
+			Weight:  Uint(50),
 		})
 	})
 	if err != nil {
