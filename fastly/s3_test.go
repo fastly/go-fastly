@@ -15,22 +15,24 @@ func TestClient_S3s(t *testing.T) {
 	var s3 *S3
 	record(t, "s3s/create", func(c *Client) {
 		s3, err = c.CreateS3(&CreateS3Input{
-			Service:         testServiceID,
-			Version:         tv.Number,
-			Name:            "test-s3",
-			BucketName:      "bucket-name",
-			Domain:          "s3.us-east-1.amazonaws.com",
-			AccessKey:       "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:       "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:            "/path",
-			Period:          12,
-			GzipLevel:       9,
-			Format:          "format",
-			FormatVersion:   2,
-			TimestampFormat: "%Y",
-			MessageType:     "classic",
-			Redundancy:      S3RedundancyReduced,
-			Placement:       "waf_debug",
+			Service:                      testServiceID,
+			Version:                      tv.Number,
+			Name:                         "test-s3",
+			BucketName:                   "bucket-name",
+			Domain:                       "s3.us-east-1.amazonaws.com",
+			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
+			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			Path:                         "/path",
+			Period:                       12,
+			GzipLevel:                    9,
+			Format:                       "format",
+			FormatVersion:                2,
+			TimestampFormat:              "%Y",
+			MessageType:                  "classic",
+			Redundancy:                   S3RedundancyReduced,
+			Placement:                    "waf_debug",
+			ServerSideEncryptionKmsKeyId: "1234",
+			ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		})
 	})
 	if err != nil {
@@ -95,6 +97,13 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", s3.Placement)
+	}
+	t.Logf("%+v", s3)
+	if s3.ServerSideEncryption != S3ServerSideEncryptionKMS {
+		t.Errorf("bad server_side_encryption: %q", s3.ServerSideEncryption)
+	}
+	if s3.ServerSideEncryptionKmsKeyId != "1234" {
+		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3.ServerSideEncryptionKmsKeyId)
 	}
 
 	// List
@@ -163,6 +172,12 @@ func TestClient_S3s(t *testing.T) {
 	if s3.Placement != ns3.Placement {
 		t.Errorf("bad placement: %q", s3.Placement)
 	}
+	if s3.ServerSideEncryption != ns3.ServerSideEncryption {
+		t.Errorf("bad server_side_encryption: %q", s3.ServerSideEncryption)
+	}
+	if s3.ServerSideEncryptionKmsKeyId != ns3.ServerSideEncryptionKmsKeyId {
+		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3.ServerSideEncryptionKmsKeyId)
+	}
 
 	// Update
 	var us3 *S3
@@ -228,6 +243,17 @@ func TestClient_CreateS3_validation(t *testing.T) {
 	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testClient.CreateS3(&CreateS3Input{
+		Service:                      "foo",
+		Version:                      1,
+		Name:                         "test-service",
+		ServerSideEncryption:         S3ServerSideEncryptionKMS,
+		ServerSideEncryptionKmsKeyId: "",
+	})
+	if err != ErrMissingKmsKeyId {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_GetS3_validation(t *testing.T) {
@@ -280,6 +306,17 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		Name:    "",
 	})
 	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateS3(&UpdateS3Input{
+		Service:                      "foo",
+		Version:                      1,
+		Name:                         "test-service",
+		ServerSideEncryption:         S3ServerSideEncryptionKMS,
+		ServerSideEncryptionKmsKeyId: "",
+	})
+	if err != ErrMissingKmsKeyId {
 		t.Errorf("bad error: %s", err)
 	}
 }

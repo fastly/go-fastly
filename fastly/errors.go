@@ -117,6 +117,10 @@ var ErrMissingWAFList = errors.New("WAF slice is empty")
 // The Fastly API specifies an maximum limit.
 var ErrBatchUpdateMaximumOperationsExceeded = errors.New("batch modify maximum operations exceeded")
 
+// ErrMissingKmsKeyId is an error that is returned from an input struct that requires
+// a "ServerSideEncryptionKmsKeyId" key, but one was not set.
+var ErrMissingKmsKeyId = errors.New("Missing required field 'ServerSideEncryptionKmsKeyId'")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
