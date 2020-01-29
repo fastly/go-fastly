@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.5.0] - 2020-01-29
+### Added
+- pool/server: Support for Fastly's Load Balancer ([#142](https://github.com/fastly/go-fastly/pull/142)).
+
 ## [1.4.0] - 2020-01-06
 ### Added
 - dictionary_info: Support to retrieve metadata for a single dictionary ([#122](https://github.com/fastly/go-fastly/pull/122)).
@@ -127,7 +131,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.4.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.5.0...HEAD
+[1.5.0]: https://github.com/fastly/go-fastly/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/fastly/go-fastly/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/fastly/go-fastly/compare/v1.2.1...v1.3.0
 [1.2.1]: https://github.com/fastly/go-fastly/compare/v1.2.0...v1.2.1
