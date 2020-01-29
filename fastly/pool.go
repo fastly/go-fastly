@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"time"
 )
 
 const (
@@ -47,6 +48,9 @@ type Pool struct {
 	Healthcheck      string     `mapstructure:"healthcheck"`
 	Type             PoolType   `mapstructure:"type"`
 	OverrideHost     string     `mapstructure:"override_host"`
+	CreatedAt        *time.Time `mapstructure:"created_at"`
+	DeletedAt        *time.Time `mapstructure:"deleted_at"`
+	UpdatedAt        *time.Time `mapstructure:"updated_at"`
 }
 
 // poolsByName is a sortable list of pools.
