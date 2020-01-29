@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4JUYQ8SpP9C2EeZ9eaYdEY/server/4GkV4IILfxBvWT1cVRRbsD
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4OjiShm8GHhXknIb71GRdV/server/3rmTTIDqYGPhtOMtJai0a7
     method: GET
   response:
-    body: '{"pool_id":"4JUYQ8SpP9C2EeZ9eaYdEY","created_at":"2020-01-22T19:24:32Z","weight":"100","port":"80","max_conn":"0","id":"4GkV4IILfxBvWT1cVRRbsD","comment":"","override_host":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","address":"127.0.0.1","updated_at":"2020-01-22T19:24:32Z","deleted_at":null,"disabled":false}'
+    body: '{"pool_id":"4OjiShm8GHhXknIb71GRdV","address":"127.0.0.1","disabled":false,"max_conn":"0","comment":"","override_host":null,"id":"3rmTTIDqYGPhtOMtJai0a7","updated_at":"2020-01-29T18:35:35Z","port":"80","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2020-01-29T18:35:35Z","weight":"100","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Jan 2020 19:24:34 GMT
+      - Wed, 29 Jan 2020 18:35:37 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lga21978-LGA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8122-JFK
       X-Timer:
-      - S1579721074.489292,VS0,VE144
+      - S1580322938.644987,VS0,VE214
     status: 200 OK
     code: 200
     duration: ""
