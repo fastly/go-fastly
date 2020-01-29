@@ -25,28 +25,28 @@ type Pool struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	ID               string   `mapstructure:"id"`
-	Name             string   `mapstructure:"name"`
-	Comment          string   `mapstructure:"comment"`
-	Shield           string   `mapstructure:"shield"`
-	RequestCondition string   `mapstructure:"request_condition"`
-	MaxConnDefault   uint     `mapstructure:"max_conn_default"`
-	ConnectTimeout   uint     `mapstructure:"connect_timeout"`
-	FirstByteTimeout uint     `mapstructure:"first_byte_timeout"`
-	Quorum           uint     `mapstructure:"quorum"`
-	UseTLS           bool     `mapstructure:"use_tls"`
-	TLSCACert        string   `mapstructure:"tls_ca_cert"`
-	TLSCiphers       string   `mapstructure:"tls_ciphers"`
-	TLSClientKey     string   `mapstructure:"tls_client_key"`
-	TLSClientCert    string   `mapstructure:"tls_client_cert"`
-	TLSSNIHostname   string   `mapstructure:"tls_sni_hostname"`
-	TLSCheckCert     bool     `mapstructure:"tls_check_cert"`
-	TLSCertHostname  string   `mapstructure:"tls_cert_hostname"`
-	MinTLSVersion    string   `mapstructure:"min_tls_version"`
-	MaxTLSVersion    string   `mapstructure:"max_tls_version"`
-	Healthcheck      string   `mapstructure:"healthcheck"`
-	Type             PoolType `mapstructure:"type"`
-	OverrideHost     string   `mapstructure:"override_host"`
+	ID               string     `mapstructure:"id"`
+	Name             string     `mapstructure:"name"`
+	Comment          string     `mapstructure:"comment"`
+	Shield           string     `mapstructure:"shield"`
+	RequestCondition string     `mapstructure:"request_condition"`
+	MaxConnDefault   uint       `mapstructure:"max_conn_default"`
+	ConnectTimeout   uint       `mapstructure:"connect_timeout"`
+	FirstByteTimeout uint       `mapstructure:"first_byte_timeout"`
+	Quorum           uint       `mapstructure:"quorum"`
+	UseTLS           bool       `mapstructure:"use_tls"`
+	TLSCACert        string     `mapstructure:"tls_ca_cert"`
+	TLSCiphers       string     `mapstructure:"tls_ciphers"`
+	TLSClientKey     string     `mapstructure:"tls_client_key"`
+	TLSClientCert    string     `mapstructure:"tls_client_cert"`
+	TLSSNIHostname   string     `mapstructure:"tls_sni_hostname"`
+	TLSCheckCert     bool       `mapstructure:"tls_check_cert"`
+	TLSCertHostname  string     `mapstructure:"tls_cert_hostname"`
+	MinTLSVersion    string     `mapstructure:"min_tls_version"`
+	MaxTLSVersion    string     `mapstructure:"max_tls_version"`
+	Healthcheck      string     `mapstructure:"healthcheck"`
+	Type             PoolType   `mapstructure:"type"`
+	OverrideHost     string     `mapstructure:"override_host"`
 }
 
 // poolsByName is a sortable list of pools.
@@ -116,7 +116,7 @@ type CreatePoolInput struct {
 	TLSClientKey     *string      `form:"tls_client_key,omitempty"`
 	TLSClientCert    *string      `form:"tls_client_cert,omitempty"`
 	TLSSNIHostname   *string      `form:"tls_sni_hostname,omitempty"`
-	TLSCheckCert     *bool        `form:"tls_check_cert,omitempty"`
+	TLSCheckCert     *Compatibool `form:"tls_check_cert,omitempty"`
 	TLSCertHostname  *string      `form:"tls_cert_hostname,omitempty"`
 	MinTLSVersion    *string      `form:"min_tls_version,omitempty"`
 	MaxTLSVersion    *string      `form:"max_tls_version,omitempty"`
