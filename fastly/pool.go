@@ -26,31 +26,31 @@ type Pool struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
 
-	ID               string       `mapstructure:"id"`
-	Name             string       `mapstructure:"name"`
-	Comment          string       `mapstructure:"comment"`
-	Shield           string       `mapstructure:"shield"`
-	RequestCondition string       `mapstructure:"request_condition"`
-	MaxConnDefault   uint         `mapstructure:"max_conn_default"`
-	ConnectTimeout   uint         `mapstructure:"connect_timeout"`
-	FirstByteTimeout uint         `mapstructure:"first_byte_timeout"`
-	Quorum           uint         `mapstructure:"quorum"`
-	UseTLS           *Compatibool `mapstructure:"use_tls"`
-	TLSCACert        string       `mapstructure:"tls_ca_cert"`
-	TLSCiphers       string       `mapstructure:"tls_ciphers"`
-	TLSClientKey     string       `mapstructure:"tls_client_key"`
-	TLSClientCert    string       `mapstructure:"tls_client_cert"`
-	TLSSNIHostname   string       `mapstructure:"tls_sni_hostname"`
-	TLSCheckCert     *Compatibool `mapstructure:"tls_check_cert"`
-	TLSCertHostname  string       `mapstructure:"tls_cert_hostname"`
-	MinTLSVersion    string       `mapstructure:"min_tls_version"`
-	MaxTLSVersion    string       `mapstructure:"max_tls_version"`
-	Healthcheck      string       `mapstructure:"healthcheck"`
-	Type             PoolType     `mapstructure:"type"`
-	OverrideHost     string       `mapstructure:"override_host"`
-	CreatedAt        *time.Time   `mapstructure:"created_at"`
-	DeletedAt        *time.Time   `mapstructure:"deleted_at"`
-	UpdatedAt        *time.Time   `mapstructure:"updated_at"`
+	ID               string     `mapstructure:"id"`
+	Name             string     `mapstructure:"name"`
+	Comment          string     `mapstructure:"comment"`
+	Shield           string     `mapstructure:"shield"`
+	RequestCondition string     `mapstructure:"request_condition"`
+	MaxConnDefault   uint       `mapstructure:"max_conn_default"`
+	ConnectTimeout   uint       `mapstructure:"connect_timeout"`
+	FirstByteTimeout uint       `mapstructure:"first_byte_timeout"`
+	Quorum           uint       `mapstructure:"quorum"`
+	UseTLS           bool       `mapstructure:"use_tls"`
+	TLSCACert        string     `mapstructure:"tls_ca_cert"`
+	TLSCiphers       string     `mapstructure:"tls_ciphers"`
+	TLSClientKey     string     `mapstructure:"tls_client_key"`
+	TLSClientCert    string     `mapstructure:"tls_client_cert"`
+	TLSSNIHostname   string     `mapstructure:"tls_sni_hostname"`
+	TLSCheckCert     bool       `mapstructure:"tls_check_cert"`
+	TLSCertHostname  string     `mapstructure:"tls_cert_hostname"`
+	MinTLSVersion    string     `mapstructure:"min_tls_version"`
+	MaxTLSVersion    string     `mapstructure:"max_tls_version"`
+	Healthcheck      string     `mapstructure:"healthcheck"`
+	Type             PoolType   `mapstructure:"type"`
+	OverrideHost     string     `mapstructure:"override_host"`
+	CreatedAt        *time.Time `mapstructure:"created_at"`
+	DeletedAt        *time.Time `mapstructure:"deleted_at"`
+	UpdatedAt        *time.Time `mapstructure:"updated_at"`
 }
 
 // poolsByName is a sortable list of pools.
