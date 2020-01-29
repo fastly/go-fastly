@@ -219,7 +219,7 @@ type UpdatePoolInput struct {
 	TLSClientKey     *string      `form:"tls_client_key,omitempty"`
 	TLSClientCert    *string      `form:"tls_client_cert,omitempty"`
 	TLSSNIHostname   *string      `form:"tls_sni_hostname,omitempty"`
-	TLSCheckCert     *bool        `form:"tls_check_cert,omitempty"`
+	TLSCheckCert     *Compatibool `form:"tls_check_cert,omitempty"`
 	TLSCertHostname  *string      `form:"tls_cert_hostname,omitempty"`
 	MinTLSVersion    *string      `form:"min_tls_version,omitempty"`
 	MaxTLSVersion    *string      `form:"max_tls_version,omitempty"`
