@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/52/pool/test_pool
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/pool/test_pool
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Pool ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test_pool, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 52 }''"}'
+      version =\u003e 54 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 18:35:27 GMT
+      - Wed, 29 Jan 2020 21:31:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "995"
+      - "985"
       Fastly-Ratelimit-Reset:
-      - "1580324400"
+      - "1580335200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8124-JFK
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8137-JFK
       X-Timer:
-      - S1580322928.809932,VS0,VE133
+      - S1580333503.646544,VS0,VE234
     status: 404 Not Found
     code: 404
     duration: ""
@@ -53,12 +53,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/52/pool/new_test_pool
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/pool/new_test_pool
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Pool ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new_test_pool, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 52 }''"}'
+      version =\u003e 54 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,11 +68,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 18:35:28 GMT
+      - Wed, 29 Jan 2020 21:31:43 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "984"
       Fastly-Ratelimit-Reset:
-      - "1580324400"
+      - "1580335200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -87,9 +87,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8124-JFK
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8137-JFK
       X-Timer:
-      - S1580322928.943972,VS0,VE198
+      - S1580333503.882551,VS0,VE151
     status: 404 Not Found
     code: 404
     duration: ""

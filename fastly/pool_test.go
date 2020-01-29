@@ -54,8 +54,8 @@ func TestClient_Pools(t *testing.T) {
 		t.Errorf("bad quorum: %q", p.Quorum)
 	}
 
-	if p.UseTLS != true {
-		t.Errorf("bad use_tls: %t", p.UseTLS)
+	if *p.UseTLS != true {
+		t.Errorf("bad use_tls: %t", *p.UseTLS)
 	}
 
 	if p.TLSCertHostname != "example.com" {

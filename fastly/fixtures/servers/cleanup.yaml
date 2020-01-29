@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4OjiShm8GHhXknIb71GRdV/server/5MZaR8aQlWZG0B2efR4wdt
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server/7SYpaE7axOQJ6XR8qj3NnX
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Server ''{ deleted =\u003e
-      0000-00-00 00:00:00, id =\u003e 5MZaR8aQlWZG0B2efR4wdt }''"}'
+      0000-00-00 00:00:00, id =\u003e 7SYpaE7axOQJ6XR8qj3NnX }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 18:35:40 GMT
+      - Wed, 29 Jan 2020 21:31:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "986"
+      - "976"
       Fastly-Ratelimit-Reset:
-      - "1580324400"
+      - "1580335200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8122-JFK
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
       X-Timer:
-      - S1580322940.135476,VS0,VE149
+      - S1580333517.845088,VS0,VE161
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,7 +52,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4OjiShm8GHhXknIb71GRdV/server/3rmTTIDqYGPhtOMtJai0a7
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server/5KevsMJ2JySYq4AxuzMyWI
     method: DELETE
   response:
     body: '{"msg":"Bad request","detail":"Cannot delete only server in a pool"}'
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 18:35:40 GMT
+      - Wed, 29 Jan 2020 21:31:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "985"
+      - "975"
       Fastly-Ratelimit-Reset:
-      - "1580324400"
+      - "1580335200"
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -84,9 +84,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8122-JFK
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
       X-Timer:
-      - S1580322940.286053,VS0,VE174
+      - S1580333517.007932,VS0,VE200
     status: 400 Bad Request
     code: 400
     duration: ""

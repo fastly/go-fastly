@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: Pool=4OjiShm8GHhXknIb71GRdV&Service=7i6HN3TK9wS159v2gPAZ8A&address=127.0.0.1
+    body: Pool=6mbr0Z45FrAaE4rNQC4KIs&Service=7i6HN3TK9wS159v2gPAZ8A&address=127.0.0.1
     form:
       Pool:
-      - 4OjiShm8GHhXknIb71GRdV
+      - 6mbr0Z45FrAaE4rNQC4KIs
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       address:
@@ -15,10 +15,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4OjiShm8GHhXknIb71GRdV/server
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server
     method: POST
   response:
-    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"4OjiShm8GHhXknIb71GRdV","updated_at":"2020-01-29T18:35:35Z","id":"3rmTTIDqYGPhtOMtJai0a7","override_host":null,"comment":"","max_conn":"0","disabled":false,"deleted_at":null,"weight":"100","created_at":"2020-01-29T18:35:35Z","port":"80"}'
+    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"6mbr0Z45FrAaE4rNQC4KIs","id":"5KevsMJ2JySYq4AxuzMyWI","override_host":null,"updated_at":"2020-01-29T21:31:52Z","disabled":false,"max_conn":"0","comment":"","weight":"100","deleted_at":null,"port":"80","created_at":"2020-01-29T21:31:52Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +28,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 18:35:36 GMT
+      - Wed, 29 Jan 2020 21:31:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "991"
+      - "981"
       Fastly-Ratelimit-Reset:
-      - "1580324400"
+      - "1580335200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,17 +47,17 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8122-JFK
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
       X-Timer:
-      - S1580322936.649463,VS0,VE991
+      - S1580333512.291887,VS0,VE936
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: Pool=4OjiShm8GHhXknIb71GRdV&Service=7i6HN3TK9wS159v2gPAZ8A&address=altserver.example.com
+    body: Pool=6mbr0Z45FrAaE4rNQC4KIs&Service=7i6HN3TK9wS159v2gPAZ8A&address=altserver.example.com
     form:
       Pool:
-      - 4OjiShm8GHhXknIb71GRdV
+      - 6mbr0Z45FrAaE4rNQC4KIs
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       address:
@@ -67,10 +67,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4OjiShm8GHhXknIb71GRdV/server
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server
     method: POST
   response:
-    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"4OjiShm8GHhXknIb71GRdV","port":"80","weight":"100","id":"5MZaR8aQlWZG0B2efR4wdt","disabled":false,"updated_at":"2020-01-29T18:35:36Z","created_at":"2020-01-29T18:35:36Z","comment":"","max_conn":"0","deleted_at":null,"override_host":null}'
+    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"6mbr0Z45FrAaE4rNQC4KIs","deleted_at":null,"weight":"100","created_at":"2020-01-29T21:31:53Z","port":"80","updated_at":"2020-01-29T21:31:53Z","id":"7SYpaE7axOQJ6XR8qj3NnX","override_host":null,"comment":"","disabled":false,"max_conn":"0"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -80,11 +80,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 18:35:37 GMT
+      - Wed, 29 Jan 2020 21:31:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "980"
       Fastly-Ratelimit-Reset:
-      - "1580324400"
+      - "1580335200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -99,9 +99,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8122-JFK
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8145-JFK
       X-Timer:
-      - S1580322937.642023,VS0,VE852
+      - S1580333513.230687,VS0,VE768
     status: 200 OK
     code: 200
     duration: ""

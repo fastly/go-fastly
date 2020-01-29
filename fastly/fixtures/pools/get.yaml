@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/52/pool/test_pool
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/pool/test_pool
     method: GET
   response:
-    body: '{"type":"random","override_host":null,"id":"2mH957TljpGXrqyh1bL7g4","tls_ca_cert":null,"updated_at":"2020-01-29T18:35:26Z","version":"52","tls_client_cert":null,"healthcheck":null,"connect_timeout":"1000","service_id":"7i6HN3TK9wS159v2gPAZ8A","shield":null,"tls_check_cert":"1","between_bytes_timeout":"10000","name":"test_pool","min_tls_version":null,"use_tls":"1","first_byte_timeout":"15000","max_tls_version":null,"max_conn_default":"200","tls_sni_hostname":null,"comment":"test
-      pool","tls_client_key":null,"deleted_at":null,"quorum":"50","request_condition":null,"tls_cert_hostname":"example.com","created_at":"2020-01-29T18:35:26Z","tls_ciphers":null}'
+    body: '{"tls_client_cert":null,"name":"test_pool","request_condition":null,"quorum":"50","deleted_at":null,"use_tls":"1","updated_at":"2020-01-29T21:31:41Z","connect_timeout":"1000","tls_cert_hostname":"example.com","healthcheck":null,"version":"54","max_conn_default":"200","tls_client_key":null,"id":"0vIHpkzwPzimDWaHBB9Rw5","shield":null,"first_byte_timeout":"15000","tls_ciphers":null,"max_tls_version":null,"min_tls_version":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","override_host":null,"created_at":"2020-01-29T21:31:41Z","tls_check_cert":"1","tls_ca_cert":null,"comment":"test
+      pool","between_bytes_timeout":"10000","type":"random","tls_sni_hostname":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 18:35:27 GMT
+      - Wed, 29 Jan 2020 21:31:41 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8124-JFK
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8137-JFK
       X-Timer:
-      - S1580322927.923831,VS0,VE173
+      - S1580333502.614319,VS0,VE100
     status: 200 OK
     code: 200
     duration: ""
