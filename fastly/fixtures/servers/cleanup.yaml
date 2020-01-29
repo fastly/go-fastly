@@ -1,0 +1,92 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server/7SYpaE7axOQJ6XR8qj3NnX
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find Server ''{ deleted =\u003e
+      0000-00-00 00:00:00, id =\u003e 7SYpaE7axOQJ6XR8qj3NnX }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Jan 2020 21:31:57 GMT
+      Fastly-Ratelimit-Remaining:
+      - "976"
+      Fastly-Ratelimit-Reset:
+      - "1580335200"
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
+      X-Timer:
+      - S1580333517.845088,VS0,VE161
+    status: 404 Not Found
+    code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server/5KevsMJ2JySYq4AxuzMyWI
+    method: DELETE
+  response:
+    body: '{"msg":"Bad request","detail":"Cannot delete only server in a pool"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Jan 2020 21:31:57 GMT
+      Fastly-Ratelimit-Remaining:
+      - "975"
+      Fastly-Ratelimit-Reset:
+      - "1580335200"
+      Status:
+      - 400 Bad Request
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
+      X-Timer:
+      - S1580333517.007932,VS0,VE200
+    status: 400 Bad Request
+    code: 400
+    duration: ""

@@ -64,3 +64,18 @@ func (b *Compatibool) UnmarshalText(t []byte) error {
 	}
 	return nil
 }
+
+// String is a helper that returns a pointer to the string value passed in.
+func String(v string) *string {
+	return &v
+}
+
+// Uint is a helper that returns a pointer to the uint value passed in.
+func Uint(v uint) *uint {
+	return &v
+}
+
+// Bool is a helper that returns a pointer to the bool value passed in.
+func Bool(v bool) *bool {
+	return &v
+}

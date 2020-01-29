@@ -182,6 +182,40 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 	}
 }
 
+func createTestPool(t *testing.T, createFixture string, serviceId string, version int, poolNameSuffix string) *Pool {
+
+	var err error
+	var pool *Pool
+
+	record(t, createFixture, func(client *Client) {
+		pool, err = client.CreatePool(&CreatePoolInput{
+			Service: serviceId,
+			Version: version,
+			Name:    fmt.Sprintf("test_pool_%s", poolNameSuffix),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return pool
+}
+
+func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
+
+	var err error
+
+	record(t, deleteFixture, func(client *Client) {
+		err = client.DeletePool(&DeletePoolInput{
+			Service: pool.ServiceID,
+			Version: pool.Version,
+			Name:    pool.Name,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func deleteTestService(t *testing.T, cleanupFixture string, serviceId string) {
 
 	var err error

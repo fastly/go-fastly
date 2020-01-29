@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/pool/test_pool
+    method: GET
+  response:
+    body: '{"tls_client_cert":null,"name":"test_pool","request_condition":null,"quorum":"50","deleted_at":null,"use_tls":"1","updated_at":"2020-01-29T21:31:41Z","connect_timeout":"1000","tls_cert_hostname":"example.com","healthcheck":null,"version":"54","max_conn_default":"200","tls_client_key":null,"id":"0vIHpkzwPzimDWaHBB9Rw5","shield":null,"first_byte_timeout":"15000","tls_ciphers":null,"max_tls_version":null,"min_tls_version":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","override_host":null,"created_at":"2020-01-29T21:31:41Z","tls_check_cert":"1","tls_ca_cert":null,"comment":"test
+      pool","between_bytes_timeout":"10000","type":"random","tls_sni_hostname":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Jan 2020 21:31:41 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8137-JFK
+      X-Timer:
+      - S1580333502.614319,VS0,VE100
+    status: 200 OK
+    code: 200
+    duration: ""

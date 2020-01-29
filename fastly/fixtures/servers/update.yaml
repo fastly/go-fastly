@@ -1,0 +1,59 @@
+---
+version: 1
+interactions:
+- request:
+    body: Pool=6mbr0Z45FrAaE4rNQC4KIs&Server=5KevsMJ2JySYq4AxuzMyWI&Service=7i6HN3TK9wS159v2gPAZ8A&address=0.0.0.0&weight=50
+    form:
+      Pool:
+      - 6mbr0Z45FrAaE4rNQC4KIs
+      Server:
+      - 5KevsMJ2JySYq4AxuzMyWI
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      address:
+      - 0.0.0.0
+      weight:
+      - "50"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server/5KevsMJ2JySYq4AxuzMyWI
+    method: PUT
+  response:
+    body: '{"address":"0.0.0.0","deleted_at":null,"max_conn":"0","updated_at":"2020-01-29T21:31:52Z","pool_id":"6mbr0Z45FrAaE4rNQC4KIs","id":"5KevsMJ2JySYq4AxuzMyWI","disabled":false,"weight":"50","comment":"","created_at":"2020-01-29T21:31:52Z","override_host":null,"port":"80","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 29 Jan 2020 21:31:55 GMT
+      Fastly-Ratelimit-Remaining:
+      - "979"
+      Fastly-Ratelimit-Reset:
+      - "1580335200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
+      X-Timer:
+      - S1580333514.398605,VS0,VE1069
+    status: 200 OK
+    code: 200
+    duration: ""
