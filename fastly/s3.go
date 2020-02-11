@@ -40,7 +40,7 @@ type S3 struct {
 	CreatedAt                    *time.Time             `mapstructure:"created_at"`
 	UpdatedAt                    *time.Time             `mapstructure:"updated_at"`
 	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
-	ServerSideEncryptionKmsKeyId string                 `mapstructure:"server_side_encryption_kms_key_id"`
+	ServerSideEncryptionKMSKeyID string                 `mapstructure:"server_side_encryption_kms_key_id"`
 	ServerSideEncryption         S3ServerSideEncryption `mapstructure:"server_side_encryption"`
 }
 
@@ -109,7 +109,7 @@ type CreateS3Input struct {
 	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
 	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
 	Placement                    string                 `form:"placement,omitempty"`
-	ServerSideEncryptionKmsKeyId string                 `form:"server_side_encryption_kms_key_id,omitempty"`
+	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
 }
 
@@ -123,8 +123,8 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 		return nil, ErrMissingVersion
 	}
 
-	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKmsKeyId == "" {
-		return nil, ErrMissingKmsKeyId
+	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
+		return nil, ErrMissingKMSKeyID
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.Service, i.Version)
@@ -203,7 +203,7 @@ type UpdateS3Input struct {
 	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
 	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
 	Placement                    string                 `form:"placement,omitempty"`
-	ServerSideEncryptionKmsKeyId string                 `form:"server_side_encryption_kms_key_id,omitempty"`
+	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
 }
 
@@ -221,8 +221,8 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 		return nil, ErrMissingName
 	}
 
-	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKmsKeyId == "" {
-		return nil, ErrMissingKmsKeyId
+	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
+		return nil, ErrMissingKMSKeyID
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.Service, i.Version, url.PathEscape(i.Name))

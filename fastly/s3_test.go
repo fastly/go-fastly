@@ -31,7 +31,7 @@ func TestClient_S3s(t *testing.T) {
 			MessageType:                  "classic",
 			Redundancy:                   S3RedundancyReduced,
 			Placement:                    "waf_debug",
-			ServerSideEncryptionKmsKeyId: "1234",
+			ServerSideEncryptionKMSKeyID: "1234",
 			ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		})
 	})
@@ -102,8 +102,8 @@ func TestClient_S3s(t *testing.T) {
 	if s3.ServerSideEncryption != S3ServerSideEncryptionKMS {
 		t.Errorf("bad server_side_encryption: %q", s3.ServerSideEncryption)
 	}
-	if s3.ServerSideEncryptionKmsKeyId != "1234" {
-		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3.ServerSideEncryptionKmsKeyId)
+	if s3.ServerSideEncryptionKMSKeyID != "1234" {
+		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3.ServerSideEncryptionKMSKeyID)
 	}
 
 	// List
@@ -175,8 +175,8 @@ func TestClient_S3s(t *testing.T) {
 	if s3.ServerSideEncryption != ns3.ServerSideEncryption {
 		t.Errorf("bad server_side_encryption: %q", s3.ServerSideEncryption)
 	}
-	if s3.ServerSideEncryptionKmsKeyId != ns3.ServerSideEncryptionKmsKeyId {
-		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3.ServerSideEncryptionKmsKeyId)
+	if s3.ServerSideEncryptionKMSKeyID != ns3.ServerSideEncryptionKMSKeyID {
+		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3.ServerSideEncryptionKMSKeyID)
 	}
 
 	// Update
@@ -249,9 +249,9 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		Version:                      1,
 		Name:                         "test-service",
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
-		ServerSideEncryptionKmsKeyId: "",
+		ServerSideEncryptionKMSKeyID: "",
 	})
-	if err != ErrMissingKmsKeyId {
+	if err != ErrMissingKMSKeyID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -314,9 +314,9 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		Version:                      1,
 		Name:                         "test-service",
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
-		ServerSideEncryptionKmsKeyId: "",
+		ServerSideEncryptionKMSKeyID: "",
 	})
-	if err != ErrMissingKmsKeyId {
+	if err != ErrMissingKMSKeyID {
 		t.Errorf("bad error: %s", err)
 	}
 }
