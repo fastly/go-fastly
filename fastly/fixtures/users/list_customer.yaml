@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.5.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/customer/CUsT0m3rID/users
+    method: GET
+  response:
+    body: '[{"id":"F5I5VEFIVefI5VEfiVeFI","created_at":"2013-07-09T21:40:13Z","updated_at":"2017-11-17T00:01:35Z","name":"Superuser Five","customer_id":"CUsT0m3rID","require_new_password":false,"role":"superuser","login":"superuser.five@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"604faaaeb46afd0b358d42b062036864","two_factor_setup_required":false},
+      {"id":"FOUr4Four44FOU4R4fOUR","created_at":"2013-09-24T22:17:25Z","updated_at":"2016-10-15T13:17:23Z","name":"Engineer Four","customer_id":"CUsT0m3rID","require_new_password":false,"role":"engineer","login":"engineer.four@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"e14edca92489428b8000b9be0f860e5b","two_factor_setup_required":false},
+      {"id":"OnEoN1e1oN1E11onE11O1","created_at":"2013-11-08T19:36:33Z","updated_at":"2016-10-07T18:09:53Z","name":"Engineer One","customer_id":"CUsT0m3rID","require_new_password":false,"role":"engineer","login":"engineer.one@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"2bdb1a919f4f34eb77dda34c12d7538a","two_factor_setup_required":false},
+      {"id":"T3hr33eE3thr3EEtHr3e3","created_at":"2013-10-25T08:17:38Z","updated_at":"2018-02-02T18:42:41Z","name":"User Three","customer_id":"CUsT0m3rID","require_new_password":false,"role":"user","login":"user.three@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"3e340dcebcbef6aa898a4fc58f98eff5","two_factor_setup_required":false},
+      {"id":"TwoT2wO22222t222w22oT","created_at":"2013-11-04T15:37:00Z","updated_at":"2016-11-04T18:33:19Z","name":"Accounting Two","customer_id":"CUsT0m3rID","require_new_password":false,"role":"billing","login":"accounting@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"8899255b1b083e5479540b2e2db7b8e3","two_factor_setup_required":false}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 14 Feb 2020 01:31:02 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-yyz4535-YYZ
+      X-Timer:
+      - S1581643862.466377,VS0,VE238
+    status: 200 OK
+    code: 200
+    duration: ""
