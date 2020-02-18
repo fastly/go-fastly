@@ -37,11 +37,11 @@ type S3 struct {
 	TimestampFormat              string                 `mapstructure:"timestamp_format"`
 	Placement                    string                 `mapstructure:"placement"`
 	Redundancy                   S3Redundancy           `mapstructure:"redundancy"`
+	ServerSideEncryptionKMSKeyID string                 `mapstructure:"server_side_encryption_kms_key_id"`
+	ServerSideEncryption         S3ServerSideEncryption `mapstructure:"server_side_encryption"`
 	CreatedAt                    *time.Time             `mapstructure:"created_at"`
 	UpdatedAt                    *time.Time             `mapstructure:"updated_at"`
 	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
-	ServerSideEncryptionKMSKeyID string                 `mapstructure:"server_side_encryption_kms_key_id"`
-	ServerSideEncryption         S3ServerSideEncryption `mapstructure:"server_side_encryption"`
 }
 
 // s3sByName is a sortable list of S3s.
