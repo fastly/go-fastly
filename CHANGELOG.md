@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.6.0] - 2020-02-18
+### Added
+- s3: Support for `server_side_encryption_kms_key_id` and `server_side_encryption` fields ([#144](https://github.com/fastly/go-fastly/pull/144)).
+
 ## [1.5.0] - 2020-01-29
 ### Added
 - pool/server: Support for Fastly's Load Balancer ([#142](https://github.com/fastly/go-fastly/pull/142)).
@@ -131,7 +135,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.5.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.6.0...HEAD
+[1.6.0]: https://github.com/fastly/go-fastly/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/fastly/go-fastly/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/fastly/go-fastly/compare/v1.3.0...v1.4.0
 [1.3.0]: https://github.com/fastly/go-fastly/compare/v1.2.1...v1.3.0
