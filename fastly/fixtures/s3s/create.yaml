@@ -1,14 +1,13 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=41&access_key=AKIAIOSFODNN7EXAMPLE&bucket_name=bucket-name&domain=s3.us-east-1.amazonaws.com&format=format&format_version=2&gzip_level=9&message_type=classic&name=test-s3&path=%2Fpath&period=12&placement=waf_debug&redundancy=reduced_redundancy&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&timestamp_format=%25Y
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=6&access_key=AKIAIOSFODNN7EXAMPLE&bucket_name=bucket-name&domain=s3.us-east-1.amazonaws.com&format=format&format_version=2&gzip_level=9&message_type=classic&name=test-s3&path=%2Fpath&period=12&placement=waf_debug&redundancy=reduced_redundancy&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&server_side_encryption=aws%3Akms&server_side_encryption_kms_key_id=1234&timestamp_format=%25Y
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "41"
+      - "6"
       access_key:
       - AKIAIOSFODNN7EXAMPLE
       bucket_name:
@@ -35,32 +34,35 @@ interactions:
       - reduced_redundancy
       secret_key:
       - wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
+      server_side_encryption:
+      - aws:kms
+      server_side_encryption_kms_key_id:
+      - "1234"
       timestamp_format:
       - '%Y'
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/41/logging/s3
+      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.12.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/logging/s3
     method: POST
   response:
-    body: '{"access_key":"AKIAIOSFODNN7EXAMPLE","bucket_name":"bucket-name","domain":"s3.us-east-1.amazonaws.com","format":"format","format_version":"2","gzip_level":9,"message_type":"classic","name":"test-s3","path":"/path","period":12,"placement":"waf_debug","redundancy":"reduced_redundancy","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"41","server_side_encryption":null,"server_side_encryption_kms_key_id":null,"response_condition":"","updated_at":"2019-05-09T22:30:57Z","acl":null,"deleted_at":null,"public_key":null,"created_at":"2019-05-09T22:30:57Z"}'
+    body: '{"access_key":"AKIAIOSFODNN7EXAMPLE","bucket_name":"bucket-name","domain":"s3.us-east-1.amazonaws.com","format":"format","format_version":"2","gzip_level":"9","message_type":"classic","name":"test-s3","path":"/path","period":"12","placement":"waf_debug","redundancy":"reduced_redundancy","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","server_side_encryption":"aws:kms","server_side_encryption_kms_key_id":"1234","timestamp_format":"%Y","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"6","acl":null,"response_condition":"","deleted_at":null,"public_key":null,"created_at":"2020-02-11T22:23:40Z","updated_at":"2020-02-11T22:23:40Z"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 22:30:57 GMT
+      - Tue, 11 Feb 2020 22:23:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "992"
+      - "996"
       Fastly-Ratelimit-Reset:
-      - "1557442800"
+      - "1581462000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -75,8 +77,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3633-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sea4454-SEA
       X-Timer:
-      - S1557441057.790510,VS0,VE782
+      - S1581459820.129654,VS0,VE522
     status: 200 OK
     code: 200
+    duration: ""

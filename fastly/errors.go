@@ -129,6 +129,10 @@ var ErrMissingAddress = errors.New("Missing required field 'Address'")
 // The Fastly API specifies an maximum limit.
 var ErrBatchUpdateMaximumOperationsExceeded = errors.New("batch modify maximum operations exceeded")
 
+// ErrMissingKMSKeyID is an error that is returned from an input struct that requires
+// a "ServerSideEncryptionKMSKeyID" key, but one was not set.
+var ErrMissingKMSKeyID = errors.New("Missing required field 'ServerSideEncryptionKMSKeyID'")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
