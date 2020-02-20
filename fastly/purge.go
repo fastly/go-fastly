@@ -1,10 +1,6 @@
 package fastly
 
-import (
-	"fmt"
-	"net/http"
-	"net/url"
-)
+import "fmt"
 
 // Purge is a response from a purge request.
 type Purge struct {
@@ -30,7 +26,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, ErrMissingURL
 	}
 
-	req, err := c.createPurgeRequest(i.URL)
+	req, err := c.RawRequest("POST", "purge/" + i.URL, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -49,20 +45,6 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, err
 	}
 	return r, nil
-}
-
-func (c *Client) createPurgeRequest(purgeUrl string) (*http.Request, error) {
-	u, err := url.Parse(purgeUrl)
-	if err != nil {
-		return nil, err
-	}
-
-	if u.Scheme == "https" {
-		return c.PurgeRequest(purgeUrl)
-	}
-
-	// if not https - ensure API token is encrypted in transit
-	return c.RawRequest("POST", "purge/"+purgeUrl, nil)
 }
 
 // PurgeKeyInput is used as input to the Purge function.
