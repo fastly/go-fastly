@@ -21,19 +21,27 @@ type RequestOptions struct {
 	BodyLength int64
 }
 
+func (c *Client) PurgeRequest(pUrl string) (*http.Request, error) {
+	return c.createRequest("PURGE", pUrl, nil)
+}
+
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the
 // constructed http.Request and any errors that occurred
 func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, error) {
+	// Append the path to the URL.
+	u := strings.TrimRight(c.url.String(), "/") + "/" + strings.TrimLeft(p, "/")
+
+	return c.createRequest(verb, u, ro)
+}
+
+func (c *Client) createRequest(verb, reqUrl string, ro *RequestOptions) (*http.Request, error) {
 	// Ensure we have request options.
 	if ro == nil {
 		ro = new(RequestOptions)
 	}
 
-	// Append the path to the URL.
-	u := strings.TrimRight(c.url.String(), "/") + "/" + strings.TrimLeft(p, "/")
-
 	// Create the request object.
-	request, err := http.NewRequest(verb, u, ro.Body)
+	request, err := http.NewRequest(verb, reqUrl, ro.Body)
 	if err != nil {
 		return nil, err
 	}
