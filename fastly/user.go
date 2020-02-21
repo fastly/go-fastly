@@ -8,20 +8,20 @@ import (
 
 // User represents a user of the Fastly API and web interface.
 type User struct {
-	CreatedAt              *time.Time `mapstructure:"created_at"`
-	CustomerID             string     `mapstructure:"customer_id"`
-	DeletedAt              *time.Time `mapstructure:"deleted_at"`
-	EmailHash              string     `mapstructure:"email_hash"`
 	ID                     string     `mapstructure:"id"`
-	LimitServices          bool       `mapstructure:"limit_services"`
-	Locked                 bool       `mapstructure:"locked"`
 	Login                  string     `mapstructure:"login"`
 	Name                   string     `mapstructure:"name"`
-	RequireNewPassword     bool       `mapstructure:"require_new_password"`
 	Role                   string     `mapstructure:"role"`
+	CustomerID             string     `mapstructure:"customer_id"`
+	EmailHash              string     `mapstructure:"email_hash"`
+	LimitServices          bool       `mapstructure:"limit_services"`
+	Locked                 bool       `mapstructure:"locked"`
+	RequireNewPassword     bool       `mapstructure:"require_new_password"`
 	TwoFactorAuthEnabled   bool       `mapstructure:"two_factor_auth_enabled"`
 	TwoFactorSetupRequired bool       `mapstructure:"two_factor_setup_required"`
+	CreatedAt              *time.Time `mapstructure:"created_at"`
 	UpdatedAt              *time.Time `mapstructure:"updated_at"`
+	DeletedAt              *time.Time `mapstructure:"deleted_at"`
 }
 
 // usersByLogin is a sortable list of users.
