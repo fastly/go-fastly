@@ -104,8 +104,9 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
 	Login string `form:"login"`
-	Name  string `form:"name,omitempty"`
-	Role  string `form:"role,omitempty"`
+	Name  string `form:"name"`
+
+	Role string `form:"role,omitempty"`
 }
 
 // CreateUser creates a new API token with the given information.
