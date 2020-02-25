@@ -34,22 +34,6 @@ func (s usersByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListUsers returns the full list of users belonging to the currently
-// authenticated user.
-func (c *Client) ListUsers() ([]*User, error) {
-	resp, err := c.Get("/users", nil)
-	if err != nil {
-		return nil, err
-	}
-
-	var t []*User
-	if err := decodeJSON(&t, resp.Body); err != nil {
-		return nil, err
-	}
-	sort.Stable(usersByName(t))
-	return t, nil
-}
-
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
 type ListCustomerUsersInput struct {
 	ID string

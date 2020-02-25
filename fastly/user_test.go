@@ -2,22 +2,6 @@ package fastly
 
 import "testing"
 
-func TestClient_ListUsers(t *testing.T) {
-	t.Parallel()
-
-	var users []*User
-	var err error
-	record(t, "users/list", func(c *Client) {
-		users, err = c.ListUsers()
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(users) < 1 {
-		t.Errorf("bad users: %v", users)
-	}
-}
-
 func TestClient_ListCustomerUsers(t *testing.T) {
 	t.Parallel()
 
