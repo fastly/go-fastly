@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: name=Superuser+Three&role=superuser
+    body: name=updated+user&role=superuser
     form:
       name:
-      - Superuser Three
+      - updated user
       role:
       - superuser
     headers:
@@ -13,10 +13,11 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.5.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/user/T3hr33eE3thr3EEtHr3e3
+    url: https://api.fastly.com/user/FoXUMd33uGfvJYLTqQ0d74
     method: PUT
   response:
-    body: '{"id":"T3hr33eE3thr3EEtHr3e3","created_at":"2013-10-25T08:17:38Z","updated_at":"2020-02-14T14:39:20Z","name":"Superuser Three","customer_id":"CUsT0m3rID","require_new_password":false,"role":"superuser","login":"user.three@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"3e340dcebcbef6aa898a4fc58f98eff5","two_factor_setup_required":false}'
+    body: '{"id":"FoXUMd33uGfvJYLTqQ0d74","customer_id":"qGfZo6FegmRT5XlvOLdsKy","name":"updated
+      user","role":"superuser","login":"test+user@example.com","deleted_at":null,"created_at":"2020-02-25T02:39:08Z","updated_at":"2020-02-25T02:39:09Z","require_new_password":false,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"email_hash":"bebed43da3708b3360ad6aeb75adc7ae","two_factor_setup_required":true}'
     headers:
       Accept-Ranges:
       - bytes
@@ -26,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 14 Feb 2020 14:39:20 GMT
+      - Tue, 25 Feb 2020 02:39:09 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "990"
       Fastly-Ratelimit-Reset:
-      - "1581692400"
+      - "1582599600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +46,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-mdw17355-MDW
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-mdw17322-MDW
       X-Timer:
-      - S1581691160.851554,VS0,VE188
+      - S1582598349.464999,VS0,VE221
     status: 200 OK
     code: 200
     duration: ""

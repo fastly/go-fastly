@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: login=new%2Bengineer%40example.com&name=new+engineer&role=engineer
+    body: login=test%2Buser%40example.com&name=test+user&role=engineer
     form:
       login:
-      - new+engineer@example.com
+      - test+user@example.com
       name:
-      - new engineer
+      - test user
       role:
       - engineer
     headers:
@@ -18,7 +18,8 @@ interactions:
     url: https://api.fastly.com/user
     method: POST
   response:
-    body: '{"id":"6SI6xsIX66S66iX6ixSIx","created_at":"2020-02-14T13:52:02Z","updated_at":"2020-02-14T13:52:02Z","name":"new engineer","customer_id":"CUsT0m3rID","require_new_password":false,"role":"engineer","login":"new+engineer@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"email_hash":"73a84706cd6e66f218e326ab3a74b7aa","two_factor_setup_required":true}'
+    body: '{"id":"FoXUMd33uGfvJYLTqQ0d74","created_at":"2020-02-25T02:39:08Z","updated_at":"2020-02-25T02:39:08Z","name":"test
+      user","customer_id":"qGfZo6FegmRT5XlvOLdsKy","require_new_password":false,"role":"engineer","login":"test+user@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"email_hash":"bebed43da3708b3360ad6aeb75adc7ae","two_factor_setup_required":true}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 14 Feb 2020 13:52:02 GMT
+      - Tue, 25 Feb 2020 02:39:08 GMT
       Fastly-Ratelimit-Remaining:
-      - "999"
+      - "991"
       Fastly-Ratelimit-Reset:
-      - "1581688800"
+      - "1582599600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +48,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-mdw17331-MDW
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-mdw17322-MDW
       X-Timer:
-      - S1581688323.715400,VS0,VE233
+      - S1582598349.500241,VS0,VE212
     status: 200 OK
     code: 200
     duration: ""
