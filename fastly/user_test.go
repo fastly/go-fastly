@@ -2,126 +2,172 @@ package fastly
 
 import "testing"
 
-func TestClient_ListCustomerUsers(t *testing.T) {
+func TestClient_GetCurrentUser(t *testing.T) {
 	t.Parallel()
 
-	var users []*User
 	var err error
-	record(t, "users/list_customer", func(c *Client) {
-		users, err = c.ListCustomerUsers(&ListCustomerUsersInput{
-			ID: "CUsT0m3rID",
+	var u *User
+	record(t, "users/get_current_user", func(c *Client) {
+		u, err = c.GetCurrentUser()
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("%+v", u)
+}
+
+func TestClient_Users(t *testing.T) {
+	t.Parallel()
+
+	fixtureBase := "users/"
+
+	// Create
+	var err error
+	var u *User
+	record(t, fixtureBase+"create", func(c *Client) {
+		u, err = c.CreateUser(&CreateUserInput{
+			Login: "test+user@example.com",
+			Name:  "test user",
+			Role:  "engineer",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(users) < 1 {
-		t.Errorf("bad users: %v", users)
+
+	// Ensure deleted
+	defer func() {
+		record(t, fixtureBase+"cleanup", func(c *Client) {
+			c.DeleteUser(&DeleteUserInput{
+				ID: u.ID,
+			})
+		})
+	}()
+
+	if u.Login != "test+user@example.com" {
+		t.Errorf("bad login: %v", u.Login)
 	}
-}
 
-func TestClient_GetCurrentUser(t *testing.T) {
-	t.Parallel()
+	if u.Name != "test user" {
+		t.Errorf("bad name: %v", u.Name)
+	}
 
-	var user *User
-	var err error
-	record(t, "users/get_current_user", func(c *Client) {
-		user, err = c.GetCurrentUser()
+	if u.Role != "engineer" {
+		t.Errorf("bad role: %v", u.Role)
+	}
+
+	// List
+	var us []*User
+	record(t, fixtureBase+"list", func(c *Client) {
+		us, err = c.ListCustomerUsers(&ListCustomerUsersInput{
+			CustomerID: u.CustomerID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", user)
-}
-
-func TestClient_GetUser(t *testing.T) {
-	t.Parallel()
-
-	input := &GetUserInput{
-		ID: "T3hr33eE3thr3EEtHr3e3",
+	if len(us) < 1 {
+		t.Errorf("bad users: %v", us)
 	}
 
-	var user *User
-	var err error
-	record(t, "users/get", func(c *Client) {
-		user, err = c.GetUser(input)
+	// Get
+	var nu *User
+	record(t, fixtureBase+"get", func(c *Client) {
+		nu, err = c.GetUser(&GetUserInput{
+			ID: u.ID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	t.Logf("%+v", user)
-}
-
-func TestClient_CreateUser(t *testing.T) {
-	t.Parallel()
-
-	input := &CreateUserInput{
-		Login: "new+engineer@example.com",
-		Name:  "new engineer",
-		Role:  "engineer",
+	if u.Name != nu.Name {
+		t.Errorf("bad name: %q (%q)", u.Name, nu.Name)
 	}
 
-	var user *User
-	var err error
-	record(t, "users/create", func(c *Client) {
-		user, err = c.CreateUser(input)
+	// Update
+	var uu *User
+	record(t, fixtureBase+"update", func(c *Client) {
+		uu, err = c.UpdateUser(&UpdateUserInput{
+			ID:   u.ID,
+			Name: "updated user",
+			Role: "superuser",
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	if user.Login != input.Login {
-		t.Errorf("returned invalid login, got %s, want %s", user.Login, input.Login)
+	if uu.Name != "updated user" {
+		t.Errorf("bad name: %q", uu.Name)
+	}
+	if uu.Role != "superuser" {
+		t.Errorf("bad role: %q", uu.Role)
 	}
 
-	if user.Name != input.Name {
-		t.Errorf("returned invalid name, got %s, want %s", user.Name, input.Name)
-	}
-
-	if user.Role != input.Role {
-		t.Errorf("returned invalid role, got %s, want %s", user.Role, input.Role)
-	}
-}
-
-func TestClient_UpdateUser(t *testing.T) {
-	t.Parallel()
-
-	input := &UpdateUserInput{
-		ID:   "T3hr33eE3thr3EEtHr3e3",
-		Name: "Superuser Three",
-		Role: "superuser",
-	}
-
-	var user *User
-	var err error
-	record(t, "users/update", func(c *Client) {
-		user, err = c.UpdateUser(input)
+	// Delete
+	record(t, fixtureBase+"delete", func(c *Client) {
+		err = c.DeleteUser(&DeleteUserInput{
+			ID: u.ID,
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
+}
 
-	if user.Name != input.Name {
-		t.Errorf("returned invalid name, got %s, want %s", user.Name, input.Name)
+func TestClient_CreateUser_validation(t *testing.T) {
+	var err error
+	_, err = testClient.CreateUser(&CreateUserInput{
+		Login: "",
+	})
+	if err != ErrMissingLogin {
+		t.Errorf("bad error: %s", err)
 	}
 
-	if user.Role != input.Role {
-		t.Errorf("returned invalid role, got %s, want %s", user.Role, input.Role)
+	_, err = testClient.CreateUser(&CreateUserInput{
+		Login: "new+user@example.com",
+		Name:  "",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestClient_DeleteUser(t *testing.T) {
-	t.Parallel()
-
-	input := &DeleteUserInput{
-		ID: "6SI6xsIX66S66iX6ixSIx",
-	}
-
+func TestClient_ListCustomerUsers_validation(t *testing.T) {
 	var err error
-	record(t, "users/delete", func(c *Client) {
-		err = c.DeleteUser(input)
+	_, err = testClient.ListCustomerUsers(&ListCustomerUsersInput{
+		CustomerID: "",
 	})
-	if err != nil {
-		t.Fatal(err)
+	if err != ErrMissingCustomerID {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_GetUser_validation(t *testing.T) {
+	var err error
+	_, err = testClient.GetUser(&GetUserInput{
+		ID: "",
+	})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_UpdateUser_validation(t *testing.T) {
+	var err error
+	_, err = testClient.UpdateUser(&UpdateUserInput{
+		ID: "",
+	})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_DeleteUser_validation(t *testing.T) {
+	var err error
+	err = testClient.DeleteUser(&DeleteUserInput{
+		ID: "",
+	})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
 	}
 }

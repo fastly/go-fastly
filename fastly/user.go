@@ -36,17 +36,17 @@ func (s usersByName) Less(i, j int) bool {
 
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
 type ListCustomerUsersInput struct {
-	ID string
+	CustomerID string
 }
 
 // ListCustomerUsers returns the full list of users belonging to a specific
 // customer.
 func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.CustomerID == "" {
+		return nil, ErrMissingCustomerID
 	}
 
-	path := fmt.Sprintf("/customer/%s/users", i.ID)
+	path := fmt.Sprintf("/customer/%s/users", i.CustomerID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -111,6 +111,14 @@ type CreateUserInput struct {
 
 // CreateUser creates a new API token with the given information.
 func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
+	if i.Login == "" {
+		return nil, ErrMissingLogin
+	}
+
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
+
 	resp, err := c.PostForm("/user", i, nil)
 	if err != nil {
 		return nil, err
