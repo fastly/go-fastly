@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.7.0] - 2020-02-26
+### Added
+- user: Support for Fastly's User Management ([#145](https://github.com/fastly/go-fastly/pull/145)).
+
+### Changed
+- purge: Request method for purging an individual URL ([#116](https://github.com/fastly/go-fastly/pull/116)).
+
 ## [1.6.0] - 2020-02-18
 ### Added
 - s3: Support for `server_side_encryption_kms_key_id` and `server_side_encryption` fields ([#144](https://github.com/fastly/go-fastly/pull/144)).
@@ -135,7 +142,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.6.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.7.0...HEAD
+[1.7.0]: https://github.com/fastly/go-fastly/compare/v1.6.0...v1.7.0
 [1.6.0]: https://github.com/fastly/go-fastly/compare/v1.5.0...v1.6.0
 [1.5.0]: https://github.com/fastly/go-fastly/compare/v1.4.0...v1.5.0
 [1.4.0]: https://github.com/fastly/go-fastly/compare/v1.3.0...v1.4.0
