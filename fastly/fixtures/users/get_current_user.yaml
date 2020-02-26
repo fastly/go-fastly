@@ -1,0 +1,47 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.5.0 (+github.com/fastly/go-fastly; go1.13.5)
+    url: https://api.fastly.com/current_user
+    method: GET
+  response:
+    body: '{"id":"Y3VycmVudCt1c2VyQGV4YW","created_at":"2016-08-29T19:35:22Z","updated_at":"2020-02-25T00:24:55Z","name":"current+user@example.com","customer_id":"qGfZo6FegmRT5XlvOLdsKy","require_new_password":false,"role":"superuser","login":"current+user@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"e3aaaf9ef83cf31d4821ddc22e485800","two_factor_setup_required":false}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 25 Feb 2020 02:39:08 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-mdw17322-MDW
+      X-Timer:
+      - S1582598348.498253,VS0,VE114
+    status: 200 OK
+    code: 200
+    duration: ""

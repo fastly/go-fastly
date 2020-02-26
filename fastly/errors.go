@@ -29,6 +29,10 @@ var ErrMissingVersion = errors.New("Missing required field 'Version'")
 // "Content" key, but one was not set.
 var ErrMissingContent = errors.New("Missing required field 'Content'")
 
+// ErrMissingLogin is an error that is returned when an input struct requires a
+// "Login" key, but one was not set.
+var ErrMissingLogin = errors.New("Missing required field 'Login'")
+
 // ErrMissingName is an error that is returned when an input struct requires a
 // "Name" key, but one was not set.
 var ErrMissingName = errors.New("Missing required field 'Name'")
@@ -88,6 +92,10 @@ var ErrMissingACL = errors.New("Missing required field 'ACL'")
 // ErrMissingIP is an error that is returned when an input struct
 // required an "IP" key, but one is not set
 var ErrMissingIP = errors.New("Missing required field 'IP'")
+
+// ErrMissingCustomerID is an error that is returned was an input struct
+// requires a "CustomerID" key, but one was not set
+var ErrMissingCustomerID = errors.New("Missing required field 'CustomerID'")
 
 // ErrMissingEventID is an error that is returned was an input struct
 // requires a "EventID" key, but one was not set
