@@ -51,8 +51,8 @@ type Client struct {
 	// client will be used.
 	HTTPClient *http.Client
 
-	// updateLock forces serialization of calls that modify a service to
-	// avoid rate limits.
+	// updateLock forces serialization of calls that modify a service.
+	// Concurrent modifications have undefined semantics.
 	updateLock sync.Mutex
 
 	// apiKey is the Fastly API key to authenticate requests.
