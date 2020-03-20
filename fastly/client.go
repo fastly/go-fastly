@@ -205,11 +205,11 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 
 	if verb != "GET" && verb != "HEAD" {
 		c.updateLock.Lock()
+		defer c.updateLock.Unlock()
+
 	}
 	resp, err := checkResp(c.HTTPClient.Do(req))
-	if verb != "GET" && verb != "HEAD" {
-		c.updateLock.Unlock()
-	}
+
 	if err != nil {
 		return resp, err
 	}
