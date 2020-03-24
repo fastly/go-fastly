@@ -10,6 +10,7 @@ import (
 	"os"
 	"runtime"
 	"strings"
+	"sync"
 
 	"github.com/ajg/form"
 	"github.com/google/jsonapi"
@@ -49,6 +50,10 @@ type Client struct {
 	// HTTPClient is the HTTP client to use. If one is not provided, a default
 	// client will be used.
 	HTTPClient *http.Client
+
+	// updateLock forces serialization of calls that modify a service.
+	// Concurrent modifications have undefined semantics.
+	updateLock sync.Mutex
 
 	// apiKey is the Fastly API key to authenticate requests.
 	apiKey string
@@ -198,7 +203,13 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		return nil, err
 	}
 
+	if verb != "GET" && verb != "HEAD" {
+		c.updateLock.Lock()
+		defer c.updateLock.Unlock()
+
+	}
 	resp, err := checkResp(c.HTTPClient.Do(req))
+
 	if err != nil {
 		return resp, err
 	}
