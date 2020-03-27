@@ -19,6 +19,9 @@ type RequestOptions struct {
 	// Request. BodyLength is the final size of the Body.
 	Body       io.Reader
 	BodyLength int64
+
+	// Can this request run in parallel
+	Parallel bool
 }
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the

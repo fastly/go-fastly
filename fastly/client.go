@@ -122,11 +122,19 @@ func (c *Client) init() (*Client, error) {
 
 // Get issues an HTTP GET request.
 func (c *Client) Get(p string, ro *RequestOptions) (*http.Response, error) {
+	if ro == nil {
+		ro = new(RequestOptions)
+	}
+	ro.Parallel = true
 	return c.Request("GET", p, ro)
 }
 
 // Head issues an HTTP HEAD request.
 func (c *Client) Head(p string, ro *RequestOptions) (*http.Response, error) {
+	if ro == nil {
+		ro = new(RequestOptions)
+	}
+	ro.Parallel = true
 	return c.Request("HEAD", p, ro)
 }
 
@@ -203,7 +211,7 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		return nil, err
 	}
 
-	if verb != "GET" && verb != "HEAD" && !strings.Contains(p, "/purge/") && !strings.HasPrefix(p, "purge/") {
+	if ro == nil || !ro.Parallel {
 		c.updateLock.Lock()
 		defer c.updateLock.Unlock()
 

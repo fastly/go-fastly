@@ -27,6 +27,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 	}
 
 	ro := new(RequestOptions)
+	ro.Parallel = true
 	if i.Soft {
 		ro.Headers["Fastly-Soft-Purge"] = "1"
 	}
@@ -66,7 +67,10 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 	}
 
 	path := fmt.Sprintf("/service/%s/purge/%s", i.Service, i.Key)
-	req, err := c.RawRequest("POST", path, nil)
+
+	ro := new(RequestOptions)
+	ro.Parallel = true
+	req, err := c.RawRequest("POST", path, ro)
 	if err != nil {
 		return nil, err
 	}
