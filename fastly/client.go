@@ -203,7 +203,7 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		return nil, err
 	}
 
-	if verb != "GET" && verb != "HEAD" {
+	if verb != "GET" && verb != "HEAD" && !strings.Contains(p, "/purge/") && !strings.HasPrefix(p, "purge/") {
 		c.updateLock.Lock()
 		defer c.updateLock.Unlock()
 
