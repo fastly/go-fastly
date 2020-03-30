@@ -7,7 +7,7 @@
 	* **Only add relevant changes**
 	* Please keep the Unreleased header/link at the top
 	* Please don’t forget to update the header links at the bottom
-4. Bump the project version in fastly/client.go
+4. Bump the project version in [fastly/client.go](https://github.com/fastly/go-fastly/blob/master/fastly/client.go)
 5. Checkout and update the master branch:
 	* $ git checkout master
 	* $ git pull upstream master
