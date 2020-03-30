@@ -17,7 +17,7 @@
 	* $ git push upstream vx.x.x
 8. On GitHub, go to the main page of the repository
 9. Under the repository name, click Releases
-10. Click Draft a new release
+10. Click [Draft a new release](https://github.com/fastly/go-fastly/releases/new)
 	* Select the new tag for the tag version
 	* Use the format: `vx.x.x - yyyy-mm-dd` for the release title
 	* Use what you have added to the CHANGELOG for the release description
