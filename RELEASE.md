@@ -1,7 +1,7 @@
 ### How to cut a new release for the go-fastly HTTP client
 1. Merge all PRs for the release into the master branch
 2. Ensure all tests are passing
-3. Update the CHANGELOG:
+3. Update the [CHANGELOG.md](https://github.com/fastly/go-fastly/blob/master/CHANGELOG.md):
 	* The format is based on https://keepachangelog.com/en/1.0.0/
 	* This project adheres to https://semver.org/spec/v2.0.0.html
 	* Only add relevant changes
