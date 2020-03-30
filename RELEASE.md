@@ -19,6 +19,6 @@
 9. Under the repository name, click Releases
 10. Click Draft a new release
 	* Select the new tag for the tag version
-	* Use the format: vx.x.x - yyyy-mm-dd for the release title
+	* Use the format: `vx.x.x - yyyy-mm-dd` for the release title
 	* Use what you have added to the CHANGELOG for the release description
 11. Click Publish release
