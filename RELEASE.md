@@ -4,7 +4,7 @@
 3. Update the [CHANGELOG.md](https://github.com/fastly/go-fastly/blob/master/CHANGELOG.md):
 	* The format is based on https://keepachangelog.com/en/1.0.0/
 	* This project adheres to https://semver.org/spec/v2.0.0.html
-	* Only add relevant changes
+	* **Only add relevant changes**
 	* Please keep the Unreleased header/link at the top
 	* Please don’t forget to update the header links at the bottom
 4. Bump the project version in fastly/client.go
