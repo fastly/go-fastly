@@ -21,17 +21,17 @@ type Service struct {
 }
 
 type ServiceDetail struct {
-	ID            string     `mapstructure:"id"`
-	Name          string     `mapstructure:"name"`
-	Type          string     `mapstructure:"type"`
-	Comment       string     `mapstructure:"comment"`
-	CustomerID    string     `mapstructure:"customer_id"`
-	ActiveVersion Version    `mapstructure:"active_version"`
-	Version       Version    `mapstructure:"version"`
-	Versions      []*Version `mapstructure:"versions"`
-	CreatedAt     *time.Time `mapstructure:"created_at"`
-	UpdatedAt     *time.Time `mapstructure:"updated_at"`
-	DeletedAt     *time.Time `mapstructure:"deleted_at"`
+	ID            string        `mapstructure:"id"`
+	Name          string        `mapstructure:"name"`
+	Type          string        `mapstructure:"type"`
+	Comment       string        `mapstructure:"comment"`
+	CustomerID    string        `mapstructure:"customer_id"`
+	ActiveVersion ActiveVersion `mapstructure:"active_version"`
+	Version       Version       `mapstructure:"version"`
+	Versions      []*Version    `mapstructure:"versions"`
+	CreatedAt     *time.Time    `mapstructure:"created_at"`
+	UpdatedAt     *time.Time    `mapstructure:"updated_at"`
+	DeletedAt     *time.Time    `mapstructure:"deleted_at"`
 }
 
 type ServiceDomain struct {

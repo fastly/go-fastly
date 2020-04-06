@@ -3,10 +3,10 @@ version: 1
 rwmutex: {}
 interactions:
 - request:
-    body: ID=4cyy8qad5xykKfjyTCkGnq&name=new-test-service
+    body: ID=7i6HN3TK9wS159v2gPAZ8A&name=new-test-service
     form:
       ID:
-      - 4cyy8qad5xykKfjyTCkGnq
+      - 7i6HN3TK9wS159v2gPAZ8A
       name:
       - new-test-service
     headers:
@@ -16,10 +16,10 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/4cyy8qad5xykKfjyTCkGnq
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A
     method: PUT
   response:
-    body: '{"name":"new-test-service","customer_id":"76eo17QE8I25lqXy9uJqbd","publish_key":"ff100f0c03c61271b4052b07878159c721c4e897","created_at":"2019-05-11T17:03:47Z","comment":"comment","updated_at":"2019-05-11T17:03:47Z","id":"4cyy8qad5xykKfjyTCkGnq","versions":[{"created_at":"2019-05-11T17:03:47Z","locked":false,"active":false,"staging":false,"deleted_at":null,"testing":false,"comment":"","service_id":"4cyy8qad5xykKfjyTCkGnq","number":1,"deployed":false,"updated_at":"2019-05-11T17:03:47Z"}],"deleted_at":null}'
+    body: '{"name":"new-test-service","customer_id":"76eo17QE8I25lqXy9uJqbd","publish_key":"ff100f0c03c61271b4052b07878159c721c4e897","created_at":"2019-05-11T17:03:47Z","comment":"comment","updated_at":"2019-05-11T17:03:47Z","id":"7i6HN3TK9wS159v2gPAZ8A","versions":[{"created_at":"2019-05-11T17:03:47Z","locked":false,"active":false,"staging":false,"deleted_at":null,"testing":false,"comment":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","number":1,"deployed":false,"updated_at":"2019-05-11T17:03:47Z"}],"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes

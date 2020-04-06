@@ -21,6 +21,31 @@ type Version struct {
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
+type ActiveVersion struct {
+	Number         int                    `mapstructure:"number"`
+	Comment        string                 `mapstructure:"comment"`
+	ServiceID      string                 `mapstructure:"service_id"`
+	Active         bool                   `mapstructure:"active"`
+	Locked         bool                   `mapstructure:"locked"`
+	Deployed       bool                   `mapstructure:"deployed"`
+	Staging        bool                   `mapstructure:"staging"`
+	Testing        bool                   `mapstructure:"testing"`
+	Backends       []Backend              `mapstructure:"backends"`
+	CacheSetting   []CacheSetting         `mapstructure:"cache_settings"`
+	Conditions     []Condition            `mapstructure:"conditions"`
+	Dictionaries   []Dictionary           `mapstructure:"dictionaries"`
+	Directors      []Director             `mapstructure:"directors"`
+	Domains        []Domain               `mapstructure:"domains"`
+	Gzips          []Gzip                 `mapstructure:"gzips"`
+	Headers        []Header               `mapstructure:"headers"`
+	HealthChecks   []HealthCheck          `mapstructure:"healthchecks"`
+	RequestSetting []RequestSetting       `mapstructure:"request_settings"`
+	ResponseObject []ResponseObject       `mapstructure:"response_objects"`
+	Settings       map[string]interface{} `mapstructure:"settings"`
+	Snippets       []Snippet              `mapstructure:"snippets"`
+	VCLs           []VCL                  `mapstructure:"vcls"`
+}
+
 // versionsByNumber is a sortable list of versions. This is used by the version
 // `List()` function to sort the API responses.
 type versionsByNumber []*Version

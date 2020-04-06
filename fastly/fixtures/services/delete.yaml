@@ -10,7 +10,7 @@ interactions:
       - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
       - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/4cyy8qad5xykKfjyTCkGnq
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A
     method: DELETE
   response:
     body: '{"status":"ok"}'

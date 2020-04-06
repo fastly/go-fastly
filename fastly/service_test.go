@@ -100,6 +100,9 @@ func TestClient_Services(t *testing.T) {
 	if nsd.Version.Number == 0 {
 		t.Errorf("Service Detail Version is empty: (%#v)", nsd)
 	}
+	if nsd.ActiveVersion.Number == 0 {
+		t.Errorf("Service Active Version is empty: (%#v)", nsd.ActiveVersion)
+	}
 
 	// Search
 	var fs *Service
