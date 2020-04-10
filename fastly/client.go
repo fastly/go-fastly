@@ -106,6 +106,17 @@ func NewRealtimeStatsClient() *RTSClient {
 	return &RTSClient{client: c}
 }
 
+// NewRealtimeStatsClientForEndpoint creates an RTSClient from a token and endpoint url.
+// `token` is a Fastly API token and `endpoint` is RealtimeStatsEndpoint for the production
+// realtime stats API.
+func NewRealtimeStatsClientForEndpoint(token, endpoint string) (*RTSClient, error) {
+	c, err := NewClientForEndpoint(token, endpoint)
+	if err != nil {
+		return nil, err
+	}
+	return &RTSClient{client: c}, nil
+}
+
 func (c *Client) init() (*Client, error) {
 	u, err := url.Parse(c.Address)
 	if err != nil {
