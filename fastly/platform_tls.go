@@ -191,7 +191,7 @@ type BulkCertificateResponseAttribute struct {
 }
 
 // BulkCertificateResponsRelationships .
-type BulkCertificateResponsRelationships struct {
+type BulkCertificateResponseRelationships struct {
 	TLSConfigurations TLSConfigurations `json:"tls_configurations"`
 	TLSDomains        TLSDomains        `json:"tls_domains"`
 }
