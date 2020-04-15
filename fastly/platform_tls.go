@@ -100,19 +100,19 @@ func (c *Client) GetPlatformPrivateKey(i *GetPlatformPrivateKeyInput) (*Platform
 // CreatePlatformPrivateKeyInput is an input to the CreatePlatformPrivateKey function.
 // Allowed values for the fields are described at https://docs.fastly.com/api/platform-tls
 type CreatePlatformPrivateKeyInput struct {
-	Data CreatePlatformPrivateKeyData `form:"data"`
+	Data CreatePlatformPrivateKeyData `json:"data"`
 }
 
 // CreatePlatformPrivateKeyData .
 type CreatePlatformPrivateKeyData struct {
-	Type       string                             `form:"type"`
-	Attributes CreatePlatformPrivateKeyAttributes `form:"attributes"`
+	Type       string                             `json:"type"`
+	Attributes CreatePlatformPrivateKeyAttributes `json:"attributes"`
 }
 
 // CreatePlatformPrivateKeyAttributes .
 type CreatePlatformPrivateKeyAttributes struct {
-	Key  string `form:"subnet,omitempty"`
-	Name string `form:"subnet,omitempty"`
+	Key  string `json:"key,omitempty"`
+	Name string `json:"name,omitempty"`
 }
 
 // CreatePlatformPrivateKey returns a specific private key
@@ -159,68 +159,80 @@ func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 
 // TLSConfigurations .
 type TLSConfigurations struct {
-	Data []TLSConfiguration `json:"data"`
+	Data []TLSConfiguration `mapstructure:"data"`
 }
 
 // TLSConfiguration .
 type TLSConfiguration struct {
-	Type string `json:"type"`
-	ID   string `json:"id"`
+	ID   string `mapstructure:"id"`
+	Type string `mapstructure:"type"`
 }
 
 // TLSDomains .
 type TLSDomains struct {
-	Data []TLSDomain `json:"data"`
+	Data []TLSDomain `mapstructure:"data"`
 }
 
 // TLSDomain .
 type TLSDomain struct {
-	Type string `json:"type"`
-	ID   string `json:"id"`
+	Type string `mapstructure:"type"`
+	ID   string `mapstructure:"id"`
 }
 
 // BulkCertificateResponseAttributes .
 type BulkCertificateResponseAttributes struct {
-	Data []BulkCertificateResponseAttribute `json:"data"`
+	Data []BulkCertificateResponseAttribute `mapstructure:"data"`
 }
 
 // BulkCertificateResponseAttribute .
 type BulkCertificateResponseAttribute struct {
-	Type string `json:"type"`
-	ID   string `json:"id"`
+	NotAfter  time.Time `mapstructure:"not_after"`
+	NotBefore time.Time `mapstructure:"not_before"`
+	CreatedAt time.Time `mapstructure:"created_at"`
+	UpdatedAt time.Time `mapstructure:"updated_at"`
+	Replace   bool      `mapstructure:"replace"`
 }
 
-// BulkCertificateResponsRelationships .
+// BulkCertificateResponseRelationships .
 type BulkCertificateResponseRelationships struct {
-	TLSConfigurations TLSConfigurations `json:"tls_configurations"`
-	TLSDomains        TLSDomains        `json:"tls_domains"`
+	TLSConfigurations TLSConfigurations `mapstructure:"tls_configurations"`
+	TLSDomains        TLSDomains        `mapstructure:"tls_domains"`
 }
 
 // BulkCertificate .
 type BulkCertificate struct {
-	ID            string                              `json:"id"`
-	Type          string                              `json:"type"`
-	Attributes    BulkCertificateResponseAttributes   `json:"attributes"`
-	Relationships BulkCertificateResponsRelationships `json:"relationships"`
+	ID            string                               `mapstructure:"id"`
+	Type          string                               `mapstructure:"type"`
+	Attributes    BulkCertificateResponseAttribute     `mapstructure:"attributes"`
+	Relationships BulkCertificateResponseRelationships `mapstructure:"relationships"`
 }
 
 // GetBulkCertificateResponse .
 type GetBulkCertificateResponse struct {
-	Data BulkCertificate `json:"data"`
+	Data BulkCertificate `mapstructure:"data"`
 }
 
 // GetBulkCertificatesResponse .
 type GetBulkCertificatesResponse struct {
-	Data []BulkCertificate `json:"data"`
+	Data []BulkCertificate `mapstructure:"data"`
+}
+
+// GetBulkCertificateInput used for getting a bulk certificate
+type GetBulkCertificateInput struct {
+	ID     string
+	Params map[string]string
 }
 
 // GetBulkCertificates returns certificate data based on GetBulkCertificatesResponse
-func (c *Client) GetBulkCertificates() (*GetBulkCertificatesResponse, error) {
+func (c *Client) GetBulkCertificates(i *GetBulkCertificateInput) (*GetBulkCertificatesResponse, error) {
 
 	p := "/tls/bulk/certificates"
 
 	r, err := c.Get(p, &RequestOptions{
-		Params: map[string]string{},
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json", //required, otherwise filter doesn't work
+		},
+		Params: i.Params,
 	})
 	if err != nil {
 		return nil, err
@@ -234,11 +246,6 @@ func (c *Client) GetBulkCertificates() (*GetBulkCertificatesResponse, error) {
 	return gbcr, nil
 }
 
-// GetBulkCertificateInput used for getting a bulk certificate
-type GetBulkCertificateInput struct {
-	ID string
-}
-
 // GetBulkCertificate returns a specific certificate
 func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*GetBulkCertificateResponse, error) {
 
@@ -249,7 +256,10 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*GetBulkCertifi
 	}
 
 	r, err := c.Get(p, &RequestOptions{
-		Params: map[string]string{},
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json",
+		},
+		Params: i.Params,
 	})
 	if err != nil {
 		return nil, err
@@ -265,25 +275,36 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*GetBulkCertifi
 
 // CreateBulkCertificatesInput holds cert data
 type CreateBulkCertificatesInput struct {
-	Data BulkCertificatesData `json:"data"`
+	Data CreateBulkCertificatesData `json:"data"`
 }
 
-// BulkCertificatesData holds certificate attributes and relationships
-type BulkCertificatesData struct {
-	Type          string                        `json:"type"`
-	Attributes    BulkCertificatesAttributes    `json:"attributes"`
-	Relationships BulkCertificatesRelationships `json:"relationships"`
+// CreateBulkCertificatesData holds certificate attributes and relationships
+type CreateBulkCertificatesData struct {
+	Type          string                              `json:"type"`
+	Attributes    CreateBulkCertificatesAttributes    `json:"attributes"`
+	Relationships CreateBulkCertificatesRelationships `json:"relationships"`
 }
 
-// BulkCertificatesAttributes holds attributes for certificate
-type BulkCertificatesAttributes struct {
+// CreateBulkCertificatesAttributes holds attributes for certificate
+type CreateBulkCertificatesAttributes struct {
 	CertBlob          string `json:"cert_blob"`
 	IntermediatesBlob string `json:"intermediates_blob"`
 }
 
-//BulkCertificatesRelationships holds tls configurations for bulk certificate
-type BulkCertificatesRelationships struct {
-	TLSConfigurations TLSConfigurations `json:"tls_configurations"`
+//CreateBulkCertificatesRelationships holds tls configurations for bulk certificate
+type CreateBulkCertificatesRelationships struct {
+	TLSConfigurations CreateTLSConfigurations `json:"tls_configurations"`
+}
+
+// CreateTLSConfigurations .
+type CreateTLSConfigurations struct {
+	Data []CreateTLSConfiguration `json:"data"`
+}
+
+// CreateTLSConfiguration .
+type CreateTLSConfiguration struct {
+	ID   string `json:"id"`
+	Type string `json:"type"`
 }
 
 // CreateBulkCertificate uploads a new certificate
@@ -291,7 +312,11 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificatesInput) (*GetBulk
 
 	p := "/tls/bulk/certificates"
 
-	r, err := c.PostJSON(p, i, nil)
+	r, err := c.PostJSON(p, i, &RequestOptions{
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json",
+		},
+	})
 	if err != nil {
 		return nil, err
 	}
@@ -306,15 +331,15 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificatesInput) (*GetBulk
 
 //UpdateBulkCertificateInput used for updating a certificate
 type UpdateBulkCertificateInput struct {
-	Data UpdateBulkCertificateData `json:"data"`
+	Data UpdateBulkCertificateData `mapstructure:"data"`
 }
 
 // UpdateBulkCertificateData .
 type UpdateBulkCertificateData struct {
-	ID                string `json:"id"`
-	Type              string `json:"type"`
-	CertBlob          string `json:"cert_blob"`
-	IntermediatesBlob string `json:"intermediates_blob"`
+	ID                string `mapstructure:"id"`
+	Type              string `mapstructure:"type"`
+	CertBlob          string `mapstructure:"cert_blob"`
+	IntermediatesBlob string `mapstructure:"intermediates_blob"`
 }
 
 // UpdateBulkCertificate replace a certificate with a newly reissued certificate

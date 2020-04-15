@@ -54,16 +54,16 @@ func TestClient_CreateBulkCertificate(t *testing.T) {
 	var err error
 	record(t, "platform_tls/create_bulk_certificate", func(c *Client) {
 		_, err = c.CreateBulkCertificate(&CreateBulkCertificatesInput{
-			Data: BulkCertificatesData{
+			Data: CreateBulkCertificatesData{
 				Type: "tls_bulk_certificate",
-				Attributes: BulkCertificatesAttributes{
+				Attributes: CreateBulkCertificatesAttributes{
 					CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 					IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 				},
-				Relationships: BulkCertificatesRelationships{
-					TLSConfigurations: TLSConfigurations{
-						Data: []TLSConfiguration{
-							TLSConfiguration{
+				Relationships: CreateBulkCertificatesRelationships{
+					TLSConfigurations: CreateTLSConfigurations{
+						Data: []CreateTLSConfiguration{
+							{
 								Type: "tls_configuration",
 								ID:   "TLS_CONFIGURATION_ID",
 							},
@@ -111,7 +111,7 @@ func TestClient_GetBulkCertificates(t *testing.T) {
 
 	var err error
 	record(t, "platform_tls/platform_bulk_certificates", func(c *Client) {
-		_, err = c.GetBulkCertificates()
+		_, err = c.GetBulkCertificates(&GetBulkCertificateInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
