@@ -1,16 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: '{"data" : {"type" : "tls_bulk_certificate","attributes": {"cert_blob": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n","intermediates_blob": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n"},"relationships": {"tls_configurations": {"data": [{"type": "tls_configuration","id": "TLS_CONFIGURATION_ID"}]}}}}'
+    body: '{"data":{"type":"tls_bulk_certificate","attributes":{"cert_blob":"-----BEGIN
+      CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n","intermediates_blob":"-----BEGIN
+      CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n"},"relationships":{"tls_configurations":{"data":[{"type":"tls_configuration","id":"TLS_CONFIGURATION_ID"}]}}}}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
       - application/json
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+      - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14)
     url: https://api.fastly.com/tls/bulk/certificates
     method: POST
   response:

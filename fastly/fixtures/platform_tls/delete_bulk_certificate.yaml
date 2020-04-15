@@ -1,15 +1,12 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+      - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14)
     url: https://api.fastly.com/tls/bulk/certificates/BULK_CERTIFICATE_ID
     method: DELETE
   response:

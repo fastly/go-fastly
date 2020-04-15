@@ -1,16 +1,17 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: '{"data": {"type": "tls_private_key","attributes": {"key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n","name": "My private key"}}}'
+    body: '{"Data":{"Type":"tls_private_key","Attributes":{"Key":"-----BEGIN PRIVATE
+      KEY-----\n...\n-----END PRIVATE KEY-----\n","Name":"My private key"}}}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
       - application/json
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+      - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14)
     url: https://api.fastly.com/tls/private_keys
     method: POST
   response:

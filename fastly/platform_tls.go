@@ -128,7 +128,7 @@ func (c *Client) CreatePlatformPrivateKey(i *CreatePlatformPrivateKeyInput) (*Pl
 		return nil, ErrMissingName
 	}
 
-	r, err := c.PostForm(p, i, nil)
+	r, err := c.PostJSON(p, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -141,6 +141,7 @@ func (c *Client) CreatePlatformPrivateKey(i *CreatePlatformPrivateKeyInput) (*Pl
 	return ppkr, nil
 }
 
+// DeletePrivateKeyInput used for deleting a private key
 type DeletePrivateKeyInput struct {
 	ID string
 }
@@ -156,34 +157,46 @@ func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 	return err
 }
 
+// TLSConfigurations .
 type TLSConfigurations struct {
 	Data []TLSConfiguration `json:"data"`
 }
 
+// TLSConfiguration .
 type TLSConfiguration struct {
 	Type string `json:"type"`
 	ID   string `json:"id"`
 }
 
+// TLSDomains .
 type TLSDomains struct {
-	Data []struct {
-		Type string `json:"type"`
-		ID   string `json:"id"`
-	} `json:"data"`
+	Data []TLSDomain `json:"data"`
 }
 
+// TLSDomain .
+type TLSDomain struct {
+	Type string `json:"type"`
+	ID   string `json:"id"`
+}
+
+// BulkCertificateResponseAttributes .
 type BulkCertificateResponseAttributes struct {
-	Data []struct {
-		Type string `json:"type"`
-		ID   string `json:"id"`
-	} `json:"data"`
+	Data []BulkCertificateResponseAttribute `json:"data"`
 }
 
+// BulkCertificateResponseAttribute .
+type BulkCertificateResponseAttribute struct {
+	Type string `json:"type"`
+	ID   string `json:"id"`
+}
+
+// BulkCertificateResponsRelationships .
 type BulkCertificateResponsRelationships struct {
 	TLSConfigurations TLSConfigurations `json:"tls_configurations"`
 	TLSDomains        TLSDomains        `json:"tls_domains"`
 }
 
+// BulkCertificate .
 type BulkCertificate struct {
 	ID            string                              `json:"id"`
 	Type          string                              `json:"type"`
@@ -191,10 +204,12 @@ type BulkCertificate struct {
 	Relationships BulkCertificateResponsRelationships `json:"relationships"`
 }
 
+// GetBulkCertificateResponse .
 type GetBulkCertificateResponse struct {
 	Data BulkCertificate `json:"data"`
 }
 
+// GetBulkCertificatesResponse .
 type GetBulkCertificatesResponse struct {
 	Data []BulkCertificate `json:"data"`
 }
@@ -219,6 +234,7 @@ func (c *Client) GetBulkCertificates() (*GetBulkCertificatesResponse, error) {
 	return gbcr, nil
 }
 
+// GetBulkCertificateInput used for getting a bulk certificate
 type GetBulkCertificateInput struct {
 	ID string
 }
@@ -247,22 +263,26 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*GetBulkCertifi
 	return bcr, nil
 }
 
+// CreateBulkCertificatesInput holds cert data
 type CreateBulkCertificatesInput struct {
-	Data CreateBulkCertificatesData `json:"data"`
+	Data BulkCertificatesData `json:"data"`
 }
 
-type CreateBulkCertificatesData struct {
-	Type          string                              `json:"type"`
-	Attributes    CreateBulkCertificatesAttributes    `json:"attributes"`
-	Relationships CreateBulkCertificatesRelationships `json:"relationships"`
+// BulkCertificatesData holds certificate attributes and relationships
+type BulkCertificatesData struct {
+	Type          string                        `json:"type"`
+	Attributes    BulkCertificatesAttributes    `json:"attributes"`
+	Relationships BulkCertificatesRelationships `json:"relationships"`
 }
 
-type CreateBulkCertificatesAttributes struct {
+// BulkCertificatesAttributes holds attributes for certificate
+type BulkCertificatesAttributes struct {
 	CertBlob          string `json:"cert_blob"`
 	IntermediatesBlob string `json:"intermediates_blob"`
 }
 
-type CreateBulkCertificatesRelationships struct {
+//BulkCertificatesRelationships holds tls configurations for bulk certificate
+type BulkCertificatesRelationships struct {
 	TLSConfigurations TLSConfigurations `json:"tls_configurations"`
 }
 
@@ -271,7 +291,7 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificatesInput) (*GetBulk
 
 	p := "/tls/bulk/certificates"
 
-	r, err := c.PostForm(p, i, nil)
+	r, err := c.PostJSON(p, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -284,48 +304,39 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificatesInput) (*GetBulk
 	return bcr, nil
 }
 
+//UpdateBulkCertificateInput used for updating a certificate
 type UpdateBulkCertificateInput struct {
+	Data UpdateBulkCertificateData `json:"data"`
+}
+
+// UpdateBulkCertificateData .
+type UpdateBulkCertificateData struct {
 	ID                string `json:"id"`
 	Type              string `json:"type"`
 	CertBlob          string `json:"cert_blob"`
 	IntermediatesBlob string `json:"intermediates_blob"`
 }
 
-// validate makes sure the UpdateBulkCertificateInput instance has all
-// fields we need to request a change. Almost, but not quite, identical to
-// UpdateBulkCertificateInput.validate()
-func (i UpdateBulkCertificateInput) validate() error {
-	if i.ID == "" {
-		return ErrMissingID
-	}
-	if i.Type == "" {
-		return ErrMissingType
-	}
-	if i.CertBlob == "" {
-		return ErrMissingCertBlob
-	}
-	if i.IntermediatesBlob == "" {
-		return ErrMissingIntermediatesBlob
-	}
-	return nil
-}
-
 // UpdateBulkCertificate replace a certificate with a newly reissued certificate
 func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*GetBulkCertificateResponse, error) {
-	if i.ID == "" {
+	if i.Data.ID == "" {
 		return nil, ErrMissingID
 	}
 
-	if i.Type == "" {
+	if i.Data.Type == "" {
 		return nil, ErrMissingType
 	}
 
-	if i.CertBlob == "" {
-		return nil, ErrMissingOWASPID
+	if i.Data.CertBlob == "" {
+		return nil, ErrMissingCertBlob
 	}
 
-	path := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)
-	resp, err := c.PatchJSONAPI(path, i, nil)
+	if i.Data.CertBlob == "" {
+		return nil, ErrMissingIntermediatesBlob
+	}
+
+	path := fmt.Sprintf("/tls/bulk/certificates/%s", i.Data.ID)
+	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -337,11 +348,12 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*GetBulkC
 	return &gbcr, nil
 }
 
+// DeleteBulkCertificateInput used for deleting a certificate
 type DeleteBulkCertificateInput struct {
 	ID string
 }
 
-// DeleteBulkCertificate deletes a specific private key
+// DeleteBulkCertificate deletes a specific certificate
 func (c *Client) DeleteBulkCertificate(i *DeleteBulkCertificateInput) error {
 	if i.ID == "" {
 		return ErrMissingID

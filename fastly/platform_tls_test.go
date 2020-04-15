@@ -54,13 +54,13 @@ func TestClient_CreateBulkCertificate(t *testing.T) {
 	var err error
 	record(t, "platform_tls/create_bulk_certificate", func(c *Client) {
 		_, err = c.CreateBulkCertificate(&CreateBulkCertificatesInput{
-			Data: CreateBulkCertificatesData{
+			Data: BulkCertificatesData{
 				Type: "tls_bulk_certificate",
-				Attributes: CreateBulkCertificatesAttributes{
+				Attributes: BulkCertificatesAttributes{
 					CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 					IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 				},
-				Relationships: CreateBulkCertificatesRelationships{
+				Relationships: BulkCertificatesRelationships{
 					TLSConfigurations: TLSConfigurations{
 						Data: []TLSConfiguration{
 							TLSConfiguration{
@@ -99,6 +99,51 @@ func TestClient_DeleteBulkCertificate(t *testing.T) {
 	record(t, "platform_tls/delete_bulk_certificate", func(c *Client) {
 		err = c.DeleteBulkCertificate(&DeleteBulkCertificateInput{
 			ID: "BULK_CERTIFICATE_ID",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestClient_GetBulkCertificates(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	record(t, "platform_tls/platform_bulk_certificates", func(c *Client) {
+		_, err = c.GetBulkCertificates()
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestClient_GetBulkCertificate(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	record(t, "platform_tls/platform_bulk_certificate", func(c *Client) {
+		_, err = c.GetBulkCertificate(&GetBulkCertificateInput{
+			ID: "BULK_CERTIFICATE_ID",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestClient_UpdateBulkCertificate(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	record(t, "platform_tls/update_bulk_certificate", func(c *Client) {
+		_, err = c.UpdateBulkCertificate(&UpdateBulkCertificateInput{
+			Data: UpdateBulkCertificateData{
+				ID:                "CERTIFICATE_ID",
+				Type:              "tls_bulk_certificate",
+				CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+				IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+			},
 		})
 	})
 	if err != nil {
