@@ -1,0 +1,54 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: |
+      {"data":{"type":"waf","id":"2WK9ofHfHcPi3s6S2X0Z8m","attributes":{"response":"test-response-object-2"}}}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs/2WK9ofHfHcPi3s6S2X0Z8m
+    method: PATCH
+  response:
+    body: '{"data":{"id":"2WK9ofHfHcPi3s6S2X0Z8m","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object-2","version":54,"service_id":"7i6HN3TK9wS159v2gPAZ8A","disabled":false,"rule_statuses_log_count":0,"rule_statuses_block_count":0,"rule_statuses_disabled_count":0},"relationships":{"configuration_set":{"data":{"id":"3vnl3cwPda9Q3WYCDRuGW","type":"configuration_set"}},"owasp":{"data":{"id":"4Jh5ZWRaYGgPdCdgQZNzyk","type":"owasp"}}}},"meta":{"warnings":[{"title":"This
+      version of this service must be active","detail":"You may only update the WAF
+      VCL on an active version of a service.  The version 54 of service 7i6HN3TK9wS159v2gPAZ8A
+      is not active.  You may activate it through https://app.fastly.com or through
+      the API: https://docs.fastly.com/api/config#version  Be sure to review the version''s
+      changes before activating it."}]}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "890"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Sat, 11 May 2019 21:45:02 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lax8631-LAX
+      X-Timer:
+      - S1557611102.061591,VS0,VE521
+    status: 200 OK
+    code: 200
