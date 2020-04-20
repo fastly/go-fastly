@@ -1,14 +1,13 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=42&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-splunk&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2Fmysplunkendpoint.example.com%2Fservices%2Fcollector%2Fevent
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=3&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-splunk&placement=waf_debug&tls_ca_cert=-----BEGIN+CERTIFICATE-----%0AMIICUTCCAfugAwIBAgIBADANBgkqhkiG9w0BAQQFADBXMQswCQYDVQQGEwJDTjEL%0AMAkGA1UECBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMC%0AVU4xFDASBgNVBAMTC0hlcm9uZyBZYW5nMB4XDTA1MDcxNTIxMTk0N1oXDTA1MDgx%0ANDIxMTk0N1owVzELMAkGA1UEBhMCQ04xCzAJBgNVBAgTAlBOMQswCQYDVQQHEwJD%0ATjELMAkGA1UEChMCT04xCzAJBgNVBAsTAlVOMRQwEgYDVQQDEwtIZXJvbmcgWWFu%0AZzBcMA0GCSqGSIb3DQEBAQUAA0sAMEgCQQCp5hnG7ogBhtlynpOS21cBewKE%2FB7j%0AV14qeyslnr26xZUsSVko36ZnhiaO%2FzbMOoRcKK9vEcgMtcLFuQTWDl3RAgMBAAGj%0AgbEwga4wHQYDVR0OBBYEFFXI70krXeQDxZgbaCQoR4jUDncEMH8GA1UdIwR4MHaA%0AFFXI70krXeQDxZgbaCQoR4jUDncEoVukWTBXMQswCQYDVQQGEwJDTjELMAkGA1UE%0ACBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMCVU4xFDAS%0ABgNVBAMTC0hlcm9uZyBZYW5nggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEE%0ABQADQQA%2FugzBrjjK9jcWnDVfGHlk3icNRq0oV7Ri32z%2F%2BHQX67aRfgZu7KWdI%2BJu%0AWm7DCfrPNGVwFWUQOmsPue9rZBgO%0A-----END+CERTIFICATE-----&tls_hostname=example.com&token=super-secure-token&url=https%3A%2F%2Fmysplunkendpoint.example.com%2Fservices%2Fcollector%2Fevent
     form:
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "42"
+      - "3"
       format:
       - '%h %l %u %t "%r" %>s %b'
       format_version:
@@ -17,6 +16,25 @@ interactions:
       - test-splunk
       placement:
       - waf_debug
+      tls_ca_cert:
+      - |-
+        -----BEGIN CERTIFICATE-----
+        MIICUTCCAfugAwIBAgIBADANBgkqhkiG9w0BAQQFADBXMQswCQYDVQQGEwJDTjEL
+        MAkGA1UECBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMC
+        VU4xFDASBgNVBAMTC0hlcm9uZyBZYW5nMB4XDTA1MDcxNTIxMTk0N1oXDTA1MDgx
+        NDIxMTk0N1owVzELMAkGA1UEBhMCQ04xCzAJBgNVBAgTAlBOMQswCQYDVQQHEwJD
+        TjELMAkGA1UEChMCT04xCzAJBgNVBAsTAlVOMRQwEgYDVQQDEwtIZXJvbmcgWWFu
+        ZzBcMA0GCSqGSIb3DQEBAQUAA0sAMEgCQQCp5hnG7ogBhtlynpOS21cBewKE/B7j
+        V14qeyslnr26xZUsSVko36ZnhiaO/zbMOoRcKK9vEcgMtcLFuQTWDl3RAgMBAAGj
+        gbEwga4wHQYDVR0OBBYEFFXI70krXeQDxZgbaCQoR4jUDncEMH8GA1UdIwR4MHaA
+        FFXI70krXeQDxZgbaCQoR4jUDncEoVukWTBXMQswCQYDVQQGEwJDTjELMAkGA1UE
+        CBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMCVU4xFDAS
+        BgNVBAMTC0hlcm9uZyBZYW5nggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEE
+        BQADQQA/ugzBrjjK9jcWnDVfGHlk3icNRq0oV7Ri32z/+HQX67aRfgZu7KWdI+Ju
+        Wm7DCfrPNGVwFWUQOmsPue9rZBgO
+        -----END CERTIFICATE-----
+      tls_hostname:
+      - example.com
       token:
       - super-secure-token
       url:
@@ -24,27 +42,28 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/logging/splunk
+      - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/logging/splunk
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-splunk","placement":"waf_debug","token":"super-secure-token","url":"https://mysplunkendpoint.example.com/services/collector/event","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"42","created_at":"2019-05-09T22:50:15Z","tls_allow_insecure":"0","tls_ca_cert":null,"tls_hostname":null,"deleted_at":null,"response_condition":"","updated_at":"2019-05-09T22:50:15Z","content_type":null}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-splunk","placement":"waf_debug","tls_ca_cert":"-----BEGIN
+      CERTIFICATE-----\nMIICUTCCAfugAwIBAgIBADANBgkqhkiG9w0BAQQFADBXMQswCQYDVQQGEwJDTjEL\nMAkGA1UECBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMC\nVU4xFDASBgNVBAMTC0hlcm9uZyBZYW5nMB4XDTA1MDcxNTIxMTk0N1oXDTA1MDgx\nNDIxMTk0N1owVzELMAkGA1UEBhMCQ04xCzAJBgNVBAgTAlBOMQswCQYDVQQHEwJD\nTjELMAkGA1UEChMCT04xCzAJBgNVBAsTAlVOMRQwEgYDVQQDEwtIZXJvbmcgWWFu\nZzBcMA0GCSqGSIb3DQEBAQUAA0sAMEgCQQCp5hnG7ogBhtlynpOS21cBewKE/B7j\nV14qeyslnr26xZUsSVko36ZnhiaO/zbMOoRcKK9vEcgMtcLFuQTWDl3RAgMBAAGj\ngbEwga4wHQYDVR0OBBYEFFXI70krXeQDxZgbaCQoR4jUDncEMH8GA1UdIwR4MHaA\nFFXI70krXeQDxZgbaCQoR4jUDncEoVukWTBXMQswCQYDVQQGEwJDTjELMAkGA1UE\nCBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMCVU4xFDAS\nBgNVBAMTC0hlcm9uZyBZYW5nggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEE\nBQADQQA/ugzBrjjK9jcWnDVfGHlk3icNRq0oV7Ri32z/+HQX67aRfgZu7KWdI+Ju\nWm7DCfrPNGVwFWUQOmsPue9rZBgO\n-----END
+      CERTIFICATE-----","tls_hostname":"example.com","token":"super-secure-token","url":"https://mysplunkendpoint.example.com/services/collector/event","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"3","updated_at":"2020-04-20T18:15:37Z","deleted_at":null,"created_at":"2020-04-20T18:15:37Z","response_condition":""}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 22:50:16 GMT
+      - Mon, 20 Apr 2020 18:15:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "986"
+      - "998"
       Fastly-Ratelimit-Reset:
-      - "1557442800"
+      - "1587409200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -59,8 +78,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3647-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17421-PAO
       X-Timer:
-      - S1557442216.561112,VS0,VE764
+      - S1587406537.133599,VS0,VE484
     status: 200 OK
     code: 200
+    duration: ""

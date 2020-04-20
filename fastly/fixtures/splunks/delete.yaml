@@ -1,32 +1,30 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/logging/splunk/new-test-splunk
+      - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/logging/splunk/new-test-splunk
     method: DELETE
   response:
     body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 22:50:18 GMT
+      - Mon, 20 Apr 2020 18:15:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "984"
+      - "996"
       Fastly-Ratelimit-Reset:
-      - "1557442800"
+      - "1587409200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,8 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3647-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17421-PAO
       X-Timer:
-      - S1557442218.014222,VS0,VE278
+      - S1587406539.371367,VS0,VE264
     status: 200 OK
     code: 200
+    duration: ""
