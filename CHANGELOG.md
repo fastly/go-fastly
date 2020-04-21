@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.8.0] - 2020-04-21
+### Changed
+- client: Add NewRealtimeStatsClientForEndpoint API ([#152](https://github.com/fastly/go-fastly/pull/152))
+
 ## [1.7.2] - 2020-03-30
 ### Changed
 - client: Allow purge requests to run in parallel ([#147](https://github.com/fastly/go-fastly/pull/147))
@@ -150,7 +154,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.7.2...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.8.0...HEAD
+[1.8.0]: https://github.com/fastly/go-fastly/compare/v1.7.2...v1.8.0
 [1.7.2]: https://github.com/fastly/go-fastly/compare/v1.7.1...v1.7.2
 [1.7.1]: https://github.com/fastly/go-fastly/compare/v1.7.0...v1.7.1
 [1.7.0]: https://github.com/fastly/go-fastly/compare/v1.6.0...v1.7.0
