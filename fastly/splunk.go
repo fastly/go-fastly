@@ -19,6 +19,8 @@ type Splunk struct {
 	ResponseCondition string     `mapstructure:"response_condition"`
 	Placement         string     `mapstructure:"placement"`
 	Token             string     `mapstructure:"token"`
+	TLSCACert         string     `mapstructure:"tls_ca_cert"`
+	TLSHostname       string     `mapstructure:"tls_hostname"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -81,6 +83,8 @@ type CreateSplunkInput struct {
 	ResponseCondition string `form:"response_condition,omitempty"`
 	Placement         string `form:"placement,omitempty"`
 	Token             string `form:"token,omitempty"`
+	TLSCACert         string `form:"tls_ca_cert,omitempty"`
+	TLSHostname       string `form:"tls_hostname,omitempty"`
 }
 
 // CreateSplunk creates a new Fastly splunk.
@@ -161,6 +165,8 @@ type UpdateSplunkInput struct {
 	ResponseCondition string `form:"response_condition,omitempty"`
 	Placement         string `form:"placement,omitempty"`
 	Token             string `form:"token,omitempty"`
+	TLSCACert         string `form:"tls_ca_cert,omitempty"`
+	TLSHostname       string `form:"tls_hostname,omitempty"`
 }
 
 // UpdateSplunk updates a specific splunk.

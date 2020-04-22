@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 func TestClient_Splunks(t *testing.T) {
 	t.Parallel()
@@ -10,6 +13,24 @@ func TestClient_Splunks(t *testing.T) {
 	record(t, "splunks/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
+
+	caCert := strings.TrimSpace(`
+-----BEGIN CERTIFICATE-----
+MIICUTCCAfugAwIBAgIBADANBgkqhkiG9w0BAQQFADBXMQswCQYDVQQGEwJDTjEL
+MAkGA1UECBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMC
+VU4xFDASBgNVBAMTC0hlcm9uZyBZYW5nMB4XDTA1MDcxNTIxMTk0N1oXDTA1MDgx
+NDIxMTk0N1owVzELMAkGA1UEBhMCQ04xCzAJBgNVBAgTAlBOMQswCQYDVQQHEwJD
+TjELMAkGA1UEChMCT04xCzAJBgNVBAsTAlVOMRQwEgYDVQQDEwtIZXJvbmcgWWFu
+ZzBcMA0GCSqGSIb3DQEBAQUAA0sAMEgCQQCp5hnG7ogBhtlynpOS21cBewKE/B7j
+V14qeyslnr26xZUsSVko36ZnhiaO/zbMOoRcKK9vEcgMtcLFuQTWDl3RAgMBAAGj
+gbEwga4wHQYDVR0OBBYEFFXI70krXeQDxZgbaCQoR4jUDncEMH8GA1UdIwR4MHaA
+FFXI70krXeQDxZgbaCQoR4jUDncEoVukWTBXMQswCQYDVQQGEwJDTjELMAkGA1UE
+CBMCUE4xCzAJBgNVBAcTAkNOMQswCQYDVQQKEwJPTjELMAkGA1UECxMCVU4xFDAS
+BgNVBAMTC0hlcm9uZyBZYW5nggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEE
+BQADQQA/ugzBrjjK9jcWnDVfGHlk3icNRq0oV7Ri32z/+HQX67aRfgZu7KWdI+Ju
+Wm7DCfrPNGVwFWUQOmsPue9rZBgO
+-----END CERTIFICATE-----
+`)
 
 	// Create
 	var s *Splunk
@@ -23,6 +44,8 @@ func TestClient_Splunks(t *testing.T) {
 			FormatVersion: 2,
 			Placement:     "waf_debug",
 			Token:         "super-secure-token",
+			TLSCACert:     caCert,
+			TLSHostname:   "example.com",
 		})
 	})
 	if err != nil {
@@ -63,6 +86,12 @@ func TestClient_Splunks(t *testing.T) {
 	}
 	if s.Token != "super-secure-token" {
 		t.Errorf("bad token: %q", s.Token)
+	}
+	if s.TLSCACert != caCert {
+		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
+	}
+	if s.TLSHostname != "example.com" {
+		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
 	}
 
 	// List
@@ -109,6 +138,12 @@ func TestClient_Splunks(t *testing.T) {
 	}
 	if s.Token != ns.Token {
 		t.Errorf("bad token: %q", s.Token)
+	}
+	if s.TLSCACert != ns.TLSCACert {
+		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
+	}
+	if s.TLSHostname != ns.TLSHostname {
+		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
 	}
 
 	// Update
