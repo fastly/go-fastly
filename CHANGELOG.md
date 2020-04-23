@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.9.0] - 2020-04-23
+### Changed
+- splunk: Add missing TLS fields to the Splunk logging endpoint ([#156](https://github.com/fastly/go-fastly/pull/156))
+- https: Add support for HTTPS logging endpoints ([#155](https://github.com/fastly/go-fastly/pull/155))
+
 ## [1.8.0] - 2020-04-21
 ### Changed
 - client: Add NewRealtimeStatsClientForEndpoint API ([#152](https://github.com/fastly/go-fastly/pull/152))
@@ -154,7 +159,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.8.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.9.0...HEAD
+[1.9.0]: https://github.com/fastly/go-fastly/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/fastly/go-fastly/compare/v1.7.2...v1.8.0
 [1.7.2]: https://github.com/fastly/go-fastly/compare/v1.7.1...v1.7.2
 [1.7.1]: https://github.com/fastly/go-fastly/compare/v1.7.0...v1.7.1
