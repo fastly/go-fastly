@@ -5,34 +5,36 @@ import (
 	"reflect"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/google/jsonapi"
 )
 
-// GetPlatformPrivateKeyInput is an input to the GetPlatformPrivateKey function.
+// GetPrivateKeyInput is an input to the GetPrivateKey function.
 // Allowed values for the fields are described at https://docs.fastly.com/api/platform-tls.
-type GetPlatformPrivateKeyInput struct {
+type GetPrivateKeyInput struct {
 	ID string
 }
 
-// PlatformPrivateKey .
-type PlatformPrivateKey struct {
-	KeyLength     int    `jsonapi:"attr,key_length"`
-	KeyType       string `jsonapi:"attr,key_type"`
-	Name          string `jsonapi:"attr,name"`
-	CreatedAt     string `jsonapi:"attr,created_at"`
-	Replace       bool   `jsonapi:"attr,replace"`
-	PublicKeySHA1 string `jsonapi:"attr,public_key_sha1"`
+// PrivateKey represents a private key is used to sign a Certificate.
+type PrivateKey struct {
+	ID            string     `jsonapi:"primary,tls_private_key"`
+	Name          string     `jsonapi:"attr,name"`
+	KeyLength     int        `jsonapi:"attr,key_length"`
+	KeyType       string     `jsonapi:"attr,key_type"`
+	PublicKeySHA1 string     `jsonapi:"attr,public_key_sha1"`
+	CreatedAt     *time.Time `jsonapi:"attr,created_at,iso8601"`
+	Replace       bool       `jsonapi:"attr,replace"`
 }
 
-// ListPrivateKeysInput .
+// ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
 	PageNumber  int    // The page index for pagination.
 	PageSize    int    // The number of keys per page.
 	FilterInUse string // Limit the returned keys to those without any matching TLS certificates.
 }
 
-// formatFilters converts user input into query parameters for filtering
+// formatFilters converts user input into query parameters for filtering.
 func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
@@ -68,8 +70,8 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListPlatformPrivateKeys list all TLS private keys.
-func (c *Client) ListPlatformPrivateKeys(i *ListPrivateKeysInput) ([]*PlatformPrivateKey, error) {
+// ListPrivateKeys list all TLS private keys.
+func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
 
 	p := "/tls/private_keys"
 	filters := &RequestOptions{Params: i.formatFilters()}
@@ -79,16 +81,16 @@ func (c *Client) ListPlatformPrivateKeys(i *ListPrivateKeysInput) ([]*PlatformPr
 		return nil, err
 	}
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(PlatformPrivateKey)))
+	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(PrivateKey)))
 	if err != nil {
 		return nil, err
 	}
 
-	ppk := make([]*PlatformPrivateKey, len(data))
+	ppk := make([]*PrivateKey, len(data))
 	for i := range data {
-		typed, ok := data[i].(*PlatformPrivateKey)
+		typed, ok := data[i].(*PrivateKey)
 		if !ok {
-			return nil, fmt.Errorf("got back a non-PlatformPrivateKey response")
+			return nil, fmt.Errorf("got back a non-PrivateKey response")
 		}
 		ppk[i] = typed
 	}
@@ -96,8 +98,8 @@ func (c *Client) ListPlatformPrivateKeys(i *ListPrivateKeysInput) ([]*PlatformPr
 	return ppk, nil
 }
 
-// GetPlatformPrivateKey show a TLS private key.
-func (c *Client) GetPlatformPrivateKey(i *GetPlatformPrivateKeyInput) (*PlatformPrivateKey, error) {
+// GetPrivateKey show a TLS private key.
+func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -110,7 +112,7 @@ func (c *Client) GetPlatformPrivateKey(i *GetPlatformPrivateKeyInput) (*Platform
 		return nil, err
 	}
 
-	var ppk PlatformPrivateKey
+	var ppk PrivateKey
 	if err := jsonapi.UnmarshalPayload(r.Body, &ppk); err != nil {
 		return nil, err
 	}
@@ -118,14 +120,14 @@ func (c *Client) GetPlatformPrivateKey(i *GetPlatformPrivateKeyInput) (*Platform
 	return &ppk, nil
 }
 
-// CreatePlatformPrivateKeyInput .
-type CreatePlatformPrivateKeyInput struct {
+// CreatePrivateKeyInput is used as input to the CreatePrivateKey function.
+type CreatePrivateKeyInput struct {
 	Key  string `jsonapi:"attr,key,omitempty"`
 	Name string `jsonapi:"attr,name,omitempty"`
 }
 
-// CreatePlatformPrivateKey create a TLS private key.
-func (c *Client) CreatePlatformPrivateKey(i *CreatePlatformPrivateKeyInput) (*PlatformPrivateKey, error) {
+// CreatePrivateKey create a TLS private key.
+func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error) {
 
 	p := "/tls/private_keys"
 
@@ -142,7 +144,7 @@ func (c *Client) CreatePlatformPrivateKey(i *CreatePlatformPrivateKeyInput) (*Pl
 		return nil, err
 	}
 
-	var ppk PlatformPrivateKey
+	var ppk PrivateKey
 	if err := jsonapi.UnmarshalPayload(r.Body, &ppk); err != nil {
 		return nil, err
 	}
@@ -155,7 +157,7 @@ type DeletePrivateKeyInput struct {
 	ID string
 }
 
-// DeletePrivateKey destroy a TLS private key. only private keys not already matched to any certificates can be deleted.
+// DeletePrivateKey destroy a TLS private key. Only private keys not already matched to any certificates can be deleted.
 func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 	if i.ID == "" {
 		return ErrMissingID
@@ -166,31 +168,31 @@ func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 	return err
 }
 
-// BulkCertificate .
+// BulkCertificate represents a bulk certificate.
 type BulkCertificate struct {
 	ID                string              `jsonapi:"primary,tls_bulk_certificate"`
-	NotAfter          string              `jsonapi:"attr,not_after"`
-	NotBefore         string              `jsonapi:"attr,not_before"`
-	CreatedAt         string              `jsonapi:"attr,created_at"`
-	UpdatedAt         string              `jsonapi:"attr,updated_at"`
-	Replace           bool                `jsonapi:"attr,replace"`
 	TLSConfigurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
 	TLSDomains        []*TLSDomain        `jsonapi:"relation,tls_domains,tls_domain"`
+	NotAfter          *time.Time          `jsonapi:"attr,not_after,iso8601"`
+	NotBefore         *time.Time          `jsonapi:"attr,not_before,iso8601"`
+	CreatedAt         *time.Time          `jsonapi:"attr,created_at,iso8601"`
+	UpdatedAt         *time.Time          `jsonapi:"attr,updated_at,iso8601"`
+	Replace           bool                `jsonapi:"attr,replace"`
 }
 
-// TLSConfiguration .
+// TLSConfiguration represents the dedicated IP address pool that will be used to route traffic from the TLSDomain.
 type TLSConfiguration struct {
 	ID   string `jsonapi:"primary,tls_configuration"`
 	Type string `jsonapi:"attr,type"`
 }
 
-// TLSDomain .
+// TLSDomain represents a domain (including wildcard domains) that is listed on a certificate's Subject Alternative Names (SAN) list.
 type TLSDomain struct {
 	ID   string `jsonapi:"primary,tls_domain"`
 	Type string `jsonapi:"attr,type"`
 }
 
-// ListBulkCertificatesInput .
+// ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
 type ListBulkCertificatesInput struct {
 	PageNumber int // The page index for pagination.
 	PageSize   int // The number of keys per page.
@@ -201,7 +203,7 @@ type ListBulkCertificatesInput struct {
 	Sort                    string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
 }
 
-// formatFilters converts user input into query parameters for filtering
+// formatFilters converts user input into query parameters for filtering.
 func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
@@ -267,7 +269,7 @@ func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCert
 	return bc, nil
 }
 
-// GetBulkCertificateInput .
+// GetBulkCertificateInput is used as input to the GetBulkCertificate function.
 type GetBulkCertificateInput struct {
 	ID string
 }
@@ -294,7 +296,7 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 	return &bc, nil
 }
 
-// CreateBulkCertificateInput .
+// CreateBulkCertificateInput is used as input to the CreateBulkCertificate function.
 type CreateBulkCertificateInput struct {
 	CertBlob          string              `jsonapi:"attr,cert_blob"`
 	IntermediatesBlob string              `jsonapi:"attr,intermediates_blob"`
@@ -305,10 +307,10 @@ type CreateBulkCertificateInput struct {
 func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCertificate, error) {
 
 	if i.CertBlob == "" {
-		return nil, ErrMissingKey
+		return nil, ErrMissingCertBlob
 	}
 	if i.IntermediatesBlob == "" {
-		return nil, ErrMissingName
+		return nil, ErrMissingIntermediatesBlob
 	}
 
 	p := "/tls/bulk/certificates"
@@ -326,7 +328,7 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 	return &bc, nil
 }
 
-// UpdateBulkCertificateInput .
+// UpdateBulkCertificateInput is used as input to the UpdateBulkCertificate function.
 type UpdateBulkCertificateInput struct {
 	ID                string `jsonapi:"attr,id"`
 	CertBlob          string `jsonapi:"attr,cert_blob"`
