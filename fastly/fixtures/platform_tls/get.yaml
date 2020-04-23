@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14)
-    url: https://api.fastly.com/tls/private_keys/PRIVATE_KEY_ID
+    url: https://api.fastly.com/tls/bulk/certificates/CERTIFICATE_ID
     method: GET
   response:
-    body: '{"data": {"id": "PRIVATE_KEY_ID","type": "tls_private_key","attributes": {"key_length": 2048,"key_type": "RSA","name": "My private key","created_at": "2019-02-01T12:12:12.000Z","replace": false,"public_key_sha1": "KEY_DIGEST"}}}'
+    body: '{"data": {"id": "CERTIFICATE_ID","type" : "tls_bulk_certificate","attributes": {"not_after": "2019-06-06T18:14:32Z","not_before": "2018-06-06T18:14:32Z","created_at": "2018-06-06T18:14:32Z","updated_at": "2018-06-06T18:14:32Z","replace": false},"relationships": {"tls_configurations": {"data": [{"type": "tls_configuration","id": "TLS_CONFIGURATION_ID"}]},"tls_domains": {"data": [{"type": "tls_domain","id": "DOMAIN_NAME"}]}}}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -41,3 +41,4 @@ interactions:
       - S1557545630.411550,VS0,VE560
     status: 200 OK
     code: 200
+
