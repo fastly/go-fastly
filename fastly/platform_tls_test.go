@@ -2,12 +2,12 @@ package fastly
 
 import "testing"
 
-func TestClient_GetPlatformPrivateKeys(t *testing.T) {
+func TestClient_ListPlatformPrivateKeys(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	record(t, "platform_tls/platform_private_keys", func(c *Client) {
-		_, err = c.GetPlatformPrivateKeys()
+		_, err = c.ListPlatformPrivateKeys(&ListPrivateKeysInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -34,13 +34,8 @@ func TestClient_CreatePlatformPrivateKey(t *testing.T) {
 	var err error
 	record(t, "platform_tls/create_private_key", func(c *Client) {
 		_, err = c.CreatePlatformPrivateKey(&CreatePlatformPrivateKeyInput{
-			Data: CreatePlatformPrivateKeyData{
-				Type: "tls_private_key",
-				Attributes: CreatePlatformPrivateKeyAttributes{
-					Key:  "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
-					Name: "My private key",
-				},
-			},
+			Key:  "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+			Name: "My private key",
 		})
 	})
 	if err != nil {
@@ -53,22 +48,12 @@ func TestClient_CreateBulkCertificate(t *testing.T) {
 
 	var err error
 	record(t, "platform_tls/create_bulk_certificate", func(c *Client) {
-		_, err = c.CreateBulkCertificate(&CreateBulkCertificatesInput{
-			Data: CreateBulkCertificatesData{
-				Type: "tls_bulk_certificate",
-				Attributes: CreateBulkCertificatesAttributes{
-					CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-					IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-				},
-				Relationships: CreateBulkCertificatesRelationships{
-					TLSConfigurations: CreateTLSConfigurations{
-						Data: []CreateTLSConfiguration{
-							{
-								Type: "tls_configuration",
-								ID:   "TLS_CONFIGURATION_ID",
-							},
-						},
-					},
+		_, err = c.CreateBulkCertificate(&CreateBulkCertificateInput{
+			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+			IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+			TLSConfigurations: []*TLSConfiguration{
+				{
+					ID: "TLS_CONFIGURATION_ID",
 				},
 			},
 		})
@@ -106,12 +91,12 @@ func TestClient_DeleteBulkCertificate(t *testing.T) {
 	}
 }
 
-func TestClient_GetBulkCertificates(t *testing.T) {
+func TestClient_ListBulkCertificates(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	record(t, "platform_tls/platform_bulk_certificates", func(c *Client) {
-		_, err = c.GetBulkCertificates(&GetBulkCertificateInput{})
+		_, err = c.ListBulkCertificates(&ListBulkCertificatesInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -138,12 +123,9 @@ func TestClient_UpdateBulkCertificate(t *testing.T) {
 	var err error
 	record(t, "platform_tls/update_bulk_certificate", func(c *Client) {
 		_, err = c.UpdateBulkCertificate(&UpdateBulkCertificateInput{
-			Data: UpdateBulkCertificateData{
-				ID:                "CERTIFICATE_ID",
-				Type:              "tls_bulk_certificate",
-				CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-				IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-			},
+			ID:                "CERTIFICATE_ID",
+			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+			IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 		})
 	})
 	if err != nil {
