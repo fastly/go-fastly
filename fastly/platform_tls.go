@@ -3,8 +3,6 @@ package fastly
 import (
 	"fmt"
 	"reflect"
-	"strconv"
-	"strings"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -29,9 +27,9 @@ type PrivateKey struct {
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
-	PageNumber  int    // The page index for pagination.
-	PageSize    int    // The number of keys per page.
-	FilterInUse string // Limit the returned keys to those without any matching TLS certificates.
+	PageNumber  *uint   // The page index for pagination.
+	PageSize    *uint   // The number of keys per page.
+	FilterInUse *string // Limit the returned keys to those without any matching TLS certificates.
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -42,29 +40,9 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 		"page[size]":     i.PageSize,
 		"page[number]":   i.PageNumber,
 	}
-	// NOTE: This setup means we will not be able to send the zero value
-	// of any of these filters. It doesn't appear we would need to at present.
 	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
-			if value != "" {
-				result[key] = value.(string)
-			}
-		case "int":
-			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
-			}
-		case "[]int":
-			// convert ints to strings
-			toStrings := []string{}
-			values := value.([]int)
-			for _, i := range values {
-				toStrings = append(toStrings, strconv.Itoa(i))
-			}
-			// concat strings
-			if len(values) > 0 {
-				result[key] = strings.Join(toStrings, ",")
-			}
+		if !reflect.ValueOf(value).IsNil() {
+			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
 		}
 	}
 	return result
@@ -74,7 +52,12 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
 
 	p := "/tls/private_keys"
-	filters := &RequestOptions{Params: i.formatFilters()}
+	filters := &RequestOptions{
+		Params: i.formatFilters(),
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+		},
+	}
 
 	r, err := c.Get(p, filters)
 	if err != nil {
@@ -194,13 +177,13 @@ type TLSDomain struct {
 
 // ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
 type ListBulkCertificatesInput struct {
-	PageNumber int // The page index for pagination.
-	PageSize   int // The number of keys per page.
+	PageNumber *uint // The page index for pagination.
+	PageSize   *uint // The number of keys per page.
 	// `tls_domains.id` filter seems to work where `tls_domain.id` does not, documentation wrong?
 	// https://docs.fastly.com/api/platform-tls#tls_bulk_certificates_81cc5acbf847f71ecd4068ed58bfc5c5
-	FilterTLSDomainIDMatch  string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
-	FilterTLSDomainsIDMatch string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
-	Sort                    string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
+	FilterTLSDomainIDMatch  *string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
+	FilterTLSDomainsIDMatch *string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
+	Sort                    *string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -213,29 +196,9 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 		"page[number]":                  i.PageNumber,
 		"sort":                          i.Sort,
 	}
-	// NOTE: This setup means we will not be able to send the zero value
-	// of any of these filters. It doesn't appear we would need to at present.
 	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
-			if value != "" {
-				result[key] = value.(string)
-			}
-		case "int":
-			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
-			}
-		case "[]int":
-			// convert ints to strings
-			toStrings := []string{}
-			values := value.([]int)
-			for _, i := range values {
-				toStrings = append(toStrings, strconv.Itoa(i))
-			}
-			// concat strings
-			if len(values) > 0 {
-				result[key] = strings.Join(toStrings, ",")
-			}
+		if !reflect.ValueOf(value).IsNil() {
+			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
 		}
 	}
 	return result
@@ -245,7 +208,12 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCertificate, error) {
 
 	p := "/tls/bulk/certificates"
-	filters := &RequestOptions{Params: i.formatFilters()}
+	filters := &RequestOptions{
+		Params: i.formatFilters(),
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+		},
+	}
 
 	r, err := c.Get(p, filters)
 	if err != nil {
