@@ -1,0 +1,40 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14)
+    url: https://api.fastly.com/tls/private_keys/PRIVATE_KEY_ID
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Sat, 11 May 2019 21:45:02 GMT
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lax8631-LAX
+      X-Timer:
+      - S1557611103.608075,VS0,VE254
+    status: 204 No Content
+    code: 204

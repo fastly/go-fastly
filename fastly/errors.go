@@ -141,6 +141,14 @@ var ErrBatchUpdateMaximumOperationsExceeded = errors.New("batch modify maximum o
 // a "ServerSideEncryptionKMSKeyID" key, but one was not set.
 var ErrMissingKMSKeyID = errors.New("Missing required field 'ServerSideEncryptionKMSKeyID'")
 
+// ErrMissingCertBlob is an error that is returned from an input struct that requires
+// a "CertBlob" key, but one was not set.
+var ErrMissingCertBlob = errors.New("Missing required field 'CertBlob'")
+
+// ErrMissingIntermediatesBlob is an error that is returned from an input struct that requires
+// a "IntermediatesBlob" key, but one was not set.
+var ErrMissingIntermediatesBlob = errors.New("Missing required field 'IntermediatesBlob'")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
