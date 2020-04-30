@@ -33,8 +33,12 @@ const EndpointEnvVar = "FASTLY_API_URL"
 // support an on-premise solution, this is likely to always be the default.
 const DefaultEndpoint = "https://api.fastly.com"
 
-// RealtimeStatsEndpoint is the realtime stats endpoint for Fastly.
-const RealtimeStatsEndpoint = "https://rt.fastly.com"
+// RealtimeStatsEndpointEnvVar is the name of an environment variable that can be used
+// to change the URL of realtime stats requests.
+const RealtimeStatsEndpointEnvVar = "FASTLY_RTS_URL"
+
+// DefaultRealtimeStatsEndpoint is the realtime stats endpoint for Fastly.
+const DefaultRealtimeStatsEndpoint = "https://rt.fastly.com"
 
 // ProjectURL is the url for this library.
 var ProjectURL = "github.com/fastly/go-fastly"
@@ -109,7 +113,13 @@ func NewClientForEndpoint(key string, endpoint string) (*Client, error) {
 // This function requires the environment variable `FASTLY_API_KEY` is set and contains
 // a valid API key to authenticate with Fastly.
 func NewRealtimeStatsClient() *RTSClient {
-	c, err := NewClientForEndpoint(os.Getenv(APIKeyEnvVar), RealtimeStatsEndpoint)
+	endpoint, ok := os.LookupEnv(RealtimeStatsEndpointEnvVar)
+
+	if !ok {
+		endpoint = DefaultRealtimeStatsEndpoint
+	}
+
+	c, err := NewClientForEndpoint(os.Getenv(APIKeyEnvVar), endpoint)
 	if err != nil {
 		panic(err)
 	}
