@@ -25,6 +25,10 @@ const APIKeyEnvVar = "FASTLY_API_KEY"
 // APIKeyHeader is the name of the header that contains the Fastly API key.
 const APIKeyHeader = "Fastly-Key"
 
+// EndpointEnvVar is the name of an environment variable that can be used
+// to change the URL of API requests.
+const EndpointEnvVar = "FASTLY_API_URL"
+
 // DefaultEndpoint is the default endpoint for Fastly. Since Fastly does not
 // support an on-premise solution, this is likely to always be the default.
 const DefaultEndpoint = "https://api.fastly.com"
@@ -83,7 +87,13 @@ func DefaultClient() *Client {
 // function will not error if the API token is not supplied. Attempts to make a
 // request that requires an API key will return a 403 response.
 func NewClient(key string) (*Client, error) {
-	return NewClientForEndpoint(key, DefaultEndpoint)
+	endpoint, ok := os.LookupEnv(EndpointEnvVar)
+
+	if !ok {
+		endpoint = DefaultEndpoint
+	}
+
+	return NewClientForEndpoint(key, endpoint)
 }
 
 // NewClientForEndpoint creates a new API client with the given key and API
