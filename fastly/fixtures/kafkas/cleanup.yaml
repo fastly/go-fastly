@@ -1,0 +1,95 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/120/logging/kafka/test-kafka
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-kafka, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 120 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 08 May 2020 11:29:46 GMT
+      Fastly-Ratelimit-Remaining:
+      - "931"
+      Fastly-Ratelimit-Reset:
+      - "1588939200"
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17429-PAO
+      X-Timer:
+      - S1588937386.262838,VS0,VE238
+    status: 404 Not Found
+    code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/120/logging/kafka/new-test-kafka
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-kafka, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 120 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 08 May 2020 11:29:46 GMT
+      Fastly-Ratelimit-Remaining:
+      - "930"
+      Fastly-Ratelimit-Reset:
+      - "1588939200"
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17429-PAO
+      X-Timer:
+      - S1588937387.515604,VS0,VE188
+    status: 404 Not Found
+    code: 404
+    duration: ""
