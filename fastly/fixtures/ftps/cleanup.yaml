@@ -1,34 +1,32 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/ftp/test-ftp
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/112/logging/ftp/test-ftp
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-ftp, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 66 }''"}'
+      version =\u003e 112 }''"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:11:27 GMT
+      - Fri, 08 May 2020 11:06:53 GMT
       Fastly-Ratelimit-Remaining:
       - "989"
       Fastly-Ratelimit-Reset:
-      - "1559862000"
+      - "1588939200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -43,38 +41,38 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3641-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17431-PAO
       X-Timer:
-      - S1559859087.324759,VS0,VE164
+      - S1588936013.479269,VS0,VE204
     status: 404 Not Found
     code: 404
+    duration: ""
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/ftp/new-test-ftp
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/112/logging/ftp/new-test-ftp
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-ftp, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 66 }''"}'
+      version =\u003e 112 }''"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:11:27 GMT
+      - Fri, 08 May 2020 11:06:53 GMT
       Fastly-Ratelimit-Remaining:
       - "988"
       Fastly-Ratelimit-Reset:
-      - "1559862000"
+      - "1588939200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -89,8 +87,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3641-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17431-PAO
       X-Timer:
-      - S1559859087.493898,VS0,VE177
+      - S1588936014.699134,VS0,VE225
     status: 404 Not Found
     code: 404
+    duration: ""

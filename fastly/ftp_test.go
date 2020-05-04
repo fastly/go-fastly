@@ -10,25 +10,25 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
-
 	// Create
 	var ftp *FTP
 	record(t, "ftps/create", func(c *Client) {
 		ftp, err = c.CreateFTP(&CreateFTPInput{
 			Service:         testServiceID,
 			Version:         tv.Number,
-			Name:            "test-ftp",
-			Address:         "example.com",
-			Port:            1234,
-			Username:        "username",
-			Password:        "password",
-			Path:            "/dir",
-			Period:          12,
-			GzipLevel:       9,
-			FormatVersion:   2,
-			Format:          "format",
-			TimestampFormat: "%Y",
-			Placement:       "waf_debug",
+			Name:            String("test-ftp"),
+			Address:         String("example.com"),
+			Port:            Uint(1234),
+			PublicKey:       String(pgpPublicKey()),
+			User:            String("username"),
+			Password:        String("password"),
+			Path:            String("/dir"),
+			Period:          Uint(12),
+			GzipLevel:       Uint(9),
+			FormatVersion:   Uint(2),
+			Format:          String("format"),
+			TimestampFormat: String("%Y"),
+			Placement:       String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -61,8 +61,11 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.Port != 1234 {
 		t.Errorf("bad port: %q", ftp.Port)
 	}
-	if ftp.Username != "username" {
-		t.Errorf("bad username: %q", ftp.Username)
+	if ftp.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", ftp.PublicKey)
+	}
+	if ftp.User != "username" {
+		t.Errorf("bad user: %q", ftp.User)
 	}
 	if ftp.Password != "password" {
 		t.Errorf("bad password: %q", ftp.Password)
@@ -125,8 +128,11 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.Port != nftp.Port {
 		t.Errorf("bad port: %q", ftp.Port)
 	}
-	if ftp.Username != nftp.Username {
-		t.Errorf("bad username: %q", ftp.Username)
+	if ftp.PublicKey != nftp.PublicKey {
+		t.Errorf("bad public_key: %q", ftp.PublicKey)
+	}
+	if ftp.User != nftp.User {
+		t.Errorf("bad user: %q", ftp.User)
 	}
 	if ftp.Password != nftp.Password {
 		t.Errorf("bad password: %q", ftp.Password)
@@ -157,10 +163,11 @@ func TestClient_FTPs(t *testing.T) {
 	var uftp *FTP
 	record(t, "ftps/update", func(c *Client) {
 		uftp, err = c.UpdateFTP(&UpdateFTPInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-ftp",
-			NewName: "new-test-ftp",
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-ftp",
+			NewName:   String("new-test-ftp"),
+			GzipLevel: Uint(0),
 		})
 	})
 	if err != nil {
@@ -168,6 +175,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if uftp.Name != "new-test-ftp" {
 		t.Errorf("bad name: %q", uftp.Name)
+	}
+	if uftp.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", uftp.GzipLevel)
 	}
 
 	// Delete
