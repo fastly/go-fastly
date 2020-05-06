@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"os"
 	"sync"
 	"testing"
 
@@ -16,33 +17,57 @@ var testClient = DefaultClient()
 var testStatsClient = NewRealtimeStatsClient()
 
 // testServiceID is the ID of the testing service.
-var testServiceID = "7i6HN3TK9wS159v2gPAZ8A"
+var testServiceID = serviceIDForTest()
+
+// Default ID of the testing service.
+var defaultTestServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.
 var testVersionLock sync.Mutex
 
-func record(t *testing.T, fixture string, f func(*Client)) {
-	r, err := recorder.New("fixtures/" + fixture)
-	if err != nil {
-		t.Fatal(err)
+func serviceIDForTest() string {
+	tsid := os.Getenv("FASTLY_TEST_SERVICE_ID")
+
+	if tsid != "" {
+		return tsid
 	}
-	defer func() {
-		if err := r.Stop(); err != nil {
+
+	return defaultTestServiceID
+}
+
+func vcrDisabled() bool {
+	vcrDisable := os.Getenv("VCR_DISABLE")
+
+	return vcrDisable != ""
+}
+
+func record(t *testing.T, fixture string, f func(*Client)) {
+	client := DefaultClient()
+
+	if vcrDisabled() {
+		f(client)
+	} else {
+		r, err := recorder.New("fixtures/" + fixture)
+		if err != nil {
 			t.Fatal(err)
 		}
-	}()
+		defer func() {
+			if err := r.Stop(); err != nil {
+				t.Fatal(err)
+			}
+		}()
 
-	// Add a filter which removes Fastly-Key header from all recorded requests.
-	r.AddFilter(func(i *cassette.Interaction) error {
-		delete(i.Request.Headers, "Fastly-Key")
-		return nil
-	})
+		// Add a filter which removes Fastly-Key header from all recorded requests.
+		r.AddFilter(func(i *cassette.Interaction) error {
+			delete(i.Request.Headers, "Fastly-Key")
+			return nil
+		})
 
-	client := DefaultClient()
-	client.HTTPClient.Transport = r
+		client.HTTPClient.Transport = r
 
-	f(client)
+		f(client)
+	}
 }
 
 func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {

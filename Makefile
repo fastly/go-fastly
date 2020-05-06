@@ -28,6 +28,9 @@ GOCACHE ?= $(shell go env GOCACHE)
 # List of tests to run
 FILES ?= ./...
 
+# Test Service ID
+FASTLY_TEST_SERVICE_ID ?=
+
 # bootstrap installs the necessary go tools for development or build.
 bootstrap:
 	@echo "==> Bootstrapping ${PROJECT}"
@@ -96,3 +99,17 @@ test-race:
 	@echo "==> Testing ${NAME} (race)"
 	@go test -timeout=60s -race -tags="${GOTAGS}" ${GOFILES} ${TESTARGS}
 .PHONY: test-race
+
+# test without VCR
+test-full:
+	@echo "==> Testing ${NAME} with VCR disabled"
+	@env \
+		VCR_DISABLE=1 \
+		go test -timeout=60s -parallel=20 ${GOFILES} ${TESTARGS}
+.PHONY: test-full
+
+# update fixtures default service ID
+fix-fixtures:
+	@echo "==> Updating fixtures"
+	@$(CURRENT_DIR)/scripts/fixFixtures.sh ${FASTLY_TEST_SERVICE_ID}
+.PHONY: fix-fixtures
