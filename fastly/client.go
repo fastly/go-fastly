@@ -342,8 +342,9 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 	}
 }
 
-// decodeJSON is used to decode an HTTP response body into an interface as JSON.
-func decodeJSON(out interface{}, body io.ReadCloser) error {
+// decodeBodyMap is used to decode an HTTP response body into a mapstructure struct.
+// It closes `body`.
+func decodeBodyMap(out interface{}, body io.ReadCloser) error {
 	defer body.Close()
 
 	var parsed interface{}
@@ -352,6 +353,12 @@ func decodeJSON(out interface{}, body io.ReadCloser) error {
 		return err
 	}
 
+	return decodeMap(out, parsed)
+}
+
+// decodeMap decodes an `in` struct or map to a mapstructure tagged `out`.
+// It applies the decoder defaults used throughout go-fastly.
+func decodeMap(out interface{}, in interface{}) error {
 	decoder, err := mapstructure.NewDecoder(&mapstructure.DecoderConfig{
 		DecodeHook: mapstructure.ComposeDecodeHookFunc(
 			mapToHTTPHeaderHookFunc(),
@@ -363,5 +370,5 @@ func decodeJSON(out interface{}, body io.ReadCloser) error {
 	if err != nil {
 		return err
 	}
-	return decoder.Decode(parsed)
+	return decoder.Decode(in)
 }

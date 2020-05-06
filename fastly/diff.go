@@ -50,7 +50,7 @@ func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 	}
 
 	var d *Diff
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(&d, resp.Body); err != nil {
 		return nil, err
 	}
 	return d, nil

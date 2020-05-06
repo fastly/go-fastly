@@ -67,7 +67,7 @@ func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, err
 	}
 
 	var as []*BlobStorage
-	if err := decodeJSON(&as, resp.Body); err != nil {
+	if err := decodeBodyMap(&as, resp.Body); err != nil {
 		return nil, err
 	}
 	sort.Stable(blobStorageByName(as))
@@ -114,7 +114,7 @@ func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, err
 	}
 
 	var a *BlobStorage
-	if err := decodeJSON(&a, resp.Body); err != nil {
+	if err := decodeBodyMap(&a, resp.Body); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -152,7 +152,7 @@ func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 	}
 
 	var a *BlobStorage
-	if err := decodeJSON(&a, resp.Body); err != nil {
+	if err := decodeBodyMap(&a, resp.Body); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -205,7 +205,7 @@ func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, err
 	}
 
 	var a *BlobStorage
-	if err := decodeJSON(&a, resp.Body); err != nil {
+	if err := decodeBodyMap(&a, resp.Body); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -243,7 +243,7 @@ func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(&r, resp.Body); err != nil {
 		return err
 	}
 	if !r.Ok() {

@@ -194,12 +194,12 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 
 	// If this is a jsonapi response, decode it accordingly
 	if resp.Header.Get("Content-Type") == jsonapi.MediaType {
-		if err := decodeJSON(&e, resp.Body); err != nil {
+		if err := decodeBodyMap(&e, resp.Body); err != nil {
 			panic(err)
 		}
 	} else {
 		var lerr *legacyError
-		decodeJSON(&lerr, resp.Body)
+		decodeBodyMap(&lerr, resp.Body)
 		if lerr != nil {
 			e.Errors = append(e.Errors, &ErrorObject{
 				Title:  lerr.Message,

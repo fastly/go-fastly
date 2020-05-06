@@ -46,7 +46,7 @@ func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsRe
 	}
 
 	var s *RealtimeStatsResponse
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(&s, resp.Body); err != nil {
 		return nil, err
 	}
 	return s, nil

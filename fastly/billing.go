@@ -74,7 +74,7 @@ func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
 	}
 
 	var b *Billing
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(&b, resp.Body); err != nil {
 		return nil, err
 	}
 	return b, nil

@@ -125,7 +125,7 @@ func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	}
 
 	var sr *StatsResponse
-	if err := decodeJSON(&sr, r.Body); err != nil {
+	if err := decodeBodyMap(&sr, r.Body); err != nil {
 		return nil, err
 	}
 
@@ -180,7 +180,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 		return nil, err
 	}
 	var sr *UsageResponse
-	if err := decodeJSON(&sr, r.Body); err != nil {
+	if err := decodeBodyMap(&sr, r.Body); err != nil {
 		return nil, err
 	}
 
@@ -216,7 +216,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 		return nil, err
 	}
 	var sr *UsageByServiceResponse
-	if err := decodeJSON(&sr, r.Body); err != nil {
+	if err := decodeBodyMap(&sr, r.Body); err != nil {
 		return nil, err
 	}
 
@@ -239,7 +239,7 @@ func (c *Client) GetRegions() (*RegionsResponse, error) {
 	}
 
 	var rr *RegionsResponse
-	if err := decodeJSON(&rr, r.Body); err != nil {
+	if err := decodeBodyMap(&rr, r.Body); err != nil {
 		return nil, err
 	}
 
