@@ -125,6 +125,54 @@ fmt.Printf("%t\n", activeVersion.Locked)
 More information can be found in the
 [Fastly Godoc](https://godoc.org/github.com/fastly/go-fastly).
 
+Testing
+-------
+Go Fastly uses [go-vcr](https://github.com/dnaeon/go-vcr) to "record" and
+"replay" API request fixtures to improve the speed and portability of
+integration tests. The test suite uses a single test service ID for all test
+fixtures.
+
+Contributors _without_ access to the test service can disable go-vcr, set a
+different test service ID, and use their own API credentials by setting the
+following environment variables:
+* `VCR_DISABLE`: disables go-vcr fixture recording and replay
+* `FASTLY_TEST_SERVICE_ID`: set default service ID used by the test suite
+* `FASTLY_API_KEY`: set a Fastly API key to be used by the test suite
+
+Example (`go test`):
+```sh
+go test -v ./... -run=Logentries \
+	VCR_DISABLE=1 \
+	FASTLY_TEST_SERVICE_ID="SERVICEID" \
+	FASTLY_API_KEY="TESTAPIKEY"
+```
+
+Example (`make test-full`):
+```sh
+make test-full FASTLY_TEST_SERVICE_ID="SERVICEID" \
+	       FASTLY_API_KEY="TESTAPIKEY" \
+	       TESTARGS="-run=Logentries"
+```
+
+When adding or updating client code and integration tests, contributors may
+record a new set of fixtures by running the tests without `VCR_DISABLE`. Before
+submitting a pull request with new or updated fixtures, we ask that contributors
+update them to use the default service ID by running `make fix-fixtures` with
+`FASTLY_TEST_SERVICE_ID` set to the same value used to run your tests.
+
+Example (`make test`, `make fix-fixtures`):
+```sh
+export FASTLY_TEST_SERVICE_ID="SERVICEID"
+export FASTLY_API_KEY="TESTAPIKEY"
+
+make test TESTARGS="-run=NewClient"
+make fix-fixtures
+
+# Re-run test suite with newly recorded fixtures
+unset FASTLY_TEST_SERVICE_ID FASTLY_API_KEY
+make test
+```
+
 License
 -------
 ```

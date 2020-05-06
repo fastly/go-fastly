@@ -31,9 +31,9 @@ func serviceIDForTest() string {
 
 	if tsid != "" {
 		return tsid
-	} else {
-		return defaultTestServiceID
 	}
+
+	return defaultTestServiceID
 }
 
 func vcrDisabled() bool {
