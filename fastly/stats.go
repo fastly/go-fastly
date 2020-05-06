@@ -1,6 +1,9 @@
 package fastly
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 // Stats represent metrics of a Fastly service
 type Stats struct {
@@ -101,7 +104,20 @@ type StatsResponse struct {
 
 // GetStats returns stats data based on GetStatsInput
 func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
+	var resp interface{}
+	if err := c.GetStatsJSON(&resp, i); err != nil {
+		return nil, err
+	}
 
+	var sr *StatsResponse
+	if err := decodeMap(&sr, resp); err != nil {
+		return nil, err
+	}
+	return sr, nil
+}
+
+// GetStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
+func (c *Client) GetStatsJSON(dst interface{}, i *GetStatsInput) error {
 	p := "/stats"
 
 	if i.Service != "" {
@@ -121,15 +137,11 @@ func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 		},
 	})
 	if err != nil {
-		return nil, err
+		return err
 	}
+	defer r.Body.Close()
 
-	var sr *StatsResponse
-	if err := decodeBodyMap(&sr, r.Body); err != nil {
-		return nil, err
-	}
-
-	return sr, nil
+	return json.NewDecoder(r.Body).Decode(dst)
 }
 
 // UsageStatsResponse is a response from the account usage API endpoint

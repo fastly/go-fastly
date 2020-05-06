@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestClient_GetStats(t *testing.T) {
 	t.Parallel()
@@ -19,6 +21,32 @@ func TestClient_GetStats(t *testing.T) {
 		t.Fatal(err)
 	}
 
+}
+
+func TestClient_GetStatsJSON(t *testing.T) {
+	t.Parallel()
+
+	var ret struct {
+		RenameStatus string `json:"status"`
+	}
+
+	var err error
+	record(t, "stats/service_stats", func(c *Client) {
+		err = c.GetStatsJSON(&ret, &GetStatsInput{
+			Service: testServiceID,
+			From:    "10 days ago",
+			To:      "now",
+			By:      "minute",
+			Region:  "europe",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if ret.RenameStatus != "success" {
+		t.Fatalf("got RenameStatus=%q, want %q", ret.RenameStatus, "success")
+	}
 }
 
 func TestClient_GetRegions(t *testing.T) {
