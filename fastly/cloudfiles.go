@@ -249,7 +249,7 @@ func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrStatusNotOk
 	}
 	return nil
 }
