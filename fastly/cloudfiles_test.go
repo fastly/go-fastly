@@ -17,20 +17,20 @@ func TestClient_Cloudfiles(t *testing.T) {
 		cloudfiles, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			Service:         testServiceID,
 			Version:         tv.Number,
-			Name:            "test-cloudfiles",
-			User:            "user",
-			AccessKey:       "secret-key",
-			BucketName:      "bucket-name",
-			Path:            "/path",
-			Region:          "DFW",
-			Period:          12,
-			GzipLevel:       9,
-			Format:          "format",
-			FormatVersion:   2,
-			TimestampFormat: "%Y",
-			MessageType:     "classic",
-			Placement:       "waf_debug",
-			PublicKey:       pgpPublicKey(),
+			Name:            String("test-cloudfiles"),
+			User:            String("user"),
+			AccessKey:       String("secret-key"),
+			BucketName:      String("bucket-name"),
+			Path:            String("/path"),
+			Region:          String("DFW"),
+			Period:          Uint(12),
+			GzipLevel:       Uint(9),
+			Format:          String("format"),
+			FormatVersion:   Uint(1),
+			TimestampFormat: String("%Y"),
+			MessageType:     String("classic"),
+			Placement:       String("waf_debug"),
+			PublicKey:       String(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -81,7 +81,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	if cloudfiles.Format != "format" {
 		t.Errorf("bad format: %q", cloudfiles.Format)
 	}
-	if cloudfiles.FormatVersion != 2 {
+	if cloudfiles.FormatVersion != 1 {
 		t.Errorf("bad format_version: %q", cloudfiles.FormatVersion)
 	}
 	if cloudfiles.TimestampFormat != "%Y" {
@@ -171,10 +171,13 @@ func TestClient_Cloudfiles(t *testing.T) {
 	var ucloudfiles *Cloudfiles
 	record(t, "cloudfiles/update", func(c *Client) {
 		ucloudfiles, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-cloudfiles",
-			NewName: "new-test-cloudfiles",
+			Service:       testServiceID,
+			Version:       tv.Number,
+			Name:          "test-cloudfiles",
+			NewName:       String("new-test-cloudfiles"),
+			Period:        Uint(0),
+			GzipLevel:     Uint(0),
+			FormatVersion: Uint(2),
 		})
 	})
 	if err != nil {
@@ -182,6 +185,15 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 	if ucloudfiles.Name != "new-test-cloudfiles" {
 		t.Errorf("bad name: %q", ucloudfiles.Name)
+	}
+	if ucloudfiles.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", ucloudfiles.GzipLevel)
+	}
+	if ucloudfiles.Period != 0 {
+		t.Errorf("bad period: %q", ucloudfiles.Period)
+	}
+	if ucloudfiles.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", ucloudfiles.FormatVersion)
 	}
 
 	// Delete
