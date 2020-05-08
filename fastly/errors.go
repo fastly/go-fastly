@@ -149,6 +149,10 @@ var ErrMissingCertBlob = errors.New("Missing required field 'CertBlob'")
 // a "IntermediatesBlob" key, but one was not set.
 var ErrMissingIntermediatesBlob = errors.New("Missing required field 'IntermediatesBlob'")
 
+// ErrStatusNotOk is an error that indicates that indicates that the response body returned
+// by the Fastly API was not `{"status": "ok"}`
+var ErrStatusNotOk = errors.New("Unexpected 'status' field in API response body")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
