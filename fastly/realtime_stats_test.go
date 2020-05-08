@@ -41,11 +41,11 @@ func TestStatsClient_GetRealtimeStatsJSON(t *testing.T) {
 
 	var err error
 	recordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
-		err = c.GetRealtimeStatsJSON(&ret, &GetRealtimeStatsInput{
+		err = c.GetRealtimeStatsJSON(&GetRealtimeStatsInput{
 			Service:   testServiceID,
 			Timestamp: 0,
 			Limit:     3,
-		})
+		}, &ret)
 	})
 	if err != nil {
 		t.Fatal(err)

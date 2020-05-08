@@ -32,13 +32,13 @@ func TestClient_GetStatsJSON(t *testing.T) {
 
 	var err error
 	record(t, "stats/service_stats", func(c *Client) {
-		err = c.GetStatsJSON(&ret, &GetStatsInput{
+		err = c.GetStatsJSON(&GetStatsInput{
 			Service: testServiceID,
 			From:    "10 days ago",
 			To:      "now",
 			By:      "minute",
 			Region:  "europe",
-		})
+		}, &ret)
 	})
 	if err != nil {
 		t.Fatal(err)

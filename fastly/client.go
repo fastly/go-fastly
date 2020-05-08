@@ -344,7 +344,7 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 
 // decodeBodyMap is used to decode an HTTP response body into a mapstructure struct.
 // It closes `body`.
-func decodeBodyMap(out interface{}, body io.ReadCloser) error {
+func decodeBodyMap(body io.ReadCloser, out interface{}) error {
 	defer body.Close()
 
 	var parsed interface{}
@@ -353,12 +353,13 @@ func decodeBodyMap(out interface{}, body io.ReadCloser) error {
 		return err
 	}
 
-	return decodeMap(out, parsed)
+	return decodeMap(parsed, out)
 }
 
 // decodeMap decodes an `in` struct or map to a mapstructure tagged `out`.
 // It applies the decoder defaults used throughout go-fastly.
-func decodeMap(out interface{}, in interface{}) error {
+// Note that this uses opposite argument order from Go's copy().
+func decodeMap(in interface{}, out interface{}) error {
 	decoder, err := mapstructure.NewDecoder(&mapstructure.DecoderConfig{
 		DecodeHook: mapstructure.ComposeDecodeHookFunc(
 			mapToHTTPHeaderHookFunc(),

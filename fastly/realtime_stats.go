@@ -34,19 +34,19 @@ type GetRealtimeStatsInput struct {
 // More details at https://docs.fastly.com/api/analytics
 func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
 	var resp interface{}
-	if err := c.GetRealtimeStatsJSON(&resp, i); err != nil {
+	if err := c.GetRealtimeStatsJSON(i, &resp); err != nil {
 		return nil, err
 	}
 
 	var s *RealtimeStatsResponse
-	if err := decodeMap(&s, resp); err != nil {
+	if err := decodeMap(resp, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
 }
 
 // GetRealtimeStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
-func (c *RTSClient) GetRealtimeStatsJSON(dst interface{}, i *GetRealtimeStatsInput) error {
+func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst interface{}) error {
 	if i.Service == "" {
 		return ErrMissingService
 	}

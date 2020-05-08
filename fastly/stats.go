@@ -105,19 +105,19 @@ type StatsResponse struct {
 // GetStats returns stats data based on GetStatsInput
 func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	var resp interface{}
-	if err := c.GetStatsJSON(&resp, i); err != nil {
+	if err := c.GetStatsJSON(i, &resp); err != nil {
 		return nil, err
 	}
 
 	var sr *StatsResponse
-	if err := decodeMap(&sr, resp); err != nil {
+	if err := decodeMap(resp, &sr); err != nil {
 		return nil, err
 	}
 	return sr, nil
 }
 
 // GetStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
-func (c *Client) GetStatsJSON(dst interface{}, i *GetStatsInput) error {
+func (c *Client) GetStatsJSON(i *GetStatsInput, dst interface{}) error {
 	p := "/stats"
 
 	if i.Service != "" {
@@ -192,7 +192,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 		return nil, err
 	}
 	var sr *UsageResponse
-	if err := decodeBodyMap(&sr, r.Body); err != nil {
+	if err := decodeBodyMap(r.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -228,7 +228,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 		return nil, err
 	}
 	var sr *UsageByServiceResponse
-	if err := decodeBodyMap(&sr, r.Body); err != nil {
+	if err := decodeBodyMap(r.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -251,7 +251,7 @@ func (c *Client) GetRegions() (*RegionsResponse, error) {
 	}
 
 	var rr *RegionsResponse
-	if err := decodeBodyMap(&rr, r.Body); err != nil {
+	if err := decodeBodyMap(r.Body, &rr); err != nil {
 		return nil, err
 	}
 
