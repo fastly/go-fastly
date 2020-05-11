@@ -1,8 +1,11 @@
 package fastly
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
-// RealtimeStats is a response from Fastly's real-time analytics endpoint
+// RealtimeStatsResponse is a response from Fastly's real-time analytics endpoint
 type RealtimeStatsResponse struct {
 	Timestamp      uint64          `mapstructure:"Timestamp"`
 	Data           []*RealtimeData `mapstructure:"Data"`
@@ -30,8 +33,22 @@ type GetRealtimeStatsInput struct {
 // a timestamp which should be passed to the next call and so on.
 // More details at https://docs.fastly.com/api/analytics
 func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
+	var resp interface{}
+	if err := c.GetRealtimeStatsJSON(i, &resp); err != nil {
+		return nil, err
+	}
+
+	var s *RealtimeStatsResponse
+	if err := decodeMap(resp, &s); err != nil {
+		return nil, err
+	}
+	return s, nil
+}
+
+// GetRealtimeStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
+func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst interface{}) error {
 	if i.Service == "" {
-		return nil, ErrMissingService
+		return ErrMissingService
 	}
 
 	path := fmt.Sprintf("/v1/channel/%s/ts/%d", i.Service, i.Timestamp)
@@ -42,12 +59,9 @@ func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsRe
 
 	resp, err := c.client.Get(path, nil)
 	if err != nil {
-		return nil, err
+		return err
 	}
+	defer resp.Body.Close()
 
-	var s *RealtimeStatsResponse
-	if err := decodeJSON(&s, resp.Body); err != nil {
-		return nil, err
-	}
-	return s, nil
+	return json.NewDecoder(resp.Body).Decode(dst)
 }

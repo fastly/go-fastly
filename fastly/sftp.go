@@ -69,7 +69,7 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 	}
 
 	var sftps []*SFTP
-	if err := decodeJSON(&sftps, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &sftps); err != nil {
 		return nil, err
 	}
 	sort.Stable(sftpsByName(sftps))
@@ -118,7 +118,7 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 	}
 
 	var ftp *SFTP
-	if err := decodeJSON(&ftp, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ftp); err != nil {
 		return nil, err
 	}
 	return ftp, nil
@@ -156,7 +156,7 @@ func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
 	}
 
 	var b *SFTP
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -211,7 +211,7 @@ func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
 	}
 
 	var b *SFTP
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -249,7 +249,7 @@ func (c *Client) DeleteSFTP(i *DeleteSFTPInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
