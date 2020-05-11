@@ -68,7 +68,7 @@ func (c *Client) ListOpenstack(i *ListOpenstackInput) ([]*Openstack, error) {
 	}
 
 	var openstacks []*Openstack
-	if err := decodeJSON(&openstacks, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &openstacks); err != nil {
 		return nil, err
 	}
 	sort.Stable(openstacksByName(openstacks))
@@ -116,7 +116,7 @@ func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
 	}
 
 	var openstack *Openstack
-	if err := decodeJSON(&openstack, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &openstack); err != nil {
 		return nil, err
 	}
 	return openstack, nil
@@ -154,7 +154,7 @@ func (c *Client) GetOpenstack(i *GetOpenstackInput) (*Openstack, error) {
 	}
 
 	var openstack *Openstack
-	if err := decodeJSON(&openstack, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &openstack); err != nil {
 		return nil, err
 	}
 	return openstack, nil
@@ -207,7 +207,7 @@ func (c *Client) UpdateOpenstack(i *UpdateOpenstackInput) (*Openstack, error) {
 	}
 
 	var openstack *Openstack
-	if err := decodeJSON(&openstack, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &openstack); err != nil {
 		return nil, err
 	}
 	return openstack, nil
@@ -245,7 +245,7 @@ func (c *Client) DeleteOpenstack(i *DeleteOpenstackInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
