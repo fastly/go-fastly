@@ -60,7 +60,7 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	}
 
 	var hs []*Heroku
-	if err := decodeJSON(&hs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &hs); err != nil {
 		return nil, err
 	}
 	sort.Stable(herokusByName(hs))
@@ -100,7 +100,7 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	}
 
 	var h *Heroku
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -138,7 +138,7 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	}
 
 	var h *Heroku
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -184,7 +184,7 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	}
 
 	var h *Heroku
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -222,7 +222,7 @@ func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

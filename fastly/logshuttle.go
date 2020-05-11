@@ -60,7 +60,7 @@ func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error)
 	}
 
 	var ls []*Logshuttle
-	if err := decodeJSON(&ls, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ls); err != nil {
 		return nil, err
 	}
 	sort.Stable(logshuttlesByName(ls))
@@ -100,7 +100,7 @@ func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error)
 	}
 
 	var l *Logshuttle
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -138,7 +138,7 @@ func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 	}
 
 	var l *Logshuttle
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -184,7 +184,7 @@ func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error)
 	}
 
 	var l *Logshuttle
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -222,7 +222,7 @@ func (c *Client) DeleteLogshuttle(i *DeleteLogshuttleInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

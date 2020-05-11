@@ -68,7 +68,7 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 	}
 
 	var digitaloceans []*DigitalOcean
-	if err := decodeJSON(&digitaloceans, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &digitaloceans); err != nil {
 		return nil, err
 	}
 	sort.Stable(digitaloceansByName(digitaloceans))
@@ -116,7 +116,7 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	var digitalocean *DigitalOcean
-	if err := decodeJSON(&digitalocean, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &digitalocean); err != nil {
 		return nil, err
 	}
 	return digitalocean, nil
@@ -154,7 +154,7 @@ func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error)
 	}
 
 	var digitalocean *DigitalOcean
-	if err := decodeJSON(&digitalocean, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &digitalocean); err != nil {
 		return nil, err
 	}
 	return digitalocean, nil
@@ -208,7 +208,7 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	var digitalocean *DigitalOcean
-	if err := decodeJSON(&digitalocean, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &digitalocean); err != nil {
 		return nil, err
 	}
 	return digitalocean, nil
@@ -246,7 +246,7 @@ func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
