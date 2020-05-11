@@ -59,7 +59,7 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	}
 
 	var n []*NewRelic
-	if err := decodeJSON(&n, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	sort.Stable(newrelicByName(n))
@@ -98,7 +98,7 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 	}
 
 	var n *NewRelic
-	if err := decodeJSON(&n, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -136,7 +136,7 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	}
 
 	var n *NewRelic
-	if err := decodeJSON(&n, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -181,7 +181,7 @@ func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 	}
 
 	var n *NewRelic
-	if err := decodeJSON(&n, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -219,7 +219,7 @@ func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
