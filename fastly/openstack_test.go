@@ -174,6 +174,7 @@ func TestClient_Openstack(t *testing.T) {
 			Service:   testServiceID,
 			Version:   tv.Number,
 			Name:      "test-openstack",
+			User:      String("new-user"),
 			NewName:   String("new-test-openstack"),
 			GzipLevel: Uint(0),
 		})
@@ -183,6 +184,9 @@ func TestClient_Openstack(t *testing.T) {
 	}
 	if uopenstack.Name != "new-test-openstack" {
 		t.Errorf("bad name: %q", uopenstack.Name)
+	}
+	if uopenstack.User != "new-user" {
+		t.Errorf("bad user: %q", uopenstack.User)
 	}
 	if uopenstack.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", uopenstack.GzipLevel)

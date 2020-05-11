@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/128/logging/openstack/test-openstack
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/5/logging/openstack/test-openstack
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-openstack, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 128 }''"}'
+      version =\u003e 5 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 11:52:12 GMT
+      - Mon, 11 May 2020 21:53:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "880"
+      - "986"
       Fastly-Ratelimit-Reset:
-      - "1588939200"
+      - "1589234400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17424-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-wdc5529-WDC
       X-Timer:
-      - S1588938732.414613,VS0,VE186
+      - S1589234018.284277,VS0,VE127
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,13 +52,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/128/logging/openstack/new-test-openstack
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/5/logging/openstack/new-test-openstack
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-openstack, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 128 }''"}'
+      version =\u003e 5 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,11 +68,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 11:52:12 GMT
+      - Mon, 11 May 2020 21:53:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "879"
+      - "985"
       Fastly-Ratelimit-Reset:
-      - "1588939200"
+      - "1589234400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -87,9 +87,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17424-PAO
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-wdc5529-WDC
       X-Timer:
-      - S1588938733.618651,VS0,VE175
+      - S1589234018.455740,VS0,VE106
     status: 404 Not Found
     code: 404
     duration: ""

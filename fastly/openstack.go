@@ -174,6 +174,7 @@ type UpdateOpenstackInput struct {
 	AccessKey         *string `form:"access_key,omitempty"`
 	BucketName        *string `form:"bucket_name,omitempty"`
 	URL               *string `form:"url,omitempty"`
+	User              *string `form:"user,omitempty"`
 	Path              *string `form:"path,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 	Period            *uint   `form:"period,omitempty"`
