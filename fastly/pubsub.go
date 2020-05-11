@@ -62,7 +62,7 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	}
 
 	var pubsubs []*Pubsub
-	if err := decodeJSON(&pubsubs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &pubsubs); err != nil {
 		return nil, err
 	}
 	sort.Stable(pubsubsByName(pubsubs))
@@ -104,7 +104,7 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	}
 
 	var pubsub *Pubsub
-	if err := decodeJSON(&pubsub, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &pubsub); err != nil {
 		return nil, err
 	}
 	return pubsub, nil
@@ -142,7 +142,7 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	}
 
 	var b *Pubsub
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -190,7 +190,7 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	}
 
 	var b *Pubsub
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -228,7 +228,7 @@ func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
