@@ -59,7 +59,7 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	}
 
 	var ls []*Loggly
-	if err := decodeJSON(&ls, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ls); err != nil {
 		return nil, err
 	}
 	sort.Stable(logglyByName(ls))
@@ -98,7 +98,7 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 	}
 
 	var l *Loggly
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -136,7 +136,7 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 	}
 
 	var l *Loggly
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -181,7 +181,7 @@ func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 	}
 
 	var l *Loggly
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -219,7 +219,7 @@ func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
