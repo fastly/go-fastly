@@ -240,6 +240,14 @@ func TestClient_ListElasticsearch_validation(t *testing.T) {
 	if err != ErrMissingService {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testClient.ListElasticsearch(&ListElasticsearchInput{
+		Service: "foo",
+		Version: 0,
+	})
+	if err != ErrMissingVersion {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_CreateElasticsearch_validation(t *testing.T) {
