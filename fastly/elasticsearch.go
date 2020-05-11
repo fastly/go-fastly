@@ -69,7 +69,7 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 	}
 
 	var elasticsearch []*Elasticsearch
-	if err := decodeJSON(&elasticsearch, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &elasticsearch); err != nil {
 		return nil, err
 	}
 	sort.Stable(elasticsearchByName(elasticsearch))
@@ -118,7 +118,7 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 	}
 
 	var elasticsearch *Elasticsearch
-	if err := decodeJSON(&elasticsearch, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &elasticsearch); err != nil {
 		return nil, err
 	}
 	return elasticsearch, nil
@@ -155,7 +155,7 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 	}
 
 	var es *Elasticsearch
-	if err := decodeJSON(&es, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &es); err != nil {
 		return nil, err
 	}
 
@@ -209,7 +209,7 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 	}
 
 	var es *Elasticsearch
-	if err := decodeJSON(&es, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &es); err != nil {
 		return nil, err
 	}
 	return es, nil
@@ -245,7 +245,7 @@ func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

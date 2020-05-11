@@ -67,7 +67,7 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	}
 
 	var k []*Kafka
-	if err := decodeJSON(&k, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	sort.Stable(kafkasByName(k))
@@ -115,7 +115,7 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 	}
 
 	var k *Kafka
-	if err := decodeJSON(&k, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	return k, nil
@@ -153,7 +153,7 @@ func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
 	}
 
 	var k *Kafka
-	if err := decodeJSON(&k, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	return k, nil
@@ -207,7 +207,7 @@ func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
 	}
 
 	var k *Kafka
-	if err := decodeJSON(&k, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	return k, nil
@@ -245,7 +245,7 @@ func (c *Client) DeleteKafka(i *DeleteKafkaInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
