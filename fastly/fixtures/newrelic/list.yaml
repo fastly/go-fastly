@@ -1,0 +1,47 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/126/logging/newrelic
+    method: GET
+  response:
+    body: '[{"created_at":"2020-05-08T11:46:36Z","response_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","version":"126","token":"abcd1234","updated_at":"2020-05-08T11:46:36Z","format":"format","deleted_at":null,"placement":"waf_debug","name":"test-newrelic"}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 08 May 2020 11:46:37 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17444-PAO
+      X-Timer:
+      - S1588938398.514713,VS0,VE189
+    status: 200 OK
+    code: 200
+    duration: ""
