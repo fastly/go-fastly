@@ -61,7 +61,7 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	}
 
 	var ls []*Logentries
-	if err := decodeJSON(&ls, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ls); err != nil {
 		return nil, err
 	}
 	sort.Stable(logentriesByName(ls))
@@ -102,7 +102,7 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 	}
 
 	var l *Logentries
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -140,7 +140,7 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	}
 
 	var l *Logentries
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -187,7 +187,7 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 	}
 
 	var l *Logentries
-	if err := decodeJSON(&l, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &l); err != nil {
 		return nil, err
 	}
 	return l, nil
@@ -225,7 +225,7 @@ func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

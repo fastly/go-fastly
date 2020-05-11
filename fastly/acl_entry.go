@@ -54,7 +54,7 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	}
 
 	var es []*ACLEntry
-	if err := decodeJSON(&es, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &es); err != nil {
 		return nil, err
 	}
 
@@ -92,7 +92,7 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	}
 
 	var e *ACLEntry
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 
@@ -134,7 +134,7 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	}
 
 	var e *ACLEntry
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 
@@ -170,7 +170,7 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 
@@ -218,7 +218,7 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	}
 
 	var e *ACLEntry
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 
@@ -262,7 +262,7 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	}
 
 	var batchModifyResult map[string]string
-	if err := decodeJSON(&batchModifyResult, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &batchModifyResult); err != nil {
 		return err
 	}
 

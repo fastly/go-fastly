@@ -66,7 +66,7 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	}
 
 	var ftps []*FTP
-	if err := decodeJSON(&ftps, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ftps); err != nil {
 		return nil, err
 	}
 	sort.Stable(ftpsByName(ftps))
@@ -112,7 +112,7 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	}
 
 	var ftp *FTP
-	if err := decodeJSON(&ftp, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ftp); err != nil {
 		return nil, err
 	}
 	return ftp, nil
@@ -150,7 +150,7 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	}
 
 	var b *FTP
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -202,7 +202,7 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	}
 
 	var b *FTP
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -240,7 +240,7 @@ func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

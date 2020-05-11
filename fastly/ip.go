@@ -11,7 +11,7 @@ func (c *Client) IPs() (IPAddrs, error) {
 	}
 
 	var m map[string][]string
-	if err := decodeJSON(&m, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &m); err != nil {
 		return nil, err
 	}
 	return IPAddrs(m["addresses"]), nil

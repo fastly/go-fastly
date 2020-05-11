@@ -73,7 +73,7 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 	}
 
 	var cs []*CacheSetting
-	if err := decodeJSON(&cs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	sort.Stable(cacheSettingsByName(cs))
@@ -111,7 +111,7 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 	}
 
 	var cs *CacheSetting
-	if err := decodeJSON(&cs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	return cs, nil
@@ -150,7 +150,7 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 	}
 
 	var cs *CacheSetting
-	if err := decodeJSON(&cs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	return cs, nil
@@ -194,7 +194,7 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 	}
 
 	var cs *CacheSetting
-	if err := decodeJSON(&cs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	return cs, nil
@@ -232,7 +232,7 @@ func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

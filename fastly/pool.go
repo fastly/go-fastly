@@ -89,7 +89,7 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 	}
 
 	var ps []*Pool
-	if err := decodeJSON(&ps, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ps); err != nil {
 		return nil, err
 	}
 	sort.Stable(poolsByName(ps))
@@ -150,7 +150,7 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 	}
 
 	var p *Pool
-	if err := decodeJSON(&p, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -189,7 +189,7 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 	}
 
 	var p *Pool
-	if err := decodeJSON(&p, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -249,7 +249,7 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 	}
 
 	var p *Pool
-	if err := decodeJSON(&p, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -287,7 +287,7 @@ func (c *Client) DeletePool(i *DeletePoolInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

@@ -99,7 +99,7 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 	}
 
 	var bs []*RequestSetting
-	if err := decodeJSON(&bs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
 	sort.Stable(requestSettingsByName(bs))
@@ -145,7 +145,7 @@ func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSet
 	}
 
 	var b *RequestSetting
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -184,7 +184,7 @@ func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, 
 	}
 
 	var b *RequestSetting
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -236,7 +236,7 @@ func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSet
 	}
 
 	var b *RequestSetting
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -274,7 +274,7 @@ func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

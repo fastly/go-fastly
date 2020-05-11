@@ -67,7 +67,7 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	}
 
 	var s []*Service
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	sort.Stable(servicesByName(s))
@@ -89,7 +89,7 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 	}
 
 	var s *Service
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -115,7 +115,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	}
 
 	var s *Service
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 
@@ -136,7 +136,7 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	}
 
 	var s *ServiceDetail
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 
@@ -164,7 +164,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	}
 
 	var s *Service
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -188,7 +188,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
@@ -219,7 +219,7 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	}
 
 	var s *Service
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 
@@ -243,7 +243,7 @@ func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsLi
 
 	var ds ServiceDomainsList
 
-	if err := decodeJSON(&ds, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
 
