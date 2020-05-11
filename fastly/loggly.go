@@ -17,10 +17,10 @@ type Loggly struct {
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
+	Placement         string     `mapstructure:"placement"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Placement         string     `mapstructure:"placement"`
 }
 
 // logglyByName is a sortable list of loggly.
