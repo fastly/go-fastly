@@ -80,7 +80,7 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 	}
 
 	var bs []*Backend
-	if err := decodeJSON(&bs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
 	sort.Stable(backendsByName(bs))
@@ -139,7 +139,7 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 	}
 
 	var b *Backend
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -177,7 +177,7 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 	}
 
 	var b *Backend
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -242,7 +242,7 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 	}
 
 	var b *Backend
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -280,7 +280,7 @@ func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

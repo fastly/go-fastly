@@ -56,7 +56,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	}
 
 	var bs []*DictionaryItem
-	if err := decodeJSON(&bs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
 	sort.Stable(dictionaryItemsByKey(bs))
@@ -91,7 +91,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	}
 
 	var b *DictionaryItem
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -143,7 +143,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 	}
 
 	var b *DictionaryItem
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -183,7 +183,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	}
 
 	var b *DictionaryItem
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -225,7 +225,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	}
 
 	var batchModifyResult map[string]string
-	if err := decodeJSON(&batchModifyResult, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &batchModifyResult); err != nil {
 		return err
 	}
 

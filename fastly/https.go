@@ -71,7 +71,7 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	}
 
 	var https []*HTTPS
-	if err := decodeJSON(&https, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &https); err != nil {
 		return nil, err
 	}
 	sort.Stable(httpsByName(https))
@@ -122,7 +122,7 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 	}
 
 	var https *HTTPS
-	if err := decodeJSON(&https, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &https); err != nil {
 		return nil, err
 	}
 	return https, nil
@@ -159,7 +159,7 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	}
 
 	var h *HTTPS
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 
@@ -215,7 +215,7 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	}
 
 	var h *HTTPS
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -251,7 +251,7 @@ func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

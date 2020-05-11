@@ -80,7 +80,7 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	}
 
 	var s3s []*S3
-	if err := decodeJSON(&s3s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s3s); err != nil {
 		return nil, err
 	}
 	sort.Stable(s3sByName(s3s))
@@ -134,7 +134,7 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	}
 
 	var s3 *S3
-	if err := decodeJSON(&s3, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s3); err != nil {
 		return nil, err
 	}
 	return s3, nil
@@ -172,7 +172,7 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	}
 
 	var s3 *S3
-	if err := decodeJSON(&s3, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s3); err != nil {
 		return nil, err
 	}
 	return s3, nil
@@ -232,7 +232,7 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	}
 
 	var s3 *S3
-	if err := decodeJSON(&s3, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s3); err != nil {
 		return nil, err
 	}
 	return s3, nil
@@ -270,7 +270,7 @@ func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

@@ -56,7 +56,7 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 	}
 
 	var bs []*Dictionary
-	if err := decodeJSON(&bs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
 	sort.Stable(dictionariesByName(bs))
@@ -91,7 +91,7 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 	}
 
 	var b *Dictionary
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -129,7 +129,7 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 	}
 
 	var b *Dictionary
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -170,7 +170,7 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 	}
 
 	var b *Dictionary
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
