@@ -62,7 +62,7 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	}
 
 	var bs []*ResponseObject
-	if err := decodeJSON(&bs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
 	sort.Stable(responseObjectsByName(bs))
@@ -103,7 +103,7 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 	}
 
 	var b *ResponseObject
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -142,7 +142,7 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 	}
 
 	var b *ResponseObject
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -189,7 +189,7 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 	}
 
 	var b *ResponseObject
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -227,7 +227,7 @@ func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

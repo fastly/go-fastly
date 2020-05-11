@@ -38,7 +38,7 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 	}
 
 	var b *Settings
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -74,7 +74,7 @@ func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 	}
 
 	var b *Settings
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil

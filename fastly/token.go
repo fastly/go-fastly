@@ -55,7 +55,7 @@ func (c *Client) ListTokens() ([]*Token, error) {
 	}
 
 	var t []*Token
-	if err := decodeJSON(&t, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	sort.Stable(tokensByName(t))
@@ -81,7 +81,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 	}
 
 	var t []*Token
-	if err := decodeJSON(&t, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	sort.Stable(tokensByName(t))
@@ -98,7 +98,7 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 	}
 
 	var t *Token
-	if err := decodeJSON(&t, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 
@@ -128,7 +128,7 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 	}
 
 	var t *Token
-	if err := decodeJSON(&t, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	return t, nil

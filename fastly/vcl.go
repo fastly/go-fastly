@@ -56,7 +56,7 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 	}
 
 	var vcls []*VCL
-	if err := decodeJSON(&vcls, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &vcls); err != nil {
 		return nil, err
 	}
 	sort.Stable(vclsByName(vcls))
@@ -95,7 +95,7 @@ func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 	}
 
 	var vcl *VCL
-	if err := decodeJSON(&vcl, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
 		return nil, err
 	}
 	return vcl, nil
@@ -126,7 +126,7 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 	}
 
 	var vcl *VCL
-	if err := decodeJSON(&vcl, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
 		return nil, err
 	}
 	return vcl, nil
@@ -161,7 +161,7 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 	}
 
 	var vcl *VCL
-	if err := decodeJSON(&vcl, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
 		return nil, err
 	}
 	return vcl, nil
@@ -202,7 +202,7 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 	}
 
 	var vcl *VCL
-	if err := decodeJSON(&vcl, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
 		return nil, err
 	}
 	return vcl, nil
@@ -240,7 +240,7 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 	}
 
 	var vcl *VCL
-	if err := decodeJSON(&vcl, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
 		return nil, err
 	}
 	return vcl, nil
@@ -278,7 +278,7 @@ func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
