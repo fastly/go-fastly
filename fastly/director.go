@@ -77,7 +77,7 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	}
 
 	var ds []*Director
-	if err := decodeJSON(&ds, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
 	sort.Stable(directorsByName(ds))
@@ -117,7 +117,7 @@ func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 	}
 
 	var d *Director
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -155,7 +155,7 @@ func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 	}
 
 	var d *Director
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -201,7 +201,7 @@ func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 	}
 
 	var d *Director
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -239,7 +239,7 @@ func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

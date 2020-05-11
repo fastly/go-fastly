@@ -53,7 +53,7 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 	}
 
 	var u []*User
-	if err := decodeJSON(&u, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &u); err != nil {
 		return nil, err
 	}
 	sort.Stable(usersByName(u))
@@ -68,7 +68,7 @@ func (c *Client) GetCurrentUser() (*User, error) {
 	}
 
 	var u *User
-	if err := decodeJSON(&u, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &u); err != nil {
 		return nil, err
 	}
 
@@ -94,7 +94,7 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 	}
 
 	var u *User
-	if err := decodeJSON(&u, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &u); err != nil {
 		return nil, err
 	}
 
@@ -125,7 +125,7 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 	}
 
 	var u *User
-	if err := decodeJSON(&u, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &u); err != nil {
 		return nil, err
 	}
 	return u, nil
@@ -152,7 +152,7 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 	}
 
 	var u *User
-	if err := decodeJSON(&u, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &u); err != nil {
 		return nil, err
 	}
 	return u, nil
@@ -176,7 +176,7 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

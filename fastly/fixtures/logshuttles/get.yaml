@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/124/logging/logshuttle/test-logshuttle
+    method: GET
+  response:
+    body: '{"url":"https://logs.example.com","name":"test-logshuttle","placement":"waf_debug","format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"124","response_condition":"","updated_at":"2020-05-08T11:40:56Z","token":"super-secure-token","created_at":"2020-05-08T11:40:56Z","deleted_at":null,"format":"%h
+      %l %u %t \"%r\" %\u003es %b"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      - bytes
+      Age:
+      - "0"
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 08 May 2020 11:40:57 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17428-PAO
+      X-Timer:
+      - S1588938057.366602,VS0,VE185
+    status: 200 OK
+    code: 200
+    duration: ""
