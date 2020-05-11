@@ -60,7 +60,7 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 	}
 
 	var ps []*Papertrail
-	if err := decodeJSON(&ps, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ps); err != nil {
 		return nil, err
 	}
 	sort.Stable(papertrailsByName(ps))
@@ -103,7 +103,7 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 	}
 
 	var p *Papertrail
-	if err := decodeJSON(&p, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -141,7 +141,7 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	}
 
 	var p *Papertrail
-	if err := decodeJSON(&p, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -190,7 +190,7 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 	}
 
 	var p *Papertrail
-	if err := decodeJSON(&p, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -228,7 +228,7 @@ func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

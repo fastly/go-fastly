@@ -66,7 +66,7 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 	}
 
 	var hcs []*HealthCheck
-	if err := decodeJSON(&hcs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &hcs); err != nil {
 		return nil, err
 	}
 	sort.Stable(healthChecksByName(hcs))
@@ -111,7 +111,7 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 	}
 
 	var h *HealthCheck
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -149,7 +149,7 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 	}
 
 	var h *HealthCheck
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -200,7 +200,7 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 	}
 
 	var h *HealthCheck
-	if err := decodeJSON(&h, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -238,7 +238,7 @@ func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

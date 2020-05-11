@@ -61,7 +61,7 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	}
 
 	var ss []*Sumologic
-	if err := decodeJSON(&ss, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
 	sort.Stable(sumologicsByName(ss))
@@ -102,7 +102,7 @@ func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 	}
 
 	var s *Sumologic
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -140,7 +140,7 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	}
 
 	var s *Sumologic
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -187,7 +187,7 @@ func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	}
 
 	var s *Sumologic
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -225,7 +225,7 @@ func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

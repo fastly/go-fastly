@@ -57,7 +57,7 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	}
 
 	var gzips []*Gzip
-	if err := decodeJSON(&gzips, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &gzips); err != nil {
 		return nil, err
 	}
 	sort.Stable(gzipsByName(gzips))
@@ -94,7 +94,7 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 	}
 
 	var gzip *Gzip
-	if err := decodeJSON(&gzip, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &gzip); err != nil {
 		return nil, err
 	}
 	return gzip, nil
@@ -132,7 +132,7 @@ func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 	}
 
 	var b *Gzip
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -175,7 +175,7 @@ func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 	}
 
 	var b *Gzip
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -213,7 +213,7 @@ func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

@@ -54,7 +54,7 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	}
 
 	var ds []*Domain
-	if err := decodeJSON(&ds, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
 	sort.Stable(domainsByName(ds))
@@ -92,7 +92,7 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	}
 
 	var d *Domain
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -130,7 +130,7 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	}
 
 	var d *Domain
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -175,7 +175,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	}
 
 	var d *Domain
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil

@@ -51,7 +51,7 @@ func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 	}
 
 	var e []*Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	sort.Sort(versionsByNumber(e))
@@ -108,7 +108,7 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 	}
 
 	var e *Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	return e, nil
@@ -140,7 +140,7 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	}
 
 	var e *Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	return e, nil
@@ -174,7 +174,7 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	}
 
 	var e *Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	return e, nil
@@ -205,7 +205,7 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 	}
 
 	var e *Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	return e, nil
@@ -236,7 +236,7 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 	}
 
 	var e *Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	return e, nil
@@ -269,7 +269,7 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 	}
 
 	var e *Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	return e, nil
@@ -302,7 +302,7 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return false, msg, err
 	}
 
@@ -335,7 +335,7 @@ func (c *Client) LockVersion(i *LockVersionInput) (*Version, error) {
 	}
 
 	var e *Version
-	if err := decodeJSON(&e, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
 	return e, nil

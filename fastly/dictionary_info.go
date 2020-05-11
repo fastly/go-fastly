@@ -50,7 +50,7 @@ func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, 
 	}
 
 	var b *DictionaryInfo
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil

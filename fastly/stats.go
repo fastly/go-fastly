@@ -1,6 +1,9 @@
 package fastly
 
-import "fmt"
+import (
+	"encoding/json"
+	"fmt"
+)
 
 // Stats represent metrics of a Fastly service
 type Stats struct {
@@ -101,7 +104,20 @@ type StatsResponse struct {
 
 // GetStats returns stats data based on GetStatsInput
 func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
+	var resp interface{}
+	if err := c.GetStatsJSON(i, &resp); err != nil {
+		return nil, err
+	}
 
+	var sr *StatsResponse
+	if err := decodeMap(resp, &sr); err != nil {
+		return nil, err
+	}
+	return sr, nil
+}
+
+// GetStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
+func (c *Client) GetStatsJSON(i *GetStatsInput, dst interface{}) error {
 	p := "/stats"
 
 	if i.Service != "" {
@@ -121,15 +137,11 @@ func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 		},
 	})
 	if err != nil {
-		return nil, err
+		return err
 	}
+	defer r.Body.Close()
 
-	var sr *StatsResponse
-	if err := decodeJSON(&sr, r.Body); err != nil {
-		return nil, err
-	}
-
-	return sr, nil
+	return json.NewDecoder(r.Body).Decode(dst)
 }
 
 // UsageStatsResponse is a response from the account usage API endpoint
@@ -180,7 +192,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 		return nil, err
 	}
 	var sr *UsageResponse
-	if err := decodeJSON(&sr, r.Body); err != nil {
+	if err := decodeBodyMap(r.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -216,7 +228,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 		return nil, err
 	}
 	var sr *UsageByServiceResponse
-	if err := decodeJSON(&sr, r.Body); err != nil {
+	if err := decodeBodyMap(r.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -239,7 +251,7 @@ func (c *Client) GetRegions() (*RegionsResponse, error) {
 	}
 
 	var rr *RegionsResponse
-	if err := decodeJSON(&rr, r.Body); err != nil {
+	if err := decodeBodyMap(r.Body, &rr); err != nil {
 		return nil, err
 	}
 
