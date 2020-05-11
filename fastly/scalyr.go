@@ -59,7 +59,7 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	}
 
 	var ss []*Scalyr
-	if err := decodeJSON(&ss, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
 	sort.Stable(scalyrsByName(ss))
@@ -98,7 +98,7 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	}
 
 	var s *Scalyr
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -136,7 +136,7 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 	}
 
 	var s *Scalyr
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -181,7 +181,7 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 	}
 
 	var s *Scalyr
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -219,7 +219,7 @@ func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
