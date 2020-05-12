@@ -10,7 +10,6 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
-
 	// Create
 	var ftp *FTP
 	record(t, "ftps/create", func(c *Client) {
@@ -20,6 +19,7 @@ func TestClient_FTPs(t *testing.T) {
 			Name:            "test-ftp",
 			Address:         "example.com",
 			Port:            1234,
+			PublicKey:       pgpPublicKey(),
 			Username:        "username",
 			Password:        "password",
 			Path:            "/dir",
@@ -60,6 +60,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftp.Port != 1234 {
 		t.Errorf("bad port: %q", ftp.Port)
+	}
+	if ftp.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", ftp.PublicKey)
 	}
 	if ftp.Username != "username" {
 		t.Errorf("bad username: %q", ftp.Username)
@@ -125,6 +128,9 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.Port != nftp.Port {
 		t.Errorf("bad port: %q", ftp.Port)
 	}
+	if ftp.PublicKey != nftp.PublicKey {
+		t.Errorf("bad public_key: %q", ftp.PublicKey)
+	}
 	if ftp.Username != nftp.Username {
 		t.Errorf("bad username: %q", ftp.Username)
 	}
@@ -157,10 +163,11 @@ func TestClient_FTPs(t *testing.T) {
 	var uftp *FTP
 	record(t, "ftps/update", func(c *Client) {
 		uftp, err = c.UpdateFTP(&UpdateFTPInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-ftp",
-			NewName: "new-test-ftp",
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-ftp",
+			NewName:   "new-test-ftp",
+			GzipLevel: 0,
 		})
 	})
 	if err != nil {
@@ -168,6 +175,14 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if uftp.Name != "new-test-ftp" {
 		t.Errorf("bad name: %q", uftp.Name)
+	}
+	// TODO (v2): This is a bug where updates to zero-values are omitted due to the
+	// `omitempty` struct tag.
+	//
+	// We plan to fix this in the next major release as changing this behavior is a
+	// breaking change.
+	if uftp.GzipLevel != 9 {
+		t.Errorf("bad gzip_level: %q", uftp.GzipLevel)
 	}
 
 	// Delete

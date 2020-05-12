@@ -17,6 +17,7 @@ type FTP struct {
 	Port              uint       `mapstructure:"port"`
 	Username          string     `mapstructure:"user"`
 	Password          string     `mapstructure:"password"`
+	PublicKey         string     `mapstructure:"public_key"`
 	Path              string     `mapstructure:"path"`
 	Period            uint       `mapstructure:"period"`
 	GzipLevel         uint8      `mapstructure:"gzip_level"`
@@ -85,6 +86,7 @@ type CreateFTPInput struct {
 	Port              uint   `form:"port,omitempty"`
 	Username          string `form:"user,omitempty"`
 	Password          string `form:"password,omitempty"`
+	PublicKey         string `form:"public_key,omitempty"`
 	Path              string `form:"path,omitempty"`
 	Period            uint   `form:"period,omitempty"`
 	FormatVersion     uint   `form:"format_version,omitempty"`
@@ -169,6 +171,7 @@ type UpdateFTPInput struct {
 	NewName           string `form:"name,omitempty"`
 	Address           string `form:"address,omitempty"`
 	Port              uint   `form:"port,omitempty"`
+	PublicKey         string `form:"public_key,omitempty"`
 	Username          string `form:"user,omitempty"`
 	Password          string `form:"password,omitempty"`
 	Path              string `form:"path,omitempty"`
