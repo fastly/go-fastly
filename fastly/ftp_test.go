@@ -65,7 +65,7 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad public_key: %q", ftp.PublicKey)
 	}
 	if ftp.Username != "username" {
-		t.Errorf("bad user: %q", ftp.Username)
+		t.Errorf("bad username: %q", ftp.Username)
 	}
 	if ftp.Password != "password" {
 		t.Errorf("bad password: %q", ftp.Password)
@@ -132,7 +132,7 @@ func TestClient_FTPs(t *testing.T) {
 		t.Errorf("bad public_key: %q", ftp.PublicKey)
 	}
 	if ftp.Username != nftp.Username {
-		t.Errorf("bad user: %q", ftp.Username)
+		t.Errorf("bad username: %q", ftp.Username)
 	}
 	if ftp.Password != nftp.Password {
 		t.Errorf("bad password: %q", ftp.Password)
