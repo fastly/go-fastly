@@ -60,7 +60,7 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	}
 
 	var d []*Datadog
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	sort.Stable(datadogByName(d))
@@ -100,7 +100,7 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	}
 
 	var d *Datadog
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -138,7 +138,7 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	}
 
 	var d *Datadog
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -184,7 +184,7 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	}
 
 	var d *Datadog
-	if err := decodeJSON(&d, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -222,7 +222,7 @@ func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
