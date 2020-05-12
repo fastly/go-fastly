@@ -6,8 +6,6 @@ import (
 	"testing"
 )
 
-var testEventID = "3OMewexIMbzrQj77xxxxxx"
-
 func TestClient_APIEvents(t *testing.T) {
 	t.Parallel()
 

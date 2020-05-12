@@ -159,24 +159,21 @@ func TestClient_Services(t *testing.T) {
 }
 
 func TestClient_GetService_validation(t *testing.T) {
-	var err error
-	_, err = testClient.GetService(&GetServiceInput{})
+	_, err := testClient.GetService(&GetServiceInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateService_validation(t *testing.T) {
-	var err error
-	_, err = testClient.UpdateService(&UpdateServiceInput{})
+	_, err := testClient.UpdateService(&UpdateServiceInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
-	var err error
-	err = testClient.DeleteService(&DeleteServiceInput{})
+	err := testClient.DeleteService(&DeleteServiceInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}

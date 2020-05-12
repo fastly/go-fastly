@@ -115,8 +115,7 @@ func TestClient_Users(t *testing.T) {
 }
 
 func TestClient_CreateUser_validation(t *testing.T) {
-	var err error
-	_, err = testClient.CreateUser(&CreateUserInput{
+	_, err := testClient.CreateUser(&CreateUserInput{
 		Login: "",
 	})
 	if err != ErrMissingLogin {
@@ -133,8 +132,7 @@ func TestClient_CreateUser_validation(t *testing.T) {
 }
 
 func TestClient_ListCustomerUsers_validation(t *testing.T) {
-	var err error
-	_, err = testClient.ListCustomerUsers(&ListCustomerUsersInput{
+	_, err := testClient.ListCustomerUsers(&ListCustomerUsersInput{
 		CustomerID: "",
 	})
 	if err != ErrMissingCustomerID {
@@ -143,8 +141,7 @@ func TestClient_ListCustomerUsers_validation(t *testing.T) {
 }
 
 func TestClient_GetUser_validation(t *testing.T) {
-	var err error
-	_, err = testClient.GetUser(&GetUserInput{
+	_, err := testClient.GetUser(&GetUserInput{
 		ID: "",
 	})
 	if err != ErrMissingID {
@@ -153,8 +150,7 @@ func TestClient_GetUser_validation(t *testing.T) {
 }
 
 func TestClient_UpdateUser_validation(t *testing.T) {
-	var err error
-	_, err = testClient.UpdateUser(&UpdateUserInput{
+	_, err := testClient.UpdateUser(&UpdateUserInput{
 		ID: "",
 	})
 	if err != ErrMissingID {
@@ -163,8 +159,7 @@ func TestClient_UpdateUser_validation(t *testing.T) {
 }
 
 func TestClient_DeleteUser_validation(t *testing.T) {
-	var err error
-	err = testClient.DeleteUser(&DeleteUserInput{
+	err := testClient.DeleteUser(&DeleteUserInput{
 		ID: "",
 	})
 	if err != ErrMissingID {

@@ -118,7 +118,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	if rs.ForceMiss != nrs.ForceMiss {
 		t.Errorf("bad force_miss: %t (%t)", rs.ForceMiss, nrs.ForceMiss)
 	}
-	if rs.ForceSSL != rs.ForceSSL {
+	if rs.ForceSSL != nrs.ForceSSL {
 		t.Errorf("bad force_ssl: %t (%t)", rs.ForceSSL, nrs.ForceSSL)
 	}
 	if rs.Action != nrs.Action {

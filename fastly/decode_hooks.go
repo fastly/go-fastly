@@ -30,15 +30,15 @@ func mapToHTTPHeaderHookFunc() mapstructure.DecodeHookFunc {
 
 		n := map[string][]string{}
 		for k, v := range typed {
-			switch v.(type) {
+			switch tv := v.(type) {
 			case string:
-				n[k] = []string{v.(string)}
+				n[k] = []string{tv}
 			case []string:
-				n[k] = v.([]string)
+				n[k] = tv
 			case int, int8, int16, int32, int64:
-				n[k] = []string{fmt.Sprintf("%d", v.(int))}
+				n[k] = []string{fmt.Sprintf("%d", tv)}
 			case float32, float64:
-				n[k] = []string{fmt.Sprintf("%f", v.(float64))}
+				n[k] = []string{fmt.Sprintf("%f", tv)}
 			default:
 				return nil, fmt.Errorf("cannot convert %T to http.Header", v)
 			}

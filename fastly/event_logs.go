@@ -77,7 +77,7 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 		Links:  EventsPaginationInfo{},
 	}
 
-	path := fmt.Sprintf("/events")
+	path := "/events"
 
 	filters := &RequestOptions{Params: i.formatEventFilters()}
 

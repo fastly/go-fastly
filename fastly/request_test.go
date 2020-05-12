@@ -40,13 +40,13 @@ func TestClient_RawRequest(t *testing.T) {
 					pk = "/" + pk
 				}
 				t.Log("Encoded path expected: ", pk)
-				// Insure we don't get a path starting with an extra slash
+				// Ensure we don't get a path starting with an extra slash
 				// e.g. //service/myservice/purge/mykey
 				if r.URL.Path[1] == '/' {
 					t.Fatalf("Host and APIPath were joined incorrectly. Got: %s\n", r.URL.Path)
 				}
-				// Insure the encoded path isn't altered
-				if strings.Index(r.URL.EscapedPath(), p+url.PathEscape(k)) == -1 {
+				// Ensure the encoded path isn't altered
+				if !strings.Contains(r.URL.EscapedPath(), p+url.PathEscape(k)) {
 					t.Fatalf("RawRequest altered the encoded path. New encoded path: %s, expecting: %s\n", r.URL.EscapedPath(), p+url.PathEscape(k))
 				}
 			}
