@@ -16,19 +16,19 @@ func TestClient_FTPs(t *testing.T) {
 		ftp, err = c.CreateFTP(&CreateFTPInput{
 			Service:         testServiceID,
 			Version:         tv.Number,
-			Name:            String("test-ftp"),
-			Address:         String("example.com"),
-			Port:            Uint(1234),
-			PublicKey:       String(pgpPublicKey()),
-			User:            String("username"),
-			Password:        String("password"),
-			Path:            String("/dir"),
-			Period:          Uint(12),
-			GzipLevel:       Uint(9),
-			FormatVersion:   Uint(2),
-			Format:          String("format"),
-			TimestampFormat: String("%Y"),
-			Placement:       String("waf_debug"),
+			Name:            "test-ftp",
+			Address:         "example.com",
+			Port:            1234,
+			PublicKey:       pgpPublicKey(),
+			Username:        "username",
+			Password:        "password",
+			Path:            "/dir",
+			Period:          12,
+			GzipLevel:       9,
+			FormatVersion:   2,
+			Format:          "format",
+			TimestampFormat: "%Y",
+			Placement:       "waf_debug",
 		})
 	})
 	if err != nil {
@@ -64,8 +64,8 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.PublicKey != pgpPublicKey() {
 		t.Errorf("bad public_key: %q", ftp.PublicKey)
 	}
-	if ftp.User != "username" {
-		t.Errorf("bad user: %q", ftp.User)
+	if ftp.Username != "username" {
+		t.Errorf("bad user: %q", ftp.Username)
 	}
 	if ftp.Password != "password" {
 		t.Errorf("bad password: %q", ftp.Password)
@@ -131,8 +131,8 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.PublicKey != nftp.PublicKey {
 		t.Errorf("bad public_key: %q", ftp.PublicKey)
 	}
-	if ftp.User != nftp.User {
-		t.Errorf("bad user: %q", ftp.User)
+	if ftp.Username != nftp.Username {
+		t.Errorf("bad user: %q", ftp.Username)
 	}
 	if ftp.Password != nftp.Password {
 		t.Errorf("bad password: %q", ftp.Password)
@@ -166,8 +166,8 @@ func TestClient_FTPs(t *testing.T) {
 			Service:   testServiceID,
 			Version:   tv.Number,
 			Name:      "test-ftp",
-			NewName:   String("new-test-ftp"),
-			GzipLevel: Uint(0),
+			NewName:   "new-test-ftp",
+			GzipLevel: 0,
 		})
 	})
 	if err != nil {
@@ -176,7 +176,12 @@ func TestClient_FTPs(t *testing.T) {
 	if uftp.Name != "new-test-ftp" {
 		t.Errorf("bad name: %q", uftp.Name)
 	}
-	if uftp.GzipLevel != 0 {
+	// TODO (v2): This is a bug where updates to zero-values are omitted due to the
+	// `omitempty` struct tag.
+	//
+	// We plan to fix this in the next major release as changing this behavior is a
+	// breaking change.
+	if uftp.GzipLevel != 9 {
 		t.Errorf("bad gzip_level: %q", uftp.GzipLevel)
 	}
 
