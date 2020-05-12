@@ -66,7 +66,7 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	}
 
 	var gcses []*GCS
-	if err := decodeJSON(&gcses, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &gcses); err != nil {
 		return nil, err
 	}
 	sort.Stable(gcsesByName(gcses))
@@ -112,7 +112,7 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 	}
 
 	var gcs *GCS
-	if err := decodeJSON(&gcs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &gcs); err != nil {
 		return nil, err
 	}
 	return gcs, nil
@@ -150,7 +150,7 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	}
 
 	var b *GCS
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -201,7 +201,7 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	}
 
 	var b *GCS
-	if err := decodeJSON(&b, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -239,7 +239,7 @@ func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

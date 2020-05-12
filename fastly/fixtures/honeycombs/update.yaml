@@ -1,0 +1,62 @@
+---
+version: 1
+interactions:
+- request:
+    body: Name=test-honeycomb&Service=7i6HN3TK9wS159v2gPAZ8A&Version=118&dataset=newDataset&name=new-test-honeycomb&token=new-token
+    form:
+      Name:
+      - test-honeycomb
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      Version:
+      - "118"
+      dataset:
+      - newDataset
+      name:
+      - new-test-honeycomb
+      token:
+      - new-token
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/118/logging/honeycomb/test-honeycomb
+    method: PUT
+  response:
+    body: '{"deleted_at":null,"dataset":"newDataset","response_condition":"","version":"118","format":"%h
+      %l %u %t \"%r\" %\u003es %b","placement":"waf_debug","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2020-05-08T11:24:21Z","format_version":"2","created_at":"2020-05-08T11:24:21Z","name":"new-test-honeycomb","token":"new-token"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 08 May 2020 11:24:23 GMT
+      Fastly-Ratelimit-Remaining:
+      - "946"
+      Fastly-Ratelimit-Reset:
+      - "1588939200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17446-PAO
+      X-Timer:
+      - S1588937063.784266,VS0,VE641
+    status: 200 OK
+    code: 200
+    duration: ""

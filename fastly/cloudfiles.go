@@ -68,7 +68,7 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	}
 
 	var cloudfiles []*Cloudfiles
-	if err := decodeJSON(&cloudfiles, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
 		return nil, err
 	}
 	sort.Stable(cloudfilesByName(cloudfiles))
@@ -116,7 +116,7 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 	}
 
 	var cloudfiles *Cloudfiles
-	if err := decodeJSON(&cloudfiles, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
 		return nil, err
 	}
 	return cloudfiles, nil
@@ -154,7 +154,7 @@ func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 	}
 
 	var cloudfiles *Cloudfiles
-	if err := decodeJSON(&cloudfiles, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
 		return nil, err
 	}
 	return cloudfiles, nil
@@ -207,7 +207,7 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 	}
 
 	var cloudfiles *Cloudfiles
-	if err := decodeJSON(&cloudfiles, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
 		return nil, err
 	}
 	return cloudfiles, nil
@@ -245,7 +245,7 @@ func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

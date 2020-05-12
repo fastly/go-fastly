@@ -58,7 +58,7 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	}
 
 	var cs []*Condition
-	if err := decodeJSON(&cs, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	sort.Stable(conditionsByName(cs))
@@ -95,7 +95,7 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	}
 
 	var co *Condition
-	if err := decodeJSON(&co, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &co); err != nil {
 		return nil, err
 	}
 	return co, nil
@@ -133,7 +133,7 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 	}
 
 	var co *Condition
-	if err := decodeJSON(&co, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &co); err != nil {
 		return nil, err
 	}
 	return co, nil
@@ -176,7 +176,7 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 	}
 
 	var co *Condition
-	if err := decodeJSON(&co, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &co); err != nil {
 		return nil, err
 	}
 	return co, nil
@@ -214,7 +214,7 @@ func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

@@ -54,7 +54,7 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	}
 
 	var as []*ACL
-	if err := decodeJSON(&as, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &as); err != nil {
 		return nil, err
 	}
 	sort.Stable(ACLsByName(as))
@@ -88,7 +88,7 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	}
 
 	var a *ACL
-	if err := decodeJSON(&a, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -126,7 +126,7 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
@@ -167,7 +167,7 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 	}
 
 	var a *ACL
-	if err := decodeJSON(&a, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -213,7 +213,7 @@ func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 	}
 
 	var a *ACL
-	if err := decodeJSON(&a, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 

@@ -60,7 +60,7 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	}
 
 	var ss []*Server
-	if err := decodeJSON(&ss, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
 	sort.Stable(serversByAddress(ss))
@@ -108,7 +108,7 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 	}
 
 	var s *Server
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -144,7 +144,7 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	}
 
 	var s *Server
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -189,7 +189,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 	}
 
 	var s *Server
-	if err := decodeJSON(&s, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -225,7 +225,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	}
 
 	var r *statusResp
-	if err := decodeJSON(&r, resp.Body); err != nil {
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
