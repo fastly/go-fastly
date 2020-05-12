@@ -197,8 +197,6 @@ type BatchModifyDictionaryItemsInput struct {
 }
 
 type BatchDictionaryItem struct {
-
-
 	Operation BatchOperation `json:"op"`
 	ItemKey   string         `json:"item_key"`
 	ItemValue string         `json:"item_value"`

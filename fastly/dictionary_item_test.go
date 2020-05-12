@@ -7,8 +7,8 @@ func TestClient_DictionaryItems(t *testing.T) {
 	fixtureBase := "dictionary_items/"
 	nameSuffix := "DictionaryItems"
 
-	testService := createTestService(t, fixtureBase + "create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase +"delete_service", testService.ID)
+	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
+	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
 
 	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
 
