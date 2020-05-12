@@ -19,7 +19,7 @@ func TestClient_FTPs(t *testing.T) {
 			Name:            "test-ftp",
 			Address:         "example.com",
 			Port:            1234,
-			PublicKey:       String(pgpPublicKey()),
+			PublicKey:       pgpPublicKey(),
 			Username:        "username",
 			Password:        "password",
 			Path:            "/dir",
