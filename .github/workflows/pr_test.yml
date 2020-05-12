@@ -1,0 +1,73 @@
+on: pull_request
+name: Test
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+    - name: Install Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.14.x
+    - name: Set GOPATH
+      # Temporary fix, see: https://github.com/actions/setup-go/issues/14
+      run: |
+        echo "::set-env name=GOPATH::$(go env GOPATH)"
+        echo "::add-path::$(go env GOPATH)/bin"
+      shell: bash
+    - name: Restore cache
+      id: cache
+      uses: actions/cache@v1
+      with:
+        path: ~/go/bin
+        key: ${{ runner.os }}-go-bin-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-bin-
+    - name: Restore cache
+      uses: actions/cache@v1
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-mod-
+    - name: Install staticcheck
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: go get -v -u honnef.co/go/tools/cmd/staticcheck
+      shell: bash
+    - name: Check Fmt
+      run: make check-fmt
+    - name: Vet
+      run: make vet
+      shell: bash
+    - name: Staticcheck
+      run: make staticcheck
+      shell: bash
+  test:
+    strategy:
+      matrix:
+        go-version: [1.14.x]
+        platform: [ubuntu-latest, macos-latest, windows-latest]
+    runs-on: ${{ matrix.platform }}
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v1
+    - name: Install Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: ${{ matrix.go-version }}
+    - name: Set GOPATH
+      # Temporary fix, see: https://github.com/actions/setup-go/issues/14
+      run: |
+        echo "::set-env name=GOPATH::$(go env GOPATH)"
+        echo "::add-path::$(go env GOPATH)/bin"
+    - name: Restore cache
+      uses: actions/cache@v1
+      with:
+        path: ~/go/pkg/mod
+        key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-mod-
+    - name: Test
+      run: make test
+      shell: bash

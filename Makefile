@@ -6,7 +6,8 @@ CURRENT_DIR := $(patsubst %/,%,$(dir $(realpath $(MKFILE_PATH))))
 GOPATH ?= $(HOME)/go
 
 # List all our actual files, excluding vendor
-GOFILES ?= $(shell go list $(FILES) | grep -v /vendor/)
+GOPKGS ?= $(shell go list $(FILES) | grep -v /vendor/)
+GOFILES ?= $(shell find . -name '*.go' | grep -v /vendor/)
 
 # Tags specific for building
 GOTAGS ?=
@@ -56,7 +57,7 @@ build:
 		GOARCH="${GOARCH}" \
 		GOCACHE="${GOCACHE}" \
 		GOPATH="${GOPATH}" \
-		go build -a -o "pkg/${GOOS}_${GOARCH}/${NAME}" ${GOFILES}
+		go build -a -o "pkg/${GOOS}_${GOARCH}/${NAME}" ${GOPKGS}
 .PHONY: build
 
 # deps updates all dependencies for this project.
@@ -77,7 +78,7 @@ dev:
 		GOARCH="${GOARCH}" \
 		GOCACHE="${GOCACHE}" \
 		GOPATH="${GOPATH}" \
-		go install ${GOFILES}
+		go install ${GOPKGS}
 .PHONY: dev
 
 # linux builds the linux binary
@@ -91,13 +92,13 @@ linux:
 # test runs the test suite.
 test:
 	@echo "==> Testing ${NAME}"
-	@go test -timeout=30s -parallel=20 -tags="${GOTAGS}" ${GOFILES} ${TESTARGS}
+	@go test -timeout=30s -parallel=20 -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test
 
 # test-race runs the test suite.
 test-race:
 	@echo "==> Testing ${NAME} (race)"
-	@go test -timeout=60s -race -tags="${GOTAGS}" ${GOFILES} ${TESTARGS}
+	@go test -timeout=60s -race -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test-race
 
 # test without VCR
@@ -105,7 +106,7 @@ test-full:
 	@echo "==> Testing ${NAME} with VCR disabled"
 	@env \
 		VCR_DISABLE=1 \
-		go test -timeout=60s -parallel=20 ${GOFILES} ${TESTARGS}
+		go test -timeout=60s -parallel=20 ${GOPKGS} ${TESTARGS}
 .PHONY: test-full
 
 # update fixtures default service ID
@@ -114,10 +115,32 @@ fix-fixtures:
 	@$(CURRENT_DIR)/scripts/fixFixtures.sh ${FASTLY_TEST_SERVICE_ID}
 .PHONY: fix-fixtures
 
+# lists improperly-formatted files if they exist
+check-fmt:
+	@gofmt -s -l ${GOFILES}
+	@printf "\nPlease, run 'make fmt'.\n"
+.PHONY: check-fmt
+
+# properly formats go files
+fmt:
+	@gofmt -s -w ${GOFILES}
+
+# runs go vet
+vet:
+	@go vet ${GOFILES}
+.PHONY: vet
+
+# runs the staticcheck linter
+staticcheck:
+	@staticcheck ${GOFILES}
+.PHONY: staticcheck
+
+# generates the full project changelog
 changelog:
 	@$(CURRENT_DIR)/scripts/changelog.sh
 .PHONY: changelog
 
+# generates the changelog for a specific release
 release-changelog:
 	@$(CURRENT_DIR)/scripts/release-changelog.sh
 .PHONY: release-changelog
