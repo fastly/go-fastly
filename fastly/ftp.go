@@ -81,20 +81,20 @@ type CreateFTPInput struct {
 	Service string
 	Version int
 
-	Name              string `form:"name,omitempty"`
-	Address           string `form:"address,omitempty"`
-	Port              uint   `form:"port,omitempty"`
-	Username          string `form:"user,omitempty"`
-	Password          string `form:"password,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	GzipLevel         uint8  `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              string  `form:"name,omitempty"`
+	Address           string  `form:"address,omitempty"`
+	Port              uint    `form:"port,omitempty"`
+	Username          string  `form:"user,omitempty"`
+	Password          string  `form:"password,omitempty"`
+	PublicKey         *string `form:"public_key,omitempty"`
+	Path              string  `form:"path,omitempty"`
+	Period            uint    `form:"period,omitempty"`
+	FormatVersion     uint    `form:"format_version,omitempty"`
+	GzipLevel         uint8   `form:"gzip_level,omitempty"`
+	Format            string  `form:"format,omitempty"`
+	ResponseCondition string  `form:"response_condition,omitempty"`
+	TimestampFormat   string  `form:"timestamp_format,omitempty"`
+	Placement         string  `form:"placement,omitempty"`
 }
 
 // CreateFTP creates a new Fastly FTP.
@@ -168,20 +168,20 @@ type UpdateFTPInput struct {
 	// Name is the name of the FTP to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	Address           string `form:"address,omitempty"`
-	Port              uint   `form:"port,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	Username          string `form:"user,omitempty"`
-	Password          string `form:"password,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	GzipLevel         uint8  `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	NewName           string  `form:"name,omitempty"`
+	Address           string  `form:"address,omitempty"`
+	Port              uint    `form:"port,omitempty"`
+	PublicKey         *string `form:"public_key,omitempty"`
+	Username          string  `form:"user,omitempty"`
+	Password          string  `form:"password,omitempty"`
+	Path              string  `form:"path,omitempty"`
+	Period            uint    `form:"period,omitempty"`
+	FormatVersion     uint    `form:"format_version,omitempty"`
+	GzipLevel         uint8   `form:"gzip_level,omitempty"`
+	Format            string  `form:"format,omitempty"`
+	ResponseCondition string  `form:"response_condition,omitempty"`
+	TimestampFormat   string  `form:"timestamp_format,omitempty"`
+	Placement         string  `form:"placement,omitempty"`
 }
 
 // UpdateFTP updates a specific FTP.
