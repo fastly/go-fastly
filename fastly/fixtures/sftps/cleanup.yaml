@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/134/logging/sftp/test-sftp
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/33/logging/sftp/test-sftp
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-sftp, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 134 }''"}'
+      version =\u003e 33 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 12:06:05 GMT
+      - Tue, 12 May 2020 15:53:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "985"
+      - "796"
       Fastly-Ratelimit-Reset:
-      - "1588942800"
+      - "1589299200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17443-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-wdc5535-WDC
       X-Timer:
-      - S1588939565.231545,VS0,VE177
+      - S1589298817.131452,VS0,VE102
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,13 +52,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/134/logging/sftp/new-test-sftp
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/33/logging/sftp/new-test-sftp
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-sftp, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 134 }''"}'
+      version =\u003e 33 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,11 +68,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 12:06:05 GMT
+      - Tue, 12 May 2020 15:53:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "984"
+      - "794"
       Fastly-Ratelimit-Reset:
-      - "1588942800"
+      - "1589299200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -87,9 +87,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17443-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-wdc5535-WDC
       X-Timer:
-      - S1588939565.418675,VS0,VE194
+      - S1589298818.526722,VS0,VE137
     status: 404 Not Found
     code: 404
     duration: ""
