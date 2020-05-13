@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.11.0] - 2020-05-13
+### Added
+- test: Updates testing helper for fix fixtures to support macOS ([#177](https://github.com/fastly/go-fastly/pull/177))
+- helpers: Add raw access to stats JSON responses ([#176](https://github.com/fastly/go-fastly/pull/176))
+- datadog: Add Datadog logging endpoint support ([#182](https://github.com/fastly/go-fastly/pull/182))
+- sftp: Add SFTP logging endpoint support ([#175](https://github.com/fastly/go-fastly/pull/175))
+- scalyr: Add Scalyr logging endpoint support ([#174](https://github.com/fastly/go-fastly/pull/174))
+- pubsub: Add Google Cloud Pub/Sub logging endpoint support ([#173](https://github.com/fastly/go-fastly/pull/173))
+- openstack: Add OpenStack logging endpoint support ([#172](https://github.com/fastly/go-fastly/pull/172))
+- newrelic: Add New Relic logging endpoint support ([#171](https://github.com/fastly/go-fastly/pull/171))
+- logshuttle: Add Log Shuttle logging endpoint support ([#170](https://github.com/fastly/go-fastly/pull/170))
+- loggly: Add Loggly logging endpoint support ([#169](https://github.com/fastly/go-fastly/pull/169))
+- kafka: Add Kafka logging endpoint support ([#168](https://github.com/fastly/go-fastly/pull/168))
+- honeycomb: Add Honeycomb logging endpoint support ([#167](https://github.com/fastly/go-fastly/pull/167))
+- heroku: Add Heroku Logplex logging endpoint support ([#166](https://github.com/fastly/go-fastly/pull/166))
+- ftp: Update FTP logging endpoint support to include `PublicKey` ([#165](https://github.com/fastly/go-fastly/pull/165))
+- elasticsearch: Add Elasticsearch logging endpoint support ([#164](https://github.com/fastly/go-fastly/pull/164))
+- digitalocean: Add DigitalOcean Spaces logging endpoint support ([#163](https://github.com/fastly/go-fastly/pull/163))
+- rackspace: Add Rackspace Cloud Files logging endpoint support ([#162](https://github.com/fastly/go-fastly/pull/162))
+- test: Improve testing experience ([#161](https://github.com/fastly/go-fastly/pull/161))
+- doc: Fix typos in `GetRealtimeStats` documentation ([#160](https://github.com/fastly/go-fastly/pull/160))
+
 ## [1.10.0] - 2020-04-24
 ### Added
 - tls: Add support for Platform TLS API endpoints ([#154](https://github.com/fastly/go-fastly/pull/154))
@@ -163,7 +185,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.10.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.11.0...HEAD
 [1.10.0]: https://github.com/fastly/go-fastly/compare/v1.9.0...v1.10.0
 [1.9.0]: https://github.com/fastly/go-fastly/compare/v1.8.0...v1.9.0
 [1.8.0]: https://github.com/fastly/go-fastly/compare/v1.7.2...v1.8.0
