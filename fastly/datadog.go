@@ -7,7 +7,7 @@ import (
 	"time"
 )
 
-// Datadog represents a datadog response from the Fastly API.
+// Datadog represents a Datadog response from the Fastly API.
 type Datadog struct {
 	ServiceID string `mapstructure:"service_id"`
 	Version   int    `mapstructure:"version"`
@@ -18,13 +18,13 @@ type Datadog struct {
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
+	Placement         string     `mapstructure:"placement"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Placement         string     `mapstructure:"placement"`
 }
 
-// datadogByName is a sortable list of datadog.
+// datadogByName is a sortable list of Datadog.
 type datadogByName []*Datadog
 
 // Len, Swap, and Less implement the sortable interface.
@@ -43,7 +43,7 @@ type ListDatadogInput struct {
 	Version int
 }
 
-// ListDatadog returns the list of datadog for the configuration version.
+// ListDatadog returns the list of Datadog for the configuration version.
 func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
@@ -83,7 +83,7 @@ type CreateDatadogInput struct {
 	Placement         *string `form:"placement,omitempty"`
 }
 
-// CreateDatadog creates a new Fastly datadog.
+// CreateDatadog creates a new Datadog logging endpoint on a Fastly service version.
 func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
@@ -113,11 +113,11 @@ type GetDatadogInput struct {
 	Service string
 	Version int
 
-	// Name is the name of the datadog to fetch.
+	// Name is the name of the Datadog to fetch.
 	Name string
 }
 
-// GetDatadog gets the datadog configuration with the given parameters.
+// GetDatadog gets the Datadog configuration with the given parameters.
 func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
@@ -151,7 +151,7 @@ type UpdateDatadogInput struct {
 	Service string
 	Version int
 
-	// Name is the name of the datadog to update.
+	// Name is the name of the Datadog to update.
 	Name string
 
 	NewName           *string `form:"name,omitempty"`
@@ -163,7 +163,7 @@ type UpdateDatadogInput struct {
 	Placement         *string `form:"placement,omitempty"`
 }
 
-// UpdateDatadog updates a specific datadog.
+// UpdateDatadog updates a Datadog logging endpoint on a Fastly service version.
 func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	if i.Service == "" {
 		return nil, ErrMissingService
@@ -197,11 +197,11 @@ type DeleteDatadogInput struct {
 	Service string
 	Version int
 
-	// Name is the name of the datadog to delete (required).
+	// Name is the name of the Datadog to delete (required).
 	Name string
 }
 
-// DeleteDatadog deletes the given datadog version.
+// DeleteDatadog deletes a Datadog logging endpoint on a Fastly service version.
 func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	if i.Service == "" {
 		return ErrMissingService
