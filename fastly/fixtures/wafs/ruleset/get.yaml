@@ -7,10 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/34/wafs/1NGmubiAYnKMtCvXWAeszf
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/wafs/1NGmubiAYnKMtCvXWAeszf/ruleset
     method: GET
   response:
-    body: '{"data":{"id":"1NGmubiAYnKMtCvXWAeszf","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object","version":34,"service_id":"7i6HN3TK9wS159v2gPAZ8A","disabled":false,"rule_statuses_log_count":0,"rule_statuses_block_count":0,"rule_statuses_disabled_count":0},"relationships":{"configuration_set":{"data":{"id":"6wvihQHbaCG7NBPTfm20S9","type":"configuration_set"}}}}}'
+    body: '{"data":{"id":"1NGmubiAYnKMtCvXWAeszf","type":"ruleset","attributes":{"vcl":"sub
+      waf_ruleset {\n  /* This WAF is not configured */\n}","last_push":null}}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +21,7 @@ interactions:
       - "0"
       - "0"
       Content-Length:
-      - "426"
+      - "154"
       Content-Type:
       - application/vnd.api+json
       Date:
@@ -39,9 +40,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sea4480-SEA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sea4480-SEA
       X-Timer:
-      - S1589556917.123551,VS0,VE170
+      - S1589556917.308235,VS0,VE134
     status: 200 OK
     code: 200
     duration: ""

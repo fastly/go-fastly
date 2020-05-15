@@ -151,6 +151,30 @@ func TestClient_WAFs(t *testing.T) {
 		t.Errorf("expected %q to be %q", nwaf.ID, waf.ID)
 	}
 
+	// Get the WAF ruleset
+	var ruleset *Ruleset
+	record(t, "wafs/ruleset/get", func(c *Client) {
+		ruleset, err = c.GetWAFRuleRuleSets(&GetWAFRuleRuleSetsInput{
+			Service: testServiceID,
+			ID:      waf.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ruleset.ID != waf.ID {
+		t.Errorf("expected %q to be %q", ruleset.ID, waf.ID)
+	}
+	if ruleset.VCL == "" {
+		t.Error("bad vcl")
+	}
+	if ruleset.LastPush != waf.LastPush {
+		t.Errorf("expected %q to be %q", ruleset.LastPush, waf.LastPush)
+	}
+	if ruleset.Link != "" {
+		t.Error("bad link")
+	}
+
 	// Update
 	// Create a new response object to attach
 	var nro *ResponseObject
@@ -191,6 +215,30 @@ func TestClient_WAFs(t *testing.T) {
 	}
 	if uwaf.Response != "test-response-object-2" {
 		t.Errorf("bad name: %q", uwaf.Response)
+	}
+
+	// Update the WAF ruleset
+	var uRuleset *Ruleset
+	record(t, "wafs/ruleset/patch", func(c *Client) {
+		uRuleset, err = c.UpdateWAFRuleSets(&UpdateWAFRuleRuleSetsInput{
+			Service: testServiceID,
+			ID:      uwaf.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if uRuleset.ID != uwaf.ID {
+		t.Errorf("expected %q to be %q", uRuleset.ID, uwaf.ID)
+	}
+	if uRuleset.VCL != "" {
+		t.Error("bad vcl")
+	}
+	if uRuleset.LastPush != nil {
+		t.Error("bad last_push")
+	}
+	if uRuleset.Link == "" {
+		t.Error("bad link")
 	}
 
 	// Delete

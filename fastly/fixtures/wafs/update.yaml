@@ -1,38 +1,36 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf","id":"2WK9ofHfHcPi3s6S2X0Z8m","attributes":{"response":"test-response-object-2"}}}
+      {"data":{"type":"waf","id":"1NGmubiAYnKMtCvXWAeszf","attributes":{"response":"test-response-object-2"}}}
     form: {}
     headers:
       Accept:
       - application/vnd.api+json
       Content-Type:
       - application/vnd.api+json
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs/2WK9ofHfHcPi3s6S2X0Z8m
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/34/wafs/1NGmubiAYnKMtCvXWAeszf
     method: PATCH
   response:
-    body: '{"data":{"id":"2WK9ofHfHcPi3s6S2X0Z8m","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object-2","version":54,"service_id":"7i6HN3TK9wS159v2gPAZ8A","disabled":false,"rule_statuses_log_count":0,"rule_statuses_block_count":0,"rule_statuses_disabled_count":0},"relationships":{"configuration_set":{"data":{"id":"3vnl3cwPda9Q3WYCDRuGW","type":"configuration_set"}},"owasp":{"data":{"id":"4Jh5ZWRaYGgPdCdgQZNzyk","type":"owasp"}}}},"meta":{"warnings":[{"title":"This
+    body: '{"data":{"id":"1NGmubiAYnKMtCvXWAeszf","type":"waf","attributes":{"last_push":null,"prefetch_condition":"test-waf-condition","response":"test-response-object-2","version":34,"service_id":"7i6HN3TK9wS159v2gPAZ8A","disabled":false,"rule_statuses_log_count":0,"rule_statuses_block_count":0,"rule_statuses_disabled_count":0},"relationships":{"configuration_set":{"data":{"id":"6wvihQHbaCG7NBPTfm20S9","type":"configuration_set"}},"owasp":{"data":{"id":"7Voa4ckWs2CEQ3jewO2xr2","type":"owasp"}}}},"meta":{"warnings":[{"title":"This
       version of this service must be active","detail":"You may only update the WAF
-      VCL on an active version of a service.  The version 54 of service 7i6HN3TK9wS159v2gPAZ8A
-      is not active.  You may activate it through https://app.fastly.com or through
+      VCL on an active version of a service.  The version 34 of service 7i6HN3TK9wS159v2gPAZ8A
+      is not active.  You may activate it through https://manage.fastly.com or through
       the API: https://docs.fastly.com/api/config#version  Be sure to review the version''s
       changes before activating it."}]}}'
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
       Content-Length:
-      - "890"
+      - "894"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Sat, 11 May 2019 21:45:02 GMT
+      - Fri, 15 May 2020 15:35:18 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,8 +45,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lax8631-LAX
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sea4480-SEA
       X-Timer:
-      - S1557611102.061591,VS0,VE521
+      - S1589556918.755702,VS0,VE318
     status: 200 OK
     code: 200
+    duration: ""
