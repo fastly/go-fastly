@@ -506,6 +506,7 @@ type Ruleset struct {
 	ID       string     `jsonapi:"primary,ruleset"`
 	VCL      string     `jsonapi:"attr,vcl,omitempty"`
 	LastPush *time.Time `jsonapi:"attr,last_push,omitempty,iso8601"`
+	Link     string
 }
 
 // GetWAFRuleRuleSetsInput is used as input to the GetWAFRuleRuleSets function.
@@ -563,10 +564,29 @@ func (c *Client) UpdateWAFRuleSets(i *UpdateWAFRuleRuleSetsInput) (*Ruleset, err
 		return nil, err
 	}
 
-	var ruleset Ruleset
-	if err := jsonapi.UnmarshalPayload(resp.Body, &ruleset); err != nil {
+	interimRuleset := struct {
+		Data struct {
+			ID   string `json:"id"`
+			Type string `json:"type"`
+		} `json:"data"`
+		Links struct {
+			Related struct {
+				Href string `json:"href"`
+			} `json:"related"`
+		} `json:"links"`
+	}{}
+	if err = json.NewDecoder(resp.Body).Decode(&interimRuleset); err != nil {
 		return nil, err
 	}
+
+	var ruleset Ruleset
+	if interimRuleset.Data.ID != "" {
+		ruleset.ID = interimRuleset.Data.ID
+	}
+	if interimRuleset.Links.Related.Href != "" {
+		ruleset.Link = interimRuleset.Links.Related.Href
+	}
+
 	return &ruleset, nil
 }
 

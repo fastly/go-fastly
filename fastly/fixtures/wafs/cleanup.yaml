@@ -1,24 +1,22 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/wafs/2WK9ofHfHcPi3s6S2X0Z8m
+      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.12)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/34/wafs/1NGmubiAYnKMtCvXWAeszf
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
       Date:
-      - Sat, 11 May 2019 21:45:03 GMT
+      - Fri, 15 May 2020 15:35:18 GMT
       Status:
       - 204 No Content
       Strict-Transport-Security:
@@ -33,8 +31,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lax8631-LAX
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sea4480-SEA
       X-Timer:
-      - S1557611103.468691,VS0,VE153
+      - S1589556919.811961,VS0,VE135
     status: 204 No Content
     code: 204
+    duration: ""
