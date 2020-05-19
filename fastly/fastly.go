@@ -70,6 +70,15 @@ func String(v string) *string {
 	return &v
 }
 
+// NullString is a helper that returns a pointer to the string value passed in
+// or nil if the string is empty.
+func NullString(v string) *string {
+	if v == "" {
+		return nil
+	}
+	return &v
+}
+
 // Uint is a helper that returns a pointer to the uint value passed in.
 func Uint(v uint) *uint {
 	return &v
