@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.13.0] - 2020-05-19
+### Added
+- helpers: Add `NullString` helper ([#187](https://github.com/fastly/go-fastly/pull/187))
+
 ## [1.12.0] - 2020-05-15
 ### Added
 - waf: Support for `link` field ([#179](https://github.com/fastly/go-fastly/pull/179))
@@ -189,7 +193,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.12.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.13.0...HEAD
+[1.13.0]: https://github.com/fastly/go-fastly/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/fastly/go-fastly/compare/v1.11.0...v1.12.0
 [1.11.0]: https://github.com/fastly/go-fastly/compare/v1.10.0...v1.11.0
 [1.10.0]: https://github.com/fastly/go-fastly/compare/v1.9.0...v1.10.0
