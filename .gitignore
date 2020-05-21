@@ -28,3 +28,6 @@ bin/
 pkg/
 
 .envrc
+
+# IDE specs
+*.iml
