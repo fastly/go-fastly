@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: Service=7i6HN3TK9wS159v2gPAZ8A
+    form:
+      Service:
+      - 7i6HN3TK9wS159v2gPAZ8A
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/1.13.0 (+github.com/fastly/go-fastly; go1.12.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
+    method: POST
+  response:
+    body: '{"msg":"Provided credentials are missing or invalid"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "53"
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 24 May 2020 19:32:45 GMT
+      Retry-After:
+      - "0"
+      Server:
+      - Varnish
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-sjc10038-SJC
+    status: 401 Unauthorized
+    code: 401
+    duration: ""
