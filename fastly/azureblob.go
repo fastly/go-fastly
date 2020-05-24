@@ -167,9 +167,9 @@ type UpdateAzureBlobInput struct {
 	Name string
 
 	NewName           string `form:"name,omitempty"`
-	Container         string `form:"container"`
-	AccountName       string `form:"account_name"`
-	SASToken          string `form:"sas_token"`
+	Container         string `form:"container,omitempty"`
+	AccountName       string `form:"account_name,omitempty"`
+	SASToken          string `form:"sas_token,omitempty"`
 	Path              string `form:"path,omitempty"`
 	Period            uint   `form:"period,omitempty"`
 	FormatVersion     uint   `form:"format_version,omitempty"`
