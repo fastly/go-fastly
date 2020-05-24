@@ -19,8 +19,8 @@ func TestClient_AzureBlobs(t *testing.T) {
 			Version:         tv.Number,
 			Name:            "test-azureblob",
 			Container:       "container",
-			AccountName:     "account_name",
-			SASToken:        "sv=2018-04-05&st=2018-04-29T22%3A18%3A26Z&sr=b&se=2020-04-30T02%3A23%3A26Z&sp=w&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D",
+			AccountName:     "accountname",
+			SASToken:        "sv=2000-10-01&ss=b&srt=o&sp=w&se=3000-01-01&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D",
 			Path:            "/path",
 			Period:          12,
 			GzipLevel:       9,
@@ -58,10 +58,10 @@ func TestClient_AzureBlobs(t *testing.T) {
 	if azureblob.Container != "container" {
 		t.Errorf("bad container: %q", azureblob.Container)
 	}
-	if azureblob.AccountName != "account_name" {
+	if azureblob.AccountName != "accountname" {
 		t.Errorf("bad account_name: %q", azureblob.AccountName)
 	}
-	if azureblob.SASToken != "sv=2018-04-05&st=2018-04-29T22%3A18%3A26Z&sr=b&se=2020-04-30T02%3A23%3A26Z&sp=w&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D" {
+	if azureblob.SASToken != "sv=2000-10-01&ss=b&srt=o&sp=w&se=3000-01-01&sig=Z%2FRHIX5Xcg0Mq2rqI3OlWTjEg2tYkboXr1P9ZUXDtkk%3D" {
 		t.Errorf("bad sas_token: %q", azureblob.SASToken)
 	}
 	if azureblob.Path != "/path" {
