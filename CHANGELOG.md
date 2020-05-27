@@ -7,52 +7,56 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.14.0] - 2020-05-26
+### Added
+- ip: Support for accessing Fastly's IPv6 ranges ([#189](https://github.com/fastly/go-fastly/pull/189)).
+
 ## [1.13.0] - 2020-05-19
 ### Added
-- helpers: Add `NullString` helper ([#187](https://github.com/fastly/go-fastly/pull/187))
+- helpers: Add `NullString` helper ([#187](https://github.com/fastly/go-fastly/pull/187)).
 
 ## [1.12.0] - 2020-05-15
 ### Added
-- waf: Support for `link` field ([#179](https://github.com/fastly/go-fastly/pull/179))
+- waf: Support for `link` field ([#179](https://github.com/fastly/go-fastly/pull/179)).
 
 ## [1.11.0] - 2020-05-13
 ### Added
-- test: Updates testing helper for fix fixtures to support macOS ([#177](https://github.com/fastly/go-fastly/pull/177))
-- helpers: Add raw access to stats JSON responses ([#176](https://github.com/fastly/go-fastly/pull/176))
-- datadog: Add Datadog logging endpoint support ([#182](https://github.com/fastly/go-fastly/pull/182))
-- sftp: Add SFTP logging endpoint support ([#175](https://github.com/fastly/go-fastly/pull/175))
-- scalyr: Add Scalyr logging endpoint support ([#174](https://github.com/fastly/go-fastly/pull/174))
-- pubsub: Add Google Cloud Pub/Sub logging endpoint support ([#173](https://github.com/fastly/go-fastly/pull/173))
-- openstack: Add OpenStack logging endpoint support ([#172](https://github.com/fastly/go-fastly/pull/172))
-- newrelic: Add New Relic logging endpoint support ([#171](https://github.com/fastly/go-fastly/pull/171))
-- logshuttle: Add Log Shuttle logging endpoint support ([#170](https://github.com/fastly/go-fastly/pull/170))
-- loggly: Add Loggly logging endpoint support ([#169](https://github.com/fastly/go-fastly/pull/169))
-- kafka: Add Kafka logging endpoint support ([#168](https://github.com/fastly/go-fastly/pull/168))
-- honeycomb: Add Honeycomb logging endpoint support ([#167](https://github.com/fastly/go-fastly/pull/167))
-- heroku: Add Heroku Logplex logging endpoint support ([#166](https://github.com/fastly/go-fastly/pull/166))
-- ftp: Update FTP logging endpoint support to include `PublicKey` ([#165](https://github.com/fastly/go-fastly/pull/165))
-- elasticsearch: Add Elasticsearch logging endpoint support ([#164](https://github.com/fastly/go-fastly/pull/164))
-- digitalocean: Add DigitalOcean Spaces logging endpoint support ([#163](https://github.com/fastly/go-fastly/pull/163))
-- rackspace: Add Rackspace Cloud Files logging endpoint support ([#162](https://github.com/fastly/go-fastly/pull/162))
-- test: Improve testing experience ([#161](https://github.com/fastly/go-fastly/pull/161))
-- doc: Fix typos in `GetRealtimeStats` documentation ([#160](https://github.com/fastly/go-fastly/pull/160))
+- test: Updates testing helper for fix fixtures to support macOS ([#177](https://github.com/fastly/go-fastly/pull/177)).
+- helpers: Add raw access to stats JSON responses ([#176](https://github.com/fastly/go-fastly/pull/176)).
+- datadog: Add Datadog logging endpoint support ([#182](https://github.com/fastly/go-fastly/pull/182)).
+- sftp: Add SFTP logging endpoint support ([#175](https://github.com/fastly/go-fastly/pull/175)).
+- scalyr: Add Scalyr logging endpoint support ([#174](https://github.com/fastly/go-fastly/pull/174)).
+- pubsub: Add Google Cloud Pub/Sub logging endpoint support ([#173](https://github.com/fastly/go-fastly/pull/173)).
+- openstack: Add OpenStack logging endpoint support ([#172](https://github.com/fastly/go-fastly/pull/172)).
+- newrelic: Add New Relic logging endpoint support ([#171](https://github.com/fastly/go-fastly/pull/171)).
+- logshuttle: Add Log Shuttle logging endpoint support ([#170](https://github.com/fastly/go-fastly/pull/170)).
+- loggly: Add Loggly logging endpoint support ([#169](https://github.com/fastly/go-fastly/pull/169)).
+- kafka: Add Kafka logging endpoint support ([#168](https://github.com/fastly/go-fastly/pull/168)).
+- honeycomb: Add Honeycomb logging endpoint support ([#167](https://github.com/fastly/go-fastly/pull/167)).
+- heroku: Add Heroku Logplex logging endpoint support ([#166](https://github.com/fastly/go-fastly/pull/166)).
+- ftp: Update FTP logging endpoint support to include `PublicKey` ([#165](https://github.com/fastly/go-fastly/pull/165)).
+- elasticsearch: Add Elasticsearch logging endpoint support ([#164](https://github.com/fastly/go-fastly/pull/164)).
+- digitalocean: Add DigitalOcean Spaces logging endpoint support ([#163](https://github.com/fastly/go-fastly/pull/163)).
+- rackspace: Add Rackspace Cloud Files logging endpoint support ([#162](https://github.com/fastly/go-fastly/pull/162)).
+- test: Improve testing experience ([#161](https://github.com/fastly/go-fastly/pull/161)).
+- doc: Fix typos in `GetRealtimeStats` documentation ([#160](https://github.com/fastly/go-fastly/pull/160)).
 
 ## [1.10.0] - 2020-04-24
 ### Added
-- tls: Add support for Platform TLS API endpoints ([#154](https://github.com/fastly/go-fastly/pull/154))
+- tls: Add support for Platform TLS API endpoints ([#154](https://github.com/fastly/go-fastly/pull/154)).
 
 ## [1.9.0] - 2020-04-23
 ### Changed
-- splunk: Add missing TLS fields to the Splunk logging endpoint ([#156](https://github.com/fastly/go-fastly/pull/156))
-- https: Add support for HTTPS logging endpoints ([#155](https://github.com/fastly/go-fastly/pull/155))
+- splunk: Add missing TLS fields to the Splunk logging endpoint ([#156](https://github.com/fastly/go-fastly/pull/156)).
+- https: Add support for HTTPS logging endpoints ([#155](https://github.com/fastly/go-fastly/pull/155)).
 
 ## [1.8.0] - 2020-04-21
 ### Changed
-- client: Add NewRealtimeStatsClientForEndpoint API ([#152](https://github.com/fastly/go-fastly/pull/152))
+- client: Add NewRealtimeStatsClientForEndpoint API ([#152](https://github.com/fastly/go-fastly/pull/152)).
 
 ## [1.7.2] - 2020-03-30
 ### Changed
-- client: Allow purge requests to run in parallel ([#147](https://github.com/fastly/go-fastly/pull/147))
+- client: Allow purge requests to run in parallel ([#147](https://github.com/fastly/go-fastly/pull/147)).
 
 ## [1.7.1] - 2020-03-24
 ### Changed
@@ -193,7 +197,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Initial tagged release
 
-[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.13.0...HEAD
+[Unreleased]: https://github.com/fastly/go-fastly/compare/v1.14.0...HEAD
+[1.14.0]: https://github.com/fastly/go-fastly/compare/v1.13.0...v1.14.0
 [1.13.0]: https://github.com/fastly/go-fastly/compare/v1.12.0...v1.13.0
 [1.12.0]: https://github.com/fastly/go-fastly/compare/v1.11.0...v1.12.0
 [1.11.0]: https://github.com/fastly/go-fastly/compare/v1.10.0...v1.11.0
