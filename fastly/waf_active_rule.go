@@ -89,7 +89,7 @@ func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleR
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
 	resp, err := c.Get(path, &RequestOptions{
 		Params: i.formatFilters(),
 	})
@@ -203,7 +203,7 @@ func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiv
 		return nil, ErrMissingWAFActiveRuleList
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
 	resp, err := c.PostJSONAPIBulk(path, i.Rules, nil)
 	if err != nil {
 		return nil, err
@@ -289,7 +289,7 @@ func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
 		return ErrMissingWAFActiveRuleList
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
 	_, err := c.DeleteJSONAPIBulk(path, i.Rules, nil)
 	return err
 }
@@ -313,7 +313,7 @@ func (c *Client) DeleteAllWAFActiveRules(i *DeleteAllWAFActiveRulesInput) error 
 		return ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
 	_, err := c.DeleteJSONAPI(path, nil, nil)
 	return err
 }
