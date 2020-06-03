@@ -157,10 +157,11 @@ func TestClient_GCSs(t *testing.T) {
 	var ugcs *GCS
 	record(t, "gcses/update", func(c *Client) {
 		ugcs, err = c.UpdateGCS(&UpdateGCSInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-gcs",
-			NewName: "new-test-gcs",
+			Service:     testServiceID,
+			Version:     tv.Number,
+			Name:        "test-gcs",
+			NewName:     "new-test-gcs",
+			MessageType: "classic",
 		})
 	})
 	if err != nil {
@@ -168,6 +169,9 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if ugcs.Name != "new-test-gcs" {
 		t.Errorf("bad name: %q", ugcs.Name)
+	}
+	if ugcs.MessageType != "classic" {
+		t.Errorf("bad message_type: %q", ugcs.MessageType)
 	}
 
 	// Delete
