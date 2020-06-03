@@ -27,6 +27,7 @@ type SFTP struct {
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	MessageType       string     `mapstructure:"message_type"`
 	Placement         string     `mapstructure:"placement"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
@@ -98,6 +99,7 @@ type CreateSFTPInput struct {
 	Format            *string `form:"format,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
 	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 }
 
@@ -187,6 +189,7 @@ type UpdateSFTPInput struct {
 	Format            *string `form:"format,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
 	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 }
 

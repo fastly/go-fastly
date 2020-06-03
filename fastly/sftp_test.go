@@ -30,6 +30,7 @@ func TestClient_SFTPs(t *testing.T) {
 			GzipLevel:       Uint(9),
 			FormatVersion:   Uint(2),
 			Format:          String("format"),
+			MessageType:     String("blank"),
 			TimestampFormat: String("%Y"),
 			Placement:       String("waf_debug"),
 		})
@@ -96,6 +97,9 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 	if sftp.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", sftp.TimestampFormat)
+	}
+	if sftp.MessageType != "blank" {
+		t.Errorf("bad message_type: %q", sftp.MessageType)
 	}
 	if sftp.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", sftp.Placement)
@@ -170,6 +174,9 @@ func TestClient_SFTPs(t *testing.T) {
 	if sftp.TimestampFormat != nsftp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", sftp.TimestampFormat)
 	}
+	if sftp.MessageType != "blank" {
+		t.Errorf("bad message_type: %q", sftp.MessageType)
+	}
 	if sftp.Placement != nsftp.Placement {
 		t.Errorf("bad placement: %q", sftp.Placement)
 	}
@@ -178,11 +185,12 @@ func TestClient_SFTPs(t *testing.T) {
 	var usftp *SFTP
 	record(t, "sftps/update", func(c *Client) {
 		usftp, err = c.UpdateSFTP(&UpdateSFTPInput{
-			Service:   testServiceID,
-			Version:   tv.Number,
-			Name:      "test-sftp",
-			NewName:   String("new-test-sftp"),
-			GzipLevel: Uint(0),
+			Service:     testServiceID,
+			Version:     tv.Number,
+			Name:        "test-sftp",
+			NewName:     String("new-test-sftp"),
+			GzipLevel:   Uint(0),
+			MessageType: String("classic"),
 		})
 	})
 	if err != nil {
@@ -190,6 +198,9 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 	if usftp.Name != "new-test-sftp" {
 		t.Errorf("bad name: %q", usftp.Name)
+	}
+	if usftp.MessageType != "classic" {
+		t.Errorf("bad message_type: %q", usftp.MessageType)
 	}
 	if usftp.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", usftp.GzipLevel)
