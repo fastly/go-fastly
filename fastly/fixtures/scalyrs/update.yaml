@@ -2,28 +2,29 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-scalyr&Service=7i6HN3TK9wS159v2gPAZ8A&Version=132&name=new-test-scalyr&token=new-token
+    body: Name=test-scalyr&Service=7i6HN3TK9wS159v2gPAZ8A&Version=10&name=new-test-scalyr&region=EU&token=new-token
     form:
       Name:
       - test-scalyr
       Service:
       - 7i6HN3TK9wS159v2gPAZ8A
       Version:
-      - "132"
+      - "10"
       name:
       - new-test-scalyr
+      region:
+      - EU
       token:
       - new-token
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/132/logging/scalyr/test-scalyr
+      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/10/logging/scalyr/test-scalyr
     method: PUT
   response:
-    body: '{"response_condition":"","token":"new-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2020-05-08T11:59:59Z","version":"132","name":"new-test-scalyr","placement":"waf_debug","updated_at":"2020-05-08T11:59:59Z","deleted_at":null,"format_version":"2","format":"%h
-      %l %u %t \"%r\" %\u003es %b"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","token":"new-token","response_condition":"","created_at":"2020-06-03T14:26:08Z","version":"10","name":"new-test-scalyr","format_version":"2","deleted_at":null,"updated_at":"2020-06-03T14:26:08Z","placement":"waf_debug","service_id":"7i6HN3TK9wS159v2gPAZ8A","region":"EU"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +34,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 12:00:01 GMT
+      - Wed, 03 Jun 2020 14:26:09 GMT
       Fastly-Ratelimit-Remaining:
-      - "999"
+      - "992"
       Fastly-Ratelimit-Reset:
-      - "1588942800"
+      - "1591196400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -52,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17440-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-dca17749-DCA
       X-Timer:
-      - S1588939201.504254,VS0,VE687
+      - S1591194369.626285,VS0,VE410
     status: 200 OK
     code: 200
     duration: ""

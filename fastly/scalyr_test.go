@@ -23,6 +23,7 @@ func TestClient_Scalyrs(t *testing.T) {
 			Format:        String("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion: Uint(2),
 			Placement:     String("waf_debug"),
+			Region:        String("US"),
 			Token:         String("super-secure-token"),
 		})
 	})
@@ -58,6 +59,9 @@ func TestClient_Scalyrs(t *testing.T) {
 	}
 	if s.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", s.Placement)
+	}
+	if s.Region != "US" {
+		t.Errorf("bad region: %q", s.Region)
 	}
 	if s.Token != "super-secure-token" {
 		t.Errorf("bad token: %q", s.Token)
@@ -102,6 +106,9 @@ func TestClient_Scalyrs(t *testing.T) {
 	if s.Placement != ns.Placement {
 		t.Errorf("bad placement: %q", s.Placement)
 	}
+	if s.Region != "US" {
+		t.Errorf("bad region: %q", s.Region)
+	}
 	if s.Token != ns.Token {
 		t.Errorf("bad token: %q", s.Token)
 	}
@@ -114,6 +121,7 @@ func TestClient_Scalyrs(t *testing.T) {
 			Version: tv.Number,
 			Name:    "test-scalyr",
 			NewName: String("new-test-scalyr"),
+			Region:  String("EU"),
 			Token:   String("new-token"),
 		})
 	})
@@ -122,6 +130,9 @@ func TestClient_Scalyrs(t *testing.T) {
 	}
 	if us.Name != "new-test-scalyr" {
 		t.Errorf("bad name: %q", us.Name)
+	}
+	if us.Region != "EU" {
+		t.Errorf("bad region: %q", us.Region)
 	}
 	if us.Token != "new-token" {
 		t.Errorf("bad token: %q", us.Token)
