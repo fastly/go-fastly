@@ -91,7 +91,6 @@ type CreateKafkaInput struct {
 	FormatVersion     *uint        `form:"format_version,omitempty"`
 	ResponseCondition *string      `form:"response_condition,omitempty"`
 	Placement         *string      `form:"placement,omitempty"`
-	Token             *string      `form:"token,omitempty"`
 	TLSCACert         *string      `form:"tls_ca_cert,omitempty"`
 	TLSHostname       *string      `form:"tls_hostname,omitempty"`
 	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
@@ -179,7 +178,6 @@ type UpdateKafkaInput struct {
 	FormatVersion     *uint        `form:"format_version,omitempty"`
 	ResponseCondition *string      `form:"response_condition,omitempty"`
 	Placement         *string      `form:"placement,omitempty"`
-	Token             *string      `form:"token,omitempty"`
 	TLSCACert         *string      `form:"tls_ca_cert,omitempty"`
 	TLSHostname       *string      `form:"tls_hostname,omitempty"`
 	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
