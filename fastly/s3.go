@@ -36,6 +36,7 @@ type S3 struct {
 	MessageType                  string                 `mapstructure:"message_type"`
 	TimestampFormat              string                 `mapstructure:"timestamp_format"`
 	Placement                    string                 `mapstructure:"placement"`
+	PublicKey                    string                 `mapstructure:"public_key"`
 	Redundancy                   S3Redundancy           `mapstructure:"redundancy"`
 	ServerSideEncryptionKMSKeyID string                 `mapstructure:"server_side_encryption_kms_key_id"`
 	ServerSideEncryption         S3ServerSideEncryption `mapstructure:"server_side_encryption"`
@@ -109,6 +110,7 @@ type CreateS3Input struct {
 	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
 	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
 	Placement                    string                 `form:"placement,omitempty"`
+	PublicKey                    string                 `form:"public_key,omitempty"`
 	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
 }
@@ -203,6 +205,7 @@ type UpdateS3Input struct {
 	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
 	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
 	Placement                    string                 `form:"placement,omitempty"`
+	PublicKey                    string                 `form:"public_key,omitempty"`
 	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
 }

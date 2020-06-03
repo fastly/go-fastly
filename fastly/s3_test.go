@@ -27,10 +27,12 @@ func TestClient_S3s(t *testing.T) {
 			GzipLevel:                    9,
 			Format:                       "format",
 			FormatVersion:                2,
+			ResponseCondition:            "",
 			TimestampFormat:              "%Y",
 			MessageType:                  "classic",
 			Redundancy:                   S3RedundancyReduced,
 			Placement:                    "waf_debug",
+			PublicKey:                    pgpPublicKey(),
 			ServerSideEncryptionKMSKeyID: "1234",
 			ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		})
@@ -97,6 +99,12 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", s3.Placement)
+	}
+	if s3.ResponseCondition != "" {
+		t.Errorf("bad response_condition: %q", s3.ResponseCondition)
+	}
+	if s3.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", s3.PublicKey)
 	}
 	t.Logf("%+v", s3)
 	if s3.ServerSideEncryption != S3ServerSideEncryptionKMS {
@@ -172,6 +180,12 @@ func TestClient_S3s(t *testing.T) {
 	if s3.Placement != ns3.Placement {
 		t.Errorf("bad placement: %q", s3.Placement)
 	}
+	if s3.ResponseCondition != "" {
+		t.Errorf("bad response_condition: %q", s3.ResponseCondition)
+	}
+	if s3.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", s3.PublicKey)
+	}
 	if s3.ServerSideEncryption != ns3.ServerSideEncryption {
 		t.Errorf("bad server_side_encryption: %q", s3.ServerSideEncryption)
 	}
@@ -183,10 +197,11 @@ func TestClient_S3s(t *testing.T) {
 	var us3 *S3
 	record(t, "s3s/update", func(c *Client) {
 		us3, err = c.UpdateS3(&UpdateS3Input{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-s3",
-			NewName: "new-test-s3",
+			Service:   testServiceID,
+			Version:   tv.Number,
+			Name:      "test-s3",
+			NewName:   "new-test-s3",
+			PublicKey: pgpPublicKeyUpdate(),
 		})
 	})
 	if err != nil {
@@ -194,6 +209,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if us3.Name != "new-test-s3" {
 		t.Errorf("bad name: %q", us3.Name)
+	}
+	if us3.PublicKey != pgpPublicKeyUpdate() {
+		t.Errorf("bad public_key: %q", us3.PublicKey)
 	}
 
 	// Delete
