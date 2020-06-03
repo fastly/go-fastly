@@ -175,6 +175,7 @@ type UpdateGCSInput struct {
 	FormatVersion     uint   `form:"format_version,omitempty"`
 	GzipLevel         uint8  `form:"gzip_level,omitempty"`
 	Format            string `form:"format,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
 	Placement         string `form:"placement,omitempty"`
