@@ -171,6 +171,7 @@ type UpdateCloudfilesInput struct {
 	Name string
 
 	NewName           *string `form:"name,omitempty"`
+	User              *string `form:"user,omitempty"`
 	AccessKey         *string `form:"access_key,omitempty"`
 	BucketName        *string `form:"bucket_name,omitempty"`
 	Path              *string `form:"path,omitempty"`

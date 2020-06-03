@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/101/logging/cloudfiles/test-cloudfiles
+      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/logging/cloudfiles/test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-cloudfiles, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 101 }''"}'
+      version =\u003e 14 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 00:39:47 GMT
+      - Wed, 03 Jun 2020 15:00:22 GMT
       Fastly-Ratelimit-Remaining:
       - "995"
       Fastly-Ratelimit-Reset:
-      - "1588899600"
+      - "1591200000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17438-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-dca17728-DCA
       X-Timer:
-      - S1588898387.331904,VS0,VE191
+      - S1591196422.107294,VS0,VE96
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,13 +52,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/101/logging/cloudfiles/new-test-cloudfiles
+      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/logging/cloudfiles/new-test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-cloudfiles, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 101 }''"}'
+      version =\u003e 14 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -68,11 +68,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 00:39:47 GMT
+      - Wed, 03 Jun 2020 15:00:22 GMT
       Fastly-Ratelimit-Remaining:
       - "994"
       Fastly-Ratelimit-Reset:
-      - "1588899600"
+      - "1591200000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -87,9 +87,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17438-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-dca17728-DCA
       X-Timer:
-      - S1588898388.539481,VS0,VE181
+      - S1591196422.230100,VS0,VE111
     status: 404 Not Found
     code: 404
     duration: ""

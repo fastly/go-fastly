@@ -175,6 +175,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 			Version:       tv.Number,
 			Name:          "test-cloudfiles",
 			NewName:       String("new-test-cloudfiles"),
+			User:          String("new-user"),
 			Period:        Uint(0),
 			GzipLevel:     Uint(0),
 			FormatVersion: Uint(2),
@@ -185,6 +186,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 	if ucloudfiles.Name != "new-test-cloudfiles" {
 		t.Errorf("bad name: %q", ucloudfiles.Name)
+	}
+	if ucloudfiles.User != "new-user" {
+		t.Errorf("bad user: %q", ucloudfiles.User)
 	}
 	if ucloudfiles.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", ucloudfiles.GzipLevel)
