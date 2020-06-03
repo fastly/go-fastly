@@ -16,6 +16,7 @@ type Scalyr struct {
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
 	Token             string     `mapstructure:"token"`
+	Region            string     `mapstructure:"region"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	Placement         string     `mapstructure:"placement"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
@@ -77,6 +78,7 @@ type CreateScalyrInput struct {
 	Format            *string `form:"format,omitempty"`
 	FormatVersion     *uint   `form:"format_version,omitempty"`
 	Token             *string `form:"token,omitempty"`
+	Region            *string `form:"region,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 }
@@ -156,6 +158,7 @@ type UpdateScalyrInput struct {
 	Format            *string `form:"format,omitempty"`
 	FormatVersion     *uint   `form:"format_version,omitempty"`
 	Token             *string `form:"token,omitempty"`
+	Region            *string `form:"region,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 }
