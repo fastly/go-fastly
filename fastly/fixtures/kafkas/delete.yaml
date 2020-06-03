@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/120/logging/kafka/new-test-kafka
+      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/13/logging/kafka/new-test-kafka
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 11:29:46 GMT
+      - Wed, 03 Jun 2020 14:41:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "932"
+      - "981"
       Fastly-Ratelimit-Reset:
-      - "1588939200"
+      - "1591196400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17429-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-dca17728-DCA
       X-Timer:
-      - S1588937386.899148,VS0,VE346
+      - S1591195296.694508,VS0,VE167
     status: 200 OK
     code: 200
     duration: ""
