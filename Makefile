@@ -113,3 +113,11 @@ fix-fixtures:
 	@echo "==> Updating fixtures"
 	@$(CURRENT_DIR)/scripts/fixFixtures.sh ${FASTLY_TEST_SERVICE_ID}
 .PHONY: fix-fixtures
+
+changelog:
+	@$(CURRENT_DIR)/scripts/changelog.sh
+.PHONY: changelog
+
+release-changelog:
+	@$(CURRENT_DIR)/scripts/release-changelog.sh
+.PHONY: release-changelog
