@@ -1,5 +1,18 @@
 # Changelog
 
+## [v1.15.0](https://github.com/fastly/go-fastly/releases/tag/v1.15.0) (2020-06-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v1.14.0...v1.15.0)
+
+**Enhancements:**
+
+- Add PublicKey field to S3 all CRUD actions [\#198](https://github.com/fastly/go-fastly/pull/198)
+- Add User field to Cloudfiles Updates [\#197](https://github.com/fastly/go-fastly/pull/197)
+- Remove extraneous Token field from all Kafka CRUD [\#196](https://github.com/fastly/go-fastly/pull/196)
+- Add Region field to all Scalyr CRUD actions [\#195](https://github.com/fastly/go-fastly/pull/195)
+- Add MessageType field to all SFTP CRUD actions [\#194](https://github.com/fastly/go-fastly/pull/194)
+- Add MessageType field to GCS Updates [\#193](https://github.com/fastly/go-fastly/pull/193)
+
 # Historical Manual Changelog
 
 All notable changes to this project will be documented in this file.
