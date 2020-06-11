@@ -31,7 +31,7 @@ type GetRealtimeStatsInput struct {
 // GetRealtimeStats returns realtime stats for a service based on the GetRealtimeStatsInput
 // parameter. The realtime stats work in a rolling fashion where first request will return
 // a timestamp which should be passed to the next call and so on.
-// More details at https://docs.fastly.com/api/analytics
+// More details at https://developer.fastly.com/reference/api/metrics-stats/realtime/
 func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
 	var resp interface{}
 	if err := c.GetRealtimeStatsJSON(i, &resp); err != nil {

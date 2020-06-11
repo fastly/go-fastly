@@ -84,7 +84,7 @@ type Stats struct {
 // GetStatsInput is an input to the GetStats function.
 // Stats can be filtered by a Service ID, an individual stats field,
 // time range (From and To), sampling rate (By) and/or Fastly region (Region)
-// Allowed values for the fields are described at https://docs.fastly.com/api/stats
+// Allowed values for the fields are described at https://developer.fastly.com/reference/api/metrics-stats/
 type GetStatsInput struct {
 	Service string
 	Field   string
@@ -170,7 +170,7 @@ type UsageResponse struct {
 }
 
 // GetUsageInput is used as an input to the GetUsage function
-// Value for the input are described at https://docs.fastly.com/api/stats
+// Value for the input are described at https://developer.fastly.com/reference/api/metrics-stats/
 type GetUsageInput struct {
 	From   string
 	To     string
