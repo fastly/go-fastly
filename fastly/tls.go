@@ -9,7 +9,7 @@ import (
 )
 
 // GetPrivateKeyInput is an input to the GetPrivateKey function.
-// Allowed values for the fields are described at https://docs.fastly.com/api/platform-tls.
+// Allowed values for the fields are described at https://developer.fastly.com/reference/api/tls/platform/.
 type GetPrivateKeyInput struct {
 	ID string
 }
