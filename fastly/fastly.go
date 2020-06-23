@@ -18,10 +18,10 @@ const (
 	BatchModifyMaximumOperations = 1000
 
 	// Represents the maximum number of items that can be placed within an Edge Dictionary.
-	MaximumDictionarySize = 10000
+	MaximumDictionarySize = 1000
 
 	// Represents the maximum number of entries that can be placed within an ACL.
-	MaximumACLSize = 10000
+	MaximumACLSize = 1000
 )
 
 type statusResp struct {
