@@ -7,32 +7,31 @@ import (
 )
 
 type WASMPackageMetadata struct {
-	Name	  		string
-	Description	  	string
-	Authors	  		[]string
-	Language  		string
-	Size	  		int
-	HashSum  		string
+	Name        string
+	Description string
+	Authors     []string
+	Language    string
+	Size        int
+	HashSum     string
 }
 
 type WASMPackage struct {
-	ID 				string
-	ServiceID 		string 		`mapstructure:"service_id"`
-	Version   		int
-	CreatedAt      	*time.Time 	`mapstructure:"created_at"`
-	UpdatedAt      	*time.Time 	`mapstructure:"updated_at"`
-	DeletedAt       *time.Time 	`mapstructure:"deleted_at"`
-	Metadata 		WASMPackageMetadata
+	ID        string
+	ServiceID string `mapstructure:"service_id"`
+	Version   int
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	Metadata  WASMPackageMetadata
 }
-
 
 // GetWASMPackageInput is used as input to the GetWASMPackage function.
 type GetWASMPackageInput struct {
 	// Service is the ID of the service.
 	// Version is the specific configuration version.
 	// Both fields are required.
-	Service string	`mapstructure:"service_id"`
-	Version int		`mapstructure:"version"`
+	Service string `mapstructure:"service_id"`
+	Version int    `mapstructure:"version"`
 }
 
 // GetWASMPackage retrieves WASM package information for the given service and version
@@ -50,14 +49,13 @@ func (c *Client) GetWASMPackage(i *GetWASMPackageInput) (*WASMPackage, error) {
 	return PopulateWASMPackage(resp.Body)
 }
 
-
 // UpdateWASMPackageInput is used as input to the UpdateWASMPackage function.
 type UpdateWASMPackageInput struct {
 	// Service is the ID of the service.
 	// Version is the specific configuration version.
 	// Both fields are required.
-	Service string	`mapstructure:"service_id"`
-	Version int		`mapstructure:"version"`
+	Service string `mapstructure:"service_id"`
+	Version int    `mapstructure:"version"`
 
 	// PackagePath is the local filesystem path to the WASM package to upload
 	PackagePath string
@@ -79,20 +77,17 @@ func (c *Client) UpdateWASMPackage(i *UpdateWASMPackageInput) (*WASMPackage, err
 	return PopulateWASMPackage(resp.Body)
 }
 
-
-
-func MakeWASMPackagePath(Service string, Version int) (string, error){
+func MakeWASMPackagePath(Service string, Version int) (string, error) {
 	if Service == "" {
 		return "", ErrMissingService
 	}
-	if Version == 0  {
+	if Version == 0 {
 		return "", ErrMissingVersion
 	}
 	return fmt.Sprintf("/service/%s/version/%d/package", Service, Version), nil
 }
 
-
-func PopulateWASMPackage(body io.ReadCloser) (*WASMPackage, error){
+func PopulateWASMPackage(body io.ReadCloser) (*WASMPackage, error) {
 	var p *WASMPackage
 	if err := decodeBodyMap(body, &p); err != nil {
 		return nil, err

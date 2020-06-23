@@ -171,7 +171,7 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 		Entries: []*BatchACLEntry{
 			{
 				Operation: DeleteBatchOperation,
-				ID: createdACLEntries[0].ID,
+				ID:        createdACLEntries[0].ID,
 			},
 		},
 	}
@@ -188,8 +188,8 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 	var actualACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			Service:    testService.ID,
-			ACL: testACL.ID,
+			Service: testService.ID,
+			ACL:     testACL.ID,
 		})
 	})
 	if err != nil {
@@ -273,11 +273,11 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 		Entries: []*BatchACLEntry{
 			{
 				Operation: UpdateBatchOperation,
-				ID: createdACLEntries[0].ID,
-				IP: "127.0.0.2",
-				Subnet: "16",
-				Negated: true,
-				Comment: "Updated ACL Entry 1",
+				ID:        createdACLEntries[0].ID,
+				IP:        "127.0.0.2",
+				Subnet:    "16",
+				Negated:   true,
+				Comment:   "Updated ACL Entry 1",
 			},
 		},
 	}

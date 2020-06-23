@@ -287,7 +287,6 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	return c.Request(verb, p, ro)
 }
 
-
 // RequestForm makes an HTTP request with the given interface being encoded as
 // form data.
 func (c *Client) RequestFormFile(verb, p string, i interface{}, f string, ro *RequestOptions) (*http.Response, error) {
@@ -327,7 +326,6 @@ func (c *Client) RequestFormFile(verb, p string, i interface{}, f string, ro *Re
 
 	return c.Request(verb, p, ro)
 }
-
 
 func (c *Client) RequestJSON(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	if ro == nil {

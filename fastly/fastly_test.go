@@ -22,6 +22,9 @@ var testServiceID = serviceIDForTest()
 // Default ID of the testing service.
 var defaultTestServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 
+var ServiceTypeVCL = "vcl"
+var ServiceTypeWASM = "wasm"
+
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.
 var testVersionLock sync.Mutex
@@ -96,7 +99,7 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 		service, err = client.CreateService(&CreateServiceInput{
 			Name:    fmt.Sprintf("test_service_%s", serviceNameSuffix),
 			Comment: "go-fastly client test",
-			Type: "vcl",
+			Type:    ServiceTypeVCL,
 		})
 	})
 	if err != nil {
@@ -106,7 +109,7 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 	return service
 }
 
-func createTestService_WASM(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
+func createTestServiceWASM(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
 
 	var err error
 	var service *Service
@@ -115,7 +118,7 @@ func createTestService_WASM(t *testing.T, serviceFixture string, serviceNameSuff
 		service, err = client.CreateService(&CreateServiceInput{
 			Name:    fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix),
 			Comment: "go-fastly wasm client test",
-			Type: 	 "wasm",
+			Type:    ServiceTypeWASM,
 		})
 	})
 	if err != nil {
@@ -124,7 +127,6 @@ func createTestService_WASM(t *testing.T, serviceFixture string, serviceNameSuff
 
 	return service
 }
-
 
 // testVersion is a new, blank version suitable for testing.
 func testVersion(t *testing.T, c *Client) *Version {
