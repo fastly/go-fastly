@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: comment=go-fastly+client+test&name=test_service_wasmPackage&type=WASM
+    body: comment=go-fastly+client+test&name=test_service_wasmPackage&type=wasm
     form:
       comment:
       - go-fastly client test
       name:
       - test_service_wasmPackage
       type:
-      - WASM
+      - wasm
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
@@ -18,7 +18,7 @@ interactions:
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"msg":"Type must be one of: vcl, wasm"}'
+    body: '{"msg":"Token 2R5yLyYNvsKtV6g9ElExX4 expired at 2020-06-23T10:24:15Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,13 +28,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jun 2020 10:19:11 GMT
+      - Tue, 23 Jun 2020 10:40:52 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "850"
       Fastly-Ratelimit-Reset:
       - "1592910000"
       Status:
-      - 400 Bad Request
+      - 401 Unauthorized
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4241-LON
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4259-LON
       X-Timer:
-      - S1592907551.036790,VS0,VE431
-    status: 400 Bad Request
-    code: 400
+      - S1592908852.456378,VS0,VE139
+    status: 401 Unauthorized
+    code: 401
     duration: ""

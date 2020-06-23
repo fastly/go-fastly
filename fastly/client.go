@@ -293,7 +293,7 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 func (c *Client) RequestFormFile(verb, p string, i interface{}, f string, ro *RequestOptions) (*http.Response, error) {
 	file, err := os.Open(filepath.Clean(f))
 	if err != nil {
-		return nil, fmt.Errorf("error reading package: %w", err)
+		return nil, fmt.Errorf("error reading package: %v", err)
 	}
 	defer file.Close() // #nosec G307
 
@@ -301,17 +301,17 @@ func (c *Client) RequestFormFile(verb, p string, i interface{}, f string, ro *Re
 	writer := multipart.NewWriter(&body)
 	part, err := writer.CreateFormFile("package", filepath.Base(f))
 	if err != nil {
-		return nil, fmt.Errorf("error creating multipart form: %w", err)
+		return nil, fmt.Errorf("error creating multipart form: %v", err)
 	}
 
 	_, err = io.Copy(part, file)
 	if err != nil {
-		return nil, fmt.Errorf("error copying package to multipart form: %w", err)
+		return nil, fmt.Errorf("error copying package to multipart form: %v", err)
 	}
 
 	err = writer.Close()
 	if err != nil {
-		return nil, fmt.Errorf("error closing multipart form: %w", err)
+		return nil, fmt.Errorf("error closing multipart form: %v", err)
 	}
 
 	if ro == nil {

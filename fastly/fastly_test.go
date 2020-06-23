@@ -113,9 +113,9 @@ func createTestService_WASM(t *testing.T, serviceFixture string, serviceNameSuff
 
 	record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
-			Name:    fmt.Sprintf("test_service_%s", serviceNameSuffix),
-			Comment: "go-fastly client test",
-			Type: "wasm",
+			Name:    fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix),
+			Comment: "go-fastly wasm client test",
+			Type: 	 "wasm",
 		})
 	})
 	if err != nil {
