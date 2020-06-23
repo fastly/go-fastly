@@ -96,6 +96,7 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 		service, err = client.CreateService(&CreateServiceInput{
 			Name:    fmt.Sprintf("test_service_%s", serviceNameSuffix),
 			Comment: "go-fastly client test",
+			Type: "vcl",
 		})
 	})
 	if err != nil {
@@ -104,6 +105,26 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 
 	return service
 }
+
+func createTestService_WASM(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
+
+	var err error
+	var service *Service
+
+	record(t, serviceFixture, func(client *Client) {
+		service, err = client.CreateService(&CreateServiceInput{
+			Name:    fmt.Sprintf("test_service_%s", serviceNameSuffix),
+			Comment: "go-fastly client test",
+			Type: "wasm",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return service
+}
+
 
 // testVersion is a new, blank version suitable for testing.
 func testVersion(t *testing.T, c *Client) *Version {

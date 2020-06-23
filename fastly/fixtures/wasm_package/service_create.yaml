@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: comment=go-fastly+client+test&name=test_service_wasmPackage&type=WASM
+    form:
+      comment:
+      - go-fastly client test
+      name:
+      - test_service_wasmPackage
+      type:
+      - WASM
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/1.15.0 (+github.com/fastly/go-fastly; go1.14.3)
+    url: https://api.fastly.com/service
+    method: POST
+  response:
+    body: '{"msg":"Type must be one of: vcl, wasm"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 23 Jun 2020 10:19:11 GMT
+      Fastly-Ratelimit-Remaining:
+      - "998"
+      Fastly-Ratelimit-Reset:
+      - "1592910000"
+      Status:
+      - 400 Bad Request
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4241-LON
+      X-Timer:
+      - S1592907551.036790,VS0,VE431
+    status: 400 Bad Request
+    code: 400
+    duration: ""
