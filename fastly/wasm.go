@@ -64,12 +64,12 @@ type UpdateWasmPackageInput struct {
 // UpdateWasmPackage updates a Wasm package for a specific version.
 func (c *Client) UpdateWasmPackage(i *UpdateWasmPackageInput) (*WasmPackage, error) {
 
-	path, err := MakeWasmPackagePath(i.Service, i.Version)
+	urlPath, err := MakeWasmPackagePath(i.Service, i.Version)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := c.PutFormFile(path, i, i.PackagePath, nil)
+	resp, err := c.PutFormFile(urlPath, i.PackagePath, "package", nil)
 	if err != nil {
 		return nil, err
 	}

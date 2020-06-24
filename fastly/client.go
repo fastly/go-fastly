@@ -222,8 +222,8 @@ func (c *Client) PutForm(p string, i interface{}, ro *RequestOptions) (*http.Res
 }
 
 // PutFormFile issues an HTTP PUT request with multipart/form-encoded with file attached.
-func (c *Client) PutFormFile(p string, i interface{}, f string, ro *RequestOptions) (*http.Response, error) {
-	return c.RequestFormFile("PUT", p, i, f, ro)
+func (c *Client) PutFormFile(urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestFormFile("PUT", urlPath, filePath, fieldName, ro)
 }
 
 // PutJSON issues an HTTP PUT request with the given interface json-encoded.
@@ -289,23 +289,23 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 
 // RequestForm makes an HTTP request with the given interface being encoded as
 // form data.
-func (c *Client) RequestFormFile(verb, p string, i interface{}, f string, ro *RequestOptions) (*http.Response, error) {
-	file, err := os.Open(filepath.Clean(f))
+func (c *Client) RequestFormFile(verb, urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
+	file, err := os.Open(filepath.Clean(filePath))
 	if err != nil {
-		return nil, fmt.Errorf("error reading package: %v", err)
+		return nil, fmt.Errorf("error reading file: %v", err)
 	}
 	defer file.Close() // #nosec G307
 
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
-	part, err := writer.CreateFormFile("package", filepath.Base(f))
+	part, err := writer.CreateFormFile(fieldName, filepath.Base(filePath))
 	if err != nil {
 		return nil, fmt.Errorf("error creating multipart form: %v", err)
 	}
 
 	_, err = io.Copy(part, file)
 	if err != nil {
-		return nil, fmt.Errorf("error copying package to multipart form: %v", err)
+		return nil, fmt.Errorf("error copying file to multipart form: %v", err)
 	}
 
 	err = writer.Close()
@@ -324,7 +324,7 @@ func (c *Client) RequestFormFile(verb, p string, i interface{}, f string, ro *Re
 	ro.Body = &body
 	ro.BodyLength = int64(body.Len())
 
-	return c.Request(verb, p, ro)
+	return c.Request(verb, urlPath, ro)
 }
 
 func (c *Client) RequestJSON(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
