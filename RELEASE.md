@@ -11,6 +11,7 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
     * **Only add labels for relevant changes**
     * `git checkout -b vX.Y.Z` where `vX.Y.Z` is your target version tag
     * `CHANGELOG_GITHUB_TOKEN=xxxx SEMVER_TAG=vX.Y.Z make changelog`
+       * **Known Issue**: We've found that the diffs generated are non-deterministic. Just re-run `make changelog` until you get a diff with just the newest additions. For more details, visit [this link](https://github.com/github-changelog-generator/github-changelog-generator/issues/580#issuecomment-380952266).
     * `git add CHANGELOG.md && git commit -m "vX.Y.Z"`
 1. Bump the project version in fastly/client.go
 1. Send PR for the `CHANGELOG.md` and `client.go` changes.
