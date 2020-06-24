@@ -226,8 +226,8 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 }
 
 type BatchModifyACLEntriesInput struct {
-	Service string `json:"-,"`
-	ACL     string `json:"-,"`
+	Service string `json:"-"`
+	ACL     string `json:"-"`
 
 	Entries []*BatchACLEntry `json:"entries"`
 }
