@@ -221,7 +221,7 @@ func (c *Client) PutForm(p string, i interface{}, ro *RequestOptions) (*http.Res
 	return c.RequestForm("PUT", p, i, ro)
 }
 
-// PutFormFile issues an HTTP PUT request with multipart/form-encoded with file attached.
+// PutFormFile issues an HTTP PUT request (multipart/form-encoded) to put a file to an endpoint.
 func (c *Client) PutFormFile(urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	return c.RequestFormFile("PUT", urlPath, filePath, fieldName, ro)
 }
@@ -287,8 +287,7 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	return c.Request(verb, p, ro)
 }
 
-// RequestForm makes an HTTP request with the given interface being encoded as
-// form data.
+// RequestFormFile makes an HTTP request to upload a file to an endpoint.
 func (c *Client) RequestFormFile(verb, urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	file, err := os.Open(filepath.Clean(filePath))
 	if err != nil {

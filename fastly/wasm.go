@@ -6,6 +6,7 @@ import (
 	"time"
 )
 
+// WasmPackage is a container for data returned about a Wasm package.
 type WasmPackage struct {
 	ID        string
 	ServiceID string `mapstructure:"service_id"`
@@ -16,6 +17,9 @@ type WasmPackage struct {
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
+// WasmPackage is a container for data returned about a Wasm package metadata.
+// It is a separate struct to allow correct serialisation by mapstructure -
+// the raw data is returned as a json sub-block.
 type WasmPackageMetadata struct {
 	Name        string
 	Description string
@@ -34,7 +38,7 @@ type GetWasmPackageInput struct {
 	Version int    `mapstructure:"version"`
 }
 
-// GetWasmPackage retrieves Wasm package information for the given service and version
+// GetWasmPackage retrieves Wasm package information for the given service and version.
 func (c *Client) GetWasmPackage(i *GetWasmPackageInput) (*WasmPackage, error) {
 	path, err := MakeWasmPackagePath(i.Service, i.Version)
 	if err != nil {
@@ -57,7 +61,7 @@ type UpdateWasmPackageInput struct {
 	Service string `mapstructure:"service_id"`
 	Version int    `mapstructure:"version"`
 
-	// PackagePath is the local filesystem path to the Wasm package to upload
+	// PackagePath is the local filesystem path to the Wasm package to upload.
 	PackagePath string
 }
 
@@ -77,6 +81,7 @@ func (c *Client) UpdateWasmPackage(i *UpdateWasmPackageInput) (*WasmPackage, err
 	return PopulateWasmPackage(resp.Body)
 }
 
+// MakeWasmPackagePath ensures we create the correct REST path for referencing wasm packages in the API.
 func MakeWasmPackagePath(Service string, Version int) (string, error) {
 	if Service == "" {
 		return "", ErrMissingService
@@ -87,6 +92,7 @@ func MakeWasmPackagePath(Service string, Version int) (string, error) {
 	return fmt.Sprintf("/service/%s/version/%d/package", Service, Version), nil
 }
 
+// PopulateWasmPackage encapsulates the decoding of returned Wasm package data.
 func PopulateWasmPackage(body io.ReadCloser) (*WasmPackage, error) {
 	var p *WasmPackage
 	if err := decodeBodyMap(body, &p); err != nil {
