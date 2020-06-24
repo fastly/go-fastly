@@ -23,7 +23,7 @@ var testServiceID = serviceIDForTest()
 var defaultTestServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 
 var ServiceTypeVCL = "vcl"
-var ServiceTypeWASM = "wasm"
+var ServiceTypeWasm = "wasm"
 
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.
@@ -109,7 +109,7 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 	return service
 }
 
-func createTestServiceWASM(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
+func createTestServiceWasm(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
 
 	var err error
 	var service *Service
@@ -118,7 +118,7 @@ func createTestServiceWASM(t *testing.T, serviceFixture string, serviceNameSuffi
 		service, err = client.CreateService(&CreateServiceInput{
 			Name:    fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix),
 			Comment: "go-fastly wasm client test",
-			Type:    ServiceTypeWASM,
+			Type:    ServiceTypeWasm,
 		})
 	})
 	if err != nil {

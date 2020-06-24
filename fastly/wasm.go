@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-type WASMPackageMetadata struct {
+type WasmPackageMetadata struct {
 	Name        string
 	Description string
 	Authors     []string
@@ -15,18 +15,18 @@ type WASMPackageMetadata struct {
 	HashSum     string
 }
 
-type WASMPackage struct {
+type WasmPackage struct {
 	ID        string
 	ServiceID string `mapstructure:"service_id"`
 	Version   int
 	CreatedAt *time.Time `mapstructure:"created_at"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	Metadata  WASMPackageMetadata
+	Metadata  WasmPackageMetadata
 }
 
-// GetWASMPackageInput is used as input to the GetWASMPackage function.
-type GetWASMPackageInput struct {
+// GetWasmPackageInput is used as input to the GetWasmPackage function.
+type GetWasmPackageInput struct {
 	// Service is the ID of the service.
 	// Version is the specific configuration version.
 	// Both fields are required.
@@ -34,9 +34,9 @@ type GetWASMPackageInput struct {
 	Version int    `mapstructure:"version"`
 }
 
-// GetWASMPackage retrieves WASM package information for the given service and version
-func (c *Client) GetWASMPackage(i *GetWASMPackageInput) (*WASMPackage, error) {
-	path, err := MakeWASMPackagePath(i.Service, i.Version)
+// GetWasmPackage retrieves Wasm package information for the given service and version
+func (c *Client) GetWasmPackage(i *GetWasmPackageInput) (*WasmPackage, error) {
+	path, err := MakeWasmPackagePath(i.Service, i.Version)
 	if err != nil {
 		return nil, err
 	}
@@ -46,25 +46,25 @@ func (c *Client) GetWASMPackage(i *GetWASMPackageInput) (*WASMPackage, error) {
 		return nil, err
 	}
 
-	return PopulateWASMPackage(resp.Body)
+	return PopulateWasmPackage(resp.Body)
 }
 
-// UpdateWASMPackageInput is used as input to the UpdateWASMPackage function.
-type UpdateWASMPackageInput struct {
+// UpdateWasmPackageInput is used as input to the UpdateWasmPackage function.
+type UpdateWasmPackageInput struct {
 	// Service is the ID of the service.
 	// Version is the specific configuration version.
 	// Both fields are required.
 	Service string `mapstructure:"service_id"`
 	Version int    `mapstructure:"version"`
 
-	// PackagePath is the local filesystem path to the WASM package to upload
+	// PackagePath is the local filesystem path to the Wasm package to upload
 	PackagePath string
 }
 
-// UpdateWASMPackage updates a WASM package for a specific version.
-func (c *Client) UpdateWASMPackage(i *UpdateWASMPackageInput) (*WASMPackage, error) {
+// UpdateWasmPackage updates a Wasm package for a specific version.
+func (c *Client) UpdateWasmPackage(i *UpdateWasmPackageInput) (*WasmPackage, error) {
 
-	path, err := MakeWASMPackagePath(i.Service, i.Version)
+	path, err := MakeWasmPackagePath(i.Service, i.Version)
 	if err != nil {
 		return nil, err
 	}
@@ -74,10 +74,10 @@ func (c *Client) UpdateWASMPackage(i *UpdateWASMPackageInput) (*WASMPackage, err
 		return nil, err
 	}
 
-	return PopulateWASMPackage(resp.Body)
+	return PopulateWasmPackage(resp.Body)
 }
 
-func MakeWASMPackagePath(Service string, Version int) (string, error) {
+func MakeWasmPackagePath(Service string, Version int) (string, error) {
 	if Service == "" {
 		return "", ErrMissingService
 	}
@@ -87,8 +87,8 @@ func MakeWASMPackagePath(Service string, Version int) (string, error) {
 	return fmt.Sprintf("/service/%s/version/%d/package", Service, Version), nil
 }
 
-func PopulateWASMPackage(body io.ReadCloser) (*WASMPackage, error) {
-	var p *WASMPackage
+func PopulateWasmPackage(body io.ReadCloser) (*WasmPackage, error) {
+	var p *WasmPackage
 	if err := decodeBodyMap(body, &p); err != nil {
 		return nil, err
 	}

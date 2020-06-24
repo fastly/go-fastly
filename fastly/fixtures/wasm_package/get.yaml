@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.15.0 (+github.com/fastly/go-fastly; go1.14.3)
-    url: https://api.fastly.com/service/0L6SGD3RiYpIHHmdJun425/version/2/package
+    url: https://api.fastly.com/service/6dV8eJUF4ViYvaSGIoEIFE/version/2/package
     method: GET
   response:
-    body: '{"version":2,"service_id":"0L6SGD3RiYpIHHmdJun425","deleted_at":null,"id":"2OtNYNqqGJzrE2g2Nslqr2","metadata":{"name":"wasm-test","description":"Default
-      package template used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["guy.richardson+fastly@opencredo.com"],"language":"rust","size":2179443,"hashsum":"119a5ac6ec8a6dc29107b87de3bba5d98b6e89827310dd01f4e8cbf89234125bf4f7b81603ac7df42ce0205d047ac2caa53ec0cc52839112aed786cb7f27ac92"},"created_at":"2020-06-24T07:19:45Z","updated_at":"2020-06-24T07:19:46Z"}'
+    body: '{"metadata":{"name":"wasm-test","description":"Default package template
+      used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["guy.richardson+fastly@opencredo.com"],"language":"rust","size":2179443,"hashsum":"119a5ac6ec8a6dc29107b87de3bba5d98b6e89827310dd01f4e8cbf89234125bf4f7b81603ac7df42ce0205d047ac2caa53ec0cc52839112aed786cb7f27ac92"},"updated_at":"2020-06-24T08:11:45Z","created_at":"2020-06-24T08:11:44Z","version":2,"service_id":"6dV8eJUF4ViYvaSGIoEIFE","deleted_at":null,"id":"1VWqouO9TkE2B9fhKcPlBk"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 24 Jun 2020 07:19:46 GMT
+      - Wed, 24 Jun 2020 08:11:46 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4280-LON
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4281-LON
       X-Timer:
-      - S1592983186.388536,VS0,VE179
+      - S1592986306.930017,VS0,VE193
     status: 200 OK
     code: 200
     duration: ""
