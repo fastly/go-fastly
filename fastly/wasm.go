@@ -11,7 +11,7 @@ type WasmPackageMetadata struct {
 	Description string
 	Authors     []string
 	Language    string
-	Size        int
+	Size        int64
 	HashSum     string
 }
 
