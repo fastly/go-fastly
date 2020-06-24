@@ -28,11 +28,11 @@ func TestClient_WASM(t *testing.T) {
 
 	// Update
 
-	record(t, "wasm_package/update", func(c *Client) {
+	record(t, fixtureBase+"update", func(c *Client) {
 		wp, err = c.UpdateWASMPackage(&UpdateWASMPackageInput{
 			Service:     testService.ID,
 			Version:     testVersion.Number,
-			PackagePath: "fixtures/wasm_package/test.tar.gz",
+			PackagePath: "test_assets/wasm/test.tar.gz",
 		})
 	})
 	if err != nil {
@@ -46,7 +46,7 @@ func TestClient_WASM(t *testing.T) {
 	}
 
 	// Get
-	record(t, "wasm_package/get", func(c *Client) {
+	record(t, fixtureBase+"get", func(c *Client) {
 		wp, err = c.GetWASMPackage(&GetWASMPackageInput{
 			Service: testService.ID,
 			Version: testVersion.Number,

@@ -3,8 +3,8 @@ version: 1
 interactions:
 - request:
     body: !!binary |
-      LS1lYTlkNDY3YzU1YzM3ZWY0MmEzNDI1MGRiOTI4MDJjZTBkZTRhMjUzMGY3Nzc3YjExMT
-      lkZjZkZDdhNmINCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0icGFj
+      LS03MDQ0YThkYmMwNGY4YTBiZWFmMDM5OWEyMDFhODU2OWRjMGZkNDJmMmMyOThkOTk4Nj
+      EwNTQxZjhjODENCkNvbnRlbnQtRGlzcG9zaXRpb246IGZvcm0tZGF0YTsgbmFtZT0icGFj
       a2FnZSI7IGZpbGVuYW1lPSJ0ZXN0LnRhci5neiINCkNvbnRlbnQtVHlwZTogYXBwbGljYX
       Rpb24vb2N0ZXQtc3RyZWFtDQoNCh+LCAAACW6IAP/s/Q2AHUd1L4jXV3/M7Xvv9EhjGJD4
       p7qf+OdqsdAY2zNayySqCbbROl6TLLvL25C1FSSwW8L2jMbCvKenGdkaI4HANjZYgAkGbK
@@ -41519,21 +41519,21 @@ interactions:
       jHtn28xa/DsRFsbaMT/th4COlYOHVstAHHLisL6dilV15xLPcHx5A3XBA8vnBpf2t7PILv
       cGkdjm0P+t8LcTRsn39eXSJ8eOx+x77r/PXxqfagi0J4GvZ796xX5Xeg/z8OIPXbsb91/s
       3nTVgPEoU85PzzhjA4UZxTCb+TV3VvvOKB4/WLb9oejh++Pbzl1KmrzLXnnzff9S/yny/y
-      ny/yny/yny/yn9nP/w8AAP//AQAA//8XqtBGANR6AA0KLS1lYTlkNDY3YzU1YzM3ZWY0Mm
-      EzNDI1MGRiOTI4MDJjZTBkZTRhMjUzMGY3Nzc3YjExMTlkZjZkZDdhNmItLQ0K
+      ny/yny/yny/yn9nP/w8AAP//AQAA//8XqtBGANR6AA0KLS03MDQ0YThkYmMwNGY4YTBiZW
+      FmMDM5OWEyMDFhODU2OWRjMGZkNDJmMmMyOThkOTk4NjEwNTQxZjhjODEtLQ0K
     form: {}
     headers:
       Accept:
       - application/json
       Content-Type:
-      - multipart/form-data; boundary=ea9d467c55c37ef42a34250db92802ce0de4a2530f7777b1119df6dd7a6b
+      - multipart/form-data; boundary=7044a8dbc04f8a0beaf0399a201a8569dc0fd42f2c298d998610541f8c81
       User-Agent:
       - FastlyGo/1.15.0 (+github.com/fastly/go-fastly; go1.14.3)
-    url: https://api.fastly.com/service/2Q0B1WlDbii9DItrMCvIGL/version/2/package
+    url: https://api.fastly.com/service/0L6SGD3RiYpIHHmdJun425/version/2/package
     method: PUT
   response:
-    body: '{"service_id":"2Q0B1WlDbii9DItrMCvIGL","version":2,"deleted_at":null,"id":"0eh4MAGwaPjZerrjj44ZI6","updated_at":"2020-06-23T11:11:37Z","metadata":{"name":"wasm-test","description":"Default
-      package template used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["guy.richardson+fastly@opencredo.com"],"language":"rust","size":2179443,"hashsum":"119a5ac6ec8a6dc29107b87de3bba5d98b6e89827310dd01f4e8cbf89234125bf4f7b81603ac7df42ce0205d047ac2caa53ec0cc52839112aed786cb7f27ac92"},"created_at":"2020-06-23T11:11:34Z"}'
+    body: '{"service_id":"0L6SGD3RiYpIHHmdJun425","version":2,"created_at":"2020-06-24T07:19:45Z","id":"2OtNYNqqGJzrE2g2Nslqr2","metadata":{"name":"wasm-test","description":"Default
+      package template used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["guy.richardson+fastly@opencredo.com"],"language":"rust","size":2179443,"hashsum":"119a5ac6ec8a6dc29107b87de3bba5d98b6e89827310dd01f4e8cbf89234125bf4f7b81603ac7df42ce0205d047ac2caa53ec0cc52839112aed786cb7f27ac92"},"updated_at":"2020-06-24T07:19:46Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -41543,11 +41543,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jun 2020 11:11:37 GMT
+      - Wed, 24 Jun 2020 07:19:46 GMT
       Fastly-Ratelimit-Remaining:
-      - "942"
+      - "949"
       Fastly-Ratelimit-Reset:
-      - "1592913600"
+      - "1592985600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41562,9 +41562,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4265-LON
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4280-LON
       X-Timer:
-      - S1592910692.073207,VS0,VE5719
+      - S1592983182.496548,VS0,VE3650
     status: 200 OK
     code: 200
     duration: ""
