@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -18,8 +19,8 @@ func TestClient_Wasm(t *testing.T) {
 			Name:        "wasm-test",
 			Description: "Default package template used by the Fastly CLI for Rust-based Compute@Edge projects.",
 			Language:    "rust",
-			Size:        2179443,
-			HashSum:     "119a5ac6ec8a6dc29107b87de3bba5d98b6e89827310dd01f4e8cbf89234125bf4f7b81603ac7df42ce0205d047ac2caa53ec0cc52839112aed786cb7f27ac92",
+			Size:        2015936,
+			HashSum:     "f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616",
 		},
 	}
 
@@ -55,6 +56,8 @@ func TestClient_Wasm(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	fmt.Print(wp)
 
 	if wp.ServiceID != testService.ID {
 		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
