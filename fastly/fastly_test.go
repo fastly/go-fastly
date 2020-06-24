@@ -51,27 +51,55 @@ func record(t *testing.T, fixture string, f func(*Client)) {
 	if vcrDisabled() {
 		f(client)
 	} else {
-		r, err := recorder.New("fixtures/" + fixture)
-		if err != nil {
-			t.Fatal(err)
-		}
-		defer func() {
-			if err := r.Stop(); err != nil {
-				t.Fatal(err)
-			}
-		}()
+		r := getRecorder(t, fixture)
+		defer stopRecorder(t, r)
+		client.HTTPClient.Transport = r
+		f(client)
+	}
+}
 
-		// Add a filter which removes Fastly-Key header from all recorded requests.
+func recordIgnoreBody(t *testing.T, fixture string, f func(*Client)) {
+	client := DefaultClient()
+
+	if vcrDisabled() {
+		f(client)
+	} else {
+		r := getRecorder(t, fixture)
+		defer stopRecorder(t, r)
+
 		r.AddFilter(func(i *cassette.Interaction) error {
-			delete(i.Request.Headers, "Fastly-Key")
+			i.Request.Body=""
 			return nil
 		})
 
 		client.HTTPClient.Transport = r
-
 		f(client)
 	}
 }
+
+
+func getRecorder(t *testing.T, fixture string) *recorder.Recorder{
+	r, err := recorder.New("fixtures/" + fixture)
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Add a filter which removes Fastly-Key header from all recorded requests.
+	r.AddFilter(func(i *cassette.Interaction) error {
+		delete(i.Request.Headers, "Fastly-Key")
+		return nil
+	})
+
+	return r
+}
+
+func stopRecorder(t *testing.T, r *recorder.Recorder) {
+	if err := r.Stop(); err != nil {
+		t.Fatal(err)
+	}
+}
+
+
 
 func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 	r, err := recorder.New("fixtures/" + fixture)

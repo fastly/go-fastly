@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -29,7 +28,7 @@ func TestClient_Wasm(t *testing.T) {
 
 	// Update
 
-	record(t, fixtureBase+"update", func(c *Client) {
+	recordIgnoreBody(t, fixtureBase+"update", func(c *Client) {
 		wp, err = c.UpdateWasmPackage(&UpdateWasmPackageInput{
 			Service:     testService.ID,
 			Version:     testVersion.Number,
@@ -57,8 +56,6 @@ func TestClient_Wasm(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	fmt.Print(wp)
-
 	if wp.ServiceID != testService.ID {
 		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
 	}
@@ -85,7 +82,7 @@ func TestClient_Wasm(t *testing.T) {
 
 	// Update with invalid package
 
-	record(t, fixtureBase+"update_invalid", func(c *Client) {
+	recordIgnoreBody(t, fixtureBase+"update_invalid", func(c *Client) {
 		wp, err = c.UpdateWasmPackage(&UpdateWasmPackageInput{
 			Service:     testService.ID,
 			Version:     testVersion.Number,
