@@ -6,6 +6,16 @@ import (
 	"time"
 )
 
+type WasmPackage struct {
+	ID        string
+	ServiceID string `mapstructure:"service_id"`
+	Version   int
+	Metadata  WasmPackageMetadata
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
+}
+
 type WasmPackageMetadata struct {
 	Name        string
 	Description string
@@ -13,16 +23,6 @@ type WasmPackageMetadata struct {
 	Language    string
 	Size        int64
 	HashSum     string
-}
-
-type WasmPackage struct {
-	ID        string
-	ServiceID string `mapstructure:"service_id"`
-	Version   int
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	Metadata  WasmPackageMetadata
 }
 
 // GetWasmPackageInput is used as input to the GetWasmPackage function.
