@@ -22,8 +22,14 @@ var testServiceID = serviceIDForTest()
 // Default ID of the testing service.
 var defaultTestServiceID = "7i6HN3TK9wS159v2gPAZ8A"
 
-var ServiceTypeVCL = "vcl"
-var ServiceTypeWasm = "wasm"
+const (
+	// ServiceTypeVCL is the type for VCL services.
+	ServiceTypeVCL = "vcl"
+	// ServiceTypeWasm is the type for Wasm services.
+	ServiceTypeWasm = "wasm"
+)
+
+
 
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.
