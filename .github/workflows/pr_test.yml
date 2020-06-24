@@ -31,12 +31,15 @@ jobs:
         key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-mod-
-    - name: Install staticcheck
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: go get -v -u honnef.co/go/tools/cmd/staticcheck
+    - name: Check Module
+      run: make check-mod
+      shell: bash
+    - name: Check Imports
+      run: make check-imports
       shell: bash
     - name: Check Fmt
       run: make check-fmt
+      shell: bash
     - name: Vet
       run: make vet
       shell: bash
