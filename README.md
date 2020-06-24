@@ -1,24 +1,24 @@
 Go Fastly
 =========
-[![Build Status](http://img.shields.io/travis/fastly/go-fastly.svg?style=flat-square)][travis]
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
-[travis]: http://travis-ci.org/fastly/go-fastly
-[godocs]: http://godoc.org/github.com/fastly/go-fastly
+[godocs]: https://pkg.go.dev/github.com/fastly/go-fastly?tab=overview
 
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
 
 Installation
 ------------
-This is a client library, so there is nothing to install. You must be running Go
-1.8 or higher.
+This is a client library, so there is nothing to install. But, it uses Go modules,
+so you must be running Go 1.11 or higher.
 
 Usage
 -----
-Download the library into your `$GOPATH`:
+Fetch the library:
 
-    $ go get github.com/fastly/go-fastly/fastly
+```
+$ go get github.com/fastly/go-fastly/fastly
+```
 
 Import the library into your tool:
 
@@ -125,6 +125,23 @@ fmt.Printf("%t\n", activeVersion.Locked)
 More information can be found in the
 [Fastly Godoc](https://godoc.org/github.com/fastly/go-fastly).
 
+Developing
+-------
+
+1. Clone the project to your preferred directory, using your preferred method
+2. Download the module and accompanying developer tooling
+
+  ```bash
+  $ go mod download
+  ```
+
+3. Make changes.
+4. Verify those changes.
+
+  ```bash
+  $ make all
+  ```
+
 Testing
 -------
 Go Fastly uses [go-vcr](https://github.com/dnaeon/go-vcr) to "record" and
@@ -165,7 +182,7 @@ Example (`make test`, `make fix-fixtures`):
 export FASTLY_TEST_SERVICE_ID="SERVICEID"
 export FASTLY_API_KEY="TESTAPIKEY"
 
-make test TESTARGS="-run=NewClient"
+make test TESTARGS="-run=Logentries"
 make fix-fixtures
 
 # Re-run test suite with newly recorded fixtures
