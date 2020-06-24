@@ -397,7 +397,7 @@ var rulesType = reflect.TypeOf(new(Rule))
 
 // GetRules returns the list of wafs for the configuration version.
 func (c *Client) GetRules() ([]*Rule, error) {
-	path := fmt.Sprintf("/wafs/rules")
+	var path = "/wafs/rules"
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

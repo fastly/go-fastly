@@ -175,8 +175,7 @@ func TestClient_UpdateService_validation(t *testing.T) {
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
-	var err error
-	err = testClient.DeleteService(&DeleteServiceInput{})
+	err := testClient.DeleteService(&DeleteServiceInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}

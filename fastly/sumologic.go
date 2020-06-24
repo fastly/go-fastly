@@ -229,7 +229,7 @@ func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

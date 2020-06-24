@@ -247,7 +247,7 @@ func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrStatusNotOk
 	}
 	return nil
 }

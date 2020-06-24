@@ -218,7 +218,7 @@ func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

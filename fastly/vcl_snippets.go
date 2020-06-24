@@ -253,7 +253,7 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

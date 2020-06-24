@@ -232,7 +232,7 @@ func (c *Client) DeleteSplunk(i *DeleteSplunkInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

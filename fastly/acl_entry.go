@@ -175,7 +175,7 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	}
 
 	if !r.Ok() {
-		return fmt.Errorf("Not OK")
+		return fmt.Errorf("not ok")
 	}
 
 	return nil

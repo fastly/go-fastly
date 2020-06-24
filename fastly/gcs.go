@@ -244,7 +244,7 @@ func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

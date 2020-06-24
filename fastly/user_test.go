@@ -163,8 +163,7 @@ func TestClient_UpdateUser_validation(t *testing.T) {
 }
 
 func TestClient_DeleteUser_validation(t *testing.T) {
-	var err error
-	err = testClient.DeleteUser(&DeleteUserInput{
+	err := testClient.DeleteUser(&DeleteUserInput{
 		ID: "",
 	})
 	if err != ErrMissingID {

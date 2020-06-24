@@ -253,7 +253,7 @@ func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

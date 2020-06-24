@@ -277,7 +277,7 @@ func (c *Client) DeleteS3(i *DeleteS3Input) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

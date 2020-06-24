@@ -278,7 +278,7 @@ func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

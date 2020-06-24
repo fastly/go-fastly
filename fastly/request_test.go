@@ -46,7 +46,7 @@ func TestClient_RawRequest(t *testing.T) {
 					t.Fatalf("Host and APIPath were joined incorrectly. Got: %s\n", r.URL.Path)
 				}
 				// Insure the encoded path isn't altered
-				if strings.Index(r.URL.EscapedPath(), p+url.PathEscape(k)) == -1 {
+				if !strings.Contains(r.URL.EscapedPath(), p+url.PathEscape(k)) {
 					t.Fatalf("RawRequest altered the encoded path. New encoded path: %s, expecting: %s\n", r.URL.EscapedPath(), p+url.PathEscape(k))
 				}
 			}

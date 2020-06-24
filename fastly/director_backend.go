@@ -156,7 +156,7 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }
