@@ -5,16 +5,12 @@ interactions:
     body: ""
     form: {}
     headers:
-      Accept:
-      - application/json
-      Content-Type:
-      - multipart/form-data; boundary=e1f5be3a903e7adf881976d9491cdb9daba005cbb0a33297965de2350cff
       User-Agent:
       - FastlyGo/1.15.0 (+github.com/fastly/go-fastly; go1.14.3)
-    url: https://api.fastly.com/service/5PsLIoA5bDygjm13yqYwjb/version/2/package
-    method: PUT
+    url: https://api.fastly.com/service/4pNcnRy0abFyAb253yEDpz
+    method: DELETE
   response:
-    body: '{"service_id":"5PsLIoA5bDygjm13yqYwjb","version":2,"id":"1cyjdvdr1Ns8wgOzFGJaN7","created_at":"2020-06-24T10:58:57Z","deleted_at":null,"metadata":null,"updated_at":"2020-06-24T10:58:57Z"}'
+    body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 24 Jun 2020 10:58:58 GMT
+      - Wed, 24 Jun 2020 13:01:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "927"
+      - "995"
       Fastly-Ratelimit-Reset:
-      - "1592996400"
+      - "1593007200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lon4230-LON
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4225-LON
       X-Timer:
-      - S1592996337.133831,VS0,VE1074
+      - S1593003672.483377,VS0,VE247
     status: 200 OK
     code: 200
     duration: ""

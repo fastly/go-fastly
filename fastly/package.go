@@ -6,21 +6,21 @@ import (
 	"time"
 )
 
-// WasmPackage is a container for data returned about a Wasm package.
-type WasmPackage struct {
+// Package is a container for data returned about a package.
+type Package struct {
 	ID        string
 	ServiceID string `mapstructure:"service_id"`
 	Version   int
-	Metadata  WasmPackageMetadata
+	Metadata  PackageMetadata
 	CreatedAt *time.Time `mapstructure:"created_at"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
-// WasmPackage is a container for data returned about a Wasm package metadata.
+// Package is a container for metadata returned about a package.
 // It is a separate struct to allow correct serialisation by mapstructure -
 // the raw data is returned as a json sub-block.
-type WasmPackageMetadata struct {
+type PackageMetadata struct {
 	Name        string
 	Description string
 	Authors     []string
@@ -29,8 +29,8 @@ type WasmPackageMetadata struct {
 	HashSum     string
 }
 
-// GetWasmPackageInput is used as input to the GetWasmPackage function.
-type GetWasmPackageInput struct {
+// GetPackageInput is used as input to the GetPackage function.
+type GetPackageInput struct {
 	// Service is the ID of the service.
 	// Version is the specific configuration version.
 	// Both fields are required.
@@ -38,9 +38,9 @@ type GetWasmPackageInput struct {
 	Version int    `mapstructure:"version"`
 }
 
-// GetWasmPackage retrieves Wasm package information for the given service and version.
-func (c *Client) GetWasmPackage(i *GetWasmPackageInput) (*WasmPackage, error) {
-	path, err := MakeWasmPackagePath(i.Service, i.Version)
+// GetPackage retrieves  package information for the given service and version.
+func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
+	path, err := MakePackagePath(i.Service, i.Version)
 	if err != nil {
 		return nil, err
 	}
@@ -50,25 +50,25 @@ func (c *Client) GetWasmPackage(i *GetWasmPackageInput) (*WasmPackage, error) {
 		return nil, err
 	}
 
-	return PopulateWasmPackage(resp.Body)
+	return PopulatePackage(resp.Body)
 }
 
-// UpdateWasmPackageInput is used as input to the UpdateWasmPackage function.
-type UpdateWasmPackageInput struct {
+// UpdatePackageInput is used as input to the UpdatePackage function.
+type UpdatePackageInput struct {
 	// Service is the ID of the service.
 	// Version is the specific configuration version.
 	// Both fields are required.
 	Service string `mapstructure:"service_id"`
 	Version int    `mapstructure:"version"`
 
-	// PackagePath is the local filesystem path to the Wasm package to upload.
+	// PackagePath is the local filesystem path to the package to upload.
 	PackagePath string
 }
 
-// UpdateWasmPackage updates a Wasm package for a specific version.
-func (c *Client) UpdateWasmPackage(i *UpdateWasmPackageInput) (*WasmPackage, error) {
+// UpdatePackage updates a package for a specific version.
+func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 
-	urlPath, err := MakeWasmPackagePath(i.Service, i.Version)
+	urlPath, err := MakePackagePath(i.Service, i.Version)
 	if err != nil {
 		return nil, err
 	}
@@ -78,11 +78,11 @@ func (c *Client) UpdateWasmPackage(i *UpdateWasmPackageInput) (*WasmPackage, err
 		return nil, err
 	}
 
-	return PopulateWasmPackage(resp.Body)
+	return PopulatePackage(resp.Body)
 }
 
-// MakeWasmPackagePath ensures we create the correct REST path for referencing wasm packages in the API.
-func MakeWasmPackagePath(Service string, Version int) (string, error) {
+// MakePackagePath ensures we create the correct REST path for referencing packages in the API.
+func MakePackagePath(Service string, Version int) (string, error) {
 	if Service == "" {
 		return "", ErrMissingService
 	}
@@ -92,9 +92,9 @@ func MakeWasmPackagePath(Service string, Version int) (string, error) {
 	return fmt.Sprintf("/service/%s/version/%d/package", Service, Version), nil
 }
 
-// PopulateWasmPackage encapsulates the decoding of returned Wasm package data.
-func PopulateWasmPackage(body io.ReadCloser) (*WasmPackage, error) {
-	var p *WasmPackage
+// PopulatePackage encapsulates the decoding of returned package data.
+func PopulatePackage(body io.ReadCloser) (*Package, error) {
+	var p *Package
 	if err := decodeBodyMap(body, &p); err != nil {
 		return nil, err
 	}
