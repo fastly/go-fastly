@@ -8,7 +8,7 @@ func TestClient_ACLs(t *testing.T) {
 	fixtureBase := "acls/"
 
 	testVersion := createTestVersion(t, fixtureBase+"version", testServiceID)
-	
+
 	// Create
 	var err error
 	var a *ACL
@@ -39,7 +39,7 @@ func TestClient_ACLs(t *testing.T) {
 			})
 		})
 	}()
-	
+
 	if a.Name != "test_acl" {
 		t.Errorf("bad name: %q", a.Name)
 	}

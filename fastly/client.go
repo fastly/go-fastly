@@ -5,9 +5,11 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"mime/multipart"
 	"net/http"
 	"net/url"
 	"os"
+	"path/filepath"
 	"runtime"
 	"strings"
 	"sync"
@@ -219,6 +221,11 @@ func (c *Client) PutForm(p string, i interface{}, ro *RequestOptions) (*http.Res
 	return c.RequestForm("PUT", p, i, ro)
 }
 
+// PutFormFile issues an HTTP PUT request (multipart/form-encoded) to put a file to an endpoint.
+func (c *Client) PutFormFile(urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestFormFile("PUT", urlPath, filePath, fieldName, ro)
+}
+
 // PutJSON issues an HTTP PUT request with the given interface json-encoded.
 func (c *Client) PutJSON(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	return c.RequestJSON("PUT", p, i, ro)
@@ -278,6 +285,45 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	ro.BodyLength = int64(len(body))
 
 	return c.Request(verb, p, ro)
+}
+
+// RequestFormFile makes an HTTP request to upload a file to an endpoint.
+func (c *Client) RequestFormFile(verb, urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
+	file, err := os.Open(filepath.Clean(filePath))
+	if err != nil {
+		return nil, fmt.Errorf("error reading file: %v", err)
+	}
+	defer file.Close() // #nosec G307
+
+	var body bytes.Buffer
+	writer := multipart.NewWriter(&body)
+	part, err := writer.CreateFormFile(fieldName, filepath.Base(filePath))
+	if err != nil {
+		return nil, fmt.Errorf("error creating multipart form: %v", err)
+	}
+
+	_, err = io.Copy(part, file)
+	if err != nil {
+		return nil, fmt.Errorf("error copying file to multipart form: %v", err)
+	}
+
+	err = writer.Close()
+	if err != nil {
+		return nil, fmt.Errorf("error closing multipart form: %v", err)
+	}
+
+	if ro == nil {
+		ro = new(RequestOptions)
+	}
+	if ro.Headers == nil {
+		ro.Headers = make(map[string]string)
+	}
+	ro.Headers["Content-Type"] = writer.FormDataContentType()
+	ro.Headers["Accept"] = "application/json"
+	ro.Body = &body
+	ro.BodyLength = int64(body.Len())
+
+	return c.Request(verb, urlPath, ro)
 }
 
 func (c *Client) RequestJSON(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
