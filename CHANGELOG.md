@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.16.0](https://github.com/fastly/go-fastly/releases/tag/v1.16.0) (2020-06-25)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v1.15.0...v1.16.0)
+
+**Enhancements:**
+
+- Add support for Compute@Edge Packages [\#203](https://github.com/fastly/go-fastly/pull/203)
+
 ## [v1.15.0](https://github.com/fastly/go-fastly/releases/tag/v1.15.0) (2020-06-04)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.14.0...v1.15.0)
