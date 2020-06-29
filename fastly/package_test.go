@@ -79,7 +79,6 @@ func TestClient_Package(t *testing.T) {
 		t.Errorf("bad package language: %q != %q", wp.Metadata.Language, testData.Metadata.Language)
 	}
 
-
 	// Update with invalid package
 
 	recordIgnoreBody(t, fixtureBase+"update_invalid", func(c *Client) {
@@ -92,14 +91,12 @@ func TestClient_Package(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if wp.Metadata.Size > 0 || wp.Metadata.Language!="" || wp.Metadata.HashSum!="" || wp.Metadata.Description!="" ||
-	   wp.Metadata.Name!="" {
+	if wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
+		wp.Metadata.Name != "" {
 		t.Fatal("Invalid package upload completed rather than failed.")
 	}
 
 }
-
-
 
 func TestClient_GetPackage_validation(t *testing.T) {
 	var err error

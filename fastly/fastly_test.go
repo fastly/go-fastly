@@ -29,8 +29,6 @@ const (
 	ServiceTypeWasm = "wasm"
 )
 
-
-
 // testVersionLock is a lock around version creation because the Fastly API
 // kinda dies on concurrent requests to create a version.
 var testVersionLock sync.Mutex
@@ -74,7 +72,7 @@ func recordIgnoreBody(t *testing.T, fixture string, f func(*Client)) {
 		defer stopRecorder(t, r)
 
 		r.AddFilter(func(i *cassette.Interaction) error {
-			i.Request.Body=""
+			i.Request.Body = ""
 			return nil
 		})
 
@@ -83,8 +81,7 @@ func recordIgnoreBody(t *testing.T, fixture string, f func(*Client)) {
 	}
 }
 
-
-func getRecorder(t *testing.T, fixture string) *recorder.Recorder{
+func getRecorder(t *testing.T, fixture string) *recorder.Recorder {
 	r, err := recorder.New("fixtures/" + fixture)
 	if err != nil {
 		t.Fatal(err)
@@ -104,8 +101,6 @@ func stopRecorder(t *testing.T, r *recorder.Recorder) {
 		t.Fatal(err)
 	}
 }
-
-
 
 func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 	r, err := recorder.New("fixtures/" + fixture)
