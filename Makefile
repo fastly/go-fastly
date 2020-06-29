@@ -18,13 +18,24 @@ NAME := $(notdir $(shell pwd))
 # Test Service ID
 FASTLY_TEST_SERVICE_ID ?=
 
-all: tidy fmt fiximports test vet staticcheck ## Runs all of the required cleaning and verification targets.
+all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs all of the required cleaning and verification targets.
 .PHONY: all
 
 tidy: ## Cleans the Go module.
 	@echo "==> Tidying module"
 	@go mod tidy
 .PHONY: tidy
+
+mod-download: ## Downloads the Go module.
+	@echo "==> Downloading Go module"
+	@go mod download
+.PHONY: mod-download
+
+dev-dependencies: ## Downloads the necessesary dev dependencies.
+	@echo "==> Downloading development dependencies"
+	@go install honnef.co/go/tools/cmd/staticcheck
+	@go install golang.org/x/tools/cmd/goimports
+.PHONY: dev-dependencies
 
 test: ## Runs the test suite with VCR mocks enabled.
 	@echo "==> Testing ${NAME}"
