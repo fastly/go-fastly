@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-# https://github.com/hashicorp/vault/blob/master/scripts/gofmtcheck.sh
 
 echo "==> Checking that code complies with gofmt requirements..."
 

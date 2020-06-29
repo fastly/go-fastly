@@ -128,8 +128,8 @@ More information can be found in the
 Developing
 -------
 
-1. Clone the project to your preferred directory, using your preferred method
-2. Download the module and accompanying developer tooling
+1. Clone the project to your preferred directory, using your preferred method.
+2. Download the module and accompanying developer tooling.
 
   ```bash
   $ go mod download
