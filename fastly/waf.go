@@ -240,7 +240,8 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 // EnableWAFInput is used as input to the EnableWAF function.
 type EnableWAFInput struct {
 	// ID is the WAF's ID.
-	ID string
+	ID       string `jsonapi:"primary,waf_firewall"`
+	Disabled bool   `jsonapi:"attr,disabled"`
 }
 
 // EnableWAF enables a specific WAF.
@@ -249,9 +250,10 @@ func (c *Client) EnableWAF(i *EnableWAFInput) (*WAF, error) {
 	if i.ID == "" {
 		return nil, ErrMissingWAFID
 	}
+	i.Disabled = false
 
-	path := fmt.Sprintf("/waf/firewalls/%s/enable", i.ID)
-	resp, err := c.PatchJSONAPI(path, nil, nil)
+	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
+	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -266,7 +268,8 @@ func (c *Client) EnableWAF(i *EnableWAFInput) (*WAF, error) {
 // DisableWAFInput is used as input to the DisableWAF function.
 type DisableWAFInput struct {
 	// ID is the WAF's ID.
-	ID string
+	ID       string
+	Disabled bool `jsonapi:"attr,disabled"`
 }
 
 // DisableWAF disables a specific WAF.
@@ -275,9 +278,10 @@ func (c *Client) DisableWAF(i *DisableWAFInput) (*WAF, error) {
 	if i.ID == "" {
 		return nil, ErrMissingWAFID
 	}
+	i.Disabled = true
 
-	path := fmt.Sprintf("/waf/firewalls/%s/disable", i.ID)
-	resp, err := c.PatchJSONAPI(path, nil, nil)
+	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
+	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
