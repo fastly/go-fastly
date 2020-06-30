@@ -17,12 +17,14 @@ var WAFActiveRuleType = reflect.TypeOf(new(WAFActiveRule))
 
 // WAFActiveRule is the information about a WAF active rule object.
 type WAFActiveRule struct {
-	ID        string     `jsonapi:"primary,waf_active_rule,omitempty"`
-	Status    string     `jsonapi:"attr,status,omitempty"`
-	ModSecID  int        `jsonapi:"attr,modsec_rule_id,omitempty"`
-	Revision  int        `jsonapi:"attr,revision,omitempty"`
-	CreatedAt *time.Time `jsonapi:"attr,created_at,iso8601,omitempty"`
-	UpdatedAt *time.Time `jsonapi:"attr,updated_at,iso8601,omitempty"`
+	ID             string     `jsonapi:"primary,waf_active_rule,omitempty"`
+	Status         string     `jsonapi:"attr,status,omitempty"`
+	ModSecID       int        `jsonapi:"attr,modsec_rule_id,omitempty"`
+	Revision       int        `jsonapi:"attr,revision,omitempty"`
+	CreatedAt      *time.Time `jsonapi:"attr,created_at,iso8601,omitempty"`
+	UpdatedAt      *time.Time `jsonapi:"attr,updated_at,iso8601,omitempty"`
+	Outdated       bool       `jsonapi:"attr,outdated,omitempty"`
+	LatestRevision int        `jsonapi:"attr,latest_revision,omitempty"`
 }
 
 // WAFActiveRuleResponse represents a list of active rules - full response.
@@ -64,12 +66,12 @@ func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
 	}
 
 	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
+		switch value.(type) {
+		case string:
 			if value != "" {
 				result[key] = value.(string)
 			}
-		case "int":
+		case int:
 			if value != 0 {
 				result[key] = strconv.Itoa(value.(int))
 			}
@@ -89,7 +91,7 @@ func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleR
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
 	resp, err := c.Get(path, &RequestOptions{
 		Params: i.formatFilters(),
 	})
@@ -203,7 +205,7 @@ func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiv
 		return nil, ErrMissingWAFActiveRuleList
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
 	resp, err := c.PostJSONAPIBulk(path, i.Rules, nil)
 	if err != nil {
 		return nil, err
@@ -289,31 +291,7 @@ func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
 		return ErrMissingWAFActiveRuleList
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
 	_, err := c.DeleteJSONAPIBulk(path, i.Rules, nil)
-	return err
-}
-
-// DeleteAllWAFActiveRulesInput used as input for removing all rules from a WAF.
-type DeleteAllWAFActiveRulesInput struct {
-	// The Web Application Firewall's ID.
-	WAFID string
-	// The Web Application Firewall's version number.
-	WAFVersionNumber int
-}
-
-// DeleteAllWAFActiveRules removes all rules from a particular WAF.
-func (c *Client) DeleteAllWAFActiveRules(i *DeleteAllWAFActiveRulesInput) error {
-
-	if i.WAFID == "" {
-		return ErrMissingWAFID
-	}
-
-	if i.WAFVersionNumber == 0 {
-		return ErrMissingWAFVersionNumber
-	}
-
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/rules", i.WAFID, i.WAFVersionNumber)
-	_, err := c.DeleteJSONAPI(path, nil, nil)
 	return err
 }

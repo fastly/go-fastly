@@ -145,29 +145,6 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	if len(rulesResp.Items) != 2 {
 		t.Errorf("expected 2 waf rules: got %d", len(rulesResp.Items))
 	}
-
-	record(t, fixtureBase+"/delete_all", func(c *Client) {
-		err = c.DeleteAllWAFActiveRules(&DeleteAllWAFActiveRulesInput{
-			WAFID:            waf.ID,
-			WAFVersionNumber: 1,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	record(t, fixtureBase+"/list_after_delete_all", func(c *Client) {
-		rulesResp, err = c.ListWAFActiveRules(&ListWAFActiveRulesInput{
-			WAFID:            waf.ID,
-			WAFVersionNumber: 1,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(rulesResp.Items) != 0 {
-		t.Errorf("expected 0 waf rules: got %d", len(rulesResp.Items))
-	}
 }
 
 func TestClient_ListWAFActiveRules_validation(t *testing.T) {
@@ -275,24 +252,6 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-}
-
-func TestClient_DeleteAllWAFActiveRules_validation(t *testing.T) {
-	var err error
-	err = testClient.DeleteAllWAFActiveRules(&DeleteAllWAFActiveRulesInput{
-		WAFID: "",
-	})
-	if err != ErrMissingWAFID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteAllWAFActiveRules(&DeleteAllWAFActiveRulesInput{
-		WAFID:            "1",
-		WAFVersionNumber: 0,
-	})
-	if err != ErrMissingWAFVersionNumber {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func buildWAFRules(status string) []*WAFActiveRule {

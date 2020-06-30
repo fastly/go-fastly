@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf_firewall","id":"5ui1qC2Y9TZIonO95zU3gM","attributes":{"disable":false}}}
+      {"data":{"type":"waf_firewall","id":"2m5TQ56k5nWIFJusRN0Vap","attributes":{"disabled":false}}}
     form: {}
     headers:
       Accept:
@@ -11,25 +11,27 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
-    url: https://api.fastly.com/waf/firewalls/5ui1qC2Y9TZIonO95zU3gM
+      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/waf/firewalls/2m5TQ56k5nWIFJusRN0Vap
     method: PATCH
   response:
-    body: '{"data":{"id":"5ui1qC2Y9TZIonO95zU3gM","type":"waf_firewall","attributes":{"service_id":"1l9vtYGCa1be9QkG5opE5F","prefetch_condition":null,"response":null,"disabled":false,"service_version_number":null,"created_at":"2019-12-13T08:52:52Z","updated_at":"2019-12-13T08:52:55Z","active_rules_trustwave_log_count":0,"active_rules_trustwave_block_count":0,"active_rules_fastly_log_count":0,"active_rules_fastly_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_score_count":0}}}'
+    body: '{"data":{"id":"2m5TQ56k5nWIFJusRN0Vap","type":"waf_firewall","attributes":{"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_fastly_score_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"created_at":"2020-06-30T10:56:27Z","disabled":false,"prefetch_condition":null,"response":null,"service_id":"6PehUY86Aj8yGpccQ0a8oT","service_version_number":null,"updated_at":"2020-06-30T10:56:29Z"}}}'
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
       Content-Length:
-      - "525"
+      - "561"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Fri, 13 Dec 2019 08:52:55 GMT
+      - Tue, 30 Jun 2020 10:56:29 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
       Via:
+      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS
@@ -38,9 +40,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19229-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19235-LCY
       X-Timer:
-      - S1576227175.617161,VS0,VE667
+      - S1593514589.338495,VS0,VE622
     status: 200 OK
     code: 200
     duration: ""

@@ -6,35 +6,38 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
-    url: https://api.fastly.com/waf/firewalls/3bhISXhyFhsufhCFnTst1j/versions/2
+      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/waf/firewalls/6gj91AAsD3ndcoKaplqiq8/versions/2
     method: GET
   response:
-    body: '{"data":{"id":"4x66aw12P6aLHGwK4KzGni","type":"waf_firewall_version","attributes":{"number":2,"comment":null,"active":null,"locked":false,"error":null,"deployed_at":null,"critical_anomaly_score":5,"error_anomaly_score":4,"warning_anomaly_score":3,"notice_anomaly_score":2,"http_violation_score_threshold":999,"inbound_anomaly_score_threshold":999,"lfi_score_threshold":999,"php_injection_score_threshold":999,"rce_score_threshold":999,"rfi_score_threshold":999,"session_fixation_score_threshold":999,"sql_injection_score_threshold":999,"xss_score_threshold":999,"paranoia_level":1,"arg_name_length":100,"arg_length":400,"total_arg_length":6400,"max_file_size":10000000,"combined_file_sizes":10000000,"max_num_args":255,"high_risk_country_codes":"","allowed_methods":"GET
-      HEAD POST OPTIONS PUT PATCH DELETE","restricted_headers":"/proxy/ /lock-token/
-      /content-range/ /translate/ /if/","restricted_extensions":".asa/ .asax/ .ascx/
-      .axd/ .backup/ .bak/ .bat/ .cdx/ .cer/ .cfg/ .cmd/ .com/ .config/ .conf/ .cs/
-      .csproj/ .csr/ .dat/ .db/ .dbf/ .dll/ .dos/ .htr/ .htw/ .ida/ .idc/ .idq/ .inc/
-      .ini/ .key/ .licx/ .lnk/ .log/ .mdb/ .old/ .pass/ .pdb/ .pol/ .printer/ .pwd/
-      .resources/ .resx/ .sql/ .sys/ .vb/ .vbs/ .vbproj/ .vsdisco/ .webinfo/ .xsd/
-      .xsx/","allowed_request_content_type":"application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml|application/soap+xml|application/x-amf|application/json|application/octet-stream|application/csp-report|application/xss-auditor-report|text/plain","allowed_request_content_type_charset":"utf-8|iso-8859-1|iso-8859-15|windows-1252","allowed_http_versions":"HTTP/1.0
-      HTTP/1.1 HTTP/2","crs_validate_utf8_encoding":false,"created_at":"2019-11-25T14:43:32Z","updated_at":"2019-11-25T14:43:32Z","active_rules_trustwave_log_count":0,"active_rules_trustwave_block_count":0,"active_rules_fastly_log_count":0,"active_rules_fastly_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_score_count":0}}}'
+    body: '{"data":{"id":"3LP12sn59pB0iz0Kh75cHb","type":"waf_firewall_version","attributes":{"active":false,"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"allowed_http_versions":"HTTP/1.0
+      HTTP/1.1 HTTP/2","allowed_methods":"GET HEAD POST OPTIONS PUT PATCH DELETE","allowed_request_content_type":"application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml|application/soap+xml|application/x-amf|application/json|application/octet-stream|application/csp-report|application/xss-auditor-report|text/plain","allowed_request_content_type_charset":"utf-8|iso-8859-1|iso-8859-15|windows-1252","arg_name_length":100,"arg_length":400,"combined_file_sizes":10000000,"comment":null,"created_at":"2020-06-30T10:56:28Z","critical_anomaly_score":5,"crs_validate_utf8_encoding":false,"deployed_at":null,"error":null,"error_anomaly_score":4,"high_risk_country_codes":"","http_violation_score_threshold":999,"inbound_anomaly_score_threshold":999,"last_deployment_status":null,"lfi_score_threshold":999,"locked":false,"max_file_size":10000000,"max_num_args":255,"notice_anomaly_score":2,"number":2,"paranoia_level":1,"php_injection_score_threshold":999,"rce_score_threshold":999,"restricted_extensions":".asa/
+      .asax/ .ascx/ .axd/ .backup/ .bak/ .bat/ .cdx/ .cer/ .cfg/ .cmd/ .com/ .config/
+      .conf/ .cs/ .csproj/ .csr/ .dat/ .db/ .dbf/ .dll/ .dos/ .htr/ .htw/ .ida/ .idc/
+      .idq/ .inc/ .ini/ .key/ .licx/ .lnk/ .log/ .mdb/ .old/ .pass/ .pdb/ .pol/ .printer/
+      .pwd/ .resources/ .resx/ .sql/ .sys/ .vb/ .vbs/ .vbproj/ .vsdisco/ .webinfo/
+      .xsd/ .xsx/","restricted_headers":"/proxy/ /lock-token/ /content-range/ /translate/
+      /if/","rfi_score_threshold":999,"session_fixation_score_threshold":999,"sql_injection_score_threshold":999,"total_arg_length":6400,"updated_at":"2020-06-30T10:56:28Z","warning_anomaly_score":3,"xss_score_threshold":999}}}'
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
+      - bytes
       Age:
       - "0"
+      - "0"
       Content-Length:
-      - "1999"
+      - "2030"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 25 Nov 2019 14:43:33 GMT
+      - Tue, 30 Jun 2020 10:56:28 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
       Via:
+      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS
@@ -43,9 +46,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19271-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19235-LCY
       X-Timer:
-      - S1574693013.970868,VS0,VE452
+      - S1593514589.802406,VS0,VE149
     status: 200 OK
     code: 200
     duration: ""
