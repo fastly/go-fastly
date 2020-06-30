@@ -12,7 +12,6 @@ branches:
   only:
     - master
 
-script: make build test test-race
+script: make all test-race build
 
 env: GO111MODULE=on
-
