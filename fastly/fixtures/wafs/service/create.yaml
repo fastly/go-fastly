@@ -2,34 +2,37 @@
 version: 1
 interactions:
 - request:
-    body: comment=go-fastly+client+test&name=test_service_service
+    body: comment=go-fastly+client+test&name=test_service_service2&type=vcl
     form:
       comment:
       - go-fastly client test
       name:
-      - test_service_service
+      - test_service_service2
+      type:
+      - vcl
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
+      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_service","type":"vcl","versions":[{"testing":false,"service_id":"3qt0xLYGlOxt19jpAQ0LJM","deployed":false,"locked":false,"deleted_at":null,"created_at":"2019-11-20T12:59:03Z","staging":false,"comment":"","number":1,"updated_at":"2019-11-20T12:59:03Z","active":false}],"publish_key":"84a3007cd3e38afa00fdeb2cf36b24361153c410","updated_at":"2019-11-20T12:59:03Z","id":"3qt0xLYGlOxt19jpAQ0LJM","deleted_at":null,"created_at":"2019-11-20T12:59:03Z"}'
+    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_service2","type":"vcl","versions":[{"service_id":"6PehUY86Aj8yGpccQ0a8oT","locked":false,"updated_at":"2020-06-30T10:56:24Z","created_at":"2020-06-30T10:56:24Z","testing":false,"deleted_at":null,"number":1,"active":false,"comment":"","staging":false,"deployed":false}],"created_at":"2020-06-30T10:56:24Z","id":"6PehUY86Aj8yGpccQ0a8oT","updated_at":"2020-06-30T10:56:24Z","deleted_at":null,"publish_key":""}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 20 Nov 2019 12:59:03 GMT
+      - Tue, 30 Jun 2020 10:56:24 GMT
       Fastly-Ratelimit-Remaining:
-      - "972"
+      - "692"
       Fastly-Ratelimit-Reset:
-      - "1574254800"
+      - "1593514800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -38,14 +41,15 @@ interactions:
       - Accept-Encoding
       Via:
       - 1.1 varnish
+      - 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19235-LCY
       X-Timer:
-      - S1574254744.559435,VS0,VE269
+      - S1593514584.987381,VS0,VE225
     status: 200 OK
     code: 200
     duration: ""

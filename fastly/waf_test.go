@@ -11,7 +11,7 @@ func TestClient_WAFs(t *testing.T) {
 
 	fixtureBase := "wafs/"
 
-	testService := createTestService(t, fixtureBase+"service/create", "service")
+	testService := createTestService(t, fixtureBase+"service/create", "service2")
 	defer deleteTestService(t, fixtureBase+"/service/delete", testService.ID)
 
 	tv := createTestVersion(t, fixtureBase+"/service/version", testService.ID)
