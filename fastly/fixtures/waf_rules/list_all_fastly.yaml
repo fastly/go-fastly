@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
+      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
     url: https://api.fastly.com/waf/rules?filter%5Bpublisher%5D%5Bin%5D=fastly&page%5Bnumber%5D=1&page%5Bsize%5D=100
     method: GET
   response:
@@ -14,19 +14,23 @@ interactions:
     headers:
       Accept-Ranges:
       - bytes
+      - bytes
+      - bytes
       Age:
+      - "0"
       - "0"
       Content-Length:
       - "4251"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Thu, 05 Dec 2019 10:22:56 GMT
+      - Tue, 30 Jun 2020 10:56:25 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
       Via:
+      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS
@@ -35,9 +39,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19256-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19235-LCY
       X-Timer:
-      - S1575541376.941919,VS0,VE335
+      - S1593514585.652064,VS0,VE367
     status: 200 OK
     code: 200
     duration: ""

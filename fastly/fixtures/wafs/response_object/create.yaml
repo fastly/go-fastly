@@ -2,31 +2,25 @@
 version: 1
 interactions:
 - request:
-    body: Service=3qt0xLYGlOxt19jpAQ0LJM&Version=2&content=abcd&content_type=text%2Fplain&name=WAf_Response&response=Ok&status=200
+    body: Service=6PehUY86Aj8yGpccQ0a8oT&Version=2&name=WAF_Response&status=403
     form:
       Service:
-      - 3qt0xLYGlOxt19jpAQ0LJM
+      - 6PehUY86Aj8yGpccQ0a8oT
       Version:
       - "2"
-      content:
-      - abcd
-      content_type:
-      - text/plain
       name:
-      - WAf_Response
-      response:
-      - Ok
+      - WAF_Response
       status:
-      - "200"
+      - "403"
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
-    url: https://api.fastly.com/service/3qt0xLYGlOxt19jpAQ0LJM/version/2/response_object
+      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/service/6PehUY86Aj8yGpccQ0a8oT/version/2/response_object
     method: POST
   response:
-    body: '{"content":"abcd","content_type":"text/plain","name":"WAf_Response","response":"Ok","status":"200","service_id":"3qt0xLYGlOxt19jpAQ0LJM","version":"2","cache_condition":"","updated_at":"2019-11-20T12:59:04Z","request_condition":"","deleted_at":null,"created_at":"2019-11-20T12:59:04Z"}'
+    body: '{"name":"WAF_Response","status":"403","service_id":"6PehUY86Aj8yGpccQ0a8oT","version":"2","response":"ok","updated_at":"2020-06-30T10:56:25Z","created_at":"2020-06-30T10:56:25Z","content_type":null,"request_condition":"","content":null,"deleted_at":null,"cache_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,11 +30,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 20 Nov 2019 12:59:04 GMT
+      - Tue, 30 Jun 2020 10:56:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "969"
+      - "683"
       Fastly-Ratelimit-Reset:
-      - "1574254800"
+      - "1593514800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,14 +43,15 @@ interactions:
       - Accept-Encoding
       Via:
       - 1.1 varnish
+      - 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19235-LCY
       X-Timer:
-      - S1574254744.451020,VS0,VE306
+      - S1593514586.539867,VS0,VE271
     status: 200 OK
     code: 200
     duration: ""

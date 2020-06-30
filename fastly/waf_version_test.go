@@ -11,7 +11,7 @@ func TestClient_WAF_Versions(t *testing.T) {
 
 	fixtureBase := "waf_versions/"
 
-	testService := createTestService(t, fixtureBase+"service/create", "service")
+	testService := createTestService(t, fixtureBase+"service/create", "service3")
 	defer deleteTestService(t, fixtureBase+"/service/delete", testService.ID)
 
 	tv := createTestVersion(t, fixtureBase+"/service/version", testService.ID)
@@ -517,5 +517,3 @@ func intToPtr(i int) *int {
 func boolToPtr(i bool) *bool {
 	return &i
 }
-
-

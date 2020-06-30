@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf_firewall","attributes":{"prefetch_condition":"WAF_Prefetch","response":"WAf_Response","service_id":"3qt0xLYGlOxt19jpAQ0LJM","service_version_number":"2"}}}
+      {"data":{"type":"waf_firewall","attributes":{"prefetch_condition":"WAF_Prefetch","response":"WAF_Response","service_id":"6PehUY86Aj8yGpccQ0a8oT","service_version_number":"2"}}}
     form: {}
     headers:
       Accept:
@@ -11,26 +11,27 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.4)
+      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
     url: https://api.fastly.com/waf/firewalls
     method: POST
   response:
-    body: '{"data":{"id":"5ui1qC2Y9TZIonO95zU3gM","type":"waf_firewall","attributes":{"service_id":"3qt0xLYGlOxt19jpAQ0LJM","prefetch_condition":"WAF_Prefetch","response":"WAf_Response","disabled":false,"service_version_number":2,"created_at":"2019-11-20T12:59:05Z","updated_at":"2019-11-20T12:59:05Z","active_rules_trustwave_log_count":0,"active_rules_trustwave_block_count":0,"active_rules_fastly_log_count":0,"active_rules_fastly_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_score_count":0}}}'
+    body: '{"data":{"id":"2m5TQ56k5nWIFJusRN0Vap","type":"waf_firewall","attributes":{"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_fastly_score_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"created_at":"2020-06-30T10:56:27Z","disabled":false,"prefetch_condition":"WAF_Prefetch","response":"WAF_Response","service_id":"6PehUY86Aj8yGpccQ0a8oT","service_version_number":2,"updated_at":"2020-06-30T10:56:27Z"}}}'
     headers:
       Accept-Ranges:
       - bytes
       - bytes
       Content-Length:
-      - "542"
+      - "578"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Wed, 20 Nov 2019 12:59:05 GMT
+      - Tue, 30 Jun 2020 10:56:27 GMT
       Status:
       - 201 Created
       Strict-Transport-Security:
       - max-age=31536000
       Via:
+      - 1.1 varnish
       - 1.1 varnish
       X-Cache:
       - MISS, MISS
@@ -39,9 +40,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19235-LCY
       X-Timer:
-      - S1574254745.875699,VS0,VE922
+      - S1593514586.335980,VS0,VE783
     status: 201 Created
     code: 201
     duration: ""

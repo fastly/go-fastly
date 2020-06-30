@@ -394,7 +394,7 @@ func (c *Client) RequestJSONAPIBulk(verb, p string, i interface{}, ro *RequestOp
 	if ro.Headers == nil {
 		ro.Headers = make(map[string]string)
 	}
-	ro.Headers["Content-Type"] = jsonapi.MediaType
+	ro.Headers["Content-Type"] = jsonapi.MediaType + "; ext=bulk"
 	ro.Headers["Accept"] = jsonapi.MediaType + "; ext=bulk"
 
 	var buf bytes.Buffer
