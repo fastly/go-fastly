@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf_firewall","id":"2m5TQ56k5nWIFJusRN0Vap","attributes":{"service_version_number":"2"}}}
+      {"data":{"type":"waf_firewall","id":"206Rvtz4NQuFifzUpnhUqL","attributes":{"service_version_number":"2"}}}
     form: {}
     headers:
       Accept:
@@ -12,7 +12,7 @@ interactions:
       - application/vnd.api+json
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/2m5TQ56k5nWIFJusRN0Vap
+    url: https://api.fastly.com/waf/firewalls/206Rvtz4NQuFifzUpnhUqL
     method: DELETE
   response:
     body: '{"errors":[{"title":"Resource not found","detail":"We could not find a
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Tue, 30 Jun 2020 10:56:30 GMT
+      - Wed, 01 Jul 2020 09:40:43 GMT
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19235-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19273-LCY
       X-Timer:
-      - S1593514591.815640,VS0,VE156
+      - S1593596443.956301,VS0,VE134
     status: 404 Not Found
     code: 404
     duration: ""

@@ -12,7 +12,7 @@ interactions:
       - application/vnd.api+json
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/2m5TQ56k5nWIFJusRN0Vap/versions/1
+    url: https://api.fastly.com/waf/firewalls/206Rvtz4NQuFifzUpnhUqL/versions/1
     method: POST
   response:
     body: '{}'
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Tue, 30 Jun 2020 10:56:27 GMT
+      - Wed, 01 Jul 2020 09:40:39 GMT
       Status:
       - 202 Accepted
       Strict-Transport-Security:
@@ -40,9 +40,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19235-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19273-LCY
       X-Timer:
-      - S1593514588.553163,VS0,VE139
+      - S1593596440.647605,VS0,VE142
     status: 202 Accepted
     code: 202
     duration: ""

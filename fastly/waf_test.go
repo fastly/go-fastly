@@ -114,8 +114,9 @@ func TestClient_WAFs(t *testing.T) {
 
 	var dwaf *WAF
 	record(t, fixtureBase+"/disable", func(c *Client) {
-		dwaf, err = c.DisableWAF(&DisableWAFInput{
-			ID: waf.ID,
+		dwaf, err = c.UpdateWAF(&UpdateWAFInput{
+			ID:       waf.ID,
+			Disabled: Bool(true),
 		})
 	})
 	if err != nil {
@@ -127,8 +128,9 @@ func TestClient_WAFs(t *testing.T) {
 
 	var ewaf *WAF
 	record(t, fixtureBase+"/enable", func(c *Client) {
-		ewaf, err = c.EnableWAF(&EnableWAFInput{
-			ID: waf.ID,
+		ewaf, err = c.UpdateWAF(&UpdateWAFInput{
+			ID:       waf.ID,
+			Disabled: Bool(false),
 		})
 	})
 	if err != nil {
@@ -196,20 +198,6 @@ func TestClient_GetWAF_validation(t *testing.T) {
 
 func TestClient_UpdateWAF_validation(t *testing.T) {
 	var err error
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-		Service: "",
-	})
-	if err != ErrMissingService {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-		Service: "foo",
-		Version: "",
-	})
-	if err != ErrMissingVersion {
-		t.Errorf("bad error: %s", err)
-	}
 
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
 		Service: "foo",
@@ -217,6 +205,23 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 		ID:      "",
 	})
 	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID:      "123",
+		Service: "",
+	})
+	if err != ErrMissingService {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID:      "123",
+		Service: "foo",
+		Version: "",
+	})
+	if err != ErrMissingVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -239,20 +244,22 @@ func TestClient_DeleteWAF_validation(t *testing.T) {
 	}
 }
 
-func TestClient_EnableWAF_validation(t *testing.T) {
+func TestClient_UpdateWAF_Enable_validation(t *testing.T) {
 	var err error
-	_, err = testClient.EnableWAF(&EnableWAFInput{
-		ID: "",
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID:       "",
+		Disabled: Bool(false),
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestClient_DisableWAF_validation(t *testing.T) {
+func TestClient_UpdateWAF_Disable_validation(t *testing.T) {
 	var err error
-	_, err = testClient.DisableWAF(&DisableWAFInput{
-		ID: "",
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID:       "",
+		Disabled: Bool(true),
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
