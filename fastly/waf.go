@@ -204,81 +204,34 @@ type UpdateWAFInput struct {
 	// Service is the ID of the service. Version is the specific configuration
 	// version. Both fields are required.
 	ID                string `jsonapi:"primary,waf_firewall"`
-	Service           string `jsonapi:"attr,service_id"`
-	Version           string `jsonapi:"attr,service_version_number"`
-	PrefetchCondition string `jsonapi:"attr,prefetch_condition"`
-	Response          string `jsonapi:"attr,response"`
+	Service           string `jsonapi:"attr,service_id,omitempty"`
+	Version           string `jsonapi:"attr,service_version_number,omitempty"`
+	PrefetchCondition string `jsonapi:"attr,prefetch_condition,omitempty"`
+	Response          string `jsonapi:"attr,response,omitempty"`
+	Disabled          *bool  `jsonapi:"attr,disabled,omitempty"`
 }
 
 // UpdateWAF updates a specific WAF.
 func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
-	}
-
-	if i.Version == "" {
-		return nil, ErrMissingVersion
-	}
-
 	if i.ID == "" {
 		return nil, ErrMissingWAFID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
-	resp, err := c.PatchJSONAPI(path, i, nil)
-	if err != nil {
-		return nil, err
+	// 'Service' and 'Version' are mandatory
+	// if 'Disabled' is not specified.
+	//
+	// 'Service' and 'Version' are mandatory
+	// if 'PrefetchCondition' or 'Response' are
+	// not empty
+	if i.Disabled == nil || i.PrefetchCondition != "" || i.Response != "" {
+		if i.Service == "" {
+			return nil, ErrMissingService
+		}
+
+		if i.Version == "" {
+			return nil, ErrMissingVersion
+		}
 	}
-
-	var waf WAF
-	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
-		return nil, err
-	}
-	return &waf, nil
-}
-
-// EnableWAFInput is used as input to the EnableWAF function.
-type EnableWAFInput struct {
-	// ID is the WAF's ID.
-	ID       string `jsonapi:"primary,waf_firewall"`
-	Disabled bool   `jsonapi:"attr,disabled"`
-}
-
-// EnableWAF enables a specific WAF.
-func (c *Client) EnableWAF(i *EnableWAFInput) (*WAF, error) {
-
-	if i.ID == "" {
-		return nil, ErrMissingWAFID
-	}
-	i.Disabled = false
-
-	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
-	resp, err := c.PatchJSONAPI(path, i, nil)
-	if err != nil {
-		return nil, err
-	}
-
-	var waf WAF
-	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
-		return nil, err
-	}
-	return &waf, nil
-}
-
-// DisableWAFInput is used as input to the DisableWAF function.
-type DisableWAFInput struct {
-	// ID is the WAF's ID.
-	ID       string
-	Disabled bool `jsonapi:"attr,disabled"`
-}
-
-// DisableWAF disables a specific WAF.
-func (c *Client) DisableWAF(i *DisableWAFInput) (*WAF, error) {
-
-	if i.ID == "" {
-		return nil, ErrMissingWAFID
-	}
-	i.Disabled = true
 
 	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
 	resp, err := c.PatchJSONAPI(path, i, nil)
