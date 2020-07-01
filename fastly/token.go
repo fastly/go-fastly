@@ -152,7 +152,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	}
 
 	if resp.StatusCode != http.StatusNoContent {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }
@@ -165,7 +165,7 @@ func (c *Client) DeleteTokenSelf() error {
 	}
 
 	if resp.StatusCode != http.StatusNoContent {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

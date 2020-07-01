@@ -46,7 +46,7 @@ func TestNewHTTPError(t *testing.T) {
 	t.Run("jsonapi", func(t *testing.T) {
 		resp := &http.Response{
 			StatusCode: 404,
-			Header:     http.Header(map[string][]string{"Content-Type": []string{jsonapi.MediaType}}),
+			Header:     http.Header(map[string][]string{"Content-Type": {jsonapi.MediaType}}),
 			Body: ioutil.NopCloser(bytes.NewBufferString(
 				`{"errors":[{"id":"abc123", "title":"Not found", "detail":"That resource does not exist"}]}`)),
 		}

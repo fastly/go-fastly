@@ -13,8 +13,7 @@ func TestClient_Bigqueries(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
-	var secretKey string
-	secretKey = privateKey()
+	var secretKey = privateKey()
 
 	// Create
 	var bq *BigQuery

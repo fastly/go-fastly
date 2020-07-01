@@ -118,11 +118,11 @@ func TestClient_Versions(t *testing.T) {
 
 func TestClient_SortVersions(t *testing.T) {
 	versionsData := []*Version{
-		&Version{Number: 1},
-		&Version{Number: 201},
-		&Version{Number: 10},
-		&Version{Number: 2},
-		&Version{Number: 197},
+		{Number: 1},
+		{Number: 201},
+		{Number: 10},
+		{Number: 2},
+		{Number: 197},
 	}
 	sort.Sort(versionsByNumber(versionsData))
 	if versionsData[0].Number != 1 || versionsData[1].Number != 2 || versionsData[2].Number != 10 || versionsData[3].Number != 197 || versionsData[4].Number != 201 {

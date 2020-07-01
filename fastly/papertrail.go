@@ -232,7 +232,7 @@ func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

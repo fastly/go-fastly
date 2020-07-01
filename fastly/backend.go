@@ -284,7 +284,7 @@ func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return fmt.Errorf("not ok")
 	}
 	return nil
 }

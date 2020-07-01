@@ -130,7 +130,7 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return fmt.Errorf("not ok")
 	}
 	return nil
 }

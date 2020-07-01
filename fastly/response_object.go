@@ -231,7 +231,7 @@ func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }

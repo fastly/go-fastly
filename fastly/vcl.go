@@ -282,7 +282,7 @@ func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 		return err
 	}
 	if !r.Ok() {
-		return fmt.Errorf("Not Ok")
+		return ErrNotOK
 	}
 	return nil
 }
