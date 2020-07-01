@@ -25,6 +25,9 @@ jobs:
         key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
         restore-keys: |
           ${{ runner.os }}-go-mod-
+    - name: Installing necessary tools
+      run: make dev-dependencies
+      shell: bash
     - name: Check Module
       run: make check-mod
       shell: bash
