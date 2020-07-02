@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: Service=3BOOVoayIlrdMuRU8LrKSA&Version=2&address=example.com&format=format&format_version=2&hostname=example.com&message_type=classic&name=test-syslog&port=1234&token=abcd1234
+    body: Service=5mAR0wHKpNJjOqc65YeDqI&Version=2&address=example.com&format=format&format_version=2&hostname=example.com&message_type=classic&name=test-syslog&port=1234&token=abcd1234
     form:
       Service:
-      - 3BOOVoayIlrdMuRU8LrKSA
+      - 5mAR0wHKpNJjOqc65YeDqI
       Version:
       - "2"
       address:
@@ -29,10 +29,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/3BOOVoayIlrdMuRU8LrKSA/version/2/logging/syslog
+    url: https://api.fastly.com/service/5mAR0wHKpNJjOqc65YeDqI/version/2/logging/syslog
     method: POST
   response:
-    body: '{"address":"example.com","format":"format","format_version":"2","hostname":"example.com","message_type":"classic","name":"test-syslog","port":"1234","token":"abcd1234","service_id":"3BOOVoayIlrdMuRU8LrKSA","version":"2","tls_ca_cert":null,"tls_client_key":null,"updated_at":"2020-06-30T10:56:25Z","created_at":"2020-06-30T10:56:25Z","tls_hostname":null,"placement":null,"response_condition":"","use_tls":"0","tls_client_cert":null,"ipv4":null,"deleted_at":null,"public_key":null}'
+    body: '{"address":"example.com","format":"format","format_version":"2","hostname":"example.com","message_type":"classic","name":"test-syslog","port":"1234","token":"abcd1234","service_id":"5mAR0wHKpNJjOqc65YeDqI","version":"2","updated_at":"2020-07-02T20:05:32Z","deleted_at":null,"created_at":"2020-07-02T20:05:32Z","tls_client_cert":null,"placement":null,"tls_ca_cert":null,"tls_hostname":null,"tls_client_key":null,"ipv4":null,"response_condition":"","use_tls":"0","public_key":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -42,11 +42,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 30 Jun 2020 10:56:25 GMT
+      - Thu, 02 Jul 2020 20:05:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "684"
+      - "979"
       Fastly-Ratelimit-Reset:
-      - "1593514800"
+      - "1593723600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -61,9 +61,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19235-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19251-LCY
       X-Timer:
-      - S1593514585.355101,VS0,VE520
+      - S1593720333.715815,VS0,VE413
     status: 200 OK
     code: 200
     duration: ""
