@@ -18,7 +18,7 @@ interactions:
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_service2","type":"vcl","updated_at":"2020-07-01T09:40:36Z","id":"5MlnHT66t9pZgO8XrBEDQl","publish_key":"","versions":[{"active":false,"updated_at":"2020-07-01T09:40:36Z","staging":false,"service_id":"5MlnHT66t9pZgO8XrBEDQl","deleted_at":null,"comment":"","created_at":"2020-07-01T09:40:36Z","number":1,"testing":false,"locked":false,"deployed":false}],"deleted_at":null,"created_at":"2020-07-01T09:40:36Z"}'
+    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_service2","type":"vcl","versions":[{"testing":false,"locked":false,"deployed":false,"updated_at":"2020-07-02T20:19:36Z","deleted_at":null,"service_id":"5n1Tvc6QVHtvZlG109EsyV","active":false,"staging":false,"comment":"","created_at":"2020-07-02T20:19:36Z","number":1}],"created_at":"2020-07-02T20:19:36Z","publish_key":"","deleted_at":null,"id":"5n1Tvc6QVHtvZlG109EsyV","updated_at":"2020-07-02T20:19:36Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +28,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 01 Jul 2020 09:40:36 GMT
+      - Thu, 02 Jul 2020 20:19:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "981"
+      - "963"
       Fastly-Ratelimit-Reset:
-      - "1593597600"
+      - "1593723600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19273-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19250-LCY
       X-Timer:
-      - S1593596436.357176,VS0,VE226
+      - S1593721176.037648,VS0,VE232
     status: 200 OK
     code: 200
     duration: ""

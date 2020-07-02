@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf_firewall","id":"3x9V8lGE6mhxxVIr15QeRo","attributes":{"service_version_number":"2"}}}
+      {"data":{"type":"waf_firewall","id":"5oX1X8cVEBpEXg6PsNSTXA","attributes":{"service_version_number":"2"}}}
     form: {}
     headers:
       Accept:
@@ -12,7 +12,7 @@ interactions:
       - application/vnd.api+json
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/3x9V8lGE6mhxxVIr15QeRo
+    url: https://api.fastly.com/waf/firewalls/5oX1X8cVEBpEXg6PsNSTXA
     method: DELETE
   response:
     body: ""
@@ -21,7 +21,7 @@ interactions:
       - bytes
       - bytes
       Date:
-      - Thu, 02 Jul 2020 20:05:38 GMT
+      - Thu, 02 Jul 2020 20:21:01 GMT
       Status:
       - 204 No Content
       Strict-Transport-Security:
@@ -36,9 +36,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19251-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19265-LCY
       X-Timer:
-      - S1593720338.214280,VS0,VE316
+      - S1593721261.790412,VS0,VE281
     status: 204 No Content
     code: 204
     duration: ""
