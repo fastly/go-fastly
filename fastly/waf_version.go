@@ -387,8 +387,8 @@ func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 		return ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.WAFID, i.WAFVersionNumber)
-	_, err := c.PostJSONAPI(path, &DeployWAFVersionInput{}, nil)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/activate", i.WAFID, i.WAFVersionNumber)
+	_, err := c.PutJSONAPI(path, &DeployWAFVersionInput{}, nil)
 	if err != nil {
 		return err
 	}
