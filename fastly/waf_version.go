@@ -322,8 +322,10 @@ func (c *Client) LockWAFVersion(i *LockWAFVersionInput) (*WAFVersion, error) {
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/lock", i.WAFID, i.WAFVersionNumber)
-	resp, err := c.PutJSONAPI(path, &LockWAFVersionInput{}, nil)
+	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.WAFID, i.WAFVersionNumber)
+	resp, err := c.PatchJSONAPI(path, &struct {
+		Locked bool `jsonapi:"attr,locked"`
+	}{true}, nil)
 	if err != nil {
 		return nil, err
 	}
