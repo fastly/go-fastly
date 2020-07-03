@@ -21,6 +21,18 @@ const (
 
 	// WAFBatchModifyMaximumOperations is used as the default batch maximum operations.
 	WAFBatchModifyMaximumOperations = 500
+
+	// WAFVersionDeploymentStatusPending is the string value representing pending state for last_deployment_status for a WAF version
+	WAFVersionDeploymentStatusPending = "pending"
+
+	// WAFVersionDeploymentStatusInProgress is the string value representing in-progress state for last_deployment_status for a WAF version
+	WAFVersionDeploymentStatusInProgress = "in-progress"
+
+	// WAFVersionDeploymentStatusCompleted is the string value representing completed state for last_deployment_status for a WAF versions
+	WAFVersionDeploymentStatusCompleted = "completed"
+
+	// WAFVersionDeploymentStatusFailed is the string value representing failed state for last_deployment_status for a WAF versions
+	WAFVersionDeploymentStatusFailed = "failed"
 )
 
 // WAFVersion is the information about a WAF version object.
@@ -33,6 +45,7 @@ type WAFVersion struct {
 	CRSValidateUTF8Encoding          bool       `jsonapi:"attr,crs_validate_utf8_encoding"`
 	Comment                          string     `jsonapi:"attr,comment"`
 	Error                            string     `jsonapi:"attr,error"`
+	LastDeploymentStatus             string     `jsonapi:"attr,last_deployment_status"`
 	DeployedAt                       *time.Time `jsonapi:"attr,deployed_at,iso8601"`
 	AllowedHTTPVersions              string     `jsonapi:"attr,allowed_http_versions"`
 	AllowedMethods                   string     `jsonapi:"attr,allowed_methods"`
