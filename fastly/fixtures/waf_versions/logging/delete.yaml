@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/52szbbqIWi1L5bUd4EBKkX/version/2/logging/syslog/test-syslog
+    url: https://api.fastly.com/service/5GZsX83POn5zij6allCOKe/version/2/logging/syslog/test-syslog
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 02 Jul 2020 20:21:02 GMT
+      - Mon, 06 Jul 2020 11:09:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "947"
+      - "974"
       Fastly-Ratelimit-Reset:
-      - "1593723600"
+      - "1594036800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19257-LCY
       X-Timer:
-      - S1593721262.118224,VS0,VE245
+      - S1594033753.121374,VS0,VE260
     status: 200 OK
     code: 200
     duration: ""

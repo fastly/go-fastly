@@ -2,19 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: Service=52szbbqIWi1L5bUd4EBKkX
+    body: Service=5GZsX83POn5zij6allCOKe
     form:
       Service:
-      - 52szbbqIWi1L5bUd4EBKkX
+      - 5GZsX83POn5zij6allCOKe
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/52szbbqIWi1L5bUd4EBKkX/version
+    url: https://api.fastly.com/service/5GZsX83POn5zij6allCOKe/version
     method: POST
   response:
-    body: '{"service_id":"52szbbqIWi1L5bUd4EBKkX","number":2}'
+    body: '{"service_id":"5GZsX83POn5zij6allCOKe","number":2}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 02 Jul 2020 20:20:55 GMT
+      - Mon, 06 Jul 2020 11:09:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "953"
+      - "980"
       Fastly-Ratelimit-Reset:
-      - "1593723600"
+      - "1594036800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19257-LCY
       X-Timer:
-      - S1593721255.771073,VS0,VE244
+      - S1594033745.664307,VS0,VE540
     status: 200 OK
     code: 200
     duration: ""
