@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: Service=52szbbqIWi1L5bUd4EBKkX&Version=2&name=WAF_Prefetch&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
+    body: Service=5GZsX83POn5zij6allCOKe&Version=2&name=WAF_Prefetch&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
     form:
       Service:
-      - 52szbbqIWi1L5bUd4EBKkX
+      - 5GZsX83POn5zij6allCOKe
       Version:
       - "2"
       name:
@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/52szbbqIWi1L5bUd4EBKkX/version/2/condition
+    url: https://api.fastly.com/service/5GZsX83POn5zij6allCOKe/version/2/condition
     method: POST
   response:
-    body: '{"name":"WAF_Prefetch","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"52szbbqIWi1L5bUd4EBKkX","version":"2","created_at":"2020-07-02T20:20:56Z","updated_at":"2020-07-02T20:20:56Z","deleted_at":null,"comment":""}'
+    body: '{"name":"WAF_Prefetch","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"5GZsX83POn5zij6allCOKe","version":"2","updated_at":"2020-07-06T11:09:06Z","comment":"","deleted_at":null,"created_at":"2020-07-06T11:09:06Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -34,11 +34,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 02 Jul 2020 20:20:56 GMT
+      - Mon, 06 Jul 2020 11:09:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "951"
+      - "978"
       Fastly-Ratelimit-Reset:
-      - "1593723600"
+      - "1594036800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19257-LCY
       X-Timer:
-      - S1593721256.006684,VS0,VE198
+      - S1594033746.983994,VS0,VE199
     status: 200 OK
     code: 200
     duration: ""

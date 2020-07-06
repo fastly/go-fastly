@@ -7,21 +7,21 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/5oX1X8cVEBpEXg6PsNSTXA/versions?page%5Bnumber%5D=1&page%5Bsize%5D=100
+    url: https://api.fastly.com/waf/firewalls/7kRiB97L3ppEaKv5J3hJmV/versions?page%5Bnumber%5D=1&page%5Bsize%5D=100
     method: GET
   response:
-    body: '{"data":[{"id":"6q3TBLBKV00lMIsp0DC3wq","type":"waf_firewall_version","attributes":{"active":false,"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"allowed_http_versions":"HTTP/1.0
+    body: '{"data":[{"id":"6BowSDK5ezUJMnkXOUWVuD","type":"waf_firewall_version","attributes":{"active":false,"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"allowed_http_versions":"HTTP/1.0
       HTTP/1.1","allowed_methods":"GET HEAD POST","allowed_request_content_type":"application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml","allowed_request_content_type_charset":"utf-8|iso-8859-1","arg_name_length":200,"arg_length":800,"combined_file_sizes":20000000,"comment":"my
-      comment","created_at":"2020-07-02T20:20:58Z","critical_anomaly_score":12,"crs_validate_utf8_encoding":true,"deployed_at":null,"error":null,"error_anomaly_score":10,"high_risk_country_codes":"gb","http_violation_score_threshold":20,"inbound_anomaly_score_threshold":20,"last_deployment_status":null,"lfi_score_threshold":20,"locked":true,"max_file_size":20000000,"max_num_args":510,"notice_anomaly_score":8,"number":2,"paranoia_level":2,"php_injection_score_threshold":20,"rce_score_threshold":20,"restricted_extensions":".asa/
+      comment","created_at":"2020-07-06T11:09:09Z","critical_anomaly_score":12,"crs_validate_utf8_encoding":true,"deployed_at":null,"error":null,"error_anomaly_score":10,"high_risk_country_codes":"gb","http_violation_score_threshold":20,"inbound_anomaly_score_threshold":20,"last_deployment_status":null,"lfi_score_threshold":20,"locked":true,"max_file_size":20000000,"max_num_args":510,"notice_anomaly_score":8,"number":2,"paranoia_level":2,"php_injection_score_threshold":20,"rce_score_threshold":20,"restricted_extensions":".asa/
       .asax/ .ascx/ .axd/ .backup/ .bak/ .bat/ .cdx/ .cer/ .cfg/ .cmd/ .com/","restricted_headers":"/proxy/
-      /lock-token/","rfi_score_threshold":20,"session_fixation_score_threshold":20,"sql_injection_score_threshold":20,"total_arg_length":12800,"updated_at":"2020-07-02T20:20:59Z","warning_anomaly_score":20,"xss_score_threshold":20}},{"id":"6oTvCXk15i1OiTbir1LNYn","type":"waf_firewall_version","attributes":{"active":true,"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"allowed_http_versions":"HTTP/1.0
-      HTTP/1.1 HTTP/2","allowed_methods":"GET HEAD POST OPTIONS PUT PATCH DELETE","allowed_request_content_type":"application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml|application/soap+xml|application/x-amf|application/json|application/octet-stream|application/csp-report|application/xss-auditor-report|text/plain","allowed_request_content_type_charset":"utf-8|iso-8859-1|iso-8859-15|windows-1252","arg_name_length":100,"arg_length":400,"combined_file_sizes":10000000,"comment":null,"created_at":"2020-07-02T20:20:57Z","critical_anomaly_score":5,"crs_validate_utf8_encoding":false,"deployed_at":"2020-07-02T20:20:58Z","error":null,"error_anomaly_score":4,"high_risk_country_codes":"","http_violation_score_threshold":999,"inbound_anomaly_score_threshold":999,"last_deployment_status":"completed","lfi_score_threshold":999,"locked":true,"max_file_size":10000000,"max_num_args":255,"notice_anomaly_score":2,"number":1,"paranoia_level":1,"php_injection_score_threshold":999,"rce_score_threshold":999,"restricted_extensions":".asa/
+      /lock-token/","rfi_score_threshold":20,"session_fixation_score_threshold":20,"sql_injection_score_threshold":20,"total_arg_length":12800,"updated_at":"2020-07-06T11:09:10Z","warning_anomaly_score":20,"xss_score_threshold":20}},{"id":"6adJ5yqgOU9olga76asAr6","type":"waf_firewall_version","attributes":{"active":true,"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"allowed_http_versions":"HTTP/1.0
+      HTTP/1.1 HTTP/2","allowed_methods":"GET HEAD POST OPTIONS PUT PATCH DELETE","allowed_request_content_type":"application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml|application/soap+xml|application/x-amf|application/json|application/octet-stream|application/csp-report|application/xss-auditor-report|text/plain","allowed_request_content_type_charset":"utf-8|iso-8859-1|iso-8859-15|windows-1252","arg_name_length":100,"arg_length":400,"combined_file_sizes":10000000,"comment":null,"created_at":"2020-07-06T11:09:07Z","critical_anomaly_score":5,"crs_validate_utf8_encoding":false,"deployed_at":"2020-07-06T11:09:08Z","error":null,"error_anomaly_score":4,"high_risk_country_codes":"","http_violation_score_threshold":999,"inbound_anomaly_score_threshold":999,"last_deployment_status":"completed","lfi_score_threshold":999,"locked":true,"max_file_size":10000000,"max_num_args":255,"notice_anomaly_score":2,"number":1,"paranoia_level":1,"php_injection_score_threshold":999,"rce_score_threshold":999,"restricted_extensions":".asa/
       .asax/ .ascx/ .axd/ .backup/ .bak/ .bat/ .cdx/ .cer/ .cfg/ .cmd/ .com/ .config/
       .conf/ .cs/ .csproj/ .csr/ .dat/ .db/ .dbf/ .dll/ .dos/ .htr/ .htw/ .ida/ .idc/
       .idq/ .inc/ .ini/ .key/ .licx/ .lnk/ .log/ .mdb/ .old/ .pass/ .pdb/ .pol/ .printer/
       .pwd/ .resources/ .resx/ .sql/ .sys/ .vb/ .vbs/ .vbproj/ .vsdisco/ .webinfo/
       .xsd/ .xsx/","restricted_headers":"/proxy/ /lock-token/ /content-range/ /translate/
-      /if/","rfi_score_threshold":999,"session_fixation_score_threshold":999,"sql_injection_score_threshold":999,"total_arg_length":6400,"updated_at":"2020-07-02T20:20:58Z","warning_anomaly_score":3,"xss_score_threshold":999}}],"links":{"last":"https://api.fastly.com/waf/firewalls/5oX1X8cVEBpEXg6PsNSTXA/versions?page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/5oX1X8cVEBpEXg6PsNSTXA/versions?page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":2,"total_pages":1}}'
+      /if/","rfi_score_threshold":999,"session_fixation_score_threshold":999,"sql_injection_score_threshold":999,"total_arg_length":6400,"updated_at":"2020-07-06T11:09:08Z","warning_anomaly_score":3,"xss_score_threshold":999}}],"links":{"last":"https://api.fastly.com/waf/firewalls/7kRiB97L3ppEaKv5J3hJmV/versions?page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/7kRiB97L3ppEaKv5J3hJmV/versions?page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":2,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,7 +35,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Thu, 02 Jul 2020 20:21:00 GMT
+      - Mon, 06 Jul 2020 11:09:11 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,9 +50,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19257-LCY
       X-Timer:
-      - S1593721260.916258,VS0,VE392
+      - S1594033751.890658,VS0,VE459
     status: 200 OK
     code: 200
     duration: ""

@@ -26,7 +26,7 @@ const (
 	WAFVersionDeploymentStatusPending = "pending"
 
 	// WAFVersionDeploymentStatusInProgress is the string value representing in-progress state for last_deployment_status for a WAF version
-	WAFVersionDeploymentStatusInProgress = "in-progress"
+	WAFVersionDeploymentStatusInProgress = "in progress"
 
 	// WAFVersionDeploymentStatusCompleted is the string value representing completed state for last_deployment_status for a WAF versions
 	WAFVersionDeploymentStatusCompleted = "completed"

@@ -1,9 +1,11 @@
 package fastly
 
 import (
+	"fmt"
 	"reflect"
 	"strconv"
 	"testing"
+	"time"
 )
 
 func TestClient_WAF_Versions(t *testing.T) {
@@ -63,6 +65,9 @@ func TestClient_WAF_Versions(t *testing.T) {
 	if len(wafVerResp.Items) != 1 {
 		t.Errorf("expected 1 waf: got %d", len(wafVerResp.Items))
 	}
+	if wafVerResp.Items[0].LastDeploymentStatus != "" {
+		t.Errorf("unexpected waf deployment status: \"%s\"", wafVerResp.Items[0].LastDeploymentStatus)
+	}
 
 	record(t, fixtureBase+"/deploy", func(c *Client) {
 		err = c.DeployWAFVersion(&DeployWAFVersionInput{
@@ -72,6 +77,38 @@ func TestClient_WAF_Versions(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	var wafVerPD *WAFVersion
+	for i := 0; i < 120 && (wafVerPD == nil || wafVerPD.LastDeploymentStatus != WAFVersionDeploymentStatusCompleted); i++ {
+		record(t, fmt.Sprintf("%s/getPostDeploy_%d", fixtureBase, i), func(c *Client) {
+			wafVerPD, err = c.GetWAFVersion(&GetWAFVersionInput{
+				WAFID:            waf.ID,
+				WAFVersionNumber: 1,
+			})
+		})
+		if err != nil {
+			t.Fatal(err)
+			break
+		}
+		if wafVerPD == nil {
+			t.Error("expected waf, got nil")
+			break
+		}
+		if wafVerPD.LastDeploymentStatus != WAFVersionDeploymentStatusPending &&
+			wafVerPD.LastDeploymentStatus != WAFVersionDeploymentStatusInProgress &&
+			wafVerPD.LastDeploymentStatus != WAFVersionDeploymentStatusFailed &&
+			wafVerPD.LastDeploymentStatus != WAFVersionDeploymentStatusCompleted {
+			t.Errorf("unexpected waf deployment status: \"%s\"", wafVerPD.LastDeploymentStatus)
+			break
+		}
+
+		if wafVerPD.LastDeploymentStatus != WAFVersionDeploymentStatusCompleted {
+			time.Sleep(500 * time.Millisecond)
+		}
+	}
+	if wafVerPD.LastDeploymentStatus != WAFVersionDeploymentStatusCompleted {
+		t.Error("waf deployment did not reach completed status")
 	}
 
 	var wafVer *WAFVersion

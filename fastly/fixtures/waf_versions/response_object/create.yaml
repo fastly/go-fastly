@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: Service=52szbbqIWi1L5bUd4EBKkX&Version=2&name=WAf_Response&status=403
+    body: Service=5GZsX83POn5zij6allCOKe&Version=2&name=WAf_Response&status=403
     form:
       Service:
-      - 52szbbqIWi1L5bUd4EBKkX
+      - 5GZsX83POn5zij6allCOKe
       Version:
       - "2"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/52szbbqIWi1L5bUd4EBKkX/version/2/response_object
+    url: https://api.fastly.com/service/5GZsX83POn5zij6allCOKe/version/2/response_object
     method: POST
   response:
-    body: '{"name":"WAf_Response","status":"403","service_id":"52szbbqIWi1L5bUd4EBKkX","version":"2","content":null,"response":"ok","updated_at":"2020-07-02T20:20:56Z","cache_condition":"","created_at":"2020-07-02T20:20:56Z","request_condition":"","deleted_at":null,"content_type":null}'
+    body: '{"name":"WAf_Response","status":"403","service_id":"5GZsX83POn5zij6allCOKe","version":"2","request_condition":"","content_type":null,"created_at":"2020-07-06T11:09:06Z","deleted_at":null,"response":"ok","content":null,"cache_condition":"","updated_at":"2020-07-06T11:09:06Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -30,11 +30,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 02 Jul 2020 20:20:56 GMT
+      - Mon, 06 Jul 2020 11:09:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "950"
+      - "977"
       Fastly-Ratelimit-Reset:
-      - "1593723600"
+      - "1594036800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19265-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19257-LCY
       X-Timer:
-      - S1593721256.343174,VS0,VE213
+      - S1594033746.319287,VS0,VE242
     status: 200 OK
     code: 200
     duration: ""
