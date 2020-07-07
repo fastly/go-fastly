@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.16.1](https://github.com/fastly/go-fastly/releases/tag/v1.16.1) (2020-07-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v1.16.0...v1.16.1)
+
+**Bug fixes:**
+
+- ci: add GH Action for fmt, vet, staticcheck, test [\#184](https://github.com/fastly/go-fastly/pull/184)
+
 ## [v1.16.0](https://github.com/fastly/go-fastly/releases/tag/v1.16.0) (2020-06-25)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.15.0...v1.16.0)
