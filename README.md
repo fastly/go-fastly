@@ -2,7 +2,7 @@ Go Fastly
 =========
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
-[godocs]: https://pkg.go.dev/github.com/fastly/go-fastly?tab=overview
+[godocs]: https://pkg.go.dev/github.com/fastly/go-fastly/fastly?tab=doc
 
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
