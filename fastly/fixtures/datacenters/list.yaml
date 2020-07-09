@@ -1,0 +1,46 @@
+---
+version: 1
+rwmutex: {}
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Fastly-Key:
+      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+      User-Agent:
+      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+    url: https://api.fastly.com/datacenters
+    method: GET
+  response:
+    body: '[{"code":"AMS","name":"Amsterdam","group":"Europe","coordinates":{"x":0,"y":0,"latitude":52.308613,"longitude":4.763889},"shield":"amsterdam-nl"},{"code":"IAD","name":"Ashburn","group":"United States","coordinates":{"x":0,"y":0,"latitude":38.944533,"longitude":-77.455811}}]'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 09 Jul 2020 20:16:27 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-mdw17325-MDW
+      X-Timer:
+      - S1594319825.301688,VS0,VE114
+    status: 200 OK
+    code: 200
