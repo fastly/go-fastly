@@ -29,6 +29,7 @@ func TestClient_FTPs(t *testing.T) {
 			Format:          "format",
 			TimestampFormat: "%Y",
 			Placement:       "waf_debug",
+			MessageType:     "classic",
 		})
 	})
 	if err != nil {
@@ -90,6 +91,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftp.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", ftp.Placement)
+	}
+	if ftp.MessageType != "classic" {
+		t.Errorf("bad message type: %q", ftp.MessageType)
 	}
 
 	// List
@@ -157,6 +161,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftp.Placement != nftp.Placement {
 		t.Errorf("bad placement: %q", ftp.Placement)
+	}
+	if ftp.MessageType != nftp.MessageType {
+		t.Errorf("bad message type: %q", ftp.MessageType)
 	}
 
 	// Update

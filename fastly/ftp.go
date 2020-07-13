@@ -25,6 +25,7 @@ type FTP struct {
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	MessageType       string     `mapstructure:"message_type"`
 	Placement         string     `mapstructure:"placement"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
@@ -93,6 +94,7 @@ type CreateFTPInput struct {
 	GzipLevel         uint8  `form:"gzip_level,omitempty"`
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
 	Placement         string `form:"placement,omitempty"`
 }
@@ -180,6 +182,7 @@ type UpdateFTPInput struct {
 	GzipLevel         uint8  `form:"gzip_level,omitempty"`
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
 	Placement         string `form:"placement,omitempty"`
 }
