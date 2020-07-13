@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.16.2](https://github.com/fastly/go-fastly/releases/tag/v1.16.2) (2020-07-13)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v1.16.1...v1.16.2)
+
+**Bug fixes:**
+
+- Allow message\_type support for FTP endpoint [\#212](https://github.com/fastly/go-fastly/pull/212)
+
 ## [v1.16.1](https://github.com/fastly/go-fastly/releases/tag/v1.16.1) (2020-07-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.16.0...v1.16.1)
