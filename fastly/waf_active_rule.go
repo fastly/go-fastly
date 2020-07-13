@@ -66,14 +66,14 @@ func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
 	}
 
 	for key, value := range pairings {
-		switch value.(type) {
+		switch value := value.(type) {
 		case string:
 			if value != "" {
-				result[key] = value.(string)
+				result[key] = value
 			}
 		case int:
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				result[key] = strconv.Itoa(value)
 			}
 		}
 	}
