@@ -1,5 +1,13 @@
 # Changelog
 
+## [v1.17.0](https://github.com/fastly/go-fastly/releases/tag/v1.17.0) (2020-07-16)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v1.16.2...v1.17.0)
+
+**Enhancements:**
+
+- Added support to list all datacenters [\#210](https://github.com/fastly/go-fastly/pull/210)
+
 ## [v1.16.2](https://github.com/fastly/go-fastly/releases/tag/v1.16.2) (2020-07-13)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.16.1...v1.16.2)
