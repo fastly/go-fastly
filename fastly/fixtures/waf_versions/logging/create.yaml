@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: Service=5GZsX83POn5zij6allCOKe&Version=2&address=example.com&format=format&format_version=2&hostname=example.com&message_type=classic&name=test-syslog&port=1234&token=abcd1234
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=2&address=example.com&format=format&format_version=2&hostname=example.com&message_type=classic&name=test-syslog&port=1234&token=abcd1234
     form:
       Service:
-      - 5GZsX83POn5zij6allCOKe
+      - 7i6HN3TK9wS159v2gPAZ8A
       Version:
       - "2"
       address:
@@ -29,10 +29,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/5GZsX83POn5zij6allCOKe/version/2/logging/syslog
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/logging/syslog
     method: POST
   response:
-    body: '{"address":"example.com","format":"format","format_version":"2","hostname":"example.com","message_type":"classic","name":"test-syslog","port":"1234","token":"abcd1234","service_id":"5GZsX83POn5zij6allCOKe","version":"2","tls_client_cert":null,"deleted_at":null,"created_at":"2020-07-06T11:09:05Z","updated_at":"2020-07-06T11:09:05Z","tls_hostname":null,"tls_ca_cert":null,"placement":null,"ipv4":null,"tls_client_key":null,"public_key":null,"use_tls":"0","response_condition":""}'
+    body: '{"address":"example.com","format":"format","format_version":"2","hostname":"example.com","message_type":"classic","name":"test-syslog","port":"1234","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"2","tls_client_cert":null,"deleted_at":null,"created_at":"2020-07-06T11:09:05Z","updated_at":"2020-07-06T11:09:05Z","tls_hostname":null,"tls_ca_cert":null,"placement":null,"ipv4":null,"tls_client_key":null,"public_key":null,"use_tls":"0","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
