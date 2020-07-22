@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf_firewall","id":"2pmz6XhLxsbLCkK68TrL46","attributes":{"service_version_number":"1"}}}
+      {"data":{"type":"waf_firewall","id":"7i6HN3TK9wS159v2gPAZ8A","attributes":{"service_version_number":"1"}}}
     form: {}
     headers:
       Accept:
@@ -12,7 +12,7 @@ interactions:
       - application/vnd.api+json
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/2pmz6XhLxsbLCkK68TrL46
+    url: https://api.fastly.com/waf/firewalls/7i6HN3TK9wS159v2gPAZ8A
     method: DELETE
   response:
     body: ""

@@ -12,7 +12,7 @@ interactions:
       - application/vnd.api+json; ext=bulk
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/2pmz6XhLxsbLCkK68TrL46/versions/1/active-rules
+    url: https://api.fastly.com/waf/firewalls/7i6HN3TK9wS159v2gPAZ8A/versions/1/active-rules
     method: DELETE
   response:
     body: ""

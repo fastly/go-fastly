@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: Service=0tMlTqfWhijgsh07mPyFJq&Version=2&name=WAf_Response&status=403
+    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=2&name=WAf_Response&status=403
     form:
       Service:
-      - 0tMlTqfWhijgsh07mPyFJq
+      - 7i6HN3TK9wS159v2gPAZ8A
       Version:
       - "2"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/0tMlTqfWhijgsh07mPyFJq/version/2/response_object
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/response_object
     method: POST
   response:
-    body: '{"name":"WAf_Response","status":"403","service_id":"0tMlTqfWhijgsh07mPyFJq","version":"2","request_condition":"","response":"ok","content":null,"content_type":null,"updated_at":"2020-06-30T10:56:25Z","cache_condition":"","created_at":"2020-06-30T10:56:25Z","deleted_at":null}'
+    body: '{"name":"WAf_Response","status":"403","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"2","request_condition":"","response":"ok","content":null,"content_type":null,"updated_at":"2020-06-30T10:56:25Z","cache_condition":"","created_at":"2020-06-30T10:56:25Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes

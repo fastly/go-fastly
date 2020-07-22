@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/2pmz6XhLxsbLCkK68TrL46/versions/1/active-rules
+    url: https://api.fastly.com/waf/firewalls/7i6HN3TK9wS159v2gPAZ8A/versions/1/active-rules
     method: GET
   response:
-    body: '{"data":[],"links":{"last":"https://api.fastly.com/waf/firewalls/2pmz6XhLxsbLCkK68TrL46/versions/1/active-rules?page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/2pmz6XhLxsbLCkK68TrL46/versions/1/active-rules?page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":0,"total_pages":1}}'
+    body: '{"data":[],"links":{"last":"https://api.fastly.com/waf/firewalls/7i6HN3TK9wS159v2gPAZ8A/versions/1/active-rules?page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/7i6HN3TK9wS159v2gPAZ8A/versions/1/active-rules?page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":0,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
