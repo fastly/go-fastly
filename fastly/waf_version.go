@@ -22,22 +22,22 @@ const (
 	// WAFBatchModifyMaximumOperations is used as the default batch maximum operations.
 	WAFBatchModifyMaximumOperations = 500
 
-	// WAFVersionDeploymentStatusPending is the string value representing pending state for last_deployment_status for a WAF version
+	// WAFVersionDeploymentStatusPending is the string value representing pending state for last_deployment_status for a WAF version.
 	WAFVersionDeploymentStatusPending = "pending"
 
-	// WAFVersionDeploymentStatusInProgress is the string value representing in-progress state for last_deployment_status for a WAF version
+	// WAFVersionDeploymentStatusInProgress is the string value representing in-progress state for last_deployment_status for a WAF version.
 	WAFVersionDeploymentStatusInProgress = "in progress"
 
-	// WAFVersionDeploymentStatusCompleted is the string value representing completed state for last_deployment_status for a WAF versions
+	// WAFVersionDeploymentStatusCompleted is the string value representing completed state for last_deployment_status for a WAF versions.
 	WAFVersionDeploymentStatusCompleted = "completed"
 
-	// WAFVersionDeploymentStatusFailed is the string value representing failed state for last_deployment_status for a WAF versions
+	// WAFVersionDeploymentStatusFailed is the string value representing failed state for last_deployment_status for a WAF versions.
 	WAFVersionDeploymentStatusFailed = "failed"
 )
 
 // WAFVersion is the information about a WAF version object.
 type WAFVersion struct {
-	// See documentation here https://docs.fastly.com/api/ngwaf#api-section-ngwaf_firewall_versions
+	// See documentation here https://developer.fastly.com/reference/api/waf/ngwaf/#api-section-ngwaf_firewall_versions
 	ID                               string     `jsonapi:"primary,waf_firewall_version"`
 	Number                           int        `jsonapi:"attr,number"`
 	Active                           bool       `jsonapi:"attr,active"`
@@ -46,7 +46,6 @@ type WAFVersion struct {
 	Comment                          string     `jsonapi:"attr,comment"`
 	Error                            string     `jsonapi:"attr,error"`
 	LastDeploymentStatus             string     `jsonapi:"attr,last_deployment_status"`
-	DeployedAt                       *time.Time `jsonapi:"attr,deployed_at,iso8601"`
 	AllowedHTTPVersions              string     `jsonapi:"attr,allowed_http_versions"`
 	AllowedMethods                   string     `jsonapi:"attr,allowed_methods"`
 	AllowedRequestContentType        string     `jsonapi:"attr,allowed_request_content_type"`
@@ -54,8 +53,6 @@ type WAFVersion struct {
 	HighRiskCountryCodes             string     `jsonapi:"attr,high_risk_country_codes"`
 	RestrictedExtensions             string     `jsonapi:"attr,restricted_extensions"`
 	RestrictedHeaders                string     `jsonapi:"attr,restricted_headers"`
-	CreatedAt                        *time.Time `jsonapi:"attr,created_at,iso8601"`
-	UpdatedAt                        *time.Time `jsonapi:"attr,updated_at,iso8601"`
 	ArgLength                        int        `jsonapi:"attr,arg_length"`
 	ArgNameLength                    int        `jsonapi:"attr,arg_name_length"`
 	CombinedFileSizes                int        `jsonapi:"attr,combined_file_sizes"`
@@ -83,6 +80,9 @@ type WAFVersion struct {
 	ActiveRulesOWASPLogCount         int        `jsonapi:"attr,active_rules_owasp_log_count"`
 	ActiveRulesOWASPBlockCount       int        `jsonapi:"attr,active_rules_owasp_block_count"`
 	ActiveRulesOWASPScoreCount       int        `jsonapi:"attr,active_rules_owasp_score_count"`
+	DeployedAt                       *time.Time `jsonapi:"attr,deployed_at,iso8601"`
+	CreatedAt                        *time.Time `jsonapi:"attr,created_at,iso8601"`
+	UpdatedAt                        *time.Time `jsonapi:"attr,updated_at,iso8601"`
 }
 
 // WAFVersionResponse represents a list WAF versions full response.

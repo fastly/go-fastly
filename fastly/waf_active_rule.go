@@ -21,10 +21,10 @@ type WAFActiveRule struct {
 	Status         string     `jsonapi:"attr,status,omitempty"`
 	ModSecID       int        `jsonapi:"attr,modsec_rule_id,omitempty"`
 	Revision       int        `jsonapi:"attr,revision,omitempty"`
-	CreatedAt      *time.Time `jsonapi:"attr,created_at,iso8601,omitempty"`
-	UpdatedAt      *time.Time `jsonapi:"attr,updated_at,iso8601,omitempty"`
 	Outdated       bool       `jsonapi:"attr,outdated,omitempty"`
 	LatestRevision int        `jsonapi:"attr,latest_revision,omitempty"`
+	CreatedAt      *time.Time `jsonapi:"attr,created_at,iso8601,omitempty"`
+	UpdatedAt      *time.Time `jsonapi:"attr,updated_at,iso8601,omitempty"`
 }
 
 // WAFActiveRuleResponse represents a list of active rules - full response.
