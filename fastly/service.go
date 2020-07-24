@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"reflect"
 	"sort"
 	"time"
 )
@@ -57,11 +58,35 @@ func (s servicesByName) Less(i, j int) bool {
 }
 
 // ListServicesInput is used as input to the ListServices function.
-type ListServicesInput struct{}
+type ListServicesInput struct {
+	PageNumber *uint // The page index for pagination.
+	PageSize   *uint // The number of keys per page.
+}
+
+// formatFilters converts user input into query parameters for filtering.
+func (i *ListServicesInput) formatFilters() map[string]string {
+	result := map[string]string{}
+	pairings := map[string]interface{}{
+		"page[size]":   i.PageSize,
+		"page[number]": i.PageNumber,
+	}
+	for key, value := range pairings {
+		if !reflect.ValueOf(value).IsNil() {
+			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
+		}
+	}
+	return result
+}
 
 // ListServices returns the full list of services for the current account.
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
-	resp, err := c.Get("/service", nil)
+	filters := &RequestOptions{
+		Params: i.formatFilters(),
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+		},
+	}
+	resp, err := c.Get("/service", filters)
 	if err != nil {
 		return nil, err
 	}
