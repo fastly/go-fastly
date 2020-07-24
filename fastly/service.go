@@ -21,6 +21,19 @@ type Service struct {
 	Versions      []*Version `mapstructure:"versions"`
 }
 
+type ListServicesOutput struct {
+	Services []*Service `mapstructure:"data"`
+	Meta     struct {
+		TotalPages  int `mapstructure:"total_pages"`
+		RecordCount int `mapstructure:"record_count"`
+		CurrentPage int `mapstructure:"current_page"`
+	} `mapstructure:"meta"`
+	Links struct {
+		Last *string `mapstructure:"last"`
+		Next *string `mapstructure:"next"`
+	} `mapstructure:"links"`
+}
+
 type ServiceDetail struct {
 	ID            string     `mapstructure:"id"`
 	Name          string     `mapstructure:"name"`
@@ -79,7 +92,7 @@ func (i *ListServicesInput) formatFilters() map[string]string {
 }
 
 // ListServices returns the full list of services for the current account.
-func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
+func (c *Client) ListServices(i *ListServicesInput) (*ListServicesOutput, error) {
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
@@ -91,12 +104,12 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 		return nil, err
 	}
 
-	var s []*Service
+	var s ListServicesOutput
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
-	sort.Stable(servicesByName(s))
-	return s, nil
+	sort.Stable(servicesByName(s.Services))
+	return &s, nil
 }
 
 // CreateServiceInput is used as input to the CreateService function.
