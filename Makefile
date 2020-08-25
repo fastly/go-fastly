@@ -17,6 +17,7 @@ NAME := $(notdir $(shell pwd))
 
 # Test Service ID
 FASTLY_TEST_SERVICE_ID ?=
+FASTLY_API_KEY ?=
 
 all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs all of the required cleaning and verification targets.
 .PHONY: all
@@ -49,9 +50,9 @@ test-race: ## Runs the test suite with the -race flag to identify race condition
 
 test-full: ## Runs the tests with VCR disabled (i.e., makes external calls).
 	@echo "==> Testing ${NAME} with VCR disabled"
-	@env \
-		VCR_DISABLE=1 \
-		go test -timeout=60s -parallel=20 ${GOPKGS} ${TESTARGS}
+	@VCR_DISABLE=1 \
+		bash -c \
+		'go test -timeout=60s -parallel=20 ${GOPKGS} ${TESTARGS}'
 .PHONY: test-full
 
 fix-fixtures: ## Updates test fixtures with a specified default service ID.
