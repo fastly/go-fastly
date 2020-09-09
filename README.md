@@ -153,22 +153,19 @@ Contributors _without_ access to the test service can disable go-vcr, set a
 different test service ID, and use their own API credentials by setting the
 following environment variables:
 * `VCR_DISABLE`: disables go-vcr fixture recording and replay
+  * The `test-full` make target runs the tests with go-vcr disabled.
 * `FASTLY_TEST_SERVICE_ID`: set default service ID used by the test suite
+  * **NOTE: A quick way to create a resource for testing is to use the following [Fastly CLI](https://github.com/fastly/cli) command:**
+  ```
+  $ fastly service create --type=vcl --name=foo
+  ```
 * `FASTLY_API_KEY`: set a Fastly API key to be used by the test suite
 
-Example (`go test`):
 ```sh
-go test -v ./... -run=Logentries \
-	VCR_DISABLE=1 \
-	FASTLY_TEST_SERVICE_ID="SERVICEID" \
-	FASTLY_API_KEY="TESTAPIKEY"
-```
-
-Example (`make test-full`):
-```sh
-make test-full FASTLY_TEST_SERVICE_ID="SERVICEID" \
-	       FASTLY_API_KEY="TESTAPIKEY" \
-	       TESTARGS="-run=Logentries"
+make test-full \
+  FASTLY_TEST_SERVICE_ID="SERVICEID" \
+  FASTLY_API_KEY="TESTAPIKEY" \
+  TESTARGS="-run=Logentries"
 ```
 
 When adding or updating client code and integration tests, contributors may
@@ -177,18 +174,32 @@ submitting a pull request with new or updated fixtures, we ask that contributors
 update them to use the default service ID by running `make fix-fixtures` with
 `FASTLY_TEST_SERVICE_ID` set to the same value used to run your tests.
 
+If you are **updating** an existing resource, in order to force go-vcr to re-record,
+rather than use the existing recorded values, you will have to removed the recorded
+values for that resource via `rm -r fastly/fixtures/<resource_name>`. **If you don't
+remove the existing recorded values, you will see the following error**:
+
+```
+Post "https://api.fastly.com/service/SERVICEID/version": Requested interaction not found
+```
+
 Example (`make test`, `make fix-fixtures`):
 ```sh
-export FASTLY_TEST_SERVICE_ID="SERVICEID"
-export FASTLY_API_KEY="TESTAPIKEY"
-
-make test TESTARGS="-run=Logentries"
+make test \
+  FASTLY_TEST_SERVICE_ID="SERVICEID" \
+  FASTLY_API_KEY="TESTAPIKEY" \
+  TESTARGS="-run=Logentries"
 make fix-fixtures
 
 # Re-run test suite with newly recorded fixtures
 unset FASTLY_TEST_SERVICE_ID FASTLY_API_KEY
 make test
 ```
+
+Contributing
+--------------------------
+
+Refer to [CONTRIBUTING.md](./CONTRIBUTING.md)
 
 License
 -------
