@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: Service=1JeR1AIjuRcEXA5doHqxPr&Version=2&name=WAf_Response&status=403
+    form:
+      Service:
+      - 1JeR1AIjuRcEXA5doHqxPr
+      Version:
+      - "2"
+      name:
+      - WAf_Response
+      status:
+      - "403"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
+    url: https://api.fastly.com/service/1JeR1AIjuRcEXA5doHqxPr/version/2/response_object
+    method: POST
+  response:
+    body: '{"name":"WAf_Response","status":"403","service_id":"1JeR1AIjuRcEXA5doHqxPr","version":"2","content":null,"cache_condition":"","content_type":null,"updated_at":"2020-10-07T13:09:08Z","request_condition":"","deleted_at":null,"created_at":"2020-10-07T13:09:08Z","response":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 07 Oct 2020 13:09:09 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4938"
+      Fastly-Ratelimit-Reset:
+      - "1602079200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lhr7363-LHR
+      X-Timer:
+      - S1602076149.651672,VS0,VE399
+    status: 200 OK
+    code: 200
+    duration: ""
