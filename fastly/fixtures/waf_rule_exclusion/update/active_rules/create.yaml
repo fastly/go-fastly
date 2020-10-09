@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":[{"type":"waf_active_rule","attributes":{"modsec_rule_id":2029718,"revision":1,"status":"log"}},{"type":"waf_active_rule","attributes":{"modsec_rule_id":2037405,"revision":1,"status":"log"}},{"type":"waf_active_rule","attributes":{"modsec_rule_id":21032607,"revision":1,"status":"log"}}]}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json; ext=bulk
+      Content-Type:
+      - application/vnd.api+json; ext=bulk
+      User-Agent:
+      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
+    url: https://api.fastly.com/waf/firewalls/6DaBRX0dIm1SjxiB1KQCII/versions/1/active-rules
+    method: POST
+  response:
+    body: '{"data":[{"id":"4Cfz3YyWpEJHybhkcui3KW","type":"waf_active_rule","attributes":{"created_at":"2020-10-09T09:28:43Z","latest_revision":1,"modsec_rule_id":2029718,"outdated":false,"revision":1,"status":"log","updated_at":"2020-10-09T09:28:43Z"},"relationships":{"waf_firewall_version":{"data":{"id":"2ZKa6D4Ibe8SL2lnmqAxNm","type":"waf_firewall_version"}},"waf_rule_revision":{"data":{"id":"6ZJML5tsy5uVq1nGNgmZ78","type":"waf_rule_revision"}}}},{"id":"4MFH6fCBrk81yMZsWzyeEk","type":"waf_active_rule","attributes":{"created_at":"2020-10-09T09:28:43Z","latest_revision":1,"modsec_rule_id":2037405,"outdated":false,"revision":1,"status":"log","updated_at":"2020-10-09T09:28:43Z"},"relationships":{"waf_firewall_version":{"data":{"id":"2ZKa6D4Ibe8SL2lnmqAxNm","type":"waf_firewall_version"}},"waf_rule_revision":{"data":{"id":"3ANlv7vVZdzk2qFXlJLIk3","type":"waf_rule_revision"}}}},{"id":"6Mj4fVJ3JHcjs9hsJPmLsV","type":"waf_active_rule","attributes":{"created_at":"2020-10-09T09:28:43Z","latest_revision":1,"modsec_rule_id":21032607,"outdated":false,"revision":1,"status":"log","updated_at":"2020-10-09T09:28:43Z"},"relationships":{"waf_firewall_version":{"data":{"id":"2ZKa6D4Ibe8SL2lnmqAxNm","type":"waf_firewall_version"}},"waf_rule_revision":{"data":{"id":"168gOasZaIZ1Sr712NJLLn","type":"waf_rule_revision"}}}}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Content-Length:
+      - "1313"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Fri, 09 Oct 2020 09:28:43 GMT
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lon4257-LON
+      X-Timer:
+      - S1602235723.456905,VS0,VE189
+    status: 201 Created
+    code: 201
+    duration: ""

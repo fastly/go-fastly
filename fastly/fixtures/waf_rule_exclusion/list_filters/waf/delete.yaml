@@ -1,0 +1,44 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":{"type":"waf_firewall","id":"62l7nuYjgnuQSlFstrZnnH","attributes":{"service_version_number":"1"}}}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
+    url: https://api.fastly.com/waf/firewalls/62l7nuYjgnuQSlFstrZnnH
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Date:
+      - Fri, 09 Oct 2020 09:28:44 GMT
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4257-LON
+      X-Timer:
+      - S1602235724.072526,VS0,VE155
+    status: 204 No Content
+    code: 204
+    duration: ""

@@ -117,13 +117,13 @@ var ErrMissingWAFVersionID = errors.New("missing required field 'WAFVersionID'")
 // requires a list of WAF active rules, but it is empty.
 var ErrMissingWAFActiveRuleList = errors.New("WAF active rules slice is empty")
 
-// ErrMissingWAFExclusionNumber is an error that is returned when an input struct
+// ErrMissingWAFRuleExclusionNumber is an error that is returned when an input struct
 // requires a "WAFExclusionNumber" key, but one was not set.
-var ErrMissingWAFExclusionNumber = errors.New("missing required field 'WAFExclusionNumber'")
+var ErrMissingWAFRuleExclusionNumber = errors.New("missing required field 'WAFExclusionNumber'")
 
-// ErrMissingWAFExclusion is an error that is returned when an input struct
-// requires a "WAFExclusion" key, but one was not set.
-var ErrMissingWAFExclusion = errors.New("missing required field 'WAFExclusion'")
+// ErrMissingWAFRuleExclusion is an error that is returned when an input struct
+// requires a "WAFRuleExclusion" key, but one was not set.
+var ErrMissingWAFRuleExclusion = errors.New("missing required field 'WAFRuleExclusion'")
 
 // ErrMissingOWASPID is an error that is returned was an input struct
 // requires a "OWASPID" key, but one was not set
