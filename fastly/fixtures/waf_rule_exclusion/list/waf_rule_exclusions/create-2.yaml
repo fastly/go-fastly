@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":{"type":"waf_exclusion","attributes":{"condition":"req.url.basename == \"index.php\"","exclusion_type":"rule","name":"index php","number":null},"relationships":{"waf_rules":{"data":[{"type":"waf_rule","id":"21032607"}]}}},"included":[{"type":"waf_rule","id":"21032607","attributes":{"modsec_rule_id":21032607}}]}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
+    url: https://api.fastly.com/waf/firewalls/1YwZnVgr910HP3I8WRlhwE/versions/1/exclusions
+    method: POST
+  response:
+    body: '{"data":{"id":"7hTcQkaAY1Ix0oB1i7U9FO","type":"waf_exclusion","attributes":{"created_at":"2020-10-09T09:28:43Z","exclusion_type":"rule","condition":"req.url.basename
+      == \"index.php\"","name":"index php","number":2,"updated_at":"2020-10-09T09:28:43Z"},"relationships":{"waf_rules":{"data":[{"id":"16kRBJ5RrNGYcnQ9EEiawe","type":"waf_rule"}]}}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Content-Length:
+      - "343"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Fri, 09 Oct 2020 09:28:43 GMT
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lon4257-LON
+      X-Timer:
+      - S1602235723.456888,VS0,VE151
+    status: 201 Created
+    code: 201
+    duration: ""
