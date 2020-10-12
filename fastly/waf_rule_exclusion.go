@@ -6,6 +6,7 @@ import (
 	"io"
 	"reflect"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -56,8 +57,8 @@ type ListWAFRuleExclusionsInput struct {
 	PageSize *int
 	// Request a specific page of exclusions.
 	PageNumber *int
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_rule_revision and waf_firewall_version.
-	Include *string
+	// Include relationships. Optional. Permitted values: waf_rules.
+	Include []string
 }
 
 // ListAllWAFRuleExclusionsInput used as input for listing all WAF rule exclusions.
@@ -72,8 +73,8 @@ type ListAllWAFRuleExclusionsInput struct {
 	FilterName *string
 	// Limit results to exclusions that represent the specified ModSecurity modsec_rule_id.
 	FilterModSedID *string
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_rule_revision and waf_firewall_version.
-	Include *string
+	// Include relationships. Optional. Permitted values: waf_rules.
+	Include []string
 }
 
 // CreateWAFRuleExclusionInput used as input to create a WAF rule exclusion.
@@ -110,6 +111,8 @@ type DeleteWAFRuleExclusionInput struct {
 
 func (i *ListWAFRuleExclusionsInput) formatFilters() map[string]string {
 
+	include := strings.Join(i.Include, ",")
+
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[exclusion_type]":           i.FilterExclusionType,
@@ -117,11 +120,15 @@ func (i *ListWAFRuleExclusionsInput) formatFilters() map[string]string {
 		"filter[waf_rules.modsec_rule_id]": i.FilterModSedID,
 		"page[size]":                       i.PageSize,
 		"page[number]":                     i.PageNumber,
-		"include":                          i.Include,
+		"include":                          include,
 	}
 
 	for key, value := range pairings {
 		switch value := value.(type) {
+		case string:
+			if value != "" {
+				result[key] = value
+			}
 		case *string:
 			if value != nil {
 				result[key] = *value

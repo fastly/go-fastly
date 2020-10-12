@@ -55,7 +55,7 @@ func TestClient_WAF_Rule_Exclusion_list_filters(t *testing.T) {
 		WAFVersionNumber:    1,
 		FilterExclusionType: strToPtr(WAFRuleExclusionTypeRule),
 		FilterModSedID:      strToPtr("21032607"),
-		Include:             strToPtr("waf_rules"),
+		Include:             []string{"waf_rules"},
 	})
 	if len(exclResp.Items) != 1 {
 		t.Errorf("expected 2 waf rule exclusions: got %d", len(exclResp.Items))
@@ -415,7 +415,7 @@ func listWAFRuleExclusions(t *testing.T, fixture string, waf *WAF, include strin
 		exclResp, err = c.ListAllWAFRuleExclusions(&ListAllWAFRuleExclusionsInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
-			Include:          &include,
+			Include:          []string{include},
 		})
 	})
 	if err != nil {
