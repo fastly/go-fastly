@@ -21,7 +21,7 @@ type CustomCertificate struct {
 	SerialNumber       string       `jsonapi:"attr,serial_number"`
 	SignatureAlgorithm string       `jsonapi:"attr,signature_algorithm"`
 	UpdatedAt          *time.Time   `jsonapi:"attr,updated_at,iso8601"`
-	TLSDomains         []*TLSDomain `jsonapi:"relation,tls_domains,tls_domain"`
+	TLSDomains         []*TLSDomain `jsonapi:"relation,tls_domains,tls_domain"` // TODO "type" is not populating
 }
 
 // ListCustomCertificatesInput is used as input to the ListBulkCertificates function.
@@ -80,4 +80,30 @@ func (c *Client) ListCustomCertificates(i *ListCustomCertificatesInput) ([]*Cust
 	}
 
 	return cc, nil
+}
+
+// GetCustomCertificateInput is used as input to the GetCustomCertificate function.
+type GetCustomCertificateInput struct {
+	ID string
+}
+
+func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCertificate, error) {
+
+	if i.ID == "" {
+		return nil, ErrMissingID
+	}
+
+	p := fmt.Sprintf("/tls/certificates/%s", i.ID)
+
+	r, err := c.Get(p, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var cc CustomCertificate
+	if err := jsonapi.UnmarshalPayload(r.Body, &cc); err != nil {
+		return nil, err
+	}
+
+	return &cc, nil
 }
