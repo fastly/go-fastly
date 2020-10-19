@@ -107,3 +107,84 @@ func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCert
 
 	return &cc, nil
 }
+
+type CreateCustomCertificateInput struct {
+	CertBlob string `jsonapi:"attr,cert_blob"`
+	Name     string `jsonapi:"attr,name"`
+}
+
+func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*CustomCertificate, error) { // TODO panic: invalid character '<' looking for beginning of value
+
+	if i.CertBlob == "" {
+		return nil, ErrMissingCertBlob
+	}
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
+
+	p := "/tls/certificates"
+
+	r, err := c.PostJSONAPI(p, i, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var cc CustomCertificate
+	if err := jsonapi.UnmarshalPayload(r.Body, &cc); err != nil {
+		return nil, err
+	}
+
+	return &cc, nil
+}
+
+type UpdateCustomCertificateInput struct {
+	ID                string `jsonapi:"attr,id"`
+	CertBlob          string `jsonapi:"attr,cert_blob"`
+	Name 			  string `jsonapi:"attr,name"`
+}
+
+// UpdateCustomCertificate replace a certificate with a newly reissued certificate.
+// By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
+// Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
+// Any SAN entries that are missing in the replacement certificate will become disabled.
+func (c *Client) UpdateCustomCertificate(i *UpdateCustomCertificateInput) (*CustomCertificate, error) { // TODO TEST THIS
+	if i.ID == "" {
+		return nil, ErrMissingID
+	}
+
+	if i.CertBlob == "" {
+		return nil, ErrMissingCertBlob
+	}
+
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
+
+	path := fmt.Sprintf("/tls/certificates/%s", i.ID)
+	resp, err := c.PatchJSONAPI(path, i, nil)
+	if err != nil {
+		return nil, err
+	}
+
+	var cc CustomCertificate
+	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {
+		return nil, err
+	}
+	return &cc, nil
+}
+
+// DeleteCustomCertificateInput used for deleting a certificate.
+type DeleteCustomCertificateInput struct {
+	ID string
+}
+
+// DeleteCustomCertificate destroy a certificate. This disables TLS for all domains listed as SAN entries.
+func (c *Client) DeleteCustomCertificate(i *DeleteCustomCertificateInput) error {
+	if i.ID == "" {
+		return ErrMissingID
+	}
+
+	path := fmt.Sprintf("/tls/certificates/%s", i.ID)
+	_, err := c.Delete(path, nil)
+	return err
+}
