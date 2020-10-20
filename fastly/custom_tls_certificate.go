@@ -8,7 +8,7 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// CustomCertificate represents a custom certificate. Uses common TLSDomain type from BulkCertificate
+// CustomCertificate represents a custom certificate. Uses common TLSDomain type from CustomCertificate
 type CustomCertificate struct {
 	ID                 string       `jsonapi:"primary,tls_certificate"`
 	CreatedAt          *time.Time   `jsonapi:"attr,created_at,iso8601"`
@@ -24,7 +24,7 @@ type CustomCertificate struct {
 	TLSDomains         []*TLSDomain `jsonapi:"relation,tls_domains,tls_domain"` // TODO "type" is not populating
 }
 
-// ListCustomCertificatesInput is used as input to the ListBulkCertificates function.
+// ListCustomCertificatesInput is used as input to the ListCustomCertificatesInput function.
 type ListCustomCertificatesInput struct {
 	PageNumber              *uint   // The page index for pagination.
 	PageSize                *uint   // The number of keys per page.
@@ -113,7 +113,7 @@ type CreateCustomCertificateInput struct {
 	Name     string `jsonapi:"attr,name"`
 }
 
-func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*CustomCertificate, error) { // TODO panic: invalid character '<' looking for beginning of value
+func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*CustomCertificate, error) { // TODO Possible platform bug, returns "Internal Server Error" if "type" is blank
 
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
@@ -138,9 +138,9 @@ func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*Cust
 }
 
 type UpdateCustomCertificateInput struct {
-	ID                string `jsonapi:"attr,id"`
-	CertBlob          string `jsonapi:"attr,cert_blob"`
-	Name 			  string `jsonapi:"attr,name"`
+	ID       string `jsonapi:"attr,id"`
+	CertBlob string `jsonapi:"attr,cert_blob"`
+	Name     string `jsonapi:"attr,name"`
 }
 
 // UpdateCustomCertificate replace a certificate with a newly reissued certificate.
