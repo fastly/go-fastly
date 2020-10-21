@@ -1,0 +1,37 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/tls/certificates/CERTIFICATE_ID
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+        - bytes
+      Date:
+        - Sat, 11 May 2019 21:45:02 GMT
+      Status:
+        - 204 No Content
+      Strict-Transport-Security:
+        - max-age=31536000
+      Via:
+        - 1.1 varnish
+        - 1.1 varnish
+      X-Cache:
+        - MISS, MISS
+      X-Cache-Hits:
+        - 0, 0
+      X-Content-Type-Options:
+        - nosniff
+      X-Served-By:
+        - cache-control-slwdc9035-CONTROL-SLWDC, cache-lax8631-LAX
+      X-Timer:
+        - S1557611103.608075,VS0,VE254
+    status: 204 No Content
+    code: 204

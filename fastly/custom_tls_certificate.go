@@ -8,7 +8,7 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// CustomCertificate represents a custom certificate. Uses common TLSDomain type from CustomCertificate
+// CustomCertificate represents a custom certificate. Uses common TLSDomain type from BulkCertificate
 type CustomCertificate struct {
 	ID                 string       `jsonapi:"primary,tls_certificate"`
 	CreatedAt          *time.Time   `jsonapi:"attr,created_at,iso8601"`
@@ -21,7 +21,7 @@ type CustomCertificate struct {
 	SerialNumber       string       `jsonapi:"attr,serial_number"`
 	SignatureAlgorithm string       `jsonapi:"attr,signature_algorithm"`
 	UpdatedAt          *time.Time   `jsonapi:"attr,updated_at,iso8601"`
-	TLSDomains         []*TLSDomain `jsonapi:"relation,tls_domains,tls_domain"` // TODO "type" is not populating
+	TLSDomains         []*TLSDomain `jsonapi:"relation,tls_domains,tls_domain"`
 }
 
 // ListCustomCertificatesInput is used as input to the ListCustomCertificatesInput function.
@@ -147,7 +147,7 @@ type UpdateCustomCertificateInput struct {
 // By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
 // Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
 // Any SAN entries that are missing in the replacement certificate will become disabled.
-func (c *Client) UpdateCustomCertificate(i *UpdateCustomCertificateInput) (*CustomCertificate, error) { // TODO TEST THIS
+func (c *Client) UpdateCustomCertificate(i *UpdateCustomCertificateInput) (*CustomCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
