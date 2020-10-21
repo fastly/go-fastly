@@ -115,9 +115,9 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 
 // CreateTLSActivationInput is used as input to the CreateTLSActivation function.
 type CreateTLSActivationInput struct {
-	TLSCertificate          *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
+	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate,tls_certificate"`
 	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration,tls_configuration"`
-	TLSDomain *TLSDomain `jsonapi:"relation,tls_domain,tls_domain"`
+	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain,tls_domain"`
 }
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
@@ -150,8 +150,8 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 
 // UpdateTLSActivationInput is used as input to the UpdateTLSActivation function.
 type UpdateTLSActivationInput struct {
-	ID                string `jsonapi:"attr,id"`
-	TLSCertificate          *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
+	ID             string          `jsonapi:"attr,id"`
+	TLSCertificate *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
 }
 
 // UpdateTLSActivation
