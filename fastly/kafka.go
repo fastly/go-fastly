@@ -26,14 +26,14 @@ type Kafka struct {
 	TLSHostname       string     `mapstructure:"tls_hostname"`
 	TLSClientCert     string     `mapstructure:"tls_client_cert"`
 	TLSClientKey      string     `mapstructure:"tls_client_key"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
-	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	ParseLogKeyvals   bool       `mapstructure:"parse_log_keyvals"`
 	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
 	AuthMethod        string     `mapstructure:"auth_method"`
 	User              string     `mapstructure:"user"`
 	Password          string     `mapstructure:"password"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	UpdatedAt         *time.Time `mapstructure:"updated_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // kafkaByName is a sortable list of kafkas.
