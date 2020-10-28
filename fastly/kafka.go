@@ -26,6 +26,11 @@ type Kafka struct {
 	TLSHostname       string     `mapstructure:"tls_hostname"`
 	TLSClientCert     string     `mapstructure:"tls_client_cert"`
 	TLSClientKey      string     `mapstructure:"tls_client_key"`
+	ParseLogKeyvals   bool       `mapstructure:"parse_log_keyvals"`
+	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
+	AuthMethod        string     `mapstructure:"auth_method"`
+	User              string     `mapstructure:"user"`
+	Password          string     `mapstructure:"password"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -95,6 +100,11 @@ type CreateKafkaInput struct {
 	TLSHostname       *string      `form:"tls_hostname,omitempty"`
 	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
 	TLSClientKey      *string      `form:"tls_client_key,omitempty"`
+	ParseLogKeyvals   *Compatibool `form:"parse_log_keyvals,omitempty"`
+	RequestMaxBytes   *uint        `form:"request_max_bytes,omitempty"`
+	AuthMethod        *string      `form:"auth_method,omitempty"`
+	User              *string      `form:"user,omitempty"`
+	Password          *string      `form:"password,omitempty"`
 }
 
 // CreateKafka creates a new Fastly kafka.
@@ -182,6 +192,11 @@ type UpdateKafkaInput struct {
 	TLSHostname       *string      `form:"tls_hostname,omitempty"`
 	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
 	TLSClientKey      *string      `form:"tls_client_key,omitempty"`
+	ParseLogKeyvals   *Compatibool `form:"parse_log_keyvals,omitempty"`
+	RequestMaxBytes   *uint        `form:"request_max_bytes,omitempty"`
+	AuthMethod        *string      `form:"auth_method,omitempty"`
+	User              *string      `form:"user,omitempty"`
+	Password          *string      `form:"password,omitempty"`
 }
 
 // UpdateKafka updates a specific kafka.
