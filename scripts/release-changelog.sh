@@ -25,5 +25,6 @@ github_changelog_generator -u fastly -p go-fastly \
   --bugs-label "**Bug fixes:**" \
   --release-url "https://github.com/fastly/go-fastly/releases/tag/%s" \
   --exclude-labels documentation \
+  --exclude-tags-regex "v.*-.*" \
   --output RELEASE_CHANGELOG.md \
   --since-tag $prev_tag
