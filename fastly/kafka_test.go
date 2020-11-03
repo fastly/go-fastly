@@ -37,6 +37,11 @@ func TestClient_Kafkas(t *testing.T) {
 			TLSHostname:      String("example.com"),
 			TLSClientCert:    String(clientCert),
 			TLSClientKey:     String(clientKey),
+			ParseLogKeyvals:  CBool(true),
+			RequestMaxBytes:  Uint(1024),
+			AuthMethod:       String("scram-sha-512"),
+			User:             String("foobar"),
+			Password:         String("deadbeef"),
 		})
 	})
 	if err != nil {
@@ -98,6 +103,21 @@ func TestClient_Kafkas(t *testing.T) {
 	}
 	if k.TLSClientKey != clientKey {
 		t.Errorf("bad tls_client_key: %q", k.TLSClientKey)
+	}
+	if k.ParseLogKeyvals != true {
+		t.Errorf("bad parse_log_keyvals: %t", k.ParseLogKeyvals)
+	}
+	if k.RequestMaxBytes != 1024 {
+		t.Errorf("bad request_max_bytes: %q", k.RequestMaxBytes)
+	}
+	if k.AuthMethod != "scram-sha-512" {
+		t.Errorf("bad auth_method: %q", k.AuthMethod)
+	}
+	if k.User != "foobar" {
+		t.Errorf("bad user: %q", k.User)
+	}
+	if k.Password != "deadbeef" {
+		t.Errorf("bad password: %q", k.Password)
 	}
 
 	// List
@@ -165,6 +185,21 @@ func TestClient_Kafkas(t *testing.T) {
 	}
 	if k.TLSClientKey != nk.TLSClientKey {
 		t.Errorf("bad tls_client_key: %q", k.TLSClientKey)
+	}
+	if k.ParseLogKeyvals != true {
+		t.Errorf("bad parse_log_keyvals: %t", k.ParseLogKeyvals)
+	}
+	if k.RequestMaxBytes != 1024 {
+		t.Errorf("bad request_max_bytes: %q", k.RequestMaxBytes)
+	}
+	if k.AuthMethod != "scram-sha-512" {
+		t.Errorf("bad auth_method: %q", k.AuthMethod)
+	}
+	if k.User != "foobar" {
+		t.Errorf("bad user: %q", k.User)
+	}
+	if k.Password != "deadbeef" {
+		t.Errorf("bad password: %q", k.Password)
 	}
 
 	// Update

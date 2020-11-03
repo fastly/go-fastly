@@ -1,6 +1,14 @@
 # Changelog
 
-## [v1.17.0](https://github.com/fastly/go-fastly/releases/tag/v1.17.0) (2020-07-16)
+## [v1.18.0](https://github.com/fastly/go-fastly/releases/tag/v1.18.0) (2020-10-28)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v1.17.0...v1.18.0)
+
+**Enhancements:**
+
+- Add SASL fields support for Kafka Logging Endpoint [\#226](https://github.com/fastly/go-fastly/pull/226)
+
+## [v1.17.0](https://github.com/fastly/go-fastly/releases/tag/v1.17.0) (2020-07-20)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.16.2...v1.17.0)
 
