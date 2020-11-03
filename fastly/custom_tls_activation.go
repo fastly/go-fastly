@@ -11,9 +11,9 @@ import (
 // TLSActivation represents a /tls/activations response.
 type TLSActivation struct {
 	ID                string              `jsonapi:"primary,tls_activation"`
-	TLSConfigurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"` // TLSConfiguration type shared with BulkCertificate
-	TLSDomains        []*TLSDomain        `jsonapi:"relation,tls_domains,tls_domain"`               // TLSDomain type shared with BulkCertificate
-	TLSCertificates   []*TLSCertificate   `jsonapi:"relation,tls_certificates,tls_certificate"`
+	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration"` // TLSConfiguration type shared with BulkCertificate
+	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain"`               // TLSDomain type shared with BulkCertificate
+	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate"`
 	CreatedAt         *time.Time          `jsonapi:"attr,created_at,iso8601"`
 }
 
@@ -54,7 +54,7 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 }
 
 // ListTLSActivations list all activations.
-func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivation, error) { // TODO not populating relations
+func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivation, error) {
 
 	p := "/tls/activations"
 	filters := &RequestOptions{
@@ -92,7 +92,7 @@ type GetTLSActivationInput struct {
 }
 
 // GetTLSActivation retrieve a single activation.
-func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, error) { // TODO not populating relations
+func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, error) {
 
 	if i.ID == "" {
 		return nil, ErrMissingID
