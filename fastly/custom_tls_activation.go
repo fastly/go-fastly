@@ -153,6 +153,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 type UpdateTLSActivationInput struct {
 	ID             string          `jsonapi:"attr,id"`
 	TLSCertificate *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
+	Type             string        `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be set.
 }
 
 // UpdateTLSActivation
