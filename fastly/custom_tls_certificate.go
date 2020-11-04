@@ -111,7 +111,7 @@ func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCert
 type CreateCustomCertificateInput struct {
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	Name     string `jsonapi:"attr,name"`
-	Type     string `jsonapi:"primary,tls_certificate"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be present.
+	ID       string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 }
 
 func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*CustomCertificate, error) {
@@ -139,10 +139,10 @@ func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*Cust
 }
 
 type UpdateCustomCertificateInput struct {
-	ID       string `jsonapi:"attr,id"`
+	ID       string `jsonapi:"primary,tls_certificate"`
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	Name     string `jsonapi:"attr,name"`
-	Type     string `jsonapi:"primary,tls_certificate"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be present.
+	Type     string `jsonapi:"primary,tls_certificate"`
 }
 
 // UpdateCustomCertificate replace a certificate with a newly reissued certificate.

@@ -115,10 +115,10 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 
 // CreateTLSActivationInput is used as input to the CreateTLSActivation function.
 type CreateTLSActivationInput struct {
+	ID               string            `jsonapi:"primary,tls_activation"` // ID value does not need to be set.
 	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate,tls_certificate"`
 	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration,tls_configuration"`
 	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain,tls_domain"`
-	Type             string            `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be present.
 }
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
@@ -151,9 +151,8 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 
 // UpdateTLSActivationInput is used as input to the UpdateTLSActivation function.
 type UpdateTLSActivationInput struct {
-	ID             string          `jsonapi:"attr,id"`
+	ID             string          `jsonapi:"primary,tls_activation"`
 	TLSCertificate *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
-	Type           string          `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be present.
 }
 
 // UpdateTLSActivation
