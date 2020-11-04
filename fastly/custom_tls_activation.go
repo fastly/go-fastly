@@ -17,7 +17,7 @@ type TLSActivation struct {
 	CreatedAt        *time.Time        `jsonapi:"attr,created_at,iso8601"`
 }
 
-// TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tls/certificates API
+// TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tlsrtificates API/ce
 type TLSCertificate struct {
 	ID   string `jsonapi:"primary,tls_certificate"`
 	Type string `jsonapi:"attr,type"`
@@ -118,11 +118,11 @@ type CreateTLSActivationInput struct {
 	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate,tls_certificate"`
 	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration,tls_configuration"`
 	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain,tls_domain"`
-	Type             string            `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be set.
+	Type             string            `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API that requires "type" to be present.
 }
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
-func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) { // TODO test
+func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
 
 	if i.TLSCertificate == nil {
 		return nil, ErrMissingTLSCertificateID // TODO update this error
@@ -153,11 +153,11 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 type UpdateTLSActivationInput struct {
 	ID             string          `jsonapi:"attr,id"`
 	TLSCertificate *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
-	Type             string        `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be set.
+	Type           string          `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API that requires "type" to be present.
 }
 
 // UpdateTLSActivation
-func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivation, error) { // TODO test
+func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -171,11 +171,11 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 		return nil, err
 	}
 
-	var bc TLSActivation
-	if err := jsonapi.UnmarshalPayload(resp.Body, &bc); err != nil {
+	var ta TLSActivation
+	if err := jsonapi.UnmarshalPayload(resp.Body, &ta); err != nil {
 		return nil, err
 	}
-	return &bc, nil
+	return &ta, nil
 }
 
 // DeleteTLSActivationInput used for deleting a certificate.
