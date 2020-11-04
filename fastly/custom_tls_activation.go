@@ -118,20 +118,20 @@ type CreateTLSActivationInput struct {
 	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate,tls_certificate"`
 	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration,tls_configuration"`
 	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain,tls_domain"`
-	Type             string            `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API that requires "type" to be present.
+	Type             string            `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be present.
 }
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
 func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
 
 	if i.TLSCertificate == nil {
-		return nil, ErrMissingTLSCertificateID // TODO update this error
+		return nil, ErrMissingTLSCertificate
 	}
 	if i.TLSConfiguration == nil {
-		return nil, ErrMissingTLSConfigurationID // TODO update this error
+		return nil, ErrMissingTLSConfiguration
 	}
 	if i.TLSDomain == nil {
-		return nil, ErrMissingTLSDomainID // TODO update this error
+		return nil, ErrMissingTLSDomain
 	}
 
 	p := "/tls/activations"
@@ -153,7 +153,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 type UpdateTLSActivationInput struct {
 	ID             string          `jsonapi:"attr,id"`
 	TLSCertificate *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
-	Type           string          `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API that requires "type" to be present.
+	Type           string          `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be present.
 }
 
 // UpdateTLSActivation
@@ -162,7 +162,7 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 		return nil, ErrMissingID
 	}
 	if i.TLSCertificate == nil {
-		return nil, ErrMissingTLSCertificateID // TODO update this error
+		return nil, ErrMissingTLSCertificate
 	}
 
 	path := fmt.Sprintf("/tls/activations/%s", i.ID)
