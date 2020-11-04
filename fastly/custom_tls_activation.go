@@ -10,11 +10,11 @@ import (
 
 // TLSActivation represents a /tls/activations response.
 type TLSActivation struct {
-	ID                string              `jsonapi:"primary,tls_activation"`
+	ID               string            `jsonapi:"primary,tls_activation"`
 	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration"` // TLSConfiguration type shared with BulkCertificate
-	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain"`               // TLSDomain type shared with BulkCertificate
+	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain"`        // TLSDomain type shared with BulkCertificate
 	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate"`
-	CreatedAt         *time.Time          `jsonapi:"attr,created_at,iso8601"`
+	CreatedAt        *time.Time        `jsonapi:"attr,created_at,iso8601"`
 }
 
 // TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tls/certificates API
@@ -118,6 +118,7 @@ type CreateTLSActivationInput struct {
 	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate,tls_certificate"`
 	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration,tls_configuration"`
 	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain,tls_domain"`
+	Type             string            `jsonapi:"primary,tls_activation"` // Type value does not need to be set but existence of this key prevents server error due to API bug that requires "type" to be set.
 }
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.

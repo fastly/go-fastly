@@ -36,14 +36,12 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 		t.Errorf("bad tls configurations: %v", lcon)
 	}
 
-
-
 	// Update
 	var ucon *CustomTLSConfiguration
 	newName := "My configuration v2"
 	record(t, fixtureBase+"update", func(c *Client) {
 		ucon, err = c.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
-			ID:                "TLS_CONFIGURATION_ID",
+			ID:   "TLS_CONFIGURATION_ID",
 			Name: newName,
 		})
 	})
@@ -91,7 +89,7 @@ func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
 	var err error
 	record(t, "custom_tls_configuration/update", func(c *Client) {
 		_, err = c.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
-			ID:                "TLS_CONFIGURATION_ID",
+			ID:   "TLS_CONFIGURATION_ID",
 			Name: "My configuration v2",
 		})
 	})

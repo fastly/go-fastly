@@ -14,9 +14,9 @@ func TestClient_TLSActivation(t *testing.T) {
 	var ta *TLSActivation
 	record(t, fixtureBase+"create", func(c *Client) {
 		ta, err = c.CreateTLSActivation(&CreateTLSActivationInput{
-			TLSCertificate:          &TLSCertificate{ID: "CERTIFICATE_ID"},
-			TLSConfiguration: &TLSConfiguration{ID:"CONFIGURATION_ID"},
-			TLSDomain: &TLSDomain{ID:"DOMAIN_NAME"},
+			TLSCertificate:   &TLSCertificate{ID: "CERTIFICATE_ID"},
+			TLSConfiguration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
+			TLSDomain:        &TLSDomain{ID: "DOMAIN_NAME"},
 		})
 	})
 	if err != nil {
@@ -71,8 +71,8 @@ func TestClient_TLSActivation(t *testing.T) {
 	var uta *TLSActivation
 	record(t, fixtureBase+"update", func(c *Client) {
 		uta, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
-			ID:                "ACTIVATION_ID",
-			TLSCertificate:          &TLSCertificate{},
+			ID:             "ACTIVATION_ID",
+			TLSCertificate: &TLSCertificate{},
 		})
 	})
 	if err != nil {
@@ -99,9 +99,9 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 	var err error
 	record(t, "custom_tls_activation/create", func(c *Client) {
 		_, err = c.CreateTLSActivation(&CreateTLSActivationInput{
-			TLSCertificate:          &TLSCertificate{},
+			TLSCertificate:   &TLSCertificate{},
 			TLSConfiguration: &TLSConfiguration{},
-			TLSDomain: &TLSDomain{},
+			TLSDomain:        &TLSDomain{},
 		})
 	})
 	if err != nil {
@@ -155,8 +155,8 @@ func TestClient_UpdateTLSActivation_validation(t *testing.T) {
 	var err error
 	record(t, "custom_tls_activation/update", func(c *Client) {
 		_, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
-			ID:                "ACTIVATION_ID",
-			TLSCertificate:          &TLSCertificate{ID: "CERTIFICATE_ID"},
+			ID:             "ACTIVATION_ID",
+			TLSCertificate: &TLSCertificate{ID: "CERTIFICATE_ID"},
 		})
 	})
 	if err != nil {
