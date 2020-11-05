@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"strconv"
 	"testing"
 )
 
@@ -24,8 +23,8 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	responseName := "WAf_Response"
 	createTestWAFResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
 
-	waf := createWAF(t, fixtureBase+"/waf/create", testService.ID, strconv.Itoa(tv.Number), prefetch, responseName)
-	defer deleteWAF(t, fixtureBase+"/waf/delete", waf.ID, "1")
+	waf := createWAF(t, fixtureBase+"/waf/create", testService.ID, prefetch, responseName, tv.Number)
+	defer deleteWAF(t, fixtureBase+"/waf/delete", waf.ID, 1)
 
 	var err error
 

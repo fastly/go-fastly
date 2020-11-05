@@ -9,8 +9,8 @@ func TestClient_Purge(t *testing.T) {
 	var purge *Purge
 	record(t, "purges/purge_by_key", func(c *Client) {
 		purge, err = c.PurgeKey(&PurgeKeyInput{
-			Service: testServiceID,
-			Key:     "foo",
+			ServiceID: testServiceID,
+			Key:       "foo",
 		})
 	})
 	if err != nil {

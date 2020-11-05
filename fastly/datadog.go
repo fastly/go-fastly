@@ -36,24 +36,24 @@ func (s datadogByName) Less(i, j int) bool {
 
 // ListDatadogInput is used as input to the ListDatadog function.
 type ListDatadogInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListDatadog returns the list of Datadog for the configuration version.
 func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -69,10 +69,11 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 
 // CreateDatadogInput is used as input to the CreateDatadog function.
 type CreateDatadogInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name              *string `form:"name,omitempty"`
 	Token             *string `form:"token,omitempty"`
@@ -85,15 +86,15 @@ type CreateDatadogInput struct {
 
 // CreateDatadog creates a new Datadog logging endpoint on a Fastly service version.
 func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -108,10 +109,11 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 
 // GetDatadogInput is used as input to the GetDatadog function.
 type GetDatadogInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Datadog to fetch.
 	Name string
@@ -119,19 +121,19 @@ type GetDatadogInput struct {
 
 // GetDatadog gets the Datadog configuration with the given parameters.
 func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -146,10 +148,11 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 
 // UpdateDatadogInput is used as input to the UpdateDatadog function.
 type UpdateDatadogInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Datadog to update.
 	Name string
@@ -165,19 +168,19 @@ type UpdateDatadogInput struct {
 
 // UpdateDatadog updates a Datadog logging endpoint on a Fastly service version.
 func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -192,10 +195,11 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 
 // DeleteDatadogInput is the input parameter to DeleteDatadog.
 type DeleteDatadogInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Datadog to delete (required).
 	Name string
@@ -203,19 +207,19 @@ type DeleteDatadogInput struct {
 
 // DeleteDatadog deletes a Datadog logging endpoint on a Fastly service version.
 func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

@@ -15,8 +15,8 @@ func TestClient_Cloudfiles(t *testing.T) {
 	var cloudfiles *Cloudfiles
 	record(t, "cloudfiles/create", func(c *Client) {
 		cloudfiles, err = c.CreateCloudfiles(&CreateCloudfilesInput{
-			Service:         testServiceID,
-			Version:         tv.Number,
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
 			Name:            String("test-cloudfiles"),
 			User:            String("user"),
 			AccessKey:       String("secret-key"),
@@ -41,15 +41,15 @@ func TestClient_Cloudfiles(t *testing.T) {
 	defer func() {
 		record(t, "cloudfiles/cleanup", func(c *Client) {
 			c.DeleteCloudfiles(&DeleteCloudfilesInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-cloudfiles",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-cloudfiles",
 			})
 
 			c.DeleteCloudfiles(&DeleteCloudfilesInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-cloudfiles",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-cloudfiles",
 			})
 		})
 	}()
@@ -101,8 +101,8 @@ func TestClient_Cloudfiles(t *testing.T) {
 	var lc []*Cloudfiles
 	record(t, "cloudfiles/list", func(c *Client) {
 		lc, err = c.ListCloudfiles(&ListCloudfilesInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -116,9 +116,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 	var ncloudfiles *Cloudfiles
 	record(t, "cloudfiles/get", func(c *Client) {
 		ncloudfiles, err = c.GetCloudfiles(&GetCloudfilesInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-cloudfiles",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-cloudfiles",
 		})
 	})
 	if err != nil {
@@ -171,14 +171,14 @@ func TestClient_Cloudfiles(t *testing.T) {
 	var ucloudfiles *Cloudfiles
 	record(t, "cloudfiles/update", func(c *Client) {
 		ucloudfiles, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
-			Service:       testServiceID,
-			Version:       tv.Number,
-			Name:          "test-cloudfiles",
-			NewName:       String("new-test-cloudfiles"),
-			User:          String("new-user"),
-			Period:        Uint(0),
-			GzipLevel:     Uint(0),
-			FormatVersion: Uint(2),
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-cloudfiles",
+			NewName:        String("new-test-cloudfiles"),
+			User:           String("new-user"),
+			Period:         Uint(0),
+			GzipLevel:      Uint(0),
+			FormatVersion:  Uint(2),
 		})
 	})
 	if err != nil {
@@ -203,9 +203,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// Delete
 	record(t, "cloudfiles/delete", func(c *Client) {
 		err = c.DeleteCloudfiles(&DeleteCloudfilesInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-cloudfiles",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-cloudfiles",
 		})
 	})
 	if err != nil {
@@ -216,17 +216,17 @@ func TestClient_Cloudfiles(t *testing.T) {
 func TestClient_ListCloudfiles_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListCloudfiles(&ListCloudfilesInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListCloudfiles(&ListCloudfilesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -234,17 +234,17 @@ func TestClient_ListCloudfiles_validation(t *testing.T) {
 func TestClient_CreateCloudfiles_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateCloudfiles(&CreateCloudfilesInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateCloudfiles(&CreateCloudfilesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -252,24 +252,24 @@ func TestClient_CreateCloudfiles_validation(t *testing.T) {
 func TestClient_GetCloudfiles_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -279,24 +279,24 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -306,24 +306,24 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

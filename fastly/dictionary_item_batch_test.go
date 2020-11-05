@@ -19,8 +19,8 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		Service:    testService.ID,
-		Dictionary: testDictionary.ID,
+		ServiceID:    testService.ID,
+		DictionaryID: testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
 				Operation: CreateBatchOperation,
@@ -49,8 +49,8 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			Service:    testService.ID,
-			Dictionary: testDictionary.ID,
+			ServiceID:    testService.ID,
+			DictionaryID: testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -96,8 +96,8 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		Service:    testService.ID,
-		Dictionary: testDictionary.ID,
+		ServiceID:    testService.ID,
+		DictionaryID: testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
 				Operation: CreateBatchOperation,
@@ -123,8 +123,8 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	// When: I execute the batch delete operations against the Fastly API,
 	batchDeleteOperations := &BatchModifyDictionaryItemsInput{
-		Service:    testService.ID,
-		Dictionary: testDictionary.ID,
+		ServiceID:    testService.ID,
+		DictionaryID: testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
 				Operation: DeleteBatchOperation,
@@ -146,8 +146,8 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualDictionaryItems, err = client.ListDictionaryItems(&ListDictionaryItemsInput{
-			Service:    testService.ID,
-			Dictionary: testDictionary.ID,
+			ServiceID:    testService.ID,
+			DictionaryID: testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -176,8 +176,8 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		Service:    testService.ID,
-		Dictionary: testDictionary.ID,
+		ServiceID:    testService.ID,
+		DictionaryID: testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
 				Operation: CreateBatchOperation,
@@ -203,8 +203,8 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	// When: I execute the batch update operations against the Fastly API,
 	batchUpdateOperations := &BatchModifyDictionaryItemsInput{
-		Service:    testService.ID,
-		Dictionary: testDictionary.ID,
+		ServiceID:    testService.ID,
+		DictionaryID: testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
 				Operation: UpdateBatchOperation,
@@ -226,8 +226,8 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_update", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			Service:    testService.ID,
-			Dictionary: testDictionary.ID,
+			ServiceID:    testService.ID,
+			DictionaryID: testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -286,8 +286,8 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		Service:    testService.ID,
-		Dictionary: testDictionary.ID,
+		ServiceID:    testService.ID,
+		DictionaryID: testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
 				Operation: CreateBatchOperation,
@@ -308,8 +308,8 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	// When: I execute the batch upsert operations against the Fastly API
 	batchUpsertOperations := &BatchModifyDictionaryItemsInput{
-		Service:    testService.ID,
-		Dictionary: testDictionary.ID,
+		ServiceID:    testService.ID,
+		DictionaryID: testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
 				Operation: UpsertBatchOperation,
@@ -336,8 +336,8 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_upsert", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			Service:    testService.ID,
-			Dictionary: testDictionary.ID,
+			ServiceID:    testService.ID,
+			DictionaryID: testDictionary.ID,
 		})
 	})
 	if err != nil {

@@ -15,14 +15,14 @@ func TestClient_Sumologics(t *testing.T) {
 	var s *Sumologic
 	record(t, "sumologics/create", func(c *Client) {
 		s, err = c.CreateSumologic(&CreateSumologicInput{
-			Service:       testServiceID,
-			Version:       tv.Number,
-			Name:          "test-sumologic",
-			URL:           "https://foo.sumologic.com",
-			Format:        "format",
-			FormatVersion: 1,
-			MessageType:   "classic",
-			Placement:     "waf_debug",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-sumologic",
+			URL:            "https://foo.sumologic.com",
+			Format:         "format",
+			FormatVersion:  1,
+			MessageType:    "classic",
+			Placement:      "waf_debug",
 		})
 	})
 	if err != nil {
@@ -33,15 +33,15 @@ func TestClient_Sumologics(t *testing.T) {
 	defer func() {
 		record(t, "sumologics/cleanup", func(c *Client) {
 			c.DeleteSumologic(&DeleteSumologicInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-sumologic",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-sumologic",
 			})
 
 			c.DeleteSumologic(&DeleteSumologicInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-sumologic",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-sumologic",
 			})
 		})
 	}()
@@ -69,8 +69,8 @@ func TestClient_Sumologics(t *testing.T) {
 	var ss []*Sumologic
 	record(t, "sumologics/list", func(c *Client) {
 		ss, err = c.ListSumologics(&ListSumologicsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -84,9 +84,9 @@ func TestClient_Sumologics(t *testing.T) {
 	var ns *Sumologic
 	record(t, "sumologics/get", func(c *Client) {
 		ns, err = c.GetSumologic(&GetSumologicInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-sumologic",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-sumologic",
 		})
 	})
 	if err != nil {
@@ -115,10 +115,10 @@ func TestClient_Sumologics(t *testing.T) {
 	var us *Sumologic
 	record(t, "sumologics/update", func(c *Client) {
 		us, err = c.UpdateSumologic(&UpdateSumologicInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-sumologic",
-			NewName: "new-test-sumologic",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-sumologic",
+			NewName:        "new-test-sumologic",
 		})
 	})
 	if err != nil {
@@ -131,9 +131,9 @@ func TestClient_Sumologics(t *testing.T) {
 	// Delete
 	record(t, "sumologics/delete", func(c *Client) {
 		err = c.DeleteSumologic(&DeleteSumologicInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-sumologic",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-sumologic",
 		})
 	})
 	if err != nil {
@@ -144,17 +144,17 @@ func TestClient_Sumologics(t *testing.T) {
 func TestClient_ListSumologics_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListSumologics(&ListSumologicsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListSumologics(&ListSumologicsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -162,17 +162,17 @@ func TestClient_ListSumologics_validation(t *testing.T) {
 func TestClient_CreateSumologic_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateSumologic(&CreateSumologicInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateSumologic(&CreateSumologicInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -180,24 +180,24 @@ func TestClient_CreateSumologic_validation(t *testing.T) {
 func TestClient_GetSumologic_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetSumologic(&GetSumologicInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSumologic(&GetSumologicInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSumologic(&GetSumologicInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -207,24 +207,24 @@ func TestClient_GetSumologic_validation(t *testing.T) {
 func TestClient_UpdateSumologic_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -234,24 +234,24 @@ func TestClient_UpdateSumologic_validation(t *testing.T) {
 func TestClient_DeleteSumologic_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteSumologic(&DeleteSumologicInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteSumologic(&DeleteSumologicInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteSumologic(&DeleteSumologicInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

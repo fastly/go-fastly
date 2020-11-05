@@ -15,8 +15,8 @@ func TestClient_Pools(t *testing.T) {
 	var p *Pool
 	record(t, "pools/create", func(c *Client) {
 		p, err = c.CreatePool(&CreatePoolInput{
-			Service:         testServiceID,
-			Version:         tv.Number,
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
 			Name:            "test_pool",
 			Comment:         String("test pool"),
 			Quorum:          Uint(50),
@@ -33,15 +33,15 @@ func TestClient_Pools(t *testing.T) {
 	defer func() {
 		record(t, "pools/cleanup", func(c *Client) {
 			c.DeletePool(&DeletePoolInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test_pool",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test_pool",
 			})
 
 			c.DeletePool(&DeletePoolInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new_test_pool",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new_test_pool",
 			})
 		})
 	}()
@@ -70,8 +70,8 @@ func TestClient_Pools(t *testing.T) {
 	var ps []*Pool
 	record(t, "pools/list", func(c *Client) {
 		ps, err = c.ListPools(&ListPoolsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -85,9 +85,9 @@ func TestClient_Pools(t *testing.T) {
 	var np *Pool
 	record(t, "pools/get", func(c *Client) {
 		np, err = c.GetPool(&GetPoolInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test_pool",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test_pool",
 		})
 	})
 	if err != nil {
@@ -107,11 +107,11 @@ func TestClient_Pools(t *testing.T) {
 	var up *Pool
 	record(t, "pools/update", func(c *Client) {
 		up, err = c.UpdatePool(&UpdatePoolInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test_pool",
-			NewName: String("new_test_pool"),
-			Quorum:  Uint(0),
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test_pool",
+			NewName:        String("new_test_pool"),
+			Quorum:         Uint(0),
 		})
 	})
 	if err != nil {
@@ -127,9 +127,9 @@ func TestClient_Pools(t *testing.T) {
 	// Delete
 	record(t, "pools/delete", func(c *Client) {
 		err = c.DeletePool(&DeletePoolInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new_test_pool",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new_test_pool",
 		})
 	})
 	if err != nil {
@@ -140,17 +140,17 @@ func TestClient_Pools(t *testing.T) {
 func TestClient_ListPools_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListPools(&ListPoolsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListPools(&ListPoolsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -158,24 +158,24 @@ func TestClient_ListPools_validation(t *testing.T) {
 func TestClient_CreatePool_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreatePool(&CreatePoolInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreatePool(&CreatePoolInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreatePool(&CreatePoolInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -185,24 +185,24 @@ func TestClient_CreatePool_validation(t *testing.T) {
 func TestClient_GetPool_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetPool(&GetPoolInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetPool(&GetPoolInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetPool(&GetPoolInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -212,24 +212,24 @@ func TestClient_GetPool_validation(t *testing.T) {
 func TestClient_UpdatePool_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdatePool(&UpdatePoolInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdatePool(&UpdatePoolInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdatePool(&UpdatePoolInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -239,24 +239,24 @@ func TestClient_UpdatePool_validation(t *testing.T) {
 func TestClient_DeletePool_validation(t *testing.T) {
 	var err error
 	err = testClient.DeletePool(&DeletePoolInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeletePool(&DeletePoolInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeletePool(&DeletePoolInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

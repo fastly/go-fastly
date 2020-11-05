@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"reflect"
-	"strconv"
 	"testing"
 	"time"
 )
@@ -33,8 +32,8 @@ func TestClient_WAF_Versions(t *testing.T) {
 	var waf *WAF
 	record(t, fixtureBase+"/waf/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
-			Service:           testService.ID,
-			Version:           strconv.Itoa(tv.Number),
+			ServiceID:         testService.ID,
+			ServiceVersion:    tv.Number,
 			PrefetchCondition: condition.Name,
 			Response:          ro.Name,
 		})
@@ -45,8 +44,8 @@ func TestClient_WAF_Versions(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"/waf/delete", func(c *Client) {
 			if err := c.DeleteWAF(&DeleteWAFInput{
-				Version: strconv.Itoa(tv.Number),
-				ID:      waf.ID,
+				ServiceVersion: tv.Number,
+				ID:             waf.ID,
 			}); err != nil {
 				t.Fatal(err)
 			}

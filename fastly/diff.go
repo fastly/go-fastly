@@ -12,8 +12,8 @@ type Diff struct {
 
 // GetDiffInput is used as input to the GetDiff function.
 type GetDiffInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
 	// From is the version to diff from. This can either be a string indicating a
 	// positive number (e.g. "1") or a negative number from "-1" down ("-1" is the
@@ -31,8 +31,8 @@ type GetDiffInput struct {
 
 // GetDiff returns the diff of the given versions.
 func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	if i.From == 0 {
@@ -43,7 +43,7 @@ func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 		return nil, ErrMissingTo
 	}
 
-	path := fmt.Sprintf("service/%s/diff/from/%d/to/%d", i.Service, i.From, i.To)
+	path := fmt.Sprintf("service/%s/diff/from/%d/to/%d", i.ServiceID, i.From, i.To)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

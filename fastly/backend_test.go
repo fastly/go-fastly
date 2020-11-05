@@ -15,8 +15,8 @@ func TestClient_Backends(t *testing.T) {
 	var b *Backend
 	record(t, "backends/create", func(c *Client) {
 		b, err = c.CreateBackend(&CreateBackendInput{
-			Service:        testServiceID,
-			Version:        tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 			Name:           "test-backend",
 			Address:        "integ-test.go-fastly.com",
 			Port:           1234,
@@ -32,15 +32,15 @@ func TestClient_Backends(t *testing.T) {
 	defer func() {
 		record(t, "backends/cleanup", func(c *Client) {
 			c.DeleteBackend(&DeleteBackendInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-backend",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-backend",
 			})
 
 			c.DeleteBackend(&DeleteBackendInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-backend",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-backend",
 			})
 		})
 	}()
@@ -65,8 +65,8 @@ func TestClient_Backends(t *testing.T) {
 	var bs []*Backend
 	record(t, "backends/list", func(c *Client) {
 		bs, err = c.ListBackends(&ListBackendsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -80,9 +80,9 @@ func TestClient_Backends(t *testing.T) {
 	var nb *Backend
 	record(t, "backends/get", func(c *Client) {
 		nb, err = c.GetBackend(&GetBackendInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-backend",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-backend",
 		})
 	})
 	if err != nil {
@@ -108,11 +108,11 @@ func TestClient_Backends(t *testing.T) {
 	var ub *Backend
 	record(t, "backends/update", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
-			Service:      testServiceID,
-			Version:      tv.Number,
-			Name:         "test-backend",
-			NewName:      "new-test-backend",
-			OverrideHost: "www.example.com",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-backend",
+			NewName:        "new-test-backend",
+			OverrideHost:   "www.example.com",
 		})
 	})
 	if err != nil {
@@ -128,9 +128,9 @@ func TestClient_Backends(t *testing.T) {
 	// Delete
 	record(t, "backends/delete", func(c *Client) {
 		err = c.DeleteBackend(&DeleteBackendInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-backend",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-backend",
 		})
 	})
 	if err != nil {
@@ -141,17 +141,17 @@ func TestClient_Backends(t *testing.T) {
 func TestClient_ListBackends_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListBackends(&ListBackendsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListBackends(&ListBackendsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -159,17 +159,17 @@ func TestClient_ListBackends_validation(t *testing.T) {
 func TestClient_CreateBackend_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateBackend(&CreateBackendInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateBackend(&CreateBackendInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -177,24 +177,24 @@ func TestClient_CreateBackend_validation(t *testing.T) {
 func TestClient_GetBackend_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetBackend(&GetBackendInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetBackend(&GetBackendInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetBackend(&GetBackendInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -204,24 +204,24 @@ func TestClient_GetBackend_validation(t *testing.T) {
 func TestClient_UpdateBackend_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateBackend(&UpdateBackendInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateBackend(&UpdateBackendInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateBackend(&UpdateBackendInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -231,24 +231,24 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 func TestClient_DeleteBackend_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteBackend(&DeleteBackendInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteBackend(&DeleteBackendInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteBackend(&DeleteBackendInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

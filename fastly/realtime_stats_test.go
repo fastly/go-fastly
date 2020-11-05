@@ -9,7 +9,7 @@ func TestClient_GetRealtimeStats_validation(t *testing.T) {
 	_, err = testStatsClient.GetRealtimeStats(&GetRealtimeStatsInput{
 		Service: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }

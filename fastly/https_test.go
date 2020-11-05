@@ -38,8 +38,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var h *HTTPS
 	record(t, "https/create", func(c *Client) {
 		h, err = c.CreateHTTPS(&CreateHTTPSInput{
-			Service:           testServiceID,
-			Version:           tv.Number,
+			ServiceID:         testServiceID,
+			ServiceVersion:    tv.Number,
 			Name:              "test-https",
 			Format:            "format",
 			URL:               "https://example.com/",
@@ -67,16 +67,16 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	defer func() {
 		record(t, "https/cleanup", func(c *Client) {
 			c.DeleteHTTPS(&DeleteHTTPSInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-https",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-https",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
 			c.DeleteHTTPS(&DeleteHTTPSInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-https",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-https",
 			})
 		})
 	}()
@@ -137,8 +137,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var hs []*HTTPS
 	record(t, "https/list", func(c *Client) {
 		hs, err = c.ListHTTPS(&ListHTTPSInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -152,9 +152,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var nh *HTTPS
 	record(t, "https/get", func(c *Client) {
 		nh, err = c.GetHTTPS(&GetHTTPSInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-https",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-https",
 		})
 	})
 	if err != nil {
@@ -216,11 +216,11 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var uh *HTTPS
 	record(t, "https/update", func(c *Client) {
 		uh, err = c.UpdateHTTPS(&UpdateHTTPSInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-https",
-			NewName: "new-test-https",
-			Method:  "POST",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-https",
+			NewName:        "new-test-https",
+			Method:         "POST",
 		})
 	})
 	if err != nil {
@@ -236,9 +236,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Delete
 	record(t, "https/delete", func(c *Client) {
 		err = c.DeleteHTTPS(&DeleteHTTPSInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-https",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-https",
 		})
 	})
 	if err != nil {
@@ -249,9 +249,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 func TestClient_ListHTTPS_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListHTTPS(&ListHTTPSInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -259,17 +259,17 @@ func TestClient_ListHTTPS_validation(t *testing.T) {
 func TestClient_CreateHTTPS_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateHTTPS(&CreateHTTPSInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateHTTPS(&CreateHTTPSInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -277,24 +277,24 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 func TestClient_GetHTTPS_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -304,24 +304,24 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 func TestClient_UpdateHTTPS_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -331,24 +331,24 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 func TestClient_DeleteHTTPS_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

@@ -126,23 +126,25 @@ func (c *Client) ListWAFs(i *ListWAFsInput) (*WAFResponse, error) {
 
 // CreateWAFInput is used as input to the CreateWAF function.
 type CreateWAFInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
 	ID                string `jsonapi:"primary,waf_firewall"`
-	Service           string `jsonapi:"attr,service_id"`
-	Version           string `jsonapi:"attr,service_version_number"`
 	PrefetchCondition string `jsonapi:"attr,prefetch_condition"`
 	Response          string `jsonapi:"attr,response"`
+
+	// ServiceID is the ID of the service (required).
+	ServiceID string `jsonapi:"attr,service_id"`
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `jsonapi:"attr,service_version_number"`
 }
 
 // CreateWAF creates a new Fastly WAF.
 func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == "" {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := "/waf/firewalls"
@@ -160,22 +162,24 @@ func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
 
 // GetWAFInput is used as input to the GetWAF function.
 type GetWAFInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
 	// ID is the WAF's ID.
 	ID string
 }
 
 // GetWAF gets details for given WAF
 func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == "" {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.ID == "" {
@@ -185,7 +189,7 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
 	resp, err := c.Get(path, &RequestOptions{
 		Params: map[string]string{
-			"filter[service_version_number]": i.Version,
+			"filter[service_version_number]": strconv.Itoa(i.ServiceVersion),
 		},
 	})
 	if err != nil {
@@ -201,11 +205,13 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 
 // UpdateWAFInput is used as input to the UpdateWAF function.
 type UpdateWAFInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
+	// ServiceID is the ID of the service (required).
+	ServiceID string `jsonapi:"attr,service_id,omitempty"`
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `jsonapi:"attr,service_version_number,omitempty"`
+
 	ID                string `jsonapi:"primary,waf_firewall"`
-	Service           string `jsonapi:"attr,service_id,omitempty"`
-	Version           string `jsonapi:"attr,service_version_number,omitempty"`
 	PrefetchCondition string `jsonapi:"attr,prefetch_condition,omitempty"`
 	Response          string `jsonapi:"attr,response,omitempty"`
 	Disabled          *bool  `jsonapi:"attr,disabled,omitempty"`
@@ -224,12 +230,12 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	// if 'PrefetchCondition' or 'Response' are
 	// not empty
 	if i.Disabled == nil || i.PrefetchCondition != "" || i.Response != "" {
-		if i.Service == "" {
-			return nil, ErrMissingService
+		if i.ServiceID == "" {
+			return nil, ErrMissingServiceID
 		}
 
-		if i.Version == "" {
-			return nil, ErrMissingVersion
+		if i.ServiceVersion == 0 {
+			return nil, ErrMissingServiceVersion
 		}
 	}
 
@@ -251,14 +257,14 @@ type DeleteWAFInput struct {
 	// This is the WAF ID.
 	ID string `jsonapi:"primary,waf_firewall"`
 	// The service version.
-	Version string `jsonapi:"attr,service_version_number"`
+	ServiceVersion int `jsonapi:"attr,service_version_number"`
 }
 
 // DeleteWAF deletes a given WAF from its service.
 func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 
-	if i.Version == "" {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.ID == "" {

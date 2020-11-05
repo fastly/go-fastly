@@ -31,16 +31,16 @@ type PackageMetadata struct {
 
 // GetPackageInput is used as input to the GetPackage function.
 type GetPackageInput struct {
-	// Service is the ID of the service.
-	// Version is the specific configuration version.
-	// Both fields are required.
-	Service string `mapstructure:"service_id"`
-	Version int    `mapstructure:"version"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string `mapstructure:"service_id"`
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `mapstructure:"version"`
 }
 
 // GetPackage retrieves  package information for the given service and version.
 func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
-	path, err := MakePackagePath(i.Service, i.Version)
+	path, err := MakePackagePath(i.ServiceID, i.ServiceVersion)
 	if err != nil {
 		return nil, err
 	}
@@ -55,11 +55,11 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 
 // UpdatePackageInput is used as input to the UpdatePackage function.
 type UpdatePackageInput struct {
-	// Service is the ID of the service.
-	// Version is the specific configuration version.
-	// Both fields are required.
-	Service string `mapstructure:"service_id"`
-	Version int    `mapstructure:"version"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string `mapstructure:"service_id"`
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `mapstructure:"version"`
 
 	// PackagePath is the local filesystem path to the package to upload.
 	PackagePath string
@@ -68,7 +68,7 @@ type UpdatePackageInput struct {
 // UpdatePackage updates a package for a specific version.
 func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 
-	urlPath, err := MakePackagePath(i.Service, i.Version)
+	urlPath, err := MakePackagePath(i.ServiceID, i.ServiceVersion)
 	if err != nil {
 		return nil, err
 	}
@@ -84,10 +84,10 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 // MakePackagePath ensures we create the correct REST path for referencing packages in the API.
 func MakePackagePath(Service string, Version int) (string, error) {
 	if Service == "" {
-		return "", ErrMissingService
+		return "", ErrMissingServiceID
 	}
 	if Version == 0 {
-		return "", ErrMissingVersion
+		return "", ErrMissingServiceVersion
 	}
 	return fmt.Sprintf("/service/%s/version/%d/package", Service, Version), nil
 }

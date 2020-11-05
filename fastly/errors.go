@@ -9,9 +9,9 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// ErrMissingService is an error that is returned when an input struct requires
-// a "Service" key, but one was not set.
-var ErrMissingService = errors.New("missing required field 'Service'")
+// ErrMissingServiceID is an error that is returned when an input struct requires
+// a "ServiceID" key, but one was not set.
+var ErrMissingServiceID = errors.New("missing required field 'ServiceID'")
 
 // ErrMissingStatus is an error that is returned when an input struct requires
 // a "Status" key, but one was not set.
@@ -21,9 +21,9 @@ var ErrMissingStatus = errors.New("missing required field 'Status'")
 // a "Tag" key, but one was not set.
 var ErrMissingTag = errors.New("missing required field 'Tag'")
 
-// ErrMissingVersion is an error that is returned when an input struct requires
-// a "Version" key, but one was not set.
-var ErrMissingVersion = errors.New("missing required field 'Version'")
+// ErrMissingServiceVersion is an error that is returned when an input struct requires
+// a "ServiceVersion" key, but one was not set.
+var ErrMissingServiceVersion = errors.New("missing required field 'ServiceVersion'")
 
 // ErrMissingContent is an error that is returned when an input struct requires a
 // "Content" key, but one was not set.

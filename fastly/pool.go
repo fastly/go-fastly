@@ -65,24 +65,24 @@ func (s poolsByName) Less(i, j int) bool {
 
 // ListPoolsInput is used as input to the ListPools function.
 type ListPoolsInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListPools lists all pools for a particular service and version.
 func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/pool", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/pool", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -98,10 +98,11 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 
 // CreatePoolInput is used as input to the CreatePool function.
 type CreatePoolInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the pool to create (required).
 	Name string `form:"name"`
@@ -131,19 +132,19 @@ type CreatePoolInput struct {
 
 // CreatePool creates a pool for a particular service and version.
 func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/pool", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/pool", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -158,11 +159,11 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 
 // GetPoolInput is used as input to the GetPool function.
 type GetPoolInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the pool of interest (required).
 	Name string
@@ -170,19 +171,19 @@ type GetPoolInput struct {
 
 // GetPool gets a single pool for a particular service and version.
 func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -197,12 +198,14 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 
 // UpdatePoolInput is used as input to the UpdatePool function.
 type UpdatePoolInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Name is the name of the pool to update. All three fields
-	// are required.
-	Service string
-	Version int
-	Name    string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	// Name is the name of the pool to update (required).
+	Name string
 
 	// Optional fields.
 	NewName          *string      `form:"name,omitempty"`
@@ -230,19 +233,19 @@ type UpdatePoolInput struct {
 
 // UpdatePool updates a specufic pool for a particular service and version.
 func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -257,30 +260,32 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 
 // DeletePoolInput is used as input to the DeletePool function.
 type DeletePoolInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Name is the name of the pool to delete. All three fields
-	// are required.
-	Service string
-	Version int
-	Name    string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	// Name is the name of the pool to delete (required).
+	Name string
 }
 
 // DeletePool deletes a specific pool for a particular service and version.
 func (c *Client) DeletePool(i *DeletePoolInput) error {
-	if i.Service == "" {
+	if i.ServiceID == "" {
 
-		return ErrMissingService
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

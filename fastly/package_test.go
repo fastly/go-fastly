@@ -30,9 +30,9 @@ func TestClient_Package(t *testing.T) {
 
 	recordIgnoreBody(t, fixtureBase+"update", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
-			Service:     testService.ID,
-			Version:     testVersion.Number,
-			PackagePath: "test_assets/package/valid.tar.gz",
+			ServiceID:      testService.ID,
+			ServiceVersion: testVersion.Number,
+			PackagePath:    "test_assets/package/valid.tar.gz",
 		})
 	})
 	if err != nil {
@@ -48,8 +48,8 @@ func TestClient_Package(t *testing.T) {
 	// Get
 	record(t, fixtureBase+"get", func(c *Client) {
 		wp, err = c.GetPackage(&GetPackageInput{
-			Service: testService.ID,
-			Version: testVersion.Number,
+			ServiceID:      testService.ID,
+			ServiceVersion: testVersion.Number,
 		})
 	})
 	if err != nil {
@@ -83,9 +83,9 @@ func TestClient_Package(t *testing.T) {
 
 	recordIgnoreBody(t, fixtureBase+"update_invalid", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
-			Service:     testService.ID,
-			Version:     testVersion.Number,
-			PackagePath: "test_assets/package/invalid.tar.gz",
+			ServiceID:      testService.ID,
+			ServiceVersion: testVersion.Number,
+			PackagePath:    "test_assets/package/invalid.tar.gz",
 		})
 	})
 	if err != nil {
@@ -101,17 +101,17 @@ func TestClient_Package(t *testing.T) {
 func TestClient_GetPackage_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetPackage(&GetPackageInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetPackage(&GetPackageInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -119,17 +119,17 @@ func TestClient_GetPackage_validation(t *testing.T) {
 func TestClient_UpdatePackage_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdatePackage(&UpdatePackageInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdatePackage(&UpdatePackageInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }

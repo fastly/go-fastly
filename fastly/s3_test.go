@@ -15,8 +15,8 @@ func TestClient_S3s(t *testing.T) {
 	var s3 *S3
 	record(t, "s3s/create", func(c *Client) {
 		s3, err = c.CreateS3(&CreateS3Input{
-			Service:                      testServiceID,
-			Version:                      tv.Number,
+			ServiceID:                    testServiceID,
+			ServiceVersion:               tv.Number,
 			Name:                         "test-s3",
 			BucketName:                   "bucket-name",
 			Domain:                       "s3.us-east-1.amazonaws.com",
@@ -45,15 +45,15 @@ func TestClient_S3s(t *testing.T) {
 	defer func() {
 		record(t, "s3s/cleanup", func(c *Client) {
 			c.DeleteS3(&DeleteS3Input{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-s3",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-s3",
 			})
 
 			c.DeleteS3(&DeleteS3Input{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-s3",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-s3",
 			})
 		})
 	}()
@@ -118,8 +118,8 @@ func TestClient_S3s(t *testing.T) {
 	var s3s []*S3
 	record(t, "s3s/list", func(c *Client) {
 		s3s, err = c.ListS3s(&ListS3sInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -133,9 +133,9 @@ func TestClient_S3s(t *testing.T) {
 	var ns3 *S3
 	record(t, "s3s/get", func(c *Client) {
 		ns3, err = c.GetS3(&GetS3Input{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-s3",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-s3",
 		})
 	})
 	if err != nil {
@@ -197,11 +197,11 @@ func TestClient_S3s(t *testing.T) {
 	var us3 *S3
 	record(t, "s3s/update", func(c *Client) {
 		us3, err = c.UpdateS3(&UpdateS3Input{
-			Service:   testServiceID,
-			Version:   tv.Number,
-			Name:      "test-s3",
-			NewName:   "new-test-s3",
-			PublicKey: pgpPublicKeyUpdate(),
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-s3",
+			NewName:        "new-test-s3",
+			PublicKey:      pgpPublicKeyUpdate(),
 		})
 	})
 	if err != nil {
@@ -217,9 +217,9 @@ func TestClient_S3s(t *testing.T) {
 	// Delete
 	record(t, "s3s/delete", func(c *Client) {
 		err = c.DeleteS3(&DeleteS3Input{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-s3",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-s3",
 		})
 	})
 	if err != nil {
@@ -230,17 +230,17 @@ func TestClient_S3s(t *testing.T) {
 func TestClient_ListS3s_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListS3s(&ListS3sInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListS3s(&ListS3sInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -248,23 +248,23 @@ func TestClient_ListS3s_validation(t *testing.T) {
 func TestClient_CreateS3_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateS3(&CreateS3Input{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateS3(&CreateS3Input{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateS3(&CreateS3Input{
-		Service:                      "foo",
-		Version:                      1,
+		ServiceID:                    "foo",
+		ServiceVersion:               1,
 		Name:                         "test-service",
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: "",
@@ -277,24 +277,24 @@ func TestClient_CreateS3_validation(t *testing.T) {
 func TestClient_GetS3_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetS3(&GetS3Input{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetS3(&GetS3Input{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetS3(&GetS3Input{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -304,32 +304,32 @@ func TestClient_GetS3_validation(t *testing.T) {
 func TestClient_UpdateS3_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateS3(&UpdateS3Input{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateS3(&UpdateS3Input{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateS3(&UpdateS3Input{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateS3(&UpdateS3Input{
-		Service:                      "foo",
-		Version:                      1,
+		ServiceID:                    "foo",
+		ServiceVersion:               1,
 		Name:                         "test-service",
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: "",
@@ -342,24 +342,24 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 func TestClient_DeleteS3_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteS3(&DeleteS3Input{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteS3(&DeleteS3Input{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteS3(&DeleteS3Input{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

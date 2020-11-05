@@ -32,10 +32,10 @@ sub vcl_hash {
 	var vcl *VCL
 	record(t, "vcls/create", func(c *Client) {
 		vcl, err = c.CreateVCL(&CreateVCLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-vcl",
-			Content: content,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-vcl",
+			Content:        content,
 		})
 	})
 	if err != nil {
@@ -46,15 +46,15 @@ sub vcl_hash {
 	defer func() {
 		record(t, "vcls/cleanup", func(c *Client) {
 			c.DeleteVCL(&DeleteVCLInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-vcl",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-vcl",
 			})
 
 			c.DeleteVCL(&DeleteVCLInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-vcl",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-vcl",
 			})
 		})
 	}()
@@ -70,8 +70,8 @@ sub vcl_hash {
 	var vcls []*VCL
 	record(t, "vcls/list", func(c *Client) {
 		vcls, err = c.ListVCLs(&ListVCLsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -85,9 +85,9 @@ sub vcl_hash {
 	var nvcl *VCL
 	record(t, "vcls/get", func(c *Client) {
 		nvcl, err = c.GetVCL(&GetVCLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-vcl",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-vcl",
 		})
 	})
 	if err != nil {
@@ -104,10 +104,10 @@ sub vcl_hash {
 	var uvcl *VCL
 	record(t, "vcls/update", func(c *Client) {
 		uvcl, err = c.UpdateVCL(&UpdateVCLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-vcl",
-			NewName: "new-test-vcl",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-vcl",
+			NewName:        "new-test-vcl",
 		})
 	})
 	if err != nil {
@@ -121,9 +121,9 @@ sub vcl_hash {
 	var avcl *VCL
 	record(t, "vcls/activate", func(c *Client) {
 		avcl, err = c.ActivateVCL(&ActivateVCLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-vcl",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-vcl",
 		})
 	})
 	if err != nil {
@@ -136,9 +136,9 @@ sub vcl_hash {
 	// Delete
 	record(t, "vcls/delete", func(c *Client) {
 		err = c.DeleteVCL(&DeleteVCLInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-vcl",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-vcl",
 		})
 	})
 	if err != nil {
@@ -149,17 +149,17 @@ sub vcl_hash {
 func TestClient_ListVCLs_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListVCLs(&ListVCLsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListVCLs(&ListVCLsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -167,17 +167,17 @@ func TestClient_ListVCLs_validation(t *testing.T) {
 func TestClient_CreateVCL_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateVCL(&CreateVCLInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateVCL(&CreateVCLInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -185,24 +185,24 @@ func TestClient_CreateVCL_validation(t *testing.T) {
 func TestClient_GetVCL_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetVCL(&GetVCLInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetVCL(&GetVCLInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetVCL(&GetVCLInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -212,24 +212,24 @@ func TestClient_GetVCL_validation(t *testing.T) {
 func TestClient_UpdateVCL_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateVCL(&UpdateVCLInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateVCL(&UpdateVCLInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateVCL(&UpdateVCLInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -239,24 +239,24 @@ func TestClient_UpdateVCL_validation(t *testing.T) {
 func TestClient_ActivateVCL_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ActivateVCL(&ActivateVCLInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ActivateVCL(&ActivateVCLInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ActivateVCL(&ActivateVCLInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -266,24 +266,24 @@ func TestClient_ActivateVCL_validation(t *testing.T) {
 func TestClient_DeleteVCL_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteVCL(&DeleteVCLInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteVCL(&DeleteVCLInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteVCL(&DeleteVCLInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

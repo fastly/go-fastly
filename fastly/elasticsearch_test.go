@@ -38,8 +38,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var es *Elasticsearch
 	record(t, "elasticsearch/create", func(c *Client) {
 		es, err = c.CreateElasticsearch(&CreateElasticsearchInput{
-			Service:           testServiceID,
-			Version:           tv.Number,
+			ServiceID:         testServiceID,
+			ServiceVersion:    tv.Number,
 			Name:              String("test-elasticsearch"),
 			Format:            String("format"),
 			Index:             String("#{%F}"),
@@ -65,16 +65,16 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	defer func() {
 		record(t, "elasticsearch/cleanup", func(c *Client) {
 			c.DeleteElasticsearch(&DeleteElasticsearchInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-elasticsearch",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-elasticsearch",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
 			c.DeleteElasticsearch(&DeleteElasticsearchInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-elasticsearch",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-elasticsearch",
 			})
 		})
 	}()
@@ -129,8 +129,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var ess []*Elasticsearch
 	record(t, "elasticsearch/list", func(c *Client) {
 		ess, err = c.ListElasticsearch(&ListElasticsearchInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -144,9 +144,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var nes *Elasticsearch
 	record(t, "elasticsearch/get", func(c *Client) {
 		nes, err = c.GetElasticsearch(&GetElasticsearchInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-elasticsearch",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-elasticsearch",
 		})
 	})
 	if err != nil {
@@ -202,11 +202,11 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var ues *Elasticsearch
 	record(t, "elasticsearch/update", func(c *Client) {
 		ues, err = c.UpdateElasticsearch(&UpdateElasticsearchInput{
-			Service:  testServiceID,
-			Version:  tv.Number,
-			Name:     "test-elasticsearch",
-			NewName:  String("new-test-elasticsearch"),
-			Pipeline: String("my_new_pipeline_id"),
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-elasticsearch",
+			NewName:        String("new-test-elasticsearch"),
+			Pipeline:       String("my_new_pipeline_id"),
 		})
 	})
 	if err != nil {
@@ -222,9 +222,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Delete
 	record(t, "elasticsearch/delete", func(c *Client) {
 		err = c.DeleteElasticsearch(&DeleteElasticsearchInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-elasticsearch",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-elasticsearch",
 		})
 	})
 	if err != nil {
@@ -235,17 +235,17 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 func TestClient_ListElasticsearch_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListElasticsearch(&ListElasticsearchInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListElasticsearch(&ListElasticsearchInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -253,17 +253,17 @@ func TestClient_ListElasticsearch_validation(t *testing.T) {
 func TestClient_CreateElasticsearch_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateElasticsearch(&CreateElasticsearchInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateElasticsearch(&CreateElasticsearchInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -271,24 +271,24 @@ func TestClient_CreateElasticsearch_validation(t *testing.T) {
 func TestClient_GetElasticsearch_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -298,24 +298,24 @@ func TestClient_GetElasticsearch_validation(t *testing.T) {
 func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -325,24 +325,24 @@ func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 func TestClient_DeleteElasticsearch_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

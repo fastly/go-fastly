@@ -20,8 +20,8 @@ func TestClient_Settings(t *testing.T) {
 	var ns *Settings
 	record(t, "settings/get", func(c *Client) {
 		ns, err = c.GetSettings(&GetSettingsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -35,8 +35,8 @@ func TestClient_Settings(t *testing.T) {
 	var us *Settings
 	record(t, "settings/update", func(c *Client) {
 		us, err = c.UpdateSettings(&UpdateSettingsInput{
-			Service:         testServiceID,
-			Version:         tv.Number,
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
 			DefaultTTL:      1800,
 			StaleIfError:    true,
 			StaleIfErrorTTL: 57600,
@@ -59,10 +59,10 @@ func TestClient_Settings(t *testing.T) {
 // Tests if we can update a default_ttl to 0 as reported in issue #20
 func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	t.Parallel()
-	s := UpdateSettingsInput{Service: "foo", Version: 1, DefaultTTL: 0}
+	s := UpdateSettingsInput{ServiceID: "foo", ServiceVersion: 1, DefaultTTL: 0}
 	buf := new(bytes.Buffer)
 	form.NewEncoder(buf).KeepZeros(true).DelimitWith('|').Encode(s)
-	if buf.String() != "Service=foo&Version=1&general.default_ttl=0" {
+	if buf.String() != "ServiceID=foo&ServiceVersion=1&general.default_ttl=0" {
 		t.Errorf("Update request should contain a default_ttl. Got: %s", buf.String())
 	}
 }
@@ -70,17 +70,17 @@ func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 func TestClient_GetSettings_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetSettings(&GetSettingsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSettings(&GetSettingsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -88,17 +88,17 @@ func TestClient_GetSettings_validation(t *testing.T) {
 func TestClient_UpdateSettings_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateSettings(&UpdateSettingsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSettings(&UpdateSettingsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }

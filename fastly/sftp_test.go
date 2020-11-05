@@ -15,8 +15,8 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftp *SFTP
 	record(t, "sftps/create", func(c *Client) {
 		sftp, err = c.CreateSFTP(&CreateSFTPInput{
-			Service:         testServiceID,
-			Version:         tv.Number,
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
 			Name:            String("test-sftp"),
 			Address:         String("example.com"),
 			Port:            Uint(1234),
@@ -43,15 +43,15 @@ func TestClient_SFTPs(t *testing.T) {
 	defer func() {
 		record(t, "sftps/cleanup", func(c *Client) {
 			c.DeleteSFTP(&DeleteSFTPInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-sftp",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-sftp",
 			})
 
 			c.DeleteSFTP(&DeleteSFTPInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-sftp",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-sftp",
 			})
 		})
 	}()
@@ -109,8 +109,8 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftps []*SFTP
 	record(t, "sftps/list", func(c *Client) {
 		sftps, err = c.ListSFTPs(&ListSFTPsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -124,9 +124,9 @@ func TestClient_SFTPs(t *testing.T) {
 	var nsftp *SFTP
 	record(t, "sftps/get", func(c *Client) {
 		nsftp, err = c.GetSFTP(&GetSFTPInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-sftp",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-sftp",
 		})
 	})
 	if err != nil {
@@ -185,12 +185,12 @@ func TestClient_SFTPs(t *testing.T) {
 	var usftp *SFTP
 	record(t, "sftps/update", func(c *Client) {
 		usftp, err = c.UpdateSFTP(&UpdateSFTPInput{
-			Service:     testServiceID,
-			Version:     tv.Number,
-			Name:        "test-sftp",
-			NewName:     String("new-test-sftp"),
-			GzipLevel:   Uint(0),
-			MessageType: String("classic"),
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-sftp",
+			NewName:        String("new-test-sftp"),
+			GzipLevel:      Uint(0),
+			MessageType:    String("classic"),
 		})
 	})
 	if err != nil {
@@ -209,9 +209,9 @@ func TestClient_SFTPs(t *testing.T) {
 	// Delete
 	record(t, "sftps/delete", func(c *Client) {
 		err = c.DeleteSFTP(&DeleteSFTPInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-sftp",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-sftp",
 		})
 	})
 	if err != nil {
@@ -222,17 +222,17 @@ func TestClient_SFTPs(t *testing.T) {
 func TestClient_ListSFTPs_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListSFTPs(&ListSFTPsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListSFTPs(&ListSFTPsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -240,17 +240,17 @@ func TestClient_ListSFTPs_validation(t *testing.T) {
 func TestClient_CreateSFTP_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateSFTP(&CreateSFTPInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateSFTP(&CreateSFTPInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -258,24 +258,24 @@ func TestClient_CreateSFTP_validation(t *testing.T) {
 func TestClient_GetSFTP_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetSFTP(&GetSFTPInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSFTP(&GetSFTPInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSFTP(&GetSFTPInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -285,24 +285,24 @@ func TestClient_GetSFTP_validation(t *testing.T) {
 func TestClient_UpdateSFTP_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -312,24 +312,24 @@ func TestClient_UpdateSFTP_validation(t *testing.T) {
 func TestClient_DeleteSFTP_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteSFTP(&DeleteSFTPInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteSFTP(&DeleteSFTPInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteSFTP(&DeleteSFTPInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

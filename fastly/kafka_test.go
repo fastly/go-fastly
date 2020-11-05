@@ -22,8 +22,8 @@ func TestClient_Kafkas(t *testing.T) {
 	var k *Kafka
 	record(t, "kafkas/create", func(c *Client) {
 		k, err = c.CreateKafka(&CreateKafkaInput{
-			Service:          testServiceID,
-			Version:          tv.Number,
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
 			Name:             String("test-kafka"),
 			Brokers:          String("192.168.1.1,192.168.1.2"),
 			Topic:            String("kafka-topic"),
@@ -52,15 +52,15 @@ func TestClient_Kafkas(t *testing.T) {
 	defer func() {
 		record(t, "kafkas/cleanup", func(c *Client) {
 			c.DeleteKafka(&DeleteKafkaInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-kafka",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-kafka",
 			})
 
 			c.DeleteKafka(&DeleteKafkaInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-kafka",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-kafka",
 			})
 		})
 	}()
@@ -124,8 +124,8 @@ func TestClient_Kafkas(t *testing.T) {
 	var ks []*Kafka
 	record(t, "kafkas/list", func(c *Client) {
 		ks, err = c.ListKafkas(&ListKafkasInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -139,9 +139,9 @@ func TestClient_Kafkas(t *testing.T) {
 	var nk *Kafka
 	record(t, "kafkas/get", func(c *Client) {
 		nk, err = c.GetKafka(&GetKafkaInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-kafka",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-kafka",
 		})
 	})
 	if err != nil {
@@ -206,11 +206,11 @@ func TestClient_Kafkas(t *testing.T) {
 	var uk *Kafka
 	record(t, "kafkas/update", func(c *Client) {
 		uk, err = c.UpdateKafka(&UpdateKafkaInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-kafka",
-			NewName: String("new-test-kafka"),
-			Topic:   String("new-kafka-topic"),
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-kafka",
+			NewName:        String("new-test-kafka"),
+			Topic:          String("new-kafka-topic"),
 		})
 	})
 	if err != nil {
@@ -226,9 +226,9 @@ func TestClient_Kafkas(t *testing.T) {
 	// Delete
 	record(t, "kafkas/delete", func(c *Client) {
 		err = c.DeleteKafka(&DeleteKafkaInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-kafka",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-kafka",
 		})
 	})
 	if err != nil {
@@ -239,17 +239,17 @@ func TestClient_Kafkas(t *testing.T) {
 func TestClient_ListKafkas_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListKafkas(&ListKafkasInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListKafkas(&ListKafkasInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -257,17 +257,17 @@ func TestClient_ListKafkas_validation(t *testing.T) {
 func TestClient_CreateKafka_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateKafka(&CreateKafkaInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateKafka(&CreateKafkaInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -275,24 +275,24 @@ func TestClient_CreateKafka_validation(t *testing.T) {
 func TestClient_GetKafka_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetKafka(&GetKafkaInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetKafka(&GetKafkaInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetKafka(&GetKafkaInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -302,24 +302,24 @@ func TestClient_GetKafka_validation(t *testing.T) {
 func TestClient_UpdateKafka_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -329,24 +329,24 @@ func TestClient_UpdateKafka_validation(t *testing.T) {
 func TestClient_DeleteKafka_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteKafka(&DeleteKafkaInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteKafka(&DeleteKafkaInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteKafka(&DeleteKafkaInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

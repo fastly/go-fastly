@@ -139,7 +139,7 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
 		Service: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -157,7 +157,7 @@ func TestClient_CreateACLEntry_validation(t *testing.T) {
 	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{
 		Service: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -175,7 +175,7 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 	_, err = testClient.GetACLEntry(&GetACLEntryInput{
 		Service: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -202,7 +202,7 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
 		Service: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -229,7 +229,7 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
 		Service: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -256,7 +256,7 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
 		Service: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{

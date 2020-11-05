@@ -39,7 +39,7 @@ type ListACLEntriesInput struct {
 // ListACLEntries return a list of entries for an ACL
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.Service == "" {
-		return nil, ErrMissingService
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACL == "" {
@@ -73,7 +73,7 @@ type GetACLEntryInput struct {
 // GetACLEntry returns a single ACL entry based on its ID.
 func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if i.Service == "" {
-		return nil, ErrMissingService
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACL == "" {
@@ -115,7 +115,7 @@ type CreateACLEntryInput struct {
 // CreateACLEntry creates and returns a new ACL entry.
 func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	if i.Service == "" {
-		return nil, ErrMissingService
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACL == "" {
@@ -151,7 +151,7 @@ type DeleteACLEntryInput struct {
 // DeleteACLEntry deletes an entry from an ACL based on its ID
 func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if i.Service == "" {
-		return ErrMissingService
+		return ErrMissingServiceID
 	}
 
 	if i.ACL == "" {
@@ -199,7 +199,7 @@ type UpdateACLEntryInput struct {
 // UpdateACLEntry updates an ACL entry
 func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if i.Service == "" {
-		return nil, ErrMissingService
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACL == "" {
@@ -244,7 +244,7 @@ type BatchACLEntry struct {
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 
 	if i.Service == "" {
-		return ErrMissingService
+		return ErrMissingServiceID
 	}
 
 	if i.ACL == "" {

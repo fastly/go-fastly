@@ -44,24 +44,24 @@ func (o openstacksByName) Less(i, j int) bool {
 
 // ListOpenstackInput is used as input to the ListOpenstack function.
 type ListOpenstackInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListOpenstack returns the list of Openstack for the configuration version.
 func (c *Client) ListOpenstack(i *ListOpenstackInput) ([]*Openstack, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -77,10 +77,11 @@ func (c *Client) ListOpenstack(i *ListOpenstackInput) ([]*Openstack, error) {
 
 // CreateOpenstackInput is used as input to the CreateOpenstack function.
 type CreateOpenstackInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name              *string `form:"name,omitempty"`
 	User              *string `form:"user,omitempty"`
@@ -101,15 +102,15 @@ type CreateOpenstackInput struct {
 
 // CreateOpenstack creates a new Fastly Openstack.
 func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -124,10 +125,11 @@ func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
 
 // GetOpenstackInput is used as input to the GetOpenstack function.
 type GetOpenstackInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Openstack to fetch.
 	Name string
@@ -135,19 +137,19 @@ type GetOpenstackInput struct {
 
 // GetOpenstack gets the Openstack configuration with the given parameters.
 func (c *Client) GetOpenstack(i *GetOpenstackInput) (*Openstack, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -162,10 +164,11 @@ func (c *Client) GetOpenstack(i *GetOpenstackInput) (*Openstack, error) {
 
 // UpdateOpenstackInput is used as input to the UpdateOpenstack function.
 type UpdateOpenstackInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Openstack to update.
 	Name string
@@ -189,19 +192,19 @@ type UpdateOpenstackInput struct {
 
 // UpdateOpenstack updates a specific Openstack.
 func (c *Client) UpdateOpenstack(i *UpdateOpenstackInput) (*Openstack, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -216,10 +219,11 @@ func (c *Client) UpdateOpenstack(i *UpdateOpenstackInput) (*Openstack, error) {
 
 // DeleteOpenstackInput is the input parameter to DeleteOpenstack.
 type DeleteOpenstackInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Openstack to delete (required).
 	Name string
@@ -227,19 +231,19 @@ type DeleteOpenstackInput struct {
 
 // DeleteOpenstack deletes the given Openstack version.
 func (c *Client) DeleteOpenstack(i *DeleteOpenstackInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/openstack/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

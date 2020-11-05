@@ -15,8 +15,8 @@ func TestClient_BlobStorages(t *testing.T) {
 	var bs *BlobStorage
 	record(t, "blobstorages/create", func(c *Client) {
 		bs, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			Service:         testServiceID,
-			Version:         tv.Number,
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
 			Name:            "test-blobstorage",
 			Path:            "/logs",
 			AccountName:     "test",
@@ -40,15 +40,15 @@ func TestClient_BlobStorages(t *testing.T) {
 	defer func() {
 		record(t, "blobstorages/cleanup", func(c *Client) {
 			c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-blobstorage",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-blobstorage",
 			})
 
 			c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-blobstorage",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-blobstorage",
 			})
 		})
 	}()
@@ -97,8 +97,8 @@ func TestClient_BlobStorages(t *testing.T) {
 	var bsl []*BlobStorage
 	record(t, "blobstorages/list", func(c *Client) {
 		bsl, err = c.ListBlobStorages(&ListBlobStoragesInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -112,9 +112,9 @@ func TestClient_BlobStorages(t *testing.T) {
 	var nbs *BlobStorage
 	record(t, "blobstorages/get", func(c *Client) {
 		nbs, err = c.GetBlobStorage(&GetBlobStorageInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-blobstorage",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-blobstorage",
 		})
 	})
 	if err != nil {
@@ -164,10 +164,10 @@ func TestClient_BlobStorages(t *testing.T) {
 	var ubs *BlobStorage
 	record(t, "blobstorages/update", func(c *Client) {
 		ubs, err = c.UpdateBlobStorage(&UpdateBlobStorageInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-blobstorage",
-			NewName: "new-test-blobstorage",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-blobstorage",
+			NewName:        "new-test-blobstorage",
 		})
 	})
 	if err != nil {
@@ -180,9 +180,9 @@ func TestClient_BlobStorages(t *testing.T) {
 	// Delete
 	record(t, "blobstorages/delete", func(c *Client) {
 		err = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-blobstorage",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-blobstorage",
 		})
 	})
 	if err != nil {
@@ -193,17 +193,17 @@ func TestClient_BlobStorages(t *testing.T) {
 func TestClient_ListBlobStorages_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListBlobStorages(&ListBlobStoragesInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListBlobStorages(&ListBlobStoragesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -211,17 +211,17 @@ func TestClient_ListBlobStorages_validation(t *testing.T) {
 func TestClient_CreateBlobStorage_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateBlobStorage(&CreateBlobStorageInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateBlobStorage(&CreateBlobStorageInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -229,24 +229,24 @@ func TestClient_CreateBlobStorage_validation(t *testing.T) {
 func TestClient_GetBlobStorage_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -256,24 +256,24 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -283,24 +283,24 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

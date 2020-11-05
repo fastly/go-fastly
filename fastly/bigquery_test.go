@@ -19,18 +19,18 @@ func TestClient_Bigqueries(t *testing.T) {
 	var bq *BigQuery
 	record(t, "bigqueries/create", func(c *Client) {
 		bq, err = c.CreateBigQuery(&CreateBigQueryInput{
-			Service:       testServiceID,
-			Version:       tv.Number,
-			Name:          "test-bigquery",
-			ProjectID:     "example-fastly-log",
-			Dataset:       "fastly_log_test",
-			Table:         "fastly_logs",
-			Template:      "",
-			User:          "fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com",
-			SecretKey:     secretKey,
-			Format:        "{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}",
-			Placement:     "waf_debug",
-			FormatVersion: 2,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-bigquery",
+			ProjectID:      "example-fastly-log",
+			Dataset:        "fastly_log_test",
+			Table:          "fastly_logs",
+			Template:       "",
+			User:           "fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com",
+			SecretKey:      secretKey,
+			Format:         "{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}",
+			Placement:      "waf_debug",
+			FormatVersion:  2,
 		})
 	})
 	if err != nil {
@@ -41,15 +41,15 @@ func TestClient_Bigqueries(t *testing.T) {
 	defer func() {
 		record(t, "bigqueries/cleanup", func(c *Client) {
 			c.DeleteBigQuery(&DeleteBigQueryInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-bigquery",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-bigquery",
 			})
 
 			c.DeleteBigQuery(&DeleteBigQueryInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-bigquery",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-test-bigquery",
 			})
 		})
 	}()
@@ -92,8 +92,8 @@ func TestClient_Bigqueries(t *testing.T) {
 	var bqs []*BigQuery
 	record(t, "bigqueries/list", func(c *Client) {
 		bqs, err = c.ListBigQueries(&ListBigQueriesInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -107,9 +107,9 @@ func TestClient_Bigqueries(t *testing.T) {
 	var nbq *BigQuery
 	record(t, "bigqueries/get", func(c *Client) {
 		nbq, err = c.GetBigQuery(&GetBigQueryInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-bigquery",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-bigquery",
 		})
 	})
 	if err != nil {
@@ -153,10 +153,10 @@ func TestClient_Bigqueries(t *testing.T) {
 	var ubq *BigQuery
 	record(t, "bigqueries/update", func(c *Client) {
 		ubq, err = c.UpdateBigQuery(&UpdateBigQueryInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-bigquery",
-			NewName: "new-test-bigquery",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-bigquery",
+			NewName:        "new-test-bigquery",
 		})
 	})
 	if err != nil {
@@ -169,9 +169,9 @@ func TestClient_Bigqueries(t *testing.T) {
 	// Delete
 	record(t, "bigqueries/delete", func(c *Client) {
 		err = c.DeleteBigQuery(&DeleteBigQueryInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-bigquery",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-bigquery",
 		})
 	})
 	if err != nil {
@@ -182,17 +182,17 @@ func TestClient_Bigqueries(t *testing.T) {
 func TestClient_ListBigQueries_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListBigQueries(&ListBigQueriesInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListBigQueries(&ListBigQueriesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -200,17 +200,17 @@ func TestClient_ListBigQueries_validation(t *testing.T) {
 func TestClient_CreateBigQuery_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateBigQuery(&CreateBigQueryInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateBigQuery(&CreateBigQueryInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -218,24 +218,24 @@ func TestClient_CreateBigQuery_validation(t *testing.T) {
 func TestClient_GetBigQuery_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetBigQuery(&GetBigQueryInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetBigQuery(&GetBigQueryInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetBigQuery(&GetBigQueryInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -245,24 +245,24 @@ func TestClient_GetBigQuery_validation(t *testing.T) {
 func TestClient_UpdateBigQuery_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateBigQuery(&UpdateBigQueryInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateBigQuery(&UpdateBigQueryInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateBigQuery(&UpdateBigQueryInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -272,24 +272,24 @@ func TestClient_UpdateBigQuery_validation(t *testing.T) {
 func TestClient_DeleteBigQuery_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteBigQuery(&DeleteBigQueryInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteBigQuery(&DeleteBigQueryInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteBigQuery(&DeleteBigQueryInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

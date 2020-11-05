@@ -45,24 +45,24 @@ func (s elasticsearchByName) Less(i, j int) bool {
 
 // ListElasticsearchInput is used as input to the ListElasticsearch function.
 type ListElasticsearchInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListElasticsearch returns the list of Elasticsearch logs for the configuration version.
 func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -78,10 +78,11 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 
 // CreateElasticsearchInput is used as input to the CreateElasticsearch function.
 type CreateElasticsearchInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name              *string `form:"name,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
@@ -103,15 +104,15 @@ type CreateElasticsearchInput struct {
 
 // CreateElasticsearch creates a new Fastly Elasticsearch logging endpoint.
 func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearch, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -126,29 +127,30 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 
 // GetElasticsearchInput is used as input to the GetElasticsearch function.
 type GetElasticsearchInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Elasticsearch endpoint to fetch.
 	Name string
 }
 
 func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -163,10 +165,11 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 }
 
 type UpdateElasticsearchInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Elasticsearch endpoint to fetch.
 	Name string
@@ -190,19 +193,19 @@ type UpdateElasticsearchInput struct {
 }
 
 func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearch, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -216,29 +219,30 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 }
 
 type DeleteElasticsearchInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Elasticsearch endpoint to fetch.
 	Name string
 }
 
 func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/elasticsearch/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
