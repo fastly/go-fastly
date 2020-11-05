@@ -108,12 +108,14 @@ func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCert
 	return &cc, nil
 }
 
+// CreateCustomCertificateInput is used as inpput to the CreateCustomCertificate function.
 type CreateCustomCertificateInput struct {
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	Name     string `jsonapi:"attr,name"`
 	ID       string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 }
 
+// CreateCustomCertificate creates a custom TLS certificate.
 func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*CustomCertificate, error) {
 
 	if i.CertBlob == "" {
@@ -138,6 +140,7 @@ func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*Cust
 	return &cc, nil
 }
 
+// UpdateCustomCertificateInput is used as inpput to the UpdateCustomCertificate function.
 type UpdateCustomCertificateInput struct {
 	ID       string `jsonapi:"primary,tls_certificate"`
 	CertBlob string `jsonapi:"attr,cert_blob"`

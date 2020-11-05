@@ -8,7 +8,7 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// CustomTLSConfiguration
+// CustomTLSConfiguration represents a TLS configuration response from the Fastly API.
 type CustomTLSConfiguration struct {
 	ID            string       `jsonapi:"primary,tls_configuration"`
 	DNSRecords    []*DNSRecord `jsonapi:"relation,dns_records,dns_record"`
@@ -20,7 +20,7 @@ type CustomTLSConfiguration struct {
 	UpdatedAt     *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
 
-// DNSRecord
+// DNSRecord is a child of CustomTLSConfiguration
 type DNSRecord struct {
 	ID         string `jsonapi:"primary,dns_record"`
 	RecordType string `jsonapi:"attr,record_type"`
@@ -89,6 +89,7 @@ type GetCustomTLSConfigurationInput struct {
 	Include string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
 }
 
+// GetCustomTLSConfiguration returns a single TLS configuration.
 func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
 
 	if i.ID == "" {
@@ -120,6 +121,7 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 	return &con, nil
 }
 
+// UpdateCustomTLSConfigurationInput is used as input to the UpdateCustomTLSConfiguration function.
 type UpdateCustomTLSConfigurationInput struct {
 	ID   string `jsonapi:"attr,id"`
 	Name string `jsonapi:"attr,name"`
