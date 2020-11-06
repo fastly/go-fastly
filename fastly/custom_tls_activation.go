@@ -89,6 +89,7 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 // GetTLSActivationInput is used as input to the GetTLSActivation function.
 type GetTLSActivationInput struct {
 	ID string
+    Include                  *string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
 }
 
 // GetTLSActivation retrieve a single activation.
