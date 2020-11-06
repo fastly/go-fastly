@@ -18,10 +18,6 @@ type TLSActivation struct {
 }
 
 // TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tls/certificates API.
-type TLSCertificate struct {
-	ID   string `jsonapi:"primary,tls_certificate"`
-	Type string `jsonapi:"attr,type"`
-}
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
 type ListTLSActivationsInput struct {
