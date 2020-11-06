@@ -14,7 +14,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	var ta *TLSActivation
 	record(t, fixtureBase+"create", func(c *Client) {
 		ta, err = c.CreateTLSActivation(&CreateTLSActivationInput{
-			TLSCertificate:   &CustomCertificate{ID: "CERTIFICATE_ID"},
+			TLSCertificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 			TLSConfiguration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 			TLSDomain:        &TLSDomain{ID: "DOMAIN_NAME"},
 		})
@@ -43,13 +43,13 @@ func TestClient_TLSActivation(t *testing.T) {
 	if len(lta) < 1 {
 		t.Errorf("bad TLS activations: %v", lta)
 	}
-	if lta[0].TLSCertificate == nil {
+	if lta[0].Certificate == nil {
 		t.Errorf("TLS certificate relation should not be nil: %v", lta)
 	}
-	if lta[0].TLSConfiguration == nil {
+	if lta[0].Configuration == nil {
 		t.Errorf("TLS configuration relation should not be nil: %v", lta)
 	}
-	if lta[0].TLSDomain == nil {
+	if lta[0].Domain == nil {
 		t.Errorf("TLS domain relation should not be nil: %v", lta)
 	}
 
@@ -72,7 +72,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		uta, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
 			ID:             "ACTIVATION_ID",
-			TLSCertificate: &CustomCertificate{},
+			TLSCertificate: &CustomTLSCertificate{},
 		})
 	})
 	if err != nil {
@@ -99,7 +99,7 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 	var err error
 	record(t, "custom_tls_activation/create", func(c *Client) {
 		_, err = c.CreateTLSActivation(&CreateTLSActivationInput{
-			TLSCertificate:   &CustomCertificate{},
+			TLSCertificate:   &CustomTLSCertificate{},
 			TLSConfiguration: &TLSConfiguration{},
 			TLSDomain:        &TLSDomain{},
 		})
@@ -156,7 +156,7 @@ func TestClient_UpdateTLSActivation_validation(t *testing.T) {
 	record(t, "custom_tls_activation/update", func(c *Client) {
 		_, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
 			ID:             "ACTIVATION_ID",
-			TLSCertificate: &CustomCertificate{ID: "CERTIFICATE_ID"},
+			TLSCertificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 		})
 	})
 	if err != nil {

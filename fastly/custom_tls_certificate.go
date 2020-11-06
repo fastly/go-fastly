@@ -8,10 +8,9 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// CustomCertificate represents a custom certificate. Uses common TLSDomain type from BulkCertificate
-type CustomCertificate struct {
+// CustomTLSCertificate represents a custom certificate. Uses common TLSDomain type from BulkCertificate
+type CustomTLSCertificate struct {
 	ID                 string       `jsonapi:"primary,tls_certificate"`
-	CreatedAt          *time.Time   `jsonapi:"attr,created_at,iso8601"`
 	IssuedTo           string       `jsonapi:"attr,issued_to"`
 	Issuer             string       `jsonapi:"attr,issuer"`
 	Name               string       `jsonapi:"attr,name"`
@@ -20,12 +19,13 @@ type CustomCertificate struct {
 	Replace            bool         `jsonapi:"attr,replace"`
 	SerialNumber       string       `jsonapi:"attr,serial_number"`
 	SignatureAlgorithm string       `jsonapi:"attr,signature_algorithm"`
-	UpdatedAt          *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 	TLSDomains         []*TLSDomain `jsonapi:"relation,tls_domains,tls_domain"`
+	CreatedAt          *time.Time   `jsonapi:"attr,created_at,iso8601"`
+	UpdatedAt          *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
 
-// ListCustomCertificatesInput is used as input to the ListCustomCertificatesInput function.
-type ListCustomCertificatesInput struct {
+// ListCustomTLSCertificatesInput is used as input to the ListCustomTLSCertificatesInput function.
+type ListCustomTLSCertificatesInput struct {
 	PageNumber              *uint   // The page index for pagination.
 	PageSize                *uint   // The number of keys per page.
 	FilterTLSDomainsIDMatch *string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
@@ -33,7 +33,7 @@ type ListCustomCertificatesInput struct {
 }
 
 // formatFilters converts user input into query parameters for filtering.
-func (i *ListCustomCertificatesInput) formatFilters() map[string]string {
+func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[tls_domains.id][match]": i.FilterTLSDomainsIDMatch,
@@ -49,8 +49,8 @@ func (i *ListCustomCertificatesInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListCustomCertificates list all certificates.
-func (c *Client) ListCustomCertificates(i *ListCustomCertificatesInput) ([]*CustomCertificate, error) {
+// ListCustomTLSCertificates list all certificates.
+func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([]*CustomTLSCertificate, error) {
 	p := "/tls/certificates"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
@@ -64,14 +64,14 @@ func (c *Client) ListCustomCertificates(i *ListCustomCertificatesInput) ([]*Cust
 		return nil, err
 	}
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(CustomCertificate)))
+	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(CustomTLSCertificate)))
 	if err != nil {
 		return nil, err
 	}
 
-	cc := make([]*CustomCertificate, len(data))
+	cc := make([]*CustomTLSCertificate, len(data))
 	for i := range data {
-		typed, ok := data[i].(*CustomCertificate)
+		typed, ok := data[i].(*CustomTLSCertificate)
 		if !ok {
 			return nil, fmt.Errorf("unexpected response type: %T", data[i])
 		}
@@ -81,12 +81,12 @@ func (c *Client) ListCustomCertificates(i *ListCustomCertificatesInput) ([]*Cust
 	return cc, nil
 }
 
-// GetCustomCertificateInput is used as input to the GetCustomCertificate function.
-type GetCustomCertificateInput struct {
+// GetCustomTLSCertificateInput is used as input to the GetCustomTLSCertificate function.
+type GetCustomTLSCertificateInput struct {
 	ID string
 }
 
-func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCertificate, error) {
+func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -98,7 +98,7 @@ func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCert
 		return nil, err
 	}
 
-	var cc CustomCertificate
+	var cc CustomTLSCertificate
 	if err := jsonapi.UnmarshalPayload(r.Body, &cc); err != nil {
 		return nil, err
 	}
@@ -106,15 +106,15 @@ func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCert
 	return &cc, nil
 }
 
-// CreateCustomCertificateInput is used as inpput to the CreateCustomCertificate function.
-type CreateCustomCertificateInput struct {
+// CreateCustomTLSCertificateInput is used as input to the CreateCustomTLSCertificate function.
+type CreateCustomTLSCertificateInput struct {
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	Name     string `jsonapi:"attr,name"`
 	ID       string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 }
 
-// CreateCustomCertificate creates a custom TLS certificate.
-func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*CustomCertificate, error) {
+// CreateCustomTLSCertificate creates a custom TLS certificate.
+func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
 	}
@@ -129,7 +129,7 @@ func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*Cust
 		return nil, err
 	}
 
-	var cc CustomCertificate
+	var cc CustomTLSCertificate
 	if err := jsonapi.UnmarshalPayload(r.Body, &cc); err != nil {
 		return nil, err
 	}
@@ -137,19 +137,19 @@ func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*Cust
 	return &cc, nil
 }
 
-// UpdateCustomCertificateInput is used as inpput to the UpdateCustomCertificate function.
-type UpdateCustomCertificateInput struct {
+// UpdateCustomTLSCertificateInput is used as input to the UpdateCustomTLSCertificate function.
+type UpdateCustomTLSCertificateInput struct {
 	ID       string `jsonapi:"primary,tls_certificate"`
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	Name     string `jsonapi:"attr,name"`
 	Type     string `jsonapi:"primary,tls_certificate"`
 }
 
-// UpdateCustomCertificate replace a certificate with a newly reissued certificate.
+// UpdateCustomTLSCertificate replace a certificate with a newly reissued certificate.
 // By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
 // Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
 // Any SAN entries that are missing in the replacement certificate will become disabled.
-func (c *Client) UpdateCustomCertificate(i *UpdateCustomCertificateInput) (*CustomCertificate, error) {
+func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -168,20 +168,20 @@ func (c *Client) UpdateCustomCertificate(i *UpdateCustomCertificateInput) (*Cust
 		return nil, err
 	}
 
-	var cc CustomCertificate
+	var cc CustomTLSCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {
 		return nil, err
 	}
 	return &cc, nil
 }
 
-// DeleteCustomCertificateInput used for deleting a certificate.
-type DeleteCustomCertificateInput struct {
+// DeleteCustomTLSCertificateInput used for deleting a certificate.
+type DeleteCustomTLSCertificateInput struct {
 	ID string
 }
 
-// DeleteCustomCertificate destroy a certificate. This disables TLS for all domains listed as SAN entries.
-func (c *Client) DeleteCustomCertificate(i *DeleteCustomCertificateInput) error {
+// DeleteCustomTLSCertificate destroy a certificate. This disables TLS for all domains listed as SAN entries.
+func (c *Client) DeleteCustomTLSCertificate(i *DeleteCustomTLSCertificateInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
