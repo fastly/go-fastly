@@ -10,11 +10,11 @@ import (
 
 // TLSActivation represents a /tls/activations response.
 type TLSActivation struct {
-	ID               string            `jsonapi:"primary,tls_activation"`
-	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration"` // TLSConfiguration type shared with BulkCertificate
-	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain"`        // TLSDomain type shared with BulkCertificate
-	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate"`
-	CreatedAt        *time.Time        `jsonapi:"attr,created_at,iso8601"`
+	ID               string             `jsonapi:"primary,tls_activation"`
+	TLSConfiguration *TLSConfiguration  `jsonapi:"relation,tls_configuration"` // TLSConfiguration type shared with BulkCertificate
+	TLSDomain        *TLSDomain         `jsonapi:"relation,tls_domain"`        // TLSDomain type shared with BulkCertificate
+	TLSCertificate   *CustomCertificate `jsonapi:"relation,tls_certificate"`
+	CreatedAt        *time.Time         `jsonapi:"attr,created_at,iso8601"`
 }
 
 // TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tls/certificates API.
@@ -101,7 +101,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 		},
 	}
 
-	if *i.Include != "" {
+	if i.Include != nil {
 		ro.Params = map[string]string{"include": *i.Include}
 	}
 
@@ -128,7 +128,6 @@ type CreateTLSActivationInput struct {
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
 func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
-
 	if i.TLSCertificate == nil {
 		return nil, ErrMissingTLSCertificate
 	}

@@ -89,7 +89,7 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 // GetCustomTLSConfigurationInput is used as input to the GetCustomTLSConfiguration function.
 type GetCustomTLSConfigurationInput struct {
 	ID      string
-	Include string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
+	Include *string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
 }
 
 // GetCustomTLSConfiguration returns a single TLS configuration.
@@ -106,8 +106,8 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 		},
 	}
 
-	if i.Include != "" {
-		ro.Params = map[string]string{"include": i.Include}
+	if i.Include != nil {
+		ro.Params = map[string]string{"include": *i.Include}
 	}
 
 	r, err := c.Get(p, ro)

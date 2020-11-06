@@ -51,7 +51,6 @@ func (i *ListCustomCertificatesInput) formatFilters() map[string]string {
 
 // ListCustomCertificates list all certificates.
 func (c *Client) ListCustomCertificates(i *ListCustomCertificatesInput) ([]*CustomCertificate, error) {
-
 	p := "/tls/certificates"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
@@ -88,7 +87,6 @@ type GetCustomCertificateInput struct {
 }
 
 func (c *Client) GetCustomCertificate(i *GetCustomCertificateInput) (*CustomCertificate, error) {
-
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -117,7 +115,6 @@ type CreateCustomCertificateInput struct {
 
 // CreateCustomCertificate creates a custom TLS certificate.
 func (c *Client) CreateCustomCertificate(i *CreateCustomCertificateInput) (*CustomCertificate, error) {
-
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
 	}
