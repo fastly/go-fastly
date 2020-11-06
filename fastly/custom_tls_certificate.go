@@ -74,7 +74,7 @@ func (c *Client) ListCustomCertificates(i *ListCustomCertificatesInput) ([]*Cust
 	for i := range data {
 		typed, ok := data[i].(*CustomCertificate)
 		if !ok {
-			return nil, fmt.Errorf("got back a non-CustomCertificate response")
+			return nil, fmt.Errorf("unexpected response type: %T", data[i])
 		}
 		cc[i] = typed
 	}
