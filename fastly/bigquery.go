@@ -79,17 +79,17 @@ type CreateBigQueryInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	ProjectID         string `form:"project_id,omitempty"`
-	Dataset           string `form:"dataset,omitempty"`
-	Table             string `form:"table,omitempty"`
-	Template          string `form:"template_suffix,omitempty"`
-	User              string `form:"user,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Format            string `form:"format,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
+	Name              *string `form:"name,omitempty"`
+	ProjectID         *string `form:"project_id,omitempty"`
+	Dataset           *string `form:"dataset,omitempty"`
+	Table             *string `form:"table,omitempty"`
+	Template          *string `form:"template_suffix,omitempty"`
+	User              *string `form:"user,omitempty"`
+	SecretKey         *string `form:"secret_key,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
 }
 
 // CreateBigQuery creates a new Fastly BigQuery.
@@ -165,17 +165,17 @@ type UpdateBigQueryInput struct {
 	// Name is the name of the BigQuery to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	ProjectID         string `form:"project_id,omitempty"`
-	Dataset           string `form:"dataset,omitempty"`
-	Table             string `form:"table,omitempty"`
-	Template          string `form:"template_suffix,omitempty"`
-	User              string `form:"user,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Format            string `form:"format,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	ProjectID         *string `form:"project_id,omitempty"`
+	Dataset           *string `form:"dataset,omitempty"`
+	Table             *string `form:"table,omitempty"`
+	Template          *string `form:"template_suffix,omitempty"`
+	User              *string `form:"user,omitempty"`
+	SecretKey         *string `form:"secret_key,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
 }
 
 // UpdateBigQuery updates a specific BigQuery.

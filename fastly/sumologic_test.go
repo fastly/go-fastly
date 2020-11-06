@@ -17,12 +17,12 @@ func TestClient_Sumologics(t *testing.T) {
 		s, err = c.CreateSumologic(&CreateSumologicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-sumologic",
-			URL:            "https://foo.sumologic.com",
-			Format:         "format",
-			FormatVersion:  1,
-			MessageType:    "classic",
-			Placement:      "waf_debug",
+			Name:           String("test-sumologic"),
+			URL:            String("https://foo.sumologic.com"),
+			Format:         String("format"),
+			FormatVersion:  Int(1),
+			MessageType:    String("classic"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -118,7 +118,7 @@ func TestClient_Sumologics(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-sumologic",
-			NewName:        "new-test-sumologic",
+			NewName:        String("new-test-sumologic"),
 		})
 	})
 	if err != nil {

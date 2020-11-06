@@ -17,7 +17,7 @@ func TestClient_Gzips(t *testing.T) {
 		gzip, err = c.CreateGzip(&CreateGzipInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-gzip",
+			Name:           String("test-gzip"),
 			ContentTypes:   "text/html text/css",
 			Extensions:     "html css",
 		})
@@ -32,7 +32,7 @@ func TestClient_Gzips(t *testing.T) {
 		gzipomit, err = c.CreateGzip(&CreateGzipInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-gzip-omit",
+			Name:           String("test-gzip-omit"),
 		})
 	})
 	if err != nil {
@@ -122,7 +122,7 @@ func TestClient_Gzips(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-gzip",
-			NewName:        "new-test-gzip",
+			NewName:        String("new-test-gzip"),
 		})
 	})
 	if err != nil {

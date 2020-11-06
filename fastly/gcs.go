@@ -81,19 +81,19 @@ type CreateGCSInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Bucket            string `form:"bucket_name,omitempty"`
-	User              string `form:"user,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	GzipLevel         uint8  `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              *string `form:"name,omitempty"`
+	Bucket            *string `form:"bucket_name,omitempty"`
+	User              *string `form:"user,omitempty"`
+	SecretKey         *string `form:"secret_key,omitempty"`
+	Path              *string `form:"path,omitempty"`
+	Period            *uint   `form:"period,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	GzipLevel         *uint8  `form:"gzip_level,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
 }
 
 // CreateGCS creates a new Fastly GCS.
@@ -169,19 +169,19 @@ type UpdateGCSInput struct {
 	// Name is the name of the GCS to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	Bucket            string `form:"bucket_name,omitempty"`
-	User              string `form:"user,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	GzipLevel         uint8  `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	Bucket            *string `form:"bucket_name,omitempty"`
+	User              *string `form:"user,omitempty"`
+	SecretKey         *string `form:"secret_key,omitempty"`
+	Path              *string `form:"path,omitempty"`
+	Period            *uint   `form:"period,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	GzipLevel         *uint8  `form:"gzip_level,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
 }
 
 // UpdateGCS updates a specific GCS.

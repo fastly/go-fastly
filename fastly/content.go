@@ -26,7 +26,7 @@ type EdgeCheckResponse struct {
 
 // EdgeCheckInput is used as input to the EdgeCheck function.
 type EdgeCheckInput struct {
-	URL string `form:"url,omitempty"`
+	URL *string `form:"url,omitempty"`
 }
 
 // EdgeCheck queries the edge cache for all of Fastly's servers for the given
@@ -34,7 +34,7 @@ type EdgeCheckInput struct {
 func (c *Client) EdgeCheck(i *EdgeCheckInput) ([]*EdgeCheck, error) {
 	resp, err := c.Get("/content/edge_check", &RequestOptions{
 		Params: map[string]string{
-			"url": i.URL,
+			"url": *i.URL,
 		},
 	})
 	if err != nil {

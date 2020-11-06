@@ -74,7 +74,7 @@ type CreateDomainInput struct {
 	Name string `form:"name"`
 
 	// Comment is a personal, freeform descriptive note.
-	Comment string `form:"comment,omitempty"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // CreateDomain creates a new domain with the given information.
@@ -154,7 +154,7 @@ type UpdateDomainInput struct {
 	NewName string `form:"name"`
 
 	// Comment is a personal, freeform descriptive note.
-	Comment string `form:"comment,omitempty"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // UpdateDomain updates a single domain for the current service. The only allowed

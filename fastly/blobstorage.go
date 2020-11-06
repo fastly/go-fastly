@@ -82,20 +82,20 @@ type CreateBlobStorageInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Path              string `form:"path,omitempty"`
-	AccountName       string `form:"account_name,omitempty"`
-	Container         string `form:"container,omitempty"`
-	SASToken          string `form:"sas_token,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	GzipLevel         uint   `form:"gzip_level,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
+	Name              *string `form:"name,omitempty"`
+	Path              *string `form:"path,omitempty"`
+	AccountName       *string `form:"account_name,omitempty"`
+	Container         *string `form:"container,omitempty"`
+	SASToken          *string `form:"sas_token,omitempty"`
+	Period            *uint   `form:"period,omitempty"`
+	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	GzipLevel         *uint   `form:"gzip_level,omitempty"`
+	PublicKey         *string `form:"public_key,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
 }
 
 // CreateBlobStorage creates a new Fastly blob storage.
@@ -171,20 +171,20 @@ type UpdateBlobStorageInput struct {
 	// Name is the name of the blob storage to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	Path              string `form:"path,omitempty"`
-	AccountName       string `form:"account_name,omitempty"`
-	Container         string `form:"container,omitempty"`
-	SASToken          string `form:"sas_token,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	GzipLevel         uint   `form:"gzip_level,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	Path              *string `form:"path,omitempty"`
+	AccountName       *string `form:"account_name,omitempty"`
+	Container         *string `form:"container,omitempty"`
+	SASToken          *string `form:"sas_token,omitempty"`
+	Period            *uint   `form:"period,omitempty"`
+	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	GzipLevel         *uint   `form:"gzip_level,omitempty"`
+	PublicKey         *string `form:"public_key,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
 }
 
 // UpdateBlobStorage updates a specific blob storage.

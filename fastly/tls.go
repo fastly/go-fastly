@@ -105,8 +105,8 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 // CreatePrivateKeyInput is used as input to the CreatePrivateKey function.
 type CreatePrivateKeyInput struct {
-	Key  string `jsonapi:"attr,key,omitempty"`
-	Name string `jsonapi:"attr,name,omitempty"`
+	Key  *string `jsonapi:"attr,key,omitempty"`
+	Name *string `jsonapi:"attr,name,omitempty"`
 }
 
 // CreatePrivateKey create a TLS private key.
@@ -114,11 +114,11 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 
 	p := "/tls/private_keys"
 
-	if i.Key == "" {
+	if *i.Key == "" {
 		return nil, ErrMissingKey
 	}
 
-	if i.Name == "" {
+	if *i.Name == "" {
 		return nil, ErrMissingName
 	}
 

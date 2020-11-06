@@ -17,17 +17,17 @@ func TestClient_RequestSettings(t *testing.T) {
 		rs, err = c.CreateRequestSetting(&CreateRequestSettingInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-request-setting",
+			Name:           String("test-request-setting"),
 			ForceMiss:      CBool(true),
 			ForceSSL:       CBool(true),
 			Action:         RequestSettingActionLookup,
 			BypassBusyWait: CBool(true),
-			MaxStaleAge:    30,
-			HashKeys:       "a,b,c",
+			MaxStaleAge:    Uint(30),
+			HashKeys:       String("a,b,c"),
 			XForwardedFor:  RequestSettingXFFLeave,
 			TimerSupport:   CBool(true),
 			GeoHeaders:     CBool(true),
-			DefaultHost:    "example.com",
+			DefaultHost:    String("example.com"),
 		})
 	})
 	if err != nil {
@@ -153,7 +153,7 @@ func TestClient_RequestSettings(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-request-setting",
-			NewName:        "new-test-request-setting",
+			NewName:        String("new-test-request-setting"),
 		})
 	})
 	if err != nil {

@@ -205,16 +205,16 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 
 // UpdateWAFInput is used as input to the UpdateWAF function.
 type UpdateWAFInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string `jsonapi:"attr,service_id,omitempty"`
+	// ServiceID is the ID of the service.
+	ServiceID *string `jsonapi:"attr,service_id,omitempty"`
 
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `jsonapi:"attr,service_version_number,omitempty"`
+	// ServiceVersion is the specific configuration version.
+	ServiceVersion *int `jsonapi:"attr,service_version_number,omitempty"`
 
-	ID                string `jsonapi:"primary,waf_firewall"`
-	PrefetchCondition string `jsonapi:"attr,prefetch_condition,omitempty"`
-	Response          string `jsonapi:"attr,response,omitempty"`
-	Disabled          *bool  `jsonapi:"attr,disabled,omitempty"`
+	ID                string  `jsonapi:"primary,waf_firewall"`
+	PrefetchCondition *string `jsonapi:"attr,prefetch_condition,omitempty"`
+	Response          *string `jsonapi:"attr,response,omitempty"`
+	Disabled          *bool   `jsonapi:"attr,disabled,omitempty"`
 }
 
 // UpdateWAF updates a specific WAF.
@@ -223,18 +223,15 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 		return nil, ErrMissingWAFID
 	}
 
-	// 'Service' and 'Version' are mandatory
-	// if 'Disabled' is not specified.
-	//
-	// 'Service' and 'Version' are mandatory
-	// if 'PrefetchCondition' or 'Response' are
-	// not empty
-	if i.Disabled == nil || i.PrefetchCondition != "" || i.Response != "" {
-		if i.ServiceID == "" {
+	// 'Service' and 'Version' are mandatory if:
+	// 		- 'Disabled' is not specified.
+	// 		- 'PrefetchCondition' or 'Response' are NOT empty.
+	if i.Disabled == nil || i.PrefetchCondition != nil || i.Response != nil {
+		if i.ServiceID == nil {
 			return nil, ErrMissingServiceID
 		}
 
-		if i.ServiceVersion == 0 {
+		if i.ServiceVersion == nil {
 			return nil, ErrMissingServiceVersion
 		}
 	}

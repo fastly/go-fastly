@@ -17,10 +17,10 @@ func TestClient_Directors(t *testing.T) {
 		b, err = c.CreateDirector(&CreateDirectorInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-director",
-			Quorum:         50,
+			Name:           String("test-director"),
+			Quorum:         Uint(50),
 			Type:           DirectorTypeRandom,
-			Retries:        5,
+			Retries:        Uint(5),
 		})
 	})
 	if err != nil {
@@ -104,8 +104,8 @@ func TestClient_Directors(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-director",
-			NewName:        "new-test-director",
-			Quorum:         100,
+			NewName:        String("new-test-director"),
+			Quorum:         Uint(100),
 		})
 	})
 	if err != nil {

@@ -115,18 +115,18 @@ type CreateRequestSettingInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name             string               `form:"name,omitempty"`
+	Name             *string              `form:"name,omitempty"`
 	ForceMiss        *Compatibool         `form:"force_miss,omitempty"`
 	ForceSSL         *Compatibool         `form:"force_ssl,omitempty"`
 	Action           RequestSettingAction `form:"action,omitempty"`
 	BypassBusyWait   *Compatibool         `form:"bypass_busy_wait,omitempty"`
-	MaxStaleAge      uint                 `form:"max_stale_age,omitempty"`
-	HashKeys         string               `form:"hash_keys,omitempty"`
+	MaxStaleAge      *uint                `form:"max_stale_age,omitempty"`
+	HashKeys         *string              `form:"hash_keys,omitempty"`
 	XForwardedFor    RequestSettingXFF    `form:"xff,omitempty"`
 	TimerSupport     *Compatibool         `form:"timer_support,omitempty"`
 	GeoHeaders       *Compatibool         `form:"geo_headers,omitempty"`
-	DefaultHost      string               `form:"default_host,omitempty"`
-	RequestCondition string               `form:"request_condition,omitempty"`
+	DefaultHost      *string              `form:"default_host,omitempty"`
+	RequestCondition *string              `form:"request_condition,omitempty"`
 }
 
 // CreateRequestSetting creates a new Fastly request settings.
@@ -204,18 +204,18 @@ type UpdateRequestSettingInput struct {
 	// Name is the name of the request settings to update.
 	Name string
 
-	NewName          string               `form:"name,omitempty"`
+	NewName          *string              `form:"name,omitempty"`
 	ForceMiss        *Compatibool         `form:"force_miss,omitempty"`
 	ForceSSL         *Compatibool         `form:"force_ssl,omitempty"`
 	Action           RequestSettingAction `form:"action,omitempty"`
 	BypassBusyWait   *Compatibool         `form:"bypass_busy_wait,omitempty"`
-	MaxStaleAge      uint                 `form:"max_stale_age,omitempty"`
-	HashKeys         string               `form:"hash_keys,omitempty"`
+	MaxStaleAge      *uint                `form:"max_stale_age,omitempty"`
+	HashKeys         *string              `form:"hash_keys,omitempty"`
 	XForwardedFor    RequestSettingXFF    `form:"xff,omitempty"`
 	TimerSupport     *Compatibool         `form:"timer_support,omitempty"`
 	GeoHeaders       *Compatibool         `form:"geo_headers,omitempty"`
-	DefaultHost      string               `form:"default_host,omitempty"`
-	RequestCondition string               `form:"request_condition,omitempty"`
+	DefaultHost      *string              `form:"default_host,omitempty"`
+	RequestCondition *string              `form:"request_condition,omitempty"`
 }
 
 // UpdateRequestSetting updates a specific request settings.

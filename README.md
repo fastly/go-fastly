@@ -86,9 +86,9 @@ fmt.Println(domain.Name)
 backend, err := client.CreateBackend(&fastly.CreateBackendInput{
   Service: serviceID,
   Version: version.Number,
-  Name:    "example-backend",
-  Address: "127.0.0.1",
-  Port:    80,
+  Name:    fastly.String("example-backend"),
+  Address: fastly.String("127.0.0.1"),
+  Port:    fastly.Uint(80),
 })
 if err != nil {
   log.Fatal(err)
@@ -121,6 +121,8 @@ if err != nil {
 // Output: true
 fmt.Printf("%t\n", activeVersion.Locked)
 ```
+
+> Note: [basic types](https://tour.golang.org/basics/11) that are _optional_, must be provided as pointers to avoid unexpected behaviours when dealing with their zero value ([reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/)). We provide helper functions for this [here](./fastly/basictypes_helper.go).
 
 More information can be found in the
 [Fastly Godoc][godocs].

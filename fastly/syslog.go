@@ -84,22 +84,22 @@ type CreateSyslogInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string       `form:"name,omitempty"`
-	Address           string       `form:"address,omitempty"`
-	Hostname          string       `form:"hostname,omitempty"`
-	Port              uint         `form:"port,omitempty"`
+	Name              *string      `form:"name,omitempty"`
+	Address           *string      `form:"address,omitempty"`
+	Hostname          *string      `form:"hostname,omitempty"`
+	Port              *uint        `form:"port,omitempty"`
 	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	IPV4              string       `form:"ipv4,omitempty"`
-	TLSCACert         string       `form:"tls_ca_cert,omitempty"`
-	TLSHostname       string       `form:"tls_hostname,omitempty"`
-	TLSClientCert     string       `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string       `form:"tls_client_key,omitempty"`
-	Token             string       `form:"token,omitempty"`
-	Format            string       `form:"format,omitempty"`
-	FormatVersion     uint         `form:"format_version,omitempty"`
-	MessageType       string       `form:"message_type,omitempty"`
-	ResponseCondition string       `form:"response_condition,omitempty"`
-	Placement         string       `form:"placement,omitempty"`
+	IPV4              *string      `form:"ipv4,omitempty"`
+	TLSCACert         *string      `form:"tls_ca_cert,omitempty"`
+	TLSHostname       *string      `form:"tls_hostname,omitempty"`
+	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
+	TLSClientKey      *string      `form:"tls_client_key,omitempty"`
+	Token             *string      `form:"token,omitempty"`
+	Format            *string      `form:"format,omitempty"`
+	FormatVersion     *uint        `form:"format_version,omitempty"`
+	MessageType       *string      `form:"message_type,omitempty"`
+	ResponseCondition *string      `form:"response_condition,omitempty"`
+	Placement         *string      `form:"placement,omitempty"`
 }
 
 // CreateSyslog creates a new Fastly syslog.
@@ -175,22 +175,22 @@ type UpdateSyslogInput struct {
 	// Name is the name of the syslog to update.
 	Name string
 
-	NewName           string       `form:"name,omitempty"`
-	Address           string       `form:"address,omitempty"`
-	Hostname          string       `form:"hostname,omitempty"`
-	Port              uint         `form:"port,omitempty"`
+	NewName           *string      `form:"name,omitempty"`
+	Address           *string      `form:"address,omitempty"`
+	Hostname          *string      `form:"hostname,omitempty"`
+	Port              *uint        `form:"port,omitempty"`
 	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	IPV4              string       `form:"ipv4,omitempty"`
-	TLSCACert         string       `form:"tls_ca_cert,omitempty"`
-	TLSHostname       string       `form:"tls_hostname,omitempty"`
-	TLSClientCert     string       `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string       `form:"tls_client_key,omitempty"`
-	Token             string       `form:"token,omitempty"`
-	Format            string       `form:"format,omitempty"`
-	FormatVersion     uint         `form:"format_version,omitempty"`
-	MessageType       string       `form:"message_type,omitempty"`
-	ResponseCondition string       `form:"response_condition,omitempty"`
-	Placement         string       `form:"placement,omitempty"`
+	IPV4              *string      `form:"ipv4,omitempty"`
+	TLSCACert         *string      `form:"tls_ca_cert,omitempty"`
+	TLSHostname       *string      `form:"tls_hostname,omitempty"`
+	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
+	TLSClientKey      *string      `form:"tls_client_key,omitempty"`
+	Token             *string      `form:"token,omitempty"`
+	Format            *string      `form:"format,omitempty"`
+	FormatVersion     *uint        `form:"format_version,omitempty"`
+	MessageType       *string      `form:"message_type,omitempty"`
+	ResponseCondition *string      `form:"response_condition,omitempty"`
+	Placement         *string      `form:"placement,omitempty"`
 }
 
 // UpdateSyslog updates a specific syslog.

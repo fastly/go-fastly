@@ -17,11 +17,11 @@ func TestClient_ResponseObjects(t *testing.T) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-response-object",
-			Status:         200,
-			Response:       "Ok",
-			Content:        "abcd",
-			ContentType:    "text/plain",
+			Name:           String("test-response-object"),
+			Status:         Uint(200),
+			Response:       String("Ok"),
+			Content:        String("abcd"),
+			ContentType:    String("text/plain"),
 		})
 	})
 	if err != nil {
@@ -111,7 +111,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-response-object",
-			NewName:        "new-test-response-object",
+			NewName:        String("new-test-response-object"),
 		})
 	})
 	if err != nil {

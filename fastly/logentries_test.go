@@ -17,12 +17,12 @@ func TestClient_Logentries(t *testing.T) {
 		le, err = c.CreateLogentries(&CreateLogentriesInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-logentries",
-			Port:           1234,
+			Name:           String("test-logentries"),
+			Port:           Uint(1234),
 			UseTLS:         CBool(true),
-			Token:          "abcd1234",
-			Format:         "format",
-			Placement:      "waf_debug",
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -124,8 +124,8 @@ func TestClient_Logentries(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-logentries",
-			NewName:        "new-test-logentries",
-			FormatVersion:  2,
+			NewName:        String("new-test-logentries"),
+			FormatVersion:  Uint(2),
 		})
 	})
 	if err != nil {

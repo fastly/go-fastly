@@ -54,10 +54,10 @@ func TestClient_CreateToken(t *testing.T) {
 	t.Parallel()
 
 	input := &CreateTokenInput{
-		Name:     "my-test-token",
+		Name:     String("my-test-token"),
 		Scope:    "global",
-		Username: "xxxxxxxxxxxxxxxxxxxx",
-		Password: "xxxxxxxxxxxxxxxxxxxx",
+		Username: String("xxxxxxxxxxxxxxxxxxxx"),
+		Password: String("xxxxxxxxxxxxxxxxxxxx"),
 	}
 
 	var token *Token
@@ -69,8 +69,8 @@ func TestClient_CreateToken(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if token.Name != input.Name {
-		t.Errorf("returned invalid name, got %s, want %s", token.Name, input.Name)
+	if token.Name != *input.Name {
+		t.Errorf("returned invalid name, got %s, want %s", token.Name, *input.Name)
 	}
 
 	if token.Scope != input.Scope {

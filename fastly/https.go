@@ -86,24 +86,24 @@ type CreateHTTPSInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Format            string `form:"format,omitempty"`
-	URL               string `form:"url,omitempty"`
-	RequestMaxEntries uint   `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint   `form:"request_max_bytes,omitempty"`
-	ContentType       string `form:"content_type,omitempty"`
-	HeaderName        string `form:"header_name,omitempty"`
-	HeaderValue       string `form:"header_value,omitempty"`
-	Method            string `form:"method,omitempty"`
-	JSONFormat        string `form:"json_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	TLSCACert         string `form:"tls_ca_cert,omitempty"`
-	TLSClientCert     string `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string `form:"tls_client_key,omitempty"`
-	TLSHostname       string `form:"tls_hostname,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
+	Name              *string `form:"name,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	URL               *string `form:"url,omitempty"`
+	RequestMaxEntries *uint   `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   *uint   `form:"request_max_bytes,omitempty"`
+	ContentType       *string `form:"content_type,omitempty"`
+	HeaderName        *string `form:"header_name,omitempty"`
+	HeaderValue       *string `form:"header_value,omitempty"`
+	Method            *string `form:"method,omitempty"`
+	JSONFormat        *string `form:"json_format,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
+	TLSClientCert     *string `form:"tls_client_cert,omitempty"`
+	TLSClientKey      *string `form:"tls_client_key,omitempty"`
+	TLSHostname       *string `form:"tls_hostname,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
 }
 
 // CreateHTTPS creates a new Fastly HTTPS logging endpoint.
@@ -178,24 +178,24 @@ type UpdateHTTPSInput struct {
 	// Name is the name of the HTTPS endpoint to fetch.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Format            string `form:"format,omitempty"`
-	URL               string `form:"url,omitempty"`
-	RequestMaxEntries uint   `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint   `form:"request_max_bytes,omitempty"`
-	ContentType       string `form:"content_type,omitempty"`
-	HeaderName        string `form:"header_name,omitempty"`
-	HeaderValue       string `form:"header_value,omitempty"`
-	Method            string `form:"method,omitempty"`
-	JSONFormat        string `form:"json_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	TLSCACert         string `form:"tls_ca_cert,omitempty"`
-	TLSClientCert     string `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string `form:"tls_client_key,omitempty"`
-	TLSHostname       string `form:"tls_hostname,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	URL               *string `form:"url,omitempty"`
+	RequestMaxEntries *uint   `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   *uint   `form:"request_max_bytes,omitempty"`
+	ContentType       *string `form:"content_type,omitempty"`
+	HeaderName        *string `form:"header_name,omitempty"`
+	HeaderValue       *string `form:"header_value,omitempty"`
+	Method            *string `form:"method,omitempty"`
+	JSONFormat        *string `form:"json_format,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
+	TLSClientCert     *string `form:"tls_client_cert,omitempty"`
+	TLSClientKey      *string `form:"tls_client_key,omitempty"`
+	TLSHostname       *string `form:"tls_hostname,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
 }
 
 func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {

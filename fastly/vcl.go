@@ -142,9 +142,9 @@ type CreateVCLInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name    string `form:"name,omitempty"`
-	Content string `form:"content,omitempty"`
-	Main    bool   `form:"main,omitempty"`
+	Name    *string `form:"name,omitempty"`
+	Content *string `form:"content,omitempty"`
+	Main    *bool   `form:"main,omitempty"`
 }
 
 // CreateVCL creates a new Fastly VCL.
@@ -181,8 +181,8 @@ type UpdateVCLInput struct {
 	// Name is the name of the VCL to update (required).
 	Name string
 
-	NewName string `form:"name,omitempty"`
-	Content string `form:"content,omitempty"`
+	NewName *string `form:"name,omitempty"`
+	Content *string `form:"content,omitempty"`
 }
 
 // UpdateVCL creates a new Fastly VCL.

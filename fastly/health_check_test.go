@@ -17,17 +17,17 @@ func TestClient_HealthChecks(t *testing.T) {
 		hc, err = c.CreateHealthCheck(&CreateHealthCheckInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-healthcheck",
-			Method:           "HEAD",
-			Host:             "example.com",
-			Path:             "/foo",
-			HTTPVersion:      "1.1",
-			Timeout:          1500,
-			CheckInterval:    2500,
-			ExpectedResponse: 200,
-			Window:           5000,
-			Threshold:        10,
-			Initial:          10,
+			Name:             String("test-healthcheck"),
+			Method:           String("HEAD"),
+			Host:             String("example.com"),
+			Path:             String("/foo"),
+			HTTPVersion:      String("1.1"),
+			Timeout:          Uint(1500),
+			CheckInterval:    Uint(2500),
+			ExpectedResponse: Uint(200),
+			Window:           Uint(5000),
+			Threshold:        Uint(10),
+			Initial:          Uint(10),
 		})
 	})
 	if err != nil {
@@ -153,7 +153,7 @@ func TestClient_HealthChecks(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-healthcheck",
-			NewName:        "new-test-healthcheck",
+			NewName:        String("new-test-healthcheck"),
 		})
 	})
 	if err != nil {

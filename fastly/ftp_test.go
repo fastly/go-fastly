@@ -16,20 +16,20 @@ func TestClient_FTPs(t *testing.T) {
 		ftp, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
-			Name:            "test-ftp",
-			Address:         "example.com",
-			Port:            1234,
-			PublicKey:       pgpPublicKey(),
-			Username:        "username",
-			Password:        "password",
-			Path:            "/dir",
-			Period:          12,
-			GzipLevel:       9,
-			FormatVersion:   2,
-			Format:          "format",
-			TimestampFormat: "%Y",
-			Placement:       "waf_debug",
-			MessageType:     "classic",
+			Name:            String("test-ftp"),
+			Address:         String("example.com"),
+			Port:            Uint(1234),
+			PublicKey:       String(pgpPublicKey()),
+			Username:        String("username"),
+			Password:        String("password"),
+			Path:            String("/dir"),
+			Period:          Uint(12),
+			GzipLevel:       Uint8(9),
+			FormatVersion:   Uint(2),
+			Format:          String("format"),
+			TimestampFormat: String("%Y"),
+			Placement:       String("waf_debug"),
+			MessageType:     String("classic"),
 		})
 	})
 	if err != nil {
@@ -173,8 +173,8 @@ func TestClient_FTPs(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-ftp",
-			NewName:        "new-test-ftp",
-			GzipLevel:      0,
+			NewName:        String("new-test-ftp"),
+			GzipLevel:      Uint8(0),
 		})
 	})
 	if err != nil {

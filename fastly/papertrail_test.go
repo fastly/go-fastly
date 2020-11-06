@@ -17,12 +17,12 @@ func TestClient_Papertrails(t *testing.T) {
 		p, err = c.CreatePapertrail(&CreatePapertrailInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-papertrail",
-			Address:        "integ-test.go-fastly.com",
-			Port:           1234,
-			FormatVersion:  2,
-			Format:         "format",
-			Placement:      "waf_debug",
+			Name:           String("test-papertrail"),
+			Address:        String("integ-test.go-fastly.com"),
+			Port:           Uint(1234),
+			FormatVersion:  Uint(2),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -118,7 +118,7 @@ func TestClient_Papertrails(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-papertrail",
-			NewName:        "new-test-papertrail",
+			NewName:        String("new-test-papertrail"),
 		})
 	})
 	if err != nil {

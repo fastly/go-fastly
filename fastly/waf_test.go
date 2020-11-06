@@ -98,10 +98,10 @@ func TestClient_WAFs(t *testing.T) {
 	var uwaf *WAF
 	record(t, fixtureBase+"/update", func(c *Client) {
 		uwaf, err = c.UpdateWAF(&UpdateWAFInput{
-			ServiceID:      testService.ID,
-			ServiceVersion: tv.Number,
+			ServiceID:      &testService.ID,
+			ServiceVersion: &tv.Number,
 			ID:             waf.ID,
-			Response:       nro.Name,
+			Response:       &nro.Name,
 		})
 	})
 	if err != nil {
@@ -199,26 +199,24 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 	var err error
 
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		ID:             "",
+		ID: "",
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-		ID:        "123",
-		ServiceID: "",
+		ID: "123999",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
+	serviceID := "foo"
+
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-		ID:             "123",
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		ID:        "123",
+		ServiceID: &serviceID,
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)

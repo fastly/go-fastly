@@ -22,8 +22,8 @@ func TestClient_DictionaryItems(t *testing.T) {
 		createdDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
 			ServiceID:    testService.ID,
 			DictionaryID: testDictionary.ID,
-			ItemKey:      "test-dictionary-item",
-			ItemValue:    "value",
+			ItemKey:      String("test-dictionary-item"),
+			ItemValue:    String("value"),
 		})
 	})
 	if err != nil {
@@ -89,7 +89,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 			ServiceID:    testService.ID,
 			DictionaryID: testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
-			ItemValue:    "new-value",
+			ItemValue:    String("new-value"),
 		})
 	})
 	if err != nil {

@@ -23,9 +23,9 @@ func TestClient_ACLEntries(t *testing.T) {
 			Service: testService.ID,
 			ACL:     testACL.ID,
 			IP:      "10.0.0.3",
-			Subnet:  "8",
-			Negated: false,
-			Comment: "test entry",
+			Subnet:  String("8"),
+			Negated: Bool(false),
+			Comment: String("test entry"),
 		})
 	})
 	if err != nil {
@@ -97,8 +97,8 @@ func TestClient_ACLEntries(t *testing.T) {
 			Service: testService.ID,
 			ACL:     testACL.ID,
 			ID:      e.ID,
-			IP:      "10.0.0.4",
-			Negated: true,
+			IP:      String("10.0.0.4"),
+			Negated: Bool(true),
 		})
 	})
 	if err != nil {

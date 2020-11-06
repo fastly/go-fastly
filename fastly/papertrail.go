@@ -75,16 +75,16 @@ type CreatePapertrailInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string     `form:"name,omitempty"`
-	Address           string     `form:"address,omitempty"`
-	Port              uint       `form:"port,omitempty"`
-	FormatVersion     uint       `form:"format_version,omitempty"`
-	Format            string     `form:"format,omitempty"`
-	ResponseCondition string     `form:"response_condition,omitempty"`
+	Name              *string    `form:"name,omitempty"`
+	Address           *string    `form:"address,omitempty"`
+	Port              *uint      `form:"port,omitempty"`
+	FormatVersion     *uint      `form:"format_version,omitempty"`
+	Format            *string    `form:"format,omitempty"`
+	ResponseCondition *string    `form:"response_condition,omitempty"`
 	CreatedAt         *time.Time `form:"created_at,omitempty"`
 	UpdatedAt         *time.Time `form:"updated_at,omitempty"`
 	DeletedAt         *time.Time `form:"deleted_at,omitempty"`
-	Placement         string     `form:"placement,omitempty"`
+	Placement         *string    `form:"placement,omitempty"`
 }
 
 // CreatePapertrail creates a new Fastly papertrail.
@@ -160,16 +160,16 @@ type UpdatePapertrailInput struct {
 	// Name is the name of the papertrail to update.
 	Name string
 
-	NewName           string     `form:"name,omitempty"`
-	Address           string     `form:"address,omitempty"`
-	Port              uint       `form:"port,omitempty"`
-	FormatVersion     uint       `form:"format_version,omitempty"`
-	Format            string     `form:"format,omitempty"`
-	ResponseCondition string     `form:"response_condition,omitempty"`
+	NewName           *string    `form:"name,omitempty"`
+	Address           *string    `form:"address,omitempty"`
+	Port              *uint      `form:"port,omitempty"`
+	FormatVersion     *uint      `form:"format_version,omitempty"`
+	Format            *string    `form:"format,omitempty"`
+	ResponseCondition *string    `form:"response_condition,omitempty"`
 	CreatedAt         *time.Time `form:"created_at,omitempty"`
 	UpdatedAt         *time.Time `form:"updated_at,omitempty"`
 	DeletedAt         *time.Time `form:"deleted_at,omitempty"`
-	Placement         string     `form:"placement,omitempty"`
+	Placement         *string    `form:"placement,omitempty"`
 }
 
 // UpdatePapertrail updates a specific papertrail.

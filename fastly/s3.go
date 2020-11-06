@@ -96,23 +96,23 @@ type CreateS3Input struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name                         string                 `form:"name,omitempty"`
-	BucketName                   string                 `form:"bucket_name,omitempty"`
-	Domain                       string                 `form:"domain,omitempty"`
-	AccessKey                    string                 `form:"access_key,omitempty"`
-	SecretKey                    string                 `form:"secret_key,omitempty"`
-	Path                         string                 `form:"path,omitempty"`
-	Period                       uint                   `form:"period,omitempty"`
-	GzipLevel                    uint                   `form:"gzip_level,omitempty"`
-	Format                       string                 `form:"format,omitempty"`
-	MessageType                  string                 `form:"message_type,omitempty"`
-	FormatVersion                uint                   `form:"format_version,omitempty"`
-	ResponseCondition            string                 `form:"response_condition,omitempty"`
-	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
+	Name                         *string                `form:"name,omitempty"`
+	BucketName                   *string                `form:"bucket_name,omitempty"`
+	Domain                       *string                `form:"domain,omitempty"`
+	AccessKey                    *string                `form:"access_key,omitempty"`
+	SecretKey                    *string                `form:"secret_key,omitempty"`
+	Path                         *string                `form:"path,omitempty"`
+	Period                       *uint                  `form:"period,omitempty"`
+	GzipLevel                    *uint                  `form:"gzip_level,omitempty"`
+	Format                       *string                `form:"format,omitempty"`
+	MessageType                  *string                `form:"message_type,omitempty"`
+	FormatVersion                *uint                  `form:"format_version,omitempty"`
+	ResponseCondition            *string                `form:"response_condition,omitempty"`
+	TimestampFormat              *string                `form:"timestamp_format,omitempty"`
 	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
-	Placement                    string                 `form:"placement,omitempty"`
-	PublicKey                    string                 `form:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
+	Placement                    *string                `form:"placement,omitempty"`
+	PublicKey                    *string                `form:"public_key,omitempty"`
+	ServerSideEncryptionKMSKeyID *string                `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
 }
 
@@ -126,7 +126,7 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
+	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
 		return nil, ErrMissingKMSKeyID
 	}
 
@@ -193,23 +193,23 @@ type UpdateS3Input struct {
 	// Name is the name of the S3 to update.
 	Name string
 
-	NewName                      string                 `form:"name,omitempty"`
-	BucketName                   string                 `form:"bucket_name,omitempty"`
-	Domain                       string                 `form:"domain,omitempty"`
-	AccessKey                    string                 `form:"access_key,omitempty"`
-	SecretKey                    string                 `form:"secret_key,omitempty"`
-	Path                         string                 `form:"path,omitempty"`
-	Period                       uint                   `form:"period,omitempty"`
-	GzipLevel                    uint                   `form:"gzip_level,omitempty"`
-	Format                       string                 `form:"format,omitempty"`
-	FormatVersion                uint                   `form:"format_version,omitempty"`
-	ResponseCondition            string                 `form:"response_condition,omitempty"`
-	MessageType                  string                 `form:"message_type,omitempty"`
-	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
+	NewName                      *string                `form:"name,omitempty"`
+	BucketName                   *string                `form:"bucket_name,omitempty"`
+	Domain                       *string                `form:"domain,omitempty"`
+	AccessKey                    *string                `form:"access_key,omitempty"`
+	SecretKey                    *string                `form:"secret_key,omitempty"`
+	Path                         *string                `form:"path,omitempty"`
+	Period                       *uint                  `form:"period,omitempty"`
+	GzipLevel                    *uint                  `form:"gzip_level,omitempty"`
+	Format                       *string                `form:"format,omitempty"`
+	FormatVersion                *uint                  `form:"format_version,omitempty"`
+	ResponseCondition            *string                `form:"response_condition,omitempty"`
+	MessageType                  *string                `form:"message_type,omitempty"`
+	TimestampFormat              *string                `form:"timestamp_format,omitempty"`
 	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
-	Placement                    string                 `form:"placement,omitempty"`
-	PublicKey                    string                 `form:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
+	Placement                    *string                `form:"placement,omitempty"`
+	PublicKey                    *string                `form:"public_key,omitempty"`
+	ServerSideEncryptionKMSKeyID *string                `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
 }
 
@@ -227,7 +227,7 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 		return nil, ErrMissingName
 	}
 
-	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
+	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
 		return nil, ErrMissingKMSKeyID
 	}
 

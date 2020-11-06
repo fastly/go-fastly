@@ -40,20 +40,20 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		s, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-syslog",
-			Address:        "example.com",
-			Hostname:       "example.com",
-			Port:           1234,
+			Name:           String("test-syslog"),
+			Address:        String("example.com"),
+			Hostname:       String("example.com"),
+			Port:           Uint(1234),
 			UseTLS:         CBool(true),
-			TLSCACert:      caCert,
-			TLSHostname:    "example.com",
-			TLSClientCert:  clientCert,
-			TLSClientKey:   clientKey,
-			Token:          "abcd1234",
-			Format:         "format",
-			FormatVersion:  2,
-			MessageType:    "classic",
-			Placement:      "waf_debug",
+			TLSCACert:      String(caCert),
+			TLSHostname:    String("example.com"),
+			TLSClientCert:  String(clientCert),
+			TLSClientKey:   String(clientKey),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			FormatVersion:  Uint(2),
+			MessageType:    String("classic"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -197,8 +197,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-syslog",
-			NewName:        "new-test-syslog",
-			FormatVersion:  2,
+			NewName:        String("new-test-syslog"),
+			FormatVersion:  Uint(2),
 		})
 	})
 	if err != nil {

@@ -12,8 +12,8 @@ func TestClient_PrivateKey(t *testing.T) {
 	var pk *PrivateKey
 	record(t, fixtureBase+"create", func(c *Client) {
 		pk, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
-			Key:  "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
-			Name: "My private key",
+			Key:  String("-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"),
+			Name: String("My private key"),
 		})
 	})
 	if err != nil {
@@ -98,8 +98,8 @@ func TestClient_CreatePrivateKey_validation(t *testing.T) {
 	var err error
 	record(t, "tls/create", func(c *Client) {
 		_, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
-			Key:  "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
-			Name: "My private key",
+			Key:  String("-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"),
+			Name: String("My private key"),
 		})
 	})
 	if err != nil {

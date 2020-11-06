@@ -17,23 +17,23 @@ func TestClient_S3s(t *testing.T) {
 		s3, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:                         "/path",
-			Period:                       12,
-			GzipLevel:                    9,
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
+			Name:                         String("test-s3"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			AccessKey:                    String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:                    String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:                         String("/path"),
+			Period:                       Uint(12),
+			GzipLevel:                    Uint(9),
+			Format:                       String("format"),
+			FormatVersion:                Uint(2),
+			ResponseCondition:            String(""),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
 			Redundancy:                   S3RedundancyReduced,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
+			Placement:                    String("waf_debug"),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
 			ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		})
 	})
@@ -200,8 +200,8 @@ func TestClient_S3s(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-s3",
-			NewName:        "new-test-s3",
-			PublicKey:      pgpPublicKeyUpdate(),
+			NewName:        String("new-test-s3"),
+			PublicKey:      String(pgpPublicKeyUpdate()),
 		})
 	})
 	if err != nil {
@@ -265,9 +265,9 @@ func TestClient_CreateS3_validation(t *testing.T) {
 	_, err = testClient.CreateS3(&CreateS3Input{
 		ServiceID:                    "foo",
 		ServiceVersion:               1,
-		Name:                         "test-service",
+		Name:                         String("test-service"),
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
-		ServerSideEncryptionKMSKeyID: "",
+		ServerSideEncryptionKMSKeyID: String(""),
 	})
 	if err != ErrMissingKMSKeyID {
 		t.Errorf("bad error: %s", err)
@@ -332,7 +332,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceVersion:               1,
 		Name:                         "test-service",
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
-		ServerSideEncryptionKMSKeyID: "",
+		ServerSideEncryptionKMSKeyID: String(""),
 	})
 	if err != ErrMissingKMSKeyID {
 		t.Errorf("bad error: %s", err)

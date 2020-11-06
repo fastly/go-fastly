@@ -34,8 +34,8 @@ sub vcl_hash {
 		vcl, err = c.CreateVCL(&CreateVCLInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-vcl",
-			Content:        content,
+			Name:           String("test-vcl"),
+			Content:        String(content),
 		})
 	})
 	if err != nil {
@@ -107,7 +107,7 @@ sub vcl_hash {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-vcl",
-			NewName:        "new-test-vcl",
+			NewName:        String("new-test-vcl"),
 		})
 	})
 	if err != nil {

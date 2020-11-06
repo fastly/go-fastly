@@ -77,15 +77,15 @@ type CreateSplunkInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	URL               string `form:"url,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	Token             string `form:"token,omitempty"`
-	TLSCACert         string `form:"tls_ca_cert,omitempty"`
-	TLSHostname       string `form:"tls_hostname,omitempty"`
+	Name              *string `form:"name,omitempty"`
+	URL               *string `form:"url,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	Token             *string `form:"token,omitempty"`
+	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
+	TLSHostname       *string `form:"tls_hostname,omitempty"`
 }
 
 // CreateSplunk creates a new Fastly splunk.
@@ -161,15 +161,15 @@ type UpdateSplunkInput struct {
 	// Name is the name of the splunk to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	URL               string `form:"url,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	Token             string `form:"token,omitempty"`
-	TLSCACert         string `form:"tls_ca_cert,omitempty"`
-	TLSHostname       string `form:"tls_hostname,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	URL               *string `form:"url,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	Token             *string `form:"token,omitempty"`
+	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
+	TLSHostname       *string `form:"tls_hostname,omitempty"`
 }
 
 // UpdateSplunk updates a specific splunk.

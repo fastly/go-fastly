@@ -71,7 +71,7 @@ type CreateDictionaryInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name      string       `form:"name,omitempty"`
+	Name      *string      `form:"name,omitempty"`
 	WriteOnly *Compatibool `form:"write_only,omitempty"`
 }
 
@@ -148,7 +148,7 @@ type UpdateDictionaryInput struct {
 	// Name is the name of the dictionary to update.
 	Name string
 
-	NewName   string       `form:"name,omitempty"`
+	NewName   *string      `form:"name,omitempty"`
 	WriteOnly *Compatibool `form:"write_only,omitempty"`
 }
 

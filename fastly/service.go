@@ -76,9 +76,9 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 
 // CreateServiceInput is used as input to the CreateService function.
 type CreateServiceInput struct {
-	Name    string `form:"name,omitempty"`
-	Type    string `form:"type,omitempty"`
-	Comment string `form:"comment,omitempty"`
+	Name    *string `form:"name,omitempty"`
+	Type    *string `form:"type,omitempty"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // CreateService creates a new service with the given information.
@@ -147,8 +147,8 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 type UpdateServiceInput struct {
 	ID string
 
-	Name    string `form:"name,omitempty"`
-	Comment string `form:"comment,omitempty"`
+	Name    *string `form:"name,omitempty"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // UpdateService updates the service with the given input.

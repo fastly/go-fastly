@@ -38,14 +38,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		s, err = c.CreateSplunk(&CreateSplunkInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-splunk",
-			URL:            "https://mysplunkendpoint.example.com/services/collector/event",
-			Format:         "%h %l %u %t \"%r\" %>s %b",
-			FormatVersion:  2,
-			Placement:      "waf_debug",
-			Token:          "super-secure-token",
-			TLSCACert:      caCert,
-			TLSHostname:    "example.com",
+			Name:           String("test-splunk"),
+			URL:            String("https://mysplunkendpoint.example.com/services/collector/event"),
+			Format:         String("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  Uint(2),
+			Placement:      String("waf_debug"),
+			Token:          String("super-secure-token"),
+			TLSCACert:      String(caCert),
+			TLSHostname:    String("example.com"),
 		})
 	})
 	if err != nil {
@@ -153,7 +153,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-splunk",
-			NewName:        "new-test-splunk",
+			NewName:        String("new-test-splunk"),
 		})
 	})
 	if err != nil {
