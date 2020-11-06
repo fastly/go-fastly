@@ -12,12 +12,12 @@ import (
 type CustomTLSConfiguration struct {
 	ID            string       `jsonapi:"primary,tls_configuration"`
 	DNSRecords    []*DNSRecord `jsonapi:"relation,dns_records,dns_record"`
-	CreatedAt     *time.Time   `jsonapi:"attr,created_at,iso8601"`
 	Bulk          bool         `jsonapi:"attr,bulk"`
 	Default       bool         `jsonapi:"attr,default"`
 	HTTPProtocols []string     `jsonapi:"attr,http_protocols"`
 	Name          string       `jsonapi:"attr,name"`
 	TLSProtocols  []string     `jsonapi:"attr,tls_protocols"`
+	CreatedAt     *time.Time   `jsonapi:"attr,created_at,iso8601"`
 	UpdatedAt     *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
 
@@ -30,9 +30,11 @@ type DNSRecord struct {
 
 // ListCustomTLSConfigurationsInput is used as input to the ListCustomTLSConfigurationsInput function.
 type ListCustomTLSConfigurationsInput struct {
-	PageNumber *uint // The page index for pagination.
-	PageSize   *uint // The number of keys per page.
-	FilterBulk *bool // Whether or not to only include bulk=true configurations
+	FilterBulk *bool   // Whether or not to only include bulk=true configurations
+	Include    *string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
+	PageNumber *uint   // The page index for pagination.
+	PageSize   *uint   // The number of keys per page.
+
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -40,6 +42,7 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[bulk]": i.FilterBulk,
+		"include":      i.Include,
 		"page[size]":   i.PageSize,
 		"page[number]": i.PageNumber,
 	}
