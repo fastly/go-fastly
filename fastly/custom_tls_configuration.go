@@ -75,7 +75,7 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 	for i := range data {
 		typed, ok := data[i].(*CustomTLSConfiguration)
 		if !ok {
-			return nil, fmt.Errorf("got back a non-tls-configuration response")
+			return nil, fmt.Errorf("unexpected response type: %T", data[i])
 		}
 		con[i] = typed
 	}
