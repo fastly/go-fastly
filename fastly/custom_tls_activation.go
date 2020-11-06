@@ -78,7 +78,7 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 	for i := range data {
 		typed, ok := data[i].(*TLSActivation)
 		if !ok {
-			return nil, fmt.Errorf("got back a non-TLSActivation response")
+			return nil, fmt.Errorf("unexpected response type: %T", data[i])
 		}
 		a[i] = typed
 	}
