@@ -55,7 +55,6 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 
 // ListTLSActivations list all activations.
 func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivation, error) {
-
 	p := "/tls/activations"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
