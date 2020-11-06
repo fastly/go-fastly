@@ -17,7 +17,7 @@ type TLSActivation struct {
 	CreatedAt        *time.Time        `jsonapi:"attr,created_at,iso8601"`
 }
 
-// TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tlsrtificates API/ce
+// TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tls/certificates API.
 type TLSCertificate struct {
 	ID   string `jsonapi:"primary,tls_certificate"`
 	Type string `jsonapi:"attr,type"`
