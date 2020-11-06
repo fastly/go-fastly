@@ -89,12 +89,21 @@ type GetTLSActivationInput struct {
 
 // GetTLSActivation retrieve a single activation.
 func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, error) {
-
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	p := fmt.Sprintf("/tls/activations/%s", i.ID)
+
+	ro := &RequestOptions{
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json", // this is required otherwise the params don't work
+		},
+	}
+
+	if *i.Include != "" {
+		ro.Params = map[string]string{"include": *i.Include}
+	}
 
 	r, err := c.Get(p, nil)
 	if err != nil {
@@ -112,7 +121,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 // CreateTLSActivationInput is used as input to the CreateTLSActivation function.
 type CreateTLSActivationInput struct {
 	ID               string            `jsonapi:"primary,tls_activation"` // ID value does not need to be set.
-	TLSCertificate   *TLSCertificate   `jsonapi:"relation,tls_certificate"`
+	TLSCertificate   *CustomCertificate   `jsonapi:"relation,tls_certificate"` // Only ID of CustomCertificate needs to be set.
 	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration"`
 	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain"`
 }
@@ -148,7 +157,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 // UpdateTLSActivationInput is used as input to the UpdateTLSActivation function.
 type UpdateTLSActivationInput struct {
 	ID             string          `jsonapi:"primary,tls_activation"`
-	TLSCertificate *TLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`
+	TLSCertificate *CustomCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`  // Only ID of CustomCertificate needs to be set.
 }
 
 // UpdateTLSActivation
