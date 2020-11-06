@@ -11,7 +11,7 @@ import (
 // CustomTLSConfiguration represents a TLS configuration response from the Fastly API.
 type CustomTLSConfiguration struct {
 	ID            string       `jsonapi:"primary,tls_configuration"`
-	DNSRecords    []*DNSRecord `jsonapi:"relation,dns_records,dns_record"`
+	DNSRecords    []*DNSRecord `jsonapi:"relation,dns_records"`
 	Bulk          bool         `jsonapi:"attr,bulk"`
 	Default       bool         `jsonapi:"attr,default"`
 	HTTPProtocols []string     `jsonapi:"attr,http_protocols"`
