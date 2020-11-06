@@ -17,6 +17,7 @@ type CustomTLSConfiguration struct {
 	Default       bool         `jsonapi:"attr,default"`
 	HTTPProtocols []string     `jsonapi:"attr,http_protocols"`
 	Name          string       `jsonapi:"attr,name"`
+	TLSProtocols  []string     `jsonapi:"attr,tls_protocols"`
 	UpdatedAt     *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
 
@@ -52,7 +53,6 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 
 // ListCustomTLSConfigurations list all TLS configurations.
 func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
-
 	p := "/tls/configurations"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
@@ -91,7 +91,6 @@ type GetCustomTLSConfigurationInput struct {
 
 // GetCustomTLSConfiguration returns a single TLS configuration.
 func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
-
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}

@@ -83,8 +83,8 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 
 // GetTLSActivationInput is used as input to the GetTLSActivation function.
 type GetTLSActivationInput struct {
-	ID string
-    Include                  *string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
+	ID      string
+	Include *string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
 }
 
 // GetTLSActivation retrieve a single activation.
@@ -120,10 +120,10 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 
 // CreateTLSActivationInput is used as input to the CreateTLSActivation function.
 type CreateTLSActivationInput struct {
-	ID               string            `jsonapi:"primary,tls_activation"` // ID value does not need to be set.
-	TLSCertificate   *CustomCertificate   `jsonapi:"relation,tls_certificate"` // Only ID of CustomCertificate needs to be set.
-	TLSConfiguration *TLSConfiguration `jsonapi:"relation,tls_configuration"`
-	TLSDomain        *TLSDomain        `jsonapi:"relation,tls_domain"`
+	ID               string             `jsonapi:"primary,tls_activation"`   // ID value does not need to be set.
+	TLSCertificate   *CustomCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomCertificate needs to be set.
+	TLSConfiguration *TLSConfiguration  `jsonapi:"relation,tls_configuration"`
+	TLSDomain        *TLSDomain         `jsonapi:"relation,tls_domain"`
 }
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
@@ -156,8 +156,8 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 
 // UpdateTLSActivationInput is used as input to the UpdateTLSActivation function.
 type UpdateTLSActivationInput struct {
-	ID             string          `jsonapi:"primary,tls_activation"`
-	TLSCertificate *CustomCertificate `jsonapi:"relation,tls_certificate,tls_certificate"`  // Only ID of CustomCertificate needs to be set.
+	ID             string             `jsonapi:"primary,tls_activation"`
+	TLSCertificate *CustomCertificate `jsonapi:"relation,tls_certificate,tls_certificate"` // Only ID of CustomCertificate needs to be set.
 }
 
 // UpdateTLSActivation
