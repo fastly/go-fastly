@@ -104,6 +104,20 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
+		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
+		Name: "My certificate",
+	})
+	if err != ErrMissingCertBlob {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_DeleteCustomTLSCertificate_validation(t *testing.T) {
@@ -117,6 +131,11 @@ func TestClient_DeleteCustomTLSCertificate_validation(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	err = testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
@@ -144,6 +163,11 @@ func TestClient_GetCustomTLSCertificate_validation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	_, err = testClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
@@ -159,5 +183,29 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	_, err = testClient.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
+		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+		Name:     "My certificate",
+	})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
+		ID:   "CERTIFICATE_ID",
+		Name: "My certificate",
+	})
+	if err != ErrMissingCertBlob {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
+		ID:       "CERTIFICATE_ID",
+		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
 	}
 }
