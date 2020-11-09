@@ -54,11 +54,14 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 	if cc.ID != gcc.ID {
 		t.Errorf("bad ID: %q (%q)", cc.ID, gcc.ID)
 	}
-	if cc.TLSDomains == nil {
+	if gcc.TLSDomains == nil {
 		t.Errorf("TLSDomains should not be nil: %v", cc.TLSDomains)
 	}
-	if len(cc.TLSDomains) < 1 {
+	if len(gcc.TLSDomains) < 1 {
 		t.Errorf("TLSDomains should not be an empty slice: %v", cc.TLSDomains)
+	}
+	if cc.TLSDomains[0].ID != gcc.TLSDomains[0].ID {
+		t.Errorf("bad Domain ID: %q (%q)", cc.TLSDomains[0].ID, gcc.TLSDomains[0].ID)
 	}
 
 	// Update

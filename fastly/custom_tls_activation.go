@@ -121,20 +121,20 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 // CreateTLSActivationInput is used as input to the CreateTLSActivation function.
 type CreateTLSActivationInput struct {
 	ID               string                `jsonapi:"primary,tls_activation"`   // ID value does not need to be set.
-	TLSCertificate   *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
-	TLSConfiguration *TLSConfiguration     `jsonapi:"relation,tls_configuration"`
-	TLSDomain        *TLSDomain            `jsonapi:"relation,tls_domain"`
+	Certificate   *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
+	Configuration *TLSConfiguration     `jsonapi:"relation,tls_configuration"`
+	Domain        *TLSDomain            `jsonapi:"relation,tls_domain"`
 }
 
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
 func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
-	if i.TLSCertificate == nil {
+	if i.Certificate == nil {
 		return nil, ErrMissingTLSCertificate
 	}
-	if i.TLSConfiguration == nil {
+	if i.Configuration == nil {
 		return nil, ErrMissingTLSConfiguration
 	}
-	if i.TLSDomain == nil {
+	if i.Domain == nil {
 		return nil, ErrMissingTLSDomain
 	}
 
@@ -156,7 +156,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 // UpdateTLSActivationInput is used as input to the UpdateTLSActivation function.
 type UpdateTLSActivationInput struct {
 	ID             string                `jsonapi:"primary,tls_activation"`
-	TLSCertificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
+	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
 }
 
 // UpdateTLSActivation
@@ -164,7 +164,7 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
-	if i.TLSCertificate == nil {
+	if i.Certificate == nil {
 		return nil, ErrMissingTLSCertificate
 	}
 
