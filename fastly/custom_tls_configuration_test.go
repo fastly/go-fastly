@@ -81,6 +81,11 @@ func TestClient_GetCustomTLSConfiguration_validation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	_, err = testClient.GetCustomTLSConfiguration(&GetCustomTLSConfigurationInput{})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
@@ -95,5 +100,19 @@ func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
+		Name: "My configuration v2",
+	})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
+		ID: "CONFIGURATION_ID",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
 	}
 }
