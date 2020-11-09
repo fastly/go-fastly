@@ -80,7 +80,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	var uta *TLSActivation
 	record(t, fixtureBase+"update", func(c *Client) {
 		uta, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
-			ID:             "ACTIVATION_ID",
+			ID:          "ACTIVATION_ID",
 			Certificate: &CustomTLSCertificate{},
 		})
 	})
@@ -108,13 +108,37 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 	var err error
 	record(t, "custom_tls_activation/create", func(c *Client) {
 		_, err = c.CreateTLSActivation(&CreateTLSActivationInput{
-			Certificate:   &CustomTLSCertificate{},
-			Configuration: &TLSConfiguration{},
-			Domain:        &TLSDomain{},
+			Certificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
+			Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
+			Domain:        &TLSDomain{ID: "DOMAIN_NAME"},
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	_, err = testClient.CreateTLSActivation(&CreateTLSActivationInput{
+		Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
+		Domain:        &TLSDomain{ID: "DOMAIN_NAME"},
+	})
+	if err != ErrMissingTLSCertificate {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateTLSActivation(&CreateTLSActivationInput{
+		Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
+		Domain:      &TLSDomain{ID: "DOMAIN_NAME"},
+	})
+	if err != ErrMissingTLSConfiguration {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateTLSActivation(&CreateTLSActivationInput{
+		Certificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
+		Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
+	})
+	if err != ErrMissingTLSDomain {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
@@ -129,6 +153,11 @@ func TestClient_DeleteTLSActivation_validation(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	err = testClient.DeleteTLSActivation(&DeleteTLSActivationInput{})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
@@ -156,6 +185,11 @@ func TestClient_GetTLSActivation_validation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	_, err = testClient.GetTLSActivation(&GetTLSActivationInput{})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_UpdateTLSActivation_validation(t *testing.T) {
@@ -164,11 +198,25 @@ func TestClient_UpdateTLSActivation_validation(t *testing.T) {
 	var err error
 	record(t, "custom_tls_activation/update", func(c *Client) {
 		_, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
-			ID:             "ACTIVATION_ID",
+			ID:          "ACTIVATION_ID",
 			Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	_, err = testClient.UpdateTLSActivation(&UpdateTLSActivationInput{
+		ID: "ACTIVATION_ID",
+	})
+	if err != ErrMissingTLSCertificate {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateTLSActivation(&UpdateTLSActivationInput{
+		Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
+	})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
 	}
 }
