@@ -26,9 +26,11 @@ type CustomTLSCertificate struct {
 
 // ListCustomTLSCertificatesInput is used as input to the ListCustomTLSCertificatesInput function.
 type ListCustomTLSCertificatesInput struct {
+	FilterNotAfter          *string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
+	FilterTLSDomainsIDMatch *string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
+	Include                 *string // Include related objects. Optional, comma-separated values. Permitted values: tls_activations.
 	PageNumber              *uint   // The page index for pagination.
 	PageSize                *uint   // The number of keys per page.
-	FilterTLSDomainsIDMatch *string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
 	Sort                    *string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
 }
 
@@ -36,7 +38,9 @@ type ListCustomTLSCertificatesInput struct {
 func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
+		"filter[not_after]":             i.FilterNotAfter,
 		"filter[tls_domains.id][match]": i.FilterTLSDomainsIDMatch,
+		"include":                       i.Include,
 		"page[size]":                    i.PageSize,
 		"page[number]":                  i.PageNumber,
 		"sort":                          i.Sort,
