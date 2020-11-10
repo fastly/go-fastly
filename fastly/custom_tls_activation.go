@@ -156,7 +156,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 // UpdateTLSActivationInput is used as input to the UpdateTLSActivation function.
 type UpdateTLSActivationInput struct {
 	ID          string                `jsonapi:"primary,tls_activation"`
-	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
+	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
 }
 
 // UpdateTLSActivation updates the certificate used to terminate TLS traffic for the domain associated with this TLS activation.
