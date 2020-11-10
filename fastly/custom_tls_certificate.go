@@ -8,7 +8,7 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// CustomTLSCertificate represents a custom certificate. Uses common TLSDomain type from BulkCertificate
+// CustomTLSCertificate represents a custom certificate. Uses common TLSDomain type from BulkCertificate.
 type CustomTLSCertificate struct {
 	ID                 string       `jsonapi:"primary,tls_certificate"`
 	IssuedTo           string       `jsonapi:"attr,issued_to"`
