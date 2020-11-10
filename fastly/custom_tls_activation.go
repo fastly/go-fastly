@@ -17,7 +17,6 @@ type TLSActivation struct {
 	CreatedAt     *time.Time            `jsonapi:"attr,created_at,iso8601"`
 }
 
-// TLSCertificate represents a certificate relationship. See CustomTLSCertificate for the /tls/certificates API.
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
 type ListTLSActivationsInput struct {
