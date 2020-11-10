@@ -146,7 +146,6 @@ type UpdateCustomTLSCertificateInput struct {
 	ID       string `jsonapi:"primary,tls_certificate"`
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	Name     string `jsonapi:"attr,name"`
-	Type     string `jsonapi:"primary,tls_certificate"`
 }
 
 // UpdateCustomTLSCertificate replace a certificate with a newly reissued certificate.
