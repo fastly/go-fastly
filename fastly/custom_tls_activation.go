@@ -159,7 +159,7 @@ type UpdateTLSActivationInput struct {
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
 }
 
-// UpdateTLSActivation
+// UpdateTLSActivation updates the certificate used to terminate TLS traffic for the domain associated with this TLS activation.
 func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
