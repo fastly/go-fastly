@@ -103,7 +103,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 		ro.Params = map[string]string{"include": *i.Include}
 	}
 
-	r, err := c.Get(p, nil)
+	r, err := c.Get(p, ro)
 	if err != nil {
 		return nil, err
 	}
