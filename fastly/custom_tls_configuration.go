@@ -64,7 +64,7 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 		},
 	}
 
-	r, err := c.Get(p, filters)
+	r, err := c.Get(p, ro)
 	if err != nil {
 		return nil, err
 	}
