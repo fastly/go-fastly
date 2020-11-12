@@ -57,7 +57,7 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 // ListCustomTLSConfigurations list all TLS configurations.
 func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
 	p := "/tls/configurations"
-	filters := &RequestOptions{
+	ro := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
 			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
