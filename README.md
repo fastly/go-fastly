@@ -123,7 +123,7 @@ fmt.Printf("%t\n", activeVersion.Locked)
 ```
 
 More information can be found in the
-[Fastly Godoc](https://godoc.org/github.com/fastly/go-fastly).
+[Fastly Godoc][godocs].
 
 Developing
 -------
