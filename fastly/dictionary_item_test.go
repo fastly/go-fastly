@@ -22,8 +22,8 @@ func TestClient_DictionaryItems(t *testing.T) {
 		createdDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
 			ServiceID:    testService.ID,
 			DictionaryID: testDictionary.ID,
-			ItemKey:      String("test-dictionary-item"),
-			ItemValue:    String("value"),
+			ItemKey:      "test-dictionary-item",
+			ItemValue:    "value",
 		})
 	})
 	if err != nil {

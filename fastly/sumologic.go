@@ -76,14 +76,14 @@ type CreateSumologicInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	Address           *string `form:"address,omitempty"`
-	URL               *string `form:"url,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	FormatVersion     *int    `form:"format_version,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	Name              string `form:"name,omitempty"`
+	Address           string `form:"address,omitempty"`
+	URL               string `form:"url,omitempty"`
+	Format            string `form:"format,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
+	FormatVersion     int    `form:"format_version,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateSumologic creates a new Fastly sumologic.

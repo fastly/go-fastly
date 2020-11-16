@@ -78,13 +78,13 @@ type CreateResponseObjectInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name             *string `form:"name,omitempty"`
-	Status           *uint   `form:"status,omitempty"`
-	Response         *string `form:"response,omitempty"`
-	Content          *string `form:"content,omitempty"`
-	ContentType      *string `form:"content_type,omitempty"`
-	RequestCondition *string `form:"request_condition,omitempty"`
-	CacheCondition   *string `form:"cache_condition,omitempty"`
+	Name             string `form:"name,omitempty"`
+	Status           uint   `form:"status,omitempty"`
+	Response         string `form:"response,omitempty"`
+	Content          string `form:"content,omitempty"`
+	ContentType      string `form:"content_type,omitempty"`
+	RequestCondition string `form:"request_condition,omitempty"`
+	CacheCondition   string `form:"cache_condition,omitempty"`
 }
 
 // CreateResponseObject creates a new Fastly response object.

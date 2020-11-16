@@ -16,7 +16,7 @@ func TestClient_Dictionaries(t *testing.T) {
 		d, err = c.CreateDictionary(&CreateDictionaryInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: testVersion.Number,
-			Name:           String("test_dictionary"),
+			Name:           "test_dictionary",
 		})
 	})
 	if err != nil {

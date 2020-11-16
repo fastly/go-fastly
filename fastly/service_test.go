@@ -11,8 +11,8 @@ func TestClient_Services(t *testing.T) {
 	var s *Service
 	record(t, "services/create", func(c *Client) {
 		s, err = c.CreateService(&CreateServiceInput{
-			Name:    String("test-service"),
-			Comment: String("comment"),
+			Name:    "test-service",
+			Comment: "comment",
 		})
 	})
 	if err != nil {

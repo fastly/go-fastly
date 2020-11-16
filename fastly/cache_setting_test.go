@@ -17,10 +17,10 @@ func TestClient_CacheSettings(t *testing.T) {
 		cacheSetting, err = c.CreateCacheSetting(&CreateCacheSettingInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-cache-setting"),
+			Name:           "test-cache-setting",
 			Action:         CacheSettingActionCache,
-			TTL:            Uint(1234),
-			StaleTTL:       Uint(1500),
+			TTL:            1234,
+			StaleTTL:       1500,
 		})
 	})
 	if err != nil {

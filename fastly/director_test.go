@@ -17,10 +17,10 @@ func TestClient_Directors(t *testing.T) {
 		b, err = c.CreateDirector(&CreateDirectorInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-director"),
-			Quorum:         Uint(50),
+			Name:           "test-director",
+			Quorum:         50,
 			Type:           DirectorTypeRandom,
-			Retries:        Uint(5),
+			Retries:        5,
 		})
 	})
 	if err != nil {

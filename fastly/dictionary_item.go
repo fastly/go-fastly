@@ -71,8 +71,8 @@ type CreateDictionaryItemInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 
-	ItemKey   *string `form:"item_key,omitempty"`
-	ItemValue *string `form:"item_value,omitempty"`
+	ItemKey   string `form:"item_key,omitempty"`
+	ItemValue string `form:"item_value,omitempty"`
 }
 
 // CreateDictionaryItem creates a new Fastly dictionary item.

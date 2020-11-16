@@ -28,7 +28,7 @@ func TestClient_Users(t *testing.T) {
 		u, err = c.CreateUser(&CreateUserInput{
 			Login: "test+user@example.com",
 			Name:  "test user",
-			Role:  String("engineer"),
+			Role:  "engineer",
 		})
 	})
 	if err != nil {

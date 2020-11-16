@@ -34,8 +34,8 @@ func TestClient_Diff(t *testing.T) {
 		_, err = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv2.Number,
-			Name:           String("test-backend"),
-			Address:        String("integ-test.go-fastly.com"),
+			Name:           "test-backend",
+			Address:        "integ-test.go-fastly.com",
 		})
 	})
 	if err != nil {

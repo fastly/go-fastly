@@ -107,9 +107,9 @@ type CreateACLEntryInput struct {
 	IP        string `form:"ip"`
 
 	// Optional fields
-	Subnet  *string `form:"subnet,omitempty"`
-	Negated *bool   `form:"negated,omitempty"`
-	Comment *string `form:"comment,omitempty"`
+	Subnet  string `form:"subnet,omitempty"`
+	Negated bool   `form:"negated,omitempty"`
+	Comment string `form:"comment,omitempty"`
 }
 
 // CreateACLEntry creates and returns a new ACL entry.

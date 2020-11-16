@@ -17,17 +17,17 @@ func TestClient_RequestSettings(t *testing.T) {
 		rs, err = c.CreateRequestSetting(&CreateRequestSettingInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-request-setting"),
+			Name:           "test-request-setting",
 			ForceMiss:      CBool(true),
 			ForceSSL:       CBool(true),
 			Action:         RequestSettingActionLookup,
 			BypassBusyWait: CBool(true),
-			MaxStaleAge:    Uint(30),
-			HashKeys:       String("a,b,c"),
+			MaxStaleAge:    30,
+			HashKeys:       "a,b,c",
 			XForwardedFor:  RequestSettingXFFLeave,
 			TimerSupport:   CBool(true),
 			GeoHeaders:     CBool(true),
-			DefaultHost:    String("example.com"),
+			DefaultHost:    "example.com",
 		})
 	})
 	if err != nil {

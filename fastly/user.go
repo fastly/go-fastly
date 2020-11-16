@@ -106,7 +106,7 @@ type CreateUserInput struct {
 	Login string `form:"login"`
 	Name  string `form:"name"`
 
-	Role *string `form:"role,omitempty"`
+	Role string `form:"role,omitempty"`
 }
 
 // CreateUser creates a new API token with the given information.

@@ -18,7 +18,7 @@ func TestClient_Domains(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "integ-test.go-fastly.com",
-			Comment:        String("comment"),
+			Comment:        "comment",
 		})
 	})
 	if err != nil {

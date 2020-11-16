@@ -17,11 +17,11 @@ func TestClient_Backends(t *testing.T) {
 		b, err = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-backend"),
-			Address:        String("integ-test.go-fastly.com"),
-			Port:           Uint(1234),
-			ConnectTimeout: Uint(1500),
-			OverrideHost:   String("origin.example.com"),
+			Name:           "test-backend",
+			Address:        "integ-test.go-fastly.com",
+			Port:           1234,
+			ConnectTimeout: 1500,
+			OverrideHost:   "origin.example.com",
 		})
 	})
 	if err != nil {

@@ -73,10 +73,10 @@ type CreateConditionInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name      *string `form:"name,omitempty"`
-	Statement *string `form:"statement,omitempty"`
-	Type      *string `form:"type,omitempty"`
-	Priority  *int    `form:"priority,omitempty"`
+	Name      string `form:"name,omitempty"`
+	Statement string `form:"statement,omitempty"`
+	Type      string `form:"type,omitempty"`
+	Priority  int    `form:"priority,omitempty"`
 }
 
 // CreateCondition creates a new Fastly condition.
