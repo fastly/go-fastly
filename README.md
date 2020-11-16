@@ -3,6 +3,8 @@
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
 [godocs]: https://pkg.go.dev/github.com/fastly/go-fastly/fastly?tab=doc
+[v2]: https://pkg.go.dev/github.com/fastly/go-fastly@v2.0.0/fastly
+[v1]: https://pkg.go.dev/github.com/fastly/go-fastly@v1.18.0/fastly
 
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
@@ -28,12 +30,14 @@ import "github.com/fastly/go-fastly/fastly"
 
 ## Migrating from v1 to v2
 
-The move from major version 1 to 2 as resulted in a couple of fundamental changes to the library:
+The move from major version [1][v1] to [2][v2] has resulted in a couple of fundamental changes to the library:
 
-- Consistent field name format for `ServiceID`, `ServiceVersion`, `DictionaryID`, `PoolID`.
+- Consistent field name format for IDs and Versions (e.g. `DictionaryID`, `PoolID`, `ServiceID`, `ServiceVersion` etc).
 - Input struct fields (for write/update operations) that are optional (i.e. `omitempty`) and use basic types, are now defined as pointers.
 
-> Note: [basic types](https://tour.golang.org/basics/11) that are _optional_, must be provided as pointers to avoid unexpected behaviours when dealing with their zero value ([reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/)). We provide helper functions for this [here](./fastly/basictypes_helper.go).
+The move to more consistent field names in some cases will have resulted in the corresponding sentinel error name to be updated also. For example, `ServiceID` has resulted in a change from `ErrMissingService` to `ErrMissingServiceID`.
+
+The change in type for [basic types](https://tour.golang.org/basics/11) that are optional on input structs related to write/update operations is designed to avoid unexpected behaviours when dealing with their zero value (see [this reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/) for more details). As part of this change we now provide [helper functions](./fastly/basictypes_helper.go) to assist with generating the new pointer types required.
 
 ## Examples
 
