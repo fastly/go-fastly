@@ -9,8 +9,8 @@ import (
 
 // Splunk represents a splunk response from the Fastly API.
 type Splunk struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	URL               string     `mapstructure:"url"`

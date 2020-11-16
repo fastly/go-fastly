@@ -9,8 +9,8 @@ import (
 
 // HealthCheck represents a health check response from the Fastly API.
 type HealthCheck struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name             string     `mapstructure:"name"`
 	Comment          string     `mapstructure:"comment"`

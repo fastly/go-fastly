@@ -9,8 +9,8 @@ import (
 
 // Elasticsearch represents an Elasticsearch Logging response from the Fastly API.
 type Elasticsearch struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	ResponseCondition string     `mapstructure:"response_condition"`

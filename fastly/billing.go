@@ -23,8 +23,8 @@ type BillingStatus struct {
 	SentAt    *time.Time `mapstructure:"sent_at"`
 }
 
-// BillingTotal is a repsentation of the status of the usage for this bill from
-// the Fastly API.
+// BillingTotal is a representation of the status of the usage for this bill
+// from the Fastly API.
 type BillingTotal struct {
 	PlanName           string          `mapstructure:"plan_name"`
 	PlanCode           string          `mapstructure:"plan_code"`

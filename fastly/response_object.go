@@ -9,8 +9,8 @@ import (
 
 // ResponseObject represents a response object response from the Fastly API.
 type ResponseObject struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name             string     `mapstructure:"name"`
 	Status           uint       `mapstructure:"status"`

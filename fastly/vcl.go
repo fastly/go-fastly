@@ -9,8 +9,8 @@ import (
 
 // VCL represents a response about VCL from the Fastly API.
 type VCL struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name      string     `mapstructure:"name"`
 	Main      bool       `mapstructure:"main"`

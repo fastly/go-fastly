@@ -4,8 +4,8 @@ import "fmt"
 
 // Settings represents a backend response from the Fastly API.
 type Settings struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	DefaultTTL      uint   `mapstructure:"general.default_ttl"`
 	DefaultHost     string `mapstructure:"general.default_host"`

@@ -9,8 +9,8 @@ import (
 
 // Dictionary represents a dictionary response from the Fastly API.
 type Dictionary struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	ID        string     `mapstructure:"id"`
 	Name      string     `mapstructure:"name"`

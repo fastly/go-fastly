@@ -9,8 +9,8 @@ import (
 
 // Pubsub represents an Pubsub logging response from the Fastly API.
 type Pubsub struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Topic             string     `mapstructure:"topic"`

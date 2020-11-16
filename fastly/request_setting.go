@@ -41,8 +41,8 @@ type RequestSettingXFF string
 
 // RequestSetting represents a request setting response from the Fastly API.
 type RequestSetting struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name             string               `mapstructure:"name"`
 	ForceMiss        bool                 `mapstructure:"force_miss"`

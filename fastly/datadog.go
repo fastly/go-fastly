@@ -9,8 +9,8 @@ import (
 
 // Datadog represents a Datadog response from the Fastly API.
 type Datadog struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Token             string     `mapstructure:"token"`

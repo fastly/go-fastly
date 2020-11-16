@@ -52,8 +52,8 @@ type HeaderType string
 
 // Header represents a header response from the Fastly API.
 type Header struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string       `mapstructure:"name"`
 	Action            HeaderAction `mapstructure:"action"`

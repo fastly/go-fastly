@@ -47,8 +47,8 @@ type SnippetType string
 
 // Snippet is the Fastly Snippet object
 type Snippet struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name      string      `mapstructure:"name"`
 	ID        string      `mapstructure:"id"`

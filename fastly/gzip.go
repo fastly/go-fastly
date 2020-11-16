@@ -9,8 +9,8 @@ import (
 
 // Gzip represents an Gzip logging response from the Fastly API.
 type Gzip struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name           string     `mapstructure:"name"`
 	ContentTypes   string     `mapstructure:"content_types"`

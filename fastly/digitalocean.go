@@ -9,8 +9,8 @@ import (
 
 // DigitalOcean represents a DigitalOcean response from the Fastly API.
 type DigitalOcean struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	BucketName        string     `mapstructure:"bucket_name"`

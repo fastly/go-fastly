@@ -225,8 +225,8 @@ func Test_Snippets(t *testing.T) {
 		if x.ServiceID != testServiceID {
 			t.Errorf("bad service: %q", x.ServiceID)
 		}
-		if x.Version != tv.Number {
-			t.Errorf("bad ServiceVersion: %q", x.Version)
+		if x.ServiceVersion != tv.Number {
+			t.Errorf("bad ServiceVersion: %q", x.ServiceVersion)
 		}
 	}
 

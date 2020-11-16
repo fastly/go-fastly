@@ -8,13 +8,13 @@ import (
 
 // Package is a container for data returned about a package.
 type Package struct {
-	ID        string
-	ServiceID string `mapstructure:"service_id"`
-	Version   int
-	Metadata  PackageMetadata
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	ID             string
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
+	Metadata       PackageMetadata
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
 }
 
 // Package is a container for metadata returned about a package.
@@ -82,14 +82,14 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 }
 
 // MakePackagePath ensures we create the correct REST path for referencing packages in the API.
-func MakePackagePath(Service string, Version int) (string, error) {
-	if Service == "" {
+func MakePackagePath(ServiceID string, ServiceVersion int) (string, error) {
+	if ServiceID == "" {
 		return "", ErrMissingServiceID
 	}
-	if Version == 0 {
+	if ServiceVersion == 0 {
 		return "", ErrMissingServiceVersion
 	}
-	return fmt.Sprintf("/service/%s/version/%d/package", Service, Version), nil
+	return fmt.Sprintf("/service/%s/version/%d/package", ServiceID, ServiceVersion), nil
 }
 
 // PopulatePackage encapsulates the decoding of returned package data.

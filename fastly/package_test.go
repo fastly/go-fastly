@@ -41,8 +41,8 @@ func TestClient_Package(t *testing.T) {
 	if wp.ServiceID != testService.ID {
 		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
 	}
-	if wp.Version != testVersion.Number {
-		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	if wp.ServiceVersion != testVersion.Number {
+		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
 	}
 
 	// Get
@@ -59,8 +59,8 @@ func TestClient_Package(t *testing.T) {
 	if wp.ServiceID != testService.ID {
 		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
 	}
-	if wp.Version != testVersion.Number {
-		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	if wp.ServiceVersion != testVersion.Number {
+		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
 	}
 
 	if wp.Metadata.Name != testData.Metadata.Name {
