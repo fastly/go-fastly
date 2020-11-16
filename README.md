@@ -1,5 +1,5 @@
-Go Fastly
-=========
+# Go Fastly
+
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
 [godocs]: https://pkg.go.dev/github.com/fastly/go-fastly/fastly?tab=doc
@@ -7,13 +7,13 @@ Go Fastly
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
 
-Installation
-------------
+## Installation
+
 This is a client library, so there is nothing to install. But, it uses Go modules,
 so you must be running Go 1.11 or higher.
 
-Usage
------
+## Usage
+
 Fetch the library:
 
 ```
@@ -26,8 +26,8 @@ Import the library into your tool:
 import "github.com/fastly/go-fastly/fastly"
 ```
 
-Examples
---------
+## Examples
+
 Fastly's API is designed to work in the following manner:
 
 1. Create (or clone) a new configuration version for the service
@@ -127,8 +127,7 @@ fmt.Printf("%t\n", activeVersion.Locked)
 More information can be found in the
 [Fastly Godoc][godocs].
 
-Developing
--------
+## Developing
 
 1. Clone the project to your preferred directory, using your preferred method.
 2. Download the module and accompanying developer tooling.
@@ -144,8 +143,8 @@ Developing
   $ make all
   ```
 
-Testing
--------
+## Testing
+
 Go Fastly uses [go-vcr](https://github.com/dnaeon/go-vcr) to "record" and
 "replay" API request fixtures to improve the speed and portability of
 integration tests. The test suite uses a single test service ID for all test
@@ -198,13 +197,12 @@ unset FASTLY_TEST_SERVICE_ID FASTLY_API_KEY
 make test
 ```
 
-Contributing
---------------------------
+## Contributing
 
 Refer to [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-License
--------
+## License
+
 ```
 Copyright 2015 Seth Vargo
 
