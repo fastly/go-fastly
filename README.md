@@ -26,6 +26,15 @@ Import the library into your tool:
 import "github.com/fastly/go-fastly/fastly"
 ```
 
+## Migrating from v1 to v2
+
+The move from major version 1 to 2 as resulted in a couple of fundamental changes to the library:
+
+- Consistent field name format for `ServiceID`, `ServiceVersion`, `DictionaryID`, `PoolID`.
+- Input struct fields (for write/update operations) that are optional (i.e. `omitempty`) and use basic types, are now defined as pointers.
+
+> Note: [basic types](https://tour.golang.org/basics/11) that are _optional_, must be provided as pointers to avoid unexpected behaviours when dealing with their zero value ([reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/)). We provide helper functions for this [here](./fastly/basictypes_helper.go).
+
 ## Examples
 
 Fastly's API is designed to work in the following manner:
@@ -121,8 +130,6 @@ if err != nil {
 // Output: true
 fmt.Printf("%t\n", activeVersion.Locked)
 ```
-
-> Note: [basic types](https://tour.golang.org/basics/11) that are _optional_, must be provided as pointers to avoid unexpected behaviours when dealing with their zero value ([reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/)). We provide helper functions for this [here](./fastly/basictypes_helper.go).
 
 More information can be found in the
 [Fastly Godoc][godocs].
