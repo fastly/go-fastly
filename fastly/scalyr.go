@@ -75,13 +75,13 @@ type CreateScalyrInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	Region            *string `form:"region,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	Name              string `form:"name,omitempty"`
+	Format            string `form:"format,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	Token             string `form:"token,omitempty"`
+	Region            string `form:"region,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateScalyr creates a new Fastly scalyr.

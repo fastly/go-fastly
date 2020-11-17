@@ -83,21 +83,21 @@ type CreateDigitalOceanInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	BucketName        *string `form:"bucket_name,omitempty"`
-	Domain            *string `form:"domain,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
+	Name              string `form:"name,omitempty"`
+	BucketName        string `form:"bucket_name,omitempty"`
+	Domain            string `form:"domain,omitempty"`
+	AccessKey         string `form:"access_key,omitempty"`
+	SecretKey         string `form:"secret_key,omitempty"`
+	Path              string `form:"path,omitempty"`
+	Period            uint   `form:"period,omitempty"`
+	GzipLevel         uint   `form:"gzip_level,omitempty"`
+	Format            string `form:"format,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	Placement         string `form:"placement,omitempty"`
+	PublicKey         string `form:"public_key,omitempty"`
 }
 
 // CreateDigitalOcean creates a new Fastly DigitalOcean.

@@ -85,23 +85,23 @@ type CreateSFTPInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	Address           *string `form:"address,omitempty"`
-	Port              *uint   `form:"port,omitempty"`
-	User              *string `form:"user,omitempty"`
-	Password          *string `form:"password,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	SSHKnownHosts     *string `form:"ssh_known_hosts,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	Name              string `form:"name,omitempty"`
+	Address           string `form:"address,omitempty"`
+	Port              uint   `form:"port,omitempty"`
+	User              string `form:"user,omitempty"`
+	Password          string `form:"password,omitempty"`
+	PublicKey         string `form:"public_key,omitempty"`
+	SecretKey         string `form:"secret_key,omitempty"`
+	SSHKnownHosts     string `form:"ssh_known_hosts,omitempty"`
+	Path              string `form:"path,omitempty"`
+	Period            uint   `form:"period,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	GzipLevel         uint   `form:"gzip_level,omitempty"`
+	Format            string `form:"format,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateSFTP creates a new Fastly SFTP.

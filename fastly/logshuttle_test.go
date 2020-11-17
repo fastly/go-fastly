@@ -19,12 +19,12 @@ func TestClient_Logshuttles(t *testing.T) {
 		l, err = c.CreateLogshuttle(&CreateLogshuttleInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-logshuttle"),
-			Format:         String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  Uint(2),
-			Placement:      String("waf_debug"),
-			Token:          String("super-secure-token"),
-			URL:            String("https://logs.example.com"),
+			Name:           "test-logshuttle",
+			Format:         "%h %l %u %t \"%r\" %>s %b",
+			FormatVersion:  2,
+			Placement:      "waf_debug",
+			Token:          "super-secure-token",
+			URL:            "https://logs.example.com",
 		})
 	})
 	if err != nil {

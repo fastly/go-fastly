@@ -17,10 +17,10 @@ func TestClient_NewRelic(t *testing.T) {
 		n, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-newrelic"),
-			Token:          String("abcd1234"),
-			Format:         String("format"),
-			Placement:      String("waf_debug"),
+			Name:           "test-newrelic",
+			Token:          "abcd1234",
+			Format:         "format",
+			Placement:      "waf_debug",
 		})
 	})
 	if err != nil {

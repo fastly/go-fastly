@@ -17,10 +17,10 @@ func TestClient_Loggly(t *testing.T) {
 		lg, err = c.CreateLoggly(&CreateLogglyInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-loggly"),
-			Token:          String("abcd1234"),
-			Format:         String("format"),
-			Placement:      String("waf_debug"),
+			Name:           "test-loggly",
+			Token:          "abcd1234",
+			Format:         "format",
+			Placement:      "waf_debug",
 		})
 	})
 	if err != nil {

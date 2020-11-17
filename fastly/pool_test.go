@@ -18,10 +18,10 @@ func TestClient_Pools(t *testing.T) {
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
 			Name:            "test_pool",
-			Comment:         String("test pool"),
-			Quorum:          Uint(50),
+			Comment:         "test pool",
+			Quorum:          50,
 			UseTLS:          CBool(true),
-			TLSCertHostname: String("example.com"),
+			TLSCertHostname: "example.com",
 			Type:            PoolTypeRandom,
 		})
 	})

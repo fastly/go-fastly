@@ -84,22 +84,22 @@ type CreateElasticsearchInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	Index             *string `form:"index,omitempty"`
-	URL               *string `form:"url,omitempty"`
-	Pipeline          *string `form:"pipeline,omitempty"`
-	User              *string `form:"user,omitempty"`
-	Password          *string `form:"password,omitempty"`
-	RequestMaxEntries *uint   `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   *uint   `form:"request_max_bytes,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
-	TLSClientCert     *string `form:"tls_client_cert,omitempty"`
-	TLSClientKey      *string `form:"tls_client_key,omitempty"`
-	TLSHostname       *string `form:"tls_hostname,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
+	Name              string `form:"name,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	Format            string `form:"format,omitempty"`
+	Index             string `form:"index,omitempty"`
+	URL               string `form:"url,omitempty"`
+	Pipeline          string `form:"pipeline,omitempty"`
+	User              string `form:"user,omitempty"`
+	Password          string `form:"password,omitempty"`
+	RequestMaxEntries uint   `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   uint   `form:"request_max_bytes,omitempty"`
+	Placement         string `form:"placement,omitempty"`
+	TLSCACert         string `form:"tls_ca_cert,omitempty"`
+	TLSClientCert     string `form:"tls_client_cert,omitempty"`
+	TLSClientKey      string `form:"tls_client_key,omitempty"`
+	TLSHostname       string `form:"tls_hostname,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
 }
 
 // CreateElasticsearch creates a new Fastly Elasticsearch logging endpoint.

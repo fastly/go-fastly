@@ -83,21 +83,21 @@ type CreateOpenstackInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	User              *string `form:"user,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	BucketName        *string `form:"bucket_name,omitempty"`
-	URL               *string `form:"url,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
+	Name              string `form:"name,omitempty"`
+	User              string `form:"user,omitempty"`
+	AccessKey         string `form:"access_key,omitempty"`
+	BucketName        string `form:"bucket_name,omitempty"`
+	URL               string `form:"url,omitempty"`
+	Path              string `form:"path,omitempty"`
+	Placement         string `form:"placement,omitempty"`
+	Period            uint   `form:"period,omitempty"`
+	GzipLevel         uint   `form:"gzip_level,omitempty"`
+	Format            string `form:"format,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
+	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	PublicKey         string `form:"public_key,omitempty"`
 }
 
 // CreateOpenstack creates a new Fastly Openstack.

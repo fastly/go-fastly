@@ -17,11 +17,11 @@ func TestClient_Datadog(t *testing.T) {
 		d, err = c.CreateDatadog(&CreateDatadogInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-datadog"),
-			Region:         String("US"),
-			Token:          String("abcd1234"),
-			Format:         String("format"),
-			Placement:      String("waf_debug"),
+			Name:           "test-datadog",
+			Region:         "US",
+			Token:          "abcd1234",
+			Format:         "format",
+			Placement:      "waf_debug",
 		})
 	})
 	if err != nil {

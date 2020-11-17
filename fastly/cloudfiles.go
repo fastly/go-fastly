@@ -83,21 +83,21 @@ type CreateCloudfilesInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	User              *string `form:"user,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	BucketName        *string `form:"bucket_name,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Region            *string `form:"region,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
+	Name              string `form:"name,omitempty"`
+	User              string `form:"user,omitempty"`
+	AccessKey         string `form:"access_key,omitempty"`
+	BucketName        string `form:"bucket_name,omitempty"`
+	Path              string `form:"path,omitempty"`
+	Region            string `form:"region,omitempty"`
+	Placement         string `form:"placement,omitempty"`
+	Period            uint   `form:"period,omitempty"`
+	GzipLevel         uint   `form:"gzip_level,omitempty"`
+	Format            string `form:"format,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
+	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	PublicKey         string `form:"public_key,omitempty"`
 }
 
 // CreateCloudfiles creates a new Fastly Cloudfiles.

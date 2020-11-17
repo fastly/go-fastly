@@ -77,15 +77,15 @@ type CreatePubsubInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              *string `form:"name,omitempty"`
-	Topic             *string `form:"topic,omitempty"`
-	User              *string `form:"user,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	ProjectID         *string `form:"project_id,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	Name              string `form:"name,omitempty"`
+	Topic             string `form:"topic,omitempty"`
+	User              string `form:"user,omitempty"`
+	SecretKey         string `form:"secret_key,omitempty"`
+	ProjectID         string `form:"project_id,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	Format            string `form:"format,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreatePubsub creates a new Fastly Pubsub.

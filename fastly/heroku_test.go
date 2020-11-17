@@ -19,12 +19,12 @@ func TestClient_Herokus(t *testing.T) {
 		h, err = c.CreateHeroku(&CreateHerokuInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-heroku"),
-			Format:         String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  Uint(2),
-			Placement:      String("waf_debug"),
-			Token:          String("super-secure-token"),
-			URL:            String("https://1.us.logplex.io/logs"),
+			Name:           "test-heroku",
+			Format:         "%h %l %u %t \"%r\" %>s %b",
+			FormatVersion:  2,
+			Placement:      "waf_debug",
+			Token:          "super-secure-token",
+			URL:            "https://1.us.logplex.io/logs",
 		})
 	})
 	if err != nil {

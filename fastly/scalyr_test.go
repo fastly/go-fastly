@@ -19,12 +19,12 @@ func TestClient_Scalyrs(t *testing.T) {
 		s, err = c.CreateScalyr(&CreateScalyrInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-scalyr"),
-			Format:         String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  Uint(2),
-			Placement:      String("waf_debug"),
-			Region:         String("US"),
-			Token:          String("super-secure-token"),
+			Name:           "test-scalyr",
+			Format:         "%h %l %u %t \"%r\" %>s %b",
+			FormatVersion:  2,
+			Placement:      "waf_debug",
+			Region:         "US",
+			Token:          "super-secure-token",
 		})
 	})
 	if err != nil {

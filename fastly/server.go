@@ -79,12 +79,12 @@ type CreateServerInput struct {
 	Address string `form:"address"`
 
 	// Optional fields.
-	Comment      *string `form:"comment,omitempty"`
-	Weight       *uint   `form:"weight,omitempty"`
-	MaxConn      *uint   `form:"max_conn,omitempty"`
-	Port         *uint   `form:"port,omitempty"`
-	Disabled     *bool   `form:"disabled,omitempty"`
-	OverrideHost *string `form:"override_host,omitempty"`
+	Comment      string `form:"comment,omitempty"`
+	Weight       uint   `form:"weight,omitempty"`
+	MaxConn      uint   `form:"max_conn,omitempty"`
+	Port         uint   `form:"port,omitempty"`
+	Disabled     bool   `form:"disabled,omitempty"`
+	OverrideHost string `form:"override_host,omitempty"`
 }
 
 // CreateServer creates a single server for a particular service and pool.
