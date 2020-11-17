@@ -112,6 +112,7 @@ func TestClient_Pools(t *testing.T) {
 			Name:           "test_pool",
 			NewName:        String("new_test_pool"),
 			Quorum:         Uint(0),
+			Type:           PPoolType(PoolTypeHash),
 		})
 	})
 	if err != nil {

@@ -21,6 +21,12 @@ const (
 // PoolType is a type of pool.
 type PoolType string
 
+// PPoolType returns pointer to PoolType.
+func PPoolType(t PoolType) *PoolType {
+	pt := PoolType(t)
+	return &pt
+}
+
 // Pool represents a pool response from the Fastly API.
 type Pool struct {
 	ServiceID      string `mapstructure:"service_id"`
@@ -227,7 +233,7 @@ type UpdatePoolInput struct {
 	MinTLSVersion    *string      `form:"min_tls_version,omitempty"`
 	MaxTLSVersion    *string      `form:"max_tls_version,omitempty"`
 	Healthcheck      *string      `form:"healthcheck,omitempty"`
-	Type             PoolType     `form:"type,omitempty"`
+	Type             *PoolType    `form:"type,omitempty"`
 	OverrideHost     *string      `form:"override_host,omitempty"`
 }
 
