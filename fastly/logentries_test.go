@@ -19,7 +19,7 @@ func TestClient_Logentries(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-logentries",
 			Port:           1234,
-			UseTLS:         CBool(true),
+			UseTLS:         true,
 			Token:          "abcd1234",
 			Format:         "format",
 			Placement:      "waf_debug",

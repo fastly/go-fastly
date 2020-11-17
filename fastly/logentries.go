@@ -76,14 +76,14 @@ type CreateLogentriesInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string       `form:"name,omitempty"`
-	Port              uint         `form:"port,omitempty"`
-	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	Token             string       `form:"token,omitempty"`
-	Format            string       `form:"format,omitempty"`
-	FormatVersion     uint         `form:"format_version,omitempty"`
-	ResponseCondition string       `form:"response_condition,omitempty"`
-	Placement         string       `form:"placement,omitempty"`
+	Name              string      `form:"name,omitempty"`
+	Port              uint        `form:"port,omitempty"`
+	UseTLS            Compatibool `form:"use_tls,omitempty"`
+	Token             string      `form:"token,omitempty"`
+	Format            string      `form:"format,omitempty"`
+	FormatVersion     uint        `form:"format_version,omitempty"`
+	ResponseCondition string      `form:"response_condition,omitempty"`
+	Placement         string      `form:"placement,omitempty"`
 }
 
 // CreateLogentries creates a new Fastly logentries.

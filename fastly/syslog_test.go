@@ -44,7 +44,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Address:        "example.com",
 			Hostname:       "example.com",
 			Port:           1234,
-			UseTLS:         CBool(true),
+			UseTLS:         true,
 			TLSCACert:      caCert,
 			TLSHostname:    "example.com",
 			TLSClientCert:  clientCert,

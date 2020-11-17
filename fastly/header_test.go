@@ -19,7 +19,7 @@ func TestClient_Headers(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-header",
 			Action:         HeaderActionSet,
-			IgnoreIfSet:    CBool(false),
+			IgnoreIfSet:    false,
 			Type:           HeaderTypeRequest,
 			Destination:    "http.foo",
 			Source:         "client.ip",

@@ -20,7 +20,7 @@ func TestClient_Pools(t *testing.T) {
 			Name:            "test_pool",
 			Comment:         "test pool",
 			Quorum:          50,
-			UseTLS:          CBool(true),
+			UseTLS:          true,
 			TLSCertHostname: "example.com",
 			Type:            PoolTypeRandom,
 		})
