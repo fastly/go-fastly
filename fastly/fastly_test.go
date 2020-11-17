@@ -163,7 +163,7 @@ func testVersion(t *testing.T, c *Client) *Version {
 	defer testVersionLock.Unlock()
 
 	v, err := c.CreateVersion(&CreateVersionInput{
-		Service: testServiceID,
+		ServiceID: testServiceID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -181,7 +181,7 @@ func createTestVersion(t *testing.T, versionFixture string, serviceId string) *V
 		defer testVersionLock.Unlock()
 
 		version, err = client.CreateVersion(&CreateVersionInput{
-			Service: serviceId,
+			ServiceID: serviceId,
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -198,9 +198,9 @@ func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId stri
 
 	record(t, dictionaryFixture, func(client *Client) {
 		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
-			Service: serviceId,
-			Version: version,
-			Name:    fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix),
+			ServiceID:      serviceId,
+			ServiceVersion: version,
+			Name:           fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix),
 		})
 	})
 	if err != nil {
@@ -215,9 +215,9 @@ func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture st
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteDictionary(&DeleteDictionaryInput{
-			Service: dictionary.ServiceID,
-			Version: dictionary.Version,
-			Name:    dictionary.Name,
+			ServiceID:      dictionary.ServiceID,
+			ServiceVersion: dictionary.ServiceVersion,
+			Name:           dictionary.Name,
 		})
 	})
 	if err != nil {
@@ -232,9 +232,9 @@ func createTestACL(t *testing.T, createFixture string, serviceId string, version
 
 	record(t, createFixture, func(client *Client) {
 		acl, err = client.CreateACL(&CreateACLInput{
-			Service: serviceId,
-			Version: version,
-			Name:    fmt.Sprintf("test_acl_%s", aclNameSuffix),
+			ServiceID:      serviceId,
+			ServiceVersion: version,
+			Name:           fmt.Sprintf("test_acl_%s", aclNameSuffix),
 		})
 	})
 	if err != nil {
@@ -249,9 +249,9 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteACL(&DeleteACLInput{
-			Service: acl.ServiceID,
-			Version: acl.Version,
-			Name:    acl.Name,
+			ServiceID:      acl.ServiceID,
+			ServiceVersion: acl.ServiceVersion,
+			Name:           acl.Name,
 		})
 	})
 	if err != nil {
@@ -266,9 +266,9 @@ func createTestPool(t *testing.T, createFixture string, serviceId string, versio
 
 	record(t, createFixture, func(client *Client) {
 		pool, err = client.CreatePool(&CreatePoolInput{
-			Service: serviceId,
-			Version: version,
-			Name:    fmt.Sprintf("test_pool_%s", poolNameSuffix),
+			ServiceID:      serviceId,
+			ServiceVersion: version,
+			Name:           fmt.Sprintf("test_pool_%s", poolNameSuffix),
 		})
 	})
 	if err != nil {
@@ -277,15 +277,41 @@ func createTestPool(t *testing.T, createFixture string, serviceId string, versio
 	return pool
 }
 
+func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) *Syslog {
+
+	var err error
+	var log *Syslog
+
+	record(t, fixture, func(c *Client) {
+		log, err = c.CreateSyslog(&CreateSyslogInput{
+			ServiceID:      serviceID,
+			ServiceVersion: serviceNumber,
+			Name:           "test-syslog",
+			Address:        "example.com",
+			Hostname:       "example.com",
+			Port:           1234,
+			Token:          "abcd1234",
+			Format:         "format",
+			FormatVersion:  2,
+			MessageType:    "classic",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	return log
+}
+
 func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 
 	var err error
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeletePool(&DeletePoolInput{
-			Service: pool.ServiceID,
-			Version: pool.Version,
-			Name:    pool.Name,
+			ServiceID:      pool.ServiceID,
+			ServiceVersion: pool.ServiceVersion,
+			Name:           pool.Name,
 		})
 	})
 	if err != nil {
@@ -293,13 +319,135 @@ func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 	}
 }
 
-func deleteTestService(t *testing.T, cleanupFixture string, serviceId string) {
+func deleteTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteSyslog(&DeleteSyslogInput{
+			ServiceID:      serviceID,
+			ServiceVersion: serviceNumber,
+			Name:           "test-syslog",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) *Condition {
+
+	var err error
+	var condition *Condition
+
+	record(t, fixture, func(c *Client) {
+		condition, err = c.CreateCondition(&CreateConditionInput{
+			ServiceID:      serviceID,
+			ServiceVersion: serviceNumber,
+			Name:           name,
+			Statement:      "req.url~+\"index.html\"",
+			Type:           "PREFETCH", // This must be a prefetch condition
+			Priority:       1,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return condition
+}
+
+func deleteTestCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteCondition(&DeleteConditionInput{
+			ServiceID:      serviceID,
+			ServiceVersion: serviceNumber,
+			Name:           name,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) *ResponseObject {
+
+	var err error
+	var ro *ResponseObject
+
+	record(t, fixture, func(c *Client) {
+		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
+			ServiceID:      serviceID,
+			ServiceVersion: serviceNumber,
+			Name:           name,
+			Status:         403,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return ro
+}
+
+func deleteTestResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteResponseObject(&DeleteResponseObjectInput{
+			ServiceID:      serviceID,
+			ServiceVersion: serviceNumber,
+			Name:           name,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func createWAF(t *testing.T, fixture, serviceID, condition, response string, serviceNumber int) *WAF {
+
+	var err error
+	var waf *WAF
+
+	record(t, fixture, func(c *Client) {
+		waf, err = c.CreateWAF(&CreateWAFInput{
+			ServiceID:         serviceID,
+			ServiceVersion:    serviceNumber,
+			PrefetchCondition: condition,
+			Response:          response,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	return waf
+}
+
+func deleteWAF(t *testing.T, fixture, WAFID string, WAFVersion int) {
+
+	var err error
+
+	record(t, fixture, func(c *Client) {
+		err = c.DeleteWAF(&DeleteWAFInput{
+			ID:             WAFID,
+			ServiceVersion: WAFVersion,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
+func deleteTestService(t *testing.T, cleanupFixture, serviceID string) {
 
 	var err error
 
 	record(t, cleanupFixture, func(client *Client) {
 		err = client.DeleteService(&DeleteServiceInput{
-			ID: serviceId,
+			ID: serviceID,
 		})
 	})
 	if err != nil {

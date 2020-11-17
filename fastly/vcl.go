@@ -9,8 +9,8 @@ import (
 
 // VCL represents a response about VCL from the Fastly API.
 type VCL struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name      string     `mapstructure:"name"`
 	Main      bool       `mapstructure:"main"`
@@ -32,24 +32,24 @@ func (s vclsByName) Less(i, j int) bool {
 
 // ListVCLsInput is used as input to the ListVCLs function.
 type ListVCLsInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListVCLs returns the list of VCLs for the configuration version.
 func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/vcl", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/vcl", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -65,10 +65,11 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 
 // GetVCLInput is used as input to the GetVCL function.
 type GetVCLInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the VCL to fetch.
 	Name string
@@ -76,19 +77,19 @@ type GetVCLInput struct {
 
 // GetVCL gets the VCL configuration with the given parameters.
 func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -103,23 +104,24 @@ func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 
 // GetGeneratedVCLInput is used as input to the GetGeneratedVCL function.
 type GetGeneratedVCLInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetGeneratedVCL gets the VCL configuration with the given parameters.
 func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/generated_vcl", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/generated_vcl", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -134,10 +136,11 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 
 // CreateVCLInput is used as input to the CreateVCL function.
 type CreateVCLInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name    string `form:"name,omitempty"`
 	Content string `form:"content,omitempty"`
@@ -146,15 +149,15 @@ type CreateVCLInput struct {
 
 // CreateVCL creates a new Fastly VCL.
 func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/vcl", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/vcl", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -169,33 +172,34 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 
 // UpdateVCLInput is used as input to the UpdateVCL function.
 type UpdateVCLInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the VCL to update (required).
 	Name string
 
-	NewName string `form:"name,omitempty"`
-	Content string `form:"content,omitempty"`
+	NewName *string `form:"name,omitempty"`
+	Content *string `form:"content,omitempty"`
 }
 
 // UpdateVCL creates a new Fastly VCL.
 func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -210,10 +214,11 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 
 // ActivateVCLInput is used as input to the ActivateVCL function.
 type ActivateVCLInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the VCL to mark as main (required).
 	Name string
@@ -221,19 +226,19 @@ type ActivateVCLInput struct {
 
 // ActivateVCL creates a new Fastly VCL.
 func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s/main", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s/main", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Put(path, nil)
 	if err != nil {
 		return nil, err
@@ -248,10 +253,11 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 
 // DeleteVCLInput is the input parameter to DeleteVCL.
 type DeleteVCLInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the VCL to delete (required).
 	Name string
@@ -259,19 +265,19 @@ type DeleteVCLInput struct {
 
 // DeleteVCL deletes the given VCL version.
 func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

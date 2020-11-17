@@ -9,9 +9,9 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// ErrMissingService is an error that is returned when an input struct requires
-// a "Service" key, but one was not set.
-var ErrMissingService = errors.New("missing required field 'Service'")
+// ErrMissingServiceID is an error that is returned when an input struct requires
+// a "ServiceID" key, but one was not set.
+var ErrMissingServiceID = errors.New("missing required field 'ServiceID'")
 
 // ErrMissingStatus is an error that is returned when an input struct requires
 // a "Status" key, but one was not set.
@@ -21,9 +21,9 @@ var ErrMissingStatus = errors.New("missing required field 'Status'")
 // a "Tag" key, but one was not set.
 var ErrMissingTag = errors.New("missing required field 'Tag'")
 
-// ErrMissingVersion is an error that is returned when an input struct requires
-// a "Version" key, but one was not set.
-var ErrMissingVersion = errors.New("missing required field 'Version'")
+// ErrMissingServiceVersion is an error that is returned when an input struct requires
+// a "ServiceVersion" key, but one was not set.
+var ErrMissingServiceVersion = errors.New("missing required field 'ServiceVersion'")
 
 // ErrMissingContent is an error that is returned when an input struct requires a
 // "Content" key, but one was not set.
@@ -85,9 +85,9 @@ var ErrMissingMonth = errors.New("missing required field 'Month'")
 // requires a "NewName" key, but one was not set
 var ErrMissingNewName = errors.New("missing required field 'NewName'")
 
-// ErrMissingAcl is an error that is returned when an input struct
-// required an "Acl" key, but one is not set
-var ErrMissingACL = errors.New("missing required field 'ACL'")
+// ErrMissingACLID is an error that is returned when an input struct
+// required an "ACLID" key, but one is not set
+var ErrMissingACLID = errors.New("missing required field 'ACLID'")
 
 // ErrMissingIP is an error that is returned when an input struct
 // required an "IP" key, but one is not set
@@ -101,9 +101,29 @@ var ErrMissingCustomerID = errors.New("missing required field 'CustomerID'")
 // requires a "EventID" key, but one was not set
 var ErrMissingEventID = errors.New("missing required field 'EventID'")
 
-// ErrMissingWafID is an error that is returned was an input struct
-// requires a "WafID" key, but one was not set
+// ErrMissingWAFID is an error that is returned when an input struct
+// requires a "WAFID" key, but one was not set.
 var ErrMissingWAFID = errors.New("missing required field 'WAFID'")
+
+// ErrMissingWAFVersionNumber is an error that is returned when an input struct
+// requires a "WAFVersionNumber" key, but one was not set.
+var ErrMissingWAFVersionNumber = errors.New("missing required field 'WAFVersionNumber'")
+
+// ErrMissingWAFVersionID is an error that is returned when an input struct
+// requires a "WAFVersionID" key, but one was not set.
+var ErrMissingWAFVersionID = errors.New("missing required field 'WAFVersionID'")
+
+// ErrMissingWAFActiveRuleList is an error that is returned when an input struct
+// requires a list of WAF active rules, but it is empty.
+var ErrMissingWAFActiveRuleList = errors.New("WAF active rules slice is empty")
+
+// ErrMissingWAFRuleExclusionNumber is an error that is returned when an input struct
+// requires a "WAFExclusionNumber" key, but one was not set.
+var ErrMissingWAFRuleExclusionNumber = errors.New("missing required field 'WAFExclusionNumber'")
+
+// ErrMissingWAFRuleExclusion is an error that is returned when an input struct
+// requires a "WAFRuleExclusion" key, but one was not set.
+var ErrMissingWAFRuleExclusion = errors.New("missing required field 'WAFRuleExclusion'")
 
 // ErrMissingOWASPID is an error that is returned was an input struct
 // requires a "OWASPID" key, but one was not set

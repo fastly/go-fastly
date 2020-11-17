@@ -35,14 +35,14 @@ type ServiceDetail struct {
 }
 
 type ServiceDomain struct {
-	Locked    bool       `mapstructure:"locked"`
-	Version   int64      `mapstructure:"version"`
-	Name      string     `mapstructure:"name"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	ServiceID string     `mapstructure:"service_id"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	Comment   string     `mapstructure:"comment"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	Locked         bool       `mapstructure:"locked"`
+	Name           string     `mapstructure:"name"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int64      `mapstructure:"version"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	Comment        string     `mapstructure:"comment"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 type ServiceDomainsList []*ServiceDomain
 
@@ -147,8 +147,8 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 type UpdateServiceInput struct {
 	ID string
 
-	Name    string `form:"name,omitempty"`
-	Comment string `form:"comment,omitempty"`
+	Name    *string `form:"name,omitempty"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // UpdateService updates the service with the given input.

@@ -9,8 +9,8 @@ import (
 
 // Pubsub represents an Pubsub logging response from the Fastly API.
 type Pubsub struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Topic             string     `mapstructure:"topic"`
@@ -38,24 +38,24 @@ func (s pubsubsByName) Less(i, j int) bool {
 
 // ListPubsubsInput is used as input to the ListPubsubs function.
 type ListPubsubsInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListPubsubs returns the list of pubsubs for the configuration version.
 func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -71,33 +71,34 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 
 // CreatePubsubInput is used as input to the CreatePubsub function.
 type CreatePubsubInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	Name              *string `form:"name,omitempty"`
-	Topic             *string `form:"topic,omitempty"`
-	User              *string `form:"user,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	ProjectID         *string `form:"project_id,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	Name              string `form:"name,omitempty"`
+	Topic             string `form:"topic,omitempty"`
+	User              string `form:"user,omitempty"`
+	SecretKey         string `form:"secret_key,omitempty"`
+	ProjectID         string `form:"project_id,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	Format            string `form:"format,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreatePubsub creates a new Fastly Pubsub.
 func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -112,10 +113,11 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 
 // GetPubsubInput is used as input to the GetPubsub function.
 type GetPubsubInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Pubsub to fetch.
 	Name string
@@ -123,19 +125,19 @@ type GetPubsubInput struct {
 
 // GetPubsub gets the Pubsub configuration with the given parameters.
 func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -150,10 +152,11 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 
 // UpdatePubsubInput is used as input to the UpdatePubsub function.
 type UpdatePubsubInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Pubsub to update.
 	Name string
@@ -171,19 +174,19 @@ type UpdatePubsubInput struct {
 
 // UpdatePubsub updates a specific Pubsub.
 func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -198,10 +201,11 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 
 // DeletePubsubInput is the input parameter to DeletePubsub.
 type DeletePubsubInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Pubsub to delete (required).
 	Name string
@@ -209,19 +213,19 @@ type DeletePubsubInput struct {
 
 // DeletePubsub deletes the given Pubsub version.
 func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

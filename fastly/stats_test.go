@@ -20,7 +20,24 @@ func TestClient_GetStats(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+}
 
+func TestClient_GetStats_ByField(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	record(t, "stats/service_stats_by_field", func(c *Client) {
+		_, err = c.GetStatsField(&GetStatsInput{
+			Field:  "bandwidth",
+			From:   "1 hour ago",
+			To:     "now",
+			By:     "minute",
+			Region: "europe",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
 }
 
 func TestClient_GetStatsJSON(t *testing.T) {

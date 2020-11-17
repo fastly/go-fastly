@@ -9,8 +9,8 @@ import (
 // DirectorBackend is the relationship between a director and a backend in the
 // Fastly API.
 type DirectorBackend struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Director  string     `mapstructure:"director_name"`
 	Backend   string     `mapstructure:"backend_name"`
@@ -22,10 +22,11 @@ type DirectorBackend struct {
 // CreateDirectorBackendInput is used as input to the CreateDirectorBackend
 // function.
 type CreateDirectorBackendInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Director is the name of the director (required).
 	Director string
@@ -36,12 +37,12 @@ type CreateDirectorBackendInput struct {
 
 // CreateDirectorBackend creates a new Fastly backend.
 func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*DirectorBackend, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Director == "" {
@@ -53,7 +54,7 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.Service, i.Version, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -68,10 +69,11 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 
 // GetDirectorBackendInput is used as input to the GetDirectorBackend function.
 type GetDirectorBackendInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Director is the name of the director (required).
 	Director string
@@ -82,12 +84,12 @@ type GetDirectorBackendInput struct {
 
 // GetDirectorBackend gets the backend configuration with the given parameters.
 func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBackend, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Director == "" {
@@ -99,7 +101,7 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.Service, i.Version, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -114,10 +116,11 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 
 // DeleteDirectorBackendInput is the input parameter to DeleteDirectorBackend.
 type DeleteDirectorBackendInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Director is the name of the director (required).
 	Director string
@@ -128,12 +131,12 @@ type DeleteDirectorBackendInput struct {
 
 // DeleteDirectorBackend deletes the given backend version.
 func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Director == "" {
@@ -145,7 +148,7 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.Service, i.Version, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

@@ -9,8 +9,8 @@ import (
 
 // HealthCheck represents a health check response from the Fastly API.
 type HealthCheck struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name             string     `mapstructure:"name"`
 	Comment          string     `mapstructure:"comment"`
@@ -41,25 +41,25 @@ func (s healthChecksByName) Less(i, j int) bool {
 
 // ListHealthChecksInput is used as input to the ListHealthChecks function.
 type ListHealthChecksInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListHealthChecks returns the list of health checks for the configuration
 // version.
 func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/healthcheck", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/healthcheck", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -75,10 +75,11 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 
 // CreateHealthCheckInput is used as input to the CreateHealthCheck function.
 type CreateHealthCheckInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name             string `form:"name,omitempty"`
 	Comment          string `form:"comment,omitempty"`
@@ -96,15 +97,15 @@ type CreateHealthCheckInput struct {
 
 // CreateHealthCheck creates a new Fastly health check.
 func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/healthcheck", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/healthcheck", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -119,10 +120,11 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 
 // GetHealthCheckInput is used as input to the GetHealthCheck function.
 type GetHealthCheckInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the health check to fetch.
 	Name string
@@ -130,19 +132,19 @@ type GetHealthCheckInput struct {
 
 // GetHealthCheck gets the health check configuration with the given parameters.
 func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -157,43 +159,44 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 
 // UpdateHealthCheckInput is used as input to the UpdateHealthCheck function.
 type UpdateHealthCheckInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the health check to update.
 	Name string
 
-	NewName          string `form:"name,omitempty"`
-	Comment          string `form:"comment,omitempty"`
-	Method           string `form:"method,omitempty"`
-	Host             string `form:"host,omitempty"`
-	Path             string `form:"path,omitempty"`
-	HTTPVersion      string `form:"http_version,omitempty"`
-	Timeout          uint   `form:"timeout,omitempty"`
-	CheckInterval    uint   `form:"check_interval,omitempty"`
-	ExpectedResponse uint   `form:"expected_response,omitempty"`
-	Window           uint   `form:"window,omitempty"`
-	Threshold        uint   `form:"threshold,omitempty"`
-	Initial          uint   `form:"initial,omitempty"`
+	NewName          *string `form:"name,omitempty"`
+	Comment          *string `form:"comment,omitempty"`
+	Method           *string `form:"method,omitempty"`
+	Host             *string `form:"host,omitempty"`
+	Path             *string `form:"path,omitempty"`
+	HTTPVersion      *string `form:"http_version,omitempty"`
+	Timeout          *uint   `form:"timeout,omitempty"`
+	CheckInterval    *uint   `form:"check_interval,omitempty"`
+	ExpectedResponse *uint   `form:"expected_response,omitempty"`
+	Window           *uint   `form:"window,omitempty"`
+	Threshold        *uint   `form:"threshold,omitempty"`
+	Initial          *uint   `form:"initial,omitempty"`
 }
 
 // UpdateHealthCheck updates a specific health check.
 func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -208,10 +211,11 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 
 // DeleteHealthCheckInput is the input parameter to DeleteHealthCheck.
 type DeleteHealthCheckInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the health check to delete (required).
 	Name string
@@ -219,19 +223,19 @@ type DeleteHealthCheckInput struct {
 
 // DeleteHealthCheck deletes the given health check.
 func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

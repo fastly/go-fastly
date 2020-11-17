@@ -9,8 +9,8 @@ import (
 
 // BigQuery represents a BigQuery response from the Fastly API.
 type BigQuery struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Format            string     `mapstructure:"format"`
@@ -40,24 +40,24 @@ func (s bigQueriesByName) Less(i, j int) bool {
 
 // ListBigQueriesInput is used as input to the ListBigQueries function.
 type ListBigQueriesInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListBigQueries returns the list of BigQueries for the configuration version.
 func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -73,10 +73,11 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 
 // CreateBigQueryInput is used as input to the CreateBigQuery function.
 type CreateBigQueryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name              string `form:"name,omitempty"`
 	ProjectID         string `form:"project_id,omitempty"`
@@ -93,15 +94,15 @@ type CreateBigQueryInput struct {
 
 // CreateBigQuery creates a new Fastly BigQuery.
 func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -116,10 +117,11 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 
 // GetBigQueryInput is used as input to the GetBigQuery function.
 type GetBigQueryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the BigQuery to fetch.
 	Name string
@@ -127,19 +129,19 @@ type GetBigQueryInput struct {
 
 // GetBigQuery gets the BigQuery configuration with the given parameters.
 func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -154,42 +156,43 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 
 // UpdateBigQueryInput is used as input to the UpdateBigQuery function.
 type UpdateBigQueryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the BigQuery to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	ProjectID         string `form:"project_id,omitempty"`
-	Dataset           string `form:"dataset,omitempty"`
-	Table             string `form:"table,omitempty"`
-	Template          string `form:"template_suffix,omitempty"`
-	User              string `form:"user,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Format            string `form:"format,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	ProjectID         *string `form:"project_id,omitempty"`
+	Dataset           *string `form:"dataset,omitempty"`
+	Table             *string `form:"table,omitempty"`
+	Template          *string `form:"template_suffix,omitempty"`
+	User              *string `form:"user,omitempty"`
+	SecretKey         *string `form:"secret_key,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
 }
 
 // UpdateBigQuery updates a specific BigQuery.
 func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -204,10 +207,11 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 
 // DeleteBigQueryInput is the input parameter to DeleteBigQuery.
 type DeleteBigQueryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the BigQuery to delete (required).
 	Name string
@@ -215,19 +219,19 @@ type DeleteBigQueryInput struct {
 
 // DeleteBigQuery deletes the given BigQuery version.
 func (c *Client) DeleteBigQuery(i *DeleteBigQueryInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

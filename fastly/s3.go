@@ -19,8 +19,8 @@ const (
 
 // S3 represents a S3 response from the Fastly API.
 type S3 struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name                         string                 `mapstructure:"name"`
 	BucketName                   string                 `mapstructure:"bucket_name"`
@@ -57,24 +57,24 @@ func (s s3sByName) Less(i, j int) bool {
 
 // ListS3sInput is used as input to the ListS3s function.
 type ListS3sInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListS3s returns the list of S3s for the configuration version.
 func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -90,10 +90,11 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 
 // CreateS3Input is used as input to the CreateS3 function.
 type CreateS3Input struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name                         string                 `form:"name,omitempty"`
 	BucketName                   string                 `form:"bucket_name,omitempty"`
@@ -117,19 +118,19 @@ type CreateS3Input struct {
 
 // CreateS3 creates a new Fastly S3.
 func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
 		return nil, ErrMissingKMSKeyID
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -144,10 +145,11 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 
 // GetS3Input is used as input to the GetS3 function.
 type GetS3Input struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the S3 to fetch.
 	Name string
@@ -155,19 +157,19 @@ type GetS3Input struct {
 
 // GetS3 gets the S3 configuration with the given parameters.
 func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -182,53 +184,54 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 
 // UpdateS3Input is used as input to the UpdateS3 function.
 type UpdateS3Input struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the S3 to update.
 	Name string
 
-	NewName                      string                 `form:"name,omitempty"`
-	BucketName                   string                 `form:"bucket_name,omitempty"`
-	Domain                       string                 `form:"domain,omitempty"`
-	AccessKey                    string                 `form:"access_key,omitempty"`
-	SecretKey                    string                 `form:"secret_key,omitempty"`
-	Path                         string                 `form:"path,omitempty"`
-	Period                       uint                   `form:"period,omitempty"`
-	GzipLevel                    uint                   `form:"gzip_level,omitempty"`
-	Format                       string                 `form:"format,omitempty"`
-	FormatVersion                uint                   `form:"format_version,omitempty"`
-	ResponseCondition            string                 `form:"response_condition,omitempty"`
-	MessageType                  string                 `form:"message_type,omitempty"`
-	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
+	NewName                      *string                `form:"name,omitempty"`
+	BucketName                   *string                `form:"bucket_name,omitempty"`
+	Domain                       *string                `form:"domain,omitempty"`
+	AccessKey                    *string                `form:"access_key,omitempty"`
+	SecretKey                    *string                `form:"secret_key,omitempty"`
+	Path                         *string                `form:"path,omitempty"`
+	Period                       *uint                  `form:"period,omitempty"`
+	GzipLevel                    *uint                  `form:"gzip_level,omitempty"`
+	Format                       *string                `form:"format,omitempty"`
+	FormatVersion                *uint                  `form:"format_version,omitempty"`
+	ResponseCondition            *string                `form:"response_condition,omitempty"`
+	MessageType                  *string                `form:"message_type,omitempty"`
+	TimestampFormat              *string                `form:"timestamp_format,omitempty"`
 	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
-	Placement                    string                 `form:"placement,omitempty"`
-	PublicKey                    string                 `form:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
+	Placement                    *string                `form:"placement,omitempty"`
+	PublicKey                    *string                `form:"public_key,omitempty"`
+	ServerSideEncryptionKMSKeyID *string                `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
 }
 
 // UpdateS3 updates a specific S3.
 func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
+	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
 		return nil, ErrMissingKMSKeyID
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -243,10 +246,11 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 
 // DeleteS3Input is the input parameter to DeleteS3.
 type DeleteS3Input struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the S3 to delete (required).
 	Name string
@@ -254,19 +258,19 @@ type DeleteS3Input struct {
 
 // DeleteS3 deletes the given S3 version.
 func (c *Client) DeleteS3(i *DeleteS3Input) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

@@ -9,8 +9,8 @@ import (
 
 // Domain represents the the domain name Fastly will serve content for.
 type Domain struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name      string     `mapstructure:"name"`
 	Comment   string     `mapstructure:"comment"`
@@ -31,23 +31,24 @@ func (s domainsByName) Less(i, j int) bool {
 
 // ListDomainsInput is used as input to the ListDomains function.
 type ListDomainsInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListDomains returns the list of domains for this Service.
 func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/domain", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -63,10 +64,11 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 
 // CreateDomainInput is used as input to the CreateDomain function.
 type CreateDomainInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the domain that the service will respond to (required).
 	Name string `form:"name"`
@@ -77,15 +79,15 @@ type CreateDomainInput struct {
 
 // CreateDomain creates a new domain with the given information.
 func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/domain", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -100,10 +102,11 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 
 // GetDomainInput is used as input to the GetDomain function.
 type GetDomainInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the domain to fetch.
 	Name string `form:"name"`
@@ -111,19 +114,19 @@ type GetDomainInput struct {
 
 // GetDomain retrieves information about the given domain name.
 func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -138,10 +141,11 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 
 // UpdateDomainInput is used as input to the UpdateDomain function.
 type UpdateDomainInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the domain that the service will respond to (required).
 	Name string
@@ -150,25 +154,25 @@ type UpdateDomainInput struct {
 	NewName string `form:"name"`
 
 	// Comment is a personal, freeform descriptive note.
-	Comment string `form:"comment,omitempty"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // UpdateDomain updates a single domain for the current service. The only allowed
 // parameters are `Name` and `Comment`.
 func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -183,10 +187,11 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 
 // DeleteDomainInput is used as input to the DeleteDomain function.
 type DeleteDomainInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the domain that the service will respond to (required).
 	Name string `form:"name"`
@@ -194,19 +199,19 @@ type DeleteDomainInput struct {
 
 // DeleteDomain removes a single domain by the given name.
 func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	_, err := c.Delete(path, nil)
 	if err != nil {
 		return err

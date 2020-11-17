@@ -1,106 +1,38 @@
 package fastly
 
 import (
-	"bytes"
-	"io/ioutil"
+	"reflect"
 	"testing"
 )
 
 func TestClient_WAFs(t *testing.T) {
 	t.Parallel()
 
+	fixtureBase := "wafs/"
+
+	testService := createTestService(t, fixtureBase+"service/create", "service2")
+	defer deleteTestService(t, fixtureBase+"/service/delete", testService.ID)
+
+	tv := createTestVersion(t, fixtureBase+"/service/version", testService.ID)
+
+	prefetch := "WAF_Prefetch"
+	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", testService.ID, prefetch, tv.Number)
+	defer deleteTestCondition(t, fixtureBase+"/condition/delete", testService.ID, prefetch, tv.Number)
+
+	responseName := "WAF_Response"
+	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
+	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", testService.ID, responseName, tv.Number)
+
+	responseName2 := "WAF_Response2"
+	nro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create_another", testService.ID, responseName2, tv.Number)
+	defer deleteTestResponseObject(t, fixtureBase+"/response_object/cleanup_another", testService.ID, responseName2, tv.Number)
+
 	var err error
-	var tv *Version
-	record(t, "wafs/version", func(c *Client) {
-		tv = testVersion(t, c)
-	})
-
-	// Enable logging on the service - we cannot create wafs without logging
-	// enabled
-	record(t, "wafs/logging/create", func(c *Client) {
-		_, err = c.CreateSyslog(&CreateSyslogInput{
-			Service:       testServiceID,
-			Version:       tv.Number,
-			Name:          "test-syslog",
-			Address:       "example.com",
-			Hostname:      "example.com",
-			Port:          1234,
-			Token:         "abcd1234",
-			Format:        "format",
-			FormatVersion: 2,
-			MessageType:   "classic",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer func() {
-		record(t, "wafs/logging/cleanup", func(c *Client) {
-			c.DeleteSyslog(&DeleteSyslogInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-syslog",
-			})
-		})
-	}()
-
-	// Create a condition - we cannot create a waf without attaching a condition
-	var condition *Condition
-	record(t, "wafs/condition/create", func(c *Client) {
-		condition, err = c.CreateCondition(&CreateConditionInput{
-			Service:   testServiceID,
-			Version:   tv.Number,
-			Name:      "test-waf-condition",
-			Statement: "req.url~+\"index.html\"",
-			Type:      "PREFETCH", // This must be a prefetch condition
-			Priority:  1,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer func() {
-		record(t, "wafs/condition/cleanup", func(c *Client) {
-			c.DeleteCondition(&DeleteConditionInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-waf-condition",
-			})
-		})
-	}()
-
-	// Create a response object
-	var ro *ResponseObject
-	record(t, "wafs/response_object/create", func(c *Client) {
-		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
-			Service:     testServiceID,
-			Version:     tv.Number,
-			Name:        "test-response-object",
-			Status:      200,
-			Response:    "Ok",
-			Content:     "abcd",
-			ContentType: "text/plain",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer func() {
-		record(t, "wafs/response_object/cleanup", func(c *Client) {
-			c.DeleteResponseObject(&DeleteResponseObjectInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    ro.Name,
-			})
-		})
-	}()
-
-	// Create
 	var waf *WAF
-	record(t, "wafs/create", func(c *Client) {
+	record(t, fixtureBase+"/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
-			Service:           testServiceID,
-			Version:           tv.Number,
+			ServiceID:         testService.ID,
+			ServiceVersion:    tv.Number,
 			PrefetchCondition: condition.Name,
 			Response:          ro.Name,
 		})
@@ -110,38 +42,47 @@ func TestClient_WAFs(t *testing.T) {
 	}
 
 	// List
-	var wafs []*WAF
-	record(t, "wafs/list", func(c *Client) {
-		wafs, err = c.ListWAFs(&ListWAFsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+	var wafsResp *WAFResponse
+	record(t, fixtureBase+"/list", func(c *Client) {
+		wafsResp, err = c.ListWAFs(&ListWAFsInput{
+			FilterService: testService.ID,
+			FilterVersion: tv.Number,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(wafs) < 1 {
-		t.Errorf("bad wafs: %v", wafs)
+	if len(wafsResp.Items) < 0 {
+		t.Errorf("bad wafs: %v", wafsResp.Items)
 	}
 
 	// Ensure deleted
 	defer func() {
-		record(t, "wafs/cleanup", func(c *Client) {
+		record(t, fixtureBase+"/cleanup", func(c *Client) {
 			c.DeleteWAF(&DeleteWAFInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				ID:      waf.ID,
+				ServiceVersion: tv.Number,
+				ID:             waf.ID,
 			})
 		})
 	}()
 
+	record(t, fixtureBase+"/deploy", func(c *Client) {
+		err = c.DeployWAFVersion(&DeployWAFVersionInput{
+			WAFID:            waf.ID,
+			WAFVersionNumber: 1,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// Get
 	var nwaf *WAF
-	record(t, "wafs/get", func(c *Client) {
+	record(t, fixtureBase+"/get", func(c *Client) {
 		nwaf, err = c.GetWAF(&GetWAFInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			ID:      waf.ID,
+			ServiceID:      testService.ID,
+			ServiceVersion: tv.Number,
+			ID:             waf.ID,
 		})
 	})
 	if err != nil {
@@ -150,143 +91,80 @@ func TestClient_WAFs(t *testing.T) {
 	if nwaf.ID != waf.ID {
 		t.Errorf("expected %q to be %q", nwaf.ID, waf.ID)
 	}
-
-	// Get the WAF ruleset
-	var ruleset *Ruleset
-	record(t, "wafs/ruleset/get", func(c *Client) {
-		ruleset, err = c.GetWAFRuleRuleSets(&GetWAFRuleRuleSetsInput{
-			Service: testServiceID,
-			ID:      waf.ID,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if ruleset.ID != waf.ID {
-		t.Errorf("expected %q to be %q", ruleset.ID, waf.ID)
-	}
-	if ruleset.VCL == "" {
-		t.Error("bad vcl")
-	}
-	if ruleset.LastPush != waf.LastPush {
-		t.Errorf("expected %q to be %q", ruleset.LastPush, waf.LastPush)
-	}
-	if ruleset.Link != "" {
-		t.Error("bad link")
+	if nwaf.Disabled {
+		t.Errorf("expected disabled false, got : %v", nwaf.Disabled)
 	}
 
-	// Update
-	// Create a new response object to attach
-	var nro *ResponseObject
-	record(t, "wafs/response_object/create_another", func(c *Client) {
-		nro, err = c.CreateResponseObject(&CreateResponseObjectInput{
-			Service:     testServiceID,
-			Version:     tv.Number,
-			Name:        "test-response-object-2",
-			Status:      200,
-			Response:    "Ok",
-			Content:     "efgh",
-			ContentType: "text/plain",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	defer func() {
-		record(t, "wafs/response_object/cleanup_another", func(c *Client) {
-			c.DeleteResponseObject(&DeleteResponseObjectInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    nro.Name,
-			})
-		})
-	}()
 	var uwaf *WAF
-	record(t, "wafs/update", func(c *Client) {
+	record(t, fixtureBase+"/update", func(c *Client) {
 		uwaf, err = c.UpdateWAF(&UpdateWAFInput{
-			Service:  testServiceID,
-			Version:  tv.Number,
-			ID:       waf.ID,
-			Response: nro.Name,
+			ServiceID:      &testService.ID,
+			ServiceVersion: &tv.Number,
+			ID:             waf.ID,
+			Response:       &nro.Name,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uwaf.Response != "test-response-object-2" {
+	if uwaf.Response != responseName2 {
 		t.Errorf("bad name: %q", uwaf.Response)
 	}
 
-	// Update the WAF ruleset
-	var uRuleset *Ruleset
-	record(t, "wafs/ruleset/patch", func(c *Client) {
-		uRuleset, err = c.UpdateWAFRuleSets(&UpdateWAFRuleRuleSetsInput{
-			Service: testServiceID,
-			ID:      uwaf.ID,
+	var dwaf *WAF
+	record(t, fixtureBase+"/disable", func(c *Client) {
+		dwaf, err = c.UpdateWAF(&UpdateWAFInput{
+			ID:       waf.ID,
+			Disabled: Bool(true),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uRuleset.ID != uwaf.ID {
-		t.Errorf("expected %q to be %q", uRuleset.ID, uwaf.ID)
+	if !dwaf.Disabled {
+		t.Errorf("expected disabled true, got : %v", dwaf.Disabled)
 	}
-	if uRuleset.VCL != "" {
-		t.Error("bad vcl")
+
+	var ewaf *WAF
+	record(t, fixtureBase+"/enable", func(c *Client) {
+		ewaf, err = c.UpdateWAF(&UpdateWAFInput{
+			ID:       waf.ID,
+			Disabled: Bool(false),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-	if uRuleset.LastPush != nil {
-		t.Error("bad last_push")
-	}
-	if uRuleset.Link == "" {
-		t.Error("bad link")
+	if ewaf.Disabled {
+		t.Errorf("expected disabled false, got : %v", ewaf.Disabled)
 	}
 
 	// Delete
-	record(t, "wafs/delete", func(c *Client) {
+	record(t, fixtureBase+"/delete", func(c *Client) {
 		err = c.DeleteWAF(&DeleteWAFInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			ID:      waf.ID,
+			ServiceVersion: tv.Number,
+			ID:             waf.ID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
-	}
-
-}
-
-func TestClient_ListWAFs_validation(t *testing.T) {
-	var err error
-	_, err = testClient.ListWAFs(&ListWAFsInput{
-		Service: "",
-	})
-	if err != ErrMissingService {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListWAFs(&ListWAFsInput{
-		Service: "foo",
-		Version: 0,
-	})
-	if err != ErrMissingVersion {
-		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_CreateWAF_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateWAF(&CreateWAFInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateWAF(&CreateWAFInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -294,278 +172,133 @@ func TestClient_CreateWAF_validation(t *testing.T) {
 func TestClient_GetWAF_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetWAF(&GetWAFInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetWAF(&GetWAFInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetWAF(&GetWAFInput{
-		Service: "foo",
-		Version: 1,
-		ID:      "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
-//
-// func TestClient_UpdateWAF_validation(t *testing.T) {
-// 	var err error
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "",
-// 	})
-// 	if err != ErrMissingService {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "foo",
-// 		Version: 0,
-// 	})
-// 	if err != ErrMissingVersion {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-// 		Service: "foo",
-// 		Version: 1,
-// 		WAFID:   "",
-// 	})
-// 	if err != ErrMissingWAFID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// }
-//
-// func TestClient_DeleteWAF_validation(t *testing.T) {
-// 	var err error
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "",
-// 	})
-// 	if err != ErrMissingService {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "foo",
-// 		Version: 0,
-// 	})
-// 	if err != ErrMissingVersion {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-//
-// 	err = testClient.DeleteWAF(&DeleteWAFInput{
-// 		Service: "foo",
-// 		Version: 1,
-// 		WAFID:   "",
-// 	})
-// 	if err != ErrMissingWAFID {
-// 		t.Errorf("bad error: %s", err)
-// 	}
-// }
+func TestClient_UpdateWAF_validation(t *testing.T) {
+	var err error
 
-func TestUpdateWAFRuleStatusesInput_validate(t *testing.T) {
-	tests := []struct {
-		description string
-		input       UpdateWAFRuleStatusInput
-		expected    error
-	}{
-		{
-			description: "Accepts valid input",
-			input: UpdateWAFRuleStatusInput{
-				ID:      "as098k-8104",
-				RuleID:  8104,
-				Service: "108asj1",
-				WAF:     "as098k",
-				Status:  "block",
-			},
-			expected: nil,
-		},
-		{
-			description: "Rejects input with missing int field",
-			input: UpdateWAFRuleStatusInput{
-				ID:      "as098k-8104",
-				Service: "108asj1",
-				WAF:     "as098k",
-				Status:  "block",
-			},
-			expected: ErrMissingRuleID,
-		},
-		{
-			description: "Rejects input with missing string field",
-			input: UpdateWAFRuleStatusInput{
-				ID:     "as098k-8104",
-				RuleID: 8104,
-				WAF:    "as098k",
-				Status: "block",
-			},
-			expected: ErrMissingService,
-		},
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID: "",
+	})
+	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
 	}
-	for _, testcase := range tests {
-		err := testcase.input.validate()
-		if err != testcase.expected {
-			t.Errorf("In test %s: Expected %v,got %v", testcase.description, testcase.expected, err)
-		}
+
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID: "123999",
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	serviceID := "foo"
+
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID:        "123",
+		ServiceID: &serviceID,
+	})
+	if err != ErrMissingServiceVersion {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestUpdateWAFRuleTagStatusInput_validate(t *testing.T) {
-	tests := []struct {
-		description string
-		input       UpdateWAFRuleTagStatusInput
-		expected    error
-	}{
-		{
-			description: "Accepts valid input",
-			input: UpdateWAFRuleTagStatusInput{
-				Tag:     "lala tag la",
-				Service: "108asj1",
-				WAF:     "as098k",
-				Status:  "block",
-			},
-			expected: nil,
-		},
-		{
-			description: "Rejects input with missing string field",
-			input: UpdateWAFRuleTagStatusInput{
-				Service: "108asj1",
-				WAF:     "as098k",
-				Status:  "block",
-			},
-			expected: ErrMissingTag,
-		},
+func TestClient_DeleteWAF_validation(t *testing.T) {
+	var err error
+	err = testClient.DeleteWAF(&DeleteWAFInput{
+		ServiceVersion: 0,
+	})
+	if err != ErrMissingServiceVersion {
+		t.Errorf("bad error: %s", err)
 	}
-	for _, testcase := range tests {
-		err := testcase.input.validate()
-		if err != testcase.expected {
-			t.Errorf("In test %s: Expected %v,got %v", testcase.description, testcase.expected, err)
-		}
+
+	err = testClient.DeleteWAF(&DeleteWAFInput{
+		ServiceVersion: 1,
+		ID:             "",
+	})
+	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestGetWAFRuleStatusesInput_formatFilters(t *testing.T) {
-	tests := []struct {
-		description string
-		filters     GetWAFRuleStatusesFilters
-		expected    map[string]string
-	}{
-		{
-			description: "converts both strings and ints to strings",
-			filters: GetWAFRuleStatusesFilters{
-				Status:   "log",
-				Accuracy: 10,
-				Version:  "180ad",
-			},
-			expected: map[string]string{
-				"filter[status]":         "log",
-				"filter[rule][accuracy]": "10",
-				"filter[rule][version]":  "180ad",
-			},
-		},
-		{
-			description: "converts arrays to strings",
-			filters: GetWAFRuleStatusesFilters{
-				Status:  "log",
-				Version: "181ad",
-				Tags:    []int{18, 1, 1093, 86308},
-			},
-			expected: map[string]string{
-				"filter[status]":        "log",
-				"filter[rule][version]": "181ad",
-				"include":               "18,1,1093,86308",
-			},
-		},
-	}
-	for _, testcase := range tests {
-		input := GetWAFRuleStatusesInput{
-			Filters: testcase.filters,
-		}
-		answer := input.formatFilters()
-		if len(answer) != len(testcase.expected) {
-			t.Errorf("In test %s: Expected map with %d entries,got one with %d", testcase.description, len(testcase.expected), len(answer))
-		}
-		for key, value := range testcase.expected {
-			if answer[key] != value {
-				t.Errorf("In test %s: Expected %s key to have value %s, got %s", testcase.description, key, value, answer[key])
-			}
-		}
+func TestClient_UpdateWAF_Enable_validation(t *testing.T) {
+	var err error
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID:       "",
+		Disabled: Bool(false),
+	})
+	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestGetPages(t *testing.T) {
-	tests := []struct {
-		description   string
-		input         string
-		expectedPages paginationInfo
-		expectedErr   error
-	}{
-		{
-			description: "returns the next page",
-			input:       `{"links": {"next": "https://google.com/2"}, "data": []}`,
-			expectedPages: paginationInfo{
-				Next: "https://google.com/2",
-			},
-		},
-		{
-			description: "returns multiple pages",
-			input:       `{"links": {"next": "https://google.com/2", "first": "https://google.com/1"}, "data": []}`,
-			expectedPages: paginationInfo{
-				First: "https://google.com/1",
-				Next:  "https://google.com/2",
-			},
-		},
-		{
-			description:   "returns no pages",
-			input:         `{"data": []}`,
-			expectedPages: paginationInfo{},
-		},
-	}
-	for _, testcase := range tests {
-		pages, reader, err := getPages(bytes.NewReader([]byte(testcase.input)))
-		if pages != testcase.expectedPages {
-			t.Errorf("Test %s: Expected pages %+v, got %+v", testcase.description, testcase.expectedPages, pages)
-		}
-
-		// we expect to be able to get the original input out again
-		resultBytes, _ := ioutil.ReadAll(reader)
-		if string(resultBytes) != testcase.input {
-			t.Errorf("Test %s: Expected body %s, got %s", testcase.description, testcase.input, string(resultBytes))
-		}
-		if err != testcase.expectedErr {
-			t.Errorf("Test %s: Expected error %v, got %v", testcase.description, testcase.expectedErr, err)
-		}
+func TestClient_UpdateWAF_Disable_validation(t *testing.T) {
+	var err error
+	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+		ID:       "",
+		Disabled: Bool(true),
+	})
+	if err != ErrMissingWAFID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
-func TestUpdateWAFConfigSetInput_validate(t *testing.T) {
-	tests := []struct {
-		description string
-		input       UpdateWAFConfigSetInput
-		expected    error
+func TestClient_listWAFs_formatFilters(t *testing.T) {
+	cases := []struct {
+		remote *ListWAFsInput
+		local  map[string]string
 	}{
 		{
-			description: "Accepts valid input",
-			input: UpdateWAFConfigSetInput{
-				WAFList:     []ConfigSetWAFs{{ID: "derpID"}},
-				ConfigSetID: "derpConfigSet",
+			remote: &ListWAFsInput{
+				FilterService: "service1",
+				FilterVersion: 1,
 			},
-			expected: nil,
+			local: map[string]string{
+				"filter[service_id]":             "service1",
+				"filter[service_version_number]": "1",
+			},
+		},
+		{
+			remote: &ListWAFsInput{
+				FilterService: "service1",
+				FilterVersion: 1,
+				PageSize:      2,
+				PageNumber:    2,
+				Include:       "included",
+			},
+			local: map[string]string{
+				"filter[service_id]":             "service1",
+				"filter[service_version_number]": "1",
+				"page[size]":                     "2",
+				"page[number]":                   "2",
+				"include":                        "included",
+			},
 		},
 	}
-	for _, testcase := range tests {
-		err := testcase.input.validate()
-		if err != testcase.expected {
-			t.Errorf("In test %s: Expected %v,got %v", testcase.description, testcase.expected, err)
+	for _, c := range cases {
+		out := c.remote.formatFilters()
+		if !reflect.DeepEqual(out, c.local) {
+			t.Fatalf("Error matching:\nexpected: %#v\n     got: %#v", c.local, out)
 		}
 	}
 }

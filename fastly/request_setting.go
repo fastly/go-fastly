@@ -41,8 +41,8 @@ type RequestSettingXFF string
 
 // RequestSetting represents a request setting response from the Fastly API.
 type RequestSetting struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name             string               `mapstructure:"name"`
 	ForceMiss        bool                 `mapstructure:"force_miss"`
@@ -74,25 +74,25 @@ func (s requestSettingsByName) Less(i, j int) bool {
 // ListRequestSettingsInput is used as input to the ListRequestSettings
 // function.
 type ListRequestSettingsInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListRequestSettings returns the list of request settings for the
 // configuration version.
 func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSetting, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/request_settings", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/request_settings", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -109,36 +109,37 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 // CreateRequestSettingInput is used as input to the CreateRequestSetting
 // function.
 type CreateRequestSettingInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name             string               `form:"name,omitempty"`
-	ForceMiss        *Compatibool         `form:"force_miss,omitempty"`
-	ForceSSL         *Compatibool         `form:"force_ssl,omitempty"`
+	ForceMiss        Compatibool          `form:"force_miss,omitempty"`
+	ForceSSL         Compatibool          `form:"force_ssl,omitempty"`
 	Action           RequestSettingAction `form:"action,omitempty"`
-	BypassBusyWait   *Compatibool         `form:"bypass_busy_wait,omitempty"`
+	BypassBusyWait   Compatibool          `form:"bypass_busy_wait,omitempty"`
 	MaxStaleAge      uint                 `form:"max_stale_age,omitempty"`
 	HashKeys         string               `form:"hash_keys,omitempty"`
 	XForwardedFor    RequestSettingXFF    `form:"xff,omitempty"`
-	TimerSupport     *Compatibool         `form:"timer_support,omitempty"`
-	GeoHeaders       *Compatibool         `form:"geo_headers,omitempty"`
+	TimerSupport     Compatibool          `form:"timer_support,omitempty"`
+	GeoHeaders       Compatibool          `form:"geo_headers,omitempty"`
 	DefaultHost      string               `form:"default_host,omitempty"`
 	RequestCondition string               `form:"request_condition,omitempty"`
 }
 
 // CreateRequestSetting creates a new Fastly request settings.
 func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSetting, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/request_settings", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/request_settings", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -153,10 +154,11 @@ func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSet
 
 // GetRequestSettingInput is used as input to the GetRequestSetting function.
 type GetRequestSettingInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the request settings to fetch.
 	Name string
@@ -165,19 +167,19 @@ type GetRequestSettingInput struct {
 // GetRequestSetting gets the request settings configuration with the given
 // parameters.
 func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -193,43 +195,44 @@ func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, 
 // UpdateRequestSettingInput is used as input to the UpdateRequestSetting
 // function.
 type UpdateRequestSettingInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the request settings to update.
 	Name string
 
-	NewName          string               `form:"name,omitempty"`
+	NewName          *string              `form:"name,omitempty"`
 	ForceMiss        *Compatibool         `form:"force_miss,omitempty"`
 	ForceSSL         *Compatibool         `form:"force_ssl,omitempty"`
 	Action           RequestSettingAction `form:"action,omitempty"`
 	BypassBusyWait   *Compatibool         `form:"bypass_busy_wait,omitempty"`
-	MaxStaleAge      uint                 `form:"max_stale_age,omitempty"`
-	HashKeys         string               `form:"hash_keys,omitempty"`
+	MaxStaleAge      *uint                `form:"max_stale_age,omitempty"`
+	HashKeys         *string              `form:"hash_keys,omitempty"`
 	XForwardedFor    RequestSettingXFF    `form:"xff,omitempty"`
 	TimerSupport     *Compatibool         `form:"timer_support,omitempty"`
 	GeoHeaders       *Compatibool         `form:"geo_headers,omitempty"`
-	DefaultHost      string               `form:"default_host,omitempty"`
-	RequestCondition string               `form:"request_condition,omitempty"`
+	DefaultHost      *string              `form:"default_host,omitempty"`
+	RequestCondition *string              `form:"request_condition,omitempty"`
 }
 
 // UpdateRequestSetting updates a specific request settings.
 func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSetting, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -244,10 +247,11 @@ func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSet
 
 // DeleteRequestSettingInput is the input parameter to DeleteRequestSetting.
 type DeleteRequestSettingInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the request settings to delete (required).
 	Name string
@@ -255,19 +259,19 @@ type DeleteRequestSettingInput struct {
 
 // DeleteRequestSetting deletes the given request settings version.
 func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

@@ -9,8 +9,8 @@ import (
 
 // NewRelic represents a newrelic response from the Fastly API.
 type NewRelic struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Token             string     `mapstructure:"token"`
@@ -35,24 +35,24 @@ func (s newrelicByName) Less(i, j int) bool {
 
 // ListNewRelicInput is used as input to the ListNewRelic function.
 type ListNewRelicInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListNewRelic returns the list of newrelic for the configuration version.
 func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -68,30 +68,31 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 
 // CreateNewRelicInput is used as input to the CreateNewRelic function.
 type CreateNewRelicInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	Name              *string `form:"name,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	Name              string `form:"name,omitempty"`
+	Token             string `form:"token,omitempty"`
+	Format            string `form:"format,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateNewRelic creates a new Fastly newrelic.
 func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -106,10 +107,11 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 
 // GetNewRelicInput is used as input to the GetNewRelic function.
 type GetNewRelicInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the newrelic to fetch.
 	Name string
@@ -117,19 +119,19 @@ type GetNewRelicInput struct {
 
 // GetNewRelic gets the newrelic configuration with the given parameters.
 func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -144,10 +146,11 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 
 // UpdateNewRelicInput is used as input to the UpdateNewRelic function.
 type UpdateNewRelicInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the newrelic to update.
 	Name string
@@ -162,19 +165,19 @@ type UpdateNewRelicInput struct {
 
 // UpdateNewRelic updates a specific newrelic.
 func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -189,10 +192,11 @@ func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 
 // DeleteNewRelicInput is the input parameter to DeleteNewRelic.
 type DeleteNewRelicInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the newrelic to delete (required).
 	Name string
@@ -200,19 +204,19 @@ type DeleteNewRelicInput struct {
 
 // DeleteNewRelic deletes the given newrelic version.
 func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

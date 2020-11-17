@@ -9,8 +9,8 @@ import (
 
 // Honeycomb represents a honeycomb response from the Fastly API.
 type Honeycomb struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Format            string     `mapstructure:"format"`
@@ -36,24 +36,24 @@ func (h honeycombsByName) Less(i, j int) bool {
 
 // ListHoneycombsInput is used as input to the ListHoneycombs function.
 type ListHoneycombsInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListHoneycombs returns the list of honeycombs for the configuration version.
 func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -69,31 +69,32 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 
 // CreateHoneycombInput is used as input to the CreateHoneycomb function.
 type CreateHoneycombInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	Name              *string `form:"name,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	Dataset           *string `form:"dataset,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	Name              string `form:"name,omitempty"`
+	Format            string `form:"format,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	Dataset           string `form:"dataset,omitempty"`
+	Token             string `form:"token,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateHoneycomb creates a new Fastly honeycomb.
 func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -108,10 +109,11 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 
 // GetHoneycombInput is used as input to the GetHoneycomb function.
 type GetHoneycombInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the honeycomb to fetch.
 	Name string
@@ -119,19 +121,19 @@ type GetHoneycombInput struct {
 
 // GetHoneycomb gets the honeycomb configuration with the given parameters.
 func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -146,10 +148,11 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 
 // UpdateHoneycombInput is used as input to the UpdateHoneycomb function.
 type UpdateHoneycombInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the honeycomb to update.
 	Name string
@@ -165,19 +168,19 @@ type UpdateHoneycombInput struct {
 
 // UpdateHoneycomb updates a specific honeycomb.
 func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -192,10 +195,11 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 
 // DeleteHoneycombInput is the input parameter to DeleteHoneycomb.
 type DeleteHoneycombInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the honeycomb to delete (required).
 	Name string
@@ -203,19 +207,19 @@ type DeleteHoneycombInput struct {
 
 // DeleteHoneycomb deletes the given honeycomb version.
 func (c *Client) DeleteHoneycomb(i *DeleteHoneycombInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

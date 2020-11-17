@@ -9,8 +9,8 @@ import (
 
 // Dictionary represents a dictionary response from the Fastly API.
 type Dictionary struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	ID        string     `mapstructure:"id"`
 	Name      string     `mapstructure:"name"`
@@ -32,24 +32,24 @@ func (s dictionariesByName) Less(i, j int) bool {
 
 // ListDictionariesInput is used as input to the ListDictionaries function.
 type ListDictionariesInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListDictionaries returns the list of dictionaries for the configuration version.
 func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/dictionary", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -65,26 +65,27 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 
 // CreateDictionaryInput is used as input to the CreateDictionary function.
 type CreateDictionaryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	Name      string       `form:"name,omitempty"`
-	WriteOnly *Compatibool `form:"write_only,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	Name      string      `form:"name,omitempty"`
+	WriteOnly Compatibool `form:"write_only,omitempty"`
 }
 
 // CreateDictionary creates a new Fastly dictionary.
 func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/dictionary", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -99,10 +100,11 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 
 // GetDictionaryInput is used as input to the GetDictionary function.
 type GetDictionaryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the dictionary to fetch.
 	Name string
@@ -110,19 +112,19 @@ type GetDictionaryInput struct {
 
 // GetDictionary gets the dictionary configuration with the given parameters.
 func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -137,33 +139,34 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 
 // UpdateDictionaryInput is used as input to the UpdateDictionary function.
 type UpdateDictionaryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the dictionary to update.
 	Name string
 
-	NewName   string       `form:"name,omitempty"`
+	NewName   *string      `form:"name,omitempty"`
 	WriteOnly *Compatibool `form:"write_only,omitempty"`
 }
 
 // UpdateDictionary updates a specific dictionary.
 func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -178,10 +181,11 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 
 // DeleteDictionaryInput is the input parameter to DeleteDictionary.
 type DeleteDictionaryInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the dictionary to delete (required).
 	Name string
@@ -189,19 +193,19 @@ type DeleteDictionaryInput struct {
 
 // DeleteDictionary deletes the given dictionary version.
 func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

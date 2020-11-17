@@ -102,6 +102,14 @@ type StatsResponse struct {
 	Data    []*Stats          `mapstructure:"data"`
 }
 
+// StatsFieldResponse is a response from the service stats/field API endpoint
+type StatsFieldResponse struct {
+	Status  string              `mapstructure:"status"`
+	Meta    map[string]string   `mapstructure:"meta"`
+	Message string              `mapstructure:"msg"`
+	Data    map[string][]*Stats `mapstructure:"data"`
+}
+
 // GetStats returns stats data based on GetStatsInput
 func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	var resp interface{}
@@ -110,6 +118,20 @@ func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	}
 
 	var sr *StatsResponse
+	if err := decodeMap(resp, &sr); err != nil {
+		return nil, err
+	}
+	return sr, nil
+}
+
+// GetStatsField returns stats field data based on GetStatsInput
+func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
+	var resp interface{}
+	if err := c.GetStatsJSON(i, &resp); err != nil {
+		return nil, err
+	}
+
+	var sr *StatsFieldResponse
 	if err := decodeMap(resp, &sr); err != nil {
 		return nil, err
 	}

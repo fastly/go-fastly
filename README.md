@@ -1,19 +1,21 @@
-Go Fastly
-=========
+# Go Fastly
+
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
 [godocs]: https://pkg.go.dev/github.com/fastly/go-fastly/fastly?tab=doc
+[v2]: https://pkg.go.dev/github.com/fastly/go-fastly@v2.0.0/fastly
+[v1]: https://pkg.go.dev/github.com/fastly/go-fastly@v1.18.0/fastly
 
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
 
-Installation
-------------
+## Installation
+
 This is a client library, so there is nothing to install. But, it uses Go modules,
 so you must be running Go 1.11 or higher.
 
-Usage
------
+## Usage
+
 Fetch the library:
 
 ```
@@ -26,8 +28,19 @@ Import the library into your tool:
 import "github.com/fastly/go-fastly/fastly"
 ```
 
-Examples
---------
+## Migrating from v1 to v2
+
+The move from major version [1][v1] to [2][v2] has resulted in a couple of fundamental changes to the library:
+
+- Consistent field name format for IDs and Versions (e.g. `DictionaryID`, `PoolID`, `ServiceID`, `ServiceVersion` etc).
+- Input struct fields (for write/update operations) that are optional (i.e. `omitempty`) and use basic types, are now defined as pointers.
+
+The move to more consistent field names in some cases will have resulted in the corresponding sentinel error name to be updated also. For example, `ServiceID` has resulted in a change from `ErrMissingService` to `ErrMissingServiceID`.
+
+The change in type for [basic types](https://tour.golang.org/basics/11) that are optional on input structs related to write/update operations is designed to avoid unexpected behaviours when dealing with their zero value (see [this reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/) for more details). As part of this change we now provide [helper functions](./fastly/basictypes_helper.go) to assist with generating the new pointer types required.
+
+## Examples
+
 Fastly's API is designed to work in the following manner:
 
 1. Create (or clone) a new configuration version for the service
@@ -52,7 +65,7 @@ var serviceID = "SERVICE_ID"
 
 // Get the latest active version
 latest, err := client.LatestVersion(&fastly.LatestVersionInput{
-  Service: serviceID,
+  ServiceID: serviceID,
 })
 if err != nil {
   log.Fatal(err)
@@ -61,8 +74,8 @@ if err != nil {
 // Clone the latest version so we can make changes without affecting the
 // active configuration.
 version, err := client.CloneVersion(&fastly.CloneVersionInput{
-  Service: serviceID,
-  Version: latest.Number,
+  ServiceID:      serviceID,
+  ServiceVersion: latest.Number,
 })
 if err != nil {
   log.Fatal(err)
@@ -71,9 +84,9 @@ if err != nil {
 // Now you can make any changes to the new version. In this example, we will add
 // a new domain.
 domain, err := client.CreateDomain(&fastly.CreateDomainInput{
-  Service: serviceID,
-  Version: version.Number,
-  Name: "example.com",
+  ServiceID:      serviceID,
+  ServiceVersion: version.Number,
+  Name:           "example.com",
 })
 if err != nil {
   log.Fatal(err)
@@ -84,11 +97,11 @@ fmt.Println(domain.Name)
 
 // And we will also add a new backend.
 backend, err := client.CreateBackend(&fastly.CreateBackendInput{
-  Service: serviceID,
-  Version: version.Number,
-  Name:    "example-backend",
-  Address: "127.0.0.1",
-  Port:    80,
+  ServiceID:      serviceID,
+  ServiceVersion: version.Number,
+  Name:           fastly.String("example-backend"),
+  Address:        fastly.String("127.0.0.1"),
+  Port:           fastly.Uint(80),
 })
 if err != nil {
   log.Fatal(err)
@@ -99,8 +112,8 @@ fmt.Println(backend.Name)
 
 // Now we can validate that our version is valid.
 valid, _, err := client.ValidateVersion(&fastly.ValidateVersionInput{
-  Service: serviceID,
-  Version: version.Number,
+  ServiceID:      serviceID,
+  ServiceVersion: version.Number,
 })
 if err != nil {
   log.Fatal(err)
@@ -111,8 +124,8 @@ if !valid {
 
 // Finally, activate this new version.
 activeVersion, err := client.ActivateVersion(&fastly.ActivateVersionInput{
-  Service: serviceID,
-  Version: version.Number,
+  ServiceID:      serviceID,
+  ServiceVersion: version.Number,
 })
 if err != nil {
   log.Fatal(err)
@@ -125,8 +138,7 @@ fmt.Printf("%t\n", activeVersion.Locked)
 More information can be found in the
 [Fastly Godoc][godocs].
 
-Developing
--------
+## Developing
 
 1. Clone the project to your preferred directory, using your preferred method.
 2. Download the module and accompanying developer tooling.
@@ -142,8 +154,8 @@ Developing
   $ make all
   ```
 
-Testing
--------
+## Testing
+
 Go Fastly uses [go-vcr](https://github.com/dnaeon/go-vcr) to "record" and
 "replay" API request fixtures to improve the speed and portability of
 integration tests. The test suite uses a single test service ID for all test
@@ -196,13 +208,12 @@ unset FASTLY_TEST_SERVICE_ID FASTLY_API_KEY
 make test
 ```
 
-Contributing
---------------------------
+## Contributing
 
 Refer to [CONTRIBUTING.md](./CONTRIBUTING.md)
 
-License
--------
+## License
+
 ```
 Copyright 2015 Seth Vargo
 
