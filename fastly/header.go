@@ -29,6 +29,12 @@ const (
 // HeaderAction is a type of header action.
 type HeaderAction string
 
+// PHeaderAction returns pointer to HeaderAction.
+func PHeaderAction(t HeaderAction) *HeaderAction {
+	ha := HeaderAction(t)
+	return &ha
+}
+
 const (
 	// HeaderTypeRequest is a header type that performs on the request before
 	// lookups.
@@ -49,6 +55,12 @@ const (
 
 // HeaderType is a type of header.
 type HeaderType string
+
+// PHeaderType returns pointer to HeaderType.
+func PHeaderType(t HeaderType) *HeaderType {
+	ht := HeaderType(t)
+	return &ht
+}
 
 // Header represents a header response from the Fastly API.
 type Header struct {
@@ -210,18 +222,18 @@ type UpdateHeaderInput struct {
 	// Name is the name of the header to update.
 	Name string
 
-	NewName           *string      `form:"name,omitempty"`
-	Action            HeaderAction `form:"action,omitempty"`
-	IgnoreIfSet       *Compatibool `form:"ignore_if_set,omitempty"`
-	Type              HeaderType   `form:"type,omitempty"`
-	Destination       *string      `form:"dst,omitempty"`
-	Source            *string      `form:"src,omitempty"`
-	Regex             *string      `form:"regex,omitempty"`
-	Substitution      *string      `form:"substitution,omitempty"`
-	Priority          *uint        `form:"priority,omitempty"`
-	RequestCondition  *string      `form:"request_condition,omitempty"`
-	CacheCondition    *string      `form:"cache_condition,omitempty"`
-	ResponseCondition *string      `form:"response_condition,omitempty"`
+	NewName           *string       `form:"name,omitempty"`
+	Action            *HeaderAction `form:"action,omitempty"`
+	IgnoreIfSet       *Compatibool  `form:"ignore_if_set,omitempty"`
+	Type              *HeaderType   `form:"type,omitempty"`
+	Destination       *string       `form:"dst,omitempty"`
+	Source            *string       `form:"src,omitempty"`
+	Regex             *string       `form:"regex,omitempty"`
+	Substitution      *string       `form:"substitution,omitempty"`
+	Priority          *uint         `form:"priority,omitempty"`
+	RequestCondition  *string       `form:"request_condition,omitempty"`
+	CacheCondition    *string       `form:"cache_condition,omitempty"`
+	ResponseCondition *string       `form:"response_condition,omitempty"`
 }
 
 // UpdateHeader updates a specific header.

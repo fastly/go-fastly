@@ -140,6 +140,8 @@ func TestClient_Headers(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-header",
 			NewName:        String("new-test-header"),
+			Action:         PHeaderAction(HeaderActionAppend),
+			Type:           PHeaderType(HeaderTypeFetch),
 		})
 	})
 	if err != nil {
