@@ -1,5 +1,17 @@
 # Changelog
 
+## [v2.0.0](https://github.com/fastly/go-fastly/releases/tag/v2.0.0) (2020-11-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v1.18.0...v2.0.0)
+
+**Enhancements:**
+
+- v2 [\#230](https://github.com/fastly/go-fastly/pull/230)
+
+**Closed issues:**
+
+- Fails to Parse Historic Stats when no Service Provided [\#214](https://github.com/fastly/go-fastly/issues/214)
+
 ## [v1.18.0](https://github.com/fastly/go-fastly/releases/tag/v1.18.0) (2020-10-28)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.17.0...v1.18.0)
