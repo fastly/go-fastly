@@ -3,6 +3,7 @@ package fastly
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -19,12 +20,12 @@ type TLSActivation struct {
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
 type ListTLSActivationsInput struct {
-	FilterTLSCertificateID   *string // Limit the returned activations to a specific certificate.
-	FilterTLSConfigurationID *string // Limit the returned activations to a specific TLS configuration.
-	FilterTLSDomainID        *string // Limit the returned rules to a specific domain name.
-	Include                  *string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
-	PageNumber               *uint   // The page index for pagination.
-	PageSize                 *uint   // The number of activations per page.
+	FilterTLSCertificateID   string // Limit the returned activations to a specific certificate.
+	FilterTLSConfigurationID string // Limit the returned activations to a specific TLS configuration.
+	FilterTLSDomainID        string // Limit the returned rules to a specific domain name.
+	Include                  string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
+	PageNumber               int    // The page index for pagination.
+	PageSize                 int    // The number of activations per page.
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -38,9 +39,17 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 		"page[number]":                 i.PageNumber,
 		"page[size]":                   i.PageSize,
 	}
+
 	for key, value := range pairings {
-		if !reflect.ValueOf(value).IsNil() {
-			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
+		switch t := reflect.TypeOf(value).String(); t {
+		case "string":
+			if value != "" {
+				result[key] = value.(string)
+			}
+		case "int":
+			if value != 0 {
+				result[key] = strconv.Itoa(value.(int))
+			}
 		}
 	}
 

@@ -3,6 +3,7 @@ package fastly
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -26,12 +27,12 @@ type CustomTLSCertificate struct {
 
 // ListCustomTLSCertificatesInput is used as input to the ListCustomTLSCertificatesInput function.
 type ListCustomTLSCertificatesInput struct {
-	FilterNotAfter          *string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
-	FilterTLSDomainsIDMatch *string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
-	Include                 *string // Include related objects. Optional, comma-separated values. Permitted values: tls_activations.
-	PageNumber              *uint   // The page index for pagination.
-	PageSize                *uint   // The number of keys per page.
-	Sort                    *string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
+	FilterNotAfter          string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
+	FilterTLSDomainsIDMatch string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
+	Include                 string // Include related objects. Optional, comma-separated values. Permitted values: tls_activations.
+	PageNumber              int    // The page index for pagination.
+	PageSize                int    // The number of keys per page.
+	Sort                    string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -45,11 +46,20 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 		"page[number]":                  i.PageNumber,
 		"sort":                          i.Sort,
 	}
+
 	for key, value := range pairings {
-		if !reflect.ValueOf(value).IsNil() {
-			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
+		switch t := reflect.TypeOf(value).String(); t {
+		case "string":
+			if value != "" {
+				result[key] = value.(string)
+			}
+		case "int":
+			if value != 0 {
+				result[key] = strconv.Itoa(value.(int))
+			}
 		}
 	}
+
 	return result
 }
 

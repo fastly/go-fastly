@@ -3,6 +3,7 @@ package fastly
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -30,10 +31,10 @@ type DNSRecord struct {
 
 // ListCustomTLSConfigurationsInput is used as input to the ListCustomTLSConfigurationsInput function.
 type ListCustomTLSConfigurationsInput struct {
-	FilterBulk *bool   // Whether or not to only include bulk=true configurations
-	Include    *string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
-	PageNumber *uint   // The page index for pagination.
-	PageSize   *uint   // The number of keys per page.
+	FilterBulk bool   // Whether or not to only include bulk=true configurations
+	Include    string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
+	PageNumber int    // The page index for pagination.
+	PageSize   int    // The number of keys per page.
 
 }
 
@@ -46,11 +47,20 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 		"page[size]":   i.PageSize,
 		"page[number]": i.PageNumber,
 	}
+
 	for key, value := range pairings {
-		if !reflect.ValueOf(value).IsNil() {
-			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
+		switch t := reflect.TypeOf(value).String(); t {
+		case "string":
+			if value != "" {
+				result[key] = value.(string)
+			}
+		case "int":
+			if value != 0 {
+				result[key] = strconv.Itoa(value.(int))
+			}
 		}
 	}
+
 	return result
 }
 
