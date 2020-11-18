@@ -3,8 +3,8 @@
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
 
 [godocs]: https://pkg.go.dev/github.com/fastly/go-fastly/fastly?tab=doc
-[v2]: https://pkg.go.dev/github.com/fastly/go-fastly@v2.0.0/fastly
-[v1]: https://pkg.go.dev/github.com/fastly/go-fastly@v1.18.0/fastly
+[v2]: https://pkg.go.dev/github.com/fastly/go-fastly/v2
+[v1]: https://pkg.go.dev/github.com/fastly/go-fastly
 
 Go Fastly is a Golang API client for interacting with most facets of the
 [Fastly API](https://docs.fastly.com/api).
@@ -16,16 +16,8 @@ so you must be running Go 1.11 or higher.
 
 ## Usage
 
-Fetch the library:
-
-```
-$ go get github.com/fastly/go-fastly/fastly
-```
-
-Import the library into your tool:
-
 ```go
-import "github.com/fastly/go-fastly/fastly"
+import "github.com/fastly/go-fastly/v2/fastly"
 ```
 
 ## Migrating from v1 to v2
@@ -99,9 +91,9 @@ fmt.Println(domain.Name)
 backend, err := client.CreateBackend(&fastly.CreateBackendInput{
   ServiceID:      serviceID,
   ServiceVersion: version.Number,
-  Name:           fastly.String("example-backend"),
-  Address:        fastly.String("127.0.0.1"),
-  Port:           fastly.Uint(80),
+  Name:           "example-backend",
+  Address:        "127.0.0.1",
+  Port:           80,
 })
 if err != nil {
   log.Fatal(err)
