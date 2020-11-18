@@ -16,16 +16,8 @@ so you must be running Go 1.11 or higher.
 
 ## Usage
 
-Fetch the library:
-
-```
-$ go get github.com/fastly/go-fastly/fastly/v2
-```
-
-Import the library into your tool:
-
 ```go
-import "github.com/fastly/go-fastly/fastly/v2"
+import "github.com/fastly/go-fastly/v2/fastly"
 ```
 
 ## Migrating from v1 to v2
