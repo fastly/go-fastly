@@ -9,8 +9,8 @@ import (
 
 // ResponseObject represents a response object response from the Fastly API.
 type ResponseObject struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name             string     `mapstructure:"name"`
 	Status           uint       `mapstructure:"status"`
@@ -37,25 +37,25 @@ func (s responseObjectsByName) Less(i, j int) bool {
 // ListResponseObjectsInput is used as input to the ListResponseObjects
 // function.
 type ListResponseObjectsInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListResponseObjects returns the list of response objects for the
 // configuration version.
 func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseObject, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/response_object", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/response_object", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -72,10 +72,11 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 // CreateResponseObjectInput is used as input to the CreateResponseObject
 // function.
 type CreateResponseObjectInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name             string `form:"name,omitempty"`
 	Status           uint   `form:"status,omitempty"`
@@ -88,15 +89,15 @@ type CreateResponseObjectInput struct {
 
 // CreateResponseObject creates a new Fastly response object.
 func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseObject, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/response_object", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/response_object", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -111,10 +112,11 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 
 // GetResponseObjectInput is used as input to the GetResponseObject function.
 type GetResponseObjectInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the response object to fetch.
 	Name string
@@ -123,19 +125,19 @@ type GetResponseObjectInput struct {
 // GetResponseObject gets the response object configuration with the given
 // parameters.
 func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -151,38 +153,39 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 // UpdateResponseObjectInput is used as input to the UpdateResponseObject
 // function.
 type UpdateResponseObjectInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the response object to update.
 	Name string
 
-	NewName          string `form:"name,omitempty"`
-	Status           uint   `form:"status,omitempty"`
-	Response         string `form:"response,omitempty"`
-	Content          string `form:"content,omitempty"`
-	ContentType      string `form:"content_type,omitempty"`
-	RequestCondition string `form:"request_condition,omitempty"`
-	CacheCondition   string `form:"cache_condition,omitempty"`
+	NewName          *string `form:"name,omitempty"`
+	Status           *uint   `form:"status,omitempty"`
+	Response         *string `form:"response,omitempty"`
+	Content          *string `form:"content,omitempty"`
+	ContentType      *string `form:"content_type,omitempty"`
+	RequestCondition *string `form:"request_condition,omitempty"`
+	CacheCondition   *string `form:"cache_condition,omitempty"`
 }
 
 // UpdateResponseObject updates a specific response object.
 func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseObject, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -197,10 +200,11 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 
 // DeleteResponseObjectInput is the input parameter to DeleteResponseObject.
 type DeleteResponseObjectInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the response object to delete (required).
 	Name string
@@ -208,19 +212,19 @@ type DeleteResponseObjectInput struct {
 
 // DeleteResponseObject deletes the given response object version.
 func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

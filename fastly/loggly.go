@@ -9,8 +9,8 @@ import (
 
 // Loggly represents a loggly response from the Fastly API.
 type Loggly struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Token             string     `mapstructure:"token"`
@@ -35,24 +35,24 @@ func (s logglyByName) Less(i, j int) bool {
 
 // ListLogglyInput is used as input to the ListLoggly function.
 type ListLogglyInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListLoggly returns the list of loggly for the configuration version.
 func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -68,30 +68,31 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 
 // CreateLogglyInput is used as input to the CreateLoggly function.
 type CreateLogglyInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	Name              *string `form:"name,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	Name              string `form:"name,omitempty"`
+	Token             string `form:"token,omitempty"`
+	Format            string `form:"format,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	Placement         string `form:"placement,omitempty"`
 }
 
 // CreateLoggly creates a new Fastly loggly.
 func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -106,10 +107,11 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 
 // GetLogglyInput is used as input to the GetLoggly function.
 type GetLogglyInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the loggly to fetch.
 	Name string
@@ -117,19 +119,19 @@ type GetLogglyInput struct {
 
 // GetLoggly gets the loggly configuration with the given parameters.
 func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -144,10 +146,11 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 
 // UpdateLogglyInput is used as input to the UpdateLoggly function.
 type UpdateLogglyInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the loggly to update.
 	Name string
@@ -162,19 +165,19 @@ type UpdateLogglyInput struct {
 
 // UpdateLoggly updates a specific loggly.
 func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -189,10 +192,11 @@ func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 
 // DeleteLogglyInput is the input parameter to DeleteLoggly.
 type DeleteLogglyInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the loggly to delete (required).
 	Name string
@@ -200,19 +204,19 @@ type DeleteLogglyInput struct {
 
 // DeleteLoggly deletes the given loggly version.
 func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

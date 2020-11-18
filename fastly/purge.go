@@ -46,8 +46,8 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 
 // PurgeKeyInput is used as input to the Purge function.
 type PurgeKeyInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
 	// Key is the key to purge (required).
 	Key string
@@ -58,15 +58,15 @@ type PurgeKeyInput struct {
 
 // PurgeKey instantly purges a particular service of items tagged with a key.
 func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	if i.Key == "" {
 		return nil, ErrMissingKey
 	}
 
-	path := fmt.Sprintf("/service/%s/purge/%s", i.Service, i.Key)
+	path := fmt.Sprintf("/service/%s/purge/%s", i.ServiceID, i.Key)
 
 	ro := new(RequestOptions)
 	ro.Parallel = true
@@ -93,8 +93,8 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 // PurgeAllInput is used as input to the Purge function.
 type PurgeAllInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
 	// Soft performs a soft purge.
 	Soft bool
@@ -102,11 +102,11 @@ type PurgeAllInput struct {
 
 // PurgeAll instantly purges everything from a service.
 func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/purge_all", i.Service)
+	path := fmt.Sprintf("/service/%s/purge_all", i.ServiceID)
 	req, err := c.RawRequest("POST", path, nil)
 	if err != nil {
 		return nil, err

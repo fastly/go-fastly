@@ -20,9 +20,9 @@ func TestClient_Diff(t *testing.T) {
 	var d *Diff
 	record(t, "diff/get", func(c *Client) {
 		d, err = c.GetDiff(&GetDiffInput{
-			Service: testServiceID,
-			From:    tv1.Number,
-			To:      tv2.Number,
+			ServiceID: testServiceID,
+			From:      tv1.Number,
+			To:        tv2.Number,
 		})
 	})
 	if err != nil {
@@ -32,10 +32,10 @@ func TestClient_Diff(t *testing.T) {
 	// Create a diff
 	record(t, "diff/create_backend", func(c *Client) {
 		_, err = c.CreateBackend(&CreateBackendInput{
-			Service: testServiceID,
-			Version: tv2.Number,
-			Name:    "test-backend",
-			Address: "integ-test.go-fastly.com",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv2.Number,
+			Name:           "test-backend",
+			Address:        "integ-test.go-fastly.com",
 		})
 	})
 	if err != nil {
@@ -46,9 +46,9 @@ func TestClient_Diff(t *testing.T) {
 	defer func() {
 		record(t, "diff/cleanup", func(c *Client) {
 			c.DeleteBackend(&DeleteBackendInput{
-				Service: testServiceID,
-				Version: tv2.Number,
-				Name:    "test-backend",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv2.Number,
+				Name:           "test-backend",
 			})
 		})
 	}()
@@ -56,9 +56,9 @@ func TestClient_Diff(t *testing.T) {
 	// Diff should mot be empty
 	record(t, "diff/get_again", func(c *Client) {
 		d, err = c.GetDiff(&GetDiffInput{
-			Service: testServiceID,
-			From:    tv1.Number,
-			To:      tv2.Number,
+			ServiceID: testServiceID,
+			From:      tv1.Number,
+			To:        tv2.Number,
 		})
 	})
 	if err != nil {
@@ -72,24 +72,24 @@ func TestClient_Diff(t *testing.T) {
 func TestClient_Diff_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetDiff(&GetDiffInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDiff(&GetDiffInput{
-		Service: "foo",
-		From:    0,
+		ServiceID: "foo",
+		From:      0,
 	})
 	if err != ErrMissingFrom {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDiff(&GetDiffInput{
-		Service: "foo",
-		From:    1,
-		To:      0,
+		ServiceID: "foo",
+		From:      1,
+		To:        0,
 	})
 	if err != ErrMissingTo {
 		t.Errorf("bad error: %s", err)

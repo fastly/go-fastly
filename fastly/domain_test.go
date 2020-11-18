@@ -15,10 +15,10 @@ func TestClient_Domains(t *testing.T) {
 	var d *Domain
 	record(t, "domains/create", func(c *Client) {
 		d, err = c.CreateDomain(&CreateDomainInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "integ-test.go-fastly.com",
-			Comment: "comment",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "integ-test.go-fastly.com",
+			Comment:        "comment",
 		})
 	})
 	if err != nil {
@@ -29,15 +29,15 @@ func TestClient_Domains(t *testing.T) {
 	defer func() {
 		record(t, "domains/cleanup", func(c *Client) {
 			c.DeleteDomain(&DeleteDomainInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "integ-test.go-fastly.com",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "integ-test.go-fastly.com",
 			})
 
 			c.DeleteDomain(&DeleteDomainInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-integ-test.go-fastly.com",
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "new-integ-test.go-fastly.com",
 			})
 		})
 	}()
@@ -53,8 +53,8 @@ func TestClient_Domains(t *testing.T) {
 	var ds []*Domain
 	record(t, "domains/list", func(c *Client) {
 		ds, err = c.ListDomains(&ListDomainsInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
 		})
 	})
 	if err != nil {
@@ -68,9 +68,9 @@ func TestClient_Domains(t *testing.T) {
 	var nd *Domain
 	record(t, "domains/get", func(c *Client) {
 		nd, err = c.GetDomain(&GetDomainInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "integ-test.go-fastly.com",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "integ-test.go-fastly.com",
 		})
 	})
 	if err != nil {
@@ -87,10 +87,10 @@ func TestClient_Domains(t *testing.T) {
 	var ud *Domain
 	record(t, "domains/update", func(c *Client) {
 		ud, err = c.UpdateDomain(&UpdateDomainInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "integ-test.go-fastly.com",
-			NewName: "new-integ-test.go-fastly.com",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "integ-test.go-fastly.com",
+			NewName:        "new-integ-test.go-fastly.com",
 		})
 	})
 	if err != nil {
@@ -103,9 +103,9 @@ func TestClient_Domains(t *testing.T) {
 	// Delete
 	record(t, "domains/delete", func(c *Client) {
 		err = c.DeleteDomain(&DeleteDomainInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-integ-test.go-fastly.com",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-integ-test.go-fastly.com",
 		})
 	})
 	if err != nil {
@@ -116,17 +116,17 @@ func TestClient_Domains(t *testing.T) {
 func TestClient_ListDomains_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListDomains(&ListDomainsInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListDomains(&ListDomainsInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -134,17 +134,17 @@ func TestClient_ListDomains_validation(t *testing.T) {
 func TestClient_CreateDomain_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateDomain(&CreateDomainInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateDomain(&CreateDomainInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -152,24 +152,24 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 func TestClient_GetDomain_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetDomain(&GetDomainInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDomain(&GetDomainInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDomain(&GetDomainInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -179,24 +179,24 @@ func TestClient_GetDomain_validation(t *testing.T) {
 func TestClient_UpdateDomain_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -206,24 +206,24 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 func TestClient_DeleteDomain_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteDomain(&DeleteDomainInput{
-		Service: "",
+		ServiceID: "",
 	})
-	if err != ErrMissingService {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteDomain(&DeleteDomainInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
-	if err != ErrMissingVersion {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteDomain(&DeleteDomainInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

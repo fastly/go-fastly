@@ -9,8 +9,8 @@ import (
 
 // HTTPS represents an HTTPS Logging response from the Fastly API.
 type HTTPS struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	ResponseCondition string     `mapstructure:"response_condition"`
@@ -47,24 +47,24 @@ func (s httpsByName) Less(i, j int) bool {
 
 // ListHTTPSInput is used as input to the ListHTTPS function.
 type ListHTTPSInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListHTTPS returns the list of HTTPS logs for the configuration version.
 func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/https", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/https", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -80,10 +80,11 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 
 // CreateHTTPSInput is used as input to the CreateHTTPS function.
 type CreateHTTPSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name              string `form:"name,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
@@ -107,15 +108,15 @@ type CreateHTTPSInput struct {
 
 // CreateHTTPS creates a new Fastly HTTPS logging endpoint.
 func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/https", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/https", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -130,29 +131,30 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 
 // GetHTTPSInput is used as input to the GetHTTPS function.
 type GetHTTPSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the HTTPS endpoint to fetch.
 	Name string
 }
 
 func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -167,48 +169,49 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 }
 
 type UpdateHTTPSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the HTTPS endpoint to fetch.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Format            string `form:"format,omitempty"`
-	URL               string `form:"url,omitempty"`
-	RequestMaxEntries uint   `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint   `form:"request_max_bytes,omitempty"`
-	ContentType       string `form:"content_type,omitempty"`
-	HeaderName        string `form:"header_name,omitempty"`
-	HeaderValue       string `form:"header_value,omitempty"`
-	Method            string `form:"method,omitempty"`
-	JSONFormat        string `form:"json_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	TLSCACert         string `form:"tls_ca_cert,omitempty"`
-	TLSClientCert     string `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string `form:"tls_client_key,omitempty"`
-	TLSHostname       string `form:"tls_hostname,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	URL               *string `form:"url,omitempty"`
+	RequestMaxEntries *uint   `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   *uint   `form:"request_max_bytes,omitempty"`
+	ContentType       *string `form:"content_type,omitempty"`
+	HeaderName        *string `form:"header_name,omitempty"`
+	HeaderValue       *string `form:"header_value,omitempty"`
+	Method            *string `form:"method,omitempty"`
+	JSONFormat        *string `form:"json_format,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
+	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
+	TLSClientCert     *string `form:"tls_client_cert,omitempty"`
+	TLSClientKey      *string `form:"tls_client_key,omitempty"`
+	TLSHostname       *string `form:"tls_hostname,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
 }
 
 func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -222,29 +225,30 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 }
 
 type DeleteHTTPSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the HTTPS endpoint to fetch.
 	Name string
 }
 
 func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

@@ -135,8 +135,8 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 type UpdateUserInput struct {
 	ID string `form:"-"`
 
-	Name string `form:"name,omitempty"`
-	Role string `form:"role,omitempty"`
+	Name *string `form:"name,omitempty"`
+	Role *string `form:"role,omitempty"`
 }
 
 // UpdateUser updates the user with the given input.

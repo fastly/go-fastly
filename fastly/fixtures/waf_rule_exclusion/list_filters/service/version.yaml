@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: Service=3lYLhAbTXOxJ79lUeCK97B
+    form:
+      Service:
+      - 3lYLhAbTXOxJ79lUeCK97B
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
+    url: https://api.fastly.com/service/3lYLhAbTXOxJ79lUeCK97B/version
+    method: POST
+  response:
+    body: '{"service_id":"3lYLhAbTXOxJ79lUeCK97B","number":2}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 09 Oct 2020 09:28:40 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4935"
+      Fastly-Ratelimit-Reset:
+      - "1602237600"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4257-LON
+      X-Timer:
+      - S1602235721.728296,VS0,VE224
+    status: 200 OK
+    code: 200
+    duration: ""

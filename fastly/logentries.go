@@ -9,8 +9,8 @@ import (
 
 // Logentries represents a logentries response from the Fastly API.
 type Logentries struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Port              uint       `mapstructure:"port"`
@@ -37,24 +37,24 @@ func (s logentriesByName) Less(i, j int) bool {
 
 // ListLogentriesInput is used as input to the ListLogentries function.
 type ListLogentriesInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListLogentries returns the list of logentries for the configuration version.
 func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -70,32 +70,33 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 
 // CreateLogentriesInput is used as input to the CreateLogentries function.
 type CreateLogentriesInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	Name              string       `form:"name,omitempty"`
-	Port              uint         `form:"port,omitempty"`
-	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	Token             string       `form:"token,omitempty"`
-	Format            string       `form:"format,omitempty"`
-	FormatVersion     uint         `form:"format_version,omitempty"`
-	ResponseCondition string       `form:"response_condition,omitempty"`
-	Placement         string       `form:"placement,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	Name              string      `form:"name,omitempty"`
+	Port              uint        `form:"port,omitempty"`
+	UseTLS            Compatibool `form:"use_tls,omitempty"`
+	Token             string      `form:"token,omitempty"`
+	Format            string      `form:"format,omitempty"`
+	FormatVersion     uint        `form:"format_version,omitempty"`
+	ResponseCondition string      `form:"response_condition,omitempty"`
+	Placement         string      `form:"placement,omitempty"`
 }
 
 // CreateLogentries creates a new Fastly logentries.
 func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -110,10 +111,11 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 
 // GetLogentriesInput is used as input to the GetLogentries function.
 type GetLogentriesInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the logentries to fetch.
 	Name string
@@ -121,19 +123,19 @@ type GetLogentriesInput struct {
 
 // GetLogentries gets the logentries configuration with the given parameters.
 func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -148,39 +150,40 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 
 // UpdateLogentriesInput is used as input to the UpdateLogentries function.
 type UpdateLogentriesInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the logentries to update.
 	Name string
 
-	NewName           string       `form:"name,omitempty"`
-	Port              uint         `form:"port,omitempty"`
+	NewName           *string      `form:"name,omitempty"`
+	Port              *uint        `form:"port,omitempty"`
 	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	Token             string       `form:"token,omitempty"`
-	Format            string       `form:"format,omitempty"`
-	FormatVersion     uint         `form:"format_version,omitempty"`
-	ResponseCondition string       `form:"response_condition,omitempty"`
-	Placement         string       `form:"placement,omitempty"`
+	Token             *string      `form:"token,omitempty"`
+	Format            *string      `form:"format,omitempty"`
+	FormatVersion     *uint        `form:"format_version,omitempty"`
+	ResponseCondition *string      `form:"response_condition,omitempty"`
+	Placement         *string      `form:"placement,omitempty"`
 }
 
 // UpdateLogentries updates a specific logentries.
 func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -195,10 +198,11 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 
 // DeleteLogentriesInput is the input parameter to DeleteLogentries.
 type DeleteLogentriesInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the logentries to delete (required).
 	Name string
@@ -206,19 +210,19 @@ type DeleteLogentriesInput struct {
 
 // DeleteLogentries deletes the given logentries version.
 func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

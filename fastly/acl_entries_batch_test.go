@@ -20,22 +20,22 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
-		Service: testService.ID,
-		ACL:     testACL.ID,
+		ServiceID: testService.ID,
+		ACLID:     testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: CreateBatchOperation,
-				IP:        "127.0.0.1",
-				Subnet:    "24",
-				Negated:   false,
-				Comment:   "ACL Entry 1",
+				IP:        String("127.0.0.1"),
+				Subnet:    String("24"),
+				Negated:   Bool(false),
+				Comment:   String("ACL Entry 1"),
 			},
 			{
 				Operation: CreateBatchOperation,
-				IP:        "192.168.0.1",
-				Subnet:    "24",
-				Negated:   false,
-				Comment:   "ACL Entry 2",
+				IP:        String("192.168.0.1"),
+				Subnet:    String("24"),
+				Negated:   Bool(false),
+				Comment:   String("ACL Entry 2"),
 			},
 		},
 	}
@@ -54,8 +54,8 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 	var actualACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualACLEntries, err = c.ListACLEntries(&ListACLEntriesInput{
-			Service: testService.ID,
-			ACL:     testACL.ID,
+			ServiceID: testService.ID,
+			ACLID:     testACL.ID,
 		})
 	})
 	if err != nil {
@@ -77,29 +77,29 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 		actualIp := entry.IP
 		expectedIp := batchCreateOperations.Entries[i].IP
 
-		if actualIp != expectedIp {
-			t.Errorf("IP did not match, expected %s, got %s", expectedIp, actualIp)
+		if actualIp != *expectedIp {
+			t.Errorf("IP did not match, expected %v, got %v", expectedIp, actualIp)
 		}
 
 		actualSubnet := entry.Subnet
 		expectedSubnet := batchCreateOperations.Entries[i].Subnet
 
-		if actualSubnet != expectedSubnet {
-			t.Errorf("Subnet did not match, expected %s, got %s", expectedSubnet, actualSubnet)
+		if actualSubnet != *expectedSubnet {
+			t.Errorf("Subnet did not match, expected %v, got %v", expectedSubnet, actualSubnet)
 		}
 
 		actualNegated := entry.Negated
 		expectedNegated := batchCreateOperations.Entries[i].Negated
 
-		if actualNegated != expectedNegated {
-			t.Errorf("Negated did not match, expected %t, got %t", expectedNegated, actualNegated)
+		if actualNegated != *expectedNegated {
+			t.Errorf("Negated did not match, expected %v, got %v", expectedNegated, actualNegated)
 		}
 
 		actualComment := entry.Comment
 		expectedComment := batchCreateOperations.Entries[i].Comment
 
-		if actualComment != expectedComment {
-			t.Errorf("Comment did not match, expected %s, got %s", expectedComment, actualComment)
+		if actualComment != *expectedComment {
+			t.Errorf("Comment did not match, expected %v, got %v", expectedComment, actualComment)
 		}
 	}
 
@@ -120,22 +120,22 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
-		Service: testService.ID,
-		ACL:     testACL.ID,
+		ServiceID: testService.ID,
+		ACLID:     testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: CreateBatchOperation,
-				IP:        "127.0.0.1",
-				Subnet:    "24",
-				Negated:   false,
-				Comment:   "ACL Entry 1",
+				IP:        String("127.0.0.1"),
+				Subnet:    String("24"),
+				Negated:   Bool(false),
+				Comment:   String("ACL Entry 1"),
 			},
 			{
 				Operation: CreateBatchOperation,
-				IP:        "192.168.0.1",
-				Subnet:    "24",
-				Negated:   false,
-				Comment:   "ACL Entry 2",
+				IP:        String("192.168.0.1"),
+				Subnet:    String("24"),
+				Negated:   Bool(false),
+				Comment:   String("ACL Entry 2"),
 			},
 		},
 	}
@@ -152,8 +152,8 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 	var createdACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_before_delete", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			Service: testService.ID,
-			ACL:     testACL.ID,
+			ServiceID: testService.ID,
+			ACLID:     testACL.ID,
 		})
 	})
 	if err != nil {
@@ -166,12 +166,12 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 
 	// When: I execute the batch delete operations against the Fastly API,
 	batchDeleteOperations := &BatchModifyACLEntriesInput{
-		Service: testService.ID,
-		ACL:     testACL.ID,
+		ServiceID: testService.ID,
+		ACLID:     testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: DeleteBatchOperation,
-				ID:        createdACLEntries[0].ID,
+				ID:        String(createdACLEntries[0].ID),
 			},
 		},
 	}
@@ -188,8 +188,8 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 	var actualACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			Service: testService.ID,
-			ACL:     testACL.ID,
+			ServiceID: testService.ID,
+			ACLID:     testACL.ID,
 		})
 	})
 	if err != nil {
@@ -222,22 +222,22 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
-		Service: testService.ID,
-		ACL:     testACL.ID,
+		ServiceID: testService.ID,
+		ACLID:     testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: CreateBatchOperation,
-				IP:        "127.0.0.1",
-				Subnet:    "24",
-				Negated:   false,
-				Comment:   "ACL Entry 1",
+				IP:        String("127.0.0.1"),
+				Subnet:    String("24"),
+				Negated:   Bool(false),
+				Comment:   String("ACL Entry 1"),
 			},
 			{
 				Operation: CreateBatchOperation,
-				IP:        "192.168.0.1",
-				Subnet:    "24",
-				Negated:   false,
-				Comment:   "ACL Entry 2",
+				IP:        String("192.168.0.1"),
+				Subnet:    String("24"),
+				Negated:   Bool(false),
+				Comment:   String("ACL Entry 2"),
 			},
 		},
 	}
@@ -254,8 +254,8 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	var createdACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_before_update", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			Service: testService.ID,
-			ACL:     testACL.ID,
+			ServiceID: testService.ID,
+			ACLID:     testACL.ID,
 		})
 	})
 	if err != nil {
@@ -268,16 +268,16 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 
 	// When: I execute the batch update operations against the Fastly API,
 	batchUpdateOperations := &BatchModifyACLEntriesInput{
-		Service: testService.ID,
-		ACL:     testACL.ID,
+		ServiceID: testService.ID,
+		ACLID:     testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: UpdateBatchOperation,
-				ID:        createdACLEntries[0].ID,
-				IP:        "127.0.0.2",
-				Subnet:    "16",
-				Negated:   true,
-				Comment:   "Updated ACL Entry 1",
+				ID:        String(createdACLEntries[0].ID),
+				IP:        String("127.0.0.2"),
+				Subnet:    String("16"),
+				Negated:   Bool(true),
+				Comment:   String("Updated ACL Entry 1"),
 			},
 		},
 	}
@@ -294,8 +294,8 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	var actualACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_after_update", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			Service: testService.ID,
-			ACL:     testACL.ID,
+			ServiceID: testService.ID,
+			ACLID:     testACL.ID,
 		})
 	})
 	if err != nil {
@@ -315,36 +315,36 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	actualID := actualACLEntries[0].ID
 	expectedID := batchUpdateOperations.Entries[0].ID
 
-	if actualID != expectedID {
-		t.Errorf("First ID did not match, expected %s, got %s", expectedID, actualID)
+	if actualID != *expectedID {
+		t.Errorf("First ID did not match, expected %v, got %v", expectedID, actualID)
 	}
 
 	actualIP := actualACLEntries[0].IP
 	expectedIP := batchUpdateOperations.Entries[0].IP
 
-	if actualIP != expectedIP {
-		t.Errorf("First IP did not match, expected %s, got %s", expectedIP, actualIP)
+	if actualIP != *expectedIP {
+		t.Errorf("First IP did not match, expected %v, got %v", expectedIP, actualIP)
 	}
 
 	actualSubnet := actualACLEntries[0].Subnet
 	expectedSubnet := batchUpdateOperations.Entries[0].Subnet
 
-	if actualSubnet != expectedSubnet {
-		t.Errorf("First Subnet did not match, expected %s, got %s", expectedSubnet, actualSubnet)
+	if actualSubnet != *expectedSubnet {
+		t.Errorf("First Subnet did not match, expected %v, got %v", expectedSubnet, actualSubnet)
 	}
 
 	actualNegated := actualACLEntries[0].Negated
 	expectedNegated := batchUpdateOperations.Entries[0].Negated
 
-	if actualNegated != expectedNegated {
-		t.Errorf("First Subnet did not match, expected %t, got %t", expectedNegated, actualNegated)
+	if actualNegated != *expectedNegated {
+		t.Errorf("First Subnet did not match, expected %v, got %v", expectedNegated, actualNegated)
 	}
 
 	actualComment := actualACLEntries[0].Comment
 	expectedComment := batchUpdateOperations.Entries[0].Comment
 
-	if actualComment != expectedComment {
-		t.Errorf("First Comment did not match, expected %s, got %s", expectedComment, actualComment)
+	if actualComment != *expectedComment {
+		t.Errorf("First Comment did not match, expected %v, got %v", expectedComment, actualComment)
 	}
 
 }

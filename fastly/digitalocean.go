@@ -9,8 +9,8 @@ import (
 
 // DigitalOcean represents a DigitalOcean response from the Fastly API.
 type DigitalOcean struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	BucketName        string     `mapstructure:"bucket_name"`
@@ -44,24 +44,24 @@ func (d digitaloceansByName) Less(i, j int) bool {
 
 // ListDigitalOceansInput is used as input to the ListDigitalOceans function.
 type ListDigitalOceansInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListDigitalOceans returns the list of DigitalOceans for the configuration version.
 func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -77,39 +77,40 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 
 // CreateDigitalOceanInput is used as input to the CreateDigitalOcean function.
 type CreateDigitalOceanInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	Name              *string `form:"name,omitempty"`
-	BucketName        *string `form:"bucket_name,omitempty"`
-	Domain            *string `form:"domain,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	Name              string `form:"name,omitempty"`
+	BucketName        string `form:"bucket_name,omitempty"`
+	Domain            string `form:"domain,omitempty"`
+	AccessKey         string `form:"access_key,omitempty"`
+	SecretKey         string `form:"secret_key,omitempty"`
+	Path              string `form:"path,omitempty"`
+	Period            uint   `form:"period,omitempty"`
+	GzipLevel         uint   `form:"gzip_level,omitempty"`
+	Format            string `form:"format,omitempty"`
+	MessageType       string `form:"message_type,omitempty"`
+	FormatVersion     uint   `form:"format_version,omitempty"`
+	ResponseCondition string `form:"response_condition,omitempty"`
+	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	Placement         string `form:"placement,omitempty"`
+	PublicKey         string `form:"public_key,omitempty"`
 }
 
 // CreateDigitalOcean creates a new Fastly DigitalOcean.
 func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -124,10 +125,11 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 
 // GetDigitalOceanInput is used as input to the GetDigitalOcean function.
 type GetDigitalOceanInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the DigitalOcean to fetch.
 	Name string
@@ -135,19 +137,19 @@ type GetDigitalOceanInput struct {
 
 // GetDigitalOcean gets the DigitalOcean configuration with the given parameters.
 func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -162,10 +164,11 @@ func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error)
 
 // UpdateDigitalOceanInput is used as input to the UpdateDigitalOcean function.
 type UpdateDigitalOceanInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the DigitalOcean to update.
 	Name string
@@ -189,19 +192,19 @@ type UpdateDigitalOceanInput struct {
 
 // UpdateDigitalOcean updates a specific DigitalOcean.
 func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -216,10 +219,11 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 
 // DeleteDigitalOceanInput is the input parameter to DeleteDigitalOcean.
 type DeleteDigitalOceanInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the DigitalOcean to delete (required).
 	Name string
@@ -227,19 +231,19 @@ type DeleteDigitalOceanInput struct {
 
 // DeleteDigitalOcean deletes the given DigitalOcean version.
 func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/digitalocean/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

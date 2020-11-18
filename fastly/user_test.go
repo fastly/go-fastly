@@ -89,8 +89,8 @@ func TestClient_Users(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		uu, err = c.UpdateUser(&UpdateUserInput{
 			ID:   u.ID,
-			Name: "updated user",
-			Role: "superuser",
+			Name: String("updated user"),
+			Role: String("superuser"),
 		})
 	})
 	if err != nil {

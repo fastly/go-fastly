@@ -22,8 +22,8 @@ type GetDictionaryInfoInput struct {
 	// ServiceID is the ID of the service Dictionary belongs to (required).
 	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// ID is the alphanumeric string identifying a dictionary.
 	ID string
@@ -32,18 +32,18 @@ type GetDictionaryInfoInput struct {
 // GetDictionaryInfo gets the dictionary metadata with the given parameters.
 func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingService
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s/info", i.ServiceID, i.Version, i.ID)
+	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s/info", i.ServiceID, i.ServiceVersion, i.ID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

@@ -36,24 +36,24 @@ func (s serversByAddress) Less(i, j int) bool {
 
 // ListServersInput is used as input to the ListServers function.
 type ListServersInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Pool is the ID of the pool (required).
-	Pool string
+	// PoolID is the ID of the pool (required).
+	PoolID string
 }
 
 // ListServers lists all servers for a particular service and pool.
 func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Pool == "" {
+	if i.PoolID == "" {
 		return nil, ErrMissingPool
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/servers", i.Service, i.Pool)
+	path := fmt.Sprintf("/service/%s/pool/%s/servers", i.ServiceID, i.PoolID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -69,31 +69,32 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 
 // CreateServerInput is used as input to the CreateServer function.
 type CreateServerInput struct {
-	// Service is the ID of the service. Pool is the ID of the pool. Both
-	// fields are required.
-	Service string
-	Pool    string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// PoolID is the ID of the pool (required).
+	PoolID string
 
 	// Address is the hostname or IP of the origin server (required).
 	Address string `form:"address"`
 
 	// Optional fields.
-	Comment      *string `form:"comment,omitempty"`
-	Weight       *uint   `form:"weight,omitempty"`
-	MaxConn      *uint   `form:"max_conn,omitempty"`
-	Port         *uint   `form:"port,omitempty"`
-	Disabled     *bool   `form:"disabled,omitempty"`
-	OverrideHost *string `form:"override_host,omitempty"`
+	Comment      string `form:"comment,omitempty"`
+	Weight       uint   `form:"weight,omitempty"`
+	MaxConn      uint   `form:"max_conn,omitempty"`
+	Port         uint   `form:"port,omitempty"`
+	Disabled     bool   `form:"disabled,omitempty"`
+	OverrideHost string `form:"override_host,omitempty"`
 }
 
 // CreateServer creates a single server for a particular service and pool.
 // Servers are versionless resources that are associated with a Pool.
 func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Pool == "" {
+	if i.PoolID == "" {
 		return nil, ErrMissingPool
 	}
 
@@ -101,7 +102,7 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 		return nil, ErrMissingAddress
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server", i.Service, i.Pool)
+	path := fmt.Sprintf("/service/%s/pool/%s/server", i.ServiceID, i.PoolID)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -116,20 +117,22 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 
 // GetServerInput is used as input to the GetServer function.
 type GetServerInput struct {
-	// Service is the ID of the service. Pool is the ID of the pool. Server is
-	// the ID of the server in the Pool. These are required fields.
-	Service string
-	Pool    string
-	Server  string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// PoolID is the ID of the pool (required).
+	PoolID string
+
+	Server string
 }
 
 // GetServer gets a single server for a particular service and pool.
 func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Pool == "" {
+	if i.PoolID == "" {
 		return nil, ErrMissingPool
 	}
 
@@ -137,7 +140,7 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 		return nil, ErrMissingServer
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.Service, i.Pool, i.Server)
+	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -152,11 +155,13 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 
 // UpdateServerInput is used as input to the UpdateServer function.
 type UpdateServerInput struct {
-	// Service is the ID of the service. Pool is the ID of the pool. Server is
-	// the ID of the server in the Pool. These are required fields.
-	Service string
-	Pool    string
-	Server  string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// PoolID is the ID of the pool (required).
+	PoolID string
+
+	Server string
 
 	// Optional fields.
 	Address      *string `form:"address,omitempty"`
@@ -170,11 +175,11 @@ type UpdateServerInput struct {
 
 // UpdateServer updates a single server for a particular service and pool.
 func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Pool == "" {
+	if i.PoolID == "" {
 		return nil, ErrMissingPool
 	}
 
@@ -182,7 +187,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 		return nil, ErrMissingServer
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.Service, i.Pool, i.Server)
+	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -197,20 +202,22 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 
 // DeleteServerInput is used as input to the DeleteServer function.
 type DeleteServerInput struct {
-	// Service is the ID of the service. Pool is the ID of the pool. Server is
-	// the ID of the server in the Pool. These are required fields.
-	Service string
-	Pool    string
-	Server  string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// PoolID is the ID of the pool (required).
+	PoolID string
+
+	Server string
 }
 
 // DeleteServer deletes a single server for a particular service and pool.
 func (c *Client) DeleteServer(i *DeleteServerInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Pool == "" {
+	if i.PoolID == "" {
 		return ErrMissingPool
 	}
 
@@ -218,7 +225,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 		return ErrMissingServer
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.Service, i.Pool, i.Server)
+	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

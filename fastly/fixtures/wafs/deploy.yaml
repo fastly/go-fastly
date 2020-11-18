@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":{"type":""}}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/waf/firewalls/1bibBdxQkJYmZsQtR3EmmH/versions/1/activate
+    method: PUT
+  response:
+    body: '{}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Content-Length:
+      - "2"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Thu, 02 Jul 2020 20:19:39 GMT
+      Status:
+      - 202 Accepted
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19250-LCY
+      X-Timer:
+      - S1593721179.458398,VS0,VE144
+    status: 202 Accepted
+    code: 202
+    duration: ""

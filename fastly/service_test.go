@@ -123,7 +123,7 @@ func TestClient_Services(t *testing.T) {
 	record(t, "services/update", func(c *Client) {
 		us, err = c.UpdateService(&UpdateServiceInput{
 			ID:   s.ID,
-			Name: "new-test-service",
+			Name: String("new-test-service"),
 		})
 	})
 	if err != nil {

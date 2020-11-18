@@ -32,21 +32,21 @@ func (s entriesById) Less(i, j int) bool {
 
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
 type ListACLEntriesInput struct {
-	Service string
-	ACL     string
+	ServiceID string
+	ACLID     string
 }
 
 // ListACLEntries return a list of entries for an ACL
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.ACL == "" {
-		return nil, ErrMissingACL
+	if i.ACLID == "" {
+		return nil, ErrMissingACLID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.Service, i.ACL)
+	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -65,26 +65,26 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 
 // GetACLEntryInput is the input parameter to GetACLEntry function.
 type GetACLEntryInput struct {
-	Service string
-	ACL     string
-	ID      string
+	ServiceID string
+	ACLID     string
+	ID        string
 }
 
 // GetACLEntry returns a single ACL entry based on its ID.
 func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.ACL == "" {
-		return nil, ErrMissingACL
+	if i.ACLID == "" {
+		return nil, ErrMissingACLID
 	}
 
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.ACL, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -102,9 +102,9 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 // CreateACLEntryInput the input parameter to CreateACLEntry function.
 type CreateACLEntryInput struct {
 	// Required fields
-	Service string
-	ACL     string
-	IP      string `form:"ip"`
+	ServiceID string
+	ACLID     string
+	IP        string `form:"ip"`
 
 	// Optional fields
 	Subnet  string `form:"subnet,omitempty"`
@@ -114,19 +114,19 @@ type CreateACLEntryInput struct {
 
 // CreateACLEntry creates and returns a new ACL entry.
 func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.ACL == "" {
-		return nil, ErrMissingACL
+	if i.ACLID == "" {
+		return nil, ErrMissingACLID
 	}
 
 	if i.IP == "" {
 		return nil, ErrMissingIP
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.Service, i.ACL)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.ServiceID, i.ACLID)
 
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
@@ -143,26 +143,26 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 
 // DeleteACLEntryInput the input parameter to DeleteACLEntry function.
 type DeleteACLEntryInput struct {
-	Service string
-	ACL     string
-	ID      string
+	ServiceID string
+	ACLID     string
+	ID        string
 }
 
 // DeleteACLEntry deletes an entry from an ACL based on its ID
 func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.ACL == "" {
-		return ErrMissingACL
+	if i.ACLID == "" {
+		return ErrMissingACLID
 	}
 
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.ACL, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
 
 	resp, err := c.Delete(path, nil)
 	if err != nil {
@@ -185,32 +185,32 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 // UpdateACLEntryInput is the input parameter to UpdateACLEntry function.
 type UpdateACLEntryInput struct {
 	// Required fields
-	Service string
-	ACL     string
-	ID      string
+	ServiceID string
+	ACLID     string
+	ID        string
 
 	// Optional fields
-	IP      string `form:"ip,omitempty"`
-	Subnet  string `form:"subnet,omitempty"`
-	Negated bool   `form:"negated,omitempty"`
-	Comment string `form:"comment,omitempty"`
+	IP      *string `form:"ip,omitempty"`
+	Subnet  *string `form:"subnet,omitempty"`
+	Negated *bool   `form:"negated,omitempty"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // UpdateACLEntry updates an ACL entry
 func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.ACL == "" {
-		return nil, ErrMissingACL
+	if i.ACLID == "" {
+		return nil, ErrMissingACLID
 	}
 
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.Service, i.ACL, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
 
 	resp, err := c.RequestForm("PATCH", path, i, nil)
 	if err != nil {
@@ -226,36 +226,36 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 }
 
 type BatchModifyACLEntriesInput struct {
-	Service string `json:"-"`
-	ACL     string `json:"-"`
+	ServiceID string `json:"-"`
+	ACLID     string `json:"-"`
 
 	Entries []*BatchACLEntry `json:"entries"`
 }
 
 type BatchACLEntry struct {
 	Operation BatchOperation `json:"op"`
-	ID        string         `json:"id,omitempty"`
-	IP        string         `json:"ip,omitempty"`
-	Subnet    string         `json:"subnet,omitempty"`
-	Negated   bool           `json:"negated,omitempty"`
-	Comment   string         `json:"comment,omitempty"`
+	ID        *string        `json:"id,omitempty"`
+	IP        *string        `json:"ip,omitempty"`
+	Subnet    *string        `json:"subnet,omitempty"`
+	Negated   *bool          `json:"negated,omitempty"`
+	Comment   *string        `json:"comment,omitempty"`
 }
 
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.ACL == "" {
-		return ErrMissingACL
+	if i.ACLID == "" {
+		return ErrMissingACLID
 	}
 
 	if len(i.Entries) > BatchModifyMaximumOperations {
 		return ErrBatchUpdateMaximumOperationsExceeded
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.Service, i.ACL)
+	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err

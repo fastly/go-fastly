@@ -4,8 +4,8 @@ import "fmt"
 
 // Settings represents a backend response from the Fastly API.
 type Settings struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	DefaultTTL      uint   `mapstructure:"general.default_ttl"`
 	DefaultHost     string `mapstructure:"general.default_host"`
@@ -15,23 +15,24 @@ type Settings struct {
 
 // GetSettingsInput is used as input to the GetSettings function.
 type GetSettingsInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetSettings gets the backend configuration with the given parameters.
 func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/settings", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/settings", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -46,28 +47,29 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 
 // UpdateSettingsInput is used as input to the UpdateSettings function.
 type UpdateSettingsInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	DefaultTTL      uint   `form:"general.default_ttl"`
-	DefaultHost     string `form:"general.default_host,omitempty"`
-	StaleIfError    bool   `form:"general.stale_if_error,omitempty"`
-	StaleIfErrorTTL uint   `form:"general.stale_if_error_ttl,omitempty"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+
+	DefaultTTL      uint    `form:"general.default_ttl"`
+	DefaultHost     *string `form:"general.default_host,omitempty"`
+	StaleIfError    *bool   `form:"general.stale_if_error,omitempty"`
+	StaleIfErrorTTL *uint   `form:"general.stale_if_error_ttl,omitempty"`
 }
 
 // UpdateSettings updates a specific backend.
 func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/settings", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/settings", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err

@@ -9,8 +9,8 @@ import (
 
 // GCS represents an GCS logging response from the Fastly API.
 type GCS struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	Bucket            string     `mapstructure:"bucket_name"`
@@ -42,24 +42,24 @@ func (s gcsesByName) Less(i, j int) bool {
 
 // ListGCSsInput is used as input to the ListGCSs function.
 type ListGCSsInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListGCSs returns the list of gcses for the configuration version.
 func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -75,10 +75,11 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 
 // CreateGCSInput is used as input to the CreateGCS function.
 type CreateGCSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name              string `form:"name,omitempty"`
 	Bucket            string `form:"bucket_name,omitempty"`
@@ -97,15 +98,15 @@ type CreateGCSInput struct {
 
 // CreateGCS creates a new Fastly GCS.
 func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -120,10 +121,11 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 
 // GetGCSInput is used as input to the GetGCS function.
 type GetGCSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the GCS to fetch.
 	Name string
@@ -131,19 +133,19 @@ type GetGCSInput struct {
 
 // GetGCS gets the GCS configuration with the given parameters.
 func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -158,44 +160,45 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 
 // UpdateGCSInput is used as input to the UpdateGCS function.
 type UpdateGCSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the GCS to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	Bucket            string `form:"bucket_name,omitempty"`
-	User              string `form:"user,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	GzipLevel         uint8  `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	Bucket            *string `form:"bucket_name,omitempty"`
+	User              *string `form:"user,omitempty"`
+	SecretKey         *string `form:"secret_key,omitempty"`
+	Path              *string `form:"path,omitempty"`
+	Period            *uint   `form:"period,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	GzipLevel         *uint8  `form:"gzip_level,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	MessageType       *string `form:"message_type,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
 }
 
 // UpdateGCS updates a specific GCS.
 func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
-	if i.Service == "" {
-		return nil, ErrMissingService
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return nil, ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -210,10 +213,11 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 
 // DeleteGCSInput is the input parameter to DeleteGCS.
 type DeleteGCSInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the GCS to delete (required).
 	Name string
@@ -221,19 +225,19 @@ type DeleteGCSInput struct {
 
 // DeleteGCS deletes the given GCS version.
 func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
-	if i.Service == "" {
-		return ErrMissingService
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
-		return ErrMissingVersion
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
