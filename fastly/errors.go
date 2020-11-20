@@ -9,6 +9,20 @@ import (
 	"github.com/google/jsonapi"
 )
 
+// Err represents a custom error type.
+type Err struct {
+	kind string
+}
+
+func (e *Err) Error() string {
+	return fmt.Sprintf("missing required field '%s'", e.kind)
+}
+
+// NewError returns an error that formats as the given text.
+func NewError(kind string) error {
+	return &Err{kind}
+}
+
 // ErrMissingServiceID is an error that is returned when an input struct requires
 // a "ServiceID" key, but one was not set.
 var ErrMissingServiceID = errors.New("missing required field 'ServiceID'")
