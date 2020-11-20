@@ -6,17 +6,17 @@ func TestClient_Kineses(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	var tv *Version
+	var v *Version
 	record(t, "kineses/version", func(c *Client) {
-		tv = testVersion(t, c)
+		v = testVersion(t, c)
 	})
 
 	// Create
 	var kinesis *Kinesis
 	record(t, "kineses/create", func(c *Client) {
 		kinesis, err = c.CreateKinesis(&CreateKinesisInput{
-			Service:           testServiceID,
-			Version:           tv.Number,
+			ServiceID:         testServiceID,
+			ServiceVersion:    v.Number,
 			Name:              "test-kinesis",
 			StreamName:        "stream-name",
 			Region:            "us-east-1",
@@ -36,15 +36,15 @@ func TestClient_Kineses(t *testing.T) {
 	defer func() {
 		record(t, "kineses/cleanup", func(c *Client) {
 			c.DeleteKinesis(&DeleteKinesisInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "test-kinesis",
+				ServiceID:      testServiceID,
+				ServiceVersion: v.Number,
+				Name:           "test-kinesis",
 			})
 
 			c.DeleteKinesis(&DeleteKinesisInput{
-				Service: testServiceID,
-				Version: tv.Number,
-				Name:    "new-test-kinesis",
+				ServiceID:      testServiceID,
+				ServiceVersion: v.Number,
+				Name:           "new-test-kinesis",
 			})
 		})
 	}()
@@ -81,8 +81,8 @@ func TestClient_Kineses(t *testing.T) {
 	var kineses []*Kinesis
 	record(t, "kineses/list", func(c *Client) {
 		kineses, err = c.ListKineses(&ListKinesesInput{
-			Service: testServiceID,
-			Version: tv.Number,
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
 		})
 	})
 	if err != nil {
@@ -96,9 +96,9 @@ func TestClient_Kineses(t *testing.T) {
 	var nkinesis *Kinesis
 	record(t, "kineses/get", func(c *Client) {
 		nkinesis, err = c.GetKinesis(&GetKinesisInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-kinesis",
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
+			Name:           "test-kinesis",
 		})
 	})
 	if err != nil {
@@ -136,10 +136,10 @@ func TestClient_Kineses(t *testing.T) {
 	var ukinesis *Kinesis
 	record(t, "kineses/update", func(c *Client) {
 		ukinesis, err = c.UpdateKinesis(&UpdateKinesisInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "test-kinesis",
-			NewName: "new-test-kinesis",
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
+			Name:           "test-kinesis",
+			NewName:        String("new-test-kinesis"),
 		})
 	})
 	if err != nil {
@@ -152,9 +152,9 @@ func TestClient_Kineses(t *testing.T) {
 	// Delete
 	record(t, "kineses/delete", func(c *Client) {
 		err = c.DeleteKinesis(&DeleteKinesisInput{
-			Service: testServiceID,
-			Version: tv.Number,
-			Name:    "new-test-kinesis",
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
+			Name:           "new-test-kinesis",
 		})
 	})
 	if err != nil {
@@ -165,15 +165,15 @@ func TestClient_Kineses(t *testing.T) {
 func TestClient_ListKineses_validation(t *testing.T) {
 	var err error
 	_, err = testClient.ListKineses(&ListKinesesInput{
-		Service: "",
+		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ListKineses(&ListKinesesInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
@@ -183,15 +183,15 @@ func TestClient_ListKineses_validation(t *testing.T) {
 func TestClient_CreateKinesis_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateKinesis(&CreateKinesisInput{
-		Service: "",
+		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateKinesis(&CreateKinesisInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
@@ -201,24 +201,24 @@ func TestClient_CreateKinesis_validation(t *testing.T) {
 func TestClient_GetKinesis_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetKinesis(&GetKinesisInput{
-		Service: "",
+		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetKinesis(&GetKinesisInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetKinesis(&GetKinesisInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -228,24 +228,24 @@ func TestClient_GetKinesis_validation(t *testing.T) {
 func TestClient_UpdateKinesis_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
-		Service: "",
+		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
@@ -255,24 +255,24 @@ func TestClient_UpdateKinesis_validation(t *testing.T) {
 func TestClient_DeleteKinesis_validation(t *testing.T) {
 	var err error
 	err = testClient.DeleteKinesis(&DeleteKinesisInput{
-		Service: "",
+		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteKinesis(&DeleteKinesisInput{
-		Service: "foo",
-		Version: 0,
+		ServiceID:      "foo",
+		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteKinesis(&DeleteKinesisInput{
-		Service: "foo",
-		Version: 1,
-		Name:    "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)

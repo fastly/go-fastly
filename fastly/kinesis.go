@@ -9,8 +9,8 @@ import (
 
 // Kinesis represents a Kinesis response from the Fastly API.
 type Kinesis struct {
-	ServiceID string `mapstructure:"service_id"`
-	Version   int    `mapstructure:"version"`
+	ServiceID      string `mapstructure:"service_id"`
+	ServiceVersion int    `mapstructure:"version"`
 
 	Name              string     `mapstructure:"name"`
 	StreamName        string     `mapstructure:"topic"`
@@ -38,24 +38,24 @@ func (s kinesesByName) Less(i, j int) bool {
 
 // ListKinesesInput is used as input to the ListKineses function.
 type ListKinesesInput struct {
-	// Service is the ID of the service (required).
-	Service string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 
-	// Version is the specific configuration version (required).
-	Version int
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ListKineses returns the list of Kineses for the configuration version.
 func (c *Client) ListKineses(i *ListKinesesInput) ([]*Kinesis, error) {
-	if i.Service == "" {
+	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
+	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis", i.ServiceID, i.ServiceVersion)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -71,10 +71,11 @@ func (c *Client) ListKineses(i *ListKinesesInput) ([]*Kinesis, error) {
 
 // CreateKinesisInput is used as input to the CreateKinesis function.
 type CreateKinesisInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	//ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	Name              string `form:"name,omitempty"`
 	StreamName        string `form:"topic,omitempty"`
@@ -89,15 +90,15 @@ type CreateKinesisInput struct {
 
 // CreateKinesis creates a new Fastly Kinesis.
 func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
-	if i.Service == "" {
+	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
+	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis", i.Service, i.Version)
+	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -112,10 +113,11 @@ func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 
 // GetKinesisInput is used as input to the GetKinesis function.
 type GetKinesisInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	//ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Kinesis to fetch.
 	Name string
@@ -123,11 +125,11 @@ type GetKinesisInput struct {
 
 // GetKinesis gets the Kinesis configuration with the given parameters.
 func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
-	if i.Service == "" {
+	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
+	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
 
@@ -135,7 +137,7 @@ func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -150,32 +152,33 @@ func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 
 // UpdateKinesisInput is used as input to the UpdateKinesis function.
 type UpdateKinesisInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	//ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Kinesis to update.
 	Name string
 
-	NewName           string `form:"name,omitempty"`
-	StreamName        string `form:"topic,omitempty"`
-	Region            string `form:"region,omitempty"`
-	AccessKey         string `form:"access_key,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	NewName           *string `form:"name,omitempty"`
+	StreamName        *string `form:"topic,omitempty"`
+	Region            *string `form:"region,omitempty"`
+	AccessKey         *string `form:"access_key,omitempty"`
+	SecretKey         *string `form:"secret_key,omitempty"`
+	Format            *string `form:"format,omitempty"`
+	FormatVersion     *uint   `form:"format_version,omitempty"`
+	ResponseCondition *string `form:"response_condition,omitempty"`
+	Placement         *string `form:"placement,omitempty"`
 }
 
 // UpdateKinesis updates a specific Kinesis.
 func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
-	if i.Service == "" {
+	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
+	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
 
@@ -183,7 +186,7 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -198,10 +201,11 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 
 // DeleteKinesisInput is the input parameter to DeleteKinesis.
 type DeleteKinesisInput struct {
-	// Service is the ID of the service. Version is the specific configuration
-	// version. Both fields are required.
-	Service string
-	Version int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	//ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 
 	// Name is the name of the Kinesis to delete (required).
 	Name string
@@ -209,11 +213,11 @@ type DeleteKinesisInput struct {
 
 // DeleteKinesis deletes the given Kinesis version.
 func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
-	if i.Service == "" {
+	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
 
-	if i.Version == 0 {
+	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
 	}
 
@@ -221,7 +225,7 @@ func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
 		return ErrMissingName
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.Service, i.Version, url.PathEscape(i.Name))
+	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
