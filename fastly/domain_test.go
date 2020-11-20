@@ -90,7 +90,7 @@ func TestClient_Domains(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "integ-test.go-fastly.com",
-			NewName:        "new-integ-test.go-fastly.com",
+			NewName:        String("new-integ-test.go-fastly.com"),
 		})
 	})
 	if err != nil {

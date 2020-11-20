@@ -189,8 +189,15 @@ var ErrMissingTLSConfiguration = errors.New("missing required field 'Configurati
 // a "Domain" field assigned a "TLSDomain" struct, but one was not set.
 var ErrMissingTLSDomain = errors.New("missing required field 'Domain'")
 
-// ErrStatusNotOk is an error that indicates that the response body returned
-// by the Fastly API was not `{"status": "ok"}`
+// ErrMissingAtLeastOneOptionalField is an error that indicates at least one
+// optional field is required to be provided for the call to be valid.
+//
+// EXAMPLE: when updating a domain, if you don't provide either a new 'name' or
+// an updated 'comment' then the API call is unnecessary.
+var ErrMissingAtLeastOneOptionalField = errors.New("unexpected at least one of the available 'optional' fields is required")
+
+// ErrStatusNotOk is an error that indicates the response body returned by the
+// Fastly API was not `{"status": "ok"}`
 var ErrStatusNotOk = errors.New("unexpected 'status' field in API response body")
 
 // ErrNotOK is a generic error indicating that something is not okay.
