@@ -72,7 +72,7 @@ func TestClient_Versions(t *testing.T) {
 		uv, err = c.UpdateVersion(&UpdateVersionInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: v.Number,
-			Comment:        String("new comment"),
+			Comment:        "new comment",
 		})
 	})
 	if err != nil {
@@ -173,7 +173,7 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 	_, err = testClient.UpdateVersion(&UpdateVersionInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -181,7 +181,7 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
