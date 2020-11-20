@@ -208,7 +208,7 @@ var ErrMissingTLSDomain = errors.New("missing required field 'Domain'")
 //
 // EXAMPLE: when updating a domain, if you don't provide either a new 'name' or
 // an updated 'comment' then the API call is unnecessary.
-var ErrMissingAtLeastOneOptionalField = errors.New("unexpected at least one of the available 'optional' fields is required")
+var ErrMissingAtLeastOneOptionalField = errors.New("at least one of the available 'optional' fields is required")
 
 // ErrStatusNotOk is an error that indicates the response body returned by the
 // Fastly API was not `{"status": "ok"}`
