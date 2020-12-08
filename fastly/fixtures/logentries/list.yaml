@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/50/logging/logentries
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/113/logging/logentries
     method: GET
   response:
-    body: '[{"use_tls":"1","port":"1234","public_key":null,"format_version":"2","format":"format","version":"50","updated_at":"2021-01-14T10:44:09Z","token":"abcd1234","placement":"waf_debug","region":null,"created_at":"2021-01-14T10:44:09Z","name":"test-logentries","response_condition":"","deleted_at":null,"hostname":"api.logentries.com","service_id":"7i6HN3TK9wS159v2gPAZ8A"}]'
+    body: '[{"format_version":"2","region":"us","name":"test-logentries","placement":"waf_debug","use_tls":"1","port":"0","updated_at":"2021-01-19T16:02:30Z","response_condition":"","version":"113","public_key":null,"deleted_at":null,"created_at":"2021-01-19T16:02:30Z","token":"abcd1234","hostname":null,"format":"format","service_id":"7i6HN3TK9wS159v2gPAZ8A"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:44:10 GMT
+      - Tue, 19 Jan 2021 16:02:30 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4120-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8268-DEN
       X-Timer:
-      - S1610621050.445759,VS0,VE189
+      - S1611072151.640918,VS0,VE152
     status: 200 OK
     code: 200
     duration: ""

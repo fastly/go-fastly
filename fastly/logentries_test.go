@@ -18,11 +18,12 @@ func TestClient_Logentries(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-logentries",
-			Port:           1234,
+			Port:           0,
 			UseTLS:         true,
 			Token:          "abcd1234",
 			Format:         "format",
 			Placement:      "waf_debug",
+			Region:         "us",
 		})
 	})
 	if err != nil {
@@ -49,7 +50,7 @@ func TestClient_Logentries(t *testing.T) {
 	if le.Name != "test-logentries" {
 		t.Errorf("bad name: %q", le.Name)
 	}
-	if le.Port != 1234 {
+	if le.Port != 0 {
 		t.Errorf("bad port: %q", le.Port)
 	}
 	if le.UseTLS != true {
@@ -66,6 +67,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if le.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", le.Placement)
+	}
+	if le.Region != "us" {
+		t.Errorf("bad region: %q", le.Region)
 	}
 
 	// List
@@ -126,6 +130,7 @@ func TestClient_Logentries(t *testing.T) {
 			Name:           "test-logentries",
 			NewName:        String("new-test-logentries"),
 			FormatVersion:  Uint(2),
+			Region:         String("ap"),
 		})
 	})
 	if err != nil {
@@ -136,6 +141,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if ule.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", ule.FormatVersion)
+	}
+	if ule.Region != "ap" {
+		t.Errorf("bad region: %q", ule.Region)
 	}
 
 	// Delete
