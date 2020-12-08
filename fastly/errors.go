@@ -171,15 +171,15 @@ var ErrMissingIntermediatesBlob = errors.New("missing required field 'Intermedia
 
 // ErrMissingTLSCertificate is an error that is returned from an input struct that requires
 // a "TLSCertificate" struct, but one was not set.
-var ErrMissingTLSCertificate = errors.New("missing required field 'TLSCertificate'")
+var ErrMissingTLSCertificate = errors.New("missing required field 'Certificate'")
 
 // ErrMissingTLSConfiguration is an error that is returned from an input struct that requires
 // a "TLSConfiguration" struct, but one was not set.
-var ErrMissingTLSConfiguration = errors.New("missing required field 'TLSConfiguration'")
+var ErrMissingTLSConfiguration = errors.New("missing required field 'Configuration'")
 
 // ErrMissingTLSDomain is an error that is returned from an input struct that requires
 // a "TLSDomain" struct, but one was not set.
-var ErrMissingTLSDomain = errors.New("missing required field 'TLSDomain'")
+var ErrMissingTLSDomain = errors.New("missing required field 'Domain'")
 
 // ErrStatusNotOk is an error that indicates that indicates that the response body returned
 // by the Fastly API was not `{"status": "ok"}`
