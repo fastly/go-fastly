@@ -178,7 +178,7 @@ var ErrMissingTLSCertificate = errors.New("missing required field 'Certificate'"
 var ErrMissingTLSConfiguration = errors.New("missing required field 'Configuration'")
 
 // ErrMissingTLSDomain is an error that is returned from an input struct that requires
-// a "TLSDomain" struct, but one was not set.
+// a "Domain" field assigned a "TLSDomain" struct, but one was not set.
 var ErrMissingTLSDomain = errors.New("missing required field 'Domain'")
 
 // ErrStatusNotOk is an error that indicates that indicates that the response body returned
