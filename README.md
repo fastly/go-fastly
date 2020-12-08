@@ -31,6 +31,8 @@ The move to more consistent field names in some cases will have resulted in the 
 
 The change in type for [basic types](https://tour.golang.org/basics/11) that are optional on input structs related to write/update operations is designed to avoid unexpected behaviours when dealing with their zero value (see [this reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/) for more details). As part of this change we now provide [helper functions](./fastly/basictypes_helper.go) to assist with generating the new pointer types required.
 
+> Note: some read/list operations require fields to be provided but if omitted a zero value will be used when marshaling the data structure into JSON. This too can cause confusion, which is why some input structs define their mandatory fields as pointers (to ensure that the backend can distinguish between a zero value and an omitted field).
+
 ## Examples
 
 Fastly's API is designed to work in the following manner:
