@@ -27,12 +27,12 @@ type CustomTLSCertificate struct {
 
 // ListCustomTLSCertificatesInput is used as input to the ListCustomTLSCertificatesInput function.
 type ListCustomTLSCertificatesInput struct {
-	FilterNotAfter          string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
+	FilterNotAfter     string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
 	FilterTLSDomainsID string // Limit the returned certificates to those that include the specific domain.
-	Include                 string // Include related objects. Optional, comma-separated values. Permitted values: tls_activations.
-	PageNumber              int    // The page index for pagination.
-	PageSize                int    // The number of keys per page.
-	Sort                    string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
+	Include            string // Include related objects. Optional, comma-separated values. Permitted values: tls_activations.
+	PageNumber         int    // The page index for pagination.
+	PageSize           int    // The number of keys per page.
+	Sort               string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -40,7 +40,7 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[not_after]":      i.FilterNotAfter,
-		"filter[tls_domains.id]": i.FilterTLSDomainsIDMatch,
+		"filter[tls_domains.id]": i.FilterTLSDomainsID,
 		"include":                i.Include,
 		"page[size]":             i.PageSize,
 		"page[number]":           i.PageNumber,
