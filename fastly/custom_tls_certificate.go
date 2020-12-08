@@ -39,12 +39,12 @@ type ListCustomTLSCertificatesInput struct {
 func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
-		"filter[not_after]":             i.FilterNotAfter,
+		"filter[not_after]":      i.FilterNotAfter,
 		"filter[tls_domains.id]": i.FilterTLSDomainsIDMatch,
-		"include":                       i.Include,
-		"page[size]":                    i.PageSize,
-		"page[number]":                  i.PageNumber,
-		"sort":                          i.Sort,
+		"include":                i.Include,
+		"page[size]":             i.PageSize,
+		"page[number]":           i.PageNumber,
+		"sort":                   i.Sort,
 	}
 
 	for key, value := range pairings {
