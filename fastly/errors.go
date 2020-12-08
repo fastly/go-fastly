@@ -179,7 +179,7 @@ var ErrMissingTLSConfiguration = errors.New("missing required field 'Configurati
 
 // ErrMissingTLSDomain is an error that is returned from an input struct that requires
 // a "TLSDomain" struct, but one was not set.
-var ErrMissingTLSDomain = errors.New("missing required field 'TLSDomain'")
+var ErrMissingTLSDomain = errors.New("missing required field 'Domain'")
 
 // ErrStatusNotOk is an error that indicates that indicates that the response body returned
 // by the Fastly API was not `{"status": "ok"}`
