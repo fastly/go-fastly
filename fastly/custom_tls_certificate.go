@@ -28,7 +28,7 @@ type CustomTLSCertificate struct {
 // ListCustomTLSCertificatesInput is used as input to the ListCustomTLSCertificatesInput function.
 type ListCustomTLSCertificatesInput struct {
 	FilterNotAfter          string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
-	FilterTLSDomainsIDMatch string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
+	FilterTLSDomainsID string // Limit the returned certificates to those that include the specific domain.
 	Include                 string // Include related objects. Optional, comma-separated values. Permitted values: tls_activations.
 	PageNumber              int    // The page index for pagination.
 	PageSize                int    // The number of keys per page.
