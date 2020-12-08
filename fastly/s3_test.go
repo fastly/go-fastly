@@ -24,7 +24,8 @@ func TestClient_S3s(t *testing.T) {
 			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
 			Path:                         "/path",
 			Period:                       12,
-			GzipLevel:                    9,
+			CompressionCodec:             "snappy",
+			GzipLevel:                    8,
 			Format:                       "format",
 			FormatVersion:                2,
 			ResponseCondition:            "",
@@ -79,7 +80,10 @@ func TestClient_S3s(t *testing.T) {
 	if s3.Period != 12 {
 		t.Errorf("bad period: %q", s3.Period)
 	}
-	if s3.GzipLevel != 9 {
+	if s3.CompressionCodec != "" {
+		t.Errorf("bad compression_codec: %q", s3.CompressionCodec)
+	}
+	if s3.GzipLevel != 8 {
 		t.Errorf("bad gzip_level: %q", s3.GzipLevel)
 	}
 	if s3.Format != "format" {
@@ -162,6 +166,9 @@ func TestClient_S3s(t *testing.T) {
 	if s3.Period != ns3.Period {
 		t.Errorf("bad period: %q", s3.Period)
 	}
+	if s3.CompressionCodec != ns3.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", s3.CompressionCodec)
+	}
 	if s3.GzipLevel != ns3.GzipLevel {
 		t.Errorf("bad gzip_level: %q", s3.GzipLevel)
 	}
@@ -197,11 +204,12 @@ func TestClient_S3s(t *testing.T) {
 	var us3 *S3
 	record(t, "s3s/update", func(c *Client) {
 		us3, err = c.UpdateS3(&UpdateS3Input{
-			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
-			Name:           "test-s3",
-			NewName:        String("new-test-s3"),
-			PublicKey:      String(pgpPublicKeyUpdate()),
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-s3",
+			NewName:          String("new-test-s3"),
+			PublicKey:        String(pgpPublicKeyUpdate()),
+			CompressionCodec: String("zstd"),
 		})
 	})
 	if err != nil {
@@ -212,6 +220,12 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if us3.PublicKey != pgpPublicKeyUpdate() {
 		t.Errorf("bad public_key: %q", us3.PublicKey)
+	}
+	if us3.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", us3.CompressionCodec)
+	}
+	if us3.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", us3.GzipLevel)
 	}
 
 	// Delete

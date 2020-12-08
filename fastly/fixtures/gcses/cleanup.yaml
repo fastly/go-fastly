@@ -6,27 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/logging/gcs/test-gcs
+      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/gcs/test-gcs
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-gcs, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 6 }''"}'
+      version =\u003e 66 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 13:25:54 GMT
+      - Tue, 08 Dec 2020 15:34:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "962"
+      - "968"
       Fastly-Ratelimit-Reset:
-      - "1591192800"
+      - "1607443200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -34,16 +33,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-dca17741-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-chi21151-CHI
       X-Timer:
-      - S1591190754.311097,VS0,VE101
+      - S1607441656.888045,VS0,VE111
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,27 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/logging/gcs/new-test-gcs
+      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/gcs/new-test-gcs
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-gcs, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 6 }''"}'
+      version =\u003e 66 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 13:25:54 GMT
+      - Tue, 08 Dec 2020 15:34:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "961"
+      - "967"
       Fastly-Ratelimit-Reset:
-      - "1591192800"
+      - "1607443200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -80,16 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-dca17741-DCA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-chi21151-CHI
       X-Timer:
-      - S1591190754.436096,VS0,VE84
+      - S1607441656.095403,VS0,VE117
     status: 404 Not Found
     code: 404
     duration: ""

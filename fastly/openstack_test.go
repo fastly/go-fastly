@@ -15,22 +15,22 @@ func TestClient_Openstack(t *testing.T) {
 	var openstack *Openstack
 	record(t, "openstack/create", func(c *Client) {
 		openstack, err = c.CreateOpenstack(&CreateOpenstackInput{
-			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
-			Name:            "test-openstack",
-			User:            "user",
-			AccessKey:       "secret-key",
-			BucketName:      "bucket-name",
-			URL:             "https://logs.example.com/v1.0",
-			Path:            "/path",
-			Period:          12,
-			GzipLevel:       9,
-			Format:          "format",
-			FormatVersion:   2,
-			TimestampFormat: "%Y",
-			MessageType:     "classic",
-			Placement:       "waf_debug",
-			PublicKey:       pgpPublicKey(),
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-openstack",
+			User:             "user",
+			AccessKey:        "secret-key",
+			BucketName:       "bucket-name",
+			URL:              "https://logs.example.com/v1.0",
+			Path:             "/path",
+			Period:           12,
+			CompressionCodec: "zstd",
+			Format:           "format",
+			FormatVersion:    2,
+			TimestampFormat:  "%Y",
+			MessageType:      "classic",
+			Placement:        "waf_debug",
+			PublicKey:        pgpPublicKey(),
 		})
 	})
 	if err != nil {
@@ -75,7 +75,10 @@ func TestClient_Openstack(t *testing.T) {
 	if openstack.Period != 12 {
 		t.Errorf("bad period: %q", openstack.Period)
 	}
-	if openstack.GzipLevel != 9 {
+	if openstack.CompressionCodec != "zstd" {
+		t.Errorf("bad comprssion_codec: %q", openstack.CompressionCodec)
+	}
+	if openstack.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", openstack.GzipLevel)
 	}
 	if openstack.Format != "format" {
@@ -145,6 +148,9 @@ func TestClient_Openstack(t *testing.T) {
 	if openstack.Period != nopenstack.Period {
 		t.Errorf("bad period: %q", openstack.Period)
 	}
+	if openstack.CompressionCodec != nopenstack.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", openstack.CompressionCodec)
+	}
 	if openstack.GzipLevel != nopenstack.GzipLevel {
 		t.Errorf("bad gzip_level: %q", openstack.GzipLevel)
 	}
@@ -171,12 +177,12 @@ func TestClient_Openstack(t *testing.T) {
 	var uopenstack *Openstack
 	record(t, "openstack/update", func(c *Client) {
 		uopenstack, err = c.UpdateOpenstack(&UpdateOpenstackInput{
-			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
-			Name:           "test-openstack",
-			User:           String("new-user"),
-			NewName:        String("new-test-openstack"),
-			GzipLevel:      Uint(0),
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-openstack",
+			User:             String("new-user"),
+			NewName:          String("new-test-openstack"),
+			CompressionCodec: String("snappy"),
 		})
 	})
 	if err != nil {
@@ -187,6 +193,9 @@ func TestClient_Openstack(t *testing.T) {
 	}
 	if uopenstack.User != "new-user" {
 		t.Errorf("bad user: %q", uopenstack.User)
+	}
+	if uopenstack.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", uopenstack.CompressionCodec)
 	}
 	if uopenstack.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", uopenstack.GzipLevel)

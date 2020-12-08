@@ -18,6 +18,7 @@ type GCS struct {
 	SecretKey         string     `mapstructure:"secret_key"`
 	Path              string     `mapstructure:"path"`
 	Period            uint       `mapstructure:"period"`
+	CompressionCodec  string     `mapstructure:"compression_codec"`
 	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
@@ -88,6 +89,7 @@ type CreateGCSInput struct {
 	Path              string `form:"path,omitempty"`
 	Period            uint   `form:"period,omitempty"`
 	FormatVersion     uint   `form:"format_version,omitempty"`
+	CompressionCodec  string `form:"compression_codec,omitempty"`
 	GzipLevel         uint8  `form:"gzip_level,omitempty"`
 	Format            string `form:"format,omitempty"`
 	MessageType       string `form:"message_type,omitempty"`
@@ -176,6 +178,7 @@ type UpdateGCSInput struct {
 	Path              *string `form:"path,omitempty"`
 	Period            *uint   `form:"period,omitempty"`
 	FormatVersion     *uint   `form:"format_version,omitempty"`
+	CompressionCodec  *string `form:"compression_codec,omitempty"`
 	GzipLevel         *uint8  `form:"gzip_level,omitempty"`
 	Format            *string `form:"format,omitempty"`
 	MessageType       *string `form:"message_type,omitempty"`

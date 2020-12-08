@@ -15,24 +15,24 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftp *SFTP
 	record(t, "sftps/create", func(c *Client) {
 		sftp, err = c.CreateSFTP(&CreateSFTPInput{
-			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
-			Name:            "test-sftp",
-			Address:         "example.com",
-			Port:            1234,
-			PublicKey:       pgpPublicKey(),
-			SecretKey:       privateKey(),
-			SSHKnownHosts:   knownHosts,
-			User:            "username",
-			Password:        "password",
-			Path:            "/dir",
-			Period:          12,
-			GzipLevel:       9,
-			FormatVersion:   2,
-			Format:          "format",
-			MessageType:     "blank",
-			TimestampFormat: "%Y",
-			Placement:       "waf_debug",
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-sftp",
+			Address:          "example.com",
+			Port:             1234,
+			PublicKey:        pgpPublicKey(),
+			SecretKey:        privateKey(),
+			SSHKnownHosts:    knownHosts,
+			User:             "username",
+			Password:         "password",
+			Path:             "/dir",
+			Period:           12,
+			CompressionCodec: "snappy",
+			FormatVersion:    2,
+			Format:           "format",
+			MessageType:      "blank",
+			TimestampFormat:  "%Y",
+			Placement:        "waf_debug",
 		})
 	})
 	if err != nil {
@@ -86,7 +86,10 @@ func TestClient_SFTPs(t *testing.T) {
 	if sftp.Period != 12 {
 		t.Errorf("bad period: %q", sftp.Period)
 	}
-	if sftp.GzipLevel != 9 {
+	if sftp.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", sftp.CompressionCodec)
+	}
+	if sftp.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", sftp.GzipLevel)
 	}
 	if sftp.FormatVersion != 2 {
@@ -162,6 +165,9 @@ func TestClient_SFTPs(t *testing.T) {
 	if sftp.Period != nsftp.Period {
 		t.Errorf("bad period: %q", sftp.Period)
 	}
+	if sftp.CompressionCodec != nsftp.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", sftp.CompressionCodec)
+	}
 	if sftp.GzipLevel != nsftp.GzipLevel {
 		t.Errorf("bad gzip_level: %q", sftp.GzipLevel)
 	}
@@ -189,7 +195,7 @@ func TestClient_SFTPs(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-sftp",
 			NewName:        String("new-test-sftp"),
-			GzipLevel:      Uint(0),
+			GzipLevel:      Uint(8),
 			MessageType:    String("classic"),
 		})
 	})
@@ -202,7 +208,10 @@ func TestClient_SFTPs(t *testing.T) {
 	if usftp.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", usftp.MessageType)
 	}
-	if usftp.GzipLevel != 0 {
+	if usftp.CompressionCodec != "" {
+		t.Errorf("bad compression_codec: %q", usftp.CompressionCodec)
+	}
+	if usftp.GzipLevel != 8 {
 		t.Errorf("bad gzip_level: %q", usftp.GzipLevel)
 	}
 

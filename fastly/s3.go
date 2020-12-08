@@ -29,6 +29,7 @@ type S3 struct {
 	SecretKey                    string                 `mapstructure:"secret_key"`
 	Path                         string                 `mapstructure:"path"`
 	Period                       uint                   `mapstructure:"period"`
+	CompressionCodec             string                 `mapstructure:"compression_codec"`
 	GzipLevel                    uint                   `mapstructure:"gzip_level"`
 	Format                       string                 `mapstructure:"format"`
 	FormatVersion                uint                   `mapstructure:"format_version"`
@@ -103,6 +104,7 @@ type CreateS3Input struct {
 	SecretKey                    string                 `form:"secret_key,omitempty"`
 	Path                         string                 `form:"path,omitempty"`
 	Period                       uint                   `form:"period,omitempty"`
+	CompressionCodec             string                 `form:"compression_codec,omitempty"`
 	GzipLevel                    uint                   `form:"gzip_level,omitempty"`
 	Format                       string                 `form:"format,omitempty"`
 	MessageType                  string                 `form:"message_type,omitempty"`
@@ -200,6 +202,7 @@ type UpdateS3Input struct {
 	SecretKey                    *string                `form:"secret_key,omitempty"`
 	Path                         *string                `form:"path,omitempty"`
 	Period                       *uint                  `form:"period,omitempty"`
+	CompressionCodec             *string                `form:"compression_codec,omitempty"`
 	GzipLevel                    *uint                  `form:"gzip_level,omitempty"`
 	Format                       *string                `form:"format,omitempty"`
 	FormatVersion                *uint                  `form:"format_version,omitempty"`

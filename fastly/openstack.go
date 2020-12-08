@@ -20,6 +20,7 @@ type Openstack struct {
 	Path              string     `mapstructure:"path"`
 	Placement         string     `mapstructure:"placement"`
 	Period            uint       `mapstructure:"period"`
+	CompressionCodec  string     `mapstructure:"compression_codec"`
 	GzipLevel         uint       `mapstructure:"gzip_level"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
@@ -91,6 +92,7 @@ type CreateOpenstackInput struct {
 	Path              string `form:"path,omitempty"`
 	Placement         string `form:"placement,omitempty"`
 	Period            uint   `form:"period,omitempty"`
+	CompressionCodec  string `form:"compression_codec,omitempty"`
 	GzipLevel         uint   `form:"gzip_level,omitempty"`
 	Format            string `form:"format,omitempty"`
 	FormatVersion     uint   `form:"format_version,omitempty"`
@@ -181,6 +183,7 @@ type UpdateOpenstackInput struct {
 	Path              *string `form:"path,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 	Period            *uint   `form:"period,omitempty"`
+	CompressionCodec  *string `form:"compression_codec,omitempty"`
 	GzipLevel         *uint   `form:"gzip_level,omitempty"`
 	Format            *string `form:"format,omitempty"`
 	FormatVersion     *uint   `form:"format_version,omitempty"`

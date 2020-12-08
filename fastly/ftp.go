@@ -20,6 +20,7 @@ type FTP struct {
 	PublicKey         string     `mapstructure:"public_key"`
 	Path              string     `mapstructure:"path"`
 	Period            uint       `mapstructure:"period"`
+	CompressionCodec  string     `mapstructure:"compression_codec"`
 	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
@@ -92,6 +93,7 @@ type CreateFTPInput struct {
 	Path              string `form:"path,omitempty"`
 	Period            uint   `form:"period,omitempty"`
 	FormatVersion     uint   `form:"format_version,omitempty"`
+	CompressionCodec  string `form:"compression_codec,omitempty"`
 	GzipLevel         uint8  `form:"gzip_level,omitempty"`
 	Format            string `form:"format,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
@@ -182,6 +184,7 @@ type UpdateFTPInput struct {
 	Path              *string `form:"path,omitempty"`
 	Period            *uint   `form:"period,omitempty"`
 	FormatVersion     *uint   `form:"format_version,omitempty"`
+	CompressionCodec  *string `form:"compression_codec,omitempty"`
 	GzipLevel         *uint8  `form:"gzip_level,omitempty"`
 	Format            *string `form:"format,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`

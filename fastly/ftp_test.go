@@ -14,22 +14,22 @@ func TestClient_FTPs(t *testing.T) {
 	var ftp *FTP
 	record(t, "ftps/create", func(c *Client) {
 		ftp, err = c.CreateFTP(&CreateFTPInput{
-			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
-			Name:            "test-ftp",
-			Address:         "example.com",
-			Port:            1234,
-			PublicKey:       pgpPublicKey(),
-			Username:        "username",
-			Password:        "password",
-			Path:            "/dir",
-			Period:          12,
-			GzipLevel:       9,
-			FormatVersion:   2,
-			Format:          "format",
-			TimestampFormat: "%Y",
-			Placement:       "waf_debug",
-			MessageType:     "classic",
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-ftp",
+			Address:          "example.com",
+			Port:             1234,
+			PublicKey:        pgpPublicKey(),
+			Username:         "username",
+			Password:         "password",
+			Path:             "/dir",
+			Period:           12,
+			CompressionCodec: "snappy",
+			FormatVersion:    2,
+			Format:           "format",
+			TimestampFormat:  "%Y",
+			Placement:        "waf_debug",
+			MessageType:      "classic",
 		})
 	})
 	if err != nil {
@@ -77,7 +77,10 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.Period != 12 {
 		t.Errorf("bad period: %q", ftp.Period)
 	}
-	if ftp.GzipLevel != 9 {
+	if ftp.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", ftp.CompressionCodec)
+	}
+	if ftp.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", ftp.GzipLevel)
 	}
 	if ftp.FormatVersion != 2 {
@@ -147,6 +150,9 @@ func TestClient_FTPs(t *testing.T) {
 	if ftp.Period != nftp.Period {
 		t.Errorf("bad period: %q", ftp.Period)
 	}
+	if ftp.CompressionCodec != nftp.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", ftp.CompressionCodec)
+	}
 	if ftp.GzipLevel != nftp.GzipLevel {
 		t.Errorf("bad gzip_level: %q", ftp.GzipLevel)
 	}
@@ -170,11 +176,11 @@ func TestClient_FTPs(t *testing.T) {
 	var uftp *FTP
 	record(t, "ftps/update", func(c *Client) {
 		uftp, err = c.UpdateFTP(&UpdateFTPInput{
-			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
-			Name:           "test-ftp",
-			NewName:        String("new-test-ftp"),
-			GzipLevel:      Uint8(0),
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-ftp",
+			NewName:          String("new-test-ftp"),
+			CompressionCodec: String("zstd"),
 		})
 	})
 	if err != nil {
@@ -183,12 +189,11 @@ func TestClient_FTPs(t *testing.T) {
 	if uftp.Name != "new-test-ftp" {
 		t.Errorf("bad name: %q", uftp.Name)
 	}
-	// TODO (v2): This is a bug where updates to zero-values are omitted due to the
-	// `omitempty` struct tag.
-	//
-	// We plan to fix this in the next major release as changing this behavior is a
-	// breaking change.
-	if uftp.GzipLevel != 9 {
+
+	if uftp.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", uftp.CompressionCodec)
+	}
+	if uftp.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", uftp.GzipLevel)
 	}
 
