@@ -170,7 +170,7 @@ var ErrMissingCertBlob = errors.New("missing required field 'CertBlob'")
 var ErrMissingIntermediatesBlob = errors.New("missing required field 'IntermediatesBlob'")
 
 // ErrMissingTLSCertificate is an error that is returned from an input struct that requires
-// a "TLSCertificate" struct, but one was not set.
+// a "Certificate" field assigned a "TLSCertificate" struct, but one was not set.
 var ErrMissingTLSCertificate = errors.New("missing required field 'Certificate'")
 
 // ErrMissingTLSConfiguration is an error that is returned from an input struct that requires
