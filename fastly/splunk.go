@@ -14,6 +14,8 @@ type Splunk struct {
 
 	Name              string     `mapstructure:"name"`
 	URL               string     `mapstructure:"url"`
+	RequestMaxEntries uint       `mapstructure:"request_max_entries"`
+	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
@@ -21,6 +23,8 @@ type Splunk struct {
 	Token             string     `mapstructure:"token"`
 	TLSCACert         string     `mapstructure:"tls_ca_cert"`
 	TLSHostname       string     `mapstructure:"tls_hostname"`
+	TLSClientCert     string     `mapstructure:"tls_client_cert"`
+	TLSClientKey      string     `mapstructure:"tls_client_key"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -79,6 +83,8 @@ type CreateSplunkInput struct {
 
 	Name              string `form:"name,omitempty"`
 	URL               string `form:"url,omitempty"`
+	RequestMaxEntries uint   `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   uint   `form:"request_max_bytes,omitempty"`
 	Format            string `form:"format,omitempty"`
 	FormatVersion     uint   `form:"format_version,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
@@ -86,6 +92,8 @@ type CreateSplunkInput struct {
 	Token             string `form:"token,omitempty"`
 	TLSCACert         string `form:"tls_ca_cert,omitempty"`
 	TLSHostname       string `form:"tls_hostname,omitempty"`
+	TLSClientCert     string `form:"tls_client_cert,omitempty"`
+	TLSClientKey      string `form:"tls_client_key,omitempty"`
 }
 
 // CreateSplunk creates a new Fastly splunk.
@@ -163,6 +171,8 @@ type UpdateSplunkInput struct {
 
 	NewName           *string `form:"name,omitempty"`
 	URL               *string `form:"url,omitempty"`
+	RequestMaxEntries *uint   `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   *uint   `form:"request_max_bytes,omitempty"`
 	Format            *string `form:"format,omitempty"`
 	FormatVersion     *uint   `form:"format_version,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
@@ -170,6 +180,8 @@ type UpdateSplunkInput struct {
 	Token             *string `form:"token,omitempty"`
 	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
 	TLSHostname       *string `form:"tls_hostname,omitempty"`
+	TLSClientCert     *string `form:"tls_client_cert,omitempty"`
+	TLSClientKey      *string `form:"tls_client_key,omitempty"`
 }
 
 // UpdateSplunk updates a specific splunk.
