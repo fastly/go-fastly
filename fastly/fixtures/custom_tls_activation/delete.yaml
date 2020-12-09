@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.2)
+    url: https://api.fastly.com/tls/activations/ACTIVATION_ID
+    method: DELETE
+  response:
+    body: '{}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      - bytes
+      Content-Length:
+      - "55"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Thu, 29 Oct 2020 21:56:36 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sea4479-SEA
+      X-Timer:
+      - S1604008596.365429,VS0,VE113
+    status: 200 OK
+    code: 200
+    duration: ""
