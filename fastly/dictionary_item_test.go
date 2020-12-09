@@ -89,7 +89,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 			ServiceID:    testService.ID,
 			DictionaryID: testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
-			ItemValue:    String("new-value"),
+			ItemValue:    "new-value",
 		})
 	})
 	if err != nil {

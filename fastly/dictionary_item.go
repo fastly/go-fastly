@@ -162,7 +162,8 @@ type UpdateDictionaryItemInput struct {
 	// ItemKey is the name of the dictionary item to fetch.
 	ItemKey string
 
-	ItemValue *string `form:"item_value,omitempty"`
+	// ItemValue is the new value of the dictionary item.
+	ItemValue string `form:"item_value"`
 }
 
 // UpdateDictionaryItem updates a specific dictionary item.
