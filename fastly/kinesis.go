@@ -74,7 +74,7 @@ type CreateKinesisInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 
-	//ServiceVersion is the specific configuration version (required).
+	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
 	Name              string `form:"name,omitempty"`
@@ -116,10 +116,10 @@ type GetKinesisInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 
-	//ServiceVersion is the specific configuration version (required).
+	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	// Name is the name of the Kinesis to fetch.
+	// Name is the name of the Kinesis logging object to fetch (required).
 	Name string
 }
 
@@ -155,10 +155,10 @@ type UpdateKinesisInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 
-	//ServiceVersion is the specific configuration version (required).
+	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	// Name is the name of the Kinesis to update.
+	// Name is the name of the Kinesis logging object to update (required).
 	Name string
 
 	NewName           *string `form:"name,omitempty"`
@@ -204,10 +204,10 @@ type DeleteKinesisInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 
-	//ServiceVersion is the specific configuration version (required).
+	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	// Name is the name of the Kinesis to delete (required).
+	// Name is the name of the Kinesis logging object to delete (required).
 	Name string
 }
 
