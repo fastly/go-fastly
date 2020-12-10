@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/gcs/test-gcs
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/101/logging/gcs/test-gcs
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-gcs, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 66 }''"}'
+      version =\u003e 101 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 08 Dec 2020 15:34:15 GMT
+      - Wed, 09 Dec 2020 23:44:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "968"
+      - "979"
       Fastly-Ratelimit-Reset:
-      - "1607443200"
+      - "1607558400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-chi21151-CHI
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8242-DEN
       X-Timer:
-      - S1607441656.888045,VS0,VE111
+      - S1607557491.287692,VS0,VE123
     status: 404 Not Found
     code: 404
     duration: ""
@@ -51,12 +51,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/gcs/new-test-gcs
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/101/logging/gcs/test-gcs-2
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-gcs, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 66 }''"}'
+    body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +63,97 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 08 Dec 2020 15:34:16 GMT
+      - Wed, 09 Dec 2020 23:44:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "967"
+      - "978"
       Fastly-Ratelimit-Reset:
-      - "1607443200"
+      - "1607558400"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8242-DEN
+      X-Timer:
+      - S1607557492.505887,VS0,VE227
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/101/logging/gcs/test-gcs-3
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 09 Dec 2020 23:44:52 GMT
+      Fastly-Ratelimit-Remaining:
+      - "977"
+      Fastly-Ratelimit-Reset:
+      - "1607558400"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8242-DEN
+      X-Timer:
+      - S1607557492.879208,VS0,VE208
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/101/logging/gcs/new-test-gcs
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new-test-gcs, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 101 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 09 Dec 2020 23:44:52 GMT
+      Fastly-Ratelimit-Remaining:
+      - "976"
+      Fastly-Ratelimit-Reset:
+      - "1607558400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +167,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-chi21151-CHI
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8242-DEN
       X-Timer:
-      - S1607441656.095403,VS0,VE117
+      - S1607557492.182926,VS0,VE146
     status: 404 Not Found
     code: 404
     duration: ""

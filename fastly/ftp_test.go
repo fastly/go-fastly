@@ -11,12 +11,61 @@ func TestClient_FTPs(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 	// Create
-	var ftp *FTP
+	var ftpCreateResp1, ftpCreateResp2, ftpCreateResp3 *FTP
 	record(t, "ftps/create", func(c *Client) {
-		ftp, err = c.CreateFTP(&CreateFTPInput{
+		ftpCreateResp1, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
 			Name:             "test-ftp",
+			Address:          "example.com",
+			Port:             1234,
+			PublicKey:        pgpPublicKey(),
+			Username:         "username",
+			Password:         "password",
+			Path:             "/dir",
+			Period:           12,
+			CompressionCodec: "snappy",
+			FormatVersion:    2,
+			Format:           "format",
+			TimestampFormat:  "%Y",
+			Placement:        "waf_debug",
+			MessageType:      "classic",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	record(t, "ftps/create2", func(c *Client) {
+		ftpCreateResp2, err = c.CreateFTP(&CreateFTPInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-ftp-2",
+			Address:          "example.com",
+			Port:             1234,
+			PublicKey:        pgpPublicKey(),
+			Username:         "username",
+			Password:         "password",
+			Path:             "/dir",
+			Period:           12,
+			CompressionCodec: "snappy",
+			GzipLevel:        8,
+			FormatVersion:    2,
+			Format:           "format",
+			TimestampFormat:  "%Y",
+			Placement:        "waf_debug",
+			MessageType:      "classic",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	record(t, "ftps/create3", func(c *Client) {
+		ftpCreateResp3, err = c.CreateFTP(&CreateFTPInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-ftp-3",
 			Address:          "example.com",
 			Port:             1234,
 			PublicKey:        pgpPublicKey(),
@@ -48,55 +97,81 @@ func TestClient_FTPs(t *testing.T) {
 			c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
+				Name:           "test-ftp-2",
+			})
+
+			c.DeleteFTP(&DeleteFTPInput{
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           "test-ftp-3",
+			})
+
+			c.DeleteFTP(&DeleteFTPInput{
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
 				Name:           "new-test-ftp",
 			})
 		})
 	}()
 
-	if ftp.Name != "test-ftp" {
-		t.Errorf("bad name: %q", ftp.Name)
+	if ftpCreateResp1.Name != "test-ftp" {
+		t.Errorf("bad name: %q", ftpCreateResp1.Name)
 	}
-	if ftp.Address != "example.com" {
-		t.Errorf("bad address: %q", ftp.Address)
+	if ftpCreateResp1.Address != "example.com" {
+		t.Errorf("bad address: %q", ftpCreateResp1.Address)
 	}
-	if ftp.Port != 1234 {
-		t.Errorf("bad port: %q", ftp.Port)
+	if ftpCreateResp1.Port != 1234 {
+		t.Errorf("bad port: %q", ftpCreateResp1.Port)
 	}
-	if ftp.PublicKey != pgpPublicKey() {
-		t.Errorf("bad public_key: %q", ftp.PublicKey)
+	if ftpCreateResp1.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", ftpCreateResp1.PublicKey)
 	}
-	if ftp.Username != "username" {
-		t.Errorf("bad username: %q", ftp.Username)
+	if ftpCreateResp1.Username != "username" {
+		t.Errorf("bad username: %q", ftpCreateResp1.Username)
 	}
-	if ftp.Password != "password" {
-		t.Errorf("bad password: %q", ftp.Password)
+	if ftpCreateResp1.Password != "password" {
+		t.Errorf("bad password: %q", ftpCreateResp1.Password)
 	}
-	if ftp.Path != "/dir" {
-		t.Errorf("bad path: %q", ftp.Path)
+	if ftpCreateResp1.Path != "/dir" {
+		t.Errorf("bad path: %q", ftpCreateResp1.Path)
 	}
-	if ftp.Period != 12 {
-		t.Errorf("bad period: %q", ftp.Period)
+	if ftpCreateResp1.Period != 12 {
+		t.Errorf("bad period: %q", ftpCreateResp1.Period)
 	}
-	if ftp.CompressionCodec != "snappy" {
-		t.Errorf("bad compression_codec: %q", ftp.CompressionCodec)
+	if ftpCreateResp1.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", ftpCreateResp1.CompressionCodec)
 	}
-	if ftp.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", ftp.GzipLevel)
+	if ftpCreateResp1.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", ftpCreateResp1.GzipLevel)
 	}
-	if ftp.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", ftp.FormatVersion)
+	if ftpCreateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", ftpCreateResp1.FormatVersion)
 	}
-	if ftp.Format != "format" {
-		t.Errorf("bad format: %q", ftp.Format)
+	if ftpCreateResp1.Format != "format" {
+		t.Errorf("bad format: %q", ftpCreateResp1.Format)
 	}
-	if ftp.TimestampFormat != "%Y" {
-		t.Errorf("bad timestamp_format: %q", ftp.TimestampFormat)
+	if ftpCreateResp1.TimestampFormat != "%Y" {
+		t.Errorf("bad timestamp_format: %q", ftpCreateResp1.TimestampFormat)
 	}
-	if ftp.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", ftp.Placement)
+	if ftpCreateResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", ftpCreateResp1.Placement)
 	}
-	if ftp.MessageType != "classic" {
-		t.Errorf("bad message type: %q", ftp.MessageType)
+	if ftpCreateResp1.MessageType != "classic" {
+		t.Errorf("bad message type: %q", ftpCreateResp1.MessageType)
+	}
+
+	if ftpCreateResp2.CompressionCodec != "" {
+		t.Errorf("bad compression_codec: %q", ftpCreateResp2.CompressionCodec)
+	}
+	if ftpCreateResp2.GzipLevel != 8 {
+		t.Errorf("bad gzip_level: %q", ftpCreateResp2.GzipLevel)
+	}
+
+	if ftpCreateResp3.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", ftpCreateResp3.CompressionCodec)
+	}
+	if ftpCreateResp3.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", ftpCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -115,9 +190,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	// Get
-	var nftp *FTP
+	var ftpGetResp *FTP
 	record(t, "ftps/get", func(c *Client) {
-		nftp, err = c.GetFTP(&GetFTPInput{
+		ftpGetResp, err = c.GetFTP(&GetFTPInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-ftp",
@@ -126,56 +201,56 @@ func TestClient_FTPs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ftp.Name != nftp.Name {
-		t.Errorf("bad name: %q", ftp.Name)
+	if ftpCreateResp1.Name != ftpGetResp.Name {
+		t.Errorf("bad name: %q", ftpCreateResp1.Name)
 	}
-	if ftp.Address != nftp.Address {
-		t.Errorf("bad address: %q", ftp.Address)
+	if ftpCreateResp1.Address != ftpGetResp.Address {
+		t.Errorf("bad address: %q", ftpCreateResp1.Address)
 	}
-	if ftp.Port != nftp.Port {
-		t.Errorf("bad port: %q", ftp.Port)
+	if ftpCreateResp1.Port != ftpGetResp.Port {
+		t.Errorf("bad port: %q", ftpCreateResp1.Port)
 	}
-	if ftp.PublicKey != nftp.PublicKey {
-		t.Errorf("bad public_key: %q", ftp.PublicKey)
+	if ftpCreateResp1.PublicKey != ftpGetResp.PublicKey {
+		t.Errorf("bad public_key: %q", ftpCreateResp1.PublicKey)
 	}
-	if ftp.Username != nftp.Username {
-		t.Errorf("bad username: %q", ftp.Username)
+	if ftpCreateResp1.Username != ftpGetResp.Username {
+		t.Errorf("bad username: %q", ftpCreateResp1.Username)
 	}
-	if ftp.Password != nftp.Password {
-		t.Errorf("bad password: %q", ftp.Password)
+	if ftpCreateResp1.Password != ftpGetResp.Password {
+		t.Errorf("bad password: %q", ftpCreateResp1.Password)
 	}
-	if ftp.Path != nftp.Path {
-		t.Errorf("bad path: %q", ftp.Path)
+	if ftpCreateResp1.Path != ftpGetResp.Path {
+		t.Errorf("bad path: %q", ftpCreateResp1.Path)
 	}
-	if ftp.Period != nftp.Period {
-		t.Errorf("bad period: %q", ftp.Period)
+	if ftpCreateResp1.Period != ftpGetResp.Period {
+		t.Errorf("bad period: %q", ftpCreateResp1.Period)
 	}
-	if ftp.CompressionCodec != nftp.CompressionCodec {
-		t.Errorf("bad compression_codec: %q", ftp.CompressionCodec)
+	if ftpCreateResp1.CompressionCodec != ftpGetResp.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", ftpCreateResp1.CompressionCodec)
 	}
-	if ftp.GzipLevel != nftp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", ftp.GzipLevel)
+	if ftpCreateResp1.GzipLevel != ftpGetResp.GzipLevel {
+		t.Errorf("bad gzip_level: %q", ftpCreateResp1.GzipLevel)
 	}
-	if ftp.FormatVersion != nftp.FormatVersion {
-		t.Errorf("bad format_version: %q", ftp.FormatVersion)
+	if ftpCreateResp1.FormatVersion != ftpGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", ftpCreateResp1.FormatVersion)
 	}
-	if ftp.Format != nftp.Format {
-		t.Errorf("bad format: %q", ftp.Format)
+	if ftpCreateResp1.Format != ftpGetResp.Format {
+		t.Errorf("bad format: %q", ftpCreateResp1.Format)
 	}
-	if ftp.TimestampFormat != nftp.TimestampFormat {
-		t.Errorf("bad timestamp_format: %q", ftp.TimestampFormat)
+	if ftpCreateResp1.TimestampFormat != ftpGetResp.TimestampFormat {
+		t.Errorf("bad timestamp_format: %q", ftpCreateResp1.TimestampFormat)
 	}
-	if ftp.Placement != nftp.Placement {
-		t.Errorf("bad placement: %q", ftp.Placement)
+	if ftpCreateResp1.Placement != ftpGetResp.Placement {
+		t.Errorf("bad placement: %q", ftpCreateResp1.Placement)
 	}
-	if ftp.MessageType != nftp.MessageType {
-		t.Errorf("bad message type: %q", ftp.MessageType)
+	if ftpCreateResp1.MessageType != ftpGetResp.MessageType {
+		t.Errorf("bad message type: %q", ftpCreateResp1.MessageType)
 	}
 
 	// Update
-	var uftp *FTP
+	var ftpUpdateResp1, ftpUpdateResp2, ftpUpdateResp3 *FTP
 	record(t, "ftps/update", func(c *Client) {
-		uftp, err = c.UpdateFTP(&UpdateFTPInput{
+		ftpUpdateResp1, err = c.UpdateFTP(&UpdateFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
 			Name:             "test-ftp",
@@ -186,15 +261,54 @@ func TestClient_FTPs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uftp.Name != "new-test-ftp" {
-		t.Errorf("bad name: %q", uftp.Name)
+
+	record(t, "ftps/update2", func(c *Client) {
+		ftpUpdateResp2, err = c.UpdateFTP(&UpdateFTPInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-ftp-2",
+			CompressionCodec: String("zstd"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
 
-	if uftp.CompressionCodec != "zstd" {
-		t.Errorf("bad compression_codec: %q", uftp.CompressionCodec)
+	record(t, "ftps/update3", func(c *Client) {
+		ftpUpdateResp3, err = c.UpdateFTP(&UpdateFTPInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-ftp-3",
+			GzipLevel:      Uint8(9),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-	if uftp.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", uftp.GzipLevel)
+
+	if ftpUpdateResp1.Name != "new-test-ftp" {
+		t.Errorf("bad name: %q", ftpUpdateResp1.Name)
+	}
+
+	if ftpUpdateResp1.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", ftpUpdateResp1.CompressionCodec)
+	}
+	if ftpUpdateResp1.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", ftpUpdateResp1.GzipLevel)
+	}
+
+	if ftpUpdateResp2.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", ftpUpdateResp2.CompressionCodec)
+	}
+	if ftpUpdateResp2.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", ftpUpdateResp2.GzipLevel)
+	}
+
+	if ftpUpdateResp3.CompressionCodec != "" {
+		t.Errorf("bad compression_codec: %q", ftpUpdateResp3.CompressionCodec)
+	}
+	if ftpUpdateResp3.GzipLevel != 9 {
+		t.Errorf("bad gzip_level: %q", ftpUpdateResp3.GzipLevel)
 	}
 
 	// Delete
