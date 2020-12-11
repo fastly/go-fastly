@@ -1,5 +1,20 @@
 # Changelog
 
+## [v2.1.0](https://github.com/fastly/go-fastly/releases/tag/v2.1.0) (2020-12-11)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v2.0.0...v2.1.0)
+
+**Enhancements:**
+
+- Add support for TLS client and batch size options for splunk [\#236](https://github.com/fastly/go-fastly/pull/236)
+- Add support for compression\_codec to logging file sink endpoints [\#235](https://github.com/fastly/go-fastly/pull/235)
+- Add support for Kinesis logging endpoint [\#234](https://github.com/fastly/go-fastly/pull/234)
+- Custom TLS API  [\#225](https://github.com/fastly/go-fastly/pull/225)
+
+**Closed issues:**
+
+- Any plan to add custom TLS certificates? [\#224](https://github.com/fastly/go-fastly/issues/224)
+
 ## [v2.0.0](https://github.com/fastly/go-fastly/releases/tag/v2.0.0) (2020-11-17)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.18.0...v2.0.0)
