@@ -19,6 +19,7 @@ type BlobStorage struct {
 	SASToken          string     `mapstructure:"sas_token"`
 	Period            uint       `mapstructure:"period"`
 	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	CompressionCodec  string     `mapstructure:"compression_codec"`
 	GzipLevel         uint       `mapstructure:"gzip_level"`
 	PublicKey         string     `mapstructure:"public_key"`
 	Format            string     `mapstructure:"format"`
@@ -89,6 +90,7 @@ type CreateBlobStorageInput struct {
 	SASToken          string `form:"sas_token,omitempty"`
 	Period            uint   `form:"period,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
+	CompressionCodec  string `form:"compression_codec,omitempty"`
 	GzipLevel         uint   `form:"gzip_level,omitempty"`
 	PublicKey         string `form:"public_key,omitempty"`
 	Format            string `form:"format,omitempty"`
@@ -178,6 +180,7 @@ type UpdateBlobStorageInput struct {
 	SASToken          *string `form:"sas_token,omitempty"`
 	Period            *uint   `form:"period,omitempty"`
 	TimestampFormat   *string `form:"timestamp_format,omitempty"`
+	CompressionCodec  *string `form:"compression_codec,omitempty"`
 	GzipLevel         *uint   `form:"gzip_level,omitempty"`
 	PublicKey         *string `form:"public_key,omitempty"`
 	Format            *string `form:"format,omitempty"`

@@ -2,33 +2,32 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
+      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":6}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":101}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 13:25:53 GMT
+      - Wed, 09 Dec 2020 23:44:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "966"
+      - "987"
       Fastly-Ratelimit-Reset:
-      - "1591192800"
+      - "1607558400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,16 +35,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-dca17741-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8242-DEN
       X-Timer:
-      - S1591190753.878677,VS0,VE138
+      - S1607557486.749572,VS0,VE201
     status: 200 OK
     code: 200
     duration: ""
