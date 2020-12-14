@@ -61,17 +61,34 @@ type ListServicesInput struct{}
 
 // ListServices returns the full list of services for the current account.
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
-	resp, err := c.Get("/service", nil)
-	if err != nil {
-		return nil, err
-	}
+	var services []*Service
+	page := 1
+	perPage := 100
+	for {
+		resp, err := c.Get("/service", &RequestOptions{
+			Params: map[string]string{
+				"per_page": fmt.Sprintf("%d", perPage),
+				"page":     fmt.Sprintf("%d", page),
+			},
+		})
+		if err != nil {
+			return nil, err
+		}
 
-	var s []*Service
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
-		return nil, err
+		var s []*Service
+		if err := decodeBodyMap(resp.Body, &s); err != nil {
+			return nil, err
+		}
+		services = append(services, s...)
+
+		if len(s) < perPage {
+			break
+		}
+
+		page++
 	}
-	sort.Stable(servicesByName(s))
-	return s, nil
+	sort.Stable(servicesByName(services))
+	return services, nil
 }
 
 // CreateServiceInput is used as input to the CreateService function.
