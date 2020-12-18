@@ -201,6 +201,15 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testClient.UpdateDomain(&UpdateDomainInput{
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "bar",
+	})
+	if err != ErrMissingAtLeastOneOptionalField {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_DeleteDomain_validation(t *testing.T) {
