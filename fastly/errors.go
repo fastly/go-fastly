@@ -9,18 +9,54 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// Err represents a custom error type.
-type Err struct {
-	kind string
+// FieldError represents a custom error type for API data fields.
+type FieldError struct {
+	kind               string
+	missingValue       bool
+	atLeastOneOptional bool
 }
 
-func (e *Err) Error() string {
-	return fmt.Sprintf("missing required field '%s'", e.kind)
+// Error fulfills the error interface.
+//
+// NOTE: some fields are optional but still need to present an error depending
+// on the API they are associated with. For example, when updating a service
+// the 'name' and 'comment' fields are both optional, but at least one of them
+// needs to be provided for the API call to have any purpose (otherwise the API
+// backend will just reject the call, thus being a waste of network resources).
+//
+// Because of this we allow modifying the error message to reflect whether the
+// missing field was either 'required' or just missing a value.
+func (e *FieldError) Error() string {
+	if e.atLeastOneOptional {
+		return "at least one of the available 'optional' fields is required"
+	}
+
+	prefix := "required "
+	suffix := ""
+
+	if e.missingValue {
+		prefix = ""
+		suffix = " value for"
+	}
+
+	return fmt.Sprintf("missing %sfield%s '%s'", prefix, suffix, e.kind)
 }
 
-// NewError returns an error that formats as the given text.
-func NewError(kind string) error {
-	return &Err{kind}
+func (e *FieldError) MissingValue() *FieldError {
+	e.missingValue = true
+	return e
+}
+
+func (e *FieldError) AtLeastOneOptional() *FieldError {
+	e.atLeastOneOptional = true
+	return e
+}
+
+// NewFieldError returns an error that formats as the given text.
+func NewFieldError(kind string) *FieldError {
+	return &FieldError{
+		kind: kind,
+	}
 }
 
 // ErrMissingServiceID is an error that is returned when an input struct requires

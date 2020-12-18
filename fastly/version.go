@@ -161,15 +161,15 @@ type UpdateVersionInput struct {
 // UpdateVersion updates the given version
 func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, NewError("ServiceID")
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewError("ServiceVersion")
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Comment == "" {
-		return nil, NewError("Comment")
+		return nil, NewFieldError("Comment")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d", i.ServiceID, i.ServiceVersion)

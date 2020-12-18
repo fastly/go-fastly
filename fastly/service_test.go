@@ -122,8 +122,8 @@ func TestClient_Services(t *testing.T) {
 	var us *Service
 	record(t, "services/update", func(c *Client) {
 		us, err = c.UpdateService(&UpdateServiceInput{
-			ID:   s.ID,
-			Name: String("new-test-service"),
+			ServiceID: s.ID,
+			Name:      String("new-test-service"),
 		})
 	})
 	if err != nil {
@@ -169,7 +169,22 @@ func TestClient_GetService_validation(t *testing.T) {
 func TestClient_UpdateService_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateService(&UpdateServiceInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ServiceID'" {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateService(&UpdateServiceInput{
+		ServiceID: "foo",
+	})
+	if err.Error() != "at least one of the available 'optional' fields is required" {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateService(&UpdateServiceInput{
+		ServiceID: "foo",
+		Name:      String(""),
+	})
+	if err.Error() != "missing field value for 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
