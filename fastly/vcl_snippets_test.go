@@ -233,14 +233,14 @@ func Test_Snippets(t *testing.T) {
 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
 		ServiceID: testServiceID,
 		ID:        "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -254,7 +254,7 @@ func Test_Snippets(t *testing.T) {
 		Content:        "",
 	})
 
-	if err != ErrMissingContent {
+	if err.Error() != "missing required field 'Content'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

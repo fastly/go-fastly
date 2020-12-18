@@ -85,7 +85,7 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 
 	p := fmt.Sprintf("/tls/private_keys/%s", i.ID)
@@ -115,11 +115,11 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 	p := "/tls/private_keys"
 
 	if i.Key == "" {
-		return nil, ErrMissingKey
+		return nil, NewFieldError("Key")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	r, err := c.PostJSONAPI(p, i, nil)
@@ -143,7 +143,7 @@ type DeletePrivateKeyInput struct {
 // DeletePrivateKey destroy a TLS private key. Only private keys not already matched to any certificates can be deleted.
 func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 	if i.ID == "" {
-		return ErrMissingID
+		return NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/tls/private_keys/%s", i.ID)

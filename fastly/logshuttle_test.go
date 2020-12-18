@@ -156,7 +156,7 @@ func TestClient_ListLogshuttles_validation(t *testing.T) {
 	_, err = testClient.ListLogshuttles(&ListLogshuttlesInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -164,7 +164,7 @@ func TestClient_ListLogshuttles_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -174,7 +174,7 @@ func TestClient_CreateLogshuttle_validation(t *testing.T) {
 	_, err = testClient.CreateLogshuttle(&CreateLogshuttleInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -182,7 +182,7 @@ func TestClient_CreateLogshuttle_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -192,7 +192,7 @@ func TestClient_GetLogshuttle_validation(t *testing.T) {
 	_, err = testClient.GetLogshuttle(&GetLogshuttleInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -200,7 +200,7 @@ func TestClient_GetLogshuttle_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -209,7 +209,7 @@ func TestClient_GetLogshuttle_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -219,7 +219,7 @@ func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 	_, err = testClient.UpdateLogshuttle(&UpdateLogshuttleInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -227,7 +227,7 @@ func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -236,7 +236,7 @@ func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -246,7 +246,7 @@ func TestClient_DeleteLogshuttle_validation(t *testing.T) {
 	err = testClient.DeleteLogshuttle(&DeleteLogshuttleInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -254,7 +254,7 @@ func TestClient_DeleteLogshuttle_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -263,7 +263,7 @@ func TestClient_DeleteLogshuttle_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

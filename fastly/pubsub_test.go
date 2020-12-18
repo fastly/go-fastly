@@ -164,7 +164,7 @@ func TestClient_ListPubsubs_validation(t *testing.T) {
 	_, err = testClient.ListPubsubs(&ListPubsubsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -172,7 +172,7 @@ func TestClient_ListPubsubs_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -182,7 +182,7 @@ func TestClient_CreatePubsub_validation(t *testing.T) {
 	_, err = testClient.CreatePubsub(&CreatePubsubInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -190,7 +190,7 @@ func TestClient_CreatePubsub_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -200,7 +200,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 	_, err = testClient.GetPubsub(&GetPubsubInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -208,7 +208,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -217,7 +217,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -227,7 +227,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 	_, err = testClient.UpdatePubsub(&UpdatePubsubInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -235,7 +235,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -244,7 +244,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -254,7 +254,7 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 	err = testClient.DeletePubsub(&DeletePubsubInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -262,7 +262,7 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -271,7 +271,7 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

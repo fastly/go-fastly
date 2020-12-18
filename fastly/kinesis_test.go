@@ -167,7 +167,7 @@ func TestClient_ListKinesis_validation(t *testing.T) {
 	_, err = testClient.ListKinesis(&ListKinesisInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -175,7 +175,7 @@ func TestClient_ListKinesis_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -185,7 +185,7 @@ func TestClient_CreateKinesis_validation(t *testing.T) {
 	_, err = testClient.CreateKinesis(&CreateKinesisInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -193,7 +193,7 @@ func TestClient_CreateKinesis_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -203,7 +203,7 @@ func TestClient_GetKinesis_validation(t *testing.T) {
 	_, err = testClient.GetKinesis(&GetKinesisInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -211,7 +211,7 @@ func TestClient_GetKinesis_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -220,7 +220,7 @@ func TestClient_GetKinesis_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -230,7 +230,7 @@ func TestClient_UpdateKinesis_validation(t *testing.T) {
 	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -238,7 +238,7 @@ func TestClient_UpdateKinesis_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -247,7 +247,7 @@ func TestClient_UpdateKinesis_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -257,7 +257,7 @@ func TestClient_DeleteKinesis_validation(t *testing.T) {
 	err = testClient.DeleteKinesis(&DeleteKinesisInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -265,7 +265,7 @@ func TestClient_DeleteKinesis_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -274,7 +274,7 @@ func TestClient_DeleteKinesis_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

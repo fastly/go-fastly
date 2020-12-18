@@ -48,11 +48,11 @@ type ListPubsubsInput struct {
 // ListPubsubs returns the list of pubsubs for the configuration version.
 func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub", i.ServiceID, i.ServiceVersion)
@@ -91,11 +91,11 @@ type CreatePubsubInput struct {
 // CreatePubsub creates a new Fastly Pubsub.
 func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub", i.ServiceID, i.ServiceVersion)
@@ -126,15 +126,15 @@ type GetPubsubInput struct {
 // GetPubsub gets the Pubsub configuration with the given parameters.
 func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -175,15 +175,15 @@ type UpdatePubsubInput struct {
 // UpdatePubsub updates a specific Pubsub.
 func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -214,15 +214,15 @@ type DeletePubsubInput struct {
 // DeletePubsub deletes the given Pubsub version.
 func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

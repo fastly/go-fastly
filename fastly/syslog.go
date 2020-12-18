@@ -55,11 +55,11 @@ type ListSyslogsInput struct {
 // ListSyslogs returns the list of syslogs for the configuration version.
 func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog", i.ServiceID, i.ServiceVersion)
@@ -105,11 +105,11 @@ type CreateSyslogInput struct {
 // CreateSyslog creates a new Fastly syslog.
 func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog", i.ServiceID, i.ServiceVersion)
@@ -140,15 +140,15 @@ type GetSyslogInput struct {
 // GetSyslog gets the syslog configuration with the given parameters.
 func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -196,15 +196,15 @@ type UpdateSyslogInput struct {
 // UpdateSyslog updates a specific syslog.
 func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -235,15 +235,15 @@ type DeleteSyslogInput struct {
 // DeleteSyslog deletes the given syslog version.
 func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

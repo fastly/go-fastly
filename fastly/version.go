@@ -41,7 +41,7 @@ type ListVersionsInput struct {
 // ListVersions returns the full list of all versions of the given service.
 func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	path := fmt.Sprintf("/service/%s/version", i.ServiceID)
@@ -69,7 +69,7 @@ type LatestVersionInput struct {
 // function will return nil (but not an error).
 func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	list, err := c.ListVersions(&ListVersionsInput{ServiceID: i.ServiceID})
@@ -98,7 +98,7 @@ type CreateVersionInput struct {
 // configuration where `Clone()` builds off of an existing configuration.
 func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	path := fmt.Sprintf("/service/%s/version", i.ServiceID)
@@ -126,11 +126,11 @@ type GetVersionInput struct {
 // GetVersion fetches a version with the given information.
 func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d", i.ServiceID, i.ServiceVersion)
@@ -197,11 +197,11 @@ type ActivateVersionInput struct {
 // ActivateVersion activates the given version.
 func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/activate", i.ServiceID, i.ServiceVersion)
@@ -229,11 +229,11 @@ type DeactivateVersionInput struct {
 // DeactivateVersion deactivates the given version.
 func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/deactivate", i.ServiceID, i.ServiceVersion)
@@ -263,11 +263,11 @@ type CloneVersionInput struct {
 // incremented number.
 func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/clone", i.ServiceID, i.ServiceVersion)
@@ -297,11 +297,11 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 	var msg string
 
 	if i.ServiceID == "" {
-		return false, msg, ErrMissingServiceID
+		return false, msg, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return false, msg, ErrMissingServiceVersion
+		return false, msg, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/validate", i.ServiceID, i.ServiceVersion)
@@ -331,11 +331,11 @@ type LockVersionInput struct {
 // LockVersion locks the specified version.
 func (c *Client) LockVersion(i *LockVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/lock", i.ServiceID, i.ServiceVersion)

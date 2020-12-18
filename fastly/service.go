@@ -105,7 +105,7 @@ type GetServiceInput struct {
 // (not a 404).
 func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ID)
@@ -126,7 +126,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 // service exists for the given id, the API returns a 400 response (not a 404).
 func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/service/%s/details", i.ID)
@@ -158,12 +158,11 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	}
 
 	if i.Name == nil && i.Comment == nil {
-		return nil, NewFieldError("").AtLeastOneOptional()
+		return nil, NewFieldError("Name or Comment").Custom("at least one of the available 'optional' fields is required")
 	}
 
-	// The service name can't be an empty value.
 	if i.Name != nil && *i.Name == "" {
-		return nil, NewFieldError("Name").MissingValue()
+		return nil, NewFieldError("Name").Custom("service name can't be an empty value")
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ServiceID)
@@ -187,7 +186,7 @@ type DeleteServiceInput struct {
 // DeleteService updates the service with the given input.
 func (c *Client) DeleteService(i *DeleteServiceInput) error {
 	if i.ID == "" {
-		return ErrMissingID
+		return NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ID)
@@ -215,7 +214,7 @@ type SearchServiceInput struct {
 // name, the API returns a 400 response (not a 404).
 func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	resp, err := c.Get("/service/search", &RequestOptions{
@@ -242,7 +241,7 @@ type ListServiceDomainInput struct {
 // ListServiceDomains lists all domains associated with a given service
 func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 	path := fmt.Sprintf("/service/%s/domain", i.ID)
 	resp, err := c.Get(path, nil)

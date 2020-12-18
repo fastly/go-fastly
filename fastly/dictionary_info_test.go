@@ -65,7 +65,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -73,7 +73,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -82,7 +82,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 		ServiceVersion: 1,
 		ID:             "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

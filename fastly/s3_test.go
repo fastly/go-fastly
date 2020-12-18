@@ -370,7 +370,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 	_, err = testClient.ListS3s(&ListS3sInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -378,7 +378,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -388,7 +388,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 	_, err = testClient.CreateS3(&CreateS3Input{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -396,7 +396,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -407,7 +407,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: "",
 	})
-	if err != ErrMissingKMSKeyID {
+	if err.Error() != "missing required field 'ServerSideEncryptionKMSKeyID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -417,7 +417,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 	_, err = testClient.GetS3(&GetS3Input{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -425,7 +425,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -434,7 +434,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -444,7 +444,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 	_, err = testClient.UpdateS3(&UpdateS3Input{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -452,7 +452,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -461,7 +461,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -472,7 +472,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: String(""),
 	})
-	if err != ErrMissingKMSKeyID {
+	if err.Error() != "missing required field 'ServerSideEncryptionKMSKeyID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -482,7 +482,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 	err = testClient.DeleteS3(&DeleteS3Input{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -490,7 +490,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -499,7 +499,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

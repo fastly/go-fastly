@@ -52,11 +52,11 @@ type ListSplunksInput struct {
 // ListSplunks returns the list of splunks for the configuration version.
 func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/splunk", i.ServiceID, i.ServiceVersion)
@@ -99,11 +99,11 @@ type CreateSplunkInput struct {
 // CreateSplunk creates a new Fastly splunk.
 func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/splunk", i.ServiceID, i.ServiceVersion)
@@ -134,15 +134,15 @@ type GetSplunkInput struct {
 // GetSplunk gets the splunk configuration with the given parameters.
 func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/splunk/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -187,15 +187,15 @@ type UpdateSplunkInput struct {
 // UpdateSplunk updates a specific splunk.
 func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/splunk/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -226,15 +226,15 @@ type DeleteSplunkInput struct {
 // DeleteSplunk deletes the given splunk version.
 func (c *Client) DeleteSplunk(i *DeleteSplunkInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/splunk/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

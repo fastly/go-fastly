@@ -48,11 +48,11 @@ type ListResponseObjectsInput struct {
 // configuration version.
 func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseObject, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object", i.ServiceID, i.ServiceVersion)
@@ -90,11 +90,11 @@ type CreateResponseObjectInput struct {
 // CreateResponseObject creates a new Fastly response object.
 func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseObject, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object", i.ServiceID, i.ServiceVersion)
@@ -126,15 +126,15 @@ type GetResponseObjectInput struct {
 // parameters.
 func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -174,15 +174,15 @@ type UpdateResponseObjectInput struct {
 // UpdateResponseObject updates a specific response object.
 func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseObject, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -213,15 +213,15 @@ type DeleteResponseObjectInput struct {
 // DeleteResponseObject deletes the given response object version.
 func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

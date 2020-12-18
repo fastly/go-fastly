@@ -156,7 +156,7 @@ func TestClient_CreateWAF_validation(t *testing.T) {
 	_, err = testClient.CreateWAF(&CreateWAFInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -164,7 +164,7 @@ func TestClient_CreateWAF_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -174,7 +174,7 @@ func TestClient_GetWAF_validation(t *testing.T) {
 	_, err = testClient.GetWAF(&GetWAFInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -182,7 +182,7 @@ func TestClient_GetWAF_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -190,7 +190,7 @@ func TestClient_GetWAF_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingWAFID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -201,14 +201,14 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
 		ID: "",
 	})
-	if err != ErrMissingWAFID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
 		ID: "123999",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -218,7 +218,7 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 		ID:        "123",
 		ServiceID: &serviceID,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -228,7 +228,7 @@ func TestClient_DeleteWAF_validation(t *testing.T) {
 	err = testClient.DeleteWAF(&DeleteWAFInput{
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -236,7 +236,7 @@ func TestClient_DeleteWAF_validation(t *testing.T) {
 		ServiceVersion: 1,
 		ID:             "",
 	})
-	if err != ErrMissingWAFID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -247,7 +247,7 @@ func TestClient_UpdateWAF_Enable_validation(t *testing.T) {
 		ID:       "",
 		Disabled: Bool(false),
 	})
-	if err != ErrMissingWAFID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -258,7 +258,7 @@ func TestClient_UpdateWAF_Disable_validation(t *testing.T) {
 		ID:       "",
 		Disabled: Bool(true),
 	})
-	if err != ErrMissingWAFID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

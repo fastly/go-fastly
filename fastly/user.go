@@ -43,7 +43,7 @@ type ListCustomerUsersInput struct {
 // customer.
 func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 	if i.CustomerID == "" {
-		return nil, ErrMissingCustomerID
+		return nil, NewFieldError("CustomerID")
 	}
 
 	path := fmt.Sprintf("/customer/%s/users", i.CustomerID)
@@ -84,7 +84,7 @@ type GetUserInput struct {
 // id. If no user exists for the given id, the API returns a 404 response.
 func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/user/%s", i.ID)
@@ -112,11 +112,11 @@ type CreateUserInput struct {
 // CreateUser creates a new API token with the given information.
 func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 	if i.Login == "" {
-		return nil, ErrMissingLogin
+		return nil, NewFieldError("Login")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	resp, err := c.PostForm("/user", i, nil)
@@ -142,7 +142,7 @@ type UpdateUserInput struct {
 // UpdateUser updates the user with the given input.
 func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/user/%s", i.ID)
@@ -166,7 +166,7 @@ type DeleteUserInput struct {
 // DeleteUser revokes a specific token by its ID.
 func (c *Client) DeleteUser(i *DeleteUserInput) error {
 	if i.ID == "" {
-		return ErrMissingID
+		return NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/user/%s", i.ID)

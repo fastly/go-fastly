@@ -108,14 +108,14 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		Name: "My certificate",
 	})
-	if err != ErrMissingCertBlob {
+	if err.Error() != "missing required field 'CertBlob'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -134,7 +134,7 @@ func TestClient_DeleteCustomTLSCertificate_validation(t *testing.T) {
 	}
 
 	err = testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -165,7 +165,7 @@ func TestClient_GetCustomTLSCertificate_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -189,7 +189,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 		Name:     "My certificate",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -197,7 +197,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		ID:   "CERTIFICATE_ID",
 		Name: "My certificate",
 	})
-	if err != ErrMissingCertBlob {
+	if err.Error() != "missing required field 'CertBlob'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -205,7 +205,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		ID:       "CERTIFICATE_ID",
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

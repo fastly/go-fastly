@@ -203,7 +203,7 @@ func TestClient_ListDigitalOceans_validation(t *testing.T) {
 	_, err = testClient.ListDigitalOceans(&ListDigitalOceansInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -211,7 +211,7 @@ func TestClient_ListDigitalOceans_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -221,7 +221,7 @@ func TestClient_CreateDigitalOcean_validation(t *testing.T) {
 	_, err = testClient.CreateDigitalOcean(&CreateDigitalOceanInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -229,7 +229,7 @@ func TestClient_CreateDigitalOcean_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -239,7 +239,7 @@ func TestClient_GetDigitalOcean_validation(t *testing.T) {
 	_, err = testClient.GetDigitalOcean(&GetDigitalOceanInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -247,7 +247,7 @@ func TestClient_GetDigitalOcean_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -256,7 +256,7 @@ func TestClient_GetDigitalOcean_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -266,7 +266,7 @@ func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 	_, err = testClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -274,7 +274,7 @@ func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -283,7 +283,7 @@ func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -293,7 +293,7 @@ func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 	err = testClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -301,7 +301,7 @@ func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -310,7 +310,7 @@ func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

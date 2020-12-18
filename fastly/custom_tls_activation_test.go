@@ -121,7 +121,7 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 		Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 		Domain:        &TLSDomain{ID: "DOMAIN_NAME"},
 	})
-	if err != ErrMissingTLSCertificate {
+	if err.Error() != "missing required field 'TLSCertificate'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -129,7 +129,7 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 		Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 		Domain:      &TLSDomain{ID: "DOMAIN_NAME"},
 	})
-	if err != ErrMissingTLSConfiguration {
+	if err.Error() != "missing required field 'TLSConfiguration'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -137,7 +137,7 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 		Certificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 		Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 	})
-	if err != ErrMissingTLSDomain {
+	if err.Error() != "missing required field 'TLSDomain'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -156,7 +156,7 @@ func TestClient_DeleteTLSActivation_validation(t *testing.T) {
 	}
 
 	err = testClient.DeleteTLSActivation(&DeleteTLSActivationInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -187,7 +187,7 @@ func TestClient_GetTLSActivation_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetTLSActivation(&GetTLSActivationInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -209,14 +209,14 @@ func TestClient_UpdateTLSActivation_validation(t *testing.T) {
 	_, err = testClient.UpdateTLSActivation(&UpdateTLSActivationInput{
 		ID: "ACTIVATION_ID",
 	})
-	if err != ErrMissingTLSCertificate {
+	if err.Error() != "missing required field 'TLSCertificate'" {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateTLSActivation(&UpdateTLSActivationInput{
 		Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

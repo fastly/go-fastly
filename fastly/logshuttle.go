@@ -46,11 +46,11 @@ type ListLogshuttlesInput struct {
 // ListLogshuttles returns the list of logshuttles for the configuration version.
 func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logshuttle", i.ServiceID, i.ServiceVersion)
@@ -87,11 +87,11 @@ type CreateLogshuttleInput struct {
 // CreateLogshuttle creates a new Fastly logshuttle.
 func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logshuttle", i.ServiceID, i.ServiceVersion)
@@ -122,15 +122,15 @@ type GetLogshuttleInput struct {
 // GetLogshuttle gets the logshuttle configuration with the given parameters.
 func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logshuttle/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -169,15 +169,15 @@ type UpdateLogshuttleInput struct {
 // UpdateLogshuttle updates a specific logshuttle.
 func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logshuttle/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -208,15 +208,15 @@ type DeleteLogshuttleInput struct {
 // DeleteLogshuttle deletes the given logshuttle version.
 func (c *Client) DeleteLogshuttle(i *DeleteLogshuttleInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logshuttle/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

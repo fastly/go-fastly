@@ -118,7 +118,7 @@ func TestClient_ListDomains_validation(t *testing.T) {
 	_, err = testClient.ListDomains(&ListDomainsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -126,7 +126,7 @@ func TestClient_ListDomains_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -136,7 +136,7 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 	_, err = testClient.CreateDomain(&CreateDomainInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -144,7 +144,7 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -154,7 +154,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 	_, err = testClient.GetDomain(&GetDomainInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -162,7 +162,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -171,7 +171,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -181,7 +181,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 	_, err = testClient.UpdateDomain(&UpdateDomainInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -189,7 +189,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -198,7 +198,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -207,7 +207,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "bar",
 	})
-	if err != ErrMissingAtLeastOneOptionalField {
+	if err.Error() != "problem with field 'Name or Comment': at least one of the available 'optional' fields is required" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -217,7 +217,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 	err = testClient.DeleteDomain(&DeleteDomainInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -225,7 +225,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if err.Error() != "missing required field 'ServiceVersion'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -234,7 +234,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

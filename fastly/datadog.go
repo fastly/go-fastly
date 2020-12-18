@@ -46,11 +46,11 @@ type ListDatadogInput struct {
 // ListDatadog returns the list of Datadog for the configuration version.
 func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog", i.ServiceID, i.ServiceVersion)
@@ -87,11 +87,11 @@ type CreateDatadogInput struct {
 // CreateDatadog creates a new Datadog logging endpoint on a Fastly service version.
 func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog", i.ServiceID, i.ServiceVersion)
@@ -122,15 +122,15 @@ type GetDatadogInput struct {
 // GetDatadog gets the Datadog configuration with the given parameters.
 func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -169,15 +169,15 @@ type UpdateDatadogInput struct {
 // UpdateDatadog updates a Datadog logging endpoint on a Fastly service version.
 func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -208,15 +208,15 @@ type DeleteDatadogInput struct {
 // DeleteDatadog deletes a Datadog logging endpoint on a Fastly service version.
 func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

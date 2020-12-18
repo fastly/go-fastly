@@ -119,7 +119,7 @@ func TestClient_CreateUser_validation(t *testing.T) {
 	_, err = testClient.CreateUser(&CreateUserInput{
 		Login: "",
 	})
-	if err != ErrMissingLogin {
+	if err.Error() != "missing required field 'Login'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -127,7 +127,7 @@ func TestClient_CreateUser_validation(t *testing.T) {
 		Login: "new+user@example.com",
 		Name:  "",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -137,7 +137,7 @@ func TestClient_ListCustomerUsers_validation(t *testing.T) {
 	_, err = testClient.ListCustomerUsers(&ListCustomerUsersInput{
 		CustomerID: "",
 	})
-	if err != ErrMissingCustomerID {
+	if err.Error() != "missing required field 'CustomerID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -147,7 +147,7 @@ func TestClient_GetUser_validation(t *testing.T) {
 	_, err = testClient.GetUser(&GetUserInput{
 		ID: "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -157,7 +157,7 @@ func TestClient_UpdateUser_validation(t *testing.T) {
 	_, err = testClient.UpdateUser(&UpdateUserInput{
 		ID: "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -166,7 +166,7 @@ func TestClient_DeleteUser_validation(t *testing.T) {
 	err := testClient.DeleteUser(&DeleteUserInput{
 		ID: "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

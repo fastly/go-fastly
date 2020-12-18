@@ -63,11 +63,11 @@ type ListDirectorsInput struct {
 // ListDirectors returns the list of directors for the configuration version.
 func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director", i.ServiceID, i.ServiceVersion)
@@ -104,11 +104,11 @@ type CreateDirectorInput struct {
 // CreateDirector creates a new Fastly director.
 func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director", i.ServiceID, i.ServiceVersion)
@@ -139,15 +139,15 @@ type GetDirectorInput struct {
 // GetDirector gets the director configuration with the given parameters.
 func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -186,15 +186,15 @@ type UpdateDirectorInput struct {
 // UpdateDirector updates a specific director.
 func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -225,15 +225,15 @@ type DeleteDirectorInput struct {
 // DeleteDirector deletes the given director version.
 func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

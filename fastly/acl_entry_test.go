@@ -139,7 +139,7 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -147,7 +147,7 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if err != ErrMissingACLID {
+	if err.Error() != "missing required field 'ACLID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -157,7 +157,7 @@ func TestClient_CreateACLEntry_validation(t *testing.T) {
 	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -165,7 +165,7 @@ func TestClient_CreateACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if err != ErrMissingACLID {
+	if err.Error() != "missing required field 'ACLID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -175,7 +175,7 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 	_, err = testClient.GetACLEntry(&GetACLEntryInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -183,7 +183,7 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if err != ErrMissingACLID {
+	if err.Error() != "missing required field 'ACLID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -192,7 +192,7 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 		ACLID:     "acl",
 		ID:        "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -202,7 +202,7 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -210,7 +210,7 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if err != ErrMissingACLID {
+	if err.Error() != "missing required field 'ACLID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -219,7 +219,7 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 		ACLID:     "acl",
 		ID:        "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -229,7 +229,7 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -237,7 +237,7 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if err != ErrMissingACLID {
+	if err.Error() != "missing required field 'ACLID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -246,7 +246,7 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 		ACLID:     "acl",
 		ID:        "",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -256,14 +256,14 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if err != ErrMissingACLID {
+	if err.Error() != "missing required field 'ACLID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -273,7 +273,7 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 		ACLID:     "bar",
 		Entries:   oversizedACLEntries,
 	})
-	if err != ErrBatchUpdateMaximumOperationsExceeded {
+	if err.Error() != "problem with field 'Entries': batch modify maximum operations exceeded" {
 		t.Errorf("bad error: %s", err)
 	}
 

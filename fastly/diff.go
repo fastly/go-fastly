@@ -32,15 +32,15 @@ type GetDiffInput struct {
 // GetDiff returns the diff of the given versions.
 func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.From == 0 {
-		return nil, ErrMissingFrom
+		return nil, NewFieldError("From")
 	}
 
 	if i.To == 0 {
-		return nil, ErrMissingTo
+		return nil, NewFieldError("To")
 	}
 
 	path := fmt.Sprintf("service/%s/diff/from/%d/to/%d", i.ServiceID, i.From, i.To)

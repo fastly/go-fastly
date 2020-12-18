@@ -46,11 +46,11 @@ type ListHerokusInput struct {
 // ListHerokus returns the list of herokus for the configuration version.
 func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/heroku", i.ServiceID, i.ServiceVersion)
@@ -87,11 +87,11 @@ type CreateHerokuInput struct {
 // CreateHeroku creates a new Fastly heroku.
 func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/heroku", i.ServiceID, i.ServiceVersion)
@@ -122,15 +122,15 @@ type GetHerokuInput struct {
 // GetHeroku gets the heroku configuration with the given parameters.
 func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/heroku/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -169,15 +169,15 @@ type UpdateHerokuInput struct {
 // UpdateHeroku updates a specific heroku.
 func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/heroku/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -208,15 +208,15 @@ type DeleteHerokuInput struct {
 // DeleteHeroku deletes the given heroku version.
 func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/heroku/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

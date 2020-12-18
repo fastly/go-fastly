@@ -41,11 +41,11 @@ type ListDomainsInput struct {
 // ListDomains returns the list of domains for this Service.
 func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain", i.ServiceID, i.ServiceVersion)
@@ -80,11 +80,11 @@ type CreateDomainInput struct {
 // CreateDomain creates a new domain with the given information.
 func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain", i.ServiceID, i.ServiceVersion)
@@ -115,15 +115,15 @@ type GetDomainInput struct {
 // GetDomain retrieves information about the given domain name.
 func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -161,19 +161,19 @@ type UpdateDomainInput struct {
 // parameters are `Name` and `Comment`.
 func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	if i.NewName == nil && i.Comment == nil {
-		return nil, ErrMissingAtLeastOneOptionalField
+		return nil, NewFieldError("Name or Comment").Custom("at least one of the available 'optional' fields is required")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -204,15 +204,15 @@ type DeleteDomainInput struct {
 // DeleteDomain removes a single domain by the given name.
 func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

@@ -140,11 +140,11 @@ type CreateWAFInput struct {
 // CreateWAF creates a new Fastly WAF.
 func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := "/waf/firewalls"
@@ -175,15 +175,15 @@ type GetWAFInput struct {
 // GetWAF gets details for given WAF
 func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.ID == "" {
-		return nil, ErrMissingWAFID
+		return nil, NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
@@ -220,7 +220,7 @@ type UpdateWAFInput struct {
 // UpdateWAF updates a specific WAF.
 func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	if i.ID == "" {
-		return nil, ErrMissingWAFID
+		return nil, NewFieldError("ID")
 	}
 
 	// 'Service' and 'Version' are mandatory if:
@@ -228,11 +228,11 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	// 		- 'PrefetchCondition' or 'Response' are NOT empty.
 	if i.Disabled == nil || i.PrefetchCondition != nil || i.Response != nil {
 		if i.ServiceID == nil {
-			return nil, ErrMissingServiceID
+			return nil, NewFieldError("ServiceID")
 		}
 
 		if i.ServiceVersion == nil {
-			return nil, ErrMissingServiceVersion
+			return nil, NewFieldError("ServiceVersion")
 		}
 	}
 
@@ -261,11 +261,11 @@ type DeleteWAFInput struct {
 func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.ID == "" {
-		return ErrMissingWAFID
+		return NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)

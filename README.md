@@ -33,6 +33,15 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 > Note: some read/list operations require fields to be provided but if omitted a zero value will be used when marshaling the data structure into JSON. This too can cause confusion, which is why some input structs define their mandatory fields as pointers (to ensure that the backend can distinguish between a zero value and an omitted field).
 
+## Migrating from v2 to v3
+
+There were a couple of breaking changes introduced into `v3.0.0`:
+
+1. A new `FieldError` abstraction for validating API struct fields.
+2. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
+
+> Note: the reason for a new error abstraction was to help reduce the ever growing number of sentinel errors.
+
 ## Examples
 
 Fastly's API is designed to work in the following manner:

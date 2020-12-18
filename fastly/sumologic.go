@@ -47,11 +47,11 @@ type ListSumologicsInput struct {
 // ListSumologics returns the list of sumologics for the configuration version.
 func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sumologic", i.ServiceID, i.ServiceVersion)
@@ -89,11 +89,11 @@ type CreateSumologicInput struct {
 // CreateSumologic creates a new Fastly sumologic.
 func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sumologic", i.ServiceID, i.ServiceVersion)
@@ -124,15 +124,15 @@ type GetSumologicInput struct {
 // GetSumologic gets the sumologic configuration with the given parameters.
 func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sumologic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -172,15 +172,15 @@ type UpdateSumologicInput struct {
 // UpdateSumologic updates a specific sumologic.
 func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sumologic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -211,15 +211,15 @@ type DeleteSumologicInput struct {
 // DeleteSumologic deletes the given sumologic version.
 func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sumologic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

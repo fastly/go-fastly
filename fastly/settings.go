@@ -25,11 +25,11 @@ type GetSettingsInput struct {
 // GetSettings gets the backend configuration with the given parameters.
 func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/settings", i.ServiceID, i.ServiceVersion)
@@ -62,11 +62,11 @@ type UpdateSettingsInput struct {
 // UpdateSettings updates a specific backend.
 func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/settings", i.ServiceID, i.ServiceVersion)

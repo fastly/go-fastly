@@ -32,15 +32,15 @@ type GetDictionaryInfoInput struct {
 // GetDictionaryInfo gets the dictionary metadata with the given parameters.
 func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s/info", i.ServiceID, i.ServiceVersion, i.ID)

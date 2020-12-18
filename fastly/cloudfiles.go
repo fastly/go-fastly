@@ -54,11 +54,11 @@ type ListCloudfilesInput struct {
 // ListCloudfiles returns the list of Cloudfiles for the configuration version.
 func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles", i.ServiceID, i.ServiceVersion)
@@ -103,11 +103,11 @@ type CreateCloudfilesInput struct {
 // CreateCloudfiles creates a new Fastly Cloudfiles.
 func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles", i.ServiceID, i.ServiceVersion)
@@ -138,15 +138,15 @@ type GetCloudfilesInput struct {
 // GetCloudfiles gets the Cloudfiles configuration with the given parameters.
 func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -193,15 +193,15 @@ type UpdateCloudfilesInput struct {
 // UpdateCloudfiles updates a specific Cloudfiles.
 func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -232,15 +232,15 @@ type DeleteCloudfilesInput struct {
 // DeleteCloudfiles deletes the given Cloudfiles version.
 func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

@@ -53,11 +53,11 @@ type ListGCSsInput struct {
 // ListGCSs returns the list of gcses for the configuration version.
 func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs", i.ServiceID, i.ServiceVersion)
@@ -101,11 +101,11 @@ type CreateGCSInput struct {
 // CreateGCS creates a new Fastly GCS.
 func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs", i.ServiceID, i.ServiceVersion)
@@ -136,15 +136,15 @@ type GetGCSInput struct {
 // GetGCS gets the GCS configuration with the given parameters.
 func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -190,15 +190,15 @@ type UpdateGCSInput struct {
 // UpdateGCS updates a specific GCS.
 func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -229,15 +229,15 @@ type DeleteGCSInput struct {
 // DeleteGCS deletes the given GCS version.
 func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/gcs/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

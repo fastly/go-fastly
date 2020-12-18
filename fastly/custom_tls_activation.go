@@ -97,7 +97,7 @@ type GetTLSActivationInput struct {
 // GetTLSActivation retrieve a single activation.
 func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 
 	p := fmt.Sprintf("/tls/activations/%s", i.ID)
@@ -136,13 +136,13 @@ type CreateTLSActivationInput struct {
 // CreateTLSActivation enable TLS for a domain using a custom certificate.
 func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
 	if i.Certificate == nil {
-		return nil, ErrMissingTLSCertificate
+		return nil, NewFieldError("TLSCertificate")
 	}
 	if i.Configuration == nil {
-		return nil, ErrMissingTLSConfiguration
+		return nil, NewFieldError("TLSConfiguration")
 	}
 	if i.Domain == nil {
-		return nil, ErrMissingTLSDomain
+		return nil, NewFieldError("TLSDomain")
 	}
 
 	p := "/tls/activations"
@@ -169,10 +169,10 @@ type UpdateTLSActivationInput struct {
 // UpdateTLSActivation updates the certificate used to terminate TLS traffic for the domain associated with this TLS activation.
 func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
-		return nil, ErrMissingID
+		return nil, NewFieldError("ID")
 	}
 	if i.Certificate == nil {
-		return nil, ErrMissingTLSCertificate
+		return nil, NewFieldError("TLSCertificate")
 	}
 
 	path := fmt.Sprintf("/tls/activations/%s", i.ID)
@@ -196,7 +196,7 @@ type DeleteTLSActivationInput struct {
 // DeleteTLSActivation destroy a certificate.
 func (c *Client) DeleteTLSActivation(i *DeleteTLSActivationInput) error {
 	if i.ID == "" {
-		return ErrMissingID
+		return NewFieldError("ID")
 	}
 
 	path := fmt.Sprintf("/tls/activations/%s", i.ID)

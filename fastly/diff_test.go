@@ -74,7 +74,7 @@ func TestClient_Diff_validation(t *testing.T) {
 	_, err = testClient.GetDiff(&GetDiffInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if err.Error() != "missing required field 'ServiceID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -82,7 +82,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		ServiceID: "foo",
 		From:      0,
 	})
-	if err != ErrMissingFrom {
+	if err.Error() != "missing required field 'From'" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -91,7 +91,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		From:      1,
 		To:        0,
 	})
-	if err != ErrMissingTo {
+	if err.Error() != "missing required field 'To'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -161,7 +161,7 @@ func TestClient_Services(t *testing.T) {
 func TestClient_GetService_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetService(&GetServiceInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -176,7 +176,7 @@ func TestClient_UpdateService_validation(t *testing.T) {
 	_, err = testClient.UpdateService(&UpdateServiceInput{
 		ServiceID: "foo",
 	})
-	if err.Error() != "at least one of the available 'optional' fields is required" {
+	if err.Error() != "problem with field 'Name or Comment': at least one of the available 'optional' fields is required" {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -184,14 +184,14 @@ func TestClient_UpdateService_validation(t *testing.T) {
 		ServiceID: "foo",
 		Name:      String(""),
 	})
-	if err.Error() != "missing field value for 'Name'" {
+	if err.Error() != "problem with field 'Name': service name can't be an empty value" {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
 	err := testClient.DeleteService(&DeleteServiceInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -83,7 +83,7 @@ func TestClient_GetCustomTLSConfiguration_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCustomTLSConfiguration(&GetCustomTLSConfigurationInput{})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -105,14 +105,14 @@ func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
 	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
 		Name: "My configuration v2",
 	})
-	if err != ErrMissingID {
+	if err.Error() != "missing required field 'ID'" {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
 		ID: "CONFIGURATION_ID",
 	})
-	if err != ErrMissingName {
+	if err.Error() != "missing required field 'Name'" {
 		t.Errorf("bad error: %s", err)
 	}
 }

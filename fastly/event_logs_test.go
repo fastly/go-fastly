@@ -44,7 +44,7 @@ func TestClient_GetAPIEvent_validation(t *testing.T) {
 	_, err = testClient.GetAPIEvent(&GetAPIEventInput{
 		EventID: "",
 	})
-	if err != ErrMissingEventID {
+	if err.Error() != "missing required field 'EventID'" {
 		t.Errorf("bad error: %s", err)
 	}
 

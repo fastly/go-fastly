@@ -46,11 +46,11 @@ type ListServersInput struct {
 // ListServers lists all servers for a particular service and pool.
 func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, NewFieldError("PoolID")
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/servers", i.ServiceID, i.PoolID)
@@ -91,15 +91,15 @@ type CreateServerInput struct {
 // Servers are versionless resources that are associated with a Pool.
 func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, NewFieldError("PoolID")
 	}
 
 	if i.Address == "" {
-		return nil, ErrMissingAddress
+		return nil, NewFieldError("Address")
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server", i.ServiceID, i.PoolID)
@@ -129,15 +129,15 @@ type GetServerInput struct {
 // GetServer gets a single server for a particular service and pool.
 func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, NewFieldError("PoolID")
 	}
 
 	if i.Server == "" {
-		return nil, ErrMissingServer
+		return nil, NewFieldError("Server")
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
@@ -176,15 +176,15 @@ type UpdateServerInput struct {
 // UpdateServer updates a single server for a particular service and pool.
 func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, NewFieldError("PoolID")
 	}
 
 	if i.Server == "" {
-		return nil, ErrMissingServer
+		return nil, NewFieldError("Server")
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
@@ -214,15 +214,15 @@ type DeleteServerInput struct {
 // DeleteServer deletes a single server for a particular service and pool.
 func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.PoolID == "" {
-		return ErrMissingPool
+		return NewFieldError("PoolID")
 	}
 
 	if i.Server == "" {
-		return ErrMissingServer
+		return NewFieldError("Server")
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)

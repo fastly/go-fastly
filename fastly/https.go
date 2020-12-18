@@ -57,11 +57,11 @@ type ListHTTPSInput struct {
 // ListHTTPS returns the list of HTTPS logs for the configuration version.
 func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/https", i.ServiceID, i.ServiceVersion)
@@ -109,11 +109,11 @@ type CreateHTTPSInput struct {
 // CreateHTTPS creates a new Fastly HTTPS logging endpoint.
 func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/https", i.ServiceID, i.ServiceVersion)
@@ -143,15 +143,15 @@ type GetHTTPSInput struct {
 
 func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -200,15 +200,15 @@ type UpdateHTTPSInput struct {
 
 func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+		return nil, NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
+		return nil, NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return nil, ErrMissingName
+		return nil, NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -237,15 +237,15 @@ type DeleteHTTPSInput struct {
 
 func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	if i.ServiceID == "" {
-		return ErrMissingServiceID
+		return NewFieldError("ServiceID")
 	}
 
 	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
+		return NewFieldError("ServiceVersion")
 	}
 
 	if i.Name == "" {
-		return ErrMissingName
+		return NewFieldError("Name")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/https/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
