@@ -24,7 +24,7 @@ type FieldError struct {
 // backend will just reject the call, thus being a waste of network resources).
 //
 // Because of this we allow modifying the error message to reflect whether the
-// missing field was either 'required' or just missing a value.
+// field was either missing or some other type of error occurred.
 func (e *FieldError) Error() string {
 	if e.message != "" {
 		return fmt.Sprintf("problem with field '%s': %s", e.kind, e.message)
