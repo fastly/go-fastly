@@ -176,7 +176,7 @@ func TestClient_UpdateService_validation(t *testing.T) {
 	_, err = testClient.UpdateService(&UpdateServiceInput{
 		ServiceID: "foo",
 	})
-	if err.Error() != "problem with field 'Name or Comment': at least one of the available 'optional' fields is required" {
+	if err.Error() != "problem with field 'Name, Comment': at least one of the available 'optional' fields is required" {
 		t.Errorf("bad error: %s", err)
 	}
 

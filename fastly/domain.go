@@ -173,7 +173,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	}
 
 	if i.NewName == nil && i.Comment == nil {
-		return nil, NewFieldError("Name or Comment").Custom("at least one of the available 'optional' fields is required")
+		return nil, NewFieldError("Name, Comment").Message("at least one of the available 'optional' fields is required")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

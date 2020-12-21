@@ -11,8 +11,8 @@ import (
 
 // FieldError represents a custom error type for API data fields.
 type FieldError struct {
-	kind   string
-	custom string
+	kind    string
+	message string
 }
 
 // Error fulfills the error interface.
@@ -26,15 +26,15 @@ type FieldError struct {
 // Because of this we allow modifying the error message to reflect whether the
 // missing field was either 'required' or just missing a value.
 func (e *FieldError) Error() string {
-	if e.custom != "" {
-		return fmt.Sprintf("problem with field '%s': %s", e.kind, e.custom)
+	if e.message != "" {
+		return fmt.Sprintf("problem with field '%s': %s", e.kind, e.message)
 	}
 
 	return fmt.Sprintf("missing required field '%s'", e.kind)
 }
 
-func (e *FieldError) Custom(msg string) *FieldError {
-	e.custom = msg
+func (e *FieldError) Message(msg string) *FieldError {
+	e.message = msg
 	return e
 }
 

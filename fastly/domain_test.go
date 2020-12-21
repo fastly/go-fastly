@@ -207,7 +207,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "bar",
 	})
-	if err.Error() != "problem with field 'Name or Comment': at least one of the available 'optional' fields is required" {
+	if err.Error() != "problem with field 'Name, Comment': at least one of the available 'optional' fields is required" {
 		t.Errorf("bad error: %s", err)
 	}
 }

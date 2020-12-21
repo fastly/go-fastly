@@ -158,11 +158,11 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	}
 
 	if i.Name == nil && i.Comment == nil {
-		return nil, NewFieldError("Name or Comment").Custom("at least one of the available 'optional' fields is required")
+		return nil, NewFieldError("Name, Comment").Message("at least one of the available 'optional' fields is required")
 	}
 
 	if i.Name != nil && *i.Name == "" {
-		return nil, NewFieldError("Name").Custom("service name can't be an empty value")
+		return nil, NewFieldError("Name").Message("service name can't be an empty value")
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ServiceID)

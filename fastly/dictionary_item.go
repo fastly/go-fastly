@@ -220,7 +220,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	}
 
 	if len(i.Items) > BatchModifyMaximumOperations {
-		return NewFieldError("Items").Custom("batch modify maximum operations exceeded")
+		return NewFieldError("Items").Message("batch modify maximum operations exceeded")
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)

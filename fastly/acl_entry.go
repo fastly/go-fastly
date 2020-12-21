@@ -251,7 +251,7 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	}
 
 	if len(i.Entries) > BatchModifyMaximumOperations {
-		return NewFieldError("Entries").Custom("batch modify maximum operations exceeded")
+		return NewFieldError("Entries").Message("batch modify maximum operations exceeded")
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)

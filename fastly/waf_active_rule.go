@@ -202,7 +202,7 @@ func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiv
 	}
 
 	if len(i.Rules) == 0 {
-		return nil, NewFieldError("Rules").Custom("expect at least one WAFActiveRule")
+		return nil, NewFieldError("Rules").Message("expect at least one WAFActiveRule")
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
@@ -245,7 +245,7 @@ type BatchModificationWAFActiveRulesInput struct {
 func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRulesInput) ([]*WAFActiveRule, error) {
 
 	if len(i.Rules) > BatchModifyMaximumOperations {
-		return nil, NewFieldError("Rules").Custom("batch modify maximum operations exceeded")
+		return nil, NewFieldError("Rules").Message("batch modify maximum operations exceeded")
 	}
 
 	switch i.OP {
@@ -288,7 +288,7 @@ func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
 	}
 
 	if len(i.Rules) == 0 {
-		return NewFieldError("Rules").Custom("expect at least one WAFActiveRule")
+		return NewFieldError("Rules").Message("expect at least one WAFActiveRule")
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
