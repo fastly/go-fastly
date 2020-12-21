@@ -72,7 +72,7 @@ func TestClient_Versions(t *testing.T) {
 		uv, err = c.UpdateVersion(&UpdateVersionInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: v.Number,
-			Comment:        "new comment",
+			Comment:        String("new comment"),
 		})
 	})
 	if err != nil {

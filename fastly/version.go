@@ -155,7 +155,7 @@ type UpdateVersionInput struct {
 	ServiceVersion int
 
 	// A personal freeform descriptive note.
-	Comment string `form:"comment"`
+	Comment *string `form:"comment,omitempty"`
 }
 
 // UpdateVersion updates the given version
@@ -166,10 +166,6 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 
 	if i.ServiceVersion == 0 {
 		return nil, NewFieldError("ServiceVersion")
-	}
-
-	if i.Comment == "" {
-		return nil, NewFieldError("Comment")
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d", i.ServiceID, i.ServiceVersion)
