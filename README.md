@@ -1,9 +1,10 @@
 # Go Fastly
 
-[![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
+[![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][latest]
 
-[godocs]: https://pkg.go.dev/github.com/fastly/go-fastly/fastly?tab=doc
-[v2]: https://pkg.go.dev/github.com/fastly/go-fastly/v2
+[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
+[v3]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
+[v2]: https://pkg.go.dev/github.com/fastly/go-fastly/v2/fastly
 [v1]: https://pkg.go.dev/github.com/fastly/go-fastly
 
 Go Fastly is a Golang API client for interacting with most facets of the
@@ -17,7 +18,7 @@ so you must be running Go 1.11 or higher.
 ## Usage
 
 ```go
-import "github.com/fastly/go-fastly/v2/fastly"
+import "github.com/fastly/go-fastly/v3/fastly"
 ```
 
 ## Migrating from v1 to v2
@@ -35,7 +36,7 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 ## Migrating from v2 to v3
 
-There were a couple of breaking changes introduced into `v3.0.0`:
+There were a couple of breaking changes introduced into [`v3.0.0`][v3]:
 
 1. A new `FieldError` abstraction for validating API struct fields.
 2. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
@@ -139,7 +140,7 @@ fmt.Printf("%t\n", activeVersion.Locked)
 ```
 
 More information can be found in the
-[Fastly Godoc][godocs].
+[Fastly Godoc][latest].
 
 ## Developing
 
