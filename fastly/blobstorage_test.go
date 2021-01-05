@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -323,7 +322,7 @@ func TestClient_ListBlobStorages_validation(t *testing.T) {
 	_, err = testClient.ListBlobStorages(&ListBlobStoragesInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -331,7 +330,7 @@ func TestClient_ListBlobStorages_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -341,7 +340,7 @@ func TestClient_CreateBlobStorage_validation(t *testing.T) {
 	_, err = testClient.CreateBlobStorage(&CreateBlobStorageInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -349,7 +348,7 @@ func TestClient_CreateBlobStorage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -359,7 +358,7 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -367,7 +366,7 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -376,7 +375,7 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -386,7 +385,7 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -394,7 +393,7 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -403,7 +402,7 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -413,7 +412,7 @@ func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -421,7 +420,7 @@ func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -430,7 +429,7 @@ func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -153,7 +152,7 @@ func TestClient_ListDatadog_validation(t *testing.T) {
 	_, err = testClient.ListDatadog(&ListDatadogInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -161,7 +160,7 @@ func TestClient_ListDatadog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -171,7 +170,7 @@ func TestClient_CreateDatadog_validation(t *testing.T) {
 	_, err = testClient.CreateDatadog(&CreateDatadogInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -179,7 +178,7 @@ func TestClient_CreateDatadog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -189,7 +188,7 @@ func TestClient_GetDatadog_validation(t *testing.T) {
 	_, err = testClient.GetDatadog(&GetDatadogInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -197,7 +196,7 @@ func TestClient_GetDatadog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -206,7 +205,7 @@ func TestClient_GetDatadog_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -216,7 +215,7 @@ func TestClient_UpdateDatadog_validation(t *testing.T) {
 	_, err = testClient.UpdateDatadog(&UpdateDatadogInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -224,7 +223,7 @@ func TestClient_UpdateDatadog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -233,7 +232,7 @@ func TestClient_UpdateDatadog_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -243,7 +242,7 @@ func TestClient_DeleteDatadog_validation(t *testing.T) {
 	err = testClient.DeleteDatadog(&DeleteDatadogInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -251,7 +250,7 @@ func TestClient_DeleteDatadog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -260,7 +259,7 @@ func TestClient_DeleteDatadog_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

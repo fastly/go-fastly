@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -66,7 +65,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -74,7 +73,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -83,7 +82,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 		ServiceVersion: 1,
 		ID:             "",
 	})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }

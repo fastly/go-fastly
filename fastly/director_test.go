@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -136,7 +135,7 @@ func TestClient_ListDirectors_validation(t *testing.T) {
 	_, err = testClient.ListDirectors(&ListDirectorsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -144,7 +143,7 @@ func TestClient_ListDirectors_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -154,7 +153,7 @@ func TestClient_CreateDirector_validation(t *testing.T) {
 	_, err = testClient.CreateDirector(&CreateDirectorInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -162,7 +161,7 @@ func TestClient_CreateDirector_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -172,7 +171,7 @@ func TestClient_GetDirector_validation(t *testing.T) {
 	_, err = testClient.GetDirector(&GetDirectorInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -180,7 +179,7 @@ func TestClient_GetDirector_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -189,7 +188,7 @@ func TestClient_GetDirector_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -199,7 +198,7 @@ func TestClient_UpdateDirector_validation(t *testing.T) {
 	_, err = testClient.UpdateDirector(&UpdateDirectorInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -207,7 +206,7 @@ func TestClient_UpdateDirector_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -216,7 +215,7 @@ func TestClient_UpdateDirector_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -226,7 +225,7 @@ func TestClient_DeleteDirector_validation(t *testing.T) {
 	err = testClient.DeleteDirector(&DeleteDirectorInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -234,7 +233,7 @@ func TestClient_DeleteDirector_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -243,7 +242,7 @@ func TestClient_DeleteDirector_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

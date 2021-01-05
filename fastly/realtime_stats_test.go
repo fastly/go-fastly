@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -10,7 +9,7 @@ func TestClient_GetRealtimeStats_validation(t *testing.T) {
 	_, err = testStatsClient.GetRealtimeStats(&GetRealtimeStatsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }

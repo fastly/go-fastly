@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"bytes"
-	"errors"
 	"testing"
 
 	"github.com/ajg/form"
@@ -73,7 +72,7 @@ func TestClient_GetSettings_validation(t *testing.T) {
 	_, err = testClient.GetSettings(&GetSettingsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -81,7 +80,7 @@ func TestClient_GetSettings_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -91,7 +90,7 @@ func TestClient_UpdateSettings_validation(t *testing.T) {
 	_, err = testClient.UpdateSettings(&UpdateSettingsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -99,7 +98,7 @@ func TestClient_UpdateSettings_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }

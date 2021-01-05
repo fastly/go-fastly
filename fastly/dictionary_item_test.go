@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -120,7 +119,7 @@ func TestClient_ListDictionaryItems_validation(t *testing.T) {
 	_, err = testClient.ListDictionaryItems(&ListDictionaryItemsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -128,7 +127,7 @@ func TestClient_ListDictionaryItems_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if !errors.Is(err, ErrMissingDictionaryID) {
+	if err != ErrMissingDictionaryID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -138,7 +137,7 @@ func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 	_, err = testClient.CreateDictionaryItem(&CreateDictionaryItemInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -146,7 +145,7 @@ func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if !errors.Is(err, ErrMissingDictionaryID) {
+	if err != ErrMissingDictionaryID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -156,7 +155,7 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 	_, err = testClient.GetDictionaryItem(&GetDictionaryItemInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -164,7 +163,7 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if !errors.Is(err, ErrMissingDictionaryID) {
+	if err != ErrMissingDictionaryID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -173,7 +172,7 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "",
 	})
-	if !errors.Is(err, ErrMissingItemKey) {
+	if err != ErrMissingItemKey {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -183,7 +182,7 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 	_, err = testClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -191,7 +190,7 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if !errors.Is(err, ErrMissingDictionaryID) {
+	if err != ErrMissingDictionaryID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -200,7 +199,7 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "",
 	})
-	if !errors.Is(err, ErrMissingItemKey) {
+	if err != ErrMissingItemKey {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -210,7 +209,7 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 	err = testClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -218,7 +217,7 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if !errors.Is(err, ErrMissingDictionaryID) {
+	if err != ErrMissingDictionaryID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -227,7 +226,7 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "",
 	})
-	if !errors.Is(err, ErrMissingItemKey) {
+	if err != ErrMissingItemKey {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -237,14 +236,14 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 	err = testClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 	err = testClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if !errors.Is(err, ErrMissingDictionaryID) {
+	if err != ErrMissingDictionaryID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -254,7 +253,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "bar",
 		Items:        oversizedDictionaryItems,
 	})
-	if !errors.Is(err, ErrMaxExceededItems) {
+	if err != ErrMaxExceededItems {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -373,7 +372,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 	_, err = testClient.ListS3s(&ListS3sInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -381,7 +380,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -391,7 +390,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 	_, err = testClient.CreateS3(&CreateS3Input{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -399,7 +398,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -410,7 +409,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: "",
 	})
-	if !errors.Is(err, ErrMissingServerSideEncryptionKMSKeyID) {
+	if err != ErrMissingServerSideEncryptionKMSKeyID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -420,7 +419,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 	_, err = testClient.GetS3(&GetS3Input{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -428,7 +427,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -437,7 +436,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -447,7 +446,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 	_, err = testClient.UpdateS3(&UpdateS3Input{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -455,7 +454,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -464,7 +463,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -475,7 +474,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: String(""),
 	})
-	if !errors.Is(err, ErrMissingServerSideEncryptionKMSKeyID) {
+	if err != ErrMissingServerSideEncryptionKMSKeyID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -485,7 +484,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 	err = testClient.DeleteS3(&DeleteS3Input{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -493,7 +492,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -502,7 +501,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

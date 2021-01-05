@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -77,7 +76,7 @@ func TestClient_Diff_validation(t *testing.T) {
 	_, err = testClient.GetDiff(&GetDiffInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -85,7 +84,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		ServiceID: "foo",
 		From:      0,
 	})
-	if !errors.Is(err, ErrMissingFrom) {
+	if err != ErrMissingFrom {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -94,7 +93,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		From:      1,
 		To:        0,
 	})
-	if !errors.Is(err, ErrMissingTo) {
+	if err != ErrMissingTo {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -86,7 +85,7 @@ func TestClient_GetCustomTLSConfiguration_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCustomTLSConfiguration(&GetCustomTLSConfigurationInput{})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -108,14 +107,14 @@ func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
 	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
 		Name: "My configuration v2",
 	})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
 		ID: "CONFIGURATION_ID",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

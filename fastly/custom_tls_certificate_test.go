@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -111,14 +110,14 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		Name: "My certificate",
 	})
-	if !errors.Is(err, ErrMissingCertBlob) {
+	if err != ErrMissingCertBlob {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -137,7 +136,7 @@ func TestClient_DeleteCustomTLSCertificate_validation(t *testing.T) {
 	}
 
 	err = testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -168,7 +167,7 @@ func TestClient_GetCustomTLSCertificate_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -192,7 +191,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 		Name:     "My certificate",
 	})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -200,7 +199,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		ID:   "CERTIFICATE_ID",
 		Name: "My certificate",
 	})
-	if !errors.Is(err, ErrMissingCertBlob) {
+	if err != ErrMissingCertBlob {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -208,7 +207,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		ID:       "CERTIFICATE_ID",
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

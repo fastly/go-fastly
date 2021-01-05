@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"strings"
 	"testing"
 )
@@ -252,7 +251,7 @@ func TestClient_ListHTTPS_validation(t *testing.T) {
 	_, err = testClient.ListHTTPS(&ListHTTPSInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -262,7 +261,7 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 	_, err = testClient.CreateHTTPS(&CreateHTTPSInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -270,7 +269,7 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -280,7 +279,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -288,7 +287,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -297,7 +296,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -307,7 +306,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -315,7 +314,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -324,7 +323,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -334,7 +333,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -342,7 +341,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -351,7 +350,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

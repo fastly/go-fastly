@@ -143,14 +143,14 @@ func TestClient_WAF_Rule_Exclusion_list_validation(t *testing.T) {
 			input: &ListWAFRuleExclusionsInput{
 				WAFID: "",
 			},
-			expectedError: "missing required field 'WAFID'",
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &ListWAFRuleExclusionsInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: "missing required field 'WAFVersionNumber'",
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 	}
 	for _, c := range cases {
@@ -171,14 +171,14 @@ func TestClient_WAF_Rule_Exclusion_list_all_validation(t *testing.T) {
 			input: &ListAllWAFRuleExclusionsInput{
 				WAFID: "",
 			},
-			expectedError: "missing required field 'WAFID'",
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &ListAllWAFRuleExclusionsInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: "missing required field 'WAFVersionNumber'",
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 	}
 	for _, c := range cases {
@@ -199,21 +199,21 @@ func TestClient_WAF_Rule_Exclusion_create_validation(t *testing.T) {
 			input: &CreateWAFRuleExclusionInput{
 				WAFID: "",
 			},
-			expectedError: "missing required field 'WAFID'",
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &CreateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: "missing required field 'WAFVersionNumber'",
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 		{
 			input: &CreateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 1,
 			},
-			expectedError: "missing required field 'WAFRuleExclusion'",
+			expectedError: ErrMissingWAFRuleExclusion.Error(),
 		},
 	}
 	for _, c := range cases {
@@ -234,21 +234,21 @@ func TestClient_WAF_Rule_Exclusion_update_validation(t *testing.T) {
 			input: &UpdateWAFRuleExclusionInput{
 				WAFID: "",
 			},
-			expectedError: "missing required field 'WAFID'",
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &UpdateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: "missing required field 'WAFVersionNumber'",
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 		{
 			input: &UpdateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 1,
 			},
-			expectedError: "missing required field 'WAFRuleExclusionNumber'",
+			expectedError: ErrMissingWAFRuleExclusionNumber.Error(),
 		},
 		{
 			input: &UpdateWAFRuleExclusionInput{
@@ -256,7 +256,7 @@ func TestClient_WAF_Rule_Exclusion_update_validation(t *testing.T) {
 				WAFVersionNumber: 1,
 				Number:           1,
 			},
-			expectedError: "missing required field 'WAFRuleExclusion'",
+			expectedError: ErrMissingWAFRuleExclusion.Error(),
 		},
 	}
 	for _, c := range cases {
@@ -277,21 +277,21 @@ func TestClient_WAF_Rule_Exclusion_delete_validation(t *testing.T) {
 			input: &DeleteWAFRuleExclusionInput{
 				WAFID: "",
 			},
-			expectedError: "missing required field 'WAFID'",
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &DeleteWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: "missing required field 'WAFVersionNumber'",
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 		{
 			input: &DeleteWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 1,
 			},
-			expectedError: "missing required field 'Number'",
+			expectedError: ErrMissingNumber.Error(),
 		},
 	}
 	for _, c := range cases {

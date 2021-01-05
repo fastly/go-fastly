@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"sort"
 	"testing"
 )
@@ -136,7 +135,7 @@ func TestClient_ListVersions_validation(t *testing.T) {
 	_, err = testClient.ListVersions(&ListVersionsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -146,7 +145,7 @@ func TestClient_CreateVersion_validation(t *testing.T) {
 	_, err = testClient.CreateVersion(&CreateVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -156,7 +155,7 @@ func TestClient_GetVersion_validation(t *testing.T) {
 	_, err = testClient.GetVersion(&GetVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -164,7 +163,7 @@ func TestClient_GetVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -174,7 +173,7 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 	_, err = testClient.UpdateVersion(&UpdateVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -182,7 +181,7 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -192,7 +191,7 @@ func TestClient_ActivateVersion_validation(t *testing.T) {
 	_, err = testClient.ActivateVersion(&ActivateVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -200,7 +199,7 @@ func TestClient_ActivateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -210,7 +209,7 @@ func TestClient_DeactivateVersion_validation(t *testing.T) {
 	_, err = testClient.DeactivateVersion(&DeactivateVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -218,7 +217,7 @@ func TestClient_DeactivateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -228,7 +227,7 @@ func TestClient_CloneVersion_validation(t *testing.T) {
 	_, err = testClient.CloneVersion(&CloneVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -236,7 +235,7 @@ func TestClient_CloneVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -246,7 +245,7 @@ func TestClient_ValidateVersion_validation(t *testing.T) {
 	_, _, err = testClient.ValidateVersion(&ValidateVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -254,7 +253,7 @@ func TestClient_ValidateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -264,7 +263,7 @@ func TestClient_LockVersion_validation(t *testing.T) {
 	_, err = testClient.LockVersion(&LockVersionInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -272,7 +271,7 @@ func TestClient_LockVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -142,7 +141,7 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -150,7 +149,7 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if !errors.Is(err, ErrMissingACLID) {
+	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -160,7 +159,7 @@ func TestClient_CreateACLEntry_validation(t *testing.T) {
 	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -168,7 +167,7 @@ func TestClient_CreateACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if !errors.Is(err, ErrMissingACLID) {
+	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -178,7 +177,7 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 	_, err = testClient.GetACLEntry(&GetACLEntryInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -186,7 +185,7 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if !errors.Is(err, ErrMissingACLID) {
+	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -195,7 +194,7 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 		ACLID:     "acl",
 		ID:        "",
 	})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -205,7 +204,7 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -213,7 +212,7 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if !errors.Is(err, ErrMissingACLID) {
+	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -222,7 +221,7 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 		ACLID:     "acl",
 		ID:        "",
 	})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -232,7 +231,7 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -240,7 +239,7 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if !errors.Is(err, ErrMissingACLID) {
+	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -249,7 +248,7 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 		ACLID:     "acl",
 		ID:        "",
 	})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -259,14 +258,14 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
 		ServiceID: "foo",
 		ACLID:     "",
 	})
-	if !errors.Is(err, ErrMissingACLID) {
+	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -276,7 +275,7 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 		ACLID:     "bar",
 		Entries:   oversizedACLEntries,
 	})
-	if !errors.Is(err, ErrMaxExceededEntries) {
+	if err != ErrMaxExceededEntries {
 		t.Errorf("bad error: %s", err)
 	}
 

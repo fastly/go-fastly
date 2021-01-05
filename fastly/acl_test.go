@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -118,7 +117,7 @@ func TestClient_ListACLs_validation(t *testing.T) {
 	_, err = testClient.ListACLs(&ListACLsInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -126,7 +125,7 @@ func TestClient_ListACLs_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -136,7 +135,7 @@ func TestClient_CreateACL_validation(t *testing.T) {
 	_, err = testClient.CreateACL(&CreateACLInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -144,7 +143,7 @@ func TestClient_CreateACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -154,7 +153,7 @@ func TestClient_GetACL_validation(t *testing.T) {
 	_, err = testClient.GetACL(&GetACLInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -162,7 +161,7 @@ func TestClient_GetACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -171,7 +170,7 @@ func TestClient_GetACL_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -181,7 +180,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 	_, err = testClient.UpdateACL(&UpdateACLInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -189,7 +188,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -198,7 +197,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = testClient.UpdateACL(&UpdateACLInput{
@@ -207,7 +206,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 		Name:           "acl",
 		NewName:        "",
 	})
-	if !errors.Is(err, ErrMissingNewName) {
+	if err != ErrMissingNewName {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -217,7 +216,7 @@ func TestClient_DeleteACL_validation(t *testing.T) {
 	err = testClient.DeleteACL(&DeleteACLInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -225,7 +224,7 @@ func TestClient_DeleteACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if !errors.Is(err, ErrMissingServiceVersion) {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -234,7 +233,7 @@ func TestClient_DeleteACL_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if !errors.Is(err, ErrMissingName) {
+	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

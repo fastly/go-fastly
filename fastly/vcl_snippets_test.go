@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"errors"
 	"testing"
 )
 
@@ -236,14 +235,14 @@ func Test_Snippets(t *testing.T) {
 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
 		ServiceID: "",
 	})
-	if !errors.Is(err, ErrMissingServiceID) {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
 		ServiceID: testServiceID,
 		ID:        "",
 	})
-	if !errors.Is(err, ErrMissingID) {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -257,7 +256,7 @@ func Test_Snippets(t *testing.T) {
 		Content:        "",
 	})
 
-	if !errors.Is(err, ErrMissingContent) {
+	if err != ErrMissingContent {
 		t.Errorf("bad error: %s", err)
 	}
 }
