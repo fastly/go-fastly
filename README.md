@@ -193,7 +193,7 @@ make test \
   FASTLY_TEST_SERVICE_ID="SERVICEID" \
   FASTLY_API_KEY="TESTAPIKEY" \
   TESTARGS="-run=Logentries"
-make fix-fixtures
+make fix-fixtures FASTLY_TEST_SERVICE_ID="SERVICEID"
 
 # Re-run test suite with newly recorded fixtures
 unset FASTLY_TEST_SERVICE_ID FASTLY_API_KEY

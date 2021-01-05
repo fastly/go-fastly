@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: Kind=1&ServiceID=7i6HN3TK9wS159v2gPAZ8A
+    form:
+      Kind:
+      - "1"
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/log_stream/managed/instance_output
+    method: POST
+  response:
+    body: '{"msg":"Event Buffer has already been enabled for this service"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 07 Jan 2021 19:28:04 GMT
+      Fastly-Ratelimit-Remaining:
+      - "19996"
+      Fastly-Ratelimit-Reset:
+      - "1610049600"
+      Status:
+      - 409 Conflict
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8229-DEN
+      X-Timer:
+      - S1610047684.059177,VS0,VE736
+    status: 409 Conflict
+    code: 409
+    duration: ""

@@ -41,6 +41,10 @@ var ErrMissingName = errors.New("missing required field 'Name'")
 // "Key" key, but one was not set.
 var ErrMissingKey = errors.New("missing required field 'Key'")
 
+// ErrMissingKind is an error that is returned when an input struct requires a
+// "Kind" key, but one was not set.
+var ErrMissingKind = errors.New("missing required field 'Kind'")
+
 // ErrMissingURL is an error that is returned when an input struct requires a
 // "URL" key, but one was not set.
 var ErrMissingURL = errors.New("missing required field 'URL'")
@@ -181,12 +185,19 @@ var ErrMissingTLSConfiguration = errors.New("missing required field 'Configurati
 // a "Domain" field assigned a "TLSDomain" struct, but one was not set.
 var ErrMissingTLSDomain = errors.New("missing required field 'Domain'")
 
-// ErrStatusNotOk is an error that indicates that indicates that the response body returned
+// ErrStatusNotOk is an error that indicates that the response body returned
 // by the Fastly API was not `{"status": "ok"}`
 var ErrStatusNotOk = errors.New("unexpected 'status' field in API response body")
 
 // ErrNotOK is a generic error indicating that something is not okay.
 var ErrNotOK = errors.New("not ok")
+
+// ErrNotImplemented is a generic error indicating that something is not yet implemented.
+var ErrNotImplemented = errors.New("not implemented")
+
+// ErrManagedLoggingEnabled is an error that indicates that managed logging was
+// already enabled for a service.
+var ErrManagedLoggingEnabled = errors.New("managed logging already enabled")
 
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
