@@ -41,8 +41,6 @@ There were a couple of breaking changes introduced into [`v3.0.0`][v3]:
 1. A new `FieldError` abstraction for validating API struct fields.
 2. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
 
-> Note: the reason for a new error abstraction was to help reduce the ever growing number of sentinel errors.
-
 ## Examples
 
 Fastly's API is designed to work in the following manner:
