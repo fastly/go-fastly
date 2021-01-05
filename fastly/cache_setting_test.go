@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_CacheSettings(t *testing.T) {
 	t.Parallel()
@@ -132,7 +135,7 @@ func TestClient_ListCacheSettings_validation(t *testing.T) {
 	_, err = testClient.ListCacheSettings(&ListCacheSettingsInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -140,7 +143,7 @@ func TestClient_ListCacheSettings_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -150,7 +153,7 @@ func TestClient_CreateCacheSetting_validation(t *testing.T) {
 	_, err = testClient.CreateCacheSetting(&CreateCacheSettingInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -158,7 +161,7 @@ func TestClient_CreateCacheSetting_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -168,7 +171,7 @@ func TestClient_GetCacheSetting_validation(t *testing.T) {
 	_, err = testClient.GetCacheSetting(&GetCacheSettingInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -176,7 +179,7 @@ func TestClient_GetCacheSetting_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -185,7 +188,7 @@ func TestClient_GetCacheSetting_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -195,7 +198,7 @@ func TestClient_UpdateCacheSetting_validation(t *testing.T) {
 	_, err = testClient.UpdateCacheSetting(&UpdateCacheSettingInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -203,7 +206,7 @@ func TestClient_UpdateCacheSetting_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -212,7 +215,7 @@ func TestClient_UpdateCacheSetting_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -222,7 +225,7 @@ func TestClient_DeleteCacheSetting_validation(t *testing.T) {
 	err = testClient.DeleteCacheSetting(&DeleteCacheSettingInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -230,7 +233,7 @@ func TestClient_DeleteCacheSetting_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -239,7 +242,7 @@ func TestClient_DeleteCacheSetting_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

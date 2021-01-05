@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func Test_Snippets(t *testing.T) {
 	t.Parallel()
@@ -233,14 +236,14 @@ func Test_Snippets(t *testing.T) {
 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = testClient.GetDynamicSnippet(&GetDynamicSnippetInput{
 		ServiceID: testServiceID,
 		ID:        "",
 	})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -254,7 +257,7 @@ func Test_Snippets(t *testing.T) {
 		Content:        "",
 	})
 
-	if err.Error() != "missing required field 'Content'" {
+	if !errors.Is(err, ErrMissingContent) {
 		t.Errorf("bad error: %s", err)
 	}
 }

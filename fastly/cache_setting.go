@@ -59,11 +59,11 @@ type ListCacheSettingsInput struct {
 // version.
 func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings", i.ServiceID, i.ServiceVersion)
@@ -98,11 +98,11 @@ type CreateCacheSettingInput struct {
 // CreateCacheSetting creates a new Fastly cache setting.
 func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings", i.ServiceID, i.ServiceVersion)
@@ -134,15 +134,15 @@ type GetCacheSettingInput struct {
 // parameters.
 func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -179,15 +179,15 @@ type UpdateCacheSettingInput struct {
 // UpdateCacheSetting updates a specific cache setting.
 func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -218,15 +218,15 @@ type DeleteCacheSettingInput struct {
 // DeleteCacheSetting deletes the given cache setting version.
 func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

@@ -47,11 +47,11 @@ type ListLogentriesInput struct {
 // ListLogentries returns the list of logentries for the configuration version.
 func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries", i.ServiceID, i.ServiceVersion)
@@ -89,11 +89,11 @@ type CreateLogentriesInput struct {
 // CreateLogentries creates a new Fastly logentries.
 func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries", i.ServiceID, i.ServiceVersion)
@@ -124,15 +124,15 @@ type GetLogentriesInput struct {
 // GetLogentries gets the logentries configuration with the given parameters.
 func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -172,15 +172,15 @@ type UpdateLogentriesInput struct {
 // UpdateLogentries updates a specific logentries.
 func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -211,15 +211,15 @@ type DeleteLogentriesInput struct {
 // DeleteLogentries deletes the given logentries version.
 func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/logentries/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

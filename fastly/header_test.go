@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_Headers(t *testing.T) {
 	t.Parallel()
@@ -169,7 +172,7 @@ func TestClient_ListHeaders_validation(t *testing.T) {
 	_, err = testClient.ListHeaders(&ListHeadersInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -177,7 +180,7 @@ func TestClient_ListHeaders_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -187,7 +190,7 @@ func TestClient_CreateHeader_validation(t *testing.T) {
 	_, err = testClient.CreateHeader(&CreateHeaderInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -195,7 +198,7 @@ func TestClient_CreateHeader_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -205,7 +208,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 	_, err = testClient.GetHeader(&GetHeaderInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -213,7 +216,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -222,7 +225,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -232,7 +235,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 	_, err = testClient.UpdateHeader(&UpdateHeaderInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -240,7 +243,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -249,7 +252,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -259,7 +262,7 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 	err = testClient.DeleteHeader(&DeleteHeaderInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -267,7 +270,7 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -276,7 +279,7 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

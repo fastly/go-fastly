@@ -106,11 +106,11 @@ type ListHeadersInput struct {
 // ListHeaders returns the list of headers for the configuration version.
 func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header", i.ServiceID, i.ServiceVersion)
@@ -152,11 +152,11 @@ type CreateHeaderInput struct {
 // CreateHeader creates a new Fastly header.
 func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header", i.ServiceID, i.ServiceVersion)
@@ -187,15 +187,15 @@ type GetHeaderInput struct {
 // GetHeader gets the header configuration with the given parameters.
 func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -239,15 +239,15 @@ type UpdateHeaderInput struct {
 // UpdateHeader updates a specific header.
 func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -278,15 +278,15 @@ type DeleteHeaderInput struct {
 // DeleteHeader deletes the given header version.
 func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

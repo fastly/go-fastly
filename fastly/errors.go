@@ -45,6 +45,176 @@ func NewFieldError(kind string) *FieldError {
 	}
 }
 
+const batchModifyMaxExceeded string = "batch modify maximum operations exceeded"
+
+// ErrMaxExceededEntries is an error that is returned when an input struct
+// specifies an "Entries" key value exceeding the maximum allowed.
+var ErrMaxExceededEntries = NewFieldError("Entries").Message(batchModifyMaxExceeded)
+
+// ErrMaxExceededItems is an error that is returned when an input struct
+// specifies an "Items" key value exceeding the maximum allowed.
+var ErrMaxExceededItems = NewFieldError("Items").Message(batchModifyMaxExceeded)
+
+// ErrMaxExceededRules is an error that is returned when an input struct
+// specifies an "Rules" key value exceeding the maximum allowed.
+var ErrMaxExceededRules = NewFieldError("Rules").Message(batchModifyMaxExceeded)
+
+// ErrMissingACLID is an error that is returned when an input struct
+// requires a "ACLID" key, but one was not set.
+var ErrMissingACLID = NewFieldError("ACLID")
+
+// ErrMissingAddress is an error that is returned when an input struct
+// requires a "Address" key, but one was not set.
+var ErrMissingAddress = NewFieldError("Address")
+
+// ErrMissingBackend is an error that is returned when an input struct
+// requires a "Backend" key, but one was not set.
+var ErrMissingBackend = NewFieldError("Backend")
+
+// ErrMissingCertBlob is an error that is returned when an input struct
+// requires a "CertBlob" key, but one was not set.
+var ErrMissingCertBlob = NewFieldError("CertBlob")
+
+// ErrMissingContent is an error that is returned when an input struct
+// requires a "Content" key, but one was not set.
+var ErrMissingContent = NewFieldError("Content")
+
+// ErrMissingCustomerID is an error that is returned when an input struct
+// requires a "CustomerID" key, but one was not set.
+var ErrMissingCustomerID = NewFieldError("CustomerID")
+
+// ErrMissingDictionaryID is an error that is returned when an input struct
+// requires a "DictionaryID" key, but one was not set.
+var ErrMissingDictionaryID = NewFieldError("DictionaryID")
+
+// ErrMissingDirector is an error that is returned when an input struct
+// requires a "Director" key, but one was not set.
+var ErrMissingDirector = NewFieldError("Director")
+
+// ErrMissingEventID is an error that is returned when an input struct
+// requires a "EventID" key, but one was not set.
+var ErrMissingEventID = NewFieldError("EventID")
+
+// ErrMissingFrom is an error that is returned when an input struct
+// requires a "From" key, but one was not set.
+var ErrMissingFrom = NewFieldError("From")
+
+// ErrMissingID is an error that is returned when an input struct
+// requires a "ID" key, but one was not set.
+var ErrMissingID = NewFieldError("ID")
+
+// ErrMissingIP is an error that is returned when an input struct
+// requires a "IP" key, but one was not set.
+var ErrMissingIP = NewFieldError("IP")
+
+// ErrMissingIntermediatesBlob is an error that is returned when an input struct
+// requires a "IntermediatesBlob" key, but one was not set.
+var ErrMissingIntermediatesBlob = NewFieldError("IntermediatesBlob")
+
+// ErrMissingItemKey is an error that is returned when an input struct
+// requires a "ItemKey" key, but one was not set.
+var ErrMissingItemKey = NewFieldError("ItemKey")
+
+// ErrMissingKey is an error that is returned when an input struct
+// requires a "Key" key, but one was not set.
+var ErrMissingKey = NewFieldError("Key")
+
+// ErrMissingLogin is an error that is returned when an input struct
+// requires a "Login" key, but one was not set.
+var ErrMissingLogin = NewFieldError("Login")
+
+// ErrMissingMonth is an error that is returned when an input struct
+// requires a "Month" key, but one was not set.
+var ErrMissingMonth = NewFieldError("Month")
+
+// ErrMissingName is an error that is returned when an input struct
+// requires a "Name" key, but one was not set.
+var ErrMissingName = NewFieldError("Name")
+
+// ErrMissingNameValue is an error that is returned when an input struct
+// requires a "Name" key, but one was not set.
+var ErrMissingNameValue = NewFieldError("Name").Message("service name can't be an empty value")
+
+// ErrMissingNewName is an error that is returned when an input struct
+// requires a "NewName" key, but one was not set.
+var ErrMissingNewName = NewFieldError("NewName")
+
+// ErrMissingNumber is an error that is returned when an input struct
+// requires a "Number" key, but one was not set.
+var ErrMissingNumber = NewFieldError("Number")
+
+// ErrMissingPoolID is an error that is returned when an input struct
+// requires a "PoolID" key, but one was not set.
+var ErrMissingPoolID = NewFieldError("PoolID")
+
+// ErrMissingServer is an error that is returned when an input struct
+// requires a "Server" key, but one was not set.
+var ErrMissingServer = NewFieldError("Server")
+
+// ErrMissingServerSideEncryptionKMSKeyID is an error that is returned when an
+// input struct requires a "ServerSideEncryptionKMSKeyID" key, but one was not set.
+var ErrMissingServerSideEncryptionKMSKeyID = NewFieldError("ServerSideEncryptionKMSKeyID")
+
+// ErrMissingServiceID is an error that is returned when an input struct
+// requires a "ServiceID" key, but one was not set.
+var ErrMissingServiceID = NewFieldError("ServiceID")
+
+// ErrMissingServiceVersion is an error that is returned when an input struct
+// requires a "ServiceVersion" key, but one was not set.
+var ErrMissingServiceVersion = NewFieldError("ServiceVersion")
+
+// ErrMissingTLSCertificate is an error that is returned when an input struct
+// requires a "TLSCertificate" key, but one was not set.
+var ErrMissingTLSCertificate = NewFieldError("TLSCertificate")
+
+// ErrMissingTLSConfiguration is an error that is returned when an input
+// struct requires a "TLSConfiguration" key, but one was not set.
+var ErrMissingTLSConfiguration = NewFieldError("TLSConfiguration")
+
+// ErrMissingTLSDomain is an error that is returned when an input struct
+// requires a "TLSDomain" key, but one was not set.
+var ErrMissingTLSDomain = NewFieldError("TLSDomain")
+
+// ErrMissingTo is an error that is returned when an input struct
+// requires a "To" key, but one was not set.
+var ErrMissingTo = NewFieldError("To")
+
+// ErrMissingURL is an error that is returned when an input struct
+// requires a "URL" key, but one was not set.
+var ErrMissingURL = NewFieldError("URL")
+
+// ErrMissingWAFActiveRule is an error that is returned when an input struct
+// requires a "Rules" key, but there needs to be at least one WAFActiveRule entry.
+var ErrMissingWAFActiveRule = NewFieldError("Rules").Message("expect at least one WAFActiveRule")
+
+// ErrMissingWAFID is an error that is returned when an input struct
+// requires a "WAFID" key, but one was not set.
+var ErrMissingWAFID = NewFieldError("WAFID")
+
+// ErrMissingWAFRuleExclusion is an error that is returned when an input struct
+// requires a "WAFRuleExclusion" key, but one was not set.
+var ErrMissingWAFRuleExclusion = NewFieldError("WAFRuleExclusion")
+
+// ErrMissingWAFRuleExclusionNumber is an error that is returned when an input
+// struct requires a "WAFRuleExclusionNumber" key, but one was not set.
+var ErrMissingWAFRuleExclusionNumber = NewFieldError("WAFRuleExclusionNumber")
+
+// ErrMissingWAFVersionID is an error that is returned when an input struct
+// requires a "WAFVersionID" key, but one was not set.
+var ErrMissingWAFVersionID = NewFieldError("WAFVersionID")
+
+// ErrMissingWAFVersionNumber is an error that is returned when an input
+// struct requires a "WAFVersionNumber" key, but one was not set.
+var ErrMissingWAFVersionNumber = NewFieldError("WAFVersionNumber")
+
+// ErrMissingYear is an error that is returned when an input struct requires a
+// "Year" key, but one was not set.
+var ErrMissingYear = NewFieldError("Year")
+
+// ErrMissingOptionalNameComment is an error that is returned when an input
+// struct requires either a "Name" or "Comment" key, but one was not set.
+var ErrMissingOptionalNameComment = NewFieldError("Name, Comment").Message("at least one of the available 'optional' fields is required")
+
 // ErrStatusNotOk is an error that indicates the response body returned by the
 // Fastly API was not `{"status": "ok"}`
 var ErrStatusNotOk = errors.New("unexpected 'status' field in API response body")

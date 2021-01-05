@@ -55,11 +55,11 @@ type ListFTPsInput struct {
 // ListFTPs returns the list of ftps for the configuration version.
 func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp", i.ServiceID, i.ServiceVersion)
@@ -105,11 +105,11 @@ type CreateFTPInput struct {
 // CreateFTP creates a new Fastly FTP.
 func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp", i.ServiceID, i.ServiceVersion)
@@ -140,15 +140,15 @@ type GetFTPInput struct {
 // GetFTP gets the FTP configuration with the given parameters.
 func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -196,15 +196,15 @@ type UpdateFTPInput struct {
 // UpdateFTP updates a specific FTP.
 func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -235,15 +235,15 @@ type DeleteFTPInput struct {
 // DeleteFTP deletes the given FTP version.
 func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

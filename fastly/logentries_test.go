@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_Logentries(t *testing.T) {
 	t.Parallel()
@@ -156,7 +159,7 @@ func TestClient_ListLogentries_validation(t *testing.T) {
 	_, err = testClient.ListLogentries(&ListLogentriesInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -164,7 +167,7 @@ func TestClient_ListLogentries_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -174,7 +177,7 @@ func TestClient_CreateLogentries_validation(t *testing.T) {
 	_, err = testClient.CreateLogentries(&CreateLogentriesInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -182,7 +185,7 @@ func TestClient_CreateLogentries_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -192,7 +195,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 	_, err = testClient.GetLogentries(&GetLogentriesInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -200,7 +203,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -209,7 +212,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -219,7 +222,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 	_, err = testClient.UpdateLogentries(&UpdateLogentriesInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -227,7 +230,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -236,7 +239,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -246,7 +249,7 @@ func TestClient_DeleteLogentries_validation(t *testing.T) {
 	err = testClient.DeleteLogentries(&DeleteLogentriesInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -254,7 +257,7 @@ func TestClient_DeleteLogentries_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -263,7 +266,7 @@ func TestClient_DeleteLogentries_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

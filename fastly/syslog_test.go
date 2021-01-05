@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"strings"
 	"testing"
 )
@@ -230,7 +231,7 @@ func TestClient_ListSyslogs_validation(t *testing.T) {
 	_, err = testClient.ListSyslogs(&ListSyslogsInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -238,7 +239,7 @@ func TestClient_ListSyslogs_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -248,7 +249,7 @@ func TestClient_CreateSyslog_validation(t *testing.T) {
 	_, err = testClient.CreateSyslog(&CreateSyslogInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -256,7 +257,7 @@ func TestClient_CreateSyslog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -266,7 +267,7 @@ func TestClient_GetSyslog_validation(t *testing.T) {
 	_, err = testClient.GetSyslog(&GetSyslogInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -274,7 +275,7 @@ func TestClient_GetSyslog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -283,7 +284,7 @@ func TestClient_GetSyslog_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -293,7 +294,7 @@ func TestClient_UpdateSyslog_validation(t *testing.T) {
 	_, err = testClient.UpdateSyslog(&UpdateSyslogInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -301,7 +302,7 @@ func TestClient_UpdateSyslog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -310,7 +311,7 @@ func TestClient_UpdateSyslog_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -320,7 +321,7 @@ func TestClient_DeleteSyslog_validation(t *testing.T) {
 	err = testClient.DeleteSyslog(&DeleteSyslogInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -328,7 +329,7 @@ func TestClient_DeleteSyslog_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -337,7 +338,7 @@ func TestClient_DeleteSyslog_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

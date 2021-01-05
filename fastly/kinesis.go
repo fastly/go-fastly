@@ -48,11 +48,11 @@ type ListKinesisInput struct {
 // ListKinesis returns the list of Kinesis for the configuration version.
 func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis", i.ServiceID, i.ServiceVersion)
@@ -91,11 +91,11 @@ type CreateKinesisInput struct {
 // CreateKinesis creates a new Fastly Kinesis.
 func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis", i.ServiceID, i.ServiceVersion)
@@ -126,15 +126,15 @@ type GetKinesisInput struct {
 // GetKinesis gets the Kinesis configuration with the given parameters.
 func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -175,15 +175,15 @@ type UpdateKinesisInput struct {
 // UpdateKinesis updates a specific Kinesis.
 func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -214,15 +214,15 @@ type DeleteKinesisInput struct {
 // DeleteKinesis deletes the given Kinesis version.
 func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

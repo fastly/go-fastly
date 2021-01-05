@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_S3s(t *testing.T) {
 	t.Parallel()
@@ -370,7 +373,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 	_, err = testClient.ListS3s(&ListS3sInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -378,7 +381,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -388,7 +391,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 	_, err = testClient.CreateS3(&CreateS3Input{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -396,7 +399,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -407,7 +410,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: "",
 	})
-	if err.Error() != "missing required field 'ServerSideEncryptionKMSKeyID'" {
+	if !errors.Is(err, ErrMissingServerSideEncryptionKMSKeyID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -417,7 +420,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 	_, err = testClient.GetS3(&GetS3Input{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -425,7 +428,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -434,7 +437,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -444,7 +447,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 	_, err = testClient.UpdateS3(&UpdateS3Input{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -452,7 +455,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -461,7 +464,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -472,7 +475,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: String(""),
 	})
-	if err.Error() != "missing required field 'ServerSideEncryptionKMSKeyID'" {
+	if !errors.Is(err, ErrMissingServerSideEncryptionKMSKeyID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -482,7 +485,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 	err = testClient.DeleteS3(&DeleteS3Input{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -490,7 +493,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -499,7 +502,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

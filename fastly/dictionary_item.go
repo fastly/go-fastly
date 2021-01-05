@@ -42,11 +42,11 @@ type ListDictionaryItemsInput struct {
 // configuration version.
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.DictionaryID == "" {
-		return nil, NewFieldError("DictionaryID")
+		return nil, ErrMissingDictionaryID
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
@@ -78,11 +78,11 @@ type CreateDictionaryItemInput struct {
 // CreateDictionaryItem creates a new Fastly dictionary item.
 func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.DictionaryID == "" {
-		return nil, NewFieldError("DictionaryID")
+		return nil, ErrMissingDictionaryID
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/item", i.ServiceID, i.DictionaryID)
@@ -127,15 +127,15 @@ type GetDictionaryItemInput struct {
 // GetDictionaryItem gets the dictionary item with the given parameters.
 func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.DictionaryID == "" {
-		return nil, NewFieldError("DictionaryID")
+		return nil, ErrMissingDictionaryID
 	}
 
 	if i.ItemKey == "" {
-		return nil, NewFieldError("ItemKey")
+		return nil, ErrMissingItemKey
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.ServiceID, i.DictionaryID, url.PathEscape(i.ItemKey))
@@ -169,15 +169,15 @@ type UpdateDictionaryItemInput struct {
 // UpdateDictionaryItem updates a specific dictionary item.
 func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.DictionaryID == "" {
-		return nil, NewFieldError("DictionaryID")
+		return nil, ErrMissingDictionaryID
 	}
 
 	if i.ItemKey == "" {
-		return nil, NewFieldError("ItemKey")
+		return nil, ErrMissingItemKey
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.ServiceID, i.DictionaryID, url.PathEscape(i.ItemKey))
@@ -212,15 +212,15 @@ type BatchDictionaryItem struct {
 func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
 
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.DictionaryID == "" {
-		return NewFieldError("DictionaryID")
+		return ErrMissingDictionaryID
 	}
 
 	if len(i.Items) > BatchModifyMaximumOperations {
-		return NewFieldError("Items").Message("batch modify maximum operations exceeded")
+		return ErrMaxExceededItems
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
@@ -252,15 +252,15 @@ type DeleteDictionaryItemInput struct {
 // DeleteDictionaryItem deletes the given dictionary item.
 func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.DictionaryID == "" {
-		return NewFieldError("DictionaryID")
+		return ErrMissingDictionaryID
 	}
 
 	if i.ItemKey == "" {
-		return NewFieldError("ItemKey")
+		return ErrMissingItemKey
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.ServiceID, i.DictionaryID, url.PathEscape(i.ItemKey))

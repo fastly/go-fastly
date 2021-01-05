@@ -68,11 +68,11 @@ type ListS3sInput struct {
 // ListS3s returns the list of S3s for the configuration version.
 func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.ServiceID, i.ServiceVersion)
@@ -121,15 +121,15 @@ type CreateS3Input struct {
 // CreateS3 creates a new Fastly S3.
 func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
-		return nil, NewFieldError("ServerSideEncryptionKMSKeyID")
+		return nil, ErrMissingServerSideEncryptionKMSKeyID
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.ServiceID, i.ServiceVersion)
@@ -160,15 +160,15 @@ type GetS3Input struct {
 // GetS3 gets the S3 configuration with the given parameters.
 func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -219,19 +219,19 @@ type UpdateS3Input struct {
 // UpdateS3 updates a specific S3.
 func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
-		return nil, NewFieldError("ServerSideEncryptionKMSKeyID")
+		return nil, ErrMissingServerSideEncryptionKMSKeyID
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -262,15 +262,15 @@ type DeleteS3Input struct {
 // DeleteS3 deletes the given S3 version.
 func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

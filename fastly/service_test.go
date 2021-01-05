@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_Services(t *testing.T) {
 	t.Parallel()
@@ -161,7 +164,7 @@ func TestClient_Services(t *testing.T) {
 func TestClient_GetService_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetService(&GetServiceInput{})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -169,14 +172,14 @@ func TestClient_GetService_validation(t *testing.T) {
 func TestClient_UpdateService_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateService(&UpdateServiceInput{})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateService(&UpdateServiceInput{
 		ServiceID: "foo",
 	})
-	if err.Error() != "problem with field 'Name, Comment': at least one of the available 'optional' fields is required" {
+	if !errors.Is(err, ErrMissingOptionalNameComment) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -184,14 +187,14 @@ func TestClient_UpdateService_validation(t *testing.T) {
 		ServiceID: "foo",
 		Name:      String(""),
 	})
-	if err.Error() != "problem with field 'Name': service name can't be an empty value" {
+	if !errors.Is(err, ErrMissingNameValue) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
 	err := testClient.DeleteService(&DeleteServiceInput{})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

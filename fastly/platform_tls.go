@@ -99,7 +99,7 @@ type GetBulkCertificateInput struct {
 func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificate, error) {
 
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	p := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)
@@ -128,10 +128,10 @@ type CreateBulkCertificateInput struct {
 func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCertificate, error) {
 
 	if i.CertBlob == "" {
-		return nil, NewFieldError("CertBlob")
+		return nil, ErrMissingCertBlob
 	}
 	if i.IntermediatesBlob == "" {
-		return nil, NewFieldError("IntermediatesBlob")
+		return nil, ErrMissingIntermediatesBlob
 	}
 
 	p := "/tls/bulk/certificates"
@@ -162,15 +162,15 @@ type UpdateBulkCertificateInput struct {
 // Any SAN entries that are missing in the replacement certificate will become disabled.
 func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCertificate, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	if i.CertBlob == "" {
-		return nil, NewFieldError("CertBlob")
+		return nil, ErrMissingCertBlob
 	}
 
 	if i.IntermediatesBlob == "" {
-		return nil, NewFieldError("IntermediatesBlob")
+		return nil, ErrMissingIntermediatesBlob
 	}
 
 	path := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)
@@ -194,7 +194,7 @@ type DeleteBulkCertificateInput struct {
 // DeleteBulkCertificate destroy a certificate. This disables TLS for all domains listed as SAN entries.
 func (c *Client) DeleteBulkCertificate(i *DeleteBulkCertificateInput) error {
 	if i.ID == "" {
-		return NewFieldError("ID")
+		return ErrMissingID
 	}
 
 	path := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)

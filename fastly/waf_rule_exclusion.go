@@ -146,11 +146,11 @@ func (i *ListWAFRuleExclusionsInput) formatFilters() map[string]string {
 func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleExclusionResponse, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions", i.WAFID, i.WAFVersionNumber)
@@ -193,11 +193,11 @@ func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleE
 func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WAFRuleExclusionResponse, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	currentPage := 1
@@ -231,15 +231,15 @@ func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WA
 func (c *Client) CreateWAFRuleExclusion(i *CreateWAFRuleExclusionInput) (*WAFRuleExclusion, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	if i.WAFRuleExclusion == nil {
-		return nil, NewFieldError("WAFRuleExclusion")
+		return nil, ErrMissingWAFRuleExclusion
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions", i.WAFID, i.WAFVersionNumber)
@@ -258,19 +258,19 @@ func (c *Client) CreateWAFRuleExclusion(i *CreateWAFRuleExclusionInput) (*WAFRul
 // UpdateWAFRuleExclusion used to update a particular WAF rule exclusion.
 func (c *Client) UpdateWAFRuleExclusion(i *UpdateWAFRuleExclusionInput) (*WAFRuleExclusion, error) {
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	if i.Number == 0 {
-		return nil, NewFieldError("WAFRuleExclusionNumber")
+		return nil, ErrMissingWAFRuleExclusionNumber
 	}
 
 	if i.WAFRuleExclusion == nil {
-		return nil, NewFieldError("WAFRuleExclusion")
+		return nil, ErrMissingWAFRuleExclusion
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions/%d", i.WAFID, i.WAFVersionNumber, i.Number)
@@ -289,13 +289,13 @@ func (c *Client) UpdateWAFRuleExclusion(i *UpdateWAFRuleExclusionInput) (*WAFRul
 // DeleteWAFExclusions removes rules from a particular WAF.
 func (c *Client) DeleteWAFRuleExclusion(i *DeleteWAFRuleExclusionInput) error {
 	if i.WAFID == "" {
-		return NewFieldError("WAFID")
+		return ErrMissingWAFID
 	}
 	if i.WAFVersionNumber == 0 {
-		return NewFieldError("WAFVersionNumber")
+		return ErrMissingWAFVersionNumber
 	}
 	if i.Number == 0 {
-		return NewFieldError("Number")
+		return ErrMissingNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions/%d", i.WAFID, i.WAFVersionNumber, i.Number)

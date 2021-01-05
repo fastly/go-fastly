@@ -52,11 +52,11 @@ type ListHealthChecksInput struct {
 // version.
 func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck", i.ServiceID, i.ServiceVersion)
@@ -98,11 +98,11 @@ type CreateHealthCheckInput struct {
 // CreateHealthCheck creates a new Fastly health check.
 func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck", i.ServiceID, i.ServiceVersion)
@@ -133,15 +133,15 @@ type GetHealthCheckInput struct {
 // GetHealthCheck gets the health check configuration with the given parameters.
 func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -185,15 +185,15 @@ type UpdateHealthCheckInput struct {
 // UpdateHealthCheck updates a specific health check.
 func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -224,15 +224,15 @@ type DeleteHealthCheckInput struct {
 // DeleteHealthCheck deletes the given health check.
 func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

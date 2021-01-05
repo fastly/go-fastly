@@ -84,10 +84,10 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 // MakePackagePath ensures we create the correct REST path for referencing packages in the API.
 func MakePackagePath(ServiceID string, ServiceVersion int) (string, error) {
 	if ServiceID == "" {
-		return "", NewFieldError("ServiceID")
+		return "", ErrMissingServiceID
 	}
 	if ServiceVersion == 0 {
-		return "", NewFieldError("ServiceVersion")
+		return "", ErrMissingServiceVersion
 	}
 	return fmt.Sprintf("/service/%s/version/%d/package", ServiceID, ServiceVersion), nil
 }

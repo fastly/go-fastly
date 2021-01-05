@@ -50,11 +50,11 @@ type ListBigQueriesInput struct {
 // ListBigQueries returns the list of BigQueries for the configuration version.
 func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.ServiceID, i.ServiceVersion)
@@ -95,11 +95,11 @@ type CreateBigQueryInput struct {
 // CreateBigQuery creates a new Fastly BigQuery.
 func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery", i.ServiceID, i.ServiceVersion)
@@ -130,15 +130,15 @@ type GetBigQueryInput struct {
 // GetBigQuery gets the BigQuery configuration with the given parameters.
 func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -181,15 +181,15 @@ type UpdateBigQueryInput struct {
 // UpdateBigQuery updates a specific BigQuery.
 func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -220,15 +220,15 @@ type DeleteBigQueryInput struct {
 // DeleteBigQuery deletes the given BigQuery version.
 func (c *Client) DeleteBigQuery(i *DeleteBigQueryInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

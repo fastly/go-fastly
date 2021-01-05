@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"strings"
 	"testing"
 )
@@ -251,7 +252,7 @@ func TestClient_ListHTTPS_validation(t *testing.T) {
 	_, err = testClient.ListHTTPS(&ListHTTPSInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -261,7 +262,7 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 	_, err = testClient.CreateHTTPS(&CreateHTTPSInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -269,7 +270,7 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -279,7 +280,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -287,7 +288,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -296,7 +297,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -306,7 +307,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -314,7 +315,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -323,7 +324,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -333,7 +334,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -341,7 +342,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -350,7 +351,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

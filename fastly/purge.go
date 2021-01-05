@@ -23,7 +23,7 @@ type PurgeInput struct {
 // Purge instantly purges an individual URL.
 func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 	if i.URL == "" {
-		return nil, NewFieldError("URL")
+		return nil, ErrMissingURL
 	}
 
 	ro := new(RequestOptions)
@@ -59,11 +59,11 @@ type PurgeKeyInput struct {
 // PurgeKey instantly purges a particular service of items tagged with a key.
 func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.Key == "" {
-		return nil, NewFieldError("Key")
+		return nil, ErrMissingKey
 	}
 
 	path := fmt.Sprintf("/service/%s/purge/%s", i.ServiceID, i.Key)
@@ -103,7 +103,7 @@ type PurgeAllInput struct {
 // PurgeAll instantly purges everything from a service.
 func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/purge_all", i.ServiceID)

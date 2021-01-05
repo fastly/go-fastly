@@ -66,11 +66,11 @@ type ListBackendsInput struct {
 // ListBackends returns the list of backends for the configuration version.
 func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/backend", i.ServiceID, i.ServiceVersion)
@@ -126,11 +126,11 @@ type CreateBackendInput struct {
 // CreateBackend creates a new Fastly backend.
 func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/backend", i.ServiceID, i.ServiceVersion)
@@ -161,15 +161,15 @@ type GetBackendInput struct {
 // GetBackend gets the backend configuration with the given parameters.
 func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/backend/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -227,15 +227,15 @@ type UpdateBackendInput struct {
 // UpdateBackend updates a specific backend.
 func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/backend/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -266,15 +266,15 @@ type DeleteBackendInput struct {
 // DeleteBackend deletes the given backend version.
 func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/backend/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

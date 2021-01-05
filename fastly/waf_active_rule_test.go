@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -151,7 +152,7 @@ func TestClient_ListWAFActiveRules_validation(t *testing.T) {
 	_, err = testClient.ListWAFActiveRules(&ListWAFActiveRulesInput{
 		WAFID: "",
 	})
-	if err.Error() != "missing required field 'WAFID'" {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -159,7 +160,7 @@ func TestClient_ListWAFActiveRules_validation(t *testing.T) {
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
-	if err.Error() != "missing required field 'WAFVersionNumber'" {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -169,7 +170,7 @@ func TestClient_ListAllWAFActiveRules_validation(t *testing.T) {
 	_, err = testClient.ListAllWAFActiveRules(&ListAllWAFActiveRulesInput{
 		WAFID: "",
 	})
-	if err.Error() != "missing required field 'WAFID'" {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -177,7 +178,7 @@ func TestClient_ListAllWAFActiveRules_validation(t *testing.T) {
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
-	if err.Error() != "missing required field 'WAFVersionNumber'" {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -187,7 +188,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 	_, err = testClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
 		WAFID: "",
 	})
-	if err.Error() != "missing required field 'WAFID'" {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -195,7 +196,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
-	if err.Error() != "missing required field 'WAFVersionNumber'" {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -204,7 +205,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 		WAFVersionNumber: 1,
 		Rules:            []*WAFActiveRule{},
 	})
-	if err.Error() != "problem with field 'Rules': expect at least one WAFActiveRule" {
+	if !errors.Is(err, ErrMissingWAFActiveRule) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -223,7 +224,7 @@ func TestClient_BatchModificationWAFActiveRules_validation(t *testing.T) {
 	_, err = testClient.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
 		Rules: rules,
 	})
-	if err.Error() != "problem with field 'Rules': batch modify maximum operations exceeded" {
+	if !errors.Is(err, ErrMaxExceededRules) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -234,7 +235,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		WAFID: "",
 	})
 
-	if err.Error() != "missing required field 'WAFID'" {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -243,7 +244,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		WAFVersionNumber: 0,
 	})
 
-	if err.Error() != "missing required field 'WAFVersionNumber'" {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -253,7 +254,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		Rules:            []*WAFActiveRule{},
 	})
 
-	if err.Error() != "problem with field 'Rules': expect at least one WAFActiveRule" {
+	if !errors.Is(err, ErrMissingWAFActiveRule) {
 		t.Errorf("bad error: %s", err)
 	}
 }

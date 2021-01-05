@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_DirectorBackends(t *testing.T) {
 	t.Parallel()
@@ -84,7 +87,7 @@ func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 	_, err = testClient.CreateDirectorBackend(&CreateDirectorBackendInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -92,7 +95,7 @@ func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -102,7 +105,7 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 	_, err = testClient.GetDirectorBackend(&GetDirectorBackendInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -110,7 +113,7 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -119,7 +122,7 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Director:       "",
 	})
-	if err.Error() != "missing required field 'Director'" {
+	if !errors.Is(err, ErrMissingDirector) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -129,7 +132,7 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 		Director:       "director",
 		Backend:        "",
 	})
-	if err.Error() != "missing required field 'Backend'" {
+	if !errors.Is(err, ErrMissingBackend) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -139,7 +142,7 @@ func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 	err = testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -147,7 +150,7 @@ func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -156,7 +159,7 @@ func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Director:       "",
 	})
-	if err.Error() != "missing required field 'Director'" {
+	if !errors.Is(err, ErrMissingDirector) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -166,7 +169,7 @@ func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 		Director:       "director",
 		Backend:        "",
 	})
-	if err.Error() != "missing required field 'Backend'" {
+	if !errors.Is(err, ErrMissingBackend) {
 		t.Errorf("bad error: %s", err)
 	}
 }

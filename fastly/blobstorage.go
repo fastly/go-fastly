@@ -54,11 +54,11 @@ type ListBlobStoragesInput struct {
 // ListBlobStorages returns the list of blob storages for the configuration version.
 func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/azureblob", i.ServiceID, i.ServiceVersion)
@@ -103,11 +103,11 @@ type CreateBlobStorageInput struct {
 // CreateBlobStorage creates a new Fastly blob storage.
 func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/azureblob", i.ServiceID, i.ServiceVersion)
@@ -138,15 +138,15 @@ type GetBlobStorageInput struct {
 // GetBlobStorage gets the blob storage configuration with the given parameters.
 func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/azureblob/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -193,15 +193,15 @@ type UpdateBlobStorageInput struct {
 // UpdateBlobStorage updates a specific blob storage.
 func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/azureblob/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -232,15 +232,15 @@ type DeleteBlobStorageInput struct {
 // DeleteBlobStorage deletes the given blob storage version.
 func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/azureblob/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

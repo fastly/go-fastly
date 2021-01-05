@@ -38,19 +38,19 @@ type CreateDirectorBackendInput struct {
 // CreateDirectorBackend creates a new Fastly backend.
 func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*DirectorBackend, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Director == "" {
-		return nil, NewFieldError("Director")
+		return nil, ErrMissingDirector
 	}
 
 	if i.Backend == "" {
-		return nil, NewFieldError("Backend")
+		return nil, ErrMissingBackend
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
@@ -85,19 +85,19 @@ type GetDirectorBackendInput struct {
 // GetDirectorBackend gets the backend configuration with the given parameters.
 func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBackend, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Director == "" {
-		return nil, NewFieldError("Director")
+		return nil, ErrMissingDirector
 	}
 
 	if i.Backend == "" {
-		return nil, NewFieldError("Backend")
+		return nil, ErrMissingBackend
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
@@ -132,19 +132,19 @@ type DeleteDirectorBackendInput struct {
 // DeleteDirectorBackend deletes the given backend version.
 func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Director == "" {
-		return NewFieldError("Director")
+		return ErrMissingDirector
 	}
 
 	if i.Backend == "" {
-		return NewFieldError("Backend")
+		return ErrMissingBackend
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",

@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_Diff(t *testing.T) {
 	t.Parallel()
@@ -74,7 +77,7 @@ func TestClient_Diff_validation(t *testing.T) {
 	_, err = testClient.GetDiff(&GetDiffInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -82,7 +85,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		ServiceID: "foo",
 		From:      0,
 	})
-	if err.Error() != "missing required field 'From'" {
+	if !errors.Is(err, ErrMissingFrom) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -91,7 +94,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		From:      1,
 		To:        0,
 	})
-	if err.Error() != "missing required field 'To'" {
+	if !errors.Is(err, ErrMissingTo) {
 		t.Errorf("bad error: %s", err)
 	}
 }

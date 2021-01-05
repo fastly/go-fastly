@@ -84,11 +84,11 @@ func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
 func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
@@ -147,11 +147,11 @@ type ListAllWAFActiveRulesInput struct {
 func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	currentPage := 1
@@ -194,15 +194,15 @@ type CreateWAFActiveRulesInput struct {
 func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiveRule, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	if len(i.Rules) == 0 {
-		return nil, NewFieldError("Rules").Message("expect at least one WAFActiveRule")
+		return nil, ErrMissingWAFActiveRule
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)
@@ -245,7 +245,7 @@ type BatchModificationWAFActiveRulesInput struct {
 func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRulesInput) ([]*WAFActiveRule, error) {
 
 	if len(i.Rules) > BatchModifyMaximumOperations {
-		return nil, NewFieldError("Rules").Message("batch modify maximum operations exceeded")
+		return nil, ErrMaxExceededRules
 	}
 
 	switch i.OP {
@@ -280,15 +280,15 @@ type DeleteWAFActiveRulesInput struct {
 func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
 
 	if i.WAFID == "" {
-		return NewFieldError("WAFID")
+		return ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return NewFieldError("WAFVersionNumber")
+		return ErrMissingWAFVersionNumber
 	}
 
 	if len(i.Rules) == 0 {
-		return NewFieldError("Rules").Message("expect at least one WAFActiveRule")
+		return ErrMissingWAFActiveRule
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/active-rules", i.WAFID, i.WAFVersionNumber)

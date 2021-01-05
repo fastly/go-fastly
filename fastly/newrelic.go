@@ -45,11 +45,11 @@ type ListNewRelicInput struct {
 // ListNewRelic returns the list of newrelic for the configuration version.
 func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.ServiceID, i.ServiceVersion)
@@ -85,11 +85,11 @@ type CreateNewRelicInput struct {
 // CreateNewRelic creates a new Fastly newrelic.
 func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.ServiceID, i.ServiceVersion)
@@ -120,15 +120,15 @@ type GetNewRelicInput struct {
 // GetNewRelic gets the newrelic configuration with the given parameters.
 func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -166,15 +166,15 @@ type UpdateNewRelicInput struct {
 // UpdateNewRelic updates a specific newrelic.
 func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -205,15 +205,15 @@ type DeleteNewRelicInput struct {
 // DeleteNewRelic deletes the given newrelic version.
 func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

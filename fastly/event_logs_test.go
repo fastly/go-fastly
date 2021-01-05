@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"errors"
 	"io/ioutil"
 	"testing"
 )
@@ -44,7 +45,7 @@ func TestClient_GetAPIEvent_validation(t *testing.T) {
 	_, err = testClient.GetAPIEvent(&GetAPIEventInput{
 		EventID: "",
 	})
-	if err.Error() != "missing required field 'EventID'" {
+	if !errors.Is(err, ErrMissingEventID) {
 		t.Errorf("bad error: %s", err)
 	}
 

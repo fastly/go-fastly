@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_ACLs(t *testing.T) {
 	t.Parallel()
@@ -115,7 +118,7 @@ func TestClient_ListACLs_validation(t *testing.T) {
 	_, err = testClient.ListACLs(&ListACLsInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -123,7 +126,7 @@ func TestClient_ListACLs_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -133,7 +136,7 @@ func TestClient_CreateACL_validation(t *testing.T) {
 	_, err = testClient.CreateACL(&CreateACLInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -141,7 +144,7 @@ func TestClient_CreateACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -151,7 +154,7 @@ func TestClient_GetACL_validation(t *testing.T) {
 	_, err = testClient.GetACL(&GetACLInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -159,7 +162,7 @@ func TestClient_GetACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -168,7 +171,7 @@ func TestClient_GetACL_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -178,7 +181,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 	_, err = testClient.UpdateACL(&UpdateACLInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -186,7 +189,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -195,7 +198,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = testClient.UpdateACL(&UpdateACLInput{
@@ -204,7 +207,7 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 		Name:           "acl",
 		NewName:        "",
 	})
-	if err.Error() != "missing required field 'NewName'" {
+	if !errors.Is(err, ErrMissingNewName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -214,7 +217,7 @@ func TestClient_DeleteACL_validation(t *testing.T) {
 	err = testClient.DeleteACL(&DeleteACLInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -222,7 +225,7 @@ func TestClient_DeleteACL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -231,7 +234,7 @@ func TestClient_DeleteACL_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

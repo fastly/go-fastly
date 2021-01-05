@@ -81,11 +81,11 @@ type ListPoolsInput struct {
 // ListPools lists all pools for a particular service and version.
 func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool", i.ServiceID, i.ServiceVersion)
@@ -139,15 +139,15 @@ type CreatePoolInput struct {
 // CreatePool creates a pool for a particular service and version.
 func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool", i.ServiceID, i.ServiceVersion)
@@ -178,15 +178,15 @@ type GetPoolInput struct {
 // GetPool gets a single pool for a particular service and version.
 func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -240,15 +240,15 @@ type UpdatePoolInput struct {
 // UpdatePool updates a specufic pool for a particular service and version.
 func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -280,15 +280,15 @@ type DeletePoolInput struct {
 func (c *Client) DeletePool(i *DeletePoolInput) error {
 	if i.ServiceID == "" {
 
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

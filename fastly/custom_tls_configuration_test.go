@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_CustomTLSConfiguration(t *testing.T) {
 	t.Parallel()
@@ -83,7 +86,7 @@ func TestClient_GetCustomTLSConfiguration_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCustomTLSConfiguration(&GetCustomTLSConfigurationInput{})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -105,14 +108,14 @@ func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
 	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
 		Name: "My configuration v2",
 	})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
 		ID: "CONFIGURATION_ID",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

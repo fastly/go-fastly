@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_Servers(t *testing.T) {
 	var err error
@@ -139,7 +142,7 @@ func TestClient_ListServers_validation(t *testing.T) {
 	_, err = testClient.ListServers(&ListServersInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -147,7 +150,7 @@ func TestClient_ListServers_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err.Error() != "missing required field 'PoolID'" {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 }
@@ -157,7 +160,7 @@ func TestClient_CreateServer_validation(t *testing.T) {
 	_, err = testClient.CreateServer(&CreateServerInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -165,7 +168,7 @@ func TestClient_CreateServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err.Error() != "missing required field 'PoolID'" {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 }
@@ -175,7 +178,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 	_, err = testClient.GetServer(&GetServerInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -183,7 +186,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err.Error() != "missing required field 'PoolID'" {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -192,7 +195,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		PoolID:    "bar",
 		Server:    "",
 	})
-	if err.Error() != "missing required field 'Server'" {
+	if !errors.Is(err, ErrMissingServer) {
 		t.Errorf("bad error: %q", err)
 	}
 }
@@ -202,7 +205,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 	_, err = testClient.UpdateServer(&UpdateServerInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -210,7 +213,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err.Error() != "missing required field 'PoolID'" {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -219,7 +222,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		PoolID:    "bar",
 		Server:    "",
 	})
-	if err.Error() != "missing required field 'Server'" {
+	if !errors.Is(err, ErrMissingServer) {
 		t.Errorf("bad error: %q", err)
 	}
 }
@@ -229,7 +232,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 	err = testClient.DeleteServer(&DeleteServerInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -237,7 +240,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err.Error() != "missing required field 'PoolID'" {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -246,7 +249,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		PoolID:    "bar",
 		Server:    "",
 	})
-	if err.Error() != "missing required field 'Server'" {
+	if !errors.Is(err, ErrMissingServer) {
 		t.Errorf("bad error: %q", err)
 	}
 }

@@ -131,7 +131,7 @@ func (i *ListWAFVersionsInput) formatFilters() map[string]string {
 func (c *Client) ListWAFVersions(i *ListWAFVersionsInput) (*WAFVersionResponse, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions", i.WAFID)
@@ -182,7 +182,7 @@ type ListAllWAFVersionsInput struct {
 func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResponse, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	currentPage := 1
@@ -219,11 +219,11 @@ type GetWAFVersionInput struct {
 func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.WAFID, i.WAFVersionNumber)
@@ -293,15 +293,15 @@ func (i UpdateWAFVersionInput) HasChanges() bool {
 // UpdateWAFVersion updates a specific WAF version.
 func (c *Client) UpdateWAFVersion(i *UpdateWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == nil || *i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == nil || *i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	if i.WAFVersionID == nil || *i.WAFVersionID == "" {
-		return nil, NewFieldError("WAFVersionID")
+		return nil, ErrMissingWAFVersionID
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", *i.WAFID, *i.WAFVersionNumber)
@@ -328,11 +328,11 @@ type LockWAFVersionInput struct {
 // LockWAFVersion locks a specific WAF version.
 func (c *Client) LockWAFVersion(i *LockWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.WAFID, i.WAFVersionNumber)
@@ -361,11 +361,11 @@ type CloneWAFVersionInput struct {
 // CloneWAFVersion clones a specific WAF version.
 func (c *Client) CloneWAFVersion(i *CloneWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return nil, NewFieldError("WAFVersionNumber")
+		return nil, ErrMissingWAFVersionNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/clone", i.WAFID, i.WAFVersionNumber)
@@ -393,11 +393,11 @@ type DeployWAFVersionInput struct {
 func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 
 	if i.WAFID == "" {
-		return NewFieldError("WAFID")
+		return ErrMissingWAFID
 	}
 
 	if i.WAFVersionNumber == 0 {
-		return NewFieldError("WAFVersionNumber")
+		return ErrMissingWAFVersionNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/activate", i.WAFID, i.WAFVersionNumber)
@@ -419,7 +419,7 @@ type CreateEmptyWAFVersionInput struct {
 func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersion, error) {
 
 	if i.WAFID == "" {
-		return nil, NewFieldError("WAFID")
+		return nil, ErrMissingWAFID
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions", i.WAFID)

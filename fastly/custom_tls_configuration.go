@@ -105,7 +105,7 @@ type GetCustomTLSConfigurationInput struct {
 // GetCustomTLSConfiguration returns a single TLS configuration.
 func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	p := fmt.Sprintf("/tls/configurations/%s", i.ID)
@@ -142,11 +142,11 @@ type UpdateCustomTLSConfigurationInput struct {
 // UpdateCustomTLSConfiguration can only be used to change the name of the configuration
 func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/tls/configurations/%s", i.ID)

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -65,7 +66,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -73,7 +74,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -82,7 +83,7 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 		ServiceVersion: 1,
 		ID:             "",
 	})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

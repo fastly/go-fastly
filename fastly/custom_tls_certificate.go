@@ -102,7 +102,7 @@ type GetCustomTLSCertificateInput struct {
 
 func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	p := fmt.Sprintf("/tls/certificates/%s", i.ID)
@@ -130,10 +130,10 @@ type CreateCustomTLSCertificateInput struct {
 // CreateCustomTLSCertificate creates a custom TLS certificate.
 func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.CertBlob == "" {
-		return nil, NewFieldError("CertBlob")
+		return nil, ErrMissingCertBlob
 	}
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	p := "/tls/certificates"
@@ -164,15 +164,15 @@ type UpdateCustomTLSCertificateInput struct {
 // Any SAN entries that are missing in the replacement certificate will become disabled.
 func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	if i.CertBlob == "" {
-		return nil, NewFieldError("CertBlob")
+		return nil, ErrMissingCertBlob
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/tls/certificates/%s", i.ID)
@@ -196,7 +196,7 @@ type DeleteCustomTLSCertificateInput struct {
 // DeleteCustomTLSCertificate destroy a certificate. This disables TLS for all domains listed as SAN entries.
 func (c *Client) DeleteCustomTLSCertificate(i *DeleteCustomTLSCertificateInput) error {
 	if i.ID == "" {
-		return NewFieldError("ID")
+		return ErrMissingID
 	}
 
 	path := fmt.Sprintf("/tls/certificates/%s", i.ID)

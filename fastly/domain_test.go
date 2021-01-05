@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_Domains(t *testing.T) {
 	t.Parallel()
@@ -118,7 +121,7 @@ func TestClient_ListDomains_validation(t *testing.T) {
 	_, err = testClient.ListDomains(&ListDomainsInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -126,7 +129,7 @@ func TestClient_ListDomains_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -136,7 +139,7 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 	_, err = testClient.CreateDomain(&CreateDomainInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -144,7 +147,7 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -154,7 +157,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 	_, err = testClient.GetDomain(&GetDomainInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -162,7 +165,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -171,7 +174,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -181,7 +184,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 	_, err = testClient.UpdateDomain(&UpdateDomainInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -189,7 +192,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -198,7 +201,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -207,7 +210,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "bar",
 	})
-	if err.Error() != "problem with field 'Name, Comment': at least one of the available 'optional' fields is required" {
+	if !errors.Is(err, ErrMissingOptionalNameComment) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -217,7 +220,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 	err = testClient.DeleteDomain(&DeleteDomainInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -225,7 +228,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -234,7 +237,7 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_GetCurrentUser(t *testing.T) {
 	t.Parallel()
@@ -119,7 +122,7 @@ func TestClient_CreateUser_validation(t *testing.T) {
 	_, err = testClient.CreateUser(&CreateUserInput{
 		Login: "",
 	})
-	if err.Error() != "missing required field 'Login'" {
+	if !errors.Is(err, ErrMissingLogin) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -127,7 +130,7 @@ func TestClient_CreateUser_validation(t *testing.T) {
 		Login: "new+user@example.com",
 		Name:  "",
 	})
-	if err.Error() != "missing required field 'Name'" {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -137,7 +140,7 @@ func TestClient_ListCustomerUsers_validation(t *testing.T) {
 	_, err = testClient.ListCustomerUsers(&ListCustomerUsersInput{
 		CustomerID: "",
 	})
-	if err.Error() != "missing required field 'CustomerID'" {
+	if !errors.Is(err, ErrMissingCustomerID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -147,7 +150,7 @@ func TestClient_GetUser_validation(t *testing.T) {
 	_, err = testClient.GetUser(&GetUserInput{
 		ID: "",
 	})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -157,7 +160,7 @@ func TestClient_UpdateUser_validation(t *testing.T) {
 	_, err = testClient.UpdateUser(&UpdateUserInput{
 		ID: "",
 	})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -166,7 +169,7 @@ func TestClient_DeleteUser_validation(t *testing.T) {
 	err := testClient.DeleteUser(&DeleteUserInput{
 		ID: "",
 	})
-	if err.Error() != "missing required field 'ID'" {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

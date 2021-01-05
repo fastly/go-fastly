@@ -46,11 +46,11 @@ type ListScalyrsInput struct {
 // ListScalyrs returns the list of scalyrs for the configuration version.
 func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr", i.ServiceID, i.ServiceVersion)
@@ -87,11 +87,11 @@ type CreateScalyrInput struct {
 // CreateScalyr creates a new Fastly scalyr.
 func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr", i.ServiceID, i.ServiceVersion)
@@ -122,15 +122,15 @@ type GetScalyrInput struct {
 // GetScalyr gets the scalyr configuration with the given parameters.
 func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -169,15 +169,15 @@ type UpdateScalyrInput struct {
 // UpdateScalyr updates a specific scalyr.
 func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -208,15 +208,15 @@ type DeleteScalyrInput struct {
 // DeleteScalyr deletes the given scalyr version.
 func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

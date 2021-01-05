@@ -40,11 +40,11 @@ type ListACLsInput struct {
 // ListACLs returns the list of ACLs for the configuration version.
 func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl", i.ServiceID, i.ServiceVersion)
@@ -75,11 +75,11 @@ type CreateACLInput struct {
 
 func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl", i.ServiceID, i.ServiceVersion)
@@ -110,15 +110,15 @@ type DeleteACLInput struct {
 // DeleteACL deletes the given ACL version.
 func (c *Client) DeleteACL(i *DeleteACLInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -152,15 +152,15 @@ type GetACLInput struct {
 // GetACL gets the ACL configuration with the given parameters.
 func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -194,19 +194,19 @@ type UpdateACLInput struct {
 // UpdateACL updates the name of the ACL with the given parameters.
 func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	if i.NewName == "" {
-		return nil, NewFieldError("NewName")
+		return nil, ErrMissingNewName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

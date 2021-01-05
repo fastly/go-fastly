@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_DictionaryItems(t *testing.T) {
 
@@ -117,7 +120,7 @@ func TestClient_ListDictionaryItems_validation(t *testing.T) {
 	_, err = testClient.ListDictionaryItems(&ListDictionaryItemsInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -125,7 +128,7 @@ func TestClient_ListDictionaryItems_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if err.Error() != "missing required field 'DictionaryID'" {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -135,7 +138,7 @@ func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 	_, err = testClient.CreateDictionaryItem(&CreateDictionaryItemInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -143,7 +146,7 @@ func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if err.Error() != "missing required field 'DictionaryID'" {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -153,7 +156,7 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 	_, err = testClient.GetDictionaryItem(&GetDictionaryItemInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -161,7 +164,7 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if err.Error() != "missing required field 'DictionaryID'" {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -170,7 +173,7 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "",
 	})
-	if err.Error() != "missing required field 'ItemKey'" {
+	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -180,7 +183,7 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 	_, err = testClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -188,7 +191,7 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if err.Error() != "missing required field 'DictionaryID'" {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -197,7 +200,7 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "",
 	})
-	if err.Error() != "missing required field 'ItemKey'" {
+	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -207,7 +210,7 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 	err = testClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -215,7 +218,7 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if err.Error() != "missing required field 'DictionaryID'" {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -224,7 +227,7 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "",
 	})
-	if err.Error() != "missing required field 'ItemKey'" {
+	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -234,14 +237,14 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 	err = testClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 	err = testClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
 		ServiceID:    "foo",
 		DictionaryID: "",
 	})
-	if err.Error() != "missing required field 'DictionaryID'" {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -251,8 +254,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "bar",
 		Items:        oversizedDictionaryItems,
 	})
-	if err.Error() != "problem with field 'Items': batch modify maximum operations exceeded" {
+	if !errors.Is(err, ErrMaxExceededItems) {
 		t.Errorf("bad error: %s", err)
 	}
-
 }

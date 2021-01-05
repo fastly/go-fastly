@@ -44,11 +44,11 @@ type ListConditionsInput struct {
 // ListConditions returns the list of conditions for the configuration version.
 func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition", i.ServiceID, i.ServiceVersion)
@@ -82,11 +82,11 @@ type CreateConditionInput struct {
 // CreateCondition creates a new Fastly condition.
 func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition", i.ServiceID, i.ServiceVersion)
@@ -117,15 +117,15 @@ type GetConditionInput struct {
 // GetCondition gets the condition configuration with the given parameters.
 func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -161,15 +161,15 @@ type UpdateConditionInput struct {
 // UpdateCondition updates a specific condition.
 func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -200,15 +200,15 @@ type DeleteConditionInput struct {
 // DeleteCondition deletes the given condition version.
 func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

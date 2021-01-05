@@ -45,11 +45,11 @@ type ListLogglyInput struct {
 // ListLoggly returns the list of loggly for the configuration version.
 func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly", i.ServiceID, i.ServiceVersion)
@@ -85,11 +85,11 @@ type CreateLogglyInput struct {
 // CreateLoggly creates a new Fastly loggly.
 func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly", i.ServiceID, i.ServiceVersion)
@@ -120,15 +120,15 @@ type GetLogglyInput struct {
 // GetLoggly gets the loggly configuration with the given parameters.
 func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -166,15 +166,15 @@ type UpdateLogglyInput struct {
 // UpdateLoggly updates a specific loggly.
 func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -205,15 +205,15 @@ type DeleteLogglyInput struct {
 // DeleteLoggly deletes the given loggly version.
 func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

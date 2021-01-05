@@ -60,11 +60,11 @@ type GetBillingInput struct {
 // GetBilling returns the billing information for the current account.
 func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
 	if i.Year == 0 {
-		return nil, NewFieldError("Year")
+		return nil, ErrMissingYear
 	}
 
 	if i.Month == 0 {
-		return nil, NewFieldError("Month")
+		return nil, ErrMissingMonth
 	}
 
 	path := fmt.Sprintf("/billing/year/%d/month/%02d", i.Year, i.Month)

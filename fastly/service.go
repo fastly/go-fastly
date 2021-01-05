@@ -105,7 +105,7 @@ type GetServiceInput struct {
 // (not a 404).
 func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ID)
@@ -126,7 +126,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 // service exists for the given id, the API returns a 400 response (not a 404).
 func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s/details", i.ID)
@@ -154,15 +154,15 @@ type UpdateServiceInput struct {
 // UpdateService updates the service with the given input.
 func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.Name == nil && i.Comment == nil {
-		return nil, NewFieldError("Name, Comment").Message("at least one of the available 'optional' fields is required")
+		return nil, ErrMissingOptionalNameComment
 	}
 
 	if i.Name != nil && *i.Name == "" {
-		return nil, NewFieldError("Name").Message("service name can't be an empty value")
+		return nil, ErrMissingNameValue
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ServiceID)
@@ -186,7 +186,7 @@ type DeleteServiceInput struct {
 // DeleteService updates the service with the given input.
 func (c *Client) DeleteService(i *DeleteServiceInput) error {
 	if i.ID == "" {
-		return NewFieldError("ID")
+		return ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ID)
@@ -214,7 +214,7 @@ type SearchServiceInput struct {
 // name, the API returns a 400 response (not a 404).
 func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	resp, err := c.Get("/service/search", &RequestOptions{
@@ -241,7 +241,7 @@ type ListServiceDomainInput struct {
 // ListServiceDomains lists all domains associated with a given service
 func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 	path := fmt.Sprintf("/service/%s/domain", i.ID)
 	resp, err := c.Get(path, nil)

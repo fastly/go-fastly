@@ -88,19 +88,19 @@ type CreateSnippetInput struct {
 // CreateSnippet creates a new snippet or dynamic snippet on a unlocked version
 func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	if i.Dynamic == 0 && i.Content == "" {
-		return nil, NewFieldError("Content")
+		return nil, ErrMissingContent
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet", i.ServiceID, i.ServiceVersion)
@@ -145,19 +145,19 @@ type UpdateSnippetInput struct {
 // UpdateSnippet updates a snippet on a unlocked version
 func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	if i.Dynamic == 0 && i.Content == "" {
-		return nil, NewFieldError("Content")
+		return nil, ErrMissingContent
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -198,11 +198,11 @@ type UpdateDynamicSnippetInput struct {
 // UpdateDynamicSnippet replaces the content of a Dynamic Snippet
 func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.ID)
@@ -231,15 +231,15 @@ type DeleteSnippetInput struct {
 
 func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -281,11 +281,11 @@ func (s snippetsByName) Less(i, j int) bool {
 // versionless, use the GetDynamicSnippet function to show current content.
 func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet", i.ServiceID, i.ServiceVersion)
@@ -318,15 +318,15 @@ type GetSnippetInput struct {
 // being versionless, use GetDynamicSnippet to see content.
 func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -355,11 +355,11 @@ type GetDynamicSnippetInput struct {
 // associated with a Dynamic Snippet.
 func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.ID)

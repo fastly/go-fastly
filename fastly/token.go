@@ -71,7 +71,7 @@ type ListCustomerTokensInput struct {
 // customer.
 func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error) {
 	if i.CustomerID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/customer/%s/tokens", i.CustomerID)
@@ -142,7 +142,7 @@ type DeleteTokenInput struct {
 // DeleteToken revokes a specific token by its ID.
 func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	if i.TokenID == "" {
-		return NewFieldError("ID")
+		return ErrMissingID
 	}
 
 	path := fmt.Sprintf("/tokens/%s", i.TokenID)

@@ -104,7 +104,7 @@ type GetAPIEventInput struct {
 // GetAPIEvent gets a specific event
 func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 	if i.EventID == "" {
-		return nil, NewFieldError("EventID")
+		return nil, ErrMissingEventID
 	}
 
 	path := fmt.Sprintf("/events/%s", i.EventID)

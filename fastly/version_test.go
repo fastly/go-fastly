@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"sort"
 	"testing"
 )
@@ -135,7 +136,7 @@ func TestClient_ListVersions_validation(t *testing.T) {
 	_, err = testClient.ListVersions(&ListVersionsInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -145,7 +146,7 @@ func TestClient_CreateVersion_validation(t *testing.T) {
 	_, err = testClient.CreateVersion(&CreateVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -155,7 +156,7 @@ func TestClient_GetVersion_validation(t *testing.T) {
 	_, err = testClient.GetVersion(&GetVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -163,7 +164,7 @@ func TestClient_GetVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -173,7 +174,7 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 	_, err = testClient.UpdateVersion(&UpdateVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -181,7 +182,7 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -191,7 +192,7 @@ func TestClient_ActivateVersion_validation(t *testing.T) {
 	_, err = testClient.ActivateVersion(&ActivateVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -199,7 +200,7 @@ func TestClient_ActivateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -209,7 +210,7 @@ func TestClient_DeactivateVersion_validation(t *testing.T) {
 	_, err = testClient.DeactivateVersion(&DeactivateVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -217,7 +218,7 @@ func TestClient_DeactivateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -227,7 +228,7 @@ func TestClient_CloneVersion_validation(t *testing.T) {
 	_, err = testClient.CloneVersion(&CloneVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -235,7 +236,7 @@ func TestClient_CloneVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -245,7 +246,7 @@ func TestClient_ValidateVersion_validation(t *testing.T) {
 	_, _, err = testClient.ValidateVersion(&ValidateVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -253,7 +254,7 @@ func TestClient_ValidateVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -263,7 +264,7 @@ func TestClient_LockVersion_validation(t *testing.T) {
 	_, err = testClient.LockVersion(&LockVersionInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -271,7 +272,7 @@ func TestClient_LockVersion_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

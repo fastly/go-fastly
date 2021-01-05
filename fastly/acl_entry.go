@@ -39,11 +39,11 @@ type ListACLEntriesInput struct {
 // ListACLEntries return a list of entries for an ACL
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACLID == "" {
-		return nil, NewFieldError("ACLID")
+		return nil, ErrMissingACLID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
@@ -73,15 +73,15 @@ type GetACLEntryInput struct {
 // GetACLEntry returns a single ACL entry based on its ID.
 func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACLID == "" {
-		return nil, NewFieldError("ACLID")
+		return nil, ErrMissingACLID
 	}
 
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
@@ -115,15 +115,15 @@ type CreateACLEntryInput struct {
 // CreateACLEntry creates and returns a new ACL entry.
 func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACLID == "" {
-		return nil, NewFieldError("ACLID")
+		return nil, ErrMissingACLID
 	}
 
 	if i.IP == "" {
-		return nil, NewFieldError("IP")
+		return nil, ErrMissingIP
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.ServiceID, i.ACLID)
@@ -151,15 +151,15 @@ type DeleteACLEntryInput struct {
 // DeleteACLEntry deletes an entry from an ACL based on its ID
 func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ACLID == "" {
-		return NewFieldError("ACLID")
+		return ErrMissingACLID
 	}
 
 	if i.ID == "" {
-		return NewFieldError("ID")
+		return ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
@@ -199,15 +199,15 @@ type UpdateACLEntryInput struct {
 // UpdateACLEntry updates an ACL entry
 func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ACLID == "" {
-		return nil, NewFieldError("ACLID")
+		return nil, ErrMissingACLID
 	}
 
 	if i.ID == "" {
-		return nil, NewFieldError("ID")
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
@@ -243,15 +243,15 @@ type BatchACLEntry struct {
 
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ACLID == "" {
-		return NewFieldError("ACLID")
+		return ErrMissingACLID
 	}
 
 	if len(i.Entries) > BatchModifyMaximumOperations {
-		return NewFieldError("Entries").Message("batch modify maximum operations exceeded")
+		return ErrMaxExceededEntries
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)

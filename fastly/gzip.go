@@ -43,11 +43,11 @@ type ListGzipsInput struct {
 // ListGzips returns the list of gzips for the configuration version.
 func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip", i.ServiceID, i.ServiceVersion)
@@ -81,11 +81,11 @@ type CreateGzipInput struct {
 // CreateGzip creates a new Fastly Gzip.
 func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip", i.ServiceID, i.ServiceVersion)
@@ -116,15 +116,15 @@ type GetGzipInput struct {
 // GetGzip gets the Gzip configuration with the given parameters.
 func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -160,15 +160,15 @@ type UpdateGzipInput struct {
 // UpdateGzip updates a specific Gzip.
 func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
-		return nil, NewFieldError("ServiceID")
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return nil, NewFieldError("ServiceVersion")
+		return nil, ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return nil, NewFieldError("Name")
+		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -199,15 +199,15 @@ type DeleteGzipInput struct {
 // DeleteGzip deletes the given Gzip version.
 func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
 	if i.ServiceID == "" {
-		return NewFieldError("ServiceID")
+		return ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
-		return NewFieldError("ServiceVersion")
+		return ErrMissingServiceVersion
 	}
 
 	if i.Name == "" {
-		return NewFieldError("Name")
+		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
