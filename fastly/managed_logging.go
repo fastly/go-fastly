@@ -29,7 +29,7 @@ const (
 	ManagedLoggingInstanceOutput
 )
 
-// CreateManagedLogging enabled managed logging for a service.
+// CreateManagedLogging enables managed logging for a service.
 func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLogging, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -46,7 +46,7 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 		return nil, ErrNotImplemented
 	}
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.Post(path, nil)
 	// If the service already has managed logging enabled, it will respond
 	// with a 409. Handle this case specially so users can decide if this is
 	// truly an error.

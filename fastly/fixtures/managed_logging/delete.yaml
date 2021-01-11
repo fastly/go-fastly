@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 07 Jan 2021 19:28:05 GMT
+      - Mon, 11 Jan 2021 14:05:09 GMT
       Fastly-Ratelimit-Remaining:
-      - "19995"
+      - "19996"
       Fastly-Ratelimit-Reset:
-      - "1610049600"
+      - "1610377200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8229-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8275-DEN
       X-Timer:
-      - S1610047685.823978,VS0,VE866
+      - S1610373908.316897,VS0,VE892
     status: 200 OK
     code: 200
     duration: ""
