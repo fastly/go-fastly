@@ -1,20 +1,17 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49/lock
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/17/lock
     method: PUT
   response:
-    body: '{"staging":false,"deleted_at":null,"number":49,"updated_at":"2019-05-11T00:21:35Z","deployed":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","testing":false,"comment":"new
-      comment","locked":true,"created_at":"2019-05-11T00:21:34Z","active":false}'
+    body: '{"created_at":"2021-01-14T09:51:27Z","testing":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","active":false,"deployed":false,"comment":"new
+      comment","deleted_at":null,"staging":false,"updated_at":"2021-01-14T09:51:29Z","number":17,"locked":true}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 11 May 2019 00:21:36 GMT
+      - Thu, 14 Jan 2021 09:51:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "997"
+      - "989"
       Fastly-Ratelimit-Reset:
-      - "1557536400"
+      - "1610618400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,15 +32,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17444-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4142-MAN
       X-Timer:
-      - S1557534096.964478,VS0,VE261
+      - S1610617890.564996,VS0,VE591
     status: 200 OK
     code: 200
+    duration: ""

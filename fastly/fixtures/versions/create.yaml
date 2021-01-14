@@ -1,25 +1,22 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&comment=test+comment
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&comment=test+comment
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       comment:
       - test comment
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"comment":"test comment","service_id":"7i6HN3TK9wS159v2gPAZ8A","number":49}'
+    body: '{"comment":"test comment","service_id":"7i6HN3TK9wS159v2gPAZ8A","number":17}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 11 May 2019 00:21:34 GMT
+      - Thu, 14 Jan 2021 09:51:28 GMT
       Fastly-Ratelimit-Remaining:
-      - "999"
+      - "991"
       Fastly-Ratelimit-Reset:
-      - "1557536400"
+      - "1610618400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,15 +37,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17444-PAO
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4142-MAN
       X-Timer:
-      - S1557534094.898614,VS0,VE597
+      - S1610617888.521722,VS0,VE608
     status: 200 OK
     code: 200
+    duration: ""
