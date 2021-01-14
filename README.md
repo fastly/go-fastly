@@ -148,56 +148,31 @@ More information can be found in the
 
 ## Testing
 
-Go Fastly uses [go-vcr](https://github.com/dnaeon/go-vcr) to "record" and
-"replay" API request fixtures to improve the speed and portability of
-integration tests. The test suite uses a single test service ID for all test
-fixtures.
+Go Fastly uses [go-vcr](https://github.com/dnaeon/go-vcr) to "record" and "replay" API request fixtures to improve the speed and portability of integration tests. The test suite uses a single test service ID for all test fixtures.
 
-Contributors _without_ access to the test service can disable go-vcr, set a
-different test service ID, and use their own API credentials by setting the
-following environment variables:
-* `VCR_DISABLE`: disables go-vcr fixture recording and replay
-  * The `test-full` make target runs the tests with go-vcr disabled.
-* `FASTLY_TEST_SERVICE_ID`: set default service ID used by the test suite
-  * **NOTE: A quick way to create a resource for testing is to use the following [Fastly CLI](https://github.com/fastly/cli) command:**
-  ```
-  $ fastly service create --type=vcl --name=foo
-  ```
-* `FASTLY_API_KEY`: set a Fastly API key to be used by the test suite
+Contributors without access to the test service can still update the fixtures but with some additional steps required. Below is an example workflow for updating a set of fixture files (where `...` should be replaced with an appropriate value):
 
 ```sh
-make test-full \
-  FASTLY_TEST_SERVICE_ID="SERVICEID" \
-  FASTLY_API_KEY="TESTAPIKEY" \
-  TESTARGS="-run=Logentries"
+# Remove all yaml fixture files from the specified directory.
+#
+rm -r fastly/fixtures/.../*
+
+# Run a subsection of the tests.
+# This will cause the deleted fixtures to be recreated.
+# 
+# FASTLY_TEST_SERVICE_ID: should correspond to a real service you control.
+# FASTLY_API_KEY: should be a real token associated with the Service you control.
+# TESTARGS: allows you to use the -run flag of the 'go test' command.
+# 
+make test FASTLY_TEST_SERVICE_ID="..." FASTLY_API_KEY="..." TESTARGS="-run=..."
 ```
 
-When adding or updating client code and integration tests, contributors may
-record a new set of fixtures by running the tests without `VCR_DISABLE`. Before
-submitting a pull request with new or updated fixtures, we ask that contributors
-update them to use the default service ID by running `make fix-fixtures` with
-`FASTLY_TEST_SERVICE_ID` set to the same value used to run your tests.
+> **NOTE**: to run the tests with go-vcr disabled, set `VCR_DISABLE=1` (`make test-full` does this).
 
-If you are **updating** an existing resource, in order to force go-vcr to re-record,
-rather than use the existing recorded values, you will have to removed the recorded
-values for that resource via `rm -r fastly/fixtures/<resource_name>`. **If you don't
-remove the existing recorded values, you will see the following error**:
+When adding or updating client code and integration tests, contributors should record a new set of fixtures. Before submitting a pull request with new or updated fixtures, we ask that contributors update them to use the default service ID by running `make fix-fixtures` with `FASTLY_TEST_SERVICE_ID` set to the same value used to run your tests.
 
-```
-Post "https://api.fastly.com/service/SERVICEID/version": Requested interaction not found
-```
-
-Example (`make test`, `make fix-fixtures`):
 ```sh
-make test \
-  FASTLY_TEST_SERVICE_ID="SERVICEID" \
-  FASTLY_API_KEY="TESTAPIKEY" \
-  TESTARGS="-run=Logentries"
-make fix-fixtures FASTLY_TEST_SERVICE_ID="SERVICEID"
-
-# Re-run test suite with newly recorded fixtures
-unset FASTLY_TEST_SERVICE_ID FASTLY_API_KEY
-make test
+make fix-fixtures FASTLY_TEST_SERVICE_ID="..."
 ```
 
 ## Contributing
