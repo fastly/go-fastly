@@ -1,16 +1,15 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: ACL=1d7GeY6Ky6eeqSsO5c1r29&ID=5z5nqKm0IGS8ovR512rSaT&Service=2voeSM5z6889qin6D9waPl&ip=10.0.0.4&negated=true
+    body: ACLID=3XA9Zoz75yiYlgnjzDAFmI&ID=5Eyk2g71nkTniNmscr6bJs&ServiceID=5BEXGVZPrhtk8TJfJJiz5u&ip=10.0.0.4&negated=true
     form:
-      ACL:
-      - 1d7GeY6Ky6eeqSsO5c1r29
+      ACLID:
+      - 3XA9Zoz75yiYlgnjzDAFmI
       ID:
-      - 5z5nqKm0IGS8ovR512rSaT
-      Service:
-      - 2voeSM5z6889qin6D9waPl
+      - 5Eyk2g71nkTniNmscr6bJs
+      ServiceID:
+      - 5BEXGVZPrhtk8TJfJJiz5u
       ip:
       - 10.0.0.4
       negated:
@@ -18,14 +17,13 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/2voeSM5z6889qin6D9waPl/acl/1d7GeY6Ky6eeqSsO5c1r29/entry/5z5nqKm0IGS8ovR512rSaT
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/5BEXGVZPrhtk8TJfJJiz5u/acl/3XA9Zoz75yiYlgnjzDAFmI/entry/5Eyk2g71nkTniNmscr6bJs
     method: PATCH
   response:
-    body: '{"ip":"10.0.0.4","updated_at":"2019-07-23T10:47:07Z","comment":"test entry","acl_id":"1d7GeY6Ky6eeqSsO5c1r29","created_at":"2019-07-23T10:47:07Z","negated":"true","service_id":"2voeSM5z6889qin6D9waPl","id":"5z5nqKm0IGS8ovR512rSaT","subnet":8,"deleted_at":null}'
+    body: '{"subnet":8,"acl_id":"3XA9Zoz75yiYlgnjzDAFmI","created_at":"2021-01-14T10:23:48Z","negated":"true","service_id":"5BEXGVZPrhtk8TJfJJiz5u","ip":"10.0.0.4","id":"5Eyk2g71nkTniNmscr6bJs","deleted_at":null,"comment":"test
+      entry","updated_at":"2021-01-14T10:23:48Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -34,11 +32,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jul 2019 10:47:08 GMT
+      - Thu, 14 Jan 2021 10:23:49 GMT
       Fastly-Ratelimit-Remaining:
-      - "980"
+      - "975"
       Fastly-Ratelimit-Reset:
-      - "1563879600"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,14 +44,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19277-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1563878828.855404,VS0,VE260
+      - S1610619830.700188,VS0,VE277
     status: 200 OK
     code: 200
+    duration: ""

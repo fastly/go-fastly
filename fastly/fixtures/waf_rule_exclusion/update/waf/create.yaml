@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf_firewall","attributes":{"prefetch_condition":"","response":"WAf_Response","service_id":"5wBis6DpoO67acK0K7n5GU","service_version_number":"2"}}}
+      {"data":{"type":"waf_firewall","attributes":{"prefetch_condition":"","response":"WAf_Response","service_id":"5V7x2mes9fC7zg73R9bTFm","service_version_number":2}}}
     form: {}
     headers:
       Accept:
@@ -11,28 +11,24 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/waf/firewalls
     method: POST
   response:
-    body: '{"data":{"id":"6DaBRX0dIm1SjxiB1KQCII","type":"waf_firewall","attributes":{"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_fastly_score_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"created_at":"2020-10-09T09:28:43Z","disabled":false,"prefetch_condition":"","response":"WAf_Response","service_id":"5wBis6DpoO67acK0K7n5GU","service_version_number":2,"updated_at":"2020-10-09T09:28:43Z"}}}'
+    body: '{"data":{"id":"4yjbtwWcN9qHjzre3ScLDt","type":"waf_firewall","attributes":{"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_fastly_score_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"created_at":"2021-01-14T10:27:49Z","disabled":false,"prefetch_condition":"","response":"WAf_Response","service_id":"5V7x2mes9fC7zg73R9bTFm","service_version_number":2,"updated_at":"2021-01-14T10:27:49Z"}}}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Content-Length:
       - "566"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Fri, 09 Oct 2020 09:28:43 GMT
-      Status:
-      - 201 Created
+      - Thu, 14 Jan 2021 10:27:49 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
@@ -40,9 +36,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lon4257-LON
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1602235722.327297,VS0,VE1030
+      - S1610620068.083503,VS0,VE1193
     status: 201 Created
     code: 201
     duration: ""

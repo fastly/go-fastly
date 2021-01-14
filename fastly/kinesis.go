@@ -26,7 +26,7 @@ type Kinesis struct {
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
-// kinesesByName is a sortable list of Kineses.
+// kinesesByName is a sortable list of Kinesis.
 type kinesesByName []*Kinesis
 
 // Len, Swap, and Less implement the sortable interface.
@@ -36,8 +36,8 @@ func (s kinesesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListKinesesInput is used as input to the ListKineses function.
-type ListKinesesInput struct {
+// ListKinesisInput is used as input to the ListKinesis function.
+type ListKinesisInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 
@@ -45,8 +45,8 @@ type ListKinesesInput struct {
 	ServiceVersion int
 }
 
-// ListKineses returns the list of Kineses for the configuration version.
-func (c *Client) ListKineses(i *ListKinesesInput) ([]*Kinesis, error) {
+// ListKinesis returns the list of Kinesis for the configuration version.
+func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}

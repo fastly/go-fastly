@@ -6,32 +6,24 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/waf/rules?filter%5Bmodsec_rule_id%5D%5Bnot%5D=4170020&filter%5Bpublisher%5D%5Bin%5D=fastly&page%5Bnumber%5D=1&page%5Bsize%5D=100
     method: GET
   response:
-    body: '{"data":[{"id":"2XaxZXGRt3si6PYFjk72VJ","type":"waf_rule","attributes":{"modsec_rule_id":4113001,"publisher":"fastly","type":"strict"}},{"id":"3gFobZTPjwOe2d4wjyMq0t","type":"waf_rule","attributes":{"modsec_rule_id":4112010,"publisher":"fastly","type":"strict"}},{"id":"7XknD1S1cIaBzaLaLM03rU","type":"waf_rule","attributes":{"modsec_rule_id":4170010,"publisher":"fastly","type":"strict"}},{"id":"4Ik26w8xeZsg6YSIgXvxk8","type":"waf_rule","attributes":{"modsec_rule_id":4112012,"publisher":"fastly","type":"strict"}},{"id":"3eMBNjXm2CDeuVGtqQ5gnm","type":"waf_rule","attributes":{"modsec_rule_id":4112019,"publisher":"fastly","type":"strict"}},{"id":"Z4a2ehtBKgSGKdzjLsFho","type":"waf_rule","attributes":{"modsec_rule_id":4120010,"publisher":"fastly","type":"strict"}},{"id":"YIvh8KyBfg2mpxd8VL701","type":"waf_rule","attributes":{"modsec_rule_id":4113060,"publisher":"fastly","type":"strict"}},{"id":"5IIah6rhz2xHPN4z0BGZQs","type":"waf_rule","attributes":{"modsec_rule_id":4112016,"publisher":"fastly","type":"strict"}},{"id":"WW0xqe1o1uGZkkZvyteXn","type":"waf_rule","attributes":{"modsec_rule_id":4113030,"publisher":"fastly","type":"strict"}},{"id":"4UrmWndGlZ6wF6YvVEo4mU","type":"waf_rule","attributes":{"modsec_rule_id":4112060,"publisher":"fastly","type":"strict"}},{"id":"38J95zkMuMHTAZa7YBV2Vj","type":"waf_rule","attributes":{"modsec_rule_id":4100030,"publisher":"fastly","type":"strict"}},{"id":"4tgA6dhHu45W2hWdGyVzmN","type":"waf_rule","attributes":{"modsec_rule_id":4112014,"publisher":"fastly","type":"strict"}},{"id":"5GdxS8oMO6Q7nVRDbbhetP","type":"waf_rule","attributes":{"modsec_rule_id":4113061,"publisher":"fastly","type":"strict"}},{"id":"1IKpuI64G89IiTwJ4OFjWd","type":"waf_rule","attributes":{"modsec_rule_id":4113050,"publisher":"fastly","type":"strict"}},{"id":"56ujtNdxwqnArlcY1ZxwuT","type":"waf_rule","attributes":{"modsec_rule_id":4112031,"publisher":"fastly","type":"strict"}},{"id":"5G9dWn5s3Po0rxqeQS2kQj","type":"waf_rule","attributes":{"modsec_rule_id":4112015,"publisher":"fastly","type":"strict"}},{"id":"17wfGf6Hha4qRO8al8C17G","type":"waf_rule","attributes":{"modsec_rule_id":4113020,"publisher":"fastly","type":"strict"}},{"id":"3M3EURR8f1V4hnsfVy8XRG","type":"waf_rule","attributes":{"modsec_rule_id":4112013,"publisher":"fastly","type":"strict"}},{"id":"4fYCmxnKNs1vPlJWhDTYOx","type":"waf_rule","attributes":{"modsec_rule_id":4100020,"publisher":"fastly","type":"strict"}},{"id":"C36P2W5xakP9F01r42Kht","type":"waf_rule","attributes":{"modsec_rule_id":4100041,"publisher":"fastly","type":"strict"}},{"id":"4TbXJfEwK7m8BcoZA24Sbe","type":"waf_rule","attributes":{"modsec_rule_id":4100010,"publisher":"fastly","type":"strict"}},{"id":"2zJHh4N0NqjpnIetsScbDd","type":"waf_rule","attributes":{"modsec_rule_id":4120011,"publisher":"fastly","type":"strict"}},{"id":"6pCSSke85supSFYGlhbQKF","type":"waf_rule","attributes":{"modsec_rule_id":4112018,"publisher":"fastly","type":"strict"}},{"id":"2SOmKa8AfgmNj0LCv9322W","type":"waf_rule","attributes":{"modsec_rule_id":4134010,"publisher":"fastly","type":"strict"}},{"id":"5jnKuokWp9ttLvzzV2fhMa","type":"waf_rule","attributes":{"modsec_rule_id":4113002,"publisher":"fastly","type":"strict"}},{"id":"38ZKGAwj8ePH7LyT4sELcW","type":"waf_rule","attributes":{"modsec_rule_id":4170001,"publisher":"fastly","type":"strict"}},{"id":"1j1agibUmJiozEVbIjnxw4","type":"waf_rule","attributes":{"modsec_rule_id":4170000,"publisher":"fastly","type":"strict"}},{"id":"7alH8ouxT4Ecl0omtUxDwi","type":"waf_rule","attributes":{"modsec_rule_id":4112011,"publisher":"fastly","type":"strict"}},{"id":"5rY5QVuuEnVp00OjBkW9d8","type":"waf_rule","attributes":{"modsec_rule_id":4113010,"publisher":"fastly","type":"strict"}},{"id":"2afLRYhGuQEW82cD5S7aAv","type":"waf_rule","attributes":{"modsec_rule_id":4100040,"publisher":"fastly","type":"strict"}}],"links":{"last":"https://api.fastly.com/waf/rules?filter[modsec_rule_id][not]=4170020\u0026filter[publisher][in]=fastly\u0026page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/rules?filter[modsec_rule_id][not]=4170020\u0026filter[publisher][in]=fastly\u0026page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":30,"total_pages":1}}'
+    body: '{"data":[{"id":"5BTrk0uu84xfsvDlLieCsj","type":"waf_rule","attributes":{"modsec_rule_id":4170030,"publisher":"fastly","type":"strict"}},{"id":"2XaxZXGRt3si6PYFjk72VJ","type":"waf_rule","attributes":{"modsec_rule_id":4113001,"publisher":"fastly","type":"strict"}},{"id":"3gFobZTPjwOe2d4wjyMq0t","type":"waf_rule","attributes":{"modsec_rule_id":4112010,"publisher":"fastly","type":"strict"}},{"id":"7XknD1S1cIaBzaLaLM03rU","type":"waf_rule","attributes":{"modsec_rule_id":4170010,"publisher":"fastly","type":"strict"}},{"id":"4Ik26w8xeZsg6YSIgXvxk8","type":"waf_rule","attributes":{"modsec_rule_id":4112012,"publisher":"fastly","type":"strict"}},{"id":"3eMBNjXm2CDeuVGtqQ5gnm","type":"waf_rule","attributes":{"modsec_rule_id":4112019,"publisher":"fastly","type":"strict"}},{"id":"Z4a2ehtBKgSGKdzjLsFho","type":"waf_rule","attributes":{"modsec_rule_id":4120010,"publisher":"fastly","type":"strict"}},{"id":"YIvh8KyBfg2mpxd8VL701","type":"waf_rule","attributes":{"modsec_rule_id":4113060,"publisher":"fastly","type":"strict"}},{"id":"5IIah6rhz2xHPN4z0BGZQs","type":"waf_rule","attributes":{"modsec_rule_id":4112016,"publisher":"fastly","type":"strict"}},{"id":"WW0xqe1o1uGZkkZvyteXn","type":"waf_rule","attributes":{"modsec_rule_id":4113030,"publisher":"fastly","type":"strict"}},{"id":"4UrmWndGlZ6wF6YvVEo4mU","type":"waf_rule","attributes":{"modsec_rule_id":4112060,"publisher":"fastly","type":"strict"}},{"id":"38J95zkMuMHTAZa7YBV2Vj","type":"waf_rule","attributes":{"modsec_rule_id":4100030,"publisher":"fastly","type":"strict"}},{"id":"4tgA6dhHu45W2hWdGyVzmN","type":"waf_rule","attributes":{"modsec_rule_id":4112014,"publisher":"fastly","type":"strict"}},{"id":"5GdxS8oMO6Q7nVRDbbhetP","type":"waf_rule","attributes":{"modsec_rule_id":4113061,"publisher":"fastly","type":"strict"}},{"id":"1IKpuI64G89IiTwJ4OFjWd","type":"waf_rule","attributes":{"modsec_rule_id":4113050,"publisher":"fastly","type":"strict"}},{"id":"56ujtNdxwqnArlcY1ZxwuT","type":"waf_rule","attributes":{"modsec_rule_id":4112031,"publisher":"fastly","type":"strict"}},{"id":"5G9dWn5s3Po0rxqeQS2kQj","type":"waf_rule","attributes":{"modsec_rule_id":4112015,"publisher":"fastly","type":"strict"}},{"id":"17wfGf6Hha4qRO8al8C17G","type":"waf_rule","attributes":{"modsec_rule_id":4113020,"publisher":"fastly","type":"strict"}},{"id":"3M3EURR8f1V4hnsfVy8XRG","type":"waf_rule","attributes":{"modsec_rule_id":4112013,"publisher":"fastly","type":"strict"}},{"id":"4fYCmxnKNs1vPlJWhDTYOx","type":"waf_rule","attributes":{"modsec_rule_id":4100020,"publisher":"fastly","type":"strict"}},{"id":"C36P2W5xakP9F01r42Kht","type":"waf_rule","attributes":{"modsec_rule_id":4100041,"publisher":"fastly","type":"strict"}},{"id":"4TbXJfEwK7m8BcoZA24Sbe","type":"waf_rule","attributes":{"modsec_rule_id":4100010,"publisher":"fastly","type":"strict"}},{"id":"2zJHh4N0NqjpnIetsScbDd","type":"waf_rule","attributes":{"modsec_rule_id":4120011,"publisher":"fastly","type":"strict"}},{"id":"6pCSSke85supSFYGlhbQKF","type":"waf_rule","attributes":{"modsec_rule_id":4112018,"publisher":"fastly","type":"strict"}},{"id":"2SOmKa8AfgmNj0LCv9322W","type":"waf_rule","attributes":{"modsec_rule_id":4134010,"publisher":"fastly","type":"strict"}},{"id":"5jnKuokWp9ttLvzzV2fhMa","type":"waf_rule","attributes":{"modsec_rule_id":4113002,"publisher":"fastly","type":"strict"}},{"id":"38ZKGAwj8ePH7LyT4sELcW","type":"waf_rule","attributes":{"modsec_rule_id":4170001,"publisher":"fastly","type":"strict"}},{"id":"1j1agibUmJiozEVbIjnxw4","type":"waf_rule","attributes":{"modsec_rule_id":4170000,"publisher":"fastly","type":"strict"}},{"id":"7alH8ouxT4Ecl0omtUxDwi","type":"waf_rule","attributes":{"modsec_rule_id":4112011,"publisher":"fastly","type":"strict"}},{"id":"5rY5QVuuEnVp00OjBkW9d8","type":"waf_rule","attributes":{"modsec_rule_id":4113010,"publisher":"fastly","type":"strict"}},{"id":"2afLRYhGuQEW82cD5S7aAv","type":"waf_rule","attributes":{"modsec_rule_id":4100040,"publisher":"fastly","type":"strict"}}],"links":{"last":"https://api.fastly.com/waf/rules?filter[modsec_rule_id][not]=4170020\u0026filter[publisher][in]=fastly\u0026page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/rules?filter[modsec_rule_id][not]=4170020\u0026filter[publisher][in]=fastly\u0026page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":31,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Content-Length:
-      - "4206"
+      - "4333"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Tue, 30 Jun 2020 10:56:25 GMT
-      Status:
-      - 200 OK
+      - Thu, 14 Jan 2021 10:26:25 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
@@ -39,9 +31,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19235-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1593514585.185515,VS0,VE225
+      - S1610619985.279629,VS0,VE474
     status: 200 OK
     code: 200
     duration: ""

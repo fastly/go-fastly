@@ -6,26 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.2.1 (+github.com/fastly/go-fastly; go1.13)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/tokens/self
     method: GET
   response:
-    body: '{"id":"xxxxxxxxxxxxxxxxxxxx","user_id":"xxxxxxxxxxxxxxxxxxxx","customer_id":"xxxxxxxxxxxxxxxxxxxx","name":"go-fastly-tests","last_used_at":"2019-09-25T10:42:50Z","created_at":"2019-09-25T10:15:12Z","expires_at":null,"ip":"127.0.0.1","user_agent":"FastlyGo/1.2.1
-      (+github.com/fastly/go-fastly; go1.13)","sudo_expires_at":null,"scopes":["global"],"scope":"global","services":[],"service_id":null}'
+    body: '{"id":"XXXXXXXXXXXXXXXXXXXXXX","user_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"TempTokenForGoFastlyTests","last_used_at":"2021-01-14T11:36:43Z","created_at":"2021-01-14T11:25:39Z","expires_at":null,"ip":"92.238.40.48","user_agent":"FastlyGo/2.1.0
+      (+github.com/fastly/go-fastly; go1.15.4)","sudo_expires_at":null,"scopes":["global"],"scope":"global","services":["XXXXXXXXXXXXXXXXXXXXXX"],"service_id":"XXXXXXXXXXXXXXXXXXXXXX"}'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 25 Sep 2019 10:42:50 GMT
+      - Thu, 14 Jan 2021 11:36:43 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,16 +28,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-cdg20741-CDG
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4128-MAN
       X-Timer:
-      - S1569408170.039160,VS0,VE468
+      - S1610624204.628303,VS0,VE158
     status: 200 OK
     code: 200
     duration: ""

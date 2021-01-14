@@ -6,33 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
-    url: https://api.fastly.com/waf/firewalls/62l7nuYjgnuQSlFstrZnnH/versions/1/exclusions?filter%5Bexclusion_type%5D=rule&filter%5Bwaf_rules.modsec_rule_id%5D=21032607&include=waf_rules&page%5Bnumber%5D=1&page%5Bsize%5D=100
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/waf/firewalls/1GeCu9U6X9dT82wCSwlNqa/versions/1/exclusions?filter%5Bexclusion_type%5D=rule&filter%5Bwaf_rules.modsec_rule_id%5D=21032607&include=waf_rules&page%5Bnumber%5D=1&page%5Bsize%5D=100
     method: GET
   response:
-    body: '{"data":[{"id":"e00Ot5MjYzxOxpLFnR8Cq","type":"waf_exclusion","attributes":{"created_at":"2020-10-09T09:28:43Z","exclusion_type":"rule","condition":"req.url.basename
-      == \"index.php\"","name":"index php","number":2,"updated_at":"2020-10-09T09:28:43Z"},"relationships":{"waf_rules":{"data":[{"id":"16kRBJ5RrNGYcnQ9EEiawe","type":"waf_rule"}]}}}],"included":[{"id":"16kRBJ5RrNGYcnQ9EEiawe","type":"waf_rule","attributes":{"modsec_rule_id":21032607,"publisher":"trustwave","type":"strict"}}],"links":{"last":"https://api.fastly.com/waf/firewalls/62l7nuYjgnuQSlFstrZnnH/versions/1/exclusions?filter[exclusion_type]=rule\u0026filter[waf_rules.modsec_rule_id]=21032607\u0026include=waf_rules\u0026page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/62l7nuYjgnuQSlFstrZnnH/versions/1/exclusions?filter[exclusion_type]=rule\u0026filter[waf_rules.modsec_rule_id]=21032607\u0026include=waf_rules\u0026page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":1,"total_pages":1}}'
+    body: '{"data":[{"id":"66lNVk5ACCkyybaZ6Lhcll","type":"waf_exclusion","attributes":{"condition":"req.url.basename
+      == \"index.php\"","created_at":"2021-01-14T10:27:50Z","exclusion_type":"rule","logging":true,"name":"index
+      php","number":2,"updated_at":"2021-01-14T10:27:50Z","variable":null},"relationships":{"waf_rules":{"data":[{"id":"16kRBJ5RrNGYcnQ9EEiawe","type":"waf_rule"}]}}}],"included":[{"id":"16kRBJ5RrNGYcnQ9EEiawe","type":"waf_rule","attributes":{"modsec_rule_id":21032607,"publisher":"trustwave","type":"strict"}}],"links":{"last":"https://api.fastly.com/waf/firewalls/1GeCu9U6X9dT82wCSwlNqa/versions/1/exclusions?filter[exclusion_type]=rule\u0026filter[waf_rules.modsec_rule_id]=21032607\u0026include=waf_rules\u0026page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/1GeCu9U6X9dT82wCSwlNqa/versions/1/exclusions?filter[exclusion_type]=rule\u0026filter[waf_rules.modsec_rule_id]=21032607\u0026include=waf_rules\u0026page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":1,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Content-Length:
-      - "1031"
+      - "1063"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Fri, 09 Oct 2020 09:28:43 GMT
-      Status:
-      - 200 OK
+      - Thu, 14 Jan 2021 10:27:51 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
@@ -40,9 +33,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lon4257-LON
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1602235724.826469,VS0,VE155
+      - S1610620071.025276,VS0,VE237
     status: 200 OK
     code: 200
     duration: ""

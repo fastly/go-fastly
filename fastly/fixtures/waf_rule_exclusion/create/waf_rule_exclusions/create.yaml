@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"waf_exclusion","attributes":{"condition":"req.url.basename == \"index.html\"","exclusion_type":"rule","name":"index page","number":null},"relationships":{"waf_rules":{"data":[{"type":"waf_rule","id":"2029718"},{"type":"waf_rule","id":"2037405"}]}}},"included":[{"type":"waf_rule","id":"2037405","attributes":{"modsec_rule_id":2037405}},{"type":"waf_rule","id":"2029718","attributes":{"modsec_rule_id":2029718}}]}
+      {"data":{"type":"waf_exclusion","attributes":{"condition":"req.url.basename == \"index.html\"","exclusion_type":"rule","name":"index page","number":null},"relationships":{"waf_rules":{"data":[{"type":"waf_rule","id":"2029718"},{"type":"waf_rule","id":"2037405"}]}}},"included":[{"type":"waf_rule","id":"2029718","attributes":{"modsec_rule_id":2029718}},{"type":"waf_rule","id":"2037405","attributes":{"modsec_rule_id":2037405}}]}
     form: {}
     headers:
       Accept:
@@ -11,29 +11,26 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.5)
-    url: https://api.fastly.com/waf/firewalls/4AGLf45qntIRxH9l9fkdBe/versions/1/exclusions
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/waf/firewalls/1bVzQr0yxJfEtuDsODo3Xv/versions/1/exclusions
     method: POST
   response:
-    body: '{"data":{"id":"1NkzJ4Y136Ns4zk1fjWAlU","type":"waf_exclusion","attributes":{"created_at":"2020-10-09T09:28:44Z","exclusion_type":"rule","condition":"req.url.basename
-      == \"index.html\"","name":"index page","number":1,"updated_at":"2020-10-09T09:28:44Z"},"relationships":{"waf_rules":{"data":[{"id":"1YveWU8qwEYidE8WAiZqCN","type":"waf_rule"},{"id":"VovV0PIWJCm33k1piDpnX","type":"waf_rule"}]}}}}'
+    body: '{"data":{"id":"3nscRVemP28z2RXcahMjUC","type":"waf_exclusion","attributes":{"condition":"req.url.basename
+      == \"index.html\"","created_at":"2021-01-14T10:27:49Z","exclusion_type":"rule","logging":true,"name":"index
+      page","number":1,"updated_at":"2021-01-14T10:27:49Z","variable":null},"relationships":{"waf_rules":{"data":[{"id":"1YveWU8qwEYidE8WAiZqCN","type":"waf_rule"},{"id":"VovV0PIWJCm33k1piDpnX","type":"waf_rule"}]}}}}'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
       Content-Length:
-      - "394"
+      - "425"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Fri, 09 Oct 2020 09:28:44 GMT
-      Status:
-      - 201 Created
+      - Thu, 14 Jan 2021 10:27:49 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
@@ -41,9 +38,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lon4257-LON
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1602235725.768216,VS0,VE152
+      - S1610620069.955513,VS0,VE480
     status: 201 Created
     code: 201
     duration: ""

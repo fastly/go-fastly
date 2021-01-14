@@ -1,14 +1,13 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Dictionary=2qpiTjYtwgTuLyB2N6vFAq&Service=17Cozi1mqUCWuTgyYvipeW&item_key=test-dictionary-item&item_value=value
+    body: DictionaryID=2WbI2tm1K7r1j6zNhrnDDp&ServiceID=2Sz0CwKi5NYXurcMQ1SHPo&item_key=test-dictionary-item&item_value=value
     form:
-      Dictionary:
-      - 2qpiTjYtwgTuLyB2N6vFAq
-      Service:
-      - 17Cozi1mqUCWuTgyYvipeW
+      DictionaryID:
+      - 2WbI2tm1K7r1j6zNhrnDDp
+      ServiceID:
+      - 2Sz0CwKi5NYXurcMQ1SHPo
       item_key:
       - test-dictionary-item
       item_value:
@@ -16,14 +15,12 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/17Cozi1mqUCWuTgyYvipeW/dictionary/2qpiTjYtwgTuLyB2N6vFAq/item
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/2Sz0CwKi5NYXurcMQ1SHPo/dictionary/2WbI2tm1K7r1j6zNhrnDDp/item
     method: POST
   response:
-    body: '{"dictionary_id":"2qpiTjYtwgTuLyB2N6vFAq","service_id":"17Cozi1mqUCWuTgyYvipeW","item_key":"test-dictionary-item","item_value":"value","created_at":"2019-07-16T11:30:23Z","deleted_at":null,"updated_at":"2019-07-16T11:30:23Z"}'
+    body: '{"dictionary_id":"2WbI2tm1K7r1j6zNhrnDDp","service_id":"2Sz0CwKi5NYXurcMQ1SHPo","item_key":"test-dictionary-item","item_value":"value","deleted_at":null,"updated_at":"2021-01-14T10:24:05Z","created_at":"2021-01-14T10:24:05Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:23 GMT
+      - Thu, 14 Jan 2021 10:24:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "933"
+      - "935"
       Fastly-Ratelimit-Reset:
-      - "1563278400"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -44,14 +41,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1563276624.648567,VS0,VE286
+      - S1610619846.734511,VS0,VE299
     status: 200 OK
     code: 200
+    duration: ""

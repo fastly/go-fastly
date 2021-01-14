@@ -2,11 +2,11 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=2&name=WAF_Prefetch&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
+    body: ServiceID=0OKgTNe0V5krPIwq1Ux6Yn&ServiceVersion=2&name=WAF_Prefetch&priority=1&statement=req.url~%2B%22index.html%22&type=PREFETCH
     form:
-      Service:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
+      ServiceID:
+      - 0OKgTNe0V5krPIwq1Ux6Yn
+      ServiceVersion:
       - "2"
       name:
       - WAF_Prefetch
@@ -20,25 +20,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/condition
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/0OKgTNe0V5krPIwq1Ux6Yn/version/2/condition
     method: POST
   response:
-    body: '{"name":"WAF_Prefetch","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"2","updated_at":"2020-06-30T10:56:25Z","created_at":"2020-06-30T10:56:25Z","comment":"","deleted_at":null}'
+    body: '{"name":"WAF_Prefetch","priority":"1","statement":"req.url~+\"index.html\"","type":"PREFETCH","service_id":"0OKgTNe0V5krPIwq1Ux6Yn","version":"2","deleted_at":null,"comment":"","updated_at":"2021-01-14T10:27:49Z","created_at":"2021-01-14T10:27:49Z"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Tue, 30 Jun 2020 10:56:25 GMT
+      - Thu, 14 Jan 2021 10:27:49 GMT
       Fastly-Ratelimit-Remaining:
-      - "686"
+      - "863"
       Fastly-Ratelimit-Reset:
-      - "1593514800"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,16 +45,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19235-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1593514585.239619,VS0,VE183
+      - S1610620069.152674,VS0,VE280
     status: 200 OK
     code: 200
     duration: ""

@@ -1,27 +1,24 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7BETwKaHgBudYYud5D8kUv&Version=2&name=test_dictionary_BatchModifyDictionaryItems_Delete
+    body: ServiceID=05ivbgRNjYUzRD0vUbobb1&ServiceVersion=2&name=test_dictionary_BatchModifyDictionaryItems_Delete
     form:
-      Service:
-      - 7BETwKaHgBudYYud5D8kUv
-      Version:
+      ServiceID:
+      - 05ivbgRNjYUzRD0vUbobb1
+      ServiceVersion:
       - "2"
       name:
       - test_dictionary_BatchModifyDictionaryItems_Delete
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/7BETwKaHgBudYYud5D8kUv/version/2/dictionary
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/05ivbgRNjYUzRD0vUbobb1/version/2/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary_BatchModifyDictionaryItems_Delete","service_id":"7BETwKaHgBudYYud5D8kUv","version":2,"deleted_at":null,"created_at":"2019-07-16T11:30:15Z","updated_at":"2019-07-16T11:30:15Z","write_only":false,"id":"1d3q6SOskD5WKWbHAH3OXL"}'
+    body: '{"name":"test_dictionary_BatchModifyDictionaryItems_Delete","service_id":"05ivbgRNjYUzRD0vUbobb1","version":2,"updated_at":"2021-01-14T10:23:57Z","id":"30B7QxXf0GuF3CYixw7bny","created_at":"2021-01-14T10:23:57Z","write_only":false,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -30,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:16 GMT
+      - Thu, 14 Jan 2021 10:23:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "955"
+      - "957"
       Fastly-Ratelimit-Reset:
-      - "1563278400"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,14 +39,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19245-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1563276616.746079,VS0,VE271
+      - S1610619837.004817,VS0,VE262
     status: 200 OK
     code: 200
+    duration: ""
