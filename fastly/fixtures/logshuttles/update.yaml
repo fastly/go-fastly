@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-logshuttle&ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=49&name=new-test-logshuttle&token=new-token&url=https%3A%2F%2Flogs2.example.com
+    body: Name=test-logshuttle&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=49&name=new-test-logshuttle&token=new-token&url=https%3A%2F%2Flogs2.example.com
     form:
       Name:
       - test-logshuttle
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "49"
       name:
@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/49/logging/logshuttle/test-logshuttle
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49/logging/logshuttle/test-logshuttle
     method: PUT
   response:
-    body: '{"name":"new-test-logshuttle","token":"new-token","url":"https://logs2.example.com","updated_at":"2021-01-14T10:44:03Z","deleted_at":null,"service_id":"4vQveBxLAGfObTin9pqYne","format_version":"2","created_at":"2021-01-14T10:44:03Z","format":"%h
+    body: '{"name":"new-test-logshuttle","token":"new-token","url":"https://logs2.example.com","updated_at":"2021-01-14T10:44:03Z","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","created_at":"2021-01-14T10:44:03Z","format":"%h
       %l %u %t \"%r\" %\u003es %b","response_condition":"","placement":"waf_debug","version":"49"}'
     headers:
       Accept-Ranges:

@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=45&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-heroku&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2F1.us.logplex.io%2Flogs
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=45&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-heroku&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2F1.us.logplex.io%2Flogs
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "45"
       format:
@@ -25,10 +25,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/45/logging/heroku
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/heroku
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-heroku","placement":"waf_debug","token":"super-secure-token","url":"https://1.us.logplex.io/logs","service_id":"4vQveBxLAGfObTin9pqYne","version":"45","response_condition":"","deleted_at":null,"updated_at":"2021-01-14T10:43:00Z","created_at":"2021-01-14T10:43:00Z"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-heroku","placement":"waf_debug","token":"super-secure-token","url":"https://1.us.logplex.io/logs","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"45","response_condition":"","deleted_at":null,"updated_at":"2021-01-14T10:43:00Z","created_at":"2021-01-14T10:43:00Z"}'
     headers:
       Accept-Ranges:
       - bytes

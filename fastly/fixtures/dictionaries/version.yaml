@@ -2,19 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"4vQveBxLAGfObTin9pqYne","number":33}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":33}'
     headers:
       Accept-Ranges:
       - bytes

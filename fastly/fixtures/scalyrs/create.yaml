@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=59&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=waf_debug&region=US&token=super-secure-token
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=59&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=waf_debug&region=US&token=super-secure-token
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "59"
       format:
@@ -25,10 +25,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/59/logging/scalyr
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/scalyr
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"waf_debug","region":"US","token":"super-secure-token","service_id":"4vQveBxLAGfObTin9pqYne","version":"59","response_condition":"","created_at":"2021-01-14T10:47:09Z","updated_at":"2021-01-14T10:47:09Z","deleted_at":null,"project_id":null}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"waf_debug","region":"US","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"59","response_condition":"","created_at":"2021-01-14T10:47:09Z","updated_at":"2021-01-14T10:47:09Z","deleted_at":null,"project_id":null}'
     headers:
       Accept-Ranges:
       - bytes

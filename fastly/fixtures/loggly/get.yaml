@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/51/logging/loggly/test-loggly
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/logging/loggly/test-loggly
     method: GET
   response:
-    body: '{"placement":"waf_debug","token":"abcd1234","name":"test-loggly","created_at":"2021-01-14T10:44:16Z","version":"51","updated_at":"2021-01-14T10:44:16Z","service_id":"4vQveBxLAGfObTin9pqYne","deleted_at":null,"response_condition":"","format_version":"2","public_key":null,"format":"format"}'
+    body: '{"placement":"waf_debug","token":"abcd1234","name":"test-loggly","created_at":"2021-01-14T10:44:16Z","version":"51","updated_at":"2021-01-14T10:44:16Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"response_condition":"","format_version":"2","public_key":null,"format":"format"}'
     headers:
       Accept-Ranges:
       - bytes

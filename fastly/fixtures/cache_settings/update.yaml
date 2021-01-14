@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-cache-setting&ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=29&name=new-test-cache-setting
+    body: Name=test-cache-setting&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=29&name=new-test-cache-setting
     form:
       Name:
       - test-cache-setting
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "29"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/29/cache_settings/test-cache-setting
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/29/cache_settings/test-cache-setting
     method: PUT
   response:
-    body: '{"updated_at":"2021-01-14T10:36:00Z","name":"new-test-cache-setting","stale_ttl":"1500","ttl":"1234","cache_condition":"","created_at":"2021-01-14T10:36:00Z","version":"29","action":"cache","deleted_at":null,"service_id":"4vQveBxLAGfObTin9pqYne"}'
+    body: '{"updated_at":"2021-01-14T10:36:00Z","name":"new-test-cache-setting","stale_ttl":"1500","ttl":"1234","cache_condition":"","created_at":"2021-01-14T10:36:00Z","version":"29","action":"cache","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
     headers:
       Accept-Ranges:
       - bytes

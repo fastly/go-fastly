@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-loggly&ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=51&format_version=2&name=new-test-loggly
+    body: Name=test-loggly&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=51&format_version=2&name=new-test-loggly
     form:
       Name:
       - test-loggly
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "51"
       format_version:
@@ -19,10 +19,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/51/logging/loggly/test-loggly
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/logging/loggly/test-loggly
     method: PUT
   response:
-    body: '{"created_at":"2021-01-14T10:44:16Z","format":"format","response_condition":"","updated_at":"2021-01-14T10:44:16Z","format_version":"2","service_id":"4vQveBxLAGfObTin9pqYne","name":"new-test-loggly","version":"51","token":"abcd1234","public_key":null,"placement":"waf_debug","deleted_at":null}'
+    body: '{"created_at":"2021-01-14T10:44:16Z","format":"format","response_condition":"","updated_at":"2021-01-14T10:44:16Z","format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"new-test-loggly","version":"51","token":"abcd1234","public_key":null,"placement":"waf_debug","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes

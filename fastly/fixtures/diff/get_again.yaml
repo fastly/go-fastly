@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/diff/from/34/to/35
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/34/to/35
     method: GET
   response:
     body: '{"from":"34","to":"35","format":"text","diff":" acls: []\n-backends: []\n+backends:\n+-
@@ -20,7 +20,7 @@ interactions:
       false\n+  weight: 100\n cache_settings: []\n comment: ''''\n conditions: []\n
       deployed: false\n dictionaries: []\n directors: []\n domains: []\n gzips: []\n
       headers: []\n healthchecks: []\n request_settings: []\n response_objects: []\n
-      service_id: 4vQveBxLAGfObTin9pqYne\n settings:\n   general.default_host: ''''\n   general.default_pci:
+      service_id: 7i6HN3TK9wS159v2gPAZ8A\n settings:\n   general.default_host: ''''\n   general.default_pci:
       0\n   general.default_ttl: 3600\n   general.stale_if_error: false\n   general.stale_if_error_ttl:
       43200\n snippets: []\n staging: false\n testing: false\n vcls: []\n wordpress:
       []\n"}'

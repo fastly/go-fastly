@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=35&address=integ-test.go-fastly.com&name=test-backend
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=35&address=integ-test.go-fastly.com&name=test-backend
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "35"
       address:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/35/backend
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/35/backend
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","name":"test-backend","service_id":"4vQveBxLAGfObTin9pqYne","version":35,"ssl_ca_cert":null,"max_tls_version":null,"client_cert":null,"hostname":"integ-test.go-fastly.com","ssl_cert_hostname":null,"use_ssl":false,"port":80,"error_threshold":0,"ssl_client_cert":null,"max_conn":200,"deleted_at":null,"shield":null,"first_byte_timeout":15000,"ipv6":null,"ssl_ciphers":null,"ssl_sni_hostname":null,"connect_timeout":1000,"comment":"","ssl_client_key":null,"ssl_check_cert":true,"request_condition":"","auto_loadbalance":false,"updated_at":"2021-01-14T10:41:17Z","weight":100,"healthcheck":null,"between_bytes_timeout":10000,"override_host":null,"ssl_hostname":null,"created_at":"2021-01-14T10:41:17Z","ipv4":null,"min_tls_version":null}'
+    body: '{"address":"integ-test.go-fastly.com","name":"test-backend","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":35,"ssl_ca_cert":null,"max_tls_version":null,"client_cert":null,"hostname":"integ-test.go-fastly.com","ssl_cert_hostname":null,"use_ssl":false,"port":80,"error_threshold":0,"ssl_client_cert":null,"max_conn":200,"deleted_at":null,"shield":null,"first_byte_timeout":15000,"ipv6":null,"ssl_ciphers":null,"ssl_sni_hostname":null,"connect_timeout":1000,"comment":"","ssl_client_key":null,"ssl_check_cert":true,"request_condition":"","auto_loadbalance":false,"updated_at":"2021-01-14T10:41:17Z","weight":100,"healthcheck":null,"between_bytes_timeout":10000,"override_host":null,"ssl_hostname":null,"created_at":"2021-01-14T10:41:17Z","ipv4":null,"min_tls_version":null}'
     headers:
       Accept-Ranges:
       - bytes

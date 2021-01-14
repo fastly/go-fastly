@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/purge/foo
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/purge/foo
     method: POST
   response:
     body: '{ "status": "ok", "id": "4133-1610579213-156" }'

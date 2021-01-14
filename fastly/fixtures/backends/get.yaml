@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/20/backend/test-backend
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/backend/test-backend
     method: GET
   response:
-    body: '{"name":"test-backend","service_id":"4vQveBxLAGfObTin9pqYne","address":"integ-test.go-fastly.com","ssl_sni_hostname":null,"between_bytes_timeout":10000,"ssl_client_key":null,"weight":100,"min_tls_version":null,"auto_loadbalance":false,"shield":null,"connect_timeout":1500,"comment":"","port":1234,"ipv4":null,"ssl_client_cert":null,"first_byte_timeout":15000,"ssl_ciphers":null,"deleted_at":null,"request_condition":"","max_conn":200,"ssl_cert_hostname":null,"hostname":"integ-test.go-fastly.com","ssl_check_cert":true,"ipv6":null,"use_ssl":false,"ssl_ca_cert":null,"version":20,"updated_at":"2021-01-14T10:25:50Z","override_host":"origin.example.com","created_at":"2021-01-14T10:25:50Z","error_threshold":0,"max_tls_version":null,"healthcheck":null,"ssl_hostname":null,"client_cert":null}'
+    body: '{"name":"test-backend","service_id":"7i6HN3TK9wS159v2gPAZ8A","address":"integ-test.go-fastly.com","ssl_sni_hostname":null,"between_bytes_timeout":10000,"ssl_client_key":null,"weight":100,"min_tls_version":null,"auto_loadbalance":false,"shield":null,"connect_timeout":1500,"comment":"","port":1234,"ipv4":null,"ssl_client_cert":null,"first_byte_timeout":15000,"ssl_ciphers":null,"deleted_at":null,"request_condition":"","max_conn":200,"ssl_cert_hostname":null,"hostname":"integ-test.go-fastly.com","ssl_check_cert":true,"ipv6":null,"use_ssl":false,"ssl_ca_cert":null,"version":20,"updated_at":"2021-01-14T10:25:50Z","override_host":"origin.example.com","created_at":"2021-01-14T10:25:50Z","error_threshold":0,"max_tls_version":null,"healthcheck":null,"ssl_hostname":null,"client_cert":null}'
     headers:
       Accept-Ranges:
       - bytes

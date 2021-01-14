@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/46/logging/honeycomb/test-honeycomb
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/honeycomb/test-honeycomb
     method: GET
   response:
-    body: '{"response_condition":"","version":"46","name":"test-honeycomb","updated_at":"2021-01-14T10:43:06Z","dataset":"testDataset","deleted_at":null,"service_id":"4vQveBxLAGfObTin9pqYne","format":"%h
+    body: '{"response_condition":"","version":"46","name":"test-honeycomb","updated_at":"2021-01-14T10:43:06Z","dataset":"testDataset","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"%h
       %l %u %t \"%r\" %\u003es %b","format_version":"2","placement":"waf_debug","created_at":"2021-01-14T10:43:06Z","token":"super-secure-token"}'
     headers:
       Accept-Ranges:

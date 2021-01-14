@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-honeycomb&ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=46&dataset=newDataset&name=new-test-honeycomb&token=new-token
+    body: Name=test-honeycomb&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=46&dataset=newDataset&name=new-test-honeycomb&token=new-token
     form:
       Name:
       - test-honeycomb
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "46"
       dataset:
@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/46/logging/honeycomb/test-honeycomb
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/honeycomb/test-honeycomb
     method: PUT
   response:
-    body: '{"format_version":"2","dataset":"newDataset","service_id":"4vQveBxLAGfObTin9pqYne","deleted_at":null,"version":"46","placement":"waf_debug","response_condition":"","format":"%h
+    body: '{"format_version":"2","dataset":"newDataset","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"version":"46","placement":"waf_debug","response_condition":"","format":"%h
       %l %u %t \"%r\" %\u003es %b","created_at":"2021-01-14T10:43:06Z","token":"new-token","name":"new-test-honeycomb","updated_at":"2021-01-14T10:43:06Z"}'
     headers:
       Accept-Ranges:

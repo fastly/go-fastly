@@ -12,7 +12,7 @@ interactions:
   response:
     body: '{"data":[{"id":"7ZZ53PQrCHbQgBPiZsyRCp","type":"event","attributes":{"customer_id":"51MumwLiSJyFTWhtbByYgR","description":"Healthcheck
       ''new-test-healthcheck'' was deleted on Version ''23''","event_type":"healthcheck.delete","ip":"92.238.40.48,
-      92.238.40.48","metadata":{"comment":"","expected_response":200,"method":"HEAD","timeout":1500,"window":5000,"initial":10,"path":"/foo","check_interval":2500,"http_version":"1.1","version":23,"threshold":10,"name":"new-test-healthcheck","service_id":"4vQveBxLAGfObTin9pqYne","host":"example.com"},"service_id":"4vQveBxLAGfObTin9pqYne","user_id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2021-01-14T10:26:25Z","admin":false}}],"links":{"next":"https://api.fastly.com/events?page[number]=2&page[size]=1","last":"https://api.fastly.com/events?page[number]=23224&page[size]=1"},"meta":{"record_count":23224,"current_page":1,"total_pages":23224,"per_page":1}}'
+      92.238.40.48","metadata":{"comment":"","expected_response":200,"method":"HEAD","timeout":1500,"window":5000,"initial":10,"path":"/foo","check_interval":2500,"http_version":"1.1","version":23,"threshold":10,"name":"new-test-healthcheck","service_id":"7i6HN3TK9wS159v2gPAZ8A","host":"example.com"},"service_id":"7i6HN3TK9wS159v2gPAZ8A","user_id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2021-01-14T10:26:25Z","admin":false}}],"links":{"next":"https://api.fastly.com/events?page[number]=2&page[size]=1","last":"https://api.fastly.com/events?page[number]=23224&page[size]=1"},"meta":{"record_count":23224,"current_page":1,"total_pages":23224,"per_page":1}}'
     headers:
       Accept-Ranges:
       - bytes

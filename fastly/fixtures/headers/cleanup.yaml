@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/44/header/test-header
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/44/header/test-header
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Header ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-header, service =\u003e 4vQveBxLAGfObTin9pqYne,
+      0000-00-00 00:00:00, name =\u003e test-header, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
       version =\u003e 44 }''"}'
     headers:
       Accept-Ranges:
@@ -51,11 +51,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/44/header/new-test-header
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/44/header/new-test-header
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Header ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-header, service =\u003e 4vQveBxLAGfObTin9pqYne,
+      0000-00-00 00:00:00, name =\u003e new-test-header, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
       version =\u003e 44 }''"}'
     headers:
       Accept-Ranges:

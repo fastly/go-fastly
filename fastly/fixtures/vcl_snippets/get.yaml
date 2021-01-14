@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/25/snippet/testsnip0
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/25/snippet/testsnip0
     method: GET
   response:
-    body: '{"service_id":"4vQveBxLAGfObTin9pqYne","priority":"100","dynamic":"0","updated_at":"2021-01-14T10:33:54Z","type":"recv","content":"\n\t#
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","priority":"100","dynamic":"0","updated_at":"2021-01-14T10:33:54Z","type":"recv","content":"\n\t#
       testing EdgeACL2 and EdgeDictionary2\n\t declare local var.number2 STRING;\n\t
       set var.number2 = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number2
       == \"true\") {\n\t   set req.http.securityruleid = \"num2-block\";\n\t error

@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=36&name=test-director&quorum=50&retries=5&type=1
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=36&name=test-director&quorum=50&retries=5&type=1
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "36"
       name:
@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/36/director
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/director
     method: POST
   response:
-    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"4vQveBxLAGfObTin9pqYne","version":36,"comment":"","updated_at":"2021-01-14T10:41:23Z","deleted_at":null,"backends":[],"capacity":100,"shield":null,"created_at":"2021-01-14T10:41:23Z"}'
+    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":36,"comment":"","updated_at":"2021-01-14T10:41:23Z","deleted_at":null,"backends":[],"capacity":100,"shield":null,"created_at":"2021-01-14T10:41:23Z"}'
     headers:
       Accept-Ranges:
       - bytes

@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=52&format=format&name=test-newrelic&placement=waf_debug&token=abcd1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=52&format=format&name=test-newrelic&placement=waf_debug&token=abcd1234
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "52"
       format:
@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/52/logging/newrelic
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/52/logging/newrelic
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","token":"abcd1234","service_id":"4vQveBxLAGfObTin9pqYne","version":"52","updated_at":"2021-01-14T10:44:27Z","format_version":"2","deleted_at":null,"response_condition":"","created_at":"2021-01-14T10:44:27Z"}'
+    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"52","updated_at":"2021-01-14T10:44:27Z","format_version":"2","deleted_at":null,"response_condition":"","created_at":"2021-01-14T10:44:27Z"}'
     headers:
       Accept-Ranges:
       - bytes

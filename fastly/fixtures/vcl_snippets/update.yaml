@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=testsnip0&ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=25&content=%0A%09+%23+testing+EdgeACL5+and+EdgeDictionary5%0A%09+declare+local+var.number5+STRING%3B%0A%09+set+var.number5+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09+if+%28var.number5+%3D%3D+%22true%22%29+%7B%0A%09+set+req.http.securityruleid+%3D+%22num5-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A++++&dynamic=0&name=newTestSnippetName&priority=50&type=none
+    body: Name=testsnip0&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=25&content=%0A%09+%23+testing+EdgeACL5+and+EdgeDictionary5%0A%09+declare+local+var.number5+STRING%3B%0A%09+set+var.number5+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09+if+%28var.number5+%3D%3D+%22true%22%29+%7B%0A%09+set+req.http.securityruleid+%3D+%22num5-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A++++&dynamic=0&name=newTestSnippetName&priority=50&type=none
     form:
       Name:
       - testsnip0
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "25"
       content:
@@ -28,10 +28,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/25/snippet/testsnip0
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/25/snippet/testsnip0
     method: PUT
   response:
-    body: '{"id":"5by9hd2tHZoG9jlWSZ31e1","priority":"50","updated_at":"2021-01-14T10:33:54Z","name":"newTestSnippetName","service_id":"4vQveBxLAGfObTin9pqYne","deleted_at":null,"content":"\n\t
+    body: '{"id":"5by9hd2tHZoG9jlWSZ31e1","priority":"50","updated_at":"2021-01-14T10:33:54Z","name":"newTestSnippetName","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"content":"\n\t
       # testing EdgeACL5 and EdgeDictionary5\n\t declare local var.number5 STRING;\n\t
       set var.number5 = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number5
       == \"true\") {\n\t set req.http.securityruleid = \"num5-block\";\n\t error 403

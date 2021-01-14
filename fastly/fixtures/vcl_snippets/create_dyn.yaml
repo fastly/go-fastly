@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=25&content=%0A%09+%23+testing+EdgeACL6+and+EdgeDictionary6%0A%09++declare+local+var.number6+STRING%3B%0A%09++set+var.number6+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09++if+%28var.number6+%3D%3D+%22true%22%29+%7B%0A%09++++set+req.http.securityruleid+%3D+%22num6-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A%09&dynamic=1&name=testsnip5&priority=100&type=recv
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=25&content=%0A%09+%23+testing+EdgeACL6+and+EdgeDictionary6%0A%09++declare+local+var.number6+STRING%3B%0A%09++set+var.number6+%3D+table.lookup%28demoDICTtest%2C+client.as.number%29%3B%0A%0A%09++if+%28var.number6+%3D%3D+%22true%22%29+%7B%0A%09++++set+req.http.securityruleid+%3D+%22num6-block%22%3B%0A%09+error+403+%22Access+Denied%22%3B%0A%09++%7D%0A%09&dynamic=1&name=testsnip5&priority=100&type=recv
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "25"
       content:
@@ -26,10 +26,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/25/snippet
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/25/snippet
     method: POST
   response:
-    body: '{"content":null,"dynamic":1,"name":"testsnip5","priority":"100","type":"recv","service_id":"4vQveBxLAGfObTin9pqYne","version":"25","deleted_at":null,"updated_at":"2021-01-14T10:33:54Z","created_at":"2021-01-14T10:33:54Z","id":"2Ixzsm1YNjy9csTVNIKSjp"}'
+    body: '{"content":null,"dynamic":1,"name":"testsnip5","priority":"100","type":"recv","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"25","deleted_at":null,"updated_at":"2021-01-14T10:33:54Z","created_at":"2021-01-14T10:33:54Z","id":"2Ixzsm1YNjy9csTVNIKSjp"}'
     headers:
       Accept-Ranges:
       - bytes

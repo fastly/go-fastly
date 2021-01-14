@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/38/domain/integ-test.go-fastly.com
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/38/domain/integ-test.go-fastly.com
     method: GET
   response:
-    body: '{"deleted_at":null,"version":38,"updated_at":"2021-01-14T10:41:40Z","comment":"comment","created_at":"2021-01-14T10:41:40Z","service_id":"4vQveBxLAGfObTin9pqYne","name":"integ-test.go-fastly.com"}'
+    body: '{"deleted_at":null,"version":38,"updated_at":"2021-01-14T10:41:40Z","comment":"comment","created_at":"2021-01-14T10:41:40Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"integ-test.go-fastly.com"}'
     headers:
       Accept-Ranges:
       - bytes

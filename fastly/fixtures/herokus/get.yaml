@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/45/logging/heroku/test-heroku
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/heroku/test-heroku
     method: GET
   response:
     body: '{"response_condition":"","version":"45","name":"test-heroku","updated_at":"2021-01-14T10:43:00Z","deleted_at":null,"format":"%h
-      %l %u %t \"%r\" %\u003es %b","service_id":"4vQveBxLAGfObTin9pqYne","format_version":"2","placement":"waf_debug","url":"https://1.us.logplex.io/logs","created_at":"2021-01-14T10:43:00Z","token":"super-secure-token"}'
+      %l %u %t \"%r\" %\u003es %b","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","placement":"waf_debug","url":"https://1.us.logplex.io/logs","created_at":"2021-01-14T10:43:00Z","token":"super-secure-token"}'
     headers:
       Accept-Ranges:
       - bytes

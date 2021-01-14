@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/43/gzip
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip
     method: GET
   response:
     body: '[{"name":"test-gzip","created_at":"2021-01-14T10:42:41Z","content_types":"text/html
-      text/css","updated_at":"2021-01-14T10:42:41Z","version":"43","deleted_at":null,"cache_condition":"","service_id":"4vQveBxLAGfObTin9pqYne","extensions":"html
-      css"},{"created_at":"2021-01-14T10:42:41Z","content_types":"","name":"test-gzip-omit","version":"43","deleted_at":null,"updated_at":"2021-01-14T10:42:41Z","cache_condition":"","extensions":"","service_id":"4vQveBxLAGfObTin9pqYne"}]'
+      text/css","updated_at":"2021-01-14T10:42:41Z","version":"43","deleted_at":null,"cache_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","extensions":"html
+      css"},{"created_at":"2021-01-14T10:42:41Z","content_types":"","name":"test-gzip-omit","version":"43","deleted_at":null,"updated_at":"2021-01-14T10:42:41Z","cache_condition":"","extensions":"","service_id":"7i6HN3TK9wS159v2gPAZ8A"}]'
     headers:
       Accept-Ranges:
       - bytes

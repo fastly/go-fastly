@@ -9,7 +9,7 @@ interactions:
       - bbE06UJYsHy-ukGS4jDsES0x5AYD1knx
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://rt.fastly.com/v1/channel/4vQveBxLAGfObTin9pqYne/ts/0/limit/3
+    url: https://rt.fastly.com/v1/channel/7i6HN3TK9wS159v2gPAZ8A/ts/0/limit/3
     method: GET
   response:
     body: '{"Data":[],"Timestamp":1610621200,"AggregateDelay":9,"Error":"No data available,

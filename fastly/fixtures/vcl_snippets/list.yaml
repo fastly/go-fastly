@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/25/snippet
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/25/snippet
     method: GET
   response:
-    body: '[{"updated_at":"2021-01-14T10:33:55Z","version":"25","deleted_at":null,"id":"5by9hd2tHZoG9jlWSZ31e1","dynamic":"0","priority":"50","service_id":"4vQveBxLAGfObTin9pqYne","name":"newTestSnippetName","type":"none","content":"\n\t
+    body: '[{"updated_at":"2021-01-14T10:33:55Z","version":"25","deleted_at":null,"id":"5by9hd2tHZoG9jlWSZ31e1","dynamic":"0","priority":"50","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"newTestSnippetName","type":"none","content":"\n\t
       # testing EdgeACL5 and EdgeDictionary5\n\t declare local var.number5 STRING;\n\t
       set var.number5 = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number5
       == \"true\") {\n\t set req.http.securityruleid = \"num5-block\";\n\t error 403

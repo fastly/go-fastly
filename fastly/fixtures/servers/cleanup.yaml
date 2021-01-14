@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/pool/0dINauGIu5SXLm56N5HIAN/server/140kbB19pPYH8oAYq2Vycr
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/0dINauGIu5SXLm56N5HIAN/server/140kbB19pPYH8oAYq2Vycr
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Server ''{ deleted =\u003e
@@ -50,7 +50,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/pool/0dINauGIu5SXLm56N5HIAN/server/3tpKpF4E4ZSZDAZib4RoEH
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/0dINauGIu5SXLm56N5HIAN/server/3tpKpF4E4ZSZDAZib4RoEH
     method: DELETE
   response:
     body: '{"msg":"Bad request","detail":"Cannot delete only server in a pool"}'

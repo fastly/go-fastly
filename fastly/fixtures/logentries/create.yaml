@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=50&format=format&name=test-logentries&placement=waf_debug&port=1234&token=abcd1234&use_tls=1
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=50&format=format&name=test-logentries&placement=waf_debug&port=1234&token=abcd1234&use_tls=1
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "50"
       format:
@@ -25,10 +25,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/50/logging/logentries
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/50/logging/logentries
     method: POST
   response:
-    body: '{"format":"format","name":"test-logentries","placement":"waf_debug","port":"1234","token":"abcd1234","use_tls":"1","service_id":"4vQveBxLAGfObTin9pqYne","version":"50","hostname":"api.logentries.com","response_condition":"","format_version":"2","public_key":null,"region":null,"deleted_at":null,"updated_at":"2021-01-14T10:44:09Z","created_at":"2021-01-14T10:44:09Z"}'
+    body: '{"format":"format","name":"test-logentries","placement":"waf_debug","port":"1234","token":"abcd1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"50","hostname":"api.logentries.com","response_condition":"","format_version":"2","public_key":null,"region":null,"deleted_at":null,"updated_at":"2021-01-14T10:44:09Z","created_at":"2021-01-14T10:44:09Z"}'
     headers:
       Accept-Ranges:
       - bytes

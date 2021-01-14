@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/29/cache_settings/test-cache-setting
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/29/cache_settings/test-cache-setting
     method: GET
   response:
-    body: '{"cache_condition":"","service_id":"4vQveBxLAGfObTin9pqYne","name":"test-cache-setting","created_at":"2021-01-14T10:36:00Z","updated_at":"2021-01-14T10:36:00Z","ttl":"1234","stale_ttl":"1500","deleted_at":null,"action":"cache","version":"29"}'
+    body: '{"cache_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test-cache-setting","created_at":"2021-01-14T10:36:00Z","updated_at":"2021-01-14T10:36:00Z","ttl":"1234","stale_ttl":"1500","deleted_at":null,"action":"cache","version":"29"}'
     headers:
       Accept-Ranges:
       - bytes

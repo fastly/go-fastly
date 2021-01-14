@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/pool/0dINauGIu5SXLm56N5HIAN/servers
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/0dINauGIu5SXLm56N5HIAN/servers
     method: GET
   response:
-    body: '[{"port":"80","comment":"","max_conn":"0","service_id":"4vQveBxLAGfObTin9pqYne","override_host":null,"weight":"100","created_at":"2021-01-14T10:26:20Z","disabled":false,"updated_at":"2021-01-14T10:26:20Z","pool_id":"0dINauGIu5SXLm56N5HIAN","address":"127.0.0.1","deleted_at":null,"id":"3tpKpF4E4ZSZDAZib4RoEH"},{"comment":"","port":"80","created_at":"2021-01-14T10:26:21Z","weight":"100","disabled":false,"override_host":null,"max_conn":"0","service_id":"4vQveBxLAGfObTin9pqYne","updated_at":"2021-01-14T10:26:21Z","deleted_at":null,"id":"140kbB19pPYH8oAYq2Vycr","address":"altserver.example.com","pool_id":"0dINauGIu5SXLm56N5HIAN"}]'
+    body: '[{"port":"80","comment":"","max_conn":"0","service_id":"7i6HN3TK9wS159v2gPAZ8A","override_host":null,"weight":"100","created_at":"2021-01-14T10:26:20Z","disabled":false,"updated_at":"2021-01-14T10:26:20Z","pool_id":"0dINauGIu5SXLm56N5HIAN","address":"127.0.0.1","deleted_at":null,"id":"3tpKpF4E4ZSZDAZib4RoEH"},{"comment":"","port":"80","created_at":"2021-01-14T10:26:21Z","weight":"100","disabled":false,"override_host":null,"max_conn":"0","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-01-14T10:26:21Z","deleted_at":null,"id":"140kbB19pPYH8oAYq2Vycr","address":"altserver.example.com","pool_id":"0dINauGIu5SXLm56N5HIAN"}]'
     headers:
       Accept-Ranges:
       - bytes

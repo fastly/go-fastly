@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/40/logging/sftp/new-test-sftp
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/40/logging/sftp/new-test-sftp
     method: DELETE
   response:
     body: '{"status":"ok"}'

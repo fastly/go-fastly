@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4vQveBxLAGfObTin9pqYne&ServiceVersion=66&access_key=AKIAIOSFODNN7EXAMPLE&format=format&format_version=2&name=test-kinesis&placement=waf_debug&region=us-east-1&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&topic=stream-name
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=66&access_key=AKIAIOSFODNN7EXAMPLE&format=format&format_version=2&name=test-kinesis&placement=waf_debug&region=us-east-1&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&topic=stream-name
     form:
       ServiceID:
-      - 4vQveBxLAGfObTin9pqYne
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "66"
       access_key:
@@ -29,10 +29,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4vQveBxLAGfObTin9pqYne/version/66/logging/kinesis
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/kinesis
     method: POST
   response:
-    body: '{"access_key":"AKIAIOSFODNN7EXAMPLE","format":"format","format_version":"2","name":"test-kinesis","placement":"waf_debug","region":"us-east-1","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","topic":"stream-name","service_id":"4vQveBxLAGfObTin9pqYne","version":"66","deleted_at":null,"updated_at":"2021-01-14T11:10:02Z","response_condition":"","created_at":"2021-01-14T11:10:02Z"}'
+    body: '{"access_key":"AKIAIOSFODNN7EXAMPLE","format":"format","format_version":"2","name":"test-kinesis","placement":"waf_debug","region":"us-east-1","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","topic":"stream-name","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"66","deleted_at":null,"updated_at":"2021-01-14T11:10:02Z","response_condition":"","created_at":"2021-01-14T11:10:02Z"}'
     headers:
       Accept-Ranges:
       - bytes
