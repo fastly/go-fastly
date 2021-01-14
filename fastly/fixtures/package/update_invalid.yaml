@@ -8,42 +8,44 @@ interactions:
       Accept:
       - application/json
       Content-Type:
-      - multipart/form-data; boundary=68e9554abf86b28cb7d2d51906734624e22aa838c5e9fc7edc2eb08841e9
+      - multipart/form-data; boundary=4c8b70ff8a04f6e75c13187fc33320263f65b1c4d14dac7c6fdc43a8074f
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/4DzyEZLjdwQ7nPt8x3zn44/version/2/package
+      - FastlyGo/1.15.0 (+github.com/fastly/go-fastly; go1.14.3)
+    url: https://api.fastly.com/service/4pNcnRy0abFyAb253yEDpz/version/2/package
     method: PUT
   response:
-    body: '{"msg":"Bad request","detail":"Failed to extract metadata from package"}'
+    body: '{"service_id":"4pNcnRy0abFyAb253yEDpz","version":2,"updated_at":"2020-06-24T13:01:11Z","deleted_at":null,"created_at":"2020-06-24T13:01:11Z","metadata":null,"id":"3C4JK2R0jXIemgqdtvwaov"}'
     headers:
       Accept-Ranges:
+      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:26:19 GMT
+      - Wed, 24 Jun 2020 13:01:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "909"
+      - "996"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1593007200"
       Status:
-      - 400 Bad Request
+      - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
+      - 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4225-LON
       X-Timer:
-      - S1610619978.444013,VS0,VE1050
-    status: 400 Bad Request
-    code: 400
+      - S1593003671.179657,VS0,VE1097
+    status: 200 OK
+    code: 200
     duration: ""
