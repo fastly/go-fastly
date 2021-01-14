@@ -10,7 +10,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/log_stream/managed/instance_output
     method: POST
   response:
-    body: '{"msg":"Event Buffer has already been enabled for this service"}'
+    body: '{"msg":"Compute@Edge Log Tailing has already been enabled for this service"}'
     headers:
       Accept-Ranges:
       - bytes
