@@ -27,12 +27,12 @@ type Kinesis struct {
 }
 
 // kinesisByName is a sortable list of Kinesis.
-type kinesesByName []*Kinesis
+type kinesisByName []*Kinesis
 
 // Len, Swap, and Less implement the sortable interface.
-func (s kinesesByName) Len() int      { return len(s) }
-func (s kinesesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-func (s kinesesByName) Less(i, j int) bool {
+func (s kinesisByName) Len() int      { return len(s) }
+func (s kinesisByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s kinesisByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
@@ -65,7 +65,7 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if err := decodeBodyMap(resp.Body, &kineses); err != nil {
 		return nil, err
 	}
-	sort.Stable(kinesesByName(kineses))
+	sort.Stable(kinesisByName(kineses))
 	return kineses, nil
 }
 
