@@ -2,18 +2,18 @@ package fastly
 
 import "testing"
 
-func TestClient_Kineses(t *testing.T) {
+func TestClient_Kinesis(t *testing.T) {
 	t.Parallel()
 
 	var err error
 	var v *Version
-	record(t, "kineses/version", func(c *Client) {
+	record(t, "kinesis/version", func(c *Client) {
 		v = testVersion(t, c)
 	})
 
 	// Create
 	var kinesis *Kinesis
-	record(t, "kineses/create", func(c *Client) {
+	record(t, "kinesis/create", func(c *Client) {
 		kinesis, err = c.CreateKinesis(&CreateKinesisInput{
 			ServiceID:         testServiceID,
 			ServiceVersion:    v.Number,
@@ -34,7 +34,7 @@ func TestClient_Kineses(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "kineses/cleanup", func(c *Client) {
+		record(t, "kinesis/cleanup", func(c *Client) {
 			c.DeleteKinesis(&DeleteKinesisInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: v.Number,
@@ -79,8 +79,8 @@ func TestClient_Kineses(t *testing.T) {
 
 	// List
 	var kineses []*Kinesis
-	record(t, "kineses/list", func(c *Client) {
-		kineses, err = c.ListKineses(&ListKinesesInput{
+	record(t, "kinesis/list", func(c *Client) {
+		kineses, err = c.ListKinesis(&ListKinesisInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: v.Number,
 		})
@@ -94,7 +94,7 @@ func TestClient_Kineses(t *testing.T) {
 
 	// Get
 	var nkinesis *Kinesis
-	record(t, "kineses/get", func(c *Client) {
+	record(t, "kinesis/get", func(c *Client) {
 		nkinesis, err = c.GetKinesis(&GetKinesisInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: v.Number,
@@ -134,7 +134,7 @@ func TestClient_Kineses(t *testing.T) {
 
 	// Update
 	var ukinesis *Kinesis
-	record(t, "kineses/update", func(c *Client) {
+	record(t, "kinesis/update", func(c *Client) {
 		ukinesis, err = c.UpdateKinesis(&UpdateKinesisInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: v.Number,
@@ -150,7 +150,7 @@ func TestClient_Kineses(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "kineses/delete", func(c *Client) {
+	record(t, "kinesis/delete", func(c *Client) {
 		err = c.DeleteKinesis(&DeleteKinesisInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: v.Number,
@@ -162,16 +162,16 @@ func TestClient_Kineses(t *testing.T) {
 	}
 }
 
-func TestClient_ListKineses_validation(t *testing.T) {
+func TestClient_ListKinesis_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListKineses(&ListKinesesInput{
+	_, err = testClient.ListKinesis(&ListKinesisInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListKineses(&ListKinesesInput{
+	_, err = testClient.ListKinesis(&ListKinesisInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
