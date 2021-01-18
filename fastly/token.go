@@ -64,17 +64,17 @@ func (c *Client) ListTokens() ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
-	CustomerID string
+	ID string
 }
 
 // ListCustomerTokens returns the full list of tokens belonging to a specific
 // customer.
 func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error) {
-	if i.CustomerID == "" {
-		return nil, ErrMissingCustomerID
+	if i.ID == "" {
+		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/customer/%s/tokens", i.CustomerID)
+	path := fmt.Sprintf("/customer/%s/tokens", i.ID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -136,16 +136,16 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
-	TokenID string
+	ID string
 }
 
 // DeleteToken revokes a specific token by its ID.
 func (c *Client) DeleteToken(i *DeleteTokenInput) error {
-	if i.TokenID == "" {
-		return ErrMissingTokenID
+	if i.ID == "" {
+		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tokens/%s", i.TokenID)
+	path := fmt.Sprintf("/tokens/%s", i.ID)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

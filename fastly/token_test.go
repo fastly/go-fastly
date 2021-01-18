@@ -25,7 +25,7 @@ func TestClient_ListCustomerTokens(t *testing.T) {
 	var err error
 	record(t, "tokens/list_customer", func(c *Client) {
 		tokens, err = c.ListCustomerTokens(&ListCustomerTokensInput{
-			CustomerID: "XXXXXXXXXXXXXXXXXXXXXX",
+			ID: "XXXXXXXXXXXXXXXXXXXXXX",
 		})
 	})
 	if err != nil {
@@ -82,7 +82,7 @@ func TestClient_DeleteToken(t *testing.T) {
 	t.Parallel()
 
 	input := &DeleteTokenInput{
-		TokenID: "XXXXXXXXXXXXXXXXXXXXXX",
+		ID: "XXXXXXXXXXXXXXXXXXXXXX",
 	}
 
 	var err error
