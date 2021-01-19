@@ -23,7 +23,7 @@ type RealtimeData struct {
 
 // GetRealtimeStatsInput is an input parameter to GetRealtimeStats function
 type GetRealtimeStatsInput struct {
-	Service   string
+	ServiceID string
 	Timestamp uint64
 	Limit     uint32
 }
@@ -47,11 +47,11 @@ func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsRe
 
 // GetRealtimeStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
 func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst interface{}) error {
-	if i.Service == "" {
+	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/v1/channel/%s/ts/%d", i.Service, i.Timestamp)
+	path := fmt.Sprintf("/v1/channel/%s/ts/%d", i.ServiceID, i.Timestamp)
 
 	if i.Limit != 0 {
 		path = fmt.Sprintf("%s/limit/%d", path, i.Limit)
