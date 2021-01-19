@@ -82,7 +82,7 @@ func TestClient_DeleteToken(t *testing.T) {
 	t.Parallel()
 
 	input := &DeleteTokenInput{
-		ID: "XXXXXXXXXXXXXXXXXXXXXX",
+		TokenID: "xxxxxxxxxxxxxxxxxxxxx",
 	}
 
 	var err error

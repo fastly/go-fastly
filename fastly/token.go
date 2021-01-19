@@ -136,16 +136,16 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
-	ID string
+	TokenID string
 }
 
 // DeleteToken revokes a specific token by its ID.
 func (c *Client) DeleteToken(i *DeleteTokenInput) error {
-	if i.ID == "" {
-		return ErrMissingID
+	if i.TokenID == "" {
+		return ErrMissingTokenID
 	}
 
-	path := fmt.Sprintf("/tokens/%s", i.ID)
+	path := fmt.Sprintf("/tokens/%s", i.TokenID)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
