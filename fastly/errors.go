@@ -53,6 +53,10 @@ var ErrMissingURL = errors.New("missing required field 'URL'")
 // "ID" key, but one was not set.
 var ErrMissingID = errors.New("missing required field 'ID'")
 
+// ErrMissingTokenID is an error that is returned when an input struct requires a
+// "TokenID" key, but one was not set.
+var ErrMissingTokenID = errors.New("missing required field 'TokenID'")
+
 // ErrMissingDictionary is an error that is returned when an input struct
 // requires a "Dictionary" key, but one was not set.
 var ErrMissingDictionary = errors.New("missing required field 'Dictionary'")
