@@ -2,20 +2,20 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=50&format=format&name=test-logentries&placement=waf_debug&port=1234&token=abcd1234&use_tls=1
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=113&format=format&name=test-logentries&placement=waf_debug&region=us&token=abcd1234&use_tls=1
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "50"
+      - "113"
       format:
       - format
       name:
       - test-logentries
       placement:
       - waf_debug
-      port:
-      - "1234"
+      region:
+      - us
       token:
       - abcd1234
       use_tls:
@@ -24,11 +24,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/50/logging/logentries
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/113/logging/logentries
     method: POST
   response:
-    body: '{"format":"format","name":"test-logentries","placement":"waf_debug","port":"1234","token":"abcd1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"50","hostname":"api.logentries.com","response_condition":"","format_version":"2","public_key":null,"region":null,"deleted_at":null,"updated_at":"2021-01-14T10:44:09Z","created_at":"2021-01-14T10:44:09Z"}'
+    body: '{"format":"format","name":"test-logentries","placement":"waf_debug","region":"us","token":"abcd1234","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"113","port":"0","hostname":null,"updated_at":"2021-01-19T16:02:30Z","public_key":null,"format_version":"2","response_condition":"","deleted_at":null,"created_at":"2021-01-19T16:02:30Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -37,11 +37,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:44:10 GMT
+      - Tue, 19 Jan 2021 16:02:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "676"
+      - "998"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1611075600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +55,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4120-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8268-DEN
       X-Timer:
-      - S1610621050.830924,VS0,VE530
+      - S1611072150.865647,VS0,VE722
     status: 200 OK
     code: 200
     duration: ""
