@@ -10,14 +10,14 @@ import (
 
 // BulkCertificate represents a bulk certificate.
 type BulkCertificate struct {
-	ID                string              `jsonapi:"primary,tls_bulk_certificate"`
-	TLSConfigurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
-	TLSDomains        []*TLSDomain        `jsonapi:"relation,tls_domains,tls_domain"`
-	NotAfter          *time.Time          `jsonapi:"attr,not_after,iso8601"`
-	NotBefore         *time.Time          `jsonapi:"attr,not_before,iso8601"`
-	CreatedAt         *time.Time          `jsonapi:"attr,created_at,iso8601"`
-	UpdatedAt         *time.Time          `jsonapi:"attr,updated_at,iso8601"`
-	Replace           bool                `jsonapi:"attr,replace"`
+	ID             string              `jsonapi:"primary,tls_bulk_certificate"`
+	Configurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
+	Domains        []*TLSDomain        `jsonapi:"relation,tls_domains,tls_domain"`
+	NotAfter       *time.Time          `jsonapi:"attr,not_after,iso8601"`
+	NotBefore      *time.Time          `jsonapi:"attr,not_before,iso8601"`
+	CreatedAt      *time.Time          `jsonapi:"attr,created_at,iso8601"`
+	UpdatedAt      *time.Time          `jsonapi:"attr,updated_at,iso8601"`
+	Replace        bool                `jsonapi:"attr,replace"`
 }
 
 // TLSConfiguration represents the dedicated IP address pool that will be used to route traffic from the TLSDomain.
@@ -121,7 +121,7 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 type CreateBulkCertificateInput struct {
 	CertBlob          string              `jsonapi:"attr,cert_blob"`
 	IntermediatesBlob string              `jsonapi:"attr,intermediates_blob"`
-	TLSConfigurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
+	Configurations    []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
 }
 
 // CreateBulkCertificate create a TLS private key.
