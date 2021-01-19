@@ -1,5 +1,32 @@
 # Changelog
 
+## [v3.0.0](https://github.com/fastly/go-fastly/releases/tag/v3.0.0) (2021-01-19)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v2.1.0...v3.0.0)
+
+**Enhancements:**
+
+- Strip TLS prefix from TLS struct fields [\#250](https://github.com/fastly/go-fastly/pull/250)
+- Avoid generic ID field when more explicit naming would be clearer [\#247](https://github.com/fastly/go-fastly/pull/247)
+- Update Test Fixtures [\#245](https://github.com/fastly/go-fastly/pull/245)
+- Add region support to logentries logging endpoint [\#243](https://github.com/fastly/go-fastly/pull/243)
+- Add basic managed logging endpoint support to go-fastly [\#241](https://github.com/fastly/go-fastly/pull/241)
+- Create new error abstraction for field validation [\#239](https://github.com/fastly/go-fastly/pull/239)
+
+**Bug fixes:**
+
+- NewName should be optional [\#252](https://github.com/fastly/go-fastly/pull/252)
+- Dictionary ItemValue isn't optional [\#251](https://github.com/fastly/go-fastly/pull/251)
+- Ensure consistent naming for ServiceID \(fixes missed references\) [\#249](https://github.com/fastly/go-fastly/pull/249)
+- Update to RequestMaxBytes to align with updated API and regenerate fixtures [\#248](https://github.com/fastly/go-fastly/pull/248)
+- Cleanup naming of Kinesis to be more consistent. [\#246](https://github.com/fastly/go-fastly/pull/246)
+- Reword expected error message based on API changes [\#244](https://github.com/fastly/go-fastly/pull/244)
+
+**Closed issues:**
+
+- Remove uninitialized ActiveVersion field from Service struct? [\#242](https://github.com/fastly/go-fastly/issues/242)
+- Cache setting is missing the 'deliver' action [\#136](https://github.com/fastly/go-fastly/issues/136)
+
 ## [v2.1.0](https://github.com/fastly/go-fastly/releases/tag/v2.1.0) (2020-12-11)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v2.0.0...v2.1.0)
