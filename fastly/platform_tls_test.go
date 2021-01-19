@@ -14,7 +14,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 		bc, err = c.CreateBulkCertificate(&CreateBulkCertificateInput{
 			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 			IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-			TLSConfigurations: []*TLSConfiguration{
+			Configurations: []*TLSConfiguration{
 				{
 					ID: "TLS_CONFIGURATION_ID",
 				},
@@ -95,7 +95,7 @@ func TestClient_CreateBulkCertificate_validation(t *testing.T) {
 		_, err = c.CreateBulkCertificate(&CreateBulkCertificateInput{
 			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 			IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-			TLSConfigurations: []*TLSConfiguration{
+			Configurations: []*TLSConfiguration{
 				{
 					ID: "TLS_CONFIGURATION_ID",
 				},
