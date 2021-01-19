@@ -26,7 +26,7 @@ type Kinesis struct {
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
-// kinesesByName is a sortable list of Kinesis.
+// kinesisByName is a sortable list of Kinesis.
 type kinesesByName []*Kinesis
 
 // Len, Swap, and Less implement the sortable interface.
