@@ -26,18 +26,18 @@ type Kinesis struct {
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
-// kinesesByName is a sortable list of Kineses.
-type kinesesByName []*Kinesis
+// kinesisByName is a sortable list of Kinesis.
+type kinesisByName []*Kinesis
 
 // Len, Swap, and Less implement the sortable interface.
-func (s kinesesByName) Len() int      { return len(s) }
-func (s kinesesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-func (s kinesesByName) Less(i, j int) bool {
+func (s kinesisByName) Len() int      { return len(s) }
+func (s kinesisByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s kinesisByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListKinesesInput is used as input to the ListKineses function.
-type ListKinesesInput struct {
+// ListKinesisInput is used as input to the ListKinesis function.
+type ListKinesisInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 
@@ -45,8 +45,8 @@ type ListKinesesInput struct {
 	ServiceVersion int
 }
 
-// ListKineses returns the list of Kineses for the configuration version.
-func (c *Client) ListKineses(i *ListKinesesInput) ([]*Kinesis, error) {
+// ListKinesis returns the list of Kinesis for the configuration version.
+func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -65,7 +65,7 @@ func (c *Client) ListKineses(i *ListKinesesInput) ([]*Kinesis, error) {
 	if err := decodeBodyMap(resp.Body, &kineses); err != nil {
 		return nil, err
 	}
-	sort.Stable(kinesesByName(kineses))
+	sort.Stable(kinesisByName(kineses))
 	return kineses, nil
 }
 
