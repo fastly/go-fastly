@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func Test_Snippets(t *testing.T) {
 	t.Parallel()

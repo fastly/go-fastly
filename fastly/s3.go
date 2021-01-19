@@ -129,7 +129,7 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	}
 
 	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
-		return nil, ErrMissingKMSKeyID
+		return nil, ErrMissingServerSideEncryptionKMSKeyID
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3", i.ServiceID, i.ServiceVersion)
@@ -231,7 +231,7 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	}
 
 	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
-		return nil, ErrMissingKMSKeyID
+		return nil, ErrMissingServerSideEncryptionKMSKeyID
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

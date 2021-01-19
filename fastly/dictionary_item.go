@@ -46,7 +46,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	}
 
 	if i.DictionaryID == "" {
-		return nil, ErrMissingDictionary
+		return nil, ErrMissingDictionaryID
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
@@ -82,7 +82,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	}
 
 	if i.DictionaryID == "" {
-		return nil, ErrMissingDictionary
+		return nil, ErrMissingDictionaryID
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/item", i.ServiceID, i.DictionaryID)
@@ -131,7 +131,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 	}
 
 	if i.DictionaryID == "" {
-		return nil, ErrMissingDictionary
+		return nil, ErrMissingDictionaryID
 	}
 
 	if i.ItemKey == "" {
@@ -172,7 +172,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	}
 
 	if i.DictionaryID == "" {
-		return nil, ErrMissingDictionary
+		return nil, ErrMissingDictionaryID
 	}
 
 	if i.ItemKey == "" {
@@ -215,11 +215,11 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	}
 
 	if i.DictionaryID == "" {
-		return ErrMissingDictionary
+		return ErrMissingDictionaryID
 	}
 
 	if len(i.Items) > BatchModifyMaximumOperations {
-		return ErrBatchUpdateMaximumOperationsExceeded
+		return ErrMaxExceededItems
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
@@ -255,7 +255,7 @@ func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 	}
 
 	if i.DictionaryID == "" {
-		return ErrMissingDictionary
+		return ErrMissingDictionaryID
 	}
 
 	if i.ItemKey == "" {

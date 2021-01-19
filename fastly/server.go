@@ -50,7 +50,7 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, ErrMissingPoolID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/servers", i.ServiceID, i.PoolID)
@@ -95,7 +95,7 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, ErrMissingPoolID
 	}
 
 	if i.Address == "" {
@@ -133,7 +133,7 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, ErrMissingPoolID
 	}
 
 	if i.Server == "" {
@@ -180,7 +180,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 	}
 
 	if i.PoolID == "" {
-		return nil, ErrMissingPool
+		return nil, ErrMissingPoolID
 	}
 
 	if i.Server == "" {
@@ -218,7 +218,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	}
 
 	if i.PoolID == "" {
-		return ErrMissingPool
+		return ErrMissingPoolID
 	}
 
 	if i.Server == "" {

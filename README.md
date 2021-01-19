@@ -1,9 +1,10 @@
 # Go Fastly
 
-[![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][godocs]
+[![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][latest]
 
-[godocs]: https://pkg.go.dev/github.com/fastly/go-fastly/fastly?tab=doc
-[v2]: https://pkg.go.dev/github.com/fastly/go-fastly/v2
+[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
+[v3]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
+[v2]: https://pkg.go.dev/github.com/fastly/go-fastly/v2/fastly
 [v1]: https://pkg.go.dev/github.com/fastly/go-fastly
 
 Go Fastly is a Golang API client for interacting with most facets of the
@@ -17,7 +18,7 @@ so you must be running Go 1.11 or higher.
 ## Usage
 
 ```go
-import "github.com/fastly/go-fastly/v2/fastly"
+import "github.com/fastly/go-fastly/v3/fastly"
 ```
 
 ## Migrating from v1 to v2
@@ -30,6 +31,16 @@ The move from major version [1][v1] to [2][v2] has resulted in a couple of funda
 The move to more consistent field names in some cases will have resulted in the corresponding sentinel error name to be updated also. For example, `ServiceID` has resulted in a change from `ErrMissingService` to `ErrMissingServiceID`.
 
 The change in type for [basic types](https://tour.golang.org/basics/11) that are optional on input structs related to write/update operations is designed to avoid unexpected behaviours when dealing with their zero value (see [this reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/) for more details). As part of this change we now provide [helper functions](./fastly/basictypes_helper.go) to assist with generating the new pointer types required.
+
+> Note: some read/list operations require fields to be provided but if omitted a zero value will be used when marshaling the data structure into JSON. This too can cause confusion, which is why some input structs define their mandatory fields as pointers (to ensure that the backend can distinguish between a zero value and an omitted field).
+
+## Migrating from v2 to v3
+
+There were a few breaking changes introduced in [`v3.0.0`][v3]:
+
+1. A new `FieldError` abstraction for validating API struct fields.
+2. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
+3. Avoid generic ID field when more explicit naming would be clearer.
 
 ## Examples
 
@@ -128,7 +139,7 @@ fmt.Printf("%t\n", activeVersion.Locked)
 ```
 
 More information can be found in the
-[Fastly Godoc][godocs].
+[Fastly Godoc][latest].
 
 ## Developing
 

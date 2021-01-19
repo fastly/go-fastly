@@ -183,7 +183,7 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 	}
 
 	if i.ID == "" {
-		return nil, ErrMissingWAFID
+		return nil, ErrMissingID
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
@@ -220,7 +220,7 @@ type UpdateWAFInput struct {
 // UpdateWAF updates a specific WAF.
 func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	if i.ID == "" {
-		return nil, ErrMissingWAFID
+		return nil, ErrMissingID
 	}
 
 	// 'Service' and 'Version' are mandatory if:
@@ -265,7 +265,7 @@ func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 	}
 
 	if i.ID == "" {
-		return ErrMissingWAFID
+		return ErrMissingID
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)

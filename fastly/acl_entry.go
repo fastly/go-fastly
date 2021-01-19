@@ -242,7 +242,6 @@ type BatchACLEntry struct {
 }
 
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
-
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
@@ -252,7 +251,7 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	}
 
 	if len(i.Entries) > BatchModifyMaximumOperations {
-		return ErrBatchUpdateMaximumOperationsExceeded
+		return ErrMaxExceededEntries
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)

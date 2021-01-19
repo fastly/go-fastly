@@ -137,24 +137,24 @@ func TestClient_WAF_Rule_Exclusion_list_validation(t *testing.T) {
 
 	cases := []struct {
 		input         *ListWAFRuleExclusionsInput
-		expectedError error
+		expectedError string
 	}{
 		{
 			input: &ListWAFRuleExclusionsInput{
 				WAFID: "",
 			},
-			expectedError: ErrMissingWAFID,
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &ListWAFRuleExclusionsInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: ErrMissingWAFVersionNumber,
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.ListWAFRuleExclusions(c.input); err != c.expectedError {
+		if _, err := testClient.ListWAFRuleExclusions(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -165,24 +165,24 @@ func TestClient_WAF_Rule_Exclusion_list_all_validation(t *testing.T) {
 
 	cases := []struct {
 		input         *ListAllWAFRuleExclusionsInput
-		expectedError error
+		expectedError string
 	}{
 		{
 			input: &ListAllWAFRuleExclusionsInput{
 				WAFID: "",
 			},
-			expectedError: ErrMissingWAFID,
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &ListAllWAFRuleExclusionsInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: ErrMissingWAFVersionNumber,
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.ListAllWAFRuleExclusions(c.input); err != c.expectedError {
+		if _, err := testClient.ListAllWAFRuleExclusions(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -193,31 +193,31 @@ func TestClient_WAF_Rule_Exclusion_create_validation(t *testing.T) {
 
 	cases := []struct {
 		input         *CreateWAFRuleExclusionInput
-		expectedError error
+		expectedError string
 	}{
 		{
 			input: &CreateWAFRuleExclusionInput{
 				WAFID: "",
 			},
-			expectedError: ErrMissingWAFID,
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &CreateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: ErrMissingWAFVersionNumber,
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 		{
 			input: &CreateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 1,
 			},
-			expectedError: ErrMissingWAFRuleExclusion,
+			expectedError: ErrMissingWAFRuleExclusion.Error(),
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.CreateWAFRuleExclusion(c.input); err != c.expectedError {
+		if _, err := testClient.CreateWAFRuleExclusion(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -228,27 +228,27 @@ func TestClient_WAF_Rule_Exclusion_update_validation(t *testing.T) {
 
 	cases := []struct {
 		input         *UpdateWAFRuleExclusionInput
-		expectedError error
+		expectedError string
 	}{
 		{
 			input: &UpdateWAFRuleExclusionInput{
 				WAFID: "",
 			},
-			expectedError: ErrMissingWAFID,
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &UpdateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: ErrMissingWAFVersionNumber,
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 		{
 			input: &UpdateWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 1,
 			},
-			expectedError: ErrMissingWAFRuleExclusionNumber,
+			expectedError: ErrMissingWAFRuleExclusionNumber.Error(),
 		},
 		{
 			input: &UpdateWAFRuleExclusionInput{
@@ -256,11 +256,11 @@ func TestClient_WAF_Rule_Exclusion_update_validation(t *testing.T) {
 				WAFVersionNumber: 1,
 				Number:           1,
 			},
-			expectedError: ErrMissingWAFRuleExclusion,
+			expectedError: ErrMissingWAFRuleExclusion.Error(),
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.UpdateWAFRuleExclusion(c.input); err != c.expectedError {
+		if _, err := testClient.UpdateWAFRuleExclusion(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -271,31 +271,31 @@ func TestClient_WAF_Rule_Exclusion_delete_validation(t *testing.T) {
 
 	cases := []struct {
 		input         *DeleteWAFRuleExclusionInput
-		expectedError error
+		expectedError string
 	}{
 		{
 			input: &DeleteWAFRuleExclusionInput{
 				WAFID: "",
 			},
-			expectedError: ErrMissingWAFID,
+			expectedError: ErrMissingWAFID.Error(),
 		},
 		{
 			input: &DeleteWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 0,
 			},
-			expectedError: ErrMissingWAFVersionNumber,
+			expectedError: ErrMissingWAFVersionNumber.Error(),
 		},
 		{
 			input: &DeleteWAFRuleExclusionInput{
 				WAFID:            "1",
 				WAFVersionNumber: 1,
 			},
-			expectedError: ErrMissingWAFRuleExclusionNumber,
+			expectedError: ErrMissingNumber.Error(),
 		},
 	}
 	for _, c := range cases {
-		if err := testClient.DeleteWAFRuleExclusion(c.input); err != c.expectedError {
+		if err := testClient.DeleteWAFRuleExclusion(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}

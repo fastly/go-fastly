@@ -190,7 +190,7 @@ func TestClient_GetWAF_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingWAFID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -201,7 +201,7 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
 		ID: "",
 	})
-	if err != ErrMissingWAFID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -236,7 +236,7 @@ func TestClient_DeleteWAF_validation(t *testing.T) {
 		ServiceVersion: 1,
 		ID:             "",
 	})
-	if err != ErrMissingWAFID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -247,7 +247,7 @@ func TestClient_UpdateWAF_Enable_validation(t *testing.T) {
 		ID:       "",
 		Disabled: Bool(false),
 	})
-	if err != ErrMissingWAFID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -258,7 +258,7 @@ func TestClient_UpdateWAF_Disable_validation(t *testing.T) {
 		ID:       "",
 		Disabled: Bool(true),
 	})
-	if err != ErrMissingWAFID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }

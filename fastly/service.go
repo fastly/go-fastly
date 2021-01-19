@@ -157,6 +157,14 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 		return nil, ErrMissingID
 	}
 
+	if i.Name == nil && i.Comment == nil {
+		return nil, ErrMissingOptionalNameComment
+	}
+
+	if i.Name != nil && *i.Name == "" {
+		return nil, ErrMissingNameValue
+	}
+
 	path := fmt.Sprintf("/service/%s", i.ID)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {

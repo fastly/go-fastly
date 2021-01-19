@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v2
+module github.com/fastly/go-fastly/v3
 
 require (
 	github.com/ajg/form v0.0.0-20160802194845-cc2954064ec9
@@ -11,4 +11,4 @@ require (
 	honnef.co/go/tools v0.0.1-2020.1.4
 )
 
-go 1.13
+go 1.15

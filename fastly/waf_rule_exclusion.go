@@ -295,7 +295,7 @@ func (c *Client) DeleteWAFRuleExclusion(i *DeleteWAFRuleExclusionInput) error {
 		return ErrMissingWAFVersionNumber
 	}
 	if i.Number == 0 {
-		return ErrMissingWAFRuleExclusionNumber
+		return ErrMissingNumber
 	}
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions/%d", i.WAFID, i.WAFVersionNumber, i.Number)

@@ -487,16 +487,20 @@ func TestClient_CloneWAFVersion_validation(t *testing.T) {
 
 func TestClient_DeployWAFVersion_validation(t *testing.T) {
 	var err error
-	if err = testClient.DeployWAFVersion(&DeployWAFVersionInput{
+	err = testClient.DeployWAFVersion(&DeployWAFVersionInput{
 		WAFID: "",
-	}); err != ErrMissingWAFID {
+	})
+
+	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	if err = testClient.DeployWAFVersion(&DeployWAFVersionInput{
+	err = testClient.DeployWAFVersion(&DeployWAFVersionInput{
 		WAFID:            "1",
 		WAFVersionNumber: 0,
-	}); err != ErrMissingWAFVersionNumber {
+	})
+
+	if err != ErrMissingWAFVersionNumber {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -535,9 +539,11 @@ func TestClient_UpdateWAFVersionInput_HasChanges(t *testing.T) {
 
 func TestClient_CreateEmptyWAFVersion_validation(t *testing.T) {
 	var err error
-	if _, err = testClient.CreateEmptyWAFVersion(&CreateEmptyWAFVersionInput{
+	_, err = testClient.CreateEmptyWAFVersion(&CreateEmptyWAFVersionInput{
 		WAFID: "",
-	}); err != ErrMissingWAFID {
+	})
+
+	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 }

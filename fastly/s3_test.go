@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestClient_S3s(t *testing.T) {
 	t.Parallel()
@@ -407,7 +409,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: "",
 	})
-	if err != ErrMissingKMSKeyID {
+	if err != ErrMissingServerSideEncryptionKMSKeyID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -472,7 +474,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServerSideEncryption:         S3ServerSideEncryptionKMS,
 		ServerSideEncryptionKMSKeyID: String(""),
 	})
-	if err != ErrMissingKMSKeyID {
+	if err != ErrMissingServerSideEncryptionKMSKeyID {
 		t.Errorf("bad error: %s", err)
 	}
 }

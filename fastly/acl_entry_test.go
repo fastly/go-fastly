@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestClient_ACLEntries(t *testing.T) {
 
@@ -273,7 +275,7 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 		ACLID:     "bar",
 		Entries:   oversizedACLEntries,
 	})
-	if err != ErrBatchUpdateMaximumOperationsExceeded {
+	if err != ErrMaxExceededEntries {
 		t.Errorf("bad error: %s", err)
 	}
 

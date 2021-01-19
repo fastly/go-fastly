@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestClient_Servers(t *testing.T) {
 	var err error
@@ -147,7 +149,7 @@ func TestClient_ListServers_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err != ErrMissingPool {
+	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 }
@@ -165,7 +167,7 @@ func TestClient_CreateServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err != ErrMissingPool {
+	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 }
@@ -183,7 +185,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err != ErrMissingPool {
+	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -210,7 +212,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err != ErrMissingPool {
+	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -237,7 +239,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		ServiceID: "foo",
 		PoolID:    "",
 	})
-	if err != ErrMissingPool {
+	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 

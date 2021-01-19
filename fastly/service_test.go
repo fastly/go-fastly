@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestClient_Services(t *testing.T) {
 	t.Parallel()
@@ -170,6 +172,21 @@ func TestClient_UpdateService_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateService(&UpdateServiceInput{})
 	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateService(&UpdateServiceInput{
+		ID: "foo",
+	})
+	if err != ErrMissingOptionalNameComment {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateService(&UpdateServiceInput{
+		ID:   "foo",
+		Name: String(""),
+	})
+	if err != ErrMissingNameValue {
 		t.Errorf("bad error: %s", err)
 	}
 }

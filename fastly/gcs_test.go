@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestClient_GCSs(t *testing.T) {
 	t.Parallel()
