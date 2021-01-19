@@ -38,7 +38,7 @@ func TestClient_Kafkas(t *testing.T) {
 			TLSClientCert:    clientCert,
 			TLSClientKey:     clientKey,
 			ParseLogKeyvals:  true,
-			RequestMaxBytes:  2048,
+			RequestMaxBytes:  1024,
 			AuthMethod:       "scram-sha-512",
 			User:             "foobar",
 			Password:         "deadbeef",
@@ -107,7 +107,7 @@ func TestClient_Kafkas(t *testing.T) {
 	if k.ParseLogKeyvals != true {
 		t.Errorf("bad parse_log_keyvals: %t", k.ParseLogKeyvals)
 	}
-	if k.RequestMaxBytes != 2048 {
+	if k.RequestMaxBytes != 1024 {
 		t.Errorf("bad request_max_bytes: %q", k.RequestMaxBytes)
 	}
 	if k.AuthMethod != "scram-sha-512" {
@@ -189,7 +189,7 @@ func TestClient_Kafkas(t *testing.T) {
 	if k.ParseLogKeyvals != true {
 		t.Errorf("bad parse_log_keyvals: %t", k.ParseLogKeyvals)
 	}
-	if k.RequestMaxBytes != 2048 {
+	if k.RequestMaxBytes != 1024 {
 		t.Errorf("bad request_max_bytes: %q", k.RequestMaxBytes)
 	}
 	if k.AuthMethod != "scram-sha-512" {
