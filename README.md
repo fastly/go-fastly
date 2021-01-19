@@ -36,10 +36,11 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 ## Migrating from v2 to v3
 
-There were a couple of breaking changes introduced into [`v3.0.0`][v3]:
+There were a few breaking changes introduced in [`v3.0.0`][v3]:
 
 1. A new `FieldError` abstraction for validating API struct fields.
 2. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
+3. Avoid generic ID field when more explicit naming would be clearer.
 
 ## Examples
 
