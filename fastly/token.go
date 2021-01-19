@@ -64,17 +64,17 @@ func (c *Client) ListTokens() ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
-	ID string
+	CustomerID string
 }
 
 // ListCustomerTokens returns the full list of tokens belonging to a specific
 // customer.
 func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.CustomerID == "" {
+		return nil, ErrMissingCustomerID
 	}
 
-	path := fmt.Sprintf("/customer/%s/tokens", i.ID)
+	path := fmt.Sprintf("/customer/%s/tokens", i.CustomerID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

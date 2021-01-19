@@ -25,7 +25,7 @@ func TestClient_ListCustomerTokens(t *testing.T) {
 	var err error
 	record(t, "tokens/list_customer", func(c *Client) {
 		tokens, err = c.ListCustomerTokens(&ListCustomerTokensInput{
-			ID: "XXXXXXXXXXXXXXXXXXXXXX",
+			CustomerID: "xxxxxxxxxxxxxxxxxxxx",
 		})
 	})
 	if err != nil {
