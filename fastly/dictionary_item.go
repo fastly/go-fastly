@@ -159,10 +159,11 @@ type UpdateDictionaryItemInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 
-	// ItemKey is the name of the dictionary item to fetch.
+	// ItemKey is the name of the dictionary item to fetch (required).
 	ItemKey string
 
-	ItemValue *string `form:"item_value,omitempty"`
+	// ItemValue is the new value of the dictionary item (required).
+	ItemValue string `form:"item_value"`
 }
 
 // UpdateDictionaryItem updates a specific dictionary item.
