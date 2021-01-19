@@ -145,7 +145,7 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 
 // UpdateServiceInput is used as input to the UpdateService function.
 type UpdateServiceInput struct {
-	ID string
+	ServiceID string
 
 	Name    *string `form:"name,omitempty"`
 	Comment *string `form:"comment,omitempty"`
@@ -153,8 +153,8 @@ type UpdateServiceInput struct {
 
 // UpdateService updates the service with the given input.
 func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	if i.Name == nil && i.Comment == nil {
@@ -165,7 +165,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 		return nil, ErrMissingNameValue
 	}
 
-	path := fmt.Sprintf("/service/%s", i.ID)
+	path := fmt.Sprintf("/service/%s", i.ServiceID)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
