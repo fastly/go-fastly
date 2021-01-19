@@ -103,7 +103,7 @@ func TestClient_GetPackage_validation(t *testing.T) {
 	_, err = testClient.GetPackage(&GetPackageInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -111,7 +111,7 @@ func TestClient_GetPackage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -121,7 +121,7 @@ func TestClient_UpdatePackage_validation(t *testing.T) {
 	_, err = testClient.UpdatePackage(&UpdatePackageInput{
 		ServiceID: "",
 	})
-	if err.Error() != "missing required field 'ServiceID'" {
+	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -129,7 +129,7 @@ func TestClient_UpdatePackage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err.Error() != "missing required field 'ServiceVersion'" {
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
