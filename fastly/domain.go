@@ -151,7 +151,7 @@ type UpdateDomainInput struct {
 	Name string
 
 	// NewName is the updated name of the domain
-	NewName string `form:"name"`
+	NewName *string `form:"name,omitempty"`
 
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `form:"comment,omitempty"`
@@ -170,6 +170,10 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 
 	if i.Name == "" {
 		return nil, ErrMissingName
+	}
+
+	if i.NewName == nil && i.Comment == nil {
+		return nil, ErrMissingOptionalNameComment
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
