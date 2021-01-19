@@ -179,6 +179,10 @@ var ErrMissingTLSDomain = NewFieldError("TLSDomain")
 // requires a "To" key, but one was not set.
 var ErrMissingTo = NewFieldError("To")
 
+// ErrMissingKind is an error that is returned when an input struct requires a
+// "Kind" key, but one was not set.
+var ErrMissingKind = NewFieldError("Kind")
+
 // ErrMissingURL is an error that is returned when an input struct
 // requires a "URL" key, but one was not set.
 var ErrMissingURL = NewFieldError("URL")
