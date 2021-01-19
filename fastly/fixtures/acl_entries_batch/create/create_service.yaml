@@ -1,25 +1,24 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: comment=go-fastly+client+test&name=test_service_BatchModifyAclEntries_Create
+    body: comment=go-fastly+client+test&name=test_service_BatchModifyAclEntries_Create&type=vcl
     form:
       comment:
       - go-fastly client test
       name:
       - test_service_BatchModifyAclEntries_Create
+      type:
+      - vcl
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_BatchModifyAclEntries_Create","created_at":"2019-07-23T09:37:35Z","deleted_at":null,"publish_key":"f20b3f94c392835f34fe594cc3ed23d4437863d1","id":"3MYXdSsO9U0dulSgjNLvMq","versions":[{"staging":false,"created_at":"2019-07-23T09:37:35Z","deployed":false,"deleted_at":null,"comment":"","service_id":"3MYXdSsO9U0dulSgjNLvMq","testing":false,"active":false,"updated_at":"2019-07-23T09:37:35Z","number":1,"locked":false}],"updated_at":"2019-07-23T09:37:35Z"}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_BatchModifyAclEntries_Create","type":"vcl","publish_key":"","updated_at":"2021-01-14T10:23:38Z","created_at":"2021-01-14T10:23:38Z","deleted_at":null,"versions":[{"staging":false,"locked":false,"active":false,"number":1,"deployed":false,"deleted_at":null,"created_at":"2021-01-14T10:23:38Z","service_id":"5JukT0tQGanjTr3Wu9ACAO","comment":"","testing":false,"updated_at":"2021-01-14T10:23:38Z"}],"id":"5JukT0tQGanjTr3Wu9ACAO","paused":false}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jul 2019 09:37:35 GMT
+      - Thu, 14 Jan 2021 10:23:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "983"
+      - "999"
       Fastly-Ratelimit-Reset:
-      - "1563876000"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,14 +39,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19226-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1563874655.999568,VS0,VE255
+      - S1610619818.278756,VS0,VE245
     status: 200 OK
     code: 200
+    duration: ""

@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=126&format=format&name=test-newrelic&placement=waf_debug&token=abcd1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=52&format=format&name=test-newrelic&placement=waf_debug&token=abcd1234
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "126"
+      ServiceVersion:
+      - "52"
       format:
       - format
       name:
@@ -20,25 +20,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/126/logging/newrelic
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/52/logging/newrelic
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"126","updated_at":"2020-05-08T11:46:36Z","deleted_at":null,"format_version":"2","response_condition":"","created_at":"2020-05-08T11:46:36Z"}'
+    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"52","updated_at":"2021-01-14T10:44:27Z","format_version":"2","deleted_at":null,"response_condition":"","created_at":"2021-01-14T10:44:27Z"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 11:46:37 GMT
+      - Thu, 14 Jan 2021 10:44:28 GMT
       Fastly-Ratelimit-Remaining:
-      - "893"
+      - "668"
       Fastly-Ratelimit-Reset:
-      - "1588939200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,16 +45,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17444-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4150-MAN
       X-Timer:
-      - S1588938397.844266,VS0,VE655
+      - S1610621067.440300,VS0,VE613
     status: 200 OK
     code: 200
     duration: ""

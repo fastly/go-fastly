@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=103&format=format&name=test-datadog&placement=waf_debug&region=US&token=abcd1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=32&format=format&name=test-datadog&placement=waf_debug&region=US&token=abcd1234
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "103"
+      ServiceVersion:
+      - "32"
       format:
       - format
       name:
@@ -22,25 +22,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/103/logging/datadog
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/32/logging/datadog
     method: POST
   response:
-    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"103","created_at":"2020-05-08T09:31:13Z","response_condition":"","deleted_at":null,"updated_at":"2020-05-08T09:31:13Z","format_version":"2"}'
+    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"32","created_at":"2021-01-14T10:40:45Z","updated_at":"2021-01-14T10:40:45Z","deleted_at":null,"response_condition":"","format_version":"2"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 09:31:13 GMT
+      - Thu, 14 Jan 2021 10:40:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "992"
+      - "790"
       Fastly-Ratelimit-Reset:
-      - "1588932000"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -48,16 +47,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-pao17446-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1588930273.018818,VS0,VE587
+      - S1610620845.148905,VS0,VE759
     status: 200 OK
     code: 200
     duration: ""

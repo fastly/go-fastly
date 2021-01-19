@@ -6,26 +6,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.5.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/customer/qGfZo6FegmRT5XlvOLdsKy/users
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/customer/51MumwLiSJyFTWhtbByYgR/users
     method: GET
   response:
-    body: '[{"id":"FoXUMd33uGfvJYLTqQ0d74","created_at":"2020-02-25T02:39:08Z","updated_at":"2020-02-25T02:39:08Z","name":"test
-      user","customer_id":"qGfZo6FegmRT5XlvOLdsKy","require_new_password":false,"role":"engineer","login":"test+user@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"email_hash":"bebed43da3708b3360ad6aeb75adc7ae","two_factor_setup_required":true},{"id":"Y3VycmVudCt1c2VyQGV4YW","created_at":"2016-08-29T19:35:22Z","updated_at":"2020-02-25T00:24:55Z","name":"current+user@example.com","customer_id":"qGfZo6FegmRT5XlvOLdsKy","require_new_password":false,"role":"superuser","login":"current+user@example.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"email_hash":"3bfde6f2aa518c51be9d9d8ca63a2785","two_factor_setup_required":false}]'
+    body: '[{"id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2020-11-04T09:51:20Z","updated_at":"2021-01-13T13:48:29Z","name":"Mark
+      McDonnell","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"superuser","login":"mmcdonnell+experiments@fastly.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false},{"id":"57rOH2Ne8lHWWlCMA5J8nB","created_at":"2021-01-14T10:53:07Z","updated_at":"2021-01-14T10:53:07Z","name":"test
+      user","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"go-fastly-test+user1@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false}]'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Tue, 25 Feb 2020 02:39:09 GMT
+      - Thu, 14 Jan 2021 10:53:08 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,16 +29,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-mdw17322-MDW
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1582598349.976169,VS0,VE257
+      - S1610621588.832305,VS0,VE352
     status: 200 OK
     code: 200
     duration: ""

@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.18.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/logging/kinesis/test-kinesis
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/kinesis/test-kinesis
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 43 }''"}'
+      version =\u003e 66 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 17 Nov 2020 17:45:09 GMT
+      - Thu, 14 Jan 2021 11:10:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "983"
+      - "971"
       Fastly-Ratelimit-Reset:
-      - "1605636000"
+      - "1610625600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den19634-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4120-MAN
       X-Timer:
-      - S1605635110.578083,VS0,VE240
+      - S1610622604.185345,VS0,VE209
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.18.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/logging/kinesis/new-test-kinesis
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/kinesis/new-test-kinesis
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-kinesis, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 43 }''"}'
+      version =\u003e 66 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 17 Nov 2020 17:45:09 GMT
+      - Thu, 14 Jan 2021 11:10:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "982"
+      - "970"
       Fastly-Ratelimit-Reset:
-      - "1605636000"
+      - "1610625600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den19634-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4120-MAN
       X-Timer:
-      - S1605635110.831632,VS0,VE135
+      - S1610622604.439051,VS0,VE194
     status: 404 Not Found
     code: 404
     duration: ""

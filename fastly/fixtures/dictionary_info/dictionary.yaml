@@ -2,11 +2,11 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=2&name=test_dictionary_DictionaryInfo
+    body: ServiceID=1qDpFsCBTXDoh0hJ9NY1L3&ServiceVersion=2&name=test_dictionary_DictionaryInfo
     form:
-      Service:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
+      ServiceID:
+      - 1qDpFsCBTXDoh0hJ9NY1L3
+      ServiceVersion:
       - "2"
       name:
       - test_dictionary_DictionaryInfo
@@ -14,25 +14,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.12.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/dictionary
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/1qDpFsCBTXDoh0hJ9NY1L3/version/2/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary_DictionaryInfo","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":2,"created_at":"2019-10-05T21:12:15Z","write_only":false,"id":"6FKsD88tVMhbomod52CWRH","deleted_at":null,"updated_at":"2019-10-05T21:12:15Z"}'
+    body: '{"name":"test_dictionary_DictionaryInfo","service_id":"1qDpFsCBTXDoh0hJ9NY1L3","version":2,"write_only":false,"updated_at":"2021-01-14T10:23:51Z","deleted_at":null,"created_at":"2021-01-14T10:23:51Z","id":"7h0KVo4Y10wIQTaHELYQnr"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Sat, 05 Oct 2019 21:12:15 GMT
+      - Thu, 14 Jan 2021 10:23:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "997"
+      - "969"
       Fastly-Ratelimit-Reset:
-      - "1570312800"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,16 +39,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-msp20851-MSP
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1570309935.830654,VS0,VE328
+      - S1610619832.642080,VS0,VE272
     status: 200 OK
     code: 200
     duration: ""

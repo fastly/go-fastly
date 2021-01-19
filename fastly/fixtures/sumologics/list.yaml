@@ -1,30 +1,25 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/sumologic
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/sumologic
     method: GET
   response:
-    body: '[{"deleted_at":null,"url":"https://foo.sumologic.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"46","response_condition":"","updated_at":"2019-05-09T23:21:58Z","message_type":"classic","placement":"waf_debug","format":"format","format_version":"1","created_at":"2019-05-09T23:21:58Z","name":"test-sumologic"}]'
+    body: '[{"name":"test-sumologic","updated_at":"2021-01-14T10:47:54Z","url":"https://foo.sumologic.com","message_type":"classic","format_version":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"version":"62","placement":"waf_debug","format":"format","response_condition":"","created_at":"2021-01-14T10:47:54Z"}]'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 23:21:58 GMT
+      - Thu, 14 Jan 2021 10:47:54 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -32,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3649-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1557444118.451647,VS0,VE402
+      - S1610621275.587216,VS0,VE196
     status: 200 OK
     code: 200
+    duration: ""

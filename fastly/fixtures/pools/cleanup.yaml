@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/pool/test_pool
     method: DELETE
   response:
@@ -16,17 +16,16 @@ interactions:
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 21:31:42 GMT
+      - Thu, 14 Jan 2021 10:46:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "985"
+      - "655"
       Fastly-Ratelimit-Reset:
-      - "1580335200"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -34,16 +33,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8137-JFK
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4131-MAN
       X-Timer:
-      - S1580333503.646544,VS0,VE234
+      - S1610621173.814844,VS0,VE192
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,7 +50,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/pool/new_test_pool
     method: DELETE
   response:
@@ -62,17 +60,16 @@ interactions:
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 21:31:43 GMT
+      - Thu, 14 Jan 2021 10:46:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "984"
+      - "654"
       Fastly-Ratelimit-Reset:
-      - "1580335200"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -80,16 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-jfk8137-JFK
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4131-MAN
       X-Timer:
-      - S1580333503.882551,VS0,VE151
+      - S1610621173.052456,VS0,VE167
     status: 404 Not Found
     code: 404
     duration: ""

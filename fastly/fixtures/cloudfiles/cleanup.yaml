@@ -6,27 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/logging/cloudfiles/test-cloudfiles
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/30/logging/cloudfiles/test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-cloudfiles, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 14 }''"}'
+      version =\u003e 30 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 15:00:22 GMT
+      - Thu, 14 Jan 2021 10:36:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "995"
+      - "798"
       Fastly-Ratelimit-Reset:
-      - "1591200000"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -34,16 +33,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-dca17728-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4143-MAN
       X-Timer:
-      - S1591196422.107294,VS0,VE96
+      - S1610620576.349415,VS0,VE164
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,27 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/logging/cloudfiles/new-test-cloudfiles
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/30/logging/cloudfiles/new-test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-cloudfiles, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 14 }''"}'
+      version =\u003e 30 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 15:00:22 GMT
+      - Thu, 14 Jan 2021 10:36:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "797"
       Fastly-Ratelimit-Reset:
-      - "1591200000"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -80,16 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-dca17728-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4143-MAN
       X-Timer:
-      - S1591196422.230100,VS0,VE111
+      - S1610620577.560782,VS0,VE190
     status: 404 Not Found
     code: 404
     duration: ""

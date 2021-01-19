@@ -1,14 +1,13 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=21&content_types=&extensions=&name=test-gzip-omit
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=43&content_types=&extensions=&name=test-gzip-omit
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "21"
+      ServiceVersion:
+      - "43"
       content_types:
       - ""
       extensions:
@@ -18,14 +17,12 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/gzip
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip
     method: POST
   response:
-    body: '{"content_types":"","extensions":"","name":"test-gzip-omit","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"21","created_at":"2019-05-09T00:00:14Z","deleted_at":null,"cache_condition":"","updated_at":"2019-05-09T00:00:14Z"}'
+    body: '{"content_types":"","extensions":"","name":"test-gzip-omit","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"43","created_at":"2021-01-14T10:42:41Z","cache_condition":"","deleted_at":null,"updated_at":"2021-01-14T10:42:41Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -34,11 +31,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 00:00:14 GMT
+      - Thu, 14 Jan 2021 10:42:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "997"
+      - "715"
       Fastly-Ratelimit-Reset:
-      - "1557363600"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,15 +43,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17429-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1557360014.178619,VS0,VE519
+      - S1610620962.563709,VS0,VE266
     status: 200 OK
     code: 200
+    duration: ""

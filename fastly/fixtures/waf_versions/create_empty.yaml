@@ -10,35 +10,30 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/waf/firewalls/7kRiB97L3ppEaKv5J3hJmV/versions
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/waf/firewalls/2euOKJUgrMVJ2BUK6shB7P/versions
     method: POST
   response:
-    body: '{"data":{"id":"3fLfb20XK4ep2ACbeI35T","type":"waf_firewall_version","attributes":{"active":false,"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"allowed_http_versions":"HTTP/1.0
-      HTTP/1.1 HTTP/2","allowed_methods":"GET HEAD POST OPTIONS PUT PATCH DELETE","allowed_request_content_type":"application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml|application/soap+xml|application/x-amf|application/json|application/octet-stream|application/csp-report|application/xss-auditor-report|text/plain","allowed_request_content_type_charset":"utf-8|iso-8859-1|iso-8859-15|windows-1252","arg_name_length":100,"arg_length":400,"combined_file_sizes":10000000,"comment":null,"created_at":"2020-07-06T11:09:11Z","critical_anomaly_score":5,"crs_validate_utf8_encoding":false,"deployed_at":null,"error":null,"error_anomaly_score":4,"high_risk_country_codes":"","http_violation_score_threshold":999,"inbound_anomaly_score_threshold":999,"last_deployment_status":null,"lfi_score_threshold":999,"locked":false,"max_file_size":10000000,"max_num_args":255,"notice_anomaly_score":2,"number":3,"paranoia_level":1,"php_injection_score_threshold":999,"rce_score_threshold":999,"restricted_extensions":".asa/
+    body: '{"data":{"id":"76DyljvQsX3XxHRBIt7vKH","type":"waf_firewall_version","attributes":{"active":false,"active_rules_fastly_block_count":0,"active_rules_fastly_log_count":0,"active_rules_owasp_block_count":0,"active_rules_owasp_log_count":0,"active_rules_owasp_score_count":0,"active_rules_trustwave_block_count":0,"active_rules_trustwave_log_count":0,"allowed_http_versions":"HTTP/1.0
+      HTTP/1.1 HTTP/2 HTTP/3","allowed_methods":"GET HEAD POST OPTIONS PUT PATCH DELETE","allowed_request_content_type":"application/x-www-form-urlencoded|multipart/form-data|text/xml|application/xml|application/soap+xml|application/x-amf|application/json|application/octet-stream|application/csp-report|application/xss-auditor-report|text/plain","allowed_request_content_type_charset":"utf-8|iso-8859-1|iso-8859-15|windows-1252","arg_name_length":100,"arg_length":400,"combined_file_sizes":10000000,"comment":null,"created_at":"2021-01-14T10:27:52Z","critical_anomaly_score":5,"crs_validate_utf8_encoding":false,"deployed_at":null,"error":null,"error_anomaly_score":4,"high_risk_country_codes":"","http_violation_score_threshold":999,"inbound_anomaly_score_threshold":999,"last_deployment_status":null,"lfi_score_threshold":999,"locked":false,"max_file_size":10000000,"max_num_args":255,"notice_anomaly_score":2,"number":3,"paranoia_level":1,"php_injection_score_threshold":999,"rce_score_threshold":999,"restricted_extensions":".asa/
       .asax/ .ascx/ .axd/ .backup/ .bak/ .bat/ .cdx/ .cer/ .cfg/ .cmd/ .com/ .config/
       .conf/ .cs/ .csproj/ .csr/ .dat/ .db/ .dbf/ .dll/ .dos/ .htr/ .htw/ .ida/ .idc/
       .idq/ .inc/ .ini/ .key/ .licx/ .lnk/ .log/ .mdb/ .old/ .pass/ .pdb/ .pol/ .printer/
       .pwd/ .resources/ .resx/ .sql/ .sys/ .vb/ .vbs/ .vbproj/ .vsdisco/ .webinfo/
-      .xsd/ .xsx/","restricted_headers":"/proxy/ /lock-token/ /content-range/ /translate/
-      /if/","rfi_score_threshold":999,"session_fixation_score_threshold":999,"sql_injection_score_threshold":999,"total_arg_length":6400,"updated_at":"2020-07-06T11:09:11Z","warning_anomaly_score":3,"xss_score_threshold":999},"relationships":{"waf_firewall":{"data":{"id":"7kRiB97L3ppEaKv5J3hJmV","type":"waf_firewall"}}}}}'
+      .xsd/ .xsx/","restricted_headers":"/proxy/ /lock-token/ /content-range/ /if/","rfi_score_threshold":999,"session_fixation_score_threshold":999,"sql_injection_score_threshold":999,"total_arg_length":6400,"updated_at":"2021-01-14T10:27:52Z","warning_anomaly_score":3,"xss_score_threshold":999},"relationships":{"waf_firewall":{"data":{"id":"2euOKJUgrMVJ2BUK6shB7P","type":"waf_firewall"}}}}}'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
       Content-Length:
-      - "2125"
+      - "2121"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 06 Jul 2020 11:09:11 GMT
-      Status:
-      - 201 Created
+      - Thu, 14 Jan 2021 10:27:52 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
@@ -46,9 +41,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19257-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1594033752.522295,VS0,VE172
+      - S1610620072.395763,VS0,VE154
     status: 201 Created
     code: 201
     duration: ""

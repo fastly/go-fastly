@@ -1,19 +1,16 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/26/to/27
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/34/to/35
     method: GET
   response:
-    body: '{"from":"26","to":"27","format":"text","diff":" acls: []\n-backends: []\n+backends:\n+-
+    body: '{"from":"34","to":"35","format":"text","diff":" acls: []\n-backends: []\n+backends:\n+-
       name: test-backend\n+  address: integ-test.go-fastly.com\n+  auto_loadbalance:
       false\n+  between_bytes_timeout: 10000\n+  client_cert:\n+  comment: ''''\n+  connect_timeout:
       1000\n+  error_threshold: 0\n+  first_byte_timeout: 15000\n+  healthcheck:\n+  hostname:
@@ -35,7 +32,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 19:53:12 GMT
+      - Thu, 14 Jan 2021 10:41:17 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,15 +40,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3644-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN
       X-Timer:
-      - S1557431592.360354,VS0,VE305
+      - S1610620877.386245,VS0,VE347
     status: 200 OK
     code: 200
+    duration: ""

@@ -2,27 +2,27 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-s3-3&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=90&gzip_level=9
+    body: Name=test-s3-3&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=58&gzip_level=9
     form:
       Name:
       - test-s3-3
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "90"
+      - "58"
       gzip_level:
       - "9"
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/90/logging/s3/test-s3-3
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/58/logging/s3/test-s3-3
     method: PUT
   response:
-    body: '{"server_side_encryption_kms_key_id":"1234","compression_codec":null,"acl":null,"format":"format","gzip_level":"9","server_side_encryption":"aws:kms","path":"/path","public_key":"-----BEGIN
+    body: '{"placement":"waf_debug","timestamp_format":"%Y","access_key":"AKIAIOSFODNN7EXAMPLE","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","format_version":"2","bucket_name":"bucket-name","public_key":"-----BEGIN
       PGP PUBLIC KEY BLOCK-----\n\nmQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/\nibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4\n8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p\nlDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn\ndwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB\n89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz\ndCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6\nvFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc\n9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9\nOLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX\nSvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq\n7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx\nkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG\nM1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe\nu6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L\n4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF\nftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K\nUEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu\nYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi\nkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb\nDAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml\ndYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L\n3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c\nFaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR\n5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR\nwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N\n=28dr\n-----END
-      PGP PUBLIC KEY BLOCK-----\n","redundancy":"reduced_redundancy","placement":"waf_debug","updated_at":"2020-12-09T21:44:03Z","access_key":"AKIAIOSFODNN7EXAMPLE","bucket_name":"bucket-name","name":"test-s3-3","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","domain":"s3.us-east-1.amazonaws.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"format_version":"2","version":"90","message_type":"classic","created_at":"2020-12-09T21:44:03Z","period":"12","response_condition":"","timestamp_format":"%Y"}'
+      PGP PUBLIC KEY BLOCK-----\n","server_side_encryption_kms_key_id":"1234","message_type":"classic","redundancy":"reduced_redundancy","created_at":"2021-01-14T10:47:00Z","period":"12","version":"58","response_condition":"","domain":"s3.us-east-1.amazonaws.com","path":"/path","gzip_level":"9","acl":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","compression_codec":null,"deleted_at":null,"updated_at":"2021-01-14T10:47:00Z","server_side_encryption":"aws:kms","name":"test-s3-3"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,11 +31,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Dec 2020 21:44:06 GMT
+      - Thu, 14 Jan 2021 10:47:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "965"
+      - "629"
       Fastly-Ratelimit-Reset:
-      - "1607551200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8246-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1607550246.825707,VS0,VE723
+      - S1610621223.768616,VS0,VE570
     status: 200 OK
     code: 200
     duration: ""

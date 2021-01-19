@@ -6,27 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/10/logging/scalyr/test-scalyr
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/scalyr/test-scalyr
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-scalyr, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 10 }''"}'
+      version =\u003e 59 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 14:26:09 GMT
+      - Thu, 14 Jan 2021 10:47:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "619"
       Fastly-Ratelimit-Reset:
-      - "1591196400"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -34,16 +33,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-dca17749-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1591194369.266169,VS0,VE103
+      - S1610621232.901172,VS0,VE184
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,27 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/10/logging/scalyr/new-test-scalyr
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/scalyr/new-test-scalyr
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-scalyr, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 10 }''"}'
+      version =\u003e 59 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 14:26:09 GMT
+      - Thu, 14 Jan 2021 10:47:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "618"
       Fastly-Ratelimit-Reset:
-      - "1591196400"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -80,16 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-dca17749-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1591194369.399321,VS0,VE115
+      - S1610621232.129255,VS0,VE170
     status: 404 Not Found
     code: 404
     duration: ""

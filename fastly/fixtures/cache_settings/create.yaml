@@ -1,14 +1,13 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=11&action=cache&name=test-cache-setting&stale_ttl=1500&ttl=1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=29&action=cache&name=test-cache-setting&stale_ttl=1500&ttl=1234
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "11"
+      ServiceVersion:
+      - "29"
       action:
       - cache
       name:
@@ -20,14 +19,12 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/11/cache_settings
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/29/cache_settings
     method: POST
   response:
-    body: '{"action":"cache","name":"test-cache-setting","stale_ttl":"1500","ttl":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"11","deleted_at":null,"cache_condition":"","created_at":"2019-05-08T18:03:09Z","updated_at":"2019-05-08T18:03:09Z"}'
+    body: '{"action":"cache","name":"test-cache-setting","stale_ttl":"1500","ttl":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"29","created_at":"2021-01-14T10:36:00Z","deleted_at":null,"cache_condition":"","updated_at":"2021-01-14T10:36:00Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 08 May 2019 18:03:09 GMT
+      - Thu, 14 Jan 2021 10:36:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "807"
       Fastly-Ratelimit-Reset:
-      - "1557342000"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -48,15 +45,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3641-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4143-MAN
       X-Timer:
-      - S1557338589.720202,VS0,VE452
+      - S1610620560.356454,VS0,VE523
     status: 200 OK
     code: 200
+    duration: ""

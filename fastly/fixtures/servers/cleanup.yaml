@@ -6,26 +6,25 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server/7SYpaE7axOQJ6XR8qj3NnX
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/0dINauGIu5SXLm56N5HIAN/server/140kbB19pPYH8oAYq2Vycr
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Server ''{ deleted =\u003e
-      0000-00-00 00:00:00, id =\u003e 7SYpaE7axOQJ6XR8qj3NnX }''"}'
+      0000-00-00 00:00:00, id =\u003e 140kbB19pPYH8oAYq2Vycr }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 21:31:57 GMT
+      - Thu, 14 Jan 2021 10:26:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "976"
+      - "900"
       Fastly-Ratelimit-Reset:
-      - "1580335200"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -33,16 +32,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1580333517.845088,VS0,VE161
+      - S1610619983.268252,VS0,VE169
     status: 404 Not Found
     code: 404
     duration: ""
@@ -51,25 +49,24 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server/5KevsMJ2JySYq4AxuzMyWI
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/0dINauGIu5SXLm56N5HIAN/server/3tpKpF4E4ZSZDAZib4RoEH
     method: DELETE
   response:
     body: '{"msg":"Bad request","detail":"Cannot delete only server in a pool"}'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 21:31:57 GMT
+      - Thu, 14 Jan 2021 10:26:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "975"
+      - "899"
       Fastly-Ratelimit-Reset:
-      - "1580335200"
+      - "1610622000"
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -77,16 +74,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1580333517.007932,VS0,VE200
+      - S1610619983.477258,VS0,VE219
     status: 400 Bad Request
     code: 400
     duration: ""

@@ -6,25 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/10/logging/scalyr
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/scalyr
     method: GET
   response:
-    body: '[{"token":"super-secure-token","format":"%h %l %u %t \"%r\" %\u003es %b","service_id":"7i6HN3TK9wS159v2gPAZ8A","placement":"waf_debug","created_at":"2020-06-03T14:26:08Z","name":"test-scalyr","updated_at":"2020-06-03T14:26:08Z","region":"US","deleted_at":null,"format_version":"2","version":"10","response_condition":""}]'
+    body: '[{"name":"test-scalyr","placement":"waf_debug","format":"%h %l %u %t \"%r\"
+      %\u003es %b","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","project_id":null,"format_version":"2","token":"super-secure-token","response_condition":"","version":"59","region":"US","updated_at":"2021-01-14T10:47:09Z","created_at":"2021-01-14T10:47:09Z"}]'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 14:26:08 GMT
+      - Thu, 14 Jan 2021 10:47:10 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -32,16 +28,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-dca17749-DCA
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1591194368.387144,VS0,VE91
+      - S1610621230.362446,VS0,VE184
     status: 200 OK
     code: 200
     duration: ""

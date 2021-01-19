@@ -1,29 +1,26 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Name=test-papertrail&Service=7i6HN3TK9wS159v2gPAZ8A&Version=68&name=new-test-papertrail
+    body: Name=test-papertrail&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=53&name=new-test-papertrail
     form:
       Name:
       - test-papertrail
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "68"
+      ServiceVersion:
+      - "53"
       name:
       - new-test-papertrail
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/logging/papertrail/test-papertrail
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/53/logging/papertrail/test-papertrail
     method: PUT
   response:
-    body: '{"deleted_at":null,"name":"new-test-papertrail","response_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","placement":"waf_debug","port":"1234","format":"format","updated_at":"2019-06-06T22:12:54Z","version":"68","created_at":"2019-06-06T22:12:54Z","address":"integ-test.go-fastly.com","hostname":"integ-test.go-fastly.com","public_key":null}'
+    body: '{"created_at":"2021-01-14T10:45:48Z","name":"new-test-papertrail","placement":"waf_debug","updated_at":"2021-01-14T10:45:48Z","version":"53","service_id":"7i6HN3TK9wS159v2gPAZ8A","response_condition":"","deleted_at":null,"format_version":"2","address":"integ-test.go-fastly.com","port":"1234","public_key":null,"format":"format"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:12:56 GMT
+      - Thu, 14 Jan 2021 10:45:50 GMT
       Fastly-Ratelimit-Remaining:
-      - "979"
+      - "663"
       Fastly-Ratelimit-Reset:
-      - "1559862000"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -44,15 +41,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3621-SJC
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4143-MAN
       X-Timer:
-      - S1559859176.003211,VS0,VE851
+      - S1610621150.923848,VS0,VE515
     status: 200 OK
     code: 200
+    duration: ""

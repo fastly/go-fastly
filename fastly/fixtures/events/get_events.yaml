@@ -1,33 +1,29 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/events?page%5Bnumber%5D=1&page%5Bsize%5D=1
     method: GET
   response:
-    body: '{"data":[{"id":"5ua9a8p7hThd5G9K1PmrRf","type":"event","attributes":{"customer_id":"76eo17QE8I25lqXy9uJqbd","description":"Version
-      52 was created","event_type":"version.create","ip":"73.93.140.51, 73.93.140.51","metadata":{"version_number":52,"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":52},"service_id":"7i6HN3TK9wS159v2gPAZ8A","user_id":"48R7uE14gWaqdDSjVMLzKO","created_at":"2019-05-11T17:53:06Z","admin":false}}],"links":{"next":"https://api.fastly.com/events?page[number]=2&page[size]=1","last":"https://api.fastly.com/events?page[number]=9330&page[size]=1"}}'
+    body: '{"data":[{"id":"7ZZ53PQrCHbQgBPiZsyRCp","type":"event","attributes":{"customer_id":"51MumwLiSJyFTWhtbByYgR","description":"Healthcheck
+      ''new-test-healthcheck'' was deleted on Version ''23''","event_type":"healthcheck.delete","ip":"92.238.40.48,
+      92.238.40.48","metadata":{"comment":"","expected_response":200,"method":"HEAD","timeout":1500,"window":5000,"initial":10,"path":"/foo","check_interval":2500,"http_version":"1.1","version":23,"threshold":10,"name":"new-test-healthcheck","service_id":"7i6HN3TK9wS159v2gPAZ8A","host":"example.com"},"service_id":"7i6HN3TK9wS159v2gPAZ8A","user_id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2021-01-14T10:26:25Z","admin":false}}],"links":{"next":"https://api.fastly.com/events?page[number]=2&page[size]=1","last":"https://api.fastly.com/events?page[number]=23224&page[size]=1"},"meta":{"record_count":23224,"current_page":1,"total_pages":23224,"per_page":1}}'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - max-age=0, private, must-revalidate
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Sat, 11 May 2019 21:09:18 GMT
+      - Thu, 14 Jan 2021 10:26:30 GMT
       Etag:
-      - W/"4027a264941218792e9c44ffaf4aee65"
+      - W/"38776e07e5baa900a66bf65ea34f8c38"
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Status:
@@ -35,8 +31,7 @@ interactions:
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
@@ -50,14 +45,15 @@ interactions:
       X-Permitted-Cross-Domain-Policies:
       - none
       X-Request-Id:
-      - 4bf42008-2f1d-469f-9264-c1a12637bd99
+      - 503a52fb-734f-437b-80a3-20e8b009edf8
       X-Runtime:
-      - "0.249101"
+      - "6.204242"
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bur17528-BUR
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1557608958.961912,VS0,VE542
+      - S1610619984.746090,VS0,VE6616
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
     code: 200
+    duration: ""

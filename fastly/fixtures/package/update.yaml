@@ -8,28 +8,27 @@ interactions:
       Accept:
       - application/json
       Content-Type:
-      - multipart/form-data; boundary=3410163a001b37c52759b9816b76ed3003c7f68c90c79f617b49948eb3e7
+      - multipart/form-data; boundary=d414d90512dd2f67a95698c80b637067bb85ecee14caa7c673ebe99ae45d
       User-Agent:
-      - FastlyGo/1.15.0 (+github.com/fastly/go-fastly; go1.14.3)
-    url: https://api.fastly.com/service/4pNcnRy0abFyAb253yEDpz/version/2/package
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/package
     method: PUT
   response:
-    body: '{"service_id":"4pNcnRy0abFyAb253yEDpz","version":2,"id":"04ZdIMxY3FUxE5VUzmNiwf","deleted_at":null,"updated_at":"2020-06-24T13:01:10Z","metadata":{"name":"wasm-test","description":"Default
-      package template used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["fastly@fastly.com"],"language":"rust","size":2015936,"hashsum":"f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616"},"created_at":"2020-06-24T13:01:09Z"}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":2,"updated_at":"2021-01-14T10:26:17Z","created_at":"2021-01-14T10:26:17Z","id":"4zATd3TnBo0By3br2HeA9U","deleted_at":null,"metadata":{"name":"wasm-test","description":"Default
+      package template used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["fastly@fastly.com"],"language":"rust","size":2015936,"hashsum":"f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616"}}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 24 Jun 2020 13:01:10 GMT
+      - Thu, 14 Jan 2021 10:26:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "997"
+      - "910"
       Fastly-Ratelimit-Reset:
-      - "1593007200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,16 +36,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lon4225-LON
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1593003668.625821,VS0,VE3100
+      - S1610619975.499132,VS0,VE2641
     status: 200 OK
     code: 200
     duration: ""

@@ -1,14 +1,13 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=36&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=57&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "36"
+      ServiceVersion:
+      - "57"
       content:
       - abcd
       content_type:
@@ -22,14 +21,12 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/response_object
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/57/response_object
     method: POST
   response:
-    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"36","updated_at":"2019-05-09T22:07:01Z","request_condition":"","deleted_at":null,"created_at":"2019-05-09T22:07:01Z","cache_condition":""}'
+    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"57","cache_condition":"","request_condition":"","created_at":"2021-01-14T10:46:50Z","updated_at":"2021-01-14T10:46:50Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -38,11 +35,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 22:07:01 GMT
+      - Thu, 14 Jan 2021 10:46:50 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "640"
       Fastly-Ratelimit-Reset:
-      - "1557442800"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,15 +47,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc3644-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN
       X-Timer:
-      - S1557439621.889580,VS0,VE487
+      - S1610621211.666976,VS0,VE248
     status: 200 OK
     code: 200
+    duration: ""

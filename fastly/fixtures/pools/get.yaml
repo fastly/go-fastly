@@ -6,26 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/pool/test_pool
     method: GET
   response:
-    body: '{"tls_client_cert":null,"name":"test_pool","request_condition":null,"quorum":"50","deleted_at":null,"use_tls":"1","updated_at":"2020-01-29T21:31:41Z","connect_timeout":"1000","tls_cert_hostname":"example.com","healthcheck":null,"version":"54","max_conn_default":"200","tls_client_key":null,"id":"0vIHpkzwPzimDWaHBB9Rw5","shield":null,"first_byte_timeout":"15000","tls_ciphers":null,"max_tls_version":null,"min_tls_version":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","override_host":null,"created_at":"2020-01-29T21:31:41Z","tls_check_cert":"1","tls_ca_cert":null,"comment":"test
-      pool","between_bytes_timeout":"10000","type":"random","tls_sni_hostname":null}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","min_tls_version":null,"tls_client_key":null,"comment":"test
+      pool","tls_sni_hostname":null,"created_at":"2021-01-14T10:46:11Z","version":"54","quorum":"50","override_host":null,"between_bytes_timeout":"10000","connect_timeout":"1000","id":"5AU4vnHtp2QSywo4qD2YlG","tls_check_cert":"1","healthcheck":null,"first_byte_timeout":"15000","tls_cert_hostname":"example.com","tls_client_cert":null,"updated_at":"2021-01-14T10:46:11Z","deleted_at":null,"shield":null,"tls_ca_cert":null,"type":"random","request_condition":null,"max_conn_default":"200","tls_ciphers":null,"max_tls_version":null,"name":"test_pool","use_tls":"1"}'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 21:31:41 GMT
+      - Thu, 14 Jan 2021 10:46:11 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,16 +28,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8137-JFK
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4131-MAN
       X-Timer:
-      - S1580333502.614319,VS0,VE100
+      - S1610621172.795597,VS0,VE193
     status: 200 OK
     code: 200
     duration: ""

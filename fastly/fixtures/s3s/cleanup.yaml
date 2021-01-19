@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/90/logging/s3/test-s3
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/58/logging/s3/test-s3
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-s3, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 90 }''"}'
+      version =\u003e 58 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Dec 2020 21:44:06 GMT
+      - Thu, 14 Jan 2021 10:47:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "963"
+      - "627"
       Fastly-Ratelimit-Reset:
-      - "1607551200"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8246-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1607550247.838969,VS0,VE147
+      - S1610621224.810621,VS0,VE181
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,8 +50,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/90/logging/s3/test-s3-2
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/58/logging/s3/test-s3-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -63,11 +63,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Dec 2020 21:44:07 GMT
+      - Thu, 14 Jan 2021 10:47:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "962"
+      - "626"
       Fastly-Ratelimit-Reset:
-      - "1607551200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -81,9 +81,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8246-DEN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1607550247.046732,VS0,VE233
+      - S1610621224.017883,VS0,VE292
     status: 200 OK
     code: 200
     duration: ""
@@ -92,8 +92,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/90/logging/s3/test-s3-3
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/58/logging/s3/test-s3-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -105,11 +105,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Dec 2020 21:44:07 GMT
+      - Thu, 14 Jan 2021 10:47:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "961"
+      - "625"
       Fastly-Ratelimit-Reset:
-      - "1607551200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -123,9 +123,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8246-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1607550247.352204,VS0,VE635
+      - S1610621224.366641,VS0,VE268
     status: 200 OK
     code: 200
     duration: ""
@@ -134,13 +134,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/90/logging/s3/new-test-s3
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/58/logging/s3/new-test-s3
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-s3, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 90 }''"}'
+      version =\u003e 58 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -149,11 +149,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Dec 2020 21:44:08 GMT
+      - Thu, 14 Jan 2021 10:47:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "960"
+      - "624"
       Fastly-Ratelimit-Reset:
-      - "1607551200"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -167,9 +167,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8246-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1607550248.000548,VS0,VE150
+      - S1610621225.719022,VS0,VE180
     status: 404 Not Found
     code: 404
     duration: ""

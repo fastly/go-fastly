@@ -2,39 +2,38 @@
 version: 1
 interactions:
 - request:
-    body: name=my-test-token&password=xxxxxxxxxxxxxxxxxxxx&scope=global&username=xxxxxxxxxxxxxxxxxxxx
+    body: name=my-test-token&password=XXXXXXXXXXXXXXXXXXXXXX&scope=global&username=XXXXXXXXXXXXXXXXXXXXXX
     form:
       name:
       - my-test-token
       password:
-      - xxxxxxxxxxxxxxxxxxxxx
+      - XXXXXXXXXXXXXXXXXXXXXX
       scope:
       - global
       username:
-      - xxxxxxxxxxxxxxxxxxxxx
+      - XXXXXXXXXXXXXXXXXXXXXX
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.2.1 (+github.com/fastly/go-fastly; go1.13)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/sudo
     method: POST
   response:
-    body: '{"expiry_time":"2019-09-25T12:37:45+00:00"}'
+    body: '{"expiry_time":"2021-01-14T11:52:45+00:00"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 25 Sep 2019 12:32:45 GMT
+      - Thu, 14 Jan 2021 11:47:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "998"
+      - "955"
       Fastly-Ratelimit-Reset:
-      - "1569416400"
+      - "1610625600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,53 +41,51 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-cdg20755-CDG
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4141-MAN
       X-Timer:
-      - S1569414765.217878,VS0,VE714
+      - S1610624865.994919,VS0,VE649
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: name=my-test-token&password=xxxxxxxxxxxxxxxxxxxx&scope=global&username=xxxxxxxxxxxxxxxxxxxx
+    body: name=my-test-token&password=XXXXXXXXXXXXXXXXXXXXXXL&scope=global&username=XXXXXXXXXXXXXXXXXXXXXX
     form:
       name:
       - my-test-token
       password:
-      - xxxxxxxxxxxxxxxxxxxx
+      - XXXXXXXXXXXXXXXXXXXXXX
       scope:
       - global
       username:
-      - xxxxxxxxxxxxxxxxxxxx
+      - XXXXXXXXXXXXXXXXXXXXXX
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.2.1 (+github.com/fastly/go-fastly; go1.13)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/tokens
     method: POST
   response:
-    body: '{"id":"xxxxxxxxxxxxxxxxxxxx","name":"my-test-token","user_id":"xxxxxxxxxxxxxxxxxxxx","service_id":null,"expires_at":null,"created_at":"2019-09-25T12:32:46Z","updated_at":"2019-09-25T12:32:46Z","scope":"global","services":[],"access_token":"xxxxxxxxxxxxxxxxxxxx"}'
+    body: '{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"my-test-token","user_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","service_id":null,"expires_at":null,"created_at":"2021-01-14T11:47:46Z","updated_at":"2021-01-14T11:47:46Z","scope":"global","services":[],"access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 25 Sep 2019 12:32:46 GMT
+      - Thu, 14 Jan 2021 11:47:46 GMT
       Fastly-Ratelimit-Remaining:
-      - "997"
+      - "954"
       Fastly-Ratelimit-Reset:
-      - "1569416400"
+      - "1610625600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -96,16 +93,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-cdg20755-CDG
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4141-MAN
       X-Timer:
-      - S1569414766.001643,VS0,VE572
+      - S1610624866.784304,VS0,VE499
     status: 200 OK
     code: 200
     duration: ""

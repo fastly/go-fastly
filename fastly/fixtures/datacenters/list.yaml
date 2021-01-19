@@ -1,30 +1,74 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/datacenters
     method: GET
   response:
-    body: '[{"code":"AMS","name":"Amsterdam","group":"Europe","coordinates":{"x":0,"y":0,"latitude":52.308613,"longitude":4.763889},"shield":"amsterdam-nl"},{"code":"IAD","name":"Ashburn","group":"United States","coordinates":{"x":0,"y":0,"latitude":38.944533,"longitude":-77.455811}}]'
+    body: '[{"code":"AMS","name":"Amsterdam","group":"Europe","coordinates":{"x":0,"y":0,"latitude":52.308613,"longitude":4.763889},"shield":"amsterdam-nl"},{"code":"IAD","name":"Ashburn","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":38.944533,"longitude":-77.455811}},{"code":"WDC","name":"Ashburn","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":39.022,"longitude":-77.451}},{"code":"BWI","name":"Ashburn
+      - BWI","group":"United States","coordinates":{"x":0,"y":0,"latitude":38.944533,"longitude":-77.455811},"shield":"bwi-va-us"},{"code":"DCA","name":"Ashburn
+      - DCA","group":"United States","coordinates":{"x":0,"y":0,"latitude":38.851242,"longitude":-77.040232},"shield":"dca-dc-us"},{"code":"FTY","name":"Atlanta
+      - FTY","group":"United States","coordinates":{"x":0,"y":0,"latitude":33.636719,"longitude":-84.428067},"shield":"fty-ga-us"},{"code":"PDK","name":"Atlanta
+      - PDK","group":"United States","coordinates":{"x":0,"y":0,"latitude":33.876819,"longitude":-84.302921}},{"code":"AKL","name":"Auckland","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":-37.008056,"longitude":174.791667},"shield":"auckland-akl"},{"code":"BOG","name":"Bogota","group":"South
+      America","coordinates":{"x":0,"y":0,"latitude":4.711,"longitude":-74.072},"shield":"bog-bogota-co"},{"code":"BOS","name":"Boston","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":42.364347,"longitude":-71.005181},"shield":"bos-ma-us"},{"code":"BNE","name":"Brisbane","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":-27.384167,"longitude":153.1175},"shield":"brisbane-au"},{"code":"EZE","name":"Buenos
+      Aires","group":"South America","coordinates":{"x":0,"y":0,"latitude":-34.815,"longitude":-58.5348}},{"code":"CPT","name":"Cape
+      Town","group":"South Africa","coordinates":{"x":0,"y":0,"latitude":-33.97,"longitude":18.464},"shield":"cpt-capetown-za"},{"code":"MAA","name":"Chennai","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":12.9941,"longitude":80.1709},"shield":"maa-chennai-in"},{"code":"ORD","name":"Chicago","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":41.978603,"longitude":-87.904842}},{"code":"CHI","name":"Chicago
+      - CHI","group":"United States","coordinates":{"x":0,"y":0,"latitude":41.9742,"longitude":-87.9073},"shield":"chi-il-us"},{"code":"MDW","name":"Chicago
+      - MDW","group":"United States","coordinates":{"x":0,"y":0,"latitude":41.7867799,"longitude":-87.7543771},"shield":"mdw-il-us"},{"code":"PWK","name":"Chicago
+      - PWK","group":"United States","coordinates":{"x":0,"y":0,"latitude":42.1171,"longitude":-87.9011},"shield":"pwk-il-us"},{"code":"CMH","name":"Columbus","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":40.116,"longitude":-83.002}},{"code":"LCK","name":"Columbus","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":40.116,"longitude":-83.002}},{"code":"CPH","name":"Copenhagen","group":"Europe","coordinates":{"x":0,"y":0,"latitude":55.728081,"longitude":12.37752},"shield":"cph-copenhagen-dk"},{"code":"CWB","name":"Curitiba","group":"Brazil","coordinates":{"x":0,"y":0,"latitude":-25.4809,"longitude":-49.3044}},{"code":"DFW","name":"Dallas","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":32.896828,"longitude":-97.037997},"shield":"dallas-tx-us"},{"code":"DAL","name":"Dallas
+      - DAL","group":"United States","coordinates":{"x":0,"y":0,"latitude":32.787,"longitude":-96.794},"shield":"dal-tx-us"},{"code":"DEL","name":"Delhi","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":28.506912,"longitude":77.378557},"shield":"del-delhi-in"},{"code":"DEN","name":"Denver","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":39.861656,"longitude":-104.673178},"shield":"den-co-us"},{"code":"DUB","name":"Dublin","group":"Europe","coordinates":{"x":0,"y":0,"latitude":53.35,"longitude":6.26},"shield":"dub-dublin-ie"},{"code":"FRA","name":"Frankfurt","group":"Europe","coordinates":{"x":0,"y":0,"latitude":50.026421,"longitude":8.543125},"shield":"frankfurt-de"},{"code":"HHN","name":"Frankfurt
+      - Interxion","group":"Europe","coordinates":{"x":0,"y":0,"latitude":50.11975,"longitude":8.738472},"shield":"hhn-frankfurt-de"},{"code":"FJR","name":"Fujairah
+      Al Mahta","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":25.112225,"longitude":56.323964},"shield":"fjr-ae"},{"code":"HEL","name":"Helsinki","group":"Europe","coordinates":{"x":0,"y":0,"latitude":60.1699,"longitude":24.9384},"shield":"hel-helsinki-fi"},{"code":"HKG","name":"Hong
+      Kong","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":22.308919,"longitude":113.914603},"shield":"hongkong-hk"},{"code":"IAH","name":"Houston","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":29.99022,"longitude":-95.336783},"shield":"iah-tx-us"},{"code":"JAX","name":"Jacksonville","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":30.3322,"longitude":-81.6557},"shield":"jax-fl-us"},{"code":"JNB","name":"Johannesburg","group":"South
+      Africa","coordinates":{"x":0,"y":0,"latitude":-26.13778,"longitude":28.19756},"shield":"jnb-johannesburg-za"},{"code":"MCI","name":"Kansas
+      City","group":"United States","coordinates":{"x":0,"y":0,"latitude":39.101,"longitude":-94.581}},{"code":"LCY","name":"London
+      - LCY","group":"Europe","coordinates":{"x":0,"y":0,"latitude":51.505278,"longitude":0.055278},"shield":"london_city-uk"},{"code":"LHR","name":"London
+      - LHR","group":"Europe","coordinates":{"x":0,"y":0,"latitude":51.4775,"longitude":-0.461389},"shield":"london-uk"},{"code":"LON","name":"London
+      - LON","group":"Europe","coordinates":{"x":0,"y":0,"latitude":51.499,"longitude":-0.011},"shield":"lon-london-uk"},{"code":"LGB","name":"Los
+      Angeles (Metro)","group":"United States","coordinates":{"x":0,"y":0,"latitude":33.942536,"longitude":-118.408075},"shield":"lgb-ca-us"},{"code":"BUR","name":"Los
+      Angeles - BUR","group":"United States","coordinates":{"x":0,"y":0,"latitude":34.198312,"longitude":-118.357404},"shield":"bur-ca-us"},{"code":"LAX","name":"Los
+      Angeles - LAX","group":"United States","coordinates":{"x":0,"y":0,"latitude":33.942536,"longitude":-118.408075}},{"code":"MAD","name":"Madrid","group":"Europe","coordinates":{"x":0,"y":0,"latitude":40.439323,"longitude":-3.621211},"shield":"mad-madrid-es"},{"code":"MAN","name":"Manchester","group":"Europe","coordinates":{"x":0,"y":0,"latitude":53.4808,"longitude":-2.2426},"shield":"man-manchester-uk"},{"code":"MRS","name":"Marseille","group":"Europe","coordinates":{"x":0,"y":0,"latitude":43.311,"longitude":5.373},"shield":"mrs-marseille-fr"},{"code":"MEL","name":"Melbourne","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":-37.673333,"longitude":144.843333},"shield":"melbourne-au"},{"code":"MIA","name":"Miami","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":25.79325,"longitude":-80.290556},"shield":"miami-fl-us"},{"code":"MXP","name":"Milan","group":"Europe","coordinates":{"x":0,"y":0,"latitude":45.4642,"longitude":9.19},"shield":"mxp-milan-it"},{"code":"MSP","name":"Minneapolis","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":44.971401,"longitude":-93.254501},"shield":"msp-mn-us"},{"code":"STP","name":"Minneapolis","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":44.971401,"longitude":-93.254501}},{"code":"YUL","name":"Montreal","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":45.497497,"longitude":-73.570959}},{"code":"BOM","name":"Mumbai","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":18.975,"longitude":72.825833},"shield":"bom-mumbai-in"},{"code":"JFK","name":"New
+      York City","group":"United States","coordinates":{"x":0,"y":0,"latitude":40.639751,"longitude":-73.778925}},{"code":"LGA","name":"New
+      York City - LGA","group":"United States","coordinates":{"x":0,"y":0,"latitude":40.639751,"longitude":-73.778925},"shield":"lga-ny-us"},{"code":"EWR","name":"Newark","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":40.736844,"longitude":-74.173402}},{"code":"ITM","name":"Osaka","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":34.785528,"longitude":135.438222},"shield":"osaka-jp"},{"code":"OSL","name":"Oslo","group":"Europe","coordinates":{"x":0,"y":0,"latitude":59.922,"longitude":10.809},"shield":"osl-oslo-no"},{"code":"PAO","name":"Palo
+      Alto","group":"United States","coordinates":{"x":0,"y":0,"latitude":37.454965,"longitude":-122.110783},"shield":"pao-ca-us"},{"code":"CDG","name":"Paris","group":"Europe","coordinates":{"x":0,"y":0,"latitude":48.928051,"longitude":2.35189},"shield":"cdg-par-fr"},{"code":"PER","name":"Perth","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":-31.940278,"longitude":115.966944},"shield":"perth-au"},{"code":"GIG","name":"Rio
+      de Janeiro","group":"Brazil","coordinates":{"x":0,"y":0,"latitude":-22.81341,"longitude":-43.249423},"shield":"gig-riodejaneiro-br"},{"code":"SJC","name":"San
+      Jose","group":"United States","coordinates":{"x":0,"y":0,"latitude":37.3626,"longitude":-121.929022},"shield":"sjc-ca-us"},{"code":"SCL","name":"Santiago","group":"South
+      America","coordinates":{"x":0,"y":0,"latitude":-33.3936,"longitude":-70.7935}},{"code":"GRU","name":"Sao
+      Paulo","group":"Brazil","coordinates":{"x":0,"y":0,"latitude":-23.432075,"longitude":-46.469511},"shield":"gru-br-sa"},{"code":"SEA","name":"Seattle","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":47.449,"longitude":-122.309306},"shield":"sea-wa-us"},{"code":"QPG","name":"Singapore","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":1.350189,"longitude":103.994433}},{"code":"SIN","name":"Singapore","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":1.350189,"longitude":103.994433},"shield":"singapore-sg"},{"code":"STL","name":"St.Louis","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":38.629,"longitude":-90.197}},{"code":"BMA","name":"Stockholm","group":"Europe","coordinates":{"x":0,"y":0,"latitude":59.354372,"longitude":17.94165},"shield":"stockholm-bma"},{"code":"SYD","name":"Sydney","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":-33.946111,"longitude":151.177222},"shield":"sydney-au"},{"code":"TYO","name":"Tokyo","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":35.617,"longitude":139.748},"shield":"tyo-tokyo-jp"},{"code":"HND","name":"Tokyo
+      - HND","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":35.622281,"longitude":139.748426},"shield":"hnd-tokyo-jp"},{"code":"YYZ","name":"Toronto","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":43.677223,"longitude":-79.630556},"shield":"yyz-on-ca"},{"code":"YVR","name":"Vancouver","group":"United
+      States","coordinates":{"x":0,"y":0,"latitude":49.1967,"longitude":-123.1815}},{"code":"VIE","name":"Vienna","group":"Europe","coordinates":{"x":0,"y":0,"latitude":48.269,"longitude":16.41},"shield":"vie-vienna-at"},{"code":"WLG","name":"Wellington","group":"Asia/Pacific","coordinates":{"x":0,"y":0,"latitude":-41.327221,"longitude":174.805278}}]'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 Jul 2020 20:16:27 GMT
+      - Thu, 14 Jan 2021 10:40:45 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -32,15 +76,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-mdw17325-MDW
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1594319825.301688,VS0,VE114
+      - S1610620845.848007,VS0,VE174
     status: 200 OK
     code: 200
+    duration: ""

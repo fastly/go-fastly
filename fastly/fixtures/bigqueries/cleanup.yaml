@@ -6,27 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/9/logging/bigquery/test-bigquery
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/27/logging/bigquery/test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-bigquery, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 9 }''"}'
+      version =\u003e 27 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 03 Jan 2020 15:43:45 GMT
+      - Thu, 14 Jan 2021 10:35:44 GMT
       Fastly-Ratelimit-Remaining:
-      - "973"
+      - "822"
       Fastly-Ratelimit-Reset:
-      - "1578067200"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -34,16 +33,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19231-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4141-MAN
       X-Timer:
-      - S1578066225.269782,VS0,VE215
+      - S1610620544.482286,VS0,VE206
     status: 404 Not Found
     code: 404
     duration: ""
@@ -52,27 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.3.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/9/logging/bigquery/new-test-bigquery
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/27/logging/bigquery/new-test-bigquery
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-bigquery, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 9 }''"}'
+      version =\u003e 27 }''"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 03 Jan 2020 15:43:45 GMT
+      - Thu, 14 Jan 2021 10:35:44 GMT
       Fastly-Ratelimit-Remaining:
-      - "972"
+      - "821"
       Fastly-Ratelimit-Reset:
-      - "1578067200"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -80,16 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19231-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4141-MAN
       X-Timer:
-      - S1578066226.500592,VS0,VE225
+      - S1610620545.731899,VS0,VE183
     status: 404 Not Found
     code: 404
     duration: ""

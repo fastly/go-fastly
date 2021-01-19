@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=10&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=waf_debug&region=US&token=super-secure-token
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=59&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=waf_debug&region=US&token=super-secure-token
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "10"
+      ServiceVersion:
+      - "59"
       format:
       - '%h %l %u %t "%r" %>s %b'
       format_version:
@@ -24,25 +24,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.14.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/10/logging/scalyr
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/scalyr
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"waf_debug","region":"US","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"10","updated_at":"2020-06-03T14:26:08Z","response_condition":"","deleted_at":null,"created_at":"2020-06-03T14:26:08Z"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"waf_debug","region":"US","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"59","response_condition":"","created_at":"2021-01-14T10:47:09Z","updated_at":"2021-01-14T10:47:09Z","deleted_at":null,"project_id":null}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Jun 2020 14:26:08 GMT
+      - Thu, 14 Jan 2021 10:47:10 GMT
       Fastly-Ratelimit-Remaining:
-      - "993"
+      - "622"
       Fastly-Ratelimit-Reset:
-      - "1591196400"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,16 +49,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-dca17749-DCA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1591194368.947134,VS0,VE409
+      - S1610621230.721676,VS0,VE581
     status: 200 OK
     code: 200
     duration: ""

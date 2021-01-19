@@ -14,25 +14,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"WpqWFjTA4lk2N1g0GY2HH","comment":"go-fastly client test","name":"test_service_service3","type":"vcl","id":"7i6HN3TK9wS159v2gPAZ8A","versions":[{"testing":false,"active":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":1,"created_at":"2020-07-06T11:09:04Z","updated_at":"2020-07-06T11:09:04Z","deleted_at":null,"locked":false,"deployed":false,"comment":"","staging":false}],"created_at":"2020-07-06T11:09:04Z","publish_key":"","updated_at":"2020-07-06T11:09:04Z","deleted_at":null}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_service3","type":"vcl","updated_at":"2021-01-14T10:26:24Z","publish_key":"","id":"01yXo1ojqff8q5FU2Mt2uX","created_at":"2021-01-14T10:26:24Z","versions":[{"service_id":"01yXo1ojqff8q5FU2Mt2uX","locked":false,"number":1,"updated_at":"2021-01-14T10:26:24Z","active":false,"staging":false,"deleted_at":null,"comment":"","deployed":false,"created_at":"2021-01-14T10:26:24Z","testing":false}],"deleted_at":null,"paused":false}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Mon, 06 Jul 2020 11:09:04 GMT
+      - Thu, 14 Jan 2021 10:26:24 GMT
       Fastly-Ratelimit-Remaining:
-      - "981"
+      - "895"
       Fastly-Ratelimit-Reset:
-      - "1594036800"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,16 +39,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19257-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1594033744.045220,VS0,VE487
+      - S1610619984.746178,VS0,VE807
     status: 200 OK
     code: 200
     duration: ""

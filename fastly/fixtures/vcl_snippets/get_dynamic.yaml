@@ -1,34 +1,28 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/snippet/4tZ3EnzeCIiKtsmQcJRs2X
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/snippet/2Ixzsm1YNjy9csTVNIKSjp
     method: GET
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2019-05-10T18:17:56Z","content":"\n\t
-      # testing EdgeACL5 and EdgeDictionary5\n\t declare local var.number5 STRING;\n\t
-      set var.number5 = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number5
-      == \"true\") {\n\t set req.http.securityruleid = \"num5-block\";\n\t error 403
-      \"Access Denied\";\n\t  }\n    ","created_at":"2019-05-10T18:17:55Z","snippet_id":"4tZ3EnzeCIiKtsmQcJRs2X"}'
+    body: '{"snippet_id":"2Ixzsm1YNjy9csTVNIKSjp","content":"\n\t # testing EdgeACL5
+      and EdgeDictionary5\n\t declare local var.number5 STRING;\n\t set var.number5
+      = table.lookup(demoDICTtest, client.as.number);\n\n\t if (var.number5 == \"true\")
+      {\n\t set req.http.securityruleid = \"num5-block\";\n\t error 403 \"Access Denied\";\n\t  }\n    ","created_at":"2021-01-14T10:33:54Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-01-14T10:33:54Z"}'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 10 May 2019 18:17:57 GMT
+      - Thu, 14 Jan 2021 10:33:55 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,15 +30,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lax8628-LAX
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4132-MAN
       X-Timer:
-      - S1557512277.305181,VS0,VE463
+      - S1610620435.286215,VS0,VE182
     status: 200 OK
     code: 200
+    duration: ""

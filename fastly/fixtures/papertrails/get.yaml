@@ -1,30 +1,25 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/logging/papertrail/test-papertrail
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/53/logging/papertrail/test-papertrail
     method: GET
   response:
-    body: '{"created_at":"2019-06-06T22:12:54Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","hostname":"integ-test.go-fastly.com","address":"integ-test.go-fastly.com","port":"1234","public_key":null,"deleted_at":null,"version":"68","updated_at":"2019-06-06T22:12:54Z","format_version":"2","name":"test-papertrail","placement":"waf_debug","format":"format","response_condition":""}'
+    body: '{"updated_at":"2021-01-14T10:45:48Z","public_key":null,"name":"test-papertrail","port":"1234","version":"53","placement":"waf_debug","format":"format","response_condition":"","created_at":"2021-01-14T10:45:48Z","format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","address":"integ-test.go-fastly.com","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:12:55 GMT
+      - Thu, 14 Jan 2021 10:45:49 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -32,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3621-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4143-MAN
       X-Timer:
-      - S1559859175.225576,VS0,VE446
+      - S1610621150.698960,VS0,VE184
     status: 200 OK
     code: 200
+    duration: ""

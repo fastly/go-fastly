@@ -1,21 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/logging/papertrail/test-papertrail
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/53/logging/papertrail/test-papertrail
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 68 }''"}'
+      version =\u003e 53 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:12:57 GMT
+      - Thu, 14 Jan 2021 10:45:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "977"
+      - "661"
       Fastly-Ratelimit-Reset:
-      - "1559862000"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -36,32 +33,30 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3621-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4143-MAN
       X-Timer:
-      - S1559859177.346567,VS0,VE183
+      - S1610621151.207019,VS0,VE212
     status: 404 Not Found
     code: 404
+    duration: ""
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/logging/papertrail/new-test-papertrail
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/53/logging/papertrail/new-test-papertrail
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 68 }''"}'
+      version =\u003e 53 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -70,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Jun 2019 22:12:57 GMT
+      - Thu, 14 Jan 2021 10:45:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "976"
+      - "660"
       Fastly-Ratelimit-Reset:
-      - "1559862000"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -82,15 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3621-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4143-MAN
       X-Timer:
-      - S1559859178.535212,VS0,VE175
+      - S1610621151.464232,VS0,VE205
     status: 404 Not Found
     code: 404
+    duration: ""

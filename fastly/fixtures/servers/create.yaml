@@ -2,11 +2,11 @@
 version: 1
 interactions:
 - request:
-    body: Pool=6mbr0Z45FrAaE4rNQC4KIs&Service=7i6HN3TK9wS159v2gPAZ8A&address=127.0.0.1
+    body: PoolID=0dINauGIu5SXLm56N5HIAN&ServiceID=7i6HN3TK9wS159v2gPAZ8A&address=127.0.0.1
     form:
-      Pool:
-      - 6mbr0Z45FrAaE4rNQC4KIs
-      Service:
+      PoolID:
+      - 0dINauGIu5SXLm56N5HIAN
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       address:
       - 127.0.0.1
@@ -14,25 +14,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/0dINauGIu5SXLm56N5HIAN/server
     method: POST
   response:
-    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"6mbr0Z45FrAaE4rNQC4KIs","id":"5KevsMJ2JySYq4AxuzMyWI","override_host":null,"updated_at":"2020-01-29T21:31:52Z","disabled":false,"max_conn":"0","comment":"","weight":"100","deleted_at":null,"port":"80","created_at":"2020-01-29T21:31:52Z"}'
+    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"0dINauGIu5SXLm56N5HIAN","id":"3tpKpF4E4ZSZDAZib4RoEH","port":"80","weight":"100","comment":"","deleted_at":null,"override_host":null,"max_conn":"0","updated_at":"2021-01-14T10:26:20Z","disabled":false,"created_at":"2021-01-14T10:26:20Z"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 21:31:53 GMT
+      - Thu, 14 Jan 2021 10:26:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "981"
+      - "905"
       Fastly-Ratelimit-Reset:
-      - "1580335200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,25 +39,24 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-jfk8145-JFK
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1580333512.291887,VS0,VE936
+      - S1610619981.556398,VS0,VE287
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: Pool=6mbr0Z45FrAaE4rNQC4KIs&Service=7i6HN3TK9wS159v2gPAZ8A&address=altserver.example.com
+    body: PoolID=0dINauGIu5SXLm56N5HIAN&ServiceID=7i6HN3TK9wS159v2gPAZ8A&address=altserver.example.com
     form:
-      Pool:
-      - 6mbr0Z45FrAaE4rNQC4KIs
-      Service:
+      PoolID:
+      - 0dINauGIu5SXLm56N5HIAN
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       address:
       - altserver.example.com
@@ -66,25 +64,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.4.0 (+github.com/fastly/go-fastly; go1.13.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/6mbr0Z45FrAaE4rNQC4KIs/server
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/0dINauGIu5SXLm56N5HIAN/server
     method: POST
   response:
-    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"6mbr0Z45FrAaE4rNQC4KIs","deleted_at":null,"weight":"100","created_at":"2020-01-29T21:31:53Z","port":"80","updated_at":"2020-01-29T21:31:53Z","id":"7SYpaE7axOQJ6XR8qj3NnX","override_host":null,"comment":"","disabled":false,"max_conn":"0"}'
+    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"0dINauGIu5SXLm56N5HIAN","created_at":"2021-01-14T10:26:21Z","max_conn":"0","override_host":null,"deleted_at":null,"disabled":false,"id":"140kbB19pPYH8oAYq2Vycr","weight":"100","updated_at":"2021-01-14T10:26:21Z","port":"80","comment":""}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 29 Jan 2020 21:31:53 GMT
+      - Thu, 14 Jan 2021 10:26:21 GMT
       Fastly-Ratelimit-Remaining:
-      - "980"
+      - "904"
       Fastly-Ratelimit-Reset:
-      - "1580335200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -92,16 +89,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-jfk8145-JFK
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1580333513.230687,VS0,VE768
+      - S1610619981.969032,VS0,VE298
     status: 200 OK
     code: 200
     duration: ""

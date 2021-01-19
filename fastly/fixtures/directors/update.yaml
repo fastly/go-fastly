@@ -1,16 +1,15 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Name=test-director&Service=7i6HN3TK9wS159v2gPAZ8A&Version=17&name=new-test-director&quorum=100
+    body: Name=test-director&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=36&name=new-test-director&quorum=100
     form:
       Name:
       - test-director
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "17"
+      ServiceVersion:
+      - "36"
       name:
       - new-test-director
       quorum:
@@ -18,14 +17,12 @@ interactions:
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/17/director/test-director
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/director/test-director
     method: PUT
   response:
-    body: '{"capacity":100,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2019-05-08T22:55:00Z","version":17,"quorum":100,"retries":5,"deleted_at":null,"backends":[],"shield":null,"type":1,"comment":"","name":"test-director","updated_at":"2019-05-08T22:55:00Z"}'
+    body: '{"deleted_at":null,"type":1,"quorum":100,"shield":null,"version":36,"updated_at":"2021-01-14T10:41:23Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","backends":[],"capacity":100,"created_at":"2021-01-14T10:41:23Z","name":"test-director","retries":5,"comment":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -34,11 +31,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 08 May 2019 22:55:01 GMT
+      - Thu, 14 Jan 2021 10:41:24 GMT
       Fastly-Ratelimit-Remaining:
-      - "986"
+      - "775"
       Fastly-Ratelimit-Reset:
-      - "1557356400"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,15 +43,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3629-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4149-MAN
       X-Timer:
-      - S1557356101.333423,VS0,VE275
+      - S1610620884.499086,VS0,VE293
     status: 200 OK
     code: 200
+    duration: ""

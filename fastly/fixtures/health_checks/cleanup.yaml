@@ -1,21 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/29/healthcheck/test-healthcheck
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/23/healthcheck/test-healthcheck
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Healthcheck ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-healthcheck, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 29 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 23 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 20:06:53 GMT
+      - Thu, 14 Jan 2021 10:26:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "19989"
+      - "887"
       Fastly-Ratelimit-Reset:
-      - "1557435600"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -36,32 +33,30 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17444-PAO
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1557432413.200663,VS0,VE229
+      - S1610619985.437939,VS0,VE170
     status: 404 Not Found
     code: 404
+    duration: ""
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/29/healthcheck/new-test-healthcheck
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/23/healthcheck/new-test-healthcheck
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Healthcheck ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-healthcheck, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 29 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 23 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -70,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 20:06:53 GMT
+      - Thu, 14 Jan 2021 10:26:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "19988"
+      - "886"
       Fastly-Ratelimit-Reset:
-      - "1557435600"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -82,15 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17444-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1557432414.507001,VS0,VE173
+      - S1610619986.644972,VS0,VE167
     status: 404 Not Found
     code: 404
+    duration: ""

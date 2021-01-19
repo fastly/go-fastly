@@ -1,36 +1,35 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/purge/foo
     method: POST
   response:
-    body: |
-      {"status": "ok", "id": "17551-1554898727-26861"}
+    body: '{ "status": "ok", "id": "4133-1610579213-156" }'
     headers:
       Accept-Ranges:
       - bytes
       Content-Length:
-      - "49"
+      - "47"
       Content-Type:
       - application/json
       Date:
-      - Sat, 11 May 2019 19:18:54 GMT
+      - Thu, 14 Jan 2021 11:02:29 GMT
+      Fastly-Instant-Rate:
+      - "0"
       Fastly-Surrogate-Key-Count:
       - "1"
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-bur17551-BUR
+      - cache-man4133-MAN
       X-Varnish:
-      - "25307528"
+      - "1799636368"
     status: 200 OK
     code: 200
+    duration: ""

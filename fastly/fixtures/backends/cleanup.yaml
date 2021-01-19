@@ -1,21 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/backend/test-backend
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-backend, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 69 }''"}'
+      version =\u003e 20 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 07 Jun 2019 21:31:24 GMT
+      - Thu, 14 Jan 2021 10:25:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "995"
+      - "917"
       Fastly-Ratelimit-Reset:
-      - "1559944800"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -36,32 +33,30 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-bur17538-BUR
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1559943085.641690,VS0,VE156
+      - S1610619953.007977,VS0,VE193
     status: 404 Not Found
     code: 404
+    duration: ""
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/backend/new-test-backend
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/backend/new-test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-backend, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 69 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 20 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -70,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 07 Jun 2019 21:31:24 GMT
+      - Thu, 14 Jan 2021 10:25:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "916"
       Fastly-Ratelimit-Reset:
-      - "1559944800"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -82,15 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-bur17538-BUR
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1559943085.818963,VS0,VE163
+      - S1610619953.247038,VS0,VE184
     status: 404 Not Found
     code: 404
+    duration: ""

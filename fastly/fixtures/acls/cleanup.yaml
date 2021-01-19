@@ -1,21 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/acl/test_acl
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/19/acl/test_acl
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find ACL ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test_acl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 6 }''"}'
+      version =\u003e 19 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 07 May 2019 21:51:04 GMT
+      - Thu, 14 Jan 2021 10:25:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "992"
+      - "927"
       Fastly-Ratelimit-Reset:
-      - "1557266400"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -36,14 +33,59 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17422-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1557265864.454172,VS0,VE161
+      - S1610619928.548582,VS0,VE176
     status: 404 Not Found
     code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/19/acl/new_test_acl
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find ACL ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e new_test_acl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 19 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 14 Jan 2021 10:25:27 GMT
+      Fastly-Ratelimit-Remaining:
+      - "926"
+      Fastly-Ratelimit-Reset:
+      - "1610622000"
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
+      X-Timer:
+      - S1610619928.766151,VS0,VE180
+    status: 404 Not Found
+    code: 404
+    duration: ""

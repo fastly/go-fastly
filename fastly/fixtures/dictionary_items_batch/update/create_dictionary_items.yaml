@@ -1,6 +1,5 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: '{"items":[{"op":"create","item_key":"key1","item_value":"val1"},{"op":"create","item_key":"key2","item_value":"val2"}]}'
@@ -10,11 +9,9 @@ interactions:
       - application/json
       Content-Type:
       - application/json
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/1.0.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/6q3QkVUjl4q6L3UwavMQ91/dictionary/7RmRuJYKwpn2hMqNWqVR1s/items
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/4dLwh4ao2p7BsqmQyf3oIr/dictionary/5v5DkUyEQAS1kSKxbDOKLp/items
     method: PATCH
   response:
     body: '{"status":"ok"}'
@@ -26,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Jul 2019 11:30:18 GMT
+      - Thu, 14 Jan 2021 10:24:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "947"
+      - "949"
       Fastly-Ratelimit-Reset:
-      - "1563278400"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -38,14 +35,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19245-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1563276618.480655,VS0,VE315
+      - S1610619840.074906,VS0,VE315
     status: 200 OK
     code: 200
+    duration: ""

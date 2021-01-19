@@ -1,21 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/vcl/test-vcl
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/vcl/test-vcl
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find VCL ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-vcl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 51 }''"}'
+      version =\u003e 24 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 11 May 2019 00:32:55 GMT
+      - Thu, 14 Jan 2021 10:33:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "841"
       Fastly-Ratelimit-Reset:
-      - "1557536400"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -36,32 +33,30 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17430-PAO
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4131-MAN
       X-Timer:
-      - S1557534776.661794,VS0,VE207
+      - S1610620419.632492,VS0,VE249
     status: 404 Not Found
     code: 404
+    duration: ""
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/vcl/new-test-vcl
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/vcl/new-test-vcl
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find VCL ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-vcl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 51 }''"}'
+      version =\u003e 24 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -70,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 11 May 2019 00:32:56 GMT
+      - Thu, 14 Jan 2021 10:33:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "840"
       Fastly-Ratelimit-Reset:
-      - "1557536400"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -82,15 +77,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17430-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4131-MAN
       X-Timer:
-      - S1557534776.873962,VS0,VE161
+      - S1610620419.939152,VS0,VE198
     status: 404 Not Found
     code: 404
+    duration: ""

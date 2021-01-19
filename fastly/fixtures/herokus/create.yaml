@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=116&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-heroku&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2F1.us.logplex.io%2Flogs
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=45&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-heroku&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2F1.us.logplex.io%2Flogs
     form:
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "116"
+      ServiceVersion:
+      - "45"
       format:
       - '%h %l %u %t "%r" %>s %b'
       format_version:
@@ -24,25 +24,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/116/logging/heroku
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/heroku
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-heroku","placement":"waf_debug","token":"super-secure-token","url":"https://1.us.logplex.io/logs","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"116","created_at":"2020-05-08T11:19:36Z","updated_at":"2020-05-08T11:19:36Z","deleted_at":null,"response_condition":""}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-heroku","placement":"waf_debug","token":"super-secure-token","url":"https://1.us.logplex.io/logs","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"45","response_condition":"","deleted_at":null,"updated_at":"2021-01-14T10:43:00Z","created_at":"2021-01-14T10:43:00Z"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 11:19:37 GMT
+      - Thu, 14 Jan 2021 10:43:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "968"
+      - "702"
       Fastly-Ratelimit-Reset:
-      - "1588939200"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,16 +49,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17447-PAO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4124-MAN
       X-Timer:
-      - S1588936777.760286,VS0,VE607
+      - S1610620981.511587,VS0,VE514
     status: 200 OK
     code: 200
     duration: ""

@@ -1,29 +1,26 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Name=test-sumologic&Service=7i6HN3TK9wS159v2gPAZ8A&Version=46&name=new-test-sumologic
+    body: Name=test-sumologic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=62&name=new-test-sumologic
     form:
       Name:
       - test-sumologic
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "46"
+      ServiceVersion:
+      - "62"
       name:
       - new-test-sumologic
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/sumologic/test-sumologic
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/sumologic/test-sumologic
     method: PUT
   response:
-    body: '{"format":"format","created_at":"2019-05-09T23:21:58Z","version":"46","name":"new-test-sumologic","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"url":"https://foo.sumologic.com","message_type":"classic","updated_at":"2019-05-09T23:21:58Z","format_version":"1","response_condition":"","placement":"waf_debug"}'
+    body: '{"placement":"waf_debug","format_version":"1","created_at":"2021-01-14T10:47:54Z","message_type":"classic","url":"https://foo.sumologic.com","version":"62","response_condition":"","format":"format","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"updated_at":"2021-01-14T10:47:54Z","name":"new-test-sumologic"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 23:21:59 GMT
+      - Thu, 14 Jan 2021 10:47:55 GMT
       Fastly-Ratelimit-Remaining:
-      - "991"
+      - "607"
       Fastly-Ratelimit-Reset:
-      - "1557446400"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -44,15 +41,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3649-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1557444119.145057,VS0,VE763
+      - S1610621275.048756,VS0,VE650
     status: 200 OK
     code: 200
+    duration: ""

@@ -6,26 +6,24 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.2.1 (+github.com/fastly/go-fastly; go1.13)
-    url: https://api.fastly.com/customer/xxxxxxxxxxxxxxxxxxxx/tokens
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/customer/XXXXXXXXXXXXXXXXXXXXXX/tokens
     method: GET
   response:
-    body: '[{"id":"xxxxxxxxxxxxxxxxxxxx","user_id":"xxxxxxxxxxxxxxxxxxxx","customer_id":"xxxxxxxxxxxxxxxxxxxx","name":"go-fastly-tests","last_used_at":"2019-09-25T10:26:59Z","created_at":"2019-09-25T10:15:12Z","expires_at":null,"ip":"127.0.0.1","user_agent":"FastlyGo/1.2.1
-      (+github.com/fastly/go-fastly; go1.13)","sudo_expires_at":null,"scopes":["global"],"scope":"global","services":[],"service_id":null}]'
+    body: '[{"id":"XXXXXXXXXXXXXXXXXXXXXX","user_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":"2021-01-14T11:33:38Z","created_at":"2021-01-14T11:25:39Z","expires_at":null,"ip":"92.238.40.48","user_agent":"FastlyGo/2.1.0
+      (+github.com/fastly/go-fastly; go1.15.4)","sudo_expires_at":null,"scopes":["global"],"scope":"global","services":["XXXXXXXXXXXXXXXXXXXXXX"],"service_id":"XXXXXXXXXXXXXXXXXXXXXX"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","user_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"manage.fastly.com
+      browser session","last_used_at":"2021-01-14T11:25:40Z","created_at":"2021-01-13T13:48:28Z","expires_at":null,"ip":"92.238.40.48","user_agent":"Mozilla/5.0
+      (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88
+      Safari/537.36","sudo_expires_at":"2021-01-14T11:25:52Z","scopes":["global"],"scope":"global","services":[],"service_id":null},{"id":"XXXXXXXXXXXXXXXXXXXXXX","user_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":null,"created_at":"2021-01-14T11:21:15Z","expires_at":"2021-04-14T10:20:53Z","ip":null,"user_agent":null,"sudo_expires_at":null,"scopes":["global:read"],"scope":"global:read","services":["XXXXXXXXXXXXXXXXXXXXXX"],"service_id":"XXXXXXXXXXXXXXXXXXXXXX"},{"id":"XXXXXXXXXXXXXXXXXXXXXX","user_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"XXXXXXXXXXXXXXXXXXXXXX","last_used_at":"2021-01-14T11:13:47Z","created_at":"2021-01-13T17:01:25Z","expires_at":null,"ip":"92.238.40.48","user_agent":"curl/7.64.1","sudo_expires_at":null,"scopes":["global"],"scope":"global","services":[],"service_id":null}]'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 25 Sep 2019 10:35:47 GMT
+      - Thu, 14 Jan 2021 11:33:38 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,16 +31,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-cdg20766-CDG
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4150-MAN
       X-Timer:
-      - S1569407747.596795,VS0,VE478
+      - S1610624018.809279,VS0,VE393
     status: 200 OK
     code: 200
     duration: ""

@@ -1,32 +1,27 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/gzip
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip
     method: GET
   response:
-    body: '[{"deleted_at":null,"cache_condition":"","name":"test-gzip","updated_at":"2019-05-09T00:00:13Z","extensions":"html
-      css","version":"21","created_at":"2019-05-09T00:00:13Z","content_types":"text/html
-      text/css","service_id":"7i6HN3TK9wS159v2gPAZ8A"},{"updated_at":"2019-05-09T00:00:14Z","name":"test-gzip-omit","cache_condition":"","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"21","created_at":"2019-05-09T00:00:14Z","content_types":"","extensions":""}]'
+    body: '[{"name":"test-gzip","created_at":"2021-01-14T10:42:41Z","content_types":"text/html
+      text/css","updated_at":"2021-01-14T10:42:41Z","version":"43","deleted_at":null,"cache_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","extensions":"html
+      css"},{"created_at":"2021-01-14T10:42:41Z","content_types":"","name":"test-gzip-omit","version":"43","deleted_at":null,"updated_at":"2021-01-14T10:42:41Z","cache_condition":"","extensions":"","service_id":"7i6HN3TK9wS159v2gPAZ8A"}]'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 00:00:15 GMT
+      - Thu, 14 Jan 2021 10:42:42 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,15 +29,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17429-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1557360015.789711,VS0,VE424
+      - S1610620962.969219,VS0,VE186
     status: 200 OK
     code: 200
+    duration: ""

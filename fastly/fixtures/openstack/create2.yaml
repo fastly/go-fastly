@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=99&access_key=secret-key&bucket_name=bucket-name&compression_codec=snappy&format=format&format_version=2&gzip_level=8&message_type=classic&name=test-openstack-2&path=%2Fpath&period=12&placement=waf_debug&public_key=-----BEGIN+PGP+PUBLIC+KEY+BLOCK-----%0A%0AmQENBFyUD8sBCACyFnB39AuuTygseek%2BeA4fo0cgwva6%2FFSjnWq7riouQee8GgQ%2F%0AibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr%2BIZ4GVGJqs6ZJnvQcqe3xPoR4%0A8AnBfw90o32r%2FLuHf6QCJXi%2BAEu35koNlNAvLJ2B%2BKACaNB7N0EeWmqpV%2F1V2k9p%0AlDYk%2Bth7LcCuaFNGqKS%2FPrMnnMqR6VDLCjHhNx4KR79b0Twm%2F2qp6an3hyNRu8Gn%0Adwxpf1%2FBUu3JWf%2BLqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB%0A89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz%0AdCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6%0AvFFc9jxV%2FwUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc%0A9jxV%2F815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg%2BmjM3b8N7iXm9%0AOLX59fbDAWtBSldSZE22RXd3CvlFOG%2FEnKBXSjBtEqfyxYSnyOPkMPBYWGL%2FApkX%0ASvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR%2B3rv1u3aoy7%2Fs2EltAfDS3ZQIq%0A7%2FcWTLJml%2FlleeB%2FY6rPj8xqeCYhE5ahw9gsV%2FMdqatl24V9Tks30iijx0Hhw%2BGx%0AkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe%2FKY9M2yVnMHUXmAZwbG%0AM1cMI%2FNH1DjevCKdGBLcRJlhuLPKF%2FanuQENBFyUD8sBCADIpd7r7GuPd6n%2FIkxe%0Au6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y%2Fart8ip0VJ3m07L%0A4RSfSpnzqgSwdjSq5hNour2Fo%2FBzYhK7yaz2AzVSbe33R0%2BRYhb4b%2F6N%2BbKbjwGF%0AftCsqVFMH%2BPyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K%0AUEGUcTzz%2B8QGAwAra%2B0ewPXo%2FAkO%2B8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu%0AYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O%2B0F1G7ttZ2GRRgVBZPwi%0AkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV%2FwUCXJQPywIb%0ADAAKCRC6vFFc9jxV%2F9YOCACe8qmOSnKQpQfW%2BPqYOqo3dt7JyweTs3FkD6NT8Zml%0AdYy%2FvkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L%0A3Tp90NN%2BQY5WDbsGmsyk6%2B6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c%0AFaNmEfKKy%2Fr1PO20NXEG6t9t05K%2FfrHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR%0A5%2BzkkSq%2FeG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR%0AwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr%2BN%0A%3D28dr%0A-----END+PGP+PUBLIC+KEY+BLOCK-----%0A&timestamp_format=%25Y&url=https%3A%2F%2Flogs.example.com%2Fv1.0&user=user
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=63&access_key=secret-key&bucket_name=bucket-name&compression_codec=snappy&format=format&format_version=2&gzip_level=8&message_type=classic&name=test-openstack-2&path=%2Fpath&period=12&placement=waf_debug&public_key=-----BEGIN+PGP+PUBLIC+KEY+BLOCK-----%0A%0AmQENBFyUD8sBCACyFnB39AuuTygseek%2BeA4fo0cgwva6%2FFSjnWq7riouQee8GgQ%2F%0AibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr%2BIZ4GVGJqs6ZJnvQcqe3xPoR4%0A8AnBfw90o32r%2FLuHf6QCJXi%2BAEu35koNlNAvLJ2B%2BKACaNB7N0EeWmqpV%2F1V2k9p%0AlDYk%2Bth7LcCuaFNGqKS%2FPrMnnMqR6VDLCjHhNx4KR79b0Twm%2F2qp6an3hyNRu8Gn%0Adwxpf1%2FBUu3JWf%2BLqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB%0A89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz%0AdCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6%0AvFFc9jxV%2FwUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc%0A9jxV%2F815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg%2BmjM3b8N7iXm9%0AOLX59fbDAWtBSldSZE22RXd3CvlFOG%2FEnKBXSjBtEqfyxYSnyOPkMPBYWGL%2FApkX%0ASvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR%2B3rv1u3aoy7%2Fs2EltAfDS3ZQIq%0A7%2FcWTLJml%2FlleeB%2FY6rPj8xqeCYhE5ahw9gsV%2FMdqatl24V9Tks30iijx0Hhw%2BGx%0AkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe%2FKY9M2yVnMHUXmAZwbG%0AM1cMI%2FNH1DjevCKdGBLcRJlhuLPKF%2FanuQENBFyUD8sBCADIpd7r7GuPd6n%2FIkxe%0Au6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y%2Fart8ip0VJ3m07L%0A4RSfSpnzqgSwdjSq5hNour2Fo%2FBzYhK7yaz2AzVSbe33R0%2BRYhb4b%2F6N%2BbKbjwGF%0AftCsqVFMH%2BPyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K%0AUEGUcTzz%2B8QGAwAra%2B0ewPXo%2FAkO%2B8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu%0AYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O%2B0F1G7ttZ2GRRgVBZPwi%0AkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV%2FwUCXJQPywIb%0ADAAKCRC6vFFc9jxV%2F9YOCACe8qmOSnKQpQfW%2BPqYOqo3dt7JyweTs3FkD6NT8Zml%0AdYy%2FvkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L%0A3Tp90NN%2BQY5WDbsGmsyk6%2B6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c%0AFaNmEfKKy%2Fr1PO20NXEG6t9t05K%2FfrHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR%0A5%2BzkkSq%2FeG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR%0AwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr%2BN%0A%3D28dr%0A-----END+PGP+PUBLIC+KEY+BLOCK-----%0A&timestamp_format=%25Y&url=https%3A%2F%2Flogs.example.com%2Fv1.0&user=user
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "99"
+      - "63"
       access_key:
       - secret-key
       bucket_name:
@@ -72,13 +72,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/99/logging/openstack
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/63/logging/openstack
     method: POST
   response:
     body: '{"access_key":"secret-key","bucket_name":"bucket-name","compression_codec":null,"format":"format","format_version":"2","gzip_level":"8","message_type":"classic","name":"test-openstack-2","path":"/path","period":"12","placement":"waf_debug","public_key":"-----BEGIN
       PGP PUBLIC KEY BLOCK-----\n\nmQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/\nibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4\n8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p\nlDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn\ndwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB\n89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz\ndCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6\nvFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc\n9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9\nOLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX\nSvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq\n7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx\nkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG\nM1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe\nu6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L\n4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF\nftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K\nUEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu\nYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi\nkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb\nDAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml\ndYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L\n3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c\nFaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR\n5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR\nwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N\n=28dr\n-----END
-      PGP PUBLIC KEY BLOCK-----\n","timestamp_format":"%Y","url":"https://logs.example.com/v1.0","user":"user","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"99","deleted_at":null,"response_condition":"","created_at":"2020-12-09T22:42:32Z","updated_at":"2020-12-09T22:42:32Z"}'
+      PGP PUBLIC KEY BLOCK-----\n","timestamp_format":"%Y","url":"https://logs.example.com/v1.0","user":"user","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"63","created_at":"2021-01-14T11:03:01Z","response_condition":"","updated_at":"2021-01-14T11:03:01Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -87,11 +87,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Dec 2020 22:42:32 GMT
+      - Thu, 14 Jan 2021 11:03:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "921"
+      - "997"
       Fastly-Ratelimit-Reset:
-      - "1607554800"
+      - "1610625600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -105,9 +105,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8263-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4130-MAN
       X-Timer:
-      - S1607553752.929688,VS0,VE806
+      - S1610622181.133145,VS0,VE696
     status: 200 OK
     code: 200
     duration: ""

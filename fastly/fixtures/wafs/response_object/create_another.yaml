@@ -2,11 +2,11 @@
 version: 1
 interactions:
 - request:
-    body: Service=7i6HN3TK9wS159v2gPAZ8A&Version=2&name=WAF_Response2&status=403
+    body: ServiceID=5OTf0ZHln9oPp7u1f73YdC&ServiceVersion=2&name=WAF_Response2&status=403
     form:
-      Service:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
+      ServiceID:
+      - 5OTf0ZHln9oPp7u1f73YdC
+      ServiceVersion:
       - "2"
       name:
       - WAF_Response2
@@ -16,25 +16,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/1.16.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/response_object
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/5OTf0ZHln9oPp7u1f73YdC/version/2/response_object
     method: POST
   response:
-    body: '{"name":"WAF_Response2","status":"403","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"2","content":null,"updated_at":"2020-07-02T20:19:37Z","response":"ok","cache_condition":"","created_at":"2020-07-02T20:19:37Z","content_type":null,"request_condition":"","deleted_at":null}'
+    body: '{"name":"WAF_Response2","status":"403","service_id":"5OTf0ZHln9oPp7u1f73YdC","version":"2","deleted_at":null,"created_at":"2021-01-14T10:27:48Z","content":null,"response":"ok","request_condition":"","cache_condition":"","content_type":null,"updated_at":"2021-01-14T10:27:48Z"}'
     headers:
       Accept-Ranges:
-      - bytes
       - bytes
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Thu, 02 Jul 2020 20:19:37 GMT
+      - Thu, 14 Jan 2021 10:27:49 GMT
       Fastly-Ratelimit-Remaining:
-      - "959"
+      - "865"
       Fastly-Ratelimit-Reset:
-      - "1593723600"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,16 +41,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19250-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
       X-Timer:
-      - S1593721177.422242,VS0,VE235
+      - S1610620069.782790,VS0,VE247
     status: 200 OK
     code: 200
     duration: ""

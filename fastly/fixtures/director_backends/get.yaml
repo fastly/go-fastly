@@ -1,30 +1,25 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16/director/director/backend/backend
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/director/director/backend/backend
     method: GET
   response:
-    body: '{"deleted_at":null,"version":16,"created_at":"2019-05-08T22:38:27Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","backend_name":"backend","director_name":"director","updated_at":"2019-05-08T22:38:27Z"}'
+    body: '{"director_name":"director","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"backend_name":"backend","created_at":"2021-01-14T10:25:51Z","version":21,"updated_at":"2021-01-14T10:25:51Z"}'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Wed, 08 May 2019 22:38:28 GMT
+      - Thu, 14 Jan 2021 10:25:51 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -32,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3623-SJC
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1557355108.582806,VS0,VE430
+      - S1610619951.359242,VS0,VE164
     status: 200 OK
     code: 200
+    duration: ""

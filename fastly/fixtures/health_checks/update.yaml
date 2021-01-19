@@ -1,29 +1,26 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
-    body: Name=test-healthcheck&Service=7i6HN3TK9wS159v2gPAZ8A&Version=29&name=new-test-healthcheck
+    body: Name=test-healthcheck&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=23&name=new-test-healthcheck
     form:
       Name:
       - test-healthcheck
-      Service:
+      ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
-      Version:
-      - "29"
+      ServiceVersion:
+      - "23"
       name:
       - new-test-healthcheck
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/29/healthcheck/test-healthcheck
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/23/healthcheck/test-healthcheck
     method: PUT
   response:
-    body: '{"path":"/foo","method":"HEAD","initial":10,"created_at":"2019-05-09T20:06:51Z","expected_response":200,"window":5000,"host":"example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"","name":"new-test-healthcheck","deleted_at":null,"timeout":1500,"http_version":"1.1","updated_at":"2019-05-09T20:06:51Z","version":29,"check_interval":2500,"threshold":10}'
+    body: '{"initial":10,"http_version":"1.1","created_at":"2021-01-14T10:26:24Z","window":5000,"name":"new-test-healthcheck","expected_response":200,"service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"","method":"HEAD","deleted_at":null,"updated_at":"2021-01-14T10:26:24Z","check_interval":2500,"version":23,"host":"example.com","threshold":10,"timeout":1500,"path":"/foo"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 May 2019 20:06:52 GMT
+      - Thu, 14 Jan 2021 10:26:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "19991"
+      - "890"
       Fastly-Ratelimit-Reset:
-      - "1557435600"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -44,15 +41,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17444-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1557432413.587634,VS0,VE258
+      - S1610619985.731524,VS0,VE299
     status: 200 OK
     code: 200
+    duration: ""

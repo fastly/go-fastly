@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=101&bucket_name=bucket&compression_codec=snappy&format=format&format_version=2&message_type=blank&name=test-gcs&path=%2Fpath&period=12&placement=waf_debug&secret_key=-----BEGIN+PRIVATE+KEY-----%0AMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq%0ATdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1%0ANnqWYvHDyA5Ug%2BT8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA%0AeURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6%2F9oRfUjytXJ%0ARuUIE5xL8yhRCagNr5ZW250aa%2BwBwu5DSCk5fDNr0eDuZjw84WHDll%2BmHxBFGV%2BX%0AKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi%2FyXhhO%2FmNEXhvhq%2FR%0AfN0Jh2A3AgMBAAECggEAef%2BCEL5aF6%2FaVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF%0AXM1EdnBt50fA2xSQUeGmeEXi6%2Bcngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m%0ABRG2uZI2Ti%2FbD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY%2Bc08Izh%2F2BOoY6McDoqh%0AdQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA%2FG5%2BS3Cwr%0AVG4fkAxYi5vdIK3b8jUXrTM%2FkpoTl%2Bd3dlQ7rRZYf7KyT31%2FHtJ%2FGNzxFI6upzO7%0AiDNrrUOyeOPjWXdzUh9budv3j%2B6UfbYK7uZIoebHIQKBgQDykYX1L%2FakGaOC2tfS%0AjzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh%2FpYd8Ivnz3vOVski5Zt%0A19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX%2BMhiX5fEotTlVi7wfOmzTP5%0AhUCMSd%2F17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o%2BEj%2FZfcdGIa3mAFazToPDzxhHU%0AnwADxaxpNGKRU03XCaiYkykarLYdG6Rk%2B7dXUv8eLy%2B6Dcq1SWQtfCWKEor%2B%2BIIp%0A1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i%0AFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0%2BcgE%2Fp3fC6R%0AptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg%0Av3YCOXk3%2By5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr%0AM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK%0A1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM%2FLm6C%2FJWI8pzpVeU%0AIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5%2BYCG5DeLT1%2FN%0Ain6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn%2BuNatKvlVyfPm6rdxeHCmER1FpR7Q%0AA%2FaNVjPeViKT%2FR4nK9ytsa%2Bs%2F1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ%0Abv1KwcKoQbNVXwauH79JKc0%3D%0A-----END+PRIVATE+KEY-----%0A&timestamp_format=%25Y&user=user
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=42&bucket_name=bucket&compression_codec=snappy&format=format&format_version=2&message_type=blank&name=test-gcs&path=%2Fpath&period=12&placement=waf_debug&secret_key=-----BEGIN+PRIVATE+KEY-----%0AMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq%0ATdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1%0ANnqWYvHDyA5Ug%2BT8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA%0AeURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6%2F9oRfUjytXJ%0ARuUIE5xL8yhRCagNr5ZW250aa%2BwBwu5DSCk5fDNr0eDuZjw84WHDll%2BmHxBFGV%2BX%0AKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi%2FyXhhO%2FmNEXhvhq%2FR%0AfN0Jh2A3AgMBAAECggEAef%2BCEL5aF6%2FaVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF%0AXM1EdnBt50fA2xSQUeGmeEXi6%2Bcngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m%0ABRG2uZI2Ti%2FbD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY%2Bc08Izh%2F2BOoY6McDoqh%0AdQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA%2FG5%2BS3Cwr%0AVG4fkAxYi5vdIK3b8jUXrTM%2FkpoTl%2Bd3dlQ7rRZYf7KyT31%2FHtJ%2FGNzxFI6upzO7%0AiDNrrUOyeOPjWXdzUh9budv3j%2B6UfbYK7uZIoebHIQKBgQDykYX1L%2FakGaOC2tfS%0AjzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh%2FpYd8Ivnz3vOVski5Zt%0A19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX%2BMhiX5fEotTlVi7wfOmzTP5%0AhUCMSd%2F17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o%2BEj%2FZfcdGIa3mAFazToPDzxhHU%0AnwADxaxpNGKRU03XCaiYkykarLYdG6Rk%2B7dXUv8eLy%2B6Dcq1SWQtfCWKEor%2B%2BIIp%0A1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i%0AFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0%2BcgE%2Fp3fC6R%0AptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg%0Av3YCOXk3%2By5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr%0AM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK%0A1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM%2FLm6C%2FJWI8pzpVeU%0AIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5%2BYCG5DeLT1%2FN%0Ain6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn%2BuNatKvlVyfPm6rdxeHCmER1FpR7Q%0AA%2FaNVjPeViKT%2FR4nK9ytsa%2Bs%2F1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ%0Abv1KwcKoQbNVXwauH79JKc0%3D%0A-----END+PRIVATE+KEY-----%0A&timestamp_format=%25Y&user=user
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "101"
+      - "42"
       bucket_name:
       - bucket
       compression_codec:
@@ -64,13 +64,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/101/logging/gcs
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/logging/gcs
     method: POST
   response:
     body: '{"bucket_name":"bucket","compression_codec":"snappy","format":"format","format_version":"2","message_type":"blank","name":"test-gcs","path":"/path","period":"12","placement":"waf_debug","secret_key":"-----BEGIN
       PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq\nTdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1\nNnqWYvHDyA5Ug+T8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA\neURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6/9oRfUjytXJ\nRuUIE5xL8yhRCagNr5ZW250aa+wBwu5DSCk5fDNr0eDuZjw84WHDll+mHxBFGV+X\nKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi/yXhhO/mNEXhvhq/R\nfN0Jh2A3AgMBAAECggEAef+CEL5aF6/aVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF\nXM1EdnBt50fA2xSQUeGmeEXi6+cngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m\nBRG2uZI2Ti/bD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY+c08Izh/2BOoY6McDoqh\ndQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA/G5+S3Cwr\nVG4fkAxYi5vdIK3b8jUXrTM/kpoTl+d3dlQ7rRZYf7KyT31/HtJ/GNzxFI6upzO7\niDNrrUOyeOPjWXdzUh9budv3j+6UfbYK7uZIoebHIQKBgQDykYX1L/akGaOC2tfS\njzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh/pYd8Ivnz3vOVski5Zt\n19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX+MhiX5fEotTlVi7wfOmzTP5\nhUCMSd/17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o+Ej/ZfcdGIa3mAFazToPDzxhHU\nnwADxaxpNGKRU03XCaiYkykarLYdG6Rk+7dXUv8eLy+6Dcq1SWQtfCWKEor++IIp\n1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i\nFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0+cgE/p3fC6R\nptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg\nv3YCOXk3+y5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr\nM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK\n1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM/Lm6C/JWI8pzpVeU\nIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5+YCG5DeLT1/N\nin6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn+uNatKvlVyfPm6rdxeHCmER1FpR7Q\nA/aNVjPeViKT/R4nK9ytsa+s/1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ\nbv1KwcKoQbNVXwauH79JKc0=\n-----END
-      PRIVATE KEY-----\n","timestamp_format":"%Y","user":"user","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"101","response_condition":"","updated_at":"2020-12-09T23:44:46Z","deleted_at":null,"created_at":"2020-12-09T23:44:46Z","public_key":null,"gzip_level":"0"}'
+      PRIVATE KEY-----\n","timestamp_format":"%Y","user":"user","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"42","public_key":null,"response_condition":"","deleted_at":null,"gzip_level":"0","updated_at":"2021-01-14T10:42:29Z","created_at":"2021-01-14T10:42:29Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -79,11 +79,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Dec 2020 23:44:46 GMT
+      - Thu, 14 Jan 2021 10:42:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "986"
+      - "728"
       Fastly-Ratelimit-Reset:
-      - "1607558400"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -97,9 +97,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8242-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1607557486.133086,VS0,VE414
+      - S1610620950.669576,VS0,VE552
     status: 200 OK
     code: 200
     duration: ""

@@ -1,30 +1,25 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/backend/test-backend
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/backend/test-backend
     method: GET
   response:
-    body: '{"ssl_sni_hostname":null,"first_byte_timeout":15000,"max_conn":200,"shield":null,"created_at":"2019-06-07T21:31:21Z","max_tls_version":null,"updated_at":"2019-06-07T21:31:21Z","version":69,"ssl_ca_cert":null,"ssl_cert_hostname":null,"error_threshold":0,"hostname":"integ-test.go-fastly.com","ssl_check_cert":true,"weight":100,"comment":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test-backend","ipv4":null,"client_cert":null,"ssl_ciphers":null,"ssl_client_cert":null,"override_host":"origin.example.com","port":1234,"ssl_hostname":null,"address":"integ-test.go-fastly.com","min_tls_version":null,"request_condition":"","auto_loadbalance":false,"use_ssl":false,"ipv6":null,"ssl_client_key":null,"deleted_at":null,"healthcheck":null,"connect_timeout":1500,"between_bytes_timeout":10000}'
+    body: '{"name":"test-backend","service_id":"7i6HN3TK9wS159v2gPAZ8A","address":"integ-test.go-fastly.com","ssl_sni_hostname":null,"between_bytes_timeout":10000,"ssl_client_key":null,"weight":100,"min_tls_version":null,"auto_loadbalance":false,"shield":null,"connect_timeout":1500,"comment":"","port":1234,"ipv4":null,"ssl_client_cert":null,"first_byte_timeout":15000,"ssl_ciphers":null,"deleted_at":null,"request_condition":"","max_conn":200,"ssl_cert_hostname":null,"hostname":"integ-test.go-fastly.com","ssl_check_cert":true,"ipv6":null,"use_ssl":false,"ssl_ca_cert":null,"version":20,"updated_at":"2021-01-14T10:25:50Z","override_host":"origin.example.com","created_at":"2021-01-14T10:25:50Z","error_threshold":0,"max_tls_version":null,"healthcheck":null,"ssl_hostname":null,"client_cert":null}'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 07 Jun 2019 21:31:23 GMT
+      - Thu, 14 Jan 2021 10:25:51 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -32,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bur17538-BUR
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1559943083.705387,VS0,VE409
+      - S1610619951.458633,VS0,VE468
     status: 200 OK
     code: 200
+    duration: ""

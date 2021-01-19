@@ -1,21 +1,18 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/0.4.3.dev (+github.com/fastly/go-fastly; go1.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16/director/director/backend/backend
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/director/director/backend/backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find DirectorBackend ''{
       backend =\u003e backend, deleted =\u003e 0000-00-00 00:00:00, director =\u003e
-      director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 16 }''"}'
+      director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 21 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 08 May 2019 22:38:28 GMT
+      - Thu, 14 Jan 2021 10:25:52 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "920"
       Fastly-Ratelimit-Reset:
-      - "1557356400"
+      - "1610622000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -36,15 +33,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc3623-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1557355108.353032,VS0,VE439
+      - S1610619952.943192,VS0,VE186
     status: 404 Not Found
     code: 404
+    duration: ""

@@ -1,31 +1,26 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/2voeSM5z6889qin6D9waPl/acl/1d7GeY6Ky6eeqSsO5c1r29/entries
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/5BEXGVZPrhtk8TJfJJiz5u/acl/3XA9Zoz75yiYlgnjzDAFmI/entries
     method: GET
   response:
-    body: '[{"service_id":"2voeSM5z6889qin6D9waPl","deleted_at":null,"negated":"0","comment":"test
-      entry","subnet":8,"created_at":"2019-07-23T10:47:07Z","ip":"10.0.0.3","updated_at":"2019-07-23T10:47:07Z","acl_id":"1d7GeY6Ky6eeqSsO5c1r29","id":"5z5nqKm0IGS8ovR512rSaT"}]'
+    body: '[{"created_at":"2021-01-14T10:23:48Z","acl_id":"3XA9Zoz75yiYlgnjzDAFmI","comment":"test
+      entry","deleted_at":null,"ip":"10.0.0.3","updated_at":"2021-01-14T10:23:48Z","negated":"0","id":"5Eyk2g71nkTniNmscr6bJs","service_id":"5BEXGVZPrhtk8TJfJJiz5u","subnet":8}]'
     headers:
       Accept-Ranges:
       - bytes
-      Age:
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jul 2019 10:47:07 GMT
+      - Thu, 14 Jan 2021 10:23:49 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,14 +28,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19277-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1563878827.147987,VS0,VE220
+      - S1610619829.690429,VS0,VE466
     status: 200 OK
     code: 200
+    duration: ""

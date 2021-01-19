@@ -6,25 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/1.10.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/103/logging/datadog
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/32/logging/datadog
     method: GET
   response:
-    body: '[{"response_condition":"","version":"103","deleted_at":null,"updated_at":"2020-05-08T09:31:13Z","name":"test-datadog","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","region":"US","format":"format","created_at":"2020-05-08T09:31:13Z","token":"abcd1234","placement":"waf_debug"}]'
+    body: '[{"deleted_at":null,"response_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-01-14T10:40:45Z","version":"32","placement":"waf_debug","token":"abcd1234","name":"test-datadog","created_at":"2021-01-14T10:40:45Z","region":"US","format":"format","format_version":"2"}]'
     headers:
       Accept-Ranges:
       - bytes
-      - bytes
-      - bytes
-      Age:
-      - "0"
-      - "0"
       Cache-Control:
       - no-cache
       Content-Type:
       - application/json
       Date:
-      - Fri, 08 May 2020 09:31:13 GMT
+      - Thu, 14 Jan 2021 10:40:46 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -32,16 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-pao17446-PAO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
       X-Timer:
-      - S1588930274.621863,VS0,VE197
+      - S1610620846.049596,VS0,VE184
     status: 200 OK
     code: 200
     duration: ""

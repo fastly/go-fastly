@@ -1,16 +1,13 @@
 ---
 version: 1
-rwmutex: {}
 interactions:
 - request:
     body: ""
     form: {}
     headers:
-      Fastly-Key:
-      - xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
       User-Agent:
-      - FastlyGo/1.1.0 (+github.com/fastly/go-fastly; go1.12.1)
-    url: https://api.fastly.com/service/5RZUouxF6dQkKd6RQSla8P/version/2/acl/test_acl_BatchModifyAclEntries_Update
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/service/0Akek5AFpJCUDYry2Hkju2/version/2/acl/test_acl_BatchModifyAclEntries_Update
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -22,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 23 Jul 2019 09:38:01 GMT
+      - Thu, 14 Jan 2021 10:23:46 GMT
       Fastly-Ratelimit-Remaining:
-      - "965"
+      - "981"
       Fastly-Ratelimit-Reset:
-      - "1563876000"
+      - "1610622000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,14 +31,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19226-LCY
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1563874681.843056,VS0,VE433
+      - S1610619827.544100,VS0,VE297
     status: 200 OK
     code: 200
+    duration: ""
