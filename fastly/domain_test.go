@@ -92,7 +92,7 @@ func TestClient_Domains(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "integ-test.go-fastly.com",
-			NewName:        String("new-integ-test.go-fastly.com"),
+			NewName:        "new-integ-test.go-fastly.com",
 		})
 	})
 	if err != nil {
@@ -201,15 +201,6 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		Name:           "",
 	})
 	if err != ErrMissingName {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "bar",
-	})
-	if err != ErrMissingOptionalNameComment {
 		t.Errorf("bad error: %s", err)
 	}
 }
