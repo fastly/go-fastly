@@ -99,6 +99,10 @@ var ErrMissingEventID = NewFieldError("EventID")
 // requires a "From" key, but one was not set.
 var ErrMissingFrom = NewFieldError("From")
 
+// ErrMissingTokenID is an error that is returned when an input struct requires a
+// "TokenID" key, but one was not set.
+var ErrMissingTokenID = errors.New("missing required field 'TokenID'")
+
 // ErrMissingID is an error that is returned when an input struct
 // requires a "ID" key, but one was not set.
 var ErrMissingID = NewFieldError("ID")
