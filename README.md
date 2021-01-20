@@ -186,6 +186,26 @@ When adding or updating client code and integration tests, contributors should r
 make fix-fixtures FASTLY_TEST_SERVICE_ID="..."
 ```
 
+### Important Test Tips!
+
+There are two important things external contributors need to do when running the tests:
+
+1. Use a 'temporary' token for running the tests (only if regenerating the token fixtures).
+2. Redact sensitive information in your fixtures.
+
+You only need to use a temporary token when regenerating the 'token' fixtures. This is because there is a test to validate the _revoking_ of a token using the [`/tokens/self`](https://developer.fastly.com/reference/api/auth/#revoke-token-current) API endpoint, for which running this test (if there are no existing fixtures) will cause the token you provided at your command-line shell to be revoked/expired. So please don't use a token that's also used by a real/running application! Otherwise you'll discover those application may stop working as you've inadvertently caused your token to be revoked.
+
+In general, any time you regenerate fixtures you should be sure to redact any sensitive information served back from the API, but specifically there is a test which _creates_ tokens that needs special attention: when regenerating the token fixtures this will require you to enter your actual account credentials (i.e. username/password) into the `token_test.go` file. You'll want to ensure that once the fixtures are create that you redact those values from both the generated fixture as well as the go test file itself. For example...
+
+```go
+input := &CreateTokenInput{
+	Name:     "my-test-token",
+	Scope:    "global",
+	Username: "XXXXXXXXXXXXXXXXXXXXXX",
+	Password: "XXXXXXXXXXXXXXXXXXXXXX",
+}
+```
+
 ## Contributing
 
 Refer to [CONTRIBUTING.md](./CONTRIBUTING.md)
