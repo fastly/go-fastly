@@ -108,13 +108,6 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	}
 
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
-		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-	})
-	if err != ErrMissingName {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		Name: "My certificate",
 	})
 	if err != ErrMissingCertBlob {
@@ -200,14 +193,6 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		Name: "My certificate",
 	})
 	if err != ErrMissingCertBlob {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
-		ID:       "CERTIFICATE_ID",
-		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

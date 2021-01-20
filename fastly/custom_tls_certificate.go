@@ -124,16 +124,13 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 type CreateCustomTLSCertificateInput struct {
 	ID       string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	CertBlob string `jsonapi:"attr,cert_blob"`
-	Name     string `jsonapi:"attr,name"`
+	Name     string `jsonapi:"attr,name,omitempty"`
 }
 
 // CreateCustomTLSCertificate creates a custom TLS certificate.
 func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
-	}
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	p := "/tls/certificates"
@@ -155,7 +152,7 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 type UpdateCustomTLSCertificateInput struct {
 	ID       string `jsonapi:"primary,tls_certificate"`
 	CertBlob string `jsonapi:"attr,cert_blob"`
-	Name     string `jsonapi:"attr,name"`
+	Name     string `jsonapi:"attr,name,omitempty"`
 }
 
 // UpdateCustomTLSCertificate replace a certificate with a newly reissued certificate.
@@ -169,10 +166,6 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/tls/certificates/%s", i.ID)
