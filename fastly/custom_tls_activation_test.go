@@ -126,14 +126,6 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 	}
 
 	_, err = testClient.CreateTLSActivation(&CreateTLSActivationInput{
-		Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
-		Domain:      &TLSDomain{ID: "DOMAIN_NAME"},
-	})
-	if err != ErrMissingTLSConfiguration {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateTLSActivation(&CreateTLSActivationInput{
 		Certificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 		Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 	})
