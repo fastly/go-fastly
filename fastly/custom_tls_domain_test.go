@@ -12,7 +12,7 @@ func TestClient_ListTLSDomains(t *testing.T) {
 	var err error
 
 	// List
-	var ldom []*CustomTLSDomain
+	var ldom []*TLSDomain
 	record(t, fixtureBase+"list", func(c *Client) {
 		ldom, err = c.ListTLSDomains(&ListTLSDomainsInput{
 			PageSize: 10,
