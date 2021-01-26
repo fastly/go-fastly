@@ -12,14 +12,22 @@ type TLSSubscription struct {
 	ID string `jsonapi:"primary,tls_subscription"`
 }
 
+// ListTLSDomainsInput is used as input to Client.ListTLSDomains.
 type ListTLSDomainsInput struct {
-	FilterInUse             *bool
-	FilterTLSCertificateID  string
+	// Limit the returned domains to those currently using Fastly to terminate TLS with SNI (that is, domains considered "in use")
+	FilterInUse *bool
+	// Limit the returned domains to those listed in the given TLS certificate's SAN list
+	FilterTLSCertificateID string
+	// Limit the returned domains to those for a given TLS subscription
 	FilterTLSSubscriptionID string
-	Include                 string
-	PageNumber              int
-	PageSize                int
-	Sort                    string
+	// Include related objects. Optional, comma-separated values
+	Include string
+	// Current page
+	PageNumber int
+	// Number of records per page
+	PageSize int
+	// The order in which to list the results by creation date
+	Sort string
 }
 
 func (l *ListTLSDomainsInput) formatFilters() map[string]string {
@@ -54,6 +62,7 @@ func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 	return result
 }
 
+// ListTLSDomains retrieves a page of TLS domains.
 func (c *Client) ListTLSDomains(i *ListTLSDomainsInput) ([]*TLSDomain, error) {
 	p := "/tls/domains"
 	filters := &RequestOptions{
