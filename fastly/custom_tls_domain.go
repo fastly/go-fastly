@@ -8,10 +8,6 @@ import (
 	"github.com/google/jsonapi"
 )
 
-type TLSSubscription struct {
-	ID string `jsonapi:"primary,tls_subscription"`
-}
-
 // ListTLSDomainsInput is used as input to Client.ListTLSDomains.
 type ListTLSDomainsInput struct {
 	// Limit the returned domains to those currently using Fastly to terminate TLS with SNI (that is, domains considered "in use")

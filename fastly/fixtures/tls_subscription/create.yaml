@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":{"type":"tls_subscription","relationships":{"tls_domain":{"data":[{"type":"tls_domain"}]}}},"included":[{"type":"tls_domain","attributes":{"type":""}}]}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.6)
+    url: https://api.fastly.com/tls/subscriptions
+    method: POST
+  response:
+    body: '{"data":{"id":"SUBSCRIPTION_ID","type":"tls_subscription","attributes":{"certificate_authority":"lets-encrypt","created_at":"2021-01-25T17:11:41.000Z","state":"pending","updated_at":"2021-01-25T17:11:41.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"AUTHORIZATION_ID","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"DOMAIN_NAME","type":"tls_domain"}]},"common_name":{"data":{"id":"DOMAIN_NAME","type":"tls_domain"}},"tls_configuration":{"data":{"id":"CONFIGURATION_ID","type":"tls_configuration"}}}},"included":[{"id":"AUTHORIZATION_ID","type":"tls_authorization","attributes":{"challenges":[{"type":"managed-dns","record_type":"CNAME","record_name":"CNAME_CHALLENGE_DOMAIN_NAME","values":["CNAME_CHALLENGE_DOMAIN_NAME_TARGET"]},{"type":"managed-http-cname","record_type":"CNAME","record_name":"DOMAIN_NAME","values":["j.sni.global.fastly.net"]},{"type":"managed-http-a","record_type":"A","record_name":"DOMAIN_NAME","values":["151.101.2.132","151.101.66.132","151.101.130.132","151.101.194.132"]}],"created_at":"2021-01-25T17:11:41.000Z","state":"pending","updated_at":"2021-01-25T17:11:41.000Z","warnings":null},"relationships":{"tls_domain":{"data":{"id":"DOMAIN_NAME","type":"tls_domain"}}}}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "1322"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Mon, 25 Jan 2021 17:11:41 GMT
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19271-LCY
+      X-Timer:
+      - S1611594701.776296,VS0,VE800
+    status: 201 Created
+    code: 201
+    duration: ""

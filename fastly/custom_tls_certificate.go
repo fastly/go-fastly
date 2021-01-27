@@ -25,7 +25,7 @@ type CustomTLSCertificate struct {
 	UpdatedAt          *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
 
-// ListCustomTLSCertificatesInput is used as input to the ListCustomTLSCertificatesInput function.
+// ListCustomTLSCertificatesInput is used as input to the Client.ListCustomTLSCertificates function.
 type ListCustomTLSCertificatesInput struct {
 	FilterNotAfter     string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
 	FilterTLSDomainsID string // Limit the returned certificates to those that include the specific domain.
