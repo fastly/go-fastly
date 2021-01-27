@@ -11,13 +11,30 @@ import (
 
 // TLSSubscription represents a managed TLS certificate
 type TLSSubscription struct {
-	ID                   string            `jsonapi:"primary,tls_subscription"`
-	CertificateAuthority string            `jsonapi:"attr,certificate_authority"`
-	State                string            `jsonapi:"attr,state"`
-	CreatedAt            *time.Time        `jsonapi:"attr,created_at,iso8601"`
-	UpdatedAt            *time.Time        `jsonapi:"attr,updated_at,iso8601"`
-	Configuration        *TLSConfiguration `jsonapi:"relation,tls_configuration"`
-	TLSDomains           []*TLSDomain      `jsonapi:"relation,tls_domains"`
+	ID                   string               `jsonapi:"primary,tls_subscription"`
+	CertificateAuthority string               `jsonapi:"attr,certificate_authority"`
+	State                string               `jsonapi:"attr,state"`
+	CreatedAt            *time.Time           `jsonapi:"attr,created_at,iso8601"`
+	UpdatedAt            *time.Time           `jsonapi:"attr,updated_at,iso8601"`
+	Configuration        *TLSConfiguration    `jsonapi:"relation,tls_configuration"`
+	TLSDomains           []*TLSDomain         `jsonapi:"relation,tls_domains"`
+	Authorizations       []*TLSAuthorizations `jsonapi:"relation,tls_authorizations"`
+}
+
+type TLSAuthorizations struct {
+	ID string `jsonapi:"primary,tls_authorization"`
+	// Nested structs only work with values, not pointers. See https://github.com/google/jsonapi/pull/99
+	Challenges []TLSChallenge `jsonapi:"attr,challenges"`
+	CreatedAt  *time.Time     `jsonapi:"attr,created_at,iso8601,omitempty"`
+	UpdatedAt  *time.Time     `jsonapi:"attr,updated_at,iso8601,omitempty"`
+	State      string         `jsonapi:"attr,state,omitempty"`
+}
+
+type TLSChallenge struct {
+	Type       string   `jsonapi:"attr,type"`
+	RecordType string   `jsonapi:"attr,record_type"`
+	RecordName string   `jsonapi:"attr,record_name"`
+	Values     []string `jsonapi:"attr,values"`
 }
 
 // ListTLSSubscriptionsInput is used as input to the ListTLSSubscriptions function
@@ -67,6 +84,9 @@ func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubscription, error) {
 	response, err := c.Get("/tls/subscriptions", &RequestOptions{
 		Params: i.formatFilters(),
+		Headers: map[string]string{
+			"Accept": "application/vnd.api+json", // Needed for "include" but seemingly not the other fields
+		},
 	})
 	if err != nil {
 		return nil, err
