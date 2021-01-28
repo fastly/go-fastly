@@ -27,6 +27,7 @@ type BlobStorage struct {
 	MessageType       string     `mapstructure:"message_type"`
 	Placement         string     `mapstructure:"placement"`
 	ResponseCondition string     `mapstructure:"response_condition"`
+	FileMaxBytes      uint       `mapstructure:"file_max_bytes"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -98,6 +99,7 @@ type CreateBlobStorageInput struct {
 	MessageType       string `form:"message_type,omitempty"`
 	Placement         string `form:"placement,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
+	FileMaxBytes      uint   `form:"file_max_bytes,omitempty"`
 }
 
 // CreateBlobStorage creates a new Fastly blob storage.
@@ -188,6 +190,7 @@ type UpdateBlobStorageInput struct {
 	MessageType       *string `form:"message_type,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
+	FileMaxBytes      *uint   `form:"file_max_bytes,omitempty"`
 }
 
 // UpdateBlobStorage updates a specific blob storage.

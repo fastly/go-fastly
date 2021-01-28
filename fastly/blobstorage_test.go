@@ -4,6 +4,10 @@ import (
 	"testing"
 )
 
+const (
+	MiB = 1048576
+)
+
 func TestClient_BlobStorages(t *testing.T) {
 	t.Parallel()
 
@@ -32,6 +36,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			FormatVersion:    2,
 			MessageType:      "classic",
 			Placement:        "waf_debug",
+			FileMaxBytes:     MiB,
 		})
 	})
 	if err != nil {
@@ -55,6 +60,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			FormatVersion:   2,
 			MessageType:     "classic",
 			Placement:       "waf_debug",
+			FileMaxBytes:    10 * MiB,
 		})
 	})
 	if err != nil {
@@ -155,6 +161,9 @@ func TestClient_BlobStorages(t *testing.T) {
 	if bsCreateResp1.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", bsCreateResp1.Placement)
 	}
+	if bsCreateResp1.FileMaxBytes != MiB {
+		t.Errorf("bad file_max_bytes: %q", bsCreateResp1.FileMaxBytes)
+	}
 
 	if bsCreateResp2.CompressionCodec != "" {
 		t.Errorf("bad compression_codec: %q", bsCreateResp2.CompressionCodec)
@@ -162,12 +171,18 @@ func TestClient_BlobStorages(t *testing.T) {
 	if bsCreateResp2.GzipLevel != 8 {
 		t.Errorf("bad gzip_level: %q", bsCreateResp2.GzipLevel)
 	}
+	if bsCreateResp2.FileMaxBytes != 10*MiB {
+		t.Errorf("bad file_max_bytes: %q", bsCreateResp2.FileMaxBytes)
+	}
 
 	if bsCreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", bsCreateResp3.CompressionCodec)
 	}
 	if bsCreateResp3.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", bsCreateResp3.GzipLevel)
+	}
+	if bsCreateResp3.FileMaxBytes != 0 {
+		t.Errorf("bad file_max_bytes: %q", bsCreateResp3.FileMaxBytes)
 	}
 
 	// List
@@ -249,6 +264,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			Name:             "test-blobstorage",
 			NewName:          String("new-test-blobstorage"),
 			CompressionCodec: String("zstd"),
+			FileMaxBytes:     Uint(5 * MiB),
 		})
 	})
 	if err != nil {
@@ -288,6 +304,9 @@ func TestClient_BlobStorages(t *testing.T) {
 	}
 	if bsUpdateResp1.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", bsUpdateResp1.CompressionCodec)
+	}
+	if bsUpdateResp1.FileMaxBytes != 5*MiB {
+		t.Errorf("bad file_max_bytes: %q", bsUpdateResp1.FileMaxBytes)
 	}
 
 	if bsUpdateResp2.CompressionCodec != "zstd" {
