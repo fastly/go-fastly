@@ -4,6 +4,10 @@ import (
 	"testing"
 )
 
+const (
+	MiB = 10485760
+)
+
 func TestClient_BlobStorages(t *testing.T) {
 	t.Parallel()
 
@@ -32,7 +36,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			FormatVersion:    2,
 			MessageType:      "classic",
 			Placement:        "waf_debug",
-			FileMaxBytes:     1 << 20,
+			FileMaxBytes:     MiB,
 		})
 	})
 	if err != nil {
@@ -56,7 +60,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			FormatVersion:   2,
 			MessageType:     "classic",
 			Placement:       "waf_debug",
-			FileMaxBytes:    10 << 20,
+			FileMaxBytes:    10 * MiB,
 		})
 	})
 	if err != nil {
