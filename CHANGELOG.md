@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.1.0](https://github.com/fastly/go-fastly/releases/tag/v3.1.0) (2021-01-28)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.0.0...v3.1.0)
+
+**Enhancements:**
+
+- Add support for file\_max\_bytes configuration for azure logging endpoint [\#255](https://github.com/fastly/go-fastly/pull/255)
+
 ## [v3.0.0](https://github.com/fastly/go-fastly/releases/tag/v3.0.0) (2021-01-19)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v2.1.0...v3.0.0)
