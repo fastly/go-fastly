@@ -132,6 +132,7 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 type CreateBulkCertificateInput struct {
 	CertBlob          string              `jsonapi:"attr,cert_blob"`
 	IntermediatesBlob string              `jsonapi:"attr,intermediates_blob"`
+	AllowUntrusted    bool                `jsonapi:"attr,allow_untrusted_root,omitempty"`
 	Configurations    []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
 }
 
@@ -164,7 +165,8 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 type UpdateBulkCertificateInput struct {
 	ID                string `jsonapi:"attr,id"`
 	CertBlob          string `jsonapi:"attr,cert_blob"`
-	IntermediatesBlob string `jsonapi:"attr,intermediates_blob"`
+	IntermediatesBlob string `jsonapi:"attr,intermediates_blob,omitempty"`
+	AllowUntrusted    bool   `jsonapi:"attr,allow_untrusted_root"`
 }
 
 // UpdateBulkCertificate replace a certificate with a newly reissued certificate.
