@@ -27,6 +27,7 @@ type Cloudfiles struct {
 	MessageType       string     `mapstructure:"message_type"`
 	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	PublicKey         string     `mapstructure:"public_key"`
+	CompressionCodec  string     `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -98,6 +99,7 @@ type CreateCloudfilesInput struct {
 	MessageType       string `form:"message_type,omitempty"`
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
 	PublicKey         string `form:"public_key,omitempty"`
+	CompressionCodec  string `form:"compression_codec,omitempty"`
 }
 
 // CreateCloudfiles creates a new Fastly Cloudfiles.
@@ -188,6 +190,7 @@ type UpdateCloudfilesInput struct {
 	MessageType       *string `form:"message_type,omitempty"`
 	TimestampFormat   *string `form:"timestamp_format,omitempty"`
 	PublicKey         *string `form:"public_key,omitempty"`
+	CompressionCodec  *string `form:"compression_codec,omitempty"`
 }
 
 // UpdateCloudfiles updates a specific Cloudfiles.

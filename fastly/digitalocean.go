@@ -27,6 +27,7 @@ type DigitalOcean struct {
 	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	Placement         string     `mapstructure:"placement"`
 	PublicKey         string     `mapstructure:"public_key"`
+	CompressionCodec  string     `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -98,6 +99,7 @@ type CreateDigitalOceanInput struct {
 	TimestampFormat   string `form:"timestamp_format,omitempty"`
 	Placement         string `form:"placement,omitempty"`
 	PublicKey         string `form:"public_key,omitempty"`
+	CompressionCodec  string `form:"compression_codec,omitempty"`
 }
 
 // CreateDigitalOcean creates a new Fastly DigitalOcean.
@@ -188,6 +190,7 @@ type UpdateDigitalOceanInput struct {
 	TimestampFormat   *string `form:"timestamp_format,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
 	PublicKey         *string `form:"public_key,omitempty"`
+	CompressionCodec  *string `form:"compression_codec,omitempty"`
 }
 
 // UpdateDigitalOcean updates a specific DigitalOcean.
