@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.2.0](https://github.com/fastly/go-fastly/releases/tag/v3.2.0) (2021-02-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.1.0...v3.2.0)
+
+**Enhancements:**
+
+- Add more support for compression\_codec to logging endpoints [\#257](https://github.com/fastly/go-fastly/pull/257)
+
 ## [v3.1.0](https://github.com/fastly/go-fastly/releases/tag/v3.1.0) (2021-01-28)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.0.0...v3.1.0)
