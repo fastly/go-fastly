@@ -20,7 +20,7 @@ type CustomTLSCertificate struct {
 	Replace            bool         `jsonapi:"attr,replace"`
 	SerialNumber       string       `jsonapi:"attr,serial_number"`
 	SignatureAlgorithm string       `jsonapi:"attr,signature_algorithm"`
-	TLSDomains         []*TLSDomain `jsonapi:"relation,tls_domains"`
+	Domains            []*TLSDomain `jsonapi:"relation,tls_domains"`
 	CreatedAt          *time.Time   `jsonapi:"attr,created_at,iso8601"`
 	UpdatedAt          *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }

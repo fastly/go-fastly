@@ -29,11 +29,11 @@ type TLSConfiguration struct {
 
 // TLSDomain represents a domain (including wildcard domains) that is listed on a certificate's Subject Alternative Names (SAN) list.
 type TLSDomain struct {
-	ID               string                  `jsonapi:"primary,tls_domain"`
-	Type             string                  `jsonapi:"attr,type"`
-	TLSActivations   []*TLSActivation        `jsonapi:"relation,tls_activations,omitempty"`
-	TLSCertificates  []*CustomTLSCertificate `jsonapi:"relation,tls_certificates,omitempty"`
-	TLSSubscriptions []*TLSSubscription      `jsonapi:"relation,tls_subscriptions,omitempty"`
+	ID            string                  `jsonapi:"primary,tls_domain"`
+	Type          string                  `jsonapi:"attr,type"`
+	Activations   []*TLSActivation        `jsonapi:"relation,tls_activations,omitempty"`
+	Certificates  []*CustomTLSCertificate `jsonapi:"relation,tls_certificates,omitempty"`
+	Subscriptions []*TLSSubscription      `jsonapi:"relation,tls_subscriptions,omitempty"`
 }
 
 // ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
