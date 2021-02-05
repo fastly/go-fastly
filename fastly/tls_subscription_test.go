@@ -12,7 +12,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	var subscription *TLSSubscription
 	record(t, fixtureBase+"create", func(c *Client) {
 		subscription, err = c.CreateTLSSubscription(&CreateTLSSubscriptionInput{
-			Domain: []*TLSDomain{
+			Domains: []*TLSDomain{
 				{ID: "DOMAIN_NAME"},
 			},
 		})
@@ -41,14 +41,17 @@ func TestClient_TLSSubscription(t *testing.T) {
 	if len(listSubscriptions) < 1 {
 		t.Errorf("bad TLS subscriptions: %v", listSubscriptions)
 	}
-	if listSubscriptions[0].TLSDomains == nil {
+	if listSubscriptions[0].Domains == nil {
 		t.Errorf("TLS Domains relation should not be nil: %v", listSubscriptions)
 	}
-	if len(listSubscriptions[0].TLSDomains) < 1 {
+	if len(listSubscriptions[0].Domains) < 1 {
 		t.Errorf("TLS Domains list should not be empty: %v", listSubscriptions)
 	}
-	if listSubscriptions[0].TLSDomains[0].ID != subscription.TLSDomains[0].ID {
-		t.Errorf("bad Domain ID: %s (%s)", listSubscriptions[0].TLSDomains[0].ID, subscription.TLSDomains[0].ID)
+	if listSubscriptions[0].Domains[0].ID != subscription.Domains[0].ID {
+		t.Errorf("bad Domain ID: %s (%s)", listSubscriptions[0].Domains[0].ID, subscription.Domains[0].ID)
+	}
+	if listSubscriptions[0].CommonName.ID != subscription.Domains[0].ID {
+		t.Errorf("bad CommonName: %s (%s)", listSubscriptions[0].CommonName.ID, subscription.Domains[0].ID)
 	}
 
 	var retrievedSubscription *TLSSubscription
@@ -96,9 +99,10 @@ func TestClient_CreateTLSSubscription_validation(t *testing.T) {
 	var err error
 	record(t, fixtureBase+"create", func(c *Client) {
 		_, err = c.CreateTLSSubscription(&CreateTLSSubscriptionInput{
-			Domain: []*TLSDomain{
+			Domains: []*TLSDomain{
 				{ID: "DOMAIN_NAME"},
 			},
+			CommonName: &TLSDomain{ID: "DOMAIN_NAME"},
 		})
 	})
 	if err != nil {
@@ -107,6 +111,17 @@ func TestClient_CreateTLSSubscription_validation(t *testing.T) {
 
 	_, err = testClient.CreateTLSSubscription(&CreateTLSSubscriptionInput{})
 	if err != ErrMissingTLSDomain {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateTLSSubscription(&CreateTLSSubscriptionInput{
+		Domains: []*TLSDomain{
+			{ID: "DN1"},
+			{ID: "DN2"},
+		},
+		CommonName: &TLSDomain{ID: "DN3"},
+	})
+	if err != ErrCommonNameNotInDomains {
 		t.Errorf("bad error: %s", err)
 	}
 }

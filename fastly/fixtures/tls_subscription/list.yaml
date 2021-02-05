@@ -8,20 +8,20 @@ interactions:
       Accept:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.6)
+      - FastlyGo/3.1.0 (+github.com/fastly/go-fastly; go1.15.6)
     url: https://api.fastly.com/tls/subscriptions
     method: GET
   response:
-    body: '{"data":[{"id":"SUBSCRIPTION_ID","type":"tls_subscription","attributes":{"certificate_authority":"lets-encrypt","created_at":"2021-01-25T15:38:20.000Z","state":"pending","updated_at":"2021-01-25T15:38:20.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"AUTHORIZATION_ID","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"DOMAIN_NAME","type":"tls_domain"}]},"common_name":{"data":{"id":"DOMAIN_NAME","type":"tls_domain"}},"tls_configuration":{"data":{"id":"CONFIGURATION_ID","type":"tls_configuration"}}}}],"links":{"self":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","first":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","prev":null,"next":null,"last":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100"},"meta":{"per_page":100,"current_page":1,"record_count":1,"total_pages":1}}'
+    body: '{"data":[{"id":"SUBSCRIPTION_ID","type":"tls_subscription","attributes":{"certificate_authority":"lets-encrypt","created_at":"2021-02-05T14:57:16.000Z","state":"pending","updated_at":"2021-02-05T14:57:16.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"AUTHORIZATION_ID","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"DOMAIN_NAME","type":"tls_domain"}]},"common_name":{"data":{"id":"DOMAIN_NAME","type":"tls_domain"}},"tls_configuration":{"data":{"id":"i8FkSYJPKTdhZ9CdBWWzzA","type":"tls_configuration"}}}}],"links":{"self":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","first":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","prev":null,"next":null,"last":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100"},"meta":{"per_page":100,"current_page":1,"record_count":1,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Content-Length:
-      - "978"
+      - "1018"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 25 Jan 2021 15:38:49 GMT
+      - Fri, 05 Feb 2021 15:12:10 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +35,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lcy19238-LCY
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19249-LCY
       X-Timer:
-      - S1611589129.570647,VS0,VE431
+      - S1612537930.801978,VS0,VE754
     status: 200 OK
     code: 200
     duration: ""
