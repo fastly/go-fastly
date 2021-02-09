@@ -67,6 +67,25 @@ func TestClient_TLSSubscription(t *testing.T) {
 		t.Errorf("bad ID: %s (%s)", subscription.ID, retrievedSubscription.ID)
 	}
 
+	newDomain := "DOMAIN_NAME2"
+	var updatedSubscription *TLSSubscription
+	record(t, fixtureBase+"update", func(c *Client) {
+		updatedSubscription, err = c.UpdateTLSSubscription(&UpdateTLSSubscriptionInput{
+			ID: "SUBSCRIPTION_ID",
+			Domains: []*TLSDomain{
+				{ID: "DOMAIN_NAME"},
+				{ID: newDomain},
+			},
+			CommonName: &TLSDomain{ID: newDomain},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if updatedSubscription.CommonName.ID != newDomain {
+		t.Errorf("bad CommonName %s (%s)", updatedSubscription.CommonName.ID, newDomain)
+	}
+
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteTLSSubscription(&DeleteTLSSubscriptionInput{
 			ID: subscription.ID,
@@ -140,6 +159,18 @@ func TestClient_GetTLSSubscription_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetTLSSubscription(&GetTLSSubscriptionInput{})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_UpdateTLSSubscription_validation(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	record(t, fixtureBase+"update", func(c *Client) {
+		_, err = c.UpdateTLSSubscription(&UpdateTLSSubscriptionInput{})
+	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
