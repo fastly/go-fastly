@@ -16,7 +16,7 @@ type ListTLSDomainsInput struct {
 	FilterTLSCertificateID string
 	// Limit the returned domains to those for a given TLS subscription
 	FilterTLSSubscriptionID string
-	// Include related objects. Optional, comma-separated values
+	// Include related objects
 	Include string
 	// Current page
 	PageNumber int
@@ -26,6 +26,7 @@ type ListTLSDomainsInput struct {
 	Sort string
 }
 
+// formatFilters converts user input into query parameters for filtering.
 func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{

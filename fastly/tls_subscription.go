@@ -116,6 +116,7 @@ func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubsc
 	return subscriptions, nil
 }
 
+// CreateTLSSubscriptionInput is used as input to the CreateTLSSubscription function
 type CreateTLSSubscriptionInput struct {
 	// ID value is ignored and should not be set, needed to make JSONAPI work correctly.
 	ID string `jsonapi:"primary,tls_subscription"`
@@ -151,6 +152,8 @@ func (c *Client) CreateTLSSubscription(i *CreateTLSSubscriptionInput) (*TLSSubsc
 	return &subscription, nil
 }
 
+// domainInSlice takes a slice of TLSDomain structs, and another TLSDomain struct to search for, returning true if any
+// of the ID fields in the slice match
 func domainInSlice(haystack []*TLSDomain, needle *TLSDomain) bool {
 	for _, s := range haystack {
 		if s.ID == needle.ID {
@@ -161,6 +164,7 @@ func domainInSlice(haystack []*TLSDomain, needle *TLSDomain) bool {
 	return false
 }
 
+// GetTLSSubscriptionInput is used as input to the GetTLSSubscription function
 type GetTLSSubscriptionInput struct {
 	// ID of the TLS subscription to fetch.
 	ID string
@@ -199,6 +203,7 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 	return &subscription, err
 }
 
+// DeleteTLSSubscriptionInput is used as input to the DeleteTLSSubscription function
 type DeleteTLSSubscriptionInput struct {
 	// ID of the TLS subscription to delete.
 	ID string
