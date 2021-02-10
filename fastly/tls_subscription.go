@@ -202,6 +202,8 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 type DeleteTLSSubscriptionInput struct {
 	// ID of the TLS subscription to delete.
 	ID string
+	// Force the subscription to be deleted, even if domains are active. Warning: can disable production traffic.
+	Force bool
 }
 
 func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
@@ -209,7 +211,14 @@ func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
 		return ErrMissingID
 	}
 
+	var ro RequestOptions
+	if i.Force {
+		ro.Params = map[string]string{
+			"force": "true",
+		}
+	}
+
 	path := fmt.Sprintf("/tls/subscriptions/%s", i.ID)
-	_, err := c.Delete(path, nil)
+	_, err := c.Delete(path, &ro)
 	return err
 }
