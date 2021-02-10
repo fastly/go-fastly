@@ -215,6 +215,8 @@ type UpdateTLSSubscriptionInput struct {
 	CommonName *TLSDomain `jsonapi:"relation,common_name,omitempty"`
 	// Domains list to enable TLS for. Only the ID fields of each one need to be set.
 	Domains []*TLSDomain `jsonapi:"relation,tls_domain,omitempty"`
+	// Force the update to be applied, even if domains are active. Warning: can disable production traffic.
+	Force bool
 }
 
 func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubscription, error) {
@@ -222,12 +224,15 @@ func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubsc
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/subscriptions/%s", i.ID)
-	response, err := c.PatchJSONAPI(path, i, &RequestOptions{
-		Params: map[string]string{
+	var ro RequestOptions
+	if i.Force {
+		ro.Params = map[string]string{
 			"force": "true",
-		},
-	})
+		}
+	}
+
+	path := fmt.Sprintf("/tls/subscriptions/%s", i.ID)
+	response, err := c.PatchJSONAPI(path, i, &ro)
 	if err != nil {
 		return nil, err
 	}

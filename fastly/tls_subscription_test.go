@@ -77,6 +77,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 				{ID: newDomain},
 			},
 			CommonName: &TLSDomain{ID: newDomain},
+			Force:      true,
 		})
 	})
 	if err != nil {
