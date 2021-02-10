@@ -4,8 +4,6 @@ github.com/ajg/form v0.0.0-20160802194845-cc2954064ec9 h1:fJ4XPqxuZfm11zauw9XX7c
 github.com/ajg/form v0.0.0-20160802194845-cc2954064ec9/go.mod h1:uL1WgH+h2mgNtvBq0339dVnzXdBETtL2LeUXaIv25UY=
 github.com/dnaeon/go-vcr v1.0.1 h1:r8L/HqC0Hje5AXMu1ooW8oyQyOFv4GxqpL0nRP7SLLY=
 github.com/dnaeon/go-vcr v1.0.1/go.mod h1:aBB1+wY4s93YsC3HHjMBMrwTj2R9FHDzUr9KyGc8n1E=
-github.com/google/jsonapi v0.0.0-20170708005851-46d3ced04344 h1:G5TmuUtIYeR0scfa8ZQ06cfHeAAfVeFlIG8TVOCfuAA=
-github.com/google/jsonapi v0.0.0-20170708005851-46d3ced04344/go.mod h1:XSx4m2SziAqk9DXY9nz659easTq4q6TyrpYd9tHSm0g=
 github.com/google/jsonapi v0.0.0-20201022225600-f822737867f6 h1:nVbdADVJLcaOp/CAR9xhaMCZrYn07HFFhUtM+dHsAIc=
 github.com/google/jsonapi v0.0.0-20201022225600-f822737867f6/go.mod h1:XSx4m2SziAqk9DXY9nz659easTq4q6TyrpYd9tHSm0g=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
