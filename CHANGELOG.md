@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.3.0](https://github.com/fastly/go-fastly/releases/tag/v3.3.0) (2021-02-15)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.2.0...v3.3.0)
+
+**Enhancements:**
+
+- Updates needed to support Terraform TLS resources [\#259](https://github.com/fastly/go-fastly/pull/259)
+
 ## [v3.2.0](https://github.com/fastly/go-fastly/releases/tag/v3.2.0) (2021-02-04)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.1.0...v3.2.0)
