@@ -27,6 +27,7 @@ type TLSSubscriptionCertificate struct {
 	ID string `jsonapi:"primary,tls_certificate"`
 }
 
+// TLSAuthorizations gives information needed to verify domain ownership in order to enable a TLSSubscription
 type TLSAuthorizations struct {
 	ID string `jsonapi:"primary,tls_authorization"`
 	// Nested structs only work with values, not pointers. See https://github.com/google/jsonapi/pull/99
@@ -36,6 +37,7 @@ type TLSAuthorizations struct {
 	State      string         `jsonapi:"attr,state,omitempty"`
 }
 
+// TLSChallenge represents a DNS record to be added for a specific type of domain ownership challenge
 type TLSChallenge struct {
 	Type       string   `jsonapi:"attr,type"`
 	RecordType string   `jsonapi:"attr,record_type"`
