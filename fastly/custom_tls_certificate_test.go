@@ -56,14 +56,14 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 	if cc.ID != gcc.ID {
 		t.Errorf("bad ID: %q (%q)", cc.ID, gcc.ID)
 	}
-	if gcc.TLSDomains == nil {
-		t.Errorf("TLSDomains should not be nil: %v", cc.TLSDomains)
+	if gcc.Domains == nil {
+		t.Errorf("Domains should not be nil: %v", cc.Domains)
 	}
-	if len(gcc.TLSDomains) < 1 {
-		t.Errorf("TLSDomains should not be an empty slice: %v", cc.TLSDomains)
+	if len(gcc.Domains) < 1 {
+		t.Errorf("Domains should not be an empty slice: %v", cc.Domains)
 	}
-	if cc.TLSDomains[0].ID != gcc.TLSDomains[0].ID {
-		t.Errorf("bad Domain ID: %q (%q)", cc.TLSDomains[0].ID, gcc.TLSDomains[0].ID)
+	if cc.Domains[0].ID != gcc.Domains[0].ID {
+		t.Errorf("bad Domain ID: %q (%q)", cc.Domains[0].ID, gcc.Domains[0].ID)
 	}
 
 	// Update
@@ -105,13 +105,6 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
-	}
-
-	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
-		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-	})
-	if err != ErrMissingName {
-		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
@@ -200,14 +193,6 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		Name: "My certificate",
 	})
 	if err != ErrMissingCertBlob {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
-		ID:       "CERTIFICATE_ID",
-		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

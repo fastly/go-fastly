@@ -179,6 +179,10 @@ var ErrMissingTLSConfiguration = NewFieldError("TLSConfiguration")
 // requires a "TLSDomain" key, but one was not set.
 var ErrMissingTLSDomain = NewFieldError("TLSDomain")
 
+// ErrCommonNameNotInDomains is an error that is returned when an input struct
+// requires that the domain in "CommonName" is also in "Domains"
+var ErrCommonNameNotInDomains = NewFieldError("CommonName").Message("CommonName must be in Domains")
+
 // ErrMissingTo is an error that is returned when an input struct
 // requires a "To" key, but one was not set.
 var ErrMissingTo = NewFieldError("To")

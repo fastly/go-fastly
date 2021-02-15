@@ -3,6 +3,7 @@ package fastly
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -27,9 +28,9 @@ type PrivateKey struct {
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
-	PageNumber  *uint   // The page index for pagination.
-	PageSize    *uint   // The number of keys per page.
-	FilterInUse *string // Limit the returned keys to those without any matching TLS certificates.
+	PageNumber  int    // The page index for pagination.
+	PageSize    int    // The number of keys per page.
+	FilterInUse string // Limit the returned keys to those without any matching TLS certificates.
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -40,9 +41,17 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 		"page[size]":     i.PageSize,
 		"page[number]":   i.PageNumber,
 	}
+
 	for key, value := range pairings {
-		if !reflect.ValueOf(value).IsNil() {
-			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
+		switch t := reflect.TypeOf(value).String(); t {
+		case "string":
+			if value != "" {
+				result[key] = value.(string)
+			}
+		case "int":
+			if value != 0 {
+				result[key] = strconv.Itoa(value.(int))
+			}
 		}
 	}
 	return result

@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/tls/domains?page%5Bsize%5D=10
+    method: GET
+  response:
+    body: '{"data":[{"id":"a-real-tld.example","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"6RltCYkOfFfzPVitOyLCnV","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"along-with.localhost","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"64JrNBzdRRzkefaHXLvg3e","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"also-real.invalid","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"2TMKp6R51PW2VMJKiWW3eO","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"and-this-is-real.test","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"1f44cer2CdblNR2WVgfGnU","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"dummy.test","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"1jBkBddyG0bcMlaLp6i1Ur","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"first.example","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"5tjYkVLnZKc4yscdDQ4lzz","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"hello-world.example","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"4RWSfyNCwPAfUIWqtTKg2N","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"pagination-pad1.test","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"7d34I8GLEja5zVq4gCq294","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"pagination-pad2.test","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"77MQa3kQ1Ke3BodIuEdr3Y","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}},{"id":"pagination-pad3.test","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"7eQZD0jAsebDtWAWphdu3p","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}}],"links":{"self":"https://api.fastly.com/tls/domains?page%5Bnumber%5D=1\u0026page%5Bsize%5D=10","first":"https://api.fastly.com/tls/domains?page%5Bnumber%5D=1\u0026page%5Bsize%5D=10","prev":null,"next":"https://api.fastly.com/tls/domains?page%5Bnumber%5D=2\u0026page%5Bsize%5D=10","last":"https://api.fastly.com/tls/domains?page%5Bnumber%5D=2\u0026page%5Bsize%5D=10"},"meta":{"record_count":12,"current_page":1,"per_page":10,"total_pages":2}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "2599"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Mon, 25 Jan 2021 15:02:43 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19235-LCY
+      X-Timer:
+      - S1611586963.753130,VS0,VE572
+    status: 200 OK
+    code: 200
+    duration: ""

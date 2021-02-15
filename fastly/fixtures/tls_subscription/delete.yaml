@@ -1,0 +1,37 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.6)
+    url: https://api.fastly.com/tls/subscriptions/SUBSCRIPTION_ID
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Mon, 25 Jan 2021 18:00:06 GMT
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19251-LCY
+      X-Timer:
+      - S1611597606.927024,VS0,VE145
+    status: 204 No Content
+    code: 204
+    duration: ""

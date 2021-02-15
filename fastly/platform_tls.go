@@ -3,6 +3,7 @@ package fastly
 import (
 	"fmt"
 	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -28,16 +29,19 @@ type TLSConfiguration struct {
 
 // TLSDomain represents a domain (including wildcard domains) that is listed on a certificate's Subject Alternative Names (SAN) list.
 type TLSDomain struct {
-	ID   string `jsonapi:"primary,tls_domain"`
-	Type string `jsonapi:"attr,type"`
+	ID            string                  `jsonapi:"primary,tls_domain"`
+	Type          string                  `jsonapi:"attr,type"`
+	Activations   []*TLSActivation        `jsonapi:"relation,tls_activations,omitempty"`
+	Certificates  []*CustomTLSCertificate `jsonapi:"relation,tls_certificates,omitempty"`
+	Subscriptions []*TLSSubscription      `jsonapi:"relation,tls_subscriptions,omitempty"`
 }
 
 // ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
 type ListBulkCertificatesInput struct {
-	PageNumber              *uint   // The page index for pagination.
-	PageSize                *uint   // The number of keys per page.
-	FilterTLSDomainsIDMatch *string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
-	Sort                    *string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
+	PageNumber              int    // The page index for pagination.
+	PageSize                int    // The number of keys per page.
+	FilterTLSDomainsIDMatch string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
+	Sort                    string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -50,8 +54,15 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 		"sort":                          i.Sort,
 	}
 	for key, value := range pairings {
-		if !reflect.ValueOf(value).IsNil() {
-			result[key] = fmt.Sprintf("%v", reflect.ValueOf(value).Elem())
+		switch v := value.(type) {
+		case int:
+			if v != 0 {
+				result[key] = strconv.Itoa(v)
+			}
+		case string:
+			if v != "" {
+				result[key] = v
+			}
 		}
 	}
 	return result
@@ -121,6 +132,7 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 type CreateBulkCertificateInput struct {
 	CertBlob          string              `jsonapi:"attr,cert_blob"`
 	IntermediatesBlob string              `jsonapi:"attr,intermediates_blob"`
+	AllowUntrusted    bool                `jsonapi:"attr,allow_untrusted_root,omitempty"`
 	Configurations    []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
 }
 
@@ -153,7 +165,8 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 type UpdateBulkCertificateInput struct {
 	ID                string `jsonapi:"attr,id"`
 	CertBlob          string `jsonapi:"attr,cert_blob"`
-	IntermediatesBlob string `jsonapi:"attr,intermediates_blob"`
+	IntermediatesBlob string `jsonapi:"attr,intermediates_blob,omitempty"`
+	AllowUntrusted    bool   `jsonapi:"attr,allow_untrusted_root"`
 }
 
 // UpdateBulkCertificate replace a certificate with a newly reissued certificate.

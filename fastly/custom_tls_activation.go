@@ -129,7 +129,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 type CreateTLSActivationInput struct {
 	ID            string                `jsonapi:"primary,tls_activation"`   // ID value does not need to be set.
 	Certificate   *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
-	Configuration *TLSConfiguration     `jsonapi:"relation,tls_configuration"`
+	Configuration *TLSConfiguration     `jsonapi:"relation,tls_configuration,omitempty"`
 	Domain        *TLSDomain            `jsonapi:"relation,tls_domain"`
 }
 
@@ -137,9 +137,6 @@ type CreateTLSActivationInput struct {
 func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
 	if i.Certificate == nil {
 		return nil, ErrMissingTLSCertificate
-	}
-	if i.Configuration == nil {
-		return nil, ErrMissingTLSConfiguration
 	}
 	if i.Domain == nil {
 		return nil, ErrMissingTLSDomain
