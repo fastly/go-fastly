@@ -205,7 +205,7 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 	return &subscription, nil
 }
 
-// UpdateTLSSubscriptionInput is used as input to the UpdateTLSSubscription function
+// UpdateTLSSubscriptionInput is used as input to the UpdateTLSSubscription function (Limited Availability)
 type UpdateTLSSubscriptionInput struct {
 	// ID of the subscription to update.
 	ID string `jsonapi:"primary,tls_subscription"`
@@ -219,6 +219,8 @@ type UpdateTLSSubscriptionInput struct {
 	Force bool
 }
 
+// UpdateTLSSubscription updates an existing TLS Subscription (Limited Availability).
+// TLS Subscriptions can only be updated in an "issued" state, and when Force=true.
 func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubscription, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
