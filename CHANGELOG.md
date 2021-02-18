@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.4.0](https://github.com/fastly/go-fastly/releases/tag/v3.4.0) (2021-02-18)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.3.0...v3.4.0)
+
+**Enhancements:**
+
+- Add PATCH endpoint for TLS Subscriptions [\#262](https://github.com/fastly/go-fastly/pull/262)
+
 ## [v3.3.0](https://github.com/fastly/go-fastly/releases/tag/v3.3.0) (2021-02-15)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.2.0...v3.3.0)
