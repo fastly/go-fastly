@@ -66,19 +66,31 @@ if err != nil {
 // You can find the service ID in the Fastly web console.
 var serviceID = "SERVICE_ID"
 
-// Get the latest active version
-latest, err := client.LatestVersion(&fastly.LatestVersionInput{
-  ServiceID: serviceID,
+// We'll get the latest 'active' version by inspecting the service metadata and 
+// then finding which available version is the 'active' version.
+service, err := client.GetService(&fastly.GetServiceInput{
+  ID: serviceID,
 })
 if err != nil {
   log.Fatal(err)
 }
 
-// Clone the latest version so we can make changes without affecting the
-// active configuration.
+// Let's acquire a service version to clone from. We'll start by searching for 
+// the latest 'active' version available, and if there are no active versions, 
+// then we'll clone from whatever is the latest version.
+latest := service.Versions[len(service.Versions)-1]
+for _, version := range service.Versions {
+  if version.Active {
+    latest = version.Number
+    break
+  }
+}
+
+// Clone the latest 'active' version so we can make changes without affecting 
+// the active configuration.
 version, err := client.CloneVersion(&fastly.CloneVersionInput{
   ServiceID:      serviceID,
-  ServiceVersion: latest.Number,
+  ServiceVersion: latest,
 })
 if err != nil {
   log.Fatal(err)
