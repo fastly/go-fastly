@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/backend/test-backend
+      - FastlyGo/3.4.0 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-backend, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 20 }''"}'
+      version =\u003e 2 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:25:53 GMT
+      - Wed, 24 Mar 2021 12:56:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "917"
+      - "4995"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1616590800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4138-MAN
       X-Timer:
-      - S1610619953.007977,VS0,VE193
+      - S1616590612.709425,VS0,VE192
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/backend/new-test-backend
+      - FastlyGo/3.4.0 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/backend/new-test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-backend, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 20 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 2 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:25:53 GMT
+      - Wed, 24 Mar 2021 12:56:52 GMT
       Fastly-Ratelimit-Remaining:
-      - "916"
+      - "4994"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1616590800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4138-MAN
       X-Timer:
-      - S1610619953.247038,VS0,VE184
+      - S1616590612.929691,VS0,VE192
     status: 404 Not Found
     code: 404
     duration: ""

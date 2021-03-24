@@ -133,6 +133,10 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
+	if i.UseSSL && i.Port == 0 {
+		i.Port = 443
+	}
+
 	path := fmt.Sprintf("/service/%s/version/%d/backend", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {

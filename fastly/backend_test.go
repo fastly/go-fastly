@@ -21,9 +21,9 @@ func TestClient_Backends(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-backend",
 			Address:        "integ-test.go-fastly.com",
-			Port:           1234,
 			ConnectTimeout: 1500,
 			OverrideHost:   "origin.example.com",
+			UseSSL:         true,
 		})
 	})
 	if err != nil {
@@ -53,7 +53,7 @@ func TestClient_Backends(t *testing.T) {
 	if b.Address != "integ-test.go-fastly.com" {
 		t.Errorf("bad address: %q", b.Address)
 	}
-	if b.Port != 1234 {
+	if b.Port != 443 {
 		t.Errorf("bad port: %d", b.Port)
 	}
 	if b.ConnectTimeout != 1500 {

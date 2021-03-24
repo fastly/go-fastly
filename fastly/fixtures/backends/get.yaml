@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/backend/test-backend
+      - FastlyGo/3.4.0 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/backend/test-backend
     method: GET
   response:
-    body: '{"name":"test-backend","service_id":"7i6HN3TK9wS159v2gPAZ8A","address":"integ-test.go-fastly.com","ssl_sni_hostname":null,"between_bytes_timeout":10000,"ssl_client_key":null,"weight":100,"min_tls_version":null,"auto_loadbalance":false,"shield":null,"connect_timeout":1500,"comment":"","port":1234,"ipv4":null,"ssl_client_cert":null,"first_byte_timeout":15000,"ssl_ciphers":null,"deleted_at":null,"request_condition":"","max_conn":200,"ssl_cert_hostname":null,"hostname":"integ-test.go-fastly.com","ssl_check_cert":true,"ipv6":null,"use_ssl":false,"ssl_ca_cert":null,"version":20,"updated_at":"2021-01-14T10:25:50Z","override_host":"origin.example.com","created_at":"2021-01-14T10:25:50Z","error_threshold":0,"max_tls_version":null,"healthcheck":null,"ssl_hostname":null,"client_cert":null}'
+    body: '{"ssl_client_key":null,"override_host":"origin.example.com","created_at":"2021-03-24T12:56:50Z","deleted_at":null,"ssl_cert_hostname":null,"use_ssl":true,"service_id":"7i6HN3TK9wS159v2gPAZ8A","request_condition":"","connect_timeout":1500,"ssl_ciphers":null,"error_threshold":0,"ssl_hostname":null,"between_bytes_timeout":10000,"weight":100,"address":"integ-test.go-fastly.com","ssl_check_cert":true,"max_tls_version":null,"ssl_client_cert":null,"name":"test-backend","auto_loadbalance":false,"first_byte_timeout":15000,"hostname":"integ-test.go-fastly.com","ssl_ca_cert":null,"ipv4":null,"ssl_sni_hostname":null,"version":2,"min_tls_version":null,"updated_at":"2021-03-24T12:56:50Z","comment":"","port":443,"client_cert":null,"healthcheck":null,"ipv6":null,"shield":null,"max_conn":200}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:25:51 GMT
+      - Wed, 24 Mar 2021 12:56:51 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4138-MAN
       X-Timer:
-      - S1610619951.458633,VS0,VE468
+      - S1616590611.671194,VS0,VE423
     status: 200 OK
     code: 200
     duration: ""
