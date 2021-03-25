@@ -26,10 +26,13 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, ErrMissingURL
 	}
 
-	ro := new(RequestOptions)
-	ro.Parallel = true
+	ro := &RequestOptions{
+		Parallel: true,
+	}
 	if i.Soft {
-		ro.Headers["Fastly-Soft-Purge"] = "1"
+		ro.Headers = map[string]string{
+			"Fastly-Soft-Purge": "1",
+		}
 	}
 
 	resp, err := c.Post("purge/"+i.URL, ro)
