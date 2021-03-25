@@ -29,6 +29,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 	ro := new(RequestOptions)
 	ro.Parallel = true
 	if i.Soft {
+		ro.Headers = make(map[string]string)
 		ro.Headers["Fastly-Soft-Purge"] = "1"
 	}
 
