@@ -1,5 +1,17 @@
 # Changelog
 
+## [v3.4.1](https://github.com/fastly/go-fastly/releases/tag/v3.4.1) (2021-03-25)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.4.0...v3.4.1)
+
+**Bug fixes:**
+
+- Initialise Headers map to avoid runtime panic when purging. [\#267](https://github.com/fastly/go-fastly/pull/267)
+
+**Closed issues:**
+
+- Potentially misleading comment in README.md [\#260](https://github.com/fastly/go-fastly/issues/260)
+
 ## [v3.4.0](https://github.com/fastly/go-fastly/releases/tag/v3.4.0) (2021-02-18)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.3.0...v3.4.0)
@@ -44,6 +56,7 @@
 - Add region support to logentries logging endpoint [\#243](https://github.com/fastly/go-fastly/pull/243)
 - Add basic managed logging endpoint support to go-fastly [\#241](https://github.com/fastly/go-fastly/pull/241)
 - Create new error abstraction for field validation [\#239](https://github.com/fastly/go-fastly/pull/239)
+- v2 [\#230](https://github.com/fastly/go-fastly/pull/230)
 
 **Bug fixes:**
 
@@ -77,10 +90,6 @@
 ## [v2.0.0](https://github.com/fastly/go-fastly/releases/tag/v2.0.0) (2020-11-17)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.18.0...v2.0.0)
-
-**Enhancements:**
-
-- v2 [\#230](https://github.com/fastly/go-fastly/pull/230)
 
 **Closed issues:**
 
