@@ -1,5 +1,17 @@
 # Changelog
 
+## [v3.4.1](https://github.com/fastly/go-fastly/releases/tag/v3.4.1) (2021-03-25)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.4.0...v3.4.1)
+
+**Bug fixes:**
+
+- Initialise Headers map to avoid runtime panic when purging. [\#267](https://github.com/fastly/go-fastly/pull/267)
+
+**Closed issues:**
+
+- Potentially misleading comment in README.md [\#260](https://github.com/fastly/go-fastly/issues/260)
+
 ## [v3.4.0](https://github.com/fastly/go-fastly/releases/tag/v3.4.0) (2021-02-18)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.3.0...v3.4.0)
