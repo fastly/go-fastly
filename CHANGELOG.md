@@ -56,7 +56,6 @@
 - Add region support to logentries logging endpoint [\#243](https://github.com/fastly/go-fastly/pull/243)
 - Add basic managed logging endpoint support to go-fastly [\#241](https://github.com/fastly/go-fastly/pull/241)
 - Create new error abstraction for field validation [\#239](https://github.com/fastly/go-fastly/pull/239)
-- v2 [\#230](https://github.com/fastly/go-fastly/pull/230)
 
 **Bug fixes:**
 
@@ -90,6 +89,10 @@
 ## [v2.0.0](https://github.com/fastly/go-fastly/releases/tag/v2.0.0) (2020-11-17)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.18.0...v2.0.0)
+
+**Enhancements:**
+
+- v2 [\#230](https://github.com/fastly/go-fastly/pull/230)
 
 **Closed issues:**
 
