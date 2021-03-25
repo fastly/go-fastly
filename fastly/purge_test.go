@@ -7,8 +7,8 @@ import (
 // TestClient_Purge validates no runtime panics are raised by the Purge method.
 //
 // Specifically, we're ensuring that the setting of the `Soft` key to `true`
-// (which will require assigning a header to the RequestOptions struct) doesn't
-// cause `panic: assignment to entry in nil map`.
+// (which will require assigning a header to the RequestOptions.Headers field)
+// doesn't cause `panic: assignment to entry in nil map`.
 func TestClient_Purge(t *testing.T) {
 	t.Parallel()
 
