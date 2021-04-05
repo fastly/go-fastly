@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/66/logging/kinesis
+      - FastlyGo/3.2.0 (+github.com/fastly/go-fastly; go1.15.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis
     method: GET
   response:
-    body: '[{"placement":"waf_debug","deleted_at":null,"version":"66","name":"test-kinesis","region":"us-east-1","service_id":"7i6HN3TK9wS159v2gPAZ8A","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","updated_at":"2021-01-14T11:10:02Z","format_version":"2","access_key":"AKIAIOSFODNN7EXAMPLE","topic":"stream-name","response_condition":"","format":"format","created_at":"2021-01-14T11:10:02Z"}]'
+    body: '[{"access_key":"AKIAIOSFODNN7EXAMPLE","topic":"stream-name","version":"21","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","format_version":"2","name":"test-kinesis","iam_role":null,"format":"format","updated_at":"2021-04-05T13:02:15Z","placement":"waf_debug","created_at":"2021-04-05T13:02:15Z","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","response_condition":"","region":"us-east-1"},{"name":"test-kinesis-2","format_version":"2","secret_key":null,"version":"21","access_key":null,"topic":"stream-name","region":"us-east-1","response_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"created_at":"2021-04-05T13:02:16Z","placement":"waf_debug","updated_at":"2021-04-05T13:02:16Z","iam_role":"arn:aws:iam::123456789012:role/S3Access","format":"format"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 11:10:02 GMT
+      - Mon, 05 Apr 2021 13:02:17 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4120-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8277-DEN
       X-Timer:
-      - S1610622603.731898,VS0,VE184
+      - S1617627737.320386,VS0,VE136
     status: 200 OK
     code: 200
     duration: ""

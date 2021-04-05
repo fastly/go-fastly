@@ -17,6 +17,7 @@ type Kinesis struct {
 	Region            string     `mapstructure:"region"`
 	AccessKey         string     `mapstructure:"access_key"`
 	SecretKey         string     `mapstructure:"secret_key"`
+	IAMRole           string     `mapstructure:"iam_role"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
@@ -82,6 +83,7 @@ type CreateKinesisInput struct {
 	Region            string `form:"region,omitempty"`
 	AccessKey         string `form:"access_key,omitempty"`
 	SecretKey         string `form:"secret_key,omitempty"`
+	IAMRole           string `form:"iam_role,omitempty"`
 	Format            string `form:"format,omitempty"`
 	FormatVersion     uint   `form:"format_version,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
@@ -166,6 +168,7 @@ type UpdateKinesisInput struct {
 	Region            *string `form:"region,omitempty"`
 	AccessKey         *string `form:"access_key,omitempty"`
 	SecretKey         *string `form:"secret_key,omitempty"`
+	IAMRole           *string `form:"iam_role,omitempty"`
 	Format            *string `form:"format,omitempty"`
 	FormatVersion     *uint   `form:"format_version,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`

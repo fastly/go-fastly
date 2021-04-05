@@ -27,6 +27,7 @@ type S3 struct {
 	Domain                       string                 `mapstructure:"domain"`
 	AccessKey                    string                 `mapstructure:"access_key"`
 	SecretKey                    string                 `mapstructure:"secret_key"`
+	IAMRole                      string                 `mapstructure:"iam_role"`
 	Path                         string                 `mapstructure:"path"`
 	Period                       uint                   `mapstructure:"period"`
 	CompressionCodec             string                 `mapstructure:"compression_codec"`
@@ -102,6 +103,7 @@ type CreateS3Input struct {
 	Domain                       string                 `form:"domain,omitempty"`
 	AccessKey                    string                 `form:"access_key,omitempty"`
 	SecretKey                    string                 `form:"secret_key,omitempty"`
+	IAMRole                      string                 `form:"iam_role,omitempty"`
 	Path                         string                 `form:"path,omitempty"`
 	Period                       uint                   `form:"period,omitempty"`
 	CompressionCodec             string                 `form:"compression_codec,omitempty"`
@@ -200,6 +202,7 @@ type UpdateS3Input struct {
 	Domain                       *string                `form:"domain,omitempty"`
 	AccessKey                    *string                `form:"access_key,omitempty"`
 	SecretKey                    *string                `form:"secret_key,omitempty"`
+	IAMRole                      *string                `form:"iam_role,omitempty"`
 	Path                         *string                `form:"path,omitempty"`
 	Period                       *uint                  `form:"period,omitempty"`
 	CompressionCodec             *string                `form:"compression_codec,omitempty"`
