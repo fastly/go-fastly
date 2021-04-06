@@ -1,11 +1,20 @@
 # Changelog
 
+## [v3.5.0](https://github.com/fastly/go-fastly/releases/tag/v3.5.0) (2021-04-06)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.4.1...v3.5.0)
+
+**Enhancements:**
+
+- Support usage of IAM role in S3 and Kinesis logging endpoints [\#269](https://github.com/fastly/go-fastly/pull/269)
+
 ## [v3.4.1](https://github.com/fastly/go-fastly/releases/tag/v3.4.1) (2021-03-25)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.4.0...v3.4.1)
 
 **Bug fixes:**
 
+- Purge with Soft=true bug [\#266](https://github.com/fastly/go-fastly/issues/266)
 - Initialise Headers map to avoid runtime panic when purging. [\#267](https://github.com/fastly/go-fastly/pull/267)
 
 **Closed issues:**
@@ -80,6 +89,7 @@
 - Add support for TLS client and batch size options for splunk [\#236](https://github.com/fastly/go-fastly/pull/236)
 - Add support for compression\_codec to logging file sink endpoints [\#235](https://github.com/fastly/go-fastly/pull/235)
 - Add support for Kinesis logging endpoint [\#234](https://github.com/fastly/go-fastly/pull/234)
+- Add SASL fields support for Kafka Logging Endpoint [\#226](https://github.com/fastly/go-fastly/pull/226)
 - Custom TLS API  [\#225](https://github.com/fastly/go-fastly/pull/225)
 
 **Closed issues:**
@@ -101,10 +111,6 @@
 ## [v1.18.0](https://github.com/fastly/go-fastly/releases/tag/v1.18.0) (2020-10-28)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.17.0...v1.18.0)
-
-**Enhancements:**
-
-- Add SASL fields support for Kafka Logging Endpoint [\#226](https://github.com/fastly/go-fastly/pull/226)
 
 ## [v1.17.0](https://github.com/fastly/go-fastly/releases/tag/v1.17.0) (2020-07-20)
 
