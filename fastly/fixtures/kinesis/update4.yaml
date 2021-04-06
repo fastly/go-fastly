@@ -2,19 +2,27 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A
+    body: Name=test-kinesis&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=21&iam_role=badarn
     form:
+      Name:
+      - test-kinesis
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "21"
+      iam_role:
+      - badarn
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/3.2.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
-    method: POST
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis/test-kinesis
+    method: PUT
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":21}'
+    body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 21 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,13 +31,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 05 Apr 2021 13:02:15 GMT
+      - Mon, 05 Apr 2021 13:02:19 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "981"
       Fastly-Ratelimit-Reset:
       - "1617631200"
       Status:
-      - 200 OK
+      - 404 Not Found
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -41,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8277-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8277-DEN
       X-Timer:
-      - S1617627735.248369,VS0,VE215
-    status: 200 OK
-    code: 200
+      - S1617627740.675236,VS0,VE175
+    status: 404 Not Found
+    code: 404
     duration: ""

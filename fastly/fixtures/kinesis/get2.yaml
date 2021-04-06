@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/3.2.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis/new-test-kinesis
-    method: DELETE
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis/test-kinesis-2
+    method: GET
   response:
-    body: '{"status":"ok"}'
+    body: '{"iam_role":"arn:aws:iam::123456789012:role/S3Access","deleted_at":null,"placement":"waf_debug","secret_key":null,"topic":"stream-name","name":"test-kinesis-2","region":"us-east-1","version":"21","response_condition":"","created_at":"2021-04-05T13:02:16Z","format_version":"2","updated_at":"2021-04-05T13:02:16Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","access_key":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,11 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 05 Apr 2021 13:02:20 GMT
-      Fastly-Ratelimit-Remaining:
-      - "980"
-      Fastly-Ratelimit-Reset:
-      - "1617631200"
+      - Mon, 05 Apr 2021 13:02:17 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,7 +35,7 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8277-DEN
       X-Timer:
-      - S1617627740.880218,VS0,VE222
+      - S1617627738.732426,VS0,VE131
     status: 200 OK
     code: 200
     duration: ""
