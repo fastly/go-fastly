@@ -41,23 +41,22 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	record(t, "cloudfiles/create2", func(c *Client) {
 		cloudfilesCreateResp2, err = c.CreateCloudfiles(&CreateCloudfilesInput{
-			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
-			Name:             "test-cloudfiles-2",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			Path:             "/path",
-			Region:           "DFW",
-			Period:           12,
-			GzipLevel:        8,
-			Format:           "format",
-			FormatVersion:    1,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
+			Name:            "test-cloudfiles-2",
+			User:            "user",
+			AccessKey:       "secret-key",
+			BucketName:      "bucket-name",
+			Path:            "/path",
+			Region:          "DFW",
+			Period:          12,
+			GzipLevel:       8,
+			Format:          "format",
+			FormatVersion:   1,
+			TimestampFormat: "%Y",
+			MessageType:     "classic",
+			Placement:       "waf_debug",
+			PublicKey:       pgpPublicKey(),
 		})
 	})
 	if err != nil {
@@ -85,6 +84,33 @@ func TestClient_Cloudfiles(t *testing.T) {
 		})
 	})
 	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	record(t, "cloudfiles/create4", func(c *Client) {
+		_, err = c.CreateCloudfiles(&CreateCloudfilesInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-cloudfiles-4",
+			User:             "user",
+			AccessKey:        "secret-key",
+			BucketName:       "bucket-name",
+			Path:             "/path",
+			Region:           "DFW",
+			Period:           12,
+			GzipLevel:        8,
+			Format:           "format",
+			FormatVersion:    1,
+			TimestampFormat:  "%Y",
+			MessageType:      "classic",
+			Placement:        "waf_debug",
+			PublicKey:        pgpPublicKey(),
+			CompressionCodec: "snappy",
+		})
+	})
+	if err == nil {
 		t.Fatal(err)
 	}
 

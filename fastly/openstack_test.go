@@ -41,23 +41,22 @@ func TestClient_Openstack(t *testing.T) {
 
 	record(t, "openstack/create2", func(c *Client) {
 		osCreateResp2, err = c.CreateOpenstack(&CreateOpenstackInput{
-			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
-			Name:             "test-openstack-2",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			URL:              "https://logs.example.com/v1.0",
-			Path:             "/path",
-			Period:           12,
-			CompressionCodec: "snappy",
-			GzipLevel:        8,
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
+			Name:            "test-openstack-2",
+			User:            "user",
+			AccessKey:       "secret-key",
+			BucketName:      "bucket-name",
+			URL:             "https://logs.example.com/v1.0",
+			Path:            "/path",
+			Period:          12,
+			GzipLevel:       8,
+			Format:          "format",
+			FormatVersion:   2,
+			TimestampFormat: "%Y",
+			MessageType:     "classic",
+			Placement:       "waf_debug",
+			PublicKey:       pgpPublicKey(),
 		})
 	})
 	if err != nil {
@@ -85,6 +84,33 @@ func TestClient_Openstack(t *testing.T) {
 		})
 	})
 	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	record(t, "openstack/create4", func(c *Client) {
+		_, err = c.CreateOpenstack(&CreateOpenstackInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-openstack-4",
+			User:             "user",
+			AccessKey:        "secret-key",
+			BucketName:       "bucket-name",
+			URL:              "https://logs.example.com/v1.0",
+			Path:             "/path",
+			Period:           12,
+			CompressionCodec: "snappy",
+			GzipLevel:        8,
+			Format:           "format",
+			FormatVersion:    2,
+			TimestampFormat:  "%Y",
+			MessageType:      "classic",
+			Placement:        "waf_debug",
+			PublicKey:        pgpPublicKey(),
+		})
+	})
+	if err == nil {
 		t.Fatal(err)
 	}
 

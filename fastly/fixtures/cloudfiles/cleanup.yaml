@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.1.0 (+github.com/fastly/go-fastly; go1.15.2)
+      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16/logging/cloudfiles/test-cloudfiles
     method: DELETE
   response:
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Feb 2021 00:38:13 GMT
+      - Tue, 13 Apr 2021 19:17:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "877"
+      - "895"
       Fastly-Ratelimit-Reset:
-      - "1612227600"
+      - "1618344000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8251-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8283-DEN
       X-Timer:
-      - S1612226294.762577,VS0,VE144
+      - S1618341440.105533,VS0,VE154
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,7 +50,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.1.0 (+github.com/fastly/go-fastly; go1.15.2)
+      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16/logging/cloudfiles/test-cloudfiles-2
     method: DELETE
   response:
@@ -63,11 +63,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Feb 2021 00:38:14 GMT
+      - Tue, 13 Apr 2021 19:17:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "876"
+      - "894"
       Fastly-Ratelimit-Reset:
-      - "1612227600"
+      - "1618344000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -81,9 +81,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8251-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8283-DEN
       X-Timer:
-      - S1612226294.939358,VS0,VE211
+      - S1618341440.309543,VS0,VE222
     status: 200 OK
     code: 200
     duration: ""
@@ -92,7 +92,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.1.0 (+github.com/fastly/go-fastly; go1.15.2)
+      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16/logging/cloudfiles/test-cloudfiles-3
     method: DELETE
   response:
@@ -105,11 +105,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Feb 2021 00:38:14 GMT
+      - Tue, 13 Apr 2021 19:17:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "875"
+      - "893"
       Fastly-Ratelimit-Reset:
-      - "1612227600"
+      - "1618344000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -123,9 +123,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8251-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8283-DEN
       X-Timer:
-      - S1612226294.201371,VS0,VE217
+      - S1618341441.544568,VS0,VE222
     status: 200 OK
     code: 200
     duration: ""
@@ -134,7 +134,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.1.0 (+github.com/fastly/go-fastly; go1.15.2)
+      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/16/logging/cloudfiles/new-test-cloudfiles
     method: DELETE
   response:
@@ -149,11 +149,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 02 Feb 2021 00:38:14 GMT
+      - Tue, 13 Apr 2021 19:17:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "874"
+      - "892"
       Fastly-Ratelimit-Reset:
-      - "1612227600"
+      - "1618344000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -167,9 +167,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8251-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8283-DEN
       X-Timer:
-      - S1612226295.508886,VS0,VE125
+      - S1618341441.821784,VS0,VE156
     status: 404 Not Found
     code: 404
     duration: ""

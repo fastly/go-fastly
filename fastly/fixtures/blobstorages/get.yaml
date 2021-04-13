@@ -6,14 +6,14 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.0.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/118/logging/azureblob/test-blobstorage
+      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/logging/azureblob/test-blobstorage
     method: GET
   response:
-    body: '{"sas_token":"sv=2015-04-05\u0026ss=b\u0026srt=sco\u0026sp=rw\u0026se=2030-07-21T18%3A00%3A00Z\u0026sig=3ABdLOJZosCp0o491T%2BqZGKIhafF1nlM3MzESDDD3Gg%3D","response_condition":"","public_key":"-----BEGIN
+    body: '{"created_at":"2021-04-13T19:24:22Z","format":"%h %l %u %{now}V %{req.method}V
+      %{req.url}V %\u003es %{resp.http.Content-Length}V","compression_codec":"snappy","timestamp_format":"%Y-%m-%dT%H:%M:%S.000","service_id":"7i6HN3TK9wS159v2gPAZ8A","placement":"waf_debug","path":"/logs","version":"20","message_type":"classic","response_condition":"","deleted_at":null,"gzip_level":"0","account_name":"test","file_max_bytes":1048576,"container":"fastly","public_key":"-----BEGIN
       PGP PUBLIC KEY BLOCK-----\n\nmQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/\nibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4\n8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p\nlDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn\ndwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB\n89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz\ndCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6\nvFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc\n9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9\nOLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX\nSvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq\n7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx\nkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG\nM1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe\nu6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L\n4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF\nftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K\nUEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu\nYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi\nkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb\nDAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml\ndYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L\n3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c\nFaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR\n5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR\nwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N\n=28dr\n-----END
-      PGP PUBLIC KEY BLOCK-----\n","message_type":"classic","name":"test-blobstorage","account_name":"test","file_max_bytes":1048576,"updated_at":"2021-01-27T22:56:45Z","created_at":"2021-01-27T22:56:45Z","path":"/logs","gzip_level":"0","timestamp_format":"%Y-%m-%dT%H:%M:%S.000","compression_codec":"snappy","format":"%h
-      %l %u %{now}V %{req.method}V %{req.url}V %\u003es %{resp.http.Content-Length}V","deleted_at":null,"format_version":"2","placement":"waf_debug","period":"12","version":"118","container":"fastly","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+      PGP PUBLIC KEY BLOCK-----\n","sas_token":"sv=2015-04-05\u0026ss=b\u0026srt=sco\u0026sp=rw\u0026se=2030-07-21T18%3A00%3A00Z\u0026sig=3ABdLOJZosCp0o491T%2BqZGKIhafF1nlM3MzESDDD3Gg%3D","format_version":"2","updated_at":"2021-04-13T19:24:22Z","period":"12","name":"test-blobstorage"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 27 Jan 2021 22:56:47 GMT
+      - Tue, 13 Apr 2021 19:24:25 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -36,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8267-DEN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8234-DEN
       X-Timer:
-      - S1611788207.323853,VS0,VE134
+      - S1618341865.482231,VS0,VE148
     status: 200 OK
     code: 200
     duration: ""

@@ -14,7 +14,7 @@ func TestClient_S3s(t *testing.T) {
 	})
 
 	// Create
-	var s3CreateResp1, s3CreateResp2, s3CreateResp3, s3CreateResp4 *S3
+	var s3CreateResp1, s3CreateResp3, s3CreateResp4 *S3
 	record(t, "s3s/create", func(c *Client) {
 		s3CreateResp1, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
@@ -44,7 +44,7 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	record(t, "s3s/create2", func(c *Client) {
-		s3CreateResp2, err = c.CreateS3(&CreateS3Input{
+		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
 			Name:                         "test-s3-2",
@@ -54,7 +54,6 @@ func TestClient_S3s(t *testing.T) {
 			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
 			Path:                         "/path",
 			Period:                       12,
-			CompressionCodec:             "snappy",
 			GzipLevel:                    8,
 			Format:                       "format",
 			FormatVersion:                2,
@@ -185,6 +184,37 @@ func TestClient_S3s(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	record(t, "s3s/create7", func(c *Client) {
+		_, err = c.CreateS3(&CreateS3Input{
+			ServiceID:                    testServiceID,
+			ServiceVersion:               tv.Number,
+			Name:                         "test-s3-2",
+			BucketName:                   "bucket-name",
+			Domain:                       "s3.us-east-1.amazonaws.com",
+			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
+			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			Path:                         "/path",
+			Period:                       12,
+			CompressionCodec:             "snappy",
+			GzipLevel:                    8,
+			Format:                       "format",
+			FormatVersion:                2,
+			ResponseCondition:            "",
+			TimestampFormat:              "%Y",
+			MessageType:                  "classic",
+			Redundancy:                   S3RedundancyReduced,
+			Placement:                    "waf_debug",
+			PublicKey:                    pgpPublicKey(),
+			ServerSideEncryptionKMSKeyID: "1234",
+			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+		})
+	})
+	if err == nil {
+		t.Fatal(err)
+	}
+
 	// Ensure deleted
 	defer func() {
 		record(t, "s3s/cleanup", func(c *Client) {
@@ -192,12 +222,6 @@ func TestClient_S3s(t *testing.T) {
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-s3",
-			})
-
-			c.DeleteS3(&DeleteS3Input{
-				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
-				Name:           "test-s3-2",
 			})
 
 			c.DeleteS3(&DeleteS3Input{
@@ -279,13 +303,6 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3CreateResp1.ServerSideEncryptionKMSKeyID != "1234" {
 		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3CreateResp1.ServerSideEncryptionKMSKeyID)
-	}
-
-	if s3CreateResp2.CompressionCodec != "" {
-		t.Errorf("bad compression_codec: %q", s3CreateResp1.CompressionCodec)
-	}
-	if s3CreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", s3CreateResp1.GzipLevel)
 	}
 
 	if s3CreateResp3.CompressionCodec != "snappy" {

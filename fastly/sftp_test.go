@@ -44,25 +44,24 @@ func TestClient_SFTPs(t *testing.T) {
 
 	record(t, "sftps/create2", func(c *Client) {
 		sftpCreateResp2, err = c.CreateSFTP(&CreateSFTPInput{
-			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
-			Name:             "test-sftp-2",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			SecretKey:        privateKey(),
-			SSHKnownHosts:    knownHosts,
-			User:             "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			GzipLevel:        8,
-			FormatVersion:    2,
-			Format:           "format",
-			MessageType:      "blank",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
+			Name:            "test-sftp-2",
+			Address:         "example.com",
+			Port:            1234,
+			PublicKey:       pgpPublicKey(),
+			SecretKey:       privateKey(),
+			SSHKnownHosts:   knownHosts,
+			User:            "username",
+			Password:        "password",
+			Path:            "/dir",
+			Period:          12,
+			GzipLevel:       8,
+			FormatVersion:   2,
+			Format:          "format",
+			MessageType:     "blank",
+			TimestampFormat: "%Y",
+			Placement:       "waf_debug",
 		})
 	})
 	if err != nil {
@@ -92,6 +91,35 @@ func TestClient_SFTPs(t *testing.T) {
 		})
 	})
 	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	record(t, "sftps/create4", func(c *Client) {
+		_, err = c.CreateSFTP(&CreateSFTPInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-sftp-4",
+			Address:          "example.com",
+			Port:             1234,
+			PublicKey:        pgpPublicKey(),
+			SecretKey:        privateKey(),
+			SSHKnownHosts:    knownHosts,
+			User:             "username",
+			Password:         "password",
+			Path:             "/dir",
+			Period:           12,
+			CompressionCodec: "snappy",
+			GzipLevel:        8,
+			FormatVersion:    2,
+			Format:           "format",
+			MessageType:      "blank",
+			TimestampFormat:  "%Y",
+			Placement:        "waf_debug",
+		})
+	})
+	if err == nil {
 		t.Fatal(err)
 	}
 
