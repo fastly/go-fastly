@@ -41,23 +41,22 @@ func TestClient_DigitalOceans(t *testing.T) {
 
 	record(t, "digitaloceans/create2", func(c *Client) {
 		digitaloceanCreateResp2, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
-			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
-			Name:             "test-digitalocean-2",
-			BucketName:       "bucket-name",
-			Domain:           "fra1.digitaloceanspaces.com",
-			AccessKey:        "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:        "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:             "/path",
-			Period:           12,
-			GzipLevel:        8,
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
+			Name:            "test-digitalocean-2",
+			BucketName:      "bucket-name",
+			Domain:          "fra1.digitaloceanspaces.com",
+			AccessKey:       "AKIAIOSFODNN7EXAMPLE",
+			SecretKey:       "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			Path:            "/path",
+			Period:          12,
+			GzipLevel:       8,
+			Format:          "format",
+			FormatVersion:   2,
+			TimestampFormat: "%Y",
+			MessageType:     "classic",
+			Placement:       "waf_debug",
+			PublicKey:       pgpPublicKey(),
 		})
 	})
 	if err != nil {
@@ -85,6 +84,33 @@ func TestClient_DigitalOceans(t *testing.T) {
 		})
 	})
 	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	record(t, "digitaloceans/create4", func(c *Client) {
+		_, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-digitalocean-4",
+			BucketName:       "bucket-name",
+			Domain:           "fra1.digitaloceanspaces.com",
+			AccessKey:        "AKIAIOSFODNN7EXAMPLE",
+			SecretKey:        "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
+			Path:             "/path",
+			Period:           12,
+			GzipLevel:        8,
+			Format:           "format",
+			FormatVersion:    2,
+			TimestampFormat:  "%Y",
+			MessageType:      "classic",
+			Placement:        "waf_debug",
+			PublicKey:        pgpPublicKey(),
+			CompressionCodec: "snappy",
+		})
+	})
+	if err == nil {
 		t.Fatal(err)
 	}
 

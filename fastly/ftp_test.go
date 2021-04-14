@@ -40,23 +40,22 @@ func TestClient_FTPs(t *testing.T) {
 
 	record(t, "ftps/create2", func(c *Client) {
 		ftpCreateResp2, err = c.CreateFTP(&CreateFTPInput{
-			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
-			Name:             "test-ftp-2",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			Username:         "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			GzipLevel:        8,
-			FormatVersion:    2,
-			Format:           "format",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
-			MessageType:      "classic",
+			ServiceID:       testServiceID,
+			ServiceVersion:  tv.Number,
+			Name:            "test-ftp-2",
+			Address:         "example.com",
+			Port:            1234,
+			PublicKey:       pgpPublicKey(),
+			Username:        "username",
+			Password:        "password",
+			Path:            "/dir",
+			Period:          12,
+			GzipLevel:       8,
+			FormatVersion:   2,
+			Format:          "format",
+			TimestampFormat: "%Y",
+			Placement:       "waf_debug",
+			MessageType:     "classic",
 		})
 	})
 	if err != nil {
@@ -84,6 +83,33 @@ func TestClient_FTPs(t *testing.T) {
 		})
 	})
 	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail because both CompressionCodec and
+	// GzipLevel are present.
+	record(t, "ftps/create4", func(c *Client) {
+		_, err = c.CreateFTP(&CreateFTPInput{
+			ServiceID:        testServiceID,
+			ServiceVersion:   tv.Number,
+			Name:             "test-ftp-4",
+			Address:          "example.com",
+			Port:             1234,
+			PublicKey:        pgpPublicKey(),
+			Username:         "username",
+			Password:         "password",
+			Path:             "/dir",
+			Period:           12,
+			CompressionCodec: "snappy",
+			GzipLevel:        8,
+			FormatVersion:    2,
+			Format:           "format",
+			TimestampFormat:  "%Y",
+			Placement:        "waf_debug",
+			MessageType:      "classic",
+		})
+	})
+	if err == nil {
 		t.Fatal(err)
 	}
 

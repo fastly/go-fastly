@@ -1,0 +1,111 @@
+---
+version: 1
+interactions:
+- request:
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=20&account_name=test&compression_codec=snappy&container=fastly&file_max_bytes=10485760&format=%25h+%25l+%25u+%25%7Bnow%7DV+%25%7Breq.method%7DV+%25%7Breq.url%7DV+%25%3Es+%25%7Bresp.http.Content-Length%7DV&format_version=2&gzip_level=8&message_type=classic&name=test-blobstorage-4&path=%2Flogs&period=12&placement=waf_debug&public_key=-----BEGIN+PGP+PUBLIC+KEY+BLOCK-----%0A%0AmQENBFyUD8sBCACyFnB39AuuTygseek%2BeA4fo0cgwva6%2FFSjnWq7riouQee8GgQ%2F%0AibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr%2BIZ4GVGJqs6ZJnvQcqe3xPoR4%0A8AnBfw90o32r%2FLuHf6QCJXi%2BAEu35koNlNAvLJ2B%2BKACaNB7N0EeWmqpV%2F1V2k9p%0AlDYk%2Bth7LcCuaFNGqKS%2FPrMnnMqR6VDLCjHhNx4KR79b0Twm%2F2qp6an3hyNRu8Gn%0Adwxpf1%2FBUu3JWf%2BLqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB%0A89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz%0AdCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6%0AvFFc9jxV%2FwUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc%0A9jxV%2F815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg%2BmjM3b8N7iXm9%0AOLX59fbDAWtBSldSZE22RXd3CvlFOG%2FEnKBXSjBtEqfyxYSnyOPkMPBYWGL%2FApkX%0ASvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR%2B3rv1u3aoy7%2Fs2EltAfDS3ZQIq%0A7%2FcWTLJml%2FlleeB%2FY6rPj8xqeCYhE5ahw9gsV%2FMdqatl24V9Tks30iijx0Hhw%2BGx%0AkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe%2FKY9M2yVnMHUXmAZwbG%0AM1cMI%2FNH1DjevCKdGBLcRJlhuLPKF%2FanuQENBFyUD8sBCADIpd7r7GuPd6n%2FIkxe%0Au6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y%2Fart8ip0VJ3m07L%0A4RSfSpnzqgSwdjSq5hNour2Fo%2FBzYhK7yaz2AzVSbe33R0%2BRYhb4b%2F6N%2BbKbjwGF%0AftCsqVFMH%2BPyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K%0AUEGUcTzz%2B8QGAwAra%2B0ewPXo%2FAkO%2B8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu%0AYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O%2B0F1G7ttZ2GRRgVBZPwi%0AkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV%2FwUCXJQPywIb%0ADAAKCRC6vFFc9jxV%2F9YOCACe8qmOSnKQpQfW%2BPqYOqo3dt7JyweTs3FkD6NT8Zml%0AdYy%2FvkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L%0A3Tp90NN%2BQY5WDbsGmsyk6%2B6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c%0AFaNmEfKKy%2Fr1PO20NXEG6t9t05K%2FfrHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR%0A5%2BzkkSq%2FeG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR%0AwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr%2BN%0A%3D28dr%0A-----END+PGP+PUBLIC+KEY+BLOCK-----%0A&sas_token=sv%3D2015-04-05%26ss%3Db%26srt%3Dsco%26sp%3Drw%26se%3D2030-07-21T18%253A00%253A00Z%26sig%3D3ABdLOJZosCp0o491T%252BqZGKIhafF1nlM3MzESDDD3Gg%253D&timestamp_format=%25Y-%25m-%25dT%25H%3A%25M%3A%25S.000
+    form:
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "20"
+      account_name:
+      - test
+      compression_codec:
+      - snappy
+      container:
+      - fastly
+      file_max_bytes:
+      - "10485760"
+      format:
+      - '%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V'
+      format_version:
+      - "2"
+      gzip_level:
+      - "8"
+      message_type:
+      - classic
+      name:
+      - test-blobstorage-4
+      path:
+      - /logs
+      period:
+      - "12"
+      placement:
+      - waf_debug
+      public_key:
+      - |
+        -----BEGIN PGP PUBLIC KEY BLOCK-----
+
+        mQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/
+        ibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4
+        8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p
+        lDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn
+        dwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB
+        89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz
+        dCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6
+        vFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc
+        9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9
+        OLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX
+        SvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq
+        7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx
+        kATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG
+        M1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe
+        u6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L
+        4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF
+        ftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K
+        UEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu
+        YrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi
+        kiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb
+        DAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml
+        dYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L
+        3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c
+        FaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR
+        5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR
+        wMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N
+        =28dr
+        -----END PGP PUBLIC KEY BLOCK-----
+      sas_token:
+      - sv=2015-04-05&ss=b&srt=sco&sp=rw&se=2030-07-21T18%3A00%3A00Z&sig=3ABdLOJZosCp0o491T%2BqZGKIhafF1nlM3MzESDDD3Gg%3D
+      timestamp_format:
+      - '%Y-%m-%dT%H:%M:%S.000'
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/20/logging/azureblob
+    method: POST
+  response:
+    body: '{"msg":"''compression_codec'' and ''gzip_level'' cannot be set simultaneously"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 13 Apr 2021 19:24:25 GMT
+      Fastly-Ratelimit-Remaining:
+      - "859"
+      Fastly-Ratelimit-Reset:
+      - "1618344000"
+      Status:
+      - 400 Bad Request
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8234-DEN
+      X-Timer:
+      - S1618341865.078680,VS0,VE119
+    status: 400 Bad Request
+    code: 400
+    duration: ""
