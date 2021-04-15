@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.6.0](https://github.com/fastly/go-fastly/releases/tag/v3.6.0) (2021-04-15)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.5.0...v3.6.0)
+
+**Enhancements:**
+
+- Fix testing behavior for logging endpoints the support compression [\#271](https://github.com/fastly/go-fastly/pull/271)
+
 ## [v3.5.0](https://github.com/fastly/go-fastly/releases/tag/v3.5.0) (2021-04-06)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.4.1...v3.5.0)
