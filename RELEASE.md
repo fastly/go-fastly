@@ -1,12 +1,12 @@
 ### How to cut a new release for the go-fastly HTTP client
 This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html); therefore first determine the appropriate version tag based on the change set. If in doubt discuss with the team via Slack before releasing.
 
-1. Merge all PRs intended for the release into the `master` branch
-1. Checkout and update the master branch and ensure all tests are passing:
-    * `git checkout master`
+1. Merge all PRs intended for the release into the `main` branch
+1. Checkout and update the main branch and ensure all tests are passing:
+    * `git checkout main`
     * `git pull`
     * `make test`
-1. Update the [`CHANGELOG.md`](https://github.com/fastly/go-fastly/blob/master/CHANGELOG.md):
+1. Update the [`CHANGELOG.md`](https://github.com/fastly/go-fastly/blob/main/CHANGELOG.md):
     * Apply necessary labels (`enchancement`, `bug`, `documentation` etc) to all PRs intended for the release that you wish to appear in the `CHANGELOG.md`
     * **Only add labels for relevant changes**
     * `git checkout -b vX.Y.Z` where `vX.Y.Z` is your target version tag
@@ -15,10 +15,10 @@ This project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
     * Bump the project version in `fastly/client.go`
     * `git add CHANGELOG.md fastly/client.go && git commit -m "vX.Y.Z"`
 1. Send PR for the `CHANGELOG.md` and `client.go` changes.
-1. Once approved and merged, checkout and update the `master` branch:
-    * `git checkout master`
+1. Once approved and merged, checkout and update the `main` branch:
+    * `git checkout main`
     * `git pull`
-1. Create a new tag for `master`:
+1. Create a new tag for `main`:
     * `git tag -s vX.Y.Z -m "vX.Y.Z"`
 1. Push the new tag:
     * `git push origin vX.Y.Z`
