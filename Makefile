@@ -92,14 +92,6 @@ staticcheck: ## Runs the staticcheck linter.
 	@staticcheck ./...
 .PHONY: staticcheck
 
-changelog: ## Generates the full project changelog.
-	@$(shell pwd)/scripts/changelog.sh
-.PHONY: changelog
-
-release-changelog: ## Generates the changelog for a specific release.
-	@$(shell pwd)/scripts/release-changelog.sh
-.PHONY: release-changelog
-
 .PHONY: help
 help: ## Prints this help menu.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
