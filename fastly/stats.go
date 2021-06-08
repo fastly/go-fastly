@@ -50,6 +50,7 @@ type Stats struct {
 	ImageOptimizer            uint64      `mapstructure:"imgopto"`                  // Number of responses that came from the Fastly Image Optimizer service.
 	Status200                 uint64      `mapstructure:"status_200"`               // Number of responses sent with status code 200 (Success).
 	Status204                 uint64      `mapstructure:"status_204"`               // Number of responses sent with status code 204 (No Content).
+	Status206                 uint64      `mapstructure:"status_206"`               // Number of responses sent with status code 206 (Partial Content).
 	Status301                 uint64      `mapstructure:"status_301"`               // Number of responses sent with status code 301 (Moved Permanently).
 	Status302                 uint64      `mapstructure:"status_302"`               // Number of responses sent with status code 302 (Found).
 	Status304                 uint64      `mapstructure:"status_304"`               // Number of responses sent with status code 304 (Not Modified).
