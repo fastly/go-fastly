@@ -9,12 +9,24 @@ import (
 
 type S3Redundancy string
 type S3ServerSideEncryption string
+type S3AccessControlList string
 
 const (
-	S3RedundancyStandard      S3Redundancy           = "standard"
-	S3RedundancyReduced       S3Redundancy           = "reduced_redundancy"
+	S3RedundancyStandard   S3Redundancy = "standard"
+	S3RedundancyReduced    S3Redundancy = "reduced_redundancy"
+	S3RedundancyOneZoneIA  S3Redundancy = "onezone_ia"
+	S3RedundancyStandardIA S3Redundancy = "standard_ia"
+
 	S3ServerSideEncryptionAES S3ServerSideEncryption = "AES256"
 	S3ServerSideEncryptionKMS S3ServerSideEncryption = "aws:kms"
+
+	S3AccessControlListPrivate                S3AccessControlList = "private"
+	S3AccessControlListPublicRead             S3AccessControlList = "public-read"
+	S3AccessControlListPublicReadWrite        S3AccessControlList = "public-read-write"
+	S3AccessControlListAWSExecRead            S3AccessControlList = "aws-exec-read"
+	S3AccessControlListAuthenticatedRead      S3AccessControlList = "authenticated-read"
+	S3AccessControlListBucketOwnerRead        S3AccessControlList = "bucket-owner-read"
+	S3AccessControlListBucketOwnerFullControl S3AccessControlList = "bucket-owner-full-control"
 )
 
 // S3 represents a S3 response from the Fastly API.
@@ -45,6 +57,7 @@ type S3 struct {
 	CreatedAt                    *time.Time             `mapstructure:"created_at"`
 	UpdatedAt                    *time.Time             `mapstructure:"updated_at"`
 	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
+	ACL                          S3AccessControlList    `mapstructure:"acl"`
 }
 
 // s3sByName is a sortable list of S3s.
@@ -118,6 +131,7 @@ type CreateS3Input struct {
 	PublicKey                    string                 `form:"public_key,omitempty"`
 	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
+	ACL                          S3AccessControlList    `form:"acl,omitempty"`
 }
 
 // CreateS3 creates a new Fastly S3.
@@ -217,6 +231,7 @@ type UpdateS3Input struct {
 	PublicKey                    *string                `form:"public_key,omitempty"`
 	ServerSideEncryptionKMSKeyID *string                `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
+	ACL                          S3AccessControlList    `form:"acl,omitempty"`
 }
 
 // UpdateS3 updates a specific S3.
