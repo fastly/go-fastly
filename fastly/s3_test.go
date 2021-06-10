@@ -37,6 +37,7 @@ func TestClient_S3s(t *testing.T) {
 			PublicKey:                    pgpPublicKey(),
 			ServerSideEncryptionKMSKeyID: "1234",
 			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+			ACL:                          S3AccessControlListPrivate,
 		})
 	})
 	if err != nil {
@@ -60,11 +61,12 @@ func TestClient_S3s(t *testing.T) {
 			ResponseCondition:            "",
 			TimestampFormat:              "%Y",
 			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyReduced,
+			Redundancy:                   S3RedundancyOneZoneIA,
 			Placement:                    "waf_debug",
 			PublicKey:                    pgpPublicKey(),
 			ServerSideEncryptionKMSKeyID: "1234",
 			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+			ACL:                          S3AccessControlListAuthenticatedRead,
 		})
 	})
 	if err != nil {
@@ -88,11 +90,12 @@ func TestClient_S3s(t *testing.T) {
 			ResponseCondition:            "",
 			TimestampFormat:              "%Y",
 			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyReduced,
+			Redundancy:                   S3RedundancyStandardIA,
 			Placement:                    "waf_debug",
 			PublicKey:                    pgpPublicKey(),
 			ServerSideEncryptionKMSKeyID: "1234",
 			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+			ACL:                          S3AccessControlListBucketOwnerFullControl,
 		})
 	})
 	if err != nil {
@@ -115,7 +118,7 @@ func TestClient_S3s(t *testing.T) {
 			ResponseCondition:            "",
 			TimestampFormat:              "%Y",
 			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyReduced,
+			Redundancy:                   S3RedundancyStandard,
 			Placement:                    "waf_debug",
 			PublicKey:                    pgpPublicKey(),
 			ServerSideEncryptionKMSKeyID: "1234",
@@ -304,12 +307,21 @@ func TestClient_S3s(t *testing.T) {
 	if s3CreateResp1.ServerSideEncryptionKMSKeyID != "1234" {
 		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3CreateResp1.ServerSideEncryptionKMSKeyID)
 	}
+	if s3CreateResp1.ACL != S3AccessControlListPrivate {
+		t.Errorf("bad acl: %s", s3CreateResp1.ACL)
+	}
 
 	if s3CreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", s3CreateResp1.CompressionCodec)
 	}
 	if s3CreateResp3.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", s3CreateResp1.GzipLevel)
+	}
+	if s3CreateResp3.Redundancy != S3RedundancyStandardIA {
+		t.Errorf("bad acl: %s", s3CreateResp3.Redundancy)
+	}
+	if s3CreateResp3.ACL != S3AccessControlListBucketOwnerFullControl {
+		t.Errorf("bad acl: %s", s3CreateResp3.ACL)
 	}
 
 	if s3CreateResp4.AccessKey != "" {
@@ -320,6 +332,12 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3CreateResp4.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
 		t.Errorf("bad iam_role: %q", s3CreateResp4.IAMRole)
+	}
+	if s3CreateResp4.Redundancy != S3RedundancyStandard {
+		t.Errorf("bad acl: %s", s3CreateResp4.Redundancy)
+	}
+	if s3CreateResp4.ACL != "" {
+		t.Errorf("bad acl: %s", s3CreateResp4.ACL)
 	}
 
 	// List
@@ -419,6 +437,9 @@ func TestClient_S3s(t *testing.T) {
 	if s3CreateResp1.ServerSideEncryptionKMSKeyID != s3GetResp.ServerSideEncryptionKMSKeyID {
 		t.Errorf("bad server_side_encryption_kms_key_id: %q", s3CreateResp1.ServerSideEncryptionKMSKeyID)
 	}
+	if s3CreateResp1.ACL != s3GetResp.ACL {
+		t.Errorf("bad acl: %s", s3CreateResp1.ACL)
+	}
 
 	if s3CreateResp4.AccessKey != s3GetResp2.AccessKey {
 		t.Errorf("bad access_key: %q", s3CreateResp4.AccessKey)
@@ -428,6 +449,12 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3CreateResp4.IAMRole != s3GetResp2.IAMRole {
 		t.Errorf("bad iam_role: %q", s3CreateResp4.IAMRole)
+	}
+	if s3CreateResp4.Redundancy != s3GetResp2.Redundancy {
+		t.Errorf("bad redundancy: %q", s3CreateResp4.Redundancy)
+	}
+	if s3CreateResp4.ACL != s3GetResp2.ACL {
+		t.Errorf("bad acl: %s", s3CreateResp4.ACL)
 	}
 
 	// Update
@@ -684,7 +711,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceID:                    "foo",
 		ServiceVersion:               1,
 		Name:                         "test-service",
-		ServerSideEncryption:         S3ServerSideEncryptionKMS,
+		ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 		ServerSideEncryptionKMSKeyID: String(""),
 	})
 	if err != ErrMissingServerSideEncryptionKMSKeyID {

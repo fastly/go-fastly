@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=3&access_key=AKIAIOSFODNN7EXAMPLE&bucket_name=bucket-name&compression_codec=snappy&domain=s3.us-east-1.amazonaws.com&format=format&format_version=2&gzip_level=8&message_type=classic&name=test-s3-2&path=%2Fpath&period=12&placement=waf_debug&public_key=-----BEGIN+PGP+PUBLIC+KEY+BLOCK-----%0A%0AmQENBFyUD8sBCACyFnB39AuuTygseek%2BeA4fo0cgwva6%2FFSjnWq7riouQee8GgQ%2F%0AibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr%2BIZ4GVGJqs6ZJnvQcqe3xPoR4%0A8AnBfw90o32r%2FLuHf6QCJXi%2BAEu35koNlNAvLJ2B%2BKACaNB7N0EeWmqpV%2F1V2k9p%0AlDYk%2Bth7LcCuaFNGqKS%2FPrMnnMqR6VDLCjHhNx4KR79b0Twm%2F2qp6an3hyNRu8Gn%0Adwxpf1%2FBUu3JWf%2BLqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB%0A89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz%0AdCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6%0AvFFc9jxV%2FwUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc%0A9jxV%2F815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg%2BmjM3b8N7iXm9%0AOLX59fbDAWtBSldSZE22RXd3CvlFOG%2FEnKBXSjBtEqfyxYSnyOPkMPBYWGL%2FApkX%0ASvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR%2B3rv1u3aoy7%2Fs2EltAfDS3ZQIq%0A7%2FcWTLJml%2FlleeB%2FY6rPj8xqeCYhE5ahw9gsV%2FMdqatl24V9Tks30iijx0Hhw%2BGx%0AkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe%2FKY9M2yVnMHUXmAZwbG%0AM1cMI%2FNH1DjevCKdGBLcRJlhuLPKF%2FanuQENBFyUD8sBCADIpd7r7GuPd6n%2FIkxe%0Au6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y%2Fart8ip0VJ3m07L%0A4RSfSpnzqgSwdjSq5hNour2Fo%2FBzYhK7yaz2AzVSbe33R0%2BRYhb4b%2F6N%2BbKbjwGF%0AftCsqVFMH%2BPyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K%0AUEGUcTzz%2B8QGAwAra%2B0ewPXo%2FAkO%2B8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu%0AYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O%2B0F1G7ttZ2GRRgVBZPwi%0AkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV%2FwUCXJQPywIb%0ADAAKCRC6vFFc9jxV%2F9YOCACe8qmOSnKQpQfW%2BPqYOqo3dt7JyweTs3FkD6NT8Zml%0AdYy%2FvkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L%0A3Tp90NN%2BQY5WDbsGmsyk6%2B6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c%0AFaNmEfKKy%2Fr1PO20NXEG6t9t05K%2FfrHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR%0A5%2BzkkSq%2FeG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR%0AwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr%2BN%0A%3D28dr%0A-----END+PGP+PUBLIC+KEY+BLOCK-----%0A&redundancy=reduced_redundancy&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&server_side_encryption=aws%3Akms&server_side_encryption_kms_key_id=1234&timestamp_format=%25Y
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=4&access_key=AKIAIOSFODNN7EXAMPLE&bucket_name=bucket-name&compression_codec=snappy&domain=s3.us-east-1.amazonaws.com&format=format&format_version=2&gzip_level=8&message_type=classic&name=test-s3-2&path=%2Fpath&period=12&placement=waf_debug&public_key=-----BEGIN+PGP+PUBLIC+KEY+BLOCK-----%0A%0AmQENBFyUD8sBCACyFnB39AuuTygseek%2BeA4fo0cgwva6%2FFSjnWq7riouQee8GgQ%2F%0AibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr%2BIZ4GVGJqs6ZJnvQcqe3xPoR4%0A8AnBfw90o32r%2FLuHf6QCJXi%2BAEu35koNlNAvLJ2B%2BKACaNB7N0EeWmqpV%2F1V2k9p%0AlDYk%2Bth7LcCuaFNGqKS%2FPrMnnMqR6VDLCjHhNx4KR79b0Twm%2F2qp6an3hyNRu8Gn%0Adwxpf1%2FBUu3JWf%2BLqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB%0A89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz%0AdCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6%0AvFFc9jxV%2FwUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc%0A9jxV%2F815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg%2BmjM3b8N7iXm9%0AOLX59fbDAWtBSldSZE22RXd3CvlFOG%2FEnKBXSjBtEqfyxYSnyOPkMPBYWGL%2FApkX%0ASvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR%2B3rv1u3aoy7%2Fs2EltAfDS3ZQIq%0A7%2FcWTLJml%2FlleeB%2FY6rPj8xqeCYhE5ahw9gsV%2FMdqatl24V9Tks30iijx0Hhw%2BGx%0AkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe%2FKY9M2yVnMHUXmAZwbG%0AM1cMI%2FNH1DjevCKdGBLcRJlhuLPKF%2FanuQENBFyUD8sBCADIpd7r7GuPd6n%2FIkxe%0Au6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y%2Fart8ip0VJ3m07L%0A4RSfSpnzqgSwdjSq5hNour2Fo%2FBzYhK7yaz2AzVSbe33R0%2BRYhb4b%2F6N%2BbKbjwGF%0AftCsqVFMH%2BPyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K%0AUEGUcTzz%2B8QGAwAra%2B0ewPXo%2FAkO%2B8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu%0AYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O%2B0F1G7ttZ2GRRgVBZPwi%0AkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV%2FwUCXJQPywIb%0ADAAKCRC6vFFc9jxV%2F9YOCACe8qmOSnKQpQfW%2BPqYOqo3dt7JyweTs3FkD6NT8Zml%0AdYy%2FvkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L%0A3Tp90NN%2BQY5WDbsGmsyk6%2B6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c%0AFaNmEfKKy%2Fr1PO20NXEG6t9t05K%2FfrHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR%0A5%2BzkkSq%2FeG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR%0AwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr%2BN%0A%3D28dr%0A-----END+PGP+PUBLIC+KEY+BLOCK-----%0A&redundancy=reduced_redundancy&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&server_side_encryption=aws%3Akms&server_side_encryption_kms_key_id=1234&timestamp_format=%25Y
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "3"
+      - "4"
       access_key:
       - AKIAIOSFODNN7EXAMPLE
       bucket_name:
@@ -78,8 +78,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/logging/s3
+      - FastlyGo/3.6.0 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/4/logging/s3
     method: POST
   response:
     body: '{"msg":"''compression_codec'' and ''gzip_level'' cannot be set simultaneously"}'
@@ -91,11 +91,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 13 Apr 2021 18:41:47 GMT
+      - Wed, 09 Jun 2021 11:04:56 GMT
       Fastly-Ratelimit-Remaining:
-      - "918"
+      - "4992"
       Fastly-Ratelimit-Reset:
-      - "1618340400"
+      - "1623240000"
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -109,9 +109,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8248-DEN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lhr7382-LHR
       X-Timer:
-      - S1618339308.784483,VS0,VE78
+      - S1623236696.982087,VS0,VE117
     status: 400 Bad Request
     code: 400
     duration: ""

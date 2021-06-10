@@ -8,13 +8,33 @@ import (
 )
 
 type S3Redundancy string
+
+func S3RedundancyPtr(v S3Redundancy) *S3Redundancy { return &v }
+
 type S3ServerSideEncryption string
 
+func S3ServerSideEncryptionPtr(v S3ServerSideEncryption) *S3ServerSideEncryption { return &v }
+
+type S3AccessControlList string
+
+func S3AccessControlListPtr(v S3AccessControlList) *S3AccessControlList { return &v }
+
 const (
-	S3RedundancyStandard      S3Redundancy           = "standard"
-	S3RedundancyReduced       S3Redundancy           = "reduced_redundancy"
+	S3RedundancyStandard   S3Redundancy = "standard"
+	S3RedundancyReduced    S3Redundancy = "reduced_redundancy"
+	S3RedundancyOneZoneIA  S3Redundancy = "onezone_ia"
+	S3RedundancyStandardIA S3Redundancy = "standard_ia"
+
 	S3ServerSideEncryptionAES S3ServerSideEncryption = "AES256"
 	S3ServerSideEncryptionKMS S3ServerSideEncryption = "aws:kms"
+
+	S3AccessControlListPrivate                S3AccessControlList = "private"
+	S3AccessControlListPublicRead             S3AccessControlList = "public-read"
+	S3AccessControlListPublicReadWrite        S3AccessControlList = "public-read-write"
+	S3AccessControlListAWSExecRead            S3AccessControlList = "aws-exec-read"
+	S3AccessControlListAuthenticatedRead      S3AccessControlList = "authenticated-read"
+	S3AccessControlListBucketOwnerRead        S3AccessControlList = "bucket-owner-read"
+	S3AccessControlListBucketOwnerFullControl S3AccessControlList = "bucket-owner-full-control"
 )
 
 // S3 represents a S3 response from the Fastly API.
@@ -45,6 +65,7 @@ type S3 struct {
 	CreatedAt                    *time.Time             `mapstructure:"created_at"`
 	UpdatedAt                    *time.Time             `mapstructure:"updated_at"`
 	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
+	ACL                          S3AccessControlList    `mapstructure:"acl"`
 }
 
 // s3sByName is a sortable list of S3s.
@@ -118,6 +139,7 @@ type CreateS3Input struct {
 	PublicKey                    string                 `form:"public_key,omitempty"`
 	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
+	ACL                          S3AccessControlList    `form:"acl,omitempty"`
 }
 
 // CreateS3 creates a new Fastly S3.
@@ -197,26 +219,27 @@ type UpdateS3Input struct {
 	// Name is the name of the S3 to update.
 	Name string
 
-	NewName                      *string                `form:"name,omitempty"`
-	BucketName                   *string                `form:"bucket_name,omitempty"`
-	Domain                       *string                `form:"domain,omitempty"`
-	AccessKey                    *string                `form:"access_key,omitempty"`
-	SecretKey                    *string                `form:"secret_key,omitempty"`
-	IAMRole                      *string                `form:"iam_role,omitempty"`
-	Path                         *string                `form:"path,omitempty"`
-	Period                       *uint                  `form:"period,omitempty"`
-	CompressionCodec             *string                `form:"compression_codec,omitempty"`
-	GzipLevel                    *uint                  `form:"gzip_level,omitempty"`
-	Format                       *string                `form:"format,omitempty"`
-	FormatVersion                *uint                  `form:"format_version,omitempty"`
-	ResponseCondition            *string                `form:"response_condition,omitempty"`
-	MessageType                  *string                `form:"message_type,omitempty"`
-	TimestampFormat              *string                `form:"timestamp_format,omitempty"`
-	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
-	Placement                    *string                `form:"placement,omitempty"`
-	PublicKey                    *string                `form:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID *string                `form:"server_side_encryption_kms_key_id,omitempty"`
-	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
+	NewName                      *string                 `form:"name,omitempty"`
+	BucketName                   *string                 `form:"bucket_name,omitempty"`
+	Domain                       *string                 `form:"domain,omitempty"`
+	AccessKey                    *string                 `form:"access_key,omitempty"`
+	SecretKey                    *string                 `form:"secret_key,omitempty"`
+	IAMRole                      *string                 `form:"iam_role,omitempty"`
+	Path                         *string                 `form:"path,omitempty"`
+	Period                       *uint                   `form:"period,omitempty"`
+	CompressionCodec             *string                 `form:"compression_codec,omitempty"`
+	GzipLevel                    *uint                   `form:"gzip_level,omitempty"`
+	Format                       *string                 `form:"format,omitempty"`
+	FormatVersion                *uint                   `form:"format_version,omitempty"`
+	ResponseCondition            *string                 `form:"response_condition,omitempty"`
+	MessageType                  *string                 `form:"message_type,omitempty"`
+	TimestampFormat              *string                 `form:"timestamp_format,omitempty"`
+	Redundancy                   *S3Redundancy           `form:"redundancy,omitempty"`
+	Placement                    *string                 `form:"placement,omitempty"`
+	PublicKey                    *string                 `form:"public_key,omitempty"`
+	ServerSideEncryptionKMSKeyID *string                 `form:"server_side_encryption_kms_key_id,omitempty"`
+	ServerSideEncryption         *S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
+	ACL                          *S3AccessControlList    `form:"acl,omitempty"`
 }
 
 // UpdateS3 updates a specific S3.
@@ -233,7 +256,7 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 		return nil, ErrMissingName
 	}
 
-	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
+	if i.ServerSideEncryption != nil && *i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
 		return nil, ErrMissingServerSideEncryptionKMSKeyID
 	}
 
