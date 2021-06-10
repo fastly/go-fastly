@@ -1,5 +1,14 @@
 # Changelog
 
+## [v3.7.0](https://github.com/fastly/go-fastly/releases/tag/v3.7.0) (2021-06-10)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.6.0...v3.7.0)
+
+**Enhancements:**
+
+- Add S3 Logging ACL parameter and add Redundancy options [\#279](https://github.com/fastly/go-fastly/pull/279)
+- Add HTTP `206 Partial Content` to stats [\#277](https://github.com/fastly/go-fastly/pull/277)
+
 ## [v3.6.0](https://github.com/fastly/go-fastly/releases/tag/v3.6.0) (2021-04-15)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.5.0...v3.6.0)
