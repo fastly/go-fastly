@@ -711,7 +711,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceID:                    "foo",
 		ServiceVersion:               1,
 		Name:                         "test-service",
-		ServerSideEncryption:         S3ServerSideEncryptionKMS,
+		ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 		ServerSideEncryptionKMSKeyID: String(""),
 	})
 	if err != ErrMissingServerSideEncryptionKMSKeyID {
