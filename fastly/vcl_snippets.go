@@ -127,19 +127,16 @@ type UpdateSnippetInput struct {
 	Name string
 
 	// Name is the name for the snippet.
-	NewName string `form:"name"`
+	NewName *string `form:"name,omitempty"`
 
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `form:"priority"`
-
-	// Dynamic sets the snippet version to regular (0) or dynamic (1).
-	Dynamic int `form:"dynamic"`
+	Priority *int `form:"priority,omitempty"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `form:"content"`
+	Content *string `form:"content,omitempty"`
 
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type SnippetType `form:"type"`
+	Type *SnippetType `form:"type,omitempty"`
 }
 
 // UpdateSnippet updates a snippet on a unlocked version
@@ -154,10 +151,6 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 
 	if i.Name == "" {
 		return nil, ErrMissingName
-	}
-
-	if i.Dynamic == 0 && i.Content == "" {
-		return nil, ErrMissingContent
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -192,7 +185,7 @@ type UpdateDynamicSnippetInput struct {
 	ID string
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `form:"content"`
+	Content *string `form:"content,omitempty"`
 }
 
 // UpdateDynamicSnippet replaces the content of a Dynamic Snippet
