@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/3.7.0 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/snippet/0nO9jIuehPc4RDYpBa7fJw
-    method: GET
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/13/snippet/snipdyn
+    method: DELETE
   response:
-    body: '{"created_at":"2021-06-23T12:58:35Z","updated_at":"2021-06-23T12:58:35Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","snippet_id":"0nO9jIuehPc4RDYpBa7fJw","content":"#vcl"}'
+    body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,9 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 23 Jun 2021 12:58:36 GMT
-      Fastly-Restarts:
-      - "1"
+      - Wed, 23 Jun 2021 12:58:37 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4977"
+      Fastly-Ratelimit-Reset:
+      - "1624453200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4139-MAN
       X-Timer:
-      - S1624453116.244838,VS0,VE443
+      - S1624453118.573557,VS0,VE203
     status: 200 OK
     code: 200
     duration: ""

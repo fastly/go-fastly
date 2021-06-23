@@ -73,7 +73,7 @@ type CreateSnippetInput struct {
 	Name string `form:"name"`
 
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `form:"priority"`
+	Priority int `form:"priority,omitempty"`
 
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic int `form:"dynamic"`
@@ -99,8 +99,12 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 		return nil, ErrMissingName
 	}
 
-	if i.Dynamic == 0 && i.Content == "" {
+	if i.Content == "" {
 		return nil, ErrMissingContent
+	}
+
+	if i.Type == "" {
+		return nil, ErrMissingType
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/snippet", i.ServiceID, i.ServiceVersion)
