@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/3.7.0 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/13/snippet/snipverUpdated
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/13/snippet/snipverUpdated
     method: DELETE
   response:
     body: '{"status":"ok"}'

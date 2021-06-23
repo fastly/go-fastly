@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=13&content=%23vcl&dynamic=1&name=snipdyn&priority=123&type=fetch
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=13&content=%23vcl&dynamic=1&name=snipdyn&priority=123&type=fetch
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "13"
       content:
@@ -23,10 +23,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/3.7.0 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/13/snippet
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/13/snippet
     method: POST
   response:
-    body: '{"content":null,"dynamic":1,"name":"snipdyn","priority":"123","type":"fetch","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"13","id":"0nO9jIuehPc4RDYpBa7fJw","created_at":"2021-06-23T12:58:35Z","updated_at":"2021-06-23T12:58:35Z","deleted_at":null}'
+    body: '{"content":null,"dynamic":1,"name":"snipdyn","priority":"123","type":"fetch","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"13","id":"0nO9jIuehPc4RDYpBa7fJw","created_at":"2021-06-23T12:58:35Z","updated_at":"2021-06-23T12:58:35Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
