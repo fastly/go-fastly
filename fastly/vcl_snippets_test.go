@@ -38,22 +38,22 @@ func Test_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if testServiceID != cs.ServiceID {
+	if cs.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, cs.ServiceID)
 	}
-	if svName != cs.Name {
+	if cs.Name != svName {
 		t.Errorf("incorrect Name: want %v, have %q", svName, cs.Name)
 	}
-	if defaultPriority != cs.Priority {
+	if cs.Priority != defaultPriority {
 		t.Errorf("incorrect Priority: want %v, have %q", defaultPriority, cs.Priority)
 	}
-	if defaultDynamic != cs.Dynamic {
+	if cs.Dynamic != defaultDynamic {
 		t.Errorf("incorrect Dynamic: want %v, have %q", defaultDynamic, cs.Dynamic)
 	}
-	if vclContent != cs.Content {
+	if cs.Content != vclContent {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, cs.Content)
 	}
-	if SnippetTypeFetch != cs.Type {
+	if cs.Type != SnippetTypeFetch {
 		t.Errorf("incorrect Name: want %v, have %q", SnippetTypeFetch, cs.Type)
 	}
 
@@ -75,22 +75,22 @@ func Test_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if testServiceID != cs.ServiceID {
+	if cs.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, cs.ServiceID)
 	}
-	if sdName != cs.Name {
+	if cs.Name != sdName {
 		t.Errorf("incorrect Name: want %v, have %q", sdName, cs.Name)
 	}
-	if priority != cs.Priority {
+	if cs.Priority != priority {
 		t.Errorf("incorrect Priority: want %v, have %q", priority, cs.Priority)
 	}
-	if dynamic != cs.Dynamic {
+	if cs.Dynamic != dynamic {
 		t.Errorf("incorrect Dynamic: want %v, have %q", dynamic, cs.Dynamic)
 	}
-	if "" != cs.Content {
+	if cs.Content != "" {
 		t.Errorf("incorrect Content: want %v, have %q", "", cs.Content) // dynamic snippets don't return content
 	}
-	if SnippetTypeFetch != cs.Type {
+	if cs.Type != SnippetTypeFetch {
 		t.Errorf("incorrect Name: want %v, have %q", SnippetTypeFetch, cs.Type)
 	}
 
@@ -108,13 +108,13 @@ func Test_Snippets(t *testing.T) {
 	}
 
 	for _, s := range ls {
-		if testServiceID != s.ServiceID {
+		if s.ServiceID != testServiceID {
 			t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, s.ServiceID)
 		}
-		if SnippetTypeFetch != s.Type {
+		if s.Type != SnippetTypeFetch {
 			t.Errorf("incorrect Name: want %v, have %q", SnippetTypeFetch, s.Type)
 		}
-		if s.Dynamic == defaultDynamic {
+		if defaultDynamic == s.Dynamic {
 			if svName != s.Name {
 				t.Errorf("incorrect Name: want %v, have %q", svName, s.Name)
 			}
@@ -125,13 +125,13 @@ func Test_Snippets(t *testing.T) {
 				t.Errorf("incorrect Content: want %v, have %q", vclContent, s.Content)
 			}
 		} else {
-			if sdName != s.Name {
+			if s.Name != sdName {
 				t.Errorf("incorrect Name: want %v, have %q", sdName, s.Name)
 			}
-			if priority != s.Priority {
+			if s.Priority != priority {
 				t.Errorf("incorrect Priority: want %v, have %q", priority, s.Priority)
 			}
-			if "" != s.Content {
+			if s.Content != "" {
 				t.Errorf("incorrect Content: want %v, have %q", "", s.Content) // dynamic snippets don't return content
 			}
 		}
@@ -150,22 +150,22 @@ func Test_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if testServiceID != vs.ServiceID {
+	if vs.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, vs.ServiceID)
 	}
-	if svName != vs.Name {
+	if vs.Name != svName {
 		t.Errorf("incorrect Name: want %v, have %q", svName, vs.Name)
 	}
-	if defaultPriority != vs.Priority {
+	if vs.Priority != defaultPriority {
 		t.Errorf("incorrect Priority: want %v, have %q", defaultPriority, vs.Priority)
 	}
-	if defaultDynamic != vs.Dynamic {
+	if vs.Dynamic != defaultDynamic {
 		t.Errorf("incorrect Dynamic: want %v, have %q", defaultDynamic, vs.Dynamic)
 	}
-	if vclContent != vs.Content {
+	if vs.Content != vclContent {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, vs.Content)
 	}
-	if SnippetTypeFetch != vs.Type {
+	if vs.Type != SnippetTypeFetch {
 		t.Errorf("incorrect Name: want %v, have %q", SnippetTypeFetch, vs.Type)
 	}
 
@@ -181,13 +181,13 @@ func Test_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if testServiceID != ds.ServiceID {
+	if ds.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, ds.ServiceID)
 	}
-	if cs.ID != ds.ID {
+	if ds.ID != cs.ID {
 		t.Errorf("incorrect ID: want %v, have %q", cs.ID, ds.ID)
 	}
-	if vclContent != ds.Content {
+	if ds.Content != vclContent {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, ds.Content)
 	}
 
@@ -209,22 +209,22 @@ func Test_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if testServiceID != vs.ServiceID {
+	if vs.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, vs.ServiceID)
 	}
-	if svNameUpdated != vs.Name {
+	if vs.Name != svNameUpdated {
 		t.Errorf("incorrect Name: want %v, have %q", svNameUpdated, vs.Name)
 	}
-	if priority != vs.Priority {
+	if vs.Priority != priority {
 		t.Errorf("incorrect Priority: want %v, have %q", priority, vs.Priority)
 	}
-	if defaultDynamic != vs.Dynamic {
+	if vs.Dynamic != defaultDynamic {
 		t.Errorf("incorrect Dynamic: want %v, have %q", defaultDynamic, vs.Dynamic)
 	}
-	if vclContentUpdated != vs.Content {
+	if vs.Content != vclContentUpdated {
 		t.Errorf("incorrect Content: want %v, have %q", vclContentUpdated, vs.Content)
 	}
-	if hit != vs.Type {
+	if vs.Type != hit {
 		t.Errorf("incorrect Name: want %v, have %q", hit, vs.Type)
 	}
 
@@ -239,13 +239,13 @@ func Test_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if testServiceID != ds.ServiceID {
+	if ds.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, ds.ServiceID)
 	}
-	if cs.ID != ds.ID {
+	if ds.ID != cs.ID {
 		t.Errorf("incorrect ID: want %v, have %q", cs.ID, ds.ID)
 	}
-	if vclContentUpdated != ds.Content {
+	if ds.Content != vclContentUpdated {
 		t.Errorf("incorrect Content: want %v, have %q", vclContentUpdated, ds.Content)
 	}
 
