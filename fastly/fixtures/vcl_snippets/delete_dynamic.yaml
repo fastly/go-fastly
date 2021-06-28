@@ -2,19 +2,15 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A
-    form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+    body: ""
+    form: {}
     headers:
-      Content-Type:
-      - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/3.7.0 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
-    method: POST
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/13/snippet/snipdyn
+    method: DELETE
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":13}'
+    body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,9 +19,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 23 Jun 2021 12:58:34 GMT
+      - Wed, 23 Jun 2021 12:58:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "4983"
+      - "4977"
       Fastly-Ratelimit-Reset:
       - "1624453200"
       Status:
@@ -41,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4139-MAN
       X-Timer:
-      - S1624453114.023109,VS0,VE329
+      - S1624453118.573557,VS0,VE203
     status: 200 OK
     code: 200
     duration: ""

@@ -1,0 +1,61 @@
+---
+version: 1
+interactions:
+- request:
+    body: Name=snipver&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=13&content=%23vclUpdated&name=snipverUpdated&priority=456&type=hit
+    form:
+      Name:
+      - snipver
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "13"
+      content:
+      - '#vclUpdated'
+      name:
+      - snipverUpdated
+      priority:
+      - "456"
+      type:
+      - hit
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/3.7.0 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/13/snippet/snipver
+    method: PUT
+  response:
+    body: '{"updated_at":"2021-06-23T12:58:34Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-06-23T12:58:34Z","version":"13","content":"#vclUpdated","priority":"456","id":"425c18oKgfiNdUrGtFzKeh","type":"hit","dynamic":"0","name":"snipverUpdated","deleted_at":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-cache
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 23 Jun 2021 12:58:37 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4980"
+      Fastly-Ratelimit-Reset:
+      - "1624453200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4139-MAN
+      X-Timer:
+      - S1624453117.831266,VS0,VE255
+    status: 200 OK
+    code: 200
+    duration: ""
