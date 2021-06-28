@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.8.0](https://github.com/fastly/go-fastly/releases/tag/v3.8.0) (2021-06-28)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.7.0...v3.8.0)
+
+**Enhancements:**
+
+- Update VCL snippets to more closely align with API [\#281](https://github.com/fastly/go-fastly/pull/281)
+
 ## [v3.7.0](https://github.com/fastly/go-fastly/releases/tag/v3.7.0) (2021-06-10)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.6.0...v3.7.0)
