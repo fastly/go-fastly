@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.9.0](https://github.com/fastly/go-fastly/releases/tag/v3.9.0) (2021-06-29)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.8.0...v3.9.0)
+
+**Enhancements:**
+
+- Batch Surrogate-Key purge [\#284](https://github.com/fastly/go-fastly/pull/284)
+
 ## [v3.8.0](https://github.com/fastly/go-fastly/releases/tag/v3.8.0) (2021-06-28)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.7.0...v3.8.0)
