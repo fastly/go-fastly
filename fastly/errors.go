@@ -127,6 +127,10 @@ var ErrMissingItemKey = NewFieldError("ItemKey")
 // requires a "Key" key, but one was not set.
 var ErrMissingKey = NewFieldError("Key")
 
+// ErrMissingKeys is an error that is returned when an input struct
+// requires a "Keys" key, but one was not set.
+var ErrMissingKeys = NewFieldError("Keys")
+
 // ErrMissingLogin is an error that is returned when an input struct
 // requires a "Login" key, but one was not set.
 var ErrMissingLogin = NewFieldError("Login")

@@ -46,3 +46,42 @@ func TestClient_PurgeKey(t *testing.T) {
 		t.Error("bad id")
 	}
 }
+
+func TestClient_PurgeKeys(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var purges map[string]string
+	record(t, "purges/purge_by_keys", func(c *Client) {
+		purges, err = c.PurgeKeys(&PurgeKeysInput{
+			ServiceID: testServiceID,
+			Keys:      []string{"foo", "bar", "baz"},
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(purges) != 3 {
+		t.Error("bad length")
+	}
+}
+
+func TestClient_PurgeAll(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var purge *Purge
+	record(t, "purges/purge_all", func(c *Client) {
+		purge, err = c.PurgeAll(&PurgeAllInput{
+			ServiceID: testServiceID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if purge.Status != "ok" {
+		t.Error("bad status")
+	}
+}
