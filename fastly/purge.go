@@ -98,9 +98,6 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 type PurgeAllInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
-	// Soft performs a soft purge.
-	Soft bool
 }
 
 // PurgeAll instantly purges everything from a service.
@@ -113,10 +110,6 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 	req, err := c.RawRequest("POST", path, nil)
 	if err != nil {
 		return nil, err
-	}
-
-	if i.Soft {
-		req.Header.Set("Fastly-Soft-Purge", "1")
 	}
 
 	resp, err := checkResp(c.HTTPClient.Do(req))
