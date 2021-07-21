@@ -1,5 +1,14 @@
 # Changelog
 
+## [v3.9.1](https://github.com/fastly/go-fastly/releases/tag/v3.9.1) (2021-07-21)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.0...v3.9.1)
+
+**Bug fixes:**
+
+- `omitempty` should be set for ContentTypes and Extensions [#282](https://github.com/fastly/go-fastly/pull/282)
+- Check pointer struct type isn't nil before referencing its fields [#286](https://github.com/fastly/go-fastly/pull/286)
+
 ## [v3.9.0](https://github.com/fastly/go-fastly/releases/tag/v3.9.0) (2021-06-29)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.8.0...v3.9.0)
