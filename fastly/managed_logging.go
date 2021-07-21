@@ -51,7 +51,7 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 	// with a 409. Handle this case specially so users can decide if this is
 	// truly an error.
 	if err != nil {
-		if resp.StatusCode == http.StatusConflict {
+		if resp != nil && resp.StatusCode == http.StatusConflict {
 			return nil, ErrManagedLoggingEnabled
 		}
 		return nil, err
