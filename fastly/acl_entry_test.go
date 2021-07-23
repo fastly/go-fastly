@@ -38,7 +38,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Errorf("bad IP: %q", e.IP)
 	}
 
-	if e.Subnet != "8" {
+	if e.Subnet != 8 {
 		t.Errorf("Bad subnet: %q", e.Subnet)
 	}
 

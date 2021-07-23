@@ -12,7 +12,7 @@ type ACLEntry struct {
 
 	ID        string     `mapstructure:"id"`
 	IP        string     `mapstructure:"ip"`
-	Subnet    string     `mapstructure:"subnet"`
+	Subnet    int        `mapstructure:"subnet"`
 	Negated   bool       `mapstructure:"negated"`
 	Comment   string     `mapstructure:"comment"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
@@ -236,7 +236,7 @@ type BatchACLEntry struct {
 	Operation BatchOperation `json:"op"`
 	ID        *string        `json:"id,omitempty"`
 	IP        *string        `json:"ip,omitempty"`
-	Subnet    *string        `json:"subnet,omitempty"`
+	Subnet    *int           `json:"subnet,omitempty"`
 	Negated   *bool          `json:"negated,omitempty"`
 	Comment   *string        `json:"comment,omitempty"`
 }
