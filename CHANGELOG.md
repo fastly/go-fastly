@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.9.3](https://github.com/fastly/go-fastly/releases/tag/v3.9.3) (2021-07-23)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.2...v3.9.3)
+
+**Bug fixes:**
+
+- ACL entry `Subnet` field should be integer type (missed references) [#290](https://github.com/fastly/go-fastly/pull/290)
+
 ## [v3.9.2](https://github.com/fastly/go-fastly/releases/tag/v3.9.2) (2021-07-23)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.1...v3.9.2)
