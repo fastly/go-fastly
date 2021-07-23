@@ -12,7 +12,7 @@ type ACLEntry struct {
 
 	ID        string     `mapstructure:"id"`
 	IP        string     `mapstructure:"ip"`
-	Subnet    string     `mapstructure:"subnet"`
+	Subnet    int        `mapstructure:"subnet"`
 	Negated   bool       `mapstructure:"negated"`
 	Comment   string     `mapstructure:"comment"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
