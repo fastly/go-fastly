@@ -25,7 +25,7 @@ func TestClient_ACLEntries(t *testing.T) {
 			ServiceID: testService.ID,
 			ACLID:     testACL.ID,
 			IP:        "10.0.0.3",
-			Subnet:    "8",
+			Subnet:    8,
 			Negated:   false,
 			Comment:   "test entry",
 		})

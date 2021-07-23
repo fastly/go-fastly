@@ -107,7 +107,7 @@ type CreateACLEntryInput struct {
 	IP        string `form:"ip"`
 
 	// Optional fields
-	Subnet  string `form:"subnet,omitempty"`
+	Subnet  int    `form:"subnet,omitempty"`
 	Negated bool   `form:"negated,omitempty"`
 	Comment string `form:"comment,omitempty"`
 }
@@ -191,7 +191,7 @@ type UpdateACLEntryInput struct {
 
 	// Optional fields
 	IP      *string `form:"ip,omitempty"`
-	Subnet  *string `form:"subnet,omitempty"`
+	Subnet  *int    `form:"subnet,omitempty"`
 	Negated *bool   `form:"negated,omitempty"`
 	Comment *string `form:"comment,omitempty"`
 }
