@@ -18,6 +18,7 @@ type NewRelic struct {
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	Placement         string     `mapstructure:"placement"`
+	Region            string     `mapstructure:"region"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -80,6 +81,7 @@ type CreateNewRelicInput struct {
 	FormatVersion     uint   `form:"format_version,omitempty"`
 	ResponseCondition string `form:"response_condition,omitempty"`
 	Placement         string `form:"placement,omitempty"`
+	Region            string `form:"region,omitempty"`
 }
 
 // CreateNewRelic creates a new Fastly newrelic.
@@ -161,6 +163,7 @@ type UpdateNewRelicInput struct {
 	FormatVersion     *uint   `form:"format_version,omitempty"`
 	ResponseCondition *string `form:"response_condition,omitempty"`
 	Placement         *string `form:"placement,omitempty"`
+	Region            *string `form:"region,omitempty"`
 }
 
 // UpdateNewRelic updates a specific newrelic.

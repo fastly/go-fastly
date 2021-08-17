@@ -14,18 +14,50 @@ func TestClient_NewRelic(t *testing.T) {
 	})
 
 	// Create
-	var n *NewRelic
+	var newRelicResp1, newRelicResp2 *NewRelic
 	record(t, "newrelic/create", func(c *Client) {
-		n, err = c.CreateNewRelic(&CreateNewRelicInput{
+		newRelicResp1, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-newrelic",
 			Token:          "abcd1234",
 			Format:         "format",
 			Placement:      "waf_debug",
+			Region:         "us",
 		})
 	})
 	if err != nil {
+		t.Fatal(err)
+	}
+
+	record(t, "newrelic/create2", func(c *Client) {
+		newRelicResp2, err = c.CreateNewRelic(&CreateNewRelicInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-newrelic-2",
+			Token:          "abcd1234",
+			Format:         "format",
+			Placement:      "waf_debug",
+			Region:         "eu",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// This case is expected to fail due to an invalid region
+	record(t, "newrelic/create3", func(c *Client) {
+		_, err = c.CreateNewRelic(&CreateNewRelicInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-newrelic-3",
+			Token:          "abcd1234",
+			Format:         "format",
+			Placement:      "waf_debug",
+			Region:         "abc",
+		})
+	})
+	if err == nil {
 		t.Fatal(err)
 	}
 
@@ -41,25 +73,53 @@ func TestClient_NewRelic(t *testing.T) {
 			c.DeleteNewRelic(&DeleteNewRelicInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
+				Name:           "test-newrelic-2",
+			})
+
+			c.DeleteNewRelic(&DeleteNewRelicInput{
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
 				Name:           "new-test-newrelic",
 			})
 		})
 	}()
 
-	if n.Name != "test-newrelic" {
-		t.Errorf("bad name: %q", n.Name)
+	if newRelicResp1.Name != "test-newrelic" {
+		t.Errorf("bad name: %q", newRelicResp1.Name)
 	}
-	if n.Token != "abcd1234" {
-		t.Errorf("bad token: %q", n.Token)
+	if newRelicResp1.Token != "abcd1234" {
+		t.Errorf("bad token: %q", newRelicResp1.Token)
 	}
-	if n.Format != "format" {
-		t.Errorf("bad format: %q", n.Format)
+	if newRelicResp1.Format != "format" {
+		t.Errorf("bad format: %q", newRelicResp1.Format)
 	}
-	if n.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", n.FormatVersion)
+	if newRelicResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", newRelicResp1.FormatVersion)
 	}
-	if n.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", n.Placement)
+	if newRelicResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", newRelicResp1.Placement)
+	}
+	if newRelicResp1.Region != "us" {
+		t.Errorf("bad region: %q", newRelicResp1.Region)
+	}
+
+	if newRelicResp2.Name != "test-newrelic-2" {
+		t.Errorf("bad name: %q", newRelicResp2.Name)
+	}
+	if newRelicResp2.Token != "abcd1234" {
+		t.Errorf("bad token: %q", newRelicResp2.Token)
+	}
+	if newRelicResp2.Format != "format" {
+		t.Errorf("bad format: %q", newRelicResp2.Format)
+	}
+	if newRelicResp2.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", newRelicResp2.FormatVersion)
+	}
+	if newRelicResp2.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", newRelicResp2.Placement)
+	}
+	if newRelicResp2.Region != "eu" {
+		t.Errorf("bad region: %q", newRelicResp2.Region)
 	}
 
 	// List
@@ -78,9 +138,9 @@ func TestClient_NewRelic(t *testing.T) {
 	}
 
 	// Get
-	var nn *NewRelic
+	var newRelicGetResp, newRelicGetResp2 *NewRelic
 	record(t, "newrelic/get", func(c *Client) {
-		nn, err = c.GetNewRelic(&GetNewRelicInput{
+		newRelicGetResp, err = c.GetNewRelic(&GetNewRelicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-newrelic",
@@ -89,41 +149,93 @@ func TestClient_NewRelic(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if n.Name != nn.Name {
-		t.Errorf("bad name: %q", n.Name)
+
+	record(t, "newrelic/get2", func(c *Client) {
+		newRelicGetResp2, err = c.GetNewRelic(&GetNewRelicInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-newrelic-2",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
 	}
-	if n.Token != nn.Token {
-		t.Errorf("bad token: %q", n.Token)
+
+	if newRelicResp1.Name != newRelicGetResp.Name {
+		t.Errorf("bad name: %q", newRelicResp1.Name)
 	}
-	if n.Format != nn.Format {
-		t.Errorf("bad format: %q", n.Format)
+	if newRelicResp1.Token != newRelicGetResp.Token {
+		t.Errorf("bad token: %q", newRelicResp1.Token)
 	}
-	if n.FormatVersion != nn.FormatVersion {
-		t.Errorf("bad format_version: %q", n.FormatVersion)
+	if newRelicResp1.Format != newRelicGetResp.Format {
+		t.Errorf("bad format: %q", newRelicResp1.Format)
 	}
-	if n.Placement != nn.Placement {
-		t.Errorf("bad placement: %q", n.Placement)
+	if newRelicResp1.FormatVersion != newRelicGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", newRelicResp1.FormatVersion)
+	}
+	if newRelicResp1.Placement != newRelicGetResp.Placement {
+		t.Errorf("bad placement: %q", newRelicResp1.Placement)
+	}
+	if newRelicResp1.Region != newRelicGetResp.Region {
+		t.Errorf("bad region: %q", newRelicResp1.Region)
+	}
+
+	if newRelicResp2.Name != newRelicGetResp2.Name {
+		t.Errorf("bad name: %q", newRelicResp2.Name)
+	}
+	if newRelicResp2.Token != newRelicGetResp2.Token {
+		t.Errorf("bad token: %q", newRelicResp2.Token)
+	}
+	if newRelicResp2.Format != newRelicGetResp2.Format {
+		t.Errorf("bad format: %q", newRelicResp2.Format)
+	}
+	if newRelicResp2.FormatVersion != newRelicGetResp2.FormatVersion {
+		t.Errorf("bad format_version: %q", newRelicResp2.FormatVersion)
+	}
+	if newRelicResp2.Placement != newRelicGetResp2.Placement {
+		t.Errorf("bad placement: %q", newRelicResp2.Placement)
+	}
+	if newRelicResp2.Region != newRelicGetResp2.Region {
+		t.Errorf("bad region: %q", newRelicResp2.Region)
 	}
 
 	// Update
-	var un *NewRelic
+	var newRelicUpdateResp1 *NewRelic
 	record(t, "newrelic/update", func(c *Client) {
-		un, err = c.UpdateNewRelic(&UpdateNewRelicInput{
+		newRelicUpdateResp1, err = c.UpdateNewRelic(&UpdateNewRelicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-newrelic",
 			NewName:        String("new-test-newrelic"),
 			FormatVersion:  Uint(2),
+			Region:         String("eu"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if un.Name != "new-test-newrelic" {
-		t.Errorf("bad name: %q", un.Name)
+
+	// This case is expected to fail due to an invalid region.
+	record(t, "newrelic/update2", func(c *Client) {
+		_, err = c.UpdateNewRelic(&UpdateNewRelicInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-newrelic",
+			Region:         String("zz"),
+		})
+	})
+	if err == nil {
+		t.Fatal(err)
 	}
-	if un.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", un.FormatVersion)
+
+	if newRelicUpdateResp1.Name != "new-test-newrelic" {
+		t.Errorf("bad name: %q", newRelicUpdateResp1.Name)
+	}
+	if newRelicUpdateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", newRelicUpdateResp1.FormatVersion)
+	}
+	if newRelicUpdateResp1.Region != "eu" {
+		t.Errorf("bad region: %q", newRelicUpdateResp1.Region)
 	}
 
 	// Delete
