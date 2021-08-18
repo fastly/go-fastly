@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/3.6.0 (+github.com/fastly/go-fastly; go1.16.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/139/logging/newrelic/test-newrelic
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/139/logging/newrelic/test-newrelic-2
     method: GET
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","region":"us","response_condition":"","token":"abcd1234","version":"139","format_version":"2","format":"format","name":"test-newrelic","placement":"waf_debug","updated_at":"2021-08-17T16:11:50Z","deleted_at":null,"created_at":"2021-08-17T16:11:50Z"}'
+    body: '{"token":"abcd1234","deleted_at":null,"format_version":"2","created_at":"2021-08-17T16:11:50Z","name":"test-newrelic-2","service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","version":"139","placement":"waf_debug","region":"eu","response_condition":"","updated_at":"2021-08-17T16:11:50Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8241-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8241-DEN
       X-Timer:
-      - S1629216712.468589,VS0,VE84
+      - S1629216713.567055,VS0,VE100
     status: 200 OK
     code: 200
     duration: ""

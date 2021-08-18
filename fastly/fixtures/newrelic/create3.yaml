@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=139&format=format&name=test-newrelic&placement=waf_debug&region=us&token=abcd1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=139&format=format&name=test-newrelic-3&placement=waf_debug&region=abc&token=abcd1234
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
@@ -11,11 +11,11 @@ interactions:
       format:
       - format
       name:
-      - test-newrelic
+      - test-newrelic-3
       placement:
       - waf_debug
       region:
-      - us
+      - abc
       token:
       - abcd1234
     headers:
@@ -26,7 +26,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/139/logging/newrelic
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","region":"us","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"139","created_at":"2021-08-17T16:11:50Z","format_version":"2","updated_at":"2021-08-17T16:11:50Z","response_condition":"","deleted_at":null}'
+    body: '{"msg":"Bad request","detail":"unrecognized region abc"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,13 +35,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 17 Aug 2021 16:11:50 GMT
+      - Tue, 17 Aug 2021 16:11:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "982"
+      - "980"
       Fastly-Ratelimit-Reset:
       - "1629219600"
       Status:
-      - 200 OK
+      - 400 Bad Request
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -55,7 +55,7 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8241-DEN
       X-Timer:
-      - S1629216710.415356,VS0,VE383
-    status: 200 OK
-    code: 200
+      - S1629216712.580225,VS0,VE377
+    status: 400 Bad Request
+    code: 400
     duration: ""
