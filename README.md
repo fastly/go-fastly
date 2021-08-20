@@ -59,8 +59,7 @@ package main
 import (
 	"fmt"
 	"log"
-  "os"
-
+ 	"os"
 	"github.com/fastly/go-fastly/v3/fastly"
 )
 
