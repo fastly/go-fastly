@@ -45,6 +45,12 @@ const (
 // SnippetType is the type of VCL Snippet
 type SnippetType string
 
+// Helper function to get a pointer to string
+func SnippetTypeToString(b string) *SnippetType {
+	p := SnippetType(b)
+	return &p
+}
+
 // Snippet is the Fastly Snippet object
 type Snippet struct {
 	ServiceID      string `mapstructure:"service_id"`
