@@ -111,16 +111,20 @@ type CreateBackendInput struct {
 	HealthCheck         string      `form:"healthcheck,omitempty"`
 	Shield              string      `form:"shield,omitempty"`
 	UseSSL              Compatibool `form:"use_ssl,omitempty"`
-	SSLCheckCert        Compatibool `form:"ssl_check_cert,omitempty"`
-	SSLCACert           string      `form:"ssl_ca_cert,omitempty"`
-	SSLClientCert       string      `form:"ssl_client_cert,omitempty"`
-	SSLClientKey        string      `form:"ssl_client_key,omitempty"`
-	SSLHostname         string      `form:"ssl_hostname,omitempty"`
-	SSLCertHostname     string      `form:"ssl_cert_hostname,omitempty"`
-	SSLSNIHostname      string      `form:"ssl_sni_hostname,omitempty"`
-	MinTLSVersion       string      `form:"min_tls_version,omitempty"`
-	MaxTLSVersion       string      `form:"max_tls_version,omitempty"`
-	SSLCiphers          []string    `form:"ssl_ciphers,omitempty"`
+	// NOTE: Fastly API sets "ssl_check_cert" to true as its default value
+	// if this parameter is not present in the request.
+	// Removing omitempty from this particular field so that we can still
+	// create a new backend with "ssl_check_cert: false" set.
+	SSLCheckCert    Compatibool `form:"ssl_check_cert"`
+	SSLCACert       string      `form:"ssl_ca_cert,omitempty"`
+	SSLClientCert   string      `form:"ssl_client_cert,omitempty"`
+	SSLClientKey    string      `form:"ssl_client_key,omitempty"`
+	SSLHostname     string      `form:"ssl_hostname,omitempty"`
+	SSLCertHostname string      `form:"ssl_cert_hostname,omitempty"`
+	SSLSNIHostname  string      `form:"ssl_sni_hostname,omitempty"`
+	MinTLSVersion   string      `form:"min_tls_version,omitempty"`
+	MaxTLSVersion   string      `form:"max_tls_version,omitempty"`
+	SSLCiphers      []string    `form:"ssl_ciphers,omitempty"`
 }
 
 // CreateBackend creates a new Fastly backend.
