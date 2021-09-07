@@ -1,5 +1,21 @@
 # Changelog
 
+## [v3.9.4](https://github.com/fastly/go-fastly/releases/tag/v3.9.4) (2021-09-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.3...v3.9.4)
+
+**Enhancements:**
+
+- Add region support for NewRelic logging endpoint [#292](https://github.com/fastly/go-fastly/pull/292)
+
+**Bug fixes:**
+
+- Remove `omitempty` from `SSLCheckCert` field [#294](https://github.com/fastly/go-fastly/pull/294)
+
+**Documentation:**
+
+- Correct indentation in README code example [#293](https://github.com/fastly/go-fastly/pull/293)
+
 ## [v3.9.3](https://github.com/fastly/go-fastly/releases/tag/v3.9.3) (2021-07-23)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.2...v3.9.3)
