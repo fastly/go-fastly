@@ -1,3 +1,4 @@
+//go:build tools
 // +build tools
 
 // This follows the agreed-upon current best approach for adding developer tooling to your Module.
