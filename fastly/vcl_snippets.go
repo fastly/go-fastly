@@ -105,8 +105,8 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 		return nil, ErrMissingName
 	}
 
-	// 0 = dynamic snippet
-	// 1 = versioned snippet
+	// 0 = versioned snippet
+	// 1 = dynamic snippet
 	if i.Dynamic == 0 && i.Content == "" {
 		return nil, ErrMissingContent
 	}
