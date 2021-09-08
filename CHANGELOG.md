@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.9.5](https://github.com/fastly/go-fastly/releases/tag/v3.9.5) (2021-09-08)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.4...v3.9.5)
+
+**Bug fixes:**
+
+- Allow creating dynamic VCL snippets with empty content [#296](https://github.com/fastly/go-fastly/pull/296)
+
 ## [v3.9.4](https://github.com/fastly/go-fastly/releases/tag/v3.9.4) (2021-09-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.3...v3.9.4)
