@@ -2,25 +2,25 @@
 version: 1
 interactions:
 - request:
-    body: Name=integ-test.go-fastly.com&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=24&name=new-integ-test.go-fastly.com
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=24&comment=comment&name=integ2-test.go-fastly.com
     form:
-      Name:
-      - integ-test.go-fastly.com
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "24"
+      comment:
+      - comment
       name:
-      - new-integ-test.go-fastly.com
+      - integ2-test.go-fastly.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/3.9.5 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/domain/integ-test.go-fastly.com
-    method: PUT
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/domain
+    method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"comment","created_at":"2021-09-13T13:55:45Z","name":"new-integ-test.go-fastly.com","updated_at":"2021-09-13T13:55:45Z","deleted_at":null,"version":24}'
+    body: '{"comment":"comment","name":"integ2-test.go-fastly.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":24,"created_at":"2021-09-13T13:55:45Z","updated_at":"2021-09-13T13:55:45Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,9 +29,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 13 Sep 2021 13:55:46 GMT
+      - Mon, 13 Sep 2021 13:55:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "4947"
+      - "4948"
       Fastly-Ratelimit-Reset:
       - "1631541600"
       Status:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1631541347.646645,VS0,VE224
+      - S1631541345.494061,VS0,VE395
     status: 200 OK
     code: 200
     duration: ""
