@@ -3,7 +3,7 @@ package fastly
 import (
 	"encoding/json"
 	"fmt"
-	"io"
+	"io/ioutil"
 	"net/url"
 	"sort"
 	"time"
@@ -258,7 +258,7 @@ func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult
 	}
 	defer resp.Body.Close()
 
-	data, err := io.ReadAll(resp.Body)
+	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
@@ -345,7 +345,7 @@ func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*Doma
 	}
 	defer resp.Body.Close()
 
-	data, err := io.ReadAll(resp.Body)
+	data, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		return nil, err
 	}
