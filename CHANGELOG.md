@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.10.0](https://github.com/fastly/go-fastly/releases/tag/v3.10.0) (2021-09-13)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.5...v3.10.0)
+
+**Enhancements:**
+
+- Add domain validation API [#298](https://github.com/fastly/go-fastly/pull/298)
+
 ## [v3.9.5](https://github.com/fastly/go-fastly/releases/tag/v3.9.5) (2021-09-08)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.4...v3.9.5)
