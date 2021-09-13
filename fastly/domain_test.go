@@ -27,6 +27,19 @@ func TestClient_Domains(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	var d2 *Domain
+	record(t, "domains/create2", func(c *Client) {
+		d2, err = c.CreateDomain(&CreateDomainInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "integ2-test.go-fastly.com",
+			Comment:        "comment",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// Ensure deleted
 	defer func() {
 		record(t, "domains/cleanup", func(c *Client) {
@@ -50,6 +63,9 @@ func TestClient_Domains(t *testing.T) {
 	if d.Comment != "comment" {
 		t.Errorf("bad comment: %q", d.Comment)
 	}
+	if d2.Name != "integ2-test.go-fastly.com" {
+		t.Errorf("bad name: %q", d.Name)
+	}
 
 	// List
 	var ds []*Domain
@@ -62,7 +78,7 @@ func TestClient_Domains(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(ds) < 1 {
+	if len(ds) < 2 {
 		t.Errorf("bad domains: %v", ds)
 	}
 
@@ -116,6 +132,25 @@ func TestClient_Domains(t *testing.T) {
 	}
 	if vd.Valid != false {
 		t.Errorf("valid domain unexpected: %q", vd.Metadata.Name)
+	}
+
+	var vds []*DomainValidationResult
+	record(t, "domains/validate-all", func(c *Client) {
+		vds, err = c.ValidateAllDomains(&ValidateAllDomainsInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(vds) < 2 {
+		t.Errorf("invalid domains: %v", vds)
+	}
+	for _, d := range vds {
+		if d.Valid != false {
+			t.Errorf("valid domain unexpected: %q", d.Metadata.Name)
+		}
 	}
 
 	// Delete

@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/3.9.5 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/18/domain/integ-test.go-fastly.com
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/24/domain/integ-test.go-fastly.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e integ-test.go-fastly.com, service =\u003e
-      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 18 }''"}'
+      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 24 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,9 +21,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 13 Sep 2021 13:19:48 GMT
+      - Mon, 13 Sep 2021 13:55:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "4988"
+      - "4945"
       Fastly-Ratelimit-Reset:
       - "1631541600"
       Status:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1631539188.001498,VS0,VE115
+      - S1631541348.001965,VS0,VE114
     status: 404 Not Found
     code: 404
     duration: ""
@@ -51,12 +51,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/3.9.5 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/18/domain/new-integ-test.go-fastly.com
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/24/domain/new-integ-test.go-fastly.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-integ-test.go-fastly.com, service =\u003e
-      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 18 }''"}'
+      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 24 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,9 +65,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 13 Sep 2021 13:19:48 GMT
+      - Mon, 13 Sep 2021 13:55:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "4987"
+      - "4944"
       Fastly-Ratelimit-Reset:
       - "1631541600"
       Status:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1631539188.135178,VS0,VE185
+      - S1631541348.139158,VS0,VE136
     status: 404 Not Found
     code: 404
     duration: ""

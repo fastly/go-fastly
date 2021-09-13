@@ -318,3 +318,50 @@ type DomainMetadata struct {
 	UpdatedAt *time.Time `json:"updated_at"`
 	DeletedAt *time.Time `json:"deleted_at"`
 }
+
+// ValidateAllDomainsInput is used as input to the ValidateAllDomains function.
+type ValidateAllDomainsInput struct {
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+}
+
+// ValidateAllDomains validates the given domain.
+func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*DomainValidationResult, err error) {
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
+	}
+
+	path := fmt.Sprintf("/service/%s/version/%d/domain/check_all", i.ServiceID, i.ServiceVersion)
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	data, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	var tuple []json.RawMessage
+	if err := json.Unmarshal(data, &tuple); err != nil {
+		return nil, fmt.Errorf("initial: %w", err)
+	}
+	for _, t := range tuple {
+		var d *DomainValidationResult
+		err = json.Unmarshal(t, &d)
+		if err != nil {
+			return nil, err
+		}
+		results = append(results, d)
+	}
+
+	return results, nil
+}
