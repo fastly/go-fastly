@@ -6,26 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/38/domain/integ-test.go-fastly.com
+      - FastlyGo/3.9.5 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/18/domain/integ-test.go-fastly.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e integ-test.go-fastly.com, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 38 }''"}'
+      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 18 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:41:43 GMT
+      - Mon, 13 Sep 2021 13:19:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "761"
+      - "4988"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1631541600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4134-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610620903.978902,VS0,VE178
+      - S1631539188.001498,VS0,VE115
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,26 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/38/domain/new-integ-test.go-fastly.com
+      - FastlyGo/3.9.5 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/18/domain/new-integ-test.go-fastly.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-integ-test.go-fastly.com, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 38 }''"}'
+      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 18 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:41:43 GMT
+      - Mon, 13 Sep 2021 13:19:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "760"
+      - "4987"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1631541600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4134-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610620903.210763,VS0,VE185
+      - S1631539188.135178,VS0,VE185
     status: 404 Not Found
     code: 404
     duration: ""

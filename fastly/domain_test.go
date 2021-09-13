@@ -102,6 +102,22 @@ func TestClient_Domains(t *testing.T) {
 		t.Errorf("bad name: %q", ud.Name)
 	}
 
+	// Validate
+	var vd *DomainValidationResult
+	record(t, "domains/validation", func(c *Client) {
+		vd, err = c.ValidateDomain(&ValidateDomainInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-integ-test.go-fastly.com",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if vd.Valid != false {
+		t.Errorf("valid domain unexpected: %q", vd.Metadata.Name)
+	}
+
 	// Delete
 	record(t, "domains/delete", func(c *Client) {
 		err = c.DeleteDomain(&DeleteDomainInput{
@@ -232,6 +248,33 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 	}
 
 	err = testClient.DeleteDomain(&DeleteDomainInput{
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+		Name:           "",
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_ValidateDomain_validation(t *testing.T) {
+	var err error
+	_, err = testClient.ValidateDomain(&ValidateDomainInput{
+		ServiceID: "",
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ValidateDomain(&ValidateDomainInput{
+		ServiceID:      "foo",
+		ServiceVersion: 0,
+	})
+	if err != ErrMissingServiceVersion {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ValidateDomain(&ValidateDomainInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 		Name:           "",
