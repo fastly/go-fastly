@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"sort"
 	"time"
 )
@@ -171,6 +172,33 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 
 	path := fmt.Sprintf("/user/%s", i.ID)
 	resp, err := c.Delete(path, nil)
+	if err != nil {
+		return err
+	}
+
+	var r *statusResp
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
+		return err
+	}
+	if !r.Ok() {
+		return ErrNotOK
+	}
+	return nil
+}
+
+// ResetUserPasswordInput is used as input to the ResetUserPassword function.
+type ResetUserPasswordInput struct {
+	Login string
+}
+
+// ResetUserPassword revokes a specific token by its ID.
+func (c *Client) ResetUserPassword(i *ResetUserPasswordInput) error {
+	if i.Login == "" {
+		return ErrMissingLogin
+	}
+
+	path := fmt.Sprintf("/user/%s/password/request_reset", url.PathEscape(i.Login))
+	resp, err := c.Post(path, nil)
 	if err != nil {
 		return err
 	}

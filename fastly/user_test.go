@@ -105,6 +105,16 @@ func TestClient_Users(t *testing.T) {
 		t.Errorf("bad role: %q", uu.Role)
 	}
 
+	// Reset Password
+	record(t, fixtureBase+"reset_password", func(c *Client) {
+		err = c.ResetUserPassword(&ResetUserPasswordInput{
+			Login: uu.Login,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteUser(&DeleteUserInput{
@@ -169,6 +179,15 @@ func TestClient_DeleteUser_validation(t *testing.T) {
 		ID: "",
 	})
 	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestClient_ResetUser_validation(t *testing.T) {
+	err := testClient.ResetUserPassword(&ResetUserPasswordInput{
+		Login: "",
+	})
+	if err != ErrMissingLogin {
 		t.Errorf("bad error: %s", err)
 	}
 }
