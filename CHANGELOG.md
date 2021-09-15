@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.12.0](https://github.com/fastly/go-fastly/releases/tag/v3.12.0) (2021-09-15)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.11.0...v3.12.0)
+
+**Enhancements:**
+
+- Implement `DELETE /tokens` (bulk token deletion) API [#302](https://github.com/fastly/go-fastly/pull/302)
+
 ## [v3.11.0](https://github.com/fastly/go-fastly/releases/tag/v3.11.0) (2021-09-15)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.10.0...v3.11.0)
