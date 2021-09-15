@@ -1,0 +1,254 @@
+---
+version: 1
+interactions:
+- request:
+    body: name=my-test-token-1&password=foobar&scope=global&username=testing%40fastly.com
+    form:
+      name:
+      - my-test-token-1
+      password:
+      - foobar
+      scope:
+      - global
+      username:
+      - testing@fastly.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/sudo
+    method: POST
+  response:
+    body: '{"expiry_time":"2021-09-15T16:15:56+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 Sep 2021 16:10:56 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4999"
+      Fastly-Ratelimit-Reset:
+      - "1631725200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4150-MAN
+      X-Timer:
+      - S1631722256.303142,VS0,VE306
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: name=my-test-token-1&password=foobar&scope=global&username=testing%40fastly.com
+    form:
+      name:
+      - my-test-token-1
+      password:
+      - foobar
+      scope:
+      - global
+      username:
+      - testing@fastly.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/tokens
+    method: POST
+  response:
+    body: '{"id":"67WnFZog4TztGgdNfc9mxX","name":"my-test-token-1","user_id":"52LiGaZmbWl4D5xv4tcxON","customer_id":"51MumwLiSJyFTWhtbByYgR","service_id":null,"expires_at":null,"created_at":"2021-09-15T16:10:56Z","updated_at":"2021-09-15T16:10:56Z","scope":"global","services":[],"access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 Sep 2021 16:10:56 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4998"
+      Fastly-Ratelimit-Reset:
+      - "1631725200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4150-MAN
+      X-Timer:
+      - S1631722257.636563,VS0,VE348
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: name=my-test-token-2&password=foobar&scope=global&username=testing%40fastly.com
+    form:
+      name:
+      - my-test-token-2
+      password:
+      - foobar
+      scope:
+      - global
+      username:
+      - testing@fastly.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/sudo
+    method: POST
+  response:
+    body: '{"expiry_time":"2021-09-15T16:15:57+00:00"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 Sep 2021 16:10:57 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4997"
+      Fastly-Ratelimit-Reset:
+      - "1631725200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4150-MAN
+      X-Timer:
+      - S1631722257.011411,VS0,VE232
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: name=my-test-token-2&password=foobar&scope=global&username=testing%40fastly.com
+    form:
+      name:
+      - my-test-token-2
+      password:
+      - foobar
+      scope:
+      - global
+      username:
+      - testing@fastly.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/tokens
+    method: POST
+  response:
+    body: '{"id":"XzkxSPqcUJmf522PeZ1tb","name":"my-test-token-2","user_id":"52LiGaZmbWl4D5xv4tcxON","customer_id":"51MumwLiSJyFTWhtbByYgR","service_id":null,"expires_at":null,"created_at":"2021-09-15T16:10:57Z","updated_at":"2021-09-15T16:10:57Z","scope":"global","services":[],"access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 15 Sep 2021 16:10:57 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4996"
+      Fastly-Ratelimit-Reset:
+      - "1631725200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4150-MAN
+      X-Timer:
+      - S1631722257.275500,VS0,VE167
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: |
+      {"data":[{"type":"token","id":"67WnFZog4TztGgdNfc9mxX"},{"type":"token","id":"XzkxSPqcUJmf522PeZ1tb"}]}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json; ext=bulk
+      Content-Type:
+      - application/vnd.api+json; ext=bulk
+      User-Agent:
+      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/tokens
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Wed, 15 Sep 2021 16:10:57 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4995"
+      Fastly-Ratelimit-Reset:
+      - "1631725200"
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4150-MAN
+      X-Timer:
+      - S1631722257.462874,VS0,VE199
+    status: 204 No Content
+    code: 204
+    duration: ""
