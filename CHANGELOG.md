@@ -1,5 +1,13 @@
 # Changelog
 
+## [v3.11.0](https://github.com/fastly/go-fastly/releases/tag/v3.11.0) (2021-09-15)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.10.0...v3.11.0)
+
+**Enhancements:**
+
+- Implement user password reset [#300](https://github.com/fastly/go-fastly/pull/300)
+
 ## [v3.10.0](https://github.com/fastly/go-fastly/releases/tag/v3.10.0) (2021-09-13)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.9.5...v3.10.0)
