@@ -105,3 +105,42 @@ func TestClient_DeleteTokenSelf(t *testing.T) {
 		t.Fatal(err)
 	}
 }
+
+func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
+	t.Parallel()
+
+	var deleteErr error
+
+	record(t, "tokens/create_and_bulk_delete", func(c *Client) {
+		token1, err := c.CreateToken(&CreateTokenInput{
+			Name:     "my-test-token-1",
+			Scope:    "global",
+			Username: "testing@fastly.com",
+			Password: "foobar",
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		token2, err := c.CreateToken(&CreateTokenInput{
+			Name:     "my-test-token-2",
+			Scope:    "global",
+			Username: "testing@fastly.com",
+			Password: "foobar",
+		})
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		deleteErr = c.BatchDeleteTokens(&BatchDeleteTokensInput{
+			Tokens: []*BatchToken{
+				{ID: token1.ID},
+				{ID: token2.ID},
+			},
+		})
+	})
+
+	if deleteErr != nil {
+		t.Fatal(deleteErr)
+	}
+}

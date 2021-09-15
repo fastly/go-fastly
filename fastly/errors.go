@@ -235,6 +235,10 @@ var ErrMissingYear = NewFieldError("Year")
 // struct requires either a "Name" or "Comment" key, but one was not set.
 var ErrMissingOptionalNameComment = NewFieldError("Name, Comment").Message("at least one of the available 'optional' fields is required")
 
+// ErrMissingTokensValue is an error that is returned when an input struct
+// requires a "Tokens" key, but there needs to be at least one token entry.
+var ErrMissingTokensValue = NewFieldError("Tokens").Message("expect at least one token")
+
 // ErrStatusNotOk is an error that indicates the response body returned by the
 // Fastly API was not `{"status": "ok"}`
 var ErrStatusNotOk = errors.New("unexpected 'status' field in API response body")

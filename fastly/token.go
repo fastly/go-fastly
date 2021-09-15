@@ -169,3 +169,23 @@ func (c *Client) DeleteTokenSelf() error {
 	}
 	return nil
 }
+
+// BatchDeleteTokensInput is used as input to BatchDeleteTokens.
+type BatchDeleteTokensInput struct {
+	Tokens []*BatchToken
+}
+
+// BatchToken represents the JSONAPI data to be sent to the API.
+// Reference: https://github.com/google/jsonapi#primary
+type BatchToken struct {
+	ID string `jsonapi:"primary,token,omitempty"`
+}
+
+// BatchDeleteTokens revokes multiple tokens.
+func (c *Client) BatchDeleteTokens(i *BatchDeleteTokensInput) error {
+	if len(i.Tokens) == 0 {
+		return ErrMissingTokensValue
+	}
+	_, err := c.DeleteJSONAPIBulk("/tokens", i.Tokens, nil)
+	return err
+}
