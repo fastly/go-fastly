@@ -300,6 +300,16 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	if err := form.NewEncoder(buf).KeepZeros(true).DelimitWith('|').Encode(i); err != nil {
 		return nil, err
 	}
+
+	// NOTE: This is a temporary work-around to the issue of the Fastly API not
+	// recognising the format used by the github.com/ajg/form package.
+	//
+	// TODO: Consider using some form of custom marshal
+	// (https://github.com/ajg/form#custom-marshaling) or alternatively switch
+	// out the package for something else that has better support for the more
+	// traditional serialisation format: foo[]=A&foo[]=B
+	//
+	// EXAMPLE: https://play.golang.org/p/Kmf3l54MB73
 	body := formEncodingArrayPattern.ReplaceAllString(buf.String(), "%5B%5D") // %5B%5D == []
 
 	ro.Body = strings.NewReader(body)
