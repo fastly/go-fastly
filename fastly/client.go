@@ -54,8 +54,14 @@ var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 	ProjectVersion, ProjectURL, runtime.Version())
 
 // formEncodingArrayPattern is used to match the encoded multi-valued field
-// format of |<T> where T is an incrementing index such as:
-// services|0=A&services|1=B
+// format of |<T> where T is an incrementing index
+//
+// Example:
+// foo|0=A&foo|1=B
+//
+// NOTE:
+// I'm only checking double digits and nothing larger as I don't expect anyone
+// to provide over 99 separate values.
 var formEncodingArrayPattern = regexp.MustCompile(`%7C\d{1,2}`)
 
 // Client is the main entrypoint to the Fastly golang API library.
