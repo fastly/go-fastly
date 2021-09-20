@@ -117,6 +117,7 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 			Scope:    "global",
 			Username: "testing@fastly.com",
 			Password: "foobar",
+			Services: []string{"5wHdzYhbILBcvU2aAjH8so", "6besTz8jIUQudhhr4vLEzt"},
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -127,6 +128,7 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 			Scope:    "global",
 			Username: "testing@fastly.com",
 			Password: "foobar",
+			Services: []string{"5wHdzYhbILBcvU2aAjH8so", "6besTz8jIUQudhhr4vLEzt"},
 		})
 		if err != nil {
 			t.Fatal(err)

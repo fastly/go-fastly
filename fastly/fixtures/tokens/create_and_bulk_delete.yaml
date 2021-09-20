@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: name=my-test-token-1&password=foobar&scope=global&username=testing%40fastly.com
+    body: name=my-test-token-1&password=foobar&scope=global&services%5B%5D=5wHdzYhbILBcvU2aAjH8so&services%5B%5D=6besTz8jIUQudhhr4vLEzt&username=testing%40fastly.com
     form:
       name:
       - my-test-token-1
@@ -10,17 +10,20 @@ interactions:
       - foobar
       scope:
       - global
+      services[]:
+      - 5wHdzYhbILBcvU2aAjH8so
+      - 6besTz8jIUQudhhr4vLEzt
       username:
       - testing@fastly.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/3.12.0 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/sudo
     method: POST
   response:
-    body: '{"expiry_time":"2021-09-15T16:15:56+00:00"}'
+    body: '{"expiry_time":"2021-09-20T11:29:38+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +32,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 15 Sep 2021 16:10:56 GMT
+      - Mon, 20 Sep 2021 11:24:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "4999"
+      - "4992"
       Fastly-Ratelimit-Reset:
-      - "1631725200"
+      - "1632139200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,14 +50,14 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4150-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1631722256.303142,VS0,VE306
+      - S1632137078.768877,VS0,VE400
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: name=my-test-token-1&password=foobar&scope=global&username=testing%40fastly.com
+    body: name=my-test-token-1&password=foobar&scope=global&services%5B%5D=5wHdzYhbILBcvU2aAjH8so&services%5B%5D=6besTz8jIUQudhhr4vLEzt&username=testing%40fastly.com
     form:
       name:
       - my-test-token-1
@@ -62,17 +65,20 @@ interactions:
       - foobar
       scope:
       - global
+      services[]:
+      - 5wHdzYhbILBcvU2aAjH8so
+      - 6besTz8jIUQudhhr4vLEzt
       username:
       - testing@fastly.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/3.12.0 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/tokens
     method: POST
   response:
-    body: '{"id":"67WnFZog4TztGgdNfc9mxX","name":"my-test-token-1","user_id":"52LiGaZmbWl4D5xv4tcxON","customer_id":"51MumwLiSJyFTWhtbByYgR","service_id":null,"expires_at":null,"created_at":"2021-09-15T16:10:56Z","updated_at":"2021-09-15T16:10:56Z","scope":"global","services":[],"access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
+    body: '{"id":"27DePetT24oLN9xdXRMkdo","name":"my-test-token-1","user_id":"52LiGaZmbWl4D5xv4tcxON","customer_id":"51MumwLiSJyFTWhtbByYgR","service_id":"6besTz8jIUQudhhr4vLEzt","expires_at":null,"created_at":"2021-09-20T11:24:38Z","updated_at":"2021-09-20T11:24:38Z","scope":"global","services":["5wHdzYhbILBcvU2aAjH8so","6besTz8jIUQudhhr4vLEzt"],"access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -81,11 +87,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 15 Sep 2021 16:10:56 GMT
+      - Mon, 20 Sep 2021 11:24:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "4998"
+      - "4991"
       Fastly-Ratelimit-Reset:
-      - "1631725200"
+      - "1632139200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -99,14 +105,14 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4150-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1631722257.636563,VS0,VE348
+      - S1632137078.206178,VS0,VE386
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: name=my-test-token-2&password=foobar&scope=global&username=testing%40fastly.com
+    body: name=my-test-token-2&password=foobar&scope=global&services%5B%5D=5wHdzYhbILBcvU2aAjH8so&services%5B%5D=6besTz8jIUQudhhr4vLEzt&username=testing%40fastly.com
     form:
       name:
       - my-test-token-2
@@ -114,17 +120,20 @@ interactions:
       - foobar
       scope:
       - global
+      services[]:
+      - 5wHdzYhbILBcvU2aAjH8so
+      - 6besTz8jIUQudhhr4vLEzt
       username:
       - testing@fastly.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/3.12.0 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/sudo
     method: POST
   response:
-    body: '{"expiry_time":"2021-09-15T16:15:57+00:00"}'
+    body: '{"expiry_time":"2021-09-20T11:29:38+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -133,11 +142,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 15 Sep 2021 16:10:57 GMT
+      - Mon, 20 Sep 2021 11:24:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "4997"
+      - "4990"
       Fastly-Ratelimit-Reset:
-      - "1631725200"
+      - "1632139200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -151,14 +160,14 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4150-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1631722257.011411,VS0,VE232
+      - S1632137079.627201,VS0,VE371
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: name=my-test-token-2&password=foobar&scope=global&username=testing%40fastly.com
+    body: name=my-test-token-2&password=foobar&scope=global&services%5B%5D=5wHdzYhbILBcvU2aAjH8so&services%5B%5D=6besTz8jIUQudhhr4vLEzt&username=testing%40fastly.com
     form:
       name:
       - my-test-token-2
@@ -166,17 +175,20 @@ interactions:
       - foobar
       scope:
       - global
+      services[]:
+      - 5wHdzYhbILBcvU2aAjH8so
+      - 6besTz8jIUQudhhr4vLEzt
       username:
       - testing@fastly.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/3.12.0 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/tokens
     method: POST
   response:
-    body: '{"id":"XzkxSPqcUJmf522PeZ1tb","name":"my-test-token-2","user_id":"52LiGaZmbWl4D5xv4tcxON","customer_id":"51MumwLiSJyFTWhtbByYgR","service_id":null,"expires_at":null,"created_at":"2021-09-15T16:10:57Z","updated_at":"2021-09-15T16:10:57Z","scope":"global","services":[],"access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
+    body: '{"id":"5nifBbOSCa4gxQ0846z1RL","name":"my-test-token-2","user_id":"52LiGaZmbWl4D5xv4tcxON","customer_id":"51MumwLiSJyFTWhtbByYgR","service_id":"6besTz8jIUQudhhr4vLEzt","expires_at":null,"created_at":"2021-09-20T11:24:39Z","updated_at":"2021-09-20T11:24:39Z","scope":"global","services":["5wHdzYhbILBcvU2aAjH8so","6besTz8jIUQudhhr4vLEzt"],"access_token":"XXXXXXXXXXXXXXXXXXXXXX"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -185,11 +197,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 15 Sep 2021 16:10:57 GMT
+      - Mon, 20 Sep 2021 11:24:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "4996"
+      - "4989"
       Fastly-Ratelimit-Reset:
-      - "1631725200"
+      - "1632139200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -203,15 +215,15 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4150-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1631722257.275500,VS0,VE167
+      - S1632137079.019631,VS0,VE221
     status: 200 OK
     code: 200
     duration: ""
 - request:
     body: |
-      {"data":[{"type":"token","id":"67WnFZog4TztGgdNfc9mxX"},{"type":"token","id":"XzkxSPqcUJmf522PeZ1tb"}]}
+      {"data":[{"type":"token","id":"27DePetT24oLN9xdXRMkdo"},{"type":"token","id":"5nifBbOSCa4gxQ0846z1RL"}]}
     form: {}
     headers:
       Accept:
@@ -219,7 +231,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json; ext=bulk
       User-Agent:
-      - FastlyGo/3.11.0 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/3.12.0 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/tokens
     method: DELETE
   response:
@@ -230,11 +242,11 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 15 Sep 2021 16:10:57 GMT
+      - Mon, 20 Sep 2021 11:24:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "4995"
+      - "4988"
       Fastly-Ratelimit-Reset:
-      - "1631725200"
+      - "1632139200"
       Status:
       - 204 No Content
       Strict-Transport-Security:
@@ -246,9 +258,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4150-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1631722257.462874,VS0,VE199
+      - S1632137079.267003,VS0,VE276
     status: 204 No Content
     code: 204
     duration: ""

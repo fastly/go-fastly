@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"strings"
 	"sync"
@@ -51,6 +52,11 @@ var ProjectVersion = "3.12.0"
 // UserAgent is the user agent for this particular client.
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 	ProjectVersion, ProjectURL, runtime.Version())
+
+// formEncodingArrayPattern is used to match the encoded multi-valued field
+// format of |<T> where T is an incrementing index such as:
+// services|0=A&services|1=B
+var formEncodingArrayPattern = regexp.MustCompile(`%7C\d{1,2}`)
 
 // Client is the main entrypoint to the Fastly golang API library.
 type Client struct {
@@ -294,7 +300,7 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	if err := form.NewEncoder(buf).KeepZeros(true).DelimitWith('|').Encode(i); err != nil {
 		return nil, err
 	}
-	body := buf.String()
+	body := formEncodingArrayPattern.ReplaceAllString(buf.String(), "%5B%5D") // %5B%5D == []
 
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))
