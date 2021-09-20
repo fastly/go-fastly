@@ -38,7 +38,7 @@ type Backend struct {
 	SSLSNIHostname      string     `mapstructure:"ssl_sni_hostname"`
 	MinTLSVersion       string     `mapstructure:"min_tls_version"`
 	MaxTLSVersion       string     `mapstructure:"max_tls_version"`
-	SSLCiphers          []string   `mapstructure:"ssl_ciphers"`
+	SSLCiphers          string     `mapstructure:"ssl_ciphers"`
 	CreatedAt           *time.Time `mapstructure:"created_at"`
 	UpdatedAt           *time.Time `mapstructure:"updated_at"`
 	DeletedAt           *time.Time `mapstructure:"deleted_at"`
@@ -124,7 +124,7 @@ type CreateBackendInput struct {
 	SSLSNIHostname  string      `form:"ssl_sni_hostname,omitempty"`
 	MinTLSVersion   string      `form:"min_tls_version,omitempty"`
 	MaxTLSVersion   string      `form:"max_tls_version,omitempty"`
-	SSLCiphers      []string    `form:"ssl_ciphers,omitempty"`
+	SSLCiphers      string      `form:"ssl_ciphers,omitempty"`
 }
 
 // CreateBackend creates a new Fastly backend.
@@ -225,7 +225,7 @@ type UpdateBackendInput struct {
 	SSLSNIHostname      *string      `form:"ssl_sni_hostname,omitempty"`
 	MinTLSVersion       *string      `form:"min_tls_version,omitempty"`
 	MaxTLSVersion       *string      `form:"max_tls_version,omitempty"`
-	SSLCiphers          []string     `form:"ssl_ciphers,omitempty"`
+	SSLCiphers          string       `form:"ssl_ciphers,omitempty"`
 }
 
 // UpdateBackend updates a specific backend.

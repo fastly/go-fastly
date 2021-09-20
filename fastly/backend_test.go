@@ -24,6 +24,7 @@ func TestClient_Backends(t *testing.T) {
 			Port:           1234,
 			ConnectTimeout: 1500,
 			OverrideHost:   "origin.example.com",
+			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
 		})
 	})
 	if err != nil {
@@ -115,6 +116,7 @@ func TestClient_Backends(t *testing.T) {
 			Name:           "test-backend",
 			NewName:        String("new-test-backend"),
 			OverrideHost:   String("www.example.com"),
+			SSLCiphers:     "RC4:!COMPLEMENTOFDEFAULT",
 		})
 	})
 	if err != nil {
