@@ -10,6 +10,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"regexp"
 	"runtime"
 	"strings"
 	"sync"
@@ -51,6 +52,17 @@ var ProjectVersion = "3.12.0"
 // UserAgent is the user agent for this particular client.
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 	ProjectVersion, ProjectURL, runtime.Version())
+
+// formEncodingArrayPattern is used to match the encoded multi-valued field
+// format of |<T> where T is an incrementing index
+//
+// Example:
+// foo|0=A&foo|1=B
+//
+// NOTE:
+// I'm only checking double digits and nothing larger as I don't expect anyone
+// to provide over 99 separate values.
+var formEncodingArrayPattern = regexp.MustCompile(`%7C\d{1,2}`)
 
 // Client is the main entrypoint to the Fastly golang API library.
 type Client struct {
@@ -294,7 +306,17 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	if err := form.NewEncoder(buf).KeepZeros(true).DelimitWith('|').Encode(i); err != nil {
 		return nil, err
 	}
-	body := buf.String()
+
+	// NOTE: This is a temporary work-around to the issue of the Fastly API not
+	// recognising the format used by the github.com/ajg/form package.
+	//
+	// TODO: Consider using some form of custom marshal
+	// (https://github.com/ajg/form#custom-marshaling) or alternatively switch
+	// out the package for something else that has better support for the more
+	// traditional serialisation format: foo[]=A&foo[]=B
+	//
+	// EXAMPLE: https://play.golang.org/p/Kmf3l54MB73
+	body := formEncodingArrayPattern.ReplaceAllString(buf.String(), "%5B%5D") // %5B%5D == []
 
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))
