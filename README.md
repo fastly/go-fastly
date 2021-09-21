@@ -2,7 +2,8 @@
 
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][latest]
 
-[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
+[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v4/fastly
+[v4]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
 [v3]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
 [v2]: https://pkg.go.dev/github.com/fastly/go-fastly/v2/fastly
 [v1]: https://pkg.go.dev/github.com/fastly/go-fastly
@@ -60,7 +61,7 @@ import (
 	"fmt"
 	"log"
  	"os"
-	"github.com/fastly/go-fastly/v3/fastly"
+	"github.com/fastly/go-fastly/v4/fastly"
 )
 
 func main() {
