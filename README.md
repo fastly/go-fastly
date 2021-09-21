@@ -18,7 +18,7 @@ so you must be running Go 1.11 or higher.
 ## Usage
 
 ```go
-import "github.com/fastly/go-fastly/v3/fastly"
+import "github.com/fastly/go-fastly/v4/fastly"
 ```
 
 ## Migrating from v1 to v2
