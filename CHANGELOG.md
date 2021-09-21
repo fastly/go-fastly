@@ -1,5 +1,13 @@
 # Changelog
 
+## [v4.0.0](https://github.com/fastly/go-fastly/releases/tag/v4.0.0) (2021-09-21)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v3.12.0...v4.0.0)
+
+**Bug fixes:**
+
+- Fix issues with serialising x-www-form-urlencoded data [#304](https://github.com/fastly/go-fastly/pull/304)
+
 ## [v3.12.0](https://github.com/fastly/go-fastly/releases/tag/v3.12.0) (2021-09-15)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.11.0...v3.12.0)
