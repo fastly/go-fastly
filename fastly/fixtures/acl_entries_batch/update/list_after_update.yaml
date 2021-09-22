@@ -6,22 +6,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/0Akek5AFpJCUDYry2Hkju2/acl/5LpMLuDvLHtcpJ8hzbX0VG/entries
+      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/5eExXVGVxVxKhaiNduThkR/acl/17nbIIGX2ZTN8sfLyLtwgR/entries
     method: GET
   response:
-    body: '[{"acl_id":"5LpMLuDvLHtcpJ8hzbX0VG","deleted_at":null,"service_id":"0Akek5AFpJCUDYry2Hkju2","comment":"Updated
-      ACL Entry 1","created_at":"2021-01-14T10:23:45Z","negated":"1","subnet":16,"ip":"127.0.0.2","updated_at":"2021-01-14T10:23:46Z","id":"61QD49PqouKtm7DBKI4PCo"},{"ip":"192.168.0.1","updated_at":"2021-01-14T10:23:45Z","id":"5GuOrZyuqqeYps785EQyIu","acl_id":"5LpMLuDvLHtcpJ8hzbX0VG","deleted_at":null,"service_id":"0Akek5AFpJCUDYry2Hkju2","comment":"ACL
-      Entry 2","subnet":24,"created_at":"2021-01-14T10:23:45Z","negated":"0"}]'
+    body: '[{"subnet":16,"updated_at":"2021-09-22T11:03:00Z","created_at":"2021-09-22T11:02:59Z","negated":"1","comment":"Updated
+      ACL Entry 1","ip":"127.0.0.2","id":"6gcf6qN6a90w5WISByUzqp","service_id":"5eExXVGVxVxKhaiNduThkR","acl_id":"17nbIIGX2ZTN8sfLyLtwgR"},{"updated_at":"2021-09-22T11:02:59Z","subnet":24,"created_at":"2021-09-22T11:02:59Z","negated":"1","comment":"ACL
+      Entry 2","id":"68oskig9jsgpobiSaBYmv0","ip":"192.168.0.1","service_id":"5eExXVGVxVxKhaiNduThkR","acl_id":"17nbIIGX2ZTN8sfLyLtwgR"}]'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:23:46 GMT
+      - Wed, 22 Sep 2021 11:03:00 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
       X-Timer:
-      - S1610619826.330588,VS0,VE170
+      - S1632308580.215608,VS0,VE179
     status: 200 OK
     code: 200
     duration: ""

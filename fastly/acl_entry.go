@@ -107,9 +107,9 @@ type CreateACLEntryInput struct {
 	IP        string `form:"ip"`
 
 	// Optional fields
-	Subnet  int    `form:"subnet,omitempty"`
-	Negated bool   `form:"negated,omitempty"`
-	Comment string `form:"comment,omitempty"`
+	Subnet  int         `form:"subnet,omitempty"`
+	Negated Compatibool `form:"negated,omitempty"`
+	Comment string      `form:"comment,omitempty"`
 }
 
 // CreateACLEntry creates and returns a new ACL entry.
@@ -190,10 +190,10 @@ type UpdateACLEntryInput struct {
 	ID        string
 
 	// Optional fields
-	IP      *string `form:"ip,omitempty"`
-	Subnet  *int    `form:"subnet,omitempty"`
-	Negated *bool   `form:"negated,omitempty"`
-	Comment *string `form:"comment,omitempty"`
+	IP      *string      `form:"ip,omitempty"`
+	Subnet  *int         `form:"subnet,omitempty"`
+	Negated *Compatibool `form:"negated,omitempty"`
+	Comment *string      `form:"comment,omitempty"`
 }
 
 // UpdateACLEntry updates an ACL entry
@@ -237,7 +237,7 @@ type BatchACLEntry struct {
 	ID        *string        `json:"id,omitempty"`
 	IP        *string        `json:"ip,omitempty"`
 	Subnet    *int           `json:"subnet,omitempty"`
-	Negated   *bool          `json:"negated,omitempty"`
+	Negated   *Compatibool   `json:"negated,omitempty"`
 	Comment   *string        `json:"comment,omitempty"`
 }
 

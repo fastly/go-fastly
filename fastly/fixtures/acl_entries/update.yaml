@@ -2,41 +2,40 @@
 version: 1
 interactions:
 - request:
-    body: ACLID=3XA9Zoz75yiYlgnjzDAFmI&ID=5Eyk2g71nkTniNmscr6bJs&ServiceID=5BEXGVZPrhtk8TJfJJiz5u&ip=10.0.0.4&negated=true
+    body: ACLID=1PCB9fTlFSnrOrUCKa0WzO&ID=69nI3MhHVzdtXD5XW9B6ZN&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ip=10.0.0.4&negated=1
     form:
       ACLID:
-      - 3XA9Zoz75yiYlgnjzDAFmI
+      - 1PCB9fTlFSnrOrUCKa0WzO
       ID:
-      - 5Eyk2g71nkTniNmscr6bJs
+      - 69nI3MhHVzdtXD5XW9B6ZN
       ServiceID:
-      - 5BEXGVZPrhtk8TJfJJiz5u
+      - 7i6HN3TK9wS159v2gPAZ8A
       ip:
       - 10.0.0.4
       negated:
-      - "true"
+      - "1"
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/5BEXGVZPrhtk8TJfJJiz5u/acl/3XA9Zoz75yiYlgnjzDAFmI/entry/5Eyk2g71nkTniNmscr6bJs
+      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/1PCB9fTlFSnrOrUCKa0WzO/entry/69nI3MhHVzdtXD5XW9B6ZN
     method: PATCH
   response:
-    body: '{"subnet":8,"acl_id":"3XA9Zoz75yiYlgnjzDAFmI","created_at":"2021-01-14T10:23:48Z","negated":"true","service_id":"5BEXGVZPrhtk8TJfJJiz5u","ip":"10.0.0.4","id":"5Eyk2g71nkTniNmscr6bJs","deleted_at":null,"comment":"test
-      entry","updated_at":"2021-01-14T10:23:48Z"}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"test entry","acl_id":"1PCB9fTlFSnrOrUCKa0WzO","negated":1,"ip":"10.0.0.4","updated_at":"2021-09-22T10:29:25Z","created_at":"2021-09-22T10:29:25Z","subnet":8,"id":"69nI3MhHVzdtXD5XW9B6ZN"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:23:49 GMT
+      - Wed, 22 Sep 2021 10:29:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "975"
+      - "4992"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1632308400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4130-MAN
       X-Timer:
-      - S1610619830.700188,VS0,VE277
+      - S1632306566.618880,VS0,VE191
     status: 200 OK
     code: 200
     duration: ""

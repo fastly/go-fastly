@@ -6,22 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/0LwY12HMwvVr5TmfdLhiKB/acl/4HXRtBKpLbDcsvWAepvIeQ/entries
+      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3HSOFAYE9MIClrNMnneZ88/acl/2tmd64cHXy8wccFSnB5tP0/entries
     method: GET
   response:
-    body: '[{"created_at":"2021-01-14T10:23:41Z","updated_at":"2021-01-14T10:23:41Z","ip":"127.0.0.1","deleted_at":null,"comment":"ACL
-      Entry 1","acl_id":"4HXRtBKpLbDcsvWAepvIeQ","negated":"0","subnet":24,"service_id":"0LwY12HMwvVr5TmfdLhiKB","id":"62E4eZ3hGflhAoiBGOMEos"},{"service_id":"0LwY12HMwvVr5TmfdLhiKB","subnet":24,"id":"3zM1cN7ritzGZ9wi97xN1P","negated":"0","ip":"192.168.0.1","updated_at":"2021-01-14T10:23:41Z","acl_id":"4HXRtBKpLbDcsvWAepvIeQ","comment":"ACL
-      Entry 2","deleted_at":null,"created_at":"2021-01-14T10:23:41Z"}]'
+    body: '[{"subnet":24,"comment":"ACL Entry 1","created_at":"2021-09-22T11:02:47Z","ip":"127.0.0.1","id":"5Fd2BgJh5t1KWMCCQh9bgq","negated":"0","service_id":"3HSOFAYE9MIClrNMnneZ88","updated_at":"2021-09-22T11:02:47Z","acl_id":"2tmd64cHXy8wccFSnB5tP0"},{"acl_id":"2tmd64cHXy8wccFSnB5tP0","updated_at":"2021-09-22T11:02:47Z","service_id":"3HSOFAYE9MIClrNMnneZ88","ip":"192.168.0.1","negated":"1","id":"79oTJwlhREppUI6BahCekM","created_at":"2021-09-22T11:02:47Z","comment":"ACL
+      Entry 2","subnet":24}]'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:23:42 GMT
+      - Wed, 22 Sep 2021 11:02:47 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +34,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
       X-Timer:
-      - S1610619822.054831,VS0,VE471
+      - S1632308568.543070,VS0,VE312
     status: 200 OK
     code: 200
     duration: ""

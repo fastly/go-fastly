@@ -2,8 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: '{"entries":[{"op":"create","ip":"127.0.0.1","subnet":"24","negated":false,"comment":"ACL
-      Entry 1"},{"op":"create","ip":"192.168.0.1","subnet":"24","negated":false,"comment":"ACL
+    body: '{"entries":[{"op":"create","ip":"127.0.0.1","subnet":24,"negated":"0","comment":"ACL
+      Entry 1"},{"op":"create","ip":"192.168.0.1","subnet":24,"negated":"1","comment":"ACL
       Entry 2"}]}'
     form: {}
     headers:
@@ -12,8 +12,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/0LwY12HMwvVr5TmfdLhiKB/acl/4HXRtBKpLbDcsvWAepvIeQ/entries
+      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3HSOFAYE9MIClrNMnneZ88/acl/2tmd64cHXy8wccFSnB5tP0/entries
     method: PATCH
   response:
     body: '{"status":"ok"}'
@@ -21,15 +21,15 @@ interactions:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:23:42 GMT
+      - Wed, 22 Sep 2021 11:02:47 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "4990"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1632312000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
       X-Timer:
-      - S1610619822.774808,VS0,VE235
+      - S1632308567.279852,VS0,VE232
     status: 200 OK
     code: 200
     duration: ""
