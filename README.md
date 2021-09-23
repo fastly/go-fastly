@@ -2,8 +2,9 @@
 
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][latest]
 
-[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v4/fastly
-[v4]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
+[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v5/fastly
+[v5]: https://pkg.go.dev/github.com/fastly/go-fastly/v5/fastly
+[v4]: https://pkg.go.dev/github.com/fastly/go-fastly/v4/fastly
 [v3]: https://pkg.go.dev/github.com/fastly/go-fastly/v3/fastly
 [v2]: https://pkg.go.dev/github.com/fastly/go-fastly/v2/fastly
 [v1]: https://pkg.go.dev/github.com/fastly/go-fastly
@@ -19,7 +20,7 @@ so you must be running Go 1.11 or higher.
 ## Usage
 
 ```go
-import "github.com/fastly/go-fastly/v4/fastly"
+import "github.com/fastly/go-fastly/v5/fastly"
 ```
 
 ## Migrating from v1 to v2
@@ -61,7 +62,7 @@ import (
 	"fmt"
 	"log"
  	"os"
-	"github.com/fastly/go-fastly/v4/fastly"
+	"github.com/fastly/go-fastly/v5/fastly"
 )
 
 func main() {

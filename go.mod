@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v4
+module github.com/fastly/go-fastly/v5
 
 require (
 	github.com/ajg/form v0.0.0-20160802194845-cc2954064ec9

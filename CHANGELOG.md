@@ -1,5 +1,13 @@
 # Changelog
 
+## [v5.0.0](https://github.com/fastly/go-fastly/releases/tag/v5.0.0) (2021-09-23)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v4.0.0...v5.0.0)
+
+**Breaking**:
+
+- Switch from `bool` to `Compatibool` for ACL entries [#307](https://github.com/fastly/go-fastly/pull/307)
+
 ## [v4.0.0](https://github.com/fastly/go-fastly/releases/tag/v4.0.0) (2021-09-21)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v3.12.0...v4.0.0)
