@@ -27,14 +27,14 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 				Operation: CreateBatchOperation,
 				IP:        String("127.0.0.1"),
 				Subnet:    Int(24),
-				Negated:   Bool(false),
+				Negated:   CBool(false),
 				Comment:   String("ACL Entry 1"),
 			},
 			{
 				Operation: CreateBatchOperation,
 				IP:        String("192.168.0.1"),
 				Subnet:    Int(24),
-				Negated:   Bool(false),
+				Negated:   CBool(true),
 				Comment:   String("ACL Entry 2"),
 			},
 		},
@@ -43,7 +43,6 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 	// When: I execute the batch create operations against the Fastly API,
 	var err error
 	record(t, fixtureBase+"create_acl_entries", func(c *Client) {
-
 		err = c.BatchModifyACLEntries(batchCreateOperations)
 	})
 	if err != nil {
@@ -89,9 +88,9 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 		}
 
 		actualNegated := entry.Negated
-		expectedNegated := batchCreateOperations.Entries[i].Negated
+		expectedNegated := bool(*batchCreateOperations.Entries[i].Negated)
 
-		if actualNegated != *expectedNegated {
+		if actualNegated != expectedNegated {
 			t.Errorf("Negated did not match, expected %v, got %v", expectedNegated, actualNegated)
 		}
 
@@ -127,14 +126,14 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 				Operation: CreateBatchOperation,
 				IP:        String("127.0.0.1"),
 				Subnet:    Int(24),
-				Negated:   Bool(false),
+				Negated:   CBool(false),
 				Comment:   String("ACL Entry 1"),
 			},
 			{
 				Operation: CreateBatchOperation,
 				IP:        String("192.168.0.1"),
 				Subnet:    Int(24),
-				Negated:   Bool(false),
+				Negated:   CBool(true),
 				Comment:   String("ACL Entry 2"),
 			},
 		},
@@ -229,14 +228,14 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 				Operation: CreateBatchOperation,
 				IP:        String("127.0.0.1"),
 				Subnet:    Int(24),
-				Negated:   Bool(false),
+				Negated:   CBool(false),
 				Comment:   String("ACL Entry 1"),
 			},
 			{
 				Operation: CreateBatchOperation,
 				IP:        String("192.168.0.1"),
 				Subnet:    Int(24),
-				Negated:   Bool(false),
+				Negated:   CBool(true),
 				Comment:   String("ACL Entry 2"),
 			},
 		},
@@ -276,7 +275,7 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 				ID:        String(createdACLEntries[0].ID),
 				IP:        String("127.0.0.2"),
 				Subnet:    Int(16),
-				Negated:   Bool(true),
+				Negated:   CBool(true),
 				Comment:   String("Updated ACL Entry 1"),
 			},
 		},
@@ -334,9 +333,9 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	}
 
 	actualNegated := actualACLEntries[0].Negated
-	expectedNegated := batchUpdateOperations.Entries[0].Negated
+	expectedNegated := bool(*batchUpdateOperations.Entries[0].Negated)
 
-	if actualNegated != *expectedNegated {
+	if actualNegated != expectedNegated {
 		t.Errorf("First Subnet did not match, expected %v, got %v", expectedNegated, actualNegated)
 	}
 

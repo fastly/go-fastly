@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"entries":[{"op":"delete","id":"62E4eZ3hGflhAoiBGOMEos"}]}'
+    body: '{"entries":[{"op":"delete","id":"5Fd2BgJh5t1KWMCCQh9bgq"}]}'
     form: {}
     headers:
       Accept:
@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/0LwY12HMwvVr5TmfdLhiKB/acl/4HXRtBKpLbDcsvWAepvIeQ/entries
+      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3HSOFAYE9MIClrNMnneZ88/acl/2tmd64cHXy8wccFSnB5tP0/entries
     method: PATCH
   response:
     body: '{"status":"ok"}'
@@ -19,15 +19,15 @@ interactions:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:23:42 GMT
+      - Wed, 22 Sep 2021 11:02:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "4989"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1632312000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4139-MAN
       X-Timer:
-      - S1610619823.662541,VS0,VE261
+      - S1632308568.883749,VS0,VE234
     status: 200 OK
     code: 200
     duration: ""

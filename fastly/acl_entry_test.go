@@ -26,7 +26,7 @@ func TestClient_ACLEntries(t *testing.T) {
 			ACLID:     testACL.ID,
 			IP:        "10.0.0.3",
 			Subnet:    8,
-			Negated:   false,
+			Negated:   Compatibool(false),
 			Comment:   "test entry",
 		})
 	})
@@ -100,7 +100,7 @@ func TestClient_ACLEntries(t *testing.T) {
 			ACLID:     testACL.ID,
 			ID:        e.ID,
 			IP:        String("10.0.0.4"),
-			Negated:   Bool(true),
+			Negated:   CBool(true),
 		})
 	})
 	if err != nil {
