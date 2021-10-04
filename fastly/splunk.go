@@ -21,6 +21,7 @@ type Splunk struct {
 	ResponseCondition string     `mapstructure:"response_condition"`
 	Placement         string     `mapstructure:"placement"`
 	Token             string     `mapstructure:"token"`
+	UseTLS            bool       `mapstructure:"use_tls"`
 	TLSCACert         string     `mapstructure:"tls_ca_cert"`
 	TLSHostname       string     `mapstructure:"tls_hostname"`
 	TLSClientCert     string     `mapstructure:"tls_client_cert"`
@@ -81,19 +82,20 @@ type CreateSplunkInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	URL               string `form:"url,omitempty"`
-	RequestMaxEntries uint   `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint   `form:"request_max_bytes,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	Token             string `form:"token,omitempty"`
-	TLSCACert         string `form:"tls_ca_cert,omitempty"`
-	TLSHostname       string `form:"tls_hostname,omitempty"`
-	TLSClientCert     string `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string `form:"tls_client_key,omitempty"`
+	Name              string      `form:"name,omitempty"`
+	URL               string      `form:"url,omitempty"`
+	RequestMaxEntries uint        `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   uint        `form:"request_max_bytes,omitempty"`
+	Format            string      `form:"format,omitempty"`
+	FormatVersion     uint        `form:"format_version,omitempty"`
+	ResponseCondition string      `form:"response_condition,omitempty"`
+	Placement         string      `form:"placement,omitempty"`
+	Token             string      `form:"token,omitempty"`
+	UseTLS            Compatibool `form:"use_tls,omitempty"`
+	TLSCACert         string      `form:"tls_ca_cert,omitempty"`
+	TLSHostname       string      `form:"tls_hostname,omitempty"`
+	TLSClientCert     string      `form:"tls_client_cert,omitempty"`
+	TLSClientKey      string      `form:"tls_client_key,omitempty"`
 }
 
 // CreateSplunk creates a new Fastly splunk.
@@ -169,19 +171,20 @@ type UpdateSplunkInput struct {
 	// Name is the name of the splunk to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	URL               *string `form:"url,omitempty"`
-	RequestMaxEntries *uint   `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   *uint   `form:"request_max_bytes,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	TLSCACert         *string `form:"tls_ca_cert,omitempty"`
-	TLSHostname       *string `form:"tls_hostname,omitempty"`
-	TLSClientCert     *string `form:"tls_client_cert,omitempty"`
-	TLSClientKey      *string `form:"tls_client_key,omitempty"`
+	NewName           *string      `form:"name,omitempty"`
+	URL               *string      `form:"url,omitempty"`
+	RequestMaxEntries *uint        `form:"request_max_entries,omitempty"`
+	RequestMaxBytes   *uint        `form:"request_max_bytes,omitempty"`
+	Format            *string      `form:"format,omitempty"`
+	FormatVersion     *uint        `form:"format_version,omitempty"`
+	ResponseCondition *string      `form:"response_condition,omitempty"`
+	Placement         *string      `form:"placement,omitempty"`
+	Token             *string      `form:"token,omitempty"`
+	UseTLS            *Compatibool `form:"use_tls,omitempty"`
+	TLSCACert         *string      `form:"tls_ca_cert,omitempty"`
+	TLSHostname       *string      `form:"tls_hostname,omitempty"`
+	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
+	TLSClientKey      *string      `form:"tls_client_key,omitempty"`
 }
 
 // UpdateSplunk updates a specific splunk.
