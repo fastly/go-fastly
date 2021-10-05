@@ -1,5 +1,13 @@
 # Changelog
 
+## [v5.1.0](https://github.com/fastly/go-fastly/releases/tag/v5.1.0) (2021-10-05)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v5.0.0...v5.1.0)
+
+**Enhancements:**
+
+- Add `UseTLS` field for Splunk logging [#309](https://github.com/fastly/go-fastly/pull/309)
+
 ## [v5.0.0](https://github.com/fastly/go-fastly/releases/tag/v5.0.0) (2021-09-23)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v4.0.0...v5.0.0)
