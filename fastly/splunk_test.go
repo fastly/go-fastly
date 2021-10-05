@@ -48,6 +48,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			FormatVersion:     2,
 			Placement:         "waf_debug",
 			Token:             "super-secure-token",
+			UseTLS:            true,
 			TLSCACert:         caCert,
 			TLSHostname:       "example.com",
 			TLSClientCert:     clientCert,
@@ -98,6 +99,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.Token != "super-secure-token" {
 		t.Errorf("bad token: %q", s.Token)
+	}
+	if s.UseTLS != true {
+		t.Errorf("bad use_tls: %t", s.UseTLS)
 	}
 	if s.TLSCACert != caCert {
 		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
@@ -162,6 +166,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if s.Token != ns.Token {
 		t.Errorf("bad token: %q", s.Token)
+	}
+	if s.UseTLS != ns.UseTLS {
+		t.Errorf("bad use_tls: %t", s.UseTLS)
 	}
 	if s.TLSCACert != ns.TLSCACert {
 		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
