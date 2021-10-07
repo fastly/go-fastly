@@ -127,6 +127,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	for i := range s.Versions {
 		if s.Versions[i].Active {
 			s.ActiveVersion = uint(s.Versions[i].Number)
+			break
 		}
 	}
 
