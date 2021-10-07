@@ -119,6 +119,17 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 		return nil, err
 	}
 
+	// NOTE: GET /service/:service_id endpoint does not return the "version" field
+	// unlike other GET service endpoints (/service, /service/:service_id/details).
+	// Therefore, ActiveVersion is always zero value when GetService is called.
+	// We work around this by manually finding the active version number from the
+	// "versions" array in the returned JSON response.
+	for i := range s.Versions {
+		if s.Versions[i].Active {
+			s.ActiveVersion = uint(s.Versions[i].Number)
+		}
+	}
+
 	return s, nil
 }
 
