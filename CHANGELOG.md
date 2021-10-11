@@ -1,5 +1,13 @@
 # Changelog
 
+## [v5.1.1](https://github.com/fastly/go-fastly/releases/tag/v5.1.1) (2021-10-11)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.0...v5.1.1)
+
+**Bug fixes:**
+
+- Manually fill `ActiveVersion` value in `GetService` [#312](https://github.com/fastly/go-fastly/pull/312)
+
 ## [v5.1.0](https://github.com/fastly/go-fastly/releases/tag/v5.1.0) (2021-10-05)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v5.0.0...v5.1.0)
