@@ -84,22 +84,22 @@ type CreateOpenstackInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	User              string `form:"user,omitempty"`
-	AccessKey         string `form:"access_key,omitempty"`
-	BucketName        string `form:"bucket_name,omitempty"`
-	URL               string `form:"url,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	CompressionCodec  string `form:"compression_codec,omitempty"`
-	GzipLevel         uint   `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
+	Name              string `url:"name,omitempty"`
+	User              string `url:"user,omitempty"`
+	AccessKey         string `url:"access_key,omitempty"`
+	BucketName        string `url:"bucket_name,omitempty"`
+	URL               string `url:"url,omitempty"`
+	Path              string `url:"path,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	Period            uint   `url:"period,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
+	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	TimestampFormat   string `url:"timestamp_format,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
 }
 
 // CreateOpenstack creates a new Fastly Openstack.
@@ -175,22 +175,22 @@ type UpdateOpenstackInput struct {
 	// Name is the name of the Openstack to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	BucketName        *string `form:"bucket_name,omitempty"`
-	URL               *string `form:"url,omitempty"`
-	User              *string `form:"user,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	CompressionCodec  *string `form:"compression_codec,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	AccessKey         *string `url:"access_key,omitempty"`
+	BucketName        *string `url:"bucket_name,omitempty"`
+	URL               *string `url:"url,omitempty"`
+	User              *string `url:"user,omitempty"`
+	Path              *string `url:"path,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	Period            *uint   `url:"period,omitempty"`
+	CompressionCodec  *string `url:"compression_codec,omitempty"`
+	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	MessageType       *string `url:"message_type,omitempty"`
+	TimestampFormat   *string `url:"timestamp_format,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
 }
 
 // UpdateOpenstack updates a specific Openstack.

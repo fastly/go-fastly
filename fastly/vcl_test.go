@@ -21,6 +21,10 @@ backend default {
 
 sub vcl_recv {
   set req.backend = default;
+
+  if (req.url.path ~ "(1|2)") {
+    // ...
+  }
 }
 
 sub vcl_hash {

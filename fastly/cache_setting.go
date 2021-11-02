@@ -88,11 +88,11 @@ type CreateCacheSettingInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name           string             `form:"name,omitempty"`
-	Action         CacheSettingAction `form:"action,omitempty"`
-	TTL            uint               `form:"ttl,omitempty"`
-	StaleTTL       uint               `form:"stale_ttl,omitempty"`
-	CacheCondition string             `form:"cache_condition,omitempty"`
+	Name           string             `url:"name,omitempty"`
+	Action         CacheSettingAction `url:"action,omitempty"`
+	TTL            uint               `url:"ttl,omitempty"`
+	StaleTTL       uint               `url:"stale_ttl,omitempty"`
+	CacheCondition string             `url:"cache_condition,omitempty"`
 }
 
 // CreateCacheSetting creates a new Fastly cache setting.
@@ -169,11 +169,11 @@ type UpdateCacheSettingInput struct {
 	// Name is the name of the cache setting to update.
 	Name string
 
-	NewName        *string            `form:"name,omitempty"`
-	Action         CacheSettingAction `form:"action,omitempty"`
-	TTL            *uint              `form:"ttl,omitempty"`
-	StaleTTL       *uint              `form:"stale_ttl,omitempty"`
-	CacheCondition *string            `form:"cache_condition,omitempty"`
+	NewName        *string            `url:"name,omitempty"`
+	Action         CacheSettingAction `url:"action,omitempty"`
+	TTL            *uint              `url:"ttl,omitempty"`
+	StaleTTL       *uint              `url:"stale_ttl,omitempty"`
+	CacheCondition *string            `url:"cache_condition,omitempty"`
 }
 
 // UpdateCacheSetting updates a specific cache setting.

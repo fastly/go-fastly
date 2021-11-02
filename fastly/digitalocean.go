@@ -84,22 +84,22 @@ type CreateDigitalOceanInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	BucketName        string `form:"bucket_name,omitempty"`
-	Domain            string `form:"domain,omitempty"`
-	AccessKey         string `form:"access_key,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	GzipLevel         uint   `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	CompressionCodec  string `form:"compression_codec,omitempty"`
+	Name              string `url:"name,omitempty"`
+	BucketName        string `url:"bucket_name,omitempty"`
+	Domain            string `url:"domain,omitempty"`
+	AccessKey         string `url:"access_key,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
+	Path              string `url:"path,omitempty"`
+	Period            uint   `url:"period,omitempty"`
+	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	Format            string `url:"format,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	TimestampFormat   string `url:"timestamp_format,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
 }
 
 // CreateDigitalOcean creates a new Fastly DigitalOcean.
@@ -175,22 +175,22 @@ type UpdateDigitalOceanInput struct {
 	// Name is the name of the DigitalOcean to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	BucketName        *string `form:"bucket_name,omitempty"`
-	Domain            *string `form:"domain,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
-	CompressionCodec  *string `form:"compression_codec,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	BucketName        *string `url:"bucket_name,omitempty"`
+	Domain            *string `url:"domain,omitempty"`
+	AccessKey         *string `url:"access_key,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
+	Path              *string `url:"path,omitempty"`
+	Period            *uint   `url:"period,omitempty"`
+	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	MessageType       *string `url:"message_type,omitempty"`
+	TimestampFormat   *string `url:"timestamp_format,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
+	CompressionCodec  *string `url:"compression_codec,omitempty"`
 }
 
 // UpdateDigitalOcean updates a specific DigitalOcean.

@@ -84,22 +84,22 @@ type CreateBlobStorageInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Path              string `form:"path,omitempty"`
-	AccountName       string `form:"account_name,omitempty"`
-	Container         string `form:"container,omitempty"`
-	SASToken          string `form:"sas_token,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	CompressionCodec  string `form:"compression_codec,omitempty"`
-	GzipLevel         uint   `form:"gzip_level,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	FileMaxBytes      uint   `form:"file_max_bytes,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Path              string `url:"path,omitempty"`
+	AccountName       string `url:"account_name,omitempty"`
+	Container         string `url:"container,omitempty"`
+	SASToken          string `url:"sas_token,omitempty"`
+	Period            uint   `url:"period,omitempty"`
+	TimestampFormat   string `url:"timestamp_format,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
+	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	FileMaxBytes      uint   `url:"file_max_bytes,omitempty"`
 }
 
 // CreateBlobStorage creates a new Fastly blob storage.
@@ -175,22 +175,22 @@ type UpdateBlobStorageInput struct {
 	// Name is the name of the blob storage to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	AccountName       *string `form:"account_name,omitempty"`
-	Container         *string `form:"container,omitempty"`
-	SASToken          *string `form:"sas_token,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	CompressionCodec  *string `form:"compression_codec,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	FileMaxBytes      *uint   `form:"file_max_bytes,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	Path              *string `url:"path,omitempty"`
+	AccountName       *string `url:"account_name,omitempty"`
+	Container         *string `url:"container,omitempty"`
+	SASToken          *string `url:"sas_token,omitempty"`
+	Period            *uint   `url:"period,omitempty"`
+	TimestampFormat   *string `url:"timestamp_format,omitempty"`
+	CompressionCodec  *string `url:"compression_codec,omitempty"`
+	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	MessageType       *string `url:"message_type,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	FileMaxBytes      *uint   `url:"file_max_bytes,omitempty"`
 }
 
 // UpdateBlobStorage updates a specific blob storage.

@@ -71,8 +71,8 @@ type CreateDictionaryInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name      string      `form:"name,omitempty"`
-	WriteOnly Compatibool `form:"write_only,omitempty"`
+	Name      string      `url:"name,omitempty"`
+	WriteOnly Compatibool `url:"write_only,omitempty"`
 }
 
 // CreateDictionary creates a new Fastly dictionary.
@@ -148,8 +148,8 @@ type UpdateDictionaryInput struct {
 	// Name is the name of the dictionary to update.
 	Name string
 
-	NewName   *string      `form:"name,omitempty"`
-	WriteOnly *Compatibool `form:"write_only,omitempty"`
+	NewName   *string      `url:"name,omitempty"`
+	WriteOnly *Compatibool `url:"write_only,omitempty"`
 }
 
 // UpdateDictionary updates a specific dictionary.

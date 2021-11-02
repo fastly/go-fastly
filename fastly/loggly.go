@@ -74,12 +74,12 @@ type CreateLogglyInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Token             string `form:"token,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Token             string `url:"token,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 }
 
 // CreateLoggly creates a new Fastly loggly.
@@ -155,12 +155,12 @@ type UpdateLogglyInput struct {
 	// Name is the name of the loggly to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	Token             *string `url:"token,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
 }
 
 // UpdateLoggly updates a specific loggly.

@@ -135,18 +135,18 @@ type CreateHeaderInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string       `form:"name,omitempty"`
-	Action            HeaderAction `form:"action,omitempty"`
-	IgnoreIfSet       Compatibool  `form:"ignore_if_set,omitempty"`
-	Type              HeaderType   `form:"type,omitempty"`
-	Destination       string       `form:"dst,omitempty"`
-	Source            string       `form:"src,omitempty"`
-	Regex             string       `form:"regex,omitempty"`
-	Substitution      string       `form:"substitution,omitempty"`
-	Priority          uint         `form:"priority,omitempty"`
-	RequestCondition  string       `form:"request_condition,omitempty"`
-	CacheCondition    string       `form:"cache_condition,omitempty"`
-	ResponseCondition string       `form:"response_condition,omitempty"`
+	Name              string       `url:"name,omitempty"`
+	Action            HeaderAction `url:"action,omitempty"`
+	IgnoreIfSet       Compatibool  `url:"ignore_if_set,omitempty"`
+	Type              HeaderType   `url:"type,omitempty"`
+	Destination       string       `url:"dst,omitempty"`
+	Source            string       `url:"src,omitempty"`
+	Regex             string       `url:"regex,omitempty"`
+	Substitution      string       `url:"substitution,omitempty"`
+	Priority          uint         `url:"priority,omitempty"`
+	RequestCondition  string       `url:"request_condition,omitempty"`
+	CacheCondition    string       `url:"cache_condition,omitempty"`
+	ResponseCondition string       `url:"response_condition,omitempty"`
 }
 
 // CreateHeader creates a new Fastly header.
@@ -222,18 +222,18 @@ type UpdateHeaderInput struct {
 	// Name is the name of the header to update.
 	Name string
 
-	NewName           *string       `form:"name,omitempty"`
-	Action            *HeaderAction `form:"action,omitempty"`
-	IgnoreIfSet       *Compatibool  `form:"ignore_if_set,omitempty"`
-	Type              *HeaderType   `form:"type,omitempty"`
-	Destination       *string       `form:"dst,omitempty"`
-	Source            *string       `form:"src,omitempty"`
-	Regex             *string       `form:"regex,omitempty"`
-	Substitution      *string       `form:"substitution,omitempty"`
-	Priority          *uint         `form:"priority,omitempty"`
-	RequestCondition  *string       `form:"request_condition,omitempty"`
-	CacheCondition    *string       `form:"cache_condition,omitempty"`
-	ResponseCondition *string       `form:"response_condition,omitempty"`
+	NewName           *string       `url:"name,omitempty"`
+	Action            *HeaderAction `url:"action,omitempty"`
+	IgnoreIfSet       *Compatibool  `url:"ignore_if_set,omitempty"`
+	Type              *HeaderType   `url:"type,omitempty"`
+	Destination       *string       `url:"dst,omitempty"`
+	Source            *string       `url:"src,omitempty"`
+	Regex             *string       `url:"regex,omitempty"`
+	Substitution      *string       `url:"substitution,omitempty"`
+	Priority          *uint         `url:"priority,omitempty"`
+	RequestCondition  *string       `url:"request_condition,omitempty"`
+	CacheCondition    *string       `url:"cache_condition,omitempty"`
+	ResponseCondition *string       `url:"response_condition,omitempty"`
 }
 
 // UpdateHeader updates a specific header.

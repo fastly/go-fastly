@@ -71,8 +71,8 @@ type CreateDictionaryItemInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 
-	ItemKey   string `form:"item_key,omitempty"`
-	ItemValue string `form:"item_value,omitempty"`
+	ItemKey   string `url:"item_key,omitempty"`
+	ItemValue string `url:"item_value,omitempty"`
 }
 
 // CreateDictionaryItem creates a new Fastly dictionary item.
@@ -163,7 +163,7 @@ type UpdateDictionaryItemInput struct {
 	ItemKey string
 
 	// ItemValue is the new value of the dictionary item (required).
-	ItemValue string `form:"item_value"`
+	ItemValue string `url:"item_value"`
 }
 
 // UpdateDictionaryItem updates a specific dictionary item.

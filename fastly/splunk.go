@@ -82,20 +82,20 @@ type CreateSplunkInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string      `form:"name,omitempty"`
-	URL               string      `form:"url,omitempty"`
-	RequestMaxEntries uint        `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint        `form:"request_max_bytes,omitempty"`
-	Format            string      `form:"format,omitempty"`
-	FormatVersion     uint        `form:"format_version,omitempty"`
-	ResponseCondition string      `form:"response_condition,omitempty"`
-	Placement         string      `form:"placement,omitempty"`
-	Token             string      `form:"token,omitempty"`
-	UseTLS            Compatibool `form:"use_tls,omitempty"`
-	TLSCACert         string      `form:"tls_ca_cert,omitempty"`
-	TLSHostname       string      `form:"tls_hostname,omitempty"`
-	TLSClientCert     string      `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string      `form:"tls_client_key,omitempty"`
+	Name              string      `url:"name,omitempty"`
+	URL               string      `url:"url,omitempty"`
+	RequestMaxEntries uint        `url:"request_max_entries,omitempty"`
+	RequestMaxBytes   uint        `url:"request_max_bytes,omitempty"`
+	Format            string      `url:"format,omitempty"`
+	FormatVersion     uint        `url:"format_version,omitempty"`
+	ResponseCondition string      `url:"response_condition,omitempty"`
+	Placement         string      `url:"placement,omitempty"`
+	Token             string      `url:"token,omitempty"`
+	UseTLS            Compatibool `url:"use_tls,omitempty"`
+	TLSCACert         string      `url:"tls_ca_cert,omitempty"`
+	TLSHostname       string      `url:"tls_hostname,omitempty"`
+	TLSClientCert     string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey      string      `url:"tls_client_key,omitempty"`
 }
 
 // CreateSplunk creates a new Fastly splunk.
@@ -171,20 +171,20 @@ type UpdateSplunkInput struct {
 	// Name is the name of the splunk to update.
 	Name string
 
-	NewName           *string      `form:"name,omitempty"`
-	URL               *string      `form:"url,omitempty"`
-	RequestMaxEntries *uint        `form:"request_max_entries,omitempty"`
-	RequestMaxBytes   *uint        `form:"request_max_bytes,omitempty"`
-	Format            *string      `form:"format,omitempty"`
-	FormatVersion     *uint        `form:"format_version,omitempty"`
-	ResponseCondition *string      `form:"response_condition,omitempty"`
-	Placement         *string      `form:"placement,omitempty"`
-	Token             *string      `form:"token,omitempty"`
-	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	TLSCACert         *string      `form:"tls_ca_cert,omitempty"`
-	TLSHostname       *string      `form:"tls_hostname,omitempty"`
-	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
-	TLSClientKey      *string      `form:"tls_client_key,omitempty"`
+	NewName           *string      `url:"name,omitempty"`
+	URL               *string      `url:"url,omitempty"`
+	RequestMaxEntries *uint        `url:"request_max_entries,omitempty"`
+	RequestMaxBytes   *uint        `url:"request_max_bytes,omitempty"`
+	Format            *string      `url:"format,omitempty"`
+	FormatVersion     *uint        `url:"format_version,omitempty"`
+	ResponseCondition *string      `url:"response_condition,omitempty"`
+	Placement         *string      `url:"placement,omitempty"`
+	Token             *string      `url:"token,omitempty"`
+	UseTLS            *Compatibool `url:"use_tls,omitempty"`
+	TLSCACert         *string      `url:"tls_ca_cert,omitempty"`
+	TLSHostname       *string      `url:"tls_hostname,omitempty"`
+	TLSClientCert     *string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey      *string      `url:"tls_client_key,omitempty"`
 }
 
 // UpdateSplunk updates a specific splunk.

@@ -75,13 +75,13 @@ type CreateDatadogInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Token             string `form:"token,omitempty"`
-	Region            string `form:"region,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Token             string `url:"token,omitempty"`
+	Region            string `url:"region,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 }
 
 // CreateDatadog creates a new Datadog logging endpoint on a Fastly service version.
@@ -157,13 +157,13 @@ type UpdateDatadogInput struct {
 	// Name is the name of the Datadog to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	Region            *string `form:"region,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	Token             *string `url:"token,omitempty"`
+	Region            *string `url:"region,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
 }
 
 // UpdateDatadog updates a Datadog logging endpoint on a Fastly service version.

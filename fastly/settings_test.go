@@ -1,10 +1,9 @@
 package fastly
 
 import (
-	"bytes"
 	"testing"
 
-	"github.com/ajg/form"
+	"github.com/google/go-querystring/query"
 )
 
 func TestClient_Settings(t *testing.T) {
@@ -60,10 +59,15 @@ func TestClient_Settings(t *testing.T) {
 func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	t.Parallel()
 	s := UpdateSettingsInput{ServiceID: "foo", ServiceVersion: 1, DefaultTTL: 0}
-	buf := new(bytes.Buffer)
-	form.NewEncoder(buf).KeepZeros(true).DelimitWith('|').Encode(s)
-	if buf.String() != "ServiceID=foo&ServiceVersion=1&general.default_ttl=0" {
-		t.Errorf("Update request should contain a default_ttl. Got: %s", buf.String())
+
+	v, err := query.Values(s)
+	if err != nil {
+		t.Errorf("Unexpected error: %v", err)
+	}
+	body := v.Encode()
+
+	if body != "ServiceID=foo&ServiceVersion=1&general.default_ttl=0" {
+		t.Errorf("Update request should contain a default_ttl. Got: %s", body)
 	}
 }
 

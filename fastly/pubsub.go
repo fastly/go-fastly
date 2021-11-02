@@ -77,15 +77,15 @@ type CreatePubsubInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Topic             string `form:"topic,omitempty"`
-	User              string `form:"user,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	ProjectID         string `form:"project_id,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	Format            string `form:"format,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Topic             string `url:"topic,omitempty"`
+	User              string `url:"user,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
+	ProjectID         string `url:"project_id,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	Format            string `url:"format,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 }
 
 // CreatePubsub creates a new Fastly Pubsub.
@@ -161,15 +161,15 @@ type UpdatePubsubInput struct {
 	// Name is the name of the Pubsub to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	Topic             *string `form:"topic,omitempty"`
-	User              *string `form:"user,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	ProjectID         *string `form:"project_id,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	Topic             *string `url:"topic,omitempty"`
+	User              *string `url:"user,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
+	ProjectID         *string `url:"project_id,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
 }
 
 // UpdatePubsub updates a specific Pubsub.

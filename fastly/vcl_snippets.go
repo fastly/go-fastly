@@ -76,19 +76,19 @@ type CreateSnippetInput struct {
 	ServiceVersion int
 
 	// Name is the name for the snippet.
-	Name string `form:"name"`
+	Name string `url:"name"`
 
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `form:"priority,omitempty"`
+	Priority int `url:"priority,omitempty"`
 
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
-	Dynamic int `form:"dynamic"`
+	Dynamic int `url:"dynamic"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content string `form:"content"`
+	Content string `url:"content"`
 
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type SnippetType `form:"type"`
+	Type SnippetType `url:"type"`
 }
 
 // CreateSnippet creates a new snippet or dynamic snippet on a unlocked version
@@ -139,16 +139,16 @@ type UpdateSnippetInput struct {
 	Name string
 
 	// Name is the name for the snippet.
-	NewName *string `form:"name,omitempty"`
+	NewName *string `url:"name,omitempty"`
 
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority *int `form:"priority,omitempty"`
+	Priority *int `url:"priority,omitempty"`
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content *string `form:"content,omitempty"`
+	Content *string `url:"content,omitempty"`
 
 	// Type is the location in generated VCL where the snippet should be placed.
-	Type *SnippetType `form:"type,omitempty"`
+	Type *SnippetType `url:"type,omitempty"`
 }
 
 // UpdateSnippet updates a snippet on a unlocked version
@@ -197,7 +197,7 @@ type UpdateDynamicSnippetInput struct {
 	ID string
 
 	// Content is the VCL code that specifies exactly what the snippet does.
-	Content *string `form:"content,omitempty"`
+	Content *string `url:"content,omitempty"`
 }
 
 // UpdateDynamicSnippet replaces the content of a Dynamic Snippet

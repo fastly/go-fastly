@@ -87,25 +87,25 @@ type CreateKafkaInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string      `form:"name,omitempty"`
-	Brokers           string      `form:"brokers,omitempty"`
-	Topic             string      `form:"topic,omitempty"`
-	RequiredACKs      string      `form:"required_acks,omitempty"`
-	UseTLS            Compatibool `form:"use_tls,omitempty"`
-	CompressionCodec  string      `form:"compression_codec,omitempty"`
-	Format            string      `form:"format,omitempty"`
-	FormatVersion     uint        `form:"format_version,omitempty"`
-	ResponseCondition string      `form:"response_condition,omitempty"`
-	Placement         string      `form:"placement,omitempty"`
-	TLSCACert         string      `form:"tls_ca_cert,omitempty"`
-	TLSHostname       string      `form:"tls_hostname,omitempty"`
-	TLSClientCert     string      `form:"tls_client_cert,omitempty"`
-	TLSClientKey      string      `form:"tls_client_key,omitempty"`
-	ParseLogKeyvals   Compatibool `form:"parse_log_keyvals,omitempty"`
-	RequestMaxBytes   uint        `form:"request_max_bytes,omitempty"`
-	AuthMethod        string      `form:"auth_method,omitempty"`
-	User              string      `form:"user,omitempty"`
-	Password          string      `form:"password,omitempty"`
+	Name              string      `url:"name,omitempty"`
+	Brokers           string      `url:"brokers,omitempty"`
+	Topic             string      `url:"topic,omitempty"`
+	RequiredACKs      string      `url:"required_acks,omitempty"`
+	UseTLS            Compatibool `url:"use_tls,omitempty"`
+	CompressionCodec  string      `url:"compression_codec,omitempty"`
+	Format            string      `url:"format,omitempty"`
+	FormatVersion     uint        `url:"format_version,omitempty"`
+	ResponseCondition string      `url:"response_condition,omitempty"`
+	Placement         string      `url:"placement,omitempty"`
+	TLSCACert         string      `url:"tls_ca_cert,omitempty"`
+	TLSHostname       string      `url:"tls_hostname,omitempty"`
+	TLSClientCert     string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey      string      `url:"tls_client_key,omitempty"`
+	ParseLogKeyvals   Compatibool `url:"parse_log_keyvals,omitempty"`
+	RequestMaxBytes   uint        `url:"request_max_bytes,omitempty"`
+	AuthMethod        string      `url:"auth_method,omitempty"`
+	User              string      `url:"user,omitempty"`
+	Password          string      `url:"password,omitempty"`
 }
 
 // CreateKafka creates a new Fastly kafka.
@@ -181,25 +181,25 @@ type UpdateKafkaInput struct {
 	// Name is the name of the kafka to update.
 	Name string
 
-	NewName           *string      `form:"name,omitempty"`
-	Brokers           *string      `form:"brokers,omitempty"`
-	Topic             *string      `form:"topic,omitempty"`
-	RequiredACKs      *string      `form:"required_acks,omitempty"`
-	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	CompressionCodec  *string      `form:"compression_codec,omitempty"`
-	Format            *string      `form:"format,omitempty"`
-	FormatVersion     *uint        `form:"format_version,omitempty"`
-	ResponseCondition *string      `form:"response_condition,omitempty"`
-	Placement         *string      `form:"placement,omitempty"`
-	TLSCACert         *string      `form:"tls_ca_cert,omitempty"`
-	TLSHostname       *string      `form:"tls_hostname,omitempty"`
-	TLSClientCert     *string      `form:"tls_client_cert,omitempty"`
-	TLSClientKey      *string      `form:"tls_client_key,omitempty"`
-	ParseLogKeyvals   *Compatibool `form:"parse_log_keyvals,omitempty"`
-	RequestMaxBytes   *uint        `form:"request_max_bytes,omitempty"`
-	AuthMethod        *string      `form:"auth_method,omitempty"`
-	User              *string      `form:"user,omitempty"`
-	Password          *string      `form:"password,omitempty"`
+	NewName           *string      `url:"name,omitempty"`
+	Brokers           *string      `url:"brokers,omitempty"`
+	Topic             *string      `url:"topic,omitempty"`
+	RequiredACKs      *string      `url:"required_acks,omitempty"`
+	UseTLS            *Compatibool `url:"use_tls,omitempty"`
+	CompressionCodec  *string      `url:"compression_codec,omitempty"`
+	Format            *string      `url:"format,omitempty"`
+	FormatVersion     *uint        `url:"format_version,omitempty"`
+	ResponseCondition *string      `url:"response_condition,omitempty"`
+	Placement         *string      `url:"placement,omitempty"`
+	TLSCACert         *string      `url:"tls_ca_cert,omitempty"`
+	TLSHostname       *string      `url:"tls_hostname,omitempty"`
+	TLSClientCert     *string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey      *string      `url:"tls_client_key,omitempty"`
+	ParseLogKeyvals   *Compatibool `url:"parse_log_keyvals,omitempty"`
+	RequestMaxBytes   *uint        `url:"request_max_bytes,omitempty"`
+	AuthMethod        *string      `url:"auth_method,omitempty"`
+	User              *string      `url:"user,omitempty"`
+	Password          *string      `url:"password,omitempty"`
 }
 
 // UpdateKafka updates a specific kafka.

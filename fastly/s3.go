@@ -119,27 +119,27 @@ type CreateS3Input struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name                         string                 `form:"name,omitempty"`
-	BucketName                   string                 `form:"bucket_name,omitempty"`
-	Domain                       string                 `form:"domain,omitempty"`
-	AccessKey                    string                 `form:"access_key,omitempty"`
-	SecretKey                    string                 `form:"secret_key,omitempty"`
-	IAMRole                      string                 `form:"iam_role,omitempty"`
-	Path                         string                 `form:"path,omitempty"`
-	Period                       uint                   `form:"period,omitempty"`
-	CompressionCodec             string                 `form:"compression_codec,omitempty"`
-	GzipLevel                    uint                   `form:"gzip_level,omitempty"`
-	Format                       string                 `form:"format,omitempty"`
-	MessageType                  string                 `form:"message_type,omitempty"`
-	FormatVersion                uint                   `form:"format_version,omitempty"`
-	ResponseCondition            string                 `form:"response_condition,omitempty"`
-	TimestampFormat              string                 `form:"timestamp_format,omitempty"`
-	Redundancy                   S3Redundancy           `form:"redundancy,omitempty"`
-	Placement                    string                 `form:"placement,omitempty"`
-	PublicKey                    string                 `form:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID string                 `form:"server_side_encryption_kms_key_id,omitempty"`
-	ServerSideEncryption         S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
-	ACL                          S3AccessControlList    `form:"acl,omitempty"`
+	Name                         string                 `url:"name,omitempty"`
+	BucketName                   string                 `url:"bucket_name,omitempty"`
+	Domain                       string                 `url:"domain,omitempty"`
+	AccessKey                    string                 `url:"access_key,omitempty"`
+	SecretKey                    string                 `url:"secret_key,omitempty"`
+	IAMRole                      string                 `url:"iam_role,omitempty"`
+	Path                         string                 `url:"path,omitempty"`
+	Period                       uint                   `url:"period,omitempty"`
+	CompressionCodec             string                 `url:"compression_codec,omitempty"`
+	GzipLevel                    uint                   `url:"gzip_level,omitempty"`
+	Format                       string                 `url:"format,omitempty"`
+	MessageType                  string                 `url:"message_type,omitempty"`
+	FormatVersion                uint                   `url:"format_version,omitempty"`
+	ResponseCondition            string                 `url:"response_condition,omitempty"`
+	TimestampFormat              string                 `url:"timestamp_format,omitempty"`
+	Redundancy                   S3Redundancy           `url:"redundancy,omitempty"`
+	Placement                    string                 `url:"placement,omitempty"`
+	PublicKey                    string                 `url:"public_key,omitempty"`
+	ServerSideEncryptionKMSKeyID string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	ServerSideEncryption         S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	ACL                          S3AccessControlList    `url:"acl,omitempty"`
 }
 
 // CreateS3 creates a new Fastly S3.
@@ -219,27 +219,27 @@ type UpdateS3Input struct {
 	// Name is the name of the S3 to update.
 	Name string
 
-	NewName                      *string                 `form:"name,omitempty"`
-	BucketName                   *string                 `form:"bucket_name,omitempty"`
-	Domain                       *string                 `form:"domain,omitempty"`
-	AccessKey                    *string                 `form:"access_key,omitempty"`
-	SecretKey                    *string                 `form:"secret_key,omitempty"`
-	IAMRole                      *string                 `form:"iam_role,omitempty"`
-	Path                         *string                 `form:"path,omitempty"`
-	Period                       *uint                   `form:"period,omitempty"`
-	CompressionCodec             *string                 `form:"compression_codec,omitempty"`
-	GzipLevel                    *uint                   `form:"gzip_level,omitempty"`
-	Format                       *string                 `form:"format,omitempty"`
-	FormatVersion                *uint                   `form:"format_version,omitempty"`
-	ResponseCondition            *string                 `form:"response_condition,omitempty"`
-	MessageType                  *string                 `form:"message_type,omitempty"`
-	TimestampFormat              *string                 `form:"timestamp_format,omitempty"`
-	Redundancy                   *S3Redundancy           `form:"redundancy,omitempty"`
-	Placement                    *string                 `form:"placement,omitempty"`
-	PublicKey                    *string                 `form:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID *string                 `form:"server_side_encryption_kms_key_id,omitempty"`
-	ServerSideEncryption         *S3ServerSideEncryption `form:"server_side_encryption,omitempty"`
-	ACL                          *S3AccessControlList    `form:"acl,omitempty"`
+	NewName                      *string                 `url:"name,omitempty"`
+	BucketName                   *string                 `url:"bucket_name,omitempty"`
+	Domain                       *string                 `url:"domain,omitempty"`
+	AccessKey                    *string                 `url:"access_key,omitempty"`
+	SecretKey                    *string                 `url:"secret_key,omitempty"`
+	IAMRole                      *string                 `url:"iam_role,omitempty"`
+	Path                         *string                 `url:"path,omitempty"`
+	Period                       *uint                   `url:"period,omitempty"`
+	CompressionCodec             *string                 `url:"compression_codec,omitempty"`
+	GzipLevel                    *uint                   `url:"gzip_level,omitempty"`
+	Format                       *string                 `url:"format,omitempty"`
+	FormatVersion                *uint                   `url:"format_version,omitempty"`
+	ResponseCondition            *string                 `url:"response_condition,omitempty"`
+	MessageType                  *string                 `url:"message_type,omitempty"`
+	TimestampFormat              *string                 `url:"timestamp_format,omitempty"`
+	Redundancy                   *S3Redundancy           `url:"redundancy,omitempty"`
+	Placement                    *string                 `url:"placement,omitempty"`
+	PublicKey                    *string                 `url:"public_key,omitempty"`
+	ServerSideEncryptionKMSKeyID *string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	ServerSideEncryption         *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	ACL                          *S3AccessControlList    `url:"acl,omitempty"`
 }
 
 // UpdateS3 updates a specific S3.

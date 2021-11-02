@@ -75,13 +75,13 @@ type CreateHerokuInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	URL               string `form:"url,omitempty"`
-	Token             string `form:"token,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	URL               string `url:"url,omitempty"`
+	Token             string `url:"token,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 }
 
 // CreateHeroku creates a new Fastly heroku.
@@ -157,13 +157,13 @@ type UpdateHerokuInput struct {
 	// Name is the name of the heroku to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	URL               *string `form:"url,omitempty"`
-	Token             *string `form:"token,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	URL               *string `url:"url,omitempty"`
+	Token             *string `url:"token,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
 }
 
 // UpdateHeroku updates a specific heroku.

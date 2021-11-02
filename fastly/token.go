@@ -107,12 +107,12 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
-	Name      string     `form:"name,omitempty"`
-	Scope     TokenScope `form:"scope,omitempty"`
-	Username  string     `form:"username,omitempty"`
-	Password  string     `form:"password,omitempty"`
-	Services  []string   `form:"services,omitempty"`
-	ExpiresAt *time.Time `form:"expires_at,omitempty"`
+	Name      string     `url:"name,omitempty"`
+	Scope     TokenScope `url:"scope,omitempty"`
+	Username  string     `url:"username,omitempty"`
+	Password  string     `url:"password,omitempty"`
+	Services  []string   `url:"services,brackets,omitempty"`
+	ExpiresAt *time.Time `url:"expires_at,omitempty"`
 }
 
 // CreateToken creates a new API token with the given information.

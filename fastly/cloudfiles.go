@@ -84,22 +84,22 @@ type CreateCloudfilesInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	User              string `form:"user,omitempty"`
-	AccessKey         string `form:"access_key,omitempty"`
-	BucketName        string `form:"bucket_name,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Region            string `form:"region,omitempty"`
-	Placement         string `form:"placement,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	GzipLevel         uint   `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	CompressionCodec  string `form:"compression_codec,omitempty"`
+	Name              string `url:"name,omitempty"`
+	User              string `url:"user,omitempty"`
+	AccessKey         string `url:"access_key,omitempty"`
+	BucketName        string `url:"bucket_name,omitempty"`
+	Path              string `url:"path,omitempty"`
+	Region            string `url:"region,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	Period            uint   `url:"period,omitempty"`
+	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	TimestampFormat   string `url:"timestamp_format,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
 }
 
 // CreateCloudfiles creates a new Fastly Cloudfiles.
@@ -175,22 +175,22 @@ type UpdateCloudfilesInput struct {
 	// Name is the name of the Cloudfiles to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	User              *string `form:"user,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	BucketName        *string `form:"bucket_name,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Region            *string `form:"region,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	GzipLevel         *uint   `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
-	CompressionCodec  *string `form:"compression_codec,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	User              *string `url:"user,omitempty"`
+	AccessKey         *string `url:"access_key,omitempty"`
+	BucketName        *string `url:"bucket_name,omitempty"`
+	Path              *string `url:"path,omitempty"`
+	Region            *string `url:"region,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	Period            *uint   `url:"period,omitempty"`
+	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	MessageType       *string `url:"message_type,omitempty"`
+	TimestampFormat   *string `url:"timestamp_format,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
+	CompressionCodec  *string `url:"compression_codec,omitempty"`
 }
 
 // UpdateCloudfiles updates a specific Cloudfiles.

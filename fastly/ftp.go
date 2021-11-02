@@ -84,22 +84,22 @@ type CreateFTPInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	Address           string `form:"address,omitempty"`
-	Port              uint   `form:"port,omitempty"`
-	Username          string `form:"user,omitempty"`
-	Password          string `form:"password,omitempty"`
-	PublicKey         string `form:"public_key,omitempty"`
-	Path              string `form:"path,omitempty"`
-	Period            uint   `form:"period,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	CompressionCodec  string `form:"compression_codec,omitempty"`
-	GzipLevel         uint8  `form:"gzip_level,omitempty"`
-	Format            string `form:"format,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	MessageType       string `form:"message_type,omitempty"`
-	TimestampFormat   string `form:"timestamp_format,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Address           string `url:"address,omitempty"`
+	Port              uint   `url:"port,omitempty"`
+	Username          string `url:"user,omitempty"`
+	Password          string `url:"password,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
+	Path              string `url:"path,omitempty"`
+	Period            uint   `url:"period,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
+	Format            string `url:"format,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	TimestampFormat   string `url:"timestamp_format,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 }
 
 // CreateFTP creates a new Fastly FTP.
@@ -175,22 +175,22 @@ type UpdateFTPInput struct {
 	// Name is the name of the FTP to update.
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	Address           *string `form:"address,omitempty"`
-	Port              *uint   `form:"port,omitempty"`
-	PublicKey         *string `form:"public_key,omitempty"`
-	Username          *string `form:"user,omitempty"`
-	Password          *string `form:"password,omitempty"`
-	Path              *string `form:"path,omitempty"`
-	Period            *uint   `form:"period,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	CompressionCodec  *string `form:"compression_codec,omitempty"`
-	GzipLevel         *uint8  `form:"gzip_level,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	MessageType       *string `form:"message_type,omitempty"`
-	TimestampFormat   *string `form:"timestamp_format,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	Address           *string `url:"address,omitempty"`
+	Port              *uint   `url:"port,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
+	Username          *string `url:"user,omitempty"`
+	Password          *string `url:"password,omitempty"`
+	Path              *string `url:"path,omitempty"`
+	Period            *uint   `url:"period,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	CompressionCodec  *string `url:"compression_codec,omitempty"`
+	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	MessageType       *string `url:"message_type,omitempty"`
+	TimestampFormat   *string `url:"timestamp_format,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
 }
 
 // UpdateFTP updates a specific FTP.

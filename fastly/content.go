@@ -26,7 +26,7 @@ type EdgeCheckResponse struct {
 
 // EdgeCheckInput is used as input to the EdgeCheck function.
 type EdgeCheckInput struct {
-	URL string `form:"url,omitempty"`
+	URL string `url:"url,omitempty"`
 }
 
 // EdgeCheck queries the edge cache for all of Fastly's servers for the given
