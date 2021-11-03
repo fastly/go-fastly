@@ -6,21 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/diff/from/34/to/35
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/diff/from/56/to/57
     method: GET
   response:
-    body: '{"from":"34","to":"35","format":"text","diff":" acls: []\n-backends: []\n+backends:\n+-
+    body: '{"from":"56","to":"57","format":"text","diff":" acls: []\n-backends: []\n+backends:\n+-
       name: test-backend\n+  address: integ-test.go-fastly.com\n+  auto_loadbalance:
       false\n+  between_bytes_timeout: 10000\n+  client_cert:\n+  comment: ''''\n+  connect_timeout:
       1000\n+  error_threshold: 0\n+  first_byte_timeout: 15000\n+  healthcheck:\n+  hostname:
       integ-test.go-fastly.com\n+  ipv4:\n+  ipv6:\n+  max_conn: 200\n+  max_tls_version:\n+  min_tls_version:\n+  override_host:\n+  port:
       80\n+  request_condition: ''''\n+  shield:\n+  ssl_ca_cert:\n+  ssl_cert_hostname:\n+  ssl_check_cert:
-      true\n+  ssl_ciphers:\n+  ssl_client_cert:\n+  ssl_client_key:\n+  ssl_hostname:\n+  ssl_sni_hostname:\n+  use_ssl:
+      false\n+  ssl_ciphers:\n+  ssl_client_cert:\n+  ssl_client_key:\n+  ssl_hostname:\n+  ssl_sni_hostname:\n+  use_ssl:
       false\n+  weight: 100\n cache_settings: []\n comment: ''''\n conditions: []\n
       deployed: false\n dictionaries: []\n directors: []\n domains: []\n gzips: []\n
       headers: []\n healthchecks: []\n request_settings: []\n response_objects: []\n
-      service_id: 7i6HN3TK9wS159v2gPAZ8A\n settings:\n   general.default_host: ''''\n   general.default_pci:
+      service_id: 3QSsca5ilwNVpceZ2HJIAH\n settings:\n   general.default_host: ''''\n   general.default_pci:
       0\n   general.default_ttl: 3600\n   general.stale_if_error: false\n   general.stale_if_error_ttl:
       43200\n snippets: []\n staging: false\n testing: false\n vcls: []\n wordpress:
       []\n"}'
@@ -28,11 +28,11 @@ interactions:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:41:17 GMT
+      - Wed, 03 Nov 2021 16:16:18 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,9 +46,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1610620877.386245,VS0,VE347
+      - S1635956179.610262,VS0,VE376
     status: 200 OK
     code: 200
     duration: ""
