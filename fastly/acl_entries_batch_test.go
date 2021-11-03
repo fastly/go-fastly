@@ -83,7 +83,7 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 		actualSubnet := entry.Subnet
 		expectedSubnet := batchCreateOperations.Entries[i].Subnet
 
-		if actualSubnet != *expectedSubnet {
+		if *actualSubnet != *expectedSubnet {
 			t.Errorf("Subnet did not match, expected %v, got %v", expectedSubnet, actualSubnet)
 		}
 
@@ -328,7 +328,7 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	actualSubnet := actualACLEntries[0].Subnet
 	expectedSubnet := batchUpdateOperations.Entries[0].Subnet
 
-	if actualSubnet != *expectedSubnet {
+	if *actualSubnet != *expectedSubnet {
 		t.Errorf("First Subnet did not match, expected %v, got %v", expectedSubnet, actualSubnet)
 	}
 
