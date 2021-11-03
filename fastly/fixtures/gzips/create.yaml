@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=67&content_types=text%2Fhtml+text%2Fcss&extensions=html+css&name=test-gzip
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=67&content_types=text%2Fhtml+text%2Fcss&extensions=html+css&name=test-gzip
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "67"
       content_types:
@@ -19,10 +19,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/gzip
     method: POST
   response:
-    body: '{"content_types":"text/html text/css","extensions":"html css","name":"test-gzip","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"67","cache_condition":"","deleted_at":null,"updated_at":"2021-11-03T16:50:29Z","created_at":"2021-11-03T16:50:29Z"}'
+    body: '{"content_types":"text/html text/css","extensions":"html css","name":"test-gzip","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"67","cache_condition":"","deleted_at":null,"updated_at":"2021-11-03T16:50:29Z","created_at":"2021-11-03T16:50:29Z"}'
     headers:
       Accept-Ranges:
       - bytes

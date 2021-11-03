@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=67&name=test-gzip-omit
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=67&name=test-gzip-omit
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "67"
       name:
@@ -15,10 +15,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/gzip
     method: POST
   response:
-    body: '{"name":"test-gzip-omit","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"67","updated_at":"2021-11-03T16:50:29Z","deleted_at":null,"extensions":"css
+    body: '{"name":"test-gzip-omit","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"67","updated_at":"2021-11-03T16:50:29Z","deleted_at":null,"extensions":"css
       js html eot ico otf ttf json","created_at":"2021-11-03T16:50:29Z","cache_condition":"","content_types":"text/html
       application/x-javascript text/css application/javascript text/javascript application/json
       application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype

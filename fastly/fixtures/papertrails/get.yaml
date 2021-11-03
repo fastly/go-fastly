@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/80/logging/papertrail/test-papertrail
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/logging/papertrail/test-papertrail
     method: GET
   response:
-    body: '{"public_key":null,"placement":"waf_debug","format":"format","address":"integ-test.go-fastly.com","port":"1234","created_at":"2021-11-03T17:05:33Z","format_version":"2","response_condition":"","name":"test-papertrail","updated_at":"2021-11-03T17:05:33Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"80","deleted_at":null}'
+    body: '{"public_key":null,"placement":"waf_debug","format":"format","address":"integ-test.go-fastly.com","port":"1234","created_at":"2021-11-03T17:05:33Z","format_version":"2","response_condition":"","name":"test-papertrail","updated_at":"2021-11-03T17:05:33Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"80","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes

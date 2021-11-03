@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/62/domain/check_all
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/domain/check_all
     method: GET
   response:
-    body: '[[{"name":"integ-test2.go-fastly-MRAjWwhTHc.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","created_at":"2021-11-03T16:28:25Z","version":62,"deleted_at":null,"updated_at":"2021-11-03T16:28:25Z","comment":"comment"},null,false],[{"comment":"comment","service_id":"3QSsca5ilwNVpceZ2HJIAH","created_at":"2021-11-03T16:28:25Z","deleted_at":null,"version":62,"updated_at":"2021-11-03T16:28:26Z","name":"integ-test3.go-fastly-tcuAxhxKQF.com"},null,false]]'
+    body: '[[{"name":"integ-test2.go-fastly-MRAjWwhTHc.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-11-03T16:28:25Z","version":62,"deleted_at":null,"updated_at":"2021-11-03T16:28:25Z","comment":"comment"},null,false],[{"comment":"comment","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-11-03T16:28:25Z","deleted_at":null,"version":62,"updated_at":"2021-11-03T16:28:26Z","name":"integ-test3.go-fastly-tcuAxhxKQF.com"},null,false]]'
     headers:
       Accept-Ranges:
       - bytes

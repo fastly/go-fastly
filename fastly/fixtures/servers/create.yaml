@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: PoolID=4I1u39xj1EztfJHVzPo6BY&ServiceID=3QSsca5ilwNVpceZ2HJIAH&address=127.0.0.1
+    body: PoolID=4I1u39xj1EztfJHVzPo6BY&ServiceID=7i6HN3TK9wS159v2gPAZ8A&address=127.0.0.1
     form:
       PoolID:
       - 4I1u39xj1EztfJHVzPo6BY
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       address:
       - 127.0.0.1
     headers:
@@ -15,10 +15,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/pool/4I1u39xj1EztfJHVzPo6BY/server
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/server
     method: POST
   response:
-    body: '{"address":"127.0.0.1","service_id":"3QSsca5ilwNVpceZ2HJIAH","pool_id":"4I1u39xj1EztfJHVzPo6BY","max_conn":"0","weight":"100","port":"80","updated_at":"2021-11-03T17:14:36Z","disabled":false,"created_at":"2021-11-03T17:14:36Z","id":"5kmav70NchjgR8M9tjxtOz","deleted_at":null,"override_host":null,"comment":""}'
+    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"4I1u39xj1EztfJHVzPo6BY","max_conn":"0","weight":"100","port":"80","updated_at":"2021-11-03T17:14:36Z","disabled":false,"created_at":"2021-11-03T17:14:36Z","id":"5kmav70NchjgR8M9tjxtOz","deleted_at":null,"override_host":null,"comment":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -52,12 +52,12 @@ interactions:
     code: 200
     duration: ""
 - request:
-    body: PoolID=4I1u39xj1EztfJHVzPo6BY&ServiceID=3QSsca5ilwNVpceZ2HJIAH&address=altserver.example.com
+    body: PoolID=4I1u39xj1EztfJHVzPo6BY&ServiceID=7i6HN3TK9wS159v2gPAZ8A&address=altserver.example.com
     form:
       PoolID:
       - 4I1u39xj1EztfJHVzPo6BY
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       address:
       - altserver.example.com
     headers:
@@ -65,10 +65,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/pool/4I1u39xj1EztfJHVzPo6BY/server
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/server
     method: POST
   response:
-    body: '{"address":"altserver.example.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","pool_id":"4I1u39xj1EztfJHVzPo6BY","weight":"100","created_at":"2021-11-03T17:14:36Z","deleted_at":null,"updated_at":"2021-11-03T17:14:36Z","disabled":false,"id":"1YEDh57waxruEoTEsk4bKx","override_host":null,"port":"80","comment":"","max_conn":"0"}'
+    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"4I1u39xj1EztfJHVzPo6BY","weight":"100","created_at":"2021-11-03T17:14:36Z","deleted_at":null,"updated_at":"2021-11-03T17:14:36Z","disabled":false,"id":"1YEDh57waxruEoTEsk4bKx","override_host":null,"port":"80","comment":"","max_conn":"0"}'
     headers:
       Accept-Ranges:
       - bytes

@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/49/logging/bigquery/test-bigquery
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49/logging/bigquery/test-bigquery
     method: GET
   response:
     body: '{"template_suffix":null,"version":"49","project_id":"example-fastly-log","user":"fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com","response_condition":"","placement":"waf_debug","secret_key":"-----BEGIN
@@ -15,7 +15,7 @@ interactions:
       PRIVATE KEY-----","updated_at":"2021-11-03T15:34:54Z","dataset":"fastly_log_test","table":"fastly_logs","format_version":"2","format":"{\n
       \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl,
       \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state,
-      \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}","name":"test-bigquery","service_id":"3QSsca5ilwNVpceZ2HJIAH","deleted_at":null,"created_at":"2021-11-03T15:34:54Z"}'
+      \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}","name":"test-bigquery","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"created_at":"2021-11-03T15:34:54Z"}'
     headers:
       Accept-Ranges:
       - bytes

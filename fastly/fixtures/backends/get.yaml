@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/42/backend/test-backend
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/backend/test-backend
     method: GET
   response:
-    body: '{"ssl_client_cert":null,"first_byte_timeout":15000,"deleted_at":null,"healthcheck":null,"auto_loadbalance":false,"created_at":"2021-11-03T15:12:22Z","between_bytes_timeout":10000,"weight":100,"comment":"","port":1234,"ssl_check_cert":false,"ssl_client_key":null,"ipv6":null,"ssl_ca_cert":null,"request_condition":"","address":"integ-test.go-fastly.com","error_threshold":0,"connect_timeout":1500,"name":"test-backend","ipv4":null,"ssl_hostname":null,"version":42,"min_tls_version":null,"ssl_sni_hostname":null,"max_conn":200,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","hostname":"integ-test.go-fastly.com","updated_at":"2021-11-03T15:12:22Z","use_ssl":false,"client_cert":null,"service_id":"3QSsca5ilwNVpceZ2HJIAH","shield":null,"override_host":"origin.example.com","max_tls_version":null,"ssl_cert_hostname":null}'
+    body: '{"ssl_client_cert":null,"first_byte_timeout":15000,"deleted_at":null,"healthcheck":null,"auto_loadbalance":false,"created_at":"2021-11-03T15:12:22Z","between_bytes_timeout":10000,"weight":100,"comment":"","port":1234,"ssl_check_cert":false,"ssl_client_key":null,"ipv6":null,"ssl_ca_cert":null,"request_condition":"","address":"integ-test.go-fastly.com","error_threshold":0,"connect_timeout":1500,"name":"test-backend","ipv4":null,"ssl_hostname":null,"version":42,"min_tls_version":null,"ssl_sni_hostname":null,"max_conn":200,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","hostname":"integ-test.go-fastly.com","updated_at":"2021-11-03T15:12:22Z","use_ssl":false,"client_cert":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","shield":null,"override_host":"origin.example.com","max_tls_version":null,"ssl_cert_hostname":null}'
     headers:
       Accept-Ranges:
       - bytes

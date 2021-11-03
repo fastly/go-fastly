@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-vcl&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=97&name=new-test-vcl
+    body: Name=test-vcl&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=97&name=new-test-vcl
     form:
       Name:
       - test-vcl
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "97"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/97/vcl/test-vcl
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/97/vcl/test-vcl
     method: PUT
   response:
-    body: '{"name":"new-test-vcl","version":97,"deleted_at":null,"updated_at":"2021-11-03T17:24:55Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","content":"\nbackend
+    body: '{"name":"new-test-vcl","version":97,"deleted_at":null,"updated_at":"2021-11-03T17:24:55Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","content":"\nbackend
       default {\n  .host = \"127.0.0.1\";\n  .port = \"9092\";\n}\n\nsub vcl_recv
       {\n  set req.backend = default;\n\n  if (req.url.path ~ \"(1|2)\") {\n    //
       ...\n  }\n}\n\nsub vcl_hash {\n  set req.hash += req.url;\n  set req.hash +=

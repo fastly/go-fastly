@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/81/pool/test_pool
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/81/pool/test_pool
     method: GET
   response:
-    body: '{"min_tls_version":null,"tls_sni_hostname":null,"comment":"test pool","version":"81","tls_client_cert":null,"created_at":"2021-11-03T17:06:47Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","id":"7VKzgbCVzgxjIbzWwJy3PV","shield":null,"quorum":"50","tls_ciphers":null,"tls_client_key":null,"tls_check_cert":"1","deleted_at":null,"use_tls":"1","max_tls_version":null,"override_host":null,"first_byte_timeout":"15000","name":"test_pool","between_bytes_timeout":"10000","healthcheck":null,"connect_timeout":"1000","tls_cert_hostname":"example.com","type":"random","max_conn_default":"200","request_condition":null,"tls_ca_cert":null,"updated_at":"2021-11-03T17:06:47Z"}'
+    body: '{"min_tls_version":null,"tls_sni_hostname":null,"comment":"test pool","version":"81","tls_client_cert":null,"created_at":"2021-11-03T17:06:47Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","id":"7VKzgbCVzgxjIbzWwJy3PV","shield":null,"quorum":"50","tls_ciphers":null,"tls_client_key":null,"tls_check_cert":"1","deleted_at":null,"use_tls":"1","max_tls_version":null,"override_host":null,"first_byte_timeout":"15000","name":"test_pool","between_bytes_timeout":"10000","healthcheck":null,"connect_timeout":"1000","tls_cert_hostname":"example.com","type":"random","max_conn_default":"200","request_condition":null,"tls_ca_cert":null,"updated_at":"2021-11-03T17:06:47Z"}'
     headers:
       Accept-Ranges:
       - bytes

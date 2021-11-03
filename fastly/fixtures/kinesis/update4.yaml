@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-kinesis&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=74&iam_role=badarn
+    body: Name=test-kinesis&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=74&iam_role=badarn
     form:
       Name:
       - test-kinesis
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "74"
       iam_role:
@@ -17,11 +17,11 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/74/logging/kinesis/test-kinesis
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis/test-kinesis
     method: PUT
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e 3QSsca5ilwNVpceZ2HJIAH,
+      0000-00-00 00:00:00, name =\u003e test-kinesis, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
       version =\u003e 74 }''"}'
     headers:
       Accept-Ranges:

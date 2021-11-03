@@ -7,16 +7,16 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/gzip
     method: GET
   response:
-    body: '[{"created_at":"2021-11-03T16:50:29Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","content_types":"text/html
+    body: '[{"created_at":"2021-11-03T16:50:29Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","content_types":"text/html
       text/css","updated_at":"2021-11-03T16:50:29Z","extensions":"html css","deleted_at":null,"version":"67","cache_condition":"","name":"test-gzip"},{"extensions":"css
       js html eot ico otf ttf json","deleted_at":null,"version":"67","cache_condition":"","name":"test-gzip-omit","created_at":"2021-11-03T16:50:29Z","content_types":"text/html
       application/x-javascript text/css application/javascript text/javascript application/json
       application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
       application/x-font-ttf application/xml font/eot font/opentype font/otf image/svg+xml
-      image/vnd.microsoft.icon text/plain text/xml","service_id":"3QSsca5ilwNVpceZ2HJIAH","updated_at":"2021-11-03T16:50:29Z"}]'
+      image/vnd.microsoft.icon text/plain text/xml","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T16:50:29Z"}]'
     headers:
       Accept-Ranges:
       - bytes

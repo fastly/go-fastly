@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-sumologic&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=95&name=new-test-sumologic
+    body: Name=test-sumologic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=95&name=new-test-sumologic
     form:
       Name:
       - test-sumologic
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "95"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/95/logging/sumologic/test-sumologic
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/logging/sumologic/test-sumologic
     method: PUT
   response:
-    body: '{"version":"95","service_id":"3QSsca5ilwNVpceZ2HJIAH","format_version":"1","deleted_at":null,"name":"new-test-sumologic","created_at":"2021-11-03T17:19:13Z","url":"https://foo.sumologic.com","response_condition":"","updated_at":"2021-11-03T17:19:13Z","message_type":"classic","placement":"waf_debug","format":"format"}'
+    body: '{"version":"95","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"1","deleted_at":null,"name":"new-test-sumologic","created_at":"2021-11-03T17:19:13Z","url":"https://foo.sumologic.com","response_condition":"","updated_at":"2021-11-03T17:19:13Z","message_type":"classic","placement":"waf_debug","format":"format"}'
     headers:
       Accept-Ranges:
       - bytes

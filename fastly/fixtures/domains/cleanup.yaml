@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/62/domain/integ-test.go-fastly-XVlBzgbaiC.com
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/domain/integ-test.go-fastly-XVlBzgbaiC.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e integ-test.go-fastly-XVlBzgbaiC.com, service
-      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 62 }''"}'
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 62 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -51,12 +51,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/62/domain/integ-test3.go-fastly-tcuAxhxKQF.com
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/domain/integ-test3.go-fastly-tcuAxhxKQF.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e integ-test3.go-fastly-tcuAxhxKQF.com, service
-      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 62 }''"}'
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 62 }''"}'
     headers:
       Accept-Ranges:
       - bytes

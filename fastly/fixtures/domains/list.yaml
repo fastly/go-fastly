@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/62/domain
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/domain
     method: GET
   response:
-    body: '[{"name":"integ-test.go-fastly-XVlBzgbaiC.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","updated_at":"2021-11-03T16:28:25Z","created_at":"2021-11-03T16:28:25Z","deleted_at":null,"version":62,"comment":"comment"},{"updated_at":"2021-11-03T16:28:25Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","name":"integ-test2.go-fastly-MRAjWwhTHc.com","comment":"comment","version":62,"deleted_at":null,"created_at":"2021-11-03T16:28:25Z"}]'
+    body: '[{"name":"integ-test.go-fastly-XVlBzgbaiC.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T16:28:25Z","created_at":"2021-11-03T16:28:25Z","deleted_at":null,"version":62,"comment":"comment"},{"updated_at":"2021-11-03T16:28:25Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"integ-test2.go-fastly-MRAjWwhTHc.com","comment":"comment","version":62,"deleted_at":null,"created_at":"2021-11-03T16:28:25Z"}]'
     headers:
       Accept-Ranges:
       - bytes

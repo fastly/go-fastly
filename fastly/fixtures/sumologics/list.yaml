@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/95/logging/sumologic
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/logging/sumologic
     method: GET
   response:
-    body: '[{"version":"95","format_version":"1","deleted_at":null,"service_id":"3QSsca5ilwNVpceZ2HJIAH","response_condition":"","created_at":"2021-11-03T17:19:13Z","url":"https://foo.sumologic.com","name":"test-sumologic","format":"format","placement":"waf_debug","updated_at":"2021-11-03T17:19:13Z","message_type":"classic"}]'
+    body: '[{"version":"95","format_version":"1","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","response_condition":"","created_at":"2021-11-03T17:19:13Z","url":"https://foo.sumologic.com","name":"test-sumologic","format":"format","placement":"waf_debug","updated_at":"2021-11-03T17:19:13Z","message_type":"classic"}]'
     headers:
       Accept-Ranges:
       - bytes

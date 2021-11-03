@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=85&action=lookup&bypass_busy_wait=1&default_host=example.com&force_miss=1&force_ssl=1&geo_headers=1&hash_keys=a%2Cb%2Cc&max_stale_age=30&name=test-request-setting&timer_support=1&xff=leave
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=85&action=lookup&bypass_busy_wait=1&default_host=example.com&force_miss=1&force_ssl=1&geo_headers=1&hash_keys=a%2Cb%2Cc&max_stale_age=30&name=test-request-setting&timer_support=1&xff=leave
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "85"
       action:
@@ -35,10 +35,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/85/request_settings
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/85/request_settings
     method: POST
   response:
-    body: '{"action":"lookup","bypass_busy_wait":"1","default_host":"example.com","force_miss":"1","force_ssl":"1","geo_headers":"1","hash_keys":"a,b,c","max_stale_age":"30","name":"test-request-setting","timer_support":"1","xff":"leave","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"85","deleted_at":null,"updated_at":"2021-11-03T17:11:58Z","request_condition":"","created_at":"2021-11-03T17:11:58Z"}'
+    body: '{"action":"lookup","bypass_busy_wait":"1","default_host":"example.com","force_miss":"1","force_ssl":"1","geo_headers":"1","hash_keys":"a,b,c","max_stale_age":"30","name":"test-request-setting","timer_support":"1","xff":"leave","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"85","deleted_at":null,"updated_at":"2021-11-03T17:11:58Z","request_condition":"","created_at":"2021-11-03T17:11:58Z"}'
     headers:
       Accept-Ranges:
       - bytes

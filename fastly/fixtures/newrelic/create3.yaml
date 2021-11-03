@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=78&format=format&name=test-newrelic-3&placement=waf_debug&region=abc&token=abcd1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=78&format=format&name=test-newrelic-3&placement=waf_debug&region=abc&token=abcd1234
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "78"
       format:
@@ -23,7 +23,7 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/78/logging/newrelic
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/78/logging/newrelic
     method: POST
   response:
     body: '{"msg":"Bad request","detail":"unrecognized region abc"}'

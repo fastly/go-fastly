@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=74&format=format&format_version=2&iam_role=badarn&name=test-kinesis-3&placement=waf_debug&region=us-east-1&topic=stream-name
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=74&format=format&format_version=2&iam_role=badarn&name=test-kinesis-3&placement=waf_debug&region=us-east-1&topic=stream-name
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "74"
       format:
@@ -27,7 +27,7 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/74/logging/kinesis
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis
     method: POST
   response:
     body: '{"msg":"Bad request","detail":"invalid IAM Role ARN badarn: ARNs must have

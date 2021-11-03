@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=54&format=format&name=test-datadog&placement=waf_debug&region=US&token=abcd1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=54&format=format&name=test-datadog&placement=waf_debug&region=US&token=abcd1234
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "54"
       format:
@@ -23,10 +23,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/54/logging/datadog
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/logging/datadog
     method: POST
   response:
-    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"54","created_at":"2021-11-03T16:12:00Z","response_condition":"","deleted_at":null,"updated_at":"2021-11-03T16:12:00Z","format_version":"2"}'
+    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"54","created_at":"2021-11-03T16:12:00Z","response_condition":"","deleted_at":null,"updated_at":"2021-11-03T16:12:00Z","format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes

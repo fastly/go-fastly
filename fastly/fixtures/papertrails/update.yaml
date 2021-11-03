@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-papertrail&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=80&name=new-test-papertrail
+    body: Name=test-papertrail&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=80&name=new-test-papertrail
     form:
       Name:
       - test-papertrail
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "80"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/80/logging/papertrail/test-papertrail
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/logging/papertrail/test-papertrail
     method: PUT
   response:
-    body: '{"placement":"waf_debug","format":"format","created_at":"2021-11-03T17:05:33Z","format_version":"2","updated_at":"2021-11-03T17:05:33Z","address":"integ-test.go-fastly.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","response_condition":"","port":"1234","name":"new-test-papertrail","public_key":null,"deleted_at":null,"version":"80"}'
+    body: '{"placement":"waf_debug","format":"format","created_at":"2021-11-03T17:05:33Z","format_version":"2","updated_at":"2021-11-03T17:05:33Z","address":"integ-test.go-fastly.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","response_condition":"","port":"1234","name":"new-test-papertrail","public_key":null,"deleted_at":null,"version":"80"}'
     headers:
       Accept-Ranges:
       - bytes

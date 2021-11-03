@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/78/logging/newrelic/test-newrelic
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/78/logging/newrelic/test-newrelic
     method: GET
   response:
-    body: '{"name":"test-newrelic","service_id":"3QSsca5ilwNVpceZ2HJIAH","format":"format","created_at":"2021-11-03T17:00:56Z","region":"us","token":"abcd1234","updated_at":"2021-11-03T17:00:56Z","format_version":"2","response_condition":"","deleted_at":null,"version":"78","placement":"waf_debug"}'
+    body: '{"name":"test-newrelic","service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","created_at":"2021-11-03T17:00:56Z","region":"us","token":"abcd1234","updated_at":"2021-11-03T17:00:56Z","format_version":"2","response_condition":"","deleted_at":null,"version":"78","placement":"waf_debug"}'
     headers:
       Accept-Ranges:
       - bytes

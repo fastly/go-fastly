@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/73/logging/kafka/test-kafka
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/73/logging/kafka/test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-kafka, service =\u003e 3QSsca5ilwNVpceZ2HJIAH,
+      0000-00-00 00:00:00, name =\u003e test-kafka, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
       version =\u003e 73 }''"}'
     headers:
       Accept-Ranges:
@@ -51,11 +51,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/73/logging/kafka/new-test-kafka
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/73/logging/kafka/new-test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-kafka, service =\u003e 3QSsca5ilwNVpceZ2HJIAH,
+      0000-00-00 00:00:00, name =\u003e new-test-kafka, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
       version =\u003e 73 }''"}'
     headers:
       Accept-Ranges:

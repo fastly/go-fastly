@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip/test-gzip
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/gzip/test-gzip
     method: GET
   response:
-    body: '{"version":"67","extensions":"html css","created_at":"2021-11-03T16:50:29Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","cache_condition":"","name":"test-gzip","content_types":"text/html
+    body: '{"version":"67","extensions":"html css","created_at":"2021-11-03T16:50:29Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","cache_condition":"","name":"test-gzip","content_types":"text/html
       text/css","deleted_at":null,"updated_at":"2021-11-03T16:50:29Z"}'
     headers:
       Accept-Ranges:

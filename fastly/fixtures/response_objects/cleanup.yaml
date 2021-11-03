@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/86/response_object/test-response-object
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/86/response_object/test-response-object
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find ResponseObject ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-response-object, service =\u003e
-      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 86 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 86 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -51,12 +51,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/86/response_object/new-test-response-object
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/86/response_object/new-test-response-object
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find ResponseObject ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-response-object, service
-      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 86 }''"}'
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 86 }''"}'
     headers:
       Accept-Ranges:
       - bytes

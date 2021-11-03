@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&comment=test+comment
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&comment=test+comment
     form:
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       comment:
       - test comment
     headers:
@@ -13,10 +13,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"comment":"test comment","service_id":"3QSsca5ilwNVpceZ2HJIAH","number":99}'
+    body: '{"comment":"test comment","service_id":"7i6HN3TK9wS159v2gPAZ8A","number":99}'
     headers:
       Accept-Ranges:
       - bytes

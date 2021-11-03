@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-response-object&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=86&name=new-test-response-object
+    body: Name=test-response-object&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=86&name=new-test-response-object
     form:
       Name:
       - test-response-object
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "86"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/86/response_object/test-response-object
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/86/response_object/test-response-object
     method: PUT
   response:
-    body: '{"deleted_at":null,"created_at":"2021-11-03T17:12:48Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","updated_at":"2021-11-03T17:12:48Z","version":"86","name":"new-test-response-object","cache_condition":"","request_condition":"","content_type":"text/plain","status":"200","response":"Ok","content":"abcd"}'
+    body: '{"deleted_at":null,"created_at":"2021-11-03T17:12:48Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T17:12:48Z","version":"86","name":"new-test-response-object","cache_condition":"","request_condition":"","content_type":"text/plain","status":"200","response":"Ok","content":"abcd"}'
     headers:
       Accept-Ranges:
       - bytes

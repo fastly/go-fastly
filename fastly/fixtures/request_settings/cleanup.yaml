@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/85/request_settings/test-request-setting
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/85/request_settings/test-request-setting
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find RequestSettings ''{
       deleted =\u003e 0000-00-00 00:00:00, name =\u003e test-request-setting, service
-      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 85 }''"}'
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 85 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -51,12 +51,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/85/request_settings/new-test-request-setting
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/85/request_settings/new-test-request-setting
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find RequestSettings ''{
       deleted =\u003e 0000-00-00 00:00:00, name =\u003e new-test-request-setting,
-      service =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 85 }''"}'
+      service =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 85 }''"}'
     headers:
       Accept-Ranges:
       - bytes

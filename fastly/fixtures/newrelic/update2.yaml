@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=new-test-newrelic&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=78&region=zz
+    body: Name=new-test-newrelic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=78&region=zz
     form:
       Name:
       - new-test-newrelic
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "78"
       region:
@@ -17,7 +17,7 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/78/logging/newrelic/new-test-newrelic
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/78/logging/newrelic/new-test-newrelic
     method: PUT
   response:
     body: '{"msg":"Bad request","detail":"unrecognized region zz"}'
