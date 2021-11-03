@@ -6,13 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/5eExXVGVxVxKhaiNduThkR/acl/17nbIIGX2ZTN8sfLyLtwgR/entries
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/4Hn1qrMGr7wMCST5ZTggPi/acl/7BuNhEp3BZ1kaf1liTfwMR/entries
     method: GET
   response:
-    body: '[{"subnet":16,"updated_at":"2021-09-22T11:03:00Z","created_at":"2021-09-22T11:02:59Z","negated":"1","comment":"Updated
-      ACL Entry 1","ip":"127.0.0.2","id":"6gcf6qN6a90w5WISByUzqp","service_id":"5eExXVGVxVxKhaiNduThkR","acl_id":"17nbIIGX2ZTN8sfLyLtwgR"},{"updated_at":"2021-09-22T11:02:59Z","subnet":24,"created_at":"2021-09-22T11:02:59Z","negated":"1","comment":"ACL
-      Entry 2","id":"68oskig9jsgpobiSaBYmv0","ip":"192.168.0.1","service_id":"5eExXVGVxVxKhaiNduThkR","acl_id":"17nbIIGX2ZTN8sfLyLtwgR"}]'
+    body: '[{"negated":"1","updated_at":"2021-11-03T14:44:26Z","ip":"127.0.0.2","acl_id":"7BuNhEp3BZ1kaf1liTfwMR","created_at":"2021-11-03T14:44:25Z","id":"6Wi3gAbJkAvhhU0BsFodJg","service_id":"4Hn1qrMGr7wMCST5ZTggPi","subnet":16,"comment":"Updated
+      ACL Entry 1"},{"comment":"ACL Entry 2","subnet":24,"id":"1tX6MA13zclBDPe2THY1na","service_id":"4Hn1qrMGr7wMCST5ZTggPi","created_at":"2021-11-03T14:44:25Z","acl_id":"7BuNhEp3BZ1kaf1liTfwMR","ip":"192.168.0.1","updated_at":"2021-11-03T14:44:25Z","negated":"1"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Sep 2021 11:03:00 GMT
+      - Wed, 03 Nov 2021 14:44:26 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +34,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1632308580.215608,VS0,VE179
+      - S1635950667.590459,VS0,VE133
     status: 200 OK
     code: 200
     duration: ""

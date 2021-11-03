@@ -6,12 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3HSOFAYE9MIClrNMnneZ88/acl/2tmd64cHXy8wccFSnB5tP0/entries
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/0Z7jVDUwGwu7F2OANQI4zM/acl/2unSFVs0YvJ5OfIxOFkT1h/entries
     method: GET
   response:
-    body: '[{"subnet":24,"comment":"ACL Entry 1","created_at":"2021-09-22T11:02:47Z","ip":"127.0.0.1","id":"5Fd2BgJh5t1KWMCCQh9bgq","negated":"0","service_id":"3HSOFAYE9MIClrNMnneZ88","updated_at":"2021-09-22T11:02:47Z","acl_id":"2tmd64cHXy8wccFSnB5tP0"},{"acl_id":"2tmd64cHXy8wccFSnB5tP0","updated_at":"2021-09-22T11:02:47Z","service_id":"3HSOFAYE9MIClrNMnneZ88","ip":"192.168.0.1","negated":"1","id":"79oTJwlhREppUI6BahCekM","created_at":"2021-09-22T11:02:47Z","comment":"ACL
-      Entry 2","subnet":24}]'
+    body: '[{"acl_id":"2unSFVs0YvJ5OfIxOFkT1h","ip":"127.0.0.1","updated_at":"2021-11-03T14:44:23Z","id":"6RYoKeriQf7iaCl1jdrM31","subnet":24,"negated":"0","created_at":"2021-11-03T14:44:23Z","service_id":"0Z7jVDUwGwu7F2OANQI4zM","comment":"ACL
+      Entry 1"},{"updated_at":"2021-11-03T14:44:23Z","ip":"192.168.0.1","acl_id":"2unSFVs0YvJ5OfIxOFkT1h","comment":"ACL
+      Entry 2","service_id":"0Z7jVDUwGwu7F2OANQI4zM","negated":"1","created_at":"2021-11-03T14:44:23Z","subnet":24,"id":"5DGQ0YxSuwDw03pUapmI04"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Sep 2021 11:02:47 GMT
+      - Wed, 03 Nov 2021 14:44:24 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1632308568.543070,VS0,VE312
+      - S1635950664.772296,VS0,VE312
     status: 200 OK
     code: 200
     duration: ""

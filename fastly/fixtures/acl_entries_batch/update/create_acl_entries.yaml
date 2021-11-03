@@ -12,8 +12,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/5eExXVGVxVxKhaiNduThkR/acl/17nbIIGX2ZTN8sfLyLtwgR/entries
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/4Hn1qrMGr7wMCST5ZTggPi/acl/7BuNhEp3BZ1kaf1liTfwMR/entries
     method: PATCH
   response:
     body: '{"status":"ok"}'
@@ -25,11 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Sep 2021 11:02:59 GMT
+      - Wed, 03 Nov 2021 14:44:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "4983"
+      - "4949"
       Fastly-Ratelimit-Reset:
-      - "1632312000"
+      - "1635951600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1632308579.453642,VS0,VE342
+      - S1635950666.697988,VS0,VE201
     status: 200 OK
     code: 200
     duration: ""
