@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=integ-test1.go-fastly-1.com&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=102&name=integ-test3.go-fastly-3.com
+    body: Name=integ-test1.go-fastly-1.com&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=102&name=integ-test3.go-fastly-3.com
     form:
       Name:
       - integ-test1.go-fastly-1.com
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "102"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/102/domain/integ-test1.go-fastly-1.com
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/102/domain/integ-test1.go-fastly-1.com
     method: PUT
   response:
-    body: '{"updated_at":"2021-11-03T17:36:28Z","version":102,"service_id":"3QSsca5ilwNVpceZ2HJIAH","deleted_at":null,"created_at":"2021-11-03T17:36:28Z","name":"integ-test3.go-fastly-3.com","comment":"comment"}'
+    body: '{"updated_at":"2021-11-03T17:36:28Z","version":102,"service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"created_at":"2021-11-03T17:36:28Z","name":"integ-test3.go-fastly-3.com","comment":"comment"}'
     headers:
       Accept-Ranges:
       - bytes

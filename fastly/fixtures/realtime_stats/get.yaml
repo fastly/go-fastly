@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - 6BVemsYo07IZ1T3D3_XVb-JehFbts3lN
+      - XXXX
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://rt.fastly.com/v1/channel/7i6HN3TK9wS159v2gPAZ8A/ts/0/limit/3
