@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=21&access_key=AKIAIOSFODNN7EXAMPLE&format=format&format_version=2&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&name=test-kinesis-3&placement=waf_debug&region=us-east-1&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&topic=stream-name
+    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=74&access_key=AKIAIOSFODNN7EXAMPLE&format=format&format_version=2&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&name=test-kinesis-3&placement=waf_debug&region=us-east-1&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY&topic=stream-name
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "21"
+      - "74"
       access_key:
       - AKIAIOSFODNN7EXAMPLE
       format:
@@ -30,8 +30,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.2.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/74/logging/kinesis
     method: POST
   response:
     body: '{"msg":"''iam_role'' can''t be used when ''access_key'' or ''secret_key''
@@ -40,15 +40,15 @@ interactions:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Mon, 05 Apr 2021 13:02:16 GMT
+      - Wed, 03 Nov 2021 16:56:47 GMT
       Fastly-Ratelimit-Remaining:
-      - "986"
+      - "4824"
       Fastly-Ratelimit-Reset:
-      - "1617631200"
+      - "1635958800"
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -62,9 +62,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8277-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1617627737.714972,VS0,VE102
+      - S1635958607.142082,VS0,VE144
     status: 400 Bad Request
     code: 400
     duration: ""
