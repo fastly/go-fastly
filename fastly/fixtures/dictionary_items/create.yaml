@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: DictionaryID=2WbI2tm1K7r1j6zNhrnDDp&ServiceID=2Sz0CwKi5NYXurcMQ1SHPo&item_key=test-dictionary-item&item_value=value
+    body: DictionaryID=3pTsXixukWxd2SGBzWnpxK&ServiceID=0hSVcwLyhP24GhIMGcOqlw&item_key=test-dictionary-item&item_value=value
     form:
       DictionaryID:
-      - 2WbI2tm1K7r1j6zNhrnDDp
+      - 3pTsXixukWxd2SGBzWnpxK
       ServiceID:
-      - 2Sz0CwKi5NYXurcMQ1SHPo
+      - 0hSVcwLyhP24GhIMGcOqlw
       item_key:
       - test-dictionary-item
       item_value:
@@ -16,24 +16,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/2Sz0CwKi5NYXurcMQ1SHPo/dictionary/2WbI2tm1K7r1j6zNhrnDDp/item
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/0hSVcwLyhP24GhIMGcOqlw/dictionary/3pTsXixukWxd2SGBzWnpxK/item
     method: POST
   response:
-    body: '{"dictionary_id":"2WbI2tm1K7r1j6zNhrnDDp","service_id":"2Sz0CwKi5NYXurcMQ1SHPo","item_key":"test-dictionary-item","item_value":"value","deleted_at":null,"updated_at":"2021-01-14T10:24:05Z","created_at":"2021-01-14T10:24:05Z"}'
+    body: '{"dictionary_id":"3pTsXixukWxd2SGBzWnpxK","service_id":"0hSVcwLyhP24GhIMGcOqlw","item_key":"test-dictionary-item","item_value":"value","created_at":"2021-11-03T16:13:54Z","deleted_at":null,"updated_at":"2021-11-03T16:13:54Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:24:06 GMT
+      - Wed, 03 Nov 2021 16:13:54 GMT
       Fastly-Ratelimit-Remaining:
-      - "935"
+      - "4986"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1610619846.734511,VS0,VE299
+      - S1635956035.543792,VS0,VE162
     status: 200 OK
     code: 200
     duration: ""

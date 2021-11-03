@@ -6,20 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/2Sz0CwKi5NYXurcMQ1SHPo/dictionary/2WbI2tm1K7r1j6zNhrnDDp/item/test-dictionary-item
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/0hSVcwLyhP24GhIMGcOqlw/dictionary/3pTsXixukWxd2SGBzWnpxK/item/test-dictionary-item
     method: GET
   response:
-    body: '{"updated_at":"2021-01-14T10:24:05Z","item_value":"value","created_at":"2021-01-14T10:24:05Z","dictionary_id":"2WbI2tm1K7r1j6zNhrnDDp","service_id":"2Sz0CwKi5NYXurcMQ1SHPo","deleted_at":null,"item_key":"test-dictionary-item"}'
+    body: '{"dictionary_id":"3pTsXixukWxd2SGBzWnpxK","service_id":"0hSVcwLyhP24GhIMGcOqlw","deleted_at":null,"item_key":"test-dictionary-item","created_at":"2021-11-03T16:13:54Z","updated_at":"2021-11-03T16:13:54Z","item_value":"value"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:24:07 GMT
+      - Wed, 03 Nov 2021 16:13:55 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1610619847.624036,VS0,VE457
+      - S1635956035.143861,VS0,VE312
     status: 200 OK
     code: 200
     duration: ""

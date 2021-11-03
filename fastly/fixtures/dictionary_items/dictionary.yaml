@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=2Sz0CwKi5NYXurcMQ1SHPo&ServiceVersion=2&name=test_dictionary_DictionaryItems
+    body: ServiceID=0hSVcwLyhP24GhIMGcOqlw&ServiceVersion=2&name=test_dictionary_DictionaryItems
     form:
       ServiceID:
-      - 2Sz0CwKi5NYXurcMQ1SHPo
+      - 0hSVcwLyhP24GhIMGcOqlw
       ServiceVersion:
       - "2"
       name:
@@ -14,24 +14,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/2Sz0CwKi5NYXurcMQ1SHPo/version/2/dictionary
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/0hSVcwLyhP24GhIMGcOqlw/version/2/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary_DictionaryItems","service_id":"2Sz0CwKi5NYXurcMQ1SHPo","version":2,"created_at":"2021-01-14T10:24:05Z","write_only":false,"deleted_at":null,"id":"2WbI2tm1K7r1j6zNhrnDDp","updated_at":"2021-01-14T10:24:05Z"}'
+    body: '{"name":"test_dictionary_DictionaryItems","service_id":"0hSVcwLyhP24GhIMGcOqlw","version":2,"deleted_at":null,"updated_at":"2021-11-03T16:13:54Z","id":"3pTsXixukWxd2SGBzWnpxK","write_only":false,"created_at":"2021-11-03T16:13:54Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:24:05 GMT
+      - Wed, 03 Nov 2021 16:13:54 GMT
       Fastly-Ratelimit-Remaining:
-      - "936"
+      - "4987"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1610619845.469684,VS0,VE241
+      - S1635956034.322536,VS0,VE192
     status: 200 OK
     code: 200
     duration: ""
