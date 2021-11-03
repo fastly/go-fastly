@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-newrelic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=139&format_version=2&name=new-test-newrelic&region=eu
+    body: Name=test-newrelic&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=78&format_version=2&name=new-test-newrelic&region=eu
     form:
       Name:
       - test-newrelic
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "139"
+      - "78"
       format_version:
       - "2"
       name:
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.6.0 (+github.com/fastly/go-fastly; go1.16.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/139/logging/newrelic/test-newrelic
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/78/logging/newrelic/test-newrelic
     method: PUT
   response:
-    body: '{"version":"139","region":"eu","response_condition":"","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"new-test-newrelic","format_version":"2","created_at":"2021-08-17T16:11:50Z","placement":"waf_debug","deleted_at":null,"format":"format","updated_at":"2021-08-17T16:11:50Z"}'
+    body: '{"placement":"waf_debug","version":"78","format_version":"2","updated_at":"2021-11-03T17:00:56Z","deleted_at":null,"response_condition":"","created_at":"2021-11-03T17:00:56Z","region":"eu","token":"abcd1234","name":"new-test-newrelic","service_id":"3QSsca5ilwNVpceZ2HJIAH","format":"format"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 17 Aug 2021 16:11:53 GMT
+      - Wed, 03 Nov 2021 17:00:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "979"
+      - "4992"
       Fastly-Ratelimit-Reset:
-      - "1629219600"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8241-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1629216713.683571,VS0,VE474
+      - S1635958859.021661,VS0,VE576
     status: 200 OK
     code: 200
     duration: ""
