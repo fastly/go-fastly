@@ -1,0 +1,40 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/stats/usage?by=minute&from=10+days+ago&region=usa&to=now
+    method: GET
+  response:
+    body: |
+      {"data":{"africa_std":{"bandwidth":0,"requests":0,"compute_requests":0},"anzac":{"bandwidth":0,"requests":0,"compute_requests":0},"asia":{"bandwidth":0,"requests":0,"compute_requests":0},"asia_india":{"bandwidth":0,"requests":0,"compute_requests":0},"asia_southkorea":{"bandwidth":0,"requests":0,"compute_requests":0},"europe":{"bandwidth":17759,"requests":0,"compute_requests":9},"latam":{"bandwidth":0,"requests":0,"compute_requests":0},"southamerica_std":{"bandwidth":0,"requests":0,"compute_requests":0},"usa":{"bandwidth":0,"requests":0,"compute_requests":0}},"meta":{"to":"2021-11-03 17:31:47 UTC","from":"2021-10-24 17:31:47 UTC","by":"minute","region":"usa"},"status":"success","msg":null}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Nov 2021 17:31:48 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN
+      X-Timer:
+      - S1635960708.630371,VS0,VE1048
+    status: 200 OK
+    code: 200
+    duration: ""

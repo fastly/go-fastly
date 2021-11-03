@@ -7,19 +7,18 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/101/domain/integ-test.go-fastly-XVlBzgbaiC.com
+    url: https://api.fastly.com/stats/regions
     method: GET
   response:
-    body: '{"updated_at":"2021-11-03T17:34:22Z","name":"integ-test.go-fastly-XVlBzgbaiC.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","comment":"comment","created_at":"2021-11-03T17:34:22Z","deleted_at":null,"version":101}'
+    body: |
+      {"data":["africa_std","anzac","asia","asia_india","asia_southkorea","europe","latam","southamerica_std","usa"],"meta":{"to":"2021-11-03 17:31:47 UTC","from":"2021-10-03 17:31:47 UTC","by":"day","region":"all"},"status":"success","msg":null}
     headers:
       Accept-Ranges:
       - bytes
-      Cache-Control:
-      - no-store
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:34:24 GMT
+      - Wed, 03 Nov 2021 17:31:48 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +32,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1635960864.056935,VS0,VE324
+      - S1635960708.630514,VS0,VE769
     status: 200 OK
     code: 200
     duration: ""

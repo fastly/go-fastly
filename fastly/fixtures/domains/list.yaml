@@ -7,19 +7,19 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/domain
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/101/domain
     method: GET
   response:
-    body: '[{"name":"integ-test.go-fastly-XVlBzgbaiC.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T16:28:25Z","created_at":"2021-11-03T16:28:25Z","deleted_at":null,"version":62,"comment":"comment"},{"updated_at":"2021-11-03T16:28:25Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"integ-test2.go-fastly-MRAjWwhTHc.com","comment":"comment","version":62,"deleted_at":null,"created_at":"2021-11-03T16:28:25Z"}]'
+    body: '[{"name":"integ-test.go-fastly-XVlBzgbaiC.com","deleted_at":null,"updated_at":"2021-11-03T17:34:22Z","version":101,"comment":"comment","service_id":"3QSsca5ilwNVpceZ2HJIAH","created_at":"2021-11-03T17:34:22Z"},{"version":101,"created_at":"2021-11-03T17:34:23Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","comment":"comment","name":"integ-test2.go-fastly-MRAjWwhTHc.com","updated_at":"2021-11-03T17:34:23Z","deleted_at":null}]'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-store
+      - no-store, s-maxage=0
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:28:26 GMT
+      - Wed, 03 Nov 2021 17:34:23 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -27,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish, 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS, MISS, MISS
       X-Cache-Hits:
-      - 0, 0
+      - 0, 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN, cache-man4133-MAN
       X-Timer:
-      - S1635956906.889370,VS0,VE354
+      - S1635960863.430187,VS0,VE528
     status: 200 OK
     code: 200
     duration: ""

@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/domain/integ-test.go-fastly-XVlBzgbaiC.com
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/101/domain/integ-test.go-fastly-XVlBzgbaiC.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e integ-test.go-fastly-XVlBzgbaiC.com, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 62 }''"}'
+      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 101 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,55 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:28:28 GMT
+      - Wed, 03 Nov 2021 17:34:25 GMT
       Fastly-Ratelimit-Remaining:
-      - "4913"
+      - "4739"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
-      Status:
-      - 404 Not Found
-      Strict-Transport-Security:
-      - max-age=31536000
-      Vary:
-      - Accept-Encoding
-      Via:
-      - 1.1 varnish, 1.1 varnish
-      X-Cache:
-      - MISS, MISS
-      X-Cache-Hits:
-      - 0, 0
-      X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4133-MAN
-      X-Timer:
-      - S1635956909.577298,VS0,VE413
-    status: 404 Not Found
-    code: 404
-    duration: ""
-- request:
-    body: ""
-    form: {}
-    headers:
-      User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/domain/integ-test3.go-fastly-tcuAxhxKQF.com
-    method: DELETE
-  response:
-    body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e integ-test3.go-fastly-tcuAxhxKQF.com, service
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 62 }''"}'
-    headers:
-      Accept-Ranges:
-      - bytes
-      Cache-Control:
-      - no-store
-      Content-Type:
-      - application/json
-      Date:
-      - Wed, 03 Nov 2021 16:28:29 GMT
-      Fastly-Ratelimit-Remaining:
-      - "4912"
-      Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1635962400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -85,7 +41,51 @@ interactions:
       X-Served-By:
       - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
       X-Timer:
-      - S1635956909.010277,VS0,VE165
+      - S1635960866.788462,VS0,VE157
+    status: 404 Not Found
+    code: 404
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/101/domain/integ-test3.go-fastly-tcuAxhxKQF.com
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
+      0000-00-00 00:00:00, name =\u003e integ-test3.go-fastly-tcuAxhxKQF.com, service
+      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 101 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 03 Nov 2021 17:34:26 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4738"
+      Fastly-Ratelimit-Reset:
+      - "1635962400"
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4133-MAN
+      X-Timer:
+      - S1635960866.971471,VS0,VE144
     status: 404 Not Found
     code: 404
     duration: ""
