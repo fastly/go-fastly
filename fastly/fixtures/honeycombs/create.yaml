@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=46&dataset=testDataset&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-honeycomb&placement=waf_debug&token=super-secure-token
+    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=71&dataset=testDataset&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-honeycomb&placement=waf_debug&token=super-secure-token
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "46"
+      - "71"
       dataset:
       - testDataset
       format:
@@ -24,24 +24,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/honeycomb
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/71/logging/honeycomb
     method: POST
   response:
-    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"46","response_condition":"","created_at":"2021-01-14T10:43:06Z","updated_at":"2021-01-14T10:43:06Z","deleted_at":null}'
+    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"71","created_at":"2021-11-03T16:53:42Z","response_condition":"","updated_at":"2021-11-03T16:53:42Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:43:07 GMT
+      - Wed, 03 Nov 2021 16:53:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "696"
+      - "4844"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +55,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4134-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4147-MAN
       X-Timer:
-      - S1610620987.864334,VS0,VE538
+      - S1635958422.202330,VS0,VE437
     status: 200 OK
     code: 200
     duration: ""
