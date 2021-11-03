@@ -6,20 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/31/condition
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/53/condition
     method: GET
   response:
-    body: '[{"service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test/condition","type":"REQUEST","priority":"1","statement":"req.url~+\"index.html\"","created_at":"2021-01-14T10:36:24Z","comment":"","updated_at":"2021-01-14T10:36:24Z","version":"31","deleted_at":null}]'
+    body: '[{"comment":"","statement":"req.url~+\"index.html\"","service_id":"3QSsca5ilwNVpceZ2HJIAH","deleted_at":null,"priority":"1","version":"53","type":"REQUEST","created_at":"2021-11-03T15:49:00Z","name":"test/condition","updated_at":"2021-11-03T15:49:00Z"}]'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:36:24 GMT
+      - Wed, 03 Nov 2021 15:49:00 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610620584.213179,VS0,VE205
+      - S1635954540.304949,VS0,VE346
     status: 200 OK
     code: 200
     duration: ""
