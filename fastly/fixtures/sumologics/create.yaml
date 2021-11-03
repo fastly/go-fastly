@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=62&format=format&format_version=1&message_type=classic&name=test-sumologic&placement=waf_debug&url=https%3A%2F%2Ffoo.sumologic.com
+    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=95&format=format&format_version=1&message_type=classic&name=test-sumologic&placement=waf_debug&url=https%3A%2F%2Ffoo.sumologic.com
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "62"
+      - "95"
       format:
       - format
       format_version:
@@ -24,24 +24,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/sumologic
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/95/logging/sumologic
     method: POST
   response:
-    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"62","created_at":"2021-01-14T10:47:54Z","updated_at":"2021-01-14T10:47:54Z","deleted_at":null,"response_condition":""}'
+    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"95","updated_at":"2021-11-03T17:19:13Z","created_at":"2021-11-03T17:19:13Z","response_condition":"","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:47:54 GMT
+      - Wed, 03 Nov 2021 17:19:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "608"
+      - "4841"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +55,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN
       X-Timer:
-      - S1610621274.991671,VS0,VE551
+      - S1635959953.086973,VS0,VE705
     status: 200 OK
     code: 200
     duration: ""

@@ -6,26 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/sumologic/test-sumologic
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/95/logging/sumologic/test-sumologic
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-sumologic, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 62 }''"}'
+      0000-00-00 00:00:00, name =\u003e test-sumologic, service =\u003e 3QSsca5ilwNVpceZ2HJIAH,
+      version =\u003e 95 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:47:56 GMT
+      - Wed, 03 Nov 2021 17:19:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "605"
+      - "4838"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635962400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4146-MAN
       X-Timer:
-      - S1610621276.233266,VS0,VE186
+      - S1635959956.552451,VS0,VE254
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,26 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/sumologic/new-test-sumologic
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/95/logging/sumologic/new-test-sumologic
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-sumologic, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 62 }''"}'
+      0000-00-00 00:00:00, name =\u003e new-test-sumologic, service =\u003e 3QSsca5ilwNVpceZ2HJIAH,
+      version =\u003e 95 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:47:56 GMT
+      - Wed, 03 Nov 2021 17:19:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "604"
+      - "4837"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635962400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN
       X-Timer:
-      - S1610621276.469596,VS0,VE203
+      - S1635959956.828076,VS0,VE192
     status: 404 Not Found
     code: 404
     duration: ""
