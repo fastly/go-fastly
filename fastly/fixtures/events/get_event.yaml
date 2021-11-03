@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/events/7ZZ53PQrCHbQgBPiZsyRCp
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/events/5ThmATeNYLVLXcHYTpb4G1
     method: GET
   response:
-    body: '{"data":{"id":"7ZZ53PQrCHbQgBPiZsyRCp","type":"event","attributes":{"customer_id":"51MumwLiSJyFTWhtbByYgR","description":"Healthcheck
-      ''new-test-healthcheck'' was deleted on Version ''23''","event_type":"healthcheck.delete","ip":"92.238.40.48,
-      92.238.40.48","metadata":{"comment":"","expected_response":200,"method":"HEAD","timeout":1500,"window":5000,"initial":10,"path":"/foo","check_interval":2500,"http_version":"1.1","version":23,"threshold":10,"name":"new-test-healthcheck","service_id":"7i6HN3TK9wS159v2gPAZ8A","host":"example.com"},"service_id":"7i6HN3TK9wS159v2gPAZ8A","user_id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2021-01-14T10:26:25Z","admin":false}}}'
+    body: '{"data":{"id":"5ThmATeNYLVLXcHYTpb4G1","type":"event","attributes":{"customer_id":"51MumwLiSJyFTWhtbByYgR","description":"Logging
+      ''new-test-elasticsearch'' was updated on Version ''63''","event_type":"logging.update","ip":"92.238.40.48,
+      92.238.40.48","metadata":{"old":{"name":"test-elasticsearch","pipeline":"my_pipeline_id"},"new":{"name":"new-test-elasticsearch","pipeline":"my_new_pipeline_id"}},"service_id":"3QSsca5ilwNVpceZ2HJIAH","user_id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2021-11-03T16:29:29Z","admin":false}}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,9 +21,9 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Thu, 14 Jan 2021 10:26:30 GMT
+      - Wed, 03 Nov 2021 16:38:54 GMT
       Etag:
-      - W/"cf55d9c69a340caf87da7b9f80d342b7"
+      - W/"e49a8c71e80234c4e535de74f4135fbc"
       Referrer-Policy:
       - strict-origin-when-cross-origin
       Status:
@@ -45,13 +45,13 @@ interactions:
       X-Permitted-Cross-Domain-Policies:
       - none
       X-Request-Id:
-      - 3194f6fd-42eb-4344-ae59-dd6f61b21497
+      - 23c1c3aa-5173-402c-8396-c5d67ada923c
       X-Runtime:
-      - "0.119756"
+      - "0.647383"
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4135-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4124-MAN
       X-Timer:
-      - S1610619990.388303,VS0,VE244
+      - S1635957533.191734,VS0,VE999
       X-Xss-Protection:
       - 1; mode=block
     status: 200 OK
