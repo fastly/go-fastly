@@ -6,21 +6,19 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/stats/field/bandwidth?by=minute&from=1+hour+ago&region=europe&to=now
     method: GET
   response:
-    body: '{"data":{},"status":"success","msg":null,"meta":{"from":"2021-01-14 09:26:23
-      UTC","to":"2021-01-14 10:26:23 UTC","by":"minute","region":"europe"}}'
+    body: |
+      {"data":{},"meta":{"to":"2021-11-03 17:18:41 UTC","from":"2021-11-03 16:18:41 UTC","by":"minute","region":"europe"},"status":"success","msg":null}
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:26:24 GMT
-      Server:
-      - nginx
+      - Wed, 03 Nov 2021 17:18:41 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,14 +31,10 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
-      X-Content-Type-Options:
-      - nosniff
-      X-Host-Name:
-      - df-prod-us-east1-timespiral03
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4131-MAN
       X-Timer:
-      - S1610619984.746147,VS0,VE279
+      - S1635959921.205955,VS0,VE659
     status: 200 OK
     code: 200
     duration: ""

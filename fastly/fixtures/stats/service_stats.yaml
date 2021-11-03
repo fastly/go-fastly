@@ -6,21 +6,19 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/stats/service/7i6HN3TK9wS159v2gPAZ8A?by=minute&from=10+days+ago&region=europe&to=now
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/stats/service/3QSsca5ilwNVpceZ2HJIAH?by=minute&from=10+days+ago&region=europe&to=now
     method: GET
   response:
-    body: '{"data":[],"status":"success","msg":null,"meta":{"from":"2021-01-04 10:26:24
-      UTC","to":"2021-01-14 10:26:24 UTC","by":"minute","region":"europe"}}'
+    body: |
+      {"data":[],"meta":{"to":"2021-11-03 17:18:42 UTC","from":"2021-10-24 17:18:42 UTC","by":"minute","region":"europe"},"status":"success","msg":null}
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:26:24 GMT
-      Server:
-      - nginx
+      - Wed, 03 Nov 2021 17:18:42 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,14 +31,10 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
-      X-Content-Type-Options:
-      - nosniff
-      X-Host-Name:
-      - df-prod-us-east1-timespiral02
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4135-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4131-MAN
       X-Timer:
-      - S1610619984.746144,VS0,VE786
+      - S1635959921.206077,VS0,VE1256
     status: 200 OK
     code: 200
     duration: ""
