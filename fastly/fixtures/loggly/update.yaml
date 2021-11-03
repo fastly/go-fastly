@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-loggly&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=51&format_version=2&name=new-test-loggly
+    body: Name=test-loggly&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=76&format_version=2&name=new-test-loggly
     form:
       Name:
       - test-loggly
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "51"
+      - "76"
       format_version:
       - "2"
       name:
@@ -18,24 +18,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/logging/loggly/test-loggly
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/76/logging/loggly/test-loggly
     method: PUT
   response:
-    body: '{"created_at":"2021-01-14T10:44:16Z","format":"format","response_condition":"","updated_at":"2021-01-14T10:44:16Z","format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"new-test-loggly","version":"51","token":"abcd1234","public_key":null,"placement":"waf_debug","deleted_at":null}'
+    body: '{"deleted_at":null,"version":"76","name":"new-test-loggly","public_key":null,"service_id":"3QSsca5ilwNVpceZ2HJIAH","response_condition":"","token":"abcd1234","updated_at":"2021-11-03T16:57:58Z","format_version":"2","created_at":"2021-11-03T16:57:58Z","format":"format","placement":"waf_debug"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:44:18 GMT
+      - Wed, 03 Nov 2021 16:57:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "671"
+      - "4808"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610621058.647832,VS0,VE614
+      - S1635958679.226003,VS0,VE483
     status: 200 OK
     code: 200
     duration: ""
