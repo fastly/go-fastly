@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -72,7 +73,7 @@ func TestClient_Bigqueries(t *testing.T) {
 	if bq.User != "fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com" {
 		t.Errorf("bad user: %q", bq.User)
 	}
-	if bq.SecretKey != secretKey {
+	if strings.TrimSpace(bq.SecretKey) != strings.TrimSpace(secretKey) {
 		t.Errorf("bad secret_key: %q", bq.SecretKey)
 	}
 	if bq.Format != "{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}" {
