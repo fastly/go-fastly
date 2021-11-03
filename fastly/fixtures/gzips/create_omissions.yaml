@@ -2,40 +2,41 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=43&content_types=&extensions=&name=test-gzip-omit
+    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=67&name=test-gzip-omit
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "43"
-      content_types:
-      - ""
-      extensions:
-      - ""
+      - "67"
       name:
       - test-gzip-omit
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip
     method: POST
   response:
-    body: '{"content_types":"","extensions":"","name":"test-gzip-omit","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"43","created_at":"2021-01-14T10:42:41Z","cache_condition":"","deleted_at":null,"updated_at":"2021-01-14T10:42:41Z"}'
+    body: '{"name":"test-gzip-omit","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"67","updated_at":"2021-11-03T16:50:29Z","deleted_at":null,"extensions":"css
+      js html eot ico otf ttf json","created_at":"2021-11-03T16:50:29Z","cache_condition":"","content_types":"text/html
+      application/x-javascript text/css application/javascript text/javascript application/json
+      application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
+      application/x-font-ttf application/xml font/eot font/opentype font/otf image/svg+xml
+      image/vnd.microsoft.icon text/plain text/xml"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:42:41 GMT
+      - Wed, 03 Nov 2021 16:50:29 GMT
       Fastly-Ratelimit-Remaining:
-      - "715"
+      - "4869"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +50,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610620962.563709,VS0,VE266
+      - S1635958230.567103,VS0,VE167
     status: 200 OK
     code: 200
     duration: ""

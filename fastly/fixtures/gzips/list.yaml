@@ -6,22 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip
     method: GET
   response:
-    body: '[{"name":"test-gzip","created_at":"2021-01-14T10:42:41Z","content_types":"text/html
-      text/css","updated_at":"2021-01-14T10:42:41Z","version":"43","deleted_at":null,"cache_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","extensions":"html
-      css"},{"created_at":"2021-01-14T10:42:41Z","content_types":"","name":"test-gzip-omit","version":"43","deleted_at":null,"updated_at":"2021-01-14T10:42:41Z","cache_condition":"","extensions":"","service_id":"7i6HN3TK9wS159v2gPAZ8A"}]'
+    body: '[{"created_at":"2021-11-03T16:50:29Z","service_id":"3QSsca5ilwNVpceZ2HJIAH","content_types":"text/html
+      text/css","updated_at":"2021-11-03T16:50:29Z","extensions":"html css","deleted_at":null,"version":"67","cache_condition":"","name":"test-gzip"},{"extensions":"css
+      js html eot ico otf ttf json","deleted_at":null,"version":"67","cache_condition":"","name":"test-gzip-omit","created_at":"2021-11-03T16:50:29Z","content_types":"text/html
+      application/x-javascript text/css application/javascript text/javascript application/json
+      application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype
+      application/x-font-ttf application/xml font/eot font/opentype font/otf image/svg+xml
+      image/vnd.microsoft.icon text/plain text/xml","service_id":"3QSsca5ilwNVpceZ2HJIAH","updated_at":"2021-11-03T16:50:29Z"}]'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:42:42 GMT
+      - Wed, 03 Nov 2021 16:50:30 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610620962.969219,VS0,VE186
+      - S1635958230.757817,VS0,VE336
     status: 200 OK
     code: 200
     duration: ""

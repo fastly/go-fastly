@@ -29,6 +29,7 @@ func TestClient_Gzips(t *testing.T) {
 	}
 
 	// Create omissions (GH-7)
+	// NOTE: API should return defaults.
 	var gzipomit *Gzip
 	record(t, "gzips/create_omissions", func(c *Client) {
 		gzipomit, err = c.CreateGzip(&CreateGzipInput{
@@ -40,10 +41,10 @@ func TestClient_Gzips(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if gzipomit.ContentTypes != "" {
+	if gzipomit.ContentTypes != "text/html application/x-javascript text/css application/javascript text/javascript application/json application/vnd.ms-fontobject application/x-font-opentype application/x-font-truetype application/x-font-ttf application/xml font/eot font/opentype font/otf image/svg+xml image/vnd.microsoft.icon text/plain text/xml" {
 		t.Errorf("bad content_types: %q", gzipomit.ContentTypes)
 	}
-	if gzipomit.Extensions != "" {
+	if gzipomit.Extensions != "css js html eot ico otf ttf json" {
 		t.Errorf("bad extensions: %q", gzipomit.Extensions)
 	}
 

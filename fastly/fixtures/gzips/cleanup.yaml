@@ -6,26 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip/test-gzip
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip/test-gzip
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-gzip, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 43 }''"}'
+      0000-00-00 00:00:00, name =\u003e test-gzip, service =\u003e 3QSsca5ilwNVpceZ2HJIAH,
+      version =\u003e 67 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:42:43 GMT
+      - Wed, 03 Nov 2021 16:50:31 GMT
       Fastly-Ratelimit-Remaining:
-      - "712"
+      - "4866"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610620963.076140,VS0,VE180
+      - S1635958231.121221,VS0,VE194
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,8 +50,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip/test-gzip-omit
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip/test-gzip-omit
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -59,15 +59,15 @@ interactions:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:42:43 GMT
+      - Wed, 03 Nov 2021 16:50:31 GMT
       Fastly-Ratelimit-Remaining:
-      - "711"
+      - "4865"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -81,9 +81,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610620963.284871,VS0,VE286
+      - S1635958231.335303,VS0,VE292
     status: 200 OK
     code: 200
     duration: ""
@@ -92,26 +92,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip/new-test-gzip
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/67/gzip/new-test-gzip
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-gzip, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 43 }''"}'
+      0000-00-00 00:00:00, name =\u003e new-test-gzip, service =\u003e 3QSsca5ilwNVpceZ2HJIAH,
+      version =\u003e 67 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:42:43 GMT
+      - Wed, 03 Nov 2021 16:50:31 GMT
       Fastly-Ratelimit-Remaining:
-      - "710"
+      - "4864"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -125,9 +125,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610620964.612140,VS0,VE195
+      - S1635958232.647653,VS0,VE156
     status: 404 Not Found
     code: 404
     duration: ""
