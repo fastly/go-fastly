@@ -39,7 +39,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	}
 
 	if *e.Subnet != 8 {
-		t.Errorf("Bad subnet: %q", e.Subnet)
+		t.Errorf("Bad subnet: %v", e.Subnet)
 	}
 
 	if e.Negated != false {
@@ -80,7 +80,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Errorf("bad IP: %v", ne.IP)
 	}
 
-	if e.Subnet != ne.Subnet {
+	if *e.Subnet != *ne.Subnet {
 		t.Errorf("bad subnet: %v", ne.Subnet)
 	}
 
@@ -110,7 +110,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	if ue.IP != "10.0.0.4" {
 		t.Errorf("bad IP: %q", ue.IP)
 	}
-	if e.Subnet != ue.Subnet {
+	if *e.Subnet != *ue.Subnet {
 		t.Errorf("bad subnet: %v", ne.Subnet)
 	}
 
