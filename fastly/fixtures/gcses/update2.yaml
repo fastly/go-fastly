@@ -2,40 +2,40 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-gcs-2&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=11&compression_codec=zstd
+    body: Name=test-gcs-2&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=65&compression_codec=zstd
     form:
       Name:
       - test-gcs-2
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "11"
+      - "65"
       compression_codec:
       - zstd
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.5.0 (+github.com/fastly/go-fastly; go1.16.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/11/logging/gcs/test-gcs-2
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/65/logging/gcs/test-gcs-2
     method: PUT
   response:
-    body: '{"timestamp_format":"%Y","period":"12","message_type":"blank","format_version":"2","created_at":"2021-04-13T19:11:12Z","format":"format","name":"test-gcs-2","version":"11","updated_at":"2021-04-13T19:11:12Z","compression_codec":"zstd","service_id":"7i6HN3TK9wS159v2gPAZ8A","secret_key":"-----BEGIN
+    body: '{"user":"user","service_id":"3QSsca5ilwNVpceZ2HJIAH","path":"/path","response_condition":"","secret_key":"-----BEGIN
       PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq\nTdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1\nNnqWYvHDyA5Ug+T8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA\neURUzFsqyymXMUGrqDPqrHsVWC2E3NTJEb4QlywtrwI13qbhlvTx6/9oRfUjytXJ\nRuUIE5xL8yhRCagNr5ZW250aa+wBwu5DSCk5fDNr0eDuZjw84WHDll+mHxBFGV+X\nKJ5jCOmGumGqjVWZesJpNN1My3M9bsY9layNJJ0eiDeHDEi/yXhhO/mNEXhvhq/R\nfN0Jh2A3AgMBAAECggEAef+CEL5aF6/aVs0yh7fiXkKSp1ECXkud8ztgpEn63KJF\nXM1EdnBt50fA2xSQUeGmeEXi6+cngf0nRb8FToAEgLoGoOEjSJuLrzP3I8U9Fe3m\nBRG2uZI2Ti/bD0eRGEc1oSDhCpsqnkTGK1bwcD4AKpwY+c08Izh/2BOoY6McDoqh\ndQ89jzTuMtD4cNlnPiIrY9HbxoNjshK2ax1OaeXyYKZFG1TxqMFv5gA/G5+S3Cwr\nVG4fkAxYi5vdIK3b8jUXrTM/kpoTl+d3dlQ7rRZYf7KyT31/HtJ/GNzxFI6upzO7\niDNrrUOyeOPjWXdzUh9budv3j+6UfbYK7uZIoebHIQKBgQDykYX1L/akGaOC2tfS\njzCWUzPxGFYVZQ7zD1PM6UyouuS1KLURDEGk9RxqVzTPh/pYd8Ivnz3vOVski5Zt\n19ozLGxdtDhn122DcnVpfCdYzHBdAzPCzORenFohX+MhiX5fEotTlVi7wfOmzTP5\nhUCMSd/17bJrV4XMLhkdrMRBFQKBgQDH5fwV7o+Ej/ZfcdGIa3mAFazToPDzxhHU\nnwADxaxpNGKRU03XCaiYkykarLYdG6Rk+7dXUv8eLy+6Dcq1SWQtfCWKEor++IIp\n1RwWmFHfYriHGkmxSkkEkLFvL8old9xM5YWbEXc4QIXvnfR4BZxdyJHVzIDdbI2i\nFgcn17U3GwKBgDd1njMY7ENIuWHJt16k7m7wRwfwkH4DxQ89ieNn0+cgE/p3fC6R\nptCYWg7WMXThmhNwDi3lMrvnWTdZ0uL6XyEkHwKtmdfkIV3UZZPglv5uf6JEgSkg\nv3YCOXk3+y5HyWTjUIejtc334kVY1XFPThrFKTeJSSnRsP2l7IgkYBqhAoGAYGsr\nM3z1FrDF2nWw5odIfKJ30UAw2LRyB0eGH0uqhLgyzvwKcK2E98sLqYUi9llN6zOK\n1IEA8xM5hxl97AFxY4sdJEMbbi55wim7uZ5Q51nbvbbNUsmM/Lm6C/JWI8pzpVeU\nIR7EjYp50AE1WOsD6CyFQ0W35pWkn0jWvL4L938CgYEAlax4dLE5+YCG5DeLT1/N\nin6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn+uNatKvlVyfPm6rdxeHCmER1FpR7Q\nA/aNVjPeViKT/R4nK9ytsa+s/1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ\nbv1KwcKoQbNVXwauH79JKc0=\n-----END
-      PRIVATE KEY-----\n","gzip_level":0,"path":"/path","public_key":null,"deleted_at":null,"bucket_name":"bucket","user":"user","placement":"waf_debug","response_condition":""}'
+      PRIVATE KEY-----\n","deleted_at":null,"version":"65","gzip_level":0,"compression_codec":"zstd","name":"test-gcs-2","public_key":null,"message_type":"blank","created_at":"2021-11-03T16:40:53Z","format":"format","bucket_name":"bucket","placement":"waf_debug","updated_at":"2021-11-03T16:40:53Z","period":"12","format_version":"2","timestamp_format":"%Y"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 13 Apr 2021 19:11:15 GMT
+      - Wed, 03 Nov 2021 16:40:56 GMT
       Fastly-Ratelimit-Remaining:
-      - "935"
+      - "4886"
       Fastly-Ratelimit-Reset:
-      - "1618344000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8236-DEN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4149-MAN
       X-Timer:
-      - S1618341075.536589,VS0,VE558
+      - S1635957656.245326,VS0,VE629
     status: 200 OK
     code: 200
     duration: ""
