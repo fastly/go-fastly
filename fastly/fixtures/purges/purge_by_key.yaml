@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.8.0 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/purge/foo
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/purge/foo
     method: POST
   response:
-    body: '{ "status": "ok", "id": "4133-1624535347-68496" }'
+    body: '{ "status": "ok", "id": "4151-1635861748-11038" }'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 29 Jun 2021 13:16:50 GMT
+      - Wed, 03 Nov 2021 17:09:50 GMT
       Fastly-Instant-Rate:
       - "3"
       Fastly-Surrogate-Key-Count:
@@ -27,9 +27,9 @@ interactions:
       Via:
       - 1.1 varnish
       X-Served-By:
-      - cache-man4133-MAN
+      - cache-man4151-MAN
       X-Varnish:
-      - "611018848"
+      - "4184921647"
     status: 200 OK
     code: 200
     duration: ""
