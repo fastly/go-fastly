@@ -11,13 +11,13 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/waf/firewalls/1bVzQr0yxJfEtuDsODo3Xv/versions/1/exclusions
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/waf/firewalls/3roDaZUtpogfO5ZXPEkBzX/versions/1/exclusions
     method: POST
   response:
-    body: '{"data":{"id":"3nscRVemP28z2RXcahMjUC","type":"waf_exclusion","attributes":{"condition":"req.url.basename
-      == \"index.html\"","created_at":"2021-01-14T10:27:49Z","exclusion_type":"rule","logging":true,"name":"index
-      page","number":1,"updated_at":"2021-01-14T10:27:49Z","variable":null},"relationships":{"waf_rules":{"data":[{"id":"1YveWU8qwEYidE8WAiZqCN","type":"waf_rule"},{"id":"VovV0PIWJCm33k1piDpnX","type":"waf_rule"}]}}}}'
+    body: '{"data":{"id":"45PJoTU3G7ScxaF8JyJBXd","type":"waf_exclusion","attributes":{"condition":"req.url.basename
+      == \"index.html\"","created_at":"2021-11-03T17:30:10Z","exclusion_type":"rule","logging":true,"name":"index
+      page","number":1,"updated_at":"2021-11-03T17:30:10Z","variable":null},"relationships":{"waf_rules":{"data":[{"id":"1YveWU8qwEYidE8WAiZqCN","type":"waf_rule"},{"id":"VovV0PIWJCm33k1piDpnX","type":"waf_rule"}]}}}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Thu, 14 Jan 2021 10:27:49 GMT
+      - Wed, 03 Nov 2021 17:30:10 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -38,9 +38,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610620069.955513,VS0,VE480
+      - S1635960610.812468,VS0,VE530
     status: 201 Created
     code: 201
     duration: ""
