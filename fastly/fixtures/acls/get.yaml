@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/41/acl/test_acl
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/41/acl/test_acl
     method: GET
   response:
-    body: '{"deleted_at":null,"name":"test_acl","updated_at":"2021-11-03T14:27:05Z","created_at":"2021-11-03T14:27:05Z","version":"41","service_id":"3QSsca5ilwNVpceZ2HJIAH","id":"66T8Pl5oaiXfTuRJwYv7G7"}'
+    body: '{"deleted_at":null,"name":"test_acl","updated_at":"2021-11-03T14:27:05Z","created_at":"2021-11-03T14:27:05Z","version":"41","service_id":"7i6HN3TK9wS159v2gPAZ8A","id":"66T8Pl5oaiXfTuRJwYv7G7"}'
     headers:
       Accept-Ranges:
       - bytes

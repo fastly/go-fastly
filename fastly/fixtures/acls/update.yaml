@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: Name=test_acl&ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=41&name=new_test_acl
+    body: Name=test_acl&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=41&name=new_test_acl
     form:
       Name:
       - test_acl
       ServiceID:
-      - 3QSsca5ilwNVpceZ2HJIAH
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "41"
       name:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/41/acl/test_acl
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/41/acl/test_acl
     method: PUT
   response:
-    body: '{"updated_at":"2021-11-03T14:27:05Z","name":"new_test_acl","deleted_at":null,"id":"66T8Pl5oaiXfTuRJwYv7G7","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":"41","created_at":"2021-11-03T14:27:05Z"}'
+    body: '{"updated_at":"2021-11-03T14:27:05Z","name":"new_test_acl","deleted_at":null,"id":"66T8Pl5oaiXfTuRJwYv7G7","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"41","created_at":"2021-11-03T14:27:05Z"}'
     headers:
       Accept-Ranges:
       - bytes
