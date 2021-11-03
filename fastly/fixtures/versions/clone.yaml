@@ -6,25 +6,25 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/17/clone
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/99/clone
     method: PUT
   response:
-    body: '{"number":18,"locked":false,"active":false,"staging":false,"updated_at":"2021-01-14T09:51:30Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","testing":false,"comment":"new
-      comment","deployed":false,"deleted_at":null,"created_at":"2021-01-14T09:51:27Z"}'
+    body: '{"updated_at":"2021-11-03T17:26:40Z","deleted_at":null,"active":false,"comment":"new
+      comment","service_id":"3QSsca5ilwNVpceZ2HJIAH","created_at":"2021-11-03T17:26:39Z","deployed":false,"locked":false,"staging":false,"testing":false,"number":100}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 09:51:30 GMT
+      - Wed, 03 Nov 2021 17:26:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "988"
+      - "4808"
       Fastly-Ratelimit-Reset:
-      - "1610618400"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610617890.264558,VS0,VE302
+      - S1635960401.946824,VS0,VE243
     status: 200 OK
     code: 200
     duration: ""
