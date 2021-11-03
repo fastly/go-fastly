@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -14,9 +13,12 @@ func TestClient_Domains(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
-	domain := fmt.Sprintf("integ-test.go-fastly-%s.com", randStringBytes(10))
-	domain2 := fmt.Sprintf("integ-test2.go-fastly-%s.com", randStringBytes(10))
-	domain3 := fmt.Sprintf("integ-test3.go-fastly-%s.com", randStringBytes(10))
+	// NOTE: Everytime you regenerate the fixtures you'll need to update the
+	// domains as they'll potentially be reported as used depending on the
+	// service pre-existing.
+	domain1 := "integ-test1.go-fastly-1.com"
+	domain2 := "integ-test2.go-fastly-2.com"
+	domain3 := "integ-test3.go-fastly-3.com"
 
 	// Create
 	var d *Domain
@@ -24,7 +26,7 @@ func TestClient_Domains(t *testing.T) {
 		d, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           domain,
+			Name:           domain1,
 			Comment:        "comment",
 		})
 	})
@@ -51,7 +53,7 @@ func TestClient_Domains(t *testing.T) {
 			c.DeleteDomain(&DeleteDomainInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
-				Name:           domain,
+				Name:           domain1,
 			})
 
 			c.DeleteDomain(&DeleteDomainInput{
@@ -62,7 +64,7 @@ func TestClient_Domains(t *testing.T) {
 		})
 	}()
 
-	if d.Name != domain {
+	if d.Name != domain1 {
 		t.Errorf("bad name: %q", d.Name)
 	}
 	if d.Comment != "comment" {
@@ -93,7 +95,7 @@ func TestClient_Domains(t *testing.T) {
 		nd, err = c.GetDomain(&GetDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           domain,
+			Name:           domain1,
 		})
 	})
 	if err != nil {
@@ -112,7 +114,7 @@ func TestClient_Domains(t *testing.T) {
 		ud, err = c.UpdateDomain(&UpdateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           domain,
+			Name:           domain1,
 			NewName:        String(domain3),
 		})
 	})

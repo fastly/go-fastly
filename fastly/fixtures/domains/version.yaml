@@ -14,7 +14,7 @@ interactions:
     url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version
     method: POST
   response:
-    body: '{"service_id":"3QSsca5ilwNVpceZ2HJIAH","number":101}'
+    body: '{"service_id":"3QSsca5ilwNVpceZ2HJIAH","number":102}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,9 +23,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:34:22 GMT
+      - Wed, 03 Nov 2021 17:36:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "4744"
+      - "4737"
       Fastly-Ratelimit-Reset:
       - "1635962400"
       Status:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4134-MAN
       X-Timer:
-      - S1635960863.566008,VS0,VE284
+      - S1635960987.458629,VS0,VE396
     status: 200 OK
     code: 200
     duration: ""

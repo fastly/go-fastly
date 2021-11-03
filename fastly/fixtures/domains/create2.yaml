@@ -2,25 +2,25 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=101&comment=comment&name=integ-test2.go-fastly-MRAjWwhTHc.com
+    body: ServiceID=3QSsca5ilwNVpceZ2HJIAH&ServiceVersion=102&comment=comment&name=integ-test2.go-fastly-2.com
     form:
       ServiceID:
       - 3QSsca5ilwNVpceZ2HJIAH
       ServiceVersion:
-      - "101"
+      - "102"
       comment:
       - comment
       name:
-      - integ-test2.go-fastly-MRAjWwhTHc.com
+      - integ-test2.go-fastly-2.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/101/domain
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/102/domain
     method: POST
   response:
-    body: '{"comment":"comment","name":"integ-test2.go-fastly-MRAjWwhTHc.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":101,"created_at":"2021-11-03T17:34:23Z","deleted_at":null,"updated_at":"2021-11-03T17:34:23Z"}'
+    body: '{"comment":"comment","name":"integ-test2.go-fastly-2.com","service_id":"3QSsca5ilwNVpceZ2HJIAH","version":102,"updated_at":"2021-11-03T17:36:28Z","deleted_at":null,"created_at":"2021-11-03T17:36:28Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,9 +29,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:34:23 GMT
+      - Wed, 03 Nov 2021 17:36:28 GMT
       Fastly-Ratelimit-Remaining:
-      - "4742"
+      - "4735"
       Fastly-Ratelimit-Reset:
       - "1635962400"
       Status:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4134-MAN
       X-Timer:
-      - S1635960863.117431,VS0,VE292
+      - S1635960988.143522,VS0,VE318
     status: 200 OK
     code: 200
     duration: ""

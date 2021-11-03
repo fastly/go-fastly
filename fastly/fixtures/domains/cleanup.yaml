@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/101/domain/integ-test.go-fastly-XVlBzgbaiC.com
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/102/domain/integ-test1.go-fastly-1.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e integ-test.go-fastly-XVlBzgbaiC.com, service
-      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 101 }''"}'
+      0000-00-00 00:00:00, name =\u003e integ-test1.go-fastly-1.com, service =\u003e
+      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 102 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,9 +21,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:34:25 GMT
+      - Wed, 03 Nov 2021 17:36:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "4739"
+      - "4732"
       Fastly-Ratelimit-Reset:
       - "1635962400"
       Status:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4134-MAN
       X-Timer:
-      - S1635960866.788462,VS0,VE157
+      - S1635960990.426404,VS0,VE159
     status: 404 Not Found
     code: 404
     duration: ""
@@ -51,12 +51,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/101/domain/integ-test3.go-fastly-tcuAxhxKQF.com
+    url: https://api.fastly.com/service/3QSsca5ilwNVpceZ2HJIAH/version/102/domain/integ-test3.go-fastly-3.com
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Domain ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e integ-test3.go-fastly-tcuAxhxKQF.com, service
-      =\u003e 3QSsca5ilwNVpceZ2HJIAH, version =\u003e 101 }''"}'
+      0000-00-00 00:00:00, name =\u003e integ-test3.go-fastly-3.com, service =\u003e
+      3QSsca5ilwNVpceZ2HJIAH, version =\u003e 102 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,9 +65,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:34:26 GMT
+      - Wed, 03 Nov 2021 17:36:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "4738"
+      - "4731"
       Fastly-Ratelimit-Reset:
       - "1635962400"
       Status:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4134-MAN
       X-Timer:
-      - S1635960866.971471,VS0,VE144
+      - S1635960991.602209,VS0,VE158
     status: 404 Not Found
     code: 404
     duration: ""
