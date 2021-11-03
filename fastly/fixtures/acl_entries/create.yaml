@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ACLID=1PCB9fTlFSnrOrUCKa0WzO&ServiceID=7i6HN3TK9wS159v2gPAZ8A&comment=test+entry&ip=10.0.0.3&subnet=8
+    body: ACLID=052T9UE1HyiRIW2K9FiMr3&ServiceID=5XPrLhrnNoOk0tcpWh1fpS&comment=test+entry&ip=10.0.0.3&subnet=8
     form:
       ACLID:
-      - 1PCB9fTlFSnrOrUCKa0WzO
+      - 052T9UE1HyiRIW2K9FiMr3
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 5XPrLhrnNoOk0tcpWh1fpS
       comment:
       - test entry
       ip:
@@ -18,12 +18,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/1PCB9fTlFSnrOrUCKa0WzO/entry
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/5XPrLhrnNoOk0tcpWh1fpS/acl/052T9UE1HyiRIW2K9FiMr3/entry
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","acl_id":"1PCB9fTlFSnrOrUCKa0WzO","ip":"10.0.0.3","subnet":8,"comment":"test
-      entry","negated":0,"updated_at":"2021-09-22T10:29:25Z","created_at":"2021-09-22T10:29:25Z","id":"69nI3MhHVzdtXD5XW9B6ZN"}'
+    body: '{"service_id":"5XPrLhrnNoOk0tcpWh1fpS","acl_id":"052T9UE1HyiRIW2K9FiMr3","ip":"10.0.0.3","subnet":8,"comment":"test
+      entry","id":"0rSunhGyoHgvQWj05vPlC0","negated":0,"created_at":"2021-11-03T14:30:49Z","updated_at":"2021-11-03T14:30:49Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +32,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Sep 2021 10:29:25 GMT
+      - Wed, 03 Nov 2021 14:30:49 GMT
       Fastly-Ratelimit-Remaining:
-      - "4993"
+      - "4990"
       Fastly-Ratelimit-Reset:
-      - "1632308400"
+      - "1635951600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,9 +50,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4130-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4139-MAN
       X-Timer:
-      - S1632306565.999302,VS0,VE170
+      - S1635949849.961590,VS0,VE216
     status: 200 OK
     code: 200
     duration: ""
