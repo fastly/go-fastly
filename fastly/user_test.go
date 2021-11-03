@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestClient_GetCurrentUser(t *testing.T) {
+func TestClient_UsersCurrent(t *testing.T) {
 	t.Parallel()
 
 	var err error
