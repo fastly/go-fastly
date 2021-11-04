@@ -6,26 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/heroku/test-heroku
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/70/logging/heroku/test-heroku
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-heroku, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 45 }''"}'
+      version =\u003e 70 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:43:02 GMT
+      - Wed, 03 Nov 2021 16:53:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "699"
+      - "4847"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4124-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1610620983.653694,VS0,VE172
+      - S1635958393.334086,VS0,VE138
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,26 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/heroku/new-test-heroku
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/70/logging/heroku/new-test-heroku
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-heroku, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 45 }''"}'
+      version =\u003e 70 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:43:03 GMT
+      - Wed, 03 Nov 2021 16:53:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "698"
+      - "4846"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4124-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1610620983.867503,VS0,VE197
+      - S1635958393.492258,VS0,VE162
     status: 404 Not Found
     code: 404
     duration: ""

@@ -2,22 +2,22 @@
 version: 1
 interactions:
 - request:
-    body: Name=new-test-newrelic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=139&region=zz
+    body: Name=new-test-newrelic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=78&region=zz
     form:
       Name:
       - new-test-newrelic
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "139"
+      - "78"
       region:
       - zz
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.6.0 (+github.com/fastly/go-fastly; go1.16.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/139/logging/newrelic/new-test-newrelic
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/78/logging/newrelic/new-test-newrelic
     method: PUT
   response:
     body: '{"msg":"Bad request","detail":"unrecognized region zz"}'
@@ -29,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 17 Aug 2021 16:11:53 GMT
+      - Wed, 03 Nov 2021 17:01:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "978"
+      - "4991"
       Fastly-Ratelimit-Reset:
-      - "1629219600"
+      - "1635962400"
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8241-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1629216713.192754,VS0,VE387
+      - S1635958860.621231,VS0,VE504
     status: 400 Bad Request
     code: 400
     duration: ""

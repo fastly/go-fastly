@@ -90,7 +90,7 @@ type CreateVersionInput struct {
 	ServiceID string
 
 	// A personal freeform descriptive note.
-	Comment string `form:"comment,omitempty"`
+	Comment string `url:"comment,omitempty"`
 }
 
 // CreateVersion constructs a new version. Note that `CloneVersion` is
@@ -155,7 +155,7 @@ type UpdateVersionInput struct {
 	ServiceVersion int
 
 	// A personal freeform descriptive note.
-	Comment *string `form:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 }
 
 // UpdateVersion updates the given version

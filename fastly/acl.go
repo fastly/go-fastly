@@ -70,7 +70,7 @@ type CreateACLInput struct {
 	ServiceVersion int
 
 	// Name is the name of the ACL to create (required)
-	Name string `form:"name"`
+	Name string `url:"name"`
 }
 
 func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
@@ -188,7 +188,7 @@ type UpdateACLInput struct {
 	Name string
 
 	// NewName is the new name of the ACL to update (required).
-	NewName string `form:"name"`
+	NewName string `url:"name"`
 }
 
 // UpdateACL updates the name of the ACL with the given parameters.

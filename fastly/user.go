@@ -104,10 +104,10 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
-	Login string `form:"login"`
-	Name  string `form:"name"`
+	Login string `url:"login"`
+	Name  string `url:"name"`
 
-	Role string `form:"role,omitempty"`
+	Role string `url:"role,omitempty"`
 }
 
 // CreateUser creates a new API token with the given information.
@@ -134,10 +134,10 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 
 // UpdateUserInput is used as input to the UpdateUser function.
 type UpdateUserInput struct {
-	ID string `form:"-"`
+	ID string `url:"-"`
 
-	Name *string `form:"name,omitempty"`
-	Role *string `form:"role,omitempty"`
+	Name *string `url:"name,omitempty"`
+	Role *string `url:"role,omitempty"`
 }
 
 // UpdateUser updates the user with the given input.

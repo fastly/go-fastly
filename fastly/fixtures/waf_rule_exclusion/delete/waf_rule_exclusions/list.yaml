@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/waf/firewalls/2PelCuqu96MJfMzdcPrH9B/versions/1/exclusions?include=waf_rules&page%5Bnumber%5D=1&page%5Bsize%5D=100
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/waf/firewalls/2TpxRgL4WO4pqyLkCaosb5/versions/1/exclusions?include=waf_rules&page%5Bnumber%5D=1&page%5Bsize%5D=100
     method: GET
   response:
-    body: '{"data":[],"links":{"last":"https://api.fastly.com/waf/firewalls/2PelCuqu96MJfMzdcPrH9B/versions/1/exclusions?include=waf_rules\u0026page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/2PelCuqu96MJfMzdcPrH9B/versions/1/exclusions?include=waf_rules\u0026page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":0,"total_pages":1}}'
+    body: '{"data":[],"links":{"last":"https://api.fastly.com/waf/firewalls/2TpxRgL4WO4pqyLkCaosb5/versions/1/exclusions?include=waf_rules\u0026page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/firewalls/2TpxRgL4WO4pqyLkCaosb5/versions/1/exclusions?include=waf_rules\u0026page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":0,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Thu, 14 Jan 2021 10:27:51 GMT
+      - Wed, 03 Nov 2021 17:30:11 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -31,9 +31,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610620071.127915,VS0,VE140
+      - S1635960611.949901,VS0,VE116
     status: 200 OK
     code: 200
     duration: ""

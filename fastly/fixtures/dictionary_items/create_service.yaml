@@ -14,24 +14,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_DictionaryItems","type":"vcl","id":"2Sz0CwKi5NYXurcMQ1SHPo","publish_key":"","deleted_at":null,"updated_at":"2021-01-14T10:24:05Z","created_at":"2021-01-14T10:24:05Z","versions":[{"staging":false,"locked":false,"comment":"","number":1,"created_at":"2021-01-14T10:24:05Z","service_id":"2Sz0CwKi5NYXurcMQ1SHPo","active":false,"testing":false,"deployed":false,"updated_at":"2021-01-14T10:24:05Z","deleted_at":null}],"paused":false}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_DictionaryItems","type":"vcl","id":"0hSVcwLyhP24GhIMGcOqlw","created_at":"2021-11-03T16:13:53Z","updated_at":"2021-11-03T16:13:53Z","publish_key":"","versions":[{"locked":false,"deleted_at":null,"service_id":"0hSVcwLyhP24GhIMGcOqlw","number":1,"testing":false,"active":false,"created_at":"2021-11-03T16:13:53Z","updated_at":"2021-11-03T16:13:53Z","comment":"","staging":false,"deployed":false}],"paused":false,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:24:05 GMT
+      - Wed, 03 Nov 2021 16:13:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "938"
+      - "4989"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4148-MAN
       X-Timer:
-      - S1610619845.925927,VS0,VE229
+      - S1635956034.527465,VS0,VE359
     status: 200 OK
     code: 200
     duration: ""

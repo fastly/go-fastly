@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.12.0 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/32/backend
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/42/backend
     method: GET
   response:
-    body: '[{"use_ssl":false,"port":1234,"first_byte_timeout":15000,"error_threshold":0,"ssl_cert_hostname":null,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","request_condition":"","comment":"","client_cert":null,"ssl_client_cert":null,"healthcheck":null,"override_host":"origin.example.com","ssl_check_cert":false,"ipv4":null,"address":"integ-test.go-fastly.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","ssl_ca_cert":null,"ipv6":null,"created_at":"2021-09-20T12:34:29Z","ssl_sni_hostname":null,"auto_loadbalance":false,"min_tls_version":null,"hostname":"integ-test.go-fastly.com","between_bytes_timeout":10000,"name":"test-backend","connect_timeout":1500,"version":32,"ssl_client_key":null,"updated_at":"2021-09-20T12:34:29Z","ssl_hostname":null,"deleted_at":null,"weight":100,"max_tls_version":null,"shield":null,"max_conn":200}]'
+    body: '[{"ssl_check_cert":false,"updated_at":"2021-11-03T15:12:22Z","client_cert":null,"min_tls_version":null,"ssl_client_cert":null,"deleted_at":null,"max_conn":200,"name":"test-backend","between_bytes_timeout":10000,"ssl_cert_hostname":null,"override_host":"origin.example.com","use_ssl":false,"auto_loadbalance":false,"comment":"","connect_timeout":1500,"healthcheck":null,"ssl_client_key":null,"ipv6":null,"ssl_ca_cert":null,"hostname":"integ-test.go-fastly.com","version":42,"port":1234,"max_tls_version":null,"ipv4":null,"request_condition":"","weight":100,"shield":null,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","error_threshold":0,"ssl_hostname":null,"address":"integ-test.go-fastly.com","first_byte_timeout":15000,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-11-03T15:12:22Z","ssl_sni_hostname":null}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 20 Sep 2021 12:34:30 GMT
+      - Wed, 03 Nov 2021 15:12:22 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4148-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4146-MAN
       X-Timer:
-      - S1632141270.868788,VS0,VE168
+      - S1635952342.134470,VS0,VE443
     status: 200 OK
     code: 200
     duration: ""

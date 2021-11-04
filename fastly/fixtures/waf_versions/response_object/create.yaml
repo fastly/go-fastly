@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=01yXo1ojqff8q5FU2Mt2uX&ServiceVersion=2&name=WAf_Response&status=403
+    body: ServiceID=3U83pdesYFrsH5Mgt6tN2C&ServiceVersion=2&name=WAf_Response&status=403
     form:
       ServiceID:
-      - 01yXo1ojqff8q5FU2Mt2uX
+      - 3U83pdesYFrsH5Mgt6tN2C
       ServiceVersion:
       - "2"
       name:
@@ -16,24 +16,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/01yXo1ojqff8q5FU2Mt2uX/version/2/response_object
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3U83pdesYFrsH5Mgt6tN2C/version/2/response_object
     method: POST
   response:
-    body: '{"name":"WAf_Response","status":"403","service_id":"01yXo1ojqff8q5FU2Mt2uX","version":"2","cache_condition":"","content_type":null,"request_condition":"","created_at":"2021-01-14T10:27:48Z","response":"ok","content":null,"deleted_at":null,"updated_at":"2021-01-14T10:27:48Z"}'
+    body: '{"name":"WAf_Response","status":"403","service_id":"3U83pdesYFrsH5Mgt6tN2C","version":"2","cache_condition":"","deleted_at":null,"created_at":"2021-11-03T17:28:48Z","content":null,"response":"ok","updated_at":"2021-11-03T17:28:48Z","request_condition":"","content_type":null}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:27:48 GMT
+      - Wed, 03 Nov 2021 17:28:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "869"
+      - "4776"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
       X-Timer:
-      - S1610620068.432780,VS0,VE280
+      - S1635960529.642885,VS0,VE170
     status: 200 OK
     code: 200
     duration: ""

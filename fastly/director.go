@@ -92,13 +92,13 @@ type CreateDirectorInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name     string       `form:"name,omitempty"`
-	Comment  string       `form:"comment,omitempty"`
-	Shield   string       `form:"shield,omitempty"`
-	Quorum   uint         `form:"quorum,omitempty"`
-	Type     DirectorType `form:"type,omitempty"`
-	Retries  uint         `form:"retries,omitempty"`
-	Capacity uint         `form:"capacity,omitempty"`
+	Name     string       `url:"name,omitempty"`
+	Comment  string       `url:"comment,omitempty"`
+	Shield   string       `url:"shield,omitempty"`
+	Quorum   uint         `url:"quorum,omitempty"`
+	Type     DirectorType `url:"type,omitempty"`
+	Retries  uint         `url:"retries,omitempty"`
+	Capacity uint         `url:"capacity,omitempty"`
 }
 
 // CreateDirector creates a new Fastly director.
@@ -174,13 +174,13 @@ type UpdateDirectorInput struct {
 	// Name is the name of the director to update.
 	Name string
 
-	NewName  *string      `form:"name,omitempty"`
-	Comment  *string      `form:"comment,omitempty"`
-	Shield   *string      `form:"shield,omitempty"`
-	Quorum   *uint        `form:"quorum,omitempty"`
-	Type     DirectorType `form:"type,omitempty"`
-	Retries  *uint        `form:"retries,omitempty"`
-	Capacity *uint        `form:"capacity,omitempty"`
+	NewName  *string      `url:"name,omitempty"`
+	Comment  *string      `url:"comment,omitempty"`
+	Shield   *string      `url:"shield,omitempty"`
+	Quorum   *uint        `url:"quorum,omitempty"`
+	Type     DirectorType `url:"type,omitempty"`
+	Retries  *uint        `url:"retries,omitempty"`
+	Capacity *uint        `url:"capacity,omitempty"`
 }
 
 // UpdateDirector updates a specific director.

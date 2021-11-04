@@ -6,21 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49/logging/logshuttle/test-logshuttle
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/77/logging/logshuttle/test-logshuttle
     method: GET
   response:
-    body: '{"created_at":"2021-01-14T10:44:03Z","response_condition":"","format":"%h
-      %l %u %t \"%r\" %\u003es %b","format_version":"2","updated_at":"2021-01-14T10:44:03Z","url":"https://logs.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test-logshuttle","version":"49","token":"super-secure-token","deleted_at":null,"placement":"waf_debug"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","created_at":"2021-11-03T16:58:26Z","placement":"waf_debug","updated_at":"2021-11-03T16:58:26Z","format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","token":"super-secure-token","response_condition":"","deleted_at":null,"version":"77","url":"https://logs.example.com","name":"test-logshuttle"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:44:04 GMT
+      - Wed, 03 Nov 2021 16:58:27 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4120-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610621044.050193,VS0,VE163
+      - S1635958707.263726,VS0,VE140
     status: 200 OK
     code: 200
     duration: ""

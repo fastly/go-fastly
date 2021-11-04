@@ -53,10 +53,10 @@ type UpdateSettingsInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	DefaultTTL      uint    `form:"general.default_ttl"`
-	DefaultHost     *string `form:"general.default_host,omitempty"`
-	StaleIfError    *bool   `form:"general.stale_if_error,omitempty"`
-	StaleIfErrorTTL *uint   `form:"general.stale_if_error_ttl,omitempty"`
+	DefaultTTL      uint    `url:"general.default_ttl"`
+	DefaultHost     *string `url:"general.default_host,omitempty"`
+	StaleIfError    *bool   `url:"general.stale_if_error,omitempty"`
+	StaleIfErrorTTL *uint   `url:"general.stale_if_error_ttl,omitempty"`
 }
 
 // UpdateSettings updates a specific backend.

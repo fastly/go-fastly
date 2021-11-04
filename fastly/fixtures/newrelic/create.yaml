@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=139&format=format&name=test-newrelic&placement=waf_debug&region=us&token=abcd1234
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=78&format=format&name=test-newrelic&placement=waf_debug&region=us&token=abcd1234
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "139"
+      - "78"
       format:
       - format
       name:
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.6.0 (+github.com/fastly/go-fastly; go1.16.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/139/logging/newrelic
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/78/logging/newrelic
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","region":"us","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"139","created_at":"2021-08-17T16:11:50Z","format_version":"2","updated_at":"2021-08-17T16:11:50Z","response_condition":"","deleted_at":null}'
+    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","region":"us","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"78","response_condition":"","updated_at":"2021-11-03T17:00:56Z","deleted_at":null,"created_at":"2021-11-03T17:00:56Z","format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +35,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 17 Aug 2021 16:11:50 GMT
+      - Wed, 03 Nov 2021 17:00:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "982"
+      - "4995"
       Fastly-Ratelimit-Reset:
-      - "1629219600"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8241-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1629216710.415356,VS0,VE383
+      - S1635958857.797677,VS0,VE489
     status: 200 OK
     code: 200
     duration: ""

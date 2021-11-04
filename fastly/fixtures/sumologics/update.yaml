@@ -2,38 +2,38 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-sumologic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=62&name=new-test-sumologic
+    body: Name=test-sumologic&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=95&name=new-test-sumologic
     form:
       Name:
       - test-sumologic
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "62"
+      - "95"
       name:
       - new-test-sumologic
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/sumologic/test-sumologic
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/logging/sumologic/test-sumologic
     method: PUT
   response:
-    body: '{"placement":"waf_debug","format_version":"1","created_at":"2021-01-14T10:47:54Z","message_type":"classic","url":"https://foo.sumologic.com","version":"62","response_condition":"","format":"format","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"updated_at":"2021-01-14T10:47:54Z","name":"new-test-sumologic"}'
+    body: '{"version":"95","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"1","deleted_at":null,"name":"new-test-sumologic","created_at":"2021-11-03T17:19:13Z","url":"https://foo.sumologic.com","response_condition":"","updated_at":"2021-11-03T17:19:13Z","message_type":"classic","placement":"waf_debug","format":"format"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:47:55 GMT
+      - Wed, 03 Nov 2021 17:19:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "607"
+      - "4840"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4146-MAN
       X-Timer:
-      - S1610621275.048756,VS0,VE650
+      - S1635959954.194525,VS0,VE996
     status: 200 OK
     code: 200
     duration: ""

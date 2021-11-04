@@ -2,37 +2,37 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=17&comment=new+comment
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=99&comment=new+comment
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "17"
+      - "99"
       comment:
       - new comment
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/17
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/99
     method: PUT
   response:
-    body: '{"locked":false,"active":false,"number":17,"staging":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","testing":false,"updated_at":"2021-01-14T09:51:27Z","deployed":false,"deleted_at":null,"created_at":"2021-01-14T09:51:27Z","comment":"new
-      comment"}'
+    body: '{"testing":false,"locked":false,"staging":false,"created_at":"2021-11-03T17:26:39Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"new
+      comment","updated_at":"2021-11-03T17:26:39Z","active":false,"deleted_at":null,"number":99,"deployed":false}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 09:51:29 GMT
+      - Wed, 03 Nov 2021 17:26:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "4810"
       Fastly-Ratelimit-Reset:
-      - "1610618400"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,9 +46,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610617889.977043,VS0,VE541
+      - S1635960400.393506,VS0,VE221
     status: 200 OK
     code: 200
     duration: ""

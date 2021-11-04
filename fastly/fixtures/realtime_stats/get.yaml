@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       Fastly-Key:
-      - bbE06UJYsHy-ukGS4jDsES0x5AYD1knx
+      - XXXX
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://rt.fastly.com/v1/channel/7i6HN3TK9wS159v2gPAZ8A/ts/0/limit/3
     method: GET
   response:
-    body: '{"Data":[],"Timestamp":1610621200,"AggregateDelay":9,"Error":"No data available,
+    body: '{"Data":[],"Timestamp":1635959484,"AggregateDelay":9,"Error":"No data available,
       please retry"}'
     headers:
       Accept-Ranges:
@@ -30,7 +30,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:46:40 GMT
+      - Wed, 03 Nov 2021 17:11:24 GMT
       Strict-Transport-Security:
       - max-age=63072000; includeSubDomains
       Vary:
@@ -38,15 +38,15 @@ interactions:
       Via:
       - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, HIT
+      - MISS, MISS
       X-Cache-Hits:
-      - 0, 1
+      - 0, 0
       X-Fastly-Rts:
       - df-prod-us-east1-whistler02
       X-Served-By:
-      - cache-dca17747-DCA, cache-man4141-MAN
+      - cache-dca17744-DCA, cache-man4149-MAN
       X-Timer:
-      - S1610621199.928453,VS0,VE1515
+      - S1635959483.674590,VS0,VE1699
     status: 200 OK
     code: 200
     duration: ""

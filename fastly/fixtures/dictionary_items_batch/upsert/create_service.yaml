@@ -14,24 +14,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_BatchModifyDictionaryItems_Upsert","type":"vcl","deleted_at":null,"created_at":"2021-01-14T10:24:02Z","versions":[{"service_id":"1oqyjzbVDYmap1acKNtPrn","comment":"","deployed":false,"deleted_at":null,"created_at":"2021-01-14T10:24:02Z","updated_at":"2021-01-14T10:24:02Z","testing":false,"staging":false,"number":1,"locked":false,"active":false}],"publish_key":"","updated_at":"2021-01-14T10:24:02Z","id":"1oqyjzbVDYmap1acKNtPrn","paused":false}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_BatchModifyDictionaryItems_Upsert","type":"vcl","id":"4Qk3djeqyu8sUlxKDcRnHo","deleted_at":null,"updated_at":"2021-11-03T16:14:57Z","paused":false,"publish_key":"","versions":[{"updated_at":"2021-11-03T16:14:57Z","deleted_at":null,"active":false,"comment":"","service_id":"4Qk3djeqyu8sUlxKDcRnHo","created_at":"2021-11-03T16:14:57Z","deployed":false,"locked":false,"staging":false,"testing":false,"number":1}],"created_at":"2021-11-03T16:14:57Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:24:02 GMT
+      - Wed, 03 Nov 2021 16:14:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "945"
+      - "4960"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610619842.052143,VS0,VE239
+      - S1635956097.354292,VS0,VE225
     status: 200 OK
     code: 200
     duration: ""

@@ -2,25 +2,25 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=24&comment=comment&name=integ-test.go-fastly.com
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=102&comment=comment&name=integ-test1.go-fastly-1.com
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "24"
+      - "102"
       comment:
       - comment
       name:
-      - integ-test.go-fastly.com
+      - integ-test1.go-fastly-1.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.9.5 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/domain
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/102/domain
     method: POST
   response:
-    body: '{"comment":"comment","name":"integ-test.go-fastly.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":24,"deleted_at":null,"updated_at":"2021-09-13T13:55:45Z","created_at":"2021-09-13T13:55:45Z"}'
+    body: '{"comment":"comment","name":"integ-test1.go-fastly-1.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":102,"updated_at":"2021-11-03T17:36:28Z","created_at":"2021-11-03T17:36:28Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 13 Sep 2021 13:55:45 GMT
+      - Wed, 03 Nov 2021 17:36:28 GMT
       Fastly-Ratelimit-Remaining:
-      - "4949"
+      - "4736"
       Fastly-Ratelimit-Reset:
-      - "1631541600"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4134-MAN
       X-Timer:
-      - S1631541345.987280,VS0,VE482
+      - S1635960988.881700,VS0,VE239
     status: 200 OK
     code: 200
     duration: ""

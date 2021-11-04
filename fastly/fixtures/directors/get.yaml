@@ -6,20 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/director/test-director
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/director/test-director
     method: GET
   response:
-    body: '{"deleted_at":null,"type":1,"version":36,"created_at":"2021-01-14T10:41:23Z","name":"test-director","capacity":100,"quorum":50,"shield":null,"retries":5,"service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"","updated_at":"2021-01-14T10:41:23Z","backends":[]}'
+    body: '{"shield":null,"updated_at":"2021-11-03T16:18:20Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","type":1,"created_at":"2021-11-03T16:18:20Z","name":"test-director","backends":[],"version":59,"comment":"","retries":5,"deleted_at":null,"capacity":100,"quorum":50}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:41:24 GMT
+      - Wed, 03 Nov 2021 16:18:20 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4149-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1610620884.272791,VS0,VE182
+      - S1635956301.561648,VS0,VE130
     status: 200 OK
     code: 200
     duration: ""

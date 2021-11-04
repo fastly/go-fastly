@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.8.0 (+github.com/fastly/go-fastly; go1.16)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/purge_all
     method: POST
   response:
@@ -15,15 +15,15 @@ interactions:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 29 Jun 2021 13:16:51 GMT
+      - Wed, 03 Nov 2021 17:09:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "4999"
+      - "4941"
       Fastly-Ratelimit-Reset:
-      - "1624975200"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4151-MAN
       X-Timer:
-      - S1624972610.499316,VS0,VE647
+      - S1635959391.720209,VS0,VE336
     status: 200 OK
     code: 200
     duration: ""

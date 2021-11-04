@@ -6,20 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.2.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis/test-kinesis-2
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis/test-kinesis-2
     method: GET
   response:
-    body: '{"iam_role":"arn:aws:iam::123456789012:role/S3Access","deleted_at":null,"placement":"waf_debug","secret_key":null,"topic":"stream-name","name":"test-kinesis-2","region":"us-east-1","version":"21","response_condition":"","created_at":"2021-04-05T13:02:16Z","format_version":"2","updated_at":"2021-04-05T13:02:16Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","access_key":null}'
+    body: '{"placement":"waf_debug","region":"us-east-1","format":"format","created_at":"2021-11-03T16:56:46Z","format_version":"2","updated_at":"2021-11-03T16:56:46Z","secret_key":null,"response_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","topic":"stream-name","access_key":null,"name":"test-kinesis-2","iam_role":"arn:aws:iam::123456789012:role/S3Access","deleted_at":null,"version":"74"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Mon, 05 Apr 2021 13:02:17 GMT
+      - Wed, 03 Nov 2021 16:56:48 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-den8277-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1617627738.732426,VS0,VE131
+      - S1635958609.635404,VS0,VE165
     status: 200 OK
     code: 200
     duration: ""

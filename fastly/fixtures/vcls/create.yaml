@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=24&content=%0Abackend+default+%7B%0A++.host+%3D+%22127.0.0.1%22%3B%0A++.port+%3D+%229092%22%3B%0A%7D%0A%0Asub+vcl_recv+%7B%0A++set+req.backend+%3D+default%3B%0A%7D%0A%0Asub+vcl_hash+%7B%0A++set+req.hash+%2B%3D+req.url%3B%0A++set+req.hash+%2B%3D+req.http.host%3B%0A++set+req.hash+%2B%3D+%220%22%3B%0A%7D%0A&name=test-vcl
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=97&content=%0Abackend+default+%7B%0A++.host+%3D+%22127.0.0.1%22%3B%0A++.port+%3D+%229092%22%3B%0A%7D%0A%0Asub+vcl_recv+%7B%0A++set+req.backend+%3D+default%3B%0A%0A++if+%28req.url.path+~+%22%281%7C2%29%22%29+%7B%0A++++%2F%2F+...%0A++%7D%0A%7D%0A%0Asub+vcl_hash+%7B%0A++set+req.hash+%2B%3D+req.url%3B%0A++set+req.hash+%2B%3D+req.http.host%3B%0A++set+req.hash+%2B%3D+%220%22%3B%0A%7D%0A&name=test-vcl
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "24"
+      - "97"
       content:
       - |2
 
@@ -18,6 +18,10 @@ interactions:
 
         sub vcl_recv {
           set req.backend = default;
+
+          if (req.url.path ~ "(1|2)") {
+            // ...
+          }
         }
 
         sub vcl_hash {
@@ -31,26 +35,27 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/24/vcl
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/97/vcl
     method: POST
   response:
     body: '{"content":"\nbackend default {\n  .host = \"127.0.0.1\";\n  .port = \"9092\";\n}\n\nsub
-      vcl_recv {\n  set req.backend = default;\n}\n\nsub vcl_hash {\n  set req.hash
-      += req.url;\n  set req.hash += req.http.host;\n  set req.hash += \"0\";\n}\n","name":"test-vcl","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":24,"updated_at":"2021-01-14T10:33:35Z","deleted_at":null,"created_at":"2021-01-14T10:33:35Z","main":false}'
+      vcl_recv {\n  set req.backend = default;\n\n  if (req.url.path ~ \"(1|2)\")
+      {\n    // ...\n  }\n}\n\nsub vcl_hash {\n  set req.hash += req.url;\n  set req.hash
+      += req.http.host;\n  set req.hash += \"0\";\n}\n","name":"test-vcl","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":97,"created_at":"2021-11-03T17:24:55Z","main":false,"deleted_at":null,"updated_at":"2021-11-03T17:24:55Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:33:36 GMT
+      - Wed, 03 Nov 2021 17:24:55 GMT
       Fastly-Ratelimit-Remaining:
-      - "845"
+      - "4824"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -64,9 +69,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4131-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4142-MAN
       X-Timer:
-      - S1610620416.570398,VS0,VE474
+      - S1635960295.334667,VS0,VE192
     status: 200 OK
     code: 200
     duration: ""

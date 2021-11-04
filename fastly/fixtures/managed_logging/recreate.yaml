@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.5)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/log_stream/managed/instance_output
     method: POST
   response:
@@ -15,15 +15,15 @@ interactions:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Mon, 11 Jan 2021 14:05:08 GMT
+      - Wed, 03 Nov 2021 17:00:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "19997"
+      - "4998"
       Fastly-Ratelimit-Reset:
-      - "1610377200"
+      - "1635962400"
       Status:
       - 409 Conflict
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8275-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1610373908.834016,VS0,VE457
+      - S1635958812.820010,VS0,VE550
     status: 409 Conflict
     code: 409
     duration: ""

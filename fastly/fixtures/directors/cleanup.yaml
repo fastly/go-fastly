@@ -6,26 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/director/test-director
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/director/test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 36 }''"}'
+      version =\u003e 59 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:41:25 GMT
+      - Wed, 03 Nov 2021 16:18:21 GMT
       Fastly-Ratelimit-Remaining:
-      - "773"
+      - "4926"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4149-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1610620885.149374,VS0,VE461
+      - S1635956302.699113,VS0,VE155
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,26 +50,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/36/director/new-test-director
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/director/new-test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-director, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 36 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 59 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:41:25 GMT
+      - Wed, 03 Nov 2021 16:18:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "772"
+      - "4925"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4149-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1610620886.676887,VS0,VE197
+      - S1635956302.881699,VS0,VE181
     status: 404 Not Found
     code: 404
     duration: ""

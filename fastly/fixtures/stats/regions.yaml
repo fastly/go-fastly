@@ -6,21 +6,19 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/stats/regions
     method: GET
   response:
-    body: '{"data":["anzac","asia","asia_india","europe","latam","south_africa","southamerica_std","usa"],"status":"success","msg":null,"meta":{"from":"2020-12-14
-      11:01:32 UTC","to":"2021-01-14 11:01:32 UTC","by":"day","region":"all"}}'
+    body: |
+      {"data":["africa_std","anzac","asia","asia_india","asia_southkorea","europe","latam","southamerica_std","usa"],"meta":{"to":"2021-11-03 17:31:47 UTC","from":"2021-10-03 17:31:47 UTC","by":"day","region":"all"},"status":"success","msg":null}
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 11:01:32 GMT
-      Server:
-      - nginx
+      - Wed, 03 Nov 2021 17:31:48 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,14 +31,10 @@ interactions:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
-      X-Content-Type-Options:
-      - nosniff
-      X-Host-Name:
-      - df-prod-us-east1-timespiral03
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1610622092.312815,VS0,VE216
+      - S1635960708.630514,VS0,VE769
     status: 200 OK
     code: 200
     duration: ""

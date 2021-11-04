@@ -6,21 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/scalyr
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/88/logging/scalyr
     method: GET
   response:
-    body: '[{"name":"test-scalyr","placement":"waf_debug","format":"%h %l %u %t \"%r\"
-      %\u003es %b","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","project_id":null,"format_version":"2","token":"super-secure-token","response_condition":"","version":"59","region":"US","updated_at":"2021-01-14T10:47:09Z","created_at":"2021-01-14T10:47:09Z"}]'
+    body: '[{"format":"%h %l %u %t \"%r\" %\u003es %b","placement":"waf_debug","project_id":null,"created_at":"2021-11-03T17:14:02Z","format_version":"2","region":"US","response_condition":"","token":"super-secure-token","name":"test-scalyr","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T17:14:02Z","deleted_at":null,"version":"88"}]'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store, s-maxage=0
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:47:10 GMT
+      - Wed, 03 Nov 2021 17:14:03 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -28,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish, 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS, MISS, MISS
       X-Cache-Hits:
-      - 0, 0
+      - 0, 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4148-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN, cache-man4122-MAN
       X-Timer:
-      - S1610621230.362446,VS0,VE184
+      - S1635959643.185004,VS0,VE473
     status: 200 OK
     code: 200
     duration: ""

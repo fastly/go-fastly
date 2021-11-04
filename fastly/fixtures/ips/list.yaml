@@ -6,22 +6,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
     url: https://api.fastly.com/public-ip-list
     method: GET
   response:
-    body: '{"addresses":["23.235.32.0/20","43.249.72.0/22","103.244.50.0/24","103.245.222.0/23","103.245.224.0/24","104.156.80.0/20","146.75.0.0/16","151.101.0.0/16","157.52.64.0/18","167.82.0.0/17","167.82.128.0/20","167.82.160.0/20","167.82.224.0/20","172.111.64.0/18","185.31.16.0/22","199.27.72.0/21","199.232.0.0/16"],"ipv6_addresses":["2a04:4e40::/32","2a04:4e42::/32"]}'
+    body: '{"addresses":["23.235.32.0/20","43.249.72.0/22","103.244.50.0/24","103.245.222.0/23","103.245.224.0/24","104.156.80.0/20","140.248.64.0/18","140.248.128.0/17","146.75.0.0/17","151.101.0.0/16","157.52.64.0/18","167.82.0.0/17","167.82.128.0/20","167.82.160.0/20","167.82.224.0/20","172.111.64.0/18","185.31.16.0/22","199.27.72.0/21","199.232.0.0/16"],"ipv6_addresses":["2a04:4e40::/32","2a04:4e42::/32"]}'
     headers:
       Accept-Ranges:
       - bytes
       Age:
       - "0"
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:43:23 GMT
+      - Wed, 03 Nov 2021 16:55:07 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,11 +33,12 @@ interactions:
       X-Cache:
       - MISS, HIT
       X-Cache-Hits:
-      - 0, 2
+      - 0, 1
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4149-MAN
       X-Timer:
-      - S1610621003.209561,VS0,VE159
+      - S1635958507.125247,VS0,VE124
     status: 200 OK
     code: 200
     duration: ""
+

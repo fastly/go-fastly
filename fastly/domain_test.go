@@ -13,13 +13,20 @@ func TestClient_Domains(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
+	// NOTE: Everytime you regenerate the fixtures you'll need to update the
+	// domains as they'll potentially be reported as used depending on the
+	// service pre-existing.
+	domain1 := "integ-test1.go-fastly-1.com"
+	domain2 := "integ-test2.go-fastly-2.com"
+	domain3 := "integ-test3.go-fastly-3.com"
+
 	// Create
 	var d *Domain
 	record(t, "domains/create", func(c *Client) {
 		d, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "integ-test.go-fastly.com",
+			Name:           domain1,
 			Comment:        "comment",
 		})
 	})
@@ -32,7 +39,7 @@ func TestClient_Domains(t *testing.T) {
 		d2, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "integ2-test.go-fastly.com",
+			Name:           domain2,
 			Comment:        "comment",
 		})
 	})
@@ -46,24 +53,24 @@ func TestClient_Domains(t *testing.T) {
 			c.DeleteDomain(&DeleteDomainInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
-				Name:           "integ-test.go-fastly.com",
+				Name:           domain1,
 			})
 
 			c.DeleteDomain(&DeleteDomainInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
-				Name:           "new-integ-test.go-fastly.com",
+				Name:           domain3,
 			})
 		})
 	}()
 
-	if d.Name != "integ-test.go-fastly.com" {
+	if d.Name != domain1 {
 		t.Errorf("bad name: %q", d.Name)
 	}
 	if d.Comment != "comment" {
 		t.Errorf("bad comment: %q", d.Comment)
 	}
-	if d2.Name != "integ2-test.go-fastly.com" {
+	if d2.Name != domain2 {
 		t.Errorf("bad name: %q", d.Name)
 	}
 
@@ -88,7 +95,7 @@ func TestClient_Domains(t *testing.T) {
 		nd, err = c.GetDomain(&GetDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "integ-test.go-fastly.com",
+			Name:           domain1,
 		})
 	})
 	if err != nil {
@@ -107,14 +114,14 @@ func TestClient_Domains(t *testing.T) {
 		ud, err = c.UpdateDomain(&UpdateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "integ-test.go-fastly.com",
-			NewName:        String("new-integ-test.go-fastly.com"),
+			Name:           domain1,
+			NewName:        String(domain3),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.Name != "new-integ-test.go-fastly.com" {
+	if ud.Name != domain3 {
 		t.Errorf("bad name: %q", ud.Name)
 	}
 
@@ -124,7 +131,7 @@ func TestClient_Domains(t *testing.T) {
 		vd, err = c.ValidateDomain(&ValidateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "new-integ-test.go-fastly.com",
+			Name:           domain3,
 		})
 	})
 	if err != nil {
@@ -158,7 +165,7 @@ func TestClient_Domains(t *testing.T) {
 		err = c.DeleteDomain(&DeleteDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "new-integ-test.go-fastly.com",
+			Name:           domain3,
 		})
 	})
 	if err != nil {

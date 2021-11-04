@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/4.0.0 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3HSOFAYE9MIClrNMnneZ88/acl/2tmd64cHXy8wccFSnB5tP0/entries
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/0Z7jVDUwGwu7F2OANQI4zM/acl/2unSFVs0YvJ5OfIxOFkT1h/entries
     method: GET
   response:
-    body: '[{"negated":"1","ip":"192.168.0.1","id":"79oTJwlhREppUI6BahCekM","updated_at":"2021-09-22T11:02:47Z","subnet":24,"created_at":"2021-09-22T11:02:47Z","service_id":"3HSOFAYE9MIClrNMnneZ88","comment":"ACL
-      Entry 2","acl_id":"2tmd64cHXy8wccFSnB5tP0"}]'
+    body: '[{"ip":"192.168.0.1","id":"5DGQ0YxSuwDw03pUapmI04","comment":"ACL Entry
+      2","created_at":"2021-11-03T14:44:23Z","negated":"1","service_id":"0Z7jVDUwGwu7F2OANQI4zM","acl_id":"2unSFVs0YvJ5OfIxOFkT1h","updated_at":"2021-11-03T14:44:23Z","subnet":24}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Sep 2021 11:02:48 GMT
+      - Wed, 03 Nov 2021 14:44:24 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,9 +34,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4144-MAN
       X-Timer:
-      - S1632308568.146840,VS0,VE144
+      - S1635950664.301684,VS0,VE128
     status: 200 OK
     code: 200
     duration: ""

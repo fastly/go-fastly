@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=43&content_types=text%2Fhtml+text%2Fcss&extensions=html+css&name=test-gzip
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=67&content_types=text%2Fhtml+text%2Fcss&extensions=html+css&name=test-gzip
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "43"
+      - "67"
       content_types:
       - text/html text/css
       extensions:
@@ -18,24 +18,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/gzip
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/gzip
     method: POST
   response:
-    body: '{"content_types":"text/html text/css","extensions":"html css","name":"test-gzip","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"43","cache_condition":"","created_at":"2021-01-14T10:42:41Z","updated_at":"2021-01-14T10:42:41Z","deleted_at":null}'
+    body: '{"content_types":"text/html text/css","extensions":"html css","name":"test-gzip","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"67","cache_condition":"","deleted_at":null,"updated_at":"2021-11-03T16:50:29Z","created_at":"2021-11-03T16:50:29Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:42:41 GMT
+      - Wed, 03 Nov 2021 16:50:29 GMT
       Fastly-Ratelimit-Remaining:
-      - "716"
+      - "4870"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4123-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1610620961.253797,VS0,VE261
+      - S1635958229.341016,VS0,VE201
     status: 200 OK
     code: 200
     duration: ""

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"strings"
 	"testing"
 )
 
@@ -164,7 +165,7 @@ func TestClient_SFTPs(t *testing.T) {
 	if sftpCreateResp1.PublicKey != pgpPublicKey() {
 		t.Errorf("bad public_key: %q", sftpCreateResp1.PublicKey)
 	}
-	if sftpCreateResp1.SecretKey != privateKey() {
+	if strings.TrimSpace(sftpCreateResp1.SecretKey) != strings.TrimSpace(privateKey()) {
 		t.Errorf("bad secret_key: %q", sftpCreateResp1.SecretKey)
 	}
 	if sftpCreateResp1.SSHKnownHosts != knownHosts {

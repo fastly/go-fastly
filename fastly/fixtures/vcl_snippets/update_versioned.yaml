@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: Name=snipver&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=13&content=%23vclUpdated&name=snipverUpdated&priority=456&type=hit
+    body: Name=snipver&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=98&content=%23vclUpdated&name=snipverUpdated&priority=456&type=hit
     form:
       Name:
       - snipver
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "13"
+      - "98"
       content:
       - '#vclUpdated'
       name:
@@ -22,24 +22,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.7.0 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/13/snippet/snipver
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/98/snippet/snipver
     method: PUT
   response:
-    body: '{"updated_at":"2021-06-23T12:58:34Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-06-23T12:58:34Z","version":"13","content":"#vclUpdated","priority":"456","id":"425c18oKgfiNdUrGtFzKeh","type":"hit","dynamic":"0","name":"snipverUpdated","deleted_at":null}'
+    body: '{"dynamic":"0","name":"snipverUpdated","type":"hit","priority":"456","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T17:25:58Z","id":"10mlhMpOm4St4hsnk0Wl31","content":"#vclUpdated","created_at":"2021-11-03T17:25:58Z","deleted_at":null,"version":"98"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Wed, 23 Jun 2021 12:58:37 GMT
+      - Wed, 03 Nov 2021 17:25:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "4980"
+      - "4815"
       Fastly-Ratelimit-Reset:
-      - "1624453200"
+      - "1635962400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
       X-Timer:
-      - S1624453117.831266,VS0,VE255
+      - S1635960360.505951,VS0,VE344
     status: 200 OK
     code: 200
     duration: ""

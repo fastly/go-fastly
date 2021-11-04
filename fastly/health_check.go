@@ -81,18 +81,18 @@ type CreateHealthCheckInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name             string `form:"name,omitempty"`
-	Comment          string `form:"comment,omitempty"`
-	Method           string `form:"method,omitempty"`
-	Host             string `form:"host,omitempty"`
-	Path             string `form:"path,omitempty"`
-	HTTPVersion      string `form:"http_version,omitempty"`
-	Timeout          uint   `form:"timeout,omitempty"`
-	CheckInterval    uint   `form:"check_interval,omitempty"`
-	ExpectedResponse uint   `form:"expected_response,omitempty"`
-	Window           uint   `form:"window,omitempty"`
-	Threshold        uint   `form:"threshold,omitempty"`
-	Initial          uint   `form:"initial,omitempty"`
+	Name             string `url:"name,omitempty"`
+	Comment          string `url:"comment,omitempty"`
+	Method           string `url:"method,omitempty"`
+	Host             string `url:"host,omitempty"`
+	Path             string `url:"path,omitempty"`
+	HTTPVersion      string `url:"http_version,omitempty"`
+	Timeout          uint   `url:"timeout,omitempty"`
+	CheckInterval    uint   `url:"check_interval,omitempty"`
+	ExpectedResponse uint   `url:"expected_response,omitempty"`
+	Window           uint   `url:"window,omitempty"`
+	Threshold        uint   `url:"threshold,omitempty"`
+	Initial          uint   `url:"initial,omitempty"`
 }
 
 // CreateHealthCheck creates a new Fastly health check.
@@ -168,18 +168,18 @@ type UpdateHealthCheckInput struct {
 	// Name is the name of the health check to update.
 	Name string
 
-	NewName          *string `form:"name,omitempty"`
-	Comment          *string `form:"comment,omitempty"`
-	Method           *string `form:"method,omitempty"`
-	Host             *string `form:"host,omitempty"`
-	Path             *string `form:"path,omitempty"`
-	HTTPVersion      *string `form:"http_version,omitempty"`
-	Timeout          *uint   `form:"timeout,omitempty"`
-	CheckInterval    *uint   `form:"check_interval,omitempty"`
-	ExpectedResponse *uint   `form:"expected_response,omitempty"`
-	Window           *uint   `form:"window,omitempty"`
-	Threshold        *uint   `form:"threshold,omitempty"`
-	Initial          *uint   `form:"initial,omitempty"`
+	NewName          *string `url:"name,omitempty"`
+	Comment          *string `url:"comment,omitempty"`
+	Method           *string `url:"method,omitempty"`
+	Host             *string `url:"host,omitempty"`
+	Path             *string `url:"path,omitempty"`
+	HTTPVersion      *string `url:"http_version,omitempty"`
+	Timeout          *uint   `url:"timeout,omitempty"`
+	CheckInterval    *uint   `url:"check_interval,omitempty"`
+	ExpectedResponse *uint   `url:"expected_response,omitempty"`
+	Window           *uint   `url:"window,omitempty"`
+	Threshold        *uint   `url:"threshold,omitempty"`
+	Initial          *uint   `url:"initial,omitempty"`
 }
 
 // UpdateHealthCheck updates a specific health check.

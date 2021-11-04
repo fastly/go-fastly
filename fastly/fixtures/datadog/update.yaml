@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-datadog&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=32&format_version=2&name=new-test-datadog&region=EU
+    body: Name=test-datadog&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=54&format_version=2&name=new-test-datadog&region=EU
     form:
       Name:
       - test-datadog
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "32"
+      - "54"
       format_version:
       - "2"
       name:
@@ -20,24 +20,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/32/logging/datadog/test-datadog
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/logging/datadog/test-datadog
     method: PUT
   response:
-    body: '{"updated_at":"2021-01-14T10:40:45Z","version":"32","created_at":"2021-01-14T10:40:45Z","name":"new-test-datadog","region":"EU","token":"abcd1234","placement":"waf_debug","response_condition":"","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","format":"format"}'
+    body: '{"response_condition":"","token":"abcd1234","created_at":"2021-11-03T16:12:00Z","name":"new-test-datadog","format":"format","placement":"waf_debug","updated_at":"2021-11-03T16:12:00Z","version":"54","region":"EU","deleted_at":null,"format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:40:47 GMT
+      - Wed, 03 Nov 2021 16:12:02 GMT
       Fastly-Ratelimit-Remaining:
-      - "789"
+      - "4997"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4135-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
       X-Timer:
-      - S1610620846.496088,VS0,VE625
+      - S1635955922.691212,VS0,VE472
     status: 200 OK
     code: 200
     duration: ""

@@ -77,15 +77,15 @@ type CreateLogentriesInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string      `form:"name,omitempty"`
-	Port              uint        `form:"port,omitempty"`
-	UseTLS            Compatibool `form:"use_tls,omitempty"`
-	Token             string      `form:"token,omitempty"`
-	Format            string      `form:"format,omitempty"`
-	FormatVersion     uint        `form:"format_version,omitempty"`
-	ResponseCondition string      `form:"response_condition,omitempty"`
-	Region            string      `form:"region,omitempty"`
-	Placement         string      `form:"placement,omitempty"`
+	Name              string      `url:"name,omitempty"`
+	Port              uint        `url:"port,omitempty"`
+	UseTLS            Compatibool `url:"use_tls,omitempty"`
+	Token             string      `url:"token,omitempty"`
+	Format            string      `url:"format,omitempty"`
+	FormatVersion     uint        `url:"format_version,omitempty"`
+	ResponseCondition string      `url:"response_condition,omitempty"`
+	Region            string      `url:"region,omitempty"`
+	Placement         string      `url:"placement,omitempty"`
 }
 
 // CreateLogentries creates a new Fastly logentries.
@@ -161,15 +161,15 @@ type UpdateLogentriesInput struct {
 	// Name is the name of the logentries to update.
 	Name string
 
-	NewName           *string      `form:"name,omitempty"`
-	Port              *uint        `form:"port,omitempty"`
-	UseTLS            *Compatibool `form:"use_tls,omitempty"`
-	Token             *string      `form:"token,omitempty"`
-	Format            *string      `form:"format,omitempty"`
-	FormatVersion     *uint        `form:"format_version,omitempty"`
-	ResponseCondition *string      `form:"response_condition,omitempty"`
-	Region            *string      `form:"region,omitempty"`
-	Placement         *string      `form:"placement,omitempty"`
+	NewName           *string      `url:"name,omitempty"`
+	Port              *uint        `url:"port,omitempty"`
+	UseTLS            *Compatibool `url:"use_tls,omitempty"`
+	Token             *string      `url:"token,omitempty"`
+	Format            *string      `url:"format,omitempty"`
+	FormatVersion     *uint        `url:"format_version,omitempty"`
+	ResponseCondition *string      `url:"response_condition,omitempty"`
+	Region            *string      `url:"region,omitempty"`
+	Placement         *string      `url:"placement,omitempty"`
 }
 
 // UpdateLogentries updates a specific logentries.

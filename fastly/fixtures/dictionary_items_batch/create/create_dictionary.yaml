@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=6VFIpb0fvGBPDzyUaWqszd&ServiceVersion=2&name=test_dictionary_BatchModifyDictionaryItems_Create
+    body: ServiceID=3e8JbEVlTMla2bfE02fNiD&ServiceVersion=2&name=test_dictionary_BatchModifyDictionaryItems_Create
     form:
       ServiceID:
-      - 6VFIpb0fvGBPDzyUaWqszd
+      - 3e8JbEVlTMla2bfE02fNiD
       ServiceVersion:
       - "2"
       name:
@@ -14,24 +14,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
-    url: https://api.fastly.com/service/6VFIpb0fvGBPDzyUaWqszd/version/2/dictionary
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/3e8JbEVlTMla2bfE02fNiD/version/2/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary_BatchModifyDictionaryItems_Create","service_id":"6VFIpb0fvGBPDzyUaWqszd","version":2,"id":"4s2r3X4mVt8kQ8ps50jz7w","deleted_at":null,"write_only":false,"updated_at":"2021-01-14T10:23:54Z","created_at":"2021-01-14T10:23:54Z"}'
+    body: '{"name":"test_dictionary_BatchModifyDictionaryItems_Create","service_id":"3e8JbEVlTMla2bfE02fNiD","version":2,"write_only":false,"id":"11rhj5A92qe0LNSRQG0zuR","created_at":"2021-11-03T16:14:51Z","deleted_at":null,"updated_at":"2021-11-03T16:14:51Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Jan 2021 10:23:54 GMT
+      - Wed, 03 Nov 2021 16:14:51 GMT
       Fastly-Ratelimit-Remaining:
-      - "963"
+      - "4978"
       Fastly-Ratelimit-Reset:
-      - "1610622000"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1610619834.433003,VS0,VE253
+      - S1635956092.646322,VS0,VE188
     status: 200 OK
     code: 200
     duration: ""

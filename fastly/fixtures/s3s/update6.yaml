@@ -2,40 +2,40 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-s3&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=4&iam_role=badarn
+    body: Name=test-s3&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=87&iam_role=badarn
     form:
       Name:
       - test-s3
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "4"
+      - "87"
       iam_role:
       - badarn
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.6.0 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/4/logging/s3/test-s3
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/87/logging/s3/test-s3
     method: PUT
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-s3, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 4 }''"}'
+      version =\u003e 87 }''"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Jun 2021 11:05:00 GMT
+      - Wed, 03 Nov 2021 17:13:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "4986"
+      - "4915"
       Fastly-Ratelimit-Reset:
-      - "1623240000"
+      - "1635962400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -49,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-lhr7382-LHR
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4147-MAN
       X-Timer:
-      - S1623236701.718913,VS0,VE177
+      - S1635959615.975245,VS0,VE186
     status: 404 Not Found
     code: 404
     duration: ""

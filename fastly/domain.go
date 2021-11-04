@@ -73,10 +73,10 @@ type CreateDomainInput struct {
 	ServiceVersion int
 
 	// Name is the name of the domain that the service will respond to (required).
-	Name string `form:"name"`
+	Name string `url:"name"`
 
 	// Comment is a personal, freeform descriptive note.
-	Comment string `form:"comment,omitempty"`
+	Comment string `url:"comment,omitempty"`
 }
 
 // CreateDomain creates a new domain with the given information.
@@ -111,7 +111,7 @@ type GetDomainInput struct {
 	ServiceVersion int
 
 	// Name is the name of the domain to fetch.
-	Name string `form:"name"`
+	Name string `url:"name"`
 }
 
 // GetDomain retrieves information about the given domain name.
@@ -153,10 +153,10 @@ type UpdateDomainInput struct {
 	Name string
 
 	// NewName is the updated name of the domain
-	NewName *string `form:"name,omitempty"`
+	NewName *string `url:"name,omitempty"`
 
 	// Comment is a personal, freeform descriptive note.
-	Comment *string `form:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 }
 
 // UpdateDomain updates a single domain for the current service. The only allowed
@@ -200,7 +200,7 @@ type DeleteDomainInput struct {
 	ServiceVersion int
 
 	// Name is the name of the domain that the service will respond to (required).
-	Name string `form:"name"`
+	Name string `url:"name"`
 }
 
 // DeleteDomain removes a single domain by the given name.
@@ -234,7 +234,7 @@ type ValidateDomainInput struct {
 	ServiceVersion int
 
 	// Name is the name of the domain to validate.
-	Name string `form:"name"`
+	Name string `url:"name"`
 }
 
 // ValidateDomain validates the given domain.

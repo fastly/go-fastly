@@ -6,20 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/3.2.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis/test-kinesis
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis/test-kinesis
     method: GET
   response:
-    body: '{"created_at":"2021-04-05T13:02:15Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-04-05T13:02:15Z","access_key":"AKIAIOSFODNN7EXAMPLE","version":"21","format":"format","placement":"waf_debug","response_condition":"","iam_role":null,"deleted_at":null,"topic":"stream-name","region":"us-east-1","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","format_version":"2","name":"test-kinesis"}'
+    body: '{"iam_role":null,"deleted_at":null,"version":"74","name":"test-kinesis","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","response_condition":"","topic":"stream-name","access_key":"AKIAIOSFODNN7EXAMPLE","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T16:56:46Z","format_version":"2","region":"us-east-1","format":"format","created_at":"2021-11-03T16:56:46Z","placement":"waf_debug"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store, s-maxage=0
       Content-Type:
       - application/json
       Date:
-      - Mon, 05 Apr 2021 13:02:17 GMT
+      - Wed, 03 Nov 2021 16:56:48 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -27,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish, 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS, MISS, MISS
       X-Cache-Hits:
-      - 0, 0
+      - 0, 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-den8277-DEN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4145-MAN, cache-man4127-MAN
       X-Timer:
-      - S1617627737.469924,VS0,VE158
+      - S1635958608.116295,VS0,VE475
     status: 200 OK
     code: 200
     duration: ""

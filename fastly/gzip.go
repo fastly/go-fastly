@@ -72,10 +72,10 @@ type CreateGzipInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name           string `form:"name,omitempty"`
-	ContentTypes   string `form:"content_types,omitempty"`
-	Extensions     string `form:"extensions,omitempty"`
-	CacheCondition string `form:"cache_condition,omitempty"`
+	Name           string `url:"name,omitempty"`
+	ContentTypes   string `url:"content_types,omitempty"`
+	Extensions     string `url:"extensions,omitempty"`
+	CacheCondition string `url:"cache_condition,omitempty"`
 }
 
 // CreateGzip creates a new Fastly Gzip.
@@ -151,10 +151,10 @@ type UpdateGzipInput struct {
 	// Name is the name of the Gzip to update.
 	Name string
 
-	NewName        *string `form:"name,omitempty"`
-	ContentTypes   *string `form:"content_types,omitempty"`
-	Extensions     *string `form:"extensions,omitempty"`
-	CacheCondition *string `form:"cache_condition,omitempty"`
+	NewName        *string `url:"name,omitempty"`
+	ContentTypes   *string `url:"content_types,omitempty"`
+	Extensions     *string `url:"extensions,omitempty"`
+	CacheCondition *string `url:"cache_condition,omitempty"`
 }
 
 // UpdateGzip updates a specific Gzip.

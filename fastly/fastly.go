@@ -3,6 +3,7 @@ package fastly
 import (
 	"bytes"
 	"encoding"
+	"net/url"
 )
 
 type BatchOperation string
@@ -62,5 +63,15 @@ func (b *Compatibool) UnmarshalText(t []byte) error {
 	if bytes.Equal(t, []byte("1")) {
 		*b = Compatibool(true)
 	}
+	return nil
+}
+
+// EncodeValues implements github.com/google/go-querystring/query#Encoder interface.
+func (b Compatibool) EncodeValues(key string, v *url.Values) error {
+	if b {
+		v.Add(key, "1")
+		return nil
+	}
+	v.Add(key, "0")
 	return nil
 }

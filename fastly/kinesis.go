@@ -78,16 +78,16 @@ type CreateKinesisInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name              string `form:"name,omitempty"`
-	StreamName        string `form:"topic,omitempty"`
-	Region            string `form:"region,omitempty"`
-	AccessKey         string `form:"access_key,omitempty"`
-	SecretKey         string `form:"secret_key,omitempty"`
-	IAMRole           string `form:"iam_role,omitempty"`
-	Format            string `form:"format,omitempty"`
-	FormatVersion     uint   `form:"format_version,omitempty"`
-	ResponseCondition string `form:"response_condition,omitempty"`
-	Placement         string `form:"placement,omitempty"`
+	Name              string `url:"name,omitempty"`
+	StreamName        string `url:"topic,omitempty"`
+	Region            string `url:"region,omitempty"`
+	AccessKey         string `url:"access_key,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
+	IAMRole           string `url:"iam_role,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 }
 
 // CreateKinesis creates a new Fastly Kinesis.
@@ -163,16 +163,16 @@ type UpdateKinesisInput struct {
 	// Name is the name of the Kinesis logging object to update (required).
 	Name string
 
-	NewName           *string `form:"name,omitempty"`
-	StreamName        *string `form:"topic,omitempty"`
-	Region            *string `form:"region,omitempty"`
-	AccessKey         *string `form:"access_key,omitempty"`
-	SecretKey         *string `form:"secret_key,omitempty"`
-	IAMRole           *string `form:"iam_role,omitempty"`
-	Format            *string `form:"format,omitempty"`
-	FormatVersion     *uint   `form:"format_version,omitempty"`
-	ResponseCondition *string `form:"response_condition,omitempty"`
-	Placement         *string `form:"placement,omitempty"`
+	NewName           *string `url:"name,omitempty"`
+	StreamName        *string `url:"topic,omitempty"`
+	Region            *string `url:"region,omitempty"`
+	AccessKey         *string `url:"access_key,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
+	IAMRole           *string `url:"iam_role,omitempty"`
+	Format            *string `url:"format,omitempty"`
+	FormatVersion     *uint   `url:"format_version,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
 }
 
 // UpdateKinesis updates a specific Kinesis.

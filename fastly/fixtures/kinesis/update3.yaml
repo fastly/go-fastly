@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-kinesis-2&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=21&access_key=AKIAIOSFODNN7EXAMPLE&iam_role=&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY
+    body: Name=test-kinesis-2&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=74&access_key=AKIAIOSFODNN7EXAMPLE&iam_role=&secret_key=wJalrXUtnFEMI%2FK7MDENG%2FbPxRfiCYEXAMPLEKEY
     form:
       Name:
       - test-kinesis-2
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "21"
+      - "74"
       access_key:
       - AKIAIOSFODNN7EXAMPLE
       iam_role:
@@ -20,24 +20,24 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/3.2.0 (+github.com/fastly/go-fastly; go1.15.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/21/logging/kinesis/test-kinesis-2
+      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis/test-kinesis-2
     method: PUT
   response:
-    body: '{"deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-04-05T13:02:16Z","region":"us-east-1","response_condition":"","updated_at":"2021-04-05T13:02:16Z","iam_role":"","format":"format","placement":"waf_debug","format_version":"2","name":"test-kinesis-2","version":"21","access_key":"AKIAIOSFODNN7EXAMPLE","topic":"stream-name","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"}'
+    body: '{"response_condition":"","deleted_at":null,"access_key":"AKIAIOSFODNN7EXAMPLE","updated_at":"2021-11-03T16:56:46Z","format_version":"2","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","service_id":"7i6HN3TK9wS159v2gPAZ8A","iam_role":"","name":"test-kinesis-2","format":"format","topic":"stream-name","region":"us-east-1","created_at":"2021-11-03T16:56:46Z","placement":"waf_debug","version":"74"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-cache
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Mon, 05 Apr 2021 13:02:19 GMT
+      - Wed, 03 Nov 2021 16:56:50 GMT
       Fastly-Ratelimit-Remaining:
-      - "982"
+      - "4820"
       Fastly-Ratelimit-Reset:
-      - "1617631200"
+      - "1635958800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-den8277-DEN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
       X-Timer:
-      - S1617627739.165783,VS0,VE482
+      - S1635958610.945073,VS0,VE446
     status: 200 OK
     code: 200
     duration: ""
