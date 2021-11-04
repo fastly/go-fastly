@@ -1,5 +1,14 @@
 # Changelog
 
+## [v5.1.2](https://github.com/fastly/go-fastly/releases/tag/v5.1.2) (2021-11-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.1...v5.1.2)
+
+**Bug fixes:**
+
+- Use pointer for `subnet` field [#316](https://github.com/fastly/go-fastly/pull/316)
+- Replace form dependency with google's go-querystring [#315](https://github.com/fastly/go-fastly/pull/315)
+
 ## [v5.1.1](https://github.com/fastly/go-fastly/releases/tag/v5.1.1) (2021-10-11)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.0...v5.1.1)
