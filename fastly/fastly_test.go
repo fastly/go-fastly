@@ -347,7 +347,7 @@ func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 			Name:           name,
 			Statement:      "req.url~+\"index.html\"",
 			Type:           "PREFETCH", // This must be a prefetch condition
-			Priority:       1,
+			Priority:       Int(1),
 		})
 	})
 	if err != nil {
@@ -382,7 +382,7 @@ func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, 
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
 			Name:           name,
-			Status:         403,
+			Status:         Uint(403),
 		})
 	})
 	if err != nil {

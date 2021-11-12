@@ -76,7 +76,7 @@ type CreateConditionInput struct {
 	Name      string `url:"name,omitempty"`
 	Statement string `url:"statement,omitempty"`
 	Type      string `url:"type,omitempty"`
-	Priority  int    `url:"priority,omitempty"`
+	Priority  *int   `url:"priority,omitempty"`
 }
 
 // CreateCondition creates a new Fastly condition.

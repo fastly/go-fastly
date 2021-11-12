@@ -87,12 +87,12 @@ type CreateHealthCheckInput struct {
 	Host             string `url:"host,omitempty"`
 	Path             string `url:"path,omitempty"`
 	HTTPVersion      string `url:"http_version,omitempty"`
-	Timeout          uint   `url:"timeout,omitempty"`
-	CheckInterval    uint   `url:"check_interval,omitempty"`
-	ExpectedResponse uint   `url:"expected_response,omitempty"`
-	Window           uint   `url:"window,omitempty"`
-	Threshold        uint   `url:"threshold,omitempty"`
-	Initial          uint   `url:"initial,omitempty"`
+	Timeout          *uint  `url:"timeout,omitempty"`
+	CheckInterval    *uint  `url:"check_interval,omitempty"`
+	ExpectedResponse *uint  `url:"expected_response,omitempty"`
+	Window           *uint  `url:"window,omitempty"`
+	Threshold        *uint  `url:"threshold,omitempty"`
+	Initial          *uint  `url:"initial,omitempty"`
 }
 
 // CreateHealthCheck creates a new Fastly health check.

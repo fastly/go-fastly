@@ -20,7 +20,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-response-object",
-			Status:         200,
+			Status:         Uint(200),
 			Response:       "Ok",
 			Content:        "abcd",
 			ContentType:    "text/plain",

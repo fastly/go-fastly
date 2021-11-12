@@ -27,7 +27,7 @@ func TestClient_Headers(t *testing.T) {
 			Source:         "client.ip",
 			Regex:          "foobar",
 			Substitution:   "123",
-			Priority:       50,
+			Priority:       Uint(50),
 		})
 	})
 	if err != nil {

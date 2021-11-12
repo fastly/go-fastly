@@ -79,7 +79,7 @@ type CreateSnippetInput struct {
 	Name string `url:"name"`
 
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority int `url:"priority,omitempty"`
+	Priority *int `url:"priority,omitempty"`
 
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic int `url:"dynamic"`

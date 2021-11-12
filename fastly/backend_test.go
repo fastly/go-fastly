@@ -21,8 +21,8 @@ func TestClient_Backends(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-backend",
 			Address:        "integ-test.go-fastly.com",
-			Port:           1234,
-			ConnectTimeout: 1500,
+			Port:           Uint(1234),
+			ConnectTimeout: Uint(1500),
 			OverrideHost:   "origin.example.com",
 			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
 		})

@@ -79,7 +79,7 @@ type CreateResponseObjectInput struct {
 	ServiceVersion int
 
 	Name             string `url:"name,omitempty"`
-	Status           uint   `url:"status,omitempty"`
+	Status           *uint  `url:"status,omitempty"`
 	Response         string `url:"response,omitempty"`
 	Content          string `url:"content,omitempty"`
 	ContentType      string `url:"content_type,omitempty"`
