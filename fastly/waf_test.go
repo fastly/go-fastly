@@ -52,7 +52,7 @@ func TestClient_WAFs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(wafsResp.Items) < 0 {
+	if len(wafsResp.Items) == 0 {
 		t.Errorf("bad wafs: %v", wafsResp.Items)
 	}
 
