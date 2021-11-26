@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/53/condition/test%2Fcondition
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/74/condition/test%2Fcondition
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Condition ''{ deleted
-      =\u003e 0000-00-00 00:00:00, name =\u003e test/condition, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 53 }''"}'
+      =\u003e 0000-00-00 00:00:00, name =\u003e test/condition, service =\u003e 7AfpC5AR6GFm8x8edlSAFX,
+      version =\u003e 74 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 15:49:01 GMT
+      - Fri, 26 Nov 2021 07:13:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "4915"
+      - "4989"
       Fastly-Ratelimit-Reset:
-      - "1635955200"
+      - "1637913600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11952-TYO
       X-Timer:
-      - S1635954542.600354,VS0,VE342
+      - S1637910808.571039,VS0,VE278
     status: 404 Not Found
     code: 404
     duration: ""

@@ -2,25 +2,25 @@
 version: 1
 interactions:
 - request:
-    body: Name=test%2Fcondition&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=53&statement=req.url~%2B%22updated.html%22
+    body: Name=test%2Fcondition&ServiceID=7AfpC5AR6GFm8x8edlSAFX&ServiceVersion=74&statement=req.url~%2B%22updated.html%22
     form:
       Name:
       - test/condition
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 7AfpC5AR6GFm8x8edlSAFX
       ServiceVersion:
-      - "53"
+      - "74"
       statement:
       - req.url~+"updated.html"
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/53/condition/test%2Fcondition
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/74/condition/test%2Fcondition
     method: PUT
   response:
-    body: '{"type":"REQUEST","name":"test/condition","created_at":"2021-11-03T15:49:00Z","priority":"1","comment":"","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"53","updated_at":"2021-11-03T15:49:00Z","statement":"req.url~+\"updated.html\""}'
+    body: '{"created_at":"2021-11-26T07:13:25Z","deleted_at":null,"statement":"req.url~+\"updated.html\"","updated_at":"2021-11-26T07:13:25Z","priority":"1","name":"test/condition","version":"74","comment":"","type":"REQUEST","service_id":"7AfpC5AR6GFm8x8edlSAFX"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 15:49:01 GMT
+      - Fri, 26 Nov 2021 07:13:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "4917"
+      - "4991"
       Fastly-Ratelimit-Reset:
-      - "1635955200"
+      - "1637913600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11952-TYO
       X-Timer:
-      - S1635954541.126665,VS0,VE186
+      - S1637910807.681327,VS0,VE448
     status: 200 OK
     code: 200
     duration: ""
