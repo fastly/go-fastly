@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/header/test-header
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/76/header/test-header
     method: GET
   response:
-    body: '{"version":"68","substitution":"123","created_at":"2021-11-03T16:51:08Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","type":"request","name":"test-header","request_condition":null,"action":"set","updated_at":"2021-11-03T16:51:08Z","ignore_if_set":"0","regex":"foobar","dst":"http.foo","cache_condition":null,"deleted_at":null,"src":"client.ip","response_condition":null,"priority":"50"}'
+    body: '{"updated_at":"2021-11-26T07:16:34Z","ignore_if_set":"0","substitution":"123","name":"test-header","dst":"http.foo","service_id":"7AfpC5AR6GFm8x8edlSAFX","response_condition":null,"cache_condition":null,"deleted_at":null,"request_condition":null,"type":"request","priority":"50","regex":"foobar","src":"client.ip","created_at":"2021-11-26T07:16:34Z","version":"76","action":"set"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:51:09 GMT
+      - Fri, 26 Nov 2021 07:16:35 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4149-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-tyo11972-TYO
       X-Timer:
-      - S1635958269.775163,VS0,VE399
+      - S1637910995.201980,VS0,VE241
     status: 200 OK
     code: 200
     duration: ""
