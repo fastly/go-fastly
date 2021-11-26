@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/director/test-director
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/75/director/test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
-      =\u003e 0000-00-00 00:00:00, name =\u003e test-director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 59 }''"}'
+      =\u003e 0000-00-00 00:00:00, name =\u003e test-director, service =\u003e 7AfpC5AR6GFm8x8edlSAFX,
+      version =\u003e 75 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:18:21 GMT
+      - Fri, 26 Nov 2021 07:15:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "4926"
+      - "4984"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1637913600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-tyo11957-TYO
       X-Timer:
-      - S1635956302.699113,VS0,VE155
+      - S1637910921.608891,VS0,VE271
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/director/new-test-director
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/75/director/new-test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-director, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 59 }''"}'
+      7AfpC5AR6GFm8x8edlSAFX, version =\u003e 75 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:18:22 GMT
+      - Fri, 26 Nov 2021 07:15:21 GMT
       Fastly-Ratelimit-Remaining:
-      - "4925"
+      - "4983"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1637913600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11957-TYO
       X-Timer:
-      - S1635956302.881699,VS0,VE181
+      - S1637910921.887712,VS0,VE252
     status: 404 Not Found
     code: 404
     duration: ""
