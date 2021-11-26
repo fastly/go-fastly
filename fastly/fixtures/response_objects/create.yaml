@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=86&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
+    body: ServiceID=7AfpC5AR6GFm8x8edlSAFX&ServiceVersion=79&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 7AfpC5AR6GFm8x8edlSAFX
       ServiceVersion:
-      - "86"
+      - "79"
       content:
       - abcd
       content_type:
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/86/response_object
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/79/response_object
     method: POST
   response:
-    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"86","created_at":"2021-11-03T17:12:48Z","deleted_at":null,"updated_at":"2021-11-03T17:12:48Z","cache_condition":"","request_condition":""}'
+    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7AfpC5AR6GFm8x8edlSAFX","version":"79","created_at":"2021-11-26T07:19:36Z","deleted_at":null,"updated_at":"2021-11-26T07:19:36Z","request_condition":"","cache_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +35,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:12:48 GMT
+      - Fri, 26 Nov 2021 07:19:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "4933"
+      - "4963"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1637913600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11970-TYO
       X-Timer:
-      - S1635959569.676530,VS0,VE185
+      - S1637911176.952938,VS0,VE312
     status: 200 OK
     code: 200
     duration: ""
