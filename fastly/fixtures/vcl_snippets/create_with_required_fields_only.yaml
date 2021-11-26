@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=98&content=%23vcl&dynamic=0&name=snipver&type=fetch
+    body: ServiceID=7AfpC5AR6GFm8x8edlSAFX&ServiceVersion=80&content=%23vcl&dynamic=0&name=snipver&type=fetch
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 7AfpC5AR6GFm8x8edlSAFX
       ServiceVersion:
-      - "98"
+      - "80"
       content:
       - '#vcl'
       dynamic:
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/98/snippet
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/80/snippet
     method: POST
   response:
-    body: '{"content":"#vcl","dynamic":0,"name":"snipver","type":"fetch","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"98","priority":100,"created_at":"2021-11-03T17:25:58Z","deleted_at":null,"updated_at":"2021-11-03T17:25:58Z","id":"10mlhMpOm4St4hsnk0Wl31"}'
+    body: '{"content":"#vcl","dynamic":0,"name":"snipver","type":"fetch","service_id":"7AfpC5AR6GFm8x8edlSAFX","version":"80","priority":100,"created_at":"2021-11-26T07:21:18Z","updated_at":"2021-11-26T07:21:18Z","id":"2t19aLnUdhacWY37Cgi3d9","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:25:58 GMT
+      - Fri, 26 Nov 2021 07:21:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "4817"
+      - "4957"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1637913600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11955-TYO
       X-Timer:
-      - S1635960358.115037,VS0,VE367
+      - S1637911279.556287,VS0,VE290
     status: 200 OK
     code: 200
     duration: ""
