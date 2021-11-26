@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/73/backend
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/73/backend
     method: GET
   response:
-    body: '[{"first_byte_timeout":15000,"name":"test-backend","comment":"","override_host":"origin.example.com","updated_at":"2021-11-26T07:11:11Z","weight":100,"ipv6":null,"ssl_client_key":null,"ssl_sni_hostname":null,"created_at":"2021-11-26T07:11:11Z","ssl_client_cert":null,"use_ssl":false,"version":73,"ipv4":null,"address":"integ-test.go-fastly.com","between_bytes_timeout":10000,"hostname":"integ-test.go-fastly.com","request_condition":"","deleted_at":null,"max_tls_version":null,"client_cert":null,"min_tls_version":null,"auto_loadbalance":false,"port":1234,"ssl_cert_hostname":null,"shield":null,"ssl_ca_cert":null,"error_threshold":0,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","healthcheck":null,"ssl_check_cert":false,"connect_timeout":1500,"service_id":"7AfpC5AR6GFm8x8edlSAFX","max_conn":200,"ssl_hostname":null}]'
+    body: '[{"first_byte_timeout":15000,"name":"test-backend","comment":"","override_host":"origin.example.com","updated_at":"2021-11-26T07:11:11Z","weight":100,"ipv6":null,"ssl_client_key":null,"ssl_sni_hostname":null,"created_at":"2021-11-26T07:11:11Z","ssl_client_cert":null,"use_ssl":false,"version":73,"ipv4":null,"address":"integ-test.go-fastly.com","between_bytes_timeout":10000,"hostname":"integ-test.go-fastly.com","request_condition":"","deleted_at":null,"max_tls_version":null,"client_cert":null,"min_tls_version":null,"auto_loadbalance":false,"port":1234,"ssl_cert_hostname":null,"shield":null,"ssl_ca_cert":null,"error_threshold":0,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","healthcheck":null,"ssl_check_cert":false,"connect_timeout":1500,"service_id":"7i6HN3TK9wS159v2gPAZ8A","max_conn":200,"ssl_hostname":null}]'
     headers:
       Accept-Ranges:
       - bytes

@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ID=2lag0ngIB569L99MYVaUMb&ServiceID=7AfpC5AR6GFm8x8edlSAFX&content=%23vclUpdated
+    body: ID=2lag0ngIB569L99MYVaUMb&ServiceID=7i6HN3TK9wS159v2gPAZ8A&content=%23vclUpdated
     form:
       ID:
       - 2lag0ngIB569L99MYVaUMb
       ServiceID:
-      - 7AfpC5AR6GFm8x8edlSAFX
+      - 7i6HN3TK9wS159v2gPAZ8A
       content:
       - '#vclUpdated'
     headers:
@@ -15,10 +15,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/snippet/2lag0ngIB569L99MYVaUMb
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/snippet/2lag0ngIB569L99MYVaUMb
     method: PUT
   response:
-    body: '{"updated_at":"2021-11-26T07:21:19Z","snippet_id":"2lag0ngIB569L99MYVaUMb","created_at":"2021-11-26T07:21:19Z","content":"#vclUpdated","service_id":"7AfpC5AR6GFm8x8edlSAFX"}'
+    body: '{"updated_at":"2021-11-26T07:21:19Z","snippet_id":"2lag0ngIB569L99MYVaUMb","created_at":"2021-11-26T07:21:19Z","content":"#vclUpdated","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
     headers:
       Accept-Ranges:
       - bytes

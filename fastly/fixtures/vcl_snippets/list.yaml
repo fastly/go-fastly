@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/80/snippet
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/snippet
     method: GET
   response:
-    body: '[{"content":null,"type":"fetch","dynamic":"1","priority":"123","created_at":"2021-11-26T07:21:19Z","id":"2lag0ngIB569L99MYVaUMb","name":"snipdyn","version":"80","service_id":"7AfpC5AR6GFm8x8edlSAFX","deleted_at":null,"updated_at":"2021-11-26T07:21:19Z"},{"content":"#vcl","type":"fetch","version":"80","name":"snipver","priority":"100","dynamic":"0","id":"2t19aLnUdhacWY37Cgi3d9","created_at":"2021-11-26T07:21:18Z","service_id":"7AfpC5AR6GFm8x8edlSAFX","deleted_at":null,"updated_at":"2021-11-26T07:21:18Z"}]'
+    body: '[{"content":null,"type":"fetch","dynamic":"1","priority":"123","created_at":"2021-11-26T07:21:19Z","id":"2lag0ngIB569L99MYVaUMb","name":"snipdyn","version":"80","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"updated_at":"2021-11-26T07:21:19Z"},{"content":"#vcl","type":"fetch","version":"80","name":"snipver","priority":"100","dynamic":"0","id":"2t19aLnUdhacWY37Cgi3d9","created_at":"2021-11-26T07:21:18Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"updated_at":"2021-11-26T07:21:18Z"}]'
     headers:
       Accept-Ranges:
       - bytes

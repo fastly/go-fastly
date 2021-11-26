@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7AfpC5AR6GFm8x8edlSAFX&ServiceVersion=76&action=set&dst=http.foo&name=test-header&priority=50&regex=foobar&src=client.ip&substitution=123&type=request
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=76&action=set&dst=http.foo&name=test-header&priority=50&regex=foobar&src=client.ip&substitution=123&type=request
     form:
       ServiceID:
-      - 7AfpC5AR6GFm8x8edlSAFX
+      - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
       - "76"
       action:
@@ -29,10 +29,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7AfpC5AR6GFm8x8edlSAFX/version/76/header
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/76/header
     method: POST
   response:
-    body: '{"action":"set","dst":"http.foo","name":"test-header","priority":"50","regex":"foobar","src":"client.ip","substitution":"123","type":"request","service_id":"7AfpC5AR6GFm8x8edlSAFX","version":"76","response_condition":null,"updated_at":"2021-11-26T07:16:34Z","request_condition":null,"ignore_if_set":"0","created_at":"2021-11-26T07:16:34Z","cache_condition":null,"deleted_at":null}'
+    body: '{"action":"set","dst":"http.foo","name":"test-header","priority":"50","regex":"foobar","src":"client.ip","substitution":"123","type":"request","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"76","response_condition":null,"updated_at":"2021-11-26T07:16:34Z","request_condition":null,"ignore_if_set":"0","created_at":"2021-11-26T07:16:34Z","cache_condition":null,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
