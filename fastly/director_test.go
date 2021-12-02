@@ -20,9 +20,9 @@ func TestClient_Directors(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-director",
-			Quorum:         50,
+			Quorum:         Uint(50),
 			Type:           DirectorTypeRandom,
-			Retries:        5,
+			Retries:        Uint(5),
 		})
 	})
 	if err != nil {

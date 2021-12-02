@@ -120,7 +120,7 @@ type CreateRequestSettingInput struct {
 	ForceSSL         Compatibool          `url:"force_ssl,omitempty"`
 	Action           RequestSettingAction `url:"action,omitempty"`
 	BypassBusyWait   Compatibool          `url:"bypass_busy_wait,omitempty"`
-	MaxStaleAge      uint                 `url:"max_stale_age,omitempty"`
+	MaxStaleAge      *uint                `url:"max_stale_age,omitempty"`
 	HashKeys         string               `url:"hash_keys,omitempty"`
 	XForwardedFor    RequestSettingXFF    `url:"xff,omitempty"`
 	TimerSupport     Compatibool          `url:"timer_support,omitempty"`

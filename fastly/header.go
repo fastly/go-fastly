@@ -143,7 +143,7 @@ type CreateHeaderInput struct {
 	Source            string       `url:"src,omitempty"`
 	Regex             string       `url:"regex,omitempty"`
 	Substitution      string       `url:"substitution,omitempty"`
-	Priority          uint         `url:"priority,omitempty"`
+	Priority          *uint        `url:"priority,omitempty"`
 	RequestCondition  string       `url:"request_condition,omitempty"`
 	CacheCondition    string       `url:"cache_condition,omitempty"`
 	ResponseCondition string       `url:"response_condition,omitempty"`

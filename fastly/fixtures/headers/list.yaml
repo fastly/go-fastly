@@ -6,20 +6,20 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/header
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/76/header
     method: GET
   response:
-    body: '[{"updated_at":"2021-11-03T16:51:08Z","name":"test-header","regex":"foobar","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-11-03T16:51:08Z","version":"68","cache_condition":null,"request_condition":null,"substitution":"123","ignore_if_set":"0","type":"request","response_condition":null,"priority":"50","action":"set","src":"client.ip","deleted_at":null,"dst":"http.foo"}]'
+    body: '[{"regex":"foobar","dst":"http.foo","name":"test-header","cache_condition":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"created_at":"2021-11-26T07:16:34Z","ignore_if_set":"0","version":"76","src":"client.ip","action":"set","type":"request","substitution":"123","response_condition":null,"updated_at":"2021-11-26T07:16:34Z","request_condition":null,"priority":"50"}]'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
-      - no-store, s-maxage=0
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:51:08 GMT
+      - Fri, 26 Nov 2021 07:16:35 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -27,15 +27,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish, 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, MISS, MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - 0, 0, 0
+      - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN, cache-man4149-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-tyo11972-TYO
       X-Timer:
-      - S1635958268.264325,VS0,VE488
+      - S1637910995.548779,VS0,VE616
     status: 200 OK
     code: 200
     duration: ""

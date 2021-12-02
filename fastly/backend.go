@@ -98,15 +98,15 @@ type CreateBackendInput struct {
 	Name                string      `url:"name,omitempty"`
 	Comment             string      `url:"comment,omitempty"`
 	Address             string      `url:"address,omitempty"`
-	Port                uint        `url:"port,omitempty"`
+	Port                *uint       `url:"port,omitempty"`
 	OverrideHost        string      `url:"override_host,omitempty"`
-	ConnectTimeout      uint        `url:"connect_timeout,omitempty"`
-	MaxConn             uint        `url:"max_conn,omitempty"`
-	ErrorThreshold      uint        `url:"error_threshold,omitempty"`
-	FirstByteTimeout    uint        `url:"first_byte_timeout,omitempty"`
-	BetweenBytesTimeout uint        `url:"between_bytes_timeout,omitempty"`
+	ConnectTimeout      *uint       `url:"connect_timeout,omitempty"`
+	MaxConn             *uint       `url:"max_conn,omitempty"`
+	ErrorThreshold      *uint       `url:"error_threshold,omitempty"`
+	FirstByteTimeout    *uint       `url:"first_byte_timeout,omitempty"`
+	BetweenBytesTimeout *uint       `url:"between_bytes_timeout,omitempty"`
 	AutoLoadbalance     Compatibool `url:"auto_loadbalance,omitempty"`
-	Weight              uint        `url:"weight,omitempty"`
+	Weight              *uint       `url:"weight,omitempty"`
 	RequestCondition    string      `url:"request_condition,omitempty"`
 	HealthCheck         string      `url:"healthcheck,omitempty"`
 	Shield              string      `url:"shield,omitempty"`

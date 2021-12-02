@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/healthcheck
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/77/healthcheck
     method: GET
   response:
-    body: '[{"timeout":1500,"expected_response":200,"method":"HEAD","comment":"","threshold":10,"deleted_at":null,"window":5000,"created_at":"2021-11-03T16:52:32Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","host":"example.com","initial":10,"http_version":"1.1","version":69,"updated_at":"2021-11-03T16:52:32Z","path":"/foo","name":"test-healthcheck","check_interval":2500}]'
+    body: '[{"threshold":10,"service_id":"7i6HN3TK9wS159v2gPAZ8A","check_interval":2500,"path":"/foo","initial":10,"expected_response":200,"host":"example.com","timeout":1500,"method":"HEAD","updated_at":"2021-11-26T07:17:25Z","window":5000,"http_version":"1.1","created_at":"2021-11-26T07:17:25Z","deleted_at":null,"name":"test-healthcheck","comment":"","version":77}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:52:33 GMT
+      - Fri, 26 Nov 2021 07:17:25 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-tyo11949-TYO
       X-Timer:
-      - S1635958353.826572,VS0,VE333
+      - S1637911045.482615,VS0,VE248
     status: 200 OK
     code: 200
     duration: ""

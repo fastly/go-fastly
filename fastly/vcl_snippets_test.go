@@ -68,7 +68,7 @@ func Test_Snippets(t *testing.T) {
 			Content:        vclContent,
 			Type:           SnippetTypeFetch,
 			Dynamic:        dynamic,
-			Priority:       priority,
+			Priority:       Int(priority),
 		})
 	})
 

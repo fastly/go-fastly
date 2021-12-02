@@ -24,7 +24,7 @@ func TestClient_RequestSettings(t *testing.T) {
 			ForceSSL:       true,
 			Action:         RequestSettingActionLookup,
 			BypassBusyWait: true,
-			MaxStaleAge:    30,
+			MaxStaleAge:    Uint(30),
 			HashKeys:       "a,b,c",
 			XForwardedFor:  RequestSettingXFFLeave,
 			TimerSupport:   true,

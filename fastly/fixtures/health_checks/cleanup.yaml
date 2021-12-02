@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/healthcheck/test-healthcheck
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/77/healthcheck/test-healthcheck
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Healthcheck ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-healthcheck, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 69 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 77 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:52:34 GMT
+      - Fri, 26 Nov 2021 07:17:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "4853"
+      - "4972"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1637913600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11949-TYO
       X-Timer:
-      - S1635958355.524738,VS0,VE155
+      - S1637911047.773785,VS0,VE283
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/healthcheck/new-test-healthcheck
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/77/healthcheck/new-test-healthcheck
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Healthcheck ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-healthcheck, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 69 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 77 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:52:34 GMT
+      - Fri, 26 Nov 2021 07:17:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "4852"
+      - "4971"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1637913600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11949-TYO
       X-Timer:
-      - S1635958355.706188,VS0,VE140
+      - S1637911047.182845,VS0,VE278
     status: 404 Not Found
     code: 404
     duration: ""

@@ -95,10 +95,10 @@ type CreateDirectorInput struct {
 	Name     string       `url:"name,omitempty"`
 	Comment  string       `url:"comment,omitempty"`
 	Shield   string       `url:"shield,omitempty"`
-	Quorum   uint         `url:"quorum,omitempty"`
+	Quorum   *uint        `url:"quorum,omitempty"`
 	Type     DirectorType `url:"type,omitempty"`
-	Retries  uint         `url:"retries,omitempty"`
-	Capacity uint         `url:"capacity,omitempty"`
+	Retries  *uint        `url:"retries,omitempty"`
+	Capacity *uint        `url:"capacity,omitempty"`
 }
 
 // CreateDirector creates a new Fastly director.

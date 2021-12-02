@@ -22,7 +22,7 @@ func TestClient_Conditions(t *testing.T) {
 			Name:           "test/condition",
 			Statement:      "req.url~+\"index.html\"",
 			Type:           "REQUEST",
-			Priority:       1,
+			Priority:       Int(1),
 		})
 	})
 	if err != nil {

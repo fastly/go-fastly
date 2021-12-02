@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=59&name=test-director&quorum=50&retries=5&type=1
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=75&name=test-director&quorum=50&retries=5&type=1
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "59"
+      - "75"
       name:
       - test-director
       quorum:
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/director
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/75/director
     method: POST
   response:
-    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":59,"updated_at":"2021-11-03T16:18:20Z","shield":null,"created_at":"2021-11-03T16:18:20Z","comment":"","backends":[],"capacity":100,"deleted_at":null}'
+    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":75,"capacity":100,"comment":"","created_at":"2021-11-26T07:15:18Z","backends":[],"updated_at":"2021-11-26T07:15:18Z","deleted_at":null,"shield":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:18:20 GMT
+      - Fri, 26 Nov 2021 07:15:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "4929"
+      - "4987"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1637913600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11957-TYO
       X-Timer:
-      - S1635956300.973781,VS0,VE203
+      - S1637910918.210918,VS0,VE288
     status: 200 OK
     code: 200
     duration: ""
