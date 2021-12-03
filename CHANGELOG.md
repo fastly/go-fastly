@@ -1,5 +1,14 @@
 # Changelog
 
+## [v5.1.3](https://github.com/fastly/go-fastly/releases/tag/v5.1.3) (2021-12-03)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.2...v5.1.3)
+
+**Bug fixes:**
+
+- Do not omit zero int values on create operations [#318](https://github.com/fastly/go-fastly/pull/318)
+- Fix `len < 0` in test: len cannot return negative values [#319](https://github.com/fastly/go-fastly/pull/319)
+
 ## [v5.1.2](https://github.com/fastly/go-fastly/releases/tag/v5.1.2) (2021-11-04)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.1...v5.1.2)
