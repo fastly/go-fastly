@@ -96,8 +96,8 @@ func (p *ListDictionaryItemsPaginator) GetNext() ([]*DictionaryItem, error) {
 	return p.client.listDictionaryItemsWithPage(p.options, p)
 }
 
-// NewListDictionaryItemsPagenator returns a new ListDictionaryItemsPaginator
-func (c *Client) NewListDictionaryItemsPagenator(i *ListDictionaryItemsInput) *ListDictionaryItemsPaginator {
+// NewListDictionaryItemsPaginator returns a new ListDictionaryItemsPaginator
+func (c *Client) NewListDictionaryItemsPaginator(i *ListDictionaryItemsInput) *ListDictionaryItemsPaginator {
 	return &ListDictionaryItemsPaginator{
 		client:  c,
 		options: i,
