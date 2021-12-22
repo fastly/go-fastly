@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/0hSVcwLyhP24GhIMGcOqlw/dictionary/3pTsXixukWxd2SGBzWnpxK/item/test-dictionary-item
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/70Xeh5hM2FIvR5UG41Ay62/item/test-dictionary-item
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find DictionaryItem ''{ dictionary_id
-      =\u003e 3pTsXixukWxd2SGBzWnpxK, item_key =\u003e test-dictionary-item, service_id
-      =\u003e 0hSVcwLyhP24GhIMGcOqlw }''"}'
+      =\u003e 70Xeh5hM2FIvR5UG41Ay62, item_key =\u003e test-dictionary-item, service_id
+      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:13:56 GMT
+      - Wed, 22 Dec 2021 03:08:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "4983"
+      - "4985"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1640145600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4148-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11927-TYO
       X-Timer:
-      - S1635956036.189657,VS0,VE194
+      - S1640142497.167518,VS0,VE359
     status: 404 Not Found
     code: 404
     duration: ""

@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/0hSVcwLyhP24GhIMGcOqlw/dictionary/3pTsXixukWxd2SGBzWnpxK/item/test-dictionary-item
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/70Xeh5hM2FIvR5UG41Ay62/item/test-dictionary-item
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:13:56 GMT
+      - Wed, 22 Dec 2021 03:08:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "4984"
+      - "4986"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1640145600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4148-MAN
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11927-TYO
       X-Timer:
-      - S1635956036.966212,VS0,VE197
+      - S1640142497.821999,VS0,VE272
     status: 200 OK
     code: 200
     duration: ""

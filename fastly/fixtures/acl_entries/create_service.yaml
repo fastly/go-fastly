@@ -14,11 +14,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_ACLEntries","type":"vcl","paused":false,"publish_key":"","id":"5XPrLhrnNoOk0tcpWh1fpS","versions":[{"comment":"","staging":false,"service_id":"5XPrLhrnNoOk0tcpWh1fpS","deployed":false,"testing":false,"active":false,"number":1,"deleted_at":null,"created_at":"2021-11-03T14:30:47Z","locked":false,"updated_at":"2021-11-03T14:30:47Z"}],"deleted_at":null,"created_at":"2021-11-03T14:30:47Z","updated_at":"2021-11-03T14:30:47Z"}'
+    body: '{"customer_id":"2mEgzQsbxIHPAkmXcKCBG5","comment":"go-fastly client test","name":"test_service_ACLEntries","type":"vcl","created_at":"2021-12-22T03:02:12Z","deleted_at":null,"publish_key":"","id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-12-22T03:02:12Z","versions":[{"service_id":"7i6HN3TK9wS159v2gPAZ8A","deployed":false,"active":false,"deleted_at":null,"locked":false,"created_at":"2021-12-22T03:02:12Z","updated_at":"2021-12-22T03:02:12Z","testing":false,"comment":"","number":1,"staging":false}],"paused":false}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 14:30:47 GMT
+      - Wed, 22 Dec 2021 03:02:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "4993"
+      - "4999"
       Fastly-Ratelimit-Reset:
-      - "1635951600"
+      - "1640145600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11945-TYO
       X-Timer:
-      - S1635949847.308442,VS0,VE513
+      - S1640142133.512806,VS0,VE368
     status: 200 OK
     code: 200
     duration: ""
