@@ -118,9 +118,9 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntrie
 	}
 
 	var perPage int
+	const maxPerPage = 100
 	if i.PerPage <= 0 {
-		// Max is 100
-		perPage = 100
+		perPage = maxPerPage
 	} else {
 		perPage = i.PerPage
 	}
@@ -147,24 +147,25 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntrie
 	}
 
 	resp, err := c.Get(path, requestOptions)
-	if err == nil {
-		for _, l := range link.ParseResponse(resp) {
-			// indicates the Link response header contained the next page instruction
-			if l.Rel == "next" {
-				u, _ := url.Parse(l.URI)
-				query := u.Query()
-				p.NextPage, _ = strconv.Atoi(query["page"][0])
-			}
-			// indicates the Link response header contained the last page instruction
-			if l.Rel == "last" {
-				u, _ := url.Parse(l.URI)
-				query := u.Query()
-				p.LastPage, _ = strconv.Atoi(query["page"][0])
-			}
-		}
-	} else {
+	if err != nil {
 		return nil, err
 	}
+
+	for _, l := range link.ParseResponse(resp) {
+		// indicates the Link response header contained the next page instruction
+		if l.Rel == "next" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.NextPage, _ = strconv.Atoi(query["page"][0])
+		}
+		// indicates the Link response header contained the last page instruction
+		if l.Rel == "last" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.LastPage, _ = strconv.Atoi(query["page"][0])
+		}
+	}
+
 	p.consumed = true
 
 	var es []*ACLEntry
