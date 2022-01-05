@@ -21,14 +21,14 @@ func ExampleClient_NewListDictionaryItemsPaginator() {
 		},
 	)
 
-	var es []*fastly.DictionaryItem
+	var ds []*fastly.DictionaryItem
 	for paginator.HasNext() {
 		data, err := paginator.GetNext()
 		if err != nil {
 			break
 		}
-		es = append(es, data...)
+		ds = append(ds, data...)
 	}
 
-	fmt.Printf("retrieved %d Dictionary items\n", len(es))
+	fmt.Printf("retrieved %d Dictionary items\n", len(ds))
 }
