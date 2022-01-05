@@ -1,0 +1,39 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/waf/rules?filter%5Bmodsec_rule_id%5D%5Bin%5D=1010060%2C1010070&page%5Bnumber%5D=1&page%5Bsize%5D=100
+    method: GET
+  response:
+    body: '{"data":[{"id":"62NGF4KWy1v17yyV1vmPdb","type":"waf_rule","attributes":{"modsec_rule_id":1010070,"publisher":"owasp","type":"threshold"}},{"id":"5o7EaPCRlKoEPZB7ziSXYV","type":"waf_rule","attributes":{"modsec_rule_id":1010060,"publisher":"owasp","type":"threshold"}}],"links":{"last":"https://api.fastly.com/waf/rules?filter[modsec_rule_id][in]=1010060,1010070\u0026page[number]=1\u0026page[size]=100","first":"https://api.fastly.com/waf/rules?filter[modsec_rule_id][in]=1010060,1010070\u0026page[number]=1\u0026page[size]=100"},"meta":{"current_page":1,"per_page":100,"record_count":2,"total_pages":1}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "603"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Wed, 05 Jan 2022 11:16:49 GMT
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11953-TYO
+      X-Timer:
+      - S1641381410.693492,VS0,VE246
+    status: 200 OK
+    code: 200
+    duration: ""
