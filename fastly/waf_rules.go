@@ -49,7 +49,10 @@ type ListWAFRulesInput struct {
 	FilterTagNames []string
 	// Limit the returned rules to a set by publishers.
 	FilterPublishers []string
+	// Limit the returned rules to a set by modsecurity rule IDs.
+	FilterModSecIDs []int
 	// Excludes individual rules by modsecurity rule IDs.
+	// TODO: fix typo ExcludeMocSecIDs -> ExcludeModSecIDs
 	ExcludeMocSecIDs []int
 	// Limit the number of returned rules.
 	PageSize int
@@ -65,6 +68,7 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 	pairings := map[string]interface{}{
 		"filter[waf_tags][name][in]":  i.FilterTagNames,
 		"filter[publisher][in]":       i.FilterPublishers,
+		"filter[modsec_rule_id][in]":  i.FilterModSecIDs,
 		"filter[modsec_rule_id][not]": i.ExcludeMocSecIDs,
 		"page[size]":                  i.PageSize,
 		"page[number]":                i.PageNumber,
@@ -142,6 +146,8 @@ type ListAllWAFRulesInput struct {
 	FilterTagNames []string
 	// Limit the returned rules to a set by publishers.
 	FilterPublishers []string
+	// Limit the returned rules to a set by modsecurity rule IDs.
+	FilterModSecIDs []int
 	// Excludes individual rules by modsecurity rule IDs.
 	ExcludeMocSecIDs []int
 	// Include relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
@@ -158,6 +164,7 @@ func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, err
 		r, err := c.ListWAFRules(&ListWAFRulesInput{
 			FilterTagNames:   i.FilterTagNames,
 			FilterPublishers: i.FilterPublishers,
+			FilterModSecIDs:  i.FilterModSecIDs,
 			ExcludeMocSecIDs: i.ExcludeMocSecIDs,
 			Include:          i.Include,
 			PageNumber:       currentPage,
