@@ -2,8 +2,12 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"sort"
+	"strconv"
 	"time"
+
+	"github.com/peterhellberg/link"
 )
 
 type ACLEntry struct {
@@ -34,6 +38,10 @@ func (s entriesById) Less(i, j int) bool {
 type ListACLEntriesInput struct {
 	ServiceID string
 	ACLID     string
+	Direction string
+	PerPage   int
+	Page      int
+	Sort      string
 }
 
 // ListACLEntries return a list of entries for an ACL
@@ -52,6 +60,113 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
+
+	var es []*ACLEntry
+	if err := decodeBodyMap(resp.Body, &es); err != nil {
+		return nil, err
+	}
+
+	sort.Stable(entriesById(es))
+
+	return es, nil
+}
+
+type ListAclEntriesPaginator struct {
+	consumed    bool
+	CurrentPage int
+	NextPage    int
+	LastPage    int
+	client      *Client
+	options     *ListACLEntriesInput
+}
+
+// HasNext returns a boolean indicating whether more pages are available
+func (p *ListAclEntriesPaginator) HasNext() bool {
+	return !p.consumed || p.Remaining() != 0
+}
+
+// Remaining returns the remaining page count
+func (p *ListAclEntriesPaginator) Remaining() int {
+	if p.LastPage == 0 {
+		return 0
+	}
+	return p.LastPage - p.CurrentPage
+}
+
+// GetNext retrieves data in the next page
+func (p *ListAclEntriesPaginator) GetNext() ([]*ACLEntry, error) {
+	return p.client.listACLEntriesWithPage(p.options, p)
+}
+
+// NewListACLEntriesPaginator returns a new ListAclEntriesPaginator
+func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) *ListAclEntriesPaginator {
+	return &ListAclEntriesPaginator{
+		client:  c,
+		options: i,
+	}
+}
+
+// listACLEntriesWithPage return a list of entries for an ACL of a given page
+func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntriesPaginator) ([]*ACLEntry, error) {
+
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+
+	if i.ACLID == "" {
+		return nil, ErrMissingACLID
+	}
+
+	var perPage int
+	const maxPerPage = 100
+	if i.PerPage <= 0 {
+		perPage = maxPerPage
+	} else {
+		perPage = i.PerPage
+	}
+
+	if i.Page <= 0 && p.CurrentPage == 0 {
+		p.CurrentPage = 1
+	} else {
+		p.CurrentPage = p.CurrentPage + 1
+	}
+
+	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
+	requestOptions := &RequestOptions{
+		Params: map[string]string{
+			"per_page": strconv.Itoa(perPage),
+			"page":     strconv.Itoa(p.CurrentPage),
+		},
+	}
+
+	if i.Direction != "" {
+		requestOptions.Params["direction"] = i.Direction
+	}
+	if i.Sort != "" {
+		requestOptions.Params["sort"] = i.Sort
+	}
+
+	resp, err := c.Get(path, requestOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, l := range link.ParseResponse(resp) {
+		// indicates the Link response header contained the next page instruction
+		if l.Rel == "next" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.NextPage, _ = strconv.Atoi(query["page"][0])
+		}
+		// indicates the Link response header contained the last page instruction
+		if l.Rel == "last" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.LastPage, _ = strconv.Atoi(query["page"][0])
+		}
+	}
+
+	p.consumed = true
 
 	var es []*ACLEntry
 	if err := decodeBodyMap(resp.Body, &es); err != nil {

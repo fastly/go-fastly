@@ -4,7 +4,10 @@ import (
 	"fmt"
 	"net/url"
 	"sort"
+	"strconv"
 	"time"
+
+	"github.com/peterhellberg/link"
 )
 
 // DictionaryItem represents a dictionary item response from the Fastly API.
@@ -36,10 +39,13 @@ type ListDictionaryItemsInput struct {
 
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
+	Direction    string
+	PerPage      int
+	Page         int
+	Sort         string
 }
 
-// ListDictionaryItems returns the list of dictionary items for the
-// configuration version.
+// ListDictionaryItems returns a list of items for a dictionary
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -60,6 +66,111 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 		return nil, err
 	}
 	sort.Stable(dictionaryItemsByKey(bs))
+	return bs, nil
+}
+
+type ListDictionaryItemsPaginator struct {
+	consumed    bool
+	CurrentPage int
+	NextPage    int
+	LastPage    int
+	client      *Client
+	options     *ListDictionaryItemsInput
+}
+
+// HasNext returns a boolean indicating whether more pages are available
+func (p *ListDictionaryItemsPaginator) HasNext() bool {
+	return !p.consumed || p.Remaining() != 0
+}
+
+// Remaining returns the remaining page count
+func (p *ListDictionaryItemsPaginator) Remaining() int {
+	if p.LastPage == 0 {
+		return 0
+	}
+	return p.LastPage - p.CurrentPage
+}
+
+// GetNext retrieves data in the next page
+func (p *ListDictionaryItemsPaginator) GetNext() ([]*DictionaryItem, error) {
+	return p.client.listDictionaryItemsWithPage(p.options, p)
+}
+
+// NewListDictionaryItemsPaginator returns a new ListDictionaryItemsPaginator
+func (c *Client) NewListDictionaryItemsPaginator(i *ListDictionaryItemsInput) *ListDictionaryItemsPaginator {
+	return &ListDictionaryItemsPaginator{
+		client:  c,
+		options: i,
+	}
+}
+
+// listDictionaryItemsWithPage returns a list of items for a dictionary of a given page
+func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *ListDictionaryItemsPaginator) ([]*DictionaryItem, error) {
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+
+	if i.DictionaryID == "" {
+		return nil, ErrMissingDictionaryID
+	}
+
+	var perPage int
+	const maxPerPage = 100
+	if i.PerPage <= 0 {
+		perPage = maxPerPage
+	} else {
+		perPage = i.PerPage
+	}
+
+	if i.Page <= 0 && p.CurrentPage == 0 {
+		p.CurrentPage = 1
+	} else {
+		p.CurrentPage = p.CurrentPage + 1
+	}
+
+	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
+	requestOptions := &RequestOptions{
+		Params: map[string]string{
+			"per_page": strconv.Itoa(perPage),
+			"page":     strconv.Itoa(p.CurrentPage),
+		},
+	}
+
+	if i.Direction != "" {
+		requestOptions.Params["direction"] = i.Direction
+	}
+	if i.Sort != "" {
+		requestOptions.Params["sort"] = i.Sort
+	}
+
+	resp, err := c.Get(path, requestOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, l := range link.ParseResponse(resp) {
+		// indicates the Link response header contained the next page instruction
+		if l.Rel == "next" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.NextPage, _ = strconv.Atoi(query["page"][0])
+		}
+		// indicates the Link response header contained the last page instruction
+		if l.Rel == "last" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.LastPage, _ = strconv.Atoi(query["page"][0])
+		}
+	}
+
+	p.consumed = true
+
+	var bs []*DictionaryItem
+	if err := decodeBodyMap(resp.Body, &bs); err != nil {
+		return nil, err
+	}
+	sort.Stable(dictionaryItemsByKey(bs))
+
 	return bs, nil
 }
 

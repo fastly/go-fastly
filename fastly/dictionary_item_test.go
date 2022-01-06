@@ -65,6 +65,28 @@ func TestClient_DictionaryItems(t *testing.T) {
 		t.Errorf("bad dictionary items: %v", dictionaryItems)
 	}
 
+	// List with paginator
+	var dictionaryItems2 []*DictionaryItem
+	var paginator *ListDictionaryItemsPaginator
+	record(t, fixtureBase+"list2", func(c *Client) {
+		paginator = c.NewListDictionaryItemsPaginator(&ListDictionaryItemsInput{
+			ServiceID:    testService.ID,
+			DictionaryID: testDictionary.ID,
+		})
+		dictionaryItems2, err = paginator.GetNext()
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(dictionaryItems2) != 1 {
+		t.Errorf("Bad items: %v", dictionaryItems2)
+	}
+
+	if paginator.HasNext() {
+		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())
+	}
+
 	// Get
 	var retrievedDictionaryItem *DictionaryItem
 	record(t, fixtureBase+"get", func(c *Client) {

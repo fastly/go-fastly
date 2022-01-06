@@ -2,19 +2,16 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A
-    form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+    body: ""
+    form: {}
     headers:
-      Content-Type:
-      - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
-    method: POST
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/12pStJK7x7jIrG6SGYMaUb/entries?page=1&per_page=100
+    method: GET
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":2}'
+    body: '[{"subnet":8,"id":"1uf5l6laVrMWujt7AZAI6c","updated_at":"2021-12-22T03:02:13Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","acl_id":"12pStJK7x7jIrG6SGYMaUb","ip":"10.0.0.3","negated":"0","created_at":"2021-12-22T03:02:13Z","comment":"test
+      entry"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Dec 2021 03:08:14 GMT
-      Fastly-Ratelimit-Remaining:
-      - "4990"
-      Fastly-Ratelimit-Reset:
-      - "1640145600"
+      - Wed, 22 Dec 2021 03:02:14 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +34,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11927-TYO
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11945-TYO
       X-Timer:
-      - S1640142495.714483,VS0,VE281
+      - S1640142134.993590,VS0,VE234
     status: 200 OK
     code: 200
     duration: ""

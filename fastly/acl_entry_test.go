@@ -66,6 +66,28 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Errorf("Bad entries: %v", es)
 	}
 
+	// List with paginator
+	var es2 []*ACLEntry
+	var paginator *ListAclEntriesPaginator
+	record(t, fixtureBase+"list2", func(c *Client) {
+		paginator = c.NewListACLEntriesPaginator(&ListACLEntriesInput{
+			ServiceID: testService.ID,
+			ACLID:     testACL.ID,
+		})
+		es2, err = paginator.GetNext()
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(es2) != 1 {
+		t.Errorf("Bad entries: %v", es)
+	}
+
+	if paginator.HasNext() {
+		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())
+	}
+
 	// Get
 	var ne *ACLEntry
 	record(t, fixtureBase+"get", func(c *Client) {
