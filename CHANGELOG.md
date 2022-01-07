@@ -1,5 +1,15 @@
 # Changelog
 
+## [v5.2.0](https://github.com/fastly/go-fastly/releases/tag/v5.2.0) (2022-01-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.3...v5.2.0)
+
+**Enhancements:**
+
+- Bump deps to side-step `gopkg.in/yaml.v2` security vulnerability [#323](https://github.com/fastly/go-fastly/pull/323)
+- Add support for `modsec_rule_id` filter parameter [#322](https://github.com/fastly/go-fastly/pull/322)
+- Add support for Link header pagination [#321](https://github.com/fastly/go-fastly/pull/321)
+
 ## [v5.1.3](https://github.com/fastly/go-fastly/releases/tag/v5.1.3) (2021-12-03)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.2...v5.1.3)
