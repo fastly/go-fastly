@@ -8,7 +8,7 @@ require (
 	github.com/mitchellh/mapstructure v0.0.0-20170523030023-d0303fe80992
 	github.com/peterhellberg/link v1.1.0
 	golang.org/x/tools v0.0.0-20200624163319-25775e59acb7
-	gopkg.in/yaml.v2 v2.0.0-20170812160011-eb3733d160e7 // indirect
+	gopkg.in/yaml.v2 v2.2.8 // indirect
 	honnef.co/go/tools v0.0.1-2020.1.4
 )
 
