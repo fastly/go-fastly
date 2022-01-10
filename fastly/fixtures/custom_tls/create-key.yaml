@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":{"type":"","attributes":{"key":"-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD6HXcEGvbQyAMI\ndqNDPjSgZd65dq4DKImZ1WXsdGMydEcGUlenDes12YsDU64E0mF3epf871LBmnHG\nJFF0/XRxvEHdY+BSbzUBmAtvKAW7dlmSNCiINWZDnVZ41Alvr2e9rU6qACuICkuK\nEkWbpKPUCt58R+DgsUdr1ma27/HSyalvtQbA6zmTE8bIkTiCnPHFpx5Dr1JOlXac\ngrRfJsISfgg5X3K81cUSjeT4aaSVSGk8s+J4oOKz1BUBQgSra5yPBvbY2a+tUmXF\nb1o1z8/Mh6cjnoRG3VrZVR+0sp8vaYou7yRYYFi6gPqBjg7BUJS/rmzjkvYqNP/o\nS/5JCEYFAgMBAAECggEACmZRPY11d8bpQV/VeAVNIOI7eZCyuZTk682QuF06hq2J\nCn1AAcU1Y37RJelD0hWBUft5+F1nHn+yfV+jN28WeWgvgOoXOLZBCPjueMe8PUg1\nfzvF96vovaT8JHgEkG1FrgBXxf/Nz5FGBM6vsEIPQdDV4WsHsbANXTGEAdVGQ9Jj\nuxZlHHd45BJcxpJBuRC1XxVMf82YpiQsO/UZ4eHNH0eWUDAIY4xUw8nzPu8P2iQT\nliaZ4tILqHdBc1ClHnr2IapVnADTe1Mi2WFROnmNraO1bINCtne4Cti+M2dEEmap\np9Yz9eqesDITSmZxLnXENlk0eiXcwk3Fw7qdK4jTvQKBgQD7gVAxqT/Xw6ChoDza\n6NLewETU5KJVDOFitAyIHT4MgnZeMKoYe+/4KdFO7cr4HXGVWalz6RFylyk1+7U/\nrsJaJTO/uFUcdWHZIWV5TFMIBcA82uoQDs9EeL+0FDETqhOd1Jf9VHfnRkmflTpL\neGeVsLVQszkDUbUacsHKvYWz+wKBgQD+lcq+dvgB73YSX/Eh0k2+fXn//Z7v8O1x\nXv0Xx2887gCQCEzU5Bs5x7HfhHAAz8dCKCqmy1DTXR8u0j85X3vTl+iD2Sw4pDM7\n5MBDMrDnyyh0ULhI14hzJEqKtYGAF0HQT3TDnDtvB1syS1Sly5ert/Db/cbu+nUu\nIBu7SA7N/wKBgQDeINXNJqhmTjdeyIE27o7fgXzJcq0U5O1jGZY/2WPl9IvKoLx6\nJ2xIB9b/GPI8tPSObcRFxUFNrcgOD6OC/TxWFalg2NMC8YFcHizbNtfWrA2fMdGs\nIQhadzMJPxQhRANTUGJ0sde8gc2gjlIQOeVyxcE95yyhi9ah51zVTRH7ZQKBgGTv\n/vKFOM+LocSnRXOjbi+YkEZuyBVZ8MqCXtaOvAvsUUzJ/axqxGCkTGHSoJWxy87v\nHfoDoogq47IsqeSVdwLtt8KO2HmcoLOefpwl/P3qDqAPYQGAcxkzylo0nKOslOuC\nlUj5KJdc00udknIpxnjO9TBD7hvSMaOYF2apqzUBAoGBAMOYOeRROMRMCB7mMI05\nYTD5UxMadsHBaAs0Ht5/1wndoi5RLo43aHVmD6PQz2OrjUGpYspaIupU6x9Xrl+N\ntl2/V0L+m9maiI3UAUj6SOT3kg9daSKHVpZ2QDT/sKwnu0Bm/DJqOy+wqBV0ANxi\nzBWEPScibRjZpxU0J/zwSaaN\n-----END PRIVATE KEY-----","name":"My private key"}}}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/tls/private_keys
+    method: POST
+  response:
+    body: '{"data":{"id":"3SSWyx5lOSiqBZvl10vamP","type":"tls_private_key","attributes":{"key_length":2048,"key_type":"RSA","name":"My
+      private key","created_at":null,"replace":false,"public_key_sha1":"75cdebb915f1bd7741b6530c0cd63783daa52e8f"}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "234"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Mon, 10 Jan 2022 07:58:43 GMT
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11926-TYO
+      X-Timer:
+      - S1641801523.468587,VS0,VE362
+    status: 201 Created
+    code: 201
+    duration: ""
