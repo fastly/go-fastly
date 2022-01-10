@@ -53,6 +53,26 @@ func TestClient_Services(t *testing.T) {
 		t.Errorf("bad services: %v", ss)
 	}
 
+	// List with paginator
+	var ss2 []*Service
+	var paginator *ListServicesPaginator
+	record(t, "services/list_paginator", func(c *Client) {
+		paginator = c.NewListServicesPaginator(
+			&ListServicesInput{
+				Direction: "descend",
+				Sort:      "created",
+				PerPage:   1,
+			},
+		)
+		ss2, err = paginator.GetNext()
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ss2) != 1 {
+		t.Errorf("expected 1 service but got: %d", len(ss2))
+	}
+
 	// Get
 	var ns *Service
 	record(t, "services/get", func(c *Client) {

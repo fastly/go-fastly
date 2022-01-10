@@ -2,8 +2,12 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"sort"
+	"strconv"
 	"time"
+
+	"github.com/peterhellberg/link"
 )
 
 // Service represents a single service for the Fastly account.
@@ -57,7 +61,12 @@ func (s servicesByName) Less(i, j int) bool {
 }
 
 // ListServicesInput is used as input to the ListServices function.
-type ListServicesInput struct{}
+type ListServicesInput struct {
+	Direction string
+	PerPage   int
+	Page      int
+	Sort      string
+}
 
 // ListServices returns the full list of services for the current account.
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
@@ -71,6 +80,103 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 		return nil, err
 	}
 	sort.Stable(servicesByName(s))
+	return s, nil
+}
+
+type ListServicesPaginator struct {
+	consumed    bool
+	CurrentPage int
+	NextPage    int
+	LastPage    int
+	client      *Client
+	options     *ListServicesInput
+}
+
+// HasNext returns a boolean indicating whether more pages are available
+func (p *ListServicesPaginator) HasNext() bool {
+	return !p.consumed || p.Remaining() != 0
+}
+
+// Remaining returns the remaining page count
+func (p *ListServicesPaginator) Remaining() int {
+	if p.LastPage == 0 {
+		return 0
+	}
+	return p.LastPage - p.CurrentPage
+}
+
+// GetNext retrieves data in the next page
+func (p *ListServicesPaginator) GetNext() ([]*Service, error) {
+	return p.client.listServicesWithPage(p.options, p)
+}
+
+// NewListServicesPaginator returns a new ListServicesPaginator
+func (c *Client) NewListServicesPaginator(i *ListServicesInput) *ListServicesPaginator {
+	return &ListServicesPaginator{
+		client:  c,
+		options: i,
+	}
+}
+
+// listServicesWithPage return a list of services
+func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPaginator) ([]*Service, error) {
+	var perPage int
+	const maxPerPage = 100
+	if i.PerPage <= 0 {
+		perPage = maxPerPage
+	} else {
+		perPage = i.PerPage
+	}
+
+	if i.Page <= 0 && p.CurrentPage == 0 {
+		p.CurrentPage = 1
+	} else {
+		p.CurrentPage = p.CurrentPage + 1
+	}
+
+	requestOptions := &RequestOptions{
+		Params: map[string]string{
+			"per_page": strconv.Itoa(perPage),
+			"page":     strconv.Itoa(p.CurrentPage),
+		},
+	}
+
+	if i.Direction != "" {
+		requestOptions.Params["direction"] = i.Direction
+	}
+	if i.Sort != "" {
+		requestOptions.Params["sort"] = i.Sort
+	}
+
+	resp, err := c.Get("/service", requestOptions)
+	if err != nil {
+		return nil, err
+	}
+
+	for _, l := range link.ParseResponse(resp) {
+		// indicates the Link response header contained the next page instruction
+		if l.Rel == "next" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.NextPage, _ = strconv.Atoi(query["page"][0])
+		}
+		// indicates the Link response header contained the last page instruction
+		if l.Rel == "last" {
+			u, _ := url.Parse(l.URI)
+			query := u.Query()
+			p.LastPage, _ = strconv.Atoi(query["page"][0])
+		}
+	}
+
+	p.consumed = true
+
+	var s []*Service
+	if err := decodeBodyMap(resp.Body, &s); err != nil {
+		return nil, err
+	}
+
+	sort.Stable(servicesByName(s))
+
 	return s, nil
 }
 
