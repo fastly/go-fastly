@@ -1,5 +1,13 @@
 # Changelog
 
+## [v5.3.0](https://github.com/fastly/go-fastly/releases/tag/v5.3.0) (2022-01-10)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v5.2.0...v5.3.0)
+
+**Enhancements:**
+
+- Add pagination support for `GET /service` endpoint [#326](https://github.com/fastly/go-fastly/pull/326)
+
 ## [v5.2.0](https://github.com/fastly/go-fastly/releases/tag/v5.2.0) (2022-01-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v5.1.3...v5.2.0)
