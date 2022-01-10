@@ -20,12 +20,17 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	fixtureBase := "tls/"
 
+	// prepare test key
+	_, key, err := buildPrivateKey()
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// Create
-	var err error
 	var pk *PrivateKey
 	record(t, fixtureBase+"create", func(c *Client) {
 		pk, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
-			Key:  "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
+			Key:  key,
 			Name: "My private key",
 		})
 	})
@@ -35,10 +40,8 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeletePrivateKey(&DeletePrivateKeyInput{
-				ID: pk.ID,
-			})
+		testClient.DeletePrivateKey(&DeletePrivateKeyInput{
+			ID: pk.ID,
 		})
 	}()
 
@@ -72,61 +75,6 @@ func TestClient_PrivateKey(t *testing.T) {
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeletePrivateKey(&DeletePrivateKeyInput{
 			ID: pk.ID,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestClient_ListPrivateKeys_validation(t *testing.T) {
-	t.Parallel()
-
-	var err error
-	record(t, "tls/list", func(c *Client) {
-		_, err = c.ListPrivateKeys(&ListPrivateKeysInput{})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestClient_GetPrivateKey_validation(t *testing.T) {
-	t.Parallel()
-
-	var err error
-	record(t, "tls/get", func(c *Client) {
-		_, err = c.GetPrivateKey(&GetPrivateKeyInput{
-			ID: "PRIVATE_KEY_ID",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestClient_CreatePrivateKey_validation(t *testing.T) {
-	t.Parallel()
-
-	var err error
-	record(t, "tls/create", func(c *Client) {
-		_, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
-			Key:  "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n",
-			Name: "My private key",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func TestClient_DeletePrivateKey_validation(t *testing.T) {
-	t.Parallel()
-
-	var err error
-	record(t, "tls/delete", func(c *Client) {
-		err = c.DeletePrivateKey(&DeletePrivateKeyInput{
-			ID: "PRIVATE_KEY_ID",
 		})
 	})
 	if err != nil {
