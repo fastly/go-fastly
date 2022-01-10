@@ -134,16 +134,6 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "custom_tls/create", func(c *Client) {
-		_, err = c.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
-			CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-			Name:     "My certificate",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		Name: "My certificate",
 	})
@@ -155,17 +145,7 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 func TestClient_DeleteCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
-	var err error
-	record(t, "custom_tls/delete", func(c *Client) {
-		err = c.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
-			ID: "CERTIFICATE_ID",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	err = testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
+	err := testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
@@ -187,15 +167,6 @@ func TestClient_GetCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "custom_tls/get", func(c *Client) {
-		_, err = c.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{
-			ID: "CERTIFICATE_ID",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	_, err = testClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
@@ -206,17 +177,6 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "custom_tls/update", func(c *Client) {
-		_, err = c.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
-			ID:       "CERTIFICATE_ID",
-			CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-			Name:     "My certificate",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	_, err = testClient.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 		Name:     "My certificate",
