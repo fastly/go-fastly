@@ -1,6 +1,19 @@
 package fastly
 
-import "testing"
+import (
+	"crypto/rand"
+	"crypto/rsa"
+	"crypto/x509"
+	"crypto/x509/pkix"
+	"encoding/pem"
+	"fmt"
+	"math/big"
+	"testing"
+
+	rnd "math/rand"
+	"strings"
+	"time"
+)
 
 func TestClient_PrivateKey(t *testing.T) {
 	t.Parallel()
@@ -119,4 +132,67 @@ func TestClient_DeletePrivateKey_validation(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+}
+
+func buildPrivateKey() (*rsa.PrivateKey, string, error) {
+	key, err := rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		return nil, "", fmt.Errorf("failed to generate private key: %s", err)
+	}
+	privKeyBytes, err := x509.MarshalPKCS8PrivateKey(key)
+	if err != nil {
+		return nil, "", fmt.Errorf("unable to marshal private key: %v", err)
+	}
+	keyBlock := &pem.Block{
+		Type:  "PRIVATE KEY",
+		Bytes: privKeyBytes,
+	}
+	return key, strings.TrimSpace(string(pem.EncodeToMemory(keyBlock))), nil
+}
+
+func buildCertificate(privateKey *rsa.PrivateKey, domains ...string) (string, error) {
+	now := time.Now()
+	serialNumber := new(big.Int).SetInt64(rnd.Int63())
+	template := &x509.Certificate{
+		SerialNumber: serialNumber,
+		Subject: pkix.Name{
+			SerialNumber: fmt.Sprintf("%d", serialNumber),
+		},
+		NotBefore:             now,
+		NotAfter:              now.Add(24 * 90 * time.Hour),
+		KeyUsage:              x509.KeyUsageCertSign,
+		ExtKeyUsage:           []x509.ExtKeyUsage{x509.ExtKeyUsageServerAuth},
+		BasicConstraintsValid: true,
+		SignatureAlgorithm:    x509.SHA256WithRSA,
+		IsCA:                  true,
+		DNSNames:              domains,
+	}
+
+	if len(domains) != 0 {
+		template.Subject.CommonName = domains[0]
+	}
+
+	c, err := formatCertificate(template, template, &privateKey.PublicKey, privateKey)
+	if err != nil {
+		return "", err
+	}
+	return c, nil
+}
+
+func formatCertificate(certificate *x509.Certificate, parent *x509.Certificate, publicKey *rsa.PublicKey, privateKey *rsa.PrivateKey) (string, error) {
+	derBytes, err := x509.CreateCertificate(
+		rand.Reader,
+		certificate,
+		parent,
+		publicKey,
+		privateKey,
+	)
+	if err != nil {
+		return "", err
+	}
+	certBlock := &pem.Block{
+		Type:  "CERTIFICATE",
+		Bytes: derBytes,
+	}
+	return strings.TrimSpace(string(pem.EncodeToMemory(certBlock))), nil
 }
