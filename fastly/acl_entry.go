@@ -98,8 +98,8 @@ func (p *ListAclEntriesPaginator) GetNext() ([]*ACLEntry, error) {
 	return p.client.listACLEntriesWithPage(p.options, p)
 }
 
-// NewListACLEntriesPaginator returns a new ListAclEntriesPaginator
-func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) *ListAclEntriesPaginator {
+// NewListACLEntriesPaginator returns a new paginator
+func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) PaginatorACLEntries {
 	return &ListAclEntriesPaginator{
 		client:  c,
 		options: i,
