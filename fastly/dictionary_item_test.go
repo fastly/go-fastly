@@ -67,7 +67,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	// List with paginator
 	var dictionaryItems2 []*DictionaryItem
-	var paginator *ListDictionaryItemsPaginator
+	var paginator PaginatorDictionaryItems
 	record(t, fixtureBase+"list2", func(c *Client) {
 		paginator = c.NewListDictionaryItemsPaginator(&ListDictionaryItemsInput{
 			ServiceID:    testService.ID,

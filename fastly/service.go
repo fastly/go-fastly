@@ -110,8 +110,8 @@ func (p *ListServicesPaginator) GetNext() ([]*Service, error) {
 	return p.client.listServicesWithPage(p.options, p)
 }
 
-// NewListServicesPaginator returns a new ListServicesPaginator
-func (c *Client) NewListServicesPaginator(i *ListServicesInput) *ListServicesPaginator {
+// NewListServicesPaginator returns a new paginator
+func (c *Client) NewListServicesPaginator(i *ListServicesInput) PaginatorServices {
 	return &ListServicesPaginator{
 		client:  c,
 		options: i,

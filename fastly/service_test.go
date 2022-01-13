@@ -55,7 +55,7 @@ func TestClient_Services(t *testing.T) {
 
 	// List with paginator
 	var ss2 []*Service
-	var paginator *ListServicesPaginator
+	var paginator PaginatorServices
 	record(t, "services/list_paginator", func(c *Client) {
 		paginator = c.NewListServicesPaginator(
 			&ListServicesInput{
