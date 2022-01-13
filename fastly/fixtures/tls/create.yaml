@@ -2,49 +2,44 @@
 version: 1
 interactions:
 - request:
-    body: '{"Data":{"Type":"tls_private_key","Attributes":{"Key":"-----BEGIN PRIVATE
-      KEY-----\n...\n-----END PRIVATE KEY-----\n","Name":"My private key"}}}'
+    body: |
+      {"data":{"type":"","attributes":{"key":"-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDc0cjRpy5tGHCb\nooGWkSGsNUAz5Jtt+WKKYL00rm4gXksVWKdTZ0WygI0Shoip6yD11GwxMAs6In0f\nR0+3vAUFYmgJllufLjN9rqDlkcsolLvzXe99k9JY/ZZr2Urwd3fifYRPOHrsMLe9\nn035x3XkGfvnl8kNz5fvLohiZNkD202zEo9i7XJyCeGtz6Xbu+OSk7EFpBBfJFWI\nR4dLITupEjllXmBiapSF0+O5lk40/EWyzCNQBdHj4s9Tk1l/EPaBoViKqlnp92vI\nuzzGpva94eq4t1I5ani6Ouht86wAR/rDN2fxn47lcuHywkCBbHlfEiGR5I2rWqaY\n2Xq7ECBdAgMBAAECggEBALTCxjFZOZf0ubmtfYdTpszhinzwVovf6dp89mV5pIy6\no5wFxnNvxo4ozVKs7pKp94FFMovRWF9ufB5uscMmFrYhqCiw/K+BkoT/vpYukq/V\nkUXXT4TszPQsIkaGyeGu6mRtezGeeoF+H+sJzTr7HHZtDti2V88GcMlKvjpNc5jD\nF8M0e0mmEUpEHD1qTUgPlegJsrzn/OgtFADJwKhFAIHZMwoqnjzLfrkJXwxkc97D\n7+qkkKNx0Q2qQq7/prHjDcoNSrv2Z4HlHV6uSzhLGfo9zf4gEFWEjDkQk5aE+8zT\n19HFcpjUMnr05OKAKm4Egc+V1dDrecXGYz/IUy8gigECgYEA7w5qwM90QTnEwESP\nIvP84i2T6wnTO4DdeEE9wj1ktCeJC+ilXIsYw+OqAjtSuv9sgeJgLDyoISlTmsue\nN5Ome4taQWRUwm4qFPrc10/hGGjUZvKgZ09l4jdt3V9nhxcisfDBRSiIAVEVwxZP\nTxKwmRThgzEUUj0FZHrz+QUV6bUCgYEA7Hh3j6xH0XnUGiaRUIDXhfowIKfHsvfh\n8tF4eDyC/wlkRwxY7VvkbW8MEOD3myJcT8UGNraDYrO11h5ubLwb6w6Uj/eG0hSX\n+WkbqGQdDH+K12VdKqOtPFqA8Ez14JG6JNWuYnghCvMUDgdo4S3D+FIEdn3R7+pS\n7LqCsjvM5QkCgYBqSurEmHmElv8YzmMmk34Zw1JF67R0fLP8yGWBfHLOd9XD6cm9\nAEwerZfmLiJ26yOADPveL4pCVHHMHkVXSNt5i1iyQr49RWaItZKEWgwoIlRvAeq4\nhOE0WJkNGWKa+np+zCHjckYm77rRZ5YT/qdvKY2sG6KBfohrSRA55Tz9EQKBgQDc\n6mZ4WPD3aCOZErLrTJMM3YEc4OIV9rKmEL/FRHL1JKcEISrrBNBQ1E+nbSSlT+KB\nu4Vkk/oGufGEygVLnClQ3dw463yOwyJ/pYxrMqxYwsbJGC+D6Emtere+x4dld385\nbk9uOuBTxGfV+2ImDIVqdeUpdb4trvItqsjzDh8LUQKBgCJ1/AsiewwiNKjs8DSU\nvUYpuaaYwc0a8ADkuVLHtmt9uqnYnUYf9LhLGXVze2E5X4D2ReXNrivwHEyEVXHz\n3vXPWHe+kPdfU26pbmO44FGu4hRVzaXdPnj7DMVR4XbhGh6dYCTMhrjcgzV+b0nm\nujC5EjA1ClNRKhRZfUZMM2ZK\n-----END PRIVATE KEY-----","name":"My private key"}}}
     form: {}
     headers:
       Accept:
-      - application/json
+      - application/vnd.api+json
       Content-Type:
-      - application/json
+      - application/vnd.api+json
       User-Agent:
-      - FastlyGo/1.7.2 (+github.com/fastly/go-fastly; go1.14)
+      - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
     url: https://api.fastly.com/tls/private_keys
     method: POST
   response:
-    body: '{"data": {"id": "PRIVATE_KEY_ID","type": "tls_private_key","attributes": {"key_length": 2048,"key_type": "RSA","name": "My private key","created_at": "2019-02-01T12:12:12.000Z","replace": false,"public_key_sha1": "KEY_DIGEST"}}}'
+    body: '{"data":{"id":"2Bh0QhgtpUdtbsFkAZOmvi","type":"tls_private_key","attributes":{"key_length":2048,"key_type":"RSA","name":"My
+      private key","created_at":null,"replace":false,"public_key_sha1":"aad823355d14cdc06a5299f5b92224a37e600c65"}}}'
     headers:
       Accept-Ranges:
       - bytes
-      Cache-Control:
-      - no-cache
+      Content-Length:
+      - "234"
       Content-Type:
-      - application/json
+      - application/vnd.api+json
       Date:
-      - Thu, 06 Jun 2019 22:12:54 GMT
-      Fastly-Ratelimit-Remaining:
-      - "980"
-      Fastly-Ratelimit-Reset:
-      - "1559862000"
-      Status:
-      - 200 OK
+      - Mon, 10 Jan 2022 08:23:03 GMT
       Strict-Transport-Security:
       - max-age=31536000
-      Vary:
-      - Accept-Encoding
       Via:
-      - 1.1 varnish
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
       - MISS, MISS
       X-Cache-Hits:
       - 0, 0
+      X-Content-Type-Options:
+      - nosniff
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-sjc3621-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11955-TYO
       X-Timer:
-      - S1559859174.118436,VS0,VE554
-    status: 200 OK
-    code: 200
+      - S1641802984.552983,VS0,VE358
+    status: 201 Created
+    code: 201
+    duration: ""

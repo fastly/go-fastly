@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"","attributes":{"cert_blob":"-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n","id":"CERTIFICATE_ID","name":"My certificate"}}}
+      {"data":{"type":"tls_certificate","id":"1TvLUdms3P3wORynPDnXhu","attributes":{"cert_blob":"-----BEGIN CERTIFICATE-----\nMIIDazCCAlOgAwIBAgIIeGKaD18/Fk8wDQYJKoZIhvcNAQELBQAwNDEUMBIGA1UE\nAxMLZXhhbXBsZS5jb20xHDAaBgNVBAUTEzg2NzQ2NjUyMjMwODIxNTM1NTEwHhcN\nMjIwMTEwMDc1ODQ0WhcNMjIwNDEwMDc1ODQ0WjA0MRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTEcMBoGA1UEBRMTODY3NDY2NTIyMzA4MjE1MzU1MTCCASIwDQYJKoZIhvcN\nAQEBBQADggEPADCCAQoCggEBAPoddwQa9tDIAwh2o0M+NKBl3rl2rgMoiZnVZex0\nYzJ0RwZSV6cN6zXZiwNTrgTSYXd6l/zvUsGaccYkUXT9dHG8Qd1j4FJvNQGYC28o\nBbt2WZI0KIg1ZkOdVnjUCW+vZ72tTqoAK4gKS4oSRZuko9QK3nxH4OCxR2vWZrbv\n8dLJqW+1BsDrOZMTxsiROIKc8cWnHkOvUk6VdpyCtF8mwhJ+CDlfcrzVxRKN5Php\npJVIaTyz4nig4rPUFQFCBKtrnI8G9tjZr61SZcVvWjXPz8yHpyOehEbdWtlVH7Sy\nny9pii7vJFhgWLqA+oGODsFQlL+ubOOS9io0/+hL/kkIRgUCAwEAAaOBgDB+MA4G\nA1UdDwEB/wQEAwICBDATBgNVHSUEDDAKBggrBgEFBQcDATAPBgNVHRMBAf8EBTAD\nAQH/MB0GA1UdDgQWBBSRpJ8v+VPXOkIq/Ixd6pKBlAPWizAnBgNVHREEIDAeggtl\neGFtcGxlLmNvbYIPZm9vLmV4YW1wbGUuY29tMA0GCSqGSIb3DQEBCwUAA4IBAQC4\nBTHLtU51psuuqjbC7+ta1aenROCw+URI9oDG6nXc7w+noSXDVCyxR0fV99wLCTbR\n//4gHQuTIOjkVIbKBj7XEUa9KrVmUzwsJ/fj8tBVzMrNeCvp5RRLWzvxBjOTbesh\nKnBfRptyVzSM+nxKiQ1ufaqv2Brhtu0O9oKDiGaXDLoOUTOMTuUWAcbkoF9hxeUu\n0NVfljVIGxhuMiOICPw2dWkv6vv/y7Y8V1CjWWRIOXCwEKJ47eOh3nXuBjEtt3+8\n71TWm5ImfFzncdcsH5MB42QzEvKHvj9BsLcX3lEpgkz4R8KcoRWqITJKEV1qZRZS\nbDDlZ8qKguGFvymx9xNE\n-----END CERTIFICATE-----","name":"My certificate"}}}
     form: {}
     headers:
       Accept:
@@ -11,36 +11,35 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/1.17.0 (+github.com/fastly/go-fastly; go1.14.2)
-    url: https://api.fastly.com/tls/certificates/CERTIFICATE_ID
+      - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
+    url: https://api.fastly.com/tls/certificates/1TvLUdms3P3wORynPDnXhu
     method: PATCH
   response:
-    body: '{"data":{"id":"CERTIFICATE_ID","type":"tls_certificate","attributes":{"created_at":"2020-10-21T17:39:36.000Z","issued_to":"ISSUED_TO","issuer":"ISSUER","name":"My certificate","not_after":"2021-11-14T17:21:03.000Z","not_before":"2020-10-13T17:21:03.000Z","replace":false,"serial_number":"00000000000000000","signature_algorithm":"SHA256-RSA","updated_at":"2020-10-21T17:39:36.000Z"},"relationships":{"tls_domains":{"data":[{"id":"DOMAIN_NAME","type":"tls_domain"}]}}}}'
+    body: '{"data":{"id":"1TvLUdms3P3wORynPDnXhu","type":"tls_certificate","attributes":{"created_at":"2022-01-10T07:58:44.000Z","issued_to":"example.com","issuer":"example.com","name":"My
+      certificate","not_after":"2022-04-10T07:58:44.000Z","not_before":"2022-01-10T07:58:44.000Z","replace":false,"serial_number":"8674665223082153551","signature_algorithm":"SHA256-RSA","updated_at":"2022-01-10T07:58:44.000Z"},"relationships":{"tls_domains":{"data":[{"id":"example.com","type":"tls_domain"}]}}}}'
     headers:
       Accept-Ranges:
-        - bytes
+      - bytes
       Content-Length:
-        - "890"
+      - "485"
       Content-Type:
-        - application/vnd.api+json
+      - application/vnd.api+json
       Date:
-        - Sat, 11 May 2019 21:45:02 GMT
-      Status:
-        - 200 OK
+      - Mon, 10 Jan 2022 07:58:45 GMT
       Strict-Transport-Security:
-        - max-age=31536000
+      - max-age=31536000
       Via:
-        - 1.1 varnish
-        - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-        - MISS, MISS
+      - MISS, MISS
       X-Cache-Hits:
-        - 0, 0
+      - 0, 0
       X-Content-Type-Options:
-        - nosniff
+      - nosniff
       X-Served-By:
-        - cache-control-slwdc9036-CONTROL-SLWDC, cache-lax8631-LAX
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11926-TYO
       X-Timer:
-        - S1557611102.061591,VS0,VE521
+      - S1641801525.647530,VS0,VE503
     status: 200 OK
     code: 200
+    duration: ""

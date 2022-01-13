@@ -9,12 +9,34 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 
 	fixtureBase := "custom_tls/"
 
+	// prepare test key and cert
+	privKey, key, err := buildPrivateKey()
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	cert, err := buildCertificate(privKey, "example.com")
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// Create
-	var err error
+	var pk *PrivateKey
+	record(t, fixtureBase+"create-key", func(c *Client) {
+		pk, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
+			Key:  key,
+			Name: "My private key",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Create
 	var cc *CustomTLSCertificate
 	record(t, fixtureBase+"create", func(c *Client) {
 		cc, err = c.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
-			CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+			CertBlob: cert,
 			Name:     "My certificate",
 		})
 	})
@@ -24,10 +46,11 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
-				ID: cc.ID,
-			})
+		testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
+			ID: cc.ID,
+		})
+		testClient.DeletePrivateKey(&DeletePrivateKeyInput{
+			ID: pk.ID,
 		})
 	}()
 
@@ -66,12 +89,18 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 		t.Errorf("bad Domain ID: %q (%q)", cc.Domains[0].ID, gcc.Domains[0].ID)
 	}
 
+	// regenerate test cert using the created key above
+	cert, err = buildCertificate(privKey, "example.com", "foo.example.com")
+	if err != nil {
+		t.Fatal(err)
+	}
+
 	// Update
 	var ucc *CustomTLSCertificate
 	record(t, fixtureBase+"update", func(c *Client) {
 		ucc, err = c.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
-			ID:       "CERTIFICATE_ID",
-			CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
+			ID:       cc.ID,
+			CertBlob: cert,
 			Name:     "My certificate",
 		})
 	})
@@ -83,9 +112,17 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 	}
 
 	// Delete
-	record(t, fixtureBase+"delete", func(c *Client) {
+	record(t, fixtureBase+"delete-cert", func(c *Client) {
 		err = c.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
 			ID: cc.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	record(t, fixtureBase+"delete-key", func(c *Client) {
+		err = c.DeletePrivateKey(&DeletePrivateKeyInput{
+			ID: pk.ID,
 		})
 	})
 	if err != nil {
@@ -97,16 +134,6 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "custom_tls/create", func(c *Client) {
-		_, err = c.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
-			CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-			Name:     "My certificate",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	_, err = testClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		Name: "My certificate",
 	})
@@ -118,17 +145,7 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 func TestClient_DeleteCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
-	var err error
-	record(t, "custom_tls/delete", func(c *Client) {
-		err = c.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
-			ID: "CERTIFICATE_ID",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	err = testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
+	err := testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
@@ -150,15 +167,6 @@ func TestClient_GetCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "custom_tls/get", func(c *Client) {
-		_, err = c.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{
-			ID: "CERTIFICATE_ID",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	_, err = testClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
@@ -169,17 +177,6 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "custom_tls/update", func(c *Client) {
-		_, err = c.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
-			ID:       "CERTIFICATE_ID",
-			CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
-			Name:     "My certificate",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
 	_, err = testClient.UpdateCustomTLSCertificate(&UpdateCustomTLSCertificateInput{
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 		Name:     "My certificate",

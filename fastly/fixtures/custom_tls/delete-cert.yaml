@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/tls/private_keys/2Bh0QhgtpUdtbsFkAZOmvi
+    url: https://api.fastly.com/tls/certificates/1TvLUdms3P3wORynPDnXhu
     method: DELETE
   response:
     body: ""
@@ -15,7 +15,7 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Mon, 10 Jan 2022 08:23:05 GMT
+      - Mon, 10 Jan 2022 07:58:45 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -27,9 +27,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11955-TYO
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11926-TYO
       X-Timer:
-      - S1641802985.834246,VS0,VE220
+      - S1641801525.160457,VS0,VE272
     status: 204 No Content
     code: 204
     duration: ""
