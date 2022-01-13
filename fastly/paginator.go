@@ -9,8 +9,8 @@ type PaginatorACLEntries interface {
 	GetNext() ([]*ACLEntry, error)
 }
 
-// PaginatorDictItems represents a paginator.
-type PaginatorDictItems interface {
+// PaginatorDictionaryItems represents a paginator.
+type PaginatorDictionaryItems interface {
 	HasNext() bool
 	Remaining() int
 	GetNext() ([]*DictionaryItem, error)
