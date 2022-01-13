@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v5
+module github.com/fastly/go-fastly/v6
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0
@@ -14,4 +14,11 @@ require (
 	honnef.co/go/tools v0.2.2
 )
 
-go 1.15
+require (
+	github.com/BurntSushi/toml v0.3.1 // indirect
+	golang.org/x/mod v0.5.1 // indirect
+	golang.org/x/sys v0.0.0-20211019181941-9d821ace8654 // indirect
+	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
+)
+
+go 1.17
