@@ -1,5 +1,14 @@
 # Changelog
 
+## [v6.0.0](https://github.com/fastly/go-fastly/releases/tag/v6.0.0) (2022-01-13)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v5.3.0...v6.0.0)
+
+**Enhancements:**
+
+- Pagination to return interface not concrete type [#328](https://github.com/fastly/go-fastly/pull/328)
+- Update go modules and fixtures [#325](https://github.com/fastly/go-fastly/pull/325)
+
 ## [v5.3.0](https://github.com/fastly/go-fastly/releases/tag/v5.3.0) (2022-01-10)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v5.2.0...v5.3.0)
