@@ -122,10 +122,16 @@ func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *Lis
 		perPage = i.PerPage
 	}
 
+	// page is not specified, fetch from the beginning
 	if i.Page <= 0 && p.CurrentPage == 0 {
 		p.CurrentPage = 1
 	} else {
-		p.CurrentPage = p.CurrentPage + 1
+		// page is specified, fetch from a given page
+		if !p.consumed {
+			p.CurrentPage = i.Page
+		} else {
+			p.CurrentPage = p.CurrentPage + 1
+		}
 	}
 
 	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
