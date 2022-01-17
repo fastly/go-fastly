@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.0.1](https://github.com/fastly/go-fastly/releases/tag/v6.0.0) (2022-01-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.0.0...v6.0.1)
+
+**Bug fixes:**
+
+- Correctly set and advance current page for pagination types [#330](https://github.com/fastly/go-fastly/pull/330)
+
 ## [v6.0.0](https://github.com/fastly/go-fastly/releases/tag/v6.0.0) (2022-01-13)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v5.3.0...v6.0.0)
