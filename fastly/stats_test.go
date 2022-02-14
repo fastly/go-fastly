@@ -40,6 +40,25 @@ func TestClient_GetStats_ByField(t *testing.T) {
 	}
 }
 
+func TestClient_GetStats_ByFieldAndService(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	record(t, "stats/service_stats_by_field_and_service", func(c *Client) {
+		_, err = c.GetStats(&GetStatsInput{
+			Service: testServiceID,
+			Field:   "bandwidth",
+			From:    "10 days ago",
+			To:      "now",
+			By:      "day",
+			Region:  "usa",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestClient_GetStatsJSON(t *testing.T) {
 	t.Parallel()
 
