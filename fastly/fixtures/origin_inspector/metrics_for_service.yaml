@@ -1,0 +1,42 @@
+---
+version: 1
+interactions:
+  - request:
+      body: ""
+      form: { }
+      headers:
+        User-Agent:
+          - FastlyGo/6.0.1 (+github.com/fastly/go-fastly; go1.17.2)
+      url: https://api.fastly.com/metrics/origins/services/7i6HN3TK9wS159v2gPAZ8A?cursor=&datacenter=LHR%2CJFK&downsample=day&end=1644796800&host=host01&metric=responses%2Cstatus_2xx&region=europe%2Cusa&start=1644624000
+      method: GET
+    response:
+      body: |
+        {"data":[{"dimensions":{"host":"host01"},"values":[{"responses":26795476,"status_2xx":26750746,"timestamp":1644624000},{"responses":27071107,"status_2xx":27026758,"timestamp":1644710400}]}],"meta":{"start":"2022-02-12T00:00:00Z","end":"2022-02-14T00:00:00Z","downsample":"day","metric":"responses,status_2xx","limit":100,"next_cursor":"","sort":"host","group_by":"host","filters":{"datacenters":"LHR,JFK","hosts":"host01","regions":"europe,usa"}},"status":"success"}
+      headers:
+        Accept-Ranges:
+          - bytes
+        Content-Length:
+          - "471"
+        Content-Type:
+          - application/json
+        Date:
+          - Tue, 15 Feb 2022 11:09:41 GMT
+        Status:
+          - 200 OK
+        Strict-Transport-Security:
+          - max-age=31536000
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 varnish, 1.1 varnish
+        X-Cache:
+          - MISS, MISS
+        X-Cache-Hits:
+          - 0, 0
+        X-Served-By:
+          - cache-control-slwdc9037-CONTROL-SLWDC, cache-lon4281-LON
+        X-Timer:
+          - S1644923381.893816,VS0,VE147
+      status: 200 OK
+      code: 200
+      duration: ""
