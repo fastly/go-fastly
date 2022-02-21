@@ -41,6 +41,7 @@ func ExampleClient_Remaining() {
 		log.Fatal(err)
 	}
 	fmt.Printf("Writes remaining before '429 Too Many Requests': %d\n", c.Remaining())
+	fmt.Printf("Next rate limit reset expected at %v\n", c.Reset())
 
 	for i := 1; i < 10; i++ {
 		_, err := c.UpdateDictionaryItem(&fastly.UpdateDictionaryItemInput{
@@ -53,5 +54,6 @@ func ExampleClient_Remaining() {
 			log.Fatal(err)
 		}
 		fmt.Printf("Writes remaining before '429 Too Many Requests': %d\n", c.Remaining())
+		fmt.Printf("Next rate limit reset expected at %v\n", c.Reset())
 	}
 }

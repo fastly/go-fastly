@@ -14,6 +14,7 @@ import (
 	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/google/go-querystring/query"
 	"github.com/google/jsonapi"
@@ -74,6 +75,9 @@ type Client struct {
 
 	// remaining is last observed value of http header Fastly-RateLimit-Remaining
 	remaining int
+
+	// reset is last observed value of http header Fastly-RateLimit-Reset
+	reset int64
 }
 
 // RTSClient is the entrypoint to the Fastly's Realtime Stats API.
@@ -148,6 +152,7 @@ func (c *Client) init() (*Client, error) {
 	// Use the default limit as a first guess:
 	// https://developer.fastly.com/reference/api/#rate-limiting
 	c.remaining = 1000
+	// Remaining() is left at the epoch to indicate a refresh of remaining is overdue
 
 	u, err := url.Parse(c.Address)
 	if err != nil {
@@ -166,6 +171,11 @@ func (c *Client) init() (*Client, error) {
 // rate limiting causes a 429 Too Many Requests error.
 func (c *Client) Remaining() int {
 	return c.remaining
+}
+
+// Reset returns the next time the rate limiter's Remaining counter will be refilled.
+func (c *Client) Reset() time.Time {
+	return time.Unix(c.reset, 0)
 }
 
 // Get issues an HTTP GET request.
@@ -295,6 +305,12 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		if remaining != "" {
 			if val, err := strconv.Atoi(remaining); err == nil {
 				c.remaining = val
+			}
+		}
+		reset := resp.Header.Get("Fastly-RateLimit-Reset")
+		if reset != "" {
+			if val, err := strconv.ParseInt(reset, 10, 64); err == nil {
+				c.reset = val
 			}
 		}
 	}
