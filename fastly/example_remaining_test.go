@@ -7,7 +7,7 @@ import (
 	"github.com/fastly/go-fastly/v6/fastly"
 )
 
-func ExampleClient_Remaining() {
+func ExampleClient_RateLimitRemaining() {
 	token := "your_api_token"
 	sid := "your_service_id"
 	dictName := "your_dict_name"
@@ -40,8 +40,8 @@ func ExampleClient_Remaining() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("Writes remaining before '429 Too Many Requests': %d\n", c.Remaining())
-	fmt.Printf("Next rate limit reset expected at %v\n", c.Reset())
+	fmt.Printf("Writes remaining before '429 Too Many Requests': %d\n", c.RateLimitRemaining())
+	fmt.Printf("Next rate limit reset expected at %v\n", c.RateLimitReset())
 
 	for i := 1; i < 10; i++ {
 		_, err := c.UpdateDictionaryItem(&fastly.UpdateDictionaryItemInput{
@@ -53,7 +53,7 @@ func ExampleClient_Remaining() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		fmt.Printf("Writes remaining before '429 Too Many Requests': %d\n", c.Remaining())
-		fmt.Printf("Next rate limit reset expected at %v\n", c.Reset())
+		fmt.Printf("Writes remaining before '429 Too Many Requests': %d\n", c.RateLimitRemaining())
+		fmt.Printf("Next rate limit reset expected at %v\n", c.RateLimitReset())
 	}
 }

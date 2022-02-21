@@ -152,7 +152,7 @@ func (c *Client) init() (*Client, error) {
 	// Use the default limit as a first guess:
 	// https://developer.fastly.com/reference/api/#rate-limiting
 	c.remaining = 1000
-	// Remaining() is left at the epoch to indicate a refresh of remaining is overdue
+	// c.reset is left at the epoch to indicate a refresh of remaining is overdue
 
 	u, err := url.Parse(c.Address)
 	if err != nil {
@@ -167,14 +167,14 @@ func (c *Client) init() (*Client, error) {
 	return c, nil
 }
 
-// Remaining returns the number of non-read requests left before
+// RateLimitRemaining returns the number of non-read requests left before
 // rate limiting causes a 429 Too Many Requests error.
-func (c *Client) Remaining() int {
+func (c *Client) RateLimitRemaining() int {
 	return c.remaining
 }
 
-// Reset returns the next time the rate limiter's Remaining counter will be refilled.
-func (c *Client) Reset() time.Time {
+// Reset returns the next time the rate limiter's counter will be refilled.
+func (c *Client) RateLimitReset() time.Time {
 	return time.Unix(c.reset, 0)
 }
 
@@ -295,7 +295,6 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 
 	}
 	resp, err := checkResp(c.HTTPClient.Do(req))
-
 	if err != nil {
 		return resp, err
 	}
