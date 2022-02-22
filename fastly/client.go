@@ -173,7 +173,8 @@ func (c *Client) RateLimitRemaining() int {
 	return c.remaining
 }
 
-// Reset returns the next time the rate limiter's counter will be refilled.
+// RateLimitReset returns the next time the rate limiter's counter will be
+// reset.
 func (c *Client) RateLimitReset() time.Time {
 	return time.Unix(c.reset, 0)
 }
