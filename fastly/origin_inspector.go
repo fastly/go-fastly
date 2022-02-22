@@ -25,33 +25,6 @@ type OriginData struct {
 // OriginMetrics represents the possible metrics that can be returned by a call
 // to the Origin Inspector endpoints.
 type OriginMetrics struct {
-	Timestamp             uint64 `mapstructure:"timestamp"`
-	Responses             uint64 `mapstructure:"responses"`
-	RespHeaderBytes       uint64 `mapstructure:"resp_header_bytes"`
-	RespBodyBytes         uint64 `mapstructure:"resp_body_bytes"`
-	Status1xx             uint64 `mapstructure:"status_1xx"`
-	Status2xx             uint64 `mapstructure:"status_2xx"`
-	Status3xx             uint64 `mapstructure:"status_3xx"`
-	Status4xx             uint64 `mapstructure:"status_4xx"`
-	Status5xx             uint64 `mapstructure:"status_5xx"`
-	Status200             uint64 `mapstructure:"status_200"`
-	Status204             uint64 `mapstructure:"status_204"`
-	Status206             uint64 `mapstructure:"status_206"`
-	Status301             uint64 `mapstructure:"status_301"`
-	Status302             uint64 `mapstructure:"status_302"`
-	Status304             uint64 `mapstructure:"status_304"`
-	Status400             uint64 `mapstructure:"status_400"`
-	Status401             uint64 `mapstructure:"status_401"`
-	Status403             uint64 `mapstructure:"status_403"`
-	Status404             uint64 `mapstructure:"status_404"`
-	Status416             uint64 `mapstructure:"status_416"`
-	Status429             uint64 `mapstructure:"status_429"`
-	Status500             uint64 `mapstructure:"status_500"`
-	Status501             uint64 `mapstructure:"status_501"`
-	Status502             uint64 `mapstructure:"status_502"`
-	Status503             uint64 `mapstructure:"status_503"`
-	Status504             uint64 `mapstructure:"status_504"`
-	Status505             uint64 `mapstructure:"status_505"`
 	Latency0to1ms         uint64 `mapstructure:"latency_0_to_1ms"`
 	Latency1to5ms         uint64 `mapstructure:"latency_1_to_5ms"`
 	Latency5to10ms        uint64 `mapstructure:"latency_5_to_10ms"`
@@ -64,6 +37,33 @@ type OriginMetrics struct {
 	Latency5000to10000ms  uint64 `mapstructure:"latency_5000_to_10000ms"`
 	Latency10000to60000ms uint64 `mapstructure:"latency_10000_to_60000ms"`
 	Latency60000ms        uint64 `mapstructure:"latency_60000ms"`
+	RespBodyBytes         uint64 `mapstructure:"resp_body_bytes"`
+	RespHeaderBytes       uint64 `mapstructure:"resp_header_bytes"`
+	Responses             uint64 `mapstructure:"responses"`
+	Status1xx             uint64 `mapstructure:"status_1xx"`
+	Status200             uint64 `mapstructure:"status_200"`
+	Status204             uint64 `mapstructure:"status_204"`
+	Status206             uint64 `mapstructure:"status_206"`
+	Status2xx             uint64 `mapstructure:"status_2xx"`
+	Status301             uint64 `mapstructure:"status_301"`
+	Status302             uint64 `mapstructure:"status_302"`
+	Status304             uint64 `mapstructure:"status_304"`
+	Status3xx             uint64 `mapstructure:"status_3xx"`
+	Status400             uint64 `mapstructure:"status_400"`
+	Status401             uint64 `mapstructure:"status_401"`
+	Status403             uint64 `mapstructure:"status_403"`
+	Status404             uint64 `mapstructure:"status_404"`
+	Status416             uint64 `mapstructure:"status_416"`
+	Status429             uint64 `mapstructure:"status_429"`
+	Status4xx             uint64 `mapstructure:"status_4xx"`
+	Status500             uint64 `mapstructure:"status_500"`
+	Status501             uint64 `mapstructure:"status_501"`
+	Status502             uint64 `mapstructure:"status_502"`
+	Status503             uint64 `mapstructure:"status_503"`
+	Status504             uint64 `mapstructure:"status_504"`
+	Status505             uint64 `mapstructure:"status_505"`
+	Status5xx             uint64 `mapstructure:"status_5xx"`
+	Timestamp             uint64 `mapstructure:"timestamp"`
 }
 
 // OriginMeta is the meta section returned for /metrics/origins responses
