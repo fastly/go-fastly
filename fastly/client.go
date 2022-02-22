@@ -152,7 +152,6 @@ func (c *Client) init() (*Client, error) {
 	// Use the default limit as a first guess:
 	// https://developer.fastly.com/reference/api/#rate-limiting
 	c.remaining = 1000
-	// c.reset is left at the epoch to indicate a refresh of remaining is overdue
 
 	u, err := url.Parse(c.Address)
 	if err != nil {
