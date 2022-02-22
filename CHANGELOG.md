@@ -1,6 +1,19 @@
 # Changelog
 
-## [v6.0.1](https://github.com/fastly/go-fastly/releases/tag/v6.0.0) (2022-01-17)
+## [v6.1.0](https://github.com/fastly/go-fastly/releases/tag/v6.1.0) (2022-02-22)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.0.1...v6.1.0)
+
+**Enhancements:**
+
+- Support `Fastly-RateLimit-Remaining` and `Fastly-RateLimit-Reset` [#337](https://github.com/fastly/go-fastly/pull/337)
+- Stats: Add test for fetching stats by service and field [#333](https://github.com/fastly/go-fastly/pull/333)
+
+**Documentation:**
+
+- Fix README typo [#334](https://github.com/fastly/go-fastly/pull/334)
+
+## [v6.0.1](https://github.com/fastly/go-fastly/releases/tag/v6.0.1) (2022-01-17)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.0.0...v6.0.1)
 
