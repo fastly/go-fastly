@@ -11,8 +11,10 @@ import (
 	"os"
 	"path/filepath"
 	"runtime"
+	"strconv"
 	"strings"
 	"sync"
+	"time"
 
 	"github.com/google/go-querystring/query"
 	"github.com/google/jsonapi"
@@ -70,6 +72,12 @@ type Client struct {
 
 	// url is the parsed URL from Address
 	url *url.URL
+
+	// remaining is last observed value of http header Fastly-RateLimit-Remaining
+	remaining int
+
+	// reset is last observed value of http header Fastly-RateLimit-Reset
+	reset int64
 }
 
 // RTSClient is the entrypoint to the Fastly's Realtime Stats API.
@@ -140,6 +148,11 @@ func NewRealtimeStatsClientForEndpoint(token, endpoint string) (*RTSClient, erro
 }
 
 func (c *Client) init() (*Client, error) {
+	// Until we do a request, we don't know how many are left.
+	// Use the default limit as a first guess:
+	// https://developer.fastly.com/reference/api/#rate-limiting
+	c.remaining = 1000
+
 	u, err := url.Parse(c.Address)
 	if err != nil {
 		return nil, err
@@ -151,6 +164,18 @@ func (c *Client) init() (*Client, error) {
 	}
 
 	return c, nil
+}
+
+// RateLimitRemaining returns the number of non-read requests left before
+// rate limiting causes a 429 Too Many Requests error.
+func (c *Client) RateLimitRemaining() int {
+	return c.remaining
+}
+
+// RateLimitReset returns the next time the rate limiter's counter will be
+// reset.
+func (c *Client) RateLimitReset() time.Time {
+	return time.Unix(c.reset, 0)
 }
 
 // Get issues an HTTP GET request.
@@ -270,9 +295,23 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 
 	}
 	resp, err := checkResp(c.HTTPClient.Do(req))
-
 	if err != nil {
 		return resp, err
+	}
+
+	if verb != "GET" && verb != "HEAD" {
+		remaining := resp.Header.Get("Fastly-RateLimit-Remaining")
+		if remaining != "" {
+			if val, err := strconv.Atoi(remaining); err == nil {
+				c.remaining = val
+			}
+		}
+		reset := resp.Header.Get("Fastly-RateLimit-Reset")
+		if reset != "" {
+			if val, err := strconv.ParseInt(reset, 10, 64); err == nil {
+				c.reset = val
+			}
+		}
 	}
 
 	return resp, nil
