@@ -8,7 +8,7 @@ import (
 func TestClient_GetOriginMetricsForService(t *testing.T) {
 	t.Parallel()
 
-	// NOTE: Update this to a recent time when regenerating the test fixtures, 
+	// NOTE: Update this to a recent time when regenerating the test fixtures,
 	// otherwise the data may be outside of retention and an error will be
 	// returned.
 	end := time.Date(2022, 2, 14, 0, 0, 0, 0, time.UTC)
