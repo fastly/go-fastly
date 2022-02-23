@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.2.0](https://github.com/fastly/go-fastly/releases/tag/v6.1.0) (2022-02-23)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.1.0...v6.2.0)
+
+**Enhancements:**
+
+- Origin Inspector: Get Historical Origin Metrics for a Service [#335](https://github.com/fastly/go-fastly/pull/335)
+
 ## [v6.1.0](https://github.com/fastly/go-fastly/releases/tag/v6.1.0) (2022-02-22)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.0.1...v6.1.0)
