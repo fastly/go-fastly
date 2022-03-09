@@ -1,0 +1,42 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.2.0 (+github.com/fastly/go-fastly; go1.17.6)
+    url: https://api.fastly.com/rate-limiters/XXXXXXXXXXXXXXXXXXX
+    method: GET
+  response:
+    body: '{"feature_revision":1,"feature_update_available":false,"name":"test_erl","uri_dictionary_name":null,"http_methods":["GET","POST"],"rps_limit":20,"window_size":10,"client_key":["req.http.Fastly-Client-IP"],"penalty_box_duration":30,"action":"response","response":{"status":429,"content":"Too
+      many requests","content_type":"application/json"},"response_object_name":null,"logger_type":null,"id":"XXXXXXXXXXXXXXXXXX","service_id":"XXXXXXXXXXXXXXXXXXXXXX","version":96,"created_at":"2022-03-09T01:27:37Z","updated_at":"2022-03-09T01:27:37Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 09 Mar 2022 01:27:37 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc10076-SJC
+      X-Timer:
+      - S1646789258.709454,VS0,VE118
+    status: 200 OK
+    code: 200
+    duration: ""
