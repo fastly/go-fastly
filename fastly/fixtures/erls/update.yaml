@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"id":"XXXXXXXXXXXXXXXXXXXXXX","name":"test_erl"}'
+    body: '{"id":"wBT3mVJW6QVW0omIYSiyF","name":"test_erl"}'
     form: {}
     headers:
       Accept:
@@ -11,11 +11,11 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/6.2.0 (+github.com/fastly/go-fastly; go1.17.6)
-    url: https://api.fastly.com/rate-limiters/XXXXXXXXXXXXXXXXXXXXX
+    url: https://api.fastly.com/rate-limiters/wBT3mVJW6QVW0omIYSiyF
     method: PUT
   response:
     body: '{"feature_revision":1,"feature_update_available":false,"name":"test_erl","uri_dictionary_name":null,"http_methods":["GET","POST"],"rps_limit":20,"window_size":10,"client_key":["req.http.Fastly-Client-IP"],"penalty_box_duration":30,"action":"response","response":{"status":429,"content":"Too
-      many requests","content_type":"application/json"},"response_object_name":null,"logger_type":null,"id":"XXXXXXXXXXXXXXXXXXXXX","service_id":"XXXXXXXXXXXXXXXXXXX","version":96,"created_at":"2022-03-09T01:27:37Z","updated_at":"2022-03-09T01:27:37Z"}'
+      many requests","content_type":"application/json"},"response_object_name":null,"logger_type":null,"id":"wBT3mVJW6QVW0omIYSiyF","service_id":"5gpZBTmFpC5mvbN4tWyxpc","version":109,"created_at":"2022-03-10T01:29:44Z","updated_at":"2022-03-10T01:29:44Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Mar 2022 01:27:38 GMT
+      - Thu, 10 Mar 2022 01:29:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "981"
+      - "997"
       Fastly-Ratelimit-Reset:
-      - "1646791200"
+      - "1646877600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-sjc10076-SJC
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-sjc10021-SJC
       X-Timer:
-      - S1646789258.860013,VS0,VE369
+      - S1646875785.995568,VS0,VE352
     status: 200 OK
     code: 200
     duration: ""
