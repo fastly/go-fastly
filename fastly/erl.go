@@ -1,13 +1,6 @@
 //
-// API reference: https://developer.fastly.com/reference/api/vcl-services/rate-limiter/
-//
-// Supports these functions
-//   1) List rate limiters
-//   2) Create rate limiter
-//   3) Delete rate limiter
-//   4) Get rate limiter
-//   5) Update rate limiter
-//
+// API reference: 
+// https://developer.fastly.com/reference/api/vcl-services/rate-limiter/
 package fastly
 
 import (
