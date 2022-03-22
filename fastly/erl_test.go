@@ -130,7 +130,7 @@ func TestClient_ListERLs_validation(t *testing.T) {
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 }
 
@@ -140,7 +140,7 @@ func TestClient_CreateERL_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	_, err = testClient.CreateERL(&CreateERLInput{
