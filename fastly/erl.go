@@ -147,30 +147,21 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 	return erls, nil
 }
 
-// ********************************************************************************************* //
-//
-// Function 2: Create rate limiter
-// Note(s):
-//   VersionId must not be locked
-//
-// Return type
-//   *ERL
-
-// Input to the CreateERL function
+// CreateERLInput is used as input to the CreateERL function.
 type CreateERLInput struct {
-	ServiceID          string               `json:"-"`
-	ServiceVersion     int                  `json:"-"`
-	Action             ERLActionEnum        `json:"action"`
+	Action             ERLAction        `json:"action"`
 	ClientKey          []string             `json:"client_key"`
-	HttpMethods        []ERLHttpMethodsEnum `json:"http_methods"`
+	HttpMethods        []ERLHttpMethods `json:"http_methods"`
 	Name               string               `json:"name"`
 	PenaltyBoxDuration int                  `json:"penalty_box_duration"`
 	Response           *ERLResponseType     `json:"response,omitempty"`
 	RpsLimit           int                  `json:"rps_limit"`
-	WindowSize         ERLWindowSizeEnum    `json:"window_size"`
+	ServiceID          string               `json:"-"`
+	ServiceVersion     int                  `json:"-"`
+	WindowSize         ERLWindowSize    `json:"window_size"`
 }
 
-// Returns the newly created ERL
+// CreateERL returns a new ERL.
 func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -193,22 +184,14 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 	return erl, nil
 }
 
-// ********************************************************************************************* //
-//
-// Function 3: Delete rate limiter
-// Note(s):
-//
-// Return type
-//   error
-
-// Input to the DeleteERL function
+// DeleteERLInput is used as input to the DeleteERL function.
 type DeleteERLInput struct {
 	ServiceID      string `form:"service_id"`
 	ServiceVersion int    `form:"version"`
 	ERLID          string `form:"id"`
 }
 
-// Deletes the specified ERL
+// DeleteERL deletes the specified ERL.
 func (c *Client) DeleteERL(i *DeleteERLInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -237,22 +220,14 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 	return nil
 }
 
-// ********************************************************************************************* //
-//
-// Function 4: Get rate limiter
-// Note(s):
-//
-// Return type
-//   error
-
-// Input to the GetERL function
+// GetERLInput is used as input to the GetERL function.
 type GetERLInput struct {
 	ServiceID      string `form:"service_id"`
 	ServiceVersion int    `form:"version"`
 	ERLID          string `form:"id"`
 }
 
-// Gets the specified ERL
+// GetERL returns the specified ERL.
 func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
