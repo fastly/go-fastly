@@ -9,16 +9,16 @@ import (
 	"time"
 )
 
-// Main definition of an Edge Rate Limiter
+// ERL models the response from the Fastly API.
 type ERL struct {
-	Action             ERLActionEnum        `mapstructure:"action"`
+	Action             ERLAction        `mapstructure:"action"`
 	ClientKey          []string             `mapstructure:"client_key"`
 	CreatedAt          *time.Time           `mapstructure:"created_at"`
 	DeletedAt          *time.Time           `mapstructure:"deleted_at"`
 	FeatureRevision    int                  `mapstructure:"feature_revision"` // 1..
-	HttpMethods        []ERLHttpMethodsEnum `mapstructure:"http_methods"`
+	HttpMethods        []ERLHttpMethods `mapstructure:"http_methods"`
 	ID                 string               `mapstructure:"id"`
-	LoggerType         ERLLoggerEnum        `mapstructure:"logger_type"`
+	LoggerType         ERLLogger        `mapstructure:"logger_type"`
 	Name               string               `mapstructure:"name"`
 	PenaltyBoxDuration int                  `mapstructure:"version"`  // 1..60
 	Response           *ERLResponseType     `mapstructure:"response"` // required if Action != Log
@@ -28,7 +28,7 @@ type ERL struct {
 	UpdatedAt          *time.Time           `mapstructure:"updated_at"`
 	UriDictionaryName  string               `mapstructure:"uri_dictionary_name"`
 	Version            int                  `mapstructure:"version"` // 1..
-	WindowSize         ERLWindowSizeEnum    `mapstructure:"window_size"`
+	WindowSize         ERLWindowSize    `mapstructure:"window_size"`
 }
 
 // Type for ERL
