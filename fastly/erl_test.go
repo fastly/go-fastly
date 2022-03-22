@@ -71,12 +71,12 @@ func TestClient_ERL(t *testing.T) {
 	}
 
 	// Get
-	var ne *ERL
+	var ge *ERL
 	record(t, fixtureBase+"get", func(c *Client) {
-		ne, err = c.GetERL(&GetERLInput{
+		ge, err = c.GetERL(&GetERLInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: testVersion.Number,
-			ERLID:          saveID,
+			ERLID:          e.ID,
 		})
 	})
 	if err != nil {
@@ -92,7 +92,7 @@ func TestClient_ERL(t *testing.T) {
 		ua, err = c.UpdateERL(&UpdateERLInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: testVersion.Number,
-			ID:             saveID,
+			ID:             e.ID,
 			Name:           "test_erl",
 		})
 	})
@@ -108,7 +108,7 @@ func TestClient_ERL(t *testing.T) {
 		err = c.DeleteERL(&DeleteERLInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: testVersion.Number,
-			ERLID:          ne.ID,
+			ERLID:          ge.ID,
 		})
 	})
 	if err != nil {
