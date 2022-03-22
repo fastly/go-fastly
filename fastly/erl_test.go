@@ -52,6 +52,10 @@ func TestClient_ERL(t *testing.T) {
 		t.Errorf("bad name: %q", e.Name)
 	}
 
+	if e.RpsLimit != 20 {
+		t.Errorf("wrong value: %q", e.RpsLimit)
+	}
+
 	// List
 	var es []*ERL
 	record(t, fixtureBase+"list", func(c *Client) {
