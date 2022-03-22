@@ -1,5 +1,5 @@
 //
-// API reference: 
+// API reference:
 // https://developer.fastly.com/reference/api/vcl-services/rate-limiter/
 package fastly
 
@@ -12,22 +12,22 @@ import (
 // ERL models the response from the Fastly API.
 type ERL struct {
 	Action             ERLAction        `mapstructure:"action"`
-	ClientKey          []string             `mapstructure:"client_key"`
-	CreatedAt          *time.Time           `mapstructure:"created_at"`
-	DeletedAt          *time.Time           `mapstructure:"deleted_at"`
-	FeatureRevision    int                  `mapstructure:"feature_revision"` // 1..
+	ClientKey          []string         `mapstructure:"client_key"`
+	CreatedAt          *time.Time       `mapstructure:"created_at"`
+	DeletedAt          *time.Time       `mapstructure:"deleted_at"`
+	FeatureRevision    int              `mapstructure:"feature_revision"` // 1..
 	HttpMethods        []ERLHttpMethods `mapstructure:"http_methods"`
-	ID                 string               `mapstructure:"id"`
+	ID                 string           `mapstructure:"id"`
 	LoggerType         ERLLogger        `mapstructure:"logger_type"`
-	Name               string               `mapstructure:"name"`
-	PenaltyBoxDuration int                  `mapstructure:"version"`  // 1..60
-	Response           *ERLResponseType     `mapstructure:"response"` // required if Action != Log
-	ResponseObjectName string               `mapstructure:"response_object_name"`
-	RpsLimit           int                  `mapstructure:"rps_limit"` // 10..10000
-	ServiceId          string               `mapstructure:"service_id"`
-	UpdatedAt          *time.Time           `mapstructure:"updated_at"`
-	UriDictionaryName  string               `mapstructure:"uri_dictionary_name"`
-	Version            int                  `mapstructure:"version"` // 1..
+	Name               string           `mapstructure:"name"`
+	PenaltyBoxDuration int              `mapstructure:"version"`  // 1..60
+	Response           *ERLResponseType `mapstructure:"response"` // required if Action != Log
+	ResponseObjectName string           `mapstructure:"response_object_name"`
+	RpsLimit           int              `mapstructure:"rps_limit"` // 10..10000
+	ServiceId          string           `mapstructure:"service_id"`
+	UpdatedAt          *time.Time       `mapstructure:"updated_at"`
+	UriDictionaryName  string           `mapstructure:"uri_dictionary_name"`
+	Version            int              `mapstructure:"version"` // 1..
 	WindowSize         ERLWindowSize    `mapstructure:"window_size"`
 }
 
@@ -49,7 +49,7 @@ const (
 )
 
 // ERLHttpMethods represents the supported HTTP method variants.
-type ERLHttpMethodsEnum string
+type ERLHttpMethods string
 
 const (
 	ERLDelete  ERLHttpMethods = "DELETE"
@@ -150,14 +150,14 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 // CreateERLInput is used as input to the CreateERL function.
 type CreateERLInput struct {
 	Action             ERLAction        `json:"action"`
-	ClientKey          []string             `json:"client_key"`
+	ClientKey          []string         `json:"client_key"`
 	HttpMethods        []ERLHttpMethods `json:"http_methods"`
-	Name               string               `json:"name"`
-	PenaltyBoxDuration int                  `json:"penalty_box_duration"`
-	Response           *ERLResponseType     `json:"response,omitempty"`
-	RpsLimit           int                  `json:"rps_limit"`
-	ServiceID          string               `json:"-"`
-	ServiceVersion     int                  `json:"-"`
+	Name               string           `json:"name"`
+	PenaltyBoxDuration int              `json:"penalty_box_duration"`
+	Response           *ERLResponseType `json:"response,omitempty"`
+	RpsLimit           int              `json:"rps_limit"`
+	ServiceID          string           `json:"-"`
+	ServiceVersion     int              `json:"-"`
 	WindowSize         ERLWindowSize    `json:"window_size"`
 }
 
@@ -256,15 +256,15 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 // UpdateERLInput is used as input to the UpdateERL function.
 type UpdateERLInput struct {
 	Action             ERLAction        `json:"action,omitempty"`
-	ClientKey          []string             `json:"client_key,omitempty"`
+	ClientKey          []string         `json:"client_key,omitempty"`
 	HttpMethods        []ERLHttpMethods `json:"http_methods,omitempty"`
-	ID                 string               `json:"id"`
-	Name               string               `json:"name,omitempty"`
-	PenaltyBoxDuration int                  `json:"penalty_box_duration,omitempty"`
-	Response           *ERLResponseType     `json:"response,omitempty"`
-	RpsLimit           int                  `json:"rps_limit,omitempty"`
-	ServiceID          string               `json:"-"`
-	ServiceVersion     int                  `json:"-"`
+	ID                 string           `json:"id"`
+	Name               string           `json:"name,omitempty"`
+	PenaltyBoxDuration int              `json:"penalty_box_duration,omitempty"`
+	Response           *ERLResponseType `json:"response,omitempty"`
+	RpsLimit           int              `json:"rps_limit,omitempty"`
+	ServiceID          string           `json:"-"`
+	ServiceVersion     int              `json:"-"`
 	WindowSize         ERLWindowSize    `json:"window_size,omitempty"`
 }
 

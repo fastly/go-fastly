@@ -12,7 +12,7 @@ func TestClient_ERL(t *testing.T) {
 
 	// Create
 	var (
-		e *ERL
+		e   *ERL
 		err error
 	)
 	record(t, fixtureBase+"create", func(c *Client) {
@@ -82,7 +82,7 @@ func TestClient_ERL(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if e.ID != ne.ID {
+	if e.ID != ge.ID {
 		t.Errorf("bad ID: %q (%q)", e.ID, ge.ID)
 	}
 
