@@ -148,7 +148,7 @@ func TestClient_CreateERL_validation(t *testing.T) {
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 }
 
@@ -158,7 +158,7 @@ func TestClient_GetERL_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	_, err = testClient.GetERL(&GetERLInput{
@@ -166,7 +166,7 @@ func TestClient_GetERL_validation(t *testing.T) {
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	_, err = testClient.GetERL(&GetERLInput{
@@ -175,7 +175,7 @@ func TestClient_GetERL_validation(t *testing.T) {
 		ERLID:          "",
 	})
 	if err != ErrMissingID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 }
 
@@ -187,7 +187,7 @@ func TestClient_UpdateERL_validation(t *testing.T) {
 	})
 
 	if err != ErrMissingServiceID && err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	_, err = testClient.UpdateERL(&UpdateERLInput{
@@ -195,7 +195,7 @@ func TestClient_UpdateERL_validation(t *testing.T) {
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	_, err = testClient.UpdateERL(&UpdateERLInput{
@@ -204,7 +204,7 @@ func TestClient_UpdateERL_validation(t *testing.T) {
 		Name:           "",
 	})
 	if err != ErrMissingID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 	_, err = testClient.UpdateERL(&UpdateERLInput{
 		ServiceID:      "foo",
@@ -212,7 +212,7 @@ func TestClient_UpdateERL_validation(t *testing.T) {
 		Name:           "acl",
 	})
 	if err != ErrMissingID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 }
 
@@ -222,7 +222,7 @@ func TestClient_DeleteERL_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	err = testClient.DeleteERL(&DeleteERLInput{
@@ -230,7 +230,7 @@ func TestClient_DeleteERL_validation(t *testing.T) {
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	err = testClient.DeleteERL(&DeleteERLInput{
@@ -239,6 +239,6 @@ func TestClient_DeleteERL_validation(t *testing.T) {
 		ERLID:          "",
 	})
 	if err != ErrMissingID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 }
