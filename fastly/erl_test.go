@@ -11,9 +11,10 @@ func TestClient_ERL(t *testing.T) {
 	testVersion := createTestVersion(t, fixtureBase+"version", testServiceID)
 
 	// Create
-	var err error
-	var e *ERL
-	var saveID string
+	var (
+		e *ERL
+		err error
+	)
 	record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateERL(&CreateERLInput{
 			ServiceID:          testServiceID,
@@ -21,7 +22,7 @@ func TestClient_ERL(t *testing.T) {
 			Name:               "test_erl",
 			Action:             ERLActionResponse,
 			ClientKey:          []string{"req.http.Fastly-Client-IP"},
-			HttpMethods:        []ERLHttpMethodsEnum{ERLGet, ERLPost},
+			HttpMethods:        []ERLHttpMethods{ERLGet, ERLPost},
 			PenaltyBoxDuration: 30,
 			Response: &ERLResponseType{
 				ERLStatus:      429,
@@ -34,7 +35,6 @@ func TestClient_ERL(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	saveID = e.ID
 
 	// Ensure deleted
 	defer func() {
@@ -62,8 +62,9 @@ func TestClient_ERL(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(es) < 1 {
-		t.Errorf("bad erls: %v", es)
+	var want, got = 1, len(es)
+	if got < want {
+		t.Errorf("want %d, got %d", want, got)
 	}
 	if es[0].Name != "test_erl" {
 		t.Errorf("bad name: %q", es[0].Name)
@@ -82,7 +83,7 @@ func TestClient_ERL(t *testing.T) {
 		t.Fatal(err)
 	}
 	if e.ID != ne.ID {
-		t.Errorf("bad name: %q (%q)", e.ID, ne.ID)
+		t.Errorf("bad ID: %q (%q)", e.ID, ge.ID)
 	}
 
 	// Update
@@ -121,7 +122,7 @@ func TestClient_ListERLs_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("error: %s", err)
 	}
 
 	_, err = testClient.ListERLs(&ListERLsInput{

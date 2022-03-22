@@ -253,30 +253,22 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 	return erl, nil
 }
 
-// ********************************************************************************************* //
-//
-// Function 5: Update rate limiter
-// Note(s):
-//
-// Return type
-//   *ERL
-
-// Input to the UpdateERL function
+// UpdateERLInput is used as input to the UpdateERL function.
 type UpdateERLInput struct {
-	ServiceID          string               `json:"-"`
-	ServiceVersion     int                  `json:"-"`
-	ID                 string               `json:"id"`
-	Action             ERLActionEnum        `json:"action,omitempty"`
+	Action             ERLAction        `json:"action,omitempty"`
 	ClientKey          []string             `json:"client_key,omitempty"`
-	HttpMethods        []ERLHttpMethodsEnum `json:"http_methods,omitempty"`
+	HttpMethods        []ERLHttpMethods `json:"http_methods,omitempty"`
+	ID                 string               `json:"id"`
 	Name               string               `json:"name,omitempty"`
 	PenaltyBoxDuration int                  `json:"penalty_box_duration,omitempty"`
 	Response           *ERLResponseType     `json:"response,omitempty"`
 	RpsLimit           int                  `json:"rps_limit,omitempty"`
-	WindowSize         ERLWindowSizeEnum    `json:"window_size,omitempty"`
+	ServiceID          string               `json:"-"`
+	ServiceVersion     int                  `json:"-"`
+	WindowSize         ERLWindowSize    `json:"window_size,omitempty"`
 }
 
-// Updates the specified ERL
+// UpdateERLInput updates the specified ERL.
 func (c *Client) UpdateERL(i *UpdateERLInput) (*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
