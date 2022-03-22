@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"net/http"
 	"testing"
 )
 
@@ -22,7 +23,7 @@ func TestClient_ERL(t *testing.T) {
 			Name:               "test_erl",
 			Action:             ERLActionResponse,
 			ClientKey:          []string{"req.http.Fastly-Client-IP"},
-			HttpMethods:        []ERLHttpMethods{ERLGet, ERLPost},
+			HttpMethods:        []string{http.MethodGet, http.MethodPost},
 			PenaltyBoxDuration: 30,
 			Response: &ERLResponseType{
 				ERLStatus:      429,

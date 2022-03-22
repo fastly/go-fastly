@@ -1,6 +1,7 @@
 //
 // API reference:
 // https://developer.fastly.com/reference/api/vcl-services/rate-limiter/
+// NB: ERL is an optional feature that must be enabled before use
 package fastly
 
 import (
@@ -16,7 +17,7 @@ type ERL struct {
 	CreatedAt          *time.Time       `mapstructure:"created_at"`
 	DeletedAt          *time.Time       `mapstructure:"deleted_at"`
 	FeatureRevision    int              `mapstructure:"feature_revision"` // 1..
-	HttpMethods        []ERLHttpMethods `mapstructure:"http_methods"`
+	HttpMethods        []string         `mapstructure:"http_methods"`
 	ID                 string           `mapstructure:"id"`
 	LoggerType         ERLLogger        `mapstructure:"logger_type"`
 	Name               string           `mapstructure:"name"`
@@ -46,20 +47,6 @@ const (
 	ERLActionLogOnly        ERLAction = "log_only"
 	ERLActionResponse       ERLAction = "response"
 	ERLActionResponseObject ERLAction = "response_object"
-)
-
-// ERLHttpMethods represents the supported HTTP method variants.
-type ERLHttpMethods string
-
-const (
-	ERLDelete  ERLHttpMethods = "DELETE"
-	ERLGet     ERLHttpMethods = "GET"
-	ERLHead    ERLHttpMethods = "HEAD"
-	ERLOptions ERLHttpMethods = "OPTIONS"
-	ERLPatch   ERLHttpMethods = "PATCH"
-	ERLPost    ERLHttpMethods = "POST"
-	ERLPut     ERLHttpMethods = "PUT"
-	ERLTrace   ERLHttpMethods = "TRACE"
 )
 
 // ERLLogger represents the supported log provider variants.
@@ -151,7 +138,7 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 type CreateERLInput struct {
 	Action             ERLAction        `json:"action"`
 	ClientKey          []string         `json:"client_key"`
-	HttpMethods        []ERLHttpMethods `json:"http_methods"`
+	HttpMethods        []string         `json:"http_methods"`
 	Name               string           `json:"name"`
 	PenaltyBoxDuration int              `json:"penalty_box_duration"`
 	Response           *ERLResponseType `json:"response,omitempty"`
@@ -171,6 +158,7 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/rate-limiters", i.ServiceID, i.ServiceVersion)
+	// resp, err := c.PostForm(path, i, nil)
 	resp, err := c.PostJSON(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -257,7 +245,7 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 type UpdateERLInput struct {
 	Action             ERLAction        `json:"action,omitempty"`
 	ClientKey          []string         `json:"client_key,omitempty"`
-	HttpMethods        []ERLHttpMethods `json:"http_methods,omitempty"`
+	HttpMethods        []string         `json:"http_methods,omitempty"`
 	ID                 string           `json:"id"`
 	Name               string           `json:"name,omitempty"`
 	PenaltyBoxDuration int              `json:"penalty_box_duration,omitempty"`
