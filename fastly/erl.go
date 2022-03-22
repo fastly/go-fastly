@@ -97,13 +97,14 @@ const (
 	ERLLogSysLog          ERLLogger = "syslog"
 )
 
-// Enum for ERL
-type ERLWindowSizeEnum int
+// ERLWindowSize represents the duration variants for when the RPS limit is
+// exceeded.
+type ERLWindowSize int
 
 const (
-	ERLSize1  ERLWindowSizeEnum = 1
-	ERLSize10 ERLWindowSizeEnum = 10
-	ERLSize60 ERLWindowSizeEnum = 60
+	ERLSize1  ERLWindowSize = 1
+	ERLSize10 ERLWindowSize = 10
+	ERLSize60 ERLWindowSize = 60
 )
 
 // ERLsByName is a sortable list of ERLs
@@ -116,21 +117,13 @@ func (s ERLsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ********************************************************************************************* //
-//
-// Function 1: List rate limiters
-// Note(s):
-//
-// Return type
-//   []*ERL
-
-// Input to the ListERLs function
+// ListERLsInput is used as input to the ListERLs function.
 type ListERLsInput struct {
 	ServiceID      string // required
 	ServiceVersion int    // required
 }
 
-// Returns the list of ERLs for the specified version
+// ListERLs returns the list of ERLs for the specified service version.
 func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
