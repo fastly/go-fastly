@@ -31,69 +31,70 @@ type ERL struct {
 	WindowSize         ERLWindowSize    `mapstructure:"window_size"`
 }
 
-// Type for ERL
+// ERLResponseType models the response from the Fastly API.
 type ERLResponseType struct {
 	ERLStatus      int    `json:"status,omitempty"`
 	ERLContentType string `json:"content_type,omitempty"`
 	ERLContent     string `json:"content,omitempty"`
 }
 
-// Enum for ERL
-type ERLActionEnum string
+// ERLAction represents the action variants for when a rate limiter
+// violation is detected.
+type ERLAction string
 
 const (
-	ERLActionResponse       ERLActionEnum = "response"
-	ERLActionResponseObject ERLActionEnum = "response_object"
-	ERLActionLogOnly        ERLActionEnum = "log_only"
+	ERLActionLogOnly        ERLAction = "log_only"
+	ERLActionResponse       ERLAction = "response"
+	ERLActionResponseObject ERLAction = "response_object"
 )
 
-// Enum for ERL
+// ERLHttpMethods represents the supported HTTP method variants.
 type ERLHttpMethodsEnum string
 
 const (
-	ERLGet     ERLHttpMethodsEnum = "GET"
-	ERLPut     ERLHttpMethodsEnum = "PUT"
-	ERLTrace   ERLHttpMethodsEnum = "TRACE"
-	ERLPost    ERLHttpMethodsEnum = "POST"
-	ERLHead    ERLHttpMethodsEnum = "HEAD"
-	ERLDelete  ERLHttpMethodsEnum = "DELETE"
-	ERLPatch   ERLHttpMethodsEnum = "PATCH"
-	ERLOptions ERLHttpMethodsEnum = "OPTIONS"
+	ERLDelete  ERLHttpMethods = "DELETE"
+	ERLGet     ERLHttpMethods = "GET"
+	ERLHead    ERLHttpMethods = "HEAD"
+	ERLOptions ERLHttpMethods = "OPTIONS"
+	ERLPatch   ERLHttpMethods = "PATCH"
+	ERLPost    ERLHttpMethods = "POST"
+	ERLPut     ERLHttpMethods = "PUT"
+	ERLTrace   ERLHttpMethods = "TRACE"
 )
 
-// Enum for ERL
-type ERLLoggerEnum string
+// ERLLogger represents the supported log provider variants.
+type ERLLogger string
 
 const (
-	ERLLogAzureBlob       ERLLoggerEnum = "azureblob"
-	ERLLogBigQuery        ERLLoggerEnum = "bigquery"
-	ERLLogCloudFiles      ERLLoggerEnum = "cloudfiles"
-	ERLLogDataDog         ERLLoggerEnum = "datadog"
-	ERLLogDigitalOcean    ERLLoggerEnum = "digitalocean"
-	ERLLogElasticSearch   ERLLoggerEnum = "elasticsearch"
-	ERLLogFtp             ERLLoggerEnum = "ftp"
-	ERLLogGcs             ERLLoggerEnum = "gcs"
-	ERLLogGoogleAnalytics ERLLoggerEnum = "googleanalytics"
-	ERLLogHeroku          ERLLoggerEnum = "heroku"
-	ERLLogHoneycomb       ERLLoggerEnum = "honeycomb"
-	ERLLogHttp            ERLLoggerEnum = "http"
-	ERLLogHttps           ERLLoggerEnum = "https"
-	ERLLogKafta           ERLLoggerEnum = "kafka"
-	ERLLogKinesis         ERLLoggerEnum = "kinesis"
-	ERLLogLogEntries      ERLLoggerEnum = "logentries"
-	ERLLogLoggly          ERLLoggerEnum = "loggly"
-	ERLLogLogShuttle      ERLLoggerEnum = "logshuttle"
-	ERLLogNewRelic        ERLLoggerEnum = "newrelic"
-	ERLLogOpenStack       ERLLoggerEnum = "openstack"
-	ERLLogPaperTrail      ERLLoggerEnum = "papertrail"
-	ERLLogPubSub          ERLLoggerEnum = "pubsub"
-	ERLLogS3              ERLLoggerEnum = "s3"
-	ERLLogScalyr          ERLLoggerEnum = "scalyr"
-	ERLLogSftp            ERLLoggerEnum = "sftp"
-	ERLLogSplunk          ERLLoggerEnum = "splunk"
-	ERLLogStackDriver     ERLLoggerEnum = "stackdriver"
-	ERLLogSumoLogiuc      ERLLoggerEnum = "sumologic"
-	ERLLogSysLog          ERLLoggerEnum = "syslog"
+	ERLLogAzureBlob       ERLLogger = "azureblob"
+	ERLLogBigQuery        ERLLogger = "bigquery"
+	ERLLogCloudFiles      ERLLogger = "cloudfiles"
+	ERLLogDataDog         ERLLogger = "datadog"
+	ERLLogDigitalOcean    ERLLogger = "digitalocean"
+	ERLLogElasticSearch   ERLLogger = "elasticsearch"
+	ERLLogFtp             ERLLogger = "ftp"
+	ERLLogGcs             ERLLogger = "gcs"
+	ERLLogGoogleAnalytics ERLLogger = "googleanalytics"
+	ERLLogHeroku          ERLLogger = "heroku"
+	ERLLogHoneycomb       ERLLogger = "honeycomb"
+	ERLLogHttp            ERLLogger = "http"
+	ERLLogHttps           ERLLogger = "https"
+	ERLLogKafta           ERLLogger = "kafka"
+	ERLLogKinesis         ERLLogger = "kinesis"
+	ERLLogLogEntries      ERLLogger = "logentries"
+	ERLLogLoggly          ERLLogger = "loggly"
+	ERLLogLogShuttle      ERLLogger = "logshuttle"
+	ERLLogNewRelic        ERLLogger = "newrelic"
+	ERLLogOpenStack       ERLLogger = "openstack"
+	ERLLogPaperTrail      ERLLogger = "papertrail"
+	ERLLogPubSub          ERLLogger = "pubsub"
+	ERLLogS3              ERLLogger = "s3"
+	ERLLogScalyr          ERLLogger = "scalyr"
+	ERLLogSftp            ERLLogger = "sftp"
+	ERLLogSplunk          ERLLogger = "splunk"
+	ERLLogStackDriver     ERLLogger = "stackdriver"
+	ERLLogSumoLogiuc      ERLLogger = "sumologic"
+	ERLLogSysLog          ERLLogger = "syslog"
 )
 
 // Enum for ERL
