@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.2.0 (+github.com/fastly/go-fastly; go1.17.6)
-    url: https://api.fastly.com/rate-limiters/2Xmuupqernl231QYxye2O7
+    url: https://api.fastly.com/rate-limiters/5U7LrjONAOghcVobCesDyb
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Cannot find vclmodule ''''"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 23 Mar 2022 17:50:01 GMT
+      - Wed, 23 Mar 2022 18:29:09 GMT
       Fastly-Ratelimit-Remaining:
-      - "917"
+      - "994"
       Fastly-Ratelimit-Reset:
-      - "1648058400"
+      - "1648062000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17449-PAO
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-pao17459-PAO
       X-Timer:
-      - S1648057801.072627,VS0,VE110
+      - S1648060149.927695,VS0,VE115
     status: 404 Not Found
     code: 404
     duration: ""
