@@ -21,8 +21,8 @@ type ERL struct {
 	ID                 string           `mapstructure:"id"`
 	LoggerType         ERLLogger        `mapstructure:"logger_type"`
 	Name               string           `mapstructure:"name"`
-	PenaltyBoxDuration int              `mapstructure:"version"`  // 1..60
-	Response           *ERLResponseType `mapstructure:"response"` // required if Action != Log
+	PenaltyBoxDuration int              `mapstructure:"penalty_box_duration"` // 1..60
+	Response           *ERLResponseType `mapstructure:"response"`             // required if Action != Log
 	ResponseObjectName string           `mapstructure:"response_object_name"`
 	RpsLimit           int              `mapstructure:"rps_limit"` // 10..10000
 	ServiceId          string           `mapstructure:"service_id"`
@@ -34,9 +34,9 @@ type ERL struct {
 
 // ERLResponseType models the response from the Fastly API.
 type ERLResponseType struct {
-	ERLStatus      int    `json:"status,omitempty"`
-	ERLContentType string `json:"content_type,omitempty"`
-	ERLContent     string `json:"content,omitempty"`
+	ERLStatus      int    `url:"status,omitempty"`
+	ERLContentType string `url:"content_type,omitempty"`
+	ERLContent     string `url:"content,omitempty"`
 }
 
 // ERLAction represents the action variants for when a rate limiter
@@ -136,16 +136,16 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 
 // CreateERLInput is used as input to the CreateERL function.
 type CreateERLInput struct {
-	Action             ERLAction        `json:"action"`
-	ClientKey          []string         `json:"client_key"`
-	HttpMethods        []string         `json:"http_methods"`
-	Name               string           `json:"name"`
-	PenaltyBoxDuration int              `json:"penalty_box_duration"`
-	Response           *ERLResponseType `json:"response,omitempty"`
-	RpsLimit           int              `json:"rps_limit"`
-	ServiceID          string           `json:"-"`
-	ServiceVersion     int              `json:"-"`
-	WindowSize         ERLWindowSize    `json:"window_size"`
+	Action             ERLAction        `url:"action"`
+	ClientKey          []string         `url:"client_key,brackets"`
+	HttpMethods        []string         `url:"http_methods,brackets"`
+	Name               string           `url:"name"`
+	PenaltyBoxDuration int              `url:"penalty_box_duration"`
+	Response           *ERLResponseType `url:"response,omitempty"`
+	RpsLimit           int              `url:"rps_limit"`
+	ServiceID          string           `url:"-"`
+	ServiceVersion     int              `url:"-"`
+	WindowSize         ERLWindowSize    `url:"window_size"`
 }
 
 // CreateERL returns a new ERL.
@@ -158,8 +158,7 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/rate-limiters", i.ServiceID, i.ServiceVersion)
-	// resp, err := c.PostForm(path, i, nil)
-	resp, err := c.PostJSON(path, i, nil)
+	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -243,17 +242,17 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 
 // UpdateERLInput is used as input to the UpdateERL function.
 type UpdateERLInput struct {
-	Action             ERLAction        `json:"action,omitempty"`
-	ClientKey          []string         `json:"client_key,omitempty"`
-	HttpMethods        []string         `json:"http_methods,omitempty"`
-	ID                 string           `json:"id"`
-	Name               string           `json:"name,omitempty"`
-	PenaltyBoxDuration int              `json:"penalty_box_duration,omitempty"`
-	Response           *ERLResponseType `json:"response,omitempty"`
-	RpsLimit           int              `json:"rps_limit,omitempty"`
-	ServiceID          string           `json:"-"`
-	ServiceVersion     int              `json:"-"`
-	WindowSize         ERLWindowSize    `json:"window_size,omitempty"`
+	Action             ERLAction        `url:"action,omitempty"`
+	ClientKey          []string         `url:"client_key,omitempty,brackets"`
+	HttpMethods        []string         `url:"http_methods,omitempty,brackets"`
+	ID                 string           `url:"id"`
+	Name               string           `url:"name,omitempty"`
+	PenaltyBoxDuration int              `url:"penalty_box_duration,omitempty"`
+	Response           *ERLResponseType `url:"response,omitempty"`
+	RpsLimit           int              `url:"rps_limit,omitempty"`
+	ServiceID          string           `url:"-"`
+	ServiceVersion     int              `url:"-"`
+	WindowSize         ERLWindowSize    `url:"window_size,omitempty"`
 }
 
 // UpdateERLInput updates the specified ERL.
@@ -269,8 +268,7 @@ func (c *Client) UpdateERL(i *UpdateERLInput) (*ERL, error) {
 	}
 
 	path := fmt.Sprintf("/rate-limiters/%s", i.ID)
-	// resp, err := c.PutForm(path, i, nil)
-	resp, err := c.PutJSON(path, i, nil)
+	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
