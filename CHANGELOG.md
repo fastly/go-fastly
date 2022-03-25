@@ -1,6 +1,18 @@
 # Changelog
 
-## [v6.2.0](https://github.com/fastly/go-fastly/releases/tag/v6.1.0) (2022-02-23)
+## [v6.3.0](https://github.com/fastly/go-fastly/releases/tag/v6.3.0) (2022-03-25)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.2.0...v6.3.0)
+
+**Enhancements:**
+
+- Support for Edge Rate Limiting [#341](https://github.com/fastly/go-fastly/pull/341)
+
+**Bug fixes:**
+
+- go.mod: downgrade to 1.16 [#340](https://github.com/fastly/go-fastly/pull/340)
+
+## [v6.2.0](https://github.com/fastly/go-fastly/releases/tag/v6.2.0) (2022-02-23)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.1.0...v6.2.0)
 
