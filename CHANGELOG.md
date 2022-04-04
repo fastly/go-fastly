@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.3.1](https://github.com/fastly/go-fastly/releases/tag/v6.3.1) (2022-04-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.3.0...v6.3.1)
+
+**Bug fixes:**
+
+- Fix typo in `filter[tls_certificate.id]` [#344](https://github.com/fastly/go-fastly/pull/344)
+
 ## [v6.3.0](https://github.com/fastly/go-fastly/releases/tag/v6.3.0) (2022-03-25)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.2.0...v6.3.0)
