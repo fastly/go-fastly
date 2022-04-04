@@ -31,7 +31,7 @@ func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[in_use]":               l.FilterInUse,
-		"filter[tls_certificate.id]":   l.FilterTLSCertificateID,
+		"filter[tls_certificates.id]":  l.FilterTLSCertificateID,
 		"filter[tls_subscriptions.id]": l.FilterTLSSubscriptionID,
 		"include":                      l.Include,
 		"page[number]":                 l.PageNumber,

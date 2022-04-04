@@ -41,3 +41,44 @@ interactions:
     status: 200 OK
     code: 200
     duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.4)
+    url: https://api.fastly.com/tls/domains?filter%5Btls_certificates.id%5D=6RltCYkOfFfzPVitOyLCnV
+    method: GET
+  response:
+    body: '{"data":[{"id":"a-real-tld.example","type":"tls_domain","relationships":{"tls_activations":{"data":[]},"tls_certificates":{"data":[{"id":"6RltCYkOfFfzPVitOyLCnV","type":"tls_certificate"}]},"tls_subscriptions":{"data":[]}}}],"links":{"self":"https://api.fastly.com/tls/domains?filter%5Btls_certificates.id%5D=6RltCYkOfFfzPVitOyLCnV&page%5Bnumber%5D=1&page%5Bsize%5D=20","first":"https://api.fastly.com/tls/domains?filter%5Btls_certificates.id%5D=6RltCYkOfFfzPVitOyLCnV&page%5Bnumber%5D=1&page%5Bsize%5D=20","prev":null,"next":null,"last":"https://api.fastly.com/tls/domains?filter%5Btls_certificates.id%5D=6RltCYkOfFfzPVitOyLCnV&page%5Bnumber%5D=1&page%5Bsize%5D=20"},"meta":{"record_count":1,"current_page":1,"per_page":20,"total_pages":1}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "2599"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Mon, 25 Jan 2021 15:02:43 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-lcy19235-LCY
+      X-Timer:
+      - S1611586963.753130,VS0,VE572
+    status: 200 OK
+    code: 200
+    duration: ""
+
