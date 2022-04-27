@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.3.2](https://github.com/fastly/go-fastly/releases/tag/v6.3.2) (2022-04-27)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.3.1...v6.3.2)
+
+**Enhancements:**
+
+- Add `Backends` field to `Director` [#347](https://github.com/fastly/go-fastly/pull/347)
+
 ## [v6.3.1](https://github.com/fastly/go-fastly/releases/tag/v6.3.1) (2022-04-04)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.3.0...v6.3.1)
