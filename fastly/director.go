@@ -30,6 +30,7 @@ type Director struct {
 	ServiceVersion int    `mapstructure:"version"`
 
 	Name      string       `mapstructure:"name"`
+	Backends  []string     `mapstructure:"backends"`
 	Comment   string       `mapstructure:"comment"`
 	Shield    string       `mapstructure:"shield"`
 	Quorum    uint         `mapstructure:"quorum"`
