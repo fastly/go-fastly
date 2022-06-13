@@ -2,29 +2,35 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=75&name=test-director&quorum=50&retries=5&type=1
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=108&address=integ-test.go-fastly.com&connect_timeout=1500&name=test-backend&override_host=origin.example.com&port=1234&ssl_check_cert=0&ssl_ciphers=DHE-RSA-AES256-SHA%3ADHE-RSA-CAMELLIA256-SHA%3AAES256-GCM-SHA384
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "75"
+      - "108"
+      address:
+      - integ-test.go-fastly.com
+      connect_timeout:
+      - "1500"
       name:
-      - test-director
-      quorum:
-      - "50"
-      retries:
-      - "5"
-      type:
-      - "1"
+      - test-backend
+      override_host:
+      - origin.example.com
+      port:
+      - "1234"
+      ssl_check_cert:
+      - "0"
+      ssl_ciphers:
+      - DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/75/director
+      - FastlyGo/6.3.1 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/108/backend
     method: POST
   response:
-    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":75,"capacity":100,"comment":"","created_at":"2021-11-26T07:15:18Z","backends":[],"updated_at":"2021-11-26T07:15:18Z","deleted_at":null,"shield":null}'
+    body: '{"address":"integ-test.go-fastly.com","connect_timeout":1500,"name":"test-backend","override_host":"origin.example.com","port":1234,"ssl_check_cert":false,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":108,"auto_loadbalance":false,"request_condition":"","first_byte_timeout":15000,"updated_at":"2022-04-27T11:03:45Z","deleted_at":null,"comment":"","ssl_client_key":null,"client_cert":null,"shield":null,"weight":100,"max_tls_version":null,"ssl_client_cert":null,"ssl_sni_hostname":null,"use_ssl":false,"min_tls_version":null,"created_at":"2022-04-27T11:03:45Z","max_conn":200,"error_threshold":0,"ssl_hostname":null,"ssl_ca_cert":null,"hostname":"integ-test.go-fastly.com","healthcheck":null,"ipv6":null,"ipv4":null,"ssl_cert_hostname":null,"between_bytes_timeout":10000}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +39,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 26 Nov 2021 07:15:18 GMT
+      - Wed, 27 Apr 2022 11:03:45 GMT
       Fastly-Ratelimit-Remaining:
-      - "4987"
+      - "4998"
       Fastly-Ratelimit-Reset:
-      - "1637913600"
+      - "1651060800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +57,117 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11957-TYO
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN
       X-Timer:
-      - S1637910918.210918,VS0,VE288
+      - S1651057425.969083,VS0,VE231
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=108&name=test-director&quorum=50&retries=5&type=1
+    form:
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "108"
+      name:
+      - test-director
+      quorum:
+      - "50"
+      retries:
+      - "5"
+      type:
+      - "1"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/6.3.1 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/108/director
+    method: POST
+  response:
+    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":108,"deleted_at":null,"shield":null,"backends":[],"comment":"","created_at":"2022-04-27T11:03:45Z","capacity":100,"updated_at":"2022-04-27T11:03:45Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 27 Apr 2022 11:03:45 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4997"
+      Fastly-Ratelimit-Reset:
+      - "1651060800"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
+      X-Timer:
+      - S1651057425.220888,VS0,VE379
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: Backend=test-backend&Director=test-director&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=108
+    form:
+      Backend:
+      - test-backend
+      Director:
+      - test-director
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "108"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/6.3.1 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/108/director/test-director/backend/test-backend
+    method: POST
+  response:
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":108,"director_name":"test-director","backend_name":"test-backend","updated_at":"2022-04-27T11:03:45Z","deleted_at":null,"created_at":"2022-04-27T11:03:45Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 27 Apr 2022 11:03:45 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4996"
+      Fastly-Ratelimit-Reset:
+      - "1651060800"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN
+      X-Timer:
+      - S1651057426.624363,VS0,VE175
     status: 200 OK
     code: 200
     duration: ""

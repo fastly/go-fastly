@@ -7,16 +7,31 @@ import (
 func TestClient_Directors(t *testing.T) {
 	t.Parallel()
 
-	var err error
 	var tv *Version
 	record(t, "directors/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
-	var b *Director
+	var (
+		b                  *Backend
+		d                  *Director
+		errBackend         error
+		errDirector        error
+		errDirectorBackend error
+	)
 	record(t, "directors/create", func(c *Client) {
-		b, err = c.CreateDirector(&CreateDirectorInput{
+		b, errBackend = c.CreateBackend(&CreateBackendInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-backend",
+			Address:        "integ-test.go-fastly.com",
+			Port:           Uint(1234),
+			ConnectTimeout: Uint(1500),
+			OverrideHost:   "origin.example.com",
+			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
+		})
+		d, errDirector = c.CreateDirector(&CreateDirectorInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-director",
@@ -24,14 +39,39 @@ func TestClient_Directors(t *testing.T) {
 			Type:           DirectorTypeRandom,
 			Retries:        Uint(5),
 		})
+		_, errDirectorBackend = c.CreateDirectorBackend(&CreateDirectorBackendInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Director:       "test-director",
+			Backend:        b.Name,
+		})
 	})
-	if err != nil {
-		t.Fatal(err)
+	if errBackend != nil {
+		t.Fatal(errBackend)
+	}
+	if errDirector != nil {
+		t.Fatal(errDirector)
+	}
+	if errDirectorBackend != nil {
+		t.Fatal(errDirectorBackend)
 	}
 
 	// Ensure deleted
 	defer func() {
 		record(t, "directors/cleanup", func(c *Client) {
+			c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Director:       d.Name,
+				Backend:        b.Name,
+			})
+
+			c.DeleteBackend(&DeleteBackendInput{
+				ServiceID:      testServiceID,
+				ServiceVersion: tv.Number,
+				Name:           b.Name,
+			})
+
 			c.DeleteDirector(&DeleteDirectorInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
@@ -46,21 +86,24 @@ func TestClient_Directors(t *testing.T) {
 		})
 	}()
 
-	if b.Name != "test-director" {
-		t.Errorf("bad name: %q", b.Name)
+	if d.Name != "test-director" {
+		t.Errorf("bad name: %q", d.Name)
 	}
-	if b.Quorum != 50 {
-		t.Errorf("bad quorum: %q", b.Quorum)
+	if d.Quorum != 50 {
+		t.Errorf("bad quorum: %q", d.Quorum)
 	}
-	if b.Type != DirectorTypeRandom {
-		t.Errorf("bad type: %d", b.Type)
+	if d.Type != DirectorTypeRandom {
+		t.Errorf("bad type: %d", d.Type)
 	}
-	if b.Retries != 5 {
-		t.Errorf("bad retries: %d", b.Retries)
+	if d.Retries != 5 {
+		t.Errorf("bad retries: %d", d.Retries)
 	}
 
 	// List
-	var bs []*Director
+	var (
+		bs  []*Director
+		err error
+	)
 	record(t, "directors/list", func(c *Client) {
 		bs, err = c.ListDirectors(&ListDirectorsInput{
 			ServiceID:      testServiceID,
@@ -86,17 +129,20 @@ func TestClient_Directors(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if b.Name != nb.Name {
-		t.Errorf("bad name: %q (%q)", b.Name, nb.Name)
+	if d.Name != nb.Name {
+		t.Errorf("bad name: %q (%q)", d.Name, nb.Name)
 	}
-	if b.Quorum != nb.Quorum {
-		t.Errorf("bad quorum: %q (%q)", b.Quorum, nb.Quorum)
+	if d.Quorum != nb.Quorum {
+		t.Errorf("bad quorum: %q (%q)", d.Quorum, nb.Quorum)
 	}
-	if b.Type != nb.Type {
-		t.Errorf("bad type: %q (%q)", b.Type, nb.Type)
+	if d.Type != nb.Type {
+		t.Errorf("bad type: %q (%q)", d.Type, nb.Type)
 	}
-	if b.Retries != nb.Retries {
-		t.Errorf("bad retries: %q (%q)", b.Retries, nb.Retries)
+	if d.Retries != nb.Retries {
+		t.Errorf("bad retries: %q (%q)", d.Retries, nb.Retries)
+	}
+	if len(nb.Backends) == 0 || nb.Backends[0] != b.Name {
+		t.Error("bad backend: expected a backend")
 	}
 
 	// Update
