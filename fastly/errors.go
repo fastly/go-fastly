@@ -171,6 +171,14 @@ var ErrMissingServerSideEncryptionKMSKeyID = NewFieldError("ServerSideEncryption
 // requires a "ServiceID" key, but one was not set.
 var ErrMissingServiceID = NewFieldError("ServiceID")
 
+// ErrMissingUserID is an error that is returned when an input struct
+// requires a "UserID" key, but one was not set
+var ErrMissingUserID = NewFieldError("UserID")
+
+// ErrMissingPermissions is an error that is returned when an input struct
+// requires a "Permissions" key, but one was not set
+var ErrMissingPermissions = NewFieldError("Permissions")
+
 // ErrMissingServiceVersion is an error that is returned when an input struct
 // requires a "ServiceVersion" key, but one was not set.
 var ErrMissingServiceVersion = NewFieldError("ServiceVersion")
