@@ -25,10 +25,13 @@ type ServiceAuthorization struct {
 	Service    *SAService `jsonapi:"relation,service,omitempty"`
 }
 
+// GetServiceAuthorizationInput is used as input to the GetServiceAuthorization function.
 type GetServiceAuthorizationInput struct {
+	// ID of the service authorization to retrieve.
 	ID string
 }
 
+// GetServiceAuthorization retrieves an existing service authorization using its ID.
 func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -48,6 +51,7 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 	return &sa, nil
 }
 
+// CreateServiceAuthorizationInput is used as input to the CreateServiceAuthorization function.
 type CreateServiceAuthorizationInput struct {
 	// ID value is ignored and should not be set, needed to make JSONAPI work correctly.
 	ID string `jsonapi:"primary,service_authorization"`
@@ -62,6 +66,7 @@ type CreateServiceAuthorizationInput struct {
 	User *SAUser `jsonapi:"relation,user,omitempty"`
 }
 
+// CreateServiceAuthorization creates a new service authorization granting granular service and user permissions.
 func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.Service == nil || i.Service.ID == "" {
 		return nil, ErrMissingServiceID
@@ -83,11 +88,16 @@ func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) 
 	return &sa, nil
 }
 
+// UpdateServiceAuthorizationInput is used as input to the UpdateServiceAuthorization function.
 type UpdateServiceAuthorizationInput struct {
-	ID          string `jsonapi:"primary,service_authorization"`
+	// ID uniquely identifies the service authorization (service and user pair) to be updated.
+	ID string `jsonapi:"primary,service_authorization"`
+
+	// The permission to grant the user to the service referenced by this service authorization.
 	Permissions string `jsonapi:"attr,permission,omitempty"`
 }
 
+// UpdateServiceAuthorization updates an exisitng service authorization. The ID must be known.
 func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -111,10 +121,13 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 	return &sa, nil
 }
 
+// DeleteServiceAuthorizationInput is used as input to the DeleteServiceAuthorization function.
 type DeleteServiceAuthorizationInput struct {
+	// ID of the service authorization to delete.
 	ID string
 }
 
+// DeleteServiceAuthorization deletes an existing service authorization using the ID.
 func (c *Client) DeleteServiceAuthorization(i *DeleteServiceAuthorizationInput) error {
 	if i.ID == "" {
 		return ErrMissingID
