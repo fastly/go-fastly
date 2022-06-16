@@ -16,7 +16,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		sa, err = c.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
 			ServiceID:  "7ZVxm5pPWdzKdl3P5UW7jR",
 			UserID:     "4tKBSuFhNEiIpNDxmmVydt",
-			Permission: PermissionFull,
+			Permission: "full",
 		})
 	})
 	if err != nil {
@@ -41,7 +41,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Errorf("bad user id: %v", sa.UserID)
 	}
 
-	if sa.Permission != PermissionFull {
+	if sa.Permission != "full" {
 		t.Errorf("bad permission: %v", sa.Permission)
 	}
 
@@ -65,7 +65,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		usa, err = c.UpdateServiceAuthorization(&UpdateServiceAuthorizationInput{
 			ID:          sa.ID,
-			Permissions: PermissionPurgeSelect,
+			Permissions: "purge_select",
 		})
 	})
 	if err != nil {
@@ -75,7 +75,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	if usa.ServiceID != "7ZVxm5pPWdzKdl3P5UW7jR" {
 		t.Errorf("bad service id: %v", usa.ServiceID)
 	}
-	if usa.Permission != PermissionPurgeSelect {
+	if usa.Permission != "purge_select" {
 		t.Errorf("bad permission: %v", usa.Permission)
 	}
 

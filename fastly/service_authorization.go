@@ -4,30 +4,16 @@ import (
 	"fmt"
 )
 
-type ServiceAuthorizationPermission string
-type ServiceAuthorizationType string
-
-const (
-	PermissionFull        = "full"
-	PermissionReadOnly    = "read_only"
-	PermissionPurgeSelect = "purge_select"
-	PermissionPurgeAll    = "purge_all"
-)
-
-const (
-	ServiceAuthorizationTypeServiceAuthorization = "service_authorization"
-)
-
 type ServiceAuthorization struct {
-	ID         string                         `mapstructure:"id"`
-	Permission ServiceAuthorizationPermission `mapstructure:"permission"`
-	UserID     string                         `mapstructure:"relationships.user.data.id"`
-	ServiceID  string                         `mapstructure:"relationships.service.data.id"`
-	Type       ServiceAuthorizationType       `mapstructure:"type"`
+	ID         string `mapstructure:"id"`
+	Permission string `mapstructure:"permission"`
+	UserID     string `mapstructure:"relationships.user.data.id"`
+	ServiceID  string `mapstructure:"relationships.service.data.id"`
+	Type       string `mapstructure:"type"`
 }
 
 type serviceAuthorizationAttributesModel struct {
-	Permission ServiceAuthorizationPermission `mapstructure:"permission,omitempty" json:"permission,omitempty"`
+	Permission string `mapstructure:"permission,omitempty" json:"permission,omitempty"`
 }
 
 type serviceAuthorizationRelationshipDataModel struct {
@@ -48,7 +34,7 @@ type serviceAuthorizationDataModel struct {
 	ID            string                                  `mapstructure:"id,omitempty" json:"id,omitempty"`
 	Attributes    serviceAuthorizationAttributesModel     `mapstructure:"attributes" json:"attributes,omitempty"`
 	Relationships *serviceAuthorizationRelationshipsModel `mapstructure:"relationships" json:"relationships,omitempty"`
-	Type          ServiceAuthorizationType                `mapstructure:"type" json:"type,omitempty"`
+	Type          string                                  `mapstructure:"type" json:"type,omitempty"`
 }
 
 type serviceAuthorizationAPIModel struct {
@@ -91,7 +77,7 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 type CreateServiceAuthorizationInput struct {
 	ServiceID  string
 	UserID     string
-	Permission ServiceAuthorizationPermission
+	Permission string
 }
 
 func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
@@ -121,7 +107,7 @@ func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) 
 					},
 				},
 			},
-			Type: ServiceAuthorizationTypeServiceAuthorization,
+			Type: "service_authorization",
 		},
 	}
 
@@ -140,7 +126,7 @@ func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) 
 
 type UpdateServiceAuthorizationInput struct {
 	ID          string
-	Permissions ServiceAuthorizationPermission
+	Permissions string
 }
 
 func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) (*ServiceAuthorization, error) {
