@@ -2,53 +2,27 @@ package fastly
 
 import (
 	"fmt"
+	"time"
+
+	"github.com/google/jsonapi"
 )
 
+type SAUser struct {
+	ID string `jsonapi:"primary,user"`
+}
+
+type SAService struct {
+	ID string `jsonapi:"primary,service"`
+}
+
 type ServiceAuthorization struct {
-	ID         string `mapstructure:"id"`
-	Permission string `mapstructure:"permission"`
-	UserID     string `mapstructure:"relationships.user.data.id"`
-	ServiceID  string `mapstructure:"relationships.service.data.id"`
-	Type       string `mapstructure:"type"`
-}
-
-type serviceAuthorizationAttributesModel struct {
-	Permission string `mapstructure:"permission,omitempty" json:"permission,omitempty"`
-}
-
-type serviceAuthorizationRelationshipDataModel struct {
-	ID   string `mapstructure:"id" json:"id,omitempty"`
-	Type string `mapstructure:"type" json:"type,omitempty"`
-}
-
-type serviceAuthorizationRelationshipsAPIModel struct {
-	Data serviceAuthorizationRelationshipDataModel `mapstructure:"data" json:"data,omitempty"`
-}
-
-type serviceAuthorizationRelationshipsModel struct {
-	Service serviceAuthorizationRelationshipsAPIModel `mapstructure:"service" json:"service,omitempty"`
-	User    serviceAuthorizationRelationshipsAPIModel `mapstructure:"user" json:"user,omitempty"`
-}
-
-type serviceAuthorizationDataModel struct {
-	ID            string                                  `mapstructure:"id,omitempty" json:"id,omitempty"`
-	Attributes    serviceAuthorizationAttributesModel     `mapstructure:"attributes" json:"attributes,omitempty"`
-	Relationships *serviceAuthorizationRelationshipsModel `mapstructure:"relationships" json:"relationships,omitempty"`
-	Type          string                                  `mapstructure:"type" json:"type,omitempty"`
-}
-
-type serviceAuthorizationAPIModel struct {
-	Data serviceAuthorizationDataModel `mapstructure:"data" json:"data"`
-}
-
-func (a serviceAuthorizationAPIModel) ToServiceAuthorization() *ServiceAuthorization {
-	return &ServiceAuthorization{
-		ID:         a.Data.ID,
-		Permission: a.Data.Attributes.Permission,
-		UserID:     a.Data.Relationships.User.Data.ID,
-		ServiceID:  a.Data.Relationships.Service.Data.ID,
-		Type:       a.Data.Type,
-	}
+	ID         string     `jsonapi:"primary,service_authorization"`
+	Permission string     `jsonapi:"attr,permission,omitempty"`
+	CreatedAt  *time.Time `jsonapi:"attr,created_at,iso8601"`
+	UpdatedAt  *time.Time `jsonapi:"attr,updated_at,iso8601"`
+	DeltedAt   *time.Time `jsonapi:"attr,deleted_at,iso8601"`
+	User       *SAUser    `jsonapi:"relation,user,omitempty"`
+	Service    *SAService `jsonapi:"relation,service,omitempty"`
 }
 
 type GetServiceAuthorizationInput struct {
@@ -66,67 +40,52 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 		return nil, err
 	}
 
-	var a *serviceAuthorizationAPIModel
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	var sa ServiceAuthorization
+	if err := jsonapi.UnmarshalPayload(resp.Body, &sa); err != nil {
 		return nil, err
 	}
 
-	return a.ToServiceAuthorization(), nil
+	return &sa, nil
 }
 
 type CreateServiceAuthorizationInput struct {
-	ServiceID  string
-	UserID     string
-	Permission string
+	// ID value is ignored and should not be set, needed to make JSONAPI work correctly.
+	ID string `jsonapi:"primary,service_authorization"`
+
+	// Permission is the level of permissions to grant the user to the service. Valid values are "full", "read_only", "purge_select" or "purge_all".
+	Permission string `jsonapi:"attr,permission,omitempty"`
+
+	// ServiceID is the ID of the service to grant permissions for.
+	Service *SAService `jsonapi:"relation,service,omitempty"`
+
+	// UserID is the ID of the user which should have its permissions set.
+	User *SAUser `jsonapi:"relation,user,omitempty"`
 }
 
 func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
-	if i.ServiceID == "" {
+	if i.Service == nil || i.Service.ID == "" {
 		return nil, ErrMissingServiceID
 	}
-	if i.UserID == "" {
+	if i.User == nil || i.User.ID == "" {
 		return nil, ErrMissingUserID
 	}
 
-	out := serviceAuthorizationAPIModel{
-		Data: serviceAuthorizationDataModel{
-			Attributes: serviceAuthorizationAttributesModel{
-				Permission: i.Permission,
-			},
-			Relationships: &serviceAuthorizationRelationshipsModel{
-				Service: serviceAuthorizationRelationshipsAPIModel{
-					Data: serviceAuthorizationRelationshipDataModel{
-						ID:   i.ServiceID,
-						Type: "service",
-					},
-				},
-				User: serviceAuthorizationRelationshipsAPIModel{
-					Data: serviceAuthorizationRelationshipDataModel{
-						ID:   i.UserID,
-						Type: "user",
-					},
-				},
-			},
-			Type: "service_authorization",
-		},
-	}
-
-	resp, err := c.PostJSON("/service-authorizations", &out, nil)
+	resp, err := c.PostJSONAPI("/service-authorizations", i, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var a *serviceAuthorizationAPIModel
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	var sa ServiceAuthorization
+	if err := jsonapi.UnmarshalPayload(resp.Body, &sa); err != nil {
 		return nil, err
 	}
 
-	return a.ToServiceAuthorization(), nil
+	return &sa, nil
 }
 
 type UpdateServiceAuthorizationInput struct {
-	ID          string
-	Permissions string
+	ID          string `jsonapi:"primary,service_authorization"`
+	Permissions string `jsonapi:"attr,permission,omitempty"`
 }
 
 func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) (*ServiceAuthorization, error) {
@@ -138,28 +97,18 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 		return nil, ErrMissingPermissions
 	}
 
-	out := &serviceAuthorizationAPIModel{
-		Data: serviceAuthorizationDataModel{
-			ID:   i.ID,
-			Type: "service_authorization",
-			Attributes: serviceAuthorizationAttributesModel{
-				Permission: i.Permissions,
-			},
-		},
-	}
-
 	path := fmt.Sprintf("/service-authorizations/%s", i.ID)
-	resp, err := c.PatchJSON(path, out, nil)
+	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
 
-	var a *serviceAuthorizationAPIModel
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	var sa ServiceAuthorization
+	if err := jsonapi.UnmarshalPayload(resp.Body, &sa); err != nil {
 		return nil, err
 	}
 
-	return a.ToServiceAuthorization(), nil
+	return &sa, nil
 }
 
 type DeleteServiceAuthorizationInput struct {
