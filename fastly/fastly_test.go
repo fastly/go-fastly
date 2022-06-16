@@ -19,8 +19,14 @@ var testStatsClient = NewRealtimeStatsClient()
 // testServiceID is the ID of the testing service.
 var testServiceID = serviceIDForTest()
 
+// testUserID is the ID of the testing user.
+var testUserID = userIDForTest()
+
 // Default ID of the testing service.
 var defaultTestServiceID = "7i6HN3TK9wS159v2gPAZ8A"
+
+// Default ID of the testing user.
+var defaultTestUserID = "4tKBSuFhNEiIpNDxmmVydt"
 
 const (
 	// ServiceTypeVCL is the type for VCL services.
@@ -41,6 +47,16 @@ func serviceIDForTest() string {
 	}
 
 	return defaultTestServiceID
+}
+
+func userIDForTest() string {
+	uid := os.Getenv("FASTLY_TEST_USER_ID")
+
+	if uid != "" {
+		return uid
+	}
+
+	return defaultTestUserID
 }
 
 func vcrDisabled() bool {

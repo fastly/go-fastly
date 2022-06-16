@@ -7,29 +7,25 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.3.2 (+github.com/fastly/go-fastly; go1.18)
-    url: https://api.fastly.com/service-authorizations/RpPAg3cWoOTz6WbzXkA2a
+    url: https://api.fastly.com/service-authorizations/dTYPkfosjJ6dMSBZNAPff
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Cannot find serviceauthorization ''RpPAg3cWoOTz6WbzXkA2a''"}'
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Type:
-      - application/json
       Date:
-      - Wed, 15 Jun 2022 13:15:35 GMT
+      - Thu, 16 Jun 2022 14:54:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "995"
+      - "957"
       Fastly-Ratelimit-Reset:
-      - "1655301600"
+      - "1655391600"
       Status:
-      - 404 Not Found
+      - 204 No Content
       Strict-Transport-Security:
       - max-age=31536000
-      Vary:
-      - Accept-Encoding
       Via:
       - 1.1 varnish, 1.1 varnish
       X-Cache:
@@ -37,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-bma1653-BMA
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-bma1646-BMA
       X-Timer:
-      - S1655298935.038067,VS0,VE340
-    status: 404 Not Found
-    code: 404
+      - S1655391273.032612,VS0,VE260
+    status: 204 No Content
+    code: 204
     duration: ""

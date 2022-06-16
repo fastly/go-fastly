@@ -14,8 +14,8 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	var sa *ServiceAuthorization
 	record(t, fixtureBase+"create", func(c *Client) {
 		sa, err = c.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
-			ServiceID:  "7ZVxm5pPWdzKdl3P5UW7jR",
-			UserID:     "4tKBSuFhNEiIpNDxmmVydt",
+			Service:    &SAService{ID: testServiceID},
+			User:       &SAUser{ID: testUserID},
 			Permission: "full",
 		})
 	})
@@ -33,12 +33,12 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		})
 	}()
 
-	if sa.ServiceID != "7ZVxm5pPWdzKdl3P5UW7jR" {
-		t.Errorf("bad service id: %v", sa.ServiceID)
+	if sa.Service.ID != testServiceID {
+		t.Errorf("bad service id: %v", sa.Service.ID)
 	}
 
-	if sa.UserID != "4tKBSuFhNEiIpNDxmmVydt" {
-		t.Errorf("bad user id: %v", sa.UserID)
+	if sa.User.ID != testUserID {
+		t.Errorf("bad user id: %v", sa.User.ID)
 	}
 
 	if sa.Permission != "full" {
@@ -56,8 +56,8 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if nsa.ServiceID != "7ZVxm5pPWdzKdl3P5UW7jR" {
-		t.Errorf("bad service id: %v", nsa.ServiceID)
+	if nsa.Service.ID != testServiceID {
+		t.Errorf("bad service id: %v", nsa.Service)
 	}
 
 	// Update
@@ -72,8 +72,8 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if usa.ServiceID != "7ZVxm5pPWdzKdl3P5UW7jR" {
-		t.Errorf("bad service id: %v", usa.ServiceID)
+	if usa.Service.ID != testServiceID {
+		t.Errorf("bad service id: %v", usa.Service)
 	}
 	if usa.Permission != "purge_select" {
 		t.Errorf("bad permission: %v", usa.Permission)
@@ -103,16 +103,16 @@ func TestClient_GetServiceAuthorization_validation(t *testing.T) {
 func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 	var err error
 	_, err = testClient.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
-		ServiceID: "",
-		UserID:    "",
+		Service: &SAService{ID: ""},
+		User:    &SAUser{ID: ""},
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
-		ServiceID: "my-service-id",
-		UserID:    "",
+		Service: &SAService{ID: "my-service-id"},
+		User:    &SAUser{ID: ""},
 	})
 	if err != ErrMissingUserID {
 		t.Errorf("bad error: %s", err)
