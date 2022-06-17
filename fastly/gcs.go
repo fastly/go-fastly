@@ -15,6 +15,7 @@ type GCS struct {
 	Name              string     `mapstructure:"name"`
 	Bucket            string     `mapstructure:"bucket_name"`
 	User              string     `mapstructure:"user"`
+	AccountName       string     `mapstructure:"account_name"`
 	SecretKey         string     `mapstructure:"secret_key"`
 	Path              string     `mapstructure:"path"`
 	Period            uint       `mapstructure:"period"`
@@ -85,6 +86,7 @@ type CreateGCSInput struct {
 	Name              string `url:"name,omitempty"`
 	Bucket            string `url:"bucket_name,omitempty"`
 	User              string `url:"user,omitempty"`
+	AccountName       string `url:"account_name,omitempty"`
 	SecretKey         string `url:"secret_key,omitempty"`
 	Path              string `url:"path,omitempty"`
 	Period            uint   `url:"period,omitempty"`
@@ -174,6 +176,7 @@ type UpdateGCSInput struct {
 	NewName           *string `url:"name,omitempty"`
 	Bucket            *string `url:"bucket_name,omitempty"`
 	User              *string `url:"user,omitempty"`
+	AccountName       *string `url:"account_name,omitempty"`
 	SecretKey         *string `url:"secret_key,omitempty"`
 	Path              *string `url:"path,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
