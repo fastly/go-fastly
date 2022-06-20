@@ -172,7 +172,7 @@ var ErrMissingServerSideEncryptionKMSKeyID = NewFieldError("ServerSideEncryption
 var ErrMissingServiceID = NewFieldError("ServiceID")
 
 // ErrMissingServiceAuthorizationsService is an error that is returned when an input struct
-// requires a "ServiceAuthorizationService" key, but one was not set.
+// requires a "Service" key of type SAService, but one was not set or was misconfigured.
 var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("SAService requires an ID")
 
 // ErrMissingServiceAuthorizationsUser is an error that is returned when an input struct
