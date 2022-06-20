@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.3.2 (+github.com/fastly/go-fastly; go1.18)
+    url: https://api.fastly.com/service-authorizations/3LA2qxhWzpRitVKTq9SsEU
+    method: GET
+  response:
+    body: '{"data":{"id":"3LA2qxhWzpRitVKTq9SsEU","type":"service_authorization","attributes":{"created_at":"2022-06-20T09:05:32Z","updated_at":"2022-06-20T09:05:32Z","deleted_at":null,"permission":"full"},"relationships":{"service":{"data":{"id":"7i6HN3TK9wS159v2gPAZ8A","type":"service"}},"user":{"data":{"id":"4tKBSuFhNEiIpNDxmmVydt","type":"user"}}}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Mon, 20 Jun 2022 09:05:32 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-bma1641-BMA
+      X-Timer:
+      - S1655715933.614930,VS0,VE139
+    status: 200 OK
+    code: 200
+    duration: ""
