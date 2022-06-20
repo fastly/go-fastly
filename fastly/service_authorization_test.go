@@ -106,7 +106,7 @@ func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 		Service: &SAService{ID: ""},
 		User:    &SAUser{ID: ""},
 	})
-	if err != ErrMissingServiceID {
+	if err != ErrMissingServiceAuthorizationsService {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -114,7 +114,7 @@ func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 		Service: &SAService{ID: "my-service-id"},
 		User:    &SAUser{ID: ""},
 	})
-	if err != ErrMissingUserID {
+	if err != ErrMissingServiceAuthorizationsUser {
 		t.Errorf("bad error: %s", err)
 	}
 }

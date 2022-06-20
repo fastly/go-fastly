@@ -69,10 +69,10 @@ type CreateServiceAuthorizationInput struct {
 // CreateServiceAuthorization creates a new service authorization granting granular service and user permissions.
 func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.Service == nil || i.Service.ID == "" {
-		return nil, ErrMissingServiceID
+		return nil, ErrMissingServiceAuthorizationsService
 	}
 	if i.User == nil || i.User.ID == "" {
-		return nil, ErrMissingUserID
+		return nil, ErrMissingServiceAuthorizationsUser
 	}
 
 	resp, err := c.PostJSONAPI("/service-authorizations", i, nil)

@@ -171,6 +171,14 @@ var ErrMissingServerSideEncryptionKMSKeyID = NewFieldError("ServerSideEncryption
 // requires a "ServiceID" key, but one was not set.
 var ErrMissingServiceID = NewFieldError("ServiceID")
 
+// ErrMissingServiceAuthorizationsService is an error that is returned when an input struct
+// requires a "ServiceAuthorizationService" key, but one was not set.
+var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("SAService requires an ID")
+
+// ErrMissingServiceAuthorizationsUser is an error that is returned when an input struct
+// requires a "ServiceAuthorizationUser" key, but one was not set.
+var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser requires an ID")
+
 // ErrMissingUserID is an error that is returned when an input struct
 // requires a "UserID" key, but one was not set
 var ErrMissingUserID = NewFieldError("UserID")
