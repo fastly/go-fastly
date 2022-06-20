@@ -1,5 +1,14 @@
 # Changelog
 
+## [v6.4.0](https://github.com/fastly/go-fastly/releases/tag/v6.4.0) (2022-06-20)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.3.2...v6.4.0)
+
+**Enhancements:**
+
+- Support for Service Authorizations [#349](https://github.com/fastly/go-fastly/pull/349)
+- logging/gcp: add AccountName [#346](https://github.com/fastly/go-fastly/pull/346)
+
 ## [v6.3.2](https://github.com/fastly/go-fastly/releases/tag/v6.3.2) (2022-04-27)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.3.1...v6.3.2)
