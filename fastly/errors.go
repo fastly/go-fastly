@@ -176,7 +176,7 @@ var ErrMissingServiceID = NewFieldError("ServiceID")
 var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("SAService requires an ID")
 
 // ErrMissingServiceAuthorizationsUser is an error that is returned when an input struct
-// requires a "ServiceAuthorizationUser" key, but one was not set.
+// requires a "User" key of type SAUser, but one was not set or was misconfigured.
 var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser requires an ID")
 
 // ErrMissingUserID is an error that is returned when an input struct
