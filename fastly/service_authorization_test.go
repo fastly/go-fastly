@@ -16,7 +16,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	record(t, fixtureBase+"create", func(c *Client) {
 		sa, err = c.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
 			Service:    &SAService{ID: testServiceID},
-			User:       &SAUser{ID: "4tKBSuFhNEiIpNDxmmVydt"},
+			User:       &SAUser{ID: "1pnpEMCscfjqgvH7Qofda6"},
 			Permission: "full",
 		})
 	})
@@ -51,7 +51,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Errorf("bad service id: %v", sa.Service.ID)
 	}
 
-	if sa.User.ID != "4tKBSuFhNEiIpNDxmmVydt" {
+	if sa.User.ID != "1pnpEMCscfjqgvH7Qofda6" {
 		t.Errorf("bad user id: %v", sa.User.ID)
 	}
 

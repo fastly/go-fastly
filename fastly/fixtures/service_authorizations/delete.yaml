@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.3.2 (+github.com/fastly/go-fastly; go1.18)
-    url: https://api.fastly.com/service-authorizations/3LA2qxhWzpRitVKTq9SsEU
+      - FastlyGo/6.4.0 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service-authorizations/6lxMq0qXIaSCLqrch0azvx
     method: DELETE
   response:
     body: ""
@@ -17,11 +17,11 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Mon, 20 Jun 2022 09:05:33 GMT
+      - Wed, 22 Jun 2022 18:07:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "967"
+      - "4994"
       Fastly-Ratelimit-Reset:
-      - "1655719200"
+      - "1655924400"
       Status:
       - 204 No Content
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-bma1641-BMA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1655715933.228193,VS0,VE203
+      - S1655921244.503974,VS0,VE176
     status: 204 No Content
     code: 204
     duration: ""
