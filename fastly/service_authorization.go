@@ -1,20 +1,27 @@
 package fastly
 
 import (
+	"bytes"
 	"fmt"
+	"io"
+	"reflect"
+	"strconv"
 	"time"
 
 	"github.com/google/jsonapi"
 )
 
+// SAUser represents a service user account.
 type SAUser struct {
 	ID string `jsonapi:"primary,user"`
 }
 
+// SAService represents a service.
 type SAService struct {
 	ID string `jsonapi:"primary,service"`
 }
 
+// ServiceAuthorization is the API response model.
 type ServiceAuthorization struct {
 	ID         string     `jsonapi:"primary,service_authorization"`
 	Permission string     `jsonapi:"attr,permission,omitempty"`
@@ -23,6 +30,77 @@ type ServiceAuthorization struct {
 	DeltedAt   *time.Time `jsonapi:"attr,deleted_at,iso8601"`
 	User       *SAUser    `jsonapi:"relation,user,omitempty"`
 	Service    *SAService `jsonapi:"relation,service,omitempty"`
+}
+
+// SAResponse is an object containing the list of ServiceAuthorization results.
+type SAResponse struct {
+	Items []*ServiceAuthorization
+	Info  infoResponse
+}
+
+// saType is used for reflection because JSONAPI wants to know what it's
+// decoding into.
+var saType = reflect.TypeOf(new(ServiceAuthorization))
+
+// ListServiceAuthorizationsInput is used as input to the ListWAFs function.
+type ListServiceAuthorizationsInput struct {
+	// Limit the number of returned service authorizations.
+	PageSize int
+	// Request a specific page of service authorizations.
+	PageNumber int
+}
+
+// formatFilters ensures the parameters are formatted according to how the
+// JSONAPI implementation requires them.
+func (i *ListServiceAuthorizationsInput) formatFilters() map[string]string {
+	result := map[string]string{}
+	pairings := map[string]int{
+		"page[size]":   i.PageSize,
+		"page[number]": i.PageNumber,
+	}
+
+	for key, value := range pairings {
+		if value > 0 {
+			result[key] = strconv.Itoa(value)
+		}
+	}
+	return result
+}
+
+// ListServiceAuthorizations returns the list of wafs for the configuration version.
+func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*SAResponse, error) {
+	resp, err := c.Get("/service-authorizations", &RequestOptions{
+		Params: i.formatFilters(),
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	var buf bytes.Buffer
+	tee := io.TeeReader(resp.Body, &buf)
+
+	info, err := getResponseInfo(tee)
+	if err != nil {
+		return nil, err
+	}
+	data, err := jsonapi.UnmarshalManyPayload(bytes.NewReader(buf.Bytes()), saType)
+	if err != nil {
+		return nil, err
+	}
+
+	sas := make([]*ServiceAuthorization, len(data))
+	for i := range data {
+		typed, ok := data[i].(*ServiceAuthorization)
+		if !ok {
+			return nil, fmt.Errorf("got back a non-ServiceAuthorization response")
+		}
+		sas[i] = typed
+	}
+
+	return &SAResponse{
+		Items: sas,
+		Info:  info,
+	}, nil
 }
 
 // GetServiceAuthorizationInput is used as input to the GetServiceAuthorization function.

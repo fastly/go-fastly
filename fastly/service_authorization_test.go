@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -23,13 +24,26 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 
+	// List
+	var sasResp *SAResponse
+	record(t, fixtureBase+"/list", func(c *Client) {
+		sasResp, err = c.ListServiceAuthorizations(&ListServiceAuthorizationsInput{
+			PageSize: 10,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(sasResp.Items) == 0 {
+		t.Errorf("bad service authorizations: %v", sasResp.Items)
+	}
+
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			c.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
 				ID: sa.ID,
 			})
-
 		})
 	}()
 
@@ -145,5 +159,28 @@ func TestClient_DeleteServiceAuthorization_validation(t *testing.T) {
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
+}
 
+func TestClient_listServiceAuthorizations_formatFilters(t *testing.T) {
+	cases := []struct {
+		remote *ListServiceAuthorizationsInput
+		local  map[string]string
+	}{
+		{
+			remote: &ListServiceAuthorizationsInput{
+				PageSize:   2,
+				PageNumber: 2,
+			},
+			local: map[string]string{
+				"page[size]":   "2",
+				"page[number]": "2",
+			},
+		},
+	}
+	for _, c := range cases {
+		out := c.remote.formatFilters()
+		if !reflect.DeepEqual(out, c.local) {
+			t.Fatalf("Error matching:\nexpected: %#v\n     got: %#v", c.local, out)
+		}
+	}
 }
