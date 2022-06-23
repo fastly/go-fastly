@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"service_authorization","id":"3LA2qxhWzpRitVKTq9SsEU","attributes":{"permission":"purge_select"}}}
+      {"data":{"type":"service_authorization","id":"6lxMq0qXIaSCLqrch0azvx","attributes":{"permission":"purge_select"}}}
     form: {}
     headers:
       Accept:
@@ -11,11 +11,11 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/6.3.2 (+github.com/fastly/go-fastly; go1.18)
-    url: https://api.fastly.com/service-authorizations/3LA2qxhWzpRitVKTq9SsEU
+      - FastlyGo/6.4.0 (+github.com/fastly/go-fastly; go1.16)
+    url: https://api.fastly.com/service-authorizations/6lxMq0qXIaSCLqrch0azvx
     method: PATCH
   response:
-    body: '{"data":{"id":"3LA2qxhWzpRitVKTq9SsEU","type":"service_authorization","attributes":{"created_at":"2022-06-20T09:05:32Z","updated_at":"2022-06-20T09:05:33Z","deleted_at":null,"permission":"purge_select"},"relationships":{"service":{"data":{"id":"7i6HN3TK9wS159v2gPAZ8A","type":"service"}},"user":{"data":{"id":"4tKBSuFhNEiIpNDxmmVydt","type":"user"}}}}}'
+    body: '{"data":{"id":"6lxMq0qXIaSCLqrch0azvx","type":"service_authorization","attributes":{"created_at":"2022-06-22T18:07:20Z","updated_at":"2022-06-22T18:07:23Z","deleted_at":null,"permission":"purge_select"},"relationships":{"service":{"data":{"id":"7i6HN3TK9wS159v2gPAZ8A","type":"service"}},"user":{"data":{"id":"1pnpEMCscfjqgvH7Qofda6","type":"user"}}}}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +24,11 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 20 Jun 2022 09:05:33 GMT
+      - Wed, 22 Jun 2022 18:07:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "968"
+      - "4995"
       Fastly-Ratelimit-Reset:
-      - "1655719200"
+      - "1655924400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-bma1641-BMA
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4137-MAN
       X-Timer:
-      - S1655715933.770167,VS0,VE391
+      - S1655921243.003003,VS0,VE431
     status: 200 OK
     code: 200
     duration: ""

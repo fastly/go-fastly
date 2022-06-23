@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -15,12 +16,26 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	record(t, fixtureBase+"create", func(c *Client) {
 		sa, err = c.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
 			Service:    &SAService{ID: testServiceID},
-			User:       &SAUser{ID: "4tKBSuFhNEiIpNDxmmVydt"},
+			User:       &SAUser{ID: "1pnpEMCscfjqgvH7Qofda6"},
 			Permission: "full",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+
+	// List
+	var sasResp *SAResponse
+	record(t, fixtureBase+"/list", func(c *Client) {
+		sasResp, err = c.ListServiceAuthorizations(&ListServiceAuthorizationsInput{
+			PageSize: 10,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(sasResp.Items) == 0 {
+		t.Errorf("bad service authorizations: %v", sasResp.Items)
 	}
 
 	// Ensure deleted
@@ -29,7 +44,6 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 			c.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
 				ID: sa.ID,
 			})
-
 		})
 	}()
 
@@ -37,7 +51,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Errorf("bad service id: %v", sa.Service.ID)
 	}
 
-	if sa.User.ID != "4tKBSuFhNEiIpNDxmmVydt" {
+	if sa.User.ID != "1pnpEMCscfjqgvH7Qofda6" {
 		t.Errorf("bad user id: %v", sa.User.ID)
 	}
 
@@ -145,5 +159,28 @@ func TestClient_DeleteServiceAuthorization_validation(t *testing.T) {
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
+}
 
+func TestClient_listServiceAuthorizations_formatFilters(t *testing.T) {
+	cases := []struct {
+		remote *ListServiceAuthorizationsInput
+		local  map[string]string
+	}{
+		{
+			remote: &ListServiceAuthorizationsInput{
+				PageSize:   2,
+				PageNumber: 2,
+			},
+			local: map[string]string{
+				"page[size]":   "2",
+				"page[number]": "2",
+			},
+		},
+	}
+	for _, c := range cases {
+		out := c.remote.formatFilters()
+		if !reflect.DeepEqual(out, c.local) {
+			t.Fatalf("Error matching:\nexpected: %#v\n     got: %#v", c.local, out)
+		}
+	}
 }
