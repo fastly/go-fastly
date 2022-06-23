@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.4.1](https://github.com/fastly/go-fastly/releases/tag/v6.4.1) (2022-06-23)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.0...v6.4.1)
+
+**Enhancements:**
+
+- Implement missing `ListServiceAuthorizations` [#351](https://github.com/fastly/go-fastly/pull/351)
+
 ## [v6.4.0](https://github.com/fastly/go-fastly/releases/tag/v6.4.0) (2022-06-20)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.3.2...v6.4.0)
