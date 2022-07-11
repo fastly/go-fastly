@@ -18,6 +18,9 @@ NAME := $(notdir $(shell pwd))
 # Test Service ID
 FASTLY_TEST_SERVICE_ID ?=
 FASTLY_API_KEY ?=
+#
+# Enables support for tools such as https://github.com/rakyll/gotest
+TEST_COMMAND ?= go test
 
 all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs all of the required cleaning and verification targets.
 .PHONY: all
@@ -40,12 +43,12 @@ dev-dependencies: ## Downloads the necessesary dev dependencies.
 
 test: ## Runs the test suite with VCR mocks enabled.
 	@echo "==> Testing ${NAME}"
-	@go test -timeout=30s -parallel=20 -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
+	@$(TEST_COMMAND) -timeout=30s -parallel=20 -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test
 
 test-race: ## Runs the test suite with the -race flag to identify race conditions, if they exist.
 	@echo "==> Testing ${NAME} (race)"
-	@go test -timeout=60s -race -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
+	@$(TEST_COMMAND) -timeout=60s -race -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test-race
 
 test-full: ## Runs the tests with VCR disabled (i.e., makes external calls).
