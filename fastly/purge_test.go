@@ -17,9 +17,16 @@ func TestROParams(t *testing.T) {
 				"beep": "boop",
 			},
 		},
-		"valid no qs": {
+		"no qs": {
 			input:  "https://www.example.com/",
 			output: map[string]string{},
+		},
+		"key no value": {
+			input: "https://www.example.com/?empty&foo=bar",
+			output: map[string]string{
+				"foo":   "bar",
+				"empty": "",
+			},
 		},
 	}
 

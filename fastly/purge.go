@@ -70,9 +70,7 @@ func constructRequestOptionsParam(us string) (map[string]string, error) {
 	// type, so we have to manually loop over the url.Values and copy the
 	// key/value pairs into a new map instance.
 	for k, v := range v {
-		if len(v) > 0 {
-			m[k] = v[0]
-		}
+		m[k] = v[0]
 	}
 	return m, nil
 }
