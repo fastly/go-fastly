@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.4.2](https://github.com/fastly/go-fastly/releases/tag/v6.4.2) (2022-07-11)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.1...v6.4.2)
+
+**Bug fixes:**
+
+- purge: fail to purge with query string [#353](https://github.com/fastly/go-fastly/pull/353)
+
 ## [v6.4.1](https://github.com/fastly/go-fastly/releases/tag/v6.4.1) (2022-06-23)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.0...v6.4.1)
