@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 )
 
@@ -38,6 +39,12 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		}
 	}
 
+	var err error
+	ro.Params, err = constructRequestOptionsParam(i.URL)
+	if err != nil {
+		return nil, err
+	}
+
 	resp, err := c.Post("purge/"+i.URL, ro)
 	if err != nil {
 		return nil, err
@@ -48,6 +55,24 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, err
 	}
 	return r, nil
+}
+
+// constructRequestOptionsParam prevents Client.RawRequest from incorrectly
+// clearing the URL query string, by manually constructing a ro.Params.
+func constructRequestOptionsParam(us string) (map[string]string, error) {
+	m := make(map[string]string)
+	u, err := url.Parse(us)
+	if err != nil {
+		return nil, err
+	}
+	v := u.Query()
+	// NOTE: we can't coerce a url.Values into the underlying map[string]string
+	// type, so we have to manually loop over the url.Values and copy the
+	// key/value pairs into a new map instance.
+	for k, v := range v {
+		m[k] = v[0]
+	}
+	return m, nil
 }
 
 // PurgeKeyInput is used as input to the PurgeKey function.
@@ -174,5 +199,4 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 		return nil, err
 	}
 	return r, nil
-
 }

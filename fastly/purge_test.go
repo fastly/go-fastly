@@ -1,8 +1,49 @@
 package fastly
 
 import (
+	"reflect"
 	"testing"
 )
+
+func TestROParams(t *testing.T) {
+	tests := map[string]struct {
+		input  string
+		output map[string]string
+	}{
+		"valid qs": {
+			input: "https://www.example.com/?foo=bar&beep=boop",
+			output: map[string]string{
+				"foo":  "bar",
+				"beep": "boop",
+			},
+		},
+		"no qs": {
+			input:  "https://www.example.com/",
+			output: map[string]string{},
+		},
+		"key no value": {
+			input: "https://www.example.com/?empty&foo=bar",
+			output: map[string]string{
+				"foo":   "bar",
+				"empty": "",
+			},
+		},
+	}
+
+	for name, tc := range tests {
+		t.Run(name, func(t *testing.T) {
+			t.Parallel()
+			want := tc.output
+			have, err := constructRequestOptionsParam(tc.input)
+			if err != nil {
+				t.Errorf("got an unexpected error: %s", err)
+			}
+			if !reflect.DeepEqual(want, have) {
+				t.Errorf("want: %+v, have: %+v\n", want, have)
+			}
+		})
+	}
+}
 
 // TestClient_Purge validates no runtime panics are raised by the Purge method.
 //
