@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"net/url"
 	"strings"
 )
 
@@ -36,6 +37,25 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		ro.Headers = map[string]string{
 			"Fastly-Soft-Purge": "1",
 		}
+	}
+
+	// NOTE: To prevent Client.RawRequest from incorrectly clearing the URL query
+	// string, we manually construct ro.Params. Unfortunately we can't coerce a
+	// url.Values type into the underlying map[string]string type, so we have to
+	// manually loop over the url.Values and copy values to a new map instance.
+	{
+		m := make(map[string]string)
+		u, err := url.Parse(i.URL)
+		if err != nil {
+			return nil, err
+		}
+		v := u.Query()
+		for k, v := range v {
+			if len(v) > 0 {
+				m[k] = v[0]
+			}
+		}
+		ro.Params = m
 	}
 
 	resp, err := c.Post("purge/"+i.URL, ro)
