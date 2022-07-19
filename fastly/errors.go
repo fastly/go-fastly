@@ -45,6 +45,12 @@ func NewFieldError(kind string) *FieldError {
 	}
 }
 
+const emptyTokenInvalid string = "the token value cannot be empty"
+
+// ErrTokenEmpty is an error that is returned when an input struct
+// specifies an "Token" key value which the user has set to an empty string.
+var ErrTokenEmpty = NewFieldError("Token").Message(emptyTokenInvalid)
+
 const batchModifyMaxExceeded string = "batch modify maximum operations exceeded"
 
 // ErrMaxExceededEntries is an error that is returned when an input struct

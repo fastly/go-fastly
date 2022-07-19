@@ -184,6 +184,10 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 		return nil, ErrMissingName
 	}
 
+	if i.Token != nil && *i.Token == "" {
+		return nil, ErrTokenEmpty
+	}
+
 	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
