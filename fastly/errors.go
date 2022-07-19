@@ -269,6 +269,10 @@ var ErrNotImplemented = errors.New("not implemented")
 // already enabled for a service.
 var ErrManagedLoggingEnabled = errors.New("managed logging already enabled")
 
+// ErrMissingToken is an error that is returned when an input struct
+// requires a "Token" key, but one was not set.
+var ErrMissingToken = NewFieldError("Token")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
