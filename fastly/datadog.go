@@ -94,6 +94,10 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
+	if i.Token == "" {
+		return nil, ErrMissingToken
+	}
+
 	path := fmt.Sprintf("/service/%s/version/%d/logging/datadog", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {

@@ -94,6 +94,10 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
+	if i.Token == "" {
+		return nil, ErrMissingToken
+	}
+
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {

@@ -94,6 +94,10 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
+	if i.Token == "" {
+		return nil, ErrMissingToken
+	}
+
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
