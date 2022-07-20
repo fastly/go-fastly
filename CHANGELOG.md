@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.4.3](https://github.com/fastly/go-fastly/releases/tag/v6.4.3) (2022-07-20)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.2...v6.4.3)
+
+**Bug fixes:**
+
+- `Token` field is required for some log endpoints [#355](https://github.com/fastly/go-fastly/pull/355)
+
 ## [v6.4.2](https://github.com/fastly/go-fastly/releases/tag/v6.4.2) (2022-07-11)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.1...v6.4.2)
