@@ -94,6 +94,10 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
+	if i.Token == "" {
+		return nil, ErrMissingToken
+	}
+
 	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
@@ -178,6 +182,10 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 
 	if i.Name == "" {
 		return nil, ErrMissingName
+	}
+
+	if i.Token != nil && *i.Token == "" {
+		return nil, ErrTokenEmpty
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/honeycomb/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

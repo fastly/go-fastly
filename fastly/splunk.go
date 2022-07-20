@@ -108,6 +108,10 @@ func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
+	if i.Token == "" {
+		return nil, ErrMissingToken
+	}
+
 	path := fmt.Sprintf("/service/%s/version/%d/logging/splunk", i.ServiceID, i.ServiceVersion)
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
@@ -199,6 +203,10 @@ func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 
 	if i.Name == "" {
 		return nil, ErrMissingName
+	}
+
+	if i.Token != nil && *i.Token == "" {
+		return nil, ErrTokenEmpty
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/splunk/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

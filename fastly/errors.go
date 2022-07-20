@@ -45,6 +45,12 @@ func NewFieldError(kind string) *FieldError {
 	}
 }
 
+const emptyTokenInvalid string = "the token value cannot be empty"
+
+// ErrTokenEmpty is an error that is returned when an input struct
+// specifies an "Token" key value which the user has set to an empty string.
+var ErrTokenEmpty = NewFieldError("Token").Message(emptyTokenInvalid)
+
 const batchModifyMaxExceeded string = "batch modify maximum operations exceeded"
 
 // ErrMaxExceededEntries is an error that is returned when an input struct
@@ -268,6 +274,10 @@ var ErrNotImplemented = errors.New("not implemented")
 // ErrManagedLoggingEnabled is an error that indicates that managed logging was
 // already enabled for a service.
 var ErrManagedLoggingEnabled = errors.New("managed logging already enabled")
+
+// ErrMissingToken is an error that is returned when an input struct
+// requires a "Token" key, but one was not set.
+var ErrMissingToken = NewFieldError("Token")
 
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
