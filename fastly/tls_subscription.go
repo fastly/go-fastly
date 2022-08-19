@@ -78,6 +78,8 @@ func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 
 	for key, v := range pairings {
 		switch value := v.(type) {
+		case bool:
+			result[key] = strconv.FormatBool(value)
 		case string:
 			if value != "" {
 				result[key] = value
