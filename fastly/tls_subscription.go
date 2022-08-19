@@ -47,6 +47,8 @@ type TLSChallenge struct {
 
 // ListTLSSubscriptionsInput is used as input to the ListTLSSubscriptions function
 type ListTLSSubscriptionsInput struct {
+	// Limit the returned subscriptions to those that have currently active orders. Permitted values: true.
+	FilterActiveOrders bool
 	// Limit the returned subscriptions by state. Valid values are pending, processing, issued, and renewing. Accepts parameters: not (e.g., filter[state][not]=renewing).
 	FilterState string
 	// Limit the returned subscriptions to those that include the specific domain.
@@ -65,12 +67,13 @@ type ListTLSSubscriptionsInput struct {
 func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]interface{}{
-		"filter[state]":          s.FilterState,
-		"filter[tls_domains.id]": s.FilterTLSDomainsID,
-		"include":                s.Include,
-		"page[number]":           s.PageNumber,
-		"page[size]":             s.PageSize,
-		"sort":                   s.Sort,
+		"filter[has_active_order]": s.FilterActiveOrders,
+		"filter[state]":            s.FilterState,
+		"filter[tls_domains.id]":   s.FilterTLSDomainsID,
+		"include":                  s.Include,
+		"page[number]":             s.PageNumber,
+		"page[size]":               s.PageSize,
+		"sort":                     s.Sort,
 	}
 
 	for key, v := range pairings {
