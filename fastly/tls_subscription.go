@@ -79,7 +79,16 @@ func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 	for key, v := range pairings {
 		switch value := v.(type) {
 		case bool:
-			result[key] = strconv.FormatBool(value)
+			// NOTE: The API currently has a bug where the presence of the
+			// has_active_order filter will cause the response to include
+			// subscriptions with an active order, even if the filter value itself was
+			// set to `false`. This is considered a bug and the Fastly API team are
+			// aware of the issue. For now, go-fastly will omit setting the filter
+			// unless the key includes has_active_order and the value is explicitly
+			// set to `true`.
+			if (key == "filter[has_active_order]" && value) || key != "filter[has_active_order]" {
+				result[key] = strconv.FormatBool(value)
+			}
 		case string:
 			if value != "" {
 				result[key] = value
