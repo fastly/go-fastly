@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.5.0](https://github.com/fastly/go-fastly/releases/tag/v6.5.0) (2022-08-22)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.3...v6.5.0)
+
+**Enhancements:**
+
+- TLS Subscriptions: add filter for active orders [#357](https://github.com/fastly/go-fastly/pull/357)
+
 ## [v6.4.3](https://github.com/fastly/go-fastly/releases/tag/v6.4.3) (2022-07-20)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.2...v6.4.3)
