@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=6&comment=comment&name=integ-test1.go-fastly-1.com
+    form:
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "6"
+      comment:
+      - comment
+      name:
+      - integ-test1.go-fastly-1.com
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/6.4.3 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/domain
+    method: POST
+  response:
+    body: '{"comment":"comment","name":"integ-test1.go-fastly-1.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":6,"created_at":"2022-08-22T10:45:36Z","deleted_at":null,"updated_at":"2022-08-22T10:45:36Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Aug 2022 10:45:36 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4987"
+      Fastly-Ratelimit-Reset:
+      - "1661166000"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4139-MAN
+      X-Timer:
+      - S1661165136.252796,VS0,VE384
+    status: 200 OK
+    code: 200
+    duration: ""

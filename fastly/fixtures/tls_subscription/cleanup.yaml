@@ -6,18 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/2.1.0 (+github.com/fastly/go-fastly; go1.15.6)
+      - FastlyGo/6.4.3 (+github.com/fastly/go-fastly; go1.16.15)
     url: https://api.fastly.com/tls/subscriptions/SUBSCRIPTION_ID
     method: DELETE
   response:
-    body: ""
+    body: '{"errors":[{"title":"Not found","detail":"The subscription you requested
+      was not found"}]}'
     headers:
       Accept-Ranges:
       - bytes
+      Content-Length:
+      - "90"
+      Content-Type:
+      - application/vnd.api+json
       Date:
-      - Mon, 25 Jan 2021 18:00:06 GMT
-      Status:
-      - 204 No Content
+      - Mon, 22 Aug 2022 10:45:41 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +32,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-lcy19251-LCY
+      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4139-MAN
       X-Timer:
-      - S1611597606.927024,VS0,VE145
-    status: 204 No Content
-    code: 204
+      - S1661165141.335736,VS0,VE93
+    status: 404 Not Found
+    code: 404
     duration: ""

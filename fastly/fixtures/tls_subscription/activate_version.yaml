@@ -1,0 +1,47 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.4.3 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/activate
+    method: PUT
+  response:
+    body: '{"testing":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","locked":true,"staging":false,"deleted_at":null,"deployed":false,"created_at":"2022-08-22T10:45:36Z","updated_at":"2022-08-22T10:45:36Z","active":true,"comment":"","number":6,"msg":"Warning:
+      No default director found\nat: (default Line 174 Pos 1)\n         if (req.http.Fastly-Temp-XFF
+      == \"\") {\n----------------------------------------------"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 22 Aug 2022 10:45:38 GMT
+      Fastly-Ratelimit-Remaining:
+      - "4985"
+      Fastly-Ratelimit-Reset:
+      - "1661166000"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
+      X-Timer:
+      - S1661165137.971061,VS0,VE1034
+    status: 200 OK
+    code: 200
+    duration: ""
