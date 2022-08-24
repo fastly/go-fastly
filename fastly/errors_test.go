@@ -2,7 +2,7 @@ package fastly
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"strings"
 	"testing"
@@ -16,7 +16,7 @@ func TestNewHTTPError(t *testing.T) {
 	t.Run("legacy", func(t *testing.T) {
 		resp := &http.Response{
 			StatusCode: 404,
-			Body: ioutil.NopCloser(bytes.NewBufferString(
+			Body: io.NopCloser(bytes.NewBufferString(
 				`{"msg": "hello", "detail": "nope"}`)),
 		}
 		e := NewHTTPError(resp)
@@ -47,7 +47,7 @@ func TestNewHTTPError(t *testing.T) {
 		resp := &http.Response{
 			StatusCode: 404,
 			Header:     http.Header(map[string][]string{"Content-Type": {jsonapi.MediaType}}),
-			Body: ioutil.NopCloser(bytes.NewBufferString(
+			Body: io.NopCloser(bytes.NewBufferString(
 				`{"errors":[{"id":"abc123", "title":"Not found", "detail":"That resource does not exist"}]}`)),
 		}
 		e := NewHTTPError(resp)

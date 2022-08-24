@@ -2,7 +2,7 @@ package fastly
 
 import (
 	"bytes"
-	"io/ioutil"
+	"io"
 	"testing"
 )
 
@@ -124,7 +124,7 @@ func TestGetEventsPages(t *testing.T) {
 		}
 
 		// we expect to be able to get the original input out again
-		resultBytes, _ := ioutil.ReadAll(reader)
+		resultBytes, _ := io.ReadAll(reader)
 		if string(resultBytes) != testcase.input {
 			t.Errorf("Test %s: Expected body %s, got %s", testcase.description, testcase.input, string(resultBytes))
 		}
