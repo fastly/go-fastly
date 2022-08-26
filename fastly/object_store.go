@@ -3,6 +3,7 @@ package fastly
 import (
 	"io"
 	"net/http"
+	"strconv"
 	"strings"
 	"time"
 )
@@ -38,15 +39,45 @@ func (c *Client) CreateObjectStore(i *CreateObjectStoreInput) (*ObjectStore, err
 	return store, nil
 }
 
+type ListObjectStoresInput struct {
+	Cursor string
+	Limit  int
+}
+
+func (l *ListObjectStoresInput) formatFilters() map[string]string {
+	if l == nil {
+		return nil
+	}
+
+	if l.Limit == 0 && l.Cursor == "" {
+		return nil
+	}
+
+	m := make(map[string]string)
+
+	if l.Limit != 0 {
+		m["limit"] = strconv.Itoa(l.Limit)
+	}
+
+	if l.Cursor != "" {
+		m["cursor"] = l.Cursor
+	}
+
+	return m
+}
+
 type ListObjectStoresResponse struct {
 	Data []ObjectStore
 	Meta map[string]string
 }
 
-func (c *Client) ListObjectStores() (*ListObjectStoresResponse, error) {
+func (c *Client) ListObjectStores(i *ListObjectStoresInput) (*ListObjectStoresResponse, error) {
 	const path = "/resources/stores/object"
-	// TODO(dgryski): How do I handle pagination?
-	resp, err := c.Get(path, nil)
+
+	ro := new(RequestOptions)
+	ro.Params = i.formatFilters()
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +87,55 @@ func (c *Client) ListObjectStores() (*ListObjectStoresResponse, error) {
 		return nil, err
 	}
 	return output, nil
+}
+
+type ListObjectStoresPaginator struct {
+	cursor   string        // == "" if no more pages
+	stores   []ObjectStore // stored response from previous api call
+	finished bool
+	err      error
+
+	client *Client
+	input  *ListObjectStoresInput
+}
+
+func (c *Client) NewListObjectStoresPaginator(i *ListObjectStoresInput) *ListObjectStoresPaginator {
+	return &ListObjectStoresPaginator{
+		client: c,
+		input:  i,
+	}
+}
+
+func (l *ListObjectStoresPaginator) Next() bool {
+	if l.finished {
+		l.stores = nil
+		return false
+	}
+
+	l.input.Cursor = l.cursor
+	o, err := l.client.ListObjectStores(l.input)
+
+	if err != nil {
+		l.err = err
+		l.finished = true
+	}
+
+	l.stores = o.Data
+	if next := o.Meta["next_cursor"]; next == "" {
+		l.finished = true
+	} else {
+		l.cursor = next
+	}
+
+	return true
+}
+
+func (l *ListObjectStoresPaginator) Stores() []ObjectStore {
+	return l.stores
+}
+
+func (l *ListObjectStoresPaginator) Err() error {
+	return l.err
 }
 
 type GetObjectStoreInput struct {
@@ -103,7 +183,31 @@ func (c *Client) DeleteObjectStore(i *DeleteObjectStoreInput) error {
 }
 
 type ListObjectStoreKeysInput struct {
-	ID string
+	ID     string
+	Limit  int
+	Cursor string
+}
+
+func (l *ListObjectStoreKeysInput) formatFilters() map[string]string {
+	if l == nil {
+		return nil
+	}
+
+	if l.Limit == 0 && l.Cursor == "" {
+		return nil
+	}
+
+	m := make(map[string]string)
+
+	if l.Limit != 0 {
+		m["limit"] = strconv.Itoa(l.Limit)
+	}
+
+	if l.Cursor != "" {
+		m["cursor"] = l.Cursor
+	}
+
+	return m
 }
 
 type ListObjectStoreKeysResponse struct {
@@ -111,13 +215,16 @@ type ListObjectStoreKeysResponse struct {
 	Meta map[string]string
 }
 
-func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) ([]string, error) {
+func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) (*ListObjectStoreKeysResponse, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := "/resources/stores/object/" + i.ID + "/keys"
-	resp, err := c.Get(path, nil)
+	ro := new(RequestOptions)
+	ro.Params = i.formatFilters()
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -126,7 +233,56 @@ func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) ([]string, err
 	if err := decodeBodyMap(resp.Body, &output); err != nil {
 		return nil, err
 	}
-	return output.Data, nil
+	return output, nil
+}
+
+type ListObjectsStoreKeysPaginator struct {
+	cursor   string   // == "" if no more pages
+	keys     []string // stored response from previous api call
+	finished bool
+	err      error
+
+	client *Client
+	input  *ListObjectStoreKeysInput
+}
+
+func (c *Client) NewListObjectStoreKeysPaginator(i *ListObjectStoreKeysInput) *ListObjectsStoreKeysPaginator {
+	return &ListObjectsStoreKeysPaginator{
+		client: c,
+		input:  i,
+	}
+}
+
+func (l *ListObjectsStoreKeysPaginator) Next() bool {
+	if l.finished {
+		l.keys = nil
+		return false
+	}
+
+	l.input.Cursor = l.cursor
+	o, err := l.client.ListObjectStoreKeys(l.input)
+
+	if err != nil {
+		l.err = err
+		l.finished = true
+	}
+
+	l.keys = o.Data
+	if next := o.Meta["next_cursor"]; next == "" {
+		l.finished = true
+	} else {
+		l.cursor = next
+	}
+
+	return true
+}
+
+func (l *ListObjectsStoreKeysPaginator) Err() error {
+	return l.err
+}
+
+func (l *ListObjectsStoreKeysPaginator) Keys() []string {
+	return l.keys
 }
 
 // missing example requests from API reference
