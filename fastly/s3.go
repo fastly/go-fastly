@@ -20,10 +20,14 @@ type S3AccessControlList string
 func S3AccessControlListPtr(v S3AccessControlList) *S3AccessControlList { return &v }
 
 const (
-	S3RedundancyStandard   S3Redundancy = "standard"
-	S3RedundancyReduced    S3Redundancy = "reduced_redundancy"
-	S3RedundancyOneZoneIA  S3Redundancy = "onezone_ia"
-	S3RedundancyStandardIA S3Redundancy = "standard_ia"
+	S3RedundancyStandard                 S3Redundancy = "standard"
+	S3RedundancyIntelligentTiering       S3Redundancy = "intelligent_tiering"
+	S3RedundancyStandardIA               S3Redundancy = "standard_ia"
+	S3RedundancyOneZoneIA                S3Redundancy = "onezone_ia"
+	S3RedundancyGlacierInstantRetrieval  S3Redundancy = "glacier_ir"
+	S3RedundancyGlacierFlexibleRetrieval S3Redundancy = "glacier"
+	S3RedundancyGlacierDeepArchive       S3Redundancy = "deep_archive"
+	S3RedundancyReduced                  S3Redundancy = "reduced_redundancy"
 
 	S3ServerSideEncryptionAES S3ServerSideEncryption = "AES256"
 	S3ServerSideEncryptionKMS S3ServerSideEncryption = "aws:kms"
