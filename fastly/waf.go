@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"reflect"
 	"strconv"
 	"time"
@@ -298,7 +297,7 @@ type metaInfo struct {
 // getResponseInfo parses a response to get the pagination and metadata info.
 func getResponseInfo(body io.Reader) (infoResponse, error) {
 
-	bodyBytes, err := ioutil.ReadAll(body)
+	bodyBytes, err := io.ReadAll(body)
 	if err != nil {
 		return infoResponse{}, err
 	}

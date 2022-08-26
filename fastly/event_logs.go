@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"reflect"
 	"strconv"
@@ -165,7 +164,7 @@ func getEventsPages(body io.Reader) (EventsPaginationInfo, io.Reader, error) {
 	var buf bytes.Buffer
 	tee := io.TeeReader(body, &buf)
 
-	bodyBytes, err := ioutil.ReadAll(tee)
+	bodyBytes, err := io.ReadAll(tee)
 	if err != nil {
 		return EventsPaginationInfo{}, nil, err
 	}
