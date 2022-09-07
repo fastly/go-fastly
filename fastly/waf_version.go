@@ -104,7 +104,6 @@ type ListWAFVersionsInput struct {
 }
 
 func (i *ListWAFVersionsInput) formatFilters() map[string]string {
-
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"page[size]":   i.PageSize,
@@ -129,7 +128,6 @@ func (i *ListWAFVersionsInput) formatFilters() map[string]string {
 
 // ListWAFVersions returns the list of VAF versions for a given WAF ID.
 func (c *Client) ListWAFVersions(i *ListWAFVersionsInput) (*WAFVersionResponse, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -141,6 +139,7 @@ func (c *Client) ListWAFVersions(i *ListWAFVersionsInput) (*WAFVersionResponse, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var buf bytes.Buffer
 	tee := io.TeeReader(resp.Body, &buf)
@@ -180,7 +179,6 @@ type ListAllWAFVersionsInput struct {
 // ListAllWAFVersions returns the complete list of WAF versions for a given WAF ID. It iterates through
 // all existing pages to ensure all WAF versions are returned at once.
 func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResponse, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -217,7 +215,6 @@ type GetWAFVersionInput struct {
 
 // GetWAFVersion gets details for given WAF version.
 func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -231,6 +228,7 @@ func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var wafVer WAFVersion
 	if err := jsonapi.UnmarshalPayload(resp.Body, &wafVer); err != nil {
@@ -309,6 +307,7 @@ func (c *Client) UpdateWAFVersion(i *UpdateWAFVersionInput) (*WAFVersion, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var waf WAFVersion
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
@@ -342,6 +341,7 @@ func (c *Client) LockWAFVersion(i *LockWAFVersionInput) (*WAFVersion, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var waf WAFVersion
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
@@ -373,6 +373,7 @@ func (c *Client) CloneWAFVersion(i *CloneWAFVersionInput) (*WAFVersion, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var waf WAFVersion
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
@@ -391,7 +392,6 @@ type DeployWAFVersionInput struct {
 
 // DeployWAFVersion deploys a specific WAF version.
 func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
-
 	if i.WAFID == "" {
 		return ErrMissingWAFID
 	}
@@ -417,7 +417,6 @@ type CreateEmptyWAFVersionInput struct {
 // CreateEmptyWAFVersion creates an empty WAF version,
 //  which means a version without rules and all config options set to their default values.
 func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersion, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -427,6 +426,7 @@ func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersi
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var waf WAFVersion
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {

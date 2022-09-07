@@ -52,6 +52,7 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var u []*User
 	if err := decodeBodyMap(resp.Body, &u); err != nil {
@@ -67,6 +68,7 @@ func (c *Client) GetCurrentUser() (*User, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var u *User
 	if err := decodeBodyMap(resp.Body, &u); err != nil {
@@ -93,6 +95,7 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var u *User
 	if err := decodeBodyMap(resp.Body, &u); err != nil {
@@ -124,6 +127,7 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var u *User
 	if err := decodeBodyMap(resp.Body, &u); err != nil {
@@ -151,6 +155,7 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var u *User
 	if err := decodeBodyMap(resp.Body, &u); err != nil {
@@ -175,6 +180,7 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {
@@ -202,6 +208,7 @@ func (c *Client) ResetUserPassword(i *ResetUserPasswordInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

@@ -104,7 +104,7 @@ func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 
 // ListTLSSubscriptions lists all managed TLS subscriptions
 func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubscription, error) {
-	response, err := c.Get("/tls/subscriptions", &RequestOptions{
+	resp, err := c.Get("/tls/subscriptions", &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
 			"Accept": "application/vnd.api+json", // Needed for "include" but seemingly not the other fields
@@ -113,8 +113,9 @@ func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubsc
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
-	data, err := jsonapi.UnmarshalManyPayload(response.Body, reflect.TypeOf(new(TLSSubscription)))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(TLSSubscription)))
 	if err != nil {
 		return nil, err
 	}
@@ -154,13 +155,14 @@ func (c *Client) CreateTLSSubscription(i *CreateTLSSubscriptionInput) (*TLSSubsc
 		return nil, ErrCommonNameNotInDomains
 	}
 
-	response, err := c.PostJSONAPI("/tls/subscriptions", i, nil)
+	resp, err := c.PostJSONAPI("/tls/subscriptions", i, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var subscription TLSSubscription
-	err = jsonapi.UnmarshalPayload(response.Body, &subscription)
+	err = jsonapi.UnmarshalPayload(resp.Body, &subscription)
 	if err != nil {
 		return nil, err
 	}
@@ -205,13 +207,14 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 		requestOptions.Params = map[string]string{"include": *i.Include}
 	}
 
-	response, err := c.Get(path, requestOptions)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var subscription TLSSubscription
-	err = jsonapi.UnmarshalPayload(response.Body, &subscription)
+	err = jsonapi.UnmarshalPayload(resp.Body, &subscription)
 	if err != nil {
 		return nil, err
 	}
@@ -248,13 +251,14 @@ func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubsc
 	}
 
 	path := fmt.Sprintf("/tls/subscriptions/%s", i.ID)
-	response, err := c.PatchJSONAPI(path, i, &ro)
+	resp, err := c.PatchJSONAPI(path, i, &ro)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var subscription TLSSubscription
-	err = jsonapi.UnmarshalPayload(response.Body, &subscription)
+	err = jsonapi.UnmarshalPayload(resp.Body, &subscription)
 	if err != nil {
 		return nil, err
 	}

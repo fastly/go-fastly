@@ -72,6 +72,7 @@ func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Billing
 	if err := decodeBodyMap(resp.Body, &b); err != nil {

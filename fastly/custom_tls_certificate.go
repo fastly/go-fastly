@@ -173,6 +173,7 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cc CustomTLSCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {

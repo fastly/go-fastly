@@ -214,6 +214,8 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
+
 	var sr *UsageResponse
 	if err := decodeBodyMap(r.Body, &sr); err != nil {
 		return nil, err
@@ -250,6 +252,8 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
+
 	var sr *UsageByServiceResponse
 	if err := decodeBodyMap(r.Body, &sr); err != nil {
 		return nil, err
@@ -272,6 +276,7 @@ func (c *Client) GetRegions() (*RegionsResponse, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	var rr *RegionsResponse
 	if err := decodeBodyMap(r.Body, &rr); err != nil {

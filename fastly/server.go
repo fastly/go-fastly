@@ -58,6 +58,7 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ss []*Server
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
@@ -107,6 +108,7 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Server
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -145,6 +147,7 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Server
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -192,6 +195,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Server
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -230,6 +234,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

@@ -60,6 +60,7 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ls []*Logentries
 	if err := decodeBodyMap(resp.Body, &ls); err != nil {
@@ -103,6 +104,7 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := decodeBodyMap(resp.Body, &l); err != nil {
@@ -142,6 +144,7 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := decodeBodyMap(resp.Body, &l); err != nil {
@@ -191,6 +194,7 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := decodeBodyMap(resp.Body, &l); err != nil {
@@ -230,6 +234,7 @@ func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

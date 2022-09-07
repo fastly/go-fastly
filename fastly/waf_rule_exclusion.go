@@ -110,7 +110,6 @@ type DeleteWAFRuleExclusionInput struct {
 }
 
 func (i *ListWAFRuleExclusionsInput) formatFilters() map[string]string {
-
 	include := strings.Join(i.Include, ",")
 
 	result := map[string]string{}
@@ -144,7 +143,6 @@ func (i *ListWAFRuleExclusionsInput) formatFilters() map[string]string {
 
 // ListWAFRuleExclusions returns the list of exclusions for a given WAF ID.
 func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleExclusionResponse, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -160,6 +158,7 @@ func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleE
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var buf bytes.Buffer
 	tee := io.TeeReader(resp.Body, &buf)
@@ -191,7 +190,6 @@ func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleE
 // ListAllWAFRuleExclusions returns the complete list of WAF rule exclusions for a given WAF ID. It iterates through
 // all existing pages to ensure all WAF rule exclusions are returned at once.
 func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WAFRuleExclusionResponse, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -229,7 +227,6 @@ func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WA
 
 // CreateWAFRuleExclusion used to create a particular WAF rule exclusion.
 func (c *Client) CreateWAFRuleExclusion(i *CreateWAFRuleExclusionInput) (*WAFRuleExclusion, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -247,6 +244,7 @@ func (c *Client) CreateWAFRuleExclusion(i *CreateWAFRuleExclusionInput) (*WAFRul
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var wafExclusion WAFRuleExclusion
 	if err := jsonapi.UnmarshalPayload(resp.Body, &wafExclusion); err != nil {
@@ -278,6 +276,7 @@ func (c *Client) UpdateWAFRuleExclusion(i *UpdateWAFRuleExclusionInput) (*WAFRul
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var exc *WAFRuleExclusion
 	if err := decodeBodyMap(resp.Body, &exc); err != nil {

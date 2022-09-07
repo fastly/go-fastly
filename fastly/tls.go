@@ -59,7 +59,6 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 
 // ListPrivateKeys list all TLS private keys.
 func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
-
 	p := "/tls/private_keys"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
@@ -72,6 +71,7 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(PrivateKey)))
 	if err != nil {
@@ -92,7 +92,6 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 
 // GetPrivateKey show a TLS private key.
 func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
-
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -120,7 +119,6 @@ type CreatePrivateKeyInput struct {
 
 // CreatePrivateKey create a TLS private key.
 func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error) {
-
 	p := "/tls/private_keys"
 
 	if i.Key == "" {

@@ -40,6 +40,7 @@ func (c *Client) EdgeCheck(i *EdgeCheckInput) ([]*EdgeCheck, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e []*EdgeCheck
 	if err := decodeBodyMap(resp.Body, &e); err != nil {

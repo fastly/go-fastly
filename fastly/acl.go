@@ -52,6 +52,7 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var as []*ACL
 	if err := decodeBodyMap(resp.Body, &as); err != nil {
@@ -87,6 +88,7 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var a *ACL
 	if err := decodeBodyMap(resp.Body, &a); err != nil {
@@ -126,6 +128,7 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {
@@ -168,6 +171,7 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var a *ACL
 	if err := decodeBodyMap(resp.Body, &a); err != nil {
@@ -211,10 +215,10 @@ func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	resp, err := c.PutForm(path, i, nil)
-
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var a *ACL
 	if err := decodeBodyMap(resp.Body, &a); err != nil {

@@ -59,6 +59,7 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ss []*Sumologic
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
@@ -101,6 +102,7 @@ func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Sumologic
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -140,6 +142,7 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Sumologic
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -188,6 +191,7 @@ func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Sumologic
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -227,6 +231,7 @@ func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

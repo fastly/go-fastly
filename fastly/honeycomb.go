@@ -58,6 +58,7 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var hs []*Honeycomb
 	if err := decodeBodyMap(resp.Body, &hs); err != nil {
@@ -103,6 +104,7 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *Honeycomb
 	if err := decodeBodyMap(resp.Body, &h); err != nil {
@@ -142,6 +144,7 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *Honeycomb
 	if err := decodeBodyMap(resp.Body, &h); err != nil {
@@ -193,6 +196,7 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *Honeycomb
 	if err := decodeBodyMap(resp.Body, &h); err != nil {
@@ -232,6 +236,7 @@ func (c *Client) DeleteHoneycomb(i *DeleteHoneycombInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

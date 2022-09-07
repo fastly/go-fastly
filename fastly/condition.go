@@ -56,6 +56,7 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cs []*Condition
 	if err := decodeBodyMap(resp.Body, &cs); err != nil {
@@ -94,6 +95,7 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var co *Condition
 	if err := decodeBodyMap(resp.Body, &co); err != nil {
@@ -133,6 +135,7 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var co *Condition
 	if err := decodeBodyMap(resp.Body, &co); err != nil {
@@ -177,6 +180,7 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var co *Condition
 	if err := decodeBodyMap(resp.Body, &co); err != nil {
@@ -216,6 +220,7 @@ func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

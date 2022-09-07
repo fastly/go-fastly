@@ -63,7 +63,6 @@ type ListWAFRulesInput struct {
 }
 
 func (i *ListWAFRulesInput) formatFilters() map[string]string {
-
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[waf_tags][name][in]":  i.FilterTagNames,
@@ -105,13 +104,13 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 
 // ListWAFRules returns the list of VAF versions for a given WAF ID.
 func (c *Client) ListWAFRules(i *ListWAFRulesInput) (*WAFRuleResponse, error) {
-
 	resp, err := c.Get("/waf/rules", &RequestOptions{
 		Params: i.formatFilters(),
 	})
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var buf bytes.Buffer
 	tee := io.TeeReader(resp.Body, &buf)
@@ -157,7 +156,6 @@ type ListAllWAFRulesInput struct {
 // ListAllWAFRules returns the complete list of WAF rules for the given filters. It iterates through
 // all existing pages to ensure all WAF rules are returned at once.
 func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, error) {
-
 	currentPage := 1
 	result := &WAFRuleResponse{Items: []*WAFRule{}}
 	for {

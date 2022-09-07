@@ -61,7 +61,6 @@ type ListWAFsInput struct {
 }
 
 func (i *ListWAFsInput) formatFilters() map[string]string {
-
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"page[size]":                     i.PageSize,
@@ -88,13 +87,13 @@ func (i *ListWAFsInput) formatFilters() map[string]string {
 
 // ListWAFs returns the list of wafs for the configuration version.
 func (c *Client) ListWAFs(i *ListWAFsInput) (*WAFResponse, error) {
-
 	resp, err := c.Get("/waf/firewalls", &RequestOptions{
 		Params: i.formatFilters(),
 	})
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var buf bytes.Buffer
 	tee := io.TeeReader(resp.Body, &buf)
@@ -151,6 +150,7 @@ func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var waf WAF
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
@@ -194,6 +194,7 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var waf WAF
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
@@ -240,6 +241,7 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var waf WAF
 	if err := jsonapi.UnmarshalPayload(resp.Body, &waf); err != nil {
@@ -258,7 +260,6 @@ type DeleteWAFInput struct {
 
 // DeleteWAF deletes a given WAF from its service.
 func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
 	}
@@ -296,7 +297,6 @@ type metaInfo struct {
 
 // getResponseInfo parses a response to get the pagination and metadata info.
 func getResponseInfo(body io.Reader) (infoResponse, error) {
-
 	bodyBytes, err := io.ReadAll(body)
 	if err != nil {
 		return infoResponse{}, err

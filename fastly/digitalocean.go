@@ -67,6 +67,7 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var digitaloceans []*DigitalOcean
 	if err := decodeBodyMap(resp.Body, &digitaloceans); err != nil {
@@ -117,6 +118,7 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var digitalocean *DigitalOcean
 	if err := decodeBodyMap(resp.Body, &digitalocean); err != nil {
@@ -156,6 +158,7 @@ func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var digitalocean *DigitalOcean
 	if err := decodeBodyMap(resp.Body, &digitalocean); err != nil {
@@ -212,6 +215,7 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var digitalocean *DigitalOcean
 	if err := decodeBodyMap(resp.Body, &digitalocean); err != nil {
@@ -251,6 +255,7 @@ func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {
