@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.5.1](https://github.com/fastly/go-fastly/releases/tag/v6.5.1) (2022-09-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.5.0...v6.5.1)
+
+**Bug fixes:**
+
+- Ensure `http.Response.Body` is closed [#363](https://github.com/fastly/go-fastly/pull/363)
+
 ## [v6.5.0](https://github.com/fastly/go-fastly/releases/tag/v6.5.0) (2022-08-22)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.4.3...v6.5.0)
