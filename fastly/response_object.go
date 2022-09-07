@@ -60,6 +60,7 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*ResponseObject
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
@@ -102,6 +103,7 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -142,6 +144,7 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -190,6 +193,7 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -229,6 +233,7 @@ func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

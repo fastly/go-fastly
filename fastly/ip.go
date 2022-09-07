@@ -9,6 +9,7 @@ func (c *Client) AllIPs() (v4, v6 IPAddrs, err error) {
 	if err != nil {
 		return nil, nil, err
 	}
+	defer resp.Body.Close()
 
 	var m map[string][]string
 	if err := decodeBodyMap(resp.Body, &m); err != nil {

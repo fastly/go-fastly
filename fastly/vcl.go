@@ -54,6 +54,7 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var vcls []*VCL
 	if err := decodeBodyMap(resp.Body, &vcls); err != nil {
@@ -94,6 +95,7 @@ func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var vcl *VCL
 	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
@@ -126,6 +128,7 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var vcl *VCL
 	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
@@ -162,6 +165,7 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var vcl *VCL
 	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
@@ -204,6 +208,7 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var vcl *VCL
 	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
@@ -243,6 +248,7 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var vcl *VCL
 	if err := decodeBodyMap(resp.Body, &vcl); err != nil {
@@ -282,6 +288,7 @@ func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

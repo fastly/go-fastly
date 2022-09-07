@@ -62,6 +62,7 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bigQueries []*BigQuery
 	if err := decodeBodyMap(resp.Body, &bigQueries); err != nil {
@@ -107,6 +108,7 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bigQuery *BigQuery
 	if err := decodeBodyMap(resp.Body, &bigQuery); err != nil {
@@ -146,6 +148,7 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bigQuery *BigQuery
 	if err := decodeBodyMap(resp.Body, &bigQuery); err != nil {
@@ -197,6 +200,7 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bigQuery *BigQuery
 	if err := decodeBodyMap(resp.Body, &bigQuery); err != nil {
@@ -236,6 +240,7 @@ func (c *Client) DeleteBigQuery(i *DeleteBigQueryInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

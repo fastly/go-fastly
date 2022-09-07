@@ -53,6 +53,7 @@ func (c *Client) ListTokens() ([]*Token, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var t []*Token
 	if err := decodeBodyMap(resp.Body, &t); err != nil {
@@ -79,6 +80,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var t []*Token
 	if err := decodeBodyMap(resp.Body, &t); err != nil {
@@ -96,6 +98,7 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var t *Token
 	if err := decodeBodyMap(resp.Body, &t); err != nil {
@@ -126,6 +129,7 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var t *Token
 	if err := decodeBodyMap(resp.Body, &t); err != nil {
@@ -150,6 +154,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return ErrNotOK
@@ -163,6 +168,7 @@ func (c *Client) DeleteTokenSelf() error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return ErrNotOK

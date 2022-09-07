@@ -60,6 +60,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*DictionaryItem
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
@@ -153,6 +154,7 @@ func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *Lis
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	for _, l := range link.ParseResponse(resp) {
 		// indicates the Link response header contained the next page instruction
@@ -207,6 +209,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -217,7 +220,6 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 
 // CreateDictionaryItems creates new Fastly dictionary items from a slice.
 func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
-
 	var b []DictionaryItem
 	for _, cdii := range i {
 		di, err := c.CreateDictionaryItem(&cdii)
@@ -260,6 +262,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -302,6 +305,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -327,7 +331,6 @@ type BatchDictionaryItem struct {
 }
 
 func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
-
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
@@ -345,6 +348,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
 	if err := decodeBodyMap(resp.Body, &batchModifyResult); err != nil {

@@ -61,6 +61,7 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var kineses []*Kinesis
 	if err := decodeBodyMap(resp.Body, &kineses); err != nil {
@@ -105,6 +106,7 @@ func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var kinesis *Kinesis
 	if err := decodeBodyMap(resp.Body, &kinesis); err != nil {
@@ -144,6 +146,7 @@ func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var kinesis *Kinesis
 	if err := decodeBodyMap(resp.Body, &kinesis); err != nil {
@@ -194,6 +197,7 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var kinesis *Kinesis
 	if err := decodeBodyMap(resp.Body, &kinesis); err != nil {
@@ -233,6 +237,7 @@ func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

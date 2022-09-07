@@ -110,6 +110,7 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *HealthCheck
 	if err := decodeBodyMap(resp.Body, &h); err != nil {
@@ -149,6 +150,7 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *HealthCheck
 	if err := decodeBodyMap(resp.Body, &h); err != nil {
@@ -201,6 +203,7 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var h *HealthCheck
 	if err := decodeBodyMap(resp.Body, &h); err != nil {
@@ -240,6 +243,7 @@ func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

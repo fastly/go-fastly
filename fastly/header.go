@@ -164,6 +164,7 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Header
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -203,6 +204,7 @@ func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Header
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -255,6 +257,7 @@ func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Header
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -294,6 +297,7 @@ func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

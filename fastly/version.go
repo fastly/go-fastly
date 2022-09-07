@@ -49,6 +49,7 @@ func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e []*Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -106,6 +107,7 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -138,6 +140,7 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -173,6 +176,7 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -205,6 +209,7 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -237,6 +242,7 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -271,6 +277,7 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -305,6 +312,7 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 	if err != nil {
 		return false, msg, err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {
@@ -339,6 +347,7 @@ func (c *Client) LockVersion(i *LockVersionInput) (*Version, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *Version
 	if err := decodeBodyMap(resp.Body, &e); err != nil {

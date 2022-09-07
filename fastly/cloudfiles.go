@@ -67,6 +67,7 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cloudfiles []*Cloudfiles
 	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
@@ -117,6 +118,7 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cloudfiles *Cloudfiles
 	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
@@ -156,6 +158,7 @@ func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cloudfiles *Cloudfiles
 	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
@@ -212,6 +215,7 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cloudfiles *Cloudfiles
 	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
@@ -251,6 +255,7 @@ func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

@@ -177,6 +177,7 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ta TLSActivation
 	if err := jsonapi.UnmarshalPayload(resp.Body, &ta); err != nil {

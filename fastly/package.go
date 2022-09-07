@@ -49,6 +49,7 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	return PopulatePackage(resp.Body)
 }
@@ -67,7 +68,6 @@ type UpdatePackageInput struct {
 
 // UpdatePackage updates a package for a specific version.
 func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
-
 	urlPath, err := MakePackagePath(i.ServiceID, i.ServiceVersion)
 	if err != nil {
 		return nil, err
@@ -77,6 +77,7 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	return PopulatePackage(resp.Body)
 }

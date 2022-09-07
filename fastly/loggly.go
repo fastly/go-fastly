@@ -57,6 +57,7 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ls []*Loggly
 	if err := decodeBodyMap(resp.Body, &ls); err != nil {
@@ -97,6 +98,7 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Loggly
 	if err := decodeBodyMap(resp.Body, &l); err != nil {
@@ -136,6 +138,7 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Loggly
 	if err := decodeBodyMap(resp.Body, &l); err != nil {
@@ -182,6 +185,7 @@ func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var l *Loggly
 	if err := decodeBodyMap(resp.Body, &l); err != nil {
@@ -221,6 +225,7 @@ func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

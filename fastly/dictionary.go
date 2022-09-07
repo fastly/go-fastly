@@ -54,6 +54,7 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*Dictionary
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
@@ -90,6 +91,7 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Dictionary
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -129,6 +131,7 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Dictionary
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -171,6 +174,7 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *Dictionary
 	if err := decodeBodyMap(resp.Body, &b); err != nil {

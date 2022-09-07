@@ -93,6 +93,7 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ps []*Pool
 	if err := decodeBodyMap(resp.Body, &ps); err != nil {
@@ -155,6 +156,7 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var p *Pool
 	if err := decodeBodyMap(resp.Body, &p); err != nil {
@@ -194,6 +196,7 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var p *Pool
 	if err := decodeBodyMap(resp.Body, &p); err != nil {
@@ -256,6 +259,7 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var p *Pool
 	if err := decodeBodyMap(resp.Body, &p); err != nil {
@@ -279,7 +283,6 @@ type DeletePoolInput struct {
 // DeletePool deletes a specific pool for a particular service and version.
 func (c *Client) DeletePool(i *DeletePoolInput) error {
 	if i.ServiceID == "" {
-
 		return ErrMissingServiceID
 	}
 
@@ -296,6 +299,7 @@ func (c *Client) DeletePool(i *DeletePoolInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

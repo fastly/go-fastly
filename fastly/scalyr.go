@@ -58,6 +58,7 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ss []*Scalyr
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
@@ -103,6 +104,7 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Scalyr
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -142,6 +144,7 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Scalyr
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -193,6 +196,7 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Scalyr
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -232,6 +236,7 @@ func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

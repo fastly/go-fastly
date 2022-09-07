@@ -55,10 +55,12 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
 		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DirectorBackend
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -102,10 +104,12 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
 		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *DirectorBackend
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -149,10 +153,12 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
 		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

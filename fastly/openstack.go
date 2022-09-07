@@ -67,6 +67,7 @@ func (c *Client) ListOpenstack(i *ListOpenstackInput) ([]*Openstack, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var openstacks []*Openstack
 	if err := decodeBodyMap(resp.Body, &openstacks); err != nil {
@@ -117,6 +118,7 @@ func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var openstack *Openstack
 	if err := decodeBodyMap(resp.Body, &openstack); err != nil {
@@ -156,6 +158,7 @@ func (c *Client) GetOpenstack(i *GetOpenstackInput) (*Openstack, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var openstack *Openstack
 	if err := decodeBodyMap(resp.Body, &openstack); err != nil {
@@ -212,6 +215,7 @@ func (c *Client) UpdateOpenstack(i *UpdateOpenstackInput) (*Openstack, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var openstack *Openstack
 	if err := decodeBodyMap(resp.Body, &openstack); err != nil {
@@ -251,6 +255,7 @@ func (c *Client) DeleteOpenstack(i *DeleteOpenstackInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

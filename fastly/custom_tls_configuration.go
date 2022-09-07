@@ -35,7 +35,6 @@ type ListCustomTLSConfigurationsInput struct {
 	Include    string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
 	PageNumber int    // The page index for pagination.
 	PageSize   int    // The number of keys per page.
-
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -154,6 +153,7 @@ func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInp
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var con CustomTLSConfiguration
 	if err := jsonapi.UnmarshalPayload(resp.Body, &con); err != nil {

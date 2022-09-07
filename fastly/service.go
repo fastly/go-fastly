@@ -74,6 +74,7 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s []*Service
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -158,6 +159,7 @@ func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPagin
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	for _, l := range link.ParseResponse(resp) {
 		// indicates the Link response header contained the next page instruction
@@ -199,6 +201,7 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Service
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -225,6 +228,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Service
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -258,6 +262,7 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *ServiceDetail
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -294,6 +299,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Service
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -318,6 +324,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {
@@ -349,6 +356,7 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var s *Service
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
@@ -372,6 +380,7 @@ func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsLi
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ds ServiceDomainsList
 

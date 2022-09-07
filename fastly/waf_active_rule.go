@@ -54,7 +54,6 @@ type ListWAFActiveRulesInput struct {
 }
 
 func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
-
 	result := map[string]string{}
 	pairings := map[string]interface{}{
 		"filter[status]":                            i.FilterStatus,
@@ -82,7 +81,6 @@ func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
 
 // ListWAFActiveRules returns the list of active rules for a given WAF ID.
 func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -98,6 +96,7 @@ func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleR
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var buf bytes.Buffer
 	tee := io.TeeReader(resp.Body, &buf)
@@ -145,7 +144,6 @@ type ListAllWAFActiveRulesInput struct {
 // ListAllWAFActiveRules returns the complete list of WAF active rules for a given WAF ID. It iterates through
 // all existing pages to ensure all WAF active rules are returned at once.
 func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -192,7 +190,6 @@ type CreateWAFActiveRulesInput struct {
 
 // CreateWAFActiveRules adds rules to a particular WAF.
 func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiveRule, error) {
-
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
 	}
@@ -210,6 +207,7 @@ func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiv
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, WAFActiveRuleType)
 	if err != nil {
@@ -243,7 +241,6 @@ type BatchModificationWAFActiveRulesInput struct {
 // BatchModificationWAFActiveRules is a generic function for creating or deleting WAF active rules in batches.
 // Upsert and delete are the only operations allowed.
 func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRulesInput) ([]*WAFActiveRule, error) {
-
 	if len(i.Rules) > BatchModifyMaximumOperations {
 		return nil, ErrMaxExceededRules
 	}
@@ -278,7 +275,6 @@ type DeleteWAFActiveRulesInput struct {
 
 // DeleteWAFActiveRules removes rules from a particular WAF.
 func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
-
 	if i.WAFID == "" {
 		return ErrMissingWAFID
 	}

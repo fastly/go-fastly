@@ -70,7 +70,6 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 
 // ListBulkCertificates list all certificates.
 func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCertificate, error) {
-
 	p := "/tls/bulk/certificates"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
@@ -83,6 +82,7 @@ func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCert
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(BulkCertificate)))
 	if err != nil {
@@ -108,7 +108,6 @@ type GetBulkCertificateInput struct {
 
 // GetBulkCertificate retrieve a single certificate.
 func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificate, error) {
-
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -119,6 +118,7 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	var bc BulkCertificate
 	if err := jsonapi.UnmarshalPayload(r.Body, &bc); err != nil {
@@ -138,7 +138,6 @@ type CreateBulkCertificateInput struct {
 
 // CreateBulkCertificate create a TLS private key.
 func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCertificate, error) {
-
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
 	}
@@ -152,6 +151,7 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	var bc BulkCertificate
 	if err := jsonapi.UnmarshalPayload(r.Body, &bc); err != nil {
@@ -191,6 +191,7 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCert
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bc BulkCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &bc); err != nil {

@@ -69,6 +69,7 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var sftps []*SFTP
 	if err := decodeBodyMap(resp.Body, &sftps); err != nil {
@@ -121,6 +122,7 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ftp *SFTP
 	if err := decodeBodyMap(resp.Body, &ftp); err != nil {
@@ -160,6 +162,7 @@ func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *SFTP
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -218,6 +221,7 @@ func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var b *SFTP
 	if err := decodeBodyMap(resp.Body, &b); err != nil {
@@ -257,6 +261,7 @@ func (c *Client) DeleteSFTP(i *DeleteSFTPInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {

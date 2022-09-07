@@ -60,6 +60,7 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var es []*ACLEntry
 	if err := decodeBodyMap(resp.Body, &es); err != nil {
@@ -108,7 +109,6 @@ func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) PaginatorACL
 
 // listACLEntriesWithPage return a list of entries for an ACL of a given page
 func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntriesPaginator) ([]*ACLEntry, error) {
-
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -156,6 +156,7 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntrie
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	for _, l := range link.ParseResponse(resp) {
 		// indicates the Link response header contained the next page instruction
@@ -211,6 +212,7 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *ACLEntry
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -253,6 +255,7 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *ACLEntry
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -289,6 +292,7 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := decodeBodyMap(resp.Body, &r); err != nil {
@@ -300,7 +304,6 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	}
 
 	return nil
-
 }
 
 // UpdateACLEntryInput is the input parameter to UpdateACLEntry function.
@@ -337,6 +340,7 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var e *ACLEntry
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
@@ -380,6 +384,7 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
 	if err := decodeBodyMap(resp.Body, &batchModifyResult); err != nil {
