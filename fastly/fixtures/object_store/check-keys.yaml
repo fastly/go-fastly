@@ -1,0 +1,183 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/apple
+    method: GET
+  response:
+    body: apple0
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=86400
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Thu, 15 Sep 2022 17:55:38 GMT
+      Server-Timing:
+      - get_object;dur=119, total;dur=123, verify;dur=1
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21321-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264538.181432,VS0,VE183
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/banana
+    method: GET
+  response:
+    body: banana1
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=86400
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Thu, 15 Sep 2022 17:55:38 GMT
+      Server-Timing:
+      - get_object;dur=95, total;dur=99, verify;dur=1
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21353-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264538.383885,VS0,VE160
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/carrot
+    method: GET
+  response:
+    body: carrot2
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=86400
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Thu, 15 Sep 2022 17:55:38 GMT
+      Server-Timing:
+      - get_object;dur=97, verify;dur=1, total;dur=102
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21337-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264539.560918,VS0,VE166
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
+    method: GET
+  response:
+    body: dragonfruit3
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=86400
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Thu, 15 Sep 2022 17:55:38 GMT
+      Server-Timing:
+      - get_object;dur=121, total;dur=125, verify;dur=1
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21362-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264539.742169,VS0,VE185
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/eggplant
+    method: GET
+  response:
+    body: eggplant4
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - max-age=86400
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Thu, 15 Sep 2022 17:55:39 GMT
+      Server-Timing:
+      - total;dur=121, verify;dur=1, get_object;dur=115
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21342-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264539.945095,VS0,VE182
+    status: 200 OK
+    code: 200
+    duration: ""

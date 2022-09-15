@@ -1,0 +1,173 @@
+---
+version: 1
+interactions:
+- request:
+    body: apple0
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/apple
+    method: PUT
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "0"
+      Date:
+      - Thu, 15 Sep 2022 17:55:36 GMT
+      Server-Timing:
+      - set_object;dur=275, verify;dur=1, total;dur=279
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264536.174126,VS0,VE361
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: banana1
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/banana
+    method: PUT
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "0"
+      Date:
+      - Thu, 15 Sep 2022 17:55:37 GMT
+      Server-Timing:
+      - total;dur=408, set_object;dur=402, verify;dur=1
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264537.554119,VS0,VE472
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: carrot2
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/carrot
+    method: PUT
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "0"
+      Date:
+      - Thu, 15 Sep 2022 17:55:37 GMT
+      Server-Timing:
+      - verify;dur=1, set_object;dur=319, total;dur=324
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264537.042032,VS0,VE384
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: dragonfruit3
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
+    method: PUT
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "0"
+      Date:
+      - Thu, 15 Sep 2022 17:55:37 GMT
+      Server-Timing:
+      - total;dur=288, set_object;dur=284, verify;dur=1
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264537.446895,VS0,VE352
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: eggplant4
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/eggplant
+    method: PUT
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Length:
+      - "0"
+      Date:
+      - Thu, 15 Sep 2022 17:55:38 GMT
+      Server-Timing:
+      - verify;dur=1, total;dur=244, set_object;dur=240
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264538.822351,VS0,VE317
+    status: 200 OK
+    code: 200
+    duration: ""

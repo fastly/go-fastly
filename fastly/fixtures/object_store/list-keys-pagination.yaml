@@ -1,0 +1,71 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys?limit=4
+    method: GET
+  response:
+    body: '{"data":["apple","banana","carrot","dragonfruit"],"meta":{"limit":4,"next_cursor":"CgtkcmFnb25mcnVpdA=="}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 15 Sep 2022 17:55:39 GMT
+      Server-Timing:
+      - list_buckets;dur=72, verify;dur=1, total;dur=75
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21321-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264540.531075,VS0,VE136
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys?cursor=CgtkcmFnb25mcnVpdA%3D%3D&limit=4
+    method: GET
+  response:
+    body: '{"data":["eggplant"],"meta":{"limit":4}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 15 Sep 2022 17:55:39 GMT
+      Server-Timing:
+      - total;dur=83, verify;dur=1, list_buckets;dur=79
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21332-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264540.686870,VS0,VE144
+    status: 200 OK
+    code: 200
+    duration: ""
