@@ -1,0 +1,40 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"name":"TestClient_DeleteSecretStore"}
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/6.5.2 (+github.com/fastly/go-fastly; go1.19.1)
+    url: https://api.fastly.com/resources/stores/secret
+    method: POST
+  response:
+    body: |
+      {
+        "id": "38BjRL0jFRvujBb9ksPp9r",
+        "name": "TestClient_DeleteSecretStore"
+      }
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, Fastly-Key
+      Access-Control-Allow-Methods:
+      - PUT, POST, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - "79"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 23 Sep 2022 16:09:02 GMT
+      Fastly-Trace-Id:
+      - x4k7xNewTPEAEkJZhI49A4
+    status: 201 Created
+    code: 201
+    duration: ""
