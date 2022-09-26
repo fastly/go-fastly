@@ -146,10 +146,4 @@ func TestClient_ObjectStore(t *testing.T) {
 			t.Errorf("mismatch listing paginated keys: got %q, want %q", objectStoreListKeys.Data, keys)
 		}
 	})
-
-	// create more stores
-	// list
-	// list with pagination
-	// cleanup
-
 }

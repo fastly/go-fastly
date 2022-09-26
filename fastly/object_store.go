@@ -319,8 +319,6 @@ func (l *ListObjectsStoreKeysPaginator) Keys() []string {
 	return l.keys
 }
 
-// missing example requests from API reference
-
 // GetObjectStoreKeyInput is the input to the GetObjectStoreKey function.
 type GetObjectStoreKeyInput struct {
 	// ID is the ID of the object store (required).
