@@ -3,7 +3,6 @@ package fastly
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"strconv"
 )
 
@@ -134,7 +133,7 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 		return nil, ErrMissingID
 	}
 
-	p := fmt.Sprintf("/resources/stores/secret/%s", i.ID)
+	p := "/resources/stores/secret/" + i.ID
 
 	resp, err := c.Get(p, &RequestOptions{
 		Headers: map[string]string{
@@ -168,7 +167,7 @@ func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 		return ErrMissingID
 	}
 
-	p := fmt.Sprintf("/resources/stores/secret/%s", i.ID)
+	p := "/resources/stores/secret/" + i.ID
 
 	resp, err := c.Delete(p, &RequestOptions{
 		Headers: map[string]string{
@@ -197,6 +196,8 @@ type CreateSecretInput struct {
 	// Name of the Secret (required).
 	Name string
 	// Secret is the plaintext secret to be stored (required).
+	// The value will be base64-encoded when delivered to the API,
+	// which is the required format.
 	Secret []byte
 }
 
@@ -212,7 +213,7 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 		return nil, ErrMissingSecret
 	}
 
-	p := fmt.Sprintf("/resources/stores/secret/%s/secrets", i.ID)
+	p := "/resources/stores/secret/" + i.ID + "/secrets"
 
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(struct {
@@ -273,7 +274,7 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 		return nil, ErrMissingID
 	}
 
-	p := fmt.Sprintf("/resources/stores/secret/%s/secrets", i.ID)
+	p := "/resources/stores/secret/" + i.ID + "/secrets"
 
 	params := make(map[string]string, 2)
 	if i.Limit > 0 {
@@ -321,7 +322,7 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 		return nil, ErrMissingName
 	}
 
-	p := fmt.Sprintf("/resources/stores/secret/%s/secrets/%s", i.ID, i.Name)
+	p := "/resources/stores/secret/" + i.ID + "/secrets/" + i.Name
 
 	resp, err := c.Get(p, &RequestOptions{
 		Headers: map[string]string{
@@ -360,7 +361,7 @@ func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 		return ErrMissingName
 	}
 
-	p := fmt.Sprintf("/resources/stores/secret/%s/secrets/%s", i.ID, i.Name)
+	p := "/resources/stores/secret/" + i.ID + "/secrets/" + i.Name
 
 	resp, err := c.Delete(p, &RequestOptions{
 		Headers: map[string]string{

@@ -32,10 +32,10 @@ func TestNewHTTPError(t *testing.T) {
     Detail: nope
 `)
 		if e.Error() != expected {
-			t.Errorf("expected \n\n%s\n\n to be \n\n%s\n\n", e.Error(), expected)
+			t.Errorf("expected \n\n%q\n\n to be \n\n%q\n\n", e.Error(), expected)
 		}
 		if e.String() != expected {
-			t.Errorf("expected \n\n%s\n\n to be \n\n%s\n\n", e.String(), expected)
+			t.Errorf("expected \n\n%q\n\n to be \n\n%q\n\n", e.String(), expected)
 		}
 
 		if !e.IsNotFound() {
@@ -64,10 +64,10 @@ func TestNewHTTPError(t *testing.T) {
     Detail: That resource does not exist
 `)
 		if e.Error() != expected {
-			t.Errorf("expected \n\n%s\n\n to be \n\n%s\n\n", e.Error(), expected)
+			t.Errorf("expected \n\n%q\n\n to be \n\n%q\n\n", e.Error(), expected)
 		}
 		if e.String() != expected {
-			t.Errorf("expected \n\n%s\n\n to be \n\n%s\n\n", e.String(), expected)
+			t.Errorf("expected \n\n%q\n\n to be \n\n%q\n\n", e.String(), expected)
 		}
 
 		if !e.IsNotFound() {
@@ -96,10 +96,10 @@ func TestNewHTTPError(t *testing.T) {
     Detail: this was an error
 `)
 		if e.Error() != expected {
-			t.Errorf("expected \n\n%s\n\n to be \n\n%s\n\n", e.Error(), expected)
+			t.Errorf("expected \n\n%q\n\n to be \n\n%q\n\n", e.Error(), expected)
 		}
 		if e.String() != expected {
-			t.Errorf("expected \n\n%s\n\n to be \n\n%s\n\n", e.String(), expected)
+			t.Errorf("expected \n\n%q\n\n to be \n\n%q\n\n", e.String(), expected)
 		}
 
 		if !e.IsNotFound() {
