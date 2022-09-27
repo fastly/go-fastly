@@ -1,0 +1,229 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys
+    method: GET
+  response:
+    body: '{"data":["apple","banana","carrot","dragonfruit","eggplant"],"meta":{"limit":100}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 15 Sep 2022 17:55:40 GMT
+      Server-Timing:
+      - verify;dur=1, list_buckets;dur=140, total;dur=144
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264540.850553,VS0,VE203
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/apple
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 15 Sep 2022 17:55:40 GMT
+      Server-Timing:
+      - total;dur=342, verify;dur=2, delete_object;dur=337
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264540.071843,VS0,VE402
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/banana
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 15 Sep 2022 17:55:40 GMT
+      Server-Timing:
+      - verify;dur=1, total;dur=297, delete_object;dur=293
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264541.528713,VS0,VE357
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/carrot
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 15 Sep 2022 17:55:41 GMT
+      Server-Timing:
+      - total;dur=314, verify;dur=2, delete_object;dur=308
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264541.903027,VS0,VE373
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 15 Sep 2022 17:55:41 GMT
+      Server-Timing:
+      - total;dur=315, verify;dur=1, delete_object;dur=310
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264541.338655,VS0,VE374
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/eggplant
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 15 Sep 2022 17:55:42 GMT
+      Server-Timing:
+      - total;dur=308, delete_object;dur=304, verify;dur=1
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264542.768237,VS0,VE367
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
+    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Thu, 15 Sep 2022 17:55:42 GMT
+      Server-Timing:
+      - total;dur=578, delete_attachment;dur=56, verify;dur=1, delete_bucket;dur=518
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21373-FTY, cache-sea4451-SEA
+      X-Timer:
+      - S1663264542.166765,VS0,VE637
+    status: 204 No Content
+    code: 204
+    duration: ""
