@@ -1,5 +1,14 @@
 # Changelog
 
+## [v6.6.0](https://github.com/fastly/go-fastly/releases/tag/v6.6.0) (2022-10-05)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.5.2...v6.6.0)
+
+**Enhancements:**
+
+- Make gzip level consistent everywhere [#368](https://github.com/fastly/go-fastly/pull/368)
+- Add Object Store API support [#359](https://github.com/fastly/go-fastly/pull/359)
+
 ## [v6.5.2](https://github.com/fastly/go-fastly/releases/tag/v6.5.2) (2022-09-08)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.5.1...v6.5.2)
