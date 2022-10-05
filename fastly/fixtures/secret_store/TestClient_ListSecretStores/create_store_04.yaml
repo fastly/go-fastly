@@ -1,0 +1,40 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"name":"TestClient_ListSecretStores-04"}
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/6.5.2 (+github.com/fastly/go-fastly; go1.19.1)
+    url: https://api.fastly.com/resources/stores/secret
+    method: POST
+  response:
+    body: |
+      {
+        "id": "wzLBnkxQV291CX4unAYefO",
+        "name": "TestClient_ListSecretStores-04"
+      }
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, Fastly-Key
+      Access-Control-Allow-Methods:
+      - PUT, POST, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - "81"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 23 Sep 2022 16:09:01 GMT
+      Fastly-Trace-Id:
+      - JSj7ZWXwnk3wS1CtFWw3Rv
+    status: 201 Created
+    code: 201
+    duration: ""

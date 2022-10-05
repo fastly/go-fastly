@@ -2,9 +2,11 @@ package fastly
 
 import (
 	"bytes"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/google/jsonapi"
 )
@@ -165,6 +167,10 @@ var ErrMissingNumber = NewFieldError("Number")
 // requires a "PoolID" key, but one was not set.
 var ErrMissingPoolID = NewFieldError("PoolID")
 
+// ErrMissingSecret is an error that is returned when an input struct
+// requires a "Secret" key, but one was not set.
+var ErrMissingSecret = NewFieldError("Secret")
+
 // ErrMissingServer is an error that is returned when an input struct
 // requires a "Server" key, but one was not set.
 var ErrMissingServer = NewFieldError("Server")
@@ -318,12 +324,31 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		return &e
 	}
 
-	// If this is a jsonapi response, decode it accordingly
-	if resp.Header.Get("Content-Type") == jsonapi.MediaType {
+	switch resp.Header.Get("Content-Type") {
+	case jsonapi.MediaType:
+		// If this is a jsonapi response, decode it accordingly
 		if err := decodeBodyMap(resp.Body, &e); err != nil {
 			panic(err)
 		}
-	} else {
+
+	case "application/problem+json":
+		// Response is a "problem detail" as defined in RFC 7807.
+		var problemDetail struct {
+			URL    string `json:"type,omitempty"`   // URL to a human-readable document describing this specific error condition
+			Title  string `json:"title,omitempty"`  // A short name for the error type, which remains constant from occurrence to occurrence
+			Status int    `json:"status"`           // HTTP status code
+			Detail string `json:"detail,omitempty"` // A human-readable description of the specific error, aiming to help the user correct the problem
+		}
+		if err := json.NewDecoder(resp.Body).Decode(&problemDetail); err != nil {
+			panic(err)
+		}
+		e.Errors = append(e.Errors, &ErrorObject{
+			Title:  problemDetail.Title,
+			Detail: problemDetail.Detail,
+			Status: strconv.Itoa(problemDetail.Status),
+		})
+
+	default:
 		var lerr *legacyError
 		decodeBodyMap(resp.Body, &lerr)
 		if lerr != nil {
