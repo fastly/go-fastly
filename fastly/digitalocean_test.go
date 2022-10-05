@@ -303,7 +303,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-digitalocean-3",
-			GzipLevel:      Uint(9),
+			GzipLevel:      Uint8(9),
 		})
 	})
 	if err != nil {

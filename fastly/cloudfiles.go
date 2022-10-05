@@ -20,7 +20,7 @@ type Cloudfiles struct {
 	Region            string     `mapstructure:"region"`
 	Placement         string     `mapstructure:"placement"`
 	Period            uint       `mapstructure:"period"`
-	GzipLevel         uint       `mapstructure:"gzip_level"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
@@ -93,7 +93,7 @@ type CreateCloudfilesInput struct {
 	Region            string `url:"region,omitempty"`
 	Placement         string `url:"placement,omitempty"`
 	Period            uint   `url:"period,omitempty"`
-	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
 	ResponseCondition string `url:"response_condition,omitempty"`
@@ -186,7 +186,7 @@ type UpdateCloudfilesInput struct {
 	Region            *string `url:"region,omitempty"`
 	Placement         *string `url:"placement,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
-	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
 	Format            *string `url:"format,omitempty"`
 	FormatVersion     *uint   `url:"format_version,omitempty"`
 	ResponseCondition *string `url:"response_condition,omitempty"`

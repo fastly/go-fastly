@@ -494,7 +494,7 @@ func TestClient_S3s(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-s3-3",
-			GzipLevel:      Uint(9),
+			GzipLevel:      Uint8(9),
 		})
 	})
 	if err != nil {

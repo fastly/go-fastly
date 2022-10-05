@@ -20,7 +20,7 @@ type BlobStorage struct {
 	Period            uint       `mapstructure:"period"`
 	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	CompressionCodec  string     `mapstructure:"compression_codec"`
-	GzipLevel         uint       `mapstructure:"gzip_level"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	PublicKey         string     `mapstructure:"public_key"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
@@ -93,7 +93,7 @@ type CreateBlobStorageInput struct {
 	Period            uint   `url:"period,omitempty"`
 	TimestampFormat   string `url:"timestamp_format,omitempty"`
 	CompressionCodec  string `url:"compression_codec,omitempty"`
-	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
 	PublicKey         string `url:"public_key,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
@@ -186,7 +186,7 @@ type UpdateBlobStorageInput struct {
 	Period            *uint   `url:"period,omitempty"`
 	TimestampFormat   *string `url:"timestamp_format,omitempty"`
 	CompressionCodec  *string `url:"compression_codec,omitempty"`
-	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
 	PublicKey         *string `url:"public_key,omitempty"`
 	Format            *string `url:"format,omitempty"`
 	FormatVersion     *uint   `url:"format_version,omitempty"`

@@ -55,7 +55,7 @@ type S3 struct {
 	Path                         string                 `mapstructure:"path"`
 	Period                       uint                   `mapstructure:"period"`
 	CompressionCodec             string                 `mapstructure:"compression_codec"`
-	GzipLevel                    uint                   `mapstructure:"gzip_level"`
+	GzipLevel                    uint8                  `mapstructure:"gzip_level"`
 	Format                       string                 `mapstructure:"format"`
 	FormatVersion                uint                   `mapstructure:"format_version"`
 	ResponseCondition            string                 `mapstructure:"response_condition"`
@@ -133,7 +133,7 @@ type CreateS3Input struct {
 	Path                         string                 `url:"path,omitempty"`
 	Period                       uint                   `url:"period,omitempty"`
 	CompressionCodec             string                 `url:"compression_codec,omitempty"`
-	GzipLevel                    uint                   `url:"gzip_level,omitempty"`
+	GzipLevel                    uint8                  `url:"gzip_level,omitempty"`
 	Format                       string                 `url:"format,omitempty"`
 	MessageType                  string                 `url:"message_type,omitempty"`
 	FormatVersion                uint                   `url:"format_version,omitempty"`
@@ -235,7 +235,7 @@ type UpdateS3Input struct {
 	Path                         *string                 `url:"path,omitempty"`
 	Period                       *uint                   `url:"period,omitempty"`
 	CompressionCodec             *string                 `url:"compression_codec,omitempty"`
-	GzipLevel                    *uint                   `url:"gzip_level,omitempty"`
+	GzipLevel                    *uint8                  `url:"gzip_level,omitempty"`
 	Format                       *string                 `url:"format,omitempty"`
 	FormatVersion                *uint                   `url:"format_version,omitempty"`
 	ResponseCondition            *string                 `url:"response_condition,omitempty"`

@@ -306,7 +306,7 @@ func TestClient_SFTPs(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-sftp",
 			NewName:        String("new-test-sftp"),
-			GzipLevel:      Uint(8),
+			GzipLevel:      Uint8(8),
 			MessageType:    String("classic"),
 		})
 	})
@@ -331,7 +331,7 @@ func TestClient_SFTPs(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-sftp-3",
-			GzipLevel:      Uint(9),
+			GzipLevel:      Uint8(9),
 		})
 	})
 	if err != nil {

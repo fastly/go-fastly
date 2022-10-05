@@ -19,7 +19,7 @@ type DigitalOcean struct {
 	SecretKey         string     `mapstructure:"secret_key"`
 	Path              string     `mapstructure:"path"`
 	Period            uint       `mapstructure:"period"`
-	GzipLevel         uint       `mapstructure:"gzip_level"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
 	ResponseCondition string     `mapstructure:"response_condition"`
@@ -92,7 +92,7 @@ type CreateDigitalOceanInput struct {
 	SecretKey         string `url:"secret_key,omitempty"`
 	Path              string `url:"path,omitempty"`
 	Period            uint   `url:"period,omitempty"`
-	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
 	Format            string `url:"format,omitempty"`
 	MessageType       string `url:"message_type,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
@@ -185,7 +185,7 @@ type UpdateDigitalOceanInput struct {
 	SecretKey         *string `url:"secret_key,omitempty"`
 	Path              *string `url:"path,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
-	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
 	Format            *string `url:"format,omitempty"`
 	FormatVersion     *uint   `url:"format_version,omitempty"`
 	ResponseCondition *string `url:"response_condition,omitempty"`
