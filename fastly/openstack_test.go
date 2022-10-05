@@ -309,7 +309,7 @@ func TestClient_Openstack(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-openstack-3",
-			GzipLevel:      Uint(9),
+			GzipLevel:      Uint8(9),
 		})
 	})
 	if err != nil {

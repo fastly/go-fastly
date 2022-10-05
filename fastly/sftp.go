@@ -99,7 +99,7 @@ type CreateSFTPInput struct {
 	Period            uint   `url:"period,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
 	CompressionCodec  string `url:"compression_codec,omitempty"`
-	GzipLevel         uint   `url:"gzip_level,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
 	Format            string `url:"format,omitempty"`
 	ResponseCondition string `url:"response_condition,omitempty"`
 	TimestampFormat   string `url:"timestamp_format,omitempty"`
@@ -194,7 +194,7 @@ type UpdateSFTPInput struct {
 	Period            *uint   `url:"period,omitempty"`
 	FormatVersion     *uint   `url:"format_version,omitempty"`
 	CompressionCodec  *string `url:"compression_codec,omitempty"`
-	GzipLevel         *uint   `url:"gzip_level,omitempty"`
+	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
 	Format            *string `url:"format,omitempty"`
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	TimestampFormat   *string `url:"timestamp_format,omitempty"`
