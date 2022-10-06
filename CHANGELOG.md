@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.7.0](https://github.com/fastly/go-fastly/releases/tag/v6.7.0) (2022-10-06)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.6.0...v6.7.0)
+
+**Enhancements:**
+
+- Add Secret Store API support [#367](https://github.com/fastly/go-fastly/pull/367)
+
 ## [v6.6.0](https://github.com/fastly/go-fastly/releases/tag/v6.6.0) (2022-10-05)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.5.2...v6.6.0)
