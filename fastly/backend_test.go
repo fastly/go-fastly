@@ -107,8 +107,40 @@ func TestClient_Backends(t *testing.T) {
 		t.Errorf("bad override_host: %q (%q)", b.OverrideHost, nb.OverrideHost)
 	}
 
-	// Update
+	// Update an empty field to be non-empty
 	var ub *Backend
+	record(t, "backends/update0", func(c *Client) {
+		ub, err = c.UpdateBackend(&UpdateBackendInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-backend",
+			OverrideHost:   String("example.com"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ub.OverrideHost != "example.com" {
+		t.Errorf("bad override_host: %q", ub.OverrideHost)
+	}
+
+	// Update a non-empty field to be empty
+	record(t, "backends/update1", func(c *Client) {
+		ub, err = c.UpdateBackend(&UpdateBackendInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-backend",
+			OverrideHost:   String(""),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ub.OverrideHost != "" {
+		t.Errorf("expected empty override_host, got: %q", ub.OverrideHost)
+	}
+
+	// Update
 	record(t, "backends/update", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
 			ServiceID:      testServiceID,

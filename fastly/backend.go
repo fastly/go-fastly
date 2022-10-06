@@ -203,11 +203,14 @@ type UpdateBackendInput struct {
 	// Name is the name of the backend to update.
 	Name string
 
+	// Which fields should be omitempty?  NewName certainly,
+	// but not e.g. OverrideHost and SSLSNIHostname, which users may want to clear.
+	// TODO: remove omitempty from more fields
 	NewName             *string      `url:"name,omitempty"`
 	Comment             *string      `url:"comment,omitempty"`
 	Address             *string      `url:"address,omitempty"`
 	Port                *uint        `url:"port,omitempty"`
-	OverrideHost        *string      `url:"override_host,omitempty"`
+	OverrideHost        *string      `url:"override_host"`
 	ConnectTimeout      *uint        `url:"connect_timeout,omitempty"`
 	MaxConn             *uint        `url:"max_conn,omitempty"`
 	ErrorThreshold      *uint        `url:"error_threshold,omitempty"`
@@ -220,15 +223,15 @@ type UpdateBackendInput struct {
 	Shield              *string      `url:"shield,omitempty"`
 	UseSSL              *Compatibool `url:"use_ssl,omitempty"`
 	SSLCheckCert        *Compatibool `url:"ssl_check_cert,omitempty"`
-	SSLCACert           *string      `url:"ssl_ca_cert,omitempty"`
-	SSLClientCert       *string      `url:"ssl_client_cert,omitempty"`
-	SSLClientKey        *string      `url:"ssl_client_key,omitempty"`
-	SSLHostname         *string      `url:"ssl_hostname,omitempty"`
-	SSLCertHostname     *string      `url:"ssl_cert_hostname,omitempty"`
-	SSLSNIHostname      *string      `url:"ssl_sni_hostname,omitempty"`
-	MinTLSVersion       *string      `url:"min_tls_version,omitempty"`
-	MaxTLSVersion       *string      `url:"max_tls_version,omitempty"`
-	SSLCiphers          string       `url:"ssl_ciphers,omitempty"`
+	SSLCACert           *string      `url:"ssl_ca_cert"`
+	SSLClientCert       *string      `url:"ssl_client_cert"`
+	SSLClientKey        *string      `url:"ssl_client_key"`
+	SSLHostname         *string      `url:"ssl_hostname,"`
+	SSLCertHostname     *string      `url:"ssl_cert_hostname"`
+	SSLSNIHostname      *string      `url:"ssl_sni_hostname"`
+	MinTLSVersion       *string      `url:"min_tls_version"`
+	MaxTLSVersion       *string      `url:"max_tls_version"`
+	SSLCiphers          string       `url:"ssl_ciphers"`
 }
 
 // UpdateBackend updates a specific backend.
