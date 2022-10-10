@@ -1,5 +1,13 @@
 # Changelog
 
+## [v6.8.0](https://github.com/fastly/go-fastly/releases/tag/v6.8.0) (2022-10-10)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.7.0...v6.8.0)
+
+**Enhancements:**
+
+- Support Health Check Headers [#373](https://github.com/fastly/go-fastly/pull/373)
+
 ## [v6.7.0](https://github.com/fastly/go-fastly/releases/tag/v6.7.0) (2022-10-06)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.6.0...v6.7.0)
