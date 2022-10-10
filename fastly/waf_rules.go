@@ -52,7 +52,7 @@ type ListWAFRulesInput struct {
 	// Limit the returned rules to a set by modsecurity rule IDs.
 	FilterModSecIDs []int
 	// Excludes individual rules by modsecurity rule IDs.
-	// TODO: fix typo ExcludeMocSecIDs -> ExcludeModSecIDs
+	// FIXME: Should be d not c (ExcludeMocSecIDs -> ExcludeModSecIDs)
 	ExcludeMocSecIDs []int
 	// Limit the number of returned rules.
 	PageSize int

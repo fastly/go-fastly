@@ -22,6 +22,12 @@ type RequestOptions struct {
 
 	// Can this request run in parallel
 	Parallel bool
+
+	// HealthCheckHeaders indicates if there is any special parsing required to
+	// support the health check API endpoint (refer to client.RequestForm).
+	//
+	// FIXME: For the future code-generated API client world.
+	HealthCheckHeaders bool
 }
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the

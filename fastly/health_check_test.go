@@ -17,10 +17,14 @@ func TestClient_HealthChecks(t *testing.T) {
 	var hc *HealthCheck
 	record(t, "health_checks/create", func(c *Client) {
 		hc, err = c.CreateHealthCheck(&CreateHealthCheckInput{
-			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
-			Name:             "test-healthcheck",
-			Method:           "HEAD",
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "test-healthcheck",
+			Method:         "HEAD",
+			Headers: []string{
+				"Foo: Bar",
+				"Baz: Qux",
+			},
 			Host:             "example.com",
 			Path:             "/foo",
 			HTTPVersion:      "1.1",
@@ -86,6 +90,9 @@ func TestClient_HealthChecks(t *testing.T) {
 	if hc.Initial != 10 {
 		t.Errorf("bad initial: %q", hc.Initial)
 	}
+	if len(hc.Headers) != 2 {
+		t.Errorf("bad headers: %q", hc.Headers)
+	}
 
 	// List
 	var hcs []*HealthCheck
@@ -147,6 +154,12 @@ func TestClient_HealthChecks(t *testing.T) {
 	if hc.Initial != nhc.Initial {
 		t.Errorf("bad initial: %q", hc.Initial)
 	}
+	if len(nhc.Headers) != 2 {
+		t.Errorf("bad headers: %q", nhc.Headers)
+	}
+	if hc.Headers[0] != nhc.Headers[0] || hc.Headers[1] != nhc.Headers[1] {
+		t.Errorf("bad headers: %q", nhc.Headers)
+	}
 
 	// Update
 	var uhc *HealthCheck
@@ -156,13 +169,17 @@ func TestClient_HealthChecks(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-healthcheck",
 			NewName:        String("new-test-healthcheck"),
+			Headers:        &[]string{"Beep: Boop"},
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 	if uhc.Name != "new-test-healthcheck" {
-		t.Errorf("bad name: %q", uhc.Name)
+		t.Errorf("bad update name: %q", uhc.Name)
+	}
+	if len(uhc.Headers) != 1 {
+		t.Errorf("bad headers: %q", uhc.Headers)
 	}
 
 	// Delete
