@@ -317,6 +317,32 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 	return resp, nil
 }
 
+// parseHealthCheckHeaders returns the serialised body with the custom health
+// check headers appended.
+//
+// NOTE: The Google query library we use for parsing and encoding the provided
+// struct values doesn't support the format `headers=["Foo: Bar"]` and so we
+// have to manually construct this format.
+func parseHealthCheckHeaders(s string) string {
+	headers := []string{}
+	result := []string{}
+	segs := strings.Split(s, "&")
+	for _, s := range segs {
+		if strings.HasPrefix(strings.ToLower(s), "headers=") {
+			v := strings.Split(s, "=")
+			if len(v) == 2 {
+				headers = append(headers, fmt.Sprintf("%q", strings.ReplaceAll(v[1], "%3A+", ":")))
+			}
+		} else {
+			result = append(result, s)
+		}
+	}
+	if len(headers) > 0 {
+		result = append(result, "headers=%5B"+strings.Join(headers, ",")+"%5D")
+	}
+	return strings.Join(result, "&")
+}
+
 // RequestForm makes an HTTP request with the given interface being encoded as
 // form data.
 func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
@@ -333,7 +359,11 @@ func (c *Client) RequestForm(verb, p string, i interface{}, ro *RequestOptions) 
 	if err != nil {
 		return nil, err
 	}
+
 	body := v.Encode()
+	if ro.HealthCheckHeaders {
+		body = parseHealthCheckHeaders(body)
+	}
 
 	ro.Body = strings.NewReader(body)
 	ro.BodyLength = int64(len(body))

@@ -15,6 +15,7 @@ type HealthCheck struct {
 	Name             string     `mapstructure:"name"`
 	Comment          string     `mapstructure:"comment"`
 	Method           string     `mapstructure:"method"`
+	Headers          []string   `mapstructure:"headers"`
 	Host             string     `mapstructure:"host"`
 	Path             string     `mapstructure:"path"`
 	HTTPVersion      string     `mapstructure:"http_version"`
@@ -81,18 +82,19 @@ type CreateHealthCheckInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 
-	Name             string `url:"name,omitempty"`
-	Comment          string `url:"comment,omitempty"`
-	Method           string `url:"method,omitempty"`
-	Host             string `url:"host,omitempty"`
-	Path             string `url:"path,omitempty"`
-	HTTPVersion      string `url:"http_version,omitempty"`
-	Timeout          *uint  `url:"timeout,omitempty"`
-	CheckInterval    *uint  `url:"check_interval,omitempty"`
-	ExpectedResponse *uint  `url:"expected_response,omitempty"`
-	Window           *uint  `url:"window,omitempty"`
-	Threshold        *uint  `url:"threshold,omitempty"`
-	Initial          *uint  `url:"initial,omitempty"`
+	Name             string   `url:"name,omitempty"`
+	Comment          string   `url:"comment,omitempty"`
+	Method           string   `url:"method,omitempty"`
+	Headers          []string `url:"headers,omitempty"`
+	Host             string   `url:"host,omitempty"`
+	Path             string   `url:"path,omitempty"`
+	HTTPVersion      string   `url:"http_version,omitempty"`
+	Timeout          *uint    `url:"timeout,omitempty"`
+	CheckInterval    *uint    `url:"check_interval,omitempty"`
+	ExpectedResponse *uint    `url:"expected_response,omitempty"`
+	Window           *uint    `url:"window,omitempty"`
+	Threshold        *uint    `url:"threshold,omitempty"`
+	Initial          *uint    `url:"initial,omitempty"`
 }
 
 // CreateHealthCheck creates a new Fastly health check.
@@ -105,8 +107,11 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
+	ro := new(RequestOptions)
+	ro.HealthCheckHeaders = true
+
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck", i.ServiceID, i.ServiceVersion)
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -170,18 +175,19 @@ type UpdateHealthCheckInput struct {
 	// Name is the name of the health check to update.
 	Name string
 
-	NewName          *string `url:"name,omitempty"`
-	Comment          *string `url:"comment,omitempty"`
-	Method           *string `url:"method,omitempty"`
-	Host             *string `url:"host,omitempty"`
-	Path             *string `url:"path,omitempty"`
-	HTTPVersion      *string `url:"http_version,omitempty"`
-	Timeout          *uint   `url:"timeout,omitempty"`
-	CheckInterval    *uint   `url:"check_interval,omitempty"`
-	ExpectedResponse *uint   `url:"expected_response,omitempty"`
-	Window           *uint   `url:"window,omitempty"`
-	Threshold        *uint   `url:"threshold,omitempty"`
-	Initial          *uint   `url:"initial,omitempty"`
+	NewName          *string   `url:"name,omitempty"`
+	Comment          *string   `url:"comment,omitempty"`
+	Method           *string   `url:"method,omitempty"`
+	Headers          *[]string `url:"headers,omitempty"`
+	Host             *string   `url:"host,omitempty"`
+	Path             *string   `url:"path,omitempty"`
+	HTTPVersion      *string   `url:"http_version,omitempty"`
+	Timeout          *uint     `url:"timeout,omitempty"`
+	CheckInterval    *uint     `url:"check_interval,omitempty"`
+	ExpectedResponse *uint     `url:"expected_response,omitempty"`
+	Window           *uint     `url:"window,omitempty"`
+	Threshold        *uint     `url:"threshold,omitempty"`
+	Initial          *uint     `url:"initial,omitempty"`
 }
 
 // UpdateHealthCheck updates a specific health check.
@@ -198,8 +204,11 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingName
 	}
 
+	ro := new(RequestOptions)
+	ro.HealthCheckHeaders = true
+
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, ro)
 	if err != nil {
 		return nil, err
 	}

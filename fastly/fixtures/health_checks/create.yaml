@@ -2,16 +2,18 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=77&check_interval=2500&expected_response=200&host=example.com&http_version=1.1&initial=10&method=HEAD&name=test-healthcheck&path=%2Ffoo&threshold=10&timeout=1500&window=5000
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=131&check_interval=2500&expected_response=200&host=example.com&http_version=1.1&initial=10&method=HEAD&name=test-healthcheck&path=%2Ffoo&threshold=10&timeout=1500&window=5000&headers=%5B"Foo:Bar","Baz:Qux"%5D
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "77"
+      - "131"
       check_interval:
       - "2500"
       expected_response:
       - "200"
+      headers:
+      - '["Foo:Bar","Baz:Qux"]'
       host:
       - example.com
       http_version:
@@ -34,11 +36,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/77/healthcheck
+      - FastlyGo/6.7.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/131/healthcheck
     method: POST
   response:
-    body: '{"check_interval":2500,"expected_response":200,"host":"example.com","http_version":"1.1","initial":10,"method":"HEAD","name":"test-healthcheck","path":"/foo","threshold":10,"timeout":1500,"window":5000,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":77,"updated_at":"2021-11-26T07:17:25Z","comment":"","created_at":"2021-11-26T07:17:25Z","deleted_at":null}'
+    body: '{"check_interval":2500,"expected_response":200,"host":"example.com","http_version":"1.1","initial":10,"method":"HEAD","name":"test-healthcheck","path":"/foo","threshold":10,"timeout":1500,"window":5000,"headers":["Baz:
+      Qux","Foo: Bar"],"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":131,"deleted_at":null,"updated_at":"2022-10-10T11:57:57Z","created_at":"2022-10-10T11:57:57Z","comment":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -47,11 +50,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 26 Nov 2021 07:17:25 GMT
+      - Mon, 10 Oct 2022 11:57:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "4975"
+      - "9920"
       Fastly-Ratelimit-Reset:
-      - "1637913600"
+      - "1665403200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -65,9 +68,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11949-TYO
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4129-MAN
       X-Timer:
-      - S1637911045.174887,VS0,VE292
+      - S1665403077.753161,VS0,VE358
     status: 200 OK
     code: 200
     duration: ""
