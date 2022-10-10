@@ -27,12 +27,14 @@ type ServiceAuthorization struct {
 	Permission string     `jsonapi:"attr,permission,omitempty"`
 	CreatedAt  *time.Time `jsonapi:"attr,created_at,iso8601"`
 	UpdatedAt  *time.Time `jsonapi:"attr,updated_at,iso8601"`
-	DeltedAt   *time.Time `jsonapi:"attr,deleted_at,iso8601"`
-	User       *SAUser    `jsonapi:"relation,user,omitempty"`
-	Service    *SAService `jsonapi:"relation,service,omitempty"`
+	// FIXME: Typo (DeltedAt -> DeletedAt).
+	DeltedAt *time.Time `jsonapi:"attr,deleted_at,iso8601"`
+	User     *SAUser    `jsonapi:"relation,user,omitempty"`
+	Service  *SAService `jsonapi:"relation,service,omitempty"`
 }
 
 // SAResponse is an object containing the list of ServiceAuthorization results.
+// FIXME: Ambiguous name (SAResponse -> ServiceAuthorizations)
 type SAResponse struct {
 	Items []*ServiceAuthorization
 	Info  infoResponse
@@ -139,7 +141,7 @@ type CreateServiceAuthorizationInput struct {
 	// Permission is the level of permissions to grant the user to the service. Valid values are "full", "read_only", "purge_select" or "purge_all".
 	Permission string `jsonapi:"attr,permission,omitempty"`
 
-	// ServiceID is the ID of the service to grant permissions for.
+	// Service is the ID of the service to grant permissions for.
 	Service *SAService `jsonapi:"relation,service,omitempty"`
 
 	// UserID is the ID of the user which should have its permissions set.
@@ -175,6 +177,7 @@ type UpdateServiceAuthorizationInput struct {
 	ID string `jsonapi:"primary,service_authorization"`
 
 	// The permission to grant the user to the service referenced by this service authorization.
+	// FIXME: Should be singular (Permissions -> Permission).
 	Permissions string `jsonapi:"attr,permission,omitempty"`
 }
 
