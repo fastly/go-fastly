@@ -224,7 +224,6 @@ type UpdateBackendInput struct {
 	SSLCiphers          string       `url:"ssl_ciphers,omitempty"`
 	SSLClientCert       *string      `url:"ssl_client_cert,omitempty"`
 	SSLClientKey        *string      `url:"ssl_client_key,omitempty"`
-	SSLHostname         *string      `url:"ssl_hostname,omitempty"`
 	SSLSNIHostname      *string      `url:"ssl_sni_hostname,omitempty"`
 	Shield              *string      `url:"shield,omitempty"`
 	UseSSL              *Compatibool `url:"use_ssl,omitempty"`
