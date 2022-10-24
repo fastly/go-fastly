@@ -1,0 +1,53 @@
+---
+version: 1
+interactions:
+- request:
+    body: Name=new-test-backend&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=12
+    form:
+      Name:
+      - new-test-backend
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "12"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/12/backend/new-test-backend
+    method: PUT
+  response:
+    body: '{"created_at":"2022-10-24T11:38:05Z","shield":null,"first_byte_timeout":15000,"ssl_check_cert":false,"auto_loadbalance":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","ssl_sni_hostname":null,"version":12,"port":1234,"ipv4":null,"deleted_at":null,"max_tls_version":null,"ssl_client_key":null,"comment":"","min_tls_version":null,"connect_timeout":1500,"ssl_ca_cert":null,"request_condition":"","ssl_cert_hostname":null,"ssl_client_cert":null,"between_bytes_timeout":10000,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","name":"new-test-backend","hostname":"integ-test.go-fastly.com","use_ssl":false,"healthcheck":null,"weight":100,"max_conn":200,"client_cert":null,"ipv6":null,"error_threshold":0,"address":"integ-test.go-fastly.com","override_host":"www.example.com","updated_at":"2022-10-24T11:38:05Z","ssl_hostname":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 24 Oct 2022 11:38:06 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9937"
+      Fastly-Ratelimit-Reset:
+      - "1666612800"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4146-MAN
+      X-Timer:
+      - S1666611486.138761,VS0,VE396
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -21,7 +21,6 @@ func TestClient_Backends(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-backend",
 			Address:        "integ-test.go-fastly.com",
-			Port:           Uint(1234),
 			ConnectTimeout: Uint(1500),
 			OverrideHost:   "origin.example.com",
 			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
@@ -54,7 +53,7 @@ func TestClient_Backends(t *testing.T) {
 	if b.Address != "integ-test.go-fastly.com" {
 		t.Errorf("bad address: %q", b.Address)
 	}
-	if b.Port != 1234 {
+	if b.Port != 80 {
 		t.Errorf("bad port: %d", b.Port)
 	}
 	if b.ConnectTimeout != 1500 {
@@ -62,6 +61,9 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if b.OverrideHost != "origin.example.com" {
 		t.Errorf("bad override_host: %q", b.OverrideHost)
+	}
+	if b.SSLCheckCert != true {
+		t.Errorf("bad ssl_check_cert: %t", b.SSLCheckCert) // API defaults to true
 	}
 
 	// List
@@ -116,7 +118,9 @@ func TestClient_Backends(t *testing.T) {
 			Name:           "test-backend",
 			NewName:        String("new-test-backend"),
 			OverrideHost:   String("www.example.com"),
-			SSLCiphers:     "RC4:!COMPLEMENTOFDEFAULT",
+			Port:           Uint(1234),
+			SSLCiphers:     String("RC4:!COMPLEMENTOFDEFAULT"),
+			SSLCheckCert:   CBool(false),
 		})
 	})
 	if err != nil {
@@ -127,6 +131,54 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if ub.OverrideHost != "www.example.com" {
 		t.Errorf("bad override_host: %q", ub.OverrideHost)
+	}
+	if ub.Port != 1234 {
+		t.Errorf("bad port: %d", ub.Port)
+	}
+	if ub.SSLCheckCert != false {
+		t.Errorf("bad ssl_check_cert: %t", ub.SSLCheckCert)
+	}
+
+	// NOTE: The following test validates empty values are NOT sent.
+	record(t, "backends/update_ignore_empty_values", func(c *Client) {
+		ub, err = c.UpdateBackend(&UpdateBackendInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-backend",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ub.OverrideHost != "www.example.com" {
+		t.Errorf("bad override_host: %q", ub.OverrideHost)
+	}
+	if ub.Port != 1234 {
+		t.Errorf("bad port: %d", ub.Port)
+	}
+
+	// NOTE: The following test validates empty values ARE sent.
+	//
+	// e.g. Although OverrideHost and Port are set to the type's zero values, and
+	// the UpdateBackendInput struct fields set omitempty, they're pointer types
+	// and so the JSON unmarshal recognises that empty values are allowed.
+	record(t, "backends/update_allow_empty_values", func(c *Client) {
+		ub, err = c.UpdateBackend(&UpdateBackendInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-backend",
+			OverrideHost:   String(""),
+			Port:           Uint(0),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ub.OverrideHost != "" {
+		t.Errorf("bad override_host: %q", ub.OverrideHost)
+	}
+	if ub.Port != 0 {
+		t.Errorf("bad port: %d", ub.Port)
 	}
 
 	// Delete

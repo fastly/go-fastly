@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: Name=new-test-backend&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=12&override_host=&port=0
+    form:
+      Name:
+      - new-test-backend
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "12"
+      override_host:
+      - ""
+      port:
+      - "0"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/12/backend/new-test-backend
+    method: PUT
+  response:
+    body: '{"healthcheck":null,"address":"integ-test.go-fastly.com","request_condition":"","auto_loadbalance":false,"version":12,"created_at":"2022-10-24T11:38:05Z","weight":100,"max_conn":200,"port":0,"ssl_hostname":null,"ssl_client_cert":null,"max_tls_version":null,"name":"new-test-backend","ssl_ca_cert":null,"first_byte_timeout":15000,"error_threshold":0,"updated_at":"2022-10-24T11:38:05Z","override_host":null,"deleted_at":null,"connect_timeout":1500,"comment":"","ssl_check_cert":false,"client_cert":null,"ssl_client_key":null,"between_bytes_timeout":10000,"min_tls_version":null,"hostname":"integ-test.go-fastly.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","ipv4":null,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","ipv6":null,"shield":null,"use_ssl":false,"ssl_sni_hostname":null,"ssl_cert_hostname":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 24 Oct 2022 11:38:06 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9936"
+      Fastly-Ratelimit-Reset:
+      - "1666612800"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4146-MAN
+      X-Timer:
+      - S1666611487.563762,VS0,VE370
+    status: 200 OK
+    code: 200
+    duration: ""
