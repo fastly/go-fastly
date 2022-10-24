@@ -12,36 +12,36 @@ type Backend struct {
 	ServiceID      string `mapstructure:"service_id"`
 	ServiceVersion int    `mapstructure:"version"`
 
-	Name                string     `mapstructure:"name"`
-	Comment             string     `mapstructure:"comment"`
 	Address             string     `mapstructure:"address"`
-	Port                uint       `mapstructure:"port"`
-	OverrideHost        string     `mapstructure:"override_host"`
+	AutoLoadbalance     bool       `mapstructure:"auto_loadbalance"`
+	BetweenBytesTimeout uint       `mapstructure:"between_bytes_timeout"`
+	Comment             string     `mapstructure:"comment"`
 	ConnectTimeout      uint       `mapstructure:"connect_timeout"`
-	MaxConn             uint       `mapstructure:"max_conn"`
+	CreatedAt           *time.Time `mapstructure:"created_at"`
+	DeletedAt           *time.Time `mapstructure:"deleted_at"`
 	ErrorThreshold      uint       `mapstructure:"error_threshold"`
 	FirstByteTimeout    uint       `mapstructure:"first_byte_timeout"`
-	BetweenBytesTimeout uint       `mapstructure:"between_bytes_timeout"`
-	AutoLoadbalance     bool       `mapstructure:"auto_loadbalance"`
-	Weight              uint       `mapstructure:"weight"`
-	RequestCondition    string     `mapstructure:"request_condition"`
 	HealthCheck         string     `mapstructure:"healthcheck"`
 	Hostname            string     `mapstructure:"hostname"`
-	Shield              string     `mapstructure:"shield"`
-	UseSSL              bool       `mapstructure:"use_ssl"`
-	SSLCheckCert        bool       `mapstructure:"ssl_check_cert"`
+	MaxConn             uint       `mapstructure:"max_conn"`
+	MaxTLSVersion       string     `mapstructure:"max_tls_version"`
+	MinTLSVersion       string     `mapstructure:"min_tls_version"`
+	Name                string     `mapstructure:"name"`
+	OverrideHost        string     `mapstructure:"override_host"`
+	Port                uint       `mapstructure:"port"`
+	RequestCondition    string     `mapstructure:"request_condition"`
 	SSLCACert           string     `mapstructure:"ssl_ca_cert"`
+	SSLCertHostname     string     `mapstructure:"ssl_cert_hostname"`
+	SSLCheckCert        bool       `mapstructure:"ssl_check_cert"`
+	SSLCiphers          string     `mapstructure:"ssl_ciphers"`
 	SSLClientCert       string     `mapstructure:"ssl_client_cert"`
 	SSLClientKey        string     `mapstructure:"ssl_client_key"`
 	SSLHostname         string     `mapstructure:"ssl_hostname"`
-	SSLCertHostname     string     `mapstructure:"ssl_cert_hostname"`
 	SSLSNIHostname      string     `mapstructure:"ssl_sni_hostname"`
-	MinTLSVersion       string     `mapstructure:"min_tls_version"`
-	MaxTLSVersion       string     `mapstructure:"max_tls_version"`
-	SSLCiphers          string     `mapstructure:"ssl_ciphers"`
-	CreatedAt           *time.Time `mapstructure:"created_at"`
+	Shield              string     `mapstructure:"shield"`
 	UpdatedAt           *time.Time `mapstructure:"updated_at"`
-	DeletedAt           *time.Time `mapstructure:"deleted_at"`
+	UseSSL              bool       `mapstructure:"use_ssl"`
+	Weight              uint       `mapstructure:"weight"`
 }
 
 // backendsByName is a sortable list of backends.
