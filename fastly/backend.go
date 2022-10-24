@@ -221,7 +221,7 @@ type UpdateBackendInput struct {
 	SSLCACert           *string      `url:"ssl_ca_cert,omitempty"`
 	SSLCertHostname     *string      `url:"ssl_cert_hostname,omitempty"`
 	SSLCheckCert        *Compatibool `url:"ssl_check_cert,omitempty"`
-	SSLCiphers          string       `url:"ssl_ciphers,omitempty"`
+	SSLCiphers          *string      `url:"ssl_ciphers,omitempty"`
 	SSLClientCert       *string      `url:"ssl_client_cert,omitempty"`
 	SSLClientKey        *string      `url:"ssl_client_key,omitempty"`
 	SSLSNIHostname      *string      `url:"ssl_sni_hostname,omitempty"`
