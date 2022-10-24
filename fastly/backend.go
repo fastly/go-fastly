@@ -203,32 +203,32 @@ type UpdateBackendInput struct {
 	// Name is the name of the backend to update.
 	Name string
 
-	NewName             *string      `url:"name,omitempty"`
-	Comment             *string      `url:"comment,omitempty"`
 	Address             *string      `url:"address,omitempty"`
-	Port                *uint        `url:"port,omitempty"`
-	OverrideHost        *string      `url:"override_host,omitempty"`
+	AutoLoadbalance     *Compatibool `url:"auto_loadbalance,omitempty"`
+	BetweenBytesTimeout *uint        `url:"between_bytes_timeout,omitempty"`
+	Comment             *string      `url:"comment,omitempty"`
 	ConnectTimeout      *uint        `url:"connect_timeout,omitempty"`
-	MaxConn             *uint        `url:"max_conn,omitempty"`
 	ErrorThreshold      *uint        `url:"error_threshold,omitempty"`
 	FirstByteTimeout    *uint        `url:"first_byte_timeout,omitempty"`
-	BetweenBytesTimeout *uint        `url:"between_bytes_timeout,omitempty"`
-	AutoLoadbalance     *Compatibool `url:"auto_loadbalance,omitempty"`
-	Weight              *uint        `url:"weight,omitempty"`
-	RequestCondition    *string      `url:"request_condition,omitempty"`
 	HealthCheck         *string      `url:"healthcheck,omitempty"`
-	Shield              *string      `url:"shield,omitempty"`
-	UseSSL              *Compatibool `url:"use_ssl,omitempty"`
-	SSLCheckCert        *Compatibool `url:"ssl_check_cert,omitempty"`
+	MaxConn             *uint        `url:"max_conn,omitempty"`
+	MaxTLSVersion       *string      `url:"max_tls_version,omitempty"`
+	MinTLSVersion       *string      `url:"min_tls_version,omitempty"`
+	NewName             *string      `url:"name,omitempty"`
+	OverrideHost        *string      `url:"override_host,omitempty"`
+	Port                *uint        `url:"port,omitempty"`
+	RequestCondition    *string      `url:"request_condition,omitempty"`
 	SSLCACert           *string      `url:"ssl_ca_cert,omitempty"`
+	SSLCertHostname     *string      `url:"ssl_cert_hostname,omitempty"`
+	SSLCheckCert        *Compatibool `url:"ssl_check_cert,omitempty"`
+	SSLCiphers          string       `url:"ssl_ciphers,omitempty"`
 	SSLClientCert       *string      `url:"ssl_client_cert,omitempty"`
 	SSLClientKey        *string      `url:"ssl_client_key,omitempty"`
 	SSLHostname         *string      `url:"ssl_hostname,omitempty"`
-	SSLCertHostname     *string      `url:"ssl_cert_hostname,omitempty"`
 	SSLSNIHostname      *string      `url:"ssl_sni_hostname,omitempty"`
-	MinTLSVersion       *string      `url:"min_tls_version,omitempty"`
-	MaxTLSVersion       *string      `url:"max_tls_version,omitempty"`
-	SSLCiphers          string       `url:"ssl_ciphers,omitempty"`
+	Shield              *string      `url:"shield,omitempty"`
+	UseSSL              *Compatibool `url:"use_ssl,omitempty"`
+	Weight              *uint        `url:"weight,omitempty"`
 }
 
 // UpdateBackend updates a specific backend.
