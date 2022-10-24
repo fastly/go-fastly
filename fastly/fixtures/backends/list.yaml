@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/12/backend
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/13/backend
     method: GET
   response:
-    body: '[{"ipv6":null,"shield":null,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","ssl_cert_hostname":null,"ssl_sni_hostname":null,"use_ssl":false,"ssl_client_key":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","hostname":"integ-test.go-fastly.com","ipv4":null,"between_bytes_timeout":10000,"min_tls_version":null,"error_threshold":0,"first_byte_timeout":15000,"name":"test-backend","ssl_ca_cert":null,"client_cert":null,"comment":"","ssl_check_cert":true,"override_host":"origin.example.com","deleted_at":null,"connect_timeout":1500,"updated_at":"2022-10-24T11:38:05Z","healthcheck":null,"address":"integ-test.go-fastly.com","request_condition":"","max_tls_version":null,"ssl_client_cert":null,"created_at":"2022-10-24T11:38:05Z","weight":100,"ssl_hostname":null,"max_conn":200,"port":80,"auto_loadbalance":false,"version":12}]'
+    body: '[{"name":"test-backend","ssl_ca_cert":null,"first_byte_timeout":15000,"error_threshold":0,"updated_at":"2022-10-24T11:58:36Z","connect_timeout":1500,"deleted_at":null,"override_host":"origin.example.com","ssl_check_cert":true,"comment":"","client_cert":null,"request_condition":"","address":"integ-test.go-fastly.com","healthcheck":null,"version":13,"auto_loadbalance":false,"max_conn":200,"ssl_hostname":null,"port":80,"weight":100,"created_at":"2022-10-24T11:58:36Z","ssl_client_cert":null,"max_tls_version":null,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","shield":null,"ipv6":null,"use_ssl":false,"ssl_sni_hostname":"ssl-hostname.com","ssl_cert_hostname":null,"ssl_client_key":null,"min_tls_version":null,"between_bytes_timeout":10000,"ipv4":null,"hostname":"integ-test.go-fastly.com","service_id":"7i6HN3TK9wS159v2gPAZ8A"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 24 Oct 2022 11:38:05 GMT
+      - Mon, 24 Oct 2022 11:58:36 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4146-MAN
+      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4133-MAN
       X-Timer:
-      - S1666611485.133574,VS0,VE340
+      - S1666612716.146406,VS0,VE326
     status: 200 OK
     code: 200
     duration: ""

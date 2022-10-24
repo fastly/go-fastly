@@ -24,6 +24,7 @@ func TestClient_Backends(t *testing.T) {
 			ConnectTimeout: Uint(1500),
 			OverrideHost:   "origin.example.com",
 			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
+			SSLSNIHostname: "ssl-hostname.com",
 		})
 	})
 	if err != nil {
@@ -64,6 +65,9 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if b.SSLCheckCert != true {
 		t.Errorf("bad ssl_check_cert: %t", b.SSLCheckCert) // API defaults to true
+	}
+	if b.SSLSNIHostname != "ssl-hostname.com" {
+		t.Errorf("bad ssl_sni_hostname: %q", b.SSLSNIHostname)
 	}
 
 	// List
@@ -121,6 +125,7 @@ func TestClient_Backends(t *testing.T) {
 			Port:           Uint(1234),
 			SSLCiphers:     String("RC4:!COMPLEMENTOFDEFAULT"),
 			SSLCheckCert:   CBool(false),
+			SSLSNIHostname: String("ssl-hostname-updated.com"),
 		})
 	})
 	if err != nil {
@@ -137,6 +142,9 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if ub.SSLCheckCert != false {
 		t.Errorf("bad ssl_check_cert: %t", ub.SSLCheckCert)
+	}
+	if ub.SSLSNIHostname != "ssl-hostname-updated.com" {
+		t.Errorf("bad ssl_sni_hostname: %q", ub.SSLSNIHostname)
 	}
 
 	// NOTE: The following test validates empty values are NOT sent.
