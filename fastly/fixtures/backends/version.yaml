@@ -14,7 +14,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":13}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":14}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 24 Oct 2022 11:58:35 GMT
+      - Thu, 27 Oct 2022 16:42:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "9932"
+      - "9999"
       Fastly-Ratelimit-Reset:
-      - "1666612800"
+      - "1666890000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4133-MAN
+      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4132-MAN
       X-Timer:
-      - S1666612715.288705,VS0,VE403
+      - S1666888950.671453,VS0,VE420
     status: 200 OK
     code: 200
     duration: ""

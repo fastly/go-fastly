@@ -23,6 +23,7 @@ func TestClient_Backends(t *testing.T) {
 			Address:        "integ-test.go-fastly.com",
 			ConnectTimeout: Uint(1500),
 			OverrideHost:   "origin.example.com",
+			SSLCheckCert:   CBool(false),
 			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
 			SSLSNIHostname: "ssl-hostname.com",
 		})
@@ -63,8 +64,8 @@ func TestClient_Backends(t *testing.T) {
 	if b.OverrideHost != "origin.example.com" {
 		t.Errorf("bad override_host: %q", b.OverrideHost)
 	}
-	if b.SSLCheckCert != true {
-		t.Errorf("bad ssl_check_cert: %t", b.SSLCheckCert) // API defaults to true
+	if b.SSLCheckCert != false {
+		t.Errorf("bad ssl_check_cert: %t", b.SSLCheckCert) // API defaults to true and we want to allow setting false
 	}
 	if b.SSLSNIHostname != "ssl-hostname.com" {
 		t.Errorf("bad ssl_sni_hostname: %q", b.SSLSNIHostname)
