@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: Name=new-test-backend&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=14&override_host=&port=0
+    form:
+      Name:
+      - new-test-backend
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "14"
+      override_host:
+      - ""
+      port:
+      - "0"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/backend/new-test-backend
+    method: PUT
+  response:
+    body: '{"first_byte_timeout":15000,"address":"integ-test.go-fastly.com","ssl_client_cert":null,"ssl_ca_cert":null,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","service_id":"7i6HN3TK9wS159v2gPAZ8A","client_cert":null,"ipv6":null,"use_ssl":false,"created_at":"2022-10-27T16:42:30Z","deleted_at":null,"between_bytes_timeout":10000,"ssl_sni_hostname":"ssl-hostname-updated.com","port":0,"request_condition":"","weight":100,"ssl_cert_hostname":null,"max_tls_version":null,"comment":"","max_conn":200,"auto_loadbalance":false,"connect_timeout":1500,"min_tls_version":null,"ssl_hostname":null,"hostname":"integ-test.go-fastly.com","name":"new-test-backend","version":14,"ipv4":null,"ssl_client_key":null,"error_threshold":0,"ssl_check_cert":false,"override_host":null,"updated_at":"2022-10-27T16:42:30Z","healthcheck":null,"shield":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 27 Oct 2022 16:42:31 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9995"
+      Fastly-Ratelimit-Reset:
+      - "1666890000"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4132-MAN
+      X-Timer:
+      - S1666888951.267177,VS0,VE224
+    status: 200 OK
+    code: 200
+    duration: ""

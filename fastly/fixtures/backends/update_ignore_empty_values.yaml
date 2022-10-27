@@ -1,0 +1,53 @@
+---
+version: 1
+interactions:
+- request:
+    body: Name=new-test-backend&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=14
+    form:
+      Name:
+      - new-test-backend
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+      ServiceVersion:
+      - "14"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/backend/new-test-backend
+    method: PUT
+  response:
+    body: '{"ssl_cert_hostname":null,"name":"new-test-backend","client_cert":null,"port":1234,"version":14,"max_conn":200,"ssl_client_cert":null,"updated_at":"2022-10-27T16:42:30Z","request_condition":"","address":"integ-test.go-fastly.com","auto_loadbalance":false,"min_tls_version":null,"shield":null,"ssl_client_key":null,"ssl_sni_hostname":"ssl-hostname-updated.com","ssl_hostname":null,"error_threshold":0,"healthcheck":null,"comment":"","deleted_at":null,"ipv4":null,"first_byte_timeout":15000,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","between_bytes_timeout":10000,"max_tls_version":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","ipv6":null,"weight":100,"created_at":"2022-10-27T16:42:30Z","hostname":"integ-test.go-fastly.com","ssl_check_cert":false,"connect_timeout":1500,"ssl_ca_cert":null,"override_host":"www.example.com","use_ssl":false}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 27 Oct 2022 16:42:31 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9996"
+      Fastly-Ratelimit-Reset:
+      - "1666890000"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4132-MAN
+      X-Timer:
+      - S1666888951.051715,VS0,VE190
+    status: 200 OK
+    code: 200
+    duration: ""
