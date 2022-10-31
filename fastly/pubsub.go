@@ -15,6 +15,7 @@ type Pubsub struct {
 	Name              string     `mapstructure:"name"`
 	Topic             string     `mapstructure:"topic"`
 	User              string     `mapstructure:"user"`
+	AccountName       string     `mapstructure:"account_name"`
 	SecretKey         string     `mapstructure:"secret_key"`
 	ProjectID         string     `mapstructure:"project_id"`
 	Format            string     `mapstructure:"format"`
@@ -81,6 +82,7 @@ type CreatePubsubInput struct {
 	Name              string `url:"name,omitempty"`
 	Topic             string `url:"topic,omitempty"`
 	User              string `url:"user,omitempty"`
+	AccountName       string `url:"account_name,omitempty"`
 	SecretKey         string `url:"secret_key,omitempty"`
 	ProjectID         string `url:"project_id,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
@@ -167,6 +169,7 @@ type UpdatePubsubInput struct {
 	NewName           *string `url:"name,omitempty"`
 	Topic             *string `url:"topic,omitempty"`
 	User              *string `url:"user,omitempty"`
+	AccountName       *string `url:"account_name,omitempty"`
 	SecretKey         *string `url:"secret_key,omitempty"`
 	ProjectID         *string `url:"project_id,omitempty"`
 	FormatVersion     *uint   `url:"format_version,omitempty"`

@@ -15,6 +15,7 @@ type BigQuery struct {
 	Name              string     `mapstructure:"name"`
 	Format            string     `mapstructure:"format"`
 	User              string     `mapstructure:"user"`
+	AccountName       string     `mapstructure:"account_name"`
 	ProjectID         string     `mapstructure:"project_id"`
 	Dataset           string     `mapstructure:"dataset"`
 	Table             string     `mapstructure:"table"`
@@ -86,6 +87,7 @@ type CreateBigQueryInput struct {
 	Table             string `url:"table,omitempty"`
 	Template          string `url:"template_suffix,omitempty"`
 	User              string `url:"user,omitempty"`
+	AccountName       string `url:"account_name,omitempty"`
 	SecretKey         string `url:"secret_key,omitempty"`
 	Format            string `url:"format,omitempty"`
 	ResponseCondition string `url:"response_condition,omitempty"`
@@ -174,6 +176,7 @@ type UpdateBigQueryInput struct {
 	Table             *string `url:"table,omitempty"`
 	Template          *string `url:"template_suffix,omitempty"`
 	User              *string `url:"user,omitempty"`
+	AccountName       *string `url:"account_name,omitempty"`
 	SecretKey         *string `url:"secret_key,omitempty"`
 	Format            *string `url:"format,omitempty"`
 	ResponseCondition *string `url:"response_condition,omitempty"`
