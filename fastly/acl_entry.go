@@ -11,17 +11,16 @@ import (
 )
 
 type ACLEntry struct {
-	ServiceID string `mapstructure:"service_id"`
-	ACLID     string `mapstructure:"acl_id"`
-
-	ID        string     `mapstructure:"id"`
-	IP        string     `mapstructure:"ip"`
-	Subnet    *int       `mapstructure:"subnet"`
-	Negated   bool       `mapstructure:"negated"`
+	ACLID     string     `mapstructure:"acl_id"`
 	Comment   string     `mapstructure:"comment"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	ID        string     `mapstructure:"id"`
+	IP        string     `mapstructure:"ip"`
+	Negated   bool       `mapstructure:"negated"`
+	ServiceID string     `mapstructure:"service_id"`
+	Subnet    *int       `mapstructure:"subnet"`
+	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
 // entriesById is a sortable list of ACL entries.
@@ -36,11 +35,11 @@ func (s entriesById) Less(i, j int) bool {
 
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
 type ListACLEntriesInput struct {
-	ServiceID string
 	ACLID     string
 	Direction string
-	PerPage   int
 	Page      int
+	PerPage   int
+	ServiceID string
 	Sort      string
 }
 
@@ -73,12 +72,14 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 }
 
 type ListAclEntriesPaginator struct {
-	consumed    bool
 	CurrentPage int
-	NextPage    int
 	LastPage    int
-	client      *Client
-	options     *ListACLEntriesInput
+	NextPage    int
+
+	// Private
+	client   *Client
+	consumed bool
+	options  *ListACLEntriesInput
 }
 
 // HasNext returns a boolean indicating whether more pages are available
@@ -187,9 +188,9 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntrie
 
 // GetACLEntryInput is the input parameter to GetACLEntry function.
 type GetACLEntryInput struct {
-	ServiceID string
 	ACLID     string
 	ID        string
+	ServiceID string
 }
 
 // GetACLEntry returns a single ACL entry based on its ID.
@@ -224,15 +225,12 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 
 // CreateACLEntryInput the input parameter to CreateACLEntry function.
 type CreateACLEntryInput struct {
-	// Required fields
-	ServiceID string
 	ACLID     string
 	IP        string `url:"ip"`
-
-	// Optional fields
-	Subnet  int         `url:"subnet,omitempty"`
-	Negated Compatibool `url:"negated,omitempty"`
-	Comment string      `url:"comment,omitempty"`
+	ServiceID string
+	Comment   string      `url:"comment,omitempty"`
+	Negated   Compatibool `url:"negated,omitempty"`
+	Subnet    int         `url:"subnet,omitempty"`
 }
 
 // CreateACLEntry creates and returns a new ACL entry.
@@ -267,9 +265,9 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 
 // DeleteACLEntryInput the input parameter to DeleteACLEntry function.
 type DeleteACLEntryInput struct {
-	ServiceID string
 	ACLID     string
 	ID        string
+	ServiceID string
 }
 
 // DeleteACLEntry deletes an entry from an ACL based on its ID
@@ -308,16 +306,13 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 
 // UpdateACLEntryInput is the input parameter to UpdateACLEntry function.
 type UpdateACLEntryInput struct {
-	// Required fields
-	ServiceID string
 	ACLID     string
+	Comment   *string `url:"comment,omitempty"`
 	ID        string
-
-	// Optional fields
-	IP      *string      `url:"ip,omitempty"`
-	Subnet  *int         `url:"subnet,omitempty"`
-	Negated *Compatibool `url:"negated,omitempty"`
-	Comment *string      `url:"comment,omitempty"`
+	IP        *string      `url:"ip,omitempty"`
+	Negated   *Compatibool `url:"negated,omitempty"`
+	ServiceID string
+	Subnet    *int `url:"subnet,omitempty"`
 }
 
 // UpdateACLEntry updates an ACL entry
@@ -351,19 +346,18 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 }
 
 type BatchModifyACLEntriesInput struct {
-	ServiceID string `json:"-"`
-	ACLID     string `json:"-"`
-
-	Entries []*BatchACLEntry `json:"entries"`
+	ACLID     string           `json:"-"`
+	Entries   []*BatchACLEntry `json:"entries"`
+	ServiceID string           `json:"-"`
 }
 
 type BatchACLEntry struct {
-	Operation BatchOperation `json:"op"`
+	Comment   *string        `json:"comment,omitempty"`
 	ID        *string        `json:"id,omitempty"`
 	IP        *string        `json:"ip,omitempty"`
-	Subnet    *int           `json:"subnet,omitempty"`
 	Negated   *Compatibool   `json:"negated,omitempty"`
-	Comment   *string        `json:"comment,omitempty"`
+	Operation BatchOperation `json:"op"`
+	Subnet    *int           `json:"subnet,omitempty"`
 }
 
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {

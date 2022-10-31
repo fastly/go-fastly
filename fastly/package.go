@@ -8,32 +8,31 @@ import (
 
 // Package is a container for data returned about a package.
 type Package struct {
-	ID             string
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-	Metadata       PackageMetadata
 	CreatedAt      *time.Time `mapstructure:"created_at"`
-	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	ID             string
+	Metadata       PackageMetadata
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // Package is a container for metadata returned about a package.
 // It is a separate struct to allow correct serialisation by mapstructure -
 // the raw data is returned as a json sub-block.
 type PackageMetadata struct {
-	Name        string
-	Description string
 	Authors     []string
-	Language    string
-	Size        int64
+	Description string
 	HashSum     string
+	Language    string
+	Name        string
+	Size        int64
 }
 
 // GetPackageInput is used as input to the GetPackage function.
 type GetPackageInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string `mapstructure:"service_id"`
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `mapstructure:"version"`
 }
@@ -56,14 +55,12 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 
 // UpdatePackageInput is used as input to the UpdatePackage function.
 type UpdatePackageInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string `mapstructure:"service_id"`
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `mapstructure:"version"`
-
 	// PackagePath is the local filesystem path to the package to upload.
 	PackagePath string
+	// ServiceID is the ID of the service (required).
+	ServiceID string `mapstructure:"service_id"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `mapstructure:"version"`
 }
 
 // UpdatePackage updates a package for a specific version.

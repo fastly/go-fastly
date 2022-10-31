@@ -9,15 +9,14 @@ import (
 
 // Dictionary represents a dictionary response from the Fastly API.
 type Dictionary struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	ID        string     `mapstructure:"id"`
-	Name      string     `mapstructure:"name"`
-	WriteOnly bool       `mapstructure:"write_only"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	ID             string     `mapstructure:"id"`
+	Name           string     `mapstructure:"name"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
+	WriteOnly      bool       `mapstructure:"write_only"`
 }
 
 // dictionariesByName is a sortable list of dictionaries.
@@ -34,7 +33,6 @@ func (s dictionariesByName) Less(i, j int) bool {
 type ListDictionariesInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -66,14 +64,12 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 
 // CreateDictionaryInput is used as input to the CreateDictionary function.
 type CreateDictionaryInput struct {
+	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name      string      `url:"name,omitempty"`
-	WriteOnly Compatibool `url:"write_only,omitempty"`
+	WriteOnly      Compatibool `url:"write_only,omitempty"`
 }
 
 // CreateDictionary creates a new Fastly dictionary.
@@ -102,14 +98,12 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 
 // GetDictionaryInput is used as input to the GetDictionary function.
 type GetDictionaryInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the dictionary to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetDictionary gets the dictionary configuration with the given parameters.
@@ -142,17 +136,14 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 
 // UpdateDictionaryInput is used as input to the UpdateDictionary function.
 type UpdateDictionaryInput struct {
+	// Name is the name of the dictionary to update.
+	Name    string
+	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the dictionary to update.
-	Name string
-
-	NewName   *string      `url:"name,omitempty"`
-	WriteOnly *Compatibool `url:"write_only,omitempty"`
+	WriteOnly      *Compatibool `url:"write_only,omitempty"`
 }
 
 // UpdateDictionary updates a specific dictionary.
@@ -185,14 +176,12 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 
 // DeleteDictionaryInput is the input parameter to DeleteDictionary.
 type DeleteDictionaryInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the dictionary to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteDictionary deletes the given dictionary version.

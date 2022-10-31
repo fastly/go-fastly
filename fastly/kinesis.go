@@ -9,22 +9,21 @@ import (
 
 // Kinesis represents a Kinesis response from the Fastly API.
 type Kinesis struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	StreamName        string     `mapstructure:"topic"`
-	Region            string     `mapstructure:"region"`
 	AccessKey         string     `mapstructure:"access_key"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	IAMRole           string     `mapstructure:"iam_role"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	IAMRole           string     `mapstructure:"iam_role"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	Region            string     `mapstructure:"region"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	SecretKey         string     `mapstructure:"secret_key"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	StreamName        string     `mapstructure:"topic"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // kinesisByName is a sortable list of Kinesis.
@@ -41,7 +40,6 @@ func (s kinesisByName) Less(i, j int) bool {
 type ListKinesisInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -73,22 +71,20 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 
 // CreateKinesisInput is used as input to the CreateKinesis function.
 type CreateKinesisInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	StreamName        string `url:"topic,omitempty"`
-	Region            string `url:"region,omitempty"`
 	AccessKey         string `url:"access_key,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
-	IAMRole           string `url:"iam_role,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
+	IAMRole           string `url:"iam_role,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	Region            string `url:"region,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	StreamName     string `url:"topic,omitempty"`
 }
 
 // CreateKinesis creates a new Fastly Kinesis.
@@ -117,14 +113,12 @@ func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 
 // GetKinesisInput is used as input to the GetKinesis function.
 type GetKinesisInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Kinesis logging object to fetch (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetKinesis gets the Kinesis configuration with the given parameters.
@@ -157,25 +151,22 @@ func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 
 // UpdateKinesisInput is used as input to the UpdateKinesis function.
 type UpdateKinesisInput struct {
+	AccessKey     *string `url:"access_key,omitempty"`
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	IAMRole       *string `url:"iam_role,omitempty"`
+	// Name is the name of the Kinesis logging object to update (required).
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	Region            *string `url:"region,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the Kinesis logging object to update (required).
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	StreamName        *string `url:"topic,omitempty"`
-	Region            *string `url:"region,omitempty"`
-	AccessKey         *string `url:"access_key,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
-	IAMRole           *string `url:"iam_role,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	StreamName     *string `url:"topic,omitempty"`
 }
 
 // UpdateKinesis updates a specific Kinesis.
@@ -208,14 +199,12 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 
 // DeleteKinesisInput is the input parameter to DeleteKinesis.
 type DeleteKinesisInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Kinesis logging object to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteKinesis deletes the given Kinesis version.

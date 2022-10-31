@@ -17,10 +17,10 @@ type (
 
 	// CreateManagedLoggingInput is used as input to the CreateManagedLogging function.
 	CreateManagedLoggingInput struct {
-		// ServiceID is the ID of the service (required).
-		ServiceID string
 		// Kind is the kind of managed logging we are creating (required).
 		Kind ManagedLoggingKind
+		// ServiceID is the ID of the service (required).
+		ServiceID string
 	}
 )
 
@@ -67,10 +67,10 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 
 // DeleteManagedLoggingInput is used as input to the DeleteManagedLogging function.
 type DeleteManagedLoggingInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
 	// Kind is the kind of managed logging we are removing (required).
 	Kind ManagedLoggingKind
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // DeleteManagedLogging disables managed logging for a service

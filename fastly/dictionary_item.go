@@ -12,14 +12,13 @@ import (
 
 // DictionaryItem represents a dictionary item response from the Fastly API.
 type DictionaryItem struct {
-	ServiceID    string `mapstructure:"service_id"`
-	DictionaryID string `mapstructure:"dictionary_id"`
-	ItemKey      string `mapstructure:"item_key"`
-
-	ItemValue string     `mapstructure:"item_value"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	CreatedAt    *time.Time `mapstructure:"created_at"`
+	DeletedAt    *time.Time `mapstructure:"deleted_at"`
+	DictionaryID string     `mapstructure:"dictionary_id"`
+	ItemKey      string     `mapstructure:"item_key"`
+	ItemValue    string     `mapstructure:"item_value"`
+	ServiceID    string     `mapstructure:"service_id"`
+	UpdatedAt    *time.Time `mapstructure:"updated_at"`
 }
 
 // dictionaryItemsByKey is a sortable list of dictionary items.
@@ -34,15 +33,14 @@ func (s dictionaryItemsByKey) Less(i, j int) bool {
 
 // ListDictionaryItemsInput is used as input to the ListDictionaryItems function.
 type ListDictionaryItemsInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	Direction    string
-	PerPage      int
 	Page         int
-	Sort         string
+	PerPage      int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	Sort      string
 }
 
 // ListDictionaryItems returns a list of items for a dictionary
@@ -71,12 +69,14 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 }
 
 type ListDictionaryItemsPaginator struct {
-	consumed    bool
 	CurrentPage int
-	NextPage    int
 	LastPage    int
-	client      *Client
-	options     *ListDictionaryItemsInput
+	NextPage    int
+
+	// Private
+	client   *Client
+	consumed bool
+	options  *ListDictionaryItemsInput
 }
 
 // HasNext returns a boolean indicating whether more pages are available
@@ -184,14 +184,12 @@ func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *Lis
 
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.
 type CreateDictionaryItemInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// DictionaryID is the ID of the dictionary to retrieve items for (required).
-	DictionaryID string
-
 	ItemKey   string `url:"item_key,omitempty"`
 	ItemValue string `url:"item_value,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// DictionaryID is the ID of the dictionary to retrieve items for (required).
+	DictionaryID string
 }
 
 // CreateDictionaryItem creates a new Fastly dictionary item.
@@ -233,14 +231,12 @@ func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]Diction
 
 // GetDictionaryItemInput is used as input to the GetDictionaryItem function.
 type GetDictionaryItemInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
-
 	// ItemKey is the name of the dictionary item to fetch.
 	ItemKey string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // GetDictionaryItem gets the dictionary item with the given parameters.
@@ -273,17 +269,14 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 
 // UpdateDictionaryItemInput is used as input to the UpdateDictionaryItem function.
 type UpdateDictionaryItemInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
-
 	// ItemKey is the name of the dictionary item to fetch (required).
 	ItemKey string
-
 	// ItemValue is the new value of the dictionary item (required).
 	ItemValue string `url:"item_value"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // UpdateDictionaryItem updates a specific dictionary item.
@@ -315,19 +308,17 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 }
 
 type BatchModifyDictionaryItemsInput struct {
+	// DictionaryID is the ID of the dictionary to modify items for (required).
+	DictionaryID string                 `json:"-"`
+	Items        []*BatchDictionaryItem `json:"items"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `json:"-"`
-
-	// DictionaryID is the ID of the dictionary to modify items for (required).
-	DictionaryID string `json:"-"`
-
-	Items []*BatchDictionaryItem `json:"items"`
 }
 
 type BatchDictionaryItem struct {
-	Operation BatchOperation `json:"op"`
 	ItemKey   string         `json:"item_key"`
 	ItemValue string         `json:"item_value"`
+	Operation BatchOperation `json:"op"`
 }
 
 func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
@@ -360,14 +351,12 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 
 // DeleteDictionaryItemInput is the input parameter to DeleteDictionaryItem.
 type DeleteDictionaryItemInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
-
 	// ItemKey is the name of the dictionary item to delete.
 	ItemKey string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // DeleteDictionaryItem deletes the given dictionary item.

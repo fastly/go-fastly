@@ -9,25 +9,22 @@ import (
 
 // RequestOptions is the list of options to pass to the request.
 type RequestOptions struct {
-	// Params is a map of key-value pairs that will be added to the Request.
-	Params map[string]string
-
+	// Body is an io.Reader object that will be streamed or uploaded with the
+	// Request.
+	Body io.Reader
+	// BodyLength is the final size of the Body.
+	BodyLength int64
 	// Headers is a map of key-value pairs that will be added to the Request.
 	Headers map[string]string
-
-	// Body is an io.Reader object that will be streamed or uploaded with the
-	// Request. BodyLength is the final size of the Body.
-	Body       io.Reader
-	BodyLength int64
-
-	// Can this request run in parallel
-	Parallel bool
-
 	// HealthCheckHeaders indicates if there is any special parsing required to
 	// support the health check API endpoint (refer to client.RequestForm).
 	//
 	// FIXME: For the future code-generated API client world.
 	HealthCheckHeaders bool
+	// Can this request run in parallel
+	Parallel bool
+	// Params is a map of key-value pairs that will be added to the Request.
+	Params map[string]string
 }
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the
@@ -47,7 +44,7 @@ func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, 
 		return nil, err
 	}
 
-	var params = make(url.Values)
+	params := make(url.Values)
 	for k, v := range ro.Params {
 		params.Add(k, v)
 	}

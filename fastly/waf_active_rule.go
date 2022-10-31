@@ -17,40 +17,40 @@ var WAFActiveRuleType = reflect.TypeOf(new(WAFActiveRule))
 
 // WAFActiveRule is the information about a WAF active rule object.
 type WAFActiveRule struct {
-	ID             string     `jsonapi:"primary,waf_active_rule,omitempty"`
-	Status         string     `jsonapi:"attr,status,omitempty"`
-	ModSecID       int        `jsonapi:"attr,modsec_rule_id,omitempty"`
-	Revision       int        `jsonapi:"attr,revision,omitempty"`
-	Outdated       bool       `jsonapi:"attr,outdated,omitempty"`
-	LatestRevision int        `jsonapi:"attr,latest_revision,omitempty"`
 	CreatedAt      *time.Time `jsonapi:"attr,created_at,iso8601,omitempty"`
+	ID             string     `jsonapi:"primary,waf_active_rule,omitempty"`
+	LatestRevision int        `jsonapi:"attr,latest_revision,omitempty"`
+	ModSecID       int        `jsonapi:"attr,modsec_rule_id,omitempty"`
+	Outdated       bool       `jsonapi:"attr,outdated,omitempty"`
+	Revision       int        `jsonapi:"attr,revision,omitempty"`
+	Status         string     `jsonapi:"attr,status,omitempty"`
 	UpdatedAt      *time.Time `jsonapi:"attr,updated_at,iso8601,omitempty"`
 }
 
 // WAFActiveRuleResponse represents a list of active rules - full response.
 type WAFActiveRuleResponse struct {
-	Items []*WAFActiveRule
 	Info  infoResponse
+	Items []*WAFActiveRule
 }
 
 // ListWAFActiveRulesInput used as input for listing a WAF's active rules.
 type ListWAFActiveRulesInput struct {
-	// The Web Application Firewall's ID.
-	WAFID string
-	// The Web Application Firewall's version number.
-	WAFVersionNumber int
-	// Limit results to active rules with the specified status.
-	FilterStatus string
-	// Limit results to active rules with the specified message.
+	// FilterMessage limits results to active rules with the specified message.
 	FilterMessage string
-	// Limit results to active rules that represent the specified ModSecurity modsec_rule_id.
+	// FilterModSedID limits results to active rules that represent the specified ModSecurity modsec_rule_id.
 	FilterModSedID string
-	// Limit the number of returned pages.
-	PageSize int
-	// Request a specific page of active rules.
-	PageNumber int
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_rule_revision and waf_firewall_version.
+	// FilterStatus limits results to active rules with the specified status.
+	FilterStatus string
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_rule_revision and waf_firewall_version.
 	Include string
+	// PageNumber requests a specific page of active rules.
+	PageNumber int
+	// PageSize limits the number of returned pages.
+	PageSize int
+	// WAFID is the Web Application Firewall's ID.
+	WAFID string
+	// WAFVersionNumber is the Web Application Firewall's version number.
+	WAFVersionNumber int
 }
 
 func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
@@ -127,18 +127,18 @@ func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleR
 
 // ListAllWAFActiveRulesInput used as input for listing all WAF active rules.
 type ListAllWAFActiveRulesInput struct {
-	// The Web Application Firewall's ID.
-	WAFID string
-	// The Web Application Firewall's version number.
-	WAFVersionNumber int
-	// Limit results to active rules with the specified status.
-	FilterStatus string
-	// Limit results to active rules with the specified message.
+	// FilterMessage limits results to active rules with the specified message.
 	FilterMessage string
-	// Limit results to active rules that represent the specified ModSecurity modsec_rule_id.
+	// FilterModSedID limits results to active rules that represent the specified ModSecurity modsec_rule_id.
 	FilterModSedID string
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_rule_revision and waf_firewall_version.
+	// FilterStatus limits results to active rules with the specified status.
+	FilterStatus string
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_rule_revision and waf_firewall_version.
 	Include string
+	// WAFID is the Web Application Firewall's ID.
+	WAFID string
+	// WAFVersionNumber is the Web Application Firewall's version number.
+	WAFVersionNumber int
 }
 
 // ListAllWAFActiveRules returns the complete list of WAF active rules for a given WAF ID. It iterates through
@@ -180,12 +180,12 @@ func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiv
 
 // CreateWAFActiveRulesInput used as input for adding rules to a WAF.
 type CreateWAFActiveRulesInput struct {
+	// The list of WAF active rules (ModSecID, Status and Revision are required).
+	Rules []*WAFActiveRule
 	// The Web Application Firewall's ID.
 	WAFID string
 	// The Web Application Firewall's version number.
 	WAFVersionNumber int
-	// The list of WAF active rules (ModSecID, Status and Revision are required).
-	Rules []*WAFActiveRule
 }
 
 // CreateWAFActiveRules adds rules to a particular WAF.
@@ -228,14 +228,14 @@ func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiv
 
 // BatchModificationWAFActiveRulesInput is used for active rules batch modifications.
 type BatchModificationWAFActiveRulesInput struct {
+	// The batch operation to be performed (allowed operations are upsert and delete).
+	OP BatchOperation
+	// The list of WAF active rules (ModSecID, Status and Revision are required for upsert, ModSecID is required for delete).
+	Rules []*WAFActiveRule
 	// The Web Application Firewall's ID.
 	WAFID string
 	// The Web Application Firewall's version number.
 	WAFVersionNumber int
-	// The list of WAF active rules (ModSecID, Status and Revision are required for upsert, ModSecID is required for delete).
-	Rules []*WAFActiveRule
-	// The batch operation to be performed (allowed operations are upsert and delete).
-	OP BatchOperation
 }
 
 // BatchModificationWAFActiveRules is a generic function for creating or deleting WAF active rules in batches.
@@ -265,12 +265,12 @@ func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRu
 
 // DeleteWAFActiveRulesInput used as input for removing rules from a WAF.
 type DeleteWAFActiveRulesInput struct {
+	// The list of WAF active rules (ModSecID is required).
+	Rules []*WAFActiveRule
 	// The Web Application Firewall's ID.
 	WAFID string
 	// The Web Application Firewall's version number.
 	WAFVersionNumber int
-	// The list of WAF active rules (ModSecID is required).
-	Rules []*WAFActiveRule
 }
 
 // DeleteWAFActiveRules removes rules from a particular WAF.

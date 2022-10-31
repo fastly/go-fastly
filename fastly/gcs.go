@@ -9,27 +9,26 @@ import (
 
 // GCS represents an GCS logging response from the Fastly API.
 type GCS struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	Bucket            string     `mapstructure:"bucket_name"`
-	User              string     `mapstructure:"user"`
 	AccountName       string     `mapstructure:"account_name"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	Path              string     `mapstructure:"path"`
-	Period            uint       `mapstructure:"period"`
+	Bucket            string     `mapstructure:"bucket_name"`
 	CompressionCodec  string     `mapstructure:"compression_codec"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	MessageType       string     `mapstructure:"message_type"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Name              string     `mapstructure:"name"`
+	Path              string     `mapstructure:"path"`
+	Period            uint       `mapstructure:"period"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	SecretKey         string     `mapstructure:"secret_key"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	User              string     `mapstructure:"user"`
 }
 
 // gcsesByName is a sortable list of gcses.
@@ -46,7 +45,6 @@ func (s gcsesByName) Less(i, j int) bool {
 type ListGCSsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -77,27 +75,25 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 
 // CreateGCSInput is used as input to the CreateGCS function.
 type CreateGCSInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	Bucket            string `url:"bucket_name,omitempty"`
-	User              string `url:"user,omitempty"`
 	AccountName       string `url:"account_name,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
+	Bucket            string `url:"bucket_name,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Path              string `url:"path,omitempty"`
 	Period            uint   `url:"period,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	Format            string `url:"format,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	TimestampFormat   string `url:"timestamp_format,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat string `url:"timestamp_format,omitempty"`
+	User            string `url:"user,omitempty"`
 }
 
 // CreateGCS creates a new Fastly GCS.
@@ -126,14 +122,12 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 
 // GetGCSInput is used as input to the GetGCS function.
 type GetGCSInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the GCS to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetGCS gets the GCS configuration with the given parameters.
@@ -166,30 +160,27 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 
 // UpdateGCSInput is used as input to the UpdateGCS function.
 type UpdateGCSInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
+	AccountName      *string `url:"account_name,omitempty"`
+	Bucket           *string `url:"bucket_name,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	Format           *string `url:"format,omitempty"`
+	FormatVersion    *uint   `url:"format_version,omitempty"`
+	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
+	MessageType      *string `url:"message_type,omitempty"`
 	// Name is the name of the GCS to update.
-	Name string
-
+	Name              string
 	NewName           *string `url:"name,omitempty"`
-	Bucket            *string `url:"bucket_name,omitempty"`
-	User              *string `url:"user,omitempty"`
-	AccountName       *string `url:"account_name,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
 	Path              *string `url:"path,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	CompressionCodec  *string `url:"compression_codec,omitempty"`
-	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	TimestampFormat   *string `url:"timestamp_format,omitempty"`
 	Placement         *string `url:"placement,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	User            *string `url:"user,omitempty"`
 }
 
 // UpdateGCS updates a specific GCS.
@@ -222,14 +213,12 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 
 // DeleteGCSInput is the input parameter to DeleteGCS.
 type DeleteGCSInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the GCS to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteGCS deletes the given GCS version.

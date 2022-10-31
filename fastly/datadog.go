@@ -9,19 +9,18 @@ import (
 
 // Datadog represents a Datadog response from the Fastly API.
 type Datadog struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	Token             string     `mapstructure:"token"`
-	Region            string     `mapstructure:"region"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	Region            string     `mapstructure:"region"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	Token             string     `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // datadogByName is a sortable list of Datadog.
@@ -70,19 +69,17 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 
 // CreateDatadogInput is used as input to the CreateDatadog function.
 type CreateDatadogInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	Token             string `url:"token,omitempty"`
-	Region            string `url:"region,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	Region            string `url:"region,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Token          string `url:"token,omitempty"`
 }
 
 // CreateDatadog creates a new Datadog logging endpoint on a Fastly service version.
@@ -115,14 +112,12 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 
 // GetDatadogInput is used as input to the GetDatadog function.
 type GetDatadogInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Datadog to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetDatadog gets the Datadog configuration with the given parameters.
@@ -155,22 +150,19 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 
 // UpdateDatadogInput is used as input to the UpdateDatadog function.
 type UpdateDatadogInput struct {
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the Datadog to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	Region            *string `url:"region,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the Datadog to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	Token             *string `url:"token,omitempty"`
-	Region            *string `url:"region,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Token          *string `url:"token,omitempty"`
 }
 
 // UpdateDatadog updates a Datadog logging endpoint on a Fastly service version.
@@ -207,14 +199,12 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 
 // DeleteDatadogInput is the input parameter to DeleteDatadog.
 type DeleteDatadogInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Datadog to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteDatadog deletes a Datadog logging endpoint on a Fastly service version.

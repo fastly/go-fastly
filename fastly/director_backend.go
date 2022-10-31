@@ -9,30 +9,26 @@ import (
 // DirectorBackend is the relationship between a director and a backend in the
 // Fastly API.
 type DirectorBackend struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Director  string     `mapstructure:"director_name"`
-	Backend   string     `mapstructure:"backend_name"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	Backend        string     `mapstructure:"backend_name"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	Director       string     `mapstructure:"director_name"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // CreateDirectorBackendInput is used as input to the CreateDirectorBackend
 // function.
 type CreateDirectorBackendInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Director is the name of the director (required).
-	Director string
-
 	// Backend is the name of the backend (required).
 	Backend string
+	// Director is the name of the director (required).
+	Director string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // CreateDirectorBackend creates a new Fastly backend.
@@ -71,17 +67,14 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 
 // GetDirectorBackendInput is used as input to the GetDirectorBackend function.
 type GetDirectorBackendInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Director is the name of the director (required).
-	Director string
-
 	// Backend is the name of the backend (required).
 	Backend string
+	// Director is the name of the director (required).
+	Director string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetDirectorBackend gets the backend configuration with the given parameters.
@@ -120,17 +113,14 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 
 // DeleteDirectorBackendInput is the input parameter to DeleteDirectorBackend.
 type DeleteDirectorBackendInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Director is the name of the director (required).
-	Director string
-
 	// Backend is the name of the backend (required).
 	Backend string
+	// Director is the name of the director (required).
+	Director string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteDirectorBackend deletes the given backend version.

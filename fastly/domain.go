@@ -11,14 +11,13 @@ import (
 
 // Domain represents the the domain name Fastly will serve content for.
 type Domain struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name      string     `mapstructure:"name"`
-	Comment   string     `mapstructure:"comment"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	Comment        string     `mapstructure:"comment"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	Name           string     `mapstructure:"name"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // domainsByName is a sortable list of backends.
@@ -35,7 +34,6 @@ func (s domainsByName) Less(i, j int) bool {
 type ListDomainsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -67,17 +65,14 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 
 // CreateDomainInput is used as input to the CreateDomain function.
 type CreateDomainInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the domain that the service will respond to (required).
-	Name string `url:"name"`
-
 	// Comment is a personal, freeform descriptive note.
 	Comment string `url:"comment,omitempty"`
+	// Name is the name of the domain that the service will respond to (required).
+	Name string `url:"name"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // CreateDomain creates a new domain with the given information.
@@ -106,14 +101,12 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 
 // GetDomainInput is used as input to the GetDomain function.
 type GetDomainInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the domain to fetch.
 	Name string `url:"name"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetDomain retrieves information about the given domain name.
@@ -146,20 +139,16 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 
 // UpdateDomainInput is used as input to the UpdateDomain function.
 type UpdateDomainInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the domain that the service will respond to (required).
-	Name string
-
-	// NewName is the updated name of the domain
-	NewName *string `url:"name,omitempty"`
-
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Name is the name of the domain that the service will respond to (required).
+	Name string
+	// NewName is the updated name of the domain
+	NewName *string `url:"name,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // UpdateDomain updates a single domain for the current service. The only allowed
@@ -197,14 +186,12 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 
 // DeleteDomainInput is used as input to the DeleteDomain function.
 type DeleteDomainInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the domain that the service will respond to (required).
 	Name string `url:"name"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteDomain removes a single domain by the given name.
@@ -231,14 +218,12 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 
 // ValidateDomainInput is used as input to the ValidateDomain function.
 type ValidateDomainInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the domain to validate.
 	Name string `url:"name"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ValidateDomain validates the given domain.
@@ -279,8 +264,8 @@ func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult
 // DomainValidationResult defines an idiomatic representation of the API
 // response.
 type DomainValidationResult struct {
-	Metadata DomainMetadata
 	CName    string
+	Metadata DomainMetadata
 	Valid    bool
 }
 
@@ -313,21 +298,19 @@ func (d *DomainValidationResult) UnmarshalJSON(data []byte) error {
 
 // DomainMetadata represents a domain name configured for a Fastly service.
 type DomainMetadata struct {
-	ServiceID      string `json:"service_id"`
-	ServiceVersion int    `json:"version"`
-
-	Name      string     `json:"name"`
-	Comment   string     `json:"comment"`
-	CreatedAt *time.Time `json:"created_at"`
-	UpdatedAt *time.Time `json:"updated_at"`
-	DeletedAt *time.Time `json:"deleted_at"`
+	Comment        string     `json:"comment"`
+	CreatedAt      *time.Time `json:"created_at"`
+	DeletedAt      *time.Time `json:"deleted_at"`
+	Name           string     `json:"name"`
+	ServiceID      string     `json:"service_id"`
+	ServiceVersion int        `json:"version"`
+	UpdatedAt      *time.Time `json:"updated_at"`
 }
 
 // ValidateAllDomainsInput is used as input to the ValidateAllDomains function.
 type ValidateAllDomainsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }

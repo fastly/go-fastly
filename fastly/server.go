@@ -8,20 +8,19 @@ import (
 
 // ServerType represents a server response from the Fastly API.
 type Server struct {
-	ServiceID string `mapstructure:"service_id"`
-	PoolID    string `mapstructure:"pool_id"`
-	ID        string `mapstructure:"id"`
-
 	Address      string     `mapstructure:"address"`
 	Comment      string     `mapstructure:"comment"`
-	Weight       uint       `mapstructure:"weight"`
-	MaxConn      uint       `mapstructure:"max_conn"`
-	Port         uint       `mapstructure:"port"`
-	Disabled     bool       `mapstructure:"disabled"`
-	OverrideHost string     `mapstructure:"override_host"`
 	CreatedAt    *time.Time `mapstructure:"created_at"`
 	DeletedAt    *time.Time `mapstructure:"deleted_at"`
+	Disabled     bool       `mapstructure:"disabled"`
+	ID           string     `mapstructure:"id"`
+	MaxConn      uint       `mapstructure:"max_conn"`
+	OverrideHost string     `mapstructure:"override_host"`
+	PoolID       string     `mapstructure:"pool_id"`
+	Port         uint       `mapstructure:"port"`
+	ServiceID    string     `mapstructure:"service_id"`
 	UpdatedAt    *time.Time `mapstructure:"updated_at"`
+	Weight       uint       `mapstructure:"weight"`
 }
 
 // serversByAddress is a sortable list of servers.
@@ -36,11 +35,10 @@ func (s serversByAddress) Less(i, j int) bool {
 
 // ListServersInput is used as input to the ListServers function.
 type ListServersInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// PoolID is the ID of the pool (required).
 	PoolID string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // ListServers lists all servers for a particular service and pool.
@@ -70,22 +68,18 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 
 // CreateServerInput is used as input to the CreateServer function.
 type CreateServerInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
+	// Address is the hostname or IP of the origin server (required).
+	Address      string `url:"address"`
+	Comment      string `url:"comment,omitempty"`
+	Disabled     bool   `url:"disabled,omitempty"`
+	MaxConn      uint   `url:"max_conn,omitempty"`
+	OverrideHost string `url:"override_host,omitempty"`
 	// PoolID is the ID of the pool (required).
 	PoolID string
-
-	// Address is the hostname or IP of the origin server (required).
-	Address string `url:"address"`
-
-	// Optional fields.
-	Comment      string `url:"comment,omitempty"`
-	Weight       uint   `url:"weight,omitempty"`
-	MaxConn      uint   `url:"max_conn,omitempty"`
-	Port         uint   `url:"port,omitempty"`
-	Disabled     bool   `url:"disabled,omitempty"`
-	OverrideHost string `url:"override_host,omitempty"`
+	Port   uint `url:"port,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	Weight    uint `url:"weight,omitempty"`
 }
 
 // CreateServer creates a single server for a particular service and pool.
@@ -119,13 +113,11 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 
 // GetServerInput is used as input to the GetServer function.
 type GetServerInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// PoolID is the ID of the pool (required).
 	PoolID string
-
 	Server string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // GetServer gets a single server for a particular service and pool.
@@ -158,22 +150,18 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 
 // UpdateServerInput is used as input to the UpdateServer function.
 type UpdateServerInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// PoolID is the ID of the pool (required).
-	PoolID string
-
-	Server string
-
-	// Optional fields.
 	Address      *string `url:"address,omitempty"`
 	Comment      *string `url:"comment,omitempty"`
-	Weight       *uint   `url:"weight,omitempty"`
-	MaxConn      *uint   `url:"max_conn,omitempty"`
-	Port         *uint   `url:"port,omitempty"`
 	Disabled     *bool   `url:"disabled,omitempty"`
+	MaxConn      *uint   `url:"max_conn,omitempty"`
 	OverrideHost *string `url:"override_host,omitempty"`
+	// PoolID is the ID of the pool (required).
+	PoolID string
+	Port   *uint `url:"port,omitempty"`
+	Server string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	Weight    *uint `url:"weight,omitempty"`
 }
 
 // UpdateServer updates a single server for a particular service and pool.
@@ -206,13 +194,11 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 
 // DeleteServerInput is used as input to the DeleteServer function.
 type DeleteServerInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// PoolID is the ID of the pool (required).
 	PoolID string
-
 	Server string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // DeleteServer deletes a single server for a particular service and pool.

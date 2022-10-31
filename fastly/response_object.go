@@ -9,19 +9,18 @@ import (
 
 // ResponseObject represents a response object response from the Fastly API.
 type ResponseObject struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name             string     `mapstructure:"name"`
-	Status           uint       `mapstructure:"status"`
-	Response         string     `mapstructure:"response"`
+	CacheCondition   string     `mapstructure:"cache_condition"`
 	Content          string     `mapstructure:"content"`
 	ContentType      string     `mapstructure:"content_type"`
-	RequestCondition string     `mapstructure:"request_condition"`
-	CacheCondition   string     `mapstructure:"cache_condition"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
-	UpdatedAt        *time.Time `mapstructure:"updated_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
+	Name             string     `mapstructure:"name"`
+	RequestCondition string     `mapstructure:"request_condition"`
+	Response         string     `mapstructure:"response"`
+	ServiceID        string     `mapstructure:"service_id"`
+	ServiceVersion   int        `mapstructure:"version"`
+	Status           uint       `mapstructure:"status"`
+	UpdatedAt        *time.Time `mapstructure:"updated_at"`
 }
 
 // responseObjectsByName is a sortable list of response objects.
@@ -39,7 +38,6 @@ func (s responseObjectsByName) Less(i, j int) bool {
 type ListResponseObjectsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -73,19 +71,17 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 // CreateResponseObjectInput is used as input to the CreateResponseObject
 // function.
 type CreateResponseObjectInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name             string `url:"name,omitempty"`
-	Status           *uint  `url:"status,omitempty"`
-	Response         string `url:"response,omitempty"`
+	CacheCondition   string `url:"cache_condition,omitempty"`
 	Content          string `url:"content,omitempty"`
 	ContentType      string `url:"content_type,omitempty"`
+	Name             string `url:"name,omitempty"`
 	RequestCondition string `url:"request_condition,omitempty"`
-	CacheCondition   string `url:"cache_condition,omitempty"`
+	Response         string `url:"response,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Status         *uint `url:"status,omitempty"`
 }
 
 // CreateResponseObject creates a new Fastly response object.
@@ -114,14 +110,12 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 
 // GetResponseObjectInput is used as input to the GetResponseObject function.
 type GetResponseObjectInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the response object to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetResponseObject gets the response object configuration with the given
@@ -156,22 +150,19 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 // UpdateResponseObjectInput is used as input to the UpdateResponseObject
 // function.
 type UpdateResponseObjectInput struct {
+	CacheCondition *string `url:"cache_condition,omitempty"`
+	Content        *string `url:"content,omitempty"`
+	ContentType    *string `url:"content_type,omitempty"`
+	// Name is the name of the response object to update.
+	Name             string
+	NewName          *string `url:"name,omitempty"`
+	RequestCondition *string `url:"request_condition,omitempty"`
+	Response         *string `url:"response,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the response object to update.
-	Name string
-
-	NewName          *string `url:"name,omitempty"`
-	Status           *uint   `url:"status,omitempty"`
-	Response         *string `url:"response,omitempty"`
-	Content          *string `url:"content,omitempty"`
-	ContentType      *string `url:"content_type,omitempty"`
-	RequestCondition *string `url:"request_condition,omitempty"`
-	CacheCondition   *string `url:"cache_condition,omitempty"`
+	Status         *uint `url:"status,omitempty"`
 }
 
 // UpdateResponseObject updates a specific response object.
@@ -204,14 +195,12 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 
 // DeleteResponseObjectInput is the input parameter to DeleteResponseObject.
 type DeleteResponseObjectInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the response object to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteResponseObject deletes the given response object version.

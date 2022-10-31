@@ -41,24 +41,23 @@ type RequestSettingXFF string
 
 // RequestSetting represents a request setting response from the Fastly API.
 type RequestSetting struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name             string               `mapstructure:"name"`
-	ForceMiss        bool                 `mapstructure:"force_miss"`
-	ForceSSL         bool                 `mapstructure:"force_ssl"`
 	Action           RequestSettingAction `mapstructure:"action"`
 	BypassBusyWait   bool                 `mapstructure:"bypass_busy_wait"`
-	MaxStaleAge      uint                 `mapstructure:"max_stale_age"`
-	HashKeys         string               `mapstructure:"hash_keys"`
-	XForwardedFor    RequestSettingXFF    `mapstructure:"xff"`
-	TimerSupport     bool                 `mapstructure:"timer_support"`
-	GeoHeaders       bool                 `mapstructure:"geo_headers"`
-	DefaultHost      string               `mapstructure:"default_host"`
-	RequestCondition string               `mapstructure:"request_condition"`
 	CreatedAt        *time.Time           `mapstructure:"created_at"`
-	UpdatedAt        *time.Time           `mapstructure:"updated_at"`
+	DefaultHost      string               `mapstructure:"default_host"`
 	DeletedAt        *time.Time           `mapstructure:"deleted_at"`
+	ForceMiss        bool                 `mapstructure:"force_miss"`
+	ForceSSL         bool                 `mapstructure:"force_ssl"`
+	GeoHeaders       bool                 `mapstructure:"geo_headers"`
+	HashKeys         string               `mapstructure:"hash_keys"`
+	MaxStaleAge      uint                 `mapstructure:"max_stale_age"`
+	Name             string               `mapstructure:"name"`
+	RequestCondition string               `mapstructure:"request_condition"`
+	ServiceID        string               `mapstructure:"service_id"`
+	ServiceVersion   int                  `mapstructure:"version"`
+	TimerSupport     bool                 `mapstructure:"timer_support"`
+	UpdatedAt        *time.Time           `mapstructure:"updated_at"`
+	XForwardedFor    RequestSettingXFF    `mapstructure:"xff"`
 }
 
 // requestSettingsByName is a sortable list of request settings.
@@ -76,7 +75,6 @@ func (s requestSettingsByName) Less(i, j int) bool {
 type ListRequestSettingsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -110,24 +108,22 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 // CreateRequestSettingInput is used as input to the CreateRequestSetting
 // function.
 type CreateRequestSettingInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name             string               `url:"name,omitempty"`
-	ForceMiss        Compatibool          `url:"force_miss,omitempty"`
-	ForceSSL         Compatibool          `url:"force_ssl,omitempty"`
 	Action           RequestSettingAction `url:"action,omitempty"`
 	BypassBusyWait   Compatibool          `url:"bypass_busy_wait,omitempty"`
-	MaxStaleAge      *uint                `url:"max_stale_age,omitempty"`
-	HashKeys         string               `url:"hash_keys,omitempty"`
-	XForwardedFor    RequestSettingXFF    `url:"xff,omitempty"`
-	TimerSupport     Compatibool          `url:"timer_support,omitempty"`
-	GeoHeaders       Compatibool          `url:"geo_headers,omitempty"`
 	DefaultHost      string               `url:"default_host,omitempty"`
+	ForceMiss        Compatibool          `url:"force_miss,omitempty"`
+	ForceSSL         Compatibool          `url:"force_ssl,omitempty"`
+	GeoHeaders       Compatibool          `url:"geo_headers,omitempty"`
+	HashKeys         string               `url:"hash_keys,omitempty"`
+	MaxStaleAge      *uint                `url:"max_stale_age,omitempty"`
+	Name             string               `url:"name,omitempty"`
 	RequestCondition string               `url:"request_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	TimerSupport   Compatibool       `url:"timer_support,omitempty"`
+	XForwardedFor  RequestSettingXFF `url:"xff,omitempty"`
 }
 
 // CreateRequestSetting creates a new Fastly request settings.
@@ -156,14 +152,12 @@ func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSet
 
 // GetRequestSettingInput is used as input to the GetRequestSetting function.
 type GetRequestSettingInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the request settings to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetRequestSetting gets the request settings configuration with the given
@@ -198,27 +192,24 @@ func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, 
 // UpdateRequestSettingInput is used as input to the UpdateRequestSetting
 // function.
 type UpdateRequestSettingInput struct {
+	Action         RequestSettingAction `url:"action,omitempty"`
+	BypassBusyWait *Compatibool         `url:"bypass_busy_wait,omitempty"`
+	DefaultHost    *string              `url:"default_host,omitempty"`
+	ForceMiss      *Compatibool         `url:"force_miss,omitempty"`
+	ForceSSL       *Compatibool         `url:"force_ssl,omitempty"`
+	GeoHeaders     *Compatibool         `url:"geo_headers,omitempty"`
+	HashKeys       *string              `url:"hash_keys,omitempty"`
+	MaxStaleAge    *uint                `url:"max_stale_age,omitempty"`
+	// Name is the name of the request settings to update.
+	Name             string
+	NewName          *string `url:"name,omitempty"`
+	RequestCondition *string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the request settings to update.
-	Name string
-
-	NewName          *string              `url:"name,omitempty"`
-	ForceMiss        *Compatibool         `url:"force_miss,omitempty"`
-	ForceSSL         *Compatibool         `url:"force_ssl,omitempty"`
-	Action           RequestSettingAction `url:"action,omitempty"`
-	BypassBusyWait   *Compatibool         `url:"bypass_busy_wait,omitempty"`
-	MaxStaleAge      *uint                `url:"max_stale_age,omitempty"`
-	HashKeys         *string              `url:"hash_keys,omitempty"`
-	XForwardedFor    RequestSettingXFF    `url:"xff,omitempty"`
-	TimerSupport     *Compatibool         `url:"timer_support,omitempty"`
-	GeoHeaders       *Compatibool         `url:"geo_headers,omitempty"`
-	DefaultHost      *string              `url:"default_host,omitempty"`
-	RequestCondition *string              `url:"request_condition,omitempty"`
+	TimerSupport   *Compatibool      `url:"timer_support,omitempty"`
+	XForwardedFor  RequestSettingXFF `url:"xff,omitempty"`
 }
 
 // UpdateRequestSetting updates a specific request settings.
@@ -251,14 +242,12 @@ func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSet
 
 // DeleteRequestSettingInput is the input parameter to DeleteRequestSetting.
 type DeleteRequestSettingInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the request settings to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteRequestSetting deletes the given request settings version.

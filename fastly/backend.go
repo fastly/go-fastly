@@ -9,9 +9,6 @@ import (
 
 // Backend represents a backend response from the Fastly API.
 type Backend struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
 	Address             string     `mapstructure:"address"`
 	AutoLoadbalance     bool       `mapstructure:"auto_loadbalance"`
 	BetweenBytesTimeout uint       `mapstructure:"between_bytes_timeout"`
@@ -38,6 +35,8 @@ type Backend struct {
 	SSLClientKey        string     `mapstructure:"ssl_client_key"`
 	SSLHostname         string     `mapstructure:"ssl_hostname"`
 	SSLSNIHostname      string     `mapstructure:"ssl_sni_hostname"`
+	ServiceID           string     `mapstructure:"service_id"`
+	ServiceVersion      int        `mapstructure:"version"`
 	Shield              string     `mapstructure:"shield"`
 	UpdatedAt           *time.Time `mapstructure:"updated_at"`
 	UseSSL              bool       `mapstructure:"use_ssl"`
@@ -58,7 +57,6 @@ func (s backendsByName) Less(i, j int) bool {
 type ListBackendsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -90,12 +88,6 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 
 // CreateBackendInput is used as input to the CreateBackend function.
 type CreateBackendInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	Address             string       `url:"address,omitempty"`
 	AutoLoadbalance     Compatibool  `url:"auto_loadbalance,omitempty"`
 	BetweenBytesTimeout *uint        `url:"between_bytes_timeout,omitempty"`
@@ -119,9 +111,13 @@ type CreateBackendInput struct {
 	SSLClientKey        string       `url:"ssl_client_key,omitempty"`
 	SSLHostname         string       `url:"ssl_hostname,omitempty"`
 	SSLSNIHostname      string       `url:"ssl_sni_hostname,omitempty"`
-	Shield              string       `url:"shield,omitempty"`
-	UseSSL              Compatibool  `url:"use_ssl,omitempty"`
-	Weight              *uint        `url:"weight,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Shield         string      `url:"shield,omitempty"`
+	UseSSL         Compatibool `url:"use_ssl,omitempty"`
+	Weight         *uint       `url:"weight,omitempty"`
 }
 
 // CreateBackend creates a new Fastly backend.
@@ -150,14 +146,12 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 // GetBackendInput is used as input to the GetBackend function.
 type GetBackendInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the backend to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetBackend gets the backend configuration with the given parameters.
@@ -190,15 +184,6 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 
 // UpdateBackendInput is used as input to the UpdateBackend function.
 type UpdateBackendInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the backend to update.
-	Name string
-
 	Address             *string      `url:"address,omitempty"`
 	AutoLoadbalance     *Compatibool `url:"auto_loadbalance,omitempty"`
 	BetweenBytesTimeout *uint        `url:"between_bytes_timeout,omitempty"`
@@ -210,20 +195,26 @@ type UpdateBackendInput struct {
 	MaxConn             *uint        `url:"max_conn,omitempty"`
 	MaxTLSVersion       *string      `url:"max_tls_version,omitempty"`
 	MinTLSVersion       *string      `url:"min_tls_version,omitempty"`
-	NewName             *string      `url:"name,omitempty"`
-	OverrideHost        *string      `url:"override_host,omitempty"`
-	Port                *uint        `url:"port,omitempty"`
-	RequestCondition    *string      `url:"request_condition,omitempty"`
-	SSLCACert           *string      `url:"ssl_ca_cert,omitempty"`
-	SSLCertHostname     *string      `url:"ssl_cert_hostname,omitempty"`
-	SSLCheckCert        *Compatibool `url:"ssl_check_cert,omitempty"`
-	SSLCiphers          *string      `url:"ssl_ciphers,omitempty"`
-	SSLClientCert       *string      `url:"ssl_client_cert,omitempty"`
-	SSLClientKey        *string      `url:"ssl_client_key,omitempty"`
-	SSLSNIHostname      *string      `url:"ssl_sni_hostname,omitempty"`
-	Shield              *string      `url:"shield,omitempty"`
-	UseSSL              *Compatibool `url:"use_ssl,omitempty"`
-	Weight              *uint        `url:"weight,omitempty"`
+	// Name is the name of the backend to update.
+	Name             string
+	NewName          *string      `url:"name,omitempty"`
+	OverrideHost     *string      `url:"override_host,omitempty"`
+	Port             *uint        `url:"port,omitempty"`
+	RequestCondition *string      `url:"request_condition,omitempty"`
+	SSLCACert        *string      `url:"ssl_ca_cert,omitempty"`
+	SSLCertHostname  *string      `url:"ssl_cert_hostname,omitempty"`
+	SSLCheckCert     *Compatibool `url:"ssl_check_cert,omitempty"`
+	SSLCiphers       *string      `url:"ssl_ciphers,omitempty"`
+	SSLClientCert    *string      `url:"ssl_client_cert,omitempty"`
+	SSLClientKey     *string      `url:"ssl_client_key,omitempty"`
+	SSLSNIHostname   *string      `url:"ssl_sni_hostname,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Shield         *string      `url:"shield,omitempty"`
+	UseSSL         *Compatibool `url:"use_ssl,omitempty"`
+	Weight         *uint        `url:"weight,omitempty"`
 }
 
 // UpdateBackend updates a specific backend.
@@ -256,14 +247,12 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 
 // DeleteBackendInput is the input parameter to DeleteBackend.
 type DeleteBackendInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the backend to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteBackend deletes the given backend version.

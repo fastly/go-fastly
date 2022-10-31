@@ -9,26 +9,25 @@ import (
 
 // Splunk represents a splunk response from the Fastly API.
 type Splunk struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	URL               string     `mapstructure:"url"`
-	RequestMaxEntries uint       `mapstructure:"request_max_entries"`
-	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	Token             string     `mapstructure:"token"`
-	UseTLS            bool       `mapstructure:"use_tls"`
+	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
+	RequestMaxEntries uint       `mapstructure:"request_max_entries"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
 	TLSCACert         string     `mapstructure:"tls_ca_cert"`
-	TLSHostname       string     `mapstructure:"tls_hostname"`
 	TLSClientCert     string     `mapstructure:"tls_client_cert"`
 	TLSClientKey      string     `mapstructure:"tls_client_key"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	TLSHostname       string     `mapstructure:"tls_hostname"`
+	Token             string     `mapstructure:"token"`
+	URL               string     `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	UseTLS            bool       `mapstructure:"use_tls"`
 }
 
 // splunkByName is a sortable list of splunks.
@@ -45,7 +44,6 @@ func (s splunkByName) Less(i, j int) bool {
 type ListSplunksInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -77,26 +75,24 @@ func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 
 // CreateSplunkInput is used as input to the CreateSplunk function.
 type CreateSplunkInput struct {
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	RequestMaxBytes   uint   `url:"request_max_bytes,omitempty"`
+	RequestMaxEntries uint   `url:"request_max_entries,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string      `url:"name,omitempty"`
-	URL               string      `url:"url,omitempty"`
-	RequestMaxEntries uint        `url:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint        `url:"request_max_bytes,omitempty"`
-	Format            string      `url:"format,omitempty"`
-	FormatVersion     uint        `url:"format_version,omitempty"`
-	ResponseCondition string      `url:"response_condition,omitempty"`
-	Placement         string      `url:"placement,omitempty"`
-	Token             string      `url:"token,omitempty"`
-	UseTLS            Compatibool `url:"use_tls,omitempty"`
-	TLSCACert         string      `url:"tls_ca_cert,omitempty"`
-	TLSHostname       string      `url:"tls_hostname,omitempty"`
-	TLSClientCert     string      `url:"tls_client_cert,omitempty"`
-	TLSClientKey      string      `url:"tls_client_key,omitempty"`
+	TLSCACert      string      `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey   string      `url:"tls_client_key,omitempty"`
+	TLSHostname    string      `url:"tls_hostname,omitempty"`
+	Token          string      `url:"token,omitempty"`
+	URL            string      `url:"url,omitempty"`
+	UseTLS         Compatibool `url:"use_tls,omitempty"`
 }
 
 // CreateSplunk creates a new Fastly splunk.
@@ -129,14 +125,12 @@ func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 
 // GetSplunkInput is used as input to the GetSplunk function.
 type GetSplunkInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the splunk to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetSplunk gets the splunk configuration with the given parameters.
@@ -169,29 +163,26 @@ func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 
 // UpdateSplunkInput is used as input to the UpdateSplunk function.
 type UpdateSplunkInput struct {
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the splunk to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	RequestMaxBytes   *uint   `url:"request_max_bytes,omitempty"`
+	RequestMaxEntries *uint   `url:"request_max_entries,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the splunk to update.
-	Name string
-
-	NewName           *string      `url:"name,omitempty"`
-	URL               *string      `url:"url,omitempty"`
-	RequestMaxEntries *uint        `url:"request_max_entries,omitempty"`
-	RequestMaxBytes   *uint        `url:"request_max_bytes,omitempty"`
-	Format            *string      `url:"format,omitempty"`
-	FormatVersion     *uint        `url:"format_version,omitempty"`
-	ResponseCondition *string      `url:"response_condition,omitempty"`
-	Placement         *string      `url:"placement,omitempty"`
-	Token             *string      `url:"token,omitempty"`
-	UseTLS            *Compatibool `url:"use_tls,omitempty"`
-	TLSCACert         *string      `url:"tls_ca_cert,omitempty"`
-	TLSHostname       *string      `url:"tls_hostname,omitempty"`
-	TLSClientCert     *string      `url:"tls_client_cert,omitempty"`
-	TLSClientKey      *string      `url:"tls_client_key,omitempty"`
+	TLSCACert      *string      `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  *string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey   *string      `url:"tls_client_key,omitempty"`
+	TLSHostname    *string      `url:"tls_hostname,omitempty"`
+	Token          *string      `url:"token,omitempty"`
+	URL            *string      `url:"url,omitempty"`
+	UseTLS         *Compatibool `url:"use_tls,omitempty"`
 }
 
 // UpdateSplunk updates a specific splunk.
@@ -228,14 +219,12 @@ func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 
 // DeleteSplunkInput is the input parameter to DeleteSplunk.
 type DeleteSplunkInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the splunk to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteSplunk deletes the given splunk version.

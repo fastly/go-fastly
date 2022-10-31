@@ -9,19 +9,18 @@ import (
 
 // Scalyr represents a scalyr response from the Fastly API.
 type Scalyr struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	Token             string     `mapstructure:"token"`
+	Name              string     `mapstructure:"name"`
+	Placement         string     `mapstructure:"placement"`
 	Region            string     `mapstructure:"region"`
 	ResponseCondition string     `mapstructure:"response_condition"`
-	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	Token             string     `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // scalyrByName is a sortable list of scalyrs.
@@ -38,7 +37,6 @@ func (s scalyrsByName) Less(i, j int) bool {
 type ListScalyrsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -70,19 +68,17 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 
 // CreateScalyrInput is used as input to the CreateScalyr function.
 type CreateScalyrInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
-	Token             string `url:"token,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 	Region            string `url:"region,omitempty"`
 	ResponseCondition string `url:"response_condition,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Token          string `url:"token,omitempty"`
 }
 
 // CreateScalyr creates a new Fastly scalyr.
@@ -115,14 +111,12 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 
 // GetScalyrInput is used as input to the GetScalyr function.
 type GetScalyrInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the scalyr to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetScalyr gets the scalyr configuration with the given parameters.
@@ -155,22 +149,19 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 
 // UpdateScalyrInput is used as input to the UpdateScalyr function.
 type UpdateScalyrInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
 	// Name is the name of the scalyr to update.
-	Name string
-
+	Name              string
 	NewName           *string `url:"name,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	Token             *string `url:"token,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
 	Region            *string `url:"region,omitempty"`
 	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Token          *string `url:"token,omitempty"`
 }
 
 // UpdateScalyr updates a specific scalyr.
@@ -207,14 +198,12 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 
 // DeleteScalyrInput is the input parameter to DeleteScalyr.
 type DeleteScalyrInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the scalyr to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteScalyr deletes the given scalyr version.

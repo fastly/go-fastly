@@ -9,28 +9,27 @@ import (
 
 // DigitalOcean represents a DigitalOcean response from the Fastly API.
 type DigitalOcean struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	BucketName        string     `mapstructure:"bucket_name"`
-	Domain            string     `mapstructure:"domain"`
 	AccessKey         string     `mapstructure:"access_key"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	Path              string     `mapstructure:"path"`
-	Period            uint       `mapstructure:"period"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	MessageType       string     `mapstructure:"message_type"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
-	Placement         string     `mapstructure:"placement"`
-	PublicKey         string     `mapstructure:"public_key"`
+	BucketName        string     `mapstructure:"bucket_name"`
 	CompressionCodec  string     `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
-	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Domain            string     `mapstructure:"domain"`
+	Format            string     `mapstructure:"format"`
+	FormatVersion     uint       `mapstructure:"format_version"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	MessageType       string     `mapstructure:"message_type"`
+	Name              string     `mapstructure:"name"`
+	Path              string     `mapstructure:"path"`
+	Period            uint       `mapstructure:"period"`
+	Placement         string     `mapstructure:"placement"`
+	PublicKey         string     `mapstructure:"public_key"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	SecretKey         string     `mapstructure:"secret_key"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 }
 
 // digitaloceansByName is a sortable list of DigitalOceans.
@@ -47,7 +46,6 @@ func (d digitaloceansByName) Less(i, j int) bool {
 type ListDigitalOceansInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -79,28 +77,26 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 
 // CreateDigitalOceanInput is used as input to the CreateDigitalOcean function.
 type CreateDigitalOceanInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	BucketName        string `url:"bucket_name,omitempty"`
-	Domain            string `url:"domain,omitempty"`
 	AccessKey         string `url:"access_key,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
+	BucketName        string `url:"bucket_name,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
+	Domain            string `url:"domain,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Path              string `url:"path,omitempty"`
 	Period            uint   `url:"period,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	Format            string `url:"format,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	TimestampFormat   string `url:"timestamp_format,omitempty"`
 	Placement         string `url:"placement,omitempty"`
 	PublicKey         string `url:"public_key,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
 // CreateDigitalOcean creates a new Fastly DigitalOcean.
@@ -129,14 +125,12 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 
 // GetDigitalOceanInput is used as input to the GetDigitalOcean function.
 type GetDigitalOceanInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the DigitalOcean to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetDigitalOcean gets the DigitalOcean configuration with the given parameters.
@@ -169,31 +163,28 @@ func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error)
 
 // UpdateDigitalOceanInput is used as input to the UpdateDigitalOcean function.
 type UpdateDigitalOceanInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
+	AccessKey        *string `url:"access_key,omitempty"`
+	BucketName       *string `url:"bucket_name,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	Domain           *string `url:"domain,omitempty"`
+	Format           *string `url:"format,omitempty"`
+	FormatVersion    *uint   `url:"format_version,omitempty"`
+	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
+	MessageType      *string `url:"message_type,omitempty"`
 	// Name is the name of the DigitalOcean to update.
-	Name string
-
+	Name              string
 	NewName           *string `url:"name,omitempty"`
-	BucketName        *string `url:"bucket_name,omitempty"`
-	Domain            *string `url:"domain,omitempty"`
-	AccessKey         *string `url:"access_key,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
 	Path              *string `url:"path,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
-	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
-	TimestampFormat   *string `url:"timestamp_format,omitempty"`
 	Placement         *string `url:"placement,omitempty"`
 	PublicKey         *string `url:"public_key,omitempty"`
-	CompressionCodec  *string `url:"compression_codec,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // UpdateDigitalOcean updates a specific DigitalOcean.
@@ -226,14 +217,12 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 
 // DeleteDigitalOceanInput is the input parameter to DeleteDigitalOcean.
 type DeleteDigitalOceanInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the DigitalOcean to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteDigitalOcean deletes the given DigitalOcean version.

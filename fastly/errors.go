@@ -291,28 +291,26 @@ var _ error = (*HTTPError)(nil)
 // HTTPError is a custom error type that wraps an HTTP status code with some
 // helper functions.
 type HTTPError struct {
+	Errors []*ErrorObject `mapstructure:"errors"`
 	// StatusCode is the HTTP status code (2xx-5xx).
 	StatusCode int
-
-	Errors []*ErrorObject `mapstructure:"errors"`
 }
 
 // ErrorObject is a single error.
 type ErrorObject struct {
-	ID     string `mapstructure:"id"`
-	Title  string `mapstructure:"title"`
-	Detail string `mapstructure:"detail"`
-	Status string `mapstructure:"status"`
-	Code   string `mapstructure:"code"`
-
-	Meta *map[string]interface{} `mapstructure:"meta"`
+	Code   string                  `mapstructure:"code"`
+	Detail string                  `mapstructure:"detail"`
+	ID     string                  `mapstructure:"id"`
+	Meta   *map[string]interface{} `mapstructure:"meta"`
+	Status string                  `mapstructure:"status"`
+	Title  string                  `mapstructure:"title"`
 }
 
 // legacyError represents the older-style errors from Fastly. It is private
 // because it is automatically converted to a jsonapi error.
 type legacyError struct {
-	Message string `mapstructure:"msg"`
 	Detail  string `mapstructure:"detail"`
+	Message string `mapstructure:"msg"`
 }
 
 // NewHTTPError creates a new HTTP error from the given code.
@@ -334,10 +332,10 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 	case "application/problem+json":
 		// Response is a "problem detail" as defined in RFC 7807.
 		var problemDetail struct {
-			URL    string `json:"type,omitempty"`   // URL to a human-readable document describing this specific error condition
-			Title  string `json:"title,omitempty"`  // A short name for the error type, which remains constant from occurrence to occurrence
-			Status int    `json:"status"`           // HTTP status code
 			Detail string `json:"detail,omitempty"` // A human-readable description of the specific error, aiming to help the user correct the problem
+			Status int    `json:"status"`           // HTTP status code
+			Title  string `json:"title,omitempty"`  // A short name for the error type, which remains constant from occurrence to occurrence
+			URL    string `json:"type,omitempty"`   // URL to a human-readable document describing this specific error condition
 		}
 		if err := json.NewDecoder(resp.Body).Decode(&problemDetail); err != nil {
 			panic(err)

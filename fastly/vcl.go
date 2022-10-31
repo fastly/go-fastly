@@ -9,15 +9,14 @@ import (
 
 // VCL represents a response about VCL from the Fastly API.
 type VCL struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name      string     `mapstructure:"name"`
-	Main      bool       `mapstructure:"main"`
-	Content   string     `mapstructure:"content"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	Content        string     `mapstructure:"content"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	Main           bool       `mapstructure:"main"`
+	Name           string     `mapstructure:"name"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // vclsByName is a sortable list of VCLs.
@@ -34,7 +33,6 @@ func (s vclsByName) Less(i, j int) bool {
 type ListVCLsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -66,14 +64,12 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 
 // GetVCLInput is used as input to the GetVCL function.
 type GetVCLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the VCL to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetVCL gets the VCL configuration with the given parameters.
@@ -108,7 +104,6 @@ func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 type GetGeneratedVCLInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -139,15 +134,13 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 
 // CreateVCLInput is used as input to the CreateVCL function.
 type CreateVCLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name    string `url:"name,omitempty"`
 	Content string `url:"content,omitempty"`
 	Main    bool   `url:"main,omitempty"`
+	Name    string `url:"name,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // CreateVCL creates a new Fastly VCL.
@@ -176,17 +169,14 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 
 // UpdateVCLInput is used as input to the UpdateVCL function.
 type UpdateVCLInput struct {
+	Content *string `url:"content,omitempty"`
+	// Name is the name of the VCL to update (required).
+	Name    string
+	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the VCL to update (required).
-	Name string
-
-	NewName *string `url:"name,omitempty"`
-	Content *string `url:"content,omitempty"`
 }
 
 // UpdateVCL creates a new Fastly VCL.
@@ -219,14 +209,12 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 
 // ActivateVCLInput is used as input to the ActivateVCL function.
 type ActivateVCLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the VCL to mark as main (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // ActivateVCL creates a new Fastly VCL.
@@ -259,14 +247,12 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 
 // DeleteVCLInput is the input parameter to DeleteVCL.
 type DeleteVCLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the VCL to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteVCL deletes the given VCL version.

@@ -8,17 +8,17 @@ import (
 
 // Version represents a distinct configuration version.
 type Version struct {
-	Number    int        `mapstructure:"number"`
-	Comment   string     `mapstructure:"comment"`
-	ServiceID string     `mapstructure:"service_id"`
 	Active    bool       `mapstructure:"active"`
-	Locked    bool       `mapstructure:"locked"`
+	Comment   string     `mapstructure:"comment"`
+	CreatedAt *time.Time `mapstructure:"created_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at"`
 	Deployed  bool       `mapstructure:"deployed"`
+	Locked    bool       `mapstructure:"locked"`
+	Number    int        `mapstructure:"number"`
+	ServiceID string     `mapstructure:"service_id"`
 	Staging   bool       `mapstructure:"staging"`
 	Testing   bool       `mapstructure:"testing"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
 }
 
 // versionsByNumber is a sortable list of versions. This is used by the version
@@ -87,11 +87,10 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 
 // CreateVersionInput is the input to the CreateVersion function.
 type CreateVersionInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// A personal freeform descriptive note.
 	Comment string `url:"comment,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // CreateVersion constructs a new version. Note that `CloneVersion` is
@@ -120,7 +119,6 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 type GetVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// SrrviceVersion is the version number to fetch (required).
 	ServiceVersion int
 }
@@ -151,14 +149,12 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 
 // UpdateVersionInput is the input to the UpdateVersion function.
 type UpdateVersionInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// A personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // UpdateVersion updates the given version
@@ -189,7 +185,6 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 type ActivateVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -222,7 +217,6 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 type DeactivateVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -255,7 +249,6 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 type CloneVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -290,7 +283,6 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 type ValidateVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -327,7 +319,6 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 type LockVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
