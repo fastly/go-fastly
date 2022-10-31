@@ -9,25 +9,24 @@ import (
 
 // HealthCheck represents a health check response from the Fastly API.
 type HealthCheck struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name             string     `mapstructure:"name"`
+	CheckInterval    uint       `mapstructure:"check_interval"`
 	Comment          string     `mapstructure:"comment"`
-	Method           string     `mapstructure:"method"`
+	CreatedAt        *time.Time `mapstructure:"created_at"`
+	DeletedAt        *time.Time `mapstructure:"deleted_at"`
+	ExpectedResponse uint       `mapstructure:"expected_response"`
+	HTTPVersion      string     `mapstructure:"http_version"`
 	Headers          []string   `mapstructure:"headers"`
 	Host             string     `mapstructure:"host"`
-	Path             string     `mapstructure:"path"`
-	HTTPVersion      string     `mapstructure:"http_version"`
-	Timeout          uint       `mapstructure:"timeout"`
-	CheckInterval    uint       `mapstructure:"check_interval"`
-	ExpectedResponse uint       `mapstructure:"expected_response"`
-	Window           uint       `mapstructure:"window"`
-	Threshold        uint       `mapstructure:"threshold"`
 	Initial          uint       `mapstructure:"initial"`
-	CreatedAt        *time.Time `mapstructure:"created_at"`
+	Method           string     `mapstructure:"method"`
+	Name             string     `mapstructure:"name"`
+	Path             string     `mapstructure:"path"`
+	ServiceID        string     `mapstructure:"service_id"`
+	ServiceVersion   int        `mapstructure:"version"`
+	Threshold        uint       `mapstructure:"threshold"`
+	Timeout          uint       `mapstructure:"timeout"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
-	DeletedAt        *time.Time `mapstructure:"deleted_at"`
+	Window           uint       `mapstructure:"window"`
 }
 
 // healthChecksByName is a sortable list of health checks.
@@ -44,7 +43,6 @@ func (s healthChecksByName) Less(i, j int) bool {
 type ListHealthChecksInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -76,25 +74,23 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 
 // CreateHealthCheckInput is used as input to the CreateHealthCheck function.
 type CreateHealthCheckInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name             string   `url:"name,omitempty"`
+	CheckInterval    *uint    `url:"check_interval,omitempty"`
 	Comment          string   `url:"comment,omitempty"`
-	Method           string   `url:"method,omitempty"`
+	ExpectedResponse *uint    `url:"expected_response,omitempty"`
+	HTTPVersion      string   `url:"http_version,omitempty"`
 	Headers          []string `url:"headers,omitempty"`
 	Host             string   `url:"host,omitempty"`
-	Path             string   `url:"path,omitempty"`
-	HTTPVersion      string   `url:"http_version,omitempty"`
-	Timeout          *uint    `url:"timeout,omitempty"`
-	CheckInterval    *uint    `url:"check_interval,omitempty"`
-	ExpectedResponse *uint    `url:"expected_response,omitempty"`
-	Window           *uint    `url:"window,omitempty"`
-	Threshold        *uint    `url:"threshold,omitempty"`
 	Initial          *uint    `url:"initial,omitempty"`
+	Method           string   `url:"method,omitempty"`
+	Name             string   `url:"name,omitempty"`
+	Path             string   `url:"path,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Threshold      *uint `url:"threshold,omitempty"`
+	Timeout        *uint `url:"timeout,omitempty"`
+	Window         *uint `url:"window,omitempty"`
 }
 
 // CreateHealthCheck creates a new Fastly health check.
@@ -126,14 +122,12 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 
 // GetHealthCheckInput is used as input to the GetHealthCheck function.
 type GetHealthCheckInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the health check to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetHealthCheck gets the health check configuration with the given parameters.
@@ -166,28 +160,25 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 
 // UpdateHealthCheckInput is used as input to the UpdateHealthCheck function.
 type UpdateHealthCheckInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the health check to update.
-	Name string
-
-	NewName          *string   `url:"name,omitempty"`
+	CheckInterval    *uint     `url:"check_interval,omitempty"`
 	Comment          *string   `url:"comment,omitempty"`
-	Method           *string   `url:"method,omitempty"`
+	ExpectedResponse *uint     `url:"expected_response,omitempty"`
+	HTTPVersion      *string   `url:"http_version,omitempty"`
 	Headers          *[]string `url:"headers,omitempty"`
 	Host             *string   `url:"host,omitempty"`
-	Path             *string   `url:"path,omitempty"`
-	HTTPVersion      *string   `url:"http_version,omitempty"`
-	Timeout          *uint     `url:"timeout,omitempty"`
-	CheckInterval    *uint     `url:"check_interval,omitempty"`
-	ExpectedResponse *uint     `url:"expected_response,omitempty"`
-	Window           *uint     `url:"window,omitempty"`
-	Threshold        *uint     `url:"threshold,omitempty"`
 	Initial          *uint     `url:"initial,omitempty"`
+	Method           *string   `url:"method,omitempty"`
+	// Name is the name of the health check to update.
+	Name    string
+	NewName *string `url:"name,omitempty"`
+	Path    *string `url:"path,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Threshold      *uint `url:"threshold,omitempty"`
+	Timeout        *uint `url:"timeout,omitempty"`
+	Window         *uint `url:"window,omitempty"`
 }
 
 // UpdateHealthCheck updates a specific health check.
@@ -223,14 +214,12 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 
 // DeleteHealthCheckInput is the input parameter to DeleteHealthCheck.
 type DeleteHealthCheckInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the health check to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteHealthCheck deletes the given health check.

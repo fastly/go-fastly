@@ -58,26 +58,21 @@ var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 type Client struct {
 	// Address is the address of Fastly's API endpoint.
 	Address string
-
 	// HTTPClient is the HTTP client to use. If one is not provided, a default
 	// client will be used.
 	HTTPClient *http.Client
 
+	// apiKey is the Fastly API key to authenticate requests.
+	apiKey string
+	// remaining is last observed value of http header Fastly-RateLimit-Remaining
+	remaining int
+	// reset is last observed value of http header Fastly-RateLimit-Reset
+	reset int64
 	// updateLock forces serialization of calls that modify a service.
 	// Concurrent modifications have undefined semantics.
 	updateLock sync.Mutex
-
-	// apiKey is the Fastly API key to authenticate requests.
-	apiKey string
-
 	// url is the parsed URL from Address
 	url *url.URL
-
-	// remaining is last observed value of http header Fastly-RateLimit-Remaining
-	remaining int
-
-	// reset is last observed value of http header Fastly-RateLimit-Reset
-	reset int64
 }
 
 // RTSClient is the entrypoint to the Fastly's Realtime Stats API.

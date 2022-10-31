@@ -11,14 +11,14 @@ import (
 
 // BulkCertificate represents a bulk certificate.
 type BulkCertificate struct {
-	ID             string              `jsonapi:"primary,tls_bulk_certificate"`
 	Configurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
+	CreatedAt      *time.Time          `jsonapi:"attr,created_at,iso8601"`
 	Domains        []*TLSDomain        `jsonapi:"relation,tls_domains,tls_domain"`
+	ID             string              `jsonapi:"primary,tls_bulk_certificate"`
 	NotAfter       *time.Time          `jsonapi:"attr,not_after,iso8601"`
 	NotBefore      *time.Time          `jsonapi:"attr,not_before,iso8601"`
-	CreatedAt      *time.Time          `jsonapi:"attr,created_at,iso8601"`
-	UpdatedAt      *time.Time          `jsonapi:"attr,updated_at,iso8601"`
 	Replace        bool                `jsonapi:"attr,replace"`
+	UpdatedAt      *time.Time          `jsonapi:"attr,updated_at,iso8601"`
 }
 
 // TLSConfiguration represents the dedicated IP address pool that will be used to route traffic from the TLSDomain.
@@ -29,18 +29,18 @@ type TLSConfiguration struct {
 
 // TLSDomain represents a domain (including wildcard domains) that is listed on a certificate's Subject Alternative Names (SAN) list.
 type TLSDomain struct {
-	ID            string                  `jsonapi:"primary,tls_domain"`
-	Type          string                  `jsonapi:"attr,type"`
 	Activations   []*TLSActivation        `jsonapi:"relation,tls_activations,omitempty"`
 	Certificates  []*CustomTLSCertificate `jsonapi:"relation,tls_certificates,omitempty"`
+	ID            string                  `jsonapi:"primary,tls_domain"`
 	Subscriptions []*TLSSubscription      `jsonapi:"relation,tls_subscriptions,omitempty"`
+	Type          string                  `jsonapi:"attr,type"`
 }
 
 // ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
 type ListBulkCertificatesInput struct {
+	FilterTLSDomainsIDMatch string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
 	PageNumber              int    // The page index for pagination.
 	PageSize                int    // The number of keys per page.
-	FilterTLSDomainsIDMatch string // Filter certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
 	Sort                    string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
 }
 
@@ -130,10 +130,10 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 
 // CreateBulkCertificateInput is used as input to the CreateBulkCertificate function.
 type CreateBulkCertificateInput struct {
-	CertBlob          string              `jsonapi:"attr,cert_blob"`
-	IntermediatesBlob string              `jsonapi:"attr,intermediates_blob"`
 	AllowUntrusted    bool                `jsonapi:"attr,allow_untrusted_root,omitempty"`
+	CertBlob          string              `jsonapi:"attr,cert_blob"`
 	Configurations    []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
+	IntermediatesBlob string              `jsonapi:"attr,intermediates_blob"`
 }
 
 // CreateBulkCertificate create a TLS private key.
@@ -163,10 +163,10 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 
 // UpdateBulkCertificateInput is used as input to the UpdateBulkCertificate function.
 type UpdateBulkCertificateInput struct {
-	ID                string `jsonapi:"attr,id"`
-	CertBlob          string `jsonapi:"attr,cert_blob"`
-	IntermediatesBlob string `jsonapi:"attr,intermediates_blob,omitempty"`
 	AllowUntrusted    bool   `jsonapi:"attr,allow_untrusted_root"`
+	CertBlob          string `jsonapi:"attr,cert_blob"`
+	ID                string `jsonapi:"attr,id"`
+	IntermediatesBlob string `jsonapi:"attr,intermediates_blob,omitempty"`
 }
 
 // UpdateBulkCertificate replace a certificate with a newly reissued certificate.

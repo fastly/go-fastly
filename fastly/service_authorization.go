@@ -22,22 +22,22 @@ type SAService struct {
 }
 
 // ServiceAuthorization is the API response model.
+// FIXME: Typo (DeltedAt -> DeletedAt).
 type ServiceAuthorization struct {
+	CreatedAt  *time.Time `jsonapi:"attr,created_at,iso8601"`
+	DeltedAt   *time.Time `jsonapi:"attr,deleted_at,iso8601"`
 	ID         string     `jsonapi:"primary,service_authorization"`
 	Permission string     `jsonapi:"attr,permission,omitempty"`
-	CreatedAt  *time.Time `jsonapi:"attr,created_at,iso8601"`
+	Service    *SAService `jsonapi:"relation,service,omitempty"`
 	UpdatedAt  *time.Time `jsonapi:"attr,updated_at,iso8601"`
-	// FIXME: Typo (DeltedAt -> DeletedAt).
-	DeltedAt *time.Time `jsonapi:"attr,deleted_at,iso8601"`
-	User     *SAUser    `jsonapi:"relation,user,omitempty"`
-	Service  *SAService `jsonapi:"relation,service,omitempty"`
+	User       *SAUser    `jsonapi:"relation,user,omitempty"`
 }
 
 // SAResponse is an object containing the list of ServiceAuthorization results.
 // FIXME: Ambiguous name (SAResponse -> ServiceAuthorizations)
 type SAResponse struct {
-	Items []*ServiceAuthorization
 	Info  infoResponse
+	Items []*ServiceAuthorization
 }
 
 // saType is used for reflection because JSONAPI wants to know what it's
@@ -46,10 +46,10 @@ var saType = reflect.TypeOf(new(ServiceAuthorization))
 
 // ListServiceAuthorizationsInput is used as input to the ListWAFs function.
 type ListServiceAuthorizationsInput struct {
-	// Limit the number of returned service authorizations.
-	PageSize int
-	// Request a specific page of service authorizations.
+	// PageNumber requests a specific page of service authorizations.
 	PageNumber int
+	// PageSize limits the number of returned service authorizations.
+	PageSize int
 }
 
 // formatFilters ensures the parameters are formatted according to how the

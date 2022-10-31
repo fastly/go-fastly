@@ -43,33 +43,32 @@ const (
 
 // S3 represents a S3 response from the Fastly API.
 type S3 struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name                         string                 `mapstructure:"name"`
-	BucketName                   string                 `mapstructure:"bucket_name"`
-	Domain                       string                 `mapstructure:"domain"`
+	ACL                          S3AccessControlList    `mapstructure:"acl"`
 	AccessKey                    string                 `mapstructure:"access_key"`
-	SecretKey                    string                 `mapstructure:"secret_key"`
-	IAMRole                      string                 `mapstructure:"iam_role"`
-	Path                         string                 `mapstructure:"path"`
-	Period                       uint                   `mapstructure:"period"`
+	BucketName                   string                 `mapstructure:"bucket_name"`
 	CompressionCodec             string                 `mapstructure:"compression_codec"`
-	GzipLevel                    uint8                  `mapstructure:"gzip_level"`
+	CreatedAt                    *time.Time             `mapstructure:"created_at"`
+	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
+	Domain                       string                 `mapstructure:"domain"`
 	Format                       string                 `mapstructure:"format"`
 	FormatVersion                uint                   `mapstructure:"format_version"`
-	ResponseCondition            string                 `mapstructure:"response_condition"`
+	GzipLevel                    uint8                  `mapstructure:"gzip_level"`
+	IAMRole                      string                 `mapstructure:"iam_role"`
 	MessageType                  string                 `mapstructure:"message_type"`
-	TimestampFormat              string                 `mapstructure:"timestamp_format"`
+	Name                         string                 `mapstructure:"name"`
+	Path                         string                 `mapstructure:"path"`
+	Period                       uint                   `mapstructure:"period"`
 	Placement                    string                 `mapstructure:"placement"`
 	PublicKey                    string                 `mapstructure:"public_key"`
 	Redundancy                   S3Redundancy           `mapstructure:"redundancy"`
-	ServerSideEncryptionKMSKeyID string                 `mapstructure:"server_side_encryption_kms_key_id"`
+	ResponseCondition            string                 `mapstructure:"response_condition"`
+	SecretKey                    string                 `mapstructure:"secret_key"`
 	ServerSideEncryption         S3ServerSideEncryption `mapstructure:"server_side_encryption"`
-	CreatedAt                    *time.Time             `mapstructure:"created_at"`
+	ServerSideEncryptionKMSKeyID string                 `mapstructure:"server_side_encryption_kms_key_id"`
+	ServiceID                    string                 `mapstructure:"service_id"`
+	ServiceVersion               int                    `mapstructure:"version"`
+	TimestampFormat              string                 `mapstructure:"timestamp_format"`
 	UpdatedAt                    *time.Time             `mapstructure:"updated_at"`
-	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
-	ACL                          S3AccessControlList    `mapstructure:"acl"`
 }
 
 // s3sByName is a sortable list of S3s.
@@ -86,7 +85,6 @@ func (s s3sByName) Less(i, j int) bool {
 type ListS3sInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -118,33 +116,31 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 
 // CreateS3Input is used as input to the CreateS3 function.
 type CreateS3Input struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name                         string                 `url:"name,omitempty"`
-	BucketName                   string                 `url:"bucket_name,omitempty"`
-	Domain                       string                 `url:"domain,omitempty"`
+	ACL                          S3AccessControlList    `url:"acl,omitempty"`
 	AccessKey                    string                 `url:"access_key,omitempty"`
-	SecretKey                    string                 `url:"secret_key,omitempty"`
+	BucketName                   string                 `url:"bucket_name,omitempty"`
+	CompressionCodec             string                 `url:"compression_codec,omitempty"`
+	Domain                       string                 `url:"domain,omitempty"`
+	Format                       string                 `url:"format,omitempty"`
+	FormatVersion                uint                   `url:"format_version,omitempty"`
+	GzipLevel                    uint8                  `url:"gzip_level,omitempty"`
 	IAMRole                      string                 `url:"iam_role,omitempty"`
+	MessageType                  string                 `url:"message_type,omitempty"`
+	Name                         string                 `url:"name,omitempty"`
 	Path                         string                 `url:"path,omitempty"`
 	Period                       uint                   `url:"period,omitempty"`
-	CompressionCodec             string                 `url:"compression_codec,omitempty"`
-	GzipLevel                    uint8                  `url:"gzip_level,omitempty"`
-	Format                       string                 `url:"format,omitempty"`
-	MessageType                  string                 `url:"message_type,omitempty"`
-	FormatVersion                uint                   `url:"format_version,omitempty"`
-	ResponseCondition            string                 `url:"response_condition,omitempty"`
-	TimestampFormat              string                 `url:"timestamp_format,omitempty"`
-	Redundancy                   S3Redundancy           `url:"redundancy,omitempty"`
 	Placement                    string                 `url:"placement,omitempty"`
 	PublicKey                    string                 `url:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	Redundancy                   S3Redundancy           `url:"redundancy,omitempty"`
+	ResponseCondition            string                 `url:"response_condition,omitempty"`
+	SecretKey                    string                 `url:"secret_key,omitempty"`
 	ServerSideEncryption         S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
-	ACL                          S3AccessControlList    `url:"acl,omitempty"`
+	ServerSideEncryptionKMSKeyID string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
 // CreateS3 creates a new Fastly S3.
@@ -177,14 +173,12 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 
 // GetS3Input is used as input to the GetS3 function.
 type GetS3Input struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the S3 to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetS3 gets the S3 configuration with the given parameters.
@@ -217,36 +211,33 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 
 // UpdateS3Input is used as input to the UpdateS3 function.
 type UpdateS3Input struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
+	ACL              *S3AccessControlList `url:"acl,omitempty"`
+	AccessKey        *string              `url:"access_key,omitempty"`
+	BucketName       *string              `url:"bucket_name,omitempty"`
+	CompressionCodec *string              `url:"compression_codec,omitempty"`
+	Domain           *string              `url:"domain,omitempty"`
+	Format           *string              `url:"format,omitempty"`
+	FormatVersion    *uint                `url:"format_version,omitempty"`
+	GzipLevel        *uint8               `url:"gzip_level,omitempty"`
+	IAMRole          *string              `url:"iam_role,omitempty"`
+	MessageType      *string              `url:"message_type,omitempty"`
 	// Name is the name of the S3 to update.
-	Name string
-
+	Name                         string
 	NewName                      *string                 `url:"name,omitempty"`
-	BucketName                   *string                 `url:"bucket_name,omitempty"`
-	Domain                       *string                 `url:"domain,omitempty"`
-	AccessKey                    *string                 `url:"access_key,omitempty"`
-	SecretKey                    *string                 `url:"secret_key,omitempty"`
-	IAMRole                      *string                 `url:"iam_role,omitempty"`
 	Path                         *string                 `url:"path,omitempty"`
 	Period                       *uint                   `url:"period,omitempty"`
-	CompressionCodec             *string                 `url:"compression_codec,omitempty"`
-	GzipLevel                    *uint8                  `url:"gzip_level,omitempty"`
-	Format                       *string                 `url:"format,omitempty"`
-	FormatVersion                *uint                   `url:"format_version,omitempty"`
-	ResponseCondition            *string                 `url:"response_condition,omitempty"`
-	MessageType                  *string                 `url:"message_type,omitempty"`
-	TimestampFormat              *string                 `url:"timestamp_format,omitempty"`
-	Redundancy                   *S3Redundancy           `url:"redundancy,omitempty"`
 	Placement                    *string                 `url:"placement,omitempty"`
 	PublicKey                    *string                 `url:"public_key,omitempty"`
-	ServerSideEncryptionKMSKeyID *string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	Redundancy                   *S3Redundancy           `url:"redundancy,omitempty"`
+	ResponseCondition            *string                 `url:"response_condition,omitempty"`
+	SecretKey                    *string                 `url:"secret_key,omitempty"`
 	ServerSideEncryption         *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
-	ACL                          *S3AccessControlList    `url:"acl,omitempty"`
+	ServerSideEncryptionKMSKeyID *string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // UpdateS3 updates a specific S3.
@@ -283,14 +274,12 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 
 // DeleteS3Input is the input parameter to DeleteS3.
 type DeleteS3Input struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the S3 to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteS3 deletes the given S3 version.

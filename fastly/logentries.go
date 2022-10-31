@@ -9,21 +9,20 @@ import (
 
 // Logentries represents a logentries response from the Fastly API.
 type Logentries struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	Port              uint       `mapstructure:"port"`
-	UseTLS            bool       `mapstructure:"use_tls"`
-	Token             string     `mapstructure:"token"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	Region            string     `mapstructure:"region"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
-	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
+	Port              uint       `mapstructure:"port"`
+	Region            string     `mapstructure:"region"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	Token             string     `mapstructure:"token"`
+	UpdatedAt         *time.Time `mapstructure:"updated_at"`
+	UseTLS            bool       `mapstructure:"use_tls"`
 }
 
 // logentriesByName is a sortable list of logentries.
@@ -40,7 +39,6 @@ func (s logentriesByName) Less(i, j int) bool {
 type ListLogentriesInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -72,21 +70,19 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 
 // CreateLogentriesInput is used as input to the CreateLogentries function.
 type CreateLogentriesInput struct {
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	Port              uint   `url:"port,omitempty"`
+	Region            string `url:"region,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string      `url:"name,omitempty"`
-	Port              uint        `url:"port,omitempty"`
-	UseTLS            Compatibool `url:"use_tls,omitempty"`
-	Token             string      `url:"token,omitempty"`
-	Format            string      `url:"format,omitempty"`
-	FormatVersion     uint        `url:"format_version,omitempty"`
-	ResponseCondition string      `url:"response_condition,omitempty"`
-	Region            string      `url:"region,omitempty"`
-	Placement         string      `url:"placement,omitempty"`
+	Token          string      `url:"token,omitempty"`
+	UseTLS         Compatibool `url:"use_tls,omitempty"`
 }
 
 // CreateLogentries creates a new Fastly logentries.
@@ -115,14 +111,12 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 
 // GetLogentriesInput is used as input to the GetLogentries function.
 type GetLogentriesInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the logentries to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetLogentries gets the logentries configuration with the given parameters.
@@ -155,24 +149,21 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 
 // UpdateLogentriesInput is used as input to the UpdateLogentries function.
 type UpdateLogentriesInput struct {
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the logentries to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	Port              *uint   `url:"port,omitempty"`
+	Region            *string `url:"region,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the logentries to update.
-	Name string
-
-	NewName           *string      `url:"name,omitempty"`
-	Port              *uint        `url:"port,omitempty"`
-	UseTLS            *Compatibool `url:"use_tls,omitempty"`
-	Token             *string      `url:"token,omitempty"`
-	Format            *string      `url:"format,omitempty"`
-	FormatVersion     *uint        `url:"format_version,omitempty"`
-	ResponseCondition *string      `url:"response_condition,omitempty"`
-	Region            *string      `url:"region,omitempty"`
-	Placement         *string      `url:"placement,omitempty"`
+	Token          *string      `url:"token,omitempty"`
+	UseTLS         *Compatibool `url:"use_tls,omitempty"`
 }
 
 // UpdateLogentries updates a specific logentries.
@@ -205,14 +196,12 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 
 // DeleteLogentriesInput is the input parameter to DeleteLogentries.
 type DeleteLogentriesInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the logentries to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteLogentries deletes the given logentries version.

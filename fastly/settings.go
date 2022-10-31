@@ -4,11 +4,10 @@ import "fmt"
 
 // Settings represents a backend response from the Fastly API.
 type Settings struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	DefaultTTL      uint   `mapstructure:"general.default_ttl"`
 	DefaultHost     string `mapstructure:"general.default_host"`
+	DefaultTTL      uint   `mapstructure:"general.default_ttl"`
+	ServiceID       string `mapstructure:"service_id"`
+	ServiceVersion  int    `mapstructure:"version"`
 	StaleIfError    bool   `mapstructure:"general.stale_if_error"`
 	StaleIfErrorTTL uint   `mapstructure:"general.stale_if_error_ttl"`
 }
@@ -17,7 +16,6 @@ type Settings struct {
 type GetSettingsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -48,16 +46,14 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 
 // UpdateSettingsInput is used as input to the UpdateSettings function.
 type UpdateSettingsInput struct {
+	DefaultHost *string `url:"general.default_host,omitempty"`
+	DefaultTTL  uint    `url:"general.default_ttl"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	DefaultTTL      uint    `url:"general.default_ttl"`
-	DefaultHost     *string `url:"general.default_host,omitempty"`
-	StaleIfError    *bool   `url:"general.stale_if_error,omitempty"`
-	StaleIfErrorTTL *uint   `url:"general.stale_if_error_ttl,omitempty"`
+	ServiceVersion  int
+	StaleIfError    *bool `url:"general.stale_if_error,omitempty"`
+	StaleIfErrorTTL *uint `url:"general.stale_if_error_ttl,omitempty"`
 }
 
 // UpdateSettings updates a specific backend.

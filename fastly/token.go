@@ -24,16 +24,16 @@ const (
 // Token represents an API token which are used to authenticate requests to the
 // Fastly API.
 type Token struct {
-	ID          string     `mapstructure:"id"`
-	Name        string     `mapstructure:"name"`
-	UserID      string     `mapstructure:"user_id"`
-	Services    []string   `mapstructure:"services"`
 	AccessToken string     `mapstructure:"access_token"`
-	Scope       TokenScope `mapstructure:"scope"`
-	IP          string     `mapstructure:"ip"`
 	CreatedAt   *time.Time `mapstructure:"created_at"`
-	LastUsedAt  *time.Time `mapstructure:"last_used_at"`
 	ExpiresAt   *time.Time `mapstructure:"expires_at"`
+	ID          string     `mapstructure:"id"`
+	IP          string     `mapstructure:"ip"`
+	LastUsedAt  *time.Time `mapstructure:"last_used_at"`
+	Name        string     `mapstructure:"name"`
+	Scope       TokenScope `mapstructure:"scope"`
+	Services    []string   `mapstructure:"services"`
+	UserID      string     `mapstructure:"user_id"`
 }
 
 // tokensByName is a sortable list of tokens.
@@ -110,12 +110,12 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
-	Name      string     `url:"name,omitempty"`
-	Scope     TokenScope `url:"scope,omitempty"`
-	Username  string     `url:"username,omitempty"`
-	Password  string     `url:"password,omitempty"`
-	Services  []string   `url:"services,brackets,omitempty"`
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
+	Name      string     `url:"name,omitempty"`
+	Password  string     `url:"password,omitempty"`
+	Scope     TokenScope `url:"scope,omitempty"`
+	Services  []string   `url:"services,brackets,omitempty"`
+	Username  string     `url:"username,omitempty"`
 }
 
 // CreateToken creates a new API token with the given information.

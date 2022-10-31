@@ -9,20 +9,19 @@ import (
 
 // Sumologic represents a sumologic response from the Fastly API.
 type Sumologic struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
 	Address           string     `mapstructure:"address"`
-	URL               string     `mapstructure:"url"`
-	Format            string     `mapstructure:"format"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	MessageType       string     `mapstructure:"message_type"`
-	FormatVersion     int        `mapstructure:"format_version"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
-	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Format            string     `mapstructure:"format"`
+	FormatVersion     int        `mapstructure:"format_version"`
+	MessageType       string     `mapstructure:"message_type"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	URL               string     `mapstructure:"url"`
+	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 }
 
 // sumologicsByName is a sortable list of sumologics.
@@ -39,7 +38,6 @@ func (s sumologicsByName) Less(i, j int) bool {
 type ListSumologicsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -71,20 +69,18 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 
 // CreateSumologicInput is used as input to the CreateSumologic function.
 type CreateSumologicInput struct {
+	Address           string `url:"address,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     int    `url:"format_version,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	Address           string `url:"address,omitempty"`
-	URL               string `url:"url,omitempty"`
-	Format            string `url:"format,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	FormatVersion     int    `url:"format_version,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	URL            string `url:"url,omitempty"`
 }
 
 // CreateSumologic creates a new Fastly sumologic.
@@ -113,14 +109,12 @@ func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 
 // GetSumologicInput is used as input to the GetSumologic function.
 type GetSumologicInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the sumologic to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetSumologic gets the sumologic configuration with the given parameters.
@@ -153,23 +147,20 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 
 // UpdateSumologicInput is used as input to the UpdateSumologic function.
 type UpdateSumologicInput struct {
+	Address       *string `url:"address,omitempty"`
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *int    `url:"format_version,omitempty"`
+	MessageType   *string `url:"message_type,omitempty"`
+	// Name is the name of the sumologic to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the sumologic to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	Address           *string `url:"address,omitempty"`
-	URL               *string `url:"url,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
-	FormatVersion     *int    `url:"format_version,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	URL            *string `url:"url,omitempty"`
 }
 
 // UpdateSumologic updates a specific sumologic.
@@ -202,14 +193,12 @@ func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 
 // DeleteSumologicInput is the input parameter to DeleteSumologic.
 type DeleteSumologicInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the sumologic to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteSumologic deletes the given sumologic version.

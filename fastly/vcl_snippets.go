@@ -53,40 +53,33 @@ func SnippetTypeToString(b string) *SnippetType {
 
 // Snippet is the Fastly Snippet object
 type Snippet struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name      string      `mapstructure:"name"`
-	ID        string      `mapstructure:"id"`
-	Priority  int         `mapstructure:"priority"`
-	Dynamic   int         `mapstructure:"dynamic"`
-	Content   string      `mapstructure:"content"`
-	Type      SnippetType `mapstructure:"type"`
-	CreatedAt *time.Time  `mapstructure:"created_at"`
-	UpdatedAt *time.Time  `mapstructure:"updated_at"`
-	DeletedAt *time.Time  `mapstructure:"deleted_at"`
+	Content        string      `mapstructure:"content"`
+	CreatedAt      *time.Time  `mapstructure:"created_at"`
+	DeletedAt      *time.Time  `mapstructure:"deleted_at"`
+	Dynamic        int         `mapstructure:"dynamic"`
+	ID             string      `mapstructure:"id"`
+	Name           string      `mapstructure:"name"`
+	Priority       int         `mapstructure:"priority"`
+	ServiceID      string      `mapstructure:"service_id"`
+	ServiceVersion int         `mapstructure:"version"`
+	Type           SnippetType `mapstructure:"type"`
+	UpdatedAt      *time.Time  `mapstructure:"updated_at"`
 }
 
 // CreateSnippetInput is the input for CreateSnippet
 type CreateSnippetInput struct {
-	// ServiceID is the ID of the service to add the snippet to (required).
-	ServiceID string
-
-	// ServiceVersion is the editable configuration version (required).
-	ServiceVersion int
-
-	// Name is the name for the snippet.
-	Name string `url:"name"`
-
-	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority *int `url:"priority,omitempty"`
-
-	// Dynamic sets the snippet version to regular (0) or dynamic (1).
-	Dynamic int `url:"dynamic"`
-
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content string `url:"content"`
-
+	// Dynamic sets the snippet version to regular (0) or dynamic (1).
+	Dynamic int `url:"dynamic"`
+	// Name is the name for the snippet.
+	Name string `url:"name"`
+	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
+	Priority *int `url:"priority,omitempty"`
+	// ServiceID is the ID of the service to add the snippet to (required).
+	ServiceID string
+	// ServiceVersion is the editable configuration version (required).
+	ServiceVersion int
 	// Type is the location in generated VCL where the snippet should be placed.
 	Type SnippetType `url:"type"`
 }
@@ -131,23 +124,17 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 
 // UpdateSnippetInput is the input for UpdateSnippet
 type UpdateSnippetInput struct {
-	// ServiceID is the ID of the service to add the snippet to (required).
-	ServiceID string
-
-	// ServiceVersion is the editable configuration version (required).
-	ServiceVersion int
-
-	Name string
-
-	// Name is the name for the snippet.
-	NewName *string `url:"name,omitempty"`
-
-	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority *int `url:"priority,omitempty"`
-
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
-
+	// Name is the name for the snippet.
+	Name    string
+	NewName *string `url:"name,omitempty"`
+	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
+	Priority *int `url:"priority,omitempty"`
+	// ServiceID is the ID of the service to add the snippet to (required).
+	ServiceID string
+	// ServiceVersion is the editable configuration version (required).
+	ServiceVersion int
 	// Type is the location in generated VCL where the snippet should be placed.
 	Type *SnippetType `url:"type,omitempty"`
 }
@@ -182,24 +169,21 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 
 // DynamicSnippet is the object returned when updating or retrieving a Dynamic Snippet
 type DynamicSnippet struct {
-	ServiceID string `mapstructure:"service_id"`
-	ID        string `mapstructure:"snippet_id"`
-
 	Content   string     `mapstructure:"content"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
+	ID        string     `mapstructure:"snippet_id"`
+	ServiceID string     `mapstructure:"service_id"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
 // UpdateDynamicSnippetInput is the input for UpdateDynamicSnippet
 type UpdateDynamicSnippetInput struct {
-	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string
-
-	// ID is the ID of the Snippet to modify
-	ID string
-
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
+	// ID is the ID of the Snippet to modify
+	ID string
+	// ServiceID is the ID of the Service to add the snippet to.
+	ServiceID string
 }
 
 // UpdateDynamicSnippet replaces the content of a Dynamic Snippet
@@ -227,12 +211,10 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 }
 
 type DeleteSnippetInput struct {
-	// ServiceID is the ID of the Service to add the snippet to.
-	ServiceID string
-
 	// Name is the Name of the Snippet to Delete
 	Name string
-
+	// ServiceID is the ID of the Service to add the snippet to.
+	ServiceID string
 	// ServiceVersion is the editable configuration version (required).
 	ServiceVersion int
 }
@@ -271,7 +253,6 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 type ListSnippetsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -314,14 +295,12 @@ func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 
 // GetSnippetInput is used as input to the GetSnippet function.
 type GetSnippetInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Snippet to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetSnippet gets the Snippet configuration with the given parameters. Dynamic Snippets will not show content due to them
@@ -355,11 +334,10 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 
 // GetDynamicSnippetInput is used as input to the GetDynamicSnippet function.
 type GetDynamicSnippetInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// ID is the ID of the Snippet to fetch.
 	ID string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // GetDynamicSnippet gets the Snippet configuration with the given parameters. This will show the current content

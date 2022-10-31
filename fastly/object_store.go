@@ -12,9 +12,9 @@ import (
 
 // ObjectStore represents an Object Store response from the Fastly API.
 type ObjectStore struct {
-	Name      string     `mapstructure:"name"`
-	ID        string     `mapstructure:"id"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
+	ID        string     `mapstructure:"id"`
+	Name      string     `mapstructure:"name"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
@@ -75,7 +75,6 @@ func (l *ListObjectStoresInput) formatFilters() map[string]string {
 type ListObjectStoresResponse struct {
 	// Data is the list of returned object stores
 	Data []ObjectStore
-
 	// Meta is the information for pagination
 	Meta map[string]string
 }
@@ -101,13 +100,12 @@ func (c *Client) ListObjectStores(i *ListObjectStoresInput) (*ListObjectStoresRe
 
 // ListObjectStoresPagiator is the opaque type for a ListObjectStores call with pagination.
 type ListObjectStoresPaginator struct {
-	cursor   string        // == "" if no more pages
-	stores   []ObjectStore // stored response from previous api call
-	finished bool
+	client   *Client
+	cursor   string // == "" if no more pages
 	err      error
-
-	client *Client
-	input  *ListObjectStoresInput
+	finished bool
+	input    *ListObjectStoresInput
+	stores   []ObjectStore // stored response from previous api call
 }
 
 // NewListObjectStoresPaginator creates a new paginator for the given ListObjectStoresInput.
@@ -127,7 +125,6 @@ func (l *ListObjectStoresPaginator) Next() bool {
 
 	l.input.Cursor = l.cursor
 	o, err := l.client.ListObjectStores(l.input)
-
 	if err != nil {
 		l.err = err
 		l.finished = true
@@ -205,11 +202,10 @@ func (c *Client) DeleteObjectStore(i *DeleteObjectStoreInput) error {
 
 // ListObjectStoreKeysInput is the input to the ListObjectStoreKeys function.
 type ListObjectStoreKeysInput struct {
-	// ID is the ID of the object store to list keys for.
-	ID string
-
-	Limit  int
 	Cursor string
+	// ID is the ID of the object store to list keys for.
+	ID    string
+	Limit int
 }
 
 func (l *ListObjectStoreKeysInput) formatFilters() map[string]string {
@@ -238,7 +234,6 @@ func (l *ListObjectStoreKeysInput) formatFilters() map[string]string {
 type ListObjectStoreKeysResponse struct {
 	// Data is the list of keys
 	Data []string
-
 	// Meta is the information for pagination
 	Meta map[string]string
 }
@@ -267,13 +262,12 @@ func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) (*ListObjectSt
 
 // ListObjectStoreKeysPaginator is the opaque type for a ListObjectStoreKeys calls with pagination.
 type ListObjectsStoreKeysPaginator struct {
-	cursor   string   // == "" if no more pages
-	keys     []string // stored response from previous api call
-	finished bool
+	client   *Client
+	cursor   string // == "" if no more pages
 	err      error
-
-	client *Client
-	input  *ListObjectStoreKeysInput
+	finished bool
+	input    *ListObjectStoreKeysInput
+	keys     []string // stored response from previous api call
 }
 
 // NewListObjectStoreKeysPaginator returns a new paginator for the provided LitObjectStoreKeysInput.
@@ -293,7 +287,6 @@ func (l *ListObjectsStoreKeysPaginator) Next() bool {
 
 	l.input.Cursor = l.cursor
 	o, err := l.client.ListObjectStoreKeys(l.input)
-
 	if err != nil {
 		l.err = err
 		l.finished = true
@@ -323,7 +316,6 @@ func (l *ListObjectsStoreKeysPaginator) Keys() []string {
 type GetObjectStoreKeyInput struct {
 	// ID is the ID of the object store (required).
 	ID string
-
 	// Key is the key to fetch (required).
 	Key string
 }
@@ -356,10 +348,8 @@ func (c *Client) GetObjectStoreKey(i *GetObjectStoreKeyInput) (string, error) {
 type InsertObjectStoreKeyInput struct {
 	// ID is the ID of the object store (required).
 	ID string
-
 	// Key is the key to add (required).
 	Key string
-
 	// Value is the value to insert (required).
 	Value string
 }
@@ -388,7 +378,6 @@ func (c *Client) InsertObjectStoreKey(i *InsertObjectStoreKeyInput) error {
 type DeleteObjectStoreKeyInput struct {
 	// ID is the ID of the object store (required).
 	ID string
-
 	// Key is the key to delete (required).
 	Key string
 }

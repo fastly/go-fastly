@@ -29,34 +29,33 @@ func PPoolType(t PoolType) *PoolType {
 
 // Pool represents a pool response from the Fastly API.
 type Pool struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	ID               string     `mapstructure:"id"`
-	Name             string     `mapstructure:"name"`
 	Comment          string     `mapstructure:"comment"`
-	Shield           string     `mapstructure:"shield"`
-	RequestCondition string     `mapstructure:"request_condition"`
-	MaxConnDefault   uint       `mapstructure:"max_conn_default"`
 	ConnectTimeout   uint       `mapstructure:"connect_timeout"`
-	FirstByteTimeout uint       `mapstructure:"first_byte_timeout"`
-	Quorum           uint       `mapstructure:"quorum"`
-	UseTLS           bool       `mapstructure:"use_tls"`
-	TLSCACert        string     `mapstructure:"tls_ca_cert"`
-	TLSCiphers       string     `mapstructure:"tls_ciphers"`
-	TLSClientKey     string     `mapstructure:"tls_client_key"`
-	TLSClientCert    string     `mapstructure:"tls_client_cert"`
-	TLSSNIHostname   string     `mapstructure:"tls_sni_hostname"`
-	TLSCheckCert     bool       `mapstructure:"tls_check_cert"`
-	TLSCertHostname  string     `mapstructure:"tls_cert_hostname"`
-	MinTLSVersion    string     `mapstructure:"min_tls_version"`
-	MaxTLSVersion    string     `mapstructure:"max_tls_version"`
-	Healthcheck      string     `mapstructure:"healthcheck"`
-	Type             PoolType   `mapstructure:"type"`
-	OverrideHost     string     `mapstructure:"override_host"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
+	FirstByteTimeout uint       `mapstructure:"first_byte_timeout"`
+	Healthcheck      string     `mapstructure:"healthcheck"`
+	ID               string     `mapstructure:"id"`
+	MaxConnDefault   uint       `mapstructure:"max_conn_default"`
+	MaxTLSVersion    string     `mapstructure:"max_tls_version"`
+	MinTLSVersion    string     `mapstructure:"min_tls_version"`
+	Name             string     `mapstructure:"name"`
+	OverrideHost     string     `mapstructure:"override_host"`
+	Quorum           uint       `mapstructure:"quorum"`
+	RequestCondition string     `mapstructure:"request_condition"`
+	ServiceID        string     `mapstructure:"service_id"`
+	ServiceVersion   int        `mapstructure:"version"`
+	Shield           string     `mapstructure:"shield"`
+	TLSCACert        string     `mapstructure:"tls_ca_cert"`
+	TLSCertHostname  string     `mapstructure:"tls_cert_hostname"`
+	TLSCheckCert     bool       `mapstructure:"tls_check_cert"`
+	TLSCiphers       string     `mapstructure:"tls_ciphers"`
+	TLSClientCert    string     `mapstructure:"tls_client_cert"`
+	TLSClientKey     string     `mapstructure:"tls_client_key"`
+	TLSSNIHostname   string     `mapstructure:"tls_sni_hostname"`
+	Type             PoolType   `mapstructure:"type"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
+	UseTLS           bool       `mapstructure:"use_tls"`
 }
 
 // poolsByName is a sortable list of pools.
@@ -73,7 +72,6 @@ func (s poolsByName) Less(i, j int) bool {
 type ListPoolsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -105,36 +103,32 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 
 // CreatePoolInput is used as input to the CreatePool function.
 type CreatePoolInput struct {
+	Comment          string `url:"comment,omitempty"`
+	ConnectTimeout   uint   `url:"connect_timeout,omitempty"`
+	FirstByteTimeout uint   `url:"first_byte_timeout,omitempty"`
+	Healthcheck      string `url:"healthcheck,omitempty"`
+	MaxConnDefault   uint   `url:"max_conn_default,omitempty"`
+	MaxTLSVersion    string `url:"max_tls_version,omitempty"`
+	MinTLSVersion    string `url:"min_tls_version,omitempty"`
+	// Name is the name of the pool to create (required).
+	Name             string `url:"name"`
+	OverrideHost     string `url:"override_host,omitempty"`
+	Quorum           uint   `url:"quorum,omitempty"`
+	RequestCondition string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the pool to create (required).
-	Name string `url:"name"`
-
-	// Optional fields.
-	Comment          string      `url:"comment,omitempty"`
-	Shield           string      `url:"shield,omitempty"`
-	RequestCondition string      `url:"request_condition,omitempty"`
-	MaxConnDefault   uint        `url:"max_conn_default,omitempty"`
-	ConnectTimeout   uint        `url:"connect_timeout,omitempty"`
-	FirstByteTimeout uint        `url:"first_byte_timeout,omitempty"`
-	Quorum           uint        `url:"quorum,omitempty"`
-	UseTLS           Compatibool `url:"use_tls,omitempty"`
-	TLSCACert        string      `url:"tls_ca_cert,omitempty"`
-	TLSCiphers       string      `url:"tls_ciphers,omitempty"`
-	TLSClientKey     string      `url:"tls_client_key,omitempty"`
-	TLSClientCert    string      `url:"tls_client_cert,omitempty"`
-	TLSSNIHostname   string      `url:"tls_sni_hostname,omitempty"`
-	TLSCheckCert     Compatibool `url:"tls_check_cert,omitempty"`
-	TLSCertHostname  string      `url:"tls_cert_hostname,omitempty"`
-	MinTLSVersion    string      `url:"min_tls_version,omitempty"`
-	MaxTLSVersion    string      `url:"max_tls_version,omitempty"`
-	Healthcheck      string      `url:"healthcheck,omitempty"`
-	Type             PoolType    `url:"type,omitempty"`
-	OverrideHost     string      `url:"override_host,omitempty"`
+	ServiceVersion  int
+	Shield          string      `url:"shield,omitempty"`
+	TLSCACert       string      `url:"tls_ca_cert,omitempty"`
+	TLSCertHostname string      `url:"tls_cert_hostname,omitempty"`
+	TLSCheckCert    Compatibool `url:"tls_check_cert,omitempty"`
+	TLSCiphers      string      `url:"tls_ciphers,omitempty"`
+	TLSClientCert   string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey    string      `url:"tls_client_key,omitempty"`
+	TLSSNIHostname  string      `url:"tls_sni_hostname,omitempty"`
+	Type            PoolType    `url:"type,omitempty"`
+	UseTLS          Compatibool `url:"use_tls,omitempty"`
 }
 
 // CreatePool creates a pool for a particular service and version.
@@ -167,14 +161,12 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 
 // GetPoolInput is used as input to the GetPool function.
 type GetPoolInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the pool of interest (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetPool gets a single pool for a particular service and version.
@@ -207,37 +199,33 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 
 // UpdatePoolInput is used as input to the UpdatePool function.
 type UpdatePoolInput struct {
+	Comment          *string `url:"comment,omitempty"`
+	ConnectTimeout   *uint   `url:"connect_timeout,omitempty"`
+	FirstByteTimeout *uint   `url:"first_byte_timeout,omitempty"`
+	Healthcheck      *string `url:"healthcheck,omitempty"`
+	MaxConnDefault   *uint   `url:"max_conn_default,omitempty"`
+	MaxTLSVersion    *string `url:"max_tls_version,omitempty"`
+	MinTLSVersion    *string `url:"min_tls_version,omitempty"`
+	// Name is the name of the pool to update (required).
+	Name             string
+	NewName          *string `url:"name,omitempty"`
+	OverrideHost     *string `url:"override_host,omitempty"`
+	Quorum           *uint   `url:"quorum,omitempty"`
+	RequestCondition *string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the pool to update (required).
-	Name string
-
-	// Optional fields.
-	NewName          *string      `url:"name,omitempty"`
-	Comment          *string      `url:"comment,omitempty"`
-	Shield           *string      `url:"shield,omitempty"`
-	RequestCondition *string      `url:"request_condition,omitempty"`
-	MaxConnDefault   *uint        `url:"max_conn_default,omitempty"`
-	ConnectTimeout   *uint        `url:"connect_timeout,omitempty"`
-	FirstByteTimeout *uint        `url:"first_byte_timeout,omitempty"`
-	Quorum           *uint        `url:"quorum,omitempty"`
-	UseTLS           *Compatibool `url:"use_tls,omitempty"`
-	TLSCACert        *string      `url:"tls_ca_cert,omitempty"`
-	TLSCiphers       *string      `url:"tls_ciphers,omitempty"`
-	TLSClientKey     *string      `url:"tls_client_key,omitempty"`
-	TLSClientCert    *string      `url:"tls_client_cert,omitempty"`
-	TLSSNIHostname   *string      `url:"tls_sni_hostname,omitempty"`
-	TLSCheckCert     *Compatibool `url:"tls_check_cert,omitempty"`
-	TLSCertHostname  *string      `url:"tls_cert_hostname,omitempty"`
-	MinTLSVersion    *string      `url:"min_tls_version,omitempty"`
-	MaxTLSVersion    *string      `url:"max_tls_version,omitempty"`
-	Healthcheck      *string      `url:"healthcheck,omitempty"`
-	Type             *PoolType    `url:"type,omitempty"`
-	OverrideHost     *string      `url:"override_host,omitempty"`
+	ServiceVersion  int
+	Shield          *string      `url:"shield,omitempty"`
+	TLSCACert       *string      `url:"tls_ca_cert,omitempty"`
+	TLSCertHostname *string      `url:"tls_cert_hostname,omitempty"`
+	TLSCheckCert    *Compatibool `url:"tls_check_cert,omitempty"`
+	TLSCiphers      *string      `url:"tls_ciphers,omitempty"`
+	TLSClientCert   *string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey    *string      `url:"tls_client_key,omitempty"`
+	TLSSNIHostname  *string      `url:"tls_sni_hostname,omitempty"`
+	Type            *PoolType    `url:"type,omitempty"`
+	UseTLS          *Compatibool `url:"use_tls,omitempty"`
 }
 
 // UpdatePool updates a specufic pool for a particular service and version.
@@ -270,14 +258,12 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 
 // DeletePoolInput is used as input to the DeletePool function.
 type DeletePoolInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the pool to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeletePool deletes a specific pool for a particular service and version.

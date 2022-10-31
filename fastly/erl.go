@@ -34,9 +34,9 @@ type ERL struct {
 
 // ERLResponseType models the response from the Fastly API.
 type ERLResponseType struct {
-	ERLStatus      int    `url:"status,omitempty"`
-	ERLContentType string `url:"content_type,omitempty"`
 	ERLContent     string `url:"content,omitempty"`
+	ERLContentType string `url:"content_type,omitempty"`
+	ERLStatus      int    `url:"status,omitempty"`
 }
 
 // ERLAction represents the action variants for when a rate limiter
@@ -175,9 +175,9 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 
 // DeleteERLInput is used as input to the DeleteERL function.
 type DeleteERLInput struct {
+	ERLID          string `form:"id"`
 	ServiceID      string `form:"service_id"`
 	ServiceVersion int    `form:"version"`
-	ERLID          string `form:"id"`
 }
 
 // DeleteERL deletes the specified ERL.
@@ -212,9 +212,9 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 
 // GetERLInput is used as input to the GetERL function.
 type GetERLInput struct {
+	ERLID          string `form:"id"`
 	ServiceID      string `form:"service_id"`
 	ServiceVersion int    `form:"version"`
-	ERLID          string `form:"id"`
 }
 
 // GetERL returns the specified ERL.

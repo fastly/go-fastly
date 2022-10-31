@@ -9,23 +9,22 @@ import (
 
 // BigQuery represents a BigQuery response from the Fastly API.
 type BigQuery struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	Format            string     `mapstructure:"format"`
-	User              string     `mapstructure:"user"`
-	ProjectID         string     `mapstructure:"project_id"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
 	Dataset           string     `mapstructure:"dataset"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Format            string     `mapstructure:"format"`
+	FormatVersion     uint       `mapstructure:"format_version"`
+	Name              string     `mapstructure:"name"`
+	Placement         string     `mapstructure:"placement"`
+	ProjectID         string     `mapstructure:"project_id"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	SecretKey         string     `mapstructure:"secret_key"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
 	Table             string     `mapstructure:"table"`
 	Template          string     `mapstructure:"template_suffix"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	Placement         string     `mapstructure:"placement"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	User              string     `mapstructure:"user"`
 }
 
 // bigQueriesByName is a sortable list of BigQueries.
@@ -42,7 +41,6 @@ func (s bigQueriesByName) Less(i, j int) bool {
 type ListBigQueriesInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -74,23 +72,21 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 
 // CreateBigQueryInput is used as input to the CreateBigQuery function.
 type CreateBigQueryInput struct {
+	Dataset           string `url:"dataset,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	ProjectID         string `url:"project_id,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	ProjectID         string `url:"project_id,omitempty"`
-	Dataset           string `url:"dataset,omitempty"`
-	Table             string `url:"table,omitempty"`
-	Template          string `url:"template_suffix,omitempty"`
-	User              string `url:"user,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
-	Format            string `url:"format,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
+	Table          string `url:"table,omitempty"`
+	Template       string `url:"template_suffix,omitempty"`
+	User           string `url:"user,omitempty"`
 }
 
 // CreateBigQuery creates a new Fastly BigQuery.
@@ -119,14 +115,12 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 
 // GetBigQueryInput is used as input to the GetBigQuery function.
 type GetBigQueryInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the BigQuery to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetBigQuery gets the BigQuery configuration with the given parameters.
@@ -159,26 +153,23 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 
 // UpdateBigQueryInput is used as input to the UpdateBigQuery function.
 type UpdateBigQueryInput struct {
+	Dataset       *string `url:"dataset,omitempty"`
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the BigQuery to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	ProjectID         *string `url:"project_id,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the BigQuery to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	ProjectID         *string `url:"project_id,omitempty"`
-	Dataset           *string `url:"dataset,omitempty"`
-	Table             *string `url:"table,omitempty"`
-	Template          *string `url:"template_suffix,omitempty"`
-	User              *string `url:"user,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
+	Table          *string `url:"table,omitempty"`
+	Template       *string `url:"template_suffix,omitempty"`
+	User           *string `url:"user,omitempty"`
 }
 
 // UpdateBigQuery updates a specific BigQuery.
@@ -211,14 +202,12 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 
 // DeleteBigQueryInput is the input parameter to DeleteBigQuery.
 type DeleteBigQueryInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the BigQuery to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteBigQuery deletes the given BigQuery version.

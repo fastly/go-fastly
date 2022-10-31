@@ -20,46 +20,46 @@ type WAFRule struct {
 	ID        string             `jsonapi:"primary,waf_rule,omitempty"`
 	ModSecID  int                `jsonapi:"attr,modsec_rule_id,omitempty"`
 	Publisher string             `jsonapi:"attr,publisher,omitempty"`
-	Type      string             `jsonapi:"attr,type,omitempty"`
 	Revisions []*WAFRuleRevision `jsonapi:"relation,waf_rule_revisions,omitempty"`
+	Type      string             `jsonapi:"attr,type,omitempty"`
 }
 
 // WAFRuleRevision is the information about a WAF rule revision object.
 type WAFRuleRevision struct {
 	ID            string `jsonapi:"primary,waf_rule_revision,omitempty"`
-	Status        string `jsonapi:"attr,message,omitempty"`
-	Severity      int    `jsonapi:"attr,severity,omitempty"`
-	Revision      int    `jsonapi:"attr,revision,omitempty"`
-	ParanoiaLevel int    `jsonapi:"attr,paranoia_level,omitempty"`
 	ModSecID      int    `jsonapi:"attr,modsec_rule_id,omitempty"`
-	State         string `jsonapi:"attr,state,omitempty"`
+	ParanoiaLevel int    `jsonapi:"attr,paranoia_level,omitempty"`
+	Revision      int    `jsonapi:"attr,revision,omitempty"`
+	Severity      int    `jsonapi:"attr,severity,omitempty"`
 	Source        string `jsonapi:"attr,source,omitempty"`
+	State         string `jsonapi:"attr,state,omitempty"`
+	Status        string `jsonapi:"attr,message,omitempty"`
 	VCL           string `jsonapi:"attr,vcl,omitempty"`
 }
 
 // WAFRuleResponse represents a list WAF rules full response.
 type WAFRuleResponse struct {
-	Items []*WAFRule
 	Info  infoResponse
+	Items []*WAFRule
 }
 
 // ListWAFRulesInput used as input for listing WAF rules.
 type ListWAFRulesInput struct {
-	// Limit the returned rules to a set linked to list of tags by name.
-	FilterTagNames []string
-	// Limit the returned rules to a set by publishers.
-	FilterPublishers []string
-	// Limit the returned rules to a set by modsecurity rule IDs.
-	FilterModSecIDs []int
 	// Excludes individual rules by modsecurity rule IDs.
 	// FIXME: Should be d not c (ExcludeMocSecIDs -> ExcludeModSecIDs)
 	ExcludeMocSecIDs []int
-	// Limit the number of returned rules.
-	PageSize int
-	// Request a specific page of rules.
-	PageNumber int
+	// Limit the returned rules to a set by modsecurity rule IDs.
+	FilterModSecIDs []int
+	// Limit the returned rules to a set by publishers.
+	FilterPublishers []string
+	// Limit the returned rules to a set linked to list of tags by name.
+	FilterTagNames []string
 	// Include relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
 	Include string
+	// Request a specific page of rules.
+	PageNumber int
+	// Limit the number of returned rules.
+	PageSize int
 }
 
 func (i *ListWAFRulesInput) formatFilters() map[string]string {
@@ -141,14 +141,14 @@ func (c *Client) ListWAFRules(i *ListWAFRulesInput) (*WAFRuleResponse, error) {
 
 // ListAllWAFRulesInput used as input for listing all WAF rules.
 type ListAllWAFRulesInput struct {
-	// Limit the returned rules to a set linked to a tag by name.
-	FilterTagNames []string
-	// Limit the returned rules to a set by publishers.
-	FilterPublishers []string
-	// Limit the returned rules to a set by modsecurity rule IDs.
-	FilterModSecIDs []int
 	// Excludes individual rules by modsecurity rule IDs.
 	ExcludeMocSecIDs []int
+	// Limit the returned rules to a set by modsecurity rule IDs.
+	FilterModSecIDs []int
+	// Limit the returned rules to a set by publishers.
+	FilterPublishers []string
+	// Limit the returned rules to a set linked to a tag by name.
+	FilterTagNames []string
 	// Include relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
 	Include string
 }

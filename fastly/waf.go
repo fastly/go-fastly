@@ -19,27 +19,27 @@ type WAFConfigurationSet struct {
 
 // WAF  is the information about a firewall object.
 type WAF struct {
+	ActiveRulesFastlyBlockCount    int        `jsonapi:"attr,active_rules_fastly_block_count"`
+	ActiveRulesFastlyLogCount      int        `jsonapi:"attr,active_rules_fastly_log_count"`
+	ActiveRulesOWASPBlockCount     int        `jsonapi:"attr,active_rules_owasp_block_count"`
+	ActiveRulesOWASPLogCount       int        `jsonapi:"attr,active_rules_owasp_log_count"`
+	ActiveRulesOWASPScoreCount     int        `jsonapi:"attr,active_rules_owasp_score_count"`
+	ActiveRulesTrustwaveBlockCount int        `jsonapi:"attr,active_rules_trustwave_block_count"`
+	ActiveRulesTrustwaveLogCount   int        `jsonapi:"attr,active_rules_trustwave_log_count"`
+	CreatedAt                      *time.Time `jsonapi:"attr,created_at,iso8601"`
+	Disabled                       bool       `jsonapi:"attr,disabled"`
 	ID                             string     `jsonapi:"primary,waf_firewall"`
-	ServiceID                      string     `jsonapi:"attr,service_id"`
-	ServiceVersion                 int        `jsonapi:"attr,service_version_number"`
 	PrefetchCondition              string     `jsonapi:"attr,prefetch_condition"`
 	Response                       string     `jsonapi:"attr,response"`
-	Disabled                       bool       `jsonapi:"attr,disabled"`
-	CreatedAt                      *time.Time `jsonapi:"attr,created_at,iso8601"`
+	ServiceID                      string     `jsonapi:"attr,service_id"`
+	ServiceVersion                 int        `jsonapi:"attr,service_version_number"`
 	UpdatedAt                      *time.Time `jsonapi:"attr,updated_at,iso8601"`
-	ActiveRulesTrustwaveLogCount   int        `jsonapi:"attr,active_rules_trustwave_log_count"`
-	ActiveRulesTrustwaveBlockCount int        `jsonapi:"attr,active_rules_trustwave_block_count"`
-	ActiveRulesFastlyLogCount      int        `jsonapi:"attr,active_rules_fastly_log_count"`
-	ActiveRulesFastlyBlockCount    int        `jsonapi:"attr,active_rules_fastly_block_count"`
-	ActiveRulesOWASPLogCount       int        `jsonapi:"attr,active_rules_owasp_log_count"`
-	ActiveRulesOWASPBlockCount     int        `jsonapi:"attr,active_rules_owasp_block_count"`
-	ActiveRulesOWASPScoreCount     int        `jsonapi:"attr,active_rules_owasp_score_count"`
 }
 
 // WAFResponse an object containing the list of WAF results.
 type WAFResponse struct {
-	Items []*WAF
 	Info  infoResponse
+	Items []*WAF
 }
 
 // wafType is used for reflection because JSONAPI wants to know what it's
@@ -48,16 +48,16 @@ var wafType = reflect.TypeOf(new(WAF))
 
 // ListWAFsInput is used as input to the ListWAFs function.
 type ListWAFsInput struct {
-	// Limit the number of returned firewalls.
-	PageSize int
-	// Request a specific page of firewalls.
-	PageNumber int
-	// Specify the service ID of the returned firewalls.
+	// FilterService specifies the service ID of the returned firewalls.
 	FilterService string
-	// Specify the version of the service for the firewalls.
+	// FilterVersion specifies the version of the service for the firewalls.
 	FilterVersion int
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_firewall_versions.
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_firewall_versions.
 	Include string
+	// PageNumber requests a specific page of firewalls.
+	PageNumber int
+	// PageSize limits the number of returned firewalls.
+	PageSize int
 }
 
 func (i *ListWAFsInput) formatFilters() map[string]string {
@@ -127,10 +127,8 @@ type CreateWAFInput struct {
 	ID                string `jsonapi:"primary,waf_firewall"`
 	PrefetchCondition string `jsonapi:"attr,prefetch_condition"`
 	Response          string `jsonapi:"attr,response"`
-
 	// ServiceID is the ID of the service (required).
 	ServiceID string `jsonapi:"attr,service_id"`
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `jsonapi:"attr,service_version_number"`
 }
@@ -161,14 +159,12 @@ func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
 
 // GetWAFInput is used as input to the GetWAF function.
 type GetWAFInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// ID is the WAF's ID.
 	ID string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetWAF gets details for given WAF
@@ -205,16 +201,14 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 
 // UpdateWAFInput is used as input to the UpdateWAF function.
 type UpdateWAFInput struct {
-	// ServiceID is the ID of the service.
-	ServiceID *string `jsonapi:"attr,service_id,omitempty"`
-
-	// ServiceVersion is the specific configuration version.
-	ServiceVersion *int `jsonapi:"attr,service_version_number,omitempty"`
-
+	Disabled          *bool   `jsonapi:"attr,disabled,omitempty"`
 	ID                string  `jsonapi:"primary,waf_firewall"`
 	PrefetchCondition *string `jsonapi:"attr,prefetch_condition,omitempty"`
 	Response          *string `jsonapi:"attr,response,omitempty"`
-	Disabled          *bool   `jsonapi:"attr,disabled,omitempty"`
+	// ServiceID is the ID of the service.
+	ServiceID *string `jsonapi:"attr,service_id,omitempty"`
+	// ServiceVersion is the specific configuration version.
+	ServiceVersion *int `jsonapi:"attr,service_version_number,omitempty"`
 }
 
 // UpdateWAF updates a specific WAF.

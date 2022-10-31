@@ -5,23 +5,23 @@ import "net/http"
 // EdgeCheck represents an edge check response from the Fastly API.
 type EdgeCheck struct {
 	Hash         string             `mapstructure:"hash"`
-	Server       string             `mapstructure:"server"`
-	ResponseTime float64            `mapstructure:"response_time"`
 	Request      *EdgeCheckRequest  `mapstructure:"request"`
 	Response     *EdgeCheckResponse `mapstructure:"response"`
+	ResponseTime float64            `mapstructure:"response_time"`
+	Server       string             `mapstructure:"server"`
 }
 
 // EdgeCheckRequest is the request part of an EdgeCheck response.
 type EdgeCheckRequest struct {
-	URL     string       `mapstructure:"url"`
-	Method  string       `mapstructure:"method"`
 	Headers *http.Header `mapstructure:"headers"`
+	Method  string       `mapstructure:"method"`
+	URL     string       `mapstructure:"url"`
 }
 
 // EdgeCheckResponse is the response part of an EdgeCheck response.
 type EdgeCheckResponse struct {
-	Status  uint         `mapstructure:"status"`
 	Headers *http.Header `mapstructure:"headers"`
+	Status  uint         `mapstructure:"status"`
 }
 
 // EdgeCheckInput is used as input to the EdgeCheck function.

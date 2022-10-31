@@ -9,21 +9,20 @@ import (
 
 // Pubsub represents an Pubsub logging response from the Fastly API.
 type Pubsub struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	Topic             string     `mapstructure:"topic"`
-	User              string     `mapstructure:"user"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ProjectID         string     `mapstructure:"project_id"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	ProjectID         string     `mapstructure:"project_id"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	SecretKey         string     `mapstructure:"secret_key"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	Topic             string     `mapstructure:"topic"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	User              string     `mapstructure:"user"`
 }
 
 // pubsubsByName is a sortable list of pubsubs.
@@ -40,7 +39,6 @@ func (s pubsubsByName) Less(i, j int) bool {
 type ListPubsubsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -72,21 +70,19 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 
 // CreatePubsubInput is used as input to the CreatePubsub function.
 type CreatePubsubInput struct {
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	ProjectID         string `url:"project_id,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	Topic             string `url:"topic,omitempty"`
-	User              string `url:"user,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
-	ProjectID         string `url:"project_id,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Format            string `url:"format,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	Topic          string `url:"topic,omitempty"`
+	User           string `url:"user,omitempty"`
 }
 
 // CreatePubsub creates a new Fastly Pubsub.
@@ -115,14 +111,12 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 
 // GetPubsubInput is used as input to the GetPubsub function.
 type GetPubsubInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Pubsub to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetPubsub gets the Pubsub configuration with the given parameters.
@@ -155,24 +149,21 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 
 // UpdatePubsubInput is used as input to the UpdatePubsub function.
 type UpdatePubsubInput struct {
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the Pubsub to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	ProjectID         *string `url:"project_id,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the Pubsub to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	Topic             *string `url:"topic,omitempty"`
-	User              *string `url:"user,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
-	ProjectID         *string `url:"project_id,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Topic          *string `url:"topic,omitempty"`
+	User           *string `url:"user,omitempty"`
 }
 
 // UpdatePubsub updates a specific Pubsub.
@@ -205,14 +196,12 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 
 // DeletePubsubInput is the input parameter to DeletePubsub.
 type DeletePubsubInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Pubsub to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeletePubsub deletes the given Pubsub version.

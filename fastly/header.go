@@ -64,24 +64,23 @@ func PHeaderType(t HeaderType) *HeaderType {
 
 // Header represents a header response from the Fastly API.
 type Header struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string       `mapstructure:"name"`
 	Action            HeaderAction `mapstructure:"action"`
-	IgnoreIfSet       bool         `mapstructure:"ignore_if_set"`
-	Type              HeaderType   `mapstructure:"type"`
-	Destination       string       `mapstructure:"dst"`
-	Source            string       `mapstructure:"src"`
-	Regex             string       `mapstructure:"regex"`
-	Substitution      string       `mapstructure:"substitution"`
-	Priority          uint         `mapstructure:"priority"`
-	RequestCondition  string       `mapstructure:"request_condition"`
 	CacheCondition    string       `mapstructure:"cache_condition"`
-	ResponseCondition string       `mapstructure:"response_condition"`
 	CreatedAt         *time.Time   `mapstructure:"created_at"`
-	UpdatedAt         *time.Time   `mapstructure:"updated_at"`
 	DeletedAt         *time.Time   `mapstructure:"deleted_at"`
+	Destination       string       `mapstructure:"dst"`
+	IgnoreIfSet       bool         `mapstructure:"ignore_if_set"`
+	Name              string       `mapstructure:"name"`
+	Priority          uint         `mapstructure:"priority"`
+	Regex             string       `mapstructure:"regex"`
+	RequestCondition  string       `mapstructure:"request_condition"`
+	ResponseCondition string       `mapstructure:"response_condition"`
+	ServiceID         string       `mapstructure:"service_id"`
+	ServiceVersion    int          `mapstructure:"version"`
+	Source            string       `mapstructure:"src"`
+	Substitution      string       `mapstructure:"substitution"`
+	Type              HeaderType   `mapstructure:"type"`
+	UpdatedAt         *time.Time   `mapstructure:"updated_at"`
 }
 
 // headersByName is a sortable list of headers.
@@ -98,7 +97,6 @@ func (s headersByName) Less(i, j int) bool {
 type ListHeadersInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -129,24 +127,22 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 
 // CreateHeaderInput is used as input to the CreateHeader function.
 type CreateHeaderInput struct {
+	Action            HeaderAction `url:"action,omitempty"`
+	CacheCondition    string       `url:"cache_condition,omitempty"`
+	Destination       string       `url:"dst,omitempty"`
+	IgnoreIfSet       Compatibool  `url:"ignore_if_set,omitempty"`
+	Name              string       `url:"name,omitempty"`
+	Priority          *uint        `url:"priority,omitempty"`
+	Regex             string       `url:"regex,omitempty"`
+	RequestCondition  string       `url:"request_condition,omitempty"`
+	ResponseCondition string       `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string       `url:"name,omitempty"`
-	Action            HeaderAction `url:"action,omitempty"`
-	IgnoreIfSet       Compatibool  `url:"ignore_if_set,omitempty"`
-	Type              HeaderType   `url:"type,omitempty"`
-	Destination       string       `url:"dst,omitempty"`
-	Source            string       `url:"src,omitempty"`
-	Regex             string       `url:"regex,omitempty"`
-	Substitution      string       `url:"substitution,omitempty"`
-	Priority          *uint        `url:"priority,omitempty"`
-	RequestCondition  string       `url:"request_condition,omitempty"`
-	CacheCondition    string       `url:"cache_condition,omitempty"`
-	ResponseCondition string       `url:"response_condition,omitempty"`
+	Source         string     `url:"src,omitempty"`
+	Substitution   string     `url:"substitution,omitempty"`
+	Type           HeaderType `url:"type,omitempty"`
 }
 
 // CreateHeader creates a new Fastly header.
@@ -175,14 +171,12 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 
 // GetHeaderInput is used as input to the GetHeader function.
 type GetHeaderInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the header to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetHeader gets the header configuration with the given parameters.
@@ -215,27 +209,24 @@ func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 
 // UpdateHeaderInput is used as input to the UpdateHeader function.
 type UpdateHeaderInput struct {
+	Action         *HeaderAction `url:"action,omitempty"`
+	CacheCondition *string       `url:"cache_condition,omitempty"`
+	Destination    *string       `url:"dst,omitempty"`
+	IgnoreIfSet    *Compatibool  `url:"ignore_if_set,omitempty"`
+	// Name is the name of the header to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Priority          *uint   `url:"priority,omitempty"`
+	Regex             *string `url:"regex,omitempty"`
+	RequestCondition  *string `url:"request_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the header to update.
-	Name string
-
-	NewName           *string       `url:"name,omitempty"`
-	Action            *HeaderAction `url:"action,omitempty"`
-	IgnoreIfSet       *Compatibool  `url:"ignore_if_set,omitempty"`
-	Type              *HeaderType   `url:"type,omitempty"`
-	Destination       *string       `url:"dst,omitempty"`
-	Source            *string       `url:"src,omitempty"`
-	Regex             *string       `url:"regex,omitempty"`
-	Substitution      *string       `url:"substitution,omitempty"`
-	Priority          *uint         `url:"priority,omitempty"`
-	RequestCondition  *string       `url:"request_condition,omitempty"`
-	CacheCondition    *string       `url:"cache_condition,omitempty"`
-	ResponseCondition *string       `url:"response_condition,omitempty"`
+	Source         *string     `url:"src,omitempty"`
+	Substitution   *string     `url:"substitution,omitempty"`
+	Type           *HeaderType `url:"type,omitempty"`
 }
 
 // UpdateHeader updates a specific header.
@@ -268,14 +259,12 @@ func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 
 // DeleteHeaderInput is the input parameter to DeleteHeader.
 type DeleteHeaderInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the header to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteHeader deletes the given header version.

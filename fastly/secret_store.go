@@ -14,8 +14,7 @@ import (
 type SecretStoreMeta struct {
 	// Limit is the limit of results returned.
 	Limit int `json:"limit"`
-	// NextCursor can be used on a subsequent request to fetch
-	// the next page of data.
+	// NextCursor can be used on a subsequent request to fetch the next page of data.
 	NextCursor string `json:"next_cursor,omitempty"`
 }
 
@@ -39,6 +38,7 @@ func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, err
 
 	p := "/resources/stores/secret"
 
+	// TODO: Should use PostJSON to avoid manually encoding.
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(struct {
 		Name string `json:"name"`
@@ -80,10 +80,10 @@ type SecretStores struct {
 
 // ListSecretStoresInput is used as input to the ListSecretStores function.
 type ListSecretStoresInput struct {
-	// Limit is the desired number of Secret Stores (optional).
-	Limit int
 	// Cursor is the pagination cursor (optional).
 	Cursor string
+	// Limit is the desired number of Secret Stores (optional).
+	Limit int
 }
 
 // ListSecretStores returns a paginated list of Secret Stores.
@@ -184,9 +184,9 @@ func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 
 // Secret is a Secret Store secret.
 type Secret struct {
-	Name string `json:"name"`
 	// Digest is an opaque hash of the secret.
 	Digest []byte `json:"digest"`
+	Name   string `json:"name"`
 }
 
 // CreateSecretInput is used as input to the CreateSecret function.
@@ -196,8 +196,8 @@ type CreateSecretInput struct {
 	// Name of the Secret (required).
 	Name string
 	// Secret is the plaintext secret to be stored (required).
-	// The value will be base64-encoded when delivered to the API,
-	// which is the required format.
+	// The value will be base64-encoded when delivered to the API, which is the
+	// required format.
 	Secret []byte
 }
 
@@ -258,12 +258,12 @@ type Secrets struct {
 
 // ListSecretsInput is used as input to the ListSecrets function.
 type ListSecretsInput struct {
+	// Cursor is the pagination cursor (optional).
+	Cursor string
 	// ID of the Secret Store (required).
 	ID string
 	// Limit is the desired number of Secrets (optional).
 	Limit int
-	// Cursor is the pagination cursor (optional).
-	Cursor string
 }
 
 // ListSecrets returns a list of Secrets for the given Secret Store.

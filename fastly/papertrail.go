@@ -9,19 +9,18 @@ import (
 
 // Papertrail represents a papertrail response from the Fastly API.
 type Papertrail struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
 	Address           string     `mapstructure:"address"`
-	Port              uint       `mapstructure:"port"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
-	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
+	Port              uint       `mapstructure:"port"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 }
 
 // papertrailsByName is a sortable list of papertrails.
@@ -38,7 +37,6 @@ func (s papertrailsByName) Less(i, j int) bool {
 type ListPapertrailsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -70,22 +68,20 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 
 // CreatePapertrailInput is used as input to the CreatePapertrail function.
 type CreatePapertrailInput struct {
+	Address           string     `url:"address,omitempty"`
+	CreatedAt         *time.Time `url:"created_at,omitempty"`
+	DeletedAt         *time.Time `url:"deleted_at,omitempty"`
+	Format            string     `url:"format,omitempty"`
+	FormatVersion     uint       `url:"format_version,omitempty"`
+	Name              string     `url:"name,omitempty"`
+	Placement         string     `url:"placement,omitempty"`
+	Port              uint       `url:"port,omitempty"`
+	ResponseCondition string     `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string     `url:"name,omitempty"`
-	Address           string     `url:"address,omitempty"`
-	Port              uint       `url:"port,omitempty"`
-	FormatVersion     uint       `url:"format_version,omitempty"`
-	Format            string     `url:"format,omitempty"`
-	ResponseCondition string     `url:"response_condition,omitempty"`
-	CreatedAt         *time.Time `url:"created_at,omitempty"`
-	UpdatedAt         *time.Time `url:"updated_at,omitempty"`
-	DeletedAt         *time.Time `url:"deleted_at,omitempty"`
-	Placement         string     `url:"placement,omitempty"`
+	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
 // CreatePapertrail creates a new Fastly papertrail.
@@ -114,14 +110,12 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 
 // GetPapertrailInput is used as input to the GetPapertrail function.
 type GetPapertrailInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the papertrail to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetPapertrail gets the papertrail configuration with the given parameters.
@@ -154,25 +148,22 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 
 // UpdatePapertrailInput is used as input to the UpdatePapertrail function.
 type UpdatePapertrailInput struct {
+	Address       *string    `url:"address,omitempty"`
+	CreatedAt     *time.Time `url:"created_at,omitempty"`
+	DeletedAt     *time.Time `url:"deleted_at,omitempty"`
+	Format        *string    `url:"format,omitempty"`
+	FormatVersion *uint      `url:"format_version,omitempty"`
+	// Name is the name of the papertrail to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	Port              *uint   `url:"port,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the papertrail to update.
-	Name string
-
-	NewName           *string    `url:"name,omitempty"`
-	Address           *string    `url:"address,omitempty"`
-	Port              *uint      `url:"port,omitempty"`
-	FormatVersion     *uint      `url:"format_version,omitempty"`
-	Format            *string    `url:"format,omitempty"`
-	ResponseCondition *string    `url:"response_condition,omitempty"`
-	CreatedAt         *time.Time `url:"created_at,omitempty"`
-	UpdatedAt         *time.Time `url:"updated_at,omitempty"`
-	DeletedAt         *time.Time `url:"deleted_at,omitempty"`
-	Placement         *string    `url:"placement,omitempty"`
+	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
 // UpdatePapertrail updates a specific papertrail.
@@ -205,14 +196,12 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 
 // DeletePapertrailInput is the input parameter to DeletePapertrail.
 type DeletePapertrailInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the papertrail to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeletePapertrail deletes the given papertrail version.

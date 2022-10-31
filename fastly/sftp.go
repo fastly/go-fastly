@@ -9,30 +9,29 @@ import (
 
 // SFTP represents an SFTP logging response from the Fastly API.
 type SFTP struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
 	Address           string     `mapstructure:"address"`
-	Port              uint       `mapstructure:"port"`
-	User              string     `mapstructure:"user"`
-	Password          string     `mapstructure:"password"`
-	PublicKey         string     `mapstructure:"public_key"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	SSHKnownHosts     string     `mapstructure:"ssh_known_hosts"`
-	Path              string     `mapstructure:"path"`
-	Period            uint       `mapstructure:"period"`
 	CompressionCodec  string     `mapstructure:"compression_codec"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	MessageType       string     `mapstructure:"message_type"`
+	Name              string     `mapstructure:"name"`
+	Password          string     `mapstructure:"password"`
+	Path              string     `mapstructure:"path"`
+	Period            uint       `mapstructure:"period"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	Port              uint       `mapstructure:"port"`
+	PublicKey         string     `mapstructure:"public_key"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	SSHKnownHosts     string     `mapstructure:"ssh_known_hosts"`
+	SecretKey         string     `mapstructure:"secret_key"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	User              string     `mapstructure:"user"`
 }
 
 // sftpsByName is a sortable list of sftps.
@@ -49,7 +48,6 @@ func (s sftpsByName) Less(i, j int) bool {
 type ListSFTPsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -81,30 +79,28 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 
 // CreateSFTPInput is used as input to the CreateSFTP function.
 type CreateSFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
 	Address           string `url:"address,omitempty"`
-	Port              uint   `url:"port,omitempty"`
-	User              string `url:"user,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Password          string `url:"password,omitempty"`
-	PublicKey         string `url:"public_key,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
-	SSHKnownHosts     string `url:"ssh_known_hosts,omitempty"`
 	Path              string `url:"path,omitempty"`
 	Period            uint   `url:"period,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	Format            string `url:"format,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	TimestampFormat   string `url:"timestamp_format,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	Port              uint   `url:"port,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	SSHKnownHosts     string `url:"ssh_known_hosts,omitempty"`
+	SecretKey         string `url:"secret_key,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat string `url:"timestamp_format,omitempty"`
+	User            string `url:"user,omitempty"`
 }
 
 // CreateSFTP creates a new Fastly SFTP.
@@ -133,14 +129,12 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 
 // GetSFTPInput is used as input to the GetSFTP function.
 type GetSFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the SFTP to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetSFTP gets the SFTP configuration with the given parameters.
@@ -173,33 +167,30 @@ func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
 
 // UpdateSFTPInput is used as input to the UpdateSFTP function.
 type UpdateSFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
+	Address          *string `url:"address,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	Format           *string `url:"format,omitempty"`
+	FormatVersion    *uint   `url:"format_version,omitempty"`
+	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
+	MessageType      *string `url:"message_type,omitempty"`
 	// Name is the name of the SFTP to update.
-	Name string
-
+	Name              string
 	NewName           *string `url:"name,omitempty"`
-	Address           *string `url:"address,omitempty"`
-	Port              *uint   `url:"port,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
-	SSHKnownHosts     *string `url:"ssh_known_hosts,omitempty"`
-	User              *string `url:"user,omitempty"`
 	Password          *string `url:"password,omitempty"`
 	Path              *string `url:"path,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	CompressionCodec  *string `url:"compression_codec,omitempty"`
-	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	TimestampFormat   *string `url:"timestamp_format,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
 	Placement         *string `url:"placement,omitempty"`
+	Port              *uint   `url:"port,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	SSHKnownHosts     *string `url:"ssh_known_hosts,omitempty"`
+	SecretKey         *string `url:"secret_key,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	User            *string `url:"user,omitempty"`
 }
 
 // UpdateSFTP updates a specific SFTP.
@@ -232,14 +223,12 @@ func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
 
 // DeleteSFTPInput is the input parameter to DeleteSFTP.
 type DeleteSFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the SFTP to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteSFTP deletes the given SFTP version.
