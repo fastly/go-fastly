@@ -139,7 +139,7 @@ type CreatePoolInput struct {
 	UseTLS          Compatibool `url:"use_tls,omitempty"`
 }
 
-// CreatePool creates a pool for a particular service and version.
+// CreatePool creates a new resource.
 func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

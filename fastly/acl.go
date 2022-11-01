@@ -79,7 +79,7 @@ type CreateACLInput struct {
 	ServiceVersion int
 }
 
-// CreateACL creates a new ACL.
+// CreateACL creates a new resource.
 func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

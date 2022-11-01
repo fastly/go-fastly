@@ -126,7 +126,7 @@ type CreateBackendInput struct {
 	Weight         *uint       `url:"weight,omitempty"`
 }
 
-// CreateBackend creates a new Fastly backend.
+// CreateBackend creates a new resource.
 func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

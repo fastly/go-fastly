@@ -101,7 +101,7 @@ type CreateHealthCheckInput struct {
 	Window         *uint `url:"window,omitempty"`
 }
 
-// CreateHealthCheck creates a new Fastly health check.
+// CreateHealthCheck creates a new resource.
 func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

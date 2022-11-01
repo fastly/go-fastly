@@ -87,7 +87,7 @@ type CreateLogglyInput struct {
 	Token          string `url:"token,omitempty"`
 }
 
-// CreateLoggly creates a new Fastly loggly.
+// CreateLoggly creates a new resource.
 func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

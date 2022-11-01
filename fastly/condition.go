@@ -84,7 +84,7 @@ type CreateConditionInput struct {
 	Type           string `url:"type,omitempty"`
 }
 
-// CreateCondition creates a new Fastly condition.
+// CreateCondition creates a new resource.
 func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

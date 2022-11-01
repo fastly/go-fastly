@@ -77,7 +77,7 @@ type ListAllWAFRuleExclusionsInput struct {
 	WAFVersionNumber int
 }
 
-// CreateWAFRuleExclusionInput used as input to create a WAF rule exclusion.
+// CreateWAFRuleExclusionInput creates a new resource.
 type CreateWAFRuleExclusionInput struct {
 	// The Web Application Firewall's ID.
 	WAFID string
@@ -225,7 +225,7 @@ func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WA
 	}
 }
 
-// CreateWAFRuleExclusion used to create a particular WAF rule exclusion.
+// CreateWAFRuleExclusion creates a new resource.
 func (c *Client) CreateWAFRuleExclusion(i *CreateWAFRuleExclusionInput) (*WAFRuleExclusion, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID

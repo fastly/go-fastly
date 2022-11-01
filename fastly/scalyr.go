@@ -89,7 +89,7 @@ type CreateScalyrInput struct {
 	Token          string `url:"token,omitempty"`
 }
 
-// CreateScalyr creates a new Fastly scalyr.
+// CreateScalyr creates a new resource.
 func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

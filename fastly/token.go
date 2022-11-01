@@ -126,7 +126,7 @@ type CreateTokenInput struct {
 	Username  string     `url:"username,omitempty"`
 }
 
-// CreateToken creates a new API token with the given information.
+// CreateToken creates a new resource.
 func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 	_, err := c.PostForm("/sudo", i, nil)
 	if err != nil {

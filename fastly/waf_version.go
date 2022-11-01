@@ -407,13 +407,13 @@ func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 	return nil
 }
 
-// CreateEmptyWAFVersionInput used as input for creating an empty WAF version.
+// CreateEmptyWAFVersionInput creates a new resource.
 type CreateEmptyWAFVersionInput struct {
 	// The Web Application Firewall's ID.
 	WAFID string
 }
 
-// CreateEmptyWAFVersion creates an empty WAF version,
+// CreateEmptyWAFVersion creates a new resource.
 //  which means a version without rules and all config options set to their default values.
 func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == "" {

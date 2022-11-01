@@ -136,7 +136,7 @@ type CreateBulkCertificateInput struct {
 	IntermediatesBlob string              `jsonapi:"attr,intermediates_blob"`
 }
 
-// CreateBulkCertificate create a TLS private key.
+// CreateBulkCertificate creates a new resource.
 func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCertificate, error) {
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob

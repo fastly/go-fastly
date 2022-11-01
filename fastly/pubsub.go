@@ -95,7 +95,7 @@ type CreatePubsubInput struct {
 	User           string `url:"user,omitempty"`
 }
 
-// CreatePubsub creates a new Fastly Pubsub.
+// CreatePubsub creates a new resource.
 func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -133,7 +133,7 @@ type CreateWAFInput struct {
 	ServiceVersion int `jsonapi:"attr,service_version_number"`
 }
 
-// CreateWAF creates a new Fastly WAF.
+// CreateWAF creates a new resource.
 func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

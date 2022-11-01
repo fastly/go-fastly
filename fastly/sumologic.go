@@ -91,7 +91,7 @@ type CreateSumologicInput struct {
 	URL            string `url:"url,omitempty"`
 }
 
-// CreateSumologic creates a new Fastly sumologic.
+// CreateSumologic creates a new resource.
 func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

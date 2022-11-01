@@ -89,7 +89,7 @@ type CreateNewRelicInput struct {
 	Token          string `url:"token,omitempty"`
 }
 
-// CreateNewRelic creates a new Fastly newrelic.
+// CreateNewRelic creates a new resource.
 func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

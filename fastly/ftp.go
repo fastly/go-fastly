@@ -107,7 +107,7 @@ type CreateFTPInput struct {
 	Username        string `url:"user,omitempty"`
 }
 
-// CreateFTP creates a new Fastly FTP.
+// CreateFTP creates a new resource.
 func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

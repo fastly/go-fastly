@@ -146,7 +146,7 @@ type CreateServiceAuthorizationInput struct {
 	User *SAUser `jsonapi:"relation,user,omitempty"`
 }
 
-// CreateServiceAuthorization creates a new service authorization granting granular service and user permissions.
+// CreateServiceAuthorization creates a new resource.
 func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.Service == nil || i.Service.ID == "" {
 		return nil, ErrMissingServiceAuthorizationsService

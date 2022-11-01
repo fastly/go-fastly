@@ -117,7 +117,7 @@ type CreatePrivateKeyInput struct {
 	Name string `jsonapi:"attr,name,omitempty"`
 }
 
-// CreatePrivateKey create a TLS private key.
+// CreatePrivateKey creates a new resource.
 func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error) {
 	p := "/tls/private_keys"
 

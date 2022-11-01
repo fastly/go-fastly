@@ -107,7 +107,7 @@ type CreateBlobStorageInput struct {
 	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
-// CreateBlobStorage creates a new Fastly blob storage.
+// CreateBlobStorage creates a new resource.
 func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

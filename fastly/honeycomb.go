@@ -89,7 +89,7 @@ type CreateHoneycombInput struct {
 	Token          string `url:"token,omitempty"`
 }
 
-// CreateHoneycomb creates a new Fastly honeycomb.
+// CreateHoneycomb creates a new resource.
 func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

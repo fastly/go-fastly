@@ -100,7 +100,7 @@ type CreateCacheSettingInput struct {
 	TTL            uint `url:"ttl,omitempty"`
 }
 
-// CreateCacheSetting creates a new Fastly cache setting.
+// CreateCacheSetting creates a new resource.
 func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -133,7 +133,7 @@ type CreateTLSActivationInput struct {
 	ID            string                `jsonapi:"primary,tls_activation"` // ID value does not need to be set.
 }
 
-// CreateTLSActivation enable TLS for a domain using a custom certificate.
+// CreateTLSActivation creates a new resource.
 func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
 	if i.Certificate == nil {
 		return nil, ErrMissingTLSCertificate

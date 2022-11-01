@@ -107,7 +107,7 @@ type CreateSyslogInput struct {
 	UseTLS         Compatibool `url:"use_tls,omitempty"`
 }
 
-// CreateSyslog creates a new Fastly syslog.
+// CreateSyslog creates a new resource.
 func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

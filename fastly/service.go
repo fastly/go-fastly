@@ -211,7 +211,7 @@ type CreateServiceInput struct {
 	Type    string `url:"type,omitempty"`
 }
 
-// CreateService creates a new service with the given information.
+// CreateService creates a new resource.
 func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 	resp, err := c.PostForm("/service", i, nil)
 	if err != nil {

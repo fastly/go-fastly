@@ -178,7 +178,7 @@ func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiv
 	}
 }
 
-// CreateWAFActiveRulesInput used as input for adding rules to a WAF.
+// CreateWAFActiveRulesInput creates a new resource.
 type CreateWAFActiveRulesInput struct {
 	// The list of WAF active rules (ModSecID, Status and Revision are required).
 	Rules []*WAFActiveRule
@@ -188,7 +188,7 @@ type CreateWAFActiveRulesInput struct {
 	WAFVersionNumber int
 }
 
-// CreateWAFActiveRules adds rules to a particular WAF.
+// CreateWAFActiveRules creates a new resource.
 func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiveRule, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID

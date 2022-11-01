@@ -93,7 +93,7 @@ type CreateLogentriesInput struct {
 	UseTLS         Compatibool `url:"use_tls,omitempty"`
 }
 
-// CreateLogentries creates a new Fastly logentries.
+// CreateLogentries creates a new resource.
 func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

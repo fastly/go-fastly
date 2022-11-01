@@ -24,7 +24,7 @@ type CreateObjectStoreInput struct {
 	Name string `json:"name"`
 }
 
-// CreateObjectStore create a new object store.
+// CreateObjectStore creates a new resource.
 func (c *Client) CreateObjectStore(i *CreateObjectStoreInput) (*ObjectStore, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName

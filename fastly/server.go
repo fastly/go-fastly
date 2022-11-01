@@ -90,7 +90,7 @@ type CreateServerInput struct {
 	Weight    uint `url:"weight,omitempty"`
 }
 
-// CreateServer creates a single server for a particular service and pool.
+// CreateServer creates a new resource.
 // Servers are versionless resources that are associated with a Pool.
 func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 	if i.ServiceID == "" {

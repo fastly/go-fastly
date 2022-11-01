@@ -95,7 +95,7 @@ type CreateKinesisInput struct {
 	StreamName     string `url:"topic,omitempty"`
 }
 
-// CreateKinesis creates a new Fastly Kinesis.
+// CreateKinesis creates a new resource.
 func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

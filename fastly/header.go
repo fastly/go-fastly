@@ -153,7 +153,7 @@ type CreateHeaderInput struct {
 	Type           HeaderType `url:"type,omitempty"`
 }
 
-// CreateHeader creates a new Fastly header.
+// CreateHeader creates a new resource.
 func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

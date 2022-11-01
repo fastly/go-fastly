@@ -134,7 +134,7 @@ type CreateRequestSettingInput struct {
 	XForwardedFor  RequestSettingXFF `url:"xff,omitempty"`
 }
 
-// CreateRequestSetting creates a new Fastly request settings.
+// CreateRequestSetting creates a new resource.
 func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

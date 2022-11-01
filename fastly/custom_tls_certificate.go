@@ -128,7 +128,7 @@ type CreateCustomTLSCertificateInput struct {
 	Name     string `jsonapi:"attr,name,omitempty"`
 }
 
-// CreateCustomTLSCertificate creates a custom TLS certificate.
+// CreateCustomTLSCertificate creates a new resource.
 func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob

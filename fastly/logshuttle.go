@@ -89,7 +89,7 @@ type CreateLogshuttleInput struct {
 	URL            string `url:"url,omitempty"`
 }
 
-// CreateLogshuttle creates a new Fastly logshuttle.
+// CreateLogshuttle creates a new resource.
 func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

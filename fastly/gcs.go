@@ -104,7 +104,7 @@ type CreateGCSInput struct {
 	User            string `url:"user,omitempty"`
 }
 
-// CreateGCS creates a new Fastly GCS.
+// CreateGCS creates a new resource.
 func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

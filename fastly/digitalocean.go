@@ -107,7 +107,7 @@ type CreateDigitalOceanInput struct {
 	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
-// CreateDigitalOcean creates a new Fastly DigitalOcean.
+// CreateDigitalOcean creates a new resource.
 func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

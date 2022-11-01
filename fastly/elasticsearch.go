@@ -107,7 +107,7 @@ type CreateElasticsearchInput struct {
 	User           string `url:"user,omitempty"`
 }
 
-// CreateElasticsearch creates a new Fastly Elasticsearch logging endpoint.
+// CreateElasticsearch creates a new resource.
 func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearch, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -107,7 +107,7 @@ type CreateCloudfilesInput struct {
 	User            string `url:"user,omitempty"`
 }
 
-// CreateCloudfiles creates a new Fastly Cloudfiles.
+// CreateCloudfiles creates a new resource.
 func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

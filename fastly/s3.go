@@ -180,7 +180,7 @@ type CreateS3Input struct {
 	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
-// CreateS3 creates a new Fastly S3.
+// CreateS3 creates a new resource.
 func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

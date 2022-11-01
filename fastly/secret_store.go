@@ -30,7 +30,7 @@ type CreateSecretStoreInput struct {
 	Name string
 }
 
-// CreateSecretStore creates a new Secret Store.
+// CreateSecretStore creates a new resource.
 func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
@@ -201,7 +201,7 @@ type CreateSecretInput struct {
 	Secret []byte
 }
 
-// CreateSecret creates a new Secret within a Secret Store.
+// CreateSecret creates a new resource.
 func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

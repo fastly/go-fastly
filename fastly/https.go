@@ -111,7 +111,7 @@ type CreateHTTPSInput struct {
 	URL            string `url:"url,omitempty"`
 }
 
-// CreateHTTPS creates a new Fastly HTTPS logging endpoint.
+// CreateHTTPS creates a new resource.
 func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

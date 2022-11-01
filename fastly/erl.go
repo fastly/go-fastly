@@ -192,7 +192,7 @@ type CreateERLInput struct {
 	WindowSize         ERLWindowSize    `url:"window_size"`
 }
 
-// CreateERL returns a new ERL.
+// CreateERL creates a new resource.
 func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

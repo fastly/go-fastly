@@ -92,7 +92,7 @@ type CreateResponseObjectInput struct {
 	Status         *uint `url:"status,omitempty"`
 }
 
-// CreateResponseObject creates a new Fastly response object.
+// CreateResponseObject creates a new resource.
 func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseObject, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

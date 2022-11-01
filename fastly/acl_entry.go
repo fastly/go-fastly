@@ -234,7 +234,7 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	return e, nil
 }
 
-// CreateACLEntryInput the input parameter to CreateACLEntry function.
+// CreateACLEntryInput is the input parameter to the CreateACLEntry function.
 type CreateACLEntryInput struct {
 	ACLID     string
 	IP        string `url:"ip"`
@@ -244,7 +244,7 @@ type CreateACLEntryInput struct {
 	Subnet    int         `url:"subnet,omitempty"`
 }
 
-// CreateACLEntry creates and returns a new ACL entry.
+// CreateACLEntry creates a new resource.
 func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

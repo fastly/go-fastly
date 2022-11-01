@@ -103,7 +103,7 @@ type CreateSplunkInput struct {
 	UseTLS         Compatibool `url:"use_tls,omitempty"`
 }
 
-// CreateSplunk creates a new Fastly splunk.
+// CreateSplunk creates a new resource.
 func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

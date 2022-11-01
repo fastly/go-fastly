@@ -31,7 +31,7 @@ type CreateDirectorBackendInput struct {
 	ServiceVersion int
 }
 
-// CreateDirectorBackend creates a new Fastly backend.
+// CreateDirectorBackend creates a new resource.
 func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*DirectorBackend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

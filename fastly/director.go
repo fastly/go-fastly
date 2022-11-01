@@ -107,7 +107,7 @@ type CreateDirectorInput struct {
 	Type           DirectorType `url:"type,omitempty"`
 }
 
-// CreateDirector creates a new Fastly director.
+// CreateDirector creates a new resource.
 func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

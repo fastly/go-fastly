@@ -88,7 +88,7 @@ type CreateHerokuInput struct {
 	URL            string `url:"url,omitempty"`
 }
 
-// CreateHeroku creates a new Fastly heroku.
+// CreateHeroku creates a new resource.
 func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -83,7 +83,7 @@ type CreateGzipInput struct {
 	ServiceVersion int
 }
 
-// CreateGzip creates a new Fastly Gzip.
+// CreateGzip creates a new resource.
 func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

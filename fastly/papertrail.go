@@ -93,7 +93,7 @@ type CreatePapertrailInput struct {
 }
 
 // CreatePapertrail creates a new Fastly papertrail.
-func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error) {
+// ( creates a new resource.
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}

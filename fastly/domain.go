@@ -83,7 +83,7 @@ type CreateDomainInput struct {
 	ServiceVersion int
 }
 
-// CreateDomain creates a new domain with the given information.
+// CreateDomain creates a new resource.
 func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

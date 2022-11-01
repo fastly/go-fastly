@@ -31,7 +31,7 @@ const (
 	ManagedLoggingInstanceOutput
 )
 
-// CreateManagedLogging enables managed logging for a service.
+// CreateManagedLogging creates a new resource.
 func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLogging, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

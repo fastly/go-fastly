@@ -111,7 +111,7 @@ type CreateSFTPInput struct {
 	User            string `url:"user,omitempty"`
 }
 
-// CreateSFTP creates a new Fastly SFTP.
+// CreateSFTP creates a new resource.
 func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

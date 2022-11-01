@@ -113,7 +113,7 @@ type CreateKafkaInput struct {
 	User           string      `url:"user,omitempty"`
 }
 
-// CreateKafka creates a new Fastly kafka.
+// CreateKafka creates a new resource.
 func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

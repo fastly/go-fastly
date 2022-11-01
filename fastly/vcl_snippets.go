@@ -84,7 +84,7 @@ type CreateSnippetInput struct {
 	Type SnippetType `url:"type"`
 }
 
-// CreateSnippet creates a new snippet or dynamic snippet on a unlocked version
+// CreateSnippet creates a new resource.
 func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -151,7 +151,7 @@ type CreateVCLInput struct {
 	ServiceVersion int
 }
 
-// CreateVCL creates a new Fastly VCL.
+// CreateVCL creates a new resource.
 func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

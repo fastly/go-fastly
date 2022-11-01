@@ -99,7 +99,7 @@ type CreateBigQueryInput struct {
 	User           string `url:"user,omitempty"`
 }
 
-// CreateBigQuery creates a new Fastly BigQuery.
+// CreateBigQuery creates a new resource.
 func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

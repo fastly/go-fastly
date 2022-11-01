@@ -120,7 +120,7 @@ type CreateUserInput struct {
 	Role  string `url:"role,omitempty"`
 }
 
-// CreateUser creates a new API token with the given information.
+// CreateUser creates a new resource.
 func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 	if i.Login == "" {
 		return nil, ErrMissingLogin

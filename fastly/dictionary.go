@@ -80,7 +80,7 @@ type CreateDictionaryInput struct {
 	WriteOnly      Compatibool `url:"write_only,omitempty"`
 }
 
-// CreateDictionary creates a new Fastly dictionary.
+// CreateDictionary creates a new resource.
 func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -90,7 +90,7 @@ type CreateDatadogInput struct {
 	Token          string `url:"token,omitempty"`
 }
 
-// CreateDatadog creates a new Datadog logging endpoint on a Fastly service version.
+// CreateDatadog creates a new resource.
 func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

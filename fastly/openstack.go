@@ -107,7 +107,7 @@ type CreateOpenstackInput struct {
 	User            string `url:"user,omitempty"`
 }
 
-// CreateOpenstack creates a new Fastly Openstack.
+// CreateOpenstack creates a new resource.
 func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

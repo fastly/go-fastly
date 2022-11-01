@@ -101,7 +101,7 @@ type CreateVersionInput struct {
 	ServiceID string
 }
 
-// CreateVersion constructs a new version. Note that `CloneVersion` is
+// CreateVersion creates a new resource.
 // preferred in almost all scenarios, since `Create()` creates a _blank_
 // configuration where `Clone()` builds off of an existing configuration.
 func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {

@@ -202,7 +202,7 @@ type CreateDictionaryItemInput struct {
 	DictionaryID string
 }
 
-// CreateDictionaryItem creates a new Fastly dictionary item.
+// CreateDictionaryItem creates a new resource.
 func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -226,7 +226,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	return b, nil
 }
 
-// CreateDictionaryItems creates new Fastly dictionary items from a slice.
+// CreateDictionaryItems creates a new resource.
 func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
 	var b []DictionaryItem
 	for _, cdii := range i {
