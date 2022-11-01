@@ -98,7 +98,7 @@ func TestClient_listWAFRules_formatFilters(t *testing.T) {
 				FilterTagNames:   []string{"tag1", "tag2"},
 				FilterPublishers: []string{"owasp", "trustwave"},
 				FilterModSecIDs:  []int{1010060, 1010070},
-				ExcludeMocSecIDs: []int{123456, 1234567},
+				ExcludeModSecIDs: []int{123456, 1234567},
 				PageSize:         2,
 				PageNumber:       2,
 				Include:          "included",

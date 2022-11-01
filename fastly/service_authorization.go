@@ -22,10 +22,9 @@ type SAService struct {
 }
 
 // ServiceAuthorization is the API response model.
-// FIXME: Typo (DeltedAt -> DeletedAt).
 type ServiceAuthorization struct {
 	CreatedAt  *time.Time `jsonapi:"attr,created_at,iso8601"`
-	DeltedAt   *time.Time `jsonapi:"attr,deleted_at,iso8601"`
+	DeletedAt  *time.Time `jsonapi:"attr,deleted_at,iso8601"`
 	ID         string     `jsonapi:"primary,service_authorization"`
 	Permission string     `jsonapi:"attr,permission,omitempty"`
 	Service    *SAService `jsonapi:"relation,service,omitempty"`
@@ -33,9 +32,8 @@ type ServiceAuthorization struct {
 	User       *SAUser    `jsonapi:"relation,user,omitempty"`
 }
 
-// SAResponse is an object containing the list of ServiceAuthorization results.
-// FIXME: Ambiguous name (SAResponse -> ServiceAuthorizations)
-type SAResponse struct {
+// ServiceAuthorizations is an object containing the list of ServiceAuthorization results.
+type ServiceAuthorizations struct {
 	Info  infoResponse
 	Items []*ServiceAuthorization
 }
@@ -69,8 +67,8 @@ func (i *ListServiceAuthorizationsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListServiceAuthorizations returns the list of wafs for the configuration version.
-func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*SAResponse, error) {
+// ListServiceAuthorizations retrieves all resources.
+func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*ServiceAuthorizations, error) {
 	resp, err := c.Get("/service-authorizations", &RequestOptions{
 		Params: i.formatFilters(),
 	})
@@ -100,7 +98,7 @@ func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*
 		sas[i] = typed
 	}
 
-	return &SAResponse{
+	return &ServiceAuthorizations{
 		Items: sas,
 		Info:  info,
 	}, nil
@@ -177,8 +175,7 @@ type UpdateServiceAuthorizationInput struct {
 	ID string `jsonapi:"primary,service_authorization"`
 
 	// The permission to grant the user to the service referenced by this service authorization.
-	// FIXME: Should be singular (Permissions -> Permission).
-	Permissions string `jsonapi:"attr,permission,omitempty"`
+	Permission string `jsonapi:"attr,permission,omitempty"`
 }
 
 // UpdateServiceAuthorization updates an exisitng service authorization. The ID must be known.
@@ -187,8 +184,8 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 		return nil, ErrMissingID
 	}
 
-	if i.Permissions == "" {
-		return nil, ErrMissingPermissions
+	if i.Permission == "" {
+		return nil, ErrMissingPermission
 	}
 
 	path := fmt.Sprintf("/service-authorizations/%s", i.ID)

@@ -46,8 +46,7 @@ type WAFRuleResponse struct {
 // ListWAFRulesInput used as input for listing WAF rules.
 type ListWAFRulesInput struct {
 	// Excludes individual rules by modsecurity rule IDs.
-	// FIXME: Should be d not c (ExcludeMocSecIDs -> ExcludeModSecIDs)
-	ExcludeMocSecIDs []int
+	ExcludeModSecIDs []int
 	// Limit the returned rules to a set by modsecurity rule IDs.
 	FilterModSecIDs []int
 	// Limit the returned rules to a set by publishers.
@@ -68,7 +67,7 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 		"filter[waf_tags][name][in]":  i.FilterTagNames,
 		"filter[publisher][in]":       i.FilterPublishers,
 		"filter[modsec_rule_id][in]":  i.FilterModSecIDs,
-		"filter[modsec_rule_id][not]": i.ExcludeMocSecIDs,
+		"filter[modsec_rule_id][not]": i.ExcludeModSecIDs,
 		"page[size]":                  i.PageSize,
 		"page[number]":                i.PageNumber,
 		"include":                     i.Include,
@@ -163,7 +162,7 @@ func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, err
 			FilterTagNames:   i.FilterTagNames,
 			FilterPublishers: i.FilterPublishers,
 			FilterModSecIDs:  i.FilterModSecIDs,
-			ExcludeMocSecIDs: i.ExcludeMocSecIDs,
+			ExcludeModSecIDs: i.ExcludeMocSecIDs,
 			Include:          i.Include,
 			PageNumber:       currentPage,
 			PageSize:         WAFPaginationPageSize,
