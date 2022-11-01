@@ -173,7 +173,7 @@ type UpdateDatadogInput struct {
 	Token          *string `url:"token,omitempty"`
 }
 
-// UpdateDatadog updates a Datadog logging endpoint on a Fastly service version.
+// UpdateDatadog updates the specified resource.
 func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

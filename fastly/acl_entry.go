@@ -326,7 +326,7 @@ type UpdateACLEntryInput struct {
 	Subnet    *int `url:"subnet,omitempty"`
 }
 
-// UpdateACLEntry updates an ACL entry
+// UpdateACLEntry updates the specified resource.
 func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

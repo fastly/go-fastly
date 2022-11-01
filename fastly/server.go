@@ -172,7 +172,7 @@ type UpdateServerInput struct {
 	Weight    *uint `url:"weight,omitempty"`
 }
 
-// UpdateServer updates a single server for a particular service and pool.
+// UpdateServer updates the specified resource.
 func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -174,7 +174,7 @@ type UpdateLogentriesInput struct {
 	UseTLS         *Compatibool `url:"use_tls,omitempty"`
 }
 
-// UpdateLogentries updates a specific logentries.
+// UpdateLogentries updates the specified resource.
 func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

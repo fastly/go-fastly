@@ -150,7 +150,7 @@ type UpdateUserInput struct {
 	Role *string `url:"role,omitempty"`
 }
 
-// UpdateUser updates the user with the given input.
+// UpdateUser updates the specified resource.
 func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

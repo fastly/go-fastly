@@ -211,7 +211,7 @@ type UpdateWAFInput struct {
 	ServiceVersion *int `jsonapi:"attr,service_version_number,omitempty"`
 }
 
-// UpdateWAF updates a specific WAF.
+// UpdateWAF updates the specified resource.
 func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

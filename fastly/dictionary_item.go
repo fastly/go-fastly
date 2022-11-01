@@ -288,7 +288,7 @@ type UpdateDictionaryItemInput struct {
 	ServiceID string
 }
 
-// UpdateDictionaryItem updates a specific dictionary item.
+// UpdateDictionaryItem updates the specified resource.
 func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

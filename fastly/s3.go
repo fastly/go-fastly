@@ -277,7 +277,7 @@ type UpdateS3Input struct {
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
-// UpdateS3 updates a specific S3.
+// UpdateS3 updates the specified resource.
 func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

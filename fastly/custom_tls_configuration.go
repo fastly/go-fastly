@@ -138,7 +138,7 @@ type UpdateCustomTLSConfigurationInput struct {
 	Name string `jsonapi:"attr,name"`
 }
 
-// UpdateCustomTLSConfiguration can only be used to change the name of the configuration
+// UpdateCustomTLSConfiguration updates the specified resource.
 func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

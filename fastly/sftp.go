@@ -201,7 +201,7 @@ type UpdateSFTPInput struct {
 	User            *string `url:"user,omitempty"`
 }
 
-// UpdateSFTP updates a specific SFTP.
+// UpdateSFTP updates the specified resource.
 func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

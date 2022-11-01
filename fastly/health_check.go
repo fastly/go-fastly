@@ -189,7 +189,7 @@ type UpdateHealthCheckInput struct {
 	Window         *uint `url:"window,omitempty"`
 }
 
-// UpdateHealthCheck updates a specific health check.
+// UpdateHealthCheck updates the specified resource.
 func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -159,7 +159,7 @@ type UpdateDomainInput struct {
 	ServiceVersion int
 }
 
-// UpdateDomain updates a single domain for the current service. The only allowed
+// UpdateDomain updates the specified resource.
 // parameters are `Name` and `Comment`.
 func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {

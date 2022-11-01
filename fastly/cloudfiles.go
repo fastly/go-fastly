@@ -195,7 +195,7 @@ type UpdateCloudfilesInput struct {
 	User            *string `url:"user,omitempty"`
 }
 
-// UpdateCloudfiles updates a specific Cloudfiles.
+// UpdateCloudfiles updates the specified resource.
 func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

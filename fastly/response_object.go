@@ -173,7 +173,7 @@ type UpdateResponseObjectInput struct {
 	Status         *uint `url:"status,omitempty"`
 }
 
-// UpdateResponseObject updates a specific response object.
+// UpdateResponseObject updates the specified resource.
 func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseObject, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

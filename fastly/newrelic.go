@@ -172,7 +172,7 @@ type UpdateNewRelicInput struct {
 	Token          *string `url:"token,omitempty"`
 }
 
-// UpdateNewRelic updates a specific newrelic.
+// UpdateNewRelic updates the specified resource.
 func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

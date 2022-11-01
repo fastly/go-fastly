@@ -165,7 +165,7 @@ type UpdateVersionInput struct {
 	ServiceVersion int
 }
 
-// UpdateVersion updates the given version
+// UpdateVersion updates the specified resource.
 func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -253,7 +253,7 @@ func (c *Client) CreateWAFRuleExclusion(i *CreateWAFRuleExclusionInput) (*WAFRul
 	return &wafExclusion, nil
 }
 
-// UpdateWAFRuleExclusion used to update a particular WAF rule exclusion.
+// UpdateWAFRuleExclusion updates the specified resource.
 func (c *Client) UpdateWAFRuleExclusion(i *UpdateWAFRuleExclusionInput) (*WAFRuleExclusion, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID

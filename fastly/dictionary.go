@@ -154,7 +154,7 @@ type UpdateDictionaryInput struct {
 	WriteOnly      *Compatibool `url:"write_only,omitempty"`
 }
 
-// UpdateDictionary updates a specific dictionary.
+// UpdateDictionary updates the specified resource.
 func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

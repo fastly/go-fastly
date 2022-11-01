@@ -223,7 +223,7 @@ type UpdateBackendInput struct {
 	Weight         *uint        `url:"weight,omitempty"`
 }
 
-// UpdateBackend updates a specific backend.
+// UpdateBackend updates the specified resource.
 func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -177,7 +177,7 @@ type UpdatePubsubInput struct {
 	User           *string `url:"user,omitempty"`
 }
 
-// UpdatePubsub updates a specific Pubsub.
+// UpdatePubsub updates the specified resource.
 func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

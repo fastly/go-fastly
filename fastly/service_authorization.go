@@ -178,7 +178,7 @@ type UpdateServiceAuthorizationInput struct {
 	Permission string `jsonapi:"attr,permission,omitempty"`
 }
 
-// UpdateServiceAuthorization updates an exisitng service authorization. The ID must be known.
+// UpdateServiceAuthorization updates the specified resource.
 func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

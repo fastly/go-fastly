@@ -193,7 +193,7 @@ type UpdateSplunkInput struct {
 	UseTLS         *Compatibool `url:"use_tls,omitempty"`
 }
 
-// UpdateSplunk updates a specific splunk.
+// UpdateSplunk updates the specified resource.
 func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

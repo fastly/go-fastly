@@ -160,7 +160,7 @@ type UpdateConditionInput struct {
 	Type           *string `url:"type,omitempty"`
 }
 
-// UpdateCondition updates a specific condition.
+// UpdateCondition updates the specified resource.
 func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

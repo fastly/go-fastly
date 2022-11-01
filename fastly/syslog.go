@@ -195,7 +195,7 @@ type UpdateSyslogInput struct {
 	UseTLS         *Compatibool `url:"use_tls,omitempty"`
 }
 
-// UpdateSyslog updates a specific syslog.
+// UpdateSyslog updates the specified resource.
 func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

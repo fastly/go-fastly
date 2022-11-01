@@ -172,7 +172,7 @@ type UpdateHoneycombInput struct {
 	Token          *string `url:"token,omitempty"`
 }
 
-// UpdateHoneycomb updates a specific honeycomb.
+// UpdateHoneycomb updates the specified resource.
 func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

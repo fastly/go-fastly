@@ -296,7 +296,7 @@ type UpdateServiceInput struct {
 	ServiceID string
 }
 
-// UpdateService updates the service with the given input.
+// UpdateService updates the specified resource.
 func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

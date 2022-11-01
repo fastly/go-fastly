@@ -172,7 +172,7 @@ type UpdateScalyrInput struct {
 	Token          *string `url:"token,omitempty"`
 }
 
-// UpdateScalyr updates a specific scalyr.
+// UpdateScalyr updates the specified resource.
 func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

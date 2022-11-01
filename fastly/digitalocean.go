@@ -195,7 +195,7 @@ type UpdateDigitalOceanInput struct {
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
-// UpdateDigitalOcean updates a specific DigitalOcean.
+// UpdateDigitalOcean updates the specified resource.
 func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

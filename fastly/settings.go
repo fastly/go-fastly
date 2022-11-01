@@ -56,7 +56,7 @@ type UpdateSettingsInput struct {
 	StaleIfErrorTTL *uint `url:"general.stale_if_error_ttl,omitempty"`
 }
 
-// UpdateSettings updates a specific backend.
+// UpdateSettings updates the specified resource.
 func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

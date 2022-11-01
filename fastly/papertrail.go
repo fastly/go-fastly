@@ -174,7 +174,7 @@ type UpdatePapertrailInput struct {
 	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
-// UpdatePapertrail updates a specific papertrail.
+// UpdatePapertrail updates the specified resource.
 func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

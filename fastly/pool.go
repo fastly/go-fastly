@@ -236,7 +236,7 @@ type UpdatePoolInput struct {
 	UseTLS          *Compatibool `url:"use_tls,omitempty"`
 }
 
-// UpdatePool updates a specufic pool for a particular service and version.
+// UpdatePool updates the specified resource.
 func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

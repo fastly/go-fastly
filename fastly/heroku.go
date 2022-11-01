@@ -167,7 +167,7 @@ type UpdateHerokuInput struct {
 	URL            *string `url:"url,omitempty"`
 }
 
-// UpdateHeroku updates a specific heroku.
+// UpdateHeroku updates the specified resource.
 func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

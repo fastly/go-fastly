@@ -171,7 +171,7 @@ type UpdateSumologicInput struct {
 	URL            *string `url:"url,omitempty"`
 }
 
-// UpdateSumologic updates a specific sumologic.
+// UpdateSumologic updates the specified resource.
 func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

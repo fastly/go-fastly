@@ -195,7 +195,7 @@ type UpdateOpenstackInput struct {
 	User            *string `url:"user,omitempty"`
 }
 
-// UpdateOpenstack updates a specific Openstack.
+// UpdateOpenstack updates the specified resource.
 func (c *Client) UpdateOpenstack(i *UpdateOpenstackInput) (*Openstack, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

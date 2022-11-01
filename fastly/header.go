@@ -237,7 +237,7 @@ type UpdateHeaderInput struct {
 	Type           *HeaderType `url:"type,omitempty"`
 }
 
-// UpdateHeader updates a specific header.
+// UpdateHeader updates the specified resource.
 func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

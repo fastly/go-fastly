@@ -159,7 +159,7 @@ type UpdateGzipInput struct {
 	ServiceVersion int
 }
 
-// UpdateGzip updates a specific Gzip.
+// UpdateGzip updates the specified resource.
 func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

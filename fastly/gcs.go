@@ -191,7 +191,7 @@ type UpdateGCSInput struct {
 	User            *string `url:"user,omitempty"`
 }
 
-// UpdateGCS updates a specific GCS.
+// UpdateGCS updates the specified resource.
 func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

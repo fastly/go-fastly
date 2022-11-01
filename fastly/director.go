@@ -186,7 +186,7 @@ type UpdateDirectorInput struct {
 	Type           DirectorType `url:"type,omitempty"`
 }
 
-// UpdateDirector updates a specific director.
+// UpdateDirector updates the specified resource.
 func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -183,7 +183,7 @@ type UpdateBigQueryInput struct {
 	User           *string `url:"user,omitempty"`
 }
 
-// UpdateBigQuery updates a specific BigQuery.
+// UpdateBigQuery updates the specified resource.
 func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

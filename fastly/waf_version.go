@@ -287,7 +287,7 @@ func (i UpdateWAFVersionInput) HasChanges() bool {
 	}
 }
 
-// UpdateWAFVersion updates a specific WAF version.
+// UpdateWAFVersion updates the specified resource.
 func (c *Client) UpdateWAFVersion(i *UpdateWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == nil || *i.WAFID == "" {
 		return nil, ErrMissingWAFID

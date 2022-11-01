@@ -63,7 +63,7 @@ type UpdatePackageInput struct {
 	ServiceVersion int `mapstructure:"version"`
 }
 
-// UpdatePackage updates a package for a specific version.
+// UpdatePackage updates the specified resource.
 func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 	urlPath, err := MakePackagePath(i.ServiceID, i.ServiceVersion)
 	if err != nil {

@@ -178,7 +178,7 @@ type UpdateCacheSettingInput struct {
 	TTL            *uint `url:"ttl,omitempty"`
 }
 
-// UpdateCacheSetting updates a specific cache setting.
+// UpdateCacheSetting updates the specified resource.
 func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -165,7 +165,7 @@ type UpdateLogglyInput struct {
 	Token          *string `url:"token,omitempty"`
 }
 
-// UpdateLoggly updates a specific loggly.
+// UpdateLoggly updates the specified resource.
 func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

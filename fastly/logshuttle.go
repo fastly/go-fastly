@@ -168,7 +168,7 @@ type UpdateLogshuttleInput struct {
 	URL            *string `url:"url,omitempty"`
 }
 
-// UpdateLogshuttle updates a specific logshuttle.
+// UpdateLogshuttle updates the specified resource.
 func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

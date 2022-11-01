@@ -220,7 +220,7 @@ type UpdateRequestSettingInput struct {
 	XForwardedFor  RequestSettingXFF `url:"xff,omitempty"`
 }
 
-// UpdateRequestSetting updates a specific request settings.
+// UpdateRequestSetting updates the specified resource.
 func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

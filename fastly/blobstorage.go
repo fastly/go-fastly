@@ -195,7 +195,7 @@ type UpdateBlobStorageInput struct {
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
-// UpdateBlobStorage updates a specific blob storage.
+// UpdateBlobStorage updates the specified resource.
 func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

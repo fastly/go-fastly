@@ -204,7 +204,7 @@ type UpdateKafkaInput struct {
 	User           *string      `url:"user,omitempty"`
 }
 
-// UpdateKafka updates a specific kafka.
+// UpdateKafka updates the specified resource.
 func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

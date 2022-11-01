@@ -163,7 +163,7 @@ type UpdateTLSActivationInput struct {
 	ID          string                `jsonapi:"primary,tls_activation"`
 }
 
-// UpdateTLSActivation updates the certificate used to terminate TLS traffic for the domain associated with this TLS activation.
+// UpdateTLSActivation updates the specified resource.
 func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

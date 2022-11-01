@@ -195,7 +195,7 @@ type UpdateFTPInput struct {
 	Username        *string `url:"user,omitempty"`
 }
 
-// UpdateFTP updates a specific FTP.
+// UpdateFTP updates the specified resource.
 func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

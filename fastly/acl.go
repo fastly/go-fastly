@@ -194,7 +194,7 @@ type UpdateACLInput struct {
 	ServiceVersion int
 }
 
-// UpdateACL updates the specified ACL.
+// UpdateACL updates the specified resource.
 func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

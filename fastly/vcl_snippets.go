@@ -139,7 +139,7 @@ type UpdateSnippetInput struct {
 	Type *SnippetType `url:"type,omitempty"`
 }
 
-// UpdateSnippet updates a snippet on a unlocked version
+// UpdateSnippet updates the specified resource.
 func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -186,7 +186,7 @@ type UpdateDynamicSnippetInput struct {
 	ServiceID string
 }
 
-// UpdateDynamicSnippet replaces the content of a Dynamic Snippet
+// UpdateDynamicSnippet updates the specified resource.
 func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

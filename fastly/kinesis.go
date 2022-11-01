@@ -177,7 +177,7 @@ type UpdateKinesisInput struct {
 	StreamName     *string `url:"topic,omitempty"`
 }
 
-// UpdateKinesis updates a specific Kinesis.
+// UpdateKinesis updates the specified resource.
 func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
