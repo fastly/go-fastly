@@ -9,6 +9,7 @@ import (
 
 // Pubsub represents an Pubsub logging response from the Fastly API.
 type Pubsub struct {
+	AccountName       string     `mapstructure:"account_name"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
@@ -70,6 +71,7 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 
 // CreatePubsubInput is used as input to the CreatePubsub function.
 type CreatePubsubInput struct {
+	AccountName       string `url:"account_name,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
 	Name              string `url:"name,omitempty"`
@@ -149,6 +151,7 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 
 // UpdatePubsubInput is used as input to the UpdatePubsub function.
 type UpdatePubsubInput struct {
+	AccountName   *string `url:"account_name,omitempty"`
 	Format        *string `url:"format,omitempty"`
 	FormatVersion *uint   `url:"format_version,omitempty"`
 	// Name is the name of the Pubsub to update.

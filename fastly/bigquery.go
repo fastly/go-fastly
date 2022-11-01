@@ -9,6 +9,7 @@ import (
 
 // BigQuery represents a BigQuery response from the Fastly API.
 type BigQuery struct {
+	AccountName       string     `mapstructure:"account_name"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	Dataset           string     `mapstructure:"dataset"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
@@ -72,6 +73,7 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 
 // CreateBigQueryInput is used as input to the CreateBigQuery function.
 type CreateBigQueryInput struct {
+	AccountName       string `url:"account_name,omitempty"`
 	Dataset           string `url:"dataset,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
@@ -153,6 +155,7 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 
 // UpdateBigQueryInput is used as input to the UpdateBigQuery function.
 type UpdateBigQueryInput struct {
+	AccountName   *string `url:"account_name,omitempty"`
 	Dataset       *string `url:"dataset,omitempty"`
 	Format        *string `url:"format,omitempty"`
 	FormatVersion *uint   `url:"format_version,omitempty"`
