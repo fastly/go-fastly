@@ -61,9 +61,17 @@ type Pool struct {
 // poolsByName is a sortable list of pools.
 type poolsByName []*Pool
 
-// Len, Swap, and Less implement the sortable interface.
-func (s poolsByName) Len() int      { return len(s) }
-func (s poolsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s poolsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s poolsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s poolsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

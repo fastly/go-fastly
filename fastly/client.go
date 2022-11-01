@@ -287,7 +287,6 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 	if ro == nil || !ro.Parallel {
 		c.updateLock.Lock()
 		defer c.updateLock.Unlock()
-
 	}
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
@@ -405,6 +404,7 @@ func (c *Client) RequestFormFile(verb, urlPath string, filePath string, fieldNam
 	return c.Request(verb, urlPath, ro)
 }
 
+// RequestJSON constructs JSON HTTP request.
 func (c *Client) RequestJSON(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	if ro == nil {
 		ro = new(RequestOptions)
@@ -427,6 +427,7 @@ func (c *Client) RequestJSON(verb, p string, i interface{}, ro *RequestOptions) 
 	return c.Request(verb, p, ro)
 }
 
+// RequestJSONAPI constructs JSON API HTTP request.
 func (c *Client) RequestJSONAPI(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	if ro == nil {
 		ro = new(RequestOptions)
@@ -450,6 +451,7 @@ func (c *Client) RequestJSONAPI(verb, p string, i interface{}, ro *RequestOption
 	return c.Request(verb, p, ro)
 }
 
+// RequestJSONAPIBulk constructs bulk JSON API HTTP request.
 func (c *Client) RequestJSONAPIBulk(verb, p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	if ro == nil {
 		ro = new(RequestOptions)

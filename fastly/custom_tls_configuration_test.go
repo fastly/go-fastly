@@ -56,7 +56,6 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	if ucon.Name != newName {
 		t.Errorf("bad Name: %q (%q)", newName, ucon.Name)
 	}
-
 }
 
 func TestClient_ListCustomTLSConfigurations_validation(t *testing.T) {

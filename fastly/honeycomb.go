@@ -26,9 +26,17 @@ type Honeycomb struct {
 // honeycombsByName is a sortable list of honeycombs.
 type honeycombsByName []*Honeycomb
 
-// Len, Swap, and Less implement the sortable interface.
-func (h honeycombsByName) Len() int      { return len(h) }
-func (h honeycombsByName) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
+// Len implement the sortable interface.
+func (h honeycombsByName) Len() int {
+	return len(h)
+}
+
+// Swap implement the sortable interface.
+func (h honeycombsByName) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+
+// Less implement the sortable interface.
 func (h honeycombsByName) Less(i, j int) bool {
 	return h[i].Name < h[j].Name
 }

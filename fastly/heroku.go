@@ -26,9 +26,17 @@ type Heroku struct {
 // herokusByName is a sortable list of herokus.
 type herokusByName []*Heroku
 
-// Len, Swap, and Less implement the sortable interface.
-func (h herokusByName) Len() int      { return len(h) }
-func (h herokusByName) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
+// Len implement the sortable interface.
+func (h herokusByName) Len() int {
+	return len(h)
+}
+
+// Swap implement the sortable interface.
+func (h herokusByName) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+
+// Less implement the sortable interface.
 func (h herokusByName) Less(i, j int) bool {
 	return h[i].Name < h[j].Name
 }

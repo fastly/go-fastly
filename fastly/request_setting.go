@@ -63,9 +63,17 @@ type RequestSetting struct {
 // requestSettingsByName is a sortable list of request settings.
 type requestSettingsByName []*RequestSetting
 
-// Len, Swap, and Less implement the sortable interface.
-func (s requestSettingsByName) Len() int      { return len(s) }
-func (s requestSettingsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s requestSettingsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s requestSettingsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s requestSettingsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

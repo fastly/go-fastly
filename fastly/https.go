@@ -37,9 +37,17 @@ type HTTPS struct {
 // httpsByName is a sortable list of HTTPS logs.
 type httpsByName []*HTTPS
 
-// Len, Swap, and Less implement the sortable interface.
-func (s httpsByName) Len() int      { return len(s) }
-func (s httpsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s httpsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s httpsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s httpsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -137,6 +145,7 @@ type GetHTTPSInput struct {
 	ServiceVersion int
 }
 
+// GetHTTPS retrieves the specified resource.
 func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -165,6 +174,7 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	return h, nil
 }
 
+// UpdateHTTPSInput is the input parameter to the UpdateHTTPS function.
 type UpdateHTTPSInput struct {
 	ContentType   *string `url:"content_type,omitempty"`
 	Format        *string `url:"format,omitempty"`
@@ -192,6 +202,7 @@ type UpdateHTTPSInput struct {
 	URL            *string `url:"url,omitempty"`
 }
 
+// UpdateHTTPS updates the specified resource.
 func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -219,6 +230,7 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	return h, nil
 }
 
+// DeleteHTTPSInput is the input parameter to the DeleteHTTPS function.
 type DeleteHTTPSInput struct {
 	// Name is the name of the HTTPS endpoint to fetch.
 	Name string
@@ -228,6 +240,7 @@ type DeleteHTTPSInput struct {
 	ServiceVersion int
 }
 
+// DeleteHTTPS deletes the specified resourc.
 func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

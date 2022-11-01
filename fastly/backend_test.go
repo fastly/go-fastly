@@ -35,13 +35,13 @@ func TestClient_Backends(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "backends/cleanup", func(c *Client) {
-			c.DeleteBackend(&DeleteBackendInput{
+			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-backend",
 			})
 
-			c.DeleteBackend(&DeleteBackendInput{
+			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-backend",
@@ -64,7 +64,7 @@ func TestClient_Backends(t *testing.T) {
 	if b.OverrideHost != "origin.example.com" {
 		t.Errorf("bad override_host: %q", b.OverrideHost)
 	}
-	if b.SSLCheckCert != false {
+	if b.SSLCheckCert {
 		t.Errorf("bad ssl_check_cert: %t", b.SSLCheckCert) // API defaults to true and we want to allow setting false
 	}
 	if b.SSLSNIHostname != "ssl-hostname.com" {
@@ -141,7 +141,7 @@ func TestClient_Backends(t *testing.T) {
 	if ub.Port != 1234 {
 		t.Errorf("bad port: %d", ub.Port)
 	}
-	if ub.SSLCheckCert != false {
+	if ub.SSLCheckCert {
 		t.Errorf("bad ssl_check_cert: %t", ub.SSLCheckCert)
 	}
 	if ub.SSLSNIHostname != "ssl-hostname-updated.com" {

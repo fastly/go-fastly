@@ -6,7 +6,6 @@ import (
 )
 
 func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
-
 	fixtureBase := "acl_entries_batch/create/"
 	nameSuffix := "BatchModifyAclEntries_Create"
 
@@ -72,12 +71,11 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 	}
 
 	for i, entry := range actualACLEntries {
+		actualIP := entry.IP
+		expectedIP := batchCreateOperations.Entries[i].IP
 
-		actualIp := entry.IP
-		expectedIp := batchCreateOperations.Entries[i].IP
-
-		if actualIp != *expectedIp {
-			t.Errorf("IP did not match, expected %v, got %v", expectedIp, actualIp)
+		if actualIP != *expectedIP {
+			t.Errorf("IP did not match, expected %v, got %v", expectedIP, actualIP)
 		}
 
 		actualSubnet := entry.Subnet
@@ -101,11 +99,9 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 			t.Errorf("Comment did not match, expected %v, got %v", expectedComment, actualComment)
 		}
 	}
-
 }
 
 func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
-
 	fixtureBase := "acl_entries_batch/delete/"
 	nameSuffix := "BatchModifyAclEntries_Delete"
 
@@ -141,7 +137,6 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 
 	var err error
 	record(t, fixtureBase+"create_acl_entries", func(c *Client) {
-
 		err = c.BatchModifyACLEntries(batchCreateOperations)
 	})
 	if err != nil {
@@ -176,7 +171,6 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 	}
 
 	record(t, fixtureBase+"delete_acl_entries", func(c *Client) {
-
 		err = c.BatchModifyACLEntries(batchDeleteOperations)
 	})
 	if err != nil {
@@ -207,7 +201,6 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 }
 
 func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
-
 	fixtureBase := "acl_entries_batch/update/"
 	nameSuffix := "BatchModifyAclEntries_Update"
 
@@ -243,7 +236,6 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 
 	var err error
 	record(t, fixtureBase+"create_acl_entries", func(c *Client) {
-
 		err = c.BatchModifyACLEntries(batchCreateOperations)
 	})
 	if err != nil {
@@ -282,7 +274,6 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	}
 
 	record(t, fixtureBase+"update_acl_entries", func(c *Client) {
-
 		err = c.BatchModifyACLEntries(batchUpdateOperations)
 	})
 	if err != nil {
@@ -305,10 +296,10 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 		return actualACLEntries[i].IP < actualACLEntries[j].IP
 	})
 
-	actualNumberOfAclEntries := len(actualACLEntries)
-	expectedNumberOfAclEntries := len(batchCreateOperations.Entries)
-	if actualNumberOfAclEntries != expectedNumberOfAclEntries {
-		t.Errorf("Incorrect number of ACL entries returned, expected: %d, got %d", expectedNumberOfAclEntries, actualNumberOfAclEntries)
+	actualNumberOfACLEntries := len(actualACLEntries)
+	expectedNumberOfACLEntries := len(batchCreateOperations.Entries)
+	if actualNumberOfACLEntries != expectedNumberOfACLEntries {
+		t.Errorf("Incorrect number of ACL entries returned, expected: %d, got %d", expectedNumberOfACLEntries, actualNumberOfACLEntries)
 	}
 
 	actualID := actualACLEntries[0].ID
@@ -345,5 +336,4 @@ func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
 	if actualComment != *expectedComment {
 		t.Errorf("First Comment did not match, expected %v, got %v", expectedComment, actualComment)
 	}
-
 }

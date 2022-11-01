@@ -35,9 +35,17 @@ type Cloudfiles struct {
 // cloudfilesByName is a sortable list of Cloudfiles.
 type cloudfilesByName []*Cloudfiles
 
-// Len, Swap, and Less implement the sortable interface.
-func (c cloudfilesByName) Len() int      { return len(c) }
-func (c cloudfilesByName) Swap(i, j int) { c[i], c[j] = c[j], c[i] }
+// Len implement the sortable interface.
+func (c cloudfilesByName) Len() int {
+	return len(c)
+}
+
+// Swap implement the sortable interface.
+func (c cloudfilesByName) Swap(i, j int) {
+	c[i], c[j] = c[j], c[i]
+}
+
+// Less implement the sortable interface.
 func (c cloudfilesByName) Less(i, j int) bool {
 	return c[i].Name < c[j].Name
 }

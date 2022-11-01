@@ -34,13 +34,13 @@ func TestClient_Honeycombs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "honeycombs/cleanup", func(c *Client) {
-			c.DeleteHoneycomb(&DeleteHoneycombInput{
+			_ = c.DeleteHoneycomb(&DeleteHoneycombInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-honeycomb",
 			})
 
-			c.DeleteHoneycomb(&DeleteHoneycombInput{
+			_ = c.DeleteHoneycomb(&DeleteHoneycombInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-honeycomb",

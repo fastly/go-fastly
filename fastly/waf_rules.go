@@ -89,7 +89,6 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 			}
 		case "[]int":
 			if len(value.([]int)) > 0 {
-
 				stringSlice := make([]string, len(value.([]int)))
 				for i, id := range value.([]int) {
 					stringSlice[i] = strconv.Itoa(id)

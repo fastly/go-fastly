@@ -23,6 +23,7 @@ type TLSSubscription struct {
 	UpdatedAt            *time.Time                    `jsonapi:"attr,updated_at,iso8601"`
 }
 
+// TLSSubscriptionCertificate represents a subscription certificate.
 type TLSSubscriptionCertificate struct {
 	ID string `jsonapi:"primary,tls_certificate"`
 }
@@ -149,6 +150,7 @@ type CreateTLSSubscriptionInput struct {
 	ID string `jsonapi:"primary,tls_subscription"`
 }
 
+// CreateTLSSubscription creates a new resource.
 func (c *Client) CreateTLSSubscription(i *CreateTLSSubscriptionInput) (*TLSSubscription, error) {
 	if len(i.Domains) == 0 {
 		return nil, ErrMissingTLSDomain
@@ -192,6 +194,7 @@ type GetTLSSubscriptionInput struct {
 	Include *string
 }
 
+// GetTLSSubscription retrieves the specified resource.
 func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscription, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -276,6 +279,7 @@ type DeleteTLSSubscriptionInput struct {
 	ID string
 }
 
+// DeleteTLSSubscription deletes the specified resource.
 func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
 	if i.ID == "" {
 		return ErrMissingID

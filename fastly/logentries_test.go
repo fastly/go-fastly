@@ -35,13 +35,13 @@ func TestClient_Logentries(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "logentries/delete", func(c *Client) {
-			c.DeleteLogentries(&DeleteLogentriesInput{
+			_ = c.DeleteLogentries(&DeleteLogentriesInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-logentries",
 			})
 
-			c.DeleteLogentries(&DeleteLogentriesInput{
+			_ = c.DeleteLogentries(&DeleteLogentriesInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-logentries",
@@ -55,7 +55,7 @@ func TestClient_Logentries(t *testing.T) {
 	if le.Port != 0 {
 		t.Errorf("bad port: %q", le.Port)
 	}
-	if le.UseTLS != true {
+	if !le.UseTLS {
 		t.Errorf("bad use_tls: %t", le.UseTLS)
 	}
 	if le.Token != "abcd1234" {

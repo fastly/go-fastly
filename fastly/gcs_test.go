@@ -110,25 +110,25 @@ func TestClient_GCSs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "gcses/cleanup", func(c *Client) {
-			c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(&DeleteGCSInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-gcs",
 			})
 
-			c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(&DeleteGCSInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-gcs-2",
 			})
 
-			c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(&DeleteGCSInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-gcs-3",
 			})
 
-			c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(&DeleteGCSInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-gcs",

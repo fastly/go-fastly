@@ -10,6 +10,7 @@ import (
 	"github.com/peterhellberg/link"
 )
 
+// ACLEntry represents a server response from the Fastly API.
 type ACLEntry struct {
 	ACLID     string     `mapstructure:"acl_id"`
 	Comment   string     `mapstructure:"comment"`
@@ -23,13 +24,21 @@ type ACLEntry struct {
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
-// entriesById is a sortable list of ACL entries.
-type entriesById []*ACLEntry
+// entriesByID is a sortable list of ACL entries.
+type entriesByID []*ACLEntry
 
-// Len, Swap, and Less implements the sortable interface.
-func (s entriesById) Len() int      { return len(s) }
-func (s entriesById) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-func (s entriesById) Less(i, j int) bool {
+// Len implements the sortable interface.
+func (s entriesByID) Len() int {
+	return len(s)
+}
+
+// Swap implements the sortable interface.
+func (s entriesByID) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implements the sortable interface.
+func (s entriesByID) Less(i, j int) bool {
 	return s[i].ID < s[j].ID
 }
 
@@ -44,6 +53,7 @@ type ListACLEntriesInput struct {
 }
 
 // ListACLEntries return a list of entries for an ACL
+// FIXME: The query parameters aren't being processed (e.g. Params: i.formatFilters()).
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -66,12 +76,13 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 		return nil, err
 	}
 
-	sort.Stable(entriesById(es))
+	sort.Stable(entriesByID(es))
 
 	return es, nil
 }
 
-type ListAclEntriesPaginator struct {
+// ListACLEntriesPaginator implements PaginatorACLEntries.
+type ListACLEntriesPaginator struct {
 	CurrentPage int
 	LastPage    int
 	NextPage    int
@@ -83,12 +94,12 @@ type ListAclEntriesPaginator struct {
 }
 
 // HasNext returns a boolean indicating whether more pages are available
-func (p *ListAclEntriesPaginator) HasNext() bool {
+func (p *ListACLEntriesPaginator) HasNext() bool {
 	return !p.consumed || p.Remaining() != 0
 }
 
 // Remaining returns the remaining page count
-func (p *ListAclEntriesPaginator) Remaining() int {
+func (p *ListACLEntriesPaginator) Remaining() int {
 	if p.LastPage == 0 {
 		return 0
 	}
@@ -96,20 +107,20 @@ func (p *ListAclEntriesPaginator) Remaining() int {
 }
 
 // GetNext retrieves data in the next page
-func (p *ListAclEntriesPaginator) GetNext() ([]*ACLEntry, error) {
+func (p *ListACLEntriesPaginator) GetNext() ([]*ACLEntry, error) {
 	return p.client.listACLEntriesWithPage(p.options, p)
 }
 
 // NewListACLEntriesPaginator returns a new paginator
 func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) PaginatorACLEntries {
-	return &ListAclEntriesPaginator{
+	return &ListACLEntriesPaginator{
 		client:  c,
 		options: i,
 	}
 }
 
 // listACLEntriesWithPage return a list of entries for an ACL of a given page
-func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntriesPaginator) ([]*ACLEntry, error) {
+func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListACLEntriesPaginator) ([]*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -181,7 +192,7 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListAclEntrie
 		return nil, err
 	}
 
-	sort.Stable(entriesById(es))
+	sort.Stable(entriesByID(es))
 
 	return es, nil
 }
@@ -345,12 +356,15 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	return e, nil
 }
 
+// BatchModifyACLEntriesInput is the input parameter to the
+// BatchModifyACLEntries function.
 type BatchModifyACLEntriesInput struct {
 	ACLID     string           `json:"-"`
 	Entries   []*BatchACLEntry `json:"entries"`
 	ServiceID string           `json:"-"`
 }
 
+// BatchACLEntry represents a single ACL entry.
 type BatchACLEntry struct {
 	Comment   *string        `json:"comment,omitempty"`
 	ID        *string        `json:"id,omitempty"`
@@ -360,6 +374,7 @@ type BatchACLEntry struct {
 	Subnet    *int           `json:"subnet,omitempty"`
 }
 
+// BatchModifyACLEntries updates the specified ACL entries.
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -381,9 +396,6 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
-	if err := decodeBodyMap(resp.Body, &batchModifyResult); err != nil {
-		return err
-	}
 
-	return nil
+	return decodeBodyMap(resp.Body, &batchModifyResult)
 }

@@ -34,13 +34,13 @@ func TestClient_Logshuttles(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "logshuttles/cleanup", func(c *Client) {
-			c.DeleteLogshuttle(&DeleteLogshuttleInput{
+			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-logshuttle",
 			})
 
-			c.DeleteLogshuttle(&DeleteLogshuttleInput{
+			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-logshuttle",

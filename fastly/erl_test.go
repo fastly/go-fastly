@@ -23,12 +23,13 @@ func TestClient_ERL(t *testing.T) {
 			Name:               "test_erl",
 			Action:             ERLActionResponse,
 			ClientKey:          []string{"req.http.Fastly-Client-IP"},
-			HttpMethods:        []string{http.MethodGet, http.MethodPost},
+			HTTPMethods:        []string{http.MethodGet, http.MethodPost},
 			PenaltyBoxDuration: 30,
 			Response: &ERLResponseType{
 				ERLStatus:      429,
 				ERLContentType: "application/json",
-				ERLContent:     "Too many requests"},
+				ERLContent:     "Too many requests",
+			},
 			RpsLimit:   20,
 			WindowSize: 10,
 		})
@@ -40,7 +41,7 @@ func TestClient_ERL(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteERL(&DeleteERLInput{
+			_ = c.DeleteERL(&DeleteERLInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: testVersion.Number,
 				ERLID:          e.ID,
@@ -67,7 +68,7 @@ func TestClient_ERL(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	var want, got = 1, len(es)
+	want, got := 1, len(es)
 	if got < want {
 		t.Errorf("want %d, got %d", want, got)
 	}

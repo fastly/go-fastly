@@ -82,7 +82,6 @@ func TestClient_ObjectStore(t *testing.T) {
 
 	if getObjectStoreResponse.Name != objectStore.Name || getObjectStoreResponse.ID != objectStore.ID {
 		t.Errorf("error fetching info for store %q: got %q, want %q", createStoreName, getObjectStoreResponse, objectStore)
-
 	}
 
 	// create a bunch of keys in our object store

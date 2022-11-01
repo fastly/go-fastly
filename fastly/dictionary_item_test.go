@@ -5,7 +5,6 @@ import (
 )
 
 func TestClient_DictionaryItems(t *testing.T) {
-
 	fixtureBase := "dictionary_items/"
 	nameSuffix := "DictionaryItems"
 
@@ -35,7 +34,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+			_ = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
 				ServiceID:    testService.ID,
 				DictionaryID: testDictionary.ID,
 				ItemKey:      "test-dictionary-item",

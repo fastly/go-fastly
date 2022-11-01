@@ -25,9 +25,17 @@ type Version struct {
 // `List()` function to sort the API responses.
 type versionsByNumber []*Version
 
-// Len, Swap, and Less implement the sortable interface.
-func (s versionsByNumber) Len() int      { return len(s) }
-func (s versionsByNumber) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s versionsByNumber) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s versionsByNumber) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s versionsByNumber) Less(i, j int) bool {
 	return s[i].Number < s[j].Number
 }

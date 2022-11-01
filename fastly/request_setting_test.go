@@ -39,13 +39,13 @@ func TestClient_RequestSettings(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "request_settings/cleanup", func(c *Client) {
-			c.DeleteRequestSetting(&DeleteRequestSettingInput{
+			_ = c.DeleteRequestSetting(&DeleteRequestSettingInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-request-setting",
 			})
 
-			c.DeleteRequestSetting(&DeleteRequestSettingInput{
+			_ = c.DeleteRequestSetting(&DeleteRequestSettingInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-request-setting",
@@ -56,16 +56,16 @@ func TestClient_RequestSettings(t *testing.T) {
 	if rs.Name != "test-request-setting" {
 		t.Errorf("bad name: %q", rs.Name)
 	}
-	if rs.ForceMiss != true {
+	if !rs.ForceMiss {
 		t.Errorf("bad force_miss: %t", rs.ForceMiss)
 	}
-	if rs.ForceSSL != true {
+	if !rs.ForceSSL {
 		t.Errorf("bad force_ssl: %t", rs.ForceSSL)
 	}
 	if rs.Action != RequestSettingActionLookup {
 		t.Errorf("bad action: %q", rs.Action)
 	}
-	if rs.BypassBusyWait != true {
+	if !rs.BypassBusyWait {
 		t.Errorf("bad bypass_busy_wait: %t", rs.BypassBusyWait)
 	}
 	if rs.MaxStaleAge != 30 {
@@ -77,10 +77,10 @@ func TestClient_RequestSettings(t *testing.T) {
 	if rs.XForwardedFor != RequestSettingXFFLeave {
 		t.Errorf("bad xff: %q", rs.XForwardedFor)
 	}
-	if rs.TimerSupport != true {
+	if !rs.TimerSupport {
 		t.Errorf("bad timer_support: %t", rs.TimerSupport)
 	}
-	if rs.GeoHeaders != true {
+	if !rs.GeoHeaders {
 		t.Errorf("bad geo_headers: %t", rs.GeoHeaders)
 	}
 	if rs.DefaultHost != "example.com" {

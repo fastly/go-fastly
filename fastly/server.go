@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// ServerType represents a server response from the Fastly API.
+// Server represents a server response from the Fastly API.
 type Server struct {
 	Address      string     `mapstructure:"address"`
 	Comment      string     `mapstructure:"comment"`
@@ -26,9 +26,17 @@ type Server struct {
 // serversByAddress is a sortable list of servers.
 type serversByAddress []*Server
 
-// Len, Swap, and Less implement the sortable interface.
-func (s serversByAddress) Len() int      { return len(s) }
-func (s serversByAddress) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s serversByAddress) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s serversByAddress) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s serversByAddress) Less(i, j int) bool {
 	return s[i].Address < s[j].Address
 }

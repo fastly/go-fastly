@@ -32,7 +32,7 @@ func TestClient_Conditions(t *testing.T) {
 	// // Ensure deleted
 	defer func() {
 		record(t, "conditions/cleanup", func(c *Client) {
-			c.DeleteCondition(&DeleteConditionInput{
+			_ = c.DeleteCondition(&DeleteConditionInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test/condition",

@@ -93,7 +93,7 @@ func TestClient_Versions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if vl.Locked != true {
+	if !vl.Locked {
 		t.Errorf("bad lock: %t", vl.Locked)
 	}
 
@@ -108,7 +108,7 @@ func TestClient_Versions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if cv.Active != false {
+	if !cv.Active {
 		t.Errorf("bad clone: %t", cv.Active)
 	}
 	if cv.Comment != uv.Comment {

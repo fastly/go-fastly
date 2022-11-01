@@ -8,11 +8,11 @@ import (
 	"encoding/pem"
 	"fmt"
 	"math/big"
+	"strings"
 	"testing"
+	"time"
 
 	rnd "math/rand"
-	"strings"
-	"time"
 )
 
 func TestClient_PrivateKey(t *testing.T) {
@@ -40,7 +40,7 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeletePrivateKey(&DeletePrivateKeyInput{
+		_ = testClient.DeletePrivateKey(&DeletePrivateKeyInput{
 			ID: pk.ID,
 		})
 	}()

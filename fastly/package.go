@@ -17,7 +17,7 @@ type Package struct {
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
-// Package is a container for metadata returned about a package.
+// PackageMetadata is a container for metadata returned about a package.
 // It is a separate struct to allow correct serialisation by mapstructure -
 // the raw data is returned as a json sub-block.
 type PackageMetadata struct {
@@ -80,14 +80,14 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 }
 
 // MakePackagePath ensures we create the correct REST path for referencing packages in the API.
-func MakePackagePath(ServiceID string, ServiceVersion int) (string, error) {
-	if ServiceID == "" {
+func MakePackagePath(serviceID string, serviceVersion int) (string, error) {
+	if serviceID == "" {
 		return "", ErrMissingServiceID
 	}
-	if ServiceVersion == 0 {
+	if serviceVersion == 0 {
 		return "", ErrMissingServiceVersion
 	}
-	return fmt.Sprintf("/service/%s/version/%d/package", ServiceID, ServiceVersion), nil
+	return fmt.Sprintf("/service/%s/version/%d/package", serviceID, serviceVersion), nil
 }
 
 // PopulatePackage encapsulates the decoding of returned package data.

@@ -35,9 +35,17 @@ type FTP struct {
 // ftpsByName is a sortable list of ftps.
 type ftpsByName []*FTP
 
-// Len, Swap, and Less implement the sortable interface.
-func (s ftpsByName) Len() int      { return len(s) }
-func (s ftpsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s ftpsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s ftpsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s ftpsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

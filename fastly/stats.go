@@ -184,7 +184,7 @@ type Usage struct {
 // RegionsUsage is a list of aggregated usage data by Fastly's region
 type RegionsUsage map[string]*Usage
 
-// UsageStatsResponse is a response from the account usage API endpoint
+// UsageResponse is a response from the account usage API endpoint
 type UsageResponse struct {
 	Data    *RegionsUsage     `mapstructure:"data"`
 	Message string            `mapstructure:"msg"`
@@ -224,7 +224,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 	return sr, nil
 }
 
-// UsageStatsResponse is a response from the account usage API endpoint
+// UsageByServiceResponse is a response from the account usage API endpoint
 type UsageByServiceResponse struct {
 	Data    *ServicesByRegionsUsage `mapstructure:"data"`
 	Message string                  `mapstructure:"msg"`

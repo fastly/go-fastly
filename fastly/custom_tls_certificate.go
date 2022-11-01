@@ -100,6 +100,7 @@ type GetCustomTLSCertificateInput struct {
 	ID string
 }
 
+// GetCustomTLSCertificate retrieves the specified Custom TLS Certificate.
 func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

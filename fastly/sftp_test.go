@@ -127,25 +127,25 @@ func TestClient_SFTPs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "sftps/cleanup", func(c *Client) {
-			c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-sftp",
 			})
 
-			c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-sftp-2",
 			})
 
-			c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-sftp-3",
 			})
 
-			c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-sftp",

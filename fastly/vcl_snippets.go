@@ -45,7 +45,7 @@ const (
 // SnippetType is the type of VCL Snippet
 type SnippetType string
 
-// Helper function to get a pointer to string
+// SnippetTypeToString is a helper function to get a pointer to string
 func SnippetTypeToString(b string) *SnippetType {
 	p := SnippetType(b)
 	return &p
@@ -210,6 +210,7 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 	return updateSnippet, err
 }
 
+// DeleteSnippetInput is the input parameter to the DeleteSnippet function.
 type DeleteSnippetInput struct {
 	// Name is the Name of the Snippet to Delete
 	Name string
@@ -219,6 +220,7 @@ type DeleteSnippetInput struct {
 	ServiceVersion int
 }
 
+// DeleteSnippet deletes the specified resource.
 func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -260,9 +262,17 @@ type ListSnippetsInput struct {
 // snippetsByName is a sortable list of Snippets.
 type snippetsByName []*Snippet
 
-// Len, Swap, and Less implement the sortable interface.
-func (s snippetsByName) Len() int      { return len(s) }
-func (s snippetsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s snippetsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s snippetsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s snippetsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

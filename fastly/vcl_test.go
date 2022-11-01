@@ -51,13 +51,13 @@ sub vcl_hash {
 	// Ensure deleted
 	defer func() {
 		record(t, "vcls/cleanup", func(c *Client) {
-			c.DeleteVCL(&DeleteVCLInput{
+			_ = c.DeleteVCL(&DeleteVCLInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-vcl",
 			})
 
-			c.DeleteVCL(&DeleteVCLInput{
+			_ = c.DeleteVCL(&DeleteVCLInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-vcl",
@@ -135,7 +135,7 @@ sub vcl_hash {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if avcl.Main != true {
+	if !avcl.Main {
 		t.Errorf("bad main: %t", avcl.Main)
 	}
 

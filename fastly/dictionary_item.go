@@ -24,9 +24,17 @@ type DictionaryItem struct {
 // dictionaryItemsByKey is a sortable list of dictionary items.
 type dictionaryItemsByKey []*DictionaryItem
 
-// Len, Swap, and Less implement the sortable interface.
-func (s dictionaryItemsByKey) Len() int      { return len(s) }
-func (s dictionaryItemsByKey) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s dictionaryItemsByKey) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s dictionaryItemsByKey) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s dictionaryItemsByKey) Less(i, j int) bool {
 	return s[i].ItemKey < s[j].ItemKey
 }
@@ -68,6 +76,8 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	return bs, nil
 }
 
+// ListDictionaryItemsPaginator implements the PaginatorDictionaryItems
+// interface.
 type ListDictionaryItemsPaginator struct {
 	CurrentPage int
 	LastPage    int
@@ -307,6 +317,8 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	return b, nil
 }
 
+// BatchModifyDictionaryItemsInput is the input parameter to the
+// BatchModifyDictionaryItems function.
 type BatchModifyDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to modify items for (required).
 	DictionaryID string                 `json:"-"`
@@ -315,12 +327,14 @@ type BatchModifyDictionaryItemsInput struct {
 	ServiceID string `json:"-"`
 }
 
+// BatchDictionaryItem represents a dictionary item.
 type BatchDictionaryItem struct {
 	ItemKey   string         `json:"item_key"`
 	ItemValue string         `json:"item_value"`
 	Operation BatchOperation `json:"op"`
 }
 
+// BatchModifyDictionaryItems bulk updates dictionary items.
 func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -342,11 +356,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
-	if err := decodeBodyMap(resp.Body, &batchModifyResult); err != nil {
-		return err
-	}
-
-	return nil
+	return decodeBodyMap(resp.Body, &batchModifyResult)
 }
 
 // DeleteDictionaryItemInput is the input parameter to DeleteDictionaryItem.

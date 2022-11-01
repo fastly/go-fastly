@@ -32,9 +32,17 @@ type HealthCheck struct {
 // healthChecksByName is a sortable list of health checks.
 type healthChecksByName []*HealthCheck
 
-// Len, Swap, and Less implement the sortable interface.
-func (s healthChecksByName) Len() int      { return len(s) }
-func (s healthChecksByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s healthChecksByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s healthChecksByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s healthChecksByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

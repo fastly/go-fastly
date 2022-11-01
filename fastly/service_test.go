@@ -24,11 +24,11 @@ func TestClient_Services(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "services/cleanup", func(c *Client) {
-			c.DeleteService(&DeleteServiceInput{
+			_ = c.DeleteService(&DeleteServiceInput{
 				ID: s.ID,
 			})
 
-			c.DeleteService(&DeleteServiceInput{
+			_ = c.DeleteService(&DeleteServiceInput{
 				ID: s.ID,
 			})
 		})

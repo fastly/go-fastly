@@ -38,13 +38,13 @@ func TestClient_Pubsubs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "pubsubs/cleanup", func(c *Client) {
-			c.DeletePubsub(&DeletePubsubInput{
+			_ = c.DeletePubsub(&DeletePubsubInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-pubsub",
 			})
 
-			c.DeletePubsub(&DeletePubsubInput{
+			_ = c.DeletePubsub(&DeletePubsubInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-pubsub",

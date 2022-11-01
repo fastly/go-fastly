@@ -35,9 +35,17 @@ type Elasticsearch struct {
 // elasticsearchByName is a sortable list of Elasticsearch logs.
 type elasticsearchByName []*Elasticsearch
 
-// Len, Swap, and Less implement the sortable interface.
-func (s elasticsearchByName) Len() int      { return len(s) }
-func (s elasticsearchByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s elasticsearchByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s elasticsearchByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s elasticsearchByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -133,6 +141,7 @@ type GetElasticsearchInput struct {
 	ServiceVersion int
 }
 
+// GetElasticsearch retrieves the specified resource.
 func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -161,6 +170,8 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 	return es, nil
 }
 
+// UpdateElasticsearchInput is the input parameter to the UpdateElasticsearch
+// function.
 type UpdateElasticsearchInput struct {
 	Format        *string `url:"format,omitempty"`
 	FormatVersion *uint   `url:"format_version,omitempty"`
@@ -186,6 +197,7 @@ type UpdateElasticsearchInput struct {
 	User           *string `url:"user,omitempty"`
 }
 
+// UpdateElasticsearch updates the specified resource.
 func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearch, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -213,6 +225,8 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 	return es, nil
 }
 
+// DeleteElasticsearchInput is the input parameter to the DeleteElasticsearch
+// function.
 type DeleteElasticsearchInput struct {
 	// Name is the name of the Elasticsearch endpoint to fetch.
 	Name string
@@ -222,6 +236,7 @@ type DeleteElasticsearchInput struct {
 	ServiceVersion int
 }
 
+// DeleteElasticsearch deletes the specified resource.
 func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

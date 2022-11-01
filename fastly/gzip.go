@@ -23,9 +23,17 @@ type Gzip struct {
 // gzipsByName is a sortable list of gzips.
 type gzipsByName []*Gzip
 
-// Len, Swap, and Less implement the sortable interface.
-func (s gzipsByName) Len() int      { return len(s) }
-func (s gzipsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s gzipsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s gzipsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s gzipsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

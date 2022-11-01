@@ -25,9 +25,17 @@ type Loggly struct {
 // logglyByName is a sortable list of loggly.
 type logglyByName []*Loggly
 
-// Len, Swap, and Less implement the sortable interface.
-func (s logglyByName) Len() int      { return len(s) }
-func (s logglyByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s logglyByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s logglyByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s logglyByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

@@ -37,9 +37,17 @@ type SFTP struct {
 // sftpsByName is a sortable list of sftps.
 type sftpsByName []*SFTP
 
-// Len, Swap, and Less implement the sortable interface.
-func (s sftpsByName) Len() int      { return len(s) }
-func (s sftpsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s sftpsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s sftpsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s sftpsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

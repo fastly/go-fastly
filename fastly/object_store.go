@@ -43,7 +43,7 @@ func (c *Client) CreateObjectStore(i *CreateObjectStoreInput) (*ObjectStore, err
 	return store, nil
 }
 
-// ListObjectStoreInput is used as an input to the ListObjectStores function.
+// ListObjectStoresInput is used as an input to the ListObjectStores function.
 type ListObjectStoresInput struct {
 	Cursor string
 	Limit  int
@@ -98,7 +98,7 @@ func (c *Client) ListObjectStores(i *ListObjectStoresInput) (*ListObjectStoresRe
 	return output, nil
 }
 
-// ListObjectStoresPagiator is the opaque type for a ListObjectStores call with pagination.
+// ListObjectStoresPaginator is the opaque type for a ListObjectStores call with pagination.
 type ListObjectStoresPaginator struct {
 	client   *Client
 	cursor   string // == "" if no more pages
@@ -261,7 +261,7 @@ func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) (*ListObjectSt
 }
 
 // ListObjectStoreKeysPaginator is the opaque type for a ListObjectStoreKeys calls with pagination.
-type ListObjectsStoreKeysPaginator struct {
+type ListObjectStoreKeysPaginator struct {
 	client   *Client
 	cursor   string // == "" if no more pages
 	err      error
@@ -271,15 +271,15 @@ type ListObjectsStoreKeysPaginator struct {
 }
 
 // NewListObjectStoreKeysPaginator returns a new paginator for the provided LitObjectStoreKeysInput.
-func (c *Client) NewListObjectStoreKeysPaginator(i *ListObjectStoreKeysInput) *ListObjectsStoreKeysPaginator {
-	return &ListObjectsStoreKeysPaginator{
+func (c *Client) NewListObjectStoreKeysPaginator(i *ListObjectStoreKeysInput) *ListObjectStoreKeysPaginator {
+	return &ListObjectStoreKeysPaginator{
 		client: c,
 		input:  i,
 	}
 }
 
 // Next advanced the paginator.
-func (l *ListObjectsStoreKeysPaginator) Next() bool {
+func (l *ListObjectStoreKeysPaginator) Next() bool {
 	if l.finished {
 		l.keys = nil
 		return false
@@ -303,12 +303,12 @@ func (l *ListObjectsStoreKeysPaginator) Next() bool {
 }
 
 // Err returns any error from the paginator.
-func (l *ListObjectsStoreKeysPaginator) Err() error {
+func (l *ListObjectStoreKeysPaginator) Err() error {
 	return l.err
 }
 
 // Keys returns the current set of keys retrieved by the paginator.
-func (l *ListObjectsStoreKeysPaginator) Keys() []string {
+func (l *ListObjectStoreKeysPaginator) Keys() []string {
 	return l.keys
 }
 

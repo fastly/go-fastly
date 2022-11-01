@@ -23,9 +23,17 @@ type Domain struct {
 // domainsByName is a sortable list of backends.
 type domainsByName []*Domain
 
-// Len, Swap, and Less implement the sortable interface.
-func (s domainsByName) Len() int      { return len(s) }
-func (s domainsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s domainsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s domainsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s domainsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

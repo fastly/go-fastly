@@ -34,13 +34,13 @@ func TestClient_Sumologics(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "sumologics/cleanup", func(c *Client) {
-			c.DeleteSumologic(&DeleteSumologicInput{
+			_ = c.DeleteSumologic(&DeleteSumologicInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-sumologic",
 			})
 
-			c.DeleteSumologic(&DeleteSumologicInput{
+			_ = c.DeleteSumologic(&DeleteSumologicInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-sumologic",

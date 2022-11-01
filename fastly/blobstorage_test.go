@@ -120,25 +120,25 @@ func TestClient_BlobStorages(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "blobstorages/cleanup", func(c *Client) {
-			c.DeleteBlobStorage(&DeleteBlobStorageInput{
+			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-blobstorage",
 			})
 
-			c.DeleteBlobStorage(&DeleteBlobStorageInput{
+			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-blobstorage-2",
 			})
 
-			c.DeleteBlobStorage(&DeleteBlobStorageInput{
+			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-blobstorage-3",
 			})
 
-			c.DeleteBlobStorage(&DeleteBlobStorageInput{
+			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-blobstorage",

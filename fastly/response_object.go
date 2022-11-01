@@ -26,9 +26,17 @@ type ResponseObject struct {
 // responseObjectsByName is a sortable list of response objects.
 type responseObjectsByName []*ResponseObject
 
-// Len, Swap, and Less implement the sortable interface.
-func (s responseObjectsByName) Len() int      { return len(s) }
-func (s responseObjectsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s responseObjectsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s responseObjectsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s responseObjectsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

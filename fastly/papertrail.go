@@ -26,9 +26,17 @@ type Papertrail struct {
 // papertrailsByName is a sortable list of papertrails.
 type papertrailsByName []*Papertrail
 
-// Len, Swap, and Less implement the sortable interface.
-func (s papertrailsByName) Len() int      { return len(s) }
-func (s papertrailsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s papertrailsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s papertrailsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s papertrailsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

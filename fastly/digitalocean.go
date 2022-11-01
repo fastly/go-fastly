@@ -35,9 +35,17 @@ type DigitalOcean struct {
 // digitaloceansByName is a sortable list of DigitalOceans.
 type digitaloceansByName []*DigitalOcean
 
-// Len, Swap, and Less implement the sortable interface.
-func (d digitaloceansByName) Len() int      { return len(d) }
-func (d digitaloceansByName) Swap(i, j int) { d[i], d[j] = d[j], d[i] }
+// Len implement the sortable interface.
+func (d digitaloceansByName) Len() int {
+	return len(d)
+}
+
+// Swap implement the sortable interface.
+func (d digitaloceansByName) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
+}
+
+// Less implement the sortable interface.
 func (d digitaloceansByName) Less(i, j int) bool {
 	return d[i].Name < d[j].Name
 }

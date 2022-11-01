@@ -117,25 +117,25 @@ func TestClient_DigitalOceans(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "digitaloceans/cleanup", func(c *Client) {
-			c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-digitalocean",
 			})
 
-			c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-digitalocean-2",
 			})
 
-			c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-digitalocean-3",
 			})
 
-			c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-digitalocean",

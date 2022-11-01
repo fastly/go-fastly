@@ -22,9 +22,17 @@ type Dictionary struct {
 // dictionariesByName is a sortable list of dictionaries.
 type dictionariesByName []*Dictionary
 
-// Len, Swap, and Less implement the sortable interface.
-func (s dictionariesByName) Len() int      { return len(s) }
-func (s dictionariesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s dictionariesByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s dictionariesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s dictionariesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

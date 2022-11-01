@@ -33,9 +33,17 @@ type Splunk struct {
 // splunkByName is a sortable list of splunks.
 type splunkByName []*Splunk
 
-// Len, Swap, and Less implement the sortable interface.
-func (s splunkByName) Len() int      { return len(s) }
-func (s splunkByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s splunkByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s splunkByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s splunkByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

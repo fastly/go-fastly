@@ -89,7 +89,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.Port != 1234 {
 		t.Errorf("bad port: %q", s.Port)
 	}
-	if s.UseTLS != true {
+	if !s.UseTLS {
 		t.Errorf("bad use_tls: %t", s.UseTLS)
 	}
 	if s.TLSCACert != caCert {

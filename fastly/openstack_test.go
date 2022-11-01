@@ -117,25 +117,25 @@ func TestClient_Openstack(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "openstack/cleanup", func(c *Client) {
-			c.DeleteOpenstack(&DeleteOpenstackInput{
+			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-openstack",
 			})
 
-			c.DeleteOpenstack(&DeleteOpenstackInput{
+			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-openstack-2",
 			})
 
-			c.DeleteOpenstack(&DeleteOpenstackInput{
+			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-openstack-3",
 			})
 
-			c.DeleteOpenstack(&DeleteOpenstackInput{
+			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-openstack",

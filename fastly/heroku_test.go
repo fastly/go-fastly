@@ -34,13 +34,13 @@ func TestClient_Herokus(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "herokus/cleanup", func(c *Client) {
-			c.DeleteHeroku(&DeleteHerokuInput{
+			_ = c.DeleteHeroku(&DeleteHerokuInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-heroku",
 			})
 
-			c.DeleteHeroku(&DeleteHerokuInput{
+			_ = c.DeleteHeroku(&DeleteHerokuInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-heroku",

@@ -47,7 +47,7 @@ func TestClient_Settings(t *testing.T) {
 	if us.DefaultTTL != 1800 {
 		t.Errorf("bad default_ttl: %d", us.DefaultTTL)
 	}
-	if us.StaleIfError != true {
+	if !us.StaleIfError {
 		t.Errorf("bad stale_if_error: %t", us.StaleIfError)
 	}
 	if us.StaleIfErrorTTL != 57600 {

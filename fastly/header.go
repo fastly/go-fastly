@@ -86,9 +86,17 @@ type Header struct {
 // headersByName is a sortable list of headers.
 type headersByName []*Header
 
-// Len, Swap, and Less implement the sortable interface.
-func (s headersByName) Len() int      { return len(s) }
-func (s headersByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s headersByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s headersByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s headersByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

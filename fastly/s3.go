@@ -7,37 +7,66 @@ import (
 	"time"
 )
 
+// S3Redundancy represents the redundancy variants for S3.
 type S3Redundancy string
 
-func S3RedundancyPtr(v S3Redundancy) *S3Redundancy { return &v }
+// S3RedundancyPtr returns a pointer to a S3Redundancy.
+func S3RedundancyPtr(v S3Redundancy) *S3Redundancy {
+	return &v
+}
 
+// S3ServerSideEncryption represents the encryption variants for S3.
 type S3ServerSideEncryption string
 
-func S3ServerSideEncryptionPtr(v S3ServerSideEncryption) *S3ServerSideEncryption { return &v }
+// S3ServerSideEncryptionPtr returns a pointer to a S3ServerSideEncryption.
+func S3ServerSideEncryptionPtr(v S3ServerSideEncryption) *S3ServerSideEncryption {
+	return &v
+}
 
+// S3AccessControlList represents the control list variants for S3.
 type S3AccessControlList string
 
-func S3AccessControlListPtr(v S3AccessControlList) *S3AccessControlList { return &v }
+// S3AccessControlListPtr returns a pointer to a S3AccessControlList.
+func S3AccessControlListPtr(v S3AccessControlList) *S3AccessControlList {
+	return &v
+}
 
 const (
-	S3RedundancyStandard                 S3Redundancy = "standard"
-	S3RedundancyIntelligentTiering       S3Redundancy = "intelligent_tiering"
-	S3RedundancyStandardIA               S3Redundancy = "standard_ia"
-	S3RedundancyOneZoneIA                S3Redundancy = "onezone_ia"
-	S3RedundancyGlacierInstantRetrieval  S3Redundancy = "glacier_ir"
+	// S3RedundancyStandard represents a redundancy variant.
+	S3RedundancyStandard S3Redundancy = "standard"
+	// S3RedundancyIntelligentTiering represents a redundancy variant.
+	S3RedundancyIntelligentTiering S3Redundancy = "intelligent_tiering"
+	// S3RedundancyStandardIA represents a redundancy variant.
+	S3RedundancyStandardIA S3Redundancy = "standard_ia"
+	// S3RedundancyOneZoneIA represents a redundancy variant.
+	S3RedundancyOneZoneIA S3Redundancy = "onezone_ia"
+	// S3RedundancyGlacierInstantRetrieval represents a redundancy variant.
+	S3RedundancyGlacierInstantRetrieval S3Redundancy = "glacier_ir"
+	// S3RedundancyGlacierFlexibleRetrieval represents a redundancy variant.
 	S3RedundancyGlacierFlexibleRetrieval S3Redundancy = "glacier"
-	S3RedundancyGlacierDeepArchive       S3Redundancy = "deep_archive"
-	S3RedundancyReduced                  S3Redundancy = "reduced_redundancy"
+	// S3RedundancyGlacierDeepArchive represents a redundancy variant.
+	S3RedundancyGlacierDeepArchive S3Redundancy = "deep_archive"
+	// S3RedundancyReduced represents a redundancy variant.
+	S3RedundancyReduced S3Redundancy = "reduced_redundancy"
 
+	// S3ServerSideEncryptionAES represents an encryption variant.
 	S3ServerSideEncryptionAES S3ServerSideEncryption = "AES256"
+	// S3ServerSideEncryptionKMS represents an encryption variant.
 	S3ServerSideEncryptionKMS S3ServerSideEncryption = "aws:kms"
 
-	S3AccessControlListPrivate                S3AccessControlList = "private"
-	S3AccessControlListPublicRead             S3AccessControlList = "public-read"
-	S3AccessControlListPublicReadWrite        S3AccessControlList = "public-read-write"
-	S3AccessControlListAWSExecRead            S3AccessControlList = "aws-exec-read"
-	S3AccessControlListAuthenticatedRead      S3AccessControlList = "authenticated-read"
-	S3AccessControlListBucketOwnerRead        S3AccessControlList = "bucket-owner-read"
+	// S3AccessControlListPrivate represents a control list variant.
+	S3AccessControlListPrivate S3AccessControlList = "private"
+	// S3AccessControlListPublicRead represents a control list variant.
+	S3AccessControlListPublicRead S3AccessControlList = "public-read"
+	// S3AccessControlListPublicReadWrite represents a control list variant.
+	S3AccessControlListPublicReadWrite S3AccessControlList = "public-read-write"
+	// S3AccessControlListAWSExecRead represents a control list variant.
+	S3AccessControlListAWSExecRead S3AccessControlList = "aws-exec-read"
+	// S3AccessControlListAuthenticatedRead represents a control list variant.
+	S3AccessControlListAuthenticatedRead S3AccessControlList = "authenticated-read"
+	// S3AccessControlListBucketOwnerRead represents a control list variant.
+	S3AccessControlListBucketOwnerRead S3AccessControlList = "bucket-owner-read"
+	// S3AccessControlListBucketOwnerFullControl represents a control list variant.
 	S3AccessControlListBucketOwnerFullControl S3AccessControlList = "bucket-owner-full-control"
 )
 
@@ -74,9 +103,17 @@ type S3 struct {
 // s3sByName is a sortable list of S3s.
 type s3sByName []*S3
 
-// Len, Swap, and Less implement the sortable interface.
-func (s s3sByName) Len() int      { return len(s) }
-func (s s3sByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s s3sByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s s3sByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s s3sByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

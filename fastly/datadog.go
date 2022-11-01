@@ -26,9 +26,17 @@ type Datadog struct {
 // datadogByName is a sortable list of Datadog.
 type datadogByName []*Datadog
 
-// Len, Swap, and Less implement the sortable interface.
-func (s datadogByName) Len() int      { return len(s) }
-func (s datadogByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s datadogByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s datadogByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s datadogByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

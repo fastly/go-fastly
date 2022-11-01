@@ -116,25 +116,25 @@ func TestClient_FTPs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "ftps/cleanup", func(c *Client) {
-			c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-ftp",
 			})
 
-			c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-ftp-2",
 			})
 
-			c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-ftp-3",
 			})
 
-			c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-ftp",

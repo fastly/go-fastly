@@ -36,7 +36,6 @@ func TestClient_APIEvents(t *testing.T) {
 	if len(event.ID) < 1 {
 		t.Errorf("bad event: %v", event)
 	}
-
 }
 
 func TestClient_GetAPIEvent_validation(t *testing.T) {
@@ -47,7 +46,6 @@ func TestClient_GetAPIEvent_validation(t *testing.T) {
 	if err != ErrMissingEventID {
 		t.Errorf("bad error: %s", err)
 	}
-
 }
 
 func TestGetAPIEventsFilterInput_formatFilters(t *testing.T) {

@@ -27,9 +27,17 @@ type Sumologic struct {
 // sumologicsByName is a sortable list of sumologics.
 type sumologicsByName []*Sumologic
 
-// Len, Swap, and Less implement the sortable interface.
-func (s sumologicsByName) Len() int      { return len(s) }
-func (s sumologicsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s sumologicsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s sumologicsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s sumologicsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

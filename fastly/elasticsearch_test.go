@@ -64,14 +64,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// ensure deleted
 	defer func() {
 		record(t, "elasticsearch/cleanup", func(c *Client) {
-			c.DeleteElasticsearch(&DeleteElasticsearchInput{
+			_ = c.DeleteElasticsearch(&DeleteElasticsearchInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-elasticsearch",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
-			c.DeleteElasticsearch(&DeleteElasticsearchInput{
+			_ = c.DeleteElasticsearch(&DeleteElasticsearchInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-elasticsearch",

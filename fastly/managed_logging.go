@@ -25,7 +25,9 @@ type (
 )
 
 const (
+	// ManagedLoggingUnset is a log stream variant.
 	ManagedLoggingUnset ManagedLoggingKind = iota
+	// ManagedLoggingInstanceOutput is a log stream variant.
 	ManagedLoggingInstanceOutput
 )
 

@@ -35,9 +35,17 @@ type Openstack struct {
 // openstacksByName is a sortable list of Openstack.
 type openstacksByName []*Openstack
 
-// Len, Swap, and Less implement the sortable interface.
-func (o openstacksByName) Len() int      { return len(o) }
-func (o openstacksByName) Swap(i, j int) { o[i], o[j] = o[j], o[i] }
+// Len implement the sortable interface.
+func (o openstacksByName) Len() int {
+	return len(o)
+}
+
+// Swap implement the sortable interface.
+func (o openstacksByName) Swap(i, j int) {
+	o[i], o[j] = o[j], o[i]
+}
+
+// Less implement the sortable interface.
 func (o openstacksByName) Less(i, j int) bool {
 	return o[i].Name < o[j].Name
 }

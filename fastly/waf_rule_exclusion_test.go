@@ -315,10 +315,10 @@ func assertWAFRuleExclusionEquals(t *testing.T, actual *WAFRuleExclusion, expect
 		t.Errorf("expected Rules to be of size %d got %d", len(actual.Rules), len(expected.Rules))
 	}
 
-	reflect.DeepEqual(extractModSecId(actual.Rules), extractModSecId(expected.Rules))
+	reflect.DeepEqual(extractModSecID(actual.Rules), extractModSecID(expected.Rules))
 }
 
-func extractModSecId(wafRule []*WAFRule) []int {
+func extractModSecID(wafRule []*WAFRule) []int {
 	var modSecIDs []int
 	for _, rule := range wafRule {
 		modSecIDs = append(modSecIDs, rule.ModSecID)
@@ -346,7 +346,6 @@ func createWAFWithRulesForExclusion(t *testing.T, fixtureBase string, testServic
 }
 
 func buildWAFRulesForExclusion(status string) []*WAFActiveRule {
-
 	return []*WAFActiveRule{
 		{
 			ModSecID: 2029718,

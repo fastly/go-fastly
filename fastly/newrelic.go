@@ -26,9 +26,17 @@ type NewRelic struct {
 // newrelicByName is a sortable list of newrelic.
 type newrelicByName []*NewRelic
 
-// Len, Swap, and Less implement the sortable interface.
-func (s newrelicByName) Len() int      { return len(s) }
-func (s newrelicByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s newrelicByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s newrelicByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s newrelicByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

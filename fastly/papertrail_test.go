@@ -34,13 +34,13 @@ func TestClient_Papertrails(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "papertrails/cleanup", func(c *Client) {
-			c.DeletePapertrail(&DeletePapertrailInput{
+			_ = c.DeletePapertrail(&DeletePapertrailInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-papertrail",
 			})
 
-			c.DeletePapertrail(&DeletePapertrailInput{
+			_ = c.DeletePapertrail(&DeletePapertrailInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-papertrail",

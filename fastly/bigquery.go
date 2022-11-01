@@ -31,9 +31,17 @@ type BigQuery struct {
 // bigQueriesByName is a sortable list of BigQueries.
 type bigQueriesByName []*BigQuery
 
-// Len, Swap, and Less implement the sortable interface.
-func (s bigQueriesByName) Len() int      { return len(s) }
-func (s bigQueriesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implements the sortable interface.
+func (s bigQueriesByName) Len() int {
+	return len(s)
+}
+
+// Swap implements the sortable interface.
+func (s bigQueriesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implements the sortable interface.
 func (s bigQueriesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

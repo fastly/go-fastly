@@ -38,9 +38,17 @@ type Kafka struct {
 // kafkaByName is a sortable list of kafkas.
 type kafkasByName []*Kafka
 
-// Len, Swap, and Less implement the sortable interface.
-func (s kafkasByName) Len() int      { return len(s) }
-func (s kafkasByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implements the sortable interface.
+func (s kafkasByName) Len() int {
+	return len(s)
+}
+
+// Swap implements the sortable interface.
+func (s kafkasByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implements the sortable interface.
 func (s kafkasByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

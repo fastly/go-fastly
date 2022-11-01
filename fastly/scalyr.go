@@ -26,9 +26,17 @@ type Scalyr struct {
 // scalyrByName is a sortable list of scalyrs.
 type scalyrsByName []*Scalyr
 
-// Len, Swap, and Less implement the sortable interface.
-func (s scalyrsByName) Len() int      { return len(s) }
-func (s scalyrsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implements the sortable interface.
+func (s scalyrsByName) Len() int {
+	return len(s)
+}
+
+// Swap implements the sortable interface.
+func (s scalyrsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implements the sortable interface.
 func (s scalyrsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

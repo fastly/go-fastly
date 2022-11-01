@@ -35,9 +35,17 @@ type Syslog struct {
 // syslogsByName is a sortable list of syslogs.
 type syslogsByName []*Syslog
 
-// Len, Swap, and Less implement the sortable interface.
-func (s syslogsByName) Len() int      { return len(s) }
-func (s syslogsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s syslogsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s syslogsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s syslogsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

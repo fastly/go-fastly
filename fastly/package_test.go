@@ -5,7 +5,6 @@ import (
 )
 
 func TestClient_Package(t *testing.T) {
-
 	fixtureBase := "package/"
 	nameSuffix := "package"
 
@@ -13,7 +12,7 @@ func TestClient_Package(t *testing.T) {
 	testVersion := createTestVersion(t, fixtureBase+"service_version", testService.ID)
 	defer deleteTestService(t, fixtureBase+"service_delete", testService.ID)
 
-	var testData = Package{
+	testData := Package{
 		Metadata: PackageMetadata{
 			Name:        "wasm-test",
 			Description: "Default package template used by the Fastly CLI for Rust-based Compute@Edge projects.",
@@ -95,7 +94,6 @@ func TestClient_Package(t *testing.T) {
 		wp.Metadata.Name != "" {
 		t.Fatal("Invalid package upload completed rather than failed.")
 	}
-
 }
 
 func TestClient_GetPackage_validation(t *testing.T) {

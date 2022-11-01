@@ -13,7 +13,7 @@ import (
 	"github.com/google/jsonapi"
 )
 
-// Events represents an event_logs item response from the Fastly API.
+// Event represents an event_logs item response from the Fastly API.
 type Event struct {
 	Admin       bool                   `jsonapi:"attr,admin"`
 	CreatedAt   *time.Time             `jsonapi:"attr,created_at,iso8601"`
@@ -27,7 +27,7 @@ type Event struct {
 	UserID      string                 `jsonapi:"attr,user_id"`
 }
 
-// GetAPIEventsFilter is used as input to the GetAPIEvents function.
+// GetAPIEventsFilterInput is used as input to the GetAPIEvents function.
 type GetAPIEventsFilterInput struct {
 	// CustomerID to Limit the returned events to a specific customer.
 	CustomerID string
@@ -132,6 +132,7 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum in
 		}
 		answer.Events = append(answer.Events, typed)
 	}
+
 	if pageNum == 0 {
 		if pages.Next != "" {
 			// NOTE: pages.Next URL includes filters already
@@ -140,9 +141,8 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum in
 				return err
 			}
 			defer resp.Body.Close()
-			c.interpretAPIEventsPage(answer, pageNum, resp)
+			return c.interpretAPIEventsPage(answer, pageNum, resp)
 		}
-		return nil
 	}
 	return nil
 }
@@ -160,7 +160,10 @@ func getEventsPages(body io.Reader) (EventsPaginationInfo, io.Reader, error) {
 	}
 
 	var pages *GetAPIEventsResponse
-	json.Unmarshal(bodyBytes, &pages)
+	err = json.Unmarshal(bodyBytes, &pages)
+	if err != nil {
+		return pages.Links, nil, err
+	}
 	return pages.Links, bytes.NewReader(buf.Bytes()), nil
 }
 

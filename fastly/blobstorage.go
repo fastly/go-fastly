@@ -35,9 +35,17 @@ type BlobStorage struct {
 // blobStorageByName is a sortable list of blob storages.
 type blobStorageByName []*BlobStorage
 
-// Len, Swap, and Less implement the sortable interface.
-func (s blobStorageByName) Len() int      { return len(s) }
-func (s blobStorageByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s blobStorageByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s blobStorageByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s blobStorageByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

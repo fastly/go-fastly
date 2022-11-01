@@ -47,8 +47,14 @@ type Backend struct {
 type backendsByName []*Backend
 
 // Len, Swap, and Less implement the sortable interface.
-func (s backendsByName) Len() int      { return len(s) }
-func (s backendsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+func (s backendsByName) Len() int {
+	return len(s)
+}
+
+func (s backendsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
 func (s backendsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

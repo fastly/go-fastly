@@ -17,7 +17,7 @@ type ERL struct {
 	CreatedAt          *time.Time       `mapstructure:"created_at"`
 	DeletedAt          *time.Time       `mapstructure:"deleted_at"`
 	FeatureRevision    int              `mapstructure:"feature_revision"` // 1..
-	HttpMethods        []string         `mapstructure:"http_methods"`
+	HTTPMethods        []string         `mapstructure:"http_methods"`
 	ID                 string           `mapstructure:"id"`
 	LoggerType         ERLLogger        `mapstructure:"logger_type"`
 	Name               string           `mapstructure:"name"`
@@ -25,9 +25,9 @@ type ERL struct {
 	Response           *ERLResponseType `mapstructure:"response"`             // required if Action != Log
 	ResponseObjectName string           `mapstructure:"response_object_name"`
 	RpsLimit           int              `mapstructure:"rps_limit"` // 10..10000
-	ServiceId          string           `mapstructure:"service_id"`
+	ServiceID          string           `mapstructure:"service_id"`
 	UpdatedAt          *time.Time       `mapstructure:"updated_at"`
-	UriDictionaryName  string           `mapstructure:"uri_dictionary_name"`
+	URIDictionaryName  string           `mapstructure:"uri_dictionary_name"`
 	Version            int              `mapstructure:"version"` // 1..
 	WindowSize         ERLWindowSize    `mapstructure:"window_size"`
 }
@@ -44,8 +44,11 @@ type ERLResponseType struct {
 type ERLAction string
 
 const (
-	ERLActionLogOnly        ERLAction = "log_only"
-	ERLActionResponse       ERLAction = "response"
+	// ERLActionLogOnly represents an action variant.
+	ERLActionLogOnly ERLAction = "log_only"
+	// ERLActionResponse represents an action variant.
+	ERLActionResponse ERLAction = "response"
+	// ERLActionResponseObject represents an action variant.
 	ERLActionResponseObject ERLAction = "response_object"
 )
 
@@ -53,35 +56,64 @@ const (
 type ERLLogger string
 
 const (
-	ERLLogAzureBlob       ERLLogger = "azureblob"
-	ERLLogBigQuery        ERLLogger = "bigquery"
-	ERLLogCloudFiles      ERLLogger = "cloudfiles"
-	ERLLogDataDog         ERLLogger = "datadog"
-	ERLLogDigitalOcean    ERLLogger = "digitalocean"
-	ERLLogElasticSearch   ERLLogger = "elasticsearch"
-	ERLLogFtp             ERLLogger = "ftp"
-	ERLLogGcs             ERLLogger = "gcs"
+	// ERLLogAzureBlob represents a log provider variant.
+	ERLLogAzureBlob ERLLogger = "azureblob"
+	// ERLLogBigQuery represents a log provider variant.
+	ERLLogBigQuery ERLLogger = "bigquery"
+	// ERLLogCloudFiles represents a log provider variant.
+	ERLLogCloudFiles ERLLogger = "cloudfiles"
+	// ERLLogDataDog represents a log provider variant.
+	ERLLogDataDog ERLLogger = "datadog"
+	// ERLLogDigitalOcean represents a log provider variant.
+	ERLLogDigitalOcean ERLLogger = "digitalocean"
+	// ERLLogElasticSearch represents a log provider variant.
+	ERLLogElasticSearch ERLLogger = "elasticsearch"
+	// ERLLogFtp represents a log provider variant.
+	ERLLogFtp ERLLogger = "ftp"
+	// ERLLogGcs represents a log provider variant.
+	ERLLogGcs ERLLogger = "gcs"
+	// ERLLogGoogleAnalytics represents a log provider variant.
 	ERLLogGoogleAnalytics ERLLogger = "googleanalytics"
-	ERLLogHeroku          ERLLogger = "heroku"
-	ERLLogHoneycomb       ERLLogger = "honeycomb"
-	ERLLogHttp            ERLLogger = "http"
-	ERLLogHttps           ERLLogger = "https"
-	ERLLogKafta           ERLLogger = "kafka"
-	ERLLogKinesis         ERLLogger = "kinesis"
-	ERLLogLogEntries      ERLLogger = "logentries"
-	ERLLogLoggly          ERLLogger = "loggly"
-	ERLLogLogShuttle      ERLLogger = "logshuttle"
-	ERLLogNewRelic        ERLLogger = "newrelic"
-	ERLLogOpenStack       ERLLogger = "openstack"
-	ERLLogPaperTrail      ERLLogger = "papertrail"
-	ERLLogPubSub          ERLLogger = "pubsub"
-	ERLLogS3              ERLLogger = "s3"
-	ERLLogScalyr          ERLLogger = "scalyr"
-	ERLLogSftp            ERLLogger = "sftp"
-	ERLLogSplunk          ERLLogger = "splunk"
-	ERLLogStackDriver     ERLLogger = "stackdriver"
-	ERLLogSumoLogiuc      ERLLogger = "sumologic"
-	ERLLogSysLog          ERLLogger = "syslog"
+	// ERLLogHeroku represents a log provider variant.
+	ERLLogHeroku ERLLogger = "heroku"
+	// ERLLogHoneycomb represents a log provider variant.
+	ERLLogHoneycomb ERLLogger = "honeycomb"
+	// ERLLogHTTP represents a log provider variant.
+	ERLLogHTTP ERLLogger = "http"
+	// ERLLogHTTPS represents a log provider variant.
+	ERLLogHTTPS ERLLogger = "https"
+	// ERLLogKafta represents a log provider variant.
+	ERLLogKafta ERLLogger = "kafka"
+	// ERLLogKinesis represents a log provider variant.
+	ERLLogKinesis ERLLogger = "kinesis"
+	// ERLLogLogEntries represents a log provider variant.
+	ERLLogLogEntries ERLLogger = "logentries"
+	// ERLLogLoggly represents a log provider variant.
+	ERLLogLoggly ERLLogger = "loggly"
+	// ERLLogLogShuttle represents a log provider variant.
+	ERLLogLogShuttle ERLLogger = "logshuttle"
+	// ERLLogNewRelic represents a log provider variant.
+	ERLLogNewRelic ERLLogger = "newrelic"
+	// ERLLogOpenStack represents a log provider variant.
+	ERLLogOpenStack ERLLogger = "openstack"
+	// ERLLogPaperTrail represents a log provider variant.
+	ERLLogPaperTrail ERLLogger = "papertrail"
+	// ERLLogPubSub represents a log provider variant.
+	ERLLogPubSub ERLLogger = "pubsub"
+	// ERLLogS3 represents a log provider variant.
+	ERLLogS3 ERLLogger = "s3"
+	// ERLLogScalyr represents a log provider variant.
+	ERLLogScalyr ERLLogger = "scalyr"
+	// ERLLogSftp represents a log provider variant.
+	ERLLogSftp ERLLogger = "sftp"
+	// ERLLogSplunk represents a log provider variant.
+	ERLLogSplunk ERLLogger = "splunk"
+	// ERLLogStackDriver represents a log provider variant.
+	ERLLogStackDriver ERLLogger = "stackdriver"
+	// ERLLogSumoLogic represents a log provider variant.
+	ERLLogSumoLogic ERLLogger = "sumologic"
+	// ERLLogSysLog represents a log provider variant.
+	ERLLogSysLog ERLLogger = "syslog"
 )
 
 // ERLWindowSize represents the duration variants for when the RPS limit is
@@ -89,17 +121,28 @@ const (
 type ERLWindowSize int
 
 const (
-	ERLSize1  ERLWindowSize = 1
+	// ERLSize1 represents a duration variant.
+	ERLSize1 ERLWindowSize = 1
+	// ERLSize10 represents a duration variant.
 	ERLSize10 ERLWindowSize = 10
+	// ERLSize60 represents a duration variant.
 	ERLSize60 ERLWindowSize = 60
 )
 
 // ERLsByName is a sortable list of ERLs
 type ERLsByName []*ERL
 
-// Len, Swap, and Less implement the sortable interface
-func (s ERLsByName) Len() int      { return len(s) }
-func (s ERLsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s ERLsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s ERLsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s ERLsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -139,7 +182,7 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 type CreateERLInput struct {
 	Action             ERLAction        `url:"action"`
 	ClientKey          []string         `url:"client_key,brackets"`
-	HttpMethods        []string         `url:"http_methods,brackets"`
+	HTTPMethods        []string         `url:"http_methods,brackets"`
 	Name               string           `url:"name"`
 	PenaltyBoxDuration int              `url:"penalty_box_duration"`
 	Response           *ERLResponseType `url:"response,omitempty"`
@@ -248,7 +291,7 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 type UpdateERLInput struct {
 	Action             ERLAction        `url:"action,omitempty"`
 	ClientKey          []string         `url:"client_key,omitempty,brackets"`
-	HttpMethods        []string         `url:"http_methods,omitempty,brackets"`
+	HTTPMethods        []string         `url:"http_methods,omitempty,brackets"`
 	ID                 string           `url:"id"`
 	Name               string           `url:"name,omitempty"`
 	PenaltyBoxDuration int              `url:"penalty_box_duration,omitempty"`
@@ -259,7 +302,7 @@ type UpdateERLInput struct {
 	WindowSize         ERLWindowSize    `url:"window_size,omitempty"`
 }
 
-// UpdateERLInput updates the specified ERL.
+// UpdateERL updates the specified resource.
 func (c *Client) UpdateERL(i *UpdateERLInput) (*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

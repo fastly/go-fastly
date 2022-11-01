@@ -59,7 +59,7 @@ func TestClient_WAFs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"/cleanup", func(c *Client) {
-			c.DeleteWAF(&DeleteWAFInput{
+			_ = c.DeleteWAF(&DeleteWAFInput{
 				ServiceVersion: tv.Number,
 				ID:             waf.ID,
 			})

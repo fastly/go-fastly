@@ -59,26 +59,26 @@ func TestClient_Directors(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "directors/cleanup", func(c *Client) {
-			c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+			_ = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Director:       d.Name,
 				Backend:        b.Name,
 			})
 
-			c.DeleteBackend(&DeleteBackendInput{
+			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           b.Name,
 			})
 
-			c.DeleteDirector(&DeleteDirectorInput{
+			_ = c.DeleteDirector(&DeleteDirectorInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-director",
 			})
 
-			c.DeleteDirector(&DeleteDirectorInput{
+			_ = c.DeleteDirector(&DeleteDirectorInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-director",

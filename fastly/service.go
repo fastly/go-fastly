@@ -10,7 +10,7 @@ import (
 	"github.com/peterhellberg/link"
 )
 
-// Service represents a single service for the Fastly account.
+// Service represents a server response from the Fastly API.
 type Service struct {
 	ActiveVersion uint       `mapstructure:"version"`
 	Comment       string     `mapstructure:"comment"`
@@ -24,6 +24,7 @@ type Service struct {
 	Versions      []*Version `mapstructure:"versions"`
 }
 
+// ServiceDetail represents a server response from the Fastly API.
 type ServiceDetail struct {
 	ActiveVersion Version    `mapstructure:"active_version"`
 	Comment       string     `mapstructure:"comment"`
@@ -38,6 +39,7 @@ type ServiceDetail struct {
 	Versions      []*Version `mapstructure:"versions"`
 }
 
+// ServiceDomain represents a server response from the Fastly API.
 type ServiceDomain struct {
 	Comment        string     `mapstructure:"comment"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
@@ -48,14 +50,24 @@ type ServiceDomain struct {
 	ServiceVersion int64      `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
+
+// ServiceDomainsList represents a list of service domains.
 type ServiceDomainsList []*ServiceDomain
 
 // servicesByName is a sortable list of services.
 type servicesByName []*Service
 
-// Len, Swap, and Less implement the sortable interface.
-func (s servicesByName) Len() int      { return len(s) }
-func (s servicesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s servicesByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s servicesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s servicesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -69,6 +81,7 @@ type ListServicesInput struct {
 }
 
 // ListServices returns the full list of services for the current account.
+// FIXME: input isn't used at all (e.g. Params: i.formatFilters()).
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	resp, err := c.Get("/service", nil)
 	if err != nil {
@@ -84,6 +97,7 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	return s, nil
 }
 
+// ListServicesPaginator implements the PaginatorServices interface.
 type ListServicesPaginator struct {
 	CurrentPage int
 	LastPage    int
@@ -252,8 +266,9 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	return s, nil
 }
 
-// GetService retrieves the details for the service with the given id. If no
-// service exists for the given id, the API returns a 400 response (not a 404).
+// GetServiceDetails retrieves the specified resource.
+//
+// If no service exists for the given id, the API returns a 400 response.
 func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -367,6 +382,8 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	return s, nil
 }
 
+// ListServiceDomainInput is the input parameter to the ListServiceDomains
+// function.
 type ListServiceDomainInput struct {
 	ID string
 }

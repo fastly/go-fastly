@@ -28,9 +28,17 @@ type Logentries struct {
 // logentriesByName is a sortable list of logentries.
 type logentriesByName []*Logentries
 
-// Len, Swap, and Less implement the sortable interface.
-func (s logentriesByName) Len() int      { return len(s) }
-func (s logentriesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implements the sortable interface.
+func (s logentriesByName) Len() int {
+	return len(s)
+}
+
+// Swap implements the sortable interface.
+func (s logentriesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implements the sortable interface.
 func (s logentriesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }

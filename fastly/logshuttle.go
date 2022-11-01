@@ -26,9 +26,17 @@ type Logshuttle struct {
 // logshuttlesByName is a sortable list of logshuttles.
 type logshuttlesByName []*Logshuttle
 
-// Len, Swap, and Less implement the sortable interface.
-func (l logshuttlesByName) Len() int      { return len(l) }
-func (l logshuttlesByName) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+// Len implement the sortable interface.
+func (l logshuttlesByName) Len() int {
+	return len(l)
+}
+
+// Swap implement the sortable interface.
+func (l logshuttlesByName) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
+}
+
+// Less implement the sortable interface.
 func (l logshuttlesByName) Less(i, j int) bool {
 	return l[i].Name < l[j].Name
 }
