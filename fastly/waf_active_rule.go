@@ -273,7 +273,7 @@ type DeleteWAFActiveRulesInput struct {
 	WAFVersionNumber int
 }
 
-// DeleteWAFActiveRules removes rules from a particular WAF.
+// DeleteWAFActiveRules deletes the specified resource.
 func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
 	if i.WAFID == "" {
 		return ErrMissingWAFID

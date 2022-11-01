@@ -235,7 +235,7 @@ type DeleteSplunkInput struct {
 	ServiceVersion int
 }
 
-// DeleteSplunk deletes the given splunk version.
+// DeleteSplunk deletes the specified resource.
 func (c *Client) DeleteSplunk(i *DeleteSplunkInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

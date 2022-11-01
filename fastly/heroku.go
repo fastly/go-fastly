@@ -205,7 +205,7 @@ type DeleteHerokuInput struct {
 	ServiceVersion int
 }
 
-// DeleteHeroku deletes the given heroku version.
+// DeleteHeroku deletes the specified resource.
 func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -214,7 +214,7 @@ type DeleteNewRelicInput struct {
 	ServiceVersion int
 }
 
-// DeleteNewRelic deletes the given newrelic version.
+// DeleteNewRelic deletes the specified resource.
 func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

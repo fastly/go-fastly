@@ -274,7 +274,7 @@ type DeletePoolInput struct {
 	ServiceVersion int
 }
 
-// DeletePool deletes a specific pool for a particular service and version.
+// DeletePool deletes the specified resource.
 func (c *Client) DeletePool(i *DeletePoolInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

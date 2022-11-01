@@ -197,7 +197,7 @@ type DeleteGzipInput struct {
 	ServiceVersion int
 }
 
-// DeleteGzip deletes the given Gzip version.
+// DeleteGzip deletes the specified resource.
 func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -113,7 +113,7 @@ type DeleteACLInput struct {
 	ServiceVersion int
 }
 
-// DeleteACL deletes the specified ACL.
+// DeleteACL deletes the specified resource.
 func (c *Client) DeleteACL(i *DeleteACLInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

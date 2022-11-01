@@ -92,8 +92,8 @@ type CreatePapertrailInput struct {
 	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
-// CreatePapertrail creates a new Fastly papertrail.
-// ( creates a new resource.
+// CreatePapertrail creates a new resource.
+func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -212,7 +212,7 @@ type DeletePapertrailInput struct {
 	ServiceVersion int
 }
 
-// DeletePapertrail deletes the given papertrail version.
+// DeletePapertrail deletes the specified resource.
 func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

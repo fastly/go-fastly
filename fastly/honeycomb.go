@@ -214,7 +214,7 @@ type DeleteHoneycombInput struct {
 	ServiceVersion int
 }
 
-// DeleteHoneycomb deletes the given honeycomb version.
+// DeleteHoneycomb deletes the specified resource.
 func (c *Client) DeleteHoneycomb(i *DeleteHoneycombInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

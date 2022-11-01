@@ -239,7 +239,7 @@ type DeleteSFTPInput struct {
 	ServiceVersion int
 }
 
-// DeleteSFTP deletes the given SFTP version.
+// DeleteSFTP deletes the specified resource.
 func (c *Client) DeleteSFTP(i *DeleteSFTPInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

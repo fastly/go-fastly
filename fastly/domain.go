@@ -202,7 +202,7 @@ type DeleteDomainInput struct {
 	ServiceVersion int
 }
 
-// DeleteDomain removes a single domain by the given name.
+// DeleteDomain deletes the specified resource.
 func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

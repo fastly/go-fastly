@@ -191,7 +191,7 @@ type DeleteTLSActivationInput struct {
 	ID string
 }
 
-// DeleteTLSActivation destroy a certificate.
+// DeleteTLSActivation deletes the specified resource.
 func (c *Client) DeleteTLSActivation(i *DeleteTLSActivationInput) error {
 	if i.ID == "" {
 		return ErrMissingID

@@ -233,7 +233,7 @@ type DeleteBlobStorageInput struct {
 	ServiceVersion int
 }
 
-// DeleteBlobStorage deletes the given blob storage version.
+// DeleteBlobStorage deletes the specified resource.
 func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -252,7 +252,7 @@ type DeleteWAFInput struct {
 	ServiceVersion int `jsonapi:"attr,service_version_number"`
 }
 
-// DeleteWAF deletes a given WAF from its service.
+// DeleteWAF deletes the specified resource.
 func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

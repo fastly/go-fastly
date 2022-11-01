@@ -224,7 +224,7 @@ type DeleteDirectorInput struct {
 	ServiceVersion int
 }
 
-// DeleteDirector deletes the given director version.
+// DeleteDirector deletes the specified resource.
 func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

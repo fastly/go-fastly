@@ -233,7 +233,7 @@ type DeleteDigitalOceanInput struct {
 	ServiceVersion int
 }
 
-// DeleteDigitalOcean deletes the given DigitalOcean version.
+// DeleteDigitalOcean deletes the specified resource.
 func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

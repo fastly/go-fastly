@@ -161,7 +161,7 @@ type DeleteSecretStoreInput struct {
 	ID string
 }
 
-// DeleteSecretStore deletes the given Secret Store and associated Secrets.
+// DeleteSecretStore deletes the specified resource.
 func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 	if i.ID == "" {
 		return ErrMissingID
@@ -352,7 +352,7 @@ type DeleteSecretInput struct {
 	Name string
 }
 
-// DeleteSecret deletes the given Secret.
+// DeleteSecret deletes the specified resource.
 func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 	if i.ID == "" {
 		return ErrMissingID

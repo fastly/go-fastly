@@ -188,7 +188,7 @@ type DeleteCustomTLSCertificateInput struct {
 	ID string
 }
 
-// DeleteCustomTLSCertificate destroy a certificate. This disables TLS for all domains listed as SAN entries.
+// DeleteCustomTLSCertificate deletes the specified resource.
 func (c *Client) DeleteCustomTLSCertificate(i *DeleteCustomTLSCertificateInput) error {
 	if i.ID == "" {
 		return ErrMissingID

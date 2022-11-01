@@ -212,7 +212,7 @@ type DeleteLogentriesInput struct {
 	ServiceVersion int
 }
 
-// DeleteLogentries deletes the given logentries version.
+// DeleteLogentries deletes the specified resource.
 func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

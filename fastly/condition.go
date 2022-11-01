@@ -198,7 +198,7 @@ type DeleteConditionInput struct {
 	ServiceVersion int
 }
 
-// DeleteCondition deletes the given condition version.
+// DeleteCondition deletes the specified resource.
 func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

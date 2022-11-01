@@ -215,7 +215,7 @@ type DeletePubsubInput struct {
 	ServiceVersion int
 }
 
-// DeletePubsub deletes the given Pubsub version.
+// DeletePubsub deletes the specified resource.
 func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -175,7 +175,7 @@ type DeleteUserInput struct {
 	ID string
 }
 
-// DeleteUser revokes a specific token by its ID.
+// DeleteUser deletes the specified resource.
 func (c *Client) DeleteUser(i *DeleteUserInput) error {
 	if i.ID == "" {
 		return ErrMissingID

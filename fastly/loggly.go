@@ -203,7 +203,7 @@ type DeleteLogglyInput struct {
 	ServiceVersion int
 }
 
-// DeleteLoggly deletes the given loggly version.
+// DeleteLoggly deletes the specified resource.
 func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

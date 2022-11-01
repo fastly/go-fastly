@@ -209,7 +209,7 @@ type DeleteSumologicInput struct {
 	ServiceVersion int
 }
 
-// DeleteSumologic deletes the given sumologic version.
+// DeleteSumologic deletes the specified resource.
 func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

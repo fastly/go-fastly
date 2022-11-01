@@ -233,7 +233,7 @@ type DeleteSyslogInput struct {
 	ServiceVersion int
 }
 
-// DeleteSyslog deletes the given syslog version.
+// DeleteSyslog deletes the specified resource.
 func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

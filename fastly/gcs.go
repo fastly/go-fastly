@@ -229,7 +229,7 @@ type DeleteGCSInput struct {
 	ServiceVersion int
 }
 
-// DeleteGCS deletes the given GCS version.
+// DeleteGCS deletes the specified resource.
 func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

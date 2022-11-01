@@ -233,7 +233,7 @@ type DeleteOpenstackInput struct {
 	ServiceVersion int
 }
 
-// DeleteOpenstack deletes the given Openstack version.
+// DeleteOpenstack deletes the specified resource.
 func (c *Client) DeleteOpenstack(i *DeleteOpenstackInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

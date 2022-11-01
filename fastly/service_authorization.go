@@ -209,7 +209,7 @@ type DeleteServiceAuthorizationInput struct {
 	ID string
 }
 
-// DeleteServiceAuthorization deletes an existing service authorization using the ID.
+// DeleteServiceAuthorization deletes the specified resource.
 func (c *Client) DeleteServiceAuthorization(i *DeleteServiceAuthorizationInput) error {
 	if i.ID == "" {
 		return ErrMissingID

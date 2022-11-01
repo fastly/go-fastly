@@ -223,7 +223,7 @@ type DeleteERLInput struct {
 	ServiceVersion int    `form:"version"`
 }
 
-// DeleteERL deletes the specified ERL.
+// DeleteERL deletes the specified resource.
 func (c *Client) DeleteERL(i *DeleteERLInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

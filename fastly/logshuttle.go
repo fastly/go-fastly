@@ -206,7 +206,7 @@ type DeleteLogshuttleInput struct {
 	ServiceVersion int
 }
 
-// DeleteLogshuttle deletes the given logshuttle version.
+// DeleteLogshuttle deletes the specified resource.
 func (c *Client) DeleteLogshuttle(i *DeleteLogshuttleInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

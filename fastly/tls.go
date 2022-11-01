@@ -147,7 +147,7 @@ type DeletePrivateKeyInput struct {
 	ID string
 }
 
-// DeletePrivateKey destroy a TLS private key. Only private keys not already matched to any certificates can be deleted.
+// DeletePrivateKey deletes the specified resource.
 func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 	if i.ID == "" {
 		return ErrMissingID

@@ -258,7 +258,7 @@ type DeleteRequestSettingInput struct {
 	ServiceVersion int
 }
 
-// DeleteRequestSetting deletes the given request settings version.
+// DeleteRequestSetting deletes the specified resource.
 func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -285,7 +285,7 @@ func (c *Client) UpdateWAFRuleExclusion(i *UpdateWAFRuleExclusionInput) (*WAFRul
 	return exc, nil
 }
 
-// DeleteWAFRuleExclusion removes rules from a particular WAF.
+// DeleteWAFRuleExclusion deletes the specified resource.
 func (c *Client) DeleteWAFRuleExclusion(i *DeleteWAFRuleExclusionInput) error {
 	if i.WAFID == "" {
 		return ErrMissingWAFID

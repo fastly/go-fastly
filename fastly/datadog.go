@@ -215,7 +215,7 @@ type DeleteDatadogInput struct {
 	ServiceVersion int
 }
 
-// DeleteDatadog deletes a Datadog logging endpoint on a Fastly service version.
+// DeleteDatadog deletes the specified resource.
 func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

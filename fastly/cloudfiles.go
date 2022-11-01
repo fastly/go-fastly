@@ -233,7 +233,7 @@ type DeleteCloudfilesInput struct {
 	ServiceVersion int
 }
 
-// DeleteCloudfiles deletes the given Cloudfiles version.
+// DeleteCloudfiles deletes the specified resource.
 func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

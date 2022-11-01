@@ -329,7 +329,7 @@ type DeleteServiceInput struct {
 	ID string
 }
 
-// DeleteService updates the service with the given input.
+// DeleteService deletes the specified resource.
 func (c *Client) DeleteService(i *DeleteServiceInput) error {
 	if i.ID == "" {
 		return ErrMissingID

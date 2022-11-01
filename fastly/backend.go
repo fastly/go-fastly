@@ -261,7 +261,7 @@ type DeleteBackendInput struct {
 	ServiceVersion int
 }
 
-// DeleteBackend deletes the given backend version.
+// DeleteBackend deletes the specified resource.
 func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

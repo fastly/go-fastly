@@ -230,7 +230,7 @@ type DeleteHealthCheckInput struct {
 	ServiceVersion int
 }
 
-// DeleteHealthCheck deletes the given health check.
+// DeleteHealthCheck deletes the specified resource.
 func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

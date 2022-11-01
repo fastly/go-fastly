@@ -192,7 +192,7 @@ type DeleteDictionaryInput struct {
 	ServiceVersion int
 }
 
-// DeleteDictionary deletes the given dictionary version.
+// DeleteDictionary deletes the specified resource.
 func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

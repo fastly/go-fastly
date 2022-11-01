@@ -181,7 +181,7 @@ type DeleteObjectStoreInput struct {
 	ID string
 }
 
-// DeleteObjectStore deletes the given object store.
+// DeleteObjectStore deletes the specified resource.
 func (c *Client) DeleteObjectStore(i *DeleteObjectStoreInput) error {
 	if i.ID == "" {
 		return ErrMissingID
@@ -382,7 +382,7 @@ type DeleteObjectStoreKeyInput struct {
 	Key string
 }
 
-// DeleteObjectStoreKey deletes a key from an object store.
+// DeleteObjectStoreKey deletes the specified resource.
 func (c *Client) DeleteObjectStoreKey(i *DeleteObjectStoreKeyInput) error {
 	if i.ID == "" {
 		return ErrMissingID

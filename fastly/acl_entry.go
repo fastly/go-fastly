@@ -281,7 +281,7 @@ type DeleteACLEntryInput struct {
 	ServiceID string
 }
 
-// DeleteACLEntry deletes an entry from an ACL based on its ID
+// DeleteACLEntry deletes the specified resource.
 func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

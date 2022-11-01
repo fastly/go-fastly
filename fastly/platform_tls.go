@@ -205,7 +205,7 @@ type DeleteBulkCertificateInput struct {
 	ID string
 }
 
-// DeleteBulkCertificate destroy a certificate. This disables TLS for all domains listed as SAN entries.
+// DeleteBulkCertificate deletes the specified resource.
 func (c *Client) DeleteBulkCertificate(i *DeleteBulkCertificateInput) error {
 	if i.ID == "" {
 		return ErrMissingID

@@ -242,7 +242,7 @@ type DeleteKafkaInput struct {
 	ServiceVersion int
 }
 
-// DeleteKafka deletes the given kafka version.
+// DeleteKafka deletes the specified resource.
 func (c *Client) DeleteKafka(i *DeleteKafkaInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

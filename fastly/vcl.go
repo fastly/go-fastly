@@ -263,7 +263,7 @@ type DeleteVCLInput struct {
 	ServiceVersion int
 }
 
-// DeleteVCL deletes the given VCL version.
+// DeleteVCL deletes the specified resource.
 func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

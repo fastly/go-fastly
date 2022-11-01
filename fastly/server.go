@@ -209,7 +209,7 @@ type DeleteServerInput struct {
 	ServiceID string
 }
 
-// DeleteServer deletes a single server for a particular service and pool.
+// DeleteServer deletes the specified resource.
 func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

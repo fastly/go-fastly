@@ -215,7 +215,7 @@ type DeleteKinesisInput struct {
 	ServiceVersion int
 }
 
-// DeleteKinesis deletes the given Kinesis version.
+// DeleteKinesis deletes the specified resource.
 func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -151,7 +151,7 @@ type DeleteTokenInput struct {
 	TokenID string
 }
 
-// DeleteToken revokes a specific token by its ID.
+// DeleteToken deletes the specified resource.
 func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	if i.TokenID == "" {
 		return ErrMissingTokenID
@@ -170,7 +170,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	return nil
 }
 
-// DeleteTokenSelf revokes the token used to authorise the request.
+// DeleteTokenSelf deletes the specified resource.
 func (c *Client) DeleteTokenSelf() error {
 	resp, err := c.Delete("/tokens/self", nil)
 	if err != nil {

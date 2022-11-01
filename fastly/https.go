@@ -240,7 +240,7 @@ type DeleteHTTPSInput struct {
 	ServiceVersion int
 }
 
-// DeleteHTTPS deletes the specified resourc.
+// DeleteHTTPS deletes the specified resource.
 func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

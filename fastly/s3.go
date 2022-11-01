@@ -319,7 +319,7 @@ type DeleteS3Input struct {
 	ServiceVersion int
 }
 
-// DeleteS3 deletes the given S3 version.
+// DeleteS3 deletes the specified resource.
 func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

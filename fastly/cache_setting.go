@@ -216,7 +216,7 @@ type DeleteCacheSettingInput struct {
 	ServiceVersion int
 }
 
-// DeleteCacheSetting deletes the given cache setting version.
+// DeleteCacheSetting deletes the specified resource.
 func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

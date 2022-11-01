@@ -221,7 +221,7 @@ type DeleteBigQueryInput struct {
 	ServiceVersion int
 }
 
-// DeleteBigQuery deletes the given BigQuery version.
+// DeleteBigQuery deletes the specified resource.
 func (c *Client) DeleteBigQuery(i *DeleteBigQueryInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

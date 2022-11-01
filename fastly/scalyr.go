@@ -214,7 +214,7 @@ type DeleteScalyrInput struct {
 	ServiceVersion int
 }
 
-// DeleteScalyr deletes the given scalyr version.
+// DeleteScalyr deletes the specified resource.
 func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -275,7 +275,7 @@ type DeleteHeaderInput struct {
 	ServiceVersion int
 }
 
-// DeleteHeader deletes the given header version.
+// DeleteHeader deletes the specified resource.
 func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

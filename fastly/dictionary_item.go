@@ -369,7 +369,7 @@ type DeleteDictionaryItemInput struct {
 	ServiceID string
 }
 
-// DeleteDictionaryItem deletes the given dictionary item.
+// DeleteDictionaryItem deletes the specified resource.
 func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

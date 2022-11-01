@@ -211,7 +211,7 @@ type DeleteResponseObjectInput struct {
 	ServiceVersion int
 }
 
-// DeleteResponseObject deletes the given response object version.
+// DeleteResponseObject deletes the specified resource.
 func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

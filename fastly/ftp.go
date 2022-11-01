@@ -233,7 +233,7 @@ type DeleteFTPInput struct {
 	ServiceVersion int
 }
 
-// DeleteFTP deletes the given FTP version.
+// DeleteFTP deletes the specified resource.
 func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
