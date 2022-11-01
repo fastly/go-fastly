@@ -137,7 +137,7 @@ func TestClient_Domains(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !vd.Valid {
+	if vd.Valid {
 		t.Errorf("valid domain unexpected: %q", vd.Metadata.Name)
 	}
 
@@ -155,7 +155,7 @@ func TestClient_Domains(t *testing.T) {
 		t.Errorf("invalid domains: %v", vds)
 	}
 	for _, d := range vds {
-		if !d.Valid {
+		if d.Valid {
 			t.Errorf("valid domain unexpected: %q", d.Metadata.Name)
 		}
 	}
