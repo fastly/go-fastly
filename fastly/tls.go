@@ -17,20 +17,20 @@ type GetPrivateKeyInput struct {
 
 // PrivateKey represents a private key is used to sign a Certificate.
 type PrivateKey struct {
+	CreatedAt     *time.Time `jsonapi:"attr,created_at,iso8601"`
 	ID            string     `jsonapi:"primary,tls_private_key"`
-	Name          string     `jsonapi:"attr,name"`
 	KeyLength     int        `jsonapi:"attr,key_length"`
 	KeyType       string     `jsonapi:"attr,key_type"`
+	Name          string     `jsonapi:"attr,name"`
 	PublicKeySHA1 string     `jsonapi:"attr,public_key_sha1"`
-	CreatedAt     *time.Time `jsonapi:"attr,created_at,iso8601"`
 	Replace       bool       `jsonapi:"attr,replace"`
 }
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
+	FilterInUse string // Limit the returned keys to those without any matching TLS certificates.
 	PageNumber  int    // The page index for pagination.
 	PageSize    int    // The number of keys per page.
-	FilterInUse string // Limit the returned keys to those without any matching TLS certificates.
 }
 
 // formatFilters converts user input into query parameters for filtering.

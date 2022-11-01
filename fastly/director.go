@@ -26,20 +26,19 @@ type DirectorType uint8
 
 // Director represents a director response from the Fastly API.
 type Director struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name      string       `mapstructure:"name"`
-	Backends  []string     `mapstructure:"backends"`
-	Comment   string       `mapstructure:"comment"`
-	Shield    string       `mapstructure:"shield"`
-	Quorum    uint         `mapstructure:"quorum"`
-	Type      DirectorType `mapstructure:"type"`
-	Retries   uint         `mapstructure:"retries"`
-	Capacity  uint         `mapstructure:"capacity"`
-	CreatedAt *time.Time   `mapstructure:"created_at"`
-	UpdatedAt *time.Time   `mapstructure:"updated_at"`
-	DeletedAt *time.Time   `mapstructure:"deleted_at"`
+	Backends       []string     `mapstructure:"backends"`
+	Capacity       uint         `mapstructure:"capacity"`
+	Comment        string       `mapstructure:"comment"`
+	CreatedAt      *time.Time   `mapstructure:"created_at"`
+	DeletedAt      *time.Time   `mapstructure:"deleted_at"`
+	Name           string       `mapstructure:"name"`
+	Quorum         uint         `mapstructure:"quorum"`
+	Retries        uint         `mapstructure:"retries"`
+	ServiceID      string       `mapstructure:"service_id"`
+	ServiceVersion int          `mapstructure:"version"`
+	Shield         string       `mapstructure:"shield"`
+	Type           DirectorType `mapstructure:"type"`
+	UpdatedAt      *time.Time   `mapstructure:"updated_at"`
 }
 
 // directorsByName is a sortable list of directors.
@@ -56,7 +55,6 @@ func (s directorsByName) Less(i, j int) bool {
 type ListDirectorsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -88,19 +86,17 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 
 // CreateDirectorInput is used as input to the CreateDirector function.
 type CreateDirectorInput struct {
+	Capacity *uint  `url:"capacity,omitempty"`
+	Comment  string `url:"comment,omitempty"`
+	Name     string `url:"name,omitempty"`
+	Quorum   *uint  `url:"quorum,omitempty"`
+	Retries  *uint  `url:"retries,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name     string       `url:"name,omitempty"`
-	Comment  string       `url:"comment,omitempty"`
-	Shield   string       `url:"shield,omitempty"`
-	Quorum   *uint        `url:"quorum,omitempty"`
-	Type     DirectorType `url:"type,omitempty"`
-	Retries  *uint        `url:"retries,omitempty"`
-	Capacity *uint        `url:"capacity,omitempty"`
+	Shield         string       `url:"shield,omitempty"`
+	Type           DirectorType `url:"type,omitempty"`
 }
 
 // CreateDirector creates a new Fastly director.
@@ -129,14 +125,12 @@ func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 
 // GetDirectorInput is used as input to the GetDirector function.
 type GetDirectorInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the director to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetDirector gets the director configuration with the given parameters.
@@ -169,22 +163,19 @@ func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 
 // UpdateDirectorInput is used as input to the UpdateDirector function.
 type UpdateDirectorInput struct {
+	Capacity *uint   `url:"capacity,omitempty"`
+	Comment  *string `url:"comment,omitempty"`
+	// Name is the name of the director to update.
+	Name    string
+	NewName *string `url:"name,omitempty"`
+	Quorum  *uint   `url:"quorum,omitempty"`
+	Retries *uint   `url:"retries,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the director to update.
-	Name string
-
-	NewName  *string      `url:"name,omitempty"`
-	Comment  *string      `url:"comment,omitempty"`
-	Shield   *string      `url:"shield,omitempty"`
-	Quorum   *uint        `url:"quorum,omitempty"`
-	Type     DirectorType `url:"type,omitempty"`
-	Retries  *uint        `url:"retries,omitempty"`
-	Capacity *uint        `url:"capacity,omitempty"`
+	Shield         *string      `url:"shield,omitempty"`
+	Type           DirectorType `url:"type,omitempty"`
 }
 
 // UpdateDirector updates a specific director.
@@ -217,14 +208,12 @@ func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 
 // DeleteDirectorInput is the input parameter to DeleteDirector.
 type DeleteDirectorInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the director to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteDirector deletes the given director version.

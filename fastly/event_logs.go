@@ -15,45 +15,33 @@ import (
 
 // Events represents an event_logs item response from the Fastly API.
 type Event struct {
-	ID          string                 `jsonapi:"primary,event"`
+	Admin       bool                   `jsonapi:"attr,admin"`
+	CreatedAt   *time.Time             `jsonapi:"attr,created_at,iso8601"`
 	CustomerID  string                 `jsonapi:"attr,customer_id"`
 	Description string                 `jsonapi:"attr,description"`
 	EventType   string                 `jsonapi:"attr,event_type"`
+	ID          string                 `jsonapi:"primary,event"`
 	IP          string                 `jsonapi:"attr,ip"`
 	Metadata    map[string]interface{} `jsonapi:"attr,metadata,omitempty"`
 	ServiceID   string                 `jsonapi:"attr,service_id"`
 	UserID      string                 `jsonapi:"attr,user_id"`
-	CreatedAt   *time.Time             `jsonapi:"attr,created_at,iso8601"`
-	Admin       bool                   `jsonapi:"attr,admin"`
 }
 
 // GetAPIEventsFilter is used as input to the GetAPIEvents function.
 type GetAPIEventsFilterInput struct {
 	// CustomerID to Limit the returned events to a specific customer.
 	CustomerID string
-
-	// ServiceID to Limit the returned events to a specific service.
-	ServiceID string
-
-	// EventType to Limit the returned events to a specific event type. See above for event codes.
+	// EventType to limit the returned events to a specific event type. See above for event codes.
 	EventType string
-
-	// UserID to Limit the returned events to a specific user.
-	UserID string
-
-	// Number is the Pagination page number.
-	PageNumber int
-
-	// Size is the Number of items to return on each paginated page.
+	// MaxResults is the number of items to return on each paginated page.
 	MaxResults int
+	// PageNumber is the pagination page number.
+	PageNumber int
+	// ServiceID to limit the returned events to a specific service.
+	ServiceID string
+	// UserID to limit the returned events to a specific user.
+	UserID string
 }
-
-// eventLinksResponse is used to pull the "Links" pagination fields from
-// a call to Fastly; these are excluded from the results of the jsonapi
-// call to `UnmarshalManyPayload()`, so we have to fetch them separately.
-// type EventLinksResponse struct {
-// 	Links EventsPaginationInfo `json:"links"`
-// }
 
 // EventsPaginationInfo stores links to searches related to the current one, showing
 // any information about additional results being stored on another page

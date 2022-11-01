@@ -9,19 +9,18 @@ import (
 
 // Honeycomb represents a honeycomb response from the Fastly API.
 type Honeycomb struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	Dataset           string     `mapstructure:"dataset"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	Dataset           string     `mapstructure:"dataset"`
-	Token             string     `mapstructure:"token"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	Token             string     `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // honeycombsByName is a sortable list of honeycombs.
@@ -38,7 +37,6 @@ func (h honeycombsByName) Less(i, j int) bool {
 type ListHoneycombsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -70,19 +68,17 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 
 // CreateHoneycombInput is used as input to the CreateHoneycomb function.
 type CreateHoneycombInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
+	Dataset           string `url:"dataset,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
-	Dataset           string `url:"dataset,omitempty"`
-	Token             string `url:"token,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Token          string `url:"token,omitempty"`
 }
 
 // CreateHoneycomb creates a new Fastly honeycomb.
@@ -115,14 +111,12 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 
 // GetHoneycombInput is used as input to the GetHoneycomb function.
 type GetHoneycombInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the honeycomb to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetHoneycomb gets the honeycomb configuration with the given parameters.
@@ -155,22 +149,19 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 
 // UpdateHoneycombInput is used as input to the UpdateHoneycomb function.
 type UpdateHoneycombInput struct {
+	Dataset       *string `url:"dataset,omitempty"`
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the honeycomb to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the honeycomb to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	Dataset           *string `url:"dataset,omitempty"`
-	Token             *string `url:"token,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Token          *string `url:"token,omitempty"`
 }
 
 // UpdateHoneycomb updates a specific honeycomb.
@@ -207,14 +198,12 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 
 // DeleteHoneycombInput is the input parameter to DeleteHoneycomb.
 type DeleteHoneycombInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the honeycomb to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteHoneycomb deletes the given honeycomb version.

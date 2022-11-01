@@ -9,28 +9,27 @@ import (
 
 // Syslog represents a syslog response from the Fastly API.
 type Syslog struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
 	Address           string     `mapstructure:"address"`
-	Hostname          string     `mapstructure:"hostname"`
-	Port              uint       `mapstructure:"port"`
-	UseTLS            bool       `mapstructure:"use_tls"`
-	IPV4              string     `mapstructure:"ipv4"`
-	TLSCACert         string     `mapstructure:"tls_ca_cert"`
-	TLSHostname       string     `mapstructure:"tls_hostname"`
-	TLSClientCert     string     `mapstructure:"tls_client_cert"`
-	TLSClientKey      string     `mapstructure:"tls_client_key"`
-	Token             string     `mapstructure:"token"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
+	Hostname          string     `mapstructure:"hostname"`
+	IPV4              string     `mapstructure:"ipv4"`
 	MessageType       string     `mapstructure:"message_type"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	Port              uint       `mapstructure:"port"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	TLSCACert         string     `mapstructure:"tls_ca_cert"`
+	TLSClientCert     string     `mapstructure:"tls_client_cert"`
+	TLSClientKey      string     `mapstructure:"tls_client_key"`
+	TLSHostname       string     `mapstructure:"tls_hostname"`
+	Token             string     `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	UseTLS            bool       `mapstructure:"use_tls"`
 }
 
 // syslogsByName is a sortable list of syslogs.
@@ -47,7 +46,6 @@ func (s syslogsByName) Less(i, j int) bool {
 type ListSyslogsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -79,28 +77,26 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 
 // CreateSyslogInput is used as input to the CreateSyslog function.
 type CreateSyslogInput struct {
+	Address           string `url:"address,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	Hostname          string `url:"hostname,omitempty"`
+	IPV4              string `url:"ipv4,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	Port              uint   `url:"port,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string      `url:"name,omitempty"`
-	Address           string      `url:"address,omitempty"`
-	Hostname          string      `url:"hostname,omitempty"`
-	Port              uint        `url:"port,omitempty"`
-	UseTLS            Compatibool `url:"use_tls,omitempty"`
-	IPV4              string      `url:"ipv4,omitempty"`
-	TLSCACert         string      `url:"tls_ca_cert,omitempty"`
-	TLSHostname       string      `url:"tls_hostname,omitempty"`
-	TLSClientCert     string      `url:"tls_client_cert,omitempty"`
-	TLSClientKey      string      `url:"tls_client_key,omitempty"`
-	Token             string      `url:"token,omitempty"`
-	Format            string      `url:"format,omitempty"`
-	FormatVersion     uint        `url:"format_version,omitempty"`
-	MessageType       string      `url:"message_type,omitempty"`
-	ResponseCondition string      `url:"response_condition,omitempty"`
-	Placement         string      `url:"placement,omitempty"`
+	TLSCACert      string      `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey   string      `url:"tls_client_key,omitempty"`
+	TLSHostname    string      `url:"tls_hostname,omitempty"`
+	Token          string      `url:"token,omitempty"`
+	UseTLS         Compatibool `url:"use_tls,omitempty"`
 }
 
 // CreateSyslog creates a new Fastly syslog.
@@ -129,14 +125,12 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 
 // GetSyslogInput is used as input to the GetSyslog function.
 type GetSyslogInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the syslog to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetSyslog gets the syslog configuration with the given parameters.
@@ -169,31 +163,28 @@ func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 
 // UpdateSyslogInput is used as input to the UpdateSyslog function.
 type UpdateSyslogInput struct {
+	Address       *string `url:"address,omitempty"`
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	Hostname      *string `url:"hostname,omitempty"`
+	IPV4          *string `url:"ipv4,omitempty"`
+	MessageType   *string `url:"message_type,omitempty"`
+	// Name is the name of the syslog to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	Port              *uint   `url:"port,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the syslog to update.
-	Name string
-
-	NewName           *string      `url:"name,omitempty"`
-	Address           *string      `url:"address,omitempty"`
-	Hostname          *string      `url:"hostname,omitempty"`
-	Port              *uint        `url:"port,omitempty"`
-	UseTLS            *Compatibool `url:"use_tls,omitempty"`
-	IPV4              *string      `url:"ipv4,omitempty"`
-	TLSCACert         *string      `url:"tls_ca_cert,omitempty"`
-	TLSHostname       *string      `url:"tls_hostname,omitempty"`
-	TLSClientCert     *string      `url:"tls_client_cert,omitempty"`
-	TLSClientKey      *string      `url:"tls_client_key,omitempty"`
-	Token             *string      `url:"token,omitempty"`
-	Format            *string      `url:"format,omitempty"`
-	FormatVersion     *uint        `url:"format_version,omitempty"`
-	MessageType       *string      `url:"message_type,omitempty"`
-	ResponseCondition *string      `url:"response_condition,omitempty"`
-	Placement         *string      `url:"placement,omitempty"`
+	TLSCACert      *string      `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  *string      `url:"tls_client_cert,omitempty"`
+	TLSClientKey   *string      `url:"tls_client_key,omitempty"`
+	TLSHostname    *string      `url:"tls_hostname,omitempty"`
+	Token          *string      `url:"token,omitempty"`
+	UseTLS         *Compatibool `url:"use_tls,omitempty"`
 }
 
 // UpdateSyslog updates a specific syslog.
@@ -226,14 +217,12 @@ func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
 
 // DeleteSyslogInput is the input parameter to DeleteSyslog.
 type DeleteSyslogInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the syslog to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteSyslog deletes the given syslog version.

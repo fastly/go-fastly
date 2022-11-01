@@ -26,8 +26,8 @@ const (
 )
 
 type statusResp struct {
-	Status string
 	Msg    string
+	Status string
 }
 
 func (t *statusResp) Ok() bool {

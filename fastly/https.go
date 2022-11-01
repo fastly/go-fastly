@@ -9,30 +9,29 @@ import (
 
 // HTTPS represents an HTTPS Logging response from the Fastly API.
 type HTTPS struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	Format            string     `mapstructure:"format"`
-	URL               string     `mapstructure:"url"`
-	RequestMaxEntries uint       `mapstructure:"request_max_entries"`
-	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
 	ContentType       string     `mapstructure:"content_type"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Format            string     `mapstructure:"format"`
+	FormatVersion     uint       `mapstructure:"format_version"`
 	HeaderName        string     `mapstructure:"header_name"`
 	HeaderValue       string     `mapstructure:"header_value"`
-	Method            string     `mapstructure:"method"`
 	JSONFormat        string     `mapstructure:"json_format"`
+	MessageType       string     `mapstructure:"message_type"`
+	Method            string     `mapstructure:"method"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
+	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
+	RequestMaxEntries uint       `mapstructure:"request_max_entries"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
 	TLSCACert         string     `mapstructure:"tls_ca_cert"`
 	TLSClientCert     string     `mapstructure:"tls_client_cert"`
 	TLSClientKey      string     `mapstructure:"tls_client_key"`
 	TLSHostname       string     `mapstructure:"tls_hostname"`
-	MessageType       string     `mapstructure:"message_type"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	URL               string     `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // httpsByName is a sortable list of HTTPS logs.
@@ -49,7 +48,6 @@ func (s httpsByName) Less(i, j int) bool {
 type ListHTTPSInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -81,30 +79,28 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 
 // CreateHTTPSInput is used as input to the CreateHTTPS function.
 type CreateHTTPSInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	Format            string `url:"format,omitempty"`
-	URL               string `url:"url,omitempty"`
-	RequestMaxEntries uint   `url:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint   `url:"request_max_bytes,omitempty"`
 	ContentType       string `url:"content_type,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
 	HeaderName        string `url:"header_name,omitempty"`
 	HeaderValue       string `url:"header_value,omitempty"`
-	Method            string `url:"method,omitempty"`
 	JSONFormat        string `url:"json_format,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	TLSCACert         string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert     string `url:"tls_client_cert,omitempty"`
-	TLSClientKey      string `url:"tls_client_key,omitempty"`
-	TLSHostname       string `url:"tls_hostname,omitempty"`
 	MessageType       string `url:"message_type,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
+	Method            string `url:"method,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	RequestMaxBytes   uint   `url:"request_max_bytes,omitempty"`
+	RequestMaxEntries uint   `url:"request_max_entries,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	TLSCACert      string `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  string `url:"tls_client_cert,omitempty"`
+	TLSClientKey   string `url:"tls_client_key,omitempty"`
+	TLSHostname    string `url:"tls_hostname,omitempty"`
+	URL            string `url:"url,omitempty"`
 }
 
 // CreateHTTPS creates a new Fastly HTTPS logging endpoint.
@@ -133,14 +129,12 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 
 // GetHTTPSInput is used as input to the GetHTTPS function.
 type GetHTTPSInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the HTTPS endpoint to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
@@ -172,33 +166,30 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 }
 
 type UpdateHTTPSInput struct {
+	ContentType   *string `url:"content_type,omitempty"`
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	HeaderName    *string `url:"header_name,omitempty"`
+	HeaderValue   *string `url:"header_value,omitempty"`
+	JSONFormat    *string `url:"json_format,omitempty"`
+	MessageType   *string `url:"message_type,omitempty"`
+	Method        *string `url:"method,omitempty"`
+	// Name is the name of the HTTPS endpoint to fetch.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	RequestMaxBytes   *uint   `url:"request_max_bytes,omitempty"`
+	RequestMaxEntries *uint   `url:"request_max_entries,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the HTTPS endpoint to fetch.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	URL               *string `url:"url,omitempty"`
-	RequestMaxEntries *uint   `url:"request_max_entries,omitempty"`
-	RequestMaxBytes   *uint   `url:"request_max_bytes,omitempty"`
-	ContentType       *string `url:"content_type,omitempty"`
-	HeaderName        *string `url:"header_name,omitempty"`
-	HeaderValue       *string `url:"header_value,omitempty"`
-	Method            *string `url:"method,omitempty"`
-	JSONFormat        *string `url:"json_format,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	TLSCACert         *string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert     *string `url:"tls_client_cert,omitempty"`
-	TLSClientKey      *string `url:"tls_client_key,omitempty"`
-	TLSHostname       *string `url:"tls_hostname,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
+	TLSCACert      *string `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  *string `url:"tls_client_cert,omitempty"`
+	TLSClientKey   *string `url:"tls_client_key,omitempty"`
+	TLSHostname    *string `url:"tls_hostname,omitempty"`
+	URL            *string `url:"url,omitempty"`
 }
 
 func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
@@ -229,14 +220,12 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 }
 
 type DeleteHTTPSInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the HTTPS endpoint to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {

@@ -9,28 +9,27 @@ import (
 
 // BlobStorage represents a blob storage response from the Fastly API.
 type BlobStorage struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	Path              string     `mapstructure:"path"`
 	AccountName       string     `mapstructure:"account_name"`
-	Container         string     `mapstructure:"container"`
-	SASToken          string     `mapstructure:"sas_token"`
-	Period            uint       `mapstructure:"period"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	CompressionCodec  string     `mapstructure:"compression_codec"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
-	PublicKey         string     `mapstructure:"public_key"`
+	Container         string     `mapstructure:"container"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	FileMaxBytes      uint       `mapstructure:"file_max_bytes"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	MessageType       string     `mapstructure:"message_type"`
+	Name              string     `mapstructure:"name"`
+	Path              string     `mapstructure:"path"`
+	Period            uint       `mapstructure:"period"`
 	Placement         string     `mapstructure:"placement"`
+	PublicKey         string     `mapstructure:"public_key"`
 	ResponseCondition string     `mapstructure:"response_condition"`
-	FileMaxBytes      uint       `mapstructure:"file_max_bytes"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	SASToken          string     `mapstructure:"sas_token"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // blobStorageByName is a sortable list of blob storages.
@@ -47,7 +46,6 @@ func (s blobStorageByName) Less(i, j int) bool {
 type ListBlobStoragesInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -79,28 +77,26 @@ func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, err
 
 // CreateBlobStorageInput is used as input to the CreateBlobStorage function.
 type CreateBlobStorageInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	Path              string `url:"path,omitempty"`
 	AccountName       string `url:"account_name,omitempty"`
-	Container         string `url:"container,omitempty"`
-	SASToken          string `url:"sas_token,omitempty"`
-	Period            uint   `url:"period,omitempty"`
-	TimestampFormat   string `url:"timestamp_format,omitempty"`
 	CompressionCodec  string `url:"compression_codec,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	PublicKey         string `url:"public_key,omitempty"`
+	Container         string `url:"container,omitempty"`
+	FileMaxBytes      uint   `url:"file_max_bytes,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
 	MessageType       string `url:"message_type,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Path              string `url:"path,omitempty"`
+	Period            uint   `url:"period,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
 	ResponseCondition string `url:"response_condition,omitempty"`
-	FileMaxBytes      uint   `url:"file_max_bytes,omitempty"`
+	SASToken          string `url:"sas_token,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
 // CreateBlobStorage creates a new Fastly blob storage.
@@ -129,14 +125,12 @@ func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, err
 
 // GetBlobStorageInput is used as input to the GetBlobStorage function.
 type GetBlobStorageInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the blob storage to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetBlobStorage gets the blob storage configuration with the given parameters.
@@ -169,31 +163,28 @@ func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 
 // UpdateBlobStorageInput is used as input to the UpdateBlobStorage function.
 type UpdateBlobStorageInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
+	AccountName      *string `url:"account_name,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	Container        *string `url:"container,omitempty"`
+	FileMaxBytes     *uint   `url:"file_max_bytes,omitempty"`
+	Format           *string `url:"format,omitempty"`
+	FormatVersion    *uint   `url:"format_version,omitempty"`
+	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
+	MessageType      *string `url:"message_type,omitempty"`
 	// Name is the name of the blob storage to update.
-	Name string
-
+	Name              string
 	NewName           *string `url:"name,omitempty"`
 	Path              *string `url:"path,omitempty"`
-	AccountName       *string `url:"account_name,omitempty"`
-	Container         *string `url:"container,omitempty"`
-	SASToken          *string `url:"sas_token,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
-	TimestampFormat   *string `url:"timestamp_format,omitempty"`
-	CompressionCodec  *string `url:"compression_codec,omitempty"`
-	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
 	Placement         *string `url:"placement,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
 	ResponseCondition *string `url:"response_condition,omitempty"`
-	FileMaxBytes      *uint   `url:"file_max_bytes,omitempty"`
+	SASToken          *string `url:"sas_token,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // UpdateBlobStorage updates a specific blob storage.
@@ -226,14 +217,12 @@ func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, err
 
 // DeleteBlobStorageInput is the input parameter to DeleteBlobStorage.
 type DeleteBlobStorageInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the blob storage to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteBlobStorage deletes the given blob storage version.

@@ -26,16 +26,16 @@ type OriginData struct {
 // to the Origin Inspector endpoints.
 type OriginMetrics struct {
 	Latency0to1ms         uint64 `mapstructure:"latency_0_to_1ms"`
-	Latency1to5ms         uint64 `mapstructure:"latency_1_to_5ms"`
-	Latency5to10ms        uint64 `mapstructure:"latency_5_to_10ms"`
-	Latency10to50ms       uint64 `mapstructure:"latency_10_to_50ms"`
-	Latency50to100ms      uint64 `mapstructure:"latency_50_to_100ms"`
-	Latency100to250ms     uint64 `mapstructure:"latency_100_to_250ms"`
-	Latency250to500ms     uint64 `mapstructure:"latency_250_to_500ms"`
-	Latency500to1000ms    uint64 `mapstructure:"latency_500_to_1000ms"`
-	Latency1000to5000ms   uint64 `mapstructure:"latency_1000_to_5000ms"`
-	Latency5000to10000ms  uint64 `mapstructure:"latency_5000_to_10000ms"`
 	Latency10000to60000ms uint64 `mapstructure:"latency_10000_to_60000ms"`
+	Latency1000to5000ms   uint64 `mapstructure:"latency_1000_to_5000ms"`
+	Latency100to250ms     uint64 `mapstructure:"latency_100_to_250ms"`
+	Latency10to50ms       uint64 `mapstructure:"latency_10_to_50ms"`
+	Latency1to5ms         uint64 `mapstructure:"latency_1_to_5ms"`
+	Latency250to500ms     uint64 `mapstructure:"latency_250_to_500ms"`
+	Latency5000to10000ms  uint64 `mapstructure:"latency_5000_to_10000ms"`
+	Latency500to1000ms    uint64 `mapstructure:"latency_500_to_1000ms"`
+	Latency50to100ms      uint64 `mapstructure:"latency_50_to_100ms"`
+	Latency5to10ms        uint64 `mapstructure:"latency_5_to_10ms"`
 	Latency60000ms        uint64 `mapstructure:"latency_60000ms"`
 	RespBodyBytes         uint64 `mapstructure:"resp_body_bytes"`
 	RespHeaderBytes       uint64 `mapstructure:"resp_header_bytes"`
@@ -68,29 +68,29 @@ type OriginMetrics struct {
 
 // OriginMeta is the meta section returned for /metrics/origins responses
 type OriginMeta struct {
-	Start      string            `mapstructure:"start"`
-	End        string            `mapstructure:"end"`
 	Downsample string            `mapstructure:"downsample"`
-	Metric     string            `mapstructure:"metric"`
+	End        string            `mapstructure:"end"`
+	Filters    map[string]string `mapstructure:"filters"`
+	GroupBy    string            `mapstructure:"group_by"`
 	Limit      int               `mapstructure:"limit"`
+	Metric     string            `mapstructure:"metric"`
 	NextCursor string            `mapstructure:"next_cursor"`
 	Sort       string            `mapstructure:"sort"`
-	GroupBy    string            `mapstructure:"group_by"`
-	Filters    map[string]string `mapstructure:"filters"`
+	Start      string            `mapstructure:"start"`
 }
 
 // GetOriginMetricsInput is the input to an OriginMetrics request.
 type GetOriginMetricsInput struct {
+	Cursor      string
+	Datacenters []string
+	Downsample  string
+	End         time.Time
+	GroupBy     []string
+	Hosts       []string
+	Metrics     []string
+	Regions     []string
 	ServiceID   string
 	Start       time.Time
-	End         time.Time
-	Metrics     []string
-	GroupBy     []string
-	Downsample  string
-	Hosts       []string
-	Datacenters []string
-	Regions     []string
-	Cursor      string
 }
 
 // GetOriginMetricsForService returns stats data based on GetOriginMetricsInput

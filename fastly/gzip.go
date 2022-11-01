@@ -9,16 +9,15 @@ import (
 
 // Gzip represents an Gzip logging response from the Fastly API.
 type Gzip struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name           string     `mapstructure:"name"`
-	ContentTypes   string     `mapstructure:"content_types"`
-	Extensions     string     `mapstructure:"extensions"`
 	CacheCondition string     `mapstructure:"cache_condition"`
+	ContentTypes   string     `mapstructure:"content_types"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
-	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	Extensions     string     `mapstructure:"extensions"`
+	Name           string     `mapstructure:"name"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // gzipsByName is a sortable list of gzips.
@@ -35,7 +34,6 @@ func (s gzipsByName) Less(i, j int) bool {
 type ListGzipsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -67,16 +65,14 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 
 // CreateGzipInput is used as input to the CreateGzip function.
 type CreateGzipInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name           string `url:"name,omitempty"`
+	CacheCondition string `url:"cache_condition,omitempty"`
 	ContentTypes   string `url:"content_types,omitempty"`
 	Extensions     string `url:"extensions,omitempty"`
-	CacheCondition string `url:"cache_condition,omitempty"`
+	Name           string `url:"name,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // CreateGzip creates a new Fastly Gzip.
@@ -105,14 +101,12 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 
 // GetGzipInput is used as input to the GetGzip function.
 type GetGzipInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Gzip to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetGzip gets the Gzip configuration with the given parameters.
@@ -145,19 +139,16 @@ func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 
 // UpdateGzipInput is used as input to the UpdateGzip function.
 type UpdateGzipInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the Gzip to update.
-	Name string
-
-	NewName        *string `url:"name,omitempty"`
+	CacheCondition *string `url:"cache_condition,omitempty"`
 	ContentTypes   *string `url:"content_types,omitempty"`
 	Extensions     *string `url:"extensions,omitempty"`
-	CacheCondition *string `url:"cache_condition,omitempty"`
+	// Name is the name of the Gzip to update.
+	Name    string
+	NewName *string `url:"name,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // UpdateGzip updates a specific Gzip.
@@ -190,14 +181,12 @@ func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 
 // DeleteGzipInput is the input parameter to DeleteGzip.
 type DeleteGzipInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Gzip to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteGzip deletes the given Gzip version.

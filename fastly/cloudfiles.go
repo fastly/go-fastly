@@ -9,28 +9,27 @@ import (
 
 // Cloudfiles represents a Cloudfiles response from the Fastly API.
 type Cloudfiles struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	User              string     `mapstructure:"user"`
 	AccessKey         string     `mapstructure:"access_key"`
 	BucketName        string     `mapstructure:"bucket_name"`
-	Path              string     `mapstructure:"path"`
-	Region            string     `mapstructure:"region"`
-	Placement         string     `mapstructure:"placement"`
-	Period            uint       `mapstructure:"period"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	MessageType       string     `mapstructure:"message_type"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
-	PublicKey         string     `mapstructure:"public_key"`
 	CompressionCodec  string     `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
-	UpdatedAt         *time.Time `mapstructure:"updated_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Format            string     `mapstructure:"format"`
+	FormatVersion     uint       `mapstructure:"format_version"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	MessageType       string     `mapstructure:"message_type"`
+	Name              string     `mapstructure:"name"`
+	Path              string     `mapstructure:"path"`
+	Period            uint       `mapstructure:"period"`
+	Placement         string     `mapstructure:"placement"`
+	PublicKey         string     `mapstructure:"public_key"`
+	Region            string     `mapstructure:"region"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	UpdatedAt         *time.Time `mapstructure:"updated_at"`
+	User              string     `mapstructure:"user"`
 }
 
 // cloudfilesByName is a sortable list of Cloudfiles.
@@ -47,7 +46,6 @@ func (c cloudfilesByName) Less(i, j int) bool {
 type ListCloudfilesInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -79,28 +77,26 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 
 // CreateCloudfilesInput is used as input to the CreateCloudfiles function.
 type CreateCloudfilesInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	User              string `url:"user,omitempty"`
 	AccessKey         string `url:"access_key,omitempty"`
 	BucketName        string `url:"bucket_name,omitempty"`
-	Path              string `url:"path,omitempty"`
-	Region            string `url:"region,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Period            uint   `url:"period,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
 	MessageType       string `url:"message_type,omitempty"`
-	TimestampFormat   string `url:"timestamp_format,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Path              string `url:"path,omitempty"`
+	Period            uint   `url:"period,omitempty"`
+	Placement         string `url:"placement,omitempty"`
 	PublicKey         string `url:"public_key,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
+	Region            string `url:"region,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat string `url:"timestamp_format,omitempty"`
+	User            string `url:"user,omitempty"`
 }
 
 // CreateCloudfiles creates a new Fastly Cloudfiles.
@@ -129,14 +125,12 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 
 // GetCloudfilesInput is used as input to the GetCloudfiles function.
 type GetCloudfilesInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Cloudfiles to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetCloudfiles gets the Cloudfiles configuration with the given parameters.
@@ -169,31 +163,28 @@ func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 
 // UpdateCloudfilesInput is used as input to the UpdateCloudfiles function.
 type UpdateCloudfilesInput struct {
+	AccessKey        *string `url:"access_key,omitempty"`
+	BucketName       *string `url:"bucket_name,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	Format           *string `url:"format,omitempty"`
+	FormatVersion    *uint   `url:"format_version,omitempty"`
+	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
+	MessageType      *string `url:"message_type,omitempty"`
+	// Name is the name of the Cloudfiles to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Path              *string `url:"path,omitempty"`
+	Period            *uint   `url:"period,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
+	Region            *string `url:"region,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	// Name is the name of the Cloudfiles to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	User              *string `url:"user,omitempty"`
-	AccessKey         *string `url:"access_key,omitempty"`
-	BucketName        *string `url:"bucket_name,omitempty"`
-	Path              *string `url:"path,omitempty"`
-	Region            *string `url:"region,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Period            *uint   `url:"period,omitempty"`
-	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
-	TimestampFormat   *string `url:"timestamp_format,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
-	CompressionCodec  *string `url:"compression_codec,omitempty"`
+	ServiceVersion  int
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	User            *string `url:"user,omitempty"`
 }
 
 // UpdateCloudfiles updates a specific Cloudfiles.
@@ -226,14 +217,12 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 
 // DeleteCloudfilesInput is the input parameter to DeleteCloudfiles.
 type DeleteCloudfilesInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Cloudfiles to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteCloudfiles deletes the given Cloudfiles version.

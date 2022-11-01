@@ -8,14 +8,13 @@ import (
 )
 
 type ACL struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name      string     `mapstructure:"name"`
-	ID        string     `mapstructure:"id"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	ID             string     `mapstructure:"id"`
+	Name           string     `mapstructure:"name"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // ACLsByName is a sortable list of ACLs.
@@ -32,7 +31,6 @@ func (s ACLsByName) Less(i, j int) bool {
 type ListACLsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -64,14 +62,12 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 
 // CreateACLInput is used as input to the CreateACL function.
 type CreateACLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the ACL to create (required)
 	Name string `url:"name"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
@@ -99,14 +95,12 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 
 // DeleteACLInput is the input parameter to DeleteACL function.
 type DeleteACLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the ACL to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteACL deletes the given ACL version.
@@ -142,14 +136,12 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 
 // GetACLInput is the input parameter to GetACL function.
 type GetACLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the ACL to get (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetACL gets the ACL configuration with the given parameters.
@@ -182,17 +174,14 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 
 // UpdateACLInput is the input parameter to UpdateACL function.
 type UpdateACLInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the ACL to update (required).
 	Name string
-
 	// NewName is the new name of the ACL to update (required).
 	NewName string `url:"name"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // UpdateACL updates the name of the ACL with the given parameters.

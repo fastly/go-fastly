@@ -12,40 +12,40 @@ import (
 
 // Service represents a single service for the Fastly account.
 type Service struct {
+	ActiveVersion uint       `mapstructure:"version"`
+	Comment       string     `mapstructure:"comment"`
+	CreatedAt     *time.Time `mapstructure:"created_at"`
+	CustomerID    string     `mapstructure:"customer_id"`
+	DeletedAt     *time.Time `mapstructure:"deleted_at"`
 	ID            string     `mapstructure:"id"`
 	Name          string     `mapstructure:"name"`
 	Type          string     `mapstructure:"type"`
-	Comment       string     `mapstructure:"comment"`
-	CustomerID    string     `mapstructure:"customer_id"`
-	CreatedAt     *time.Time `mapstructure:"created_at"`
 	UpdatedAt     *time.Time `mapstructure:"updated_at"`
-	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ActiveVersion uint       `mapstructure:"version"`
 	Versions      []*Version `mapstructure:"versions"`
 }
 
 type ServiceDetail struct {
+	ActiveVersion Version    `mapstructure:"active_version"`
+	Comment       string     `mapstructure:"comment"`
+	CreatedAt     *time.Time `mapstructure:"created_at"`
+	CustomerID    string     `mapstructure:"customer_id"`
+	DeletedAt     *time.Time `mapstructure:"deleted_at"`
 	ID            string     `mapstructure:"id"`
 	Name          string     `mapstructure:"name"`
 	Type          string     `mapstructure:"type"`
-	Comment       string     `mapstructure:"comment"`
-	CustomerID    string     `mapstructure:"customer_id"`
-	ActiveVersion Version    `mapstructure:"active_version"`
+	UpdatedAt     *time.Time `mapstructure:"updated_at"`
 	Version       Version    `mapstructure:"version"`
 	Versions      []*Version `mapstructure:"versions"`
-	CreatedAt     *time.Time `mapstructure:"created_at"`
-	UpdatedAt     *time.Time `mapstructure:"updated_at"`
-	DeletedAt     *time.Time `mapstructure:"deleted_at"`
 }
 
 type ServiceDomain struct {
+	Comment        string     `mapstructure:"comment"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
 	Locked         bool       `mapstructure:"locked"`
 	Name           string     `mapstructure:"name"`
-	DeletedAt      *time.Time `mapstructure:"deleted_at"`
 	ServiceID      string     `mapstructure:"service_id"`
 	ServiceVersion int64      `mapstructure:"version"`
-	CreatedAt      *time.Time `mapstructure:"created_at"`
-	Comment        string     `mapstructure:"comment"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 type ServiceDomainsList []*ServiceDomain
@@ -63,8 +63,8 @@ func (s servicesByName) Less(i, j int) bool {
 // ListServicesInput is used as input to the ListServices function.
 type ListServicesInput struct {
 	Direction string
-	PerPage   int
 	Page      int
+	PerPage   int
 	Sort      string
 }
 
@@ -85,12 +85,14 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 }
 
 type ListServicesPaginator struct {
-	consumed    bool
 	CurrentPage int
-	NextPage    int
 	LastPage    int
-	client      *Client
-	options     *ListServicesInput
+	NextPage    int
+
+	// Private
+	client   *Client
+	consumed bool
+	options  *ListServicesInput
 }
 
 // HasNext returns a boolean indicating whether more pages are available
@@ -190,9 +192,9 @@ func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPagin
 
 // CreateServiceInput is used as input to the CreateService function.
 type CreateServiceInput struct {
+	Comment string `url:"comment,omitempty"`
 	Name    string `url:"name,omitempty"`
 	Type    string `url:"type,omitempty"`
-	Comment string `url:"comment,omitempty"`
 }
 
 // CreateService creates a new service with the given information.
@@ -274,10 +276,9 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 
 // UpdateServiceInput is used as input to the UpdateService function.
 type UpdateServiceInput struct {
+	Comment   *string `url:"comment,omitempty"`
+	Name      *string `url:"name,omitempty"`
 	ServiceID string
-
-	Name    *string `url:"name,omitempty"`
-	Comment *string `url:"comment,omitempty"`
 }
 
 // UpdateService updates the service with the given input.

@@ -9,19 +9,18 @@ import (
 
 // Logshuttle represents a logshuttle response from the Fastly API.
 type Logshuttle struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	URL               string     `mapstructure:"url"`
-	Token             string     `mapstructure:"token"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	Token             string     `mapstructure:"token"`
+	URL               string     `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // logshuttlesByName is a sortable list of logshuttles.
@@ -38,7 +37,6 @@ func (l logshuttlesByName) Less(i, j int) bool {
 type ListLogshuttlesInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -70,19 +68,17 @@ func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error)
 
 // CreateLogshuttleInput is used as input to the CreateLogshuttle function.
 type CreateLogshuttleInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
-	URL               string `url:"url,omitempty"`
-	Token             string `url:"token,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Token          string `url:"token,omitempty"`
+	URL            string `url:"url,omitempty"`
 }
 
 // CreateLogshuttle creates a new Fastly logshuttle.
@@ -111,14 +107,12 @@ func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error)
 
 // GetLogshuttleInput is used as input to the GetLogshuttle function.
 type GetLogshuttleInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the logshuttle to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetLogshuttle gets the logshuttle configuration with the given parameters.
@@ -151,22 +145,19 @@ func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 
 // UpdateLogshuttleInput is used as input to the UpdateLogshuttle function.
 type UpdateLogshuttleInput struct {
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the logshuttle to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the logshuttle to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	URL               *string `url:"url,omitempty"`
-	Token             *string `url:"token,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Token          *string `url:"token,omitempty"`
+	URL            *string `url:"url,omitempty"`
 }
 
 // UpdateLogshuttle updates a specific logshuttle.
@@ -199,14 +190,12 @@ func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error)
 
 // DeleteLogshuttleInput is the input parameter to DeleteLogshuttle.
 type DeleteLogshuttleInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the logshuttle to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteLogshuttle deletes the given logshuttle version.

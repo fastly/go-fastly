@@ -7,25 +7,25 @@ import (
 
 // RealtimeStatsResponse is a response from Fastly's real-time analytics endpoint
 type RealtimeStatsResponse struct {
-	Timestamp      uint64          `mapstructure:"Timestamp"`
+	AggregateDelay uint32          `mapstructure:"AggregateDelay"`
 	Data           []*RealtimeData `mapstructure:"Data"`
 	Error          string          `mapstructure:"Error"`
-	AggregateDelay uint32          `mapstructure:"AggregateDelay"`
+	Timestamp      uint64          `mapstructure:"Timestamp"`
 }
 
 // RealtimeData represents combined stats for all Fastly's POPs and aggregate of them.
 // It also includes a timestamp of when the stats were recorded
 type RealtimeData struct {
-	Datacenter map[string]*Stats `mapstructure:"datacenter"`
 	Aggregated *Stats            `mapstructure:"aggregated"`
+	Datacenter map[string]*Stats `mapstructure:"datacenter"`
 	Recorded   uint64            `mapstructure:"recorded"`
 }
 
 // GetRealtimeStatsInput is an input parameter to GetRealtimeStats function
 type GetRealtimeStatsInput struct {
+	Limit     uint32
 	ServiceID string
 	Timestamp uint64
-	Limit     uint32
 }
 
 // GetRealtimeStats returns realtime stats for a service based on the GetRealtimeStatsInput

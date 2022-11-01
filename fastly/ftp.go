@@ -9,28 +9,27 @@ import (
 
 // FTP represents an FTP logging response from the Fastly API.
 type FTP struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
 	Address           string     `mapstructure:"address"`
-	Port              uint       `mapstructure:"port"`
-	Username          string     `mapstructure:"user"`
-	Password          string     `mapstructure:"password"`
-	PublicKey         string     `mapstructure:"public_key"`
-	Path              string     `mapstructure:"path"`
-	Period            uint       `mapstructure:"period"`
 	CompressionCodec  string     `mapstructure:"compression_codec"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	GzipLevel         uint8      `mapstructure:"gzip_level"`
 	MessageType       string     `mapstructure:"message_type"`
+	Name              string     `mapstructure:"name"`
+	Password          string     `mapstructure:"password"`
+	Path              string     `mapstructure:"path"`
+	Period            uint       `mapstructure:"period"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	Port              uint       `mapstructure:"port"`
+	PublicKey         string     `mapstructure:"public_key"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	TimestampFormat   string     `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	Username          string     `mapstructure:"user"`
 }
 
 // ftpsByName is a sortable list of ftps.
@@ -47,7 +46,6 @@ func (s ftpsByName) Less(i, j int) bool {
 type ListFTPsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -79,28 +77,26 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 
 // CreateFTPInput is used as input to the CreateFTP function.
 type CreateFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
 	Address           string `url:"address,omitempty"`
-	Port              uint   `url:"port,omitempty"`
-	Username          string `url:"user,omitempty"`
+	CompressionCodec  string `url:"compression_codec,omitempty"`
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	GzipLevel         uint8  `url:"gzip_level,omitempty"`
+	MessageType       string `url:"message_type,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Password          string `url:"password,omitempty"`
-	PublicKey         string `url:"public_key,omitempty"`
 	Path              string `url:"path,omitempty"`
 	Period            uint   `url:"period,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	Format            string `url:"format,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	TimestampFormat   string `url:"timestamp_format,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	Port              uint   `url:"port,omitempty"`
+	PublicKey         string `url:"public_key,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat string `url:"timestamp_format,omitempty"`
+	Username        string `url:"user,omitempty"`
 }
 
 // CreateFTP creates a new Fastly FTP.
@@ -129,14 +125,12 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 
 // GetFTPInput is used as input to the GetFTP function.
 type GetFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the FTP to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetFTP gets the FTP configuration with the given parameters.
@@ -169,31 +163,28 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 
 // UpdateFTPInput is used as input to the UpdateFTP function.
 type UpdateFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
+	Address          *string `url:"address,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	Format           *string `url:"format,omitempty"`
+	FormatVersion    *uint   `url:"format_version,omitempty"`
+	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
+	MessageType      *string `url:"message_type,omitempty"`
 	// Name is the name of the FTP to update.
-	Name string
-
+	Name              string
 	NewName           *string `url:"name,omitempty"`
-	Address           *string `url:"address,omitempty"`
-	Port              *uint   `url:"port,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
-	Username          *string `url:"user,omitempty"`
 	Password          *string `url:"password,omitempty"`
 	Path              *string `url:"path,omitempty"`
 	Period            *uint   `url:"period,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	CompressionCodec  *string `url:"compression_codec,omitempty"`
-	GzipLevel         *uint8  `url:"gzip_level,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	MessageType       *string `url:"message_type,omitempty"`
-	TimestampFormat   *string `url:"timestamp_format,omitempty"`
 	Placement         *string `url:"placement,omitempty"`
+	Port              *uint   `url:"port,omitempty"`
+	PublicKey         *string `url:"public_key,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion  int
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
+	Username        *string `url:"user,omitempty"`
 }
 
 // UpdateFTP updates a specific FTP.
@@ -226,14 +217,12 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 
 // DeleteFTPInput is the input parameter to DeleteFTP.
 type DeleteFTPInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the FTP to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteFTP deletes the given FTP version.

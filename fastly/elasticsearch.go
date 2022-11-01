@@ -9,28 +9,27 @@ import (
 
 // Elasticsearch represents an Elasticsearch Logging response from the Fastly API.
 type Elasticsearch struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
+	FormatVersion     uint       `mapstructure:"format_version"`
 	Index             string     `mapstructure:"index"`
-	URL               string     `mapstructure:"url"`
-	Pipeline          string     `mapstructure:"pipeline"`
-	User              string     `mapstructure:"user"`
+	Name              string     `mapstructure:"name"`
 	Password          string     `mapstructure:"password"`
-	RequestMaxEntries uint       `mapstructure:"request_max_entries"`
-	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
+	Pipeline          string     `mapstructure:"pipeline"`
 	Placement         string     `mapstructure:"placement"`
+	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
+	RequestMaxEntries uint       `mapstructure:"request_max_entries"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
 	TLSCACert         string     `mapstructure:"tls_ca_cert"`
 	TLSClientCert     string     `mapstructure:"tls_client_cert"`
 	TLSClientKey      string     `mapstructure:"tls_client_key"`
 	TLSHostname       string     `mapstructure:"tls_hostname"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	URL               string     `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
+	User              string     `mapstructure:"user"`
 }
 
 // elasticsearchByName is a sortable list of Elasticsearch logs.
@@ -47,7 +46,6 @@ func (s elasticsearchByName) Less(i, j int) bool {
 type ListElasticsearchInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -79,28 +77,26 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 
 // CreateElasticsearchInput is used as input to the CreateElasticsearch function.
 type CreateElasticsearchInput struct {
+	Format            string `url:"format,omitempty"`
+	FormatVersion     uint   `url:"format_version,omitempty"`
+	Index             string `url:"index,omitempty"`
+	Name              string `url:"name,omitempty"`
+	Password          string `url:"password,omitempty"`
+	Pipeline          string `url:"pipeline,omitempty"`
+	Placement         string `url:"placement,omitempty"`
+	RequestMaxBytes   uint   `url:"request_max_bytes,omitempty"`
+	RequestMaxEntries uint   `url:"request_max_entries,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
-	Format            string `url:"format,omitempty"`
-	Index             string `url:"index,omitempty"`
-	URL               string `url:"url,omitempty"`
-	Pipeline          string `url:"pipeline,omitempty"`
-	User              string `url:"user,omitempty"`
-	Password          string `url:"password,omitempty"`
-	RequestMaxEntries uint   `url:"request_max_entries,omitempty"`
-	RequestMaxBytes   uint   `url:"request_max_bytes,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	TLSCACert         string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert     string `url:"tls_client_cert,omitempty"`
-	TLSClientKey      string `url:"tls_client_key,omitempty"`
-	TLSHostname       string `url:"tls_hostname,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
+	TLSCACert      string `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  string `url:"tls_client_cert,omitempty"`
+	TLSClientKey   string `url:"tls_client_key,omitempty"`
+	TLSHostname    string `url:"tls_hostname,omitempty"`
+	URL            string `url:"url,omitempty"`
+	User           string `url:"user,omitempty"`
 }
 
 // CreateElasticsearch creates a new Fastly Elasticsearch logging endpoint.
@@ -129,14 +125,12 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 
 // GetElasticsearchInput is used as input to the GetElasticsearch function.
 type GetElasticsearchInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Elasticsearch endpoint to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, error) {
@@ -168,31 +162,28 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 }
 
 type UpdateElasticsearchInput struct {
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	Index         *string `url:"index,omitempty"`
+	// Name is the name of the Elasticsearch endpoint to fetch.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Password          *string `url:"password,omitempty"`
+	Pipeline          *string `url:"pipeline,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	RequestMaxBytes   *uint   `url:"request_max_bytes,omitempty"`
+	RequestMaxEntries *uint   `url:"request_max_entries,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the Elasticsearch endpoint to fetch.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	Index             *string `url:"index,omitempty"`
-	URL               *string `url:"url,omitempty"`
-	Pipeline          *string `url:"pipeline,omitempty"`
-	User              *string `url:"user,omitempty"`
-	Password          *string `url:"password,omitempty"`
-	RequestMaxEntries *uint   `url:"request_max_entries,omitempty"`
-	RequestMaxBytes   *uint   `url:"request_max_bytes,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	TLSCACert         *string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert     *string `url:"tls_client_cert,omitempty"`
-	TLSClientKey      *string `url:"tls_client_key,omitempty"`
-	TLSHostname       *string `url:"tls_hostname,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
+	TLSCACert      *string `url:"tls_ca_cert,omitempty"`
+	TLSClientCert  *string `url:"tls_client_cert,omitempty"`
+	TLSClientKey   *string `url:"tls_client_key,omitempty"`
+	TLSHostname    *string `url:"tls_hostname,omitempty"`
+	URL            *string `url:"url,omitempty"`
+	User           *string `url:"user,omitempty"`
 }
 
 func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearch, error) {
@@ -223,14 +214,12 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 }
 
 type DeleteElasticsearchInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the Elasticsearch endpoint to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {

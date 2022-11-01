@@ -11,6 +11,8 @@ import (
 
 // CustomTLSCertificate represents a custom certificate. Uses common TLSDomain type from BulkCertificate.
 type CustomTLSCertificate struct {
+	CreatedAt          *time.Time   `jsonapi:"attr,created_at,iso8601"`
+	Domains            []*TLSDomain `jsonapi:"relation,tls_domains"`
 	ID                 string       `jsonapi:"primary,tls_certificate"`
 	IssuedTo           string       `jsonapi:"attr,issued_to"`
 	Issuer             string       `jsonapi:"attr,issuer"`
@@ -20,8 +22,6 @@ type CustomTLSCertificate struct {
 	Replace            bool         `jsonapi:"attr,replace"`
 	SerialNumber       string       `jsonapi:"attr,serial_number"`
 	SignatureAlgorithm string       `jsonapi:"attr,signature_algorithm"`
-	Domains            []*TLSDomain `jsonapi:"relation,tls_domains"`
-	CreatedAt          *time.Time   `jsonapi:"attr,created_at,iso8601"`
 	UpdatedAt          *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
 
@@ -122,8 +122,8 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 
 // CreateCustomTLSCertificateInput is used as input to the CreateCustomTLSCertificate function.
 type CreateCustomTLSCertificateInput struct {
-	ID       string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	CertBlob string `jsonapi:"attr,cert_blob"`
+	ID       string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	Name     string `jsonapi:"attr,name,omitempty"`
 }
 

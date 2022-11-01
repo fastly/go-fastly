@@ -9,17 +9,16 @@ import (
 
 // Condition represents a condition response from the Fastly API.
 type Condition struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name      string     `mapstructure:"name"`
-	Comment   string     `mapstructure:"comment"`
-	Statement string     `mapstructure:"statement"`
-	Type      string     `mapstructure:"type"`
-	Priority  int        `mapstructure:"priority"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	Comment        string     `mapstructure:"comment"`
+	CreatedAt      *time.Time `mapstructure:"created_at"`
+	DeletedAt      *time.Time `mapstructure:"deleted_at"`
+	Name           string     `mapstructure:"name"`
+	Priority       int        `mapstructure:"priority"`
+	ServiceID      string     `mapstructure:"service_id"`
+	ServiceVersion int        `mapstructure:"version"`
+	Statement      string     `mapstructure:"statement"`
+	Type           string     `mapstructure:"type"`
+	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
 // conditionsByName is a sortable list of conditions.
@@ -36,7 +35,6 @@ func (s conditionsByName) Less(i, j int) bool {
 type ListConditionsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -68,16 +66,14 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 
 // CreateConditionInput is used as input to the CreateCondition function.
 type CreateConditionInput struct {
+	Name     string `url:"name,omitempty"`
+	Priority *int   `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	Name      string `url:"name,omitempty"`
-	Statement string `url:"statement,omitempty"`
-	Type      string `url:"type,omitempty"`
-	Priority  *int   `url:"priority,omitempty"`
+	Statement      string `url:"statement,omitempty"`
+	Type           string `url:"type,omitempty"`
 }
 
 // CreateCondition creates a new Fastly condition.
@@ -106,14 +102,12 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 
 // GetConditionInput is used as input to the GetCondition function.
 type GetConditionInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the condition to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetCondition gets the condition configuration with the given parameters.
@@ -146,19 +140,16 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 
 // UpdateConditionInput is used as input to the UpdateCondition function.
 type UpdateConditionInput struct {
+	Comment *string `url:"comment,omitempty"`
+	// Name is the name of the condition to update.
+	Name     string
+	Priority *int `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the condition to update.
-	Name string
-
-	Comment   *string `url:"comment,omitempty"`
-	Statement *string `url:"statement,omitempty"`
-	Type      *string `url:"type,omitempty"`
-	Priority  *int    `url:"priority,omitempty"`
+	Statement      *string `url:"statement,omitempty"`
+	Type           *string `url:"type,omitempty"`
 }
 
 // UpdateCondition updates a specific condition.
@@ -191,14 +182,12 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 
 // DeleteConditionInput is the input parameter to DeleteCondition.
 type DeleteConditionInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the condition to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteCondition deletes the given condition version.

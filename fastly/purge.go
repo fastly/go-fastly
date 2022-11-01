@@ -8,20 +8,18 @@ import (
 
 // Purge is a response from a purge request.
 type Purge struct {
-	// Status is the status of the purge, usually "ok".
-	Status string `mapstructure:"status"`
-
 	// ID is the unique ID of the purge request.
 	ID string `mapstructure:"id"`
+	// Status is the status of the purge, usually "ok".
+	Status string `mapstructure:"status"`
 }
 
 // PurgeInput is used as input to the Purge function.
 type PurgeInput struct {
-	// URL is the URL to purge (required).
-	URL string
-
 	// Soft performs a soft purge.
 	Soft bool
+	// URL is the URL to purge (required).
+	URL string
 }
 
 // Purge instantly purges an individual URL.
@@ -78,12 +76,10 @@ func constructRequestOptionsParam(us string) (map[string]string, error) {
 
 // PurgeKeyInput is used as input to the PurgeKey function.
 type PurgeKeyInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// Key is the key to purge (required).
 	Key string
-
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 	// Soft performs a soft purge.
 	Soft bool
 }
@@ -126,12 +122,10 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 // PurgeKeysInput is used as input to the PurgeKeys function.
 type PurgeKeysInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
 	// Keys are the keys to purge (required).
 	Keys []string
-
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 	// Soft performs a soft purge.
 	Soft bool
 }

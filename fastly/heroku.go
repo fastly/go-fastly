@@ -9,19 +9,18 @@ import (
 
 // Heroku represents a heroku response from the Fastly API.
 type Heroku struct {
-	ServiceID      string `mapstructure:"service_id"`
-	ServiceVersion int    `mapstructure:"version"`
-
-	Name              string     `mapstructure:"name"`
+	CreatedAt         *time.Time `mapstructure:"created_at"`
+	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
 	FormatVersion     uint       `mapstructure:"format_version"`
-	URL               string     `mapstructure:"url"`
-	Token             string     `mapstructure:"token"`
-	ResponseCondition string     `mapstructure:"response_condition"`
+	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	CreatedAt         *time.Time `mapstructure:"created_at"`
+	ResponseCondition string     `mapstructure:"response_condition"`
+	ServiceID         string     `mapstructure:"service_id"`
+	ServiceVersion    int        `mapstructure:"version"`
+	Token             string     `mapstructure:"token"`
+	URL               string     `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 }
 
 // herokusByName is a sortable list of herokus.
@@ -38,7 +37,6 @@ func (h herokusByName) Less(i, j int) bool {
 type ListHerokusInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -69,19 +67,17 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 
 // CreateHerokuInput is used as input to the CreateHeroku function.
 type CreateHerokuInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
-	Name              string `url:"name,omitempty"`
 	Format            string `url:"format,omitempty"`
 	FormatVersion     uint   `url:"format_version,omitempty"`
-	URL               string `url:"url,omitempty"`
-	Token             string `url:"token,omitempty"`
-	ResponseCondition string `url:"response_condition,omitempty"`
+	Name              string `url:"name,omitempty"`
 	Placement         string `url:"placement,omitempty"`
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
+	Token          string `url:"token,omitempty"`
+	URL            string `url:"url,omitempty"`
 }
 
 // CreateHeroku creates a new Fastly heroku.
@@ -110,14 +106,12 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 
 // GetHerokuInput is used as input to the GetHeroku function.
 type GetHerokuInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the heroku to fetch.
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // GetHeroku gets the heroku configuration with the given parameters.
@@ -150,22 +144,19 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 
 // UpdateHerokuInput is used as input to the UpdateHeroku function.
 type UpdateHerokuInput struct {
+	Format        *string `url:"format,omitempty"`
+	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Name is the name of the heroku to update.
+	Name              string
+	NewName           *string `url:"name,omitempty"`
+	Placement         *string `url:"placement,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
-	// Name is the name of the heroku to update.
-	Name string
-
-	NewName           *string `url:"name,omitempty"`
-	Format            *string `url:"format,omitempty"`
-	FormatVersion     *uint   `url:"format_version,omitempty"`
-	URL               *string `url:"url,omitempty"`
-	Token             *string `url:"token,omitempty"`
-	ResponseCondition *string `url:"response_condition,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Token          *string `url:"token,omitempty"`
+	URL            *string `url:"url,omitempty"`
 }
 
 // UpdateHeroku updates a specific heroku.
@@ -198,14 +189,12 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 
 // DeleteHerokuInput is the input parameter to DeleteHeroku.
 type DeleteHerokuInput struct {
-	// ServiceID is the ID of the service (required).
-	ServiceID string
-
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
-
 	// Name is the name of the heroku to delete (required).
 	Name string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int
 }
 
 // DeleteHeroku deletes the given heroku version.
