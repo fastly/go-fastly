@@ -58,7 +58,7 @@ type ListOpenstackInput struct {
 	ServiceVersion int
 }
 
-// ListOpenstack returns the list of Openstack for the configuration version.
+// ListOpenstack retrieves all resources.
 func (c *Client) ListOpenstack(i *ListOpenstackInput) ([]*Openstack, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

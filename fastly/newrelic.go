@@ -49,7 +49,7 @@ type ListNewRelicInput struct {
 	ServiceVersion int
 }
 
-// ListNewRelic returns the list of newrelic for the configuration version.
+// ListNewRelic retrieves all resources.
 func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

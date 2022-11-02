@@ -71,7 +71,7 @@ func (l *ListObjectStoresInput) formatFilters() map[string]string {
 	return m
 }
 
-// ListObjectStoresResponse is the return type for the ListObjectStores function.
+// ListObjectStoresResponse retrieves all resources.
 type ListObjectStoresResponse struct {
 	// Data is the list of returned object stores
 	Data []ObjectStore
@@ -79,7 +79,7 @@ type ListObjectStoresResponse struct {
 	Meta map[string]string
 }
 
-// ListObjectStores lists the object stores for the current customer.
+// ListObjectStores retrieves all resources.
 func (c *Client) ListObjectStores(i *ListObjectStoresInput) (*ListObjectStoresResponse, error) {
 	const path = "/resources/stores/object"
 
@@ -230,7 +230,7 @@ func (l *ListObjectStoreKeysInput) formatFilters() map[string]string {
 	return m
 }
 
-// ListObjectStoreKeysResponse is the response to the ListObjectStoreKeys function.
+// ListObjectStoreKeysResponse retrieves all resources.
 type ListObjectStoreKeysResponse struct {
 	// Data is the list of keys
 	Data []string
@@ -238,7 +238,7 @@ type ListObjectStoreKeysResponse struct {
 	Meta map[string]string
 }
 
-// ListObjectStoreKeys lists the keys for the given object store.
+// ListObjectStoreKeys retrieves all resources.
 func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) (*ListObjectStoreKeysResponse, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

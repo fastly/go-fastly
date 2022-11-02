@@ -44,7 +44,7 @@ type ListACLsInput struct {
 	ServiceVersion int
 }
 
-// ListACLs returns the list of ACLs for the configuration version.
+// ListACLs retrieves all resources.
 func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

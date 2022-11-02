@@ -47,7 +47,7 @@ type ListConditionsInput struct {
 	ServiceVersion int
 }
 
-// ListConditions returns the list of conditions for the configuration version.
+// ListConditions retrieves all resources.
 func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

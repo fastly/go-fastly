@@ -52,7 +52,7 @@ type ListKinesisInput struct {
 	ServiceVersion int
 }
 
-// ListKinesis returns the list of Kinesis for the configuration version.
+// ListKinesis retrieves all resources.
 func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

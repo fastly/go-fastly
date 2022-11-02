@@ -63,7 +63,7 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListCustomTLSConfigurations list all TLS configurations.
+// ListCustomTLSConfigurations retrieves all resources.
 func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
 	p := "/tls/configurations"
 	ro := &RequestOptions{

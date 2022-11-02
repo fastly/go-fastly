@@ -141,7 +141,7 @@ func (i *ListWAFRuleExclusionsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFRuleExclusions returns the list of exclusions for a given WAF ID.
+// ListWAFRuleExclusions retrieves all resources.
 func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleExclusionResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -187,7 +187,7 @@ func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleE
 	}, nil
 }
 
-// ListAllWAFRuleExclusions returns the complete list of WAF rule exclusions for a given WAF ID. It iterates through
+// ListAllWAFRuleExclusions retrieves all resources.
 // all existing pages to ensure all WAF rule exclusions are returned at once.
 func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WAFRuleExclusionResponse, error) {
 	if i.WAFID == "" {

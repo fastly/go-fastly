@@ -50,7 +50,7 @@ type ListResponseObjectsInput struct {
 	ServiceVersion int
 }
 
-// ListResponseObjects returns the list of response objects for the
+// ListResponseObjects retrieves all resources.
 // configuration version.
 func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseObject, error) {
 	if i.ServiceID == "" {

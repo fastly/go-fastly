@@ -60,7 +60,7 @@ type ListSFTPsInput struct {
 	ServiceVersion int
 }
 
-// ListSFTPs returns the list of sftps for the configuration version.
+// ListSFTPs retrieves all resources.
 func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

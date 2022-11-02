@@ -50,7 +50,7 @@ type ListSumologicsInput struct {
 	ServiceVersion int
 }
 
-// ListSumologics returns the list of sumologics for the configuration version.
+// ListSumologics retrieves all resources.
 func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

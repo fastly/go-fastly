@@ -46,7 +46,7 @@ type ListGzipsInput struct {
 	ServiceVersion int
 }
 
-// ListGzips returns the list of gzips for the configuration version.
+// ListGzips retrieves all resources.
 func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

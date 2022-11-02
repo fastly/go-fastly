@@ -58,7 +58,7 @@ type ListElasticsearchInput struct {
 	ServiceVersion int
 }
 
-// ListElasticsearch returns the list of Elasticsearch logs for the configuration version.
+// ListElasticsearch retrieves all resources.
 func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

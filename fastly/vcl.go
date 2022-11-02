@@ -45,7 +45,7 @@ type ListVCLsInput struct {
 	ServiceVersion int
 }
 
-// ListVCLs returns the list of VCLs for the configuration version.
+// ListVCLs retrieves all resources.
 func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

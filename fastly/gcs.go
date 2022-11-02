@@ -57,7 +57,7 @@ type ListGCSsInput struct {
 	ServiceVersion int
 }
 
-// ListGCSs returns the list of gcses for the configuration version.
+// ListGCSs retrieves all resources.
 func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

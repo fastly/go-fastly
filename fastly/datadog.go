@@ -50,7 +50,7 @@ type ListDatadogInput struct {
 	ServiceVersion int
 }
 
-// ListDatadog returns the list of Datadog for the configuration version.
+// ListDatadog retrieves all resources.
 func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -86,7 +86,7 @@ type ListSecretStoresInput struct {
 	Limit int
 }
 
-// ListSecretStores returns a paginated list of Secret Stores.
+// ListSecretStores retrieves all resources.
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, error) {
@@ -266,7 +266,7 @@ type ListSecretsInput struct {
 	Limit int
 }
 
-// ListSecrets returns a list of Secrets for the given Secret Store.
+// ListSecrets retrieves all resources.
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {

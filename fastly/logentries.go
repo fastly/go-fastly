@@ -51,7 +51,7 @@ type ListLogentriesInput struct {
 	ServiceVersion int
 }
 
-// ListLogentries returns the list of logentries for the configuration version.
+// ListLogentries retrieves all resources.
 func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

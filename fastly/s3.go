@@ -126,7 +126,7 @@ type ListS3sInput struct {
 	ServiceVersion int
 }
 
-// ListS3s returns the list of S3s for the configuration version.
+// ListS3s retrieves all resources.
 func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

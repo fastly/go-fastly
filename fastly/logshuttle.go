@@ -49,7 +49,7 @@ type ListLogshuttlesInput struct {
 	ServiceVersion int
 }
 
-// ListLogshuttles returns the list of logshuttles for the configuration version.
+// ListLogshuttles retrieves all resources.
 func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

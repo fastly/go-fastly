@@ -49,7 +49,7 @@ type ListServersInput struct {
 	ServiceID string
 }
 
-// ListServers lists all servers for a particular service and pool.
+// ListServers retrieves all resources.
 func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -46,7 +46,7 @@ type ListVersionsInput struct {
 	ServiceID string
 }
 
-// ListVersions returns the full list of all versions of the given service.
+// ListVersions retrieves all resources.
 func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

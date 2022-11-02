@@ -59,7 +59,7 @@ func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListTLSDomains retrieves a page of TLS domains.
+// ListTLSDomains retrieves all resources.
 func (c *Client) ListTLSDomains(i *ListTLSDomainsInput) ([]*TLSDomain, error) {
 	p := "/tls/domains"
 	filters := &RequestOptions{

@@ -49,7 +49,7 @@ type ListHerokusInput struct {
 	ServiceVersion int
 }
 
-// ListHerokus returns the list of herokus for the configuration version.
+// ListHerokus retrieves all resources.
 func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

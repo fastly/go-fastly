@@ -68,7 +68,7 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListBulkCertificates list all certificates.
+// ListBulkCertificates retrieves all resources.
 func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCertificate, error) {
 	p := "/tls/bulk/certificates"
 	filters := &RequestOptions{

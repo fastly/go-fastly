@@ -67,7 +67,7 @@ type ListDirectorsInput struct {
 	ServiceVersion int
 }
 
-// ListDirectors returns the list of directors for the configuration version.
+// ListDirectors retrieves all resources.
 func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

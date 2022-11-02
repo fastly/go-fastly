@@ -109,7 +109,7 @@ type ListHeadersInput struct {
 	ServiceVersion int
 }
 
-// ListHeaders returns the list of headers for the configuration version.
+// ListHeaders retrieves all resources.
 func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

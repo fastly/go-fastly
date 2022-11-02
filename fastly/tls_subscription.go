@@ -105,7 +105,7 @@ func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListTLSSubscriptions lists all managed TLS subscriptions
+// ListTLSSubscriptions retrieves all resources.
 func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubscription, error) {
 	resp, err := c.Get("/tls/subscriptions", &RequestOptions{
 		Params: i.formatFilters(),

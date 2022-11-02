@@ -45,7 +45,7 @@ type ListDictionariesInput struct {
 	ServiceVersion int
 }
 
-// ListDictionaries returns the list of dictionaries for the configuration version.
+// ListDictionaries retrieves all resources.
 func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -48,7 +48,7 @@ type ListLogglyInput struct {
 	ServiceVersion int
 }
 
-// ListLoggly returns the list of loggly for the configuration version.
+// ListLoggly retrieves all resources.
 func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

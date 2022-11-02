@@ -67,7 +67,7 @@ type ListBackendsInput struct {
 	ServiceVersion int
 }
 
-// ListBackends returns the list of backends for the configuration version.
+// ListBackends retrieves all resources.
 func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

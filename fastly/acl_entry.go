@@ -52,7 +52,7 @@ type ListACLEntriesInput struct {
 	Sort      string
 }
 
-// ListACLEntries return a list of entries for an ACL
+// ListACLEntries retrieves all resources.
 // FIXME: The query parameters aren't being processed (e.g. Params: i.formatFilters()).
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ServiceID == "" {
@@ -81,7 +81,7 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	return es, nil
 }
 
-// ListACLEntriesPaginator implements PaginatorACLEntries.
+// ListACLEntriesPaginator implements the PaginatorACLEntries interface.
 type ListACLEntriesPaginator struct {
 	CurrentPage int
 	LastPage    int

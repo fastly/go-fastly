@@ -49,7 +49,7 @@ type ListPapertrailsInput struct {
 	ServiceVersion int
 }
 
-// ListPapertrails returns the list of papertrails for the configuration version.
+// ListPapertrails retrieves all resources.
 func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

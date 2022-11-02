@@ -48,7 +48,7 @@ type ListCustomerUsersInput struct {
 	CustomerID string
 }
 
-// ListCustomerUsers returns the full list of users belonging to a specific
+// ListCustomerUsers retrieves all resources.
 // customer.
 func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 	if i.CustomerID == "" {

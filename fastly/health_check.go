@@ -55,7 +55,7 @@ type ListHealthChecksInput struct {
 	ServiceVersion int
 }
 
-// ListHealthChecks returns the list of health checks for the configuration
+// ListHealthChecks retrieves all resources.
 // version.
 func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, error) {
 	if i.ServiceID == "" {

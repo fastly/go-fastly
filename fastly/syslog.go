@@ -58,7 +58,7 @@ type ListSyslogsInput struct {
 	ServiceVersion int
 }
 
-// ListSyslogs returns the list of syslogs for the configuration version.
+// ListSyslogs retrieves all resources.
 func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

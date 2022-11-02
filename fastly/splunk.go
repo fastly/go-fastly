@@ -56,7 +56,7 @@ type ListSplunksInput struct {
 	ServiceVersion int
 }
 
-// ListSplunks returns the list of splunks for the configuration version.
+// ListSplunks retrieves all resources.
 func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

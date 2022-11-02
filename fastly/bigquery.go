@@ -54,7 +54,7 @@ type ListBigQueriesInput struct {
 	ServiceVersion int
 }
 
-// ListBigQueries returns the list of BigQueries for the configuration version.
+// ListBigQueries retrieves all resources.
 func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

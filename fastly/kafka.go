@@ -61,7 +61,7 @@ type ListKafkasInput struct {
 	ServiceVersion int
 }
 
-// ListKafkas returns the list of kafkas for the configuration version.
+// ListKafkas retrieves all resources.
 func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

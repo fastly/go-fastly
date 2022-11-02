@@ -49,7 +49,7 @@ type ListHoneycombsInput struct {
 	ServiceVersion int
 }
 
-// ListHoneycombs returns the list of honeycombs for the configuration version.
+// ListHoneycombs retrieves all resources.
 func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

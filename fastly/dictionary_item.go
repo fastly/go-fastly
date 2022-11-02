@@ -51,7 +51,7 @@ type ListDictionaryItemsInput struct {
 	Sort      string
 }
 
-// ListDictionaryItems returns a list of items for a dictionary
+// ListDictionaryItems retrieves all resources.
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -76,8 +76,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	return bs, nil
 }
 
-// ListDictionaryItemsPaginator implements the PaginatorDictionaryItems
-// interface.
+// ListDictionaryItemsPaginator implements the PaginatorDictionaryItems interface.
 type ListDictionaryItemsPaginator struct {
 	CurrentPage int
 	LastPage    int

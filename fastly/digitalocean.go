@@ -58,7 +58,7 @@ type ListDigitalOceansInput struct {
 	ServiceVersion int
 }
 
-// ListDigitalOceans returns the list of DigitalOceans for the configuration version.
+// ListDigitalOceans retrieves all resources.
 func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

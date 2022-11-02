@@ -79,7 +79,7 @@ func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFActiveRules returns the list of active rules for a given WAF ID.
+// ListWAFActiveRules retrieves all resources.
 func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -141,7 +141,7 @@ type ListAllWAFActiveRulesInput struct {
 	WAFVersionNumber int
 }
 
-// ListAllWAFActiveRules returns the complete list of WAF active rules for a given WAF ID. It iterates through
+// ListAllWAFActiveRules retrieves all resources.
 // all existing pages to ensure all WAF active rules are returned at once.
 func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
 	if i.WAFID == "" {

@@ -84,7 +84,7 @@ type ListPoolsInput struct {
 	ServiceVersion int
 }
 
-// ListPools lists all pools for a particular service and version.
+// ListPools retrieves all resources.
 func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

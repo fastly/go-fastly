@@ -80,7 +80,7 @@ type ListServicesInput struct {
 	Sort      string
 }
 
-// ListServices returns the full list of services for the current account.
+// ListServices retrieves all resources.
 // FIXME: input isn't used at all (e.g. Params: i.formatFilters()).
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	resp, err := c.Get("/service", nil)
@@ -388,7 +388,7 @@ type ListServiceDomainInput struct {
 	ID string
 }
 
-// ListServiceDomains lists all domains associated with a given service
+// ListServiceDomains retrieves all resources.
 func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

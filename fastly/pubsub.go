@@ -52,7 +52,7 @@ type ListPubsubsInput struct {
 	ServiceVersion int
 }
 
-// ListPubsubs returns the list of pubsubs for the configuration version.
+// ListPubsubs retrieves all resources.
 func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

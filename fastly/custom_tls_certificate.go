@@ -63,7 +63,7 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListCustomTLSCertificates list all certificates.
+// ListCustomTLSCertificates retrieves all resources.
 func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([]*CustomTLSCertificate, error) {
 	p := "/tls/certificates"
 	filters := &RequestOptions{

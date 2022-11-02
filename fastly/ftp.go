@@ -58,7 +58,7 @@ type ListFTPsInput struct {
 	ServiceVersion int
 }
 
-// ListFTPs returns the list of ftps for the configuration version.
+// ListFTPs retrieves all resources.
 func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

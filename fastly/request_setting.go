@@ -87,7 +87,7 @@ type ListRequestSettingsInput struct {
 	ServiceVersion int
 }
 
-// ListRequestSettings returns the list of request settings for the
+// ListRequestSettings retrieves all resources.
 // configuration version.
 func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSetting, error) {
 	if i.ServiceID == "" {

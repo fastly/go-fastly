@@ -60,7 +60,7 @@ type ListHTTPSInput struct {
 	ServiceVersion int
 }
 
-// ListHTTPS returns the list of HTTPS logs for the configuration version.
+// ListHTTPS retrieves all resources.
 func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

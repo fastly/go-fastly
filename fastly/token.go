@@ -54,7 +54,7 @@ func (s tokensByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListTokens returns the full list of tokens belonging to the currently
+// ListTokens retrieves all resources.
 // authenticated user.
 func (c *Client) ListTokens() ([]*Token, error) {
 	resp, err := c.Get("/tokens", nil)
@@ -76,7 +76,7 @@ type ListCustomerTokensInput struct {
 	CustomerID string
 }
 
-// ListCustomerTokens returns the full list of tokens belonging to a specific
+// ListCustomerTokens retrieves all resources.
 // customer.
 func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error) {
 	if i.CustomerID == "" {

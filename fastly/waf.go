@@ -85,7 +85,7 @@ func (i *ListWAFsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFs returns the list of wafs for the configuration version.
+// ListWAFs retrieves all resources.
 func (c *Client) ListWAFs(i *ListWAFsInput) (*WAFResponse, error) {
 	resp, err := c.Get("/waf/firewalls", &RequestOptions{
 		Params: i.formatFilters(),

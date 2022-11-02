@@ -46,7 +46,7 @@ type ListDomainsInput struct {
 	ServiceVersion int
 }
 
-// ListDomains returns the list of domains for this Service.
+// ListDomains retrieves all resources.
 func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

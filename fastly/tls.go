@@ -57,7 +57,7 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListPrivateKeys list all TLS private keys.
+// ListPrivateKeys retrieves all resources.
 func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
 	p := "/tls/private_keys"
 	filters := &RequestOptions{

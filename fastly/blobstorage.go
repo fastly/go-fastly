@@ -58,7 +58,7 @@ type ListBlobStoragesInput struct {
 	ServiceVersion int
 }
 
-// ListBlobStorages returns the list of blob storages for the configuration version.
+// ListBlobStorages retrieves all resources.
 func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

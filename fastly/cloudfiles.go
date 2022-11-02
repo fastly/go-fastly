@@ -58,7 +58,7 @@ type ListCloudfilesInput struct {
 	ServiceVersion int
 }
 
-// ListCloudfiles returns the list of Cloudfiles for the configuration version.
+// ListCloudfiles retrieves all resources.
 func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

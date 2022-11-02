@@ -277,7 +277,7 @@ func (s snippetsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListSnippets returns the list of Snippets for the configuration version. Content is not displayed for Dynmanic Snippets due to them being
+// ListSnippets retrieves all resources.
 // versionless, use the GetDynamicSnippet function to show current content.
 func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	if i.ServiceID == "" {

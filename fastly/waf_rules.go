@@ -100,7 +100,7 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFRules returns the list of VAF versions for a given WAF ID.
+// ListWAFRules retrieves all resources.
 func (c *Client) ListWAFRules(i *ListWAFRulesInput) (*WAFRuleResponse, error) {
 	resp, err := c.Get("/waf/rules", &RequestOptions{
 		Params: i.formatFilters(),
@@ -151,7 +151,7 @@ type ListAllWAFRulesInput struct {
 	Include string
 }
 
-// ListAllWAFRules returns the complete list of WAF rules for the given filters. It iterates through
+// ListAllWAFRules retrieves all resources.
 // all existing pages to ensure all WAF rules are returned at once.
 func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, error) {
 	currentPage := 1

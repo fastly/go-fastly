@@ -125,7 +125,7 @@ func (i *ListWAFVersionsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFVersions returns the list of VAF versions for a given WAF ID.
+// ListWAFVersions retrieves all resources.
 func (c *Client) ListWAFVersions(i *ListWAFVersionsInput) (*WAFVersionResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -175,7 +175,7 @@ type ListAllWAFVersionsInput struct {
 	WAFID string
 }
 
-// ListAllWAFVersions returns the complete list of WAF versions for a given WAF ID. It iterates through
+// ListAllWAFVersions retrieves all resources.
 // all existing pages to ensure all WAF versions are returned at once.
 func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResponse, error) {
 	if i.WAFID == "" {

@@ -153,7 +153,7 @@ type ListERLsInput struct {
 	ServiceVersion int    // required
 }
 
-// ListERLs returns the list of ERLs for the specified service version.
+// ListERLs retrieves all resources.
 func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

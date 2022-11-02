@@ -49,7 +49,7 @@ type ListScalyrsInput struct {
 	ServiceVersion int
 }
 
-// ListScalyrs returns the list of scalyrs for the configuration version.
+// ListScalyrs retrieves all resources.
 func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
