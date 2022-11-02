@@ -248,7 +248,7 @@ type GetDictionaryItemInput struct {
 	ServiceID string
 }
 
-// GetDictionaryItem gets the dictionary item with the given parameters.
+// GetDictionaryItem retrieves the specified resource.
 func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

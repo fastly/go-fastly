@@ -20,7 +20,7 @@ type GetSettingsInput struct {
 	ServiceVersion int
 }
 
-// GetSettings gets the backend configuration with the given parameters.
+// GetSettings retrieves the specified resource.
 func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -77,7 +77,7 @@ type GetDirectorBackendInput struct {
 	ServiceVersion int
 }
 
-// GetDirectorBackend gets the backend configuration with the given parameters.
+// GetDirectorBackend retrieves the specified resource.
 func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBackend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

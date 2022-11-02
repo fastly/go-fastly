@@ -93,7 +93,7 @@ type GetOriginMetricsInput struct {
 	Start       time.Time
 }
 
-// GetOriginMetricsForService returns stats data based on GetOriginMetricsInput
+// GetOriginMetricsForService retrieves the specified resource.
 func (c *Client) GetOriginMetricsForService(i *GetOriginMetricsInput) (*OriginInspector, error) {
 	var resp interface{}
 	if err := c.GetOriginMetricsForServiceJSON(i, &resp); err != nil {
@@ -107,8 +107,7 @@ func (c *Client) GetOriginMetricsForService(i *GetOriginMetricsInput) (*OriginIn
 	return or, nil
 }
 
-// GetOriginMetricsForServiceJSON fetches Origin Inspector metrics for a single service and decodes the response
-// directly to the JSON struct dst.
+// GetOriginMetricsForServiceJSON retrieves the specified resource.
 func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst interface{}) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

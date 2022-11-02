@@ -121,7 +121,7 @@ type GetLogglyInput struct {
 	ServiceVersion int
 }
 
-// GetLoggly gets the loggly configuration with the given parameters.
+// GetLoggly retrieves the specified resource.
 func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

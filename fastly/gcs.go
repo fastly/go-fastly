@@ -138,7 +138,7 @@ type GetGCSInput struct {
 	ServiceVersion int
 }
 
-// GetGCS gets the GCS configuration with the given parameters.
+// GetGCS retrieves the specified resource.
 func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -141,7 +141,7 @@ type GetOpenstackInput struct {
 	ServiceVersion int
 }
 
-// GetOpenstack gets the Openstack configuration with the given parameters.
+// GetOpenstack retrieves the specified resource.
 func (c *Client) GetOpenstack(i *GetOpenstackInput) (*Openstack, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

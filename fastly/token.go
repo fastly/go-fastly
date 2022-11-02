@@ -55,7 +55,6 @@ func (s tokensByName) Less(i, j int) bool {
 }
 
 // ListTokens retrieves all resources.
-// authenticated user.
 func (c *Client) ListTokens() ([]*Token, error) {
 	resp, err := c.Get("/tokens", nil)
 	if err != nil {
@@ -77,7 +76,6 @@ type ListCustomerTokensInput struct {
 }
 
 // ListCustomerTokens retrieves all resources.
-// customer.
 func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error) {
 	if i.CustomerID == "" {
 		return nil, ErrMissingCustomerID
@@ -99,8 +97,9 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 }
 
 // GetTokenSelf retrieves the token information for the the access_token used
-// used to authenticate the request. Returns a 401 if the token has expired
-// and a 403 for invalid access token.
+// used to authenticate the request.
+//
+// Returns a 401 if the token has expired and a 403 for invalid access token.
 func (c *Client) GetTokenSelf() (*Token, error) {
 	resp, err := c.Get("/tokens/self", nil)
 	if err != nil {

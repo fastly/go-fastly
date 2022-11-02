@@ -141,7 +141,7 @@ type GetDirectorInput struct {
 	ServiceVersion int
 }
 
-// GetDirector gets the director configuration with the given parameters.
+// GetDirector retrieves the specified resource.
 func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -122,7 +122,7 @@ type GetHerokuInput struct {
 	ServiceVersion int
 }
 
-// GetHeroku gets the heroku configuration with the given parameters.
+// GetHeroku retrieves the specified resource.
 func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

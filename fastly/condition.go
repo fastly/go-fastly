@@ -118,7 +118,7 @@ type GetConditionInput struct {
 	ServiceVersion int
 }
 
-// GetCondition gets the condition configuration with the given parameters.
+// GetCondition retrieves the specified resource.
 func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

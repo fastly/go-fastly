@@ -141,7 +141,7 @@ type GetSyslogInput struct {
 	ServiceVersion int
 }
 
-// GetSyslog gets the syslog configuration with the given parameters.
+// GetSyslog retrieves the specified resource.
 func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

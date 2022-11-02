@@ -141,7 +141,7 @@ type GetFTPInput struct {
 	ServiceVersion int
 }
 
-// GetFTP gets the FTP configuration with the given parameters.
+// GetFTP retrieves the specified resource.
 func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -141,7 +141,7 @@ type GetCloudfilesInput struct {
 	ServiceVersion int
 }
 
-// GetCloudfiles gets the Cloudfiles configuration with the given parameters.
+// GetCloudfiles retrieves the specified resource.
 func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

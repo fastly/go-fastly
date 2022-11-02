@@ -260,7 +260,7 @@ type GetERLInput struct {
 	ServiceVersion int    `form:"version"`
 }
 
-// GetERL returns the specified ERL.
+// GetERL retrieves the specified resource.
 func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

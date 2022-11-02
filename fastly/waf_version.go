@@ -176,7 +176,6 @@ type ListAllWAFVersionsInput struct {
 }
 
 // ListAllWAFVersions retrieves all resources.
-// all existing pages to ensure all WAF versions are returned at once.
 func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -212,7 +211,7 @@ type GetWAFVersionInput struct {
 	WAFVersionNumber int
 }
 
-// GetWAFVersion gets details for given WAF version.
+// GetWAFVersion retrieves the specified resource.
 func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -414,7 +413,8 @@ type CreateEmptyWAFVersionInput struct {
 }
 
 // CreateEmptyWAFVersion creates a new resource.
-//  which means a version without rules and all config options set to their default values.
+//
+// There are no rules and all config options are set to their default values.
 func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID

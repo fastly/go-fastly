@@ -142,7 +142,6 @@ type ListAllWAFActiveRulesInput struct {
 }
 
 // ListAllWAFActiveRules retrieves all resources.
-// all existing pages to ensure all WAF active rules are returned at once.
 func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -238,8 +237,11 @@ type BatchModificationWAFActiveRulesInput struct {
 	WAFVersionNumber int
 }
 
-// BatchModificationWAFActiveRules is a generic function for creating or deleting WAF active rules in batches.
-// Upsert and delete are the only operations allowed.
+// BatchModificationWAFActiveRules groups create/delete operations for the
+// specified resource.
+//
+// This is a generic function for creating or deleting WAF active rules in
+// batches. Upsert and delete are the only operations allowed.
 func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRulesInput) ([]*WAFActiveRule, error) {
 	if len(i.Rules) > BatchModifyMaximumOperations {
 		return nil, ErrMaxExceededRules

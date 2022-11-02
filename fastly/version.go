@@ -74,8 +74,9 @@ type LatestVersionInput struct {
 	ServiceID string
 }
 
-// LatestVersion fetches the latest version. If there are no versions, this
-// function will return nil (but not an error).
+// LatestVersion retrieves the specified resource.
+//
+// If there are no versions, this function will return nil (but not an error).
 func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -102,7 +103,8 @@ type CreateVersionInput struct {
 }
 
 // CreateVersion creates a new resource.
-// preferred in almost all scenarios, since `Create()` creates a _blank_
+//
+// This is preferred in almost all scenarios, since `Create()` creates a _blank_
 // configuration where `Clone()` builds off of an existing configuration.
 func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
@@ -131,7 +133,7 @@ type GetVersionInput struct {
 	ServiceVersion int
 }
 
-// GetVersion fetches a version with the given information.
+// GetVersion retrieves the specified resource.
 func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -261,9 +263,10 @@ type CloneVersionInput struct {
 	ServiceVersion int
 }
 
-// CloneVersion creates a clone of the version with and returns a new
-// configuration version with all the same configuration options, but an
-// incremented number.
+// CloneVersion creates a clone of the specified version.
+//
+// Returns a new configuration version with all the same configuration options,
+// but an incremented number.
 func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -295,7 +298,7 @@ type ValidateVersionInput struct {
 	ServiceVersion int
 }
 
-// ValidateVersion validates if the given version is okay.
+// ValidateVersion validates the specified resource.
 func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) {
 	var msg string
 

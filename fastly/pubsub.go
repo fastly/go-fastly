@@ -129,7 +129,7 @@ type GetPubsubInput struct {
 	ServiceVersion int
 }
 
-// GetPubsub gets the Pubsub configuration with the given parameters.
+// GetPubsub retrieves the specified resource.
 func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -187,7 +187,7 @@ type GetHeaderInput struct {
 	ServiceVersion int
 }
 
-// GetHeader gets the header configuration with the given parameters.
+// GetHeader retrieves the specified resource.
 func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

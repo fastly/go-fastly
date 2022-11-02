@@ -127,7 +127,7 @@ type GetHoneycombInput struct {
 	ServiceVersion int
 }
 
-// GetHoneycomb gets the honeycomb configuration with the given parameters.
+// GetHoneycomb retrieves the specified resource.
 func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

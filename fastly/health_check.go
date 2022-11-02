@@ -56,7 +56,6 @@ type ListHealthChecksInput struct {
 }
 
 // ListHealthChecks retrieves all resources.
-// version.
 func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -138,7 +137,7 @@ type GetHealthCheckInput struct {
 	ServiceVersion int
 }
 
-// GetHealthCheck gets the health check configuration with the given parameters.
+// GetHealthCheck retrieves the specified resource.
 func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

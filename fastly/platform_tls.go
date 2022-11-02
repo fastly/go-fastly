@@ -106,7 +106,7 @@ type GetBulkCertificateInput struct {
 	ID string
 }
 
-// GetBulkCertificate retrieve a single certificate.
+// GetBulkCertificate retrieves the specified resource.
 func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -170,6 +170,7 @@ type UpdateBulkCertificateInput struct {
 }
 
 // UpdateBulkCertificate updates the specified resource.
+//
 // By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
 // Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
 // Any SAN entries that are missing in the replacement certificate will become disabled.

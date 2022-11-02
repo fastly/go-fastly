@@ -278,6 +278,8 @@ func (s snippetsByName) Less(i, j int) bool {
 }
 
 // ListSnippets retrieves all resources.
+//
+// Content is not displayed for Dynmanic Snippets due to them being
 // versionless, use the GetDynamicSnippet function to show current content.
 func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	if i.ServiceID == "" {
@@ -313,8 +315,10 @@ type GetSnippetInput struct {
 	ServiceVersion int
 }
 
-// GetSnippet gets the Snippet configuration with the given parameters. Dynamic Snippets will not show content due to them
-// being versionless, use GetDynamicSnippet to see content.
+// GetSnippet retrieves the specified resource.
+//
+// Dynamic Snippets will not show content due to them being versionless, use
+// GetDynamicSnippet to see content.
 func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -350,8 +354,9 @@ type GetDynamicSnippetInput struct {
 	ServiceID string
 }
 
-// GetDynamicSnippet gets the Snippet configuration with the given parameters. This will show the current content
-// associated with a Dynamic Snippet.
+// GetDynamicSnippet retrieves the specified resource.
+//
+// This will show the current content associated with a Dynamic Snippet.
 func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -87,6 +87,7 @@ type ListSecretStoresInput struct {
 }
 
 // ListSecretStores retrieves all resources.
+//
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, error) {
@@ -127,7 +128,7 @@ type GetSecretStoreInput struct {
 	ID string
 }
 
-// GetSecretStore gets a single Secret Store.
+// GetSecretStore retrieves the specified resource.
 func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -267,6 +268,7 @@ type ListSecretsInput struct {
 }
 
 // ListSecrets retrieves all resources.
+//
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
@@ -313,7 +315,7 @@ type GetSecretInput struct {
 	Name string
 }
 
-// GetSecret returns a single Secret from a given Secret Store.
+// GetSecret retrieves the specified resource.
 func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

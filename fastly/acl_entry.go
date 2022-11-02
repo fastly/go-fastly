@@ -204,7 +204,7 @@ type GetACLEntryInput struct {
 	ServiceID string
 }
 
-// GetACLEntry returns a single ACL entry based on its ID.
+// GetACLEntry retrieves the specified resource.
 func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -374,7 +374,7 @@ type BatchACLEntry struct {
 	Subnet    *int           `json:"subnet,omitempty"`
 }
 
-// BatchModifyACLEntries updates the specified ACL entries.
+// BatchModifyACLEntries updates the specified resources.
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

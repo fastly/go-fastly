@@ -128,7 +128,7 @@ type GetServerInput struct {
 	ServiceID string
 }
 
-// GetServer gets a single server for a particular service and pool.
+// GetServer retrieves the specified resource.
 func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

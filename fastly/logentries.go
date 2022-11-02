@@ -127,7 +127,7 @@ type GetLogentriesInput struct {
 	ServiceVersion int
 }
 
-// GetLogentries gets the logentries configuration with the given parameters.
+// GetLogentries retrieves the specified resource.
 func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

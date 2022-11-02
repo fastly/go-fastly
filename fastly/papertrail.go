@@ -126,7 +126,7 @@ type GetPapertrailInput struct {
 	ServiceVersion int
 }
 
-// GetPapertrail gets the papertrail configuration with the given parameters.
+// GetPapertrail retrieves the specified resource.
 func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

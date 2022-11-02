@@ -101,7 +101,7 @@ type GetCustomTLSConfigurationInput struct {
 	Include string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
 }
 
-// GetCustomTLSConfiguration returns a single TLS configuration.
+// GetCustomTLSConfiguration retrieves the specified resource.
 func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*CustomTLSConfiguration, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

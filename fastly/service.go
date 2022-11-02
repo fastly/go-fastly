@@ -231,9 +231,9 @@ type GetServiceInput struct {
 	ID string
 }
 
-// GetService retrieves the service information for the service with the given
-// id. If no service exists for the given id, the API returns a 400 response
-// (not a 404).
+// GetService retrieves the specified resource.
+//
+// If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -268,7 +268,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 
 // GetServiceDetails retrieves the specified resource.
 //
-// If no service exists for the given id, the API returns a 400 response.
+// If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -357,8 +357,9 @@ type SearchServiceInput struct {
 	Name string
 }
 
-// SearchService gets a specific service by name. If no service exists by that
-// name, the API returns a 400 response (not a 404).
+// SearchService retrieves the specified resource.
+//
+// If no service exists by that name, the API returns a 400 response not a 404.
 func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName

@@ -88,7 +88,7 @@ type GetAPIEventInput struct {
 	EventID string
 }
 
-// GetAPIEvent gets a specific event
+// GetAPIEvent retrieves the specified resource.
 func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 	if i.EventID == "" {
 		return nil, ErrMissingEventID

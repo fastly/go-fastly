@@ -177,7 +177,7 @@ type GetPoolInput struct {
 	ServiceVersion int
 }
 
-// GetPool gets a single pool for a particular service and version.
+// GetPool retrieves the specified resource.
 func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

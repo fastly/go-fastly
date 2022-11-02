@@ -218,7 +218,7 @@ type GetS3Input struct {
 	ServiceVersion int
 }
 
-// GetS3 gets the S3 configuration with the given parameters.
+// GetS3 retrieves the specified resource.
 func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

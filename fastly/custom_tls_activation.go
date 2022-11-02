@@ -94,7 +94,7 @@ type GetTLSActivationInput struct {
 	Include *string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
 }
 
-// GetTLSActivation retrieve a single activation.
+// GetTLSActivation retrieves the specified resource.
 func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

@@ -133,7 +133,7 @@ type GetBigQueryInput struct {
 	ServiceVersion int
 }
 
-// GetBigQuery gets the BigQuery configuration with the given parameters.
+// GetBigQuery retrieves the specified resource.
 func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

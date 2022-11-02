@@ -129,7 +129,7 @@ type GetKinesisInput struct {
 	ServiceVersion int
 }
 
-// GetKinesis gets the Kinesis configuration with the given parameters.
+// GetKinesis retrieves the specified resource.
 func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

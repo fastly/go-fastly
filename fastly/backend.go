@@ -160,7 +160,7 @@ type GetBackendInput struct {
 	ServiceVersion int
 }
 
-// GetBackend gets the backend configuration with the given parameters.
+// GetBackend retrieves the specified resource.
 func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

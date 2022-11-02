@@ -37,7 +37,7 @@ type GetPackageInput struct {
 	ServiceVersion int `mapstructure:"version"`
 }
 
-// GetPackage retrieves  package information for the given service and version.
+// GetPackage retrieves the specified resource.
 func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 	path, err := MakePackagePath(i.ServiceID, i.ServiceVersion)
 	if err != nil {

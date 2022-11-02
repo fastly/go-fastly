@@ -156,7 +156,7 @@ type GetObjectStoreInput struct {
 	ID string
 }
 
-// GetObjectStore fetches information about the given object store.
+// GetObjectStore retrieves the specified resource.
 func (c *Client) GetObjectStore(i *GetObjectStoreInput) (*ObjectStore, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -320,7 +320,7 @@ type GetObjectStoreKeyInput struct {
 	Key string
 }
 
-// GetObjectStoreKey returns the value associated with a key in an object store.
+// GetObjectStoreKey retrieves the specified resource.
 func (c *Client) GetObjectStoreKey(i *GetObjectStoreKeyInput) (string, error) {
 	if i.ID == "" {
 		return "", ErrMissingID

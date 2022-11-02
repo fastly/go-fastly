@@ -49,7 +49,6 @@ type ListCustomerUsersInput struct {
 }
 
 // ListCustomerUsers retrieves all resources.
-// customer.
 func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 	if i.CustomerID == "" {
 		return nil, ErrMissingCustomerID
@@ -91,8 +90,9 @@ type GetUserInput struct {
 	ID string
 }
 
-// GetUser retrieves the user information for the user with the given
-// id. If no user exists for the given id, the API returns a 404 response.
+// GetUser retrieves the specified resource.
+//
+//If no user exists for the given id, the API returns a 404 response.
 func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

@@ -80,7 +80,7 @@ type GetVCLInput struct {
 	ServiceVersion int
 }
 
-// GetVCL gets the VCL configuration with the given parameters.
+// GetVCL retrieves the specified resource.
 func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -116,7 +116,7 @@ type GetGeneratedVCLInput struct {
 	ServiceVersion int
 }
 
-// GetGeneratedVCL gets the VCL configuration with the given parameters.
+// GetGeneratedVCL retrieves the specified resource.
 func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

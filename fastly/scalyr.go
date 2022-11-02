@@ -127,7 +127,7 @@ type GetScalyrInput struct {
 	ServiceVersion int
 }
 
-// GetScalyr gets the scalyr configuration with the given parameters.
+// GetScalyr retrieves the specified resource.
 func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

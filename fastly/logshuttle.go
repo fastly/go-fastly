@@ -123,7 +123,7 @@ type GetLogshuttleInput struct {
 	ServiceVersion int
 }
 
-// GetLogshuttle gets the logshuttle configuration with the given parameters.
+// GetLogshuttle retrieves the specified resource.
 func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

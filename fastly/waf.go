@@ -167,7 +167,7 @@ type GetWAFInput struct {
 	ServiceVersion int
 }
 
-// GetWAF gets details for given WAF
+// GetWAF retrieves the specified resource.
 func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

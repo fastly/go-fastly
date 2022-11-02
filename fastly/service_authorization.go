@@ -110,7 +110,7 @@ type GetServiceAuthorizationInput struct {
 	ID string
 }
 
-// GetServiceAuthorization retrieves an existing service authorization using its ID.
+// GetServiceAuthorization retrieves the specified resource.
 func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

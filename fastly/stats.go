@@ -111,7 +111,7 @@ type StatsFieldResponse struct {
 	Status  string              `mapstructure:"status"`
 }
 
-// GetStats returns stats data based on GetStatsInput
+// GetStats retrieves the specified resource.
 func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	var resp interface{}
 	if err := c.GetStatsJSON(i, &resp); err != nil {
@@ -125,7 +125,7 @@ func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	return sr, nil
 }
 
-// GetStatsField returns stats field data based on GetStatsInput
+// GetStatsField retrieves the specified resource.
 func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
 	var resp interface{}
 	if err := c.GetStatsJSON(i, &resp); err != nil {

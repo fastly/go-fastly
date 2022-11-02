@@ -117,7 +117,7 @@ type GetDomainInput struct {
 	ServiceVersion int
 }
 
-// GetDomain retrieves information about the given domain name.
+// GetDomain retrieves the specified resource.
 func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -160,7 +160,6 @@ type UpdateDomainInput struct {
 }
 
 // UpdateDomain updates the specified resource.
-// parameters are `Name` and `Comment`.
 func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -234,7 +233,7 @@ type ValidateDomainInput struct {
 	ServiceVersion int
 }
 
-// ValidateDomain validates the given domain.
+// ValidateDomain validates the specified resource.
 func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -323,7 +322,7 @@ type ValidateAllDomainsInput struct {
 	ServiceVersion int
 }
 
-// ValidateAllDomains validates the given domain.
+// ValidateAllDomains validates the specified resource.
 func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*DomainValidationResult, err error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

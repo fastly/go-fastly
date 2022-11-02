@@ -141,7 +141,7 @@ type GetDigitalOceanInput struct {
 	ServiceVersion int
 }
 
-// GetDigitalOcean gets the DigitalOcean configuration with the given parameters.
+// GetDigitalOcean retrieves the specified resource.
 func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

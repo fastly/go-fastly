@@ -242,6 +242,7 @@ type UpdateTLSSubscriptionInput struct {
 }
 
 // UpdateTLSSubscription updates the specified resource.
+//
 // TLS Subscriptions can only be updated in an "issued" state, and when Force=true.
 func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubscription, error) {
 	if i.ID == "" {

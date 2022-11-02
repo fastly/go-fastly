@@ -117,7 +117,7 @@ type GetGzipInput struct {
 	ServiceVersion int
 }
 
-// GetGzip gets the Gzip configuration with the given parameters.
+// GetGzip retrieves the specified resource.
 func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

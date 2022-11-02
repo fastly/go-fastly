@@ -127,7 +127,7 @@ type GetNewRelicInput struct {
 	ServiceVersion int
 }
 
-// GetNewRelic gets the newrelic configuration with the given parameters.
+// GetNewRelic retrieves the specified resource.
 func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

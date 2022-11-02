@@ -100,7 +100,7 @@ type GetCustomTLSCertificateInput struct {
 	ID string
 }
 
-// GetCustomTLSCertificate retrieves the specified Custom TLS Certificate.
+// GetCustomTLSCertificate retrieves the specified resource.
 func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*CustomTLSCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -157,6 +157,7 @@ type UpdateCustomTLSCertificateInput struct {
 }
 
 // UpdateCustomTLSCertificate updates the specified resource.
+//
 // By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
 // Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
 // Any SAN entries that are missing in the replacement certificate will become disabled.

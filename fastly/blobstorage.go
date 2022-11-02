@@ -141,7 +141,7 @@ type GetBlobStorageInput struct {
 	ServiceVersion int
 }
 
-// GetBlobStorage gets the blob storage configuration with the given parameters.
+// GetBlobStorage retrieves the specified resource.
 func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -147,7 +147,7 @@ type GetKafkaInput struct {
 	ServiceVersion int
 }
 
-// GetKafka gets the kafka configuration with the given parameters.
+// GetKafka retrieves the specified resource.
 func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

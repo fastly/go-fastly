@@ -125,7 +125,7 @@ type GetSumologicInput struct {
 	ServiceVersion int
 }
 
-// GetSumologic gets the sumologic configuration with the given parameters.
+// GetSumologic retrieves the specified resource.
 func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

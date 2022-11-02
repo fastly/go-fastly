@@ -51,7 +51,6 @@ type ListResponseObjectsInput struct {
 }
 
 // ListResponseObjects retrieves all resources.
-// configuration version.
 func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseObject, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -126,8 +125,7 @@ type GetResponseObjectInput struct {
 	ServiceVersion int
 }
 
-// GetResponseObject gets the response object configuration with the given
-// parameters.
+// GetResponseObject retrieves the specified resource.
 func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -188,7 +188,6 @@ func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleE
 }
 
 // ListAllWAFRuleExclusions retrieves all resources.
-// all existing pages to ensure all WAF rule exclusions are returned at once.
 func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WAFRuleExclusionResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID

@@ -114,7 +114,7 @@ type GetDictionaryInput struct {
 	ServiceVersion int
 }
 
-// GetDictionary gets the dictionary configuration with the given parameters.
+// GetDictionary retrieves the specified resource.
 func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

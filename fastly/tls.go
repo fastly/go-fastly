@@ -90,7 +90,7 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 	return ppk, nil
 }
 
-// GetPrivateKey show a TLS private key.
+// GetPrivateKey retrieves the specified resource.
 func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID

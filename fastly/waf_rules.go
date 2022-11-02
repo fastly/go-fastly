@@ -152,7 +152,6 @@ type ListAllWAFRulesInput struct {
 }
 
 // ListAllWAFRules retrieves all resources.
-// all existing pages to ensure all WAF rules are returned at once.
 func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, error) {
 	currentPage := 1
 	result := &WAFRuleResponse{Items: []*WAFRule{}}

@@ -145,7 +145,7 @@ type GetSFTPInput struct {
 	ServiceVersion int
 }
 
-// GetSFTP gets the SFTP configuration with the given parameters.
+// GetSFTP retrieves the specified resource.
 func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

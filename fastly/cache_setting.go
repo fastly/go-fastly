@@ -62,7 +62,6 @@ type ListCacheSettingsInput struct {
 }
 
 // ListCacheSettings retrieves all resources.
-// version.
 func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -134,8 +133,7 @@ type GetCacheSettingInput struct {
 	ServiceVersion int
 }
 
-// GetCacheSetting gets the cache setting configuration with the given
-// parameters.
+// GetCacheSetting retrieves the specified resource.
 func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

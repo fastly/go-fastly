@@ -88,7 +88,6 @@ type ListRequestSettingsInput struct {
 }
 
 // ListRequestSettings retrieves all resources.
-// configuration version.
 func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -168,8 +167,7 @@ type GetRequestSettingInput struct {
 	ServiceVersion int
 }
 
-// GetRequestSetting gets the request settings configuration with the given
-// parameters.
+// GetRequestSetting retrieves the specified resource.
 func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -141,7 +141,7 @@ type GetSplunkInput struct {
 	ServiceVersion int
 }
 
-// GetSplunk gets the splunk configuration with the given parameters.
+// GetSplunk retrieves the specified resource.
 func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

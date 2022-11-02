@@ -154,7 +154,7 @@ type GetACLInput struct {
 	ServiceVersion int
 }
 
-// GetACL retrieves the specified ACL.
+// GetACL retrieves the specified resource.
 func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

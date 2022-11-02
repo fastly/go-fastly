@@ -128,7 +128,7 @@ type GetDatadogInput struct {
 	ServiceVersion int
 }
 
-// GetDatadog gets the Datadog configuration with the given parameters.
+// GetDatadog retrieves the specified resource.
 func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
