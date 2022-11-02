@@ -195,9 +195,9 @@ var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser 
 // requires a "UserID" key, but one was not set
 var ErrMissingUserID = NewFieldError("UserID")
 
-// ErrMissingPermissions is an error that is returned when an input struct
-// requires a "Permissions" key, but one was not set
-var ErrMissingPermissions = NewFieldError("Permissions")
+// ErrMissingPermission is an error that is returned when an input struct
+// requires a "Permission" key, but one was not set
+var ErrMissingPermission = NewFieldError("Permission")
 
 // ErrMissingServiceVersion is an error that is returned when an input struct
 // requires a "ServiceVersion" key, but one was not set.

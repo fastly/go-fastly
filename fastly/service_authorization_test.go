@@ -25,7 +25,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	}
 
 	// List
-	var sasResp *SAResponse
+	var sasResp *ServiceAuthorizations
 	record(t, fixtureBase+"/list", func(c *Client) {
 		sasResp, err = c.ListServiceAuthorizations(&ListServiceAuthorizationsInput{
 			PageSize: 10,
@@ -78,8 +78,8 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	var usa *ServiceAuthorization
 	record(t, fixtureBase+"update", func(c *Client) {
 		usa, err = c.UpdateServiceAuthorization(&UpdateServiceAuthorizationInput{
-			ID:          sa.ID,
-			Permissions: "purge_select",
+			ID:         sa.ID,
+			Permission: "purge_select",
 		})
 	})
 	if err != nil {
@@ -136,18 +136,18 @@ func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 func TestClient_UpdateServiceAuthorization_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateServiceAuthorization(&UpdateServiceAuthorizationInput{
-		ID:          "",
-		Permissions: "",
+		ID:         "",
+		Permission: "",
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateServiceAuthorization(&UpdateServiceAuthorizationInput{
-		ID:          "my-service-authorization-id",
-		Permissions: "",
+		ID:         "my-service-authorization-id",
+		Permission: "",
 	})
-	if err != ErrMissingPermissions {
+	if err != ErrMissingPermission {
 		t.Errorf("bad error: %s", err)
 	}
 }
