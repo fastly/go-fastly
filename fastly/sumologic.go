@@ -77,18 +77,24 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 
 // CreateSumologicInput is used as input to the CreateSumologic function.
 type CreateSumologicInput struct {
-	Address           string `url:"address,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     int    `url:"format_version,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion int `url:"format_version,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	URL            string `url:"url,omitempty"`
+	// URL is the URL to post logs to.
+	URL string `url:"url,omitempty"`
 }
 
 // CreateSumologic creates a new resource.
@@ -155,20 +161,27 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 
 // UpdateSumologicInput is used as input to the UpdateSumologic function.
 type UpdateSumologicInput struct {
-	Address       *string `url:"address,omitempty"`
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *int    `url:"format_version,omitempty"`
-	MessageType   *string `url:"message_type,omitempty"`
+	Address *string `url:"address,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *int `url:"format_version,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the sumologic to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	URL            *string `url:"url,omitempty"`
+	// URL is the URL to post logs to.
+	URL *string `url:"url,omitempty"`
 }
 
 // UpdateSumologic updates the specified resource.

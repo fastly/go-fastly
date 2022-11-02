@@ -153,30 +153,51 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 
 // CreateS3Input is used as input to the CreateS3 function.
 type CreateS3Input struct {
-	ACL                          S3AccessControlList    `url:"acl,omitempty"`
-	AccessKey                    string                 `url:"access_key,omitempty"`
-	BucketName                   string                 `url:"bucket_name,omitempty"`
-	CompressionCodec             string                 `url:"compression_codec,omitempty"`
-	Domain                       string                 `url:"domain,omitempty"`
-	Format                       string                 `url:"format,omitempty"`
-	FormatVersion                uint                   `url:"format_version,omitempty"`
-	GzipLevel                    uint8                  `url:"gzip_level,omitempty"`
-	IAMRole                      string                 `url:"iam_role,omitempty"`
-	MessageType                  string                 `url:"message_type,omitempty"`
-	Name                         string                 `url:"name,omitempty"`
-	Path                         string                 `url:"path,omitempty"`
-	Period                       uint                   `url:"period,omitempty"`
-	Placement                    string                 `url:"placement,omitempty"`
-	PublicKey                    string                 `url:"public_key,omitempty"`
-	Redundancy                   S3Redundancy           `url:"redundancy,omitempty"`
-	ResponseCondition            string                 `url:"response_condition,omitempty"`
-	SecretKey                    string                 `url:"secret_key,omitempty"`
-	ServerSideEncryption         S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
-	ServerSideEncryptionKMSKeyID string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	// ACL is the access control list (ACL) specific request header.
+	ACL S3AccessControlList `url:"acl,omitempty"`
+	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
+	AccessKey string `url:"access_key,omitempty"`
+	// BucketName is the bucket name for S3 account.
+	BucketName string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
+	CompressionCodec string `url:"compression_codec,omitempty"`
+	// Domain is the domain of the Amazon S3 endpoint.
+	Domain string `url:"domain,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	// IAMRole is the Amazon Resource Name (ARN) for the IAM role granting Fastly access to S3. Not required if access_key and secret_key are provided.
+	IAMRole string `url:"iam_role,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name of the SFTP to update (required).
+	Name string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey string `url:"public_key,omitempty"`
+	// Redundancy is the S3 redundancy level.
+	Redundancy S3Redundancy `url:"redundancy,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// SecretKey is the secret key for your S3 account. Not required if iam_role is provided.
+	SecretKey string `url:"secret_key,omitempty"`
+	// ServerSideEncryption should be set to AES256 or aws:kms to enable S3 Server Side Encryption.
+	ServerSideEncryption S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	// ServerSideEncryptionKMSKeyID is an optional server-side KMS Key ID. Must be set if ServerSideEncryption is set to aws:kms or AES256.
+	ServerSideEncryptionKMSKeyID string `url:"server_side_encryption_kms_key_id,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
@@ -248,32 +269,53 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 
 // UpdateS3Input is used as input to the UpdateS3 function.
 type UpdateS3Input struct {
-	ACL              *S3AccessControlList `url:"acl,omitempty"`
-	AccessKey        *string              `url:"access_key,omitempty"`
-	BucketName       *string              `url:"bucket_name,omitempty"`
-	CompressionCodec *string              `url:"compression_codec,omitempty"`
-	Domain           *string              `url:"domain,omitempty"`
-	Format           *string              `url:"format,omitempty"`
-	FormatVersion    *uint                `url:"format_version,omitempty"`
-	GzipLevel        *uint8               `url:"gzip_level,omitempty"`
-	IAMRole          *string              `url:"iam_role,omitempty"`
-	MessageType      *string              `url:"message_type,omitempty"`
+	// ACL is the access control list (ACL) specific request header.
+	ACL *S3AccessControlList `url:"acl,omitempty"`
+	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
+	AccessKey *string `url:"access_key,omitempty"`
+	// BucketName is the bucket name for S3 account.
+	BucketName *string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Domain is the domain of the Amazon S3 endpoint.
+	Domain *string `url:"domain,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	// IAMRole is the Amazon Resource Name (ARN) for the IAM role granting Fastly access to S3. Not required if access_key and secret_key are provided.
+	IAMRole *string `url:"iam_role,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the S3 to update.
-	Name                         string
-	NewName                      *string                 `url:"name,omitempty"`
-	Path                         *string                 `url:"path,omitempty"`
-	Period                       *uint                   `url:"period,omitempty"`
-	Placement                    *string                 `url:"placement,omitempty"`
-	PublicKey                    *string                 `url:"public_key,omitempty"`
-	Redundancy                   *S3Redundancy           `url:"redundancy,omitempty"`
-	ResponseCondition            *string                 `url:"response_condition,omitempty"`
-	SecretKey                    *string                 `url:"secret_key,omitempty"`
-	ServerSideEncryption         *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
-	ServerSideEncryptionKMSKeyID *string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path *string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period *uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `url:"public_key,omitempty"`
+	// Redundancy is the S3 redundancy level.
+	Redundancy *S3Redundancy `url:"redundancy,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	// SecretKey is the secret key for your S3 account. Not required if iam_role is provided.
+	SecretKey *string `url:"secret_key,omitempty"`
+	// ServerSideEncryption should be set to AES256 or aws:kms to enable S3 Server Side Encryption.
+	ServerSideEncryption *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	// ServerSideEncryptionKMSKeyID is an optional server-side KMS Key ID. Must be set if ServerSideEncryption is set to aws:kms or AES256.
+	ServerSideEncryptionKMSKeyID *string `url:"server_side_encryption_kms_key_id,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 

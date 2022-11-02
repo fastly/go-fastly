@@ -43,69 +43,69 @@ type WAFRuleExclusionResponse struct {
 
 // ListWAFRuleExclusionsInput used as input for listing a WAF's rule exclusions.
 type ListWAFRuleExclusionsInput struct {
-	// Limit results to exclusions with the specified exclusions type.
+	// FilterExclusionType limits results to exclusions with the specified exclusions type.
 	FilterExclusionType *string
-	// Limit results to exclusions that represent the specified ModSecurity modsec_rule_id.
+	// FilterModSedID limits results to exclusions that represent the specified ModSecurity modsec_rule_id.
 	FilterModSedID *string
-	// Limit results to exclusions with the specified exclusion name.
+	// FilterName limits results to exclusions with the specified exclusion name.
 	FilterName *string
-	// Include relationships. Optional. Permitted values: waf_rules.
+	// Include captures relationships. Optional. Permitted values: waf_rules.
 	Include []string
-	// Request a specific page of exclusions.
+	// PageNumber requests a specific page of exclusions.
 	PageNumber *int
-	// Limit the number of returned pages.
+	// PageSize limits the number of returned pages.
 	PageSize *int
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
 // ListAllWAFRuleExclusionsInput used as input for listing all WAF rule exclusions.
 type ListAllWAFRuleExclusionsInput struct {
-	// Limit results to exclusions with the specified exclusions type.
+	// FilterExclusionType limits results to exclusions with the specified exclusions type.
 	FilterExclusionType *string
-	// Limit results to exclusions that represent the specified ModSecurity modsec_rule_id.
+	// FilterModSedID limits results to exclusions that represent the specified ModSecurity modsec_rule_id.
 	FilterModSedID *string
-	// Limit results to exclusions with the specified exclusion name.
+	// FilterName limits results to exclusions with the specified exclusion name.
 	FilterName *string
-	// Include relationships. Optional. Permitted values: waf_rules.
+	// Include captures relationships. Optional. Permitted values: waf_rules.
 	Include []string
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
 // CreateWAFRuleExclusionInput creates a new resource.
 type CreateWAFRuleExclusionInput struct {
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's exclusion
+	// WAFRuleExclusion is the Web Application Firewall's exclusion
 	WAFRuleExclusion *WAFRuleExclusion
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
 // UpdateWAFRuleExclusionInput is used for exclusions updates.
 type UpdateWAFRuleExclusionInput struct {
-	// The exclusion number.
+	// Number is the rule exclusion number.
 	Number int
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The WAF rule exclusion
+	// WAFRuleExclusion is the Web Application Firewall's exclusion
 	WAFRuleExclusion *WAFRuleExclusion
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
 // DeleteWAFRuleExclusionInput used as input for removing WAF rule exclusions.
 type DeleteWAFRuleExclusionInput struct {
-	// The rule exclusion number.
+	// Number is the rule exclusion number.
 	Number int
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 

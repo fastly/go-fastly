@@ -53,8 +53,10 @@ type BillingExtra struct {
 
 // GetBillingInput is used as input to the GetBilling function.
 type GetBillingInput struct {
+	// Month is a 2-digit month.
 	Month uint8
-	Year  uint16
+	// Year is a 4-digit year.
+	Year uint16
 }
 
 // GetBilling returns the billing information for the current account.

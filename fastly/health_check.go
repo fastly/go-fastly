@@ -81,23 +81,36 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 
 // CreateHealthCheckInput is used as input to the CreateHealthCheck function.
 type CreateHealthCheckInput struct {
-	CheckInterval    *uint    `url:"check_interval,omitempty"`
-	Comment          string   `url:"comment,omitempty"`
-	ExpectedResponse *uint    `url:"expected_response,omitempty"`
-	HTTPVersion      string   `url:"http_version,omitempty"`
-	Headers          []string `url:"headers,omitempty"`
-	Host             string   `url:"host,omitempty"`
-	Initial          *uint    `url:"initial,omitempty"`
-	Method           string   `url:"method,omitempty"`
-	Name             string   `url:"name,omitempty"`
-	Path             string   `url:"path,omitempty"`
+	// CheckInterval is how often to run the health check in milliseconds.
+	CheckInterval *uint `url:"check_interval,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment string `url:"comment,omitempty"`
+	// ExpectedResponse is the status code expected from the host.
+	ExpectedResponse *uint `url:"expected_response,omitempty"`
+	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
+	HTTPVersion string `url:"http_version,omitempty"`
+	// Headers is an array of custom headers that will be added to the health check probes.
+	Headers []string `url:"headers,omitempty"`
+	// Host is which host to check.
+	Host string `url:"host,omitempty"`
+	// Initial is when loading a config, the initial number of probes to be seen as OK.
+	Initial *uint `url:"initial,omitempty"`
+	// Method is which HTTP method to use.
+	Method string `url:"method,omitempty"`
+	// Name is the name of the health check.
+	Name string `url:"name,omitempty"`
+	// Path is the path to check.
+	Path string `url:"path,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Threshold      *uint `url:"threshold,omitempty"`
-	Timeout        *uint `url:"timeout,omitempty"`
-	Window         *uint `url:"window,omitempty"`
+	// Threshold is how many health checks must succeed to be considered healthy.
+	Threshold *uint `url:"threshold,omitempty"`
+	// Timeout is timeout in milliseconds.
+	Timeout *uint `url:"timeout,omitempty"`
+	// Window is the number of most recent health check queries to keep for this health check.
+	Window *uint `url:"window,omitempty"`
 }
 
 // CreateHealthCheck creates a new resource.
@@ -105,7 +118,6 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -142,11 +154,9 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -167,25 +177,38 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 
 // UpdateHealthCheckInput is used as input to the UpdateHealthCheck function.
 type UpdateHealthCheckInput struct {
-	CheckInterval    *uint     `url:"check_interval,omitempty"`
-	Comment          *string   `url:"comment,omitempty"`
-	ExpectedResponse *uint     `url:"expected_response,omitempty"`
-	HTTPVersion      *string   `url:"http_version,omitempty"`
-	Headers          *[]string `url:"headers,omitempty"`
-	Host             *string   `url:"host,omitempty"`
-	Initial          *uint     `url:"initial,omitempty"`
-	Method           *string   `url:"method,omitempty"`
+	// CheckInterval is how often to run the health check in milliseconds.
+	CheckInterval *uint `url:"check_interval,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment *string `url:"comment,omitempty"`
+	// ExpectedResponse is the status code expected from the host.
+	ExpectedResponse *uint `url:"expected_response,omitempty"`
+	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
+	HTTPVersion *string `url:"http_version,omitempty"`
+	// Headers is an array of custom headers that will be added to the health check probes.
+	Headers *[]string `url:"headers,omitempty"`
+	// Host is which host to check.
+	Host *string `url:"host,omitempty"`
+	// Initial is when loading a config, the initial number of probes to be seen as OK.
+	Initial *uint `url:"initial,omitempty"`
+	// Method is which HTTP method to use.
+	Method *string `url:"method,omitempty"`
 	// Name is the name of the health check to update.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	Path    *string `url:"path,omitempty"`
+	// Path is the path to check.
+	Path *string `url:"path,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Threshold      *uint `url:"threshold,omitempty"`
-	Timeout        *uint `url:"timeout,omitempty"`
-	Window         *uint `url:"window,omitempty"`
+	// Threshold is how many health checks must succeed to be considered healthy.
+	Threshold *uint `url:"threshold,omitempty"`
+	// Timeout is timeout in milliseconds.
+	Timeout *uint `url:"timeout,omitempty"`
+	// Window is the number of most recent health check queries to keep for this health check.
+	Window *uint `url:"window,omitempty"`
 }
 
 // UpdateHealthCheck updates the specified resource.
@@ -193,11 +216,9 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}

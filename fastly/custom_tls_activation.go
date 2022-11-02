@@ -20,12 +20,18 @@ type TLSActivation struct {
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
 type ListTLSActivationsInput struct {
-	FilterTLSCertificateID   string // Limit the returned activations to a specific certificate.
-	FilterTLSConfigurationID string // Limit the returned activations to a specific TLS configuration.
-	FilterTLSDomainID        string // Limit the returned rules to a specific domain name.
-	Include                  string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
-	PageNumber               int    // The page index for pagination.
-	PageSize                 int    // The number of activations per page.
+	// FilterTLSCertificateID limits the returned activations to a specific certificate.
+	FilterTLSCertificateID string
+	// FilterTLSConfigurationID limits the returned activations to a specific TLS configuration.
+	FilterTLSConfigurationID string
+	// FilterTLSDomainID limits the returned rules to a specific domain name.
+	FilterTLSDomainID string
+	// Include captures related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
+	Include string
+	// PageNumber is the page index for pagination.
+	PageNumber int
+	// PageSize is the number of activations per page.
+	PageSize int
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -90,8 +96,10 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 
 // GetTLSActivationInput is used as input to the GetTLSActivation function.
 type GetTLSActivationInput struct {
-	ID      string
-	Include *string // Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
+	// ID is an alphanumeric string identifying a TLS activation.
+	ID string
+	// Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
+	Include *string
 }
 
 // GetTLSActivation retrieves the specified resource.
@@ -127,10 +135,14 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 
 // CreateTLSActivationInput is used as input to the CreateTLSActivation function.
 type CreateTLSActivationInput struct {
-	Certificate   *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
-	Configuration *TLSConfiguration     `jsonapi:"relation,tls_configuration,omitempty"`
-	Domain        *TLSDomain            `jsonapi:"relation,tls_domain"`
-	ID            string                `jsonapi:"primary,tls_activation"` // ID value does not need to be set.
+	// Certificate is an alphanumeric string identifying a TLS certificate.
+	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
+	// Configuration is an alphanumeric string identifying a TLS configuration.
+	Configuration *TLSConfiguration `jsonapi:"relation,tls_configuration,omitempty"`
+	// Domain is the domain name.
+	Domain *TLSDomain `jsonapi:"relation,tls_domain"`
+	// ID is an aphanumeric string identifying a TLS activation.
+	ID string `jsonapi:"primary,tls_activation"` // ID value does not need to be set.
 }
 
 // CreateTLSActivation creates a new resource.
@@ -159,8 +171,10 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 
 // UpdateTLSActivationInput is used as input to the UpdateTLSActivation function.
 type UpdateTLSActivationInput struct {
+	// Certificate is an alphanumeric string identifying a TLS certificate.
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
-	ID          string                `jsonapi:"primary,tls_activation"`
+	// ID is an aphanumeric string identifying a TLS activation.
+	ID string `jsonapi:"primary,tls_activation"`
 }
 
 // UpdateTLSActivation updates the specified resource.
@@ -188,6 +202,7 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 
 // DeleteTLSActivationInput used for deleting a certificate.
 type DeleteTLSActivationInput struct {
+	// ID is an alphanumeric string identifying a TLS activation.
 	ID string
 }
 

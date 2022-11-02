@@ -45,19 +45,19 @@ type WAFRuleResponse struct {
 
 // ListWAFRulesInput used as input for listing WAF rules.
 type ListWAFRulesInput struct {
-	// Excludes individual rules by modsecurity rule IDs.
+	// ExcludeModSecIDs excludes individual rules by modsecurity rule IDs.
 	ExcludeModSecIDs []int
-	// Limit the returned rules to a set by modsecurity rule IDs.
+	// FilterModSecIDs limits the returned rules to a set by modsecurity rule IDs.
 	FilterModSecIDs []int
-	// Limit the returned rules to a set by publishers.
+	// FilterPublishers limits the returned rules to a set by publishers.
 	FilterPublishers []string
-	// Limit the returned rules to a set linked to list of tags by name.
+	// FilterTagNames limits the returned rules to a set linked to list of tags by name.
 	FilterTagNames []string
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
 	Include string
-	// Request a specific page of rules.
+	// PageNumber requests a specific page of rules.
 	PageNumber int
-	// Limit the number of returned rules.
+	// PageSize limits the number of returned rules.
 	PageSize int
 }
 
@@ -139,15 +139,15 @@ func (c *Client) ListWAFRules(i *ListWAFRulesInput) (*WAFRuleResponse, error) {
 
 // ListAllWAFRulesInput used as input for listing all WAF rules.
 type ListAllWAFRulesInput struct {
-	// Excludes individual rules by modsecurity rule IDs.
+	// ExcludeMocSecIDs excludes individual rules by modsecurity rule IDs.
 	ExcludeMocSecIDs []int
-	// Limit the returned rules to a set by modsecurity rule IDs.
+	// FilterModSecIDs limits the returned rules to a set by modsecurity rule IDs.
 	FilterModSecIDs []int
-	// Limit the returned rules to a set by publishers.
+	// FilterPublishers limits the returned rules to a set by publishers.
 	FilterPublishers []string
-	// Limit the returned rules to a set linked to a tag by name.
+	// FilterTagNames limits the returned rules to a set linked to a tag by name.
 	FilterTagNames []string
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
 	Include string
 }
 

@@ -12,6 +12,7 @@ import (
 // GetPrivateKeyInput is an input to the GetPrivateKey function.
 // Allowed values for the fields are described at https://developer.fastly.com/reference/api/tls/platform/.
 type GetPrivateKeyInput struct {
+	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
 
@@ -28,9 +29,12 @@ type PrivateKey struct {
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
-	FilterInUse string // Limit the returned keys to those without any matching TLS certificates.
-	PageNumber  int    // The page index for pagination.
-	PageSize    int    // The number of keys per page.
+	// FilterInUse is the returned keys to those without any matching TLS certificates.
+	FilterInUse string
+	// PageNumber is the page index for pagination.
+	PageNumber int
+	// PageSize is the number of keys per page.
+	PageSize int
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -113,7 +117,9 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 // CreatePrivateKeyInput is used as input to the CreatePrivateKey function.
 type CreatePrivateKeyInput struct {
-	Key  string `jsonapi:"attr,key,omitempty"`
+	// Key is the contents of the private key. Must be a PEM-formatted key.
+	Key string `jsonapi:"attr,key,omitempty"`
+	// Name is a customizable name for your private key.
 	Name string `jsonapi:"attr,name,omitempty"`
 }
 
@@ -144,6 +150,7 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 
 // DeletePrivateKeyInput used for deleting a private key.
 type DeletePrivateKeyInput struct {
+	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
 

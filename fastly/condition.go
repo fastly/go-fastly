@@ -74,14 +74,18 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 
 // CreateConditionInput is used as input to the CreateCondition function.
 type CreateConditionInput struct {
-	Name     string `url:"name,omitempty"`
-	Priority *int   `url:"priority,omitempty"`
+	// Name is the name of the condition.
+	Name string `url:"name,omitempty"`
+	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
+	Priority *int `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Statement      string `url:"statement,omitempty"`
-	Type           string `url:"type,omitempty"`
+	// Statement is a conditional expression in VCL used to determine if the condition is met.
+	Statement string `url:"statement,omitempty"`
+	// Type is the type of the condition (REQUEST, CACHE, RESPONSE, PREFETCH).
+	Type string `url:"type,omitempty"`
 }
 
 // CreateCondition creates a new resource.
@@ -148,16 +152,20 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 
 // UpdateConditionInput is used as input to the UpdateCondition function.
 type UpdateConditionInput struct {
+	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Name is the name of the condition to update.
-	Name     string
+	Name string
+	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
 	Priority *int `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Statement      *string `url:"statement,omitempty"`
-	Type           *string `url:"type,omitempty"`
+	// Statement is a conditional expression in VCL used to determine if the condition is met.
+	Statement *string `url:"statement,omitempty"`
+	// Type is the type of the condition (REQUEST, CACHE, RESPONSE, PREFETCH).
+	Type *string `url:"type,omitempty"`
 }
 
 // UpdateCondition updates the specified resource.

@@ -78,19 +78,28 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 
 // CreateLogentriesInput is used as input to the CreateLogentries function.
 type CreateLogentriesInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Port              uint   `url:"port,omitempty"`
-	Region            string `url:"region,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port uint `url:"port,omitempty"`
+	// Region is the region to which to stream logs.
+	Region string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string      `url:"token,omitempty"`
-	UseTLS         Compatibool `url:"use_tls,omitempty"`
+	// Token is token based authentication
+	Token string `url:"token,omitempty"`
+	// UseTLS is whether to use TLS (0: do not use, 1: use).
+	UseTLS Compatibool `url:"use_tls,omitempty"`
 }
 
 // CreateLogentries creates a new resource.
@@ -157,21 +166,30 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 
 // UpdateLogentriesInput is used as input to the UpdateLogentries function.
 type UpdateLogentriesInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the logentries to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Port              *uint   `url:"port,omitempty"`
-	Region            *string `url:"region,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port *uint `url:"port,omitempty"`
+	// Region is the region to which to stream logs.
+	Region *string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string      `url:"token,omitempty"`
-	UseTLS         *Compatibool `url:"use_tls,omitempty"`
+	// Token is token based authentication
+	Token *string `url:"token,omitempty"`
+	// UseTLS is whether to use TLS (0: do not use, 1: use).
+	UseTLS *Compatibool `url:"use_tls,omitempty"`
 }
 
 // UpdateLogentries updates the specified resource.

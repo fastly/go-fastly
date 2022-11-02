@@ -72,6 +72,7 @@ func (c *Client) ListTokens() ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
+	// CustomerID is an alphanumeric string identifying the customer.
 	CustomerID string
 }
 
@@ -117,12 +118,18 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
+	// ExpiresAt is a time-stamp (UTC) of when the token will expire
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
-	Name      string     `url:"name,omitempty"`
-	Password  string     `url:"password,omitempty"`
-	Scope     TokenScope `url:"scope,omitempty"`
-	Services  []string   `url:"services,brackets,omitempty"`
-	Username  string     `url:"username,omitempty"`
+	// Name is the name of the token.
+	Name string `url:"name,omitempty"`
+	// Password is the token password.
+	Password string `url:"password,omitempty"`
+	// Scope is a space-delimited list of authorization scope (global, purge_select, purge_all, global).
+	Scope TokenScope `url:"scope,omitempty"`
+	// Services is a list of alphanumeric strings identifying services. If no services are specified, the token will have access to all services on the account.
+	Services []string `url:"services,brackets,omitempty"`
+	// Username is the email of the user the token is assigned to.
+	Username string `url:"username,omitempty"`
 }
 
 // CreateToken creates a new resource.
@@ -147,6 +154,7 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
+	// TokenID is an alphanumeric string identifying a token.
 	TokenID string
 }
 
@@ -185,12 +193,14 @@ func (c *Client) DeleteTokenSelf() error {
 
 // BatchDeleteTokensInput is used as input to BatchDeleteTokens.
 type BatchDeleteTokensInput struct {
+	// Tokens is a list of alphanumeric strings, each identifying a token.
 	Tokens []*BatchToken
 }
 
 // BatchToken represents the JSONAPI data to be sent to the API.
 // Reference: https://github.com/google/jsonapi#primary
 type BatchToken struct {
+	// ID is an alphanumeric string identifying a token.
 	ID string `jsonapi:"primary,token,omitempty"`
 }
 

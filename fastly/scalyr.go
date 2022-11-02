@@ -76,17 +76,24 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 
 // CreateScalyrInput is used as input to the CreateScalyr function.
 type CreateScalyrInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Region            string `url:"region,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Region is the region that log data will be sent to.
+	Region string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string `url:"token,omitempty"`
+	// Token is the token to use for authentication
+	Token string `url:"token,omitempty"`
 }
 
 // CreateScalyr creates a new resource.
@@ -157,19 +164,26 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 
 // UpdateScalyrInput is used as input to the UpdateScalyr function.
 type UpdateScalyrInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the scalyr to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Region            *string `url:"region,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Region is the region that log data will be sent to.
+	Region *string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string `url:"token,omitempty"`
+	// Token is the token to use for authentication
+	Token *string `url:"token,omitempty"`
 }
 
 // UpdateScalyr updates the specified resource.

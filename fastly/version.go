@@ -96,7 +96,7 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 
 // CreateVersionInput is the input to the CreateVersion function.
 type CreateVersionInput struct {
-	// A personal freeform descriptive note.
+	// Comment is a personal freeform descriptive note.
 	Comment string `url:"comment,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -129,7 +129,7 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 type GetVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-	// SrrviceVersion is the version number to fetch (required).
+	// ServiceVersion is the version number to fetch (required).
 	ServiceVersion int
 }
 
@@ -159,7 +159,7 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 
 // UpdateVersionInput is the input to the UpdateVersion function.
 type UpdateVersionInput struct {
-	// A personal freeform descriptive note.
+	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string

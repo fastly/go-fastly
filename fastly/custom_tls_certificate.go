@@ -27,12 +27,18 @@ type CustomTLSCertificate struct {
 
 // ListCustomTLSCertificatesInput is used as input to the Client.ListCustomTLSCertificates function.
 type ListCustomTLSCertificatesInput struct {
-	FilterNotAfter     string // Limit the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
-	FilterTLSDomainsID string // Limit the returned certificates to those that include the specific domain.
-	Include            string // Include related objects. Optional, comma-separated values. Permitted values: tls_activations.
-	PageNumber         int    // The page index for pagination.
-	PageSize           int    // The number of keys per page.
-	Sort               string // The order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
+	// FilterNotAfter limits the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
+	FilterNotAfter string
+	// FilterTLSDomainsID limits the returned certificates to those that include the specific domain.
+	FilterTLSDomainsID string
+	// Include captures related objects. Optional, comma-separated values. Permitted values: tls_activations.
+	Include string
+	// PageNumber is the page index for pagination.
+	PageNumber int
+	// PageSize is the number of keys per page.
+	PageSize int
+	// Sort is the order in which to list certificates. Valid values are created_at, not_before, not_after. May precede any value with a - for descending.
+	Sort string
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -97,6 +103,7 @@ func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([
 
 // GetCustomTLSCertificateInput is used as input to the GetCustomTLSCertificate function.
 type GetCustomTLSCertificateInput struct {
+	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string
 }
 
@@ -123,9 +130,12 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 
 // CreateCustomTLSCertificateInput is used as input to the CreateCustomTLSCertificate function.
 type CreateCustomTLSCertificateInput struct {
+	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
-	ID       string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
-	Name     string `jsonapi:"attr,name,omitempty"`
+	// ID is an alphanumeric string identifying a TLS certificate.
+	ID string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
+	// Name is a customizable name for your certificate.
+	Name string `jsonapi:"attr,name,omitempty"`
 }
 
 // CreateCustomTLSCertificate creates a new resource.
@@ -151,9 +161,12 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 
 // UpdateCustomTLSCertificateInput is used as input to the UpdateCustomTLSCertificate function.
 type UpdateCustomTLSCertificateInput struct {
-	ID       string `jsonapi:"primary,tls_certificate"`
+	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
-	Name     string `jsonapi:"attr,name,omitempty"`
+	// ID is an alphanumeric string identifying a TLS certificate.
+	ID string `jsonapi:"primary,tls_certificate"`
+	// Name is a customizable name for your certificate.
+	Name string `jsonapi:"attr,name,omitempty"`
 }
 
 // UpdateCustomTLSCertificate updates the specified resource.
@@ -186,6 +199,7 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 
 // DeleteCustomTLSCertificateInput used for deleting a certificate.
 type DeleteCustomTLSCertificateInput struct {
+	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string
 }
 

@@ -85,26 +85,42 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 
 // CreateCloudfilesInput is used as input to the CreateCloudfiles function.
 type CreateCloudfilesInput struct {
-	AccessKey         string `url:"access_key,omitempty"`
-	BucketName        string `url:"bucket_name,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Path              string `url:"path,omitempty"`
-	Period            uint   `url:"period,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	PublicKey         string `url:"public_key,omitempty"`
-	Region            string `url:"region,omitempty"`
+	// AccessKey is your Cloud Files account access key.
+	AccessKey string `url:"access_key,omitempty"`
+	// BucketName is the name of your Cloud Files container.
+	BucketName string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
+	CompressionCodec string `url:"compression_codec,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey string `url:"public_key,omitempty"`
+	// Region is the region to stream logs to.
+	Region string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat string `url:"timestamp_format,omitempty"`
-	User            string `url:"user,omitempty"`
+	// User is the username for your Cloud Files account.
+	User string `url:"user,omitempty"`
 }
 
 // CreateCloudfiles creates a new resource.
@@ -171,28 +187,44 @@ func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 
 // UpdateCloudfilesInput is used as input to the UpdateCloudfiles function.
 type UpdateCloudfilesInput struct {
-	AccessKey        *string `url:"access_key,omitempty"`
-	BucketName       *string `url:"bucket_name,omitempty"`
+	// AccessKey is your Cloud Files account access key.
+	AccessKey *string `url:"access_key,omitempty"`
+	// BucketName is the name of your Cloud Files container.
+	BucketName *string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	Format           *string `url:"format,omitempty"`
-	FormatVersion    *uint   `url:"format_version,omitempty"`
-	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
-	MessageType      *string `url:"message_type,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the Cloudfiles to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Path              *string `url:"path,omitempty"`
-	Period            *uint   `url:"period,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
-	Region            *string `url:"region,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path *string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period *uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `url:"public_key,omitempty"`
+	// Region is the region to stream logs to.
+	Region *string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
-	User            *string `url:"user,omitempty"`
+	// User is the username for your Cloud Files account.
+	User *string `url:"user,omitempty"`
 }
 
 // UpdateCloudfiles updates the specified resource.

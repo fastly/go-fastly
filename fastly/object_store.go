@@ -45,8 +45,10 @@ func (c *Client) CreateObjectStore(i *CreateObjectStoreInput) (*ObjectStore, err
 
 // ListObjectStoresInput is used as an input to the ListObjectStores function.
 type ListObjectStoresInput struct {
+	// Cursor is used for paginating through results.
 	Cursor string
-	Limit  int
+	// Limit is the maximum number of items included the response.
+	Limit int
 }
 
 func (l *ListObjectStoresInput) formatFilters() map[string]string {
@@ -202,9 +204,11 @@ func (c *Client) DeleteObjectStore(i *DeleteObjectStoreInput) error {
 
 // ListObjectStoreKeysInput is the input to the ListObjectStoreKeys function.
 type ListObjectStoreKeysInput struct {
+	// Cursor is used for paginating through results.
 	Cursor string
 	// ID is the ID of the object store to list keys for.
-	ID    string
+	ID string
+	// Limit is the maximum number of items included the response.
 	Limit int
 }
 

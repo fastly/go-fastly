@@ -179,11 +179,11 @@ func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiv
 
 // CreateWAFActiveRulesInput creates a new resource.
 type CreateWAFActiveRulesInput struct {
-	// The list of WAF active rules (ModSecID, Status and Revision are required).
+	// Rules is the list of WAF active rules (ModSecID, Status and Revision are required).
 	Rules []*WAFActiveRule
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
@@ -227,13 +227,13 @@ func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiv
 
 // BatchModificationWAFActiveRulesInput is used for active rules batch modifications.
 type BatchModificationWAFActiveRulesInput struct {
-	// The batch operation to be performed (allowed operations are upsert and delete).
+	// OP is the batch operation to be performed (allowed operations are upsert and delete).
 	OP BatchOperation
-	// The list of WAF active rules (ModSecID, Status and Revision are required for upsert, ModSecID is required for delete).
+	// Rules is the list of WAF active rules (ModSecID, Status and Revision are required for upsert, ModSecID is required for delete).
 	Rules []*WAFActiveRule
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
@@ -267,11 +267,11 @@ func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRu
 
 // DeleteWAFActiveRulesInput used as input for removing rules from a WAF.
 type DeleteWAFActiveRulesInput struct {
-	// The list of WAF active rules (ModSecID is required).
+	// Rules is the list of WAF active rules (ModSecID is required).
 	Rules []*WAFActiveRule
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 

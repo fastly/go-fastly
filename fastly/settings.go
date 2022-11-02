@@ -46,13 +46,17 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 
 // UpdateSettingsInput is used as input to the UpdateSettings function.
 type UpdateSettingsInput struct {
+	// DefaultHost is the default host name for the version.
 	DefaultHost *string `url:"general.default_host,omitempty"`
-	DefaultTTL  uint    `url:"general.default_ttl"`
+	// DefaultTTL is the default time-to-live (TTL) for the version.
+	DefaultTTL uint `url:"general.default_ttl"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
-	StaleIfError    *bool `url:"general.stale_if_error,omitempty"`
+	ServiceVersion int
+	// StaleIfError enables serving a stale object if there is an error.
+	StaleIfError *bool `url:"general.stale_if_error,omitempty"`
+	// StaleIfErrorTTL is the default time-to-live (TTL) for serving the stale object for the version.
 	StaleIfErrorTTL *uint `url:"general.stale_if_error_ttl,omitempty"`
 }
 

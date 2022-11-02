@@ -85,26 +85,42 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 
 // CreateElasticsearchInput is used as input to the CreateElasticsearch function.
 type CreateElasticsearchInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Index             string `url:"index,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Password          string `url:"password,omitempty"`
-	Pipeline          string `url:"pipeline,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	RequestMaxBytes   uint   `url:"request_max_bytes,omitempty"`
-	RequestMaxEntries uint   `url:"request_max_entries,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that Elasticsearch can ingest.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Index is the name of the Elasticsearch index to send documents (logs) to.
+	Index string `url:"index,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Password is basic Auth password.
+	Password string `url:"password,omitempty"`
+	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
+	Pipeline string `url:"pipeline,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// RequestMaxBytes is the maximum number of bytes sent in one request.
+	RequestMaxBytes uint `url:"request_max_bytes,omitempty"`
+	// RequestMaxEntries is the maximum number of logs sent in one request.
+	RequestMaxEntries uint `url:"request_max_entries,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	TLSCACert      string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert  string `url:"tls_client_cert,omitempty"`
-	TLSClientKey   string `url:"tls_client_key,omitempty"`
-	TLSHostname    string `url:"tls_hostname,omitempty"`
-	URL            string `url:"url,omitempty"`
-	User           string `url:"user,omitempty"`
+	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
+	TLSCACert string `url:"tls_ca_cert,omitempty"`
+	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
+	TLSClientCert string `url:"tls_client_cert,omitempty"`
+	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
+	TLSClientKey string `url:"tls_client_key,omitempty"`
+	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
+	TLSHostname string `url:"tls_hostname,omitempty"`
+	// URL is the URL to stream logs to. Must use HTTPS.
+	URL string `url:"url,omitempty"`
+	// User is basic Auth username.
+	User string `url:"user,omitempty"`
 }
 
 // CreateElasticsearch creates a new resource.
@@ -173,28 +189,44 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 // UpdateElasticsearchInput is the input parameter to the UpdateElasticsearch
 // function.
 type UpdateElasticsearchInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
-	Index         *string `url:"index,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that Elasticsearch can ingest.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// Index is the name of the Elasticsearch index to send documents (logs) to.
+	Index *string `url:"index,omitempty"`
 	// Name is the name of the Elasticsearch endpoint to fetch.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Password          *string `url:"password,omitempty"`
-	Pipeline          *string `url:"pipeline,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	RequestMaxBytes   *uint   `url:"request_max_bytes,omitempty"`
-	RequestMaxEntries *uint   `url:"request_max_entries,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Password is basic Auth password.
+	Password *string `url:"password,omitempty"`
+	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
+	Pipeline *string `url:"pipeline,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// RequestMaxBytes is the maximum number of bytes sent in one request.
+	RequestMaxBytes *uint `url:"request_max_bytes,omitempty"`
+	// RequestMaxEntries is the maximum number of logs sent in one request.
+	RequestMaxEntries *uint `url:"request_max_entries,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	TLSCACert      *string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert  *string `url:"tls_client_cert,omitempty"`
-	TLSClientKey   *string `url:"tls_client_key,omitempty"`
-	TLSHostname    *string `url:"tls_hostname,omitempty"`
-	URL            *string `url:"url,omitempty"`
-	User           *string `url:"user,omitempty"`
+	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
+	TLSCACert *string `url:"tls_ca_cert,omitempty"`
+	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
+	TLSClientCert *string `url:"tls_client_cert,omitempty"`
+	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
+	TLSClientKey *string `url:"tls_client_key,omitempty"`
+	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
+	TLSHostname *string `url:"tls_hostname,omitempty"`
+	// URL is the URL to stream logs to. Must use HTTPS.
+	URL *string `url:"url,omitempty"`
+	// User is basic Auth username.
+	User *string `url:"user,omitempty"`
 }
 
 // UpdateElasticsearch updates the specified resource.

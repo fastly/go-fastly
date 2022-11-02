@@ -65,7 +65,6 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -87,28 +86,46 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 
 // CreateHTTPSInput is used as input to the CreateHTTPS function.
 type CreateHTTPSInput struct {
-	ContentType       string `url:"content_type,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	HeaderName        string `url:"header_name,omitempty"`
-	HeaderValue       string `url:"header_value,omitempty"`
-	JSONFormat        string `url:"json_format,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Method            string `url:"method,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	RequestMaxBytes   uint   `url:"request_max_bytes,omitempty"`
-	RequestMaxEntries uint   `url:"request_max_entries,omitempty"`
+	// ContentType is the content type of the header sent with the request.
+	ContentType string `url:"content_type,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// HeaderName is the name of the custom header sent with the request.
+	HeaderName string `url:"header_name,omitempty"`
+	// HeaderValue is the value of the custom header sent with the request.
+	HeaderValue string `url:"header_value,omitempty"`
+	// JSONFormat enforces valid JSON formatting for log entries (0: disabled, 1: array of JSON, 2: newline delimited JSON).
+	JSONFormat string `url:"json_format,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Method is the HTTP method used for request (POST, PUT).
+	Method string `url:"method,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (100MB).
+	RequestMaxBytes uint `url:"request_max_bytes,omitempty"`
+	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 (10k).
+	RequestMaxEntries uint `url:"request_max_entries,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	TLSCACert      string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert  string `url:"tls_client_cert,omitempty"`
-	TLSClientKey   string `url:"tls_client_key,omitempty"`
-	TLSHostname    string `url:"tls_hostname,omitempty"`
-	URL            string `url:"url,omitempty"`
+	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
+	TLSCACert string `url:"tls_ca_cert,omitempty"`
+	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
+	TLSClientCert string `url:"tls_client_cert,omitempty"`
+	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
+	TLSClientKey string `url:"tls_client_key,omitempty"`
+	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
+	TLSHostname string `url:"tls_hostname,omitempty"`
+	// URL is the URL to send logs to. Must use HTTPS
+	URL string `url:"url,omitempty"`
 }
 
 // CreateHTTPS creates a new resource.
@@ -116,7 +133,6 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -150,11 +166,9 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -176,30 +190,48 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 
 // UpdateHTTPSInput is the input parameter to the UpdateHTTPS function.
 type UpdateHTTPSInput struct {
-	ContentType   *string `url:"content_type,omitempty"`
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
-	HeaderName    *string `url:"header_name,omitempty"`
-	HeaderValue   *string `url:"header_value,omitempty"`
-	JSONFormat    *string `url:"json_format,omitempty"`
-	MessageType   *string `url:"message_type,omitempty"`
-	Method        *string `url:"method,omitempty"`
+	// ContentType is the content type of the header sent with the request.
+	ContentType *string `url:"content_type,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// HeaderName is the name of the custom header sent with the request.
+	HeaderName *string `url:"header_name,omitempty"`
+	// HeaderValue is the value of the custom header sent with the request.
+	HeaderValue *string `url:"header_value,omitempty"`
+	// JSONFormat enforces valid JSON formatting for log entries (0: disabled, 1: array of JSON, 2: newline delimited JSON).
+	JSONFormat *string `url:"json_format,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
+	// Method is the HTTP method used for request (POST, PUT).
+	Method *string `url:"method,omitempty"`
 	// Name is the name of the HTTPS endpoint to fetch.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	RequestMaxBytes   *uint   `url:"request_max_bytes,omitempty"`
-	RequestMaxEntries *uint   `url:"request_max_entries,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (100MB).
+	RequestMaxBytes *uint `url:"request_max_bytes,omitempty"`
+	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 (10k).
+	RequestMaxEntries *uint `url:"request_max_entries,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	TLSCACert      *string `url:"tls_ca_cert,omitempty"`
-	TLSClientCert  *string `url:"tls_client_cert,omitempty"`
-	TLSClientKey   *string `url:"tls_client_key,omitempty"`
-	TLSHostname    *string `url:"tls_hostname,omitempty"`
-	URL            *string `url:"url,omitempty"`
+	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
+	TLSCACert *string `url:"tls_ca_cert,omitempty"`
+	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
+	TLSClientCert *string `url:"tls_client_cert,omitempty"`
+	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
+	TLSClientKey *string `url:"tls_client_key,omitempty"`
+	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
+	TLSHostname *string `url:"tls_hostname,omitempty"`
+	// URL is the URL to send logs to. Must use HTTPS
+	URL *string `url:"url,omitempty"`
 }
 
 // UpdateHTTPS updates the specified resource.
@@ -207,11 +239,9 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -245,11 +275,9 @@ func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return ErrMissingName
 	}

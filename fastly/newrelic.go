@@ -76,17 +76,24 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 
 // CreateNewRelicInput is used as input to the CreateNewRelic function.
 type CreateNewRelicInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Region            string `url:"region,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Region is the region to which to stream logs.
+	Region string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string `url:"token,omitempty"`
+	// Token is the Insert API key from the Account page of your New Relic account.
+	Token string `url:"token,omitempty"`
 }
 
 // CreateNewRelic creates a new resource.
@@ -157,19 +164,26 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 
 // UpdateNewRelicInput is used as input to the UpdateNewRelic function.
 type UpdateNewRelicInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the newrelic to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Region            *string `url:"region,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Region is the region to which to stream logs.
+	Region *string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string `url:"token,omitempty"`
+	// Token is the Insert API key from the Account page of your New Relic account.
+	Token *string `url:"token,omitempty"`
 }
 
 // UpdateNewRelic updates the specified resource.

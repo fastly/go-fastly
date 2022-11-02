@@ -94,36 +94,63 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 
 // CreateBackendInput is used as input to the CreateBackend function.
 type CreateBackendInput struct {
-	Address             string       `url:"address,omitempty"`
-	AutoLoadbalance     Compatibool  `url:"auto_loadbalance,omitempty"`
-	BetweenBytesTimeout *uint        `url:"between_bytes_timeout,omitempty"`
-	Comment             string       `url:"comment,omitempty"`
-	ConnectTimeout      *uint        `url:"connect_timeout,omitempty"`
-	ErrorThreshold      *uint        `url:"error_threshold,omitempty"`
-	FirstByteTimeout    *uint        `url:"first_byte_timeout,omitempty"`
-	HealthCheck         string       `url:"healthcheck,omitempty"`
-	MaxConn             *uint        `url:"max_conn,omitempty"`
-	MaxTLSVersion       string       `url:"max_tls_version,omitempty"`
-	MinTLSVersion       string       `url:"min_tls_version,omitempty"`
-	Name                string       `url:"name,omitempty"`
-	OverrideHost        string       `url:"override_host,omitempty"`
-	Port                uint         `url:"port,omitempty"`
-	RequestCondition    string       `url:"request_condition,omitempty"`
-	SSLCACert           string       `url:"ssl_ca_cert,omitempty"`
-	SSLCertHostname     string       `url:"ssl_cert_hostname,omitempty"`
-	SSLCheckCert        *Compatibool `url:"ssl_check_cert,omitempty"`
-	SSLCiphers          string       `url:"ssl_ciphers,omitempty"`
-	SSLClientCert       string       `url:"ssl_client_cert,omitempty"`
-	SSLClientKey        string       `url:"ssl_client_key,omitempty"`
-	SSLHostname         string       `url:"ssl_hostname,omitempty"`
-	SSLSNIHostname      string       `url:"ssl_sni_hostname,omitempty"`
+	// Address is a hostname, IPv4, or IPv6 address for the backend.
+	Address string `url:"address,omitempty"`
+	// AutoLoadbalance is whether or not this backend should be automatically load balanced.
+	AutoLoadbalance Compatibool `url:"auto_loadbalance,omitempty"`
+	// BetweenBytesTimeout is the maximum duration in milliseconds that Fastly will wait while receiving no data on a download from a backend.
+	BetweenBytesTimeout *uint `url:"between_bytes_timeout,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment string `url:"comment,omitempty"`
+	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
+	ConnectTimeout *uint `url:"connect_timeout,omitempty"`
+	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
+	ErrorThreshold *uint `url:"error_threshold,omitempty"`
+	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
+	FirstByteTimeout *uint `url:"first_byte_timeout,omitempty"`
+	// HealthCheck is the name of the healthcheck to use with this backend.
+	HealthCheck string `url:"healthcheck,omitempty"`
+	// MaxConn is the maximum number of concurrent connections this backend will accept.
+	MaxConn *uint `url:"max_conn,omitempty"`
+	// MaxTLSVersion is the maximum allowed TLS version on SSL connections to this backend.
+	MaxTLSVersion string `url:"max_tls_version,omitempty"`
+	// MinTLSVersion is the minimum allowed TLS version on SSL connections to this backend.
+	MinTLSVersion string `url:"min_tls_version,omitempty"`
+	// Name is the name of the backend.
+	Name string `url:"name,omitempty"`
+	// OverrideHost is, if set, will replace the client-supplied HTTP Host header on connections to this backend.
+	OverrideHost string `url:"override_host,omitempty"`
+	// Port is the port on which the backend server is listening for connections from Fastly.
+	Port uint `url:"port,omitempty"`
+	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
+	RequestCondition string `url:"request_condition,omitempty"`
+	// SSLCACert is a CA certificate attached to origin.
+	SSLCACert string `url:"ssl_ca_cert,omitempty"`
+	// SSLCertHostname is an overrides ssl_hostname, but only for cert verification.
+	SSLCertHostname string `url:"ssl_cert_hostname,omitempty"`
+	// SSLCheckCert forces being strict on checking SSL certs.
+	SSLCheckCert *Compatibool `url:"ssl_check_cert,omitempty"`
+	// SSLCiphers is a list of OpenSSL ciphers to support for connections to this origin.
+	SSLCiphers string `url:"ssl_ciphers,omitempty"`
+	// SSLClientCert is a client certificate attached to origin.
+	SSLClientCert string `url:"ssl_client_cert,omitempty"`
+	// SSLClientKey is a client key attached to origin.
+	SSLClientKey string `url:"ssl_client_key,omitempty"`
+	// SSLHostname is used for both SNI during the TLS handshake and to validate the cert.
+	// Deprecated: Use ssl_cert_hostname and ssl_sni_hostname to configure certificate validation.
+	SSLHostname string `url:"ssl_hostname,omitempty"`
+	// SSLSNIHostname overrides ssl_hostname, but only for SNI in the handshake. Does not affect cert validation at all.
+	SSLSNIHostname string `url:"ssl_sni_hostname,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Shield         string      `url:"shield,omitempty"`
-	UseSSL         Compatibool `url:"use_ssl,omitempty"`
-	Weight         *uint       `url:"weight,omitempty"`
+	// Shield is an identifier of the POP to use as a shield.
+	Shield string `url:"shield,omitempty"`
+	// UseSSL indicates whether or not to require TLS for connections to this backend.
+	UseSSL Compatibool `url:"use_ssl,omitempty"`
+	// Weight is the weight used to load balance this backend against others.
+	Weight *uint `url:"weight,omitempty"`
 }
 
 // CreateBackend creates a new resource.
@@ -190,37 +217,61 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 
 // UpdateBackendInput is used as input to the UpdateBackend function.
 type UpdateBackendInput struct {
-	Address             *string      `url:"address,omitempty"`
-	AutoLoadbalance     *Compatibool `url:"auto_loadbalance,omitempty"`
-	BetweenBytesTimeout *uint        `url:"between_bytes_timeout,omitempty"`
-	Comment             *string      `url:"comment,omitempty"`
-	ConnectTimeout      *uint        `url:"connect_timeout,omitempty"`
-	ErrorThreshold      *uint        `url:"error_threshold,omitempty"`
-	FirstByteTimeout    *uint        `url:"first_byte_timeout,omitempty"`
-	HealthCheck         *string      `url:"healthcheck,omitempty"`
-	MaxConn             *uint        `url:"max_conn,omitempty"`
-	MaxTLSVersion       *string      `url:"max_tls_version,omitempty"`
-	MinTLSVersion       *string      `url:"min_tls_version,omitempty"`
+	// Address is a hostname, IPv4, or IPv6 address for the backend.
+	Address *string `url:"address,omitempty"`
+	// AutoLoadbalance is whether or not this backend should be automatically load balanced.
+	AutoLoadbalance *Compatibool `url:"auto_loadbalance,omitempty"`
+	// BetweenBytesTimeout is the maximum duration in milliseconds that Fastly will wait while receiving no data on a download from a backend.
+	BetweenBytesTimeout *uint `url:"between_bytes_timeout,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment *string `url:"comment,omitempty"`
+	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
+	ConnectTimeout *uint `url:"connect_timeout,omitempty"`
+	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
+	ErrorThreshold *uint `url:"error_threshold,omitempty"`
+	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
+	FirstByteTimeout *uint `url:"first_byte_timeout,omitempty"`
+	// HealthCheck is the name of the healthcheck to use with this backend.
+	HealthCheck *string `url:"healthcheck,omitempty"`
+	// MaxConn is the maximum number of concurrent connections this backend will accept.
+	MaxConn *uint `url:"max_conn,omitempty"`
+	// MaxTLSVersion is the maximum allowed TLS version on SSL connections to this backend.
+	MaxTLSVersion *string `url:"max_tls_version,omitempty"`
+	// MinTLSVersion is the minimum allowed TLS version on SSL connections to this backend.
+	MinTLSVersion *string `url:"min_tls_version,omitempty"`
 	// Name is the name of the backend to update.
-	Name             string
-	NewName          *string      `url:"name,omitempty"`
-	OverrideHost     *string      `url:"override_host,omitempty"`
-	Port             *uint        `url:"port,omitempty"`
-	RequestCondition *string      `url:"request_condition,omitempty"`
-	SSLCACert        *string      `url:"ssl_ca_cert,omitempty"`
-	SSLCertHostname  *string      `url:"ssl_cert_hostname,omitempty"`
-	SSLCheckCert     *Compatibool `url:"ssl_check_cert,omitempty"`
-	SSLCiphers       *string      `url:"ssl_ciphers,omitempty"`
-	SSLClientCert    *string      `url:"ssl_client_cert,omitempty"`
-	SSLClientKey     *string      `url:"ssl_client_key,omitempty"`
-	SSLSNIHostname   *string      `url:"ssl_sni_hostname,omitempty"`
+	Name    string
+	NewName *string `url:"name,omitempty"`
+	// OverrideHost is, if set, will replace the client-supplied HTTP Host header on connections to this backend.
+	OverrideHost *string `url:"override_host,omitempty"`
+	// Port is the port on which the backend server is listening for connections from Fastly.
+	Port *uint `url:"port,omitempty"`
+	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
+	RequestCondition *string `url:"request_condition,omitempty"`
+	// SSLCACert is a CA certificate attached to origin.
+	SSLCACert *string `url:"ssl_ca_cert,omitempty"`
+	// SSLCertHostname is an overrides ssl_hostname, but only for cert verification.
+	SSLCertHostname *string `url:"ssl_cert_hostname,omitempty"`
+	// SSLCheckCert forces being strict on checking SSL certs.
+	SSLCheckCert *Compatibool `url:"ssl_check_cert,omitempty"`
+	// SSLCiphers is a list of OpenSSL ciphers to support for connections to this origin.
+	SSLCiphers *string `url:"ssl_ciphers,omitempty"`
+	// SSLClientCert is a client certificate attached to origin.
+	SSLClientCert *string `url:"ssl_client_cert,omitempty"`
+	// SSLClientKey is a client key attached to origin.
+	SSLClientKey *string `url:"ssl_client_key,omitempty"`
+	// SSLSNIHostname overrides ssl_hostname, but only for SNI in the handshake. Does not affect cert validation at all.
+	SSLSNIHostname *string `url:"ssl_sni_hostname,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Shield         *string      `url:"shield,omitempty"`
-	UseSSL         *Compatibool `url:"use_ssl,omitempty"`
-	Weight         *uint        `url:"weight,omitempty"`
+	// Shield is an identifier of the POP to use as a shield.
+	Shield *string `url:"shield,omitempty"`
+	// UseSSL indicates whether or not to require TLS for connections to this backend.
+	UseSSL *Compatibool `url:"use_ssl,omitempty"`
+	// Weight is the weight used to load balance this backend against others.
+	Weight *uint `url:"weight,omitempty"`
 }
 
 // UpdateBackend updates the specified resource.

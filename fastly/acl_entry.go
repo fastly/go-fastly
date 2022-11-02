@@ -44,12 +44,18 @@ func (s entriesByID) Less(i, j int) bool {
 
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
 type ListACLEntriesInput struct {
-	ACLID     string
+	// ACLID is an alphanumeric string identifying a ACL.
+	ACLID string
+	// Direction is the direction in which to sort results.
 	Direction string
-	Page      int
-	PerPage   int
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
+	// ServiceID is an alphanumeric string identifying the service.
 	ServiceID string
-	Sort      string
+	// Sort is the field on which to sort.
+	Sort string
 }
 
 // ListACLEntries retrieves all resources.
@@ -199,8 +205,11 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListACLEntrie
 
 // GetACLEntryInput is the input parameter to GetACLEntry function.
 type GetACLEntryInput struct {
-	ACLID     string
-	ID        string
+	// ACLID is an alphanumeric string identifying an ACL Entry.
+	ACLID string
+	// ID is an alphanumeric string identifying an ACL Entry.
+	ID string
+	// ServiceID is an alphanumeric string identifying the service.
 	ServiceID string
 }
 
@@ -236,12 +245,18 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 
 // CreateACLEntryInput is the input parameter to the CreateACLEntry function.
 type CreateACLEntryInput struct {
-	ACLID     string
-	IP        string `url:"ip"`
+	// ACLID is an alphanumeric string identifying a ACL.
+	ACLID string
+	// Comment is a freeform descriptive note.
+	Comment string `url:"comment,omitempty"`
+	// IP is an IP address.
+	IP string `url:"ip"`
+	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
+	Negated Compatibool `url:"negated,omitempty"`
+	// ServiceID is an alphanumeric string identifying the service.
 	ServiceID string
-	Comment   string      `url:"comment,omitempty"`
-	Negated   Compatibool `url:"negated,omitempty"`
-	Subnet    int         `url:"subnet,omitempty"`
+	// Subnet is a number of bits for the subnet mask applied to the IP address.
+	Subnet int `url:"subnet,omitempty"`
 }
 
 // CreateACLEntry creates a new resource.
@@ -276,8 +291,11 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 
 // DeleteACLEntryInput the input parameter to DeleteACLEntry function.
 type DeleteACLEntryInput struct {
-	ACLID     string
-	ID        string
+	// ACLID is an alphanumeric string identifying a ACL.
+	ACLID string
+	// ID is an alphanumeric string identifying an ACL Entry.
+	ID string
+	// ServiceID is an alphanumeric string identifying the service.
 	ServiceID string
 }
 
@@ -317,13 +335,20 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 
 // UpdateACLEntryInput is the input parameter to UpdateACLEntry function.
 type UpdateACLEntryInput struct {
-	ACLID     string
-	Comment   *string `url:"comment,omitempty"`
-	ID        string
-	IP        *string      `url:"ip,omitempty"`
-	Negated   *Compatibool `url:"negated,omitempty"`
+	// ACLID is an alphanumeric string identifying a ACL.
+	ACLID string
+	// Comment is a freeform descriptive note.
+	Comment *string `url:"comment,omitempty"`
+	// ID is an alphanumeric string identifying an ACL Entry.
+	ID string
+	// IP is an IP address.
+	IP *string `url:"ip,omitempty"`
+	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
+	Negated *Compatibool `url:"negated,omitempty"`
+	// ServiceID is an alphanumeric string identifying the service.
 	ServiceID string
-	Subnet    *int `url:"subnet,omitempty"`
+	// Subnet is a number of bits for the subnet mask applied to the IP address.
+	Subnet *int `url:"subnet,omitempty"`
 }
 
 // UpdateACLEntry updates the specified resource.
@@ -359,19 +384,28 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 // BatchModifyACLEntriesInput is the input parameter to the
 // BatchModifyACLEntries function.
 type BatchModifyACLEntriesInput struct {
-	ACLID     string           `json:"-"`
-	Entries   []*BatchACLEntry `json:"entries"`
-	ServiceID string           `json:"-"`
+	// ACLID is an alphanumeric string identifying a ACL.
+	ACLID string `json:"-"`
+	// Entries is a list of ACL entries.
+	Entries []*BatchACLEntry `json:"entries"`
+	// ServiceID is an alphanumeric string identifying the service.
+	ServiceID string `json:"-"`
 }
 
 // BatchACLEntry represents a single ACL entry.
 type BatchACLEntry struct {
-	Comment   *string        `json:"comment,omitempty"`
-	ID        *string        `json:"id,omitempty"`
-	IP        *string        `json:"ip,omitempty"`
-	Negated   *Compatibool   `json:"negated,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment *string `json:"comment,omitempty"`
+	// ID is an alphanumeric string identifying an ACL Entry.
+	ID *string `json:"id,omitempty"`
+	// IP is an IP address.
+	IP *string `json:"ip,omitempty"`
+	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
+	Negated *Compatibool `json:"negated,omitempty"`
+	// Operation is a batching operation variant.
 	Operation BatchOperation `json:"op"`
-	Subnet    *int           `json:"subnet,omitempty"`
+	// Subnet is the number of bits for the subnet mask applied to the IP address.
+	Subnet *int `json:"subnet,omitempty"`
 }
 
 // BatchModifyACLEntries updates the specified resources.

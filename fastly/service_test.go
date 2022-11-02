@@ -169,7 +169,7 @@ func TestClient_Services(t *testing.T) {
 	var ds ServiceDomainsList
 	record(t, "services/domain", func(c *Client) {
 		ds, err = c.ListServiceDomains(&ListServiceDomainInput{
-			ID: s.ID,
+			ServiceID: s.ID,
 		})
 	})
 	if err != nil {

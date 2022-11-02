@@ -76,20 +76,24 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 
 // CreatePapertrailInput is used as input to the CreatePapertrail function.
 type CreatePapertrailInput struct {
-	Address           string     `url:"address,omitempty"`
-	CreatedAt         *time.Time `url:"created_at,omitempty"`
-	DeletedAt         *time.Time `url:"deleted_at,omitempty"`
-	Format            string     `url:"format,omitempty"`
-	FormatVersion     uint       `url:"format_version,omitempty"`
-	Name              string     `url:"name,omitempty"`
-	Placement         string     `url:"placement,omitempty"`
-	Port              uint       `url:"port,omitempty"`
-	ResponseCondition string     `url:"response_condition,omitempty"`
+	// Address is a hostname or IPv4 address.
+	Address string `url:"address,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port uint `url:"port,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
 // CreatePapertrail creates a new resource.
@@ -156,22 +160,26 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 
 // UpdatePapertrailInput is used as input to the UpdatePapertrail function.
 type UpdatePapertrailInput struct {
-	Address       *string    `url:"address,omitempty"`
-	CreatedAt     *time.Time `url:"created_at,omitempty"`
-	DeletedAt     *time.Time `url:"deleted_at,omitempty"`
-	Format        *string    `url:"format,omitempty"`
-	FormatVersion *uint      `url:"format_version,omitempty"`
+	// Address is a hostname or IPv4 address.
+	Address *string `url:"address,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the papertrail to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Port              *uint   `url:"port,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port *uint `url:"port,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
 // UpdatePapertrail updates the specified resource.

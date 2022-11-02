@@ -78,17 +78,24 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 // CreateResponseObjectInput is used as input to the CreateResponseObject
 // function.
 type CreateResponseObjectInput struct {
-	CacheCondition   string `url:"cache_condition,omitempty"`
-	Content          string `url:"content,omitempty"`
-	ContentType      string `url:"content_type,omitempty"`
-	Name             string `url:"name,omitempty"`
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
+	CacheCondition string `url:"cache_condition,omitempty"`
+	// Content is the content to deliver for the response object, can be empty.
+	Content string `url:"content,omitempty"`
+	// ContentType is the MIME type of the content, can be empty.
+	ContentType string `url:"content_type,omitempty"`
+	// Name is the name for the request settings.
+	Name string `url:"name,omitempty"`
+	// RequestCondition is the condition which, if met, will select this configuration during a request.
 	RequestCondition string `url:"request_condition,omitempty"`
-	Response         string `url:"response,omitempty"`
+	// Response is the HTTP response.
+	Response string `url:"response,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Status         *uint `url:"status,omitempty"`
+	// Status is the HTTP status code.
+	Status *uint `url:"status,omitempty"`
 }
 
 // CreateResponseObject creates a new resource.
@@ -156,19 +163,26 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 // UpdateResponseObjectInput is used as input to the UpdateResponseObject
 // function.
 type UpdateResponseObjectInput struct {
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	Content        *string `url:"content,omitempty"`
-	ContentType    *string `url:"content_type,omitempty"`
+	// Content is the content to deliver for the response object, can be empty.
+	Content *string `url:"content,omitempty"`
+	// ContentType is the MIME type of the content, can be empty.
+	ContentType *string `url:"content_type,omitempty"`
 	// Name is the name of the response object to update.
-	Name             string
-	NewName          *string `url:"name,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// RequestCondition is the condition which, if met, will select this configuration during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
-	Response         *string `url:"response,omitempty"`
+	// Response is the HTTP response.
+	Response *string `url:"response,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Status         *uint `url:"status,omitempty"`
+	// Status is the HTTP status code.
+	Status *uint `url:"status,omitempty"`
 }
 
 // UpdateResponseObject updates the specified resource.

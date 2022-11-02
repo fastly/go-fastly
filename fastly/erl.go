@@ -149,8 +149,10 @@ func (s ERLsByName) Less(i, j int) bool {
 
 // ListERLsInput is used as input to the ListERLs function.
 type ListERLsInput struct {
-	ServiceID      string // required
-	ServiceVersion int    // required
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// ServiceVersion is the version number to fetch (required).
+	ServiceVersion int
 }
 
 // ListERLs retrieves all resources.
@@ -180,16 +182,26 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 
 // CreateERLInput is used as input to the CreateERL function.
 type CreateERLInput struct {
-	Action             ERLAction        `url:"action"`
-	ClientKey          []string         `url:"client_key,brackets"`
-	HTTPMethods        []string         `url:"http_methods,brackets"`
-	Name               string           `url:"name"`
-	PenaltyBoxDuration int              `url:"penalty_box_duration"`
-	Response           *ERLResponseType `url:"response,omitempty"`
-	RpsLimit           int              `url:"rps_limit"`
-	ServiceID          string           `url:"-"`
-	ServiceVersion     int              `url:"-"`
-	WindowSize         ERLWindowSize    `url:"window_size"`
+	// Action is the action to take when a rate limiter violation is detected (response, response_object, log_only).
+	Action ERLAction `url:"action"`
+	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
+	ClientKey []string `url:"client_key,brackets"`
+	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
+	HTTPMethods []string `url:"http_methods,brackets"`
+	// Name is a human readable name for the rate limiting rule.
+	Name string `url:"name"`
+	// PenaltyBoxDuration is a length of time in minutes that the rate limiter is in effect after the initial violation is detected.
+	PenaltyBoxDuration int `url:"penalty_box_duration"`
+	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
+	Response *ERLResponseType `url:"response,omitempty"`
+	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
+	RpsLimit int `url:"rps_limit"`
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string `url:"-"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `url:"-"`
+	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
+	WindowSize ERLWindowSize `url:"window_size"`
 }
 
 // CreateERL creates a new resource.
@@ -218,9 +230,12 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 
 // DeleteERLInput is used as input to the DeleteERL function.
 type DeleteERLInput struct {
-	ERLID          string `form:"id"`
-	ServiceID      string `form:"service_id"`
-	ServiceVersion int    `form:"version"`
+	// ERLID is an alphanumeric string identifying the rate limiter (required).
+	ERLID string `form:"id"`
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string `form:"service_id"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `form:"version"`
 }
 
 // DeleteERL deletes the specified resource.
@@ -255,9 +270,12 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 
 // GetERLInput is used as input to the GetERL function.
 type GetERLInput struct {
-	ERLID          string `form:"id"`
-	ServiceID      string `form:"service_id"`
-	ServiceVersion int    `form:"version"`
+	// ERLID is an alphanumeric string identifying the rate limiter (required).
+	ERLID string `form:"id"`
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string `form:"service_id"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `form:"version"`
 }
 
 // GetERL retrieves the specified resource.
@@ -289,17 +307,28 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 
 // UpdateERLInput is used as input to the UpdateERL function.
 type UpdateERLInput struct {
-	Action             ERLAction        `url:"action,omitempty"`
-	ClientKey          []string         `url:"client_key,omitempty,brackets"`
-	HTTPMethods        []string         `url:"http_methods,omitempty,brackets"`
-	ID                 string           `url:"id"`
-	Name               string           `url:"name,omitempty"`
-	PenaltyBoxDuration int              `url:"penalty_box_duration,omitempty"`
-	Response           *ERLResponseType `url:"response,omitempty"`
-	RpsLimit           int              `url:"rps_limit,omitempty"`
-	ServiceID          string           `url:"-"`
-	ServiceVersion     int              `url:"-"`
-	WindowSize         ERLWindowSize    `url:"window_size,omitempty"`
+	// Action is the action to take when a rate limiter violation is detected (response, response_object, log_only).
+	Action ERLAction `url:"action,omitempty"`
+	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
+	ClientKey []string `url:"client_key,omitempty,brackets"`
+	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
+	HTTPMethods []string `url:"http_methods,omitempty,brackets"`
+	// ID is an alphanumeric string identifying the rate limiter (required).
+	ID string `url:"id"`
+	// Name is a human readable name for the rate limiting rule.
+	Name string `url:"name,omitempty"`
+	// PenaltyBoxDuration is a length of time in minutes that the rate limiter is in effect after the initial violation is detected.
+	PenaltyBoxDuration int `url:"penalty_box_duration,omitempty"`
+	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
+	Response *ERLResponseType `url:"response,omitempty"`
+	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
+	RpsLimit int `url:"rps_limit,omitempty"`
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string `url:"-"`
+	// ServiceVersion is the specific configuration version (required).
+	ServiceVersion int `url:"-"`
+	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
+	WindowSize ERLWindowSize `url:"window_size,omitempty"`
 }
 
 // UpdateERL updates the specified resource.

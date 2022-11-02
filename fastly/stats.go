@@ -87,12 +87,18 @@ type Stats struct {
 // time range (From and To), sampling rate (By) and/or Fastly region (Region)
 // Allowed values for the fields are described at https://developer.fastly.com/reference/api/metrics-stats/
 type GetStatsInput struct {
-	By      string
-	Field   string
-	From    string
-	Region  string
+	// By is the duration of sample windows.
+	By string
+	// Field is the name of the stats field.
+	Field string
+	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
+	From string
+	// Region limits query to a specific geographic region.
+	Region string
+	// Service is the ID of the service.
 	Service string
-	To      string
+	// To is the timestamp that defines the end of the window for which to fetch statistics.
+	To string
 }
 
 // StatsResponse is a response from the service stats API endpoint
@@ -195,10 +201,14 @@ type UsageResponse struct {
 // GetUsageInput is used as an input to the GetUsage function
 // Value for the input are described at https://developer.fastly.com/reference/api/metrics-stats/
 type GetUsageInput struct {
-	By     string
-	From   string
+	// By is the duration of sample windows.
+	By string
+	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
+	From string
+	// Region limits query to a specific geographic region.
 	Region string
-	To     string
+	// To is the timestamp that defines the end of the window for which to fetch statistics.
+	To string
 }
 
 // GetUsage returns usage information aggregated across all Fastly services and grouped by region.

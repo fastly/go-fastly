@@ -88,15 +88,20 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 
 // CreateCacheSettingInput is used as input to the CreateCacheSetting function.
 type CreateCacheSettingInput struct {
-	Action         CacheSettingAction `url:"action,omitempty"`
-	CacheCondition string             `url:"cache_condition,omitempty"`
-	Name           string             `url:"name,omitempty"`
+	// Action determines vcl_fetch behaviour (pass, cache, restart).
+	Action CacheSettingAction `url:"action,omitempty"`
+	// CacheCondition is name of the cache condition controlling when this configuration applies.
+	CacheCondition string `url:"cache_condition,omitempty"`
+	// Name is the name for the cache settings object.
+	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	StaleTTL       uint `url:"stale_ttl,omitempty"`
-	TTL            uint `url:"ttl,omitempty"`
+	// StaleTTL is the maximum time in seconds to continue to use a stale version of the object if future requests to your backend server fail (also known as 'stale if error').
+	StaleTTL uint `url:"stale_ttl,omitempty"`
+	// TTL is the maximum time to consider the object fresh in the cache (the cache 'time to live').
+	TTL uint `url:"ttl,omitempty"`
 }
 
 // CreateCacheSetting creates a new resource.
@@ -163,17 +168,22 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 
 // UpdateCacheSettingInput is used as input to the UpdateCacheSetting function.
 type UpdateCacheSettingInput struct {
-	Action         CacheSettingAction `url:"action,omitempty"`
-	CacheCondition *string            `url:"cache_condition,omitempty"`
+	// Action determines vcl_fetch behaviour (pass, cache, restart).
+	Action CacheSettingAction `url:"action,omitempty"`
+	// CacheCondition is name of the cache condition controlling when this configuration applies.
+	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Name is the name of the cache setting to update.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	StaleTTL       *uint `url:"stale_ttl,omitempty"`
-	TTL            *uint `url:"ttl,omitempty"`
+	// StaleTTL is the maximum time in seconds to continue to use a stale version of the object if future requests to your backend server fail (also known as 'stale if error').
+	StaleTTL *uint `url:"stale_ttl,omitempty"`
+	// TTL is the maximum time to consider the object fresh in the cache (the cache 'time to live').
+	TTL *uint `url:"ttl,omitempty"`
 }
 
 // UpdateCacheSetting updates the specified resource.

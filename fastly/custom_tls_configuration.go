@@ -31,10 +31,14 @@ type DNSRecord struct {
 
 // ListCustomTLSConfigurationsInput is used as input to the ListCustomTLSConfigurationsInput function.
 type ListCustomTLSConfigurationsInput struct {
-	FilterBulk bool   // Whether or not to only include bulk=true configurations
-	Include    string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
-	PageNumber int    // The page index for pagination.
-	PageSize   int    // The number of keys per page.
+	// FilterBulk is whether or not to only include bulk=true configurations
+	FilterBulk bool
+	// Include captures related objects. Optional, comma-separated values. Permitted values: dns_records.
+	Include string
+	// PageNumber is the page index for pagination.
+	PageNumber int
+	// PageSize is the number of keys per page.
+	PageSize int
 }
 
 // formatFilters converts user input into query parameters for filtering.
@@ -97,8 +101,10 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 
 // GetCustomTLSConfigurationInput is used as input to the GetCustomTLSConfiguration function.
 type GetCustomTLSConfigurationInput struct {
-	ID      string
-	Include string // Include related objects. Optional, comma-separated values. Permitted values: dns_records.
+	// ID is an alphanumeric string identifying a TLS configuration.
+	ID string
+	// Include captures related objects. Optional, comma-separated values. Permitted values: dns_records.
+	Include string
 }
 
 // GetCustomTLSConfiguration retrieves the specified resource.
@@ -134,7 +140,9 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 
 // UpdateCustomTLSConfigurationInput is used as input to the UpdateCustomTLSConfiguration function.
 type UpdateCustomTLSConfigurationInput struct {
-	ID   string
+	// ID is an alphanumeric string identifying a TLS configuration.
+	ID string
+	// Name is a custom name for your TLS configuration.
 	Name string `jsonapi:"attr,name"`
 }
 

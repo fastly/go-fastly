@@ -127,7 +127,8 @@ type UpdateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
 	// Name is the name for the snippet.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
 	Priority *int `url:"priority,omitempty"`

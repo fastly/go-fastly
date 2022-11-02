@@ -74,10 +74,14 @@ func (s servicesByName) Less(i, j int) bool {
 
 // ListServicesInput is used as input to the ListServices function.
 type ListServicesInput struct {
+	// Direction is the direction in which to sort results.
 	Direction string
-	Page      int
-	PerPage   int
-	Sort      string
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
+	// Sort is the field on which to sort.
+	Sort string
 }
 
 // ListServices retrieves all resources.
@@ -206,9 +210,12 @@ func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPagin
 
 // CreateServiceInput is used as input to the CreateService function.
 type CreateServiceInput struct {
+	// Comment is a freeform descriptive note.
 	Comment string `url:"comment,omitempty"`
-	Name    string `url:"name,omitempty"`
-	Type    string `url:"type,omitempty"`
+	// Name is the name of the service.
+	Name string `url:"name,omitempty"`
+	// Type is the type of this service (vcl, wasm).
+	Type string `url:"type,omitempty"`
 }
 
 // CreateService creates a new resource.
@@ -228,6 +235,7 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 
 // GetServiceInput is used as input to the GetService function.
 type GetServiceInput struct {
+	// ID is an alphanumeric string identifying the service.
 	ID string
 }
 
@@ -291,8 +299,11 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 
 // UpdateServiceInput is used as input to the UpdateService function.
 type UpdateServiceInput struct {
-	Comment   *string `url:"comment,omitempty"`
-	Name      *string `url:"name,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment *string `url:"comment,omitempty"`
+	// Name is the name of the service.
+	Name *string `url:"name,omitempty"`
+	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
 
@@ -326,6 +337,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 // DeleteServiceInput is used as input to the DeleteService function.
 type DeleteServiceInput struct {
+	// ID is an alphanumeric string identifying the service.
 	ID string
 }
 
@@ -354,6 +366,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 // SearchServiceInput is used as input to the SearchService function.
 type SearchServiceInput struct {
+	// Name is the name of the service.
 	Name string
 }
 
@@ -386,15 +399,16 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 // ListServiceDomainInput is the input parameter to the ListServiceDomains
 // function.
 type ListServiceDomainInput struct {
-	ID string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
 // ListServiceDomains retrieves all resources.
 func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
-	path := fmt.Sprintf("/service/%s/domain", i.ID)
+	path := fmt.Sprintf("/service/%s/domain", i.ServiceID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

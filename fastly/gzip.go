@@ -73,10 +73,14 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 
 // CreateGzipInput is used as input to the CreateGzip function.
 type CreateGzipInput struct {
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition string `url:"cache_condition,omitempty"`
-	ContentTypes   string `url:"content_types,omitempty"`
-	Extensions     string `url:"extensions,omitempty"`
-	Name           string `url:"name,omitempty"`
+	// ContentTypes is a space-separated list of content types to compress.
+	ContentTypes string `url:"content_types,omitempty"`
+	// Extensions is a space-separated list of file extensions to compress.
+	Extensions string `url:"extensions,omitempty"`
+	// Name is the name of the gzip configuration.
+	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -147,11 +151,15 @@ func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 
 // UpdateGzipInput is used as input to the UpdateGzip function.
 type UpdateGzipInput struct {
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	ContentTypes   *string `url:"content_types,omitempty"`
-	Extensions     *string `url:"extensions,omitempty"`
+	// ContentTypes is a space-separated list of content types to compress.
+	ContentTypes *string `url:"content_types,omitempty"`
+	// Extensions is a space-separated list of file extensions to compress.
+	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the Gzip to update.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string

@@ -72,12 +72,14 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 
 // CreateDictionaryInput is used as input to the CreateDictionary function.
 type CreateDictionaryInput struct {
+	// Name is the name of the dictionary to create.
 	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	WriteOnly      Compatibool `url:"write_only,omitempty"`
+	// WriteOnly determines if items in the dictionary are readable or not.
+	WriteOnly Compatibool `url:"write_only,omitempty"`
 }
 
 // CreateDictionary creates a new resource.
@@ -145,13 +147,15 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 // UpdateDictionaryInput is used as input to the UpdateDictionary function.
 type UpdateDictionaryInput struct {
 	// Name is the name of the dictionary to update.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	WriteOnly      *Compatibool `url:"write_only,omitempty"`
+	// WriteOnly determines if items in the dictionary are readable or not.
+	WriteOnly *Compatibool `url:"write_only,omitempty"`
 }
 
 // UpdateDictionary updates the specified resource.

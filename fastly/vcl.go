@@ -142,9 +142,12 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 
 // CreateVCLInput is used as input to the CreateVCL function.
 type CreateVCLInput struct {
+	// Content is the VCL code to be included.
 	Content string `url:"content,omitempty"`
-	Main    bool   `url:"main,omitempty"`
-	Name    string `url:"name,omitempty"`
+	// Main is set to true when this is the main VCL, otherwise false.
+	Main bool `url:"main,omitempty"`
+	// Name is the name of this VCL.
+	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -177,9 +180,11 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 
 // UpdateVCLInput is used as input to the UpdateVCL function.
 type UpdateVCLInput struct {
+	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
 	// Name is the name of the VCL to update (required).
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string

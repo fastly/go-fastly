@@ -43,12 +43,16 @@ func (s dictionaryItemsByKey) Less(i, j int) bool {
 type ListDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
-	Direction    string
-	Page         int
-	PerPage      int
+	// Direction is the direction in which to sort results.
+	Direction string
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-	Sort      string
+	// Sort is the field on which to sort.
+	Sort string
 }
 
 // ListDictionaryItems retrieves all resources.
@@ -193,7 +197,9 @@ func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *Lis
 
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.
 type CreateDictionaryItemInput struct {
-	ItemKey   string `url:"item_key,omitempty"`
+	// ItemKey is the dictionary item key, maximum 256 characters.
+	ItemKey string `url:"item_key,omitempty"`
+	// ItemValue is the dictionary item value, maximum 8000 characters.
 	ItemValue string `url:"item_value,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -320,16 +326,20 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 // BatchModifyDictionaryItems function.
 type BatchModifyDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to modify items for (required).
-	DictionaryID string                 `json:"-"`
-	Items        []*BatchDictionaryItem `json:"items"`
+	DictionaryID string `json:"-"`
+	// Items is a list of dictionary items.
+	Items []*BatchDictionaryItem `json:"items"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `json:"-"`
 }
 
 // BatchDictionaryItem represents a dictionary item.
 type BatchDictionaryItem struct {
-	ItemKey   string         `json:"item_key"`
-	ItemValue string         `json:"item_value"`
+	// ItemKey is an item key (maximum 256 characters).
+	ItemKey string `json:"item_key"`
+	// ItemValue is an item value (maximum 8000 characters).
+	ItemValue string `json:"item_value"`
+	// Operation is a batching operation variant.
 	Operation BatchOperation `json:"op"`
 }
 

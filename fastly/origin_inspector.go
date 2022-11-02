@@ -81,16 +81,26 @@ type OriginMeta struct {
 
 // GetOriginMetricsInput is the input to an OriginMetrics request.
 type GetOriginMetricsInput struct {
-	Cursor      string
+	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
+	Cursor string
+	// Datacenters limits query to one or more specific POPs.
 	Datacenters []string
-	Downsample  string
-	End         time.Time
-	GroupBy     []string
-	Hosts       []string
-	Metrics     []string
-	Regions     []string
-	ServiceID   string
-	Start       time.Time
+	// Downsample is the duration of sample windows.
+	Downsample string
+	// End is a valid ISO-8601-formatted date and time, or UNIX timestamp, indicating the exclusive end of the query time range. If not provided, a default is chosen based on the provided downsample value.
+	End time.Time
+	// GroupBy is the dimensions to return in the query.
+	GroupBy []string
+	// Hosts limits query to one or more specific origin hosts.
+	Hosts []string
+	// Metrics is the metric to retrieve. Up to ten metrics are accepted.
+	Metrics []string
+	// Regions limits query to one or more specific geographic regions.
+	Regions []string
+	// ServiceID is an alphanumeric string identifying the service.
+	ServiceID string
+	// Start is a valid ISO-8601-formatted date and time, or UNIX timestamp, indicating the inclusive start of the query time range. If not provided, a default is chosen based on the provided downsample value.
+	Start time.Time
 }
 
 // GetOriginMetricsForService retrieves the specified resource.
