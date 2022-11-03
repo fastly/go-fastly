@@ -197,8 +197,6 @@ type CreateS3Input struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
 // CreateS3 creates a new resource.
@@ -315,8 +313,6 @@ type UpdateS3Input struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // UpdateS3 updates the specified resource.

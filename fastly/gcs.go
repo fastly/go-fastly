@@ -113,8 +113,6 @@ type CreateGCSInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
 	User string `url:"user,omitempty"`
 }
@@ -215,8 +213,6 @@ type UpdateGCSInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
 	User *string `url:"user,omitempty"`
 }

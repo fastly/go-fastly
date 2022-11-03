@@ -115,8 +115,6 @@ type CreateOpenstackInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 	// URL is your OpenStack auth url.
 	URL string `url:"url,omitempty"`
 	// User is the username for your OpenStack account.
@@ -219,8 +217,6 @@ type UpdateOpenstackInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// URL is your OpenStack auth url.
 	URL *string `url:"url,omitempty"`
 	// User is the username for your OpenStack account.

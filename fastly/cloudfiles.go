@@ -117,8 +117,6 @@ type CreateCloudfilesInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 	// User is the username for your Cloud Files account.
 	User string `url:"user,omitempty"`
 }
@@ -221,8 +219,6 @@ type UpdateCloudfilesInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// User is the username for your Cloud Files account.
 	User *string `url:"user,omitempty"`
 }

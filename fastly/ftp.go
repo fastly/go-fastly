@@ -117,8 +117,6 @@ type CreateFTPInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 	// Username is the username for the server. Can be anonymous.
 	Username string `url:"user,omitempty"`
 }
@@ -221,8 +219,6 @@ type UpdateFTPInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// Username is the username for the server. Can be anonymous.
 	Username *string `url:"user,omitempty"`
 }

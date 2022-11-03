@@ -119,8 +119,6 @@ type CreateDigitalOceanInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
 // CreateDigitalOcean creates a new resource.
@@ -223,8 +221,6 @@ type UpdateDigitalOceanInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // UpdateDigitalOcean updates the specified resource.

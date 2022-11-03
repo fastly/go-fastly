@@ -123,8 +123,6 @@ type CreateSFTPInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 	// User is the username for the server.
 	User string `url:"user,omitempty"`
 }
@@ -231,8 +229,6 @@ type UpdateSFTPInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// User is the username for the server.
 	User *string `url:"user,omitempty"`
 }

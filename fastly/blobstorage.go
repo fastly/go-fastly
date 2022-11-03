@@ -119,8 +119,6 @@ type CreateBlobStorageInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
 // CreateBlobStorage creates a new resource.
@@ -223,8 +221,6 @@ type UpdateBlobStorageInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// TimestampFormat is a timestamp format.
-	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // UpdateBlobStorage updates the specified resource.
