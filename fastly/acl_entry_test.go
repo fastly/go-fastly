@@ -53,8 +53,12 @@ func TestClient_ACLEntries(t *testing.T) {
 	var es []*ACLEntry
 	record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
-			ServiceID: testService.ID,
 			ACLID:     testACL.ID,
+			Direction: "descend",
+			Page:      1,
+			PerPage:   1,
+			ServiceID: testService.ID,
+			Sort:      "created",
 		})
 	})
 	if err != nil {

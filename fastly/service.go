@@ -84,10 +84,31 @@ type ListServicesInput struct {
 	Sort string
 }
 
+func (l *ListServicesInput) formatFilters() map[string]string {
+	m := make(map[string]string)
+
+	if l.Direction != "" {
+		m["direction"] = l.Direction
+	}
+	if l.Page != 0 {
+		m["page"] = strconv.Itoa(l.Page)
+	}
+	if l.PerPage != 0 {
+		m["per_page"] = strconv.Itoa(l.PerPage)
+	}
+	if l.Sort != "" {
+		m["sort"] = l.Sort
+	}
+
+	return m
+}
+
 // ListServices retrieves all resources.
-// FIXME: input isn't used at all (e.g. Params: i.formatFilters()).
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
-	resp, err := c.Get("/service", nil)
+	ro := new(RequestOptions)
+	ro.Params = i.formatFilters()
+
+	resp, err := c.Get("/service", ro)
 	if err != nil {
 		return nil, err
 	}

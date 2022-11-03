@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
     url: https://api.fastly.com/service?direction=descend&page=1&per_page=1&sort=created
     method: GET
   response:
-    body: '[{"version":1,"id":"7i6HN3TK9wS159v2gPAZ8A","versions":[{"updated_at":"2022-01-10T10:22:27Z","number":1,"created_at":"2022-01-10T10:21:11Z","comment":"","testing":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","locked":true,"deployed":false,"active":true,"deleted_at":null,"staging":false}],"paused":false,"deleted_at":null,"created_at":"2022-01-10T10:21:11Z","type":"vcl","updated_at":"2022-01-10T10:21:28Z","name":"tf-test","comment":"","customer_id":"2mEgzQsbxIHPAkmXcKCBG5"}]'
+    body: '[{"id":"YVI5KaaM0YSe1CAmKAbic6","version":1,"name":"test-service","versions":[{"active":false,"locked":false,"updated_at":"2022-11-03T14:07:52Z","number":1,"testing":false,"service_id":"YVI5KaaM0YSe1CAmKAbic6","deleted_at":null,"staging":false,"deployed":false,"comment":"","created_at":"2022-11-03T14:07:52Z"}],"created_at":"2022-11-03T14:07:52Z","comment":"comment","customer_id":"51MumwLiSJyFTWhtbByYgR","updated_at":"2022-11-03T14:07:52Z","deleted_at":null,"paused":false,"type":"vcl"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,9 +21,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 10 Jan 2022 10:23:55 GMT
+      - Thu, 03 Nov 2022 14:07:52 GMT
       Link:
-      - <https://api.fastly.com/service?direction=descend&page=51&per_page=1&sort=created>;
+      - <https://api.fastly.com/service?direction=descend&page=420&per_page=1&sort=created>;
         rel="last", <https://api.fastly.com/service?direction=descend&page=2&per_page=1&sort=created>;
         rel="next"
       Status:
@@ -35,13 +35,13 @@ interactions:
       Via:
       - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS, HIT
       X-Cache-Hits:
-      - 0, 0
+      - 0, 1
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-tyo11969-TYO
+      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4151-MAN
       X-Timer:
-      - S1641810235.164889,VS0,VE268
+      - S1667484473.567625,VS0,VE0
     status: 200 OK
     code: 200
     duration: ""

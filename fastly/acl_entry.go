@@ -58,20 +58,40 @@ type ListACLEntriesInput struct {
 	Sort string
 }
 
+func (l *ListACLEntriesInput) formatFilters() map[string]string {
+	m := make(map[string]string)
+
+	if l.Direction != "" {
+		m["direction"] = l.Direction
+	}
+	if l.Page != 0 {
+		m["page"] = strconv.Itoa(l.Page)
+	}
+	if l.PerPage != 0 {
+		m["per_page"] = strconv.Itoa(l.PerPage)
+	}
+	if l.Sort != "" {
+		m["sort"] = l.Sort
+	}
+
+	return m
+}
+
 // ListACLEntries retrieves all resources.
-// FIXME: The query parameters aren't being processed (e.g. Params: i.formatFilters()).
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
 
-	resp, err := c.Get(path, nil)
+	ro := new(RequestOptions)
+	ro.Params = i.formatFilters()
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
