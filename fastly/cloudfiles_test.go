@@ -117,25 +117,25 @@ func TestClient_Cloudfiles(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "cloudfiles/cleanup", func(c *Client) {
-			c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-cloudfiles",
 			})
 
-			c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-cloudfiles-2",
 			})
 
-			c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-cloudfiles-3",
 			})
 
-			c.DeleteCloudfiles(&DeleteCloudfilesInput{
+			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-cloudfiles",

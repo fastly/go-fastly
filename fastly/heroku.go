@@ -26,9 +26,17 @@ type Heroku struct {
 // herokusByName is a sortable list of herokus.
 type herokusByName []*Heroku
 
-// Len, Swap, and Less implement the sortable interface.
-func (h herokusByName) Len() int      { return len(h) }
-func (h herokusByName) Swap(i, j int) { h[i], h[j] = h[j], h[i] }
+// Len implement the sortable interface.
+func (h herokusByName) Len() int {
+	return len(h)
+}
+
+// Swap implement the sortable interface.
+func (h herokusByName) Swap(i, j int) {
+	h[i], h[j] = h[j], h[i]
+}
+
+// Less implement the sortable interface.
 func (h herokusByName) Less(i, j int) bool {
 	return h[i].Name < h[j].Name
 }
@@ -41,7 +49,7 @@ type ListHerokusInput struct {
 	ServiceVersion int
 }
 
-// ListHerokus returns the list of herokus for the configuration version.
+// ListHerokus retrieves all resources.
 func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -67,25 +75,31 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 
 // CreateHerokuInput is used as input to the CreateHeroku function.
 type CreateHerokuInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	// Format is a fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string `url:"token,omitempty"`
-	URL            string `url:"url,omitempty"`
+	// Token is the token to use for authentication.
+	Token string `url:"token,omitempty"`
+	// URL is the URL to stream logs to.
+	URL string `url:"url,omitempty"`
 }
 
-// CreateHeroku creates a new Fastly heroku.
+// CreateHeroku creates a new resource.
 func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -114,16 +128,14 @@ type GetHerokuInput struct {
 	ServiceVersion int
 }
 
-// GetHeroku gets the heroku configuration with the given parameters.
+// GetHeroku retrieves the specified resource.
 func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -144,31 +156,36 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 
 // UpdateHerokuInput is used as input to the UpdateHeroku function.
 type UpdateHerokuInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the heroku to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string `url:"token,omitempty"`
-	URL            *string `url:"url,omitempty"`
+	// Token is the token to use for authentication.
+	Token *string `url:"token,omitempty"`
+	// URL is the URL to stream logs to.
+	URL *string `url:"url,omitempty"`
 }
 
-// UpdateHeroku updates a specific heroku.
+// UpdateHeroku updates the specified resource.
 func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -197,16 +214,14 @@ type DeleteHerokuInput struct {
 	ServiceVersion int
 }
 
-// DeleteHeroku deletes the given heroku version.
+// DeleteHeroku deletes the specified resource.
 func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return ErrMissingName
 	}

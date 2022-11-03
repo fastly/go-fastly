@@ -86,9 +86,17 @@ type Header struct {
 // headersByName is a sortable list of headers.
 type headersByName []*Header
 
-// Len, Swap, and Less implement the sortable interface.
-func (s headersByName) Len() int      { return len(s) }
-func (s headersByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s headersByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s headersByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s headersByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -101,7 +109,7 @@ type ListHeadersInput struct {
 	ServiceVersion int
 }
 
-// ListHeaders returns the list of headers for the configuration version.
+// ListHeaders retrieves all resources.
 func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -127,30 +135,41 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 
 // CreateHeaderInput is used as input to the CreateHeader function.
 type CreateHeaderInput struct {
-	Action            HeaderAction `url:"action,omitempty"`
-	CacheCondition    string       `url:"cache_condition,omitempty"`
-	Destination       string       `url:"dst,omitempty"`
-	IgnoreIfSet       Compatibool  `url:"ignore_if_set,omitempty"`
-	Name              string       `url:"name,omitempty"`
-	Priority          *uint        `url:"priority,omitempty"`
-	Regex             string       `url:"regex,omitempty"`
-	RequestCondition  string       `url:"request_condition,omitempty"`
-	ResponseCondition string       `url:"response_condition,omitempty"`
+	// Action accepts a string value (set, append, delete, regex, regex_repeat).
+	Action HeaderAction `url:"action,omitempty"`
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
+	CacheCondition string `url:"cache_condition,omitempty"`
+	// Destination is the header to set.
+	Destination string `url:"dst,omitempty"`
+	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.
+	IgnoreIfSet Compatibool `url:"ignore_if_set,omitempty"`
+	// Name is a handle to refer to this Header object.
+	Name string `url:"name,omitempty"`
+	// Priority determines execution order. Lower numbers execute first.
+	Priority *uint `url:"priority,omitempty"`
+	// Regex is the regular expression to use. Only applies to regex and regex_repeat actions.
+	Regex string `url:"regex,omitempty"`
+	// RequestCondition is the condition which, if met, will select this configuration during a request.
+	RequestCondition string `url:"request_condition,omitempty"`
+	// ResponseCondition is an optional name of a response condition to apply.
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Source         string     `url:"src,omitempty"`
-	Substitution   string     `url:"substitution,omitempty"`
-	Type           HeaderType `url:"type,omitempty"`
+	// Source is a variable to be used as a source for the header content. Does not apply to delete action.
+	Source string `url:"src,omitempty"`
+	// Substitution is a value to substitute in place of regular expression. Only applies to regex and regex_repeat actions.
+	Substitution string `url:"substitution,omitempty"`
+	// Type is a type of header (request, cache, response).
+	Type HeaderType `url:"type,omitempty"`
 }
 
-// CreateHeader creates a new Fastly header.
+// CreateHeader creates a new resource.
 func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -179,16 +198,14 @@ type GetHeaderInput struct {
 	ServiceVersion int
 }
 
-// GetHeader gets the header configuration with the given parameters.
+// GetHeader retrieves the specified resource.
 func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -209,36 +226,46 @@ func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 
 // UpdateHeaderInput is used as input to the UpdateHeader function.
 type UpdateHeaderInput struct {
-	Action         *HeaderAction `url:"action,omitempty"`
-	CacheCondition *string       `url:"cache_condition,omitempty"`
-	Destination    *string       `url:"dst,omitempty"`
-	IgnoreIfSet    *Compatibool  `url:"ignore_if_set,omitempty"`
+	// Action accepts a string value (set, append, delete, regex, regex_repeat).
+	Action *HeaderAction `url:"action,omitempty"`
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
+	CacheCondition *string `url:"cache_condition,omitempty"`
+	// Destination is the header to set.
+	Destination *string `url:"dst,omitempty"`
+	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.
+	IgnoreIfSet *Compatibool `url:"ignore_if_set,omitempty"`
 	// Name is the name of the header to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Priority          *uint   `url:"priority,omitempty"`
-	Regex             *string `url:"regex,omitempty"`
-	RequestCondition  *string `url:"request_condition,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Priority determines execution order. Lower numbers execute first.
+	Priority *uint `url:"priority,omitempty"`
+	// Regex is the regular expression to use. Only applies to regex and regex_repeat actions.
+	Regex *string `url:"regex,omitempty"`
+	// RequestCondition is the condition which, if met, will select this configuration during a request.
+	RequestCondition *string `url:"request_condition,omitempty"`
+	// ResponseCondition is an optional name of a response condition to apply.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Source         *string     `url:"src,omitempty"`
-	Substitution   *string     `url:"substitution,omitempty"`
-	Type           *HeaderType `url:"type,omitempty"`
+	// Source is a variable to be used as a source for the header content. Does not apply to delete action.
+	Source *string `url:"src,omitempty"`
+	// Substitution is a value to substitute in place of regular expression. Only applies to regex and regex_repeat actions.
+	Substitution *string `url:"substitution,omitempty"`
+	// Type is a type of header (request, cache, response).
+	Type *HeaderType `url:"type,omitempty"`
 }
 
-// UpdateHeader updates a specific header.
+// UpdateHeader updates the specified resource.
 func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -267,16 +294,14 @@ type DeleteHeaderInput struct {
 	ServiceVersion int
 }
 
-// DeleteHeader deletes the given header version.
+// DeleteHeader deletes the specified resource.
 func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return ErrMissingName
 	}

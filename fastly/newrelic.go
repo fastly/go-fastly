@@ -26,9 +26,17 @@ type NewRelic struct {
 // newrelicByName is a sortable list of newrelic.
 type newrelicByName []*NewRelic
 
-// Len, Swap, and Less implement the sortable interface.
-func (s newrelicByName) Len() int      { return len(s) }
-func (s newrelicByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s newrelicByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s newrelicByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s newrelicByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -41,7 +49,7 @@ type ListNewRelicInput struct {
 	ServiceVersion int
 }
 
-// ListNewRelic returns the list of newrelic for the configuration version.
+// ListNewRelic retrieves all resources.
 func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -68,20 +76,27 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 
 // CreateNewRelicInput is used as input to the CreateNewRelic function.
 type CreateNewRelicInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Region            string `url:"region,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Region is the region to which to stream logs.
+	Region string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string `url:"token,omitempty"`
+	// Token is the Insert API key from the Account page of your New Relic account.
+	Token string `url:"token,omitempty"`
 }
 
-// CreateNewRelic creates a new Fastly newrelic.
+// CreateNewRelic creates a new resource.
 func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -119,7 +134,7 @@ type GetNewRelicInput struct {
 	ServiceVersion int
 }
 
-// GetNewRelic gets the newrelic configuration with the given parameters.
+// GetNewRelic retrieves the specified resource.
 func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -149,22 +164,29 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 
 // UpdateNewRelicInput is used as input to the UpdateNewRelic function.
 type UpdateNewRelicInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the newrelic to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Region            *string `url:"region,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Region is the region to which to stream logs.
+	Region *string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string `url:"token,omitempty"`
+	// Token is the Insert API key from the Account page of your New Relic account.
+	Token *string `url:"token,omitempty"`
 }
 
-// UpdateNewRelic updates a specific newrelic.
+// UpdateNewRelic updates the specified resource.
 func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -206,7 +228,7 @@ type DeleteNewRelicInput struct {
 	ServiceVersion int
 }
 
-// DeleteNewRelic deletes the given newrelic version.
+// DeleteNewRelic deletes the specified resource.
 func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

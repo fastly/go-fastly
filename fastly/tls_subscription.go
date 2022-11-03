@@ -23,6 +23,7 @@ type TLSSubscription struct {
 	UpdatedAt            *time.Time                    `jsonapi:"attr,updated_at,iso8601"`
 }
 
+// TLSSubscriptionCertificate represents a subscription certificate.
 type TLSSubscriptionCertificate struct {
 	ID string `jsonapi:"primary,tls_certificate"`
 }
@@ -104,7 +105,7 @@ func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListTLSSubscriptions lists all managed TLS subscriptions
+// ListTLSSubscriptions retrieves all resources.
 func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubscription, error) {
 	resp, err := c.Get("/tls/subscriptions", &RequestOptions{
 		Params: i.formatFilters(),
@@ -149,6 +150,7 @@ type CreateTLSSubscriptionInput struct {
 	ID string `jsonapi:"primary,tls_subscription"`
 }
 
+// CreateTLSSubscription creates a new resource.
 func (c *Client) CreateTLSSubscription(i *CreateTLSSubscriptionInput) (*TLSSubscription, error) {
 	if len(i.Domains) == 0 {
 		return nil, ErrMissingTLSDomain
@@ -192,6 +194,7 @@ type GetTLSSubscriptionInput struct {
 	Include *string
 }
 
+// GetTLSSubscription retrieves the specified resource.
 func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscription, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -238,7 +241,8 @@ type UpdateTLSSubscriptionInput struct {
 	ID string `jsonapi:"primary,tls_subscription"`
 }
 
-// UpdateTLSSubscription updates an existing TLS Subscription (Limited Availability).
+// UpdateTLSSubscription updates the specified resource.
+//
 // TLS Subscriptions can only be updated in an "issued" state, and when Force=true.
 func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubscription, error) {
 	if i.ID == "" {
@@ -276,6 +280,7 @@ type DeleteTLSSubscriptionInput struct {
 	ID string
 }
 
+// DeleteTLSSubscription deletes the specified resource.
 func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
 	if i.ID == "" {
 		return ErrMissingID

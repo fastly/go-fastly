@@ -35,9 +35,17 @@ type FTP struct {
 // ftpsByName is a sortable list of ftps.
 type ftpsByName []*FTP
 
-// Len, Swap, and Less implement the sortable interface.
-func (s ftpsByName) Len() int      { return len(s) }
-func (s ftpsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s ftpsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s ftpsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s ftpsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -50,7 +58,7 @@ type ListFTPsInput struct {
 	ServiceVersion int
 }
 
-// ListFTPs returns the list of ftps for the configuration version.
+// ListFTPs retrieves all resources.
 func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -77,29 +85,45 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 
 // CreateFTPInput is used as input to the CreateFTP function.
 type CreateFTPInput struct {
-	Address           string `url:"address,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Password          string `url:"password,omitempty"`
-	Path              string `url:"path,omitempty"`
-	Period            uint   `url:"period,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Port              uint   `url:"port,omitempty"`
-	PublicKey         string `url:"public_key,omitempty"`
+	// Address is an hostname or IPv4 address.
+	Address string `url:"address,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
+	CompressionCodec string `url:"compression_codec,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Password is the password for the server. For anonymous use an email address.
+	Password string `url:"password,omitempty"`
+	// Path is the path to upload log files to. If the path ends in / then it is treated as a directory.
+	Path string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port uint `url:"port,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey string `url:"public_key,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat string `url:"timestamp_format,omitempty"`
-	Username        string `url:"user,omitempty"`
+	// Username is the username for the server. Can be anonymous.
+	Username string `url:"user,omitempty"`
 }
 
-// CreateFTP creates a new Fastly FTP.
+// CreateFTP creates a new resource.
 func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -133,7 +157,7 @@ type GetFTPInput struct {
 	ServiceVersion int
 }
 
-// GetFTP gets the FTP configuration with the given parameters.
+// GetFTP retrieves the specified resource.
 func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -163,31 +187,47 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 
 // UpdateFTPInput is used as input to the UpdateFTP function.
 type UpdateFTPInput struct {
-	Address          *string `url:"address,omitempty"`
+	// Address is an hostname or IPv4 address.
+	Address *string `url:"address,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	Format           *string `url:"format,omitempty"`
-	FormatVersion    *uint   `url:"format_version,omitempty"`
-	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
-	MessageType      *string `url:"message_type,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the FTP to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Password          *string `url:"password,omitempty"`
-	Path              *string `url:"path,omitempty"`
-	Period            *uint   `url:"period,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Port              *uint   `url:"port,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Password is the password for the server. For anonymous use an email address.
+	Password *string `url:"password,omitempty"`
+	// Path is the path to upload log files to. If the path ends in / then it is treated as a directory.
+	Path *string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period *uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port *uint `url:"port,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `url:"public_key,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
-	Username        *string `url:"user,omitempty"`
+	// Username is the username for the server. Can be anonymous.
+	Username *string `url:"user,omitempty"`
 }
 
-// UpdateFTP updates a specific FTP.
+// UpdateFTP updates the specified resource.
 func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -225,7 +265,7 @@ type DeleteFTPInput struct {
 	ServiceVersion int
 }
 
-// DeleteFTP deletes the given FTP version.
+// DeleteFTP deletes the specified resource.
 func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

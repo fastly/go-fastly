@@ -26,9 +26,17 @@ type Datadog struct {
 // datadogByName is a sortable list of Datadog.
 type datadogByName []*Datadog
 
-// Len, Swap, and Less implement the sortable interface.
-func (s datadogByName) Len() int      { return len(s) }
-func (s datadogByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s datadogByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s datadogByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s datadogByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -42,7 +50,7 @@ type ListDatadogInput struct {
 	ServiceVersion int
 }
 
-// ListDatadog returns the list of Datadog for the configuration version.
+// ListDatadog retrieves all resources.
 func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -69,20 +77,27 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 
 // CreateDatadogInput is used as input to the CreateDatadog function.
 type CreateDatadogInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Region            string `url:"region,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Region is the region that log data will be sent to.
+	Region string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string `url:"token,omitempty"`
+	// Token is the API key from your Datadog account.
+	Token string `url:"token,omitempty"`
 }
 
-// CreateDatadog creates a new Datadog logging endpoint on a Fastly service version.
+// CreateDatadog creates a new resource.
 func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -120,7 +135,7 @@ type GetDatadogInput struct {
 	ServiceVersion int
 }
 
-// GetDatadog gets the Datadog configuration with the given parameters.
+// GetDatadog retrieves the specified resource.
 func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -150,22 +165,29 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 
 // UpdateDatadogInput is used as input to the UpdateDatadog function.
 type UpdateDatadogInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the Datadog to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Region            *string `url:"region,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Region is the region that log data will be sent to.
+	Region *string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string `url:"token,omitempty"`
+	// Token is the API key from your Datadog account.
+	Token *string `url:"token,omitempty"`
 }
 
-// UpdateDatadog updates a Datadog logging endpoint on a Fastly service version.
+// UpdateDatadog updates the specified resource.
 func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -207,7 +229,7 @@ type DeleteDatadogInput struct {
 	ServiceVersion int
 }
 
-// DeleteDatadog deletes a Datadog logging endpoint on a Fastly service version.
+// DeleteDatadog deletes the specified resource.
 func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -24,7 +24,6 @@ func TestClient_ListTLSDomains(t *testing.T) {
 	if len(ldom) < 1 {
 		t.Errorf("bad tls domains: %v", ldom)
 	}
-
 }
 
 func TestClient_ListTLSDomainsFilterCertificates(t *testing.T) {
@@ -47,5 +46,4 @@ func TestClient_ListTLSDomainsFilterCertificates(t *testing.T) {
 	if len(ldom) != 1 {
 		t.Errorf("bad tls domains: %v", ldom)
 	}
-
 }

@@ -28,13 +28,13 @@ func TestClient_Dictionaries(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteDictionary(&DeleteDictionaryInput{
+			_ = c.DeleteDictionary(&DeleteDictionaryInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: testVersion.Number,
 				Name:           "test_dictionary",
 			})
 
-			c.DeleteDictionary(&DeleteDictionaryInput{
+			_ = c.DeleteDictionary(&DeleteDictionaryInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: testVersion.Number,
 				Name:           "new_test_dictionary",

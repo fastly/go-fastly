@@ -110,7 +110,7 @@ type GetServiceAuthorizationInput struct {
 	ID string
 }
 
-// GetServiceAuthorization retrieves an existing service authorization using its ID.
+// GetServiceAuthorization retrieves the specified resource.
 func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -146,7 +146,7 @@ type CreateServiceAuthorizationInput struct {
 	User *SAUser `jsonapi:"relation,user,omitempty"`
 }
 
-// CreateServiceAuthorization creates a new service authorization granting granular service and user permissions.
+// CreateServiceAuthorization creates a new resource.
 func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.Service == nil || i.Service.ID == "" {
 		return nil, ErrMissingServiceAuthorizationsService
@@ -178,7 +178,7 @@ type UpdateServiceAuthorizationInput struct {
 	Permission string `jsonapi:"attr,permission,omitempty"`
 }
 
-// UpdateServiceAuthorization updates an exisitng service authorization. The ID must be known.
+// UpdateServiceAuthorization updates the specified resource.
 func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -209,7 +209,7 @@ type DeleteServiceAuthorizationInput struct {
 	ID string
 }
 
-// DeleteServiceAuthorization deletes an existing service authorization using the ID.
+// DeleteServiceAuthorization deletes the specified resource.
 func (c *Client) DeleteServiceAuthorization(i *DeleteServiceAuthorizationInput) error {
 	if i.ID == "" {
 		return ErrMissingID

@@ -37,13 +37,13 @@ func TestClient_Headers(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "headers/cleanup", func(c *Client) {
-			c.DeleteHeader(&DeleteHeaderInput{
+			_ = c.DeleteHeader(&DeleteHeaderInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-header",
 			})
 
-			c.DeleteHeader(&DeleteHeaderInput{
+			_ = c.DeleteHeader(&DeleteHeaderInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-header",
@@ -57,7 +57,7 @@ func TestClient_Headers(t *testing.T) {
 	if h.Action != HeaderActionSet {
 		t.Errorf("bad header_action_set: %q", h.Action)
 	}
-	if h.IgnoreIfSet != false {
+	if h.IgnoreIfSet {
 		t.Errorf("bad ignore_if_set: %t", h.IgnoreIfSet)
 	}
 	if h.Type != HeaderTypeRequest {

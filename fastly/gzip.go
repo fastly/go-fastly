@@ -23,9 +23,17 @@ type Gzip struct {
 // gzipsByName is a sortable list of gzips.
 type gzipsByName []*Gzip
 
-// Len, Swap, and Less implement the sortable interface.
-func (s gzipsByName) Len() int      { return len(s) }
-func (s gzipsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s gzipsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s gzipsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s gzipsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -38,7 +46,7 @@ type ListGzipsInput struct {
 	ServiceVersion int
 }
 
-// ListGzips returns the list of gzips for the configuration version.
+// ListGzips retrieves all resources.
 func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -65,17 +73,21 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 
 // CreateGzipInput is used as input to the CreateGzip function.
 type CreateGzipInput struct {
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition string `url:"cache_condition,omitempty"`
-	ContentTypes   string `url:"content_types,omitempty"`
-	Extensions     string `url:"extensions,omitempty"`
-	Name           string `url:"name,omitempty"`
+	// ContentTypes is a space-separated list of content types to compress.
+	ContentTypes string `url:"content_types,omitempty"`
+	// Extensions is a space-separated list of file extensions to compress.
+	Extensions string `url:"extensions,omitempty"`
+	// Name is the name of the gzip configuration.
+	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
 
-// CreateGzip creates a new Fastly Gzip.
+// CreateGzip creates a new resource.
 func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -109,7 +121,7 @@ type GetGzipInput struct {
 	ServiceVersion int
 }
 
-// GetGzip gets the Gzip configuration with the given parameters.
+// GetGzip retrieves the specified resource.
 func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -139,11 +151,15 @@ func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 
 // UpdateGzipInput is used as input to the UpdateGzip function.
 type UpdateGzipInput struct {
+	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	ContentTypes   *string `url:"content_types,omitempty"`
-	Extensions     *string `url:"extensions,omitempty"`
+	// ContentTypes is a space-separated list of content types to compress.
+	ContentTypes *string `url:"content_types,omitempty"`
+	// Extensions is a space-separated list of file extensions to compress.
+	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the Gzip to update.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -151,7 +167,7 @@ type UpdateGzipInput struct {
 	ServiceVersion int
 }
 
-// UpdateGzip updates a specific Gzip.
+// UpdateGzip updates the specified resource.
 func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -189,7 +205,7 @@ type DeleteGzipInput struct {
 	ServiceVersion int
 }
 
-// DeleteGzip deletes the given Gzip version.
+// DeleteGzip deletes the specified resource.
 func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -88,7 +88,6 @@ func TestClient_WAF_Versions(t *testing.T) {
 		})
 		if err != nil {
 			t.Fatal(err)
-			break
 		}
 		if wafVerPD == nil {
 			t.Error("expected waf, got nil")
@@ -195,7 +194,6 @@ func TestClient_WAF_Versions(t *testing.T) {
 }
 
 func verifyWAFVersionUpdate(t *testing.T, i *UpdateWAFVersionInput, o *WAFVersion) {
-
 	if *i.WAFVersionID != o.ID {
 		t.Errorf("expected %s waf: got %s", *i.WAFVersionID, o.ID)
 	}
@@ -286,7 +284,6 @@ func verifyWAFVersionUpdate(t *testing.T, i *UpdateWAFVersionInput, o *WAFVersio
 }
 
 func verifyEmptyWAFVersion(t *testing.T, o *WAFVersion) {
-
 	threshold := 999
 	if threshold != o.HTTPViolationScoreThreshold {
 		t.Errorf("expected  %d HTTPViolationScoreThreshold: got %d", threshold, o.HTTPViolationScoreThreshold)
@@ -506,7 +503,6 @@ func TestClient_DeployWAFVersion_validation(t *testing.T) {
 }
 
 func TestClient_UpdateWAFVersionInput_HasChanges(t *testing.T) {
-
 	cases := []struct {
 		in  UpdateWAFVersionInput
 		out bool

@@ -23,9 +23,17 @@ type Domain struct {
 // domainsByName is a sortable list of backends.
 type domainsByName []*Domain
 
-// Len, Swap, and Less implement the sortable interface.
-func (s domainsByName) Len() int      { return len(s) }
-func (s domainsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s domainsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s domainsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s domainsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -38,7 +46,7 @@ type ListDomainsInput struct {
 	ServiceVersion int
 }
 
-// ListDomains returns the list of domains for this Service.
+// ListDomains retrieves all resources.
 func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -75,7 +83,7 @@ type CreateDomainInput struct {
 	ServiceVersion int
 }
 
-// CreateDomain creates a new domain with the given information.
+// CreateDomain creates a new resource.
 func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -109,7 +117,7 @@ type GetDomainInput struct {
 	ServiceVersion int
 }
 
-// GetDomain retrieves information about the given domain name.
+// GetDomain retrieves the specified resource.
 func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -151,8 +159,7 @@ type UpdateDomainInput struct {
 	ServiceVersion int
 }
 
-// UpdateDomain updates a single domain for the current service. The only allowed
-// parameters are `Name` and `Comment`.
+// UpdateDomain updates the specified resource.
 func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -194,7 +201,7 @@ type DeleteDomainInput struct {
 	ServiceVersion int
 }
 
-// DeleteDomain removes a single domain by the given name.
+// DeleteDomain deletes the specified resource.
 func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -226,7 +233,7 @@ type ValidateDomainInput struct {
 	ServiceVersion int
 }
 
-// ValidateDomain validates the given domain.
+// ValidateDomain validates the specified resource.
 func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -315,7 +322,7 @@ type ValidateAllDomainsInput struct {
 	ServiceVersion int
 }
 
-// ValidateAllDomains validates the given domain.
+// ValidateAllDomains validates the specified resource.
 func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*DomainValidationResult, err error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

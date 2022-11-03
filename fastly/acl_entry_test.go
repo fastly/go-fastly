@@ -5,7 +5,6 @@ import (
 )
 
 func TestClient_ACLEntries(t *testing.T) {
-
 	fixtureBase := "acl_entries/"
 	nameSuffix := "ACLEntries"
 
@@ -42,7 +41,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Errorf("Bad subnet: %v", e.Subnet)
 	}
 
-	if e.Negated != false {
+	if e.Negated {
 		t.Errorf("Bad negated flag: %t", e.Negated)
 	}
 
@@ -136,7 +135,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Errorf("bad subnet: %v", ne.Subnet)
 	}
 
-	if ue.Negated != true {
+	if !ue.Negated {
 		t.Errorf("bad Negated flag: %v", ne.Negated)
 	}
 
@@ -155,7 +154,6 @@ func TestClient_ACLEntries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 }
 
 func TestClient_ListACLEntries_validation(t *testing.T) {
@@ -300,5 +298,4 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 	if err != ErrMaxExceededEntries {
 		t.Errorf("bad error: %s", err)
 	}
-
 }

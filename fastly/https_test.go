@@ -66,14 +66,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// ensure deleted
 	defer func() {
 		record(t, "https/cleanup", func(c *Client) {
-			c.DeleteHTTPS(&DeleteHTTPSInput{
+			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-https",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
-			c.DeleteHTTPS(&DeleteHTTPSInput{
+			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-https",

@@ -28,20 +28,28 @@ type User struct {
 // usersByLogin is a sortable list of users.
 type usersByName []*User
 
-// Len, Swap, and Less implement the sortable interface.
-func (s usersByName) Len() int      { return len(s) }
-func (s usersByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s usersByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s usersByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s usersByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
 type ListCustomerUsersInput struct {
+	// CustomerID is an alphanumeric string identifying the customer.
 	CustomerID string
 }
 
-// ListCustomerUsers returns the full list of users belonging to a specific
-// customer.
+// ListCustomerUsers retrieves all resources.
 func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 	if i.CustomerID == "" {
 		return nil, ErrMissingCustomerID
@@ -80,11 +88,13 @@ func (c *Client) GetCurrentUser() (*User, error) {
 
 // GetUserInput is used as input to the GetUser function.
 type GetUserInput struct {
+	// ID is an alphanumeric string identifying the user.
 	ID string
 }
 
-// GetUser retrieves the user information for the user with the given
-// id. If no user exists for the given id, the API returns a 404 response.
+// GetUser retrieves the specified resource.
+//
+//If no user exists for the given id, the API returns a 404 response.
 func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -107,12 +117,15 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
+	// Login is the login associated with the user (typically, an email address).
 	Login string `url:"login"`
-	Name  string `url:"name"`
-	Role  string `url:"role,omitempty"`
+	// Name is the real life name of the user.
+	Name string `url:"name"`
+	// Role is the permissions role assigned to the user. Can be user, billing, engineer, or superuser.
+	Role string `url:"role,omitempty"`
 }
 
-// CreateUser creates a new API token with the given information.
+// CreateUser creates a new resource.
 func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 	if i.Login == "" {
 		return nil, ErrMissingLogin
@@ -137,12 +150,15 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 
 // UpdateUserInput is used as input to the UpdateUser function.
 type UpdateUserInput struct {
-	ID   string  `url:"-"`
+	// ID is an alphanumeric string identifying the user.
+	ID string `url:"-"`
+	// Name is the real life name of the user.
 	Name *string `url:"name,omitempty"`
+	// Role is the permissions role assigned to the user. Can be user, billing, engineer, or superuser.
 	Role *string `url:"role,omitempty"`
 }
 
-// UpdateUser updates the user with the given input.
+// UpdateUser updates the specified resource.
 func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -164,10 +180,11 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 
 // DeleteUserInput is used as input to the DeleteUser function.
 type DeleteUserInput struct {
+	// ID is an alphanumeric string identifying the user.
 	ID string
 }
 
-// DeleteUser revokes a specific token by its ID.
+// DeleteUser deletes the specified resource.
 func (c *Client) DeleteUser(i *DeleteUserInput) error {
 	if i.ID == "" {
 		return ErrMissingID
@@ -192,6 +209,7 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 
 // ResetUserPasswordInput is used as input to the ResetUserPassword function.
 type ResetUserPasswordInput struct {
+	// Login is the login associated with the user (typically, an email address).
 	Login string
 }
 

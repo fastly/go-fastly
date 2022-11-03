@@ -32,13 +32,13 @@ func TestClient_Loggly(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "loggly/delete", func(c *Client) {
-			c.DeleteLoggly(&DeleteLogglyInput{
+			_ = c.DeleteLoggly(&DeleteLogglyInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-loggly",
 			})
 
-			c.DeleteLoggly(&DeleteLogglyInput{
+			_ = c.DeleteLoggly(&DeleteLogglyInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-loggly",

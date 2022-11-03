@@ -26,7 +26,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteTLSActivation(&DeleteTLSActivationInput{
+			_ = c.DeleteTLSActivation(&DeleteTLSActivationInput{
 				ID: ta.ID,
 			})
 		})

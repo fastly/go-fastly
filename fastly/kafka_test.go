@@ -53,13 +53,13 @@ func TestClient_Kafkas(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "kafkas/cleanup", func(c *Client) {
-			c.DeleteKafka(&DeleteKafkaInput{
+			_ = c.DeleteKafka(&DeleteKafkaInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-kafka",
 			})
 
-			c.DeleteKafka(&DeleteKafkaInput{
+			_ = c.DeleteKafka(&DeleteKafkaInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-kafka",
@@ -79,7 +79,7 @@ func TestClient_Kafkas(t *testing.T) {
 	if k.RequiredACKs != "-1" {
 		t.Errorf("bad required_acks: %q", k.RequiredACKs)
 	}
-	if k.UseTLS != true {
+	if !k.UseTLS {
 		t.Errorf("bad use_tls: %t", k.UseTLS)
 	}
 	if k.CompressionCodec != "lz4" {
@@ -106,7 +106,7 @@ func TestClient_Kafkas(t *testing.T) {
 	if k.TLSClientKey != clientKey {
 		t.Errorf("bad tls_client_key: %q", k.TLSClientKey)
 	}
-	if k.ParseLogKeyvals != true {
+	if !k.ParseLogKeyvals {
 		t.Errorf("bad parse_log_keyvals: %t", k.ParseLogKeyvals)
 	}
 	if k.RequestMaxBytes != requestMaxBytes {
@@ -188,7 +188,7 @@ func TestClient_Kafkas(t *testing.T) {
 	if k.TLSClientKey != nk.TLSClientKey {
 		t.Errorf("bad tls_client_key: %q", k.TLSClientKey)
 	}
-	if k.ParseLogKeyvals != true {
+	if !k.ParseLogKeyvals {
 		t.Errorf("bad parse_log_keyvals: %t", k.ParseLogKeyvals)
 	}
 	if k.RequestMaxBytes != requestMaxBytes {

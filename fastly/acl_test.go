@@ -28,13 +28,13 @@ func TestClient_ACLs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteACL(&DeleteACLInput{
+			_ = c.DeleteACL(&DeleteACLInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: testVersion.Number,
 				Name:           "test_acl",
 			})
 
-			c.DeleteACL(&DeleteACLInput{
+			_ = c.DeleteACL(&DeleteACLInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: testVersion.Number,
 				Name:           "new_test_acl",
@@ -109,7 +109,6 @@ func TestClient_ACLs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-
 }
 
 func TestClient_ListACLs_validation(t *testing.T) {

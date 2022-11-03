@@ -35,9 +35,17 @@ type DigitalOcean struct {
 // digitaloceansByName is a sortable list of DigitalOceans.
 type digitaloceansByName []*DigitalOcean
 
-// Len, Swap, and Less implement the sortable interface.
-func (d digitaloceansByName) Len() int      { return len(d) }
-func (d digitaloceansByName) Swap(i, j int) { d[i], d[j] = d[j], d[i] }
+// Len implement the sortable interface.
+func (d digitaloceansByName) Len() int {
+	return len(d)
+}
+
+// Swap implement the sortable interface.
+func (d digitaloceansByName) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
+}
+
+// Less implement the sortable interface.
 func (d digitaloceansByName) Less(i, j int) bool {
 	return d[i].Name < d[j].Name
 }
@@ -50,7 +58,7 @@ type ListDigitalOceansInput struct {
 	ServiceVersion int
 }
 
-// ListDigitalOceans returns the list of DigitalOceans for the configuration version.
+// ListDigitalOceans retrieves all resources.
 func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -77,29 +85,45 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 
 // CreateDigitalOceanInput is used as input to the CreateDigitalOcean function.
 type CreateDigitalOceanInput struct {
-	AccessKey         string `url:"access_key,omitempty"`
-	BucketName        string `url:"bucket_name,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	Domain            string `url:"domain,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Path              string `url:"path,omitempty"`
-	Period            uint   `url:"period,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	PublicKey         string `url:"public_key,omitempty"`
+	// AccessKey is your DigitalOcean Spaces account access key.
+	AccessKey string `url:"access_key,omitempty"`
+	// BucketName is the name of the DigitalOcean Space.
+	BucketName string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
+	CompressionCodec string `url:"compression_codec,omitempty"`
+	// Domain is the domain of the DigitalOcean Spaces endpoint.
+	Domain string `url:"domain,omitempty"`
+	// Format is aFastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey string `url:"public_key,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
+	// SecretKey is your DigitalOcean Spaces account secret key.
+	SecretKey string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
-// CreateDigitalOcean creates a new Fastly DigitalOcean.
+// CreateDigitalOcean creates a new resource.
 func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -133,7 +157,7 @@ type GetDigitalOceanInput struct {
 	ServiceVersion int
 }
 
-// GetDigitalOcean gets the DigitalOcean configuration with the given parameters.
+// GetDigitalOcean retrieves the specified resource.
 func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -163,31 +187,47 @@ func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error)
 
 // UpdateDigitalOceanInput is used as input to the UpdateDigitalOcean function.
 type UpdateDigitalOceanInput struct {
-	AccessKey        *string `url:"access_key,omitempty"`
-	BucketName       *string `url:"bucket_name,omitempty"`
+	// AccessKey is your DigitalOcean Spaces account access key.
+	AccessKey *string `url:"access_key,omitempty"`
+	// BucketName is the name of the DigitalOcean Space.
+	BucketName *string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	Domain           *string `url:"domain,omitempty"`
-	Format           *string `url:"format,omitempty"`
-	FormatVersion    *uint   `url:"format_version,omitempty"`
-	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
-	MessageType      *string `url:"message_type,omitempty"`
+	// Domain is the domain of the DigitalOcean Spaces endpoint.
+	Domain *string `url:"domain,omitempty"`
+	// Format is aFastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the DigitalOcean to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Path              *string `url:"path,omitempty"`
-	Period            *uint   `url:"period,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path *string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period *uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `url:"public_key,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
+	// SecretKey is your DigitalOcean Spaces account secret key.
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
-// UpdateDigitalOcean updates a specific DigitalOcean.
+// UpdateDigitalOcean updates the specified resource.
 func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -225,7 +265,7 @@ type DeleteDigitalOceanInput struct {
 	ServiceVersion int
 }
 
-// DeleteDigitalOcean deletes the given DigitalOcean version.
+// DeleteDigitalOcean deletes the specified resource.
 func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

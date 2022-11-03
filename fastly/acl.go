@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// ACL represents a server response from the Fastly API.
 type ACL struct {
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
@@ -20,9 +21,17 @@ type ACL struct {
 // ACLsByName is a sortable list of ACLs.
 type ACLsByName []*ACL
 
-// Len, Swap, and Less implement the sortable interface.
-func (s ACLsByName) Len() int      { return len(s) }
-func (s ACLsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implements the sortable interface.
+func (s ACLsByName) Len() int {
+	return len(s)
+}
+
+// Swap implements the sortable interface.
+func (s ACLsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implements the sortable interface.
 func (s ACLsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -35,7 +44,7 @@ type ListACLsInput struct {
 	ServiceVersion int
 }
 
-// ListACLs returns the list of ACLs for the configuration version.
+// ListACLs retrieves all resources.
 func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -70,6 +79,7 @@ type CreateACLInput struct {
 	ServiceVersion int
 }
 
+// CreateACL creates a new resource.
 func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -103,7 +113,7 @@ type DeleteACLInput struct {
 	ServiceVersion int
 }
 
-// DeleteACL deletes the given ACL version.
+// DeleteACL deletes the specified resource.
 func (c *Client) DeleteACL(i *DeleteACLInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -144,7 +154,7 @@ type GetACLInput struct {
 	ServiceVersion int
 }
 
-// GetACL gets the ACL configuration with the given parameters.
+// GetACL retrieves the specified resource.
 func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -184,7 +194,7 @@ type UpdateACLInput struct {
 	ServiceVersion int
 }
 
-// UpdateACL updates the name of the ACL with the given parameters.
+// UpdateACL updates the specified resource.
 func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

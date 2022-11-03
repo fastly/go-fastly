@@ -28,9 +28,17 @@ type Logentries struct {
 // logentriesByName is a sortable list of logentries.
 type logentriesByName []*Logentries
 
-// Len, Swap, and Less implement the sortable interface.
-func (s logentriesByName) Len() int      { return len(s) }
-func (s logentriesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implements the sortable interface.
+func (s logentriesByName) Len() int {
+	return len(s)
+}
+
+// Swap implements the sortable interface.
+func (s logentriesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implements the sortable interface.
 func (s logentriesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -43,7 +51,7 @@ type ListLogentriesInput struct {
 	ServiceVersion int
 }
 
-// ListLogentries returns the list of logentries for the configuration version.
+// ListLogentries retrieves all resources.
 func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -70,22 +78,31 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 
 // CreateLogentriesInput is used as input to the CreateLogentries function.
 type CreateLogentriesInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	Port              uint   `url:"port,omitempty"`
-	Region            string `url:"region,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port uint `url:"port,omitempty"`
+	// Region is the region to which to stream logs.
+	Region string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string      `url:"token,omitempty"`
-	UseTLS         Compatibool `url:"use_tls,omitempty"`
+	// Token is token based authentication
+	Token string `url:"token,omitempty"`
+	// UseTLS is whether to use TLS (0: do not use, 1: use).
+	UseTLS Compatibool `url:"use_tls,omitempty"`
 }
 
-// CreateLogentries creates a new Fastly logentries.
+// CreateLogentries creates a new resource.
 func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -119,7 +136,7 @@ type GetLogentriesInput struct {
 	ServiceVersion int
 }
 
-// GetLogentries gets the logentries configuration with the given parameters.
+// GetLogentries retrieves the specified resource.
 func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -149,24 +166,33 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 
 // UpdateLogentriesInput is used as input to the UpdateLogentries function.
 type UpdateLogentriesInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the logentries to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Port              *uint   `url:"port,omitempty"`
-	Region            *string `url:"region,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port *uint `url:"port,omitempty"`
+	// Region is the region to which to stream logs.
+	Region *string `url:"region,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string      `url:"token,omitempty"`
-	UseTLS         *Compatibool `url:"use_tls,omitempty"`
+	// Token is token based authentication
+	Token *string `url:"token,omitempty"`
+	// UseTLS is whether to use TLS (0: do not use, 1: use).
+	UseTLS *Compatibool `url:"use_tls,omitempty"`
 }
 
-// UpdateLogentries updates a specific logentries.
+// UpdateLogentries updates the specified resource.
 func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -204,7 +230,7 @@ type DeleteLogentriesInput struct {
 	ServiceVersion int
 }
 
-// DeleteLogentries deletes the given logentries version.
+// DeleteLogentries deletes the specified resource.
 func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

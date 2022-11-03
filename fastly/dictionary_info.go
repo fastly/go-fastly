@@ -25,7 +25,7 @@ type GetDictionaryInfoInput struct {
 	ServiceVersion int
 }
 
-// GetDictionaryInfo gets the dictionary metadata with the given parameters.
+// GetDictionaryInfo retrieves the specified resource.
 func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

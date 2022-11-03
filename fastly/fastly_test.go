@@ -120,7 +120,6 @@ func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 }
 
 func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
-
 	var err error
 	var service *Service
 
@@ -139,7 +138,6 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 }
 
 func createTestServiceWasm(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
-
 	var err error
 	var service *Service
 
@@ -171,8 +169,7 @@ func testVersion(t *testing.T, c *Client) *Version {
 	return v
 }
 
-func createTestVersion(t *testing.T, versionFixture string, serviceId string) *Version {
-
+func createTestVersion(t *testing.T, versionFixture string, serviceID string) *Version {
 	var err error
 	var version *Version
 
@@ -181,7 +178,7 @@ func createTestVersion(t *testing.T, versionFixture string, serviceId string) *V
 		defer testVersionLock.Unlock()
 
 		version, err = client.CreateVersion(&CreateVersionInput{
-			ServiceID: serviceId,
+			ServiceID: serviceID,
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -191,14 +188,13 @@ func createTestVersion(t *testing.T, versionFixture string, serviceId string) *V
 	return version
 }
 
-func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId string, version int, dictionaryNameSuffix string) *Dictionary {
-
+func createTestDictionary(t *testing.T, dictionaryFixture string, serviceID string, version int, dictionaryNameSuffix string) *Dictionary {
 	var err error
 	var dictionary *Dictionary
 
 	record(t, dictionaryFixture, func(client *Client) {
 		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
-			ServiceID:      serviceId,
+			ServiceID:      serviceID,
 			ServiceVersion: version,
 			Name:           fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix),
 		})
@@ -210,7 +206,6 @@ func createTestDictionary(t *testing.T, dictionaryFixture string, serviceId stri
 }
 
 func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture string) {
-
 	var err error
 
 	record(t, deleteFixture, func(client *Client) {
@@ -225,14 +220,13 @@ func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture st
 	}
 }
 
-func createTestACL(t *testing.T, createFixture string, serviceId string, version int, aclNameSuffix string) *ACL {
-
+func createTestACL(t *testing.T, createFixture string, serviceID string, version int, aclNameSuffix string) *ACL {
 	var err error
 	var acl *ACL
 
 	record(t, createFixture, func(client *Client) {
 		acl, err = client.CreateACL(&CreateACLInput{
-			ServiceID:      serviceId,
+			ServiceID:      serviceID,
 			ServiceVersion: version,
 			Name:           fmt.Sprintf("test_acl_%s", aclNameSuffix),
 		})
@@ -244,7 +238,6 @@ func createTestACL(t *testing.T, createFixture string, serviceId string, version
 }
 
 func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
-
 	var err error
 
 	record(t, deleteFixture, func(client *Client) {
@@ -259,14 +252,13 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 	}
 }
 
-func createTestPool(t *testing.T, createFixture string, serviceId string, version int, poolNameSuffix string) *Pool {
-
+func createTestPool(t *testing.T, createFixture string, serviceID string, version int, poolNameSuffix string) *Pool {
 	var err error
 	var pool *Pool
 
 	record(t, createFixture, func(client *Client) {
 		pool, err = client.CreatePool(&CreatePoolInput{
-			ServiceID:      serviceId,
+			ServiceID:      serviceID,
 			ServiceVersion: version,
 			Name:           fmt.Sprintf("test_pool_%s", poolNameSuffix),
 		})
@@ -278,7 +270,6 @@ func createTestPool(t *testing.T, createFixture string, serviceId string, versio
 }
 
 func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) *Syslog {
-
 	var err error
 	var log *Syslog
 
@@ -304,7 +295,6 @@ func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber in
 }
 
 func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
-
 	var err error
 
 	record(t, deleteFixture, func(client *Client) {
@@ -320,7 +310,6 @@ func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 }
 
 func deleteTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
-
 	var err error
 
 	record(t, fixture, func(c *Client) {
@@ -336,7 +325,6 @@ func deleteTestLogging(t *testing.T, fixture, serviceID string, serviceNumber in
 }
 
 func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) *Condition {
-
 	var err error
 	var condition *Condition
 
@@ -357,7 +345,6 @@ func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 }
 
 func deleteTestCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
-
 	var err error
 
 	record(t, fixture, func(c *Client) {
@@ -373,7 +360,6 @@ func deleteTestCondition(t *testing.T, fixture, serviceID, name string, serviceN
 }
 
 func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) *ResponseObject {
-
 	var err error
 	var ro *ResponseObject
 
@@ -392,7 +378,6 @@ func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, 
 }
 
 func deleteTestResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
-
 	var err error
 
 	record(t, fixture, func(c *Client) {
@@ -408,7 +393,6 @@ func deleteTestResponseObject(t *testing.T, fixture, serviceID, name string, ser
 }
 
 func createWAF(t *testing.T, fixture, serviceID, condition, response string, serviceNumber int) *WAF {
-
 	var err error
 	var waf *WAF
 
@@ -426,14 +410,13 @@ func createWAF(t *testing.T, fixture, serviceID, condition, response string, ser
 	return waf
 }
 
-func deleteWAF(t *testing.T, fixture, WAFID string, WAFVersion int) {
-
+func deleteWAF(t *testing.T, fixture, wafID string, wafVersion int) {
 	var err error
 
 	record(t, fixture, func(c *Client) {
 		err = c.DeleteWAF(&DeleteWAFInput{
-			ID:             WAFID,
-			ServiceVersion: WAFVersion,
+			ID:             wafID,
+			ServiceVersion: wafVersion,
 		})
 	})
 	if err != nil {
@@ -442,7 +425,6 @@ func deleteWAF(t *testing.T, fixture, WAFID string, WAFVersion int) {
 }
 
 func deleteTestService(t *testing.T, cleanupFixture, serviceID string) {
-
 	var err error
 
 	record(t, cleanupFixture, func(client *Client) {

@@ -25,9 +25,17 @@ type Version struct {
 // `List()` function to sort the API responses.
 type versionsByNumber []*Version
 
-// Len, Swap, and Less implement the sortable interface.
-func (s versionsByNumber) Len() int      { return len(s) }
-func (s versionsByNumber) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s versionsByNumber) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s versionsByNumber) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s versionsByNumber) Less(i, j int) bool {
 	return s[i].Number < s[j].Number
 }
@@ -38,7 +46,7 @@ type ListVersionsInput struct {
 	ServiceID string
 }
 
-// ListVersions returns the full list of all versions of the given service.
+// ListVersions retrieves all resources.
 func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -66,8 +74,9 @@ type LatestVersionInput struct {
 	ServiceID string
 }
 
-// LatestVersion fetches the latest version. If there are no versions, this
-// function will return nil (but not an error).
+// LatestVersion retrieves the specified resource.
+//
+// If there are no versions, this function will return nil (but not an error).
 func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -87,14 +96,15 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 
 // CreateVersionInput is the input to the CreateVersion function.
 type CreateVersionInput struct {
-	// A personal freeform descriptive note.
+	// Comment is a personal freeform descriptive note.
 	Comment string `url:"comment,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
 
-// CreateVersion constructs a new version. Note that `CloneVersion` is
-// preferred in almost all scenarios, since `Create()` creates a _blank_
+// CreateVersion creates a new resource.
+//
+// This is preferred in almost all scenarios, since `Create()` creates a _blank_
 // configuration where `Clone()` builds off of an existing configuration.
 func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
@@ -119,11 +129,11 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 type GetVersionInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-	// SrrviceVersion is the version number to fetch (required).
+	// ServiceVersion is the version number to fetch (required).
 	ServiceVersion int
 }
 
-// GetVersion fetches a version with the given information.
+// GetVersion retrieves the specified resource.
 func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -149,7 +159,7 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 
 // UpdateVersionInput is the input to the UpdateVersion function.
 type UpdateVersionInput struct {
-	// A personal freeform descriptive note.
+	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -157,7 +167,7 @@ type UpdateVersionInput struct {
 	ServiceVersion int
 }
 
-// UpdateVersion updates the given version
+// UpdateVersion updates the specified resource.
 func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -253,9 +263,10 @@ type CloneVersionInput struct {
 	ServiceVersion int
 }
 
-// CloneVersion creates a clone of the version with and returns a new
-// configuration version with all the same configuration options, but an
-// incremented number.
+// CloneVersion creates a clone of the specified version.
+//
+// Returns a new configuration version with all the same configuration options,
+// but an incremented number.
 func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -287,7 +298,7 @@ type ValidateVersionInput struct {
 	ServiceVersion int
 }
 
-// ValidateVersion validates if the given version is okay.
+// ValidateVersion validates the specified resource.
 func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) {
 	var msg string
 

@@ -44,7 +44,7 @@ func TestClient_Servers(t *testing.T) {
 
 		record(t, "servers/cleanup", func(c *Client) {
 			// Expected to fail as this was explicitly deleted in the test.
-			c.DeleteServer(&DeleteServerInput{
+			_ = c.DeleteServer(&DeleteServerInput{
 				ServiceID: testServiceID,
 				PoolID:    testPool.ID,
 				Server:    altServer.ID,
@@ -53,7 +53,7 @@ func TestClient_Servers(t *testing.T) {
 			// Expected to fail as the API forbids deleting the last server in
 			// the pool. The pool is deleted from this version but it still
 			// exists as it may be associated with other versions.
-			c.DeleteServer(&DeleteServerInput{
+			_ = c.DeleteServer(&DeleteServerInput{
 				ServiceID: testServiceID,
 				PoolID:    testPool.ID,
 				Server:    server.ID,

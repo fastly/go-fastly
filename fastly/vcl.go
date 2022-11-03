@@ -22,9 +22,17 @@ type VCL struct {
 // vclsByName is a sortable list of VCLs.
 type vclsByName []*VCL
 
-// Len, Swap, and Less implement the sortable interface.
-func (s vclsByName) Len() int      { return len(s) }
-func (s vclsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s vclsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s vclsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s vclsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -37,7 +45,7 @@ type ListVCLsInput struct {
 	ServiceVersion int
 }
 
-// ListVCLs returns the list of VCLs for the configuration version.
+// ListVCLs retrieves all resources.
 func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -72,7 +80,7 @@ type GetVCLInput struct {
 	ServiceVersion int
 }
 
-// GetVCL gets the VCL configuration with the given parameters.
+// GetVCL retrieves the specified resource.
 func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -108,7 +116,7 @@ type GetGeneratedVCLInput struct {
 	ServiceVersion int
 }
 
-// GetGeneratedVCL gets the VCL configuration with the given parameters.
+// GetGeneratedVCL retrieves the specified resource.
 func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -134,16 +142,19 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 
 // CreateVCLInput is used as input to the CreateVCL function.
 type CreateVCLInput struct {
+	// Content is the VCL code to be included.
 	Content string `url:"content,omitempty"`
-	Main    bool   `url:"main,omitempty"`
-	Name    string `url:"name,omitempty"`
+	// Main is set to true when this is the main VCL, otherwise false.
+	Main bool `url:"main,omitempty"`
+	// Name is the name of this VCL.
+	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
 
-// CreateVCL creates a new Fastly VCL.
+// CreateVCL creates a new resource.
 func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -169,9 +180,11 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 
 // UpdateVCLInput is used as input to the UpdateVCL function.
 type UpdateVCLInput struct {
+	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
 	// Name is the name of the VCL to update (required).
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -179,7 +192,7 @@ type UpdateVCLInput struct {
 	ServiceVersion int
 }
 
-// UpdateVCL creates a new Fastly VCL.
+// UpdateVCL updates the specified resource.
 func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -255,7 +268,7 @@ type DeleteVCLInput struct {
 	ServiceVersion int
 }
 
-// DeleteVCL deletes the given VCL version.
+// DeleteVCL deletes the specified resource.
 func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

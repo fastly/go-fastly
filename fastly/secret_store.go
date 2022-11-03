@@ -30,7 +30,7 @@ type CreateSecretStoreInput struct {
 	Name string
 }
 
-// CreateSecretStore creates a new Secret Store.
+// CreateSecretStore creates a new resource.
 func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
@@ -86,7 +86,8 @@ type ListSecretStoresInput struct {
 	Limit int
 }
 
-// ListSecretStores returns a paginated list of Secret Stores.
+// ListSecretStores retrieves all resources.
+//
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, error) {
@@ -127,7 +128,7 @@ type GetSecretStoreInput struct {
 	ID string
 }
 
-// GetSecretStore gets a single Secret Store.
+// GetSecretStore retrieves the specified resource.
 func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -161,7 +162,7 @@ type DeleteSecretStoreInput struct {
 	ID string
 }
 
-// DeleteSecretStore deletes the given Secret Store and associated Secrets.
+// DeleteSecretStore deletes the specified resource.
 func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 	if i.ID == "" {
 		return ErrMissingID
@@ -201,7 +202,7 @@ type CreateSecretInput struct {
 	Secret []byte
 }
 
-// CreateSecret creates a new Secret within a Secret Store.
+// CreateSecret creates a new resource.
 func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -266,7 +267,8 @@ type ListSecretsInput struct {
 	Limit int
 }
 
-// ListSecrets returns a list of Secrets for the given Secret Store.
+// ListSecrets retrieves all resources.
+//
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
@@ -313,7 +315,7 @@ type GetSecretInput struct {
 	Name string
 }
 
-// GetSecret returns a single Secret from a given Secret Store.
+// GetSecret retrieves the specified resource.
 func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -352,7 +354,7 @@ type DeleteSecretInput struct {
 	Name string
 }
 
-// DeleteSecret deletes the given Secret.
+// DeleteSecret deletes the specified resource.
 func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 	if i.ID == "" {
 		return ErrMissingID

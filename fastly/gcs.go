@@ -34,9 +34,17 @@ type GCS struct {
 // gcsesByName is a sortable list of gcses.
 type gcsesByName []*GCS
 
-// Len, Swap, and Less implement the sortable interface.
-func (s gcsesByName) Len() int      { return len(s) }
-func (s gcsesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s gcsesByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s gcsesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s gcsesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -49,7 +57,7 @@ type ListGCSsInput struct {
 	ServiceVersion int
 }
 
-// ListGCSs returns the list of gcses for the configuration version.
+// ListGCSs retrieves all resources.
 func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -75,28 +83,43 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 
 // CreateGCSInput is used as input to the CreateGCS function.
 type CreateGCSInput struct {
-	AccountName       string `url:"account_name,omitempty"`
-	Bucket            string `url:"bucket_name,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Path              string `url:"path,omitempty"`
-	Period            uint   `url:"period,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
+	AccountName string `url:"account_name,omitempty"`
+	// Bucket is the name of the GCS bucket.
+	Bucket string `url:"bucket_name,omitempty"`
+	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
+	CompressionCodec string `url:"compression_codec,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
+	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
+	SecretKey string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat string `url:"timestamp_format,omitempty"`
-	User            string `url:"user,omitempty"`
+	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
+	User string `url:"user,omitempty"`
 }
 
-// CreateGCS creates a new Fastly GCS.
+// CreateGCS creates a new resource.
 func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -130,7 +153,7 @@ type GetGCSInput struct {
 	ServiceVersion int
 }
 
-// GetGCS gets the GCS configuration with the given parameters.
+// GetGCS retrieves the specified resource.
 func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -160,30 +183,45 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 
 // UpdateGCSInput is used as input to the UpdateGCS function.
 type UpdateGCSInput struct {
-	AccountName      *string `url:"account_name,omitempty"`
-	Bucket           *string `url:"bucket_name,omitempty"`
+	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
+	AccountName *string `url:"account_name,omitempty"`
+	// Bucket is the name of the GCS bucket.
+	Bucket *string `url:"bucket_name,omitempty"`
+	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	Format           *string `url:"format,omitempty"`
-	FormatVersion    *uint   `url:"format_version,omitempty"`
-	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
-	MessageType      *string `url:"message_type,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the GCS to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Path              *string `url:"path,omitempty"`
-	Period            *uint   `url:"period,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path *string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period *uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
+	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
-	User            *string `url:"user,omitempty"`
+	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
+	User *string `url:"user,omitempty"`
 }
 
-// UpdateGCS updates a specific GCS.
+// UpdateGCS updates the specified resource.
 func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -221,7 +259,7 @@ type DeleteGCSInput struct {
 	ServiceVersion int
 }
 
-// DeleteGCS deletes the given GCS version.
+// DeleteGCS deletes the specified resource.
 func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

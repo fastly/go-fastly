@@ -43,13 +43,13 @@ func TestClient_HealthChecks(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "health_checks/cleanup", func(c *Client) {
-			c.DeleteHealthCheck(&DeleteHealthCheckInput{
+			_ = c.DeleteHealthCheck(&DeleteHealthCheckInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-healthcheck",
 			})
 
-			c.DeleteHealthCheck(&DeleteHealthCheckInput{
+			_ = c.DeleteHealthCheck(&DeleteHealthCheckInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-healthcheck",

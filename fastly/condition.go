@@ -24,9 +24,17 @@ type Condition struct {
 // conditionsByName is a sortable list of conditions.
 type conditionsByName []*Condition
 
-// Len, Swap, and Less implement the sortable interface.
-func (s conditionsByName) Len() int      { return len(s) }
-func (s conditionsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s conditionsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s conditionsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s conditionsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -39,7 +47,7 @@ type ListConditionsInput struct {
 	ServiceVersion int
 }
 
-// ListConditions returns the list of conditions for the configuration version.
+// ListConditions retrieves all resources.
 func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -66,17 +74,21 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 
 // CreateConditionInput is used as input to the CreateCondition function.
 type CreateConditionInput struct {
-	Name     string `url:"name,omitempty"`
-	Priority *int   `url:"priority,omitempty"`
+	// Name is the name of the condition.
+	Name string `url:"name,omitempty"`
+	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
+	Priority *int `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Statement      string `url:"statement,omitempty"`
-	Type           string `url:"type,omitempty"`
+	// Statement is a conditional expression in VCL used to determine if the condition is met.
+	Statement string `url:"statement,omitempty"`
+	// Type is the type of the condition (REQUEST, CACHE, RESPONSE, PREFETCH).
+	Type string `url:"type,omitempty"`
 }
 
-// CreateCondition creates a new Fastly condition.
+// CreateCondition creates a new resource.
 func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -110,7 +122,7 @@ type GetConditionInput struct {
 	ServiceVersion int
 }
 
-// GetCondition gets the condition configuration with the given parameters.
+// GetCondition retrieves the specified resource.
 func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -140,19 +152,23 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 
 // UpdateConditionInput is used as input to the UpdateCondition function.
 type UpdateConditionInput struct {
+	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Name is the name of the condition to update.
-	Name     string
+	Name string
+	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
 	Priority *int `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Statement      *string `url:"statement,omitempty"`
-	Type           *string `url:"type,omitempty"`
+	// Statement is a conditional expression in VCL used to determine if the condition is met.
+	Statement *string `url:"statement,omitempty"`
+	// Type is the type of the condition (REQUEST, CACHE, RESPONSE, PREFETCH).
+	Type *string `url:"type,omitempty"`
 }
 
-// UpdateCondition updates a specific condition.
+// UpdateCondition updates the specified resource.
 func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -190,7 +206,7 @@ type DeleteConditionInput struct {
 	ServiceVersion int
 }
 
-// DeleteCondition deletes the given condition version.
+// DeleteCondition deletes the specified resource.
 func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

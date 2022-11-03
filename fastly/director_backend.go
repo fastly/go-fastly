@@ -31,7 +31,7 @@ type CreateDirectorBackendInput struct {
 	ServiceVersion int
 }
 
-// CreateDirectorBackend creates a new Fastly backend.
+// CreateDirectorBackend creates a new resource.
 func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*DirectorBackend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -77,7 +77,7 @@ type GetDirectorBackendInput struct {
 	ServiceVersion int
 }
 
-// GetDirectorBackend gets the backend configuration with the given parameters.
+// GetDirectorBackend retrieves the specified resource.
 func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBackend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -123,7 +123,7 @@ type DeleteDirectorBackendInput struct {
 	ServiceVersion int
 }
 
-// DeleteDirectorBackend deletes the given backend version.
+// DeleteDirectorBackend deletes the specified resource.
 func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

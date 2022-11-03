@@ -47,7 +47,7 @@ func TestClient_Diff(t *testing.T) {
 	// Ensure we delete the backend we just created
 	defer func() {
 		record(t, "diff/cleanup", func(c *Client) {
-			c.DeleteBackend(&DeleteBackendInput{
+			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv2.Number,
 				Name:           "test-backend",

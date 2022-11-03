@@ -22,9 +22,17 @@ type Dictionary struct {
 // dictionariesByName is a sortable list of dictionaries.
 type dictionariesByName []*Dictionary
 
-// Len, Swap, and Less implement the sortable interface.
-func (s dictionariesByName) Len() int      { return len(s) }
-func (s dictionariesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s dictionariesByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s dictionariesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s dictionariesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -37,7 +45,7 @@ type ListDictionariesInput struct {
 	ServiceVersion int
 }
 
-// ListDictionaries returns the list of dictionaries for the configuration version.
+// ListDictionaries retrieves all resources.
 func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -64,15 +72,17 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 
 // CreateDictionaryInput is used as input to the CreateDictionary function.
 type CreateDictionaryInput struct {
+	// Name is the name of the dictionary to create.
 	Name string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	WriteOnly      Compatibool `url:"write_only,omitempty"`
+	// WriteOnly determines if items in the dictionary are readable or not.
+	WriteOnly Compatibool `url:"write_only,omitempty"`
 }
 
-// CreateDictionary creates a new Fastly dictionary.
+// CreateDictionary creates a new resource.
 func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -106,7 +116,7 @@ type GetDictionaryInput struct {
 	ServiceVersion int
 }
 
-// GetDictionary gets the dictionary configuration with the given parameters.
+// GetDictionary retrieves the specified resource.
 func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -137,16 +147,18 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 // UpdateDictionaryInput is used as input to the UpdateDictionary function.
 type UpdateDictionaryInput struct {
 	// Name is the name of the dictionary to update.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	WriteOnly      *Compatibool `url:"write_only,omitempty"`
+	// WriteOnly determines if items in the dictionary are readable or not.
+	WriteOnly *Compatibool `url:"write_only,omitempty"`
 }
 
-// UpdateDictionary updates a specific dictionary.
+// UpdateDictionary updates the specified resource.
 func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -184,7 +196,7 @@ type DeleteDictionaryInput struct {
 	ServiceVersion int
 }
 
-// DeleteDictionary deletes the given dictionary version.
+// DeleteDictionary deletes the specified resource.
 func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

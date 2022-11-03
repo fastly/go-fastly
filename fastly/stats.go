@@ -87,12 +87,18 @@ type Stats struct {
 // time range (From and To), sampling rate (By) and/or Fastly region (Region)
 // Allowed values for the fields are described at https://developer.fastly.com/reference/api/metrics-stats/
 type GetStatsInput struct {
-	By      string
-	Field   string
-	From    string
-	Region  string
+	// By is the duration of sample windows.
+	By string
+	// Field is the name of the stats field.
+	Field string
+	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
+	From string
+	// Region limits query to a specific geographic region.
+	Region string
+	// Service is the ID of the service.
 	Service string
-	To      string
+	// To is the timestamp that defines the end of the window for which to fetch statistics.
+	To string
 }
 
 // StatsResponse is a response from the service stats API endpoint
@@ -111,7 +117,7 @@ type StatsFieldResponse struct {
 	Status  string              `mapstructure:"status"`
 }
 
-// GetStats returns stats data based on GetStatsInput
+// GetStats retrieves the specified resource.
 func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	var resp interface{}
 	if err := c.GetStatsJSON(i, &resp); err != nil {
@@ -125,7 +131,7 @@ func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
 	return sr, nil
 }
 
-// GetStatsField returns stats field data based on GetStatsInput
+// GetStatsField retrieves the specified resource.
 func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
 	var resp interface{}
 	if err := c.GetStatsJSON(i, &resp); err != nil {
@@ -184,7 +190,7 @@ type Usage struct {
 // RegionsUsage is a list of aggregated usage data by Fastly's region
 type RegionsUsage map[string]*Usage
 
-// UsageStatsResponse is a response from the account usage API endpoint
+// UsageResponse is a response from the account usage API endpoint
 type UsageResponse struct {
 	Data    *RegionsUsage     `mapstructure:"data"`
 	Message string            `mapstructure:"msg"`
@@ -195,10 +201,14 @@ type UsageResponse struct {
 // GetUsageInput is used as an input to the GetUsage function
 // Value for the input are described at https://developer.fastly.com/reference/api/metrics-stats/
 type GetUsageInput struct {
-	By     string
-	From   string
+	// By is the duration of sample windows.
+	By string
+	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
+	From string
+	// Region limits query to a specific geographic region.
 	Region string
-	To     string
+	// To is the timestamp that defines the end of the window for which to fetch statistics.
+	To string
 }
 
 // GetUsage returns usage information aggregated across all Fastly services and grouped by region.
@@ -224,7 +234,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 	return sr, nil
 }
 
-// UsageStatsResponse is a response from the account usage API endpoint
+// UsageByServiceResponse is a response from the account usage API endpoint
 type UsageByServiceResponse struct {
 	Data    *ServicesByRegionsUsage `mapstructure:"data"`
 	Message string                  `mapstructure:"msg"`

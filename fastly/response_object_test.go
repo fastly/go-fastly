@@ -33,13 +33,13 @@ func TestClient_ResponseObjects(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "response_objects/cleanup", func(c *Client) {
-			c.DeleteResponseObject(&DeleteResponseObjectInput{
+			_ = c.DeleteResponseObject(&DeleteResponseObjectInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-response-object",
 			})
 
-			c.DeleteResponseObject(&DeleteResponseObjectInput{
+			_ = c.DeleteResponseObject(&DeleteResponseObjectInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-response-object",

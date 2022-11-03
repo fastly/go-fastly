@@ -85,7 +85,7 @@ func (i *ListWAFsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFs returns the list of wafs for the configuration version.
+// ListWAFs retrieves all resources.
 func (c *Client) ListWAFs(i *ListWAFsInput) (*WAFResponse, error) {
 	resp, err := c.Get("/waf/firewalls", &RequestOptions{
 		Params: i.formatFilters(),
@@ -124,16 +124,19 @@ func (c *Client) ListWAFs(i *ListWAFsInput) (*WAFResponse, error) {
 
 // CreateWAFInput is used as input to the CreateWAF function.
 type CreateWAFInput struct {
-	ID                string `jsonapi:"primary,waf_firewall"`
+	// ID is an alphanumeric string identifying a WAF Firewall.
+	ID string `jsonapi:"primary,waf_firewall"`
+	// PrefetchCondition is the name of the corresponding condition object.
 	PrefetchCondition string `jsonapi:"attr,prefetch_condition"`
-	Response          string `jsonapi:"attr,response"`
+	// Response is the name of the corresponding response object.
+	Response string `jsonapi:"attr,response"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `jsonapi:"attr,service_id"`
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `jsonapi:"attr,service_version_number"`
 }
 
-// CreateWAF creates a new Fastly WAF.
+// CreateWAF creates a new resource.
 func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -167,7 +170,7 @@ type GetWAFInput struct {
 	ServiceVersion int
 }
 
-// GetWAF gets details for given WAF
+// GetWAF retrieves the specified resource.
 func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -201,17 +204,21 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 
 // UpdateWAFInput is used as input to the UpdateWAF function.
 type UpdateWAFInput struct {
-	Disabled          *bool   `jsonapi:"attr,disabled,omitempty"`
-	ID                string  `jsonapi:"primary,waf_firewall"`
+	// Disabled is the status of the firewall.
+	Disabled *bool `jsonapi:"attr,disabled,omitempty"`
+	// ID is an alphanumeric string identifying a WAF Firewall.
+	ID string `jsonapi:"primary,waf_firewall"`
+	// PrefetchCondition is the name of the corresponding condition object.
 	PrefetchCondition *string `jsonapi:"attr,prefetch_condition,omitempty"`
-	Response          *string `jsonapi:"attr,response,omitempty"`
+	// Response is the name of the corresponding response object.
+	Response *string `jsonapi:"attr,response,omitempty"`
 	// ServiceID is the ID of the service.
 	ServiceID *string `jsonapi:"attr,service_id,omitempty"`
 	// ServiceVersion is the specific configuration version.
 	ServiceVersion *int `jsonapi:"attr,service_version_number,omitempty"`
 }
 
-// UpdateWAF updates a specific WAF.
+// UpdateWAF updates the specified resource.
 func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -252,7 +259,7 @@ type DeleteWAFInput struct {
 	ServiceVersion int `jsonapi:"attr,service_version_number"`
 }
 
-// DeleteWAF deletes a given WAF from its service.
+// DeleteWAF deletes the specified resource.
 func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

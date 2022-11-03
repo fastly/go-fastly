@@ -24,7 +24,7 @@ type CreateObjectStoreInput struct {
 	Name string `json:"name"`
 }
 
-// CreateObjectStore create a new object store.
+// CreateObjectStore creates a new resource.
 func (c *Client) CreateObjectStore(i *CreateObjectStoreInput) (*ObjectStore, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
@@ -43,10 +43,12 @@ func (c *Client) CreateObjectStore(i *CreateObjectStoreInput) (*ObjectStore, err
 	return store, nil
 }
 
-// ListObjectStoreInput is used as an input to the ListObjectStores function.
+// ListObjectStoresInput is used as an input to the ListObjectStores function.
 type ListObjectStoresInput struct {
+	// Cursor is used for paginating through results.
 	Cursor string
-	Limit  int
+	// Limit is the maximum number of items included the response.
+	Limit int
 }
 
 func (l *ListObjectStoresInput) formatFilters() map[string]string {
@@ -71,7 +73,7 @@ func (l *ListObjectStoresInput) formatFilters() map[string]string {
 	return m
 }
 
-// ListObjectStoresResponse is the return type for the ListObjectStores function.
+// ListObjectStoresResponse retrieves all resources.
 type ListObjectStoresResponse struct {
 	// Data is the list of returned object stores
 	Data []ObjectStore
@@ -79,7 +81,7 @@ type ListObjectStoresResponse struct {
 	Meta map[string]string
 }
 
-// ListObjectStores lists the object stores for the current customer.
+// ListObjectStores retrieves all resources.
 func (c *Client) ListObjectStores(i *ListObjectStoresInput) (*ListObjectStoresResponse, error) {
 	const path = "/resources/stores/object"
 
@@ -98,7 +100,7 @@ func (c *Client) ListObjectStores(i *ListObjectStoresInput) (*ListObjectStoresRe
 	return output, nil
 }
 
-// ListObjectStoresPagiator is the opaque type for a ListObjectStores call with pagination.
+// ListObjectStoresPaginator is the opaque type for a ListObjectStores call with pagination.
 type ListObjectStoresPaginator struct {
 	client   *Client
 	cursor   string // == "" if no more pages
@@ -156,7 +158,7 @@ type GetObjectStoreInput struct {
 	ID string
 }
 
-// GetObjectStore fetches information about the given object store.
+// GetObjectStore retrieves the specified resource.
 func (c *Client) GetObjectStore(i *GetObjectStoreInput) (*ObjectStore, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -181,7 +183,7 @@ type DeleteObjectStoreInput struct {
 	ID string
 }
 
-// DeleteObjectStore deletes the given object store.
+// DeleteObjectStore deletes the specified resource.
 func (c *Client) DeleteObjectStore(i *DeleteObjectStoreInput) error {
 	if i.ID == "" {
 		return ErrMissingID
@@ -202,9 +204,11 @@ func (c *Client) DeleteObjectStore(i *DeleteObjectStoreInput) error {
 
 // ListObjectStoreKeysInput is the input to the ListObjectStoreKeys function.
 type ListObjectStoreKeysInput struct {
+	// Cursor is used for paginating through results.
 	Cursor string
 	// ID is the ID of the object store to list keys for.
-	ID    string
+	ID string
+	// Limit is the maximum number of items included the response.
 	Limit int
 }
 
@@ -230,7 +234,7 @@ func (l *ListObjectStoreKeysInput) formatFilters() map[string]string {
 	return m
 }
 
-// ListObjectStoreKeysResponse is the response to the ListObjectStoreKeys function.
+// ListObjectStoreKeysResponse retrieves all resources.
 type ListObjectStoreKeysResponse struct {
 	// Data is the list of keys
 	Data []string
@@ -238,7 +242,7 @@ type ListObjectStoreKeysResponse struct {
 	Meta map[string]string
 }
 
-// ListObjectStoreKeys lists the keys for the given object store.
+// ListObjectStoreKeys retrieves all resources.
 func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) (*ListObjectStoreKeysResponse, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -261,7 +265,7 @@ func (c *Client) ListObjectStoreKeys(i *ListObjectStoreKeysInput) (*ListObjectSt
 }
 
 // ListObjectStoreKeysPaginator is the opaque type for a ListObjectStoreKeys calls with pagination.
-type ListObjectsStoreKeysPaginator struct {
+type ListObjectStoreKeysPaginator struct {
 	client   *Client
 	cursor   string // == "" if no more pages
 	err      error
@@ -271,15 +275,15 @@ type ListObjectsStoreKeysPaginator struct {
 }
 
 // NewListObjectStoreKeysPaginator returns a new paginator for the provided LitObjectStoreKeysInput.
-func (c *Client) NewListObjectStoreKeysPaginator(i *ListObjectStoreKeysInput) *ListObjectsStoreKeysPaginator {
-	return &ListObjectsStoreKeysPaginator{
+func (c *Client) NewListObjectStoreKeysPaginator(i *ListObjectStoreKeysInput) *ListObjectStoreKeysPaginator {
+	return &ListObjectStoreKeysPaginator{
 		client: c,
 		input:  i,
 	}
 }
 
 // Next advanced the paginator.
-func (l *ListObjectsStoreKeysPaginator) Next() bool {
+func (l *ListObjectStoreKeysPaginator) Next() bool {
 	if l.finished {
 		l.keys = nil
 		return false
@@ -303,12 +307,12 @@ func (l *ListObjectsStoreKeysPaginator) Next() bool {
 }
 
 // Err returns any error from the paginator.
-func (l *ListObjectsStoreKeysPaginator) Err() error {
+func (l *ListObjectStoreKeysPaginator) Err() error {
 	return l.err
 }
 
 // Keys returns the current set of keys retrieved by the paginator.
-func (l *ListObjectsStoreKeysPaginator) Keys() []string {
+func (l *ListObjectStoreKeysPaginator) Keys() []string {
 	return l.keys
 }
 
@@ -320,7 +324,7 @@ type GetObjectStoreKeyInput struct {
 	Key string
 }
 
-// GetObjectStoreKey returns the value associated with a key in an object store.
+// GetObjectStoreKey retrieves the specified resource.
 func (c *Client) GetObjectStoreKey(i *GetObjectStoreKeyInput) (string, error) {
 	if i.ID == "" {
 		return "", ErrMissingID
@@ -382,7 +386,7 @@ type DeleteObjectStoreKeyInput struct {
 	Key string
 }
 
-// DeleteObjectStoreKey deletes a key from an object store.
+// DeleteObjectStoreKey deletes the specified resource.
 func (c *Client) DeleteObjectStoreKey(i *DeleteObjectStoreKeyInput) error {
 	if i.ID == "" {
 		return ErrMissingID

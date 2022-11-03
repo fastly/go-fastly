@@ -35,9 +35,17 @@ type BlobStorage struct {
 // blobStorageByName is a sortable list of blob storages.
 type blobStorageByName []*BlobStorage
 
-// Len, Swap, and Less implement the sortable interface.
-func (s blobStorageByName) Len() int      { return len(s) }
-func (s blobStorageByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s blobStorageByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s blobStorageByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s blobStorageByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -50,7 +58,7 @@ type ListBlobStoragesInput struct {
 	ServiceVersion int
 }
 
-// ListBlobStorages returns the list of blob storages for the configuration version.
+// ListBlobStorages retrieves all resources.
 func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -77,29 +85,45 @@ func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, err
 
 // CreateBlobStorageInput is used as input to the CreateBlobStorage function.
 type CreateBlobStorageInput struct {
-	AccountName       string `url:"account_name,omitempty"`
-	CompressionCodec  string `url:"compression_codec,omitempty"`
-	Container         string `url:"container,omitempty"`
-	FileMaxBytes      uint   `url:"file_max_bytes,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	GzipLevel         uint8  `url:"gzip_level,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Path              string `url:"path,omitempty"`
-	Period            uint   `url:"period,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	PublicKey         string `url:"public_key,omitempty"`
+	// AccountName is the unique Azure Blob Storage namespace in which your data objects are stored.
+	AccountName string `url:"account_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (valid values are zstd, snappy, and gzip).
+	CompressionCodec string `url:"compression_codec,omitempty"`
+	// Container is the name of the Azure Blob Storage container in which to store logs.
+	Container string `url:"container,omitempty"`
+	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
+	FileMaxBytes uint `url:"file_max_bytes,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted.
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey string `url:"public_key,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
-	SASToken          string `url:"sas_token,omitempty"`
+	// SASToken is the Azure shared access signature providing write access to the blob service objects.
+	SASToken string `url:"sas_token,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
-// CreateBlobStorage creates a new Fastly blob storage.
+// CreateBlobStorage creates a new resource.
 func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -133,7 +157,7 @@ type GetBlobStorageInput struct {
 	ServiceVersion int
 }
 
-// GetBlobStorage gets the blob storage configuration with the given parameters.
+// GetBlobStorage retrieves the specified resource.
 func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -163,31 +187,47 @@ func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 
 // UpdateBlobStorageInput is used as input to the UpdateBlobStorage function.
 type UpdateBlobStorageInput struct {
-	AccountName      *string `url:"account_name,omitempty"`
+	// AccountName is the unique Azure Blob Storage namespace in which your data objects are stored.
+	AccountName *string `url:"account_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs (valid values are zstd, snappy, and gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	Container        *string `url:"container,omitempty"`
-	FileMaxBytes     *uint   `url:"file_max_bytes,omitempty"`
-	Format           *string `url:"format,omitempty"`
-	FormatVersion    *uint   `url:"format_version,omitempty"`
-	GzipLevel        *uint8  `url:"gzip_level,omitempty"`
-	MessageType      *string `url:"message_type,omitempty"`
+	// Container is the name of the Azure Blob Storage container in which to store logs.
+	Container *string `url:"container,omitempty"`
+	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
+	FileMaxBytes *uint `url:"file_max_bytes,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	// MessageType is how the message should be formatted.
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the blob storage to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Path              *string `url:"path,omitempty"`
-	Period            *uint   `url:"period,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	PublicKey         *string `url:"public_key,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path *string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period *uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `url:"public_key,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
-	SASToken          *string `url:"sas_token,omitempty"`
+	// SASToken is the Azure shared access signature providing write access to the blob service objects.
+	SASToken *string `url:"sas_token,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
-// UpdateBlobStorage updates a specific blob storage.
+// UpdateBlobStorage updates the specified resource.
 func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -225,7 +265,7 @@ type DeleteBlobStorageInput struct {
 	ServiceVersion int
 }
 
-// DeleteBlobStorage deletes the given blob storage version.
+// DeleteBlobStorage deletes the specified resource.
 func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

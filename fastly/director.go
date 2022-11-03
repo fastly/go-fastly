@@ -44,9 +44,17 @@ type Director struct {
 // directorsByName is a sortable list of directors.
 type directorsByName []*Director
 
-// Len, Swap, and Less implement the sortable interface.
-func (s directorsByName) Len() int      { return len(s) }
-func (s directorsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s directorsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s directorsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s directorsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -59,7 +67,7 @@ type ListDirectorsInput struct {
 	ServiceVersion int
 }
 
-// ListDirectors returns the list of directors for the configuration version.
+// ListDirectors retrieves all resources.
 func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -86,20 +94,25 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 
 // CreateDirectorInput is used as input to the CreateDirector function.
 type CreateDirectorInput struct {
-	Capacity *uint  `url:"capacity,omitempty"`
-	Comment  string `url:"comment,omitempty"`
-	Name     string `url:"name,omitempty"`
-	Quorum   *uint  `url:"quorum,omitempty"`
-	Retries  *uint  `url:"retries,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment string `url:"comment,omitempty"`
+	// Name is the name for the Director.
+	Name string `url:"name,omitempty"`
+	// Quorum is the percentage of capacity that needs to be up for a director to be considered up. 0 to 100.
+	Quorum *uint `url:"quorum,omitempty"`
+	// Retries is how many backends to search if it fails.
+	Retries *uint `url:"retries,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Shield         string       `url:"shield,omitempty"`
-	Type           DirectorType `url:"type,omitempty"`
+	// Shield is selected POP to serve as a shield for the backends.
+	Shield string `url:"shield,omitempty"`
+	// Type is what type of load balance group to use (random, hash, client).
+	Type DirectorType `url:"type,omitempty"`
 }
 
-// CreateDirector creates a new Fastly director.
+// CreateDirector creates a new resource.
 func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -133,7 +146,7 @@ type GetDirectorInput struct {
 	ServiceVersion int
 }
 
-// GetDirector gets the director configuration with the given parameters.
+// GetDirector retrieves the specified resource.
 func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -163,22 +176,27 @@ func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 
 // UpdateDirectorInput is used as input to the UpdateDirector function.
 type UpdateDirectorInput struct {
-	Capacity *uint   `url:"capacity,omitempty"`
-	Comment  *string `url:"comment,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment *string `url:"comment,omitempty"`
 	// Name is the name of the director to update.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	Quorum  *uint   `url:"quorum,omitempty"`
-	Retries *uint   `url:"retries,omitempty"`
+	// Quorum is the percentage of capacity that needs to be up for a director to be considered up. 0 to 100.
+	Quorum *uint `url:"quorum,omitempty"`
+	// Retries is how many backends to search if it fails.
+	Retries *uint `url:"retries,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Shield         *string      `url:"shield,omitempty"`
-	Type           DirectorType `url:"type,omitempty"`
+	// Shield is selected POP to serve as a shield for the backends.
+	Shield *string `url:"shield,omitempty"`
+	// Type is what type of load balance group to use (random, hash, client).
+	Type DirectorType `url:"type,omitempty"`
 }
 
-// UpdateDirector updates a specific director.
+// UpdateDirector updates the specified resource.
 func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -216,7 +234,7 @@ type DeleteDirectorInput struct {
 	ServiceVersion int
 }
 
-// DeleteDirector deletes the given director version.
+// DeleteDirector deletes the specified resource.
 func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -51,19 +51,19 @@ func TestClient_Gzips(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "gzips/cleanup", func(c *Client) {
-			c.DeleteGzip(&DeleteGzipInput{
+			_ = c.DeleteGzip(&DeleteGzipInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-gzip",
 			})
 
-			c.DeleteGzip(&DeleteGzipInput{
+			_ = c.DeleteGzip(&DeleteGzipInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-gzip-omit",
 			})
 
-			c.DeleteGzip(&DeleteGzipInput{
+			_ = c.DeleteGzip(&DeleteGzipInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-gzip",

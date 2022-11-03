@@ -32,13 +32,13 @@ func TestClient_CacheSettings(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "cache_settings/cleanup", func(c *Client) {
-			c.DeleteCacheSetting(&DeleteCacheSettingInput{
+			_ = c.DeleteCacheSetting(&DeleteCacheSettingInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-cache-setting",
 			})
 
-			c.DeleteCacheSetting(&DeleteCacheSettingInput{
+			_ = c.DeleteCacheSetting(&DeleteCacheSettingInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-cache-setting",

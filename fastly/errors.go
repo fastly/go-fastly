@@ -35,6 +35,7 @@ func (e *FieldError) Error() string {
 	return fmt.Sprintf("missing required field '%s'", e.kind)
 }
 
+// Message prints the error message.
 func (e *FieldError) Message(msg string) *FieldError {
 	e.message = msg
 	return e
@@ -348,7 +349,7 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 
 	default:
 		var lerr *legacyError
-		decodeBodyMap(resp.Body, &lerr)
+		_ = decodeBodyMap(resp.Body, &lerr)
 		if lerr != nil {
 			e.Errors = append(e.Errors, &ErrorObject{
 				Title:  lerr.Message,

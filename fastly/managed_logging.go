@@ -25,11 +25,13 @@ type (
 )
 
 const (
+	// ManagedLoggingUnset is a log stream variant.
 	ManagedLoggingUnset ManagedLoggingKind = iota
+	// ManagedLoggingInstanceOutput is a log stream variant.
 	ManagedLoggingInstanceOutput
 )
 
-// CreateManagedLogging enables managed logging for a service.
+// CreateManagedLogging creates a new resource.
 func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLogging, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -73,7 +75,7 @@ type DeleteManagedLoggingInput struct {
 	ServiceID string
 }
 
-// DeleteManagedLogging disables managed logging for a service
+// DeleteManagedLogging deletes the specified resource.
 func (c *Client) DeleteManagedLogging(i *DeleteManagedLoggingInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

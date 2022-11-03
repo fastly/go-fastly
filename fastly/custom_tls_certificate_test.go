@@ -46,10 +46,10 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
+		_ = testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
 			ID: cc.ID,
 		})
-		testClient.DeletePrivateKey(&DeletePrivateKeyInput{
+		_ = testClient.DeletePrivateKey(&DeletePrivateKeyInput{
 			ID: pk.ID,
 		})
 	}()

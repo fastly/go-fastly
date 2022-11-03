@@ -6,22 +6,30 @@ import (
 	"net/url"
 )
 
+// BatchOperation represents batching variants.
 type BatchOperation string
 
 const (
+	// CreateBatchOperation represents a batching variant.
 	CreateBatchOperation BatchOperation = "create"
+	// UpdateBatchOperation represents a batching variant.
 	UpdateBatchOperation BatchOperation = "update"
+	// UpsertBatchOperation represents a batching variant.
 	UpsertBatchOperation BatchOperation = "upsert"
+	// DeleteBatchOperation represents a batching variant.
 	DeleteBatchOperation BatchOperation = "delete"
 
-	// Represents the maximum number of operations that can be sent within a single batch request.
-	// This is currently not documented in the API.
+	// BatchModifyMaximumOperations represents the maximum number of operations
+	// that can be sent within a single batch request. This is currently not
+	// documented in the API.
 	BatchModifyMaximumOperations = 1000
 
-	// Represents the maximum number of items that can be placed within an Edge Dictionary.
+	// MaximumDictionarySize represents the maximum number of items that can be
+	// placed within an Edge Dictionary.
 	MaximumDictionarySize = 10000
 
-	// Represents the maximum number of entries that can be placed within an ACL.
+	// MaximumACLSize represents the maximum number of entries that can be placed
+	// within an ACL.
 	MaximumACLSize = 10000
 )
 
@@ -40,7 +48,7 @@ var (
 	_ encoding.TextUnmarshaler = new(Compatibool)
 )
 
-// Helper function to get a pointer to bool
+// CBool is a helper function to get a pointer to a bool.
 func CBool(b bool) *Compatibool {
 	c := Compatibool(b)
 	return &c

@@ -5,7 +5,6 @@ import (
 )
 
 func TestClient_GetDictionaryInfo(t *testing.T) {
-
 	fixtureBase := "dictionary_info/"
 	nameSuffix := "DictionaryInfo"
 

@@ -100,7 +100,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if s.Token != "super-secure-token" {
 		t.Errorf("bad token: %q", s.Token)
 	}
-	if s.UseTLS != true {
+	if !s.UseTLS {
 		t.Errorf("bad use_tls: %t", s.UseTLS)
 	}
 	if s.TLSCACert != caCert {

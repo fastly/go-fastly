@@ -26,6 +26,7 @@ type EdgeCheckResponse struct {
 
 // EdgeCheckInput is used as input to the EdgeCheck function.
 type EdgeCheckInput struct {
+	// URL is the full URL (host and path) to check on all nodes. if protocol is omitted, http will be assumed.
 	URL string `url:"url,omitempty"`
 }
 

@@ -29,9 +29,17 @@ type Pubsub struct {
 // pubsubsByName is a sortable list of pubsubs.
 type pubsubsByName []*Pubsub
 
-// Len, Swap, and Less implement the sortable interface.
-func (s pubsubsByName) Len() int      { return len(s) }
-func (s pubsubsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s pubsubsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s pubsubsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s pubsubsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -44,7 +52,7 @@ type ListPubsubsInput struct {
 	ServiceVersion int
 }
 
-// ListPubsubs returns the list of pubsubs for the configuration version.
+// ListPubsubs retrieves all resources.
 func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -71,23 +79,33 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 
 // CreatePubsubInput is used as input to the CreatePubsub function.
 type CreatePubsubInput struct {
-	AccountName       string `url:"account_name,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
-	ProjectID         string `url:"project_id,omitempty"`
+	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
+	AccountName string `url:"account_name,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// ProjectID is your Google Cloud Platform project ID. Required.
+	ProjectID string `url:"project_id,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
-	SecretKey         string `url:"secret_key,omitempty"`
+	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
+	SecretKey string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Topic          string `url:"topic,omitempty"`
-	User           string `url:"user,omitempty"`
+	// Topic is the Google Cloud Pub/Sub topic to which logs will be published.
+	Topic string `url:"topic,omitempty"`
+	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
+	User string `url:"user,omitempty"`
 }
 
-// CreatePubsub creates a new Fastly Pubsub.
+// CreatePubsub creates a new resource.
 func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -121,7 +139,7 @@ type GetPubsubInput struct {
 	ServiceVersion int
 }
 
-// GetPubsub gets the Pubsub configuration with the given parameters.
+// GetPubsub retrieves the specified resource.
 func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -151,25 +169,35 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 
 // UpdatePubsubInput is used as input to the UpdatePubsub function.
 type UpdatePubsubInput struct {
-	AccountName   *string `url:"account_name,omitempty"`
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
+	AccountName *string `url:"account_name,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the Pubsub to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	ProjectID         *string `url:"project_id,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// ProjectID is your Google Cloud Platform project ID. Required.
+	ProjectID *string `url:"project_id,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
-	SecretKey         *string `url:"secret_key,omitempty"`
+	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Topic          *string `url:"topic,omitempty"`
-	User           *string `url:"user,omitempty"`
+	// Topic is the Google Cloud Pub/Sub topic to which logs will be published.
+	Topic *string `url:"topic,omitempty"`
+	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
+	User *string `url:"user,omitempty"`
 }
 
-// UpdatePubsub updates a specific Pubsub.
+// UpdatePubsub updates the specified resource.
 func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -207,7 +235,7 @@ type DeletePubsubInput struct {
 	ServiceVersion int
 }
 
-// DeletePubsub deletes the given Pubsub version.
+// DeletePubsub deletes the specified resource.
 func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

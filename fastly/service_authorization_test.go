@@ -41,7 +41,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
+			_ = c.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
 				ID: sa.ID,
 			})
 		})

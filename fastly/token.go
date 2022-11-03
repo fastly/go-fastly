@@ -39,15 +39,22 @@ type Token struct {
 // tokensByName is a sortable list of tokens.
 type tokensByName []*Token
 
-// Len, Swap, and Less implement the sortable interface.
-func (s tokensByName) Len() int      { return len(s) }
-func (s tokensByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s tokensByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s tokensByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s tokensByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListTokens returns the full list of tokens belonging to the currently
-// authenticated user.
+// ListTokens retrieves all resources.
 func (c *Client) ListTokens() ([]*Token, error) {
 	resp, err := c.Get("/tokens", nil)
 	if err != nil {
@@ -65,11 +72,11 @@ func (c *Client) ListTokens() ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
+	// CustomerID is an alphanumeric string identifying the customer.
 	CustomerID string
 }
 
-// ListCustomerTokens returns the full list of tokens belonging to a specific
-// customer.
+// ListCustomerTokens retrieves all resources.
 func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error) {
 	if i.CustomerID == "" {
 		return nil, ErrMissingCustomerID
@@ -91,8 +98,9 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 }
 
 // GetTokenSelf retrieves the token information for the the access_token used
-// used to authenticate the request. Returns a 401 if the token has expired
-// and a 403 for invalid access token.
+// used to authenticate the request.
+//
+// Returns a 401 if the token has expired and a 403 for invalid access token.
 func (c *Client) GetTokenSelf() (*Token, error) {
 	resp, err := c.Get("/tokens/self", nil)
 	if err != nil {
@@ -110,15 +118,21 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
+	// ExpiresAt is a time-stamp (UTC) of when the token will expire
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
-	Name      string     `url:"name,omitempty"`
-	Password  string     `url:"password,omitempty"`
-	Scope     TokenScope `url:"scope,omitempty"`
-	Services  []string   `url:"services,brackets,omitempty"`
-	Username  string     `url:"username,omitempty"`
+	// Name is the name of the token.
+	Name string `url:"name,omitempty"`
+	// Password is the token password.
+	Password string `url:"password,omitempty"`
+	// Scope is a space-delimited list of authorization scope (global, purge_select, purge_all, global).
+	Scope TokenScope `url:"scope,omitempty"`
+	// Services is a list of alphanumeric strings identifying services. If no services are specified, the token will have access to all services on the account.
+	Services []string `url:"services,brackets,omitempty"`
+	// Username is the email of the user the token is assigned to.
+	Username string `url:"username,omitempty"`
 }
 
-// CreateToken creates a new API token with the given information.
+// CreateToken creates a new resource.
 func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 	_, err := c.PostForm("/sudo", i, nil)
 	if err != nil {
@@ -140,10 +154,11 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
+	// TokenID is an alphanumeric string identifying a token.
 	TokenID string
 }
 
-// DeleteToken revokes a specific token by its ID.
+// DeleteToken deletes the specified resource.
 func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	if i.TokenID == "" {
 		return ErrMissingTokenID
@@ -162,7 +177,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	return nil
 }
 
-// DeleteTokenSelf revokes the token used to authorise the request.
+// DeleteTokenSelf deletes the specified resource.
 func (c *Client) DeleteTokenSelf() error {
 	resp, err := c.Delete("/tokens/self", nil)
 	if err != nil {
@@ -178,12 +193,14 @@ func (c *Client) DeleteTokenSelf() error {
 
 // BatchDeleteTokensInput is used as input to BatchDeleteTokens.
 type BatchDeleteTokensInput struct {
+	// Tokens is a list of alphanumeric strings, each identifying a token.
 	Tokens []*BatchToken
 }
 
 // BatchToken represents the JSONAPI data to be sent to the API.
 // Reference: https://github.com/google/jsonapi#primary
 type BatchToken struct {
+	// ID is an alphanumeric string identifying a token.
 	ID string `jsonapi:"primary,token,omitempty"`
 }
 

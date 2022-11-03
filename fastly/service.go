@@ -10,7 +10,7 @@ import (
 	"github.com/peterhellberg/link"
 )
 
-// Service represents a single service for the Fastly account.
+// Service represents a server response from the Fastly API.
 type Service struct {
 	ActiveVersion uint       `mapstructure:"version"`
 	Comment       string     `mapstructure:"comment"`
@@ -24,6 +24,7 @@ type Service struct {
 	Versions      []*Version `mapstructure:"versions"`
 }
 
+// ServiceDetail represents a server response from the Fastly API.
 type ServiceDetail struct {
 	ActiveVersion Version    `mapstructure:"active_version"`
 	Comment       string     `mapstructure:"comment"`
@@ -38,6 +39,7 @@ type ServiceDetail struct {
 	Versions      []*Version `mapstructure:"versions"`
 }
 
+// ServiceDomain represents a server response from the Fastly API.
 type ServiceDomain struct {
 	Comment        string     `mapstructure:"comment"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
@@ -48,27 +50,42 @@ type ServiceDomain struct {
 	ServiceVersion int64      `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
+
+// ServiceDomainsList represents a list of service domains.
 type ServiceDomainsList []*ServiceDomain
 
 // servicesByName is a sortable list of services.
 type servicesByName []*Service
 
-// Len, Swap, and Less implement the sortable interface.
-func (s servicesByName) Len() int      { return len(s) }
-func (s servicesByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s servicesByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s servicesByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s servicesByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
 // ListServicesInput is used as input to the ListServices function.
 type ListServicesInput struct {
+	// Direction is the direction in which to sort results.
 	Direction string
-	Page      int
-	PerPage   int
-	Sort      string
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
+	// Sort is the field on which to sort.
+	Sort string
 }
 
-// ListServices returns the full list of services for the current account.
+// ListServices retrieves all resources.
+// FIXME: input isn't used at all (e.g. Params: i.formatFilters()).
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	resp, err := c.Get("/service", nil)
 	if err != nil {
@@ -84,6 +101,7 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	return s, nil
 }
 
+// ListServicesPaginator implements the PaginatorServices interface.
 type ListServicesPaginator struct {
 	CurrentPage int
 	LastPage    int
@@ -192,12 +210,15 @@ func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPagin
 
 // CreateServiceInput is used as input to the CreateService function.
 type CreateServiceInput struct {
+	// Comment is a freeform descriptive note.
 	Comment string `url:"comment,omitempty"`
-	Name    string `url:"name,omitempty"`
-	Type    string `url:"type,omitempty"`
+	// Name is the name of the service.
+	Name string `url:"name,omitempty"`
+	// Type is the type of this service (vcl, wasm).
+	Type string `url:"type,omitempty"`
 }
 
-// CreateService creates a new service with the given information.
+// CreateService creates a new resource.
 func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 	resp, err := c.PostForm("/service", i, nil)
 	if err != nil {
@@ -214,12 +235,13 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 
 // GetServiceInput is used as input to the GetService function.
 type GetServiceInput struct {
+	// ID is an alphanumeric string identifying the service.
 	ID string
 }
 
-// GetService retrieves the service information for the service with the given
-// id. If no service exists for the given id, the API returns a 400 response
-// (not a 404).
+// GetService retrieves the specified resource.
+//
+// If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -252,8 +274,9 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	return s, nil
 }
 
-// GetService retrieves the details for the service with the given id. If no
-// service exists for the given id, the API returns a 400 response (not a 404).
+// GetServiceDetails retrieves the specified resource.
+//
+// If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
@@ -276,12 +299,15 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 
 // UpdateServiceInput is used as input to the UpdateService function.
 type UpdateServiceInput struct {
-	Comment   *string `url:"comment,omitempty"`
-	Name      *string `url:"name,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment *string `url:"comment,omitempty"`
+	// Name is the name of the service.
+	Name *string `url:"name,omitempty"`
+	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
 
-// UpdateService updates the service with the given input.
+// UpdateService updates the specified resource.
 func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -311,10 +337,11 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 // DeleteServiceInput is used as input to the DeleteService function.
 type DeleteServiceInput struct {
+	// ID is an alphanumeric string identifying the service.
 	ID string
 }
 
-// DeleteService updates the service with the given input.
+// DeleteService deletes the specified resource.
 func (c *Client) DeleteService(i *DeleteServiceInput) error {
 	if i.ID == "" {
 		return ErrMissingID
@@ -339,11 +366,13 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 // SearchServiceInput is used as input to the SearchService function.
 type SearchServiceInput struct {
+	// Name is the name of the service.
 	Name string
 }
 
-// SearchService gets a specific service by name. If no service exists by that
-// name, the API returns a 400 response (not a 404).
+// SearchService retrieves the specified resource.
+//
+// If no service exists by that name, the API returns a 400 response not a 404.
 func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
@@ -367,16 +396,19 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	return s, nil
 }
 
+// ListServiceDomainInput is the input parameter to the ListServiceDomains
+// function.
 type ListServiceDomainInput struct {
-	ID string
+	// ServiceID is the ID of the service (required).
+	ServiceID string
 }
 
-// ListServiceDomains lists all domains associated with a given service
+// ListServiceDomains retrieves all resources.
 func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
-	path := fmt.Sprintf("/service/%s/domain", i.ID)
+	path := fmt.Sprintf("/service/%s/domain", i.ServiceID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

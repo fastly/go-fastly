@@ -26,9 +26,17 @@ type Logshuttle struct {
 // logshuttlesByName is a sortable list of logshuttles.
 type logshuttlesByName []*Logshuttle
 
-// Len, Swap, and Less implement the sortable interface.
-func (l logshuttlesByName) Len() int      { return len(l) }
-func (l logshuttlesByName) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+// Len implement the sortable interface.
+func (l logshuttlesByName) Len() int {
+	return len(l)
+}
+
+// Swap implement the sortable interface.
+func (l logshuttlesByName) Swap(i, j int) {
+	l[i], l[j] = l[j], l[i]
+}
+
+// Less implement the sortable interface.
 func (l logshuttlesByName) Less(i, j int) bool {
 	return l[i].Name < l[j].Name
 }
@@ -41,7 +49,7 @@ type ListLogshuttlesInput struct {
 	ServiceVersion int
 }
 
-// ListLogshuttles returns the list of logshuttles for the configuration version.
+// ListLogshuttles retrieves all resources.
 func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -68,20 +76,27 @@ func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error)
 
 // CreateLogshuttleInput is used as input to the CreateLogshuttle function.
 type CreateLogshuttleInput struct {
-	Format            string `url:"format,omitempty"`
-	FormatVersion     uint   `url:"format_version,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          string `url:"token,omitempty"`
-	URL            string `url:"url,omitempty"`
+	// Token is the data authentication token associated with this endpoint.
+	Token string `url:"token,omitempty"`
+	// URL is the URL to stream logs to.
+	URL string `url:"url,omitempty"`
 }
 
-// CreateLogshuttle creates a new Fastly logshuttle.
+// CreateLogshuttle creates a new resource.
 func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -115,7 +130,7 @@ type GetLogshuttleInput struct {
 	ServiceVersion int
 }
 
-// GetLogshuttle gets the logshuttle configuration with the given parameters.
+// GetLogshuttle retrieves the specified resource.
 func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -145,22 +160,29 @@ func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 
 // UpdateLogshuttleInput is used as input to the UpdateLogshuttle function.
 type UpdateLogshuttleInput struct {
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *uint   `url:"format_version,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the logshuttle to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	Token          *string `url:"token,omitempty"`
-	URL            *string `url:"url,omitempty"`
+	// Token is the data authentication token associated with this endpoint.
+	Token *string `url:"token,omitempty"`
+	// URL is the URL to stream logs to.
+	URL *string `url:"url,omitempty"`
 }
 
-// UpdateLogshuttle updates a specific logshuttle.
+// UpdateLogshuttle updates the specified resource.
 func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -198,7 +220,7 @@ type DeleteLogshuttleInput struct {
 	ServiceVersion int
 }
 
-// DeleteLogshuttle deletes the given logshuttle version.
+// DeleteLogshuttle deletes the specified resource.
 func (c *Client) DeleteLogshuttle(i *DeleteLogshuttleInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

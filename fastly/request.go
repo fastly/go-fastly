@@ -79,12 +79,12 @@ func (c *Client) SimpleGet(target string) (*http.Response, error) {
 	// We parse the URL and then convert it right back to a string
 	// later; this just acts as a check that Fastly isn't sending
 	// us nonsense.
-	url, err := url.Parse(target)
+	u, err := url.Parse(target)
 	if err != nil {
 		return nil, err
 	}
 
-	request, err := http.NewRequest("GET", url.String(), nil)
+	request, err := http.NewRequest("GET", u.String(), nil)
 	if err != nil {
 		return nil, err
 	}

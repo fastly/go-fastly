@@ -92,13 +92,13 @@ type WAFVersionResponse struct {
 
 // ListWAFVersionsInput used as input for listing WAF versions.
 type ListWAFVersionsInput struct {
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_firewall_versions.
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_firewall_versions.
 	Include string
-	// Request a specific page of WAFs.
+	// PageNumber requests a specific page of WAFs.
 	PageNumber int
-	// Limit the number records returned.
+	// PageSize limits the number records returned.
 	PageSize int
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
 }
 
@@ -125,7 +125,7 @@ func (i *ListWAFVersionsInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFVersions returns the list of VAF versions for a given WAF ID.
+// ListWAFVersions retrieves all resources.
 func (c *Client) ListWAFVersions(i *ListWAFVersionsInput) (*WAFVersionResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -169,14 +169,13 @@ func (c *Client) ListWAFVersions(i *ListWAFVersionsInput) (*WAFVersionResponse, 
 
 // ListAllWAFVersionsInput used as input for listing all WAF versions.
 type ListAllWAFVersionsInput struct {
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_firewall_versions.
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_firewall_versions.
 	Include string
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
 }
 
-// ListAllWAFVersions returns the complete list of WAF versions for a given WAF ID. It iterates through
-// all existing pages to ensure all WAF versions are returned at once.
+// ListAllWAFVersions retrieves all resources.
 func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -206,13 +205,13 @@ func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResp
 
 // GetWAFVersionInput used as input for GetWAFVersion function.
 type GetWAFVersionInput struct {
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
-// GetWAFVersion gets details for given WAF version.
+// GetWAFVersion retrieves the specified resource.
 func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -239,41 +238,70 @@ func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
 // UpdateWAFVersionInput is used as input to the UpdateWAFVersion function. This struct uses pointers due to the problem
 // detailed on this issue https://github.com/opencredo/go-fastly/pull/17.
 type UpdateWAFVersionInput struct {
-	AllowedHTTPVersions              *string `jsonapi:"attr,allowed_http_versions,omitempty"`
-	AllowedMethods                   *string `jsonapi:"attr,allowed_methods,omitempty"`
-	AllowedRequestContentType        *string `jsonapi:"attr,allowed_request_content_type,omitempty"`
+	// AllowedHTTPVersions is allowed HTTP versions.
+	AllowedHTTPVersions *string `jsonapi:"attr,allowed_http_versions,omitempty"`
+	// AllowedMethods is a space-separated list of HTTP method names.
+	AllowedMethods *string `jsonapi:"attr,allowed_methods,omitempty"`
+	// AllowedRequestContentType is allowed request content types.
+	AllowedRequestContentType *string `jsonapi:"attr,allowed_request_content_type,omitempty"`
+	// AllowedRequestContentTypeCharset is allowed request content type charset.
 	AllowedRequestContentTypeCharset *string `jsonapi:"attr,allowed_request_content_type_charset,omitempty"`
-	ArgLength                        *int    `jsonapi:"attr,arg_length,omitempty"`
-	ArgNameLength                    *int    `jsonapi:"attr,arg_name_length,omitempty"`
-	CRSValidateUTF8Encoding          *bool   `jsonapi:"attr,crs_validate_utf8_encoding,omitempty"`
-	CombinedFileSizes                *int    `jsonapi:"attr,combined_file_sizes,omitempty"`
-	Comment                          *string `jsonapi:"attr,comment,omitempty"`
-	CriticalAnomalyScore             *int    `jsonapi:"attr,critical_anomaly_score,omitempty"`
-	ErrorAnomalyScore                *int    `jsonapi:"attr,error_anomaly_score,omitempty"`
-	HTTPViolationScoreThreshold      *int    `jsonapi:"attr,http_violation_score_threshold,omitempty"`
-	HighRiskCountryCodes             *string `jsonapi:"attr,high_risk_country_codes,omitempty"`
-	InboundAnomalyScoreThreshold     *int    `jsonapi:"attr,inbound_anomaly_score_threshold,omitempty"`
-	LFIScoreThreshold                *int    `jsonapi:"attr,lfi_score_threshold,omitempty"`
-	MaxFileSize                      *int    `jsonapi:"attr,max_file_size,omitempty"`
-	MaxNumArgs                       *int    `jsonapi:"attr,max_num_args,omitempty"`
-	NoticeAnomalyScore               *int    `jsonapi:"attr,notice_anomaly_score,omitempty"`
-	PHPInjectionScoreThreshold       *int    `jsonapi:"attr,php_injection_score_threshold,omitempty"`
-	ParanoiaLevel                    *int    `jsonapi:"attr,paranoia_level,omitempty"`
-	RCEScoreThreshold                *int    `jsonapi:"attr,rce_score_threshold,omitempty"`
-	RFIScoreThreshold                *int    `jsonapi:"attr,rfi_score_threshold,omitempty"`
-	RestrictedExtensions             *string `jsonapi:"attr,restricted_extensions,omitempty"`
-	RestrictedHeaders                *string `jsonapi:"attr,restricted_headers,omitempty"`
-	SQLInjectionScoreThreshold       *int    `jsonapi:"attr,sql_injection_score_threshold,omitempty"`
-	SessionFixationScoreThreshold    *int    `jsonapi:"attr,session_fixation_score_threshold,omitempty"`
-	TotalArgLength                   *int    `jsonapi:"attr,total_arg_length,omitempty"`
-	// The Web Application Firewall's ID.
+	// ArgLength is the maximum allowed length of an argument.
+	ArgLength *int `jsonapi:"attr,arg_length,omitempty"`
+	// ArgNameLength is the maximum allowed argument name length.
+	ArgNameLength *int `jsonapi:"attr,arg_name_length,omitempty"`
+	// CRSValidateUTF8Encoding is the CRS validate UTF8 encoding.
+	CRSValidateUTF8Encoding *bool `jsonapi:"attr,crs_validate_utf8_encoding,omitempty"`
+	// CombinedFileSizes is the maximum allowed size of all files (in bytes).
+	CombinedFileSizes *int `jsonapi:"attr,combined_file_sizes,omitempty"`
+	// Comment is a freeform descriptive note.
+	Comment *string `jsonapi:"attr,comment,omitempty"`
+	// CriticalAnomalyScore is the score value to add for critical anomalies.
+	CriticalAnomalyScore *int `jsonapi:"attr,critical_anomaly_score,omitempty"`
+	// ErrorAnomalyScore is the score value to add for error anomalies.
+	ErrorAnomalyScore *int `jsonapi:"attr,error_anomaly_score,omitempty"`
+	// HTTPViolationScoreThreshold is the HTTP violation threshold.
+	HTTPViolationScoreThreshold *int `jsonapi:"attr,http_violation_score_threshold,omitempty"`
+	// HighRiskCountryCodes is a space-separated list of country codes in ISO 3166-1 (two-letter) format.
+	HighRiskCountryCodes *string `jsonapi:"attr,high_risk_country_codes,omitempty"`
+	// InboundAnomalyScoreThreshold is the inbound anomaly threshold.
+	InboundAnomalyScoreThreshold *int `jsonapi:"attr,inbound_anomaly_score_threshold,omitempty"`
+	// LFIScoreThreshold is the local file inclusion attack threshold.
+	LFIScoreThreshold *int `jsonapi:"attr,lfi_score_threshold,omitempty"`
+	// MaxFileSize is the maximum allowed file size, in bytes.
+	MaxFileSize *int `jsonapi:"attr,max_file_size,omitempty"`
+	// MaxNumArgs is the maximum number of arguments allowed.
+	MaxNumArgs *int `jsonapi:"attr,max_num_args,omitempty"`
+	// NoticeAnomalyScore is the score value to add for notice anomalies.
+	NoticeAnomalyScore *int `jsonapi:"attr,notice_anomaly_score,omitempty"`
+	// PHPInjectionScoreThreshold is the PHP injection threshold.
+	PHPInjectionScoreThreshold *int `jsonapi:"attr,php_injection_score_threshold,omitempty"`
+	// ParanoiaLevel is the configured paranoia level.
+	ParanoiaLevel *int `jsonapi:"attr,paranoia_level,omitempty"`
+	// RCEScoreThreshold is the remote code execution threshold.
+	RCEScoreThreshold *int `jsonapi:"attr,rce_score_threshold,omitempty"`
+	// RFIScoreThreshold is the remote file inclusion attack threshold.
+	RFIScoreThreshold *int `jsonapi:"attr,rfi_score_threshold,omitempty"`
+	// RestrictedExtensions is a space-separated list of allowed file extensions.
+	RestrictedExtensions *string `jsonapi:"attr,restricted_extensions,omitempty"`
+	// RestrictedHeaders is a space-separated list of allowed header names.
+	RestrictedHeaders *string `jsonapi:"attr,restricted_headers,omitempty"`
+	// SQLInjectionScoreThreshold is the SQL injection attack threshold.
+	SQLInjectionScoreThreshold *int `jsonapi:"attr,sql_injection_score_threshold,omitempty"`
+	// SessionFixationScoreThreshold is the session fixation attack threshold.
+	SessionFixationScoreThreshold *int `jsonapi:"attr,session_fixation_score_threshold,omitempty"`
+	// TotalArgLength is the maximum size of argument names and values.
+	TotalArgLength *int `jsonapi:"attr,total_arg_length,omitempty"`
+	// WAFID is the Web Application Firewall's ID.
 	WAFID *string
-	// The Web Application Firewall's version ID.
+	// WAFVersionID is the Web Application Firewall's version ID.
 	WAFVersionID *string `jsonapi:"primary,waf_firewall_version"`
-	// The Web Application Firewall's version number.
-	WAFVersionNumber    *int
+	// WAFVersionNumber is the Web Application Firewall's version number.
+	WAFVersionNumber *int
+	// WarningAnomalyScore is the score value to add for warning anomalies.
 	WarningAnomalyScore *int `jsonapi:"attr,warning_anomaly_score,omitempty"`
-	XSSScoreThreshold   *int `jsonapi:"attr,xss_score_threshold,omitempty"`
+	// XSSScoreThreshold is the XSS attack threshold.
+	XSSScoreThreshold *int `jsonapi:"attr,xss_score_threshold,omitempty"`
 }
 
 // HasChanges checks that UpdateWAFVersionInput has changed in terms of configuration, which means - if it has configuration fields populated.
@@ -287,7 +315,7 @@ func (i UpdateWAFVersionInput) HasChanges() bool {
 	}
 }
 
-// UpdateWAFVersion updates a specific WAF version.
+// UpdateWAFVersion updates the specified resource.
 func (c *Client) UpdateWAFVersion(i *UpdateWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == nil || *i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -317,9 +345,9 @@ func (c *Client) UpdateWAFVersion(i *UpdateWAFVersionInput) (*WAFVersion, error)
 
 // LockWAFVersionInput used as input for locking a WAF version.
 type LockWAFVersionInput struct {
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
@@ -351,9 +379,9 @@ func (c *Client) LockWAFVersion(i *LockWAFVersionInput) (*WAFVersion, error) {
 
 // CloneWAFVersionInput used as input for cloning a WAF version.
 type CloneWAFVersionInput struct {
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
@@ -383,9 +411,9 @@ func (c *Client) CloneWAFVersion(i *CloneWAFVersionInput) (*WAFVersion, error) {
 
 // DeployWAFVersionInput used as input for deploying a WAF version.
 type DeployWAFVersionInput struct {
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
@@ -407,14 +435,15 @@ func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 	return nil
 }
 
-// CreateEmptyWAFVersionInput used as input for creating an empty WAF version.
+// CreateEmptyWAFVersionInput creates a new resource.
 type CreateEmptyWAFVersionInput struct {
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
 }
 
-// CreateEmptyWAFVersion creates an empty WAF version,
-//  which means a version without rules and all config options set to their default values.
+// CreateEmptyWAFVersion creates a new resource.
+//
+// There are no rules and all config options are set to their default values.
 func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersion, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID

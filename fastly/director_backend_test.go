@@ -30,7 +30,7 @@ func TestClient_DirectorBackends(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "director_backends/cleanup", func(c *Client) {
-			c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+			_ = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Director:       "director",

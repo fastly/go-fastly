@@ -5,7 +5,6 @@ import (
 )
 
 func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
-
 	fixtureBase := "dictionary_items_batch/create/"
 	nameSuffix := "BatchModifyDictionaryItems_Create"
 
@@ -38,7 +37,6 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	// When: I execute the batch create operations against the Fastly API,
 	var err error
 	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
-
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -64,7 +62,6 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	}
 
 	for i, item := range actualDictionaryItems {
-
 		actualItemKey := item.ItemKey
 		expectedItemKey := batchCreateOperations.Items[i].ItemKey
 		if actualItemKey != expectedItemKey {
@@ -76,13 +73,10 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 		if actualItemValue != expectedItemValue {
 			t.Errorf("First ItemValue did not match, expected %s, got %s", expectedItemValue, actualItemValue)
 		}
-
 	}
-
 }
 
 func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
-
 	fixtureBase := "dictionary_items_batch/delete/"
 	nameSuffix := "BatchModifyDictionaryItems_Delete"
 
@@ -114,7 +108,6 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	var err error
 	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
-
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -135,7 +128,6 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	}
 
 	record(t, fixtureBase+"delete_dictionary_items", func(c *Client) {
-
 		err = c.BatchModifyDictionaryItems(batchDeleteOperations)
 	})
 	if err != nil {
@@ -162,7 +154,6 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 }
 
 func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
-
 	fixtureBase := "dictionary_items_batch/update/"
 	nameSuffix := "BatchModifyDictionaryItems_Update"
 
@@ -194,7 +185,6 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	var err error
 	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
-
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -215,7 +205,6 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	}
 
 	record(t, fixtureBase+"update_dictionary_items", func(c *Client) {
-
 		err = c.BatchModifyDictionaryItems(batchUpdateOperations)
 	})
 	if err != nil {
@@ -268,11 +257,9 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	if actualItemValue != expectedItemValue {
 		t.Errorf("Second ItemValue did not match, expected %s, got %s", expectedItemValue, actualItemValue)
 	}
-
 }
 
 func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
-
 	fixtureBase := "dictionary_items_batch/upsert/"
 	nameSuffix := "BatchModifyDictionaryItems_Upsert"
 
@@ -299,7 +286,6 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	var err error
 	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
-
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -325,7 +311,6 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	}
 
 	record(t, fixtureBase+"upsert_dictionary_items", func(c *Client) {
-
 		err = c.BatchModifyDictionaryItems(batchUpsertOperations)
 	})
 	if err != nil {
@@ -351,7 +336,6 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	}
 
 	for i, item := range actualDictionaryItems {
-
 		actualItemKey := item.ItemKey
 		expectedItemKey := batchUpsertOperations.Items[i].ItemKey
 		if actualItemKey != expectedItemKey {
@@ -363,7 +347,5 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 		if actualItemValue != expectedItemValue {
 			t.Errorf("First ItemValue did not match, expected %s, got %s", expectedItemValue, actualItemValue)
 		}
-
 	}
-
 }

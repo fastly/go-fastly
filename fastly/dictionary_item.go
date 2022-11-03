@@ -24,9 +24,17 @@ type DictionaryItem struct {
 // dictionaryItemsByKey is a sortable list of dictionary items.
 type dictionaryItemsByKey []*DictionaryItem
 
-// Len, Swap, and Less implement the sortable interface.
-func (s dictionaryItemsByKey) Len() int      { return len(s) }
-func (s dictionaryItemsByKey) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s dictionaryItemsByKey) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s dictionaryItemsByKey) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s dictionaryItemsByKey) Less(i, j int) bool {
 	return s[i].ItemKey < s[j].ItemKey
 }
@@ -35,15 +43,19 @@ func (s dictionaryItemsByKey) Less(i, j int) bool {
 type ListDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
-	Direction    string
-	Page         int
-	PerPage      int
+	// Direction is the direction in which to sort results.
+	Direction string
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-	Sort      string
+	// Sort is the field on which to sort.
+	Sort string
 }
 
-// ListDictionaryItems returns a list of items for a dictionary
+// ListDictionaryItems retrieves all resources.
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -68,6 +80,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	return bs, nil
 }
 
+// ListDictionaryItemsPaginator implements the PaginatorDictionaryItems interface.
 type ListDictionaryItemsPaginator struct {
 	CurrentPage int
 	LastPage    int
@@ -184,7 +197,9 @@ func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *Lis
 
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.
 type CreateDictionaryItemInput struct {
-	ItemKey   string `url:"item_key,omitempty"`
+	// ItemKey is the dictionary item key, maximum 256 characters.
+	ItemKey string `url:"item_key,omitempty"`
+	// ItemValue is the dictionary item value, maximum 8000 characters.
 	ItemValue string `url:"item_value,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -192,7 +207,7 @@ type CreateDictionaryItemInput struct {
 	DictionaryID string
 }
 
-// CreateDictionaryItem creates a new Fastly dictionary item.
+// CreateDictionaryItem creates a new resource.
 func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -216,7 +231,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	return b, nil
 }
 
-// CreateDictionaryItems creates new Fastly dictionary items from a slice.
+// CreateDictionaryItems creates a new resource.
 func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
 	var b []DictionaryItem
 	for _, cdii := range i {
@@ -239,7 +254,7 @@ type GetDictionaryItemInput struct {
 	ServiceID string
 }
 
-// GetDictionaryItem gets the dictionary item with the given parameters.
+// GetDictionaryItem retrieves the specified resource.
 func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -279,7 +294,7 @@ type UpdateDictionaryItemInput struct {
 	ServiceID string
 }
 
-// UpdateDictionaryItem updates a specific dictionary item.
+// UpdateDictionaryItem updates the specified resource.
 func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -307,20 +322,28 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	return b, nil
 }
 
+// BatchModifyDictionaryItemsInput is the input parameter to the
+// BatchModifyDictionaryItems function.
 type BatchModifyDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to modify items for (required).
-	DictionaryID string                 `json:"-"`
-	Items        []*BatchDictionaryItem `json:"items"`
+	DictionaryID string `json:"-"`
+	// Items is a list of dictionary items.
+	Items []*BatchDictionaryItem `json:"items"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `json:"-"`
 }
 
+// BatchDictionaryItem represents a dictionary item.
 type BatchDictionaryItem struct {
-	ItemKey   string         `json:"item_key"`
-	ItemValue string         `json:"item_value"`
+	// ItemKey is an item key (maximum 256 characters).
+	ItemKey string `json:"item_key"`
+	// ItemValue is an item value (maximum 8000 characters).
+	ItemValue string `json:"item_value"`
+	// Operation is a batching operation variant.
 	Operation BatchOperation `json:"op"`
 }
 
+// BatchModifyDictionaryItems bulk updates dictionary items.
 func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -342,11 +365,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
-	if err := decodeBodyMap(resp.Body, &batchModifyResult); err != nil {
-		return err
-	}
-
-	return nil
+	return decodeBodyMap(resp.Body, &batchModifyResult)
 }
 
 // DeleteDictionaryItemInput is the input parameter to DeleteDictionaryItem.
@@ -359,7 +378,7 @@ type DeleteDictionaryItemInput struct {
 	ServiceID string
 }
 
-// DeleteDictionaryItem deletes the given dictionary item.
+// DeleteDictionaryItem deletes the specified resource.
 func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

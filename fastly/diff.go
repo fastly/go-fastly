@@ -26,7 +26,7 @@ type GetDiffInput struct {
 	To int
 }
 
-// GetDiff returns the diff of the given versions.
+// GetDiff retrieves the specified resource.
 func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

@@ -64,19 +64,19 @@ func TestClient_NewRelic(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "newrelic/delete", func(c *Client) {
-			c.DeleteNewRelic(&DeleteNewRelicInput{
+			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-newrelic",
 			})
 
-			c.DeleteNewRelic(&DeleteNewRelicInput{
+			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-newrelic-2",
 			})
 
-			c.DeleteNewRelic(&DeleteNewRelicInput{
+			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-newrelic",

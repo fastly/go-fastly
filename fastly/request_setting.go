@@ -63,9 +63,17 @@ type RequestSetting struct {
 // requestSettingsByName is a sortable list of request settings.
 type requestSettingsByName []*RequestSetting
 
-// Len, Swap, and Less implement the sortable interface.
-func (s requestSettingsByName) Len() int      { return len(s) }
-func (s requestSettingsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s requestSettingsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s requestSettingsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s requestSettingsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -79,8 +87,7 @@ type ListRequestSettingsInput struct {
 	ServiceVersion int
 }
 
-// ListRequestSettings returns the list of request settings for the
-// configuration version.
+// ListRequestSettings retrieves all resources.
 func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -108,25 +115,37 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 // CreateRequestSettingInput is used as input to the CreateRequestSetting
 // function.
 type CreateRequestSettingInput struct {
-	Action           RequestSettingAction `url:"action,omitempty"`
-	BypassBusyWait   Compatibool          `url:"bypass_busy_wait,omitempty"`
-	DefaultHost      string               `url:"default_host,omitempty"`
-	ForceMiss        Compatibool          `url:"force_miss,omitempty"`
-	ForceSSL         Compatibool          `url:"force_ssl,omitempty"`
-	GeoHeaders       Compatibool          `url:"geo_headers,omitempty"`
-	HashKeys         string               `url:"hash_keys,omitempty"`
-	MaxStaleAge      *uint                `url:"max_stale_age,omitempty"`
-	Name             string               `url:"name,omitempty"`
-	RequestCondition string               `url:"request_condition,omitempty"`
+	// Action allows you to terminate request handling and immediately perform an action.
+	Action RequestSettingAction `url:"action,omitempty"`
+	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
+	BypassBusyWait Compatibool `url:"bypass_busy_wait,omitempty"`
+	// DefaultHost sets the host header.
+	DefaultHost string `url:"default_host,omitempty"`
+	// ForceMiss allows you to force a cache miss for the request. Replaces the item in the cache if the content is cacheable.
+	ForceMiss Compatibool `url:"force_miss,omitempty"`
+	// ForceSSL forces the request use SSL (redirects a non-SSL to SSL).
+	ForceSSL Compatibool `url:"force_ssl,omitempty"`
+	// GeoHeaders injects Fastly-Geo-Country, Fastly-Geo-City, and Fastly-Geo-Region into the request headers.
+	GeoHeaders Compatibool `url:"geo_headers,omitempty"`
+	// HashKeys is a comma separated list of varnish request object fields that should be in the hash key.
+	HashKeys string `url:"hash_keys,omitempty"`
+	// MaxStaleAge is how old an object is allowed to be to serve stale-if-error or stale-while-revalidate.
+	MaxStaleAge *uint `url:"max_stale_age,omitempty"`
+	// Name is the name for the request settings.
+	Name string `url:"name,omitempty"`
+	// RequestCondition is the condition which, if met, will select this configuration during a request.
+	RequestCondition string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	TimerSupport   Compatibool       `url:"timer_support,omitempty"`
-	XForwardedFor  RequestSettingXFF `url:"xff,omitempty"`
+	// TimerSupport injects the X-Timer info into the request for viewing origin fetch durations.
+	TimerSupport Compatibool `url:"timer_support,omitempty"`
+	// XForwardedFor determines header value (clear, leave, append, append_all, overwrite)
+	XForwardedFor RequestSettingXFF `url:"xff,omitempty"`
 }
 
-// CreateRequestSetting creates a new Fastly request settings.
+// CreateRequestSetting creates a new resource.
 func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -160,8 +179,7 @@ type GetRequestSettingInput struct {
 	ServiceVersion int
 }
 
-// GetRequestSetting gets the request settings configuration with the given
-// parameters.
+// GetRequestSetting retrieves the specified resource.
 func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -192,27 +210,39 @@ func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, 
 // UpdateRequestSettingInput is used as input to the UpdateRequestSetting
 // function.
 type UpdateRequestSettingInput struct {
-	Action         RequestSettingAction `url:"action,omitempty"`
-	BypassBusyWait *Compatibool         `url:"bypass_busy_wait,omitempty"`
-	DefaultHost    *string              `url:"default_host,omitempty"`
-	ForceMiss      *Compatibool         `url:"force_miss,omitempty"`
-	ForceSSL       *Compatibool         `url:"force_ssl,omitempty"`
-	GeoHeaders     *Compatibool         `url:"geo_headers,omitempty"`
-	HashKeys       *string              `url:"hash_keys,omitempty"`
-	MaxStaleAge    *uint                `url:"max_stale_age,omitempty"`
+	// Action allows you to terminate request handling and immediately perform an action.
+	Action RequestSettingAction `url:"action,omitempty"`
+	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
+	BypassBusyWait *Compatibool `url:"bypass_busy_wait,omitempty"`
+	// DefaultHost sets the host header.
+	DefaultHost *string `url:"default_host,omitempty"`
+	// ForceMiss allows you to force a cache miss for the request. Replaces the item in the cache if the content is cacheable.
+	ForceMiss *Compatibool `url:"force_miss,omitempty"`
+	// ForceSSL forces the request use SSL (redirects a non-SSL to SSL).
+	ForceSSL *Compatibool `url:"force_ssl,omitempty"`
+	// GeoHeaders injects Fastly-Geo-Country, Fastly-Geo-City, and Fastly-Geo-Region into the request headers.
+	GeoHeaders *Compatibool `url:"geo_headers,omitempty"`
+	// HashKeys is a comma separated list of varnish request object fields that should be in the hash key.
+	HashKeys *string `url:"hash_keys,omitempty"`
+	// MaxStaleAge is how old an object is allowed to be to serve stale-if-error or stale-while-revalidate.
+	MaxStaleAge *uint `url:"max_stale_age,omitempty"`
 	// Name is the name of the request settings to update.
-	Name             string
-	NewName          *string `url:"name,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// RequestCondition is the condition which, if met, will select this configuration during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	TimerSupport   *Compatibool      `url:"timer_support,omitempty"`
-	XForwardedFor  RequestSettingXFF `url:"xff,omitempty"`
+	// TimerSupport injects the X-Timer info into the request for viewing origin fetch durations.
+	TimerSupport *Compatibool `url:"timer_support,omitempty"`
+	// XForwardedFor determines header value (clear, leave, append, append_all, overwrite)
+	XForwardedFor RequestSettingXFF `url:"xff,omitempty"`
 }
 
-// UpdateRequestSetting updates a specific request settings.
+// UpdateRequestSetting updates the specified resource.
 func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -250,7 +280,7 @@ type DeleteRequestSettingInput struct {
 	ServiceVersion int
 }
 
-// DeleteRequestSetting deletes the given request settings version.
+// DeleteRequestSetting deletes the specified resource.
 func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

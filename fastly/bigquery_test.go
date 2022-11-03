@@ -42,13 +42,13 @@ func TestClient_Bigqueries(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "bigqueries/cleanup", func(c *Client) {
-			c.DeleteBigQuery(&DeleteBigQueryInput{
+			_ = c.DeleteBigQuery(&DeleteBigQueryInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-bigquery",
 			})
 
-			c.DeleteBigQuery(&DeleteBigQueryInput{
+			_ = c.DeleteBigQuery(&DeleteBigQueryInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-bigquery",

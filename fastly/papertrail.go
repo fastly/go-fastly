@@ -26,9 +26,17 @@ type Papertrail struct {
 // papertrailsByName is a sortable list of papertrails.
 type papertrailsByName []*Papertrail
 
-// Len, Swap, and Less implement the sortable interface.
-func (s papertrailsByName) Len() int      { return len(s) }
-func (s papertrailsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s papertrailsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s papertrailsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s papertrailsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -41,7 +49,7 @@ type ListPapertrailsInput struct {
 	ServiceVersion int
 }
 
-// ListPapertrails returns the list of papertrails for the configuration version.
+// ListPapertrails retrieves all resources.
 func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -68,23 +76,27 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 
 // CreatePapertrailInput is used as input to the CreatePapertrail function.
 type CreatePapertrailInput struct {
-	Address           string     `url:"address,omitempty"`
-	CreatedAt         *time.Time `url:"created_at,omitempty"`
-	DeletedAt         *time.Time `url:"deleted_at,omitempty"`
-	Format            string     `url:"format,omitempty"`
-	FormatVersion     uint       `url:"format_version,omitempty"`
-	Name              string     `url:"name,omitempty"`
-	Placement         string     `url:"placement,omitempty"`
-	Port              uint       `url:"port,omitempty"`
-	ResponseCondition string     `url:"response_condition,omitempty"`
+	// Address is a hostname or IPv4 address.
+	Address string `url:"address,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port uint `url:"port,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
+	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
-// CreatePapertrail creates a new Fastly papertrail.
+// CreatePapertrail creates a new resource.
 func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -118,7 +130,7 @@ type GetPapertrailInput struct {
 	ServiceVersion int
 }
 
-// GetPapertrail gets the papertrail configuration with the given parameters.
+// GetPapertrail retrieves the specified resource.
 func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -148,25 +160,29 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 
 // UpdatePapertrailInput is used as input to the UpdatePapertrail function.
 type UpdatePapertrailInput struct {
-	Address       *string    `url:"address,omitempty"`
-	CreatedAt     *time.Time `url:"created_at,omitempty"`
-	DeletedAt     *time.Time `url:"deleted_at,omitempty"`
-	Format        *string    `url:"format,omitempty"`
-	FormatVersion *uint      `url:"format_version,omitempty"`
+	// Address is a hostname or IPv4 address.
+	Address *string `url:"address,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
 	// Name is the name of the papertrail to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
-	Port              *uint   `url:"port,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// Port is the port number.
+	Port *uint `url:"port,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	UpdatedAt      *time.Time `url:"updated_at,omitempty"`
 }
 
-// UpdatePapertrail updates a specific papertrail.
+// UpdatePapertrail updates the specified resource.
 func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -204,7 +220,7 @@ type DeletePapertrailInput struct {
 	ServiceVersion int
 }
 
-// DeletePapertrail deletes the given papertrail version.
+// DeletePapertrail deletes the specified resource.
 func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -34,13 +34,13 @@ func TestClient_Scalyrs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "scalyrs/cleanup", func(c *Client) {
-			c.DeleteScalyr(&DeleteScalyrInput{
+			_ = c.DeleteScalyr(&DeleteScalyrInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test-scalyr",
 			})
 
-			c.DeleteScalyr(&DeleteScalyrInput{
+			_ = c.DeleteScalyr(&DeleteScalyrInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new-test-scalyr",

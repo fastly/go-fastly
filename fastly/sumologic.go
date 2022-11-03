@@ -27,9 +27,17 @@ type Sumologic struct {
 // sumologicsByName is a sortable list of sumologics.
 type sumologicsByName []*Sumologic
 
-// Len, Swap, and Less implement the sortable interface.
-func (s sumologicsByName) Len() int      { return len(s) }
-func (s sumologicsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s sumologicsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s sumologicsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s sumologicsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -42,7 +50,7 @@ type ListSumologicsInput struct {
 	ServiceVersion int
 }
 
-// ListSumologics returns the list of sumologics for the configuration version.
+// ListSumologics retrieves all resources.
 func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -69,21 +77,27 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 
 // CreateSumologicInput is used as input to the CreateSumologic function.
 type CreateSumologicInput struct {
-	Address           string `url:"address,omitempty"`
-	Format            string `url:"format,omitempty"`
-	FormatVersion     int    `url:"format_version,omitempty"`
-	MessageType       string `url:"message_type,omitempty"`
-	Name              string `url:"name,omitempty"`
-	Placement         string `url:"placement,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion int `url:"format_version,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name for the real-time logging configuration.
+	Name string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	URL            string `url:"url,omitempty"`
+	// URL is the URL to post logs to.
+	URL string `url:"url,omitempty"`
 }
 
-// CreateSumologic creates a new Fastly sumologic.
+// CreateSumologic creates a new resource.
 func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -117,7 +131,7 @@ type GetSumologicInput struct {
 	ServiceVersion int
 }
 
-// GetSumologic gets the sumologic configuration with the given parameters.
+// GetSumologic retrieves the specified resource.
 func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -147,23 +161,30 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 
 // UpdateSumologicInput is used as input to the UpdateSumologic function.
 type UpdateSumologicInput struct {
-	Address       *string `url:"address,omitempty"`
-	Format        *string `url:"format,omitempty"`
-	FormatVersion *int    `url:"format_version,omitempty"`
-	MessageType   *string `url:"message_type,omitempty"`
+	Address *string `url:"address,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *int `url:"format_version,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the sumologic to update.
-	Name              string
-	NewName           *string `url:"name,omitempty"`
-	Placement         *string `url:"placement,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	URL            *string `url:"url,omitempty"`
+	// URL is the URL to post logs to.
+	URL *string `url:"url,omitempty"`
 }
 
-// UpdateSumologic updates a specific sumologic.
+// UpdateSumologic updates the specified resource.
 func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -201,7 +222,7 @@ type DeleteSumologicInput struct {
 	ServiceVersion int
 }
 
-// DeleteSumologic deletes the given sumologic version.
+// DeleteSumologic deletes the specified resource.
 func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID

@@ -79,7 +79,7 @@ func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFActiveRules returns the list of active rules for a given WAF ID.
+// ListWAFActiveRules retrieves all resources.
 func (c *Client) ListWAFActiveRules(i *ListWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -141,8 +141,7 @@ type ListAllWAFActiveRulesInput struct {
 	WAFVersionNumber int
 }
 
-// ListAllWAFActiveRules returns the complete list of WAF active rules for a given WAF ID. It iterates through
-// all existing pages to ensure all WAF active rules are returned at once.
+// ListAllWAFActiveRules retrieves all resources.
 func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiveRuleResponse, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -178,17 +177,17 @@ func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiv
 	}
 }
 
-// CreateWAFActiveRulesInput used as input for adding rules to a WAF.
+// CreateWAFActiveRulesInput creates a new resource.
 type CreateWAFActiveRulesInput struct {
-	// The list of WAF active rules (ModSecID, Status and Revision are required).
+	// Rules is the list of WAF active rules (ModSecID, Status and Revision are required).
 	Rules []*WAFActiveRule
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
-// CreateWAFActiveRules adds rules to a particular WAF.
+// CreateWAFActiveRules creates a new resource.
 func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiveRule, error) {
 	if i.WAFID == "" {
 		return nil, ErrMissingWAFID
@@ -228,18 +227,21 @@ func (c *Client) CreateWAFActiveRules(i *CreateWAFActiveRulesInput) ([]*WAFActiv
 
 // BatchModificationWAFActiveRulesInput is used for active rules batch modifications.
 type BatchModificationWAFActiveRulesInput struct {
-	// The batch operation to be performed (allowed operations are upsert and delete).
+	// OP is the batch operation to be performed (allowed operations are upsert and delete).
 	OP BatchOperation
-	// The list of WAF active rules (ModSecID, Status and Revision are required for upsert, ModSecID is required for delete).
+	// Rules is the list of WAF active rules (ModSecID, Status and Revision are required for upsert, ModSecID is required for delete).
 	Rules []*WAFActiveRule
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
-// BatchModificationWAFActiveRules is a generic function for creating or deleting WAF active rules in batches.
-// Upsert and delete are the only operations allowed.
+// BatchModificationWAFActiveRules groups create/delete operations for the
+// specified resource.
+//
+// This is a generic function for creating or deleting WAF active rules in
+// batches. Upsert and delete are the only operations allowed.
 func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRulesInput) ([]*WAFActiveRule, error) {
 	if len(i.Rules) > BatchModifyMaximumOperations {
 		return nil, ErrMaxExceededRules
@@ -265,15 +267,15 @@ func (c *Client) BatchModificationWAFActiveRules(i *BatchModificationWAFActiveRu
 
 // DeleteWAFActiveRulesInput used as input for removing rules from a WAF.
 type DeleteWAFActiveRulesInput struct {
-	// The list of WAF active rules (ModSecID is required).
+	// Rules is the list of WAF active rules (ModSecID is required).
 	Rules []*WAFActiveRule
-	// The Web Application Firewall's ID.
+	// WAFID is the Web Application Firewall's ID.
 	WAFID string
-	// The Web Application Firewall's version number.
+	// WAFVersionNumber is the Web Application Firewall's version number.
 	WAFVersionNumber int
 }
 
-// DeleteWAFActiveRules removes rules from a particular WAF.
+// DeleteWAFActiveRules deletes the specified resource.
 func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
 	if i.WAFID == "" {
 		return ErrMissingWAFID

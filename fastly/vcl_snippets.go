@@ -45,7 +45,7 @@ const (
 // SnippetType is the type of VCL Snippet
 type SnippetType string
 
-// Helper function to get a pointer to string
+// SnippetTypeToString is a helper function to get a pointer to string
 func SnippetTypeToString(b string) *SnippetType {
 	p := SnippetType(b)
 	return &p
@@ -84,7 +84,7 @@ type CreateSnippetInput struct {
 	Type SnippetType `url:"type"`
 }
 
-// CreateSnippet creates a new snippet or dynamic snippet on a unlocked version
+// CreateSnippet creates a new resource.
 func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -127,7 +127,8 @@ type UpdateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
 	// Name is the name for the snippet.
-	Name    string
+	Name string
+	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
 	Priority *int `url:"priority,omitempty"`
@@ -139,7 +140,7 @@ type UpdateSnippetInput struct {
 	Type *SnippetType `url:"type,omitempty"`
 }
 
-// UpdateSnippet updates a snippet on a unlocked version
+// UpdateSnippet updates the specified resource.
 func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -186,7 +187,7 @@ type UpdateDynamicSnippetInput struct {
 	ServiceID string
 }
 
-// UpdateDynamicSnippet replaces the content of a Dynamic Snippet
+// UpdateDynamicSnippet updates the specified resource.
 func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -210,6 +211,7 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 	return updateSnippet, err
 }
 
+// DeleteSnippetInput is the input parameter to the DeleteSnippet function.
 type DeleteSnippetInput struct {
 	// Name is the Name of the Snippet to Delete
 	Name string
@@ -219,6 +221,7 @@ type DeleteSnippetInput struct {
 	ServiceVersion int
 }
 
+// DeleteSnippet deletes the specified resource.
 func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -260,14 +263,24 @@ type ListSnippetsInput struct {
 // snippetsByName is a sortable list of Snippets.
 type snippetsByName []*Snippet
 
-// Len, Swap, and Less implement the sortable interface.
-func (s snippetsByName) Len() int      { return len(s) }
-func (s snippetsByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s snippetsByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s snippetsByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s snippetsByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
-// ListSnippets returns the list of Snippets for the configuration version. Content is not displayed for Dynmanic Snippets due to them being
+// ListSnippets retrieves all resources.
+//
+// Content is not displayed for Dynmanic Snippets due to them being
 // versionless, use the GetDynamicSnippet function to show current content.
 func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	if i.ServiceID == "" {
@@ -303,8 +316,10 @@ type GetSnippetInput struct {
 	ServiceVersion int
 }
 
-// GetSnippet gets the Snippet configuration with the given parameters. Dynamic Snippets will not show content due to them
-// being versionless, use GetDynamicSnippet to see content.
+// GetSnippet retrieves the specified resource.
+//
+// Dynamic Snippets will not show content due to them being versionless, use
+// GetDynamicSnippet to see content.
 func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -340,8 +355,9 @@ type GetDynamicSnippetInput struct {
 	ServiceID string
 }
 
-// GetDynamicSnippet gets the Snippet configuration with the given parameters. This will show the current content
-// associated with a Dynamic Snippet.
+// GetDynamicSnippet retrieves the specified resource.
+//
+// This will show the current content associated with a Dynamic Snippet.
 func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID

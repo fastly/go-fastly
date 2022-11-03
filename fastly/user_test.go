@@ -40,7 +40,7 @@ func TestClient_Users(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteUser(&DeleteUserInput{
+			_ = c.DeleteUser(&DeleteUserInput{
 				ID: u.ID,
 			})
 		})

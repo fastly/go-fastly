@@ -50,13 +50,13 @@ func TestClient_Domains(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "domains/cleanup", func(c *Client) {
-			c.DeleteDomain(&DeleteDomainInput{
+			_ = c.DeleteDomain(&DeleteDomainInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           domain1,
 			})
 
-			c.DeleteDomain(&DeleteDomainInput{
+			_ = c.DeleteDomain(&DeleteDomainInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           domain3,
@@ -137,7 +137,7 @@ func TestClient_Domains(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if vd.Valid != false {
+	if vd.Valid {
 		t.Errorf("valid domain unexpected: %q", vd.Metadata.Name)
 	}
 
@@ -155,7 +155,7 @@ func TestClient_Domains(t *testing.T) {
 		t.Errorf("invalid domains: %v", vds)
 	}
 	for _, d := range vds {
-		if d.Valid != false {
+		if d.Valid {
 			t.Errorf("valid domain unexpected: %q", d.Metadata.Name)
 		}
 	}

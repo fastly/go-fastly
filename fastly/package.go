@@ -17,7 +17,7 @@ type Package struct {
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
-// Package is a container for metadata returned about a package.
+// PackageMetadata is a container for metadata returned about a package.
 // It is a separate struct to allow correct serialisation by mapstructure -
 // the raw data is returned as a json sub-block.
 type PackageMetadata struct {
@@ -37,7 +37,7 @@ type GetPackageInput struct {
 	ServiceVersion int `mapstructure:"version"`
 }
 
-// GetPackage retrieves  package information for the given service and version.
+// GetPackage retrieves the specified resource.
 func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 	path, err := MakePackagePath(i.ServiceID, i.ServiceVersion)
 	if err != nil {
@@ -63,7 +63,7 @@ type UpdatePackageInput struct {
 	ServiceVersion int `mapstructure:"version"`
 }
 
-// UpdatePackage updates a package for a specific version.
+// UpdatePackage updates the specified resource.
 func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 	urlPath, err := MakePackagePath(i.ServiceID, i.ServiceVersion)
 	if err != nil {
@@ -80,14 +80,14 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 }
 
 // MakePackagePath ensures we create the correct REST path for referencing packages in the API.
-func MakePackagePath(ServiceID string, ServiceVersion int) (string, error) {
-	if ServiceID == "" {
+func MakePackagePath(serviceID string, serviceVersion int) (string, error) {
+	if serviceID == "" {
 		return "", ErrMissingServiceID
 	}
-	if ServiceVersion == 0 {
+	if serviceVersion == 0 {
 		return "", ErrMissingServiceVersion
 	}
-	return fmt.Sprintf("/service/%s/version/%d/package", ServiceID, ServiceVersion), nil
+	return fmt.Sprintf("/service/%s/version/%d/package", serviceID, serviceVersion), nil
 }
 
 // PopulatePackage encapsulates the decoding of returned package data.

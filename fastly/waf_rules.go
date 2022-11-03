@@ -45,19 +45,19 @@ type WAFRuleResponse struct {
 
 // ListWAFRulesInput used as input for listing WAF rules.
 type ListWAFRulesInput struct {
-	// Excludes individual rules by modsecurity rule IDs.
+	// ExcludeModSecIDs excludes individual rules by modsecurity rule IDs.
 	ExcludeModSecIDs []int
-	// Limit the returned rules to a set by modsecurity rule IDs.
+	// FilterModSecIDs limits the returned rules to a set by modsecurity rule IDs.
 	FilterModSecIDs []int
-	// Limit the returned rules to a set by publishers.
+	// FilterPublishers limits the returned rules to a set by publishers.
 	FilterPublishers []string
-	// Limit the returned rules to a set linked to list of tags by name.
+	// FilterTagNames limits the returned rules to a set linked to list of tags by name.
 	FilterTagNames []string
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
 	Include string
-	// Request a specific page of rules.
+	// PageNumber requests a specific page of rules.
 	PageNumber int
-	// Limit the number of returned rules.
+	// PageSize limits the number of returned rules.
 	PageSize int
 }
 
@@ -89,7 +89,6 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 			}
 		case "[]int":
 			if len(value.([]int)) > 0 {
-
 				stringSlice := make([]string, len(value.([]int)))
 				for i, id := range value.([]int) {
 					stringSlice[i] = strconv.Itoa(id)
@@ -101,7 +100,7 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 	return result
 }
 
-// ListWAFRules returns the list of VAF versions for a given WAF ID.
+// ListWAFRules retrieves all resources.
 func (c *Client) ListWAFRules(i *ListWAFRulesInput) (*WAFRuleResponse, error) {
 	resp, err := c.Get("/waf/rules", &RequestOptions{
 		Params: i.formatFilters(),
@@ -140,20 +139,19 @@ func (c *Client) ListWAFRules(i *ListWAFRulesInput) (*WAFRuleResponse, error) {
 
 // ListAllWAFRulesInput used as input for listing all WAF rules.
 type ListAllWAFRulesInput struct {
-	// Excludes individual rules by modsecurity rule IDs.
+	// ExcludeMocSecIDs excludes individual rules by modsecurity rule IDs.
 	ExcludeMocSecIDs []int
-	// Limit the returned rules to a set by modsecurity rule IDs.
+	// FilterModSecIDs limits the returned rules to a set by modsecurity rule IDs.
 	FilterModSecIDs []int
-	// Limit the returned rules to a set by publishers.
+	// FilterPublishers limits the returned rules to a set by publishers.
 	FilterPublishers []string
-	// Limit the returned rules to a set linked to a tag by name.
+	// FilterTagNames limits the returned rules to a set linked to a tag by name.
 	FilterTagNames []string
-	// Include relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
+	// Include captures relationships. Optional, comma-separated values. Permitted values: waf_tags and waf_rule_revisions.
 	Include string
 }
 
-// ListAllWAFRules returns the complete list of WAF rules for the given filters. It iterates through
-// all existing pages to ensure all WAF rules are returned at once.
+// ListAllWAFRules retrieves all resources.
 func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, error) {
 	currentPage := 1
 	result := &WAFRuleResponse{Items: []*WAFRule{}}

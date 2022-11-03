@@ -34,13 +34,13 @@ func TestClient_Pools(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "pools/cleanup", func(c *Client) {
-			c.DeletePool(&DeletePoolInput{
+			_ = c.DeletePool(&DeletePoolInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "test_pool",
 			})
 
-			c.DeletePool(&DeletePoolInput{
+			_ = c.DeletePool(&DeletePoolInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Name:           "new_test_pool",
@@ -56,7 +56,7 @@ func TestClient_Pools(t *testing.T) {
 		t.Errorf("bad quorum: %q", p.Quorum)
 	}
 
-	if p.UseTLS != true {
+	if !p.UseTLS {
 		t.Errorf("bad use_tls: %t", p.UseTLS)
 	}
 

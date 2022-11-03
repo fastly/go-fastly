@@ -7,37 +7,66 @@ import (
 	"time"
 )
 
+// S3Redundancy represents the redundancy variants for S3.
 type S3Redundancy string
 
-func S3RedundancyPtr(v S3Redundancy) *S3Redundancy { return &v }
+// S3RedundancyPtr returns a pointer to a S3Redundancy.
+func S3RedundancyPtr(v S3Redundancy) *S3Redundancy {
+	return &v
+}
 
+// S3ServerSideEncryption represents the encryption variants for S3.
 type S3ServerSideEncryption string
 
-func S3ServerSideEncryptionPtr(v S3ServerSideEncryption) *S3ServerSideEncryption { return &v }
+// S3ServerSideEncryptionPtr returns a pointer to a S3ServerSideEncryption.
+func S3ServerSideEncryptionPtr(v S3ServerSideEncryption) *S3ServerSideEncryption {
+	return &v
+}
 
+// S3AccessControlList represents the control list variants for S3.
 type S3AccessControlList string
 
-func S3AccessControlListPtr(v S3AccessControlList) *S3AccessControlList { return &v }
+// S3AccessControlListPtr returns a pointer to a S3AccessControlList.
+func S3AccessControlListPtr(v S3AccessControlList) *S3AccessControlList {
+	return &v
+}
 
 const (
-	S3RedundancyStandard                 S3Redundancy = "standard"
-	S3RedundancyIntelligentTiering       S3Redundancy = "intelligent_tiering"
-	S3RedundancyStandardIA               S3Redundancy = "standard_ia"
-	S3RedundancyOneZoneIA                S3Redundancy = "onezone_ia"
-	S3RedundancyGlacierInstantRetrieval  S3Redundancy = "glacier_ir"
+	// S3RedundancyStandard represents a redundancy variant.
+	S3RedundancyStandard S3Redundancy = "standard"
+	// S3RedundancyIntelligentTiering represents a redundancy variant.
+	S3RedundancyIntelligentTiering S3Redundancy = "intelligent_tiering"
+	// S3RedundancyStandardIA represents a redundancy variant.
+	S3RedundancyStandardIA S3Redundancy = "standard_ia"
+	// S3RedundancyOneZoneIA represents a redundancy variant.
+	S3RedundancyOneZoneIA S3Redundancy = "onezone_ia"
+	// S3RedundancyGlacierInstantRetrieval represents a redundancy variant.
+	S3RedundancyGlacierInstantRetrieval S3Redundancy = "glacier_ir"
+	// S3RedundancyGlacierFlexibleRetrieval represents a redundancy variant.
 	S3RedundancyGlacierFlexibleRetrieval S3Redundancy = "glacier"
-	S3RedundancyGlacierDeepArchive       S3Redundancy = "deep_archive"
-	S3RedundancyReduced                  S3Redundancy = "reduced_redundancy"
+	// S3RedundancyGlacierDeepArchive represents a redundancy variant.
+	S3RedundancyGlacierDeepArchive S3Redundancy = "deep_archive"
+	// S3RedundancyReduced represents a redundancy variant.
+	S3RedundancyReduced S3Redundancy = "reduced_redundancy"
 
+	// S3ServerSideEncryptionAES represents an encryption variant.
 	S3ServerSideEncryptionAES S3ServerSideEncryption = "AES256"
+	// S3ServerSideEncryptionKMS represents an encryption variant.
 	S3ServerSideEncryptionKMS S3ServerSideEncryption = "aws:kms"
 
-	S3AccessControlListPrivate                S3AccessControlList = "private"
-	S3AccessControlListPublicRead             S3AccessControlList = "public-read"
-	S3AccessControlListPublicReadWrite        S3AccessControlList = "public-read-write"
-	S3AccessControlListAWSExecRead            S3AccessControlList = "aws-exec-read"
-	S3AccessControlListAuthenticatedRead      S3AccessControlList = "authenticated-read"
-	S3AccessControlListBucketOwnerRead        S3AccessControlList = "bucket-owner-read"
+	// S3AccessControlListPrivate represents a control list variant.
+	S3AccessControlListPrivate S3AccessControlList = "private"
+	// S3AccessControlListPublicRead represents a control list variant.
+	S3AccessControlListPublicRead S3AccessControlList = "public-read"
+	// S3AccessControlListPublicReadWrite represents a control list variant.
+	S3AccessControlListPublicReadWrite S3AccessControlList = "public-read-write"
+	// S3AccessControlListAWSExecRead represents a control list variant.
+	S3AccessControlListAWSExecRead S3AccessControlList = "aws-exec-read"
+	// S3AccessControlListAuthenticatedRead represents a control list variant.
+	S3AccessControlListAuthenticatedRead S3AccessControlList = "authenticated-read"
+	// S3AccessControlListBucketOwnerRead represents a control list variant.
+	S3AccessControlListBucketOwnerRead S3AccessControlList = "bucket-owner-read"
+	// S3AccessControlListBucketOwnerFullControl represents a control list variant.
 	S3AccessControlListBucketOwnerFullControl S3AccessControlList = "bucket-owner-full-control"
 )
 
@@ -74,9 +103,17 @@ type S3 struct {
 // s3sByName is a sortable list of S3s.
 type s3sByName []*S3
 
-// Len, Swap, and Less implement the sortable interface.
-func (s s3sByName) Len() int      { return len(s) }
-func (s s3sByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
+// Len implement the sortable interface.
+func (s s3sByName) Len() int {
+	return len(s)
+}
+
+// Swap implement the sortable interface.
+func (s s3sByName) Swap(i, j int) {
+	s[i], s[j] = s[j], s[i]
+}
+
+// Less implement the sortable interface.
 func (s s3sByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
@@ -89,7 +126,7 @@ type ListS3sInput struct {
 	ServiceVersion int
 }
 
-// ListS3s returns the list of S3s for the configuration version.
+// ListS3s retrieves all resources.
 func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -116,34 +153,55 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 
 // CreateS3Input is used as input to the CreateS3 function.
 type CreateS3Input struct {
-	ACL                          S3AccessControlList    `url:"acl,omitempty"`
-	AccessKey                    string                 `url:"access_key,omitempty"`
-	BucketName                   string                 `url:"bucket_name,omitempty"`
-	CompressionCodec             string                 `url:"compression_codec,omitempty"`
-	Domain                       string                 `url:"domain,omitempty"`
-	Format                       string                 `url:"format,omitempty"`
-	FormatVersion                uint                   `url:"format_version,omitempty"`
-	GzipLevel                    uint8                  `url:"gzip_level,omitempty"`
-	IAMRole                      string                 `url:"iam_role,omitempty"`
-	MessageType                  string                 `url:"message_type,omitempty"`
-	Name                         string                 `url:"name,omitempty"`
-	Path                         string                 `url:"path,omitempty"`
-	Period                       uint                   `url:"period,omitempty"`
-	Placement                    string                 `url:"placement,omitempty"`
-	PublicKey                    string                 `url:"public_key,omitempty"`
-	Redundancy                   S3Redundancy           `url:"redundancy,omitempty"`
-	ResponseCondition            string                 `url:"response_condition,omitempty"`
-	SecretKey                    string                 `url:"secret_key,omitempty"`
-	ServerSideEncryption         S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
-	ServerSideEncryptionKMSKeyID string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	// ACL is the access control list (ACL) specific request header.
+	ACL S3AccessControlList `url:"acl,omitempty"`
+	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
+	AccessKey string `url:"access_key,omitempty"`
+	// BucketName is the bucket name for S3 account.
+	BucketName string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
+	CompressionCodec string `url:"compression_codec,omitempty"`
+	// Domain is the domain of the Amazon S3 endpoint.
+	Domain string `url:"domain,omitempty"`
+	// Format is a Fastly log format string.
+	Format string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	// IAMRole is the Amazon Resource Name (ARN) for the IAM role granting Fastly access to S3. Not required if access_key and secret_key are provided.
+	IAMRole string `url:"iam_role,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType string `url:"message_type,omitempty"`
+	// Name is the name of the SFTP to update (required).
+	Name string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey string `url:"public_key,omitempty"`
+	// Redundancy is the S3 redundancy level.
+	Redundancy S3Redundancy `url:"redundancy,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
+	ResponseCondition string `url:"response_condition,omitempty"`
+	// SecretKey is the secret key for your S3 account. Not required if iam_role is provided.
+	SecretKey string `url:"secret_key,omitempty"`
+	// ServerSideEncryption should be set to AES256 or aws:kms to enable S3 Server Side Encryption.
+	ServerSideEncryption S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	// ServerSideEncryptionKMSKeyID is an optional server-side KMS Key ID. Must be set if ServerSideEncryption is set to aws:kms or AES256.
+	ServerSideEncryptionKMSKeyID string `url:"server_side_encryption_kms_key_id,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat string `url:"timestamp_format,omitempty"`
 }
 
-// CreateS3 creates a new Fastly S3.
+// CreateS3 creates a new resource.
 func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -181,7 +239,7 @@ type GetS3Input struct {
 	ServiceVersion int
 }
 
-// GetS3 gets the S3 configuration with the given parameters.
+// GetS3 retrieves the specified resource.
 func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -211,36 +269,57 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 
 // UpdateS3Input is used as input to the UpdateS3 function.
 type UpdateS3Input struct {
-	ACL              *S3AccessControlList `url:"acl,omitempty"`
-	AccessKey        *string              `url:"access_key,omitempty"`
-	BucketName       *string              `url:"bucket_name,omitempty"`
-	CompressionCodec *string              `url:"compression_codec,omitempty"`
-	Domain           *string              `url:"domain,omitempty"`
-	Format           *string              `url:"format,omitempty"`
-	FormatVersion    *uint                `url:"format_version,omitempty"`
-	GzipLevel        *uint8               `url:"gzip_level,omitempty"`
-	IAMRole          *string              `url:"iam_role,omitempty"`
-	MessageType      *string              `url:"message_type,omitempty"`
+	// ACL is the access control list (ACL) specific request header.
+	ACL *S3AccessControlList `url:"acl,omitempty"`
+	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
+	AccessKey *string `url:"access_key,omitempty"`
+	// BucketName is the bucket name for S3 account.
+	BucketName *string `url:"bucket_name,omitempty"`
+	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
+	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Domain is the domain of the Amazon S3 endpoint.
+	Domain *string `url:"domain,omitempty"`
+	// Format is a Fastly log format string.
+	Format *string `url:"format,omitempty"`
+	// FormatVersion is the version of the custom logging format used for the configured endpoint.
+	FormatVersion *uint `url:"format_version,omitempty"`
+	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
+	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	// IAMRole is the Amazon Resource Name (ARN) for the IAM role granting Fastly access to S3. Not required if access_key and secret_key are provided.
+	IAMRole *string `url:"iam_role,omitempty"`
+	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the S3 to update.
-	Name                         string
-	NewName                      *string                 `url:"name,omitempty"`
-	Path                         *string                 `url:"path,omitempty"`
-	Period                       *uint                   `url:"period,omitempty"`
-	Placement                    *string                 `url:"placement,omitempty"`
-	PublicKey                    *string                 `url:"public_key,omitempty"`
-	Redundancy                   *S3Redundancy           `url:"redundancy,omitempty"`
-	ResponseCondition            *string                 `url:"response_condition,omitempty"`
-	SecretKey                    *string                 `url:"secret_key,omitempty"`
-	ServerSideEncryption         *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
-	ServerSideEncryptionKMSKeyID *string                 `url:"server_side_encryption_kms_key_id,omitempty"`
+	Name string
+	// NewName is the new name for the resource.
+	NewName *string `url:"name,omitempty"`
+	// Path is the path to upload logs to.
+	Path *string `url:"path,omitempty"`
+	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
+	Period *uint `url:"period,omitempty"`
+	// Placement is where in the generated VCL the logging call should be placed.
+	Placement *string `url:"placement,omitempty"`
+	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
+	PublicKey *string `url:"public_key,omitempty"`
+	// Redundancy is the S3 redundancy level.
+	Redundancy *S3Redundancy `url:"redundancy,omitempty"`
+	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
+	ResponseCondition *string `url:"response_condition,omitempty"`
+	// SecretKey is the secret key for your S3 account. Not required if iam_role is provided.
+	SecretKey *string `url:"secret_key,omitempty"`
+	// ServerSideEncryption should be set to AES256 or aws:kms to enable S3 Server Side Encryption.
+	ServerSideEncryption *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	// ServerSideEncryptionKMSKeyID is an optional server-side KMS Key ID. Must be set if ServerSideEncryption is set to aws:kms or AES256.
+	ServerSideEncryptionKMSKeyID *string `url:"server_side_encryption_kms_key_id,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion  int
+	ServiceVersion int
+	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
-// UpdateS3 updates a specific S3.
+// UpdateS3 updates the specified resource.
 func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -282,7 +361,7 @@ type DeleteS3Input struct {
 	ServiceVersion int
 }
 
-// DeleteS3 deletes the given S3 version.
+// DeleteS3 deletes the specified resource.
 func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
