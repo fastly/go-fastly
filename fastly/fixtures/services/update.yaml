@@ -2,21 +2,21 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=1JuSDr4OX1my1sYa6vxNXV&name=new-test-service
+    body: ServiceID=YVI5KaaM0YSe1CAmKAbic6&name=new-test-service
     form:
       ServiceID:
-      - 1JuSDr4OX1my1sYa6vxNXV
+      - YVI5KaaM0YSe1CAmKAbic6
       name:
       - new-test-service
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/1JuSDr4OX1my1sYa6vxNXV
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/YVI5KaaM0YSe1CAmKAbic6
     method: PUT
   response:
-    body: '{"created_at":"2021-11-03T17:15:05Z","name":"new-test-service","versions":[{"service_id":"1JuSDr4OX1my1sYa6vxNXV","comment":"","updated_at":"2021-11-03T17:15:05Z","deleted_at":null,"active":false,"testing":false,"number":1,"created_at":"2021-11-03T17:15:05Z","locked":false,"staging":false,"deployed":false}],"updated_at":"2021-11-03T17:15:05Z","paused":false,"id":"1JuSDr4OX1my1sYa6vxNXV","deleted_at":null,"publish_key":"","comment":"comment","customer_id":"51MumwLiSJyFTWhtbByYgR","type":"vcl"}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","paused":false,"comment":"comment","deleted_at":null,"name":"new-test-service","publish_key":"","created_at":"2022-11-03T14:07:52Z","updated_at":"2022-11-03T14:07:52Z","id":"YVI5KaaM0YSe1CAmKAbic6","versions":[{"service_id":"YVI5KaaM0YSe1CAmKAbic6","active":false,"locked":false,"testing":false,"created_at":"2022-11-03T14:07:52Z","updated_at":"2022-11-03T14:07:52Z","deployed":false,"number":1,"deleted_at":null,"staging":false,"comment":""}],"type":"vcl"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,11 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:15:07 GMT
+      - Thu, 03 Nov 2022 14:07:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "4893"
+      - "9988"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667487600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4149-MAN
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4151-MAN
       X-Timer:
-      - S1635959707.432708,VS0,VE199
+      - S1667484473.494594,VS0,VE345
     status: 200 OK
     code: 200
     duration: ""

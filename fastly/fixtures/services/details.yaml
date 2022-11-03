@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/1JuSDr4OX1my1sYa6vxNXV/details
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/YVI5KaaM0YSe1CAmKAbic6/details
     method: GET
   response:
-    body: '{"name":"test-service","type":"vcl","id":"1JuSDr4OX1my1sYa6vxNXV","comment":"comment","updated_at":"2021-11-03T17:15:05Z","versions":[{"service_id":"1JuSDr4OX1my1sYa6vxNXV","comment":"","updated_at":"2021-11-03T17:15:05Z","deleted_at":null,"active":false,"testing":false,"number":1,"created_at":"2021-11-03T17:15:05Z","locked":false,"staging":false,"deployed":false}],"created_at":"2021-11-03T17:15:05Z","deleted_at":null,"customer_id":"51MumwLiSJyFTWhtbByYgR","version":{"active":false,"created_at":"2021-11-03T17:15:05Z","number":1,"deleted_at":null,"deployed":false,"comment":"","staging":false,"service_id":"1JuSDr4OX1my1sYa6vxNXV","updated_at":"2021-11-03T17:15:05Z","locked":false,"testing":false,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.stale_if_error_ttl":43200,"general.default_pci":0,"general.default_ttl":3600,"general.default_host":"","general.stale_if_error":false}},"active_version":null}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","id":"YVI5KaaM0YSe1CAmKAbic6","created_at":"2022-11-03T14:07:52Z","updated_at":"2022-11-03T14:07:52Z","versions":[{"service_id":"YVI5KaaM0YSe1CAmKAbic6","active":false,"locked":false,"testing":false,"created_at":"2022-11-03T14:07:52Z","updated_at":"2022-11-03T14:07:52Z","deployed":false,"number":1,"deleted_at":null,"staging":false,"comment":""}],"deleted_at":null,"name":"test-service","comment":"comment","type":"vcl","version":{"staging":false,"updated_at":"2022-11-03T14:07:52Z","comment":"","locked":false,"service_id":"YVI5KaaM0YSe1CAmKAbic6","created_at":"2022-11-03T14:07:52Z","deployed":false,"deleted_at":null,"active":false,"testing":false,"number":1,"acls":[],"backends":[],"cache_settings":[],"conditions":[],"dictionaries":[],"directors":[],"domains":[],"gzips":[],"headers":[],"healthchecks":[],"request_settings":[],"response_objects":[],"snippets":[],"vcls":[],"wordpress":[],"settings":{"general.stale_if_error":false,"general.stale_if_error_ttl":43200,"general.default_ttl":3600,"general.default_host":"","general.default_pci":0}},"active_version":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:15:07 GMT
+      - Thu, 03 Nov 2022 14:07:53 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4149-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4151-MAN
       X-Timer:
-      - S1635959707.855862,VS0,VE219
+      - S1667484473.762032,VS0,VE364
     status: 200 OK
     code: 200
     duration: ""
