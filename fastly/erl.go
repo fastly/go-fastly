@@ -43,6 +43,11 @@ type ERLResponseType struct {
 // violation is detected.
 type ERLAction string
 
+// ERLActionPtr is a helper that returns a pointer to the type passed in.
+func ERLActionPtr(v ERLAction) *ERLAction {
+	return &v
+}
+
 const (
 	// ERLActionLogOnly represents an action variant.
 	ERLActionLogOnly ERLAction = "log_only"
@@ -120,6 +125,11 @@ const (
 // exceeded.
 type ERLWindowSize int
 
+// ERLWindowSizePtr is a helper that returns a pointer to the type passed in.
+func ERLWindowSizePtr(v ERLWindowSize) *ERLWindowSize {
+	return &v
+}
+
 const (
 	// ERLSize1 represents a duration variant.
 	ERLSize1 ERLWindowSize = 1
@@ -183,25 +193,25 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 // CreateERLInput is used as input to the CreateERL function.
 type CreateERLInput struct {
 	// Action is the action to take when a rate limiter violation is detected (response, response_object, log_only).
-	Action ERLAction `url:"action"`
+	Action *ERLAction `url:"action,omitempty"`
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
-	ClientKey []string `url:"client_key,brackets"`
+	ClientKey *[]string `url:"client_key,brackets,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
-	HTTPMethods []string `url:"http_methods,brackets"`
+	HTTPMethods *[]string `url:"http_methods,brackets,omitempty"`
 	// Name is a human readable name for the rate limiting rule.
-	Name string `url:"name"`
+	Name *string `url:"name,omitempty"`
 	// PenaltyBoxDuration is a length of time in minutes that the rate limiter is in effect after the initial violation is detected.
-	PenaltyBoxDuration int `url:"penalty_box_duration"`
+	PenaltyBoxDuration *int `url:"penalty_box_duration,omitempty"`
 	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
 	Response *ERLResponseType `url:"response,omitempty"`
 	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
-	RpsLimit int `url:"rps_limit"`
+	RpsLimit *int `url:"rps_limit,omitempty"`
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `url:"-"`
 	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
-	WindowSize ERLWindowSize `url:"window_size"`
+	WindowSize *ERLWindowSize `url:"window_size,omitempty"`
 }
 
 // CreateERL creates a new resource.
@@ -231,23 +241,13 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 // DeleteERLInput is used as input to the DeleteERL function.
 type DeleteERLInput struct {
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
-	ERLID string `form:"id"`
-	// ServiceID is an alphanumeric string identifying the service (required).
-	ServiceID string `form:"service_id"`
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `form:"version"`
+	ERLID string
 }
 
 // DeleteERL deletes the specified resource.
 func (c *Client) DeleteERL(i *DeleteERLInput) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
-	}
-	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
-	}
 	if i.ERLID == "" {
-		return ErrMissingID
+		return ErrMissingERLID
 	}
 
 	path := fmt.Sprintf("/rate-limiters/%s", i.ERLID)
@@ -271,23 +271,13 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 // GetERLInput is used as input to the GetERL function.
 type GetERLInput struct {
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
-	ERLID string `form:"id"`
-	// ServiceID is an alphanumeric string identifying the service (required).
-	ServiceID string `form:"service_id"`
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `form:"version"`
+	ERLID string
 }
 
 // GetERL retrieves the specified resource.
 func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
 	if i.ERLID == "" {
-		return nil, ErrMissingID
+		return nil, ErrMissingERLID
 	}
 
 	path := fmt.Sprintf("/rate-limiters/%s", i.ERLID)
@@ -308,42 +298,32 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 // UpdateERLInput is used as input to the UpdateERL function.
 type UpdateERLInput struct {
 	// Action is the action to take when a rate limiter violation is detected (response, response_object, log_only).
-	Action ERLAction `url:"action,omitempty"`
+	Action *ERLAction `url:"action,omitempty"`
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
-	ClientKey []string `url:"client_key,omitempty,brackets"`
+	ClientKey *[]string `url:"client_key,omitempty,brackets,omitempty"`
+	// ERLID is an alphanumeric string identifying the rate limiter (required).
+	ERLID string `url:"-"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
-	HTTPMethods []string `url:"http_methods,omitempty,brackets"`
-	// ID is an alphanumeric string identifying the rate limiter (required).
-	ID string `url:"id"`
+	HTTPMethods *[]string `url:"http_methods,omitempty,brackets,omitempty"`
 	// Name is a human readable name for the rate limiting rule.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// PenaltyBoxDuration is a length of time in minutes that the rate limiter is in effect after the initial violation is detected.
-	PenaltyBoxDuration int `url:"penalty_box_duration,omitempty"`
+	PenaltyBoxDuration *int `url:"penalty_box_duration,omitempty"`
 	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
 	Response *ERLResponseType `url:"response,omitempty"`
 	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
-	RpsLimit int `url:"rps_limit,omitempty"`
-	// ServiceID is an alphanumeric string identifying the service (required).
-	ServiceID string `url:"-"`
-	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int `url:"-"`
+	RpsLimit *int `url:"rps_limit,omitempty"`
 	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
-	WindowSize ERLWindowSize `url:"window_size,omitempty"`
+	WindowSize *ERLWindowSize `url:"window_size,omitempty"`
 }
 
 // UpdateERL updates the specified resource.
 func (c *Client) UpdateERL(i *UpdateERLInput) (*ERL, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ERLID == "" {
+		return nil, ErrMissingERLID
 	}
 
-	path := fmt.Sprintf("/rate-limiters/%s", i.ID)
+	path := fmt.Sprintf("/rate-limiters/%s", i.ERLID)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
