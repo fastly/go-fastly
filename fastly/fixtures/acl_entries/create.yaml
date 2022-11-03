@@ -2,12 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: ACLID=12pStJK7x7jIrG6SGYMaUb&ServiceID=7i6HN3TK9wS159v2gPAZ8A&comment=test+entry&ip=10.0.0.3&subnet=8
+    body: ACLID=muyEz1k1BzxjguC05Vwo15&ServiceID=2UjlhNAOAhRTbu1BO6ga21&comment=test+entry&ip=10.0.0.3&subnet=8
     form:
       ACLID:
-      - 12pStJK7x7jIrG6SGYMaUb
+      - muyEz1k1BzxjguC05Vwo15
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - 2UjlhNAOAhRTbu1BO6ga21
       comment:
       - test entry
       ip:
@@ -18,12 +18,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/acl/12pStJK7x7jIrG6SGYMaUb/entry
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/2UjlhNAOAhRTbu1BO6ga21/acl/muyEz1k1BzxjguC05Vwo15/entry
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","acl_id":"12pStJK7x7jIrG6SGYMaUb","ip":"10.0.0.3","subnet":8,"comment":"test
-      entry","updated_at":"2021-12-22T03:02:13Z","id":"1uf5l6laVrMWujt7AZAI6c","created_at":"2021-12-22T03:02:13Z","negated":0}'
+    body: '{"service_id":"2UjlhNAOAhRTbu1BO6ga21","acl_id":"muyEz1k1BzxjguC05Vwo15","ip":"10.0.0.3","subnet":8,"comment":"test
+      entry","negated":0,"updated_at":"2022-11-03T14:17:36Z","created_at":"2022-11-03T14:17:36Z","id":"NN4jSgaZyhUhudl45RJOY3"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +32,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Dec 2021 03:02:13 GMT
+      - Thu, 03 Nov 2022 14:17:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "4996"
+      - "9981"
       Fastly-Ratelimit-Reset:
-      - "1640145600"
+      - "1667487600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,9 +50,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11945-TYO
+      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4139-MAN
       X-Timer:
-      - S1640142133.430096,VS0,VE284
+      - S1667485056.481144,VS0,VE159
     status: 200 OK
     code: 200
     duration: ""

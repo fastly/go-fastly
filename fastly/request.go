@@ -19,7 +19,8 @@ type RequestOptions struct {
 	// HealthCheckHeaders indicates if there is any special parsing required to
 	// support the health check API endpoint (refer to client.RequestForm).
 	//
-	// FIXME: For the future code-generated API client world.
+	// TODO: Lookout for this when it comes to the future code-generated API
+	// client world, as this special case might get omitted accidentally.
 	HealthCheckHeaders bool
 	// Can this request run in parallel
 	Parallel bool
