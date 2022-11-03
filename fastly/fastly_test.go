@@ -228,7 +228,7 @@ func createTestACL(t *testing.T, createFixture string, serviceID string, version
 		acl, err = client.CreateACL(&CreateACLInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           fmt.Sprintf("test_acl_%s", aclNameSuffix),
+			Name:           String(fmt.Sprintf("test_acl_%s", aclNameSuffix)),
 		})
 	})
 	if err != nil {
