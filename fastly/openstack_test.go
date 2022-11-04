@@ -19,20 +19,20 @@ func TestClient_Openstack(t *testing.T) {
 		osCreateResp1, err = c.CreateOpenstack(&CreateOpenstackInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-openstack",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			URL:              "https://logs.example.com/v1.0",
-			Path:             "/path",
-			Period:           12,
-			CompressionCodec: "snappy",
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
+			Name:             String("test-openstack"),
+			User:             String("user"),
+			AccessKey:        String("secret-key"),
+			BucketName:       String("bucket-name"),
+			URL:              String("https://logs.example.com/v1.0"),
+			Path:             String("/path"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			Format:           String("format"),
+			FormatVersion:    Int(2),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -43,20 +43,20 @@ func TestClient_Openstack(t *testing.T) {
 		osCreateResp2, err = c.CreateOpenstack(&CreateOpenstackInput{
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
-			Name:            "test-openstack-2",
-			User:            "user",
-			AccessKey:       "secret-key",
-			BucketName:      "bucket-name",
-			URL:             "https://logs.example.com/v1.0",
-			Path:            "/path",
-			Period:          12,
-			GzipLevel:       8,
-			Format:          "format",
-			FormatVersion:   2,
-			TimestampFormat: "%Y",
-			MessageType:     "classic",
-			Placement:       "waf_debug",
-			PublicKey:       pgpPublicKey(),
+			Name:            String("test-openstack-2"),
+			User:            String("user"),
+			AccessKey:       String("secret-key"),
+			BucketName:      String("bucket-name"),
+			URL:             String("https://logs.example.com/v1.0"),
+			Path:            String("/path"),
+			Period:          Int(12),
+			GzipLevel:       Int(8),
+			Format:          String("format"),
+			FormatVersion:   Int(2),
+			TimestampFormat: String("%Y"),
+			MessageType:     String("classic"),
+			Placement:       String("waf_debug"),
+			PublicKey:       String(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -67,20 +67,20 @@ func TestClient_Openstack(t *testing.T) {
 		osCreateResp3, err = c.CreateOpenstack(&CreateOpenstackInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-openstack-3",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			URL:              "https://logs.example.com/v1.0",
-			Path:             "/path",
-			Period:           12,
-			CompressionCodec: "snappy",
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
+			Name:             String("test-openstack-3"),
+			User:             String("user"),
+			AccessKey:        String("secret-key"),
+			BucketName:       String("bucket-name"),
+			URL:              String("https://logs.example.com/v1.0"),
+			Path:             String("/path"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			Format:           String("format"),
+			FormatVersion:    Int(2),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -93,21 +93,21 @@ func TestClient_Openstack(t *testing.T) {
 		_, err = c.CreateOpenstack(&CreateOpenstackInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-openstack-4",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			URL:              "https://logs.example.com/v1.0",
-			Path:             "/path",
-			Period:           12,
-			CompressionCodec: "snappy",
-			GzipLevel:        8,
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
+			Name:             String("test-openstack-4"),
+			User:             String("user"),
+			AccessKey:        String("secret-key"),
+			BucketName:       String("bucket-name"),
+			URL:              String("https://logs.example.com/v1.0"),
+			Path:             String("/path"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			GzipLevel:        Int(8),
+			Format:           String("format"),
+			FormatVersion:    Int(2),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
 		})
 	})
 	if err == nil {
@@ -309,7 +309,7 @@ func TestClient_Openstack(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-openstack-3",
-			GzipLevel:      Uint8(9),
+			GzipLevel:      Int(9),
 		})
 	})
 	if err != nil {
@@ -394,81 +394,84 @@ func TestClient_CreateOpenstack_validation(t *testing.T) {
 
 func TestClient_GetOpenstack_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetOpenstack(&GetOpenstackInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetOpenstack(&GetOpenstackInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetOpenstack(&GetOpenstackInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetOpenstack(&GetOpenstackInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateOpenstack_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateOpenstack(&UpdateOpenstackInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateOpenstack(&UpdateOpenstackInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateOpenstack(&UpdateOpenstackInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateOpenstack(&UpdateOpenstackInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteOpenstack_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteOpenstack(&DeleteOpenstackInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteOpenstack(&DeleteOpenstackInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteOpenstack(&DeleteOpenstackInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteOpenstack(&DeleteOpenstackInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
