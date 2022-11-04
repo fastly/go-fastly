@@ -40,19 +40,19 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		s, err = c.CreateSplunk(&CreateSplunkInput{
 			ServiceID:         testServiceID,
 			ServiceVersion:    tv.Number,
-			Name:              "test-splunk",
-			URL:               "https://mysplunkendpoint.example.com/services/collector/event",
-			RequestMaxEntries: 1,
-			RequestMaxBytes:   1000,
-			Format:            "%h %l %u %t \"%r\" %>s %b",
-			FormatVersion:     2,
-			Placement:         "waf_debug",
-			Token:             "super-secure-token",
-			UseTLS:            true,
-			TLSCACert:         caCert,
-			TLSHostname:       "example.com",
-			TLSClientCert:     clientCert,
-			TLSClientKey:      clientKey,
+			Name:              String("test-splunk"),
+			URL:               String("https://mysplunkendpoint.example.com/services/collector/event"),
+			RequestMaxEntries: Int(1),
+			RequestMaxBytes:   Int(1000),
+			Format:            String("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:     Int(2),
+			Placement:         String("waf_debug"),
+			Token:             String("super-secure-token"),
+			UseTLS:            CBool(true),
+			TLSCACert:         String(caCert),
+			TLSHostname:       String("example.com"),
+			TLSClientCert:     String(clientCert),
+			TLSClientKey:      String(clientKey),
 		})
 	})
 	if err != nil {
@@ -251,81 +251,84 @@ func TestClient_CreateSplunk_validation(t *testing.T) {
 
 func TestClient_GetSplunk_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetSplunk(&GetSplunkInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetSplunk(&GetSplunkInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSplunk(&GetSplunkInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetSplunk(&GetSplunkInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateSplunk_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteSplunk_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteSplunk(&DeleteSplunkInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteSplunk(&DeleteSplunkInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteSplunk(&DeleteSplunkInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteSplunk(&DeleteSplunkInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
