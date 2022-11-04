@@ -40,20 +40,20 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		s, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-syslog",
-			Address:        "example.com",
-			Hostname:       "example.com",
-			Port:           1234,
-			UseTLS:         true,
-			TLSCACert:      caCert,
-			TLSHostname:    "example.com",
-			TLSClientCert:  clientCert,
-			TLSClientKey:   clientKey,
-			Token:          "abcd1234",
-			Format:         "format",
-			FormatVersion:  2,
-			MessageType:    "classic",
-			Placement:      "waf_debug",
+			Name:           String("test-syslog"),
+			Address:        String("example.com"),
+			Hostname:       String("example.com"),
+			Port:           Int(1234),
+			UseTLS:         CBool(true),
+			TLSCACert:      String(caCert),
+			TLSHostname:    String("example.com"),
+			TLSClientCert:  String(clientCert),
+			TLSClientKey:   String(clientKey),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			FormatVersion:  Int(2),
+			MessageType:    String("classic"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -198,7 +198,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceVersion: tv.Number,
 			Name:           "test-syslog",
 			NewName:        String("new-test-syslog"),
-			FormatVersion:  Uint(2),
+			FormatVersion:  Int(2),
 		})
 	})
 	if err != nil {
@@ -263,81 +263,84 @@ func TestClient_CreateSyslog_validation(t *testing.T) {
 
 func TestClient_GetSyslog_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetSyslog(&GetSyslogInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetSyslog(&GetSyslogInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSyslog(&GetSyslogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetSyslog(&GetSyslogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateSyslog_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateSyslog(&UpdateSyslogInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateSyslog(&UpdateSyslogInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSyslog(&UpdateSyslogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateSyslog(&UpdateSyslogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteSyslog_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteSyslog(&DeleteSyslogInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteSyslog(&DeleteSyslogInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteSyslog(&DeleteSyslogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteSyslog(&DeleteSyslogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

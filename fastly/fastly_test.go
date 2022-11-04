@@ -277,14 +277,14 @@ func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber in
 		log, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
-			Name:           "test-syslog",
-			Address:        "example.com",
-			Hostname:       "example.com",
-			Port:           1234,
-			Token:          "abcd1234",
-			Format:         "format",
-			FormatVersion:  2,
-			MessageType:    "classic",
+			Name:           String("test-syslog"),
+			Address:        String("example.com"),
+			Hostname:       String("example.com"),
+			Port:           Int(1234),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			FormatVersion:  Int(2),
+			MessageType:    String("classic"),
 		})
 	})
 	if err != nil {
