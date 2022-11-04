@@ -20,7 +20,7 @@ func TestClient_Servers(t *testing.T) {
 		server, err = c.CreateServer(&CreateServerInput{
 			ServiceID: testServiceID,
 			PoolID:    testPool.ID,
-			Address:   "127.0.0.1",
+			Address:   String("127.0.0.1"),
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -30,7 +30,7 @@ func TestClient_Servers(t *testing.T) {
 		altServer, err = c.CreateServer(&CreateServerInput{
 			ServiceID: testServiceID,
 			PoolID:    testPool.ID,
-			Address:   "altserver.example.com",
+			Address:   String("altserver.example.com"),
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -110,7 +110,7 @@ func TestClient_Servers(t *testing.T) {
 			PoolID:    testPool.ID,
 			Server:    server.ID,
 			Address:   String("0.0.0.0"),
-			Weight:    Uint(50),
+			Weight:    Int(50),
 		})
 	})
 	if err != nil {
@@ -138,117 +138,120 @@ func TestClient_Servers(t *testing.T) {
 
 func TestClient_ListServers_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListServers(&ListServersInput{
-		ServiceID: "",
-	})
-	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
 
 	_, err = testClient.ListServers(&ListServersInput{
 		ServiceID: "foo",
-		PoolID:    "",
 	})
 	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
+	}
+
+	_, err = testClient.ListServers(&ListServersInput{
+		PoolID: "123",
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_CreateServer_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateServer(&CreateServerInput{
-		ServiceID: "",
-	})
-	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
 
 	_, err = testClient.CreateServer(&CreateServerInput{
 		ServiceID: "foo",
-		PoolID:    "",
 	})
 	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
+	}
+
+	_, err = testClient.CreateServer(&CreateServerInput{
+		PoolID: "123",
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_GetServer_validation(t *testing.T) {
 	var err error
-	_, err = testClient.GetServer(&GetServerInput{
-		ServiceID: "",
-	})
-	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
 
 	_, err = testClient.GetServer(&GetServerInput{
+		Server:    "test",
 		ServiceID: "foo",
-		PoolID:    "",
 	})
 	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 
 	_, err = testClient.GetServer(&GetServerInput{
-		ServiceID: "foo",
 		PoolID:    "bar",
-		Server:    "",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServer {
 		t.Errorf("bad error: %q", err)
+	}
+
+	_, err = testClient.GetServer(&GetServerInput{
+		PoolID: "bar",
+		Server: "test",
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateServer_validation(t *testing.T) {
 	var err error
-	_, err = testClient.UpdateServer(&UpdateServerInput{
-		ServiceID: "",
-	})
-	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
 
 	_, err = testClient.UpdateServer(&UpdateServerInput{
+		Server:    "test",
 		ServiceID: "foo",
-		PoolID:    "",
 	})
 	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 
 	_, err = testClient.UpdateServer(&UpdateServerInput{
-		ServiceID: "foo",
 		PoolID:    "bar",
-		Server:    "",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServer {
 		t.Errorf("bad error: %q", err)
+	}
+
+	_, err = testClient.UpdateServer(&UpdateServerInput{
+		PoolID: "bar",
+		Server: "test",
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteServer_validation(t *testing.T) {
 	var err error
-	err = testClient.DeleteServer(&DeleteServerInput{
-		ServiceID: "",
-	})
-	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
 
 	err = testClient.DeleteServer(&DeleteServerInput{
+		Server:    "test",
 		ServiceID: "foo",
-		PoolID:    "",
 	})
 	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 
 	err = testClient.DeleteServer(&DeleteServerInput{
-		ServiceID: "foo",
 		PoolID:    "bar",
-		Server:    "",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServer {
 		t.Errorf("bad error: %q", err)
+	}
+
+	err = testClient.DeleteServer(&DeleteServerInput{
+		PoolID: "bar",
+		Server: "test",
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
 	}
 }

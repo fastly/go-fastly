@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/server/5kmav70NchjgR8M9tjxtOz
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server/AKS7g8tMd4ADhulOLnFhf3
     method: GET
   response:
-    body: '{"deleted_at":null,"comment":"","max_conn":"0","override_host":null,"pool_id":"4I1u39xj1EztfJHVzPo6BY","created_at":"2021-11-03T17:14:36Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","disabled":false,"weight":"100","address":"127.0.0.1","id":"5kmav70NchjgR8M9tjxtOz","port":"80","updated_at":"2021-11-03T17:14:36Z"}'
+    body: '{"weight":"100","id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","created_at":"2022-11-04T17:20:29Z","port":"80","comment":"","pool_id":"QjPTIOyTtgCuj99szEHJE6","deleted_at":null,"disabled":false,"updated_at":"2022-11-04T17:20:29Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","override_host":null,"address":"127.0.0.1"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:37 GMT
+      - Fri, 04 Nov 2022 17:20:31 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959677.184082,VS0,VE144
+      - S1667582431.820210,VS0,VE303
     status: 200 OK
     code: 200
     duration: ""

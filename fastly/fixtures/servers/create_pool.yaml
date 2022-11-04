@@ -2,23 +2,23 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=89&name=test_pool_servers22
+    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=71&name=test_pool_servers22
     form:
       ServiceID:
       - 7i6HN3TK9wS159v2gPAZ8A
       ServiceVersion:
-      - "89"
+      - "71"
       name:
       - test_pool_servers22
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/89/pool
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/71/pool
     method: POST
   response:
-    body: '{"name":"test_pool_servers22","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"89","quorum":75,"use_tls":"0","comment":"","first_byte_timeout":"15000","tls_client_cert":null,"tls_sni_hostname":null,"connect_timeout":"1000","deleted_at":null,"shield":null,"max_tls_version":null,"min_tls_version":null,"tls_ca_cert":null,"id":"4I1u39xj1EztfJHVzPo6BY","between_bytes_timeout":"10000","max_conn_default":"200","tls_ciphers":null,"tls_client_key":null,"override_host":null,"tls_check_cert":"1","tls_cert_hostname":null,"created_at":"2021-11-03T17:14:36Z","healthcheck":null,"request_condition":null,"type":"random","updated_at":"2021-11-03T17:14:36Z"}'
+    body: '{"name":"test_pool_servers22","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"71","max_tls_version":null,"type":"random","tls_client_key":null,"created_at":"2022-11-04T17:20:29Z","healthcheck":null,"tls_cert_hostname":null,"first_byte_timeout":"15000","connect_timeout":"1000","id":"QjPTIOyTtgCuj99szEHJE6","max_conn_default":"200","quorum":75,"tls_client_cert":null,"comment":"","shield":null,"between_bytes_timeout":"10000","tls_ciphers":null,"tls_check_cert":"1","deleted_at":null,"tls_sni_hostname":null,"tls_ca_cert":null,"min_tls_version":null,"request_condition":null,"override_host":null,"use_tls":"0","updated_at":"2022-11-04T17:20:29Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:36 GMT
+      - Fri, 04 Nov 2022 17:20:29 GMT
       Fastly-Ratelimit-Remaining:
-      - "4902"
+      - "9979"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959676.065289,VS0,VE345
+      - S1667582430.516082,VS0,VE187
     status: 200 OK
     code: 200
     duration: ""

@@ -14,13 +14,13 @@ type Server struct {
 	DeletedAt    *time.Time `mapstructure:"deleted_at"`
 	Disabled     bool       `mapstructure:"disabled"`
 	ID           string     `mapstructure:"id"`
-	MaxConn      uint       `mapstructure:"max_conn"`
+	MaxConn      int        `mapstructure:"max_conn"`
 	OverrideHost string     `mapstructure:"override_host"`
 	PoolID       string     `mapstructure:"pool_id"`
-	Port         uint       `mapstructure:"port"`
+	Port         int        `mapstructure:"port"`
 	ServiceID    string     `mapstructure:"service_id"`
 	UpdatedAt    *time.Time `mapstructure:"updated_at"`
-	Weight       uint       `mapstructure:"weight"`
+	Weight       int        `mapstructure:"weight"`
 }
 
 // serversByAddress is a sortable list of servers.
@@ -51,12 +51,11 @@ type ListServersInput struct {
 
 // ListServers retrieves all resources.
 func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/servers", i.ServiceID, i.PoolID)
@@ -77,38 +76,33 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 // CreateServerInput is used as input to the CreateServer function.
 type CreateServerInput struct {
 	// Address is the hostname or IP of the origin server (required).
-	Address string `url:"address"`
+	Address *string `url:"address,omitempty"`
 	// Comment is a freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// Disabled allows servers to be enabled and disabled in a pool.
-	Disabled bool `url:"disabled,omitempty"`
+	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.
-	MaxConn uint `url:"max_conn,omitempty"`
+	MaxConn *int `url:"max_conn,omitempty"`
 	// OverrideHost is the hostname to override the Host header.
-	OverrideHost string `url:"override_host,omitempty"`
+	OverrideHost *string `url:"override_host,omitempty"`
 	// PoolID is the ID of the pool (required).
-	PoolID string
+	PoolID string `url:"-"`
 	// Port is the port number.
-	Port uint `url:"port,omitempty"`
+	Port *int `url:"port,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// Weight is the weight (1-100) used to load balance this server against others.
-	Weight uint `url:"weight,omitempty"`
+	Weight *int `url:"weight,omitempty"`
 }
 
 // CreateServer creates a new resource.
 // Servers are versionless resources that are associated with a Pool.
 func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
-
-	if i.Address == "" {
-		return nil, ErrMissingAddress
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server", i.ServiceID, i.PoolID)
@@ -137,16 +131,14 @@ type GetServerInput struct {
 
 // GetServer retrieves the specified resource.
 func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
-
 	if i.Server == "" {
 		return nil, ErrMissingServer
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
@@ -172,33 +164,31 @@ type UpdateServerInput struct {
 	// Disabled allows servers to be enabled and disabled in a pool.
 	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.
-	MaxConn *uint `url:"max_conn,omitempty"`
+	MaxConn *int `url:"max_conn,omitempty"`
 	// OverrideHost is the hostname to override the Host header.
 	OverrideHost *string `url:"override_host,omitempty"`
 	// PoolID is the ID of the pool (required).
-	PoolID string
+	PoolID string `url:"-"`
 	// Port is the port number.
-	Port *uint `url:"port,omitempty"`
-	// Server is an alphanumeric string identifying a Server.
-	Server string
+	Port *int `url:"port,omitempty"`
+	// Server is an alphanumeric string identifying a Server (required).
+	Server string `url:"-"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// Weight is the weight (1-100) used to load balance this server against others.
-	Weight *uint `url:"weight,omitempty"`
+	Weight *int `url:"weight,omitempty"`
 }
 
 // UpdateServer updates the specified resource.
 func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
-
 	if i.Server == "" {
 		return nil, ErrMissingServer
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
@@ -219,7 +209,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 type DeleteServerInput struct {
 	// PoolID is the ID of the pool (required).
 	PoolID string
-	// Server is an alphanumeric string identifying a Server.
+	// Server is an alphanumeric string identifying a Server (required).
 	Server string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -227,16 +217,14 @@ type DeleteServerInput struct {
 
 // DeleteServer deletes the specified resource.
 func (c *Client) DeleteServer(i *DeleteServerInput) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
-	}
-
 	if i.PoolID == "" {
 		return ErrMissingPoolID
 	}
-
 	if i.Server == "" {
 		return ErrMissingServer
+	}
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
