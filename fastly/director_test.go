@@ -24,12 +24,12 @@ func TestClient_Directors(t *testing.T) {
 		b, errBackend = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-backend",
-			Address:        "integ-test.go-fastly.com",
-			Port:           1234,
-			ConnectTimeout: Uint(1500),
-			OverrideHost:   "origin.example.com",
-			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
+			Name:           String("test-backend"),
+			Address:        String("integ-test.go-fastly.com"),
+			Port:           Int(1234),
+			ConnectTimeout: Int(1500),
+			OverrideHost:   String("origin.example.com"),
+			SSLCiphers:     String("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
 		})
 		d, errDirector = c.CreateDirector(&CreateDirectorInput{
 			ServiceID:      testServiceID,

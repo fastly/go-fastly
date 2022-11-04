@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/14/backend/new-test-backend
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/68/backend/new-test-backend
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 27 Oct 2022 16:42:31 GMT
+      - Fri, 04 Nov 2022 16:54:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "9994"
+      - "9929"
       Fastly-Ratelimit-Reset:
-      - "1666890000"
+      - "1667581200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4132-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4143-MAN
       X-Timer:
-      - S1666888952.519562,VS0,VE187
+      - S1667580889.741891,VS0,VE212
     status: 200 OK
     code: 200
     duration: ""
