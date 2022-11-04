@@ -29,8 +29,8 @@ const (
 // HeaderAction is a type of header action.
 type HeaderAction string
 
-// PHeaderAction returns pointer to HeaderAction.
-func PHeaderAction(t HeaderAction) *HeaderAction {
+// HeaderActionPtr returns pointer to HeaderAction.
+func HeaderActionPtr(t HeaderAction) *HeaderAction {
 	ha := HeaderAction(t)
 	return &ha
 }
@@ -56,8 +56,8 @@ const (
 // HeaderType is a type of header.
 type HeaderType string
 
-// PHeaderType returns pointer to HeaderType.
-func PHeaderType(t HeaderType) *HeaderType {
+// HeaderTypePtr returns pointer to HeaderType.
+func HeaderTypePtr(t HeaderType) *HeaderType {
 	ht := HeaderType(t)
 	return &ht
 }
@@ -71,7 +71,7 @@ type Header struct {
 	Destination       string       `mapstructure:"dst"`
 	IgnoreIfSet       bool         `mapstructure:"ignore_if_set"`
 	Name              string       `mapstructure:"name"`
-	Priority          uint         `mapstructure:"priority"`
+	Priority          int          `mapstructure:"priority"`
 	Regex             string       `mapstructure:"regex"`
 	RequestCondition  string       `mapstructure:"request_condition"`
 	ResponseCondition string       `mapstructure:"response_condition"`
@@ -114,7 +114,6 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -136,33 +135,33 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 // CreateHeaderInput is used as input to the CreateHeader function.
 type CreateHeaderInput struct {
 	// Action accepts a string value (set, append, delete, regex, regex_repeat).
-	Action HeaderAction `url:"action,omitempty"`
+	Action *HeaderAction `url:"action,omitempty"`
 	// CacheCondition is the name of the cache condition controlling when this configuration applies.
-	CacheCondition string `url:"cache_condition,omitempty"`
+	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Destination is the header to set.
-	Destination string `url:"dst,omitempty"`
+	Destination *string `url:"dst,omitempty"`
 	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.
-	IgnoreIfSet Compatibool `url:"ignore_if_set,omitempty"`
+	IgnoreIfSet *Compatibool `url:"ignore_if_set,omitempty"`
 	// Name is a handle to refer to this Header object.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Priority determines execution order. Lower numbers execute first.
-	Priority *uint `url:"priority,omitempty"`
+	Priority *int `url:"priority,omitempty"`
 	// Regex is the regular expression to use. Only applies to regex and regex_repeat actions.
-	Regex string `url:"regex,omitempty"`
+	Regex *string `url:"regex,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
-	RequestCondition string `url:"request_condition,omitempty"`
+	RequestCondition *string `url:"request_condition,omitempty"`
 	// ResponseCondition is an optional name of a response condition to apply.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Source is a variable to be used as a source for the header content. Does not apply to delete action.
-	Source string `url:"src,omitempty"`
+	Source *string `url:"src,omitempty"`
 	// Substitution is a value to substitute in place of regular expression. Only applies to regex and regex_repeat actions.
-	Substitution string `url:"substitution,omitempty"`
+	Substitution *string `url:"substitution,omitempty"`
 	// Type is a type of header (request, cache, response).
-	Type HeaderType `url:"type,omitempty"`
+	Type *HeaderType `url:"type,omitempty"`
 }
 
 // CreateHeader creates a new resource.
@@ -190,7 +189,7 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 
 // GetHeaderInput is used as input to the GetHeader function.
 type GetHeaderInput struct {
-	// Name is the name of the header to fetch.
+	// Name is the name of the header to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -200,14 +199,14 @@ type GetHeaderInput struct {
 
 // GetHeader retrieves the specified resource.
 func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -234,12 +233,12 @@ type UpdateHeaderInput struct {
 	Destination *string `url:"dst,omitempty"`
 	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.
 	IgnoreIfSet *Compatibool `url:"ignore_if_set,omitempty"`
-	// Name is the name of the header to update.
-	Name string
+	// Name is the name of the header to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Priority determines execution order. Lower numbers execute first.
-	Priority *uint `url:"priority,omitempty"`
+	Priority *int `url:"priority,omitempty"`
 	// Regex is the regular expression to use. Only applies to regex and regex_repeat actions.
 	Regex *string `url:"regex,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
@@ -247,9 +246,9 @@ type UpdateHeaderInput struct {
 	// ResponseCondition is an optional name of a response condition to apply.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Source is a variable to be used as a source for the header content. Does not apply to delete action.
 	Source *string `url:"src,omitempty"`
 	// Substitution is a value to substitute in place of regular expression. Only applies to regex and regex_repeat actions.
@@ -260,14 +259,14 @@ type UpdateHeaderInput struct {
 
 // UpdateHeader updates the specified resource.
 func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -296,14 +295,14 @@ type DeleteHeaderInput struct {
 
 // DeleteHeader deletes the specified resource.
 func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/header/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

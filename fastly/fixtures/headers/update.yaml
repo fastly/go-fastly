@@ -2,14 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-header&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=76&action=append&name=new-test-header&type=fetch
+    body: action=append&name=new-test-header&type=fetch
     form:
-      Name:
-      - test-header
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "76"
       action:
       - append
       name:
@@ -20,11 +14,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/76/header/test-header
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/header/test-header
     method: PUT
   response:
-    body: '{"version":"76","name":"new-test-header","deleted_at":null,"regex":"foobar","substitution":"123","type":"fetch","created_at":"2021-11-26T07:16:34Z","cache_condition":null,"ignore_if_set":"0","request_condition":null,"action":"append","updated_at":"2021-11-26T07:16:34Z","dst":"http.foo","src":"client.ip","service_id":"7i6HN3TK9wS159v2gPAZ8A","response_condition":null,"priority":"50"}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","substitution":"123","ignore_if_set":"0","cache_condition":null,"src":"client.ip","updated_at":"2022-11-04T16:38:21Z","response_condition":null,"action":"append","name":"new-test-header","dst":"http.foo","priority":"50","version":"67","type":"fetch","request_condition":null,"deleted_at":null,"regex":"foobar","created_at":"2022-11-04T16:38:21Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 26 Nov 2021 07:16:35 GMT
+      - Fri, 04 Nov 2022 16:38:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "4980"
+      - "9938"
       Fastly-Ratelimit-Reset:
-      - "1637913600"
+      - "1667581200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11972-TYO
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4139-MAN
       X-Timer:
-      - S1637910996.513798,VS0,VE332
+      - S1667579902.784931,VS0,VE380
     status: 200 OK
     code: 200
     duration: ""
