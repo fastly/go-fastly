@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=71&dataset=testDataset&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-honeycomb&placement=waf_debug&token=super-secure-token
+    body: dataset=testDataset&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-honeycomb&placement=waf_debug&token=super-secure-token
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "71"
       dataset:
       - testDataset
       format:
@@ -24,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/71/logging/honeycomb
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49/logging/honeycomb
     method: POST
   response:
-    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"71","created_at":"2021-11-03T16:53:42Z","response_condition":"","updated_at":"2021-11-03T16:53:42Z","deleted_at":null}'
+    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"49","response_condition":"","created_at":"2022-11-04T14:43:37Z","updated_at":"2022-11-04T14:43:37Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -37,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:53:42 GMT
+      - Fri, 04 Nov 2022 14:43:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "4844"
+      - "9973"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667574000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4147-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4148-MAN
       X-Timer:
-      - S1635958422.202330,VS0,VE437
+      - S1667573017.995185,VS0,VE529
     status: 200 OK
     code: 200
     duration: ""
