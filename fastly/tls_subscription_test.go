@@ -38,8 +38,8 @@ func TestClient_TLSSubscription(t *testing.T) {
 		_, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           domain1,
-			Comment:        "comment",
+			Name:           String(domain1),
+			Comment:        String("comment"),
 		})
 	})
 	if err != nil {
@@ -50,8 +50,8 @@ func TestClient_TLSSubscription(t *testing.T) {
 		_, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           domain2,
-			Comment:        "comment",
+			Name:           String(domain2),
+			Comment:        String("comment"),
 		})
 	})
 	if err != nil {

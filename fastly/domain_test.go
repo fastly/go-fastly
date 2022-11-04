@@ -16,9 +16,9 @@ func TestClient_Domains(t *testing.T) {
 	// NOTE: Everytime you regenerate the fixtures you'll need to update the
 	// domains as they'll potentially be reported as used depending on the
 	// service pre-existing.
-	domain1 := "integ-test1.go-fastly-1.com"
-	domain2 := "integ-test2.go-fastly-2.com"
-	domain3 := "integ-test3.go-fastly-3.com"
+	domain1 := "integ-test-20221104.go-fastly-1.com"
+	domain2 := "integ-test-20221104.go-fastly-2.com"
+	domain3 := "integ-test-20221104.go-fastly-3.com"
 
 	// Create
 	var d *Domain
@@ -26,8 +26,8 @@ func TestClient_Domains(t *testing.T) {
 		d, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           domain1,
-			Comment:        "comment",
+			Name:           String(domain1),
+			Comment:        String("comment"),
 		})
 	})
 	if err != nil {
@@ -39,8 +39,8 @@ func TestClient_Domains(t *testing.T) {
 		d2, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           domain2,
-			Comment:        "comment",
+			Name:           String(domain2),
+			Comment:        String("comment"),
 		})
 	})
 	if err != nil {
@@ -211,117 +211,112 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 
 func TestClient_GetDomain_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetDomain(&GetDomainInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetDomain(&GetDomainInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDomain(&GetDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDomain(&GetDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateDomain_validation(t *testing.T) {
 	var err error
-	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		ServiceID: "",
-	})
-	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
-	})
-	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
 
 	_, err = testClient.UpdateDomain(&UpdateDomainInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
-		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		ServiceID:      "foo",
+		Name:           "test",
 		ServiceVersion: 1,
-		Name:           "bar",
 	})
-	if err != ErrMissingOptionalNameComment {
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateDomain(&UpdateDomainInput{
+		Name:      "test",
+		ServiceID: "foo",
+	})
+	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteDomain_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteDomain(&DeleteDomainInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteDomain(&DeleteDomainInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteDomain(&DeleteDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteDomain(&DeleteDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_ValidateDomain_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.ValidateDomain(&ValidateDomainInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 0,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ValidateDomain(&ValidateDomainInput{
+		Name:           "test",
+		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.ValidateDomain(&ValidateDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ValidateDomain(&ValidateDomainInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
