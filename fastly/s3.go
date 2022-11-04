@@ -80,13 +80,13 @@ type S3 struct {
 	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
 	Domain                       string                 `mapstructure:"domain"`
 	Format                       string                 `mapstructure:"format"`
-	FormatVersion                uint                   `mapstructure:"format_version"`
-	GzipLevel                    uint8                  `mapstructure:"gzip_level"`
+	FormatVersion                int                    `mapstructure:"format_version"`
+	GzipLevel                    int                    `mapstructure:"gzip_level"`
 	IAMRole                      string                 `mapstructure:"iam_role"`
 	MessageType                  string                 `mapstructure:"message_type"`
 	Name                         string                 `mapstructure:"name"`
 	Path                         string                 `mapstructure:"path"`
-	Period                       uint                   `mapstructure:"period"`
+	Period                       int                    `mapstructure:"period"`
 	Placement                    string                 `mapstructure:"placement"`
 	PublicKey                    string                 `mapstructure:"public_key"`
 	Redundancy                   S3Redundancy           `mapstructure:"redundancy"`
@@ -131,7 +131,6 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -154,51 +153,51 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 // CreateS3Input is used as input to the CreateS3 function.
 type CreateS3Input struct {
 	// ACL is the access control list (ACL) specific request header.
-	ACL S3AccessControlList `url:"acl,omitempty"`
+	ACL *S3AccessControlList `url:"acl,omitempty"`
 	//  AccessKey is the access key for your S3 account. Not required if iam_role is provided.
-	AccessKey string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"`
 	// BucketName is the bucket name for S3 account.
-	BucketName string `url:"bucket_name,omitempty"`
+	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
-	CompressionCodec string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Domain is the domain of the Amazon S3 endpoint.
-	Domain string `url:"domain,omitempty"`
+	Domain *string `url:"domain,omitempty"`
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// IAMRole is the Amazon Resource Name (ARN) for the IAM role granting Fastly access to S3. Not required if access_key and secret_key are provided.
-	IAMRole string `url:"iam_role,omitempty"`
+	IAMRole *string `url:"iam_role,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType string `url:"message_type,omitempty"`
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the SFTP to update (required).
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Path is the path to upload logs to.
-	Path string `url:"path,omitempty"`
+	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey string `url:"public_key,omitempty"`
+	PublicKey *string `url:"public_key,omitempty"`
 	// Redundancy is the S3 redundancy level.
-	Redundancy S3Redundancy `url:"redundancy,omitempty"`
+	Redundancy *S3Redundancy `url:"redundancy,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// SecretKey is the secret key for your S3 account. Not required if iam_role is provided.
-	SecretKey string `url:"secret_key,omitempty"`
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServerSideEncryption should be set to AES256 or aws:kms to enable S3 Server Side Encryption.
-	ServerSideEncryption S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
+	ServerSideEncryption *S3ServerSideEncryption `url:"server_side_encryption,omitempty"`
 	// ServerSideEncryptionKMSKeyID is an optional server-side KMS Key ID. Must be set if ServerSideEncryption is set to aws:kms or AES256.
-	ServerSideEncryptionKMSKeyID string `url:"server_side_encryption_kms_key_id,omitempty"`
+	ServerSideEncryptionKMSKeyID *string `url:"server_side_encryption_kms_key_id,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // CreateS3 creates a new resource.
@@ -206,12 +205,13 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
 
-	if i.ServerSideEncryption == S3ServerSideEncryptionKMS && i.ServerSideEncryptionKMSKeyID == "" {
+	isKMS := i.ServerSideEncryption != nil && *i.ServerSideEncryption == S3ServerSideEncryptionKMS
+	hasNoKeyID := i.ServerSideEncryptionKMSKeyID != nil && *i.ServerSideEncryptionKMSKeyID == ""
+	if isKMS && hasNoKeyID {
 		return nil, ErrMissingServerSideEncryptionKMSKeyID
 	}
 
@@ -231,7 +231,7 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 
 // GetS3Input is used as input to the GetS3 function.
 type GetS3Input struct {
-	// Name is the name of the S3 to fetch.
+	// Name is the name of the S3 to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -241,16 +241,14 @@ type GetS3Input struct {
 
 // GetS3 retrieves the specified resource.
 func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -282,21 +280,21 @@ type UpdateS3Input struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// IAMRole is the Amazon Resource Name (ARN) for the IAM role granting Fastly access to S3. Not required if access_key and secret_key are provided.
 	IAMRole *string `url:"iam_role,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the S3 to update.
-	Name string
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Path is the path to upload logs to.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
@@ -312,28 +310,28 @@ type UpdateS3Input struct {
 	// ServerSideEncryptionKMSKeyID is an optional server-side KMS Key ID. Must be set if ServerSideEncryption is set to aws:kms or AES256.
 	ServerSideEncryptionKMSKeyID *string `url:"server_side_encryption_kms_key_id,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 }
 
 // UpdateS3 updates the specified resource.
 func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
 
-	if i.Name == "" {
-		return nil, ErrMissingName
-	}
-
-	if i.ServerSideEncryption != nil && *i.ServerSideEncryption == S3ServerSideEncryptionKMS && *i.ServerSideEncryptionKMSKeyID == "" {
+	isKMS := i.ServerSideEncryption != nil && *i.ServerSideEncryption == S3ServerSideEncryptionKMS
+	hasNoKeyID := i.ServerSideEncryptionKMSKeyID != nil && *i.ServerSideEncryptionKMSKeyID == ""
+	if isKMS && hasNoKeyID {
 		return nil, ErrMissingServerSideEncryptionKMSKeyID
 	}
 
@@ -363,16 +361,14 @@ type DeleteS3Input struct {
 
 // DeleteS3 deletes the specified resource.
 func (c *Client) DeleteS3(i *DeleteS3Input) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/s3/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
