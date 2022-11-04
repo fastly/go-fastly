@@ -24,26 +24,26 @@ func TestClient_Kafkas(t *testing.T) {
 	var k *Kafka
 	record(t, "kafkas/create", func(c *Client) {
 		k, err = c.CreateKafka(&CreateKafkaInput{
+			AuthMethod:       String("scram-sha-512"),
+			Brokers:          String("192.168.1.1,192.168.1.2"),
+			CompressionCodec: String("lz4"),
+			Format:           String("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:    Int(2),
+			Name:             String("test-kafka"),
+			ParseLogKeyvals:  CBool(true),
+			Password:         String("deadbeef"),
+			Placement:        String("waf_debug"),
+			RequestMaxBytes:  Int(requestMaxBytes),
+			RequiredACKs:     String("-1"),
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-kafka",
-			Brokers:          "192.168.1.1,192.168.1.2",
-			Topic:            "kafka-topic",
-			RequiredACKs:     "-1",
-			UseTLS:           true,
-			CompressionCodec: "lz4",
-			Format:           "%h %l %u %t \"%r\" %>s %b",
-			FormatVersion:    2,
-			Placement:        "waf_debug",
-			TLSCACert:        caCert,
-			TLSHostname:      "example.com",
-			TLSClientCert:    clientCert,
-			TLSClientKey:     clientKey,
-			ParseLogKeyvals:  true,
-			RequestMaxBytes:  requestMaxBytes,
-			AuthMethod:       "scram-sha-512",
-			User:             "foobar",
-			Password:         "deadbeef",
+			TLSCACert:        String(caCert),
+			TLSClientCert:    String(clientCert),
+			TLSClientKey:     String(clientKey),
+			TLSHostname:      String("example.com"),
+			Topic:            String("kafka-topic"),
+			UseTLS:           CBool(true),
+			User:             String("foobar"),
 		})
 	})
 	if err != nil {
@@ -276,81 +276,84 @@ func TestClient_CreateKafka_validation(t *testing.T) {
 
 func TestClient_GetKafka_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetKafka(&GetKafkaInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetKafka(&GetKafkaInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetKafka(&GetKafkaInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetKafka(&GetKafkaInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateKafka_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteKafka_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteKafka(&DeleteKafkaInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteKafka(&DeleteKafkaInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteKafka(&DeleteKafkaInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteKafka(&DeleteKafkaInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

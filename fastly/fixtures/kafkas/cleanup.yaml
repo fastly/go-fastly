@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/73/logging/kafka/test-kafka
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/kafka/test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-kafka, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 73 }''"}'
+      version =\u003e 59 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:55:44 GMT
+      - Fri, 04 Nov 2022 15:58:58 GMT
       Fastly-Ratelimit-Remaining:
-      - "4829"
+      - "9954"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667577600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4141-MAN
       X-Timer:
-      - S1635958545.657450,VS0,VE171
+      - S1667577538.696736,VS0,VE312
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/73/logging/kafka/new-test-kafka
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/59/logging/kafka/new-test-kafka
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-kafka, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 73 }''"}'
+      version =\u003e 59 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:55:45 GMT
+      - Fri, 04 Nov 2022 15:58:58 GMT
       Fastly-Ratelimit-Remaining:
-      - "4828"
+      - "9953"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667577600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4141-MAN
       X-Timer:
-      - S1635958545.848353,VS0,VE178
+      - S1667577538.038343,VS0,VE335
     status: 404 Not Found
     code: 404
     duration: ""

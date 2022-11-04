@@ -15,12 +15,12 @@ type Kafka struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	Name              string     `mapstructure:"name"`
 	ParseLogKeyvals   bool       `mapstructure:"parse_log_keyvals"`
 	Password          string     `mapstructure:"password"`
 	Placement         string     `mapstructure:"placement"`
-	RequestMaxBytes   uint       `mapstructure:"request_max_bytes"`
+	RequestMaxBytes   int        `mapstructure:"request_max_bytes"`
 	RequiredACKs      string     `mapstructure:"required_acks"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	ServiceID         string     `mapstructure:"service_id"`
@@ -66,7 +66,6 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -89,47 +88,47 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 // CreateKafkaInput is used as input to the CreateKafka function.
 type CreateKafkaInput struct {
 	// AuthMethod is the SASL authentication method (plain, scram-sha-256, scram-sha-512).
-	AuthMethod string `url:"auth_method,omitempty"`
+	AuthMethod *string `url:"auth_method,omitempty"`
 	// Brokers is a comma-separated list of IP addresses or hostnames of Kafka brokers.
-	Brokers string `url:"brokers,omitempty"`
+	Brokers *string `url:"brokers,omitempty"`
 	// CompressionCodec is the codec used for compression of your logs (gzip, snappy, lz4, null).
-	CompressionCodec string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// ParseLogKeyvals enables parsing of key=value tuples from the beginning of a logline, turning them into record headers.
-	ParseLogKeyvals Compatibool `url:"parse_log_keyvals,omitempty"`
+	ParseLogKeyvals *Compatibool `url:"parse_log_keyvals,omitempty"`
 	// Password is the SASL password.
-	Password string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
-	RequestMaxBytes uint `url:"request_max_bytes,omitempty"`
+	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.
-	RequiredACKs string `url:"required_acks,omitempty"`
+	RequiredACKs *string `url:"required_acks,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert string `url:"tls_ca_cert,omitempty"`
+	TLSCACert *string `url:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert string `url:"tls_client_cert,omitempty"`
+	TLSClientCert *string `url:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey string `url:"tls_client_key,omitempty"`
+	TLSClientKey *string `url:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname string `url:"tls_hostname,omitempty"`
+	TLSHostname *string `url:"tls_hostname,omitempty"`
 	// Topic is the Kafka topic to send logs to.
-	Topic string `url:"topic,omitempty"`
+	Topic *string `url:"topic,omitempty"`
 	// UseTLS is whether to use TLS (0: do not use, 1: use).
-	UseTLS Compatibool `url:"use_tls,omitempty"`
+	UseTLS *Compatibool `url:"use_tls,omitempty"`
 	// User is the SASL user.
-	User string `url:"user,omitempty"`
+	User *string `url:"user,omitempty"`
 }
 
 // CreateKafka creates a new resource.
@@ -137,7 +136,6 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -158,7 +156,7 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 
 // GetKafkaInput is used as input to the GetKafka function.
 type GetKafkaInput struct {
-	// Name is the name of the kafka to fetch.
+	// Name is the name of the kafka to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -168,16 +166,14 @@ type GetKafkaInput struct {
 
 // GetKafka retrieves the specified resource.
 func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -205,9 +201,9 @@ type UpdateKafkaInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
-	// Name is the name of the kafka to update.
-	Name string
+	FormatVersion *int `url:"format_version,omitempty"`
+	// Name is the name of the kafka to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ParseLogKeyvals enables parsing of key=value tuples from the beginning of a logline, turning them into record headers.
@@ -217,15 +213,15 @@ type UpdateKafkaInput struct {
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
-	RequestMaxBytes *uint `url:"request_max_bytes,omitempty"`
+	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.
 	RequiredACKs *string `url:"required_acks,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
 	TLSCACert *string `url:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
@@ -244,16 +240,14 @@ type UpdateKafkaInput struct {
 
 // UpdateKafka updates the specified resource.
 func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -282,16 +276,14 @@ type DeleteKafkaInput struct {
 
 // DeleteKafka deletes the specified resource.
 func (c *Client) DeleteKafka(i *DeleteKafkaInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
