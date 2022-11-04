@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/logging/papertrail/test-papertrail
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/papertrail/test-papertrail
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 80 }''"}'
+      version =\u003e 46 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:05:35 GMT
+      - Fri, 04 Nov 2022 14:20:07 GMT
       Fastly-Ratelimit-Remaining:
-      - "4967"
+      - "9995"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667574000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4145-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4150-MAN
       X-Timer:
-      - S1635959135.294494,VS0,VE159
+      - S1667571607.944824,VS0,VE147
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/logging/papertrail/new-test-papertrail
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/papertrail/new-test-papertrail
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-papertrail, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 80 }''"}'
+      version =\u003e 46 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:05:35 GMT
+      - Fri, 04 Nov 2022 14:20:07 GMT
       Fastly-Ratelimit-Remaining:
-      - "4966"
+      - "9994"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667574000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4145-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4150-MAN
       X-Timer:
-      - S1635959135.474923,VS0,VE179
+      - S1667571607.117630,VS0,VE145
     status: 404 Not Found
     code: 404
     duration: ""

@@ -19,12 +19,12 @@ func TestClient_Papertrails(t *testing.T) {
 		p, err = c.CreatePapertrail(&CreatePapertrailInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-papertrail",
-			Address:        "integ-test.go-fastly.com",
-			Port:           1234,
-			FormatVersion:  2,
-			Format:         "format",
-			Placement:      "waf_debug",
+			Name:           String("test-papertrail"),
+			Address:        String("integ-test.go-fastly.com"),
+			Port:           Int(1234),
+			FormatVersion:  Int(2),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -145,6 +145,7 @@ func TestClient_Papertrails(t *testing.T) {
 
 func TestClient_ListPapertrails_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.ListPapertrails(&ListPapertrailsInput{
 		ServiceID: "",
 	})
@@ -163,6 +164,7 @@ func TestClient_ListPapertrails_validation(t *testing.T) {
 
 func TestClient_CreatePapertrail_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.CreatePapertrail(&CreatePapertrailInput{
 		ServiceID: "",
 	})
@@ -181,81 +183,84 @@ func TestClient_CreatePapertrail_validation(t *testing.T) {
 
 func TestClient_GetPapertrail_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetPapertrail(&GetPapertrailInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetPapertrail(&GetPapertrailInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetPapertrail(&GetPapertrailInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetPapertrail(&GetPapertrailInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdatePapertrail_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdatePapertrail(&UpdatePapertrailInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdatePapertrail(&UpdatePapertrailInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdatePapertrail(&UpdatePapertrailInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdatePapertrail(&UpdatePapertrailInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeletePapertrail_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeletePapertrail(&DeletePapertrailInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeletePapertrail(&DeletePapertrailInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeletePapertrail(&DeletePapertrailInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeletePapertrail(&DeletePapertrailInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
