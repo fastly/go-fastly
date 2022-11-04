@@ -2,25 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-kinesis&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=74&name=new-test-kinesis
+    body: name=new-test-kinesis
     form:
-      Name:
-      - test-kinesis
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "74"
       name:
       - new-test-kinesis
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis/test-kinesis
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/kinesis/test-kinesis
     method: PUT
   response:
-    body: '{"version":"74","iam_role":null,"secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","topic":"stream-name","service_id":"7i6HN3TK9wS159v2gPAZ8A","region":"us-east-1","format_version":"2","deleted_at":null,"created_at":"2021-11-03T16:56:46Z","name":"new-test-kinesis","access_key":"AKIAIOSFODNN7EXAMPLE","response_condition":"","format":"format","placement":"waf_debug","updated_at":"2021-11-03T16:56:46Z"}'
+    body: '{"response_condition":"","iam_role":null,"access_key":"AKIAIOSFODNN7EXAMPLE","placement":"waf_debug","region":"us-east-1","version":"62","deleted_at":null,"updated_at":"2022-11-04T16:11:57Z","topic":"stream-name","service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","created_at":"2022-11-04T16:11:57Z","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","name":"new-test-kinesis","format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:56:49 GMT
+      - Fri, 04 Nov 2022 16:12:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "4822"
+      - "9986"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667581200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4139-MAN
       X-Timer:
-      - S1635958609.827409,VS0,VE498
+      - S1667578320.893014,VS0,VE342
     status: 200 OK
     code: 200
     duration: ""

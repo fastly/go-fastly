@@ -14,20 +14,21 @@ func TestClient_Kinesis(t *testing.T) {
 	})
 
 	// Create
+	//
+	// NOTE: You can't send the API and empty ResponseCondition.
 	var kinesisCreateResp1, kinesisCreateResp2 *Kinesis
 	record(t, "kinesis/create", func(c *Client) {
 		kinesisCreateResp1, err = c.CreateKinesis(&CreateKinesisInput{
-			ServiceID:         testServiceID,
-			ServiceVersion:    v.Number,
-			Name:              "test-kinesis",
-			StreamName:        "stream-name",
-			Region:            "us-east-1",
-			AccessKey:         "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:         "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Format:            "format",
-			FormatVersion:     2,
-			ResponseCondition: "",
-			Placement:         "waf_debug",
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
+			Name:           String("test-kinesis"),
+			StreamName:     String("stream-name"),
+			Region:         String("us-east-1"),
+			AccessKey:      String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Format:         String("format"),
+			FormatVersion:  Int(2),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -36,16 +37,15 @@ func TestClient_Kinesis(t *testing.T) {
 
 	record(t, "kinesis/create2", func(c *Client) {
 		kinesisCreateResp2, err = c.CreateKinesis(&CreateKinesisInput{
-			ServiceID:         testServiceID,
-			ServiceVersion:    v.Number,
-			Name:              "test-kinesis-2",
-			StreamName:        "stream-name",
-			Region:            "us-east-1",
-			IAMRole:           "arn:aws:iam::123456789012:role/S3Access",
-			Format:            "format",
-			FormatVersion:     2,
-			ResponseCondition: "",
-			Placement:         "waf_debug",
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
+			Name:           String("test-kinesis-2"),
+			StreamName:     String("stream-name"),
+			Region:         String("us-east-1"),
+			IAMRole:        String("arn:aws:iam::123456789012:role/S3Access"),
+			Format:         String("format"),
+			FormatVersion:  Int(2),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -55,18 +55,17 @@ func TestClient_Kinesis(t *testing.T) {
 	// This case is expected to fail
 	record(t, "kinesis/create3", func(c *Client) {
 		_, err = c.CreateKinesis(&CreateKinesisInput{
-			ServiceID:         testServiceID,
-			ServiceVersion:    v.Number,
-			Name:              "test-kinesis-3",
-			StreamName:        "stream-name",
-			Region:            "us-east-1",
-			AccessKey:         "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:         "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			IAMRole:           "arn:aws:iam::123456789012:role/S3Access",
-			Format:            "format",
-			FormatVersion:     2,
-			ResponseCondition: "",
-			Placement:         "waf_debug",
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
+			Name:           String("test-kinesis-3"),
+			StreamName:     String("stream-name"),
+			Region:         String("us-east-1"),
+			AccessKey:      String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:      String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			IAMRole:        String("arn:aws:iam::123456789012:role/S3Access"),
+			Format:         String("format"),
+			FormatVersion:  Int(2),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err == nil {
@@ -76,16 +75,15 @@ func TestClient_Kinesis(t *testing.T) {
 	// This case is expected to fail
 	record(t, "kinesis/create4", func(c *Client) {
 		_, err = c.CreateKinesis(&CreateKinesisInput{
-			ServiceID:         testServiceID,
-			ServiceVersion:    v.Number,
-			Name:              "test-kinesis-3",
-			StreamName:        "stream-name",
-			Region:            "us-east-1",
-			IAMRole:           "badarn",
-			Format:            "format",
-			FormatVersion:     2,
-			ResponseCondition: "",
-			Placement:         "waf_debug",
+			ServiceID:      testServiceID,
+			ServiceVersion: v.Number,
+			Name:           String("test-kinesis-3"),
+			StreamName:     String("stream-name"),
+			Region:         String("us-east-1"),
+			IAMRole:        String("badarn"),
+			Format:         String("format"),
+			FormatVersion:  Int(2),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err == nil {
@@ -145,7 +143,6 @@ func TestClient_Kinesis(t *testing.T) {
 	if kinesisCreateResp1.ResponseCondition != "" {
 		t.Errorf("bad response_condition: %q", kinesisCreateResp1.ResponseCondition)
 	}
-
 	if kinesisCreateResp2.AccessKey != "" {
 		t.Errorf("bad access_key: %q", kinesisCreateResp2.AccessKey)
 	}
@@ -225,7 +222,6 @@ func TestClient_Kinesis(t *testing.T) {
 	if kinesisCreateResp1.ResponseCondition != "" {
 		t.Errorf("bad response_condition: %q", kinesisCreateResp1.ResponseCondition)
 	}
-
 	if kinesisCreateResp2.AccessKey != kinesisGetResp2.AccessKey {
 		t.Errorf("bad access_key: %q", kinesisGetResp2.AccessKey)
 	}
@@ -299,7 +295,6 @@ func TestClient_Kinesis(t *testing.T) {
 	if kinesisUpdateResp1.Name != "new-test-kinesis" {
 		t.Errorf("bad name: %q", kinesisUpdateResp1.Name)
 	}
-
 	if kinesisUpdateResp2.AccessKey != "" {
 		t.Errorf("bad access_key: %q", kinesisUpdateResp2.AccessKey)
 	}
@@ -309,7 +304,6 @@ func TestClient_Kinesis(t *testing.T) {
 	if kinesisUpdateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
 		t.Errorf("bad iam_role: %q", kinesisUpdateResp2.IAMRole)
 	}
-
 	if kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
 		t.Errorf("bad access_key: %q", kinesisUpdateResp3.AccessKey)
 	}
@@ -371,81 +365,84 @@ func TestClient_CreateKinesis_validation(t *testing.T) {
 
 func TestClient_GetKinesis_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetKinesis(&GetKinesisInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetKinesis(&GetKinesisInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetKinesis(&GetKinesisInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetKinesis(&GetKinesisInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateKinesis_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateKinesis(&UpdateKinesisInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteKinesis_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteKinesis(&DeleteKinesisInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteKinesis(&DeleteKinesisInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteKinesis(&DeleteKinesisInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteKinesis(&DeleteKinesisInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

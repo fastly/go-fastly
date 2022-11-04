@@ -2,14 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: Name=new-test-kinesis&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=74&access_key=&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&secret_key=
+    body: access_key=&iam_role=arn%3Aaws%3Aiam%3A%3A123456789012%3Arole%2FS3Access&secret_key=
     form:
-      Name:
-      - new-test-kinesis
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "74"
       access_key:
       - ""
       iam_role:
@@ -20,11 +14,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis/new-test-kinesis
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/kinesis/new-test-kinesis
     method: PUT
   response:
-    body: '{"topic":"stream-name","deleted_at":null,"version":"74","name":"new-test-kinesis","iam_role":"arn:aws:iam::123456789012:role/S3Access","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T16:56:48Z","format_version":"2","region":"us-east-1","response_condition":"","secret_key":"","created_at":"2021-11-03T16:56:46Z","format":"format","placement":"waf_debug","access_key":""}'
+    body: '{"format":"format","format_version":"2","iam_role":"arn:aws:iam::123456789012:role/S3Access","service_id":"7i6HN3TK9wS159v2gPAZ8A","region":"us-east-1","deleted_at":null,"topic":"stream-name","updated_at":"2022-11-04T16:12:00Z","name":"new-test-kinesis","response_condition":"","version":"62","created_at":"2022-11-04T16:11:57Z","secret_key":"","placement":"waf_debug","access_key":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:56:49 GMT
+      - Fri, 04 Nov 2022 16:12:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "4821"
+      - "9985"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667581200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4139-MAN
       X-Timer:
-      - S1635958609.396653,VS0,VE513
+      - S1667578320.261495,VS0,VE337
     status: 200 OK
     code: 200
     duration: ""
