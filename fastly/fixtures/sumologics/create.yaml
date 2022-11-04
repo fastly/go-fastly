@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=95&format=format&format_version=1&message_type=classic&name=test-sumologic&placement=waf_debug&url=https%3A%2F%2Ffoo.sumologic.com
+    body: format=format&format_version=1&message_type=classic&name=test-sumologic&placement=waf_debug&url=https%3A%2F%2Ffoo.sumologic.com
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "95"
       format:
       - format
       format_version:
@@ -24,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/logging/sumologic
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/56/logging/sumologic
     method: POST
   response:
-    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"95","updated_at":"2021-11-03T17:19:13Z","created_at":"2021-11-03T17:19:13Z","response_condition":"","deleted_at":null}'
+    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"56","deleted_at":null,"created_at":"2022-11-04T15:16:57Z","updated_at":"2022-11-04T15:16:57Z","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -37,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:19:13 GMT
+      - Fri, 04 Nov 2022 15:16:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "4841"
+      - "9975"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667577600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4130-MAN
       X-Timer:
-      - S1635959953.086973,VS0,VE705
+      - S1667575017.871120,VS0,VE504
     status: 200 OK
     code: 200
     duration: ""
