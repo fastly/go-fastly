@@ -6,16 +6,17 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
     url: https://api.fastly.com/customer/51MumwLiSJyFTWhtbByYgR/users
     method: GET
   response:
-    body: '[{"id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2020-11-04T09:51:20Z","updated_at":"2021-09-17T15:17:31Z","name":"Mark
-      McDonnell","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"mmcdonnell+experiments@fastly.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":"2021-09-17T15:17:31Z"},{"id":"2NfYQKW1WOyZAHfx5vHUz","created_at":"2021-07-14T18:06:16Z","updated_at":"2021-07-14T18:06:16Z","name":"tf-test-vcybp2zqer","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"tf-test-id942gvl3w@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null},{"id":"3fNBpVBwp8UnOSCoZGRanZ","created_at":"2021-03-18T11:48:38Z","updated_at":"2021-03-31T09:32:02Z","name":"mims","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"msivrieva+experiments@fastly.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"last_active_at":"2021-03-19T17:28:54Z"},{"id":"3H4OEL3kxIG6Xvz7SDLhXo","created_at":"2021-11-03T17:23:48Z","updated_at":"2021-11-03T17:23:48Z","name":"test
-      user","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"go-fastly-test+user1@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null},{"id":"3wW5dQDPr3mazMPzjVgx8D","created_at":"2021-08-25T18:37:12Z","updated_at":"2021-09-09T15:16:30Z","name":"Suby
+    body: '[{"id":"1Iyp7cXku3sEDtOBxnhLaL","created_at":"2022-11-04T18:02:15Z","updated_at":"2022-11-04T18:02:15Z","name":"test
+      user","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"go-fastly-test+user+20221104@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null},{"id":"1pnpEMCscfjqgvH7Qofda6","created_at":"2022-06-22T18:00:19Z","updated_at":"2022-06-22T18:05:27Z","name":"testing
+      integralist","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"testing-integralist@fastly.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":true,"last_active_at":null},{"id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2020-11-04T09:51:20Z","updated_at":"2022-06-01T13:25:28Z","name":"Mark
+      McDonnell","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"mmcdonnell+experiments@fastly.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":"2022-06-01T18:25:28Z"},{"id":"2NfYQKW1WOyZAHfx5vHUz","created_at":"2021-07-14T18:06:16Z","updated_at":"2021-07-14T18:06:16Z","name":"tf-test-vcybp2zqer","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"tf-test-id942gvl3w@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null},{"id":"3fNBpVBwp8UnOSCoZGRanZ","created_at":"2021-03-18T11:48:38Z","updated_at":"2021-03-31T09:32:02Z","name":"mims","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"msivrieva+experiments@fastly.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"last_active_at":"2021-03-19T17:28:54Z"},{"id":"3wW5dQDPr3mazMPzjVgx8D","created_at":"2021-08-25T18:37:12Z","updated_at":"2021-09-09T15:16:30Z","name":"Suby
       Raman","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"suby@fastly.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":true,"limit_services":false,"last_active_at":"2021-09-09T15:16:30Z"},{"id":"45T0fjT7I6Iv5SLqRYMcgc","created_at":"2021-05-25T15:43:52Z","updated_at":"2021-10-19T17:18:51Z","name":"Bridget
-      Lane","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"bridget@fastly.com","deleted_at":null,"locked":true,"two_factor_auth_enabled":false,"limit_services":false,"last_active_at":"2021-09-24T20:24:41Z"},{"id":"52LiGaZmbWl4D5xv4tcxON","created_at":"2021-09-14T15:01:34Z","updated_at":"2021-09-20T11:15:56Z","name":"go-fastly
-      testsuite","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"mmcdonnell+gofastly-testsuite@fastly.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"last_active_at":"2021-09-20T11:15:56Z"},{"id":"76kDdiiwbZC2AqlkGVRFbl","created_at":"2021-09-17T11:35:38Z","updated_at":"2021-09-17T11:35:48Z","name":"mmcdonnell+tokencreationtesting@fastly.com","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"superuser","login":"mmcdonnell+tokencreationtesting@fastly.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":"2021-09-17T11:35:47Z"},{"id":"d0aw205U9PCGTwHVlim6q","created_at":"2021-10-19T14:50:53Z","updated_at":"2021-10-19T14:51:00Z","name":"tf-test-8z47k3n2jm","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"superuser","login":"tf-test-egnij2ewd9@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null},{"id":"yGryBE2EeTHV60Q1SBsXy","created_at":"2021-10-20T11:48:07Z","updated_at":"2021-10-20T11:48:07Z","name":"tf-test-ckcd1moqdg","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"tf-test-objv2870ix@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null}]'
+      Lane","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"bridget@fastly.com","deleted_at":null,"locked":true,"two_factor_auth_enabled":false,"limit_services":false,"last_active_at":"2021-09-24T20:24:41Z"},{"id":"52LiGaZmbWl4D5xv4tcxON","created_at":"2021-09-14T15:01:34Z","updated_at":"2021-11-26T15:18:01Z","name":"go-fastly
+      testsuite","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":false,"role":"superuser","login":"mmcdonnell+gofastly-testsuite@fastly.com","deleted_at":null,"locked":false,"two_factor_auth_enabled":false,"limit_services":false,"last_active_at":"2021-11-26T15:18:01Z"},{"id":"5939paZw0L1ItdVTBzln5W","created_at":"2022-09-08T13:42:30Z","updated_at":"2022-09-08T13:42:30Z","name":"tf-test-3sn8d9gv6b","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"tf-test-ahs46mmult@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null},{"id":"76kDdiiwbZC2AqlkGVRFbl","created_at":"2021-09-17T11:35:38Z","updated_at":"2021-09-17T11:35:48Z","name":"mmcdonnell+tokencreationtesting@fastly.com","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"superuser","login":"mmcdonnell+tokencreationtesting@fastly.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":"2021-09-17T11:35:47Z"},{"id":"d0aw205U9PCGTwHVlim6q","created_at":"2021-10-19T14:50:53Z","updated_at":"2021-10-19T14:51:00Z","name":"tf-test-8z47k3n2jm","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"superuser","login":"tf-test-egnij2ewd9@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null},{"id":"yGryBE2EeTHV60Q1SBsXy","created_at":"2021-10-20T11:48:07Z","updated_at":"2021-10-20T11:48:07Z","name":"tf-test-ckcd1moqdg","customer_id":"51MumwLiSJyFTWhtbByYgR","require_new_password":null,"role":"engineer","login":"tf-test-objv2870ix@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:23:48 GMT
+      - Fri, 04 Nov 2022 18:02:16 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -38,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4138-MAN
       X-Timer:
-      - S1635960229.625328,VS0,VE314
+      - S1667584936.087150,VS0,VE556
     status: 200 OK
     code: 200
     duration: ""

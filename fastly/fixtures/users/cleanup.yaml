@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/user/3H4OEL3kxIG6Xvz7SDLhXo
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/user/1Iyp7cXku3sEDtOBxnhLaL
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Cannot find user ''3H4OEL3kxIG6Xvz7SDLhXo''"}'
+    body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,13 +19,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:23:50 GMT
+      - Fri, 04 Nov 2022 18:02:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "4826"
+      - "9995"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667588400"
       Status:
-      - 404 Not Found
+      - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4138-MAN
       X-Timer:
-      - S1635960230.955982,VS0,VE123
-    status: 404 Not Found
-    code: 404
+      - S1667584938.762740,VS0,VE211
+    status: 200 OK
+    code: 200
     duration: ""
