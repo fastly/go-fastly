@@ -19,20 +19,20 @@ func TestClient_Cloudfiles(t *testing.T) {
 		cloudfilesCreateResp1, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-cloudfiles",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			Path:             "/path",
-			Region:           "DFW",
-			Period:           12,
-			Format:           "format",
-			FormatVersion:    1,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			Name:             String("test-cloudfiles"),
+			User:             String("user"),
+			AccessKey:        String("secret-key"),
+			BucketName:       String("bucket-name"),
+			Path:             String("/path"),
+			Region:           String("DFW"),
+			Period:           Int(12),
+			Format:           String("format"),
+			FormatVersion:    Int(1),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
+			CompressionCodec: String("snappy"),
 		})
 	})
 	if err != nil {
@@ -43,20 +43,20 @@ func TestClient_Cloudfiles(t *testing.T) {
 		cloudfilesCreateResp2, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
-			Name:            "test-cloudfiles-2",
-			User:            "user",
-			AccessKey:       "secret-key",
-			BucketName:      "bucket-name",
-			Path:            "/path",
-			Region:          "DFW",
-			Period:          12,
-			GzipLevel:       8,
-			Format:          "format",
-			FormatVersion:   1,
-			TimestampFormat: "%Y",
-			MessageType:     "classic",
-			Placement:       "waf_debug",
-			PublicKey:       pgpPublicKey(),
+			Name:            String("test-cloudfiles-2"),
+			User:            String("user"),
+			AccessKey:       String("secret-key"),
+			BucketName:      String("bucket-name"),
+			Path:            String("/path"),
+			Region:          String("DFW"),
+			Period:          Int(12),
+			GzipLevel:       Int(8),
+			Format:          String("format"),
+			FormatVersion:   Int(1),
+			TimestampFormat: String("%Y"),
+			MessageType:     String("classic"),
+			Placement:       String("waf_debug"),
+			PublicKey:       String(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -67,20 +67,20 @@ func TestClient_Cloudfiles(t *testing.T) {
 		cloudfilesCreateResp3, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-cloudfiles-3",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			Path:             "/path",
-			Region:           "DFW",
-			Period:           12,
-			Format:           "format",
-			FormatVersion:    1,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			Name:             String("test-cloudfiles-3"),
+			User:             String("user"),
+			AccessKey:        String("secret-key"),
+			BucketName:       String("bucket-name"),
+			Path:             String("/path"),
+			Region:           String("DFW"),
+			Period:           Int(12),
+			Format:           String("format"),
+			FormatVersion:    Int(1),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
+			CompressionCodec: String("snappy"),
 		})
 	})
 	if err != nil {
@@ -93,21 +93,21 @@ func TestClient_Cloudfiles(t *testing.T) {
 		_, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-cloudfiles-4",
-			User:             "user",
-			AccessKey:        "secret-key",
-			BucketName:       "bucket-name",
-			Path:             "/path",
-			Region:           "DFW",
-			Period:           12,
-			GzipLevel:        8,
-			Format:           "format",
-			FormatVersion:    1,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			Name:             String("test-cloudfiles-4"),
+			User:             String("user"),
+			AccessKey:        String("secret-key"),
+			BucketName:       String("bucket-name"),
+			Path:             String("/path"),
+			Region:           String("DFW"),
+			Period:           Int(12),
+			GzipLevel:        Int(8),
+			Format:           String("format"),
+			FormatVersion:    Int(1),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
+			CompressionCodec: String("snappy"),
 		})
 	})
 	if err == nil {
@@ -282,8 +282,8 @@ func TestClient_Cloudfiles(t *testing.T) {
 			Name:             "test-cloudfiles",
 			NewName:          String("new-test-cloudfiles"),
 			User:             String("new-user"),
-			Period:           Uint(0),
-			FormatVersion:    Uint(2),
+			Period:           Int(0),
+			FormatVersion:    Int(2),
 			CompressionCodec: String("zstd"),
 		})
 	})
@@ -308,7 +308,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-cloudfiles-3",
-			GzipLevel:      Uint8(9),
+			GzipLevel:      Int(9),
 		})
 	})
 	if err != nil {
@@ -402,81 +402,84 @@ func TestClient_CreateCloudfiles_validation(t *testing.T) {
 
 func TestClient_GetCloudfiles_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
