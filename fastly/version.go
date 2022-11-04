@@ -97,9 +97,9 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 // CreateVersionInput is the input to the CreateVersion function.
 type CreateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 }
 
 // CreateVersion creates a new resource.
@@ -138,7 +138,6 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -162,9 +161,9 @@ type UpdateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // UpdateVersion updates the specified resource.
@@ -172,7 +171,6 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -204,7 +202,6 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -236,7 +233,6 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -271,7 +267,6 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -305,7 +300,6 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 	if i.ServiceID == "" {
 		return false, msg, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return false, msg, ErrMissingServiceVersion
 	}
@@ -339,7 +333,6 @@ func (c *Client) LockVersion(i *LockVersionInput) (*Version, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}

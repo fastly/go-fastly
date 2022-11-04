@@ -18,7 +18,7 @@ func TestClient_Versions(t *testing.T) {
 	record(t, "versions/create", func(c *Client) {
 		v, err = c.CreateVersion(&CreateVersionInput{
 			ServiceID: testServiceID,
-			Comment:   "test comment",
+			Comment:   String("test comment"),
 		})
 	})
 	if err != nil {
