@@ -18,20 +18,20 @@ func TestClient_FTPs(t *testing.T) {
 		ftpCreateResp1, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-ftp",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			Username:         "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			FormatVersion:    2,
-			Format:           "format",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
-			MessageType:      "classic",
+			Name:             String("test-ftp"),
+			Address:          String("example.com"),
+			Port:             Int(1234),
+			PublicKey:        String(pgpPublicKey()),
+			Username:         String("username"),
+			Password:         String("password"),
+			Path:             String("/dir"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			FormatVersion:    Int(2),
+			Format:           String("format"),
+			TimestampFormat:  String("%Y"),
+			Placement:        String("waf_debug"),
+			MessageType:      String("classic"),
 		})
 	})
 	if err != nil {
@@ -42,20 +42,20 @@ func TestClient_FTPs(t *testing.T) {
 		ftpCreateResp2, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
-			Name:            "test-ftp-2",
-			Address:         "example.com",
-			Port:            1234,
-			PublicKey:       pgpPublicKey(),
-			Username:        "username",
-			Password:        "password",
-			Path:            "/dir",
-			Period:          12,
-			GzipLevel:       8,
-			FormatVersion:   2,
-			Format:          "format",
-			TimestampFormat: "%Y",
-			Placement:       "waf_debug",
-			MessageType:     "classic",
+			Name:            String("test-ftp-2"),
+			Address:         String("example.com"),
+			Port:            Int(1234),
+			PublicKey:       String(pgpPublicKey()),
+			Username:        String("username"),
+			Password:        String("password"),
+			Path:            String("/dir"),
+			Period:          Int(12),
+			GzipLevel:       Int(8),
+			FormatVersion:   Int(2),
+			Format:          String("format"),
+			TimestampFormat: String("%Y"),
+			Placement:       String("waf_debug"),
+			MessageType:     String("classic"),
 		})
 	})
 	if err != nil {
@@ -66,20 +66,20 @@ func TestClient_FTPs(t *testing.T) {
 		ftpCreateResp3, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-ftp-3",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			Username:         "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			FormatVersion:    2,
-			Format:           "format",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
-			MessageType:      "classic",
+			Name:             String("test-ftp-3"),
+			Address:          String("example.com"),
+			Port:             Int(1234),
+			PublicKey:        String(pgpPublicKey()),
+			Username:         String("username"),
+			Password:         String("password"),
+			Path:             String("/dir"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			FormatVersion:    Int(2),
+			Format:           String("format"),
+			TimestampFormat:  String("%Y"),
+			Placement:        String("waf_debug"),
+			MessageType:      String("classic"),
 		})
 	})
 	if err != nil {
@@ -92,21 +92,21 @@ func TestClient_FTPs(t *testing.T) {
 		_, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-ftp-4",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			Username:         "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			GzipLevel:        8,
-			FormatVersion:    2,
-			Format:           "format",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
-			MessageType:      "classic",
+			Name:             String("test-ftp-4"),
+			Address:          String("example.com"),
+			Port:             Int(1234),
+			PublicKey:        String(pgpPublicKey()),
+			Username:         String("username"),
+			Password:         String("password"),
+			Path:             String("/dir"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			GzipLevel:        Int(8),
+			FormatVersion:    Int(2),
+			Format:           String("format"),
+			TimestampFormat:  String("%Y"),
+			Placement:        String("waf_debug"),
+			MessageType:      String("classic"),
 		})
 	})
 	if err == nil {
@@ -307,7 +307,7 @@ func TestClient_FTPs(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-ftp-3",
-			GzipLevel:      Uint8(9),
+			GzipLevel:      Int(9),
 		})
 	})
 	if err != nil {
@@ -354,6 +354,7 @@ func TestClient_FTPs(t *testing.T) {
 
 func TestClient_ListFTPs_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.ListFTPs(&ListFTPsInput{
 		ServiceID: "",
 	})
@@ -372,6 +373,7 @@ func TestClient_ListFTPs_validation(t *testing.T) {
 
 func TestClient_CreateFTP_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.CreateFTP(&CreateFTPInput{
 		ServiceID: "",
 	})
@@ -390,81 +392,84 @@ func TestClient_CreateFTP_validation(t *testing.T) {
 
 func TestClient_GetFTP_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetFTP(&GetFTPInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetFTP(&GetFTPInput{
+		ServiceVersion: 1,
+		Name:           "test",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetFTP(&GetFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		ServiceID: "foo",
+		Name:      "test",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetFTP(&GetFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateFTP_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateFTP(&UpdateFTPInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateFTP(&UpdateFTPInput{
+		ServiceVersion: 1,
+		Name:           "test",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateFTP(&UpdateFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		ServiceID: "foo",
+		Name:      "test",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateFTP(&UpdateFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteFTP_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteFTP(&DeleteFTPInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteFTP(&DeleteFTPInput{
+		ServiceVersion: 1,
+		Name:           "test",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteFTP(&DeleteFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		ServiceID: "foo",
+		Name:      "test",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteFTP(&DeleteFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
