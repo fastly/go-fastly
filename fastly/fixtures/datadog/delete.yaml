@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/logging/datadog/new-test-datadog
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/44/logging/datadog/new-test-datadog
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:12:02 GMT
+      - Fri, 04 Nov 2022 13:29:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "4996"
+      - "9983"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667570400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4136-MAN
       X-Timer:
-      - S1635955922.191709,VS0,VE252
+      - S1667568582.352806,VS0,VE219
     status: 200 OK
     code: 200
     duration: ""

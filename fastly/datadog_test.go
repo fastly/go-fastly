@@ -19,11 +19,11 @@ func TestClient_Datadog(t *testing.T) {
 		d, err = c.CreateDatadog(&CreateDatadogInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-datadog",
-			Region:         "US",
-			Token:          "abcd1234",
-			Format:         "format",
-			Placement:      "waf_debug",
+			Name:           String("test-datadog"),
+			Region:         String("US"),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -118,7 +118,7 @@ func TestClient_Datadog(t *testing.T) {
 			Name:           "test-datadog",
 			NewName:        String("new-test-datadog"),
 			Region:         String("EU"),
-			FormatVersion:  Uint(2),
+			FormatVersion:  Int(2),
 		})
 	})
 	if err != nil {
@@ -149,6 +149,7 @@ func TestClient_Datadog(t *testing.T) {
 
 func TestClient_ListDatadog_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.ListDatadog(&ListDatadogInput{
 		ServiceID: "",
 	})
@@ -167,6 +168,7 @@ func TestClient_ListDatadog_validation(t *testing.T) {
 
 func TestClient_CreateDatadog_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.CreateDatadog(&CreateDatadogInput{
 		ServiceID: "",
 	})
@@ -185,81 +187,84 @@ func TestClient_CreateDatadog_validation(t *testing.T) {
 
 func TestClient_GetDatadog_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetDatadog(&GetDatadogInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetDatadog(&GetDatadogInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDatadog(&GetDatadogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDatadog(&GetDatadogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateDatadog_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateDatadog(&UpdateDatadogInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateDatadog(&UpdateDatadogInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateDatadog(&UpdateDatadogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateDatadog(&UpdateDatadogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteDatadog_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteDatadog(&DeleteDatadogInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteDatadog(&DeleteDatadogInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteDatadog(&DeleteDatadogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteDatadog(&DeleteDatadogInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
