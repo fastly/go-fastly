@@ -6,14 +6,14 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.3.1 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/108/director/test-director/backend/test-backend
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director/test-director/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find DirectorBackend ''{
       backend =\u003e test-backend, deleted =\u003e 0000-00-00 00:00:00, director
       =\u003e test-director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e
-      108 }''"}'
+      69 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 27 Apr 2022 11:03:46 GMT
+      - Fri, 04 Nov 2022 17:04:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "4993"
+      - "9993"
       Fastly-Ratelimit-Reset:
-      - "1651060800"
+      - "1667584800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4124-MAN
       X-Timer:
-      - S1651057427.740035,VS0,VE193
+      - S1667581444.592274,VS0,VE312
     status: 404 Not Found
     code: 404
     duration: ""
@@ -51,8 +51,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.3.1 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/108/backend/test-backend
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/backend/test-backend
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -64,11 +64,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 27 Apr 2022 11:03:47 GMT
+      - Fri, 04 Nov 2022 17:04:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "4992"
+      - "9992"
       Fastly-Ratelimit-Reset:
-      - "1651060800"
+      - "1667584800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -82,9 +82,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4124-MAN
       X-Timer:
-      - S1651057427.966642,VS0,VE386
+      - S1667581444.933024,VS0,VE207
     status: 200 OK
     code: 200
     duration: ""
@@ -93,13 +93,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.3.1 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/108/director/test-director
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director/test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 108 }''"}'
+      version =\u003e 69 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -108,11 +108,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 27 Apr 2022 11:03:47 GMT
+      - Fri, 04 Nov 2022 17:04:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "4991"
+      - "9991"
       Fastly-Ratelimit-Reset:
-      - "1651060800"
+      - "1667584800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -126,9 +126,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4124-MAN
       X-Timer:
-      - S1651057427.384248,VS0,VE156
+      - S1667581444.168493,VS0,VE144
     status: 404 Not Found
     code: 404
     duration: ""
@@ -137,13 +137,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.3.1 (+github.com/fastly/go-fastly; go1.16)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/108/director/new-test-director
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director/new-test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-director, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 108 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 69 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -152,11 +152,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 27 Apr 2022 11:03:47 GMT
+      - Fri, 04 Nov 2022 17:04:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "4990"
+      - "9990"
       Fastly-Ratelimit-Reset:
-      - "1651060800"
+      - "1667584800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -170,9 +170,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4124-MAN
       X-Timer:
-      - S1651057428.570029,VS0,VE157
+      - S1667581444.334906,VS0,VE333
     status: 404 Not Found
     code: 404
     duration: ""
