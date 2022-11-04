@@ -12,7 +12,7 @@ type Scalyr struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
 	Region            string     `mapstructure:"region"`
@@ -54,7 +54,6 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -77,23 +76,23 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 // CreateScalyrInput is used as input to the CreateScalyr function.
 type CreateScalyrInput struct {
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// Region is the region that log data will be sent to.
-	Region string `url:"region,omitempty"`
+	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Token is the token to use for authentication
-	Token string `url:"token,omitempty"`
+	Token *string `url:"token,omitempty"`
 }
 
 // CreateScalyr creates a new resource.
@@ -101,13 +100,8 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Token == "" {
-		return nil, ErrMissingToken
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr", i.ServiceID, i.ServiceVersion)
@@ -126,7 +120,7 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 
 // GetScalyrInput is used as input to the GetScalyr function.
 type GetScalyrInput struct {
-	// Name is the name of the scalyr to fetch.
+	// Name is the name of the scalyr to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -136,16 +130,14 @@ type GetScalyrInput struct {
 
 // GetScalyr retrieves the specified resource.
 func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -167,9 +159,9 @@ type UpdateScalyrInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
-	// Name is the name of the scalyr to update.
-	Name string
+	FormatVersion *int `url:"format_version,omitempty"`
+	// Name is the name of the scalyr to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -179,29 +171,23 @@ type UpdateScalyrInput struct {
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Token is the token to use for authentication
 	Token *string `url:"token,omitempty"`
 }
 
 // UpdateScalyr updates the specified resource.
 func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-
-	if i.Token != nil && *i.Token == "" {
-		return nil, ErrTokenEmpty
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -230,16 +216,14 @@ type DeleteScalyrInput struct {
 
 // DeleteScalyr deletes the specified resource.
 func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/scalyr/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
