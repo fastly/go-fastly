@@ -14,15 +14,15 @@ type SFTP struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	FormatVersion     int        `mapstructure:"format_version"`
+	GzipLevel         int        `mapstructure:"gzip_level"`
 	MessageType       string     `mapstructure:"message_type"`
 	Name              string     `mapstructure:"name"`
 	Password          string     `mapstructure:"password"`
 	Path              string     `mapstructure:"path"`
-	Period            uint       `mapstructure:"period"`
+	Period            int        `mapstructure:"period"`
 	Placement         string     `mapstructure:"placement"`
-	Port              uint       `mapstructure:"port"`
+	Port              int        `mapstructure:"port"`
 	PublicKey         string     `mapstructure:"public_key"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	SSHKnownHosts     string     `mapstructure:"ssh_known_hosts"`
@@ -65,7 +65,6 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -88,45 +87,45 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 // CreateSFTPInput is used as input to the CreateSFTP function.
 type CreateSFTPInput struct {
 	// Address is a hostname or IPv4 address.
-	Address string `url:"address,omitempty"`
+	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
-	CompressionCodec string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType string `url:"message_type,omitempty"`
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the loggly to update.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Password is the password for the server.
-	Password string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"`
 	// Path is the path to upload logs to.
-	Path string `url:"path,omitempty"`
+	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
-	Port uint `url:"port,omitempty"`
+	Port *int `url:"port,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey string `url:"public_key,omitempty"`
+	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// SSHKnownHosts is a list of host keys for all hosts we can connect to over SFTP.
-	SSHKnownHosts string `url:"ssh_known_hosts,omitempty"`
+	SSHKnownHosts *string `url:"ssh_known_hosts,omitempty"`
 	// SecretKey is the SSH private key for the server.
-	SecretKey string `url:"secret_key,omitempty"`
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// User is the username for the server.
-	User string `url:"user,omitempty"`
+	User *string `url:"user,omitempty"`
 }
 
 // CreateSFTP creates a new resource.
@@ -134,7 +133,6 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -155,7 +153,7 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 
 // GetSFTPInput is used as input to the GetSFTP function.
 type GetSFTPInput struct {
-	// Name is the name of the SFTP to fetch.
+	// Name is the name of the SFTP to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -165,16 +163,14 @@ type GetSFTPInput struct {
 
 // GetSFTP retrieves the specified resource.
 func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -200,13 +196,13 @@ type UpdateSFTPInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name of the SFTP to update (required).
-	Name string
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Password is the password for the server.
@@ -214,11 +210,11 @@ type UpdateSFTPInput struct {
 	// Path is the path to upload logs to.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
-	Port *uint `url:"port,omitempty"`
+	Port *int `url:"port,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -228,9 +224,9 @@ type UpdateSFTPInput struct {
 	// SecretKey is the SSH private key for the server.
 	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// User is the username for the server.
@@ -239,16 +235,14 @@ type UpdateSFTPInput struct {
 
 // UpdateSFTP updates the specified resource.
 func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -277,16 +271,14 @@ type DeleteSFTPInput struct {
 
 // DeleteSFTP deletes the specified resource.
 func (c *Client) DeleteSFTP(i *DeleteSFTPInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/sftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

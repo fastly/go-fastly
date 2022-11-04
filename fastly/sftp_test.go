@@ -21,22 +21,22 @@ func TestClient_SFTPs(t *testing.T) {
 		sftpCreateResp1, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-sftp",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			SecretKey:        privateKey(),
-			SSHKnownHosts:    knownHosts,
-			User:             "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			FormatVersion:    2,
-			Format:           "format",
-			MessageType:      "blank",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
+			Name:             String("test-sftp"),
+			Address:          String("example.com"),
+			Port:             Int(1234),
+			PublicKey:        String(pgpPublicKey()),
+			SecretKey:        String(privateKey()),
+			SSHKnownHosts:    String(knownHosts),
+			User:             String("username"),
+			Password:         String("password"),
+			Path:             String("/dir"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			FormatVersion:    Int(2),
+			Format:           String("format"),
+			MessageType:      String("blank"),
+			TimestampFormat:  String("%Y"),
+			Placement:        String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -47,22 +47,22 @@ func TestClient_SFTPs(t *testing.T) {
 		sftpCreateResp2, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
-			Name:            "test-sftp-2",
-			Address:         "example.com",
-			Port:            1234,
-			PublicKey:       pgpPublicKey(),
-			SecretKey:       privateKey(),
-			SSHKnownHosts:   knownHosts,
-			User:            "username",
-			Password:        "password",
-			Path:            "/dir",
-			Period:          12,
-			GzipLevel:       8,
-			FormatVersion:   2,
-			Format:          "format",
-			MessageType:     "blank",
-			TimestampFormat: "%Y",
-			Placement:       "waf_debug",
+			Name:            String("test-sftp-2"),
+			Address:         String("example.com"),
+			Port:            Int(1234),
+			PublicKey:       String(pgpPublicKey()),
+			SecretKey:       String(privateKey()),
+			SSHKnownHosts:   String(knownHosts),
+			User:            String("username"),
+			Password:        String("password"),
+			Path:            String("/dir"),
+			Period:          Int(12),
+			GzipLevel:       Int(8),
+			FormatVersion:   Int(2),
+			Format:          String("format"),
+			MessageType:     String("blank"),
+			TimestampFormat: String("%Y"),
+			Placement:       String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -73,22 +73,22 @@ func TestClient_SFTPs(t *testing.T) {
 		sftpCreateResp3, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-sftp-3",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			SecretKey:        privateKey(),
-			SSHKnownHosts:    knownHosts,
-			User:             "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			FormatVersion:    2,
-			Format:           "format",
-			MessageType:      "blank",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
+			Name:             String("test-sftp-3"),
+			Address:          String("example.com"),
+			Port:             Int(1234),
+			PublicKey:        String(pgpPublicKey()),
+			SecretKey:        String(privateKey()),
+			SSHKnownHosts:    String(knownHosts),
+			User:             String("username"),
+			Password:         String("password"),
+			Path:             String("/dir"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			FormatVersion:    Int(2),
+			Format:           String("format"),
+			MessageType:      String("blank"),
+			TimestampFormat:  String("%Y"),
+			Placement:        String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -101,23 +101,23 @@ func TestClient_SFTPs(t *testing.T) {
 		_, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-sftp-4",
-			Address:          "example.com",
-			Port:             1234,
-			PublicKey:        pgpPublicKey(),
-			SecretKey:        privateKey(),
-			SSHKnownHosts:    knownHosts,
-			User:             "username",
-			Password:         "password",
-			Path:             "/dir",
-			Period:           12,
-			CompressionCodec: "snappy",
-			GzipLevel:        8,
-			FormatVersion:    2,
-			Format:           "format",
-			MessageType:      "blank",
-			TimestampFormat:  "%Y",
-			Placement:        "waf_debug",
+			Name:             String("test-sftp-4"),
+			Address:          String("example.com"),
+			Port:             Int(1234),
+			PublicKey:        String(pgpPublicKey()),
+			SecretKey:        String(privateKey()),
+			SSHKnownHosts:    String(knownHosts),
+			User:             String("username"),
+			Password:         String("password"),
+			Path:             String("/dir"),
+			Period:           Int(12),
+			CompressionCodec: String("snappy"),
+			GzipLevel:        Int(8),
+			FormatVersion:    Int(2),
+			Format:           String("format"),
+			MessageType:      String("blank"),
+			TimestampFormat:  String("%Y"),
+			Placement:        String("waf_debug"),
 		})
 	})
 	if err == nil {
@@ -306,7 +306,7 @@ func TestClient_SFTPs(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-sftp",
 			NewName:        String("new-test-sftp"),
-			GzipLevel:      Uint8(8),
+			GzipLevel:      Int(8),
 			MessageType:    String("classic"),
 		})
 	})
@@ -331,7 +331,7 @@ func TestClient_SFTPs(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-sftp-3",
-			GzipLevel:      Uint8(9),
+			GzipLevel:      Int(9),
 		})
 	})
 	if err != nil {
@@ -380,6 +380,7 @@ func TestClient_SFTPs(t *testing.T) {
 
 func TestClient_ListSFTPs_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.ListSFTPs(&ListSFTPsInput{
 		ServiceID: "",
 	})
@@ -398,6 +399,7 @@ func TestClient_ListSFTPs_validation(t *testing.T) {
 
 func TestClient_CreateSFTP_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.CreateSFTP(&CreateSFTPInput{
 		ServiceID: "",
 	})
@@ -416,81 +418,84 @@ func TestClient_CreateSFTP_validation(t *testing.T) {
 
 func TestClient_GetSFTP_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetSFTP(&GetSFTPInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetSFTP(&GetSFTPInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetSFTP(&GetSFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetSFTP(&GetSFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateSFTP_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteSFTP_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteSFTP(&DeleteSFTPInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteSFTP(&DeleteSFTPInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteSFTP(&DeleteSFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteSFTP(&DeleteSFTPInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
