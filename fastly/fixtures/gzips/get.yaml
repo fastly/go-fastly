@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/gzip/test-gzip
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/gzip/test-gzip
     method: GET
   response:
-    body: '{"version":"67","extensions":"html css","created_at":"2021-11-03T16:50:29Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","cache_condition":"","name":"test-gzip","content_types":"text/html
-      text/css","deleted_at":null,"updated_at":"2021-11-03T16:50:29Z"}'
+    body: '{"extensions":"html css","cache_condition":"","updated_at":"2022-11-04T14:53:12Z","version":"51","name":"test-gzip","created_at":"2022-11-04T14:53:12Z","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","content_types":"text/html
+      text/css"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:50:30 GMT
+      - Fri, 04 Nov 2022 14:53:13 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,9 +34,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4134-MAN
       X-Timer:
-      - S1635958230.121122,VS0,VE315
+      - S1667573593.075723,VS0,VE307
     status: 200 OK
     code: 200
     duration: ""

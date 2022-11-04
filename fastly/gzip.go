@@ -51,7 +51,6 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -74,17 +73,17 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 // CreateGzipInput is used as input to the CreateGzip function.
 type CreateGzipInput struct {
 	// CacheCondition is the name of the cache condition controlling when this configuration applies.
-	CacheCondition string `url:"cache_condition,omitempty"`
+	CacheCondition *string `url:"cache_condition,omitempty"`
 	// ContentTypes is a space-separated list of content types to compress.
-	ContentTypes string `url:"content_types,omitempty"`
+	ContentTypes *string `url:"content_types,omitempty"`
 	// Extensions is a space-separated list of file extensions to compress.
-	Extensions string `url:"extensions,omitempty"`
+	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the gzip configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // CreateGzip creates a new resource.
@@ -92,7 +91,6 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -113,7 +111,7 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 
 // GetGzipInput is used as input to the GetGzip function.
 type GetGzipInput struct {
-	// Name is the name of the Gzip to fetch.
+	// Name is the name of the Gzip to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -123,16 +121,14 @@ type GetGzipInput struct {
 
 // GetGzip retrieves the specified resource.
 func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -157,28 +153,26 @@ type UpdateGzipInput struct {
 	ContentTypes *string `url:"content_types,omitempty"`
 	// Extensions is a space-separated list of file extensions to compress.
 	Extensions *string `url:"extensions,omitempty"`
-	// Name is the name of the Gzip to update.
-	Name string
+	// Name is the name of the Gzip to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // UpdateGzip updates the specified resource.
 func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -207,16 +201,14 @@ type DeleteGzipInput struct {
 
 // DeleteGzip deletes the specified resource.
 func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
