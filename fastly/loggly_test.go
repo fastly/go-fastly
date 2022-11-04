@@ -19,10 +19,10 @@ func TestClient_Loggly(t *testing.T) {
 		lg, err = c.CreateLoggly(&CreateLogglyInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-loggly",
-			Token:          "abcd1234",
-			Format:         "format",
-			Placement:      "waf_debug",
+			Name:           String("test-loggly"),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -113,7 +113,7 @@ func TestClient_Loggly(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-loggly",
 			NewName:        String("new-test-loggly"),
-			FormatVersion:  Uint(2),
+			FormatVersion:  Int(2),
 		})
 	})
 	if err != nil {
@@ -177,81 +177,84 @@ func TestClient_CreateLoggly_validation(t *testing.T) {
 
 func TestClient_GetLoggly_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetLoggly(&GetLogglyInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetLoggly(&GetLogglyInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetLoggly(&GetLogglyInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetLoggly(&GetLogglyInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateLoggly_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteLoggly_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteLoggly(&DeleteLogglyInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteLoggly(&DeleteLogglyInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteLoggly(&DeleteLogglyInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteLoggly(&DeleteLogglyInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
