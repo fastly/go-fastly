@@ -14,7 +14,7 @@ type BigQuery struct {
 	Dataset           string     `mapstructure:"dataset"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
 	ProjectID         string     `mapstructure:"project_id"`
@@ -59,7 +59,6 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -82,33 +81,33 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 // CreateBigQueryInput is used as input to the CreateBigQuery function.
 type CreateBigQueryInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service.
-	AccountName string `url:"account_name,omitempty"`
+	AccountName *string `url:"account_name,omitempty"`
 	// Dataset is your BigQuery dataset.
-	Dataset string `url:"dataset,omitempty"`
+	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce JSON that matches the schema of your BigQuery table.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name of the BigQuery logging object. Used as a primary key for API access.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID.
-	ProjectID string `url:"project_id,omitempty"`
+	ProjectID *string `url:"project_id,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
-	SecretKey string `url:"secret_key,omitempty"`
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Table is your BigQuery table.
-	Table string `url:"table,omitempty"`
+	Table *string `url:"table,omitempty"`
 	// Template is a BigQuery table name suffix template.
-	Template string `url:"template_suffix,omitempty"`
+	Template *string `url:"template_suffix,omitempty"`
 	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
-	User string `url:"user,omitempty"`
+	User *string `url:"user,omitempty"`
 }
 
 // CreateBigQuery creates a new resource.
@@ -116,7 +115,6 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -137,7 +135,7 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 
 // GetBigQueryInput is used as input to the GetBigQuery function.
 type GetBigQueryInput struct {
-	// Name is the name of the BigQuery to fetch.
+	// Name is the name of the BigQuery to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -147,16 +145,14 @@ type GetBigQueryInput struct {
 
 // GetBigQuery retrieves the specified resource.
 func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -182,9 +178,9 @@ type UpdateBigQueryInput struct {
 	// Format is a Fastly log format string. Must produce JSON that matches the schema of your BigQuery table.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
-	// Name is the name of the BigQuery to update.
-	Name string
+	FormatVersion *int `url:"format_version,omitempty"`
+	// Name is the name of the BigQuery to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -196,9 +192,9 @@ type UpdateBigQueryInput struct {
 	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
 	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Table is your BigQuery table.
 	Table *string `url:"table,omitempty"`
 	// Template is a BigQuery table name suffix template.
@@ -209,16 +205,14 @@ type UpdateBigQueryInput struct {
 
 // UpdateBigQuery updates the specified resource.
 func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -247,16 +241,14 @@ type DeleteBigQueryInput struct {
 
 // DeleteBigQuery deletes the specified resource.
 func (c *Client) DeleteBigQuery(i *DeleteBigQueryInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/bigquery/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
