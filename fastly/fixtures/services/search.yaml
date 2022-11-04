@@ -10,7 +10,7 @@ interactions:
     url: https://api.fastly.com/service/search?name=test-service
     method: GET
   response:
-    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","id":"YVI5KaaM0YSe1CAmKAbic6","created_at":"2022-11-03T14:07:52Z","updated_at":"2022-11-03T14:07:52Z","versions":[{"deployed":false,"updated_at":"2022-11-03T14:07:52Z","testing":false,"staging":false,"active":false,"locked":false,"service_id":"YVI5KaaM0YSe1CAmKAbic6","number":1,"deleted_at":null,"comment":"","created_at":"2022-11-03T14:07:52Z"}],"deleted_at":null,"comment":"comment","name":"test-service","type":"vcl"}'
+    body: '{"comment":"comment","deleted_at":null,"customer_id":"51MumwLiSJyFTWhtbByYgR","updated_at":"2022-11-04T17:51:46Z","type":"vcl","name":"test-service","id":"FPkmJNp1fH8CnWbdi21Wf3","versions":[{"staging":false,"number":1,"created_at":"2022-11-04T17:51:46Z","service_id":"FPkmJNp1fH8CnWbdi21Wf3","locked":false,"deleted_at":null,"comment":"","active":false,"updated_at":"2022-11-04T17:51:46Z","testing":false,"deployed":false}],"created_at":"2022-11-04T17:51:46Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 03 Nov 2022 14:07:53 GMT
+      - Fri, 04 Nov 2022 17:51:47 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4151-MAN
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4137-MAN
       X-Timer:
-      - S1667484473.151598,VS0,VE306
+      - S1667584307.353666,VS0,VE307
     status: 200 OK
     code: 200
     duration: ""

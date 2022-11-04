@@ -12,7 +12,7 @@ import (
 
 // Service represents a server response from the Fastly API.
 type Service struct {
-	ActiveVersion uint       `mapstructure:"version"`
+	ActiveVersion int        `mapstructure:"version"`
 	Comment       string     `mapstructure:"comment"`
 	CreatedAt     *time.Time `mapstructure:"created_at"`
 	CustomerID    string     `mapstructure:"customer_id"`
@@ -232,11 +232,11 @@ func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPagin
 // CreateServiceInput is used as input to the CreateService function.
 type CreateServiceInput struct {
 	// Comment is a freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// Name is the name of the service.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Type is the type of this service (vcl, wasm).
-	Type string `url:"type,omitempty"`
+	Type *string `url:"type,omitempty"`
 }
 
 // CreateService creates a new resource.
@@ -256,7 +256,7 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 
 // GetServiceInput is used as input to the GetService function.
 type GetServiceInput struct {
-	// ID is an alphanumeric string identifying the service.
+	// ID is an alphanumeric string identifying the service (required).
 	ID string
 }
 
@@ -287,7 +287,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	// "versions" array in the returned JSON response.
 	for i := range s.Versions {
 		if s.Versions[i].Active {
-			s.ActiveVersion = uint(s.Versions[i].Number)
+			s.ActiveVersion = int(s.Versions[i].Number)
 			break
 		}
 	}
@@ -334,14 +334,6 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	if i.Name == nil && i.Comment == nil {
-		return nil, ErrMissingOptionalNameComment
-	}
-
-	if i.Name != nil && *i.Name == "" {
-		return nil, ErrMissingNameValue
-	}
-
 	path := fmt.Sprintf("/service/%s", i.ServiceID)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
@@ -358,7 +350,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 // DeleteServiceInput is used as input to the DeleteService function.
 type DeleteServiceInput struct {
-	// ID is an alphanumeric string identifying the service.
+	// ID is an alphanumeric string identifying the service (required).
 	ID string
 }
 
@@ -387,7 +379,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 // SearchServiceInput is used as input to the SearchService function.
 type SearchServiceInput struct {
-	// Name is the name of the service.
+	// Name is the name of the service (required).
 	Name string
 }
 
@@ -429,6 +421,7 @@ func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsLi
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
+
 	path := fmt.Sprintf("/service/%s/domain", i.ServiceID)
 	resp, err := c.Get(path, nil)
 	if err != nil {

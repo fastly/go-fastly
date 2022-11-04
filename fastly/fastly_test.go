@@ -125,9 +125,9 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 
 	record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
-			Name:    fmt.Sprintf("test_service_%s", serviceNameSuffix),
-			Comment: "go-fastly client test",
-			Type:    ServiceTypeVCL,
+			Name:    String(fmt.Sprintf("test_service_%s", serviceNameSuffix)),
+			Comment: String("go-fastly client test"),
+			Type:    String(ServiceTypeVCL),
 		})
 	})
 	if err != nil {
@@ -143,9 +143,9 @@ func createTestServiceWasm(t *testing.T, serviceFixture string, serviceNameSuffi
 
 	record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
-			Name:    fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix),
-			Comment: "go-fastly wasm client test",
-			Type:    ServiceTypeWasm,
+			Name:    String(fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix)),
+			Comment: String("go-fastly wasm client test"),
+			Type:    String(ServiceTypeWasm),
 		})
 	})
 	if err != nil {
