@@ -2,25 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-cache-setting&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=51&name=new-test-cache-setting
+    body: name=new-test-cache-setting
     form:
-      Name:
-      - test-cache-setting
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "51"
       name:
       - new-test-cache-setting
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/cache_settings/test-cache-setting
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/93/cache_settings/test-cache-setting
     method: PUT
   response:
-    body: '{"ttl":"1234","created_at":"2021-11-03T15:46:56Z","stale_ttl":"1500","cache_condition":"","action":"cache","updated_at":"2021-11-03T15:46:56Z","deleted_at":null,"name":"new-test-cache-setting","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"51"}'
+    body: '{"deleted_at":null,"ttl":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2022-11-07T14:12:23Z","name":"new-test-cache-setting","action":"cache","stale_ttl":"1500","version":"93","cache_condition":"","created_at":"2022-11-07T14:12:23Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 15:46:58 GMT
+      - Mon, 07 Nov 2022 14:12:24 GMT
       Fastly-Ratelimit-Remaining:
-      - "4936"
+      - "9991"
       Fastly-Ratelimit-Reset:
-      - "1635955200"
+      - "1667833200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4123-MAN
       X-Timer:
-      - S1635954418.091074,VS0,VE212
+      - S1667830344.937111,VS0,VE214
     status: 200 OK
     code: 200
     duration: ""

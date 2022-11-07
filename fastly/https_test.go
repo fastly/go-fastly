@@ -40,23 +40,23 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		h, err = c.CreateHTTPS(&CreateHTTPSInput{
 			ServiceID:         testServiceID,
 			ServiceVersion:    tv.Number,
-			Name:              "test-https",
-			Format:            "format",
-			URL:               "https://example.com/",
-			RequestMaxEntries: 1,
-			RequestMaxBytes:   1000,
-			ContentType:       "application/json",
-			HeaderName:        "X-Example-Header",
-			HeaderValue:       "ExampleValue",
-			Method:            "PUT",
-			JSONFormat:        "2",
-			Placement:         "waf_debug",
-			TLSCACert:         caCert,
-			TLSClientCert:     clientCert,
-			TLSClientKey:      clientKey,
-			TLSHostname:       "example.com",
-			MessageType:       "blank",
-			FormatVersion:     2,
+			Name:              String("test-https"),
+			Format:            String("format"),
+			URL:               String("https://example.com/"),
+			RequestMaxEntries: Int(1),
+			RequestMaxBytes:   Int(1000),
+			ContentType:       String("application/json"),
+			HeaderName:        String("X-Example-Header"),
+			HeaderValue:       String("ExampleValue"),
+			Method:            String("PUT"),
+			JSONFormat:        String("2"),
+			Placement:         String("waf_debug"),
+			TLSCACert:         String(caCert),
+			TLSClientCert:     String(clientCert),
+			TLSClientKey:      String(clientKey),
+			TLSHostname:       String("example.com"),
+			MessageType:       String("blank"),
+			FormatVersion:     Int(2),
 		})
 	})
 	if err != nil {
@@ -276,81 +276,84 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 
 func TestClient_GetHTTPS_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHTTPS(&GetHTTPSInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetHTTPS(&GetHTTPSInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateHTTPS_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteHTTPS_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

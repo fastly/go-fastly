@@ -15,12 +15,12 @@ type Cloudfiles struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	FormatVersion     int        `mapstructure:"format_version"`
+	GzipLevel         int        `mapstructure:"gzip_level"`
 	MessageType       string     `mapstructure:"message_type"`
 	Name              string     `mapstructure:"name"`
 	Path              string     `mapstructure:"path"`
-	Period            uint       `mapstructure:"period"`
+	Period            int        `mapstructure:"period"`
 	Placement         string     `mapstructure:"placement"`
 	PublicKey         string     `mapstructure:"public_key"`
 	Region            string     `mapstructure:"region"`
@@ -63,7 +63,6 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -86,41 +85,41 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 // CreateCloudfilesInput is used as input to the CreateCloudfiles function.
 type CreateCloudfilesInput struct {
 	// AccessKey is your Cloud Files account access key.
-	AccessKey string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"`
 	// BucketName is the name of your Cloud Files container.
-	BucketName string `url:"bucket_name,omitempty"`
+	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
-	CompressionCodec string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType string `url:"message_type,omitempty"`
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Path is the path to upload logs to.
-	Path string `url:"path,omitempty"`
+	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey string `url:"public_key,omitempty"`
+	PublicKey *string `url:"public_key,omitempty"`
 	// Region is the region to stream logs to.
-	Region string `url:"region,omitempty"`
+	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// User is the username for your Cloud Files account.
-	User string `url:"user,omitempty"`
+	User *string `url:"user,omitempty"`
 }
 
 // CreateCloudfiles creates a new resource.
@@ -128,7 +127,6 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -149,7 +147,7 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 
 // GetCloudfilesInput is used as input to the GetCloudfiles function.
 type GetCloudfilesInput struct {
-	// Name is the name of the Cloudfiles to fetch.
+	// Name is the name of the Cloudfiles to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -159,16 +157,14 @@ type GetCloudfilesInput struct {
 
 // GetCloudfiles retrieves the specified resource.
 func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -196,19 +192,19 @@ type UpdateCloudfilesInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Name is the name of the Cloudfiles to update.
-	Name string
+	// Name is the name of the Cloudfiles to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Path is the path to upload logs to.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
@@ -218,9 +214,9 @@ type UpdateCloudfilesInput struct {
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// User is the username for your Cloud Files account.
@@ -229,16 +225,14 @@ type UpdateCloudfilesInput struct {
 
 // UpdateCloudfiles updates the specified resource.
 func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -267,16 +261,14 @@ type DeleteCloudfilesInput struct {
 
 // DeleteCloudfiles deletes the specified resource.
 func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/cloudfiles/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

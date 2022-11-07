@@ -2,26 +2,20 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-gzip&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=67&name=new-test-gzip
+    body: name=new-test-gzip
     form:
-      Name:
-      - test-gzip
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "67"
       name:
       - new-test-gzip
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/gzip/test-gzip
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/51/gzip/test-gzip
     method: PUT
   response:
-    body: '{"extensions":"html css","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-11-03T16:50:29Z","version":"67","content_types":"text/html
-      text/css","deleted_at":null,"updated_at":"2021-11-03T16:50:29Z","name":"new-test-gzip","cache_condition":""}'
+    body: '{"name":"new-test-gzip","content_types":"text/html text/css","version":"51","extensions":"html
+      css","updated_at":"2022-11-04T14:53:12Z","created_at":"2022-11-04T14:53:12Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","cache_condition":"","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -30,11 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:50:30 GMT
+      - Fri, 04 Nov 2022 14:53:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "4868"
+      - "9959"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667574000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -48,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4134-MAN
       X-Timer:
-      - S1635958230.461144,VS0,VE181
+      - S1667573593.415365,VS0,VE201
     status: 200 OK
     code: 200
     duration: ""

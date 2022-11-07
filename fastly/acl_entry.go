@@ -44,7 +44,7 @@ func (s entriesByID) Less(i, j int) bool {
 
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
 type ListACLEntriesInput struct {
-	// ACLID is an alphanumeric string identifying a ACL.
+	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
 	// Direction is the direction in which to sort results.
 	Direction string
@@ -52,7 +52,7 @@ type ListACLEntriesInput struct {
 	Page int
 	// PerPage is the number of records per page.
 	PerPage int
-	// ServiceID is an alphanumeric string identifying the service.
+	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 	// Sort is the field on which to sort.
 	Sort string
@@ -79,11 +79,11 @@ func (l *ListACLEntriesInput) formatFilters() map[string]string {
 
 // ListACLEntries retrieves all resources.
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
@@ -225,26 +225,24 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListACLEntrie
 
 // GetACLEntryInput is the input parameter to GetACLEntry function.
 type GetACLEntryInput struct {
-	// ACLID is an alphanumeric string identifying an ACL Entry.
+	// ACLID is an alphanumeric string identifying an ACL Entry (required).
 	ACLID string
-	// ID is an alphanumeric string identifying an ACL Entry.
+	// ID is an alphanumeric string identifying an ACL Entry (required).
 	ID string
-	// ServiceID is an alphanumeric string identifying the service.
+	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
 
 // GetACLEntry retrieves the specified resource.
 func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
-
 	if i.ID == "" {
 		return nil, ErrMissingID
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
@@ -265,32 +263,27 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 
 // CreateACLEntryInput is the input parameter to the CreateACLEntry function.
 type CreateACLEntryInput struct {
-	// ACLID is an alphanumeric string identifying a ACL.
-	ACLID string
+	// ACLID is an alphanumeric string identifying a ACL (required).
+	ACLID string `url:"-"`
 	// Comment is a freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// IP is an IP address.
-	IP string `url:"ip"`
+	IP *string `url:"ip,omitempty"`
 	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
-	Negated Compatibool `url:"negated,omitempty"`
-	// ServiceID is an alphanumeric string identifying the service.
-	ServiceID string
+	Negated *Compatibool `url:"negated,omitempty"`
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string `url:"-"`
 	// Subnet is a number of bits for the subnet mask applied to the IP address.
-	Subnet int `url:"subnet,omitempty"`
+	Subnet *int `url:"subnet,omitempty"`
 }
 
 // CreateACLEntry creates a new resource.
 func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
-
-	if i.IP == "" {
-		return nil, ErrMissingIP
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.ServiceID, i.ACLID)
@@ -311,26 +304,24 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 
 // DeleteACLEntryInput the input parameter to DeleteACLEntry function.
 type DeleteACLEntryInput struct {
-	// ACLID is an alphanumeric string identifying a ACL.
+	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
-	// ID is an alphanumeric string identifying an ACL Entry.
+	// ID is an alphanumeric string identifying an ACL Entry (required).
 	ID string
-	// ServiceID is an alphanumeric string identifying the service.
+	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
 
 // DeleteACLEntry deletes the specified resource.
 func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
-	}
-
 	if i.ACLID == "" {
 		return ErrMissingACLID
 	}
-
 	if i.ID == "" {
 		return ErrMissingID
+	}
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
@@ -355,34 +346,32 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 
 // UpdateACLEntryInput is the input parameter to UpdateACLEntry function.
 type UpdateACLEntryInput struct {
-	// ACLID is an alphanumeric string identifying a ACL.
-	ACLID string
+	// ACLID is an alphanumeric string identifying a ACL (required).
+	ACLID string `url:"-"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// ID is an alphanumeric string identifying an ACL Entry.
-	ID string
+	// ID is an alphanumeric string identifying an ACL Entry (required).
+	ID string `url:"-"`
 	// IP is an IP address.
 	IP *string `url:"ip,omitempty"`
 	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
 	Negated *Compatibool `url:"negated,omitempty"`
-	// ServiceID is an alphanumeric string identifying the service.
-	ServiceID string
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string `url:"-"`
 	// Subnet is a number of bits for the subnet mask applied to the IP address.
 	Subnet *int `url:"subnet,omitempty"`
 }
 
 // UpdateACLEntry updates the specified resource.
 func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
-
 	if i.ID == "" {
 		return nil, ErrMissingID
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
@@ -404,11 +393,11 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 // BatchModifyACLEntriesInput is the input parameter to the
 // BatchModifyACLEntries function.
 type BatchModifyACLEntriesInput struct {
-	// ACLID is an alphanumeric string identifying a ACL.
+	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string `json:"-"`
 	// Entries is a list of ACL entries.
 	Entries []*BatchACLEntry `json:"entries"`
-	// ServiceID is an alphanumeric string identifying the service.
+	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string `json:"-"`
 }
 
@@ -430,14 +419,12 @@ type BatchACLEntry struct {
 
 // BatchModifyACLEntries updates the specified resources.
 func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
-	}
-
 	if i.ACLID == "" {
 		return ErrMissingACLID
 	}
-
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
+	}
 	if len(i.Entries) > BatchModifyMaximumOperations {
 		return ErrMaxExceededEntries
 	}

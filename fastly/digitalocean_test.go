@@ -19,20 +19,20 @@ func TestClient_DigitalOceans(t *testing.T) {
 		digitaloceanCreateResp1, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-digitalocean",
-			BucketName:       "bucket-name",
-			Domain:           "fra1.digitaloceanspaces.com",
-			AccessKey:        "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:        "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:             "/path",
-			Period:           12,
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			Name:             String("test-digitalocean"),
+			BucketName:       String("bucket-name"),
+			Domain:           String("fra1.digitaloceanspaces.com"),
+			AccessKey:        String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:        String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:             String("/path"),
+			Period:           Int(12),
+			Format:           String("format"),
+			FormatVersion:    Int(2),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
+			CompressionCodec: String("snappy"),
 		})
 	})
 	if err != nil {
@@ -43,20 +43,20 @@ func TestClient_DigitalOceans(t *testing.T) {
 		digitaloceanCreateResp2, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
-			Name:            "test-digitalocean-2",
-			BucketName:      "bucket-name",
-			Domain:          "fra1.digitaloceanspaces.com",
-			AccessKey:       "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:       "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:            "/path",
-			Period:          12,
-			GzipLevel:       8,
-			Format:          "format",
-			FormatVersion:   2,
-			TimestampFormat: "%Y",
-			MessageType:     "classic",
-			Placement:       "waf_debug",
-			PublicKey:       pgpPublicKey(),
+			Name:            String("test-digitalocean-2"),
+			BucketName:      String("bucket-name"),
+			Domain:          String("fra1.digitaloceanspaces.com"),
+			AccessKey:       String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:       String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:            String("/path"),
+			Period:          Int(12),
+			GzipLevel:       Int(8),
+			Format:          String("format"),
+			FormatVersion:   Int(2),
+			TimestampFormat: String("%Y"),
+			MessageType:     String("classic"),
+			Placement:       String("waf_debug"),
+			PublicKey:       String(pgpPublicKey()),
 		})
 	})
 	if err != nil {
@@ -67,20 +67,20 @@ func TestClient_DigitalOceans(t *testing.T) {
 		digitaloceanCreateResp3, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-digitalocean-3",
-			BucketName:       "bucket-name",
-			Domain:           "fra1.digitaloceanspaces.com",
-			AccessKey:        "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:        "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:             "/path",
-			Period:           12,
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			Name:             String("test-digitalocean-3"),
+			BucketName:       String("bucket-name"),
+			Domain:           String("fra1.digitaloceanspaces.com"),
+			AccessKey:        String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:        String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:             String("/path"),
+			Period:           Int(12),
+			Format:           String("format"),
+			FormatVersion:    Int(2),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
+			CompressionCodec: String("snappy"),
 		})
 	})
 	if err != nil {
@@ -93,21 +93,21 @@ func TestClient_DigitalOceans(t *testing.T) {
 		_, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			Name:             "test-digitalocean-4",
-			BucketName:       "bucket-name",
-			Domain:           "fra1.digitaloceanspaces.com",
-			AccessKey:        "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:        "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:             "/path",
-			Period:           12,
-			GzipLevel:        8,
-			Format:           "format",
-			FormatVersion:    2,
-			TimestampFormat:  "%Y",
-			MessageType:      "classic",
-			Placement:        "waf_debug",
-			PublicKey:        pgpPublicKey(),
-			CompressionCodec: "snappy",
+			Name:             String("test-digitalocean-4"),
+			BucketName:       String("bucket-name"),
+			Domain:           String("fra1.digitaloceanspaces.com"),
+			AccessKey:        String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:        String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:             String("/path"),
+			Period:           Int(12),
+			GzipLevel:        Int(8),
+			Format:           String("format"),
+			FormatVersion:    Int(2),
+			TimestampFormat:  String("%Y"),
+			MessageType:      String("classic"),
+			Placement:        String("waf_debug"),
+			PublicKey:        String(pgpPublicKey()),
+			CompressionCodec: String("snappy"),
 		})
 	})
 	if err == nil {
@@ -303,7 +303,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-digitalocean-3",
-			GzipLevel:      Uint8(9),
+			GzipLevel:      Int(9),
 		})
 	})
 	if err != nil {
@@ -388,81 +388,84 @@ func TestClient_CreateDigitalOcean_validation(t *testing.T) {
 
 func TestClient_GetDigitalOcean_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetDigitalOcean(&GetDigitalOceanInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetDigitalOcean(&GetDigitalOceanInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDigitalOcean(&GetDigitalOceanInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDigitalOcean(&GetDigitalOceanInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=80&address=integ-test.go-fastly.com&format=format&format_version=2&name=test-papertrail&placement=waf_debug&port=1234
+    body: address=integ-test.go-fastly.com&format=format&format_version=2&name=test-papertrail&placement=waf_debug&port=1234
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "80"
       address:
       - integ-test.go-fastly.com
       format:
@@ -24,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/logging/papertrail
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/46/logging/papertrail
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","format":"format","format_version":"2","name":"test-papertrail","placement":"waf_debug","port":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"80","public_key":null,"response_condition":"","created_at":"2021-11-03T17:05:33Z","updated_at":"2021-11-03T17:05:33Z","deleted_at":null}'
+    body: '{"address":"integ-test.go-fastly.com","format":"format","format_version":"2","name":"test-papertrail","placement":"waf_debug","port":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"46","created_at":"2022-11-04T14:20:05Z","public_key":null,"deleted_at":null,"updated_at":"2022-11-04T14:20:05Z","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -37,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:05:33 GMT
+      - Fri, 04 Nov 2022 14:20:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "4970"
+      - "9998"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667574000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4145-MAN
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4150-MAN
       X-Timer:
-      - S1635959133.358444,VS0,VE523
+      - S1667571605.423146,VS0,VE334
     status: 200 OK
     code: 200
     duration: ""

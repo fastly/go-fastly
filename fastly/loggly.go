@@ -12,7 +12,7 @@ type Loggly struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
 	ResponseCondition string     `mapstructure:"response_condition"`
@@ -53,7 +53,6 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -76,21 +75,21 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 // CreateLogglyInput is used as input to the CreateLoggly function.
 type CreateLogglyInput struct {
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Token is the token to use for authentication.
-	Token string `url:"token,omitempty"`
+	Token *string `url:"token,omitempty"`
 }
 
 // CreateLoggly creates a new resource.
@@ -98,7 +97,6 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -119,7 +117,7 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 
 // GetLogglyInput is used as input to the GetLoggly function.
 type GetLogglyInput struct {
-	// Name is the name of the loggly to fetch.
+	// Name is the name of the loggly to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -129,16 +127,14 @@ type GetLogglyInput struct {
 
 // GetLoggly retrieves the specified resource.
 func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -160,9 +156,9 @@ type UpdateLogglyInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
-	// Name is the name of the loggly to update.
-	Name string
+	FormatVersion *int `url:"format_version,omitempty"`
+	// Name is the name of the loggly to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -170,25 +166,23 @@ type UpdateLogglyInput struct {
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Token is the token to use for authentication.
 	Token *string `url:"token,omitempty"`
 }
 
 // UpdateLoggly updates the specified resource.
 func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -217,16 +211,14 @@ type DeleteLogglyInput struct {
 
 // DeleteLoggly deletes the specified resource.
 func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/loggly/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

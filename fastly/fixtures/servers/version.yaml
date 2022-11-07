@@ -10,11 +10,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":89}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":71}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:36 GMT
+      - Fri, 04 Nov 2022 17:20:29 GMT
       Fastly-Ratelimit-Remaining:
-      - "4903"
+      - "9980"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959676.628245,VS0,VE411
+      - S1667582429.119768,VS0,VE362
     status: 200 OK
     code: 200
     duration: ""

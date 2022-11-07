@@ -13,13 +13,13 @@ type Syslog struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	Hostname          string     `mapstructure:"hostname"`
 	IPV4              string     `mapstructure:"ipv4"`
 	MessageType       string     `mapstructure:"message_type"`
 	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
-	Port              uint       `mapstructure:"port"`
+	Port              int        `mapstructure:"port"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	ServiceID         string     `mapstructure:"service_id"`
 	ServiceVersion    int        `mapstructure:"version"`
@@ -63,7 +63,6 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -86,41 +85,41 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 // CreateSyslogInput is used as input to the CreateSyslog function.
 type CreateSyslogInput struct {
 	// Address is a hostname or IPv4 address.
-	Address string `url:"address,omitempty"`
+	Address *string `url:"address,omitempty"`
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Hostname is the hostname used for the syslog endpoint.
-	Hostname string `url:"hostname,omitempty"`
+	Hostname *string `url:"hostname,omitempty"`
 	// IPV4 is the IPv4 address used for the syslog endpoint.
-	IPV4 string `url:"ipv4,omitempty"`
+	IPV4 *string `url:"ipv4,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType string `url:"message_type,omitempty"`
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
-	Port uint `url:"port,omitempty"`
+	Port *int `url:"port,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert string `url:"tls_ca_cert,omitempty"`
+	TLSCACert *string `url:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert string `url:"tls_client_cert,omitempty"`
+	TLSClientCert *string `url:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey string `url:"tls_client_key,omitempty"`
+	TLSClientKey *string `url:"tls_client_key,omitempty"`
 	// TLSHostname is the hostname to verify the server's certificate. This should be one of the Subject Alternative Name (SAN) fields for the certificate. Common Names (CN) are not supported.
-	TLSHostname string `url:"tls_hostname,omitempty"`
+	TLSHostname *string `url:"tls_hostname,omitempty"`
 	// Token is whether to prepend each message with a specific token.
-	Token string `url:"token,omitempty"`
+	Token *string `url:"token,omitempty"`
 	// UseTLS is whether to use TLS (0: do not use, 1: use).
-	UseTLS Compatibool `url:"use_tls,omitempty"`
+	UseTLS *Compatibool `url:"use_tls,omitempty"`
 }
 
 // CreateSyslog creates a new resource.
@@ -128,7 +127,6 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -149,7 +147,7 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 
 // GetSyslogInput is used as input to the GetSyslog function.
 type GetSyslogInput struct {
-	// Name is the name of the syslog to fetch.
+	// Name is the name of the syslog to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -159,16 +157,14 @@ type GetSyslogInput struct {
 
 // GetSyslog retrieves the specified resource.
 func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -192,27 +188,27 @@ type UpdateSyslogInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Hostname is the hostname used for the syslog endpoint.
 	Hostname *string `url:"hostname,omitempty"`
 	// IPV4 is the IPv4 address used for the syslog endpoint.
 	IPV4 *string `url:"ipv4,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Name is the name of the syslog to update.
-	Name string
+	// Name is the name of the syslog to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
-	Port *uint `url:"port,omitempty"`
+	Port *int `url:"port,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
 	TLSCACert *string `url:"tls_ca_cert,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
@@ -229,16 +225,14 @@ type UpdateSyslogInput struct {
 
 // UpdateSyslog updates the specified resource.
 func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -267,16 +261,14 @@ type DeleteSyslogInput struct {
 
 // DeleteSyslog deletes the specified resource.
 func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/syslog/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

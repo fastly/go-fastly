@@ -12,12 +12,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/user/3H4OEL3kxIG6Xvz7SDLhXo
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/user/1Iyp7cXku3sEDtOBxnhLaL
     method: PUT
   response:
-    body: '{"id":"3H4OEL3kxIG6Xvz7SDLhXo","customer_id":"51MumwLiSJyFTWhtbByYgR","name":"updated
-      user","role":"superuser","created_at":"2021-11-03T17:23:48Z","updated_at":"2021-11-03T17:23:49Z","require_new_password":null,"login":"go-fastly-test+user1@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null}'
+    body: '{"id":"1Iyp7cXku3sEDtOBxnhLaL","customer_id":"51MumwLiSJyFTWhtbByYgR","name":"updated
+      user","role":"superuser","created_at":"2022-11-04T18:02:15Z","updated_at":"2022-11-04T18:02:17Z","require_new_password":null,"login":"go-fastly-test+user+20221104@example.com","deleted_at":null,"locked":null,"two_factor_auth_enabled":null,"limit_services":false,"last_active_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -26,11 +26,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:23:49 GMT
+      - Fri, 04 Nov 2022 18:02:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "4829"
+      - "9997"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667588400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -44,9 +44,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4133-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4138-MAN
       X-Timer:
-      - S1635960229.099711,VS0,VE457
+      - S1667584937.002719,VS0,VE415
     status: 200 OK
     code: 200
     duration: ""

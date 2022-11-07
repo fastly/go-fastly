@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/server/1YEDh57waxruEoTEsk4bKx
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server/UOJwfuyz8YokOWK4u1GJ54
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Server ''{ deleted =\u003e
-      0000-00-00 00:00:00, id =\u003e 1YEDh57waxruEoTEsk4bKx }''"}'
+      0000-00-00 00:00:00, id =\u003e UOJwfuyz8YokOWK4u1GJ54 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:38 GMT
+      - Fri, 04 Nov 2022 17:20:31 GMT
       Fastly-Ratelimit-Remaining:
-      - "4896"
+      - "9973"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959678.046781,VS0,VE168
+      - S1667582432.827386,VS0,VE150
     status: 404 Not Found
     code: 404
     duration: ""
@@ -49,8 +49,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/server/5kmav70NchjgR8M9tjxtOz
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server/AKS7g8tMd4ADhulOLnFhf3
     method: DELETE
   response:
     body: '{"msg":"Bad request","detail":"Cannot delete only server in a pool"}'
@@ -62,11 +62,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:38 GMT
+      - Fri, 04 Nov 2022 17:20:32 GMT
       Fastly-Ratelimit-Remaining:
-      - "4895"
+      - "9972"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -80,9 +80,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959678.238107,VS0,VE180
+      - S1667582432.358167,VS0,VE165
     status: 400 Bad Request
     code: 400
     duration: ""

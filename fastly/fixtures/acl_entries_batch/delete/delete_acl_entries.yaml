@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"entries":[{"op":"delete","id":"6RYoKeriQf7iaCl1jdrM31"}]}'
+    body: '{"entries":[{"id":"Arz8gbdy5hTwjadSxb72K6","op":"delete"}]}'
     form: {}
     headers:
       Accept:
@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/0Z7jVDUwGwu7F2OANQI4zM/acl/2unSFVs0YvJ5OfIxOFkT1h/entries
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/SRgWcFvKC9NTsezwei8lN5/acl/1tOJroBpX2wMC5bs17q4P7/entries
     method: PATCH
   response:
     body: '{"status":"ok"}'
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 14:44:24 GMT
+      - Mon, 07 Nov 2022 13:21:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "4955"
+      - "9981"
       Fastly-Ratelimit-Reset:
-      - "1635951600"
+      - "1667829600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4144-MAN
       X-Timer:
-      - S1635950664.110435,VS0,VE166
+      - S1667827277.693156,VS0,VE151
     status: 200 OK
     code: 200
     duration: ""

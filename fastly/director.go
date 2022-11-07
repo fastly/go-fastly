@@ -22,18 +22,24 @@ const (
 )
 
 // DirectorType is a type of director.
-type DirectorType uint8
+type DirectorType int
+
+// DirectorTypePtr returns pointer to DirectorType.
+func DirectorTypePtr(t DirectorType) *DirectorType {
+	dt := DirectorType(t)
+	return &dt
+}
 
 // Director represents a director response from the Fastly API.
 type Director struct {
 	Backends       []string     `mapstructure:"backends"`
-	Capacity       uint         `mapstructure:"capacity"`
+	Capacity       int          `mapstructure:"capacity"`
 	Comment        string       `mapstructure:"comment"`
 	CreatedAt      *time.Time   `mapstructure:"created_at"`
 	DeletedAt      *time.Time   `mapstructure:"deleted_at"`
 	Name           string       `mapstructure:"name"`
-	Quorum         uint         `mapstructure:"quorum"`
-	Retries        uint         `mapstructure:"retries"`
+	Quorum         int          `mapstructure:"quorum"`
+	Retries        int          `mapstructure:"retries"`
 	ServiceID      string       `mapstructure:"service_id"`
 	ServiceVersion int          `mapstructure:"version"`
 	Shield         string       `mapstructure:"shield"`
@@ -72,7 +78,6 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -95,21 +100,21 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 // CreateDirectorInput is used as input to the CreateDirector function.
 type CreateDirectorInput struct {
 	// Comment is a freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// Name is the name for the Director.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Quorum is the percentage of capacity that needs to be up for a director to be considered up. 0 to 100.
-	Quorum *uint `url:"quorum,omitempty"`
+	Quorum *int `url:"quorum,omitempty"`
 	// Retries is how many backends to search if it fails.
-	Retries *uint `url:"retries,omitempty"`
+	Retries *int `url:"retries,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Shield is selected POP to serve as a shield for the backends.
-	Shield string `url:"shield,omitempty"`
+	Shield *string `url:"shield,omitempty"`
 	// Type is what type of load balance group to use (random, hash, client).
-	Type DirectorType `url:"type,omitempty"`
+	Type *DirectorType `url:"type,omitempty"`
 }
 
 // CreateDirector creates a new resource.
@@ -117,7 +122,6 @@ func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -138,7 +142,7 @@ func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 
 // GetDirectorInput is used as input to the GetDirector function.
 type GetDirectorInput struct {
-	// Name is the name of the director to fetch.
+	// Name is the name of the director to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -148,16 +152,14 @@ type GetDirectorInput struct {
 
 // GetDirector retrieves the specified resource.
 func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -178,18 +180,18 @@ func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 type UpdateDirectorInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Name is the name of the director to update.
-	Name string
+	// Name is the name of the director to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Quorum is the percentage of capacity that needs to be up for a director to be considered up. 0 to 100.
-	Quorum *uint `url:"quorum,omitempty"`
+	Quorum *int `url:"quorum,omitempty"`
 	// Retries is how many backends to search if it fails.
-	Retries *uint `url:"retries,omitempty"`
+	Retries *int `url:"retries,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Shield is selected POP to serve as a shield for the backends.
 	Shield *string `url:"shield,omitempty"`
 	// Type is what type of load balance group to use (random, hash, client).
@@ -198,16 +200,14 @@ type UpdateDirectorInput struct {
 
 // UpdateDirector updates the specified resource.
 func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -236,16 +236,14 @@ type DeleteDirectorInput struct {
 
 // DeleteDirector deletes the specified resource.
 func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

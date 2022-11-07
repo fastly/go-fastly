@@ -40,21 +40,21 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		es, err = c.CreateElasticsearch(&CreateElasticsearchInput{
 			ServiceID:         testServiceID,
 			ServiceVersion:    tv.Number,
-			Name:              "test-elasticsearch",
-			Format:            "format",
-			Index:             "#{%F}",
-			URL:               "https://example.com/",
-			Pipeline:          "my_pipeline_id",
-			User:              "user",
-			Password:          "password",
-			RequestMaxEntries: 1,
-			RequestMaxBytes:   1000,
-			Placement:         "waf_debug",
-			TLSCACert:         caCert,
-			TLSClientCert:     clientCert,
-			TLSClientKey:      clientKey,
-			TLSHostname:       "example.com",
-			FormatVersion:     2,
+			Name:              String("test-elasticsearch"),
+			Format:            String("format"),
+			Index:             String("#{%F}"),
+			URL:               String("https://example.com/"),
+			Pipeline:          String("my_pipeline_id"),
+			User:              String("user"),
+			Password:          String("password"),
+			RequestMaxEntries: Int(1),
+			RequestMaxBytes:   Int(1000),
+			Placement:         String("waf_debug"),
+			TLSCACert:         String(caCert),
+			TLSClientCert:     String(clientCert),
+			TLSClientKey:      String(clientKey),
+			TLSHostname:       String("example.com"),
+			FormatVersion:     Int(2),
 		})
 	})
 	if err != nil {
@@ -270,81 +270,84 @@ func TestClient_CreateElasticsearch_validation(t *testing.T) {
 
 func TestClient_GetElasticsearch_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteElasticsearch_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

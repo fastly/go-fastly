@@ -9,24 +9,24 @@ import (
 
 // HealthCheck represents a health check response from the Fastly API.
 type HealthCheck struct {
-	CheckInterval    uint       `mapstructure:"check_interval"`
+	CheckInterval    int        `mapstructure:"check_interval"`
 	Comment          string     `mapstructure:"comment"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
-	ExpectedResponse uint       `mapstructure:"expected_response"`
+	ExpectedResponse int        `mapstructure:"expected_response"`
 	HTTPVersion      string     `mapstructure:"http_version"`
 	Headers          []string   `mapstructure:"headers"`
 	Host             string     `mapstructure:"host"`
-	Initial          uint       `mapstructure:"initial"`
+	Initial          int        `mapstructure:"initial"`
 	Method           string     `mapstructure:"method"`
 	Name             string     `mapstructure:"name"`
 	Path             string     `mapstructure:"path"`
 	ServiceID        string     `mapstructure:"service_id"`
 	ServiceVersion   int        `mapstructure:"version"`
-	Threshold        uint       `mapstructure:"threshold"`
-	Timeout          uint       `mapstructure:"timeout"`
+	Threshold        int        `mapstructure:"threshold"`
+	Timeout          int        `mapstructure:"timeout"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
-	Window           uint       `mapstructure:"window"`
+	Window           int        `mapstructure:"window"`
 }
 
 // healthChecksByName is a sortable list of health checks.
@@ -60,7 +60,6 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -82,35 +81,35 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 // CreateHealthCheckInput is used as input to the CreateHealthCheck function.
 type CreateHealthCheckInput struct {
 	// CheckInterval is how often to run the health check in milliseconds.
-	CheckInterval *uint `url:"check_interval,omitempty"`
+	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// ExpectedResponse is the status code expected from the host.
-	ExpectedResponse *uint `url:"expected_response,omitempty"`
+	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
-	HTTPVersion string `url:"http_version,omitempty"`
+	HTTPVersion *string `url:"http_version,omitempty"`
 	// Headers is an array of custom headers that will be added to the health check probes.
-	Headers []string `url:"headers,omitempty"`
+	Headers *[]string `url:"headers,omitempty"`
 	// Host is which host to check.
-	Host string `url:"host,omitempty"`
+	Host *string `url:"host,omitempty"`
 	// Initial is when loading a config, the initial number of probes to be seen as OK.
-	Initial *uint `url:"initial,omitempty"`
+	Initial *int `url:"initial,omitempty"`
 	// Method is which HTTP method to use.
-	Method string `url:"method,omitempty"`
+	Method *string `url:"method,omitempty"`
 	// Name is the name of the health check.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Path is the path to check.
-	Path string `url:"path,omitempty"`
+	Path *string `url:"path,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Threshold is how many health checks must succeed to be considered healthy.
-	Threshold *uint `url:"threshold,omitempty"`
+	Threshold *int `url:"threshold,omitempty"`
 	// Timeout is timeout in milliseconds.
-	Timeout *uint `url:"timeout,omitempty"`
+	Timeout *int `url:"timeout,omitempty"`
 	// Window is the number of most recent health check queries to keep for this health check.
-	Window *uint `url:"window,omitempty"`
+	Window *int `url:"window,omitempty"`
 }
 
 // CreateHealthCheck creates a new resource.
@@ -141,7 +140,7 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 
 // GetHealthCheckInput is used as input to the GetHealthCheck function.
 type GetHealthCheckInput struct {
-	// Name is the name of the health check to fetch.
+	// Name is the name of the health check to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -151,14 +150,14 @@ type GetHealthCheckInput struct {
 
 // GetHealthCheck retrieves the specified resource.
 func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -178,11 +177,11 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 // UpdateHealthCheckInput is used as input to the UpdateHealthCheck function.
 type UpdateHealthCheckInput struct {
 	// CheckInterval is how often to run the health check in milliseconds.
-	CheckInterval *uint `url:"check_interval,omitempty"`
+	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// ExpectedResponse is the status code expected from the host.
-	ExpectedResponse *uint `url:"expected_response,omitempty"`
+	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
 	HTTPVersion *string `url:"http_version,omitempty"`
 	// Headers is an array of custom headers that will be added to the health check probes.
@@ -190,37 +189,37 @@ type UpdateHealthCheckInput struct {
 	// Host is which host to check.
 	Host *string `url:"host,omitempty"`
 	// Initial is when loading a config, the initial number of probes to be seen as OK.
-	Initial *uint `url:"initial,omitempty"`
+	Initial *int `url:"initial,omitempty"`
 	// Method is which HTTP method to use.
 	Method *string `url:"method,omitempty"`
-	// Name is the name of the health check to update.
-	Name string
+	// Name is the name of the health check to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Path is the path to check.
 	Path *string `url:"path,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Threshold is how many health checks must succeed to be considered healthy.
-	Threshold *uint `url:"threshold,omitempty"`
+	Threshold *int `url:"threshold,omitempty"`
 	// Timeout is timeout in milliseconds.
-	Timeout *uint `url:"timeout,omitempty"`
+	Timeout *int `url:"timeout,omitempty"`
 	// Window is the number of most recent health check queries to keep for this health check.
-	Window *uint `url:"window,omitempty"`
+	Window *int `url:"window,omitempty"`
 }
 
 // UpdateHealthCheck updates the specified resource.
 func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	ro := new(RequestOptions)
@@ -252,16 +251,14 @@ type DeleteHealthCheckInput struct {
 
 // DeleteHealthCheck deletes the specified resource.
 func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/healthcheck/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

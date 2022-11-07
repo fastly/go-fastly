@@ -2,14 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-datadog&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=54&format_version=2&name=new-test-datadog&region=EU
+    body: format_version=2&name=new-test-datadog&region=EU
     form:
-      Name:
-      - test-datadog
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "54"
       format_version:
       - "2"
       name:
@@ -20,11 +14,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/logging/datadog/test-datadog
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/44/logging/datadog/test-datadog
     method: PUT
   response:
-    body: '{"response_condition":"","token":"abcd1234","created_at":"2021-11-03T16:12:00Z","name":"new-test-datadog","format":"format","placement":"waf_debug","updated_at":"2021-11-03T16:12:00Z","version":"54","region":"EU","deleted_at":null,"format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+    body: '{"response_condition":"","token":"abcd1234","updated_at":"2022-11-04T13:29:41Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","placement":"waf_debug","format_version":"2","format":"format","name":"new-test-datadog","created_at":"2022-11-04T13:29:41Z","version":"44","deleted_at":null,"region":"EU"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:12:02 GMT
+      - Fri, 04 Nov 2022 13:29:42 GMT
       Fastly-Ratelimit-Remaining:
-      - "4997"
+      - "9984"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667570400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4136-MAN
       X-Timer:
-      - S1635955922.691212,VS0,VE472
+      - S1667568582.980280,VS0,VE339
     status: 200 OK
     code: 200
     duration: ""

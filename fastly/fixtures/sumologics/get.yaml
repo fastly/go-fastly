@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/logging/sumologic/test-sumologic
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/56/logging/sumologic/test-sumologic
     method: GET
   response:
-    body: '{"response_condition":"","format_version":"1","created_at":"2021-11-03T17:19:13Z","message_type":"classic","url":"https://foo.sumologic.com","format":"format","placement":"waf_debug","deleted_at":null,"version":"95","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T17:19:13Z","name":"test-sumologic"}'
+    body: '{"format":"format","deleted_at":null,"message_type":"classic","created_at":"2022-11-04T15:16:57Z","url":"https://foo.sumologic.com","response_condition":"","format_version":"1","updated_at":"2022-11-04T15:16:57Z","version":"56","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test-sumologic","placement":"waf_debug"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:19:14 GMT
+      - Fri, 04 Nov 2022 15:16:57 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4146-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4130-MAN
       X-Timer:
-      - S1635959954.005534,VS0,VE165
+      - S1667575018.737855,VS0,VE135
     status: 200 OK
     code: 200
     duration: ""

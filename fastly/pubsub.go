@@ -13,7 +13,7 @@ type Pubsub struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
 	ProjectID         string     `mapstructure:"project_id"`
@@ -57,7 +57,6 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -80,29 +79,29 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 // CreatePubsubInput is used as input to the CreatePubsub function.
 type CreatePubsubInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
-	AccountName string `url:"account_name,omitempty"`
+	AccountName *string `url:"account_name,omitempty"`
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID. Required.
-	ProjectID string `url:"project_id,omitempty"`
+	ProjectID *string `url:"project_id,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
-	SecretKey string `url:"secret_key,omitempty"`
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Topic is the Google Cloud Pub/Sub topic to which logs will be published.
-	Topic string `url:"topic,omitempty"`
+	Topic *string `url:"topic,omitempty"`
 	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
-	User string `url:"user,omitempty"`
+	User *string `url:"user,omitempty"`
 }
 
 // CreatePubsub creates a new resource.
@@ -110,7 +109,6 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -131,7 +129,7 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 
 // GetPubsubInput is used as input to the GetPubsub function.
 type GetPubsubInput struct {
-	// Name is the name of the Pubsub to fetch.
+	// Name is the name of the Pubsub to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -141,16 +139,14 @@ type GetPubsubInput struct {
 
 // GetPubsub retrieves the specified resource.
 func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -174,9 +170,9 @@ type UpdatePubsubInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
-	// Name is the name of the Pubsub to update.
-	Name string
+	FormatVersion *int `url:"format_version,omitempty"`
+	// Name is the name of the Pubsub to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -188,9 +184,9 @@ type UpdatePubsubInput struct {
 	// SecretKey is your Google Cloud Platform account secret key. The private_key field in your service account authentication JSON. Not required if account_name is specified.
 	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Topic is the Google Cloud Pub/Sub topic to which logs will be published.
 	Topic *string `url:"topic,omitempty"`
 	// User is your Google Cloud Platform service account email address. The client_email field in your service account authentication JSON. Not required if account_name is specified.
@@ -199,16 +195,14 @@ type UpdatePubsubInput struct {
 
 // UpdatePubsub updates the specified resource.
 func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -237,16 +231,14 @@ type DeletePubsubInput struct {
 
 // DeletePubsub deletes the specified resource.
 func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/pubsub/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

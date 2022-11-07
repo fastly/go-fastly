@@ -18,6 +18,12 @@ const (
 // RequestSettingAction is a type of request setting action.
 type RequestSettingAction string
 
+// RequestSettingActionPtr returns a pointer to a RequestSettingAction.
+func RequestSettingActionPtr(v RequestSettingAction) *RequestSettingAction {
+	rsa := &v
+	return rsa
+}
+
 const (
 	// RequestSettingXFFClear clears any X-Forwarded-For headers.
 	RequestSettingXFFClear RequestSettingXFF = "clear"
@@ -39,6 +45,12 @@ const (
 // RequestSettingXFF is a type of X-Forwarded-For value to set.
 type RequestSettingXFF string
 
+// RequestSettingXFFPtr returns a pointer to a RequestSettingXFF.
+func RequestSettingXFFPtr(v RequestSettingXFF) *RequestSettingXFF {
+	rsx := &v
+	return rsx
+}
+
 // RequestSetting represents a request setting response from the Fastly API.
 type RequestSetting struct {
 	Action           RequestSettingAction `mapstructure:"action"`
@@ -50,7 +62,7 @@ type RequestSetting struct {
 	ForceSSL         bool                 `mapstructure:"force_ssl"`
 	GeoHeaders       bool                 `mapstructure:"geo_headers"`
 	HashKeys         string               `mapstructure:"hash_keys"`
-	MaxStaleAge      uint                 `mapstructure:"max_stale_age"`
+	MaxStaleAge      int                  `mapstructure:"max_stale_age"`
 	Name             string               `mapstructure:"name"`
 	RequestCondition string               `mapstructure:"request_condition"`
 	ServiceID        string               `mapstructure:"service_id"`
@@ -92,7 +104,6 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -116,33 +127,33 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 // function.
 type CreateRequestSettingInput struct {
 	// Action allows you to terminate request handling and immediately perform an action.
-	Action RequestSettingAction `url:"action,omitempty"`
+	Action *RequestSettingAction `url:"action,omitempty"`
 	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
-	BypassBusyWait Compatibool `url:"bypass_busy_wait,omitempty"`
+	BypassBusyWait *Compatibool `url:"bypass_busy_wait,omitempty"`
 	// DefaultHost sets the host header.
-	DefaultHost string `url:"default_host,omitempty"`
+	DefaultHost *string `url:"default_host,omitempty"`
 	// ForceMiss allows you to force a cache miss for the request. Replaces the item in the cache if the content is cacheable.
-	ForceMiss Compatibool `url:"force_miss,omitempty"`
+	ForceMiss *Compatibool `url:"force_miss,omitempty"`
 	// ForceSSL forces the request use SSL (redirects a non-SSL to SSL).
-	ForceSSL Compatibool `url:"force_ssl,omitempty"`
+	ForceSSL *Compatibool `url:"force_ssl,omitempty"`
 	// GeoHeaders injects Fastly-Geo-Country, Fastly-Geo-City, and Fastly-Geo-Region into the request headers.
-	GeoHeaders Compatibool `url:"geo_headers,omitempty"`
+	GeoHeaders *Compatibool `url:"geo_headers,omitempty"`
 	// HashKeys is a comma separated list of varnish request object fields that should be in the hash key.
-	HashKeys string `url:"hash_keys,omitempty"`
+	HashKeys *string `url:"hash_keys,omitempty"`
 	// MaxStaleAge is how old an object is allowed to be to serve stale-if-error or stale-while-revalidate.
-	MaxStaleAge *uint `url:"max_stale_age,omitempty"`
+	MaxStaleAge *int `url:"max_stale_age,omitempty"`
 	// Name is the name for the request settings.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
-	RequestCondition string `url:"request_condition,omitempty"`
+	RequestCondition *string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimerSupport injects the X-Timer info into the request for viewing origin fetch durations.
-	TimerSupport Compatibool `url:"timer_support,omitempty"`
+	TimerSupport *Compatibool `url:"timer_support,omitempty"`
 	// XForwardedFor determines header value (clear, leave, append, append_all, overwrite)
-	XForwardedFor RequestSettingXFF `url:"xff,omitempty"`
+	XForwardedFor *RequestSettingXFF `url:"xff,omitempty"`
 }
 
 // CreateRequestSetting creates a new resource.
@@ -150,7 +161,6 @@ func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSet
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -171,7 +181,7 @@ func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSet
 
 // GetRequestSettingInput is used as input to the GetRequestSetting function.
 type GetRequestSettingInput struct {
-	// Name is the name of the request settings to fetch.
+	// Name is the name of the request settings to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -181,16 +191,14 @@ type GetRequestSettingInput struct {
 
 // GetRequestSetting retrieves the specified resource.
 func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -225,17 +233,17 @@ type UpdateRequestSettingInput struct {
 	// HashKeys is a comma separated list of varnish request object fields that should be in the hash key.
 	HashKeys *string `url:"hash_keys,omitempty"`
 	// MaxStaleAge is how old an object is allowed to be to serve stale-if-error or stale-while-revalidate.
-	MaxStaleAge *uint `url:"max_stale_age,omitempty"`
-	// Name is the name of the request settings to update.
-	Name string
+	MaxStaleAge *int `url:"max_stale_age,omitempty"`
+	// Name is the name of the request settings to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimerSupport injects the X-Timer info into the request for viewing origin fetch durations.
 	TimerSupport *Compatibool `url:"timer_support,omitempty"`
 	// XForwardedFor determines header value (clear, leave, append, append_all, overwrite)
@@ -244,16 +252,14 @@ type UpdateRequestSettingInput struct {
 
 // UpdateRequestSetting updates the specified resource.
 func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSetting, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -282,16 +288,14 @@ type DeleteRequestSettingInput struct {
 
 // DeleteRequestSetting deletes the specified resource.
 func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/request_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

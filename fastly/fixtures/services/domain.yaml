@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/YVI5KaaM0YSe1CAmKAbic6/domain
+    url: https://api.fastly.com/service/FPkmJNp1fH8CnWbdi21Wf3/domain
     method: GET
   response:
     body: '[]'
@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 03 Nov 2022 14:07:54 GMT
+      - Fri, 04 Nov 2022 17:51:48 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4151-MAN
+      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4137-MAN
       X-Timer:
-      - S1667484474.297601,VS0,VE310
+      - S1667584308.476772,VS0,VE302
     status: 200 OK
     code: 200
     duration: ""

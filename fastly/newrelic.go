@@ -12,7 +12,7 @@ type NewRelic struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
 	Region            string     `mapstructure:"region"`
@@ -54,7 +54,6 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -77,23 +76,23 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 // CreateNewRelicInput is used as input to the CreateNewRelic function.
 type CreateNewRelicInput struct {
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// Region is the region to which to stream logs.
-	Region string `url:"region,omitempty"`
+	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Token is the Insert API key from the Account page of your New Relic account.
-	Token string `url:"token,omitempty"`
+	Token *string `url:"token,omitempty"`
 }
 
 // CreateNewRelic creates a new resource.
@@ -101,13 +100,8 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Token == "" {
-		return nil, ErrMissingToken
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic", i.ServiceID, i.ServiceVersion)
@@ -126,7 +120,7 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 
 // GetNewRelicInput is used as input to the GetNewRelic function.
 type GetNewRelicInput struct {
-	// Name is the name of the newrelic to fetch.
+	// Name is the name of the newrelic to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -136,16 +130,14 @@ type GetNewRelicInput struct {
 
 // GetNewRelic retrieves the specified resource.
 func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -167,9 +159,9 @@ type UpdateNewRelicInput struct {
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name of the newrelic to update.
-	Name string
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -179,29 +171,23 @@ type UpdateNewRelicInput struct {
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Token is the Insert API key from the Account page of your New Relic account.
 	Token *string `url:"token,omitempty"`
 }
 
 // UpdateNewRelic updates the specified resource.
 func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-
-	if i.Token != nil && *i.Token == "" {
-		return nil, ErrTokenEmpty
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -230,16 +216,14 @@ type DeleteNewRelicInput struct {
 
 // DeleteNewRelic deletes the specified resource.
 func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/newrelic/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

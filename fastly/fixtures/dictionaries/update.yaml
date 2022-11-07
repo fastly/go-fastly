@@ -2,25 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: Name=test_dictionary&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=55&name=new_test_dictionary
+    body: name=new_test_dictionary
     form:
-      Name:
-      - test_dictionary
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "55"
       name:
       - new_test_dictionary
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/55/dictionary/test_dictionary
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/dictionary/test_dictionary
     method: PUT
   response:
-    body: '{"write_only":false,"name":"new_test_dictionary","id":"5JztRMmZbQTwPn1adhclKA","updated_at":"2021-11-03T16:12:55Z","version":55,"deleted_at":null,"created_at":"2021-11-03T16:12:55Z","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+    body: '{"updated_at":"2022-11-07T14:45:33Z","deleted_at":null,"name":"new_test_dictionary","version":95,"id":"BPnIdK8OFZePTGgSuZN0x6","write_only":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-07T14:45:33Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:12:56 GMT
+      - Mon, 07 Nov 2022 14:45:34 GMT
       Fastly-Ratelimit-Remaining:
-      - "4993"
+      - "9979"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667833200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4137-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4130-MAN
       X-Timer:
-      - S1635955976.197826,VS0,VE447
+      - S1667832334.315538,VS0,VE360
     status: 200 OK
     code: 200
     duration: ""

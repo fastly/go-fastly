@@ -2,14 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-heroku&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=70&name=new-test-heroku&token=new-token
+    body: name=new-test-heroku&token=new-token
     form:
-      Name:
-      - test-heroku
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "70"
       name:
       - new-test-heroku
       token:
@@ -18,12 +12,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/70/logging/heroku/test-heroku
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/57/logging/heroku/test-heroku
     method: PUT
   response:
-    body: '{"version":"70","deleted_at":null,"placement":"waf_debug","format":"%h
-      %l %u %t \"%r\" %\u003es %b","updated_at":"2021-11-03T16:53:08Z","response_condition":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","name":"new-test-heroku","created_at":"2021-11-03T16:53:08Z","token":"new-token","url":"https://1.us.logplex.io/logs"}'
+    body: '{"response_condition":"","placement":"waf_debug","format_version":"2","token":"new-token","format":"%h
+      %l %u %t \"%r\" %\u003es %b","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2022-11-04T15:22:52Z","deleted_at":null,"version":"57","url":"https://1.us.logplex.io/logs","name":"new-test-heroku","created_at":"2022-11-04T15:22:52Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +26,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:53:12 GMT
+      - Fri, 04 Nov 2022 15:22:54 GMT
       Fastly-Ratelimit-Remaining:
-      - "4849"
+      - "9968"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667577600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,9 +44,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4137-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4132-MAN
       X-Timer:
-      - S1635958390.646578,VS0,VE3221
+      - S1667575374.932998,VS0,VE341
     status: 200 OK
     code: 200
     duration: ""

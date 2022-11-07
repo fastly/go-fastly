@@ -2,14 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-openstack&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=79&compression_codec=zstd&name=new-test-openstack&user=new-user
+    body: compression_codec=zstd&name=new-test-openstack&user=new-user
     form:
-      Name:
-      - test-openstack
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "79"
       compression_codec:
       - zstd
       name:
@@ -20,13 +14,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/79/logging/openstack/test-openstack
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/63/logging/openstack/test-openstack
     method: PUT
   response:
-    body: '{"user":"new-user","service_id":"7i6HN3TK9wS159v2gPAZ8A","access_key":"secret-key","path":"/path","response_condition":"","gzip_level":null,"compression_codec":"zstd","version":"79","deleted_at":null,"url":"https://logs.example.com/v1.0","name":"new-test-openstack","message_type":"classic","public_key":"-----BEGIN
+    body: '{"created_at":"2022-11-04T16:16:45Z","timestamp_format":"%Y","path":"/path","name":"new-test-openstack","deleted_at":null,"url":"https://logs.example.com/v1.0","version":"63","gzip_level":null,"message_type":"classic","public_key":"-----BEGIN
       PGP PUBLIC KEY BLOCK-----\n\nmQENBFyUD8sBCACyFnB39AuuTygseek+eA4fo0cgwva6/FSjnWq7riouQee8GgQ/\nibXTRyv4iVlwI12GswvMTIy7zNvs1R54i0qvsLr+IZ4GVGJqs6ZJnvQcqe3xPoR4\n8AnBfw90o32r/LuHf6QCJXi+AEu35koNlNAvLJ2B+KACaNB7N0EeWmqpV/1V2k9p\nlDYk+th7LcCuaFNGqKS/PrMnnMqR6VDLCjHhNx4KR79b0Twm/2qp6an3hyNRu8Gn\ndwxpf1/BUu3JWf+LqkN4Y3mbOmSUL3MaJNvyQguUzTfS0P0uGuBDHrJCVkMZCzDB\n89ag55jCPHyGeHBTd02gHMWzsg3WMBWvCsrzABEBAAG0JXRlcnJhZm9ybSAodGVz\ndCkgPHRlc3RAdGVycmFmb3JtLmNvbT6JAU4EEwEIADgWIQSHYyc6Kj9l6HzQsau6\nvFFc9jxV/wUCXJQPywIbAwULCQgHAgYVCgkICwIEFgIDAQIeAQIXgAAKCRC6vFFc\n9jxV/815CAClb32OxV7wG01yF97TzlyTl8TnvjMtoG29Mw4nSyg+mjM3b8N7iXm9\nOLX59fbDAWtBSldSZE22RXd3CvlFOG/EnKBXSjBtEqfyxYSnyOPkMPBYWGL/ApkX\nSvPYJ4LKdvipYToKFh3y9kk2gk1DcDBDyaaHvR+3rv1u3aoy7/s2EltAfDS3ZQIq\n7/cWTLJml/lleeB/Y6rPj8xqeCYhE5ahw9gsV/Mdqatl24V9Tks30iijx0Hhw+Gx\nkATUikMGr2GDVqoIRga5kXI7CzYff4rkc0Twn47fMHHHe/KY9M2yVnMHUXmAZwbG\nM1cMI/NH1DjevCKdGBLcRJlhuLPKF/anuQENBFyUD8sBCADIpd7r7GuPd6n/Ikxe\nu6h7umV6IIPoAm88xCYpTbSZiaK30Svh6Ywra9jfE2KlU9o6Y/art8ip0VJ3m07L\n4RSfSpnzqgSwdjSq5hNour2Fo/BzYhK7yaz2AzVSbe33R0+RYhb4b/6N+bKbjwGF\nftCsqVFMH+PyvYkLbvxyQrHlA9woAZaNThI1ztO5rGSnGUR8xt84eup28WIFKg0K\nUEGUcTzz+8QGAwAra+0ewPXo/AkO+8BvZjDidP417u6gpBHOJ9qYIcO9FxHeqFyu\nYrjlrxowEgXn5wO8xuNz6Vu1vhHGDHGDsRbZF8pv1d5O+0F1G7ttZ2GRRgVBZPwi\nkiyRABEBAAGJATYEGAEIACAWIQSHYyc6Kj9l6HzQsau6vFFc9jxV/wUCXJQPywIb\nDAAKCRC6vFFc9jxV/9YOCACe8qmOSnKQpQfW+PqYOqo3dt7JyweTs3FkD6NT8Zml\ndYy/vkstbTjPpX6aTvUZjkb46BVi7AOneVHpD5GBqvRsZ9iVgDYHaehmLCdKiG5L\n3Tp90NN+QY5WDbsGmsyk6+6ZMYejb4qYfweQeduOj27aavCJdLkCYMoRKfcFYI8c\nFaNmEfKKy/r1PO20NXEG6t9t05K/frHy6ZG8bCNYdpagfFVot47r9JaQqWlTNtIR\n5+zkkSq/eG9BEtRij3a6cTdQbktdBzx2KBeI0PYc1vlZR0LpuFKZqY9vlE6vTGLR\nwMfrTEOvx0NxUM3rpaCgEmuWbB1G1Hu371oyr4srrr+N\n=28dr\n-----END
-      PGP PUBLIC KEY BLOCK-----\n","format":"format","created_at":"2021-11-03T17:01:38Z","bucket_name":"bucket-name","placement":"waf_debug","updated_at":"2021-11-03T17:01:38Z","format_version":"2","period":"12","timestamp_format":"%Y"}'
+      PGP PUBLIC KEY BLOCK-----\n","response_condition":"","access_key":"secret-key","compression_codec":"zstd","format_version":"2","format":"format","placement":"waf_debug","bucket_name":"bucket-name","period":"12","user":"new-user","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2022-11-04T16:16:45Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:01:40 GMT
+      - Fri, 04 Nov 2022 16:16:47 GMT
       Fastly-Ratelimit-Remaining:
-      - "4984"
+      - "9973"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667581200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4130-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4122-MAN
       X-Timer:
-      - S1635958900.351937,VS0,VE524
+      - S1667578607.682319,VS0,VE363
     status: 200 OK
     code: 200
     duration: ""

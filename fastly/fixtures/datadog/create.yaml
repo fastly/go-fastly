@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=54&format=format&name=test-datadog&placement=waf_debug&region=US&token=abcd1234
+    body: format=format&name=test-datadog&placement=waf_debug&region=US&token=abcd1234
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "54"
       format:
       - format
       name:
@@ -22,11 +18,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/logging/datadog
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/44/logging/datadog
     method: POST
   response:
-    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"54","created_at":"2021-11-03T16:12:00Z","response_condition":"","deleted_at":null,"updated_at":"2021-11-03T16:12:00Z","format_version":"2"}'
+    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"44","format_version":"2","created_at":"2022-11-04T13:29:41Z","deleted_at":null,"response_condition":"","updated_at":"2022-11-04T13:29:41Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +31,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:12:00 GMT
+      - Fri, 04 Nov 2022 13:29:41 GMT
       Fastly-Ratelimit-Remaining:
-      - "4998"
+      - "9985"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667570400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4136-MAN
+      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4136-MAN
       X-Timer:
-      - S1635955920.131535,VS0,VE718
+      - S1667568581.906735,VS0,VE332
     status: 200 OK
     code: 200
     duration: ""

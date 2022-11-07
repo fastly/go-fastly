@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/96/logging/syslog/test-syslog
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/58/logging/syslog/test-syslog
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-syslog, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 96 }''"}'
+      version =\u003e 58 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:19:43 GMT
+      - Fri, 04 Nov 2022 15:53:39 GMT
       Fastly-Ratelimit-Remaining:
-      - "4832"
+      - "9960"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667577600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4131-MAN
       X-Timer:
-      - S1635959983.346987,VS0,VE145
+      - S1667577220.598007,VS0,VE311
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/96/logging/syslog/new-test-syslog
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/58/logging/syslog/new-test-syslog
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-syslog, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 96 }''"}'
+      version =\u003e 58 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:19:43 GMT
+      - Fri, 04 Nov 2022 15:53:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "4831"
+      - "9959"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667577600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4131-MAN
       X-Timer:
-      - S1635959984.526110,VS0,VE151
+      - S1667577220.932665,VS0,VE146
     status: 404 Not Found
     code: 404
     duration: ""

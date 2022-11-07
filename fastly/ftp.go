@@ -14,15 +14,15 @@ type FTP struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
-	GzipLevel         uint8      `mapstructure:"gzip_level"`
+	FormatVersion     int        `mapstructure:"format_version"`
+	GzipLevel         int        `mapstructure:"gzip_level"`
 	MessageType       string     `mapstructure:"message_type"`
 	Name              string     `mapstructure:"name"`
 	Password          string     `mapstructure:"password"`
 	Path              string     `mapstructure:"path"`
-	Period            uint       `mapstructure:"period"`
+	Period            int        `mapstructure:"period"`
 	Placement         string     `mapstructure:"placement"`
-	Port              uint       `mapstructure:"port"`
+	Port              int        `mapstructure:"port"`
 	PublicKey         string     `mapstructure:"public_key"`
 	ResponseCondition string     `mapstructure:"response_condition"`
 	ServiceID         string     `mapstructure:"service_id"`
@@ -63,7 +63,6 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -86,41 +85,41 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 // CreateFTPInput is used as input to the CreateFTP function.
 type CreateFTPInput struct {
 	// Address is an hostname or IPv4 address.
-	Address string `url:"address,omitempty"`
+	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
-	CompressionCodec string `url:"compression_codec,omitempty"`
+	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Format is a Fastly log format string.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
-	MessageType string `url:"message_type,omitempty"`
+	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Password is the password for the server. For anonymous use an email address.
-	Password string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"`
 	// Path is the path to upload log files to. If the path ends in / then it is treated as a directory.
-	Path string `url:"path,omitempty"`
+	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
-	Port uint `url:"port,omitempty"`
+	Port *int `url:"port,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
-	PublicKey string `url:"public_key,omitempty"`
+	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
-	TimestampFormat string `url:"timestamp_format,omitempty"`
+	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// Username is the username for the server. Can be anonymous.
-	Username string `url:"user,omitempty"`
+	Username *string `url:"user,omitempty"`
 }
 
 // CreateFTP creates a new resource.
@@ -128,7 +127,6 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -149,7 +147,7 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 
 // GetFTPInput is used as input to the GetFTP function.
 type GetFTPInput struct {
-	// Name is the name of the FTP to fetch.
+	// Name is the name of the FTP to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -159,16 +157,14 @@ type GetFTPInput struct {
 
 // GetFTP retrieves the specified resource.
 func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -194,13 +190,13 @@ type UpdateFTPInput struct {
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// GzipLevel is the level of gzip encoding when sending logs (default 0, no compression).
-	GzipLevel *uint8 `url:"gzip_level,omitempty"`
+	GzipLevel *int `url:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Name is the name of the FTP to update.
-	Name string
+	// Name is the name of the FTP to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Password is the password for the server. For anonymous use an email address.
@@ -208,19 +204,19 @@ type UpdateFTPInput struct {
 	// Path is the path to upload log files to. If the path ends in / then it is treated as a directory.
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
-	Period *uint `url:"period,omitempty"`
+	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
-	Port *uint `url:"port,omitempty"`
+	Port *int `url:"port,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// TimestampFormat is a timestamp format.
 	TimestampFormat *string `url:"timestamp_format,omitempty"`
 	// Username is the username for the server. Can be anonymous.
@@ -229,16 +225,14 @@ type UpdateFTPInput struct {
 
 // UpdateFTP updates the specified resource.
 func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -267,16 +261,14 @@ type DeleteFTPInput struct {
 
 // DeleteFTP deletes the specified resource.
 func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/ftp/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

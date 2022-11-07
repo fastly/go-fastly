@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/50/logging/azureblob/new-test-blobstorage
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/43/logging/azureblob/new-test-blobstorage
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,11 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 15:37:10 GMT
+      - Fri, 04 Nov 2022 13:22:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "4943"
+      - "9991"
       Fastly-Ratelimit-Reset:
-      - "1635955200"
+      - "1667570400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4131-MAN
       X-Timer:
-      - S1635953830.851325,VS0,VE219
+      - S1667568156.409449,VS0,VE212
     status: 200 OK
     code: 200
     duration: ""

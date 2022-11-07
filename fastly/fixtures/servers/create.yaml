@@ -2,23 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: PoolID=4I1u39xj1EztfJHVzPo6BY&ServiceID=7i6HN3TK9wS159v2gPAZ8A&address=127.0.0.1
+    body: address=127.0.0.1
     form:
-      PoolID:
-      - 4I1u39xj1EztfJHVzPo6BY
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
       address:
       - 127.0.0.1
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/server
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server
     method: POST
   response:
-    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"4I1u39xj1EztfJHVzPo6BY","max_conn":"0","weight":"100","port":"80","updated_at":"2021-11-03T17:14:36Z","disabled":false,"created_at":"2021-11-03T17:14:36Z","id":"5kmav70NchjgR8M9tjxtOz","deleted_at":null,"override_host":null,"comment":""}'
+    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"QjPTIOyTtgCuj99szEHJE6","comment":"","port":"80","updated_at":"2022-11-04T17:20:29Z","weight":"100","disabled":false,"id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","created_at":"2022-11-04T17:20:29Z","override_host":null,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:36 GMT
+      - Fri, 04 Nov 2022 17:20:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "4901"
+      - "9978"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,30 +41,26 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959676.436779,VS0,VE181
+      - S1667582430.729600,VS0,VE329
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: PoolID=4I1u39xj1EztfJHVzPo6BY&ServiceID=7i6HN3TK9wS159v2gPAZ8A&address=altserver.example.com
+    body: address=altserver.example.com
     form:
-      PoolID:
-      - 4I1u39xj1EztfJHVzPo6BY
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
       address:
       - altserver.example.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/server
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server
     method: POST
   response:
-    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"4I1u39xj1EztfJHVzPo6BY","weight":"100","created_at":"2021-11-03T17:14:36Z","deleted_at":null,"updated_at":"2021-11-03T17:14:36Z","disabled":false,"id":"1YEDh57waxruEoTEsk4bKx","override_host":null,"port":"80","comment":"","max_conn":"0"}'
+    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"QjPTIOyTtgCuj99szEHJE6","comment":"","max_conn":"0","id":"UOJwfuyz8YokOWK4u1GJ54","disabled":false,"deleted_at":null,"override_host":null,"port":"80","updated_at":"2022-11-04T17:20:30Z","created_at":"2022-11-04T17:20:30Z","weight":"100"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -77,11 +69,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:36 GMT
+      - Fri, 04 Nov 2022 17:20:30 GMT
       Fastly-Ratelimit-Remaining:
-      - "4900"
+      - "9977"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -95,9 +87,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959677.642871,VS0,VE356
+      - S1667582430.089952,VS0,VE337
     status: 200 OK
     code: 200
     duration: ""

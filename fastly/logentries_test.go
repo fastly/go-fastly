@@ -19,13 +19,13 @@ func TestClient_Logentries(t *testing.T) {
 		le, err = c.CreateLogentries(&CreateLogentriesInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-logentries",
-			Port:           0,
-			UseTLS:         true,
-			Token:          "abcd1234",
-			Format:         "format",
-			Placement:      "waf_debug",
-			Region:         "us",
+			Name:           String("test-logentries"),
+			Port:           Int(0),
+			UseTLS:         CBool(true),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
+			Region:         String("us"),
 		})
 	})
 	if err != nil {
@@ -131,7 +131,7 @@ func TestClient_Logentries(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-logentries",
 			NewName:        String("new-test-logentries"),
-			FormatVersion:  Uint(2),
+			FormatVersion:  Int(2),
 			Region:         String("ap"),
 		})
 	})
@@ -199,81 +199,84 @@ func TestClient_CreateLogentries_validation(t *testing.T) {
 
 func TestClient_GetLogentries_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetLogentries(&GetLogentriesInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetLogentries(&GetLogentriesInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetLogentries(&GetLogentriesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetLogentries(&GetLogentriesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateLogentries_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateLogentries(&UpdateLogentriesInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateLogentries(&UpdateLogentriesInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateLogentries(&UpdateLogentriesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateLogentries(&UpdateLogentriesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteLogentries_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteLogentries(&DeleteLogentriesInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteLogentries(&DeleteLogentriesInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteLogentries(&DeleteLogentriesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteLogentries(&DeleteLogentriesInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

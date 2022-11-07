@@ -14,11 +14,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_BatchModifyAclEntries_Update","type":"vcl","created_at":"2021-11-03T14:44:25Z","deleted_at":null,"id":"4Hn1qrMGr7wMCST5ZTggPi","versions":[{"service_id":"4Hn1qrMGr7wMCST5ZTggPi","created_at":"2021-11-03T14:44:25Z","active":false,"deleted_at":null,"comment":"","deployed":false,"testing":false,"updated_at":"2021-11-03T14:44:25Z","number":1,"locked":false,"staging":false}],"paused":false,"publish_key":"","updated_at":"2021-11-03T14:44:25Z"}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_BatchModifyAclEntries_Update","type":"vcl","versions":[{"created_at":"2022-11-07T13:21:17Z","staging":false,"deleted_at":null,"comment":"","locked":false,"testing":false,"service_id":"hIFHhLCI9PxAnEDzrUMVk3","deployed":false,"updated_at":"2022-11-07T13:21:17Z","number":1,"active":false}],"deleted_at":null,"paused":false,"created_at":"2022-11-07T13:21:17Z","id":"hIFHhLCI9PxAnEDzrUMVk3","updated_at":"2022-11-07T13:21:17Z","publish_key":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +27,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 14:44:25 GMT
+      - Mon, 07 Nov 2022 13:21:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "4952"
+      - "9978"
       Fastly-Ratelimit-Reset:
-      - "1635951600"
+      - "1667829600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4144-MAN
       X-Timer:
-      - S1635950665.933171,VS0,VE210
+      - S1667827278.513399,VS0,VE215
     status: 200 OK
     code: 200
     duration: ""

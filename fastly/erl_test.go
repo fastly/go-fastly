@@ -18,20 +18,25 @@ func TestClient_ERL(t *testing.T) {
 	)
 	record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateERL(&CreateERLInput{
-			ServiceID:          testServiceID,
-			ServiceVersion:     testVersion.Number,
-			Name:               "test_erl",
-			Action:             ERLActionResponse,
-			ClientKey:          []string{"req.http.Fastly-Client-IP"},
-			HTTPMethods:        []string{http.MethodGet, http.MethodPost},
-			PenaltyBoxDuration: 30,
+			ServiceID:      testServiceID,
+			ServiceVersion: testVersion.Number,
+			Name:           String("test_erl"),
+			Action:         ERLActionPtr(ERLActionResponse),
+			ClientKey: &[]string{
+				"req.http.Fastly-Client-IP",
+			},
+			HTTPMethods: &[]string{
+				http.MethodGet,
+				http.MethodPost,
+			},
+			PenaltyBoxDuration: Int(30),
 			Response: &ERLResponseType{
 				ERLStatus:      429,
 				ERLContentType: "application/json",
 				ERLContent:     "Too many requests",
 			},
-			RpsLimit:   20,
-			WindowSize: 10,
+			RpsLimit:   Int(20),
+			WindowSize: ERLWindowSizePtr(10),
 		})
 	})
 	if err != nil {
@@ -42,9 +47,7 @@ func TestClient_ERL(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteERL(&DeleteERLInput{
-				ServiceID:      testServiceID,
-				ServiceVersion: testVersion.Number,
-				ERLID:          e.ID,
+				ERLID: e.ID,
 			})
 		})
 	}()
@@ -80,9 +83,7 @@ func TestClient_ERL(t *testing.T) {
 	var ge *ERL
 	record(t, fixtureBase+"get", func(c *Client) {
 		ge, err = c.GetERL(&GetERLInput{
-			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
-			ERLID:          e.ID,
+			ERLID: e.ID,
 		})
 	})
 	if err != nil {
@@ -96,10 +97,8 @@ func TestClient_ERL(t *testing.T) {
 	var ua *ERL
 	record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateERL(&UpdateERLInput{
-			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
-			ID:             e.ID,
-			Name:           "test_erl",
+			ERLID: e.ID,
+			Name:  String("test_erl"),
 		})
 	})
 	if err != nil {
@@ -112,9 +111,7 @@ func TestClient_ERL(t *testing.T) {
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteERL(&DeleteERLInput{
-			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
-			ERLID:          ge.ID,
+			ERLID: ge.ID,
 		})
 	})
 	if err != nil {
@@ -159,92 +156,28 @@ func TestClient_CreateERL_validation(t *testing.T) {
 }
 
 func TestClient_GetERL_validation(t *testing.T) {
-	var err error
-	_, err = testClient.GetERL(&GetERLInput{
-		ServiceID: "",
+	_, err := testClient.GetERL(&GetERLInput{
+		ERLID: "",
 	})
-	if err != ErrMissingServiceID {
-		t.Errorf("error: %s", err)
-	}
-
-	_, err = testClient.GetERL(&GetERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
-	})
-	if err != ErrMissingServiceVersion {
-		t.Errorf("error: %s", err)
-	}
-
-	_, err = testClient.GetERL(&GetERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		ERLID:          "",
-	})
-	if err != ErrMissingID {
+	if err != ErrMissingERLID {
 		t.Errorf("error: %s", err)
 	}
 }
 
 func TestClient_UpdateERL_validation(t *testing.T) {
-	var err error
-	_, err = testClient.UpdateERL(&UpdateERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+	_, err := testClient.UpdateERL(&UpdateERLInput{
+		ERLID: "",
 	})
-
-	if err != ErrMissingServiceID && err != ErrMissingServiceVersion {
-		t.Errorf("error: %s", err)
-	}
-
-	_, err = testClient.UpdateERL(&UpdateERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
-	})
-	if err != ErrMissingServiceVersion {
-		t.Errorf("error: %s", err)
-	}
-
-	_, err = testClient.UpdateERL(&UpdateERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingID {
-		t.Errorf("error: %s", err)
-	}
-	_, err = testClient.UpdateERL(&UpdateERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "acl",
-	})
-	if err != ErrMissingID {
+	if err != ErrMissingERLID {
 		t.Errorf("error: %s", err)
 	}
 }
 
 func TestClient_DeleteERL_validation(t *testing.T) {
-	var err error
-	err = testClient.DeleteERL(&DeleteERLInput{
-		ServiceID: "",
+	err := testClient.DeleteERL(&DeleteERLInput{
+		ERLID: "",
 	})
-	if err != ErrMissingServiceID {
-		t.Errorf("error: %s", err)
-	}
-
-	err = testClient.DeleteERL(&DeleteERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
-	})
-	if err != ErrMissingServiceVersion {
-		t.Errorf("error: %s", err)
-	}
-
-	err = testClient.DeleteERL(&DeleteERLInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		ERLID:          "",
-	})
-	if err != ErrMissingID {
+	if err != ErrMissingERLID {
 		t.Errorf("error: %s", err)
 	}
 }

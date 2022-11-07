@@ -21,6 +21,12 @@ const (
 // CacheSettingAction is the type of cache action.
 type CacheSettingAction string
 
+// CacheSettingActionPtr returns a pointer to a CacheSettingAction.
+func CacheSettingActionPtr(v CacheSettingAction) *CacheSettingAction {
+	csa := &v
+	return csa
+}
+
 // CacheSetting represents a response from Fastly's API for cache settings.
 type CacheSetting struct {
 	Action         CacheSettingAction `mapstructure:"action"`
@@ -30,8 +36,8 @@ type CacheSetting struct {
 	Name           string             `mapstructure:"name"`
 	ServiceID      string             `mapstructure:"service_id"`
 	ServiceVersion int                `mapstructure:"version"`
-	StaleTTL       uint               `mapstructure:"stale_ttl"`
-	TTL            uint               `mapstructure:"ttl"`
+	StaleTTL       int                `mapstructure:"stale_ttl"`
+	TTL            int                `mapstructure:"ttl"`
 	UpdatedAt      *time.Time         `mapstructure:"updated_at"`
 }
 
@@ -66,7 +72,6 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -89,19 +94,19 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 // CreateCacheSettingInput is used as input to the CreateCacheSetting function.
 type CreateCacheSettingInput struct {
 	// Action determines vcl_fetch behaviour (pass, cache, restart).
-	Action CacheSettingAction `url:"action,omitempty"`
+	Action *CacheSettingAction `url:"action,omitempty"`
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
-	CacheCondition string `url:"cache_condition,omitempty"`
+	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Name is the name for the cache settings object.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// StaleTTL is the maximum time in seconds to continue to use a stale version of the object if future requests to your backend server fail (also known as 'stale if error').
-	StaleTTL uint `url:"stale_ttl,omitempty"`
+	StaleTTL *int `url:"stale_ttl,omitempty"`
 	// TTL is the maximum time to consider the object fresh in the cache (the cache 'time to live').
-	TTL uint `url:"ttl,omitempty"`
+	TTL *int `url:"ttl,omitempty"`
 }
 
 // CreateCacheSetting creates a new resource.
@@ -109,7 +114,6 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -130,7 +134,7 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 
 // GetCacheSettingInput is used as input to the GetCacheSetting function.
 type GetCacheSettingInput struct {
-	// Name is the name of the cache setting to fetch.
+	// Name is the name of the cache setting to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -140,16 +144,14 @@ type GetCacheSettingInput struct {
 
 // GetCacheSetting retrieves the specified resource.
 func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -172,32 +174,30 @@ type UpdateCacheSettingInput struct {
 	Action CacheSettingAction `url:"action,omitempty"`
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	// Name is the name of the cache setting to update.
-	Name string
+	// Name is the name of the cache setting to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// StaleTTL is the maximum time in seconds to continue to use a stale version of the object if future requests to your backend server fail (also known as 'stale if error').
-	StaleTTL *uint `url:"stale_ttl,omitempty"`
+	StaleTTL *int `url:"stale_ttl,omitempty"`
 	// TTL is the maximum time to consider the object fresh in the cache (the cache 'time to live').
-	TTL *uint `url:"ttl,omitempty"`
+	TTL *int `url:"ttl,omitempty"`
 }
 
 // UpdateCacheSetting updates the specified resource.
 func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -226,16 +226,14 @@ type DeleteCacheSettingInput struct {
 
 // DeleteCacheSetting deletes the specified resource.
 func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/cache_settings/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

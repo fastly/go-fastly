@@ -50,7 +50,6 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -72,7 +71,7 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 
 // GetVCLInput is used as input to the GetVCL function.
 type GetVCLInput struct {
-	// Name is the name of the VCL to fetch.
+	// Name is the name of the VCL to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -82,16 +81,14 @@ type GetVCLInput struct {
 
 // GetVCL retrieves the specified resource.
 func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -121,7 +118,6 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -143,15 +139,15 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 // CreateVCLInput is used as input to the CreateVCL function.
 type CreateVCLInput struct {
 	// Content is the VCL code to be included.
-	Content string `url:"content,omitempty"`
+	Content *string `url:"content,omitempty"`
 	// Main is set to true when this is the main VCL, otherwise false.
-	Main bool `url:"main,omitempty"`
+	Main *bool `url:"main,omitempty"`
 	// Name is the name of this VCL.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // CreateVCL creates a new resource.
@@ -159,7 +155,6 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -183,27 +178,25 @@ type UpdateVCLInput struct {
 	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
 	// Name is the name of the VCL to update (required).
-	Name string
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // UpdateVCL updates the specified resource.
 func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -232,16 +225,14 @@ type ActivateVCLInput struct {
 
 // ActivateVCL creates a new Fastly VCL.
 func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s/main", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -270,16 +261,14 @@ type DeleteVCLInput struct {
 
 // DeleteVCL deletes the specified resource.
 func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/vcl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

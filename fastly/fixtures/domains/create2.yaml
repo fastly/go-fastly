@@ -2,25 +2,21 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=102&comment=comment&name=integ-test2.go-fastly-2.com
+    body: comment=comment&name=integ-test-20221104.go-fastly-2.com
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "102"
       comment:
       - comment
       name:
-      - integ-test2.go-fastly-2.com
+      - integ-test-20221104.go-fastly-2.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/102/domain
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/73/domain
     method: POST
   response:
-    body: '{"comment":"comment","name":"integ-test2.go-fastly-2.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":102,"updated_at":"2021-11-03T17:36:28Z","deleted_at":null,"created_at":"2021-11-03T17:36:28Z"}'
+    body: '{"comment":"comment","name":"integ-test-20221104.go-fastly-2.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":73,"updated_at":"2022-11-04T17:36:56Z","created_at":"2022-11-04T17:36:56Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:36:28 GMT
+      - Fri, 04 Nov 2022 17:36:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "4735"
+      - "9967"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4134-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4127-MAN
       X-Timer:
-      - S1635960988.143522,VS0,VE318
+      - S1667583417.618646,VS0,VE392
     status: 200 OK
     code: 200
     duration: ""

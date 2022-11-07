@@ -19,12 +19,12 @@ func TestClient_Herokus(t *testing.T) {
 		h, err = c.CreateHeroku(&CreateHerokuInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-heroku",
-			Format:         "%h %l %u %t \"%r\" %>s %b",
-			FormatVersion:  2,
-			Placement:      "waf_debug",
-			Token:          "super-secure-token",
-			URL:            "https://1.us.logplex.io/logs",
+			Name:           String("test-heroku"),
+			Format:         String("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  Int(2),
+			Placement:      String("waf_debug"),
+			Token:          String("super-secure-token"),
+			URL:            String("https://1.us.logplex.io/logs"),
 		})
 	})
 	if err != nil {
@@ -185,81 +185,84 @@ func TestClient_CreateHeroku_validation(t *testing.T) {
 
 func TestClient_GetHeroku_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetHeroku(&GetHerokuInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHeroku(&GetHerokuInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetHeroku(&GetHerokuInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetHeroku(&GetHerokuInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateHeroku_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateHeroku(&UpdateHerokuInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateHeroku(&UpdateHerokuInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateHeroku(&UpdateHerokuInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateHeroku(&UpdateHerokuInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteHeroku_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteHeroku(&DeleteHerokuInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteHeroku(&DeleteHerokuInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteHeroku(&DeleteHerokuInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteHeroku(&DeleteHerokuInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

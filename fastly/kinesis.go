@@ -13,7 +13,7 @@ type Kinesis struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
 	Format            string     `mapstructure:"format"`
-	FormatVersion     uint       `mapstructure:"format_version"`
+	FormatVersion     int        `mapstructure:"format_version"`
 	IAMRole           string     `mapstructure:"iam_role"`
 	Name              string     `mapstructure:"name"`
 	Placement         string     `mapstructure:"placement"`
@@ -57,7 +57,6 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -80,29 +79,29 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 // CreateKinesisInput is used as input to the CreateKinesis function.
 type CreateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
-	AccessKey string `url:"access_key,omitempty"`
+	AccessKey *string `url:"access_key,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
-	Format string `url:"format,omitempty"`
+	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// IAMRole is the ARN for an IAM role granting Fastly access to the target Amazon Kinesis stream.
-	IAMRole string `url:"iam_role,omitempty"`
+	IAMRole *string `url:"iam_role,omitempty"`
 	// Name is the name for the real-time logging configuration.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
-	Placement string `url:"placement,omitempty"`
+	Placement *string `url:"placement,omitempty"`
 	// Region is a named set of AWS resources that's in the same geographical area.
-	Region string `url:"region,omitempty"`
+	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
-	ResponseCondition string `url:"response_condition,omitempty"`
+	ResponseCondition *string `url:"response_condition,omitempty"`
 	// SecretKey is the secret key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
-	SecretKey string `url:"secret_key,omitempty"`
+	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// StreamName is the Amazon Kinesis stream to send logs to.
-	StreamName string `url:"topic,omitempty"`
+	StreamName *string `url:"topic,omitempty"`
 }
 
 // CreateKinesis creates a new resource.
@@ -110,7 +109,6 @@ func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -141,16 +139,14 @@ type GetKinesisInput struct {
 
 // GetKinesis retrieves the specified resource.
 func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -174,11 +170,11 @@ type UpdateKinesisInput struct {
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
-	FormatVersion *uint `url:"format_version,omitempty"`
+	FormatVersion *int `url:"format_version,omitempty"`
 	// IAMRole is the ARN for an IAM role granting Fastly access to the target Amazon Kinesis stream.
 	IAMRole *string `url:"iam_role,omitempty"`
 	// Name is the name of the Kinesis logging object to update (required).
-	Name string
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
@@ -190,25 +186,23 @@ type UpdateKinesisInput struct {
 	// SecretKey is the secret key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
 	SecretKey *string `url:"secret_key,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// StreamName is the Amazon Kinesis stream to send logs to.
 	StreamName *string `url:"topic,omitempty"`
 }
 
 // UpdateKinesis updates the specified resource.
 func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -237,16 +231,14 @@ type DeleteKinesisInput struct {
 
 // DeleteKinesis deletes the specified resource.
 func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/logging/kinesis/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

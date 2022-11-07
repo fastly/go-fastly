@@ -19,11 +19,11 @@ func TestClient_NewRelic(t *testing.T) {
 		newRelicResp1, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-newrelic",
-			Token:          "abcd1234",
-			Format:         "format",
-			Placement:      "waf_debug",
-			Region:         "us",
+			Name:           String("test-newrelic"),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
+			Region:         String("us"),
 		})
 	})
 	if err != nil {
@@ -34,11 +34,11 @@ func TestClient_NewRelic(t *testing.T) {
 		newRelicResp2, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-newrelic-2",
-			Token:          "abcd1234",
-			Format:         "format",
-			Placement:      "waf_debug",
-			Region:         "eu",
+			Name:           String("test-newrelic-2"),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
+			Region:         String("eu"),
 		})
 	})
 	if err != nil {
@@ -50,11 +50,11 @@ func TestClient_NewRelic(t *testing.T) {
 		_, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-newrelic-3",
-			Token:          "abcd1234",
-			Format:         "format",
-			Placement:      "waf_debug",
-			Region:         "abc",
+			Name:           String("test-newrelic-3"),
+			Token:          String("abcd1234"),
+			Format:         String("format"),
+			Placement:      String("waf_debug"),
+			Region:         String("abc"),
 		})
 	})
 	if err == nil {
@@ -207,7 +207,7 @@ func TestClient_NewRelic(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-newrelic",
 			NewName:        String("new-test-newrelic"),
-			FormatVersion:  Uint(2),
+			FormatVersion:  Int(2),
 			Region:         String("eu"),
 		})
 	})
@@ -253,6 +253,7 @@ func TestClient_NewRelic(t *testing.T) {
 
 func TestClient_ListNewRelic_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.ListNewRelic(&ListNewRelicInput{
 		ServiceID: "",
 	})
@@ -271,6 +272,7 @@ func TestClient_ListNewRelic_validation(t *testing.T) {
 
 func TestClient_CreateNewRelic_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.CreateNewRelic(&CreateNewRelicInput{
 		ServiceID: "",
 	})
@@ -289,81 +291,84 @@ func TestClient_CreateNewRelic_validation(t *testing.T) {
 
 func TestClient_GetNewRelic_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetNewRelic(&GetNewRelicInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetNewRelic(&GetNewRelicInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetNewRelic(&GetNewRelicInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetNewRelic(&GetNewRelicInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateNewRelic_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateNewRelic(&UpdateNewRelicInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateNewRelic(&UpdateNewRelicInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateNewRelic(&UpdateNewRelicInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateNewRelic(&UpdateNewRelicInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteNewRelic_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteNewRelic(&DeleteNewRelicInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteNewRelic(&DeleteNewRelicInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteNewRelic(&DeleteNewRelicInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteNewRelic(&DeleteNewRelicInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

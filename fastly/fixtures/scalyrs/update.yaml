@@ -2,14 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: Name=test-scalyr&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=88&name=new-test-scalyr&region=EU&token=new-token
+    body: name=new-test-scalyr&region=EU&token=new-token
     form:
-      Name:
-      - test-scalyr
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "88"
       name:
       - new-test-scalyr
       region:
@@ -20,12 +14,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/88/logging/scalyr/test-scalyr
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/60/logging/scalyr/test-scalyr
     method: PUT
   response:
-    body: '{"placement":"waf_debug","version":"88","format_version":"2","updated_at":"2021-11-03T17:14:02Z","deleted_at":null,"response_condition":"","token":"new-token","project_id":null,"region":"EU","created_at":"2021-11-03T17:14:02Z","format":"%h
-      %l %u %t \"%r\" %\u003es %b","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"new-test-scalyr"}'
+    body: '{"format_version":"2","created_at":"2022-11-04T16:06:19Z","response_condition":"","deleted_at":null,"token":"new-token","updated_at":"2022-11-04T16:06:19Z","project_id":null,"format":"%h
+      %l %u %t \"%r\" %\u003es %b","version":"60","region":"EU","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"new-test-scalyr","placement":"waf_debug"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -34,11 +28,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:04 GMT
+      - Fri, 04 Nov 2022 16:06:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "4907"
+      - "9997"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667581200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -52,9 +46,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4138-MAN
       X-Timer:
-      - S1635959644.043078,VS0,VE523
+      - S1667577980.085080,VS0,VE515
     status: 200 OK
     code: 200
     duration: ""

@@ -19,12 +19,12 @@ func TestClient_Honeycombs(t *testing.T) {
 		h, err = c.CreateHoneycomb(&CreateHoneycombInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-honeycomb",
-			Format:         "%h %l %u %t \"%r\" %>s %b",
-			FormatVersion:  2,
-			Placement:      "waf_debug",
-			Token:          "super-secure-token",
-			Dataset:        "testDataset",
+			Name:           String("test-honeycomb"),
+			Format:         String("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  Int(2),
+			Placement:      String("waf_debug"),
+			Token:          String("super-secure-token"),
+			Dataset:        String("testDataset"),
 		})
 	})
 	if err != nil {
@@ -189,81 +189,84 @@ func TestClient_CreateHoneycomb_validation(t *testing.T) {
 
 func TestClient_GetHoneycomb_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetHoneycomb(&GetHoneycombInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHoneycomb(&GetHoneycombInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetHoneycomb(&GetHoneycombInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetHoneycomb(&GetHoneycombInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateHoneycomb(&UpdateHoneycombInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateHoneycomb(&UpdateHoneycombInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateHoneycomb(&UpdateHoneycombInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateHoneycomb(&UpdateHoneycombInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteHoneycomb(&DeleteHoneycombInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteHoneycomb(&DeleteHoneycombInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteHoneycomb(&DeleteHoneycombInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteHoneycomb(&DeleteHoneycombInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

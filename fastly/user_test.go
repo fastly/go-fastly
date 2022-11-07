@@ -22,15 +22,18 @@ func TestClient_Users(t *testing.T) {
 	t.Parallel()
 
 	fixtureBase := "users/"
+	login := "go-fastly-test+user+20221104@example.com"
 
 	// Create
+	//
+	// NOTE: When recreating the fixtures, update the login.
 	var err error
 	var u *User
 	record(t, fixtureBase+"create", func(c *Client) {
 		u, err = c.CreateUser(&CreateUserInput{
-			Login: "go-fastly-test+user1@example.com",
-			Name:  "test user",
-			Role:  "engineer",
+			Login: String(login),
+			Name:  String("test user"),
+			Role:  String("engineer"),
 		})
 	})
 	if err != nil {
@@ -46,7 +49,7 @@ func TestClient_Users(t *testing.T) {
 		})
 	}()
 
-	if u.Login != "go-fastly-test+user1@example.com" {
+	if u.Login != login {
 		t.Errorf("bad login: %v", u.Login)
 	}
 
@@ -106,6 +109,9 @@ func TestClient_Users(t *testing.T) {
 	}
 
 	// Reset Password
+	//
+	// NOTE: This integration test can fail due to reCAPTCHA.
+	// Which means you might have to manually correct the fixtures 😬
 	record(t, fixtureBase+"reset_password", func(c *Client) {
 		err = c.ResetUserPassword(&ResetUserPasswordInput{
 			Login: uu.Login,
@@ -123,24 +129,6 @@ func TestClient_Users(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
-	}
-}
-
-func TestClient_CreateUser_validation(t *testing.T) {
-	var err error
-	_, err = testClient.CreateUser(&CreateUserInput{
-		Login: "",
-	})
-	if err != ErrMissingLogin {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateUser(&CreateUserInput{
-		Login: "new+user@example.com",
-		Name:  "",
-	})
-	if err != ErrMissingName {
-		t.Errorf("bad error: %s", err)
 	}
 }
 

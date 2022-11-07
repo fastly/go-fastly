@@ -2,24 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=99&comment=new+comment
+    body: comment=new+comment
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "99"
       comment:
       - new comment
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/99
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/75
     method: PUT
   response:
-    body: '{"testing":false,"locked":false,"staging":false,"created_at":"2021-11-03T17:26:39Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","comment":"new
-      comment","updated_at":"2021-11-03T17:26:39Z","active":false,"deleted_at":null,"number":99,"deployed":false}'
+    body: '{"testing":false,"updated_at":"2022-11-04T17:45:17Z","comment":"new comment","created_at":"2022-11-04T17:45:17Z","locked":false,"number":75,"deployed":false,"deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","staging":false,"active":false}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:26:40 GMT
+      - Fri, 04 Nov 2022 17:45:19 GMT
       Fastly-Ratelimit-Remaining:
-      - "4810"
+      - "9955"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667584800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4129-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4139-MAN
       X-Timer:
-      - S1635960400.393506,VS0,VE221
+      - S1667583919.784836,VS0,VE387
     status: 200 OK
     code: 200
     duration: ""

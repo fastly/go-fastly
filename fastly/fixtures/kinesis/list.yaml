@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/logging/kinesis
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/kinesis
     method: GET
   response:
-    body: '[{"created_at":"2021-11-03T16:56:46Z","name":"test-kinesis","service_id":"7i6HN3TK9wS159v2gPAZ8A","format_version":"2","updated_at":"2021-11-03T16:56:46Z","region":"us-east-1","response_condition":"","format":"format","topic":"stream-name","placement":"waf_debug","iam_role":null,"secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","access_key":"AKIAIOSFODNN7EXAMPLE","deleted_at":null,"version":"74"},{"format_version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test-kinesis-2","created_at":"2021-11-03T16:56:46Z","version":"74","deleted_at":null,"access_key":null,"iam_role":"arn:aws:iam::123456789012:role/S3Access","secret_key":null,"placement":"waf_debug","topic":"stream-name","format":"format","response_condition":"","region":"us-east-1","updated_at":"2021-11-03T16:56:46Z"}]'
+    body: '[{"access_key":"AKIAIOSFODNN7EXAMPLE","created_at":"2022-11-04T16:11:57Z","format_version":"2","topic":"stream-name","updated_at":"2022-11-04T16:11:57Z","response_condition":"","deleted_at":null,"version":"62","region":"us-east-1","service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","placement":"waf_debug","iam_role":null,"secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","name":"test-kinesis"},{"placement":"waf_debug","secret_key":null,"iam_role":"arn:aws:iam::123456789012:role/S3Access","name":"test-kinesis-2","version":"62","service_id":"7i6HN3TK9wS159v2gPAZ8A","region":"us-east-1","format":"format","topic":"stream-name","updated_at":"2022-11-04T16:11:58Z","response_condition":"","deleted_at":null,"access_key":null,"created_at":"2022-11-04T16:11:58Z","format_version":"2"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:56:48 GMT
+      - Fri, 04 Nov 2022 16:11:59 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4139-MAN
       X-Timer:
-      - S1635958608.777123,VS0,VE318
+      - S1667578319.954677,VS0,VE136
     status: 200 OK
     code: 200
     duration: ""

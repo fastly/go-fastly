@@ -42,7 +42,7 @@ type ServiceAuthorizations struct {
 // decoding into.
 var saType = reflect.TypeOf(new(ServiceAuthorization))
 
-// ListServiceAuthorizationsInput is used as input to the ListWAFs function.
+// ListServiceAuthorizationsInput is used as input to the ListServiceAuthorizations function.
 type ListServiceAuthorizationsInput struct {
 	// PageNumber requests a specific page of service authorizations.
 	PageNumber int
@@ -106,7 +106,7 @@ func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*
 
 // GetServiceAuthorizationInput is used as input to the GetServiceAuthorization function.
 type GetServiceAuthorizationInput struct {
-	// ID of the service authorization to retrieve.
+	// ID of the service authorization to retrieve (required).
 	ID string
 }
 
@@ -205,7 +205,7 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 
 // DeleteServiceAuthorizationInput is used as input to the DeleteServiceAuthorization function.
 type DeleteServiceAuthorizationInput struct {
-	// ID of the service authorization to delete.
+	// ID of the service authorization to delete (required).
 	ID string
 }
 

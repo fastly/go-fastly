@@ -49,7 +49,6 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -72,11 +71,11 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 // CreateACLInput is used as input to the CreateACL function.
 type CreateACLInput struct {
 	// Name is the name of the ACL to create (required)
-	Name string `url:"name"`
+	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // CreateACL creates a new resource.
@@ -84,7 +83,6 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -115,16 +113,14 @@ type DeleteACLInput struct {
 
 // DeleteACL deletes the specified resource.
 func (c *Client) DeleteACL(i *DeleteACLInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -156,16 +152,14 @@ type GetACLInput struct {
 
 // GetACL retrieves the specified resource.
 func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -187,29 +181,23 @@ type UpdateACLInput struct {
 	// Name is the name of the ACL to update (required).
 	Name string
 	// NewName is the new name of the ACL to update (required).
-	NewName string `url:"name"`
+	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // UpdateACL updates the specified resource.
 func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-
-	if i.NewName == "" {
-		return nil, ErrMissingNewName
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

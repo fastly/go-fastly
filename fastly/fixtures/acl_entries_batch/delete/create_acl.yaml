@@ -2,23 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=0Z7jVDUwGwu7F2OANQI4zM&ServiceVersion=2&name=test_acl_BatchModifyAclEntries_Delete
+    body: name=test_acl_BatchModifyAclEntries_Delete
     form:
-      ServiceID:
-      - 0Z7jVDUwGwu7F2OANQI4zM
-      ServiceVersion:
-      - "2"
       name:
       - test_acl_BatchModifyAclEntries_Delete
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/0Z7jVDUwGwu7F2OANQI4zM/version/2/acl
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/SRgWcFvKC9NTsezwei8lN5/version/2/acl
     method: POST
   response:
-    body: '{"service_id":"0Z7jVDUwGwu7F2OANQI4zM","version":"2","name":"test_acl_BatchModifyAclEntries_Delete","created_at":"2021-11-03T14:44:23Z","updated_at":"2021-11-03T14:44:23Z","deleted_at":null,"id":"2unSFVs0YvJ5OfIxOFkT1h"}'
+    body: '{"service_id":"SRgWcFvKC9NTsezwei8lN5","version":"2","name":"test_acl_BatchModifyAclEntries_Delete","created_at":"2022-11-07T13:21:16Z","updated_at":"2022-11-07T13:21:16Z","id":"1tOJroBpX2wMC5bs17q4P7","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 14:44:23 GMT
+      - Mon, 07 Nov 2022 13:21:16 GMT
       Fastly-Ratelimit-Remaining:
-      - "4957"
+      - "9983"
       Fastly-Ratelimit-Reset:
-      - "1635951600"
+      - "1667829600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4144-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4144-MAN
       X-Timer:
-      - S1635950663.318838,VS0,VE198
+      - S1667827276.752174,VS0,VE355
     status: 200 OK
     code: 200
     duration: ""

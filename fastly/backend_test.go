@@ -19,13 +19,13 @@ func TestClient_Backends(t *testing.T) {
 		b, err = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-backend",
-			Address:        "integ-test.go-fastly.com",
-			ConnectTimeout: Uint(1500),
-			OverrideHost:   "origin.example.com",
+			Name:           String("test-backend"),
+			Address:        String("integ-test.go-fastly.com"),
+			ConnectTimeout: Int(1500),
+			OverrideHost:   String("origin.example.com"),
 			SSLCheckCert:   CBool(false),
-			SSLCiphers:     "DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384",
-			SSLSNIHostname: "ssl-hostname.com",
+			SSLCiphers:     String("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			SSLSNIHostname: String("ssl-hostname.com"),
 		})
 	})
 	if err != nil {
@@ -123,7 +123,7 @@ func TestClient_Backends(t *testing.T) {
 			Name:           "test-backend",
 			NewName:        String("new-test-backend"),
 			OverrideHost:   String("www.example.com"),
-			Port:           Uint(1234),
+			Port:           Int(1234),
 			SSLCiphers:     String("RC4:!COMPLEMENTOFDEFAULT"),
 			SSLCheckCert:   CBool(false),
 			SSLSNIHostname: String("ssl-hostname-updated.com"),
@@ -177,7 +177,7 @@ func TestClient_Backends(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "new-test-backend",
 			OverrideHost:   String(""),
-			Port:           Uint(0),
+			Port:           Int(0),
 		})
 	})
 	if err != nil {
@@ -241,81 +241,84 @@ func TestClient_CreateBackend_validation(t *testing.T) {
 
 func TestClient_GetBackend_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetBackend(&GetBackendInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetBackend(&GetBackendInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetBackend(&GetBackendInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetBackend(&GetBackendInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateBackend_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateBackend(&UpdateBackendInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateBackend(&UpdateBackendInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateBackend(&UpdateBackendInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateBackend(&UpdateBackendInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteBackend_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteBackend(&DeleteBackendInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteBackend(&DeleteBackendInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteBackend(&DeleteBackendInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteBackend(&DeleteBackendInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

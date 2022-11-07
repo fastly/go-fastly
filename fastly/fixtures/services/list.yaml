@@ -10,7 +10,7 @@ interactions:
     url: https://api.fastly.com/service?direction=descend&page=1&per_page=1&sort=created
     method: GET
   response:
-    body: '[{"id":"YVI5KaaM0YSe1CAmKAbic6","version":1,"name":"test-service","versions":[{"active":false,"locked":false,"updated_at":"2022-11-03T14:07:52Z","number":1,"testing":false,"service_id":"YVI5KaaM0YSe1CAmKAbic6","deleted_at":null,"staging":false,"deployed":false,"comment":"","created_at":"2022-11-03T14:07:52Z"}],"created_at":"2022-11-03T14:07:52Z","comment":"comment","customer_id":"51MumwLiSJyFTWhtbByYgR","updated_at":"2022-11-03T14:07:52Z","deleted_at":null,"paused":false,"type":"vcl"}]'
+    body: '[{"id":"FPkmJNp1fH8CnWbdi21Wf3","updated_at":"2022-11-04T17:51:46Z","created_at":"2022-11-04T17:51:46Z","comment":"comment","type":"vcl","versions":[{"updated_at":"2022-11-04T17:51:46Z","created_at":"2022-11-04T17:51:46Z","comment":"","testing":false,"deployed":false,"locked":false,"number":1,"staging":false,"deleted_at":null,"service_id":"FPkmJNp1fH8CnWbdi21Wf3","active":false}],"paused":false,"customer_id":"51MumwLiSJyFTWhtbByYgR","deleted_at":null,"version":1,"name":"test-service"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 03 Nov 2022 14:07:52 GMT
+      - Fri, 04 Nov 2022 17:51:46 GMT
       Link:
       - <https://api.fastly.com/service?direction=descend&page=420&per_page=1&sort=created>;
         rel="last", <https://api.fastly.com/service?direction=descend&page=2&per_page=1&sort=created>;
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4151-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4137-MAN
       X-Timer:
-      - S1667484472.183943,VS0,VE354
+      - S1667584306.153492,VS0,VE425
     status: 200 OK
     code: 200
     duration: ""

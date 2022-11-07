@@ -45,7 +45,7 @@ func (s usersByName) Less(i, j int) bool {
 
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
 type ListCustomerUsersInput struct {
-	// CustomerID is an alphanumeric string identifying the customer.
+	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
 
@@ -88,7 +88,7 @@ func (c *Client) GetCurrentUser() (*User, error) {
 
 // GetUserInput is used as input to the GetUser function.
 type GetUserInput struct {
-	// ID is an alphanumeric string identifying the user.
+	// ID is an alphanumeric string identifying the user (required).
 	ID string
 }
 
@@ -118,23 +118,15 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
 	// Login is the login associated with the user (typically, an email address).
-	Login string `url:"login"`
+	Login *string `url:"login,omitempty"`
 	// Name is the real life name of the user.
-	Name string `url:"name"`
+	Name *string `url:"name,omitempty"`
 	// Role is the permissions role assigned to the user. Can be user, billing, engineer, or superuser.
-	Role string `url:"role,omitempty"`
+	Role *string `url:"role,omitempty"`
 }
 
 // CreateUser creates a new resource.
 func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
-	if i.Login == "" {
-		return nil, ErrMissingLogin
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
-	}
-
 	resp, err := c.PostForm("/user", i, nil)
 	if err != nil {
 		return nil, err
@@ -150,7 +142,7 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 
 // UpdateUserInput is used as input to the UpdateUser function.
 type UpdateUserInput struct {
-	// ID is an alphanumeric string identifying the user.
+	// ID is an alphanumeric string identifying the user (required).
 	ID string `url:"-"`
 	// Name is the real life name of the user.
 	Name *string `url:"name,omitempty"`
@@ -180,7 +172,7 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 
 // DeleteUserInput is used as input to the DeleteUser function.
 type DeleteUserInput struct {
-	// ID is an alphanumeric string identifying the user.
+	// ID is an alphanumeric string identifying the user (required).
 	ID string
 }
 
@@ -209,7 +201,7 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 
 // ResetUserPasswordInput is used as input to the ResetUserPassword function.
 type ResetUserPasswordInput struct {
-	// Login is the login associated with the user (typically, an email address).
+	// Login is the login associated with the user and is typically an email address (required).
 	Login string
 }
 

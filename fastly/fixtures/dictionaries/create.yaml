@@ -2,23 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=55&name=test_dictionary
+    body: name=test_dictionary
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "55"
       name:
       - test_dictionary
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/55/dictionary
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":55,"id":"5JztRMmZbQTwPn1adhclKA","updated_at":"2021-11-03T16:12:55Z","created_at":"2021-11-03T16:12:55Z","write_only":false,"deleted_at":null}'
+    body: '{"name":"test_dictionary","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":95,"deleted_at":null,"write_only":false,"created_at":"2022-11-07T14:45:33Z","updated_at":"2022-11-07T14:45:33Z","id":"BPnIdK8OFZePTGgSuZN0x6"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:12:55 GMT
+      - Mon, 07 Nov 2022 14:45:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "4994"
+      - "9980"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667833200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4137-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4130-MAN
       X-Timer:
-      - S1635955975.906317,VS0,VE394
+      - S1667832334.758333,VS0,VE159
     status: 200 OK
     code: 200
     duration: ""

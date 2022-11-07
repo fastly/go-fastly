@@ -2,14 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: Name=snipver&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=80&content=%23vclUpdated&name=snipverUpdated&priority=456&type=hit
+    body: content=%23vclUpdated&name=snipverUpdated&priority=456&type=hit
     form:
-      Name:
-      - snipver
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "80"
       content:
       - '#vclUpdated'
       name:
@@ -22,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/snippet/snipver
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/88/snippet/snipver
     method: PUT
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"updated_at":"2021-11-26T07:21:18Z","content":"#vclUpdated","type":"hit","version":"80","name":"snipverUpdated","id":"2t19aLnUdhacWY37Cgi3d9","created_at":"2021-11-26T07:21:18Z","priority":"456","dynamic":"0"}'
+    body: '{"id":"WT2ibuLy1IEgBOgN7ZvtI4","version":"88","deleted_at":null,"content":"#vclUpdated","name":"snipverUpdated","service_id":"7i6HN3TK9wS159v2gPAZ8A","type":"hit","priority":"456","created_at":"2022-11-07T12:19:34Z","updated_at":"2022-11-07T12:19:34Z","dynamic":"0"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 26 Nov 2021 07:21:20 GMT
+      - Mon, 07 Nov 2022 12:19:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "4955"
+      - "9989"
       Fastly-Ratelimit-Reset:
-      - "1637913600"
+      - "1667826000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11955-TYO
+      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4131-MAN
       X-Timer:
-      - S1637911281.548084,VS0,VE277
+      - S1667823576.047992,VS0,VE176
     status: 200 OK
     code: 200
     duration: ""

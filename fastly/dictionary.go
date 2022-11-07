@@ -50,7 +50,6 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -73,13 +72,13 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 // CreateDictionaryInput is used as input to the CreateDictionary function.
 type CreateDictionaryInput struct {
 	// Name is the name of the dictionary to create.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// WriteOnly determines if items in the dictionary are readable or not.
-	WriteOnly Compatibool `url:"write_only,omitempty"`
+	WriteOnly *Compatibool `url:"write_only,omitempty"`
 }
 
 // CreateDictionary creates a new resource.
@@ -87,7 +86,6 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -108,7 +106,7 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 
 // GetDictionaryInput is used as input to the GetDictionary function.
 type GetDictionaryInput struct {
-	// Name is the name of the dictionary to fetch.
+	// Name is the name of the dictionary to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -118,16 +116,14 @@ type GetDictionaryInput struct {
 
 // GetDictionary retrieves the specified resource.
 func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -146,30 +142,28 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 
 // UpdateDictionaryInput is used as input to the UpdateDictionary function.
 type UpdateDictionaryInput struct {
-	// Name is the name of the dictionary to update.
-	Name string
+	// Name is the name of the dictionary to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// WriteOnly determines if items in the dictionary are readable or not.
 	WriteOnly *Compatibool `url:"write_only,omitempty"`
 }
 
 // UpdateDictionary updates the specified resource.
 func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -198,16 +192,14 @@ type DeleteDictionaryInput struct {
 
 // DeleteDictionary deletes the specified resource.
 func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

@@ -21,8 +21,8 @@ const (
 // PoolType is a type of pool.
 type PoolType string
 
-// PPoolType returns pointer to PoolType.
-func PPoolType(t PoolType) *PoolType {
+// PoolTypePtr returns pointer to PoolType.
+func PoolTypePtr(t PoolType) *PoolType {
 	pt := PoolType(t)
 	return &pt
 }
@@ -30,18 +30,18 @@ func PPoolType(t PoolType) *PoolType {
 // Pool represents a pool response from the Fastly API.
 type Pool struct {
 	Comment          string     `mapstructure:"comment"`
-	ConnectTimeout   uint       `mapstructure:"connect_timeout"`
+	ConnectTimeout   int        `mapstructure:"connect_timeout"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
-	FirstByteTimeout uint       `mapstructure:"first_byte_timeout"`
+	FirstByteTimeout int        `mapstructure:"first_byte_timeout"`
 	Healthcheck      string     `mapstructure:"healthcheck"`
 	ID               string     `mapstructure:"id"`
-	MaxConnDefault   uint       `mapstructure:"max_conn_default"`
+	MaxConnDefault   int        `mapstructure:"max_conn_default"`
 	MaxTLSVersion    string     `mapstructure:"max_tls_version"`
 	MinTLSVersion    string     `mapstructure:"min_tls_version"`
 	Name             string     `mapstructure:"name"`
 	OverrideHost     string     `mapstructure:"override_host"`
-	Quorum           uint       `mapstructure:"quorum"`
+	Quorum           int        `mapstructure:"quorum"`
 	RequestCondition string     `mapstructure:"request_condition"`
 	ServiceID        string     `mapstructure:"service_id"`
 	ServiceVersion   int        `mapstructure:"version"`
@@ -89,7 +89,6 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -112,51 +111,51 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 // CreatePoolInput is used as input to the CreatePool function.
 type CreatePoolInput struct {
 	// Comment is a freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is how long to wait for a timeout in milliseconds.
-	ConnectTimeout uint `url:"connect_timeout,omitempty"`
+	ConnectTimeout *int `url:"connect_timeout,omitempty"`
 	// FirstByteTimeout is how long to wait for the first byte in milliseconds.
-	FirstByteTimeout uint `url:"first_byte_timeout,omitempty"`
+	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// Healthcheck is the name of the healthcheck to use with this pool.
-	Healthcheck string `url:"healthcheck,omitempty"`
+	Healthcheck *string `url:"healthcheck,omitempty"`
 	// MaxConnDefault is the maximum number of connections.
-	MaxConnDefault uint `url:"max_conn_default,omitempty"`
+	MaxConnDefault *int `url:"max_conn_default,omitempty"`
 	// MaxTLSVersion is the maximum allowed TLS version on connections to this server.
-	MaxTLSVersion string `url:"max_tls_version,omitempty"`
+	MaxTLSVersion *string `url:"max_tls_version,omitempty"`
 	// MinTLSVersion is the minimum allowed TLS version on connections to this server.
-	MinTLSVersion string `url:"min_tls_version,omitempty"`
+	MinTLSVersion *string `url:"min_tls_version,omitempty"`
 	// Name is the name of the pool to create (required).
-	Name string `url:"name"`
+	Name *string `url:"name,omitempty"`
 	// OverrideHost is the hostname to override the Host header.
-	OverrideHost string `url:"override_host,omitempty"`
+	OverrideHost *string `url:"override_host,omitempty"`
 	// Quorum is the percentage of capacity (0-100) that needs to be operationally available for a pool to be considered up.
-	Quorum uint `url:"quorum,omitempty"`
+	Quorum *int `url:"quorum,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
-	RequestCondition string `url:"request_condition,omitempty"`
+	RequestCondition *string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Shield is the selected POP to serve as a shield for the servers.
-	Shield string `url:"shield,omitempty"`
+	Shield *string `url:"shield,omitempty"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
-	TLSCACert string `url:"tls_ca_cert,omitempty"`
+	TLSCACert *string `url:"tls_ca_cert,omitempty"`
 	// TLSCertHostname is the hostname used to verify a server's certificate.
-	TLSCertHostname string `url:"tls_cert_hostname,omitempty"`
+	TLSCertHostname *string `url:"tls_cert_hostname,omitempty"`
 	// TLSCheckCert forces strict checking of TLS certs.
-	TLSCheckCert Compatibool `url:"tls_check_cert,omitempty"`
+	TLSCheckCert *Compatibool `url:"tls_check_cert,omitempty"`
 	// TLSCiphers is a list of OpenSSL ciphers (see the openssl.org manpages for details).
-	TLSCiphers string `url:"tls_ciphers,omitempty"`
+	TLSCiphers *string `url:"tls_ciphers,omitempty"`
 	// TLSClientCert is the client certificate used to make authenticated requests. Must be in PEM format.
-	TLSClientCert string `url:"tls_client_cert,omitempty"`
+	TLSClientCert *string `url:"tls_client_cert,omitempty"`
 	// TLSClientKey is the client private key used to make authenticated requests. Must be in PEM format.
-	TLSClientKey string `url:"tls_client_key,omitempty"`
+	TLSClientKey *string `url:"tls_client_key,omitempty"`
 	// TLSSNIHostname is the SNI hostname.
-	TLSSNIHostname string `url:"tls_sni_hostname,omitempty"`
+	TLSSNIHostname *string `url:"tls_sni_hostname,omitempty"`
 	// Type is what type of load balance group to use (random, hash, client).
-	Type PoolType `url:"type,omitempty"`
+	Type *PoolType `url:"type,omitempty"`
 	// UseTLS indicates whether to use TLS.
-	UseTLS Compatibool `url:"use_tls,omitempty"`
+	UseTLS *Compatibool `url:"use_tls,omitempty"`
 }
 
 // CreatePool creates a new resource.
@@ -164,13 +163,8 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool", i.ServiceID, i.ServiceVersion)
@@ -199,16 +193,14 @@ type GetPoolInput struct {
 
 // GetPool retrieves the specified resource.
 func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -230,31 +222,31 @@ type UpdatePoolInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is how long to wait for a timeout in milliseconds.
-	ConnectTimeout *uint `url:"connect_timeout,omitempty"`
+	ConnectTimeout *int `url:"connect_timeout,omitempty"`
 	// FirstByteTimeout is how long to wait for the first byte in milliseconds.
-	FirstByteTimeout *uint `url:"first_byte_timeout,omitempty"`
+	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// Healthcheck is the name of the healthcheck to use with this pool.
 	Healthcheck *string `url:"healthcheck,omitempty"`
 	// MaxConnDefault is the maximum number of connections.
-	MaxConnDefault *uint `url:"max_conn_default,omitempty"`
+	MaxConnDefault *int `url:"max_conn_default,omitempty"`
 	// MaxTLSVersion is the maximum allowed TLS version on connections to this server.
 	MaxTLSVersion *string `url:"max_tls_version,omitempty"`
 	// MinTLSVersion is the minimum allowed TLS version on connections to this server.
 	MinTLSVersion *string `url:"min_tls_version,omitempty"`
 	// Name is the name of the pool to update (required).
-	Name string
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// OverrideHost is the hostname to override the Host header.
 	OverrideHost *string `url:"override_host,omitempty"`
 	// Quorum is the percentage of capacity (0-100) that needs to be operationally available for a pool to be considered up.
-	Quorum *uint `url:"quorum,omitempty"`
+	Quorum *int `url:"quorum,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Shield is the selected POP to serve as a shield for the servers.
 	Shield *string `url:"shield,omitempty"`
 	// TLSCACert is a secure certificate to authenticate a server with. Must be in PEM format.
@@ -279,16 +271,14 @@ type UpdatePoolInput struct {
 
 // UpdatePool updates the specified resource.
 func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -317,16 +307,14 @@ type DeletePoolInput struct {
 
 // DeletePool deletes the specified resource.
 func (c *Client) DeletePool(i *DeletePoolInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/pool/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

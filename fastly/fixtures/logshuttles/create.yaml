@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=77&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-logshuttle&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2Flogs.example.com
+    body: format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-logshuttle&placement=waf_debug&token=super-secure-token&url=https%3A%2F%2Flogs.example.com
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "77"
       format:
       - '%h %l %u %t "%r" %>s %b'
       format_version:
@@ -24,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/77/logging/logshuttle
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/logshuttle
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-logshuttle","placement":"waf_debug","token":"super-secure-token","url":"https://logs.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"77","created_at":"2021-11-03T16:58:26Z","response_condition":"","updated_at":"2021-11-03T16:58:26Z","deleted_at":null}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-logshuttle","placement":"waf_debug","token":"super-secure-token","url":"https://logs.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"45","updated_at":"2022-11-04T13:45:16Z","created_at":"2022-11-04T13:45:16Z","deleted_at":null,"response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -37,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:58:26 GMT
+      - Fri, 04 Nov 2022 13:45:17 GMT
       Fastly-Ratelimit-Remaining:
-      - "4805"
+      - "9981"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667570400"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4135-MAN
       X-Timer:
-      - S1635958706.140026,VS0,VE576
+      - S1667569517.779601,VS0,VE311
     status: 200 OK
     code: 200
     duration: ""

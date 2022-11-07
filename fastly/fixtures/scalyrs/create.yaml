@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=88&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=waf_debug&region=US&token=super-secure-token
+    body: format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-scalyr&placement=waf_debug&region=US&token=super-secure-token
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "88"
       format:
       - '%h %l %u %t "%r" %>s %b'
       format_version:
@@ -24,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/88/logging/scalyr
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/60/logging/scalyr
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"waf_debug","region":"US","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"88","response_condition":"","deleted_at":null,"updated_at":"2021-11-03T17:14:02Z","project_id":null,"created_at":"2021-11-03T17:14:02Z"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-scalyr","placement":"waf_debug","region":"US","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"60","response_condition":"","created_at":"2022-11-04T16:06:19Z","project_id":null,"deleted_at":null,"updated_at":"2022-11-04T16:06:19Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -37,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:03 GMT
+      - Fri, 04 Nov 2022 16:06:19 GMT
       Fastly-Ratelimit-Remaining:
-      - "4908"
+      - "9998"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667581200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -55,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4122-MAN
+      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4138-MAN
       X-Timer:
-      - S1635959643.630597,VS0,VE530
+      - S1667577979.040033,VS0,VE482
     status: 200 OK
     code: 200
     duration: ""

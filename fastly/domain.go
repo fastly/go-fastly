@@ -51,7 +51,6 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -74,13 +73,13 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 // CreateDomainInput is used as input to the CreateDomain function.
 type CreateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
-	Comment string `url:"comment,omitempty"`
+	Comment *string `url:"comment,omitempty"`
 	// Name is the name of the domain that the service will respond to (required).
-	Name string `url:"name"`
+	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // CreateDomain creates a new resource.
@@ -88,7 +87,6 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -109,8 +107,8 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 
 // GetDomainInput is used as input to the GetDomain function.
 type GetDomainInput struct {
-	// Name is the name of the domain to fetch.
-	Name string `url:"name"`
+	// Name is the name of the domain to fetch (required).
+	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -119,16 +117,14 @@ type GetDomainInput struct {
 
 // GetDomain retrieves the specified resource.
 func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -150,31 +146,25 @@ type UpdateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Name is the name of the domain that the service will respond to (required).
-	Name string
+	Name string `url:"-"`
 	// NewName is the updated name of the domain
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // UpdateDomain updates the specified resource.
 func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-
-	if i.NewName == nil && i.Comment == nil {
-		return nil, ErrMissingOptionalNameComment
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -194,7 +184,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 // DeleteDomainInput is used as input to the DeleteDomain function.
 type DeleteDomainInput struct {
 	// Name is the name of the domain that the service will respond to (required).
-	Name string `url:"name"`
+	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -203,16 +193,14 @@ type DeleteDomainInput struct {
 
 // DeleteDomain deletes the specified resource.
 func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -225,8 +213,8 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 
 // ValidateDomainInput is used as input to the ValidateDomain function.
 type ValidateDomainInput struct {
-	// Name is the name of the domain to validate.
-	Name string `url:"name"`
+	// Name is the name of the domain to validate (required).
+	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -235,16 +223,14 @@ type ValidateDomainInput struct {
 
 // ValidateDomain validates the specified resource.
 func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s/check", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -327,7 +313,6 @@ func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*Doma
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}

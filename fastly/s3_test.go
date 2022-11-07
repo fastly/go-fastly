@@ -14,30 +14,31 @@ func TestClient_S3s(t *testing.T) {
 	})
 
 	// Create
+	//
+	// NOTE: You can't send the API and empty ResponseCondition.
 	var s3CreateResp1, s3CreateResp3, s3CreateResp4 *S3
 	record(t, "s3s/create", func(c *Client) {
 		s3CreateResp1, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:                         "/path",
-			Period:                       12,
-			CompressionCodec:             "snappy",
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyReduced,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
-			ServerSideEncryption:         S3ServerSideEncryptionKMS,
-			ACL:                          S3AccessControlListPrivate,
+			Name:                         String("test-s3"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			AccessKey:                    String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:                    String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:                         String("/path"),
+			Period:                       Int(12),
+			CompressionCodec:             String("snappy"),
+			Format:                       String("format"),
+			FormatVersion:                Int(2),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
+			Redundancy:                   S3RedundancyPtr(S3RedundancyReduced),
+			Placement:                    String("waf_debug"),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
+			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
+			ACL:                          S3AccessControlListPtr(S3AccessControlListPrivate),
 		})
 	})
 	if err != nil {
@@ -48,54 +49,51 @@ func TestClient_S3s(t *testing.T) {
 		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3-2",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:                         "/path",
-			Period:                       12,
-			GzipLevel:                    8,
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyOneZoneIA,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
-			ServerSideEncryption:         S3ServerSideEncryptionKMS,
-			ACL:                          S3AccessControlListAuthenticatedRead,
+			Name:                         String("test-s3-2"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			AccessKey:                    String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:                    String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:                         String("/path"),
+			Period:                       Int(12),
+			GzipLevel:                    Int(8),
+			Format:                       String("format"),
+			FormatVersion:                Int(2),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
+			Redundancy:                   S3RedundancyPtr(S3RedundancyOneZoneIA),
+			Placement:                    String("waf_debug"),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
+			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
+			ACL:                          S3AccessControlListPtr(S3AccessControlListAuthenticatedRead),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	record(t, "s3s/create3", func(c *Client) {
 		s3CreateResp3, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3-3",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:                         "/path",
-			Period:                       12,
-			CompressionCodec:             "snappy",
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyStandardIA,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
-			ServerSideEncryption:         S3ServerSideEncryptionKMS,
-			ACL:                          S3AccessControlListBucketOwnerFullControl,
+			Name:                         String("test-s3-3"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			AccessKey:                    String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:                    String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:                         String("/path"),
+			Period:                       Int(12),
+			Format:                       String("format"),
+			CompressionCodec:             String("snappy"),
+			FormatVersion:                Int(2),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
+			Redundancy:                   S3RedundancyPtr(S3RedundancyStandardIA),
+			Placement:                    String("waf_debug"),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
+			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
+			ACL:                          S3AccessControlListPtr(S3AccessControlListBucketOwnerFullControl),
 		})
 	})
 	if err != nil {
@@ -106,23 +104,22 @@ func TestClient_S3s(t *testing.T) {
 		s3CreateResp4, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3-4",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			IAMRole:                      "arn:aws:iam::123456789012:role/S3Access",
-			Path:                         "/path",
-			Period:                       12,
-			CompressionCodec:             "snappy",
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyStandard,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
-			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+			Name:                         String("test-s3-4"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			IAMRole:                      String("arn:aws:iam::123456789012:role/S3Access"),
+			Path:                         String("/path"),
+			Period:                       Int(12),
+			Format:                       String("format"),
+			CompressionCodec:             String("snappy"),
+			FormatVersion:                Int(2),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
+			Placement:                    String("waf_debug"),
+			Redundancy:                   S3RedundancyPtr(S3RedundancyStandard),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
+			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 		})
 	})
 	if err != nil {
@@ -134,25 +131,24 @@ func TestClient_S3s(t *testing.T) {
 		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			IAMRole:                      "arn:aws:iam::123456789012:role/S3Access",
-			Path:                         "/path",
-			Period:                       12,
-			CompressionCodec:             "snappy",
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyReduced,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
-			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+			Name:                         String("test-s3"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			AccessKey:                    String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:                    String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			IAMRole:                      String("arn:aws:iam::123456789012:role/S3Access"),
+			Path:                         String("/path"),
+			Period:                       Int(12),
+			CompressionCodec:             String("snappy"),
+			Format:                       String("format"),
+			FormatVersion:                Int(2),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
+			Redundancy:                   S3RedundancyPtr(S3RedundancyReduced),
+			Placement:                    String("waf_debug"),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
+			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 		})
 	})
 	if err == nil {
@@ -164,23 +160,22 @@ func TestClient_S3s(t *testing.T) {
 		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			IAMRole:                      "badarn",
-			Path:                         "/path",
-			Period:                       12,
-			CompressionCodec:             "snappy",
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyReduced,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
-			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+			Name:                         String("test-s3"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			IAMRole:                      String("badarn"),
+			Path:                         String("/path"),
+			Period:                       Int(12),
+			CompressionCodec:             String("snappy"),
+			Format:                       String("format"),
+			FormatVersion:                Int(2),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
+			Redundancy:                   S3RedundancyPtr(S3RedundancyReduced),
+			Placement:                    String("waf_debug"),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
+			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 		})
 	})
 	if err == nil {
@@ -193,25 +188,24 @@ func TestClient_S3s(t *testing.T) {
 		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
-			Name:                         "test-s3-2",
-			BucketName:                   "bucket-name",
-			Domain:                       "s3.us-east-1.amazonaws.com",
-			AccessKey:                    "AKIAIOSFODNN7EXAMPLE",
-			SecretKey:                    "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY",
-			Path:                         "/path",
-			Period:                       12,
-			CompressionCodec:             "snappy",
-			GzipLevel:                    8,
-			Format:                       "format",
-			FormatVersion:                2,
-			ResponseCondition:            "",
-			TimestampFormat:              "%Y",
-			MessageType:                  "classic",
-			Redundancy:                   S3RedundancyReduced,
-			Placement:                    "waf_debug",
-			PublicKey:                    pgpPublicKey(),
-			ServerSideEncryptionKMSKeyID: "1234",
-			ServerSideEncryption:         S3ServerSideEncryptionKMS,
+			Name:                         String("test-s3-2"),
+			BucketName:                   String("bucket-name"),
+			Domain:                       String("s3.us-east-1.amazonaws.com"),
+			AccessKey:                    String("AKIAIOSFODNN7EXAMPLE"),
+			SecretKey:                    String("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
+			Path:                         String("/path"),
+			Period:                       Int(12),
+			CompressionCodec:             String("snappy"),
+			GzipLevel:                    Int(8),
+			Format:                       String("format"),
+			FormatVersion:                Int(2),
+			TimestampFormat:              String("%Y"),
+			MessageType:                  String("classic"),
+			Redundancy:                   S3RedundancyPtr(S3RedundancyReduced),
+			Placement:                    String("waf_debug"),
+			PublicKey:                    String(pgpPublicKey()),
+			ServerSideEncryptionKMSKeyID: String("1234"),
+			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 		})
 	})
 	if err == nil {
@@ -310,7 +304,6 @@ func TestClient_S3s(t *testing.T) {
 	if s3CreateResp1.ACL != S3AccessControlListPrivate {
 		t.Errorf("bad acl: %s", s3CreateResp1.ACL)
 	}
-
 	if s3CreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", s3CreateResp1.CompressionCodec)
 	}
@@ -323,7 +316,6 @@ func TestClient_S3s(t *testing.T) {
 	if s3CreateResp3.ACL != S3AccessControlListBucketOwnerFullControl {
 		t.Errorf("bad acl: %s", s3CreateResp3.ACL)
 	}
-
 	if s3CreateResp4.AccessKey != "" {
 		t.Errorf("bad access_key: %q", s3CreateResp4.AccessKey)
 	}
@@ -440,7 +432,6 @@ func TestClient_S3s(t *testing.T) {
 	if s3CreateResp1.ACL != s3GetResp.ACL {
 		t.Errorf("bad acl: %s", s3CreateResp1.ACL)
 	}
-
 	if s3CreateResp4.AccessKey != s3GetResp2.AccessKey {
 		t.Errorf("bad access_key: %q", s3CreateResp4.AccessKey)
 	}
@@ -494,7 +485,7 @@ func TestClient_S3s(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-s3-3",
-			GzipLevel:      Uint8(9),
+			GzipLevel:      Int(9),
 		})
 	})
 	if err != nil {
@@ -559,21 +550,18 @@ func TestClient_S3s(t *testing.T) {
 	if s3UpdateResp1.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", s3UpdateResp1.GzipLevel)
 	}
-
 	if s3UpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", s3UpdateResp2.CompressionCodec)
 	}
 	if s3UpdateResp2.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", s3UpdateResp2.GzipLevel)
 	}
-
 	if s3UpdateResp3.CompressionCodec != "" {
 		t.Errorf("bad compression_codec: %q", s3UpdateResp3.CompressionCodec)
 	}
 	if s3UpdateResp3.GzipLevel != 9 {
 		t.Errorf("bad gzip_level: %q", s3UpdateResp3.GzipLevel)
 	}
-
 	if s3UpdateResp4.AccessKey != "" {
 		t.Errorf("bad access_key: %q", s3UpdateResp4.AccessKey)
 	}
@@ -583,7 +571,6 @@ func TestClient_S3s(t *testing.T) {
 	if s3UpdateResp4.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
 		t.Errorf("bad iam_role: %q", s3UpdateResp4.IAMRole)
 	}
-
 	if s3UpdateResp5.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
 		t.Errorf("bad access_key: %q", s3UpdateResp5.AccessKey)
 	}
@@ -609,6 +596,7 @@ func TestClient_S3s(t *testing.T) {
 
 func TestClient_ListS3s_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.ListS3s(&ListS3sInput{
 		ServiceID: "",
 	})
@@ -627,27 +615,33 @@ func TestClient_ListS3s_validation(t *testing.T) {
 
 func TestClient_CreateS3_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.CreateS3(&CreateS3Input{
-		ServiceID: "",
+		Name:                         String("test-service"),
+		ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
+		ServerSideEncryptionKMSKeyID: String("1234"),
+		ServiceVersion:               1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateS3(&CreateS3Input{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:                         String("test-service"),
+		ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
+		ServerSideEncryptionKMSKeyID: String("1234"),
+		ServiceID:                    "foo",
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.CreateS3(&CreateS3Input{
+		Name:                         String("test-service"),
+		ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
+		ServerSideEncryptionKMSKeyID: String(""),
 		ServiceID:                    "foo",
 		ServiceVersion:               1,
-		Name:                         "test-service",
-		ServerSideEncryption:         S3ServerSideEncryptionKMS,
-		ServerSideEncryptionKMSKeyID: "",
 	})
 	if err != ErrMissingServerSideEncryptionKMSKeyID {
 		t.Errorf("bad error: %s", err)
@@ -656,63 +650,65 @@ func TestClient_CreateS3_validation(t *testing.T) {
 
 func TestClient_GetS3_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetS3(&GetS3Input{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetS3(&GetS3Input{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetS3(&GetS3Input{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetS3(&GetS3Input{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateS3_validation(t *testing.T) {
 	var err error
-	_, err = testClient.UpdateS3(&UpdateS3Input{
-		ServiceID: "",
-	})
-	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateS3(&UpdateS3Input{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
-	})
-	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
 
 	_, err = testClient.UpdateS3(&UpdateS3Input{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
-		Name:           "",
 	})
 	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateS3(&UpdateS3Input{
-		ServiceID:                    "foo",
-		ServiceVersion:               1,
+		Name:           "test",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateS3(&UpdateS3Input{
+		Name:      "test",
+		ServiceID: "foo",
+	})
+	if err != ErrMissingServiceVersion {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateS3(&UpdateS3Input{
 		Name:                         "test-service",
 		ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 		ServerSideEncryptionKMSKeyID: String(""),
+		ServiceID:                    "foo",
+		ServiceVersion:               1,
 	})
 	if err != ErrMissingServerSideEncryptionKMSKeyID {
 		t.Errorf("bad error: %s", err)
@@ -721,27 +717,28 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 
 func TestClient_DeleteS3_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteS3(&DeleteS3Input{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteS3(&DeleteS3Input{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteS3(&DeleteS3Input{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteS3(&DeleteS3Input{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }

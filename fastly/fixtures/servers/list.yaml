@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/4I1u39xj1EztfJHVzPo6BY/servers
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/servers
     method: GET
   response:
-    body: '[{"port":"80","pool_id":"4I1u39xj1EztfJHVzPo6BY","disabled":false,"updated_at":"2021-11-03T17:14:36Z","deleted_at":null,"max_conn":"0","weight":"100","id":"5kmav70NchjgR8M9tjxtOz","created_at":"2021-11-03T17:14:36Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","override_host":null,"comment":"","address":"127.0.0.1"},{"disabled":false,"updated_at":"2021-11-03T17:14:36Z","deleted_at":null,"pool_id":"4I1u39xj1EztfJHVzPo6BY","port":"80","comment":"","override_host":null,"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2021-11-03T17:14:36Z","id":"1YEDh57waxruEoTEsk4bKx","max_conn":"0","weight":"100"}]'
+    body: '[{"deleted_at":null,"weight":"100","comment":"","override_host":null,"port":"80","updated_at":"2022-11-04T17:20:29Z","id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","disabled":false,"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-04T17:20:29Z"},{"override_host":null,"weight":"100","deleted_at":null,"comment":"","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","address":"altserver.example.com","disabled":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-04T17:20:30Z","port":"80","updated_at":"2022-11-04T17:20:30Z","id":"UOJwfuyz8YokOWK4u1GJ54"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:14:37 GMT
+      - Fri, 04 Nov 2022 17:20:30 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4140-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4140-MAN
       X-Timer:
-      - S1635959677.023118,VS0,VE138
+      - S1667582430.476235,VS0,VE314
     status: 200 OK
     code: 200
     duration: ""

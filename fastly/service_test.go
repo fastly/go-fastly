@@ -13,8 +13,8 @@ func TestClient_Services(t *testing.T) {
 	var s *Service
 	record(t, "services/create", func(c *Client) {
 		s, err = c.CreateService(&CreateServiceInput{
-			Name:    "test-service",
-			Comment: "comment",
+			Name:    String("test-service"),
+			Comment: String("comment"),
 		})
 	})
 	if err != nil {
@@ -186,32 +186,15 @@ func TestClient_Services(t *testing.T) {
 }
 
 func TestClient_GetService_validation(t *testing.T) {
-	var err error
-	_, err = testClient.GetService(&GetServiceInput{})
+	_, err := testClient.GetService(&GetServiceInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateService_validation(t *testing.T) {
-	var err error
-	_, err = testClient.UpdateService(&UpdateServiceInput{})
+	_, err := testClient.UpdateService(&UpdateServiceInput{})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateService(&UpdateServiceInput{
-		ServiceID: "foo",
-	})
-	if err != ErrMissingOptionalNameComment {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateService(&UpdateServiceInput{
-		ServiceID: "foo",
-		Name:      String(""),
-	})
-	if err != ErrMissingNameValue {
 		t.Errorf("bad error: %s", err)
 	}
 }

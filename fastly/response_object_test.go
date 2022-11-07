@@ -19,11 +19,11 @@ func TestClient_ResponseObjects(t *testing.T) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-response-object",
-			Status:         Uint(200),
-			Response:       "Ok",
-			Content:        "abcd",
-			ContentType:    "text/plain",
+			Name:           String("test-response-object"),
+			Status:         Int(200),
+			Response:       String("Ok"),
+			Content:        String("abcd"),
+			ContentType:    String("text/plain"),
 		})
 	})
 	if err != nil {
@@ -174,81 +174,84 @@ func TestClient_CreateResponseObject_validation(t *testing.T) {
 
 func TestClient_GetResponseObject_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetResponseObject(&GetResponseObjectInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetResponseObject(&GetResponseObjectInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetResponseObject(&GetResponseObjectInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetResponseObject(&GetResponseObjectInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateResponseObject_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateResponseObject(&UpdateResponseObjectInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateResponseObject(&UpdateResponseObjectInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateResponseObject(&UpdateResponseObjectInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateResponseObject(&UpdateResponseObjectInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteResponseObject_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteResponseObject(&DeleteResponseObjectInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteResponseObject(&DeleteResponseObjectInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteResponseObject(&DeleteResponseObjectInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteResponseObject(&DeleteResponseObjectInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
