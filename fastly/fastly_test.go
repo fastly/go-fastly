@@ -367,8 +367,8 @@ func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, 
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
-			Name:           name,
-			Status:         Uint(403),
+			Name:           String(name),
+			Status:         Int(403),
 		})
 	})
 	if err != nil {

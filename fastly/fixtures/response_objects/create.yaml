@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=79&content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
+    body: content=abcd&content_type=text%2Fplain&name=test-response-object&response=Ok&status=200
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "79"
       content:
       - abcd
       content_type:
@@ -22,11 +18,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/79/response_object
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/92/response_object
     method: POST
   response:
-    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"79","created_at":"2021-11-26T07:19:36Z","deleted_at":null,"updated_at":"2021-11-26T07:19:36Z","request_condition":"","cache_condition":""}'
+    body: '{"content":"abcd","content_type":"text/plain","name":"test-response-object","response":"Ok","status":"200","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"92","updated_at":"2022-11-07T14:05:22Z","deleted_at":null,"request_condition":"","cache_condition":"","created_at":"2022-11-07T14:05:22Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +31,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 26 Nov 2021 07:19:36 GMT
+      - Mon, 07 Nov 2022 14:05:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "4963"
+      - "9998"
       Fastly-Ratelimit-Reset:
-      - "1637913600"
+      - "1667833200"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11970-TYO
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4146-MAN
       X-Timer:
-      - S1637911176.952938,VS0,VE312
+      - S1667829922.940055,VS0,VE179
     status: 200 OK
     code: 200
     duration: ""

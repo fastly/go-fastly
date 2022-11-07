@@ -19,7 +19,7 @@ type ResponseObject struct {
 	Response         string     `mapstructure:"response"`
 	ServiceID        string     `mapstructure:"service_id"`
 	ServiceVersion   int        `mapstructure:"version"`
-	Status           uint       `mapstructure:"status"`
+	Status           int        `mapstructure:"status"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
 }
 
@@ -55,7 +55,6 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -79,23 +78,23 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 // function.
 type CreateResponseObjectInput struct {
 	// CacheCondition is the name of the cache condition controlling when this configuration applies.
-	CacheCondition string `url:"cache_condition,omitempty"`
+	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Content is the content to deliver for the response object, can be empty.
-	Content string `url:"content,omitempty"`
+	Content *string `url:"content,omitempty"`
 	// ContentType is the MIME type of the content, can be empty.
-	ContentType string `url:"content_type,omitempty"`
+	ContentType *string `url:"content_type,omitempty"`
 	// Name is the name for the request settings.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
-	RequestCondition string `url:"request_condition,omitempty"`
+	RequestCondition *string `url:"request_condition,omitempty"`
 	// Response is the HTTP response.
-	Response string `url:"response,omitempty"`
+	Response *string `url:"response,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Status is the HTTP status code.
-	Status *uint `url:"status,omitempty"`
+	Status *int `url:"status,omitempty"`
 }
 
 // CreateResponseObject creates a new resource.
@@ -103,7 +102,6 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -124,7 +122,7 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 
 // GetResponseObjectInput is used as input to the GetResponseObject function.
 type GetResponseObjectInput struct {
-	// Name is the name of the response object to fetch.
+	// Name is the name of the response object to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -134,16 +132,14 @@ type GetResponseObjectInput struct {
 
 // GetResponseObject retrieves the specified resource.
 func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -169,8 +165,8 @@ type UpdateResponseObjectInput struct {
 	Content *string `url:"content,omitempty"`
 	// ContentType is the MIME type of the content, can be empty.
 	ContentType *string `url:"content_type,omitempty"`
-	// Name is the name of the response object to update.
-	Name string
+	// Name is the name of the response object to update (required).
+	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
@@ -178,25 +174,23 @@ type UpdateResponseObjectInput struct {
 	// Response is the HTTP response.
 	Response *string `url:"response,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Status is the HTTP status code.
-	Status *uint `url:"status,omitempty"`
+	Status *int `url:"status,omitempty"`
 }
 
 // UpdateResponseObject updates the specified resource.
 func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseObject, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -225,16 +219,14 @@ type DeleteResponseObjectInput struct {
 
 // DeleteResponseObject deletes the specified resource.
 func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/response_object/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
