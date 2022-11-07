@@ -19,21 +19,21 @@ func TestClient_HealthChecks(t *testing.T) {
 		hc, err = c.CreateHealthCheck(&CreateHealthCheckInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-healthcheck",
-			Method:         "HEAD",
-			Headers: []string{
+			Name:           String("test-healthcheck"),
+			Method:         String("HEAD"),
+			Headers: &[]string{
 				"Foo: Bar",
 				"Baz: Qux",
 			},
-			Host:             "example.com",
-			Path:             "/foo",
-			HTTPVersion:      "1.1",
-			Timeout:          Uint(1500),
-			CheckInterval:    Uint(2500),
-			ExpectedResponse: Uint(200),
-			Window:           Uint(5000),
-			Threshold:        Uint(10),
-			Initial:          Uint(10),
+			Host:             String("example.com"),
+			Path:             String("/foo"),
+			HTTPVersion:      String("1.1"),
+			Timeout:          Int(1500),
+			CheckInterval:    Int(2500),
+			ExpectedResponse: Int(200),
+			Window:           Int(5000),
+			Threshold:        Int(10),
+			Initial:          Int(10),
 		})
 	})
 	if err != nil {
@@ -233,81 +233,84 @@ func TestClient_CreateHealthCheck_validation(t *testing.T) {
 
 func TestClient_GetHealthCheck_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteHealthCheck_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
