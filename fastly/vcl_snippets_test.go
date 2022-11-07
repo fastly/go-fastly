@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func Test_Snippets(t *testing.T) {
+func TestClient_Snippets(t *testing.T) {
 	t.Parallel()
 
 	const (
