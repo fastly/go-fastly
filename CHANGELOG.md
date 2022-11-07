@@ -1,5 +1,25 @@
 # Changelog
 
+## [v7.0.0](https://github.com/fastly/go-fastly/releases/tag/v7.0.0) (2022-11-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v6.8.0...v7.0.0)
+
+**Breaking**:
+
+- Backend resource tweaks to allow setting zero value [#375](https://github.com/fastly/go-fastly/pull/375)
+- Sort all struct fields [#376](https://github.com/fastly/go-fastly/pull/376)
+- Address FIXME notes [#379](https://github.com/fastly/go-fastly/pull/379)
+- Revive fixes [#378](https://github.com/fastly/go-fastly/pull/378)
+- Ensure all relevant 'create' input fields are using pointers [#382](https://github.com/fastly/go-fastly/pull/382)
+
+**Bug fixes:**
+
+- Ensure parameters are sent to API [#380](https://github.com/fastly/go-fastly/pull/380)
+
+**Enhancements:**
+
+- Add google account name to all google logging endpoints [#377](https://github.com/fastly/go-fastly/pull/377)
+
 ## [v6.8.0](https://github.com/fastly/go-fastly/releases/tag/v6.8.0) (2022-10-10)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.7.0...v6.8.0)

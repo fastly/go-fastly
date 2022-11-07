@@ -2,7 +2,7 @@
 
 [![Go Documentation](http://img.shields.io/badge/go-documentation-blue.svg?style=flat-square)][latest]
 
-[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v6/fastly
+[latest]: https://pkg.go.dev/github.com/fastly/go-fastly/v7/fastly
 [v6]: https://pkg.go.dev/github.com/fastly/go-fastly/v6/fastly
 [v5]: https://pkg.go.dev/github.com/fastly/go-fastly/v5/fastly
 [v4]: https://pkg.go.dev/github.com/fastly/go-fastly/v4/fastly
@@ -21,7 +21,7 @@ so you must be running Go 1.11 or higher.
 ## Usage
 
 ```go
-import "github.com/fastly/go-fastly/v6/fastly"
+import "github.com/fastly/go-fastly/v7/fastly"
 ```
 
 ## Migrating from v1 to v2
@@ -63,7 +63,7 @@ import (
 	"fmt"
 	"log"
  	"os"
-	"github.com/fastly/go-fastly/v6/fastly"
+	"github.com/fastly/go-fastly/v7/fastly"
 )
 
 func main() {
@@ -114,7 +114,7 @@ func main() {
 	domain, err := client.CreateDomain(&fastly.CreateDomainInput{
 		ServiceID:      serviceID,
 		ServiceVersion: version.Number,
-		Name:           "example.com",
+		Name:           String("example.com"),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -127,9 +127,9 @@ func main() {
 	backend, err := client.CreateBackend(&fastly.CreateBackendInput{
 		ServiceID:      serviceID,
 		ServiceVersion: version.Number,
-		Name:           "example-backend",
-		Address:        "127.0.0.1",
-		Port:           80,
+		Name:           String("example-backend"),
+		Address:        String("127.0.0.1"),
+		Port:           Int(80),
 	})
 	if err != nil {
 		log.Fatal(err)
