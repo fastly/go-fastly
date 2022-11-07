@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/55/dictionary/test_dictionary
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/dictionary/test_dictionary
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Dictionary ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test_dictionary, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 55 }''"}'
+      version =\u003e 95 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:12:57 GMT
+      - Mon, 07 Nov 2022 14:45:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "4991"
+      - "9977"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667833200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4137-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4130-MAN
       X-Timer:
-      - S1635955977.916467,VS0,VE169
+      - S1667832335.932737,VS0,VE150
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/55/dictionary/new_test_dictionary
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/dictionary/new_test_dictionary
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Dictionary ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new_test_dictionary, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 55 }''"}'
+      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 95 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:12:57 GMT
+      - Mon, 07 Nov 2022 14:45:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "4990"
+      - "9976"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1667833200"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4137-MAN
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4130-MAN
       X-Timer:
-      - S1635955977.113252,VS0,VE194
+      - S1667832335.109678,VS0,VE149
     status: 404 Not Found
     code: 404
     duration: ""

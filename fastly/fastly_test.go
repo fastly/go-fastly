@@ -196,7 +196,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture string, serviceID stri
 		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix),
+			Name:           String(fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix)),
 		})
 	})
 	if err != nil {

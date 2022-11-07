@@ -18,7 +18,7 @@ func TestClient_Dictionaries(t *testing.T) {
 		d, err = c.CreateDictionary(&CreateDictionaryInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: testVersion.Number,
-			Name:           "test_dictionary",
+			Name:           String("test_dictionary"),
 		})
 	})
 	if err != nil {
@@ -145,81 +145,84 @@ func TestClient_CreateDictionary_validation(t *testing.T) {
 
 func TestClient_GetDictionary_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetDictionary(&GetDictionaryInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetDictionary(&GetDictionaryInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDictionary(&GetDictionaryInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDictionary(&GetDictionaryInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateDictionary_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateDictionary(&UpdateDictionaryInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateDictionary(&UpdateDictionaryInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateDictionary(&UpdateDictionaryInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateDictionary(&UpdateDictionaryInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteDictionary_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteDictionary(&DeleteDictionaryInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteDictionary(&DeleteDictionaryInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteDictionary(&DeleteDictionaryInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteDictionary(&DeleteDictionaryInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
