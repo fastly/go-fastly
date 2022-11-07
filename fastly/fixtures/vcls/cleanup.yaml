@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/97/vcl/test-vcl
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/85/vcl/test-vcl
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find VCL ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-vcl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 97 }''"}'
+      version =\u003e 85 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:24:57 GMT
+      - Mon, 07 Nov 2022 11:30:09 GMT
       Fastly-Ratelimit-Remaining:
-      - "4820"
+      - "9957"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667822400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4120-MAN
       X-Timer:
-      - S1635960297.961916,VS0,VE167
+      - S1667820609.186269,VS0,VE143
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +50,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/97/vcl/new-test-vcl
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/85/vcl/new-test-vcl
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find VCL ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-vcl, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 97 }''"}'
+      version =\u003e 85 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +65,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:24:57 GMT
+      - Mon, 07 Nov 2022 11:30:09 GMT
       Fastly-Ratelimit-Remaining:
-      - "4819"
+      - "9956"
       Fastly-Ratelimit-Reset:
-      - "1635962400"
+      - "1667822400"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +83,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4120-MAN
       X-Timer:
-      - S1635960297.158512,VS0,VE184
+      - S1667820609.369123,VS0,VE139
     status: 404 Not Found
     code: 404
     duration: ""

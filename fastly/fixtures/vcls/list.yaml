@@ -6,15 +6,15 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/97/vcl
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/85/vcl
     method: GET
   response:
-    body: '[{"deleted_at":null,"main":false,"created_at":"2021-11-03T17:24:55Z","content":"\nbackend
+    body: '[{"name":"test-vcl","updated_at":"2022-11-07T11:30:07Z","version":85,"main":false,"content":"\nbackend
       default {\n  .host = \"127.0.0.1\";\n  .port = \"9092\";\n}\n\nsub vcl_recv
       {\n  set req.backend = default;\n\n  if (req.url.path ~ \"(1|2)\") {\n    //
       ...\n  }\n}\n\nsub vcl_hash {\n  set req.hash += req.url;\n  set req.hash +=
-      req.http.host;\n  set req.hash += \"0\";\n}\n","version":97,"name":"test-vcl","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2021-11-03T17:24:55Z"}]'
+      req.http.host;\n  set req.hash += \"0\";\n}\n","deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-07T11:30:07Z"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,7 +23,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 17:24:55 GMT
+      - Mon, 07 Nov 2022 11:30:08 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4142-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4120-MAN
       X-Timer:
-      - S1635960296.551619,VS0,VE327
+      - S1667820608.992938,VS0,VE139
     status: 200 OK
     code: 200
     duration: ""
