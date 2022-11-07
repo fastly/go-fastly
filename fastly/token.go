@@ -72,7 +72,7 @@ func (c *Client) ListTokens() ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
-	// CustomerID is an alphanumeric string identifying the customer.
+	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
 
@@ -154,7 +154,7 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
-	// TokenID is an alphanumeric string identifying a token.
+	// TokenID is an alphanumeric string identifying a token (required).
 	TokenID string
 }
 
