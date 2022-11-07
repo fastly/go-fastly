@@ -19,17 +19,17 @@ func TestClient_RequestSettings(t *testing.T) {
 		rs, err = c.CreateRequestSetting(&CreateRequestSettingInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           "test-request-setting",
-			ForceMiss:      true,
-			ForceSSL:       true,
-			Action:         RequestSettingActionLookup,
-			BypassBusyWait: true,
-			MaxStaleAge:    Uint(30),
-			HashKeys:       "a,b,c",
-			XForwardedFor:  RequestSettingXFFLeave,
-			TimerSupport:   true,
-			GeoHeaders:     true,
-			DefaultHost:    "example.com",
+			Name:           String("test-request-setting"),
+			ForceMiss:      CBool(true),
+			ForceSSL:       CBool(true),
+			Action:         RequestSettingActionPtr(RequestSettingActionLookup),
+			BypassBusyWait: CBool(true),
+			MaxStaleAge:    Int(30),
+			HashKeys:       String("a,b,c"),
+			XForwardedFor:  RequestSettingXFFPtr(RequestSettingXFFLeave),
+			TimerSupport:   CBool(true),
+			GeoHeaders:     CBool(true),
+			DefaultHost:    String("example.com"),
 		})
 	})
 	if err != nil {
@@ -216,81 +216,84 @@ func TestClient_CreateRequestSetting_validation(t *testing.T) {
 
 func TestClient_GetRequestSetting_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 	var err error
+
 	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteRequestSetting_validation(t *testing.T) {
 	var err error
+
 	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
-		ServiceID: "",
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	})
+	if err != ErrMissingName {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
-		ServiceID:      "foo",
-		ServiceVersion: 0,
+		Name:      "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		Name:           "",
-	})
-	if err != ErrMissingName {
 		t.Errorf("bad error: %s", err)
 	}
 }
