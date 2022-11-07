@@ -2,6 +2,10 @@
 
 ## [v7.0.0](https://github.com/fastly/go-fastly/releases/tag/v7.0.0) (2022-11-07)
 
+The biggest change in this release is the majority of input fields are now pointers rather than primitives. This is to enable users to set an empty value for fields when they are being sent to the Fastly API, in cases where the user wishes to override an otherwise default value provided by the API.
+
+There has been a bunch of interface fixes (e.g. consistent use of `int` over `uint` equivalents, typos in field names fixed, response types renamed to be less ambiguous etc) and also many other changes to better support consistency and documentation across the code base.
+
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v6.8.0...v7.0.0)
 
 **Breaking**:
