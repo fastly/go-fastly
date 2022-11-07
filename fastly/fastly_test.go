@@ -332,9 +332,9 @@ func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 		condition, err = c.CreateCondition(&CreateConditionInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
-			Name:           name,
-			Statement:      "req.url~+\"index.html\"",
-			Type:           "PREFETCH", // This must be a prefetch condition
+			Name:           String(name),
+			Statement:      String("req.url~+\"index.html\""),
+			Type:           String("PREFETCH"), // This must be a prefetch condition
 			Priority:       Int(1),
 		})
 	})

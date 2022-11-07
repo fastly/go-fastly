@@ -2,12 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=74&name=test%2Fcondition&priority=1&statement=req.url~%2B%22index.html%22&type=REQUEST
+    body: name=test%2Fcondition&priority=1&statement=req.url~%2B%22index.html%22&type=REQUEST
     form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
-      ServiceVersion:
-      - "74"
       name:
       - test/condition
       priority:
@@ -20,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/condition
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/89/condition
     method: POST
   response:
-    body: '{"name":"test/condition","priority":"1","statement":"req.url~+\"index.html\"","type":"REQUEST","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"74","comment":"","deleted_at":null,"created_at":"2021-11-26T07:13:25Z","updated_at":"2021-11-26T07:13:25Z"}'
+    body: '{"name":"test/condition","priority":"1","statement":"req.url~+\"index.html\"","type":"REQUEST","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"89","deleted_at":null,"created_at":"2022-11-07T12:32:11Z","comment":"","updated_at":"2022-11-07T12:32:11Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 26 Nov 2021 07:13:25 GMT
+      - Mon, 07 Nov 2022 12:32:11 GMT
       Fastly-Ratelimit-Remaining:
-      - "4992"
+      - "9982"
       Fastly-Ratelimit-Reset:
-      - "1637913600"
+      - "1667826000"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11952-TYO
+      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4136-MAN
       X-Timer:
-      - S1637910805.308884,VS0,VE640
+      - S1667824332.511453,VS0,VE323
     status: 200 OK
     code: 200
     duration: ""

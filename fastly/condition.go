@@ -52,7 +52,6 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -75,17 +74,17 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 // CreateConditionInput is used as input to the CreateCondition function.
 type CreateConditionInput struct {
 	// Name is the name of the condition.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
 	Priority *int `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Statement is a conditional expression in VCL used to determine if the condition is met.
-	Statement string `url:"statement,omitempty"`
+	Statement *string `url:"statement,omitempty"`
 	// Type is the type of the condition (REQUEST, CACHE, RESPONSE, PREFETCH).
-	Type string `url:"type,omitempty"`
+	Type *string `url:"type,omitempty"`
 }
 
 // CreateCondition creates a new resource.
@@ -93,7 +92,6 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -114,7 +112,7 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 
 // GetConditionInput is used as input to the GetCondition function.
 type GetConditionInput struct {
-	// Name is the name of the condition to fetch.
+	// Name is the name of the condition to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -124,16 +122,14 @@ type GetConditionInput struct {
 
 // GetCondition retrieves the specified resource.
 func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -154,14 +150,14 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 type UpdateConditionInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Name is the name of the condition to update.
-	Name string
+	// Name is the name of the condition to update (required).
+	Name string `url:"-"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
 	Priority *int `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 	// Statement is a conditional expression in VCL used to determine if the condition is met.
 	Statement *string `url:"statement,omitempty"`
 	// Type is the type of the condition (REQUEST, CACHE, RESPONSE, PREFETCH).
@@ -170,16 +166,14 @@ type UpdateConditionInput struct {
 
 // UpdateCondition updates the specified resource.
 func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
+	if i.Name == "" {
+		return nil, ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
@@ -208,16 +202,14 @@ type DeleteConditionInput struct {
 
 // DeleteCondition deletes the specified resource.
 func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
+	if i.Name == "" {
+		return ErrMissingName
+	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
-	}
-
-	if i.Name == "" {
-		return ErrMissingName
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/condition/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))

@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/74/condition/test%2Fcondition
+      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/89/condition/test%2Fcondition
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Condition ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test/condition, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 74 }''"}'
+      version =\u003e 89 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 26 Nov 2021 07:13:27 GMT
+      - Mon, 07 Nov 2022 12:32:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "4989"
+      - "9979"
       Fastly-Ratelimit-Reset:
-      - "1637913600"
+      - "1667826000"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11952-TYO
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4136-MAN
       X-Timer:
-      - S1637910808.571039,VS0,VE278
+      - S1667824333.179726,VS0,VE328
     status: 404 Not Found
     code: 404
     duration: ""
