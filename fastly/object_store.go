@@ -206,7 +206,7 @@ func (c *Client) DeleteObjectStore(i *DeleteObjectStoreInput) error {
 type ListObjectStoreKeysInput struct {
 	// Cursor is used for paginating through results.
 	Cursor string
-	// ID is the ID of the object store to list keys for.
+	// ID is the ID of the object store to list keys for (required).
 	ID string
 	// Limit is the maximum number of items included the response.
 	Limit int
@@ -329,7 +329,6 @@ func (c *Client) GetObjectStoreKey(i *GetObjectStoreKeyInput) (string, error) {
 	if i.ID == "" {
 		return "", ErrMissingID
 	}
-
 	if i.Key == "" {
 		return "", ErrMissingKey
 	}
@@ -363,7 +362,6 @@ func (c *Client) InsertObjectStoreKey(i *InsertObjectStoreKeyInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
-
 	if i.Key == "" {
 		return ErrMissingKey
 	}
@@ -391,7 +389,6 @@ func (c *Client) DeleteObjectStoreKey(i *DeleteObjectStoreKeyInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
-
 	if i.Key == "" {
 		return ErrMissingKey
 	}
