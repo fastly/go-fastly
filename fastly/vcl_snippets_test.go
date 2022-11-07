@@ -27,11 +27,12 @@ func Test_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/create_with_required_fields_only", func(c *Client) {
 		cs, err = c.CreateSnippet(&CreateSnippetInput{
+			Content:        String(vclContent),
+			Dynamic:        Int(0),
+			Name:           String(svName),
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           svName,
-			Content:        vclContent,
-			Type:           SnippetTypeFetch,
+			Type:           SnippetTypePtr(SnippetTypeFetch),
 		})
 	})
 
@@ -64,10 +65,10 @@ func Test_Snippets(t *testing.T) {
 		cs, err = c.CreateSnippet(&CreateSnippetInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           sdName,
-			Content:        vclContent,
-			Type:           SnippetTypeFetch,
-			Dynamic:        dynamic,
+			Name:           String(sdName),
+			Content:        String(vclContent),
+			Type:           SnippetTypePtr(SnippetTypeFetch),
+			Dynamic:        Int(dynamic),
 			Priority:       Int(priority),
 		})
 	})
