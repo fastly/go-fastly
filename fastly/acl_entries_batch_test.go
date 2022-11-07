@@ -5,7 +5,7 @@ import (
 	"testing"
 )
 
-func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
+func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 	fixtureBase := "acl_entries_batch/create/"
 	nameSuffix := "BatchModifyAclEntries_Create"
 
@@ -101,7 +101,7 @@ func TestClient_BatchModifyAclEntries_Create(t *testing.T) {
 	}
 }
 
-func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
+func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	fixtureBase := "acl_entries_batch/delete/"
 	nameSuffix := "BatchModifyAclEntries_Delete"
 
@@ -200,7 +200,7 @@ func TestClient_BatchModifyAclEntries_Delete(t *testing.T) {
 	}
 }
 
-func TestClient_BatchModifyAclEntries_Update(t *testing.T) {
+func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	fixtureBase := "acl_entries_batch/update/"
 	nameSuffix := "BatchModifyAclEntries_Update"
 

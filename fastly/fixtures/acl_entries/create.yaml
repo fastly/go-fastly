@@ -2,16 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: ACLID=muyEz1k1BzxjguC05Vwo15&ServiceID=2UjlhNAOAhRTbu1BO6ga21&comment=test+entry&ip=10.0.0.3&subnet=8
+    body: comment=test+entry&ip=10.0.0.3&negated=0&subnet=8
     form:
-      ACLID:
-      - muyEz1k1BzxjguC05Vwo15
-      ServiceID:
-      - 2UjlhNAOAhRTbu1BO6ga21
       comment:
       - test entry
       ip:
       - 10.0.0.3
+      negated:
+      - "0"
       subnet:
       - "8"
     headers:
@@ -19,11 +17,11 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/2UjlhNAOAhRTbu1BO6ga21/acl/muyEz1k1BzxjguC05Vwo15/entry
+    url: https://api.fastly.com/service/e3YATriSOfV0fiQzdiADD1/acl/poFzB5MlRxh9vRHGZxjMK7/entry
     method: POST
   response:
-    body: '{"service_id":"2UjlhNAOAhRTbu1BO6ga21","acl_id":"muyEz1k1BzxjguC05Vwo15","ip":"10.0.0.3","subnet":8,"comment":"test
-      entry","negated":0,"updated_at":"2022-11-03T14:17:36Z","created_at":"2022-11-03T14:17:36Z","id":"NN4jSgaZyhUhudl45RJOY3"}'
+    body: '{"service_id":"e3YATriSOfV0fiQzdiADD1","acl_id":"poFzB5MlRxh9vRHGZxjMK7","ip":"10.0.0.3","negated":0,"subnet":8,"comment":"test
+      entry","updated_at":"2022-11-07T13:19:17Z","id":"jnRMSRSBCflqcnpMhG1gi2","created_at":"2022-11-07T13:19:17Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -32,11 +30,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 03 Nov 2022 14:17:36 GMT
+      - Mon, 07 Nov 2022 13:19:18 GMT
       Fastly-Ratelimit-Remaining:
-      - "9981"
+      - "9996"
       Fastly-Ratelimit-Reset:
-      - "1667487600"
+      - "1667829600"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -50,9 +48,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4139-MAN
+      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4136-MAN
       X-Timer:
-      - S1667485056.481144,VS0,VE159
+      - S1667827158.840484,VS0,VE160
     status: 200 OK
     code: 200
     duration: ""
