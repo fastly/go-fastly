@@ -260,7 +260,7 @@ func createTestPool(t *testing.T, createFixture string, serviceID string, versio
 		pool, err = client.CreatePool(&CreatePoolInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           fmt.Sprintf("test_pool_%s", poolNameSuffix),
+			Name:           String(fmt.Sprintf("test_pool_%s", poolNameSuffix)),
 		})
 	})
 	if err != nil {
