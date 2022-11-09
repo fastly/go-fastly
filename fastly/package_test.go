@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"os"
 	"testing"
 )
 
@@ -25,7 +26,7 @@ func TestClient_Package(t *testing.T) {
 	var wp *Package
 	var err error
 
-	// Update
+	// Update with valid package file path
 
 	recordIgnoreBody(t, fixtureBase+"update", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
@@ -78,13 +79,85 @@ func TestClient_Package(t *testing.T) {
 		t.Errorf("bad package language: %q != %q", wp.Metadata.Language, testData.Metadata.Language)
 	}
 
-	// Update with invalid package
+	// Update with valid package bytes
+
+	validPackageContent, _ := os.ReadFile("test_assets/package/valid.tar.gz")
+	recordIgnoreBody(t, fixtureBase+"update", func(c *Client) {
+		wp, err = c.UpdatePackage(&UpdatePackageInput{
+			ServiceID:      testService.ID,
+			ServiceVersion: testVersion.Number,
+			PackageContent: validPackageContent,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if wp.ServiceID != testService.ID {
+		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	}
+	if wp.ServiceVersion != testVersion.Number {
+		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
+	}
+
+	// Get
+	record(t, fixtureBase+"get", func(c *Client) {
+		wp, err = c.GetPackage(&GetPackageInput{
+			ServiceID:      testService.ID,
+			ServiceVersion: testVersion.Number,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if wp.ServiceID != testService.ID {
+		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	}
+	if wp.ServiceVersion != testVersion.Number {
+		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
+	}
+
+	if wp.Metadata.Name != testData.Metadata.Name {
+		t.Errorf("bad package name: %q != %q", wp.Metadata.Name, testData.Metadata.Name)
+	}
+	if wp.Metadata.Description != testData.Metadata.Description {
+		t.Errorf("bad package description: %q != %q", wp.Metadata.Description, testData.Metadata.Description)
+	}
+	if wp.Metadata.Size != testData.Metadata.Size {
+		t.Errorf("bad package size: %q != %q", wp.Metadata.Size, testData.Metadata.Size)
+	}
+	if wp.Metadata.HashSum != testData.Metadata.HashSum {
+		t.Errorf("bad package hashsum: %q != %q", wp.Metadata.HashSum, testData.Metadata.HashSum)
+	}
+	if wp.Metadata.Language != testData.Metadata.Language {
+		t.Errorf("bad package language: %q != %q", wp.Metadata.Language, testData.Metadata.Language)
+	}
+
+	// Update with invalid package file path
 
 	recordIgnoreBody(t, fixtureBase+"update_invalid", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
 			ServiceID:      testService.ID,
 			ServiceVersion: testVersion.Number,
 			PackagePath:    "test_assets/package/invalid.tar.gz",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
+		wp.Metadata.Name != "" {
+		t.Fatal("Invalid package upload completed rather than failed.")
+	}
+
+	// Update with invalid package bytes
+
+	invalidPackageContent, _ := os.ReadFile("test_assets/package/invalid.tar.gz")
+	recordIgnoreBody(t, fixtureBase+"update_invalid", func(c *Client) {
+		wp, err = c.UpdatePackage(&UpdatePackageInput{
+			ServiceID:      testService.ID,
+			ServiceVersion: testVersion.Number,
+			PackageContent: invalidPackageContent,
 		})
 	})
 	if err != nil {
