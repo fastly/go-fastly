@@ -142,11 +142,8 @@ func TestClient_Package(t *testing.T) {
 			PackagePath:    "test_assets/package/invalid.tar.gz",
 		})
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
-		wp.Metadata.Name != "" {
+	if err == nil && (wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
+		wp.Metadata.Name != "") {
 		t.Fatal("Invalid package upload completed rather than failed.")
 	}
 
@@ -160,11 +157,8 @@ func TestClient_Package(t *testing.T) {
 			PackageContent: invalidPackageContent,
 		})
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
-		wp.Metadata.Name != "" {
+	if err == nil && (wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
+		wp.Metadata.Name != "") {
 		t.Fatal("Invalid package upload completed rather than failed.")
 	}
 }
