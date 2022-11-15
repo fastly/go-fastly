@@ -251,6 +251,11 @@ func (c *Client) PutFormFile(urlPath string, filePath string, fieldName string, 
 	return c.RequestFormFile("PUT", urlPath, filePath, fieldName, ro)
 }
 
+// PutFormFileFromReader issues an HTTP PUT request (multipart/form-encoded) to put a file to an endpoint.
+func (c *Client) PutFormFileFromReader(urlPath string, fileName string, fileBytes io.Reader, fieldName string, ro *RequestOptions) (*http.Response, error) {
+	return c.RequestFormFileFromReader("PUT", urlPath, fileName, fileBytes, fieldName, ro)
+}
+
 // PutJSON issues an HTTP PUT request with the given interface json-encoded.
 func (c *Client) PutJSON(p string, i interface{}, ro *RequestOptions) (*http.Response, error) {
 	return c.RequestJSON("PUT", p, i, ro)
@@ -373,14 +378,19 @@ func (c *Client) RequestFormFile(verb, urlPath string, filePath string, fieldNam
 	}
 	defer file.Close() // #nosec G307
 
+	return c.RequestFormFileFromReader(verb, urlPath, filepath.Base(filePath), file, fieldName, ro)
+}
+
+// RequestFormFileFromReader makes an HTTP request to upload a raw reader to an endpoint.
+func (c *Client) RequestFormFileFromReader(verb, urlPath string, fileName string, fileBytes io.Reader, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
-	part, err := writer.CreateFormFile(fieldName, filepath.Base(filePath))
+	part, err := writer.CreateFormFile(fieldName, fileName)
 	if err != nil {
 		return nil, fmt.Errorf("error creating multipart form: %v", err)
 	}
 
-	_, err = io.Copy(part, file)
+	_, err = io.Copy(part, fileBytes)
 	if err != nil {
 		return nil, fmt.Errorf("error copying file to multipart form: %v", err)
 	}

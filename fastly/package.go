@@ -1,6 +1,8 @@
 package fastly
 
 import (
+	"bytes"
+	"errors"
 	"fmt"
 	"io"
 	"time"
@@ -57,6 +59,8 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 type UpdatePackageInput struct {
 	// PackagePath is the local filesystem path to the package to upload.
 	PackagePath string
+	// PackageContent is the data in raw of the package to upload.
+	PackageContent []byte
 	// ServiceID is the ID of the service (required).
 	ServiceID string `mapstructure:"service_id"`
 	// ServiceVersion is the specific configuration version (required).
@@ -70,13 +74,27 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 		return nil, err
 	}
 
-	resp, err := c.PutFormFile(urlPath, i.PackagePath, "package", nil)
-	if err != nil {
-		return nil, err
+	var body io.ReadCloser
+	switch {
+	case i.PackagePath != "":
+		resp, err := c.PutFormFile(urlPath, i.PackagePath, "package", nil)
+		if err != nil {
+			return nil, err
+		}
+		defer resp.Body.Close()
+		body = resp.Body
+	case len(i.PackageContent) != 0:
+		resp, err := c.PutFormFileFromReader(urlPath, "package.tar.gz", bytes.NewReader(i.PackageContent), "package", nil)
+		if err != nil {
+			return nil, err
+		}
+		defer resp.Body.Close()
+		body = resp.Body
+	default:
+		return nil, errors.New("missing package file path or content")
 	}
-	defer resp.Body.Close()
 
-	return PopulatePackage(resp.Body)
+	return PopulatePackage(body)
 }
 
 // MakePackagePath ensures we create the correct REST path for referencing packages in the API.
