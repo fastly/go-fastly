@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"net/http"
 	"strconv"
 
@@ -327,11 +328,23 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		return &e
 	}
 
+	// Save a copy of the body as it's read/decoded.
+	// If decoding fails, it can then be used (via addDecodeErr)
+	// to create a generic error containing the body's read contents.
+	var bodyCp bytes.Buffer
+	body := io.TeeReader(resp.Body, &bodyCp)
+	addDecodeErr := func() {
+		e.Errors = append(e.Errors, &ErrorObject{
+			Title:  "Undefined error",
+			Detail: bodyCp.String(),
+		})
+	}
+
 	switch resp.Header.Get("Content-Type") {
 	case jsonapi.MediaType:
-		// If this is a jsonapi response, decode it accordingly
-		if err := decodeBodyMap(resp.Body, &e); err != nil {
-			panic(err)
+		// If this is a jsonapi response, decode it accordingly.
+		if err := decodeBodyMap(body, &e); err != nil {
+			addDecodeErr()
 		}
 
 	case "application/problem+json":
@@ -342,19 +355,21 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 			Title  string `json:"title,omitempty"`  // A short name for the error type, which remains constant from occurrence to occurrence
 			URL    string `json:"type,omitempty"`   // URL to a human-readable document describing this specific error condition
 		}
-		if err := json.NewDecoder(resp.Body).Decode(&problemDetail); err != nil {
-			panic(err)
+		if err := json.NewDecoder(body).Decode(&problemDetail); err != nil { // Ignore json decode errors.
+			addDecodeErr()
+		} else {
+			e.Errors = append(e.Errors, &ErrorObject{
+				Title:  problemDetail.Title,
+				Detail: problemDetail.Detail,
+				Status: strconv.Itoa(problemDetail.Status),
+			})
 		}
-		e.Errors = append(e.Errors, &ErrorObject{
-			Title:  problemDetail.Title,
-			Detail: problemDetail.Detail,
-			Status: strconv.Itoa(problemDetail.Status),
-		})
 
 	default:
 		var lerr *legacyError
-		_ = decodeBodyMap(resp.Body, &lerr)
-		if lerr != nil {
+		if err := decodeBodyMap(body, &lerr); err != nil {
+			addDecodeErr()
+		} else if lerr != nil {
 			e.Errors = append(e.Errors, &ErrorObject{
 				Title:  lerr.Message,
 				Detail: lerr.Detail,
