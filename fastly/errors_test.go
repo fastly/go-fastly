@@ -106,4 +106,42 @@ func TestNewHTTPError(t *testing.T) {
 			t.Error("not not found")
 		}
 	})
+
+	t.Run("invalid JSON", func(t *testing.T) {
+		contentTypes := []string{
+			jsonapi.MediaType,
+			"application/problem+json",
+			"default",
+		}
+
+		for _, ct := range contentTypes {
+			resp := &http.Response{
+				StatusCode: 404,
+				Header:     http.Header(map[string][]string{"Content-Type": {ct}}),
+				Body:       io.NopCloser(bytes.NewBufferString(`THIS IS NOT JSON`)),
+			}
+			e := NewHTTPError(resp)
+
+			if e.StatusCode != 404 {
+				t.Errorf("expected %d to be %d", e.StatusCode, 404)
+			}
+
+			expected := strings.TrimSpace(`
+404 - Not Found:
+
+    Title:  Undefined error
+    Detail: THIS IS NOT JSON
+`)
+			if e.Error() != expected {
+				t.Errorf("Content-Type: %q: expected \n\n%q\n\n to be \n\n%q\n\n", ct, e.Error(), expected)
+			}
+			if e.String() != expected {
+				t.Errorf("Content-Type: %q: expected \n\n%q\n\n to be \n\n%q\n\n", ct, e.String(), expected)
+			}
+
+			if !e.IsNotFound() {
+				t.Error("not not found")
+			}
+		}
+	})
 }
