@@ -334,6 +334,13 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 	var bodyCp bytes.Buffer
 	body := io.TeeReader(resp.Body, &bodyCp)
 	addDecodeErr := func() {
+		// There are 2 errors at this point:
+		//  1. The response error.
+		//  2. The error decoding the response.
+		// The response error is still most relevant to users (just unable to be decoded).
+		// Provide the response's body verbatim as the error 'Detail' with the assumption
+		// that it may contain useful information, e.g. 'Bad Gateway'.
+		// The decode error could be conflated with the response error, so it is omitted.
 		e.Errors = append(e.Errors, &ErrorObject{
 			Title:  "Undefined error",
 			Detail: bodyCp.String(),
@@ -355,7 +362,7 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 			Title  string `json:"title,omitempty"`  // A short name for the error type, which remains constant from occurrence to occurrence
 			URL    string `json:"type,omitempty"`   // URL to a human-readable document describing this specific error condition
 		}
-		if err := json.NewDecoder(body).Decode(&problemDetail); err != nil { // Ignore json decode errors.
+		if err := json.NewDecoder(body).Decode(&problemDetail); err != nil {
 			addDecodeErr()
 		} else {
 			e.Errors = append(e.Errors, &ErrorObject{
