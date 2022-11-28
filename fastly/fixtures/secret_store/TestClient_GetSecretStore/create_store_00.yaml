@@ -11,14 +11,15 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/6.5.2 (+github.com/fastly/go-fastly; go1.19.1)
+      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.19.3)
     url: https://api.fastly.com/resources/stores/secret
     method: POST
   response:
     body: |
       {
-        "id": "T3WCZ0BEMTeah773LEMuXf",
-        "name": "TestClient_GetSecretStore-00"
+        "id": "0vOzDEmpyFbV3ysnv7zU1w",
+        "name": "TestClient_GetSecretStore-00",
+        "created_at": "2022-11-28T22:40:39Z"
       }
     headers:
       Access-Control-Allow-Headers:
@@ -28,13 +29,13 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Content-Length:
-      - "79"
+      - "119"
       Content-Type:
       - application/json
       Date:
-      - Fri, 23 Sep 2022 16:09:02 GMT
+      - Mon, 28 Nov 2022 22:40:39 GMT
       Fastly-Trace-Id:
-      - Wc2yuXbywn2kXgJ9noSbiQ
+      - kVWR47qNtYiwV9tH4Q3YJl
     status: 201 Created
     code: 201
     duration: ""
