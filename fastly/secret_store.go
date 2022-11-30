@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"strconv"
+	"time"
 )
 
 // Secret Store.
@@ -20,8 +21,9 @@ type SecretStoreMeta struct {
 
 // SecretStore represents a Secret Store response from the Fastly API.
 type SecretStore struct {
-	ID   string `json:"id"`
-	Name string `json:"name"`
+	ID        string    `json:"id"`
+	Name      string    `json:"name"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // CreateSecretStoreInput is used as input to the CreateSecretStore function.
@@ -185,9 +187,9 @@ func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 
 // Secret is a Secret Store secret.
 type Secret struct {
-	// Digest is an opaque hash of the secret.
-	Digest []byte `json:"digest"`
-	Name   string `json:"name"`
+	Name      string    `json:"name"`
+	Digest    []byte    `json:"digest"` // Digest is an opaque hash of the secret.
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // CreateSecretInput is used as input to the CreateSecret function.

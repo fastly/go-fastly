@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/6.5.2 (+github.com/fastly/go-fastly; go1.19.1)
-    url: https://api.fastly.com/resources/stores/secret/Svutc59lw0v85xFhQVmK01
+      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.19.3)
+    url: https://api.fastly.com/resources/stores/secret/fmGg6IPsjc7tXJefYcuEK4
     method: DELETE
   response:
     body: ""
@@ -23,9 +23,9 @@ interactions:
       Access-Control-Allow-Origin:
       - '*'
       Date:
-      - Fri, 23 Sep 2022 16:09:01 GMT
+      - Mon, 28 Nov 2022 22:40:39 GMT
       Fastly-Trace-Id:
-      - Xserpm2298nXi7dN84u2mS
+      - BIFiPDJnfFG93IeNDCep9M
     status: 204 No Content
     code: 204
     duration: ""
