@@ -183,8 +183,9 @@ type UsageStatsResponse struct {
 
 // Usage represents usage data of a single service or region
 type Usage struct {
-	Bandwidth uint64 `mapstructure:"bandwidth"`
-	Requests  uint64 `mapstructure:"requests"`
+	Bandwidth       uint64 `mapstructure:"bandwidth"`
+	Requests        uint64 `mapstructure:"requests"`
+	ComputeRequests uint64 `mapstructure:"compute_requests"`
 }
 
 // RegionsUsage is a list of aggregated usage data by Fastly's region
