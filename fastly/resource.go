@@ -117,6 +117,11 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 // GetResourceInput is used as input to the GetResource function.
 type GetResourceInput struct {
 	// ResourceID is an alphanumeric string identifying the resource (required)
+	//
+	// NOTE: The API documentation is confusing here because they name the
+	// parameter `resource_id` but they actually mean (as far as their data model
+	// is concerned) the `id` field. `resource_id`, from the API perspective, is
+	// referring to the resource you're creating a link to (e.g. an object store).
 	ResourceID string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -155,6 +160,11 @@ type UpdateResourceInput struct {
 	// Name is the name of the resource.
 	Name *string `url:"name,omitempty"`
 	// ResourceID is an alphanumeric string identifying the resource (required)
+	//
+	// NOTE: The API documentation is confusing here because they name the
+	// parameter `resource_id` but they actually mean (as far as their data model
+	// is concerned) the `id` field. `resource_id`, from the API perspective, is
+	// referring to the resource you're creating a link to (e.g. an object store).
 	ResourceID string `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
@@ -190,8 +200,6 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 
 // DeleteResourceInput is the input parameter to DeleteResource.
 type DeleteResourceInput struct {
-	// Name is the name of the resource to delete (required).
-	Name string
 	// ResourceID is an alphanumeric string identifying the resource (required)
 	ResourceID string `url:"-"`
 	// ServiceID is the ID of the service (required).
@@ -220,8 +228,5 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 	defer resp.Body.Close()
 
 	var r *Resource
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
-		return err
-	}
-	return nil
+	return decodeBodyMap(resp.Body, &r)
 }
