@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/resource/142Td4RZA2VUdBx6jvJMJ0
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/5/resource/rn6c7YSyRxBJMejpyvoQa1
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Link ''{ deleted =\u003e
-      0000-00-00 00:00:00, id =\u003e 142Td4RZA2VUdBx6jvJMJ0, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
-      version =\u003e 2 }''"}'
+      0000-00-00 00:00:00, id =\u003e rn6c7YSyRxBJMejpyvoQa1, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 5 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 19 Jan 2023 10:42:54 GMT
+      - Thu, 19 Jan 2023 11:28:15 GMT
       Fastly-Ratelimit-Remaining:
       - "9990"
       Fastly-Ratelimit-Reset:
-      - "1674126000"
+      - "1674129600"
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4129-MAN
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4131-MAN
       X-Timer:
-      - S1674124974.231691,VS0,VE318
+      - S1674127695.461054,VS0,VE322
     status: 404 Not Found
     code: 404
     duration: ""

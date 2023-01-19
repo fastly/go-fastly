@@ -33,13 +33,18 @@ func TestClient_Resources(t *testing.T) {
 		})
 	}()
 
+	// NOTE: This doesn't have to match the actual object-store name.
+	// This is an opportunity for you to use an 'alias' for your object store.
+	// So your service will now refer to the object-store using this name.
+	const objectStoreNameForServiceLinking = "test-object-store-name-for-linking"
+
 	// Create
 	var r *Resource
 	record(t, "resources/create", func(c *Client) {
 		r, err = c.CreateResource(&CreateResourceInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-resource"),
+			Name:           String(objectStoreNameForServiceLinking),
 			ResourceID:     String(o.ID),
 		})
 	})
@@ -62,7 +67,7 @@ func TestClient_Resources(t *testing.T) {
 		})
 	}()
 
-	if r.Name != "test-resource" {
+	if r.Name != objectStoreNameForServiceLinking {
 		t.Errorf("bad name: %q", r.Name)
 	}
 
@@ -112,13 +117,13 @@ func TestClient_Resources(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			ResourceID:     r.ID,
-			Name:           String("new-test-resource"),
+			Name:           String("new-object-store-alias-for-my-service"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ur.Name != "new-test-resource" {
+	if ur.Name != "new-object-store-alias-for-my-service" {
 		t.Errorf("bad name: %q", ur.Name)
 	}
 

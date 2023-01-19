@@ -17,7 +17,7 @@ type Resource struct {
 	HREF string `mapstructure:"href"`
 	// ID is an alphanumeric string identifying the resource.
 	ID string `mapstructure:"id"`
-	// Name is the name of the resource.
+	// Name is the name of the resource being linked to.
 	Name string `mapstructure:"name"`
 	// ResourceID is the ID of the linked resource.
 	ResourceID string `mapstructure:"resource_id"`
@@ -81,7 +81,11 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 
 // CreateResourceInput is used as input to the CreateResource function.
 type CreateResourceInput struct {
-	// Name is the name of the resource.
+	// Name is the name of the resource being linked to (e.g. an object store).
+	//
+	// NOTE: This doesn't have to match the actual object-store name.
+	// This is an opportunity for you to use an 'alias' for your object store.
+	// So your service will now refer to the object-store using this name.
 	Name *string `url:"name,omitempty"`
 	// ResourceID is the ID of the linked resource.
 	ResourceID *string `url:"resource_id,omitempty"`
@@ -129,7 +133,7 @@ type GetResourceInput struct {
 	ServiceVersion int
 }
 
-// GetBackend retrieves the specified resource.
+// GetResource retrieves the specified resource.
 func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 	if i.ResourceID == "" {
 		return nil, ErrMissingResourceID
@@ -157,7 +161,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 
 // UpdateResourceInput is used as input to the UpdateResource function.
 type UpdateResourceInput struct {
-	// Name is the name of the resource.
+	// Name is the name of the resource being linked to (e.g. an object store).
 	Name *string `url:"name,omitempty"`
 	// ResourceID is an alphanumeric string identifying the resource (required)
 	//
@@ -227,6 +231,12 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 	}
 	defer resp.Body.Close()
 
-	var r *Resource
-	return decodeBodyMap(resp.Body, &r)
+	var r *statusResp
+	if err := decodeBodyMap(resp.Body, &r); err != nil {
+		return err
+	}
+	if !r.Ok() {
+		return fmt.Errorf("not ok")
+	}
+	return nil
 }
