@@ -1,5 +1,22 @@
 # Changelog
 
+## [v7.1.0](https://github.com/fastly/go-fastly/releases/tag/v7.1.0) (2023-01-19)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.0.0...v7.1.0)
+
+**Enhancements:**
+
+- fastly: allow uploading compute package from memory [#384](https://github.com/fastly/go-fastly/pull/384)
+- Improve error response handling [#386](https://github.com/fastly/go-fastly/pull/386)
+- secret-store: Add created_at fields to store and secret [#387](https://github.com/fastly/go-fastly/pull/387)
+- Add compute_requests to usage response struct [#388](https://github.com/fastly/go-fastly/pull/388)
+- feat(resource): implement Resource API [#390](https://github.com/fastly/go-fastly/pull/390)
+
+**Bug fixes:**
+
+- fastly: fix invalid package uploading test [#385](https://github.com/fastly/go-fastly/pull/385)
+- Fix typo in AttackRequestHeaderBytes field name [#389](https://github.com/fastly/go-fastly/pull/389)
+
 ## [v7.0.0](https://github.com/fastly/go-fastly/releases/tag/v7.0.0) (2022-11-07)
 
 The biggest change in this release is the majority of input fields are now pointers rather than primitives. This is to enable users to set an empty value for fields when they are being sent to the Fastly API, in cases where the user wishes to override an otherwise default value provided by the API.
