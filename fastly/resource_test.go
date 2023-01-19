@@ -210,7 +210,7 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if err != ErrMissingResourceID {
 		t.Errorf("bad error: %s", err)
 	}
 
