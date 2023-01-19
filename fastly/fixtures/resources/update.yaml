@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: name=new-test-resource
+    form:
+      name:
+      - new-test-resource
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/resource/142Td4RZA2VUdBx6jvJMJ0
+    method: PUT
+  response:
+    body: '{"id":"142Td4RZA2VUdBx6jvJMJ0","name":"new-test-resource","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":2,"created_at":"2023-01-19T10:42:52Z","updated_at":"2023-01-19T10:42:52Z","deleted_at":null,"resource_id":"2zjt8n76gaepoiq2pzywlf","resource_type":"object-store","href":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 19 Jan 2023 10:42:53 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9992"
+      Fastly-Ratelimit-Reset:
+      - "1674126000"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4129-MAN
+      X-Timer:
+      - S1674124974.738768,VS0,VE217
+    status: 200 OK
+    code: 200
+    duration: ""

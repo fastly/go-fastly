@@ -1,0 +1,47 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/resource/142Td4RZA2VUdBx6jvJMJ0
+    method: DELETE
+  response:
+    body: '{"msg":"Record not found","detail":"Couldn''t find Link ''{ deleted =\u003e
+      0000-00-00 00:00:00, id =\u003e 142Td4RZA2VUdBx6jvJMJ0, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      version =\u003e 2 }''"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 19 Jan 2023 10:42:54 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9990"
+      Fastly-Ratelimit-Reset:
+      - "1674126000"
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4129-MAN
+      X-Timer:
+      - S1674124974.231691,VS0,VE318
+    status: 404 Not Found
+    code: 404
+    duration: ""

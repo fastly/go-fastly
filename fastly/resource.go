@@ -84,7 +84,7 @@ type CreateResourceInput struct {
 	// Name is the name of the resource.
 	Name *string `url:"name,omitempty"`
 	// ResourceID is the ID of the linked resource.
-	ResourceID *string `url:"name,omitempty"`
+	ResourceID *string `url:"resource_id,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -203,9 +203,9 @@ type DeleteResourceInput struct {
 	// ResourceID is an alphanumeric string identifying the resource (required)
 	ResourceID string `url:"-"`
 	// ServiceID is the ID of the service (required).
-	ServiceID string
+	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
-	ServiceVersion int
+	ServiceVersion int `url:"-"`
 }
 
 // DeleteResource deletes the specified resource.

@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/resource/142Td4RZA2VUdBx6jvJMJ0
+    method: GET
+  response:
+    body: '{"id":"142Td4RZA2VUdBx6jvJMJ0","name":"test-resource","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":2,"created_at":"2023-01-19T10:42:52Z","updated_at":"2023-01-19T10:42:52Z","deleted_at":null,"resource_id":"2zjt8n76gaepoiq2pzywlf","resource_type":"object-store","href":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 19 Jan 2023 10:42:53 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4129-MAN
+      X-Timer:
+      - S1674124973.398638,VS0,VE313
+    status: 200 OK
+    code: 200
+    duration: ""

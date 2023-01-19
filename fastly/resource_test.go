@@ -13,6 +13,26 @@ func TestClient_Resources(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
+	// Create object-store resource we want to link to via Resource API.
+	var o *ObjectStore
+	record(t, "resources/create-object-store", func(c *Client) {
+		o, err = c.CreateObjectStore(&CreateObjectStoreInput{
+			Name: "test-object-store",
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Ensure object-store resource is deleted
+	defer func() {
+		record(t, "resources/cleanup-object-store", func(c *Client) {
+			_ = c.DeleteObjectStore(&DeleteObjectStoreInput{
+				ID: o.ID,
+			})
+		})
+	}()
+
 	// Create
 	var r *Resource
 	record(t, "resources/create", func(c *Client) {
@@ -20,6 +40,7 @@ func TestClient_Resources(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           String("test-resource"),
+			ResourceID:     String(o.ID),
 		})
 	})
 	if err != nil {

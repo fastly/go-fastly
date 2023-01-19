@@ -1,0 +1,39 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"name":"test-object-store"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/resources/stores/object
+    method: POST
+  response:
+    body: '{"id":"2zjt8n76gaepoiq2pzywlf","name":"test-object-store","created_at":"2023-01-19T10:12:37.125Z","updated_at":"2023-01-19T10:12:37.125Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 19 Jan 2023 10:12:37 GMT
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-fty21363-FTY, cache-man4123-MAN
+      X-Timer:
+      - S1674123156.552080,VS0,VE1625
+    status: 201 Created
+    code: 201
+    duration: ""
