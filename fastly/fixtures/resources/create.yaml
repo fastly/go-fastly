@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: name=test-object-store-name-for-linking&resource_id=2dem3bjbpie7k1vyy70fh5
+    form:
+      name:
+      - test-object-store-name-for-linking
+      resource_id:
+      - 2dem3bjbpie7k1vyy70fh5
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/5/resource
+    method: POST
+  response:
+    body: '{"id":"rn6c7YSyRxBJMejpyvoQa1","name":"test-object-store-name-for-linking","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":5,"created_at":"2023-01-19T11:28:14Z","updated_at":"2023-01-19T11:28:14Z","deleted_at":null,"resource_id":"2dem3bjbpie7k1vyy70fh5","resource_type":"object-store","href":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 19 Jan 2023 11:28:14 GMT
+      Fastly-Ratelimit-Remaining:
+      - "9993"
+      Fastly-Ratelimit-Reset:
+      - "1674129600"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-man4131-MAN
+      X-Timer:
+      - S1674127694.832397,VS0,VE381
+    status: 200 OK
+    code: 200
+    duration: ""
