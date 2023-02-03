@@ -1,0 +1,42 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.1.0 (+github.com/fastly/go-fastly; go1.19.5)
+    url: https://api.fastly.com/resources/stores/secret/signing-key
+    method: GET
+  response:
+    body: |
+      {
+        "signing_key": "3Tb5p7bVMKg8TrhtmjB73d+A99yVNLR1Tfi+YwJTMw0="
+      }
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, Fastly-Key
+      Access-Control-Allow-Methods:
+      - PUT, POST, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - "68"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 03 Feb 2023 22:26:31 GMT
+      Etag:
+      - '"c2b40427846401e6a808f1a43a809a65770df02c49b3fc30aacf98e3aec0d515"'
+      Fastly-Trace-Id:
+      - wylcGg8FFv5zudofQ3PdXf
+      Surrogate-Control:
+      - max-age=86400, stale-if-error=86400
+    status: 200 OK
+    code: 200
+    duration: ""

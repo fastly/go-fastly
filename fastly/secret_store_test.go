@@ -2,9 +2,13 @@ package fastly
 
 import (
 	"bytes"
+	"crypto/ed25519"
+	"crypto/rand"
 	"fmt"
 	"sort"
 	"testing"
+
+	"golang.org/x/crypto/nacl/box"
 )
 
 func TestClient_CreateSecretStore(t *testing.T) {
@@ -157,6 +161,79 @@ func TestClient_CreateSecret(t *testing.T) {
 			ID:     ss.ID,
 			Name:   t.Name(),
 			Secret: []byte("secretum servare"),
+		})
+	})
+	if err != nil {
+		t.Fatalf("error creating secret: %v", err)
+	}
+
+	if got, want := s.Name, t.Name(); got != want {
+		t.Errorf("Name: got %q, want %q", got, want)
+	}
+	if got := s.Digest; len(got) == 0 {
+		t.Errorf("Digest: got %q, want not blank", string(got))
+	}
+}
+
+func TestClient_CreateSecret_clientEncryption(t *testing.T) {
+	t.Parallel()
+
+	ss := createSecretStoreHelper(t, 0)
+
+	var (
+		ck  *ClientKey
+		err error
+	)
+
+	record(t, fmt.Sprintf("secret_store/%s/create_client_key", t.Name()), func(c *Client) {
+		ck, err = c.CreateClientKey()
+	})
+	if err != nil {
+		t.Fatalf("error creating client key: %v", err)
+	}
+
+	if got := ck.PublicKey; len(got) == 0 {
+		t.Errorf("PublicKey: got empty")
+	}
+
+	if got := ck.Signature; len(got) == 0 {
+		t.Errorf("Signature: got empty")
+	}
+
+	if got := ck.ExpiresAt; got.IsZero() {
+		t.Errorf("ExpiresAt: got empty")
+	}
+
+	var sk ed25519.PublicKey
+
+	record(t, fmt.Sprintf("secret_store/%s/get_signing_key", t.Name()), func(c *Client) {
+		sk, err = c.GetSigningKey()
+	})
+	if err != nil {
+		t.Fatalf("error getting signing key: %v", err)
+	}
+
+	if len(sk) == 0 {
+		t.Fatalf("got empty signing key")
+	}
+
+	if !ck.ValidateSignature(sk) {
+		t.Fatalf("signature validation failed")
+	}
+
+	enc, err := box.SealAnonymous(nil, []byte("secretum servare"), (*[32]byte)(ck.PublicKey), rand.Reader)
+	if err != nil {
+		t.Fatalf("error locally encrypting secret: %v", err)
+	}
+
+	var s *Secret
+
+	record(t, fmt.Sprintf("secret_store/%s/create_secret", t.Name()), func(c *Client) {
+		s, err = c.CreateSecret(&CreateSecretInput{
+			ID:        ss.ID,
+			Name:      t.Name(),
+			ClientKey: ck.PublicKey,
+			Secret:    enc,
 		})
 	})
 	if err != nil {

@@ -1,0 +1,40 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.1.0 (+github.com/fastly/go-fastly; go1.19.5)
+    url: https://api.fastly.com/resources/stores/secret/client-key
+    method: POST
+  response:
+    body: |
+      {
+        "public_key": "CUBQitcJt9a4Vqem5vPYubm/jjZ6Inqr4gr/6aJukSc=",
+        "signature": "8ajkjOwcsUIQRS1Blsoqk3vL4gelCh1rqYZATzLGXumFB2VNCFhTgMzmV6ypPQ6VJcdtbUr/fEvGtHfagNH4DA==",
+        "expires_at": "2023-02-03T22:36:31.563174Z"
+      }
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, Fastly-Key
+      Access-Control-Allow-Methods:
+      - PUT, POST, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - '*'
+      Content-Length:
+      - "221"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 03 Feb 2023 22:26:31 GMT
+      Fastly-Trace-Id:
+      - vIOfYP6o8Rj6SVaJ2HkeQv
+    status: 200 OK
+    code: 200
+    duration: ""

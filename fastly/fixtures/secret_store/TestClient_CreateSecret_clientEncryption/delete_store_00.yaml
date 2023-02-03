@@ -1,0 +1,31 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.1.0 (+github.com/fastly/go-fastly; go1.19.5)
+    url: https://api.fastly.com/resources/stores/secret/gyxBrAO5eUjZMNwb3z93gn
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Access-Control-Allow-Headers:
+      - Content-Type, Fastly-Key
+      Access-Control-Allow-Methods:
+      - PUT, POST, GET, OPTIONS, DELETE
+      Access-Control-Allow-Origin:
+      - '*'
+      Date:
+      - Fri, 03 Feb 2023 22:26:31 GMT
+      Fastly-Trace-Id:
+      - c7kZMF2OBn2WeFQ9qV6TQY
+    status: 204 No Content
+    code: 204
+    duration: ""
