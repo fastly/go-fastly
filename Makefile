@@ -1,10 +1,11 @@
 SHELL := /bin/bash -o pipefail
+GO ?= go
 
 # List of tests to run
 FILES ?= ./...
 
 # List all our actual files, excluding vendor
-GOPKGS ?= $(shell go list $(FILES) | grep -v /vendor/)
+GOPKGS ?= $(shell $(GO) list $(FILES) | grep -v /vendor/)
 GOFILES ?= $(shell find . -name '*.go' | grep -v /vendor/)
 
 # Tags specific for building
@@ -20,25 +21,25 @@ FASTLY_TEST_SERVICE_ID ?=
 FASTLY_API_KEY ?=
 #
 # Enables support for tools such as https://github.com/rakyll/gotest
-TEST_COMMAND ?= go test
+TEST_COMMAND ?= $(GO) test
 
 all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs all of the required cleaning and verification targets.
 .PHONY: all
 
 tidy: ## Cleans the Go module.
 	@echo "==> Tidying module"
-	@go mod tidy
+	@$(GO) mod tidy
 .PHONY: tidy
 
 mod-download: ## Downloads the Go module.
 	@echo "==> Downloading Go module"
-	@go mod download
+	@$(GO) mod download
 .PHONY: mod-download
 
 dev-dependencies: ## Downloads the necessesary dev dependencies.
 	@echo "==> Downloading development dependencies"
-	@go install honnef.co/go/tools/cmd/staticcheck
-	@go install golang.org/x/tools/cmd/goimports
+	@$(GO) install honnef.co/go/tools/cmd/staticcheck
+	@$(GO) install golang.org/x/tools/cmd/goimports
 .PHONY: dev-dependencies
 
 test: ## Runs the test suite with VCR mocks enabled.
@@ -55,7 +56,7 @@ test-full: ## Runs the tests with VCR disabled (i.e., makes external calls).
 	@echo "==> Testing ${NAME} with VCR disabled"
 	@VCR_DISABLE=1 \
 		bash -c \
-		'go test -timeout=60s -parallel=20 ${GOPKGS} ${TESTARGS}'
+		'${GO} test -timeout=60s -parallel=20 ${GOPKGS} ${TESTARGS}'
 .PHONY: test-full
 
 fix-fixtures: ## Updates test fixtures with a specified default service ID.
@@ -87,7 +88,7 @@ fmt: ## Properly formats Go files and orders dependencies.
 
 vet: ## Identifies common errors.
 	@echo "==> Running go vet"
-	@go vet ./...
+	@$(GO) vet ./...
 .PHONY: vet
 
 staticcheck: ## Runs the staticcheck linter.
