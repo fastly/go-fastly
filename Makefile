@@ -93,6 +93,7 @@ vet: ## Identifies common errors.
 
 staticcheck: ## Runs the staticcheck linter.
 	@echo "==> Running staticcheck"
+	@staticcheck -version
 	@staticcheck ./...
 .PHONY: staticcheck
 
