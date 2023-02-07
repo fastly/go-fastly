@@ -2,9 +2,14 @@ package fastly
 
 import (
 	"bytes"
+	"crypto/ed25519"
+	"crypto/rand"
 	"encoding/json"
+	"fmt"
 	"strconv"
 	"time"
+
+	"golang.org/x/crypto/nacl/box"
 )
 
 // Secret Store.
@@ -202,6 +207,8 @@ type CreateSecretInput struct {
 	// The value will be base64-encoded when delivered to the API, which is the
 	// required format.
 	Secret []byte
+	// ClientKey is the public key used to encrypt the secret with (optional).
+	ClientKey []byte
 }
 
 // CreateSecret creates a new resource.
@@ -220,11 +227,13 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(struct {
-		Name   string `json:"name"`
-		Secret []byte `json:"secret"`
+		Name      string `json:"name"`
+		Secret    []byte `json:"secret"`
+		ClientKey []byte `json:"client_key,omitempty"`
 	}{
-		Name:   i.Name,
-		Secret: i.Secret,
+		Name:      i.Name,
+		Secret:    i.Secret,
+		ClientKey: i.ClientKey,
 	})
 	if err != nil {
 		return nil, err
@@ -378,4 +387,92 @@ func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 		return err
 	}
 	return resp.Body.Close()
+}
+
+// ClientKey is an X25519 public key that can be used with
+// golang.org/x/crypto/nacl/box to encrypt secrets locally before
+// uploading them to the Fastly API.  A client key is valid only for a
+// short amount of time, and should be used immediately.  The key is not
+// valid after the ExpiresAt time.
+//
+// Client keys are signed, and the attached signature must be validated
+// using the public signing key before it is used.  A ValidateSignature
+// method is provided for this purpose.
+type ClientKey struct {
+	PublicKey []byte    `json:"public_key"`
+	Signature []byte    `json:"signature"`
+	ExpiresAt time.Time `json:"expires_at"`
+}
+
+// ValidateSignature reports if the signingKey was used to generate the
+// client key's signature.  It must be a valid Ed25519 public key, and
+// it will panic if len(signingKey) is not ed25519.PublicKeySize.
+// https://pkg.go.dev/crypto/ed25519#PublicKeySize
+func (ck *ClientKey) ValidateSignature(signingKey ed25519.PublicKey) bool {
+	return ed25519.Verify(signingKey, ck.PublicKey, ck.Signature)
+}
+
+// Encrypt uses the client key to encrypt the provided plaintext
+// using a libsodium-compatible sealed box.
+// https://pkg.go.dev/golang.org/x/crypto/nacl/box#SealAnonymous
+// https://libsodium.gitbook.io/doc/public-key_cryptography/sealed_boxes
+func (ck *ClientKey) Encrypt(plaintext []byte) ([]byte, error) {
+	if len(ck.PublicKey) != 32 {
+		return nil, fmt.Errorf("invalid public key length %d", len(ck.PublicKey))
+	}
+
+	return box.SealAnonymous(nil, plaintext, (*[32]byte)(ck.PublicKey), rand.Reader)
+}
+
+// CreateClientKey creates a new time-limited client key for locally
+// encrypting secrets before uploading them to the Fastly API.
+func (c *Client) CreateClientKey() (*ClientKey, error) {
+	p := "/resources/stores/secret/client-key"
+
+	resp, err := c.Post(p, &RequestOptions{
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+			"Accept":       "application/json",
+		},
+		Parallel: true,
+	})
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var output ClientKey
+	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
+		return nil, err
+	}
+
+	return &output, nil
+}
+
+// GetSigningKey returns the public signing key for client keys.  In
+// general the signing key changes very rarely, and it's recommended to
+// ship the signing key out-of-band from the API.
+func (c *Client) GetSigningKey() (ed25519.PublicKey, error) {
+	p := "/resources/stores/secret/signing-key"
+
+	resp, err := c.Get(p, &RequestOptions{
+		Headers: map[string]string{
+			"Content-Type": "application/json",
+			"Accept":       "application/json",
+		},
+		Parallel: true,
+	})
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var output struct {
+		SigningKey []byte `json:"signing_key"`
+	}
+	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
+		return nil, err
+	}
+
+	return ed25519.PublicKey(output.SigningKey), nil
 }

@@ -2,8 +2,7 @@
 
 echo "==> Checking that the module is clean..."
 
-go mod download
-tidy=$(go mod tidy -v 2>&1)
+tidy=$(go mod tidy -v 2>&1 | grep -v "^go: downloading")
 if [[ ${tidy} ]]; then
     echo 'Extranenous dependencies need removed.'
     echo " ===== "
