@@ -3,9 +3,13 @@ package fastly
 import (
 	"bytes"
 	"crypto/ed25519"
+	"crypto/rand"
 	"encoding/json"
+	"fmt"
 	"strconv"
 	"time"
+
+	"golang.org/x/crypto/nacl/box"
 )
 
 // Secret Store.
@@ -406,6 +410,18 @@ type ClientKey struct {
 // https://pkg.go.dev/crypto/ed25519#PublicKeySize
 func (ck *ClientKey) ValidateSignature(signingKey ed25519.PublicKey) bool {
 	return ed25519.Verify(signingKey, ck.PublicKey, ck.Signature)
+}
+
+// Encrypt uses the client key to encrypt the provided plaintext
+// using a libsodium-compatible sealed box.
+// https://pkg.go.dev/golang.org/x/crypto/nacl/box#SealAnonymous
+// https://libsodium.gitbook.io/doc/public-key_cryptography/sealed_boxes
+func (ck *ClientKey) Encrypt(plaintext []byte) ([]byte, error) {
+	if len(ck.PublicKey) != 32 {
+		return nil, fmt.Errorf("invalid public key length %d", len(ck.PublicKey))
+	}
+
+	return box.SealAnonymous(nil, plaintext, (*[32]byte)(ck.PublicKey), rand.Reader)
 }
 
 // CreateClientKey creates a new time-limited client key for locally

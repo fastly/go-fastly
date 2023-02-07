@@ -3,12 +3,9 @@ package fastly
 import (
 	"bytes"
 	"crypto/ed25519"
-	"crypto/rand"
 	"fmt"
 	"sort"
 	"testing"
-
-	"golang.org/x/crypto/nacl/box"
 )
 
 func TestClient_CreateSecretStore(t *testing.T) {
@@ -221,7 +218,7 @@ func TestClient_CreateSecret_clientEncryption(t *testing.T) {
 		t.Fatalf("signature validation failed")
 	}
 
-	enc, err := box.SealAnonymous(nil, []byte("secretum servare"), (*[32]byte)(ck.PublicKey), rand.Reader)
+	enc, err := ck.Encrypt([]byte("secretum servare"))
 	if err != nil {
 		t.Fatalf("error locally encrypting secret: %v", err)
 	}
