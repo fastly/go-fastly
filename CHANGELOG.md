@@ -1,5 +1,16 @@
 # Changelog
 
+## [v7.2.0](https://github.com/fastly/go-fastly/releases/tag/v7.2.0) (2023-02-08)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.1.0...v7.2.0)
+
+**Enhancements:**
+
+- allow Go binary to be specified when running make [#393](https://github.com/fastly/go-fastly/pull/393)
+- add support for Secret Store client keys [#392](https://github.com/fastly/go-fastly/pull/392)
+- resource: improve parameter naming; support JSON encode [#394](https://github.com/fastly/go-fastly/pull/394)
+- feat(http3): implement HTTP3 API endpoints [#395](https://github.com/fastly/go-fastly/pull/395)
+
 ## [v7.1.0](https://github.com/fastly/go-fastly/releases/tag/v7.1.0) (2023-01-19)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.0.0...v7.1.0)
