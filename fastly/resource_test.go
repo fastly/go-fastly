@@ -1,7 +1,10 @@
 package fastly
 
 import (
+	"bytes"
+	"encoding/json"
 	"testing"
+	"time"
 )
 
 func TestClient_Resources(t *testing.T) {
@@ -55,14 +58,10 @@ func TestClient_Resources(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "resources/cleanup", func(c *Client) {
-			// NOTE: The API documentation is confusing here because they name the
-			// parameter `resource_id` but they actually mean (as far as their data model
-			// is concerned) the `id` field. `resource_id`, from the API perspective, is
-			// referring to the resource you're creating a link to (e.g. an object store).
 			_ = c.DeleteResource(&DeleteResourceInput{
+				ID:             r.ID,
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
-				ResourceID:     r.ID,
 			})
 		})
 	}()
@@ -89,14 +88,10 @@ func TestClient_Resources(t *testing.T) {
 	// Get
 	var gr *Resource
 	record(t, "resources/get", func(c *Client) {
-		// NOTE: The API documentation is confusing here because they name the
-		// parameter `resource_id` but they actually mean (as far as their data model
-		// is concerned) the `id` field. `resource_id`, from the API perspective, is
-		// referring to the resource you're creating a link to (e.g. an object store).
 		gr, err = c.GetResource(&GetResourceInput{
+			ID:             r.ID,
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			ResourceID:     r.ID,
 		})
 	})
 	if err != nil {
@@ -109,14 +104,10 @@ func TestClient_Resources(t *testing.T) {
 	// Update
 	var ur *Resource
 	record(t, "resources/update", func(c *Client) {
-		// NOTE: The API documentation is confusing here because they name the
-		// parameter `resource_id` but they actually mean (as far as their data model
-		// is concerned) the `id` field. `resource_id`, from the API perspective, is
-		// referring to the resource you're creating a link to (e.g. an object store).
 		ur, err = c.UpdateResource(&UpdateResourceInput{
+			ID:             r.ID,
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			ResourceID:     r.ID,
 			Name:           String("new-object-store-alias-for-my-service"),
 		})
 	})
@@ -129,14 +120,10 @@ func TestClient_Resources(t *testing.T) {
 
 	// Delete
 	record(t, "resources/delete", func(c *Client) {
-		// NOTE: The API documentation is confusing here because they name the
-		// parameter `resource_id` but they actually mean (as far as their data model
-		// is concerned) the `id` field. `resource_id`, from the API perspective, is
-		// referring to the resource you're creating a link to (e.g. an object store).
 		err = c.DeleteResource(&DeleteResourceInput{
+			ID:             ur.ID,
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			ResourceID:     ur.ID,
 		})
 	})
 	if err != nil {
@@ -187,12 +174,12 @@ func TestClient_GetResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingResourceID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetResource(&GetResourceInput{
-		ResourceID:     "test",
+		ID:             "test",
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
@@ -200,8 +187,8 @@ func TestClient_GetResource_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetResource(&GetResourceInput{
-		ResourceID: "test",
-		ServiceID:  "foo",
+		ID:        "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
@@ -215,12 +202,12 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingResourceID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateResource(&UpdateResourceInput{
-		ResourceID:     "test",
+		ID:             "test",
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
@@ -228,8 +215,8 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateResource(&UpdateResourceInput{
-		ResourceID: "test",
-		ServiceID:  "foo",
+		ID:        "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
@@ -243,12 +230,12 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingResourceID {
+	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteResource(&DeleteResourceInput{
-		ResourceID:     "test",
+		ID:             "test",
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
@@ -256,10 +243,76 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 	}
 
 	err = testClient.DeleteResource(&DeleteResourceInput{
-		ResourceID: "test",
-		ServiceID:  "foo",
+		ID:        "test",
+		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
+	}
+}
+
+func TestResourceJSONRoundtrip(t *testing.T) {
+	now := time.Now()
+	r := Resource{
+		CreatedAt:      &now,
+		DeletedAt:      &now,
+		HREF:           "the/href",
+		ID:             "the-id",
+		Name:           "the-name",
+		ResourceID:     "the-resource-id",
+		ResourceType:   "the-resource-type",
+		ServiceID:      "the-service-id",
+		ServiceVersion: "the-service-version",
+		UpdatedAt:      &now,
+	}
+
+	// Ensure that decode(encode(resource)) == resource.
+
+	var out bytes.Buffer
+	enc := json.NewEncoder(&out)
+	enc.SetIndent("", "  ")
+	if err := enc.Encode(r); err != nil {
+		t.Fatal(err)
+	}
+
+	encoded := out.String()
+	t.Logf("Encoded:\n%s", encoded)
+
+	var decoded Resource
+	if err := decodeBodyMap(&out, &decoded); err != nil {
+		t.Fatal(err)
+	}
+	t.Logf("Decoded:\n%#v", decoded)
+
+	if got, want := decoded.HREF, r.HREF; got != want {
+		t.Errorf("HREF: got %q, want %q", got, want)
+	}
+	if got, want := decoded.ID, r.ID; got != want {
+		t.Errorf("ID: got %q, want %q", got, want)
+	}
+	if got, want := decoded.Name, r.Name; got != want {
+		t.Errorf("Name: got %q, want %q", got, want)
+	}
+	if got, want := decoded.ResourceID, r.ResourceID; got != want {
+		t.Errorf("ResourceID: got %q, want %q", got, want)
+	}
+	if got, want := decoded.ResourceType, r.ResourceType; got != want {
+		t.Errorf("ResourceType: got %q, want %q", got, want)
+	}
+	if got, want := decoded.ServiceID, r.ServiceID; got != want {
+		t.Errorf("ServiceID: got %q, want %q", got, want)
+	}
+	if got, want := decoded.ServiceVersion, r.ServiceVersion; got != want {
+		t.Errorf("ServiceVersion: got %q, want %q", got, want)
+	}
+
+	if got, want := decoded.CreatedAt, r.CreatedAt; got == nil || !got.Equal(*want) {
+		t.Errorf("CreatedAt: got %s, want %s", got, want)
+	}
+	if got, want := decoded.DeletedAt, r.DeletedAt; got == nil || !got.Equal(*want) {
+		t.Errorf("DeletedAt: got %s, want %s", got, want)
+	}
+	if got, want := decoded.UpdatedAt, r.UpdatedAt; got == nil || !got.Equal(*want) {
+		t.Errorf("UpdatedAt: got %s, want %s", got, want)
 	}
 }

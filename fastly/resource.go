@@ -10,25 +10,25 @@ import (
 // Resource represents a response from the Fastly API.
 type Resource struct {
 	// CreatedAt is the date and time in ISO 8601 format.
-	CreatedAt *time.Time `mapstructure:"created_at"`
+	CreatedAt *time.Time `mapstructure:"created_at" json:"created_at"`
 	// CreatedAt is the date and time in ISO 8601 format.
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
+	DeletedAt *time.Time `mapstructure:"deleted_at" json:"deleted_at"`
 	// HREF is the path to the resource.
-	HREF string `mapstructure:"href"`
-	// ID is an alphanumeric string identifying the resource.
-	ID string `mapstructure:"id"`
+	HREF string `mapstructure:"href" json:"href"`
+	// ID is an alphanumeric string identifying the resource link.
+	ID string `mapstructure:"id" json:"id"`
 	// Name is the name of the resource being linked to.
-	Name string `mapstructure:"name"`
+	Name string `mapstructure:"name" json:"name"`
 	// ResourceID is the ID of the linked resource.
-	ResourceID string `mapstructure:"resource_id"`
-	// ResourceType is a resource type.
-	ResourceType string `mapstructure:"resource_type"`
+	ResourceID string `mapstructure:"resource_id" json:"resource_id"`
+	// ResourceType is the type of the linked resource.
+	ResourceType string `mapstructure:"resource_type" json:"resource_type"`
 	// ServiceID is an alphanumeric string identifying the service.
-	ServiceID string `mapstructure:"service_id"`
+	ServiceID string `mapstructure:"service_id" json:"service_id"`
 	// ServiceVersion is an integer identifying a service version.
-	ServiceVersion string `mapstructure:"version"`
+	ServiceVersion string `mapstructure:"version" json:"version"`
 	// UpdatedAt is the date and time in ISO 8601 format.
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	UpdatedAt *time.Time `mapstructure:"updated_at" json:"updated_at"`
 }
 
 // resourcesByName is a sortable list of resources.
@@ -83,9 +83,10 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 type CreateResourceInput struct {
 	// Name is the name of the resource being linked to (e.g. an object store).
 	//
-	// NOTE: This doesn't have to match the actual object-store name.
-	// This is an opportunity for you to use an 'alias' for your object store.
-	// So your service will now refer to the object-store using this name.
+	// NOTE: This doesn't have to match the actual resource name, i.e. the name
+	// of the Object Store. Rather, this is an opportunity for you to use an
+	// 'alias' for your Object Store. So your service will now refer to the
+	// Object Store using this name.
 	Name *string `url:"name,omitempty"`
 	// ResourceID is the ID of the linked resource.
 	ResourceID *string `url:"resource_id,omitempty"`
@@ -120,13 +121,8 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 
 // GetResourceInput is used as input to the GetResource function.
 type GetResourceInput struct {
-	// ResourceID is an alphanumeric string identifying the resource (required)
-	//
-	// NOTE: The API documentation is confusing here because they name the
-	// parameter `resource_id` but they actually mean (as far as their data model
-	// is concerned) the `id` field. `resource_id`, from the API perspective, is
-	// referring to the resource you're creating a link to (e.g. an object store).
-	ResourceID string
+	// ID is an alphanumeric string identifying the resource link (required).
+	ID string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -135,8 +131,8 @@ type GetResourceInput struct {
 
 // GetResource retrieves the specified resource.
 func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
-	if i.ResourceID == "" {
-		return nil, ErrMissingResourceID
+	if i.ID == "" {
+		return nil, ErrMissingID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -145,7 +141,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
+	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ID))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -163,13 +159,8 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 type UpdateResourceInput struct {
 	// Name is the name of the resource being linked to (e.g. an object store).
 	Name *string `url:"name,omitempty"`
-	// ResourceID is an alphanumeric string identifying the resource (required)
-	//
-	// NOTE: The API documentation is confusing here because they name the
-	// parameter `resource_id` but they actually mean (as far as their data model
-	// is concerned) the `id` field. `resource_id`, from the API perspective, is
-	// referring to the resource you're creating a link to (e.g. an object store).
-	ResourceID string `url:"-"`
+	// ID is an alphanumeric string identifying the resource link (required).
+	ID string `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -178,8 +169,8 @@ type UpdateResourceInput struct {
 
 // UpdateResource updates the specified resource.
 func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
-	if i.ResourceID == "" {
-		return nil, ErrMissingResourceID
+	if i.ID == "" {
+		return nil, ErrMissingID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -188,7 +179,7 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
+	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ID))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -204,8 +195,8 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 
 // DeleteResourceInput is the input parameter to DeleteResource.
 type DeleteResourceInput struct {
-	// ResourceID is an alphanumeric string identifying the resource (required)
-	ResourceID string `url:"-"`
+	// ID is an alphanumeric string identifying the resource link (required).
+	ID string `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -214,8 +205,8 @@ type DeleteResourceInput struct {
 
 // DeleteResource deletes the specified resource.
 func (c *Client) DeleteResource(i *DeleteResourceInput) error {
-	if i.ResourceID == "" {
-		return ErrMissingResourceID
+	if i.ID == "" {
+		return ErrMissingID
 	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -224,7 +215,7 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
+	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ID))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

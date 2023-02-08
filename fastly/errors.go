@@ -157,10 +157,6 @@ var ErrMissingMonth = NewFieldError("Month")
 // requires a "Name" key, but one was not set.
 var ErrMissingName = NewFieldError("Name")
 
-// ErrMissingResourceID is an error that is returned when an input struct
-// requires a "ResourceID" key, but one was not set.
-var ErrMissingResourceID = NewFieldError("ResourceID")
-
 // ErrMissingNameValue is an error that is returned when an input struct
 // requires a "Name" key, but one was not set.
 var ErrMissingNameValue = NewFieldError("Name").Message("service name can't be an empty value")
