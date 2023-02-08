@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/7.1.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/97/http3
+    method: GET
+  response:
+    body: '{"feature_revision":1,"feature_update_available":false,"id":"6jKAaDBecYPuyRIyONOL9w","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":97,"created_at":"2023-02-08T17:47:16Z","updated_at":"2023-02-08T17:47:16Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 08 Feb 2023 17:47:16 GMT
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-2-prod-3-CONTROL-AWS-UE2, cache-man4123-MAN
+      X-Timer:
+      - S1675878436.389307,VS0,VE324
+    status: 200 OK
+    code: 200
+    duration: ""
