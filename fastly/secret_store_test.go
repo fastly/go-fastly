@@ -214,7 +214,7 @@ func TestClient_CreateSecret_clientEncryption(t *testing.T) {
 		t.Fatalf("got empty signing key")
 	}
 
-	if !ck.ValidateSignature(sk) {
+	if !ck.VerifySignature(sk) {
 		t.Fatalf("signature validation failed")
 	}
 
