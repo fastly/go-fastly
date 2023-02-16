@@ -1,0 +1,133 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/ykdY5UTyffIVUCF34jRcb2
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 01 Mar 2023 22:12:17 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/zgQ8sjuhm34fjFMWRMves0
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 01 Mar 2023 22:12:17 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/uNRkaZuvLtEUIAkfOlQEY4
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 01 Mar 2023 22:12:18 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/JGRpM0EfCxUP1DvU78CN72
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 01 Mar 2023 22:12:18 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/8UDtzITTHrsry9Y3mD3Qp3
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 01 Mar 2023 22:12:18 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""

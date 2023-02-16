@@ -1,0 +1,33 @@
+---
+version: 1
+interactions:
+- request:
+    body: name=TestClient_ListConfigStoreServices
+    form:
+      name:
+      - TestClient_ListConfigStoreServices
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config
+    method: POST
+  response:
+    body: '{"name":"TestClient_ListConfigStoreServices","id":"ebJ4VKkdrSXuQFjB3H8UA7","created_at":"2023-03-01T22:12:18Z","updated_at":"2023-03-01T22:12:18Z","deleted_at":null}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 01 Mar 2023 22:12:19 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""

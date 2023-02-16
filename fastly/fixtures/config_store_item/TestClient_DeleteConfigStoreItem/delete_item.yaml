@@ -1,0 +1,29 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/khbExSHXsK7pw1pDTXJKv0/item/TestClient_DeleteConfigStoreItem
+    method: DELETE
+  response:
+    body: '{"status":"ok"}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 02 Mar 2023 16:24:04 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -1,0 +1,32 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/lV8kyCg7OmjQMjMpiX9dq2/items
+    method: GET
+  response:
+    body: '[{"item_key":"TestClient_ListConfigStoreItems-key-00","item_value":"value
+      00","created_at":"2023-03-02T16:24:02Z","updated_at":"2023-03-02T16:24:02Z","deleted_at":null,"store_id":"lV8kyCg7OmjQMjMpiX9dq2"},{"item_key":"TestClient_ListConfigStoreItems-key-01","item_value":"value
+      01","created_at":"2023-03-02T16:24:03Z","updated_at":"2023-03-02T16:24:03Z","deleted_at":null,"store_id":"lV8kyCg7OmjQMjMpiX9dq2"},{"item_key":"TestClient_ListConfigStoreItems-key-02","item_value":"value
+      02","created_at":"2023-03-02T16:24:04Z","updated_at":"2023-03-02T16:24:04Z","deleted_at":null,"store_id":"lV8kyCg7OmjQMjMpiX9dq2"},{"item_key":"TestClient_ListConfigStoreItems-key-03","item_value":"value
+      03","created_at":"2023-03-02T16:24:04Z","updated_at":"2023-03-02T16:24:04Z","deleted_at":null,"store_id":"lV8kyCg7OmjQMjMpiX9dq2"},{"item_key":"TestClient_ListConfigStoreItems-key-04","item_value":"value
+      04","created_at":"2023-03-02T16:24:04Z","updated_at":"2023-03-02T16:24:04Z","deleted_at":null,"store_id":"lV8kyCg7OmjQMjMpiX9dq2"}]'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 02 Mar 2023 16:24:05 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""

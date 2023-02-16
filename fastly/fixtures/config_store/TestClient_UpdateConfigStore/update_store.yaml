@@ -1,0 +1,35 @@
+---
+version: 1
+interactions:
+- request:
+    body: ID=iIVPdtgia83hbkhfMEbBE4&name=UPDATED+NAME%21
+    form:
+      ID:
+      - iIVPdtgia83hbkhfMEbBE4
+      name:
+      - UPDATED NAME!
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/7.3.0 (+github.com/fastly/go-fastly; go1.20.1)
+    url: https://api.fastly.com/resources/stores/config/iIVPdtgia83hbkhfMEbBE4
+    method: PUT
+  response:
+    body: '{"name":"UPDATED NAME!","id":"iIVPdtgia83hbkhfMEbBE4","created_at":"2023-03-01T22:12:20Z","updated_at":"2023-03-01T22:12:20Z","deleted_at":null}'
+    headers:
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 01 Mar 2023 22:12:20 GMT
+      Status:
+      - 200 OK
+      Vary:
+      - Accept-Encoding
+    status: 200 OK
+    code: 200
+    duration: ""
