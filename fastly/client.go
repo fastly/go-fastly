@@ -293,6 +293,7 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		c.updateLock.Lock()
 		defer c.updateLock.Unlock()
 	}
+	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return resp, err

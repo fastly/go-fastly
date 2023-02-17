@@ -165,7 +165,7 @@ func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiv
 			FilterMessage:    i.FilterMessage,
 		})
 		if err != nil {
-			return r, err
+			return nil, err
 		}
 
 		currentPage++

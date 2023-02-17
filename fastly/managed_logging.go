@@ -48,6 +48,7 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 		return nil, ErrNotImplemented
 	}
 
+	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
 	resp, err := c.Post(path, nil)
 	// If the service already has managed logging enabled, it will respond
 	// with a 409. Handle this case specially so users can decide if this is

@@ -212,7 +212,7 @@ func (c *Client) ListAllWAFRuleExclusions(i *ListAllWAFRuleExclusionsInput) (*WA
 			FilterExclusionType: i.FilterExclusionType,
 		})
 		if err != nil {
-			return r, err
+			return nil, err
 		}
 
 		currentPage++

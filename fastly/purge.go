@@ -38,6 +38,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 	}
 
 	var err error
+	// nosemgrep: trailofbits.go.questionable-assignment.questionable-assignment
 	ro.Params, err = constructRequestOptionsParam(i.URL)
 	if err != nil {
 		return nil, err

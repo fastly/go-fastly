@@ -191,7 +191,7 @@ func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResp
 			PageSize:   WAFPaginationPageSize,
 		})
 		if err != nil {
-			return r, err
+			return nil, err
 		}
 
 		currentPage++

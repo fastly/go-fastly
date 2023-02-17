@@ -23,7 +23,7 @@ FASTLY_API_KEY ?=
 # Enables support for tools such as https://github.com/rakyll/gotest
 TEST_COMMAND ?= $(GO) test
 
-all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck ## Runs all of the required cleaning and verification targets.
+all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck semgrep ## Runs all of the required cleaning and verification targets.
 .PHONY: all
 
 tidy: ## Cleans the Go module.
@@ -36,10 +36,11 @@ mod-download: ## Downloads the Go module.
 	@$(GO) mod download
 .PHONY: mod-download
 
-dev-dependencies: ## Downloads the necessesary dev dependencies.
+dev-dependencies: ## Downloads the necessary dev dependencies.
 	@echo "==> Downloading development dependencies"
 	@$(GO) install honnef.co/go/tools/cmd/staticcheck
 	@$(GO) install golang.org/x/tools/cmd/goimports
+	@if [[ "$$(uname)" == 'Darwin' ]]; then brew install semgrep; fi
 .PHONY: dev-dependencies
 
 test: ## Runs the test suite with VCR mocks enabled.
@@ -97,6 +98,13 @@ staticcheck: ## Runs the staticcheck linter.
 	@staticcheck ./...
 .PHONY: staticcheck
 
+# Run semgrep checker.
+.PHONY: semgrep
+semgrep:
+	if command -v semgrep &> /dev/null; then semgrep ci --config auto --exclude-rule generic.secrets.security.detected-private-key.detected-private-key; fi
+
 .PHONY: help
 help: ## Prints this help menu.
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
+
+.PHONY: clean
