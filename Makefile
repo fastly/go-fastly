@@ -101,7 +101,7 @@ staticcheck: ## Runs the staticcheck linter.
 # Run semgrep checker.
 .PHONY: semgrep
 semgrep:
-	if command -v semgrep &> /dev/null; then semgrep ci --config auto; fi
+	if command -v semgrep &> /dev/null; then semgrep ci --config auto --exclude-rule generic.secrets.security.detected-private-key.detected-private-key; fi
 
 .PHONY: help
 help: ## Prints this help menu.

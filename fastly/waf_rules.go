@@ -166,7 +166,7 @@ func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, err
 			PageSize:         WAFPaginationPageSize,
 		})
 		if err != nil {
-			return r, err
+			return nil, err
 		}
 
 		currentPage++

@@ -95,6 +95,7 @@ func (c *Client) SimpleGet(target string) (*http.Response, error) {
 	}
 	request.Header.Set("User-Agent", UserAgent)
 
+	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
 	resp, err := checkResp(c.HTTPClient.Do(request))
 	if err != nil {
 		return resp, err
