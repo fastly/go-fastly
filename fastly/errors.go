@@ -291,6 +291,10 @@ var ErrManagedLoggingEnabled = errors.New("managed logging already enabled")
 // requires a "Token" key, but one was not set.
 var ErrMissingToken = NewFieldError("Token")
 
+// ErrMissingProductID is an error that is returned when an input struct
+// requires a "ProductID" key, but one was not set.
+var ErrMissingProductID = NewFieldError("ProductID")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
