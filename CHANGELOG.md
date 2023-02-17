@@ -1,5 +1,14 @@
 # Changelog
 
+## [v7.3.0](https://github.com/fastly/go-fastly/releases/tag/v7.3.0) (2023-02-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.2.0...v7.3.0)
+
+**Enhancements:**
+
+- feat(product_enablement): implement API [#399](https://github.com/fastly/go-fastly/pull/399)
+- build(make): setup semgrep configuration [#400](https://github.com/fastly/go-fastly/pull/400)
+
 ## [v7.2.0](https://github.com/fastly/go-fastly/releases/tag/v7.2.0) (2023-02-08)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.1.0...v7.2.0)
