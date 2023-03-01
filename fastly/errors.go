@@ -308,12 +308,13 @@ type HTTPError struct {
 
 // ErrorObject is a single error.
 type ErrorObject struct {
-	Code   string                  `mapstructure:"code"`
-	Detail string                  `mapstructure:"detail"`
-	ID     string                  `mapstructure:"id"`
-	Meta   *map[string]interface{} `mapstructure:"meta"`
-	Status string                  `mapstructure:"status"`
-	Title  string                  `mapstructure:"title"`
+	Code    string                  `mapstructure:"code"`
+	Detail  string                  `mapstructure:"detail"`
+	ID      string                  `mapstructure:"id"`
+	Message string                  `mapstructure:"message"`
+	Meta    *map[string]interface{} `mapstructure:"meta"`
+	Status  string                  `mapstructure:"status"`
+	Title   string                  `mapstructure:"title"`
 }
 
 // legacyError represents the older-style errors from Fastly. It is private
@@ -321,6 +322,7 @@ type ErrorObject struct {
 type legacyError struct {
 	Detail  string `mapstructure:"detail"`
 	Message string `mapstructure:"msg"`
+	Title   string `mapstructure:"title"` // added because some API endpoints (such as Product Enablement do not return Content-Type `application/problem+json`)
 }
 
 // NewHTTPError creates a new HTTP error from the given code.
@@ -382,8 +384,9 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 			addDecodeErr()
 		} else if lerr != nil {
 			e.Errors = append(e.Errors, &ErrorObject{
-				Title:  lerr.Message,
-				Detail: lerr.Detail,
+				Message: lerr.Message,
+				Title:   lerr.Title,
+				Detail:  lerr.Detail,
 			})
 		}
 	}
@@ -407,6 +410,10 @@ func (e *HTTPError) Error() string {
 
 		if e.Title != "" {
 			fmt.Fprintf(&b, "\n    Title:  %s", e.Title)
+		}
+
+		if e.Message != "" {
+			fmt.Fprintf(&b, "\n    Message:  %s", e.Message)
 		}
 
 		if e.Detail != "" {

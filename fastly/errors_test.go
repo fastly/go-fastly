@@ -17,7 +17,7 @@ func TestNewHTTPError(t *testing.T) {
 		resp := &http.Response{
 			StatusCode: 404,
 			Body: io.NopCloser(bytes.NewBufferString(
-				`{"msg": "hello", "detail": "nope"}`)),
+				`{"msg": "hello", "detail": "nope", "title": "some title"}`)),
 		}
 		e := NewHTTPError(resp)
 
@@ -28,7 +28,8 @@ func TestNewHTTPError(t *testing.T) {
 		expected := strings.TrimSpace(`
 404 - Not Found:
 
-    Title:  hello
+    Title:  some title
+    Message:  hello
     Detail: nope
 `)
 		if e.Error() != expected {
