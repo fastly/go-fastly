@@ -94,8 +94,5 @@ func (c *Client) DeleteManagedLogging(i *DeleteManagedLoggingInput) error {
 	}
 
 	_, err := c.Delete(path, nil)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }

@@ -429,10 +429,7 @@ func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 
 	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/activate", i.WAFID, i.WAFVersionNumber)
 	_, err := c.PutJSONAPI(path, &DeployWAFVersionInput{}, nil)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 // CreateEmptyWAFVersionInput creates a new resource.

@@ -205,10 +205,7 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 
 	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
 	_, err := c.Delete(path, nil)
-	if err != nil {
-		return err
-	}
-	return nil
+	return err
 }
 
 // ValidateDomainInput is used as input to the ValidateDomain function.
