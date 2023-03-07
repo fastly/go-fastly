@@ -94,7 +94,7 @@ type GetUserInput struct {
 
 // GetUser retrieves the specified resource.
 //
-//If no user exists for the given id, the API returns a 404 response.
+// If no user exists for the given id, the API returns a 404 response.
 func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
