@@ -1,5 +1,18 @@
 # Changelog
 
+## [v7.4.0](https://github.com/fastly/go-fastly/releases/tag/v7.4.0) (2023-03-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.3.0...v7.4.0)
+
+**Enhancements:**
+
+- fix(lint): semgrep [#406](https://github.com/fastly/go-fastly/pull/406)
+- Expose `KeepAliveTime` field from Backend API [#405](https://github.com/fastly/go-fastly/pull/405)
+
+**Dependencies:**
+
+- Bump golang.org/x/crypto from 0.0.0-20210921155107-089bfa567519 to 0.1.0 [#404](https://github.com/fastly/go-fastly/pull/404)
+
 ## [v7.3.0](https://github.com/fastly/go-fastly/releases/tag/v7.3.0) (2023-02-17)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.2.0...v7.3.0)
