@@ -110,7 +110,7 @@ type CreateBackendInput struct {
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
 	HealthCheck *string `url:"healthcheck,omitempty"`
-	// KeepAliveTime how long in seconds to keep a persistent connection to the backend between requests.
+	// KeepAliveTime is how long in seconds to keep a persistent connection to the backend between requests.
 	KeepAliveTime *int `url:"keepalive_time,omitempty"`
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
 	MaxConn *int `url:"max_conn,omitempty"`
