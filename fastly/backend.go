@@ -20,6 +20,7 @@ type Backend struct {
 	FirstByteTimeout    int        `mapstructure:"first_byte_timeout"`
 	HealthCheck         string     `mapstructure:"healthcheck"`
 	Hostname            string     `mapstructure:"hostname"`
+	KeepAliveTime       int        `mapstructure:"keepalive_time"`
 	MaxConn             int        `mapstructure:"max_conn"`
 	MaxTLSVersion       string     `mapstructure:"max_tls_version"`
 	MinTLSVersion       string     `mapstructure:"min_tls_version"`
@@ -109,6 +110,8 @@ type CreateBackendInput struct {
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
 	HealthCheck *string `url:"healthcheck,omitempty"`
+	// KeepAliveTime is how long in seconds to keep a persistent connection to the backend between requests.
+	KeepAliveTime *int `url:"keepalive_time,omitempty"`
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
 	MaxConn *int `url:"max_conn,omitempty"`
 	// MaxTLSVersion is the maximum allowed TLS version on SSL connections to this backend.
@@ -229,6 +232,8 @@ type UpdateBackendInput struct {
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
 	HealthCheck *string `url:"healthcheck,omitempty"`
+	// KeepAliveTime is how long in seconds to keep a persistent connection to the backend between requests.
+	KeepAliveTime *int `url:"keepalive_time,omitempty"`
 	// MaxConn is the maximum number of concurrent connections this backend will accept.
 	MaxConn *int `url:"max_conn,omitempty"`
 	// MaxTLSVersion is the maximum allowed TLS version on SSL connections to this backend.
