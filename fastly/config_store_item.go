@@ -37,12 +37,6 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
-	if i.Key == "" {
-		return nil, ErrMissingKey
-	}
-	if i.Value == "" {
-		return nil, ErrMissingValue
-	}
 
 	path := fmt.Sprintf("/resources/stores/config/%s/item", i.StoreID)
 	resp, err := c.PostForm(path, i, &RequestOptions{
@@ -186,9 +180,6 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 	if i.Key == "" {
 		return nil, ErrMissingKey
 	}
-	if i.Value == "" {
-		return nil, ErrMissingValue
-	}
 
 	path := fmt.Sprintf("/resources/stores/config/%s/item/%s", i.StoreID, url.PathEscape(i.Key))
 
@@ -203,7 +194,7 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 
 	resp, err := c.RequestForm(httpMethod, path, i, &RequestOptions{
 		Headers: map[string]string{
-			// Put/PatchForm adds the appropriate Content-Type header.
+			// RequestForm adds the appropriate Content-Type header.
 			"Accept": "application/json",
 		},
 		Parallel: true,

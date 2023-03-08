@@ -35,10 +35,6 @@ type CreateConfigStoreInput struct {
 
 // CreateConfigStore creates a new Fastly config store.
 func (c *Client) CreateConfigStore(i *CreateConfigStoreInput) (*ConfigStore, error) {
-	if i.Name == "" {
-		return nil, ErrMissingName
-	}
-
 	path := "/resources/stores/config"
 	resp, err := c.PostForm(path, i, &RequestOptions{
 		Headers: map[string]string{
@@ -187,6 +183,10 @@ type ListConfigStoreServicesInput struct {
 // ListConfigStoreServices returns the list of services that are associated with
 // a given config store.
 func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Service, error) {
+	if i.ID == "" {
+		return nil, ErrMissingID
+	}
+
 	path := fmt.Sprintf("/resources/stores/config/%s/services", i.ID)
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
@@ -223,9 +223,6 @@ type UpdateConfigStoreInput struct {
 func (c *Client) UpdateConfigStore(i *UpdateConfigStoreInput) (*ConfigStore, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
-	}
-	if i.Name == "" {
-		return nil, ErrMissingName
 	}
 
 	path := fmt.Sprintf("/resources/stores/config/%s", i.ID)
