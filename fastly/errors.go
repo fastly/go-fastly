@@ -197,6 +197,10 @@ var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("S
 // requires a "User" key of type SAUser, but one was not set or was misconfigured.
 var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser requires an ID")
 
+// ErrMissingStoreID is an error that is returned when an input struct
+// requires a "StoreID" key, but one was not set.
+var ErrMissingStoreID = NewFieldError("StoreID")
+
 // ErrMissingUserID is an error that is returned when an input struct
 // requires a "UserID" key, but one was not set
 var ErrMissingUserID = NewFieldError("UserID")
@@ -236,6 +240,10 @@ var ErrMissingKind = NewFieldError("Kind")
 // ErrMissingURL is an error that is returned when an input struct
 // requires a "URL" key, but one was not set.
 var ErrMissingURL = NewFieldError("URL")
+
+// ErrMissingValue is an error that is returned when an input struct
+// requires a "Value" key, but one was not set.
+var ErrMissingValue = NewFieldError("Value")
 
 // ErrMissingWAFActiveRule is an error that is returned when an input struct
 // requires a "Rules" key, but there needs to be at least one WAFActiveRule entry.
