@@ -33,11 +33,18 @@ type TLSAuthorizations struct {
 	// Challenges ...
 	// See https://github.com/google/jsonapi/pull/99
 	// WARNING: Nested structs only work with values, not pointers.
-	Challenges []TLSChallenge `jsonapi:"attr,challenges"`
-	CreatedAt  *time.Time     `jsonapi:"attr,created_at,iso8601,omitempty"`
-	ID         string         `jsonapi:"primary,tls_authorization"`
-	State      string         `jsonapi:"attr,state,omitempty"`
-	UpdatedAt  *time.Time     `jsonapi:"attr,updated_at,iso8601,omitempty"`
+	Challenges []TLSChallenge            `jsonapi:"attr,challenges"`
+	CreatedAt  *time.Time                `jsonapi:"attr,created_at,iso8601,omitempty"`
+	ID         string                    `jsonapi:"primary,tls_authorization"`
+	State      string                    `jsonapi:"attr,state,omitempty"`
+	UpdatedAt  *time.Time                `jsonapi:"attr,updated_at,iso8601,omitempty"`
+	Warnings   []TLSAuthorizationWarning `jsonapi:"attr,warnings,omitempty"`
+}
+
+// TLSAuthorizationWarning indicates possible issues with the TLS configuration.
+type TLSAuthorizationWarning struct {
+	Type         string `jsonapi:"attr,type"`
+	Instructions string `jsonapi:"attr,instructions"`
 }
 
 // TLSChallenge represents a DNS record to be added for a specific type of domain ownership challenge
