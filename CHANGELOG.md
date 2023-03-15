@@ -1,5 +1,17 @@
 # Changelog
 
+## [v7.5.0](https://github.com/fastly/go-fastly/releases/tag/v7.5.0) (2023-03-15)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.4.0...v7.5.0)
+
+**Enhancements:**
+
+- feat: Add Config Store support [#398](https://github.com/fastly/go-fastly/pull/398)
+
+**Bug fixes:**
+
+- fix(tls-subscription): serialise warnings field [#409](https://github.com/fastly/go-fastly/pull/409)
+
 ## [v7.4.0](https://github.com/fastly/go-fastly/releases/tag/v7.4.0) (2023-03-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.3.0...v7.4.0)
