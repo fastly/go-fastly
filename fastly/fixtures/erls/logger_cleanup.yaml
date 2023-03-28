@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/7.5.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/rate-limiters/RjnOPBDtKW2VSit8PWB9g
+    url: https://api.fastly.com/rate-limiters/2feTclWJgsv6OfIpnxARrx
     method: DELETE
   response:
-    body: '{"msg":"Record not found","detail":"Cannot find vclmodule ''''"}'
+    body: '{"status":"ok"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Date:
       - Tue, 28 Mar 2023 11:17:44 GMT
       Fastly-Ratelimit-Remaining:
-      - "9980"
+      - "9981"
       Fastly-Ratelimit-Reset:
       - "1680004800"
       Status:
-      - 404 Not Found
+      - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-1-CONTROL-AWS-UE2, cache-lcy-eglc8600048-LCY
+      - cache-control-cp-aws-us-east-2-prod-7-CONTROL-AWS-UE2, cache-lcy-eglc8600048-LCY
       X-Timer:
-      - S1680002265.690040,VS0,VE136
-    status: 404 Not Found
-    code: 404
+      - S1680002264.306970,VS0,VE304
+    status: 200 OK
+    code: 200
     duration: ""
