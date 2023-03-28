@@ -1,5 +1,14 @@
 # Changelog
 
+## [v7.5.1](https://github.com/fastly/go-fastly/releases/tag/v7.5.1) (2023-03-28)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.0...v7.5.1)
+
+**Bug fixes:**
+
+* fix(lint): avoid range variable being captured by func literal [#411](https://github.com/fastly/go-fastly/pull/411)
+* fix(ratelimit): add missing LoggerType input for CREATE/UPDATE [#412](https://github.com/fastly/go-fastly/pull/412)
+
 ## [v7.5.0](https://github.com/fastly/go-fastly/releases/tag/v7.5.0) (2023-03-15)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.4.0...v7.5.0)
