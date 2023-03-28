@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/84/rate-limiters
+      - FastlyGo/7.5.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/116/rate-limiters
     method: GET
   response:
     body: '[{"feature_revision":1,"feature_update_available":false,"name":"test_erl","uri_dictionary_name":null,"http_methods":["GET","POST"],"rps_limit":20,"window_size":10,"client_key":["req.http.Fastly-Client-IP"],"penalty_box_duration":30,"action":"response","response":{"status":429,"content":"Too
-      many requests","content_type":"application/json"},"response_object_name":null,"logger_type":null,"id":"2AkQ1BaACW1Ggn6jPr5sLX","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":84,"created_at":"2022-11-07T11:18:23Z","updated_at":"2022-11-07T11:18:23Z"}]'
+      many requests","content_type":"application/json"},"response_object_name":null,"logger_type":null,"id":"RjnOPBDtKW2VSit8PWB9g","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":116,"created_at":"2023-03-28T11:17:42Z","updated_at":"2023-03-28T11:17:42Z"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 11:18:23 GMT
+      - Tue, 28 Mar 2023 11:17:42 GMT
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,9 +34,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4151-MAN
+      - cache-control-cp-aws-us-east-2-prod-1-CONTROL-AWS-UE2, cache-lcy-eglc8600048-LCY
       X-Timer:
-      - S1667819904.595900,VS0,VE297
+      - S1680002263.782103,VS0,VE141
     status: 200 OK
     code: 200
     duration: ""

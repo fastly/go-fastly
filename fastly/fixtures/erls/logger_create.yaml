@@ -2,25 +2,21 @@
 version: 1
 interactions:
 - request:
-    body: action=response&client_key%5B%5D=req.http.Fastly-Client-IP&http_methods%5B%5D=GET&http_methods%5B%5D=POST&name=test_erl&penalty_box_duration=30&response%5Bcontent%5D=Too+many+requests&response%5Bcontent_type%5D=application%2Fjson&response%5Bstatus%5D=429&rps_limit=20&window_size=10
+    body: action=log_only&client_key%5B%5D=req.http.Fastly-Client-IP&http_methods%5B%5D=GET&http_methods%5B%5D=POST&logger_type=azureblob&name=test_erl&penalty_box_duration=30&rps_limit=20&window_size=10
     form:
       action:
-      - response
+      - log_only
       client_key[]:
       - req.http.Fastly-Client-IP
       http_methods[]:
       - GET
       - POST
+      logger_type:
+      - azureblob
       name:
       - test_erl
       penalty_box_duration:
       - "30"
-      response[content]:
-      - Too many requests
-      response[content_type]:
-      - application/json
-      response[status]:
-      - "429"
       rps_limit:
       - "20"
       window_size:
@@ -33,8 +29,7 @@ interactions:
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/116/rate-limiters
     method: POST
   response:
-    body: '{"feature_revision":1,"feature_update_available":false,"name":"test_erl","uri_dictionary_name":null,"http_methods":["GET","POST"],"rps_limit":20,"window_size":10,"client_key":["req.http.Fastly-Client-IP"],"penalty_box_duration":30,"action":"response","response":{"content":"Too
-      many requests","content_type":"application/json","status":429},"response_object_name":null,"logger_type":null,"id":"RjnOPBDtKW2VSit8PWB9g","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":116,"created_at":"2023-03-28T11:17:42Z","updated_at":"2023-03-28T11:17:42Z"}'
+    body: '{"feature_revision":1,"feature_update_available":false,"name":"test_erl","uri_dictionary_name":null,"http_methods":["GET","POST"],"rps_limit":20,"window_size":10,"client_key":["req.http.Fastly-Client-IP"],"penalty_box_duration":30,"action":"log_only","response":null,"response_object_name":null,"logger_type":"azureblob","id":"2feTclWJgsv6OfIpnxARrx","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":116,"created_at":"2023-03-28T11:17:44Z","updated_at":"2023-03-28T11:17:44Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -43,9 +38,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 28 Mar 2023 11:17:42 GMT
+      - Tue, 28 Mar 2023 11:17:44 GMT
       Fastly-Ratelimit-Remaining:
-      - "9985"
+      - "9982"
       Fastly-Ratelimit-Reset:
       - "1680004800"
       Status:
@@ -63,7 +58,7 @@ interactions:
       X-Served-By:
       - cache-control-cp-aws-us-east-2-prod-5-CONTROL-AWS-UE2, cache-lcy-eglc8600048-LCY
       X-Timer:
-      - S1680002262.173119,VS0,VE572
+      - S1680002264.880916,VS0,VE399
     status: 200 OK
     code: 200
     duration: ""

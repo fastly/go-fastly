@@ -59,6 +59,11 @@ const (
 // ERLLogger represents the supported log provider variants.
 type ERLLogger string
 
+// ERLLoggerPtr is a helper that returns a pointer to the type passed in.
+func ERLLoggerPtr(v ERLLogger) *ERLLogger {
+	return &v
+}
+
 const (
 	// ERLLogAzureBlob represents a log provider variant.
 	ERLLogAzureBlob ERLLogger = "azureblob"
@@ -197,6 +202,8 @@ type CreateERLInput struct {
 	ClientKey *[]string `url:"client_key,brackets,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
 	HTTPMethods *[]string `url:"http_methods,brackets,omitempty"`
+	// LoggerType is the name of the type of logging endpoint to be used when `action` is log_only.
+	LoggerType *ERLLogger `url:"logger_type,omitempty"`
 	// Name is a human readable name for the rate limiting rule.
 	Name *string `url:"name,omitempty"`
 	// PenaltyBoxDuration is a length of time in minutes that the rate limiter is in effect after the initial violation is detected.
@@ -304,6 +311,8 @@ type UpdateERLInput struct {
 	ERLID string `url:"-"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
 	HTTPMethods *[]string `url:"http_methods,omitempty,brackets,omitempty"`
+	// LoggerType is the name of the type of logging endpoint to be used when `action` is log_only.
+	LoggerType *ERLLogger `url:"logger_type,omitempty"`
 	// Name is a human readable name for the rate limiting rule.
 	Name *string `url:"name,omitempty"`
 	// PenaltyBoxDuration is a length of time in minutes that the rate limiter is in effect after the initial violation is detected.

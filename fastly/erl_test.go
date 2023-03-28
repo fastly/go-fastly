@@ -117,6 +117,48 @@ func TestClient_ERL(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+
+	// Create logger type
+	var elog *ERL
+	record(t, fixtureBase+"logger_create", func(c *Client) {
+		elog, err = c.CreateERL(&CreateERLInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: testVersion.Number,
+			Name:           String("test_erl"),
+			Action:         ERLActionPtr(ERLActionLogOnly),
+			// IMPORTANT: API will 400 if LoggerType not set with log_only action.
+			LoggerType: ERLLoggerPtr(ERLLogAzureBlob),
+			ClientKey: &[]string{
+				"req.http.Fastly-Client-IP",
+			},
+			HTTPMethods: &[]string{
+				http.MethodGet,
+				http.MethodPost,
+			},
+			PenaltyBoxDuration: Int(30),
+			RpsLimit:           Int(20),
+			WindowSize:         ERLWindowSizePtr(10),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	defer func() {
+		record(t, fixtureBase+"logger_cleanup", func(c *Client) {
+			_ = c.DeleteERL(&DeleteERLInput{
+				ERLID: elog.ID,
+			})
+		})
+	}()
+
+	if elog.Name != "test_erl" {
+		t.Errorf("bad name: %q", elog.Name)
+	}
+
+	if elog.LoggerType != ERLLogAzureBlob {
+		t.Errorf("bad logger type: %q", elog.LoggerType)
+	}
 }
 
 func TestClient_ListERLs_validation(t *testing.T) {
