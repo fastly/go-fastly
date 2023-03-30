@@ -1,5 +1,13 @@
 # Changelog
 
+## [v7.5.2](https://github.com/fastly/go-fastly/releases/tag/v7.5.2) (2023-03-30)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.1...v7.5.2)
+
+**Enhancements:**
+
+* feat(erl): add missing fields [#414](https://github.com/fastly/go-fastly/pull/414)
+
 ## [v7.5.1](https://github.com/fastly/go-fastly/releases/tag/v7.5.1) (2023-03-28)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.0...v7.5.1)
