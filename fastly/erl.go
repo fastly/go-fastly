@@ -247,6 +247,8 @@ type CreateERLInput struct {
 	Action *ERLAction `url:"action,omitempty"`
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
 	ClientKey *[]string `url:"client_key,brackets,omitempty"`
+	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.
+	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
 	HTTPMethods *[]string `url:"http_methods,brackets,omitempty"`
 	// LoggerType is the name of the type of logging endpoint to be used when `action` is log_only.
@@ -257,6 +259,8 @@ type CreateERLInput struct {
 	PenaltyBoxDuration *int `url:"penalty_box_duration,omitempty"`
 	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
 	Response *ERLResponseType `url:"response,omitempty"`
+	// ResponseObjectName is the name of existing response object. Required if action is response_object.
+	ResponseObjectName *string `url:"response_object_name,omitempty"`
 	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
 	RpsLimit *int `url:"rps_limit,omitempty"`
 	// ServiceID is an alphanumeric string identifying the service (required).
@@ -356,6 +360,8 @@ type UpdateERLInput struct {
 	ClientKey *[]string `url:"client_key,omitempty,brackets,omitempty"`
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
 	ERLID string `url:"-"`
+	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.
+	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
 	HTTPMethods *[]string `url:"http_methods,omitempty,brackets,omitempty"`
 	// LoggerType is the name of the type of logging endpoint to be used when `action` is log_only.
@@ -366,6 +372,8 @@ type UpdateERLInput struct {
 	PenaltyBoxDuration *int `url:"penalty_box_duration,omitempty"`
 	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
 	Response *ERLResponseType `url:"response,omitempty"`
+	// ResponseObjectName is the name of existing response object. Required if action is response_object.
+	ResponseObjectName *string `url:"response_object_name,omitempty"`
 	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
 	RpsLimit *int `url:"rps_limit,omitempty"`
 	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
