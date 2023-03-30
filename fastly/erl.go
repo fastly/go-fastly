@@ -56,6 +56,13 @@ const (
 	ERLActionResponseObject ERLAction = "response_object"
 )
 
+// ERLActions is a list of supported actions.
+var ERLActions = []ERLAction{
+	ERLActionLogOnly,
+	ERLActionResponse,
+	ERLActionResponseObject,
+}
+
 // ERLLogger represents the supported log provider variants.
 type ERLLogger string
 
@@ -125,6 +132,39 @@ const (
 	ERLLogSysLog ERLLogger = "syslog"
 )
 
+// ERLLoggers is a list of supported logger types.
+var ERLLoggers = []ERLLogger{
+	ERLLogAzureBlob,
+	ERLLogBigQuery,
+	ERLLogCloudFiles,
+	ERLLogDataDog,
+	ERLLogDigitalOcean,
+	ERLLogElasticSearch,
+	ERLLogFtp,
+	ERLLogGcs,
+	ERLLogGoogleAnalytics,
+	ERLLogHeroku,
+	ERLLogHoneycomb,
+	ERLLogHTTP,
+	ERLLogHTTPS,
+	ERLLogKafta,
+	ERLLogKinesis,
+	ERLLogLogEntries,
+	ERLLogLoggly,
+	ERLLogLogShuttle,
+	ERLLogNewRelic,
+	ERLLogOpenStack,
+	ERLLogPaperTrail,
+	ERLLogPubSub,
+	ERLLogS3,
+	ERLLogScalyr,
+	ERLLogSftp,
+	ERLLogSplunk,
+	ERLLogStackDriver,
+	ERLLogSumoLogic,
+	ERLLogSysLog,
+}
+
 // ERLWindowSize represents the duration variants for when the RPS limit is
 // exceeded.
 type ERLWindowSize int
@@ -142,6 +182,13 @@ const (
 	// ERLSize60 represents a duration variant.
 	ERLSize60 ERLWindowSize = 60
 )
+
+// ERLWindowSizes is a list of supported time window sizes.
+var ERLWindowSizes = []ERLWindowSize{
+	ERLSize1,
+	ERLSize10,
+	ERLSize60,
+}
 
 // ERLsByName is a sortable list of ERLs
 type ERLsByName []*ERL
