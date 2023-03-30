@@ -56,6 +56,13 @@ const (
 	ERLActionResponseObject ERLAction = "response_object"
 )
 
+// ERLActions is a list of supported actions.
+var ERLActions = []ERLAction{
+	ERLActionLogOnly,
+	ERLActionResponse,
+	ERLActionResponseObject,
+}
+
 // ERLLogger represents the supported log provider variants.
 type ERLLogger string
 
@@ -125,6 +132,39 @@ const (
 	ERLLogSysLog ERLLogger = "syslog"
 )
 
+// ERLLoggers is a list of supported logger types.
+var ERLLoggers = []ERLLogger{
+	ERLLogAzureBlob,
+	ERLLogBigQuery,
+	ERLLogCloudFiles,
+	ERLLogDataDog,
+	ERLLogDigitalOcean,
+	ERLLogElasticSearch,
+	ERLLogFtp,
+	ERLLogGcs,
+	ERLLogGoogleAnalytics,
+	ERLLogHeroku,
+	ERLLogHoneycomb,
+	ERLLogHTTP,
+	ERLLogHTTPS,
+	ERLLogKafta,
+	ERLLogKinesis,
+	ERLLogLogEntries,
+	ERLLogLoggly,
+	ERLLogLogShuttle,
+	ERLLogNewRelic,
+	ERLLogOpenStack,
+	ERLLogPaperTrail,
+	ERLLogPubSub,
+	ERLLogS3,
+	ERLLogScalyr,
+	ERLLogSftp,
+	ERLLogSplunk,
+	ERLLogStackDriver,
+	ERLLogSumoLogic,
+	ERLLogSysLog,
+}
+
 // ERLWindowSize represents the duration variants for when the RPS limit is
 // exceeded.
 type ERLWindowSize int
@@ -142,6 +182,13 @@ const (
 	// ERLSize60 represents a duration variant.
 	ERLSize60 ERLWindowSize = 60
 )
+
+// ERLWindowSizes is a list of supported time window sizes.
+var ERLWindowSizes = []ERLWindowSize{
+	ERLSize1,
+	ERLSize10,
+	ERLSize60,
+}
 
 // ERLsByName is a sortable list of ERLs
 type ERLsByName []*ERL
@@ -200,6 +247,8 @@ type CreateERLInput struct {
 	Action *ERLAction `url:"action,omitempty"`
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
 	ClientKey *[]string `url:"client_key,brackets,omitempty"`
+	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.
+	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
 	HTTPMethods *[]string `url:"http_methods,brackets,omitempty"`
 	// LoggerType is the name of the type of logging endpoint to be used when `action` is log_only.
@@ -210,6 +259,8 @@ type CreateERLInput struct {
 	PenaltyBoxDuration *int `url:"penalty_box_duration,omitempty"`
 	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
 	Response *ERLResponseType `url:"response,omitempty"`
+	// ResponseObjectName is the name of existing response object. Required if action is response_object.
+	ResponseObjectName *string `url:"response_object_name,omitempty"`
 	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
 	RpsLimit *int `url:"rps_limit,omitempty"`
 	// ServiceID is an alphanumeric string identifying the service (required).
@@ -309,6 +360,8 @@ type UpdateERLInput struct {
 	ClientKey *[]string `url:"client_key,omitempty,brackets,omitempty"`
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
 	ERLID string `url:"-"`
+	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.
+	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
 	HTTPMethods *[]string `url:"http_methods,omitempty,brackets,omitempty"`
 	// LoggerType is the name of the type of logging endpoint to be used when `action` is log_only.
@@ -319,6 +372,8 @@ type UpdateERLInput struct {
 	PenaltyBoxDuration *int `url:"penalty_box_duration,omitempty"`
 	// Response is a custom response to be sent when the rate limit is exceeded. Required if action is response.
 	Response *ERLResponseType `url:"response,omitempty"`
+	// ResponseObjectName is the name of existing response object. Required if action is response_object.
+	ResponseObjectName *string `url:"response_object_name,omitempty"`
 	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
 	RpsLimit *int `url:"rps_limit,omitempty"`
 	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
