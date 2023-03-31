@@ -60,6 +60,18 @@ func TestClient_ERL(t *testing.T) {
 		t.Errorf("wrong value: %q", e.RpsLimit)
 	}
 
+	if e.Response.ERLContent != "Too many requests" {
+		t.Errorf("want 'Too many requests', got %q", e.Response.ERLContent)
+	}
+
+	if e.Response.ERLContentType != "application/json" {
+		t.Errorf("want 'application/json', got %q", e.Response.ERLContentType)
+	}
+
+	if e.Response.ERLStatus != 429 {
+		t.Errorf("want 429, got %q", e.Response.ERLStatus)
+	}
+
 	// List
 	var es []*ERL
 	record(t, fixtureBase+"list", func(c *Client) {
