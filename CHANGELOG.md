@@ -1,5 +1,13 @@
 # Changelog
 
+## [v7.5.4](https://github.com/fastly/go-fastly/releases/tag/v7.5.4) (2023-03-31)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.3...v7.5.4)
+
+**Bug fixes:**
+
+* fix(ratelimiter): use separate structs for input/response serialization [#418](https://github.com/fastly/go-fastly/pull/418)
+
 ## [v7.5.3](https://github.com/fastly/go-fastly/releases/tag/v7.5.3) (2023-03-31)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.2...v7.5.3)
