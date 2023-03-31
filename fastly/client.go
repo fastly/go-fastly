@@ -48,7 +48,7 @@ const DefaultRealtimeStatsEndpoint = "https://rt.fastly.com"
 var ProjectURL = "github.com/fastly/go-fastly"
 
 // ProjectVersion is the version of this library.
-var ProjectVersion = "7.5.4"
+var ProjectVersion = "7.5.5"
 
 // UserAgent is the user agent for this particular client.
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
