@@ -33,9 +33,9 @@ type ERL struct {
 
 // ERLResponseType models the response from the Fastly API.
 type ERLResponseType struct {
-	ERLContent     string `url:"content,omitempty"`
-	ERLContentType string `url:"content_type,omitempty"`
-	ERLStatus      int    `url:"status,omitempty"`
+	ERLContent     string `mapstructure:"content,omitempty"`
+	ERLContentType string `mapstructure:"content_type,omitempty"`
+	ERLStatus      int    `mapstructure:"status,omitempty"`
 }
 
 // ERLAction represents the action variants for when a rate limiter
