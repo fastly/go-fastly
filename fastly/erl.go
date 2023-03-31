@@ -274,6 +274,8 @@ type CreateERLInput struct {
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `url:"-"`
+	// URIDictionaryName is the name of an Edge Dictionary containing URIs as keys. If not defined or null, all origin URIs will be rate limited.
+	URIDictionaryName *string `url:"uri_dictionary_name,omitempty"`
 	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
 	WindowSize *ERLWindowSize `url:"window_size,omitempty"`
 }
@@ -383,6 +385,8 @@ type UpdateERLInput struct {
 	ResponseObjectName *string `url:"response_object_name,omitempty"`
 	// RpsLimit is an upper limit of requests per second allowed by the rate limiter.
 	RpsLimit *int `url:"rps_limit,omitempty"`
+	// URIDictionaryName is the name of an Edge Dictionary containing URIs as keys. If not defined or null, all origin URIs will be rate limited.
+	URIDictionaryName *string `url:"uri_dictionary_name,omitempty"`
 	// WindowSize is the number of seconds during which the RPS limit must be exceeded in order to trigger a violation (1, 10, 60).
 	WindowSize *ERLWindowSize `url:"window_size,omitempty"`
 }
