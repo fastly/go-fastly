@@ -1,5 +1,13 @@
 # Changelog
 
+## [v7.5.5](https://github.com/fastly/go-fastly/releases/tag/v7.5.5) (2023-03-31)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.4...v7.5.5)
+
+**Enhancements:**
+
+* feat(ratelimiter): add uri_dictionary_name property [#420](https://github.com/fastly/go-fastly/pull/420)
+
 ## [v7.5.4](https://github.com/fastly/go-fastly/releases/tag/v7.5.4) (2023-03-31)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.3...v7.5.4)
