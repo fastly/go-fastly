@@ -11,31 +11,38 @@ import (
 
 // ERL models the response from the Fastly API.
 type ERL struct {
-	Action             ERLAction        `mapstructure:"action"`
-	ClientKey          []string         `mapstructure:"client_key"`
-	CreatedAt          *time.Time       `mapstructure:"created_at"`
-	DeletedAt          *time.Time       `mapstructure:"deleted_at"`
-	FeatureRevision    int              `mapstructure:"feature_revision"` // 1..
-	HTTPMethods        []string         `mapstructure:"http_methods"`
-	ID                 string           `mapstructure:"id"`
-	LoggerType         ERLLogger        `mapstructure:"logger_type"`
-	Name               string           `mapstructure:"name"`
-	PenaltyBoxDuration int              `mapstructure:"penalty_box_duration"` // 1..60
-	Response           *ERLResponseType `mapstructure:"response"`             // required if Action != Log
-	ResponseObjectName string           `mapstructure:"response_object_name"`
-	RpsLimit           int              `mapstructure:"rps_limit"` // 10..10000
-	ServiceID          string           `mapstructure:"service_id"`
-	UpdatedAt          *time.Time       `mapstructure:"updated_at"`
-	URIDictionaryName  string           `mapstructure:"uri_dictionary_name"`
-	Version            int              `mapstructure:"version"` // 1..
-	WindowSize         ERLWindowSize    `mapstructure:"window_size"`
+	Action             ERLAction     `mapstructure:"action"`
+	ClientKey          []string      `mapstructure:"client_key"`
+	CreatedAt          *time.Time    `mapstructure:"created_at"`
+	DeletedAt          *time.Time    `mapstructure:"deleted_at"`
+	FeatureRevision    int           `mapstructure:"feature_revision"` // 1..
+	HTTPMethods        []string      `mapstructure:"http_methods"`
+	ID                 string        `mapstructure:"id"`
+	LoggerType         ERLLogger     `mapstructure:"logger_type"`
+	Name               string        `mapstructure:"name"`
+	PenaltyBoxDuration int           `mapstructure:"penalty_box_duration"` // 1..60
+	Response           *ERLResponse  `mapstructure:"response"`             // required if Action != Log
+	ResponseObjectName string        `mapstructure:"response_object_name"`
+	RpsLimit           int           `mapstructure:"rps_limit"` // 10..10000
+	ServiceID          string        `mapstructure:"service_id"`
+	UpdatedAt          *time.Time    `mapstructure:"updated_at"`
+	URIDictionaryName  string        `mapstructure:"uri_dictionary_name"`
+	Version            int           `mapstructure:"version"` // 1..
+	WindowSize         ERLWindowSize `mapstructure:"window_size"`
 }
 
-// ERLResponseType models the response from the Fastly API.
-type ERLResponseType struct {
+// ERLResponse models the response from the Fastly API.
+type ERLResponse struct {
 	ERLContent     string `mapstructure:"content,omitempty"`
 	ERLContentType string `mapstructure:"content_type,omitempty"`
 	ERLStatus      int    `mapstructure:"status,omitempty"`
+}
+
+// ERLResponseType models the input to the Fastly API.
+type ERLResponseType struct {
+	ERLContent     string `url:"content,omitempty"`
+	ERLContentType string `url:"content_type,omitempty"`
+	ERLStatus      int    `url:"status,omitempty"`
 }
 
 // ERLAction represents the action variants for when a rate limiter
