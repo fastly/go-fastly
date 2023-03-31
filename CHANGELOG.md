@@ -1,5 +1,13 @@
 # Changelog
 
+## [v7.5.3](https://github.com/fastly/go-fastly/releases/tag/v7.5.3) (2023-03-31)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.2...v7.5.3)
+
+**Bug fixes:**
+
+* fix(ratelimiter): serialize with mapstructure tag [#416](https://github.com/fastly/go-fastly/pull/416)
+
 ## [v7.5.2](https://github.com/fastly/go-fastly/releases/tag/v7.5.2) (2023-03-30)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.1...v7.5.2)
