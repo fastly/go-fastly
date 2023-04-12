@@ -1,5 +1,14 @@
 # Changelog
 
+## [v8.0.0](https://github.com/fastly/go-fastly/releases/tag/v8.0.0) (2023-04-12)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.5...v8.0.0)
+
+**Breaking**:
+
+* breaking(secret-store): rename `ValidateSignature` to `VerifySignature` [#397](https://github.com/fastly/go-fastly/pull/397)
+* breaking(object-store): rename `ObjectStore` to `KVStore` [#422](https://github.com/fastly/go-fastly/pull/422)
+
 ## [v7.5.5](https://github.com/fastly/go-fastly/releases/tag/v7.5.5) (2023-03-31)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.4...v7.5.5)
