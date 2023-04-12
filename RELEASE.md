@@ -15,6 +15,6 @@
 
 1. <a name="note1"></a>We utilize [semantic versioning](https://semver.org/) and only include relevant/significant changes within the CHANGELOG.
 2. <a name="note2"></a>Also bump `ProjectVersion` in `fastly/client.go`.
-3. <a name="note3"></a>If a major version change, then update references to the version in `go.mod` and `README.md`.
+3. <a name="note3"></a>If a major version change, then update references to the version in `go.mod` and `README.md` (also in code example tests, `./fastly/example_*_test.go`).
 4. <a name="note4"></a>Use the format: `vX.Y.Z - yyyy-mm-dd` for the release title.
 5. <a name="note5"></a>Fastly make internal announcements in the Slack channels: `#api-clients`, `#ecp-languages`.
