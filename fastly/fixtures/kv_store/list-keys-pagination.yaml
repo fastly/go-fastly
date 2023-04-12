@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys?limit=4
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys?limit=4
     method: GET
   response:
     body: '{"data":["apple","banana","carrot","dragonfruit"],"meta":{"limit":4,"next_cursor":"CgtkcmFnb25mcnVpdA=="}}'
@@ -41,7 +41,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys?cursor=CgtkcmFnb25mcnVpdA%3D%3D&limit=4
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys?cursor=CgtkcmFnb25mcnVpdA%3D%3D&limit=4
     method: GET
   response:
     body: '{"data":["eggplant"],"meta":{"limit":4}}'

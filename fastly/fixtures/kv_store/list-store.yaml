@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object
+    url: https://api.fastly.com/resources/stores/kv
     method: GET
   response:
     body: '{"data":[],"meta":{"limit":100,"total":0}}'

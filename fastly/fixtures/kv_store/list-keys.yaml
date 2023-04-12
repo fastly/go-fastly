@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys
     method: GET
   response:
     body: '{"data":["apple","banana","carrot","dragonfruit","eggplant"],"meta":{"limit":100}}'
