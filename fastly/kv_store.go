@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// https://developer.fastly.com/reference/api/kv-store/
+// https://developer.fastly.com/reference/api/services/resources/kv-store
 
 // KVStore represents an KV Store response from the Fastly API.
 type KVStore struct {
