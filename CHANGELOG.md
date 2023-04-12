@@ -519,6 +519,12 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v2.1.0...v3.0.0)
 
+There were a few breaking changes introduced in v3:
+
+1. A new `FieldError` abstraction for validating API struct fields.
+2. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
+3. Avoid generic ID field when more explicit naming would be clearer.
+
 **Enhancements:**
 
 - Strip TLS prefix from TLS struct fields [\#250](https://github.com/fastly/go-fastly/pull/250)
@@ -561,6 +567,17 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 ## [v2.0.0](https://github.com/fastly/go-fastly/releases/tag/v2.0.0) (2020-11-17)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v1.18.0...v2.0.0)
+
+The move from major version v1 to v2 has resulted in a couple of fundamental changes to the library:
+
+- Consistent field name format for IDs and Versions (e.g. `DictionaryID`, `PoolID`, `ServiceID`, `ServiceVersion` etc).
+- Input struct fields (for write/update operations) that are optional (i.e. `omitempty`) and use basic types, are now defined as pointers.
+
+The move to more consistent field names in some cases will have resulted in the corresponding sentinel error name to be updated also. For example, `ServiceID` has resulted in a change from `ErrMissingService` to `ErrMissingServiceID`.
+
+The change in type for [basic types](https://tour.golang.org/basics/11) that are optional on input structs related to write/update operations is designed to avoid unexpected behaviours when dealing with their zero value (see [this reference](https://willnorris.com/2014/05/go-rest-apis-and-pointers/) for more details). As part of this change we now provide [helper functions](./fastly/basictypes_helper.go) to assist with generating the new pointer types required.
+
+> Note: some read/list operations require fields to be provided but if omitted a zero value will be used when marshaling the data structure into JSON. This too can cause confusion, which is why some input structs define their mandatory fields as pointers (to ensure that the backend can distinguish between a zero value and an omitted field).
 
 **Enhancements:**
 
