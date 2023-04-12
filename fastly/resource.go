@@ -81,7 +81,7 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 
 // CreateResourceInput is used as input to the CreateResource function.
 type CreateResourceInput struct {
-	// Name is the name of the resource being linked to (e.g. an kv store).
+	// Name is the name of the resource being linked to (e.g. a kv store).
 	//
 	// NOTE: This doesn't have to match the actual resource name, i.e. the name
 	// of the KV Store. Rather, this is an opportunity for you to use an
