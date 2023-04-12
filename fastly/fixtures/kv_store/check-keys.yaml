@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/apple
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/apple
     method: GET
   response:
     body: apple0
@@ -43,7 +43,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/banana
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/banana
     method: GET
   response:
     body: banana1
@@ -79,7 +79,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/carrot
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/carrot
     method: GET
   response:
     body: carrot2
@@ -115,7 +115,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
     method: GET
   response:
     body: dragonfruit3
@@ -151,7 +151,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/eggplant
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/eggplant
     method: GET
   response:
     body: eggplant4

@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys
     method: GET
   response:
     body: '{"data":["apple","banana","carrot","dragonfruit","eggplant"],"meta":{"limit":100}}'
@@ -41,7 +41,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/apple
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/apple
     method: DELETE
   response:
     body: ""
@@ -73,7 +73,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/banana
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/banana
     method: DELETE
   response:
     body: ""
@@ -105,7 +105,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/carrot
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/carrot
     method: DELETE
   response:
     body: ""
@@ -137,7 +137,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
     method: DELETE
   response:
     body: ""
@@ -169,7 +169,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve/keys/eggplant
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/eggplant
     method: DELETE
   response:
     body: ""
@@ -201,7 +201,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve
     method: DELETE
   response:
     body: ""

@@ -7,19 +7,19 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object
+    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys
     method: GET
   response:
-    body: '{"data":[],"meta":{"limit":100,"total":0}}'
+    body: '{"data":["apple","banana","carrot","dragonfruit","eggplant"],"meta":{"limit":100}}'
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 Sep 2022 17:55:34 GMT
+      - Thu, 15 Sep 2022 17:55:39 GMT
       Server-Timing:
-      - get_all_attachments;dur=65, total;dur=69, verify;dur=0
+      - total;dur=111, list_buckets;dur=89, verify;dur=2
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +29,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21328-FTY, cache-sea4451-SEA
+      - cache-fty21355-FTY, cache-sea4451-SEA
       X-Timer:
-      - S1663264534.091486,VS0,VE129
+      - S1663264539.145395,VS0,VE345
     status: 200 OK
     code: 200
     duration: ""

@@ -7,19 +7,19 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/object/fff9gl14gebt6m9kkp54ve
+    url: https://api.fastly.com/resources/stores/kv
     method: GET
   response:
-    body: '{"id":"fff9gl14gebt6m9kkp54ve","name":"object-store-test-store","created_at":"2022-09-15T17:55:36.122Z","updated_at":"2022-09-15T17:55:36.122Z"}'
+    body: '{"data":[],"meta":{"limit":100,"total":0}}'
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 Sep 2022 17:55:36 GMT
+      - Thu, 15 Sep 2022 17:55:34 GMT
       Server-Timing:
-      - get_attachment;dur=115, verify;dur=1, total;dur=119
+      - get_all_attachments;dur=65, total;dur=69, verify;dur=0
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +29,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21321-FTY, cache-sea4451-SEA
+      - cache-fty21328-FTY, cache-sea4451-SEA
       X-Timer:
-      - S1663264536.973202,VS0,VE179
+      - S1663264534.091486,VS0,VE129
     status: 200 OK
     code: 200
     duration: ""

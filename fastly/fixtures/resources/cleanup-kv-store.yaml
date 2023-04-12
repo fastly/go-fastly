@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/resources/stores/object/2dem3bjbpie7k1vyy70fh5
+    url: https://api.fastly.com/resources/stores/kv/2dem3bjbpie7k1vyy70fh5
     method: DELETE
   response:
     body: ""

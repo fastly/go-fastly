@@ -81,12 +81,12 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 
 // CreateResourceInput is used as input to the CreateResource function.
 type CreateResourceInput struct {
-	// Name is the name of the resource being linked to (e.g. an object store).
+	// Name is the name of the resource being linked to (e.g. a kv store).
 	//
 	// NOTE: This doesn't have to match the actual resource name, i.e. the name
-	// of the Object Store. Rather, this is an opportunity for you to use an
-	// 'alias' for your Object Store. So your service will now refer to the
-	// Object Store using this name.
+	// of the KV Store. Rather, this is an opportunity for you to use an
+	// 'alias' for your KV Store. So your service will now refer to the
+	// KV Store using this name.
 	Name *string `url:"name,omitempty"`
 	// ResourceID is the ID of the linked resource.
 	ResourceID *string `url:"resource_id,omitempty"`
@@ -157,7 +157,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 
 // UpdateResourceInput is used as input to the UpdateResource function.
 type UpdateResourceInput struct {
-	// Name is the name of the resource being linked to (e.g. an object store).
+	// Name is the name of the resource being linked to (e.g. a kv store).
 	Name *string `url:"name,omitempty"`
 	// ID is an alphanumeric string identifying the resource link (required).
 	ID string `url:"-"`

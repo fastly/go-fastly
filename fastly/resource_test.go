@@ -16,30 +16,30 @@ func TestClient_Resources(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
-	// Create object-store resource we want to link to via Resource API.
-	var o *ObjectStore
-	record(t, "resources/create-object-store", func(c *Client) {
-		o, err = c.CreateObjectStore(&CreateObjectStoreInput{
-			Name: "test-object-store",
+	// Create kv-store resource we want to link to via Resource API.
+	var o *KVStore
+	record(t, "resources/create-kv-store", func(c *Client) {
+		o, err = c.CreateKVStore(&CreateKVStoreInput{
+			Name: "test-kv-store",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	// Ensure object-store resource is deleted
+	// Ensure kv-store resource is deleted
 	defer func() {
-		record(t, "resources/cleanup-object-store", func(c *Client) {
-			_ = c.DeleteObjectStore(&DeleteObjectStoreInput{
+		record(t, "resources/cleanup-kv-store", func(c *Client) {
+			_ = c.DeleteKVStore(&DeleteKVStoreInput{
 				ID: o.ID,
 			})
 		})
 	}()
 
-	// NOTE: This doesn't have to match the actual object-store name.
-	// This is an opportunity for you to use an 'alias' for your object store.
-	// So your service will now refer to the object-store using this name.
-	const objectStoreNameForServiceLinking = "test-object-store-name-for-linking"
+	// NOTE: This doesn't have to match the actual kv-store name.
+	// This is an opportunity for you to use an 'alias' for your kv store.
+	// So your service will now refer to the kv-store using this name.
+	const kvStoreNameForServiceLinking = "test-kv-store-name-for-linking"
 
 	// Create
 	var r *Resource
@@ -47,7 +47,7 @@ func TestClient_Resources(t *testing.T) {
 		r, err = c.CreateResource(&CreateResourceInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String(objectStoreNameForServiceLinking),
+			Name:           String(kvStoreNameForServiceLinking),
 			ResourceID:     String(o.ID),
 		})
 	})
@@ -66,7 +66,7 @@ func TestClient_Resources(t *testing.T) {
 		})
 	}()
 
-	if r.Name != objectStoreNameForServiceLinking {
+	if r.Name != kvStoreNameForServiceLinking {
 		t.Errorf("bad name: %q", r.Name)
 	}
 
@@ -108,13 +108,13 @@ func TestClient_Resources(t *testing.T) {
 			ID:             r.ID,
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("new-object-store-alias-for-my-service"),
+			Name:           String("new-kv-store-alias-for-my-service"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ur.Name != "new-object-store-alias-for-my-service" {
+	if ur.Name != "new-kv-store-alias-for-my-service" {
 		t.Errorf("bad name: %q", ur.Name)
 	}
 
