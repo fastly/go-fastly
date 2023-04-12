@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/fastly/go-fastly/v7/fastly"
+	"github.com/fastly/go-fastly/v8/fastly"
 )
 
 func ExampleClient_NewListACLEntriesPaginator() {
