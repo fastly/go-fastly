@@ -157,7 +157,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 
 // UpdateResourceInput is used as input to the UpdateResource function.
 type UpdateResourceInput struct {
-	// Name is the name of the resource being linked to (e.g. an kv store).
+	// Name is the name of the resource being linked to (e.g. a kv store).
 	Name *string `url:"name,omitempty"`
 	// ID is an alphanumeric string identifying the resource link (required).
 	ID string `url:"-"`
