@@ -404,11 +404,11 @@ type ClientKey struct {
 	ExpiresAt time.Time `json:"expires_at"`
 }
 
-// ValidateSignature reports if the signingKey was used to generate the
+// VerifySignature reports if the signingKey was used to generate the
 // client key's signature.  It must be a valid Ed25519 public key, and
 // it will panic if len(signingKey) is not ed25519.PublicKeySize.
 // https://pkg.go.dev/crypto/ed25519#PublicKeySize
-func (ck *ClientKey) ValidateSignature(signingKey ed25519.PublicKey) bool {
+func (ck *ClientKey) VerifySignature(signingKey ed25519.PublicKey) bool {
 	return ed25519.Verify(signingKey, ck.PublicKey, ck.Signature)
 }
 
