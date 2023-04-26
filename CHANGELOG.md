@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.0.1](https://github.com/fastly/go-fastly/releases/tag/v8.0.1) (2023-04-26)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.0.0...v8.0.1)
+
+**Enhancements:**
+
+* Add project id for GCP in logging [#425](https://github.com/fastly/go-fastly/pull/425)
+
 ## [v8.0.0](https://github.com/fastly/go-fastly/releases/tag/v8.0.0) (2023-04-12)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v7.5.5...v8.0.0)
