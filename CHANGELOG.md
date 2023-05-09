@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.0.3](https://github.com/fastly/go-fastly/releases/tag/v8.0.3) (2023-05-09)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.0.2...v8.0.3)
+
+**Enhancements:**
+
+* fix(kv_store): support parallel requests [#429](https://github.com/fastly/go-fastly/pull/429)
+
 ## [v8.0.2](https://github.com/fastly/go-fastly/releases/tag/v8.0.2) (2023-05-09)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.0.1...v8.0.2)
