@@ -367,7 +367,10 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 	}
 
 	path := "/resources/stores/kv/" + i.ID + "/keys/" + i.Key
-	resp, err := c.Put(path, &RequestOptions{Body: io.NopCloser(strings.NewReader(i.Value))})
+	resp, err := c.Put(path, &RequestOptions{
+		Body:       io.NopCloser(strings.NewReader(i.Value)),
+		BodyLength: int64(len(i.Value)),
+	})
 	if err != nil {
 		return err
 	}
