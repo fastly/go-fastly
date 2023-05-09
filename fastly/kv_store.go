@@ -370,6 +370,7 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 	resp, err := c.Put(path, &RequestOptions{
 		Body:       io.NopCloser(strings.NewReader(i.Value)),
 		BodyLength: int64(len(i.Value)),
+		Parallel:   true, // This will allow the Fastly CLI to make bulk inserts.
 	})
 	if err != nil {
 		return err
