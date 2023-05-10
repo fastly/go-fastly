@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"crypto/ed25519"
 	"fmt"
+	"net/http"
 	"sort"
 	"testing"
 )
@@ -169,6 +170,81 @@ func TestClient_CreateSecret(t *testing.T) {
 	}
 	if got := s.Digest; len(got) == 0 {
 		t.Errorf("Digest: got %q, want not blank", string(got))
+	}
+}
+
+func TestClient_CreateOrRecreateSecret(t *testing.T) {
+	t.Parallel()
+
+	ss := createSecretStoreHelper(t, 0)
+
+	var (
+		s   *Secret
+		err error
+	)
+	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
+		s, err = c.CreateSecret(&CreateSecretInput{
+			ID:     ss.ID,
+			Name:   t.Name(),
+			Secret: []byte("secretum servare"),
+			Method: http.MethodPut,
+		})
+	})
+	if err != nil {
+		t.Fatalf("error creating or recreating secret: %v", err)
+	}
+
+	if got, want := s.Name, t.Name(); got != want {
+		t.Errorf("Name: got %q, want %q", got, want)
+	}
+	if got := s.Digest; len(got) == 0 {
+		t.Errorf("Digest: got %q, want not blank", string(got))
+	}
+	if got, want := s.Recreated, false; got != want {
+		t.Errorf("Recreated: got %v, want %v", got, want)
+	}
+}
+
+func TestClient_RecreateSecret(t *testing.T) {
+	t.Parallel()
+
+	ss := createSecretStoreHelper(t, 0)
+
+	var (
+		s   *Secret
+		err error
+	)
+	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
+		// There must be an existing secret already, otherwise
+		// the following PATCH request will fail.
+		s, err = c.CreateSecret(&CreateSecretInput{
+			ID:     ss.ID,
+			Name:   t.Name(),
+			Secret: []byte("secretum servare"),
+		})
+		if err != nil {
+			return
+		}
+
+		s, err = c.CreateSecret(&CreateSecretInput{
+			ID:     ss.ID,
+			Name:   t.Name(),
+			Secret: []byte("secretum servare"),
+			Method: http.MethodPatch,
+		})
+	})
+	if err != nil {
+		t.Fatalf("error recreating secret: %v", err)
+	}
+
+	if got, want := s.Name, t.Name(); got != want {
+		t.Errorf("Name: got %q, want %q", got, want)
+	}
+	if got := s.Digest; len(got) == 0 {
+		t.Errorf("Digest: got %q, want not blank", string(got))
+	}
+	if got, want := s.Recreated, true; got != want {
+		t.Errorf("Recreated: got %v, want %v", got, want)
 	}
 }
 

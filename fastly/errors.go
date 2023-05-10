@@ -303,6 +303,10 @@ var ErrMissingToken = NewFieldError("Token")
 // requires a "ProductID" key, but one was not set.
 var ErrMissingProductID = NewFieldError("ProductID")
 
+// ErrInvalidMethod is an error that is returned when the input struct
+// has an invalid Method value.
+var ErrInvalidMethod = NewFieldError("Method").Message("invalid")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
