@@ -4,6 +4,7 @@ import (
 	"reflect"
 	"sort"
 	"strconv"
+	"strings"
 	"testing"
 )
 
@@ -109,7 +110,23 @@ func TestClient_KVStore(t *testing.T) {
 		}
 	})
 
-	// fetch the keys
+	record(t, "kv_store/batch-create-keys", func(c *Client) {
+		keys := `{"key":"batch-1","value":"VkFMVUU="}
+    {"key":"batch-2","value":"VkFMVUU="}`
+		err := c.BatchModifyKVStoreKey(&BatchModifyKVStoreKeyInput{
+			ID:   kvStore.ID,
+			Body: strings.NewReader(keys),
+		})
+		if err != nil {
+			t.Errorf("error inserting keys %q: %v", keys, err)
+		}
+	})
+
+	allKeys := []string{"batch-1", "batch-2"}
+	allKeys = append(allKeys, keys...)
+	sort.Strings(allKeys)
+
+	// fetch all keys and validate they match our input data
 	var kvStoreListKeys *ListKVStoreKeysResponse
 	record(t, "kv_store/list-keys", func(c *Client) {
 		kvStoreListKeys, err = c.ListKVStoreKeys(&ListKVStoreKeysInput{ID: kvStore.ID})
@@ -120,14 +137,14 @@ func TestClient_KVStore(t *testing.T) {
 	}
 
 	sort.Strings(kvStoreListKeys.Data)
-	if !reflect.DeepEqual(keys, kvStoreListKeys.Data) {
-		t.Errorf("mismatch listing keys: got %q, want %q", kvStoreListKeys.Data, keys)
+	if !reflect.DeepEqual(allKeys, kvStoreListKeys.Data) {
+		t.Errorf("mismatch listing keys: got %q, want %q", kvStoreListKeys.Data, allKeys)
 	}
 
 	record(t, "kv_store/list-keys-pagination", func(c *Client) {
 		p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{ID: kvStore.ID, Limit: 4})
 		var listed []string
-		expected := []int{4, 1}
+		expected := []int{4, 3}
 		var page int
 		for p.Next() {
 			keys := p.Keys()
@@ -141,8 +158,8 @@ func TestClient_KVStore(t *testing.T) {
 			t.Errorf("error during keys pagination: %v", err)
 		}
 		sort.Strings(listed)
-		if !reflect.DeepEqual(keys, listed) {
-			t.Errorf("mismatch listing paginated keys: got %q, want %q", kvStoreListKeys.Data, keys)
+		if !reflect.DeepEqual(allKeys, listed) {
+			t.Errorf("mismatch listing paginated keys: got %q, want %q", kvStoreListKeys.Data, allKeys)
 		}
 	})
 }
