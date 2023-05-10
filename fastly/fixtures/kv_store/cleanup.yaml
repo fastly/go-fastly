@@ -6,20 +6,18 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys
     method: GET
   response:
-    body: '{"data":["apple","banana","carrot","dragonfruit","eggplant"],"meta":{"limit":100}}'
+    body: '{"data":["apple","banana","batch-1","batch-2","carrot","dragonfruit","eggplant"],"meta":{"limit":1000}}'
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 Sep 2022 17:55:40 GMT
-      Server-Timing:
-      - verify;dur=1, list_buckets;dur=140, total;dur=144
+      - Wed, 10 May 2023 12:12:22 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +27,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264540.850553,VS0,VE203
+      - S1683720742.929949,VS0,VE198
     status: 200 OK
     code: 200
     duration: ""
@@ -40,8 +38,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/apple
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/apple
     method: DELETE
   response:
     body: ""
@@ -49,21 +47,19 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 15 Sep 2022 17:55:40 GMT
-      Server-Timing:
-      - total;dur=342, verify;dur=2, delete_object;dur=337
+      - Wed, 10 May 2023 12:12:22 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264540.071843,VS0,VE402
+      - S1683720742.152083,VS0,VE185
     status: 204 No Content
     code: 204
     duration: ""
@@ -72,8 +68,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/banana
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/banana
     method: DELETE
   response:
     body: ""
@@ -81,21 +77,19 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 15 Sep 2022 17:55:40 GMT
-      Server-Timing:
-      - verify;dur=1, total;dur=297, delete_object;dur=293
+      - Wed, 10 May 2023 12:12:22 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264541.528713,VS0,VE357
+      - S1683720742.367456,VS0,VE188
     status: 204 No Content
     code: 204
     duration: ""
@@ -104,8 +98,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/carrot
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/batch-1
     method: DELETE
   response:
     body: ""
@@ -113,21 +107,19 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 15 Sep 2022 17:55:41 GMT
-      Server-Timing:
-      - total;dur=314, verify;dur=2, delete_object;dur=308
+      - Wed, 10 May 2023 12:12:22 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264541.903027,VS0,VE373
+      - S1683720743.591727,VS0,VE181
     status: 204 No Content
     code: 204
     duration: ""
@@ -136,8 +128,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/batch-2
     method: DELETE
   response:
     body: ""
@@ -145,21 +137,19 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 15 Sep 2022 17:55:41 GMT
-      Server-Timing:
-      - total;dur=315, verify;dur=1, delete_object;dur=310
+      - Wed, 10 May 2023 12:12:22 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264541.338655,VS0,VE374
+      - S1683720743.803234,VS0,VE190
     status: 204 No Content
     code: 204
     duration: ""
@@ -168,8 +158,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/eggplant
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/carrot
     method: DELETE
   response:
     body: ""
@@ -177,21 +167,19 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 15 Sep 2022 17:55:42 GMT
-      Server-Timing:
-      - total;dur=308, delete_object;dur=304, verify;dur=1
+      - Wed, 10 May 2023 12:12:23 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264542.768237,VS0,VE367
+      - S1683720743.018149,VS0,VE192
     status: 204 No Content
     code: 204
     duration: ""
@@ -200,8 +188,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/dragonfruit
     method: DELETE
   response:
     body: ""
@@ -209,21 +197,79 @@ interactions:
       Accept-Ranges:
       - bytes
       Date:
-      - Thu, 15 Sep 2022 17:55:42 GMT
-      Server-Timing:
-      - total;dur=578, delete_attachment;dur=56, verify;dur=1, delete_bucket;dur=518
+      - Wed, 10 May 2023 12:12:23 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264542.166765,VS0,VE637
+      - S1683720743.233186,VS0,VE184
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/eggplant
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 10 May 2023 12:12:23 GMT
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
+      X-Timer:
+      - S1683720743.449694,VS0,VE196
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Date:
+      - Wed, 10 May 2023 12:12:24 GMT
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
+      X-Timer:
+      - S1683720744.674525,VS0,VE842
     status: 204 No Content
     code: 204
     duration: ""

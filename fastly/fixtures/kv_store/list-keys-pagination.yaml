@@ -6,20 +6,18 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys?limit=4
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys?limit=4
     method: GET
   response:
-    body: '{"data":["apple","banana","carrot","dragonfruit"],"meta":{"limit":4,"next_cursor":"CgtkcmFnb25mcnVpdA=="}}'
+    body: '{"data":["apple","banana","batch-1","batch-2"],"meta":{"limit":4,"next_cursor":"CgdiYXRjaC0y"}}'
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 Sep 2022 17:55:39 GMT
-      Server-Timing:
-      - list_buckets;dur=72, verify;dur=1, total;dur=75
+      - Wed, 10 May 2023 12:12:21 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +27,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21321-FTY, cache-sea4451-SEA
+      - cache-lhr7367-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264540.531075,VS0,VE136
+      - S1683720741.489338,VS0,VE181
     status: 200 OK
     code: 200
     duration: ""
@@ -40,20 +38,18 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys?cursor=CgtkcmFnb25mcnVpdA%3D%3D&limit=4
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys?cursor=CgdiYXRjaC0y&limit=4
     method: GET
   response:
-    body: '{"data":["eggplant"],"meta":{"limit":4}}'
+    body: '{"data":["carrot","dragonfruit","eggplant"],"meta":{"limit":4}}'
     headers:
       Accept-Ranges:
       - bytes
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 Sep 2022 17:55:39 GMT
-      Server-Timing:
-      - total;dur=83, verify;dur=1, list_buckets;dur=79
+      - Wed, 10 May 2023 12:12:21 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -63,9 +59,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21332-FTY, cache-sea4451-SEA
+      - cache-lhr7339-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264540.686870,VS0,VE144
+      - S1683720742.703523,VS0,VE190
     status: 200 OK
     code: 200
     duration: ""

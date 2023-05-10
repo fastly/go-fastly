@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"bufio"
 	"io"
 	"net/http"
 	"strconv"
@@ -408,4 +409,36 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 	}
 
 	return nil
+}
+
+// BatchModifyKVStoreKeyInput is the input to the BatchModifyKVStoreKey function.
+type BatchModifyKVStoreKeyInput struct {
+	// ID is the ID of the kv store (required).
+	ID string
+	// Body is the HTTP request body containing a collection of JSON objects
+	// separated by a new line. {"key": "example","value": "<base64-encoded>"}
+	// (required).
+	Body io.Reader
+}
+
+// BatchModifyKVStoreKey streams key/value JSON objects into an kv store.
+// NOTE: We wrap the io.Reader with *bufio.Reader to handle large streams.
+func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
+	if i.ID == "" {
+		return ErrMissingID
+	}
+
+	path := "/resources/stores/kv/" + i.ID + "/batch"
+	resp, err := c.Put(path, &RequestOptions{
+		Body: bufio.NewReader(i.Body),
+		Headers: map[string]string{
+			"Content-Type": "application/x-ndjson",
+		},
+	})
+	if err != nil {
+		return err
+	}
+
+	_, err = checkResp(resp, err)
+	return err
 }

@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/apple
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/apple
     method: PUT
   response:
     body: ""
@@ -17,9 +17,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Thu, 15 Sep 2022 17:55:36 GMT
-      Server-Timing:
-      - set_object;dur=275, verify;dur=1, total;dur=279
+      - Wed, 10 May 2023 12:12:17 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +27,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264536.174126,VS0,VE361
+      - S1683720737.442854,VS0,VE197
     status: 200 OK
     code: 200
     duration: ""
@@ -40,8 +38,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/banana
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/banana
     method: PUT
   response:
     body: ""
@@ -51,9 +49,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Thu, 15 Sep 2022 17:55:37 GMT
-      Server-Timing:
-      - total;dur=408, set_object;dur=402, verify;dur=1
+      - Wed, 10 May 2023 12:12:17 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -63,9 +59,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264537.554119,VS0,VE472
+      - S1683720738.666935,VS0,VE183
     status: 200 OK
     code: 200
     duration: ""
@@ -74,8 +70,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/carrot
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/carrot
     method: PUT
   response:
     body: ""
@@ -85,9 +81,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Thu, 15 Sep 2022 17:55:37 GMT
-      Server-Timing:
-      - verify;dur=1, set_object;dur=319, total;dur=324
+      - Wed, 10 May 2023 12:12:18 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -97,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264537.042032,VS0,VE384
+      - S1683720738.870371,VS0,VE192
     status: 200 OK
     code: 200
     duration: ""
@@ -108,8 +102,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/dragonfruit
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/dragonfruit
     method: PUT
   response:
     body: ""
@@ -119,9 +113,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Thu, 15 Sep 2022 17:55:37 GMT
-      Server-Timing:
-      - total;dur=288, set_object;dur=284, verify;dur=1
+      - Wed, 10 May 2023 12:12:18 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -131,9 +123,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264537.446895,VS0,VE352
+      - S1683720738.117502,VS0,VE195
     status: 200 OK
     code: 200
     duration: ""
@@ -142,8 +134,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.5.0 (+github.com/fastly/go-fastly; go1.19)
-    url: https://api.fastly.com/resources/stores/kv/fff9gl14gebt6m9kkp54ve/keys/eggplant
+      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys/eggplant
     method: PUT
   response:
     body: ""
@@ -153,9 +145,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Thu, 15 Sep 2022 17:55:38 GMT
-      Server-Timing:
-      - verify;dur=1, total;dur=244, set_object;dur=240
+      - Wed, 10 May 2023 12:12:18 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -165,9 +155,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-fty21373-FTY, cache-sea4451-SEA
+      - cache-lhr7365-LHR, cache-lhr7365-LHR
       X-Timer:
-      - S1663264538.822351,VS0,VE317
+      - S1683720738.341931,VS0,VE194
     status: 200 OK
     code: 200
     duration: ""
