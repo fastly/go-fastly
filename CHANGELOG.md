@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.1.0](https://github.com/fastly/go-fastly/releases/tag/v8.1.0) (2023-05-10)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.0.3...v8.1.0)
+
+**Enhancements:**
+
+* feat: kv_store batch API endpoint [#431](https://github.com/fastly/go-fastly/pull/431)
+
 ## [v8.0.3](https://github.com/fastly/go-fastly/releases/tag/v8.0.3) (2023-05-09)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.0.2...v8.0.3)
