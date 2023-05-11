@@ -6,6 +6,7 @@ import (
 	"crypto/rand"
 	"encoding/json"
 	"fmt"
+	"net/http"
 	"strconv"
 	"time"
 
@@ -195,6 +196,7 @@ type Secret struct {
 	Name      string    `json:"name"`
 	Digest    []byte    `json:"digest"` // Digest is an opaque hash of the secret.
 	CreatedAt time.Time `json:"created_at"`
+	Recreated bool      `json:"recreated,omitempty"`
 }
 
 // CreateSecretInput is used as input to the CreateSecret function.
@@ -209,6 +211,18 @@ type CreateSecretInput struct {
 	Secret []byte
 	// ClientKey is the public key used to encrypt the secret with (optional).
 	ClientKey []byte
+
+	// Method is the HTTP request method used to create the secret.
+	//
+	// Secret names must be unique within a store.
+	// The method effects how duplicate names are handled:
+	//
+	// - POST:  Default. Create a secret and error if one already exists with the same name.
+	// - PUT:   Create or recreate a secret.
+	// - PATCH: Recreate a secret and error if one does not already exist with the same name.
+	//
+	// More details: https://developer.fastly.com/reference/api/services/resources/secret-store-secret/
+	Method string
 }
 
 // CreateSecret creates a new resource.
@@ -239,7 +253,18 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 		return nil, err
 	}
 
-	resp, err := c.Post(p, &RequestOptions{
+	method := i.Method
+	if method == "" {
+		method = http.MethodPost
+	}
+	switch method {
+	case http.MethodPost, http.MethodPut, http.MethodPatch:
+		// Method is allowed.
+	default:
+		return nil, ErrInvalidMethod
+	}
+
+	resp, err := c.Request(method, p, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",
