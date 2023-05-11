@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.2.0](https://github.com/fastly/go-fastly/releases/tag/v8.2.0) (2023-05-11)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.1.0...v8.2.0)
+
+**Enhancements:**
+
+* Secret Store: Support PUT & PATCH methods when creating secret [#433](https://github.com/fastly/go-fastly/pull/433)
+
 ## [v8.1.0](https://github.com/fastly/go-fastly/releases/tag/v8.1.0) (2023-05-10)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.0.3...v8.1.0)
