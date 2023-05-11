@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.2.1](https://github.com/fastly/go-fastly/releases/tag/v8.2.1) (2023-05-11)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.2.0...v8.2.1)
+
+**Enhancements:**
+
+* feat(package): FilesHash [#435](https://github.com/fastly/go-fastly/pull/435)
+
 ## [v8.2.0](https://github.com/fastly/go-fastly/releases/tag/v8.2.0) (2023-05-11)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.1.0...v8.2.0)
