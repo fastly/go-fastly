@@ -8,10 +8,10 @@ interactions:
       Accept:
       - application/json
       Content-Type:
-      - multipart/form-data; boundary=79ff1e4065e457395040733c77ef3c67bdda74e9c08fab96fe0d7e4eef13
+      - multipart/form-data; boundary=759393c3176d38e7ff81407b8d0b4dc0dfa111165d9febbdeffd3fbd5841
       User-Agent:
-      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.18.3)
-    url: https://api.fastly.com/service/I1VEQVKrgJFQszKVNY3FG7/version/2/package
+      - FastlyGo/8.2.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/service/sSsCewrlNQiMzZHiqD8Xr0/version/2/package
     method: PUT
   response:
     body: '{"msg":"Bad request","detail":"Failed to extract metadata from package"}'
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 15 Nov 2022 22:02:56 GMT
+      - Thu, 11 May 2023 10:57:56 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "9991"
       Fastly-Ratelimit-Reset:
-      - "1668553200"
+      - "1683802800"
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-mad22037-MAD
+      - cache-control-cp-aws-us-east-2-prod-1-CONTROL-AWS-UE2, cache-lhr7357-LHR
       X-Timer:
-      - S1668549775.248550,VS0,VE921
+      - S1683802675.312595,VS0,VE1002
     status: 400 Bad Request
     code: 400
     duration: ""
