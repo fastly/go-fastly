@@ -15,11 +15,12 @@ func TestClient_Package(t *testing.T) {
 
 	testData := Package{
 		Metadata: PackageMetadata{
-			Name:        "wasm-test",
 			Description: "Default package template used by the Fastly CLI for Rust-based Compute@Edge projects.",
-			Language:    "rust",
-			Size:        2015936,
 			HashSum:     "f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616",
+			Language:    "rust",
+			Name:        "wasm-test",
+			Size:        2015936,
+			FilesHash:   "a763d3c88968ebc17691900d3c14306762296df8e47a1c2d7661cee0e0c5aa6d4c082a7c128d6e719fe333b73b46fe3ae32694716ccd2efa21f5d9f049ceec6d",
 		},
 	}
 
@@ -74,6 +75,9 @@ func TestClient_Package(t *testing.T) {
 	}
 	if wp.Metadata.HashSum != testData.Metadata.HashSum {
 		t.Errorf("bad package hashsum: %q != %q", wp.Metadata.HashSum, testData.Metadata.HashSum)
+	}
+	if wp.Metadata.FilesHash != testData.Metadata.FilesHash {
+		t.Errorf("bad package files_hash: %q != %q", wp.Metadata.FilesHash, testData.Metadata.FilesHash)
 	}
 	if wp.Metadata.Language != testData.Metadata.Language {
 		t.Errorf("bad package language: %q != %q", wp.Metadata.Language, testData.Metadata.Language)

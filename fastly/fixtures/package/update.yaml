@@ -8,14 +8,14 @@ interactions:
       Accept:
       - application/json
       Content-Type:
-      - multipart/form-data; boundary=d4d79bf336c8b328cb0ce7ec87854d192b926571500b26688ab9524cebde
+      - multipart/form-data; boundary=8477e59d28ad8ddd91a7f8f2fb9341b91e99e684d3487c7de370975ca96b
       User-Agent:
-      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.18.3)
-    url: https://api.fastly.com/service/I1VEQVKrgJFQszKVNY3FG7/version/2/package
+      - FastlyGo/8.2.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/service/sSsCewrlNQiMzZHiqD8Xr0/version/2/package
     method: PUT
   response:
-    body: '{"service_id":"I1VEQVKrgJFQszKVNY3FG7","version":2,"created_at":"2022-11-15T22:02:53Z","updated_at":"2022-11-15T22:02:54Z","id":"OScOS6exfJIxlixRHMccN5","deleted_at":null,"metadata":{"name":"wasm-test","description":"Default
-      package template used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["fastly@fastly.com"],"language":"rust","size":2015936,"hashsum":"f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616"}}'
+    body: '{"service_id":"sSsCewrlNQiMzZHiqD8Xr0","version":2,"deleted_at":null,"created_at":"2023-05-11T10:57:54Z","metadata":{"name":"wasm-test","description":"Default
+      package template used by the Fastly CLI for Rust-based Compute@Edge projects.","authors":["fastly@fastly.com"],"language":"rust","size":2015936,"hashsum":"f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616","files_hash":"a763d3c88968ebc17691900d3c14306762296df8e47a1c2d7661cee0e0c5aa6d4c082a7c128d6e719fe333b73b46fe3ae32694716ccd2efa21f5d9f049ceec6d"},"id":"yiXgwy8Xl4n1jVMAbpM813","updated_at":"2023-05-11T10:57:54Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 15 Nov 2022 22:02:54 GMT
+      - Thu, 11 May 2023 10:57:54 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "9992"
       Fastly-Ratelimit-Reset:
-      - "1668553200"
+      - "1683802800"
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-3-CONTROL-AWS, cache-mad22037-MAD
+      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lhr7357-LHR
       X-Timer:
-      - S1668549772.424270,VS0,VE1708
+      - S1683802672.285738,VS0,VE2606
     status: 200 OK
     code: 200
     duration: ""

@@ -13,22 +13,23 @@ type Package struct {
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
 	ID             string
-	Metadata       PackageMetadata
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
-	UpdatedAt      *time.Time `mapstructure:"updated_at"`
+	Metadata       PackageMetadata `mapstructure:"metadata"`
+	ServiceID      string          `mapstructure:"service_id"`
+	ServiceVersion int             `mapstructure:"version"`
+	UpdatedAt      *time.Time      `mapstructure:"updated_at"`
 }
 
 // PackageMetadata is a container for metadata returned about a package.
 // It is a separate struct to allow correct serialisation by mapstructure -
 // the raw data is returned as a json sub-block.
 type PackageMetadata struct {
-	Authors     []string
-	Description string
-	HashSum     string
-	Language    string
-	Name        string
-	Size        int64
+	Authors     []string `mapstructure:"authors"`
+	Description string   `mapstructure:"description"`
+	FilesHash   string   `mapstructure:"files_hash"`
+	HashSum     string   `mapstructure:"hashsum"`
+	Language    string   `mapstructure:"language"`
+	Name        string   `mapstructure:"name"`
+	Size        int64    `mapstructure:"size"`
 }
 
 // GetPackageInput is used as input to the GetPackage function.
