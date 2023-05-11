@@ -350,11 +350,15 @@ func (c *Client) GetKVStoreKey(i *GetKVStoreKeyInput) (string, error) {
 
 // InsertKVStoreKeyInput is the input to the InsertKVStoreKey function.
 type InsertKVStoreKeyInput struct {
+	// Body is the value to insert and will be streamed to the endpoint.
+	// This is for users who are passing very large files.
+	// Otherwise use the 'Value' field instead.
+	Body io.Reader
 	// ID is the ID of the kv store (required).
 	ID string
 	// Key is the key to add (required).
 	Key string
-	// Value is the value to insert (required).
+	// Value is the value to insert.
 	Value string
 }
 
@@ -367,12 +371,19 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 		return ErrMissingKey
 	}
 
+	ro := RequestOptions{
+		Parallel: true, // This will allow the Fastly CLI to make bulk inserts.
+	}
+
+	if i.Body != nil {
+		ro.Body = bufio.NewReader(i.Body)
+	} else {
+		ro.Body = strings.NewReader(i.Value)
+		ro.BodyLength = int64(len(i.Value))
+	}
+
 	path := "/resources/stores/kv/" + i.ID + "/keys/" + i.Key
-	resp, err := c.Put(path, &RequestOptions{
-		Body:       io.NopCloser(strings.NewReader(i.Value)),
-		BodyLength: int64(len(i.Value)),
-		Parallel:   true, // This will allow the Fastly CLI to make bulk inserts.
-	})
+	resp, err := c.Put(path, &ro)
 	if err != nil {
 		return err
 	}
