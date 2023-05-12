@@ -391,7 +391,7 @@ type InsertKVStoreKeyInput struct {
 	ID string
 	// Key is the key to add (required).
 	Key string
-	// Value is the value to insert.
+	// Value is the value to insert (ignored if Body is set).
 	Value string
 }
 
