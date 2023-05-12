@@ -354,6 +354,8 @@ type InsertKVStoreKeyInput struct {
 	// This is for users who are passing very large files.
 	// Otherwise use the 'Value' field instead.
 	Body io.Reader
+	// BodyLength should be set with Body to indicate value for Content-Length.
+	BodyLength int64
 	// ID is the ID of the kv store (required).
 	ID string
 	// Key is the key to add (required).
@@ -376,7 +378,11 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 	}
 
 	if i.Body != nil {
+		if i.BodyLength == 0 {
+			return ErrMissingBodyLength
+		}
 		ro.Body = bufio.NewReader(i.Body)
+		ro.BodyLength = i.BodyLength
 	} else {
 		ro.Body = strings.NewReader(i.Value)
 		ro.BodyLength = int64(len(i.Value))
