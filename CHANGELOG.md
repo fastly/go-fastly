@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.3.0](https://github.com/fastly/go-fastly/releases/tag/v8.3.0) (2023-05-12)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.2.1...v8.3.0)
+
+**Enhancements:**
+
+* fix(kv_store): allow buffering io for key insert [#437](https://github.com/fastly/go-fastly/pull/437)
+
 ## [v8.2.1](https://github.com/fastly/go-fastly/releases/tag/v8.2.1) (2023-05-11)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.2.0...v8.2.1)
