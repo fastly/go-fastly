@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"io"
 	"net/http"
+	"os"
 	"strconv"
 	"strings"
 	"time"
@@ -348,14 +349,44 @@ func (c *Client) GetKVStoreKey(i *GetKVStoreKeyInput) (string, error) {
 	return string(output), nil
 }
 
+// LengthReader represents a type that can be read and exposes its length.
+type LengthReader interface {
+	io.Reader
+	Len() int
+}
+
+// FileLengthReader allows an os.File type to be passed as a LengthReader to the
+// InsertKVStoreKeyInput.Body field.
+func FileLengthReader(f *os.File) (LengthReader, error) {
+	s, err := f.Stat()
+	if err != nil {
+		return nil, err
+	}
+	return &fileLenReader{
+		f:   f,
+		len: int(s.Size()),
+	}, nil
+}
+
+type fileLenReader struct {
+	f   *os.File
+	len int
+}
+
+func (f *fileLenReader) Read(p []byte) (int, error) {
+	return f.f.Read(p)
+}
+
+func (f *fileLenReader) Len() int {
+	return f.len
+}
+
 // InsertKVStoreKeyInput is the input to the InsertKVStoreKey function.
 type InsertKVStoreKeyInput struct {
 	// Body is the value to insert and will be streamed to the endpoint.
 	// This is for users who are passing very large files.
 	// Otherwise use the 'Value' field instead.
-	Body io.Reader
-	// BodyLength should be set with Body to indicate value for Content-Length.
-	BodyLength int64
+	Body LengthReader
 	// ID is the ID of the kv store (required).
 	ID string
 	// Key is the key to add (required).
@@ -378,11 +409,8 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 	}
 
 	if i.Body != nil {
-		if i.BodyLength == 0 {
-			return ErrMissingBodyLength
-		}
 		ro.Body = bufio.NewReader(i.Body)
-		ro.BodyLength = i.BodyLength
+		ro.BodyLength = int64(i.Body.Len())
 	} else {
 		ro.Body = strings.NewReader(i.Value)
 		ro.BodyLength = int64(len(i.Value))
