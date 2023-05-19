@@ -67,7 +67,7 @@ func main() {
 	domain, err := client.CreateDomain(&fastly.CreateDomainInput{
 		ServiceID:      serviceID,
 		ServiceVersion: version.Number,
-		Name:           String("example.com"),
+		Name:           fastly.String("example.com"),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -80,9 +80,9 @@ func main() {
 	backend, err := client.CreateBackend(&fastly.CreateBackendInput{
 		ServiceID:      serviceID,
 		ServiceVersion: version.Number,
-		Name:           String("example-backend"),
-		Address:        String("127.0.0.1"),
-		Port:           Int(80),
+		Name:           fastly.String("example-backend"),
+		Address:        fastly.String("127.0.0.1"),
+		Port:           fastly.Int(80),
 	})
 	if err != nil {
 		log.Fatal(err)
