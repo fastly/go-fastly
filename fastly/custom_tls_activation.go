@@ -160,6 +160,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	var a TLSActivation
 	if err := jsonapi.UnmarshalPayload(r.Body, &a); err != nil {
