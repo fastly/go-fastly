@@ -1,0 +1,39 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/8.3.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/tls/mutual_authentications/ighDXgQbj0EH8utWHwfzn5
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - private
+      Date:
+      - Tue, 30 May 2023 16:30:11 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-cp-aws-us-east-2-prod-5-CONTROL-AWS-UE2, cache-lhr7360-LHR
+      X-Timer:
+      - S1685464211.229053,VS0,VE265
+    status: 204 No Content
+    code: 204
+    duration: ""
