@@ -140,6 +140,7 @@ func (c *Client) CreateTLSMutualAuthentication(i *CreateTLSMutualAuthenticationI
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	var o TLSMutualAuthentication
 	if err := jsonapi.UnmarshalPayload(r.Body, &o); err != nil {
