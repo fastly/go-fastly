@@ -160,6 +160,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 	if err != nil {
 		return nil, err
 	}
+	defer r.Body.Close()
 
 	var a TLSActivation
 	if err := jsonapi.UnmarshalPayload(r.Body, &a); err != nil {
@@ -175,6 +176,8 @@ type UpdateTLSActivationInput struct {
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
 	// ID is an aphanumeric string identifying a TLS activation.
 	ID string `jsonapi:"primary,tls_activation"`
+	// MutualAuthentication is an alphanumeric string identifying a mutual authentication.
+	MutualAuthentication *TLSMutualAuthentication `jsonapi:"relation,mutual_authentication"` // Only ID of TLSMutualAuthentication needs to be set.
 }
 
 // UpdateTLSActivation updates the specified resource.

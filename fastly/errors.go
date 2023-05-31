@@ -85,6 +85,10 @@ var ErrMissingBackend = NewFieldError("Backend")
 // requires a "CertBlob" key, but one was not set.
 var ErrMissingCertBlob = NewFieldError("CertBlob")
 
+// ErrMissingCertBundle is an error that is returned when an input struct
+// requires a "CertBundle" key, but one was not set.
+var ErrMissingCertBundle = NewFieldError("CertBundle")
+
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
 var ErrMissingContent = NewFieldError("Content")

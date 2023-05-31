@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: |
+      {"data":{"type":"mutual_authentication","id":"4tFjGkmDCvPr7f4I9RlDq5","attributes":{"cert_bundle":"-----BEGIN CERTIFICATE-----\nMIIDWTCCAkGgAwIBAgIITWWCIQf8/VIwDQYJKoZIhvcNAQELBQAwNDEUMBIGA1UE\nAxMLZXhhbXBsZS5jb20xHDAaBgNVBAUTEzU1NzcwMDY3OTE5NDc3Nzk0MTAwHhcN\nMjMwNTMxMTE0ODI2WhcNMjMwODI5MTE0ODI2WjA0MRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTEcMBoGA1UEBRMTNTU3NzAwNjc5MTk0Nzc3OTQxMDCCASIwDQYJKoZIhvcN\nAQEBBQADggEPADCCAQoCggEBALcgLS9FIWYSRw7MLpEV/4nvmlDA95jlXZnejar9\nVbKXxWzEljZZVtp+CniP1ef6OBBwIph9bX9ig+96cMWR1GMlu7kddIisuSFhndPv\nQxCNW6r5Vlh0q9inuizXBdh48Ql4/xWWWHPfGBYFUzHhDaw1qlyH28E1RRp6LsfE\nVh0r5K+NuuL3ZAsXyRM1uzt62mczraVbKLHGjag/5vsgC48Yak9hLC4jUu6cPE9L\nsVX5xAbu21U7TuZslI4nerSsHAMu9463MJh4eTyKhQQiJABql+TiO7+jkDWu/InC\nOvmF3dasTq6HDEKj7Io2m6uTlWCZ0xSdyceWl6h+7OHBbTcCAwEAAaNvMG0wDgYD\nVR0PAQH/BAQDAgIEMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMB\nAf8wHQYDVR0OBBYEFL3co7IUnrTsHPO6Xhq5e9IGUkfCMBYGA1UdEQQPMA2CC2V4\nYW1wbGUuY29tMA0GCSqGSIb3DQEBCwUAA4IBAQCyKG37ZQbVFC2ATfcgYcJm9sfF\nraLcm0Ft206ZvWZ8++48G4pE6vSWcnMioMv6vffD/wRSo606Yur1GZ2TsrBok9VE\n7yNXQa+zT/pdvK7XheuCQOfX1PHS6Xe1VK657GMHTGAZZZsssTbb1PdbSkOoLR/w\nqdFf1qbwMUb5Nak4xlOlcInbUVljpSKxt0FcZJjWglINaMyVMG/B1IFFtQX3S8+c\nca7fXIvl9Vw1RO/7/HS9veQ9x1IZmuYW2VelwAkhn33qGdKcRBOAm8UOAdKQH4gT\nMrD7Hc0fqiqvwFDmBQIz5beWeUfxZWtBg+ivFmj739EfdmvkjuqK36kj3LtY\n-----END CERTIFICATE-----","enforced":true,"name":"My mutual authentication updated"}}}
+    form: {}
+    headers:
+      Accept:
+      - application/vnd.api+json
+      Content-Type:
+      - application/vnd.api+json
+      User-Agent:
+      - FastlyGo/8.3.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/tls/mutual_authentications/4tFjGkmDCvPr7f4I9RlDq5
+    method: PATCH
+  response:
+    body: '{"data":{"id":"4tFjGkmDCvPr7f4I9RlDq5","type":"mutual_authentication","attributes":{"created_at":"2023-05-31T11:48:28.000Z","enforced":true,"name":"My
+      mutual authentication updated","updated_at":"2023-05-31T11:48:29.000Z"},"relationships":{"tls_activations":{"data":[]}}}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - private
+      Content-Length:
+      - "272"
+      Content-Type:
+      - application/vnd.api+json
+      Date:
+      - Wed, 31 May 2023 11:48:29 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-control-cp-aws-us-east-2-prod-7-CONTROL-AWS-UE2, cache-lhr7383-LHR
+      X-Timer:
+      - S1685533709.447637,VS0,VE333
+    status: 200 OK
+    code: 200
+    duration: ""
