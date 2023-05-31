@@ -162,10 +162,6 @@ type UpdateTLSMutualAuthenticationInput struct {
 }
 
 // UpdateTLSMutualAuthentication updates the specified resource.
-//
-// By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
-// Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
-// Any SAN entries that are missing in the replacement certificate will become disabled.
 func (c *Client) UpdateTLSMutualAuthentication(i *UpdateTLSMutualAuthenticationInput) (*TLSMutualAuthentication, error) {
 	if i.CertBundle == "" {
 		return nil, ErrMissingCertBundle
