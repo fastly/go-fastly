@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/google/jsonapi"
@@ -21,8 +22,8 @@ type TLSMutualAuthentication struct {
 
 // ListTLSMutualAuthenticationsInput is used as input to the Client.ListTLSMutualAuthentication function.
 type ListTLSMutualAuthenticationsInput struct {
-	// Include is a comma-separated list of related objects to include (optional).
-	Include string
+	// Include is a list of related objects to include (optional).
+	Include []string
 	// PageNumber is the required page index for pagination.
 	PageNumber int
 	// PageSize is the number of records per page.
@@ -32,25 +33,15 @@ type ListTLSMutualAuthenticationsInput struct {
 // formatFilters converts user input into query parameters for filtering.
 func (i *ListTLSMutualAuthenticationsInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
-		"include":      i.Include,
-		"page[size]":   i.PageSize,
-		"page[number]": i.PageNumber,
+	if len(i.Include) > 0 {
+		result["include"] = strings.Join(i.Include, ",")
 	}
-
-	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
-			if value != "" {
-				result[key] = value.(string)
-			}
-		case "int":
-			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
-			}
-		}
+	if i.PageSize > 0 {
+		result["page[size]"] = strconv.Itoa(i.PageSize)
 	}
-
+	if i.PageNumber > 0 {
+		result["page[number]"] = strconv.Itoa(i.PageNumber)
+	}
 	return result
 }
 
