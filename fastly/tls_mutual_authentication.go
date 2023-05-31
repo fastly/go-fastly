@@ -97,6 +97,9 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 			Params: map[string]string{
 				"include": i.Include,
 			},
+			Headers: map[string]string{
+				"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+			},
 		}
 	}
 
