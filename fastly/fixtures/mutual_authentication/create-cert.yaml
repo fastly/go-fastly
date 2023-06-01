@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"tls_certificate","attributes":{"cert_blob":"-----BEGIN CERTIFICATE-----\nMIIDWTCCAkGgAwIBAgIITWWCIQf8/VIwDQYJKoZIhvcNAQELBQAwNDEUMBIGA1UE\nAxMLZXhhbXBsZS5jb20xHDAaBgNVBAUTEzU1NzcwMDY3OTE5NDc3Nzk0MTAwHhcN\nMjMwNTMxMTE0ODI2WhcNMjMwODI5MTE0ODI2WjA0MRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTEcMBoGA1UEBRMTNTU3NzAwNjc5MTk0Nzc3OTQxMDCCASIwDQYJKoZIhvcN\nAQEBBQADggEPADCCAQoCggEBALcgLS9FIWYSRw7MLpEV/4nvmlDA95jlXZnejar9\nVbKXxWzEljZZVtp+CniP1ef6OBBwIph9bX9ig+96cMWR1GMlu7kddIisuSFhndPv\nQxCNW6r5Vlh0q9inuizXBdh48Ql4/xWWWHPfGBYFUzHhDaw1qlyH28E1RRp6LsfE\nVh0r5K+NuuL3ZAsXyRM1uzt62mczraVbKLHGjag/5vsgC48Yak9hLC4jUu6cPE9L\nsVX5xAbu21U7TuZslI4nerSsHAMu9463MJh4eTyKhQQiJABql+TiO7+jkDWu/InC\nOvmF3dasTq6HDEKj7Io2m6uTlWCZ0xSdyceWl6h+7OHBbTcCAwEAAaNvMG0wDgYD\nVR0PAQH/BAQDAgIEMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMB\nAf8wHQYDVR0OBBYEFL3co7IUnrTsHPO6Xhq5e9IGUkfCMBYGA1UdEQQPMA2CC2V4\nYW1wbGUuY29tMA0GCSqGSIb3DQEBCwUAA4IBAQCyKG37ZQbVFC2ATfcgYcJm9sfF\nraLcm0Ft206ZvWZ8++48G4pE6vSWcnMioMv6vffD/wRSo606Yur1GZ2TsrBok9VE\n7yNXQa+zT/pdvK7XheuCQOfX1PHS6Xe1VK657GMHTGAZZZsssTbb1PdbSkOoLR/w\nqdFf1qbwMUb5Nak4xlOlcInbUVljpSKxt0FcZJjWglINaMyVMG/B1IFFtQX3S8+c\nca7fXIvl9Vw1RO/7/HS9veQ9x1IZmuYW2VelwAkhn33qGdKcRBOAm8UOAdKQH4gT\nMrD7Hc0fqiqvwFDmBQIz5beWeUfxZWtBg+ivFmj739EfdmvkjuqK36kj3LtY\n-----END CERTIFICATE-----","name":"My custom certificate"}}}
+      {"data":{"type":"tls_certificate","attributes":{"cert_blob":"-----BEGIN CERTIFICATE-----\nMIIDWTCCAkGgAwIBAgIITWWCIQf8/VIwDQYJKoZIhvcNAQELBQAwNDEUMBIGA1UE\nAxMLZXhhbXBsZS5jb20xHDAaBgNVBAUTEzU1NzcwMDY3OTE5NDc3Nzk0MTAwHhcN\nMjMwNjAxMTM0MDExWhcNMjMwODMwMTM0MDExWjA0MRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTEcMBoGA1UEBRMTNTU3NzAwNjc5MTk0Nzc3OTQxMDCCASIwDQYJKoZIhvcN\nAQEBBQADggEPADCCAQoCggEBAKfm230/fCHtznA1JJMmWArETYorVI+uV9GY12be\nmz5ZcFSJKwklqZyj4J47TFYlSygDV3/1N8yBUeljf/hrByBYB/rcabgR98UILHFo\nHC2An6bI1dX+HmmFXI5ZAqZu+/TtW3/c7031/cJo9nJnP7ZJadtZdKd/w747V1KI\nBHQZKtkX8C9E5IqE/SOJPvC5O4SrbDjMjloaH3KNNF9XNvKe+oqPfr89NTmKH8LX\ndbZ/60qp62R/2iMKbhtSJbKKnLyZa8pynEaq+5AVOMRCw9U1zGdOeKoXVMaqzEJ5\nNd33gXKGVcb0Z+JkXuC/Cpmhqqbr0WMBTZM/neW3bFeywtcCAwEAAaNvMG0wDgYD\nVR0PAQH/BAQDAgIEMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMB\nAf8wHQYDVR0OBBYEFKVT08Cb2bIDkPd5qom8Zw2hDuD8MBYGA1UdEQQPMA2CC2V4\nYW1wbGUuY29tMA0GCSqGSIb3DQEBCwUAA4IBAQBzerYaKOpvyd68qxb3ysGY+XkJ\npt8Bl3ZXiQDVJHGADXzj2NU7YKhaXoGZpO5pwthmXr55ZEsm3e72ooEn3aBuPkFX\nep5DNOOJXXJrJIiVgU1zXp5bdwJewPdCe8yoPt3/a3oGr3UlqTfwtvuAOCeydT4R\nZRUKQr/8uWz0tNbL26fWhU2ibkp453/dx8uCa5Ls/2SjbPzq+yxGfIJUq0hbTeir\nudkd0XV24Cq2jwAjCoqGLOwoWzKwobNZoLzUTOk4ZHTm+CZUHbztD3gu0wSkIkxD\npquKnpJO343YrMDARMbLnkVK64r9pi1HzEFGujEt3aAnu3o+17V93BHk7jAh\n-----END CERTIFICATE-----","name":"My custom certificate"}}}
     form: {}
     headers:
       Accept:
@@ -11,12 +11,12 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/8.3.0 (+github.com/fastly/go-fastly; go1.18.5)
+      - FastlyGo/8.4.0 (+github.com/fastly/go-fastly; go1.18.5)
     url: https://api.fastly.com/tls/certificates
     method: POST
   response:
-    body: '{"data":{"id":"vOJL3187my51i5ITgcr7H2","type":"tls_certificate","attributes":{"created_at":"2023-05-31T11:48:27.000Z","issued_to":"example.com","issuer":"example.com","name":"My
-      custom certificate","not_after":"2023-08-29T11:48:26.000Z","not_before":"2023-05-31T11:48:26.000Z","replace":false,"serial_number":"5577006791947779410","signature_algorithm":"SHA256-RSA","updated_at":"2023-05-31T11:48:27.000Z"},"relationships":{"tls_domains":{"data":[{"id":"example.com","type":"tls_domain"}]}}}}'
+    body: '{"data":{"id":"KAEO3Gj5ACmMQXTPSgF7s4","type":"tls_certificate","attributes":{"created_at":"2023-06-01T13:40:12.000Z","issued_to":"example.com","issuer":"example.com","name":"My
+      custom certificate","not_after":"2023-08-30T13:40:11.000Z","not_before":"2023-06-01T13:40:11.000Z","replace":false,"serial_number":"5577006791947779410","signature_algorithm":"SHA256-RSA","updated_at":"2023-06-01T13:40:12.000Z"},"relationships":{"tls_domains":{"data":[{"id":"example.com","type":"tls_domain"}]}}}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,7 +27,7 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Wed, 31 May 2023 11:48:28 GMT
+      - Thu, 01 Jun 2023 13:40:13 GMT
       Pragma:
       - no-cache
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lhr7383-LHR
+      - cache-control-cp-aws-us-east-2-prod-5-CONTROL-AWS-UE2, cache-lhr7369-LHR
       X-Timer:
-      - S1685533707.484825,VS0,VE1050
+      - S1685626812.418135,VS0,VE695
     status: 201 Created
     code: 201
     duration: ""

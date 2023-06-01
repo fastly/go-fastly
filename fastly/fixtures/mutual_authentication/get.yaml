@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.3.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/tls/mutual_authentications/4tFjGkmDCvPr7f4I9RlDq5
+      - FastlyGo/8.4.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/tls/mutual_authentications/d6Sql38JQh71sAgelxSo37
     method: GET
   response:
-    body: '{"data":{"id":"4tFjGkmDCvPr7f4I9RlDq5","type":"mutual_authentication","attributes":{"created_at":"2023-05-31T11:48:28.000Z","enforced":true,"name":"My
-      mutual authentication","updated_at":"2023-05-31T11:48:28.000Z"},"relationships":{"tls_activations":{"data":[]}}}}'
+    body: '{"data":{"id":"d6Sql38JQh71sAgelxSo37","type":"mutual_authentication","attributes":{"created_at":"2023-06-01T13:40:13.000Z","enforced":false,"name":"My
+      mutual authentication","updated_at":"2023-06-01T13:40:13.000Z"},"relationships":{"tls_activations":{"data":[]}}}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - private
       Content-Length:
-      - "264"
+      - "265"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Wed, 31 May 2023 11:48:29 GMT
+      - Thu, 01 Jun 2023 13:40:13 GMT
       Pragma:
       - no-cache
       Strict-Transport-Security:
@@ -38,9 +38,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-7-CONTROL-AWS-UE2, cache-lhr7383-LHR
+      - cache-control-cp-aws-us-east-2-prod-1-CONTROL-AWS-UE2, cache-lhr7369-LHR
       X-Timer:
-      - S1685533709.110117,VS0,VE314
+      - S1685626814.512742,VS0,VE196
     status: 200 OK
     code: 200
     duration: ""
