@@ -58,6 +58,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 	record(t, fixtureBase+"create-tma", func(c *Client) {
 		tma, err = c.CreateTLSMutualAuthentication(&CreateTLSMutualAuthenticationInput{
 			CertBundle: cert,
+			Enforced:   false,
 			Name:       "My mutual authentication",
 		})
 	})
@@ -71,6 +72,10 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 			ID: tma.ID,
 		})
 	}()
+
+	if tma.Enforced {
+		t.Errorf("bad Enforced: %t", tma.Enforced)
+	}
 
 	// List
 	var tmas []*TLSMutualAuthentication

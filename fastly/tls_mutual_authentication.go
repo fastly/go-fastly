@@ -122,6 +122,8 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 type CreateTLSMutualAuthenticationInput struct {
 	// CertBundle is one or more certificates. Enter each individual certificate blob on a new line. Must be PEM-formatted (required).
 	CertBundle string `jsonapi:"attr,cert_bundle"`
+	// Enforced determines whether Mutual TLS will fail closed (enforced) or fail open.
+	Enforced bool `jsonapi:"attr,enforced"`
 	// ID should not be set (it's internally used to help marshal the JSONAPI request data).
 	ID string `jsonapi:"primary,mutual_authentication"`
 	// Name is a custom name for your mutual authentication (optional).

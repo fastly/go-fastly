@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.3.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/tls/certificates/vOJL3187my51i5ITgcr7H2
+      - FastlyGo/8.4.0 (+github.com/fastly/go-fastly; go1.18.5)
+    url: https://api.fastly.com/tls/certificates/KAEO3Gj5ACmMQXTPSgF7s4
     method: DELETE
   response:
     body: ""
@@ -17,7 +17,7 @@ interactions:
       Cache-Control:
       - private
       Date:
-      - Wed, 31 May 2023 11:48:30 GMT
+      - Thu, 01 Jun 2023 13:40:15 GMT
       Pragma:
       - no-cache
       Strict-Transport-Security:
@@ -31,9 +31,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lhr7383-LHR
+      - cache-control-cp-aws-us-east-2-prod-5-CONTROL-AWS-UE2, cache-lhr7369-LHR
       X-Timer:
-      - S1685533710.169246,VS0,VE309
+      - S1685626815.919738,VS0,VE321
     status: 204 No Content
     code: 204
     duration: ""
