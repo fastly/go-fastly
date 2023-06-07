@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.5.0](https://github.com/fastly/go-fastly/releases/tag/v8.5.0) (2023-06-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.4.1...v8.5.0)
+
+**Enhancements:**
+
+* feat(config_store): implement batch endpoint [#444](https://github.com/fastly/go-fastly/pull/444)
+
 ## [v8.4.1](https://github.com/fastly/go-fastly/releases/tag/v8.4.1) (2023-06-01)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.4.0...v8.4.1)
