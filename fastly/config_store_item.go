@@ -211,3 +211,42 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 
 	return csi, nil
 }
+
+// BatchModifyConfigStoreItemsInput is the input parameter to the
+// BatchModifyConfigStoreItems function.
+type BatchModifyConfigStoreItemsInput struct {
+	// StoreID is the ID of the Config Store to modify items for (required).
+	StoreID string `json:"-"`
+	// Items is a list of Config Store items.
+	Items []*BatchConfigStoreItem `json:"items"`
+}
+
+// BatchDictionaryItem represents a dictionary item.
+type BatchConfigStoreItem struct {
+	// ItemKey is an item key (maximum 256 characters).
+	ItemKey string `json:"item_key"`
+	// ItemValue is an item value (maximum 8000 characters).
+	ItemValue string `json:"item_value"`
+	// Operation is a batching operation variant.
+	Operation BatchOperation `json:"op"`
+}
+
+// BatchModifyConfigStoreItems bulk updates dictionary items.
+func (c *Client) BatchModifyConfigStoreItems(i *BatchModifyConfigStoreItemsInput) error {
+	if i.StoreID == "" {
+		return ErrMissingStoreID
+	}
+	if len(i.Items) > BatchModifyMaximumOperations {
+		return ErrMaxExceededItems
+	}
+
+	path := fmt.Sprintf("/resources/stores/config/%s/items", i.StoreID)
+	resp, err := c.PatchJSON(path, i, nil)
+	if err != nil {
+		return err
+	}
+	defer resp.Body.Close()
+
+	var batchModifyResult map[string]string
+	return decodeBodyMap(resp.Body, &batchModifyResult)
+}
