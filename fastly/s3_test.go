@@ -16,7 +16,7 @@ func TestClient_S3s(t *testing.T) {
 	// Create
 	//
 	// NOTE: You can't send the API and empty ResponseCondition.
-	var s3CreateResp1, s3CreateResp3, s3CreateResp4 *S3
+	var s3CreateResp1, s3CreateResp2, s3CreateResp3, s3CreateResp4 *S3
 	record(t, "s3s/create", func(c *Client) {
 		s3CreateResp1, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
@@ -39,6 +39,7 @@ func TestClient_S3s(t *testing.T) {
 			ServerSideEncryptionKMSKeyID: String("1234"),
 			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 			ACL:                          S3AccessControlListPtr(S3AccessControlListPrivate),
+			FileMaxBytes:                 Int(MiB),
 		})
 	})
 	if err != nil {
@@ -46,7 +47,7 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	record(t, "s3s/create2", func(c *Client) {
-		_, err = c.CreateS3(&CreateS3Input{
+		s3CreateResp2, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
 			ServiceVersion:               tv.Number,
 			Name:                         String("test-s3-2"),
@@ -67,6 +68,7 @@ func TestClient_S3s(t *testing.T) {
 			ServerSideEncryptionKMSKeyID: String("1234"),
 			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
 			ACL:                          S3AccessControlListPtr(S3AccessControlListAuthenticatedRead),
+			FileMaxBytes:                 Int(10 * MiB),
 		})
 	})
 	if err != nil {
@@ -120,6 +122,7 @@ func TestClient_S3s(t *testing.T) {
 			PublicKey:                    String(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: String("1234"),
 			ServerSideEncryption:         S3ServerSideEncryptionPtr(S3ServerSideEncryptionKMS),
+			FileMaxBytes:                 Int(10 * MiB),
 		})
 	})
 	if err != nil {
@@ -304,6 +307,12 @@ func TestClient_S3s(t *testing.T) {
 	if s3CreateResp1.ACL != S3AccessControlListPrivate {
 		t.Errorf("bad acl: %s", s3CreateResp1.ACL)
 	}
+	if s3CreateResp1.FileMaxBytes != MiB {
+		t.Errorf("bad file_max_bytes: %q", s3CreateResp1.FileMaxBytes)
+	}
+	if s3CreateResp2.FileMaxBytes != 10*MiB {
+		t.Errorf("bad file_max_bytes: %q", s3CreateResp2.FileMaxBytes)
+	}
 	if s3CreateResp3.CompressionCodec != "snappy" {
 		t.Errorf("bad compression_codec: %q", s3CreateResp1.CompressionCodec)
 	}
@@ -315,6 +324,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3CreateResp3.ACL != S3AccessControlListBucketOwnerFullControl {
 		t.Errorf("bad acl: %s", s3CreateResp3.ACL)
+	}
+	if s3CreateResp3.FileMaxBytes != 0 {
+		t.Errorf("bad file_max_bytes: %q", s3CreateResp3.FileMaxBytes)
 	}
 	if s3CreateResp4.AccessKey != "" {
 		t.Errorf("bad access_key: %q", s3CreateResp4.AccessKey)
@@ -330,6 +342,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3CreateResp4.ACL != "" {
 		t.Errorf("bad acl: %s", s3CreateResp4.ACL)
+	}
+	if s3CreateResp4.FileMaxBytes != 10*MiB {
+		t.Errorf("bad file_max_bytes: %q", s3CreateResp4.FileMaxBytes)
 	}
 
 	// List
@@ -458,6 +473,7 @@ func TestClient_S3s(t *testing.T) {
 			NewName:          String("new-test-s3"),
 			PublicKey:        String(pgpPublicKeyUpdate()),
 			CompressionCodec: String("zstd"),
+			FileMaxBytes:     Int(5 * MiB),
 		})
 	})
 	if err != nil {
@@ -549,6 +565,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if s3UpdateResp1.GzipLevel != 0 {
 		t.Errorf("bad gzip_level: %q", s3UpdateResp1.GzipLevel)
+	}
+	if s3UpdateResp1.FileMaxBytes != 5*MiB {
+		t.Errorf("bad file_max_bytes: %q", s3UpdateResp1.FileMaxBytes)
 	}
 	if s3UpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", s3UpdateResp2.CompressionCodec)

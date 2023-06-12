@@ -79,6 +79,7 @@ type S3 struct {
 	CreatedAt                    *time.Time             `mapstructure:"created_at"`
 	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
 	Domain                       string                 `mapstructure:"domain"`
+	FileMaxBytes                 int                    `mapstructure:"file_max_bytes"`
 	Format                       string                 `mapstructure:"format"`
 	FormatVersion                int                    `mapstructure:"format_version"`
 	GzipLevel                    int                    `mapstructure:"gzip_level"`
@@ -162,6 +163,8 @@ type CreateS3Input struct {
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Domain is the domain of the Amazon S3 endpoint.
 	Domain *string `url:"domain,omitempty"`
+	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
+	FileMaxBytes *int `url:"file_max_bytes,omitempty"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -277,6 +280,8 @@ type UpdateS3Input struct {
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Domain is the domain of the Amazon S3 endpoint.
 	Domain *string `url:"domain,omitempty"`
+	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
+	FileMaxBytes *int `url:"file_max_bytes,omitempty"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
