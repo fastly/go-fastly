@@ -320,6 +320,10 @@ type HTTPError struct {
 	Errors []*ErrorObject `mapstructure:"errors"`
 	// StatusCode is the HTTP status code (2xx-5xx).
 	StatusCode int
+	// RateLimitRemaining is the number of API requests remaining in the current rate limit window.
+	RateLimitRemaining *int
+	// RateLimitReset is the time at which the current rate limit window resets, as a Unix timestamp.
+	RateLimitReset *int
 }
 
 // ErrorObject is a single error.
@@ -343,6 +347,13 @@ type legacyError struct {
 func NewHTTPError(resp *http.Response) *HTTPError {
 	var e HTTPError
 	e.StatusCode = resp.StatusCode
+
+	if v, err := strconv.Atoi(resp.Header.Get("Fastly-RateLimit-Remaining")); err == nil {
+		e.RateLimitRemaining = &v
+	}
+	if v, err := strconv.Atoi(resp.Header.Get("Fastly-RateLimit-Reset")); err == nil {
+		e.RateLimitReset = &v
+	}
 
 	if resp.Body == nil {
 		return &e
@@ -436,6 +447,13 @@ func (e *HTTPError) Error() string {
 		if e.Meta != nil {
 			fmt.Fprintf(&b, "\n    Meta:   %v", *e.Meta)
 		}
+	}
+
+	if e.RateLimitRemaining != nil {
+		fmt.Fprintf(&b, "\n    RateLimitRemaining: %v", *e.RateLimitRemaining)
+	}
+	if e.RateLimitReset != nil {
+		fmt.Fprintf(&b, "\n    RateLimitReset:     %v", *e.RateLimitReset)
 	}
 
 	return b.String()
