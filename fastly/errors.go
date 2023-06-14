@@ -320,9 +320,13 @@ type HTTPError struct {
 	Errors []*ErrorObject `mapstructure:"errors"`
 	// StatusCode is the HTTP status code (2xx-5xx).
 	StatusCode int
-	// RateLimitRemaining is the number of API requests remaining in the current rate limit window.
+	// RateLimitRemaining is the number of API requests remaining in the current
+	// rate limit window. A `nil` value indicates the API returned no value for
+	// the associated Fastly-RateLimit-Remaining response header.
 	RateLimitRemaining *int
-	// RateLimitReset is the time at which the current rate limit window resets, as a Unix timestamp.
+	// RateLimitReset is the time at which the current rate limit window resets,
+	// as a Unix timestamp. A `nil` value indicates the API returned no value for
+	// the associated Fastly-RateLimit-Reset response header.
 	RateLimitReset *int
 }
 
