@@ -1,5 +1,14 @@
 # Changelog
 
+## [v8.5.1](https://github.com/fastly/go-fastly/releases/tag/v8.5.1) (2023-06-14)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.0...v8.5.1)
+
+**Enhancements:**
+
+* Add support for file_max_bytes field to s3 logging endpoint [#446](https://github.com/fastly/go-fastly/pull/446)
+* feat(errors): expose rate limit headers [#447](https://github.com/fastly/go-fastly/pull/447)
+
 ## [v8.5.0](https://github.com/fastly/go-fastly/releases/tag/v8.5.0) (2023-06-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.4.1...v8.5.0)
