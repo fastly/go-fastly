@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.5.2](https://github.com/fastly/go-fastly/releases/tag/v8.5.2) (2023-06-23)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.1...v8.5.2)
+
+**Bug fixes:**
+
+* fix(errors): use title if present [#449](https://github.com/fastly/go-fastly/pull/449)
+
 ## [v8.5.1](https://github.com/fastly/go-fastly/releases/tag/v8.5.1) (2023-06-14)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.0...v8.5.1)
