@@ -345,6 +345,7 @@ type ErrorObject struct {
 type legacyError struct {
 	Detail  string `mapstructure:"detail"`
 	Message string `mapstructure:"msg"`
+	Title   string `mapstructure:"title"`
 }
 
 // NewHTTPError creates a new HTTP error from the given code.
@@ -412,8 +413,12 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		if err := decodeBodyMap(body, &lerr); err != nil {
 			addDecodeErr()
 		} else if lerr != nil {
+			msg := lerr.Message
+			if msg == "" && lerr.Title != "" {
+				msg = lerr.Title
+			}
 			e.Errors = append(e.Errors, &ErrorObject{
-				Title:  lerr.Message,
+				Title:  msg,
 				Detail: lerr.Detail,
 			})
 		}
