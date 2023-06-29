@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.5.4](https://github.com/fastly/go-fastly/releases/tag/v8.5.4) (2023-06-29)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.2...v8.5.4)
+
+**Bug fixes:**
+
+* fix: ensure Fastly-Key is stripped from the dump [#453](https://github.com/fastly/go-fastly/pull/453)
+
 ## [v8.5.3](https://github.com/fastly/go-fastly/releases/tag/v8.5.3) (2023-06-29)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.2...v8.5.3)
