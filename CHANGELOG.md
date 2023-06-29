@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.5.3](https://github.com/fastly/go-fastly/releases/tag/v8.5.3) (2023-06-29)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.2...v8.5.3)
+
+**Enhancements:**
+
+* feat: add debug mode [#451](https://github.com/fastly/go-fastly/pull/451)
+
 ## [v8.5.2](https://github.com/fastly/go-fastly/releases/tag/v8.5.2) (2023-06-23)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.1...v8.5.2)
