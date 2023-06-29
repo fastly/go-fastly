@@ -3,6 +3,7 @@ package fastly
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -293,6 +294,24 @@ func (c *Client) DeleteJSONAPIBulk(p string, i interface{}, ro *RequestOptions) 
 	return c.RequestJSONAPIBulk("DELETE", p, i, ro)
 }
 
+// stripKey removes the Fastly-Key value from the request dump.
+func stripKey(dump []byte) ([]byte, error) {
+	index := bytes.Index(dump, []byte("Fastly-Key: "))
+	if index == -1 {
+		return dump, errors.New("a Fastly-Key was not found")
+	}
+
+	tokenStart := index + len("Fastly-Key: ")
+	tokenEnd := bytes.IndexByte(dump[tokenStart:], '\r')
+	if tokenEnd == -1 {
+		return dump, errors.New("no end of token was found")
+	}
+
+	redactedToken := strings.Repeat("X", len(dump[tokenStart:tokenStart+tokenEnd]))
+	copy(dump[tokenStart:tokenStart+tokenEnd], []byte(redactedToken))
+	return dump, nil
+}
+
 // Request makes an HTTP request against the HTTPClient using the given verb,
 // Path, and request options.
 func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, error) {
@@ -308,7 +327,9 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 
 	if c.debugMode {
 		dump, _ := httputil.DumpRequest(req, true)
-		fmt.Printf("http.Request (dump): %q\n", dump)
+		if stripped, err := stripKey(dump); err == nil {
+			fmt.Printf("http.Request (dump): %q\n", stripped)
+		}
 	}
 
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
