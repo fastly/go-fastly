@@ -7,6 +7,7 @@ import (
 	"io"
 	"mime/multipart"
 	"net/http"
+	"net/http/httputil"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -32,6 +33,10 @@ const APIKeyHeader = "Fastly-Key"
 // EndpointEnvVar is the name of an environment variable that can be used
 // to change the URL of API requests.
 const EndpointEnvVar = "FASTLY_API_URL"
+
+// DebugEnvVar is the name of an environment variable that can be used to switch
+// the API client into debug mode.
+const DebugEnvVar = "FASTLY_DEBUG_MODE"
 
 // DefaultEndpoint is the default endpoint for Fastly. Since Fastly does not
 // support an on-premise solution, this is likely to always be the default.
@@ -64,6 +69,8 @@ type Client struct {
 
 	// apiKey is the Fastly API key to authenticate requests.
 	apiKey string
+	// debugMode enables HTTP request/response dumps.
+	debugMode bool
 	// remaining is last observed value of http header Fastly-RateLimit-Remaining
 	remaining int
 	// reset is last observed value of http header Fastly-RateLimit-Reset
@@ -111,6 +118,11 @@ func NewClient(key string) (*Client, error) {
 // request that requires an API key will return a 403 response.
 func NewClientForEndpoint(key string, endpoint string) (*Client, error) {
 	client := &Client{apiKey: key, Address: endpoint}
+
+	if endpoint, ok := os.LookupEnv(DebugEnvVar); ok && endpoint == "true" {
+		client.debugMode = true
+	}
+
 	return client.init()
 }
 
@@ -293,10 +305,21 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		c.updateLock.Lock()
 		defer c.updateLock.Unlock()
 	}
+
+	if c.debugMode {
+		dump, _ := httputil.DumpRequest(req, true)
+		fmt.Printf("http.Request (dump): %q\n", dump)
+	}
+
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
 	resp, err := checkResp(c.HTTPClient.Do(req))
 	if err != nil {
 		return resp, err
+	}
+
+	if c.debugMode {
+		dump, _ := httputil.DumpResponse(resp, true)
+		fmt.Printf("http.Response (dump): %q\n", dump)
 	}
 
 	if verb != "GET" && verb != "HEAD" {
