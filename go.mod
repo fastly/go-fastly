@@ -20,4 +20,7 @@ require (
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
 
+// Security: FASTLY_DEBUG_MODE wasn't redacting Fastly-Key.
+retract v8.5.3
+
 go 1.18
