@@ -332,20 +332,20 @@ type HTTPError struct {
 
 // ErrorObject is a single error.
 type ErrorObject struct {
-	Code   string                  `mapstructure:"code"`
-	Detail string                  `mapstructure:"detail"`
-	ID     string                  `mapstructure:"id"`
-	Meta   *map[string]interface{} `mapstructure:"meta"`
-	Status string                  `mapstructure:"status"`
-	Title  string                  `mapstructure:"title"`
+	Code   string                  `mapstructure:"code" json:"code,omitempty"`
+	Detail string                  `mapstructure:"detail" json:"detail,omitempty"`
+	ID     string                  `mapstructure:"id" json:"id,omitempty"`
+	Meta   *map[string]interface{} `mapstructure:"meta" json:"meta,omitempty"`
+	Status string                  `mapstructure:"status" json:"status,omitempty"`
+	Title  string                  `mapstructure:"title" json:"title,omitempty"`
 }
 
-// legacyError represents the older-style errors from Fastly. It is private
-// because it is automatically converted to a jsonapi error.
+// legacyError represents the older-style errors from Fastly.
 type legacyError struct {
-	Detail  string `mapstructure:"detail"`
-	Message string `mapstructure:"msg"`
-	Title   string `mapstructure:"title"`
+	Errors  []map[string]any `mapstructure:"errors"`
+	Detail  string           `mapstructure:"detail"`
+	Message string           `mapstructure:"msg"`
+	Title   string           `mapstructure:"title"`
 }
 
 // NewHTTPError creates a new HTTP error from the given code.
@@ -413,14 +413,41 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		if err := decodeBodyMap(body, &lerr); err != nil {
 			addDecodeErr()
 		} else if lerr != nil {
-			msg := lerr.Message
-			if msg == "" && lerr.Title != "" {
-				msg = lerr.Title
+			// This is for better handling the KV Store Bulk Insert endpoint.
+			// https://developer.fastly.com/reference/api/services/resources/kv-store-item/#batch-create-keys
+			if lerr.Errors != nil {
+				for _, le := range lerr.Errors {
+					var (
+						code, detail string
+						index        float64
+					)
+					// NOTE: We use `ok` second argument but _ it so as to avoid a panic.
+					// Panics can happen if the service returns a 503 Service Unavailable.
+					if c, ok := le["code"]; ok {
+						code, _ = c.(string)
+					}
+					if r, ok := le["reason"]; ok {
+						detail, _ = r.(string)
+					}
+					if i, ok := le["index"]; ok {
+						index, _ = i.(float64)
+					}
+					e.Errors = append(e.Errors, &ErrorObject{
+						Code:   code,
+						Detail: detail,
+						Title:  fmt.Sprintf("error at index: %v", index),
+					})
+				}
+			} else {
+				msg := lerr.Message
+				if msg == "" && lerr.Title != "" {
+					msg = lerr.Title
+				}
+				e.Errors = append(e.Errors, &ErrorObject{
+					Title:  msg,
+					Detail: lerr.Detail,
+				})
 			}
-			e.Errors = append(e.Errors, &ErrorObject{
-				Title:  msg,
-				Detail: lerr.Detail,
-			})
 		}
 	}
 
