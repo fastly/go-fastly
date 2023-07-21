@@ -1,8 +1,16 @@
 # Changelog
 
+## [v8.5.5](https://github.com/fastly/go-fastly/releases/tag/v8.5.5) (2023-07-21)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.4...v8.5.5)
+
+**Enhancements:**
+
+* fix(errors): support KV Store batch endpoint error response [#454](https://github.com/fastly/go-fastly/pull/454)
+
 ## [v8.5.4](https://github.com/fastly/go-fastly/releases/tag/v8.5.4) (2023-06-29)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.2...v8.5.4)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.3...v8.5.4)
 
 **Bug fixes:**
 
