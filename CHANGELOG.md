@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.5.7](https://github.com/fastly/go-fastly/releases/tag/v8.5.7) (2023-07-24)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.6...v8.5.7)
+
+**Enhancements:**
+
+* feat(kv_store): add interface for easier testing of paginator [#458](https://github.com/fastly/go-fastly/pull/458)
+
 ## [v8.5.6](https://github.com/fastly/go-fastly/releases/tag/v8.5.6) (2023-07-24)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.5...v8.5.6)
