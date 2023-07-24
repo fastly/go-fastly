@@ -22,3 +22,10 @@ type PaginatorServices interface {
 	Remaining() int
 	GetNext() ([]*Service, error)
 }
+
+// PaginatorKVStoreEntries represents a paginator.
+type PaginatorKVStoreEntries interface {
+	Next() bool
+	Keys() []string
+	Err() error
+}

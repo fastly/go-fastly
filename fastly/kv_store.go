@@ -277,7 +277,7 @@ type ListKVStoreKeysPaginator struct {
 }
 
 // NewListKVStoreKeysPaginator returns a new paginator for the provided LitKVStoreKeysInput.
-func (c *Client) NewListKVStoreKeysPaginator(i *ListKVStoreKeysInput) *ListKVStoreKeysPaginator {
+func (c *Client) NewListKVStoreKeysPaginator(i *ListKVStoreKeysInput) PaginatorKVStoreEntries {
 	return &ListKVStoreKeysPaginator{
 		client: c,
 		input:  i,
