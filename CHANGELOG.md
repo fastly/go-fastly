@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.5.6](https://github.com/fastly/go-fastly/releases/tag/v8.5.6) (2023-07-24)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.5...v8.5.6)
+
+**Enhancements:**
+
+* fix(kv_store): support parallel calls to delete keys [#456](https://github.com/fastly/go-fastly/pull/456)
+
 ## [v8.5.5](https://github.com/fastly/go-fastly/releases/tag/v8.5.5) (2023-07-21)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.4...v8.5.5)
