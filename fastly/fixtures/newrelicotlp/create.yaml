@@ -1,0 +1,57 @@
+---
+version: 1
+interactions:
+- request:
+    body: format=format&name=test-newrelicotlp&placement=waf_debug&token=abcd1234&url=https%3A%2F%2Fexample.nr-data.net
+    form:
+      format:
+      - format
+      name:
+      - test-newrelicotlp
+      placement:
+      - waf_debug
+      token:
+      - abcd1234
+      url:
+      - https://example.nr-data.net
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/8.5.7 (+github.com/fastly/go-fastly; go1.20.6)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/162/logging/newrelicotlp
+    method: POST
+  response:
+    body: '{"format":"format","name":"test-newrelicotlp","placement":"waf_debug","token":"abcd1234","url":"https://example.nr-data.net","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"162","response_condition":"","format_version":"2","deleted_at":null,"updated_at":"2023-07-27T16:58:48Z","created_at":"2023-07-27T16:58:48Z","region":null}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 27 Jul 2023 16:58:48 GMT
+      Fastly-Ratelimit-Remaining:
+      - "990"
+      Fastly-Ratelimit-Reset:
+      - "1690477200"
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-2-prod-5-CONTROL-AWS-UE2, cache-den8266-DEN
+      X-Timer:
+      - S1690477128.923265,VS0,VE374
+    status: 200 OK
+    code: 200
+    duration: ""
