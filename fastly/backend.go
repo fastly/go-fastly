@@ -16,7 +16,6 @@ type Backend struct {
 	ConnectTimeout      int        `mapstructure:"connect_timeout"`
 	CreatedAt           *time.Time `mapstructure:"created_at"`
 	DeletedAt           *time.Time `mapstructure:"deleted_at"`
-	ErrorThreshold      int        `mapstructure:"error_threshold"`
 	FirstByteTimeout    int        `mapstructure:"first_byte_timeout"`
 	HealthCheck         string     `mapstructure:"healthcheck"`
 	Hostname            string     `mapstructure:"hostname"`
@@ -104,8 +103,6 @@ type CreateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
-	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
-	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
@@ -226,8 +223,6 @@ type UpdateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
-	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
-	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// HealthCheck is the name of the healthcheck to use with this backend.
