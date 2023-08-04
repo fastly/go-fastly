@@ -1,5 +1,17 @@
 # Changelog
 
+## [v8.5.8](https://github.com/fastly/go-fastly/releases/tag/v8.5.8) (2023-08-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.7...v8.5.8)
+
+**Enhancements:**
+
+* Add support for the New Relic OTLP logging endpoint [#460](https://github.com/fastly/go-fastly/pull/460)
+
+**Bug fixes:**
+
+* remove(backend): remove redundant ErrorThreshold field [#461](https://github.com/fastly/go-fastly/pull/461)
+
 ## [v8.5.7](https://github.com/fastly/go-fastly/releases/tag/v8.5.7) (2023-07-24)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.6...v8.5.7)
