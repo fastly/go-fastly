@@ -28,6 +28,7 @@ type Backend struct {
 	OverrideHost        string     `mapstructure:"override_host"`
 	Port                int        `mapstructure:"port"`
 	RequestCondition    string     `mapstructure:"request_condition"`
+	ShareKey            string     `mapstructure:"share_key"`
 	SSLCACert           string     `mapstructure:"ssl_ca_cert"`
 	SSLCertHostname     string     `mapstructure:"ssl_cert_hostname"`
 	SSLCheckCert        bool       `mapstructure:"ssl_check_cert"`
@@ -126,6 +127,8 @@ type CreateBackendInput struct {
 	Port *int `url:"port,omitempty"`
 	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
+	// ShareKey is a value that when shared across backends will enable those backends to share the same health check.
+	ShareKey *string `url:"share_key,omitempty"`
 	// SSLCACert is a CA certificate attached to origin.
 	SSLCACert *string `url:"ssl_ca_cert,omitempty"`
 	// SSLCertHostname is an overrides ssl_hostname, but only for cert verification.
@@ -250,6 +253,8 @@ type UpdateBackendInput struct {
 	Port *int `url:"port,omitempty"`
 	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
+	// ShareKey is a value that when shared across backends will enable those backends to share the same health check.
+	ShareKey *string `url:"share_key,omitempty"`
 	// SSLCACert is a CA certificate attached to origin.
 	SSLCACert *string `url:"ssl_ca_cert,omitempty"`
 	// SSLCertHostname is an overrides ssl_hostname, but only for cert verification.
