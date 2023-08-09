@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.5.9](https://github.com/fastly/go-fastly/releases/tag/v8.5.9) (2023-08-09)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.8...v8.5.9)
+
+**Bug fixes:**
+
+- revert(backend): revert removal of redundant ErrorThreshold field [#464](https://github.com/fastly/go-fastly/pull/464)
+
 ## [v8.5.8](https://github.com/fastly/go-fastly/releases/tag/v8.5.8) (2023-08-04)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.7...v8.5.8)
