@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.6.0](https://github.com/fastly/go-fastly/releases/tag/v8.6.0) (2023-08-30)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.9...v8.6.0)
+
+**Enhancements:**
+
+- feat(backend): add share_key field [#463](https://github.com/fastly/go-fastly/pull/463)
+
 ## [v8.5.9](https://github.com/fastly/go-fastly/releases/tag/v8.5.9) (2023-08-09)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.8...v8.5.9)
