@@ -9,7 +9,6 @@
 7. Tag a new release (`tag=vX.Y.Z && git tag -s $tag -m "$tag" && git push origin $tag`).
 8. Copy/paste CHANGELOG into a new [draft release](https://github.com/fastly/go-fastly/releases)<sup>[4](#note4)</sup>.
 9. Publish draft release.
-10. Communicate the release in the relevant Slack channels<sup>[5](#note5)</sup>.
 
 ## Footnotes
 
@@ -17,4 +16,3 @@
 2. <a name="note2"></a>Also bump `ProjectVersion` in `fastly/client.go`.
 3. <a name="note3"></a>If a major version change, then update references to the version in `go.mod` and `README.md` (also in code example tests, `./fastly/example_*_test.go`).
 4. <a name="note4"></a>Use the format: `vX.Y.Z - yyyy-mm-dd` for the release title.
-5. <a name="note5"></a>Fastly make internal announcements in the Slack channels: `#api-clients`, `#ecp-languages`.
