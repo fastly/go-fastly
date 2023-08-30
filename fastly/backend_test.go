@@ -64,6 +64,9 @@ func TestClient_Backends(t *testing.T) {
 	if b.OverrideHost != "origin.example.com" {
 		t.Errorf("bad override_host: %q", b.OverrideHost)
 	}
+	if b.ShareKey != "" {
+		t.Errorf("bad share_key: %s", b.ShareKey)
+	}
 	if b.SSLCheckCert {
 		t.Errorf("bad ssl_check_cert: %t", b.SSLCheckCert) // API defaults to true and we want to allow setting false
 	}
@@ -124,6 +127,7 @@ func TestClient_Backends(t *testing.T) {
 			NewName:        String("new-test-backend"),
 			OverrideHost:   String("www.example.com"),
 			Port:           Int(1234),
+			ShareKey:       String("shared-key"),
 			SSLCiphers:     String("RC4:!COMPLEMENTOFDEFAULT"),
 			SSLCheckCert:   CBool(false),
 			SSLSNIHostname: String("ssl-hostname-updated.com"),
@@ -140,6 +144,9 @@ func TestClient_Backends(t *testing.T) {
 	}
 	if ub.Port != 1234 {
 		t.Errorf("bad port: %d", ub.Port)
+	}
+	if ub.ShareKey == "" || ub.ShareKey != "shared-key" {
+		t.Errorf("bad share_key: %s", ub.ShareKey)
 	}
 	if ub.SSLCheckCert {
 		t.Errorf("bad ssl_check_cert: %t", ub.SSLCheckCert)
