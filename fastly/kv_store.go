@@ -132,6 +132,7 @@ func (l *ListKVStoresPaginator) Next() bool {
 	if err != nil {
 		l.err = err
 		l.finished = true
+		return false
 	}
 
 	l.stores = o.Data
@@ -284,7 +285,7 @@ func (c *Client) NewListKVStoreKeysPaginator(i *ListKVStoreKeysInput) PaginatorK
 	}
 }
 
-// Next advanced the paginator.
+// Next advances the paginator.
 func (l *ListKVStoreKeysPaginator) Next() bool {
 	if l.finished {
 		l.keys = nil
@@ -296,6 +297,7 @@ func (l *ListKVStoreKeysPaginator) Next() bool {
 	if err != nil {
 		l.err = err
 		l.finished = true
+		return false
 	}
 
 	l.keys = o.Data
