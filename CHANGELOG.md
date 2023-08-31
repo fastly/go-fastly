@@ -1,5 +1,17 @@
 # Changelog
 
+## [v8.6.1](https://github.com/fastly/go-fastly/releases/tag/v8.6.1) (2023-08-31)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.0...v8.6.1)
+
+**Bug fixes:**
+
+- fastly: fix return value for errors during kvstore pagination [#468](https://github.com/fastly/go-fastly/pull/468)
+
+**Dependencies:**
+
+- build: bump minimum go version to 1.19 [#467](https://github.com/fastly/go-fastly/pull/467)
+
 ## [v8.6.0](https://github.com/fastly/go-fastly/releases/tag/v8.6.0) (2023-08-30)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.5.9...v8.6.0)
