@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"fmt"
 	"io"
 	"net/http"
 	"net/url"
@@ -54,6 +55,7 @@ func (c *Client) RawRequest(verb, p string, ro *RequestOptions) (*http.Request, 
 	// Set the API key.
 	if len(c.apiKey) > 0 {
 		request.Header.Set(APIKeyHeader, c.apiKey)
+		request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
 	}
 
 	// Set the User-Agent.
@@ -92,6 +94,7 @@ func (c *Client) SimpleGet(target string) (*http.Response, error) {
 
 	if len(c.apiKey) > 0 {
 		request.Header.Set(APIKeyHeader, c.apiKey)
+		request.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
 	}
 	request.Header.Set("User-Agent", UserAgent)
 
