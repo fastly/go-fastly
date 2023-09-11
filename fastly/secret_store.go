@@ -14,7 +14,7 @@ import (
 )
 
 // Secret Store.
-// A secret store is a persistent, globally distributed store for secrets accessible to Compute@Edge services during request processing.
+// A secret store is a persistent, globally distributed store for secrets accessible to Compute services during request processing.
 // https://developer.fastly.com/reference/api/secret-store/
 
 // SecretStoreMeta is the metadata returned from Secret Store paginated responses.
