@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.6.2](https://github.com/fastly/go-fastly/releases/tag/v8.6.2) (2023-09-28)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.1...v8.6.2)
+
+**Bug fixes:**
+
+- fix(client): simplify key-redaction logic [#472](https://github.com/fastly/go-fastly/pull/472)
+
 ## [v8.6.1](https://github.com/fastly/go-fastly/releases/tag/v8.6.1) (2023-08-31)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.0...v8.6.1)
