@@ -6,6 +6,8 @@
 
 A Go client library for interacting with most facets of the [Fastly API](https://docs.fastly.com/api).
 
+This library is not intended for use on the [Fastly Compute](https://www.fastly.com/products/edge-compute) platform.
+
 ## Usage
 
 ```go
