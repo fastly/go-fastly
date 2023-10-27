@@ -64,14 +64,14 @@ var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 type Client struct {
 	// Address is the address of Fastly's API endpoint.
 	Address string
+	// DebugMode enables HTTP request/response dumps.
+	DebugMode bool
 	// HTTPClient is the HTTP client to use. If one is not provided, a default
 	// client will be used.
 	HTTPClient *http.Client
 
 	// apiKey is the Fastly API key to authenticate requests.
 	apiKey string
-	// debugMode enables HTTP request/response dumps.
-	debugMode bool
 	// remaining is last observed value of http header Fastly-RateLimit-Remaining
 	remaining int
 	// reset is last observed value of http header Fastly-RateLimit-Reset
@@ -121,7 +121,7 @@ func NewClientForEndpoint(key string, endpoint string) (*Client, error) {
 	client := &Client{apiKey: key, Address: endpoint}
 
 	if endpoint, ok := os.LookupEnv(DebugEnvVar); ok && endpoint == "true" {
-		client.debugMode = true
+		client.DebugMode = true
 	}
 
 	return client.init()
@@ -307,7 +307,7 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		defer c.updateLock.Unlock()
 	}
 
-	if c.debugMode {
+	if c.DebugMode {
 		r := req.Clone(context.Background())
 		r.Header.Del("Fastly-Key")
 		dump, _ := httputil.DumpRequest(r, true)
@@ -317,7 +317,7 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
 	resp, err := checkResp(c.HTTPClient.Do(req))
 
-	if c.debugMode && resp != nil {
+	if c.DebugMode && resp != nil {
 		dump, _ := httputil.DumpResponse(resp, true)
 		fmt.Printf("http.Response (dump): %q\n", dump)
 	}
