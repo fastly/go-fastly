@@ -6,7 +6,7 @@
 
 A Go client library for interacting with most facets of the [Fastly API](https://docs.fastly.com/api).
 
-This library is not intended for use on the [Fastly Compute](https://www.fastly.com/products/edge-compute) platform.
+> **NOTE:** This API client may not function correctly when used on the [Fastly Compute](https://www.fastly.com/products/edge-compute) platform. Support for Compute is on the roadmap but has not yet been prioritised ([details](./DEVELOPMENT.md#compute)).
 
 ## Usage
 
