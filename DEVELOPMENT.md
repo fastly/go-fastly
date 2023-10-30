@@ -18,7 +18,9 @@
 
 Support for the [Fastly Compute](https://www.fastly.com/products/edge-compute) platform is still in development.
 
-There are known issues with the use of Go's `reflect` package (primarily due to the go-fastly API client's use of [github.com/mitchellh/mapstructure](https://github.com/mitchellh/mapstructure)) that still need to be addressed, and for TinyGo support to mature.
+There are known issues with the use of Go's `reflect` package and for TinyGo support to mature.
+
+> **NOTE:** The go-fastly API client uses [github.com/mitchellh/mapstructure](https://github.com/mitchellh/mapstructure)
 
 If using standard Go (not TinyGo) then a usable client can be achieved with:
 
