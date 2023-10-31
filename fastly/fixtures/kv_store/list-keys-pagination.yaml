@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys?limit=4
+      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys?consistency=strong&limit=4
     method: GET
   response:
     body: '{"data":["apple","banana","batch-1","batch-2"],"meta":{"limit":4,"next_cursor":"CgdiYXRjaC0y"}}'
@@ -17,19 +17,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 10 May 2023 12:12:21 GMT
+      - Tue, 31 Oct 2023 13:11:22 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-lhr7367-LHR, cache-lhr7365-LHR
+      - cache-lhr7342-LHR, cache-lhr7355-LHR
       X-Timer:
-      - S1683720741.489338,VS0,VE181
+      - S1698757882.016470,VS0,VE229
     status: 200 OK
     code: 200
     duration: ""
@@ -38,8 +38,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.0.3 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/resources/stores/kv/yvineawuxczxih2d54jsje/keys?cursor=CgdiYXRjaC0y&limit=4
+      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys?consistency=strong&cursor=CgdiYXRjaC0y&limit=4
     method: GET
   response:
     body: '{"data":["carrot","dragonfruit","eggplant"],"meta":{"limit":4}}'
@@ -49,19 +49,19 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 10 May 2023 12:12:21 GMT
+      - Tue, 31 Oct 2023 13:11:22 GMT
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-lhr7339-LHR, cache-lhr7365-LHR
+      - cache-lhr7361-LHR, cache-lhr7355-LHR
       X-Timer:
-      - S1683720742.703523,VS0,VE190
+      - S1698757882.266440,VS0,VE233
     status: 200 OK
     code: 200
     duration: ""

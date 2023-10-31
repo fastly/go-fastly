@@ -205,8 +205,29 @@ func (c *Client) DeleteKVStore(i *DeleteKVStoreInput) error {
 	return nil
 }
 
+// Consistency is a base for the different consistency variants.
+type Consistency int64
+
+func (c Consistency) String() string {
+	switch c {
+	case ConsistencyEventual:
+		return "eventual"
+	case ConsistencyUndefined, ConsistencyStrong:
+		return "strong"
+	}
+	return "strong" // default
+}
+
+const (
+	ConsistencyUndefined Consistency = iota
+	ConsistencyEventual
+	ConsistencyStrong
+)
+
 // ListKVStoreKeysInput is the input to the ListKVStoreKeys function.
 type ListKVStoreKeysInput struct {
+	// Consistency determines accuracy of results (values: eventual, strong). i.e. 'eventual' uses caching to improve performance (default: strong)
+	Consistency Consistency
 	// Cursor is used for paginating through results.
 	Cursor string
 	// ID is the ID of the kv store to list keys for (required).
@@ -220,11 +241,8 @@ func (l *ListKVStoreKeysInput) formatFilters() map[string]string {
 		return nil
 	}
 
-	if l.Limit == 0 && l.Cursor == "" {
-		return nil
-	}
-
 	m := make(map[string]string)
+	m["consistency"] = l.Consistency.String()
 
 	if l.Limit != 0 {
 		m["limit"] = strconv.Itoa(l.Limit)
