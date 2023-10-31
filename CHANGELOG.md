@@ -1,5 +1,13 @@
 # Changelog
 
+## [v8.6.4](https://github.com/fastly/go-fastly/releases/tag/v8.6.4) (2023-10-31)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.3...v8.6.4)
+
+**Enhancements:**
+
+- feat: add kv-store list keys `consistency` param [#479](https://github.com/fastly/go-fastly/pull/479)
+
 ## [v8.6.3](https://github.com/fastly/go-fastly/releases/tag/v8.6.3) (2023-10-31)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.2...v8.6.3)
@@ -54,11 +62,11 @@
 
 **Enhancements:**
 
-* Add support for the New Relic OTLP logging endpoint [#460](https://github.com/fastly/go-fastly/pull/460)
+- Add support for the New Relic OTLP logging endpoint [#460](https://github.com/fastly/go-fastly/pull/460)
 
 **Bug fixes:**
 
-* remove(backend): remove redundant ErrorThreshold field [#461](https://github.com/fastly/go-fastly/pull/461)
+- remove(backend): remove redundant ErrorThreshold field [#461](https://github.com/fastly/go-fastly/pull/461)
 
 ## [v8.5.7](https://github.com/fastly/go-fastly/releases/tag/v8.5.7) (2023-07-24)
 
@@ -66,7 +74,7 @@
 
 **Enhancements:**
 
-* feat(kv_store): add interface for easier testing of paginator [#458](https://github.com/fastly/go-fastly/pull/458)
+- feat(kv_store): add interface for easier testing of paginator [#458](https://github.com/fastly/go-fastly/pull/458)
 
 ## [v8.5.6](https://github.com/fastly/go-fastly/releases/tag/v8.5.6) (2023-07-24)
 
@@ -74,7 +82,7 @@
 
 **Enhancements:**
 
-* fix(kv_store): support parallel calls to delete keys [#456](https://github.com/fastly/go-fastly/pull/456)
+- fix(kv_store): support parallel calls to delete keys [#456](https://github.com/fastly/go-fastly/pull/456)
 
 ## [v8.5.5](https://github.com/fastly/go-fastly/releases/tag/v8.5.5) (2023-07-21)
 
@@ -82,7 +90,7 @@
 
 **Enhancements:**
 
-* fix(errors): support KV Store batch endpoint error response [#454](https://github.com/fastly/go-fastly/pull/454)
+- fix(errors): support KV Store batch endpoint error response [#454](https://github.com/fastly/go-fastly/pull/454)
 
 ## [v8.5.4](https://github.com/fastly/go-fastly/releases/tag/v8.5.4) (2023-06-29)
 
@@ -90,7 +98,7 @@
 
 **Bug fixes:**
 
-* fix: ensure Fastly-Key is stripped from the dump [#453](https://github.com/fastly/go-fastly/pull/453)
+- fix: ensure Fastly-Key is stripped from the dump [#453](https://github.com/fastly/go-fastly/pull/453)
 
 ## [v8.5.3](https://github.com/fastly/go-fastly/releases/tag/v8.5.3) (2023-06-29)
 
@@ -98,7 +106,7 @@
 
 **Enhancements:**
 
-* feat: add debug mode [#451](https://github.com/fastly/go-fastly/pull/451)
+- feat: add debug mode [#451](https://github.com/fastly/go-fastly/pull/451)
 
 ## [v8.5.2](https://github.com/fastly/go-fastly/releases/tag/v8.5.2) (2023-06-23)
 
@@ -106,7 +114,7 @@
 
 **Bug fixes:**
 
-* fix(errors): use title if present [#449](https://github.com/fastly/go-fastly/pull/449)
+- fix(errors): use title if present [#449](https://github.com/fastly/go-fastly/pull/449)
 
 ## [v8.5.1](https://github.com/fastly/go-fastly/releases/tag/v8.5.1) (2023-06-14)
 
@@ -114,8 +122,8 @@
 
 **Enhancements:**
 
-* Add support for file_max_bytes field to s3 logging endpoint [#446](https://github.com/fastly/go-fastly/pull/446)
-* feat(errors): expose rate limit headers [#447](https://github.com/fastly/go-fastly/pull/447)
+- Add support for file_max_bytes field to s3 logging endpoint [#446](https://github.com/fastly/go-fastly/pull/446)
+- feat(errors): expose rate limit headers [#447](https://github.com/fastly/go-fastly/pull/447)
 
 ## [v8.5.0](https://github.com/fastly/go-fastly/releases/tag/v8.5.0) (2023-06-07)
 
@@ -123,7 +131,7 @@
 
 **Enhancements:**
 
-* feat(config_store): implement batch endpoint [#444](https://github.com/fastly/go-fastly/pull/444)
+- feat(config_store): implement batch endpoint [#444](https://github.com/fastly/go-fastly/pull/444)
 
 ## [v8.4.1](https://github.com/fastly/go-fastly/releases/tag/v8.4.1) (2023-06-01)
 
@@ -131,7 +139,7 @@
 
 **Enhancements:**
 
-* feat(mutual_authentication): add Enforced to CREATE [#442](https://github.com/fastly/go-fastly/pull/442)
+- feat(mutual_authentication): add Enforced to CREATE [#442](https://github.com/fastly/go-fastly/pull/442)
 
 ## [v8.4.0](https://github.com/fastly/go-fastly/releases/tag/v8.4.0) (2023-05-31)
 
@@ -139,7 +147,7 @@
 
 **Enhancements:**
 
-* Support Mutual Authentication (mTLS) endpoints [#440](https://github.com/fastly/go-fastly/pull/440)
+- Support Mutual Authentication (mTLS) endpoints [#440](https://github.com/fastly/go-fastly/pull/440)
 
 ## [v8.3.0](https://github.com/fastly/go-fastly/releases/tag/v8.3.0) (2023-05-12)
 
@@ -147,7 +155,7 @@
 
 **Enhancements:**
 
-* fix(kv_store): allow buffering io for key insert [#437](https://github.com/fastly/go-fastly/pull/437)
+- fix(kv_store): allow buffering io for key insert [#437](https://github.com/fastly/go-fastly/pull/437)
 
 ## [v8.2.1](https://github.com/fastly/go-fastly/releases/tag/v8.2.1) (2023-05-11)
 
@@ -155,7 +163,7 @@
 
 **Enhancements:**
 
-* feat(package): FilesHash [#435](https://github.com/fastly/go-fastly/pull/435)
+- feat(package): FilesHash [#435](https://github.com/fastly/go-fastly/pull/435)
 
 ## [v8.2.0](https://github.com/fastly/go-fastly/releases/tag/v8.2.0) (2023-05-11)
 
@@ -163,7 +171,7 @@
 
 **Enhancements:**
 
-* Secret Store: Support PUT & PATCH methods when creating secret [#433](https://github.com/fastly/go-fastly/pull/433)
+- Secret Store: Support PUT & PATCH methods when creating secret [#433](https://github.com/fastly/go-fastly/pull/433)
 
 ## [v8.1.0](https://github.com/fastly/go-fastly/releases/tag/v8.1.0) (2023-05-10)
 
@@ -171,7 +179,7 @@
 
 **Enhancements:**
 
-* feat: kv_store batch API endpoint [#431](https://github.com/fastly/go-fastly/pull/431)
+- feat: kv_store batch API endpoint [#431](https://github.com/fastly/go-fastly/pull/431)
 
 ## [v8.0.3](https://github.com/fastly/go-fastly/releases/tag/v8.0.3) (2023-05-09)
 
@@ -179,7 +187,7 @@
 
 **Enhancements:**
 
-* fix(kv_store): support parallel requests [#429](https://github.com/fastly/go-fastly/pull/429)
+- fix(kv_store): support parallel requests [#429](https://github.com/fastly/go-fastly/pull/429)
 
 ## [v8.0.2](https://github.com/fastly/go-fastly/releases/tag/v8.0.2) (2023-05-09)
 
@@ -187,7 +195,7 @@
 
 **Bug fixes:**
 
-* fix(kv_store): allow file read support [#427](https://github.com/fastly/go-fastly/pull/427)
+- fix(kv_store): allow file read support [#427](https://github.com/fastly/go-fastly/pull/427)
 
 ## [v8.0.1](https://github.com/fastly/go-fastly/releases/tag/v8.0.1) (2023-04-26)
 
@@ -195,7 +203,7 @@
 
 **Enhancements:**
 
-* Add project id for GCP in logging [#425](https://github.com/fastly/go-fastly/pull/425)
+- Add project id for GCP in logging [#425](https://github.com/fastly/go-fastly/pull/425)
 
 ## [v8.0.0](https://github.com/fastly/go-fastly/releases/tag/v8.0.0) (2023-04-12)
 
@@ -203,8 +211,8 @@
 
 **Breaking**:
 
-* breaking(secret-store): rename `ValidateSignature` to `VerifySignature` [#397](https://github.com/fastly/go-fastly/pull/397)
-* breaking(object-store): rename `ObjectStore` to `KVStore` [#422](https://github.com/fastly/go-fastly/pull/422)
+- breaking(secret-store): rename `ValidateSignature` to `VerifySignature` [#397](https://github.com/fastly/go-fastly/pull/397)
+- breaking(object-store): rename `ObjectStore` to `KVStore` [#422](https://github.com/fastly/go-fastly/pull/422)
 
 ## [v7.5.5](https://github.com/fastly/go-fastly/releases/tag/v7.5.5) (2023-03-31)
 
@@ -212,7 +220,7 @@
 
 **Enhancements:**
 
-* feat(ratelimiter): add uri_dictionary_name property [#420](https://github.com/fastly/go-fastly/pull/420)
+- feat(ratelimiter): add uri_dictionary_name property [#420](https://github.com/fastly/go-fastly/pull/420)
 
 ## [v7.5.4](https://github.com/fastly/go-fastly/releases/tag/v7.5.4) (2023-03-31)
 
@@ -220,7 +228,7 @@
 
 **Bug fixes:**
 
-* fix(ratelimiter): use separate structs for input/response serialization [#418](https://github.com/fastly/go-fastly/pull/418)
+- fix(ratelimiter): use separate structs for input/response serialization [#418](https://github.com/fastly/go-fastly/pull/418)
 
 ## [v7.5.3](https://github.com/fastly/go-fastly/releases/tag/v7.5.3) (2023-03-31)
 
@@ -228,7 +236,7 @@
 
 **Bug fixes:**
 
-* fix(ratelimiter): serialize with mapstructure tag [#416](https://github.com/fastly/go-fastly/pull/416)
+- fix(ratelimiter): serialize with mapstructure tag [#416](https://github.com/fastly/go-fastly/pull/416)
 
 ## [v7.5.2](https://github.com/fastly/go-fastly/releases/tag/v7.5.2) (2023-03-30)
 
@@ -236,7 +244,7 @@
 
 **Enhancements:**
 
-* feat(erl): add missing fields [#414](https://github.com/fastly/go-fastly/pull/414)
+- feat(erl): add missing fields [#414](https://github.com/fastly/go-fastly/pull/414)
 
 ## [v7.5.1](https://github.com/fastly/go-fastly/releases/tag/v7.5.1) (2023-03-28)
 
@@ -244,8 +252,8 @@
 
 **Bug fixes:**
 
-* fix(lint): avoid range variable being captured by func literal [#411](https://github.com/fastly/go-fastly/pull/411)
-* fix(ratelimit): add missing LoggerType input for CREATE/UPDATE [#412](https://github.com/fastly/go-fastly/pull/412)
+- fix(lint): avoid range variable being captured by func literal [#411](https://github.com/fastly/go-fastly/pull/411)
+- fix(ratelimit): add missing LoggerType input for CREATE/UPDATE [#412](https://github.com/fastly/go-fastly/pull/412)
 
 ## [v7.5.0](https://github.com/fastly/go-fastly/releases/tag/v7.5.0) (2023-03-15)
 
@@ -632,7 +640,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Batch Surrogate-Key purge [\#284](https://github.com/fastly/go-fastly/pull/284)
+- Batch Surrogate-Key purge [#284](https://github.com/fastly/go-fastly/pull/284)
 
 ## [v3.8.0](https://github.com/fastly/go-fastly/releases/tag/v3.8.0) (2021-06-28)
 
@@ -640,7 +648,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Update VCL snippets to more closely align with API [\#281](https://github.com/fastly/go-fastly/pull/281)
+- Update VCL snippets to more closely align with API [#281](https://github.com/fastly/go-fastly/pull/281)
 
 ## [v3.7.0](https://github.com/fastly/go-fastly/releases/tag/v3.7.0) (2021-06-10)
 
@@ -648,8 +656,8 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Add S3 Logging ACL parameter and add Redundancy options [\#279](https://github.com/fastly/go-fastly/pull/279)
-- Add HTTP `206 Partial Content` to stats [\#277](https://github.com/fastly/go-fastly/pull/277)
+- Add S3 Logging ACL parameter and add Redundancy options [#279](https://github.com/fastly/go-fastly/pull/279)
+- Add HTTP `206 Partial Content` to stats [#277](https://github.com/fastly/go-fastly/pull/277)
 
 ## [v3.6.0](https://github.com/fastly/go-fastly/releases/tag/v3.6.0) (2021-04-15)
 
@@ -657,7 +665,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Fix testing behavior for logging endpoints the support compression [\#271](https://github.com/fastly/go-fastly/pull/271)
+- Fix testing behavior for logging endpoints the support compression [#271](https://github.com/fastly/go-fastly/pull/271)
 
 ## [v3.5.0](https://github.com/fastly/go-fastly/releases/tag/v3.5.0) (2021-04-06)
 
@@ -665,7 +673,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Support usage of IAM role in S3 and Kinesis logging endpoints [\#269](https://github.com/fastly/go-fastly/pull/269)
+- Support usage of IAM role in S3 and Kinesis logging endpoints [#269](https://github.com/fastly/go-fastly/pull/269)
 
 ## [v3.4.1](https://github.com/fastly/go-fastly/releases/tag/v3.4.1) (2021-03-25)
 
@@ -673,12 +681,12 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Bug fixes:**
 
-- Purge with Soft=true bug [\#266](https://github.com/fastly/go-fastly/issues/266)
-- Initialise Headers map to avoid runtime panic when purging. [\#267](https://github.com/fastly/go-fastly/pull/267)
+- Purge with Soft=true bug [#266](https://github.com/fastly/go-fastly/issues/266)
+- Initialise Headers map to avoid runtime panic when purging. [#267](https://github.com/fastly/go-fastly/pull/267)
 
 **Closed issues:**
 
-- Potentially misleading comment in README.md [\#260](https://github.com/fastly/go-fastly/issues/260)
+- Potentially misleading comment in README.md [#260](https://github.com/fastly/go-fastly/issues/260)
 
 ## [v3.4.0](https://github.com/fastly/go-fastly/releases/tag/v3.4.0) (2021-02-18)
 
@@ -686,7 +694,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Add PATCH endpoint for TLS Subscriptions [\#262](https://github.com/fastly/go-fastly/pull/262)
+- Add PATCH endpoint for TLS Subscriptions [#262](https://github.com/fastly/go-fastly/pull/262)
 
 ## [v3.3.0](https://github.com/fastly/go-fastly/releases/tag/v3.3.0) (2021-02-15)
 
@@ -694,7 +702,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Updates needed to support Terraform TLS resources [\#259](https://github.com/fastly/go-fastly/pull/259)
+- Updates needed to support Terraform TLS resources [#259](https://github.com/fastly/go-fastly/pull/259)
 
 ## [v3.2.0](https://github.com/fastly/go-fastly/releases/tag/v3.2.0) (2021-02-04)
 
@@ -702,7 +710,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Add more support for compression\_codec to logging endpoints [\#257](https://github.com/fastly/go-fastly/pull/257)
+- Add more support for compression_codec to logging endpoints [#257](https://github.com/fastly/go-fastly/pull/257)
 
 ## [v3.1.0](https://github.com/fastly/go-fastly/releases/tag/v3.1.0) (2021-01-28)
 
@@ -710,7 +718,7 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 
 **Enhancements:**
 
-- Add support for file\_max\_bytes configuration for azure logging endpoint [\#255](https://github.com/fastly/go-fastly/pull/255)
+- Add support for file_max_bytes configuration for azure logging endpoint [#255](https://github.com/fastly/go-fastly/pull/255)
 
 ## [v3.0.0](https://github.com/fastly/go-fastly/releases/tag/v3.0.0) (2021-01-19)
 
@@ -719,31 +727,31 @@ There has been a bunch of interface fixes (e.g. consistent use of `int` over `ui
 There were a few breaking changes introduced in v3:
 
 1. A new `FieldError` abstraction for validating API struct fields.
-2. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
-3. Avoid generic ID field when more explicit naming would be clearer.
+1. Changing some mandatory fields to Optional (and vice-versa) to better support more _practical_ API usage.
+1. Avoid generic ID field when more explicit naming would be clearer.
 
 **Enhancements:**
 
-- Strip TLS prefix from TLS struct fields [\#250](https://github.com/fastly/go-fastly/pull/250)
-- Avoid generic ID field when more explicit naming would be clearer [\#247](https://github.com/fastly/go-fastly/pull/247)
-- Update Test Fixtures [\#245](https://github.com/fastly/go-fastly/pull/245)
-- Add region support to logentries logging endpoint [\#243](https://github.com/fastly/go-fastly/pull/243)
-- Add basic managed logging endpoint support to go-fastly [\#241](https://github.com/fastly/go-fastly/pull/241)
-- Create new error abstraction for field validation [\#239](https://github.com/fastly/go-fastly/pull/239)
+- Strip TLS prefix from TLS struct fields [#250](https://github.com/fastly/go-fastly/pull/250)
+- Avoid generic ID field when more explicit naming would be clearer [#247](https://github.com/fastly/go-fastly/pull/247)
+- Update Test Fixtures [#245](https://github.com/fastly/go-fastly/pull/245)
+- Add region support to logentries logging endpoint [#243](https://github.com/fastly/go-fastly/pull/243)
+- Add basic managed logging endpoint support to go-fastly [#241](https://github.com/fastly/go-fastly/pull/241)
+- Create new error abstraction for field validation [#239](https://github.com/fastly/go-fastly/pull/239)
 
 **Bug fixes:**
 
-- NewName should be optional [\#252](https://github.com/fastly/go-fastly/pull/252)
-- Dictionary ItemValue isn't optional [\#251](https://github.com/fastly/go-fastly/pull/251)
-- Ensure consistent naming for ServiceID \(fixes missed references\) [\#249](https://github.com/fastly/go-fastly/pull/249)
-- Update to RequestMaxBytes to align with updated API and regenerate fixtures [\#248](https://github.com/fastly/go-fastly/pull/248)
-- Cleanup naming of Kinesis to be more consistent. [\#246](https://github.com/fastly/go-fastly/pull/246)
-- Reword expected error message based on API changes [\#244](https://github.com/fastly/go-fastly/pull/244)
+- NewName should be optional [#252](https://github.com/fastly/go-fastly/pull/252)
+- Dictionary ItemValue isn't optional [#251](https://github.com/fastly/go-fastly/pull/251)
+- Ensure consistent naming for ServiceID (fixes missed references) [#249](https://github.com/fastly/go-fastly/pull/249)
+- Update to RequestMaxBytes to align with updated API and regenerate fixtures [#248](https://github.com/fastly/go-fastly/pull/248)
+- Cleanup naming of Kinesis to be more consistent. [#246](https://github.com/fastly/go-fastly/pull/246)
+- Reword expected error message based on API changes [#244](https://github.com/fastly/go-fastly/pull/244)
 
 **Closed issues:**
 
-- Remove uninitialized ActiveVersion field from Service struct? [\#242](https://github.com/fastly/go-fastly/issues/242)
-- Cache setting is missing the 'deliver' action [\#136](https://github.com/fastly/go-fastly/issues/136)
+- Remove uninitialized ActiveVersion field from Service struct? [#242](https://github.com/fastly/go-fastly/issues/242)
+- Cache setting is missing the 'deliver' action [#136](https://github.com/fastly/go-fastly/issues/136)
 
 ## [v2.1.0](https://github.com/fastly/go-fastly/releases/tag/v2.1.0) (2020-12-11)
 
@@ -751,15 +759,15 @@ There were a few breaking changes introduced in v3:
 
 **Enhancements:**
 
-- Add support for TLS client and batch size options for splunk [\#236](https://github.com/fastly/go-fastly/pull/236)
-- Add support for compression\_codec to logging file sink endpoints [\#235](https://github.com/fastly/go-fastly/pull/235)
-- Add support for Kinesis logging endpoint [\#234](https://github.com/fastly/go-fastly/pull/234)
-- Add SASL fields support for Kafka Logging Endpoint [\#226](https://github.com/fastly/go-fastly/pull/226)
-- Custom TLS API  [\#225](https://github.com/fastly/go-fastly/pull/225)
+- Add support for TLS client and batch size options for splunk [#236](https://github.com/fastly/go-fastly/pull/236)
+- Add support for compression_codec to logging file sink endpoints [#235](https://github.com/fastly/go-fastly/pull/235)
+- Add support for Kinesis logging endpoint [#234](https://github.com/fastly/go-fastly/pull/234)
+- Add SASL fields support for Kafka Logging Endpoint [#226](https://github.com/fastly/go-fastly/pull/226)
+- Custom TLS API  [#225](https://github.com/fastly/go-fastly/pull/225)
 
 **Closed issues:**
 
-- Any plan to add custom TLS certificates? [\#224](https://github.com/fastly/go-fastly/issues/224)
+- Any plan to add custom TLS certificates? [#224](https://github.com/fastly/go-fastly/issues/224)
 
 ## [v2.0.0](https://github.com/fastly/go-fastly/releases/tag/v2.0.0) (2020-11-17)
 
@@ -778,11 +786,11 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 **Enhancements:**
 
-- v2 [\#230](https://github.com/fastly/go-fastly/pull/230)
+- v2 [#230](https://github.com/fastly/go-fastly/pull/230)
 
 **Closed issues:**
 
-- Fails to Parse Historic Stats when no Service Provided [\#214](https://github.com/fastly/go-fastly/issues/214)
+- Fails to Parse Historic Stats when no Service Provided [#214](https://github.com/fastly/go-fastly/issues/214)
 
 ## [v1.18.0](https://github.com/fastly/go-fastly/releases/tag/v1.18.0) (2020-10-28)
 
@@ -794,7 +802,7 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 **Enhancements:**
 
-- Added support to list all datacenters [\#210](https://github.com/fastly/go-fastly/pull/210)
+- Added support to list all datacenters [#210](https://github.com/fastly/go-fastly/pull/210)
 
 ## [v1.16.2](https://github.com/fastly/go-fastly/releases/tag/v1.16.2) (2020-07-13)
 
@@ -802,7 +810,7 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 **Bug fixes:**
 
-- Allow message\_type support for FTP endpoint [\#212](https://github.com/fastly/go-fastly/pull/212)
+- Allow message_type support for FTP endpoint [#212](https://github.com/fastly/go-fastly/pull/212)
 
 ## [v1.16.1](https://github.com/fastly/go-fastly/releases/tag/v1.16.1) (2020-07-07)
 
@@ -810,7 +818,7 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 **Bug fixes:**
 
-- ci: add GH Action for fmt, vet, staticcheck, test [\#184](https://github.com/fastly/go-fastly/pull/184)
+- ci: add GH Action for fmt, vet, staticcheck, test [#184](https://github.com/fastly/go-fastly/pull/184)
 
 ## [v1.16.0](https://github.com/fastly/go-fastly/releases/tag/v1.16.0) (2020-06-25)
 
@@ -818,7 +826,7 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 **Enhancements:**
 
-- Add support for Compute@Edge Packages [\#203](https://github.com/fastly/go-fastly/pull/203)
+- Add support for Compute@Edge Packages [#203](https://github.com/fastly/go-fastly/pull/203)
 
 ## [v1.15.0](https://github.com/fastly/go-fastly/releases/tag/v1.15.0) (2020-06-04)
 
@@ -826,12 +834,12 @@ The change in type for [basic types](https://tour.golang.org/basics/11) that are
 
 **Enhancements:**
 
-- Add PublicKey field to S3 all CRUD actions [\#198](https://github.com/fastly/go-fastly/pull/198)
-- Add User field to Cloudfiles Updates [\#197](https://github.com/fastly/go-fastly/pull/197)
-- Remove extraneous Token field from all Kafka CRUD [\#196](https://github.com/fastly/go-fastly/pull/196)
-- Add Region field to all Scalyr CRUD actions [\#195](https://github.com/fastly/go-fastly/pull/195)
-- Add MessageType field to all SFTP CRUD actions [\#194](https://github.com/fastly/go-fastly/pull/194)
-- Add MessageType field to GCS Updates [\#193](https://github.com/fastly/go-fastly/pull/193)
+- Add PublicKey field to S3 all CRUD actions [#198](https://github.com/fastly/go-fastly/pull/198)
+- Add User field to Cloudfiles Updates [#197](https://github.com/fastly/go-fastly/pull/197)
+- Remove extraneous Token field from all Kafka CRUD [#196](https://github.com/fastly/go-fastly/pull/196)
+- Add Region field to all Scalyr CRUD actions [#195](https://github.com/fastly/go-fastly/pull/195)
+- Add MessageType field to all SFTP CRUD actions [#194](https://github.com/fastly/go-fastly/pull/194)
+- Add MessageType field to GCS Updates [#193](https://github.com/fastly/go-fastly/pull/193)
 
 # Historical Manual Changelog
 
@@ -841,19 +849,27 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [v1.14.0] (2020-05-26)
+
 ### Added
+
 - ip: Support for accessing Fastly's IPv6 ranges ([#189](https://github.com/fastly/go-fastly/pull/189)).
 
 ## [v1.13.0] (2020-05-19)
+
 ### Added
+
 - helpers: Add `NullString` helper ([#187](https://github.com/fastly/go-fastly/pull/187)).
 
 ## [v1.12.0] (2020-05-15)
+
 ### Added
+
 - waf: Support for `link` field ([#179](https://github.com/fastly/go-fastly/pull/179)).
 
 ## [v1.11.0] (2020-05-13)
+
 ### Added
+
 - test: Updates testing helper for fix fixtures to support macOS ([#177](https://github.com/fastly/go-fastly/pull/177)).
 - helpers: Add raw access to stats JSON responses ([#176](https://github.com/fastly/go-fastly/pull/176)).
 - datadog: Add Datadog logging endpoint support ([#182](https://github.com/fastly/go-fastly/pull/182)).
@@ -875,70 +891,100 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - doc: Fix typos in `GetRealtimeStats` documentation ([#160](https://github.com/fastly/go-fastly/pull/160)).
 
 ## [v1.10.0] (2020-04-24)
+
 ### Added
+
 - tls: Add support for Platform TLS API endpoints ([#154](https://github.com/fastly/go-fastly/pull/154)).
 
 ## [v1.9.0] (2020-04-23)
+
 ### Changed
+
 - splunk: Add missing TLS fields to the Splunk logging endpoint ([#156](https://github.com/fastly/go-fastly/pull/156)).
 - https: Add support for HTTPS logging endpoints ([#155](https://github.com/fastly/go-fastly/pull/155)).
 
 ## [v1.8.0] (2020-04-21)
+
 ### Changed
+
 - client: Add NewRealtimeStatsClientForEndpoint API ([#152](https://github.com/fastly/go-fastly/pull/152)).
 
 ## [v1.7.2] (2020-03-30)
+
 ### Changed
+
 - client: Allow purge requests to run in parallel ([#147](https://github.com/fastly/go-fastly/pull/147)).
 
 ## [v1.7.1] (2020-03-24)
+
 ### Changed
+
 - client: Serialize all non readable requests ([#146](https://github.com/fastly/go-fastly/pull/146)).
 
 ## [v1.7.0] (2020-02-26)
+
 ### Added
+
 - user: Support for Fastly's User Management ([#145](https://github.com/fastly/go-fastly/pull/145)).
 
 ### Changed
+
 - purge: Request method for purging an individual URL ([#116](https://github.com/fastly/go-fastly/pull/116)).
 
 ## [v1.6.0] (2020-02-18)
+
 ### Added
+
 - s3: Support for `server_side_encryption_kms_key_id` and `server_side_encryption` fields ([#144](https://github.com/fastly/go-fastly/pull/144)).
 
 ## [v1.5.0] (2020-01-29)
+
 ### Added
+
 - pool/server: Support for Fastly's Load Balancer ([#142](https://github.com/fastly/go-fastly/pull/142)).
 
 ## [v1.4.0] (2020-01-06)
+
 ### Added
+
 - dictionary_info: Support to retrieve metadata for a single dictionary ([#122](https://github.com/fastly/go-fastly/pull/122)).
 - syslog: Support for `tls_client_cert` and `tls_client_key` fields ([#139](https://github.com/fastly/go-fastly/pull/139)).
 
 ## [v1.3.0] (2019-10-02)
+
 ### Added
+
 - vcl_snippets: Support for `hash` type ([#133](https://github.com/fastly/go-fastly/pull/133)).
 - service: Support for `type` field ([#132](https://github.com/fastly/go-fastly/pull/132)).
 - token: Support for API tokens ([#131](https://github.com/fastly/go-fastly/pull/131)).
 
 ### Changed
+
 - client: Codebase dependency management from `dep` to Go modules ([#130](https://github.com/fastly/go-fastly/pull/130)).
 
 ## [v1.2.1] (2019-07-25)
+
 ### Added
+
 - acl: Constant to represent the maximum number of entries that can be placed within an ACL ([#129](https://github.com/fastly/go-fastly/pull/129)).
 - dictionary: Constant to represent the maximum number of items that can be placed within an Edge Dictionary ([#129](https://github.com/fastly/go-fastly/pull/129)).
 
 ## [v1.2.0] (2019-07-24)
+
 ### Added
+
 - acl: Support for Create, Delete and Update BatchOperations ([#126](https://github.com/fastly/go-fastly/pull/126)).
 
 ## [v1.1.0] (2019-07-22)
+
 ### Added
+
 - dictionary: Support for Create, Delete, Update and Upsert BatchOperations ([#125](https://github.com/fastly/go-fastly/pull/125)).
 
 ## [v1.0.0] (2019-06-14)
+
 ### Added
+
 - bigquery: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).
 - ftp: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).
 - gcs: Support for `format_version` field ([#97](https://github.com/fastly/go-fastly/pull/97)).
@@ -958,6 +1004,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - version: Support for `created_at`, `updated_at`, and `deleted_at` fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
 
 ### Changed
+
 - bigquery: Function signature to list all of the BigQuery logging objects ([#97](https://github.com/fastly/go-fastly/pull/97)).
 - acl: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
 - acl_entry: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
@@ -969,7 +1016,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - vcl_snippets: Data types of all timestamp fields ([#121](https://github.com/fastly/go-fastly/pull/121)).
 
 ## [v0.4.3] (2019-05-24)
+
 ### Added
+
 - waf: Support for OWASP ([74c03ce](https://github.com/fastly/go-fastly/commit/74c03cec4549738bb1fc20fd881fbd9c750f6928), [cf4b60f](https://github.com/fastly/go-fastly/commit/cf4b60fa9e61358753b9cafa4481adc5977d8432), [cee4e1d](https://github.com/fastly/go-fastly/commit/cee4e1df35a27e507ef0809991fe8ffb462a94d4)).
 - waf: Support for rules ([34f0b9f](https://github.com/fastly/go-fastly/commit/34f0b9f50526c1a4fb0a866d363dd089cd628a7c), [c1e80fc](https://github.com/fastly/go-fastly/commit/c1e80fc42a3d4c7d85ece91b682cd2db602c4df7)).
 - waf: Support for rule sets ([a3cdd36](https://github.com/fastly/go-fastly/commit/a3cdd3621d72750658d3bdb988576e3401dc50f9), [bb50c5a](https://github.com/fastly/go-fastly/commit/bb50c5a9265476ce3a4161f450f6055478b84b7e)).
@@ -995,61 +1044,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - settings: Support for `stale_if_error` and `stale_if_error_ttl` fields ([#104](https://github.com/fastly/go-fastly/pull/104)).
 
 ### Changed
+
 - dictionary: Response struct to align with API ([6a8a1c6](https://github.com/fastly/go-fastly/commit/6a8a1c62e61097da752bae838375cb139f4e9cc3)).
 - dictionary_item: Response struct to align with API ([7d31c4a](https://github.com/fastly/go-fastly/commit/7d31c4aa34ef904f4426ef8af4be915c2c373e70)).
 - user-agent: client.go and fixtures to reference fastly in the user-agent ([#109](https://github.com/fastly/go-fastly/pull/113).
 
 ### Removed
+
 - domain: `locked` field ([#86](https://github.com/fastly/go-fastly/pull/86)).
 
 ### Fixed
+
 - request: URL encoding for names ([8b3e2d6](https://github.com/fastly/go-fastly/commit/8b3e2d653b2d4a32ecbd050056370c95e9f6cbd8)).
 - condition: Request struct for updating ([1fe3fda](https://github.com/fastly/go-fastly/commit/1fe3fda765dcbc8d75d0e2e501a2c326a0b6fafb)).
 
 ## [v0.4.2] (2017-09-05)
+
 ### Added
+
 - logentries: Support for `format_version` field ([#50](https://github.com/fastly/go-fastly/pull/50)).
 - gcs: Support for `message_type` field ([#52](https://github.com/fastly/go-fastly/pull/52)).
 - waf: Support for firewall ([216f9cb](https://github.com/fastly/go-fastly/commit/216f9cb6a92bc6e3c4653b7ebc9206f78a80d69b), [c6feafe](https://github.com/fastly/go-fastly/commit/c6feafe0fc5ed2b74bef9d3105f2f20c6197b19e), [50fef06](https://github.com/fastly/go-fastly/commit/50fef061051d188edcc37749a108fc6d025e495c)).
 
 ## [v0.4.1] (2017-08-07)
+
 ### Added
+
 - syslog: Support for `hostname`, `ipv4`, `tls_hostname`, and `message_type` fields ([2b863da](https://github.com/fastly/go-fastly/commit/2b863da88fc1033a68538ccdc5c9dc82fa52681f)).
 
 ## [v0.4.0] (2017-07-27)
+
 ### Added
+
 - realtime_stats: Support for real-time analytics ([#48](https://github.com/fastly/go-fastly/pull/48)).
 
 ### Changed
+
 - acl: Names of all types, functions, and variables to follow Go standards ([#46](https://github.com/fastly/go-fastly/pull/46)).
 
 ### Fixed
+
 - condition: URL encoding for forward slashes ([3d6dabb](https://github.com/fastly/go-fastly/commit/3d6dabb37bd2df7195d28aef08b1edd98895b960)).
 
 ## [v0.3.0] (2017-07-19)
 
 - Initial tagged release
 
-[v1.14.0]: https://github.com/fastly/go-fastly/compare/v1.13.0...v1.14.0
-[v1.13.0]: https://github.com/fastly/go-fastly/compare/v1.12.0...v1.13.0
-[v1.12.0]: https://github.com/fastly/go-fastly/compare/v1.11.0...v1.12.0
-[v1.11.0]: https://github.com/fastly/go-fastly/compare/v1.10.0...v1.11.0
-[v1.10.0]: https://github.com/fastly/go-fastly/compare/v1.9.0...v1.10.0
-[v1.9.0]: https://github.com/fastly/go-fastly/compare/v1.8.0...v1.9.0
-[v1.8.0]: https://github.com/fastly/go-fastly/compare/v1.7.2...v1.8.0
-[v1.7.2]: https://github.com/fastly/go-fastly/compare/v1.7.1...v1.7.2
-[v1.7.1]: https://github.com/fastly/go-fastly/compare/v1.7.0...v1.7.1
-[v1.7.0]: https://github.com/fastly/go-fastly/compare/v1.6.0...v1.7.0
-[v1.6.0]: https://github.com/fastly/go-fastly/compare/v1.5.0...v1.6.0
-[v1.5.0]: https://github.com/fastly/go-fastly/compare/v1.4.0...v1.5.0
-[v1.4.0]: https://github.com/fastly/go-fastly/compare/v1.3.0...v1.4.0
-[v1.3.0]: https://github.com/fastly/go-fastly/compare/v1.2.1...v1.3.0
-[v1.2.1]: https://github.com/fastly/go-fastly/compare/v1.2.0...v1.2.1
-[v1.2.0]: https://github.com/fastly/go-fastly/compare/v1.1.0...v1.2.0
-[v1.1.0]: https://github.com/fastly/go-fastly/compare/v1.0.0...v1.1.0
-[v1.0.0]: https://github.com/fastly/go-fastly/compare/v0.4.3...v1.0.0
-[v0.4.3]: https://github.com/fastly/go-fastly/compare/v0.4.2...v0.4.3
-[v0.4.2]: https://github.com/fastly/go-fastly/compare/v0.4.1...v0.4.2
-[v0.4.1]: https://github.com/fastly/go-fastly/compare/v0.4.0...v0.4.1
-[v0.4.0]: https://github.com/fastly/go-fastly/compare/v0.3.0...v0.4.0
 [v0.3.0]: https://github.com/fastly/go-fastly/releases/tag/v0.3.0
+[v0.4.0]: https://github.com/fastly/go-fastly/compare/v0.3.0...v0.4.0
+[v0.4.1]: https://github.com/fastly/go-fastly/compare/v0.4.0...v0.4.1
+[v0.4.2]: https://github.com/fastly/go-fastly/compare/v0.4.1...v0.4.2
+[v0.4.3]: https://github.com/fastly/go-fastly/compare/v0.4.2...v0.4.3
+[v1.0.0]: https://github.com/fastly/go-fastly/compare/v0.4.3...v1.0.0
+[v1.1.0]: https://github.com/fastly/go-fastly/compare/v1.0.0...v1.1.0
+[v1.10.0]: https://github.com/fastly/go-fastly/compare/v1.9.0...v1.10.0
+[v1.11.0]: https://github.com/fastly/go-fastly/compare/v1.10.0...v1.11.0
+[v1.12.0]: https://github.com/fastly/go-fastly/compare/v1.11.0...v1.12.0
+[v1.13.0]: https://github.com/fastly/go-fastly/compare/v1.12.0...v1.13.0
+[v1.14.0]: https://github.com/fastly/go-fastly/compare/v1.13.0...v1.14.0
+[v1.2.0]: https://github.com/fastly/go-fastly/compare/v1.1.0...v1.2.0
+[v1.2.1]: https://github.com/fastly/go-fastly/compare/v1.2.0...v1.2.1
+[v1.3.0]: https://github.com/fastly/go-fastly/compare/v1.2.1...v1.3.0
+[v1.4.0]: https://github.com/fastly/go-fastly/compare/v1.3.0...v1.4.0
+[v1.5.0]: https://github.com/fastly/go-fastly/compare/v1.4.0...v1.5.0
+[v1.6.0]: https://github.com/fastly/go-fastly/compare/v1.5.0...v1.6.0
+[v1.7.0]: https://github.com/fastly/go-fastly/compare/v1.6.0...v1.7.0
+[v1.7.1]: https://github.com/fastly/go-fastly/compare/v1.7.0...v1.7.1
+[v1.7.2]: https://github.com/fastly/go-fastly/compare/v1.7.1...v1.7.2
+[v1.8.0]: https://github.com/fastly/go-fastly/compare/v1.7.2...v1.8.0
+[v1.9.0]: https://github.com/fastly/go-fastly/compare/v1.8.0...v1.9.0
