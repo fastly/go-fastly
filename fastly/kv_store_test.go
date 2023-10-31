@@ -50,7 +50,10 @@ func TestClient_KVStore(t *testing.T) {
 	defer func() {
 		record(t, "kv_store/cleanup", func(c *Client) {
 			// first delete all the keys in it
-			p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{ID: kvStore.ID})
+			p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{
+				Consistency: ConsistencyEventual,
+				ID:          kvStore.ID,
+			})
 			for p.Next() {
 				keys := p.Keys()
 				sort.Strings(keys)
@@ -129,7 +132,10 @@ func TestClient_KVStore(t *testing.T) {
 	// fetch all keys and validate they match our input data
 	var kvStoreListKeys *ListKVStoreKeysResponse
 	record(t, "kv_store/list-keys", func(c *Client) {
-		kvStoreListKeys, err = c.ListKVStoreKeys(&ListKVStoreKeysInput{ID: kvStore.ID})
+		kvStoreListKeys, err = c.ListKVStoreKeys(&ListKVStoreKeysInput{
+			Consistency: ConsistencyStrong,
+			ID:          kvStore.ID,
+		})
 	})
 
 	if err != nil {
@@ -142,7 +148,10 @@ func TestClient_KVStore(t *testing.T) {
 	}
 
 	record(t, "kv_store/list-keys-pagination", func(c *Client) {
-		p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{ID: kvStore.ID, Limit: 4})
+		p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{
+			ID:    kvStore.ID,
+			Limit: 4,
+		})
 		var listed []string
 		expected := []int{4, 3}
 		var page int
