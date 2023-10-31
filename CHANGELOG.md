@@ -1,5 +1,17 @@
 # Changelog
 
+## [v8.6.3](https://github.com/fastly/go-fastly/releases/tag/v8.6.3) (2023-10-31)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.2...v8.6.3)
+
+**Enhancements:**
+
+- feat(client): expose DebugMode field [#477](https://github.com/fastly/go-fastly/pull/477)
+
+**Documentation:**
+
+- docs: support for Compute [#476](https://github.com/fastly/go-fastly/pull/476)
+
 ## [v8.6.2](https://github.com/fastly/go-fastly/releases/tag/v8.6.2) (2023-09-28)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.1...v8.6.2)
