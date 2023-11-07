@@ -1,5 +1,14 @@
 # Changelog
 
+## [v8.7.0](https://github.com/fastly/go-fastly/releases/tag/v8.7.0) (2023-11-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.4...v8.7.0)
+
+**Enhancements:**
+
+- feat(config stores): add `name` param for ListConfigStores` param [481](https://github.com/fastly/go-fastly/pull/481)
+
+
 ## [v8.6.4](https://github.com/fastly/go-fastly/releases/tag/v8.6.4) (2023-10-31)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.3...v8.6.4)
