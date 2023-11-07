@@ -149,15 +149,28 @@ func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*Config
 	return csm, nil
 }
 
+// ListConfigStoreServicesInput is the input to ListConfigStoreServices.
+type ListConfigStoresInput struct {
+	// Name is the name of a config store (optional).
+	Name string
+}
+
 // ListConfigStores returns a list of config stores sorted by name.
-func (c *Client) ListConfigStores() ([]*ConfigStore, error) {
+func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, error) {
 	path := "/resources/stores/config"
-	resp, err := c.Get(path, &RequestOptions{
+
+	requestOptions := &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
 		},
 		Parallel: true,
-	})
+	}
+
+	if i.Name != "" {
+		requestOptions.Params = map[string]string{"name": i.Name}
+	}
+
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

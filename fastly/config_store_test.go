@@ -223,7 +223,7 @@ func TestClient_ListConfigStores(t *testing.T) {
 
 	// Verify list works when there are no stores.
 	record(t, fmt.Sprintf("config_store/%s/empty", t.Name()), func(c *Client) {
-		css, err = c.ListConfigStores()
+		css, err = c.ListConfigStores(&ListConfigStoresInput{})
 	})
 	if err != nil {
 		t.Fatalf("ListConfigStores: unexpected error: %v", err)
@@ -245,6 +245,7 @@ func TestClient_ListConfigStores(t *testing.T) {
 			if err != nil {
 				t.Fatalf("error creating config store: %v", err)
 			}
+			t.Log(cs)
 			stores = append(stores, cs)
 		}
 	})
@@ -263,7 +264,7 @@ func TestClient_ListConfigStores(t *testing.T) {
 	})
 
 	record(t, fmt.Sprintf("config_store/%s/list", t.Name()), func(c *Client) {
-		css, err = c.ListConfigStores()
+		css, err = c.ListConfigStores(&ListConfigStoresInput{})
 	})
 
 	if got, want := len(css), len(stores); got != want {
@@ -275,6 +276,19 @@ func TestClient_ListConfigStores(t *testing.T) {
 			t.Errorf("ListConfigStores: index %d: ID: got %q, want %q", i, got, want)
 		}
 	}
+
+	record(t, fmt.Sprintf("config_store/%s/list-with-name", t.Name()), func(c *Client) {
+		css, err = c.ListConfigStores(&ListConfigStoresInput{Name: stores[0].Name})
+	})
+
+	if got, want := len(css), 1; got != want {
+		t.Fatalf("ListConfigStores: got %d entries, want %d", got, want)
+	}
+
+	if got, want := css[0].ID, stores[0].ID; got != want {
+		t.Errorf("ListConfigStores: index %d: ID: got %q, want %q", 0, got, want)
+	}
+
 }
 
 func TestClient_ListConfigStoreServices(t *testing.T) {
