@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/metrics/domains/services/7i6HN3TK9wS159v2gPAZ8A?cursor=&datacenter=SJC%2CSTP&domain=domain_1.com%2Cdomain_2.com&downsample=hour&end=1699315200&metric=resp_body_bytes%2Cstatus_2xx&region=usa&start=1699286400
+    url: https://api.fastly.com/metrics/domains/services/7i6HN3TK9wS159v2gPAZ8A?cursor=&datacenter=SJC%2CSTP&domain=domain_1.com%2Cdomain_2.com&downsample=hour&end=1699315200&group_by=domain&limit=10&metric=resp_body_bytes%2Cstatus_2xx&region=usa&start=1699286400
     method: GET
   response:
     body: |
-      {"data":[{"dimensions":{"domain":"domain_1.com"},"values":[{"resp_body_bytes":3441795,"status_2xx":20,"timestamp":1699286400},{"resp_body_bytes":3756657,"status_2xx":16,"timestamp":1699290000},{"resp_body_bytes":3531110,"status_2xx":13,"timestamp":1699293600},{"resp_body_bytes":3476768,"status_2xx":9,"timestamp":1699297200},{"resp_body_bytes":4810115,"status_2xx":16,"timestamp":1699300800},{"resp_body_bytes":5384860,"status_2xx":21,"timestamp":1699304400},{"resp_body_bytes":4037251,"status_2xx":11,"timestamp":1699308000},{"resp_body_bytes":7816494,"status_2xx":20,"timestamp":1699311600}]},{"dimensions":{"domain":"domain_2.com"},"values":[{"resp_body_bytes":13653987068,"status_2xx":516069,"timestamp":1699286400},{"resp_body_bytes":13565871035,"status_2xx":625752,"timestamp":1699290000},{"resp_body_bytes":13932434066,"status_2xx":522300,"timestamp":1699293600},{"resp_body_bytes":15202809344,"status_2xx":532950,"timestamp":1699297200},{"resp_body_bytes":16112253051,"status_2xx":517396,"timestamp":1699300800},{"resp_body_bytes":14427752268,"status_2xx":503554,"timestamp":1699304400},{"resp_body_bytes":13491682169,"status_2xx":488470,"timestamp":1699308000},{"resp_body_bytes":13376860809,"status_2xx":485002,"timestamp":1699311600}]}],"meta":{"start":"2023-11-06T16:00:00Z","end":"2023-11-07T00:00:00Z","downsample":"hour","metric":"resp_body_bytes,status_2xx","limit":100,"next_cursor":"","sort":"domain","group_by":"domain","filters":{"datacenters":"SJC,STP","domains":"domain_1.com,domain_2.com","regions":"usa"}},"status":"success"}
+      {"data":[{"dimensions":{"domain":"domain_1.com"},"values":[{"resp_body_bytes":3441795,"status_2xx":20,"timestamp":1699286400},{"resp_body_bytes":3756657,"status_2xx":16,"timestamp":1699290000},{"resp_body_bytes":3531110,"status_2xx":13,"timestamp":1699293600},{"resp_body_bytes":3476768,"status_2xx":9,"timestamp":1699297200},{"resp_body_bytes":4810115,"status_2xx":16,"timestamp":1699300800},{"resp_body_bytes":5384860,"status_2xx":21,"timestamp":1699304400},{"resp_body_bytes":4037251,"status_2xx":11,"timestamp":1699308000},{"resp_body_bytes":7816494,"status_2xx":20,"timestamp":1699311600}]},{"dimensions":{"domain":"domain_2.com"},"values":[{"resp_body_bytes":13653987068,"status_2xx":516069,"timestamp":1699286400},{"resp_body_bytes":13565871035,"status_2xx":625752,"timestamp":1699290000},{"resp_body_bytes":13932434066,"status_2xx":522300,"timestamp":1699293600},{"resp_body_bytes":15202809344,"status_2xx":532950,"timestamp":1699297200},{"resp_body_bytes":16112253051,"status_2xx":517396,"timestamp":1699300800},{"resp_body_bytes":14427752268,"status_2xx":503554,"timestamp":1699304400},{"resp_body_bytes":13491682169,"status_2xx":488470,"timestamp":1699308000},{"resp_body_bytes":13376860809,"status_2xx":485002,"timestamp":1699311600}]}],"meta":{"start":"2023-11-06T16:00:00Z","end":"2023-11-07T00:00:00Z","downsample":"hour","metric":"resp_body_bytes,status_2xx","limit":10,"next_cursor":"","sort":"domain","group_by":"domain","filters":{"datacenters":"SJC,STP","domains":"domain_1.com,domain_2.com","regions":"usa"}},"status":"success"}
     headers:
       Accept-Ranges:
       - bytes
@@ -20,11 +20,11 @@ interactions:
       Cache-Control:
       - no-store
       Content-Length:
-      - "1561"
+      - "1560"
       Content-Type:
       - application/json
       Date:
-      - Tue, 07 Nov 2023 23:20:14 GMT
+      - Thu, 09 Nov 2023 18:43:34 GMT
       Pragma:
       - no-cache
       Status:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-pao-kpao1770049-PAO
+      - cache-control-cp-aws-us-east-2-prod-3-CONTROL-AWS-UE2, cache-pao-kpao1770036-PAO
       X-Timer:
-      - S1699399214.860266,VS0,VE398
+      - S1699555414.205291,VS0,VE135
     status: 200 OK
     code: 200
     duration: ""

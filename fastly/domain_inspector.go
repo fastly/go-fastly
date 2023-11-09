@@ -159,16 +159,22 @@ func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst an
 	if !i.End.IsZero() {
 		end = strconv.FormatInt(i.End.Unix(), 10)
 	}
+	limit := ""
+	if i.Limit > 0 {
+		limit = strconv.Itoa(i.Limit)
+	}
 
 	r, err := c.Get(p, &RequestOptions{
 		Params: map[string]string{
 			"start":      start,
 			"end":        end,
 			"downsample": i.Downsample,
+			"group_by":   strings.Join(i.GroupBy, ","),
 			"metric":     strings.Join(i.Metrics, ","),
 			"domain":     strings.Join(i.Domains, ","),
 			"datacenter": strings.Join(i.Datacenters, ","),
 			"region":     strings.Join(i.Regions, ","),
+			"limit":      limit,
 			"cursor":     i.Cursor,
 		},
 	})

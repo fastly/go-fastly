@@ -25,6 +25,7 @@ func TestClient_GetDomainMetricsForService(t *testing.T) {
 			GroupBy:     []string{"domain"},
 			Downsample:  "hour",
 			Regions:     []string{"usa"},
+			Limit:       10,
 			Cursor:      "",
 		})
 	})
