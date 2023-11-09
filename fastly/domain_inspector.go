@@ -90,7 +90,7 @@ type DomainMetrics struct {
 	Timestamp                  uint64  `mapstructure:"timestamp"`
 }
 
-// DomainMeta is the meta section returned for /metrics/domain responses
+// DomainMeta is the meta section returned for /metrics/domains/... responses
 type DomainMeta struct {
 	Downsample string            `mapstructure:"downsample"`
 	End        string            `mapstructure:"end"`
@@ -131,7 +131,7 @@ type GetDomainMetricsInput struct {
 
 // GetDomainMetricsForService retrieves the specified resource.
 func (c *Client) GetDomainMetricsForService(i *GetDomainMetricsInput) (*DomainInspector, error) {
-	var resp interface{}
+	var resp any
 	if err := c.GetDomainMetricsForServiceJSON(i, &resp); err != nil {
 		return nil, err
 	}
@@ -144,7 +144,7 @@ func (c *Client) GetDomainMetricsForService(i *GetDomainMetricsInput) (*DomainIn
 }
 
 // GetDomainMetricsForServiceJSON retrieves the specified resource.
-func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst interface{}) error {
+func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst any) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
