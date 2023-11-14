@@ -36,3 +36,9 @@ func NullString(v string) *string {
 	}
 	return &v
 }
+
+// CBool is a helper that returns a pointer to a Compatibool with the value passed in.
+func CBool(b bool) *Compatibool {
+	c := Compatibool(b)
+	return &c
+}

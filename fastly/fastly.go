@@ -48,12 +48,6 @@ var (
 	_ encoding.TextUnmarshaler = new(Compatibool)
 )
 
-// CBool is a helper function to get a pointer to a bool.
-func CBool(b bool) *Compatibool {
-	c := Compatibool(b)
-	return &c
-}
-
 // Compatibool is a boolean value that marshalls to 0/1 instead of true/false
 // for compatibility with Fastly's API.
 type Compatibool bool
