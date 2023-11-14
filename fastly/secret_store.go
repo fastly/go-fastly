@@ -92,6 +92,8 @@ type ListSecretStoresInput struct {
 	Cursor string
 	// Limit is the desired number of Secret Stores (optional).
 	Limit int
+	// Name is the name of the secret store (optional).
+	Name string
 }
 
 // ListSecretStores retrieves all resources.
@@ -107,6 +109,9 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 	}
 	if i.Cursor != "" {
 		params["cursor"] = i.Cursor
+	}
+	if i.Name != "" {
+		params["name"] = i.Name
 	}
 
 	resp, err := c.Get(p, &RequestOptions{
