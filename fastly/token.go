@@ -54,8 +54,13 @@ func (s tokensByName) Less(i, j int) bool {
 	return s[i].Name < s[j].Name
 }
 
+// ListTokensInput is used as input to the ListTokens function.
+type ListTokensInput struct {
+	// For backward compatibility.
+}
+
 // ListTokens retrieves all resources.
-func (c *Client) ListTokens() ([]*Token, error) {
+func (c *Client) ListTokens(i *ListTokensInput) ([]*Token, error) {
 	resp, err := c.Get("/tokens", nil)
 	if err != nil {
 		return nil, err

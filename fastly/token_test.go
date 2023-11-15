@@ -8,7 +8,7 @@ func TestClient_ListTokens(t *testing.T) {
 	var tokens []*Token
 	var err error
 	record(t, "tokens/list", func(c *Client) {
-		tokens, err = c.ListTokens()
+		tokens, err = c.ListTokens(&ListTokensInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
