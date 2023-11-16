@@ -8,6 +8,9 @@ import (
 )
 
 const (
+	// RequestSettingActionUnset unsets the action.
+	RequestSettingActionUnset RequestSettingAction = ""
+
 	// RequestSettingActionLookup sets request handling to lookup via the cache.
 	RequestSettingActionLookup RequestSettingAction = "lookup"
 
@@ -207,7 +210,7 @@ func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, 
 // function.
 type UpdateRequestSettingInput struct {
 	// Action allows you to terminate request handling and immediately perform an action.
-	Action RequestSettingAction `url:"action,omitempty"`
+	Action *RequestSettingAction `url:"action,omitempty"`
 	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
 	BypassBusyWait *Compatibool `url:"bypass_busy_wait,omitempty"`
 	// DefaultHost sets the host header.
