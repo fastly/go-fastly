@@ -262,7 +262,7 @@ func TestResourceJSONRoundtrip(t *testing.T) {
 		ResourceID:     "the-resource-id",
 		ResourceType:   "the-resource-type",
 		ServiceID:      "the-service-id",
-		ServiceVersion: "the-service-version",
+		ServiceVersion: 1,
 		UpdatedAt:      &now,
 	}
 

@@ -26,7 +26,7 @@ type Resource struct {
 	// ServiceID is an alphanumeric string identifying the service.
 	ServiceID string `mapstructure:"service_id" json:"service_id"`
 	// ServiceVersion is an integer identifying a service version.
-	ServiceVersion string `mapstructure:"version" json:"version"`
+	ServiceVersion int `mapstructure:"version" json:"version"`
 	// UpdatedAt is the date and time in ISO 8601 format.
 	UpdatedAt *time.Time `mapstructure:"updated_at" json:"updated_at"`
 }
