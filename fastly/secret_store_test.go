@@ -91,6 +91,22 @@ func TestClient_ListSecretStores(t *testing.T) {
 	if got, want := list.Meta.NextCursor, ""; got != want {
 		t.Errorf("Meta.NextCursor: got %q, want %q", got, want)
 	}
+
+	record(t, fmt.Sprintf("secret_store/%s/list-with-name", t.Name()), func(c *Client) {
+		list, err = c.ListSecretStores(&ListSecretStoresInput{Name: stores[0].Name})
+	})
+
+	if err != nil {
+		t.Fatalf("error listing secret store by name: %v", err)
+	}
+
+	if got, want := len(list.Data), 1; got != want {
+		t.Fatalf("Data: got length %d, want %d", got, want)
+	}
+
+	if got, want := list.Data[0].ID, stores[0].ID; got != want {
+		t.Errorf("Data[0].ID: got %q, want %q", got, want)
+	}
 }
 
 func TestClient_GetSecretStore(t *testing.T) {

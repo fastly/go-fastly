@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.21.4)
+    url: https://api.fastly.com/resources/stores/secret?name=TestClient_ListSecretStores-02
+    method: GET
+  response:
+    body: |
+      {
+        "data": [
+          {
+            "id": "6a1U7edUQlMux6qO6KFjlU",
+            "name": "TestClient_ListSecretStores-02",
+            "created_at": "2023-11-16T00:12:10Z"
+          }
+        ],
+        "meta": {
+          "limit": 10
+        }
+      }
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "194"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 16 Nov 2023 00:12:11 GMT
+      Fastly-Trace-Id:
+      - NkIYI16LRKxBhIfUHaWujy
+    status: 200 OK
+    code: 200
+    duration: ""
