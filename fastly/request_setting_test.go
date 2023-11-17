@@ -156,6 +156,7 @@ func TestClient_RequestSettings(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           "test-request-setting",
 			NewName:        ToPointer("new-test-request-setting"),
+			Action:         ToPointer(RequestSettingActionPass),
 		})
 	})
 	if err != nil {
@@ -163,6 +164,43 @@ func TestClient_RequestSettings(t *testing.T) {
 	}
 	if urs.Name != "new-test-request-setting" {
 		t.Errorf("bad name: %q", urs.Name)
+	}
+	if urs.Action != RequestSettingActionPass {
+		t.Errorf("bad action: %q", urs.Action)
+	}
+
+	// Update 2 (wrap empty string with RequestSettingAction)
+	var urs2 *RequestSetting
+	record(t, "request_settings/update-2", func(c *Client) {
+		urs2, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-request-setting",
+			Action:         ToPointer(RequestSettingAction("")),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if urs2.Action != "" {
+		t.Errorf("bad action: %q", urs2.Action)
+	}
+
+	// Update 3 (use explicit RequestSettingActionUnset type)
+	var urs3 *RequestSetting
+	record(t, "request_settings/update-3", func(c *Client) {
+		urs3, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: tv.Number,
+			Name:           "new-test-request-setting",
+			Action:         ToPointer(RequestSettingActionUnset),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if urs3.Action != RequestSettingActionUnset {
+		t.Errorf("bad action: %q", urs3.Action)
 	}
 
 	// Delete
