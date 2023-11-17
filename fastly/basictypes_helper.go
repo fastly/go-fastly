@@ -1,7 +1,7 @@
 package fastly
 
 // ToPointer converts T to *T.
-func ToPointer[T string | int | uint | uint8 | bool | CacheSettingAction | Compatibool | ERLAction | ERLLogger | ERLWindowSize | RequestSettingAction | RequestSettingXFF | S3AccessControlList | S3Redundancy | S3ServerSideEncryption](v T) *T {
+func ToPointer[T ~string | ~int | uint | uint8 | ~bool](v T) *T {
 	return &v
 }
 
