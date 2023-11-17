@@ -37,8 +37,8 @@ func TestClient_Settings(t *testing.T) {
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
 			DefaultTTL:      1800,
-			StaleIfError:    Bool(true),
-			StaleIfErrorTTL: Uint(57600),
+			StaleIfError:    ToPointer(true),
+			StaleIfErrorTTL: ToPointer(uint(57600)),
 		})
 	})
 	if err != nil {

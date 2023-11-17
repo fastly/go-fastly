@@ -19,11 +19,11 @@ func TestClient_ResponseObjects(t *testing.T) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-response-object"),
-			Status:         Int(200),
-			Response:       String("Ok"),
-			Content:        String("abcd"),
-			ContentType:    String("text/plain"),
+			Name:           ToPointer("test-response-object"),
+			Status:         ToPointer(200),
+			Response:       ToPointer("Ok"),
+			Content:        ToPointer("abcd"),
+			ContentType:    ToPointer("text/plain"),
 		})
 	})
 	if err != nil {
@@ -113,7 +113,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-response-object",
-			NewName:        String("new-test-response-object"),
+			NewName:        ToPointer("new-test-response-object"),
 		})
 	})
 	if err != nil {

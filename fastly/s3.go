@@ -10,26 +10,11 @@ import (
 // S3Redundancy represents the redundancy variants for S3.
 type S3Redundancy string
 
-// S3RedundancyPtr returns a pointer to a S3Redundancy.
-func S3RedundancyPtr(v S3Redundancy) *S3Redundancy {
-	return &v
-}
-
 // S3ServerSideEncryption represents the encryption variants for S3.
 type S3ServerSideEncryption string
 
-// S3ServerSideEncryptionPtr returns a pointer to a S3ServerSideEncryption.
-func S3ServerSideEncryptionPtr(v S3ServerSideEncryption) *S3ServerSideEncryption {
-	return &v
-}
-
 // S3AccessControlList represents the control list variants for S3.
 type S3AccessControlList string
-
-// S3AccessControlListPtr returns a pointer to a S3AccessControlList.
-func S3AccessControlListPtr(v S3AccessControlList) *S3AccessControlList {
-	return &v
-}
 
 const (
 	// S3RedundancyStandard represents a redundancy variant.

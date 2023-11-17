@@ -19,15 +19,15 @@ func TestClient_Headers(t *testing.T) {
 		h, err = c.CreateHeader(&CreateHeaderInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-header"),
+			Name:           ToPointer("test-header"),
 			Action:         HeaderActionPtr(HeaderActionSet),
-			IgnoreIfSet:    CBool(false),
+			IgnoreIfSet:    ToPointer(Compatibool(false)),
 			Type:           HeaderTypePtr(HeaderTypeRequest),
-			Destination:    String("http.foo"),
-			Source:         String("client.ip"),
-			Regex:          String("foobar"),
-			Substitution:   String("123"),
-			Priority:       Int(50),
+			Destination:    ToPointer("http.foo"),
+			Source:         ToPointer("client.ip"),
+			Regex:          ToPointer("foobar"),
+			Substitution:   ToPointer("123"),
+			Priority:       ToPointer(50),
 		})
 	})
 	if err != nil {
@@ -141,7 +141,7 @@ func TestClient_Headers(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-header",
-			NewName:        String("new-test-header"),
+			NewName:        ToPointer("new-test-header"),
 			Action:         HeaderActionPtr(HeaderActionAppend),
 			Type:           HeaderTypePtr(HeaderTypeFetch),
 		})

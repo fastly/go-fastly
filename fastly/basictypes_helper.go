@@ -1,27 +1,7 @@
 package fastly
 
-// String is a helper that returns a pointer to the string value passed in.
-func String(v string) *string {
-	return &v
-}
-
-// Int is a helper that returns a pointer to the int value passed in.
-func Int(v int) *int {
-	return &v
-}
-
-// Uint is a helper that returns a pointer to the uint value passed in.
-func Uint(v uint) *uint {
-	return &v
-}
-
-// Uint8 is a helper that returns a pointer to the uint8 value passed in.
-func Uint8(v uint8) *uint8 {
-	return &v
-}
-
-// Bool is a helper that returns a pointer to the bool value passed in.
-func Bool(v bool) *bool {
+// ToPointer converts T to *T.
+func ToPointer[T string | int | uint | uint8 | bool | CacheSettingAction | Compatibool | ERLAction | ERLLogger | ERLWindowSize | RequestSettingAction | RequestSettingXFF | S3AccessControlList | S3Redundancy | S3ServerSideEncryption](v T) *T {
 	return &v
 }
 
@@ -35,10 +15,4 @@ func NullString(v string) *string {
 		return nil
 	}
 	return &v
-}
-
-// CBool is a helper that returns a pointer to a Compatibool with the value passed in.
-func CBool(b bool) *Compatibool {
-	c := Compatibool(b)
-	return &c
 }

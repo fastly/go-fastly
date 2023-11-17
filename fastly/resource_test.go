@@ -47,8 +47,8 @@ func TestClient_Resources(t *testing.T) {
 		r, err = c.CreateResource(&CreateResourceInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String(kvStoreNameForServiceLinking),
-			ResourceID:     String(o.ID),
+			Name:           ToPointer(kvStoreNameForServiceLinking),
+			ResourceID:     ToPointer(o.ID),
 		})
 	})
 	if err != nil {
@@ -108,7 +108,7 @@ func TestClient_Resources(t *testing.T) {
 			ID:             r.ID,
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("new-kv-store-alias-for-my-service"),
+			Name:           ToPointer("new-kv-store-alias-for-my-service"),
 		})
 	})
 	if err != nil {

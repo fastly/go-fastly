@@ -19,17 +19,17 @@ func TestClient_RequestSettings(t *testing.T) {
 		rs, err = c.CreateRequestSetting(&CreateRequestSettingInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-request-setting"),
-			ForceMiss:      CBool(true),
-			ForceSSL:       CBool(true),
-			Action:         RequestSettingActionPtr(RequestSettingActionLookup),
-			BypassBusyWait: CBool(true),
-			MaxStaleAge:    Int(30),
-			HashKeys:       String("a,b,c"),
-			XForwardedFor:  RequestSettingXFFPtr(RequestSettingXFFLeave),
-			TimerSupport:   CBool(true),
-			GeoHeaders:     CBool(true),
-			DefaultHost:    String("example.com"),
+			Name:           ToPointer("test-request-setting"),
+			ForceMiss:      ToPointer(Compatibool(true)),
+			ForceSSL:       ToPointer(Compatibool(true)),
+			Action:         ToPointer(RequestSettingActionLookup),
+			BypassBusyWait: ToPointer(Compatibool(true)),
+			MaxStaleAge:    ToPointer(30),
+			HashKeys:       ToPointer("a,b,c"),
+			XForwardedFor:  ToPointer(RequestSettingXFFLeave),
+			TimerSupport:   ToPointer(Compatibool(true)),
+			GeoHeaders:     ToPointer(Compatibool(true)),
+			DefaultHost:    ToPointer("example.com"),
 		})
 	})
 	if err != nil {
@@ -155,7 +155,7 @@ func TestClient_RequestSettings(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-request-setting",
-			NewName:        String("new-test-request-setting"),
+			NewName:        ToPointer("new-test-request-setting"),
 		})
 	})
 	if err != nil {

@@ -19,21 +19,21 @@ func TestClient_HealthChecks(t *testing.T) {
 		hc, err = c.CreateHealthCheck(&CreateHealthCheckInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-healthcheck"),
-			Method:         String("HEAD"),
+			Name:           ToPointer("test-healthcheck"),
+			Method:         ToPointer("HEAD"),
 			Headers: &[]string{
 				"Foo: Bar",
 				"Baz: Qux",
 			},
-			Host:             String("example.com"),
-			Path:             String("/foo"),
-			HTTPVersion:      String("1.1"),
-			Timeout:          Int(1500),
-			CheckInterval:    Int(2500),
-			ExpectedResponse: Int(200),
-			Window:           Int(5000),
-			Threshold:        Int(10),
-			Initial:          Int(10),
+			Host:             ToPointer("example.com"),
+			Path:             ToPointer("/foo"),
+			HTTPVersion:      ToPointer("1.1"),
+			Timeout:          ToPointer(1500),
+			CheckInterval:    ToPointer(2500),
+			ExpectedResponse: ToPointer(200),
+			Window:           ToPointer(5000),
+			Threshold:        ToPointer(10),
+			Initial:          ToPointer(10),
 		})
 	})
 	if err != nil {
@@ -168,7 +168,7 @@ func TestClient_HealthChecks(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-healthcheck",
-			NewName:        String("new-test-healthcheck"),
+			NewName:        ToPointer("new-test-healthcheck"),
 			Headers:        &[]string{"Beep: Boop"},
 		})
 	})

@@ -17,7 +17,7 @@ func TestClient_HTTP3(t *testing.T) {
 	var h *HTTP3
 	record(t, "http3/enable", func(c *Client) {
 		h, err = c.EnableHTTP3(&EnableHTTP3Input{
-			FeatureRevision: Int(1),
+			FeatureRevision: ToPointer(1),
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
 		})

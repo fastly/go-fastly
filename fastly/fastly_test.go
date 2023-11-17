@@ -125,9 +125,9 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 
 	record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
-			Name:    String(fmt.Sprintf("test_service_%s", serviceNameSuffix)),
-			Comment: String("go-fastly client test"),
-			Type:    String(ServiceTypeVCL),
+			Name:    ToPointer(fmt.Sprintf("test_service_%s", serviceNameSuffix)),
+			Comment: ToPointer("go-fastly client test"),
+			Type:    ToPointer(ServiceTypeVCL),
 		})
 	})
 	if err != nil {
@@ -143,9 +143,9 @@ func createTestServiceWasm(t *testing.T, serviceFixture string, serviceNameSuffi
 
 	record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
-			Name:    String(fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix)),
-			Comment: String("go-fastly wasm client test"),
-			Type:    String(ServiceTypeWasm),
+			Name:    ToPointer(fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix)),
+			Comment: ToPointer("go-fastly wasm client test"),
+			Type:    ToPointer(ServiceTypeWasm),
 		})
 	})
 	if err != nil {
@@ -196,7 +196,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture string, serviceID stri
 		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           String(fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix)),
+			Name:           ToPointer(fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix)),
 		})
 	})
 	if err != nil {
@@ -228,7 +228,7 @@ func createTestACL(t *testing.T, createFixture string, serviceID string, version
 		acl, err = client.CreateACL(&CreateACLInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           String(fmt.Sprintf("test_acl_%s", aclNameSuffix)),
+			Name:           ToPointer(fmt.Sprintf("test_acl_%s", aclNameSuffix)),
 		})
 	})
 	if err != nil {
@@ -260,7 +260,7 @@ func createTestPool(t *testing.T, createFixture string, serviceID string, versio
 		pool, err = client.CreatePool(&CreatePoolInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
-			Name:           String(fmt.Sprintf("test_pool_%s", poolNameSuffix)),
+			Name:           ToPointer(fmt.Sprintf("test_pool_%s", poolNameSuffix)),
 		})
 	})
 	if err != nil {
@@ -277,14 +277,14 @@ func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber in
 		log, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
-			Name:           String("test-syslog"),
-			Address:        String("example.com"),
-			Hostname:       String("example.com"),
-			Port:           Int(1234),
-			Token:          String("abcd1234"),
-			Format:         String("format"),
-			FormatVersion:  Int(2),
-			MessageType:    String("classic"),
+			Name:           ToPointer("test-syslog"),
+			Address:        ToPointer("example.com"),
+			Hostname:       ToPointer("example.com"),
+			Port:           ToPointer(1234),
+			Token:          ToPointer("abcd1234"),
+			Format:         ToPointer("format"),
+			FormatVersion:  ToPointer(2),
+			MessageType:    ToPointer("classic"),
 		})
 	})
 	if err != nil {
@@ -332,10 +332,10 @@ func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 		condition, err = c.CreateCondition(&CreateConditionInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
-			Name:           String(name),
-			Statement:      String("req.url~+\"index.html\""),
-			Type:           String("PREFETCH"), // This must be a prefetch condition
-			Priority:       Int(1),
+			Name:           ToPointer(name),
+			Statement:      ToPointer("req.url~+\"index.html\""),
+			Type:           ToPointer("PREFETCH"), // This must be a prefetch condition
+			Priority:       ToPointer(1),
 		})
 	})
 	if err != nil {
@@ -367,8 +367,8 @@ func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, 
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
-			Name:           String(name),
-			Status:         Int(403),
+			Name:           ToPointer(name),
+			Status:         ToPointer(403),
 		})
 	})
 	if err != nil {

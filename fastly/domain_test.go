@@ -26,8 +26,8 @@ func TestClient_Domains(t *testing.T) {
 		d, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String(domain1),
-			Comment:        String("comment"),
+			Name:           ToPointer(domain1),
+			Comment:        ToPointer("comment"),
 		})
 	})
 	if err != nil {
@@ -39,8 +39,8 @@ func TestClient_Domains(t *testing.T) {
 		d2, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String(domain2),
-			Comment:        String("comment"),
+			Name:           ToPointer(domain2),
+			Comment:        ToPointer("comment"),
 		})
 	})
 	if err != nil {
@@ -115,7 +115,7 @@ func TestClient_Domains(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           domain1,
-			NewName:        String(domain3),
+			NewName:        ToPointer(domain3),
 		})
 	})
 	if err != nil {

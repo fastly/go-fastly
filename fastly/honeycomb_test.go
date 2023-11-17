@@ -19,12 +19,12 @@ func TestClient_Honeycombs(t *testing.T) {
 		h, err = c.CreateHoneycomb(&CreateHoneycombInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-honeycomb"),
-			Format:         String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  Int(2),
-			Placement:      String("waf_debug"),
-			Token:          String("super-secure-token"),
-			Dataset:        String("testDataset"),
+			Name:           ToPointer("test-honeycomb"),
+			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  ToPointer(2),
+			Placement:      ToPointer("waf_debug"),
+			Token:          ToPointer("super-secure-token"),
+			Dataset:        ToPointer("testDataset"),
 		})
 	})
 	if err != nil {
@@ -120,9 +120,9 @@ func TestClient_Honeycombs(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-honeycomb",
-			NewName:        String("new-test-honeycomb"),
-			Token:          String("new-token"),
-			Dataset:        String("newDataset"),
+			NewName:        ToPointer("new-test-honeycomb"),
+			Token:          ToPointer("new-token"),
+			Dataset:        ToPointer("newDataset"),
 		})
 	})
 	if err != nil {

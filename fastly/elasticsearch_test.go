@@ -40,21 +40,21 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		es, err = c.CreateElasticsearch(&CreateElasticsearchInput{
 			ServiceID:         testServiceID,
 			ServiceVersion:    tv.Number,
-			Name:              String("test-elasticsearch"),
-			Format:            String("format"),
-			Index:             String("#{%F}"),
-			URL:               String("https://example.com/"),
-			Pipeline:          String("my_pipeline_id"),
-			User:              String("user"),
-			Password:          String("password"),
-			RequestMaxEntries: Int(1),
-			RequestMaxBytes:   Int(1000),
-			Placement:         String("waf_debug"),
-			TLSCACert:         String(caCert),
-			TLSClientCert:     String(clientCert),
-			TLSClientKey:      String(clientKey),
-			TLSHostname:       String("example.com"),
-			FormatVersion:     Int(2),
+			Name:              ToPointer("test-elasticsearch"),
+			Format:            ToPointer("format"),
+			Index:             ToPointer("#{%F}"),
+			URL:               ToPointer("https://example.com/"),
+			Pipeline:          ToPointer("my_pipeline_id"),
+			User:              ToPointer("user"),
+			Password:          ToPointer("password"),
+			RequestMaxEntries: ToPointer(1),
+			RequestMaxBytes:   ToPointer(1000),
+			Placement:         ToPointer("waf_debug"),
+			TLSCACert:         ToPointer(caCert),
+			TLSClientCert:     ToPointer(clientCert),
+			TLSClientKey:      ToPointer(clientKey),
+			TLSHostname:       ToPointer("example.com"),
+			FormatVersion:     ToPointer(2),
 		})
 	})
 	if err != nil {
@@ -205,8 +205,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-elasticsearch",
-			NewName:        String("new-test-elasticsearch"),
-			Pipeline:       String("my_new_pipeline_id"),
+			NewName:        ToPointer("new-test-elasticsearch"),
+			Pipeline:       ToPointer("my_new_pipeline_id"),
 		})
 	})
 	if err != nil {

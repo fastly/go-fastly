@@ -24,20 +24,20 @@ func TestClient_Directors(t *testing.T) {
 		b, errBackend = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-backend"),
-			Address:        String("integ-test.go-fastly.com"),
-			Port:           Int(1234),
-			ConnectTimeout: Int(1500),
-			OverrideHost:   String("origin.example.com"),
-			SSLCiphers:     String("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			Name:           ToPointer("test-backend"),
+			Address:        ToPointer("integ-test.go-fastly.com"),
+			Port:           ToPointer(1234),
+			ConnectTimeout: ToPointer(1500),
+			OverrideHost:   ToPointer("origin.example.com"),
+			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
 		})
 		d, errDirector = c.CreateDirector(&CreateDirectorInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-director"),
-			Quorum:         Int(50),
+			Name:           ToPointer("test-director"),
+			Quorum:         ToPointer(50),
 			Type:           DirectorTypePtr(DirectorTypeRandom),
-			Retries:        Int(5),
+			Retries:        ToPointer(5),
 		})
 		_, errDirectorBackend = c.CreateDirectorBackend(&CreateDirectorBackendInput{
 			ServiceID:      testServiceID,
@@ -152,8 +152,8 @@ func TestClient_Directors(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-director",
-			NewName:        String("new-test-director"),
-			Quorum:         Int(100),
+			NewName:        ToPointer("new-test-director"),
+			Quorum:         ToPointer(100),
 		})
 	})
 	if err != nil {

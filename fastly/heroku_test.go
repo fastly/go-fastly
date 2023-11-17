@@ -19,12 +19,12 @@ func TestClient_Herokus(t *testing.T) {
 		h, err = c.CreateHeroku(&CreateHerokuInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-heroku"),
-			Format:         String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  Int(2),
-			Placement:      String("waf_debug"),
-			Token:          String("super-secure-token"),
-			URL:            String("https://1.us.logplex.io/logs"),
+			Name:           ToPointer("test-heroku"),
+			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  ToPointer(2),
+			Placement:      ToPointer("waf_debug"),
+			Token:          ToPointer("super-secure-token"),
+			URL:            ToPointer("https://1.us.logplex.io/logs"),
 		})
 	})
 	if err != nil {
@@ -120,8 +120,8 @@ func TestClient_Herokus(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-heroku",
-			NewName:        String("new-test-heroku"),
-			Token:          String("new-token"),
+			NewName:        ToPointer("new-test-heroku"),
+			Token:          ToPointer("new-token"),
 		})
 	})
 	if err != nil {

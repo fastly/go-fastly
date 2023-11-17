@@ -19,11 +19,11 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		n, err = c.CreateNewRelicOTLP(&CreateNewRelicOTLPInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-newrelicotlp"),
-			Token:          String("abcd1234"),
-			URL:            String("https://example.nr-data.net"),
-			Format:         String("format"),
-			Placement:      String("waf_debug"),
+			Name:           ToPointer("test-newrelicotlp"),
+			Token:          ToPointer("abcd1234"),
+			URL:            ToPointer("https://example.nr-data.net"),
+			Format:         ToPointer("format"),
+			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -119,8 +119,8 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-newrelicotlp",
-			NewName:        String("new-test-newrelicotlp"),
-			FormatVersion:  Int(2),
+			NewName:        ToPointer("new-test-newrelicotlp"),
+			FormatVersion:  ToPointer(2),
 		})
 	})
 	if err != nil {
