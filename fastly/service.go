@@ -134,12 +134,12 @@ type ListServicesPaginator struct {
 	options  *ListServicesInput
 }
 
-// HasNext returns a boolean indicating whether more pages are available
+// HasNext returns a boolean indicating whether more pages are available.
 func (p *ListServicesPaginator) HasNext() bool {
 	return !p.consumed || p.Remaining() != 0
 }
 
-// Remaining returns the remaining page count
+// Remaining returns the remaining page count.
 func (p *ListServicesPaginator) Remaining() int {
 	if p.LastPage == 0 {
 		return 0
@@ -147,12 +147,12 @@ func (p *ListServicesPaginator) Remaining() int {
 	return p.LastPage - p.CurrentPage
 }
 
-// GetNext retrieves data in the next page
+// GetNext retrieves data in the next page.
 func (p *ListServicesPaginator) GetNext() ([]*Service, error) {
 	return p.client.listServicesWithPage(p.options, p)
 }
 
-// NewListServicesPaginator returns a new paginator
+// NewListServicesPaginator returns a new paginator.
 func (c *Client) NewListServicesPaginator(i *ListServicesInput) PaginatorServices {
 	return &ListServicesPaginator{
 		client:  c,
@@ -160,7 +160,7 @@ func (c *Client) NewListServicesPaginator(i *ListServicesInput) PaginatorService
 	}
 }
 
-// listServicesWithPage return a list of services
+// listServicesWithPage return a list of services.
 func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPaginator) ([]*Service, error) {
 	var perPage int
 	const maxPerPage = 100
@@ -178,7 +178,7 @@ func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPagin
 		if !p.consumed {
 			p.CurrentPage = i.Page
 		} else {
-			p.CurrentPage = p.CurrentPage + 1
+			p.CurrentPage++
 		}
 	}
 
@@ -287,7 +287,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	// "versions" array in the returned JSON response.
 	for i := range s.Versions {
 		if s.Versions[i].Active {
-			s.ActiveVersion = int(s.Versions[i].Number)
+			s.ActiveVersion = s.Versions[i].Number
 			break
 		}
 	}
