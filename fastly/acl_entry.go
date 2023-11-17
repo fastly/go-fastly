@@ -119,12 +119,12 @@ type ListACLEntriesPaginator struct {
 	options  *ListACLEntriesInput
 }
 
-// HasNext returns a boolean indicating whether more pages are available
+// HasNext returns a boolean indicating whether more pages are available.
 func (p *ListACLEntriesPaginator) HasNext() bool {
 	return !p.consumed || p.Remaining() != 0
 }
 
-// Remaining returns the remaining page count
+// Remaining returns the remaining page count.
 func (p *ListACLEntriesPaginator) Remaining() int {
 	if p.LastPage == 0 {
 		return 0
@@ -132,12 +132,12 @@ func (p *ListACLEntriesPaginator) Remaining() int {
 	return p.LastPage - p.CurrentPage
 }
 
-// GetNext retrieves data in the next page
+// GetNext retrieves data in the next page.
 func (p *ListACLEntriesPaginator) GetNext() ([]*ACLEntry, error) {
 	return p.client.listACLEntriesWithPage(p.options, p)
 }
 
-// NewListACLEntriesPaginator returns a new paginator
+// NewListACLEntriesPaginator returns a new paginator.
 func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) PaginatorACLEntries {
 	return &ListACLEntriesPaginator{
 		client:  c,
@@ -145,7 +145,7 @@ func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) PaginatorACL
 	}
 }
 
-// listACLEntriesWithPage return a list of entries for an ACL of a given page
+// listACLEntriesWithPage return a list of entries for an ACL of a given page.
 func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListACLEntriesPaginator) ([]*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -171,7 +171,7 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListACLEntrie
 		if !p.consumed {
 			p.CurrentPage = i.Page
 		} else {
-			p.CurrentPage = p.CurrentPage + 1
+			p.CurrentPage++
 		}
 	}
 
