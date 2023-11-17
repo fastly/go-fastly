@@ -91,12 +91,12 @@ type ListDictionaryItemsPaginator struct {
 	options  *ListDictionaryItemsInput
 }
 
-// HasNext returns a boolean indicating whether more pages are available
+// HasNext returns a boolean indicating whether more pages are available.
 func (p *ListDictionaryItemsPaginator) HasNext() bool {
 	return !p.consumed || p.Remaining() != 0
 }
 
-// Remaining returns the remaining page count
+// Remaining returns the remaining page count.
 func (p *ListDictionaryItemsPaginator) Remaining() int {
 	if p.LastPage == 0 {
 		return 0
@@ -104,12 +104,12 @@ func (p *ListDictionaryItemsPaginator) Remaining() int {
 	return p.LastPage - p.CurrentPage
 }
 
-// GetNext retrieves data in the next page
+// GetNext retrieves data in the next page.
 func (p *ListDictionaryItemsPaginator) GetNext() ([]*DictionaryItem, error) {
 	return p.client.listDictionaryItemsWithPage(p.options, p)
 }
 
-// NewListDictionaryItemsPaginator returns a new paginator
+// NewListDictionaryItemsPaginator returns a new paginator.
 func (c *Client) NewListDictionaryItemsPaginator(i *ListDictionaryItemsInput) PaginatorDictionaryItems {
 	return &ListDictionaryItemsPaginator{
 		client:  c,
@@ -117,7 +117,8 @@ func (c *Client) NewListDictionaryItemsPaginator(i *ListDictionaryItemsInput) Pa
 	}
 }
 
-// listDictionaryItemsWithPage returns a list of items for a dictionary of a given page
+// listDictionaryItemsWithPage returns a list of items for a dictionary of a
+// given page.
 func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *ListDictionaryItemsPaginator) ([]*DictionaryItem, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -143,7 +144,7 @@ func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *Lis
 		if !p.consumed {
 			p.CurrentPage = i.Page
 		} else {
-			p.CurrentPage = p.CurrentPage + 1
+			p.CurrentPage++
 		}
 	}
 
@@ -233,6 +234,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
 	var b []DictionaryItem
 	for _, cdii := range i {
+		cdii := cdii // it's unlikely the underlying value will have changed but we avoid a gosec warning this way (ref: https://bit.ly/go-range-bug)
 		di, err := c.CreateDictionaryItem(&cdii)
 		if err != nil {
 			return nil, err
