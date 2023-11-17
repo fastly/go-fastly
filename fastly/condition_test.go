@@ -19,10 +19,10 @@ func TestClient_Conditions(t *testing.T) {
 		condition, err = c.CreateCondition(&CreateConditionInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test/condition"),
-			Statement:      String("req.url~+\"index.html\""),
-			Type:           String("REQUEST"),
-			Priority:       Int(1),
+			Name:           ToPointer("test/condition"),
+			Statement:      ToPointer("req.url~+\"index.html\""),
+			Type:           ToPointer("REQUEST"),
+			Priority:       ToPointer(1),
 		})
 	})
 	if err != nil {
@@ -100,7 +100,7 @@ func TestClient_Conditions(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test/condition",
-			Statement:      String("req.url~+\"updated.html\""),
+			Statement:      ToPointer("req.url~+\"updated.html\""),
 		})
 	})
 	if err != nil {

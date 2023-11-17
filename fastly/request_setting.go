@@ -18,12 +18,6 @@ const (
 // RequestSettingAction is a type of request setting action.
 type RequestSettingAction string
 
-// RequestSettingActionPtr returns a pointer to a RequestSettingAction.
-func RequestSettingActionPtr(v RequestSettingAction) *RequestSettingAction {
-	rsa := &v
-	return rsa
-}
-
 const (
 	// RequestSettingXFFClear clears any X-Forwarded-For headers.
 	RequestSettingXFFClear RequestSettingXFF = "clear"
@@ -44,12 +38,6 @@ const (
 
 // RequestSettingXFF is a type of X-Forwarded-For value to set.
 type RequestSettingXFF string
-
-// RequestSettingXFFPtr returns a pointer to a RequestSettingXFF.
-func RequestSettingXFFPtr(v RequestSettingXFF) *RequestSettingXFF {
-	rsx := &v
-	return rsx
-}
 
 // RequestSetting represents a request setting response from the Fastly API.
 type RequestSetting struct {

@@ -49,11 +49,6 @@ type ERLResponseType struct {
 // violation is detected.
 type ERLAction string
 
-// ERLActionPtr is a helper that returns a pointer to the type passed in.
-func ERLActionPtr(v ERLAction) *ERLAction {
-	return &v
-}
-
 const (
 	// ERLActionLogOnly represents an action variant.
 	ERLActionLogOnly ERLAction = "log_only"
@@ -72,11 +67,6 @@ var ERLActions = []ERLAction{
 
 // ERLLogger represents the supported log provider variants.
 type ERLLogger string
-
-// ERLLoggerPtr is a helper that returns a pointer to the type passed in.
-func ERLLoggerPtr(v ERLLogger) *ERLLogger {
-	return &v
-}
 
 const (
 	// ERLLogAzureBlob represents a log provider variant.
@@ -175,11 +165,6 @@ var ERLLoggers = []ERLLogger{
 // ERLWindowSize represents the duration variants for when the RPS limit is
 // exceeded.
 type ERLWindowSize int
-
-// ERLWindowSizePtr is a helper that returns a pointer to the type passed in.
-func ERLWindowSizePtr(v ERLWindowSize) *ERLWindowSize {
-	return &v
-}
 
 const (
 	// ERLSize1 represents a duration variant.

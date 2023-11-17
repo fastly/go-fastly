@@ -19,12 +19,12 @@ func TestClient_Logshuttles(t *testing.T) {
 		l, err = c.CreateLogshuttle(&CreateLogshuttleInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-logshuttle"),
-			Format:         String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:  Int(2),
-			Placement:      String("waf_debug"),
-			Token:          String("super-secure-token"),
-			URL:            String("https://logs.example.com"),
+			Name:           ToPointer("test-logshuttle"),
+			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:  ToPointer(2),
+			Placement:      ToPointer("waf_debug"),
+			Token:          ToPointer("super-secure-token"),
+			URL:            ToPointer("https://logs.example.com"),
 		})
 	})
 	if err != nil {
@@ -120,9 +120,9 @@ func TestClient_Logshuttles(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-logshuttle",
-			NewName:        String("new-test-logshuttle"),
-			Token:          String("new-token"),
-			URL:            String("https://logs2.example.com"),
+			NewName:        ToPointer("new-test-logshuttle"),
+			Token:          ToPointer("new-token"),
+			URL:            ToPointer("https://logs2.example.com"),
 		})
 	})
 	if err != nil {

@@ -19,13 +19,13 @@ func TestClient_Backends(t *testing.T) {
 		b, err = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-backend"),
-			Address:        String("integ-test.go-fastly.com"),
-			ConnectTimeout: Int(1500),
-			OverrideHost:   String("origin.example.com"),
-			SSLCheckCert:   CBool(false),
-			SSLCiphers:     String("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
-			SSLSNIHostname: String("ssl-hostname.com"),
+			Name:           ToPointer("test-backend"),
+			Address:        ToPointer("integ-test.go-fastly.com"),
+			ConnectTimeout: ToPointer(1500),
+			OverrideHost:   ToPointer("origin.example.com"),
+			SSLCheckCert:   ToPointer(Compatibool(false)),
+			SSLCiphers:     ToPointer("DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384"),
+			SSLSNIHostname: ToPointer("ssl-hostname.com"),
 		})
 	})
 	if err != nil {
@@ -124,13 +124,13 @@ func TestClient_Backends(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-backend",
-			NewName:        String("new-test-backend"),
-			OverrideHost:   String("www.example.com"),
-			Port:           Int(1234),
-			ShareKey:       String("shared-key"),
-			SSLCiphers:     String("RC4:!COMPLEMENTOFDEFAULT"),
-			SSLCheckCert:   CBool(false),
-			SSLSNIHostname: String("ssl-hostname-updated.com"),
+			NewName:        ToPointer("new-test-backend"),
+			OverrideHost:   ToPointer("www.example.com"),
+			Port:           ToPointer(1234),
+			ShareKey:       ToPointer("shared-key"),
+			SSLCiphers:     ToPointer("RC4:!COMPLEMENTOFDEFAULT"),
+			SSLCheckCert:   ToPointer(Compatibool(false)),
+			SSLSNIHostname: ToPointer("ssl-hostname-updated.com"),
 		})
 	})
 	if err != nil {
@@ -183,8 +183,8 @@ func TestClient_Backends(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "new-test-backend",
-			OverrideHost:   String(""),
-			Port:           Int(0),
+			OverrideHost:   ToPointer(""),
+			Port:           ToPointer(0),
 		})
 	})
 	if err != nil {

@@ -20,8 +20,8 @@ func TestClient_ERL(t *testing.T) {
 		e, err = c.CreateERL(&CreateERLInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: testVersion.Number,
-			Name:           String("test_erl"),
-			Action:         ERLActionPtr(ERLActionResponse),
+			Name:           ToPointer("test_erl"),
+			Action:         ToPointer(ERLActionResponse),
 			ClientKey: &[]string{
 				"req.http.Fastly-Client-IP",
 			},
@@ -29,14 +29,14 @@ func TestClient_ERL(t *testing.T) {
 				http.MethodGet,
 				http.MethodPost,
 			},
-			PenaltyBoxDuration: Int(30),
+			PenaltyBoxDuration: ToPointer(30),
 			Response: &ERLResponseType{
 				ERLStatus:      429,
 				ERLContentType: "application/json",
 				ERLContent:     "Too many requests",
 			},
-			RpsLimit:   Int(20),
-			WindowSize: ERLWindowSizePtr(10),
+			RpsLimit:   ToPointer(20),
+			WindowSize: ToPointer(ERLWindowSize(10)),
 		})
 	})
 	if err != nil {
@@ -110,7 +110,7 @@ func TestClient_ERL(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateERL(&UpdateERLInput{
 			ERLID: e.ID,
-			Name:  String("test_erl"),
+			Name:  ToPointer("test_erl"),
 		})
 	})
 	if err != nil {
@@ -136,10 +136,10 @@ func TestClient_ERL(t *testing.T) {
 		elog, err = c.CreateERL(&CreateERLInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: testVersion.Number,
-			Name:           String("test_erl"),
-			Action:         ERLActionPtr(ERLActionLogOnly),
+			Name:           ToPointer("test_erl"),
+			Action:         ToPointer(ERLActionLogOnly),
 			// IMPORTANT: API will 400 if LoggerType not set with log_only action.
-			LoggerType: ERLLoggerPtr(ERLLogAzureBlob),
+			LoggerType: ToPointer(ERLLogAzureBlob),
 			ClientKey: &[]string{
 				"req.http.Fastly-Client-IP",
 			},
@@ -147,9 +147,9 @@ func TestClient_ERL(t *testing.T) {
 				http.MethodGet,
 				http.MethodPost,
 			},
-			PenaltyBoxDuration: Int(30),
-			RpsLimit:           Int(20),
-			WindowSize:         ERLWindowSizePtr(10),
+			PenaltyBoxDuration: ToPointer(30),
+			RpsLimit:           ToPointer(20),
+			WindowSize:         ToPointer(ERLWindowSize(10)),
 		})
 	})
 	if err != nil {

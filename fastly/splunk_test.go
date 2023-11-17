@@ -40,19 +40,19 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		s, err = c.CreateSplunk(&CreateSplunkInput{
 			ServiceID:         testServiceID,
 			ServiceVersion:    tv.Number,
-			Name:              String("test-splunk"),
-			URL:               String("https://mysplunkendpoint.example.com/services/collector/event"),
-			RequestMaxEntries: Int(1),
-			RequestMaxBytes:   Int(1000),
-			Format:            String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:     Int(2),
-			Placement:         String("waf_debug"),
-			Token:             String("super-secure-token"),
-			UseTLS:            CBool(true),
-			TLSCACert:         String(caCert),
-			TLSHostname:       String("example.com"),
-			TLSClientCert:     String(clientCert),
-			TLSClientKey:      String(clientKey),
+			Name:              ToPointer("test-splunk"),
+			URL:               ToPointer("https://mysplunkendpoint.example.com/services/collector/event"),
+			RequestMaxEntries: ToPointer(1),
+			RequestMaxBytes:   ToPointer(1000),
+			Format:            ToPointer("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:     ToPointer(2),
+			Placement:         ToPointer("waf_debug"),
+			Token:             ToPointer("super-secure-token"),
+			UseTLS:            ToPointer(Compatibool(true)),
+			TLSCACert:         ToPointer(caCert),
+			TLSHostname:       ToPointer("example.com"),
+			TLSClientCert:     ToPointer(clientCert),
+			TLSClientKey:      ToPointer(clientKey),
 		})
 	})
 	if err != nil {
@@ -190,7 +190,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-splunk",
-			NewName:        String("new-test-splunk"),
+			NewName:        ToPointer("new-test-splunk"),
 		})
 	})
 	if err != nil {

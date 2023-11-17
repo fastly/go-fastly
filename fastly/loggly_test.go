@@ -19,10 +19,10 @@ func TestClient_Loggly(t *testing.T) {
 		lg, err = c.CreateLoggly(&CreateLogglyInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-loggly"),
-			Token:          String("abcd1234"),
-			Format:         String("format"),
-			Placement:      String("waf_debug"),
+			Name:           ToPointer("test-loggly"),
+			Token:          ToPointer("abcd1234"),
+			Format:         ToPointer("format"),
+			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -112,8 +112,8 @@ func TestClient_Loggly(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-loggly",
-			NewName:        String("new-test-loggly"),
-			FormatVersion:  Int(2),
+			NewName:        ToPointer("new-test-loggly"),
+			FormatVersion:  ToPointer(2),
 		})
 	})
 	if err != nil {

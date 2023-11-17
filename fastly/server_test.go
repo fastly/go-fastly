@@ -20,7 +20,7 @@ func TestClient_Servers(t *testing.T) {
 		server, err = c.CreateServer(&CreateServerInput{
 			ServiceID: testServiceID,
 			PoolID:    testPool.ID,
-			Address:   String("127.0.0.1"),
+			Address:   ToPointer("127.0.0.1"),
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -30,7 +30,7 @@ func TestClient_Servers(t *testing.T) {
 		altServer, err = c.CreateServer(&CreateServerInput{
 			ServiceID: testServiceID,
 			PoolID:    testPool.ID,
-			Address:   String("altserver.example.com"),
+			Address:   ToPointer("altserver.example.com"),
 		})
 		if err != nil {
 			t.Fatal(err)
@@ -109,8 +109,8 @@ func TestClient_Servers(t *testing.T) {
 			ServiceID: testServiceID,
 			PoolID:    testPool.ID,
 			Server:    server.ID,
-			Address:   String("0.0.0.0"),
-			Weight:    Int(50),
+			Address:   ToPointer("0.0.0.0"),
+			Weight:    ToPointer(50),
 		})
 	})
 	if err != nil {

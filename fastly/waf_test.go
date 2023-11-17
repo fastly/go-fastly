@@ -115,7 +115,7 @@ func TestClient_WAFs(t *testing.T) {
 	record(t, fixtureBase+"/disable", func(c *Client) {
 		dwaf, err = c.UpdateWAF(&UpdateWAFInput{
 			ID:       waf.ID,
-			Disabled: Bool(true),
+			Disabled: ToPointer(true),
 		})
 	})
 	if err != nil {
@@ -129,7 +129,7 @@ func TestClient_WAFs(t *testing.T) {
 	record(t, fixtureBase+"/enable", func(c *Client) {
 		ewaf, err = c.UpdateWAF(&UpdateWAFInput{
 			ID:       waf.ID,
-			Disabled: Bool(false),
+			Disabled: ToPointer(false),
 		})
 	})
 	if err != nil {
@@ -245,7 +245,7 @@ func TestClient_UpdateWAF_Enable_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
 		ID:       "",
-		Disabled: Bool(false),
+		Disabled: ToPointer(false),
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
@@ -256,7 +256,7 @@ func TestClient_UpdateWAF_Disable_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
 		ID:       "",
-		Disabled: Bool(true),
+		Disabled: ToPointer(true),
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)

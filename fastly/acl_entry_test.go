@@ -23,10 +23,10 @@ func TestClient_ACLEntries(t *testing.T) {
 		e, err = c.CreateACLEntry(&CreateACLEntryInput{
 			ServiceID: testService.ID,
 			ACLID:     testACL.ID,
-			IP:        String("10.0.0.3"),
-			Subnet:    Int(8),
-			Negated:   CBool(false),
-			Comment:   String("test entry"),
+			IP:        ToPointer("10.0.0.3"),
+			Subnet:    ToPointer(8),
+			Negated:   ToPointer(Compatibool(false)),
+			Comment:   ToPointer("test entry"),
 		})
 	})
 	if err != nil {
@@ -124,8 +124,8 @@ func TestClient_ACLEntries(t *testing.T) {
 			ServiceID: testService.ID,
 			ACLID:     testACL.ID,
 			ID:        e.ID,
-			IP:        String("10.0.0.4"),
-			Negated:   CBool(true),
+			IP:        ToPointer("10.0.0.4"),
+			Negated:   ToPointer(Compatibool(true)),
 		})
 	})
 	if err != nil {

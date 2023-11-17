@@ -24,26 +24,26 @@ func TestClient_Kafkas(t *testing.T) {
 	var k *Kafka
 	record(t, "kafkas/create", func(c *Client) {
 		k, err = c.CreateKafka(&CreateKafkaInput{
-			AuthMethod:       String("scram-sha-512"),
-			Brokers:          String("192.168.1.1,192.168.1.2"),
-			CompressionCodec: String("lz4"),
-			Format:           String("%h %l %u %t \"%r\" %>s %b"),
-			FormatVersion:    Int(2),
-			Name:             String("test-kafka"),
-			ParseLogKeyvals:  CBool(true),
-			Password:         String("deadbeef"),
-			Placement:        String("waf_debug"),
-			RequestMaxBytes:  Int(requestMaxBytes),
-			RequiredACKs:     String("-1"),
+			AuthMethod:       ToPointer("scram-sha-512"),
+			Brokers:          ToPointer("192.168.1.1,192.168.1.2"),
+			CompressionCodec: ToPointer("lz4"),
+			Format:           ToPointer("%h %l %u %t \"%r\" %>s %b"),
+			FormatVersion:    ToPointer(2),
+			Name:             ToPointer("test-kafka"),
+			ParseLogKeyvals:  ToPointer(Compatibool(true)),
+			Password:         ToPointer("deadbeef"),
+			Placement:        ToPointer("waf_debug"),
+			RequestMaxBytes:  ToPointer(requestMaxBytes),
+			RequiredACKs:     ToPointer("-1"),
 			ServiceID:        testServiceID,
 			ServiceVersion:   tv.Number,
-			TLSCACert:        String(caCert),
-			TLSClientCert:    String(clientCert),
-			TLSClientKey:     String(clientKey),
-			TLSHostname:      String("example.com"),
-			Topic:            String("kafka-topic"),
-			UseTLS:           CBool(true),
-			User:             String("foobar"),
+			TLSCACert:        ToPointer(caCert),
+			TLSClientCert:    ToPointer(clientCert),
+			TLSClientKey:     ToPointer(clientKey),
+			TLSHostname:      ToPointer("example.com"),
+			Topic:            ToPointer("kafka-topic"),
+			UseTLS:           ToPointer(Compatibool(true)),
+			User:             ToPointer("foobar"),
 		})
 	})
 	if err != nil {
@@ -211,8 +211,8 @@ func TestClient_Kafkas(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-kafka",
-			NewName:        String("new-test-kafka"),
-			Topic:          String("new-kafka-topic"),
+			NewName:        ToPointer("new-test-kafka"),
+			Topic:          ToPointer("new-kafka-topic"),
 		})
 	})
 	if err != nil {

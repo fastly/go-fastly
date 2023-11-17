@@ -21,12 +21,6 @@ const (
 // CacheSettingAction is the type of cache action.
 type CacheSettingAction string
 
-// CacheSettingActionPtr returns a pointer to a CacheSettingAction.
-func CacheSettingActionPtr(v CacheSettingAction) *CacheSettingAction {
-	csa := &v
-	return csa
-}
-
 // CacheSetting represents a response from Fastly's API for cache settings.
 type CacheSetting struct {
 	Action         CacheSettingAction `mapstructure:"action"`

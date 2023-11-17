@@ -40,20 +40,20 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		s, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-syslog"),
-			Address:        String("example.com"),
-			Hostname:       String("example.com"),
-			Port:           Int(1234),
-			UseTLS:         CBool(true),
-			TLSCACert:      String(caCert),
-			TLSHostname:    String("example.com"),
-			TLSClientCert:  String(clientCert),
-			TLSClientKey:   String(clientKey),
-			Token:          String("abcd1234"),
-			Format:         String("format"),
-			FormatVersion:  Int(2),
-			MessageType:    String("classic"),
-			Placement:      String("waf_debug"),
+			Name:           ToPointer("test-syslog"),
+			Address:        ToPointer("example.com"),
+			Hostname:       ToPointer("example.com"),
+			Port:           ToPointer(1234),
+			UseTLS:         ToPointer(Compatibool(true)),
+			TLSCACert:      ToPointer(caCert),
+			TLSHostname:    ToPointer("example.com"),
+			TLSClientCert:  ToPointer(clientCert),
+			TLSClientKey:   ToPointer(clientKey),
+			Token:          ToPointer("abcd1234"),
+			Format:         ToPointer("format"),
+			FormatVersion:  ToPointer(2),
+			MessageType:    ToPointer("classic"),
+			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -197,8 +197,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-syslog",
-			NewName:        String("new-test-syslog"),
-			FormatVersion:  Int(2),
+			NewName:        ToPointer("new-test-syslog"),
+			FormatVersion:  ToPointer(2),
 		})
 	})
 	if err != nil {

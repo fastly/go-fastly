@@ -13,8 +13,8 @@ func TestClient_Services(t *testing.T) {
 	var s *Service
 	record(t, "services/create", func(c *Client) {
 		s, err = c.CreateService(&CreateServiceInput{
-			Name:    String("test-service"),
-			Comment: String("comment"),
+			Name:    ToPointer("test-service"),
+			Comment: ToPointer("comment"),
 		})
 	})
 	if err != nil {
@@ -150,7 +150,7 @@ func TestClient_Services(t *testing.T) {
 	record(t, "services/update", func(c *Client) {
 		us, err = c.UpdateService(&UpdateServiceInput{
 			ServiceID: s.ID,
-			Name:      String("new-test-service"),
+			Name:      ToPointer("new-test-service"),
 		})
 	})
 	if err != nil {

@@ -22,17 +22,17 @@ func TestClient_Bigqueries(t *testing.T) {
 		bq, err = c.CreateBigQuery(&CreateBigQueryInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
-			Name:           String("test-bigquery"),
-			ProjectID:      String("example-fastly-log"),
-			Dataset:        String("fastly_log_test"),
-			Table:          String("fastly_logs"),
-			Template:       String(""),
-			User:           String("fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com"),
-			AccountName:    String("service-account"),
-			SecretKey:      String(secretKey),
-			Format:         String("{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}"),
-			Placement:      String("waf_debug"),
-			FormatVersion:  Int(2),
+			Name:           ToPointer("test-bigquery"),
+			ProjectID:      ToPointer("example-fastly-log"),
+			Dataset:        ToPointer("fastly_log_test"),
+			Table:          ToPointer("fastly_logs"),
+			Template:       ToPointer(""),
+			User:           ToPointer("fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com"),
+			AccountName:    ToPointer("service-account"),
+			SecretKey:      ToPointer(secretKey),
+			Format:         ToPointer("{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}"),
+			Placement:      ToPointer("waf_debug"),
+			FormatVersion:  ToPointer(2),
 		})
 	})
 	if err != nil {
@@ -161,7 +161,7 @@ func TestClient_Bigqueries(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Name:           "test-bigquery",
-			NewName:        String("new-test-bigquery"),
+			NewName:        ToPointer("new-test-bigquery"),
 		})
 	})
 	if err != nil {
