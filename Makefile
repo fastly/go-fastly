@@ -98,6 +98,9 @@ staticcheck: ## Runs the staticcheck linter.
 	@staticcheck ./...
 .PHONY: staticcheck
 
+nilaway: ## Run nilaway
+	@nilaway ./...
+
 # Run semgrep checker.
 .PHONY: semgrep
 semgrep:
