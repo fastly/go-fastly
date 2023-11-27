@@ -42,7 +42,7 @@ type PaginatorKVStoreEntries interface {
 // This means we have to have the user pass the API path.
 // To make things easier we expose each supported path as a constant.
 // e.g. fastly.ServicePath, fastly.ACLEntriesPath etc.
-func NewPaginator[T any](client *Client, input *ListInput, path string) Paginator[T] {
+func NewPaginator[T any](client *Client, input *ListInput, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,
 		input:  input,
@@ -59,13 +59,6 @@ type ListInput struct {
 	PerPage int
 	// Sort is the field on which to sort.
 	Sort string
-}
-
-// Paginator represents a generic paginator.
-type Paginator[T any] interface {
-	HasNext() bool
-	Remaining() int
-	GetNext() ([]*T, error)
 }
 
 // ListPaginator implements the generic Paginator[N] interface.
