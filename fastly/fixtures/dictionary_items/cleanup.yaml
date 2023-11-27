@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/70Xeh5hM2FIvR5UG41Ay62/item/test-dictionary-item
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/yk2nYOFJTCTWZAr2L3HZz2/dictionary/CCdCpVmAr99NUl9ZGHPc03/item/test-dictionary-item
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find DictionaryItem ''{ dictionary_id
-      =\u003e 70Xeh5hM2FIvR5UG41Ay62, item_key =\u003e test-dictionary-item, service_id
-      =\u003e 7i6HN3TK9wS159v2gPAZ8A }''"}'
+      =\u003e CCdCpVmAr99NUl9ZGHPc03, item_key =\u003e test-dictionary-item, service_id
+      =\u003e yk2nYOFJTCTWZAr2L3HZz2 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Dec 2021 03:08:17 GMT
+      - Mon, 27 Nov 2023 14:27:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "4985"
+      - "9985"
       Fastly-Ratelimit-Reset:
-      - "1640145600"
+      - "1701097200"
+      Pragma:
+      - no-cache
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11927-TYO
+      - cache-control-canary-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600062-LCY
       X-Timer:
-      - S1640142497.167518,VS0,VE359
+      - S1701095232.435153,VS0,VE201
     status: 404 Not Found
     code: 404
     duration: ""

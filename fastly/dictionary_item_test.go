@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"fmt"
 	"testing"
 )
 
@@ -66,13 +67,23 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	// List with paginator
 	var dictionaryItems2 []*DictionaryItem
-	var paginator PaginatorDictionaryItems
+	var paginator *ListPaginator[DictionaryItem]
 	record(t, fixtureBase+"list2", func(c *Client) {
-		paginator = c.NewListDictionaryItemsPaginator(&ListDictionaryItemsInput{
-			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
-		})
-		dictionaryItems2, err = paginator.GetNext()
+		path := fmt.Sprintf(DictionaryItemsPath, testService.ID, testDictionary.ID)
+		paginator = NewPaginator[DictionaryItem](c, &ListInput{
+			Direction: "ascend",
+			Sort:      "item_key",
+			PerPage:   50,
+		}, path)
+
+		for paginator.HasNext() {
+			data, err := paginator.GetNext()
+			if err != nil {
+				t.Errorf("Bad paginator (remaining: %d): %s", paginator.Remaining(), err)
+				return
+			}
+			dictionaryItems2 = append(dictionaryItems2, data...)
+		}
 	})
 	if err != nil {
 		t.Fatal(err)

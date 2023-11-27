@@ -1,47 +1,134 @@
----
 version: 1
 interactions:
-- request:
-    body: ""
-    form: {}
-    headers:
-      User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service?direction=descend&page=1&per_page=1&sort=created
-    method: GET
-  response:
-    body: '[{"id":"FPkmJNp1fH8CnWbdi21Wf3","updated_at":"2022-11-04T17:51:46Z","created_at":"2022-11-04T17:51:46Z","comment":"comment","type":"vcl","versions":[{"updated_at":"2022-11-04T17:51:46Z","created_at":"2022-11-04T17:51:46Z","comment":"","testing":false,"deployed":false,"locked":false,"number":1,"staging":false,"deleted_at":null,"service_id":"FPkmJNp1fH8CnWbdi21Wf3","active":false}],"paused":false,"customer_id":"51MumwLiSJyFTWhtbByYgR","deleted_at":null,"version":1,"name":"test-service"}]'
-    headers:
-      Accept-Ranges:
-      - bytes
-      Age:
-      - "0"
-      Cache-Control:
-      - no-store
-      Content-Type:
-      - application/json
-      Date:
-      - Fri, 04 Nov 2022 17:51:46 GMT
-      Link:
-      - <https://api.fastly.com/service?direction=descend&page=420&per_page=1&sort=created>;
-        rel="last", <https://api.fastly.com/service?direction=descend&page=2&per_page=1&sort=created>;
-        rel="next"
-      Status:
-      - 200 OK
-      Strict-Transport-Security:
-      - max-age=31536000
-      Vary:
-      - Accept-Encoding
-      Via:
-      - 1.1 varnish, 1.1 varnish
-      X-Cache:
-      - MISS, HIT
-      X-Cache-Hits:
-      - 0, 1
-      X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4137-MAN
-      X-Timer:
-      - S1667584307.607408,VS0,VE0
-    status: 200 OK
-    code: 200
-    duration: ""
+  - request:
+      body: ""
+      form: {}
+      headers:
+        User-Agent:
+          - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+      url: https://api.fastly.com/service?direction=descend&page=1&per_page=1&sort=created
+      method: GET
+    response:
+      body: '[{"name":"testing-paginator-1","updated_at":"2023-11-17T17:41:13Z","paused":false,"versions":[{"deleted_at":null,"created_at":"2023-11-17T17:41:13Z","active":false,"staging":false,"comment":"","locked":false,"service_id":"mjvYB61u7BiqD3Nzkl69P3","number":1,"testing":false,"deployed":false,"updated_at":"2023-11-17T18:01:10Z"}],"version":1,"type":"vcl","id":"mjvYB61u7BiqD3Nzkl69P3","created_at":"2023-11-17T17:41:13Z","deleted_at":null,"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":""}]'
+      headers:
+        Accept-Ranges:
+          - bytes
+        Age:
+          - "368"
+        Cache-Control:
+          - no-store
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Nov 2023 14:41:40 GMT
+        Link:
+          - <https://api.fastly.com/service?direction=descend&page=3&per_page=100&sort=created>; rel="last", <https://api.fastly.com/service?direction=descend&page=2&per_page=1&sort=created>; rel="next"
+        Pragma:
+          - no-cache
+        Status:
+          - 200 OK
+        Strict-Transport-Security:
+          - max-age=31536000
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 varnish, 1.1 varnish
+        X-Cache:
+          - MISS, HIT
+        X-Cache-Hits:
+          - 0, 1
+        X-Served-By:
+          - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600022-LCY
+        X-Timer:
+          - S1701096100.399502,VS0,VE1
+      status: 200 OK
+      code: 200
+      duration: ""
+  - request:
+      body: ""
+      form: {}
+      headers:
+        User-Agent:
+          - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+      url: https://api.fastly.com/service?direction=descend&page=2&per_page=1&sort=created
+      method: GET
+    response:
+      body: '[{"name":"testing-paginator-2","updated_at":"2023-11-17T17:41:13Z","paused":false,"versions":[{"deleted_at":null,"created_at":"2023-11-17T17:41:13Z","active":false,"staging":false,"comment":"","locked":false,"service_id":"mjvYB61u7BiqD3Nzkl69P3","number":1,"testing":false,"deployed":false,"updated_at":"2023-11-17T18:01:10Z"}],"version":1,"type":"vcl","id":"mjvYB61u7BiqD3Nzkl69P3","created_at":"2023-11-17T17:41:13Z","deleted_at":null,"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":""}]'
+      headers:
+        Accept-Ranges:
+          - bytes
+        Age:
+          - "368"
+        Cache-Control:
+          - no-store
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Nov 2023 14:41:40 GMT
+        Link:
+          - <https://api.fastly.com/service?direction=descend&page=3&per_page=1&sort=created>; rel="last", <https://api.fastly.com/service?direction=descend&page=3&per_page=1&sort=created>; rel="next", <https://api.fastly.com/service?direction=descend&page=1&per_page=1&sort=created>; rel="prev", <https://api.fastly.com/service?direction=descend&page=1&per_page=1&sort=created>; rel="first"
+        Pragma:
+          - no-cache
+        Status:
+          - 200 OK
+        Strict-Transport-Security:
+          - max-age=31536000
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 varnish, 1.1 varnish
+        X-Cache:
+          - MISS, HIT
+        X-Cache-Hits:
+          - 0, 1
+        X-Served-By:
+          - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600022-LCY
+        X-Timer:
+          - S1701096100.399502,VS0,VE1
+      status: 200 OK
+      code: 200
+      duration: ""
+  - request:
+      body: ""
+      form: {}
+      headers:
+        User-Agent:
+          - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+      url: https://api.fastly.com/service?direction=descend&page=3&per_page=1&sort=created
+      method: GET
+    response:
+      body: '[{"name":"testing-paginator-3","updated_at":"2023-11-17T17:41:13Z","paused":false,"versions":[{"deleted_at":null,"created_at":"2023-11-17T17:41:13Z","active":false,"staging":false,"comment":"","locked":false,"service_id":"mjvYB61u7BiqD3Nzkl69P3","number":1,"testing":false,"deployed":false,"updated_at":"2023-11-17T18:01:10Z"}],"version":1,"type":"vcl","id":"mjvYB61u7BiqD3Nzkl69P3","created_at":"2023-11-17T17:41:13Z","deleted_at":null,"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":""}]'
+      headers:
+        Accept-Ranges:
+          - bytes
+        Age:
+          - "368"
+        Cache-Control:
+          - no-store
+        Content-Type:
+          - application/json
+        Date:
+          - Mon, 27 Nov 2023 14:41:40 GMT rel="next"
+        Link:
+          - <https://api.fastly.com/service?direction=descend&page=2&per_page=1&sort=created>; rel="prev", <https://api.fastly.com/service?direction=descend&page=1&per_page=1&sort=created>; rel="first"
+        Pragma:
+          - no-cache
+        Status:
+          - 200 OK
+        Strict-Transport-Security:
+          - max-age=31536000
+        Vary:
+          - Accept-Encoding
+        Via:
+          - 1.1 varnish, 1.1 varnish
+        X-Cache:
+          - MISS, HIT
+        X-Cache-Hits:
+          - 0, 1
+        X-Served-By:
+          - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600022-LCY
+        X-Timer:
+          - S1701096100.399502,VS0,VE1
+      status: 200 OK
+      code: 200
+      duration: ""

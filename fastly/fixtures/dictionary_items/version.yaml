@@ -2,19 +2,17 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A
-    form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+    body: ""
+    form: {}
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/yk2nYOFJTCTWZAr2L3HZz2/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":2}'
+    body: '{"service_id":"yk2nYOFJTCTWZAr2L3HZz2","number":2}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +21,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Dec 2021 03:08:14 GMT
+      - Mon, 27 Nov 2023 14:27:10 GMT
       Fastly-Ratelimit-Remaining:
-      - "4990"
+      - "9990"
       Fastly-Ratelimit-Reset:
-      - "1640145600"
+      - "1701097200"
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11927-TYO
+      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600062-LCY
       X-Timer:
-      - S1640142495.714483,VS0,VE281
+      - S1701095231.578761,VS0,VE300
     status: 200 OK
     code: 200
     duration: ""

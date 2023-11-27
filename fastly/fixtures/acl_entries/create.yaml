@@ -16,12 +16,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/e3YATriSOfV0fiQzdiADD1/acl/poFzB5MlRxh9vRHGZxjMK7/entry
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/6As6ZehTVeMH29EEeOeGE7/acl/KsnVNyCYWtBRx6ejSqIqN0/entry
     method: POST
   response:
-    body: '{"service_id":"e3YATriSOfV0fiQzdiADD1","acl_id":"poFzB5MlRxh9vRHGZxjMK7","ip":"10.0.0.3","negated":0,"subnet":8,"comment":"test
-      entry","updated_at":"2022-11-07T13:19:17Z","id":"jnRMSRSBCflqcnpMhG1gi2","created_at":"2022-11-07T13:19:17Z"}'
+    body: '{"service_id":"6As6ZehTVeMH29EEeOeGE7","acl_id":"KsnVNyCYWtBRx6ejSqIqN0","ip":"10.0.0.3","negated":0,"subnet":8,"comment":"test
+      entry","id":"euTcP0SLnLq0CXEY0IGV10","updated_at":"2023-11-27T14:26:06Z","created_at":"2023-11-27T14:26:06Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -30,11 +30,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 13:19:18 GMT
+      - Mon, 27 Nov 2023 14:26:06 GMT
       Fastly-Ratelimit-Remaining:
       - "9996"
       Fastly-Ratelimit-Reset:
-      - "1667829600"
+      - "1701097200"
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -48,9 +50,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4136-MAN
+      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600035-LCY
       X-Timer:
-      - S1667827158.840484,VS0,VE160
+      - S1701095166.299146,VS0,VE205
     status: 200 OK
     code: 200
     duration: ""
