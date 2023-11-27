@@ -7,28 +7,7 @@ import (
 	"github.com/peterhellberg/link"
 )
 
-// PaginatorACLEntries represents a paginator.
-type PaginatorACLEntries interface {
-	HasNext() bool
-	Remaining() int
-	GetNext() ([]*ACLEntry, error)
-}
-
-// PaginatorDictionaryItems represents a paginator.
-type PaginatorDictionaryItems interface {
-	HasNext() bool
-	Remaining() int
-	GetNext() ([]*DictionaryItem, error)
-}
-
-// PaginatorServices represents a paginator.
-type PaginatorServices interface {
-	HasNext() bool
-	Remaining() int
-	GetNext() ([]*Service, error)
-}
-
-// PaginatorKVStoreEntries represents a paginator.
+// PaginatorKVStoreEntries represents a paginator for KV Store entries.
 type PaginatorKVStoreEntries interface {
 	Next() bool
 	Keys() []string

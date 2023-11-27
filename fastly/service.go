@@ -2,12 +2,8 @@ package fastly
 
 import (
 	"fmt"
-	"net/url"
-	"sort"
 	"strconv"
 	"time"
-
-	"github.com/peterhellberg/link"
 )
 
 // ServicePath is exposed primarily for use by the generic Paginator.
@@ -58,24 +54,6 @@ type ServiceDomain struct {
 // ServiceDomainsList represents a list of service domains.
 type ServiceDomainsList []*ServiceDomain
 
-// servicesByName is a sortable list of services.
-type servicesByName []*Service
-
-// Len implement the sortable interface.
-func (s servicesByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s servicesByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s servicesByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
-}
-
 // ListServicesInput is used as input to the ListServices function.
 type ListServicesInput struct {
 	// Direction is the direction in which to sort results.
@@ -122,114 +100,6 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	if err := decodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
-	sort.Stable(servicesByName(s))
-	return s, nil
-}
-
-// ListServicesPaginator implements the PaginatorServices interface.
-type ListServicesPaginator struct {
-	CurrentPage int
-	LastPage    int
-	NextPage    int
-
-	// Private
-	client   *Client
-	consumed bool
-	options  *ListServicesInput
-}
-
-// HasNext returns a boolean indicating whether more pages are available.
-func (p *ListServicesPaginator) HasNext() bool {
-	return !p.consumed || p.Remaining() != 0
-}
-
-// Remaining returns the remaining page count.
-func (p *ListServicesPaginator) Remaining() int {
-	if p.LastPage == 0 {
-		return 0
-	}
-	return p.LastPage - p.CurrentPage
-}
-
-// GetNext retrieves data in the next page.
-func (p *ListServicesPaginator) GetNext() ([]*Service, error) {
-	return p.client.listServicesWithPage(p.options, p)
-}
-
-// NewListServicesPaginator returns a new paginator.
-func (c *Client) NewListServicesPaginator(i *ListServicesInput) PaginatorServices {
-	return &ListServicesPaginator{
-		client:  c,
-		options: i,
-	}
-}
-
-// listServicesWithPage return a list of services.
-func (c *Client) listServicesWithPage(i *ListServicesInput, p *ListServicesPaginator) ([]*Service, error) {
-	var perPage int
-	const maxPerPage = 100
-	if i.PerPage <= 0 {
-		perPage = maxPerPage
-	} else {
-		perPage = i.PerPage
-	}
-
-	// page is not specified, fetch from the beginning
-	if i.Page <= 0 && p.CurrentPage == 0 {
-		p.CurrentPage = 1
-	} else {
-		// page is specified, fetch from a given page
-		if !p.consumed {
-			p.CurrentPage = i.Page
-		} else {
-			p.CurrentPage++
-		}
-	}
-
-	requestOptions := &RequestOptions{
-		Params: map[string]string{
-			"per_page": strconv.Itoa(perPage),
-			"page":     strconv.Itoa(p.CurrentPage),
-		},
-	}
-
-	if i.Direction != "" {
-		requestOptions.Params["direction"] = i.Direction
-	}
-	if i.Sort != "" {
-		requestOptions.Params["sort"] = i.Sort
-	}
-
-	resp, err := c.Get(ServicePath, requestOptions)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	for _, l := range link.ParseResponse(resp) {
-		// indicates the Link response header contained the next page instruction
-		if l.Rel == "next" {
-			u, _ := url.Parse(l.URI)
-			query := u.Query()
-			p.NextPage, _ = strconv.Atoi(query["page"][0])
-		}
-		// indicates the Link response header contained the last page instruction
-		if l.Rel == "last" {
-			u, _ := url.Parse(l.URI)
-			query := u.Query()
-			p.LastPage, _ = strconv.Atoi(query["page"][0])
-		}
-	}
-
-	p.consumed = true
-
-	var s []*Service
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
-		return nil, err
-	}
-
-	sort.Stable(servicesByName(s))
-
 	return s, nil
 }
 

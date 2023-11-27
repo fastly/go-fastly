@@ -2,12 +2,9 @@ package fastly
 
 import (
 	"fmt"
-	"net/url"
 	"sort"
 	"strconv"
 	"time"
-
-	"github.com/peterhellberg/link"
 )
 
 // ACLEntriesPath is exposed primarily for use by the generic Paginator.
@@ -100,122 +97,6 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
-
-	var es []*ACLEntry
-	if err := decodeBodyMap(resp.Body, &es); err != nil {
-		return nil, err
-	}
-
-	sort.Stable(entriesByID(es))
-
-	return es, nil
-}
-
-// ListACLEntriesPaginator implements the PaginatorACLEntries interface.
-type ListACLEntriesPaginator struct {
-	CurrentPage int
-	LastPage    int
-	NextPage    int
-
-	// Private
-	client   *Client
-	consumed bool
-	options  *ListACLEntriesInput
-}
-
-// HasNext returns a boolean indicating whether more pages are available.
-func (p *ListACLEntriesPaginator) HasNext() bool {
-	return !p.consumed || p.Remaining() != 0
-}
-
-// Remaining returns the remaining page count.
-func (p *ListACLEntriesPaginator) Remaining() int {
-	if p.LastPage == 0 {
-		return 0
-	}
-	return p.LastPage - p.CurrentPage
-}
-
-// GetNext retrieves data in the next page.
-func (p *ListACLEntriesPaginator) GetNext() ([]*ACLEntry, error) {
-	return p.client.listACLEntriesWithPage(p.options, p)
-}
-
-// NewListACLEntriesPaginator returns a new paginator.
-func (c *Client) NewListACLEntriesPaginator(i *ListACLEntriesInput) PaginatorACLEntries {
-	return &ListACLEntriesPaginator{
-		client:  c,
-		options: i,
-	}
-}
-
-// listACLEntriesWithPage return a list of entries for an ACL of a given page.
-func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListACLEntriesPaginator) ([]*ACLEntry, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	if i.ACLID == "" {
-		return nil, ErrMissingACLID
-	}
-
-	var perPage int
-	const maxPerPage = 100
-	if i.PerPage <= 0 {
-		perPage = maxPerPage
-	} else {
-		perPage = i.PerPage
-	}
-
-	// page is not specified, fetch from the beginning
-	if i.Page <= 0 && p.CurrentPage == 0 {
-		p.CurrentPage = 1
-	} else {
-		// page is specified, fetch from a given page
-		if !p.consumed {
-			p.CurrentPage = i.Page
-		} else {
-			p.CurrentPage++
-		}
-	}
-
-	path := fmt.Sprintf(ACLEntriesPath, i.ServiceID, i.ACLID)
-	requestOptions := &RequestOptions{
-		Params: map[string]string{
-			"per_page": strconv.Itoa(perPage),
-			"page":     strconv.Itoa(p.CurrentPage),
-		},
-	}
-
-	if i.Direction != "" {
-		requestOptions.Params["direction"] = i.Direction
-	}
-	if i.Sort != "" {
-		requestOptions.Params["sort"] = i.Sort
-	}
-
-	resp, err := c.Get(path, requestOptions)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	for _, l := range link.ParseResponse(resp) {
-		// indicates the Link response header contained the next page instruction
-		if l.Rel == "next" {
-			u, _ := url.Parse(l.URI)
-			query := u.Query()
-			p.NextPage, _ = strconv.Atoi(query["page"][0])
-		}
-		// indicates the Link response header contained the last page instruction
-		if l.Rel == "last" {
-			u, _ := url.Parse(l.URI)
-			query := u.Query()
-			p.LastPage, _ = strconv.Atoi(query["page"][0])
-		}
-	}
-
-	p.consumed = true
 
 	var es []*ACLEntry
 	if err := decodeBodyMap(resp.Body, &es); err != nil {

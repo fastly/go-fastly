@@ -3,11 +3,7 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
-	"strconv"
 	"time"
-
-	"github.com/peterhellberg/link"
 )
 
 // DictionaryItemsPath is exposed primarily for use by the generic Paginator.
@@ -23,24 +19,6 @@ type DictionaryItem struct {
 	ItemValue    string     `mapstructure:"item_value"`
 	ServiceID    string     `mapstructure:"service_id"`
 	UpdatedAt    *time.Time `mapstructure:"updated_at"`
-}
-
-// dictionaryItemsByKey is a sortable list of dictionary items.
-type dictionaryItemsByKey []*DictionaryItem
-
-// Len implement the sortable interface.
-func (s dictionaryItemsByKey) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s dictionaryItemsByKey) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s dictionaryItemsByKey) Less(i, j int) bool {
-	return s[i].ItemKey < s[j].ItemKey
 }
 
 // ListDictionaryItemsInput is used as input to the ListDictionaryItems function.
@@ -79,123 +57,6 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
-	sort.Stable(dictionaryItemsByKey(bs))
-	return bs, nil
-}
-
-// ListDictionaryItemsPaginator implements the PaginatorDictionaryItems interface.
-type ListDictionaryItemsPaginator struct {
-	CurrentPage int
-	LastPage    int
-	NextPage    int
-
-	// Private
-	client   *Client
-	consumed bool
-	options  *ListDictionaryItemsInput
-}
-
-// HasNext returns a boolean indicating whether more pages are available.
-func (p *ListDictionaryItemsPaginator) HasNext() bool {
-	return !p.consumed || p.Remaining() != 0
-}
-
-// Remaining returns the remaining page count.
-func (p *ListDictionaryItemsPaginator) Remaining() int {
-	if p.LastPage == 0 {
-		return 0
-	}
-	return p.LastPage - p.CurrentPage
-}
-
-// GetNext retrieves data in the next page.
-func (p *ListDictionaryItemsPaginator) GetNext() ([]*DictionaryItem, error) {
-	return p.client.listDictionaryItemsWithPage(p.options, p)
-}
-
-// NewListDictionaryItemsPaginator returns a new paginator.
-func (c *Client) NewListDictionaryItemsPaginator(i *ListDictionaryItemsInput) PaginatorDictionaryItems {
-	return &ListDictionaryItemsPaginator{
-		client:  c,
-		options: i,
-	}
-}
-
-// listDictionaryItemsWithPage returns a list of items for a dictionary of a
-// given page.
-func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *ListDictionaryItemsPaginator) ([]*DictionaryItem, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	if i.DictionaryID == "" {
-		return nil, ErrMissingDictionaryID
-	}
-
-	var perPage int
-	const maxPerPage = 100
-	if i.PerPage <= 0 {
-		perPage = maxPerPage
-	} else {
-		perPage = i.PerPage
-	}
-
-	// page is not specified, fetch from the beginning
-	if i.Page <= 0 && p.CurrentPage == 0 {
-		p.CurrentPage = 1
-	} else {
-		// page is specified, fetch from a given page
-		if !p.consumed {
-			p.CurrentPage = i.Page
-		} else {
-			p.CurrentPage++
-		}
-	}
-
-	path := fmt.Sprintf(DictionaryItemsPath, i.ServiceID, i.DictionaryID)
-	requestOptions := &RequestOptions{
-		Params: map[string]string{
-			"per_page": strconv.Itoa(perPage),
-			"page":     strconv.Itoa(p.CurrentPage),
-		},
-	}
-
-	if i.Direction != "" {
-		requestOptions.Params["direction"] = i.Direction
-	}
-	if i.Sort != "" {
-		requestOptions.Params["sort"] = i.Sort
-	}
-
-	resp, err := c.Get(path, requestOptions)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	for _, l := range link.ParseResponse(resp) {
-		// indicates the Link response header contained the next page instruction
-		if l.Rel == "next" {
-			u, _ := url.Parse(l.URI)
-			query := u.Query()
-			p.NextPage, _ = strconv.Atoi(query["page"][0])
-		}
-		// indicates the Link response header contained the last page instruction
-		if l.Rel == "last" {
-			u, _ := url.Parse(l.URI)
-			query := u.Query()
-			p.LastPage, _ = strconv.Atoi(query["page"][0])
-		}
-	}
-
-	p.consumed = true
-
-	var bs []*DictionaryItem
-	if err := decodeBodyMap(resp.Body, &bs); err != nil {
-		return nil, err
-	}
-	sort.Stable(dictionaryItemsByKey(bs))
-
 	return bs, nil
 }
 
