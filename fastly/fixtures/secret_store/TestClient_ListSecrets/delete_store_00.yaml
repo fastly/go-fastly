@@ -10,22 +10,34 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.19.3)
-    url: https://api.fastly.com/resources/stores/secret/htbYS6BrqhzkI30YaEQcDY
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.21.4)
+    url: https://api.fastly.com/resources/stores/secret/XEFWk72J2ud8NCZonE2Fj0
     method: DELETE
   response:
     body: ""
     headers:
-      Access-Control-Allow-Headers:
-      - Content-Type, Fastly-Key
-      Access-Control-Allow-Methods:
-      - PUT, POST, GET, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - '*'
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Mon, 28 Nov 2022 22:40:40 GMT
+      - Mon, 27 Nov 2023 15:54:57 GMT
       Fastly-Trace-Id:
-      - zvKndVOOJTaE8XqtmSFDEG
+      - 26NAeUAAWBGecbu1tdseZB
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600020-LCY
+      X-Timer:
+      - S1701100497.941815,VS0,VE254
     status: 204 No Content
     code: 204
     duration: ""

@@ -10,31 +10,45 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/7.1.0 (+github.com/fastly/go-fastly; go1.19.5)
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.21.4)
     url: https://api.fastly.com/resources/stores/secret/client-key
     method: POST
   response:
     body: |
       {
-        "public_key": "CUBQitcJt9a4Vqem5vPYubm/jjZ6Inqr4gr/6aJukSc=",
-        "signature": "8ajkjOwcsUIQRS1Blsoqk3vL4gelCh1rqYZATzLGXumFB2VNCFhTgMzmV6ypPQ6VJcdtbUr/fEvGtHfagNH4DA==",
-        "expires_at": "2023-02-03T22:36:31.563174Z"
+        "public_key": "2iMPR4MnTZ3vC2PjShB6PQM8wLb2ckfUOLKwex5sYUc=",
+        "signature": "xfLzo9i8KTwie/FZID5ZAkPWiCCzbV1T77xUrzuRx3zUvdnF/I6m9Q0WKTKl8qW++NDPhrc/1wmBvILV7EmdAw==",
+        "expires_at": "2023-11-27T16:04:54.798109645Z"
       }
     headers:
-      Access-Control-Allow-Headers:
-      - Content-Type, Fastly-Key
-      Access-Control-Allow-Methods:
-      - PUT, POST, GET, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - '*'
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
-      - "221"
+      - "224"
       Content-Type:
       - application/json
       Date:
-      - Fri, 03 Feb 2023 22:26:31 GMT
+      - Mon, 27 Nov 2023 15:54:54 GMT
       Fastly-Trace-Id:
-      - vIOfYP6o8Rj6SVaJ2HkeQv
+      - BcgnEl4Q9K8MtATbK58Cmm
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-canary-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600020-LCY
+      X-Timer:
+      - S1701100495.526221,VS0,VE350
     status: 200 OK
     code: 200
     duration: ""
