@@ -10,6 +10,10 @@ import (
 	"github.com/peterhellberg/link"
 )
 
+// DictionaryItemsPath is exposed primarily for use by the generic Paginator.
+// See ./paginator.go for details.
+const DictionaryItemsPath = "/service/%s/dictionary/%s/items"
+
 // DictionaryItem represents a dictionary item response from the Fastly API.
 type DictionaryItem struct {
 	CreatedAt    *time.Time `mapstructure:"created_at"`
@@ -64,7 +68,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
+	path := fmt.Sprintf(DictionaryItemsPath, i.ServiceID, i.DictionaryID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -148,7 +152,7 @@ func (c *Client) listDictionaryItemsWithPage(i *ListDictionaryItemsInput, p *Lis
 		}
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
+	path := fmt.Sprintf(DictionaryItemsPath, i.ServiceID, i.DictionaryID)
 	requestOptions := &RequestOptions{
 		Params: map[string]string{
 			"per_page": strconv.Itoa(perPage),
@@ -351,7 +355,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/items", i.ServiceID, i.DictionaryID)
+	path := fmt.Sprintf(DictionaryItemsPath, i.ServiceID, i.DictionaryID)
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err

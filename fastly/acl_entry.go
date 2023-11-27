@@ -10,6 +10,10 @@ import (
 	"github.com/peterhellberg/link"
 )
 
+// ACLEntriesPath is exposed primarily for use by the generic Paginator.
+// See ./paginator.go for details.
+const ACLEntriesPath = "/service/%s/acl/%s/entries"
+
 // ACLEntry represents a server response from the Fastly API.
 type ACLEntry struct {
 	ACLID     string     `mapstructure:"acl_id"`
@@ -86,7 +90,7 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
+	path := fmt.Sprintf(ACLEntriesPath, i.ServiceID, i.ACLID)
 
 	ro := new(RequestOptions)
 	ro.Params = i.formatFilters()
@@ -175,7 +179,7 @@ func (c *Client) listACLEntriesWithPage(i *ListACLEntriesInput, p *ListACLEntrie
 		}
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
+	path := fmt.Sprintf(ACLEntriesPath, i.ServiceID, i.ACLID)
 	requestOptions := &RequestOptions{
 		Params: map[string]string{
 			"per_page": strconv.Itoa(perPage),
@@ -429,7 +433,7 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 		return ErrMaxExceededEntries
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entries", i.ServiceID, i.ACLID)
+	path := fmt.Sprintf(ACLEntriesPath, i.ServiceID, i.ACLID)
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err
