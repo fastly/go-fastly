@@ -56,41 +56,41 @@ func TestClient_Bigqueries(t *testing.T) {
 		})
 	}()
 
-	if bq.Name != "test-bigquery" {
-		t.Errorf("bad name: %q", bq.Name)
+	if *bq.Name != "test-bigquery" {
+		t.Errorf("bad name: %q", *bq.Name)
 	}
-	if bq.ProjectID != "example-fastly-log" {
-		t.Errorf("bad project_id: %q", bq.ProjectID)
+	if *bq.ProjectID != "example-fastly-log" {
+		t.Errorf("bad project_id: %q", *bq.ProjectID)
 	}
-	if bq.Dataset != "fastly_log_test" {
-		t.Errorf("bad dataset: %q", bq.Dataset)
+	if *bq.Dataset != "fastly_log_test" {
+		t.Errorf("bad dataset: %q", *bq.Dataset)
 	}
-	if bq.Table != "fastly_logs" {
-		t.Errorf("bad table: %q", bq.Table)
+	if *bq.Table != "fastly_logs" {
+		t.Errorf("bad table: %q", *bq.Table)
 	}
-	if bq.Template != "" {
-		t.Errorf("bad template_suffix: %q", bq.Template)
+	if *bq.Template != "" {
+		t.Errorf("bad template_suffix: %q", *bq.Template)
 	}
-	if bq.User != "fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com" {
-		t.Errorf("bad user: %q", bq.User)
+	if *bq.User != "fastly-bigquery-log@example-fastly-log.iam.gserviceaccount.com" {
+		t.Errorf("bad user: %q", *bq.User)
 	}
-	if bq.AccountName != "service-account" {
-		t.Errorf("bad account name: %q", bq.AccountName)
+	if *bq.AccountName != "service-account" {
+		t.Errorf("bad account name: %q", *bq.AccountName)
 	}
-	if strings.TrimSpace(bq.SecretKey) != strings.TrimSpace(secretKey) {
-		t.Errorf("bad secret_key: %q", bq.SecretKey)
+	if strings.TrimSpace(*bq.SecretKey) != strings.TrimSpace(secretKey) {
+		t.Errorf("bad secret_key: %q", *bq.SecretKey)
 	}
-	if bq.Format != "{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}" {
-		t.Errorf("bad format: %q", bq.Format)
+	if *bq.Format != "{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}" {
+		t.Errorf("bad format: %q", *bq.Format)
 	}
-	if bq.ResponseCondition != "" {
-		t.Errorf("bad response_condition: %q", bq.ResponseCondition)
+	if *bq.ResponseCondition != "" {
+		t.Errorf("bad response_condition: %q", *bq.ResponseCondition)
 	}
-	if bq.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", bq.Placement)
+	if *bq.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *bq.Placement)
 	}
-	if bq.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", bq.FormatVersion)
+	if *bq.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *bq.FormatVersion)
 	}
 
 	// List
@@ -120,38 +120,38 @@ func TestClient_Bigqueries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if bq.Name != nbq.Name {
-		t.Errorf("bad name: %q", bq.Name)
+	if *bq.Name != *nbq.Name {
+		t.Errorf("bad name: %q", *bq.Name)
 	}
-	if bq.ProjectID != nbq.ProjectID {
-		t.Errorf("bad project_id: %q", bq.ProjectID)
+	if *bq.ProjectID != *nbq.ProjectID {
+		t.Errorf("bad project_id: %q", *bq.ProjectID)
 	}
-	if bq.Dataset != nbq.Dataset {
-		t.Errorf("bad dataset: %q", bq.Dataset)
+	if *bq.Dataset != *nbq.Dataset {
+		t.Errorf("bad dataset: %q", *bq.Dataset)
 	}
-	if bq.Table != nbq.Table {
-		t.Errorf("bad table: %q", bq.Table)
+	if *bq.Table != *nbq.Table {
+		t.Errorf("bad table: %q", *bq.Table)
 	}
-	if bq.Template != nbq.Template {
-		t.Errorf("bad template_suffix: %q", bq.Template)
+	if *bq.Template != *nbq.Template {
+		t.Errorf("bad template_suffix: %q", *bq.Template)
 	}
-	if bq.User != nbq.User {
-		t.Errorf("bad user: %q", bq.User)
+	if *bq.User != *nbq.User {
+		t.Errorf("bad user: %q", *bq.User)
 	}
-	if bq.SecretKey != nbq.SecretKey {
-		t.Errorf("bad secret_key: %q", bq.SecretKey)
+	if *bq.SecretKey != *nbq.SecretKey {
+		t.Errorf("bad secret_key: %q", *bq.SecretKey)
 	}
-	if bq.Format != nbq.Format {
-		t.Errorf("bad format: %q", bq.Format)
+	if *bq.Format != *nbq.Format {
+		t.Errorf("bad format: %q", *bq.Format)
 	}
-	if bq.ResponseCondition != nbq.ResponseCondition {
-		t.Errorf("bad response_condition: %q", bq.ResponseCondition)
+	if *bq.ResponseCondition != *nbq.ResponseCondition {
+		t.Errorf("bad response_condition: %q", *bq.ResponseCondition)
 	}
-	if bq.Placement != nbq.Placement {
-		t.Errorf("bad placement: %q", bq.Placement)
+	if *bq.Placement != *nbq.Placement {
+		t.Errorf("bad placement: %q", *bq.Placement)
 	}
-	if bq.FormatVersion != nbq.FormatVersion {
-		t.Errorf("bad format_version: %q", bq.FormatVersion)
+	if *bq.FormatVersion != *nbq.FormatVersion {
+		t.Errorf("bad format_version: %q", *bq.FormatVersion)
 	}
 
 	// Update
@@ -167,8 +167,8 @@ func TestClient_Bigqueries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ubq.Name != "new-test-bigquery" {
-		t.Errorf("bad name: %q", ubq.Name)
+	if *ubq.Name != "new-test-bigquery" {
+		t.Errorf("bad name: %q", *ubq.Name)
 	}
 
 	// Delete

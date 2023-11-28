@@ -3,47 +3,28 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // BigQuery represents a BigQuery response from the Fastly API.
 type BigQuery struct {
-	AccountName       string     `mapstructure:"account_name"`
+	AccountName       *string    `mapstructure:"account_name"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
-	Dataset           string     `mapstructure:"dataset"`
+	Dataset           *string    `mapstructure:"dataset"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	ProjectID         string     `mapstructure:"project_id"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Table             string     `mapstructure:"table"`
-	Template          string     `mapstructure:"template_suffix"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	ProjectID         *string    `mapstructure:"project_id"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	SecretKey         *string    `mapstructure:"secret_key"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Table             *string    `mapstructure:"table"`
+	Template          *string    `mapstructure:"template_suffix"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	User              string     `mapstructure:"user"`
-}
-
-// bigQueriesByName is a sortable list of BigQueries.
-type bigQueriesByName []*BigQuery
-
-// Len implements the sortable interface.
-func (s bigQueriesByName) Len() int {
-	return len(s)
-}
-
-// Swap implements the sortable interface.
-func (s bigQueriesByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implements the sortable interface.
-func (s bigQueriesByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	User              *string    `mapstructure:"user"`
 }
 
 // ListBigQueriesInput is used as input to the ListBigQueries function.
@@ -74,7 +55,6 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 	if err := decodeBodyMap(resp.Body, &bigQueries); err != nil {
 		return nil, err
 	}
-	sort.Stable(bigQueriesByName(bigQueries))
 	return bigQueries, nil
 }
 
