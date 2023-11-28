@@ -54,8 +54,8 @@ func TestClient_ACLs(t *testing.T) {
 		})
 	}()
 
-	if a.Name != "test_acl" {
-		t.Errorf("bad name: %q", a.Name)
+	if *a.Name != "test_acl" {
+		t.Errorf("bad name: %q", *a.Name)
 	}
 
 	// List
@@ -85,8 +85,8 @@ func TestClient_ACLs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if a.Name != na.Name {
-		t.Errorf("bad name: %q (%q)", a.Name, na.Name)
+	if *a.Name != *na.Name {
+		t.Errorf("bad name: %q (%q)", *a.Name, *na.Name)
 	}
 
 	// Update
@@ -102,12 +102,12 @@ func TestClient_ACLs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ua.Name != "new_test_acl" {
-		t.Errorf("Bad name after update %s", ua.Name)
+	if *ua.Name != "new_test_acl" {
+		t.Errorf("Bad name after update %s", *ua.Name)
 	}
 
-	if a.ID != ua.ID {
-		t.Errorf("bad ACL id: %q (%q)", a.ID, ua.ID)
+	if *a.ID != *ua.ID {
+		t.Errorf("bad ACL id: %q (%q)", *a.ID, *ua.ID)
 	}
 
 	// Delete

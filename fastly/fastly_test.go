@@ -242,9 +242,9 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteACL(&DeleteACLInput{
-			ServiceID:      acl.ServiceID,
-			ServiceVersion: acl.ServiceVersion,
-			Name:           acl.Name,
+			ServiceID:      *acl.ServiceID,
+			ServiceVersion: *acl.ServiceVersion,
+			Name:           *acl.Name,
 		})
 	})
 	if err != nil {
