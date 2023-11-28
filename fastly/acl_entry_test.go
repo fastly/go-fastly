@@ -55,8 +55,6 @@ func TestClient_ACLEntries(t *testing.T) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
 			ACLID:     testACL.ID,
 			Direction: "descend",
-			Page:      1,
-			PerPage:   1,
 			ServiceID: testService.ID,
 			Sort:      "created",
 		})
@@ -71,22 +69,31 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	// List with paginator
 	var es2 []*ACLEntry
-	var paginator PaginatorACLEntries
+	var paginator *ListPaginator[ACLEntry]
 	record(t, fixtureBase+"list2", func(c *Client) {
-		paginator = c.NewListACLEntriesPaginator(&ListACLEntriesInput{
-			ServiceID: testService.ID,
+		paginator = c.GetACLEntries(&GetACLEntriesInput{
 			ACLID:     testACL.ID,
+			Direction: "ascend",
+			PerPage:   50,
+			ServiceID: testService.ID,
+			Sort:      "ip",
 		})
-		es2, err = paginator.GetNext()
+
+		for paginator.HasNext() {
+			data, err := paginator.GetNext()
+			if err != nil {
+				t.Errorf("Bad paginator (remaining: %d): %s", paginator.Remaining(), err)
+				return
+			}
+			es2 = append(es2, data...)
+		}
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	if len(es2) != 1 {
-		t.Errorf("Bad entries: %v", es)
+		t.Errorf("Bad entries: %v", es2)
 	}
-
 	if paginator.HasNext() {
 		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())
 	}
@@ -165,14 +172,14 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 
 	_, err = testClient.ListACLEntries(&ListACLEntriesInput{})
 	if err != ErrMissingACLID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("bad ACL ID: %s", err)
 	}
 
 	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("bad Service ID: %s", err)
 	}
 }
 

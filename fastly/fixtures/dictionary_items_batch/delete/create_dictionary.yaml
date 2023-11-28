@@ -2,23 +2,19 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=4qAarbm9YqjHgJSlpkVZhb&ServiceVersion=2&name=test_dictionary_BatchModifyDictionaryItems_Delete
+    body: name=test_dictionary_BatchModifyDictionaryItems_Delete
     form:
-      ServiceID:
-      - 4qAarbm9YqjHgJSlpkVZhb
-      ServiceVersion:
-      - "2"
       name:
       - test_dictionary_BatchModifyDictionaryItems_Delete
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/4qAarbm9YqjHgJSlpkVZhb/version/2/dictionary
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/VO1f3q7mWtceqmR0FTEww6/version/2/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary_BatchModifyDictionaryItems_Delete","service_id":"4qAarbm9YqjHgJSlpkVZhb","version":2,"write_only":false,"deleted_at":null,"id":"7AX6uaEQq0dWFzVprBevRB","created_at":"2021-11-03T16:14:53Z","updated_at":"2021-11-03T16:14:53Z"}'
+    body: '{"name":"test_dictionary_BatchModifyDictionaryItems_Delete","service_id":"VO1f3q7mWtceqmR0FTEww6","version":2,"created_at":"2023-11-28T14:24:05Z","updated_at":"2023-11-28T14:24:05Z","id":"E8G84Uv06Wd559j0hrGn27","deleted_at":null,"write_only":false}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +23,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:14:53 GMT
+      - Tue, 28 Nov 2023 14:24:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "4972"
+      - "9971"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1701183600"
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600066-LCY
       X-Timer:
-      - S1635956094.827472,VS0,VE171
+      - S1701181445.463703,VS0,VE208
     status: 200 OK
     code: 200
     duration: ""

@@ -2,25 +2,25 @@
 version: 1
 interactions:
 - request:
-    body: DictionaryID=70Xeh5hM2FIvR5UG41Ay62&ItemKey=test-dictionary-item&ServiceID=7i6HN3TK9wS159v2gPAZ8A&item_value=new-value
+    body: DictionaryID=xyHHO0G3S3ZREo49Us7kg5&ItemKey=test-dictionary-item&ServiceID=EXmb9qO9J34QFgYMSz0XE1&item_value=new-value
     form:
       DictionaryID:
-      - 70Xeh5hM2FIvR5UG41Ay62
+      - xyHHO0G3S3ZREo49Us7kg5
       ItemKey:
       - test-dictionary-item
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - EXmb9qO9J34QFgYMSz0XE1
       item_value:
       - new-value
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.2 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/dictionary/70Xeh5hM2FIvR5UG41Ay62/item/test-dictionary-item
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/EXmb9qO9J34QFgYMSz0XE1/dictionary/xyHHO0G3S3ZREo49Us7kg5/item/test-dictionary-item
     method: PUT
   response:
-    body: '{"dictionary_id":"70Xeh5hM2FIvR5UG41Ay62","service_id":"7i6HN3TK9wS159v2gPAZ8A","item_key":"test-dictionary-item","item_value":"new-value"}'
+    body: '{"dictionary_id":"xyHHO0G3S3ZREo49Us7kg5","service_id":"EXmb9qO9J34QFgYMSz0XE1","item_key":"test-dictionary-item","item_value":"new-value"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +29,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 22 Dec 2021 03:08:16 GMT
+      - Tue, 28 Nov 2023 14:45:15 GMT
       Fastly-Ratelimit-Remaining:
-      - "4987"
+      - "9940"
       Fastly-Ratelimit-Reset:
-      - "1640145600"
+      - "1701183600"
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11927-TYO
+      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600027-LCY
       X-Timer:
-      - S1640142497.554638,VS0,VE240
+      - S1701182715.897806,VS0,VE193
     status: 200 OK
     code: 200
     duration: ""

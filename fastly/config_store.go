@@ -217,10 +217,7 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 		return nil, err
 	}
 
-	byName := servicesByName(ss)
-	sort.Sort(byName)
-
-	return byName, nil
+	return ss, nil
 }
 
 // UpdateConfigStoreInput is the input to UpdateConfigStore.

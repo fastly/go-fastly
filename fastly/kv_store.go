@@ -37,6 +37,7 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var store *KVStore
 	if err := decodeBodyMap(resp.Body, &store); err != nil {
@@ -94,6 +95,7 @@ func (c *Client) ListKVStores(i *ListKVStoresInput) (*ListKVStoresResponse, erro
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var output *ListKVStoresResponse
 	if err := decodeBodyMap(resp.Body, &output); err != nil {
@@ -172,6 +174,7 @@ func (c *Client) GetKVStore(i *GetKVStoreInput) (*KVStore, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var output *KVStore
 	if err := decodeBodyMap(resp.Body, &output); err != nil {
@@ -197,6 +200,7 @@ func (c *Client) DeleteKVStore(i *DeleteKVStoreInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)
@@ -277,6 +281,7 @@ func (c *Client) ListKVStoreKeys(i *ListKVStoreKeysInput) (*ListKVStoreKeysRespo
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var output *ListKVStoreKeysResponse
 	if err := decodeBodyMap(resp.Body, &output); err != nil {
@@ -360,6 +365,7 @@ func (c *Client) GetKVStoreKey(i *GetKVStoreKeyInput) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	defer resp.Body.Close()
 
 	output, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -441,6 +447,7 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	_, err = checkResp(resp, err)
 	return err
@@ -472,6 +479,7 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)
@@ -507,6 +515,7 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 	if err != nil {
 		return err
 	}
+	defer resp.Body.Close()
 
 	_, err = checkResp(resp, err)
 	return err

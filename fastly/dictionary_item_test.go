@@ -66,22 +66,31 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	// List with paginator
 	var dictionaryItems2 []*DictionaryItem
-	var paginator PaginatorDictionaryItems
+	var paginator *ListPaginator[DictionaryItem]
 	record(t, fixtureBase+"list2", func(c *Client) {
-		paginator = c.NewListDictionaryItemsPaginator(&ListDictionaryItemsInput{
-			ServiceID:    testService.ID,
+		paginator = c.GetDictionaryItems(&GetDictionaryItemsInput{
 			DictionaryID: testDictionary.ID,
+			Direction:    "ascend",
+			PerPage:      50,
+			ServiceID:    testService.ID,
+			Sort:         "item_key",
 		})
-		dictionaryItems2, err = paginator.GetNext()
+
+		for paginator.HasNext() {
+			data, err := paginator.GetNext()
+			if err != nil {
+				t.Errorf("Bad paginator (remaining: %d): %s", paginator.Remaining(), err)
+				return
+			}
+			dictionaryItems2 = append(dictionaryItems2, data...)
+		}
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-
 	if len(dictionaryItems2) != 1 {
 		t.Errorf("Bad items: %v", dictionaryItems2)
 	}
-
 	if paginator.HasNext() {
 		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())
 	}

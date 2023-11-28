@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"entries":[{"comment":"Updated ACL Entry 1","id":"dYl0JXQdZIhguhUq5pbB06","ip":"127.0.0.2","negated":"1","op":"update","subnet":16}]}'
+    body: '{"entries":[{"comment":"Updated ACL Entry 1","id":"lqXtCIzmuc1WLcvxl2xhI7","ip":"127.0.0.2","negated":"1","op":"update","subnet":16}]}'
     form: {}
     headers:
       Accept:
@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/hIFHhLCI9PxAnEDzrUMVk3/acl/6NimVmh4FgcNUkqztPTyv3/entries
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/3flHGGn2I9AQx02IUyjpm6/acl/TU1mU7W8XNHjPyYBEbKRD7/entries
     method: PATCH
   response:
     body: '{"status":"ok"}'
@@ -23,11 +23,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 13:21:18 GMT
+      - Tue, 28 Nov 2023 14:23:21 GMT
       Fastly-Ratelimit-Remaining:
-      - "9974"
+      - "9982"
       Fastly-Ratelimit-Reset:
-      - "1667829600"
+      - "1701183600"
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4144-MAN
+      - cache-control-canary-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600041-LCY
       X-Timer:
-      - S1667827279.805401,VS0,VE150
+      - S1701181401.427176,VS0,VE238
     status: 200 OK
     code: 200
     duration: ""

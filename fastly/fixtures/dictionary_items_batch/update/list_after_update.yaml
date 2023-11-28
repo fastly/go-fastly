@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/2cgAHRx3MdpWJbhz6CPoFB/dictionary/5obPYoXlboJAoyWGLX2ZKC/items
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/qkVGksaLIXbjEN154Ebkt5/dictionary/C5vZ2dFHm74HTFlU1fbnV5/items?page=1&per_page=100
     method: GET
   response:
-    body: '[{"dictionary_id":"5obPYoXlboJAoyWGLX2ZKC","item_key":"key1","updated_at":"2021-11-03T16:14:56Z","item_value":"val1","service_id":"2cgAHRx3MdpWJbhz6CPoFB","created_at":"2021-11-03T16:14:56Z","deleted_at":null},{"dictionary_id":"5obPYoXlboJAoyWGLX2ZKC","deleted_at":null,"created_at":"2021-11-03T16:14:56Z","service_id":"2cgAHRx3MdpWJbhz6CPoFB","item_key":"key2","updated_at":"2021-11-03T16:14:56Z","item_value":"val2Updated"}]'
+    body: '[{"updated_at":"2023-11-28T14:24:08Z","service_id":"qkVGksaLIXbjEN154Ebkt5","deleted_at":null,"created_at":"2023-11-28T14:24:08Z","dictionary_id":"C5vZ2dFHm74HTFlU1fbnV5","item_value":"val1","item_key":"key1"},{"deleted_at":null,"created_at":"2023-11-28T14:24:08Z","dictionary_id":"C5vZ2dFHm74HTFlU1fbnV5","updated_at":"2023-11-28T14:24:09Z","service_id":"qkVGksaLIXbjEN154Ebkt5","item_key":"key2","item_value":"val2Updated"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:14:56 GMT
+      - Tue, 28 Nov 2023 14:24:09 GMT
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-2-prod-3-CONTROL-AWS-UE2, cache-lcy-eglc8600066-LCY
       X-Timer:
-      - S1635956096.420569,VS0,VE405
+      - S1701181449.314527,VS0,VE169
     status: 200 OK
     code: 200
     duration: ""

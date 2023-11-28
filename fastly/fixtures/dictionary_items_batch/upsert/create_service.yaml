@@ -14,11 +14,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_BatchModifyDictionaryItems_Upsert","type":"vcl","id":"4Qk3djeqyu8sUlxKDcRnHo","deleted_at":null,"updated_at":"2021-11-03T16:14:57Z","paused":false,"publish_key":"","versions":[{"updated_at":"2021-11-03T16:14:57Z","deleted_at":null,"active":false,"comment":"","service_id":"4Qk3djeqyu8sUlxKDcRnHo","created_at":"2021-11-03T16:14:57Z","deployed":false,"locked":false,"staging":false,"testing":false,"number":1}],"created_at":"2021-11-03T16:14:57Z"}'
+    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly client test","name":"test_service_BatchModifyDictionaryItems_Upsert","type":"vcl","updated_at":"2023-11-28T14:24:10Z","paused":false,"publish_key":"","deleted_at":null,"id":"F6UhEMInhRa35ypb2JtkS3","versions":[{"locked":false,"updated_at":"2023-11-28T14:24:10Z","service_id":"F6UhEMInhRa35ypb2JtkS3","deployed":false,"comment":"","deleted_at":null,"active":false,"number":1,"created_at":"2023-11-28T14:24:10Z","staging":false,"testing":false}],"created_at":"2023-11-28T14:24:10Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +27,13 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:14:57 GMT
+      - Tue, 28 Nov 2023 14:24:10 GMT
       Fastly-Ratelimit-Remaining:
-      - "4960"
+      - "9959"
       Fastly-Ratelimit-Reset:
-      - "1635958800"
+      - "1701183600"
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600066-LCY
       X-Timer:
-      - S1635956097.354292,VS0,VE225
+      - S1701181450.191903,VS0,VE306
     status: 200 OK
     code: 200
     duration: ""
