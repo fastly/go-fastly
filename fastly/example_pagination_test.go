@@ -29,10 +29,9 @@ func ExampleNewPaginator() {
 		},
 		// Fastly API path.
 		//
-		// Supported values:
-		// fastly.ACLEntriesPath
-		// fastly.DictionaryItemsPath
-		// fastly.ServicePath
+		// Additional functions provided:
+		// fastly.ACLEntriesPath()
+		// fastly.DictionaryItemsPath()
 		fastly.ServicePath,
 	)
 
