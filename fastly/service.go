@@ -79,7 +79,7 @@ type ListServicesInput struct {
 	Sort string
 }
 
-// ListServices retrieves all resources.
+// ListServices retrieves all resources. Not suitable for large collections.
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 	p := c.GetServices(&GetServicesInput{
 		Direction: i.Direction,

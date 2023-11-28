@@ -59,7 +59,7 @@ type ListACLEntriesInput struct {
 	Sort string
 }
 
-// ListACLEntries retrieves all resources.
+// ListACLEntries retrieves all resources. Not suitable for large collections.
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID

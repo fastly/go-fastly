@@ -57,7 +57,8 @@ type ListDictionaryItemsInput struct {
 	Sort string
 }
 
-// ListDictionaryItems retrieves all resources.
+// ListDictionaryItems retrieves all resources. Not suitable for large
+// collections.
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
 	if i.DictionaryID == "" {
 		return nil, ErrMissingDictionaryID
