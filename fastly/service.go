@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"fmt"
-	"strconv"
 	"time"
 )
 
@@ -66,41 +65,28 @@ type ListServicesInput struct {
 	Sort string
 }
 
-func (l *ListServicesInput) formatFilters() map[string]string {
-	m := make(map[string]string)
-
-	if l.Direction != "" {
-		m["direction"] = l.Direction
-	}
-	if l.Page != 0 {
-		m["page"] = strconv.Itoa(l.Page)
-	}
-	if l.PerPage != 0 {
-		m["per_page"] = strconv.Itoa(l.PerPage)
-	}
-	if l.Sort != "" {
-		m["sort"] = l.Sort
-	}
-
-	return m
+// GetServices returns a ListPaginator for paginating through the resources.
+func (c *Client) GetServices(i *ListServicesInput) *ListPaginator[Service] {
+	return NewPaginator[Service](c, &ListInput{
+		Direction: i.Direction,
+		Sort:      i.Sort,
+		Page:      i.Page,
+		PerPage:   i.PerPage,
+	}, ServicePath)
 }
 
 // ListServices retrieves all resources.
 func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
-	ro := new(RequestOptions)
-	ro.Params = i.formatFilters()
-
-	resp, err := c.Get(ServicePath, ro)
-	if err != nil {
-		return nil, err
+	p := c.GetServices(i)
+	var results []*Service
+	for p.HasNext() {
+		data, err := p.GetNext()
+		if err != nil {
+			return nil, fmt.Errorf("failed to get next page (remaining: %d): %s", p.Remaining(), err)
+		}
+		results = append(results, data...)
 	}
-	defer resp.Body.Close()
-
-	var s []*Service
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
-		return nil, err
-	}
-	return s, nil
+	return results, nil
 }
 
 // CreateServiceInput is used as input to the CreateService function.

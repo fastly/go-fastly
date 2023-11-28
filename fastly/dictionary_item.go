@@ -41,27 +41,28 @@ type ListDictionaryItemsInput struct {
 	Sort string
 }
 
+// GetDictionaryItems returns a ListPaginator for paginating through the resources.
+func (c *Client) GetDictionaryItems(i *ListDictionaryItemsInput) *ListPaginator[DictionaryItem] {
+	return NewPaginator[DictionaryItem](c, &ListInput{
+		Direction: i.Direction,
+		Sort:      i.Sort,
+		Page:      i.Page,
+		PerPage:   i.PerPage,
+	}, DictionaryItemsPath(i.ServiceID, i.DictionaryID))
+}
+
 // ListDictionaryItems retrieves all resources.
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
-	if i.DictionaryID == "" {
-		return nil, ErrMissingDictionaryID
+	p := c.GetDictionaryItems(i)
+	var results []*DictionaryItem
+	for p.HasNext() {
+		data, err := p.GetNext()
+		if err != nil {
+			return nil, fmt.Errorf("failed to get next page (remaining: %d): %s", p.Remaining(), err)
+		}
+		results = append(results, data...)
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	path := fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID)
-	resp, err := c.Get(path, nil)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var bs []*DictionaryItem
-	if err := decodeBodyMap(resp.Body, &bs); err != nil {
-		return nil, err
-	}
-	return bs, nil
+	return results, nil
 }
 
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.

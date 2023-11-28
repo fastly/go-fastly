@@ -2,8 +2,6 @@ package fastly
 
 import (
 	"fmt"
-	"sort"
-	"strconv"
 	"time"
 )
 
@@ -29,24 +27,6 @@ func ACLEntriesPath(serviceID, aclID string) string {
 	return fmt.Sprintf(aclEntriesPath, serviceID, aclID)
 }
 
-// entriesByID is a sortable list of ACL entries.
-type entriesByID []*ACLEntry
-
-// Len implements the sortable interface.
-func (s entriesByID) Len() int {
-	return len(s)
-}
-
-// Swap implements the sortable interface.
-func (s entriesByID) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implements the sortable interface.
-func (s entriesByID) Less(i, j int) bool {
-	return s[i].ID < s[j].ID
-}
-
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
 type ListACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
@@ -63,53 +43,28 @@ type ListACLEntriesInput struct {
 	Sort string
 }
 
-func (l *ListACLEntriesInput) formatFilters() map[string]string {
-	m := make(map[string]string)
-
-	if l.Direction != "" {
-		m["direction"] = l.Direction
-	}
-	if l.Page != 0 {
-		m["page"] = strconv.Itoa(l.Page)
-	}
-	if l.PerPage != 0 {
-		m["per_page"] = strconv.Itoa(l.PerPage)
-	}
-	if l.Sort != "" {
-		m["sort"] = l.Sort
-	}
-
-	return m
+// GetACLEntries returns a ListPaginator for paginating through the resources.
+func (c *Client) GetACLEntries(i *ListACLEntriesInput) *ListPaginator[ACLEntry] {
+	return NewPaginator[ACLEntry](c, &ListInput{
+		Direction: i.Direction,
+		Sort:      i.Sort,
+		Page:      i.Page,
+		PerPage:   i.PerPage,
+	}, ACLEntriesPath(i.ServiceID, i.ACLID))
 }
 
 // ListACLEntries retrieves all resources.
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
-	if i.ACLID == "" {
-		return nil, ErrMissingACLID
+	p := c.GetACLEntries(i)
+	var results []*ACLEntry
+	for p.HasNext() {
+		data, err := p.GetNext()
+		if err != nil {
+			return nil, fmt.Errorf("failed to get next page (remaining: %d): %s", p.Remaining(), err)
+		}
+		results = append(results, data...)
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
-	}
-
-	path := fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID)
-
-	ro := new(RequestOptions)
-	ro.Params = i.formatFilters()
-
-	resp, err := c.Get(path, ro)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	var es []*ACLEntry
-	if err := decodeBodyMap(resp.Body, &es); err != nil {
-		return nil, err
-	}
-
-	sort.Stable(entriesByID(es))
-
-	return es, nil
+	return results, nil
 }
 
 // GetACLEntryInput is the input parameter to GetACLEntry function.

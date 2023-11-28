@@ -18,9 +18,9 @@ type PaginatorKVStoreEntries interface {
 // This is because we don't assign it to any of the defined function parameters.
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
 //
-// This means we have to have the user pass the API path.
-// To make things easier we expose each supported path as a constant.
-// e.g. fastly.ServicePath, fastly.ACLEntriesPath etc.
+// This means we have to have the caller pass the API path.
+// To make things easier we expose functions for constructing each path.
+// e.g. fastly.ServicePath(), fastly.ACLEntriesPath() etc.
 func NewPaginator[T any](client *Client, input *ListInput, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,
@@ -29,6 +29,7 @@ func NewPaginator[T any](client *Client, input *ListInput, path string) *ListPag
 	}
 }
 
+// ListInput configures the API list options.
 type ListInput struct {
 	// Direction is the direction in which to sort results.
 	Direction string
