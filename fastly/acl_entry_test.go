@@ -33,20 +33,20 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if e.IP != "10.0.0.3" {
-		t.Errorf("bad IP: %q", e.IP)
+	if *e.IP != "10.0.0.3" {
+		t.Errorf("bad IP: %q", *e.IP)
 	}
 
 	if *e.Subnet != 8 {
-		t.Errorf("Bad subnet: %v", e.Subnet)
+		t.Errorf("Bad subnet: %v", *e.Subnet)
 	}
 
-	if e.Negated {
-		t.Errorf("Bad negated flag: %t", e.Negated)
+	if *e.Negated {
+		t.Errorf("Bad negated flag: %t", *e.Negated)
 	}
 
-	if e.Comment != "test entry" {
-		t.Errorf("Bad comment: %q", e.Comment)
+	if *e.Comment != "test entry" {
+		t.Errorf("Bad comment: %q", *e.Comment)
 	}
 
 	// List
@@ -54,9 +54,9 @@ func TestClient_ACLEntries(t *testing.T) {
 	record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
 			ACLID:     *testACL.ID,
-			Direction: "descend",
+			Direction: ToPointer("descend"),
 			ServiceID: testService.ID,
-			Sort:      "created",
+			Sort:      ToPointer("created"),
 		})
 	})
 	if err != nil {
@@ -73,10 +73,10 @@ func TestClient_ACLEntries(t *testing.T) {
 	record(t, fixtureBase+"list2", func(c *Client) {
 		paginator = c.GetACLEntries(&GetACLEntriesInput{
 			ACLID:     *testACL.ID,
-			Direction: "ascend",
-			PerPage:   50,
+			Direction: ToPointer("ascend"),
+			PerPage:   ToPointer(50),
 			ServiceID: testService.ID,
-			Sort:      "ip",
+			Sort:      ToPointer("ip"),
 		})
 
 		for paginator.HasNext() {
@@ -104,24 +104,24 @@ func TestClient_ACLEntries(t *testing.T) {
 		ne, err = c.GetACLEntry(&GetACLEntryInput{
 			ServiceID: testService.ID,
 			ACLID:     *testACL.ID,
-			ID:        e.ID,
+			ID:        *e.ID,
 		})
 	})
 
-	if e.IP != ne.IP {
-		t.Errorf("bad IP: %v", ne.IP)
+	if *e.IP != *ne.IP {
+		t.Errorf("bad IP: %v", *ne.IP)
 	}
 
 	if *e.Subnet != *ne.Subnet {
-		t.Errorf("bad subnet: %v", ne.Subnet)
+		t.Errorf("bad subnet: %v", *ne.Subnet)
 	}
 
-	if e.Negated != ne.Negated {
-		t.Errorf("bad Negated flag: %v", ne.Negated)
+	if *e.Negated != *ne.Negated {
+		t.Errorf("bad Negated flag: %v", *ne.Negated)
 	}
 
-	if e.Comment != ne.Comment {
-		t.Errorf("bad comment: %v", ne.Comment)
+	if *e.Comment != *ne.Comment {
+		t.Errorf("bad comment: %v", *ne.Comment)
 	}
 
 	// Update
@@ -130,7 +130,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		ue, err = c.UpdateACLEntry(&UpdateACLEntryInput{
 			ServiceID: testService.ID,
 			ACLID:     *testACL.ID,
-			ID:        e.ID,
+			ID:        *e.ID,
 			IP:        ToPointer("10.0.0.4"),
 			Negated:   ToPointer(Compatibool(true)),
 		})
@@ -139,19 +139,19 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if ue.IP != "10.0.0.4" {
-		t.Errorf("bad IP: %q", ue.IP)
+	if *ue.IP != "10.0.0.4" {
+		t.Errorf("bad IP: %q", *ue.IP)
 	}
 	if *e.Subnet != *ue.Subnet {
-		t.Errorf("bad subnet: %v", ne.Subnet)
+		t.Errorf("bad subnet: %v", *ue.Subnet)
 	}
 
-	if !ue.Negated {
-		t.Errorf("bad Negated flag: %v", ne.Negated)
+	if !*ue.Negated {
+		t.Errorf("bad Negated flag: %v", *ue.Negated)
 	}
 
-	if e.Comment != ue.Comment {
-		t.Errorf("bad comment: %v", ne.Comment)
+	if *e.Comment != *ue.Comment {
+		t.Errorf("bad comment: %v", *ue.Comment)
 	}
 
 	// Delete
@@ -159,7 +159,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		err = c.DeleteACLEntry(&DeleteACLEntryInput{
 			ServiceID: testService.ID,
 			ACLID:     *testACL.ID,
-			ID:        e.ID,
+			ID:        *e.ID,
 		})
 	})
 	if err != nil {
