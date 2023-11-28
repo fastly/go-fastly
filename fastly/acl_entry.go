@@ -21,12 +21,6 @@ type ACLEntry struct {
 
 const aclEntriesPath = "/service/%s/acl/%s/entries"
 
-// ACLEntriesPath is exposed primarily for use by the generic Paginator.
-// See ./paginator.go for details.
-func ACLEntriesPath(serviceID, aclID string) string {
-	return fmt.Sprintf(aclEntriesPath, serviceID, aclID)
-}
-
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
 type ListACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
@@ -50,7 +44,7 @@ func (c *Client) GetACLEntries(i *ListACLEntriesInput) *ListPaginator[ACLEntry] 
 		Sort:      i.Sort,
 		Page:      i.Page,
 		PerPage:   i.PerPage,
-	}, ACLEntriesPath(i.ServiceID, i.ACLID))
+	}, fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID))
 }
 
 // ListACLEntries retrieves all resources.

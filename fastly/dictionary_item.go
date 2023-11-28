@@ -8,12 +8,6 @@ import (
 
 const dictionaryItemsPath = "/service/%s/dictionary/%s/items"
 
-// DictionaryItemsPath is exposed primarily for use by the generic Paginator.
-// See ./paginator.go for details.
-func DictionaryItemsPath(serviceID, dictID string) string {
-	return fmt.Sprintf(dictionaryItemsPath, serviceID, dictID)
-}
-
 // DictionaryItem represents a dictionary item response from the Fastly API.
 type DictionaryItem struct {
 	CreatedAt    *time.Time `mapstructure:"created_at"`
@@ -48,7 +42,7 @@ func (c *Client) GetDictionaryItems(i *ListDictionaryItemsInput) *ListPaginator[
 		Sort:      i.Sort,
 		Page:      i.Page,
 		PerPage:   i.PerPage,
-	}, DictionaryItemsPath(i.ServiceID, i.DictionaryID))
+	}, fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID))
 }
 
 // ListDictionaryItems retrieves all resources.

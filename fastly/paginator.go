@@ -17,10 +17,7 @@ type PaginatorKVStoreEntries interface {
 // NOTE: We can't identify the underlying type of the type parameter T.
 // This is because we don't assign it to any of the defined function parameters.
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
-//
 // This means we have to have the caller pass the API path.
-// To make things easier we expose functions for constructing each path.
-// e.g. fastly.ServicePath(), fastly.ACLEntriesPath() etc.
 func newPaginator[T any](client *Client, input *listInput, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,

@@ -5,10 +5,6 @@ import (
 	"time"
 )
 
-// ServicePath is exposed primarily for use by the generic Paginator.
-// See ./paginator.go for details.
-const ServicePath = "/service"
-
 // Service represents a server response from the Fastly API.
 type Service struct {
 	ActiveVersion int        `mapstructure:"version"`
@@ -72,7 +68,7 @@ func (c *Client) GetServices(i *ListServicesInput) *ListPaginator[Service] {
 		Sort:      i.Sort,
 		Page:      i.Page,
 		PerPage:   i.PerPage,
-	}, ServicePath)
+	}, "/service")
 }
 
 // ListServices retrieves all resources.
@@ -101,7 +97,7 @@ type CreateServiceInput struct {
 
 // CreateService creates a new resource.
 func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
-	resp, err := c.PostForm(ServicePath, i, nil)
+	resp, err := c.PostForm("/service", i, nil)
 	if err != nil {
 		return nil, err
 	}
