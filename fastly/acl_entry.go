@@ -21,6 +21,32 @@ type ACLEntry struct {
 
 const aclEntriesPath = "/service/%s/acl/%s/entries"
 
+// GetACLEntriesInput is the input parameter to GetACLEntries function.
+type GetACLEntriesInput struct {
+	// ACLID is an alphanumeric string identifying a ACL (required).
+	ACLID string
+	// Direction is the direction in which to sort results.
+	Direction string
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string
+	// Sort is the field on which to sort.
+	Sort string
+}
+
+// GetACLEntries returns a ListPaginator for paginating through the resources.
+func (c *Client) GetACLEntries(i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
+	return newPaginator[ACLEntry](c, &listInput{
+		Direction: i.Direction,
+		Sort:      i.Sort,
+		Page:      i.Page,
+		PerPage:   i.PerPage,
+	}, fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID))
+}
+
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
 type ListACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
@@ -37,16 +63,6 @@ type ListACLEntriesInput struct {
 	Sort string
 }
 
-// GetACLEntries returns a ListPaginator for paginating through the resources.
-func (c *Client) GetACLEntries(i *ListACLEntriesInput) *ListPaginator[ACLEntry] {
-	return newPaginator[ACLEntry](c, &listInput{
-		Direction: i.Direction,
-		Sort:      i.Sort,
-		Page:      i.Page,
-		PerPage:   i.PerPage,
-	}, fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID))
-}
-
 // ListACLEntries retrieves all resources.
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ACLID == "" {
@@ -55,7 +71,14 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-	p := c.GetACLEntries(i)
+	p := c.GetACLEntries(&GetACLEntriesInput{
+		ACLID:     i.ACLID,
+		Direction: i.Direction,
+		Page:      i.Page,
+		PerPage:   i.PerPage,
+		ServiceID: i.ServiceID,
+		Sort:      i.Sort,
+	})
 	var results []*ACLEntry
 	for p.HasNext() {
 		data, err := p.GetNext()

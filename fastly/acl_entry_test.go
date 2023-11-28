@@ -73,14 +73,13 @@ func TestClient_ACLEntries(t *testing.T) {
 	var es2 []*ACLEntry
 	var paginator *ListPaginator[ACLEntry]
 	record(t, fixtureBase+"list2", func(c *Client) {
-		listACLEntriesInput := &ListACLEntriesInput{
+		paginator = c.GetACLEntries(&GetACLEntriesInput{
 			ACLID:     testACL.ID,
 			Direction: "ascend",
 			PerPage:   50,
 			ServiceID: testService.ID,
 			Sort:      "ip",
-		}
-		paginator = c.GetACLEntries(listACLEntriesInput)
+		})
 
 		for paginator.HasNext() {
 			data, err := paginator.GetNext()

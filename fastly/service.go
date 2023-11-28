@@ -49,6 +49,28 @@ type ServiceDomain struct {
 // ServiceDomainsList represents a list of service domains.
 type ServiceDomainsList []*ServiceDomain
 
+// GetServicesInput is used as input to the GetServices function.
+type GetServicesInput struct {
+	// Direction is the direction in which to sort results.
+	Direction string
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
+	// Sort is the field on which to sort.
+	Sort string
+}
+
+// GetServices returns a ListPaginator for paginating through the resources.
+func (c *Client) GetServices(i *GetServicesInput) *ListPaginator[Service] {
+	return newPaginator[Service](c, &listInput{
+		Direction: i.Direction,
+		Sort:      i.Sort,
+		Page:      i.Page,
+		PerPage:   i.PerPage,
+	}, "/service")
+}
+
 // ListServicesInput is used as input to the ListServices function.
 type ListServicesInput struct {
 	// Direction is the direction in which to sort results.
@@ -61,19 +83,14 @@ type ListServicesInput struct {
 	Sort string
 }
 
-// GetServices returns a ListPaginator for paginating through the resources.
-func (c *Client) GetServices(i *ListServicesInput) *ListPaginator[Service] {
-	return newPaginator[Service](c, &listInput{
+// ListServices retrieves all resources.
+func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
+	p := c.GetServices(&GetServicesInput{
 		Direction: i.Direction,
 		Sort:      i.Sort,
 		Page:      i.Page,
 		PerPage:   i.PerPage,
-	}, "/service")
-}
-
-// ListServices retrieves all resources.
-func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
-	p := c.GetServices(i)
+	})
 	var results []*Service
 	for p.HasNext() {
 		data, err := p.GetNext()

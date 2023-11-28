@@ -68,14 +68,13 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var dictionaryItems2 []*DictionaryItem
 	var paginator *ListPaginator[DictionaryItem]
 	record(t, fixtureBase+"list2", func(c *Client) {
-		listDictionaryItemsInput := &ListDictionaryItemsInput{
+		paginator = c.GetDictionaryItems(&GetDictionaryItemsInput{
 			DictionaryID: testDictionary.ID,
 			Direction:    "ascend",
 			PerPage:      50,
 			ServiceID:    testService.ID,
 			Sort:         "item_key",
-		}
-		paginator = c.GetDictionaryItems(listDictionaryItemsInput)
+		})
 
 		for paginator.HasNext() {
 			data, err := paginator.GetNext()

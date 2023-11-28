@@ -19,6 +19,32 @@ type DictionaryItem struct {
 	UpdatedAt    *time.Time `mapstructure:"updated_at"`
 }
 
+// GetDictionaryItemsInput is used as input to the GetDictionaryItems function.
+type GetDictionaryItemsInput struct {
+	// DictionaryID is the ID of the dictionary to retrieve items for (required).
+	DictionaryID string
+	// Direction is the direction in which to sort results.
+	Direction string
+	// Page is the current page.
+	Page int
+	// PerPage is the number of records per page.
+	PerPage int
+	// ServiceID is the ID of the service (required).
+	ServiceID string
+	// Sort is the field on which to sort.
+	Sort string
+}
+
+// GetDictionaryItems returns a ListPaginator for paginating through the resources.
+func (c *Client) GetDictionaryItems(i *GetDictionaryItemsInput) *ListPaginator[DictionaryItem] {
+	return newPaginator[DictionaryItem](c, &listInput{
+		Direction: i.Direction,
+		Sort:      i.Sort,
+		Page:      i.Page,
+		PerPage:   i.PerPage,
+	}, fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID))
+}
+
 // ListDictionaryItemsInput is used as input to the ListDictionaryItems function.
 type ListDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
@@ -35,16 +61,6 @@ type ListDictionaryItemsInput struct {
 	Sort string
 }
 
-// GetDictionaryItems returns a ListPaginator for paginating through the resources.
-func (c *Client) GetDictionaryItems(i *ListDictionaryItemsInput) *ListPaginator[DictionaryItem] {
-	return newPaginator[DictionaryItem](c, &listInput{
-		Direction: i.Direction,
-		Sort:      i.Sort,
-		Page:      i.Page,
-		PerPage:   i.PerPage,
-	}, fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID))
-}
-
 // ListDictionaryItems retrieves all resources.
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
 	if i.DictionaryID == "" {
@@ -53,7 +69,14 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-	p := c.GetDictionaryItems(i)
+	p := c.GetDictionaryItems(&GetDictionaryItemsInput{
+		DictionaryID: i.DictionaryID,
+		Direction:    i.Direction,
+		Page:         i.Page,
+		PerPage:      i.PerPage,
+		ServiceID:    i.ServiceID,
+		Sort:         i.Sort,
+	})
 	var results []*DictionaryItem
 	for p.HasNext() {
 		data, err := p.GetNext()

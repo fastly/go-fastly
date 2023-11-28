@@ -62,12 +62,11 @@ func TestClient_Services(t *testing.T) {
 	var ss2 []*Service
 	var paginator *ListPaginator[Service]
 	record(t, "services/list_paginator", func(c *Client) {
-		listServicesInput := &ListServicesInput{
+		paginator = c.GetServices(&GetServicesInput{
 			Direction: "descend",
 			PerPage:   200,
 			Sort:      "created",
-		}
-		paginator = c.GetServices(listServicesInput)
+		})
 
 		for paginator.HasNext() {
 			data, err := paginator.GetNext()
