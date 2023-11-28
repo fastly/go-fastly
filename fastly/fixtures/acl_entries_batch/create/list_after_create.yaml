@@ -6,12 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/rTpzNfgkERkPzzSANhcAl1/acl/jI5xfHjMwpu8e59Vm6dkr1/entries
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/h0r9bHHO8AxEkQ10Nm0Ve7/acl/gn5aWs0VHPj0DyskUd3W30/entries?page=1&per_page=100
     method: GET
   response:
-    body: '[{"id":"FuOmQj1BT9MXRHmogMvxH1","negated":"0","comment":"ACL Entry 1","created_at":"2022-11-07T13:21:14Z","subnet":24,"updated_at":"2022-11-07T13:21:14Z","service_id":"rTpzNfgkERkPzzSANhcAl1","acl_id":"jI5xfHjMwpu8e59Vm6dkr1","ip":"127.0.0.1"},{"updated_at":"2022-11-07T13:21:14Z","service_id":"rTpzNfgkERkPzzSANhcAl1","acl_id":"jI5xfHjMwpu8e59Vm6dkr1","ip":"192.168.0.1","negated":"1","id":"XxU7wpAOufHyvstNBK5r53","comment":"ACL
-      Entry 2","created_at":"2022-11-07T13:21:14Z","subnet":24}]'
+    body: '[{"service_id":"h0r9bHHO8AxEkQ10Nm0Ve7","created_at":"2023-11-28T14:23:15Z","comment":"ACL
+      Entry 1","ip":"127.0.0.1","id":"W3lz3G5uyKsDlGkKfQJ0J1","updated_at":"2023-11-28T14:23:15Z","acl_id":"gn5aWs0VHPj0DyskUd3W30","negated":"0","subnet":24},{"created_at":"2023-11-28T14:23:15Z","service_id":"h0r9bHHO8AxEkQ10Nm0Ve7","comment":"ACL
+      Entry 2","ip":"192.168.0.1","updated_at":"2023-11-28T14:23:15Z","id":"jnNjRGzeSoSzBnFpGpMU43","negated":"1","acl_id":"gn5aWs0VHPj0DyskUd3W30","subnet":24}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +21,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 13:21:14 GMT
+      - Tue, 28 Nov 2023 14:23:15 GMT
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4144-MAN
+      - cache-control-cp-aws-us-east-2-prod-3-CONTROL-AWS-UE2, cache-lcy-eglc8600041-LCY
       X-Timer:
-      - S1667827274.314794,VS0,VE139
+      - S1701181396.681579,VS0,VE165
     status: 200 OK
     code: 200
     duration: ""

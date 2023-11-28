@@ -55,6 +55,12 @@ func (c *Client) GetACLEntries(i *ListACLEntriesInput) *ListPaginator[ACLEntry] 
 
 // ListACLEntries retrieves all resources.
 func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
+	if i.ACLID == "" {
+		return nil, ErrMissingACLID
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
 	p := c.GetACLEntries(i)
 	var results []*ACLEntry
 	for p.HasNext() {

@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/service/yk2nYOFJTCTWZAr2L3HZz2/dictionary/CCdCpVmAr99NUl9ZGHPc03/item/test-dictionary-item
+    url: https://api.fastly.com/service/wWk77J9iaMechwsNTOtgK0/dictionary/eACR5nyI2vco5NC9LXdMi1/item/test-dictionary-item
     method: GET
   response:
-    body: '{"updated_at":"2023-11-27T14:27:11Z","dictionary_id":"CCdCpVmAr99NUl9ZGHPc03","deleted_at":null,"item_key":"test-dictionary-item","service_id":"yk2nYOFJTCTWZAr2L3HZz2","created_at":"2023-11-27T14:27:11Z","item_value":"value"}'
+    body: '{"item_key":"test-dictionary-item","item_value":"value","created_at":"2023-11-28T13:49:45Z","deleted_at":null,"dictionary_id":"eACR5nyI2vco5NC9LXdMi1","updated_at":"2023-11-28T13:49:45Z","service_id":"wWk77J9iaMechwsNTOtgK0"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Nov 2023 14:27:11 GMT
+      - Tue, 28 Nov 2023 13:49:46 GMT
       Pragma:
       - no-cache
       Status:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-3-CONTROL-AWS-UE2, cache-lcy-eglc8600062-LCY
+      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600058-LCY
       X-Timer:
-      - S1701095232.788564,VS0,VE198
+      - S1701179386.259482,VS0,VE184
     status: 200 OK
     code: 200
     duration: ""

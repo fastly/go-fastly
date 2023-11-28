@@ -172,14 +172,14 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 
 	_, err = testClient.ListACLEntries(&ListACLEntriesInput{})
 	if err != ErrMissingACLID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("bad ACL ID: %s", err)
 	}
 
 	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
+		t.Errorf("bad Service ID: %s", err)
 	}
 }
 

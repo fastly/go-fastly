@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/3e8JbEVlTMla2bfE02fNiD/dictionary/11rhj5A92qe0LNSRQG0zuR/items
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
+    url: https://api.fastly.com/service/rr721IHRIcXdPrkCUvRNX1/dictionary/x9VHobgfcZOnQaplJVrYC1/items?page=1&per_page=100
     method: GET
   response:
-    body: '[{"item_key":"key1","deleted_at":null,"item_value":"val1","updated_at":"2021-11-03T16:14:52Z","dictionary_id":"11rhj5A92qe0LNSRQG0zuR","service_id":"3e8JbEVlTMla2bfE02fNiD","created_at":"2021-11-03T16:14:52Z"},{"updated_at":"2021-11-03T16:14:52Z","dictionary_id":"11rhj5A92qe0LNSRQG0zuR","deleted_at":null,"item_key":"key2","item_value":"val2","created_at":"2021-11-03T16:14:52Z","service_id":"3e8JbEVlTMla2bfE02fNiD"}]'
+    body: '[{"dictionary_id":"x9VHobgfcZOnQaplJVrYC1","created_at":"2023-11-28T14:24:03Z","deleted_at":null,"service_id":"rr721IHRIcXdPrkCUvRNX1","updated_at":"2023-11-28T14:24:03Z","item_key":"key1","item_value":"val1"},{"dictionary_id":"x9VHobgfcZOnQaplJVrYC1","deleted_at":null,"created_at":"2023-11-28T14:24:03Z","service_id":"rr721IHRIcXdPrkCUvRNX1","updated_at":"2023-11-28T14:24:03Z","item_key":"key2","item_value":"val2"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,9 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 03 Nov 2021 16:14:52 GMT
+      - Tue, 28 Nov 2023 14:24:04 GMT
+      Pragma:
+      - no-cache
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4127-MAN
+      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600066-LCY
       X-Timer:
-      - S1635956092.454513,VS0,VE153
+      - S1701181444.034629,VS0,VE190
     status: 200 OK
     code: 200
     duration: ""

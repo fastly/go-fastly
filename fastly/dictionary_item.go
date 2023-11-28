@@ -53,6 +53,12 @@ func (c *Client) GetDictionaryItems(i *ListDictionaryItemsInput) *ListPaginator[
 
 // ListDictionaryItems retrieves all resources.
 func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
+	if i.DictionaryID == "" {
+		return nil, ErrMissingDictionaryID
+	}
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
 	p := c.GetDictionaryItems(i)
 	var results []*DictionaryItem
 	for p.HasNext() {

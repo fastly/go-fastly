@@ -2,14 +2,14 @@
 version: 1
 interactions:
 - request:
-    body: DictionaryID=CCdCpVmAr99NUl9ZGHPc03&ItemKey=test-dictionary-item&ServiceID=yk2nYOFJTCTWZAr2L3HZz2&item_value=new-value
+    body: DictionaryID=eACR5nyI2vco5NC9LXdMi1&ItemKey=test-dictionary-item&ServiceID=wWk77J9iaMechwsNTOtgK0&item_value=new-value
     form:
       DictionaryID:
-      - CCdCpVmAr99NUl9ZGHPc03
+      - eACR5nyI2vco5NC9LXdMi1
       ItemKey:
       - test-dictionary-item
       ServiceID:
-      - yk2nYOFJTCTWZAr2L3HZz2
+      - wWk77J9iaMechwsNTOtgK0
       item_value:
       - new-value
     headers:
@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/service/yk2nYOFJTCTWZAr2L3HZz2/dictionary/CCdCpVmAr99NUl9ZGHPc03/item/test-dictionary-item
+    url: https://api.fastly.com/service/wWk77J9iaMechwsNTOtgK0/dictionary/eACR5nyI2vco5NC9LXdMi1/item/test-dictionary-item
     method: PUT
   response:
-    body: '{"dictionary_id":"CCdCpVmAr99NUl9ZGHPc03","service_id":"yk2nYOFJTCTWZAr2L3HZz2","item_key":"test-dictionary-item","item_value":"new-value"}'
+    body: '{"dictionary_id":"eACR5nyI2vco5NC9LXdMi1","service_id":"wWk77J9iaMechwsNTOtgK0","item_key":"test-dictionary-item","item_value":"new-value"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +29,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 27 Nov 2023 14:27:12 GMT
+      - Tue, 28 Nov 2023 13:49:46 GMT
       Fastly-Ratelimit-Remaining:
       - "9987"
       Fastly-Ratelimit-Reset:
-      - "1701097200"
+      - "1701180000"
       Pragma:
       - no-cache
       Status:
@@ -49,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600062-LCY
+      - cache-control-cp-aws-us-east-2-prod-3-CONTROL-AWS-UE2, cache-lcy-eglc8600058-LCY
       X-Timer:
-      - S1701095232.010287,VS0,VE197
+      - S1701179386.464932,VS0,VE252
     status: 200 OK
     code: 200
     duration: ""

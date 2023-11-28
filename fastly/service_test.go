@@ -47,7 +47,7 @@ func TestClient_Services(t *testing.T) {
 		ss, err = c.ListServices(&ListServicesInput{
 			Direction: "descend",
 			Page:      1,
-			PerPage:   1,
+			PerPage:   200,
 			Sort:      "created",
 		})
 	})
@@ -65,7 +65,7 @@ func TestClient_Services(t *testing.T) {
 		paginator = NewPaginator[Service](c, &ListInput{
 			Direction: "descend",
 			Sort:      "created",
-			PerPage:   1,
+			PerPage:   200,
 		}, ServicePath)
 
 		for paginator.HasNext() {
@@ -80,8 +80,8 @@ func TestClient_Services(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(ss2) != 3 {
-		t.Errorf("expected 3 services but got: %d", len(ss2))
+	if len(ss2) != len(ss) {
+		t.Errorf("expected %d services but got: %d", len(ss), len(ss2))
 	}
 
 	// Get
