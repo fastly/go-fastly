@@ -43,7 +43,7 @@ func TestClient_Directors(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: tv.Number,
 			Director:       "test-director",
-			Backend:        b.Name,
+			Backend:        *b.Name,
 		})
 	})
 	if errBackend != nil {
@@ -63,13 +63,13 @@ func TestClient_Directors(t *testing.T) {
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
 				Director:       d.Name,
-				Backend:        b.Name,
+				Backend:        *b.Name,
 			})
 
 			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
-				Name:           b.Name,
+				Name:           *b.Name,
 			})
 
 			_ = c.DeleteDirector(&DeleteDirectorInput{
@@ -141,7 +141,7 @@ func TestClient_Directors(t *testing.T) {
 	if d.Retries != nb.Retries {
 		t.Errorf("bad retries: %q (%q)", d.Retries, nb.Retries)
 	}
-	if len(nb.Backends) == 0 || nb.Backends[0] != b.Name {
+	if len(nb.Backends) == 0 || nb.Backends[0] != *b.Name {
 		t.Error("bad backend: expected a backend")
 	}
 

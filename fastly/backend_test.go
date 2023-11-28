@@ -49,29 +49,29 @@ func TestClient_Backends(t *testing.T) {
 		})
 	}()
 
-	if b.Name != "test-backend" {
-		t.Errorf("bad name: %q", b.Name)
+	if *b.Name != "test-backend" {
+		t.Errorf("bad name: %q", *b.Name)
 	}
-	if b.Address != "integ-test.go-fastly.com" {
-		t.Errorf("bad address: %q", b.Address)
+	if *b.Address != "integ-test.go-fastly.com" {
+		t.Errorf("bad address: %q", *b.Address)
 	}
-	if b.Port != 80 {
-		t.Errorf("bad port: %d", b.Port)
+	if *b.Port != 80 {
+		t.Errorf("bad port: %d", *b.Port)
 	}
-	if b.ConnectTimeout != 1500 {
-		t.Errorf("bad connect_timeout: %d", b.ConnectTimeout)
+	if *b.ConnectTimeout != 1500 {
+		t.Errorf("bad connect_timeout: %d", *b.ConnectTimeout)
 	}
-	if b.OverrideHost != "origin.example.com" {
-		t.Errorf("bad override_host: %q", b.OverrideHost)
+	if *b.OverrideHost != "origin.example.com" {
+		t.Errorf("bad override_host: %q", *b.OverrideHost)
 	}
-	if b.ShareKey != "" {
-		t.Errorf("bad share_key: %s", b.ShareKey)
+	if b.ShareKey != nil {
+		t.Errorf("bad share_key: %s", *b.ShareKey)
 	}
-	if b.SSLCheckCert {
-		t.Errorf("bad ssl_check_cert: %t", b.SSLCheckCert) // API defaults to true and we want to allow setting false
+	if *b.SSLCheckCert {
+		t.Errorf("bad ssl_check_cert: %t", *b.SSLCheckCert) // API defaults to true and we want to allow setting false
 	}
-	if b.SSLSNIHostname != "ssl-hostname.com" {
-		t.Errorf("bad ssl_sni_hostname: %q", b.SSLSNIHostname)
+	if *b.SSLSNIHostname != "ssl-hostname.com" {
+		t.Errorf("bad ssl_sni_hostname: %q", *b.SSLSNIHostname)
 	}
 
 	// List
@@ -101,20 +101,20 @@ func TestClient_Backends(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if b.Name != nb.Name {
-		t.Errorf("bad name: %q (%q)", b.Name, nb.Name)
+	if *b.Name != *nb.Name {
+		t.Errorf("bad name: %q (%q)", *b.Name, *nb.Name)
 	}
-	if b.Address != nb.Address {
-		t.Errorf("bad address: %q (%q)", b.Address, nb.Address)
+	if *b.Address != *nb.Address {
+		t.Errorf("bad address: %q (%q)", *b.Address, *nb.Address)
 	}
-	if b.Port != nb.Port {
-		t.Errorf("bad port: %q (%q)", b.Port, nb.Port)
+	if *b.Port != *nb.Port {
+		t.Errorf("bad port: %q (%q)", *b.Port, *nb.Port)
 	}
-	if b.ConnectTimeout != nb.ConnectTimeout {
-		t.Errorf("bad connect_timeout: %q (%q)", b.ConnectTimeout, nb.ConnectTimeout)
+	if *b.ConnectTimeout != *nb.ConnectTimeout {
+		t.Errorf("bad connect_timeout: %q (%q)", *b.ConnectTimeout, *nb.ConnectTimeout)
 	}
-	if b.OverrideHost != nb.OverrideHost {
-		t.Errorf("bad override_host: %q (%q)", b.OverrideHost, nb.OverrideHost)
+	if *b.OverrideHost != *nb.OverrideHost {
+		t.Errorf("bad override_host: %q (%q)", *b.OverrideHost, *nb.OverrideHost)
 	}
 
 	// Update
@@ -136,23 +136,23 @@ func TestClient_Backends(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ub.Name != "new-test-backend" {
-		t.Errorf("bad name: %q", ub.Name)
+	if *ub.Name != "new-test-backend" {
+		t.Errorf("bad name: %q", *ub.Name)
 	}
-	if ub.OverrideHost != "www.example.com" {
-		t.Errorf("bad override_host: %q", ub.OverrideHost)
+	if *ub.OverrideHost != "www.example.com" {
+		t.Errorf("bad override_host: %q", *ub.OverrideHost)
 	}
-	if ub.Port != 1234 {
-		t.Errorf("bad port: %d", ub.Port)
+	if *ub.Port != 1234 {
+		t.Errorf("bad port: %d", *ub.Port)
 	}
-	if ub.ShareKey == "" || ub.ShareKey != "shared-key" {
-		t.Errorf("bad share_key: %s", ub.ShareKey)
+	if *ub.ShareKey == "" || *ub.ShareKey != "shared-key" {
+		t.Errorf("bad share_key: %s", *ub.ShareKey)
 	}
-	if ub.SSLCheckCert {
-		t.Errorf("bad ssl_check_cert: %t", ub.SSLCheckCert)
+	if *ub.SSLCheckCert {
+		t.Errorf("bad ssl_check_cert: %t", *ub.SSLCheckCert)
 	}
-	if ub.SSLSNIHostname != "ssl-hostname-updated.com" {
-		t.Errorf("bad ssl_sni_hostname: %q", ub.SSLSNIHostname)
+	if *ub.SSLSNIHostname != "ssl-hostname-updated.com" {
+		t.Errorf("bad ssl_sni_hostname: %q", *ub.SSLSNIHostname)
 	}
 
 	// NOTE: The following test validates empty values are NOT sent.
@@ -166,11 +166,11 @@ func TestClient_Backends(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ub.OverrideHost != "www.example.com" {
-		t.Errorf("bad override_host: %q", ub.OverrideHost)
+	if *ub.OverrideHost != "www.example.com" {
+		t.Errorf("bad override_host: %q", *ub.OverrideHost)
 	}
-	if ub.Port != 1234 {
-		t.Errorf("bad port: %d", ub.Port)
+	if *ub.Port != 1234 {
+		t.Errorf("bad port: %d", *ub.Port)
 	}
 
 	// NOTE: The following test validates empty values ARE sent.
@@ -190,11 +190,11 @@ func TestClient_Backends(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ub.OverrideHost != "" {
-		t.Errorf("bad override_host: %q", ub.OverrideHost)
+	if ub.OverrideHost != nil {
+		t.Errorf("bad override_host: %q", *ub.OverrideHost)
 	}
-	if ub.Port != 0 {
-		t.Errorf("bad port: %d", ub.Port)
+	if *ub.Port != 0 {
+		t.Errorf("bad port: %d", *ub.Port)
 	}
 
 	// Delete
