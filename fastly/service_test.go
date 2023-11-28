@@ -58,15 +58,16 @@ func TestClient_Services(t *testing.T) {
 		t.Errorf("bad services: %v", ss)
 	}
 
-	// List with manual paginator construction
+	// List with paginator
 	var ss2 []*Service
 	var paginator *ListPaginator[Service]
 	record(t, "services/list_paginator", func(c *Client) {
-		paginator = NewPaginator[Service](c, &ListInput{
+		listServicesInput := &ListServicesInput{
 			Direction: "descend",
-			Sort:      "created",
 			PerPage:   200,
-		}, ServicePath)
+			Sort:      "created",
+		}
+		paginator = c.GetServices(listServicesInput)
 
 		for paginator.HasNext() {
 			data, err := paginator.GetNext()
@@ -82,32 +83,6 @@ func TestClient_Services(t *testing.T) {
 	}
 	if len(ss2) != len(ss) {
 		t.Errorf("expected %d services but got: %d", len(ss), len(ss2))
-	}
-
-	// List with GetN abstraction method for paginator construction
-	var ss3 []*Service
-	record(t, "services/list_paginator_abstract_method", func(c *Client) {
-		listServicesInput := &ListServicesInput{
-			Direction: "descend",
-			PerPage:   200,
-			Sort:      "created",
-		}
-		paginator = c.GetServices(listServicesInput)
-
-		for paginator.HasNext() {
-			data, err := paginator.GetNext()
-			if err != nil {
-				t.Errorf("Bad paginator (remaining: %d): %s", paginator.Remaining(), err)
-				return
-			}
-			ss3 = append(ss3, data...)
-		}
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(ss3) != len(ss) {
-		t.Errorf("expected %d services but got: %d", len(ss), len(ss3))
 	}
 
 	// Get

@@ -64,38 +64,10 @@ func TestClient_DictionaryItems(t *testing.T) {
 		t.Errorf("bad dictionary items: %v", dictionaryItems)
 	}
 
-	// List with manual paginator construction
+	// List with paginator
 	var dictionaryItems2 []*DictionaryItem
 	var paginator *ListPaginator[DictionaryItem]
 	record(t, fixtureBase+"list2", func(c *Client) {
-		paginator = NewPaginator[DictionaryItem](c, &ListInput{
-			Direction: "ascend",
-			Sort:      "item_key",
-			PerPage:   50,
-		}, DictionaryItemsPath(testService.ID, testDictionary.ID))
-
-		for paginator.HasNext() {
-			data, err := paginator.GetNext()
-			if err != nil {
-				t.Errorf("Bad paginator (remaining: %d): %s", paginator.Remaining(), err)
-				return
-			}
-			dictionaryItems2 = append(dictionaryItems2, data...)
-		}
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	if len(dictionaryItems2) != 1 {
-		t.Errorf("Bad items: %v", dictionaryItems2)
-	}
-	if paginator.HasNext() {
-		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())
-	}
-
-	// List with GetN abstraction method for paginator construction
-	var dictionaryItems3 []*DictionaryItem
-	record(t, fixtureBase+"list3", func(c *Client) {
 		listDictionaryItemsInput := &ListDictionaryItemsInput{
 			DictionaryID: testDictionary.ID,
 			Direction:    "ascend",
@@ -111,14 +83,14 @@ func TestClient_DictionaryItems(t *testing.T) {
 				t.Errorf("Bad paginator (remaining: %d): %s", paginator.Remaining(), err)
 				return
 			}
-			dictionaryItems3 = append(dictionaryItems3, data...)
+			dictionaryItems2 = append(dictionaryItems2, data...)
 		}
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(dictionaryItems3) != 1 {
-		t.Errorf("Bad items: %v", dictionaryItems3)
+	if len(dictionaryItems2) != 1 {
+		t.Errorf("Bad items: %v", dictionaryItems2)
 	}
 	if paginator.HasNext() {
 		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())

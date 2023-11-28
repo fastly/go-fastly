@@ -43,7 +43,7 @@ type ListDictionaryItemsInput struct {
 
 // GetDictionaryItems returns a ListPaginator for paginating through the resources.
 func (c *Client) GetDictionaryItems(i *ListDictionaryItemsInput) *ListPaginator[DictionaryItem] {
-	return NewPaginator[DictionaryItem](c, &ListInput{
+	return newPaginator[DictionaryItem](c, &listInput{
 		Direction: i.Direction,
 		Sort:      i.Sort,
 		Page:      i.Page,

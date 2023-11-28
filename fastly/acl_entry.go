@@ -45,7 +45,7 @@ type ListACLEntriesInput struct {
 
 // GetACLEntries returns a ListPaginator for paginating through the resources.
 func (c *Client) GetACLEntries(i *ListACLEntriesInput) *ListPaginator[ACLEntry] {
-	return NewPaginator[ACLEntry](c, &ListInput{
+	return newPaginator[ACLEntry](c, &listInput{
 		Direction: i.Direction,
 		Sort:      i.Sort,
 		Page:      i.Page,

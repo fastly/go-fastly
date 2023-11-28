@@ -10,8 +10,8 @@ interactions:
     url: https://api.fastly.com/service/eDfYsTYU4tLAI0IX2MHsB0/acl/rpsMUXwZtYZ4IXl7Eekbl3/entries?direction=ascend&page=1&per_page=50&sort=ip
     method: GET
   response:
-    body: '[{"ip":"10.0.0.3","created_at":"2023-11-28T14:44:24Z","id":"tIri8nZnSi5Eh6d8EipAk0","service_id":"eDfYsTYU4tLAI0IX2MHsB0","negated":"0","acl_id":"rpsMUXwZtYZ4IXl7Eekbl3","updated_at":"2023-11-28T14:44:24Z","subnet":8,"comment":"test
-      entry"}]'
+    body: '[{"id":"tIri8nZnSi5Eh6d8EipAk0","created_at":"2023-11-28T14:44:24Z","comment":"test
+      entry","negated":"0","acl_id":"rpsMUXwZtYZ4IXl7Eekbl3","updated_at":"2023-11-28T14:44:24Z","ip":"10.0.0.3","subnet":8,"service_id":"eDfYsTYU4tLAI0IX2MHsB0"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -36,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-lcy-eglc8600040-LCY
+      - cache-control-canary-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600040-LCY
       X-Timer:
-      - S1701182665.828380,VS0,VE188
+      - S1701182665.040260,VS0,VE158
     status: 200 OK
     code: 200
     duration: ""

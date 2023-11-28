@@ -21,7 +21,7 @@ type PaginatorKVStoreEntries interface {
 // This means we have to have the caller pass the API path.
 // To make things easier we expose functions for constructing each path.
 // e.g. fastly.ServicePath(), fastly.ACLEntriesPath() etc.
-func NewPaginator[T any](client *Client, input *ListInput, path string) *ListPaginator[T] {
+func newPaginator[T any](client *Client, input *listInput, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,
 		input:  input,
@@ -29,8 +29,8 @@ func NewPaginator[T any](client *Client, input *ListInput, path string) *ListPag
 	}
 }
 
-// ListInput configures the API list options.
-type ListInput struct {
+// listInput configures the API list options.
+type listInput struct {
 	// Direction is the direction in which to sort results.
 	Direction string
 	// Page is the current page.
@@ -50,7 +50,7 @@ type ListPaginator[T any] struct {
 	// Private
 	client   *Client
 	consumed bool
-	input    *ListInput
+	input    *listInput
 	path     string
 }
 

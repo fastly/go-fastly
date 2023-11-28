@@ -67,7 +67,7 @@ type ListServicesInput struct {
 
 // GetServices returns a ListPaginator for paginating through the resources.
 func (c *Client) GetServices(i *ListServicesInput) *ListPaginator[Service] {
-	return NewPaginator[Service](c, &ListInput{
+	return newPaginator[Service](c, &listInput{
 		Direction: i.Direction,
 		Sort:      i.Sort,
 		Page:      i.Page,
