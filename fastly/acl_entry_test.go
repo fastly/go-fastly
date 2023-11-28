@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -74,12 +73,11 @@ func TestClient_ACLEntries(t *testing.T) {
 	var es2 []*ACLEntry
 	var paginator *ListPaginator[ACLEntry]
 	record(t, fixtureBase+"list2", func(c *Client) {
-		path := fmt.Sprintf(ACLEntriesPath, testService.ID, testACL.ID)
 		paginator = NewPaginator[ACLEntry](c, &ListInput{
 			Direction: "ascend",
 			Sort:      "ip",
 			PerPage:   50,
-		}, path)
+		}, ACLEntriesPath(testService.ID, testACL.ID))
 
 		for paginator.HasNext() {
 			data, err := paginator.GetNext()
