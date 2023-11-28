@@ -11,10 +11,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/service/wWk77J9iaMechwsNTOtgK0/version/2/dictionary
+    url: https://api.fastly.com/service/EXmb9qO9J34QFgYMSz0XE1/version/2/dictionary
     method: POST
   response:
-    body: '{"name":"test_dictionary_DictionaryItems","service_id":"wWk77J9iaMechwsNTOtgK0","version":2,"updated_at":"2023-11-28T13:49:45Z","write_only":false,"id":"eACR5nyI2vco5NC9LXdMi1","created_at":"2023-11-28T13:49:45Z","deleted_at":null}'
+    body: '{"name":"test_dictionary_DictionaryItems","service_id":"EXmb9qO9J34QFgYMSz0XE1","version":2,"created_at":"2023-11-28T14:45:13Z","deleted_at":null,"updated_at":"2023-11-28T14:45:13Z","id":"xyHHO0G3S3ZREo49Us7kg5","write_only":false}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 28 Nov 2023 13:49:45 GMT
+      - Tue, 28 Nov 2023 14:45:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "9989"
+      - "9942"
       Fastly-Ratelimit-Reset:
-      - "1701180000"
+      - "1701183600"
       Pragma:
       - no-cache
       Status:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600058-LCY
+      - cache-control-cp-aws-us-east-2-prod-3-CONTROL-AWS-UE2, cache-lcy-eglc8600027-LCY
       X-Timer:
-      - S1701179385.351003,VS0,VE193
+      - S1701182714.563454,VS0,VE240
     status: 200 OK
     code: 200
     duration: ""

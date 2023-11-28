@@ -69,7 +69,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Errorf("Bad entries: %v", es)
 	}
 
-	// List with paginator
+	// List with manual paginator construction
 	var es2 []*ACLEntry
 	var paginator *ListPaginator[ACLEntry]
 	record(t, fixtureBase+"list2", func(c *Client) {
@@ -92,7 +92,38 @@ func TestClient_ACLEntries(t *testing.T) {
 		t.Fatal(err)
 	}
 	if len(es2) != 1 {
-		t.Errorf("Bad entries: %v", es)
+		t.Errorf("Bad entries: %v", es2)
+	}
+	if paginator.HasNext() {
+		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())
+	}
+
+	// List with GetN abstraction method for paginator construction
+	var es3 []*ACLEntry
+	record(t, fixtureBase+"list3", func(c *Client) {
+		listACLEntriesInput := &ListACLEntriesInput{
+			ACLID:     testACL.ID,
+			Direction: "ascend",
+			PerPage:   50,
+			ServiceID: testService.ID,
+			Sort:      "ip",
+		}
+		paginator = c.GetACLEntries(listACLEntriesInput)
+
+		for paginator.HasNext() {
+			data, err := paginator.GetNext()
+			if err != nil {
+				t.Errorf("Bad paginator (remaining: %d): %s", paginator.Remaining(), err)
+				return
+			}
+			es3 = append(es3, data...)
+		}
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(es3) != 1 {
+		t.Errorf("Bad entries: %v", es3)
 	}
 	if paginator.HasNext() {
 		t.Errorf("Bad paginator (remaining: %v)", paginator.Remaining())
