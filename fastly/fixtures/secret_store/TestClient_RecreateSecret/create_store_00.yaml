@@ -2,8 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: |
-      {"name":"TestClient_RecreateSecret-00"}
+    body: '{"name":"TestClient_RecreateSecret-00"}'
     form: {}
     headers:
       Accept:
@@ -11,31 +10,43 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/8.0.1 (+github.com/fastly/go-fastly; go1.20.4)
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.21.4)
     url: https://api.fastly.com/resources/stores/secret
     method: POST
   response:
     body: |
       {
-        "id": "McoBzaj4jHg6NmNWG7CRRj",
+        "id": "Sfkx0raCtSr9r06jInEei7",
         "name": "TestClient_RecreateSecret-00",
-        "created_at": "2023-05-10T21:23:24Z"
+        "created_at": "2023-11-27T15:54:54Z"
       }
     headers:
-      Access-Control-Allow-Headers:
-      - Content-Type, Fastly-Key
-      Access-Control-Allow-Methods:
-      - PUT, POST, GET, OPTIONS, DELETE
-      Access-Control-Allow-Origin:
-      - '*'
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "119"
       Content-Type:
       - application/json
       Date:
-      - Wed, 10 May 2023 21:23:25 GMT
+      - Mon, 27 Nov 2023 15:54:54 GMT
       Fastly-Trace-Id:
-      - kKMyNVd1yiQ2uAvdDsNCU9
+      - 7LbQUheqDHaQiS5DMAmvcp
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lcy-eglc8600020-LCY
+      X-Timer:
+      - S1701100494.976540,VS0,VE431
     status: 201 Created
     code: 201
     duration: ""
