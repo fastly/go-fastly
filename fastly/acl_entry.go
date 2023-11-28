@@ -53,10 +53,6 @@ type ListACLEntriesInput struct {
 	ACLID string
 	// Direction is the direction in which to sort results.
 	Direction string
-	// Page is the current page.
-	Page int
-	// PerPage is the number of records per page.
-	PerPage int
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 	// Sort is the field on which to sort.
@@ -74,8 +70,6 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	p := c.GetACLEntries(&GetACLEntriesInput{
 		ACLID:     i.ACLID,
 		Direction: i.Direction,
-		Page:      i.Page,
-		PerPage:   i.PerPage,
 		ServiceID: i.ServiceID,
 		Sort:      i.Sort,
 	})

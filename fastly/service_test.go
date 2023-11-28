@@ -46,8 +46,6 @@ func TestClient_Services(t *testing.T) {
 	record(t, "services/list", func(c *Client) {
 		ss, err = c.ListServices(&ListServicesInput{
 			Direction: "descend",
-			Page:      1,
-			PerPage:   200,
 			Sort:      "created",
 		})
 	})

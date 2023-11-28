@@ -51,10 +51,6 @@ type ListDictionaryItemsInput struct {
 	DictionaryID string
 	// Direction is the direction in which to sort results.
 	Direction string
-	// Page is the current page.
-	Page int
-	// PerPage is the number of records per page.
-	PerPage int
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// Sort is the field on which to sort.
@@ -72,8 +68,6 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 	p := c.GetDictionaryItems(&GetDictionaryItemsInput{
 		DictionaryID: i.DictionaryID,
 		Direction:    i.Direction,
-		Page:         i.Page,
-		PerPage:      i.PerPage,
 		ServiceID:    i.ServiceID,
 		Sort:         i.Sort,
 	})

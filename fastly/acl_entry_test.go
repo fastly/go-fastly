@@ -55,8 +55,6 @@ func TestClient_ACLEntries(t *testing.T) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
 			ACLID:     testACL.ID,
 			Direction: "descend",
-			Page:      1,
-			PerPage:   1,
 			ServiceID: testService.ID,
 			Sort:      "created",
 		})
