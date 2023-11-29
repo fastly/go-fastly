@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -29,12 +28,6 @@ const (
 // HeaderAction is a type of header action.
 type HeaderAction string
 
-// HeaderActionPtr returns pointer to HeaderAction.
-func HeaderActionPtr(t HeaderAction) *HeaderAction {
-	ha := HeaderAction(t)
-	return &ha
-}
-
 const (
 	// HeaderTypeRequest is a header type that performs on the request before
 	// lookups.
@@ -56,49 +49,25 @@ const (
 // HeaderType is a type of header.
 type HeaderType string
 
-// HeaderTypePtr returns pointer to HeaderType.
-func HeaderTypePtr(t HeaderType) *HeaderType {
-	ht := HeaderType(t)
-	return &ht
-}
-
 // Header represents a header response from the Fastly API.
 type Header struct {
-	Action            HeaderAction `mapstructure:"action"`
-	CacheCondition    string       `mapstructure:"cache_condition"`
-	CreatedAt         *time.Time   `mapstructure:"created_at"`
-	DeletedAt         *time.Time   `mapstructure:"deleted_at"`
-	Destination       string       `mapstructure:"dst"`
-	IgnoreIfSet       bool         `mapstructure:"ignore_if_set"`
-	Name              string       `mapstructure:"name"`
-	Priority          int          `mapstructure:"priority"`
-	Regex             string       `mapstructure:"regex"`
-	RequestCondition  string       `mapstructure:"request_condition"`
-	ResponseCondition string       `mapstructure:"response_condition"`
-	ServiceID         string       `mapstructure:"service_id"`
-	ServiceVersion    int          `mapstructure:"version"`
-	Source            string       `mapstructure:"src"`
-	Substitution      string       `mapstructure:"substitution"`
-	Type              HeaderType   `mapstructure:"type"`
-	UpdatedAt         *time.Time   `mapstructure:"updated_at"`
-}
-
-// headersByName is a sortable list of headers.
-type headersByName []*Header
-
-// Len implement the sortable interface.
-func (s headersByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s headersByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s headersByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	Action            *HeaderAction `mapstructure:"action"`
+	CacheCondition    *string       `mapstructure:"cache_condition"`
+	CreatedAt         *time.Time    `mapstructure:"created_at"`
+	DeletedAt         *time.Time    `mapstructure:"deleted_at"`
+	Destination       *string       `mapstructure:"dst"`
+	IgnoreIfSet       *bool         `mapstructure:"ignore_if_set"`
+	Name              *string       `mapstructure:"name"`
+	Priority          *int          `mapstructure:"priority"`
+	Regex             *string       `mapstructure:"regex"`
+	RequestCondition  *string       `mapstructure:"request_condition"`
+	ResponseCondition *string       `mapstructure:"response_condition"`
+	ServiceID         *string       `mapstructure:"service_id"`
+	ServiceVersion    *int          `mapstructure:"version"`
+	Source            *string       `mapstructure:"src"`
+	Substitution      *string       `mapstructure:"substitution"`
+	Type              *HeaderType   `mapstructure:"type"`
+	UpdatedAt         *time.Time    `mapstructure:"updated_at"`
 }
 
 // ListHeadersInput is used as input to the ListHeaders function.
@@ -128,7 +97,6 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
-	sort.Stable(headersByName(bs))
 	return bs, nil
 }
 
