@@ -17,16 +17,16 @@ func TestClient_GetDomainMetricsForService(t *testing.T) {
 	record(t, "domain_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetDomainMetricsForService(&GetDomainMetricsInput{
 			ServiceID:   testServiceID,
-			Start:       start,
-			End:         end,
+			Start:       &start,
+			End:         &end,
 			Domains:     []string{"domain_1.com", "domain_2.com"},
 			Datacenters: []string{"SJC", "STP"},
 			Metrics:     []string{"resp_body_bytes", "status_2xx"},
 			GroupBy:     []string{"domain"},
-			Downsample:  "hour",
+			Downsample:  ToPointer("hour"),
 			Regions:     []string{"usa"},
-			Limit:       10,
-			Cursor:      "",
+			Limit:       ToPointer(10),
+			Cursor:      ToPointer(""),
 		})
 	})
 	if err != nil {
