@@ -3,51 +3,32 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // BlobStorage represents a blob storage response from the Fastly API.
 type BlobStorage struct {
-	AccountName       string     `mapstructure:"account_name"`
-	CompressionCodec  string     `mapstructure:"compression_codec"`
-	Container         string     `mapstructure:"container"`
+	AccountName       *string    `mapstructure:"account_name"`
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
+	Container         *string    `mapstructure:"container"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	FileMaxBytes      int        `mapstructure:"file_max_bytes"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	GzipLevel         int        `mapstructure:"gzip_level"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Path              string     `mapstructure:"path"`
-	Period            int        `mapstructure:"period"`
-	Placement         string     `mapstructure:"placement"`
-	PublicKey         string     `mapstructure:"public_key"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	SASToken          string     `mapstructure:"sas_token"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	FileMaxBytes      *int       `mapstructure:"file_max_bytes"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	GzipLevel         *int       `mapstructure:"gzip_level"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Path              *string    `mapstructure:"path"`
+	Period            *int       `mapstructure:"period"`
+	Placement         *string    `mapstructure:"placement"`
+	PublicKey         *string    `mapstructure:"public_key"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	SASToken          *string    `mapstructure:"sas_token"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TimestampFormat   *string    `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// blobStorageByName is a sortable list of blob storages.
-type blobStorageByName []*BlobStorage
-
-// Len implement the sortable interface.
-func (s blobStorageByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s blobStorageByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s blobStorageByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListBlobStoragesInput is used as input to the ListBlobStorages function.
@@ -78,7 +59,6 @@ func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, err
 	if err := decodeBodyMap(resp.Body, &as); err != nil {
 		return nil, err
 	}
-	sort.Stable(blobStorageByName(as))
 	return as, nil
 }
 
