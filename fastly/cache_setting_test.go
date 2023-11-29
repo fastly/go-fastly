@@ -46,17 +46,17 @@ func TestClient_CacheSettings(t *testing.T) {
 		})
 	}()
 
-	if cacheSetting.Name != "test-cache-setting" {
-		t.Errorf("bad name: %q", cacheSetting.Name)
+	if *cacheSetting.Name != "test-cache-setting" {
+		t.Errorf("bad name: %q", *cacheSetting.Name)
 	}
-	if cacheSetting.Action != CacheSettingActionCache {
-		t.Errorf("bad action: %q", cacheSetting.Action)
+	if *cacheSetting.Action != CacheSettingActionCache {
+		t.Errorf("bad action: %q", *cacheSetting.Action)
 	}
-	if cacheSetting.TTL != 1234 {
-		t.Errorf("bad ttl: %d", cacheSetting.TTL)
+	if *cacheSetting.TTL != 1234 {
+		t.Errorf("bad ttl: %d", *cacheSetting.TTL)
 	}
-	if cacheSetting.StaleTTL != 1500 {
-		t.Errorf("bad stale_ttl: %d", cacheSetting.StaleTTL)
+	if *cacheSetting.StaleTTL != 1500 {
+		t.Errorf("bad stale_ttl: %d", *cacheSetting.StaleTTL)
 	}
 
 	// List
@@ -86,17 +86,17 @@ func TestClient_CacheSettings(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if cacheSetting.Name != newCacheSetting.Name {
-		t.Errorf("bad name: %q (%q)", cacheSetting.Name, newCacheSetting.Name)
+	if *cacheSetting.Name != *newCacheSetting.Name {
+		t.Errorf("bad name: %q (%q)", *cacheSetting.Name, *newCacheSetting.Name)
 	}
-	if cacheSetting.Action != CacheSettingActionCache {
-		t.Errorf("bad action: %q", cacheSetting.Action)
+	if *cacheSetting.Action != CacheSettingActionCache {
+		t.Errorf("bad action: %q", *cacheSetting.Action)
 	}
-	if cacheSetting.TTL != 1234 {
-		t.Errorf("bad ttl: %d", cacheSetting.TTL)
+	if *cacheSetting.TTL != 1234 {
+		t.Errorf("bad ttl: %d", *cacheSetting.TTL)
 	}
-	if cacheSetting.StaleTTL != 1500 {
-		t.Errorf("bad stale_ttl: %d", cacheSetting.StaleTTL)
+	if *cacheSetting.StaleTTL != 1500 {
+		t.Errorf("bad stale_ttl: %d", *cacheSetting.StaleTTL)
 	}
 
 	// Update
@@ -112,8 +112,8 @@ func TestClient_CacheSettings(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if updatedCacheSetting.Name != "new-test-cache-setting" {
-		t.Errorf("bad name: %q", updatedCacheSetting.Name)
+	if *updatedCacheSetting.Name != "new-test-cache-setting" {
+		t.Errorf("bad name: %q", *updatedCacheSetting.Name)
 	}
 
 	// Delete
