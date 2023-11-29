@@ -47,23 +47,23 @@ func TestClient_Datadog(t *testing.T) {
 		})
 	}()
 
-	if d.Name != "test-datadog" {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != "test-datadog" {
+		t.Errorf("bad name: %q", *d.Name)
 	}
-	if d.Token != "abcd1234" {
-		t.Errorf("bad token: %q", d.Token)
+	if *d.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *d.Token)
 	}
-	if d.Region != "US" {
-		t.Errorf("bad token: %q", d.Region)
+	if *d.Region != "US" {
+		t.Errorf("bad token: %q", *d.Region)
 	}
-	if d.Format != "format" {
-		t.Errorf("bad format: %q", d.Format)
+	if *d.Format != "format" {
+		t.Errorf("bad format: %q", *d.Format)
 	}
-	if d.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", d.FormatVersion)
+	if *d.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if d.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", d.Placement)
+	if *d.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
 	// List
@@ -93,20 +93,20 @@ func TestClient_Datadog(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d.Name != nd.Name {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != *nd.Name {
+		t.Errorf("bad name: %q", *d.Name)
 	}
-	if d.Token != nd.Token {
-		t.Errorf("bad token: %q", d.Token)
+	if *d.Token != *nd.Token {
+		t.Errorf("bad token: %q", *d.Token)
 	}
-	if d.Format != nd.Format {
-		t.Errorf("bad format: %q", d.Format)
+	if *d.Format != *nd.Format {
+		t.Errorf("bad format: %q", *d.Format)
 	}
-	if d.FormatVersion != nd.FormatVersion {
-		t.Errorf("bad format_version: %q", d.FormatVersion)
+	if *d.FormatVersion != *nd.FormatVersion {
+		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if d.Placement != nd.Placement {
-		t.Errorf("bad placement: %q", d.Placement)
+	if *d.Placement != *nd.Placement {
+		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
 	// Update
@@ -124,14 +124,14 @@ func TestClient_Datadog(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.Name != "new-test-datadog" {
-		t.Errorf("bad name: %q", ud.Name)
+	if *ud.Name != "new-test-datadog" {
+		t.Errorf("bad name: %q", *ud.Name)
 	}
-	if ud.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", ud.FormatVersion)
+	if *ud.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *ud.FormatVersion)
 	}
-	if ud.Region != "EU" {
-		t.Errorf("bad region: %q", ud.Region)
+	if *ud.Region != "EU" {
+		t.Errorf("bad region: %q", *ud.Region)
 	}
 
 	// Delete

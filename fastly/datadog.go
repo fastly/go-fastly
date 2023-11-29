@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,41 +10,22 @@ import (
 type Datadog struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Region            string     `mapstructure:"region"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Region            *string    `mapstructure:"region"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// datadogByName is a sortable list of Datadog.
-type datadogByName []*Datadog
-
-// Len implement the sortable interface.
-func (s datadogByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s datadogByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s datadogByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListDatadogInput is used as input to the ListDatadog function.
 type ListDatadogInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -70,7 +50,6 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	if err := decodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
-	sort.Stable(datadogByName(d))
 	return d, nil
 }
 
