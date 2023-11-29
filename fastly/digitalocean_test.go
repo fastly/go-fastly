@@ -143,61 +143,59 @@ func TestClient_DigitalOceans(t *testing.T) {
 		})
 	}()
 
-	if digitaloceanCreateResp1.Name != "test-digitalocean" {
-		t.Errorf("bad name: %q", digitaloceanCreateResp1.Name)
+	if *digitaloceanCreateResp1.Name != "test-digitalocean" {
+		t.Errorf("bad name: %q", *digitaloceanCreateResp1.Name)
 	}
-	if digitaloceanCreateResp1.BucketName != "bucket-name" {
-		t.Errorf("bad bucket_name: %q", digitaloceanCreateResp1.BucketName)
+	if *digitaloceanCreateResp1.BucketName != "bucket-name" {
+		t.Errorf("bad bucket_name: %q", *digitaloceanCreateResp1.BucketName)
 	}
-	if digitaloceanCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
-		t.Errorf("bad access_key: %q", digitaloceanCreateResp1.AccessKey)
+	if *digitaloceanCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+		t.Errorf("bad access_key: %q", *digitaloceanCreateResp1.AccessKey)
 	}
-	if digitaloceanCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
-		t.Errorf("bad secret_key: %q", digitaloceanCreateResp1.SecretKey)
+	if *digitaloceanCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
+		t.Errorf("bad secret_key: %q", *digitaloceanCreateResp1.SecretKey)
 	}
-	if digitaloceanCreateResp1.Domain != "fra1.digitaloceanspaces.com" {
-		t.Errorf("bad domain: %q", digitaloceanCreateResp1.Domain)
+	if *digitaloceanCreateResp1.Domain != "fra1.digitaloceanspaces.com" {
+		t.Errorf("bad domain: %q", *digitaloceanCreateResp1.Domain)
 	}
-	if digitaloceanCreateResp1.Path != "/path" {
-		t.Errorf("bad path: %q", digitaloceanCreateResp1.Path)
+	if *digitaloceanCreateResp1.Path != "/path" {
+		t.Errorf("bad path: %q", *digitaloceanCreateResp1.Path)
 	}
-	if digitaloceanCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", digitaloceanCreateResp1.Period)
+	if *digitaloceanCreateResp1.Period != 12 {
+		t.Errorf("bad period: %q", *digitaloceanCreateResp1.Period)
 	}
-	if digitaloceanCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", digitaloceanCreateResp1.GzipLevel)
+	if *digitaloceanCreateResp1.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp1.GzipLevel)
 	}
-	if digitaloceanCreateResp1.Format != "format" {
-		t.Errorf("bad format: %q", digitaloceanCreateResp1.Format)
+	if *digitaloceanCreateResp1.Format != "format" {
+		t.Errorf("bad format: %q", *digitaloceanCreateResp1.Format)
 	}
-	if digitaloceanCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", digitaloceanCreateResp1.FormatVersion)
+	if *digitaloceanCreateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *digitaloceanCreateResp1.FormatVersion)
 	}
-	if digitaloceanCreateResp1.TimestampFormat != "%Y" {
-		t.Errorf("bad timestamp_format: %q", digitaloceanCreateResp1.TimestampFormat)
+	if *digitaloceanCreateResp1.TimestampFormat != "%Y" {
+		t.Errorf("bad timestamp_format: %q", *digitaloceanCreateResp1.TimestampFormat)
 	}
-	if digitaloceanCreateResp1.MessageType != "classic" {
-		t.Errorf("bad message_type: %q", digitaloceanCreateResp1.MessageType)
+	if *digitaloceanCreateResp1.MessageType != "classic" {
+		t.Errorf("bad message_type: %q", *digitaloceanCreateResp1.MessageType)
 	}
-	if digitaloceanCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", digitaloceanCreateResp1.Placement)
+	if *digitaloceanCreateResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *digitaloceanCreateResp1.Placement)
 	}
-	if digitaloceanCreateResp1.PublicKey != pgpPublicKey() {
-		t.Errorf("bad public_key: %q", digitaloceanCreateResp1.PublicKey)
+	if *digitaloceanCreateResp1.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", *digitaloceanCreateResp1.PublicKey)
 	}
-
-	if digitaloceanCreateResp2.CompressionCodec != "" {
-		t.Errorf("bad compression_codec: %q", digitaloceanCreateResp2.CompressionCodec)
+	if digitaloceanCreateResp2.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *digitaloceanCreateResp2.CompressionCodec)
 	}
-	if digitaloceanCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", digitaloceanCreateResp2.GzipLevel)
+	if *digitaloceanCreateResp2.GzipLevel != 8 {
+		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp2.GzipLevel)
 	}
-
-	if digitaloceanCreateResp3.CompressionCodec != "snappy" {
-		t.Errorf("bad compression_codec: %q", digitaloceanCreateResp3.CompressionCodec)
+	if *digitaloceanCreateResp3.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", *digitaloceanCreateResp3.CompressionCodec)
 	}
-	if digitaloceanCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", digitaloceanCreateResp3.GzipLevel)
+	if *digitaloceanCreateResp3.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -227,47 +225,47 @@ func TestClient_DigitalOceans(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if digitaloceanCreateResp1.Name != digitaloceanGetResp.Name {
-		t.Errorf("bad name: %q", digitaloceanCreateResp1.Name)
+	if *digitaloceanCreateResp1.Name != *digitaloceanGetResp.Name {
+		t.Errorf("bad name: %q", *digitaloceanCreateResp1.Name)
 	}
-	if digitaloceanCreateResp1.BucketName != digitaloceanGetResp.BucketName {
-		t.Errorf("bad bucket_name: %q", digitaloceanCreateResp1.BucketName)
+	if *digitaloceanCreateResp1.BucketName != *digitaloceanGetResp.BucketName {
+		t.Errorf("bad bucket_name: %q", *digitaloceanCreateResp1.BucketName)
 	}
-	if digitaloceanCreateResp1.AccessKey != digitaloceanGetResp.AccessKey {
-		t.Errorf("bad access_key: %q", digitaloceanCreateResp1.AccessKey)
+	if *digitaloceanCreateResp1.AccessKey != *digitaloceanGetResp.AccessKey {
+		t.Errorf("bad access_key: %q", *digitaloceanCreateResp1.AccessKey)
 	}
-	if digitaloceanCreateResp1.SecretKey != digitaloceanGetResp.SecretKey {
-		t.Errorf("bad secret_key: %q", digitaloceanCreateResp1.SecretKey)
+	if *digitaloceanCreateResp1.SecretKey != *digitaloceanGetResp.SecretKey {
+		t.Errorf("bad secret_key: %q", *digitaloceanCreateResp1.SecretKey)
 	}
-	if digitaloceanCreateResp1.Domain != digitaloceanGetResp.Domain {
-		t.Errorf("bad domain: %q", digitaloceanCreateResp1.Domain)
+	if *digitaloceanCreateResp1.Domain != *digitaloceanGetResp.Domain {
+		t.Errorf("bad domain: %q", *digitaloceanCreateResp1.Domain)
 	}
-	if digitaloceanCreateResp1.Path != digitaloceanGetResp.Path {
-		t.Errorf("bad path: %q", digitaloceanCreateResp1.Path)
+	if *digitaloceanCreateResp1.Path != *digitaloceanGetResp.Path {
+		t.Errorf("bad path: %q", *digitaloceanCreateResp1.Path)
 	}
-	if digitaloceanCreateResp1.Period != digitaloceanGetResp.Period {
-		t.Errorf("bad period: %q", digitaloceanCreateResp1.Period)
+	if *digitaloceanCreateResp1.Period != *digitaloceanGetResp.Period {
+		t.Errorf("bad period: %q", *digitaloceanCreateResp1.Period)
 	}
-	if digitaloceanCreateResp1.GzipLevel != digitaloceanGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", digitaloceanCreateResp1.GzipLevel)
+	if *digitaloceanCreateResp1.GzipLevel != *digitaloceanGetResp.GzipLevel {
+		t.Errorf("bad gzip_level: %q", *digitaloceanCreateResp1.GzipLevel)
 	}
-	if digitaloceanCreateResp1.Format != digitaloceanGetResp.Format {
-		t.Errorf("bad format: %q", digitaloceanCreateResp1.Format)
+	if *digitaloceanCreateResp1.Format != *digitaloceanGetResp.Format {
+		t.Errorf("bad format: %q", *digitaloceanCreateResp1.Format)
 	}
-	if digitaloceanCreateResp1.FormatVersion != digitaloceanGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", digitaloceanCreateResp1.FormatVersion)
+	if *digitaloceanCreateResp1.FormatVersion != *digitaloceanGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", *digitaloceanCreateResp1.FormatVersion)
 	}
-	if digitaloceanCreateResp1.TimestampFormat != digitaloceanGetResp.TimestampFormat {
-		t.Errorf("bad timestamp_format: %q", digitaloceanCreateResp1.TimestampFormat)
+	if *digitaloceanCreateResp1.TimestampFormat != *digitaloceanGetResp.TimestampFormat {
+		t.Errorf("bad timestamp_format: %q", *digitaloceanCreateResp1.TimestampFormat)
 	}
-	if digitaloceanCreateResp1.Placement != digitaloceanGetResp.Placement {
-		t.Errorf("bad placement: %q", digitaloceanCreateResp1.Placement)
+	if *digitaloceanCreateResp1.Placement != *digitaloceanGetResp.Placement {
+		t.Errorf("bad placement: %q", *digitaloceanCreateResp1.Placement)
 	}
-	if digitaloceanCreateResp1.PublicKey != digitaloceanGetResp.PublicKey {
-		t.Errorf("bad public_key: %q", digitaloceanCreateResp1.PublicKey)
+	if *digitaloceanCreateResp1.PublicKey != *digitaloceanGetResp.PublicKey {
+		t.Errorf("bad public_key: %q", *digitaloceanCreateResp1.PublicKey)
 	}
-	if digitaloceanCreateResp1.CompressionCodec != digitaloceanGetResp.CompressionCodec {
-		t.Errorf("bad compression_codec: %q", digitaloceanCreateResp1.CompressionCodec)
+	if *digitaloceanCreateResp1.CompressionCodec != *digitaloceanGetResp.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", *digitaloceanCreateResp1.CompressionCodec)
 	}
 
 	// Update
@@ -310,31 +308,29 @@ func TestClient_DigitalOceans(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if digitaloceanUpdateResp1.Name != "new-test-digitalocean" {
-		t.Errorf("bad name: %q", digitaloceanUpdateResp1.Name)
+	if *digitaloceanUpdateResp1.Name != "new-test-digitalocean" {
+		t.Errorf("bad name: %q", *digitaloceanUpdateResp1.Name)
 	}
-	if digitaloceanUpdateResp1.Domain != "nyc3.digitaloceanspaces.com" {
-		t.Errorf("bad domain: %q", digitaloceanUpdateResp1.Domain)
+	if *digitaloceanUpdateResp1.Domain != "nyc3.digitaloceanspaces.com" {
+		t.Errorf("bad domain: %q", *digitaloceanUpdateResp1.Domain)
 	}
-	if digitaloceanUpdateResp1.CompressionCodec != "zstd" {
-		t.Errorf("bad compression_codec: %q", digitaloceanUpdateResp1.CompressionCodec)
+	if *digitaloceanUpdateResp1.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp1.CompressionCodec)
 	}
-	if digitaloceanUpdateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", digitaloceanUpdateResp1.GzipLevel)
+	if digitaloceanUpdateResp1.GzipLevel != nil {
+		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp1.GzipLevel)
 	}
-
-	if digitaloceanUpdateResp2.CompressionCodec != "zstd" {
-		t.Errorf("bad compression_codec: %q", digitaloceanUpdateResp2.CompressionCodec)
+	if *digitaloceanUpdateResp2.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp2.CompressionCodec)
 	}
-	if digitaloceanUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", digitaloceanUpdateResp2.GzipLevel)
+	if *digitaloceanUpdateResp2.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp2.GzipLevel)
 	}
-
-	if digitaloceanUpdateResp3.CompressionCodec != "" {
-		t.Errorf("bad compression_codec: %q", digitaloceanUpdateResp3.CompressionCodec)
+	if digitaloceanUpdateResp3.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp3.CompressionCodec)
 	}
-	if digitaloceanUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", digitaloceanUpdateResp3.GzipLevel)
+	if *digitaloceanUpdateResp3.GzipLevel != 9 {
+		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp3.GzipLevel)
 	}
 
 	// Delete
