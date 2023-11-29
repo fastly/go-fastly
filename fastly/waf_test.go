@@ -33,7 +33,7 @@ func TestClient_WAFs(t *testing.T) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
 			ServiceID:         testService.ID,
 			ServiceVersion:    tv.Number,
-			PrefetchCondition: condition.Name,
+			PrefetchCondition: *condition.Name,
 			Response:          ro.Name,
 		})
 	})

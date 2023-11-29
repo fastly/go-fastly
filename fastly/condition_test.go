@@ -40,17 +40,17 @@ func TestClient_Conditions(t *testing.T) {
 		})
 	}()
 
-	if condition.Name != "test/condition" {
-		t.Errorf("bad name: %q", condition.Name)
+	if *condition.Name != "test/condition" {
+		t.Errorf("bad name: %q", *condition.Name)
 	}
-	if condition.Statement != "req.url~+\"index.html\"" {
-		t.Errorf("bad statement: %q", condition.Statement)
+	if *condition.Statement != "req.url~+\"index.html\"" {
+		t.Errorf("bad statement: %q", *condition.Statement)
 	}
-	if condition.Type != "REQUEST" {
-		t.Errorf("bad type: %s", condition.Type)
+	if *condition.Type != "REQUEST" {
+		t.Errorf("bad type: %s", *condition.Type)
 	}
-	if condition.Priority != 1 {
-		t.Errorf("bad priority: %d", condition.Priority)
+	if *condition.Priority != 1 {
+		t.Errorf("bad priority: %d", *condition.Priority)
 	}
 
 	// List
@@ -80,17 +80,17 @@ func TestClient_Conditions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if condition.Name != newCondition.Name {
-		t.Errorf("bad name: %q (%q)", condition.Name, newCondition.Name)
+	if *condition.Name != *newCondition.Name {
+		t.Errorf("bad name: %q (%q)", *condition.Name, *newCondition.Name)
 	}
-	if condition.Statement != "req.url~+\"index.html\"" {
-		t.Errorf("bad statement: %q", condition.Statement)
+	if *condition.Statement != "req.url~+\"index.html\"" {
+		t.Errorf("bad statement: %q", *condition.Statement)
 	}
-	if condition.Type != "REQUEST" {
-		t.Errorf("bad type: %s", condition.Type)
+	if *condition.Type != "REQUEST" {
+		t.Errorf("bad type: %s", *condition.Type)
 	}
-	if condition.Priority != 1 {
-		t.Errorf("bad priority: %d", condition.Priority)
+	if *condition.Priority != 1 {
+		t.Errorf("bad priority: %d", *condition.Priority)
 	}
 
 	// Update
@@ -106,8 +106,8 @@ func TestClient_Conditions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if updatedCondition.Statement != "req.url~+\"updated.html\"" {
-		t.Errorf("bad statement: %q", updatedCondition.Statement)
+	if *updatedCondition.Statement != "req.url~+\"updated.html\"" {
+		t.Errorf("bad statement: %q", *updatedCondition.Statement)
 	}
 
 	// Delete

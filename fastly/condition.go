@@ -3,40 +3,21 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Condition represents a condition response from the Fastly API.
 type Condition struct {
-	Comment        string     `mapstructure:"comment"`
+	Comment        *string    `mapstructure:"comment"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	Name           string     `mapstructure:"name"`
-	Priority       int        `mapstructure:"priority"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
-	Statement      string     `mapstructure:"statement"`
-	Type           string     `mapstructure:"type"`
+	Name           *string    `mapstructure:"name"`
+	Priority       *int       `mapstructure:"priority"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int       `mapstructure:"version"`
+	Statement      *string    `mapstructure:"statement"`
+	Type           *string    `mapstructure:"type"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
-}
-
-// conditionsByName is a sortable list of conditions.
-type conditionsByName []*Condition
-
-// Len implement the sortable interface.
-func (s conditionsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s conditionsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s conditionsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListConditionsInput is used as input to the ListConditions function.
@@ -67,7 +48,6 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	if err := decodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
-	sort.Stable(conditionsByName(cs))
 	return cs, nil
 }
 
