@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,43 +10,25 @@ import (
 type Elasticsearch struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Index             string     `mapstructure:"index"`
-	Name              string     `mapstructure:"name"`
-	Password          string     `mapstructure:"password"`
-	Pipeline          string     `mapstructure:"pipeline"`
-	Placement         string     `mapstructure:"placement"`
-	RequestMaxBytes   int        `mapstructure:"request_max_bytes"`
-	RequestMaxEntries int        `mapstructure:"request_max_entries"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TLSCACert         string     `mapstructure:"tls_ca_cert"`
-	TLSClientCert     string     `mapstructure:"tls_client_cert"`
-	TLSClientKey      string     `mapstructure:"tls_client_key"`
-	TLSHostname       string     `mapstructure:"tls_hostname"`
-	URL               string     `mapstructure:"url"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Index             *string    `mapstructure:"index"`
+	Name              *string    `mapstructure:"name"`
+	Password          *string    `mapstructure:"password"`
+	Pipeline          *string    `mapstructure:"pipeline"`
+	Placement         *string    `mapstructure:"placement"`
+	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
+	RequestMaxEntries *int       `mapstructure:"request_max_entries"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TLSCACert         *string    `mapstructure:"tls_ca_cert"`
+	TLSClientCert     *string    `mapstructure:"tls_client_cert"`
+	TLSClientKey      *string    `mapstructure:"tls_client_key"`
+	TLSHostname       *string    `mapstructure:"tls_hostname"`
+	URL               *string    `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	User              string     `mapstructure:"user"`
-}
-
-// elasticsearchByName is a sortable list of Elasticsearch logs.
-type elasticsearchByName []*Elasticsearch
-
-// Len implement the sortable interface.
-func (s elasticsearchByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s elasticsearchByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s elasticsearchByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	User              *string    `mapstructure:"user"`
 }
 
 // ListElasticsearchInput is used as input to the ListElasticsearch function.
@@ -78,7 +59,6 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 	if err := decodeBodyMap(resp.Body, &elasticsearch); err != nil {
 		return nil, err
 	}
-	sort.Stable(elasticsearchByName(elasticsearch))
 	return elasticsearch, nil
 }
 
