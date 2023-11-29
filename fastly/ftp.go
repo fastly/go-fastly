@@ -3,51 +3,32 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // FTP represents an FTP logging response from the Fastly API.
 type FTP struct {
-	Address           string     `mapstructure:"address"`
-	CompressionCodec  string     `mapstructure:"compression_codec"`
+	Address           *string    `mapstructure:"address"`
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	GzipLevel         int        `mapstructure:"gzip_level"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Password          string     `mapstructure:"password"`
-	Path              string     `mapstructure:"path"`
-	Period            int        `mapstructure:"period"`
-	Placement         string     `mapstructure:"placement"`
-	Port              int        `mapstructure:"port"`
-	PublicKey         string     `mapstructure:"public_key"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	GzipLevel         *int       `mapstructure:"gzip_level"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Password          *string    `mapstructure:"password"`
+	Path              *string    `mapstructure:"path"`
+	Period            *int       `mapstructure:"period"`
+	Placement         *string    `mapstructure:"placement"`
+	Port              *int       `mapstructure:"port"`
+	PublicKey         *string    `mapstructure:"public_key"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TimestampFormat   *string    `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	Username          string     `mapstructure:"user"`
-}
-
-// ftpsByName is a sortable list of ftps.
-type ftpsByName []*FTP
-
-// Len implement the sortable interface.
-func (s ftpsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s ftpsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s ftpsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	Username          *string    `mapstructure:"user"`
 }
 
 // ListFTPsInput is used as input to the ListFTPs function.
@@ -78,7 +59,6 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	if err := decodeBodyMap(resp.Body, &ftps); err != nil {
 		return nil, err
 	}
-	sort.Stable(ftpsByName(ftps))
 	return ftps, nil
 }
 
