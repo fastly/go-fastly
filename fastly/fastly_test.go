@@ -210,9 +210,9 @@ func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture st
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteDictionary(&DeleteDictionaryInput{
-			ServiceID:      dictionary.ServiceID,
-			ServiceVersion: dictionary.ServiceVersion,
-			Name:           dictionary.Name,
+			ServiceID:      *dictionary.ServiceID,
+			ServiceVersion: *dictionary.ServiceVersion,
+			Name:           *dictionary.Name,
 		})
 	})
 	if err != nil {

@@ -22,9 +22,9 @@ func TestClient_DictionaryItems(t *testing.T) {
 	record(t, fixtureBase+"create", func(c *Client) {
 		createdDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
-			ItemKey:      "test-dictionary-item",
-			ItemValue:    "value",
+			DictionaryID: *testDictionary.ID,
+			ItemKey:      ToPointer("test-dictionary-item"),
+			ItemValue:    ToPointer("value"),
 		})
 	})
 	if err != nil {
@@ -36,17 +36,17 @@ func TestClient_DictionaryItems(t *testing.T) {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
 				ServiceID:    testService.ID,
-				DictionaryID: testDictionary.ID,
+				DictionaryID: *testDictionary.ID,
 				ItemKey:      "test-dictionary-item",
 			})
 		})
 	}()
 
-	if createdDictionaryItem.ItemKey != "test-dictionary-item" {
-		t.Errorf("bad item_key: %q", createdDictionaryItem.ItemKey)
+	if *createdDictionaryItem.ItemKey != "test-dictionary-item" {
+		t.Errorf("bad item_key: %q", *createdDictionaryItem.ItemKey)
 	}
-	if createdDictionaryItem.ItemValue != "value" {
-		t.Errorf("bad item_value: %q", createdDictionaryItem.ItemValue)
+	if *createdDictionaryItem.ItemValue != "value" {
+		t.Errorf("bad item_value: %q", *createdDictionaryItem.ItemValue)
 	}
 
 	// List
@@ -54,7 +54,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	record(t, fixtureBase+"list", func(c *Client) {
 		dictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -69,11 +69,11 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var paginator *ListPaginator[DictionaryItem]
 	record(t, fixtureBase+"list2", func(c *Client) {
 		paginator = c.GetDictionaryItems(&GetDictionaryItemsInput{
-			DictionaryID: testDictionary.ID,
-			Direction:    "ascend",
-			PerPage:      50,
+			DictionaryID: *testDictionary.ID,
+			Direction:    ToPointer("ascend"),
+			PerPage:      ToPointer(50),
 			ServiceID:    testService.ID,
-			Sort:         "item_key",
+			Sort:         ToPointer("item_key"),
 		})
 
 		for paginator.HasNext() {
@@ -100,18 +100,18 @@ func TestClient_DictionaryItems(t *testing.T) {
 	record(t, fixtureBase+"get", func(c *Client) {
 		retrievedDictionaryItem, err = c.GetDictionaryItem(&GetDictionaryItemInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if retrievedDictionaryItem.ItemKey != "test-dictionary-item" {
-		t.Errorf("bad item_key: %q", retrievedDictionaryItem.ItemKey)
+	if *retrievedDictionaryItem.ItemKey != "test-dictionary-item" {
+		t.Errorf("bad item_key: %q", *retrievedDictionaryItem.ItemKey)
 	}
-	if retrievedDictionaryItem.ItemValue != "value" {
-		t.Errorf("bad item_value: %q", retrievedDictionaryItem.ItemValue)
+	if *retrievedDictionaryItem.ItemValue != "value" {
+		t.Errorf("bad item_value: %q", *retrievedDictionaryItem.ItemValue)
 	}
 
 	// Update
@@ -119,7 +119,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		updatedDictionaryItem, err = c.UpdateDictionaryItem(&UpdateDictionaryItemInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
 			ItemValue:    "new-value",
 		})
@@ -127,15 +127,15 @@ func TestClient_DictionaryItems(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if updatedDictionaryItem.ItemValue != "new-value" {
-		t.Errorf("bad item_value: %q", updatedDictionaryItem.ItemValue)
+	if *updatedDictionaryItem.ItemValue != "new-value" {
+		t.Errorf("bad item_value: %q", *updatedDictionaryItem.ItemValue)
 	}
 
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
 		})
 	})

@@ -19,17 +19,17 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
 		ServiceID:    testService.ID,
-		DictionaryID: testDictionary.ID,
+		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: CreateBatchOperation,
-				ItemKey:   "key1",
-				ItemValue: "val1",
+				Operation: ToPointer(CreateBatchOperation),
+				ItemKey:   ToPointer("key1"),
+				ItemValue: ToPointer("val1"),
 			},
 			{
-				Operation: CreateBatchOperation,
-				ItemKey:   "key2",
-				ItemValue: "val2",
+				Operation: ToPointer(CreateBatchOperation),
+				ItemKey:   ToPointer("key2"),
+				ItemValue: ToPointer("val2"),
 			},
 		},
 	}
@@ -48,7 +48,7 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -64,14 +64,14 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	for i, item := range actualDictionaryItems {
 		actualItemKey := item.ItemKey
 		expectedItemKey := batchCreateOperations.Items[i].ItemKey
-		if actualItemKey != expectedItemKey {
-			t.Errorf("First ItemKey did not match, expected %s, got %s", expectedItemKey, actualItemKey)
+		if *actualItemKey != *expectedItemKey {
+			t.Errorf("First ItemKey did not match, expected %s, got %s", *expectedItemKey, *actualItemKey)
 		}
 
 		actualItemValue := item.ItemValue
 		expectedItemValue := batchCreateOperations.Items[i].ItemValue
-		if actualItemValue != expectedItemValue {
-			t.Errorf("First ItemValue did not match, expected %s, got %s", expectedItemValue, actualItemValue)
+		if *actualItemValue != *expectedItemValue {
+			t.Errorf("First ItemValue did not match, expected %s, got %s", *expectedItemValue, *actualItemValue)
 		}
 	}
 }
@@ -91,17 +91,17 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
 		ServiceID:    testService.ID,
-		DictionaryID: testDictionary.ID,
+		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: CreateBatchOperation,
-				ItemKey:   "key1",
-				ItemValue: "val1",
+				Operation: ToPointer(CreateBatchOperation),
+				ItemKey:   ToPointer("key1"),
+				ItemValue: ToPointer("val1"),
 			},
 			{
-				Operation: CreateBatchOperation,
-				ItemKey:   "key2",
-				ItemValue: "val2",
+				Operation: ToPointer(CreateBatchOperation),
+				ItemKey:   ToPointer("key2"),
+				ItemValue: ToPointer("val2"),
 			},
 		},
 	}
@@ -117,12 +117,12 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	// When: I execute the batch delete operations against the Fastly API,
 	batchDeleteOperations := &BatchModifyDictionaryItemsInput{
 		ServiceID:    testService.ID,
-		DictionaryID: testDictionary.ID,
+		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: DeleteBatchOperation,
-				ItemKey:   "key2",
-				ItemValue: "val2",
+				Operation: ToPointer(DeleteBatchOperation),
+				ItemKey:   ToPointer("key2"),
+				ItemValue: ToPointer("val2"),
 			},
 		},
 	}
@@ -139,7 +139,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualDictionaryItems, err = client.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -168,17 +168,17 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
 		ServiceID:    testService.ID,
-		DictionaryID: testDictionary.ID,
+		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: CreateBatchOperation,
-				ItemKey:   "key1",
-				ItemValue: "val1",
+				Operation: ToPointer(CreateBatchOperation),
+				ItemKey:   ToPointer("key1"),
+				ItemValue: ToPointer("val1"),
 			},
 			{
-				Operation: CreateBatchOperation,
-				ItemKey:   "key2",
-				ItemValue: "val2",
+				Operation: ToPointer(CreateBatchOperation),
+				ItemKey:   ToPointer("key2"),
+				ItemValue: ToPointer("val2"),
 			},
 		},
 	}
@@ -194,12 +194,12 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	// When: I execute the batch update operations against the Fastly API,
 	batchUpdateOperations := &BatchModifyDictionaryItemsInput{
 		ServiceID:    testService.ID,
-		DictionaryID: testDictionary.ID,
+		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: UpdateBatchOperation,
-				ItemKey:   "key2",
-				ItemValue: "val2Updated",
+				Operation: ToPointer(UpdateBatchOperation),
+				ItemKey:   ToPointer("key2"),
+				ItemValue: ToPointer("val2Updated"),
 			},
 		},
 	}
@@ -216,7 +216,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	record(t, fixtureBase+"list_after_update", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -232,30 +232,30 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	actualItemKey := actualDictionaryItems[0].ItemKey
 	expectedItemKey := batchCreateOperations.Items[0].ItemKey
 
-	if actualItemKey != expectedItemKey {
-		t.Errorf("First ItemKey did not match, expected %s, got %s", expectedItemKey, actualItemKey)
+	if *actualItemKey != *expectedItemKey {
+		t.Errorf("First ItemKey did not match, expected %s, got %s", *expectedItemKey, *actualItemKey)
 	}
 
 	actualItemValue := actualDictionaryItems[0].ItemValue
 	expectedItemValue := batchCreateOperations.Items[0].ItemValue
 
 	// Confirm the second dictionary item contains the modifications.
-	if actualItemValue != expectedItemValue {
-		t.Errorf("First ItemValue did not match, expected %s, got %s", expectedItemValue, actualItemValue)
+	if *actualItemValue != *expectedItemValue {
+		t.Errorf("First ItemValue did not match, expected %s, got %s", *expectedItemValue, *actualItemValue)
 	}
 
 	actualItemKey = actualDictionaryItems[1].ItemKey
 	expectedItemKey = batchUpdateOperations.Items[0].ItemKey
 
-	if actualItemKey != expectedItemKey {
-		t.Errorf("Second ItemKey did not match, expected %s, got %s", expectedItemKey, actualItemKey)
+	if *actualItemKey != *expectedItemKey {
+		t.Errorf("Second ItemKey did not match, expected %s, got %s", *expectedItemKey, *actualItemKey)
 	}
 
 	actualItemValue = actualDictionaryItems[1].ItemValue
 	expectedItemValue = batchUpdateOperations.Items[0].ItemValue
 
-	if actualItemValue != expectedItemValue {
-		t.Errorf("Second ItemValue did not match, expected %s, got %s", expectedItemValue, actualItemValue)
+	if *actualItemValue != *expectedItemValue {
+		t.Errorf("Second ItemValue did not match, expected %s, got %s", *expectedItemValue, *actualItemValue)
 	}
 }
 
@@ -274,12 +274,12 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
 		ServiceID:    testService.ID,
-		DictionaryID: testDictionary.ID,
+		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: CreateBatchOperation,
-				ItemKey:   "key1",
-				ItemValue: "val1",
+				Operation: ToPointer(CreateBatchOperation),
+				ItemKey:   ToPointer("key1"),
+				ItemValue: ToPointer("val1"),
 			},
 		},
 	}
@@ -295,17 +295,17 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	// When: I execute the batch upsert operations against the Fastly API
 	batchUpsertOperations := &BatchModifyDictionaryItemsInput{
 		ServiceID:    testService.ID,
-		DictionaryID: testDictionary.ID,
+		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
-				Operation: UpsertBatchOperation,
-				ItemKey:   "key1",
-				ItemValue: "val1Updated",
+				Operation: ToPointer(UpsertBatchOperation),
+				ItemKey:   ToPointer("key1"),
+				ItemValue: ToPointer("val1Updated"),
 			},
 			{
-				Operation: UpsertBatchOperation,
-				ItemKey:   "key2",
-				ItemValue: "val2",
+				Operation: ToPointer(UpsertBatchOperation),
+				ItemKey:   ToPointer("key2"),
+				ItemValue: ToPointer("val2"),
 			},
 		},
 	}
@@ -322,7 +322,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	record(t, fixtureBase+"list_after_upsert", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			DictionaryID: *testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -338,14 +338,14 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	for i, item := range actualDictionaryItems {
 		actualItemKey := item.ItemKey
 		expectedItemKey := batchUpsertOperations.Items[i].ItemKey
-		if actualItemKey != expectedItemKey {
-			t.Errorf("First ItemKey did not match, expected %s, got %s", expectedItemKey, actualItemKey)
+		if *actualItemKey != *expectedItemKey {
+			t.Errorf("First ItemKey did not match, expected %s, got %s", *expectedItemKey, *actualItemKey)
 		}
 
 		actualItemValue := item.ItemValue
 		expectedItemValue := batchUpsertOperations.Items[i].ItemValue
-		if actualItemValue != expectedItemValue {
-			t.Errorf("First ItemValue did not match, expected %s, got %s", expectedItemValue, actualItemValue)
+		if *actualItemValue != *expectedItemValue {
+			t.Errorf("First ItemValue did not match, expected %s, got %s", *expectedItemValue, *actualItemValue)
 		}
 	}
 }

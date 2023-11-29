@@ -42,8 +42,8 @@ func TestClient_Dictionaries(t *testing.T) {
 		})
 	}()
 
-	if d.Name != "test_dictionary" {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != "test_dictionary" {
+		t.Errorf("bad name: %q", *d.Name)
 	}
 
 	// List
@@ -73,8 +73,8 @@ func TestClient_Dictionaries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d.Name != nd.Name {
-		t.Errorf("bad name: %q (%q)", d.Name, nd.Name)
+	if *d.Name != *nd.Name {
+		t.Errorf("bad name: %q (%q)", *d.Name, *nd.Name)
 	}
 
 	// Update
@@ -90,8 +90,8 @@ func TestClient_Dictionaries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.Name != "new_test_dictionary" {
-		t.Errorf("bad name: %q", ud.Name)
+	if *ud.Name != "new_test_dictionary" {
+		t.Errorf("bad name: %q", *ud.Name)
 	}
 
 	// Delete

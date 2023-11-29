@@ -33,9 +33,9 @@ func ExampleClient_RateLimitRemaining() {
 
 	_, err = c.CreateDictionaryItem(&fastly.CreateDictionaryItemInput{
 		ServiceID:    sid,
-		DictionaryID: dict.ID,
-		ItemKey:      "test-dictionary-item",
-		ItemValue:    "value",
+		DictionaryID: *dict.ID,
+		ItemKey:      fastly.ToPointer("test-dictionary-item"),
+		ItemValue:    fastly.ToPointer("value"),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -46,7 +46,7 @@ func ExampleClient_RateLimitRemaining() {
 	for i := 1; i < 10; i++ {
 		_, err := c.UpdateDictionaryItem(&fastly.UpdateDictionaryItemInput{
 			ServiceID:    sid,
-			DictionaryID: dict.ID,
+			DictionaryID: *dict.ID,
 			ItemKey:      "test-dictionary-item",
 			ItemValue:    fmt.Sprintf("value%d", i),
 		})

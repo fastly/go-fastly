@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,30 +10,12 @@ import (
 type Dictionary struct {
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	ID             string     `mapstructure:"id"`
-	Name           string     `mapstructure:"name"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
+	ID             *string    `mapstructure:"id"`
+	Name           *string    `mapstructure:"name"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int       `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
-	WriteOnly      bool       `mapstructure:"write_only"`
-}
-
-// dictionariesByName is a sortable list of dictionaries.
-type dictionariesByName []*Dictionary
-
-// Len implement the sortable interface.
-func (s dictionariesByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s dictionariesByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s dictionariesByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	WriteOnly      *bool      `mapstructure:"write_only"`
 }
 
 // ListDictionariesInput is used as input to the ListDictionaries function.
@@ -65,7 +46,6 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
-	sort.Stable(dictionariesByName(bs))
 	return bs, nil
 }
 
