@@ -57,38 +57,38 @@ func TestClient_HealthChecks(t *testing.T) {
 		})
 	}()
 
-	if hc.Name != "test-healthcheck" {
-		t.Errorf("bad name: %q", hc.Name)
+	if *hc.Name != "test-healthcheck" {
+		t.Errorf("bad name: %q", *hc.Name)
 	}
-	if hc.Method != "HEAD" {
-		t.Errorf("bad address: %q", hc.Method)
+	if *hc.Method != "HEAD" {
+		t.Errorf("bad address: %q", *hc.Method)
 	}
-	if hc.Host != "example.com" {
-		t.Errorf("bad host: %q", hc.Host)
+	if *hc.Host != "example.com" {
+		t.Errorf("bad host: %q", *hc.Host)
 	}
-	if hc.Path != "/foo" {
-		t.Errorf("bad path: %q", hc.Path)
+	if *hc.Path != "/foo" {
+		t.Errorf("bad path: %q", *hc.Path)
 	}
-	if hc.HTTPVersion != "1.1" {
-		t.Errorf("bad http_version: %q", hc.HTTPVersion)
+	if *hc.HTTPVersion != "1.1" {
+		t.Errorf("bad http_version: %q", *hc.HTTPVersion)
 	}
-	if hc.Timeout != 1500 {
-		t.Errorf("bad timeout: %q", hc.Timeout)
+	if *hc.Timeout != 1500 {
+		t.Errorf("bad timeout: %q", *hc.Timeout)
 	}
-	if hc.CheckInterval != 2500 {
-		t.Errorf("bad check_interval: %q", hc.CheckInterval)
+	if *hc.CheckInterval != 2500 {
+		t.Errorf("bad check_interval: %q", *hc.CheckInterval)
 	}
-	if hc.ExpectedResponse != 200 {
-		t.Errorf("bad timeout: %q", hc.ExpectedResponse)
+	if *hc.ExpectedResponse != 200 {
+		t.Errorf("bad timeout: %q", *hc.ExpectedResponse)
 	}
-	if hc.Window != 5000 {
-		t.Errorf("bad window: %q", hc.Window)
+	if *hc.Window != 5000 {
+		t.Errorf("bad window: %q", *hc.Window)
 	}
-	if hc.Threshold != 10 {
-		t.Errorf("bad threshold: %q", hc.Threshold)
+	if *hc.Threshold != 10 {
+		t.Errorf("bad threshold: %q", *hc.Threshold)
 	}
-	if hc.Initial != 10 {
-		t.Errorf("bad initial: %q", hc.Initial)
+	if *hc.Initial != 10 {
+		t.Errorf("bad initial: %q", *hc.Initial)
 	}
 	if len(hc.Headers) != 2 {
 		t.Errorf("bad headers: %q", hc.Headers)
@@ -121,38 +121,38 @@ func TestClient_HealthChecks(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if hc.Name != nhc.Name {
-		t.Errorf("bad name: %q (%q)", hc.Name, nhc.Name)
+	if *hc.Name != *nhc.Name {
+		t.Errorf("bad name: %q (%q)", *hc.Name, *nhc.Name)
 	}
-	if hc.Method != nhc.Method {
-		t.Errorf("bad address: %q", hc.Method)
+	if *hc.Method != *nhc.Method {
+		t.Errorf("bad address: %q", *hc.Method)
 	}
-	if hc.Host != nhc.Host {
-		t.Errorf("bad host: %q", hc.Host)
+	if *hc.Host != *nhc.Host {
+		t.Errorf("bad host: %q", *hc.Host)
 	}
-	if hc.Path != nhc.Path {
-		t.Errorf("bad path: %q", hc.Path)
+	if *hc.Path != *nhc.Path {
+		t.Errorf("bad path: %q", *hc.Path)
 	}
-	if hc.HTTPVersion != nhc.HTTPVersion {
-		t.Errorf("bad http_version: %q", hc.HTTPVersion)
+	if *hc.HTTPVersion != *nhc.HTTPVersion {
+		t.Errorf("bad http_version: %q", *hc.HTTPVersion)
 	}
-	if hc.Timeout != nhc.Timeout {
-		t.Errorf("bad timeout: %q", hc.Timeout)
+	if *hc.Timeout != *nhc.Timeout {
+		t.Errorf("bad timeout: %q", *hc.Timeout)
 	}
-	if hc.CheckInterval != nhc.CheckInterval {
-		t.Errorf("bad check_interval: %q", hc.CheckInterval)
+	if *hc.CheckInterval != *nhc.CheckInterval {
+		t.Errorf("bad check_interval: %q", *hc.CheckInterval)
 	}
-	if hc.ExpectedResponse != nhc.ExpectedResponse {
-		t.Errorf("bad timeout: %q", hc.ExpectedResponse)
+	if *hc.ExpectedResponse != *nhc.ExpectedResponse {
+		t.Errorf("bad timeout: %q", *hc.ExpectedResponse)
 	}
-	if hc.Window != nhc.Window {
-		t.Errorf("bad window: %q", hc.Window)
+	if *hc.Window != *nhc.Window {
+		t.Errorf("bad window: %q", *hc.Window)
 	}
-	if hc.Threshold != nhc.Threshold {
-		t.Errorf("bad threshold: %q", hc.Threshold)
+	if *hc.Threshold != *nhc.Threshold {
+		t.Errorf("bad threshold: %q", *hc.Threshold)
 	}
-	if hc.Initial != nhc.Initial {
-		t.Errorf("bad initial: %q", hc.Initial)
+	if *hc.Initial != *nhc.Initial {
+		t.Errorf("bad initial: %q", *hc.Initial)
 	}
 	if len(nhc.Headers) != 2 {
 		t.Errorf("bad headers: %q", nhc.Headers)
@@ -175,8 +175,8 @@ func TestClient_HealthChecks(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uhc.Name != "new-test-healthcheck" {
-		t.Errorf("bad update name: %q", uhc.Name)
+	if *uhc.Name != "new-test-healthcheck" {
+		t.Errorf("bad update name: %q", *uhc.Name)
 	}
 	if len(uhc.Headers) != 1 {
 		t.Errorf("bad headers: %q", uhc.Headers)

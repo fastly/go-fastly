@@ -3,48 +3,29 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // HealthCheck represents a health check response from the Fastly API.
 type HealthCheck struct {
-	CheckInterval    int        `mapstructure:"check_interval"`
-	Comment          string     `mapstructure:"comment"`
+	CheckInterval    *int       `mapstructure:"check_interval"`
+	Comment          *string    `mapstructure:"comment"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
-	ExpectedResponse int        `mapstructure:"expected_response"`
-	HTTPVersion      string     `mapstructure:"http_version"`
+	ExpectedResponse *int       `mapstructure:"expected_response"`
+	HTTPVersion      *string    `mapstructure:"http_version"`
 	Headers          []string   `mapstructure:"headers"`
-	Host             string     `mapstructure:"host"`
-	Initial          int        `mapstructure:"initial"`
-	Method           string     `mapstructure:"method"`
-	Name             string     `mapstructure:"name"`
-	Path             string     `mapstructure:"path"`
-	ServiceID        string     `mapstructure:"service_id"`
-	ServiceVersion   int        `mapstructure:"version"`
-	Threshold        int        `mapstructure:"threshold"`
-	Timeout          int        `mapstructure:"timeout"`
+	Host             *string    `mapstructure:"host"`
+	Initial          *int       `mapstructure:"initial"`
+	Method           *string    `mapstructure:"method"`
+	Name             *string    `mapstructure:"name"`
+	Path             *string    `mapstructure:"path"`
+	ServiceID        *string    `mapstructure:"service_id"`
+	ServiceVersion   *int       `mapstructure:"version"`
+	Threshold        *int       `mapstructure:"threshold"`
+	Timeout          *int       `mapstructure:"timeout"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
-	Window           int        `mapstructure:"window"`
-}
-
-// healthChecksByName is a sortable list of health checks.
-type healthChecksByName []*HealthCheck
-
-// Len implement the sortable interface.
-func (s healthChecksByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s healthChecksByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s healthChecksByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	Window           *int       `mapstructure:"window"`
 }
 
 // ListHealthChecksInput is used as input to the ListHealthChecks function.
@@ -74,7 +55,6 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 	if err := decodeBodyMap(resp.Body, &hcs); err != nil {
 		return nil, err
 	}
-	sort.Stable(healthChecksByName(hcs))
 	return hcs, nil
 }
 
