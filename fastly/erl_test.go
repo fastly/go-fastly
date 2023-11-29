@@ -31,9 +31,9 @@ func TestClient_ERL(t *testing.T) {
 			},
 			PenaltyBoxDuration: ToPointer(30),
 			Response: &ERLResponseType{
-				ERLStatus:      429,
-				ERLContentType: "application/json",
-				ERLContent:     "Too many requests",
+				ERLStatus:      ToPointer(429),
+				ERLContentType: ToPointer("application/json"),
+				ERLContent:     ToPointer("Too many requests"),
 			},
 			RpsLimit:   ToPointer(20),
 			WindowSize: ToPointer(ERLWindowSize(10)),
@@ -47,29 +47,25 @@ func TestClient_ERL(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteERL(&DeleteERLInput{
-				ERLID: e.ID,
+				ERLID: *e.ID,
 			})
 		})
 	}()
 
-	if e.Name != "test_erl" {
-		t.Errorf("bad name: %q", e.Name)
+	if *e.Name != "test_erl" {
+		t.Errorf("bad name: %q", *e.Name)
 	}
-
-	if e.RpsLimit != 20 {
-		t.Errorf("wrong value: %q", e.RpsLimit)
+	if *e.RpsLimit != 20 {
+		t.Errorf("wrong value: %q", *e.RpsLimit)
 	}
-
-	if e.Response.ERLContent != "Too many requests" {
-		t.Errorf("want 'Too many requests', got %q", e.Response.ERLContent)
+	if *e.Response.ERLContent != "Too many requests" {
+		t.Errorf("want 'Too many requests', got %q", *e.Response.ERLContent)
 	}
-
-	if e.Response.ERLContentType != "application/json" {
-		t.Errorf("want 'application/json', got %q", e.Response.ERLContentType)
+	if *e.Response.ERLContentType != "application/json" {
+		t.Errorf("want 'application/json', got %q", *e.Response.ERLContentType)
 	}
-
-	if e.Response.ERLStatus != 429 {
-		t.Errorf("want 429, got %q", e.Response.ERLStatus)
+	if *e.Response.ERLStatus != 429 {
+		t.Errorf("want 429, got %q", *e.Response.ERLStatus)
 	}
 
 	// List
@@ -87,43 +83,43 @@ func TestClient_ERL(t *testing.T) {
 	if got < want {
 		t.Errorf("want %d, got %d", want, got)
 	}
-	if es[0].Name != "test_erl" {
-		t.Errorf("bad name: %q", es[0].Name)
+	if *es[0].Name != "test_erl" {
+		t.Errorf("bad name: %q", *es[0].Name)
 	}
 
 	// Get
 	var ge *ERL
 	record(t, fixtureBase+"get", func(c *Client) {
 		ge, err = c.GetERL(&GetERLInput{
-			ERLID: e.ID,
+			ERLID: *e.ID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if e.ID != ge.ID {
-		t.Errorf("bad ID: %q (%q)", e.ID, ge.ID)
+	if *e.ID != *ge.ID {
+		t.Errorf("bad ID: %q (%q)", *e.ID, *ge.ID)
 	}
 
 	// Update
 	var ua *ERL
 	record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateERL(&UpdateERLInput{
-			ERLID: e.ID,
+			ERLID: *e.ID,
 			Name:  ToPointer("test_erl"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ua.Name != "test_erl" {
-		t.Errorf("Bad name after update %s", ua.Name)
+	if *ua.Name != "test_erl" {
+		t.Errorf("Bad name after update %s", *ua.Name)
 	}
 
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteERL(&DeleteERLInput{
-			ERLID: ge.ID,
+			ERLID: *ge.ID,
 		})
 	})
 	if err != nil {
@@ -159,17 +155,17 @@ func TestClient_ERL(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"logger_cleanup", func(c *Client) {
 			_ = c.DeleteERL(&DeleteERLInput{
-				ERLID: elog.ID,
+				ERLID: *elog.ID,
 			})
 		})
 	}()
 
-	if elog.Name != "test_erl" {
-		t.Errorf("bad name: %q", elog.Name)
+	if *elog.Name != "test_erl" {
+		t.Errorf("bad name: %q", *elog.Name)
 	}
 
-	if elog.LoggerType != ERLLogAzureBlob {
-		t.Errorf("bad logger type: %q", elog.LoggerType)
+	if *elog.LoggerType != ERLLogAzureBlob {
+		t.Errorf("bad logger type: %q", *elog.LoggerType)
 	}
 }
 
