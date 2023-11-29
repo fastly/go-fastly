@@ -36,7 +36,7 @@ func TestClient_Directors(t *testing.T) {
 			ServiceVersion: tv.Number,
 			Name:           ToPointer("test-director"),
 			Quorum:         ToPointer(50),
-			Type:           DirectorTypePtr(DirectorTypeRandom),
+			Type:           ToPointer(DirectorTypeRandom),
 			Retries:        ToPointer(5),
 		})
 		_, errDirectorBackend = c.CreateDirectorBackend(&CreateDirectorBackendInput{
@@ -62,7 +62,7 @@ func TestClient_Directors(t *testing.T) {
 			_ = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: tv.Number,
-				Director:       d.Name,
+				Director:       *d.Name,
 				Backend:        *b.Name,
 			})
 
@@ -86,17 +86,17 @@ func TestClient_Directors(t *testing.T) {
 		})
 	}()
 
-	if d.Name != "test-director" {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != "test-director" {
+		t.Errorf("bad name: %q", *d.Name)
 	}
-	if d.Quorum != 50 {
-		t.Errorf("bad quorum: %q", d.Quorum)
+	if *d.Quorum != 50 {
+		t.Errorf("bad quorum: %q", *d.Quorum)
 	}
-	if d.Type != DirectorTypeRandom {
-		t.Errorf("bad type: %d", d.Type)
+	if *d.Type != DirectorTypeRandom {
+		t.Errorf("bad type: %d", *d.Type)
 	}
-	if d.Retries != 5 {
-		t.Errorf("bad retries: %d", d.Retries)
+	if *d.Retries != 5 {
+		t.Errorf("bad retries: %d", *d.Retries)
 	}
 
 	// List
@@ -129,17 +129,17 @@ func TestClient_Directors(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d.Name != nb.Name {
-		t.Errorf("bad name: %q (%q)", d.Name, nb.Name)
+	if *d.Name != *nb.Name {
+		t.Errorf("bad name: %q (%q)", *d.Name, *nb.Name)
 	}
-	if d.Quorum != nb.Quorum {
-		t.Errorf("bad quorum: %q (%q)", d.Quorum, nb.Quorum)
+	if *d.Quorum != *nb.Quorum {
+		t.Errorf("bad quorum: %q (%q)", *d.Quorum, *nb.Quorum)
 	}
-	if d.Type != nb.Type {
-		t.Errorf("bad type: %q (%q)", d.Type, nb.Type)
+	if *d.Type != *nb.Type {
+		t.Errorf("bad type: %q (%q)", *d.Type, *nb.Type)
 	}
-	if d.Retries != nb.Retries {
-		t.Errorf("bad retries: %q (%q)", d.Retries, nb.Retries)
+	if *d.Retries != *nb.Retries {
+		t.Errorf("bad retries: %q (%q)", *d.Retries, *nb.Retries)
 	}
 	if len(nb.Backends) == 0 || nb.Backends[0] != *b.Name {
 		t.Error("bad backend: expected a backend")
@@ -159,8 +159,8 @@ func TestClient_Directors(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ub.Quorum != 100 {
-		t.Errorf("bad quorum: %q", ub.Quorum)
+	if *ub.Quorum != 100 {
+		t.Errorf("bad quorum: %q", *ub.Quorum)
 	}
 
 	// Delete
