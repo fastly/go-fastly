@@ -3,51 +3,32 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Cloudfiles represents a Cloudfiles response from the Fastly API.
 type Cloudfiles struct {
-	AccessKey         string     `mapstructure:"access_key"`
-	BucketName        string     `mapstructure:"bucket_name"`
-	CompressionCodec  string     `mapstructure:"compression_codec"`
+	AccessKey         *string    `mapstructure:"access_key"`
+	BucketName        *string    `mapstructure:"bucket_name"`
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	GzipLevel         int        `mapstructure:"gzip_level"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Path              string     `mapstructure:"path"`
-	Period            int        `mapstructure:"period"`
-	Placement         string     `mapstructure:"placement"`
-	PublicKey         string     `mapstructure:"public_key"`
-	Region            string     `mapstructure:"region"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	GzipLevel         *int       `mapstructure:"gzip_level"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Path              *string    `mapstructure:"path"`
+	Period            *int       `mapstructure:"period"`
+	Placement         *string    `mapstructure:"placement"`
+	PublicKey         *string    `mapstructure:"public_key"`
+	Region            *string    `mapstructure:"region"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TimestampFormat   *string    `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	User              string     `mapstructure:"user"`
-}
-
-// cloudfilesByName is a sortable list of Cloudfiles.
-type cloudfilesByName []*Cloudfiles
-
-// Len implement the sortable interface.
-func (c cloudfilesByName) Len() int {
-	return len(c)
-}
-
-// Swap implement the sortable interface.
-func (c cloudfilesByName) Swap(i, j int) {
-	c[i], c[j] = c[j], c[i]
-}
-
-// Less implement the sortable interface.
-func (c cloudfilesByName) Less(i, j int) bool {
-	return c[i].Name < c[j].Name
+	User              *string    `mapstructure:"user"`
 }
 
 // ListCloudfilesInput is used as input to the ListCloudfiles function.
@@ -78,7 +59,6 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	if err := decodeBodyMap(resp.Body, &cloudfiles); err != nil {
 		return nil, err
 	}
-	sort.Stable(cloudfilesByName(cloudfiles))
 	return cloudfiles, nil
 }
 
