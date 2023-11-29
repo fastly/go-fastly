@@ -3,39 +3,20 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Gzip represents an Gzip logging response from the Fastly API.
 type Gzip struct {
-	CacheCondition string     `mapstructure:"cache_condition"`
-	ContentTypes   string     `mapstructure:"content_types"`
+	CacheCondition *string    `mapstructure:"cache_condition"`
+	ContentTypes   *string    `mapstructure:"content_types"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	Extensions     string     `mapstructure:"extensions"`
-	Name           string     `mapstructure:"name"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
+	Extensions     *string    `mapstructure:"extensions"`
+	Name           *string    `mapstructure:"name"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int       `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
-}
-
-// gzipsByName is a sortable list of gzips.
-type gzipsByName []*Gzip
-
-// Len implement the sortable interface.
-func (s gzipsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s gzipsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s gzipsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListGzipsInput is used as input to the ListGzips function.
@@ -66,7 +47,6 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	if err := decodeBodyMap(resp.Body, &gzips); err != nil {
 		return nil, err
 	}
-	sort.Stable(gzipsByName(gzips))
 	return gzips, nil
 }
 
