@@ -13,7 +13,7 @@ func TestClient_Domains(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
-	// NOTE: Everytime you regenerate the fixtures you'll need to update the
+	// NOTE: Every time you regenerate the fixtures you'll need to update the
 	// domains as they'll potentially be reported as used depending on the
 	// service pre-existing.
 	domain1 := "integ-test-20221104.go-fastly-1.com"
@@ -64,14 +64,14 @@ func TestClient_Domains(t *testing.T) {
 		})
 	}()
 
-	if d.Name != domain1 {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != domain1 {
+		t.Errorf("bad name: %q", *d.Name)
 	}
-	if d.Comment != "comment" {
-		t.Errorf("bad comment: %q", d.Comment)
+	if *d.Comment != "comment" {
+		t.Errorf("bad comment: %q", *d.Comment)
 	}
-	if d2.Name != domain2 {
-		t.Errorf("bad name: %q", d.Name)
+	if *d2.Name != domain2 {
+		t.Errorf("bad name: %q", *d.Name)
 	}
 
 	// List
@@ -101,11 +101,11 @@ func TestClient_Domains(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d.Name != nd.Name {
-		t.Errorf("bad name: %q (%q)", d.Name, nd.Name)
+	if *d.Name != *nd.Name {
+		t.Errorf("bad name: %q (%q)", *d.Name, *nd.Name)
 	}
-	if d.Comment != nd.Comment {
-		t.Errorf("bad comment: %q (%q)", d.Comment, nd.Comment)
+	if *d.Comment != *nd.Comment {
+		t.Errorf("bad comment: %q (%q)", *d.Comment, *nd.Comment)
 	}
 
 	// Update
@@ -121,8 +121,8 @@ func TestClient_Domains(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.Name != domain3 {
-		t.Errorf("bad name: %q", ud.Name)
+	if *ud.Name != domain3 {
+		t.Errorf("bad name: %q", *ud.Name)
 	}
 
 	// Validate
@@ -137,8 +137,8 @@ func TestClient_Domains(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if vd.Valid {
-		t.Errorf("valid domain unexpected: %q", vd.Metadata.Name)
+	if *vd.Valid {
+		t.Errorf("valid domain unexpected: %q", *vd.Metadata.Name)
 	}
 
 	var vds []*DomainValidationResult
@@ -155,8 +155,8 @@ func TestClient_Domains(t *testing.T) {
 		t.Errorf("invalid domains: %v", vds)
 	}
 	for _, d := range vds {
-		if d.Valid {
-			t.Errorf("valid domain unexpected: %q", d.Metadata.Name)
+		if *d.Valid {
+			t.Errorf("valid domain unexpected: %q", *d.Metadata.Name)
 		}
 	}
 
