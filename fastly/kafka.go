@@ -3,54 +3,35 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Kafka represents a kafka response from the Fastly API.
 type Kafka struct {
-	AuthMethod        string     `mapstructure:"auth_method"`
-	Brokers           string     `mapstructure:"brokers"`
-	CompressionCodec  string     `mapstructure:"compression_codec"`
+	AuthMethod        *string    `mapstructure:"auth_method"`
+	Brokers           *string    `mapstructure:"brokers"`
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	ParseLogKeyvals   bool       `mapstructure:"parse_log_keyvals"`
-	Password          string     `mapstructure:"password"`
-	Placement         string     `mapstructure:"placement"`
-	RequestMaxBytes   int        `mapstructure:"request_max_bytes"`
-	RequiredACKs      string     `mapstructure:"required_acks"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TLSCACert         string     `mapstructure:"tls_ca_cert"`
-	TLSClientCert     string     `mapstructure:"tls_client_cert"`
-	TLSClientKey      string     `mapstructure:"tls_client_key"`
-	TLSHostname       string     `mapstructure:"tls_hostname"`
-	Topic             string     `mapstructure:"topic"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	ParseLogKeyvals   *bool      `mapstructure:"parse_log_keyvals"`
+	Password          *string    `mapstructure:"password"`
+	Placement         *string    `mapstructure:"placement"`
+	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
+	RequiredACKs      *string    `mapstructure:"required_acks"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TLSCACert         *string    `mapstructure:"tls_ca_cert"`
+	TLSClientCert     *string    `mapstructure:"tls_client_cert"`
+	TLSClientKey      *string    `mapstructure:"tls_client_key"`
+	TLSHostname       *string    `mapstructure:"tls_hostname"`
+	Topic             *string    `mapstructure:"topic"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	UseTLS            bool       `mapstructure:"use_tls"`
-	User              string     `mapstructure:"user"`
-}
-
-// kafkaByName is a sortable list of kafkas.
-type kafkasByName []*Kafka
-
-// Len implements the sortable interface.
-func (s kafkasByName) Len() int {
-	return len(s)
-}
-
-// Swap implements the sortable interface.
-func (s kafkasByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implements the sortable interface.
-func (s kafkasByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	UseTLS            *bool      `mapstructure:"use_tls"`
+	User              *string    `mapstructure:"user"`
 }
 
 // ListKafkasInput is used as input to the ListKafkas function.
@@ -81,7 +62,6 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	if err := decodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
-	sort.Stable(kafkasByName(k))
 	return k, nil
 }
 
