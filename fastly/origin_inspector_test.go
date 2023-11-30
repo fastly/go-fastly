@@ -16,16 +16,16 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 	var err error
 	record(t, "origin_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetOriginMetricsForService(&GetOriginMetricsInput{
-			ServiceID:   testServiceID,
-			Start:       start,
-			End:         end,
-			Hosts:       []string{"host01"},
+			Cursor:      ToPointer(""),
 			Datacenters: []string{"LHR", "JFK"},
-			Metrics:     []string{"responses", "status_2xx"},
+			Downsample:  ToPointer("day"),
+			End:         &end,
 			GroupBy:     []string{"host"},
-			Downsample:  "day",
+			Hosts:       []string{"host01"},
+			Metrics:     []string{"responses", "status_2xx"},
 			Regions:     []string{"europe", "usa"},
-			Cursor:      "",
+			ServiceID:   testServiceID,
+			Start:       &start,
 		})
 	})
 	if err != nil {
