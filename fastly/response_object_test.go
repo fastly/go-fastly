@@ -18,7 +18,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/create", func(c *Client) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-response-object"),
 			Status:         ToPointer(200),
 			Response:       ToPointer("Ok"),
@@ -35,13 +35,13 @@ func TestClient_ResponseObjects(t *testing.T) {
 		record(t, "response_objects/cleanup", func(c *Client) {
 			_ = c.DeleteResponseObject(&DeleteResponseObjectInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-response-object",
 			})
 
 			_ = c.DeleteResponseObject(&DeleteResponseObjectInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-response-object",
 			})
 		})
@@ -68,7 +68,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/list", func(c *Client) {
 		ros, err = c.ListResponseObjects(&ListResponseObjectsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -83,7 +83,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/get", func(c *Client) {
 		nro, err = c.GetResponseObject(&GetResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-response-object",
 		})
 	})
@@ -111,7 +111,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/update", func(c *Client) {
 		uro, err = c.UpdateResponseObject(&UpdateResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-response-object",
 			NewName:        ToPointer("new-test-response-object"),
 		})
@@ -127,7 +127,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/delete", func(c *Client) {
 		err = c.DeleteResponseObject(&DeleteResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-response-object",
 		})
 	})

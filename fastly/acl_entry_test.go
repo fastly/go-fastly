@@ -13,7 +13,7 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ID)
 
-	testACL := createTestACL(t, fixtureBase+"acl", *testService.ID, testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"acl", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	// Create

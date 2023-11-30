@@ -13,7 +13,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", *testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	// Create

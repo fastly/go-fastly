@@ -18,7 +18,7 @@ func TestClient_Logentries(t *testing.T) {
 	record(t, "logentries/create", func(c *Client) {
 		le, err = c.CreateLogentries(&CreateLogentriesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-logentries"),
 			Port:           ToPointer(0),
 			UseTLS:         ToPointer(Compatibool(true)),
@@ -37,13 +37,13 @@ func TestClient_Logentries(t *testing.T) {
 		record(t, "logentries/delete", func(c *Client) {
 			_ = c.DeleteLogentries(&DeleteLogentriesInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-logentries",
 			})
 
 			_ = c.DeleteLogentries(&DeleteLogentriesInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-logentries",
 			})
 		})
@@ -79,7 +79,7 @@ func TestClient_Logentries(t *testing.T) {
 	record(t, "logentries/list", func(c *Client) {
 		les, err = c.ListLogentries(&ListLogentriesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -94,7 +94,7 @@ func TestClient_Logentries(t *testing.T) {
 	record(t, "logentries/get", func(c *Client) {
 		nle, err = c.GetLogentries(&GetLogentriesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-logentries",
 		})
 	})
@@ -128,7 +128,7 @@ func TestClient_Logentries(t *testing.T) {
 	record(t, "logentries/update", func(c *Client) {
 		ule, err = c.UpdateLogentries(&UpdateLogentriesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-logentries",
 			NewName:        ToPointer("new-test-logentries"),
 			FormatVersion:  ToPointer(2),
@@ -152,7 +152,7 @@ func TestClient_Logentries(t *testing.T) {
 	record(t, "logentries/delete", func(c *Client) {
 		err = c.DeleteLogentries(&DeleteLogentriesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-logentries",
 		})
 	})

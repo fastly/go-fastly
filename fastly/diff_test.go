@@ -23,8 +23,8 @@ func TestClient_Diff(t *testing.T) {
 	record(t, "diff/get", func(c *Client) {
 		d, err = c.GetDiff(&GetDiffInput{
 			ServiceID: testServiceID,
-			From:      tv1.Number,
-			To:        tv2.Number,
+			From:      *tv1.Number,
+			To:        *tv2.Number,
 		})
 	})
 	if err != nil {
@@ -35,7 +35,7 @@ func TestClient_Diff(t *testing.T) {
 	record(t, "diff/create_backend", func(c *Client) {
 		_, err = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv2.Number,
+			ServiceVersion: *tv2.Number,
 			Name:           ToPointer("test-backend"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
 		})
@@ -49,7 +49,7 @@ func TestClient_Diff(t *testing.T) {
 		record(t, "diff/cleanup", func(c *Client) {
 			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv2.Number,
+				ServiceVersion: *tv2.Number,
 				Name:           "test-backend",
 			})
 		})
@@ -59,8 +59,8 @@ func TestClient_Diff(t *testing.T) {
 	record(t, "diff/get_again", func(c *Client) {
 		d, err = c.GetDiff(&GetDiffInput{
 			ServiceID: testServiceID,
-			From:      tv1.Number,
-			To:        tv2.Number,
+			From:      *tv1.Number,
+			To:        *tv2.Number,
 		})
 	})
 	if err != nil {

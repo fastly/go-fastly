@@ -20,7 +20,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/create", func(c *Client) {
 		s3CreateResp1, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
-			ServiceVersion:               tv.Number,
+			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3"),
 			BucketName:                   ToPointer("bucket-name"),
 			Domain:                       ToPointer("s3.us-east-1.amazonaws.com"),
@@ -49,7 +49,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/create2", func(c *Client) {
 		s3CreateResp2, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
-			ServiceVersion:               tv.Number,
+			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-2"),
 			BucketName:                   ToPointer("bucket-name"),
 			Domain:                       ToPointer("s3.us-east-1.amazonaws.com"),
@@ -77,7 +77,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/create3", func(c *Client) {
 		s3CreateResp3, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
-			ServiceVersion:               tv.Number,
+			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-3"),
 			BucketName:                   ToPointer("bucket-name"),
 			Domain:                       ToPointer("s3.us-east-1.amazonaws.com"),
@@ -105,7 +105,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/create4", func(c *Client) {
 		s3CreateResp4, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
-			ServiceVersion:               tv.Number,
+			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-4"),
 			BucketName:                   ToPointer("bucket-name"),
 			Domain:                       ToPointer("s3.us-east-1.amazonaws.com"),
@@ -133,7 +133,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/create5", func(c *Client) {
 		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
-			ServiceVersion:               tv.Number,
+			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3"),
 			BucketName:                   ToPointer("bucket-name"),
 			Domain:                       ToPointer("s3.us-east-1.amazonaws.com"),
@@ -162,7 +162,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/create6", func(c *Client) {
 		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
-			ServiceVersion:               tv.Number,
+			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3"),
 			BucketName:                   ToPointer("bucket-name"),
 			Domain:                       ToPointer("s3.us-east-1.amazonaws.com"),
@@ -190,7 +190,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/create7", func(c *Client) {
 		_, err = c.CreateS3(&CreateS3Input{
 			ServiceID:                    testServiceID,
-			ServiceVersion:               tv.Number,
+			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-2"),
 			BucketName:                   ToPointer("bucket-name"),
 			Domain:                       ToPointer("s3.us-east-1.amazonaws.com"),
@@ -220,25 +220,25 @@ func TestClient_S3s(t *testing.T) {
 		record(t, "s3s/cleanup", func(c *Client) {
 			c.DeleteS3(&DeleteS3Input{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-s3",
 			})
 
 			c.DeleteS3(&DeleteS3Input{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-s3-3",
 			})
 
 			c.DeleteS3(&DeleteS3Input{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-s3-4",
 			})
 
 			c.DeleteS3(&DeleteS3Input{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-s3",
 			})
 		})
@@ -352,7 +352,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/list", func(c *Client) {
 		s3s, err = c.ListS3s(&ListS3sInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -367,7 +367,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/get", func(c *Client) {
 		s3GetResp, err = c.GetS3(&GetS3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
 		})
 	})
@@ -379,7 +379,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/get2", func(c *Client) {
 		s3GetResp2, err = c.GetS3(&GetS3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-s3-4",
 		})
 	})
@@ -468,7 +468,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/update", func(c *Client) {
 		s3UpdateResp1, err = c.UpdateS3(&UpdateS3Input{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-s3",
 			NewName:          ToPointer("new-test-s3"),
 			PublicKey:        ToPointer(pgpPublicKeyUpdate()),
@@ -485,7 +485,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/update2", func(c *Client) {
 		s3UpdateResp2, err = c.UpdateS3(&UpdateS3Input{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-s3-2",
 			CompressionCodec: ToPointer("zstd"),
 		})
@@ -499,7 +499,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/update3", func(c *Client) {
 		s3UpdateResp3, err = c.UpdateS3(&UpdateS3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-s3-3",
 			GzipLevel:      ToPointer(9),
 		})
@@ -513,7 +513,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/update4", func(c *Client) {
 		s3UpdateResp4, err = c.UpdateS3(&UpdateS3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-s3",
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
@@ -529,7 +529,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/update5", func(c *Client) {
 		s3UpdateResp5, err = c.UpdateS3(&UpdateS3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-s3-4",
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
@@ -545,7 +545,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/update6", func(c *Client) {
 		_, err = c.UpdateS3(&UpdateS3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
 			IAMRole:        ToPointer("badarn"),
 		})
@@ -604,7 +604,7 @@ func TestClient_S3s(t *testing.T) {
 	record(t, "s3s/delete", func(c *Client) {
 		err = c.DeleteS3(&DeleteS3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-s3",
 		})
 	})

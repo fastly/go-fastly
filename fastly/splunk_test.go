@@ -39,7 +39,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "splunks/create", func(c *Client) {
 		s, err = c.CreateSplunk(&CreateSplunkInput{
 			ServiceID:         testServiceID,
-			ServiceVersion:    tv.Number,
+			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-splunk"),
 			URL:               ToPointer("https://mysplunkendpoint.example.com/services/collector/event"),
 			RequestMaxEntries: ToPointer(1),
@@ -64,13 +64,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		record(t, "splunks/cleanup", func(c *Client) {
 			c.DeleteSplunk(&DeleteSplunkInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-splunk",
 			})
 
 			c.DeleteSplunk(&DeleteSplunkInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-splunk",
 			})
 		})
@@ -121,7 +121,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "splunks/list", func(c *Client) {
 		ss, err = c.ListSplunks(&ListSplunksInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -136,7 +136,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "splunks/get", func(c *Client) {
 		ns, err = c.GetSplunk(&GetSplunkInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-splunk",
 		})
 	})
@@ -188,7 +188,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "splunks/update", func(c *Client) {
 		us, err = c.UpdateSplunk(&UpdateSplunkInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-splunk",
 			NewName:        ToPointer("new-test-splunk"),
 		})
@@ -204,7 +204,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "splunks/delete", func(c *Client) {
 		err = c.DeleteSplunk(&DeleteSplunkInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-splunk",
 		})
 	})

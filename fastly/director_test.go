@@ -23,7 +23,7 @@ func TestClient_Directors(t *testing.T) {
 	record(t, "directors/create", func(c *Client) {
 		b, errBackend = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-backend"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
 			Port:           ToPointer(1234),
@@ -33,7 +33,7 @@ func TestClient_Directors(t *testing.T) {
 		})
 		d, errDirector = c.CreateDirector(&CreateDirectorInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-director"),
 			Quorum:         ToPointer(50),
 			Type:           ToPointer(DirectorTypeRandom),
@@ -41,7 +41,7 @@ func TestClient_Directors(t *testing.T) {
 		})
 		_, errDirectorBackend = c.CreateDirectorBackend(&CreateDirectorBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Director:       "test-director",
 			Backend:        *b.Name,
 		})
@@ -61,26 +61,26 @@ func TestClient_Directors(t *testing.T) {
 		record(t, "directors/cleanup", func(c *Client) {
 			_ = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Director:       *d.Name,
 				Backend:        *b.Name,
 			})
 
 			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           *b.Name,
 			})
 
 			_ = c.DeleteDirector(&DeleteDirectorInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-director",
 			})
 
 			_ = c.DeleteDirector(&DeleteDirectorInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-director",
 			})
 		})
@@ -107,7 +107,7 @@ func TestClient_Directors(t *testing.T) {
 	record(t, "directors/list", func(c *Client) {
 		bs, err = c.ListDirectors(&ListDirectorsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -122,7 +122,7 @@ func TestClient_Directors(t *testing.T) {
 	record(t, "directors/get", func(c *Client) {
 		nb, err = c.GetDirector(&GetDirectorInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-director",
 		})
 	})
@@ -150,7 +150,7 @@ func TestClient_Directors(t *testing.T) {
 	record(t, "directors/update", func(c *Client) {
 		ub, err = c.UpdateDirector(&UpdateDirectorInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-director",
 			NewName:        ToPointer("new-test-director"),
 			Quorum:         ToPointer(100),
@@ -167,7 +167,7 @@ func TestClient_Directors(t *testing.T) {
 	record(t, "directors/delete", func(c *Client) {
 		err = c.DeleteDirector(&DeleteDirectorInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-director",
 		})
 	})

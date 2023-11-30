@@ -20,7 +20,7 @@ func TestClient_Settings(t *testing.T) {
 	record(t, "settings/get", func(c *Client) {
 		ns, err = c.GetSettings(&GetSettingsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -35,7 +35,7 @@ func TestClient_Settings(t *testing.T) {
 	record(t, "settings/update", func(c *Client) {
 		us, err = c.UpdateSettings(&UpdateSettingsInput{
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
+			ServiceVersion:  *tv.Number,
 			DefaultTTL:      ToPointer(uint(1800)),
 			StaleIfError:    ToPointer(true),
 			StaleIfErrorTTL: ToPointer(uint(57600)),

@@ -39,7 +39,7 @@ sub vcl_hash {
 	record(t, "vcls/create", func(c *Client) {
 		vcl, err = c.CreateVCL(&CreateVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-vcl"),
 			Content:        ToPointer(content),
 		})
@@ -53,13 +53,13 @@ sub vcl_hash {
 		record(t, "vcls/cleanup", func(c *Client) {
 			_ = c.DeleteVCL(&DeleteVCLInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-vcl",
 			})
 
 			_ = c.DeleteVCL(&DeleteVCLInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-vcl",
 			})
 		})
@@ -77,7 +77,7 @@ sub vcl_hash {
 	record(t, "vcls/list", func(c *Client) {
 		vcls, err = c.ListVCLs(&ListVCLsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -92,7 +92,7 @@ sub vcl_hash {
 	record(t, "vcls/get", func(c *Client) {
 		nvcl, err = c.GetVCL(&GetVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 		})
 	})
@@ -111,7 +111,7 @@ sub vcl_hash {
 	record(t, "vcls/update", func(c *Client) {
 		uvcl, err = c.UpdateVCL(&UpdateVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 			NewName:        ToPointer("new-test-vcl"),
 		})
@@ -128,7 +128,7 @@ sub vcl_hash {
 	record(t, "vcls/activate", func(c *Client) {
 		avcl, err = c.ActivateVCL(&ActivateVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})
 	})
@@ -143,7 +143,7 @@ sub vcl_hash {
 	record(t, "vcls/delete", func(c *Client) {
 		err = c.DeleteVCL(&DeleteVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})
 	})

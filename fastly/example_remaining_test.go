@@ -24,7 +24,7 @@ func ExampleClient_RateLimitRemaining() {
 
 	dict, err := c.GetDictionary(&fastly.GetDictionaryInput{
 		ServiceID:      sid,
-		ServiceVersion: v.Number,
+		ServiceVersion: *v.Number,
 		Name:           dictName,
 	})
 	if err != nil {

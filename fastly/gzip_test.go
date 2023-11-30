@@ -18,7 +18,7 @@ func TestClient_Gzips(t *testing.T) {
 	record(t, "gzips/create", func(c *Client) {
 		gzip, err = c.CreateGzip(&CreateGzipInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-gzip"),
 			ContentTypes:   ToPointer("text/html text/css"),
 			Extensions:     ToPointer("html css"),
@@ -34,7 +34,7 @@ func TestClient_Gzips(t *testing.T) {
 	record(t, "gzips/create_omissions", func(c *Client) {
 		gzipomit, err = c.CreateGzip(&CreateGzipInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-gzip-omit"),
 		})
 	})
@@ -53,19 +53,19 @@ func TestClient_Gzips(t *testing.T) {
 		record(t, "gzips/cleanup", func(c *Client) {
 			_ = c.DeleteGzip(&DeleteGzipInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-gzip",
 			})
 
 			_ = c.DeleteGzip(&DeleteGzipInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-gzip-omit",
 			})
 
 			_ = c.DeleteGzip(&DeleteGzipInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-gzip",
 			})
 		})
@@ -86,7 +86,7 @@ func TestClient_Gzips(t *testing.T) {
 	record(t, "gzips/list", func(c *Client) {
 		gzips, err = c.ListGzips(&ListGzipsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -101,7 +101,7 @@ func TestClient_Gzips(t *testing.T) {
 	record(t, "gzips/get", func(c *Client) {
 		ngzip, err = c.GetGzip(&GetGzipInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-gzip",
 		})
 	})
@@ -123,7 +123,7 @@ func TestClient_Gzips(t *testing.T) {
 	record(t, "gzips/update", func(c *Client) {
 		ugzip, err = c.UpdateGzip(&UpdateGzipInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-gzip",
 			NewName:        ToPointer("new-test-gzip"),
 		})
@@ -139,7 +139,7 @@ func TestClient_Gzips(t *testing.T) {
 	record(t, "gzips/delete", func(c *Client) {
 		err = c.DeleteGzip(&DeleteGzipInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-gzip",
 		})
 	})

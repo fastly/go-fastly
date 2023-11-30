@@ -18,7 +18,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/create", func(c *Client) {
 		h, err = c.CreateHeroku(&CreateHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-heroku"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
@@ -36,13 +36,13 @@ func TestClient_Herokus(t *testing.T) {
 		record(t, "herokus/cleanup", func(c *Client) {
 			_ = c.DeleteHeroku(&DeleteHerokuInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-heroku",
 			})
 
 			_ = c.DeleteHeroku(&DeleteHerokuInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-heroku",
 			})
 		})
@@ -72,7 +72,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/list", func(c *Client) {
 		hs, err = c.ListHerokus(&ListHerokusInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,7 +87,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/get", func(c *Client) {
 		nh, err = c.GetHeroku(&GetHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-heroku",
 		})
 	})
@@ -118,7 +118,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/update", func(c *Client) {
 		uh, err = c.UpdateHeroku(&UpdateHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-heroku",
 			NewName:        ToPointer("new-test-heroku"),
 			Token:          ToPointer("new-token"),
@@ -138,7 +138,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/delete", func(c *Client) {
 		err = c.DeleteHeroku(&DeleteHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-heroku",
 		})
 	})

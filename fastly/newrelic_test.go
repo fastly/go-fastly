@@ -18,7 +18,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/create", func(c *Client) {
 		newRelicResp1, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
@@ -33,7 +33,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/create2", func(c *Client) {
 		newRelicResp2, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic-2"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
@@ -49,7 +49,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/create3", func(c *Client) {
 		_, err = c.CreateNewRelic(&CreateNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic-3"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
@@ -66,19 +66,19 @@ func TestClient_NewRelic(t *testing.T) {
 		record(t, "newrelic/delete", func(c *Client) {
 			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-newrelic",
 			})
 
 			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-newrelic-2",
 			})
 
 			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-newrelic",
 			})
 		})
@@ -126,7 +126,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/list", func(c *Client) {
 		ln, err = c.ListNewRelic(&ListNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -141,7 +141,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/get", func(c *Client) {
 		newRelicGetResp, err = c.GetNewRelic(&GetNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic",
 		})
 	})
@@ -152,7 +152,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/get2", func(c *Client) {
 		newRelicGetResp2, err = c.GetNewRelic(&GetNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic-2",
 		})
 	})
@@ -202,7 +202,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/update", func(c *Client) {
 		newRelicUpdateResp1, err = c.UpdateNewRelic(&UpdateNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic",
 			NewName:        ToPointer("new-test-newrelic"),
 			FormatVersion:  ToPointer(2),
@@ -217,7 +217,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/update2", func(c *Client) {
 		_, err = c.UpdateNewRelic(&UpdateNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
 			Region:         ToPointer("zz"),
 		})
@@ -240,7 +240,7 @@ func TestClient_NewRelic(t *testing.T) {
 	record(t, "newrelic/delete", func(c *Client) {
 		err = c.DeleteNewRelic(&DeleteNewRelicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
 		})
 	})

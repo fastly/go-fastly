@@ -2,42 +2,22 @@ package fastly
 
 import (
 	"fmt"
-	"sort"
 	"time"
 )
 
 // Version represents a distinct configuration version.
 type Version struct {
-	Active    bool       `mapstructure:"active"`
-	Comment   string     `mapstructure:"comment"`
+	Active    *bool      `mapstructure:"active"`
+	Comment   *string    `mapstructure:"comment"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	Deployed  bool       `mapstructure:"deployed"`
-	Locked    bool       `mapstructure:"locked"`
-	Number    int        `mapstructure:"number"`
-	ServiceID string     `mapstructure:"service_id"`
-	Staging   bool       `mapstructure:"staging"`
-	Testing   bool       `mapstructure:"testing"`
+	Deployed  *bool      `mapstructure:"deployed"`
+	Locked    *bool      `mapstructure:"locked"`
+	Number    *int       `mapstructure:"number"`
+	ServiceID *string    `mapstructure:"service_id"`
+	Staging   *bool      `mapstructure:"staging"`
+	Testing   *bool      `mapstructure:"testing"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
-}
-
-// versionsByNumber is a sortable list of versions. This is used by the version
-// `List()` function to sort the API responses.
-type versionsByNumber []*Version
-
-// Len implement the sortable interface.
-func (s versionsByNumber) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s versionsByNumber) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s versionsByNumber) Less(i, j int) bool {
-	return s[i].Number < s[j].Number
 }
 
 // ListVersionsInput is the input to the ListVersions function.
@@ -63,7 +43,6 @@ func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 	if err := decodeBodyMap(resp.Body, &e); err != nil {
 		return nil, err
 	}
-	sort.Sort(versionsByNumber(e))
 
 	return e, nil
 }

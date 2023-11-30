@@ -19,7 +19,7 @@ func TestClient_ERL(t *testing.T) {
 	record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateERL(&CreateERLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           ToPointer("test_erl"),
 			Action:         ToPointer(ERLActionResponse),
 			ClientKey: &[]string{
@@ -73,7 +73,7 @@ func TestClient_ERL(t *testing.T) {
 	record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListERLs(&ListERLsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 		})
 	})
 	if err != nil {
@@ -131,7 +131,7 @@ func TestClient_ERL(t *testing.T) {
 	record(t, fixtureBase+"logger_create", func(c *Client) {
 		elog, err = c.CreateERL(&CreateERLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           ToPointer("test_erl"),
 			Action:         ToPointer(ERLActionLogOnly),
 			// IMPORTANT: API will 400 if LoggerType not set with log_only action.

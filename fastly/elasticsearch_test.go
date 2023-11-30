@@ -39,7 +39,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "elasticsearch/create", func(c *Client) {
 		es, err = c.CreateElasticsearch(&CreateElasticsearchInput{
 			ServiceID:         testServiceID,
-			ServiceVersion:    tv.Number,
+			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-elasticsearch"),
 			Format:            ToPointer("format"),
 			Index:             ToPointer("#{%F}"),
@@ -66,14 +66,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		record(t, "elasticsearch/cleanup", func(c *Client) {
 			_ = c.DeleteElasticsearch(&DeleteElasticsearchInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-elasticsearch",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
 			_ = c.DeleteElasticsearch(&DeleteElasticsearchInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-elasticsearch",
 			})
 		})
@@ -130,7 +130,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "elasticsearch/list", func(c *Client) {
 		ess, err = c.ListElasticsearch(&ListElasticsearchInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -145,7 +145,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "elasticsearch/get", func(c *Client) {
 		nes, err = c.GetElasticsearch(&GetElasticsearchInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-elasticsearch",
 		})
 	})
@@ -203,7 +203,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "elasticsearch/update", func(c *Client) {
 		ues, err = c.UpdateElasticsearch(&UpdateElasticsearchInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-elasticsearch",
 			NewName:        ToPointer("new-test-elasticsearch"),
 			Pipeline:       ToPointer("my_new_pipeline_id"),
@@ -223,7 +223,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "elasticsearch/delete", func(c *Client) {
 		err = c.DeleteElasticsearch(&DeleteElasticsearchInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-elasticsearch",
 		})
 	})

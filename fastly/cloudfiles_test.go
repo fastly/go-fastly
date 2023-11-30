@@ -18,7 +18,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/create", func(c *Client) {
 		cloudfilesCreateResp1, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles"),
 			User:             ToPointer("user"),
 			AccessKey:        ToPointer("secret-key"),
@@ -42,7 +42,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/create2", func(c *Client) {
 		cloudfilesCreateResp2, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
+			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-cloudfiles-2"),
 			User:            ToPointer("user"),
 			AccessKey:       ToPointer("secret-key"),
@@ -66,7 +66,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/create3", func(c *Client) {
 		cloudfilesCreateResp3, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles-3"),
 			User:             ToPointer("user"),
 			AccessKey:        ToPointer("secret-key"),
@@ -92,7 +92,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/create4", func(c *Client) {
 		_, err = c.CreateCloudfiles(&CreateCloudfilesInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles-4"),
 			User:             ToPointer("user"),
 			AccessKey:        ToPointer("secret-key"),
@@ -119,25 +119,25 @@ func TestClient_Cloudfiles(t *testing.T) {
 		record(t, "cloudfiles/cleanup", func(c *Client) {
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles",
 			})
 
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles-2",
 			})
 
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles-3",
 			})
 
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-cloudfiles",
 			})
 		})
@@ -203,7 +203,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/list", func(c *Client) {
 		lc, err = c.ListCloudfiles(&ListCloudfilesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -218,7 +218,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/get", func(c *Client) {
 		cloudfilesGetResp, err = c.GetCloudfiles(&GetCloudfilesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles",
 		})
 	})
@@ -276,7 +276,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/update", func(c *Client) {
 		cloudfilesUpdateResp1, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles",
 			NewName:          ToPointer("new-test-cloudfiles"),
 			User:             ToPointer("new-user"),
@@ -292,7 +292,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/update2", func(c *Client) {
 		cloudfilesUpdateResp2, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles-2",
 			CompressionCodec: ToPointer("zstd"),
 		})
@@ -304,7 +304,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/update3", func(c *Client) {
 		cloudfilesUpdateResp3, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles-3",
 			GzipLevel:      ToPointer(9),
 		})
@@ -351,7 +351,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 	record(t, "cloudfiles/delete", func(c *Client) {
 		err = c.DeleteCloudfiles(&DeleteCloudfilesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-cloudfiles",
 		})
 	})

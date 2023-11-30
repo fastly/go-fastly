@@ -18,7 +18,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/create", func(c *Client) {
 		n, err = c.CreateNewRelicOTLP(&CreateNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelicotlp"),
 			Token:          ToPointer("abcd1234"),
 			URL:            ToPointer("https://example.nr-data.net"),
@@ -35,13 +35,13 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		record(t, "newrelicotlp/delete", func(c *Client) {
 			c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-newrelicotlp",
 			})
 
 			c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-newrelicotlp",
 			})
 		})
@@ -71,7 +71,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/list", func(c *Client) {
 		ln, err = c.ListNewRelicOTLP(&ListNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -86,7 +86,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/get", func(c *Client) {
 		nn, err = c.GetNewRelicOTLP(&GetNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-newrelicotlp",
 		})
 	})
@@ -117,7 +117,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/update", func(c *Client) {
 		un, err = c.UpdateNewRelicOTLP(&UpdateNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-newrelicotlp",
 			NewName:        ToPointer("new-test-newrelicotlp"),
 			FormatVersion:  ToPointer(2),
@@ -137,7 +137,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/delete", func(c *Client) {
 		err = c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelicotlp",
 		})
 	})

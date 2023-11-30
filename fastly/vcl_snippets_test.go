@@ -31,7 +31,7 @@ func TestClient_Snippets(t *testing.T) {
 			Dynamic:        ToPointer(0),
 			Name:           ToPointer(svName),
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Type:           ToPointer(SnippetTypeFetch),
 		})
 	})
@@ -64,7 +64,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/create_with_all_fields", func(c *Client) {
 		cs, err = c.CreateSnippet(&CreateSnippetInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer(sdName),
 			Content:        ToPointer(vclContent),
 			Type:           ToPointer(SnippetTypeFetch),
@@ -100,7 +100,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/list", func(c *Client) {
 		ls, err = c.ListSnippets(&ListSnippetsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 
@@ -143,7 +143,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/get_versioned", func(c *Client) {
 		vs, err = c.GetSnippet(&GetSnippetInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           svName,
 		})
 	})
@@ -198,7 +198,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/update_versioned", func(c *Client) {
 		vs, err = c.UpdateSnippet(&UpdateSnippetInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           svName,
 			NewName:        ToPointer(svNameUpdated),
 			Priority:       ToPointer(priority),
@@ -253,7 +253,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/delete_versioned", func(c *Client) {
 		err = c.DeleteSnippet(&DeleteSnippetInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           svNameUpdated,
 		})
 	})
@@ -265,7 +265,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/delete_dynamic", func(c *Client) {
 		err = c.DeleteSnippet(&DeleteSnippetInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           sdName,
 		})
 	})

@@ -18,7 +18,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/create", func(c *Client) {
 		d, err = c.CreateDatadog(&CreateDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-datadog"),
 			Region:         ToPointer("US"),
 			Token:          ToPointer("abcd1234"),
@@ -35,13 +35,13 @@ func TestClient_Datadog(t *testing.T) {
 		record(t, "datadog/delete", func(c *Client) {
 			c.DeleteDatadog(&DeleteDatadogInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-datadog",
 			})
 
 			c.DeleteDatadog(&DeleteDatadogInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-datadog",
 			})
 		})
@@ -71,7 +71,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/list", func(c *Client) {
 		ld, err = c.ListDatadog(&ListDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -86,7 +86,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/get", func(c *Client) {
 		nd, err = c.GetDatadog(&GetDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-datadog",
 		})
 	})
@@ -114,7 +114,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/update", func(c *Client) {
 		ud, err = c.UpdateDatadog(&UpdateDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-datadog",
 			NewName:        ToPointer("new-test-datadog"),
 			Region:         ToPointer("EU"),
@@ -138,7 +138,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/delete", func(c *Client) {
 		err = c.DeleteDatadog(&DeleteDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-datadog",
 		})
 	})

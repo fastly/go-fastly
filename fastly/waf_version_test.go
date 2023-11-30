@@ -17,23 +17,23 @@ func TestClient_WAF_Versions(t *testing.T) {
 
 	tv := createTestVersion(t, fixtureBase+"/service/version", *testService.ID)
 
-	createTestLogging(t, fixtureBase+"/logging/create", *testService.ID, tv.Number)
-	defer deleteTestLogging(t, fixtureBase+"/logging/delete", *testService.ID, tv.Number)
+	createTestLogging(t, fixtureBase+"/logging/create", *testService.ID, *tv.Number)
+	defer deleteTestLogging(t, fixtureBase+"/logging/delete", *testService.ID, *tv.Number)
 
 	prefetch := "WAF_Prefetch"
-	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ID, prefetch, tv.Number)
-	defer deleteTestCondition(t, fixtureBase+"/condition/delete", *testService.ID, prefetch, tv.Number)
+	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ID, prefetch, *tv.Number)
+	defer deleteTestCondition(t, fixtureBase+"/condition/delete", *testService.ID, prefetch, *tv.Number)
 
 	responseName := "WAf_Response"
-	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ID, responseName, tv.Number)
-	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", *testService.ID, responseName, tv.Number)
+	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ID, responseName, *tv.Number)
+	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", *testService.ID, responseName, *tv.Number)
 
 	var err error
 	var waf *WAF
 	record(t, fixtureBase+"/waf/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
 			ServiceID:         *testService.ID,
-			ServiceVersion:    tv.Number,
+			ServiceVersion:    *tv.Number,
 			PrefetchCondition: *condition.Name,
 			Response:          *ro.Name,
 		})
@@ -44,7 +44,7 @@ func TestClient_WAF_Versions(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"/waf/delete", func(c *Client) {
 			if err := c.DeleteWAF(&DeleteWAFInput{
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				ID:             waf.ID,
 			}); err != nil {
 				t.Fatal(err)

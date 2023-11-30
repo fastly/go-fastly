@@ -18,7 +18,7 @@ func TestClient_Loggly(t *testing.T) {
 	record(t, "loggly/create", func(c *Client) {
 		lg, err = c.CreateLoggly(&CreateLogglyInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-loggly"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
@@ -34,13 +34,13 @@ func TestClient_Loggly(t *testing.T) {
 		record(t, "loggly/delete", func(c *Client) {
 			_ = c.DeleteLoggly(&DeleteLogglyInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-loggly",
 			})
 
 			_ = c.DeleteLoggly(&DeleteLogglyInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-loggly",
 			})
 		})
@@ -67,7 +67,7 @@ func TestClient_Loggly(t *testing.T) {
 	record(t, "loggly/list", func(c *Client) {
 		les, err = c.ListLoggly(&ListLogglyInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -82,7 +82,7 @@ func TestClient_Loggly(t *testing.T) {
 	record(t, "loggly/get", func(c *Client) {
 		nlg, err = c.GetLoggly(&GetLogglyInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-loggly",
 		})
 	})
@@ -110,7 +110,7 @@ func TestClient_Loggly(t *testing.T) {
 	record(t, "loggly/update", func(c *Client) {
 		ulg, err = c.UpdateLoggly(&UpdateLogglyInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-loggly",
 			NewName:        ToPointer("new-test-loggly"),
 			FormatVersion:  ToPointer(2),
@@ -130,7 +130,7 @@ func TestClient_Loggly(t *testing.T) {
 	record(t, "loggly/delete", func(c *Client) {
 		err = c.DeleteLoggly(&DeleteLogglyInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-loggly",
 		})
 	})

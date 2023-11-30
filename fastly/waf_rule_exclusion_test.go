@@ -327,7 +327,7 @@ func extractModSecID(wafRule []*WAFRule) []int {
 }
 
 func createWAFWithRulesForExclusion(t *testing.T, fixtureBase string, testService *Service, version *Version, responseName string) *WAF {
-	waf := createWAF(t, fixtureBase+"waf/create", *testService.ID, "", responseName, version.Number)
+	waf := createWAF(t, fixtureBase+"waf/create", *testService.ID, "", responseName, *version.Number)
 
 	var err error
 	rulesIn := buildWAFRulesForExclusion("log")
@@ -369,7 +369,7 @@ func createServiceForWAF(t *testing.T, fixtureBase string) (*Service, *Version, 
 	service := createTestService(t, fixtureBase+"service/create", "service-"+strconv.Itoa(rand.Int()))
 	version := createTestVersion(t, fixtureBase+"service/version", *service.ID)
 	responseName := "WAf_Response"
-	createTestWAFResponseObject(t, fixtureBase+"response_object/create", *service.ID, responseName, version.Number)
+	createTestWAFResponseObject(t, fixtureBase+"response_object/create", *service.ID, responseName, *version.Number)
 	return service, version, responseName
 }
 

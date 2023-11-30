@@ -18,7 +18,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/create", func(c *Client) {
 		digitaloceanCreateResp1, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-digitalocean"),
 			BucketName:       ToPointer("bucket-name"),
 			Domain:           ToPointer("fra1.digitaloceanspaces.com"),
@@ -42,7 +42,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/create2", func(c *Client) {
 		digitaloceanCreateResp2, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
+			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-digitalocean-2"),
 			BucketName:      ToPointer("bucket-name"),
 			Domain:          ToPointer("fra1.digitaloceanspaces.com"),
@@ -66,7 +66,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/create3", func(c *Client) {
 		digitaloceanCreateResp3, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-digitalocean-3"),
 			BucketName:       ToPointer("bucket-name"),
 			Domain:           ToPointer("fra1.digitaloceanspaces.com"),
@@ -92,7 +92,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/create4", func(c *Client) {
 		_, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-digitalocean-4"),
 			BucketName:       ToPointer("bucket-name"),
 			Domain:           ToPointer("fra1.digitaloceanspaces.com"),
@@ -119,25 +119,25 @@ func TestClient_DigitalOceans(t *testing.T) {
 		record(t, "digitaloceans/cleanup", func(c *Client) {
 			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-digitalocean",
 			})
 
 			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-digitalocean-2",
 			})
 
 			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-digitalocean-3",
 			})
 
 			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-digitalocean",
 			})
 		})
@@ -203,7 +203,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/list", func(c *Client) {
 		digitaloceans, err = c.ListDigitalOceans(&ListDigitalOceansInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -218,7 +218,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/get", func(c *Client) {
 		digitaloceanGetResp, err = c.GetDigitalOcean(&GetDigitalOceanInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-digitalocean",
 		})
 	})
@@ -273,7 +273,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/update", func(c *Client) {
 		digitaloceanUpdateResp1, err = c.UpdateDigitalOcean(&UpdateDigitalOceanInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-digitalocean",
 			NewName:          ToPointer("new-test-digitalocean"),
 			Domain:           ToPointer("nyc3.digitaloceanspaces.com"),
@@ -287,7 +287,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/update2", func(c *Client) {
 		digitaloceanUpdateResp2, err = c.UpdateDigitalOcean(&UpdateDigitalOceanInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-digitalocean-2",
 			CompressionCodec: ToPointer("zstd"),
 		})
@@ -299,7 +299,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/update3", func(c *Client) {
 		digitaloceanUpdateResp3, err = c.UpdateDigitalOcean(&UpdateDigitalOceanInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-digitalocean-3",
 			GzipLevel:      ToPointer(9),
 		})
@@ -337,7 +337,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	record(t, "digitaloceans/delete", func(c *Client) {
 		err = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-digitalocean",
 		})
 	})

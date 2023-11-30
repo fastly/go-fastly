@@ -39,7 +39,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "syslogs/create", func(c *Client) {
 		s, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-syslog"),
 			Address:        ToPointer("example.com"),
 			Hostname:       ToPointer("example.com"),
@@ -65,13 +65,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		record(t, "syslogs/cleanup", func(c *Client) {
 			c.DeleteSyslog(&DeleteSyslogInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-syslog",
 			})
 
 			c.DeleteSyslog(&DeleteSyslogInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-syslog",
 			})
 		})
@@ -125,7 +125,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "syslogs/list", func(c *Client) {
 		ss, err = c.ListSyslogs(&ListSyslogsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -140,7 +140,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "syslogs/get", func(c *Client) {
 		ns, err = c.GetSyslog(&GetSyslogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-syslog",
 		})
 	})
@@ -195,7 +195,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "syslogs/update", func(c *Client) {
 		us, err = c.UpdateSyslog(&UpdateSyslogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-syslog",
 			NewName:        ToPointer("new-test-syslog"),
 			FormatVersion:  ToPointer(2),
@@ -216,7 +216,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "syslogs/delete", func(c *Client) {
 		err = c.DeleteSyslog(&DeleteSyslogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-syslog",
 		})
 	})

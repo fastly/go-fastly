@@ -161,8 +161,8 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	// We work around this by manually finding the active version number from the
 	// "versions" array in the returned JSON response.
 	for i := range s.Versions {
-		if s.Versions[i].Active {
-			s.ActiveVersion = ToPointer(s.Versions[i].Number)
+		if *s.Versions[i].Active {
+			s.ActiveVersion = s.Versions[i].Number
 			break
 		}
 	}

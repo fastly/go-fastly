@@ -18,7 +18,7 @@ func TestClient_Backends(t *testing.T) {
 	record(t, "backends/create", func(c *Client) {
 		b, err = c.CreateBackend(&CreateBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-backend"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
 			ConnectTimeout: ToPointer(1500),
@@ -37,13 +37,13 @@ func TestClient_Backends(t *testing.T) {
 		record(t, "backends/cleanup", func(c *Client) {
 			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-backend",
 			})
 
 			_ = c.DeleteBackend(&DeleteBackendInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-backend",
 			})
 		})
@@ -79,7 +79,7 @@ func TestClient_Backends(t *testing.T) {
 	record(t, "backends/list", func(c *Client) {
 		bs, err = c.ListBackends(&ListBackendsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -94,7 +94,7 @@ func TestClient_Backends(t *testing.T) {
 	record(t, "backends/get", func(c *Client) {
 		nb, err = c.GetBackend(&GetBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
 		})
 	})
@@ -122,7 +122,7 @@ func TestClient_Backends(t *testing.T) {
 	record(t, "backends/update", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
 			NewName:        ToPointer("new-test-backend"),
 			OverrideHost:   ToPointer("www.example.com"),
@@ -159,7 +159,7 @@ func TestClient_Backends(t *testing.T) {
 	record(t, "backends/update_ignore_empty_values", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
 		})
 	})
@@ -181,7 +181,7 @@ func TestClient_Backends(t *testing.T) {
 	record(t, "backends/update_allow_empty_values", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
 			OverrideHost:   ToPointer(""),
 			Port:           ToPointer(0),
@@ -201,7 +201,7 @@ func TestClient_Backends(t *testing.T) {
 	record(t, "backends/delete", func(c *Client) {
 		err = c.DeleteBackend(&DeleteBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
 		})
 	})

@@ -18,7 +18,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/create", func(c *Client) {
 		p, err = c.CreatePapertrail(&CreatePapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-papertrail"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
 			Port:           ToPointer(1234),
@@ -36,13 +36,13 @@ func TestClient_Papertrails(t *testing.T) {
 		record(t, "papertrails/cleanup", func(c *Client) {
 			_ = c.DeletePapertrail(&DeletePapertrailInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-papertrail",
 			})
 
 			_ = c.DeletePapertrail(&DeletePapertrailInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-papertrail",
 			})
 		})
@@ -72,7 +72,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/list", func(c *Client) {
 		ps, err = c.ListPapertrails(&ListPapertrailsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,7 +87,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/get", func(c *Client) {
 		np, err = c.GetPapertrail(&GetPapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-papertrail",
 		})
 	})
@@ -118,7 +118,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/update", func(c *Client) {
 		up, err = c.UpdatePapertrail(&UpdatePapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-papertrail",
 			NewName:        ToPointer("new-test-papertrail"),
 		})
@@ -134,7 +134,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/delete", func(c *Client) {
 		err = c.DeletePapertrail(&DeletePapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-papertrail",
 		})
 	})

@@ -14,7 +14,7 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
@@ -86,7 +86,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
@@ -163,7 +163,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
@@ -269,7 +269,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{

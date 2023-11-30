@@ -18,7 +18,7 @@ func TestClient_HealthChecks(t *testing.T) {
 	record(t, "health_checks/create", func(c *Client) {
 		hc, err = c.CreateHealthCheck(&CreateHealthCheckInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-healthcheck"),
 			Method:         ToPointer("HEAD"),
 			Headers: &[]string{
@@ -45,13 +45,13 @@ func TestClient_HealthChecks(t *testing.T) {
 		record(t, "health_checks/cleanup", func(c *Client) {
 			_ = c.DeleteHealthCheck(&DeleteHealthCheckInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-healthcheck",
 			})
 
 			_ = c.DeleteHealthCheck(&DeleteHealthCheckInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-healthcheck",
 			})
 		})
@@ -99,7 +99,7 @@ func TestClient_HealthChecks(t *testing.T) {
 	record(t, "health_checks/list", func(c *Client) {
 		hcs, err = c.ListHealthChecks(&ListHealthChecksInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -114,7 +114,7 @@ func TestClient_HealthChecks(t *testing.T) {
 	record(t, "health_checks/get", func(c *Client) {
 		nhc, err = c.GetHealthCheck(&GetHealthCheckInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-healthcheck",
 		})
 	})
@@ -166,7 +166,7 @@ func TestClient_HealthChecks(t *testing.T) {
 	record(t, "health_checks/update", func(c *Client) {
 		uhc, err = c.UpdateHealthCheck(&UpdateHealthCheckInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-healthcheck",
 			NewName:        ToPointer("new-test-healthcheck"),
 			Headers:        &[]string{"Beep: Boop"},
@@ -186,7 +186,7 @@ func TestClient_HealthChecks(t *testing.T) {
 	record(t, "health_checks/delete", func(c *Client) {
 		err = c.DeleteHealthCheck(&DeleteHealthCheckInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-healthcheck",
 		})
 	})

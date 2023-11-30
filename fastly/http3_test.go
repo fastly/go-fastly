@@ -19,7 +19,7 @@ func TestClient_HTTP3(t *testing.T) {
 		h, err = c.EnableHTTP3(&EnableHTTP3Input{
 			FeatureRevision: ToPointer(1),
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
+			ServiceVersion:  *tv.Number,
 		})
 	})
 	if err != nil {
@@ -35,7 +35,7 @@ func TestClient_HTTP3(t *testing.T) {
 	record(t, "http3/get", func(c *Client) {
 		gh, err = c.GetHTTP3(&GetHTTP3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -50,7 +50,7 @@ func TestClient_HTTP3(t *testing.T) {
 	record(t, "http3/disable", func(c *Client) {
 		err = c.DisableHTTP3(&DisableHTTP3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -61,7 +61,7 @@ func TestClient_HTTP3(t *testing.T) {
 	record(t, "http3/get-disabled", func(c *Client) {
 		gh, err = c.GetHTTP3(&GetHTTP3Input{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 

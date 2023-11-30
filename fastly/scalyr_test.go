@@ -18,7 +18,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/create", func(c *Client) {
 		s, err = c.CreateScalyr(&CreateScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-scalyr"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
@@ -36,13 +36,13 @@ func TestClient_Scalyrs(t *testing.T) {
 		record(t, "scalyrs/cleanup", func(c *Client) {
 			_ = c.DeleteScalyr(&DeleteScalyrInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-scalyr",
 			})
 
 			_ = c.DeleteScalyr(&DeleteScalyrInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-scalyr",
 			})
 		})
@@ -72,7 +72,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/list", func(c *Client) {
 		ss, err = c.ListScalyrs(&ListScalyrsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,7 +87,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/get", func(c *Client) {
 		ns, err = c.GetScalyr(&GetScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
 		})
 	})
@@ -118,7 +118,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/update", func(c *Client) {
 		us, err = c.UpdateScalyr(&UpdateScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
 			NewName:        ToPointer("new-test-scalyr"),
 			Region:         ToPointer("EU"),
@@ -142,7 +142,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/delete", func(c *Client) {
 		err = c.DeleteScalyr(&DeleteScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-scalyr",
 		})
 	})

@@ -18,7 +18,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/create", func(c *Client) {
 		l, err = c.CreateLogshuttle(&CreateLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-logshuttle"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
@@ -36,13 +36,13 @@ func TestClient_Logshuttles(t *testing.T) {
 		record(t, "logshuttles/cleanup", func(c *Client) {
 			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-logshuttle",
 			})
 
 			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-logshuttle",
 			})
 		})
@@ -72,7 +72,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/list", func(c *Client) {
 		ls, err = c.ListLogshuttles(&ListLogshuttlesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,7 +87,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/get", func(c *Client) {
 		nl, err = c.GetLogshuttle(&GetLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-logshuttle",
 		})
 	})
@@ -118,7 +118,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/update", func(c *Client) {
 		ul, err = c.UpdateLogshuttle(&UpdateLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-logshuttle",
 			NewName:        ToPointer("new-test-logshuttle"),
 			Token:          ToPointer("new-token"),
@@ -142,7 +142,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/delete", func(c *Client) {
 		err = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-logshuttle",
 		})
 	})

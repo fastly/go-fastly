@@ -25,7 +25,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/create", func(c *Client) {
 		d, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain1),
 			Comment:        ToPointer("comment"),
 		})
@@ -38,7 +38,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/create2", func(c *Client) {
 		d2, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain2),
 			Comment:        ToPointer("comment"),
 		})
@@ -52,13 +52,13 @@ func TestClient_Domains(t *testing.T) {
 		record(t, "domains/cleanup", func(c *Client) {
 			_ = c.DeleteDomain(&DeleteDomainInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           domain1,
 			})
 
 			_ = c.DeleteDomain(&DeleteDomainInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           domain3,
 			})
 		})
@@ -79,7 +79,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/list", func(c *Client) {
 		ds, err = c.ListDomains(&ListDomainsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -94,7 +94,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/get", func(c *Client) {
 		nd, err = c.GetDomain(&GetDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           domain1,
 		})
 	})
@@ -113,7 +113,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/update", func(c *Client) {
 		ud, err = c.UpdateDomain(&UpdateDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           domain1,
 			NewName:        ToPointer(domain3),
 		})
@@ -130,7 +130,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/validation", func(c *Client) {
 		vd, err = c.ValidateDomain(&ValidateDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           domain3,
 		})
 	})
@@ -145,7 +145,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/validate-all", func(c *Client) {
 		vds, err = c.ValidateAllDomains(&ValidateAllDomainsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -164,7 +164,7 @@ func TestClient_Domains(t *testing.T) {
 	record(t, "domains/delete", func(c *Client) {
 		err = c.DeleteDomain(&DeleteDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           domain3,
 		})
 	})

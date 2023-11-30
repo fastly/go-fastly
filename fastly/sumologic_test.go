@@ -18,7 +18,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/create", func(c *Client) {
 		s, err = c.CreateSumologic(&CreateSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-sumologic"),
 			URL:            ToPointer("https://foo.sumologic.com"),
 			Format:         ToPointer("format"),
@@ -36,13 +36,13 @@ func TestClient_Sumologics(t *testing.T) {
 		record(t, "sumologics/cleanup", func(c *Client) {
 			_ = c.DeleteSumologic(&DeleteSumologicInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-sumologic",
 			})
 
 			_ = c.DeleteSumologic(&DeleteSumologicInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-sumologic",
 			})
 		})
@@ -72,7 +72,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/list", func(c *Client) {
 		ss, err = c.ListSumologics(&ListSumologicsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,7 +87,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/get", func(c *Client) {
 		ns, err = c.GetSumologic(&GetSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-sumologic",
 		})
 	})
@@ -118,7 +118,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/update", func(c *Client) {
 		us, err = c.UpdateSumologic(&UpdateSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-sumologic",
 			NewName:        ToPointer("new-test-sumologic"),
 		})
@@ -134,7 +134,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/delete", func(c *Client) {
 		err = c.DeleteSumologic(&DeleteSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-sumologic",
 		})
 	})

@@ -17,7 +17,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/create", func(c *Client) {
 		ftpCreateResp1, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp"),
 			Address:          ToPointer("example.com"),
 			Port:             ToPointer(1234),
@@ -41,7 +41,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/create2", func(c *Client) {
 		ftpCreateResp2, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
+			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-ftp-2"),
 			Address:         ToPointer("example.com"),
 			Port:            ToPointer(1234),
@@ -65,7 +65,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/create3", func(c *Client) {
 		ftpCreateResp3, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp-3"),
 			Address:          ToPointer("example.com"),
 			Port:             ToPointer(1234),
@@ -91,7 +91,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/create4", func(c *Client) {
 		_, err = c.CreateFTP(&CreateFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp-4"),
 			Address:          ToPointer("example.com"),
 			Port:             ToPointer(1234),
@@ -118,25 +118,25 @@ func TestClient_FTPs(t *testing.T) {
 		record(t, "ftps/cleanup", func(c *Client) {
 			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-ftp",
 			})
 
 			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-ftp-2",
 			})
 
 			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-ftp-3",
 			})
 
 			_ = c.DeleteFTP(&DeleteFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-ftp",
 			})
 		})
@@ -205,7 +205,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/list", func(c *Client) {
 		ftps, err = c.ListFTPs(&ListFTPsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -220,7 +220,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/get", func(c *Client) {
 		ftpGetResp, err = c.GetFTP(&GetFTPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-ftp",
 		})
 	})
@@ -278,7 +278,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/update", func(c *Client) {
 		ftpUpdateResp1, err = c.UpdateFTP(&UpdateFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp",
 			NewName:          ToPointer("new-test-ftp"),
 			CompressionCodec: ToPointer("zstd"),
@@ -291,7 +291,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/update2", func(c *Client) {
 		ftpUpdateResp2, err = c.UpdateFTP(&UpdateFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp-2",
 			CompressionCodec: ToPointer("zstd"),
 		})
@@ -303,7 +303,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/update3", func(c *Client) {
 		ftpUpdateResp3, err = c.UpdateFTP(&UpdateFTPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-ftp-3",
 			GzipLevel:      ToPointer(9),
 		})
@@ -338,7 +338,7 @@ func TestClient_FTPs(t *testing.T) {
 	record(t, "ftps/delete", func(c *Client) {
 		err = c.DeleteFTP(&DeleteFTPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-ftp",
 		})
 	})

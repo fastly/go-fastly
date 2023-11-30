@@ -36,7 +36,7 @@ func TestClient_Kafkas(t *testing.T) {
 			RequestMaxBytes:  ToPointer(requestMaxBytes),
 			RequiredACKs:     ToPointer("-1"),
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			TLSCACert:        ToPointer(caCert),
 			TLSClientCert:    ToPointer(clientCert),
 			TLSClientKey:     ToPointer(clientKey),
@@ -55,13 +55,13 @@ func TestClient_Kafkas(t *testing.T) {
 		record(t, "kafkas/cleanup", func(c *Client) {
 			_ = c.DeleteKafka(&DeleteKafkaInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-kafka",
 			})
 
 			_ = c.DeleteKafka(&DeleteKafkaInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-kafka",
 			})
 		})
@@ -127,7 +127,7 @@ func TestClient_Kafkas(t *testing.T) {
 	record(t, "kafkas/list", func(c *Client) {
 		ks, err = c.ListKafkas(&ListKafkasInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -142,7 +142,7 @@ func TestClient_Kafkas(t *testing.T) {
 	record(t, "kafkas/get", func(c *Client) {
 		nk, err = c.GetKafka(&GetKafkaInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-kafka",
 		})
 	})
@@ -209,7 +209,7 @@ func TestClient_Kafkas(t *testing.T) {
 	record(t, "kafkas/update", func(c *Client) {
 		uk, err = c.UpdateKafka(&UpdateKafkaInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-kafka",
 			NewName:        ToPointer("new-test-kafka"),
 			Topic:          ToPointer("new-kafka-topic"),
@@ -229,7 +229,7 @@ func TestClient_Kafkas(t *testing.T) {
 	record(t, "kafkas/delete", func(c *Client) {
 		err = c.DeleteKafka(&DeleteKafkaInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-kafka",
 		})
 	})

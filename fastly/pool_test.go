@@ -21,7 +21,7 @@ func TestClient_Pools(t *testing.T) {
 			Name:            ToPointer("test_pool"),
 			Quorum:          ToPointer(50),
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
+			ServiceVersion:  *tv.Number,
 			TLSCertHostname: ToPointer("example.com"),
 			Type:            ToPointer(PoolTypeRandom),
 			UseTLS:          ToPointer(Compatibool(true)),
@@ -36,13 +36,13 @@ func TestClient_Pools(t *testing.T) {
 		record(t, "pools/cleanup", func(c *Client) {
 			_ = c.DeletePool(&DeletePoolInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test_pool",
 			})
 
 			_ = c.DeletePool(&DeletePoolInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new_test_pool",
 			})
 		})
@@ -69,7 +69,7 @@ func TestClient_Pools(t *testing.T) {
 	record(t, "pools/list", func(c *Client) {
 		ps, err = c.ListPools(&ListPoolsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -84,7 +84,7 @@ func TestClient_Pools(t *testing.T) {
 	record(t, "pools/get", func(c *Client) {
 		np, err = c.GetPool(&GetPoolInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test_pool",
 		})
 	})
@@ -106,7 +106,7 @@ func TestClient_Pools(t *testing.T) {
 	record(t, "pools/update", func(c *Client) {
 		up, err = c.UpdatePool(&UpdatePoolInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test_pool",
 			NewName:        ToPointer("new_test_pool"),
 			Quorum:         ToPointer(0),
@@ -127,7 +127,7 @@ func TestClient_Pools(t *testing.T) {
 	record(t, "pools/delete", func(c *Client) {
 		err = c.DeletePool(&DeletePoolInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new_test_pool",
 		})
 	})

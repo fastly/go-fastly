@@ -18,7 +18,7 @@ func TestClient_DirectorBackends(t *testing.T) {
 	record(t, "director_backends/create", func(c *Client) {
 		b, err = c.CreateDirectorBackend(&CreateDirectorBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Director:       "director",
 			Backend:        "backend",
 		})
@@ -32,7 +32,7 @@ func TestClient_DirectorBackends(t *testing.T) {
 		record(t, "director_backends/cleanup", func(c *Client) {
 			_ = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Director:       "director",
 				Backend:        "backend",
 			})
@@ -51,7 +51,7 @@ func TestClient_DirectorBackends(t *testing.T) {
 	record(t, "director_backends/get", func(c *Client) {
 		nb, err = c.GetDirectorBackend(&GetDirectorBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Director:       "director",
 			Backend:        "backend",
 		})
@@ -71,7 +71,7 @@ func TestClient_DirectorBackends(t *testing.T) {
 	record(t, "director_backends/delete", func(c *Client) {
 		err = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Director:       "director",
 			Backend:        "backend",
 		})

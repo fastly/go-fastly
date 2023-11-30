@@ -39,7 +39,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/create", func(c *Client) {
 		h, err = c.CreateHTTPS(&CreateHTTPSInput{
 			ServiceID:         testServiceID,
-			ServiceVersion:    tv.Number,
+			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-https"),
 			Format:            ToPointer("format"),
 			URL:               ToPointer("https://example.com/"),
@@ -68,14 +68,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		record(t, "https/cleanup", func(c *Client) {
 			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-https",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
 			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-https",
 			})
 		})
@@ -138,7 +138,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/list", func(c *Client) {
 		hs, err = c.ListHTTPS(&ListHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -153,7 +153,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/get", func(c *Client) {
 		nh, err = c.GetHTTPS(&GetHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-https",
 		})
 	})
@@ -217,7 +217,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/update", func(c *Client) {
 		uh, err = c.UpdateHTTPS(&UpdateHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-https",
 			NewName:        ToPointer("new-test-https"),
 			Method:         ToPointer("POST"),
@@ -237,7 +237,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/delete", func(c *Client) {
 		err = c.DeleteHTTPS(&DeleteHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-https",
 		})
 	})

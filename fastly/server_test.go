@@ -11,7 +11,7 @@ func TestClient_Servers(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
-	testPool := createTestPool(t, "servers/create_pool", testServiceID, tv.Number, "servers22")
+	testPool := createTestPool(t, "servers/create_pool", testServiceID, *tv.Number, "servers22")
 
 	// Create
 	var server *Server

@@ -18,7 +18,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/create", func(c *Client) {
 		condition, err = c.CreateCondition(&CreateConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test/condition"),
 			Statement:      ToPointer("req.url~+\"index.html\""),
 			Type:           ToPointer("REQUEST"),
@@ -34,7 +34,7 @@ func TestClient_Conditions(t *testing.T) {
 		record(t, "conditions/cleanup", func(c *Client) {
 			_ = c.DeleteCondition(&DeleteConditionInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test/condition",
 			})
 		})
@@ -58,7 +58,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/list", func(c *Client) {
 		conditions, err = c.ListConditions(&ListConditionsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -73,7 +73,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/get", func(c *Client) {
 		newCondition, err = c.GetCondition(&GetConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 		})
 	})
@@ -98,7 +98,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/update", func(c *Client) {
 		updatedCondition, err = c.UpdateCondition(&UpdateConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 			Statement:      ToPointer("req.url~+\"updated.html\""),
 		})
@@ -114,7 +114,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/delete", func(c *Client) {
 		err = c.DeleteCondition(&DeleteConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 		})
 	})

@@ -19,7 +19,7 @@ func TestClient_Pubsubs(t *testing.T) {
 	record(t, "pubsubs/create", func(c *Client) {
 		pubsub, err = c.CreatePubsub(&CreatePubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-pubsub"),
 			Topic:          ToPointer("topic"),
 			User:           ToPointer("user"),
@@ -40,13 +40,13 @@ func TestClient_Pubsubs(t *testing.T) {
 		record(t, "pubsubs/cleanup", func(c *Client) {
 			_ = c.DeletePubsub(&DeletePubsubInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-pubsub",
 			})
 
 			_ = c.DeletePubsub(&DeletePubsubInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-pubsub",
 			})
 		})
@@ -112,7 +112,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	record(t, "pubsubs/list", func(c *Client) {
 		pubsubs, err = c.ListPubsubs(&ListPubsubsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -127,7 +127,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	record(t, "pubsubs/get", func(c *Client) {
 		npubsub, err = c.GetPubsub(&GetPubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 		})
 	})
@@ -164,7 +164,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	record(t, "pubsubs/update", func(c *Client) {
 		upubsub, err = c.UpdatePubsub(&UpdatePubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 			NewName:        ToPointer("new-test-pubsub"),
 			Topic:          ToPointer("new-topic"),
@@ -184,7 +184,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	record(t, "pubsubs/delete", func(c *Client) {
 		err = c.DeletePubsub(&DeletePubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-pubsub",
 		})
 	})

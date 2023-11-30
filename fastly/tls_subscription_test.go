@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 const fixtureBase = "tls_subscription/"
 
@@ -37,7 +39,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	record(t, fixtureBase+"domains/create", func(c *Client) {
 		_, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain1),
 			Comment:        ToPointer("comment"),
 		})
@@ -49,7 +51,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	record(t, fixtureBase+"domains/create2", func(c *Client) {
 		_, err = c.CreateDomain(&CreateDomainInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain2),
 			Comment:        ToPointer("comment"),
 		})
@@ -64,7 +66,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	record(t, fixtureBase+"activate_version", func(c *Client) {
 		_, err = c.ActivateVersion(&ActivateVersionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {

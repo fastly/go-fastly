@@ -18,7 +18,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	record(t, "request_settings/create", func(c *Client) {
 		rs, err = c.CreateRequestSetting(&CreateRequestSettingInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-request-setting"),
 			ForceMiss:      ToPointer(Compatibool(true)),
 			ForceSSL:       ToPointer(Compatibool(true)),
@@ -41,13 +41,13 @@ func TestClient_RequestSettings(t *testing.T) {
 		record(t, "request_settings/cleanup", func(c *Client) {
 			_ = c.DeleteRequestSetting(&DeleteRequestSettingInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-request-setting",
 			})
 
 			_ = c.DeleteRequestSetting(&DeleteRequestSettingInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-request-setting",
 			})
 		})
@@ -92,7 +92,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	record(t, "request_settings/list", func(c *Client) {
 		rss, err = c.ListRequestSettings(&ListRequestSettingsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -107,7 +107,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	record(t, "request_settings/get", func(c *Client) {
 		nrs, err = c.GetRequestSetting(&GetRequestSettingInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-request-setting",
 		})
 	})
@@ -153,7 +153,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	record(t, "request_settings/update", func(c *Client) {
 		urs, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-request-setting",
 			NewName:        ToPointer("new-test-request-setting"),
 			Action:         ToPointer(RequestSettingActionPass),
@@ -174,7 +174,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	record(t, "request_settings/update-2", func(c *Client) {
 		urs2, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
 			Action:         ToPointer(RequestSettingAction("")),
 		})
@@ -191,7 +191,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	record(t, "request_settings/update-3", func(c *Client) {
 		urs3, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
 			Action:         ToPointer(RequestSettingActionUnset),
 		})
@@ -207,7 +207,7 @@ func TestClient_RequestSettings(t *testing.T) {
 	record(t, "request_settings/delete", func(c *Client) {
 		err = c.DeleteRequestSetting(&DeleteRequestSettingInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
 		})
 	})

@@ -18,7 +18,7 @@ func TestClient_Headers(t *testing.T) {
 	record(t, "headers/create", func(c *Client) {
 		h, err = c.CreateHeader(&CreateHeaderInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-header"),
 			Action:         ToPointer(HeaderActionSet),
 			IgnoreIfSet:    ToPointer(Compatibool(false)),
@@ -39,13 +39,13 @@ func TestClient_Headers(t *testing.T) {
 		record(t, "headers/cleanup", func(c *Client) {
 			_ = c.DeleteHeader(&DeleteHeaderInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-header",
 			})
 
 			_ = c.DeleteHeader(&DeleteHeaderInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-header",
 			})
 		})
@@ -84,7 +84,7 @@ func TestClient_Headers(t *testing.T) {
 	record(t, "headers/list", func(c *Client) {
 		hs, err = c.ListHeaders(&ListHeadersInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -99,7 +99,7 @@ func TestClient_Headers(t *testing.T) {
 	record(t, "headers/get", func(c *Client) {
 		nh, err = c.GetHeader(&GetHeaderInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-header",
 		})
 	})
@@ -139,7 +139,7 @@ func TestClient_Headers(t *testing.T) {
 	record(t, "headers/update", func(c *Client) {
 		uh, err = c.UpdateHeader(&UpdateHeaderInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-header",
 			NewName:        ToPointer("new-test-header"),
 			Action:         ToPointer(HeaderActionAppend),
@@ -157,7 +157,7 @@ func TestClient_Headers(t *testing.T) {
 	record(t, "headers/delete", func(c *Client) {
 		err = c.DeleteHeader(&DeleteHeaderInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-header",
 		})
 	})

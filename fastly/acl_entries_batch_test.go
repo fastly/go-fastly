@@ -15,7 +15,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
@@ -111,7 +111,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
@@ -210,7 +210,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 
 	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
