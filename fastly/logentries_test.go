@@ -49,29 +49,29 @@ func TestClient_Logentries(t *testing.T) {
 		})
 	}()
 
-	if le.Name != "test-logentries" {
-		t.Errorf("bad name: %q", le.Name)
+	if *le.Name != "test-logentries" {
+		t.Errorf("bad name: %q", *le.Name)
 	}
-	if le.Port != 0 {
-		t.Errorf("bad port: %q", le.Port)
+	if *le.Port != 0 {
+		t.Errorf("bad port: %q", *le.Port)
 	}
-	if !le.UseTLS {
-		t.Errorf("bad use_tls: %t", le.UseTLS)
+	if !*le.UseTLS {
+		t.Errorf("bad use_tls: %t", *le.UseTLS)
 	}
-	if le.Token != "abcd1234" {
-		t.Errorf("bad token: %q", le.Token)
+	if *le.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *le.Token)
 	}
-	if le.Format != "format" {
-		t.Errorf("bad format: %q", le.Format)
+	if *le.Format != "format" {
+		t.Errorf("bad format: %q", *le.Format)
 	}
-	if le.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", le.FormatVersion)
+	if *le.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *le.FormatVersion)
 	}
-	if le.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", le.Placement)
+	if *le.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *le.Placement)
 	}
-	if le.Region != "us" {
-		t.Errorf("bad region: %q", le.Region)
+	if *le.Region != "us" {
+		t.Errorf("bad region: %q", *le.Region)
 	}
 
 	// List
@@ -101,26 +101,26 @@ func TestClient_Logentries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if le.Name != nle.Name {
-		t.Errorf("bad name: %q", le.Name)
+	if *le.Name != *nle.Name {
+		t.Errorf("bad name: %q", *le.Name)
 	}
-	if le.Port != nle.Port {
-		t.Errorf("bad port: %q", le.Port)
+	if *le.Port != *nle.Port {
+		t.Errorf("bad port: %q", *le.Port)
 	}
-	if le.UseTLS != nle.UseTLS {
-		t.Errorf("bad use_tls: %t", le.UseTLS)
+	if *le.UseTLS != *nle.UseTLS {
+		t.Errorf("bad use_tls: %t", *le.UseTLS)
 	}
-	if le.Token != nle.Token {
-		t.Errorf("bad token: %q", le.Token)
+	if *le.Token != *nle.Token {
+		t.Errorf("bad token: %q", *le.Token)
 	}
-	if le.Format != nle.Format {
-		t.Errorf("bad format: %q", le.Format)
+	if *le.Format != *nle.Format {
+		t.Errorf("bad format: %q", *le.Format)
 	}
-	if le.FormatVersion != nle.FormatVersion {
-		t.Errorf("bad format_version: %q", le.FormatVersion)
+	if *le.FormatVersion != *nle.FormatVersion {
+		t.Errorf("bad format_version: %q", *le.FormatVersion)
 	}
-	if le.Placement != nle.Placement {
-		t.Errorf("bad placement: %q", le.Placement)
+	if *le.Placement != *nle.Placement {
+		t.Errorf("bad placement: %q", *le.Placement)
 	}
 
 	// Update
@@ -138,14 +138,14 @@ func TestClient_Logentries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ule.Name != "new-test-logentries" {
-		t.Errorf("bad name: %q", ule.Name)
+	if *ule.Name != "new-test-logentries" {
+		t.Errorf("bad name: %q", *ule.Name)
 	}
-	if ule.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", ule.FormatVersion)
+	if *ule.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *ule.FormatVersion)
 	}
-	if ule.Region != "ap" {
-		t.Errorf("bad region: %q", ule.Region)
+	if *ule.Region != "ap" {
+		t.Errorf("bad region: %q", *ule.Region)
 	}
 
 	// Delete

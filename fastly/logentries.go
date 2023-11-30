@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,36 +10,18 @@ import (
 type Logentries struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Port              int        `mapstructure:"port"`
-	Region            string     `mapstructure:"region"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Port              *int       `mapstructure:"port"`
+	Region            *string    `mapstructure:"region"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	UseTLS            bool       `mapstructure:"use_tls"`
-}
-
-// logentriesByName is a sortable list of logentries.
-type logentriesByName []*Logentries
-
-// Len implements the sortable interface.
-func (s logentriesByName) Len() int {
-	return len(s)
-}
-
-// Swap implements the sortable interface.
-func (s logentriesByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implements the sortable interface.
-func (s logentriesByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	UseTLS            *bool      `mapstructure:"use_tls"`
 }
 
 // ListLogentriesInput is used as input to the ListLogentries function.
@@ -71,7 +52,6 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	if err := decodeBodyMap(resp.Body, &ls); err != nil {
 		return nil, err
 	}
-	sort.Stable(logentriesByName(ls))
 	return ls, nil
 }
 
