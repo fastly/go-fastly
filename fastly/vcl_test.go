@@ -65,11 +65,11 @@ sub vcl_hash {
 		})
 	}()
 
-	if vcl.Name != "test-vcl" {
-		t.Errorf("bad name: %q", vcl.Name)
+	if *vcl.Name != "test-vcl" {
+		t.Errorf("bad name: %q", *vcl.Name)
 	}
-	if vcl.Content != content {
-		t.Errorf("bad content: %q", vcl.Content)
+	if *vcl.Content != content {
+		t.Errorf("bad content: %q", *vcl.Content)
 	}
 
 	// List
@@ -99,11 +99,11 @@ sub vcl_hash {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if vcl.Name != nvcl.Name {
-		t.Errorf("bad name: %q", vcl.Name)
+	if *vcl.Name != *nvcl.Name {
+		t.Errorf("bad name: %q", *vcl.Name)
 	}
-	if vcl.Content != nvcl.Content {
-		t.Errorf("bad address: %q", vcl.Content)
+	if *vcl.Content != *nvcl.Content {
+		t.Errorf("bad address: %q", *vcl.Content)
 	}
 
 	// Update
@@ -119,8 +119,8 @@ sub vcl_hash {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uvcl.Name != "new-test-vcl" {
-		t.Errorf("bad name: %q", uvcl.Name)
+	if *uvcl.Name != "new-test-vcl" {
+		t.Errorf("bad name: %q", *uvcl.Name)
 	}
 
 	// Activate
@@ -135,8 +135,8 @@ sub vcl_hash {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !avcl.Main {
-		t.Errorf("bad main: %t", avcl.Main)
+	if !*avcl.Main {
+		t.Errorf("bad main: %t", *avcl.Main)
 	}
 
 	// Delete
