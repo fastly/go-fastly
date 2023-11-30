@@ -44,28 +44,28 @@ func TestClient_Users(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteUser(&DeleteUserInput{
-				ID: u.ID,
+				ID: *u.ID,
 			})
 		})
 	}()
 
-	if u.Login != login {
-		t.Errorf("bad login: %v", u.Login)
+	if *u.Login != login {
+		t.Errorf("bad login: %v", *u.Login)
 	}
 
-	if u.Name != "test user" {
-		t.Errorf("bad name: %v", u.Name)
+	if *u.Name != "test user" {
+		t.Errorf("bad name: %v", *u.Name)
 	}
 
-	if u.Role != "engineer" {
-		t.Errorf("bad role: %v", u.Role)
+	if *u.Role != "engineer" {
+		t.Errorf("bad role: %v", *u.Role)
 	}
 
 	// List
 	var us []*User
 	record(t, fixtureBase+"list", func(c *Client) {
 		us, err = c.ListCustomerUsers(&ListCustomerUsersInput{
-			CustomerID: u.CustomerID,
+			CustomerID: *u.CustomerID,
 		})
 	})
 	if err != nil {
@@ -79,21 +79,21 @@ func TestClient_Users(t *testing.T) {
 	var nu *User
 	record(t, fixtureBase+"get", func(c *Client) {
 		nu, err = c.GetUser(&GetUserInput{
-			ID: u.ID,
+			ID: *u.ID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if u.Name != nu.Name {
-		t.Errorf("bad name: %q (%q)", u.Name, nu.Name)
+	if *u.Name != *nu.Name {
+		t.Errorf("bad name: %q (%q)", *u.Name, *nu.Name)
 	}
 
 	// Update
 	var uu *User
 	record(t, fixtureBase+"update", func(c *Client) {
 		uu, err = c.UpdateUser(&UpdateUserInput{
-			ID:   u.ID,
+			ID:   *u.ID,
 			Name: ToPointer("updated user"),
 			Role: ToPointer("superuser"),
 		})
@@ -101,11 +101,11 @@ func TestClient_Users(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uu.Name != "updated user" {
-		t.Errorf("bad name: %q", uu.Name)
+	if *uu.Name != "updated user" {
+		t.Errorf("bad name: %q", *uu.Name)
 	}
-	if uu.Role != "superuser" {
-		t.Errorf("bad role: %q", uu.Role)
+	if *uu.Role != "superuser" {
+		t.Errorf("bad role: %q", *uu.Role)
 	}
 
 	// Reset Password
@@ -114,7 +114,7 @@ func TestClient_Users(t *testing.T) {
 	// Which means you might have to manually correct the fixtures 😬
 	record(t, fixtureBase+"reset_password", func(c *Client) {
 		err = c.ResetUserPassword(&ResetUserPasswordInput{
-			Login: uu.Login,
+			Login: *uu.Login,
 		})
 	})
 	if err != nil {
@@ -124,7 +124,7 @@ func TestClient_Users(t *testing.T) {
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteUser(&DeleteUserInput{
-			ID: u.ID,
+			ID: *u.ID,
 		})
 	})
 	if err != nil {
