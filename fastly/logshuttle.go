@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,34 +10,16 @@ import (
 type Logshuttle struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
-	URL               string     `mapstructure:"url"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
+	URL               *string    `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// logshuttlesByName is a sortable list of logshuttles.
-type logshuttlesByName []*Logshuttle
-
-// Len implement the sortable interface.
-func (l logshuttlesByName) Len() int {
-	return len(l)
-}
-
-// Swap implement the sortable interface.
-func (l logshuttlesByName) Swap(i, j int) {
-	l[i], l[j] = l[j], l[i]
-}
-
-// Less implement the sortable interface.
-func (l logshuttlesByName) Less(i, j int) bool {
-	return l[i].Name < l[j].Name
 }
 
 // ListLogshuttlesInput is used as input to the ListLogshuttles function.
@@ -69,7 +50,6 @@ func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error)
 	if err := decodeBodyMap(resp.Body, &ls); err != nil {
 		return nil, err
 	}
-	sort.Stable(logshuttlesByName(ls))
 	return ls, nil
 }
 
