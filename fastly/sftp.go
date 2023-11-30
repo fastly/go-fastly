@@ -3,53 +3,34 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // SFTP represents an SFTP logging response from the Fastly API.
 type SFTP struct {
-	Address           string     `mapstructure:"address"`
-	CompressionCodec  string     `mapstructure:"compression_codec"`
+	Address           *string    `mapstructure:"address"`
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	GzipLevel         int        `mapstructure:"gzip_level"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Password          string     `mapstructure:"password"`
-	Path              string     `mapstructure:"path"`
-	Period            int        `mapstructure:"period"`
-	Placement         string     `mapstructure:"placement"`
-	Port              int        `mapstructure:"port"`
-	PublicKey         string     `mapstructure:"public_key"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	SSHKnownHosts     string     `mapstructure:"ssh_known_hosts"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	GzipLevel         *int       `mapstructure:"gzip_level"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Password          *string    `mapstructure:"password"`
+	Path              *string    `mapstructure:"path"`
+	Period            *int       `mapstructure:"period"`
+	Placement         *string    `mapstructure:"placement"`
+	Port              *int       `mapstructure:"port"`
+	PublicKey         *string    `mapstructure:"public_key"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	SSHKnownHosts     *string    `mapstructure:"ssh_known_hosts"`
+	SecretKey         *string    `mapstructure:"secret_key"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TimestampFormat   *string    `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	User              string     `mapstructure:"user"`
-}
-
-// sftpsByName is a sortable list of sftps.
-type sftpsByName []*SFTP
-
-// Len implement the sortable interface.
-func (s sftpsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s sftpsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s sftpsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	User              *string    `mapstructure:"user"`
 }
 
 // ListSFTPsInput is used as input to the ListSFTPs function.
@@ -80,7 +61,6 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 	if err := decodeBodyMap(resp.Body, &sftps); err != nil {
 		return nil, err
 	}
-	sort.Stable(sftpsByName(sftps))
 	return sftps, nil
 }
 
