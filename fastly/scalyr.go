@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,34 +10,16 @@ import (
 type Scalyr struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Region            string     `mapstructure:"region"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Region            *string    `mapstructure:"region"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// scalyrByName is a sortable list of scalyrs.
-type scalyrsByName []*Scalyr
-
-// Len implements the sortable interface.
-func (s scalyrsByName) Len() int {
-	return len(s)
-}
-
-// Swap implements the sortable interface.
-func (s scalyrsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implements the sortable interface.
-func (s scalyrsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListScalyrsInput is used as input to the ListScalyrs function.
@@ -69,7 +50,6 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
-	sort.Stable(scalyrsByName(ss))
 	return ss, nil
 }
 
