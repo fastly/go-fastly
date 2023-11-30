@@ -47,7 +47,7 @@ func TestClient_Servers(t *testing.T) {
 			_ = c.DeleteServer(&DeleteServerInput{
 				ServiceID: testServiceID,
 				PoolID:    *testPool.ID,
-				Server:    altServer.ID,
+				Server:    *altServer.ID,
 			})
 
 			// Expected to fail as the API forbids deleting the last server in
@@ -56,19 +56,19 @@ func TestClient_Servers(t *testing.T) {
 			_ = c.DeleteServer(&DeleteServerInput{
 				ServiceID: testServiceID,
 				PoolID:    *testPool.ID,
-				Server:    server.ID,
+				Server:    *server.ID,
 			})
 		})
 	}()
 
-	if server.ServiceID != testServiceID {
-		t.Errorf("bad server service: %q", server.ServiceID)
+	if *server.ServiceID != testServiceID {
+		t.Errorf("bad server service: %q", *server.ServiceID)
 	}
-	if server.PoolID != *testPool.ID {
-		t.Errorf("bad server pool: %q", server.PoolID)
+	if *server.PoolID != *testPool.ID {
+		t.Errorf("bad server pool: %q", *server.PoolID)
 	}
-	if server.Address != "127.0.0.1" {
-		t.Errorf("bad server address: %q", server.Address)
+	if *server.Address != "127.0.0.1" {
+		t.Errorf("bad server address: %q", *server.Address)
 	}
 
 	// List
@@ -92,14 +92,14 @@ func TestClient_Servers(t *testing.T) {
 		ns, err = c.GetServer(&GetServerInput{
 			ServiceID: testServiceID,
 			PoolID:    *testPool.ID,
-			Server:    server.ID,
+			Server:    *server.ID,
 		})
 	})
-	if server.ID != ns.ID {
-		t.Errorf("bad ID: %q (%q)", server.ID, ns.ID)
+	if *server.ID != *ns.ID {
+		t.Errorf("bad ID: %q (%q)", *server.ID, *ns.ID)
 	}
-	if server.Address != ns.Address {
-		t.Errorf("bad address: %q (%q)", server.Address, ns.Address)
+	if *server.Address != *ns.Address {
+		t.Errorf("bad address: %q (%q)", *server.Address, *ns.Address)
 	}
 
 	// Update
@@ -108,7 +108,7 @@ func TestClient_Servers(t *testing.T) {
 		us, err = c.UpdateServer(&UpdateServerInput{
 			ServiceID: testServiceID,
 			PoolID:    *testPool.ID,
-			Server:    server.ID,
+			Server:    *server.ID,
 			Address:   ToPointer("0.0.0.0"),
 			Weight:    ToPointer(50),
 		})
@@ -116,10 +116,10 @@ func TestClient_Servers(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.Address == server.Address {
-		t.Errorf("bad address: %s", us.Address)
+	if *us.Address == *server.Address {
+		t.Errorf("bad address: %s", *us.Address)
 	}
-	if us.Weight != 50 {
+	if *us.Weight != 50 {
 		t.Errorf("bad weight: %q", 50)
 	}
 
@@ -128,7 +128,7 @@ func TestClient_Servers(t *testing.T) {
 		err = c.DeleteServer(&DeleteServerInput{
 			ServiceID: testServiceID,
 			PoolID:    *testPool.ID,
-			Server:    altServer.ID,
+			Server:    *altServer.ID,
 		})
 	})
 	if err != nil {
