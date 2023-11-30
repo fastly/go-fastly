@@ -46,20 +46,20 @@ func TestClient_Loggly(t *testing.T) {
 		})
 	}()
 
-	if lg.Name != "test-loggly" {
-		t.Errorf("bad name: %q", lg.Name)
+	if *lg.Name != "test-loggly" {
+		t.Errorf("bad name: %q", *lg.Name)
 	}
-	if lg.Token != "abcd1234" {
-		t.Errorf("bad token: %q", lg.Token)
+	if *lg.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *lg.Token)
 	}
-	if lg.Format != "format" {
-		t.Errorf("bad format: %q", lg.Format)
+	if *lg.Format != "format" {
+		t.Errorf("bad format: %q", *lg.Format)
 	}
-	if lg.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", lg.FormatVersion)
+	if *lg.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *lg.FormatVersion)
 	}
-	if lg.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", lg.Placement)
+	if *lg.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *lg.Placement)
 	}
 
 	// List
@@ -89,20 +89,20 @@ func TestClient_Loggly(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if lg.Name != nlg.Name {
-		t.Errorf("bad name: %q", lg.Name)
+	if *lg.Name != *nlg.Name {
+		t.Errorf("bad name: %q", *lg.Name)
 	}
-	if lg.Token != nlg.Token {
-		t.Errorf("bad token: %q", lg.Token)
+	if *lg.Token != *nlg.Token {
+		t.Errorf("bad token: %q", *lg.Token)
 	}
-	if lg.Format != nlg.Format {
-		t.Errorf("bad format: %q", lg.Format)
+	if *lg.Format != *nlg.Format {
+		t.Errorf("bad format: %q", *lg.Format)
 	}
-	if lg.FormatVersion != nlg.FormatVersion {
-		t.Errorf("bad format_version: %q", lg.FormatVersion)
+	if *lg.FormatVersion != *nlg.FormatVersion {
+		t.Errorf("bad format_version: %q", *lg.FormatVersion)
 	}
-	if lg.Placement != nlg.Placement {
-		t.Errorf("bad placement: %q", lg.Placement)
+	if *lg.Placement != *nlg.Placement {
+		t.Errorf("bad placement: %q", *lg.Placement)
 	}
 
 	// Update
@@ -119,11 +119,11 @@ func TestClient_Loggly(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ulg.Name != "new-test-loggly" {
-		t.Errorf("bad name: %q", ulg.Name)
+	if *ulg.Name != "new-test-loggly" {
+		t.Errorf("bad name: %q", *ulg.Name)
 	}
-	if ulg.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", ulg.FormatVersion)
+	if *ulg.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *ulg.FormatVersion)
 	}
 
 	// Delete
