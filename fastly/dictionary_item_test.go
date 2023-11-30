@@ -9,11 +9,11 @@ func TestClient_DictionaryItems(t *testing.T) {
 	nameSuffix := "DictionaryItems"
 
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
 
-	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", *testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	// Create
@@ -21,7 +21,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var createdDictionaryItem *DictionaryItem
 	record(t, fixtureBase+"create", func(c *Client) {
 		createdDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 			ItemKey:      ToPointer("test-dictionary-item"),
 			ItemValue:    ToPointer("value"),
@@ -35,7 +35,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
-				ServiceID:    testService.ID,
+				ServiceID:    *testService.ID,
 				DictionaryID: *testDictionary.ID,
 				ItemKey:      "test-dictionary-item",
 			})
@@ -53,7 +53,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var dictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list", func(c *Client) {
 		dictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 		})
 	})
@@ -72,7 +72,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 			DictionaryID: *testDictionary.ID,
 			Direction:    ToPointer("ascend"),
 			PerPage:      ToPointer(50),
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			Sort:         ToPointer("item_key"),
 		})
 
@@ -99,7 +99,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var retrievedDictionaryItem *DictionaryItem
 	record(t, fixtureBase+"get", func(c *Client) {
 		retrievedDictionaryItem, err = c.GetDictionaryItem(&GetDictionaryItemInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
 		})
@@ -118,7 +118,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var updatedDictionaryItem *DictionaryItem
 	record(t, fixtureBase+"update", func(c *Client) {
 		updatedDictionaryItem, err = c.UpdateDictionaryItem(&UpdateDictionaryItemInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
 			ItemValue:    "new-value",
@@ -134,7 +134,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 			ItemKey:      "test-dictionary-item",
 		})

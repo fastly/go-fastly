@@ -7,42 +7,42 @@ import (
 
 // Service represents a server response from the Fastly API.
 type Service struct {
-	ActiveVersion int        `mapstructure:"version"`
-	Comment       string     `mapstructure:"comment"`
+	ActiveVersion *int       `mapstructure:"version"`
+	Comment       *string    `mapstructure:"comment"`
 	CreatedAt     *time.Time `mapstructure:"created_at"`
-	CustomerID    string     `mapstructure:"customer_id"`
+	CustomerID    *string    `mapstructure:"customer_id"`
 	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ID            string     `mapstructure:"id"`
-	Name          string     `mapstructure:"name"`
-	Type          string     `mapstructure:"type"`
+	ID            *string    `mapstructure:"id"`
+	Name          *string    `mapstructure:"name"`
+	Type          *string    `mapstructure:"type"`
 	UpdatedAt     *time.Time `mapstructure:"updated_at"`
 	Versions      []*Version `mapstructure:"versions"`
 }
 
 // ServiceDetail represents a server response from the Fastly API.
 type ServiceDetail struct {
-	ActiveVersion Version    `mapstructure:"active_version"`
-	Comment       string     `mapstructure:"comment"`
+	ActiveVersion *Version   `mapstructure:"active_version"`
+	Comment       *string    `mapstructure:"comment"`
 	CreatedAt     *time.Time `mapstructure:"created_at"`
-	CustomerID    string     `mapstructure:"customer_id"`
+	CustomerID    *string    `mapstructure:"customer_id"`
 	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ID            string     `mapstructure:"id"`
-	Name          string     `mapstructure:"name"`
-	Type          string     `mapstructure:"type"`
+	ID            *string    `mapstructure:"id"`
+	Name          *string    `mapstructure:"name"`
+	Type          *string    `mapstructure:"type"`
 	UpdatedAt     *time.Time `mapstructure:"updated_at"`
-	Version       Version    `mapstructure:"version"`
+	Version       *Version   `mapstructure:"version"`
 	Versions      []*Version `mapstructure:"versions"`
 }
 
 // ServiceDomain represents a server response from the Fastly API.
 type ServiceDomain struct {
-	Comment        string     `mapstructure:"comment"`
+	Comment        *string    `mapstructure:"comment"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	Locked         bool       `mapstructure:"locked"`
-	Name           string     `mapstructure:"name"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int64      `mapstructure:"version"`
+	Locked         *bool      `mapstructure:"locked"`
+	Name           *string    `mapstructure:"name"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int64     `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
@@ -52,31 +52,39 @@ type ServiceDomainsList []*ServiceDomain
 // GetServicesInput is used as input to the GetServices function.
 type GetServicesInput struct {
 	// Direction is the direction in which to sort results.
-	Direction string
+	Direction *string
 	// Page is the current page.
-	Page int
+	Page *int
 	// PerPage is the number of records per page.
-	PerPage int
+	PerPage *int
 	// Sort is the field on which to sort.
-	Sort string
+	Sort *string
 }
 
 // GetServices returns a ListPaginator for paginating through the resources.
 func (c *Client) GetServices(i *GetServicesInput) *ListPaginator[Service] {
-	return newPaginator[Service](c, &listInput{
-		Direction: i.Direction,
-		Sort:      i.Sort,
-		Page:      i.Page,
-		PerPage:   i.PerPage,
-	}, "/service")
+	input := &listInput{}
+	if i.Direction != nil {
+		input.Direction = *i.Direction
+	}
+	if i.Sort != nil {
+		input.Sort = *i.Sort
+	}
+	if i.Page != nil {
+		input.Page = *i.Page
+	}
+	if i.PerPage != nil {
+		input.PerPage = *i.PerPage
+	}
+	return newPaginator[Service](c, input, "/service")
 }
 
 // ListServicesInput is used as input to the ListServices function.
 type ListServicesInput struct {
 	// Direction is the direction in which to sort results.
-	Direction string
+	Direction *string
 	// Sort is the field on which to sort.
-	Sort string
+	Sort *string
 }
 
 // ListServices retrieves all resources. Not suitable for large collections.
@@ -154,7 +162,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	// "versions" array in the returned JSON response.
 	for i := range s.Versions {
 		if s.Versions[i].Active {
-			s.ActiveVersion = s.Versions[i].Number
+			s.ActiveVersion = ToPointer(s.Versions[i].Number)
 			break
 		}
 	}

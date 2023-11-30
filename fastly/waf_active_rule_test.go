@@ -10,20 +10,20 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	fixtureBase := "waf_active_rules/"
 
 	testService := createTestService(t, fixtureBase+"service/create", "service")
-	defer deleteTestService(t, fixtureBase+"/service/delete", testService.ID)
+	defer deleteTestService(t, fixtureBase+"/service/delete", *testService.ID)
 
-	tv := createTestVersion(t, fixtureBase+"/service/version", testService.ID)
+	tv := createTestVersion(t, fixtureBase+"/service/version", *testService.ID)
 
-	createTestLogging(t, fixtureBase+"/logging/create", testService.ID, tv.Number)
-	defer deleteTestLogging(t, fixtureBase+"/logging/delete", testService.ID, tv.Number)
+	createTestLogging(t, fixtureBase+"/logging/create", *testService.ID, tv.Number)
+	defer deleteTestLogging(t, fixtureBase+"/logging/delete", *testService.ID, tv.Number)
 
 	prefetch := "WAF_Prefetch"
-	createTestWAFCondition(t, fixtureBase+"/condition/create", testService.ID, prefetch, tv.Number)
+	createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ID, prefetch, tv.Number)
 
 	responseName := "WAf_Response"
-	createTestWAFResponseObject(t, fixtureBase+"/response_object/create", testService.ID, responseName, tv.Number)
+	createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ID, responseName, tv.Number)
 
-	waf := createWAF(t, fixtureBase+"/waf/create", testService.ID, prefetch, responseName, tv.Number)
+	waf := createWAF(t, fixtureBase+"/waf/create", *testService.ID, prefetch, responseName, tv.Number)
 	defer deleteWAF(t, fixtureBase+"/waf/delete", waf.ID, 1)
 
 	var err error

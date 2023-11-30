@@ -9,11 +9,11 @@ func TestClient_ACLEntries(t *testing.T) {
 	nameSuffix := "ACLEntries"
 
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
 
-	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ID)
 
-	testACL := createTestACL(t, fixtureBase+"acl", testService.ID, testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"acl", *testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	// Create
@@ -21,7 +21,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	var e *ACLEntry
 	record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateACLEntry(&CreateACLEntryInput{
-			ServiceID: testService.ID,
+			ServiceID: *testService.ID,
 			ACLID:     *testACL.ID,
 			IP:        ToPointer("10.0.0.3"),
 			Subnet:    ToPointer(8),
@@ -55,7 +55,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
 			ACLID:     *testACL.ID,
 			Direction: ToPointer("descend"),
-			ServiceID: testService.ID,
+			ServiceID: *testService.ID,
 			Sort:      ToPointer("created"),
 		})
 	})
@@ -75,7 +75,7 @@ func TestClient_ACLEntries(t *testing.T) {
 			ACLID:     *testACL.ID,
 			Direction: ToPointer("ascend"),
 			PerPage:   ToPointer(50),
-			ServiceID: testService.ID,
+			ServiceID: *testService.ID,
 			Sort:      ToPointer("ip"),
 		})
 
@@ -102,7 +102,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	var ne *ACLEntry
 	record(t, fixtureBase+"get", func(c *Client) {
 		ne, err = c.GetACLEntry(&GetACLEntryInput{
-			ServiceID: testService.ID,
+			ServiceID: *testService.ID,
 			ACLID:     *testACL.ID,
 			ID:        *e.ID,
 		})
@@ -128,7 +128,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	var ue *ACLEntry
 	record(t, fixtureBase+"update", func(c *Client) {
 		ue, err = c.UpdateACLEntry(&UpdateACLEntryInput{
-			ServiceID: testService.ID,
+			ServiceID: *testService.ID,
 			ACLID:     *testACL.ID,
 			ID:        *e.ID,
 			IP:        ToPointer("10.0.0.4"),
@@ -157,7 +157,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteACLEntry(&DeleteACLEntryInput{
-			ServiceID: testService.ID,
+			ServiceID: *testService.ID,
 			ACLID:     *testACL.ID,
 			ID:        *e.ID,
 		})

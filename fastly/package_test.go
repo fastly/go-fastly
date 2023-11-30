@@ -10,8 +10,8 @@ func TestClient_Package(t *testing.T) {
 	nameSuffix := "package"
 
 	testService := createTestServiceWasm(t, fixtureBase+"service_create", nameSuffix)
-	testVersion := createTestVersion(t, fixtureBase+"service_version", testService.ID)
-	defer deleteTestService(t, fixtureBase+"service_delete", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"service_version", *testService.ID)
+	defer deleteTestService(t, fixtureBase+"service_delete", *testService.ID)
 
 	testData := Package{
 		Metadata: &PackageMetadata{
@@ -31,7 +31,7 @@ func TestClient_Package(t *testing.T) {
 
 	recordIgnoreBody(t, fixtureBase+"update", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
-			ServiceID:      testService.ID,
+			ServiceID:      *testService.ID,
 			ServiceVersion: testVersion.Number,
 			PackagePath:    ToPointer("test_assets/package/valid.tar.gz"),
 		})
@@ -39,8 +39,8 @@ func TestClient_Package(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
+	if *wp.ServiceID != *testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ID)
 	}
 	if *wp.ServiceVersion != testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", *wp.ServiceVersion, testVersion.Number)
@@ -49,7 +49,7 @@ func TestClient_Package(t *testing.T) {
 	// Get
 	record(t, fixtureBase+"get", func(c *Client) {
 		wp, err = c.GetPackage(&GetPackageInput{
-			ServiceID:      testService.ID,
+			ServiceID:      *testService.ID,
 			ServiceVersion: testVersion.Number,
 		})
 	})
@@ -57,8 +57,8 @@ func TestClient_Package(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if *wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
+	if *wp.ServiceID != *testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ID)
 	}
 	if *wp.ServiceVersion != testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
@@ -88,7 +88,7 @@ func TestClient_Package(t *testing.T) {
 	validPackageContent, _ := os.ReadFile("test_assets/package/valid.tar.gz")
 	recordIgnoreBody(t, fixtureBase+"update", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
-			ServiceID:      testService.ID,
+			ServiceID:      *testService.ID,
 			ServiceVersion: testVersion.Number,
 			PackageContent: validPackageContent,
 		})
@@ -96,8 +96,8 @@ func TestClient_Package(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
+	if *wp.ServiceID != *testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ID)
 	}
 	if *wp.ServiceVersion != testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", *wp.ServiceVersion, testVersion.Number)
@@ -106,7 +106,7 @@ func TestClient_Package(t *testing.T) {
 	// Get
 	record(t, fixtureBase+"get", func(c *Client) {
 		wp, err = c.GetPackage(&GetPackageInput{
-			ServiceID:      testService.ID,
+			ServiceID:      *testService.ID,
 			ServiceVersion: testVersion.Number,
 		})
 	})
@@ -114,8 +114,8 @@ func TestClient_Package(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if *wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
+	if *wp.ServiceID != *testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ID)
 	}
 	if *wp.ServiceVersion != testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
@@ -141,7 +141,7 @@ func TestClient_Package(t *testing.T) {
 
 	recordIgnoreBody(t, fixtureBase+"update_invalid", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
-			ServiceID:      testService.ID,
+			ServiceID:      *testService.ID,
 			ServiceVersion: testVersion.Number,
 			PackagePath:    ToPointer("test_assets/package/invalid.tar.gz"),
 		})
@@ -155,7 +155,7 @@ func TestClient_Package(t *testing.T) {
 	invalidPackageContent, _ := os.ReadFile("test_assets/package/invalid.tar.gz")
 	recordIgnoreBody(t, fixtureBase+"update_invalid", func(c *Client) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
-			ServiceID:      testService.ID,
+			ServiceID:      *testService.ID,
 			ServiceVersion: testVersion.Number,
 			PackageContent: invalidPackageContent,
 		})

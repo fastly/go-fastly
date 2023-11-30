@@ -10,15 +10,15 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 
 	// Given: a test service with a dictionary and a batch of create operations,
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		ServiceID:    testService.ID,
+		ServiceID:    *testService.ID,
 		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
@@ -47,7 +47,7 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 		})
 	})
@@ -82,15 +82,15 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	// Given: a test service with a dictionary and dictionary items,
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		ServiceID:    testService.ID,
+		ServiceID:    *testService.ID,
 		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
@@ -116,7 +116,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	// When: I execute the batch delete operations against the Fastly API,
 	batchDeleteOperations := &BatchModifyDictionaryItemsInput{
-		ServiceID:    testService.ID,
+		ServiceID:    *testService.ID,
 		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
@@ -138,7 +138,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualDictionaryItems, err = client.ListDictionaryItems(&ListDictionaryItemsInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 		})
 	})
@@ -159,15 +159,15 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	// Given: a test service with a dictionary and dictionary items,
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		ServiceID:    testService.ID,
+		ServiceID:    *testService.ID,
 		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
@@ -193,7 +193,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	// When: I execute the batch update operations against the Fastly API,
 	batchUpdateOperations := &BatchModifyDictionaryItemsInput{
-		ServiceID:    testService.ID,
+		ServiceID:    *testService.ID,
 		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
@@ -215,7 +215,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_update", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 		})
 	})
@@ -265,15 +265,15 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	// Given: a test service with a dictionary and dictionary items,
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ID, testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	batchCreateOperations := &BatchModifyDictionaryItemsInput{
-		ServiceID:    testService.ID,
+		ServiceID:    *testService.ID,
 		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
@@ -294,7 +294,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	// When: I execute the batch upsert operations against the Fastly API
 	batchUpsertOperations := &BatchModifyDictionaryItemsInput{
-		ServiceID:    testService.ID,
+		ServiceID:    *testService.ID,
 		DictionaryID: *testDictionary.ID,
 		Items: []*BatchDictionaryItem{
 			{
@@ -321,7 +321,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	var actualDictionaryItems []*DictionaryItem
 	record(t, fixtureBase+"list_after_upsert", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
-			ServiceID:    testService.ID,
+			ServiceID:    *testService.ID,
 			DictionaryID: *testDictionary.ID,
 		})
 	})

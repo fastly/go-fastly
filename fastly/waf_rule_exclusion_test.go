@@ -15,7 +15,7 @@ func TestClient_WAF_Rule_Exclusion_list(t *testing.T) {
 	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
-	defer deleteTestService(t, fixtureBase+"service/delete", testService.ID)
+	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
 	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
 
 	excl1In := buildWAFRuleExclusion1(waf.ID, 1)
@@ -40,7 +40,7 @@ func TestClient_WAF_Rule_Exclusion_list_filters(t *testing.T) {
 	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
-	defer deleteTestService(t, fixtureBase+"service/delete", testService.ID)
+	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
 	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
 
 	excl1In := buildWAFRuleExclusion1(waf.ID, 1)
@@ -72,7 +72,7 @@ func TestClient_WAF_Rule_Exclusion_create(t *testing.T) {
 	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
-	defer deleteTestService(t, fixtureBase+"service/delete", testService.ID)
+	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
 	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
 
 	exclIn := buildWAFRuleExclusion1(waf.ID, 1)
@@ -93,7 +93,7 @@ func TestClient_WAF_Rule_Exclusion_update(t *testing.T) {
 	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
-	defer deleteTestService(t, fixtureBase+"service/delete", testService.ID)
+	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
 	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
 
 	exclIn := buildWAFRuleExclusion1(waf.ID, 1)
@@ -117,7 +117,7 @@ func TestClient_WAF_Rule_Exclusion_delete(t *testing.T) {
 	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
-	defer deleteTestService(t, fixtureBase+"service/delete", testService.ID)
+	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
 	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
 
 	exclIn := buildWAFRuleExclusion1(waf.ID, 1)
@@ -327,7 +327,7 @@ func extractModSecID(wafRule []*WAFRule) []int {
 }
 
 func createWAFWithRulesForExclusion(t *testing.T, fixtureBase string, testService *Service, version *Version, responseName string) *WAF {
-	waf := createWAF(t, fixtureBase+"waf/create", testService.ID, "", responseName, version.Number)
+	waf := createWAF(t, fixtureBase+"waf/create", *testService.ID, "", responseName, version.Number)
 
 	var err error
 	rulesIn := buildWAFRulesForExclusion("log")
@@ -367,9 +367,9 @@ func buildWAFRulesForExclusion(status string) []*WAFActiveRule {
 
 func createServiceForWAF(t *testing.T, fixtureBase string) (*Service, *Version, string) {
 	service := createTestService(t, fixtureBase+"service/create", "service-"+strconv.Itoa(rand.Int()))
-	version := createTestVersion(t, fixtureBase+"service/version", service.ID)
+	version := createTestVersion(t, fixtureBase+"service/version", *service.ID)
 	responseName := "WAf_Response"
-	createTestWAFResponseObject(t, fixtureBase+"response_object/create", service.ID, responseName, version.Number)
+	createTestWAFResponseObject(t, fixtureBase+"response_object/create", *service.ID, responseName, version.Number)
 	return service, version, responseName
 }
 
