@@ -53,38 +53,38 @@ func TestClient_RequestSettings(t *testing.T) {
 		})
 	}()
 
-	if rs.Name != "test-request-setting" {
-		t.Errorf("bad name: %q", rs.Name)
+	if *rs.Name != "test-request-setting" {
+		t.Errorf("bad name: %q", *rs.Name)
 	}
-	if !rs.ForceMiss {
-		t.Errorf("bad force_miss: %t", rs.ForceMiss)
+	if !*rs.ForceMiss {
+		t.Errorf("bad force_miss: %t", *rs.ForceMiss)
 	}
-	if !rs.ForceSSL {
-		t.Errorf("bad force_ssl: %t", rs.ForceSSL)
+	if !*rs.ForceSSL {
+		t.Errorf("bad force_ssl: %t", *rs.ForceSSL)
 	}
-	if rs.Action != RequestSettingActionLookup {
-		t.Errorf("bad action: %q", rs.Action)
+	if *rs.Action != RequestSettingActionLookup {
+		t.Errorf("bad action: %q", *rs.Action)
 	}
-	if !rs.BypassBusyWait {
-		t.Errorf("bad bypass_busy_wait: %t", rs.BypassBusyWait)
+	if !*rs.BypassBusyWait {
+		t.Errorf("bad bypass_busy_wait: %t", *rs.BypassBusyWait)
 	}
-	if rs.MaxStaleAge != 30 {
-		t.Errorf("bad max_stale_age: %d", rs.MaxStaleAge)
+	if *rs.MaxStaleAge != 30 {
+		t.Errorf("bad max_stale_age: %d", *rs.MaxStaleAge)
 	}
-	if rs.HashKeys != "a,b,c" {
-		t.Errorf("bad has_keys: %q", rs.HashKeys)
+	if *rs.HashKeys != "a,b,c" {
+		t.Errorf("bad has_keys: %q", *rs.HashKeys)
 	}
-	if rs.XForwardedFor != RequestSettingXFFLeave {
-		t.Errorf("bad xff: %q", rs.XForwardedFor)
+	if *rs.XForwardedFor != RequestSettingXFFLeave {
+		t.Errorf("bad xff: %q", *rs.XForwardedFor)
 	}
-	if !rs.TimerSupport {
-		t.Errorf("bad timer_support: %t", rs.TimerSupport)
+	if !*rs.TimerSupport {
+		t.Errorf("bad timer_support: %t", *rs.TimerSupport)
 	}
-	if !rs.GeoHeaders {
-		t.Errorf("bad geo_headers: %t", rs.GeoHeaders)
+	if !*rs.GeoHeaders {
+		t.Errorf("bad geo_headers: %t", *rs.GeoHeaders)
 	}
-	if rs.DefaultHost != "example.com" {
-		t.Errorf("bad default_host: %q", rs.DefaultHost)
+	if *rs.DefaultHost != "example.com" {
+		t.Errorf("bad default_host: %q", *rs.DefaultHost)
 	}
 
 	// List
@@ -114,38 +114,38 @@ func TestClient_RequestSettings(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if rs.Name != nrs.Name {
-		t.Errorf("bad name: %q (%q)", rs.Name, nrs.Name)
+	if *rs.Name != *nrs.Name {
+		t.Errorf("bad name: %q (%q)", *rs.Name, *nrs.Name)
 	}
-	if rs.ForceMiss != nrs.ForceMiss {
-		t.Errorf("bad force_miss: %t (%t)", rs.ForceMiss, nrs.ForceMiss)
+	if *rs.ForceMiss != *nrs.ForceMiss {
+		t.Errorf("bad force_miss: %t (%t)", *rs.ForceMiss, *nrs.ForceMiss)
 	}
-	if rs.ForceSSL != nrs.ForceSSL {
-		t.Errorf("bad force_ssl: %t (%t)", rs.ForceSSL, nrs.ForceSSL)
+	if *rs.ForceSSL != *nrs.ForceSSL {
+		t.Errorf("bad force_ssl: %t (%t)", *rs.ForceSSL, *nrs.ForceSSL)
 	}
-	if rs.Action != nrs.Action {
-		t.Errorf("bad action: %q (%q)", rs.Action, nrs.Action)
+	if *rs.Action != *nrs.Action {
+		t.Errorf("bad action: %q (%q)", *rs.Action, *nrs.Action)
 	}
-	if rs.BypassBusyWait != nrs.BypassBusyWait {
-		t.Errorf("bad bypass_busy_wait: %t (%t)", rs.BypassBusyWait, nrs.BypassBusyWait)
+	if *rs.BypassBusyWait != *nrs.BypassBusyWait {
+		t.Errorf("bad bypass_busy_wait: %t (%t)", *rs.BypassBusyWait, *nrs.BypassBusyWait)
 	}
-	if rs.MaxStaleAge != nrs.MaxStaleAge {
-		t.Errorf("bad max_stale_age: %d (%d)", rs.MaxStaleAge, nrs.MaxStaleAge)
+	if *rs.MaxStaleAge != *nrs.MaxStaleAge {
+		t.Errorf("bad max_stale_age: %d (%d)", *rs.MaxStaleAge, *nrs.MaxStaleAge)
 	}
-	if rs.HashKeys != nrs.HashKeys {
-		t.Errorf("bad has_keys: %q (%q)", rs.HashKeys, nrs.HashKeys)
+	if *rs.HashKeys != *nrs.HashKeys {
+		t.Errorf("bad has_keys: %q (%q)", *rs.HashKeys, *nrs.HashKeys)
 	}
-	if rs.XForwardedFor != nrs.XForwardedFor {
-		t.Errorf("bad xff: %q (%q)", rs.XForwardedFor, nrs.XForwardedFor)
+	if *rs.XForwardedFor != *nrs.XForwardedFor {
+		t.Errorf("bad xff: %q (%q)", *rs.XForwardedFor, *nrs.XForwardedFor)
 	}
-	if rs.TimerSupport != nrs.TimerSupport {
-		t.Errorf("bad timer_support: %t (%t)", rs.TimerSupport, nrs.TimerSupport)
+	if *rs.TimerSupport != *nrs.TimerSupport {
+		t.Errorf("bad timer_support: %t (%t)", *rs.TimerSupport, *nrs.TimerSupport)
 	}
-	if rs.GeoHeaders != nrs.GeoHeaders {
-		t.Errorf("bad geo_headers: %t (%t)", rs.GeoHeaders, nrs.GeoHeaders)
+	if *rs.GeoHeaders != *nrs.GeoHeaders {
+		t.Errorf("bad geo_headers: %t (%t)", *rs.GeoHeaders, *nrs.GeoHeaders)
 	}
-	if rs.DefaultHost != nrs.DefaultHost {
-		t.Errorf("bad default_host: %q (%q)", rs.DefaultHost, nrs.DefaultHost)
+	if *rs.DefaultHost != *nrs.DefaultHost {
+		t.Errorf("bad default_host: %q (%q)", *rs.DefaultHost, *nrs.DefaultHost)
 	}
 
 	// Update
@@ -162,11 +162,11 @@ func TestClient_RequestSettings(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if urs.Name != "new-test-request-setting" {
-		t.Errorf("bad name: %q", urs.Name)
+	if *urs.Name != "new-test-request-setting" {
+		t.Errorf("bad name: %q", *urs.Name)
 	}
-	if urs.Action != RequestSettingActionPass {
-		t.Errorf("bad action: %q", urs.Action)
+	if *urs.Action != RequestSettingActionPass {
+		t.Errorf("bad action: %q", *urs.Action)
 	}
 
 	// Update 2 (wrap empty string with RequestSettingAction)
@@ -182,8 +182,8 @@ func TestClient_RequestSettings(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if urs2.Action != "" {
-		t.Errorf("bad action: %q", urs2.Action)
+	if *urs2.Action != "" {
+		t.Errorf("bad action: %q", *urs2.Action)
 	}
 
 	// Update 3 (use explicit RequestSettingActionUnset type)
@@ -199,8 +199,8 @@ func TestClient_RequestSettings(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if urs3.Action != RequestSettingActionUnset {
-		t.Errorf("bad action: %q", urs3.Action)
+	if *urs3.Action != RequestSettingActionUnset {
+		t.Errorf("bad action: %q", *urs3.Action)
 	}
 
 	// Delete
