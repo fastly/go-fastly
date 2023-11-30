@@ -84,42 +84,41 @@ func TestClient_NewRelic(t *testing.T) {
 		})
 	}()
 
-	if newRelicResp1.Name != "test-newrelic" {
-		t.Errorf("bad name: %q", newRelicResp1.Name)
+	if *newRelicResp1.Name != "test-newrelic" {
+		t.Errorf("bad name: %q", *newRelicResp1.Name)
 	}
-	if newRelicResp1.Token != "abcd1234" {
-		t.Errorf("bad token: %q", newRelicResp1.Token)
+	if *newRelicResp1.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *newRelicResp1.Token)
 	}
-	if newRelicResp1.Format != "format" {
-		t.Errorf("bad format: %q", newRelicResp1.Format)
+	if *newRelicResp1.Format != "format" {
+		t.Errorf("bad format: %q", *newRelicResp1.Format)
 	}
-	if newRelicResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", newRelicResp1.FormatVersion)
+	if *newRelicResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
 	}
-	if newRelicResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", newRelicResp1.Placement)
+	if *newRelicResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
 	}
-	if newRelicResp1.Region != "us" {
-		t.Errorf("bad region: %q", newRelicResp1.Region)
+	if *newRelicResp1.Region != "us" {
+		t.Errorf("bad region: %q", *newRelicResp1.Region)
 	}
-
-	if newRelicResp2.Name != "test-newrelic-2" {
-		t.Errorf("bad name: %q", newRelicResp2.Name)
+	if *newRelicResp2.Name != "test-newrelic-2" {
+		t.Errorf("bad name: %q", *newRelicResp2.Name)
 	}
-	if newRelicResp2.Token != "abcd1234" {
-		t.Errorf("bad token: %q", newRelicResp2.Token)
+	if *newRelicResp2.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *newRelicResp2.Token)
 	}
-	if newRelicResp2.Format != "format" {
-		t.Errorf("bad format: %q", newRelicResp2.Format)
+	if *newRelicResp2.Format != "format" {
+		t.Errorf("bad format: %q", *newRelicResp2.Format)
 	}
-	if newRelicResp2.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", newRelicResp2.FormatVersion)
+	if *newRelicResp2.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
 	}
-	if newRelicResp2.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", newRelicResp2.Placement)
+	if *newRelicResp2.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
 	}
-	if newRelicResp2.Region != "eu" {
-		t.Errorf("bad region: %q", newRelicResp2.Region)
+	if *newRelicResp2.Region != "eu" {
+		t.Errorf("bad region: %q", *newRelicResp2.Region)
 	}
 
 	// List
@@ -161,42 +160,41 @@ func TestClient_NewRelic(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if newRelicResp1.Name != newRelicGetResp.Name {
-		t.Errorf("bad name: %q", newRelicResp1.Name)
+	if *newRelicResp1.Name != *newRelicGetResp.Name {
+		t.Errorf("bad name: %q", *newRelicResp1.Name)
 	}
-	if newRelicResp1.Token != newRelicGetResp.Token {
-		t.Errorf("bad token: %q", newRelicResp1.Token)
+	if *newRelicResp1.Token != *newRelicGetResp.Token {
+		t.Errorf("bad token: %q", *newRelicResp1.Token)
 	}
-	if newRelicResp1.Format != newRelicGetResp.Format {
-		t.Errorf("bad format: %q", newRelicResp1.Format)
+	if *newRelicResp1.Format != *newRelicGetResp.Format {
+		t.Errorf("bad format: %q", *newRelicResp1.Format)
 	}
-	if newRelicResp1.FormatVersion != newRelicGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", newRelicResp1.FormatVersion)
+	if *newRelicResp1.FormatVersion != *newRelicGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
 	}
-	if newRelicResp1.Placement != newRelicGetResp.Placement {
-		t.Errorf("bad placement: %q", newRelicResp1.Placement)
+	if *newRelicResp1.Placement != *newRelicGetResp.Placement {
+		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
 	}
-	if newRelicResp1.Region != newRelicGetResp.Region {
-		t.Errorf("bad region: %q", newRelicResp1.Region)
+	if *newRelicResp1.Region != *newRelicGetResp.Region {
+		t.Errorf("bad region: %q", *newRelicResp1.Region)
 	}
-
-	if newRelicResp2.Name != newRelicGetResp2.Name {
-		t.Errorf("bad name: %q", newRelicResp2.Name)
+	if *newRelicResp2.Name != *newRelicGetResp2.Name {
+		t.Errorf("bad name: %q", *newRelicResp2.Name)
 	}
-	if newRelicResp2.Token != newRelicGetResp2.Token {
-		t.Errorf("bad token: %q", newRelicResp2.Token)
+	if *newRelicResp2.Token != *newRelicGetResp2.Token {
+		t.Errorf("bad token: %q", *newRelicResp2.Token)
 	}
-	if newRelicResp2.Format != newRelicGetResp2.Format {
-		t.Errorf("bad format: %q", newRelicResp2.Format)
+	if *newRelicResp2.Format != *newRelicGetResp2.Format {
+		t.Errorf("bad format: %q", *newRelicResp2.Format)
 	}
-	if newRelicResp2.FormatVersion != newRelicGetResp2.FormatVersion {
-		t.Errorf("bad format_version: %q", newRelicResp2.FormatVersion)
+	if *newRelicResp2.FormatVersion != *newRelicGetResp2.FormatVersion {
+		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
 	}
-	if newRelicResp2.Placement != newRelicGetResp2.Placement {
-		t.Errorf("bad placement: %q", newRelicResp2.Placement)
+	if *newRelicResp2.Placement != *newRelicGetResp2.Placement {
+		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
 	}
-	if newRelicResp2.Region != newRelicGetResp2.Region {
-		t.Errorf("bad region: %q", newRelicResp2.Region)
+	if *newRelicResp2.Region != *newRelicGetResp2.Region {
+		t.Errorf("bad region: %q", *newRelicResp2.Region)
 	}
 
 	// Update
@@ -228,14 +226,14 @@ func TestClient_NewRelic(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if newRelicUpdateResp1.Name != "new-test-newrelic" {
-		t.Errorf("bad name: %q", newRelicUpdateResp1.Name)
+	if *newRelicUpdateResp1.Name != "new-test-newrelic" {
+		t.Errorf("bad name: %q", *newRelicUpdateResp1.Name)
 	}
-	if newRelicUpdateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", newRelicUpdateResp1.FormatVersion)
+	if *newRelicUpdateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *newRelicUpdateResp1.FormatVersion)
 	}
-	if newRelicUpdateResp1.Region != "eu" {
-		t.Errorf("bad region: %q", newRelicUpdateResp1.Region)
+	if *newRelicUpdateResp1.Region != "eu" {
+		t.Errorf("bad region: %q", *newRelicUpdateResp1.Region)
 	}
 
 	// Delete
