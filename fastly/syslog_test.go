@@ -77,47 +77,47 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		})
 	}()
 
-	if s.Name != "test-syslog" {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != "test-syslog" {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.Address != "example.com" {
-		t.Errorf("bad address: %q", s.Address)
+	if *s.Address != "example.com" {
+		t.Errorf("bad address: %q", *s.Address)
 	}
-	if s.Hostname != "example.com" {
-		t.Errorf("bad hostname: %q", s.Hostname)
+	if *s.Hostname != "example.com" {
+		t.Errorf("bad hostname: %q", *s.Hostname)
 	}
-	if s.Port != 1234 {
-		t.Errorf("bad port: %q", s.Port)
+	if *s.Port != 1234 {
+		t.Errorf("bad port: %q", *s.Port)
 	}
-	if !s.UseTLS {
-		t.Errorf("bad use_tls: %t", s.UseTLS)
+	if !*s.UseTLS {
+		t.Errorf("bad use_tls: %t", *s.UseTLS)
 	}
-	if s.TLSCACert != caCert {
-		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
+	if *s.TLSCACert != caCert {
+		t.Errorf("bad tls_ca_cert: %q", *s.TLSCACert)
 	}
-	if s.TLSHostname != "example.com" {
-		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	if *s.TLSHostname != "example.com" {
+		t.Errorf("bad tls_hostname: %q", *s.TLSHostname)
 	}
-	if s.TLSClientCert != clientCert {
-		t.Errorf("bad tls_client_cert: %q", s.TLSClientCert)
+	if *s.TLSClientCert != clientCert {
+		t.Errorf("bad tls_client_cert: %q", *s.TLSClientCert)
 	}
-	if s.TLSClientKey != clientKey {
-		t.Errorf("bad tls_client_key: %q", s.TLSClientKey)
+	if *s.TLSClientKey != clientKey {
+		t.Errorf("bad tls_client_key: %q", *s.TLSClientKey)
 	}
-	if s.Token != "abcd1234" {
-		t.Errorf("bad token: %q", s.Token)
+	if *s.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *s.Token)
 	}
-	if s.Format != "format" {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != "format" {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != 2 {
-		t.Errorf("bad format_version: %d", s.FormatVersion)
+	if *s.FormatVersion != 2 {
+		t.Errorf("bad format_version: %d", *s.FormatVersion)
 	}
-	if s.MessageType != "classic" {
-		t.Errorf("bad message_type: %s", s.MessageType)
+	if *s.MessageType != "classic" {
+		t.Errorf("bad message_type: %s", *s.MessageType)
 	}
-	if s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// List
@@ -147,47 +147,47 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if err != nil {
 		t.Fatal(err)
 	}
-	if s.Name != ns.Name {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != *ns.Name {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.Address != ns.Address {
-		t.Errorf("bad address: %q", s.Address)
+	if *s.Address != *ns.Address {
+		t.Errorf("bad address: %q", *s.Address)
 	}
-	if s.Hostname != ns.Hostname {
-		t.Errorf("bad hostname: %q", s.Hostname)
+	if *s.Hostname != *ns.Hostname {
+		t.Errorf("bad hostname: %q", *s.Hostname)
 	}
-	if s.Port != ns.Port {
-		t.Errorf("bad port: %q", s.Port)
+	if *s.Port != *ns.Port {
+		t.Errorf("bad port: %q", *s.Port)
 	}
-	if s.UseTLS != ns.UseTLS {
-		t.Errorf("bad use_tls: %t", s.UseTLS)
+	if *s.UseTLS != *ns.UseTLS {
+		t.Errorf("bad use_tls: %t", *s.UseTLS)
 	}
-	if s.TLSCACert != ns.TLSCACert {
-		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
+	if *s.TLSCACert != *ns.TLSCACert {
+		t.Errorf("bad tls_ca_cert: %q", *s.TLSCACert)
 	}
-	if s.TLSHostname != ns.TLSHostname {
-		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	if *s.TLSHostname != *ns.TLSHostname {
+		t.Errorf("bad tls_hostname: %q", *s.TLSHostname)
 	}
-	if s.TLSClientCert != ns.TLSClientCert {
-		t.Errorf("bad tls_client_cert: %q", s.TLSClientCert)
+	if *s.TLSClientCert != *ns.TLSClientCert {
+		t.Errorf("bad tls_client_cert: %q", *s.TLSClientCert)
 	}
-	if s.TLSClientKey != ns.TLSClientKey {
-		t.Errorf("bad tls_client_key: %q", s.TLSClientKey)
+	if *s.TLSClientKey != *ns.TLSClientKey {
+		t.Errorf("bad tls_client_key: %q", *s.TLSClientKey)
 	}
-	if s.Token != ns.Token {
-		t.Errorf("bad token: %q", s.Token)
+	if *s.Token != *ns.Token {
+		t.Errorf("bad token: %q", *s.Token)
 	}
-	if s.Format != ns.Format {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != *ns.Format {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != ns.FormatVersion {
-		t.Errorf("bad format_version: %q", s.FormatVersion)
+	if *s.FormatVersion != *ns.FormatVersion {
+		t.Errorf("bad format_version: %q", *s.FormatVersion)
 	}
-	if s.MessageType != ns.MessageType {
-		t.Errorf("bad message_type: %q", s.MessageType)
+	if *s.MessageType != *ns.MessageType {
+		t.Errorf("bad message_type: %q", *s.MessageType)
 	}
-	if s.Placement != ns.Placement {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != *ns.Placement {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// Update
@@ -204,12 +204,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.Name != "new-test-syslog" {
-		t.Errorf("bad name: %q", us.Name)
+	if *us.Name != "new-test-syslog" {
+		t.Errorf("bad name: %q", *us.Name)
 	}
 
-	if us.FormatVersion != 2 {
-		t.Errorf("bad format_version: %d", us.FormatVersion)
+	if *us.FormatVersion != 2 {
+		t.Errorf("bad format_version: %d", *us.FormatVersion)
 	}
 
 	// Delete

@@ -3,51 +3,32 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Syslog represents a syslog response from the Fastly API.
 type Syslog struct {
-	Address           string     `mapstructure:"address"`
+	Address           *string    `mapstructure:"address"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Hostname          string     `mapstructure:"hostname"`
-	IPV4              string     `mapstructure:"ipv4"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Port              int        `mapstructure:"port"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TLSCACert         string     `mapstructure:"tls_ca_cert"`
-	TLSClientCert     string     `mapstructure:"tls_client_cert"`
-	TLSClientKey      string     `mapstructure:"tls_client_key"`
-	TLSHostname       string     `mapstructure:"tls_hostname"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Hostname          *string    `mapstructure:"hostname"`
+	IPV4              *string    `mapstructure:"ipv4"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Port              *int       `mapstructure:"port"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TLSCACert         *string    `mapstructure:"tls_ca_cert"`
+	TLSClientCert     *string    `mapstructure:"tls_client_cert"`
+	TLSClientKey      *string    `mapstructure:"tls_client_key"`
+	TLSHostname       *string    `mapstructure:"tls_hostname"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	UseTLS            bool       `mapstructure:"use_tls"`
-}
-
-// syslogsByName is a sortable list of syslogs.
-type syslogsByName []*Syslog
-
-// Len implement the sortable interface.
-func (s syslogsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s syslogsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s syslogsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	UseTLS            *bool      `mapstructure:"use_tls"`
 }
 
 // ListSyslogsInput is used as input to the ListSyslogs function.
@@ -78,7 +59,6 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
-	sort.Stable(syslogsByName(ss))
 	return ss, nil
 }
 
