@@ -34,7 +34,7 @@ func TestClient_WAFs(t *testing.T) {
 			ServiceID:         testService.ID,
 			ServiceVersion:    tv.Number,
 			PrefetchCondition: *condition.Name,
-			Response:          ro.Name,
+			Response:          *ro.Name,
 		})
 	})
 	if err != nil {
@@ -101,7 +101,7 @@ func TestClient_WAFs(t *testing.T) {
 			ServiceID:      &testService.ID,
 			ServiceVersion: &tv.Number,
 			ID:             waf.ID,
-			Response:       &nro.Name,
+			Response:       nro.Name,
 		})
 	})
 	if err != nil {

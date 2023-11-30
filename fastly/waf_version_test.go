@@ -35,7 +35,7 @@ func TestClient_WAF_Versions(t *testing.T) {
 			ServiceID:         testService.ID,
 			ServiceVersion:    tv.Number,
 			PrefetchCondition: *condition.Name,
-			Response:          ro.Name,
+			Response:          *ro.Name,
 		})
 	})
 	if err != nil {

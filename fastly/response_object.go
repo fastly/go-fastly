@@ -3,42 +3,23 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // ResponseObject represents a response object response from the Fastly API.
 type ResponseObject struct {
-	CacheCondition   string     `mapstructure:"cache_condition"`
-	Content          string     `mapstructure:"content"`
-	ContentType      string     `mapstructure:"content_type"`
+	CacheCondition   *string    `mapstructure:"cache_condition"`
+	Content          *string    `mapstructure:"content"`
+	ContentType      *string    `mapstructure:"content_type"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
-	Name             string     `mapstructure:"name"`
-	RequestCondition string     `mapstructure:"request_condition"`
-	Response         string     `mapstructure:"response"`
-	ServiceID        string     `mapstructure:"service_id"`
-	ServiceVersion   int        `mapstructure:"version"`
-	Status           int        `mapstructure:"status"`
+	Name             *string    `mapstructure:"name"`
+	RequestCondition *string    `mapstructure:"request_condition"`
+	Response         *string    `mapstructure:"response"`
+	ServiceID        *string    `mapstructure:"service_id"`
+	ServiceVersion   *int       `mapstructure:"version"`
+	Status           *int       `mapstructure:"status"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
-}
-
-// responseObjectsByName is a sortable list of response objects.
-type responseObjectsByName []*ResponseObject
-
-// Len implement the sortable interface.
-func (s responseObjectsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s responseObjectsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s responseObjectsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListResponseObjectsInput is used as input to the ListResponseObjects
@@ -70,7 +51,6 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
-	sort.Stable(responseObjectsByName(bs))
 	return bs, nil
 }
 

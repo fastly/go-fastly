@@ -47,20 +47,20 @@ func TestClient_ResponseObjects(t *testing.T) {
 		})
 	}()
 
-	if ro.Name != "test-response-object" {
-		t.Errorf("bad name: %q", ro.Name)
+	if *ro.Name != "test-response-object" {
+		t.Errorf("bad name: %q", *ro.Name)
 	}
-	if ro.Status != 200 {
-		t.Errorf("bad status: %q", ro.Status)
+	if *ro.Status != 200 {
+		t.Errorf("bad status: %q", *ro.Status)
 	}
-	if ro.Response != "Ok" {
-		t.Errorf("bad response: %q", ro.Response)
+	if *ro.Response != "Ok" {
+		t.Errorf("bad response: %q", *ro.Response)
 	}
-	if ro.Content != "abcd" {
-		t.Errorf("bad content: %q", ro.Content)
+	if *ro.Content != "abcd" {
+		t.Errorf("bad content: %q", *ro.Content)
 	}
-	if ro.ContentType != "text/plain" {
-		t.Errorf("bad content_type: %q", ro.ContentType)
+	if *ro.ContentType != "text/plain" {
+		t.Errorf("bad content_type: %q", *ro.ContentType)
 	}
 
 	// List
@@ -90,20 +90,20 @@ func TestClient_ResponseObjects(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ro.Name != nro.Name {
-		t.Errorf("bad name: %q", ro.Name)
+	if *ro.Name != *nro.Name {
+		t.Errorf("bad name: %q", *ro.Name)
 	}
-	if ro.Status != nro.Status {
-		t.Errorf("bad status: %q", ro.Status)
+	if *ro.Status != *nro.Status {
+		t.Errorf("bad status: %q", *ro.Status)
 	}
-	if ro.Response != nro.Response {
-		t.Errorf("bad response: %q", ro.Response)
+	if *ro.Response != *nro.Response {
+		t.Errorf("bad response: %q", *ro.Response)
 	}
-	if ro.Content != nro.Content {
-		t.Errorf("bad content: %q", ro.Content)
+	if *ro.Content != *nro.Content {
+		t.Errorf("bad content: %q", *ro.Content)
 	}
-	if ro.ContentType != nro.ContentType {
-		t.Errorf("bad content_type: %q", ro.ContentType)
+	if *ro.ContentType != *nro.ContentType {
+		t.Errorf("bad content_type: %q", *ro.ContentType)
 	}
 
 	// Update
@@ -119,8 +119,8 @@ func TestClient_ResponseObjects(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uro.Name != "new-test-response-object" {
-		t.Errorf("bad name: %q", uro.Name)
+	if *uro.Name != "new-test-response-object" {
+		t.Errorf("bad name: %q", *uro.Name)
 	}
 
 	// Delete
