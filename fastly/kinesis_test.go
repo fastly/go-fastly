@@ -113,44 +113,44 @@ func TestClient_Kinesis(t *testing.T) {
 		})
 	}()
 
-	if kinesisCreateResp1.Name != "test-kinesis" {
-		t.Errorf("bad name: %q", kinesisCreateResp1.Name)
+	if *kinesisCreateResp1.Name != "test-kinesis" {
+		t.Errorf("bad name: %q", *kinesisCreateResp1.Name)
 	}
-	if kinesisCreateResp1.StreamName != "stream-name" {
-		t.Errorf("bad bucket_name: %q", kinesisCreateResp1.StreamName)
+	if *kinesisCreateResp1.StreamName != "stream-name" {
+		t.Errorf("bad bucket_name: %q", *kinesisCreateResp1.StreamName)
 	}
-	if kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
-		t.Errorf("bad access_key: %q", kinesisCreateResp1.AccessKey)
+	if *kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+		t.Errorf("bad access_key: %q", *kinesisCreateResp1.AccessKey)
 	}
-	if kinesisCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
-		t.Errorf("bad secret_key: %q", kinesisCreateResp1.SecretKey)
+	if *kinesisCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
+		t.Errorf("bad secret_key: %q", *kinesisCreateResp1.SecretKey)
 	}
-	if kinesisCreateResp1.IAMRole != "" {
-		t.Errorf("bad iam_role: %q", kinesisCreateResp1.IAMRole)
+	if kinesisCreateResp1.IAMRole != nil {
+		t.Errorf("bad iam_role: %q", *kinesisCreateResp1.IAMRole)
 	}
-	if kinesisCreateResp1.Region != "us-east-1" {
-		t.Errorf("bad domain: %q", kinesisCreateResp1.Region)
+	if *kinesisCreateResp1.Region != "us-east-1" {
+		t.Errorf("bad domain: %q", *kinesisCreateResp1.Region)
 	}
-	if kinesisCreateResp1.Format != "format" {
-		t.Errorf("bad format: %q", kinesisCreateResp1.Format)
+	if *kinesisCreateResp1.Format != "format" {
+		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
-	if kinesisCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", kinesisCreateResp1.FormatVersion)
+	if *kinesisCreateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
 	}
-	if kinesisCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", kinesisCreateResp1.Placement)
+	if *kinesisCreateResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
 	}
-	if kinesisCreateResp1.ResponseCondition != "" {
-		t.Errorf("bad response_condition: %q", kinesisCreateResp1.ResponseCondition)
+	if *kinesisCreateResp1.ResponseCondition != "" {
+		t.Errorf("bad response_condition: %q", *kinesisCreateResp1.ResponseCondition)
 	}
-	if kinesisCreateResp2.AccessKey != "" {
-		t.Errorf("bad access_key: %q", kinesisCreateResp2.AccessKey)
+	if kinesisCreateResp2.AccessKey != nil {
+		t.Errorf("bad access_key: %q", *kinesisCreateResp2.AccessKey)
 	}
-	if kinesisCreateResp2.SecretKey != "" {
-		t.Errorf("bad secret_key: %q", kinesisCreateResp2.SecretKey)
+	if kinesisCreateResp2.SecretKey != nil {
+		t.Errorf("bad secret_key: %q", *kinesisCreateResp2.SecretKey)
 	}
-	if kinesisCreateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
-		t.Errorf("bad iam_role: %q", kinesisCreateResp2.IAMRole)
+	if *kinesisCreateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
+		t.Errorf("bad iam_role: %q", *kinesisCreateResp2.IAMRole)
 	}
 
 	// List
@@ -192,44 +192,50 @@ func TestClient_Kinesis(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if kinesisCreateResp1.Name != kinesisGetResp.Name {
-		t.Errorf("bad name: %q", kinesisCreateResp1.Name)
+	if *kinesisCreateResp1.Name != *kinesisGetResp.Name {
+		t.Errorf("bad name: %q", *kinesisCreateResp1.Name)
 	}
-	if kinesisCreateResp1.StreamName != kinesisGetResp.StreamName {
-		t.Errorf("bad bucket_name: %q", kinesisCreateResp1.StreamName)
+	if *kinesisCreateResp1.StreamName != *kinesisGetResp.StreamName {
+		t.Errorf("bad bucket_name: %q", *kinesisCreateResp1.StreamName)
 	}
-	if kinesisCreateResp1.AccessKey != kinesisGetResp.AccessKey {
-		t.Errorf("bad access_key: %q", kinesisCreateResp1.AccessKey)
+	if *kinesisCreateResp1.AccessKey != *kinesisGetResp.AccessKey {
+		t.Errorf("bad access_key: %q", *kinesisCreateResp1.AccessKey)
 	}
-	if kinesisCreateResp1.SecretKey != kinesisGetResp.SecretKey {
-		t.Errorf("bad secret_key: %q", kinesisCreateResp1.SecretKey)
+	if *kinesisCreateResp1.SecretKey != *kinesisGetResp.SecretKey {
+		t.Errorf("bad secret_key: %q", *kinesisCreateResp1.SecretKey)
 	}
-	if kinesisCreateResp1.IAMRole != kinesisGetResp.IAMRole {
-		t.Errorf("bad iam_role: %q", kinesisCreateResp1.IAMRole)
+	if kinesisCreateResp1.IAMRole != nil && kinesisGetResp.IAMRole != nil {
+		if *kinesisCreateResp1.IAMRole != *kinesisGetResp.IAMRole {
+			t.Errorf("bad iam_role: %q", *kinesisCreateResp1.IAMRole)
+		}
 	}
-	if kinesisCreateResp1.Region != kinesisGetResp.Region {
-		t.Errorf("bad domain: %q", kinesisCreateResp1.Region)
+	if *kinesisCreateResp1.Region != *kinesisGetResp.Region {
+		t.Errorf("bad domain: %q", *kinesisCreateResp1.Region)
 	}
-	if kinesisCreateResp1.Format != kinesisGetResp.Format {
-		t.Errorf("bad format: %q", kinesisCreateResp1.Format)
+	if *kinesisCreateResp1.Format != *kinesisGetResp.Format {
+		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
-	if kinesisCreateResp1.FormatVersion != kinesisGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", kinesisCreateResp1.FormatVersion)
+	if *kinesisCreateResp1.FormatVersion != *kinesisGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
 	}
-	if kinesisCreateResp1.Placement != kinesisGetResp.Placement {
-		t.Errorf("bad placement: %q", kinesisCreateResp1.Placement)
+	if *kinesisCreateResp1.Placement != *kinesisGetResp.Placement {
+		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
 	}
-	if kinesisCreateResp1.ResponseCondition != "" {
-		t.Errorf("bad response_condition: %q", kinesisCreateResp1.ResponseCondition)
+	if *kinesisCreateResp1.ResponseCondition != "" {
+		t.Errorf("bad response_condition: %q", *kinesisCreateResp1.ResponseCondition)
 	}
-	if kinesisCreateResp2.AccessKey != kinesisGetResp2.AccessKey {
-		t.Errorf("bad access_key: %q", kinesisGetResp2.AccessKey)
+	if kinesisCreateResp2.AccessKey != nil && kinesisGetResp2.AccessKey != nil {
+		if *kinesisCreateResp2.AccessKey != *kinesisGetResp2.AccessKey {
+			t.Errorf("bad access_key: %q", *kinesisGetResp2.AccessKey)
+		}
 	}
-	if kinesisCreateResp2.SecretKey != kinesisGetResp2.SecretKey {
-		t.Errorf("bad secret_key: %q", kinesisGetResp2.SecretKey)
+	if kinesisCreateResp2.SecretKey != nil && kinesisGetResp2.SecretKey != nil {
+		if *kinesisCreateResp2.SecretKey != *kinesisGetResp2.SecretKey {
+			t.Errorf("bad secret_key: %q", *kinesisGetResp2.SecretKey)
+		}
 	}
-	if kinesisCreateResp2.IAMRole != kinesisGetResp2.IAMRole {
-		t.Errorf("bad iam_role: %q", kinesisGetResp2.IAMRole)
+	if *kinesisCreateResp2.IAMRole != *kinesisGetResp2.IAMRole {
+		t.Errorf("bad iam_role: %q", *kinesisGetResp2.IAMRole)
 	}
 
 	// Update
@@ -292,26 +298,26 @@ func TestClient_Kinesis(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if kinesisUpdateResp1.Name != "new-test-kinesis" {
-		t.Errorf("bad name: %q", kinesisUpdateResp1.Name)
+	if *kinesisUpdateResp1.Name != "new-test-kinesis" {
+		t.Errorf("bad name: %q", *kinesisUpdateResp1.Name)
 	}
-	if kinesisUpdateResp2.AccessKey != "" {
-		t.Errorf("bad access_key: %q", kinesisUpdateResp2.AccessKey)
+	if *kinesisUpdateResp2.AccessKey != "" {
+		t.Errorf("bad access_key: %q", *kinesisUpdateResp2.AccessKey)
 	}
-	if kinesisUpdateResp2.SecretKey != "" {
-		t.Errorf("bad secret_key: %q", kinesisUpdateResp2.SecretKey)
+	if *kinesisUpdateResp2.SecretKey != "" {
+		t.Errorf("bad secret_key: %q", *kinesisUpdateResp2.SecretKey)
 	}
-	if kinesisUpdateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
-		t.Errorf("bad iam_role: %q", kinesisUpdateResp2.IAMRole)
+	if *kinesisUpdateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
+		t.Errorf("bad iam_role: %q", *kinesisUpdateResp2.IAMRole)
 	}
-	if kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
-		t.Errorf("bad access_key: %q", kinesisUpdateResp3.AccessKey)
+	if *kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+		t.Errorf("bad access_key: %q", *kinesisUpdateResp3.AccessKey)
 	}
-	if kinesisUpdateResp3.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
-		t.Errorf("bad secret_key: %q", kinesisUpdateResp3.SecretKey)
+	if *kinesisUpdateResp3.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
+		t.Errorf("bad secret_key: %q", *kinesisUpdateResp3.SecretKey)
 	}
-	if kinesisUpdateResp3.IAMRole != "" {
-		t.Errorf("bad iam_role: %q", kinesisUpdateResp3.IAMRole)
+	if *kinesisUpdateResp3.IAMRole != "" {
+		t.Errorf("bad iam_role: %q", *kinesisUpdateResp3.IAMRole)
 	}
 
 	// Delete
