@@ -14,13 +14,13 @@ func TestClient_Package(t *testing.T) {
 	defer deleteTestService(t, fixtureBase+"service_delete", testService.ID)
 
 	testData := Package{
-		Metadata: PackageMetadata{
-			Description: "Default package template used by the Fastly CLI for Rust-based Compute@Edge projects.",
-			HashSum:     "f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616",
-			Language:    "rust",
-			Name:        "wasm-test",
-			Size:        2015936,
-			FilesHash:   "a763d3c88968ebc17691900d3c14306762296df8e47a1c2d7661cee0e0c5aa6d4c082a7c128d6e719fe333b73b46fe3ae32694716ccd2efa21f5d9f049ceec6d",
+		Metadata: &PackageMetadata{
+			Description: ToPointer("Default package template used by the Fastly CLI for Rust-based Compute@Edge projects."),
+			HashSum:     ToPointer("f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616"),
+			Language:    ToPointer("rust"),
+			Name:        ToPointer("wasm-test"),
+			Size:        ToPointer(int64(2015936)),
+			FilesHash:   ToPointer("a763d3c88968ebc17691900d3c14306762296df8e47a1c2d7661cee0e0c5aa6d4c082a7c128d6e719fe333b73b46fe3ae32694716ccd2efa21f5d9f049ceec6d"),
 		},
 	}
 
@@ -33,17 +33,17 @@ func TestClient_Package(t *testing.T) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
 			ServiceID:      testService.ID,
 			ServiceVersion: testVersion.Number,
-			PackagePath:    "test_assets/package/valid.tar.gz",
+			PackagePath:    ToPointer("test_assets/package/valid.tar.gz"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	if *wp.ServiceID != testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
 	}
-	if wp.ServiceVersion != testVersion.Number {
-		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
+	if *wp.ServiceVersion != testVersion.Number {
+		t.Errorf("bad serviceVersion: %d != %d", *wp.ServiceVersion, testVersion.Number)
 	}
 
 	// Get
@@ -57,30 +57,30 @@ func TestClient_Package(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	if *wp.ServiceID != testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
 	}
-	if wp.ServiceVersion != testVersion.Number {
+	if *wp.ServiceVersion != testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
 	}
 
-	if wp.Metadata.Name != testData.Metadata.Name {
-		t.Errorf("bad package name: %q != %q", wp.Metadata.Name, testData.Metadata.Name)
+	if *wp.Metadata.Name != *testData.Metadata.Name {
+		t.Errorf("bad package name: %q != %q", *wp.Metadata.Name, *testData.Metadata.Name)
 	}
-	if wp.Metadata.Description != testData.Metadata.Description {
-		t.Errorf("bad package description: %q != %q", wp.Metadata.Description, testData.Metadata.Description)
+	if *wp.Metadata.Description != *testData.Metadata.Description {
+		t.Errorf("bad package description: %q != %q", *wp.Metadata.Description, *testData.Metadata.Description)
 	}
-	if wp.Metadata.Size != testData.Metadata.Size {
-		t.Errorf("bad package size: %q != %q", wp.Metadata.Size, testData.Metadata.Size)
+	if *wp.Metadata.Size != *testData.Metadata.Size {
+		t.Errorf("bad package size: %q != %q", *wp.Metadata.Size, *testData.Metadata.Size)
 	}
-	if wp.Metadata.HashSum != testData.Metadata.HashSum {
-		t.Errorf("bad package hashsum: %q != %q", wp.Metadata.HashSum, testData.Metadata.HashSum)
+	if *wp.Metadata.HashSum != *testData.Metadata.HashSum {
+		t.Errorf("bad package hashsum: %q != %q", *wp.Metadata.HashSum, *testData.Metadata.HashSum)
 	}
-	if wp.Metadata.FilesHash != testData.Metadata.FilesHash {
-		t.Errorf("bad package files_hash: %q != %q", wp.Metadata.FilesHash, testData.Metadata.FilesHash)
+	if *wp.Metadata.FilesHash != *testData.Metadata.FilesHash {
+		t.Errorf("bad package files_hash: %q != %q", *wp.Metadata.FilesHash, *testData.Metadata.FilesHash)
 	}
-	if wp.Metadata.Language != testData.Metadata.Language {
-		t.Errorf("bad package language: %q != %q", wp.Metadata.Language, testData.Metadata.Language)
+	if *wp.Metadata.Language != *testData.Metadata.Language {
+		t.Errorf("bad package language: %q != %q", *wp.Metadata.Language, *testData.Metadata.Language)
 	}
 
 	// Update with valid package bytes
@@ -96,11 +96,11 @@ func TestClient_Package(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	if *wp.ServiceID != testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
 	}
-	if wp.ServiceVersion != testVersion.Number {
-		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
+	if *wp.ServiceVersion != testVersion.Number {
+		t.Errorf("bad serviceVersion: %d != %d", *wp.ServiceVersion, testVersion.Number)
 	}
 
 	// Get
@@ -114,27 +114,27 @@ func TestClient_Package(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if wp.ServiceID != testService.ID {
-		t.Errorf("bad serviceID: %q != %q", wp.ID, testService.ID)
+	if *wp.ServiceID != testService.ID {
+		t.Errorf("bad serviceID: %q != %q", *wp.ID, testService.ID)
 	}
-	if wp.ServiceVersion != testVersion.Number {
+	if *wp.ServiceVersion != testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
 	}
 
-	if wp.Metadata.Name != testData.Metadata.Name {
-		t.Errorf("bad package name: %q != %q", wp.Metadata.Name, testData.Metadata.Name)
+	if *wp.Metadata.Name != *testData.Metadata.Name {
+		t.Errorf("bad package name: %q != %q", *wp.Metadata.Name, *testData.Metadata.Name)
 	}
-	if wp.Metadata.Description != testData.Metadata.Description {
-		t.Errorf("bad package description: %q != %q", wp.Metadata.Description, testData.Metadata.Description)
+	if *wp.Metadata.Description != *testData.Metadata.Description {
+		t.Errorf("bad package description: %q != %q", *wp.Metadata.Description, *testData.Metadata.Description)
 	}
-	if wp.Metadata.Size != testData.Metadata.Size {
-		t.Errorf("bad package size: %q != %q", wp.Metadata.Size, testData.Metadata.Size)
+	if *wp.Metadata.Size != *testData.Metadata.Size {
+		t.Errorf("bad package size: %q != %q", *wp.Metadata.Size, *testData.Metadata.Size)
 	}
-	if wp.Metadata.HashSum != testData.Metadata.HashSum {
-		t.Errorf("bad package hashsum: %q != %q", wp.Metadata.HashSum, testData.Metadata.HashSum)
+	if *wp.Metadata.HashSum != *testData.Metadata.HashSum {
+		t.Errorf("bad package hashsum: %q != %q", *wp.Metadata.HashSum, *testData.Metadata.HashSum)
 	}
-	if wp.Metadata.Language != testData.Metadata.Language {
-		t.Errorf("bad package language: %q != %q", wp.Metadata.Language, testData.Metadata.Language)
+	if *wp.Metadata.Language != *testData.Metadata.Language {
+		t.Errorf("bad package language: %q != %q", *wp.Metadata.Language, *testData.Metadata.Language)
 	}
 
 	// Update with invalid package file path
@@ -143,11 +143,10 @@ func TestClient_Package(t *testing.T) {
 		wp, err = c.UpdatePackage(&UpdatePackageInput{
 			ServiceID:      testService.ID,
 			ServiceVersion: testVersion.Number,
-			PackagePath:    "test_assets/package/invalid.tar.gz",
+			PackagePath:    ToPointer("test_assets/package/invalid.tar.gz"),
 		})
 	})
-	if err == nil && (wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
-		wp.Metadata.Name != "") {
+	if err == nil && (wp.Metadata.Size != nil || wp.Metadata.Language != nil || wp.Metadata.HashSum != nil || wp.Metadata.Description != nil || wp.Metadata.Name != nil) {
 		t.Fatal("Invalid package upload completed rather than failed.")
 	}
 
@@ -161,8 +160,7 @@ func TestClient_Package(t *testing.T) {
 			PackageContent: invalidPackageContent,
 		})
 	})
-	if err == nil && (wp.Metadata.Size > 0 || wp.Metadata.Language != "" || wp.Metadata.HashSum != "" || wp.Metadata.Description != "" ||
-		wp.Metadata.Name != "") {
+	if err == nil && (wp.Metadata.Size != nil || wp.Metadata.Language != nil || wp.Metadata.HashSum != nil || wp.Metadata.Description != nil || wp.Metadata.Name != nil) {
 		t.Fatal("Invalid package upload completed rather than failed.")
 	}
 }

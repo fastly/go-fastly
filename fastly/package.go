@@ -12,11 +12,11 @@ import (
 type Package struct {
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	ID             string
-	Metadata       PackageMetadata `mapstructure:"metadata"`
-	ServiceID      string          `mapstructure:"service_id"`
-	ServiceVersion int             `mapstructure:"version"`
-	UpdatedAt      *time.Time      `mapstructure:"updated_at"`
+	ID             *string
+	Metadata       *PackageMetadata `mapstructure:"metadata"`
+	ServiceID      *string          `mapstructure:"service_id"`
+	ServiceVersion *int             `mapstructure:"version"`
+	UpdatedAt      *time.Time       `mapstructure:"updated_at"`
 }
 
 // PackageMetadata is a container for metadata returned about a package.
@@ -24,12 +24,12 @@ type Package struct {
 // the raw data is returned as a json sub-block.
 type PackageMetadata struct {
 	Authors     []string `mapstructure:"authors"`
-	Description string   `mapstructure:"description"`
-	FilesHash   string   `mapstructure:"files_hash"`
-	HashSum     string   `mapstructure:"hashsum"`
-	Language    string   `mapstructure:"language"`
-	Name        string   `mapstructure:"name"`
-	Size        int64    `mapstructure:"size"`
+	Description *string  `mapstructure:"description"`
+	FilesHash   *string  `mapstructure:"files_hash"`
+	HashSum     *string  `mapstructure:"hashsum"`
+	Language    *string  `mapstructure:"language"`
+	Name        *string  `mapstructure:"name"`
+	Size        *int64   `mapstructure:"size"`
 }
 
 // GetPackageInput is used as input to the GetPackage function.
@@ -59,7 +59,7 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 // UpdatePackageInput is used as input to the UpdatePackage function.
 type UpdatePackageInput struct {
 	// PackagePath is the local filesystem path to the package to upload.
-	PackagePath string
+	PackagePath *string
 	// PackageContent is the data in raw of the package to upload.
 	PackageContent []byte
 	// ServiceID is the ID of the service (required).
@@ -77,8 +77,8 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 
 	var body io.ReadCloser
 	switch {
-	case i.PackagePath != "":
-		resp, err := c.PutFormFile(urlPath, i.PackagePath, "package", nil)
+	case i.PackagePath != nil:
+		resp, err := c.PutFormFile(urlPath, *i.PackagePath, "package", nil)
 		if err != nil {
 			return nil, err
 		}
