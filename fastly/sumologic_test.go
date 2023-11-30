@@ -48,23 +48,23 @@ func TestClient_Sumologics(t *testing.T) {
 		})
 	}()
 
-	if s.Name != "test-sumologic" {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != "test-sumologic" {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.URL != "https://foo.sumologic.com" {
-		t.Errorf("bad url: %q", s.URL)
+	if *s.URL != "https://foo.sumologic.com" {
+		t.Errorf("bad url: %q", *s.URL)
 	}
-	if s.Format != "format" {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != "format" {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != 1 {
-		t.Errorf("bad format version: %q", s.FormatVersion)
+	if *s.FormatVersion != 1 {
+		t.Errorf("bad format version: %q", *s.FormatVersion)
 	}
-	if s.MessageType != "classic" {
-		t.Errorf("bad message type: %q", s.MessageType)
+	if *s.MessageType != "classic" {
+		t.Errorf("bad message type: %q", *s.MessageType)
 	}
-	if s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// List
@@ -94,23 +94,23 @@ func TestClient_Sumologics(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if s.Name != ns.Name {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != *ns.Name {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.URL != ns.URL {
-		t.Errorf("bad url: %q", s.URL)
+	if *s.URL != *ns.URL {
+		t.Errorf("bad url: %q", *s.URL)
 	}
-	if s.Format != ns.Format {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != *ns.Format {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != ns.FormatVersion {
-		t.Errorf("bad format version: %q", s.FormatVersion)
+	if *s.FormatVersion != *ns.FormatVersion {
+		t.Errorf("bad format version: %q", *s.FormatVersion)
 	}
-	if s.MessageType != ns.MessageType {
-		t.Errorf("bad message type: %q", s.MessageType)
+	if *s.MessageType != *ns.MessageType {
+		t.Errorf("bad message type: %q", *s.MessageType)
 	}
-	if s.Placement != ns.Placement {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != *ns.Placement {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// Update
@@ -126,8 +126,8 @@ func TestClient_Sumologics(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.Name != "new-test-sumologic" {
-		t.Errorf("bad name: %q", us.Name)
+	if *us.Name != "new-test-sumologic" {
+		t.Errorf("bad name: %q", *us.Name)
 	}
 
 	// Delete

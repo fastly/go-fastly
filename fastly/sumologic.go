@@ -3,43 +3,24 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Sumologic represents a sumologic response from the Fastly API.
 type Sumologic struct {
-	Address           string     `mapstructure:"address"`
+	Address           *string    `mapstructure:"address"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	URL               string     `mapstructure:"url"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	URL               *string    `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// sumologicsByName is a sortable list of sumologics.
-type sumologicsByName []*Sumologic
-
-// Len implement the sortable interface.
-func (s sumologicsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s sumologicsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s sumologicsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListSumologicsInput is used as input to the ListSumologics function.
@@ -70,7 +51,6 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
-	sort.Stable(sumologicsByName(ss))
 	return ss, nil
 }
 
@@ -164,7 +144,7 @@ type UpdateSumologicInput struct {
 	FormatVersion *int `url:"format_version,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Name is the name of the sumologic to update.
+	// Name is the name of the sumologic to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
