@@ -1,7 +1,7 @@
 package fastly
 
 // ToPointer converts T to *T.
-func ToPointer[T ~string | ~int | ~int32 | ~int64 | uint | uint8 | ~bool](v T) *T {
+func ToPointer[T ~string | ~int | int32 | ~int64 | uint | uint8 | uint32 | ~bool](v T) *T {
 	return &v
 }
 
