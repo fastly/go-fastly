@@ -47,23 +47,23 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		})
 	}()
 
-	if n.Name != "test-newrelicotlp" {
-		t.Errorf("bad name: %q", n.Name)
+	if *n.Name != "test-newrelicotlp" {
+		t.Errorf("bad name: %q", *n.Name)
 	}
-	if n.Token != "abcd1234" {
-		t.Errorf("bad token: %q", n.Token)
+	if *n.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *n.Token)
 	}
-	if n.URL != "https://example.nr-data.net" {
-		t.Errorf("bad url: %q", n.URL)
+	if *n.URL != "https://example.nr-data.net" {
+		t.Errorf("bad url: %q", *n.URL)
 	}
-	if n.Format != "format" {
-		t.Errorf("bad format: %q", n.Format)
+	if *n.Format != "format" {
+		t.Errorf("bad format: %q", *n.Format)
 	}
-	if n.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", n.FormatVersion)
+	if *n.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *n.FormatVersion)
 	}
-	if n.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", n.Placement)
+	if *n.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *n.Placement)
 	}
 
 	// List
@@ -93,23 +93,23 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if n.Name != nn.Name {
-		t.Errorf("bad name: %q", n.Name)
+	if *n.Name != *nn.Name {
+		t.Errorf("bad name: %q", *n.Name)
 	}
-	if n.Token != nn.Token {
-		t.Errorf("bad token: %q", n.Token)
+	if *n.Token != *nn.Token {
+		t.Errorf("bad token: %q", *n.Token)
 	}
-	if n.URL != nn.URL {
-		t.Errorf("bad url: %q", n.URL)
+	if *n.URL != *nn.URL {
+		t.Errorf("bad url: %q", *n.URL)
 	}
-	if n.Format != nn.Format {
-		t.Errorf("bad format: %q", n.Format)
+	if *n.Format != *nn.Format {
+		t.Errorf("bad format: %q", *n.Format)
 	}
-	if n.FormatVersion != nn.FormatVersion {
-		t.Errorf("bad format_version: %q", n.FormatVersion)
+	if *n.FormatVersion != *nn.FormatVersion {
+		t.Errorf("bad format_version: %q", *n.FormatVersion)
 	}
-	if n.Placement != nn.Placement {
-		t.Errorf("bad placement: %q", n.Placement)
+	if *n.Placement != *nn.Placement {
+		t.Errorf("bad placement: %q", *n.Placement)
 	}
 
 	// Update
@@ -126,11 +126,11 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if un.Name != "new-test-newrelicotlp" {
-		t.Errorf("bad name: %q", un.Name)
+	if *un.Name != "new-test-newrelicotlp" {
+		t.Errorf("bad name: %q", *un.Name)
 	}
-	if un.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", un.FormatVersion)
+	if *un.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *un.FormatVersion)
 	}
 
 	// Delete
