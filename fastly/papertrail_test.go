@@ -48,23 +48,23 @@ func TestClient_Papertrails(t *testing.T) {
 		})
 	}()
 
-	if p.Name != "test-papertrail" {
-		t.Errorf("bad name: %q", p.Name)
+	if *p.Name != "test-papertrail" {
+		t.Errorf("bad name: %q", *p.Name)
 	}
-	if p.Address != "integ-test.go-fastly.com" {
-		t.Errorf("bad address: %q", p.Address)
+	if *p.Address != "integ-test.go-fastly.com" {
+		t.Errorf("bad address: %q", *p.Address)
 	}
-	if p.Port != 1234 {
-		t.Errorf("bad port: %q", p.Port)
+	if *p.Port != 1234 {
+		t.Errorf("bad port: %q", *p.Port)
 	}
-	if p.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", p.FormatVersion)
+	if *p.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *p.FormatVersion)
 	}
-	if p.Format != "format" {
-		t.Errorf("bad format: %q", p.Format)
+	if *p.Format != "format" {
+		t.Errorf("bad format: %q", *p.Format)
 	}
-	if p.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", p.Placement)
+	if *p.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *p.Placement)
 	}
 
 	// List
@@ -94,23 +94,23 @@ func TestClient_Papertrails(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if p.Name != np.Name {
-		t.Errorf("bad name: %q", p.Name)
+	if *p.Name != *np.Name {
+		t.Errorf("bad name: %q", *p.Name)
 	}
-	if p.Address != np.Address {
-		t.Errorf("bad address: %q", p.Address)
+	if *p.Address != *np.Address {
+		t.Errorf("bad address: %q", *p.Address)
 	}
-	if p.Port != np.Port {
-		t.Errorf("bad port: %q", p.Port)
+	if *p.Port != *np.Port {
+		t.Errorf("bad port: %q", *p.Port)
 	}
-	if p.FormatVersion != np.FormatVersion {
-		t.Errorf("bad format_version: %q", p.FormatVersion)
+	if *p.FormatVersion != *np.FormatVersion {
+		t.Errorf("bad format_version: %q", *p.FormatVersion)
 	}
-	if p.Format != np.Format {
-		t.Errorf("bad format: %q", p.Format)
+	if *p.Format != *np.Format {
+		t.Errorf("bad format: %q", *p.Format)
 	}
-	if p.Placement != np.Placement {
-		t.Errorf("bad placement: %q", p.Placement)
+	if *p.Placement != *np.Placement {
+		t.Errorf("bad placement: %q", *p.Placement)
 	}
 
 	// Update
@@ -126,8 +126,8 @@ func TestClient_Papertrails(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if up.Name != "new-test-papertrail" {
-		t.Errorf("bad name: %q", up.Name)
+	if *up.Name != "new-test-papertrail" {
+		t.Errorf("bad name: %q", *up.Name)
 	}
 
 	// Delete
