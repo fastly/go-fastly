@@ -299,9 +299,9 @@ func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeletePool(&DeletePoolInput{
-			ServiceID:      pool.ServiceID,
-			ServiceVersion: pool.ServiceVersion,
-			Name:           pool.Name,
+			ServiceID:      *pool.ServiceID,
+			ServiceVersion: *pool.ServiceVersion,
+			Name:           *pool.Name,
 		})
 	})
 	if err != nil {

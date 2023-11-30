@@ -23,7 +23,7 @@ func TestClient_Pools(t *testing.T) {
 			ServiceID:       testServiceID,
 			ServiceVersion:  tv.Number,
 			TLSCertHostname: ToPointer("example.com"),
-			Type:            PoolTypePtr(PoolTypeRandom),
+			Type:            ToPointer(PoolTypeRandom),
 			UseTLS:          ToPointer(Compatibool(true)),
 		})
 	})
@@ -48,24 +48,20 @@ func TestClient_Pools(t *testing.T) {
 		})
 	}()
 
-	if p.Name != "test_pool" {
-		t.Errorf("bad name: %q", p.Name)
+	if *p.Name != "test_pool" {
+		t.Errorf("bad name: %q", *p.Name)
 	}
-
-	if p.Quorum != 50 {
-		t.Errorf("bad quorum: %q", p.Quorum)
+	if *p.Quorum != 50 {
+		t.Errorf("bad quorum: %q", *p.Quorum)
 	}
-
-	if !p.UseTLS {
-		t.Errorf("bad use_tls: %t", p.UseTLS)
+	if !*p.UseTLS {
+		t.Errorf("bad use_tls: %t", *p.UseTLS)
 	}
-
-	if p.TLSCertHostname != "example.com" {
-		t.Errorf("bad tls_cert_hostname: %q", p.TLSCertHostname)
+	if *p.TLSCertHostname != "example.com" {
+		t.Errorf("bad tls_cert_hostname: %q", *p.TLSCertHostname)
 	}
-
-	if p.Type != PoolTypeRandom {
-		t.Errorf("bad type: %q", p.Type)
+	if *p.Type != PoolTypeRandom {
+		t.Errorf("bad type: %q", *p.Type)
 	}
 
 	// List
@@ -95,14 +91,14 @@ func TestClient_Pools(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if p.Name != np.Name {
-		t.Errorf("bad name: %q (%q)", p.Name, np.Name)
+	if *p.Name != *np.Name {
+		t.Errorf("bad name: %q (%q)", *p.Name, *np.Name)
 	}
-	if p.Quorum != np.Quorum {
-		t.Errorf("bad quorum: %q (%q)", p.Quorum, np.Quorum)
+	if *p.Quorum != *np.Quorum {
+		t.Errorf("bad quorum: %q (%q)", *p.Quorum, *np.Quorum)
 	}
-	if p.Type != np.Type {
-		t.Errorf("bad type: %q (%q)", p.Type, np.Type)
+	if *p.Type != *np.Type {
+		t.Errorf("bad type: %q (%q)", *p.Type, *np.Type)
 	}
 
 	// Update
@@ -114,17 +110,17 @@ func TestClient_Pools(t *testing.T) {
 			Name:           "test_pool",
 			NewName:        ToPointer("new_test_pool"),
 			Quorum:         ToPointer(0),
-			Type:           PoolTypePtr(PoolTypeHash),
+			Type:           ToPointer(PoolTypeHash),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if up.Name != "new_test_pool" {
-		t.Errorf("bad name: %q", up.Name)
+	if *up.Name != "new_test_pool" {
+		t.Errorf("bad name: %q", *up.Name)
 	}
-	if up.Quorum != 0 {
-		t.Errorf("bad quorum: %q", up.Quorum)
+	if *up.Quorum != 0 {
+		t.Errorf("bad quorum: %q", *up.Quorum)
 	}
 
 	// Delete

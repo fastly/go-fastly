@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -21,59 +20,35 @@ const (
 // PoolType is a type of pool.
 type PoolType string
 
-// PoolTypePtr returns pointer to PoolType.
-func PoolTypePtr(t PoolType) *PoolType {
-	pt := PoolType(t)
-	return &pt
-}
-
 // Pool represents a pool response from the Fastly API.
 type Pool struct {
-	Comment          string     `mapstructure:"comment"`
-	ConnectTimeout   int        `mapstructure:"connect_timeout"`
+	Comment          *string    `mapstructure:"comment"`
+	ConnectTimeout   *int       `mapstructure:"connect_timeout"`
 	CreatedAt        *time.Time `mapstructure:"created_at"`
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
-	FirstByteTimeout int        `mapstructure:"first_byte_timeout"`
-	Healthcheck      string     `mapstructure:"healthcheck"`
-	ID               string     `mapstructure:"id"`
-	MaxConnDefault   int        `mapstructure:"max_conn_default"`
-	MaxTLSVersion    string     `mapstructure:"max_tls_version"`
-	MinTLSVersion    string     `mapstructure:"min_tls_version"`
-	Name             string     `mapstructure:"name"`
-	OverrideHost     string     `mapstructure:"override_host"`
-	Quorum           int        `mapstructure:"quorum"`
-	RequestCondition string     `mapstructure:"request_condition"`
-	ServiceID        string     `mapstructure:"service_id"`
-	ServiceVersion   int        `mapstructure:"version"`
-	Shield           string     `mapstructure:"shield"`
-	TLSCACert        string     `mapstructure:"tls_ca_cert"`
-	TLSCertHostname  string     `mapstructure:"tls_cert_hostname"`
-	TLSCheckCert     bool       `mapstructure:"tls_check_cert"`
-	TLSCiphers       string     `mapstructure:"tls_ciphers"`
-	TLSClientCert    string     `mapstructure:"tls_client_cert"`
-	TLSClientKey     string     `mapstructure:"tls_client_key"`
-	TLSSNIHostname   string     `mapstructure:"tls_sni_hostname"`
-	Type             PoolType   `mapstructure:"type"`
+	FirstByteTimeout *int       `mapstructure:"first_byte_timeout"`
+	Healthcheck      *string    `mapstructure:"healthcheck"`
+	ID               *string    `mapstructure:"id"`
+	MaxConnDefault   *int       `mapstructure:"max_conn_default"`
+	MaxTLSVersion    *string    `mapstructure:"max_tls_version"`
+	MinTLSVersion    *string    `mapstructure:"min_tls_version"`
+	Name             *string    `mapstructure:"name"`
+	OverrideHost     *string    `mapstructure:"override_host"`
+	Quorum           *int       `mapstructure:"quorum"`
+	RequestCondition *string    `mapstructure:"request_condition"`
+	ServiceID        *string    `mapstructure:"service_id"`
+	ServiceVersion   *int       `mapstructure:"version"`
+	Shield           *string    `mapstructure:"shield"`
+	TLSCACert        *string    `mapstructure:"tls_ca_cert"`
+	TLSCertHostname  *string    `mapstructure:"tls_cert_hostname"`
+	TLSCheckCert     *bool      `mapstructure:"tls_check_cert"`
+	TLSCiphers       *string    `mapstructure:"tls_ciphers"`
+	TLSClientCert    *string    `mapstructure:"tls_client_cert"`
+	TLSClientKey     *string    `mapstructure:"tls_client_key"`
+	TLSSNIHostname   *string    `mapstructure:"tls_sni_hostname"`
+	Type             *PoolType  `mapstructure:"type"`
 	UpdatedAt        *time.Time `mapstructure:"updated_at"`
-	UseTLS           bool       `mapstructure:"use_tls"`
-}
-
-// poolsByName is a sortable list of pools.
-type poolsByName []*Pool
-
-// Len implement the sortable interface.
-func (s poolsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s poolsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s poolsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	UseTLS           *bool      `mapstructure:"use_tls"`
 }
 
 // ListPoolsInput is used as input to the ListPools function.
@@ -104,7 +79,6 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 	if err := decodeBodyMap(resp.Body, &ps); err != nil {
 		return nil, err
 	}
-	sort.Stable(poolsByName(ps))
 	return ps, nil
 }
 
