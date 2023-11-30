@@ -76,44 +76,44 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		})
 	}()
 
-	if s.Name != "test-splunk" {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != "test-splunk" {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.URL != "https://mysplunkendpoint.example.com/services/collector/event" {
-		t.Errorf("bad url: %q", s.URL)
+	if *s.URL != "https://mysplunkendpoint.example.com/services/collector/event" {
+		t.Errorf("bad url: %q", *s.URL)
 	}
-	if s.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", s.RequestMaxEntries)
+	if *s.RequestMaxEntries != 1 {
+		t.Errorf("bad request_max_entries: %q", *s.RequestMaxEntries)
 	}
-	if s.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", s.RequestMaxBytes)
+	if *s.RequestMaxBytes != 1000 {
+		t.Errorf("bad request_max_bytes: %q", *s.RequestMaxBytes)
 	}
-	if s.Format != "%h %l %u %t \"%r\" %>s %b" {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != "%h %l %u %t \"%r\" %>s %b" {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", s.FormatVersion)
+	if *s.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *s.FormatVersion)
 	}
-	if s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
-	if s.Token != "super-secure-token" {
-		t.Errorf("bad token: %q", s.Token)
+	if *s.Token != "super-secure-token" {
+		t.Errorf("bad token: %q", *s.Token)
 	}
-	if !s.UseTLS {
-		t.Errorf("bad use_tls: %t", s.UseTLS)
+	if !*s.UseTLS {
+		t.Errorf("bad use_tls: %t", *s.UseTLS)
 	}
-	if s.TLSCACert != caCert {
-		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
+	if *s.TLSCACert != caCert {
+		t.Errorf("bad tls_ca_cert: %q", *s.TLSCACert)
 	}
-	if s.TLSHostname != "example.com" {
-		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	if *s.TLSHostname != "example.com" {
+		t.Errorf("bad tls_hostname: %q", *s.TLSHostname)
 	}
-	if s.TLSClientCert != clientCert {
-		t.Errorf("bad tls_client_cert: %q", s.TLSClientCert)
+	if *s.TLSClientCert != clientCert {
+		t.Errorf("bad tls_client_cert: %q", *s.TLSClientCert)
 	}
-	if s.TLSClientKey != clientKey {
-		t.Errorf("bad tls_client_key: %q", s.TLSClientKey)
+	if *s.TLSClientKey != clientKey {
+		t.Errorf("bad tls_client_key: %q", *s.TLSClientKey)
 	}
 
 	// List
@@ -143,44 +143,44 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if err != nil {
 		t.Fatal(err)
 	}
-	if s.Name != ns.Name {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != *ns.Name {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.URL != ns.URL {
-		t.Errorf("bad url: %q", s.URL)
+	if *s.URL != *ns.URL {
+		t.Errorf("bad url: %q", *s.URL)
 	}
-	if s.RequestMaxEntries != ns.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", s.RequestMaxEntries)
+	if *s.RequestMaxEntries != *ns.RequestMaxEntries {
+		t.Errorf("bad request_max_entries: %q", *s.RequestMaxEntries)
 	}
-	if s.RequestMaxBytes != ns.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", s.RequestMaxBytes)
+	if *s.RequestMaxBytes != *ns.RequestMaxBytes {
+		t.Errorf("bad request_max_bytes: %q", *s.RequestMaxBytes)
 	}
-	if s.Format != ns.Format {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != *ns.Format {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != ns.FormatVersion {
-		t.Errorf("bad format_version: %q", s.FormatVersion)
+	if *s.FormatVersion != *ns.FormatVersion {
+		t.Errorf("bad format_version: %q", *s.FormatVersion)
 	}
-	if s.Placement != ns.Placement {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != *ns.Placement {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
-	if s.Token != ns.Token {
-		t.Errorf("bad token: %q", s.Token)
+	if *s.Token != *ns.Token {
+		t.Errorf("bad token: %q", *s.Token)
 	}
-	if s.UseTLS != ns.UseTLS {
-		t.Errorf("bad use_tls: %t", s.UseTLS)
+	if *s.UseTLS != *ns.UseTLS {
+		t.Errorf("bad use_tls: %t", *s.UseTLS)
 	}
-	if s.TLSCACert != ns.TLSCACert {
-		t.Errorf("bad tls_ca_cert: %q", s.TLSCACert)
+	if *s.TLSCACert != *ns.TLSCACert {
+		t.Errorf("bad tls_ca_cert: %q", *s.TLSCACert)
 	}
-	if s.TLSHostname != ns.TLSHostname {
-		t.Errorf("bad tls_hostname: %q", s.TLSHostname)
+	if *s.TLSHostname != *ns.TLSHostname {
+		t.Errorf("bad tls_hostname: %q", *s.TLSHostname)
 	}
-	if s.TLSClientCert != ns.TLSClientCert {
-		t.Errorf("bad tls_client_cert: %q", s.TLSClientCert)
+	if *s.TLSClientCert != *ns.TLSClientCert {
+		t.Errorf("bad tls_client_cert: %q", *s.TLSClientCert)
 	}
-	if s.TLSClientKey != ns.TLSClientKey {
-		t.Errorf("bad tls_client_key: %q", s.TLSClientKey)
+	if *s.TLSClientKey != *ns.TLSClientKey {
+		t.Errorf("bad tls_client_key: %q", *s.TLSClientKey)
 	}
 
 	// Update
@@ -196,8 +196,8 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.Name != "new-test-splunk" {
-		t.Errorf("bad name: %q", us.Name)
+	if *us.Name != "new-test-splunk" {
+		t.Errorf("bad name: %q", *us.Name)
 	}
 
 	// Delete

@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,41 +10,23 @@ import (
 type Splunk struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	RequestMaxBytes   int        `mapstructure:"request_max_bytes"`
-	RequestMaxEntries int        `mapstructure:"request_max_entries"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TLSCACert         string     `mapstructure:"tls_ca_cert"`
-	TLSClientCert     string     `mapstructure:"tls_client_cert"`
-	TLSClientKey      string     `mapstructure:"tls_client_key"`
-	TLSHostname       string     `mapstructure:"tls_hostname"`
-	Token             string     `mapstructure:"token"`
-	URL               string     `mapstructure:"url"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
+	RequestMaxEntries *int       `mapstructure:"request_max_entries"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TLSCACert         *string    `mapstructure:"tls_ca_cert"`
+	TLSClientCert     *string    `mapstructure:"tls_client_cert"`
+	TLSClientKey      *string    `mapstructure:"tls_client_key"`
+	TLSHostname       *string    `mapstructure:"tls_hostname"`
+	Token             *string    `mapstructure:"token"`
+	URL               *string    `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	UseTLS            bool       `mapstructure:"use_tls"`
-}
-
-// splunkByName is a sortable list of splunks.
-type splunkByName []*Splunk
-
-// Len implement the sortable interface.
-func (s splunkByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s splunkByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s splunkByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	UseTLS            *bool      `mapstructure:"use_tls"`
 }
 
 // ListSplunksInput is used as input to the ListSplunks function.
@@ -76,7 +57,6 @@ func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
-	sort.Stable(splunkByName(ss))
 	return ss, nil
 }
 
