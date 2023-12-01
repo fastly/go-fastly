@@ -21,10 +21,10 @@ type PaginatorKVStoreEntries interface {
 // This is because we don't assign it to any of the defined function parameters.
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
 // This means we have to have the caller pass the API path.
-func NewPaginator[T any](client *Client, input *ListOpts, path string) *ListPaginator[T] {
+func NewPaginator[T any](client *Client, opts *ListOpts, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,
-		input:  input,
+		opts:   opts,
 		path:   path,
 	}
 }
@@ -50,7 +50,7 @@ type ListPaginator[T any] struct {
 	// Private
 	client   *Client
 	consumed bool
-	input    *ListOpts
+	opts     *ListOpts
 	path     string
 }
 
@@ -71,19 +71,19 @@ func (p *ListPaginator[T]) Remaining() int {
 func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 	var perPage int
 	const maxPerPage = 100
-	if p.input.PerPage <= 0 {
+	if p.opts.PerPage <= 0 {
 		perPage = maxPerPage
 	} else {
-		perPage = p.input.PerPage
+		perPage = p.opts.PerPage
 	}
 
 	// page is not specified, fetch from the beginning
-	if p.input.Page <= 0 && p.CurrentPage == 0 {
+	if p.opts.Page <= 0 && p.CurrentPage == 0 {
 		p.CurrentPage = 1
 	} else {
 		// page is specified, fetch from a given page
 		if !p.consumed {
-			p.CurrentPage = p.input.Page
+			p.CurrentPage = p.opts.Page
 		} else {
 			p.CurrentPage++
 		}
@@ -96,11 +96,11 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 		},
 	}
 
-	if p.input.Direction != "" {
-		requestOptions.Params["direction"] = p.input.Direction
+	if p.opts.Direction != "" {
+		requestOptions.Params["direction"] = p.opts.Direction
 	}
-	if p.input.Sort != "" {
-		requestOptions.Params["sort"] = p.input.Sort
+	if p.opts.Sort != "" {
+		requestOptions.Params["sort"] = p.opts.Sort
 	}
 
 	resp, err := p.client.Get(p.path, requestOptions)
