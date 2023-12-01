@@ -51,7 +51,7 @@ func (c *Client) GetDictionaryItems(i *GetDictionaryItemsInput) *ListPaginator[D
 		input.PerPage = *i.PerPage
 	}
 	path := fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID)
-	return newPaginator[DictionaryItem](c, input, path)
+	return NewPaginator[DictionaryItem](c, input, path)
 }
 
 // ListDictionaryItemsInput is used as input to the ListDictionaryItems function.

@@ -53,7 +53,7 @@ func (c *Client) GetACLEntries(i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
 		input.PerPage = *i.PerPage
 	}
 	path := fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID)
-	return newPaginator[ACLEntry](c, input, path)
+	return NewPaginator[ACLEntry](c, input, path)
 }
 
 // ListACLEntriesInput is the input parameter to ListACLEntries function.

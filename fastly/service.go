@@ -76,7 +76,7 @@ func (c *Client) GetServices(i *GetServicesInput) *ListPaginator[Service] {
 	if i.PerPage != nil {
 		input.PerPage = *i.PerPage
 	}
-	return newPaginator[Service](c, input, "/service")
+	return NewPaginator[Service](c, input, "/service")
 }
 
 // ListServicesInput is used as input to the ListServices function.
