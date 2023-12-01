@@ -1,13 +1,17 @@
 package fastly
 
+type MultiConstraint interface {
+	~string | ~int | int32 | ~int64 | uint | uint8 | uint32 | ~bool
+}
+
 // ToPointer converts T to *T.
-func ToPointer[T ~string | ~int | int32 | ~int64 | uint | uint8 | uint32 | ~bool](v T) *T {
+func ToPointer[T MultiConstraint](v T) *T {
 	return &v
 }
 
 // ToValue converts *T to T.
 // If v is nil, then return T's zero value.
-func ToValue[T ~string | ~int | int32 | ~int64 | uint | uint8 | uint32 | ~bool](v *T) T {
+func ToValue[T MultiConstraint](v *T) T {
 	if v != nil {
 		return *v
 	}
