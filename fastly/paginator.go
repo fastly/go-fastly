@@ -21,7 +21,7 @@ type PaginatorKVStoreEntries interface {
 // This is because we don't assign it to any of the defined function parameters.
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
 // This means we have to have the caller pass the API path.
-func NewPaginator[T any](client *Client, input *listInput, path string) *ListPaginator[T] {
+func NewPaginator[T any](client *Client, input *ListOpts, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,
 		input:  input,
@@ -29,8 +29,8 @@ func NewPaginator[T any](client *Client, input *listInput, path string) *ListPag
 	}
 }
 
-// listInput configures the API list options.
-type listInput struct {
+// ListOpts configures the API list options.
+type ListOpts struct {
 	// Direction is the direction in which to sort results.
 	Direction string
 	// Page is the current page.
@@ -50,7 +50,7 @@ type ListPaginator[T any] struct {
 	// Private
 	client   *Client
 	consumed bool
-	input    *listInput
+	input    *ListOpts
 	path     string
 }
 

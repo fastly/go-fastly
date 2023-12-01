@@ -39,7 +39,7 @@ type GetACLEntriesInput struct {
 
 // GetACLEntries returns a ListPaginator for paginating through the resources.
 func (c *Client) GetACLEntries(i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
-	input := &listInput{}
+	input := &ListOpts{}
 	if i.Direction != nil {
 		input.Direction = *i.Direction
 	}
