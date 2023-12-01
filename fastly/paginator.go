@@ -22,9 +22,15 @@ type PaginatorKVStoreEntries interface {
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
 // This means we have to have the caller pass the API path.
 func NewPaginator[T any](client *Client, opts *ListOpts, path string) *ListPaginator[T] {
+	// We don't expect users to call this function directly, but in case they do
+	// we need to code defensively and not presume a non-nil value.
+	o := ListOpts{}
+	if opts != nil {
+		o = *opts
+	}
 	return &ListPaginator[T]{
 		client: client,
-		opts:   opts,
+		opts:   o,
 		path:   path,
 	}
 }
@@ -50,7 +56,7 @@ type ListPaginator[T any] struct {
 	// Private
 	client   *Client
 	consumed bool
-	opts     *ListOpts
+	opts     ListOpts
 	path     string
 }
 
