@@ -21,16 +21,10 @@ type PaginatorKVStoreEntries interface {
 // This is because we don't assign it to any of the defined function parameters.
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
 // This means we have to have the caller pass the API path.
-func NewPaginator[T any](client *Client, opts *ListOpts, path string) *ListPaginator[T] {
-	// We don't expect users to call this function directly, but in case they do
-	// we need to code defensively and not presume a non-nil value.
-	o := ListOpts{}
-	if opts != nil {
-		o = *opts
-	}
+func NewPaginator[T any](client *Client, opts ListOpts, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,
-		opts:   o,
+		opts:   opts,
 		path:   path,
 	}
 }
