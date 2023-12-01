@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"net/http"
 	"net/url"
 	"strconv"
 
@@ -14,6 +15,11 @@ type PaginatorKVStoreEntries interface {
 	Err() error
 }
 
+// PaginationClient represents a HTTP client.
+type PaginationClient interface {
+	Get(p string, ro *RequestOptions) (*http.Response, error)
+}
+
 // NewPaginator returns a *ListPaginator[T].
 // Exposed for the purposes of mocking the paginator within the Fastly CLI.
 //
@@ -21,7 +27,7 @@ type PaginatorKVStoreEntries interface {
 // This is because we don't assign it to any of the defined function parameters.
 // If we did, then we could do this: https://go.dev/play/p/dfTMGjaSSAX.
 // This means we have to have the caller pass the API path.
-func NewPaginator[T any](client *Client, opts ListOpts, path string) *ListPaginator[T] {
+func NewPaginator[T any](client PaginationClient, opts ListOpts, path string) *ListPaginator[T] {
 	return &ListPaginator[T]{
 		client: client,
 		opts:   opts,
@@ -48,7 +54,7 @@ type ListPaginator[T any] struct {
 	NextPage    int
 
 	// Private
-	client   *Client
+	client   PaginationClient
 	consumed bool
 	opts     ListOpts
 	path     string
