@@ -48,23 +48,23 @@ func TestClient_Honeycombs(t *testing.T) {
 		})
 	}()
 
-	if h.Name != "test-honeycomb" {
-		t.Errorf("bad name: %q", h.Name)
+	if *h.Name != "test-honeycomb" {
+		t.Errorf("bad name: %q", *h.Name)
 	}
-	if h.Format != "%h %l %u %t \"%r\" %>s %b" {
-		t.Errorf("bad format: %q", h.Format)
+	if *h.Format != "%h %l %u %t \"%r\" %>s %b" {
+		t.Errorf("bad format: %q", *h.Format)
 	}
-	if h.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", h.FormatVersion)
+	if *h.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *h.FormatVersion)
 	}
-	if h.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", h.Placement)
+	if *h.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *h.Placement)
 	}
-	if h.Token != "super-secure-token" {
-		t.Errorf("bad token: %q", h.Token)
+	if *h.Token != "super-secure-token" {
+		t.Errorf("bad token: %q", *h.Token)
 	}
-	if h.Dataset != "testDataset" {
-		t.Errorf("bad dataset: %q", h.Dataset)
+	if *h.Dataset != "testDataset" {
+		t.Errorf("bad dataset: %q", *h.Dataset)
 	}
 
 	// List
@@ -94,23 +94,23 @@ func TestClient_Honeycombs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if h.Name != nh.Name {
-		t.Errorf("bad name: %q", h.Name)
+	if *h.Name != *nh.Name {
+		t.Errorf("bad name: %q", *h.Name)
 	}
-	if h.Format != nh.Format {
-		t.Errorf("bad format: %q", h.Format)
+	if *h.Format != *nh.Format {
+		t.Errorf("bad format: %q", *h.Format)
 	}
-	if h.FormatVersion != nh.FormatVersion {
-		t.Errorf("bad format_version: %q", h.FormatVersion)
+	if *h.FormatVersion != *nh.FormatVersion {
+		t.Errorf("bad format_version: %q", *h.FormatVersion)
 	}
-	if h.Placement != nh.Placement {
-		t.Errorf("bad placement: %q", h.Placement)
+	if *h.Placement != *nh.Placement {
+		t.Errorf("bad placement: %q", *h.Placement)
 	}
-	if h.Token != nh.Token {
-		t.Errorf("bad token: %q", h.Token)
+	if *h.Token != *nh.Token {
+		t.Errorf("bad token: %q", *h.Token)
 	}
-	if h.Dataset != nh.Dataset {
-		t.Errorf("bad dataset: %q", h.Dataset)
+	if *h.Dataset != *nh.Dataset {
+		t.Errorf("bad dataset: %q", *h.Dataset)
 	}
 
 	// Update
@@ -128,14 +128,14 @@ func TestClient_Honeycombs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.Name != "new-test-honeycomb" {
-		t.Errorf("bad name: %q", us.Name)
+	if *us.Name != "new-test-honeycomb" {
+		t.Errorf("bad name: %q", *us.Name)
 	}
-	if us.Token != "new-token" {
-		t.Errorf("bad token: %q", us.Token)
+	if *us.Token != "new-token" {
+		t.Errorf("bad token: %q", *us.Token)
 	}
-	if us.Dataset != "newDataset" {
-		t.Errorf("bad dataset: %q", us.Dataset)
+	if *us.Dataset != "newDataset" {
+		t.Errorf("bad dataset: %q", *us.Dataset)
 	}
 
 	// Delete
