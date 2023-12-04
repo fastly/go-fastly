@@ -26,8 +26,8 @@ func TestClient_HTTP3(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if h.FeatureRevision != 1 {
-		t.Errorf("bad feature_revision: %d", h.FeatureRevision)
+	if *h.FeatureRevision != 1 {
+		t.Errorf("bad feature_revision: %d", *h.FeatureRevision)
 	}
 
 	// Get HTTP3 status
@@ -42,8 +42,8 @@ func TestClient_HTTP3(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if gh.FeatureRevision != 1 {
-		t.Errorf("bad feature_revision: %d", gh.FeatureRevision)
+	if *gh.FeatureRevision != 1 {
+		t.Errorf("bad feature_revision: %d", *gh.FeatureRevision)
 	}
 
 	// Disable HTTP3
