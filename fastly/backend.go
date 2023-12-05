@@ -34,7 +34,6 @@ type Backend struct {
 	SSLCiphers          *string    `mapstructure:"ssl_ciphers"`
 	SSLClientCert       *string    `mapstructure:"ssl_client_cert"`
 	SSLClientKey        *string    `mapstructure:"ssl_client_key"`
-	SSLHostname         *string    `mapstructure:"ssl_hostname"`
 	SSLSNIHostname      *string    `mapstructure:"ssl_sni_hostname"`
 	ServiceID           *string    `mapstructure:"service_id"`
 	ServiceVersion      *int       `mapstructure:"version"`
