@@ -147,11 +147,11 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 		ro.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
 	}
 
-	r, err := c.Get(p, ro)
+	resp, err := c.Get(p, ro)
 	if err != nil {
 		return err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
-	return json.NewDecoder(r.Body).Decode(dst)
+	return json.NewDecoder(resp.Body).Decode(dst)
 }

@@ -61,15 +61,15 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	list, err := c.ListVersions(&ListVersionsInput{ServiceID: i.ServiceID})
+	slice, err := c.ListVersions(&ListVersionsInput{ServiceID: i.ServiceID})
 	if err != nil {
 		return nil, err
 	}
-	if len(list) < 1 {
+	if len(slice) < 1 {
 		return nil, nil
 	}
 
-	e := list[len(list)-1]
+	e := slice[len(slice)-1]
 	return e, nil
 }
 

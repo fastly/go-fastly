@@ -160,14 +160,14 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 
 	p := "/tls/activations"
 
-	r, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(p, i, nil)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
 	var a TLSActivation
-	if err := jsonapi.UnmarshalPayload(r.Body, &a); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &a); err != nil {
 		return nil, err
 	}
 

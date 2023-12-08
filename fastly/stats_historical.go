@@ -171,13 +171,13 @@ func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
 		ro.Params["to"] = *i.To
 	}
 
-	r, err := c.Get(p, ro)
+	resp, err := c.Get(p, ro)
 	if err != nil {
 		return err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
-	return json.NewDecoder(r.Body).Decode(dst)
+	return json.NewDecoder(resp.Body).Decode(dst)
 }
 
 // Usage represents usage data of a single service or region.
@@ -229,14 +229,14 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 		ro.Params["to"] = *i.To
 	}
 
-	r, err := c.Get("/stats/usage", ro)
+	resp, err := c.Get("/stats/usage", ro)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
 	var sr *UsageResponse
-	if err := decodeBodyMap(r.Body, &sr); err != nil {
+	if err := decodeBodyMap(resp.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -276,14 +276,14 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 		ro.Params["to"] = *i.To
 	}
 
-	r, err := c.Get("/stats/usage_by_service", ro)
+	resp, err := c.Get("/stats/usage_by_service", ro)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
 	var sr *UsageByServiceResponse
-	if err := decodeBodyMap(r.Body, &sr); err != nil {
+	if err := decodeBodyMap(resp.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -300,14 +300,14 @@ type RegionsResponse struct {
 
 // GetRegions returns a list of Fastly regions.
 func (c *Client) GetRegions() (*RegionsResponse, error) {
-	r, err := c.Get("stats/regions", nil)
+	resp, err := c.Get("stats/regions", nil)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
 	var rr *RegionsResponse
-	if err := decodeBodyMap(r.Body, &rr); err != nil {
+	if err := decodeBodyMap(resp.Body, &rr); err != nil {
 		return nil, err
 	}
 

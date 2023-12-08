@@ -154,7 +154,7 @@ func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiv
 	currentPage := 1
 	result := &WAFActiveRuleResponse{Items: []*WAFActiveRule{}}
 	for {
-		r, err := c.ListWAFActiveRules(&ListWAFActiveRulesInput{
+		ptr, err := c.ListWAFActiveRules(&ListWAFActiveRulesInput{
 			WAFID:            i.WAFID,
 			WAFVersionNumber: i.WAFVersionNumber,
 			PageNumber:       currentPage,
@@ -167,11 +167,14 @@ func (c *Client) ListAllWAFActiveRules(i *ListAllWAFActiveRulesInput) (*WAFActiv
 		if err != nil {
 			return nil, err
 		}
+		if ptr == nil {
+			return nil, fmt.Errorf("error: unexpected nil pointer")
+		}
 
 		currentPage++
-		result.Items = append(result.Items, r.Items...)
+		result.Items = append(result.Items, ptr.Items...)
 
-		if r.Info.Links.Next == "" || len(r.Items) == 0 {
+		if ptr.Info.Links.Next == "" || len(ptr.Items) == 0 {
 			return result, nil
 		}
 	}

@@ -73,13 +73,13 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 		},
 	}
 
-	r, err := c.Get(p, filters)
+	resp, err := c.Get(p, filters)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(PrivateKey)))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(PrivateKey)))
 	if err != nil {
 		return nil, err
 	}

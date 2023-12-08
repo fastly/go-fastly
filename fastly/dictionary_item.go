@@ -132,11 +132,14 @@ func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]Diction
 	var b []DictionaryItem
 	for _, cdii := range i {
 		cdii := cdii // it's unlikely the underlying value will have changed but we avoid a gosec warning this way (ref: https://bit.ly/go-range-bug)
-		di, err := c.CreateDictionaryItem(&cdii)
+		ptr, err := c.CreateDictionaryItem(&cdii)
 		if err != nil {
 			return nil, err
 		}
-		b = append(b, *di)
+		if ptr == nil {
+			return nil, fmt.Errorf("error: unexpected nil pointer")
+		}
+		b = append(b, *ptr)
 	}
 	return b, nil
 }

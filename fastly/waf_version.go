@@ -186,7 +186,7 @@ func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResp
 	currentPage := 1
 	result := &WAFVersionResponse{Items: []*WAFVersion{}}
 	for {
-		r, err := c.ListWAFVersions(&ListWAFVersionsInput{
+		ptr, err := c.ListWAFVersions(&ListWAFVersionsInput{
 			WAFID:      i.WAFID,
 			Include:    i.Include,
 			PageNumber: currentPage,
@@ -195,11 +195,14 @@ func (c *Client) ListAllWAFVersions(i *ListAllWAFVersionsInput) (*WAFVersionResp
 		if err != nil {
 			return nil, err
 		}
+		if ptr == nil {
+			return nil, fmt.Errorf("error: unexpected nil pointer")
+		}
 
 		currentPage++
-		result.Items = append(result.Items, r.Items...)
+		result.Items = append(result.Items, ptr.Items...)
 
-		if r.Info.Links.Next == "" || len(r.Items) == 0 {
+		if ptr.Info.Links.Next == "" || len(ptr.Items) == 0 {
 			return result, nil
 		}
 	}

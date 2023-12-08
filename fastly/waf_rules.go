@@ -160,7 +160,7 @@ func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, err
 	currentPage := 1
 	result := &WAFRuleResponse{Items: []*WAFRule{}}
 	for {
-		r, err := c.ListWAFRules(&ListWAFRulesInput{
+		ptr, err := c.ListWAFRules(&ListWAFRulesInput{
 			FilterTagNames:   i.FilterTagNames,
 			FilterPublishers: i.FilterPublishers,
 			FilterModSecIDs:  i.FilterModSecIDs,
@@ -172,11 +172,14 @@ func (c *Client) ListAllWAFRules(i *ListAllWAFRulesInput) (*WAFRuleResponse, err
 		if err != nil {
 			return nil, err
 		}
+		if ptr == nil {
+			return nil, fmt.Errorf("error: unexpected nil pointer")
+		}
 
 		currentPage++
-		result.Items = append(result.Items, r.Items...)
+		result.Items = append(result.Items, ptr.Items...)
 
-		if r.Info.Links.Next == "" || len(r.Items) == 0 {
+		if ptr.Info.Links.Next == "" || len(ptr.Items) == 0 {
 			return result, nil
 		}
 	}
