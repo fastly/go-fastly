@@ -17,7 +17,7 @@ func TestClient_ACLs(t *testing.T) {
 	record(t, fixtureBase+"create", func(c *Client) {
 		a, err = c.CreateACL(&CreateACLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           ToPointer("test_acl"),
 		})
 	})
@@ -30,7 +30,7 @@ func TestClient_ACLs(t *testing.T) {
 	record(t, fixtureBase+"create_expected_error", func(c *Client) {
 		_, errExpected = c.CreateACL(&CreateACLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 		})
 	})
 	if errExpected == nil {
@@ -42,20 +42,20 @@ func TestClient_ACLs(t *testing.T) {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteACL(&DeleteACLInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: testVersion.Number,
+				ServiceVersion: *testVersion.Number,
 				Name:           "test_acl",
 			})
 
 			_ = c.DeleteACL(&DeleteACLInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: testVersion.Number,
+				ServiceVersion: *testVersion.Number,
 				Name:           "new_test_acl",
 			})
 		})
 	}()
 
-	if a.Name != "test_acl" {
-		t.Errorf("bad name: %q", a.Name)
+	if *a.Name != "test_acl" {
+		t.Errorf("bad name: %q", *a.Name)
 	}
 
 	// List
@@ -63,7 +63,7 @@ func TestClient_ACLs(t *testing.T) {
 	record(t, fixtureBase+"list", func(c *Client) {
 		as, err = c.ListACLs(&ListACLsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 		})
 	})
 	if err != nil {
@@ -78,15 +78,15 @@ func TestClient_ACLs(t *testing.T) {
 	record(t, fixtureBase+"get", func(c *Client) {
 		na, err = c.GetACL(&GetACLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           "test_acl",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if a.Name != na.Name {
-		t.Errorf("bad name: %q (%q)", a.Name, na.Name)
+	if *a.Name != *na.Name {
+		t.Errorf("bad name: %q (%q)", *a.Name, *na.Name)
 	}
 
 	// Update
@@ -94,7 +94,7 @@ func TestClient_ACLs(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateACL(&UpdateACLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           "test_acl",
 			NewName:        ToPointer("new_test_acl"),
 		})
@@ -102,19 +102,19 @@ func TestClient_ACLs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ua.Name != "new_test_acl" {
-		t.Errorf("Bad name after update %s", ua.Name)
+	if *ua.Name != "new_test_acl" {
+		t.Errorf("Bad name after update %s", *ua.Name)
 	}
 
-	if a.ID != ua.ID {
-		t.Errorf("bad ACL id: %q (%q)", a.ID, ua.ID)
+	if *a.ID != *ua.ID {
+		t.Errorf("bad ACL id: %q (%q)", *a.ID, *ua.ID)
 	}
 
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteACL(&DeleteACLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           "new_test_acl",
 		})
 	})

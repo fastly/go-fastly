@@ -3,42 +3,23 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Honeycomb represents a honeycomb response from the Fastly API.
 type Honeycomb struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
-	Dataset           string     `mapstructure:"dataset"`
+	Dataset           *string    `mapstructure:"dataset"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// honeycombsByName is a sortable list of honeycombs.
-type honeycombsByName []*Honeycomb
-
-// Len implement the sortable interface.
-func (h honeycombsByName) Len() int {
-	return len(h)
-}
-
-// Swap implement the sortable interface.
-func (h honeycombsByName) Swap(i, j int) {
-	h[i], h[j] = h[j], h[i]
-}
-
-// Less implement the sortable interface.
-func (h honeycombsByName) Less(i, j int) bool {
-	return h[i].Name < h[j].Name
 }
 
 // ListHoneycombsInput is used as input to the ListHoneycombs function.
@@ -69,7 +50,6 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 	if err := decodeBodyMap(resp.Body, &hs); err != nil {
 		return nil, err
 	}
-	sort.Stable(honeycombsByName(hs))
 	return hs, nil
 }
 

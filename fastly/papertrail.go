@@ -3,42 +3,23 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Papertrail represents a papertrail response from the Fastly API.
 type Papertrail struct {
-	Address           string     `mapstructure:"address"`
+	Address           *string    `mapstructure:"address"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Port              int        `mapstructure:"port"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Port              *int       `mapstructure:"port"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// papertrailsByName is a sortable list of papertrails.
-type papertrailsByName []*Papertrail
-
-// Len implement the sortable interface.
-func (s papertrailsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s papertrailsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s papertrailsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListPapertrailsInput is used as input to the ListPapertrails function.
@@ -69,7 +50,6 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 	if err := decodeBodyMap(resp.Body, &ps); err != nil {
 		return nil, err
 	}
-	sort.Stable(papertrailsByName(ps))
 	return ps, nil
 }
 

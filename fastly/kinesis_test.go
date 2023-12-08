@@ -20,7 +20,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/create", func(c *Client) {
 		kinesisCreateResp1, err = c.CreateKinesis(&CreateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis"),
 			StreamName:     ToPointer("stream-name"),
 			Region:         ToPointer("us-east-1"),
@@ -38,7 +38,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/create2", func(c *Client) {
 		kinesisCreateResp2, err = c.CreateKinesis(&CreateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis-2"),
 			StreamName:     ToPointer("stream-name"),
 			Region:         ToPointer("us-east-1"),
@@ -56,7 +56,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/create3", func(c *Client) {
 		_, err = c.CreateKinesis(&CreateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis-3"),
 			StreamName:     ToPointer("stream-name"),
 			Region:         ToPointer("us-east-1"),
@@ -76,7 +76,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/create4", func(c *Client) {
 		_, err = c.CreateKinesis(&CreateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           ToPointer("test-kinesis-3"),
 			StreamName:     ToPointer("stream-name"),
 			Region:         ToPointer("us-east-1"),
@@ -95,62 +95,62 @@ func TestClient_Kinesis(t *testing.T) {
 		record(t, "kinesis/cleanup", func(c *Client) {
 			c.DeleteKinesis(&DeleteKinesisInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: v.Number,
+				ServiceVersion: *v.Number,
 				Name:           "test-kinesis",
 			})
 
 			c.DeleteKinesis(&DeleteKinesisInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: v.Number,
+				ServiceVersion: *v.Number,
 				Name:           "test-kinesis-2",
 			})
 
 			c.DeleteKinesis(&DeleteKinesisInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: v.Number,
+				ServiceVersion: *v.Number,
 				Name:           "new-test-kinesis",
 			})
 		})
 	}()
 
-	if kinesisCreateResp1.Name != "test-kinesis" {
-		t.Errorf("bad name: %q", kinesisCreateResp1.Name)
+	if *kinesisCreateResp1.Name != "test-kinesis" {
+		t.Errorf("bad name: %q", *kinesisCreateResp1.Name)
 	}
-	if kinesisCreateResp1.StreamName != "stream-name" {
-		t.Errorf("bad bucket_name: %q", kinesisCreateResp1.StreamName)
+	if *kinesisCreateResp1.StreamName != "stream-name" {
+		t.Errorf("bad bucket_name: %q", *kinesisCreateResp1.StreamName)
 	}
-	if kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
-		t.Errorf("bad access_key: %q", kinesisCreateResp1.AccessKey)
+	if *kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+		t.Errorf("bad access_key: %q", *kinesisCreateResp1.AccessKey)
 	}
-	if kinesisCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
-		t.Errorf("bad secret_key: %q", kinesisCreateResp1.SecretKey)
+	if *kinesisCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
+		t.Errorf("bad secret_key: %q", *kinesisCreateResp1.SecretKey)
 	}
-	if kinesisCreateResp1.IAMRole != "" {
-		t.Errorf("bad iam_role: %q", kinesisCreateResp1.IAMRole)
+	if kinesisCreateResp1.IAMRole != nil {
+		t.Errorf("bad iam_role: %q", *kinesisCreateResp1.IAMRole)
 	}
-	if kinesisCreateResp1.Region != "us-east-1" {
-		t.Errorf("bad domain: %q", kinesisCreateResp1.Region)
+	if *kinesisCreateResp1.Region != "us-east-1" {
+		t.Errorf("bad domain: %q", *kinesisCreateResp1.Region)
 	}
-	if kinesisCreateResp1.Format != "format" {
-		t.Errorf("bad format: %q", kinesisCreateResp1.Format)
+	if *kinesisCreateResp1.Format != "format" {
+		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
-	if kinesisCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", kinesisCreateResp1.FormatVersion)
+	if *kinesisCreateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
 	}
-	if kinesisCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", kinesisCreateResp1.Placement)
+	if *kinesisCreateResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
 	}
-	if kinesisCreateResp1.ResponseCondition != "" {
-		t.Errorf("bad response_condition: %q", kinesisCreateResp1.ResponseCondition)
+	if *kinesisCreateResp1.ResponseCondition != "" {
+		t.Errorf("bad response_condition: %q", *kinesisCreateResp1.ResponseCondition)
 	}
-	if kinesisCreateResp2.AccessKey != "" {
-		t.Errorf("bad access_key: %q", kinesisCreateResp2.AccessKey)
+	if kinesisCreateResp2.AccessKey != nil {
+		t.Errorf("bad access_key: %q", *kinesisCreateResp2.AccessKey)
 	}
-	if kinesisCreateResp2.SecretKey != "" {
-		t.Errorf("bad secret_key: %q", kinesisCreateResp2.SecretKey)
+	if kinesisCreateResp2.SecretKey != nil {
+		t.Errorf("bad secret_key: %q", *kinesisCreateResp2.SecretKey)
 	}
-	if kinesisCreateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
-		t.Errorf("bad iam_role: %q", kinesisCreateResp2.IAMRole)
+	if *kinesisCreateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
+		t.Errorf("bad iam_role: %q", *kinesisCreateResp2.IAMRole)
 	}
 
 	// List
@@ -158,7 +158,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/list", func(c *Client) {
 		kineses, err = c.ListKinesis(&ListKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 		})
 	})
 	if err != nil {
@@ -173,7 +173,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/get", func(c *Client) {
 		kinesisGetResp, err = c.GetKinesis(&GetKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
 		})
 	})
@@ -184,7 +184,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/get2", func(c *Client) {
 		kinesisGetResp2, err = c.GetKinesis(&GetKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           "test-kinesis-2",
 		})
 	})
@@ -192,44 +192,50 @@ func TestClient_Kinesis(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if kinesisCreateResp1.Name != kinesisGetResp.Name {
-		t.Errorf("bad name: %q", kinesisCreateResp1.Name)
+	if *kinesisCreateResp1.Name != *kinesisGetResp.Name {
+		t.Errorf("bad name: %q", *kinesisCreateResp1.Name)
 	}
-	if kinesisCreateResp1.StreamName != kinesisGetResp.StreamName {
-		t.Errorf("bad bucket_name: %q", kinesisCreateResp1.StreamName)
+	if *kinesisCreateResp1.StreamName != *kinesisGetResp.StreamName {
+		t.Errorf("bad bucket_name: %q", *kinesisCreateResp1.StreamName)
 	}
-	if kinesisCreateResp1.AccessKey != kinesisGetResp.AccessKey {
-		t.Errorf("bad access_key: %q", kinesisCreateResp1.AccessKey)
+	if *kinesisCreateResp1.AccessKey != *kinesisGetResp.AccessKey {
+		t.Errorf("bad access_key: %q", *kinesisCreateResp1.AccessKey)
 	}
-	if kinesisCreateResp1.SecretKey != kinesisGetResp.SecretKey {
-		t.Errorf("bad secret_key: %q", kinesisCreateResp1.SecretKey)
+	if *kinesisCreateResp1.SecretKey != *kinesisGetResp.SecretKey {
+		t.Errorf("bad secret_key: %q", *kinesisCreateResp1.SecretKey)
 	}
-	if kinesisCreateResp1.IAMRole != kinesisGetResp.IAMRole {
-		t.Errorf("bad iam_role: %q", kinesisCreateResp1.IAMRole)
+	if kinesisCreateResp1.IAMRole != nil && kinesisGetResp.IAMRole != nil {
+		if *kinesisCreateResp1.IAMRole != *kinesisGetResp.IAMRole {
+			t.Errorf("bad iam_role: %q", *kinesisCreateResp1.IAMRole)
+		}
 	}
-	if kinesisCreateResp1.Region != kinesisGetResp.Region {
-		t.Errorf("bad domain: %q", kinesisCreateResp1.Region)
+	if *kinesisCreateResp1.Region != *kinesisGetResp.Region {
+		t.Errorf("bad domain: %q", *kinesisCreateResp1.Region)
 	}
-	if kinesisCreateResp1.Format != kinesisGetResp.Format {
-		t.Errorf("bad format: %q", kinesisCreateResp1.Format)
+	if *kinesisCreateResp1.Format != *kinesisGetResp.Format {
+		t.Errorf("bad format: %q", *kinesisCreateResp1.Format)
 	}
-	if kinesisCreateResp1.FormatVersion != kinesisGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", kinesisCreateResp1.FormatVersion)
+	if *kinesisCreateResp1.FormatVersion != *kinesisGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
 	}
-	if kinesisCreateResp1.Placement != kinesisGetResp.Placement {
-		t.Errorf("bad placement: %q", kinesisCreateResp1.Placement)
+	if *kinesisCreateResp1.Placement != *kinesisGetResp.Placement {
+		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
 	}
-	if kinesisCreateResp1.ResponseCondition != "" {
-		t.Errorf("bad response_condition: %q", kinesisCreateResp1.ResponseCondition)
+	if *kinesisCreateResp1.ResponseCondition != "" {
+		t.Errorf("bad response_condition: %q", *kinesisCreateResp1.ResponseCondition)
 	}
-	if kinesisCreateResp2.AccessKey != kinesisGetResp2.AccessKey {
-		t.Errorf("bad access_key: %q", kinesisGetResp2.AccessKey)
+	if kinesisCreateResp2.AccessKey != nil && kinesisGetResp2.AccessKey != nil {
+		if *kinesisCreateResp2.AccessKey != *kinesisGetResp2.AccessKey {
+			t.Errorf("bad access_key: %q", *kinesisGetResp2.AccessKey)
+		}
 	}
-	if kinesisCreateResp2.SecretKey != kinesisGetResp2.SecretKey {
-		t.Errorf("bad secret_key: %q", kinesisGetResp2.SecretKey)
+	if kinesisCreateResp2.SecretKey != nil && kinesisGetResp2.SecretKey != nil {
+		if *kinesisCreateResp2.SecretKey != *kinesisGetResp2.SecretKey {
+			t.Errorf("bad secret_key: %q", *kinesisGetResp2.SecretKey)
+		}
 	}
-	if kinesisCreateResp2.IAMRole != kinesisGetResp2.IAMRole {
-		t.Errorf("bad iam_role: %q", kinesisGetResp2.IAMRole)
+	if *kinesisCreateResp2.IAMRole != *kinesisGetResp2.IAMRole {
+		t.Errorf("bad iam_role: %q", *kinesisGetResp2.IAMRole)
 	}
 
 	// Update
@@ -237,7 +243,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/update", func(c *Client) {
 		kinesisUpdateResp1, err = c.UpdateKinesis(&UpdateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
 			NewName:        ToPointer("new-test-kinesis"),
 		})
@@ -251,7 +257,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/update2", func(c *Client) {
 		kinesisUpdateResp2, err = c.UpdateKinesis(&UpdateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           "new-test-kinesis",
 			AccessKey:      ToPointer(""),
 			SecretKey:      ToPointer(""),
@@ -267,7 +273,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/update3", func(c *Client) {
 		kinesisUpdateResp3, err = c.UpdateKinesis(&UpdateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           "test-kinesis-2",
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
@@ -283,7 +289,7 @@ func TestClient_Kinesis(t *testing.T) {
 	record(t, "kinesis/update4", func(c *Client) {
 		_, err = c.UpdateKinesis(&UpdateKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           "test-kinesis",
 			IAMRole:        ToPointer("badarn"),
 		})
@@ -292,33 +298,33 @@ func TestClient_Kinesis(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if kinesisUpdateResp1.Name != "new-test-kinesis" {
-		t.Errorf("bad name: %q", kinesisUpdateResp1.Name)
+	if *kinesisUpdateResp1.Name != "new-test-kinesis" {
+		t.Errorf("bad name: %q", *kinesisUpdateResp1.Name)
 	}
-	if kinesisUpdateResp2.AccessKey != "" {
-		t.Errorf("bad access_key: %q", kinesisUpdateResp2.AccessKey)
+	if *kinesisUpdateResp2.AccessKey != "" {
+		t.Errorf("bad access_key: %q", *kinesisUpdateResp2.AccessKey)
 	}
-	if kinesisUpdateResp2.SecretKey != "" {
-		t.Errorf("bad secret_key: %q", kinesisUpdateResp2.SecretKey)
+	if *kinesisUpdateResp2.SecretKey != "" {
+		t.Errorf("bad secret_key: %q", *kinesisUpdateResp2.SecretKey)
 	}
-	if kinesisUpdateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
-		t.Errorf("bad iam_role: %q", kinesisUpdateResp2.IAMRole)
+	if *kinesisUpdateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
+		t.Errorf("bad iam_role: %q", *kinesisUpdateResp2.IAMRole)
 	}
-	if kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
-		t.Errorf("bad access_key: %q", kinesisUpdateResp3.AccessKey)
+	if *kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+		t.Errorf("bad access_key: %q", *kinesisUpdateResp3.AccessKey)
 	}
-	if kinesisUpdateResp3.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
-		t.Errorf("bad secret_key: %q", kinesisUpdateResp3.SecretKey)
+	if *kinesisUpdateResp3.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
+		t.Errorf("bad secret_key: %q", *kinesisUpdateResp3.SecretKey)
 	}
-	if kinesisUpdateResp3.IAMRole != "" {
-		t.Errorf("bad iam_role: %q", kinesisUpdateResp3.IAMRole)
+	if *kinesisUpdateResp3.IAMRole != "" {
+		t.Errorf("bad iam_role: %q", *kinesisUpdateResp3.IAMRole)
 	}
 
 	// Delete
 	record(t, "kinesis/delete", func(c *Client) {
 		err = c.DeleteKinesis(&DeleteKinesisInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Name:           "new-test-kinesis",
 		})
 	})

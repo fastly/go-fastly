@@ -3,38 +3,19 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // VCL represents a response about VCL from the Fastly API.
 type VCL struct {
-	Content        string     `mapstructure:"content"`
+	Content        *string    `mapstructure:"content"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	Main           bool       `mapstructure:"main"`
-	Name           string     `mapstructure:"name"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
+	Main           *bool      `mapstructure:"main"`
+	Name           *string    `mapstructure:"name"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int       `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
-}
-
-// vclsByName is a sortable list of VCLs.
-type vclsByName []*VCL
-
-// Len implement the sortable interface.
-func (s vclsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s vclsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s vclsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListVCLsInput is used as input to the ListVCLs function.
@@ -65,7 +46,6 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 	if err := decodeBodyMap(resp.Body, &vcls); err != nil {
 		return nil, err
 	}
-	sort.Stable(vclsByName(vcls))
 	return vcls, nil
 }
 

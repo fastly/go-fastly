@@ -39,7 +39,7 @@ sub vcl_hash {
 	record(t, "vcls/create", func(c *Client) {
 		vcl, err = c.CreateVCL(&CreateVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-vcl"),
 			Content:        ToPointer(content),
 		})
@@ -53,23 +53,23 @@ sub vcl_hash {
 		record(t, "vcls/cleanup", func(c *Client) {
 			_ = c.DeleteVCL(&DeleteVCLInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-vcl",
 			})
 
 			_ = c.DeleteVCL(&DeleteVCLInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-vcl",
 			})
 		})
 	}()
 
-	if vcl.Name != "test-vcl" {
-		t.Errorf("bad name: %q", vcl.Name)
+	if *vcl.Name != "test-vcl" {
+		t.Errorf("bad name: %q", *vcl.Name)
 	}
-	if vcl.Content != content {
-		t.Errorf("bad content: %q", vcl.Content)
+	if *vcl.Content != content {
+		t.Errorf("bad content: %q", *vcl.Content)
 	}
 
 	// List
@@ -77,7 +77,7 @@ sub vcl_hash {
 	record(t, "vcls/list", func(c *Client) {
 		vcls, err = c.ListVCLs(&ListVCLsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -92,18 +92,18 @@ sub vcl_hash {
 	record(t, "vcls/get", func(c *Client) {
 		nvcl, err = c.GetVCL(&GetVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if vcl.Name != nvcl.Name {
-		t.Errorf("bad name: %q", vcl.Name)
+	if *vcl.Name != *nvcl.Name {
+		t.Errorf("bad name: %q", *vcl.Name)
 	}
-	if vcl.Content != nvcl.Content {
-		t.Errorf("bad address: %q", vcl.Content)
+	if *vcl.Content != *nvcl.Content {
+		t.Errorf("bad address: %q", *vcl.Content)
 	}
 
 	// Update
@@ -111,7 +111,7 @@ sub vcl_hash {
 	record(t, "vcls/update", func(c *Client) {
 		uvcl, err = c.UpdateVCL(&UpdateVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 			NewName:        ToPointer("new-test-vcl"),
 		})
@@ -119,8 +119,8 @@ sub vcl_hash {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uvcl.Name != "new-test-vcl" {
-		t.Errorf("bad name: %q", uvcl.Name)
+	if *uvcl.Name != "new-test-vcl" {
+		t.Errorf("bad name: %q", *uvcl.Name)
 	}
 
 	// Activate
@@ -128,22 +128,22 @@ sub vcl_hash {
 	record(t, "vcls/activate", func(c *Client) {
 		avcl, err = c.ActivateVCL(&ActivateVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !avcl.Main {
-		t.Errorf("bad main: %t", avcl.Main)
+	if !*avcl.Main {
+		t.Errorf("bad main: %t", *avcl.Main)
 	}
 
 	// Delete
 	record(t, "vcls/delete", func(c *Client) {
 		err = c.DeleteVCL(&DeleteVCLInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})
 	})

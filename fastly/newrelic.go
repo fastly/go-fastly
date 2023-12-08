@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,34 +10,16 @@ import (
 type NewRelic struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Region            string     `mapstructure:"region"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Region            *string    `mapstructure:"region"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// newrelicByName is a sortable list of newrelic.
-type newrelicByName []*NewRelic
-
-// Len implement the sortable interface.
-func (s newrelicByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s newrelicByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s newrelicByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListNewRelicInput is used as input to the ListNewRelic function.
@@ -69,7 +50,6 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	if err := decodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
-	sort.Stable(newrelicByName(n))
 	return n, nil
 }
 
@@ -160,7 +140,7 @@ type UpdateNewRelicInput struct {
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
 	FormatVersion *int `url:"format_version,omitempty"`
-	// Name is the name of the newrelic to update.
+	// Name is the name of the newrelic to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`

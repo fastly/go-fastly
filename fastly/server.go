@@ -2,43 +2,24 @@ package fastly
 
 import (
 	"fmt"
-	"sort"
 	"time"
 )
 
 // Server represents a server response from the Fastly API.
 type Server struct {
-	Address      string     `mapstructure:"address"`
-	Comment      string     `mapstructure:"comment"`
+	Address      *string    `mapstructure:"address"`
+	Comment      *string    `mapstructure:"comment"`
 	CreatedAt    *time.Time `mapstructure:"created_at"`
 	DeletedAt    *time.Time `mapstructure:"deleted_at"`
-	Disabled     bool       `mapstructure:"disabled"`
-	ID           string     `mapstructure:"id"`
-	MaxConn      int        `mapstructure:"max_conn"`
-	OverrideHost string     `mapstructure:"override_host"`
-	PoolID       string     `mapstructure:"pool_id"`
-	Port         int        `mapstructure:"port"`
-	ServiceID    string     `mapstructure:"service_id"`
+	Disabled     *bool      `mapstructure:"disabled"`
+	ID           *string    `mapstructure:"id"`
+	MaxConn      *int       `mapstructure:"max_conn"`
+	OverrideHost *string    `mapstructure:"override_host"`
+	PoolID       *string    `mapstructure:"pool_id"`
+	Port         *int       `mapstructure:"port"`
+	ServiceID    *string    `mapstructure:"service_id"`
 	UpdatedAt    *time.Time `mapstructure:"updated_at"`
-	Weight       int        `mapstructure:"weight"`
-}
-
-// serversByAddress is a sortable list of servers.
-type serversByAddress []*Server
-
-// Len implement the sortable interface.
-func (s serversByAddress) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s serversByAddress) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s serversByAddress) Less(i, j int) bool {
-	return s[i].Address < s[j].Address
+	Weight       *int       `mapstructure:"weight"`
 }
 
 // ListServersInput is used as input to the ListServers function.
@@ -69,7 +50,6 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	if err := decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
-	sort.Stable(serversByAddress(ss))
 	return ss, nil
 }
 

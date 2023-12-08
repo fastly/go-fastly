@@ -3,67 +3,60 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 const (
-	// SnippetTypeInit sets the type to init
+	// SnippetTypeInit sets the type to init.
 	SnippetTypeInit SnippetType = "init"
 
-	// SnippetTypeRecv sets the type to recv
+	// SnippetTypeRecv sets the type to recv.
 	SnippetTypeRecv SnippetType = "recv"
 
-	// SnippetTypeHash sets the type to hash
+	// SnippetTypeHash sets the type to hash.
 	SnippetTypeHash SnippetType = "hash"
 
-	// SnippetTypeHit sets the type to hit
+	// SnippetTypeHit sets the type to hit.
 	SnippetTypeHit SnippetType = "hit"
 
-	// SnippetTypeMiss sets the type to miss
+	// SnippetTypeMiss sets the type to miss.
 	SnippetTypeMiss SnippetType = "miss"
 
-	// SnippetTypePass sets the type to pass
+	// SnippetTypePass sets the type to pass.
 	SnippetTypePass SnippetType = "pass"
 
 	// SnippetTypeFetch sets the type to fetch
 	SnippetTypeFetch SnippetType = "fetch"
 
-	// SnippetTypeError sets the type to error
+	// SnippetTypeError sets the type to error.
 	SnippetTypeError SnippetType = "error"
 
-	// SnippetTypeDeliver sets the type to deliver
+	// SnippetTypeDeliver sets the type to deliver.
 	SnippetTypeDeliver SnippetType = "deliver"
 
-	// SnippetTypeLog sets the type to log
+	// SnippetTypeLog sets the type to log.
 	SnippetTypeLog SnippetType = "log"
 
-	// SnippetTypeNone sets the type to none
+	// SnippetTypeNone sets the type to none.
 	SnippetTypeNone SnippetType = "none"
 )
 
-// SnippetType is the type of VCL Snippet
+// SnippetType is the type of VCL Snippet.
 type SnippetType string
 
-// SnippetTypePtr is a helper function to get a pointer to string
-func SnippetTypePtr(b SnippetType) *SnippetType {
-	p := SnippetType(b)
-	return &p
-}
-
-// Snippet is the Fastly Snippet object
+// Snippet is the Fastly Snippet object.
 type Snippet struct {
-	Content        string      `mapstructure:"content"`
-	CreatedAt      *time.Time  `mapstructure:"created_at"`
-	DeletedAt      *time.Time  `mapstructure:"deleted_at"`
-	Dynamic        int         `mapstructure:"dynamic"`
-	ID             string      `mapstructure:"id"`
-	Name           string      `mapstructure:"name"`
-	Priority       int         `mapstructure:"priority"`
-	ServiceID      string      `mapstructure:"service_id"`
-	ServiceVersion int         `mapstructure:"version"`
-	Type           SnippetType `mapstructure:"type"`
-	UpdatedAt      *time.Time  `mapstructure:"updated_at"`
+	Content        *string      `mapstructure:"content"`
+	CreatedAt      *time.Time   `mapstructure:"created_at"`
+	DeletedAt      *time.Time   `mapstructure:"deleted_at"`
+	Dynamic        *int         `mapstructure:"dynamic"`
+	ID             *string      `mapstructure:"id"`
+	Name           *string      `mapstructure:"name"`
+	Priority       *int         `mapstructure:"priority"`
+	ServiceID      *string      `mapstructure:"service_id"`
+	ServiceVersion *int         `mapstructure:"version"`
+	Type           *SnippetType `mapstructure:"type"`
+	UpdatedAt      *time.Time   `mapstructure:"updated_at"`
 }
 
 // CreateSnippetInput is the input for CreateSnippet
@@ -153,10 +146,10 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 
 // DynamicSnippet is the object returned when updating or retrieving a Dynamic Snippet
 type DynamicSnippet struct {
-	Content   string     `mapstructure:"content"`
+	Content   *string    `mapstructure:"content"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
-	ID        string     `mapstructure:"snippet_id"`
-	ServiceID string     `mapstructure:"service_id"`
+	ID        *string    `mapstructure:"snippet_id"`
+	ServiceID *string    `mapstructure:"service_id"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
@@ -240,24 +233,6 @@ type ListSnippetsInput struct {
 	ServiceVersion int
 }
 
-// snippetsByName is a sortable list of Snippets.
-type snippetsByName []*Snippet
-
-// Len implement the sortable interface.
-func (s snippetsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s snippetsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s snippetsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
-}
-
 // ListSnippets retrieves all resources.
 //
 // Content is not displayed for Dynmanic Snippets due to them being
@@ -281,7 +256,6 @@ func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	if err := decodeBodyMap(resp.Body, &snippets); err != nil {
 		return nil, err
 	}
-	sort.Stable(snippetsByName(snippets))
 	return snippets, nil
 }
 

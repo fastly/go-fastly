@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -23,34 +22,16 @@ type CacheSettingAction string
 
 // CacheSetting represents a response from Fastly's API for cache settings.
 type CacheSetting struct {
-	Action         CacheSettingAction `mapstructure:"action"`
-	CacheCondition string             `mapstructure:"cache_condition"`
-	CreatedAt      *time.Time         `mapstructure:"created_at"`
-	DeletedAt      *time.Time         `mapstructure:"deleted_at"`
-	Name           string             `mapstructure:"name"`
-	ServiceID      string             `mapstructure:"service_id"`
-	ServiceVersion int                `mapstructure:"version"`
-	StaleTTL       int                `mapstructure:"stale_ttl"`
-	TTL            int                `mapstructure:"ttl"`
-	UpdatedAt      *time.Time         `mapstructure:"updated_at"`
-}
-
-// cacheSettingsByName is a sortable list of cache settings.
-type cacheSettingsByName []*CacheSetting
-
-// Len implement the sortable interface.
-func (s cacheSettingsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s cacheSettingsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s cacheSettingsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	Action         *CacheSettingAction `mapstructure:"action"`
+	CacheCondition *string             `mapstructure:"cache_condition"`
+	CreatedAt      *time.Time          `mapstructure:"created_at"`
+	DeletedAt      *time.Time          `mapstructure:"deleted_at"`
+	Name           *string             `mapstructure:"name"`
+	ServiceID      *string             `mapstructure:"service_id"`
+	ServiceVersion *int                `mapstructure:"version"`
+	StaleTTL       *int                `mapstructure:"stale_ttl"`
+	TTL            *int                `mapstructure:"ttl"`
+	UpdatedAt      *time.Time          `mapstructure:"updated_at"`
 }
 
 // ListCacheSettingsInput is used as input to the ListCacheSettings function.
@@ -81,7 +62,6 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 	if err := decodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
-	sort.Stable(cacheSettingsByName(cs))
 	return cs, nil
 }
 
@@ -165,7 +145,7 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 // UpdateCacheSettingInput is used as input to the UpdateCacheSetting function.
 type UpdateCacheSettingInput struct {
 	// Action determines vcl_fetch behaviour (pass, cache, restart).
-	Action CacheSettingAction `url:"action,omitempty"`
+	Action *CacheSettingAction `url:"action,omitempty"`
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Name is the name of the cache setting to update (required).

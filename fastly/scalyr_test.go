@@ -18,7 +18,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/create", func(c *Client) {
 		s, err = c.CreateScalyr(&CreateScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-scalyr"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
@@ -36,35 +36,35 @@ func TestClient_Scalyrs(t *testing.T) {
 		record(t, "scalyrs/cleanup", func(c *Client) {
 			_ = c.DeleteScalyr(&DeleteScalyrInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-scalyr",
 			})
 
 			_ = c.DeleteScalyr(&DeleteScalyrInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-scalyr",
 			})
 		})
 	}()
 
-	if s.Name != "test-scalyr" {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != "test-scalyr" {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.Format != "%h %l %u %t \"%r\" %>s %b" {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != "%h %l %u %t \"%r\" %>s %b" {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", s.FormatVersion)
+	if *s.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *s.FormatVersion)
 	}
-	if s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
-	if s.Region != "US" {
-		t.Errorf("bad region: %q", s.Region)
+	if *s.Region != "US" {
+		t.Errorf("bad region: %q", *s.Region)
 	}
-	if s.Token != "super-secure-token" {
-		t.Errorf("bad token: %q", s.Token)
+	if *s.Token != "super-secure-token" {
+		t.Errorf("bad token: %q", *s.Token)
 	}
 
 	// List
@@ -72,7 +72,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/list", func(c *Client) {
 		ss, err = c.ListScalyrs(&ListScalyrsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,30 +87,30 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/get", func(c *Client) {
 		ns, err = c.GetScalyr(&GetScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if s.Name != ns.Name {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != *ns.Name {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.Format != ns.Format {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != *ns.Format {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != ns.FormatVersion {
-		t.Errorf("bad format_version: %q", s.FormatVersion)
+	if *s.FormatVersion != *ns.FormatVersion {
+		t.Errorf("bad format_version: %q", *s.FormatVersion)
 	}
-	if s.Placement != ns.Placement {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != *ns.Placement {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
-	if s.Region != "US" {
-		t.Errorf("bad region: %q", s.Region)
+	if *s.Region != "US" {
+		t.Errorf("bad region: %q", *s.Region)
 	}
-	if s.Token != ns.Token {
-		t.Errorf("bad token: %q", s.Token)
+	if *s.Token != *ns.Token {
+		t.Errorf("bad token: %q", *s.Token)
 	}
 
 	// Update
@@ -118,7 +118,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	record(t, "scalyrs/update", func(c *Client) {
 		us, err = c.UpdateScalyr(&UpdateScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
 			NewName:        ToPointer("new-test-scalyr"),
 			Region:         ToPointer("EU"),
@@ -128,21 +128,21 @@ func TestClient_Scalyrs(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.Name != "new-test-scalyr" {
-		t.Errorf("bad name: %q", us.Name)
+	if *us.Name != "new-test-scalyr" {
+		t.Errorf("bad name: %q", *us.Name)
 	}
-	if us.Region != "EU" {
-		t.Errorf("bad region: %q", us.Region)
+	if *us.Region != "EU" {
+		t.Errorf("bad region: %q", *us.Region)
 	}
-	if us.Token != "new-token" {
-		t.Errorf("bad token: %q", us.Token)
+	if *us.Token != "new-token" {
+		t.Errorf("bad token: %q", *us.Token)
 	}
 
 	// Delete
 	record(t, "scalyrs/delete", func(c *Client) {
 		err = c.DeleteScalyr(&DeleteScalyrInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-scalyr",
 		})
 	})

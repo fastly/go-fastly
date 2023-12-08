@@ -3,51 +3,32 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // DigitalOcean represents a DigitalOcean response from the Fastly API.
 type DigitalOcean struct {
-	AccessKey         string     `mapstructure:"access_key"`
-	BucketName        string     `mapstructure:"bucket_name"`
-	CompressionCodec  string     `mapstructure:"compression_codec"`
+	AccessKey         *string    `mapstructure:"access_key"`
+	BucketName        *string    `mapstructure:"bucket_name"`
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Domain            string     `mapstructure:"domain"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	GzipLevel         int        `mapstructure:"gzip_level"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Path              string     `mapstructure:"path"`
-	Period            int        `mapstructure:"period"`
-	Placement         string     `mapstructure:"placement"`
-	PublicKey         string     `mapstructure:"public_key"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Domain            *string    `mapstructure:"domain"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	GzipLevel         *int       `mapstructure:"gzip_level"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Path              *string    `mapstructure:"path"`
+	Period            *int       `mapstructure:"period"`
+	Placement         *string    `mapstructure:"placement"`
+	PublicKey         *string    `mapstructure:"public_key"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	SecretKey         *string    `mapstructure:"secret_key"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TimestampFormat   *string    `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// digitaloceansByName is a sortable list of DigitalOceans.
-type digitaloceansByName []*DigitalOcean
-
-// Len implement the sortable interface.
-func (d digitaloceansByName) Len() int {
-	return len(d)
-}
-
-// Swap implement the sortable interface.
-func (d digitaloceansByName) Swap(i, j int) {
-	d[i], d[j] = d[j], d[i]
-}
-
-// Less implement the sortable interface.
-func (d digitaloceansByName) Less(i, j int) bool {
-	return d[i].Name < d[j].Name
 }
 
 // ListDigitalOceansInput is used as input to the ListDigitalOceans function.
@@ -78,7 +59,6 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 	if err := decodeBodyMap(resp.Body, &digitaloceans); err != nil {
 		return nil, err
 	}
-	sort.Stable(digitaloceansByName(digitaloceans))
 	return digitaloceans, nil
 }
 
@@ -199,7 +179,7 @@ type UpdateDigitalOceanInput struct {
 	GzipLevel *int `url:"gzip_level,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Name is the name of the DigitalOcean to update.
+	// Name is the name of the DigitalOcean to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`

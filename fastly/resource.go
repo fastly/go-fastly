@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -14,37 +13,21 @@ type Resource struct {
 	// CreatedAt is the date and time in ISO 8601 format.
 	DeletedAt *time.Time `mapstructure:"deleted_at" json:"deleted_at"`
 	// HREF is the path to the resource.
-	HREF string `mapstructure:"href" json:"href"`
+	HREF *string `mapstructure:"href" json:"href"`
 	// ID is an alphanumeric string identifying the resource link.
-	ID string `mapstructure:"id" json:"id"`
+	ID *string `mapstructure:"id" json:"id"`
 	// Name is the name of the resource being linked to.
-	Name string `mapstructure:"name" json:"name"`
+	Name *string `mapstructure:"name" json:"name"`
 	// ResourceID is the ID of the linked resource.
-	ResourceID string `mapstructure:"resource_id" json:"resource_id"`
+	ResourceID *string `mapstructure:"resource_id" json:"resource_id"`
 	// ResourceType is the type of the linked resource.
-	ResourceType string `mapstructure:"resource_type" json:"resource_type"`
+	ResourceType *string `mapstructure:"resource_type" json:"resource_type"`
 	// ServiceID is an alphanumeric string identifying the service.
-	ServiceID string `mapstructure:"service_id" json:"service_id"`
+	ServiceID *string `mapstructure:"service_id" json:"service_id"`
 	// ServiceVersion is an integer identifying a service version.
-	ServiceVersion int `mapstructure:"version" json:"version"`
+	ServiceVersion *int `mapstructure:"version" json:"version"`
 	// UpdatedAt is the date and time in ISO 8601 format.
 	UpdatedAt *time.Time `mapstructure:"updated_at" json:"updated_at"`
-}
-
-// resourcesByName is a sortable list of resources.
-type resourcesByName []*Resource
-
-// Len, Swap, and Less implement the sortable interface.
-func (s resourcesByName) Len() int {
-	return len(s)
-}
-
-func (s resourcesByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-func (s resourcesByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListResourcesInput is used as input to the ListResources function.
@@ -75,7 +58,6 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 	if err := decodeBodyMap(resp.Body, &rs); err != nil {
 		return nil, err
 	}
-	sort.Stable(resourcesByName(rs))
 	return rs, nil
 }
 

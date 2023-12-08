@@ -9,11 +9,11 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 	nameSuffix := "DictionaryInfo"
 
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
 
-	testVersion := createTestVersion(t, fixtureBase+"version", testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", testService.ID, testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", *testService.ID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	var (
@@ -23,18 +23,18 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 
 	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
-			ServiceID:    testService.ID,
-			DictionaryID: testDictionary.ID,
+			ServiceID:    *testService.ID,
+			DictionaryID: *testDictionary.ID,
 			Items: []*BatchDictionaryItem{
 				{
-					Operation: CreateBatchOperation,
-					ItemKey:   "test-dictionary-item-0",
-					ItemValue: "value",
+					Operation: ToPointer(CreateBatchOperation),
+					ItemKey:   ToPointer("test-dictionary-item-0"),
+					ItemValue: ToPointer("value"),
 				},
 				{
-					Operation: CreateBatchOperation,
-					ItemKey:   "test-dictionary-item-1",
-					ItemValue: "value",
+					Operation: ToPointer(CreateBatchOperation),
+					ItemKey:   ToPointer("test-dictionary-item-1"),
+					ItemValue: ToPointer("value"),
 				},
 			},
 		})
@@ -45,43 +45,40 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 
 	record(t, fixtureBase+"get", func(c *Client) {
 		info, err = c.GetDictionaryInfo(&GetDictionaryInfoInput{
-			ServiceID:      testService.ID,
-			ServiceVersion: testVersion.Number,
-			ID:             testDictionary.ID,
+			ServiceID:      *testService.ID,
+			ServiceVersion: *testVersion.Number,
+			ID:             *testDictionary.ID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
 
-	if info.ItemCount != 2 {
-		t.Errorf("bad item_count: %d", info.ItemCount)
+	if *info.ItemCount != 2 {
+		t.Errorf("bad item_count: %d", *info.ItemCount)
 	}
 }
 
 func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	var err error
+	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{})
+	if err != ErrMissingID {
+		t.Errorf("bad error: %s", err)
+	}
+
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
-		ServiceID: "",
+		ID: "123",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
+		ID:             "123",
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
-		ServiceID:      "foo",
-		ServiceVersion: 1,
-		ID:             "",
-	})
-	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 }

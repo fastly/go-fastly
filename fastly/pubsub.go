@@ -3,45 +3,26 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Pubsub represents an Pubsub logging response from the Fastly API.
 type Pubsub struct {
-	AccountName       string     `mapstructure:"account_name"`
+	AccountName       *string    `mapstructure:"account_name"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	ProjectID         string     `mapstructure:"project_id"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Topic             string     `mapstructure:"topic"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	ProjectID         *string    `mapstructure:"project_id"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	SecretKey         *string    `mapstructure:"secret_key"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Topic             *string    `mapstructure:"topic"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	User              string     `mapstructure:"user"`
-}
-
-// pubsubsByName is a sortable list of pubsubs.
-type pubsubsByName []*Pubsub
-
-// Len implement the sortable interface.
-func (s pubsubsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s pubsubsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s pubsubsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	User              *string    `mapstructure:"user"`
 }
 
 // ListPubsubsInput is used as input to the ListPubsubs function.
@@ -72,7 +53,6 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	if err := decodeBodyMap(resp.Body, &pubsubs); err != nil {
 		return nil, err
 	}
-	sort.Stable(pubsubsByName(pubsubs))
 	return pubsubs, nil
 }
 

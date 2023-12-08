@@ -1,13 +1,12 @@
----
 version: 1
 interactions:
   - request:
       body: ""
-      form: { }
+      form: {}
       headers:
         User-Agent:
           - FastlyGo/6.0.1 (+github.com/fastly/go-fastly; go1.17.2)
-      url: https://api.fastly.com/metrics/origins/services/7i6HN3TK9wS159v2gPAZ8A?cursor=&datacenter=LHR%2CJFK&downsample=day&end=1644796800&host=host01&metric=responses%2Cstatus_2xx&region=europe%2Cusa&start=1644624000
+      url: https://api.fastly.com/metrics/origins/services/7i6HN3TK9wS159v2gPAZ8A?cursor=&datacenter=LHR%2CJFK&downsample=day&end=1644796800&group_by=host&host=host01&metric=responses%2Cstatus_2xx&region=europe%2Cusa&start=1644624000
       method: GET
     response:
       body: |

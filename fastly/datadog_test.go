@@ -18,7 +18,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/create", func(c *Client) {
 		d, err = c.CreateDatadog(&CreateDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-datadog"),
 			Region:         ToPointer("US"),
 			Token:          ToPointer("abcd1234"),
@@ -35,35 +35,35 @@ func TestClient_Datadog(t *testing.T) {
 		record(t, "datadog/delete", func(c *Client) {
 			c.DeleteDatadog(&DeleteDatadogInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-datadog",
 			})
 
 			c.DeleteDatadog(&DeleteDatadogInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-datadog",
 			})
 		})
 	}()
 
-	if d.Name != "test-datadog" {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != "test-datadog" {
+		t.Errorf("bad name: %q", *d.Name)
 	}
-	if d.Token != "abcd1234" {
-		t.Errorf("bad token: %q", d.Token)
+	if *d.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *d.Token)
 	}
-	if d.Region != "US" {
-		t.Errorf("bad token: %q", d.Region)
+	if *d.Region != "US" {
+		t.Errorf("bad token: %q", *d.Region)
 	}
-	if d.Format != "format" {
-		t.Errorf("bad format: %q", d.Format)
+	if *d.Format != "format" {
+		t.Errorf("bad format: %q", *d.Format)
 	}
-	if d.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", d.FormatVersion)
+	if *d.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if d.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", d.Placement)
+	if *d.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
 	// List
@@ -71,7 +71,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/list", func(c *Client) {
 		ld, err = c.ListDatadog(&ListDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -86,27 +86,27 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/get", func(c *Client) {
 		nd, err = c.GetDatadog(&GetDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-datadog",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d.Name != nd.Name {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != *nd.Name {
+		t.Errorf("bad name: %q", *d.Name)
 	}
-	if d.Token != nd.Token {
-		t.Errorf("bad token: %q", d.Token)
+	if *d.Token != *nd.Token {
+		t.Errorf("bad token: %q", *d.Token)
 	}
-	if d.Format != nd.Format {
-		t.Errorf("bad format: %q", d.Format)
+	if *d.Format != *nd.Format {
+		t.Errorf("bad format: %q", *d.Format)
 	}
-	if d.FormatVersion != nd.FormatVersion {
-		t.Errorf("bad format_version: %q", d.FormatVersion)
+	if *d.FormatVersion != *nd.FormatVersion {
+		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if d.Placement != nd.Placement {
-		t.Errorf("bad placement: %q", d.Placement)
+	if *d.Placement != *nd.Placement {
+		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
 	// Update
@@ -114,7 +114,7 @@ func TestClient_Datadog(t *testing.T) {
 	record(t, "datadog/update", func(c *Client) {
 		ud, err = c.UpdateDatadog(&UpdateDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-datadog",
 			NewName:        ToPointer("new-test-datadog"),
 			Region:         ToPointer("EU"),
@@ -124,21 +124,21 @@ func TestClient_Datadog(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.Name != "new-test-datadog" {
-		t.Errorf("bad name: %q", ud.Name)
+	if *ud.Name != "new-test-datadog" {
+		t.Errorf("bad name: %q", *ud.Name)
 	}
-	if ud.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", ud.FormatVersion)
+	if *ud.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *ud.FormatVersion)
 	}
-	if ud.Region != "EU" {
-		t.Errorf("bad region: %q", ud.Region)
+	if *ud.Region != "EU" {
+		t.Errorf("bad region: %q", *ud.Region)
 	}
 
 	// Delete
 	record(t, "datadog/delete", func(c *Client) {
 		err = c.DeleteDatadog(&DeleteDatadogInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-datadog",
 		})
 	})

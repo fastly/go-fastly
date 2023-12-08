@@ -17,7 +17,7 @@ func TestClient_Dictionaries(t *testing.T) {
 	record(t, fixtureBase+"create", func(c *Client) {
 		d, err = c.CreateDictionary(&CreateDictionaryInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           ToPointer("test_dictionary"),
 		})
 	})
@@ -30,20 +30,20 @@ func TestClient_Dictionaries(t *testing.T) {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteDictionary(&DeleteDictionaryInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: testVersion.Number,
+				ServiceVersion: *testVersion.Number,
 				Name:           "test_dictionary",
 			})
 
 			_ = c.DeleteDictionary(&DeleteDictionaryInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: testVersion.Number,
+				ServiceVersion: *testVersion.Number,
 				Name:           "new_test_dictionary",
 			})
 		})
 	}()
 
-	if d.Name != "test_dictionary" {
-		t.Errorf("bad name: %q", d.Name)
+	if *d.Name != "test_dictionary" {
+		t.Errorf("bad name: %q", *d.Name)
 	}
 
 	// List
@@ -51,7 +51,7 @@ func TestClient_Dictionaries(t *testing.T) {
 	record(t, fixtureBase+"list", func(c *Client) {
 		ds, err = c.ListDictionaries(&ListDictionariesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 		})
 	})
 	if err != nil {
@@ -66,15 +66,15 @@ func TestClient_Dictionaries(t *testing.T) {
 	record(t, fixtureBase+"get", func(c *Client) {
 		nd, err = c.GetDictionary(&GetDictionaryInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           "test_dictionary",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if d.Name != nd.Name {
-		t.Errorf("bad name: %q (%q)", d.Name, nd.Name)
+	if *d.Name != *nd.Name {
+		t.Errorf("bad name: %q (%q)", *d.Name, *nd.Name)
 	}
 
 	// Update
@@ -82,7 +82,7 @@ func TestClient_Dictionaries(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		ud, err = c.UpdateDictionary(&UpdateDictionaryInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           "test_dictionary",
 			NewName:        ToPointer("new_test_dictionary"),
 		})
@@ -90,15 +90,15 @@ func TestClient_Dictionaries(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.Name != "new_test_dictionary" {
-		t.Errorf("bad name: %q", ud.Name)
+	if *ud.Name != "new_test_dictionary" {
+		t.Errorf("bad name: %q", *ud.Name)
 	}
 
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteDictionary(&DeleteDictionaryInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: testVersion.Number,
+			ServiceVersion: *testVersion.Number,
 			Name:           "new_test_dictionary",
 		})
 	})

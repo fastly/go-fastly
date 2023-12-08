@@ -18,7 +18,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/create", func(c *Client) {
 		p, err = c.CreatePapertrail(&CreatePapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-papertrail"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
 			Port:           ToPointer(1234),
@@ -36,35 +36,35 @@ func TestClient_Papertrails(t *testing.T) {
 		record(t, "papertrails/cleanup", func(c *Client) {
 			_ = c.DeletePapertrail(&DeletePapertrailInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-papertrail",
 			})
 
 			_ = c.DeletePapertrail(&DeletePapertrailInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-papertrail",
 			})
 		})
 	}()
 
-	if p.Name != "test-papertrail" {
-		t.Errorf("bad name: %q", p.Name)
+	if *p.Name != "test-papertrail" {
+		t.Errorf("bad name: %q", *p.Name)
 	}
-	if p.Address != "integ-test.go-fastly.com" {
-		t.Errorf("bad address: %q", p.Address)
+	if *p.Address != "integ-test.go-fastly.com" {
+		t.Errorf("bad address: %q", *p.Address)
 	}
-	if p.Port != 1234 {
-		t.Errorf("bad port: %q", p.Port)
+	if *p.Port != 1234 {
+		t.Errorf("bad port: %q", *p.Port)
 	}
-	if p.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", p.FormatVersion)
+	if *p.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *p.FormatVersion)
 	}
-	if p.Format != "format" {
-		t.Errorf("bad format: %q", p.Format)
+	if *p.Format != "format" {
+		t.Errorf("bad format: %q", *p.Format)
 	}
-	if p.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", p.Placement)
+	if *p.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *p.Placement)
 	}
 
 	// List
@@ -72,7 +72,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/list", func(c *Client) {
 		ps, err = c.ListPapertrails(&ListPapertrailsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,30 +87,30 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/get", func(c *Client) {
 		np, err = c.GetPapertrail(&GetPapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-papertrail",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if p.Name != np.Name {
-		t.Errorf("bad name: %q", p.Name)
+	if *p.Name != *np.Name {
+		t.Errorf("bad name: %q", *p.Name)
 	}
-	if p.Address != np.Address {
-		t.Errorf("bad address: %q", p.Address)
+	if *p.Address != *np.Address {
+		t.Errorf("bad address: %q", *p.Address)
 	}
-	if p.Port != np.Port {
-		t.Errorf("bad port: %q", p.Port)
+	if *p.Port != *np.Port {
+		t.Errorf("bad port: %q", *p.Port)
 	}
-	if p.FormatVersion != np.FormatVersion {
-		t.Errorf("bad format_version: %q", p.FormatVersion)
+	if *p.FormatVersion != *np.FormatVersion {
+		t.Errorf("bad format_version: %q", *p.FormatVersion)
 	}
-	if p.Format != np.Format {
-		t.Errorf("bad format: %q", p.Format)
+	if *p.Format != *np.Format {
+		t.Errorf("bad format: %q", *p.Format)
 	}
-	if p.Placement != np.Placement {
-		t.Errorf("bad placement: %q", p.Placement)
+	if *p.Placement != *np.Placement {
+		t.Errorf("bad placement: %q", *p.Placement)
 	}
 
 	// Update
@@ -118,7 +118,7 @@ func TestClient_Papertrails(t *testing.T) {
 	record(t, "papertrails/update", func(c *Client) {
 		up, err = c.UpdatePapertrail(&UpdatePapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-papertrail",
 			NewName:        ToPointer("new-test-papertrail"),
 		})
@@ -126,15 +126,15 @@ func TestClient_Papertrails(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if up.Name != "new-test-papertrail" {
-		t.Errorf("bad name: %q", up.Name)
+	if *up.Name != "new-test-papertrail" {
+		t.Errorf("bad name: %q", *up.Name)
 	}
 
 	// Delete
 	record(t, "papertrails/delete", func(c *Client) {
 		err = c.DeletePapertrail(&DeletePapertrailInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-papertrail",
 		})
 	})

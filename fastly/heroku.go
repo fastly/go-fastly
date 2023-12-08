@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,34 +10,16 @@ import (
 type Heroku struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
-	URL               string     `mapstructure:"url"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
+	URL               *string    `mapstructure:"url"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// herokusByName is a sortable list of herokus.
-type herokusByName []*Heroku
-
-// Len implement the sortable interface.
-func (h herokusByName) Len() int {
-	return len(h)
-}
-
-// Swap implement the sortable interface.
-func (h herokusByName) Swap(i, j int) {
-	h[i], h[j] = h[j], h[i]
-}
-
-// Less implement the sortable interface.
-func (h herokusByName) Less(i, j int) bool {
-	return h[i].Name < h[j].Name
 }
 
 // ListHerokusInput is used as input to the ListHerokus function.
@@ -68,7 +49,6 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	if err := decodeBodyMap(resp.Body, &hs); err != nil {
 		return nil, err
 	}
-	sort.Stable(herokusByName(hs))
 	return hs, nil
 }
 

@@ -20,7 +20,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/create", func(c *Client) {
 		sftpCreateResp1, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp"),
 			Address:          ToPointer("example.com"),
 			Port:             ToPointer(1234),
@@ -46,7 +46,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/create2", func(c *Client) {
 		sftpCreateResp2, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
+			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-sftp-2"),
 			Address:         ToPointer("example.com"),
 			Port:            ToPointer(1234),
@@ -72,7 +72,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/create3", func(c *Client) {
 		sftpCreateResp3, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp-3"),
 			Address:          ToPointer("example.com"),
 			Port:             ToPointer(1234),
@@ -100,7 +100,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/create4", func(c *Client) {
 		_, err = c.CreateSFTP(&CreateSFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp-4"),
 			Address:          ToPointer("example.com"),
 			Port:             ToPointer(1234),
@@ -129,94 +129,92 @@ func TestClient_SFTPs(t *testing.T) {
 		record(t, "sftps/cleanup", func(c *Client) {
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-sftp",
 			})
 
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-sftp-2",
 			})
 
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-sftp-3",
 			})
 
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-sftp",
 			})
 		})
 	}()
 
-	if sftpCreateResp1.Name != "test-sftp" {
-		t.Errorf("bad name: %q", sftpCreateResp1.Name)
+	if *sftpCreateResp1.Name != "test-sftp" {
+		t.Errorf("bad name: %q", *sftpCreateResp1.Name)
 	}
-	if sftpCreateResp1.Address != "example.com" {
-		t.Errorf("bad address: %q", sftpCreateResp1.Address)
+	if *sftpCreateResp1.Address != "example.com" {
+		t.Errorf("bad address: %q", *sftpCreateResp1.Address)
 	}
-	if sftpCreateResp1.Port != 1234 {
-		t.Errorf("bad port: %q", sftpCreateResp1.Port)
+	if *sftpCreateResp1.Port != 1234 {
+		t.Errorf("bad port: %q", *sftpCreateResp1.Port)
 	}
-	if sftpCreateResp1.PublicKey != pgpPublicKey() {
-		t.Errorf("bad public_key: %q", sftpCreateResp1.PublicKey)
+	if *sftpCreateResp1.PublicKey != pgpPublicKey() {
+		t.Errorf("bad public_key: %q", *sftpCreateResp1.PublicKey)
 	}
-	if strings.TrimSpace(sftpCreateResp1.SecretKey) != strings.TrimSpace(privateKey()) {
-		t.Errorf("bad secret_key: %q", sftpCreateResp1.SecretKey)
+	if strings.TrimSpace(*sftpCreateResp1.SecretKey) != strings.TrimSpace(privateKey()) {
+		t.Errorf("bad secret_key: %q", *sftpCreateResp1.SecretKey)
 	}
-	if sftpCreateResp1.SSHKnownHosts != knownHosts {
-		t.Errorf("bad ssh_known_hosts: %q", sftpCreateResp1.SSHKnownHosts)
+	if *sftpCreateResp1.SSHKnownHosts != knownHosts {
+		t.Errorf("bad ssh_known_hosts: %q", *sftpCreateResp1.SSHKnownHosts)
 	}
-	if sftpCreateResp1.User != "username" {
-		t.Errorf("bad user: %q", sftpCreateResp1.User)
+	if *sftpCreateResp1.User != "username" {
+		t.Errorf("bad user: %q", *sftpCreateResp1.User)
 	}
-	if sftpCreateResp1.Password != "password" {
-		t.Errorf("bad password: %q", sftpCreateResp1.Password)
+	if *sftpCreateResp1.Password != "password" {
+		t.Errorf("bad password: %q", *sftpCreateResp1.Password)
 	}
-	if sftpCreateResp1.Path != "/dir" {
-		t.Errorf("bad path: %q", sftpCreateResp1.Path)
+	if *sftpCreateResp1.Path != "/dir" {
+		t.Errorf("bad path: %q", *sftpCreateResp1.Path)
 	}
-	if sftpCreateResp1.Period != 12 {
-		t.Errorf("bad period: %q", sftpCreateResp1.Period)
+	if *sftpCreateResp1.Period != 12 {
+		t.Errorf("bad period: %q", *sftpCreateResp1.Period)
 	}
-	if sftpCreateResp1.CompressionCodec != "snappy" {
-		t.Errorf("bad compression_codec: %q", sftpCreateResp1.CompressionCodec)
+	if *sftpCreateResp1.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", *sftpCreateResp1.CompressionCodec)
 	}
-	if sftpCreateResp1.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", sftpCreateResp1.GzipLevel)
+	if *sftpCreateResp1.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *sftpCreateResp1.GzipLevel)
 	}
-	if sftpCreateResp1.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", sftpCreateResp1.FormatVersion)
+	if *sftpCreateResp1.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *sftpCreateResp1.FormatVersion)
 	}
-	if sftpCreateResp1.Format != "format" {
-		t.Errorf("bad format: %q", sftpCreateResp1.Format)
+	if *sftpCreateResp1.Format != "format" {
+		t.Errorf("bad format: %q", *sftpCreateResp1.Format)
 	}
-	if sftpCreateResp1.TimestampFormat != "%Y" {
-		t.Errorf("bad timestamp_format: %q", sftpCreateResp1.TimestampFormat)
+	if *sftpCreateResp1.TimestampFormat != "%Y" {
+		t.Errorf("bad timestamp_format: %q", *sftpCreateResp1.TimestampFormat)
 	}
-	if sftpCreateResp1.MessageType != "blank" {
-		t.Errorf("bad message_type: %q", sftpCreateResp1.MessageType)
+	if *sftpCreateResp1.MessageType != "blank" {
+		t.Errorf("bad message_type: %q", *sftpCreateResp1.MessageType)
 	}
-	if sftpCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", sftpCreateResp1.Placement)
+	if *sftpCreateResp1.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *sftpCreateResp1.Placement)
 	}
-
-	if sftpCreateResp2.CompressionCodec != "" {
-		t.Errorf("bad compression_codec: %q", sftpCreateResp2.CompressionCodec)
+	if sftpCreateResp2.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *sftpCreateResp2.CompressionCodec)
 	}
-	if sftpCreateResp2.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", sftpCreateResp2.GzipLevel)
+	if *sftpCreateResp2.GzipLevel != 8 {
+		t.Errorf("bad gzip_level: %q", *sftpCreateResp2.GzipLevel)
 	}
-
-	if sftpCreateResp3.CompressionCodec != "snappy" {
-		t.Errorf("bad compression_codec: %q", sftpCreateResp3.CompressionCodec)
+	if *sftpCreateResp3.CompressionCodec != "snappy" {
+		t.Errorf("bad compression_codec: %q", *sftpCreateResp3.CompressionCodec)
 	}
-	if sftpCreateResp3.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", sftpCreateResp3.GzipLevel)
+	if *sftpCreateResp3.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *sftpCreateResp3.GzipLevel)
 	}
 
 	// List
@@ -224,7 +222,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/list", func(c *Client) {
 		sftps, err = c.ListSFTPs(&ListSFTPsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -239,63 +237,64 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/get", func(c *Client) {
 		sftpGetResp, err = c.GetSFTP(&GetSFTPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-sftp",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if sftpCreateResp1.Name != sftpGetResp.Name {
-		t.Errorf("bad name: %q", sftpCreateResp1.Name)
+
+	if *sftpCreateResp1.Name != *sftpGetResp.Name {
+		t.Errorf("bad name: %q", *sftpCreateResp1.Name)
 	}
-	if sftpCreateResp1.Address != sftpGetResp.Address {
-		t.Errorf("bad address: %q", sftpCreateResp1.Address)
+	if *sftpCreateResp1.Address != *sftpGetResp.Address {
+		t.Errorf("bad address: %q", *sftpCreateResp1.Address)
 	}
-	if sftpCreateResp1.Port != sftpGetResp.Port {
-		t.Errorf("bad port: %q", sftpCreateResp1.Port)
+	if *sftpCreateResp1.Port != *sftpGetResp.Port {
+		t.Errorf("bad port: %q", *sftpCreateResp1.Port)
 	}
-	if sftpCreateResp1.PublicKey != sftpGetResp.PublicKey {
-		t.Errorf("bad public_key: %q", sftpCreateResp1.PublicKey)
+	if *sftpCreateResp1.PublicKey != *sftpGetResp.PublicKey {
+		t.Errorf("bad public_key: %q", *sftpCreateResp1.PublicKey)
 	}
-	if sftpCreateResp1.SecretKey != sftpGetResp.SecretKey {
-		t.Errorf("bad secret_key: %q", sftpCreateResp1.SecretKey)
+	if *sftpCreateResp1.SecretKey != *sftpGetResp.SecretKey {
+		t.Errorf("bad secret_key: %q", *sftpCreateResp1.SecretKey)
 	}
-	if sftpCreateResp1.SSHKnownHosts != sftpGetResp.SSHKnownHosts {
-		t.Errorf("bad ssh_known_hosts: %q", sftpCreateResp1.SSHKnownHosts)
+	if *sftpCreateResp1.SSHKnownHosts != *sftpGetResp.SSHKnownHosts {
+		t.Errorf("bad ssh_known_hosts: %q", *sftpCreateResp1.SSHKnownHosts)
 	}
-	if sftpCreateResp1.User != sftpGetResp.User {
-		t.Errorf("bad user: %q", sftpCreateResp1.User)
+	if *sftpCreateResp1.User != *sftpGetResp.User {
+		t.Errorf("bad user: %q", *sftpCreateResp1.User)
 	}
-	if sftpCreateResp1.Password != sftpGetResp.Password {
-		t.Errorf("bad password: %q", sftpCreateResp1.Password)
+	if *sftpCreateResp1.Password != *sftpGetResp.Password {
+		t.Errorf("bad password: %q", *sftpCreateResp1.Password)
 	}
-	if sftpCreateResp1.Path != sftpGetResp.Path {
-		t.Errorf("bad path: %q", sftpCreateResp1.Path)
+	if *sftpCreateResp1.Path != *sftpGetResp.Path {
+		t.Errorf("bad path: %q", *sftpCreateResp1.Path)
 	}
-	if sftpCreateResp1.Period != sftpGetResp.Period {
-		t.Errorf("bad period: %q", sftpCreateResp1.Period)
+	if *sftpCreateResp1.Period != *sftpGetResp.Period {
+		t.Errorf("bad period: %q", *sftpCreateResp1.Period)
 	}
-	if sftpCreateResp1.CompressionCodec != sftpGetResp.CompressionCodec {
-		t.Errorf("bad compression_codec: %q", sftpCreateResp1.CompressionCodec)
+	if *sftpCreateResp1.CompressionCodec != *sftpGetResp.CompressionCodec {
+		t.Errorf("bad compression_codec: %q", *sftpCreateResp1.CompressionCodec)
 	}
-	if sftpCreateResp1.GzipLevel != sftpGetResp.GzipLevel {
-		t.Errorf("bad gzip_level: %q", sftpCreateResp1.GzipLevel)
+	if *sftpCreateResp1.GzipLevel != *sftpGetResp.GzipLevel {
+		t.Errorf("bad gzip_level: %q", *sftpCreateResp1.GzipLevel)
 	}
-	if sftpCreateResp1.FormatVersion != sftpGetResp.FormatVersion {
-		t.Errorf("bad format_version: %q", sftpCreateResp1.FormatVersion)
+	if *sftpCreateResp1.FormatVersion != *sftpGetResp.FormatVersion {
+		t.Errorf("bad format_version: %q", *sftpCreateResp1.FormatVersion)
 	}
-	if sftpCreateResp1.Format != sftpGetResp.Format {
-		t.Errorf("bad format: %q", sftpCreateResp1.Format)
+	if *sftpCreateResp1.Format != *sftpGetResp.Format {
+		t.Errorf("bad format: %q", *sftpCreateResp1.Format)
 	}
-	if sftpCreateResp1.TimestampFormat != sftpGetResp.TimestampFormat {
-		t.Errorf("bad timestamp_format: %q", sftpCreateResp1.TimestampFormat)
+	if *sftpCreateResp1.TimestampFormat != *sftpGetResp.TimestampFormat {
+		t.Errorf("bad timestamp_format: %q", *sftpCreateResp1.TimestampFormat)
 	}
-	if sftpCreateResp1.MessageType != "blank" {
-		t.Errorf("bad message_type: %q", sftpCreateResp1.MessageType)
+	if *sftpCreateResp1.MessageType != "blank" {
+		t.Errorf("bad message_type: %q", *sftpCreateResp1.MessageType)
 	}
-	if sftpCreateResp1.Placement != sftpGetResp.Placement {
-		t.Errorf("bad placement: %q", sftpCreateResp1.Placement)
+	if *sftpCreateResp1.Placement != *sftpGetResp.Placement {
+		t.Errorf("bad placement: %q", *sftpCreateResp1.Placement)
 	}
 
 	// Update
@@ -303,7 +302,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/update", func(c *Client) {
 		sftpUpdateResp1, err = c.UpdateSFTP(&UpdateSFTPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-sftp",
 			NewName:        ToPointer("new-test-sftp"),
 			GzipLevel:      ToPointer(8),
@@ -317,7 +316,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/update2", func(c *Client) {
 		sftpUpdateResp2, err = c.UpdateSFTP(&UpdateSFTPInput{
 			ServiceID:        testServiceID,
-			ServiceVersion:   tv.Number,
+			ServiceVersion:   *tv.Number,
 			Name:             "test-sftp-2",
 			CompressionCodec: ToPointer("zstd"),
 		})
@@ -329,7 +328,7 @@ func TestClient_SFTPs(t *testing.T) {
 	record(t, "sftps/update3", func(c *Client) {
 		sftpUpdateResp3, err = c.UpdateSFTP(&UpdateSFTPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-sftp-3",
 			GzipLevel:      ToPointer(9),
 		})
@@ -338,38 +337,36 @@ func TestClient_SFTPs(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if sftpUpdateResp1.Name != "new-test-sftp" {
-		t.Errorf("bad name: %q", sftpUpdateResp1.Name)
+	if *sftpUpdateResp1.Name != "new-test-sftp" {
+		t.Errorf("bad name: %q", *sftpUpdateResp1.Name)
 	}
-	if sftpUpdateResp1.MessageType != "classic" {
-		t.Errorf("bad message_type: %q", sftpUpdateResp1.MessageType)
+	if *sftpUpdateResp1.MessageType != "classic" {
+		t.Errorf("bad message_type: %q", *sftpUpdateResp1.MessageType)
 	}
-	if sftpUpdateResp1.CompressionCodec != "" {
-		t.Errorf("bad compression_codec: %q", sftpUpdateResp1.CompressionCodec)
+	if sftpUpdateResp1.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *sftpUpdateResp1.CompressionCodec)
 	}
-	if sftpUpdateResp1.GzipLevel != 8 {
-		t.Errorf("bad gzip_level: %q", sftpUpdateResp1.GzipLevel)
+	if *sftpUpdateResp1.GzipLevel != 8 {
+		t.Errorf("bad gzip_level: %q", *sftpUpdateResp1.GzipLevel)
 	}
-
-	if sftpUpdateResp2.CompressionCodec != "zstd" {
-		t.Errorf("bad compression_codec: %q", sftpUpdateResp2.CompressionCodec)
+	if *sftpUpdateResp2.CompressionCodec != "zstd" {
+		t.Errorf("bad compression_codec: %q", *sftpUpdateResp2.CompressionCodec)
 	}
-	if sftpUpdateResp2.GzipLevel != 0 {
-		t.Errorf("bad gzip_level: %q", sftpUpdateResp2.GzipLevel)
+	if *sftpUpdateResp2.GzipLevel != 0 {
+		t.Errorf("bad gzip_level: %q", *sftpUpdateResp2.GzipLevel)
 	}
-
-	if sftpUpdateResp3.CompressionCodec != "" {
-		t.Errorf("bad compression_codec: %q", sftpUpdateResp3.CompressionCodec)
+	if sftpUpdateResp3.CompressionCodec != nil {
+		t.Errorf("bad compression_codec: %q", *sftpUpdateResp3.CompressionCodec)
 	}
-	if sftpUpdateResp3.GzipLevel != 9 {
-		t.Errorf("bad gzip_level: %q", sftpUpdateResp3.GzipLevel)
+	if *sftpUpdateResp3.GzipLevel != 9 {
+		t.Errorf("bad gzip_level: %q", *sftpUpdateResp3.GzipLevel)
 	}
 
 	// Delete
 	record(t, "sftps/delete", func(c *Client) {
 		err = c.DeleteSFTP(&DeleteSFTPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-sftp",
 		})
 	})

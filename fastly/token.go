@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/http"
-	"sort"
 	"time"
 )
 
@@ -24,34 +23,16 @@ const (
 // Token represents an API token which are used to authenticate requests to the
 // Fastly API.
 type Token struct {
-	AccessToken string     `mapstructure:"access_token"`
-	CreatedAt   *time.Time `mapstructure:"created_at"`
-	ExpiresAt   *time.Time `mapstructure:"expires_at"`
-	ID          string     `mapstructure:"id"`
-	IP          string     `mapstructure:"ip"`
-	LastUsedAt  *time.Time `mapstructure:"last_used_at"`
-	Name        string     `mapstructure:"name"`
-	Scope       TokenScope `mapstructure:"scope"`
-	Services    []string   `mapstructure:"services"`
-	UserID      string     `mapstructure:"user_id"`
-}
-
-// tokensByName is a sortable list of tokens.
-type tokensByName []*Token
-
-// Len implement the sortable interface.
-func (s tokensByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s tokensByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s tokensByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	AccessToken *string     `mapstructure:"access_token"`
+	CreatedAt   *time.Time  `mapstructure:"created_at"`
+	ExpiresAt   *time.Time  `mapstructure:"expires_at"`
+	ID          *string     `mapstructure:"id"`
+	IP          *string     `mapstructure:"ip"`
+	LastUsedAt  *time.Time  `mapstructure:"last_used_at"`
+	Name        *string     `mapstructure:"name"`
+	Scope       *TokenScope `mapstructure:"scope"`
+	Services    []string    `mapstructure:"services"`
+	UserID      *string     `mapstructure:"user_id"`
 }
 
 // ListTokensInput is used as input to the ListTokens function.
@@ -71,7 +52,6 @@ func (c *Client) ListTokens(i *ListTokensInput) ([]*Token, error) {
 	if err := decodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
-	sort.Stable(tokensByName(t))
 	return t, nil
 }
 
@@ -98,7 +78,6 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 	if err := decodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
-	sort.Stable(tokensByName(t))
 	return t, nil
 }
 
@@ -126,15 +105,15 @@ type CreateTokenInput struct {
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
 	// Name is the name of the token.
-	Name string `url:"name,omitempty"`
+	Name *string `url:"name,omitempty"`
 	// Password is the token password.
-	Password string `url:"password,omitempty"`
+	Password *string `url:"password,omitempty"`
 	// Scope is a space-delimited list of authorization scope (global, purge_select, purge_all, global).
-	Scope TokenScope `url:"scope,omitempty"`
+	Scope *TokenScope `url:"scope,omitempty"`
 	// Services is a list of alphanumeric strings identifying services. If no services are specified, the token will have access to all services on the account.
 	Services []string `url:"services,brackets,omitempty"`
 	// Username is the email of the user the token is assigned to.
-	Username string `url:"username,omitempty"`
+	Username *string `url:"username,omitempty"`
 }
 
 // CreateToken creates a new resource.

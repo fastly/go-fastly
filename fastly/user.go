@@ -3,44 +3,25 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // User represents a user of the Fastly API and web interface.
 type User struct {
 	CreatedAt              *time.Time `mapstructure:"created_at"`
-	CustomerID             string     `mapstructure:"customer_id"`
+	CustomerID             *string    `mapstructure:"customer_id"`
 	DeletedAt              *time.Time `mapstructure:"deleted_at"`
-	EmailHash              string     `mapstructure:"email_hash"`
-	ID                     string     `mapstructure:"id"`
-	LimitServices          bool       `mapstructure:"limit_services"`
-	Locked                 bool       `mapstructure:"locked"`
-	Login                  string     `mapstructure:"login"`
-	Name                   string     `mapstructure:"name"`
-	RequireNewPassword     bool       `mapstructure:"require_new_password"`
-	Role                   string     `mapstructure:"role"`
-	TwoFactorAuthEnabled   bool       `mapstructure:"two_factor_auth_enabled"`
-	TwoFactorSetupRequired bool       `mapstructure:"two_factor_setup_required"`
+	EmailHash              *string    `mapstructure:"email_hash"`
+	ID                     *string    `mapstructure:"id"`
+	LimitServices          *bool      `mapstructure:"limit_services"`
+	Locked                 *bool      `mapstructure:"locked"`
+	Login                  *string    `mapstructure:"login"`
+	Name                   *string    `mapstructure:"name"`
+	RequireNewPassword     *bool      `mapstructure:"require_new_password"`
+	Role                   *string    `mapstructure:"role"`
+	TwoFactorAuthEnabled   *bool      `mapstructure:"two_factor_auth_enabled"`
+	TwoFactorSetupRequired *bool      `mapstructure:"two_factor_setup_required"`
 	UpdatedAt              *time.Time `mapstructure:"updated_at"`
-}
-
-// usersByLogin is a sortable list of users.
-type usersByName []*User
-
-// Len implement the sortable interface.
-func (s usersByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s usersByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s usersByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
@@ -66,7 +47,6 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 	if err := decodeBodyMap(resp.Body, &u); err != nil {
 		return nil, err
 	}
-	sort.Stable(usersByName(u))
 	return u, nil
 }
 

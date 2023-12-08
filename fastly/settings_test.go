@@ -20,13 +20,13 @@ func TestClient_Settings(t *testing.T) {
 	record(t, "settings/get", func(c *Client) {
 		ns, err = c.GetSettings(&GetSettingsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ns.DefaultTTL == 0 {
+	if *ns.DefaultTTL == 0 {
 		t.Errorf("bad default_ttl: %d", ns.DefaultTTL)
 	}
 
@@ -35,8 +35,8 @@ func TestClient_Settings(t *testing.T) {
 	record(t, "settings/update", func(c *Client) {
 		us, err = c.UpdateSettings(&UpdateSettingsInput{
 			ServiceID:       testServiceID,
-			ServiceVersion:  tv.Number,
-			DefaultTTL:      1800,
+			ServiceVersion:  *tv.Number,
+			DefaultTTL:      ToPointer(uint(1800)),
 			StaleIfError:    ToPointer(true),
 			StaleIfErrorTTL: ToPointer(uint(57600)),
 		})
@@ -44,21 +44,25 @@ func TestClient_Settings(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.DefaultTTL != 1800 {
-		t.Errorf("bad default_ttl: %d", us.DefaultTTL)
+	if *us.DefaultTTL != 1800 {
+		t.Errorf("bad default_ttl: %d", *us.DefaultTTL)
 	}
-	if !us.StaleIfError {
-		t.Errorf("bad stale_if_error: %t", us.StaleIfError)
+	if !*us.StaleIfError {
+		t.Errorf("bad stale_if_error: %t", *us.StaleIfError)
 	}
-	if us.StaleIfErrorTTL != 57600 {
-		t.Errorf("bad stale_if_error_ttl %d", us.StaleIfErrorTTL)
+	if *us.StaleIfErrorTTL != 57600 {
+		t.Errorf("bad stale_if_error_ttl %d", *us.StaleIfErrorTTL)
 	}
 }
 
 // Tests if we can update a default_ttl to 0 as reported in issue #20
 func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	t.Parallel()
-	s := UpdateSettingsInput{ServiceID: "foo", ServiceVersion: 1, DefaultTTL: 0}
+	s := UpdateSettingsInput{
+		DefaultTTL:     ToPointer(uint(0)),
+		ServiceID:      "foo",
+		ServiceVersion: 1,
+	}
 
 	v, err := query.Values(s)
 	if err != nil {

@@ -18,7 +18,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/create", func(c *Client) {
 		l, err = c.CreateLogshuttle(&CreateLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-logshuttle"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
@@ -36,35 +36,35 @@ func TestClient_Logshuttles(t *testing.T) {
 		record(t, "logshuttles/cleanup", func(c *Client) {
 			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-logshuttle",
 			})
 
 			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-logshuttle",
 			})
 		})
 	}()
 
-	if l.Name != "test-logshuttle" {
-		t.Errorf("bad name: %q", l.Name)
+	if *l.Name != "test-logshuttle" {
+		t.Errorf("bad name: %q", *l.Name)
 	}
-	if l.Format != "%h %l %u %t \"%r\" %>s %b" {
-		t.Errorf("bad format: %q", l.Format)
+	if *l.Format != "%h %l %u %t \"%r\" %>s %b" {
+		t.Errorf("bad format: %q", *l.Format)
 	}
-	if l.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", l.FormatVersion)
+	if *l.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *l.FormatVersion)
 	}
-	if l.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", l.Placement)
+	if *l.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *l.Placement)
 	}
-	if l.Token != "super-secure-token" {
-		t.Errorf("bad token: %q", l.Token)
+	if *l.Token != "super-secure-token" {
+		t.Errorf("bad token: %q", *l.Token)
 	}
-	if l.URL != "https://logs.example.com" {
-		t.Errorf("bad url: %q", l.URL)
+	if *l.URL != "https://logs.example.com" {
+		t.Errorf("bad url: %q", *l.URL)
 	}
 
 	// List
@@ -72,7 +72,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/list", func(c *Client) {
 		ls, err = c.ListLogshuttles(&ListLogshuttlesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,30 +87,30 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/get", func(c *Client) {
 		nl, err = c.GetLogshuttle(&GetLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-logshuttle",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if l.Name != nl.Name {
-		t.Errorf("bad name: %q", l.Name)
+	if *l.Name != *nl.Name {
+		t.Errorf("bad name: %q", *l.Name)
 	}
-	if l.Format != nl.Format {
-		t.Errorf("bad format: %q", l.Format)
+	if *l.Format != *nl.Format {
+		t.Errorf("bad format: %q", *l.Format)
 	}
-	if l.FormatVersion != nl.FormatVersion {
-		t.Errorf("bad format_version: %q", l.FormatVersion)
+	if *l.FormatVersion != *nl.FormatVersion {
+		t.Errorf("bad format_version: %q", *l.FormatVersion)
 	}
-	if l.Placement != nl.Placement {
-		t.Errorf("bad placement: %q", l.Placement)
+	if *l.Placement != *nl.Placement {
+		t.Errorf("bad placement: %q", *l.Placement)
 	}
-	if l.Token != nl.Token {
-		t.Errorf("bad token: %q", l.Token)
+	if *l.Token != *nl.Token {
+		t.Errorf("bad token: %q", *l.Token)
 	}
-	if l.URL != nl.URL {
-		t.Errorf("bad url: %q", l.URL)
+	if *l.URL != *nl.URL {
+		t.Errorf("bad url: %q", *l.URL)
 	}
 
 	// Update
@@ -118,7 +118,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	record(t, "logshuttles/update", func(c *Client) {
 		ul, err = c.UpdateLogshuttle(&UpdateLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-logshuttle",
 			NewName:        ToPointer("new-test-logshuttle"),
 			Token:          ToPointer("new-token"),
@@ -128,21 +128,21 @@ func TestClient_Logshuttles(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ul.Name != "new-test-logshuttle" {
-		t.Errorf("bad name: %q", ul.Name)
+	if *ul.Name != "new-test-logshuttle" {
+		t.Errorf("bad name: %q", *ul.Name)
 	}
-	if ul.Token != "new-token" {
-		t.Errorf("bad token: %q", ul.Token)
+	if *ul.Token != "new-token" {
+		t.Errorf("bad token: %q", *ul.Token)
 	}
-	if ul.URL != "https://logs2.example.com" {
-		t.Errorf("bad url: %q", ul.URL)
+	if *ul.URL != "https://logs2.example.com" {
+		t.Errorf("bad url: %q", *ul.URL)
 	}
 
 	// Delete
 	record(t, "logshuttles/delete", func(c *Client) {
 		err = c.DeleteLogshuttle(&DeleteLogshuttleInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-logshuttle",
 		})
 	})

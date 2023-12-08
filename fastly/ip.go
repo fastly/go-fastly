@@ -1,6 +1,6 @@
 package fastly
 
-// IPAddrs is a sortable list of IP addresses returned by the Fastly API.
+// IPAddrs is a list of IP addresses returned by the Fastly API.
 type IPAddrs []string
 
 // AllIPs returns the lists of public IPv4 and IPv6 addresses for Fastly's network.

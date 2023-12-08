@@ -5,44 +5,43 @@ package fastly
 
 import (
 	"fmt"
-	"sort"
 	"time"
 )
 
 // ERL models the response from the Fastly API.
 type ERL struct {
-	Action             ERLAction     `mapstructure:"action"`
-	ClientKey          []string      `mapstructure:"client_key"`
-	CreatedAt          *time.Time    `mapstructure:"created_at"`
-	DeletedAt          *time.Time    `mapstructure:"deleted_at"`
-	FeatureRevision    int           `mapstructure:"feature_revision"` // 1..
-	HTTPMethods        []string      `mapstructure:"http_methods"`
-	ID                 string        `mapstructure:"id"`
-	LoggerType         ERLLogger     `mapstructure:"logger_type"`
-	Name               string        `mapstructure:"name"`
-	PenaltyBoxDuration int           `mapstructure:"penalty_box_duration"` // 1..60
-	Response           *ERLResponse  `mapstructure:"response"`             // required if Action != Log
-	ResponseObjectName string        `mapstructure:"response_object_name"`
-	RpsLimit           int           `mapstructure:"rps_limit"` // 10..10000
-	ServiceID          string        `mapstructure:"service_id"`
-	UpdatedAt          *time.Time    `mapstructure:"updated_at"`
-	URIDictionaryName  string        `mapstructure:"uri_dictionary_name"`
-	Version            int           `mapstructure:"version"` // 1..
-	WindowSize         ERLWindowSize `mapstructure:"window_size"`
+	Action             *ERLAction     `mapstructure:"action"`
+	ClientKey          []*string      `mapstructure:"client_key"`
+	CreatedAt          *time.Time     `mapstructure:"created_at"`
+	DeletedAt          *time.Time     `mapstructure:"deleted_at"`
+	FeatureRevision    *int           `mapstructure:"feature_revision"` // 1..
+	HTTPMethods        []*string      `mapstructure:"http_methods"`
+	ID                 *string        `mapstructure:"id"`
+	LoggerType         *ERLLogger     `mapstructure:"logger_type"`
+	Name               *string        `mapstructure:"name"`
+	PenaltyBoxDuration *int           `mapstructure:"penalty_box_duration"` // 1..60
+	Response           *ERLResponse   `mapstructure:"response"`             // required if Action != Log
+	ResponseObjectName *string        `mapstructure:"response_object_name"`
+	RpsLimit           *int           `mapstructure:"rps_limit"` // 10..10000
+	ServiceID          *string        `mapstructure:"service_id"`
+	UpdatedAt          *time.Time     `mapstructure:"updated_at"`
+	URIDictionaryName  *string        `mapstructure:"uri_dictionary_name"`
+	Version            *int           `mapstructure:"version"` // 1..
+	WindowSize         *ERLWindowSize `mapstructure:"window_size"`
 }
 
 // ERLResponse models the response from the Fastly API.
 type ERLResponse struct {
-	ERLContent     string `mapstructure:"content,omitempty"`
-	ERLContentType string `mapstructure:"content_type,omitempty"`
-	ERLStatus      int    `mapstructure:"status,omitempty"`
+	ERLContent     *string `mapstructure:"content,omitempty"`
+	ERLContentType *string `mapstructure:"content_type,omitempty"`
+	ERLStatus      *int    `mapstructure:"status,omitempty"`
 }
 
 // ERLResponseType models the input to the Fastly API.
 type ERLResponseType struct {
-	ERLContent     string `url:"content,omitempty"`
-	ERLContentType string `url:"content_type,omitempty"`
-	ERLStatus      int    `url:"status,omitempty"`
+	ERLContent     *string `url:"content,omitempty"`
+	ERLContentType *string `url:"content_type,omitempty"`
+	ERLStatus      *int    `url:"status,omitempty"`
 }
 
 // ERLAction represents the action variants for when a rate limiter
@@ -182,24 +181,6 @@ var ERLWindowSizes = []ERLWindowSize{
 	ERLSize60,
 }
 
-// ERLsByName is a sortable list of ERLs
-type ERLsByName []*ERL
-
-// Len implement the sortable interface.
-func (s ERLsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s ERLsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s ERLsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
-}
-
 // ListERLsInput is used as input to the ListERLs function.
 type ListERLsInput struct {
 	// ServiceID is the ID of the service (required).
@@ -229,7 +210,6 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 		return nil, err
 	}
 
-	sort.Stable(ERLsByName(erls))
 	return erls, nil
 }
 

@@ -9,9 +9,9 @@ import (
 type HTTP3 struct {
 	CreatedAt       *time.Time `mapstructure:"created_at" json:"created_at"`
 	DeletedAt       *time.Time `mapstructure:"deleted_at" json:"deleted_at"`
-	FeatureRevision int        `mapstructure:"feature_revision" json:"feature_revision"`
-	ServiceID       string     `mapstructure:"service_id" json:"service_id"`
-	ServiceVersion  int        `mapstructure:"version" json:"version"`
+	FeatureRevision *int       `mapstructure:"feature_revision" json:"feature_revision"`
+	ServiceID       *string    `mapstructure:"service_id" json:"service_id"`
+	ServiceVersion  *int       `mapstructure:"version" json:"version"`
 	UpdatedAt       *time.Time `mapstructure:"updated_at" json:"updated_at"`
 }
 

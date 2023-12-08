@@ -19,7 +19,7 @@ func TestClient_Pubsubs(t *testing.T) {
 	record(t, "pubsubs/create", func(c *Client) {
 		pubsub, err = c.CreatePubsub(&CreatePubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-pubsub"),
 			Topic:          ToPointer("topic"),
 			User:           ToPointer("user"),
@@ -40,31 +40,31 @@ func TestClient_Pubsubs(t *testing.T) {
 		record(t, "pubsubs/cleanup", func(c *Client) {
 			_ = c.DeletePubsub(&DeletePubsubInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-pubsub",
 			})
 
 			_ = c.DeletePubsub(&DeletePubsubInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-pubsub",
 			})
 		})
 	}()
 
-	if pubsub.Name != "test-pubsub" {
-		t.Errorf("bad name: %q", pubsub.Name)
+	if *pubsub.Name != "test-pubsub" {
+		t.Errorf("bad name: %q", *pubsub.Name)
 	}
-	if pubsub.Topic != "topic" {
-		t.Errorf("bad topic: %q", pubsub.Topic)
+	if *pubsub.Topic != "topic" {
+		t.Errorf("bad topic: %q", *pubsub.Topic)
 	}
-	if pubsub.User != "user" {
-		t.Errorf("bad user: %q", pubsub.User)
+	if *pubsub.User != "user" {
+		t.Errorf("bad user: %q", *pubsub.User)
 	}
-	if pubsub.AccountName != "service-account" {
-		t.Errorf("bad account name: %q", pubsub.AccountName)
+	if *pubsub.AccountName != "service-account" {
+		t.Errorf("bad account name: %q", *pubsub.AccountName)
 	}
-	if strings.TrimSpace(pubsub.SecretKey) != `-----BEGIN PRIVATE KEY-----
+	if strings.TrimSpace(*pubsub.SecretKey) != `-----BEGIN PRIVATE KEY-----
 MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQC9aQoqdHVA86oq
 TdRQ5HqwMfpiLBBMKNQcAJsO71RKNrDWwJJZiyYbvM4FOWRZFtRSdPIDgX0C0Wg1
 NnqWYvHDyA5Ug+T8kowiQDn56dU6Km2FWO4wnqZeA8q5G7rQVXlqdibuiP7FglHA
@@ -92,19 +92,19 @@ in6kQjl7JS4oCNlPEj6aRPLX2OJresI7oOn+uNatKvlVyfPm6rdxeHCmER1FpR7Q
 A/aNVjPeViKT/R4nK9ytsa+s/1IJVrwLFHJK3toGE660g5w3vKrCjWisMdP4yzzQ
 bv1KwcKoQbNVXwauH79JKc0=
 -----END PRIVATE KEY-----` {
-		t.Errorf("bad secret_key: %q", pubsub.SecretKey)
+		t.Errorf("bad secret_key: %q", *pubsub.SecretKey)
 	}
-	if pubsub.ProjectID != "project-id" {
-		t.Errorf("bad project_id: %q", pubsub.ProjectID)
+	if *pubsub.ProjectID != "project-id" {
+		t.Errorf("bad project_id: %q", *pubsub.ProjectID)
 	}
-	if pubsub.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", pubsub.FormatVersion)
+	if *pubsub.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *pubsub.FormatVersion)
 	}
-	if pubsub.Format != "format" {
-		t.Errorf("bad format: %q", pubsub.Format)
+	if *pubsub.Format != "format" {
+		t.Errorf("bad format: %q", *pubsub.Format)
 	}
-	if pubsub.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", pubsub.Placement)
+	if *pubsub.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *pubsub.Placement)
 	}
 
 	// List
@@ -112,7 +112,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	record(t, "pubsubs/list", func(c *Client) {
 		pubsubs, err = c.ListPubsubs(&ListPubsubsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -127,36 +127,36 @@ bv1KwcKoQbNVXwauH79JKc0=
 	record(t, "pubsubs/get", func(c *Client) {
 		npubsub, err = c.GetPubsub(&GetPubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if pubsub.Name != npubsub.Name {
-		t.Errorf("bad name: %q", pubsub.Name)
+	if *pubsub.Name != *npubsub.Name {
+		t.Errorf("bad name: %q", *pubsub.Name)
 	}
-	if pubsub.Topic != npubsub.Topic {
-		t.Errorf("bad topic: %q", pubsub.Topic)
+	if *pubsub.Topic != *npubsub.Topic {
+		t.Errorf("bad topic: %q", *pubsub.Topic)
 	}
-	if pubsub.User != npubsub.User {
-		t.Errorf("bad user: %q", pubsub.User)
+	if *pubsub.User != *npubsub.User {
+		t.Errorf("bad user: %q", *pubsub.User)
 	}
-	if pubsub.SecretKey != npubsub.SecretKey {
-		t.Errorf("bad secret_key: %q", pubsub.SecretKey)
+	if *pubsub.SecretKey != *npubsub.SecretKey {
+		t.Errorf("bad secret_key: %q", *pubsub.SecretKey)
 	}
-	if pubsub.ProjectID != npubsub.ProjectID {
-		t.Errorf("bad project_id: %q", pubsub.ProjectID)
+	if *pubsub.ProjectID != *npubsub.ProjectID {
+		t.Errorf("bad project_id: %q", *pubsub.ProjectID)
 	}
-	if pubsub.FormatVersion != npubsub.FormatVersion {
-		t.Errorf("bad format_version: %q", pubsub.FormatVersion)
+	if *pubsub.FormatVersion != *npubsub.FormatVersion {
+		t.Errorf("bad format_version: %q", *pubsub.FormatVersion)
 	}
-	if pubsub.Format != npubsub.Format {
-		t.Errorf("bad format: %q", pubsub.Format)
+	if *pubsub.Format != *npubsub.Format {
+		t.Errorf("bad format: %q", *pubsub.Format)
 	}
-	if pubsub.Placement != npubsub.Placement {
-		t.Errorf("bad placement: %q", pubsub.Placement)
+	if *pubsub.Placement != *npubsub.Placement {
+		t.Errorf("bad placement: %q", *pubsub.Placement)
 	}
 
 	// Update
@@ -164,7 +164,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	record(t, "pubsubs/update", func(c *Client) {
 		upubsub, err = c.UpdatePubsub(&UpdatePubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 			NewName:        ToPointer("new-test-pubsub"),
 			Topic:          ToPointer("new-topic"),
@@ -173,18 +173,18 @@ bv1KwcKoQbNVXwauH79JKc0=
 	if err != nil {
 		t.Fatal(err)
 	}
-	if upubsub.Name != "new-test-pubsub" {
-		t.Errorf("bad name: %q", upubsub.Name)
+	if *upubsub.Name != "new-test-pubsub" {
+		t.Errorf("bad name: %q", *upubsub.Name)
 	}
-	if upubsub.Topic != "new-topic" {
-		t.Errorf("bad topic: %q", upubsub.Topic)
+	if *upubsub.Topic != "new-topic" {
+		t.Errorf("bad topic: %q", *upubsub.Topic)
 	}
 
 	// Delete
 	record(t, "pubsubs/delete", func(c *Client) {
 		err = c.DeletePubsub(&DeletePubsubInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-pubsub",
 		})
 	})

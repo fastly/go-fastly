@@ -18,7 +18,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/create", func(c *Client) {
 		condition, err = c.CreateCondition(&CreateConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test/condition"),
 			Statement:      ToPointer("req.url~+\"index.html\""),
 			Type:           ToPointer("REQUEST"),
@@ -34,23 +34,23 @@ func TestClient_Conditions(t *testing.T) {
 		record(t, "conditions/cleanup", func(c *Client) {
 			_ = c.DeleteCondition(&DeleteConditionInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test/condition",
 			})
 		})
 	}()
 
-	if condition.Name != "test/condition" {
-		t.Errorf("bad name: %q", condition.Name)
+	if *condition.Name != "test/condition" {
+		t.Errorf("bad name: %q", *condition.Name)
 	}
-	if condition.Statement != "req.url~+\"index.html\"" {
-		t.Errorf("bad statement: %q", condition.Statement)
+	if *condition.Statement != "req.url~+\"index.html\"" {
+		t.Errorf("bad statement: %q", *condition.Statement)
 	}
-	if condition.Type != "REQUEST" {
-		t.Errorf("bad type: %s", condition.Type)
+	if *condition.Type != "REQUEST" {
+		t.Errorf("bad type: %s", *condition.Type)
 	}
-	if condition.Priority != 1 {
-		t.Errorf("bad priority: %d", condition.Priority)
+	if *condition.Priority != 1 {
+		t.Errorf("bad priority: %d", *condition.Priority)
 	}
 
 	// List
@@ -58,7 +58,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/list", func(c *Client) {
 		conditions, err = c.ListConditions(&ListConditionsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -73,24 +73,24 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/get", func(c *Client) {
 		newCondition, err = c.GetCondition(&GetConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if condition.Name != newCondition.Name {
-		t.Errorf("bad name: %q (%q)", condition.Name, newCondition.Name)
+	if *condition.Name != *newCondition.Name {
+		t.Errorf("bad name: %q (%q)", *condition.Name, *newCondition.Name)
 	}
-	if condition.Statement != "req.url~+\"index.html\"" {
-		t.Errorf("bad statement: %q", condition.Statement)
+	if *condition.Statement != "req.url~+\"index.html\"" {
+		t.Errorf("bad statement: %q", *condition.Statement)
 	}
-	if condition.Type != "REQUEST" {
-		t.Errorf("bad type: %s", condition.Type)
+	if *condition.Type != "REQUEST" {
+		t.Errorf("bad type: %s", *condition.Type)
 	}
-	if condition.Priority != 1 {
-		t.Errorf("bad priority: %d", condition.Priority)
+	if *condition.Priority != 1 {
+		t.Errorf("bad priority: %d", *condition.Priority)
 	}
 
 	// Update
@@ -98,7 +98,7 @@ func TestClient_Conditions(t *testing.T) {
 	record(t, "conditions/update", func(c *Client) {
 		updatedCondition, err = c.UpdateCondition(&UpdateConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 			Statement:      ToPointer("req.url~+\"updated.html\""),
 		})
@@ -106,15 +106,15 @@ func TestClient_Conditions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if updatedCondition.Statement != "req.url~+\"updated.html\"" {
-		t.Errorf("bad statement: %q", updatedCondition.Statement)
+	if *updatedCondition.Statement != "req.url~+\"updated.html\"" {
+		t.Errorf("bad statement: %q", *updatedCondition.Statement)
 	}
 
 	// Delete
 	record(t, "conditions/delete", func(c *Client) {
 		err = c.DeleteCondition(&DeleteConditionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 		})
 	})

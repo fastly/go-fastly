@@ -81,10 +81,10 @@ func TestClient_PurgeKey(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if purge.Status != "ok" {
+	if *purge.Status != "ok" {
 		t.Error("bad status")
 	}
-	if len(purge.ID) == 0 {
+	if purge.ID == nil {
 		t.Error("bad id")
 	}
 }
@@ -123,7 +123,7 @@ func TestClient_PurgeAll(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if purge.Status != "ok" {
+	if *purge.Status != "ok" {
 		t.Error("bad status")
 	}
 }

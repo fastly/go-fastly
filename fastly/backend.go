@@ -3,62 +3,44 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Backend represents a backend response from the Fastly API.
 type Backend struct {
-	Address             string     `mapstructure:"address"`
-	AutoLoadbalance     bool       `mapstructure:"auto_loadbalance"`
-	BetweenBytesTimeout int        `mapstructure:"between_bytes_timeout"`
-	Comment             string     `mapstructure:"comment"`
-	ConnectTimeout      int        `mapstructure:"connect_timeout"`
+	Address             *string    `mapstructure:"address"`
+	AutoLoadbalance     *bool      `mapstructure:"auto_loadbalance"`
+	BetweenBytesTimeout *int       `mapstructure:"between_bytes_timeout"`
+	Comment             *string    `mapstructure:"comment"`
+	ConnectTimeout      *int       `mapstructure:"connect_timeout"`
 	CreatedAt           *time.Time `mapstructure:"created_at"`
 	DeletedAt           *time.Time `mapstructure:"deleted_at"`
-	ErrorThreshold      int        `mapstructure:"error_threshold"`
-	FirstByteTimeout    int        `mapstructure:"first_byte_timeout"`
-	HealthCheck         string     `mapstructure:"healthcheck"`
-	Hostname            string     `mapstructure:"hostname"`
-	KeepAliveTime       int        `mapstructure:"keepalive_time"`
-	MaxConn             int        `mapstructure:"max_conn"`
-	MaxTLSVersion       string     `mapstructure:"max_tls_version"`
-	MinTLSVersion       string     `mapstructure:"min_tls_version"`
-	Name                string     `mapstructure:"name"`
-	OverrideHost        string     `mapstructure:"override_host"`
-	Port                int        `mapstructure:"port"`
-	RequestCondition    string     `mapstructure:"request_condition"`
-	ShareKey            string     `mapstructure:"share_key"`
-	SSLCACert           string     `mapstructure:"ssl_ca_cert"`
-	SSLCertHostname     string     `mapstructure:"ssl_cert_hostname"`
-	SSLCheckCert        bool       `mapstructure:"ssl_check_cert"`
-	SSLCiphers          string     `mapstructure:"ssl_ciphers"`
-	SSLClientCert       string     `mapstructure:"ssl_client_cert"`
-	SSLClientKey        string     `mapstructure:"ssl_client_key"`
-	SSLHostname         string     `mapstructure:"ssl_hostname"`
-	SSLSNIHostname      string     `mapstructure:"ssl_sni_hostname"`
-	ServiceID           string     `mapstructure:"service_id"`
-	ServiceVersion      int        `mapstructure:"version"`
-	Shield              string     `mapstructure:"shield"`
+	ErrorThreshold      *int       `mapstructure:"error_threshold"`
+	FirstByteTimeout    *int       `mapstructure:"first_byte_timeout"`
+	HealthCheck         *string    `mapstructure:"healthcheck"`
+	Hostname            *string    `mapstructure:"hostname"`
+	KeepAliveTime       *int       `mapstructure:"keepalive_time"`
+	MaxConn             *int       `mapstructure:"max_conn"`
+	MaxTLSVersion       *string    `mapstructure:"max_tls_version"`
+	MinTLSVersion       *string    `mapstructure:"min_tls_version"`
+	Name                *string    `mapstructure:"name"`
+	OverrideHost        *string    `mapstructure:"override_host"`
+	Port                *int       `mapstructure:"port"`
+	RequestCondition    *string    `mapstructure:"request_condition"`
+	ShareKey            *string    `mapstructure:"share_key"`
+	SSLCACert           *string    `mapstructure:"ssl_ca_cert"`
+	SSLCertHostname     *string    `mapstructure:"ssl_cert_hostname"`
+	SSLCheckCert        *bool      `mapstructure:"ssl_check_cert"`
+	SSLCiphers          *string    `mapstructure:"ssl_ciphers"`
+	SSLClientCert       *string    `mapstructure:"ssl_client_cert"`
+	SSLClientKey        *string    `mapstructure:"ssl_client_key"`
+	SSLSNIHostname      *string    `mapstructure:"ssl_sni_hostname"`
+	ServiceID           *string    `mapstructure:"service_id"`
+	ServiceVersion      *int       `mapstructure:"version"`
+	Shield              *string    `mapstructure:"shield"`
 	UpdatedAt           *time.Time `mapstructure:"updated_at"`
-	UseSSL              bool       `mapstructure:"use_ssl"`
-	Weight              int        `mapstructure:"weight"`
-}
-
-// backendsByName is a sortable list of backends.
-type backendsByName []*Backend
-
-// Len, Swap, and Less implement the sortable interface.
-func (s backendsByName) Len() int {
-	return len(s)
-}
-
-func (s backendsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-func (s backendsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	UseSSL              *bool      `mapstructure:"use_ssl"`
+	Weight              *int       `mapstructure:"weight"`
 }
 
 // ListBackendsInput is used as input to the ListBackends function.
@@ -89,7 +71,6 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
-	sort.Stable(backendsByName(bs))
 	return bs, nil
 }
 
@@ -141,9 +122,6 @@ type CreateBackendInput struct {
 	SSLClientCert *string `url:"ssl_client_cert,omitempty"`
 	// SSLClientKey is a client key attached to origin.
 	SSLClientKey *string `url:"ssl_client_key,omitempty"`
-	// SSLHostname is used for both SNI during the TLS handshake and to validate the cert.
-	// Deprecated: Use ssl_cert_hostname and ssl_sni_hostname to configure certificate validation.
-	SSLHostname *string `url:"ssl_hostname,omitempty"`
 	// SSLSNIHostname overrides ssl_hostname, but only for SNI in the handshake. Does not affect cert validation at all.
 	SSLSNIHostname *string `url:"ssl_sni_hostname,omitempty"`
 	// ServiceID is the ID of the service (required).

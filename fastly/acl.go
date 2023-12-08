@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,29 +10,11 @@ import (
 type ACL struct {
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	ID             string     `mapstructure:"id"`
-	Name           string     `mapstructure:"name"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
+	ID             *string    `mapstructure:"id"`
+	Name           *string    `mapstructure:"name"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int       `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
-}
-
-// ACLsByName is a sortable list of ACLs.
-type ACLsByName []*ACL
-
-// Len implements the sortable interface.
-func (s ACLsByName) Len() int {
-	return len(s)
-}
-
-// Swap implements the sortable interface.
-func (s ACLsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implements the sortable interface.
-func (s ACLsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListACLsInput is used as input to the ListACLs function.
@@ -64,13 +45,12 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	if err := decodeBodyMap(resp.Body, &as); err != nil {
 		return nil, err
 	}
-	sort.Stable(ACLsByName(as))
 	return as, nil
 }
 
 // CreateACLInput is used as input to the CreateACL function.
 type CreateACLInput struct {
-	// Name is the name of the ACL to create (required)
+	// Name is the name of the ACL to create.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
@@ -180,7 +160,7 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 type UpdateACLInput struct {
 	// Name is the name of the ACL to update (required).
 	Name string
-	// NewName is the new name of the ACL to update (required).
+	// NewName is the new name of the ACL to update.
 	NewName *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`

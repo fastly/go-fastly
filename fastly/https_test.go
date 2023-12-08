@@ -39,7 +39,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/create", func(c *Client) {
 		h, err = c.CreateHTTPS(&CreateHTTPSInput{
 			ServiceID:         testServiceID,
-			ServiceVersion:    tv.Number,
+			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-https"),
 			Format:            ToPointer("format"),
 			URL:               ToPointer("https://example.com/"),
@@ -68,69 +68,69 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 		record(t, "https/cleanup", func(c *Client) {
 			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-https",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
 			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-https",
 			})
 		})
 	}()
 
-	if h.Name != "test-https" {
-		t.Errorf("bad name: %q", h.Name)
+	if *h.Name != "test-https" {
+		t.Errorf("bad name: %q", *h.Name)
 	}
-	if h.Format != "format" {
-		t.Errorf("bad format: %q", h.Format)
+	if *h.Format != "format" {
+		t.Errorf("bad format: %q", *h.Format)
 	}
-	if h.URL != "https://example.com/" {
-		t.Errorf("bad url: %q", h.URL)
+	if *h.URL != "https://example.com/" {
+		t.Errorf("bad url: %q", *h.URL)
 	}
-	if h.RequestMaxEntries != 1 {
-		t.Errorf("bad request_max_entries: %q", h.RequestMaxEntries)
+	if *h.RequestMaxEntries != 1 {
+		t.Errorf("bad request_max_entries: %q", *h.RequestMaxEntries)
 	}
-	if h.RequestMaxBytes != 1000 {
-		t.Errorf("bad request_max_bytes: %q", h.RequestMaxBytes)
+	if *h.RequestMaxBytes != 1000 {
+		t.Errorf("bad request_max_bytes: %q", *h.RequestMaxBytes)
 	}
-	if h.ContentType != "application/json" {
-		t.Errorf("bad content_type: %q", h.ContentType)
+	if *h.ContentType != "application/json" {
+		t.Errorf("bad content_type: %q", *h.ContentType)
 	}
-	if h.HeaderName != "X-Example-Header" {
-		t.Errorf("bad header_name: %q", h.HeaderName)
+	if *h.HeaderName != "X-Example-Header" {
+		t.Errorf("bad *h.ader_name: %q", *h.HeaderName)
 	}
-	if h.HeaderValue != "ExampleValue" {
-		t.Errorf("bad header_value: %q", h.HeaderValue)
+	if *h.HeaderValue != "ExampleValue" {
+		t.Errorf("bad *h.ader_value: %q", *h.HeaderValue)
 	}
-	if h.Method != "PUT" {
-		t.Errorf("bad method: %q", h.Method)
+	if *h.Method != "PUT" {
+		t.Errorf("bad met*h.d: %q", *h.Method)
 	}
-	if h.JSONFormat != "2" {
-		t.Errorf("bad json_format: %q", h.JSONFormat)
+	if *h.JSONFormat != "2" {
+		t.Errorf("bad json_format: %q", *h.JSONFormat)
 	}
-	if h.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", h.Placement)
+	if *h.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *h.Placement)
 	}
-	if h.TLSCACert != caCert {
-		t.Errorf("bad tls_ca_cert: %q", h.TLSCACert)
+	if *h.TLSCACert != caCert {
+		t.Errorf("bad tls_ca_cert: %q", *h.TLSCACert)
 	}
-	if h.TLSHostname != "example.com" {
-		t.Errorf("bad tls_hostname: %q", h.TLSHostname)
+	if *h.TLSHostname != "example.com" {
+		t.Errorf("bad tls_*h.stname: %q", *h.TLSHostname)
 	}
-	if h.TLSClientCert != clientCert {
-		t.Errorf("bad tls_client_cert: %q", h.TLSClientCert)
+	if *h.TLSClientCert != clientCert {
+		t.Errorf("bad tls_client_cert: %q", *h.TLSClientCert)
 	}
-	if h.TLSClientKey != clientKey {
-		t.Errorf("bad tls_client_key: %q", h.TLSClientKey)
+	if *h.TLSClientKey != clientKey {
+		t.Errorf("bad tls_client_key: %q", *h.TLSClientKey)
 	}
-	if h.MessageType != "blank" {
-		t.Errorf("bad message_type: %s", h.MessageType)
+	if *h.MessageType != "blank" {
+		t.Errorf("bad message_type: %s", *h.MessageType)
 	}
-	if h.FormatVersion != 2 {
-		t.Errorf("bad format_version: %d", h.FormatVersion)
+	if *h.FormatVersion != 2 {
+		t.Errorf("bad format_version: %d", *h.FormatVersion)
 	}
 
 	// List
@@ -138,7 +138,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/list", func(c *Client) {
 		hs, err = c.ListHTTPS(&ListHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -153,63 +153,63 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/get", func(c *Client) {
 		nh, err = c.GetHTTPS(&GetHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-https",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if h.Name != nh.Name {
-		t.Errorf("bad name: %q", h.Name)
+	if *h.Name != *nh.Name {
+		t.Errorf("bad name: %q", *h.Name)
 	}
-	if h.Format != nh.Format {
-		t.Errorf("bad format: %q", h.Format)
+	if *h.Format != *nh.Format {
+		t.Errorf("bad format: %q", *h.Format)
 	}
-	if h.URL != nh.URL {
-		t.Errorf("bad url: %q", h.URL)
+	if *h.URL != *nh.URL {
+		t.Errorf("bad url: %q", *h.URL)
 	}
-	if h.RequestMaxEntries != nh.RequestMaxEntries {
-		t.Errorf("bad request_max_entries: %q", h.RequestMaxEntries)
+	if *h.RequestMaxEntries != *nh.RequestMaxEntries {
+		t.Errorf("bad request_max_entries: %q", *h.RequestMaxEntries)
 	}
-	if h.RequestMaxBytes != nh.RequestMaxBytes {
-		t.Errorf("bad request_max_bytes: %q", h.RequestMaxBytes)
+	if *h.RequestMaxBytes != *nh.RequestMaxBytes {
+		t.Errorf("bad request_max_bytes: %q", *h.RequestMaxBytes)
 	}
-	if h.ContentType != nh.ContentType {
-		t.Errorf("bad content_type: %q", h.ContentType)
+	if *h.ContentType != *nh.ContentType {
+		t.Errorf("bad content_type: %q", *h.ContentType)
 	}
-	if h.HeaderName != nh.HeaderName {
-		t.Errorf("bad header_name: %q", h.HeaderName)
+	if *h.HeaderName != *nh.HeaderName {
+		t.Errorf("bad *h.ader_name: %q", *h.HeaderName)
 	}
-	if h.HeaderValue != nh.HeaderValue {
-		t.Errorf("bad header_value: %q", h.HeaderValue)
+	if *h.HeaderValue != *nh.HeaderValue {
+		t.Errorf("bad *h.ader_value: %q", *h.HeaderValue)
 	}
-	if h.Method != nh.Method {
-		t.Errorf("bad method: %q", h.Method)
+	if *h.Method != *nh.Method {
+		t.Errorf("bad met*h.d: %q", *h.Method)
 	}
-	if h.JSONFormat != nh.JSONFormat {
-		t.Errorf("bad json_format: %q", h.JSONFormat)
+	if *h.JSONFormat != *nh.JSONFormat {
+		t.Errorf("bad json_format: %q", *h.JSONFormat)
 	}
-	if h.Placement != nh.Placement {
-		t.Errorf("bad placement: %q", h.Placement)
+	if *h.Placement != *nh.Placement {
+		t.Errorf("bad placement: %q", *h.Placement)
 	}
-	if h.TLSCACert != nh.TLSCACert {
-		t.Errorf("bad tls_ca_cert: %q", h.TLSCACert)
+	if *h.TLSCACert != *nh.TLSCACert {
+		t.Errorf("bad tls_ca_cert: %q", *h.TLSCACert)
 	}
-	if h.TLSHostname != nh.TLSHostname {
-		t.Errorf("bad tls_hostname: %q", h.TLSHostname)
+	if *h.TLSHostname != *nh.TLSHostname {
+		t.Errorf("bad tls_*h.stname: %q", *h.TLSHostname)
 	}
-	if h.TLSClientCert != nh.TLSClientCert {
-		t.Errorf("bad tls_client_cert: %q", h.TLSClientCert)
+	if *h.TLSClientCert != *nh.TLSClientCert {
+		t.Errorf("bad tls_client_cert: %q", *h.TLSClientCert)
 	}
-	if h.TLSClientKey != nh.TLSClientKey {
-		t.Errorf("bad tls_client_key: %q", h.TLSClientKey)
+	if *h.TLSClientKey != *nh.TLSClientKey {
+		t.Errorf("bad tls_client_key: %q", *h.TLSClientKey)
 	}
-	if h.MessageType != nh.MessageType {
-		t.Errorf("bad message_type: %s", h.MessageType)
+	if *h.MessageType != *nh.MessageType {
+		t.Errorf("bad message_type: %s", *h.MessageType)
 	}
-	if h.FormatVersion != nh.FormatVersion {
-		t.Errorf("bad format_version: %d", h.FormatVersion)
+	if *h.FormatVersion != *nh.FormatVersion {
+		t.Errorf("bad format_version: %d", *h.FormatVersion)
 	}
 
 	// Update
@@ -217,7 +217,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	record(t, "https/update", func(c *Client) {
 		uh, err = c.UpdateHTTPS(&UpdateHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-https",
 			NewName:        ToPointer("new-test-https"),
 			Method:         ToPointer("POST"),
@@ -226,18 +226,18 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uh.Name != "new-test-https" {
-		t.Errorf("bad name: %q", uh.Name)
+	if *uh.Name != "new-test-https" {
+		t.Errorf("bad name: %q", *uh.Name)
 	}
-	if uh.Method != "POST" {
-		t.Errorf("bad method: %q", uh.Method)
+	if *uh.Method != "POST" {
+		t.Errorf("bad method: %q", *uh.Method)
 	}
 
 	// Delete
 	record(t, "https/delete", func(c *Client) {
 		err = c.DeleteHTTPS(&DeleteHTTPSInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-https",
 		})
 	})

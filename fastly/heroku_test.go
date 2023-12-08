@@ -18,7 +18,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/create", func(c *Client) {
 		h, err = c.CreateHeroku(&CreateHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-heroku"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
@@ -36,35 +36,35 @@ func TestClient_Herokus(t *testing.T) {
 		record(t, "herokus/cleanup", func(c *Client) {
 			_ = c.DeleteHeroku(&DeleteHerokuInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-heroku",
 			})
 
 			_ = c.DeleteHeroku(&DeleteHerokuInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-heroku",
 			})
 		})
 	}()
 
-	if h.Name != "test-heroku" {
-		t.Errorf("bad name: %q", h.Name)
+	if *h.Name != "test-heroku" {
+		t.Errorf("bad name: %q", *h.Name)
 	}
-	if h.Format != "%h %l %u %t \"%r\" %>s %b" {
-		t.Errorf("bad format: %q", h.Format)
+	if *h.Format != "%h %l %u %t \"%r\" %>s %b" {
+		t.Errorf("bad format: %q", *h.Format)
 	}
-	if h.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", h.FormatVersion)
+	if *h.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *h.FormatVersion)
 	}
-	if h.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", h.Placement)
+	if *h.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *h.Placement)
 	}
-	if h.Token != "super-secure-token" {
-		t.Errorf("bad token: %q", h.Token)
+	if *h.Token != "super-secure-token" {
+		t.Errorf("bad token: %q", *h.Token)
 	}
-	if h.URL != "https://1.us.logplex.io/logs" {
-		t.Errorf("bad url: %q", h.URL)
+	if *h.URL != "https://1.us.logplex.io/logs" {
+		t.Errorf("bad url: %q", *h.URL)
 	}
 
 	// List
@@ -72,7 +72,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/list", func(c *Client) {
 		hs, err = c.ListHerokus(&ListHerokusInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,30 +87,30 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/get", func(c *Client) {
 		nh, err = c.GetHeroku(&GetHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-heroku",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if h.Name != nh.Name {
-		t.Errorf("bad name: %q", h.Name)
+	if *h.Name != *nh.Name {
+		t.Errorf("bad name: %q", *h.Name)
 	}
-	if h.Format != nh.Format {
-		t.Errorf("bad format: %q", h.Format)
+	if *h.Format != *nh.Format {
+		t.Errorf("bad format: %q", *h.Format)
 	}
-	if h.FormatVersion != nh.FormatVersion {
-		t.Errorf("bad format_version: %q", h.FormatVersion)
+	if *h.FormatVersion != *nh.FormatVersion {
+		t.Errorf("bad format_version: %q", *h.FormatVersion)
 	}
-	if h.Placement != nh.Placement {
-		t.Errorf("bad placement: %q", h.Placement)
+	if *h.Placement != *nh.Placement {
+		t.Errorf("bad placement: %q", *h.Placement)
 	}
-	if h.Token != nh.Token {
-		t.Errorf("bad token: %q", h.Token)
+	if *h.Token != *nh.Token {
+		t.Errorf("bad token: %q", *h.Token)
 	}
-	if h.URL != nh.URL {
-		t.Errorf("bad url: %q", h.URL)
+	if *h.URL != *nh.URL {
+		t.Errorf("bad url: %q", *h.URL)
 	}
 
 	// Update
@@ -118,7 +118,7 @@ func TestClient_Herokus(t *testing.T) {
 	record(t, "herokus/update", func(c *Client) {
 		uh, err = c.UpdateHeroku(&UpdateHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-heroku",
 			NewName:        ToPointer("new-test-heroku"),
 			Token:          ToPointer("new-token"),
@@ -127,18 +127,18 @@ func TestClient_Herokus(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uh.Name != "new-test-heroku" {
-		t.Errorf("bad name: %q", uh.Name)
+	if *uh.Name != "new-test-heroku" {
+		t.Errorf("bad name: %q", *uh.Name)
 	}
-	if uh.Token != "new-token" {
-		t.Errorf("bad token: %q", uh.Token)
+	if *uh.Token != "new-token" {
+		t.Errorf("bad token: %q", *uh.Token)
 	}
 
 	// Delete
 	record(t, "herokus/delete", func(c *Client) {
 		err = c.DeleteHeroku(&DeleteHerokuInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-heroku",
 		})
 	})

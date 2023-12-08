@@ -18,7 +18,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/create", func(c *Client) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-response-object"),
 			Status:         ToPointer(200),
 			Response:       ToPointer("Ok"),
@@ -35,32 +35,32 @@ func TestClient_ResponseObjects(t *testing.T) {
 		record(t, "response_objects/cleanup", func(c *Client) {
 			_ = c.DeleteResponseObject(&DeleteResponseObjectInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-response-object",
 			})
 
 			_ = c.DeleteResponseObject(&DeleteResponseObjectInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-response-object",
 			})
 		})
 	}()
 
-	if ro.Name != "test-response-object" {
-		t.Errorf("bad name: %q", ro.Name)
+	if *ro.Name != "test-response-object" {
+		t.Errorf("bad name: %q", *ro.Name)
 	}
-	if ro.Status != 200 {
-		t.Errorf("bad status: %q", ro.Status)
+	if *ro.Status != 200 {
+		t.Errorf("bad status: %q", *ro.Status)
 	}
-	if ro.Response != "Ok" {
-		t.Errorf("bad response: %q", ro.Response)
+	if *ro.Response != "Ok" {
+		t.Errorf("bad response: %q", *ro.Response)
 	}
-	if ro.Content != "abcd" {
-		t.Errorf("bad content: %q", ro.Content)
+	if *ro.Content != "abcd" {
+		t.Errorf("bad content: %q", *ro.Content)
 	}
-	if ro.ContentType != "text/plain" {
-		t.Errorf("bad content_type: %q", ro.ContentType)
+	if *ro.ContentType != "text/plain" {
+		t.Errorf("bad content_type: %q", *ro.ContentType)
 	}
 
 	// List
@@ -68,7 +68,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/list", func(c *Client) {
 		ros, err = c.ListResponseObjects(&ListResponseObjectsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -83,27 +83,27 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/get", func(c *Client) {
 		nro, err = c.GetResponseObject(&GetResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-response-object",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ro.Name != nro.Name {
-		t.Errorf("bad name: %q", ro.Name)
+	if *ro.Name != *nro.Name {
+		t.Errorf("bad name: %q", *ro.Name)
 	}
-	if ro.Status != nro.Status {
-		t.Errorf("bad status: %q", ro.Status)
+	if *ro.Status != *nro.Status {
+		t.Errorf("bad status: %q", *ro.Status)
 	}
-	if ro.Response != nro.Response {
-		t.Errorf("bad response: %q", ro.Response)
+	if *ro.Response != *nro.Response {
+		t.Errorf("bad response: %q", *ro.Response)
 	}
-	if ro.Content != nro.Content {
-		t.Errorf("bad content: %q", ro.Content)
+	if *ro.Content != *nro.Content {
+		t.Errorf("bad content: %q", *ro.Content)
 	}
-	if ro.ContentType != nro.ContentType {
-		t.Errorf("bad content_type: %q", ro.ContentType)
+	if *ro.ContentType != *nro.ContentType {
+		t.Errorf("bad content_type: %q", *ro.ContentType)
 	}
 
 	// Update
@@ -111,7 +111,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	record(t, "response_objects/update", func(c *Client) {
 		uro, err = c.UpdateResponseObject(&UpdateResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-response-object",
 			NewName:        ToPointer("new-test-response-object"),
 		})
@@ -119,15 +119,15 @@ func TestClient_ResponseObjects(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uro.Name != "new-test-response-object" {
-		t.Errorf("bad name: %q", uro.Name)
+	if *uro.Name != "new-test-response-object" {
+		t.Errorf("bad name: %q", *uro.Name)
 	}
 
 	// Delete
 	record(t, "response_objects/delete", func(c *Client) {
 		err = c.DeleteResponseObject(&DeleteResponseObjectInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-response-object",
 		})
 	})

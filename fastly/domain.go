@@ -5,37 +5,18 @@ import (
 	"fmt"
 	"io"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Domain represents the the domain name Fastly will serve content for.
 type Domain struct {
-	Comment        string     `mapstructure:"comment"`
+	Comment        *string    `mapstructure:"comment"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	Name           string     `mapstructure:"name"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
+	Name           *string    `mapstructure:"name"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int       `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
-}
-
-// domainsByName is a sortable list of backends.
-type domainsByName []*Domain
-
-// Len implement the sortable interface.
-func (s domainsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s domainsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s domainsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListDomainsInput is used as input to the ListDomains function.
@@ -66,7 +47,6 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if err := decodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
-	sort.Stable(domainsByName(ds))
 	return ds, nil
 }
 
@@ -74,7 +54,7 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 type CreateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Name is the name of the domain that the service will respond to (required).
+	// Name is the name of the domain that the service will respond to.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
@@ -254,9 +234,9 @@ func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult
 // DomainValidationResult defines an idiomatic representation of the API
 // response.
 type DomainValidationResult struct {
-	CName    string
-	Metadata DomainMetadata
-	Valid    bool
+	CName    *string
+	Metadata *DomainMetadata
+	Valid    *bool
 }
 
 // UnmarshalJSON works around the badly designed API response by coercing the
@@ -288,12 +268,12 @@ func (d *DomainValidationResult) UnmarshalJSON(data []byte) error {
 
 // DomainMetadata represents a domain name configured for a Fastly service.
 type DomainMetadata struct {
-	Comment        string     `json:"comment"`
+	Comment        *string    `json:"comment"`
 	CreatedAt      *time.Time `json:"created_at"`
 	DeletedAt      *time.Time `json:"deleted_at"`
-	Name           string     `json:"name"`
-	ServiceID      string     `json:"service_id"`
-	ServiceVersion int        `json:"version"`
+	Name           *string    `json:"name"`
+	ServiceID      *string    `json:"service_id"`
+	ServiceVersion *int       `json:"version"`
 	UpdatedAt      *time.Time `json:"updated_at"`
 }
 

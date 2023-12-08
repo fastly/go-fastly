@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,27 +10,17 @@ import (
 type NewRelicOTLP struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Region            string     `mapstructure:"region"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Region            *string    `mapstructure:"region"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	URL               string     `mapstructure:"url"`
-}
-
-// newrelicOTLPByName is a sortable list of newrelic.
-type newrelicOTLPByName []*NewRelicOTLP
-
-// Len, Swap, and Less implement the sortable interface.
-func (s newrelicOTLPByName) Len() int      { return len(s) }
-func (s newrelicOTLPByName) Swap(i, j int) { s[i], s[j] = s[j], s[i] }
-func (s newrelicOTLPByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	URL               *string    `mapstructure:"url"`
 }
 
 // ListNewRelicOTLPInput is used as input to the ListNewRelicOTLP function.
@@ -58,12 +47,12 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var n []*NewRelicOTLP
 	if err := decodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
-	sort.Stable(newrelicOTLPByName(n))
 	return n, nil
 }
 
@@ -97,7 +86,6 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
@@ -119,10 +107,8 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 type GetNewRelicOTLPInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-
 	// Name is the name of the newrelic to fetch.
 	Name string
 }
@@ -132,11 +118,9 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -160,7 +144,7 @@ type UpdateNewRelicOTLPInput struct {
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
 	FormatVersion *int `url:"format_version,omitempty"`
-	// Name is the name of the newrelic to update.
+	// Name is the name of the newrelic to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
@@ -186,11 +170,9 @@ func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, 
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -223,11 +205,9 @@ func (c *Client) DeleteNewRelicOTLP(i *DeleteNewRelicOTLPInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
-
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
 	}
-
 	if i.Name == "" {
 		return ErrMissingName
 	}

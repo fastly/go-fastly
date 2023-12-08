@@ -46,7 +46,7 @@ func TestClient_Resources(t *testing.T) {
 	record(t, "resources/create", func(c *Client) {
 		r, err = c.CreateResource(&CreateResourceInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer(kvStoreNameForServiceLinking),
 			ResourceID:     ToPointer(o.ID),
 		})
@@ -59,15 +59,15 @@ func TestClient_Resources(t *testing.T) {
 	defer func() {
 		record(t, "resources/cleanup", func(c *Client) {
 			_ = c.DeleteResource(&DeleteResourceInput{
-				ID:             r.ID,
+				ID:             *r.ID,
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 			})
 		})
 	}()
 
-	if r.Name != kvStoreNameForServiceLinking {
-		t.Errorf("bad name: %q", r.Name)
+	if *r.Name != kvStoreNameForServiceLinking {
+		t.Errorf("bad name: %q", *r.Name)
 	}
 
 	// List
@@ -75,7 +75,7 @@ func TestClient_Resources(t *testing.T) {
 	record(t, "resources/list", func(c *Client) {
 		rs, err = c.ListResources(&ListResourcesInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -89,41 +89,41 @@ func TestClient_Resources(t *testing.T) {
 	var gr *Resource
 	record(t, "resources/get", func(c *Client) {
 		gr, err = c.GetResource(&GetResourceInput{
-			ID:             r.ID,
+			ID:             *r.ID,
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if r.Name != gr.Name {
-		t.Errorf("bad name: %q (%q)", r.Name, gr.Name)
+	if *r.Name != *gr.Name {
+		t.Errorf("bad name: %q (%q)", *r.Name, *gr.Name)
 	}
 
 	// Update
 	var ur *Resource
 	record(t, "resources/update", func(c *Client) {
 		ur, err = c.UpdateResource(&UpdateResourceInput{
-			ID:             r.ID,
+			ID:             *r.ID,
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("new-kv-store-alias-for-my-service"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ur.Name != "new-kv-store-alias-for-my-service" {
-		t.Errorf("bad name: %q", ur.Name)
+	if *ur.Name != "new-kv-store-alias-for-my-service" {
+		t.Errorf("bad name: %q", *ur.Name)
 	}
 
 	// Delete
 	record(t, "resources/delete", func(c *Client) {
 		err = c.DeleteResource(&DeleteResourceInput{
-			ID:             ur.ID,
+			ID:             *ur.ID,
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -256,13 +256,13 @@ func TestResourceJSONRoundtrip(t *testing.T) {
 	r := Resource{
 		CreatedAt:      &now,
 		DeletedAt:      &now,
-		HREF:           "the/href",
-		ID:             "the-id",
-		Name:           "the-name",
-		ResourceID:     "the-resource-id",
-		ResourceType:   "the-resource-type",
-		ServiceID:      "the-service-id",
-		ServiceVersion: 1,
+		HREF:           ToPointer("the/href"),
+		ID:             ToPointer("the-id"),
+		Name:           ToPointer("the-name"),
+		ResourceID:     ToPointer("the-resource-id"),
+		ResourceType:   ToPointer("the-resource-type"),
+		ServiceID:      ToPointer("the-service-id"),
+		ServiceVersion: ToPointer(1),
 		UpdatedAt:      &now,
 	}
 
@@ -284,28 +284,27 @@ func TestResourceJSONRoundtrip(t *testing.T) {
 	}
 	t.Logf("Decoded:\n%#v", decoded)
 
-	if got, want := decoded.HREF, r.HREF; got != want {
+	if got, want := *decoded.HREF, *r.HREF; got != want {
 		t.Errorf("HREF: got %q, want %q", got, want)
 	}
-	if got, want := decoded.ID, r.ID; got != want {
+	if got, want := *decoded.ID, *r.ID; got != want {
 		t.Errorf("ID: got %q, want %q", got, want)
 	}
-	if got, want := decoded.Name, r.Name; got != want {
+	if got, want := *decoded.Name, *r.Name; got != want {
 		t.Errorf("Name: got %q, want %q", got, want)
 	}
-	if got, want := decoded.ResourceID, r.ResourceID; got != want {
+	if got, want := *decoded.ResourceID, *r.ResourceID; got != want {
 		t.Errorf("ResourceID: got %q, want %q", got, want)
 	}
-	if got, want := decoded.ResourceType, r.ResourceType; got != want {
+	if got, want := *decoded.ResourceType, *r.ResourceType; got != want {
 		t.Errorf("ResourceType: got %q, want %q", got, want)
 	}
-	if got, want := decoded.ServiceID, r.ServiceID; got != want {
+	if got, want := *decoded.ServiceID, *r.ServiceID; got != want {
 		t.Errorf("ServiceID: got %q, want %q", got, want)
 	}
-	if got, want := decoded.ServiceVersion, r.ServiceVersion; got != want {
+	if got, want := *decoded.ServiceVersion, *r.ServiceVersion; got != want {
 		t.Errorf("ServiceVersion: got %q, want %q", got, want)
 	}
-
 	if got, want := decoded.CreatedAt, r.CreatedAt; got == nil || !got.Equal(*want) {
 		t.Errorf("CreatedAt: got %s, want %s", got, want)
 	}

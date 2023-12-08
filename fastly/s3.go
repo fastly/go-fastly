@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -57,51 +56,33 @@ const (
 
 // S3 represents a S3 response from the Fastly API.
 type S3 struct {
-	ACL                          S3AccessControlList    `mapstructure:"acl"`
-	AccessKey                    string                 `mapstructure:"access_key"`
-	BucketName                   string                 `mapstructure:"bucket_name"`
-	CompressionCodec             string                 `mapstructure:"compression_codec"`
-	CreatedAt                    *time.Time             `mapstructure:"created_at"`
-	DeletedAt                    *time.Time             `mapstructure:"deleted_at"`
-	Domain                       string                 `mapstructure:"domain"`
-	FileMaxBytes                 int                    `mapstructure:"file_max_bytes"`
-	Format                       string                 `mapstructure:"format"`
-	FormatVersion                int                    `mapstructure:"format_version"`
-	GzipLevel                    int                    `mapstructure:"gzip_level"`
-	IAMRole                      string                 `mapstructure:"iam_role"`
-	MessageType                  string                 `mapstructure:"message_type"`
-	Name                         string                 `mapstructure:"name"`
-	Path                         string                 `mapstructure:"path"`
-	Period                       int                    `mapstructure:"period"`
-	Placement                    string                 `mapstructure:"placement"`
-	PublicKey                    string                 `mapstructure:"public_key"`
-	Redundancy                   S3Redundancy           `mapstructure:"redundancy"`
-	ResponseCondition            string                 `mapstructure:"response_condition"`
-	SecretKey                    string                 `mapstructure:"secret_key"`
-	ServerSideEncryption         S3ServerSideEncryption `mapstructure:"server_side_encryption"`
-	ServerSideEncryptionKMSKeyID string                 `mapstructure:"server_side_encryption_kms_key_id"`
-	ServiceID                    string                 `mapstructure:"service_id"`
-	ServiceVersion               int                    `mapstructure:"version"`
-	TimestampFormat              string                 `mapstructure:"timestamp_format"`
-	UpdatedAt                    *time.Time             `mapstructure:"updated_at"`
-}
-
-// s3sByName is a sortable list of S3s.
-type s3sByName []*S3
-
-// Len implement the sortable interface.
-func (s s3sByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s s3sByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s s3sByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	ACL                          *S3AccessControlList    `mapstructure:"acl"`
+	AccessKey                    *string                 `mapstructure:"access_key"`
+	BucketName                   *string                 `mapstructure:"bucket_name"`
+	CompressionCodec             *string                 `mapstructure:"compression_codec"`
+	CreatedAt                    *time.Time              `mapstructure:"created_at"`
+	DeletedAt                    *time.Time              `mapstructure:"deleted_at"`
+	Domain                       *string                 `mapstructure:"domain"`
+	FileMaxBytes                 *int                    `mapstructure:"file_max_bytes"`
+	Format                       *string                 `mapstructure:"format"`
+	FormatVersion                *int                    `mapstructure:"format_version"`
+	GzipLevel                    *int                    `mapstructure:"gzip_level"`
+	IAMRole                      *string                 `mapstructure:"iam_role"`
+	MessageType                  *string                 `mapstructure:"message_type"`
+	Name                         *string                 `mapstructure:"name"`
+	Path                         *string                 `mapstructure:"path"`
+	Period                       *int                    `mapstructure:"period"`
+	Placement                    *string                 `mapstructure:"placement"`
+	PublicKey                    *string                 `mapstructure:"public_key"`
+	Redundancy                   *S3Redundancy           `mapstructure:"redundancy"`
+	ResponseCondition            *string                 `mapstructure:"response_condition"`
+	SecretKey                    *string                 `mapstructure:"secret_key"`
+	ServerSideEncryption         *S3ServerSideEncryption `mapstructure:"server_side_encryption"`
+	ServerSideEncryptionKMSKeyID *string                 `mapstructure:"server_side_encryption_kms_key_id"`
+	ServiceID                    *string                 `mapstructure:"service_id"`
+	ServiceVersion               *int                    `mapstructure:"version"`
+	TimestampFormat              *string                 `mapstructure:"timestamp_format"`
+	UpdatedAt                    *time.Time              `mapstructure:"updated_at"`
 }
 
 // ListS3sInput is used as input to the ListS3s function.
@@ -132,7 +113,6 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	if err := decodeBodyMap(resp.Body, &s3s); err != nil {
 		return nil, err
 	}
-	sort.Stable(s3sByName(s3s))
 	return s3s, nil
 }
 
@@ -277,7 +257,7 @@ type UpdateS3Input struct {
 	IAMRole *string `url:"iam_role,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Name is the name of the S3 to update.
+	// Name is the name of the S3 to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`

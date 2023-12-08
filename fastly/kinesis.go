@@ -3,45 +3,26 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // Kinesis represents a Kinesis response from the Fastly API.
 type Kinesis struct {
-	AccessKey         string     `mapstructure:"access_key"`
+	AccessKey         *string    `mapstructure:"access_key"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	IAMRole           string     `mapstructure:"iam_role"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	Region            string     `mapstructure:"region"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	StreamName        string     `mapstructure:"topic"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	IAMRole           *string    `mapstructure:"iam_role"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	Region            *string    `mapstructure:"region"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	SecretKey         *string    `mapstructure:"secret_key"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	StreamName        *string    `mapstructure:"topic"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// kinesisByName is a sortable list of Kinesis.
-type kinesisByName []*Kinesis
-
-// Len implement the sortable interface.
-func (s kinesisByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s kinesisByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s kinesisByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListKinesisInput is used as input to the ListKinesis function.
@@ -72,7 +53,6 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	if err := decodeBodyMap(resp.Body, &kineses); err != nil {
 		return nil, err
 	}
-	sort.Stable(kinesisByName(kineses))
 	return kineses, nil
 }
 

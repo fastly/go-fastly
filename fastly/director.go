@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -24,45 +23,21 @@ const (
 // DirectorType is a type of director.
 type DirectorType int
 
-// DirectorTypePtr returns pointer to DirectorType.
-func DirectorTypePtr(t DirectorType) *DirectorType {
-	dt := DirectorType(t)
-	return &dt
-}
-
 // Director represents a director response from the Fastly API.
 type Director struct {
-	Backends       []string     `mapstructure:"backends"`
-	Capacity       int          `mapstructure:"capacity"`
-	Comment        string       `mapstructure:"comment"`
-	CreatedAt      *time.Time   `mapstructure:"created_at"`
-	DeletedAt      *time.Time   `mapstructure:"deleted_at"`
-	Name           string       `mapstructure:"name"`
-	Quorum         int          `mapstructure:"quorum"`
-	Retries        int          `mapstructure:"retries"`
-	ServiceID      string       `mapstructure:"service_id"`
-	ServiceVersion int          `mapstructure:"version"`
-	Shield         string       `mapstructure:"shield"`
-	Type           DirectorType `mapstructure:"type"`
-	UpdatedAt      *time.Time   `mapstructure:"updated_at"`
-}
-
-// directorsByName is a sortable list of directors.
-type directorsByName []*Director
-
-// Len implement the sortable interface.
-func (s directorsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s directorsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s directorsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	Backends       []string      `mapstructure:"backends"`
+	Capacity       *int          `mapstructure:"capacity"`
+	Comment        *string       `mapstructure:"comment"`
+	CreatedAt      *time.Time    `mapstructure:"created_at"`
+	DeletedAt      *time.Time    `mapstructure:"deleted_at"`
+	Name           *string       `mapstructure:"name"`
+	Quorum         *int          `mapstructure:"quorum"`
+	Retries        *int          `mapstructure:"retries"`
+	ServiceID      *string       `mapstructure:"service_id"`
+	ServiceVersion *int          `mapstructure:"version"`
+	Shield         *string       `mapstructure:"shield"`
+	Type           *DirectorType `mapstructure:"type"`
+	UpdatedAt      *time.Time    `mapstructure:"updated_at"`
 }
 
 // ListDirectorsInput is used as input to the ListDirectors function.
@@ -93,7 +68,6 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	if err := decodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
-	sort.Stable(directorsByName(ds))
 	return ds, nil
 }
 
@@ -195,7 +169,7 @@ type UpdateDirectorInput struct {
 	// Shield is selected POP to serve as a shield for the backends.
 	Shield *string `url:"shield,omitempty"`
 	// Type is what type of load balance group to use (random, hash, client).
-	Type DirectorType `url:"type,omitempty"`
+	Type *DirectorType `url:"type,omitempty"`
 }
 
 // UpdateDirector updates the specified resource.

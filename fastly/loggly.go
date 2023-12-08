@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -11,33 +10,15 @@ import (
 type Loggly struct {
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	Name              string     `mapstructure:"name"`
-	Placement         string     `mapstructure:"placement"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	Token             string     `mapstructure:"token"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	Name              *string    `mapstructure:"name"`
+	Placement         *string    `mapstructure:"placement"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	Token             *string    `mapstructure:"token"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-}
-
-// logglyByName is a sortable list of loggly.
-type logglyByName []*Loggly
-
-// Len implement the sortable interface.
-func (s logglyByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s logglyByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s logglyByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
 }
 
 // ListLogglyInput is used as input to the ListLoggly function.
@@ -68,7 +49,6 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	if err := decodeBodyMap(resp.Body, &ls); err != nil {
 		return nil, err
 	}
-	sort.Stable(logglyByName(ls))
 	return ls, nil
 }
 

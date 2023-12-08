@@ -3,51 +3,32 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
 // GCS represents an GCS logging response from the Fastly API.
 type GCS struct {
-	AccountName       string     `mapstructure:"account_name"`
-	Bucket            string     `mapstructure:"bucket_name"`
-	CompressionCodec  string     `mapstructure:"compression_codec"`
+	AccountName       *string    `mapstructure:"account_name"`
+	Bucket            *string    `mapstructure:"bucket_name"`
+	CompressionCodec  *string    `mapstructure:"compression_codec"`
 	CreatedAt         *time.Time `mapstructure:"created_at"`
 	DeletedAt         *time.Time `mapstructure:"deleted_at"`
-	Format            string     `mapstructure:"format"`
-	FormatVersion     int        `mapstructure:"format_version"`
-	GzipLevel         int        `mapstructure:"gzip_level"`
-	MessageType       string     `mapstructure:"message_type"`
-	Name              string     `mapstructure:"name"`
-	Path              string     `mapstructure:"path"`
-	Period            int        `mapstructure:"period"`
-	Placement         string     `mapstructure:"placement"`
-	ProjectID         string     `mapstructure:"project_id"`
-	ResponseCondition string     `mapstructure:"response_condition"`
-	SecretKey         string     `mapstructure:"secret_key"`
-	ServiceID         string     `mapstructure:"service_id"`
-	ServiceVersion    int        `mapstructure:"version"`
-	TimestampFormat   string     `mapstructure:"timestamp_format"`
+	Format            *string    `mapstructure:"format"`
+	FormatVersion     *int       `mapstructure:"format_version"`
+	GzipLevel         *int       `mapstructure:"gzip_level"`
+	MessageType       *string    `mapstructure:"message_type"`
+	Name              *string    `mapstructure:"name"`
+	Path              *string    `mapstructure:"path"`
+	Period            *int       `mapstructure:"period"`
+	Placement         *string    `mapstructure:"placement"`
+	ProjectID         *string    `mapstructure:"project_id"`
+	ResponseCondition *string    `mapstructure:"response_condition"`
+	SecretKey         *string    `mapstructure:"secret_key"`
+	ServiceID         *string    `mapstructure:"service_id"`
+	ServiceVersion    *int       `mapstructure:"version"`
+	TimestampFormat   *string    `mapstructure:"timestamp_format"`
 	UpdatedAt         *time.Time `mapstructure:"updated_at"`
-	User              string     `mapstructure:"user"`
-}
-
-// gcsesByName is a sortable list of gcses.
-type gcsesByName []*GCS
-
-// Len implement the sortable interface.
-func (s gcsesByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s gcsesByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s gcsesByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	User              *string    `mapstructure:"user"`
 }
 
 // ListGCSsInput is used as input to the ListGCSs function.
@@ -72,12 +53,12 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var gcses []*GCS
 	if err := decodeBodyMap(resp.Body, &gcses); err != nil {
 		return nil, err
 	}
-	sort.Stable(gcsesByName(gcses))
 	return gcses, nil
 }
 

@@ -9,9 +9,9 @@ import (
 // Purge is a response from a purge request.
 type Purge struct {
 	// ID is the unique ID of the purge request.
-	ID string `mapstructure:"id"`
+	ID *string `mapstructure:"id"`
 	// Status is the status of the purge, usually "ok".
-	Status string `mapstructure:"status"`
+	Status *string `mapstructure:"status"`
 }
 
 // PurgeInput is used as input to the Purge function.
@@ -90,7 +90,6 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if i.Key == "" {
 		return nil, ErrMissingKey
 	}
@@ -136,7 +135,6 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-
 	if len(i.Keys) == 0 {
 		return nil, ErrMissingKeys
 	}

@@ -24,7 +24,7 @@ func TestStatsClient_GetRealtimeStats(t *testing.T) {
 		_, err = c.GetRealtimeStats(&GetRealtimeStatsInput{
 			ServiceID: testServiceID,
 			Timestamp: 0,
-			Limit:     3,
+			Limit:     ToPointer(uint32(3)),
 		})
 	})
 	if err != nil {
@@ -44,7 +44,7 @@ func TestStatsClient_GetRealtimeStatsJSON(t *testing.T) {
 		err = c.GetRealtimeStatsJSON(&GetRealtimeStatsInput{
 			ServiceID: testServiceID,
 			Timestamp: 0,
-			Limit:     3,
+			Limit:     ToPointer(uint32(3)),
 		}, &ret)
 	})
 	if err != nil {

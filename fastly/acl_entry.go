@@ -7,14 +7,14 @@ import (
 
 // ACLEntry represents a server response from the Fastly API.
 type ACLEntry struct {
-	ACLID     string     `mapstructure:"acl_id"`
-	Comment   string     `mapstructure:"comment"`
+	ACLID     *string    `mapstructure:"acl_id"`
+	Comment   *string    `mapstructure:"comment"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	ID        string     `mapstructure:"id"`
-	IP        string     `mapstructure:"ip"`
-	Negated   bool       `mapstructure:"negated"`
-	ServiceID string     `mapstructure:"service_id"`
+	ID        *string    `mapstructure:"id"`
+	IP        *string    `mapstructure:"ip"`
+	Negated   *bool      `mapstructure:"negated"`
+	ServiceID *string    `mapstructure:"service_id"`
 	Subnet    *int       `mapstructure:"subnet"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
@@ -26,25 +26,34 @@ type GetACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
 	// Direction is the direction in which to sort results.
-	Direction string
+	Direction *string
 	// Page is the current page.
-	Page int
+	Page *int
 	// PerPage is the number of records per page.
-	PerPage int
+	PerPage *int
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 	// Sort is the field on which to sort.
-	Sort string
+	Sort *string
 }
 
 // GetACLEntries returns a ListPaginator for paginating through the resources.
 func (c *Client) GetACLEntries(i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
-	return newPaginator[ACLEntry](c, &listInput{
-		Direction: i.Direction,
-		Sort:      i.Sort,
-		Page:      i.Page,
-		PerPage:   i.PerPage,
-	}, fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID))
+	input := ListOpts{}
+	if i.Direction != nil {
+		input.Direction = *i.Direction
+	}
+	if i.Sort != nil {
+		input.Sort = *i.Sort
+	}
+	if i.Page != nil {
+		input.Page = *i.Page
+	}
+	if i.PerPage != nil {
+		input.PerPage = *i.PerPage
+	}
+	path := fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID)
+	return NewPaginator[ACLEntry](c, input, path)
 }
 
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
@@ -52,11 +61,11 @@ type ListACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
 	// Direction is the direction in which to sort results.
-	Direction string
+	Direction *string
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 	// Sort is the field on which to sort.
-	Sort string
+	Sort *string
 }
 
 // ListACLEntries retrieves all resources. Not suitable for large collections.
@@ -273,7 +282,7 @@ type BatchACLEntry struct {
 	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
 	Negated *Compatibool `json:"negated,omitempty"`
 	// Operation is a batching operation variant.
-	Operation BatchOperation `json:"op"`
+	Operation *BatchOperation `json:"op"`
 	// Subnet is the number of bits for the subnet mask applied to the IP address.
 	Subnet *int `json:"subnet,omitempty"`
 }

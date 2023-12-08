@@ -210,9 +210,9 @@ func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture st
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteDictionary(&DeleteDictionaryInput{
-			ServiceID:      dictionary.ServiceID,
-			ServiceVersion: dictionary.ServiceVersion,
-			Name:           dictionary.Name,
+			ServiceID:      *dictionary.ServiceID,
+			ServiceVersion: *dictionary.ServiceVersion,
+			Name:           *dictionary.Name,
 		})
 	})
 	if err != nil {
@@ -242,9 +242,9 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteACL(&DeleteACLInput{
-			ServiceID:      acl.ServiceID,
-			ServiceVersion: acl.ServiceVersion,
-			Name:           acl.Name,
+			ServiceID:      *acl.ServiceID,
+			ServiceVersion: *acl.ServiceVersion,
+			Name:           *acl.Name,
 		})
 	})
 	if err != nil {
@@ -299,9 +299,9 @@ func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 
 	record(t, deleteFixture, func(client *Client) {
 		err = client.DeletePool(&DeletePoolInput{
-			ServiceID:      pool.ServiceID,
-			ServiceVersion: pool.ServiceVersion,
-			Name:           pool.Name,
+			ServiceID:      *pool.ServiceID,
+			ServiceVersion: *pool.ServiceVersion,
+			Name:           *pool.Name,
 		})
 	})
 	if err != nil {

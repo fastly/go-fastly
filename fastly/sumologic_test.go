@@ -18,7 +18,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/create", func(c *Client) {
 		s, err = c.CreateSumologic(&CreateSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-sumologic"),
 			URL:            ToPointer("https://foo.sumologic.com"),
 			Format:         ToPointer("format"),
@@ -36,35 +36,35 @@ func TestClient_Sumologics(t *testing.T) {
 		record(t, "sumologics/cleanup", func(c *Client) {
 			_ = c.DeleteSumologic(&DeleteSumologicInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-sumologic",
 			})
 
 			_ = c.DeleteSumologic(&DeleteSumologicInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-sumologic",
 			})
 		})
 	}()
 
-	if s.Name != "test-sumologic" {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != "test-sumologic" {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.URL != "https://foo.sumologic.com" {
-		t.Errorf("bad url: %q", s.URL)
+	if *s.URL != "https://foo.sumologic.com" {
+		t.Errorf("bad url: %q", *s.URL)
 	}
-	if s.Format != "format" {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != "format" {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != 1 {
-		t.Errorf("bad format version: %q", s.FormatVersion)
+	if *s.FormatVersion != 1 {
+		t.Errorf("bad format version: %q", *s.FormatVersion)
 	}
-	if s.MessageType != "classic" {
-		t.Errorf("bad message type: %q", s.MessageType)
+	if *s.MessageType != "classic" {
+		t.Errorf("bad message type: %q", *s.MessageType)
 	}
-	if s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// List
@@ -72,7 +72,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/list", func(c *Client) {
 		ss, err = c.ListSumologics(&ListSumologicsInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -87,30 +87,30 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/get", func(c *Client) {
 		ns, err = c.GetSumologic(&GetSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-sumologic",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if s.Name != ns.Name {
-		t.Errorf("bad name: %q", s.Name)
+	if *s.Name != *ns.Name {
+		t.Errorf("bad name: %q", *s.Name)
 	}
-	if s.URL != ns.URL {
-		t.Errorf("bad url: %q", s.URL)
+	if *s.URL != *ns.URL {
+		t.Errorf("bad url: %q", *s.URL)
 	}
-	if s.Format != ns.Format {
-		t.Errorf("bad format: %q", s.Format)
+	if *s.Format != *ns.Format {
+		t.Errorf("bad format: %q", *s.Format)
 	}
-	if s.FormatVersion != ns.FormatVersion {
-		t.Errorf("bad format version: %q", s.FormatVersion)
+	if *s.FormatVersion != *ns.FormatVersion {
+		t.Errorf("bad format version: %q", *s.FormatVersion)
 	}
-	if s.MessageType != ns.MessageType {
-		t.Errorf("bad message type: %q", s.MessageType)
+	if *s.MessageType != *ns.MessageType {
+		t.Errorf("bad message type: %q", *s.MessageType)
 	}
-	if s.Placement != ns.Placement {
-		t.Errorf("bad placement: %q", s.Placement)
+	if *s.Placement != *ns.Placement {
+		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// Update
@@ -118,7 +118,7 @@ func TestClient_Sumologics(t *testing.T) {
 	record(t, "sumologics/update", func(c *Client) {
 		us, err = c.UpdateSumologic(&UpdateSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-sumologic",
 			NewName:        ToPointer("new-test-sumologic"),
 		})
@@ -126,15 +126,15 @@ func TestClient_Sumologics(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if us.Name != "new-test-sumologic" {
-		t.Errorf("bad name: %q", us.Name)
+	if *us.Name != "new-test-sumologic" {
+		t.Errorf("bad name: %q", *us.Name)
 	}
 
 	// Delete
 	record(t, "sumologics/delete", func(c *Client) {
 		err = c.DeleteSumologic(&DeleteSumologicInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-sumologic",
 		})
 	})

@@ -8,12 +8,12 @@ import (
 // RealtimeStatsResponse is a response from Fastly's real-time analytics endpoint
 type RealtimeStatsResponse struct {
 	// AggregateDelay is how long the system will wait before aggregating messages for each second.
-	AggregateDelay uint32 `mapstructure:"AggregateDelay"`
+	AggregateDelay *uint32 `mapstructure:"AggregateDelay"`
 	// Data is a list of records, each representing one second of time.
 	Data  []*RealtimeData `mapstructure:"Data"`
-	Error string          `mapstructure:"Error"`
+	Error *string         `mapstructure:"Error"`
 	// Timestamp is a value to use for subsequent requests.
-	Timestamp uint64 `mapstructure:"Timestamp"`
+	Timestamp *uint64 `mapstructure:"Timestamp"`
 }
 
 // RealtimeData represents combined stats for all Fastly's POPs and aggregate of them.
@@ -24,15 +24,15 @@ type RealtimeData struct {
 	// Datacenter groups measurements by POP.
 	Datacenter map[string]*Stats `mapstructure:"datacenter"`
 	// Recorded is the Unix timestamp at which this record's data was generated.
-	Recorded uint64 `mapstructure:"recorded"`
+	Recorded *uint64 `mapstructure:"recorded"`
 }
 
-// GetRealtimeStatsInput is an input parameter to GetRealtimeStats function
+// GetRealtimeStatsInput is an input parameter to GetRealtimeStats function.
 type GetRealtimeStatsInput struct {
-	Limit uint32
-	// ServiceID is the ID of the service.
+	Limit *uint32
+	// ServiceID is the ID of the service (required).
 	ServiceID string
-	// Timestamp is a value to use for subsequent requests.
+	// Timestamp is a value to use for subsequent requests (required).
 	Timestamp uint64
 }
 
@@ -61,8 +61,8 @@ func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst interface
 
 	path := fmt.Sprintf("/v1/channel/%s/ts/%d", i.ServiceID, i.Timestamp)
 
-	if i.Limit != 0 {
-		path = fmt.Sprintf("%s/limit/%d", path, i.Limit)
+	if i.Limit != nil {
+		path = fmt.Sprintf("%s/limit/%d", path, *i.Limit)
 	}
 
 	resp, err := c.client.Get(path, nil)

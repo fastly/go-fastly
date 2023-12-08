@@ -3,7 +3,6 @@ package fastly
 import (
 	"fmt"
 	"net/url"
-	"sort"
 	"time"
 )
 
@@ -44,41 +43,23 @@ type RequestSettingXFF string
 
 // RequestSetting represents a request setting response from the Fastly API.
 type RequestSetting struct {
-	Action           RequestSettingAction `mapstructure:"action"`
-	BypassBusyWait   bool                 `mapstructure:"bypass_busy_wait"`
-	CreatedAt        *time.Time           `mapstructure:"created_at"`
-	DefaultHost      string               `mapstructure:"default_host"`
-	DeletedAt        *time.Time           `mapstructure:"deleted_at"`
-	ForceMiss        bool                 `mapstructure:"force_miss"`
-	ForceSSL         bool                 `mapstructure:"force_ssl"`
-	GeoHeaders       bool                 `mapstructure:"geo_headers"`
-	HashKeys         string               `mapstructure:"hash_keys"`
-	MaxStaleAge      int                  `mapstructure:"max_stale_age"`
-	Name             string               `mapstructure:"name"`
-	RequestCondition string               `mapstructure:"request_condition"`
-	ServiceID        string               `mapstructure:"service_id"`
-	ServiceVersion   int                  `mapstructure:"version"`
-	TimerSupport     bool                 `mapstructure:"timer_support"`
-	UpdatedAt        *time.Time           `mapstructure:"updated_at"`
-	XForwardedFor    RequestSettingXFF    `mapstructure:"xff"`
-}
-
-// requestSettingsByName is a sortable list of request settings.
-type requestSettingsByName []*RequestSetting
-
-// Len implement the sortable interface.
-func (s requestSettingsByName) Len() int {
-	return len(s)
-}
-
-// Swap implement the sortable interface.
-func (s requestSettingsByName) Swap(i, j int) {
-	s[i], s[j] = s[j], s[i]
-}
-
-// Less implement the sortable interface.
-func (s requestSettingsByName) Less(i, j int) bool {
-	return s[i].Name < s[j].Name
+	Action           *RequestSettingAction `mapstructure:"action"`
+	BypassBusyWait   *bool                 `mapstructure:"bypass_busy_wait"`
+	CreatedAt        *time.Time            `mapstructure:"created_at"`
+	DefaultHost      *string               `mapstructure:"default_host"`
+	DeletedAt        *time.Time            `mapstructure:"deleted_at"`
+	ForceMiss        *bool                 `mapstructure:"force_miss"`
+	ForceSSL         *bool                 `mapstructure:"force_ssl"`
+	GeoHeaders       *bool                 `mapstructure:"geo_headers"`
+	HashKeys         *string               `mapstructure:"hash_keys"`
+	MaxStaleAge      *int                  `mapstructure:"max_stale_age"`
+	Name             *string               `mapstructure:"name"`
+	RequestCondition *string               `mapstructure:"request_condition"`
+	ServiceID        *string               `mapstructure:"service_id"`
+	ServiceVersion   *int                  `mapstructure:"version"`
+	TimerSupport     *bool                 `mapstructure:"timer_support"`
+	UpdatedAt        *time.Time            `mapstructure:"updated_at"`
+	XForwardedFor    *RequestSettingXFF    `mapstructure:"xff"`
 }
 
 // ListRequestSettingsInput is used as input to the ListRequestSettings
@@ -110,7 +91,6 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
-	sort.Stable(requestSettingsByName(bs))
 	return bs, nil
 }
 
@@ -238,7 +218,7 @@ type UpdateRequestSettingInput struct {
 	// TimerSupport injects the X-Timer info into the request for viewing origin fetch durations.
 	TimerSupport *Compatibool `url:"timer_support,omitempty"`
 	// XForwardedFor determines header value (clear, leave, append, append_all, overwrite)
-	XForwardedFor RequestSettingXFF `url:"xff,omitempty"`
+	XForwardedFor *RequestSettingXFF `url:"xff,omitempty"`
 }
 
 // UpdateRequestSetting updates the specified resource.

@@ -1,32 +1,35 @@
 package fastly
 
-import "net/http"
+import (
+	"net/http"
+)
 
 // EdgeCheck represents an edge check response from the Fastly API.
 type EdgeCheck struct {
-	Hash         string             `mapstructure:"hash"`
+	Hash         *string            `mapstructure:"hash"`
 	Request      *EdgeCheckRequest  `mapstructure:"request"`
 	Response     *EdgeCheckResponse `mapstructure:"response"`
-	ResponseTime float64            `mapstructure:"response_time"`
-	Server       string             `mapstructure:"server"`
+	ResponseTime *float64           `mapstructure:"response_time"`
+	Server       *string            `mapstructure:"server"`
 }
 
 // EdgeCheckRequest is the request part of an EdgeCheck response.
 type EdgeCheckRequest struct {
 	Headers *http.Header `mapstructure:"headers"`
-	Method  string       `mapstructure:"method"`
-	URL     string       `mapstructure:"url"`
+	Method  *string      `mapstructure:"method"`
+	URL     *string      `mapstructure:"url"`
 }
 
 // EdgeCheckResponse is the response part of an EdgeCheck response.
 type EdgeCheckResponse struct {
 	Headers *http.Header `mapstructure:"headers"`
-	Status  uint         `mapstructure:"status"`
+	Status  *int         `mapstructure:"status"`
 }
 
 // EdgeCheckInput is used as input to the EdgeCheck function.
 type EdgeCheckInput struct {
-	// URL is the full URL (host and path) to check on all nodes. if protocol is omitted, http will be assumed.
+	// URL is the full URL (host and path) to check on all nodes.
+	// If protocol is omitted, http will be assumed (required).
 	URL string `url:"url,omitempty"`
 }
 

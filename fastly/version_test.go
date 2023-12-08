@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"sort"
 	"testing"
 )
 
@@ -24,11 +23,11 @@ func TestClient_Versions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if v.Number == 0 {
-		t.Errorf("bad number: %q", v.Number)
+	if *v.Number == 0 {
+		t.Errorf("bad number: %q", *v.Number)
 	}
-	if v.Comment != "test comment" {
-		t.Errorf("bad comment: %q", v.Comment)
+	if *v.Comment != "test comment" {
+		t.Errorf("bad comment: %q", *v.Comment)
 	}
 
 	// Unlock and let other parallel tests go!
@@ -53,17 +52,17 @@ func TestClient_Versions(t *testing.T) {
 	record(t, "versions/get", func(c *Client) {
 		nv, err = c.GetVersion(&GetVersionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if nv.Number == 0 {
-		t.Errorf("bad number: %q", nv.Number)
+	if *nv.Number == 0 {
+		t.Errorf("bad number: %q", *nv.Number)
 	}
-	if nv.Comment != v.Comment {
-		t.Errorf("bad comment: %q", v.Comment)
+	if *nv.Comment != *v.Comment {
+		t.Errorf("bad comment: %q", *v.Comment)
 	}
 
 	// Update
@@ -71,15 +70,15 @@ func TestClient_Versions(t *testing.T) {
 	record(t, "versions/update", func(c *Client) {
 		uv, err = c.UpdateVersion(&UpdateVersionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 			Comment:        ToPointer("new comment"),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if uv.Comment != "new comment" {
-		t.Errorf("bad comment: %q", uv.Comment)
+	if *uv.Comment != "new comment" {
+		t.Errorf("bad comment: %q", *uv.Comment)
 	}
 
 	// Lock
@@ -87,14 +86,14 @@ func TestClient_Versions(t *testing.T) {
 	record(t, "versions/lock", func(c *Client) {
 		vl, err = c.LockVersion(&LockVersionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !vl.Locked {
-		t.Errorf("bad lock: %t", vl.Locked)
+	if !*vl.Locked {
+		t.Errorf("bad lock: %t", *vl.Locked)
 	}
 
 	// Clone
@@ -102,31 +101,17 @@ func TestClient_Versions(t *testing.T) {
 	record(t, "versions/clone", func(c *Client) {
 		cv, err = c.CloneVersion(&CloneVersionInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: v.Number,
+			ServiceVersion: *v.Number,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if cv.Active {
-		t.Errorf("bad clone: %t", cv.Active)
+	if *cv.Active {
+		t.Errorf("bad clone: %t", *cv.Active)
 	}
-	if cv.Comment != uv.Comment {
-		t.Errorf("bad comment: %q", uv.Comment)
-	}
-}
-
-func TestClient_SortVersions(t *testing.T) {
-	versionsData := []*Version{
-		{Number: 1},
-		{Number: 201},
-		{Number: 10},
-		{Number: 2},
-		{Number: 197},
-	}
-	sort.Sort(versionsByNumber(versionsData))
-	if versionsData[0].Number != 1 || versionsData[1].Number != 2 || versionsData[2].Number != 10 || versionsData[3].Number != 197 || versionsData[4].Number != 201 {
-		t.Fatalf("The sort.Sort did not work properly. Got: %#v\n", versionsData)
+	if *cv.Comment != *uv.Comment {
+		t.Errorf("bad comment: %q", *uv.Comment)
 	}
 }
 

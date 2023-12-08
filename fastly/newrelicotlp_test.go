@@ -18,7 +18,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/create", func(c *Client) {
 		n, err = c.CreateNewRelicOTLP(&CreateNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelicotlp"),
 			Token:          ToPointer("abcd1234"),
 			URL:            ToPointer("https://example.nr-data.net"),
@@ -35,35 +35,35 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 		record(t, "newrelicotlp/delete", func(c *Client) {
 			c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "test-newrelicotlp",
 			})
 
 			c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 				ServiceID:      testServiceID,
-				ServiceVersion: tv.Number,
+				ServiceVersion: *tv.Number,
 				Name:           "new-test-newrelicotlp",
 			})
 		})
 	}()
 
-	if n.Name != "test-newrelicotlp" {
-		t.Errorf("bad name: %q", n.Name)
+	if *n.Name != "test-newrelicotlp" {
+		t.Errorf("bad name: %q", *n.Name)
 	}
-	if n.Token != "abcd1234" {
-		t.Errorf("bad token: %q", n.Token)
+	if *n.Token != "abcd1234" {
+		t.Errorf("bad token: %q", *n.Token)
 	}
-	if n.URL != "https://example.nr-data.net" {
-		t.Errorf("bad url: %q", n.URL)
+	if *n.URL != "https://example.nr-data.net" {
+		t.Errorf("bad url: %q", *n.URL)
 	}
-	if n.Format != "format" {
-		t.Errorf("bad format: %q", n.Format)
+	if *n.Format != "format" {
+		t.Errorf("bad format: %q", *n.Format)
 	}
-	if n.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", n.FormatVersion)
+	if *n.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *n.FormatVersion)
 	}
-	if n.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", n.Placement)
+	if *n.Placement != "waf_debug" {
+		t.Errorf("bad placement: %q", *n.Placement)
 	}
 
 	// List
@@ -71,7 +71,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/list", func(c *Client) {
 		ln, err = c.ListNewRelicOTLP(&ListNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 		})
 	})
 	if err != nil {
@@ -86,30 +86,30 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/get", func(c *Client) {
 		nn, err = c.GetNewRelicOTLP(&GetNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-newrelicotlp",
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if n.Name != nn.Name {
-		t.Errorf("bad name: %q", n.Name)
+	if *n.Name != *nn.Name {
+		t.Errorf("bad name: %q", *n.Name)
 	}
-	if n.Token != nn.Token {
-		t.Errorf("bad token: %q", n.Token)
+	if *n.Token != *nn.Token {
+		t.Errorf("bad token: %q", *n.Token)
 	}
-	if n.URL != nn.URL {
-		t.Errorf("bad url: %q", n.URL)
+	if *n.URL != *nn.URL {
+		t.Errorf("bad url: %q", *n.URL)
 	}
-	if n.Format != nn.Format {
-		t.Errorf("bad format: %q", n.Format)
+	if *n.Format != *nn.Format {
+		t.Errorf("bad format: %q", *n.Format)
 	}
-	if n.FormatVersion != nn.FormatVersion {
-		t.Errorf("bad format_version: %q", n.FormatVersion)
+	if *n.FormatVersion != *nn.FormatVersion {
+		t.Errorf("bad format_version: %q", *n.FormatVersion)
 	}
-	if n.Placement != nn.Placement {
-		t.Errorf("bad placement: %q", n.Placement)
+	if *n.Placement != *nn.Placement {
+		t.Errorf("bad placement: %q", *n.Placement)
 	}
 
 	// Update
@@ -117,7 +117,7 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	record(t, "newrelicotlp/update", func(c *Client) {
 		un, err = c.UpdateNewRelicOTLP(&UpdateNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "test-newrelicotlp",
 			NewName:        ToPointer("new-test-newrelicotlp"),
 			FormatVersion:  ToPointer(2),
@@ -126,18 +126,18 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if un.Name != "new-test-newrelicotlp" {
-		t.Errorf("bad name: %q", un.Name)
+	if *un.Name != "new-test-newrelicotlp" {
+		t.Errorf("bad name: %q", *un.Name)
 	}
-	if un.FormatVersion != 2 {
-		t.Errorf("bad format_version: %q", un.FormatVersion)
+	if *un.FormatVersion != 2 {
+		t.Errorf("bad format_version: %q", *un.FormatVersion)
 	}
 
 	// Delete
 	record(t, "newrelicotlp/delete", func(c *Client) {
 		err = c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 			ServiceID:      testServiceID,
-			ServiceVersion: tv.Number,
+			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelicotlp",
 		})
 	})

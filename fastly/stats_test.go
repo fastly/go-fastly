@@ -10,11 +10,11 @@ func TestClient_GetStats(t *testing.T) {
 	var err error
 	record(t, "stats/service_stats", func(c *Client) {
 		_, err = c.GetStats(&GetStatsInput{
-			Service: testServiceID,
-			From:    "10 days ago",
-			To:      "now",
-			By:      "minute",
-			Region:  "europe",
+			Service: ToPointer(testServiceID),
+			From:    ToPointer("10 days ago"),
+			To:      ToPointer("now"),
+			By:      ToPointer("minute"),
+			Region:  ToPointer("europe"),
 		})
 	})
 	if err != nil {
@@ -28,11 +28,11 @@ func TestClient_GetStats_ByField(t *testing.T) {
 	var err error
 	record(t, "stats/service_stats_by_field", func(c *Client) {
 		_, err = c.GetStatsField(&GetStatsInput{
-			Field:  "bandwidth",
-			From:   "1 hour ago",
-			To:     "now",
-			By:     "minute",
-			Region: "europe",
+			Field:  ToPointer("bandwidth"),
+			From:   ToPointer("1 hour ago"),
+			To:     ToPointer("now"),
+			By:     ToPointer("minute"),
+			Region: ToPointer("europe"),
 		})
 	})
 	if err != nil {
@@ -46,12 +46,12 @@ func TestClient_GetStats_ByFieldAndService(t *testing.T) {
 	var err error
 	record(t, "stats/service_stats_by_field_and_service", func(c *Client) {
 		_, err = c.GetStats(&GetStatsInput{
-			Service: testServiceID,
-			Field:   "bandwidth",
-			From:    "10 days ago",
-			To:      "now",
-			By:      "day",
-			Region:  "usa",
+			Service: ToPointer(testServiceID),
+			Field:   ToPointer("bandwidth"),
+			From:    ToPointer("10 days ago"),
+			To:      ToPointer("now"),
+			By:      ToPointer("day"),
+			Region:  ToPointer("usa"),
 		})
 	})
 	if err != nil {
@@ -69,11 +69,11 @@ func TestClient_GetStatsJSON(t *testing.T) {
 	var err error
 	record(t, "stats/service_stats", func(c *Client) {
 		err = c.GetStatsJSON(&GetStatsInput{
-			Service: testServiceID,
-			From:    "10 days ago",
-			To:      "now",
-			By:      "minute",
-			Region:  "europe",
+			Service: ToPointer(testServiceID),
+			From:    ToPointer("10 days ago"),
+			To:      ToPointer("now"),
+			By:      ToPointer("minute"),
+			Region:  ToPointer("europe"),
 		}, &ret)
 	})
 	if err != nil {
@@ -103,10 +103,10 @@ func TestClient_GetRegionsUsage(t *testing.T) {
 	var err error
 	record(t, "stats/regions_usage", func(c *Client) {
 		_, err = c.GetUsage(&GetUsageInput{
-			From:   "10 days ago",
-			To:     "now",
-			By:     "minute",
-			Region: "usa",
+			From:   ToPointer("10 days ago"),
+			To:     ToPointer("now"),
+			By:     ToPointer("minute"),
+			Region: ToPointer("usa"),
 		})
 	})
 	if err != nil {
@@ -120,10 +120,10 @@ func TestClient_GetServicesByRegionsUsage(t *testing.T) {
 	var err error
 	record(t, "stats/services_usage", func(c *Client) {
 		_, err = c.GetUsageByService(&GetUsageInput{
-			From:   "10 days ago",
-			To:     "now",
-			By:     "minute",
-			Region: "usa",
+			From:   ToPointer("10 days ago"),
+			To:     ToPointer("now"),
+			By:     ToPointer("minute"),
+			Region: ToPointer("usa"),
 		})
 	})
 	if err != nil {

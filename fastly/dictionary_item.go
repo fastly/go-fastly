@@ -12,10 +12,10 @@ const dictionaryItemsPath = "/service/%s/dictionary/%s/items"
 type DictionaryItem struct {
 	CreatedAt    *time.Time `mapstructure:"created_at"`
 	DeletedAt    *time.Time `mapstructure:"deleted_at"`
-	DictionaryID string     `mapstructure:"dictionary_id"`
-	ItemKey      string     `mapstructure:"item_key"`
-	ItemValue    string     `mapstructure:"item_value"`
-	ServiceID    string     `mapstructure:"service_id"`
+	DictionaryID *string    `mapstructure:"dictionary_id"`
+	ItemKey      *string    `mapstructure:"item_key"`
+	ItemValue    *string    `mapstructure:"item_value"`
+	ServiceID    *string    `mapstructure:"service_id"`
 	UpdatedAt    *time.Time `mapstructure:"updated_at"`
 }
 
@@ -24,25 +24,34 @@ type GetDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// Direction is the direction in which to sort results.
-	Direction string
+	Direction *string
 	// Page is the current page.
-	Page int
+	Page *int
 	// PerPage is the number of records per page.
-	PerPage int
+	PerPage *int
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// Sort is the field on which to sort.
-	Sort string
+	Sort *string
 }
 
 // GetDictionaryItems returns a ListPaginator for paginating through the resources.
 func (c *Client) GetDictionaryItems(i *GetDictionaryItemsInput) *ListPaginator[DictionaryItem] {
-	return newPaginator[DictionaryItem](c, &listInput{
-		Direction: i.Direction,
-		Sort:      i.Sort,
-		Page:      i.Page,
-		PerPage:   i.PerPage,
-	}, fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID))
+	input := ListOpts{}
+	if i.Direction != nil {
+		input.Direction = *i.Direction
+	}
+	if i.Sort != nil {
+		input.Sort = *i.Sort
+	}
+	if i.Page != nil {
+		input.Page = *i.Page
+	}
+	if i.PerPage != nil {
+		input.PerPage = *i.PerPage
+	}
+	path := fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID)
+	return NewPaginator[DictionaryItem](c, input, path)
 }
 
 // ListDictionaryItemsInput is used as input to the ListDictionaryItems function.
@@ -50,11 +59,11 @@ type ListDictionaryItemsInput struct {
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// Direction is the direction in which to sort results.
-	Direction string
+	Direction *string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// Sort is the field on which to sort.
-	Sort string
+	Sort *string
 }
 
 // ListDictionaryItems retrieves all resources. Not suitable for large
@@ -86,9 +95,9 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.
 type CreateDictionaryItemInput struct {
 	// ItemKey is the dictionary item key, maximum 256 characters.
-	ItemKey string `url:"item_key,omitempty"`
+	ItemKey *string `url:"item_key,omitempty"`
 	// ItemValue is the dictionary item value, maximum 8000 characters.
-	ItemValue string `url:"item_value,omitempty"`
+	ItemValue *string `url:"item_value,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
@@ -220,11 +229,11 @@ type BatchModifyDictionaryItemsInput struct {
 // BatchDictionaryItem represents a dictionary item.
 type BatchDictionaryItem struct {
 	// ItemKey is an item key (maximum 256 characters).
-	ItemKey string `json:"item_key"`
+	ItemKey *string `json:"item_key"`
 	// ItemValue is an item value (maximum 8000 characters).
-	ItemValue string `json:"item_value"`
+	ItemValue *string `json:"item_value"`
 	// Operation is a batching operation variant.
-	Operation BatchOperation `json:"op"`
+	Operation *BatchOperation `json:"op"`
 }
 
 // BatchModifyDictionaryItems bulk updates dictionary items.

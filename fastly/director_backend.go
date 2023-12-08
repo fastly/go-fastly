@@ -9,12 +9,12 @@ import (
 // DirectorBackend is the relationship between a director and a backend in the
 // Fastly API.
 type DirectorBackend struct {
-	Backend        string     `mapstructure:"backend_name"`
+	Backend        *string    `mapstructure:"backend_name"`
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	Director       string     `mapstructure:"director_name"`
-	ServiceID      string     `mapstructure:"service_id"`
-	ServiceVersion int        `mapstructure:"version"`
+	Director       *string    `mapstructure:"director_name"`
+	ServiceID      *string    `mapstructure:"service_id"`
+	ServiceVersion *int       `mapstructure:"version"`
 	UpdatedAt      *time.Time `mapstructure:"updated_at"`
 }
 
@@ -33,20 +33,17 @@ type CreateDirectorBackendInput struct {
 
 // CreateDirectorBackend creates a new resource.
 func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*DirectorBackend, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if i.Backend == "" {
+		return nil, ErrMissingBackend
 	}
-
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
-
 	if i.Director == "" {
 		return nil, ErrMissingDirector
 	}
-
-	if i.Backend == "" {
-		return nil, ErrMissingBackend
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
@@ -79,20 +76,17 @@ type GetDirectorBackendInput struct {
 
 // GetDirectorBackend retrieves the specified resource.
 func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBackend, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if i.Backend == "" {
+		return nil, ErrMissingBackend
 	}
-
-	if i.ServiceVersion == 0 {
-		return nil, ErrMissingServiceVersion
-	}
-
 	if i.Director == "" {
 		return nil, ErrMissingDirector
 	}
-
-	if i.Backend == "" {
-		return nil, ErrMissingBackend
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
+	}
+	if i.ServiceVersion == 0 {
+		return nil, ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
@@ -125,20 +119,17 @@ type DeleteDirectorBackendInput struct {
 
 // DeleteDirectorBackend deletes the specified resource.
 func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if i.Backend == "" {
+		return ErrMissingBackend
 	}
-
-	if i.ServiceVersion == 0 {
-		return ErrMissingServiceVersion
-	}
-
 	if i.Director == "" {
 		return ErrMissingDirector
 	}
-
-	if i.Backend == "" {
-		return ErrMissingBackend
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
+	}
+	if i.ServiceVersion == 0 {
+		return ErrMissingServiceVersion
 	}
 
 	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
