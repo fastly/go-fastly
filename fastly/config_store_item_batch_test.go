@@ -94,7 +94,7 @@ func createConfigStoreForBatch(t *testing.T) *ConfigStore {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store_batch/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.ID,
 			})
 		})
 		if err != nil {

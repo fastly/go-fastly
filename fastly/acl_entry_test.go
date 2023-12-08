@@ -104,7 +104,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		ne, err = c.GetACLEntry(&GetACLEntryInput{
 			ServiceID: *testService.ID,
 			ACLID:     *testACL.ID,
-			ID:        *e.ID,
+			EntryID:   *e.EntryID,
 		})
 	})
 
@@ -130,7 +130,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		ue, err = c.UpdateACLEntry(&UpdateACLEntryInput{
 			ServiceID: *testService.ID,
 			ACLID:     *testACL.ID,
-			ID:        *e.ID,
+			EntryID:   *e.EntryID,
 			IP:        ToPointer("10.0.0.4"),
 			Negated:   ToPointer(Compatibool(true)),
 		})
@@ -159,7 +159,7 @@ func TestClient_ACLEntries(t *testing.T) {
 		err = c.DeleteACLEntry(&DeleteACLEntryInput{
 			ServiceID: *testService.ID,
 			ACLID:     *testACL.ID,
-			ID:        *e.ID,
+			EntryID:   *e.EntryID,
 		})
 	})
 	if err != nil {
@@ -215,8 +215,8 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetACLEntry(&GetACLEntryInput{
-		ACLID: "123",
-		ID:    "456",
+		ACLID:   "123",
+		EntryID: "456",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
@@ -239,8 +239,8 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
-		ACLID: "123",
-		ID:    "456",
+		ACLID:   "123",
+		EntryID: "456",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
@@ -258,13 +258,13 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
 		ACLID: "123",
 	})
-	if err != ErrMissingID {
+	if err != ErrMissingEntryID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
-		ACLID: "123",
-		ID:    "456",
+		ACLID:   "123",
+		EntryID: "456",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)

@@ -11,7 +11,7 @@ type ACLEntry struct {
 	Comment   *string    `mapstructure:"comment"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
 	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	ID        *string    `mapstructure:"id"`
+	EntryID   *string    `mapstructure:"id"`
 	IP        *string    `mapstructure:"ip"`
 	Negated   *bool      `mapstructure:"negated"`
 	ServiceID *string    `mapstructure:"service_id"`
@@ -97,8 +97,8 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 type GetACLEntryInput struct {
 	// ACLID is an alphanumeric string identifying an ACL Entry (required).
 	ACLID string
-	// ID is an alphanumeric string identifying an ACL Entry (required).
-	ID string
+	// EntryID is an alphanumeric string identifying an ACL Entry (required).
+	EntryID string
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
@@ -108,14 +108,14 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
-	if i.ID == "" {
+	if i.EntryID == "" {
 		return nil, ErrMissingID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -176,8 +176,8 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 type DeleteACLEntryInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
-	// ID is an alphanumeric string identifying an ACL Entry (required).
-	ID string
+	// EntryID is an alphanumeric string identifying an ACL Entry (required).
+	EntryID string
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
@@ -187,14 +187,14 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if i.ACLID == "" {
 		return ErrMissingACLID
 	}
-	if i.ID == "" {
-		return ErrMissingID
+	if i.EntryID == "" {
+		return ErrMissingEntryID
 	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
 
 	resp, err := c.Delete(path, nil)
 	if err != nil {
@@ -220,8 +220,8 @@ type UpdateACLEntryInput struct {
 	ACLID string `url:"-"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// ID is an alphanumeric string identifying an ACL Entry (required).
-	ID string `url:"-"`
+	// EntryID is an alphanumeric string identifying an ACL Entry (required).
+	EntryID string `url:"-"`
 	// IP is an IP address.
 	IP *string `url:"ip,omitempty"`
 	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
@@ -237,14 +237,14 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
-	if i.ID == "" {
+	if i.EntryID == "" {
 		return nil, ErrMissingID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.ID)
+	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
 
 	resp, err := c.RequestForm("PATCH", path, i, nil)
 	if err != nil {
@@ -275,8 +275,8 @@ type BatchModifyACLEntriesInput struct {
 type BatchACLEntry struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `json:"comment,omitempty"`
-	// ID is an alphanumeric string identifying an ACL Entry.
-	ID *string `json:"id,omitempty"`
+	// EntryID is an alphanumeric string identifying an ACL Entry.
+	EntryID *string `json:"id,omitempty"`
 	// IP is an IP address.
 	IP *string `json:"ip,omitempty"`
 	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.

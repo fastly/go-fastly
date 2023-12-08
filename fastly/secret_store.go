@@ -120,17 +120,17 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 
 // GetSecretStoreInput is used as input to the GetSecretStore function.
 type GetSecretStoreInput struct {
-	// ID of the Secret Store (required).
-	ID string
+	// StoreID of the Secret Store (required).
+	StoreID string
 }
 
 // GetSecretStore retrieves the specified resource.
 func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 
-	p := "/resources/stores/secret/" + i.ID
+	p := "/resources/stores/secret/" + i.StoreID
 
 	resp, err := c.Get(p, &RequestOptions{
 		Headers: map[string]string{
@@ -154,17 +154,17 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 
 // DeleteSecretStoreInput is used as input to the DeleteSecretStore function.
 type DeleteSecretStoreInput struct {
-	// ID of the Secret Store (required).
-	ID string
+	// StoreID of the Secret Store (required).
+	StoreID string
 }
 
 // DeleteSecretStore deletes the specified resource.
 func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
-	if i.ID == "" {
-		return ErrMissingID
+	if i.StoreID == "" {
+		return ErrMissingStoreID
 	}
 
-	p := "/resources/stores/secret/" + i.ID
+	p := "/resources/stores/secret/" + i.StoreID
 
 	resp, err := c.Delete(p, &RequestOptions{
 		Headers: map[string]string{
@@ -189,17 +189,8 @@ type Secret struct {
 
 // CreateSecretInput is used as input to the CreateSecret function.
 type CreateSecretInput struct {
-	// ID of the Secret Store (required).
-	ID string
-	// Name of the Secret (required).
-	Name string
-	// Secret is the plaintext secret to be stored (required).
-	// The value will be base64-encoded when delivered to the API, which is the
-	// required format.
-	Secret []byte
 	// ClientKey is the public key used to encrypt the secret with (optional).
 	ClientKey []byte
-
 	// Method is the HTTP request method used to create the secret.
 	//
 	// Secret names must be unique within a store.
@@ -211,12 +202,20 @@ type CreateSecretInput struct {
 	//
 	// More details: https://developer.fastly.com/reference/api/services/resources/secret-store-secret/
 	Method string
+	// Name of the Secret (required).
+	Name string
+	// Secret is the plaintext secret to be stored (required).
+	// The value will be base64-encoded when delivered to the API, which is the
+	// required format.
+	Secret []byte
+	// StoreID of the Secret Store (required).
+	StoreID string
 }
 
 // CreateSecret creates a new resource.
 func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 	if i.Name == "" {
 		return nil, ErrMissingName
@@ -225,7 +224,7 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 		return nil, ErrMissingSecret
 	}
 
-	p := "/resources/stores/secret/" + i.ID + "/secrets"
+	p := "/resources/stores/secret/" + i.StoreID + "/secrets"
 
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(struct {
@@ -285,10 +284,10 @@ type Secrets struct {
 type ListSecretsInput struct {
 	// Cursor is the pagination cursor (optional).
 	Cursor string
-	// ID of the Secret Store (required).
-	ID string
 	// Limit is the desired number of Secrets (optional).
 	Limit int
+	// StoreID of the Secret Store (required).
+	StoreID string
 }
 
 // ListSecrets retrieves all resources.
@@ -296,11 +295,11 @@ type ListSecretsInput struct {
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 
-	p := "/resources/stores/secret/" + i.ID + "/secrets"
+	p := "/resources/stores/secret/" + i.StoreID + "/secrets"
 
 	params := make(map[string]string, 2)
 	if i.Limit > 0 {
@@ -333,22 +332,22 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 
 // GetSecretInput is used as input to the GetSecret function.
 type GetSecretInput struct {
-	// ID of the Secret Store (required).
-	ID string
 	// Name of the Secret (required).
 	Name string
+	// StoreID of the Secret Store (required).
+	StoreID string
 }
 
 // GetSecret retrieves the specified resource.
 func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	p := "/resources/stores/secret/" + i.ID + "/secrets/" + i.Name
+	p := "/resources/stores/secret/" + i.StoreID + "/secrets/" + i.Name
 
 	resp, err := c.Get(p, &RequestOptions{
 		Headers: map[string]string{
@@ -372,22 +371,22 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 // DeleteSecretInput is used as input to the DeleteSecret function.
 type DeleteSecretInput struct {
-	// ID of the Secret Store (required).
-	ID string
 	// Name of the secret (required).
 	Name string
+	// StoreID of the Secret Store (required).
+	StoreID string
 }
 
 // DeleteSecret deletes the specified resource.
 func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
-	if i.ID == "" {
-		return ErrMissingID
+	if i.StoreID == "" {
+		return ErrMissingStoreID
 	}
 	if i.Name == "" {
 		return ErrMissingName
 	}
 
-	p := "/resources/stores/secret/" + i.ID + "/secrets/" + i.Name
+	p := "/resources/stores/secret/" + i.StoreID + "/secrets/" + i.Name
 
 	resp, err := c.Delete(p, &RequestOptions{
 		Headers: map[string]string{

@@ -27,7 +27,7 @@ func TestClient_CreateConfigStore(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.ID,
 			})
 		})
 		if err != nil {
@@ -64,7 +64,7 @@ func TestClient_DeleteConfigStore(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 		err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-			ID: cs.ID,
+			StoreID: cs.ID,
 		})
 	})
 	if err != nil {
@@ -75,7 +75,7 @@ func TestClient_DeleteConfigStore(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/delete_store_404", t.Name()), func(c *Client) {
 		err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-			ID: cs.ID,
+			StoreID: cs.ID,
 		})
 	})
 
@@ -110,7 +110,7 @@ func TestClient_GetConfigStore(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.ID,
 			})
 		})
 		if err != nil {
@@ -121,7 +121,7 @@ func TestClient_GetConfigStore(t *testing.T) {
 	var getResult *ConfigStore
 	record(t, fmt.Sprintf("config_store/%s/get_store", t.Name()), func(c *Client) {
 		getResult, err = c.GetConfigStore(&GetConfigStoreInput{
-			ID: cs.ID,
+			StoreID: cs.ID,
 		})
 	})
 	if err != nil {
@@ -139,7 +139,7 @@ func TestClient_GetConfigStore(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/get_store_404", t.Name()), func(c *Client) {
 		getResult, err = c.GetConfigStore(&GetConfigStoreInput{
-			ID: "DOES-NOT-EXIST",
+			StoreID: "DOES-NOT-EXIST",
 		})
 	})
 
@@ -174,7 +174,7 @@ func TestClient_GetConfigStoreMetadata(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.ID,
 			})
 		})
 		if err != nil {
@@ -185,7 +185,7 @@ func TestClient_GetConfigStoreMetadata(t *testing.T) {
 	var metadataResult *ConfigStoreMetadata
 	record(t, fmt.Sprintf("config_store/%s/get_store_metadata", t.Name()), func(c *Client) {
 		metadataResult, err = c.GetConfigStoreMetadata(&GetConfigStoreMetadataInput{
-			ID: cs.ID,
+			StoreID: cs.ID,
 		})
 	})
 	if err != nil {
@@ -200,7 +200,7 @@ func TestClient_GetConfigStoreMetadata(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/get_store_metadata_404", t.Name()), func(c *Client) {
 		metadataResult, err = c.GetConfigStoreMetadata(&GetConfigStoreMetadataInput{
-			ID: "DOES-NOT-EXIST",
+			StoreID: "DOES-NOT-EXIST",
 		})
 	})
 
@@ -254,7 +254,7 @@ func TestClient_ListConfigStores(t *testing.T) {
 		record(t, fmt.Sprintf("config_store/%s/delete_stores", t.Name()), func(c *Client) {
 			for _, cs := range stores {
 				err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-					ID: cs.ID,
+					StoreID: cs.ID,
 				})
 				if err != nil {
 					t.Fatalf("error deleting config store %q: %v", cs.ID, err)
@@ -308,7 +308,7 @@ func TestClient_ListConfigStoreServices(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.ID,
 			})
 		})
 		if err != nil {
@@ -319,7 +319,7 @@ func TestClient_ListConfigStoreServices(t *testing.T) {
 	var servicesResult []*Service
 	record(t, fmt.Sprintf("config_store/%s/list_services", t.Name()), func(c *Client) {
 		servicesResult, err = c.ListConfigStoreServices(&ListConfigStoreServicesInput{
-			ID: cs.ID,
+			StoreID: cs.ID,
 		})
 	})
 
@@ -348,7 +348,7 @@ func TestClient_UpdateConfigStore(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.ID,
 			})
 		})
 		if err != nil {
@@ -360,8 +360,8 @@ func TestClient_UpdateConfigStore(t *testing.T) {
 	var updateResult *ConfigStore
 	record(t, fmt.Sprintf("config_store/%s/update_store", t.Name()), func(c *Client) {
 		updateResult, err = c.UpdateConfigStore(&UpdateConfigStoreInput{
-			ID:   cs.ID,
-			Name: updatedName,
+			StoreID: cs.ID,
+			Name:    updatedName,
 		})
 	})
 	if err != nil {

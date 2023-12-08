@@ -175,7 +175,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/get_dynamic", func(c *Client) {
 		ds, err = c.GetDynamicSnippet(&GetDynamicSnippetInput{
 			ServiceID: testServiceID,
-			ID:        *cs.ID,
+			SnippetID: *cs.ID,
 		})
 	})
 
@@ -232,7 +232,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/update_dynamic", func(c *Client) {
 		ds, err = c.UpdateDynamicSnippet(&UpdateDynamicSnippetInput{
 			ServiceID: testServiceID,
-			ID:        *cs.ID,
+			SnippetID: *cs.ID,
 			Content:   ToPointer(vclContentUpdated),
 		})
 	})

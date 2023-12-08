@@ -47,7 +47,7 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 		info, err = c.GetDictionaryInfo(&GetDictionaryInfoInput{
 			ServiceID:      *testService.ID,
 			ServiceVersion: *testVersion.Number,
-			ID:             *testDictionary.ID,
+			DictID:         *testDictionary.ID,
 		})
 	})
 	if err != nil {
@@ -62,19 +62,19 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{})
-	if err != ErrMissingID {
+	if err != ErrMissingDictID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
-		ID: "123",
+		DictID: "123",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
-		ID:             "123",
+		DictID:         "123",
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})

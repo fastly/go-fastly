@@ -31,7 +31,7 @@ func TestClient_Resources(t *testing.T) {
 	defer func() {
 		record(t, "resources/cleanup-kv-store", func(c *Client) {
 			_ = c.DeleteKVStore(&DeleteKVStoreInput{
-				ID: o.ID,
+				StoreID: o.ID,
 			})
 		})
 	}()
@@ -59,7 +59,7 @@ func TestClient_Resources(t *testing.T) {
 	defer func() {
 		record(t, "resources/cleanup", func(c *Client) {
 			_ = c.DeleteResource(&DeleteResourceInput{
-				ID:             *r.ID,
+				ResourceID:     *r.LinkID,
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 			})
@@ -89,7 +89,7 @@ func TestClient_Resources(t *testing.T) {
 	var gr *Resource
 	record(t, "resources/get", func(c *Client) {
 		gr, err = c.GetResource(&GetResourceInput{
-			ID:             *r.ID,
+			ResourceID:     *r.LinkID,
 			ServiceID:      testServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -105,7 +105,7 @@ func TestClient_Resources(t *testing.T) {
 	var ur *Resource
 	record(t, "resources/update", func(c *Client) {
 		ur, err = c.UpdateResource(&UpdateResourceInput{
-			ID:             *r.ID,
+			ResourceID:     *r.LinkID,
 			ServiceID:      testServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("new-kv-store-alias-for-my-service"),
@@ -121,7 +121,7 @@ func TestClient_Resources(t *testing.T) {
 	// Delete
 	record(t, "resources/delete", func(c *Client) {
 		err = c.DeleteResource(&DeleteResourceInput{
-			ID:             *ur.ID,
+			ResourceID:     *ur.LinkID,
 			ServiceID:      testServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -174,12 +174,12 @@ func TestClient_GetResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingID {
+	if err != ErrMissingResourceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.GetResource(&GetResourceInput{
-		ID:             "test",
+		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
@@ -187,8 +187,8 @@ func TestClient_GetResource_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetResource(&GetResourceInput{
-		ID:        "test",
-		ServiceID: "foo",
+		ResourceID: "test",
+		ServiceID:  "foo",
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
@@ -202,12 +202,12 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingID {
+	if err != ErrMissingResourceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = testClient.UpdateResource(&UpdateResourceInput{
-		ID:             "test",
+		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
@@ -215,8 +215,8 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateResource(&UpdateResourceInput{
-		ID:        "test",
-		ServiceID: "foo",
+		ResourceID: "test",
+		ServiceID:  "foo",
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
@@ -230,12 +230,12 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingID {
+	if err != ErrMissingResourceID {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = testClient.DeleteResource(&DeleteResourceInput{
-		ID:             "test",
+		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
@@ -243,8 +243,8 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 	}
 
 	err = testClient.DeleteResource(&DeleteResourceInput{
-		ID:        "test",
-		ServiceID: "foo",
+		ResourceID: "test",
+		ServiceID:  "foo",
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
@@ -257,7 +257,7 @@ func TestResourceJSONRoundtrip(t *testing.T) {
 		CreatedAt:      &now,
 		DeletedAt:      &now,
 		HREF:           ToPointer("the/href"),
-		ID:             ToPointer("the-id"),
+		LinkID:         ToPointer("the-id"),
 		Name:           ToPointer("the-name"),
 		ResourceID:     ToPointer("the-resource-id"),
 		ResourceType:   ToPointer("the-resource-type"),
@@ -287,7 +287,7 @@ func TestResourceJSONRoundtrip(t *testing.T) {
 	if got, want := *decoded.HREF, *r.HREF; got != want {
 		t.Errorf("HREF: got %q, want %q", got, want)
 	}
-	if got, want := *decoded.ID, *r.ID; got != want {
+	if got, want := *decoded.LinkID, *r.LinkID; got != want {
 		t.Errorf("ID: got %q, want %q", got, want)
 	}
 	if got, want := *decoded.Name, *r.Name; got != want {

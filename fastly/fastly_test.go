@@ -426,7 +426,7 @@ func deleteTestService(t *testing.T, cleanupFixture, serviceID string) {
 
 	record(t, cleanupFixture, func(client *Client) {
 		err = client.DeleteService(&DeleteServiceInput{
-			ID: serviceID,
+			ServiceID: serviceID,
 		})
 	})
 	if err != nil {

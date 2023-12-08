@@ -165,7 +165,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 		Entries: []*BatchACLEntry{
 			{
 				Operation: ToPointer(DeleteBatchOperation),
-				ID:        createdACLEntries[0].ID,
+				EntryID:   createdACLEntries[0].EntryID,
 			},
 		},
 	}
@@ -264,7 +264,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 		Entries: []*BatchACLEntry{
 			{
 				Operation: ToPointer(UpdateBatchOperation),
-				ID:        createdACLEntries[0].ID,
+				EntryID:   createdACLEntries[0].EntryID,
 				IP:        ToPointer("127.0.0.2"),
 				Subnet:    ToPointer(16),
 				Negated:   ToPointer(Compatibool(true)),
@@ -302,8 +302,8 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 		t.Errorf("Incorrect number of ACL entries returned, expected: %d, got %d", expectedNumberOfACLEntries, actualNumberOfACLEntries)
 	}
 
-	actualID := actualACLEntries[0].ID
-	expectedID := batchUpdateOperations.Entries[0].ID
+	actualID := actualACLEntries[0].EntryID
+	expectedID := batchUpdateOperations.Entries[0].EntryID
 
 	if *actualID != *expectedID {
 		t.Errorf("First ID did not match, expected %v, got %v", *expectedID, *actualID)
