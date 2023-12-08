@@ -89,13 +89,13 @@ func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCert
 		},
 	}
 
-	r, err := c.Get(p, filters)
+	resp, err := c.Get(p, filters)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(BulkCertificate)))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(BulkCertificate)))
 	if err != nil {
 		return nil, err
 	}
@@ -126,14 +126,14 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 
 	p := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)
 
-	r, err := c.Get(p, nil)
+	resp, err := c.Get(p, nil)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
 	var bc BulkCertificate
-	if err := jsonapi.UnmarshalPayload(r.Body, &bc); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &bc); err != nil {
 		return nil, err
 	}
 
@@ -163,14 +163,14 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 
 	p := "/tls/bulk/certificates"
 
-	r, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(p, i, nil)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
 	var bc BulkCertificate
-	if err := jsonapi.UnmarshalPayload(r.Body, &bc); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &bc); err != nil {
 		return nil, err
 	}
 

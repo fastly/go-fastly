@@ -140,14 +140,14 @@ func (c *Client) CreateTLSMutualAuthentication(i *CreateTLSMutualAuthenticationI
 
 	p := "/tls/mutual_authentications"
 
-	r, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(p, i, nil)
 	if err != nil {
 		return nil, err
 	}
-	defer r.Body.Close()
+	defer resp.Body.Close()
 
 	var o TLSMutualAuthentication
-	if err := jsonapi.UnmarshalPayload(r.Body, &o); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &o); err != nil {
 		return nil, err
 	}
 
