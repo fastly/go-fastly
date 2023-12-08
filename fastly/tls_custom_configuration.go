@@ -22,7 +22,7 @@ type CustomTLSConfiguration struct {
 	UpdatedAt     *time.Time   `jsonapi:"attr,updated_at,iso8601"`
 }
 
-// DNSRecord is a child of CustomTLSConfiguration
+// DNSRecord is a child of CustomTLSConfiguration.
 type DNSRecord struct {
 	ID         string `jsonapi:"primary,dns_record"`
 	RecordType string `jsonapi:"attr,record_type"`
@@ -44,7 +44,7 @@ type ListCustomTLSConfigurationsInput struct {
 // formatFilters converts user input into query parameters for filtering.
 func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[bulk]": i.FilterBulk,
 		"include":      i.Include,
 		"page[size]":   i.PageSize,
@@ -55,11 +55,13 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		}
 	}
@@ -77,12 +79,13 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 		},
 	}
 
-	r, err := c.Get(p, ro)
+	resp, err := c.Get(p, ro)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(CustomTLSConfiguration)))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomTLSConfiguration)))
 	if err != nil {
 		return nil, err
 	}
@@ -125,13 +128,14 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 		ro.Params = map[string]string{"include": i.Include}
 	}
 
-	r, err := c.Get(p, ro)
+	resp, err := c.Get(p, ro)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var con CustomTLSConfiguration
-	if err := jsonapi.UnmarshalPayload(r.Body, &con); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &con); err != nil {
 		return nil, err
 	}
 

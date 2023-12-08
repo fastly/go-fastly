@@ -111,7 +111,7 @@ type GetStatsInput struct {
 
 // GetStats retrieves the specified resource.
 func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
-	var resp interface{}
+	var resp any
 	if err := c.GetStatsJSON(i, &resp); err != nil {
 		return nil, err
 	}
@@ -133,7 +133,7 @@ type StatsFieldResponse struct {
 
 // GetStatsField retrieves the specified resource.
 func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
-	var resp interface{}
+	var resp any
 	if err := c.GetStatsJSON(i, &resp); err != nil {
 		return nil, err
 	}
@@ -146,7 +146,7 @@ func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
 }
 
 // GetStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
-func (c *Client) GetStatsJSON(i *GetStatsInput, dst interface{}) error {
+func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
 	p := "/stats"
 	if i.Service != nil {
 		p = fmt.Sprintf("%s/service/%s", p, *i.Service)
@@ -195,7 +195,7 @@ type UsageResponse struct {
 	Status  *string           `mapstructure:"status"`
 }
 
-// RegionsUsage is a list of aggregated usage data by Fastly's region
+// RegionsUsage is a list of aggregated usage data by Fastly's region.
 type RegionsUsage map[string]*Usage
 
 // GetUsageInput is used as an input to the GetUsage function
@@ -243,7 +243,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 	return sr, nil
 }
 
-// UsageByServiceResponse is a response from the account usage API endpoint
+// UsageByServiceResponse is a response from the account usage API endpoint.
 type UsageByServiceResponse struct {
 	Data    *ServicesByRegionsUsage `mapstructure:"data"`
 	Message *string                 `mapstructure:"msg"`
@@ -251,10 +251,10 @@ type UsageByServiceResponse struct {
 	Status  *string                 `mapstructure:"status"`
 }
 
-// ServicesUsage is a list of usage data by a service
+// ServicesUsage is a list of usage data by a service.
 type ServicesUsage map[string]*Usage
 
-// ServicesByRegionsUsage is a list of ServicesUsage by Fastly's region
+// ServicesByRegionsUsage is a list of ServicesUsage by Fastly's region.
 type ServicesByRegionsUsage map[string]*ServicesUsage
 
 // GetUsageByService returns usage information aggregated by service and
@@ -290,7 +290,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 	return sr, nil
 }
 
-// RegionsResponse is a response from Fastly regions API endpoint
+// RegionsResponse is a response from Fastly regions API endpoint.
 type RegionsResponse struct {
 	Data    []string          `mapstructure:"data"`
 	Message *string           `mapstructure:"msg"`
@@ -298,7 +298,7 @@ type RegionsResponse struct {
 	Status  *string           `mapstructure:"status"`
 }
 
-// GetRegions returns a list of Fastly regions
+// GetRegions returns a list of Fastly regions.
 func (c *Client) GetRegions() (*RegionsResponse, error) {
 	r, err := c.Get("stats/regions", nil)
 	if err != nil {

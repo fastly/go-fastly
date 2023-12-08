@@ -33,13 +33,13 @@ func TestClient_Datadog(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "datadog/delete", func(c *Client) {
-			c.DeleteDatadog(&DeleteDatadogInput{
+			_ = c.DeleteDatadog(&DeleteDatadogInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-datadog",
 			})
 
-			c.DeleteDatadog(&DeleteDatadogInput{
+			_ = c.DeleteDatadog(&DeleteDatadogInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-datadog",

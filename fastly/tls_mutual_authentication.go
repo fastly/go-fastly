@@ -55,12 +55,13 @@ func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInpu
 		},
 	}
 
-	r, err := c.Get(p, filters)
+	resp, err := c.Get(p, filters)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(TLSMutualAuthentication)))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(TLSMutualAuthentication)))
 	if err != nil {
 		return nil, err
 	}
@@ -105,13 +106,14 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 
 	p := fmt.Sprintf("/tls/mutual_authentications/%s", i.ID)
 
-	r, err := c.Get(p, ro)
+	resp, err := c.Get(p, ro)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var o TLSMutualAuthentication
-	if err := jsonapi.UnmarshalPayload(r.Body, &o); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &o); err != nil {
 		return nil, err
 	}
 

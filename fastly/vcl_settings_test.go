@@ -55,7 +55,7 @@ func TestClient_Settings(t *testing.T) {
 	}
 }
 
-// Tests if we can update a default_ttl to 0 as reported in issue #20
+// Tests if we can update a default_ttl to 0 as reported in issue #20.
 func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	t.Parallel()
 	s := UpdateSettingsInput{

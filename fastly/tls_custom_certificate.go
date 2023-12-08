@@ -44,7 +44,7 @@ type ListCustomTLSCertificatesInput struct {
 // formatFilters converts user input into query parameters for filtering.
 func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[not_after]":      i.FilterNotAfter,
 		"filter[tls_domains.id]": i.FilterTLSDomainsID,
 		"include":                i.Include,
@@ -57,11 +57,13 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		}
 	}
@@ -79,12 +81,13 @@ func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([
 		},
 	}
 
-	r, err := c.Get(p, filters)
+	resp, err := c.Get(p, filters)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(CustomTLSCertificate)))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomTLSCertificate)))
 	if err != nil {
 		return nil, err
 	}
@@ -115,13 +118,14 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 
 	p := fmt.Sprintf("/tls/certificates/%s", i.ID)
 
-	r, err := c.Get(p, nil)
+	resp, err := c.Get(p, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cc CustomTLSCertificate
-	if err := jsonapi.UnmarshalPayload(r.Body, &cc); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {
 		return nil, err
 	}
 
@@ -146,13 +150,14 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 
 	p := "/tls/certificates"
 
-	r, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(p, i, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var cc CustomTLSCertificate
-	if err := jsonapi.UnmarshalPayload(r.Body, &cc); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {
 		return nil, err
 	}
 

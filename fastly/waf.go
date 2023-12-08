@@ -62,7 +62,7 @@ type ListWAFsInput struct {
 
 func (i *ListWAFsInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"page[size]":                     i.PageSize,
 		"page[number]":                   i.PageNumber,
 		"filter[service_id]":             i.FilterService,
@@ -74,11 +74,13 @@ func (i *ListWAFsInput) formatFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		}
 	}
@@ -281,7 +283,7 @@ type infoResponse struct {
 }
 
 // paginationInfo stores links to searches related to the current one, showing
-// any information about additional results being stored on another page
+// any information about additional results being stored on another page.
 type paginationInfo struct {
 	First string `json:"first,omitempty"`
 	Last  string `json:"last,omitempty"`

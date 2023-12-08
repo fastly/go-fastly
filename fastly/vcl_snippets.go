@@ -25,7 +25,7 @@ const (
 	// SnippetTypePass sets the type to pass.
 	SnippetTypePass SnippetType = "pass"
 
-	// SnippetTypeFetch sets the type to fetch
+	// SnippetTypeFetch sets the type to fetch.
 	SnippetTypeFetch SnippetType = "fetch"
 
 	// SnippetTypeError sets the type to error.
@@ -59,7 +59,7 @@ type Snippet struct {
 	UpdatedAt      *time.Time   `mapstructure:"updated_at"`
 }
 
-// CreateSnippetInput is the input for CreateSnippet
+// CreateSnippetInput is the input for CreateSnippet.
 type CreateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
@@ -100,7 +100,7 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	return snippet, err
 }
 
-// UpdateSnippetInput is the input for UpdateSnippet
+// UpdateSnippetInput is the input for UpdateSnippet.
 type UpdateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
@@ -144,7 +144,8 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	return snippet, err
 }
 
-// DynamicSnippet is the object returned when updating or retrieving a Dynamic Snippet
+// DynamicSnippet is the object returned when updating or retrieving a Dynamic
+// Snippet.
 type DynamicSnippet struct {
 	Content   *string    `mapstructure:"content"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
@@ -153,7 +154,7 @@ type DynamicSnippet struct {
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
-// UpdateDynamicSnippetInput is the input for UpdateDynamicSnippet
+// UpdateDynamicSnippetInput is the input for UpdateDynamicSnippet.
 type UpdateDynamicSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`

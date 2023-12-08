@@ -206,11 +206,11 @@ var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser 
 var ErrMissingStoreID = NewFieldError("StoreID")
 
 // ErrMissingUserID is an error that is returned when an input struct
-// requires a "UserID" key, but one was not set
+// requires a "UserID" key, but one was not set.
 var ErrMissingUserID = NewFieldError("UserID")
 
 // ErrMissingPermission is an error that is returned when an input struct
-// requires a "Permission" key, but one was not set
+// requires a "Permission" key, but one was not set.
 var ErrMissingPermission = NewFieldError("Permission")
 
 // ErrMissingServiceVersion is an error that is returned when an input struct
@@ -230,7 +230,7 @@ var ErrMissingTLSConfiguration = NewFieldError("TLSConfiguration")
 var ErrMissingTLSDomain = NewFieldError("TLSDomain")
 
 // ErrCommonNameNotInDomains is an error that is returned when an input struct
-// requires that the domain in "CommonName" is also in "Domains"
+// requires that the domain in "CommonName" is also in "Domains".
 var ErrCommonNameNotInDomains = NewFieldError("CommonName").Message("CommonName must be in Domains")
 
 // ErrMissingTo is an error that is returned when an input struct
@@ -286,7 +286,7 @@ var ErrMissingOptionalNameComment = NewFieldError("Name, Comment").Message("at l
 var ErrMissingTokensValue = NewFieldError("Tokens").Message("expect at least one token")
 
 // ErrStatusNotOk is an error that indicates the response body returned by the
-// Fastly API was not `{"status": "ok"}`
+// Fastly API was not `{"status": "ok"}`.
 var ErrStatusNotOk = errors.New("unexpected 'status' field in API response body")
 
 // ErrNotOK is a generic error indicating that something is not okay.
@@ -332,12 +332,12 @@ type HTTPError struct {
 
 // ErrorObject is a single error.
 type ErrorObject struct {
-	Code   string                  `mapstructure:"code" json:"code,omitempty"`
-	Detail string                  `mapstructure:"detail" json:"detail,omitempty"`
-	ID     string                  `mapstructure:"id" json:"id,omitempty"`
-	Meta   *map[string]interface{} `mapstructure:"meta" json:"meta,omitempty"`
-	Status string                  `mapstructure:"status" json:"status,omitempty"`
-	Title  string                  `mapstructure:"title" json:"title,omitempty"`
+	Code   string          `mapstructure:"code" json:"code,omitempty"`
+	Detail string          `mapstructure:"detail" json:"detail,omitempty"`
+	ID     string          `mapstructure:"id" json:"id,omitempty"`
+	Meta   *map[string]any `mapstructure:"meta" json:"meta,omitempty"`
+	Status string          `mapstructure:"status" json:"status,omitempty"`
+	Title  string          `mapstructure:"title" json:"title,omitempty"`
 }
 
 // legacyError represents the older-style errors from Fastly.

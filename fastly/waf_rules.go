@@ -63,7 +63,7 @@ type ListWAFRulesInput struct {
 
 func (i *ListWAFRulesInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[waf_tags][name][in]":  i.FilterTagNames,
 		"filter[publisher][in]":       i.FilterPublishers,
 		"filter[modsec_rule_id][in]":  i.FilterModSecIDs,
@@ -77,20 +77,24 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		case "[]string":
-			if len(value.([]string)) > 0 {
-				result[key] = strings.Join(value.([]string), ",")
+			v, _ := value.([]string) // type assert to avoid runtime panic (v will have zero value for its type)
+			if len(v) > 0 {
+				result[key] = strings.Join(v, ",")
 			}
 		case "[]int":
-			if len(value.([]int)) > 0 {
-				stringSlice := make([]string, len(value.([]int)))
-				for i, id := range value.([]int) {
+			v, _ := value.([]int) // type assert to avoid runtime panic (v will have zero value for its type)
+			if len(v) > 0 {
+				stringSlice := make([]string, len(v))
+				for i, id := range v {
 					stringSlice[i] = strconv.Itoa(id)
 				}
 				result[key] = strings.Join(stringSlice, ",")

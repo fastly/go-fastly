@@ -105,7 +105,7 @@ type GetOriginMetricsInput struct {
 
 // GetOriginMetricsForService retrieves the specified resource.
 func (c *Client) GetOriginMetricsForService(i *GetOriginMetricsInput) (*OriginInspector, error) {
-	var resp interface{}
+	var resp any
 	if err := c.GetOriginMetricsForServiceJSON(i, &resp); err != nil {
 		return nil, err
 	}
@@ -118,7 +118,7 @@ func (c *Client) GetOriginMetricsForService(i *GetOriginMetricsInput) (*OriginIn
 }
 
 // GetOriginMetricsForServiceJSON retrieves the specified resource.
-func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst interface{}) error {
+func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst any) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}

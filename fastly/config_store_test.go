@@ -288,7 +288,6 @@ func TestClient_ListConfigStores(t *testing.T) {
 	if got, want := css[0].ID, stores[0].ID; got != want {
 		t.Errorf("ListConfigStores: index %d: ID: got %q, want %q", 0, got, want)
 	}
-
 }
 
 func TestClient_ListConfigStoreServices(t *testing.T) {

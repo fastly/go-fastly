@@ -50,6 +50,7 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var hcs []*HealthCheck
 	if err := decodeBodyMap(resp.Body, &hcs); err != nil {

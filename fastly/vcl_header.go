@@ -92,6 +92,7 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var bs []*Header
 	if err := decodeBodyMap(resp.Body, &bs); err != nil {

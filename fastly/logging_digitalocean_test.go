@@ -149,7 +149,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	if *digitaloceanCreateResp1.BucketName != "bucket-name" {
 		t.Errorf("bad bucket_name: %q", *digitaloceanCreateResp1.BucketName)
 	}
-	if *digitaloceanCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+	if *digitaloceanCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
 		t.Errorf("bad access_key: %q", *digitaloceanCreateResp1.AccessKey)
 	}
 	if *digitaloceanCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {

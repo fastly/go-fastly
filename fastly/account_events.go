@@ -15,16 +15,16 @@ import (
 
 // Event represents an event_logs item response from the Fastly API.
 type Event struct {
-	Admin       bool                   `jsonapi:"attr,admin"`
-	CreatedAt   *time.Time             `jsonapi:"attr,created_at,iso8601"`
-	CustomerID  string                 `jsonapi:"attr,customer_id"`
-	Description string                 `jsonapi:"attr,description"`
-	EventType   string                 `jsonapi:"attr,event_type"`
-	ID          string                 `jsonapi:"primary,event"`
-	IP          string                 `jsonapi:"attr,ip"`
-	Metadata    map[string]interface{} `jsonapi:"attr,metadata,omitempty"`
-	ServiceID   string                 `jsonapi:"attr,service_id"`
-	UserID      string                 `jsonapi:"attr,user_id"`
+	Admin       bool           `jsonapi:"attr,admin"`
+	CreatedAt   *time.Time     `jsonapi:"attr,created_at,iso8601"`
+	CustomerID  string         `jsonapi:"attr,customer_id"`
+	Description string         `jsonapi:"attr,description"`
+	EventType   string         `jsonapi:"attr,event_type"`
+	ID          string         `jsonapi:"primary,event"`
+	IP          string         `jsonapi:"attr,ip"`
+	Metadata    map[string]any `jsonapi:"attr,metadata,omitempty"`
+	ServiceID   string         `jsonapi:"attr,service_id"`
+	UserID      string         `jsonapi:"attr,user_id"`
 }
 
 // GetAPIEventsFilterInput is used as input to the GetAPIEvents function.
@@ -44,20 +44,21 @@ type GetAPIEventsFilterInput struct {
 }
 
 // EventsPaginationInfo stores links to searches related to the current one, showing
-// any information about additional results being stored on another page
+// any information about additional results being stored on another page.
 type EventsPaginationInfo struct {
 	First string `json:"first,omitempty"`
 	Last  string `json:"last,omitempty"`
 	Next  string `json:"next,omitempty"`
 }
 
-// GetAPIEventsResponse is the data returned to the user from a GetAPIEvents call
+// GetAPIEventsResponse is the data returned to the user from a GetAPIEvents
+// call.
 type GetAPIEventsResponse struct {
 	Events []*Event
 	Links  EventsPaginationInfo `json:"links"`
 }
 
-// GetAPIEvents lists all the events for a particular customer
+// GetAPIEvents lists all the events for a particular customer.
 func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
 	eventsResponse := GetAPIEventsResponse{
 		Events: []*Event{},
@@ -171,7 +172,7 @@ func getEventsPages(body io.Reader) (EventsPaginationInfo, io.Reader, error) {
 // Fastly events.
 func (i *GetAPIEventsFilterInput) formatEventFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[customer_id]": i.CustomerID,
 		"filter[service_id]":  i.ServiceID,
 		"filter[event_type]":  i.EventType,
@@ -186,11 +187,13 @@ func (i *GetAPIEventsFilterInput) formatEventFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		}
 	}
