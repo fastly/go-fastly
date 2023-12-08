@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-// TokenScope is used to match possible authorization scopes
+// TokenScope is used to match possible authorization scopes.
 type TokenScope string
 
 const (
@@ -41,7 +41,7 @@ type ListTokensInput struct {
 }
 
 // ListTokens retrieves all resources.
-func (c *Client) ListTokens(i *ListTokensInput) ([]*Token, error) {
+func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
 	resp, err := c.Get("/tokens", nil)
 	if err != nil {
 		return nil, err

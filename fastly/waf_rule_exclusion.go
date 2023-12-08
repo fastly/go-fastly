@@ -113,7 +113,7 @@ func (i *ListWAFRuleExclusionsInput) formatFilters() map[string]string {
 	include := strings.Join(i.Include, ",")
 
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[exclusion_type]":           i.FilterExclusionType,
 		"filter[name]":                     i.FilterName,
 		"filter[waf_rules.modsec_rule_id]": i.FilterModSedID,

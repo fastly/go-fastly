@@ -11,8 +11,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	rnd "math/rand"
 )
 
 func TestClient_PrivateKey(t *testing.T) {
@@ -100,7 +98,12 @@ func buildPrivateKey() (*rsa.PrivateKey, string, error) {
 
 func buildCertificate(privateKey *rsa.PrivateKey, domains ...string) (string, error) {
 	now := time.Now()
-	serialNumber := new(big.Int).SetInt64(rnd.Int63())
+
+	n, err := rand.Int(rand.Reader, big.NewInt(1000))
+	if err != nil {
+		return "", err
+	}
+	serialNumber := new(big.Int).SetInt64(n.Int64())
 	template := &x509.Certificate{
 		SerialNumber: serialNumber,
 		Subject: pkix.Name{

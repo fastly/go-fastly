@@ -1,6 +1,8 @@
 package fastly
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestClient_BulkCertificate(t *testing.T) {
 	t.Parallel()
@@ -28,7 +30,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
-			c.DeleteBulkCertificate(&DeleteBulkCertificateInput{
+			_ = c.DeleteBulkCertificate(&DeleteBulkCertificateInput{
 				ID: bc.ID,
 			})
 		})

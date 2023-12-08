@@ -21,7 +21,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	// Ensure service (and all domains within it) are deleted
 	defer func() {
 		record(t, fixtureBase+"version", func(c *Client) {
-			c.DeleteService(&DeleteServiceInput{
+			_ = c.DeleteService(&DeleteServiceInput{
 				ID: testServiceID,
 			})
 		})
@@ -96,7 +96,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 			// function is here to ensure the subscription is deleted, just in case
 			// any of the other API calls unexpectedly fail before the "delete" step
 			// at the end of the test.
-			c.DeleteTLSSubscription(&DeleteTLSSubscriptionInput{
+			_ = c.DeleteTLSSubscription(&DeleteTLSSubscriptionInput{
 				ID: subscription.ID,
 			})
 		})

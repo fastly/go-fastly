@@ -44,6 +44,7 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var hs []*Heroku
 	if err := decodeBodyMap(resp.Body, &hs); err != nil {

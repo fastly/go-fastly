@@ -93,19 +93,19 @@ func TestClient_Kinesis(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "kinesis/cleanup", func(c *Client) {
-			c.DeleteKinesis(&DeleteKinesisInput{
+			_ = c.DeleteKinesis(&DeleteKinesisInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *v.Number,
 				Name:           "test-kinesis",
 			})
 
-			c.DeleteKinesis(&DeleteKinesisInput{
+			_ = c.DeleteKinesis(&DeleteKinesisInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *v.Number,
 				Name:           "test-kinesis-2",
 			})
 
-			c.DeleteKinesis(&DeleteKinesisInput{
+			_ = c.DeleteKinesis(&DeleteKinesisInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *v.Number,
 				Name:           "new-test-kinesis",
@@ -119,7 +119,7 @@ func TestClient_Kinesis(t *testing.T) {
 	if *kinesisCreateResp1.StreamName != "stream-name" {
 		t.Errorf("bad bucket_name: %q", *kinesisCreateResp1.StreamName)
 	}
-	if *kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+	if *kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
 		t.Errorf("bad access_key: %q", *kinesisCreateResp1.AccessKey)
 	}
 	if *kinesisCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
@@ -310,7 +310,7 @@ func TestClient_Kinesis(t *testing.T) {
 	if *kinesisUpdateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
 		t.Errorf("bad iam_role: %q", *kinesisUpdateResp2.IAMRole)
 	}
-	if *kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" {
+	if *kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
 		t.Errorf("bad access_key: %q", *kinesisUpdateResp3.AccessKey)
 	}
 	if *kinesisUpdateResp3.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {

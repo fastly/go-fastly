@@ -29,7 +29,7 @@ type ListTLSDomainsInput struct {
 // formatFilters converts user input into query parameters for filtering.
 func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[in_use]":               l.FilterInUse,
 		"filter[tls_certificates.id]":  l.FilterTLSCertificateID,
 		"filter[tls_subscriptions.id]": l.FilterTLSSubscriptionID,

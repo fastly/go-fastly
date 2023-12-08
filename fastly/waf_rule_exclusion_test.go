@@ -1,7 +1,8 @@
 package fastly
 
 import (
-	"math/rand"
+	"crypto/rand"
+	"math/big"
 	"reflect"
 	"strconv"
 	"testing"
@@ -12,18 +13,21 @@ func TestClient_WAF_Rule_Exclusion_list(t *testing.T) {
 
 	fixtureBase := "waf_rule_exclusion/list/"
 
-	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
+	testService, serviceVersion, responseName, err := createServiceForWAF(t, fixtureBase)
+	if err != nil {
+		t.Fatal(err)
+	}
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
 	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
-	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
+	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID)
 
-	excl1In := buildWAFRuleExclusion1(waf.ID, 1)
+	excl1In := buildWAFRuleExclusion1(waf.ID)
 	excl2In := buildWAFRuleExclusion2(waf.ID, 1)
 	createWAFRuleExclusion(t, fixtureBase+"waf_rule_exclusions/create-1", excl1In)
 	createWAFRuleExclusion(t, fixtureBase+"waf_rule_exclusions/create-2", excl2In)
 
-	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf, "waf_rules")
+	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf)
 	if len(exclResp.Items) != 2 {
 		t.Errorf("expected 2 waf rule exclusions: got %d", len(exclResp.Items))
 	}
@@ -37,13 +41,16 @@ func TestClient_WAF_Rule_Exclusion_list_filters(t *testing.T) {
 
 	fixtureBase := "waf_rule_exclusion/list_filters/"
 
-	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
+	testService, serviceVersion, responseName, err := createServiceForWAF(t, fixtureBase)
+	if err != nil {
+		t.Fatal(err)
+	}
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
 	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
-	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
+	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID)
 
-	excl1In := buildWAFRuleExclusion1(waf.ID, 1)
+	excl1In := buildWAFRuleExclusion1(waf.ID)
 	excl2In := buildWAFRuleExclusion2(waf.ID, 1)
 	excl3In := buildWAFExclusionWAF(waf.ID, 1)
 	createWAFRuleExclusion(t, fixtureBase+"waf_rule_exclusions/create-1", excl1In)
@@ -69,16 +76,19 @@ func TestClient_WAF_Rule_Exclusion_create(t *testing.T) {
 
 	fixtureBase := "waf_rule_exclusion/create/"
 
-	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
+	testService, serviceVersion, responseName, err := createServiceForWAF(t, fixtureBase)
+	if err != nil {
+		t.Fatal(err)
+	}
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
 	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
-	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
+	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID)
 
-	exclIn := buildWAFRuleExclusion1(waf.ID, 1)
+	exclIn := buildWAFRuleExclusion1(waf.ID)
 	createWAFRuleExclusion(t, fixtureBase+"waf_rule_exclusions/create", exclIn)
 
-	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf, "waf_rules")
+	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf)
 	if len(exclResp.Items) != 1 {
 		t.Errorf("expected 2 waf rule exclusions: got %d", len(exclResp.Items))
 	}
@@ -90,19 +100,22 @@ func TestClient_WAF_Rule_Exclusion_update(t *testing.T) {
 
 	fixtureBase := "waf_rule_exclusion/update/"
 
-	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
+	testService, serviceVersion, responseName, err := createServiceForWAF(t, fixtureBase)
+	if err != nil {
+		t.Fatal(err)
+	}
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
 	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
-	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
+	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID)
 
-	exclIn := buildWAFRuleExclusion1(waf.ID, 1)
+	exclIn := buildWAFRuleExclusion1(waf.ID)
 	exclOut := createWAFRuleExclusion(t, fixtureBase+"waf_rule_exclusions/create", exclIn)
 
 	exclUpdateIn := buildWAFExclusion1ForUpdate(waf.ID, 1, *exclOut.Number)
 	updateWAFExclusion(t, fixtureBase+"waf_rule_exclusions/update", exclUpdateIn)
 
-	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf, "waf_rules")
+	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf)
 	if len(exclResp.Items) != 1 {
 		t.Errorf("expected 1 waf version: got %d", len(exclResp.Items))
 	}
@@ -114,19 +127,22 @@ func TestClient_WAF_Rule_Exclusion_delete(t *testing.T) {
 
 	fixtureBase := "waf_rule_exclusion/delete/"
 
-	testService, serviceVersion, responseName := createServiceForWAF(t, fixtureBase)
+	testService, serviceVersion, responseName, err := createServiceForWAF(t, fixtureBase)
+	if err != nil {
+		t.Fatal(err)
+	}
 	waf := createWAFWithRulesForExclusion(t, fixtureBase, testService, serviceVersion, responseName)
 
 	defer deleteTestService(t, fixtureBase+"service/delete", *testService.ID)
-	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID, 1)
+	defer deleteWAF(t, fixtureBase+"waf/delete", waf.ID)
 
-	exclIn := buildWAFRuleExclusion1(waf.ID, 1)
+	exclIn := buildWAFRuleExclusion1(waf.ID)
 	exclOut := createWAFRuleExclusion(t, fixtureBase+"waf_rule_exclusions/create", exclIn)
 
 	exclUpdateIn := buildWAFExclusion1ForDeletion(waf.ID, 1, *exclOut.Number)
 	deleteWAFExclusion(t, fixtureBase+"waf_rule_exclusions/update", exclUpdateIn)
 
-	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf, "waf_rules")
+	exclResp := listWAFRuleExclusions(t, fixtureBase+"waf_rule_exclusions/list", waf)
 	if len(exclResp.Items) != 0 {
 		t.Errorf("expected 0 waf version: got %d", len(exclResp.Items))
 	}
@@ -365,12 +381,16 @@ func buildWAFRulesForExclusion(status string) []*WAFActiveRule {
 	}
 }
 
-func createServiceForWAF(t *testing.T, fixtureBase string) (*Service, *Version, string) {
-	service := createTestService(t, fixtureBase+"service/create", "service-"+strconv.Itoa(rand.Int()))
+func createServiceForWAF(t *testing.T, fixtureBase string) (*Service, *Version, string, error) {
+	n, err := rand.Int(rand.Reader, big.NewInt(1000))
+	if err != nil {
+		return nil, nil, "", err
+	}
+	service := createTestService(t, fixtureBase+"service/create", "service-"+strconv.Itoa(int(n.Int64())))
 	version := createTestVersion(t, fixtureBase+"service/version", *service.ID)
 	responseName := "WAf_Response"
 	createTestWAFResponseObject(t, fixtureBase+"response_object/create", *service.ID, responseName, *version.Number)
-	return service, version, responseName
+	return service, version, responseName, nil
 }
 
 func createWAFRuleExclusion(t *testing.T, fixture string, excl1In *CreateWAFRuleExclusionInput) *WAFRuleExclusion {
@@ -407,14 +427,14 @@ func deleteWAFExclusion(t *testing.T, fixture string, updateExcl *DeleteWAFRuleE
 	}
 }
 
-func listWAFRuleExclusions(t *testing.T, fixture string, waf *WAF, include string) *WAFRuleExclusionResponse {
+func listWAFRuleExclusions(t *testing.T, fixture string, waf *WAF) *WAFRuleExclusionResponse {
 	var err error
 	var exclResp *WAFRuleExclusionResponse
 	record(t, fixture, func(c *Client) {
 		exclResp, err = c.ListAllWAFRuleExclusions(&ListAllWAFRuleExclusionsInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
-			Include:          []string{include},
+			Include:          []string{"waf_rules"},
 		})
 	})
 	if err != nil {
@@ -435,10 +455,10 @@ func listWAFExclusionsWithFilters(t *testing.T, fixture string, request *ListAll
 	return exclResp
 }
 
-func buildWAFRuleExclusion1(wafID string, version int) *CreateWAFRuleExclusionInput {
+func buildWAFRuleExclusion1(wafID string) *CreateWAFRuleExclusionInput {
 	return &CreateWAFRuleExclusionInput{
 		WAFID:            wafID,
-		WAFVersionNumber: version,
+		WAFVersionNumber: 1,
 		WAFRuleExclusion: &WAFRuleExclusion{
 			Name:          strToPtr("index page"),
 			ExclusionType: strToPtr(WAFRuleExclusionTypeRule),

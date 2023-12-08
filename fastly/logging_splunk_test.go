@@ -62,13 +62,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Ensure deleted
 	defer func() {
 		record(t, "splunks/cleanup", func(c *Client) {
-			c.DeleteSplunk(&DeleteSplunkInput{
+			_ = c.DeleteSplunk(&DeleteSplunkInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-splunk",
 			})
 
-			c.DeleteSplunk(&DeleteSplunkInput{
+			_ = c.DeleteSplunk(&DeleteSplunkInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-splunk",

@@ -269,12 +269,11 @@ func createTestPool(t *testing.T, createFixture string, serviceID string, versio
 	return pool
 }
 
-func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) *Syslog {
+func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
 	var err error
-	var log *Syslog
 
 	record(t, fixture, func(c *Client) {
-		log, err = c.CreateSyslog(&CreateSyslogInput{
+		_, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
 			Name:           ToPointer("test-syslog"),
@@ -290,8 +289,6 @@ func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber in
 	if err != nil {
 		t.Fatal(err)
 	}
-
-	return log
 }
 
 func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
@@ -410,13 +407,13 @@ func createWAF(t *testing.T, fixture, serviceID, condition, response string, ser
 	return waf
 }
 
-func deleteWAF(t *testing.T, fixture, wafID string, wafVersion int) {
+func deleteWAF(t *testing.T, fixture, wafID string) {
 	var err error
 
 	record(t, fixture, func(c *Client) {
 		err = c.DeleteWAF(&DeleteWAFInput{
 			ID:             wafID,
-			ServiceVersion: wafVersion,
+			ServiceVersion: 1,
 		})
 	})
 	if err != nil {
@@ -625,7 +622,7 @@ Zfq6/HA3phy85qyj
 `
 }
 
-// caCert returns a CA certificate suitable for testing
+// caCert returns a CA certificate suitable for testing.
 func caCert() string {
 	return `-----BEGIN CERTIFICATE-----
 MIICUTCCAfugAwIBAgIBADANBgkqhkiG9w0BAQQFADBXMQswCQYDVQQGEwJDTjEL

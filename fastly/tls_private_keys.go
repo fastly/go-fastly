@@ -40,7 +40,7 @@ type ListPrivateKeysInput struct {
 // formatFilters converts user input into query parameters for filtering.
 func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[in_use]": i.FilterInUse,
 		"page[size]":     i.PageSize,
 		"page[number]":   i.PageNumber,
@@ -50,11 +50,13 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		}
 	}
@@ -102,13 +104,14 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 	p := fmt.Sprintf("/tls/private_keys/%s", i.ID)
 
-	r, err := c.Get(p, nil)
+	resp, err := c.Get(p, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ppk PrivateKey
-	if err := jsonapi.UnmarshalPayload(r.Body, &ppk); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &ppk); err != nil {
 		return nil, err
 	}
 
@@ -135,13 +138,14 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 		return nil, ErrMissingName
 	}
 
-	r, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(p, i, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var ppk PrivateKey
-	if err := jsonapi.UnmarshalPayload(r.Body, &ppk); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &ppk); err != nil {
 		return nil, err
 	}
 

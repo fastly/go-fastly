@@ -24,7 +24,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ID, responseName, *tv.Number)
 
 	waf := createWAF(t, fixtureBase+"/waf/create", *testService.ID, prefetch, responseName, *tv.Number)
-	defer deleteWAF(t, fixtureBase+"/waf/delete", waf.ID, 1)
+	defer deleteWAF(t, fixtureBase+"/waf/delete", waf.ID)
 
 	var err error
 

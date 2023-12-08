@@ -58,7 +58,7 @@ type ListBulkCertificatesInput struct {
 // formatFilters converts user input into query parameters for filtering.
 func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[tls_domains.id][match]": i.FilterTLSDomainsIDMatch,
 		"page[size]":                    i.PageSize,
 		"page[number]":                  i.PageNumber,

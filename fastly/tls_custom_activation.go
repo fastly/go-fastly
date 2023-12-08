@@ -37,7 +37,7 @@ type ListTLSActivationsInput struct {
 // formatFilters converts user input into query parameters for filtering.
 func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 	result := map[string]string{}
-	pairings := map[string]interface{}{
+	pairings := map[string]any{
 		"filter[tls_certificate.id]":   i.FilterTLSCertificateID,
 		"filter[tls_configuration.id]": i.FilterTLSConfigurationID,
 		"filter[tls_domain.id]":        i.FilterTLSDomainID,
@@ -50,11 +50,13 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		}
 	}
@@ -72,12 +74,13 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 		},
 	}
 
-	r, err := c.Get(p, filters)
+	resp, err := c.Get(p, filters)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
-	data, err := jsonapi.UnmarshalManyPayload(r.Body, reflect.TypeOf(new(TLSActivation)))
+	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(TLSActivation)))
 	if err != nil {
 		return nil, err
 	}
@@ -120,13 +123,14 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 		ro.Params = map[string]string{"include": *i.Include}
 	}
 
-	r, err := c.Get(p, ro)
+	resp, err := c.Get(p, ro)
 	if err != nil {
 		return nil, err
 	}
+	defer resp.Body.Close()
 
 	var a TLSActivation
-	if err := jsonapi.UnmarshalPayload(r.Body, &a); err != nil {
+	if err := jsonapi.UnmarshalPayload(resp.Body, &a); err != nil {
 		return nil, err
 	}
 

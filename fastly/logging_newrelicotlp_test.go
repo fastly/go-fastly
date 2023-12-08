@@ -33,13 +33,13 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		record(t, "newrelicotlp/delete", func(c *Client) {
-			c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
+			_ = c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-newrelicotlp",
 			})
 
-			c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
+			_ = c.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-newrelicotlp",

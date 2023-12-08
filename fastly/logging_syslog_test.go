@@ -63,13 +63,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Ensure deleted
 	defer func() {
 		record(t, "syslogs/cleanup", func(c *Client) {
-			c.DeleteSyslog(&DeleteSyslogInput{
+			_ = c.DeleteSyslog(&DeleteSyslogInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-syslog",
 			})
 
-			c.DeleteSyslog(&DeleteSyslogInput{
+			_ = c.DeleteSyslog(&DeleteSyslogInput{
 				ServiceID:      testServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-syslog",

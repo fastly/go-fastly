@@ -5,7 +5,8 @@ import (
 	"fmt"
 )
 
-// RealtimeStatsResponse is a response from Fastly's real-time analytics endpoint
+// RealtimeStatsResponse is a response from Fastly's real-time analytics
+// endpoint.
 type RealtimeStatsResponse struct {
 	// AggregateDelay is how long the system will wait before aggregating messages for each second.
 	AggregateDelay *uint32 `mapstructure:"AggregateDelay"`
@@ -17,7 +18,7 @@ type RealtimeStatsResponse struct {
 }
 
 // RealtimeData represents combined stats for all Fastly's POPs and aggregate of them.
-// It also includes a timestamp of when the stats were recorded
+// It also includes a timestamp of when the stats were recorded.
 type RealtimeData struct {
 	// Aggregated aggregates measurements across all Fastly POPs.
 	Aggregated *Stats `mapstructure:"aggregated"`
@@ -41,7 +42,7 @@ type GetRealtimeStatsInput struct {
 // a timestamp which should be passed to the next call and so on.
 // More details at https://developer.fastly.com/reference/api/metrics-stats/realtime/
 func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
-	var resp interface{}
+	var resp any
 	if err := c.GetRealtimeStatsJSON(i, &resp); err != nil {
 		return nil, err
 	}
@@ -54,7 +55,7 @@ func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsRe
 }
 
 // GetRealtimeStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
-func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst interface{}) error {
+func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}

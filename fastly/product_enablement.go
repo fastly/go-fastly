@@ -32,6 +32,8 @@ func (p Product) String() string {
 		return "origin_inspector"
 	case ProductWebSockets:
 		return "websockets"
+	case ProductUndefined:
+		return "unknown"
 	}
 	return "unknown"
 }

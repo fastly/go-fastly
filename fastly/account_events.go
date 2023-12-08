@@ -44,20 +44,21 @@ type GetAPIEventsFilterInput struct {
 }
 
 // EventsPaginationInfo stores links to searches related to the current one, showing
-// any information about additional results being stored on another page
+// any information about additional results being stored on another page.
 type EventsPaginationInfo struct {
 	First string `json:"first,omitempty"`
 	Last  string `json:"last,omitempty"`
 	Next  string `json:"next,omitempty"`
 }
 
-// GetAPIEventsResponse is the data returned to the user from a GetAPIEvents call
+// GetAPIEventsResponse is the data returned to the user from a GetAPIEvents
+// call.
 type GetAPIEventsResponse struct {
 	Events []*Event
 	Links  EventsPaginationInfo `json:"links"`
 }
 
-// GetAPIEvents lists all the events for a particular customer
+// GetAPIEvents lists all the events for a particular customer.
 func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
 	eventsResponse := GetAPIEventsResponse{
 		Events: []*Event{},
@@ -186,11 +187,13 @@ func (i *GetAPIEventsFilterInput) formatEventFilters() map[string]string {
 		switch t := reflect.TypeOf(value).String(); t {
 		case "string":
 			if value != "" {
-				result[key] = value.(string)
+				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = v
 			}
 		case "int":
 			if value != 0 {
-				result[key] = strconv.Itoa(value.(int))
+				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+				result[key] = strconv.Itoa(v)
 			}
 		}
 	}
