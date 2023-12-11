@@ -11,15 +11,15 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 
 	// Given: a test service with an ACL and a batch of create operations,
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
-	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, *testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
-		ServiceID: *testService.ID,
+		ServiceID: *testService.ServiceID,
 		ACLID:     *testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
@@ -52,7 +52,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 	var actualACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualACLEntries, err = c.ListACLEntries(&ListACLEntriesInput{
-			ServiceID: *testService.ID,
+			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ID,
 		})
 	})
@@ -107,15 +107,15 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 
 	// Given: a test service with an ACL and a batch of create operations,
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
-	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, *testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
-		ServiceID: *testService.ID,
+		ServiceID: *testService.ServiceID,
 		ACLID:     *testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
@@ -146,7 +146,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	var createdACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_before_delete", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			ServiceID: *testService.ID,
+			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ID,
 		})
 	})
@@ -160,7 +160,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 
 	// When: I execute the batch delete operations against the Fastly API,
 	batchDeleteOperations := &BatchModifyACLEntriesInput{
-		ServiceID: *testService.ID,
+		ServiceID: *testService.ServiceID,
 		ACLID:     *testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
@@ -181,7 +181,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	var actualACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			ServiceID: *testService.ID,
+			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ID,
 		})
 	})
@@ -206,15 +206,15 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 
 	// Given: a test service with an ACL and ACL entries,
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
-	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ID, *testVersion.Number, nameSuffix)
+	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
-		ServiceID: *testService.ID,
+		ServiceID: *testService.ServiceID,
 		ACLID:     *testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
@@ -245,7 +245,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	var createdACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_before_update", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			ServiceID: *testService.ID,
+			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ID,
 		})
 	})
@@ -259,7 +259,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 
 	// When: I execute the batch update operations against the Fastly API,
 	batchUpdateOperations := &BatchModifyACLEntriesInput{
-		ServiceID: *testService.ID,
+		ServiceID: *testService.ServiceID,
 		ACLID:     *testACL.ID,
 		Entries: []*BatchACLEntry{
 			{
@@ -284,7 +284,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	var actualACLEntries []*ACLEntry
 	record(t, fixtureBase+"list_after_update", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
-			ServiceID: *testService.ID,
+			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ID,
 		})
 	})

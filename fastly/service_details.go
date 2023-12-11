@@ -12,7 +12,7 @@ type Service struct {
 	CreatedAt     *time.Time `mapstructure:"created_at"`
 	CustomerID    *string    `mapstructure:"customer_id"`
 	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ID            *string    `mapstructure:"id"`
+	ServiceID     *string    `mapstructure:"id"`
 	Name          *string    `mapstructure:"name"`
 	Type          *string    `mapstructure:"type"`
 	UpdatedAt     *time.Time `mapstructure:"updated_at"`
@@ -26,7 +26,7 @@ type ServiceDetail struct {
 	CreatedAt     *time.Time `mapstructure:"created_at"`
 	CustomerID    *string    `mapstructure:"customer_id"`
 	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ID            *string    `mapstructure:"id"`
+	ServiceID     *string    `mapstructure:"id"`
 	Name          *string    `mapstructure:"name"`
 	Type          *string    `mapstructure:"type"`
 	UpdatedAt     *time.Time `mapstructure:"updated_at"`

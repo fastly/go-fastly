@@ -9,11 +9,11 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 	nameSuffix := "DictionaryInfo"
 
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
-	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ID)
+	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ID)
+	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ServiceID)
 
-	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", *testService.ID, *testVersion.Number, nameSuffix)
+	testDictionary := createTestDictionary(t, fixtureBase+"dictionary", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
 
 	var (
@@ -23,8 +23,8 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 
 	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
-			ServiceID:    *testService.ID,
-			DictionaryID: *testDictionary.ID,
+			ServiceID:    *testService.ServiceID,
+			DictionaryID: *testDictionary.DictionaryID,
 			Items: []*BatchDictionaryItem{
 				{
 					Operation: ToPointer(CreateBatchOperation),
@@ -45,9 +45,9 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 
 	record(t, fixtureBase+"get", func(c *Client) {
 		info, err = c.GetDictionaryInfo(&GetDictionaryInfoInput{
-			ServiceID:      *testService.ID,
+			ServiceID:      *testService.ServiceID,
 			ServiceVersion: *testVersion.Number,
-			DictID:         *testDictionary.ID,
+			DictID:         *testDictionary.DictionaryID,
 		})
 	})
 	if err != nil {

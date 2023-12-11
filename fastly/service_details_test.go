@@ -25,11 +25,11 @@ func TestClient_Services(t *testing.T) {
 	defer func() {
 		record(t, "services/cleanup", func(c *Client) {
 			_ = c.DeleteService(&DeleteServiceInput{
-				ServiceID: *s.ID,
+				ServiceID: *s.ServiceID,
 			})
 
 			_ = c.DeleteService(&DeleteServiceInput{
-				ServiceID: *s.ID,
+				ServiceID: *s.ServiceID,
 			})
 		})
 	}()
@@ -86,7 +86,7 @@ func TestClient_Services(t *testing.T) {
 	var ns *Service
 	record(t, "services/get", func(c *Client) {
 		ns, err = c.GetService(&GetServiceInput{
-			ServiceID: *s.ID,
+			ServiceID: *s.ServiceID,
 		})
 	})
 	if err != nil {
@@ -112,7 +112,7 @@ func TestClient_Services(t *testing.T) {
 	var nsd *ServiceDetail
 	record(t, "services/details", func(c *Client) {
 		nsd, err = c.GetServiceDetails(&GetServiceInput{
-			ServiceID: *s.ID,
+			ServiceID: *s.ServiceID,
 		})
 	})
 	if err != nil {
@@ -150,7 +150,7 @@ func TestClient_Services(t *testing.T) {
 	var us *Service
 	record(t, "services/update", func(c *Client) {
 		us, err = c.UpdateService(&UpdateServiceInput{
-			ServiceID: *s.ID,
+			ServiceID: *s.ServiceID,
 			Name:      ToPointer("new-test-service"),
 		})
 	})
@@ -164,7 +164,7 @@ func TestClient_Services(t *testing.T) {
 	// Delete
 	record(t, "services/delete", func(c *Client) {
 		err = c.DeleteService(&DeleteServiceInput{
-			ServiceID: *s.ID,
+			ServiceID: *s.ServiceID,
 		})
 	})
 	if err != nil {
@@ -175,7 +175,7 @@ func TestClient_Services(t *testing.T) {
 	var ds ServiceDomainsList
 	record(t, "services/domain", func(c *Client) {
 		ds, err = c.ListServiceDomains(&ListServiceDomainInput{
-			ServiceID: *s.ID,
+			ServiceID: *s.ServiceID,
 		})
 	})
 	if err != nil {

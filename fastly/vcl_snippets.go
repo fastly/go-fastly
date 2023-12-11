@@ -50,7 +50,7 @@ type Snippet struct {
 	CreatedAt      *time.Time   `mapstructure:"created_at"`
 	DeletedAt      *time.Time   `mapstructure:"deleted_at"`
 	Dynamic        *int         `mapstructure:"dynamic"`
-	ID             *string      `mapstructure:"id"`
+	SnippetID      *string      `mapstructure:"id"`
 	Name           *string      `mapstructure:"name"`
 	Priority       *int         `mapstructure:"priority"`
 	ServiceID      *string      `mapstructure:"service_id"`

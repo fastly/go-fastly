@@ -175,7 +175,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/get_dynamic", func(c *Client) {
 		ds, err = c.GetDynamicSnippet(&GetDynamicSnippetInput{
 			ServiceID: testServiceID,
-			SnippetID: *cs.ID,
+			SnippetID: *cs.SnippetID,
 		})
 	})
 
@@ -185,8 +185,8 @@ func TestClient_Snippets(t *testing.T) {
 	if *ds.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *ds.ServiceID)
 	}
-	if *ds.ID != *cs.ID {
-		t.Errorf("incorrect ID: want %v, have %q", *cs.ID, *ds.ID)
+	if *ds.ID != *cs.SnippetID {
+		t.Errorf("incorrect ID: want %v, have %q", *cs.SnippetID, *ds.ID)
 	}
 	if *ds.Content != vclContent {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, *ds.Content)
@@ -232,7 +232,7 @@ func TestClient_Snippets(t *testing.T) {
 	record(t, "vcl_snippets/update_dynamic", func(c *Client) {
 		ds, err = c.UpdateDynamicSnippet(&UpdateDynamicSnippetInput{
 			ServiceID: testServiceID,
-			SnippetID: *cs.ID,
+			SnippetID: *cs.SnippetID,
 			Content:   ToPointer(vclContentUpdated),
 		})
 	})
@@ -243,8 +243,8 @@ func TestClient_Snippets(t *testing.T) {
 	if *ds.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *ds.ServiceID)
 	}
-	if *ds.ID != *cs.ID {
-		t.Errorf("incorrect ID: want %v, have %q", cs.ID, *ds.ID)
+	if *ds.ID != *cs.SnippetID {
+		t.Errorf("incorrect ID: want %v, have %q", cs.SnippetID, *ds.ID)
 	}
 	if *ds.Content != vclContentUpdated {
 		t.Errorf("incorrect Content: want %v, have %q", vclContentUpdated, *ds.Content)
