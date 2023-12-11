@@ -95,7 +95,7 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 
 // GetACLEntryInput is the input parameter to GetACLEntry function.
 type GetACLEntryInput struct {
-	// ACLID is an alphanumeric string identifying an ACL Entry (required).
+	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
 	// EntryID is an alphanumeric string identifying an ACL Entry (required).
 	EntryID string
