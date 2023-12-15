@@ -14,11 +14,11 @@ import (
 
 // ConfigStore represents a config store response from the Fastly API.
 type ConfigStore struct {
-	Name      string     `json:"name"`
-	ID        string     `json:"id"`
 	CreatedAt *time.Time `json:"created_at"`
-	UpdatedAt *time.Time `json:"updated_at"`
 	DeletedAt *time.Time `json:"deleted_at"`
+	Name      string     `json:"name"`
+	StoreID   string     `json:"id"`
+	UpdatedAt *time.Time `json:"updated_at"`
 }
 
 // ConfigStoreMetadata represents a config store metadata response from the Fastly API.

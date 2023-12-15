@@ -14,7 +14,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 
 	record(t, "config_store_batch/create_and_upsert", func(c *Client) {
 		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
 				{
 					ItemKey:   "key1",
@@ -35,7 +35,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 
 	record(t, "config_store_batch/update_and_upsert", func(c *Client) {
 		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
 				{
 					ItemKey:   "key1",
@@ -56,7 +56,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 
 	record(t, "config_store_batch/delete", func(c *Client) {
 		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
 				{
 					ItemKey:   "key1",
@@ -94,11 +94,11 @@ func createConfigStoreForBatch(t *testing.T) *ConfigStore {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store_batch/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				StoreID: cs.ID,
+				StoreID: cs.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+			t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 		}
 	})
 

@@ -40,7 +40,7 @@ func TestClient_Package(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *wp.ServiceID != *testService.ServiceID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ServiceID)
+		t.Errorf("bad serviceID: %q != %q", *wp.PackageID, *testService.ServiceID)
 	}
 	if *wp.ServiceVersion != *testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", *wp.ServiceVersion, testVersion.Number)
@@ -58,7 +58,7 @@ func TestClient_Package(t *testing.T) {
 	}
 
 	if *wp.ServiceID != *testService.ServiceID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ServiceID)
+		t.Errorf("bad serviceID: %q != %q", *wp.PackageID, *testService.ServiceID)
 	}
 	if *wp.ServiceVersion != *testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)
@@ -97,7 +97,7 @@ func TestClient_Package(t *testing.T) {
 		t.Fatal(err)
 	}
 	if *wp.ServiceID != *testService.ServiceID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ServiceID)
+		t.Errorf("bad serviceID: %q != %q", *wp.PackageID, *testService.ServiceID)
 	}
 	if *wp.ServiceVersion != *testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", *wp.ServiceVersion, testVersion.Number)
@@ -115,7 +115,7 @@ func TestClient_Package(t *testing.T) {
 	}
 
 	if *wp.ServiceID != *testService.ServiceID {
-		t.Errorf("bad serviceID: %q != %q", *wp.ID, *testService.ServiceID)
+		t.Errorf("bad serviceID: %q != %q", *wp.PackageID, *testService.ServiceID)
 	}
 	if *wp.ServiceVersion != *testVersion.Number {
 		t.Errorf("bad serviceVersion: %d != %d", wp.ServiceVersion, testVersion.Number)

@@ -27,9 +27,9 @@ type SecretStoreMeta struct {
 
 // SecretStore represents a Secret Store response from the Fastly API.
 type SecretStore struct {
-	ID        string    `json:"id"`
-	Name      string    `json:"name"`
 	CreatedAt time.Time `json:"created_at"`
+	Name      string    `json:"name"`
+	StoreID   string    `json:"id"`
 }
 
 // CreateSecretStoreInput is used as input to the CreateSecretStore function.

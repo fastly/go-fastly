@@ -185,8 +185,8 @@ func TestClient_Snippets(t *testing.T) {
 	if *ds.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *ds.ServiceID)
 	}
-	if *ds.ID != *cs.SnippetID {
-		t.Errorf("incorrect ID: want %v, have %q", *cs.SnippetID, *ds.ID)
+	if *ds.SnippetID != *cs.SnippetID {
+		t.Errorf("incorrect ID: want %v, have %q", *cs.SnippetID, *ds.SnippetID)
 	}
 	if *ds.Content != vclContent {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, *ds.Content)
@@ -243,8 +243,8 @@ func TestClient_Snippets(t *testing.T) {
 	if *ds.ServiceID != testServiceID {
 		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *ds.ServiceID)
 	}
-	if *ds.ID != *cs.SnippetID {
-		t.Errorf("incorrect ID: want %v, have %q", cs.SnippetID, *ds.ID)
+	if *ds.SnippetID != *cs.SnippetID {
+		t.Errorf("incorrect ID: want %v, have %q", cs.SnippetID, *ds.SnippetID)
 	}
 	if *ds.Content != vclContentUpdated {
 		t.Errorf("incorrect Content: want %v, have %q", vclContentUpdated, *ds.Content)

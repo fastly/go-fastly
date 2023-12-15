@@ -15,8 +15,8 @@ import (
 // KVStore represents an KV Store response from the Fastly API.
 type KVStore struct {
 	CreatedAt *time.Time `mapstructure:"created_at"`
-	ID        string     `mapstructure:"id"`
 	Name      string     `mapstructure:"name"`
+	StoreID   string     `mapstructure:"id"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 

@@ -44,7 +44,7 @@ func TestClient_Users(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteUser(&DeleteUserInput{
-				ID: *u.ID,
+				UserID: *u.UserID,
 			})
 		})
 	}()
@@ -79,7 +79,7 @@ func TestClient_Users(t *testing.T) {
 	var nu *User
 	record(t, fixtureBase+"get", func(c *Client) {
 		nu, err = c.GetUser(&GetUserInput{
-			ID: *u.ID,
+			UserID: *u.UserID,
 		})
 	})
 	if err != nil {
@@ -93,9 +93,9 @@ func TestClient_Users(t *testing.T) {
 	var uu *User
 	record(t, fixtureBase+"update", func(c *Client) {
 		uu, err = c.UpdateUser(&UpdateUserInput{
-			ID:   *u.ID,
-			Name: ToPointer("updated user"),
-			Role: ToPointer("superuser"),
+			UserID: *u.UserID,
+			Name:   ToPointer("updated user"),
+			Role:   ToPointer("superuser"),
 		})
 	})
 	if err != nil {
@@ -124,7 +124,7 @@ func TestClient_Users(t *testing.T) {
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteUser(&DeleteUserInput{
-			ID: *u.ID,
+			UserID: *u.UserID,
 		})
 	})
 	if err != nil {
@@ -145,9 +145,9 @@ func TestClient_ListCustomerUsers_validation(t *testing.T) {
 func TestClient_GetUser_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetUser(&GetUserInput{
-		ID: "",
+		UserID: "",
 	})
-	if err != ErrMissingID {
+	if err != ErrMissingUserID {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -155,18 +155,18 @@ func TestClient_GetUser_validation(t *testing.T) {
 func TestClient_UpdateUser_validation(t *testing.T) {
 	var err error
 	_, err = testClient.UpdateUser(&UpdateUserInput{
-		ID: "",
+		UserID: "",
 	})
-	if err != ErrMissingID {
+	if err != ErrMissingUserID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteUser_validation(t *testing.T) {
 	err := testClient.DeleteUser(&DeleteUserInput{
-		ID: "",
+		UserID: "",
 	})
-	if err != ErrMissingID {
+	if err != ErrMissingUserID {
 		t.Errorf("bad error: %s", err)
 	}
 }

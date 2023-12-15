@@ -22,7 +22,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateACLEntry(&CreateACLEntryInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 			IP:        ToPointer("10.0.0.3"),
 			Subnet:    ToPointer(8),
 			Negated:   ToPointer(Compatibool(false)),
@@ -53,7 +53,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	var es []*ACLEntry
 	record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 			Direction: ToPointer("descend"),
 			ServiceID: *testService.ServiceID,
 			Sort:      ToPointer("created"),
@@ -72,7 +72,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	var paginator *ListPaginator[ACLEntry]
 	record(t, fixtureBase+"list2", func(c *Client) {
 		paginator = c.GetACLEntries(&GetACLEntriesInput{
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 			Direction: ToPointer("ascend"),
 			PerPage:   ToPointer(50),
 			ServiceID: *testService.ServiceID,
@@ -103,7 +103,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	record(t, fixtureBase+"get", func(c *Client) {
 		ne, err = c.GetACLEntry(&GetACLEntryInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 			EntryID:   *e.EntryID,
 		})
 	})
@@ -129,7 +129,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	record(t, fixtureBase+"update", func(c *Client) {
 		ue, err = c.UpdateACLEntry(&UpdateACLEntryInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 			EntryID:   *e.EntryID,
 			IP:        ToPointer("10.0.0.4"),
 			Negated:   ToPointer(Compatibool(true)),
@@ -158,7 +158,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteACLEntry(&DeleteACLEntryInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 			EntryID:   *e.EntryID,
 		})
 	})

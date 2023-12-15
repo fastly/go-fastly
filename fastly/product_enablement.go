@@ -11,8 +11,8 @@ type ProductEnablement struct {
 }
 
 type ProductEnablementNested struct {
-	ID     *string `mapstructure:"id,omitempty"`
-	Object *string `mapstructure:"object,omitempty"`
+	Object    *string `mapstructure:"object,omitempty"`
+	ProductID *string `mapstructure:"id,omitempty"`
 }
 
 // Product is a base for the different product variants.

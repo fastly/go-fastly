@@ -21,8 +21,8 @@ func TestClient_ProductEnablement(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if *pe.Product.ID != ProductBrotliCompression.String() {
-		t.Errorf("bad feature_revision: %s", *pe.Product.ID)
+	if *pe.Product.ProductID != ProductBrotliCompression.String() {
+		t.Errorf("bad feature_revision: %s", *pe.Product.ProductID)
 	}
 
 	// Get Product status
@@ -37,8 +37,8 @@ func TestClient_ProductEnablement(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if *gpe.Product.ID != ProductBrotliCompression.String() {
-		t.Errorf("bad feature_revision: %s", *gpe.Product.ID)
+	if *gpe.Product.ProductID != ProductBrotliCompression.String() {
+		t.Errorf("bad feature_revision: %s", *gpe.Product.ProductID)
 	}
 
 	// Disable Product

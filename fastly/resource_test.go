@@ -31,7 +31,7 @@ func TestClient_Resources(t *testing.T) {
 	defer func() {
 		record(t, "resources/cleanup-kv-store", func(c *Client) {
 			_ = c.DeleteKVStore(&DeleteKVStoreInput{
-				StoreID: o.ID,
+				StoreID: o.StoreID,
 			})
 		})
 	}()
@@ -48,7 +48,7 @@ func TestClient_Resources(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(kvStoreNameForServiceLinking),
-			ResourceID:     ToPointer(o.ID),
+			ResourceID:     ToPointer(o.StoreID),
 		})
 	})
 	if err != nil {

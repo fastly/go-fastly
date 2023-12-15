@@ -20,7 +20,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
 		ServiceID: *testService.ServiceID,
-		ACLID:     *testACL.ID,
+		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: ToPointer(CreateBatchOperation),
@@ -53,7 +53,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 	record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualACLEntries, err = c.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 		})
 	})
 	if err != nil {
@@ -116,7 +116,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
 		ServiceID: *testService.ServiceID,
-		ACLID:     *testACL.ID,
+		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: ToPointer(CreateBatchOperation),
@@ -147,7 +147,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	record(t, fixtureBase+"list_before_delete", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 		})
 	})
 	if err != nil {
@@ -161,7 +161,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	// When: I execute the batch delete operations against the Fastly API,
 	batchDeleteOperations := &BatchModifyACLEntriesInput{
 		ServiceID: *testService.ServiceID,
-		ACLID:     *testACL.ID,
+		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: ToPointer(DeleteBatchOperation),
@@ -182,7 +182,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 		})
 	})
 	if err != nil {
@@ -215,7 +215,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 
 	batchCreateOperations := &BatchModifyACLEntriesInput{
 		ServiceID: *testService.ServiceID,
-		ACLID:     *testACL.ID,
+		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: ToPointer(CreateBatchOperation),
@@ -246,7 +246,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	record(t, fixtureBase+"list_before_update", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 		})
 	})
 	if err != nil {
@@ -260,7 +260,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	// When: I execute the batch update operations against the Fastly API,
 	batchUpdateOperations := &BatchModifyACLEntriesInput{
 		ServiceID: *testService.ServiceID,
-		ACLID:     *testACL.ID,
+		ACLID:     *testACL.ACLID,
 		Entries: []*BatchACLEntry{
 			{
 				Operation: ToPointer(UpdateBatchOperation),
@@ -285,7 +285,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	record(t, fixtureBase+"list_after_update", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
-			ACLID:     *testACL.ID,
+			ACLID:     *testACL.ACLID,
 		})
 	})
 	if err != nil {

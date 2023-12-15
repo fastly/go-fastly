@@ -28,12 +28,12 @@ type Pool struct {
 	DeletedAt        *time.Time `mapstructure:"deleted_at"`
 	FirstByteTimeout *int       `mapstructure:"first_byte_timeout"`
 	Healthcheck      *string    `mapstructure:"healthcheck"`
-	ID               *string    `mapstructure:"id"`
 	MaxConnDefault   *int       `mapstructure:"max_conn_default"`
 	MaxTLSVersion    *string    `mapstructure:"max_tls_version"`
 	MinTLSVersion    *string    `mapstructure:"min_tls_version"`
 	Name             *string    `mapstructure:"name"`
 	OverrideHost     *string    `mapstructure:"override_host"`
+	PoolID           *string    `mapstructure:"id"`
 	Quorum           *int       `mapstructure:"quorum"`
 	RequestCondition *string    `mapstructure:"request_condition"`
 	ServiceID        *string    `mapstructure:"service_id"`

@@ -12,11 +12,11 @@ type Server struct {
 	CreatedAt    *time.Time `mapstructure:"created_at"`
 	DeletedAt    *time.Time `mapstructure:"deleted_at"`
 	Disabled     *bool      `mapstructure:"disabled"`
-	ID           *string    `mapstructure:"id"`
 	MaxConn      *int       `mapstructure:"max_conn"`
 	OverrideHost *string    `mapstructure:"override_host"`
 	PoolID       *string    `mapstructure:"pool_id"`
 	Port         *int       `mapstructure:"port"`
+	ServerID     *string    `mapstructure:"id"`
 	ServiceID    *string    `mapstructure:"service_id"`
 	UpdatedAt    *time.Time `mapstructure:"updated_at"`
 	Weight       *int       `mapstructure:"weight"`

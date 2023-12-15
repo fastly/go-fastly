@@ -149,8 +149,8 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 type DynamicSnippet struct {
 	Content   *string    `mapstructure:"content"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
-	ID        *string    `mapstructure:"snippet_id"`
 	ServiceID *string    `mapstructure:"service_id"`
+	SnippetID *string    `mapstructure:"snippet_id"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
