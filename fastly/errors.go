@@ -137,10 +137,6 @@ var ErrMissingSnippetID = NewFieldError("SnippetID")
 // requires a "ResourceID" key, but one was not set.
 var ErrMissingResourceID = NewFieldError("ResourceID")
 
-// ErrMissingDictID is an error that is returned when an input struct
-// requires a "DictID" key, but one was not set.
-var ErrMissingDictID = NewFieldError("DictID")
-
 // ErrMissingERLID is an error that is returned when an input struct
 // requires an "ERLID" key, but one was not set.
 var ErrMissingERLID = NewFieldError("ERLID")
