@@ -10,7 +10,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	t.Parallel()
 
 	testDimensions := map[string][]string{
-		"domains": []string{"example.com", "fastly.com"},
+		"domains": {"example.com", "fastly.com"},
 	}
 	testEvaluationStrategy := map[string]any{
 		"type":      "above_threshold",
