@@ -191,8 +191,7 @@ func TestClient_UpdateAlertDefinition_validation(t *testing.T) {
 }
 
 func TestClient_DeleteAlertDefinition_validation(t *testing.T) {
-	var err error
-	err = testClient.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
+	err := testClient.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
 		ID: "",
 	})
 	if err != ErrMissingID {
