@@ -1,0 +1,53 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test name","description":"test
+      description","metric":"status_5xx","source":"domains","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[]}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
+    url: https://api.fastly.com/alerts/definitions
+    method: POST
+  response:
+    body: '{"id":"4NhOijGgkEjdOwKpcvBo9a","object":"definition","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test
+      name","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m0s","threshold":10},"silenced":false,"integration_ids":[],"updated_at":"2024-01-12T22:40:41Z","created_at":"2024-01-12T22:40:41Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "428"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 12 Jan 2024 22:40:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770035-PAO
+      X-Timer:
+      - S1705099241.338483,VS0,VE390
+    status: 201 Created
+    code: 201
+    duration: ""

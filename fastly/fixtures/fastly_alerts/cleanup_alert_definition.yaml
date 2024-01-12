@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
+    url: https://api.fastly.com/alerts/definitions/4NhOijGgkEjdOwKpcvBo9a
+    method: DELETE
+  response:
+    body: |
+      {"type":"https://fastly.help/metrics/not-found","title":"The content you requested could not be found","status":404,"errors":null,"detail":""}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "143"
+      Content-Type:
+      - application/problem+json
+      Date:
+      - Fri, 12 Jan 2024 22:40:43 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770035-PAO
+      X-Timer:
+      - S1705099243.314452,VS0,VE107
+    status: 404 Not Found
+    code: 404
+    duration: ""

@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
+    url: https://api.fastly.com/alerts/definitions?created_by=&cursor=&limit=10&name=test+name&service_customer_id=&service_id=7i6HN3TK9wS159v2gPAZ8A&sort=name
+    method: GET
+  response:
+    body: '{"data":[{"id":"4NhOijGgkEjdOwKpcvBo9a","object":"definition","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test
+      name","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m0s","threshold":10},"silenced":false,"integration_ids":[],"updated_at":"2024-01-12T22:40:41Z","created_at":"2024-01-12T22:40:41Z"}],"meta":{"next_cursor":"","limit":10,"sort":"name","total":1}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "500"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 12 Jan 2024 22:40:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770035-PAO
+      X-Timer:
+      - S1705099242.757397,VS0,VE271
+    status: 200 OK
+    code: 200
+    duration: ""
