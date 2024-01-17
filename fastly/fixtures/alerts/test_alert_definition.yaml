@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx","name":"test
+      name","service_id":"7i6HN3TK9wS159v2gPAZ8A","source":"domains"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
+    url: https://api.fastly.com/alerts/definitions/test
+    method: POST
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "0"
+      Date:
+      - Wed, 17 Jan 2024 04:07:27 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 202 Accepted
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770036-PAO
+      X-Timer:
+      - S1705464447.142396,VS0,VE426
+    status: 202 Accepted
+    code: 202
+    duration: ""
