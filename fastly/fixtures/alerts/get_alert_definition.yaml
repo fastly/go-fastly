@@ -7,21 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/alerts/history?after=2006-01-02T15%3A04%3A05Z&before=2056-01-02T15%3A04%3A05Z&created_by=&cursor=&definition_id=4NhOijGgkEjdOwKpcvBo9a&limit=10&service_customer_id=&service_id=7i6HN3TK9wS159v2gPAZ8A&sort=-start&status=
+    url: https://api.fastly.com/alerts/definitions/2oiUgzqoAmULjVOwuzuUEg
     method: GET
   response:
-    body: '{"data":[],"meta":{"next_cursor":"","limit":10,"sort":"-start","total":0}}'
+    body: '{"id":"2oiUgzqoAmULjVOwuzuUEg","object":"definition","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test
+      name","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m0s","threshold":10},"integration_ids":[],"updated_at":"2024-01-17T04:03:01Z","created_at":"2024-01-17T04:03:01Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "74"
+      - "411"
       Content-Type:
       - application/json
       Date:
-      - Fri, 12 Jan 2024 22:40:43 GMT
+      - Wed, 17 Jan 2024 04:03:02 GMT
       Pragma:
       - no-cache
       Server:
@@ -39,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-pao-kpao1770035-PAO
+      - cache-pao-kpao1770062-PAO
       X-Timer:
-      - S1705099243.023440,VS0,VE270
+      - S1705464182.901553,VS0,VE302
     status: 200 OK
     code: 200
     duration: ""

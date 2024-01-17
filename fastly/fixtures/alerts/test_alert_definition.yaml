@@ -2,8 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test name","description":"test
-      description","metric":"status_5xx","source":"domains","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[]}'
+    body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx","name":"test
+      name","service_id":"7i6HN3TK9wS159v2gPAZ8A","source":"domains"}'
     form: {}
     headers:
       Accept:
@@ -24,7 +24,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Fri, 12 Jan 2024 22:40:41 GMT
+      - Wed, 17 Jan 2024 04:03:00 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-pao-kpao1770035-PAO
+      - cache-pao-kpao1770062-PAO
       X-Timer:
-      - S1705099241.599814,VS0,VE705
+      - S1705464180.029471,VS0,VE831
     status: 202 Accepted
     code: 202
     duration: ""
