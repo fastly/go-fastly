@@ -18,7 +18,7 @@ func TestClient_CreateConfigStoreItem(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store_item/%s/create_item", t.Name()), func(c *Client) {
 		item, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   value,
 		})
@@ -27,7 +27,7 @@ func TestClient_CreateConfigStoreItem(t *testing.T) {
 		t.Fatalf("error creating config store item: %v", err)
 	}
 
-	if got, want := item.StoreID, cs.ID; got != want {
+	if got, want := item.StoreID, cs.StoreID; got != want {
 		t.Errorf("StoreID: got %q, want %q", got, want)
 	}
 	if got, want := item.Key, t.Name(); got != want {
@@ -50,7 +50,7 @@ func TestClient_DeleteConfigStoreItem(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store_item/%s/create_item", t.Name()), func(c *Client) {
 		_, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   "delete me",
 		})
@@ -61,7 +61,7 @@ func TestClient_DeleteConfigStoreItem(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store_item/%s/delete_item", t.Name()), func(c *Client) {
 		err = c.DeleteConfigStoreItem(&DeleteConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 		})
 	})
@@ -83,7 +83,7 @@ func TestClient_GetConfigStoreItem(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store_item/%s/create_item", t.Name()), func(c *Client) {
 		item, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   "get me",
 		})
@@ -94,7 +94,7 @@ func TestClient_GetConfigStoreItem(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store_item/%s/get_item", t.Name()), func(c *Client) {
 		gotItem, err = c.GetConfigStoreItem(&GetConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 		})
 	})
@@ -133,7 +133,7 @@ func TestClient_ListConfigStoreItems(t *testing.T) {
 	record(t, fmt.Sprintf("config_store_item/%s/create_items", t.Name()), func(c *Client) {
 		for i, key := range keys {
 			_, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
-				StoreID: cs.ID,
+				StoreID: cs.StoreID,
 				Key:     key,
 				Value:   fmt.Sprintf("value %02d", i),
 			})
@@ -149,7 +149,7 @@ func TestClient_ListConfigStoreItems(t *testing.T) {
 	var list []*ConfigStoreItem
 	record(t, fmt.Sprintf("config_store_item/%s/list_items", t.Name()), func(c *Client) {
 		list, err = c.ListConfigStoreItems(&ListConfigStoreItemsInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 		})
 	})
 	if err != nil {
@@ -161,7 +161,7 @@ func TestClient_ListConfigStoreItems(t *testing.T) {
 	}
 
 	for i, gotItem := range list {
-		if got, want := gotItem.StoreID, cs.ID; got != want {
+		if got, want := gotItem.StoreID, cs.StoreID; got != want {
 			t.Errorf("StoreID: got %q, want %q", got, want)
 		}
 		if got, want := gotItem.Key, keys[i]; got != want {
@@ -183,7 +183,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 	const newValue = "I'm a new value"
 	record(t, fmt.Sprintf("config_store_item/%s/create_and_update_item", t.Name()), func(c *Client) {
 		_, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   "OLD VALUE",
 		})
@@ -191,7 +191,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 			return
 		}
 		_, err = c.UpdateConfigStoreItem(&UpdateConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   newValue,
 		})
@@ -199,7 +199,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 			return
 		}
 		gotItem, err = c.GetConfigStoreItem(&GetConfigStoreItemInput{
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name(),
 		})
 	})
@@ -217,7 +217,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 	record(t, fmt.Sprintf("config_store_item/%s/upsert_item", t.Name()), func(c *Client) {
 		gotItem, err = c.UpdateConfigStoreItem(&UpdateConfigStoreItemInput{
 			Upsert:  true,
-			StoreID: cs.ID,
+			StoreID: cs.StoreID,
 			Key:     t.Name() + "-upsert",
 			Value:   upsertValue,
 		})
@@ -255,11 +255,11 @@ func createConfigStore(t *testing.T) *ConfigStore {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store_item/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+			t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 		}
 	})
 

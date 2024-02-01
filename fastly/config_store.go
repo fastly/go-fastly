@@ -14,11 +14,11 @@ import (
 
 // ConfigStore represents a config store response from the Fastly API.
 type ConfigStore struct {
-	Name      string     `json:"name"`
-	ID        string     `json:"id"`
 	CreatedAt *time.Time `json:"created_at"`
-	UpdatedAt *time.Time `json:"updated_at"`
 	DeletedAt *time.Time `json:"deleted_at"`
+	Name      string     `json:"name"`
+	StoreID   string     `json:"id"`
+	UpdatedAt *time.Time `json:"updated_at"`
 }
 
 // ConfigStoreMetadata represents a config store metadata response from the Fastly API.
@@ -58,17 +58,17 @@ func (c *Client) CreateConfigStore(i *CreateConfigStoreInput) (*ConfigStore, err
 
 // DeleteConfigStoreInput is the input parameter to DeleteConfigStore.
 type DeleteConfigStoreInput struct {
-	// ID is the ID of the config store to delete (required).
-	ID string
+	// StoreID is the StoreID of the config store to delete (required).
+	StoreID string
 }
 
 // DeleteConfigStore deletes the given config store version.
 func (c *Client) DeleteConfigStore(i *DeleteConfigStoreInput) error {
-	if i.ID == "" {
-		return ErrMissingID
+	if i.StoreID == "" {
+		return ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s", i.ID)
+	path := fmt.Sprintf("/resources/stores/config/%s", i.StoreID)
 	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -87,17 +87,17 @@ func (c *Client) DeleteConfigStore(i *DeleteConfigStoreInput) error {
 
 // GetConfigStoreInput is the input to GetConfigStore.
 type GetConfigStoreInput struct {
-	// ID is the ID of the config store (required).
-	ID string
+	// StoreID is the StoreID of the config store (required).
+	StoreID string
 }
 
 // GetConfigStore returns the config store for the given input parameters.
 func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s", i.ID)
+	path := fmt.Sprintf("/resources/stores/config/%s", i.StoreID)
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -119,17 +119,17 @@ func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
 
 // GetConfigStoreMetadataInput is the input to GetConfigStoreMetadata.
 type GetConfigStoreMetadataInput struct {
-	// ID is the ID of the config store (required).
-	ID string
+	// StoreID is the StoreID of the config store (required).
+	StoreID string
 }
 
 // GetConfigStoreMetadata returns the config store's metadata for the given input parameters.
 func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*ConfigStoreMetadata, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/info", i.ID)
+	path := fmt.Sprintf("/resources/stores/config/%s/info", i.StoreID)
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -189,18 +189,18 @@ func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, err
 
 // ListConfigStoreServicesInput is the input to ListConfigStoreServices.
 type ListConfigStoreServicesInput struct {
-	// ID is the ID of the config store (required).
-	ID string
+	// StoreID is the StoreID of the config store (required).
+	StoreID string
 }
 
 // ListConfigStoreServices returns the list of services that are associated with
 // a given config store.
 func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Service, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/services", i.ID)
+	path := fmt.Sprintf("/resources/stores/config/%s/services", i.StoreID)
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -222,8 +222,8 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 
 // UpdateConfigStoreInput is the input to UpdateConfigStore.
 type UpdateConfigStoreInput struct {
-	// ID is the ID of the config store to update (required).
-	ID string
+	// StoreID is the StoreID of the config store to update (required).
+	StoreID string
 
 	// Name is the new name of the config store (required).
 	Name string `url:"name"`
@@ -231,11 +231,11 @@ type UpdateConfigStoreInput struct {
 
 // UpdateConfigStore updates a specific config store.
 func (c *Client) UpdateConfigStore(i *UpdateConfigStoreInput) (*ConfigStore, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.StoreID == "" {
+		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s", i.ID)
+	path := fmt.Sprintf("/resources/stores/config/%s", i.StoreID)
 	resp, err := c.PutForm(path, i, &RequestOptions{
 		Headers: map[string]string{
 			// PutForm adds the appropriate Content-Type header.

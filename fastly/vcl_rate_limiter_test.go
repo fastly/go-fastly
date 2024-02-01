@@ -47,7 +47,7 @@ func TestClient_ERL(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteERL(&DeleteERLInput{
-				ERLID: *e.ID,
+				ERLID: *e.RateLimiterID,
 			})
 		})
 	}()
@@ -91,21 +91,21 @@ func TestClient_ERL(t *testing.T) {
 	var ge *ERL
 	record(t, fixtureBase+"get", func(c *Client) {
 		ge, err = c.GetERL(&GetERLInput{
-			ERLID: *e.ID,
+			ERLID: *e.RateLimiterID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *e.ID != *ge.ID {
-		t.Errorf("bad ID: %q (%q)", *e.ID, *ge.ID)
+	if *e.RateLimiterID != *ge.RateLimiterID {
+		t.Errorf("bad ID: %q (%q)", *e.RateLimiterID, *ge.RateLimiterID)
 	}
 
 	// Update
 	var ua *ERL
 	record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateERL(&UpdateERLInput{
-			ERLID: *e.ID,
+			ERLID: *e.RateLimiterID,
 			Name:  ToPointer("test_erl"),
 		})
 	})
@@ -119,7 +119,7 @@ func TestClient_ERL(t *testing.T) {
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteERL(&DeleteERLInput{
-			ERLID: *ge.ID,
+			ERLID: *ge.RateLimiterID,
 		})
 	})
 	if err != nil {
@@ -155,7 +155,7 @@ func TestClient_ERL(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"logger_cleanup", func(c *Client) {
 			_ = c.DeleteERL(&DeleteERLInput{
-				ERLID: *elog.ID,
+				ERLID: *elog.RateLimiterID,
 			})
 		})
 	}()

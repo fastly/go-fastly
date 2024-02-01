@@ -11,27 +11,27 @@ func TestClient_WAFs(t *testing.T) {
 	fixtureBase := "wafs/"
 
 	testService := createTestService(t, fixtureBase+"service/create", "service2")
-	defer deleteTestService(t, fixtureBase+"/service/delete", *testService.ID)
+	defer deleteTestService(t, fixtureBase+"/service/delete", *testService.ServiceID)
 
-	tv := createTestVersion(t, fixtureBase+"/service/version", *testService.ID)
+	tv := createTestVersion(t, fixtureBase+"/service/version", *testService.ServiceID)
 
 	prefetch := "WAF_Prefetch"
-	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ID, prefetch, *tv.Number)
-	defer deleteTestCondition(t, fixtureBase+"/condition/delete", *testService.ID, prefetch, *tv.Number)
+	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ServiceID, prefetch, *tv.Number)
+	defer deleteTestCondition(t, fixtureBase+"/condition/delete", *testService.ServiceID, prefetch, *tv.Number)
 
 	responseName := "WAF_Response"
-	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ID, responseName, *tv.Number)
-	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", *testService.ID, responseName, *tv.Number)
+	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ServiceID, responseName, *tv.Number)
+	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", *testService.ServiceID, responseName, *tv.Number)
 
 	responseName2 := "WAF_Response2"
-	nro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create_another", *testService.ID, responseName2, *tv.Number)
-	defer deleteTestResponseObject(t, fixtureBase+"/response_object/cleanup_another", *testService.ID, responseName2, *tv.Number)
+	nro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create_another", *testService.ServiceID, responseName2, *tv.Number)
+	defer deleteTestResponseObject(t, fixtureBase+"/response_object/cleanup_another", *testService.ServiceID, responseName2, *tv.Number)
 
 	var err error
 	var waf *WAF
 	record(t, fixtureBase+"/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
-			ServiceID:         *testService.ID,
+			ServiceID:         *testService.ServiceID,
 			ServiceVersion:    *tv.Number,
 			PrefetchCondition: *condition.Name,
 			Response:          *ro.Name,
@@ -45,7 +45,7 @@ func TestClient_WAFs(t *testing.T) {
 	var wafsResp *WAFResponse
 	record(t, fixtureBase+"/list", func(c *Client) {
 		wafsResp, err = c.ListWAFs(&ListWAFsInput{
-			FilterService: *testService.ID,
+			FilterService: *testService.ServiceID,
 			FilterVersion: *tv.Number,
 		})
 	})
@@ -80,7 +80,7 @@ func TestClient_WAFs(t *testing.T) {
 	var nwaf *WAF
 	record(t, fixtureBase+"/get", func(c *Client) {
 		nwaf, err = c.GetWAF(&GetWAFInput{
-			ServiceID:      *testService.ID,
+			ServiceID:      *testService.ServiceID,
 			ServiceVersion: *tv.Number,
 			ID:             waf.ID,
 		})
@@ -98,7 +98,7 @@ func TestClient_WAFs(t *testing.T) {
 	var uwaf *WAF
 	record(t, fixtureBase+"/update", func(c *Client) {
 		uwaf, err = c.UpdateWAF(&UpdateWAFInput{
-			ServiceID:      testService.ID,
+			ServiceID:      testService.ServiceID,
 			ServiceVersion: tv.Number,
 			ID:             waf.ID,
 			Response:       nro.Name,

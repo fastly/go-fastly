@@ -22,7 +22,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"version", func(c *Client) {
 			_ = c.DeleteService(&DeleteServiceInput{
-				ID: testServiceID,
+				ServiceID: testServiceID,
 			})
 		})
 	}()

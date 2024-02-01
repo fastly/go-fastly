@@ -10,7 +10,7 @@ import (
 type Dictionary struct {
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	ID             *string    `mapstructure:"id"`
+	DictionaryID   *string    `mapstructure:"id"`
 	Name           *string    `mapstructure:"name"`
 	ServiceID      *string    `mapstructure:"service_id"`
 	ServiceVersion *int       `mapstructure:"version"`

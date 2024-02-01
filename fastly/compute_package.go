@@ -10,10 +10,10 @@ import (
 
 // Package is a container for data returned about a package.
 type Package struct {
-	CreatedAt      *time.Time `mapstructure:"created_at"`
-	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	ID             *string
+	CreatedAt      *time.Time       `mapstructure:"created_at"`
+	DeletedAt      *time.Time       `mapstructure:"deleted_at"`
 	Metadata       *PackageMetadata `mapstructure:"metadata"`
+	PackageID      *string          `mapstructure:"id"`
 	ServiceID      *string          `mapstructure:"service_id"`
 	ServiceVersion *int             `mapstructure:"version"`
 	UpdatedAt      *time.Time       `mapstructure:"updated_at"`

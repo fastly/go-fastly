@@ -125,6 +125,18 @@ var ErrMissingTokenID = errors.New("missing required field 'TokenID'")
 // requires a "ID" key, but one was not set.
 var ErrMissingID = NewFieldError("ID")
 
+// ErrMissingEntryID is an error that is returned when an input struct
+// requires a "EntryID" key, but one was not set.
+var ErrMissingEntryID = NewFieldError("EntryID")
+
+// ErrMissingSnippetID is an error that is returned when an input struct
+// requires a "SnippetID" key, but one was not set.
+var ErrMissingSnippetID = NewFieldError("SnippetID")
+
+// ErrMissingResourceID is an error that is returned when an input struct
+// requires a "ResourceID" key, but one was not set.
+var ErrMissingResourceID = NewFieldError("ResourceID")
+
 // ErrMissingERLID is an error that is returned when an input struct
 // requires an "ERLID" key, but one was not set.
 var ErrMissingERLID = NewFieldError("ERLID")

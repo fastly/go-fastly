@@ -8,8 +8,8 @@ import (
 
 // Purge is a response from a purge request.
 type Purge struct {
-	// ID is the unique ID of the purge request.
-	ID *string `mapstructure:"id"`
+	// PurgeID is the unique PurgeID of the purge request.
+	PurgeID *string `mapstructure:"id"`
 	// Status is the status of the purge, usually "ok".
 	Status *string `mapstructure:"status"`
 }

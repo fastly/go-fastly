@@ -13,26 +13,26 @@ func TestClient_WAF_Versions(t *testing.T) {
 	fixtureBase := "waf_versions/"
 
 	testService := createTestService(t, fixtureBase+"service/create", "service3")
-	defer deleteTestService(t, fixtureBase+"/service/delete", *testService.ID)
+	defer deleteTestService(t, fixtureBase+"/service/delete", *testService.ServiceID)
 
-	tv := createTestVersion(t, fixtureBase+"/service/version", *testService.ID)
+	tv := createTestVersion(t, fixtureBase+"/service/version", *testService.ServiceID)
 
-	createTestLogging(t, fixtureBase+"/logging/create", *testService.ID, *tv.Number)
-	defer deleteTestLogging(t, fixtureBase+"/logging/delete", *testService.ID, *tv.Number)
+	createTestLogging(t, fixtureBase+"/logging/create", *testService.ServiceID, *tv.Number)
+	defer deleteTestLogging(t, fixtureBase+"/logging/delete", *testService.ServiceID, *tv.Number)
 
 	prefetch := "WAF_Prefetch"
-	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ID, prefetch, *tv.Number)
-	defer deleteTestCondition(t, fixtureBase+"/condition/delete", *testService.ID, prefetch, *tv.Number)
+	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ServiceID, prefetch, *tv.Number)
+	defer deleteTestCondition(t, fixtureBase+"/condition/delete", *testService.ServiceID, prefetch, *tv.Number)
 
 	responseName := "WAf_Response"
-	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ID, responseName, *tv.Number)
-	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", *testService.ID, responseName, *tv.Number)
+	ro := createTestWAFResponseObject(t, fixtureBase+"/response_object/create", *testService.ServiceID, responseName, *tv.Number)
+	defer deleteTestResponseObject(t, fixtureBase+"/response_object/delete", *testService.ServiceID, responseName, *tv.Number)
 
 	var err error
 	var waf *WAF
 	record(t, fixtureBase+"/waf/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
-			ServiceID:         *testService.ID,
+			ServiceID:         *testService.ServiceID,
 			ServiceVersion:    *tv.Number,
 			PrefetchCondition: *condition.Name,
 			Response:          *ro.Name,

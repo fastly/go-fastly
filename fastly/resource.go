@@ -14,8 +14,8 @@ type Resource struct {
 	DeletedAt *time.Time `mapstructure:"deleted_at" json:"deleted_at"`
 	// HREF is the path to the resource.
 	HREF *string `mapstructure:"href" json:"href"`
-	// ID is an alphanumeric string identifying the resource link.
-	ID *string `mapstructure:"id" json:"id"`
+	// LinkID is an alphanumeric string identifying the resource link.
+	LinkID *string `mapstructure:"id" json:"id"`
 	// Name is the name of the resource being linked to.
 	Name *string `mapstructure:"name" json:"name"`
 	// ResourceID is the ID of the linked resource.
@@ -103,8 +103,8 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 
 // GetResourceInput is used as input to the GetResource function.
 type GetResourceInput struct {
-	// ID is an alphanumeric string identifying the resource link (required).
-	ID string
+	// ResourceID is an alphanumeric string identifying the resource link (required).
+	ResourceID string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -113,8 +113,8 @@ type GetResourceInput struct {
 
 // GetResource retrieves the specified resource.
 func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ResourceID == "" {
+		return nil, ErrMissingResourceID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -123,7 +123,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ID))
+	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -141,8 +141,8 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 type UpdateResourceInput struct {
 	// Name is the name of the resource being linked to (e.g. a kv store).
 	Name *string `url:"name,omitempty"`
-	// ID is an alphanumeric string identifying the resource link (required).
-	ID string `url:"-"`
+	// ResourceID is an alphanumeric string identifying the resource link (required).
+	ResourceID string `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -151,8 +151,8 @@ type UpdateResourceInput struct {
 
 // UpdateResource updates the specified resource.
 func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ResourceID == "" {
+		return nil, ErrMissingResourceID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -161,7 +161,7 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ID))
+	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -177,8 +177,8 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 
 // DeleteResourceInput is the input parameter to DeleteResource.
 type DeleteResourceInput struct {
-	// ID is an alphanumeric string identifying the resource link (required).
-	ID string `url:"-"`
+	// ResourceID is an alphanumeric string identifying the resource link (required).
+	ResourceID string `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -187,8 +187,8 @@ type DeleteResourceInput struct {
 
 // DeleteResource deletes the specified resource.
 func (c *Client) DeleteResource(i *DeleteResourceInput) error {
-	if i.ID == "" {
-		return ErrMissingID
+	if i.ResourceID == "" {
+		return ErrMissingResourceID
 	}
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
@@ -197,7 +197,7 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ID))
+	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

@@ -50,7 +50,7 @@ type Snippet struct {
 	CreatedAt      *time.Time   `mapstructure:"created_at"`
 	DeletedAt      *time.Time   `mapstructure:"deleted_at"`
 	Dynamic        *int         `mapstructure:"dynamic"`
-	ID             *string      `mapstructure:"id"`
+	SnippetID      *string      `mapstructure:"id"`
 	Name           *string      `mapstructure:"name"`
 	Priority       *int         `mapstructure:"priority"`
 	ServiceID      *string      `mapstructure:"service_id"`
@@ -149,8 +149,8 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 type DynamicSnippet struct {
 	Content   *string    `mapstructure:"content"`
 	CreatedAt *time.Time `mapstructure:"created_at"`
-	ID        *string    `mapstructure:"snippet_id"`
 	ServiceID *string    `mapstructure:"service_id"`
+	SnippetID *string    `mapstructure:"snippet_id"`
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
@@ -158,22 +158,22 @@ type DynamicSnippet struct {
 type UpdateDynamicSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
-	// ID is the ID of the Snippet to modify (required)
-	ID string `url:"-"`
+	// SnippetID is the SnippetID of the Snippet to modify (required)
+	SnippetID string `url:"-"`
 	// ServiceID is the ID of the Service to add the snippet to (required).
 	ServiceID string `url:"-"`
 }
 
 // UpdateDynamicSnippet updates the specified resource.
 func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSnippet, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.SnippetID == "" {
+		return nil, ErrMissingSnippetID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.ID)
+	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.SnippetID)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -301,8 +301,8 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 
 // GetDynamicSnippetInput is used as input to the GetDynamicSnippet function.
 type GetDynamicSnippetInput struct {
-	// ID is the ID of the Snippet to fetch (required).
-	ID string
+	// SnippetID is the SnippetID of the Snippet to fetch (required).
+	SnippetID string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
@@ -311,14 +311,14 @@ type GetDynamicSnippetInput struct {
 //
 // This will show the current content associated with a Dynamic Snippet.
 func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.SnippetID == "" {
+		return nil, ErrMissingSnippetID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.ID)
+	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.SnippetID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

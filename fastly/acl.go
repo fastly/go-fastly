@@ -10,7 +10,7 @@ import (
 type ACL struct {
 	CreatedAt      *time.Time `mapstructure:"created_at"`
 	DeletedAt      *time.Time `mapstructure:"deleted_at"`
-	ID             *string    `mapstructure:"id"`
+	ACLID          *string    `mapstructure:"id"`
 	Name           *string    `mapstructure:"name"`
 	ServiceID      *string    `mapstructure:"service_id"`
 	ServiceVersion *int       `mapstructure:"version"`

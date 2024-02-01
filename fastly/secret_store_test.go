@@ -29,15 +29,15 @@ func TestClient_CreateSecretStore(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("secret_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteSecretStore(&DeleteSecretStoreInput{
-				ID: ss.ID,
+				StoreID: ss.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting secret store %q: %v", ss.ID, err)
+			t.Fatalf("error deleting secret store %q: %v", ss.StoreID, err)
 		}
 	})
 
-	if got := ss.ID; len(got) == 0 {
+	if got := ss.StoreID; len(got) == 0 {
 		t.Errorf("ID: got %q, want not empty", got)
 	}
 	if got, want := ss.Name, t.Name(); got != want {
@@ -58,7 +58,7 @@ func TestClient_ListSecretStores(t *testing.T) {
 		stores = append(stores, ss)
 	}
 	sort.Slice(stores, func(i, j int) bool {
-		return stores[i].ID < stores[j].ID
+		return stores[i].StoreID < stores[j].StoreID
 	})
 
 	var list *SecretStores
@@ -73,10 +73,10 @@ func TestClient_ListSecretStores(t *testing.T) {
 		t.Fatalf("Data: got length %d, want %d", got, want)
 	}
 	sort.Slice(list.Data, func(i, j int) bool {
-		return list.Data[i].ID < list.Data[j].ID
+		return list.Data[i].StoreID < list.Data[j].StoreID
 	})
 	for i, ss := range list.Data {
-		if got, want := ss.ID, stores[i].ID; got != want {
+		if got, want := ss.StoreID, stores[i].StoreID; got != want {
 			t.Errorf("Data[%d].ID: got %q, %q", i, got, want)
 		}
 		if got, want := ss.Name, stores[i].Name; got != want {
@@ -104,7 +104,7 @@ func TestClient_ListSecretStores(t *testing.T) {
 		t.Fatalf("Data: got length %d, want %d", got, want)
 	}
 
-	if got, want := list.Data[0].ID, stores[0].ID; got != want {
+	if got, want := list.Data[0].StoreID, stores[0].StoreID; got != want {
 		t.Errorf("Data[0].ID: got %q, want %q", got, want)
 	}
 }
@@ -120,14 +120,14 @@ func TestClient_GetSecretStore(t *testing.T) {
 	)
 	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		store, err = c.GetSecretStore(&GetSecretStoreInput{
-			ID: ss.ID,
+			StoreID: ss.StoreID,
 		})
 	})
 	if err != nil {
 		t.Fatalf("error getting secret store: %v", err)
 	}
 
-	if got, want := store.ID, ss.ID; got != want {
+	if got, want := store.StoreID, ss.StoreID; got != want {
 		t.Errorf("ID: got %q, want %q", got, want)
 	}
 	if got, want := store.Name, ss.Name; got != want {
@@ -153,7 +153,7 @@ func TestClient_DeleteSecretStore(t *testing.T) {
 
 	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		err = c.DeleteSecretStore(&DeleteSecretStoreInput{
-			ID: ss.ID,
+			StoreID: ss.StoreID,
 		})
 	})
 	if err != nil {
@@ -172,9 +172,9 @@ func TestClient_CreateSecret(t *testing.T) {
 	)
 	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		s, err = c.CreateSecret(&CreateSecretInput{
-			ID:     ss.ID,
-			Name:   t.Name(),
-			Secret: []byte("secretum servare"),
+			StoreID: ss.StoreID,
+			Name:    t.Name(),
+			Secret:  []byte("secretum servare"),
 		})
 	})
 	if err != nil {
@@ -200,10 +200,10 @@ func TestClient_CreateOrRecreateSecret(t *testing.T) {
 	)
 	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		s, err = c.CreateSecret(&CreateSecretInput{
-			ID:     ss.ID,
-			Name:   t.Name(),
-			Secret: []byte("secretum servare"),
-			Method: http.MethodPut,
+			StoreID: ss.StoreID,
+			Name:    t.Name(),
+			Secret:  []byte("secretum servare"),
+			Method:  http.MethodPut,
 		})
 	})
 	if err != nil {
@@ -234,19 +234,19 @@ func TestClient_RecreateSecret(t *testing.T) {
 		// There must be an existing secret already, otherwise
 		// the following PATCH request will fail.
 		s, err = c.CreateSecret(&CreateSecretInput{
-			ID:     ss.ID,
-			Name:   t.Name(),
-			Secret: []byte("secretum servare"),
+			StoreID: ss.StoreID,
+			Name:    t.Name(),
+			Secret:  []byte("secretum servare"),
 		})
 		if err != nil {
 			return
 		}
 
 		s, err = c.CreateSecret(&CreateSecretInput{
-			ID:     ss.ID,
-			Name:   t.Name(),
-			Secret: []byte("secretum servare"),
-			Method: http.MethodPatch,
+			StoreID: ss.StoreID,
+			Name:    t.Name(),
+			Secret:  []byte("secretum servare"),
+			Method:  http.MethodPatch,
 		})
 	})
 	if err != nil {
@@ -319,7 +319,7 @@ func TestClient_CreateSecret_clientEncryption(t *testing.T) {
 
 	record(t, fmt.Sprintf("secret_store/%s/create_secret", t.Name()), func(c *Client) {
 		s, err = c.CreateSecret(&CreateSecretInput{
-			ID:        ss.ID,
+			StoreID:   ss.StoreID,
 			Name:      t.Name(),
 			ClientKey: ck.PublicKey,
 			Secret:    enc,
@@ -350,9 +350,9 @@ func TestClient_ListSecrets(t *testing.T) {
 	for i := 0; i < 5; i++ {
 		record(t, fmt.Sprintf("secret_store/%s/create_secret_%02d", t.Name(), i), func(c *Client) {
 			s, err = c.CreateSecret(&CreateSecretInput{
-				ID:     ss.ID,
-				Name:   fmt.Sprintf("%s-%02d", t.Name(), i),
-				Secret: []byte("secretum servare"),
+				StoreID: ss.StoreID,
+				Name:    fmt.Sprintf("%s-%02d", t.Name(), i),
+				Secret:  []byte("secretum servare"),
 			})
 		})
 		if err != nil {
@@ -364,7 +364,7 @@ func TestClient_ListSecrets(t *testing.T) {
 	var list *Secrets
 	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		list, err = c.ListSecrets(&ListSecretsInput{
-			ID: ss.ID,
+			StoreID: ss.StoreID,
 		})
 	})
 	if err != nil {
@@ -406,9 +406,9 @@ func TestClient_GetSecret(t *testing.T) {
 	)
 	record(t, fmt.Sprintf("secret_store/%s/create_secret", t.Name()), func(c *Client) {
 		s, err = c.CreateSecret(&CreateSecretInput{
-			ID:     ss.ID,
-			Name:   t.Name(),
-			Secret: []byte("secretum servare"),
+			StoreID: ss.StoreID,
+			Name:    t.Name(),
+			Secret:  []byte("secretum servare"),
 		})
 	})
 	if err != nil {
@@ -418,8 +418,8 @@ func TestClient_GetSecret(t *testing.T) {
 	var secret *Secret
 	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		secret, err = c.GetSecret(&GetSecretInput{
-			ID:   ss.ID,
-			Name: s.Name,
+			StoreID: ss.StoreID,
+			Name:    s.Name,
 		})
 	})
 	if err != nil {
@@ -445,9 +445,9 @@ func TestClient_DeleteSecret(t *testing.T) {
 	)
 	record(t, fmt.Sprintf("secret_store/%s/create_secret", t.Name()), func(c *Client) {
 		s, err = c.CreateSecret(&CreateSecretInput{
-			ID:     ss.ID,
-			Name:   t.Name(),
-			Secret: []byte("secretum servare"),
+			StoreID: ss.StoreID,
+			Name:    t.Name(),
+			Secret:  []byte("secretum servare"),
 		})
 	})
 	if err != nil {
@@ -456,8 +456,8 @@ func TestClient_DeleteSecret(t *testing.T) {
 
 	record(t, fmt.Sprintf("secret_store/%s", t.Name()), func(c *Client) {
 		err = c.DeleteSecret(&DeleteSecretInput{
-			ID:   ss.ID,
-			Name: s.Name,
+			StoreID: ss.StoreID,
+			Name:    s.Name,
 		})
 	})
 	if err != nil {
@@ -478,76 +478,76 @@ func TestClient_SecretStore_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetSecretStore(&GetSecretStoreInput{
-		ID: "",
+		StoreID: "",
 	})
-	if want := ErrMissingID; err != want {
+	if want := ErrMissingStoreID; err != want {
 		t.Errorf("GetSecretStore: got error %v, want %v", err, want)
 	}
 
 	err = testClient.DeleteSecretStore(&DeleteSecretStoreInput{
-		ID: "",
+		StoreID: "",
 	})
-	if want := ErrMissingID; err != want {
+	if want := ErrMissingStoreID; err != want {
 		t.Errorf("DeleteSecretStore: got error %v, want %v", err, want)
 	}
 
 	_, err = testClient.CreateSecret(&CreateSecretInput{
-		ID:     "",
-		Name:   "name",
-		Secret: []byte("secret"),
+		StoreID: "",
+		Name:    "name",
+		Secret:  []byte("secret"),
 	})
-	if want := ErrMissingID; err != want {
+	if want := ErrMissingStoreID; err != want {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
 	_, err = testClient.CreateSecret(&CreateSecretInput{
-		ID:     "123",
-		Name:   "",
-		Secret: []byte("secret"),
+		StoreID: "123",
+		Name:    "",
+		Secret:  []byte("secret"),
 	})
 	if want := ErrMissingName; err != want {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
 	_, err = testClient.CreateSecret(&CreateSecretInput{
-		ID:     "123",
-		Name:   "name",
-		Secret: []byte(nil),
+		StoreID: "123",
+		Name:    "name",
+		Secret:  []byte(nil),
 	})
 	if want := ErrMissingSecret; err != want {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
 
 	_, err = testClient.ListSecrets(&ListSecretsInput{
-		ID: "",
+		StoreID: "",
 	})
-	if want := ErrMissingID; err != want {
+	if want := ErrMissingStoreID; err != want {
 		t.Errorf("ListSecrets: got error %v, want %v", err, want)
 	}
 
 	_, err = testClient.GetSecret(&GetSecretInput{
-		ID:   "",
-		Name: "name",
+		StoreID: "",
+		Name:    "name",
 	})
-	if want := ErrMissingID; err != want {
+	if want := ErrMissingStoreID; err != want {
 		t.Errorf("GetSecret: got error %v, want %v", err, want)
 	}
 	_, err = testClient.GetSecret(&GetSecretInput{
-		ID:   "id",
-		Name: "",
+		StoreID: "id",
+		Name:    "",
 	})
 	if want := ErrMissingName; err != want {
 		t.Errorf("GetSecret: got error %v, want %v", err, want)
 	}
 
 	err = testClient.DeleteSecret(&DeleteSecretInput{
-		ID:   "",
-		Name: "name",
+		StoreID: "",
+		Name:    "name",
 	})
-	if want := ErrMissingID; err != want {
+	if want := ErrMissingStoreID; err != want {
 		t.Errorf("DeleteSecret: got error %v, want %v", err, want)
 	}
 	err = testClient.DeleteSecret(&DeleteSecretInput{
-		ID:   "id",
-		Name: "",
+		StoreID: "id",
+		Name:    "",
 	})
 	if want := ErrMissingName; err != want {
 		t.Errorf("DeleteSecret: got error %v, want %v", err, want)
@@ -574,11 +574,11 @@ func createSecretStoreHelper(t *testing.T, i int) *SecretStore {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("secret_store/%s/delete_store_%02d", t.Name(), i), func(c *Client) {
 			err = c.DeleteSecretStore(&DeleteSecretStoreInput{
-				ID: ss.ID,
+				StoreID: ss.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting secret store %q: %v", ss.ID, err)
+			t.Fatalf("error deleting secret store %q: %v", ss.StoreID, err)
 		}
 	})
 

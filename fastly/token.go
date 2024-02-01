@@ -26,12 +26,12 @@ type Token struct {
 	AccessToken *string     `mapstructure:"access_token"`
 	CreatedAt   *time.Time  `mapstructure:"created_at"`
 	ExpiresAt   *time.Time  `mapstructure:"expires_at"`
-	ID          *string     `mapstructure:"id"`
 	IP          *string     `mapstructure:"ip"`
 	LastUsedAt  *time.Time  `mapstructure:"last_used_at"`
 	Name        *string     `mapstructure:"name"`
 	Scope       *TokenScope `mapstructure:"scope"`
 	Services    []string    `mapstructure:"services"`
+	TokenID     *string     `mapstructure:"id"`
 	UserID      *string     `mapstructure:"user_id"`
 }
 

@@ -137,8 +137,8 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 
 		deleteErr = c.BatchDeleteTokens(&BatchDeleteTokensInput{
 			Tokens: []*BatchToken{
-				{ID: *token1.ID},
-				{ID: *token2.ID},
+				{ID: *token1.TokenID},
+				{ID: *token2.TokenID},
 			},
 		})
 	})

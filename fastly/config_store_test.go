@@ -27,15 +27,15 @@ func TestClient_CreateConfigStore(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+			t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 		}
 	})
 
-	if got := cs.ID; len(got) == 0 {
+	if got := cs.StoreID; len(got) == 0 {
 		t.Errorf("ID: got %q, want not empty", got)
 	}
 	if got, want := cs.Name, t.Name(); got != want {
@@ -64,7 +64,7 @@ func TestClient_DeleteConfigStore(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 		err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-			ID: cs.ID,
+			StoreID: cs.StoreID,
 		})
 	})
 	if err != nil {
@@ -75,7 +75,7 @@ func TestClient_DeleteConfigStore(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/delete_store_404", t.Name()), func(c *Client) {
 		err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-			ID: cs.ID,
+			StoreID: cs.StoreID,
 		})
 	})
 
@@ -110,25 +110,25 @@ func TestClient_GetConfigStore(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+			t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 		}
 	})
 
 	var getResult *ConfigStore
 	record(t, fmt.Sprintf("config_store/%s/get_store", t.Name()), func(c *Client) {
 		getResult, err = c.GetConfigStore(&GetConfigStoreInput{
-			ID: cs.ID,
+			StoreID: cs.StoreID,
 		})
 	})
 	if err != nil {
 		t.Fatalf("GetConfigStore: error: %v", err)
 	}
 
-	if got, want := getResult.ID, cs.ID; got != want {
+	if got, want := getResult.StoreID, cs.StoreID; got != want {
 		t.Errorf("ID: got %q, want %q", got, want)
 	}
 	if got, want := getResult.Name, cs.Name; got != want {
@@ -139,7 +139,7 @@ func TestClient_GetConfigStore(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/get_store_404", t.Name()), func(c *Client) {
 		getResult, err = c.GetConfigStore(&GetConfigStoreInput{
-			ID: "DOES-NOT-EXIST",
+			StoreID: "DOES-NOT-EXIST",
 		})
 	})
 
@@ -174,18 +174,18 @@ func TestClient_GetConfigStoreMetadata(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+			t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 		}
 	})
 
 	var metadataResult *ConfigStoreMetadata
 	record(t, fmt.Sprintf("config_store/%s/get_store_metadata", t.Name()), func(c *Client) {
 		metadataResult, err = c.GetConfigStoreMetadata(&GetConfigStoreMetadataInput{
-			ID: cs.ID,
+			StoreID: cs.StoreID,
 		})
 	})
 	if err != nil {
@@ -200,7 +200,7 @@ func TestClient_GetConfigStoreMetadata(t *testing.T) {
 
 	record(t, fmt.Sprintf("config_store/%s/get_store_metadata_404", t.Name()), func(c *Client) {
 		metadataResult, err = c.GetConfigStoreMetadata(&GetConfigStoreMetadataInput{
-			ID: "DOES-NOT-EXIST",
+			StoreID: "DOES-NOT-EXIST",
 		})
 	})
 
@@ -254,10 +254,10 @@ func TestClient_ListConfigStores(t *testing.T) {
 		record(t, fmt.Sprintf("config_store/%s/delete_stores", t.Name()), func(c *Client) {
 			for _, cs := range stores {
 				err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-					ID: cs.ID,
+					StoreID: cs.StoreID,
 				})
 				if err != nil {
-					t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+					t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 				}
 			}
 		})
@@ -272,7 +272,7 @@ func TestClient_ListConfigStores(t *testing.T) {
 	}
 
 	for i, cs := range css {
-		if got, want := cs.ID, stores[i].ID; got != want {
+		if got, want := cs.StoreID, stores[i].StoreID; got != want {
 			t.Errorf("ListConfigStores: index %d: ID: got %q, want %q", i, got, want)
 		}
 	}
@@ -285,7 +285,7 @@ func TestClient_ListConfigStores(t *testing.T) {
 		t.Fatalf("ListConfigStores: got %d entries, want %d", got, want)
 	}
 
-	if got, want := css[0].ID, stores[0].ID; got != want {
+	if got, want := css[0].StoreID, stores[0].StoreID; got != want {
 		t.Errorf("ListConfigStores: index %d: ID: got %q, want %q", 0, got, want)
 	}
 }
@@ -308,18 +308,18 @@ func TestClient_ListConfigStoreServices(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+			t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 		}
 	})
 
 	var servicesResult []*Service
 	record(t, fmt.Sprintf("config_store/%s/list_services", t.Name()), func(c *Client) {
 		servicesResult, err = c.ListConfigStoreServices(&ListConfigStoreServicesInput{
-			ID: cs.ID,
+			StoreID: cs.StoreID,
 		})
 	})
 
@@ -348,11 +348,11 @@ func TestClient_UpdateConfigStore(t *testing.T) {
 	t.Cleanup(func() {
 		record(t, fmt.Sprintf("config_store/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
-				ID: cs.ID,
+				StoreID: cs.StoreID,
 			})
 		})
 		if err != nil {
-			t.Fatalf("error deleting config store %q: %v", cs.ID, err)
+			t.Fatalf("error deleting config store %q: %v", cs.StoreID, err)
 		}
 	})
 
@@ -360,15 +360,15 @@ func TestClient_UpdateConfigStore(t *testing.T) {
 	var updateResult *ConfigStore
 	record(t, fmt.Sprintf("config_store/%s/update_store", t.Name()), func(c *Client) {
 		updateResult, err = c.UpdateConfigStore(&UpdateConfigStoreInput{
-			ID:   cs.ID,
-			Name: updatedName,
+			StoreID: cs.StoreID,
+			Name:    updatedName,
 		})
 	})
 	if err != nil {
 		t.Fatalf("UpdateConfigStore: error: %v", err)
 	}
 
-	if got, want := updateResult.ID, cs.ID; got != want {
+	if got, want := updateResult.StoreID, cs.StoreID; got != want {
 		t.Errorf("ID: got %q, want %q", got, want)
 	}
 	if got, want := updateResult.Name, updatedName; got != want {

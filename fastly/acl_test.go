@@ -106,8 +106,8 @@ func TestClient_ACLs(t *testing.T) {
 		t.Errorf("Bad name after update %s", *ua.Name)
 	}
 
-	if *a.ID != *ua.ID {
-		t.Errorf("bad ACL id: %q (%q)", *a.ID, *ua.ID)
+	if *a.ACLID != *ua.ACLID {
+		t.Errorf("bad ACL id: %q (%q)", *a.ACLID, *ua.ACLID)
 	}
 
 	// Delete

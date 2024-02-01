@@ -16,16 +16,16 @@ type ERL struct {
 	DeletedAt          *time.Time     `mapstructure:"deleted_at"`
 	FeatureRevision    *int           `mapstructure:"feature_revision"` // 1..
 	HTTPMethods        []*string      `mapstructure:"http_methods"`
-	ID                 *string        `mapstructure:"id"`
 	LoggerType         *ERLLogger     `mapstructure:"logger_type"`
 	Name               *string        `mapstructure:"name"`
 	PenaltyBoxDuration *int           `mapstructure:"penalty_box_duration"` // 1..60
-	Response           *ERLResponse   `mapstructure:"response"`             // required if Action != Log
+	RateLimiterID      *string        `mapstructure:"id"`
+	Response           *ERLResponse   `mapstructure:"response"` // required if Action != Log
 	ResponseObjectName *string        `mapstructure:"response_object_name"`
 	RpsLimit           *int           `mapstructure:"rps_limit"` // 10..10000
 	ServiceID          *string        `mapstructure:"service_id"`
-	UpdatedAt          *time.Time     `mapstructure:"updated_at"`
 	URIDictionaryName  *string        `mapstructure:"uri_dictionary_name"`
+	UpdatedAt          *time.Time     `mapstructure:"updated_at"`
 	Version            *int           `mapstructure:"version"` // 1..
 	WindowSize         *ERLWindowSize `mapstructure:"window_size"`
 }

@@ -12,7 +12,7 @@ type Service struct {
 	CreatedAt     *time.Time `mapstructure:"created_at"`
 	CustomerID    *string    `mapstructure:"customer_id"`
 	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ID            *string    `mapstructure:"id"`
+	ServiceID     *string    `mapstructure:"id"`
 	Name          *string    `mapstructure:"name"`
 	Type          *string    `mapstructure:"type"`
 	UpdatedAt     *time.Time `mapstructure:"updated_at"`
@@ -26,7 +26,7 @@ type ServiceDetail struct {
 	CreatedAt     *time.Time `mapstructure:"created_at"`
 	CustomerID    *string    `mapstructure:"customer_id"`
 	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ID            *string    `mapstructure:"id"`
+	ServiceID     *string    `mapstructure:"id"`
 	Name          *string    `mapstructure:"name"`
 	Type          *string    `mapstructure:"type"`
 	UpdatedAt     *time.Time `mapstructure:"updated_at"`
@@ -131,19 +131,19 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 
 // GetServiceInput is used as input to the GetService function.
 type GetServiceInput struct {
-	// ID is an alphanumeric string identifying the service (required).
-	ID string
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string
 }
 
 // GetService retrieves the specified resource.
 //
 // If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s", i.ID)
+	path := fmt.Sprintf("/service/%s", i.ServiceID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -174,11 +174,11 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 //
 // If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
-	if i.ID == "" {
-		return nil, ErrMissingID
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/details", i.ID)
+	path := fmt.Sprintf("/service/%s/details", i.ServiceID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -225,17 +225,17 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 // DeleteServiceInput is used as input to the DeleteService function.
 type DeleteServiceInput struct {
-	// ID is an alphanumeric string identifying the service (required).
-	ID string
+	// ServiceID is an alphanumeric string identifying the service (required).
+	ServiceID string
 }
 
 // DeleteService deletes the specified resource.
 func (c *Client) DeleteService(i *DeleteServiceInput) error {
-	if i.ID == "" {
-		return ErrMissingID
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s", i.ID)
+	path := fmt.Sprintf("/service/%s", i.ServiceID)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
