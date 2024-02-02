@@ -43,7 +43,6 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	var ad *AlertDefinition
 	record(t, "alerts/create_alert_definition", func(c *Client) {
 		ad, err = c.CreateAlertDefinition(cadi)
-
 	})
 	if err != nil {
 		t.Fatal(err)

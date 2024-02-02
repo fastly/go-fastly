@@ -119,7 +119,7 @@ func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 	f(client)
 }
 
-func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
+func createTestService(t *testing.T, serviceFixture, serviceNameSuffix string) *Service {
 	var err error
 	var service *Service
 
@@ -137,7 +137,7 @@ func createTestService(t *testing.T, serviceFixture string, serviceNameSuffix st
 	return service
 }
 
-func createTestServiceWasm(t *testing.T, serviceFixture string, serviceNameSuffix string) *Service {
+func createTestServiceWasm(t *testing.T, serviceFixture, serviceNameSuffix string) *Service {
 	var err error
 	var service *Service
 
@@ -169,7 +169,7 @@ func testVersion(t *testing.T, c *Client) *Version {
 	return v
 }
 
-func createTestVersion(t *testing.T, versionFixture string, serviceID string) *Version {
+func createTestVersion(t *testing.T, versionFixture, serviceID string) *Version {
 	var err error
 	var version *Version
 
@@ -188,7 +188,7 @@ func createTestVersion(t *testing.T, versionFixture string, serviceID string) *V
 	return version
 }
 
-func createTestDictionary(t *testing.T, dictionaryFixture string, serviceID string, version int, dictionaryNameSuffix string) *Dictionary {
+func createTestDictionary(t *testing.T, dictionaryFixture, serviceID string, version int, dictionaryNameSuffix string) *Dictionary {
 	var err error
 	var dictionary *Dictionary
 
@@ -220,7 +220,7 @@ func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture st
 	}
 }
 
-func createTestACL(t *testing.T, createFixture string, serviceID string, version int, aclNameSuffix string) *ACL {
+func createTestACL(t *testing.T, createFixture, serviceID string, version int, aclNameSuffix string) *ACL {
 	var err error
 	var acl *ACL
 
@@ -252,7 +252,7 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 	}
 }
 
-func createTestPool(t *testing.T, createFixture string, serviceID string, version int, poolNameSuffix string) *Pool {
+func createTestPool(t *testing.T, createFixture, serviceID string, version int, poolNameSuffix string) *Pool {
 	var err error
 	var pool *Pool
 
