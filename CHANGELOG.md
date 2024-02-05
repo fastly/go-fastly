@@ -1,5 +1,45 @@
 # Changelog
 
+## [v9.0.0](https://github.com/fastly/go-fastly/releases/tag/v9.0.0) (2024-02-05)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.4...v9.0.0)
+
+**Breaking**:
+
+To summarize the key items in the v9 release:
+
+- The paginators for Services, ACL Entries and Dictionary Items have been replaced with a generic paginator.
+- The KV Stores Entries paginator was NOT replaced as it has a incompatible implementation.
+- The `List*` methods no longer sort results, and will now return _all_ results.
+- All endpoints (except those using JSONAPI) use pointers consistently for Create/Update methods.
+
+The complete list of breaking changes are:
+
+- fix(token): add ListTokensInput to ListTokens [#487](https://github.com/fastly/go-fastly/pull/487)
+- feat(config store): adds `ListConfigStoresInput` when returning `ListConfigStores` [#481](https://github.com/fastly/go-fastly/pull/481)
+- Use integer instead of string [#486](https://github.com/fastly/go-fastly/pull/486)
+- fix(request_settings): make action a pointer in update [#488](https://github.com/fastly/go-fastly/pull/488)
+- feat: generic paginator [#491](https://github.com/fastly/go-fastly/pull/491)
+- fix: all relevant fields to be pointers [#493](https://github.com/fastly/go-fastly/pull/493)
+
+**Enhancements:**
+
+- feat: domain inspector [#483](https://github.com/fastly/go-fastly/pull/483)
+- Move CBool helper with the other helpers [#484](https://github.com/fastly/go-fastly/pull/484)
+- Support retrieving a secret store by name [#485](https://github.com/fastly/go-fastly/pull/486)
+- replace: pointer helpers to generic ToPointer function [#489](https://github.com/fastly/go-fastly/pull/489)
+- refactor(helpers): avoid explicit types in favour of tilda type constraint [#490](https://github.com/fastly/go-fastly/pull/490)
+- refactor(secret_store): replace json.NewEncoder with c.PostJSON [#492](https://github.com/fastly/go-fastly/pull/492)
+- refactor: rename files [#494](https://github.com/fastly/go-fastly/pull/494)
+- refactor: resolves linter issues [#495](https://github.com/fastly/go-fastly/pull/495)
+- refactor: use consistent naming conventions [#496](https://github.com/fastly/go-fastly/pull/496)
+- feat: fastly alerts [#499](https://github.com/fastly/go-fastly/pull/499)
+- refactor: use explicit naming for IDs [#497](https://github.com/fastly/go-fastly/pull/497)
+
+**Dependencies:**
+
+- build(deps): bump golang.org/x/crypto from 0.1.0 to 0.17.0 [#498](https://github.com/fastly/go-fastly/pull/498)
+
 ## [v8.6.4](https://github.com/fastly/go-fastly/releases/tag/v8.6.4) (2023-10-31)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.3...v8.6.4)

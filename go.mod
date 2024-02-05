@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v8
+module github.com/fastly/go-fastly/v9
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0
@@ -20,8 +20,5 @@ require (
 	golang.org/x/sys v0.15.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
-
-// Security: FASTLY_DEBUG_MODE wasn't redacting Fastly-Key.
-retract v8.5.3
 
 go 1.19
