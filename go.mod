@@ -1,4 +1,4 @@
-module github.com/fastly/go-fastly/v8
+module github.com/fastly/go-fastly/v9
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0

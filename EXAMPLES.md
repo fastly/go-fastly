@@ -3,9 +3,9 @@
 Fastly's API is designed to work in the following manner:
 
 1. Create (or clone) a new configuration version for the service
-2. Make any changes to the version
-3. Validate the version
-4. Activate the version
+1. Make any changes to the version
+1. Validate the version
+1. Activate the version
 
 This flow using the Golang client looks like this:
 
@@ -16,7 +16,7 @@ import (
 	"fmt"
 	"log"
  	"os"
-	"github.com/fastly/go-fastly/v8/fastly"
+	"github.com/fastly/go-fastly/v9/fastly"
 )
 
 func main() {
@@ -35,7 +35,7 @@ func main() {
 	// We'll get the latest 'active' version by inspecting the service metadata and
 	// then finding which available version is the 'active' version.
 	service, err := client.GetService(&fastly.GetServiceInput{
-		ID: serviceID,
+		ServiceID: serviceID,
 	})
 	if err != nil {
 		log.Fatal(err)
