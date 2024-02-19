@@ -85,6 +85,31 @@ func TestClient_GetStatsJSON(t *testing.T) {
 	}
 }
 
+func TestClient_GetAggregateJSON(t *testing.T) {
+	t.Parallel()
+
+	var ret struct {
+		Status string `json:"status"`
+	}
+
+	var err error
+	record(t, "stats/aggregate", func(c *Client) {
+		err = c.GetAggregateJSON(&GetAggregateInput{
+			From:   ToPointer("10 days ago"),
+			To:     ToPointer("now"),
+			By:     ToPointer("minute"),
+			Region: ToPointer("usa"),
+		}, &ret)
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if ret.Status != "success" {
+		t.Fatalf("got RenameStatus=%q, want %q", ret.Status, "success")
+	}
+}
+
 func TestClient_GetRegions(t *testing.T) {
 	t.Parallel()
 
