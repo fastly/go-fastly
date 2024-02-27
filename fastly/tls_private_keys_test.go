@@ -130,7 +130,7 @@ func buildCertificate(privateKey *rsa.PrivateKey, domains ...string) (string, er
 	return c, nil
 }
 
-func formatCertificate(certificate *x509.Certificate, parent *x509.Certificate, publicKey *rsa.PublicKey, privateKey *rsa.PrivateKey) (string, error) {
+func formatCertificate(certificate, parent *x509.Certificate, publicKey *rsa.PublicKey, privateKey *rsa.PrivateKey) (string, error) {
 	derBytes, err := x509.CreateCertificate(
 		rand.Reader,
 		certificate,

@@ -317,7 +317,7 @@ func TestClient_WAF_Rule_Exclusion_delete_validation(t *testing.T) {
 	}
 }
 
-func assertWAFRuleExclusionEquals(t *testing.T, actual *WAFRuleExclusion, expected *WAFRuleExclusion) {
+func assertWAFRuleExclusionEquals(t *testing.T, actual, expected *WAFRuleExclusion) {
 	if *actual.ExclusionType != *expected.ExclusionType {
 		t.Errorf("expected ExclusionType to be %s got %s", *expected.ExclusionType, *actual.ExclusionType)
 	}

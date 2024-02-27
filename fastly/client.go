@@ -118,7 +118,7 @@ func NewClient(key string) (*Client, error) {
 // endpoint. Because Fastly allows some requests without an API key, this
 // function will not error if the API token is not supplied. Attempts to make a
 // request that requires an API key will return a 403 response.
-func NewClientForEndpoint(key string, endpoint string) (*Client, error) {
+func NewClientForEndpoint(key, endpoint string) (*Client, error) {
 	client := &Client{apiKey: key, Address: endpoint}
 
 	if endpoint, ok := os.LookupEnv(DebugEnvVar); ok && endpoint == "true" {
@@ -261,12 +261,12 @@ func (c *Client) PutForm(p string, i any, ro *RequestOptions) (*http.Response, e
 }
 
 // PutFormFile issues an HTTP PUT request (multipart/form-encoded) to put a file to an endpoint.
-func (c *Client) PutFormFile(urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
+func (c *Client) PutFormFile(urlPath, filePath, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	return c.RequestFormFile("PUT", urlPath, filePath, fieldName, ro)
 }
 
 // PutFormFileFromReader issues an HTTP PUT request (multipart/form-encoded) to put a file to an endpoint.
-func (c *Client) PutFormFileFromReader(urlPath string, fileName string, fileBytes io.Reader, fieldName string, ro *RequestOptions) (*http.Response, error) {
+func (c *Client) PutFormFileFromReader(urlPath, fileName string, fileBytes io.Reader, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	return c.RequestFormFileFromReader("PUT", urlPath, fileName, fileBytes, fieldName, ro)
 }
 
@@ -492,7 +492,7 @@ func (c *Client) RequestForm(verb, p string, i any, ro *RequestOptions) (*http.R
 }
 
 // RequestFormFile makes an HTTP request to upload a file to an endpoint.
-func (c *Client) RequestFormFile(verb, urlPath string, filePath string, fieldName string, ro *RequestOptions) (*http.Response, error) {
+func (c *Client) RequestFormFile(verb, urlPath, filePath, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	file, err := os.Open(filepath.Clean(filePath))
 	if err != nil {
 		return nil, fmt.Errorf("error reading file: %v", err)
@@ -503,7 +503,7 @@ func (c *Client) RequestFormFile(verb, urlPath string, filePath string, fieldNam
 }
 
 // RequestFormFileFromReader makes an HTTP request to upload a raw reader to an endpoint.
-func (c *Client) RequestFormFileFromReader(verb, urlPath string, fileName string, fileBytes io.Reader, fieldName string, ro *RequestOptions) (*http.Response, error) {
+func (c *Client) RequestFormFileFromReader(verb, urlPath, fileName string, fileBytes io.Reader, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
 	part, err := writer.CreateFormFile(fieldName, fileName)
