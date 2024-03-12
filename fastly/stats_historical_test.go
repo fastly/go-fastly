@@ -95,7 +95,7 @@ func TestClient_GetAggregateJSON(t *testing.T) {
 	var err error
 	record(t, "stats/aggregate", func(c *Client) {
 		err = c.GetAggregateJSON(&GetAggregateInput{
-			From:   ToPointer("10 days ago"),
+			From:   ToPointer("15 minutes ago"),
 			To:     ToPointer("now"),
 			By:     ToPointer("minute"),
 			Region: ToPointer("usa"),
