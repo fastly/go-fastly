@@ -290,7 +290,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 	return sr, nil
 }
 
-// GetAggregateInput is used as an input to the GetAggregateInput function
+// GetAggregateInput is used as an input to the GetAggregateJSON function
 // Value for the input are described at https://developer.fastly.com/reference/api/metrics-stats/
 type GetAggregateInput struct {
 	// By is the duration of sample windows.
