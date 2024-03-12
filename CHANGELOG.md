@@ -1,5 +1,21 @@
 # Changelog
 
+## [v9.0.1](https://github.com/fastly/go-fastly/releases/tag/v9.0.1) (2024-03-12)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.0.0...v9.0.1)
+
+**Bug fixes:**
+
+- fix(config_store): decoding [#503](https://github.com/fastly/go-fastly/pull/503)
+
+**Enhancements:**
+
+- style: resolve gofumpt issues [#500](https://github.com/fastly/go-fastly/pull/500)
+
+**Dependencies:**
+
+- build: bump minimum go version [#504](https://github.com/fastly/go-fastly/pull/504)
+
 ## [v9.0.0](https://github.com/fastly/go-fastly/releases/tag/v9.0.0) (2024-02-05)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v8.6.4...v9.0.0)
