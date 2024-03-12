@@ -213,7 +213,7 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 	defer resp.Body.Close()
 
 	var ss []*Service
-	if err = json.NewDecoder(resp.Body).Decode(&ss); err != nil {
+	if err = decodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
 
