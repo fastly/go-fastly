@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.0.0 (+github.com/fastly/go-fastly; go1.22.1)
+    url: https://api.fastly.com/stats/aggregate?by=minute&from=15+minutes+ago&region=usa&to=now
+    method: GET
+  response:
+    body: |
+      {"data":[{"attack_blocked_req_body_bytes":0,"attack_blocked_req_header_bytes":0,"attack_logged_req_body_bytes":0,"attack_logged_req_header_bytes":0,"attack_passed_req_body_bytes":0,"attack_passed_req_header_bytes":0,"attack_req_body_bytes":0,"attack_req_header_bytes":0,"attack_resp_synth_bytes":0,"bandwidth":83749,"bereq_body_bytes":0,"bereq_header_bytes":406,"blacklist":0,"body_size":3042,"compute_execution_time_ms":0,"compute_ram_used":0,"compute_request_time_ms":0,"compute_requests":0,"deliver_sub_count":234,"deliver_sub_time":0.003453427,"edge_hit_requests":233,"edge_hit_resp_body_bytes":3029,"edge_hit_resp_header_bytes":79956,"edge_miss_requests":1,"edge_miss_resp_body_bytes":13,"edge_miss_resp_header_bytes":345,"edge_requests":234,"edge_resp_body_bytes":3042,"edge_resp_header_bytes":80301,"error_sub_count":0,"error_sub_time":0,"errors":0,"fetch_sub_count":0,"fetch_sub_time":0,"hash_sub_count":234,"hash_sub_time":0.000609642,"header_size":80301,"hit_ratio":0.9957264957264957,"hit_resp_body_bytes":3029,"hit_sub_count":229,"hit_sub_time":0.000734845,"hits":233,"hits_time":0.021048,"http2":0,"imgopto":0,"imgopto_resp_body_bytes":0,"imgopto_resp_header_bytes":0,"imgopto_shield_resp_body_bytes":0,"imgopto_shield_resp_header_bytes":0,"ipv6":0,"log":0,"log_bytes":0,"miss":1,"miss_resp_body_bytes":13,"miss_sub_count":5,"miss_sub_time":0.000003649,"miss_time":0.12293,"object_size_100k":0,"object_size_100m":0,"object_size_10k":0,"object_size_10m":0,"object_size_1g":0,"object_size_1k":234,"object_size_1m":0,"orig_req_body_size":0,"orig_req_header_size":406,"orig_resp_body_size":0,"orig_resp_header_size":25974,"origin_cache_fetch_resp_body_bytes":13,"origin_cache_fetch_resp_header_bytes":167,"origin_cache_fetches":1,"origin_fetch_body_bytes":0,"origin_fetch_header_bytes":406,"origin_fetch_resp_body_bytes":13,"origin_fetch_resp_header_bytes":167,"origin_fetches":1,"origin_revalidations":0,"otfp":0,"otfp_deliver_time":0,"otfp_manifests":0,"otfp_resp_body_bytes":0,"otfp_resp_header_bytes":0,"otfp_shield_resp_body_bytes":0,"otfp_shield_resp_header_bytes":0,"otfp_shield_time":0,"pass":0,"pass_resp_body_bytes":0,"pass_sub_count":0,"pass_sub_time":0,"pass_time":0,"pci":0,"pipe":0,"pipe_sub_count":0,"pipe_sub_time":0,"predeliver_sub_count":234,"predeliver_sub_time":0.000082964,"prehash_sub_count":234,"prehash_sub_time":0.000554911,"recv_sub_count":468,"recv_sub_time":0.010804019,"req_body_bytes":0,"req_header_bytes":25974,"requests":234,"resp_body_bytes":3042,"resp_header_bytes":80301,"restarts":0,"segblock_origin_fetches":0,"segblock_shield_fetches":0,"shield":0,"shield_fetch_body_bytes":0,"shield_fetch_header_bytes":0,"shield_fetch_resp_body_bytes":0,"shield_fetch_resp_header_bytes":0,"shield_fetches":0,"shield_resp_body_bytes":0,"shield_resp_header_bytes":0,"shield_revalidations":0,"start_time":1710258360,"status_1xx":0,"status_200":234,"status_204":0,"status_206":0,"status_2xx":234,"status_301":0,"status_302":0,"status_304":0,"status_3xx":0,"status_400":0,"status_401":0,"status_403":0,"status_404":0,"status_416":0,"status_429":0,"status_4xx":0,"status_500":0,"status_501":0,"status_502":0,"status_503":0,"status_504":0,"status_505":0,"status_5xx":0,"synth":0,"tls":0,"tls_handshake_sent_bytes":0,"tls_v10":0,"tls_v11":0,"tls_v12":0,"tls_v13":0,"uncacheable":0,"video":0,"waf_blocked":0,"waf_logged":0,"waf_passed":0}],"meta":{"to":"2024-03-12 15:54:42 UTC","from":"2024-03-12 15:39:42 UTC","by":"minute","region":"usa"},"status":"success","msg":null}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "0"
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 12 Mar 2024 15:54:42 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-yul1970031-YUL
+      X-Timer:
+      - S1710258883.783273,VS0,VE113
+    status: 200 OK
+    code: 200
+    duration: ""

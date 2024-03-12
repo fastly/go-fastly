@@ -290,6 +290,49 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 	return sr, nil
 }
 
+// GetAggregateInput is used as an input to the GetAggregateJSON function
+// Value for the input are described at https://developer.fastly.com/reference/api/metrics-stats/
+type GetAggregateInput struct {
+	// By is the duration of sample windows.
+	By *string
+	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
+	From *string
+	// Region limits query to a specific geographic region.
+	Region *string
+	// To is the timestamp that defines the end of the window for which to fetch statistics.
+	To *string
+}
+
+// GetAggregateJSON returns all aggregated stats and decodes the response directly to the JSON struct dst
+func (c *Client) GetAggregateJSON(i *GetAggregateInput, dst any) error {
+	ro := &RequestOptions{
+		Params: map[string]string{},
+	}
+	if i.By != nil {
+		ro.Params["by"] = *i.By
+	}
+	if i.From != nil {
+		ro.Params["from"] = *i.From
+	}
+	if i.Region != nil {
+		ro.Params["region"] = *i.Region
+	}
+	if i.To != nil {
+		ro.Params["to"] = *i.To
+	}
+
+	resp, err := c.Get("/stats/aggregate", ro)
+	if err != nil {
+		return err
+	}
+
+	if err = decodeBodyMap(resp.Body, &dst); err != nil {
+		return err
+	}
+
+	return nil
+}
+
 // RegionsResponse is a response from Fastly regions API endpoint.
 type RegionsResponse struct {
 	Data    []string          `mapstructure:"data"`
