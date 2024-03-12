@@ -106,7 +106,7 @@ func TestClient_GetAggregateJSON(t *testing.T) {
 	}
 
 	if ret.Status != "success" {
-		t.Fatalf("got RenameStatus=%q, want %q", ret.Status, "success")
+		t.Fatalf("got status=%q, want %q", ret.Status, "success")
 	}
 }
 
