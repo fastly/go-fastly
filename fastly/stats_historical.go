@@ -326,7 +326,11 @@ func (c *Client) GetAggregateJSON(i *GetAggregateInput, dst any) error {
 		return err
 	}
 
-	return json.NewDecoder(resp.Body).Decode(dst)
+	if err = decodeBodyMap(resp.Body, &dst); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 // RegionsResponse is a response from Fastly regions API endpoint.
