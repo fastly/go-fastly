@@ -1,5 +1,14 @@
 # Changelog
 
+## [v9.1.0](https://github.com/fastly/go-fastly/releases/tag/v9.1.0) (2024-03-13)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.0.0...v9.0.1)
+
+**Enhancements:**
+
+- feat(kv-store-entry): allow parallelization of batch put item [#502](https://github.com/fastly/go-fastly/pull/502)
+- feat(historical-stats): add aggregate endpoint [#506](https://github.com/fastly/go-fastly/pull/506)
+
 ## [v9.0.1](https://github.com/fastly/go-fastly/releases/tag/v9.0.1) (2024-03-12)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.0.0...v9.0.1)
