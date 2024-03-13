@@ -511,6 +511,7 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 		Headers: map[string]string{
 			"Content-Type": "application/x-ndjson",
 		},
+		Parallel: true,
 	})
 	if err != nil {
 		return err
