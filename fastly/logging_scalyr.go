@@ -14,6 +14,7 @@ type Scalyr struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProjectID         *string    `mapstructure:"project_id"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -63,6 +64,8 @@ type CreateScalyrInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProjectID hold the name of the logfile field sent to Scalyr.
+	ProjectID *string `url:"project_id,omitempty"`
 	// Region is the region that log data will be sent to.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -146,6 +149,8 @@ type UpdateScalyrInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProjectID hold the name of the logfile field sent to Scalyr.
+	ProjectID *string `url:"project_id,omitempty"`
 	// Region is the region that log data will be sent to.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
