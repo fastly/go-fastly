@@ -23,6 +23,7 @@ func TestClient_Scalyrs(t *testing.T) {
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
 			Placement:      ToPointer("waf_debug"),
+			ProjectID:      ToPointer("logplex"),
 			Region:         ToPointer("US"),
 			Token:          ToPointer("super-secure-token"),
 		})
@@ -59,6 +60,9 @@ func TestClient_Scalyrs(t *testing.T) {
 	}
 	if *s.Placement != "waf_debug" {
 		t.Errorf("bad placement: %q", *s.Placement)
+	}
+	if *s.ProjectID != "logplex" {
+		t.Errorf("bad project_id: %q", *s.Placement)
 	}
 	if *s.Region != "US" {
 		t.Errorf("bad region: %q", *s.Region)
@@ -106,6 +110,9 @@ func TestClient_Scalyrs(t *testing.T) {
 	if *s.Placement != *ns.Placement {
 		t.Errorf("bad placement: %q", *s.Placement)
 	}
+	if *s.ProjectID != *ns.ProjectID {
+		t.Errorf("bad project_id: %q", *s.ProjectID)
+	}
 	if *s.Region != "US" {
 		t.Errorf("bad region: %q", *s.Region)
 	}
@@ -121,6 +128,7 @@ func TestClient_Scalyrs(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
 			NewName:        ToPointer("new-test-scalyr"),
+			ProjectID:      ToPointer("app-name"),
 			Region:         ToPointer("EU"),
 			Token:          ToPointer("new-token"),
 		})
@@ -130,6 +138,9 @@ func TestClient_Scalyrs(t *testing.T) {
 	}
 	if *us.Name != "new-test-scalyr" {
 		t.Errorf("bad name: %q", *us.Name)
+	}
+	if *us.ProjectID != "app-name" {
+		t.Errorf("bad project_id: %q", *us.ProjectID)
 	}
 	if *us.Region != "EU" {
 		t.Errorf("bad region: %q", *us.Region)

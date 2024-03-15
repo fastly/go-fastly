@@ -2,19 +2,17 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A
-    form:
-      ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+    body: ""
+    form: {}
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
+      - FastlyGo/9.1.0 (+github.com/fastly/go-fastly; go1.22.1)
     url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":60}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":2}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:06:19 GMT
+      - Thu, 14 Mar 2024 23:05:44 GMT
       Fastly-Ratelimit-Remaining:
-      - "9999"
+      - "999"
       Fastly-Ratelimit-Reset:
-      - "1667581200"
+      - "1710460800"
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -35,15 +37,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4138-MAN
+      - cache-sjc1000122-SJC
       X-Timer:
-      - S1667577979.630308,VS0,VE380
+      - S1710457545.555028,VS0,VE377
     status: 200 OK
     code: 200
     duration: ""
