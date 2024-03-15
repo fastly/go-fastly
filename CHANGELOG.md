@@ -1,8 +1,16 @@
 # Changelog
 
+## [v9.2.0](https://github.com/fastly/go-fastly/releases/tag/v9.2.0) (2024-03-15)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.1.0...v9.2.0)
+
+**Enhancements:**
+
+- feat: expose project_id field of scalyr logging config [#508](https://github.com/fastly/go-fastly/pull/508)
+
 ## [v9.1.0](https://github.com/fastly/go-fastly/releases/tag/v9.1.0) (2024-03-13)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.0.0...v9.0.1)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.0.1...v9.1.0)
 
 **Enhancements:**
 
