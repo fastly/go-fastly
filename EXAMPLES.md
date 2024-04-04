@@ -15,7 +15,8 @@ package main
 import (
 	"fmt"
 	"log"
- 	"os"
+	"os"
+
 	"github.com/fastly/go-fastly/v9/fastly"
 )
 
@@ -46,7 +47,7 @@ func main() {
 	// then we'll clone from whatever is the latest version.
 	latest := service.Versions[len(service.Versions)-1]
 	for _, version := range service.Versions {
-		if version.Active {
+		if *version.Active {
 			latest = version
 			break
 		}
@@ -56,7 +57,7 @@ func main() {
 	// active configuration.
 	version, err := client.CloneVersion(&fastly.CloneVersionInput{
 		ServiceID:      serviceID,
-		ServiceVersion: latest.Number,
+		ServiceVersion: *latest.Number,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -66,8 +67,8 @@ func main() {
 	// a new domain.
 	domain, err := client.CreateDomain(&fastly.CreateDomainInput{
 		ServiceID:      serviceID,
-		ServiceVersion: version.Number,
-		Name:           fastly.String("example.com"),
+		ServiceVersion: *version.Number,
+		Name:           fastly.ToPointer("example.com"),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -79,10 +80,10 @@ func main() {
 	// And we will also add a new backend.
 	backend, err := client.CreateBackend(&fastly.CreateBackendInput{
 		ServiceID:      serviceID,
-		ServiceVersion: version.Number,
-		Name:           fastly.String("example-backend"),
-		Address:        fastly.String("127.0.0.1"),
-		Port:           fastly.Int(80),
+		ServiceVersion: *version.Number,
+		Name:           fastly.ToPointer("example-backend"),
+		Address:        fastly.ToPointer("127.0.0.1"),
+		Port:           fastly.ToPointer(80),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -94,7 +95,7 @@ func main() {
 	// Now we can validate that our version is valid.
 	valid, _, err := client.ValidateVersion(&fastly.ValidateVersionInput{
 		ServiceID:      serviceID,
-		ServiceVersion: version.Number,
+		ServiceVersion: *version.Number,
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -106,7 +107,7 @@ func main() {
 	// Finally, activate this new version.
 	activeVersion, err := client.ActivateVersion(&fastly.ActivateVersionInput{
 		ServiceID:      serviceID,
-		ServiceVersion: version.Number,
+		ServiceVersion: *version.Number,
 	})
 	if err != nil {
 		log.Fatal(err)
