@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
+    url: https://api.fastly.com/notifications/integrations/3CrNzH0A2XrdLyLPqjybvW
+    method: GET
+  response:
+    body: |
+      {"id":"3CrNzH0A2XrdLyLPqjybvW","name":"test name","description":"test description","type":"mailinglist","created_at":"2024-04-09T21:52:31Z","updated_at":"2024-04-09T21:52:31Z","status":"confirmation_pending","config":{"address":"noreply@fastly.com"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "251"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 09 Apr 2024 21:52:31 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770049-PAO
+      X-Timer:
+      - S1712699552.674125,VS0,VE116
+    status: 200 OK
+    code: 200
+    duration: ""

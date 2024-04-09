@@ -1,0 +1,49 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"Email":"noreply@fastly.com"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
+    url: https://api.fastly.com/notifications/mailinglist-confirmations
+    method: POST
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 09 Apr 2024 21:52:32 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770049-PAO
+      X-Timer:
+      - S1712699552.814909,VS0,VE413
+    status: 204 No Content
+    code: 204
+    duration: ""

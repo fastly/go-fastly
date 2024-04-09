@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
+    url: https://api.fastly.com/notifications/integrations/3CrNzH0A2XrdLyLPqjybvW
+    method: DELETE
+  response:
+    body: |
+      {"status":404,"title":"could not delete integration","detail":"could not delete integration","errors":null}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "108"
+      Content-Type:
+      - application/problem+json
+      Date:
+      - Tue, 09 Apr 2024 21:52:34 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 404 Not Found
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770049-PAO
+      X-Timer:
+      - S1712699554.335740,VS0,VE89
+    status: 404 Not Found
+    code: 404
+    duration: ""
