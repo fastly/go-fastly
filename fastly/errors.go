@@ -323,6 +323,11 @@ var ErrMissingProductID = NewFieldError("ProductID")
 // has an invalid Method value.
 var ErrInvalidMethod = NewFieldError("Method").Message("invalid")
 
+// ErrMissingCertificateMTLS is an error that is returned when an input struct
+// requires either a "Certificate" or "MutualAuthentication" key, but neither
+// was set.
+var ErrMissingCertificateMTLS = NewFieldError("Certificate, MutualAuthentication").Message("at least one of the available optional fields is required")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
