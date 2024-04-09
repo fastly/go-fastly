@@ -201,7 +201,7 @@ func TestClient_UpdateTLSActivation_validation(t *testing.T) {
 	_, err = testClient.UpdateTLSActivation(&UpdateTLSActivationInput{
 		ID: "ACTIVATION_ID",
 	})
-	if err != ErrMissingTLSCertificate {
+	if err != ErrMissingCertificateMTLS {
 		t.Errorf("bad error: %s", err)
 	}
 

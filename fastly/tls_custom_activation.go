@@ -189,8 +189,8 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
-	if i.Certificate == nil {
-		return nil, ErrMissingTLSCertificate
+	if i.Certificate == nil && i.MutualAuthentication == nil {
+		return nil, ErrMissingCertificateMTLS
 	}
 
 	path := fmt.Sprintf("/tls/activations/%s", i.ID)
