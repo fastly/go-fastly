@@ -1,5 +1,13 @@
 # Changelog
 
+## [v9.2.1](https://github.com/fastly/go-fastly/releases/tag/v9.2.1) (2024-04-09)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.2.0...v9.2.1)
+
+**Bug fixes:**
+
+- fix(tls_custom_activation): only error if no fields provided [#511](https://github.com/fastly/go-fastly/pull/511)
+
 ## [v9.2.0](https://github.com/fastly/go-fastly/releases/tag/v9.2.0) (2024-03-15)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.1.0...v9.2.0)
