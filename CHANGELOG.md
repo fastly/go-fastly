@@ -1,5 +1,13 @@
 # Changelog
 
+## [v9.2.2](https://github.com/fastly/go-fastly/releases/tag/v9.2.2) (2024-04-10)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.2.1...v9.2.2)
+
+**Bug fixes:**
+
+- fix(tls_mutual_authentication): support null for ID value [#514](https://github.com/fastly/go-fastly/pull/514)
+
 ## [v9.2.1](https://github.com/fastly/go-fastly/releases/tag/v9.2.1) (2024-04-09)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.2.0...v9.2.1)
