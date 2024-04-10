@@ -15,7 +15,7 @@ type TLSMutualAuthentication struct {
 	Activations []*TLSActivation `jsonapi:"relation,tls_activations"`
 	CreatedAt   *time.Time       `jsonapi:"attr,created_at,iso8601"`
 	Enforced    bool             `jsonapi:"attr,enforced"`
-	ID          string           `jsonapi:"primary,mutual_authentication"`
+	ID          string           `jsonapi:"primary,mutual_authentication,omitempty"`
 	Name        string           `jsonapi:"attr,name"`
 	UpdatedAt   *time.Time       `jsonapi:"attr,updated_at,iso8601"`
 }
