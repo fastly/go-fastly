@@ -1,0 +1,54 @@
+---
+version: 1
+interactions:
+- request:
+    body: ProductID=image_optimizer&ServiceID=7i6HN3TK9wS159v2gPAZ8A
+    form:
+      ProductID:
+      - image_optimizer
+      ServiceID:
+      - 7i6HN3TK9wS159v2gPAZ8A
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/enabled-products/image_optimizer/services/7i6HN3TK9wS159v2gPAZ8A
+    method: PUT
+  response:
+    body: |
+      {"product":{"id":"image_optimizer","object":"product"},"service":{"id":"7i6HN3TK9wS159v2gPAZ8A","object":"service"},"_links":{"self":"/enabled-products/image_optimizer/services/7i6HN3TK9wS159v2gPAZ8A"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "203"
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 13 Apr 2024 05:21:39 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-bfi-krnt7300024-BFI
+      X-Timer:
+      - S1712985699.911813,VS0,VE952
+    status: 200 OK
+    code: 200
+    duration: ""
