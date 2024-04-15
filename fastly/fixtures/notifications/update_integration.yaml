@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: '{"Config":{"url":"https://foo.com/bar"},"Description":"test description
-      updated","ID":"3CrNzH0A2XrdLyLPqjybvW","Name":"test name updated","Type":"webhook"}'
+      updated","ID":"67UyKL6ViyjowdcczOjYJa","Name":"test name updated","Type":"webhook"}'
     form: {}
     headers:
       Accept:
@@ -12,7 +12,7 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
-    url: https://api.fastly.com/notifications/integrations/3CrNzH0A2XrdLyLPqjybvW
+    url: https://api.fastly.com/notifications/integrations/67UyKL6ViyjowdcczOjYJa
     method: PATCH
   response:
     body: ""
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 09 Apr 2024 21:52:32 GMT
+      - Mon, 15 Apr 2024 22:02:03 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-pao-kpao1770049-PAO
+      - cache-pao-kpao1770079-PAO
       X-Timer:
-      - S1712699552.288588,VS0,VE405
+      - S1713218523.939889,VS0,VE585
     status: 204 No Content
     code: 204
     duration: ""

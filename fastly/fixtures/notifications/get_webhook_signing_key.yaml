@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
-    url: https://api.fastly.com/notifications/integrations/3CrNzH0A2XrdLyLPqjybvW/signingKey
+    url: https://api.fastly.com/notifications/integrations/67UyKL6ViyjowdcczOjYJa/signingKey
     method: GET
   response:
     body: |
-      {"signingKey":"9e4a0f5a-9d81-4503-b848-d9c81065f618"}
+      {"signingKey":"c0dc73c9-f4e0-4831-80eb-02ef01b96052"}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 09 Apr 2024 21:52:33 GMT
+      - Mon, 15 Apr 2024 22:02:04 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-pao-kpao1770049-PAO
+      - cache-pao-kpao1770079-PAO
       X-Timer:
-      - S1712699554.519608,VS0,VE355
+      - S1713218524.133980,VS0,VE368
     status: 200 OK
     code: 200
     duration: ""
