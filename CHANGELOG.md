@@ -1,5 +1,14 @@
 # Changelog
 
+## [v9.3.0](https://github.com/fastly/go-fastly/releases/tag/v9.3.0) (2024-04-16)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.2.2...v9.3.0)
+
+**Enhancements:**
+
+- Add support for specifying location when creating KV stores [#517](https://github.com/fastly/go-fastly/pull/517)
+- feat: notifications [#513](https://github.com/fastly/go-fastly/pull/513)
+
 ## [v9.2.2](https://github.com/fastly/go-fastly/releases/tag/v9.2.2) (2024-04-10)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.2.1...v9.2.2)
