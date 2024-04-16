@@ -1,0 +1,139 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv/by19id44okrxf9ui4nr93j
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Tue, 16 Apr 2024 14:10:18 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276618.697733,VS0,VE1138
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv/kkowf43t9yqupo6r7kh0cs
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Tue, 16 Apr 2024 14:10:20 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276619.847370,VS0,VE1528
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv/afd1ypidt5tyh4e6ammjn8
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Tue, 16 Apr 2024 14:10:20 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276620.387394,VS0,VE480
+    status: 204 No Content
+    code: 204
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv/r2an4zjgv6vm7o14aqm4qt
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Tue, 16 Apr 2024 14:10:22 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276621.969488,VS0,VE1111
+    status: 204 No Content
+    code: 204
+    duration: ""
