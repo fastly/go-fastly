@@ -10,14 +10,14 @@ import (
 
 // Integration holds the configuration for one integration.
 type Integration struct {
-	CreatedAt   *time.Time         `json:"created_at"`
-	Description *string            `json:"description"`
-	Config      *map[string]string `json:"config"`
-	ID          *string            `json:"id"`
-	Name        *string            `json:"name"`
-	Status      *string            `json:"status"`
-	Type        *string            `json:"type"`
-	UpdatedAt   *time.Time         `json:"updated_at"`
+	CreatedAt   *time.Time        `json:"created_at"`
+	Description *string           `json:"description"`
+	Config      map[string]string `json:"config"`
+	ID          *string           `json:"id"`
+	Name        *string           `json:"name"`
+	Status      *string           `json:"status"`
+	Type        *string           `json:"type"`
+	UpdatedAt   *time.Time        `json:"updated_at"`
 }
 
 // SearchIntegrationsInput is used as input to the SearchIntegrations function.
@@ -84,7 +84,7 @@ func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrat
 // CreateIntegrationInput is used as input to the CreateIntegration function.
 type CreateIntegrationInput struct {
 	// Config is configuration specific to the integration type.
-	Config *map[string]string
+	Config map[string]string
 	// Description is the user submitted description of the integration.
 	Description *string
 	// Name is the user submitted name of the integration.
@@ -144,7 +144,7 @@ func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
 // UpdateIntegrationInput is used as input to the UpdateIntegration function.
 type UpdateIntegrationInput struct {
 	// Config is configuration specific to the integration type.
-	Config *map[string]string
+	Config map[string]string
 	// Description is the user submitted description of the integration.
 	Description *string
 	// ID of integration to update (required).

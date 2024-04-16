@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
-    url: https://api.fastly.com/notifications/integrations/67UyKL6ViyjowdcczOjYJa
+    url: https://api.fastly.com/notifications/integrations/65OAPIbrOe7nhD7NsjyIgo
     method: GET
   response:
     body: |
-      {"id":"67UyKL6ViyjowdcczOjYJa","name":"test name","description":"test description","type":"mailinglist","created_at":"2024-04-15T22:02:01Z","updated_at":"2024-04-15T22:02:01Z","status":"confirmation_pending","config":{"address":"noreply@fastly.com"}}
+      {"id":"65OAPIbrOe7nhD7NsjyIgo","name":"test name","description":"test description","type":"mailinglist","created_at":"2024-04-16T15:41:25Z","updated_at":"2024-04-16T15:41:25Z","status":"confirmation_pending","config":{"address":"noreply@fastly.com"}}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 15 Apr 2024 22:02:02 GMT
+      - Tue, 16 Apr 2024 15:41:25 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-pao-kpao1770079-PAO
+      - cache-pao-kpao1770066-PAO
       X-Timer:
-      - S1713218522.911543,VS0,VE276
+      - S1713282085.404995,VS0,VE105
     status: 200 OK
     code: 200
     duration: ""

@@ -21,7 +21,7 @@ func TestClient_Notifications(t *testing.T) {
 	}
 
 	cii := &CreateIntegrationInput{
-		Config: &map[string]string{
+		Config: map[string]string{
 			"address": "noreply@fastly.com",
 		},
 		Description: ToPointer("test description"),
@@ -117,7 +117,7 @@ func TestClient_Notifications(t *testing.T) {
 	// Update integration
 	record(t, "notifications/update_integration", func(c *Client) {
 		err = c.UpdateIntegration(&UpdateIntegrationInput{
-			Config: &map[string]string{
+			Config: map[string]string{
 				"url": "https://foo.com/bar",
 			},
 			Description: ToPointer("test description updated"),
