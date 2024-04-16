@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"fmt"
 	"reflect"
 	"sort"
 	"strconv"
@@ -170,5 +171,47 @@ func TestClient_KVStore(t *testing.T) {
 		if !reflect.DeepEqual(allKeys, listed) {
 			t.Errorf("mismatch listing paginated keys: got %q, want %q", kvStoreListKeys.Data, allKeys)
 		}
+	})
+}
+
+func TestClient_CreateKVStoresWithLocations(t *testing.T) {
+	var (
+		stores []*KVStore
+		ks     *KVStore
+		err    error
+	)
+
+	record(t, fmt.Sprintf("kv_store/%s/create_stores", t.Name()), func(c *Client) {
+		for _, location := range []string{"US", "EU", "ASIA", "AUS"} {
+			ks, err = c.CreateKVStore(&CreateKVStoreInput{
+				Name:     fmt.Sprintf("%s_%s", t.Name(), location),
+				Location: location,
+			})
+			if err != nil {
+				t.Fatalf("error creating kv store: %v", err)
+			}
+
+			if got := ks.StoreID; len(got) == 0 {
+				t.Errorf("ID: got %q, want not empty", got)
+			}
+			if got, want := ks.Name, fmt.Sprintf("%s_%s", t.Name(), location); got != want {
+				t.Errorf("Name: got %q, want %q", got, want)
+			}
+
+			stores = append(stores, ks)
+		}
+	})
+
+	t.Cleanup(func() {
+		record(t, fmt.Sprintf("kv_store/%s/delete_stores", t.Name()), func(c *Client) {
+			for _, ks := range stores {
+				err = c.DeleteKVStore(&DeleteKVStoreInput{
+					StoreID: ks.StoreID,
+				})
+				if err != nil {
+					t.Fatalf("error deleting kv store %q: %v", ks.StoreID, err)
+				}
+			}
+		})
 	})
 }

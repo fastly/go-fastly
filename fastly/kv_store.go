@@ -24,6 +24,8 @@ type KVStore struct {
 type CreateKVStoreInput struct {
 	// Name is the name of the store to create (required).
 	Name string `json:"name"`
+	// Location is the regional location of the store (optional).
+	Location string `json:"-"`
 }
 
 // CreateKVStore creates a new resource.
@@ -32,8 +34,15 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 		return nil, ErrMissingName
 	}
 
+	ro := &RequestOptions{
+		Params: map[string]string{},
+	}
+	if i.Location != "" {
+		ro.Params["location"] = i.Location
+	}
+
 	const path = "/resources/stores/kv"
-	resp, err := c.PostJSON(path, i, nil)
+	resp, err := c.PostJSON(path, i, ro)
 	if err != nil {
 		return nil, err
 	}

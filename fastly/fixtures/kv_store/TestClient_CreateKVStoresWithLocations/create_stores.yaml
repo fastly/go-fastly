@@ -1,0 +1,167 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"name":"TestClient_CreateKVStoresWithLocations_US"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv?location=US
+    method: POST
+  response:
+    body: '{"id":"by19id44okrxf9ui4nr93j","name":"TestClient_CreateKVStoresWithLocations_US","created_at":"2024-04-16
+      14:10:02","updated_at":"2024-04-16 14:10:02"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 16 Apr 2024 14:10:03 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276598.002687,VS0,VE5008
+    status: 201 Created
+    code: 201
+    duration: ""
+- request:
+    body: '{"name":"TestClient_CreateKVStoresWithLocations_EU"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv?location=EU
+    method: POST
+  response:
+    body: '{"id":"kkowf43t9yqupo6r7kh0cs","name":"TestClient_CreateKVStoresWithLocations_EU","created_at":"2024-04-16
+      14:10:08","updated_at":"2024-04-16 14:10:08"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 16 Apr 2024 14:10:09 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276603.026026,VS0,VE6079
+    status: 201 Created
+    code: 201
+    duration: ""
+- request:
+    body: '{"name":"TestClient_CreateKVStoresWithLocations_ASIA"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv?location=ASIA
+    method: POST
+  response:
+    body: '{"id":"afd1ypidt5tyh4e6ammjn8","name":"TestClient_CreateKVStoresWithLocations_ASIA","created_at":"2024-04-16
+      14:10:12","updated_at":"2024-04-16 14:10:12"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 16 Apr 2024 14:10:12 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276609.114936,VS0,VE3619
+    status: 201 Created
+    code: 201
+    duration: ""
+- request:
+    body: '{"name":"TestClient_CreateKVStoresWithLocations_AUS"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/resources/stores/kv?location=AUS
+    method: POST
+  response:
+    body: '{"id":"r2an4zjgv6vm7o14aqm4qt","name":"TestClient_CreateKVStoresWithLocations_AUS","created_at":"2024-04-16
+      14:10:17","updated_at":"2024-04-16 14:10:17"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 16 Apr 2024 14:10:17 GMT
+      Pragma:
+      - no-cache
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      X-Timer:
+      - S1713276613.743388,VS0,VE4917
+    status: 201 Created
+    code: 201
+    duration: ""
