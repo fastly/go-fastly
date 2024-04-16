@@ -164,6 +164,75 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	}
 }
 
+func TestClient_FastlyPercentAlerts(t *testing.T) {
+	t.Parallel()
+
+	testDimensions := map[string][]string{}
+	testEvaluationStrategy := map[string]any{
+		"period":       "2m",
+		"threshold":    0.1, // Increase of 10 percent
+		"type":         "percent_increase",
+		"ignore_below": float64(5),
+	}
+	cadi := &CreateAlertDefinitionInput{
+		Description:        ToPointer("test description"),
+		Dimensions:         testDimensions,
+		EvaluationStrategy: testEvaluationStrategy,
+		IntegrationIDs:     []string{},
+		Metric:             ToPointer("status_5xx"),
+		Name:               ToPointer("test name"),
+		ServiceID:          ToPointer(testServiceID),
+		Source:             ToPointer("stats"),
+	}
+
+	// Create
+	var ad *AlertDefinition
+	var err error
+	record(t, "alerts/create_alert_definition_stats_percent", func(c *Client) {
+		ad, err = c.CreateAlertDefinition(cadi)
+
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	// Ensure deleted
+	defer func() {
+		record(t, "alerts/cleanup_alert_definition_stats_percent", func(c *Client) {
+			err = c.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
+				ID: &ad.ID,
+			})
+		})
+	}()
+
+	if ad.Description != "test description" {
+		t.Errorf("bad description: %v", ad.Description)
+	}
+
+	if ad.Metric != "status_5xx" {
+		t.Errorf("bad metric: %v", ad.Metric)
+	}
+
+	if ad.Name != "test name" {
+		t.Errorf("bad name: %v", ad.Name)
+	}
+
+	if ad.ServiceID != testServiceID {
+		t.Errorf("bad service_id: %v", ad.ServiceID)
+	}
+
+	if ad.Source != "stats" {
+		t.Errorf("bad source: %v", ad.Source)
+	}
+
+	if diff := cmp.Diff(testDimensions, ad.Dimensions); diff != "" {
+		t.Errorf("bad dimensions: diff -want +got\n%v", diff)
+	}
+
+	if diff := cmp.Diff(testEvaluationStrategy, ad.EvaluationStrategy); diff != "" {
+		t.Errorf("bad evaluation_strategy: diff -want +got\n%v", diff)
+	}
+}
+
 func TestClient_GetAlertDefinition_validation(t *testing.T) {
 	var err error
 	_, err = testClient.GetAlertDefinition(&GetAlertDefinitionInput{
