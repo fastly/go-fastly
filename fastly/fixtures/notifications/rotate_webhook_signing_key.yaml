@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.2.1 (+github.com/fastly/go-fastly; go1.22.0)
+    url: https://api.fastly.com/notifications/integrations/2KYt9p4Y1KPhSjwThWG08E/rotateSigningKey
+    method: POST
+  response:
+    body: |
+      {"signingKey":"372f476c-d02b-41fd-a275-c06a17c44f81"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "54"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 16 Apr 2024 15:52:43 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-pao-kpao1770026-PAO
+      X-Timer:
+      - S1713282762.185656,VS0,VE907
+    status: 200 OK
+    code: 200
+    duration: ""

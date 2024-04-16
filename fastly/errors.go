@@ -328,6 +328,10 @@ var ErrInvalidMethod = NewFieldError("Method").Message("invalid")
 // was set.
 var ErrMissingCertificateMTLS = NewFieldError("Certificate, MutualAuthentication").Message("at least one of the available optional fields is required")
 
+// ErrMissingIntegrationID is an error that is returned when an input struct
+// requires a "IntegrationID" key, but one was not set.
+var ErrMissingIntegrationID = NewFieldError("IntegrationID")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
