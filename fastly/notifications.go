@@ -34,7 +34,7 @@ type SearchIntegrationsInput struct {
 
 // SearchIntegrationsResponse is the response for an integrations query.
 type SearchIntegrationsResponse struct {
-	Data *[]Integration    `json:"data"`
+	Data []Integration     `json:"data"`
 	Meta *IntegrationsMeta `json:"meta"`
 }
 

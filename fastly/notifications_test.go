@@ -59,8 +59,8 @@ func TestClient_Notifications(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if len(*sir.Data) < 1 {
-		t.Errorf("bad data: %v", *sir.Data)
+	if len(sir.Data) < 1 {
+		t.Errorf("bad data: %v", sir.Data)
 	}
 	if *sir.Meta.Limit != 3 {
 		t.Errorf("bad meta limit: %v", sir.Meta.Limit)
