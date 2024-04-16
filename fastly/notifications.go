@@ -203,16 +203,16 @@ func (c *Client) DeleteIntegration(i *DeleteIntegrationInput) error {
 
 // IntegrationType is an item in the response listing integration types.
 type IntegrationType struct {
-	Type         string        `json:"type"`
-	DisplayName  string        `json:"display_name"`
+	Type         *string       `json:"type"`
+	DisplayName  *string       `json:"display_name"`
 	CustomFields []CustomField `json:"custom_fields"`
 }
 
 // CustomField describes a configuration required for a type of integration.
 type CustomField struct {
-	Name        string `json:"name"`
-	DisplayName string `json:"display_name"`
-	Format      string `json:"format"`
+	Name        *string `json:"name"`
+	DisplayName *string `json:"display_name"`
+	Format      *string `json:"format"`
 }
 
 // GetIntegrationTypes retrieves the supported integration types and what configuration they require.

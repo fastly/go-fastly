@@ -16,7 +16,7 @@ interactions:
     method: POST
   response:
     body: |
-      {"integration_id":"65OAPIbrOe7nhD7NsjyIgo"}
+      {"integration_id":"2KYt9p4Y1KPhSjwThWG08E"}
     headers:
       Accept-Ranges:
       - bytes
@@ -27,7 +27,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Apr 2024 15:41:24 GMT
+      - Tue, 16 Apr 2024 15:52:40 GMT
       Pragma:
       - no-cache
       Server:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-pao-kpao1770066-PAO
+      - cache-pao-kpao1770026-PAO
       X-Timer:
-      - S1713282085.510502,VS0,VE471
+      - S1713282760.713037,VS0,VE365
     status: 200 OK
     code: 200
     duration: ""
