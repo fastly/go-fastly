@@ -24,7 +24,7 @@ type KVStore struct {
 type CreateKVStoreInput struct {
 	// Name is the name of the store to create (required).
 	Name string `json:"name"`
-	// Location is the location of the store (optional).
+	// Location is the regional location of the store (optional).
 	Location string `json:"-"`
 }
 
