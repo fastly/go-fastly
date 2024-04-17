@@ -18,11 +18,11 @@ type KVStoreLocation string
 const (
 	// KVStoreLocationUS represents a redundancy variant.
 	KVStoreLocationUS KVStoreLocation = "US"
-	// KVStoreLocationUS represents a redundancy variant.
+	// KVStoreLocationEU represents a redundancy variant.
 	KVStoreLocationEU KVStoreLocation = "EU"
-	// KVStoreLocationUS represents a redundancy variant.
+	// KVStoreLocationASIA represents a redundancy variant.
 	KVStoreLocationASIA KVStoreLocation = "ASIA"
-	// KVStoreLocationUS represents a redundancy variant.
+	// KVStoreLocationAUS represents a redundancy variant.
 	KVStoreLocationAUS KVStoreLocation = "AUS"
 )
 
