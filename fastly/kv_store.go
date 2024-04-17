@@ -12,6 +12,20 @@ import (
 
 // https://developer.fastly.com/reference/api/services/resources/kv-store
 
+// KVStoreLocation represents the regional location of KV store.
+type KVStoreLocation string
+
+const (
+	// KVStoreLocationUS represents a redundancy variant.
+	KVStoreLocationUS KVStoreLocation = "US"
+	// KVStoreLocationUS represents a redundancy variant.
+	KVStoreLocationEU KVStoreLocation = "EU"
+	// KVStoreLocationUS represents a redundancy variant.
+	KVStoreLocationASIA KVStoreLocation = "ASIA"
+	// KVStoreLocationUS represents a redundancy variant.
+	KVStoreLocationAUS KVStoreLocation = "AUS"
+)
+
 // KVStore represents an KV Store response from the Fastly API.
 type KVStore struct {
 	CreatedAt *time.Time `mapstructure:"created_at"`
@@ -25,7 +39,7 @@ type CreateKVStoreInput struct {
 	// Name is the name of the store to create (required).
 	Name string `json:"name"`
 	// Location is the regional location of the store (optional).
-	Location string `json:"-"`
+	Location *KVStoreLocation `json:"-"`
 }
 
 // CreateKVStore creates a new resource.
@@ -37,8 +51,8 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 	ro := &RequestOptions{
 		Params: map[string]string{},
 	}
-	if i.Location != "" {
-		ro.Params["location"] = i.Location
+	if i.Location != nil {
+		ro.Params["location"] = string(*i.Location)
 	}
 
 	const path = "/resources/stores/kv"

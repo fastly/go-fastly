@@ -182,10 +182,10 @@ func TestClient_CreateKVStoresWithLocations(t *testing.T) {
 	)
 
 	record(t, fmt.Sprintf("kv_store/%s/create_stores", t.Name()), func(c *Client) {
-		for _, location := range []string{"US", "EU", "ASIA", "AUS"} {
+		for _, location := range []KVStoreLocation{KVStoreLocationUS, KVStoreLocationEU, KVStoreLocationASIA, KVStoreLocationAUS} {
 			ks, err = c.CreateKVStore(&CreateKVStoreInput{
 				Name:     fmt.Sprintf("%s_%s", t.Name(), location),
-				Location: location,
+				Location: &location,
 			})
 			if err != nil {
 				t.Fatalf("error creating kv store: %v", err)
