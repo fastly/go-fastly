@@ -51,6 +51,9 @@ const RealtimeStatsEndpointEnvVar = "FASTLY_RTS_URL"
 // DefaultRealtimeStatsEndpoint is the realtime stats endpoint for Fastly.
 const DefaultRealtimeStatsEndpoint = "https://rt.fastly.com"
 
+// JSONMimeType is the MIME type for the JSON data format.
+const JSONMimeType = "application/json"
+
 // ProjectURL is the url for this library.
 var ProjectURL = "github.com/fastly/go-fastly"
 
@@ -169,7 +172,10 @@ func (c *Client) init() (*Client, error) {
 	c.url = u
 
 	if c.HTTPClient == nil {
-		c.HTTPClient = cleanhttp.DefaultClient()
+		c.HTTPClient = &http.Client{
+			// IMPORTANT: Avoid cleanhttp.DefaultTransport() which disables keepalive.
+			Transport: cleanhttp.DefaultPooledTransport(),
+		}
 	}
 
 	return c, nil
@@ -423,7 +429,7 @@ func (c *Client) SimpleGet(target string) (*http.Response, error) {
 		return nil, err
 	}
 
-	request, err := http.NewRequest("GET", u.String(), nil)
+	request, err := http.NewRequest(http.MethodGet, u.String(), nil)
 	if err != nil {
 		return nil, err
 	}
@@ -495,7 +501,7 @@ func (c *Client) RequestForm(verb, p string, i any, ro *RequestOptions) (*http.R
 func (c *Client) RequestFormFile(verb, urlPath, filePath, fieldName string, ro *RequestOptions) (*http.Response, error) {
 	file, err := os.Open(filepath.Clean(filePath))
 	if err != nil {
-		return nil, fmt.Errorf("error reading file: %v", err)
+		return nil, fmt.Errorf("error reading file: %w", err)
 	}
 	defer file.Close() // #nosec G307
 
@@ -508,17 +514,17 @@ func (c *Client) RequestFormFileFromReader(verb, urlPath, fileName string, fileB
 	writer := multipart.NewWriter(&body)
 	part, err := writer.CreateFormFile(fieldName, fileName)
 	if err != nil {
-		return nil, fmt.Errorf("error creating multipart form: %v", err)
+		return nil, fmt.Errorf("error creating multipart form: %w", err)
 	}
 
 	_, err = io.Copy(part, fileBytes)
 	if err != nil {
-		return nil, fmt.Errorf("error copying file to multipart form: %v", err)
+		return nil, fmt.Errorf("error copying file to multipart form: %w", err)
 	}
 
 	err = writer.Close()
 	if err != nil {
-		return nil, fmt.Errorf("error closing multipart form: %v", err)
+		return nil, fmt.Errorf("error closing multipart form: %w", err)
 	}
 
 	if ro == nil {
@@ -528,7 +534,7 @@ func (c *Client) RequestFormFileFromReader(verb, urlPath, fileName string, fileB
 		ro.Headers = make(map[string]string)
 	}
 	ro.Headers["Content-Type"] = writer.FormDataContentType()
-	ro.Headers["Accept"] = "application/json"
+	ro.Headers["Accept"] = JSONMimeType
 	ro.Body = &body
 	ro.BodyLength = int64(body.Len())
 
@@ -544,8 +550,8 @@ func (c *Client) RequestJSON(verb, p string, i any, ro *RequestOptions) (*http.R
 	if ro.Headers == nil {
 		ro.Headers = make(map[string]string)
 	}
-	ro.Headers["Content-Type"] = "application/json"
-	ro.Headers["Accept"] = "application/json"
+	ro.Headers["Content-Type"] = JSONMimeType
+	ro.Headers["Accept"] = JSONMimeType
 
 	body, err := json.Marshal(i)
 	if err != nil {
@@ -616,7 +622,7 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 	}
 
 	switch resp.StatusCode {
-	case 200, 201, 202, 204, 205, 206:
+	case http.StatusOK, http.StatusCreated, http.StatusAccepted, http.StatusNoContent, http.StatusResetContent, http.StatusPartialContent:
 		return resp, nil
 	default:
 		return resp, NewHTTPError(resp)
