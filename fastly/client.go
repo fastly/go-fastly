@@ -172,7 +172,10 @@ func (c *Client) init() (*Client, error) {
 	c.url = u
 
 	if c.HTTPClient == nil {
-		c.HTTPClient = cleanhttp.DefaultClient()
+		c.HTTPClient = &http.Client{
+			// IMPORTANT: Avoid cleanhttp.DefaultTransport() which disables keepalive.
+			Transport: cleanhttp.DefaultPooledTransport(),
+		}
 	}
 
 	return c, nil
