@@ -1,5 +1,13 @@
 # Changelog
 
+## [v9.3.1](https://github.com/fastly/go-fastly/releases/tag/v9.3.0) (2024-04-17)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.3.0...v9.3.1)
+
+**Bug fixes:**
+
+- fix(client): support tcp keepalive [#519](https://github.com/fastly/go-fastly/pull/519)
+
 ## [v9.3.0](https://github.com/fastly/go-fastly/releases/tag/v9.3.0) (2024-04-16)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.2.2...v9.3.0)
