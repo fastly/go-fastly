@@ -619,7 +619,7 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 	}
 
 	switch resp.StatusCode {
-	case 200, 201, 202, 204, 205, 206:
+	case http.StatusOK, http.StatusCreated, http.StatusAccepted, http.StatusNoContent, http.StatusResetContent, http.StatusPartialContent:
 		return resp, nil
 	default:
 		return resp, NewHTTPError(resp)
