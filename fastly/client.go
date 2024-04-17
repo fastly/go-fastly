@@ -426,7 +426,7 @@ func (c *Client) SimpleGet(target string) (*http.Response, error) {
 		return nil, err
 	}
 
-	request, err := http.NewRequest("GET", u.String(), nil)
+	request, err := http.NewRequest(http.MethodGet, u.String(), nil)
 	if err != nil {
 		return nil, err
 	}
