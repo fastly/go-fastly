@@ -51,6 +51,9 @@ const RealtimeStatsEndpointEnvVar = "FASTLY_RTS_URL"
 // DefaultRealtimeStatsEndpoint is the realtime stats endpoint for Fastly.
 const DefaultRealtimeStatsEndpoint = "https://rt.fastly.com"
 
+// JSONMimeType is the MIME type for the JSON data format.
+const JSONMimeType = "application/json"
+
 // ProjectURL is the url for this library.
 var ProjectURL = "github.com/fastly/go-fastly"
 
@@ -528,7 +531,7 @@ func (c *Client) RequestFormFileFromReader(verb, urlPath, fileName string, fileB
 		ro.Headers = make(map[string]string)
 	}
 	ro.Headers["Content-Type"] = writer.FormDataContentType()
-	ro.Headers["Accept"] = "application/json"
+	ro.Headers["Accept"] = JSONMimeType
 	ro.Body = &body
 	ro.BodyLength = int64(body.Len())
 
@@ -544,8 +547,8 @@ func (c *Client) RequestJSON(verb, p string, i any, ro *RequestOptions) (*http.R
 	if ro.Headers == nil {
 		ro.Headers = make(map[string]string)
 	}
-	ro.Headers["Content-Type"] = "application/json"
-	ro.Headers["Accept"] = "application/json"
+	ro.Headers["Content-Type"] = JSONMimeType
+	ro.Headers["Accept"] = JSONMimeType
 
 	body, err := json.Marshal(i)
 	if err != nil {
