@@ -12,17 +12,17 @@ import (
 
 // https://developer.fastly.com/reference/api/services/resources/kv-store
 
-// KVStoreLocation represents the regional location of KV store.
+// KVStoreLocation represents the regional location of KV stores.
 type KVStoreLocation string
 
 const (
-	// KVStoreLocationUS represents a redundancy variant.
+	// KVStoreLocationUS represents a location variant.
 	KVStoreLocationUS KVStoreLocation = "US"
-	// KVStoreLocationEU represents a redundancy variant.
+	// KVStoreLocationEU represents a location variant.
 	KVStoreLocationEU KVStoreLocation = "EU"
-	// KVStoreLocationASIA represents a redundancy variant.
+	// KVStoreLocationASIA represents a location variant.
 	KVStoreLocationASIA KVStoreLocation = "ASIA"
-	// KVStoreLocationAUS represents a redundancy variant.
+	// KVStoreLocationAUS represents a location variant.
 	KVStoreLocationAUS KVStoreLocation = "AUS"
 )
 
