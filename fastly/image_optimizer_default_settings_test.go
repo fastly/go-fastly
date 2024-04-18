@@ -7,7 +7,7 @@ import (
 
 // TestClient_ImageOptimizerDefaultSettings tests the Image Optimizer Default Settings API
 //
-// Note: to run this, all backends on the active version of the test service must have shielding
+// NOTE: to run this, all backends on the active version of the test service must have shielding
 // enabled, and the test service's account must be allowed to enable Image Optimization.
 func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	t.Parallel()
