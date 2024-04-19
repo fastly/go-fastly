@@ -87,6 +87,8 @@ type UpdateImageOptimizerDefaultSettingsInput struct {
 }
 
 // GetImageOptimizerDefaultSettings retrives the current Image Optimizer default settings on a given service version.
+//
+// Returns (nil, nil) if no default settings are set.
 func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSettingsInput) (*ImageOptimizerDefaultSettings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
@@ -99,6 +101,12 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
+		if herr, ok := err.(*HTTPError); ok {
+			if herr.StatusCode == 404 {
+				// API endpoint returns 404 for services without Image Optimizer settings set.
+				return nil, nil
+			}
+		}
 		return nil, err
 	}
 	defer resp.Body.Close()
