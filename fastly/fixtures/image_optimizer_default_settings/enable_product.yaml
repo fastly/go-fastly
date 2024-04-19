@@ -2,33 +2,35 @@
 version: 1
 interactions:
 - request:
-    body: ProductID=image_optimizer&ServiceID=7i6HN3TK9wS159v2gPAZ8A
+    body: ProductID=image_optimizer&ServiceID=qDAwPNSjDoCytjIZ6SfjF5
     form:
       ProductID:
       - image_optimizer
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - qDAwPNSjDoCytjIZ6SfjF5
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/enabled-products/image_optimizer/services/7i6HN3TK9wS159v2gPAZ8A
+      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/enabled-products/image_optimizer/services/qDAwPNSjDoCytjIZ6SfjF5
     method: PUT
   response:
     body: |
-      {"product":{"id":"image_optimizer","object":"product"},"service":{"id":"7i6HN3TK9wS159v2gPAZ8A","object":"service"},"_links":{"self":"/enabled-products/image_optimizer/services/7i6HN3TK9wS159v2gPAZ8A"}}
+      {"product":{"id":"image_optimizer","object":"product"},"service":{"id":"qDAwPNSjDoCytjIZ6SfjF5","object":"service"},"_links":{"self":"/enabled-products/image_optimizer/services/qDAwPNSjDoCytjIZ6SfjF5"}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
+      Connection:
+      - keep-alive
       Content-Length:
       - "203"
       Content-Type:
       - application/json
       Date:
-      - Sat, 13 Apr 2024 05:21:39 GMT
+      - Fri, 19 Apr 2024 02:52:10 GMT
       Pragma:
       - no-cache
       Server:
@@ -46,9 +48,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300024-BFI
+      - cache-bfi-krnt7300112-BFI
       X-Timer:
-      - S1712985699.911813,VS0,VE952
+      - S1713495130.808709,VS0,VE992
     status: 200 OK
     code: 200
     duration: ""

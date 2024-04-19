@@ -24,12 +24,41 @@ func (r ResizeFilter) String() string {
 	return "lanczos3" // default
 }
 
+func (r ResizeFilter) MarshalJSON() ([]byte, error) {
+	return json.Marshal(r.String())
+}
+
 const (
 	Lanczos3 ResizeFilter = iota
 	Lanczos2
 	Bicubic
 	Bilinear
 	Nearest
+)
+
+// JpegType is a base for different JpegType variants
+type JpegType int64
+
+func (r JpegType) String() string {
+	switch r {
+	case Auto:
+		return "auto"
+	case Baseline:
+		return "baseline"
+	case Progressive:
+		return "progressive"
+	}
+	return "auto" // default
+}
+
+func (r JpegType) MarshalJSON() ([]byte, error) {
+	return json.Marshal(r.String())
+}
+
+const (
+	Auto JpegType = iota
+	Baseline
+	Progressive
 )
 
 // ImageOptimizerDefaultSettings represents the returned default settings for Image Optimizer on a given service.
@@ -77,7 +106,7 @@ type UpdateImageOptimizerDefaultSettingsInput struct {
 	// requests.
 	WebpQuality *int `json:"webp_quality,omitempty"`
 	// Default type of jpeg output to use. This can be overriden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
-	JpegType *string `json:"jpeg_type,omitempty"`
+	JpegType *JpegType `json:"jpeg_type,omitempty"`
 	// Default quality to use with jpeg output. This can be overridden with the "quality" parameter on specific image optimizer requests.
 	JpegQuality *int `json:"jpeg_quality,omitempty"`
 	// Whether or not we should allow output images to render at sizes larger than input.

@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/22/image_optimizer_default_settings
+      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/service/qDAwPNSjDoCytjIZ6SfjF5/version/38/image_optimizer_default_settings
     method: GET
   response:
     body: '{"resize_filter":"lanczos3","webp":false,"webp_quality":20,"jpeg_type":"auto","jpeg_quality":85,"upscale":false,"allow_video":false}'
@@ -16,10 +16,12 @@ interactions:
       - bytes
       Cache-Control:
       - no-store
+      Connection:
+      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sat, 13 Apr 2024 05:21:40 GMT
+      - Fri, 19 Apr 2024 02:52:11 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300024-BFI
+      - cache-bfi-krnt7300112-BFI
       X-Timer:
-      - S1712985700.407525,VS0,VE169
+      - S1713495131.397009,VS0,VE136
     status: 200 OK
     code: 200
     duration: ""

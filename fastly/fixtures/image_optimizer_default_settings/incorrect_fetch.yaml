@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/22/image_optimizer_default_settings
+      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/service/qDAwPNSjDoCytjIZ6SfjF5/version/38/image_optimizer_default_settings
     method: PATCH
   response:
     body: '{"type":"https://www.fastly.com/documentation/reference/api/services/image_optimizer_default_settings/","title":"Bad
@@ -21,14 +21,16 @@ interactions:
       - bytes
       Cache-Control:
       - no-store
+      Connection:
+      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Sat, 13 Apr 2024 05:21:41 GMT
+      - Fri, 19 Apr 2024 02:52:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "981"
+      - "937"
       Fastly-Ratelimit-Reset:
-      - "1712988000"
+      - "1713495600"
       Pragma:
       - no-cache
       Server:
@@ -46,9 +48,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300024-BFI
+      - cache-bfi-krnt7300112-BFI
       X-Timer:
-      - S1712985701.156217,VS0,VE150
+      - S1713495132.050585,VS0,VE155
     status: 400 Bad Request
     code: 400
     duration: ""

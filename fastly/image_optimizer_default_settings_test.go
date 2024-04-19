@@ -182,6 +182,48 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	if !strings.Contains(err.Error(), expectedErr) {
 		t.Fatalf("expected error to include '%s'; got: %v", expectedErr, err)
 	}
+
+	// Confirm all resize_filter & jpeg_type values are accepted
+	for _, resizeFilter := range []ResizeFilter{Lanczos3, Lanczos2, Bicubic, Bilinear, Nearest} {
+		record(t, fixtureBase+"set_resize_filter/"+resizeFilter.String(), func(c *Client) {
+			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+				ServiceID:      testServiceID,
+				ServiceVersion: *testVersion.Number,
+				ResizeFilter:   &resizeFilter,
+			})
+		})
+		if defaultSettings.ResizeFilter != resizeFilter.String() {
+			t.Fatalf("expected ResizeFilter: %s; got: %s", resizeFilter.String(), defaultSettings.ResizeFilter)
+		}
+	}
+
+	for _, jpegType := range []JpegType{Auto, Baseline, Progressive} {
+		record(t, fixtureBase+"set_jpeg_type/"+jpegType.String(), func(c *Client) {
+			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+				ServiceID:      testServiceID,
+				ServiceVersion: *testVersion.Number,
+				JpegType:       &jpegType,
+			})
+		})
+		if defaultSettings.JpegType != jpegType.String() {
+			t.Fatalf("expected JpegType: %s; got: %s", jpegType.String(), defaultSettings.JpegType)
+		}
+	}
+
+	// Confirm a full request is accepted - that all parameters in our library match the API's expectations
+	record(t, fixtureBase+"set_full", func(c *Client) {
+		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+			ServiceID:      testServiceID,
+			ServiceVersion: *testVersion.Number,
+			ResizeFilter:   ToPointer(Lanczos3),
+			Webp:           ToPointer(false),
+			WebpQuality:    ToPointer(85),
+			JpegType:       ToPointer(Auto),
+			JpegQuality:    ToPointer(85),
+			Upscale:        ToPointer(false),
+			AllowVideo:     ToPointer(false),
+		})
+	})
 }
 
 func TestClient_GetImageOptimizerDefaultSettings_validation(t *testing.T) {
