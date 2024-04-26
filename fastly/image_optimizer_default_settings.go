@@ -29,10 +29,15 @@ func (r ResizeFilter) MarshalJSON() ([]byte, error) {
 }
 
 const (
+	// A Lanczos filter with a kernel size of 3. Lanczos filters can detect edges and linear features within an image, providing the best possible reconstruction.
 	Lanczos3 ResizeFilter = iota
+	// A Lanczos filter with a kernel size of 2.
 	Lanczos2
+	// A filter using an average of a 4x4 environment of pixels, weighing the innermost pixels higher.
 	Bicubic
+	// A filter using an average of a 2x2 environment of pixels.
 	Bilinear
+	// A filter using the value of nearby translated pixel values. Preserves hard edges.
 	Nearest
 )
 
@@ -56,23 +61,25 @@ func (r JpegType) MarshalJSON() ([]byte, error) {
 }
 
 const (
+	// Match the input JPEG type, or baseline if transforming from a non-JPEG input.
 	Auto JpegType = iota
+	// Output baseline JPEG images
 	Baseline
+	// Output progressive JPEG images
 	Progressive
 )
 
-// ImageOptimizerDefaultSettings represents the returned default settings for Image Optimizer on a given service.
+// ImageOptimizerDefaultSettings represents the returned Image Optimizer default settings for a given service.
 type ImageOptimizerDefaultSettings struct {
-	// Type of filter to use while resizing an image.
+	// The type of filter to use while resizing an image.
 	ResizeFilter string `json:"resize_filter"`
-	// Whether or not to default to webp output when the client supports it. This is equivalent to adding "auto=webp" to all image optimizer requests.
+	// Controls whether or not to default to WebP output when the client supports it. This is equivalent to adding "auto=webp" to all image optimizer requests.
 	Webp bool `json:"webp"`
-	// Default quality to use with webp output. This can be overriden with the second option in the "quality" URL parameter on specific image optimizer
-	// requests.
+	// The default quality to use with WebP output. This can be overridden with the second option in the "quality" URL parameter on specific image optimizer requests.
 	WebpQuality int `json:"webp_quality"`
-	// Default type of jpeg output to use. This can be overriden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
+	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
 	JpegType string `json:"jpeg_type"`
-	// Default quality to use with jpeg output. This can be overridden with the "quality" parameter on specific image optimizer requests.
+	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
 	JpegQuality int `json:"jpeg_quality"`
 	// Whether or not we should allow output images to render at sizes larger than input.
 	Upscale bool `json:"upscale"`
@@ -98,16 +105,15 @@ type UpdateImageOptimizerDefaultSettingsInput struct {
 	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
-	// Type of filter to use while resizing an image.
+	// The type of filter to use while resizing an image.
 	ResizeFilter *ResizeFilter `json:"resize_filter,omitempty"`
-	// Whether or not to default to webp output when the client supports it. This is equivalent to adding "auto=webp" to all image optimizer requests.
+	// Controls whether or not to default to WebP output when the client supports it. This is equivalent to adding "auto=webp" to all image optimizer requests.
 	Webp *bool `json:"webp,omitempty"`
-	// Default quality to use with webp output. This can be overriden with the second option in the "quality" URL parameter on specific image optimizer
-	// requests.
+	// The default quality to use with WebP output. This can be overridden with the second option in the "quality" URL parameter on specific image optimizer requests.
 	WebpQuality *int `json:"webp_quality,omitempty"`
-	// Default type of jpeg output to use. This can be overriden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
+	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
 	JpegType *JpegType `json:"jpeg_type,omitempty"`
-	// Default quality to use with jpeg output. This can be overridden with the "quality" parameter on specific image optimizer requests.
+	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
 	JpegQuality *int `json:"jpeg_quality,omitempty"`
 	// Whether or not we should allow output images to render at sizes larger than input.
 	Upscale *bool `json:"upscale,omitempty"`
@@ -148,7 +154,11 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 	return iods, nil
 }
 
-// UpdateImageOptimizerDefaultSettings changes one or more Image Optimizer default settings on a given service version.
+// UpdateImageOptimizerDefaultSettings Update one or more default settings.
+//
+// A minimum of one non-nil property is required.
+//
+// Returns the new Image Optimizer default settings.
 func (c *Client) UpdateImageOptimizerDefaultSettings(i *UpdateImageOptimizerDefaultSettingsInput) (*ImageOptimizerDefaultSettings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
