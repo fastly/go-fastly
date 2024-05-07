@@ -25,7 +25,17 @@ type TLSSubscription struct {
 
 // TLSSubscriptionCertificate represents a subscription certificate.
 type TLSSubscriptionCertificate struct {
-	ID string `jsonapi:"primary,tls_certificate"`
+	ID                 string     `jsonapi:"primary,tls_certificate"`
+	CreatedAt          *time.Time `jsonapi:"attr,created_at,iso8601"`
+	IssuedTo           string     `jsonapi:"attr,issued_to"`
+	Issuer             string     `jsonapi:"attr,issuer"`
+	Name               string     `jsonapi:"attr,name"`
+	NotAfter           *time.Time `jsonapi:"attr,not_after,iso8601"`
+	NotBefore          *time.Time `jsonapi:"attr,not_before,iso8601"`
+	Replace            bool       `jsonapi:"attr,replace"`
+	SerialNumber       string     `jsonapi:"attr,serial_number"`
+	SignatureAlgorithm string     `jsonapi:"attr,signature_algorithm"`
+	UpdatedAt          *time.Time `jsonapi:"attr,updated_at,iso8601"`
 }
 
 // TLSAuthorizations gives information needed to verify domain ownership in
@@ -66,7 +76,7 @@ type ListTLSSubscriptionsInput struct {
 	FilterState string
 	// Limit the returned subscriptions to those that include the specific domain.
 	FilterTLSDomainsID string
-	// Include related objects. Optional, comma-separated values. Permitted values: tls_authorizations.
+	// Include related objects. Optional, comma-separated values. Permitted values: tls_authorizations, tls_authorizations.globalsign_email_challenge, tls_authorizations.self_managed_http_challenge, and tls_certificates.
 	Include string
 	// Current page.
 	PageNumber int
@@ -201,7 +211,7 @@ func domainInSlice(haystack []*TLSDomain, needle *TLSDomain) bool {
 type GetTLSSubscriptionInput struct {
 	// ID of the TLS subscription to fetch.
 	ID string
-	// Include related objects. Optional, comma-separated values. Permitted values: tls_authorizations.
+	// Include related objects. Optional, comma-separated values. Permitted values: tls_authorizations, tls_authorizations.globalsign_email_challenge, tls_authorizations.self_managed_http_challenge, and tls_certificates.
 	Include *string
 }
 
