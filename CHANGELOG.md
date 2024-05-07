@@ -1,6 +1,15 @@
 # Changelog
 
-## [v9.3.1](https://github.com/fastly/go-fastly/releases/tag/v9.3.0) (2024-04-17)
+## [v9.3.2](https://github.com/fastly/go-fastly/releases/tag/v9.3.2) (2024-05-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.3.1...v9.3.2)
+
+**Enhancements:**
+
+- feat(tls_subscription): add `tls_certificate` attributes [#523](https://github.com/fastly/go-fastly/pull/523)
+- tests(alerts): add percent alerts tests [#522](https://github.com/fastly/go-fastly/pull/522)
+
+## [v9.3.1](https://github.com/fastly/go-fastly/releases/tag/v9.3.1) (2024-04-17)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.3.0...v9.3.1)
 
