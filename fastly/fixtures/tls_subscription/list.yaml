@@ -8,34 +8,40 @@ interactions:
       Accept:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/6.4.3 (+github.com/fastly/go-fastly; go1.16.15)
+      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
     url: https://api.fastly.com/tls/subscriptions
     method: GET
   response:
-    body: '{"data":[{"id":"SUBSCRIPTION_ID","type":"tls_subscription","attributes":{"certificate_authority":"lets-encrypt","created_at":"2022-08-22T10:45:38.000Z","state":"pending","has_active_order":true,"updated_at":"2022-08-22T10:45:38.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"bGl42zjrl7tEqlJz24ZVKw","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}]},"common_name":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"tls_configuration":{"data":{"id":"Em77eV0D2qMAduXPtvRdKg","type":"tls_configuration"}}}}],"links":{"self":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","first":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","prev":null,"next":null,"last":"https://api.fastly.com/tls/subscriptions?page%5Bnumber%5D=1\u0026page%5Bsize%5D=100"},"meta":{"per_page":100,"current_page":1,"record_count":1,"total_pages":1}}'
+    body: '{"data":[{"id":"mwtZ5xuowgXsyR2nyPjuWw","type":"tls_subscription","attributes":{"certificate_authority":"certainly","created_at":"2024-05-07T12:51:58.000Z","state":"pending","has_active_order":true,"updated_at":"2024-05-07T12:51:58.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"B98ZDNS55WAZ5ltYl6wZUQ","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}]},"common_name":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"tls_configuration":{"data":{"id":"Em77eV0D2qMAduXPtvRdKg","type":"tls_configuration"}}}}],"links":{"self":"https://api.fastly.com/tls/subscriptions?include=tls_certificates\u0026page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","first":"https://api.fastly.com/tls/subscriptions?include=tls_certificates\u0026page%5Bnumber%5D=1\u0026page%5Bsize%5D=100","prev":null,"next":null,"last":"https://api.fastly.com/tls/subscriptions?include=tls_certificates\u0026page%5Bnumber%5D=1\u0026page%5Bsize%5D=100"},"meta":{"per_page":100,"current_page":1,"record_count":1,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
-      - "1022"
+      - "1109"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 22 Aug 2022 10:45:38 GMT
+      - Tue, 07 May 2024 12:51:58 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-lcy-eglc8600089-LCY
       X-Timer:
-      - S1661165139.590746,VS0,VE370
+      - S1715086318.253958,VS0,VE385
     status: 200 OK
     code: 200
     duration: ""

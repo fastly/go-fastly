@@ -6,13 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.4.3 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/6/activate
+      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/activate
     method: PUT
   response:
-    body: '{"testing":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","locked":true,"staging":false,"deleted_at":null,"deployed":false,"created_at":"2022-08-22T10:45:36Z","updated_at":"2022-08-22T10:45:36Z","active":true,"comment":"","number":6,"msg":"Warning:
-      No default director found\nat: (default Line 174 Pos 1)\n         if (req.http.Fastly-Temp-XFF
-      == \"\") {\n----------------------------------------------"}'
+    body: '{"staging":false,"deployed":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","locked":true,"comment":"","testing":false,"deleted_at":null,"created_at":"2024-05-07T12:51:55Z","active":true,"updated_at":"2024-05-07T12:51:56Z","number":3,"msg":"Warning:
+      No default director found\nat: (default Line 174 Pos 1)\n#--FASTLY BEREQ BEGIN\n---------------------"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +20,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 22 Aug 2022 10:45:38 GMT
+      - Tue, 07 May 2024 12:51:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "4985"
+      - "9994"
       Fastly-Ratelimit-Reset:
-      - "1661166000"
+      - "1715086800"
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,15 +36,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-lcy-eglc8600089-LCY
       X-Timer:
-      - S1661165137.971061,VS0,VE1034
+      - S1715086317.646065,VS0,VE984
     status: 200 OK
     code: 200
     duration: ""
