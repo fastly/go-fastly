@@ -6,30 +6,36 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.4.3 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/tls/subscriptions/SUBSCRIPTION_ID
+      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/tls/subscriptions/mwtZ5xuowgXsyR2nyPjuWw
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Mon, 22 Aug 2022 10:45:41 GMT
+      - Tue, 07 May 2024 12:52:02 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-lcy-eglc8600089-LCY
       X-Timer:
-      - S1661165140.634623,VS0,VE1672
+      - S1715086320.600211,VS0,VE3116
     status: 204 No Content
     code: 204
     duration: ""

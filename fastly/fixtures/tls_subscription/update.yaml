@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"tls_subscription","id":"SUBSCRIPTION_ID","relationships":{"common_name":{"data":{"type":"tls_domain","id":"integ-test2.go-fastly-2.com"}},"tls_domain":{"data":[{"type":"tls_domain","id":"integ-test1.go-fastly-1.com"},{"type":"tls_domain","id":"integ-test2.go-fastly-2.com"}]}}},"included":[{"type":"tls_domain","id":"integ-test1.go-fastly-1.com","attributes":{"type":""}},{"type":"tls_domain","id":"integ-test2.go-fastly-2.com","attributes":{"type":""}}]}
+      {"data":{"type":"tls_subscription","id":"mwtZ5xuowgXsyR2nyPjuWw","relationships":{"common_name":{"data":{"type":"tls_domain","id":"integ-test2.go-fastly-2.com"}},"tls_domain":{"data":[{"type":"tls_domain","id":"integ-test1.go-fastly-1.com"},{"type":"tls_domain","id":"integ-test2.go-fastly-2.com"}]}}},"included":[{"type":"tls_domain","id":"integ-test2.go-fastly-2.com","attributes":{"type":""}},{"type":"tls_domain","id":"integ-test1.go-fastly-1.com","attributes":{"type":""}}]}
     form: {}
     headers:
       Accept:
@@ -11,34 +11,40 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/6.4.3 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/tls/subscriptions/SUBSCRIPTION_ID?force=true
+      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/tls/subscriptions/mwtZ5xuowgXsyR2nyPjuWw?force=true
     method: PATCH
   response:
-    body: '{"data":{"id":"SUBSCRIPTION_ID","type":"tls_subscription","attributes":{"certificate_authority":"lets-encrypt","created_at":"2022-08-22T10:45:38.000Z","state":"pending","has_active_order":true,"updated_at":"2022-08-22T10:45:39.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"bGl42zjrl7tEqlJz24ZVKw","type":"tls_authorization"},{"id":"CvewJbxr4LcvYm9p5gYQsA","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"},{"id":"integ-test2.go-fastly-2.com","type":"tls_domain"}]},"common_name":{"data":{"id":"integ-test2.go-fastly-2.com","type":"tls_domain"}},"tls_configuration":{"data":{"id":"Em77eV0D2qMAduXPtvRdKg","type":"tls_configuration"}}}},"included":[{"id":"bGl42zjrl7tEqlJz24ZVKw","type":"tls_authorization","attributes":{"challenges":[{"type":"managed-dns","record_type":"CNAME","record_name":"_acme-challenge.integ-test1.go-fastly-1.com","values":["9jwu4ypaom1vthbbvt.fastly-validations.com"]},{"type":"managed-http-cname","record_type":"CNAME","record_name":"integ-test1.go-fastly-1.com","values":["j.sni.global.fastly.net"]},{"type":"managed-http-a","record_type":"A","record_name":"integ-test1.go-fastly-1.com","values":["151.101.2.132","151.101.66.132","151.101.130.132","151.101.194.132"]}],"created_at":"2022-08-22T10:45:38.000Z","state":"blocked","updated_at":"2022-08-22T10:45:39.000Z","warnings":[]},"relationships":{"tls_domain":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"globalsign_email_challenge":{"data":null}}},{"id":"CvewJbxr4LcvYm9p5gYQsA","type":"tls_authorization","attributes":{"challenges":[{"type":"managed-dns","record_type":"CNAME","record_name":"_acme-challenge.integ-test2.go-fastly-2.com","values":["t94s0ykxgurspyegdf.fastly-validations.com"]},{"type":"managed-http-cname","record_type":"CNAME","record_name":"integ-test2.go-fastly-2.com","values":["j.sni.global.fastly.net"]},{"type":"managed-http-a","record_type":"A","record_name":"integ-test2.go-fastly-2.com","values":["151.101.2.132","151.101.66.132","151.101.130.132","151.101.194.132"]}],"created_at":"2022-08-22T10:45:39.000Z","state":"pending","updated_at":"2022-08-22T10:45:39.000Z","warnings":null},"relationships":{"tls_domain":{"data":{"id":"integ-test2.go-fastly-2.com","type":"tls_domain"}},"globalsign_email_challenge":{"data":null}}}]}'
+    body: '{"data":{"id":"mwtZ5xuowgXsyR2nyPjuWw","type":"tls_subscription","attributes":{"certificate_authority":"certainly","created_at":"2024-05-07T12:51:58.000Z","state":"pending","has_active_order":true,"updated_at":"2024-05-07T12:51:59.000Z"},"relationships":{"tls_authorizations":{"data":[{"id":"6zIoBVm633HqlC31oNwcJQ","type":"tls_authorization"},{"id":"B98ZDNS55WAZ5ltYl6wZUQ","type":"tls_authorization"}]},"tls_certificates":{"data":[]},"tls_domains":{"data":[{"id":"integ-test2.go-fastly-2.com","type":"tls_domain"},{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}]},"common_name":{"data":{"id":"integ-test2.go-fastly-2.com","type":"tls_domain"}},"tls_configuration":{"data":{"id":"Em77eV0D2qMAduXPtvRdKg","type":"tls_configuration"}}}},"included":[{"id":"6zIoBVm633HqlC31oNwcJQ","type":"tls_authorization","attributes":{"challenges":[{"type":"managed-dns","record_type":"CNAME","record_name":"_acme-challenge.integ-test2.go-fastly-2.com","values":["t94s0ykxgurspyegdf.fastly-validations.com"]},{"type":"managed-http-cname","record_type":"CNAME","record_name":"integ-test2.go-fastly-2.com","values":["j.sni.global.fastly.net"]},{"type":"managed-http-a","record_type":"A","record_name":"integ-test2.go-fastly-2.com","values":["151.101.2.132","151.101.66.132","151.101.130.132","151.101.194.132"]}],"created_at":"2024-05-07T12:51:59.000Z","state":"pending","updated_at":"2024-05-07T12:51:59.000Z","warnings":null},"relationships":{"tls_domain":{"data":{"id":"integ-test2.go-fastly-2.com","type":"tls_domain"}},"globalsign_email_challenge":{"data":null},"self_managed_http_challenge":{"data":null}}},{"id":"B98ZDNS55WAZ5ltYl6wZUQ","type":"tls_authorization","attributes":{"challenges":[{"type":"managed-dns","record_type":"CNAME","record_name":"_acme-challenge.integ-test1.go-fastly-1.com","values":["9jwu4ypaom1vthbbvt.fastly-validations.com"]},{"type":"managed-http-cname","record_type":"CNAME","record_name":"integ-test1.go-fastly-1.com","values":["j.sni.global.fastly.net"]},{"type":"managed-http-a","record_type":"A","record_name":"integ-test1.go-fastly-1.com","values":["151.101.2.132","151.101.66.132","151.101.130.132","151.101.194.132"]}],"created_at":"2024-05-07T12:51:58.000Z","state":"blocked","updated_at":"2024-05-07T12:51:59.000Z","warnings":[]},"relationships":{"tls_domain":{"data":{"id":"integ-test1.go-fastly-1.com","type":"tls_domain"}},"globalsign_email_challenge":{"data":null},"self_managed_http_challenge":{"data":null}}}]}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
-      - "2367"
+      - "2452"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 22 Aug 2022 10:45:39 GMT
+      - Tue, 07 May 2024 12:51:59 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9035-CONTROL-SLWDC, cache-man4139-MAN
+      - cache-lcy-eglc8600089-LCY
       X-Timer:
-      - S1661165139.292135,VS0,VE310
+      - S1715086319.878448,VS0,VE700
     status: 200 OK
     code: 200
     duration: ""
