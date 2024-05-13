@@ -32,11 +32,15 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Ensure we disable IO on the service after the test
 	defer func() {
 		record(t, fixtureBase+"disable_product", func(c *Client) {
-			c.DisableProduct(&ProductEnablementInput{
+			err = c.DisableProduct(&ProductEnablementInput{
 				ProductID: ProductImageOptimizer,
 				ServiceID: testServiceID,
 			})
 		})
+
+		if err != nil {
+			t.Fatal(err)
+		}
 	}()
 
 	var defaultSettings *ImageOptimizerDefaultSettings
@@ -57,14 +61,23 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Reset our settings back to the original
 	defer func() {
 		record(t, fixtureBase+"final_reset", func(c *Client) {
-			_, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-				ServiceID:      testServiceID,
-				ServiceVersion: *testVersion.Number,
-				Webp:           &originalSettings.Webp,
-				WebpQuality:    &originalSettings.WebpQuality,
-				Upscale:        &originalSettings.Upscale,
-			})
+			if originalSettings != nil {
+				_, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+					ServiceID:      testServiceID,
+					ServiceVersion: *testVersion.Number,
+					// ResizeFilter:   &originalSettings.ResizeFilter,
+					Webp:        &originalSettings.Webp,
+					WebpQuality: &originalSettings.WebpQuality,
+					// JpegType:       &originalSettings.JpegType,
+					JpegQuality: &originalSettings.JpegQuality,
+					Upscale:     &originalSettings.Upscale,
+					AllowVideo:  &originalSettings.AllowVideo,
+				})
+			}
 		})
+		if err != nil {
+			t.Fatal(err)
+		}
 	}()
 
 	newWebp := false
