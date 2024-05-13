@@ -191,7 +191,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	if err == nil {
 		t.Fatalf("missing err")
 	}
-	expectedErr := "Webp quality must be less than or equal to 100"
+	expectedErr := "WebP quality must be less than or equal to 100"
 	if !strings.Contains(err.Error(), expectedErr) {
 		t.Fatalf("expected error to include '%s'; got: %v", expectedErr, err)
 	}
