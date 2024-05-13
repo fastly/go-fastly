@@ -11,26 +11,24 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/service/qDAwPNSjDoCytjIZ6SfjF5/version/38/image_optimizer_default_settings
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/86/image_optimizer_default_settings
     method: PATCH
   response:
-    body: '{"type":"https://www.fastly.com/documentation/reference/api/services/image_optimizer_default_settings/","title":"Bad
-      request","detail":"Webp quality must be less than or equal to 100"}'
+    body: '{"type":"https://www.fastly.com/documentation/reference/api/services/image-optimizer-default-settings/","title":"Bad
+      request","detail":"WebP quality must be less than or equal to 100."}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Connection:
-      - keep-alive
       Content-Type:
-      - application/json
+      - application/problem+json
       Date:
-      - Fri, 19 Apr 2024 02:52:12 GMT
+      - Mon, 13 May 2024 21:27:40 GMT
       Fastly-Ratelimit-Remaining:
-      - "937"
+      - "988"
       Fastly-Ratelimit-Reset:
-      - "1713495600"
+      - "1715637600"
       Pragma:
       - no-cache
       Server:
@@ -48,9 +46,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300112-BFI
+      - cache-bfi-krnt7300118-BFI
       X-Timer:
-      - S1713495132.050585,VS0,VE155
+      - S1715635661.735633,VS0,VE196
     status: 400 Bad Request
     code: 400
     duration: ""

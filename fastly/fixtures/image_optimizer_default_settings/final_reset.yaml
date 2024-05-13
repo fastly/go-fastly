@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"webp":false,"webp_quality":85,"upscale":false}'
+    body: '{"webp":false,"webp_quality":85,"jpeg_quality":85,"upscale":false,"allow_video":false}'
     form: {}
     headers:
       Accept:
@@ -11,7 +11,7 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/service/qDAwPNSjDoCytjIZ6SfjF5/version/38/image_optimizer_default_settings
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/86/image_optimizer_default_settings
     method: PATCH
   response:
     body: '{"resize_filter":"lanczos3","webp":false,"webp_quality":85,"jpeg_type":"auto","jpeg_quality":85,"upscale":false,"allow_video":false}'
@@ -20,16 +20,14 @@ interactions:
       - bytes
       Cache-Control:
       - no-store
-      Connection:
-      - keep-alive
       Content-Type:
       - application/json
       Date:
-      - Fri, 19 Apr 2024 02:52:15 GMT
+      - Mon, 13 May 2024 21:27:44 GMT
       Fastly-Ratelimit-Remaining:
-      - "927"
+      - "978"
       Fastly-Ratelimit-Reset:
-      - "1713495600"
+      - "1715637600"
       Pragma:
       - no-cache
       Server:
@@ -47,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300112-BFI
+      - cache-bfi-krnt7300118-BFI
       X-Timer:
-      - S1713495135.056363,VS0,VE253
+      - S1715635665.681277,VS0,VE319
     status: 200 OK
     code: 200
     duration: ""
