@@ -65,13 +65,15 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 				_, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 					ServiceID:      testServiceID,
 					ServiceVersion: *testVersion.Number,
-					// ResizeFilter:   &originalSettings.ResizeFilter,
-					Webp:        &originalSettings.Webp,
-					WebpQuality: &originalSettings.WebpQuality,
-					// JpegType:       &originalSettings.JpegType,
-					JpegQuality: &originalSettings.JpegQuality,
-					Upscale:     &originalSettings.Upscale,
-					AllowVideo:  &originalSettings.AllowVideo,
+					// just use default resizefilter & jpegtype since it doesn't matter much, and it's annoying
+					// to parse the API output strings back into enums.
+					ResizeFilter: ToPointer(ImageOptoNearest),
+					Webp:         &originalSettings.Webp,
+					WebpQuality:  &originalSettings.WebpQuality,
+					JpegType:     ToPointer(ImageOptoAuto),
+					JpegQuality:  &originalSettings.JpegQuality,
+					Upscale:      &originalSettings.Upscale,
+					AllowVideo:   &originalSettings.AllowVideo,
 				})
 			}
 		})
