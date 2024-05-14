@@ -2,7 +2,7 @@ package fastly
 
 // MultiConstraint is a generic constraint for ToPointer/ToValue.
 type MultiConstraint interface {
-	~string | ~int | int32 | ~int64 | uint | uint8 | uint32 | uint64 | float64 | ~bool
+	[]string | ~string | ~int | int32 | ~int64 | uint | uint8 | uint32 | uint64 | float64 | ~bool
 }
 
 // ToPointer converts T to *T.
