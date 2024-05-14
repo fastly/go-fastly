@@ -1,0 +1,53 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"jpeg_type":"auto"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.3.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/87/image_optimizer_default_settings
+    method: PATCH
+  response:
+    body: '{"resize_filter":"nearest","webp":true,"webp_quality":42,"jpeg_type":"auto","jpeg_quality":85,"upscale":true,"allow_video":false}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 May 2024 16:16:33 GMT
+      Fastly-Ratelimit-Remaining:
+      - "990"
+      Fastly-Ratelimit-Reset:
+      - "1715706000"
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-bfi-krnt7300110-BFI
+      X-Timer:
+      - S1715703393.016316,VS0,VE239
+    status: 200 OK
+    code: 200
+    duration: ""

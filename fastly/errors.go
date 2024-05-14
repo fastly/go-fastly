@@ -332,6 +332,10 @@ var ErrMissingCertificateMTLS = NewFieldError("Certificate, MutualAuthentication
 // requires a "IntegrationID" key, but one was not set.
 var ErrMissingIntegrationID = NewFieldError("IntegrationID")
 
+// ErrMissingImageOptimizerSettings is an error that is returned when an input struct
+// requires one of the optional Image Optimizer default settings, but none are set.
+var ErrMissingImageOptimizerDefaultSetting = NewFieldError("ResizeFilter, Webp, WebpQuality, JpegType, JpegQuality, Upscale, AllowVideo").Message("at least one of the available optional fields is required")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
