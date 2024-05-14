@@ -5,10 +5,10 @@ import (
 	"fmt"
 )
 
-// ResizeFilter is a base for the different ResizeFilter variants.
-type ResizeFilter int64
+// ImageOptoResizeFilter is a base for the different ImageOptoResizeFilter variants.
+type ImageOptoResizeFilter int64
 
-func (r ResizeFilter) String() string {
+func (r ImageOptoResizeFilter) String() string {
 	switch r {
 	case ImageOptoLanczos3:
 		return "lanczos3"
@@ -24,13 +24,13 @@ func (r ResizeFilter) String() string {
 	return "lanczos3" // default
 }
 
-func (r ResizeFilter) MarshalJSON() ([]byte, error) {
+func (r ImageOptoResizeFilter) MarshalJSON() ([]byte, error) {
 	return json.Marshal(r.String())
 }
 
 const (
 	// A Lanczos filter with a kernel size of 3. Lanczos filters can detect edges and linear features within an image, providing the best possible reconstruction.
-	ImageOptoLanczos3 ResizeFilter = iota
+	ImageOptoLanczos3 ImageOptoResizeFilter = iota
 	// A Lanczos filter with a kernel size of 2.
 	ImageOptoLanczos2
 	// A filter using an average of a 4x4 environment of pixels, weighing the innermost pixels higher.
@@ -41,10 +41,10 @@ const (
 	ImageOptoNearest
 )
 
-// JpegType is a base for different JpegType variants
-type JpegType int64
+// ImageOptoJpegType is a base for different ImageOptoJpegType variants
+type ImageOptoJpegType int64
 
-func (r JpegType) String() string {
+func (r ImageOptoJpegType) String() string {
 	switch r {
 	case ImageOptoAuto:
 		return "auto"
@@ -56,13 +56,13 @@ func (r JpegType) String() string {
 	return "auto" // default
 }
 
-func (r JpegType) MarshalJSON() ([]byte, error) {
+func (r ImageOptoJpegType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(r.String())
 }
 
 const (
 	// Match the input JPEG type, or baseline if transforming from a non-JPEG input.
-	ImageOptoAuto JpegType = iota
+	ImageOptoAuto ImageOptoJpegType = iota
 	// Output baseline JPEG images
 	ImageOptoBaseline
 	// Output progressive JPEG images
@@ -106,13 +106,13 @@ type UpdateImageOptimizerDefaultSettingsInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
 	// The type of filter to use while resizing an image.
-	ResizeFilter *ResizeFilter `json:"resize_filter,omitempty"`
+	ResizeFilter *ImageOptoResizeFilter `json:"resize_filter,omitempty"`
 	// Controls whether or not to default to WebP output when the client supports it. This is equivalent to adding "auto=webp" to all image optimizer requests.
 	Webp *bool `json:"webp,omitempty"`
 	// The default quality to use with WebP output. This can be overridden with the second option in the "quality" URL parameter on specific image optimizer requests.
 	WebpQuality *int `json:"webp_quality,omitempty"`
 	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
-	JpegType *JpegType `json:"jpeg_type,omitempty"`
+	JpegType *ImageOptoJpegType `json:"jpeg_type,omitempty"`
 	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
 	JpegQuality *int `json:"jpeg_quality,omitempty"`
 	// Whether or not we should allow output images to render at sizes larger than input.

@@ -199,7 +199,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	}
 
 	// Confirm all resize_filter & jpeg_type values are accepted
-	for _, resizeFilter := range []ResizeFilter{ImageOptoLanczos3, ImageOptoLanczos2, ImageOptoBicubic, ImageOptoBilinear, ImageOptoNearest} {
+	for _, resizeFilter := range []ImageOptoResizeFilter{ImageOptoLanczos3, ImageOptoLanczos2, ImageOptoBicubic, ImageOptoBilinear, ImageOptoNearest} {
 		record(t, fixtureBase+"set_resize_filter/"+resizeFilter.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 				ServiceID:      testServiceID,
@@ -212,7 +212,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		}
 	}
 
-	for _, jpegType := range []JpegType{ImageOptoAuto, ImageOptoBaseline, ImageOptoProgressive} {
+	for _, jpegType := range []ImageOptoJpegType{ImageOptoAuto, ImageOptoBaseline, ImageOptoProgressive} {
 		record(t, fixtureBase+"set_jpeg_type/"+jpegType.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 				ServiceID:      testServiceID,
