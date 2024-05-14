@@ -21,10 +21,10 @@ func TestClient_HealthChecks(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-healthcheck"),
 			Method:         ToPointer("HEAD"),
-			Headers: &[]string{
+			Headers: ToPointer([]string{
 				"Foo: Bar",
 				"Baz: Qux",
-			},
+			}),
 			Host:             ToPointer("example.com"),
 			Path:             ToPointer("/foo"),
 			HTTPVersion:      ToPointer("1.1"),
@@ -169,7 +169,7 @@ func TestClient_HealthChecks(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-healthcheck",
 			NewName:        ToPointer("new-test-healthcheck"),
-			Headers:        &[]string{"Beep: Boop"},
+			Headers:        ToPointer([]string{"Beep: Boop"}),
 		})
 	})
 	if err != nil {
