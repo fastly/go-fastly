@@ -197,7 +197,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	}
 
 	// Confirm all resize_filter & jpeg_type values are accepted
-	for _, resizeFilter := range []ResizeFilter{Lanczos3, Lanczos2, Bicubic, Bilinear, Nearest} {
+	for _, resizeFilter := range []ResizeFilter{ImageOptoLanczos3, ImageOptoLanczos2, ImageOptoBicubic, ImageOptoBilinear, ImageOptoNearest} {
 		record(t, fixtureBase+"set_resize_filter/"+resizeFilter.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 				ServiceID:      testServiceID,
@@ -210,7 +210,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		}
 	}
 
-	for _, jpegType := range []JpegType{Auto, Baseline, Progressive} {
+	for _, jpegType := range []JpegType{ImageOptoAuto, ImageOptoBaseline, ImageOptoProgressive} {
 		record(t, fixtureBase+"set_jpeg_type/"+jpegType.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 				ServiceID:      testServiceID,
@@ -228,10 +228,10 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: *testVersion.Number,
-			ResizeFilter:   ToPointer(Lanczos3),
+			ResizeFilter:   ToPointer(ImageOptoLanczos3),
 			Webp:           ToPointer(false),
 			WebpQuality:    ToPointer(85),
-			JpegType:       ToPointer(Auto),
+			JpegType:       ToPointer(ImageOptoAuto),
 			JpegQuality:    ToPointer(85),
 			Upscale:        ToPointer(false),
 			AllowVideo:     ToPointer(false),

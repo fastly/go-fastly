@@ -10,15 +10,15 @@ type ResizeFilter int64
 
 func (r ResizeFilter) String() string {
 	switch r {
-	case Lanczos3:
+	case ImageOptoLanczos3:
 		return "lanczos3"
-	case Lanczos2:
+	case ImageOptoLanczos2:
 		return "lanczos2"
-	case Bicubic:
+	case ImageOptoBicubic:
 		return "bicubic"
-	case Bilinear:
+	case ImageOptoBilinear:
 		return "bilinear"
-	case Nearest:
+	case ImageOptoNearest:
 		return "nearest"
 	}
 	return "lanczos3" // default
@@ -30,15 +30,15 @@ func (r ResizeFilter) MarshalJSON() ([]byte, error) {
 
 const (
 	// A Lanczos filter with a kernel size of 3. Lanczos filters can detect edges and linear features within an image, providing the best possible reconstruction.
-	Lanczos3 ResizeFilter = iota
+	ImageOptoLanczos3 ResizeFilter = iota
 	// A Lanczos filter with a kernel size of 2.
-	Lanczos2
+	ImageOptoLanczos2
 	// A filter using an average of a 4x4 environment of pixels, weighing the innermost pixels higher.
-	Bicubic
+	ImageOptoBicubic
 	// A filter using an average of a 2x2 environment of pixels.
-	Bilinear
+	ImageOptoBilinear
 	// A filter using the value of nearby translated pixel values. Preserves hard edges.
-	Nearest
+	ImageOptoNearest
 )
 
 // JpegType is a base for different JpegType variants
@@ -46,11 +46,11 @@ type JpegType int64
 
 func (r JpegType) String() string {
 	switch r {
-	case Auto:
+	case ImageOptoAuto:
 		return "auto"
-	case Baseline:
+	case ImageOptoBaseline:
 		return "baseline"
-	case Progressive:
+	case ImageOptoProgressive:
 		return "progressive"
 	}
 	return "auto" // default
@@ -62,11 +62,11 @@ func (r JpegType) MarshalJSON() ([]byte, error) {
 
 const (
 	// Match the input JPEG type, or baseline if transforming from a non-JPEG input.
-	Auto JpegType = iota
+	ImageOptoAuto JpegType = iota
 	// Output baseline JPEG images
-	Baseline
+	ImageOptoBaseline
 	// Output progressive JPEG images
-	Progressive
+	ImageOptoProgressive
 )
 
 // ImageOptimizerDefaultSettings represents the returned Image Optimizer default settings for a given service.
