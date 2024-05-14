@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/9.3.2 (+github.com/fastly/go-fastly; go1.22.2)
     url: https://api.fastly.com/enabled-products/image_optimizer/services/7i6HN3TK9wS159v2gPAZ8A
     method: DELETE
   response:
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 13 May 2024 21:27:45 GMT
+      - Tue, 14 May 2024 16:16:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300118-BFI
+      - cache-bfi-krnt7300110-BFI
       X-Timer:
-      - S1715635665.011325,VS0,VE856
+      - S1715703395.638107,VS0,VE1368
     status: 204 No Content
     code: 204
     duration: ""

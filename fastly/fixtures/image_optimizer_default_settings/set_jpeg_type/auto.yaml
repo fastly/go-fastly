@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/86/image_optimizer_default_settings
+      - FastlyGo/9.3.2 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/87/image_optimizer_default_settings
     method: PATCH
   response:
     body: '{"resize_filter":"nearest","webp":true,"webp_quality":42,"jpeg_type":"auto","jpeg_quality":85,"upscale":true,"allow_video":false}'
@@ -23,11 +23,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 13 May 2024 21:27:43 GMT
+      - Tue, 14 May 2024 16:16:33 GMT
       Fastly-Ratelimit-Remaining:
-      - "982"
+      - "990"
       Fastly-Ratelimit-Reset:
-      - "1715637600"
+      - "1715706000"
       Pragma:
       - no-cache
       Server:
@@ -45,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300118-BFI
+      - cache-bfi-krnt7300110-BFI
       X-Timer:
-      - S1715635663.973275,VS0,VE274
+      - S1715703393.016316,VS0,VE239
     status: 200 OK
     code: 200
     duration: ""

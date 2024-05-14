@@ -12,7 +12,7 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/9.3.2 (+github.com/fastly/go-fastly; go1.22.2)
     url: https://api.fastly.com/enabled-products/image_optimizer/services/7i6HN3TK9wS159v2gPAZ8A
     method: PUT
   response:
@@ -28,7 +28,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 13 May 2024 21:27:39 GMT
+      - Tue, 14 May 2024 16:16:29 GMT
       Pragma:
       - no-cache
       Server:
@@ -46,9 +46,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-bfi-krnt7300118-BFI
+      - cache-bfi-krnt7300110-BFI
       X-Timer:
-      - S1715635658.927563,VS0,VE1264
+      - S1715703388.864441,VS0,VE1596
     status: 200 OK
     code: 200
     duration: ""
