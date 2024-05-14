@@ -67,10 +67,10 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 					ServiceVersion: *testVersion.Number,
 					// just use default resizefilter & jpegtype since it doesn't matter much, and it's annoying
 					// to parse the API output strings back into enums.
-					ResizeFilter: ToPointer(ImageOptoNearest),
+					ResizeFilter: ToPointer(ImageOptimizerNearest),
 					Webp:         &originalSettings.Webp,
 					WebpQuality:  &originalSettings.WebpQuality,
-					JpegType:     ToPointer(ImageOptoAuto),
+					JpegType:     ToPointer(ImageOptimizerAuto),
 					JpegQuality:  &originalSettings.JpegQuality,
 					Upscale:      &originalSettings.Upscale,
 					AllowVideo:   &originalSettings.AllowVideo,
@@ -199,7 +199,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	}
 
 	// Confirm all resize_filter & jpeg_type values are accepted
-	for _, resizeFilter := range []ImageOptoResizeFilter{ImageOptoLanczos3, ImageOptoLanczos2, ImageOptoBicubic, ImageOptoBilinear, ImageOptoNearest} {
+	for _, resizeFilter := range []ImageOptimizerResizeFilter{ImageOptimizerLanczos3, ImageOptimizerLanczos2, ImageOptimizerBicubic, ImageOptimizerBilinear, ImageOptimizerNearest} {
 		record(t, fixtureBase+"set_resize_filter/"+resizeFilter.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 				ServiceID:      testServiceID,
@@ -212,7 +212,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		}
 	}
 
-	for _, jpegType := range []ImageOptoJpegType{ImageOptoAuto, ImageOptoBaseline, ImageOptoProgressive} {
+	for _, jpegType := range []ImageOptimizerJpegType{ImageOptimizerAuto, ImageOptimizerBaseline, ImageOptimizerProgressive} {
 		record(t, fixtureBase+"set_jpeg_type/"+jpegType.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 				ServiceID:      testServiceID,
@@ -230,10 +230,10 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: *testVersion.Number,
-			ResizeFilter:   ToPointer(ImageOptoLanczos3),
+			ResizeFilter:   ToPointer(ImageOptimizerLanczos3),
 			Webp:           ToPointer(false),
 			WebpQuality:    ToPointer(85),
-			JpegType:       ToPointer(ImageOptoAuto),
+			JpegType:       ToPointer(ImageOptimizerAuto),
 			JpegQuality:    ToPointer(85),
 			Upscale:        ToPointer(false),
 			AllowVideo:     ToPointer(false),

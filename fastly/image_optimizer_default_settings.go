@@ -5,68 +5,68 @@ import (
 	"fmt"
 )
 
-// ImageOptoResizeFilter is a base for the different ImageOptoResizeFilter variants.
-type ImageOptoResizeFilter int64
+// ImageOptimizerResizeFilter is a base for the different ImageOptimizerResizeFilter variants.
+type ImageOptimizerResizeFilter int64
 
-func (r ImageOptoResizeFilter) String() string {
+func (r ImageOptimizerResizeFilter) String() string {
 	switch r {
-	case ImageOptoLanczos3:
+	case ImageOptimizerLanczos3:
 		return "lanczos3"
-	case ImageOptoLanczos2:
+	case ImageOptimizerLanczos2:
 		return "lanczos2"
-	case ImageOptoBicubic:
+	case ImageOptimizerBicubic:
 		return "bicubic"
-	case ImageOptoBilinear:
+	case ImageOptimizerBilinear:
 		return "bilinear"
-	case ImageOptoNearest:
+	case ImageOptimizerNearest:
 		return "nearest"
 	}
 	return "lanczos3" // default
 }
 
-func (r ImageOptoResizeFilter) MarshalJSON() ([]byte, error) {
+func (r ImageOptimizerResizeFilter) MarshalJSON() ([]byte, error) {
 	return json.Marshal(r.String())
 }
 
 const (
 	// A Lanczos filter with a kernel size of 3. Lanczos filters can detect edges and linear features within an image, providing the best possible reconstruction.
-	ImageOptoLanczos3 ImageOptoResizeFilter = iota
+	ImageOptimizerLanczos3 ImageOptimizerResizeFilter = iota
 	// A Lanczos filter with a kernel size of 2.
-	ImageOptoLanczos2
+	ImageOptimizerLanczos2
 	// A filter using an average of a 4x4 environment of pixels, weighing the innermost pixels higher.
-	ImageOptoBicubic
+	ImageOptimizerBicubic
 	// A filter using an average of a 2x2 environment of pixels.
-	ImageOptoBilinear
+	ImageOptimizerBilinear
 	// A filter using the value of nearby translated pixel values. Preserves hard edges.
-	ImageOptoNearest
+	ImageOptimizerNearest
 )
 
-// ImageOptoJpegType is a base for different ImageOptoJpegType variants
-type ImageOptoJpegType int64
+// ImageOptimizerJpegType is a base for different ImageOptimizerJpegType variants
+type ImageOptimizerJpegType int64
 
-func (r ImageOptoJpegType) String() string {
+func (r ImageOptimizerJpegType) String() string {
 	switch r {
-	case ImageOptoAuto:
+	case ImageOptimizerAuto:
 		return "auto"
-	case ImageOptoBaseline:
+	case ImageOptimizerBaseline:
 		return "baseline"
-	case ImageOptoProgressive:
+	case ImageOptimizerProgressive:
 		return "progressive"
 	}
 	return "auto" // default
 }
 
-func (r ImageOptoJpegType) MarshalJSON() ([]byte, error) {
+func (r ImageOptimizerJpegType) MarshalJSON() ([]byte, error) {
 	return json.Marshal(r.String())
 }
 
 const (
 	// Match the input JPEG type, or baseline if transforming from a non-JPEG input.
-	ImageOptoAuto ImageOptoJpegType = iota
+	ImageOptimizerAuto ImageOptimizerJpegType = iota
 	// Output baseline JPEG images
-	ImageOptoBaseline
+	ImageOptimizerBaseline
 	// Output progressive JPEG images
-	ImageOptoProgressive
+	ImageOptimizerProgressive
 )
 
 // ImageOptimizerDefaultSettings represents the returned Image Optimizer default settings for a given service.
@@ -106,13 +106,13 @@ type UpdateImageOptimizerDefaultSettingsInput struct {
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
 	// The type of filter to use while resizing an image.
-	ResizeFilter *ImageOptoResizeFilter `json:"resize_filter,omitempty"`
+	ResizeFilter *ImageOptimizerResizeFilter `json:"resize_filter,omitempty"`
 	// Controls whether or not to default to WebP output when the client supports it. This is equivalent to adding "auto=webp" to all image optimizer requests.
 	Webp *bool `json:"webp,omitempty"`
 	// The default quality to use with WebP output. This can be overridden with the second option in the "quality" URL parameter on specific image optimizer requests.
 	WebpQuality *int `json:"webp_quality,omitempty"`
 	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
-	JpegType *ImageOptoJpegType `json:"jpeg_type,omitempty"`
+	JpegType *ImageOptimizerJpegType `json:"jpeg_type,omitempty"`
 	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
 	JpegQuality *int `json:"jpeg_quality,omitempty"`
 	// Whether or not we should allow output images to render at sizes larger than input.
