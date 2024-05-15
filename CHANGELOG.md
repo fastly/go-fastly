@@ -1,5 +1,14 @@
 # Changelog
 
+## [v9.4.0](https://github.com/fastly/go-fastly/releases/tag/v9.4.0) (2024-05-15)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.3.2...v9.4.0)
+
+**Enhancements:**
+
+- feat(helpers): Extend `ToPointer` to cover `[]string` [#525](https://github.com/fastly/go-fastly/pull/525)
+- feat(image_opto): Add Image Optimizer default settings API [#516](https://github.com/fastly/go-fastly/pull/516)
+
 ## [v9.3.2](https://github.com/fastly/go-fastly/releases/tag/v9.3.2) (2024-05-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.3.1...v9.3.2)
