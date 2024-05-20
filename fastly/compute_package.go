@@ -30,6 +30,7 @@ type PackageMetadata struct {
 	Language    *string  `mapstructure:"language"`
 	Name        *string  `mapstructure:"name"`
 	Size        *int64   `mapstructure:"size"`
+	ClonedFrom  *string  `mapstructure:"cloned_from"`
 }
 
 // GetPackageInput is used as input to the GetPackage function.
