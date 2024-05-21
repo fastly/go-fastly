@@ -15,12 +15,13 @@ func TestClient_Package(t *testing.T) {
 
 	testData := Package{
 		Metadata: &PackageMetadata{
+			ClonedFrom:  ToPointer("https://github.com/foo/bar.git"),
 			Description: ToPointer("Default package template used by the Fastly CLI for Rust-based Compute@Edge projects."),
+			FilesHash:   ToPointer("a763d3c88968ebc17691900d3c14306762296df8e47a1c2d7661cee0e0c5aa6d4c082a7c128d6e719fe333b73b46fe3ae32694716ccd2efa21f5d9f049ceec6d"),
 			HashSum:     ToPointer("f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616"),
 			Language:    ToPointer("rust"),
 			Name:        ToPointer("wasm-test"),
 			Size:        ToPointer(int64(2015936)),
-			FilesHash:   ToPointer("a763d3c88968ebc17691900d3c14306762296df8e47a1c2d7661cee0e0c5aa6d4c082a7c128d6e719fe333b73b46fe3ae32694716ccd2efa21f5d9f049ceec6d"),
 		},
 	}
 
@@ -82,6 +83,9 @@ func TestClient_Package(t *testing.T) {
 	if *wp.Metadata.Language != *testData.Metadata.Language {
 		t.Errorf("bad package language: %q != %q", *wp.Metadata.Language, *testData.Metadata.Language)
 	}
+	if *wp.Metadata.ClonedFrom != *testData.Metadata.ClonedFrom {
+		t.Errorf("bad package cloned_from: %q != %q", *wp.Metadata.ClonedFrom, *testData.Metadata.ClonedFrom)
+	}
 
 	// Update with valid package bytes
 
@@ -135,6 +139,9 @@ func TestClient_Package(t *testing.T) {
 	}
 	if *wp.Metadata.Language != *testData.Metadata.Language {
 		t.Errorf("bad package language: %q != %q", *wp.Metadata.Language, *testData.Metadata.Language)
+	}
+	if *wp.Metadata.ClonedFrom != *testData.Metadata.ClonedFrom {
+		t.Errorf("bad package cloned_from: %q != %q", *wp.Metadata.ClonedFrom, *testData.Metadata.ClonedFrom)
 	}
 
 	// Update with invalid package file path
