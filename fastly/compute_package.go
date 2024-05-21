@@ -24,13 +24,13 @@ type Package struct {
 // the raw data is returned as a json sub-block.
 type PackageMetadata struct {
 	Authors     []string `mapstructure:"authors"`
+	ClonedFrom  *string  `mapstructure:"cloned_from"`
 	Description *string  `mapstructure:"description"`
 	FilesHash   *string  `mapstructure:"files_hash"`
 	HashSum     *string  `mapstructure:"hashsum"`
 	Language    *string  `mapstructure:"language"`
 	Name        *string  `mapstructure:"name"`
 	Size        *int64   `mapstructure:"size"`
-	ClonedFrom  *string  `mapstructure:"cloned_from"`
 }
 
 // GetPackageInput is used as input to the GetPackage function.

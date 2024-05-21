@@ -11,7 +11,7 @@ interactions:
       - multipart/form-data; boundary=759393c3176d38e7ff81407b8d0b4dc0dfa111165d9febbdeffd3fbd5841
       User-Agent:
       - FastlyGo/8.2.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/sSsCewrlNQiMzZHiqD8Xr0/version/2/package
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/package
     method: PUT
   response:
     body: '{"msg":"Bad request","detail":"Failed to extract metadata from package"}'

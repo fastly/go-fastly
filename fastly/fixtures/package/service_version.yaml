@@ -9,10 +9,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.2.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/sSsCewrlNQiMzZHiqD8Xr0/version
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version
     method: POST
   response:
-    body: '{"service_id":"sSsCewrlNQiMzZHiqD8Xr0","number":2}'
+    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","number":2}'
     headers:
       Accept-Ranges:
       - bytes

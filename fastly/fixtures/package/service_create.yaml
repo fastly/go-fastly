@@ -19,7 +19,7 @@ interactions:
     method: POST
   response:
     body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly wasm client
-      test","name":"test_service_wasm_package","type":"wasm","id":"sSsCewrlNQiMzZHiqD8Xr0","created_at":"2023-05-11T10:57:51Z","updated_at":"2023-05-11T10:57:51Z","publish_key":"","deleted_at":null,"versions":[{"updated_at":"2023-05-11T10:57:51Z","staging":false,"deployed":false,"service_id":"sSsCewrlNQiMzZHiqD8Xr0","created_at":"2023-05-11T10:57:51Z","testing":false,"locked":false,"active":false,"deleted_at":null,"number":1,"comment":""}],"paused":false}'
+      test","name":"test_service_wasm_package","type":"wasm","id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2023-05-11T10:57:51Z","updated_at":"2023-05-11T10:57:51Z","publish_key":"","deleted_at":null,"versions":[{"updated_at":"2023-05-11T10:57:51Z","staging":false,"deployed":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2023-05-11T10:57:51Z","testing":false,"locked":false,"active":false,"deleted_at":null,"number":1,"comment":""}],"paused":false}'
     headers:
       Accept-Ranges:
       - bytes
