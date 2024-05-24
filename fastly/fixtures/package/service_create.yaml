@@ -14,12 +14,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/8.2.0 (+github.com/fastly/go-fastly; go1.18.5)
+      - FastlyGo/9.4.0 (+github.com/fastly/go-fastly; go1.22.3)
     url: https://api.fastly.com/service
     method: POST
   response:
-    body: '{"customer_id":"51MumwLiSJyFTWhtbByYgR","comment":"go-fastly wasm client
-      test","name":"test_service_wasm_package","type":"wasm","id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2023-05-11T10:57:51Z","updated_at":"2023-05-11T10:57:51Z","publish_key":"","deleted_at":null,"versions":[{"updated_at":"2023-05-11T10:57:51Z","staging":false,"deployed":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2023-05-11T10:57:51Z","testing":false,"locked":false,"active":false,"deleted_at":null,"number":1,"comment":""}],"paused":false}'
+    body: '{"customer_id":"37OEJi7mvah1swc2IV0nQF","comment":"go-fastly wasm client
+      test","name":"test_service_wasm_package","type":"wasm","versions":[{"testing":false,"locked":false,"staging":false,"comment":"","deployed":false,"active":false,"number":1,"service_id":"OOaJq4HVv57fNDv86Qfzf5","deleted_at":null,"updated_at":"2024-05-24T20:12:47Z","created_at":"2024-05-24T20:12:47Z"}],"publish_key":"","paused":false,"deleted_at":null,"id":"OOaJq4HVv57fNDv86Qfzf5","updated_at":"2024-05-24T20:12:47Z","created_at":"2024-05-24T20:12:47Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +28,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 11 May 2023 10:57:51 GMT
+      - Fri, 24 May 2024 20:12:48 GMT
       Fastly-Ratelimit-Remaining:
-      - "9994"
+      - "994"
       Fastly-Ratelimit-Reset:
-      - "1683802800"
+      - "1716584400"
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,9 +50,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-1-CONTROL-AWS-UE2, cache-lhr7357-LHR
+      - cache-chi-klot8100101-CHI, cache-nyc-kteb1890066-NYC
       X-Timer:
-      - S1683802672.502030,VS0,VE443
+      - S1716581567.228107,VS0,VE894
     status: 200 OK
     code: 200
     duration: ""

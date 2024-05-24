@@ -8,10 +8,10 @@ interactions:
       Accept:
       - application/json
       Content-Type:
-      - multipart/form-data; boundary=759393c3176d38e7ff81407b8d0b4dc0dfa111165d9febbdeffd3fbd5841
+      - multipart/form-data; boundary=74bddf4e577a8d1af55ac6e995c5eaf91606bb3ba306b9e9db754306f660
       User-Agent:
-      - FastlyGo/8.2.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/package
+      - FastlyGo/9.4.0 (+github.com/fastly/go-fastly; go1.22.3)
+    url: https://api.fastly.com/service/OOaJq4HVv57fNDv86Qfzf5/version/2/package
     method: PUT
   response:
     body: '{"msg":"Bad request","detail":"Failed to extract metadata from package"}'
@@ -23,11 +23,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 11 May 2023 10:57:56 GMT
+      - Fri, 24 May 2024 20:12:56 GMT
       Fastly-Ratelimit-Remaining:
-      - "9991"
+      - "991"
       Fastly-Ratelimit-Reset:
-      - "1683802800"
+      - "1716584400"
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -41,9 +45,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-1-CONTROL-AWS-UE2, cache-lhr7357-LHR
+      - cache-chi-klot8100138-CHI, cache-nyc-kteb1890066-NYC
       X-Timer:
-      - S1683802675.312595,VS0,VE1002
+      - S1716581573.952296,VS0,VE3703
     status: 400 Bad Request
     code: 400
     duration: ""
