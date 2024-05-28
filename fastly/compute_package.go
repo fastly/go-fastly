@@ -24,6 +24,7 @@ type Package struct {
 // the raw data is returned as a json sub-block.
 type PackageMetadata struct {
 	Authors     []string `mapstructure:"authors"`
+	ClonedFrom  *string  `mapstructure:"cloned_from"`
 	Description *string  `mapstructure:"description"`
 	FilesHash   *string  `mapstructure:"files_hash"`
 	HashSum     *string  `mapstructure:"hashsum"`

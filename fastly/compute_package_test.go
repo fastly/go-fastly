@@ -15,12 +15,13 @@ func TestClient_Package(t *testing.T) {
 
 	testData := Package{
 		Metadata: &PackageMetadata{
-			Description: ToPointer("Default package template used by the Fastly CLI for Rust-based Compute@Edge projects."),
-			HashSum:     ToPointer("f99485bd301e23f028474d26d398da525de17a372ae9e7026891d7f85361d2540d14b3b091929c3f170eade573595e20b3405a9e29651ede59915f2e1652f616"),
+			ClonedFrom:  ToPointer("https://github.com/fastly/compute-starter-kit-rust-empty"),
+			Description: ToPointer("An empty starter kit project template."),
+			FilesHash:   ToPointer("75ff1cf4d953ff2242bb38e4a01b04503622baf4b7dc540256f4dd5fc89df5aed7fea115adab0b71caa79f6483bb846ac0d4f4f937885fb03ee35d2dfafba6f3"),
+			HashSum:     ToPointer("ecc068efcd4071d36d6460152dcc50461b649f01f28589917540a69d33e9b1477decb5f5a9a2f6c269d83a13827502c1fe1f2efc3bdd6beadaabd23e22eb84fd"),
 			Language:    ToPointer("rust"),
-			Name:        ToPointer("wasm-test"),
-			Size:        ToPointer(int64(2015936)),
-			FilesHash:   ToPointer("a763d3c88968ebc17691900d3c14306762296df8e47a1c2d7661cee0e0c5aa6d4c082a7c128d6e719fe333b73b46fe3ae32694716ccd2efa21f5d9f049ceec6d"),
+			Name:        ToPointer("test-package"),
+			Size:        ToPointer(int64(1540845)),
 		},
 	}
 
@@ -71,7 +72,7 @@ func TestClient_Package(t *testing.T) {
 		t.Errorf("bad package description: %q != %q", *wp.Metadata.Description, *testData.Metadata.Description)
 	}
 	if *wp.Metadata.Size != *testData.Metadata.Size {
-		t.Errorf("bad package size: %q != %q", *wp.Metadata.Size, *testData.Metadata.Size)
+		t.Errorf("bad package size: %d != %d", *wp.Metadata.Size, *testData.Metadata.Size)
 	}
 	if *wp.Metadata.HashSum != *testData.Metadata.HashSum {
 		t.Errorf("bad package hashsum: %q != %q", *wp.Metadata.HashSum, *testData.Metadata.HashSum)
@@ -81,6 +82,9 @@ func TestClient_Package(t *testing.T) {
 	}
 	if *wp.Metadata.Language != *testData.Metadata.Language {
 		t.Errorf("bad package language: %q != %q", *wp.Metadata.Language, *testData.Metadata.Language)
+	}
+	if ToValue(wp.Metadata.ClonedFrom) != ToValue(testData.Metadata.ClonedFrom) {
+		t.Errorf("bad package cloned_from: %q != %q", ToValue(wp.Metadata.ClonedFrom), ToValue(testData.Metadata.ClonedFrom))
 	}
 
 	// Update with valid package bytes
@@ -128,13 +132,16 @@ func TestClient_Package(t *testing.T) {
 		t.Errorf("bad package description: %q != %q", *wp.Metadata.Description, *testData.Metadata.Description)
 	}
 	if *wp.Metadata.Size != *testData.Metadata.Size {
-		t.Errorf("bad package size: %q != %q", *wp.Metadata.Size, *testData.Metadata.Size)
+		t.Errorf("bad package size: %d != %d", *wp.Metadata.Size, *testData.Metadata.Size)
 	}
 	if *wp.Metadata.HashSum != *testData.Metadata.HashSum {
 		t.Errorf("bad package hashsum: %q != %q", *wp.Metadata.HashSum, *testData.Metadata.HashSum)
 	}
 	if *wp.Metadata.Language != *testData.Metadata.Language {
 		t.Errorf("bad package language: %q != %q", *wp.Metadata.Language, *testData.Metadata.Language)
+	}
+	if ToValue(wp.Metadata.ClonedFrom) != ToValue(testData.Metadata.ClonedFrom) {
+		t.Errorf("bad package cloned_from: %q != %q", ToValue(wp.Metadata.ClonedFrom), ToValue(testData.Metadata.ClonedFrom))
 	}
 
 	// Update with invalid package file path
