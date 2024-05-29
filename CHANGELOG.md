@@ -1,5 +1,13 @@
 # Changelog
 
+## [v9.5.0](https://github.com/fastly/go-fastly/releases/tag/v9.5.0) (2024-05-29)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.4.0...v9.5.0)
+
+**Enhancements:**
+
+- feat(package): add ClonedFrom field to PackageMetadata [#527](https://github.com/fastly/go-fastly/pull/527)
+
 ## [v9.4.0](https://github.com/fastly/go-fastly/releases/tag/v9.4.0) (2024-05-15)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.3.2...v9.4.0)
