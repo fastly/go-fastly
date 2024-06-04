@@ -13,6 +13,7 @@ type User struct {
 	DeletedAt              *time.Time `mapstructure:"deleted_at"`
 	EmailHash              *string    `mapstructure:"email_hash"`
 	LimitServices          *bool      `mapstructure:"limit_services"`
+	LimitWorkspaces        *bool      `mapstructure:"limit_workspaces"`
 	Locked                 *bool      `mapstructure:"locked"`
 	Login                  *string    `mapstructure:"login"`
 	Name                   *string    `mapstructure:"name"`
