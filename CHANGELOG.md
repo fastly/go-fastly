@@ -1,5 +1,13 @@
 # Changelog
 
+## [v9.6.0](https://github.com/fastly/go-fastly/releases/tag/v9.6.0) (2024-06-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.5.0...v9.6.0)
+
+**Enhancements:**
+
+- add `limit_workspaces` to `User` model [#529](https://github.com/fastly/go-fastly/pull/529)
+
 ## [v9.5.0](https://github.com/fastly/go-fastly/releases/tag/v9.5.0) (2024-05-29)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.4.0...v9.5.0)
