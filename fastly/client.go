@@ -132,8 +132,8 @@ func NewClientForEndpoint(key, endpoint string) (*Client, error) {
 		client.DebugMode = true
 	}
 
-	if userAgent, ok := os.LookupEnv(UserAgentEnvVar); ok {
-		UserAgent = userAgent
+	if customUserAgent, ok := os.LookupEnv(UserAgentEnvVar); ok {
+		UserAgent = fmt.Sprintf("%s, %s", customUserAgent, UserAgent)
 	}
 
 	return client.init()
