@@ -54,6 +54,10 @@ const DefaultRealtimeStatsEndpoint = "https://rt.fastly.com"
 // JSONMimeType is the MIME type for the JSON data format.
 const JSONMimeType = "application/json"
 
+// UserAgentEnvVar is the name of an environment variable that can be used
+// to change the User-Agent of the http requests
+const UserAgentEnvVar = "FASTLY_USER_AGENT"
+
 // ProjectURL is the url for this library.
 var ProjectURL = "github.com/fastly/go-fastly"
 
@@ -126,6 +130,10 @@ func NewClientForEndpoint(key, endpoint string) (*Client, error) {
 
 	if endpoint, ok := os.LookupEnv(DebugEnvVar); ok && endpoint == "true" {
 		client.DebugMode = true
+	}
+
+	if customUserAgent, ok := os.LookupEnv(UserAgentEnvVar); ok {
+		UserAgent = fmt.Sprintf("%s, %s", customUserAgent, UserAgent)
 	}
 
 	return client.init()
