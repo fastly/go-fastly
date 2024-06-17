@@ -57,7 +57,12 @@ func TestClient_CustomTLSCertificate(t *testing.T) {
 	// List
 	var lcc []*CustomTLSCertificate
 	record(t, fixtureBase+"list", func(c *Client) {
-		lcc, err = c.ListCustomTLSCertificates(&ListCustomTLSCertificatesInput{})
+		lcc, err = c.ListCustomTLSCertificates(&ListCustomTLSCertificatesInput{
+			// NOTE: We set to an explicit false to avoid a test error.
+			// This is because we don't activate a real TLS certificate in the test.
+			// Filtering by active certs would return zero results from the API call.
+			FilterInUse: ToPointer(false),
+		})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -156,7 +161,9 @@ func TestClient_ListCustomTLSCertificates_validation(t *testing.T) {
 
 	var err error
 	record(t, "custom_tls/list", func(c *Client) {
-		_, err = c.ListCustomTLSCertificates(&ListCustomTLSCertificatesInput{})
+		_, err = c.ListCustomTLSCertificates(&ListCustomTLSCertificatesInput{
+			FilterInUse: ToPointer(false),
+		})
 	})
 	if err != nil {
 		t.Fatal(err)

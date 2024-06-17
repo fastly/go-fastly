@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"","attributes":{"key":"-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQD6HXcEGvbQyAMI\ndqNDPjSgZd65dq4DKImZ1WXsdGMydEcGUlenDes12YsDU64E0mF3epf871LBmnHG\nJFF0/XRxvEHdY+BSbzUBmAtvKAW7dlmSNCiINWZDnVZ41Alvr2e9rU6qACuICkuK\nEkWbpKPUCt58R+DgsUdr1ma27/HSyalvtQbA6zmTE8bIkTiCnPHFpx5Dr1JOlXac\ngrRfJsISfgg5X3K81cUSjeT4aaSVSGk8s+J4oOKz1BUBQgSra5yPBvbY2a+tUmXF\nb1o1z8/Mh6cjnoRG3VrZVR+0sp8vaYou7yRYYFi6gPqBjg7BUJS/rmzjkvYqNP/o\nS/5JCEYFAgMBAAECggEACmZRPY11d8bpQV/VeAVNIOI7eZCyuZTk682QuF06hq2J\nCn1AAcU1Y37RJelD0hWBUft5+F1nHn+yfV+jN28WeWgvgOoXOLZBCPjueMe8PUg1\nfzvF96vovaT8JHgEkG1FrgBXxf/Nz5FGBM6vsEIPQdDV4WsHsbANXTGEAdVGQ9Jj\nuxZlHHd45BJcxpJBuRC1XxVMf82YpiQsO/UZ4eHNH0eWUDAIY4xUw8nzPu8P2iQT\nliaZ4tILqHdBc1ClHnr2IapVnADTe1Mi2WFROnmNraO1bINCtne4Cti+M2dEEmap\np9Yz9eqesDITSmZxLnXENlk0eiXcwk3Fw7qdK4jTvQKBgQD7gVAxqT/Xw6ChoDza\n6NLewETU5KJVDOFitAyIHT4MgnZeMKoYe+/4KdFO7cr4HXGVWalz6RFylyk1+7U/\nrsJaJTO/uFUcdWHZIWV5TFMIBcA82uoQDs9EeL+0FDETqhOd1Jf9VHfnRkmflTpL\neGeVsLVQszkDUbUacsHKvYWz+wKBgQD+lcq+dvgB73YSX/Eh0k2+fXn//Z7v8O1x\nXv0Xx2887gCQCEzU5Bs5x7HfhHAAz8dCKCqmy1DTXR8u0j85X3vTl+iD2Sw4pDM7\n5MBDMrDnyyh0ULhI14hzJEqKtYGAF0HQT3TDnDtvB1syS1Sly5ert/Db/cbu+nUu\nIBu7SA7N/wKBgQDeINXNJqhmTjdeyIE27o7fgXzJcq0U5O1jGZY/2WPl9IvKoLx6\nJ2xIB9b/GPI8tPSObcRFxUFNrcgOD6OC/TxWFalg2NMC8YFcHizbNtfWrA2fMdGs\nIQhadzMJPxQhRANTUGJ0sde8gc2gjlIQOeVyxcE95yyhi9ah51zVTRH7ZQKBgGTv\n/vKFOM+LocSnRXOjbi+YkEZuyBVZ8MqCXtaOvAvsUUzJ/axqxGCkTGHSoJWxy87v\nHfoDoogq47IsqeSVdwLtt8KO2HmcoLOefpwl/P3qDqAPYQGAcxkzylo0nKOslOuC\nlUj5KJdc00udknIpxnjO9TBD7hvSMaOYF2apqzUBAoGBAMOYOeRROMRMCB7mMI05\nYTD5UxMadsHBaAs0Ht5/1wndoi5RLo43aHVmD6PQz2OrjUGpYspaIupU6x9Xrl+N\ntl2/V0L+m9maiI3UAUj6SOT3kg9daSKHVpZ2QDT/sKwnu0Bm/DJqOy+wqBV0ANxi\nzBWEPScibRjZpxU0J/zwSaaN\n-----END PRIVATE KEY-----","name":"My private key"}}}
+      {"data":{"type":"","attributes":{"key":"-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCyRkkAKhz5QbvE\nM3gck16/sKwyJz86quvrQ35E6kjc3nxrKapDpead7b4S25q73qOG+FEOs1cqdJO4\nt2l53DEFRYgrYKXbA16jtCaPtwWt1dqlXRMByatTP0Ih3HJHEWWjBltrKX7Q2XMV\nvq38ZL+WrHwDn64fnsucoJSecPIbeWm0MIwBoASyP4PvRHke+lxlcetv6jsfh8JB\na57L9Lo9kZuxRa+X7IbnoHLyrKn5ZuLxBCRUqvJjGZCFkMe2oNCXON9Lu9ASpSEN\nBw0sQGAdooVexckzfV0c078Kg204WPkGmL+yY6pmF5n0IqrvhlToSIs9uZV6lP9j\nS/Xdalp3AgMBAAECggEAQTTKEMBWlqj/Z9U3kqQonM6fPTzzuJ656fRm5AgZnIfY\nVE4KE/JDdvJ1empOn3bgs0ZyR4E7WbEIMyEK+GKcn4P+OXeBUqlZ3WDQVfKophu5\nfJCdmiLMgod5xe7e8bWgSk/R8lFcLEHNAWAcPVwQY6k1NxIZ20D20pQ9p/JB6+AR\ni69272B0Z0wXG4VIsdI0wWzI1mWGF0BEWMnLT3XncXgllm9GNJmQRZO9bU+u0SoJ\n1uULH3F/48btXoeYPNj8/FJprdPtwBajm67hPFxCd/is1xtaD1QRvLpifpl3XCu1\nu1wZI3rZr85gO60OSWpsfsfMGceA9eie68t+uxG18QKBgQDTwHL18g+Z7kOV9RGM\nq57Re1nEDfAyC7UCA9mnBKWai+micmC/ECqQ28xSn+4FHiVRkNpzWey1spPbgOD1\nrO5xusi77W9f6q18VuoPb/KuqTJC1SiJlUfA/IUPiKrYT5H3wzLnrwb835ELMUe/\n2cPj89Y6xUMb1dm5XCumMooFDwKBgQDXhv2KHK9mnSXdK/5bQr7IH3yHQFUKo5k2\ntVnK01T86Bgj+qc/XkUeSQs2IV8zA407i21TKjfEXB+kEKB/bTpa9bDjbVxomEUC\na9IpByl4S5kqKI5m8Y/k7lYbAgiIi9USKxUO5mNyaDSlGi3Nh5MnLZ8w8DTUo8Og\ndT/f2KpkGQKBgQCYuWExClk+SJ7udUcnElEF/dWMlhD7x33R6jz9PVjD0s27oIsu\nwtYwjJcdsMPXZRq9baBhOiaEFjyWQKoAB64i0Pkese12XKir2XQPlkqOtvHNSjhm\nowiRpI/D2GqAgUNiU6NPfumnUQgn7m81bDbhHmkREl2IogDatCO3RxRM+QKBgQCZ\nawrxlEe7GKQKUzWlSta5Z8hiEoY2o4v9qIv5WAPIX4JHojYJYpZ6323uo0S78IxJ\nVY+FwqidyyHuzLMi4eLHOtsmmQNNpQ6CkbOw5ts7OT0XCHWNi+htAsciRIlEgZ0z\naJ191Lv3hXvsBr2R7y7tlYka8fH5Z3Vqs+u68OUhiQKBgCduHvbxkLtHLzYFahCr\n2xPWFFe3R59jVGOUGlhwG7Hq9qVcRlJEs+TNtqBJDBeCxv7c+U55wpWV1awSOVae\nqDTvvv/l6+L3Nh1EVnugR4K/dj28RFBSSufunJ4xXWjqe6CR4StLMW3W1qPGpcHc\nREys+kXeBhNAbW7iQG619Hgp\n-----END PRIVATE KEY-----","name":"My private key"}}}
     form: {}
     headers:
       Accept:
@@ -11,21 +11,27 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
+      - FastlyGo/9.6.0 (+github.com/fastly/go-fastly; go1.20.14)
     url: https://api.fastly.com/tls/private_keys
     method: POST
   response:
-    body: '{"data":{"id":"3SSWyx5lOSiqBZvl10vamP","type":"tls_private_key","attributes":{"key_length":2048,"key_type":"RSA","name":"My
-      private key","created_at":null,"replace":false,"public_key_sha1":"75cdebb915f1bd7741b6530c0cd63783daa52e8f"}}}'
+    body: '{"data":{"id":"RyTBv0lgwTEM2kpbMhwVp6","type":"tls_private_key","attributes":{"key_length":2048,"key_type":"RSA","name":"My
+      private key","created_at":null,"replace":false,"public_key_sha1":"7ebc5927b083d15ac667b4b796f8a1ece2d0bbb9"}}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "234"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 10 Jan 2022 07:58:43 GMT
+      - Mon, 17 Jun 2024 16:47:52 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -37,9 +43,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11926-TYO
+      - cache-chi-kigq8000163-CHI, cache-lhr-egll1980057-LHR
       X-Timer:
-      - S1641801523.468587,VS0,VE362
+      - S1718642873.565140,VS0,VE400
     status: 201 Created
     code: 201
     duration: ""
