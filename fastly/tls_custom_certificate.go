@@ -27,6 +27,8 @@ type CustomTLSCertificate struct {
 
 // ListCustomTLSCertificatesInput is used as input to the Client.ListCustomTLSCertificates function.
 type ListCustomTLSCertificatesInput struct {
+	// FilterInUse limits the returned certificates to those currently using Fastly to terminate TLS (that is, certificates associated with an activation). Permitted values: true, false.
+	FilterInUse *bool
 	// FilterNotAfter limits the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
 	FilterNotAfter string
 	// FilterTLSDomainsID limits the returned certificates to those that include the specific domain.
@@ -45,6 +47,7 @@ type ListCustomTLSCertificatesInput struct {
 func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]any{
+		"filter[in_use]":         i.FilterInUse,
 		"filter[not_after]":      i.FilterNotAfter,
 		"filter[tls_domains.id]": i.FilterTLSDomainsID,
 		"include":                i.Include,
@@ -54,16 +57,18 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	}
 
 	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
-			if value != "" {
-				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
-				result[key] = v
+		switch t := value.(type) {
+		case string:
+			if t != "" {
+				result[key] = t
 			}
-		case "int":
-			if value != 0 {
-				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
-				result[key] = strconv.Itoa(v)
+		case int:
+			if t != 0 {
+				result[key] = strconv.Itoa(t)
+			}
+		case *bool:
+			if t != nil {
+				result[key] = strconv.FormatBool(*t)
 			}
 		}
 	}

@@ -8,21 +8,27 @@ interactions:
       Accept:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
-    url: https://api.fastly.com/tls/certificates
+      - FastlyGo/9.6.0 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/tls/certificates?filter%5Bin_use%5D=false
     method: GET
   response:
-    body: '{"data":[{"id":"1TvLUdms3P3wORynPDnXhu","type":"tls_certificate","attributes":{"created_at":"2022-01-10T07:58:44.000Z","issued_to":"example.com","issuer":"example.com","name":"My
-      certificate","not_after":"2022-04-10T07:58:43.000Z","not_before":"2022-01-10T07:58:43.000Z","replace":false,"serial_number":"5577006791947779410","signature_algorithm":"SHA256-RSA","updated_at":"2022-01-10T07:58:44.000Z"},"relationships":{"tls_domains":{"data":[{"id":"example.com","type":"tls_domain"}]}}},{"id":"37bTehzIhUp7UiqGK3Mzef","type":"tls_certificate","attributes":{"created_at":"2021-11-10T04:01:58.000Z","issued_to":"tf-test-7729967424339125537.example.com","issuer":"tf-test-7729967424339125537.example.com","name":"tf-test-7729967424339125537.example.com","not_after":"2022-02-08T03:57:02.000Z","not_before":"2021-11-10T03:57:02.000Z","replace":false,"serial_number":"2341071107170126653","signature_algorithm":"SHA256-RSA","updated_at":"2021-11-10T04:01:58.000Z"},"relationships":{"tls_domains":{"data":[{"id":"tf-test-7729967424339125537.example.com","type":"tls_domain"}]}}}],"links":{"self":"https://api.fastly.com/tls/certificates?page%5Bnumber%5D=1\u0026page%5Bsize%5D=20","first":"https://api.fastly.com/tls/certificates?page%5Bnumber%5D=1\u0026page%5Bsize%5D=20","prev":null,"next":null,"last":"https://api.fastly.com/tls/certificates?page%5Bnumber%5D=1\u0026page%5Bsize%5D=20"},"meta":{"per_page":20,"current_page":1,"record_count":2,"total_pages":1}}'
+    body: '{"data":[{"id":"ZwPwTJyjOePoOdUs0WvRO6","type":"tls_certificate","attributes":{"created_at":"2024-06-17T16:47:53.000Z","issued_to":"example.com","issuer":"example.com","name":"My
+      certificate","not_after":"2024-09-15T16:47:52.000Z","not_before":"2024-06-17T16:47:52.000Z","replace":false,"serial_number":"131","signature_algorithm":"SHA256-RSA","updated_at":"2024-06-17T16:47:53.000Z"},"relationships":{"tls_domains":{"data":[{"id":"example.com","type":"tls_domain"}]}}}],"links":{"self":"https://api.fastly.com/tls/certificates?filter%5Bin_use%5D=false\u0026page%5Bnumber%5D=1\u0026page%5Bsize%5D=20","first":"https://api.fastly.com/tls/certificates?filter%5Bin_use%5D=false\u0026page%5Bnumber%5D=1\u0026page%5Bsize%5D=20","prev":null,"next":null,"last":"https://api.fastly.com/tls/certificates?filter%5Bin_use%5D=false\u0026page%5Bnumber%5D=1\u0026page%5Bsize%5D=20"},"meta":{"per_page":20,"current_page":1,"record_count":1,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
-      - "1454"
+      - "942"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 10 Jan 2022 07:58:44 GMT
+      - Mon, 17 Jun 2024 16:47:53 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -34,9 +40,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9036-CONTROL-SLWDC, cache-tyo11926-TYO
+      - cache-chi-klot8100142-CHI, cache-lhr-egll1980057-LHR
       X-Timer:
-      - S1641801524.198887,VS0,VE238
+      - S1718642874.657016,VS0,VE227
     status: 200 OK
     code: 200
     duration: ""

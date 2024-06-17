@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"tls_certificate","attributes":{"cert_blob":"-----BEGIN CERTIFICATE-----\nMIIDWTCCAkGgAwIBAgIITWWCIQf8/VIwDQYJKoZIhvcNAQELBQAwNDEUMBIGA1UE\nAxMLZXhhbXBsZS5jb20xHDAaBgNVBAUTEzU1NzcwMDY3OTE5NDc3Nzk0MTAwHhcN\nMjIwMTEwMDc1ODQzWhcNMjIwNDEwMDc1ODQzWjA0MRQwEgYDVQQDEwtleGFtcGxl\nLmNvbTEcMBoGA1UEBRMTNTU3NzAwNjc5MTk0Nzc3OTQxMDCCASIwDQYJKoZIhvcN\nAQEBBQADggEPADCCAQoCggEBAPoddwQa9tDIAwh2o0M+NKBl3rl2rgMoiZnVZex0\nYzJ0RwZSV6cN6zXZiwNTrgTSYXd6l/zvUsGaccYkUXT9dHG8Qd1j4FJvNQGYC28o\nBbt2WZI0KIg1ZkOdVnjUCW+vZ72tTqoAK4gKS4oSRZuko9QK3nxH4OCxR2vWZrbv\n8dLJqW+1BsDrOZMTxsiROIKc8cWnHkOvUk6VdpyCtF8mwhJ+CDlfcrzVxRKN5Php\npJVIaTyz4nig4rPUFQFCBKtrnI8G9tjZr61SZcVvWjXPz8yHpyOehEbdWtlVH7Sy\nny9pii7vJFhgWLqA+oGODsFQlL+ubOOS9io0/+hL/kkIRgUCAwEAAaNvMG0wDgYD\nVR0PAQH/BAQDAgIEMBMGA1UdJQQMMAoGCCsGAQUFBwMBMA8GA1UdEwEB/wQFMAMB\nAf8wHQYDVR0OBBYEFJGkny/5U9c6Qir8jF3qkoGUA9aLMBYGA1UdEQQPMA2CC2V4\nYW1wbGUuY29tMA0GCSqGSIb3DQEBCwUAA4IBAQBUM2R30QjlntlXhi7H7KRb/AEM\nXJ250I8czN/+0eLCZq8wlzUVLUpK9Vd3DY0fru98IaLtvmKLQxBH+GMBxFtpec03\nq61w4sSiOkqclUEJtzQWiAenDwG+vwfwcU3Da2yzQYrvMQ4iY9NQOGeoUusbSni6\n5pNafryRGCvFURKq2CYgf3lJH4MfidSO6lpgkleGo2GRuMpkhYKEncjXCx3NryR0\ndD7d2Wbz0Ak2KqWbnZrepTt+j7RB2eaeDjk/odWNfWbnmCPLx99LP0o8nEfsudBM\nK2EL8FRIeA5MhxuqBYKfGlr20JHtWiuEzgWDC2WLbxYbX6HtRIfGibMGGJ/F\n-----END CERTIFICATE-----","name":"My certificate"}}}
+      {"data":{"type":"tls_certificate","attributes":{"cert_blob":"-----BEGIN CERTIFICATE-----\nMIIDMzCCAhugAwIBAgICAIMwDQYJKoZIhvcNAQELBQAwJDEUMBIGA1UEAxMLZXhh\nbXBsZS5jb20xDDAKBgNVBAUTAzEzMTAeFw0yNDA2MTcxNjQ3NTJaFw0yNDA5MTUx\nNjQ3NTJaMCQxFDASBgNVBAMTC2V4YW1wbGUuY29tMQwwCgYDVQQFEwMxMzEwggEi\nMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQCyRkkAKhz5QbvEM3gck16/sKwy\nJz86quvrQ35E6kjc3nxrKapDpead7b4S25q73qOG+FEOs1cqdJO4t2l53DEFRYgr\nYKXbA16jtCaPtwWt1dqlXRMByatTP0Ih3HJHEWWjBltrKX7Q2XMVvq38ZL+WrHwD\nn64fnsucoJSecPIbeWm0MIwBoASyP4PvRHke+lxlcetv6jsfh8JBa57L9Lo9kZux\nRa+X7IbnoHLyrKn5ZuLxBCRUqvJjGZCFkMe2oNCXON9Lu9ASpSENBw0sQGAdooVe\nxckzfV0c078Kg204WPkGmL+yY6pmF5n0IqrvhlToSIs9uZV6lP9jS/Xdalp3AgMB\nAAGjbzBtMA4GA1UdDwEB/wQEAwICBDATBgNVHSUEDDAKBggrBgEFBQcDATAPBgNV\nHRMBAf8EBTADAQH/MB0GA1UdDgQWBBR4tbBMQMv6gLRhAYKJk4yLnyP5BjAWBgNV\nHREEDzANggtleGFtcGxlLmNvbTANBgkqhkiG9w0BAQsFAAOCAQEATe9fTQCETnh6\nTU0JkZ0ulfgbcdrjofLHKgEuurAorwu+1SAcXybdHYnhBNSO9/qSpg/HxpremZdF\ndf6lsdl0l/P8L7PZJVF7oK7C2a8U3mBjGosxxR6YTEo8GxVFvOpxBh4gSongSd28\nnhrpX3D1wHxsuA63XDnnid52ItVAdXQE7WcQ2me/MtikTNGeA1W9uXRUkz63kfuB\nwah+lcMJ21+EoD+7mWHAR0oPj7cl62s3K7C6K+MgroSp8ts6xHvo2Ylqz8n7rpwu\niCP1i5d9CXsCxUIt7SHoJwxnB4lfXp/BY4EFyGpEuGqSFVpzGn22lhW3YL6pV4TC\nNgRUkenEiQ==\n-----END CERTIFICATE-----","name":"My certificate"}}}
     form: {}
     headers:
       Accept:
@@ -11,21 +11,27 @@ interactions:
       Content-Type:
       - application/vnd.api+json
       User-Agent:
-      - FastlyGo/5.2.0 (+github.com/fastly/go-fastly; go1.17.3)
+      - FastlyGo/9.6.0 (+github.com/fastly/go-fastly; go1.20.14)
     url: https://api.fastly.com/tls/certificates
     method: POST
   response:
-    body: '{"data":{"id":"1TvLUdms3P3wORynPDnXhu","type":"tls_certificate","attributes":{"created_at":"2022-01-10T07:58:44.000Z","issued_to":"example.com","issuer":"example.com","name":"My
-      certificate","not_after":"2022-04-10T07:58:43.000Z","not_before":"2022-01-10T07:58:43.000Z","replace":false,"serial_number":"5577006791947779410","signature_algorithm":"SHA256-RSA","updated_at":"2022-01-10T07:58:44.000Z"},"relationships":{"tls_domains":{"data":[{"id":"example.com","type":"tls_domain"}]}}}}'
+    body: '{"data":{"id":"ZwPwTJyjOePoOdUs0WvRO6","type":"tls_certificate","attributes":{"created_at":"2024-06-17T16:47:53.000Z","issued_to":"example.com","issuer":"example.com","name":"My
+      certificate","not_after":"2024-09-15T16:47:52.000Z","not_before":"2024-06-17T16:47:52.000Z","replace":false,"serial_number":"131","signature_algorithm":"SHA256-RSA","updated_at":"2024-06-17T16:47:53.000Z"},"relationships":{"tls_domains":{"data":[{"id":"example.com","type":"tls_domain"}]}}}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
-      - "485"
+      - "469"
       Content-Type:
       - application/vnd.api+json
       Date:
-      - Mon, 10 Jan 2022 07:58:44 GMT
+      - Mon, 17 Jun 2024 16:47:53 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -37,9 +43,9 @@ interactions:
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-control-slwdc9037-CONTROL-SLWDC, cache-tyo11926-TYO
+      - cache-chi-klot8100103-CHI, cache-lhr-egll1980057-LHR
       X-Timer:
-      - S1641801524.841397,VS0,VE349
+      - S1718642873.009578,VS0,VE617
     status: 201 Created
     code: 201
     duration: ""
