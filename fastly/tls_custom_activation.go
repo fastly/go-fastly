@@ -11,11 +11,12 @@ import (
 
 // TLSActivation represents a /tls/activations response.
 type TLSActivation struct {
-	Certificate   *CustomTLSCertificate `jsonapi:"relation,tls_certificate"`
-	Configuration *TLSConfiguration     `jsonapi:"relation,tls_configuration"` // TLSConfiguration type shared with BulkCertificate
-	CreatedAt     *time.Time            `jsonapi:"attr,created_at,iso8601"`
-	Domain        *TLSDomain            `jsonapi:"relation,tls_domain"` // TLSDomain type shared with BulkCertificate
-	ID            string                `jsonapi:"primary,tls_activation"`
+	Certificate          *CustomTLSCertificate    `jsonapi:"relation,tls_certificate"`
+	Configuration        *TLSConfiguration        `jsonapi:"relation,tls_configuration"` // TLSConfiguration type shared with BulkCertificate
+	CreatedAt            *time.Time               `jsonapi:"attr,created_at,iso8601"`
+	Domain               *TLSDomain               `jsonapi:"relation,tls_domain"` // TLSDomain type shared with BulkCertificate
+	ID                   string                   `jsonapi:"primary,tls_activation"`
+	MutualAuthentication *TLSMutualAuthentication `jsonapi:"relation,mutual_authentication"`
 }
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
