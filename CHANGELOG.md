@@ -1,5 +1,17 @@
 # Changelog
 
+## [v9.7.0](https://github.com/fastly/go-fastly/releases/tag/v9.7.0) (2024-06-21)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.6.0...v9.7.0)
+
+**Enhancements:**
+
+- feat(tls_custom): add `mutual_authentication` field to response [#535](https://github.com/fastly/go-fastly/pull/535)
+
+- feat(tls/custom_certs): add `in_use` filter [#534](https://github.com/fastly/go-fastly/pull/534)
+
+- feat(client): prepend custom user-agent via `FASTLY_USER_AGENT` env variable to user [#531](https://github.com/fastly/go-fastly/pull/531)
+
 ## [v9.6.0](https://github.com/fastly/go-fastly/releases/tag/v9.6.0) (2024-06-04)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.5.0...v9.6.0)
