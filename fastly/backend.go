@@ -38,6 +38,10 @@ type Backend struct {
 	ServiceID           *string    `mapstructure:"service_id"`
 	ServiceVersion      *int       `mapstructure:"version"`
 	Shield              *string    `mapstructure:"shield"`
+	TcpKeepAliveEnable  *bool      `mapstructure:"tcp_keepalive_enable"`
+	TcpKeepAliveIntvl   *int       `mapstructure:"tcp_keepalive_interval"`
+	TcpKeepAliveProbes  *int       `mapstructure:"tcp_keepalive_probes"`
+	TcpKeepAliveTime    *int       `mapstructure:"tcp_keepalive_time"`
 	UpdatedAt           *time.Time `mapstructure:"updated_at"`
 	UseSSL              *bool      `mapstructure:"use_ssl"`
 	Weight              *int       `mapstructure:"weight"`
@@ -130,6 +134,14 @@ type CreateBackendInput struct {
 	ServiceVersion int `url:"-"`
 	// Shield is an identifier of the POP to use as a shield.
 	Shield *string `url:"shield,omitempty"`
+	// TcpKeepAliveEnable is whether to enable TCP keepalives to this backend.
+	TcpKeepAliveEnable *bool `url:"tcp_keepalive_enable,omitempty"`
+	// TcpKeepAliveIntvl is how long to wait between each TCP keepalive probe sent to this backend.
+	TcpKeepAliveIntvl *int `url:"tcp_keepalive_interval,omitempty"`
+	// TcpKeepAliveProbes is how many unacknowledged TCP keepalive probes to send to this backend before it's considered dead.
+	TcpKeepAliveProbes *int `url:"tcp_keepalive_probes,omitempty"`
+	// TcpKeepAliveTime is how long to wait after the last sent data before sending TCP keepalive probes.
+	TcpKeepAliveTime *int `url:"tcp_keepalive_time,omitempty"`
 	// UseSSL indicates whether or not to require TLS for connections to this backend.
 	UseSSL *Compatibool `url:"use_ssl,omitempty"`
 	// Weight is the weight used to load balance this backend against others.
@@ -253,6 +265,14 @@ type UpdateBackendInput struct {
 	ServiceVersion int `url:"-"`
 	// Shield is an identifier of the POP to use as a shield.
 	Shield *string `url:"shield,omitempty"`
+	// TcpKeepAliveEnable is whether to enable TCP keepalives to this backend.
+	TcpKeepAliveEnable *bool `url:"tcp_keepalive_enable,omitempty"`
+	// TcpKeepAliveIntvl is how long to wait between each TCP keepalive probe sent to this backend.
+	TcpKeepAliveIntvl *int `url:"tcp_keepalive_interval,omitempty"`
+	// TcpKeepAliveProbes is how many unacknowledged TCP keepalive probes to send to this backend before it's considered dead.
+	TcpKeepAliveProbes *int `url:"tcp_keepalive_probes,omitempty"`
+	// TcpKeepAliveTime is how long to wait after the last sent data before sending TCP keepalive probes.
+	TcpKeepAliveTime *int `url:"tcp_keepalive_time,omitempty"`
 	// UseSSL indicates whether or not to require TLS for connections to this backend.
 	UseSSL *Compatibool `url:"use_ssl,omitempty"`
 	// Weight is the weight used to load balance this backend against others.
