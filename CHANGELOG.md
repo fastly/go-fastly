@@ -1,5 +1,13 @@
 # Changelog
 
+## [v9.8.0](https://github.com/fastly/go-fastly/releases/tag/v9.8.0) (2024-08-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.7.0...v9.8.0)
+
+**Enhancements:**
+
+- Add TCP Keep-Alive parameters to backend structs [#537](https://github.com/fastly/go-fastly/pull/537)
+
 ## [v9.7.0](https://github.com/fastly/go-fastly/releases/tag/v9.7.0) (2024-06-21)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.6.0...v9.7.0)
