@@ -11,7 +11,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 
 	// Enable Product - Bot Management
 	var pe *ProductEnablement
-	record(t, "product_enablement/enable", func(c *Client) {
+	record(t, "product_enablement/enable_bot_management", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
 			ServiceID: testServiceID,
@@ -27,7 +27,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 
 	// Get Product status
 	var gpe *ProductEnablement
-	record(t, "product_enablement/get", func(c *Client) {
+	record(t, "product_enablement/get_bot_management", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
 			ServiceID: testServiceID,
@@ -42,7 +42,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 	}
 
 	// Disable Product
-	record(t, "product_enablement/disable", func(c *Client) {
+	record(t, "product_enablement/disable_bot_management", func(c *Client) {
 		err = c.DisableProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
 			ServiceID: testServiceID,
@@ -53,7 +53,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 	}
 
 	// Get Product status again to check disabled
-	record(t, "product_enablement/get-disabled", func(c *Client) {
+	record(t, "product_enablement/get-disabled_bot_management", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
 			ServiceID: testServiceID,
