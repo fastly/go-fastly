@@ -9,7 +9,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 
 	var err error
 
-	// Enable Product
+	// Enable Product - Bot Management
 	var pe *ProductEnablement
 	record(t, "product_enablement/enable", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
