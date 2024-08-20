@@ -20,6 +20,8 @@ type Product int64
 
 func (p Product) String() string {
 	switch p {
+	case ProductBotManagement:
+		return "bot_management"
 	case ProductBrotliCompression:
 		return "brotli_compression"
 	case ProductDomainInspector:
@@ -40,6 +42,7 @@ func (p Product) String() string {
 
 const (
 	ProductUndefined Product = iota
+	ProductBotManagement
 	ProductBrotliCompression
 	ProductDomainInspector
 	ProductFanout
