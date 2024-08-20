@@ -1,5 +1,13 @@
 # Changelog
 
+## [v9.9.0](https://github.com/fastly/go-fastly/releases/tag/v9.9.0) (2024-08-20)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.8.0...v9.9.0)
+
+**Enhancements:**
+
+- feat(product_enablement): Add support for the 'bot_management' product. [#539](https://github.com/fastly/go-fastly/pull/539)
+
 ## [v9.8.0](https://github.com/fastly/go-fastly/releases/tag/v9.8.0) (2024-08-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.7.0...v9.8.0)
