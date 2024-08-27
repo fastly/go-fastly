@@ -7,17 +7,25 @@ import (
 
 // Version represents a distinct configuration version.
 type Version struct {
-	Active    *bool      `mapstructure:"active"`
-	Comment   *string    `mapstructure:"comment"`
-	CreatedAt *time.Time `mapstructure:"created_at"`
-	DeletedAt *time.Time `mapstructure:"deleted_at"`
-	Deployed  *bool      `mapstructure:"deployed"`
-	Locked    *bool      `mapstructure:"locked"`
-	Number    *int       `mapstructure:"number"`
-	ServiceID *string    `mapstructure:"service_id"`
-	Staging   *bool      `mapstructure:"staging"`
-	Testing   *bool      `mapstructure:"testing"`
-	UpdatedAt *time.Time `mapstructure:"updated_at"`
+	Active       *bool          `mapstructure:"active"`
+	Comment      *string        `mapstructure:"comment"`
+	CreatedAt    *time.Time     `mapstructure:"created_at"`
+	DeletedAt    *time.Time     `mapstructure:"deleted_at"`
+	Deployed     *bool          `mapstructure:"deployed"`
+	Locked       *bool          `mapstructure:"locked"`
+	Number       *int           `mapstructure:"number"`
+	ServiceID    *string        `mapstructure:"service_id"`
+	Staging      *bool          `mapstructure:"staging"`
+	Testing      *bool          `mapstructure:"testing"`
+	UpdatedAt    *time.Time     `mapstructure:"updated_at"`
+	Environments []*Environment `mapstructure:"environments"`
+}
+
+// Environment represents a distinct deployment environment.
+type Environment struct {
+	ServiceVersion *int64  `mapstructure:"active_version"`
+	Name           *string `mapstructure:"name"`
+	ServiceID      *string `mapstructure:"service_id"`
 }
 
 // ListVersionsInput is the input to the ListVersions function.
@@ -176,6 +184,8 @@ type ActivateVersionInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
+	// Environment is the Fastly environment to activate this version to (optional).
+	Environment string
 }
 
 // ActivateVersion activates the given version.
@@ -187,7 +197,13 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "activate")
+	components := []string{"service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "activate"}
+	if i.Environment != "" {
+		components = append(components, i.Environment)
+	}
+
+	path := ToSafeURL(components...)
+
 	resp, err := c.Put(path, nil)
 	if err != nil {
 		return nil, err
@@ -207,6 +223,8 @@ type DeactivateVersionInput struct {
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
+	// Environment is the Fastly environment to deactivate this version from (optional).
+	Environment string
 }
 
 // DeactivateVersion deactivates the given version.
@@ -218,7 +236,13 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "deactivate")
+	components := []string{"service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "deactivate"}
+	if i.Environment != "" {
+		components = append(components, i.Environment)
+	}
+
+	path := ToSafeURL(components...)
+
 	resp, err := c.Put(path, nil)
 	if err != nil {
 		return nil, err

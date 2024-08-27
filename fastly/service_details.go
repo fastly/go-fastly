@@ -7,31 +7,33 @@ import (
 
 // Service represents a server response from the Fastly API.
 type Service struct {
-	ActiveVersion *int       `mapstructure:"version"`
-	Comment       *string    `mapstructure:"comment"`
-	CreatedAt     *time.Time `mapstructure:"created_at"`
-	CustomerID    *string    `mapstructure:"customer_id"`
-	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ServiceID     *string    `mapstructure:"id"`
-	Name          *string    `mapstructure:"name"`
-	Type          *string    `mapstructure:"type"`
-	UpdatedAt     *time.Time `mapstructure:"updated_at"`
-	Versions      []*Version `mapstructure:"versions"`
+	ActiveVersion *int           `mapstructure:"version"`
+	Comment       *string        `mapstructure:"comment"`
+	CreatedAt     *time.Time     `mapstructure:"created_at"`
+	CustomerID    *string        `mapstructure:"customer_id"`
+	DeletedAt     *time.Time     `mapstructure:"deleted_at"`
+	ServiceID     *string        `mapstructure:"id"`
+	Name          *string        `mapstructure:"name"`
+	Type          *string        `mapstructure:"type"`
+	UpdatedAt     *time.Time     `mapstructure:"updated_at"`
+	Versions      []*Version     `mapstructure:"versions"`
+	Environments  []*Environment `mapstructure:"environments"`
 }
 
 // ServiceDetail represents a server response from the Fastly API.
 type ServiceDetail struct {
-	ActiveVersion *Version   `mapstructure:"active_version"`
-	Comment       *string    `mapstructure:"comment"`
-	CreatedAt     *time.Time `mapstructure:"created_at"`
-	CustomerID    *string    `mapstructure:"customer_id"`
-	DeletedAt     *time.Time `mapstructure:"deleted_at"`
-	ServiceID     *string    `mapstructure:"id"`
-	Name          *string    `mapstructure:"name"`
-	Type          *string    `mapstructure:"type"`
-	UpdatedAt     *time.Time `mapstructure:"updated_at"`
-	Version       *Version   `mapstructure:"version"`
-	Versions      []*Version `mapstructure:"versions"`
+	ActiveVersion *Version       `mapstructure:"active_version"`
+	Comment       *string        `mapstructure:"comment"`
+	CreatedAt     *time.Time     `mapstructure:"created_at"`
+	CustomerID    *string        `mapstructure:"customer_id"`
+	DeletedAt     *time.Time     `mapstructure:"deleted_at"`
+	ServiceID     *string        `mapstructure:"id"`
+	Name          *string        `mapstructure:"name"`
+	Type          *string        `mapstructure:"type"`
+	UpdatedAt     *time.Time     `mapstructure:"updated_at"`
+	Version       *Version       `mapstructure:"version"`
+	Versions      []*Version     `mapstructure:"versions"`
+	Environments  []*Environment `mapstructure:"environments"`
 }
 
 // ServiceDomain represents a server response from the Fastly API.
