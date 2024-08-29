@@ -1,7 +1,5 @@
 package fastly
 
-import "unicode"
-
 // MultiConstraint is a generic constraint for ToPointer/ToValue.
 type MultiConstraint interface {
 	[]string | ~string | ~int | int32 | ~int64 | uint | uint8 | uint32 | uint64 | float64 | ~bool
@@ -37,7 +35,7 @@ func NullString(v string) *string {
 // isAlphaNumeric returns true if the string is alphanumeric.
 func isAlphanumeric(s string) bool {
 	for _, r := range s {
-		if !unicode.IsLetter(r) && !unicode.IsNumber(r) {
+		if !((r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9')) {
 			return false
 		}
 	}
