@@ -161,6 +161,13 @@ func TestClient_ListHoneycombs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListHoneycombs(&ListHoneycombsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListHoneycombs(&ListHoneycombsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -175,6 +182,13 @@ func TestClient_CreateHoneycomb_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateHoneycomb(&CreateHoneycombInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -207,6 +221,15 @@ func TestClient_GetHoneycomb_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetHoneycomb(&GetHoneycombInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHoneycomb(&GetHoneycombInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -235,6 +258,15 @@ func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateHoneycomb(&UpdateHoneycombInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateHoneycomb(&UpdateHoneycombInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -259,6 +291,15 @@ func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteHoneycomb(&DeleteHoneycombInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

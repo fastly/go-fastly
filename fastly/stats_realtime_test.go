@@ -12,6 +12,13 @@ func TestClient_GetRealtimeStats_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testStatsClient.GetRealtimeStats(&GetRealtimeStatsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestStatsClient_GetRealtimeStats(t *testing.T) {

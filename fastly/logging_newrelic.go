@@ -32,8 +32,8 @@ type ListNewRelicInput struct {
 
 // ListNewRelic retrieves all resources.
 func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -77,8 +77,8 @@ type CreateNewRelicInput struct {
 
 // CreateNewRelic creates a new resource.
 func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -113,8 +113,8 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -163,8 +163,8 @@ func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -199,8 +199,8 @@ func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

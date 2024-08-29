@@ -260,6 +260,13 @@ func TestClient_ListNewRelic_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListNewRelic(&ListNewRelicInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListNewRelic(&ListNewRelicInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -275,6 +282,13 @@ func TestClient_CreateNewRelic_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateNewRelic(&CreateNewRelicInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -307,6 +321,15 @@ func TestClient_GetNewRelic_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetNewRelic(&GetNewRelicInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetNewRelic(&GetNewRelicInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -335,6 +358,15 @@ func TestClient_UpdateNewRelic_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateNewRelic(&UpdateNewRelicInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateNewRelic(&UpdateNewRelicInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -359,6 +391,15 @@ func TestClient_DeleteNewRelic_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteNewRelic(&DeleteNewRelicInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

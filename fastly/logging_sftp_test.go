@@ -386,6 +386,13 @@ func TestClient_ListSFTPs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListSFTPs(&ListSFTPsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListSFTPs(&ListSFTPsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -401,6 +408,13 @@ func TestClient_CreateSFTP_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateSFTP(&CreateSFTPInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -433,6 +447,15 @@ func TestClient_GetSFTP_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetSFTP(&GetSFTPInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetSFTP(&GetSFTPInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -461,6 +484,15 @@ func TestClient_UpdateSFTP_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateSFTP(&UpdateSFTPInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -485,6 +517,15 @@ func TestClient_DeleteSFTP_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteSFTP(&DeleteSFTPInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

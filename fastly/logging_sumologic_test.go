@@ -153,6 +153,13 @@ func TestClient_ListSumologics_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListSumologics(&ListSumologicsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListSumologics(&ListSumologicsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -167,6 +174,13 @@ func TestClient_CreateSumologic_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateSumologic(&CreateSumologicInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -199,6 +213,15 @@ func TestClient_GetSumologic_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetSumologic(&GetSumologicInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetSumologic(&GetSumologicInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -227,6 +250,15 @@ func TestClient_UpdateSumologic_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateSumologic(&UpdateSumologicInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -251,6 +283,15 @@ func TestClient_DeleteSumologic_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteSumologic(&DeleteSumologicInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

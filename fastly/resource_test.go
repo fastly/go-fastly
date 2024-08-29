@@ -141,6 +141,13 @@ func TestClient_ListResources_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListResources(&ListResourcesInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListResources(&ListResourcesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -155,6 +162,13 @@ func TestClient_CreateResource_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateResource(&CreateResourceInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -187,6 +201,15 @@ func TestClient_GetResource_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetResource(&GetResourceInput{
+		ResourceID:     "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetResource(&GetResourceInput{
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})
@@ -215,6 +238,15 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateResource(&UpdateResourceInput{
+		ResourceID:     "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateResource(&UpdateResourceInput{
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})
@@ -239,6 +271,15 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteResource(&DeleteResourceInput{
+		ResourceID:     "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

@@ -162,6 +162,13 @@ func TestClient_ListVCLs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListVCLs(&ListVCLsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListVCLs(&ListVCLsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -176,6 +183,13 @@ func TestClient_CreateVCL_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateVCL(&CreateVCLInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -208,6 +222,15 @@ func TestClient_GetVCL_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetVCL(&GetVCLInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetVCL(&GetVCLInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -232,6 +255,15 @@ func TestClient_UpdateVCL_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateVCL(&UpdateVCLInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -264,6 +296,15 @@ func TestClient_ActivateVCL_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ActivateVCL(&ActivateVCLInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ActivateVCL(&ActivateVCLInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -288,6 +329,15 @@ func TestClient_DeleteVCL_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteVCL(&DeleteVCLInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

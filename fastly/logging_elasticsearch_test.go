@@ -242,6 +242,13 @@ func TestClient_ListElasticsearch_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListElasticsearch(&ListElasticsearchInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListElasticsearch(&ListElasticsearchInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -256,6 +263,13 @@ func TestClient_CreateElasticsearch_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateElasticsearch(&CreateElasticsearchInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -288,6 +302,15 @@ func TestClient_GetElasticsearch_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetElasticsearch(&GetElasticsearchInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -316,6 +339,15 @@ func TestClient_UpdateElasticsearch_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateElasticsearch(&UpdateElasticsearchInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -340,6 +372,15 @@ func TestClient_DeleteElasticsearch_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteElasticsearch(&DeleteElasticsearchInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

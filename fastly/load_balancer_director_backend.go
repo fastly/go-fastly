@@ -39,8 +39,8 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 	if i.Director == "" {
 		return nil, ErrMissingDirector
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -82,8 +82,8 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 	if i.Director == "" {
 		return nil, ErrMissingDirector
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -125,8 +125,8 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 	if i.Director == "" {
 		return ErrMissingDirector
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

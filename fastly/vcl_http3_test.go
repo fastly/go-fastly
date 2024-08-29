@@ -83,6 +83,14 @@ func TestClient_GetHTTP3_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetHTTP3(&GetHTTP3Input{
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHTTP3(&GetHTTP3Input{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
@@ -96,6 +104,13 @@ func TestClient_CreateHTTP3_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.EnableHTTP3(&EnableHTTP3Input{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -115,6 +130,14 @@ func TestClient_DeleteHTTP3_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DisableHTTP3(&DisableHTTP3Input{
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

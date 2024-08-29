@@ -194,6 +194,13 @@ func TestClient_ListBigQueries_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListBigQueries(&ListBigQueriesInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListBigQueries(&ListBigQueriesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -208,6 +215,13 @@ func TestClient_CreateBigQuery_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateBigQuery(&CreateBigQueryInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -240,6 +254,15 @@ func TestClient_GetBigQuery_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetBigQuery(&GetBigQueryInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetBigQuery(&GetBigQueryInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -268,6 +291,15 @@ func TestClient_UpdateBigQuery_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateBigQuery(&UpdateBigQueryInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateBigQuery(&UpdateBigQueryInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -292,6 +324,15 @@ func TestClient_DeleteBigQuery_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteBigQuery(&DeleteBigQueryInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

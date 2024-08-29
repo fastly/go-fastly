@@ -139,6 +139,13 @@ func TestClient_ListCacheSettings_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListCacheSettings(&ListCacheSettingsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListCacheSettings(&ListCacheSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -153,6 +160,13 @@ func TestClient_CreateCacheSetting_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateCacheSetting(&CreateCacheSettingInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -185,6 +199,15 @@ func TestClient_GetCacheSetting_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCacheSetting(&GetCacheSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetCacheSetting(&GetCacheSettingInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -213,6 +236,15 @@ func TestClient_UpdateCacheSetting_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateCacheSetting(&UpdateCacheSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateCacheSetting(&UpdateCacheSettingInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -237,6 +269,15 @@ func TestClient_DeleteCacheSetting_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteCacheSetting(&DeleteCacheSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

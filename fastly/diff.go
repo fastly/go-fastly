@@ -28,8 +28,8 @@ type GetDiffInput struct {
 
 // GetDiff retrieves the specified resource.
 func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	if i.From == 0 {

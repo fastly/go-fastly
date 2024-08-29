@@ -43,8 +43,8 @@ type ListSFTPsInput struct {
 
 // ListSFTPs retrieves all resources.
 func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -110,8 +110,8 @@ type CreateSFTPInput struct {
 
 // CreateSFTP creates a new resource.
 func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -146,8 +146,8 @@ func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -218,8 +218,8 @@ func (c *Client) UpdateSFTP(i *UpdateSFTPInput) (*SFTP, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -254,8 +254,8 @@ func (c *Client) DeleteSFTP(i *DeleteSFTPInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

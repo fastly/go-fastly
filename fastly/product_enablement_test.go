@@ -78,6 +78,14 @@ func TestClient_GetProduct_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetProduct(&ProductEnablementInput{
+		ProductID: ProductBrotliCompression,
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingProductID {
@@ -91,6 +99,14 @@ func TestClient_EnableProduct_validation(t *testing.T) {
 		ProductID: ProductBrotliCompression,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.EnableProduct(&ProductEnablementInput{
+		ProductID: ProductBrotliCompression,
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -109,6 +125,14 @@ func TestClient_DisableProduct_validation(t *testing.T) {
 		ProductID: ProductBrotliCompression,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DisableProduct(&ProductEnablementInput{
+		ProductID: ProductBrotliCompression,
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

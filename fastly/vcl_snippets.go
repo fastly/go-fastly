@@ -79,8 +79,8 @@ type CreateSnippetInput struct {
 
 // CreateSnippet creates a new resource.
 func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -123,8 +123,8 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -169,8 +169,8 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 	if i.SnippetID == "" {
 		return nil, ErrMissingSnippetID
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.SnippetID)
@@ -202,8 +202,8 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
@@ -239,8 +239,8 @@ type ListSnippetsInput struct {
 // Content is not displayed for Dynmanic Snippets due to them being
 // versionless, use the GetDynamicSnippet function to show current content.
 func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -278,8 +278,8 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -314,8 +314,8 @@ func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, 
 	if i.SnippetID == "" {
 		return nil, ErrMissingSnippetID
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s/snippet/%s", i.ServiceID, i.SnippetID)

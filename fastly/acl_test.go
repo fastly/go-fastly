@@ -133,6 +133,13 @@ func TestClient_ListACLs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListACLs(&ListACLsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListACLs(&ListACLsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -147,6 +154,13 @@ func TestClient_CreateACL_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateACL(&CreateACLInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -174,6 +188,15 @@ func TestClient_GetACL_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetACL(&GetACLInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -206,6 +229,15 @@ func TestClient_UpdateACL_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateACL(&UpdateACLInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateACL(&UpdateACLInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -230,6 +262,15 @@ func TestClient_DeleteACL_validation(t *testing.T) {
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteACL(&DeleteACLInput{
+		Name:           "test",
+		ServiceVersion: 0,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

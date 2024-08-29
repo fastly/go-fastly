@@ -158,6 +158,13 @@ func TestClient_ListDatadog_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListDatadog(&ListDatadogInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListDatadog(&ListDatadogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -173,6 +180,13 @@ func TestClient_CreateDatadog_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateDatadog(&CreateDatadogInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -205,6 +219,15 @@ func TestClient_GetDatadog_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetDatadog(&GetDatadogInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetDatadog(&GetDatadogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -233,6 +256,15 @@ func TestClient_UpdateDatadog_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateDatadog(&UpdateDatadogInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateDatadog(&UpdateDatadogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -257,6 +289,15 @@ func TestClient_DeleteDatadog_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteDatadog(&DeleteDatadogInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

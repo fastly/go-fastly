@@ -356,6 +356,13 @@ func TestClient_ListDigitalOceans_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListDigitalOceans(&ListDigitalOceansInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListDigitalOceans(&ListDigitalOceansInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -370,6 +377,13 @@ func TestClient_CreateDigitalOcean_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateDigitalOcean(&CreateDigitalOceanInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -402,6 +416,15 @@ func TestClient_GetDigitalOcean_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetDigitalOcean(&GetDigitalOceanInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetDigitalOcean(&GetDigitalOceanInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -430,6 +453,15 @@ func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -454,6 +486,15 @@ func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

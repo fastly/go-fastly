@@ -123,6 +123,12 @@ func TestClient_ListVersions_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+	_, err = testClient.ListVersions(&ListVersionsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_CreateVersion_validation(t *testing.T) {
@@ -133,6 +139,12 @@ func TestClient_CreateVersion_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+	_, err = testClient.CreateVersion(&CreateVersionInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_GetVersion_validation(t *testing.T) {
@@ -141,6 +153,13 @@ func TestClient_GetVersion_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetVersion(&GetVersionInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -163,6 +182,13 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateVersion(&UpdateVersionInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateVersion(&UpdateVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -177,6 +203,13 @@ func TestClient_ActivateVersion_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ActivateVersion(&ActivateVersionInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -199,6 +232,13 @@ func TestClient_DeactivateVersion_validation(t *testing.T) {
 	}
 
 	_, err = testClient.DeactivateVersion(&DeactivateVersionInput{
+		ServiceID: "not-alpha-numeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.DeactivateVersion(&DeactivateVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -213,6 +253,13 @@ func TestClient_CloneVersion_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CloneVersion(&CloneVersionInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -235,6 +282,13 @@ func TestClient_ValidateVersion_validation(t *testing.T) {
 	}
 
 	_, _, err = testClient.ValidateVersion(&ValidateVersionInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, _, err = testClient.ValidateVersion(&ValidateVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -249,6 +303,13 @@ func TestClient_LockVersion_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.LockVersion(&LockVersionInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
