@@ -158,6 +158,14 @@ func TestClient_ListDictionaryItems_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testClient.ListDictionaryItems(&ListDictionaryItemsInput{
+		DictionaryID: "123",
+		ServiceID:    "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_CreateDictionaryItem_validation(t *testing.T) {
@@ -172,6 +180,14 @@ func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "123",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateDictionaryItem(&CreateDictionaryItemInput{
+		DictionaryID: "123",
+		ServiceID:    "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -198,6 +214,15 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testClient.GetDictionaryItem(&GetDictionaryItemInput{
+		DictionaryID: "test",
+		ItemKey:      "123",
+		ServiceID:    "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
@@ -222,6 +247,15 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{
+		DictionaryID: "test",
+		ItemKey:      "123",
+		ServiceID:    "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
@@ -244,6 +278,15 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 		ItemKey:      "123",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+		DictionaryID: "test",
+		ItemKey:      "123",
+		ServiceID:    "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -271,6 +314,15 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 		Items:        validDictionaryItems,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
+		DictionaryID: "bar",
+		Items:        validDictionaryItems,
+		ServiceID:    "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }

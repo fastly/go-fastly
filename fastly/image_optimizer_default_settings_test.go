@@ -252,6 +252,14 @@ func TestClient_GetImageOptimizerDefaultSettings_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
+		ServiceID:      "not-alphanumeric",
+		ServiceVersion: 3,
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("expected error %v; got: %v", ErrMissingServiceID, err)
+	}
+
+	_, err = testClient.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -270,6 +278,15 @@ func TestClient_UpdateImageOptimizerDefaultSettings_validation(t *testing.T) {
 		Upscale:        &newUpscale,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("expected error %v; got: %v", ErrMissingServiceID, err)
+	}
+
+	_, err = testClient.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+		ServiceID:      "non-alphanumeric",
+		ServiceVersion: 3,
+		Upscale:        &newUpscale,
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("expected error %v; got: %v", ErrMissingServiceID, err)
 	}
 

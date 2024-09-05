@@ -29,8 +29,8 @@ type ListDomainsInput struct {
 
 // ListDomains retrieves all resources.
 func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -64,8 +64,8 @@ type CreateDomainInput struct {
 
 // CreateDomain creates a new resource.
 func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -100,8 +100,8 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -140,8 +140,8 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -176,8 +176,8 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion
@@ -203,8 +203,8 @@ func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -287,8 +287,8 @@ type ValidateAllDomainsInput struct {
 
 // ValidateAllDomains validates the specified resource.
 func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*DomainValidationResult, err error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion

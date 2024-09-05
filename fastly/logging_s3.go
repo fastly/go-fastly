@@ -95,8 +95,8 @@ type ListS3sInput struct {
 
 // ListS3s retrieves all resources.
 func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -170,8 +170,8 @@ type CreateS3Input struct {
 
 // CreateS3 creates a new resource.
 func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -212,8 +212,8 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -292,8 +292,8 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -334,8 +334,8 @@ func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

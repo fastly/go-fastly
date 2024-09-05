@@ -139,8 +139,8 @@ type GetServiceInput struct {
 //
 // If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ServiceID)
@@ -174,8 +174,8 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 //
 // If no service exists for the given id, the API returns a 400 response not 404.
 func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s/details", i.ServiceID)
@@ -205,8 +205,8 @@ type UpdateServiceInput struct {
 
 // UpdateService updates the specified resource.
 func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ServiceID)
@@ -231,8 +231,8 @@ type DeleteServiceInput struct {
 
 // DeleteService deletes the specified resource.
 func (c *Client) DeleteService(i *DeleteServiceInput) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 
 	path := fmt.Sprintf("/service/%s", i.ServiceID)
@@ -293,8 +293,8 @@ type ListServiceDomainInput struct {
 
 // ListServiceDomains retrieves all resources.
 func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s/domain", i.ServiceID)

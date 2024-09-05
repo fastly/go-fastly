@@ -28,8 +28,8 @@ type ListVersionsInput struct {
 
 // ListVersions retrieves all resources.
 func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s/version", i.ServiceID)
@@ -57,8 +57,8 @@ type LatestVersionInput struct {
 //
 // If there are no versions, this function will return nil (but not an error).
 func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	slice, err := c.ListVersions(&ListVersionsInput{ServiceID: i.ServiceID})
@@ -86,8 +86,8 @@ type CreateVersionInput struct {
 // This is preferred in almost all scenarios, since `Create()` creates a _blank_
 // configuration where `Clone()` builds off of an existing configuration.
 func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s/version", i.ServiceID)
@@ -114,8 +114,8 @@ type GetVersionInput struct {
 
 // GetVersion retrieves the specified resource.
 func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -147,8 +147,8 @@ type UpdateVersionInput struct {
 
 // UpdateVersion updates the specified resource.
 func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -178,8 +178,8 @@ type ActivateVersionInput struct {
 
 // ActivateVersion activates the given version.
 func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -209,8 +209,8 @@ type DeactivateVersionInput struct {
 
 // DeactivateVersion deactivates the given version.
 func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -243,8 +243,8 @@ type CloneVersionInput struct {
 // Returns a new configuration version with all the same configuration options,
 // but an incremented number.
 func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -276,8 +276,8 @@ type ValidateVersionInput struct {
 func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) {
 	var msg string
 
-	if i.ServiceID == "" {
-		return false, msg, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return false, msg, err
 	}
 	if i.ServiceVersion == 0 {
 		return false, msg, ErrMissingServiceVersion
@@ -309,8 +309,8 @@ type LockVersionInput struct {
 
 // LockVersion locks the specified version.
 func (c *Client) LockVersion(i *LockVersionInput) (*Version, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion

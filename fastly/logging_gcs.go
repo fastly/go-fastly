@@ -41,8 +41,8 @@ type ListGCSsInput struct {
 
 // ListGCSs retrieves all resources.
 func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -104,8 +104,8 @@ type CreateGCSInput struct {
 
 // CreateGCS creates a new resource.
 func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -140,8 +140,8 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -208,8 +208,8 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -244,8 +244,8 @@ func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

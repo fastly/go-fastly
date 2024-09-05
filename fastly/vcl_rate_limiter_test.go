@@ -179,6 +179,13 @@ func TestClient_ListERLs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListERLs(&ListERLsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("error: %s", err)
+	}
+
+	_, err = testClient.ListERLs(&ListERLsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -193,6 +200,13 @@ func TestClient_CreateERL_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("error: %s", err)
+	}
+
+	_, err = testClient.CreateERL(&CreateERLInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("error: %s", err)
 	}
 

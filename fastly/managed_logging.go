@@ -33,8 +33,8 @@ const (
 
 // CreateManagedLogging creates a new resource.
 func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLogging, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	var path string
@@ -78,8 +78,8 @@ type DeleteManagedLoggingInput struct {
 
 // DeleteManagedLogging deletes the specified resource.
 func (c *Client) DeleteManagedLogging(i *DeleteManagedLoggingInput) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 
 	var path string

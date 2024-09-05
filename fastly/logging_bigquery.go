@@ -37,8 +37,8 @@ type ListBigQueriesInput struct {
 
 // ListBigQueries retrieves all resources.
 func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -92,8 +92,8 @@ type CreateBigQueryInput struct {
 
 // CreateBigQuery creates a new resource.
 func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -128,8 +128,8 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -188,8 +188,8 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -224,8 +224,8 @@ func (c *Client) DeleteBigQuery(i *DeleteBigQueryInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

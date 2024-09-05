@@ -41,8 +41,8 @@ type ListCloudfilesInput struct {
 
 // ListCloudfiles retrieves all resources.
 func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -104,8 +104,8 @@ type CreateCloudfilesInput struct {
 
 // CreateCloudfiles creates a new resource.
 func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -140,8 +140,8 @@ func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -208,8 +208,8 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -244,8 +244,8 @@ func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

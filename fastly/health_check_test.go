@@ -205,6 +205,13 @@ func TestClient_ListHealthChecks_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListHealthChecks(&ListHealthChecksInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListHealthChecks(&ListHealthChecksInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -219,6 +226,13 @@ func TestClient_CreateHealthCheck_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateHealthCheck(&CreateHealthCheckInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -251,6 +265,15 @@ func TestClient_GetHealthCheck_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -279,6 +302,15 @@ func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -303,6 +335,15 @@ func TestClient_DeleteHealthCheck_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

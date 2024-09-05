@@ -140,8 +140,8 @@ type CreateWAFInput struct {
 
 // CreateWAF creates a new resource.
 func (c *Client) CreateWAF(i *CreateWAFInput) (*WAF, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	if i.ServiceVersion == 0 {
@@ -174,8 +174,8 @@ type GetWAFInput struct {
 
 // GetWAF retrieves the specified resource.
 func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	if i.ServiceVersion == 0 {
@@ -232,6 +232,8 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 	if i.Disabled == nil || i.PrefetchCondition != nil || i.Response != nil {
 		if i.ServiceID == nil {
 			return nil, ErrMissingServiceID
+		} else if err := validateServiceID(*i.ServiceID); err != nil {
+			return nil, err
 		}
 
 		if i.ServiceVersion == nil {

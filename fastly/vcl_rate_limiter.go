@@ -191,8 +191,8 @@ type ListERLsInput struct {
 
 // ListERLs retrieves all resources.
 func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -247,8 +247,8 @@ type CreateERLInput struct {
 
 // CreateERL creates a new resource.
 func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion

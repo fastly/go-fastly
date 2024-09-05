@@ -162,6 +162,13 @@ func TestClient_ListLogshuttles_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListLogshuttles(&ListLogshuttlesInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListLogshuttles(&ListLogshuttlesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -177,6 +184,13 @@ func TestClient_CreateLogshuttle_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateLogshuttle(&CreateLogshuttleInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -209,6 +223,15 @@ func TestClient_GetLogshuttle_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetLogshuttle(&GetLogshuttleInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetLogshuttle(&GetLogshuttleInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -237,6 +260,15 @@ func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateLogshuttle(&UpdateLogshuttleInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateLogshuttle(&UpdateLogshuttleInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -261,6 +293,15 @@ func TestClient_DeleteLogshuttle_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteLogshuttle(&DeleteLogshuttleInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

@@ -336,6 +336,10 @@ var ErrMissingIntegrationID = NewFieldError("IntegrationID")
 // requires one of the optional Image Optimizer default settings, but none are set.
 var ErrMissingImageOptimizerDefaultSetting = NewFieldError("ResizeFilter, Webp, WebpQuality, JpegType, JpegQuality, Upscale, AllowVideo").Message("at least one of the available optional fields is required")
 
+// ErrServiceIDNotAlphaNumeric is an error that is returned when the input service ID
+// is not alphanumeric.
+var ErrServiceIDNotAlphaNumeric = NewFieldError("ServiceID").Message("must be alphanumeric")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 

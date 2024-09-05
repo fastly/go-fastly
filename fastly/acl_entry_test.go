@@ -181,6 +181,14 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad Service ID: %s", err)
 	}
+
+	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
+		ACLID:     "123",
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad Service ID: %s", err)
+	}
 }
 
 func TestClient_CreateACLEntry_validation(t *testing.T) {
@@ -195,6 +203,14 @@ func TestClient_CreateACLEntry_validation(t *testing.T) {
 		ACLID: "123",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{
+		ACLID:     "123",
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -221,6 +237,15 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+
+	_, err = testClient.GetACLEntry(&GetACLEntryInput{
+		ACLID:     "123",
+		EntryID:   "456",
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_UpdateACLEntry_validation(t *testing.T) {
@@ -243,6 +268,15 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 		EntryID: "456",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
+		ACLID:     "123",
+		EntryID:   "456",
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -269,6 +303,15 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
+
+	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
+		ACLID:     "123",
+		EntryID:   "456",
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
 }
 
 func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
@@ -283,6 +326,14 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 		ACLID: "123",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
+		ACLID:     "123",
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

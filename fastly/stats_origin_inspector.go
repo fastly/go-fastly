@@ -119,8 +119,8 @@ func (c *Client) GetOriginMetricsForService(i *GetOriginMetricsInput) (*OriginIn
 
 // GetOriginMetricsForServiceJSON retrieves the specified resource.
 func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst any) error {
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 
 	p := "/metrics/origins/services/" + i.ServiceID

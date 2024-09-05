@@ -226,6 +226,13 @@ func TestClient_ListRequestSettings_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListRequestSettings(&ListRequestSettingsInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListRequestSettings(&ListRequestSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -240,6 +247,13 @@ func TestClient_CreateRequestSetting_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateRequestSetting(&CreateRequestSettingInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -272,6 +286,15 @@ func TestClient_GetRequestSetting_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -300,6 +323,15 @@ func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -324,6 +356,15 @@ func TestClient_DeleteRequestSetting_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

@@ -43,8 +43,8 @@ type ListHTTPSInput struct {
 
 // ListHTTPS retrieves all resources.
 func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -110,8 +110,8 @@ type CreateHTTPSInput struct {
 
 // CreateHTTPS creates a new resource.
 func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -146,8 +146,8 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -219,8 +219,8 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -255,8 +255,8 @@ func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

@@ -176,6 +176,13 @@ func TestClient_ListHeaders_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListHeaders(&ListHeadersInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.ListHeaders(&ListHeadersInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -190,6 +197,13 @@ func TestClient_CreateHeader_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.CreateHeader(&CreateHeaderInput{
+		ServiceID: "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -222,6 +236,15 @@ func TestClient_GetHeader_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetHeader(&GetHeaderInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.GetHeader(&GetHeaderInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -250,6 +273,15 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateHeader(&UpdateHeaderInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
+		t.Errorf("bad error: %s", err)
+	}
+
+	_, err = testClient.UpdateHeader(&UpdateHeaderInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -274,6 +306,15 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
+		t.Errorf("bad error: %s", err)
+	}
+
+	err = testClient.DeleteHeader(&DeleteHeaderInput{
+		Name:           "test",
+		ServiceVersion: 1,
+		ServiceID:      "not-alphanumeric",
+	})
+	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

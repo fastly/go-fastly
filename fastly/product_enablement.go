@@ -64,8 +64,8 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 	if i.ProductID == ProductUndefined {
 		return nil, ErrMissingProductID
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/enabled-products/%s/services/%s", i.ProductID, i.ServiceID)
@@ -88,8 +88,8 @@ func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, e
 	if i.ProductID == ProductUndefined {
 		return nil, ErrMissingProductID
 	}
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/enabled-products/%s/services/%s", i.ProductID, i.ServiceID)
@@ -111,8 +111,8 @@ func (c *Client) DisableProduct(i *ProductEnablementInput) error {
 	if i.ProductID == ProductUndefined {
 		return ErrMissingProductID
 	}
-	if i.ServiceID == "" {
-		return ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return err
 	}
 
 	path := fmt.Sprintf("/enabled-products/%s/services/%s", i.ProductID, i.ServiceID)

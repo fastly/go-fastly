@@ -87,8 +87,8 @@ type PurgeKeyInput struct {
 
 // PurgeKey instantly purges a particular service of items tagged with a key.
 func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if i.Key == "" {
 		return nil, ErrMissingKey
@@ -132,8 +132,8 @@ type PurgeKeysInput struct {
 
 // PurgeKeys instantly purges a particular service of items tagged with a key.
 func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 	if len(i.Keys) == 0 {
 		return nil, ErrMissingKeys
@@ -175,8 +175,8 @@ type PurgeAllInput struct {
 
 // PurgeAll instantly purges everything from a service.
 func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
-	if i.ServiceID == "" {
-		return nil, ErrMissingServiceID
+	if err := validateServiceID(i.ServiceID); err != nil {
+		return nil, err
 	}
 
 	path := fmt.Sprintf("/service/%s/purge_all", i.ServiceID)
