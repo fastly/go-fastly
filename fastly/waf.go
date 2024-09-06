@@ -186,7 +186,8 @@ func (c *Client) GetWAF(i *GetWAFInput) (*WAF, error) {
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
+	path := ToSafeURL("waf", "firewalls", i.ID)
+
 	resp, err := c.Get(path, &RequestOptions{
 		Params: map[string]string{
 			"filter[service_version_number]": strconv.Itoa(i.ServiceVersion),
@@ -239,7 +240,8 @@ func (c *Client) UpdateWAF(i *UpdateWAFInput) (*WAF, error) {
 		}
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
+	path := ToSafeURL("waf", "firewalls", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -271,7 +273,8 @@ func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s", i.ID)
+	path := ToSafeURL("waf", "firewalls", i.ID)
+
 	_, err := c.DeleteJSONAPI(path, i, nil)
 	return err
 }

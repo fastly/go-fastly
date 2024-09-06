@@ -151,7 +151,8 @@ func (c *Client) ListWAFRuleExclusions(i *ListWAFRuleExclusionsInput) (*WAFRuleE
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions", i.WAFID, i.WAFVersionNumber)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "exclusions")
+
 	resp, err := c.Get(path, &RequestOptions{
 		Params: i.formatFilters(),
 	})
@@ -241,7 +242,8 @@ func (c *Client) CreateWAFRuleExclusion(i *CreateWAFRuleExclusionInput) (*WAFRul
 		return nil, ErrMissingWAFRuleExclusion
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions", i.WAFID, i.WAFVersionNumber)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "exclusions")
+
 	resp, err := c.PostJSONAPI(path, i.WAFRuleExclusion, nil)
 	if err != nil {
 		return nil, err
@@ -273,7 +275,8 @@ func (c *Client) UpdateWAFRuleExclusion(i *UpdateWAFRuleExclusionInput) (*WAFRul
 		return nil, ErrMissingWAFRuleExclusion
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions/%d", i.WAFID, i.WAFVersionNumber, i.Number)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "exclusions", strconv.Itoa(i.Number))
+
 	resp, err := c.PatchJSONAPI(path, i.WAFRuleExclusion, nil)
 	if err != nil {
 		return nil, err
@@ -299,7 +302,8 @@ func (c *Client) DeleteWAFRuleExclusion(i *DeleteWAFRuleExclusionInput) error {
 		return ErrMissingNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/exclusions/%d", i.WAFID, i.WAFVersionNumber, i.Number)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "exclusions", strconv.Itoa(i.Number))
+
 	_, err := c.Delete(path, nil)
 	return err
 }

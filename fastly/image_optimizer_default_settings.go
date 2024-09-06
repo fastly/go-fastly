@@ -2,7 +2,7 @@ package fastly
 
 import (
 	"encoding/json"
-	"fmt"
+	"strconv"
 )
 
 // ImageOptimizerResizeFilter is a base for the different ImageOptimizerResizeFilter variants.
@@ -132,7 +132,7 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/image_optimizer_default_settings", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "image_optimizer_default_settings")
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -170,7 +170,7 @@ func (c *Client) UpdateImageOptimizerDefaultSettings(i *UpdateImageOptimizerDefa
 		return nil, ErrMissingImageOptimizerDefaultSetting
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/image_optimizer_default_settings", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "image_optimizer_default_settings")
 
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {

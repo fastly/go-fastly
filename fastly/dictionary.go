@@ -1,8 +1,7 @@
 package fastly
 
 import (
-	"fmt"
-	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -35,7 +34,8 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -70,7 +70,8 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary")
+
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -106,7 +107,8 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.Name)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -146,7 +148,8 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.Name)
+
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -182,7 +185,8 @@ func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.Name)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

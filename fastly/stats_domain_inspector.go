@@ -149,7 +149,7 @@ func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst an
 		return ErrMissingServiceID
 	}
 
-	p := "/metrics/domains/services/" + i.ServiceID
+	path := ToSafeURL("metrics", "domains", "services", i.ServiceID)
 
 	ro := &RequestOptions{
 		Params: map[string]string{
@@ -176,7 +176,7 @@ func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst an
 		ro.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return err
 	}

@@ -5,6 +5,7 @@ package fastly
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -198,7 +199,7 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/rate-limiters", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "rate-limiters")
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -254,7 +255,7 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/rate-limiters", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "rate-limiters")
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -281,7 +282,8 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 		return ErrMissingERLID
 	}
 
-	path := fmt.Sprintf("/rate-limiters/%s", i.ERLID)
+	path := ToSafeURL("rate-limiters", i.ERLID)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
@@ -311,7 +313,8 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 		return nil, ErrMissingERLID
 	}
 
-	path := fmt.Sprintf("/rate-limiters/%s", i.ERLID)
+	path := ToSafeURL("rate-limiters", i.ERLID)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -362,7 +365,8 @@ func (c *Client) UpdateERL(i *UpdateERLInput) (*ERL, error) {
 		return nil, ErrMissingERLID
 	}
 
-	path := fmt.Sprintf("/rate-limiters/%s", i.ERLID)
+	path := ToSafeURL("rate-limiters", i.ERLID)
+
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err

@@ -123,7 +123,7 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 		return ErrMissingServiceID
 	}
 
-	p := "/metrics/origins/services/" + i.ServiceID
+	path := ToSafeURL("metrics", "origins", "services", i.ServiceID)
 
 	ro := &RequestOptions{
 		Params: map[string]string{
@@ -147,7 +147,7 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 		ro.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return err
 	}

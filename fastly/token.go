@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"fmt"
 	"net/http"
 	"time"
 )
@@ -67,7 +66,8 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 		return nil, ErrMissingCustomerID
 	}
 
-	path := fmt.Sprintf("/customer/%s/tokens", i.CustomerID)
+	path := ToSafeURL("customer", i.CustomerID, "tokens")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -148,7 +148,8 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 		return ErrMissingTokenID
 	}
 
-	path := fmt.Sprintf("/tokens/%s", i.TokenID)
+	path := ToSafeURL("tokens", i.TokenID)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

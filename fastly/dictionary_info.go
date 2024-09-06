@@ -1,7 +1,7 @@
 package fastly
 
 import (
-	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -37,7 +37,8 @@ func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, 
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/dictionary/%s/info", i.ServiceID, i.ServiceVersion, i.DictionaryID)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.DictionaryID, "info")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

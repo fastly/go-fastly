@@ -1,8 +1,6 @@
 package fastly
 
 import (
-	"fmt"
-	"net/url"
 	"time"
 )
 
@@ -37,7 +35,8 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 		return nil, ErrMissingCustomerID
 	}
 
-	path := fmt.Sprintf("/customer/%s/users", i.CustomerID)
+	path := ToSafeURL("customer", i.CustomerID, "users")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -81,7 +80,8 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 		return nil, ErrMissingUserID
 	}
 
-	path := fmt.Sprintf("/user/%s", i.UserID)
+	path := ToSafeURL("user", i.UserID)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -137,7 +137,8 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 		return nil, ErrMissingUserID
 	}
 
-	path := fmt.Sprintf("/user/%s", i.UserID)
+	path := ToSafeURL("user", i.UserID)
+
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -163,7 +164,8 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 		return ErrMissingUserID
 	}
 
-	path := fmt.Sprintf("/user/%s", i.UserID)
+	path := ToSafeURL("user", i.UserID)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
@@ -192,7 +194,8 @@ func (c *Client) ResetUserPassword(i *ResetUserPasswordInput) error {
 		return ErrMissingLogin
 	}
 
-	path := fmt.Sprintf("/user/%s/password/request_reset", url.PathEscape(i.Login))
+	path := ToSafeURL("user", i.Login, "password", "request_reset")
+
 	resp, err := c.Post(path, nil)
 	if err != nil {
 		return err

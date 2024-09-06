@@ -67,7 +67,7 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 
 // ListTLSActivations retrieves all resources.
 func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivation, error) {
-	p := "/tls/activations"
+	path := "/tls/activations"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
@@ -75,7 +75,7 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 		},
 	}
 
-	resp, err := c.Get(p, filters)
+	resp, err := c.Get(path, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -112,7 +112,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 		return nil, ErrMissingID
 	}
 
-	p := fmt.Sprintf("/tls/activations/%s", i.ID)
+	path := ToSafeURL("tls", "activations", i.ID)
 
 	ro := &RequestOptions{
 		Headers: map[string]string{
@@ -124,7 +124,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 		ro.Params = map[string]string{"include": *i.Include}
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -159,9 +159,9 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 		return nil, ErrMissingTLSDomain
 	}
 
-	p := "/tls/activations"
+	path := "/tls/activations"
 
-	resp, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -194,7 +194,8 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 		return nil, ErrMissingCertificateMTLS
 	}
 
-	path := fmt.Sprintf("/tls/activations/%s", i.ID)
+	path := ToSafeURL("tls", "activations", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -220,7 +221,8 @@ func (c *Client) DeleteTLSActivation(i *DeleteTLSActivationInput) error {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/activations/%s", i.ID)
+	path := ToSafeURL("tls", "activations", i.ID)
+
 	_, err := c.Delete(path, nil)
 	return err
 }

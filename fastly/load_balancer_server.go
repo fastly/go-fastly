@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"fmt"
 	"time"
 )
 
@@ -39,7 +38,8 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/servers", i.ServiceID, i.PoolID)
+	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "servers")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -85,7 +85,8 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server", i.ServiceID, i.PoolID)
+	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server")
+
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -121,7 +122,8 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
+	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -171,7 +173,8 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
+	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
+
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -207,7 +210,8 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
+	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

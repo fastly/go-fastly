@@ -2,11 +2,8 @@ package fastly
 
 import (
 	"fmt"
-	"net/url"
 	"time"
 )
-
-const dictionaryItemsPath = "/service/%s/dictionary/%s/items"
 
 // DictionaryItem represents a dictionary item response from the Fastly API.
 type DictionaryItem struct {
@@ -50,7 +47,9 @@ func (c *Client) GetDictionaryItems(i *GetDictionaryItemsInput) *ListPaginator[D
 	if i.PerPage != nil {
 		input.PerPage = *i.PerPage
 	}
-	path := fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID)
+
+	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "items")
+
 	return NewPaginator[DictionaryItem](c, input, path)
 }
 
@@ -113,7 +112,8 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/item", i.ServiceID, i.DictionaryID)
+	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item")
+
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -166,7 +166,8 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.ServiceID, i.DictionaryID, url.PathEscape(i.ItemKey))
+	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -204,7 +205,8 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.ServiceID, i.DictionaryID, url.PathEscape(i.ItemKey))
+	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
+
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -251,7 +253,8 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf(dictionaryItemsPath, i.ServiceID, i.DictionaryID)
+	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "items")
+
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err
@@ -284,7 +287,8 @@ func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/dictionary/%s/item/%s", i.ServiceID, i.DictionaryID, url.PathEscape(i.ItemKey))
+	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

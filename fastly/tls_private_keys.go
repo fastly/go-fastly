@@ -65,7 +65,7 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 
 // ListPrivateKeys retrieves all resources.
 func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
-	p := "/tls/private_keys"
+	path := "/tls/private_keys"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
@@ -73,7 +73,7 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 		},
 	}
 
-	resp, err := c.Get(p, filters)
+	resp, err := c.Get(path, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -102,9 +102,9 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 		return nil, ErrMissingID
 	}
 
-	p := fmt.Sprintf("/tls/private_keys/%s", i.ID)
+	path := ToSafeURL("tls", "private_keys", i.ID)
 
-	resp, err := c.Get(p, nil)
+	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -128,7 +128,7 @@ type CreatePrivateKeyInput struct {
 
 // CreatePrivateKey creates a new resource.
 func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error) {
-	p := "/tls/private_keys"
+	path := "/tls/private_keys"
 
 	if i.Key == "" {
 		return nil, ErrMissingKey
@@ -138,7 +138,7 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 		return nil, ErrMissingName
 	}
 
-	resp, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -164,7 +164,8 @@ func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/private_keys/%s", i.ID)
+	path := ToSafeURL("tls", "private_keys", i.ID)
+
 	_, err := c.Delete(path, nil)
 	return err
 }

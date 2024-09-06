@@ -1,8 +1,6 @@
 package fastly
 
-import (
-	"fmt"
-)
+import "strconv"
 
 // Settings represents a backend response from the Fastly API.
 type Settings struct {
@@ -31,7 +29,7 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/settings", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "settings")
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -70,7 +68,7 @@ func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/settings", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "settings")
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err

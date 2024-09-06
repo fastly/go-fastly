@@ -1,7 +1,7 @@
 package fastly
 
 import (
-	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -32,7 +32,8 @@ func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/version", i.ServiceID)
+	path := ToSafeURL("service", i.ServiceID, "version")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -90,7 +91,8 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/version", i.ServiceID)
+	path := ToSafeURL("service", i.ServiceID, "version")
+
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -121,7 +123,7 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion))
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -154,7 +156,7 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion))
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -185,7 +187,7 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/activate", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "activate")
 	resp, err := c.Put(path, nil)
 	if err != nil {
 		return nil, err
@@ -216,7 +218,7 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/deactivate", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "deactivate")
 	resp, err := c.Put(path, nil)
 	if err != nil {
 		return nil, err
@@ -250,7 +252,7 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/clone", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "clone")
 	resp, err := c.Put(path, nil)
 	if err != nil {
 		return nil, err
@@ -283,7 +285,7 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 		return false, msg, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/validate", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "validate")
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return false, msg, err
@@ -316,7 +318,7 @@ func (c *Client) LockVersion(i *LockVersionInput) (*Version, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/lock", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "lock")
 	resp, err := c.Put(path, nil)
 	if err != nil {
 		return nil, err

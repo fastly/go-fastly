@@ -1,7 +1,7 @@
 package fastly
 
 import (
-	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -32,7 +32,7 @@ func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/http3", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -66,7 +66,7 @@ func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/http3", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -97,7 +97,7 @@ func (c *Client) DisableHTTP3(i *DisableHTTP3Input) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/http3", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

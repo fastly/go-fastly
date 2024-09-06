@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -126,7 +125,8 @@ func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/notifications/integrations/%s", i.ID)
+	path := ToSafeURL("notifications", "integrations", i.ID)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -161,7 +161,8 @@ func (c *Client) UpdateIntegration(i *UpdateIntegrationInput) error {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/notifications/integrations/%s", i.ID)
+	path := ToSafeURL("notifications", "integrations", i.ID)
+
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err
@@ -187,7 +188,8 @@ func (c *Client) DeleteIntegration(i *DeleteIntegrationInput) error {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/notifications/integrations/%s", i.ID)
+	path := ToSafeURL("notifications", "integrations", i.ID)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
@@ -248,7 +250,8 @@ func (c *Client) GetWebhookSigningKey(i *GetWebhookSigningKeyInput) (*WebhookSig
 		return nil, ErrMissingIntegrationID
 	}
 
-	path := fmt.Sprintf("/notifications/integrations/%s/signingKey", i.IntegrationID)
+	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "signingKey")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -274,7 +277,8 @@ func (c *Client) RotateWebhookSigningKey(i *RotateWebhookSigningKeyInput) (*Webh
 		return nil, ErrMissingIntegrationID
 	}
 
-	path := fmt.Sprintf("/notifications/integrations/%s/rotateSigningKey", i.IntegrationID)
+	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "rotateSigningKey")
+
 	resp, err := c.Post(path, nil)
 	if err != nil {
 		return nil, err

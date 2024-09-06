@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -151,7 +150,8 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/alerts/definitions/%s", *i.ID)
+	path := ToSafeURL("alerts", "definitions", *i.ID)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -190,7 +190,8 @@ func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDef
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/alerts/definitions/%s", *i.ID)
+	path := ToSafeURL("alerts", "definitions", *i.ID)
+
 	resp, err := c.PutJSON(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -216,7 +217,8 @@ func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/alerts/definitions/%s", *i.ID)
+	path := ToSafeURL("alerts", "definitions", *i.ID)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"encoding/json"
-	"fmt"
 	"sort"
 	"time"
 )
@@ -68,7 +67,8 @@ func (c *Client) DeleteConfigStore(i *DeleteConfigStoreInput) error {
 		return ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID)
+
 	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -97,7 +97,8 @@ func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
 		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID)
+
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -129,7 +130,8 @@ func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*Config
 		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/info", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "info")
+
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -200,7 +202,8 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/services", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "services")
+
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -235,7 +238,8 @@ func (c *Client) UpdateConfigStore(i *UpdateConfigStoreInput) (*ConfigStore, err
 		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID)
+
 	resp, err := c.PutForm(path, i, &RequestOptions{
 		Headers: map[string]string{
 			// PutForm adds the appropriate Content-Type header.
