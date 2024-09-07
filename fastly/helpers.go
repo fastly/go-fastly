@@ -40,7 +40,9 @@ func ToSafeURL(unsafeComponents ...string) string {
 	safeComponents := make([]string, len(unsafeComponents))
 
 	for i := range unsafeComponents {
-		safeComponents[i] = url.PathEscape(unsafeComponents[i])
+		if component := unsafeComponents[i]; component != ".." {
+			safeComponents[i] = url.PathEscape(component)
+		}
 	}
 
 	// it is safe to ignore the error returned from JoinPath

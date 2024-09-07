@@ -30,7 +30,7 @@ func TestToSafeURL(t *testing.T) {
 	t.Run("suppress '..'", func(t *testing.T) {
 		path := ToSafeURL("services", "..", "detail")
 
-		expected := "/detail"
+		expected := "/services/detail"
 
 		if path != expected {
 			t.Errorf("expected \n\n%q\n\n to be \n\n%q\n\n", path, expected)
