@@ -36,19 +36,17 @@ func NullString(v string) *string {
 
 // ToSafeURL produces a safe (no path traversal, no unsafe characters) URL
 // from the path components passed in.
-func ToSafeURL(components ...string) string {
-	for idx, component := range components {
-		if component == ".." {
-			components[idx] = ""
-		} else {
-			components[idx] = url.PathEscape(component)
-		}
+func ToSafeURL(unsafeComponents ...string) string {
+	safeComponents := make([]string, len(unsafeComponents))
+
+	for i := range unsafeComponents {
+		safeComponents[i] = url.PathEscape(unsafeComponents[i])
 	}
 
 	// it is safe to ignore the error returned from JoinPath
 	// because the only time it will be non-nil is if parsing
 	// the base path fails, but that will not fail since it is
 	// a constant "/" string
-	result, _ := url.JoinPath("/", components...)
+	result, _ := url.JoinPath("/", safeComponents...)
 	return result
 }

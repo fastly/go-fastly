@@ -60,12 +60,13 @@ func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) erro
 		return ErrMissingServiceID
 	}
 
-	var path string
+	components := []string{"v1", "channel", i.ServiceID, "ts", strconv.FormatUint(i.Timestamp, 10)}
+
 	if i.Limit != nil {
-		path = ToSafeURL("v1", "channel", i.ServiceID, "ts", strconv.FormatUint(i.Timestamp, 10), "limit", strconv.FormatUint(uint64(*i.Limit), 10))
-	} else {
-		path = ToSafeURL("v1", "channel", i.ServiceID, "ts", strconv.FormatUint(i.Timestamp, 10))
+		components = append(components, "limit", strconv.FormatUint(uint64(*i.Limit), 10))
 	}
+
+	path := ToSafeURL(components...)
 
 	resp, err := c.client.Get(path, nil)
 	if err != nil {
