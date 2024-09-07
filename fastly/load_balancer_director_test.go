@@ -186,13 +186,6 @@ func TestClient_ListDirectors_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListDirectors(&ListDirectorsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListDirectors(&ListDirectorsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -207,13 +200,6 @@ func TestClient_CreateDirector_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateDirector(&CreateDirectorInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -246,15 +232,6 @@ func TestClient_GetDirector_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetDirector(&GetDirectorInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDirector(&GetDirectorInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -283,15 +260,6 @@ func TestClient_UpdateDirector_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateDirector(&UpdateDirectorInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateDirector(&UpdateDirectorInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -316,15 +284,6 @@ func TestClient_DeleteDirector_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteDirector(&DeleteDirectorInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

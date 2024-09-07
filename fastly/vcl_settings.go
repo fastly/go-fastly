@@ -24,8 +24,8 @@ type GetSettingsInput struct {
 
 // GetSettings retrieves the specified resource.
 func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -63,8 +63,8 @@ type UpdateSettingsInput struct {
 
 // UpdateSettings updates the specified resource.
 func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion

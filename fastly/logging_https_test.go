@@ -254,13 +254,6 @@ func TestClient_ListHTTPS_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-
-	_, err = testClient.ListHTTPS(&ListHTTPSInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func TestClient_CreateHTTPS_validation(t *testing.T) {
@@ -269,13 +262,6 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateHTTPS(&CreateHTTPSInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -308,15 +294,6 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetHTTPS(&GetHTTPSInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetHTTPS(&GetHTTPSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -345,15 +322,6 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateHTTPS(&UpdateHTTPSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -378,15 +346,6 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteHTTPS(&DeleteHTTPSInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

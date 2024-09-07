@@ -74,14 +74,6 @@ func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
-		DictionaryID: "123",
-		ServiceID:    "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
 		DictionaryID:   "123",
 		ServiceID:      "foo",
 		ServiceVersion: 0,

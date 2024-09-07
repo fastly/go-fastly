@@ -159,13 +159,6 @@ func TestClient_ListGzips_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListGzips(&ListGzipsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListGzips(&ListGzipsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -184,12 +177,6 @@ func TestClient_CreateGzip_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateGzip(&CreateGzipInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
 	_, err = testClient.CreateGzip(&CreateGzipInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
@@ -215,15 +202,6 @@ func TestClient_GetGzip_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetGzip(&GetGzipInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -256,15 +234,6 @@ func TestClient_UpdateGzip_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateGzip(&UpdateGzipInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateGzip(&UpdateGzipInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -289,15 +258,6 @@ func TestClient_DeleteGzip_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteGzip(&DeleteGzipInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

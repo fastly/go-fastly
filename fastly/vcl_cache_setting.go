@@ -44,8 +44,8 @@ type ListCacheSettingsInput struct {
 
 // ListCacheSettings retrieves all resources.
 func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -85,8 +85,8 @@ type CreateCacheSettingInput struct {
 
 // CreateCacheSetting creates a new resource.
 func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -121,8 +121,8 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -167,8 +167,8 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -203,8 +203,8 @@ func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

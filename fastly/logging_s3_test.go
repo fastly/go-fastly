@@ -624,13 +624,6 @@ func TestClient_ListS3s_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListS3s(&ListS3sInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListS3s(&ListS3sInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -649,17 +642,6 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		ServiceVersion:               1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateS3(&CreateS3Input{
-		Name:                         ToPointer("test-service"),
-		ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
-		ServerSideEncryptionKMSKeyID: ToPointer("1234"),
-		ServiceVersion:               1,
-		ServiceID:                    "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -705,15 +687,6 @@ func TestClient_GetS3_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetS3(&GetS3Input{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetS3(&GetS3Input{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -738,15 +711,6 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateS3(&UpdateS3Input{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -786,15 +750,6 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteS3(&DeleteS3Input{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

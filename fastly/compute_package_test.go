@@ -182,13 +182,6 @@ func TestClient_GetPackage_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetPackage(&GetPackageInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetPackage(&GetPackageInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -203,13 +196,6 @@ func TestClient_UpdatePackage_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdatePackage(&UpdatePackageInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

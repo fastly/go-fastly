@@ -30,8 +30,8 @@ func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, 
 	if i.DictionaryID == "" {
 		return nil, ErrMissingDictionaryID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion

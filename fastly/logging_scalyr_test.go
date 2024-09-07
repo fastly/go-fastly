@@ -172,13 +172,6 @@ func TestClient_ListScalyrs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListScalyrs(&ListScalyrsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListScalyrs(&ListScalyrsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -193,13 +186,6 @@ func TestClient_CreateScalyr_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateScalyr(&CreateScalyrInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -232,15 +218,6 @@ func TestClient_GetScalyr_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetScalyr(&GetScalyrInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetScalyr(&GetScalyrInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -269,15 +246,6 @@ func TestClient_UpdateScalyr_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateScalyr(&UpdateScalyrInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateScalyr(&UpdateScalyrInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -302,15 +270,6 @@ func TestClient_DeleteScalyr_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteScalyr(&DeleteScalyrInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

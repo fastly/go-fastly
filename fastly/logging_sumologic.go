@@ -33,8 +33,8 @@ type ListSumologicsInput struct {
 
 // ListSumologics retrieves all resources.
 func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -78,8 +78,8 @@ type CreateSumologicInput struct {
 
 // CreateSumologic creates a new resource.
 func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -114,8 +114,8 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -165,8 +165,8 @@ func (c *Client) UpdateSumologic(i *UpdateSumologicInput) (*Sumologic, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -201,8 +201,8 @@ func (c *Client) DeleteSumologic(i *DeleteSumologicInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

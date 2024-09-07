@@ -38,8 +38,8 @@ type ListHealthChecksInput struct {
 
 // ListHealthChecks retrieves all resources.
 func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -95,8 +95,8 @@ type CreateHealthCheckInput struct {
 
 // CreateHealthCheck creates a new resource.
 func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -134,8 +134,8 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -196,8 +196,8 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -235,8 +235,8 @@ func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

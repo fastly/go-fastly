@@ -152,14 +152,6 @@ func TestClient_ListServers_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-
-	_, err = testClient.ListServers(&ListServersInput{
-		PoolID:    "123",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func TestClient_CreateServer_validation(t *testing.T) {
@@ -176,14 +168,6 @@ func TestClient_CreateServer_validation(t *testing.T) {
 		PoolID: "123",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateServer(&CreateServerInput{
-		PoolID:    "123",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -214,24 +198,6 @@ func TestClient_GetServer_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-
-	_, err = testClient.GetServer(&GetServerInput{
-		PoolID:    "bar",
-		Server:    "test",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetServer(&GetServerInput{
-		PoolID:    "bar",
-		Server:    "test",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func TestClient_UpdateServer_validation(t *testing.T) {
@@ -260,15 +226,6 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-
-	_, err = testClient.UpdateServer(&UpdateServerInput{
-		PoolID:    "bar",
-		Server:    "test",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func TestClient_DeleteServer_validation(t *testing.T) {
@@ -295,15 +252,6 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		Server: "test",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteServer(&DeleteServerInput{
-		PoolID:    "bar",
-		Server:    "test",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }

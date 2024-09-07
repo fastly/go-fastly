@@ -32,8 +32,8 @@ type ListHoneycombsInput struct {
 
 // ListHoneycombs retrieves all resources.
 func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -77,8 +77,8 @@ type CreateHoneycombInput struct {
 
 // CreateHoneycomb creates a new resource.
 func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -113,8 +113,8 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -163,8 +163,8 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -199,8 +199,8 @@ func (c *Client) DeleteHoneycomb(i *DeleteHoneycombInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

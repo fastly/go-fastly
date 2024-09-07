@@ -73,8 +73,8 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	p := c.GetACLEntries(&GetACLEntriesInput{
 		ACLID:     i.ACLID,
@@ -111,8 +111,8 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if i.EntryID == "" {
 		return nil, ErrMissingID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
@@ -152,8 +152,8 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.ServiceID, i.ACLID)
@@ -190,8 +190,8 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if i.EntryID == "" {
 		return ErrMissingEntryID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
@@ -240,8 +240,8 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if i.EntryID == "" {
 		return nil, ErrMissingID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
@@ -292,8 +292,8 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	if i.ACLID == "" {
 		return ErrMissingACLID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if len(i.Entries) > BatchModifyMaximumOperations {
 		return ErrMaxExceededEntries

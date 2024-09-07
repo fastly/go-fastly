@@ -28,8 +28,8 @@ type ListDictionariesInput struct {
 
 // ListDictionaries retrieves all resources.
 func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -63,8 +63,8 @@ type CreateDictionaryInput struct {
 
 // CreateDictionary creates a new resource.
 func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -99,8 +99,8 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -139,8 +139,8 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -175,8 +175,8 @@ func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

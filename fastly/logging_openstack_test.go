@@ -362,13 +362,6 @@ func TestClient_ListOpenstack_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListOpenstack(&ListOpenstackInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListOpenstack(&ListOpenstackInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -383,13 +376,6 @@ func TestClient_CreateOpenstack_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateOpenstack(&CreateOpenstackInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -422,15 +408,6 @@ func TestClient_GetOpenstack_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetOpenstack(&GetOpenstackInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetOpenstack(&GetOpenstackInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -459,15 +436,6 @@ func TestClient_UpdateOpenstack_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateOpenstack(&UpdateOpenstackInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateOpenstack(&UpdateOpenstackInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -492,15 +460,6 @@ func TestClient_DeleteOpenstack_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteOpenstack(&DeleteOpenstackInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

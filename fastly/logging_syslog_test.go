@@ -235,13 +235,6 @@ func TestClient_ListSyslogs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListSyslogs(&ListSyslogsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListSyslogs(&ListSyslogsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -256,13 +249,6 @@ func TestClient_CreateSyslog_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateSyslog(&CreateSyslogInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -295,15 +281,6 @@ func TestClient_GetSyslog_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetSyslog(&GetSyslogInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetSyslog(&GetSyslogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -332,15 +309,6 @@ func TestClient_UpdateSyslog_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateSyslog(&UpdateSyslogInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateSyslog(&UpdateSyslogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -365,15 +333,6 @@ func TestClient_DeleteSyslog_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteSyslog(&DeleteSyslogInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

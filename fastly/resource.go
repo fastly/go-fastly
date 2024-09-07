@@ -40,8 +40,8 @@ type ListResourcesInput struct {
 
 // ListResources retrieves all resources.
 func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -80,8 +80,8 @@ type CreateResourceInput struct {
 
 // CreateResource creates a new resource.
 func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -116,8 +116,8 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 	if i.ResourceID == "" {
 		return nil, ErrMissingResourceID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -154,8 +154,8 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 	if i.ResourceID == "" {
 		return nil, ErrMissingResourceID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -190,8 +190,8 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 	if i.ResourceID == "" {
 		return ErrMissingResourceID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

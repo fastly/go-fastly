@@ -358,13 +358,6 @@ func TestClient_ListFTPs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListFTPs(&ListFTPsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListFTPs(&ListFTPsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -380,13 +373,6 @@ func TestClient_CreateFTP_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateFTP(&CreateFTPInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -419,15 +405,6 @@ func TestClient_GetFTP_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetFTP(&GetFTPInput{
-		ServiceVersion: 1,
-		Name:           "test",
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetFTP(&GetFTPInput{
 		ServiceID: "foo",
 		Name:      "test",
 	})
@@ -456,15 +433,6 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateFTP(&UpdateFTPInput{
-		ServiceVersion: 1,
-		Name:           "test",
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateFTP(&UpdateFTPInput{
 		ServiceID: "foo",
 		Name:      "test",
 	})
@@ -489,15 +457,6 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 		Name:           "test",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteFTP(&DeleteFTPInput{
-		ServiceVersion: 1,
-		Name:           "test",
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

@@ -370,13 +370,6 @@ func TestClient_ListBlobStorages_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListBlobStorages(&ListBlobStoragesInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListBlobStorages(&ListBlobStoragesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -392,13 +385,6 @@ func TestClient_CreateBlobStorage_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateBlobStorage(&CreateBlobStorageInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -431,15 +417,6 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -468,15 +445,6 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -501,15 +469,6 @@ func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

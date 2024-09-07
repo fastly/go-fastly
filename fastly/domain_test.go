@@ -183,13 +183,6 @@ func TestClient_ListDomains_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListDomains(&ListDomainsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListDomains(&ListDomainsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -204,13 +197,6 @@ func TestClient_CreateDomain_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateDomain(&CreateDomainInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -243,15 +229,6 @@ func TestClient_GetDomain_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetDomain(&GetDomainInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDomain(&GetDomainInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -276,15 +253,6 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateDomain(&UpdateDomainInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -317,15 +285,6 @@ func TestClient_DeleteDomain_validation(t *testing.T) {
 	}
 
 	err = testClient.DeleteDomain(&DeleteDomainInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteDomain(&DeleteDomainInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -350,15 +309,6 @@ func TestClient_ValidateDomain_validation(t *testing.T) {
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ValidateDomain(&ValidateDomainInput{
-		Name:           "test",
-		ServiceVersion: 0,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

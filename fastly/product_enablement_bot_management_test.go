@@ -78,14 +78,6 @@ func TestClient_GetProduct_validation_bot_management(t *testing.T) {
 	}
 
 	_, err = testClient.GetProduct(&ProductEnablementInput{
-		ProductID: ProductBotManagement,
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingProductID {
@@ -99,14 +91,6 @@ func TestClient_EnableProduct_validation_bot_management(t *testing.T) {
 		ProductID: ProductBotManagement,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.EnableProduct(&ProductEnablementInput{
-		ProductID: ProductBotManagement,
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -125,14 +109,6 @@ func TestClient_DisableProduct_validation_bot_management(t *testing.T) {
 		ProductID: ProductBotManagement,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DisableProduct(&ProductEnablementInput{
-		ProductID: ProductBotManagement,
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

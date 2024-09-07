@@ -56,8 +56,8 @@ func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsRe
 
 // GetRealtimeStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
 func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) error {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/v1/channel/%s/ts/%d", i.ServiceID, i.Timestamp)

@@ -34,8 +34,8 @@ type ListNewRelicOTLPInput struct {
 
 // ListNewRelicOTLP returns the list of newrelic for the configuration version.
 func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	if i.ServiceVersion == 0 {
@@ -83,8 +83,8 @@ type CreateNewRelicOTLPInput struct {
 
 // CreateNewRelicOTLP creates a new Fastly newrelic.
 func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -116,8 +116,8 @@ type GetNewRelicOTLPInput struct {
 
 // GetNewRelicOTLP gets the newrelic configuration with the given parameters.
 func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -169,8 +169,8 @@ type UpdateNewRelicOTLPInput struct {
 
 // UpdateNewRelicOTLP updates a specific newrelic.
 func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -205,8 +205,8 @@ type DeleteNewRelicOTLPInput struct {
 
 // DeleteNewRelicOTLP deletes the given newrelic version.
 func (c *Client) DeleteNewRelicOTLP(i *DeleteNewRelicOTLPInput) error {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

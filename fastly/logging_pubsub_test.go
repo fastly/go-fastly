@@ -203,13 +203,6 @@ func TestClient_ListPubsubs_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListPubsubs(&ListPubsubsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListPubsubs(&ListPubsubsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -224,13 +217,6 @@ func TestClient_CreatePubsub_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreatePubsub(&CreatePubsubInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -263,15 +249,6 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetPubsub(&GetPubsubInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetPubsub(&GetPubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -300,15 +277,6 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdatePubsub(&UpdatePubsubInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdatePubsub(&UpdatePubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -333,15 +301,6 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeletePubsub(&DeletePubsubInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

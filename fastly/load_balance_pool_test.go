@@ -146,13 +146,6 @@ func TestClient_ListPools_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListPools(&ListPoolsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListPools(&ListPoolsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -169,15 +162,6 @@ func TestClient_CreatePool_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreatePool(&CreatePoolInput{
-		Name:           ToPointer("test"),
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -210,15 +194,6 @@ func TestClient_GetPool_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetPool(&GetPoolInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetPool(&GetPoolInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -247,15 +222,6 @@ func TestClient_UpdatePool_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdatePool(&UpdatePoolInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdatePool(&UpdatePoolInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -280,15 +246,6 @@ func TestClient_DeletePool_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeletePool(&DeletePoolInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

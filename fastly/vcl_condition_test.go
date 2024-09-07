@@ -133,13 +133,6 @@ func TestClient_ListConditions_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListConditions(&ListConditionsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListConditions(&ListConditionsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -154,13 +147,6 @@ func TestClient_CreateCondition_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateCondition(&CreateConditionInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -193,15 +179,6 @@ func TestClient_GetCondition_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCondition(&GetConditionInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetCondition(&GetConditionInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -230,15 +207,6 @@ func TestClient_UpdateCondition_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateCondition(&UpdateConditionInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateCondition(&UpdateConditionInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -263,15 +231,6 @@ func TestClient_DeleteCondition_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteCondition(&DeleteConditionInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

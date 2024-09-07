@@ -25,8 +25,8 @@ type GetHTTP3Input struct {
 
 // GetHTTP3 retrieves the specified resource.
 func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -59,8 +59,8 @@ type EnableHTTP3Input struct {
 
 // EnableHTTP3 creates a new resource.
 func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return nil, ErrMissingServiceVersion
@@ -90,8 +90,8 @@ type DisableHTTP3Input struct {
 
 // DisableHTTP3 deletes the specified resource.
 func (c *Client) DisableHTTP3(i *DisableHTTP3Input) error {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 	if i.ServiceVersion == 0 {
 		return ErrMissingServiceVersion

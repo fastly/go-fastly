@@ -81,13 +81,6 @@ func TestClient_Diff_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetDiff(&GetDiffInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetDiff(&GetDiffInput{
 		ServiceID: "foo",
 		From:      0,
 	})

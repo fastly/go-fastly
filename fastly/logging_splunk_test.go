@@ -223,13 +223,6 @@ func TestClient_ListSplunks_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListSplunks(&ListSplunksInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListSplunks(&ListSplunksInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -244,13 +237,6 @@ func TestClient_CreateSplunk_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateSplunk(&CreateSplunkInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -283,15 +269,6 @@ func TestClient_GetSplunk_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetSplunk(&GetSplunkInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetSplunk(&GetSplunkInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -320,15 +297,6 @@ func TestClient_UpdateSplunk_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -353,15 +321,6 @@ func TestClient_DeleteSplunk_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteSplunk(&DeleteSplunkInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

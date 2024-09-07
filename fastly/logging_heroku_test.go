@@ -157,13 +157,6 @@ func TestClient_ListHerokus_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListHerokus(&ListHerokusInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListHerokus(&ListHerokusInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -178,13 +171,6 @@ func TestClient_CreateHeroku_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateHeroku(&CreateHerokuInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -217,15 +203,6 @@ func TestClient_GetHeroku_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetHeroku(&GetHerokuInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetHeroku(&GetHerokuInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -254,15 +231,6 @@ func TestClient_UpdateHeroku_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateHeroku(&UpdateHerokuInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateHeroku(&UpdateHerokuInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -287,15 +255,6 @@ func TestClient_DeleteHeroku_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteHeroku(&DeleteHerokuInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

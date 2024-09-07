@@ -161,13 +161,6 @@ func TestClient_CreateWAF_validation(t *testing.T) {
 	}
 
 	_, err = testClient.CreateWAF(&CreateWAFInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateWAF(&CreateWAFInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -182,13 +175,6 @@ func TestClient_GetWAF_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetWAF(&GetWAFInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -226,16 +212,8 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	serviceID := "not-alphanumeric"
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
-		ID:        "123999",
-		ServiceID: &serviceID,
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
+	serviceID := "foo"
 
-	serviceID = "foo"
 	_, err = testClient.UpdateWAF(&UpdateWAFInput{
 		ID:        "123",
 		ServiceID: &serviceID,

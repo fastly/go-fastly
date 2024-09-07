@@ -149,13 +149,6 @@ func TestClient_ListLoggly_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListLoggly(&ListLogglyInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListLoggly(&ListLogglyInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -170,13 +163,6 @@ func TestClient_CreateLoggly_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateLoggly(&CreateLogglyInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -209,15 +195,6 @@ func TestClient_GetLoggly_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetLoggly(&GetLogglyInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetLoggly(&GetLogglyInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -246,15 +223,6 @@ func TestClient_UpdateLoggly_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -279,15 +247,6 @@ func TestClient_DeleteLoggly_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteLoggly(&DeleteLogglyInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

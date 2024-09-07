@@ -156,13 +156,6 @@ func TestClient_ListNewRelicOTLP_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListNewRelicOTLP(&ListNewRelicOTLPInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListNewRelicOTLP(&ListNewRelicOTLPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -181,13 +174,6 @@ func TestClient_CreateNewRelicOTLP_validation(t *testing.T) {
 	}
 
 	_, err = testClient.CreateNewRelicOTLP(&CreateNewRelicOTLPInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateNewRelicOTLP(&CreateNewRelicOTLPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -202,13 +188,6 @@ func TestClient_GetNewRelicOTLP_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetNewRelicOTLP(&GetNewRelicOTLPInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -240,13 +219,6 @@ func TestClient_UpdateNewRelicOTLP_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateNewRelicOTLP(&UpdateNewRelicOTLPInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateNewRelicOTLP(&UpdateNewRelicOTLPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -270,13 +242,6 @@ func TestClient_DeleteNewRelicOTLP_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteNewRelicOTLP(&DeleteNewRelicOTLPInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

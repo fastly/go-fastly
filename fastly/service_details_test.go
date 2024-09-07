@@ -191,10 +191,6 @@ func TestClient_GetService_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.GetService(&GetServiceInput{ServiceID: "not-alphanumeric"})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func TestClient_UpdateService_validation(t *testing.T) {
@@ -202,19 +198,11 @@ func TestClient_UpdateService_validation(t *testing.T) {
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.UpdateService(&UpdateServiceInput{ServiceID: "not-alphanumeric"})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
 	err := testClient.DeleteService(&DeleteServiceInput{})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-	err = testClient.DeleteService(&DeleteServiceInput{ServiceID: "not-alphanumeric"})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 }

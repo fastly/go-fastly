@@ -103,14 +103,6 @@ func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 	_, err = testClient.CreateDirectorBackend(&CreateDirectorBackendInput{
 		Backend:   "foo",
 		Director:  "bar",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-	_, err = testClient.CreateDirectorBackend(&CreateDirectorBackendInput{
-		Backend:   "foo",
-		Director:  "bar",
 		ServiceID: "baz",
 	})
 	if err != ErrMissingServiceVersion {
@@ -140,14 +132,6 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 	_, err = testClient.GetDirectorBackend(&GetDirectorBackendInput{
 		Backend:   "foo",
 		Director:  "bar",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-	_, err = testClient.GetDirectorBackend(&GetDirectorBackendInput{
-		Backend:   "foo",
-		Director:  "bar",
 		ServiceID: "baz",
 	})
 	if err != ErrMissingServiceVersion {
@@ -172,14 +156,6 @@ func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 		Director: "bar",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-	err = testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
-		Backend:   "foo",
-		Director:  "bar",
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 	err = testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{

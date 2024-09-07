@@ -145,8 +145,8 @@ func (c *Client) GetDomainMetricsForService(i *GetDomainMetricsInput) (*DomainIn
 
 // GetDomainMetricsForServiceJSON retrieves the specified resource.
 func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst any) error {
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
 	p := "/metrics/domains/services/" + i.ServiceID

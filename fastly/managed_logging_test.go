@@ -52,14 +52,6 @@ func TestClient_CreateManagedLogging_validation(t *testing.T) {
 	}
 
 	_, err = testClient.CreateManagedLogging(&CreateManagedLoggingInput{
-		ServiceID: "not-alphanumeric",
-		Kind:      ManagedLoggingInstanceOutput,
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("unexpected error: %s", err)
-	}
-
-	_, err = testClient.CreateManagedLogging(&CreateManagedLoggingInput{
 		ServiceID: testServiceID,
 	})
 	if err != ErrMissingKind {
@@ -81,14 +73,6 @@ func TestClient_DeleteManagedLogging_validation(t *testing.T) {
 		Kind:      ManagedLoggingInstanceOutput,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("unexpected error: %s", err)
-	}
-
-	err = testClient.DeleteManagedLogging(&DeleteManagedLoggingInput{
-		ServiceID: "not-alphanumeric",
-		Kind:      ManagedLoggingInstanceOutput,
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("unexpected error: %s", err)
 	}
 

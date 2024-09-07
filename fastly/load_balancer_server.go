@@ -35,8 +35,8 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/servers", i.ServiceID, i.PoolID)
@@ -81,8 +81,8 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 	if i.PoolID == "" {
 		return nil, ErrMissingPoolID
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server", i.ServiceID, i.PoolID)
@@ -117,8 +117,8 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	if i.Server == "" {
 		return nil, ErrMissingServer
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
@@ -167,8 +167,8 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 	if i.Server == "" {
 		return nil, ErrMissingServer
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return nil, err
+	if i.ServiceID == "" {
+		return nil, ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)
@@ -203,8 +203,8 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	if i.Server == "" {
 		return ErrMissingServer
 	}
-	if err := validateServiceID(i.ServiceID); err != nil {
-		return err
+	if i.ServiceID == "" {
+		return ErrMissingServiceID
 	}
 
 	path := fmt.Sprintf("/service/%s/pool/%s/server/%s", i.ServiceID, i.PoolID, i.Server)

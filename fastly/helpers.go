@@ -31,25 +31,3 @@ func NullString(v string) *string {
 	}
 	return &v
 }
-
-// isAlphaNumeric returns true if the string is alphanumeric.
-func isAlphanumeric(s string) bool {
-	for _, r := range s {
-		if !((r >= 'a' && r <= 'z') || (r >= 'A' && r <= 'Z') || (r >= '0' && r <= '9')) {
-			return false
-		}
-	}
-	return true
-}
-
-// validateServiceID validates the service ID.
-// checks if the service ID is alphanumeric and not empty.
-func validateServiceID(serviceID string) error {
-	if serviceID == "" {
-		return ErrMissingServiceID
-	}
-	if !isAlphanumeric(serviceID) {
-		return ErrServiceIDNotAlphaNumeric
-	}
-	return nil
-}

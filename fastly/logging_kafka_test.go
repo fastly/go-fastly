@@ -248,13 +248,6 @@ func TestClient_ListKafkas_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListKafkas(&ListKafkasInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListKafkas(&ListKafkasInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -269,13 +262,6 @@ func TestClient_CreateKafka_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateKafka(&CreateKafkaInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -308,15 +294,6 @@ func TestClient_GetKafka_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetKafka(&GetKafkaInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetKafka(&GetKafkaInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -345,15 +322,6 @@ func TestClient_UpdateKafka_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateKafka(&UpdateKafkaInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -378,15 +346,6 @@ func TestClient_DeleteKafka_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteKafka(&DeleteKafkaInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

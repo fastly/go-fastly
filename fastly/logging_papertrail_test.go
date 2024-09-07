@@ -154,13 +154,6 @@ func TestClient_ListPapertrails_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListPapertrails(&ListPapertrailsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListPapertrails(&ListPapertrailsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -176,13 +169,6 @@ func TestClient_CreatePapertrail_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreatePapertrail(&CreatePapertrailInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -215,15 +201,6 @@ func TestClient_GetPapertrail_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetPapertrail(&GetPapertrailInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetPapertrail(&GetPapertrailInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -252,15 +229,6 @@ func TestClient_UpdatePapertrail_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdatePapertrail(&UpdatePapertrailInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdatePapertrail(&UpdatePapertrailInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -285,15 +253,6 @@ func TestClient_DeletePapertrail_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeletePapertrail(&DeletePapertrailInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

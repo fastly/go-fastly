@@ -370,13 +370,6 @@ func TestClient_ListCloudfiles_validation(t *testing.T) {
 	}
 
 	_, err = testClient.ListCloudfiles(&ListCloudfilesInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.ListCloudfiles(&ListCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -391,13 +384,6 @@ func TestClient_CreateCloudfiles_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.CreateCloudfiles(&CreateCloudfilesInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -430,15 +416,6 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -467,15 +444,6 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 	}
 
 	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -500,15 +468,6 @@ func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
-		Name:           "test",
-		ServiceVersion: 1,
-		ServiceID:      "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 

@@ -101,8 +101,8 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 
 // MakePackagePath ensures we create the correct REST path for referencing packages in the API.
 func MakePackagePath(serviceID string, serviceVersion int) (string, error) {
-	if err := validateServiceID(serviceID); err != nil {
-		return "", err
+	if serviceID == "" {
+		return "", ErrMissingServiceID
 	}
 	if serviceVersion == 0 {
 		return "", ErrMissingServiceVersion

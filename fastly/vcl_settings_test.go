@@ -85,13 +85,6 @@ func TestClient_GetSettings_validation(t *testing.T) {
 	}
 
 	_, err = testClient.GetSettings(&GetSettingsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.GetSettings(&GetSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -106,13 +99,6 @@ func TestClient_UpdateSettings_validation(t *testing.T) {
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
-		t.Errorf("bad error: %s", err)
-	}
-
-	_, err = testClient.UpdateSettings(&UpdateSettingsInput{
-		ServiceID: "not-alphanumeric",
-	})
-	if err != ErrServiceIDNotAlphaNumeric {
 		t.Errorf("bad error: %s", err)
 	}
 
