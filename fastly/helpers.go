@@ -36,12 +36,16 @@ func NullString(v string) *string {
 
 // ToSafeURL produces a safe (no path traversal, no unsafe characters) URL
 // from the path components passed in.
+//
+// Unlike the normal behavior of url.JoinPath, this function skips
+// ".." components, ensuring that user-provided components cannot
+// remove code-provided components from the resulting path.
 func ToSafeURL(unsafeComponents ...string) string {
 	safeComponents := make([]string, len(unsafeComponents))
 
 	for i := range unsafeComponents {
-		if component := unsafeComponents[i]; component != ".." {
-			safeComponents[i] = url.PathEscape(component)
+		if unsafeComponents[i] != ".." {
+			safeComponents[i] = url.PathEscape(unsafeComponents[i])
 		}
 	}
 
