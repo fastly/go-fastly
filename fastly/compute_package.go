@@ -3,8 +3,8 @@ package fastly
 import (
 	"bytes"
 	"errors"
-	"fmt"
 	"io"
+	"strconv"
 	"time"
 )
 
@@ -107,7 +107,7 @@ func MakePackagePath(serviceID string, serviceVersion int) (string, error) {
 	if serviceVersion == 0 {
 		return "", ErrMissingServiceVersion
 	}
-	return fmt.Sprintf("/service/%s/version/%d/package", serviceID, serviceVersion), nil
+	return ToSafeURL("service", serviceID, "version", strconv.Itoa(serviceVersion), "package"), nil
 }
 
 // PopulatePackage encapsulates the decoding of returned package data.

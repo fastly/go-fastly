@@ -2,7 +2,6 @@ package fastly
 
 import (
 	"encoding/json"
-	"fmt"
 )
 
 // StatsResponse is a response from the service stats API endpoint.
@@ -147,13 +146,18 @@ func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
 
 // GetStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
 func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
-	p := "/stats"
+	components := make([]string, 1, 5)
+
+	components[0] = "stats"
+
 	if i.Service != nil {
-		p = fmt.Sprintf("%s/service/%s", p, *i.Service)
+		components = append(components, "service", *i.Service)
 	}
 	if i.Field != nil {
-		p = fmt.Sprintf("%s/field/%s", p, *i.Field)
+		components = append(components, "field", *i.Field)
 	}
+
+	path := ToSafeURL(components...)
 
 	ro := &RequestOptions{
 		Params: map[string]string{},
@@ -171,7 +175,7 @@ func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
 		ro.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return err
 	}

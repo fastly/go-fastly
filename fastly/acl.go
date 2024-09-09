@@ -2,7 +2,7 @@ package fastly
 
 import (
 	"fmt"
-	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -34,7 +34,8 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/acl", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -67,7 +68,8 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/acl", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl")
+
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -103,7 +105,8 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl", i.Name)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
@@ -142,7 +145,8 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl", i.Name)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -180,7 +184,8 @@ func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/acl/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl", i.Name)
+
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err

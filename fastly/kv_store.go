@@ -178,7 +178,8 @@ func (c *Client) GetKVStore(i *GetKVStoreInput) (*KVStore, error) {
 		return nil, ErrMissingStoreID
 	}
 
-	path := "/resources/stores/kv/" + i.StoreID
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -204,7 +205,8 @@ func (c *Client) DeleteKVStore(i *DeleteKVStoreInput) error {
 		return ErrMissingStoreID
 	}
 
-	path := "/resources/stores/kv/" + i.StoreID
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID)
+
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err
@@ -282,7 +284,8 @@ func (c *Client) ListKVStoreKeys(i *ListKVStoreKeysInput) (*ListKVStoreKeysRespo
 		return nil, ErrMissingStoreID
 	}
 
-	path := "/resources/stores/kv/" + i.StoreID + "/keys"
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys")
+
 	ro := new(RequestOptions)
 	ro.Params = i.formatFilters()
 
@@ -369,7 +372,8 @@ func (c *Client) GetKVStoreKey(i *GetKVStoreKeyInput) (string, error) {
 		return "", ErrMissingKey
 	}
 
-	path := "/resources/stores/kv/" + i.StoreID + "/keys/" + i.Key
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return "", err
@@ -451,7 +455,8 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 		ro.BodyLength = int64(len(i.Value))
 	}
 
-	path := "/resources/stores/kv/" + i.StoreID + "/keys/" + i.Key
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
+
 	resp, err := c.Put(path, &ro)
 	if err != nil {
 		return err
@@ -483,7 +488,8 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 		Parallel: true, // This will allow the Fastly CLI to make bulk deletes.
 	}
 
-	path := "/resources/stores/kv/" + i.StoreID + "/keys/" + i.Key
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
+
 	resp, err := c.Delete(path, &ro)
 	if err != nil {
 		return err
@@ -514,7 +520,8 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 		return ErrMissingStoreID
 	}
 
-	path := "/resources/stores/kv/" + i.StoreID + "/batch"
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "batch")
+
 	resp, err := c.Put(path, &RequestOptions{
 		Body: bufio.NewReader(i.Body),
 		Headers: map[string]string{

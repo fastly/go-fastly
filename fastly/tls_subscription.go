@@ -221,7 +221,7 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/subscriptions/%s", i.ID)
+	path := ToSafeURL("tls", "subscriptions", i.ID)
 
 	requestOptions := &RequestOptions{
 		Headers: map[string]string{
@@ -278,7 +278,8 @@ func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubsc
 		}
 	}
 
-	path := fmt.Sprintf("/tls/subscriptions/%s", i.ID)
+	path := ToSafeURL("tls", "subscriptions", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, &ro)
 	if err != nil {
 		return nil, err
@@ -316,7 +317,8 @@ func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
 		}
 	}
 
-	path := fmt.Sprintf("/tls/subscriptions/%s", i.ID)
+	path := ToSafeURL("tls", "subscriptions", i.ID)
+
 	_, err := c.Delete(path, &ro)
 	return err
 }

@@ -47,7 +47,7 @@ func (i *ListTLSMutualAuthenticationsInput) formatFilters() map[string]string {
 
 // ListTLSMutualAuthentication retrieves all resources.
 func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInput) ([]*TLSMutualAuthentication, error) {
-	p := "/tls/mutual_authentications"
+	path := "/tls/mutual_authentications"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
@@ -55,7 +55,7 @@ func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInpu
 		},
 	}
 
-	resp, err := c.Get(p, filters)
+	resp, err := c.Get(path, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -104,9 +104,9 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 		}
 	}
 
-	p := fmt.Sprintf("/tls/mutual_authentications/%s", i.ID)
+	path := ToSafeURL("tls", "mutual_authentications", i.ID)
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -138,9 +138,9 @@ func (c *Client) CreateTLSMutualAuthentication(i *CreateTLSMutualAuthenticationI
 		return nil, ErrMissingCertBundle
 	}
 
-	p := "/tls/mutual_authentications"
+	path := "/tls/mutual_authentications"
 
-	resp, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -175,7 +175,8 @@ func (c *Client) UpdateTLSMutualAuthentication(i *UpdateTLSMutualAuthenticationI
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/mutual_authentications/%s", i.ID)
+	path := ToSafeURL("tls", "mutual_authentications", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -201,7 +202,8 @@ func (c *Client) DeleteTLSMutualAuthentication(i *DeleteTLSMutualAuthenticationI
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/mutual_authentications/%s", i.ID)
+	path := ToSafeURL("tls", "mutual_authentications", i.ID)
+
 	_, err := c.Delete(path, nil)
 	return err
 }

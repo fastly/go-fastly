@@ -1,8 +1,7 @@
 package fastly
 
 import (
-	"fmt"
-	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -46,8 +45,7 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Director, "backend", i.Backend)
 
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
@@ -89,8 +87,7 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Director, "backend", i.Backend)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -132,8 +129,7 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/director/%s/backend/%s",
-		i.ServiceID, i.ServiceVersion, url.PathEscape(i.Director), url.PathEscape(i.Backend))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Director, "backend", i.Backend)
 
 	resp, err := c.Delete(path, nil)
 	if err != nil {

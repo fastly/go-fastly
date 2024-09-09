@@ -1,8 +1,7 @@
 package fastly
 
 import (
-	"fmt"
-	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -36,7 +35,7 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/gzip", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip")
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -75,7 +74,7 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/gzip", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip")
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -111,7 +110,7 @@ func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -155,7 +154,7 @@ func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -191,7 +190,7 @@ func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/gzip/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

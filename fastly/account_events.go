@@ -95,7 +95,8 @@ func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 		return nil, ErrMissingEventID
 	}
 
-	path := fmt.Sprintf("/events/%s", i.EventID)
+	path := ToSafeURL("events", i.EventID)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

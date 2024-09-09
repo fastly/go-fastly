@@ -1,8 +1,7 @@
 package fastly
 
 import (
-	"fmt"
-	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -51,7 +50,7 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka")
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -120,7 +119,7 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka")
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -156,7 +155,7 @@ func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -230,7 +229,7 @@ func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -266,7 +265,7 @@ func (c *Client) DeleteKafka(i *DeleteKafkaInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/logging/kafka/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

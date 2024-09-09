@@ -2,7 +2,7 @@ package fastly
 
 import (
 	"fmt"
-	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -47,7 +47,7 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource")
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -87,7 +87,7 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource")
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -123,7 +123,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource", i.ResourceID)
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -161,7 +161,7 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource", i.ResourceID)
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -197,7 +197,7 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/resource/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.ResourceID))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource", i.ResourceID)
 	resp, err := c.Delete(path, nil)
 	if err != nil {
 		return err

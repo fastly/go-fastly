@@ -2,7 +2,7 @@ package fastly
 
 import (
 	"encoding/json"
-	"fmt"
+	"strconv"
 )
 
 // RealtimeStatsResponse is a response from Fastly's real-time analytics
@@ -60,11 +60,13 @@ func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) erro
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/v1/channel/%s/ts/%d", i.ServiceID, i.Timestamp)
+	components := []string{"v1", "channel", i.ServiceID, "ts", strconv.FormatUint(i.Timestamp, 10)}
 
 	if i.Limit != nil {
-		path = fmt.Sprintf("%s/limit/%d", path, *i.Limit)
+		components = append(components, "limit", strconv.FormatUint(uint64(*i.Limit), 10))
 	}
+
+	path := ToSafeURL(components...)
 
 	resp, err := c.client.Get(path, nil)
 	if err != nil {

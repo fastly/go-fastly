@@ -2,9 +2,7 @@ package fastly
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
-	"net/url"
 	"sort"
 	"time"
 )
@@ -38,7 +36,8 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/item", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item")
+
 	resp, err := c.PostForm(path, i, &RequestOptions{
 		Headers: map[string]string{
 			// PostForm adds the appropriate Content-Type header.
@@ -76,7 +75,8 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 		return ErrMissingKey
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/item/%s", i.StoreID, url.PathEscape(i.Key))
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
+
 	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -110,7 +110,8 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 		return nil, ErrMissingKey
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/item/%s", i.StoreID, url.PathEscape(i.Key))
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
+
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Accept": "application/json",
@@ -142,7 +143,8 @@ func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigSt
 		return nil, ErrMissingStoreID
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/items", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "items")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -181,7 +183,7 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 		return nil, ErrMissingKey
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/item/%s", i.StoreID, url.PathEscape(i.Key))
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
 
 	var httpMethod string
 	if i.Upsert {
@@ -240,7 +242,8 @@ func (c *Client) BatchModifyConfigStoreItems(i *BatchModifyConfigStoreItemsInput
 		return ErrMaxExceededItems
 	}
 
-	path := fmt.Sprintf("/resources/stores/config/%s/items", i.StoreID)
+	path := ToSafeURL("resources", "stores", "config", i.StoreID, "items")
+
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err

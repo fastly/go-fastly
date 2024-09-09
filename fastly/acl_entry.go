@@ -19,8 +19,6 @@ type ACLEntry struct {
 	UpdatedAt *time.Time `mapstructure:"updated_at"`
 }
 
-const aclEntriesPath = "/service/%s/acl/%s/entries"
-
 // GetACLEntriesInput is the input parameter to GetACLEntries function.
 type GetACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
@@ -52,7 +50,7 @@ func (c *Client) GetACLEntries(i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
 	if i.PerPage != nil {
 		input.PerPage = *i.PerPage
 	}
-	path := fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID)
+	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entries")
 	return NewPaginator[ACLEntry](c, input, path)
 }
 
@@ -115,7 +113,7 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
+	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -156,7 +154,7 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry", i.ServiceID, i.ACLID)
+	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry")
 
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
@@ -194,7 +192,7 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 		return ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
+	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
 	resp, err := c.Delete(path, nil)
 	if err != nil {
@@ -244,7 +242,7 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/acl/%s/entry/%s", i.ServiceID, i.ACLID, i.EntryID)
+	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
 	resp, err := c.RequestForm("PATCH", path, i, nil)
 	if err != nil {
@@ -299,7 +297,8 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 		return ErrMaxExceededEntries
 	}
 
-	path := fmt.Sprintf(aclEntriesPath, i.ServiceID, i.ACLID)
+	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entries")
+
 	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err

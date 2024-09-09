@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"net/url"
+	"strconv"
 	"time"
 )
 
@@ -36,7 +36,8 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -71,7 +72,8 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain")
+
 	resp, err := c.PostForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -107,7 +109,8 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -147,7 +150,8 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
+
 	resp, err := c.PutForm(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -183,7 +187,8 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 		return ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/%s", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
+
 	_, err := c.Delete(path, nil)
 	return err
 }
@@ -210,7 +215,8 @@ func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/%s/check", i.ServiceID, i.ServiceVersion, url.PathEscape(i.Name))
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name, "check")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -294,7 +300,8 @@ func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*Doma
 		return nil, ErrMissingServiceVersion
 	}
 
-	path := fmt.Sprintf("/service/%s/version/%d/domain/check_all", i.ServiceID, i.ServiceVersion)
+	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", "check_all")
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

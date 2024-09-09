@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"fmt"
 	"net/url"
 	"strings"
 )
@@ -94,7 +93,7 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 		return nil, ErrMissingKey
 	}
 
-	path := fmt.Sprintf("/service/%s/purge/%s", i.ServiceID, i.Key)
+	path := ToSafeURL("service", i.ServiceID, "purge", i.Key)
 
 	ro := new(RequestOptions)
 	ro.Parallel = true
@@ -139,7 +138,7 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 		return nil, ErrMissingKeys
 	}
 
-	path := fmt.Sprintf("/service/%s/purge", i.ServiceID)
+	path := ToSafeURL("service", i.ServiceID, "purge")
 
 	ro := new(RequestOptions)
 	ro.Parallel = true
@@ -179,7 +178,8 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 		return nil, ErrMissingServiceID
 	}
 
-	path := fmt.Sprintf("/service/%s/purge_all", i.ServiceID)
+	path := ToSafeURL("service", i.ServiceID, "purge_all")
+
 	req, err := c.RawRequest("POST", path, nil)
 	if err != nil {
 		return nil, err

@@ -71,7 +71,7 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 
 // ListCustomTLSConfigurations retrieves all resources.
 func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
-	p := "/tls/configurations"
+	path := "/tls/configurations"
 	ro := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
@@ -79,7 +79,7 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 		},
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -116,7 +116,7 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 		return nil, ErrMissingID
 	}
 
-	p := fmt.Sprintf("/tls/configurations/%s", i.ID)
+	path := ToSafeURL("tls", "configurations", i.ID)
 
 	ro := &RequestOptions{
 		Headers: map[string]string{
@@ -128,7 +128,7 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 		ro.Params = map[string]string{"include": i.Include}
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -160,7 +160,8 @@ func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInp
 		return nil, ErrMissingName
 	}
 
-	path := fmt.Sprintf("/tls/configurations/%s", i.ID)
+	path := ToSafeURL("tls", "configurations", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err

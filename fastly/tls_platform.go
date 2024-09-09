@@ -81,7 +81,7 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 
 // ListBulkCertificates retrieves all resources.
 func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCertificate, error) {
-	p := "/tls/bulk/certificates"
+	path := "/tls/bulk/certificates"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
@@ -89,7 +89,7 @@ func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCert
 		},
 	}
 
-	resp, err := c.Get(p, filters)
+	resp, err := c.Get(path, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -124,9 +124,9 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 		return nil, ErrMissingID
 	}
 
-	p := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)
+	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
 
-	resp, err := c.Get(p, nil)
+	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -161,9 +161,9 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 		return nil, ErrMissingIntermediatesBlob
 	}
 
-	p := "/tls/bulk/certificates"
+	path := "/tls/bulk/certificates"
 
-	resp, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +207,8 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCert
 		return nil, ErrMissingIntermediatesBlob
 	}
 
-	path := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)
+	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -233,7 +234,8 @@ func (c *Client) DeleteBulkCertificate(i *DeleteBulkCertificateInput) error {
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/bulk/certificates/%s", i.ID)
+	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
+
 	_, err := c.Delete(path, nil)
 	return err
 }

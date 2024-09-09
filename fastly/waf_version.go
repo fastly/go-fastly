@@ -133,7 +133,8 @@ func (c *Client) ListWAFVersions(i *ListWAFVersionsInput) (*WAFVersionResponse, 
 		return nil, ErrMissingWAFID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions", i.WAFID)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions")
+
 	resp, err := c.Get(path, &RequestOptions{
 		Params: i.formatFilters(),
 	})
@@ -226,7 +227,8 @@ func (c *Client) GetWAFVersion(i *GetWAFVersionInput) (*WAFVersion, error) {
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.WAFID, i.WAFVersionNumber)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber))
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -334,7 +336,8 @@ func (c *Client) UpdateWAFVersion(i *UpdateWAFVersionInput) (*WAFVersion, error)
 		return nil, ErrMissingWAFVersionID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", *i.WAFID, *i.WAFVersionNumber)
+	path := ToSafeURL("waf", "firewalls", *i.WAFID, "versions", strconv.Itoa(*i.WAFVersionNumber))
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -366,7 +369,8 @@ func (c *Client) LockWAFVersion(i *LockWAFVersionInput) (*WAFVersion, error) {
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d", i.WAFID, i.WAFVersionNumber)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber))
+
 	resp, err := c.PatchJSONAPI(path, &struct {
 		Locked bool `jsonapi:"attr,locked"`
 	}{true}, nil)
@@ -400,7 +404,8 @@ func (c *Client) CloneWAFVersion(i *CloneWAFVersionInput) (*WAFVersion, error) {
 		return nil, ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/clone", i.WAFID, i.WAFVersionNumber)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "clone")
+
 	resp, err := c.PutJSONAPI(path, &CloneWAFVersionInput{}, nil)
 	if err != nil {
 		return nil, err
@@ -432,7 +437,8 @@ func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 		return ErrMissingWAFVersionNumber
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions/%d/activate", i.WAFID, i.WAFVersionNumber)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "activate")
+
 	_, err := c.PutJSONAPI(path, &DeployWAFVersionInput{}, nil)
 	return err
 }
@@ -451,7 +457,8 @@ func (c *Client) CreateEmptyWAFVersion(i *CreateEmptyWAFVersionInput) (*WAFVersi
 		return nil, ErrMissingWAFID
 	}
 
-	path := fmt.Sprintf("/waf/firewalls/%s/versions", i.WAFID)
+	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions")
+
 	resp, err := c.PostJSONAPI(path, nil, nil)
 	if err != nil {
 		return nil, err

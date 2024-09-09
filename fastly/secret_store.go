@@ -44,8 +44,8 @@ func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, err
 		return nil, ErrMissingName
 	}
 
-	p := "/resources/stores/secret"
-	resp, err := c.PostJSON(p, i, &RequestOptions{
+	path := "/resources/stores/secret"
+	resp, err := c.PostJSON(path, i, &RequestOptions{
 		Parallel: true,
 	})
 	if err != nil {
@@ -84,7 +84,7 @@ type ListSecretStoresInput struct {
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
 func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, error) {
-	p := "/resources/stores/secret"
+	path := "/resources/stores/secret"
 
 	params := make(map[string]string, 2)
 	if i.Limit > 0 {
@@ -97,7 +97,7 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 		params["name"] = i.Name
 	}
 
-	resp, err := c.Get(p, &RequestOptions{
+	resp, err := c.Get(path, &RequestOptions{
 		Params: params,
 		Headers: map[string]string{
 			"Content-Type": "application/json",
@@ -130,9 +130,9 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 		return nil, ErrMissingStoreID
 	}
 
-	p := "/resources/stores/secret/" + i.StoreID
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
 
-	resp, err := c.Get(p, &RequestOptions{
+	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",
@@ -164,9 +164,9 @@ func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 		return ErrMissingStoreID
 	}
 
-	p := "/resources/stores/secret/" + i.StoreID
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
 
-	resp, err := c.Delete(p, &RequestOptions{
+	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",
@@ -224,7 +224,7 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 		return nil, ErrMissingSecret
 	}
 
-	p := "/resources/stores/secret/" + i.StoreID + "/secrets"
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets")
 
 	var body bytes.Buffer
 	err := json.NewEncoder(&body).Encode(struct {
@@ -251,7 +251,7 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 		return nil, ErrInvalidMethod
 	}
 
-	resp, err := c.Request(method, p, &RequestOptions{
+	resp, err := c.Request(method, path, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",
@@ -299,7 +299,7 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 		return nil, ErrMissingStoreID
 	}
 
-	p := "/resources/stores/secret/" + i.StoreID + "/secrets"
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets")
 
 	params := make(map[string]string, 2)
 	if i.Limit > 0 {
@@ -309,7 +309,7 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 		params["cursor"] = i.Cursor
 	}
 
-	resp, err := c.Get(p, &RequestOptions{
+	resp, err := c.Get(path, &RequestOptions{
 		Params: params,
 		Headers: map[string]string{
 			"Content-Type": "application/json",
@@ -347,9 +347,9 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 		return nil, ErrMissingName
 	}
 
-	p := "/resources/stores/secret/" + i.StoreID + "/secrets/" + i.Name
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	resp, err := c.Get(p, &RequestOptions{
+	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",
@@ -386,9 +386,9 @@ func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 		return ErrMissingName
 	}
 
-	p := "/resources/stores/secret/" + i.StoreID + "/secrets/" + i.Name
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	resp, err := c.Delete(p, &RequestOptions{
+	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",
@@ -439,9 +439,9 @@ func (ck *ClientKey) Encrypt(plaintext []byte) ([]byte, error) {
 // CreateClientKey creates a new time-limited client key for locally
 // encrypting secrets before uploading them to the Fastly API.
 func (c *Client) CreateClientKey() (*ClientKey, error) {
-	p := "/resources/stores/secret/client-key"
+	path := "/resources/stores/secret/client-key"
 
-	resp, err := c.Post(p, &RequestOptions{
+	resp, err := c.Post(path, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",
@@ -465,9 +465,9 @@ func (c *Client) CreateClientKey() (*ClientKey, error) {
 // general the signing key changes very rarely, and it's recommended to
 // ship the signing key out-of-band from the API.
 func (c *Client) GetSigningKey() (ed25519.PublicKey, error) {
-	p := "/resources/stores/secret/signing-key"
+	path := "/resources/stores/secret/signing-key"
 
-	resp, err := c.Get(p, &RequestOptions{
+	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": "application/json",
 			"Accept":       "application/json",

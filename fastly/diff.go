@@ -1,6 +1,6 @@
 package fastly
 
-import "fmt"
+import "strconv"
 
 // Diff represents a diff of two versions as a response from the Fastly API.
 type Diff struct {
@@ -40,7 +40,8 @@ func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 		return nil, ErrMissingTo
 	}
 
-	path := fmt.Sprintf("service/%s/diff/from/%d/to/%d", i.ServiceID, i.From, i.To)
+	path := ToSafeURL("service", i.ServiceID, "diff", "from", strconv.Itoa(i.From), "to", strconv.Itoa(i.To))
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err

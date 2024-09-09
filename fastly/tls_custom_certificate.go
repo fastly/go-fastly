@@ -78,7 +78,7 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 
 // ListCustomTLSCertificates retrieves all resources.
 func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([]*CustomTLSCertificate, error) {
-	p := "/tls/certificates"
+	path := "/tls/certificates"
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
@@ -86,7 +86,7 @@ func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([
 		},
 	}
 
-	resp, err := c.Get(p, filters)
+	resp, err := c.Get(path, filters)
 	if err != nil {
 		return nil, err
 	}
@@ -121,9 +121,9 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 		return nil, ErrMissingID
 	}
 
-	p := fmt.Sprintf("/tls/certificates/%s", i.ID)
+	path := ToSafeURL("tls", "certificates", i.ID)
 
-	resp, err := c.Get(p, nil)
+	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -153,9 +153,9 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 		return nil, ErrMissingCertBlob
 	}
 
-	p := "/tls/certificates"
+	path := "/tls/certificates"
 
-	resp, err := c.PostJSONAPI(p, i, nil)
+	resp, err := c.PostJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -193,7 +193,8 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 		return nil, ErrMissingCertBlob
 	}
 
-	path := fmt.Sprintf("/tls/certificates/%s", i.ID)
+	path := ToSafeURL("tls", "certificates", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -219,7 +220,8 @@ func (c *Client) DeleteCustomTLSCertificate(i *DeleteCustomTLSCertificateInput) 
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/tls/certificates/%s", i.ID)
+	path := ToSafeURL("tls", "certificates", i.ID)
+
 	_, err := c.Delete(path, nil)
 	return err
 }

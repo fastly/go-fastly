@@ -116,7 +116,8 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 		return nil, ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service-authorizations/%s", i.ID)
+	path := ToSafeURL("service-authorizations", i.ID)
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
@@ -188,7 +189,8 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 		return nil, ErrMissingPermission
 	}
 
-	path := fmt.Sprintf("/service-authorizations/%s", i.ID)
+	path := ToSafeURL("service-authorizations", i.ID)
+
 	resp, err := c.PatchJSONAPI(path, i, nil)
 	if err != nil {
 		return nil, err
@@ -215,7 +217,8 @@ func (c *Client) DeleteServiceAuthorization(i *DeleteServiceAuthorizationInput) 
 		return ErrMissingID
 	}
 
-	path := fmt.Sprintf("/service-authorizations/%s", i.ID)
+	path := ToSafeURL("service-authorizations", i.ID)
+
 	_, err := c.Delete(path, nil)
 
 	return err

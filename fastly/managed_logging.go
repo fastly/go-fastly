@@ -1,7 +1,6 @@
 package fastly
 
 import (
-	"fmt"
 	"net/http"
 )
 
@@ -43,7 +42,7 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 	case ManagedLoggingUnset:
 		return nil, ErrMissingKind
 	case ManagedLoggingInstanceOutput:
-		path = fmt.Sprintf("/service/%s/log_stream/managed/instance_output", i.ServiceID)
+		path = ToSafeURL("service", i.ServiceID, "log_stream", "managed", "instance_output")
 	default:
 		return nil, ErrNotImplemented
 	}
@@ -88,7 +87,7 @@ func (c *Client) DeleteManagedLogging(i *DeleteManagedLoggingInput) error {
 	case ManagedLoggingUnset:
 		return ErrMissingKind
 	case ManagedLoggingInstanceOutput:
-		path = fmt.Sprintf("/service/%s/log_stream/managed/instance_output", i.ServiceID)
+		path = ToSafeURL("service", i.ServiceID, "log_stream", "managed", "instance_output")
 	default:
 		return ErrNotImplemented
 	}

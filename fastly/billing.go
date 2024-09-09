@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"strconv"
 	"time"
 )
 
@@ -68,7 +69,8 @@ func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
 		return nil, ErrMissingMonth
 	}
 
-	path := fmt.Sprintf("/billing/year/%d/month/%02d", i.Year, i.Month)
+	path := ToSafeURL("billing", "year", strconv.Itoa(int(i.Year)), "month", fmt.Sprintf("%02d", i.Month))
+
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		return nil, err
