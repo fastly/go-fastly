@@ -1,5 +1,17 @@
 # Changelog
 
+## [v9.10.0](https://github.com/fastly/go-fastly/releases/tag/v9.10.0) (2024-09-09)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.9.0...v9.10.0)
+
+**Enhancements:**
+
+- feat(service, version): Add support for 'environments'. [#542](https://github.com/fastly/go-fastly/pull/542)
+
+**Bug fixes:**
+
+- fix: Ensure that all API endpoint URLs are constructed safely. [#544](https://github.com/fastly/go-fastly/pull/544)
+
 ## [v9.9.0](https://github.com/fastly/go-fastly/releases/tag/v9.9.0) (2024-08-20)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.8.0...v9.9.0)
