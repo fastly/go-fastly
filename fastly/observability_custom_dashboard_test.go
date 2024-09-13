@@ -1,0 +1,106 @@
+package fastly
+
+import (
+	"testing"
+)
+
+func TestClient_ObservabilityCustomDashboards(t *testing.T) {
+	t.Parallel()
+
+	cocd := &CreateObservabilityCustomDashboardInput{
+		Description: ToPointer("My dashboard is super cool."),
+		Name:        "My Cool Dashboard",
+		Items:       []InputDashboardItem{},
+	}
+
+	var err error
+
+	// Create
+	var ocd *ObservabilityCustomDashboard
+	record(t, "observability_custom_dashboards/create_custom_dashboard", func(c *Client) {
+		ocd, err = c.CreateObservabilityCustomDashboard(cocd)
+	})
+	if err != nil {
+		t.Fatalf("Error encountered: %v\ninput: %#v", err, cocd)
+	}
+	// Ensure deleted
+	defer func() {
+		record(t, "observability_custom_dashboards/delete_custom_dashboard", func(c *Client) {
+			err = c.DeleteObservabilityCustomDashboard(&DeleteObservabilityCustomDashboardInput{
+				ID: &ocd.ID,
+			})
+		})
+	}()
+
+	if ocd.Description != "My dashboard is super cool." {
+		t.Errorf("bad description. want: %s, got %s", *cocd.Description, ocd.Description)
+	}
+
+	if ocd.Name != "My Cool Dashboard" {
+		t.Errorf("bad name. want: %s, got %s", cocd.Name, ocd.Name)
+	}
+
+	if len(ocd.Items) != 0 {
+		t.Errorf("bad items: %v", ocd.Items)
+	}
+
+	// List Dashboards
+	var ldr *ListDashboardsResponse
+	record(t, "observability_custom_dashboards/list_custom_dashboards", func(c *Client) {
+		ldr, err = c.ListObservabilityCustomDashboards(&ListObservabilityCustomDashboardsInput{})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(ldr.Data) < 1 {
+		t.Errorf("bad custom dashboards: %v", ldr)
+	}
+
+	// Get
+	var gocd *ObservabilityCustomDashboard
+	record(t, "observability_custom_dashboards/get_custom_dashboard", func(c *Client) {
+		gocd, err = c.GetObservabilityCustomDashboard(&GetObservabilityCustomDashboardInput{
+			ID: &ocd.ID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if gocd.Name != ocd.Name {
+		t.Errorf("bad name: %q (%q)", ocd.Name, gocd.Name)
+	}
+
+	// Update
+	var ucd *ObservabilityCustomDashboard
+	record(t, "observability_custom_dashboards/update_custom_dashboard", func(c *Client) {
+		ucd, err = c.UpdateObservabilityCustomDashboard(&UpdateObservabilityCustomDashboardInput{
+			Description: ToPointer("My dashboard just got even cooler."),
+			ID:          &ocd.ID,
+			Items: &[]InputDashboardItem{{
+				DataSource: DataSource{
+					Config: SourceConfig{
+						Metrics: []Metric{"requests"},
+					},
+					Type: SourceTypeStatsEdge,
+				},
+				Span:     4,
+				Subtitle: "This is a subtitle",
+				Title:    "A Dashboard Item",
+				Visualization: Visualization{
+					Config: VisualizationConfig{PlotType: PlotTypeLine},
+					Type:   VisualizationTypeChart,
+				},
+			}},
+			Name: ToPointer("My Updated Dashboard"),
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if ucd.Name != "My Updated Dashboard" {
+		t.Errorf("bad name: %q (%q)", "My Updated Dashboard", ucd.Name)
+	}
+	if len(ucd.Items) != 1 {
+		t.Errorf("bad items")
+	}
+}
