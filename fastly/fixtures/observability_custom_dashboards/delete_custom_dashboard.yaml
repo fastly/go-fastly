@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.0)
-    url: https://api.fastly.com/observability/dashboards/2i2SYSBHe4ktahuorJrn8P
+    url: https://api.fastly.com/observability/dashboards/4d8YrSYlEVN7O9q55PTROf
     method: DELETE
   response:
     body: ""
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 13 Sep 2024 21:08:16 GMT
+      - Mon, 16 Sep 2024 18:50:28 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100114-CHI, cache-pdk-katl1840061-PDK
+      - cache-chi-klot8100140-CHI, cache-pdk-kpdk1780083-PDK
       X-Timer:
-      - S1726261696.240009,VS0,VE68
+      - S1726512628.228117,VS0,VE65
     status: 204 No Content
     code: 204
     duration: ""

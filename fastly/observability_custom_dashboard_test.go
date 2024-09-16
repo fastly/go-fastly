@@ -2,6 +2,9 @@ package fastly
 
 import (
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
+	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func TestClient_ObservabilityCustomDashboards(t *testing.T) {
@@ -10,7 +13,21 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	cocd := &CreateObservabilityCustomDashboardInput{
 		Description: ToPointer("My dashboard is super cool."),
 		Name:        "My Cool Dashboard",
-		Items:       []InputDashboardItem{},
+		Items: []DashboardItem{{
+			DataSource: DataSource{
+				Config: SourceConfig{
+					Metrics: []Metric{"requests"},
+				},
+				Type: SourceTypeStatsEdge,
+			},
+			Span:     4,
+			Subtitle: "This is a subtitle",
+			Title:    "A Dashboard Item",
+			Visualization: Visualization{
+				Config: VisualizationConfig{PlotType: PlotTypeLine},
+				Type:   VisualizationTypeChart,
+			},
+		}},
 	}
 
 	var err error
@@ -40,7 +57,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 		t.Errorf("bad name. want: %s, got %s", cocd.Name, ocd.Name)
 	}
 
-	if len(ocd.Items) != 0 {
+	if len(ocd.Items) != 1 {
 		t.Errorf("bad items: %v", ocd.Items)
 	}
 
@@ -72,26 +89,32 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 
 	// Update
 	var ucd *ObservabilityCustomDashboard
+	items := ocd.Items
+	items[0].DataSource.Config.Metrics = []Metric{"edge_hit_requests"}
+	items[0].Visualization.Config.PlotType = PlotTypeSingleMetric
+	items[0].Title = "An Updated Dashboard Item"
+
+	items = append(items, DashboardItem{
+		DataSource: DataSource{
+			Config: SourceConfig{
+				Metrics: []Metric{"requests"},
+			},
+			Type: SourceTypeStatsEdge,
+		},
+		Span:     4,
+		Subtitle: "This is a subtitle",
+		Title:    "A New Dashboard Item",
+		Visualization: Visualization{
+			Config: VisualizationConfig{PlotType: PlotTypeLine},
+			Type:   VisualizationTypeChart,
+		},
+	})
 	record(t, "observability_custom_dashboards/update_custom_dashboard", func(c *Client) {
 		ucd, err = c.UpdateObservabilityCustomDashboard(&UpdateObservabilityCustomDashboardInput{
 			Description: ToPointer("My dashboard just got even cooler."),
 			ID:          &ocd.ID,
-			Items: &[]InputDashboardItem{{
-				DataSource: DataSource{
-					Config: SourceConfig{
-						Metrics: []Metric{"requests"},
-					},
-					Type: SourceTypeStatsEdge,
-				},
-				Span:     4,
-				Subtitle: "This is a subtitle",
-				Title:    "A Dashboard Item",
-				Visualization: Visualization{
-					Config: VisualizationConfig{PlotType: PlotTypeLine},
-					Type:   VisualizationTypeChart,
-				},
-			}},
-			Name: ToPointer("My Updated Dashboard"),
+			Items:       &items,
+			Name:        ToPointer("My Updated Dashboard"),
 		})
 	})
 	if err != nil {
@@ -100,7 +123,13 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	if ucd.Name != "My Updated Dashboard" {
 		t.Errorf("bad name: %q (%q)", "My Updated Dashboard", ucd.Name)
 	}
-	if len(ucd.Items) != 1 {
+	if len(ucd.Items) != 2 {
 		t.Errorf("bad items")
+	}
+	if diff := cmp.Diff(items[0], ucd.Items[0]); diff != "" {
+		t.Errorf("dashboard item did not match (-want,+got): %s", diff)
+	}
+	if diff := cmp.Diff(items[1], ucd.Items[1], cmpopts.IgnoreFields(DashboardItem{}, "ID")); diff != "" {
+		t.Errorf("dashboard item did not match (-want,+got): %s", diff)
 	}
 }

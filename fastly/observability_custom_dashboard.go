@@ -207,25 +207,10 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 	return ldr, nil
 }
 
-type InputDashboardItem struct {
-	// DataSource describes the source of the metrics to be displayed (required).
-	DataSource DataSource `json:"data_source"`
-	// ID is a unique identifier for the DashboardItem (read-only).
-	ID *string `json:"id,omitempty"`
-	// Span is the number of columns (1-12) for the DashboardItem to span (default: 4).
-	Span uint8 `json:"span"`
-	// Subtitle is a human-readable subtitle to display, often a description of the visualization (optional).
-	Subtitle string `json:"subtitle"`
-	// Title is a human-readable title to display (optional).
-	Title string `json:"title"`
-	// Visualization describes the way the DashboardItem should display data (required).
-	Visualization Visualization `json:"visualization"`
-}
-
 type CreateObservabilityCustomDashboardInput struct {
-	Description *string              `json:"description,omitempty"`
-	Items       []InputDashboardItem `json:"items"`
-	Name        string               `json:"name"`
+	Description *string         `json:"description,omitempty"`
+	Items       []DashboardItem `json:"items"`
+	Name        string          `json:"name"`
 }
 
 func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
@@ -270,9 +255,9 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 type UpdateObservabilityCustomDashboardInput struct {
 	Description *string `json:"description,omitempty"`
 	// ID of the dashboard to fetch (required).
-	ID    *string               `json:"-"`
-	Items *[]InputDashboardItem `json:"items,omitempty"`
-	Name  *string               `json:"name,omitempty"`
+	ID    *string          `json:"-"`
+	Items *[]DashboardItem `json:"items,omitempty"`
+	Name  *string          `json:"name,omitempty"`
 }
 
 func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
