@@ -98,8 +98,10 @@ func (st *SourceType) UnmarshalJSON(data []byte) (err error) {
 }
 
 type DataSource struct {
+	// Config describes configuration options for the selected data source (required).
 	Config SourceConfig `json:"config"`
-	Type   SourceType   `json:"type"`
+	// Type is the source of the data to display (required).
+	Type SourceType `json:"type"`
 }
 
 type Metric string
@@ -113,8 +115,10 @@ type VisualizationType string
 const VisualizationTypeChart VisualizationType = "chart"
 
 type Visualization struct {
+	// Config describes configuration options for the given visualization (required).
 	Config VisualizationConfig `json:"config"`
-	Type   VisualizationType   `json:"type"`
+	// Type is type of visualization to display. Currently only "chart" is supported (required).
+	Type VisualizationType `json:"type"`
 }
 
 type PlotType string
@@ -151,9 +155,12 @@ const (
 )
 
 type VisualizationConfig struct {
+	// CalculationMethod is the aggregation function to apply to the dataset (optional).
 	CalculationMethod *CalculationMethod `json:"calculation_method,omitempty"`
-	Format            *Format            `json:"format,omitempty"`
-	PlotType          PlotType           `json:"plot_type"`
+	// Format is the units to use to format the data (optional, default: number).
+	Format *Format `json:"format,omitempty"`
+	// PlotType is the type of chart to display (required).
+	PlotType PlotType `json:"plot_type"`
 }
 
 type ListDashboardsResponse struct {
