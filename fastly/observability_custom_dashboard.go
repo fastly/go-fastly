@@ -22,21 +22,21 @@ const (
 // ObservabilityCustomDashboard is a named container for a custom dashboard configuration
 type ObservabilityCustomDashboard struct {
 	// The date and time the dashboard was created
-	CreatedAt time.Time `mapstructure:"created_at"`
+	CreatedAt time.Time
 	// The ID of the user who created the dashboard
-	CreatedBy string `mapstructure:"created_by"`
+	CreatedBy string
 	// A short description of the dashboard
-	Description string `mapstructure:"description"`
+	Description string
 	// The unique identifier of the dashboard
-	ID string `mapstructure:"id"`
+	ID string
 	// A list of DashboardItems
-	Items []DashboardItem `mapstructure:"items"`
+	Items []DashboardItem
 	// A human-readable name
-	Name string `mapstructure:"name"`
+	Name string
 	// The date and time the dashboard was last updated
-	UpdatedAt time.Time `mapstructure:"updated_at"`
+	UpdatedAt time.Time
 	// The ID of the user who last modified the dashboard
-	UpdatedBy string `mapstructure:"updated_by"`
+	UpdatedBy string
 }
 
 // DashboardItem describes an item (or "widget") of a dashboard
