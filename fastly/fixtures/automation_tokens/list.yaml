@@ -1,0 +1,44 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.22.2)
+    url: https://api.fastly.com/automation-tokens?page=1&per_page=100
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","creator_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"my-test-token","access_token":"","role":"engineer","ip":null,"user_agent":null,"scopes":"global","services":[],"service_id":null,"sudo_expires_at":null,"last_used_at":null,"created_at":"2024-09-21T03:56:00Z","expires_at":null,"tls_access":false}],"meta":{"per_page":100,"current_page":1,"record_count":1,"total_pages":1}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "445"
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 21 Sep 2024 04:30:21 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100166-CHI, cache-per12624-PER
+      X-Timer:
+      - S1726893021.414551,VS0,VE346
+    status: 200 OK
+    code: 200
+    duration: ""
