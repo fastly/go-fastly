@@ -73,7 +73,7 @@ func (c *Client) GetAutomationTokens(i *GetAutomationTokensInput) *ListPaginator
 	return NewPaginator[AutomationTokenPaginator](c, input, "/automation-tokens")
 }
 
-// ListAutomationTokens retrieves all resources. Not suitable for large collections.
+// ListAutomationTokens retrieves all resources.
 func (c *Client) ListAutomationTokens() ([]*AutomationToken, error) {
 	p := c.GetAutomationTokens(&GetAutomationTokensInput{})
 	var results []*AutomationToken
@@ -139,6 +139,8 @@ type CreateAutomationTokenInput struct {
 }
 
 // CreateAutomationToken creates a new resource.
+//
+// Requires sudo capability for the token being used.
 func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*AutomationToken, error) {
 	_, err := c.PostForm("/sudo", i, nil)
 	if err != nil {
