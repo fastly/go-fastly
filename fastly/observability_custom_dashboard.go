@@ -40,7 +40,7 @@ type ObservabilityCustomDashboard struct {
 // DashboardItem describes an item (or "widget") of a dashboard
 type DashboardItem struct {
 	// DataSource describes the source of the metrics to be displayed (required)
-	DataSource DataSource `json:"data_source"`
+	DataSource DashboardDataSource `json:"data_source"`
 	// ID is a unique identifier for the DashboardItem (read-only)
 	ID string `json:"id,omitempty"`
 	// Span is the number of columns (1-12) for the DashboardItem to span (default: 4)
@@ -50,10 +50,10 @@ type DashboardItem struct {
 	// Title is a human-readable title to display (optional)
 	Title string `json:"title"`
 	// Visualization describes the way the DashboardItem should display data (required)
-	Visualization Visualization `json:"visualization"`
+	Visualization DashboardVisualization `json:"visualization"`
 }
 
-type SourceType string
+type DashboardSourceType string
 
 const (
 	SourceTypeStatsEdge   = "stats.edge"
@@ -61,27 +61,25 @@ const (
 	SourceTypeStatsOrigin = "stats.origin"
 )
 
-// DataSource describes the data to display in a DashboardItem
-type DataSource struct {
+// DashboardDataSource describes the data to display in a DashboardItem
+type DashboardDataSource struct {
 	// Config describes configuration options for the selected data source (required)
-	Config SourceConfig `json:"config"`
+	Config DashboardSourceConfig `json:"config"`
 	// Type is the source of the data to display (required)
-	Type SourceType `json:"type"`
+	Type DashboardSourceType `json:"type"`
 }
 
-type Metric string
-
-type SourceConfig struct {
+type DashboardSourceConfig struct {
 	// Metrics is the list metrics to visualize (required)
 	// Valid options are defined by the selected SourceType. See https://www.fastly.com/documentation/reference/api/observability/custom-dashboards/#data-source
-	Metrics []Metric `json:"metrics"`
+	Metrics []string `json:"metrics"`
 }
 
 type VisualizationType string
 
 const VisualizationTypeChart VisualizationType = "chart"
 
-type Visualization struct {
+type DashboardVisualization struct {
 	// Config describes configuration options for the given visualization (required)
 	Config VisualizationConfig `json:"config"`
 	// Type is type of visualization to display. Currently only "chart" is supported (required)
@@ -100,15 +98,15 @@ const (
 type VisualizationFormat string
 
 const (
-	FormatNumber       VisualizationFormat = "number"
-	FormatBytes        VisualizationFormat = "bytes"
-	FormatPercent      VisualizationFormat = "percent"
-	FormatRequests     VisualizationFormat = "requests"
-	FormatResponses    VisualizationFormat = "responses"
-	FormatSeconds      VisualizationFormat = "seconds"
-	FormatMilliseconds VisualizationFormat = "milliseconds"
-	FormatRatio        VisualizationFormat = "ratio"
-	FormatBitrate      VisualizationFormat = "bitrate"
+	VisualizationFormatNumber       VisualizationFormat = "number"
+	VisualizationFormatBytes        VisualizationFormat = "bytes"
+	VisualizationFormatPercent      VisualizationFormat = "percent"
+	VisualizationFormatRequests     VisualizationFormat = "requests"
+	VisualizationFormatResponses    VisualizationFormat = "responses"
+	VisualizationFormatSeconds      VisualizationFormat = "seconds"
+	VisualizationFormatMilliseconds VisualizationFormat = "milliseconds"
+	VisualizationFormatRatio        VisualizationFormat = "ratio"
+	VisualizationFormatBitrate      VisualizationFormat = "bitrate"
 )
 
 type CalculationMethod string

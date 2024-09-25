@@ -14,16 +14,16 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 		Description: ToPointer("My dashboard is super cool."),
 		Name:        "My Cool Dashboard",
 		Items: []DashboardItem{{
-			DataSource: DataSource{
-				Config: SourceConfig{
-					Metrics: []Metric{"requests"},
+			DataSource: DashboardDataSource{
+				Config: DashboardSourceConfig{
+					Metrics: []string{"requests"},
 				},
 				Type: SourceTypeStatsEdge,
 			},
 			Span:     4,
 			Subtitle: "This is a subtitle",
 			Title:    "A Dashboard Item",
-			Visualization: Visualization{
+			Visualization: DashboardVisualization{
 				Config: VisualizationConfig{PlotType: PlotTypeLine},
 				Type:   VisualizationTypeChart,
 			},
@@ -90,21 +90,21 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	// Update
 	var ucd *ObservabilityCustomDashboard
 	items := ocd.Items
-	items[0].DataSource.Config.Metrics = []Metric{"edge_hit_requests"}
+	items[0].DataSource.Config.Metrics = []string{"edge_hit_requests"}
 	items[0].Visualization.Config.PlotType = PlotTypeSingleMetric
 	items[0].Title = "An Updated Dashboard Item"
 
 	items = append(items, DashboardItem{
-		DataSource: DataSource{
-			Config: SourceConfig{
-				Metrics: []Metric{"requests"},
+		DataSource: DashboardDataSource{
+			Config: DashboardSourceConfig{
+				Metrics: []string{"requests"},
 			},
 			Type: SourceTypeStatsEdge,
 		},
 		Span:     4,
 		Subtitle: "This is a subtitle",
 		Title:    "A New Dashboard Item",
-		Visualization: Visualization{
+		Visualization: DashboardVisualization{
 			Config: VisualizationConfig{PlotType: PlotTypeLine},
 			Type:   VisualizationTypeChart,
 		},
