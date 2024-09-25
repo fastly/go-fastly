@@ -39,17 +39,17 @@ type ObservabilityCustomDashboard struct {
 
 // DashboardItem describes an item (or "widget") of a dashboard
 type DashboardItem struct {
-	// DataSource describes the source of the metrics to be displayed (required).
+	// DataSource describes the source of the metrics to be displayed (required)
 	DataSource DataSource `json:"data_source"`
-	// ID is a unique identifier for the DashboardItem (read-only).
+	// ID is a unique identifier for the DashboardItem (read-only)
 	ID string `json:"id,omitempty"`
-	// Span is the number of columns (1-12) for the DashboardItem to span (default: 4).
+	// Span is the number of columns (1-12) for the DashboardItem to span (default: 4)
 	Span uint8 `json:"span"`
-	// Subtitle is a human-readable subtitle to display, often a description of the visualization (optional).
+	// Subtitle is a human-readable subtitle to display, often a description of the visualization (optional)
 	Subtitle string `json:"subtitle"`
-	// Title is a human-readable title to display (optional).
+	// Title is a human-readable title to display (optional)
 	Title string `json:"title"`
-	// Visualization describes the way the DashboardItem should display data (required).
+	// Visualization describes the way the DashboardItem should display data (required)
 	Visualization Visualization `json:"visualization"`
 }
 
@@ -61,16 +61,19 @@ const (
 	SourceTypeStatsOrigin = "stats.origin"
 )
 
+// DataSource describes the data to display in a DashboardItem
 type DataSource struct {
-	// Config describes configuration options for the selected data source (required).
+	// Config describes configuration options for the selected data source (required)
 	Config SourceConfig `json:"config"`
-	// Type is the source of the data to display (required).
+	// Type is the source of the data to display (required)
 	Type SourceType `json:"type"`
 }
 
 type Metric string
 
 type SourceConfig struct {
+	// Metrics is the list metrics to visualize (required)
+	// Valid options are defined by the selected SourceType. See https://www.fastly.com/documentation/reference/api/observability/custom-dashboards/#data-source
 	Metrics []Metric `json:"metrics"`
 }
 
@@ -79,9 +82,9 @@ type VisualizationType string
 const VisualizationTypeChart VisualizationType = "chart"
 
 type Visualization struct {
-	// Config describes configuration options for the given visualization (required).
+	// Config describes configuration options for the given visualization (required)
 	Config VisualizationConfig `json:"config"`
-	// Type is type of visualization to display. Currently only "chart" is supported (required).
+	// Type is type of visualization to display. Currently only "chart" is supported (required)
 	Type VisualizationType `json:"type"`
 }
 
@@ -94,18 +97,18 @@ const (
 	PlotTypeSingleMetric PlotType = "single-metric"
 )
 
-type Format string
+type VisualizationFormat string
 
 const (
-	FormatNumber       Format = "number"
-	FormatBytes        Format = "bytes"
-	FormatPercent      Format = "percent"
-	FormatRequests     Format = "requests"
-	FormatResponses    Format = "responses"
-	FormatSeconds      Format = "seconds"
-	FormatMilliseconds Format = "milliseconds"
-	FormatRatio        Format = "ratio"
-	FormatBitrate      Format = "bitrate"
+	FormatNumber       VisualizationFormat = "number"
+	FormatBytes        VisualizationFormat = "bytes"
+	FormatPercent      VisualizationFormat = "percent"
+	FormatRequests     VisualizationFormat = "requests"
+	FormatResponses    VisualizationFormat = "responses"
+	FormatSeconds      VisualizationFormat = "seconds"
+	FormatMilliseconds VisualizationFormat = "milliseconds"
+	FormatRatio        VisualizationFormat = "ratio"
+	FormatBitrate      VisualizationFormat = "bitrate"
 )
 
 type CalculationMethod string
@@ -119,11 +122,11 @@ const (
 )
 
 type VisualizationConfig struct {
-	// CalculationMethod is the aggregation function to apply to the dataset (optional).
+	// CalculationMethod is the aggregation function to apply to the dataset (optional)
 	CalculationMethod *CalculationMethod `json:"calculation_method,omitempty"`
-	// Format is the units to use to format the data (optional, default: number).
-	Format *Format `json:"format,omitempty"`
-	// PlotType is the type of chart to display (required).
+	// Format indicates the unit used to format the data (optional, default: number)
+	Format *VisualizationFormat `json:"format,omitempty"`
+	// PlotType is the type of chart to display (required)
 	PlotType PlotType `json:"plot_type"`
 }
 
@@ -132,7 +135,7 @@ type ListDashboardsResponse struct {
 	Meta DashboardMeta                  `json:"meta"`
 }
 
-// DashboardMeta holds metadata about a dashboards query.
+// DashboardMeta holds metadata about a dashboards query
 type DashboardMeta struct {
 	Limit      int    `json:"limit"`
 	NextCursor string `json:"next_cursor"`
@@ -140,13 +143,13 @@ type DashboardMeta struct {
 	Total      int    `json:"total"`
 }
 
-// ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function.
+// ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function
 type ListObservabilityCustomDashboardsInput struct {
-	// Cursor is the pagination cursor from a previous request's meta (optional).
+	// Cursor is the pagination cursor from a previous request's meta (optional)
 	Cursor *string
-	// Limit is the maximum number of items included in each response (optional).
+	// Limit is the maximum number of items included in each response (optional)
 	Limit *int
-	// Sort is the field on which to sort dashboards (optional).
+	// Sort is the field on which to sort dashboards (optional)
 	Sort *string
 }
 
@@ -200,7 +203,7 @@ func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustom
 }
 
 type GetObservabilityCustomDashboardInput struct {
-	// ID of the dashboard to fetch (required).
+	// ID of the dashboard to fetch (required)
 	ID *string
 }
 
@@ -225,7 +228,7 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 
 type UpdateObservabilityCustomDashboardInput struct {
 	Description *string `json:"description,omitempty"`
-	// ID of the dashboard to fetch (required).
+	// ID of the dashboard to fetch (required)
 	ID    *string          `json:"-"`
 	Items *[]DashboardItem `json:"items,omitempty"`
 	Name  *string          `json:"name,omitempty"`
@@ -251,7 +254,7 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 }
 
 type DeleteObservabilityCustomDashboardInput struct {
-	// ID of the dashboard to delete (required).
+	// ID of the dashboard to delete (required)
 	ID *string
 }
 
