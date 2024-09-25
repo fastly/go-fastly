@@ -89,33 +89,33 @@ type PlotType string
 
 const (
 	PlotTypeLine         PlotType = "line"
-	PlotTypeBar                   = "bar"
-	PlotTypeDonut                 = "donut"
-	PlotTypeSingleMetric          = "single-metric"
+	PlotTypeBar          PlotType = "bar"
+	PlotTypeDonut        PlotType = "donut"
+	PlotTypeSingleMetric PlotType = "single-metric"
 )
 
 type Format string
 
 const (
 	FormatNumber       Format = "number"
-	FormatBytes               = "bytes"
-	FormatPercent             = "percent"
-	FormatRequests            = "requests"
-	FormatResponses           = "responses"
-	FormatSeconds             = "seconds"
-	FormatMilliseconds        = "milliseconds"
-	FormatRatio               = "ratio"
-	FormatBitrate             = "bitrate"
+	FormatBytes        Format = "bytes"
+	FormatPercent      Format = "percent"
+	FormatRequests     Format = "requests"
+	FormatResponses    Format = "responses"
+	FormatSeconds      Format = "seconds"
+	FormatMilliseconds Format = "milliseconds"
+	FormatRatio        Format = "ratio"
+	FormatBitrate      Format = "bitrate"
 )
 
 type CalculationMethod string
 
 const (
 	CalculationMethodAvg    CalculationMethod = "avg"
-	CalculationMethodSum                      = "sum"
-	CalculationMethodMin                      = "min"
-	CalculationMethodMax                      = "max"
-	CalculationMethodLatest                   = "latest"
+	CalculationMethodSum    CalculationMethod = "sum"
+	CalculationMethodMin    CalculationMethod = "min"
+	CalculationMethodMax    CalculationMethod = "max"
+	CalculationMethodLatest CalculationMethod = "latest"
 )
 
 type VisualizationConfig struct {
