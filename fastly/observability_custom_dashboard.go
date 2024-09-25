@@ -118,6 +118,64 @@ type VisualizationConfig struct {
 	PlotType PlotType `json:"plot_type"`
 }
 
+type dashboardItemOption interface {
+	apply(*DashboardItem)
+}
+type optionFunc func(*DashboardItem)
+
+func (f optionFunc) apply(di *DashboardItem) {
+	f(di)
+}
+
+func WithTitle(title string) dashboardItemOption {
+	return optionFunc(func(di *DashboardItem) {
+		di.Title = title
+	})
+}
+func WithSubtitle(subtitle string) dashboardItemOption {
+	return optionFunc(func(di *DashboardItem) {
+		di.Subtitle = subtitle
+	})
+}
+func WithSpan(span uint8) dashboardItemOption {
+	return optionFunc(func(di *DashboardItem) {
+		di.Span = span
+	})
+}
+func WithCalculationMethod(calculationMethod CalculationMethod) dashboardItemOption {
+	return optionFunc(func(di *DashboardItem) {
+		di.Visualization.Config.CalculationMethod = &calculationMethod
+	})
+}
+func WithFormat(format VisualizationFormat) dashboardItemOption {
+	return optionFunc(func(di *DashboardItem) {
+		di.Visualization.Config.Format = &format
+	})
+}
+
+func NewDashboardItem(sourceType DashboardSourceType, metrics []string, plotType PlotType, options ...dashboardItemOption) DashboardItem {
+	di := DashboardItem{
+		DataSource: DashboardDataSource{
+			Type: sourceType,
+			Config: DashboardSourceConfig{
+				Metrics: metrics,
+			},
+		},
+		Visualization: DashboardVisualization{
+			Type: VisualizationTypeChart,
+			Config: VisualizationConfig{
+				PlotType: plotType,
+			},
+		},
+	}
+
+	for _, o := range options {
+		o.apply(&di)
+	}
+
+	return di
+}
+
 type ListDashboardsResponse struct {
 	Data []ObservabilityCustomDashboard `json:"data"`
 	Meta DashboardMeta                  `json:"meta"`
