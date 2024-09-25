@@ -2,8 +2,6 @@ package fastly
 
 import (
 	"encoding/json"
-	"errors"
-	"fmt"
 	"net/http"
 	"strconv"
 	"time"
@@ -55,47 +53,13 @@ type DashboardItem struct {
 	Visualization Visualization `json:"visualization"`
 }
 
-type SourceType int
+type SourceType string
 
 const (
-	SourceTypeUndefined SourceType = iota
-	SourceTypeStatsEdge
-	SourceTypeStatsDomain
-	SourceTypeStatsOrigin
+	SourceTypeStatsEdge   = "stats.edge"
+	SourceTypeStatsDomain = "stats.domain"
+	SourceTypeStatsOrigin = "stats.origin"
 )
-
-var stringToSourceType = map[string]SourceType{
-	"stats.edge":   SourceTypeStatsEdge,
-	"stats.domain": SourceTypeStatsDomain,
-	"stats.origin": SourceTypeStatsOrigin,
-}
-
-var sourceTypeToString = map[SourceType]string{
-	SourceTypeStatsEdge:   "stats.edge",
-	SourceTypeStatsDomain: "stats.domain",
-	SourceTypeStatsOrigin: "stats.origin",
-}
-
-func (st SourceType) String() string {
-	return sourceTypeToString[st]
-}
-func (st SourceType) MarshalJSON() ([]byte, error) {
-	if st == SourceTypeUndefined {
-		return nil, errors.New("cannot marshal undefined SourceType")
-	}
-	return json.Marshal(st.String())
-}
-func (st *SourceType) UnmarshalJSON(data []byte) (err error) {
-	var str string
-	if err = json.Unmarshal(data, &str); err != nil {
-		return err
-	}
-	var ok bool
-	if *st, ok = stringToSourceType[str]; !ok {
-		return NewFieldError("DataSource.Type").Message(fmt.Sprintf("Invalid value \"%s\" for DataSource.Type", data))
-	}
-	return nil
-}
 
 type DataSource struct {
 	// Config describes configuration options for the selected data source (required).
