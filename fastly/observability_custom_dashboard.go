@@ -7,16 +7,6 @@ import (
 	"time"
 )
 
-const path = "/observability/dashboards"
-
-const (
-	ErrInvalidDataSourceType    = ""
-	ErrInvalidMetric            = ""
-	ErrInvalidVisualizationType = ""
-	ErrInvalidPlotType          = ""
-	ErrInvalidCalculationMethod = ""
-)
-
 // ObservabilityCustomDashboard is a named container for a custom dashboard configuration
 type ObservabilityCustomDashboard struct {
 	// The date and time the dashboard was created
@@ -152,6 +142,7 @@ type ListObservabilityCustomDashboardsInput struct {
 }
 
 func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDashboardsInput) (*ListDashboardsResponse, error) {
+	path := ToSafeURL("observability", "dashboards")
 	ro := &RequestOptions{
 		Params: map[string]string{},
 	}
