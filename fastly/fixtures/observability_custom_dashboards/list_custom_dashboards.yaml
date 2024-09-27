@@ -1,0 +1,61 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.0)
+    url: https://api.fastly.com/observability/dashboards
+    method: GET
+  response:
+    body: '{"data":[{"id":"5lPlp5aTUCOr0nSHqaVzC8","name":"asdf","description":"","items":[],"created_at":"2023-05-04T17:47:06Z","updated_at":"2024-01-17T23:11:54Z","created_by":"","updated_by":""},{"id":"61RxWJKW4NWsa5jGKV4l4A","name":"asdf","description":"","items":[],"created_at":"2023-05-04T17:47:44Z","updated_at":"2024-01-17T23:11:56Z","created_by":"","updated_by":""},{"id":"6KBJDGi7aQar6dxGp8gN20","name":"asdfdsf","description":"","items":[],"created_at":"2023-05-04T17:48:24Z","updated_at":"2023-05-11T18:29:26Z","created_by":"","updated_by":""},{"id":"3JMZfcutzVaFUjlAHr6Pba","name":"Dashboard
+      for testing api","description":"","items":[{"id":"1zqTeY6KzSrI7CFFOinG2P","span":4,"title":"test
+      donut","subtitle":"asdfadfsf","data_source":{"type":"stats.edge","config":{"metrics":["compute_resp_body_bytes","compute_resp_header_bytes"]}},"visualization":{"type":"chart","config":{"plot_type":"donut","calculation_method":"sum"}}},{"id":"p5o2e65VeqtSLXFjrrngR","span":8,"title":"fart","subtitle":"this
+      chart''s a fart","data_source":{"type":"stats.edge","config":{"metrics":["cache_hit_ratio"]}},"visualization":{"type":"chart","config":{"plot_type":"single-metric","calculation_method":"min"}}}],"created_at":"2023-07-28T16:54:56Z","updated_at":"2024-03-18T18:36:18Z","created_by":"","updated_by":""},{"id":"4tWc6Hr1MXJZcubU38Dpq8","name":"Dropdown
+      test","description":"","items":[],"created_at":"2023-04-17T19:46:41Z","updated_at":"2024-01-17T23:11:49Z","created_by":"","updated_by":""},{"id":"17rdlVHH2d8oc64RVbKQgg","name":"empty
+      charts","description":"","items":[],"created_at":"2023-12-21T20:25:55Z","updated_at":"2023-12-21T20:38:29Z","created_by":"","updated_by":""},{"id":"S3SbM0492DPrfZplpR8cg","name":"errors","description":"","items":[{"id":"3jaynxYnZoVojkVpsSzFVe","span":4,"title":"mem
+      exceeded","subtitle":"asdf","data_source":{"type":"stats.edge","config":{"metrics":["compute_resource_limit_exceeded"]}},"visualization":{"type":"chart","config":{"plot_type":"line"}}},{"id":"2nk0ks3UCH571AFwiRxTpI","span":4,"title":"compute
+      5xx","subtitle":"blue is \"compute\", green is not???","data_source":{"type":"stats.edge","config":{"metrics":["compute_resp_status_5xx","status_5xx"]}},"visualization":{"type":"chart","config":{"plot_type":"line"}}}],"created_at":"2023-11-06T22:37:48Z","updated_at":"2023-11-06T22:50:37Z","created_by":"","updated_by":""},{"id":"12rbGpXjMQOMJwUZj0FVf2","name":"fasdf","description":"","items":[{"id":"4OD1b3psvtQ8EPOR5k3KmC","span":4,"title":"fdsaf","subtitle":"sadf","data_source":{"type":"stats.edge","config":{"metrics":["requests"]}},"visualization":{"type":"chart","config":{"plot_type":"line"}}}],"created_at":"2023-05-02T14:32:15Z","updated_at":"2023-05-02T16:59:36Z","created_by":"","updated_by":""},{"id":"4uqEmZo4PdgX2EUWxoGLjN","name":"Just
+      checking POST headers","description":"","items":[],"created_at":"2024-07-09T18:18:01Z","updated_at":"2024-07-09T18:18:01Z","created_by":"6aqLztR9TLUCE2z3AloYbt","updated_by":"6aqLztR9TLUCE2z3AloYbt"},{"id":"UUP04HJC6BWlHGREbUt1R","name":"My
+      Cool Dashboard","description":"My dashboard is super cool.","items":[],"created_at":"2024-07-22T19:53:51Z","updated_at":"2024-07-22T19:53:51Z","created_by":"7Y26Rzri7e1Jp2feVbkX8H","updated_by":"7Y26Rzri7e1Jp2feVbkX8H"},{"id":"28AuseY7yJonnqDeXozmrJ","name":"My
+      Cool Dashboard","description":"My dashboard is super cool.","items":[],"created_at":"2024-07-22T19:54:58Z","updated_at":"2024-07-22T19:54:58Z","created_by":"7Y26Rzri7e1Jp2feVbkX8H","updated_by":"7Y26Rzri7e1Jp2feVbkX8H"},{"id":"4d8YrSYlEVN7O9q55PTROf","name":"My
+      Cool Dashboard","description":"My dashboard is super cool.","items":[{"id":"4Ntbw0nSnAOre49gUjzpE8","span":4,"title":"A
+      Dashboard Item","subtitle":"This is a subtitle","data_source":{"type":"stats.edge","config":{"metrics":["requests"]}},"visualization":{"type":"chart","config":{"plot_type":"line"}}}],"created_at":"2024-09-16T18:50:27Z","updated_at":"2024-09-16T18:50:27Z","created_by":"7Y26Rzri7e1Jp2feVbkX8H","updated_by":"7Y26Rzri7e1Jp2feVbkX8H"},{"id":"4vSKQ9rVoUlHNvl3gUbz0z","name":"my
+      impersonated dashboard!","description":"","items":[],"created_at":"2024-06-27T22:21:20Z","updated_at":"2024-06-27T22:21:20Z","created_by":"6aqLztR9TLUCE2z3AloYbt","updated_by":"6aqLztR9TLUCE2z3AloYbt"},{"id":"5OGhkA3Y84dgPWjInl9uF9","name":"My
+      new impersonation dashboard","description":"","items":[{"id":"ElNimE7Iymes5v96eAkil","span":12,"title":"This
+      is a chart","subtitle":"subtitle...","data_source":{"type":"stats.edge","config":{"metrics":["requests"]}},"visualization":{"type":"chart","config":{"plot_type":"bar"}}}],"created_at":"2024-07-22T19:51:11Z","updated_at":"2024-07-22T19:51:11Z","created_by":"7Y26Rzri7e1Jp2feVbkX8H","updated_by":"7Y26Rzri7e1Jp2feVbkX8H"},{"id":"6kgqXM7F3tWgdCyhFbp9ZB","name":"My
+      new impersonation dashboard","description":"this dashboard has no items","items":[],"created_at":"2024-07-22T19:51:39Z","updated_at":"2024-07-22T19:51:39Z","created_by":"7Y26Rzri7e1Jp2feVbkX8H","updated_by":"7Y26Rzri7e1Jp2feVbkX8H"}],"meta":{"next_cursor":"","limit":100,"total":15}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Sep 2024 18:50:28 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100135-CHI, cache-pdk-kpdk1780083-PDK
+      X-Timer:
+      - S1726512628.995377,VS0,VE62
+    status: 200 OK
+    code: 200
+    duration: ""

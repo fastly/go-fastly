@@ -1,0 +1,55 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"description":"My dashboard is super cool.","items":[{"data_source":{"config":{"metrics":["requests"]},"type":"stats.edge"},"span":4,"subtitle":"This
+      is a subtitle","title":"A Dashboard Item","visualization":{"config":{"plot_type":"line"},"type":"chart"}}],"name":"My
+      Cool Dashboard"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.0)
+    url: https://api.fastly.com/observability/dashboards
+    method: POST
+  response:
+    body: '{"id":"4d8YrSYlEVN7O9q55PTROf","name":"My Cool Dashboard","description":"My
+      dashboard is super cool.","items":[{"id":"4Ntbw0nSnAOre49gUjzpE8","span":4,"title":"A
+      Dashboard Item","subtitle":"This is a subtitle","data_source":{"type":"stats.edge","config":{"metrics":["requests"]}},"visualization":{"type":"chart","config":{"plot_type":"line"}}}],"created_at":"2024-09-16T18:50:27Z","updated_at":"2024-09-16T18:50:27Z","created_by":"7Y26Rzri7e1Jp2feVbkX8H","updated_by":"7Y26Rzri7e1Jp2feVbkX8H"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "493"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Sep 2024 18:50:27 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 201 Created
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100135-CHI, cache-pdk-kpdk1780083-PDK
+      X-Timer:
+      - S1726512628.902944,VS0,VE79
+    status: 201 Created
+    code: 201
+    duration: ""

@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.0)
+    url: https://api.fastly.com/observability/dashboards/4d8YrSYlEVN7O9q55PTROf
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 16 Sep 2024 18:50:28 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 204 No Content
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100140-CHI, cache-pdk-kpdk1780083-PDK
+      X-Timer:
+      - S1726512628.228117,VS0,VE65
+    status: 204 No Content
+    code: 204
+    duration: ""
