@@ -4,14 +4,14 @@ import (
 	"testing"
 )
 
-func TestClient_ProductEnablement(t *testing.T) {
+func TestClient_ProductEnablement_brotli_compression(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	// Enable Product
 	var pe *ProductEnablement
-	record(t, "product_enablement/enable", func(c *Client) {
+	record(t, "product_enablement/enable_brotli_compression", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
 			ServiceID: testServiceID,
@@ -27,7 +27,7 @@ func TestClient_ProductEnablement(t *testing.T) {
 
 	// Get Product status
 	var gpe *ProductEnablement
-	record(t, "product_enablement/get", func(c *Client) {
+	record(t, "product_enablement/get_brotli_compression", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
 			ServiceID: testServiceID,
@@ -42,7 +42,7 @@ func TestClient_ProductEnablement(t *testing.T) {
 	}
 
 	// Disable Product
-	record(t, "product_enablement/disable", func(c *Client) {
+	record(t, "product_enablement/disable_brotli_compression", func(c *Client) {
 		err = c.DisableProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
 			ServiceID: testServiceID,
@@ -53,7 +53,7 @@ func TestClient_ProductEnablement(t *testing.T) {
 	}
 
 	// Get Product status again to check disabled
-	record(t, "product_enablement/get-disabled", func(c *Client) {
+	record(t, "product_enablement/get-disabled_brotli_compression", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
 			ServiceID: testServiceID,
@@ -67,7 +67,7 @@ func TestClient_ProductEnablement(t *testing.T) {
 	}
 }
 
-func TestClient_GetProduct_validation(t *testing.T) {
+func TestClient_GetProduct_validation_brotli_compression(t *testing.T) {
 	var err error
 
 	_, err = testClient.GetProduct(&ProductEnablementInput{
@@ -85,7 +85,7 @@ func TestClient_GetProduct_validation(t *testing.T) {
 	}
 }
 
-func TestClient_EnableProduct_validation(t *testing.T) {
+func TestClient_EnableProduct_validation_brotli_compression(t *testing.T) {
 	var err error
 	_, err = testClient.EnableProduct(&ProductEnablementInput{
 		ProductID: ProductBrotliCompression,
@@ -102,7 +102,7 @@ func TestClient_EnableProduct_validation(t *testing.T) {
 	}
 }
 
-func TestClient_DisableProduct_validation(t *testing.T) {
+func TestClient_DisableProduct_validation_brotli_compression(t *testing.T) {
 	var err error
 
 	err = testClient.DisableProduct(&ProductEnablementInput{
