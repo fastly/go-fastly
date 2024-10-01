@@ -4,16 +4,16 @@ import (
 	"testing"
 )
 
-func TestClient_ProductEnablement(t *testing.T) {
+func TestClient_ProductEnablement_ngwaf(t *testing.T) {
 	t.Parallel()
 
 	var err error
 
 	// Enable Product
 	var pe *ProductEnablement
-	record(t, "product_enablement/enable", func(c *Client) {
+	record(t, "product_enablement/enable_ngwaf", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
-			ProductID: ProductBrotliCompression,
+			ProductID: ProductNGWAF,
 			ServiceID: testServiceID,
 		})
 	})
@@ -21,15 +21,15 @@ func TestClient_ProductEnablement(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if *pe.Product.ProductID != ProductBrotliCompression.String() {
+	if *pe.Product.ProductID != ProductNGWAF.String() {
 		t.Errorf("bad feature_revision: %s", *pe.Product.ProductID)
 	}
 
 	// Get Product status
 	var gpe *ProductEnablement
-	record(t, "product_enablement/get", func(c *Client) {
+	record(t, "product_enablement/get_ngwaf", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
-			ProductID: ProductBrotliCompression,
+			ProductID: ProductNGWAF,
 			ServiceID: testServiceID,
 		})
 	})
@@ -37,14 +37,14 @@ func TestClient_ProductEnablement(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if *gpe.Product.ProductID != ProductBrotliCompression.String() {
+	if *gpe.Product.ProductID != ProductNGWAF.String() {
 		t.Errorf("bad feature_revision: %s", *gpe.Product.ProductID)
 	}
 
 	// Disable Product
-	record(t, "product_enablement/disable", func(c *Client) {
+	record(t, "product_enablement/disable_ngwaf", func(c *Client) {
 		err = c.DisableProduct(&ProductEnablementInput{
-			ProductID: ProductBrotliCompression,
+			ProductID: ProductNGWAF,
 			ServiceID: testServiceID,
 		})
 	})
@@ -53,9 +53,9 @@ func TestClient_ProductEnablement(t *testing.T) {
 	}
 
 	// Get Product status again to check disabled
-	record(t, "product_enablement/get-disabled", func(c *Client) {
+	record(t, "product_enablement/get-disabled_ngwaf", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
-			ProductID: ProductBrotliCompression,
+			ProductID: ProductNGWAF,
 			ServiceID: testServiceID,
 		})
 	})
@@ -67,11 +67,11 @@ func TestClient_ProductEnablement(t *testing.T) {
 	}
 }
 
-func TestClient_GetProduct_validation(t *testing.T) {
+func TestClient_GetProduct_validation_ngwaf(t *testing.T) {
 	var err error
 
 	_, err = testClient.GetProduct(&ProductEnablementInput{
-		ProductID: ProductBrotliCompression,
+		ProductID: ProductNGWAF,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
@@ -85,10 +85,10 @@ func TestClient_GetProduct_validation(t *testing.T) {
 	}
 }
 
-func TestClient_EnableProduct_validation(t *testing.T) {
+func TestClient_EnableProduct_validation_ngwaf(t *testing.T) {
 	var err error
 	_, err = testClient.EnableProduct(&ProductEnablementInput{
-		ProductID: ProductBrotliCompression,
+		ProductID: ProductNGWAF,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
@@ -102,11 +102,11 @@ func TestClient_EnableProduct_validation(t *testing.T) {
 	}
 }
 
-func TestClient_DisableProduct_validation(t *testing.T) {
+func TestClient_DisableProduct_validation_ngwaf(t *testing.T) {
 	var err error
 
 	err = testClient.DisableProduct(&ProductEnablementInput{
-		ProductID: ProductBrotliCompression,
+		ProductID: ProductNGWAF,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
