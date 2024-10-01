@@ -1,5 +1,15 @@
 # Changelog
 
+## [v9.11.0](https://github.com/fastly/go-fastly/releases/tag/v9.11.0) (2024-10-01)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.10.0...v9.11.0)
+
+**Enhancements:**
+
+- feat(custom_dashboards): Add support for Custom Dashboards APIs. [#546](https://github.com/fastly/go-fastly/pull/546)
+- feat(automation_tokens): Add support for automation-tokens [#547](https://github.com/fastly/go-fastly/pull/547)
+- feat(product_enablement): Add support for NGWAF. [#550](https://github.com/fastly/go-fastly/pull/550)
+
 ## [v9.10.0](https://github.com/fastly/go-fastly/releases/tag/v9.10.0) (2024-09-09)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.9.0...v9.10.0)
