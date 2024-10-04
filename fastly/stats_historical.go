@@ -75,6 +75,7 @@ type Stats struct {
 	Shield                          *uint64     `mapstructure:"shield"`                               // Number of requests from shield to origin.
 	ShieldResponseBodyBytes         *uint64     `mapstructure:"shield_resp_body_bytes"`               // Total body bytes delivered via a shield.
 	ShieldResponseHeaderBytes       *uint64     `mapstructure:"shield_resp_header_bytes"`             // Total header bytes delivered via a shield.
+	StartTime                       *uint64     `mapstructure:"start_time"`                           // Timestamp for the start of the time period being reported.
 	Status1xx                       *uint64     `mapstructure:"status_1xx"`                           // Number of "Informational" category status codes delivered.
 	Status200                       *uint64     `mapstructure:"status_200"`                           // Number of responses sent with status code 200 (Success).
 	Status204                       *uint64     `mapstructure:"status_204"`                           // Number of responses sent with status code 204 (No Content).
