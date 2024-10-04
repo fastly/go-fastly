@@ -14,6 +14,18 @@ type StatsResponse struct {
 
 // Stats represent metrics of a Fastly service.
 type Stats struct {
+	AllEdgeHitRequests              *uint64     `mapstructure:"all_edge_hit_requests"`   // Number of requests sent by end users to Fastly that resulted in a hit at the edge for a VCL service.
+	AllEdgeMissRequests             *uint64     `mapstructure:"all_edge_miss_requests"`  // Number of requests sent by end users to Fastly that resulted in a miss at the edge for a VCL service.
+	AllErrorRequests                *uint64     `mapstructure:"all_error_requests"`      // Number of cache errors for a VCL service.
+	AllHitRequests                  *uint64     `mapstructure:"all_hit_requests"`        // Number of cache hits for a VCL service.
+	AllMissRequests                 *uint64     `mapstructure:"all_miss_requests"`       // Number of cache misses for a VCL service.
+	AllPassRequests                 *uint64     `mapstructure:"all_pass_requests"`       // Number of requests that passed through the CDN without being cached for a VCL service.
+	AllStatus1xx                    *uint64     `mapstructure:"all_status_1xx"`          // Number of "Informational" category status codes delivered for all sources.
+	AllStatus2xx                    *uint64     `mapstructure:"all_status_2xx"`          // Number of "Success" status codes delivered for all sources.
+	AllStatus3xx                    *uint64     `mapstructure:"all_status_3xx"`          // Number of "Redirection" codes delivered for all sources.
+	AllStatus4xx                    *uint64     `mapstructure:"all_status_4xx"`          // Number of "Client Error" codes delivered for all sources.
+	AllStatus5xx                    *uint64     `mapstructure:"all_status_5xx"`          // Number of "Server Error" codes delivered for all sources.
+	AllSynthRequests                *uint64     `mapstructure:"all_synth_requests"`      // Number of requests that returned a synthetic response (i.e., response objects created with the synthetic VCL statement) for a VCL service.
 	AttackRequestHeaderBytes        *uint64     `mapstructure:"attack_req_header_bytes"` // Total header bytes received from requests that triggered a WAF rule.
 	AttackRequestBodyBytes          *uint64     `mapstructure:"attack_req_body_bytes"`   // Total body bytes received from requests that triggered a WAF rule.
 	AttackResponseSynthBytes        *uint64     `mapstructure:"attack_resp_synth_bytes"` // Total bytes delivered for requests that triggered a WAF rule and returned a synthetic response.
@@ -63,6 +75,7 @@ type Stats struct {
 	Shield                          *uint64     `mapstructure:"shield"`                               // Number of requests from shield to origin.
 	ShieldResponseBodyBytes         *uint64     `mapstructure:"shield_resp_body_bytes"`               // Total body bytes delivered via a shield.
 	ShieldResponseHeaderBytes       *uint64     `mapstructure:"shield_resp_header_bytes"`             // Total header bytes delivered via a shield.
+	StartTime                       *uint64     `mapstructure:"start_time"`                           // Timestamp for the start of the time period being reported.
 	Status1xx                       *uint64     `mapstructure:"status_1xx"`                           // Number of "Informational" category status codes delivered.
 	Status200                       *uint64     `mapstructure:"status_200"`                           // Number of responses sent with status code 200 (Success).
 	Status204                       *uint64     `mapstructure:"status_204"`                           // Number of responses sent with status code 204 (No Content).
