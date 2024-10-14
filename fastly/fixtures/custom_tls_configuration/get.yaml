@@ -12,7 +12,7 @@ interactions:
     url: https://api.fastly.com/tls/configurations/TLS_CONFIGURATION_ID
     method: GET
   response:
-    body: '{"data":{"id":"TLS_CONFIGURATION_ID","type":"tls_configuration","attributes":{"bulk":false,"created_at":"2018-09-11T20:59:51.000Z","default":true,"http_protocols":["http/1.1","http/2"],"name":"My configuration","tls_protocols":["1.2"],"updated_at":"2020-10-20T22:16:11.000Z"},"relationships":{"dns_records":{"data":[{"id":"IP_ADDRESS","type":"dns_record"}]}}},"included":[{"id":"IP_ADDRESS","type":"dns_record","attributes":{"record_type":"A","region":"global"}}]}'
+    body: '{"data":{"id":"TLS_CONFIGURATION_ID","type":"tls_configuration","attributes":{"bulk":false,"created_at":"2018-09-11T20:59:51.000Z","default":true,"http_protocols":["http/1.1","http/2"],"name":"My configuration","tls_protocols":["1.2"],"updated_at":"2020-10-20T22:16:11.000Z"},"relationships":{"default_certificate":{"data":{"id":"DEFAULT_CERTIFICATE_ID","type":"tls_certificate"}},"dns_records":{"data":[{"id":"IP_ADDRESS","type":"dns_record"}]}}},"included":[{"id":"IP_ADDRESS","type":"dns_record","attributes":{"record_type":"A","region":"global"}}]}'
     headers:
       Accept-Ranges:
       - bytes

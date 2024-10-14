@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: |
-      {"data":{"type":"","attributes":{"id":"TLS_CONFIGURATION_ID","name":"My configuration v2"}}}
+      {"data":{"type":"","attributes":{"id":"TLS_CONFIGURATION_ID","name":"My configuration v2"},"relationships":{"default_certificate":{"data":{"id":"NEW_DEFAULT_CERTIFICATE_ID","type":"tls_certificate"}}}}}
     form: {}
     headers:
       Accept:
@@ -15,7 +15,7 @@ interactions:
     url: https://api.fastly.com/tls/configurations/TLS_CONFIGURATION_ID
     method: PATCH
   response:
-    body: '{"data":{"id":"TLS_CONFIGURATION_ID","type":"tls_configuration","attributes":{"bulk":false,"created_at":"2018-09-11T20:59:51.000Z","default":true,"http_protocols":["http/1.1","http/2"],"name":"My configuration v2","tls_protocols":["1.2"],"updated_at":"2020-10-22T22:38:24.000Z"}}}'
+    body: '{"data":{"id":"TLS_CONFIGURATION_ID","type":"tls_configuration","attributes":{"bulk":false,"created_at":"2018-09-11T20:59:51.000Z","default":true,"http_protocols":["http/1.1","http/2"],"name":"My configuration v2","tls_protocols":["1.2"],"updated_at":"2020-10-22T22:38:24.000Z"},"relationships":{"default_certificate":{"data":{"id":"NEW_DEFAULT_CERTIFICATE_ID","type":"tls_certificate"}}}}}'
     headers:
       Accept-Ranges:
       - bytes
