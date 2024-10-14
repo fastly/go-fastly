@@ -135,6 +135,27 @@ func TestClient_ListBulkCertificates_validation(t *testing.T) {
 	}
 }
 
+func TestClient_ListBulkCertificates(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	var resp []*BulkCertificate
+	record(t, "platform_tls/list", func(c *Client) {
+		resp, err = c.ListBulkCertificates(&ListBulkCertificatesInput{})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	if len(resp) < 1 || len(resp[0].Configurations) < 1 {
+		t.Error("invalid response")
+	}
+
+	if resp[0].Configurations[0].Type != "tls_configuration" {
+		t.Error("invalid type", resp[0].Configurations[0].Type)
+	}
+}
+
 func TestClient_GetBulkCertificate_validation(t *testing.T) {
 	t.Parallel()
 
