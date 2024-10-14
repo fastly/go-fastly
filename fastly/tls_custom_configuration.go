@@ -11,15 +11,16 @@ import (
 
 // CustomTLSConfiguration represents a TLS configuration response from the Fastly API.
 type CustomTLSConfiguration struct {
-	Bulk          bool         `jsonapi:"attr,bulk"`
-	CreatedAt     *time.Time   `jsonapi:"attr,created_at,iso8601"`
-	DNSRecords    []*DNSRecord `jsonapi:"relation,dns_records"`
-	Default       bool         `jsonapi:"attr,default"`
-	HTTPProtocols []string     `jsonapi:"attr,http_protocols"`
-	ID            string       `jsonapi:"primary,tls_configuration"`
-	Name          string       `jsonapi:"attr,name"`
-	TLSProtocols  []string     `jsonapi:"attr,tls_protocols"`
-	UpdatedAt     *time.Time   `jsonapi:"attr,updated_at,iso8601"`
+	Bulk               bool                `jsonapi:"attr,bulk"`
+	CreatedAt          *time.Time          `jsonapi:"attr,created_at,iso8601"`
+	DNSRecords         []*DNSRecord        `jsonapi:"relation,dns_records"`
+	Default            bool                `jsonapi:"attr,default"`
+	HTTPProtocols      []string            `jsonapi:"attr,http_protocols"`
+	ID                 string              `jsonapi:"primary,tls_configuration"`
+	Name               string              `jsonapi:"attr,name"`
+	TLSProtocols       []string            `jsonapi:"attr,tls_protocols"`
+	UpdatedAt          *time.Time          `jsonapi:"attr,updated_at,iso8601"`
+	DefaultCertificate *DefaultCertificate `jsonapi:"relation,default_certificate,omitempty"`
 }
 
 // DNSRecord is a child of CustomTLSConfiguration.
@@ -27,6 +28,12 @@ type DNSRecord struct {
 	ID         string `jsonapi:"primary,dns_record"`
 	RecordType string `jsonapi:"attr,record_type"`
 	Region     string `jsonapi:"attr,region"`
+}
+
+// DefaultCertificate is a child of CustomTLSConfiguration. Used as a fallback cert for Platform TLS.
+type DefaultCertificate struct {
+	ID   string `jsonapi:"primary,tls_certificate"`
+	Type string `jsonapi:"attr,type"`
 }
 
 // ListCustomTLSConfigurationsInput is used as input to the ListCustomTLSConfigurationsInput function.
@@ -148,6 +155,8 @@ type UpdateCustomTLSConfigurationInput struct {
 	ID string
 	// Name is a custom name for your TLS configuration.
 	Name string `jsonapi:"attr,name"`
+	// DefaultCertificate is the default certificate for the TLS configuration. Used as a fallback cert for Platform TLS.
+	DefaultCertificate *DefaultCertificate `jsonapi:"relation,default_certificate,omitempty"`
 }
 
 // UpdateCustomTLSConfiguration updates the specified resource.

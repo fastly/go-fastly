@@ -11,6 +11,7 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 
 	var err error
 	conID := "TLS_CONFIGURATION_ID"
+	certID := "DEFAULT_CERTIFICATE_ID"
 
 	// Get
 	var gcon *CustomTLSConfiguration
@@ -24,6 +25,14 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	}
 	if conID != gcon.ID {
 		t.Errorf("bad ID: %q (%q)", conID, gcon.ID)
+	}
+
+	if gcon.DefaultCertificate == nil {
+		t.Errorf("missing default certificate: %v", gcon.DefaultCertificate)
+	}
+
+	if gcon.DefaultCertificate.ID != certID {
+		t.Errorf("wrong default certificate ID: %v", gcon.DefaultCertificate.ID)
 	}
 
 	// List
@@ -41,10 +50,15 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	// Update
 	var ucon *CustomTLSConfiguration
 	newName := "My configuration v2"
+	newCertID := "NEW_DEFAULT_CERTIFICATE_ID"
 	record(t, fixtureBase+"update", func(c *Client) {
 		ucon, err = c.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
 			ID:   "TLS_CONFIGURATION_ID",
 			Name: newName,
+			DefaultCertificate: &DefaultCertificate{
+				ID:   newCertID,
+				Type: "tls_certificate",
+			},
 		})
 	})
 	if err != nil {
@@ -55,6 +69,12 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	}
 	if ucon.Name != newName {
 		t.Errorf("bad Name: %q (%q)", newName, ucon.Name)
+	}
+	if ucon.DefaultCertificate == nil {
+		t.Fatal("missing default certificate")
+	}
+	if ucon.DefaultCertificate.ID != newCertID {
+		t.Errorf("bad default cert ID: %q (%q)", newCertID, ucon.DefaultCertificate.ID)
 	}
 }
 
