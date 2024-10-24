@@ -21,7 +21,7 @@ type GrafanaCloudLogs struct {
 	Index *string `mapstructure:"index"`
 	Token *string `mapstructure:"token"`
 	URL   *string `mapstructure:"url"`
-	User  *string `mapstructure:"User"`
+	User  *string `mapstructure:"user"`
 }
 
 // ListGrafanaCloudLogsInput is used as input to the ListGrafanaCloudLogs function.
@@ -77,7 +77,7 @@ type CreateGrafanaCloudLogsInput struct {
 	Token *string `url:"token,omitempty"`
 	// Index
 	User *string `url:"user,omitempty"`
-	// URL is the URL to stream logs to.
+	// URL is the URL to stream logs to. Must use HTTPS.
 	URL *string `url:"url,omitempty"`
 }
 
@@ -152,8 +152,8 @@ type UpdateGrafanaCloudLogsInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// Region is the region that log data will be sent to.
-	Region *string `url:"region,omitempty"`
+	// URL is the URL to stream logs to. Must use HTTPS.
+	URL *string `url:"url,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -162,6 +162,8 @@ type UpdateGrafanaCloudLogsInput struct {
 	ServiceVersion int `url:"-"`
 	// Token is the API key from your GrafanaCloudLogs account.
 	Token *string `url:"token,omitempty"`
+	// Index is the stream identifier
+	Index *string `url:"index,omitempty"`
 }
 
 // UpdateGrafanaCloudLogs updates the specified resource.

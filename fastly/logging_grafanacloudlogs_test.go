@@ -20,10 +20,12 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 			ServiceID:      testServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-grafanacloudlogs"),
-			Region:         ToPointer("US"),
+			URL:            ToPointer("https://test123.grafana.net"),
+			User:           ToPointer("123456"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
 			Placement:      ToPointer("waf_debug"),
+			Index:          ToPointer("{\"env\": \"prod\"}"),
 		})
 	})
 	if err != nil {
@@ -53,8 +55,11 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	if *d.Token != "abcd1234" {
 		t.Errorf("bad token: %q", *d.Token)
 	}
-	if *d.Region != "US" {
-		t.Errorf("bad token: %q", *d.Region)
+	if *d.URL != "https://test123.grafana.net" {
+		t.Errorf("bad URL: %q", *d.URL)
+	}
+	if *d.Index != "{\"env\": \"prod\"}" {
+		t.Errorf("bad index: %q", *d.Index)
 	}
 	if *d.Format != "format" {
 		t.Errorf("bad format: %q", *d.Format)
@@ -117,8 +122,11 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 			ServiceVersion: *tv.Number,
 			Name:           "test-grafanacloudlogs",
 			NewName:        ToPointer("new-test-grafanacloudlogs"),
-			Region:         ToPointer("EU"),
 			FormatVersion:  ToPointer(2),
+			URL:            ToPointer("https://test456.grafana.net"),
+			Token:          ToPointer("abcd6789"),
+			Placement:      ToPointer("waf_debug"),
+			Index:          ToPointer("{\"env\": \"staging\"}"),
 		})
 	})
 	if err != nil {
@@ -130,8 +138,11 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	if *ud.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *ud.FormatVersion)
 	}
-	if *ud.Region != "EU" {
-		t.Errorf("bad region: %q", *ud.Region)
+	if *ud.URL != "https://test456.grafana.net" {
+		t.Errorf("bad url: %q", *ud.URL)
+	}
+	if *ud.Index != "{\"env\": \"staging\"}" {
+		t.Errorf("bad index: %q", *d.Index)
 	}
 
 	// Delete
