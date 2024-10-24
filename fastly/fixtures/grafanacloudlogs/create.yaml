@@ -1,0 +1,65 @@
+---
+version: 1
+interactions:
+- request:
+    body: format=format&index=%7B%22env%22%3A+%22prod%22%7D&name=test-grafanacloudlogs&placement=waf_debug&token=abcd1234&url=https%3A%2F%2Ftest123.grafana.net&user=123456
+    form:
+      format:
+      - format
+      index:
+      - '{"env": "prod"}'
+      name:
+      - test-grafanacloudlogs
+      placement:
+      - waf_debug
+      token:
+      - abcd1234
+      url:
+      - https://test123.grafana.net
+      user:
+      - "123456"
+    headers:
+      Content-Type:
+      - application/x-www-form-urlencoded
+      User-Agent:
+      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
+    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/138/logging/grafanacloudlogs
+    method: POST
+  response:
+    body: '{"format":"format","index":"{\"env\": \"prod\"}","name":"test-grafanacloudlogs","placement":"waf_debug","token":"abcd1234","url":"https://test123.grafana.net","user":"123456","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"138","updated_at":"2024-10-24T19:43:58Z","deleted_at":null,"format_version":"2","created_at":"2024-10-24T19:43:58Z","response_condition":""}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 24 Oct 2024 19:43:58 GMT
+      Fastly-Ratelimit-Remaining:
+      - "991"
+      Fastly-Ratelimit-Reset:
+      - "1729800000"
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100074-CHI, cache-bos4679-BOS
+      X-Timer:
+      - S1729799038.016898,VS0,VE338
+    status: 200 OK
+    code: 200
+    duration: ""
