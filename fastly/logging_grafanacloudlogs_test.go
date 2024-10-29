@@ -74,7 +74,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	// List
 	var ld []*GrafanaCloudLogs
 	record(t, "grafanacloudlogs/list", func(c *Client) {
-		ld, err = c.ListGrafanaCloudLogs(&ListGrafanaCloudLogsInput{
+		ld, err = c.ListGrafanaCloudLogss(&ListGrafanaCloudLogssInput{
 			ServiceID:      testServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -161,14 +161,14 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 func TestClient_ListGrafanaCloudLogs_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.ListGrafanaCloudLogs(&ListGrafanaCloudLogsInput{
+	_, err = testClient.ListGrafanaCloudLogss(&ListGrafanaCloudLogssInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListGrafanaCloudLogs(&ListGrafanaCloudLogsInput{
+	_, err = testClient.ListGrafanaCloudLogss(&ListGrafanaCloudLogssInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
