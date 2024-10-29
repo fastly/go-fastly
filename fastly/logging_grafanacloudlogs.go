@@ -78,7 +78,7 @@ type CreateGrafanaCloudLogsInput struct {
 	Index *string `url:"index,omitempty"`
 	// Token is the API key from your GrafanaCloudLogs account.
 	Token *string `url:"token,omitempty"`
-	// Index
+	// Grafana User ID
 	User *string `url:"user,omitempty"`
 	// URL is the URL to stream logs to. Must use HTTPS.
 	URL *string `url:"url,omitempty"`
@@ -157,16 +157,18 @@ type UpdateGrafanaCloudLogsInput struct {
 	MessageType *string `url:"message_type,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// URL is the URL to stream logs to. Must use HTTPS.
-	URL *string `url:"url,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `url:"-"`
+	// Grafana User ID
+	User *string `url:"user,omitempty"`
 	// Token is the API key from your GrafanaCloudLogs account.
 	Token *string `url:"token,omitempty"`
+	// URL is the URL to stream logs to. Must use HTTPS.
+	URL *string `url:"url,omitempty"`
 	// Index is the stream identifier
 	Index *string `url:"index,omitempty"`
 }
