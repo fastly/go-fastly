@@ -83,7 +83,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 		t.Fatal(err)
 	}
 	if len(ld) < 1 {
-		t.Errorf("bad GrafanaCloudLogss: %v", ld)
+		t.Errorf("bad GrafanaCloudLogs: %v", ld)
 	}
 
 	// Get
