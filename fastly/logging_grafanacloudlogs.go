@@ -25,8 +25,8 @@ type GrafanaCloudLogs struct {
 	User  *string `mapstructure:"user"`
 }
 
-// ListGrafanaCloudLogssInput is used as input to the ListGrafanaCloudLogs function.
-type ListGrafanaCloudLogssInput struct {
+// ListGrafanaCloudLogsInput is used as input to the ListGrafanaCloudLogs function.
+type ListGrafanaCloudLogsInput struct {
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +34,7 @@ type ListGrafanaCloudLogssInput struct {
 }
 
 // ListGrafanaCloudLogs retrieves all resources.
-func (c *Client) ListGrafanaCloudLogss(i *ListGrafanaCloudLogssInput) ([]*GrafanaCloudLogs, error) {
+func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaCloudLogs, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
