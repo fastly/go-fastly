@@ -30,8 +30,6 @@ func (p Product) String() string {
 		return "image_optimizer"
 	case ProductLogExplorerInsights:
 		return "log_explorer_insights"
-	case ProductNGWAF:
-		return "ngwaf"
 	case ProductOriginInspector:
 		return "origin_inspector"
 	case ProductWebSockets:
@@ -50,7 +48,6 @@ const (
 	ProductFanout
 	ProductImageOptimizer
 	ProductLogExplorerInsights
-	ProductNGWAF
 	ProductOriginInspector
 	ProductWebSockets
 )
