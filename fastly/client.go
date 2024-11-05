@@ -324,8 +324,22 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 
 	if c.DebugMode {
 		r := req.Clone(context.Background())
+		// 'r' and 'req' both have a reference to a Body that
+		// is an io.Reader, but only one of them can read its
+		// contents since io.Reader is not seekable and cannot
+		// be rewound
+
 		r.Header.Del("Fastly-Key")
 		dump, _ := httputil.DumpRequest(r, true)
+
+		// httputil.DumpRequest has read the Body from 'r',
+		// and set r.Body to an io.ReadCloser that will return
+		// the same bytes as the original Body, so we can
+		// stuff that into 'req' for when the request is
+		// actually sent; it can't be read in 'r', but the
+		// lifetime of 'r' ends at the end of this block
+		req.Body = r.Body
+
 		fmt.Printf("http.Request (dump): %q\n", dump)
 	}
 
