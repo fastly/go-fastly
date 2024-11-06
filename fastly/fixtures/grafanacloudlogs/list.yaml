@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/138/logging/grafanacloudlogs
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/138/logging/grafanacloudlogs
     method: GET
   response:
-    body: '[{"url":"https://test123.grafana.net","index":"{\"env\": \"prod\"}","format":"format","created_at":"2024-10-24T19:43:58Z","format_version":"2","response_condition":"","placement":"waf_debug","updated_at":"2024-10-24T19:43:58Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"name":"test-grafanacloudlogs","token":"abcd1234","version":"138","user":"123456"}]'
+    body: '[{"url":"https://test123.grafana.net","index":"{\"env\": \"prod\"}","format":"format","created_at":"2024-10-24T19:43:58Z","format_version":"2","response_condition":"","placement":"waf_debug","updated_at":"2024-10-24T19:43:58Z","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"name":"test-grafanacloudlogs","token":"abcd1234","version":"138","user":"123456"}]'
     headers:
       Accept-Ranges:
       - bytes

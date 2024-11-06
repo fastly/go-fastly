@@ -38,7 +38,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var h *HTTPS
 	record(t, "https/create", func(c *Client) {
 		h, err = c.CreateHTTPS(&CreateHTTPSInput{
-			ServiceID:         testServiceID,
+			ServiceID:         testDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-https"),
 			Format:            ToPointer("format"),
@@ -67,14 +67,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	defer func() {
 		record(t, "https/cleanup", func(c *Client) {
 			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-https",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
 			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-https",
 			})
@@ -137,7 +137,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var hs []*HTTPS
 	record(t, "https/list", func(c *Client) {
 		hs, err = c.ListHTTPS(&ListHTTPSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -152,7 +152,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var nh *HTTPS
 	record(t, "https/get", func(c *Client) {
 		nh, err = c.GetHTTPS(&GetHTTPSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-https",
 		})
@@ -216,7 +216,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var uh *HTTPS
 	record(t, "https/update", func(c *Client) {
 		uh, err = c.UpdateHTTPS(&UpdateHTTPSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-https",
 			NewName:        ToPointer("new-test-https"),
@@ -236,7 +236,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Delete
 	record(t, "https/delete", func(c *Client) {
 		err = c.DeleteHTTPS(&DeleteHTTPSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-https",
 		})

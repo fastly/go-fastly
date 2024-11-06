@@ -17,7 +17,7 @@ func TestClient_Loggly(t *testing.T) {
 	var lg *Loggly
 	record(t, "loggly/create", func(c *Client) {
 		lg, err = c.CreateLoggly(&CreateLogglyInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-loggly"),
 			Token:          ToPointer("abcd1234"),
@@ -33,13 +33,13 @@ func TestClient_Loggly(t *testing.T) {
 	defer func() {
 		record(t, "loggly/delete", func(c *Client) {
 			_ = c.DeleteLoggly(&DeleteLogglyInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-loggly",
 			})
 
 			_ = c.DeleteLoggly(&DeleteLogglyInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-loggly",
 			})
@@ -66,7 +66,7 @@ func TestClient_Loggly(t *testing.T) {
 	var les []*Loggly
 	record(t, "loggly/list", func(c *Client) {
 		les, err = c.ListLoggly(&ListLogglyInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -81,7 +81,7 @@ func TestClient_Loggly(t *testing.T) {
 	var nlg *Loggly
 	record(t, "loggly/get", func(c *Client) {
 		nlg, err = c.GetLoggly(&GetLogglyInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-loggly",
 		})
@@ -109,7 +109,7 @@ func TestClient_Loggly(t *testing.T) {
 	var ulg *Loggly
 	record(t, "loggly/update", func(c *Client) {
 		ulg, err = c.UpdateLoggly(&UpdateLogglyInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-loggly",
 			NewName:        ToPointer("new-test-loggly"),
@@ -129,7 +129,7 @@ func TestClient_Loggly(t *testing.T) {
 	// Delete
 	record(t, "loggly/delete", func(c *Client) {
 		err = c.DeleteLoggly(&DeleteLogglyInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-loggly",
 		})

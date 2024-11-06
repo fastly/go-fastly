@@ -17,7 +17,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	var d *GrafanaCloudLogs
 	record(t, "grafanacloudlogs/create", func(c *Client) {
 		d, err = c.CreateGrafanaCloudLogs(&CreateGrafanaCloudLogsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-grafanacloudlogs"),
 			URL:            ToPointer("https://test123.grafana.net"),
@@ -36,13 +36,13 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	defer func() {
 		record(t, "grafanacloudlogs/delete", func(c *Client) {
 			_ = c.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-grafanacloudlogs",
 			})
 
 			_ = c.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-grafanacloudlogs",
 			})
@@ -75,7 +75,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	var ld []*GrafanaCloudLogs
 	record(t, "grafanacloudlogs/list", func(c *Client) {
 		ld, err = c.ListGrafanaCloudLogs(&ListGrafanaCloudLogsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -90,7 +90,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	var nd *GrafanaCloudLogs
 	record(t, "grafanacloudlogs/get", func(c *Client) {
 		nd, err = c.GetGrafanaCloudLogs(&GetGrafanaCloudLogsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-grafanacloudlogs",
 		})
@@ -118,7 +118,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	var ud *GrafanaCloudLogs
 	record(t, "grafanacloudlogs/update", func(c *Client) {
 		ud, err = c.UpdateGrafanaCloudLogs(&UpdateGrafanaCloudLogsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-grafanacloudlogs",
 			NewName:        ToPointer("new-test-grafanacloudlogs"),
@@ -148,7 +148,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	// Delete
 	record(t, "grafanacloudlogs/delete", func(c *Client) {
 		err = c.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-grafanacloudlogs",
 		})

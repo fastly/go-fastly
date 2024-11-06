@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/56/logging/sumologic
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/56/logging/sumologic
     method: POST
   response:
-    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"56","deleted_at":null,"created_at":"2022-11-04T15:16:57Z","updated_at":"2022-11-04T15:16:57Z","response_condition":""}'
+    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"56","deleted_at":null,"created_at":"2022-11-04T15:16:57Z","updated_at":"2022-11-04T15:16:57Z","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes

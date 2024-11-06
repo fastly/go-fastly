@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director/test-director/backend/test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/69/director/test-director/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find DirectorBackend ''{
       backend =\u003e test-backend, deleted =\u003e 0000-00-00 00:00:00, director
-      =\u003e test-director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e
+      =\u003e test-director, service =\u003e kKJb5bOFI47uHeBVluGfX1, version =\u003e
       69 }''"}'
     headers:
       Accept-Ranges:
@@ -52,7 +52,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/backend/test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/69/backend/test-backend
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -94,11 +94,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director/test-director
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/69/director/test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
-      =\u003e 0000-00-00 00:00:00, name =\u003e test-director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      =\u003e 0000-00-00 00:00:00, name =\u003e test-director, service =\u003e kKJb5bOFI47uHeBVluGfX1,
       version =\u003e 69 }''"}'
     headers:
       Accept-Ranges:
@@ -138,12 +138,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director/new-test-director
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/69/director/new-test-director
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Director ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-director, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 69 }''"}'
+      kKJb5bOFI47uHeBVluGfX1, version =\u003e 69 }''"}'
     headers:
       Accept-Ranges:
       - bytes

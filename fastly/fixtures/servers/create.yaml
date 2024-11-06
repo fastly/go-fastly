@@ -11,10 +11,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/pool/QjPTIOyTtgCuj99szEHJE6/server
     method: POST
   response:
-    body: '{"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"QjPTIOyTtgCuj99szEHJE6","comment":"","port":"80","updated_at":"2022-11-04T17:20:29Z","weight":"100","disabled":false,"id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","created_at":"2022-11-04T17:20:29Z","override_host":null,"deleted_at":null}'
+    body: '{"address":"127.0.0.1","service_id":"kKJb5bOFI47uHeBVluGfX1","pool_id":"QjPTIOyTtgCuj99szEHJE6","comment":"","port":"80","updated_at":"2022-11-04T17:20:29Z","weight":"100","disabled":false,"id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","created_at":"2022-11-04T17:20:29Z","override_host":null,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -57,10 +57,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/pool/QjPTIOyTtgCuj99szEHJE6/server
     method: POST
   response:
-    body: '{"address":"altserver.example.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","pool_id":"QjPTIOyTtgCuj99szEHJE6","comment":"","max_conn":"0","id":"UOJwfuyz8YokOWK4u1GJ54","disabled":false,"deleted_at":null,"override_host":null,"port":"80","updated_at":"2022-11-04T17:20:30Z","created_at":"2022-11-04T17:20:30Z","weight":"100"}'
+    body: '{"address":"altserver.example.com","service_id":"kKJb5bOFI47uHeBVluGfX1","pool_id":"QjPTIOyTtgCuj99szEHJE6","comment":"","max_conn":"0","id":"UOJwfuyz8YokOWK4u1GJ54","disabled":false,"deleted_at":null,"override_host":null,"port":"80","updated_at":"2022-11-04T17:20:30Z","created_at":"2022-11-04T17:20:30Z","weight":"100"}'
     headers:
       Accept-Ranges:
       - bytes

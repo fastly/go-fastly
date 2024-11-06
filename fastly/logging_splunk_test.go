@@ -38,7 +38,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var s *Splunk
 	record(t, "splunks/create", func(c *Client) {
 		s, err = c.CreateSplunk(&CreateSplunkInput{
-			ServiceID:         testServiceID,
+			ServiceID:         testDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-splunk"),
 			URL:               ToPointer("https://mysplunkendpoint.example.com/services/collector/event"),
@@ -63,13 +63,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	defer func() {
 		record(t, "splunks/cleanup", func(c *Client) {
 			_ = c.DeleteSplunk(&DeleteSplunkInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-splunk",
 			})
 
 			_ = c.DeleteSplunk(&DeleteSplunkInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-splunk",
 			})
@@ -120,7 +120,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var ss []*Splunk
 	record(t, "splunks/list", func(c *Client) {
 		ss, err = c.ListSplunks(&ListSplunksInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -135,7 +135,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var ns *Splunk
 	record(t, "splunks/get", func(c *Client) {
 		ns, err = c.GetSplunk(&GetSplunkInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-splunk",
 		})
@@ -187,7 +187,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var us *Splunk
 	record(t, "splunks/update", func(c *Client) {
 		us, err = c.UpdateSplunk(&UpdateSplunkInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-splunk",
 			NewName:        ToPointer("new-test-splunk"),
@@ -203,7 +203,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Delete
 	record(t, "splunks/delete", func(c *Client) {
 		err = c.DeleteSplunk(&DeleteSplunkInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-splunk",
 		})

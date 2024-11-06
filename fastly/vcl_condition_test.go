@@ -17,7 +17,7 @@ func TestClient_Conditions(t *testing.T) {
 	var condition *Condition
 	record(t, "conditions/create", func(c *Client) {
 		condition, err = c.CreateCondition(&CreateConditionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test/condition"),
 			Statement:      ToPointer("req.url~+\"index.html\""),
@@ -33,7 +33,7 @@ func TestClient_Conditions(t *testing.T) {
 	defer func() {
 		record(t, "conditions/cleanup", func(c *Client) {
 			_ = c.DeleteCondition(&DeleteConditionInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test/condition",
 			})
@@ -57,7 +57,7 @@ func TestClient_Conditions(t *testing.T) {
 	var conditions []*Condition
 	record(t, "conditions/list", func(c *Client) {
 		conditions, err = c.ListConditions(&ListConditionsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -72,7 +72,7 @@ func TestClient_Conditions(t *testing.T) {
 	var newCondition *Condition
 	record(t, "conditions/get", func(c *Client) {
 		newCondition, err = c.GetCondition(&GetConditionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 		})
@@ -97,7 +97,7 @@ func TestClient_Conditions(t *testing.T) {
 	var updatedCondition *Condition
 	record(t, "conditions/update", func(c *Client) {
 		updatedCondition, err = c.UpdateCondition(&UpdateConditionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 			Statement:      ToPointer("req.url~+\"updated.html\""),
@@ -113,7 +113,7 @@ func TestClient_Conditions(t *testing.T) {
 	// Delete
 	record(t, "conditions/delete", func(c *Client) {
 		err = c.DeleteCondition(&DeleteConditionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
 		})

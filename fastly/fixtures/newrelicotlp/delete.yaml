@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.5.7 (+github.com/fastly/go-fastly; go1.20.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/162/logging/newrelicotlp/new-test-newrelicotlp
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/162/logging/newrelicotlp/new-test-newrelicotlp
     method: DELETE
   response:
     body: '{"status":"ok"}'

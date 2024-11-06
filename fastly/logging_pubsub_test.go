@@ -18,7 +18,7 @@ func TestClient_Pubsubs(t *testing.T) {
 	var pubsub *Pubsub
 	record(t, "pubsubs/create", func(c *Client) {
 		pubsub, err = c.CreatePubsub(&CreatePubsubInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-pubsub"),
 			Topic:          ToPointer("topic"),
@@ -39,13 +39,13 @@ func TestClient_Pubsubs(t *testing.T) {
 	defer func() {
 		record(t, "pubsubs/cleanup", func(c *Client) {
 			_ = c.DeletePubsub(&DeletePubsubInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-pubsub",
 			})
 
 			_ = c.DeletePubsub(&DeletePubsubInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-pubsub",
 			})
@@ -111,7 +111,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	var pubsubs []*Pubsub
 	record(t, "pubsubs/list", func(c *Client) {
 		pubsubs, err = c.ListPubsubs(&ListPubsubsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -126,7 +126,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	var npubsub *Pubsub
 	record(t, "pubsubs/get", func(c *Client) {
 		npubsub, err = c.GetPubsub(&GetPubsubInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 		})
@@ -163,7 +163,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	var upubsub *Pubsub
 	record(t, "pubsubs/update", func(c *Client) {
 		upubsub, err = c.UpdatePubsub(&UpdatePubsubInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 			NewName:        ToPointer("new-test-pubsub"),
@@ -183,7 +183,7 @@ bv1KwcKoQbNVXwauH79JKc0=
 	// Delete
 	record(t, "pubsubs/delete", func(c *Client) {
 		err = c.DeletePubsub(&DeletePubsubInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-pubsub",
 		})

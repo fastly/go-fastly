@@ -16,7 +16,7 @@ func TestClient_FTPs(t *testing.T) {
 	var ftpCreateResp1, ftpCreateResp2, ftpCreateResp3 *FTP
 	record(t, "ftps/create", func(c *Client) {
 		ftpCreateResp1, err = c.CreateFTP(&CreateFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp"),
 			Address:          ToPointer("example.com"),
@@ -40,7 +40,7 @@ func TestClient_FTPs(t *testing.T) {
 
 	record(t, "ftps/create2", func(c *Client) {
 		ftpCreateResp2, err = c.CreateFTP(&CreateFTPInput{
-			ServiceID:       testServiceID,
+			ServiceID:       testDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-ftp-2"),
 			Address:         ToPointer("example.com"),
@@ -64,7 +64,7 @@ func TestClient_FTPs(t *testing.T) {
 
 	record(t, "ftps/create3", func(c *Client) {
 		ftpCreateResp3, err = c.CreateFTP(&CreateFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp-3"),
 			Address:          ToPointer("example.com"),
@@ -90,7 +90,7 @@ func TestClient_FTPs(t *testing.T) {
 	// GzipLevel are present.
 	record(t, "ftps/create4", func(c *Client) {
 		_, err = c.CreateFTP(&CreateFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp-4"),
 			Address:          ToPointer("example.com"),
@@ -117,25 +117,25 @@ func TestClient_FTPs(t *testing.T) {
 	defer func() {
 		record(t, "ftps/cleanup", func(c *Client) {
 			_ = c.DeleteFTP(&DeleteFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-ftp",
 			})
 
 			_ = c.DeleteFTP(&DeleteFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-ftp-2",
 			})
 
 			_ = c.DeleteFTP(&DeleteFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-ftp-3",
 			})
 
 			_ = c.DeleteFTP(&DeleteFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-ftp",
 			})
@@ -204,7 +204,7 @@ func TestClient_FTPs(t *testing.T) {
 	var ftps []*FTP
 	record(t, "ftps/list", func(c *Client) {
 		ftps, err = c.ListFTPs(&ListFTPsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -219,7 +219,7 @@ func TestClient_FTPs(t *testing.T) {
 	var ftpGetResp *FTP
 	record(t, "ftps/get", func(c *Client) {
 		ftpGetResp, err = c.GetFTP(&GetFTPInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-ftp",
 		})
@@ -277,7 +277,7 @@ func TestClient_FTPs(t *testing.T) {
 	var ftpUpdateResp1, ftpUpdateResp2, ftpUpdateResp3 *FTP
 	record(t, "ftps/update", func(c *Client) {
 		ftpUpdateResp1, err = c.UpdateFTP(&UpdateFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp",
 			NewName:          ToPointer("new-test-ftp"),
@@ -290,7 +290,7 @@ func TestClient_FTPs(t *testing.T) {
 
 	record(t, "ftps/update2", func(c *Client) {
 		ftpUpdateResp2, err = c.UpdateFTP(&UpdateFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -302,7 +302,7 @@ func TestClient_FTPs(t *testing.T) {
 
 	record(t, "ftps/update3", func(c *Client) {
 		ftpUpdateResp3, err = c.UpdateFTP(&UpdateFTPInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-ftp-3",
 			GzipLevel:      ToPointer(9),
@@ -337,7 +337,7 @@ func TestClient_FTPs(t *testing.T) {
 	// Delete
 	record(t, "ftps/delete", func(c *Client) {
 		err = c.DeleteFTP(&DeleteFTPInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-ftp",
 		})

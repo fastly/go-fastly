@@ -16,8 +16,11 @@ GOMAXPROCS ?= 4
 
 NAME := $(notdir $(shell pwd))
 
-# Test Service ID
-FASTLY_TEST_SERVICE_ID ?=
+# Test Service IDs
+FASTLY_TEST_DELIVERY_SERVICE_ID ?=
+DEFAULT_FASTLY_TEST_DELIVERY_SERVICE_ID = kKJb5bOFI47uHeBVluGfX1
+FASTLY_TEST_COMPUTE_SERVICE_ID ?=
+DEFAULT_FASTLY_TEST_COMPUTE_SERVICE_ID = XsjdElScZGjmfCcTwsYRC1
 FASTLY_API_KEY ?=
 #
 # Enables support for tools such as https://github.com/rakyll/gotest
@@ -60,10 +63,15 @@ test-full: ## Runs the tests with VCR disabled (i.e., makes external calls).
 		'${GO} test -timeout=60s -parallel=20 ${GOPKGS} ${TESTARGS}'
 .PHONY: test-full
 
-fix-fixtures: ## Updates test fixtures with a specified default service ID.
+fix-delivery-fixtures: ## Updates test fixtures with a specified default Delivery service ID.
 	@echo "==> Updating fixtures"
-	@$(shell pwd)/scripts/fixFixtures.sh ${FASTLY_TEST_SERVICE_ID}
-.PHONY: fix-fixtures
+	@$(shell pwd)/scripts/fixFixtures.sh ${FASTLY_TEST_DELIVERY_SERVICE_ID} ${DEFAULT_FASTLY_TEST_DELIVERY_SERVICE_ID}
+.PHONY: fix-delivery-fixtures
+
+fix-compute-fixtures: ## Updates test fixtures with a specified default Compute service ID.
+	@echo "==> Updating fixtures"
+	@$(shell pwd)/scripts/fixFixtures.sh ${FASTLY_TEST_COMPUTE_SERVICE_ID} ${DEFAULT_FASTLY_TEST_COMPUTE_SERVICE_ID}
+.PHONY: fix-compute-fixtures
 
 check-imports: ## A check which lists improperly-formatted imports, if they exist.
 	@$(shell pwd)/scripts/check-imports.sh

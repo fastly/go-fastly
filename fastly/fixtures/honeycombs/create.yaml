@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/49/logging/honeycomb
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/49/logging/honeycomb
     method: POST
   response:
-    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"49","response_condition":"","created_at":"2022-11-04T14:43:37Z","updated_at":"2022-11-04T14:43:37Z","deleted_at":null}'
+    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"49","response_condition":"","created_at":"2022-11-04T14:43:37Z","updated_at":"2022-11-04T14:43:37Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes

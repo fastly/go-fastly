@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/138/logging/grafanacloudlogs/new-test-grafanacloudlogs
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/138/logging/grafanacloudlogs/new-test-grafanacloudlogs
     method: DELETE
   response:
     body: '{"status":"ok"}'

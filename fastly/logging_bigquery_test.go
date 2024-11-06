@@ -20,7 +20,7 @@ func TestClient_Bigqueries(t *testing.T) {
 	var bq *BigQuery
 	record(t, "bigqueries/create", func(c *Client) {
 		bq, err = c.CreateBigQuery(&CreateBigQueryInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-bigquery"),
 			ProjectID:      ToPointer("example-fastly-log"),
@@ -43,13 +43,13 @@ func TestClient_Bigqueries(t *testing.T) {
 	defer func() {
 		record(t, "bigqueries/cleanup", func(c *Client) {
 			_ = c.DeleteBigQuery(&DeleteBigQueryInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-bigquery",
 			})
 
 			_ = c.DeleteBigQuery(&DeleteBigQueryInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-bigquery",
 			})
@@ -97,7 +97,7 @@ func TestClient_Bigqueries(t *testing.T) {
 	var bqs []*BigQuery
 	record(t, "bigqueries/list", func(c *Client) {
 		bqs, err = c.ListBigQueries(&ListBigQueriesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -112,7 +112,7 @@ func TestClient_Bigqueries(t *testing.T) {
 	var nbq *BigQuery
 	record(t, "bigqueries/get", func(c *Client) {
 		nbq, err = c.GetBigQuery(&GetBigQueryInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-bigquery",
 		})
@@ -158,7 +158,7 @@ func TestClient_Bigqueries(t *testing.T) {
 	var ubq *BigQuery
 	record(t, "bigqueries/update", func(c *Client) {
 		ubq, err = c.UpdateBigQuery(&UpdateBigQueryInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-bigquery",
 			NewName:        ToPointer("new-test-bigquery"),
@@ -174,7 +174,7 @@ func TestClient_Bigqueries(t *testing.T) {
 	// Delete
 	record(t, "bigqueries/delete", func(c *Client) {
 		err = c.DeleteBigQuery(&DeleteBigQueryInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-bigquery",
 		})

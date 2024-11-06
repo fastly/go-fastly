@@ -15,10 +15,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/53/logging/logentries/test-logentries
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/53/logging/logentries/test-logentries
     method: PUT
   response:
-    body: '{"format":"format","updated_at":"2022-11-04T15:03:05Z","port":0,"created_at":"2022-11-04T15:03:05Z","name":"new-test-logentries","deleted_at":null,"public_key":null,"token":"abcd1234","use_tls":"1","version":"53","hostname":"","response_condition":"","format_version":"2","region":"ap","placement":"waf_debug","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+    body: '{"format":"format","updated_at":"2022-11-04T15:03:05Z","port":0,"created_at":"2022-11-04T15:03:05Z","name":"new-test-logentries","deleted_at":null,"public_key":null,"token":"abcd1234","use_tls":"1","version":"53","hostname":"","response_condition":"","format_version":"2","region":"ap","placement":"waf_debug","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes

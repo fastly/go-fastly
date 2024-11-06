@@ -16,7 +16,7 @@ func TestClient_GetDomainMetricsForService(t *testing.T) {
 	var err error
 	record(t, "domain_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetDomainMetricsForService(&GetDomainMetricsInput{
-			ServiceID:   testServiceID,
+			ServiceID:   testDeliveryServiceID,
 			Start:       &start,
 			End:         &end,
 			Domains:     []string{"domain_1.com", "domain_2.com"},

@@ -14,7 +14,7 @@ func TestClient_ProductEnablement_log_explorer_insights(t *testing.T) {
 	record(t, "product_enablement/enable_log_explorer_insights", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
 			ProductID: ProductLogExplorerInsights,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -30,7 +30,7 @@ func TestClient_ProductEnablement_log_explorer_insights(t *testing.T) {
 	record(t, "product_enablement/get_log_explorer_insights", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductLogExplorerInsights,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -45,7 +45,7 @@ func TestClient_ProductEnablement_log_explorer_insights(t *testing.T) {
 	record(t, "product_enablement/disable_log_explorer_insights", func(c *Client) {
 		err = c.DisableProduct(&ProductEnablementInput{
 			ProductID: ProductLogExplorerInsights,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -56,7 +56,7 @@ func TestClient_ProductEnablement_log_explorer_insights(t *testing.T) {
 	record(t, "product_enablement/get-disabled_log_explorer_insights", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductLogExplorerInsights,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 

@@ -6,22 +6,24 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/7.2.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/enabled-products/brotli_compression/services/7i6HN3TK9wS159v2gPAZ8A
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/enabled-products/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Fri, 17 Feb 2023 15:08:02 GMT
-      Fastly-Ratelimit-Remaining:
-      - "998"
-      Fastly-Ratelimit-Reset:
-      - "1676649600"
+      - Tue, 05 Nov 2024 20:38:22 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Status:
       - 204 No Content
       Strict-Transport-Security:
@@ -35,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-7-CONTROL-AWS-UE2, cache-lhr7368-LHR
+      - cache-chi-kigq8000119-CHI, cache-nyc-kteb1890054-NYC
       X-Timer:
-      - S1676646482.821386,VS0,VE327
+      - S1730839103.536201,VS0,VE231
     status: 204 No Content
     code: 204
     duration: ""

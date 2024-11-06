@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.1.0 (+github.com/fastly/go-fastly; go1.22.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/logging/scalyr/new-test-scalyr
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/2/logging/scalyr/new-test-scalyr
     method: DELETE
   response:
     body: '{"status":"ok"}'

@@ -17,7 +17,7 @@ func TestClient_GCSs(t *testing.T) {
 	var gcsCreateResp1, gcsCreateResp2, gcsCreateResp3 *GCS
 	record(t, "gcses/create", func(c *Client) {
 		gcsCreateResp1, err = c.CreateGCS(&CreateGCSInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-gcs"),
 			ProjectID:        ToPointer("logging-project"),
@@ -41,7 +41,7 @@ func TestClient_GCSs(t *testing.T) {
 
 	record(t, "gcses/create2", func(c *Client) {
 		gcsCreateResp2, err = c.CreateGCS(&CreateGCSInput{
-			ServiceID:       testServiceID,
+			ServiceID:       testDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-gcs-2"),
 			ProjectID:       ToPointer("logging-project"),
@@ -64,7 +64,7 @@ func TestClient_GCSs(t *testing.T) {
 
 	record(t, "gcses/create3", func(c *Client) {
 		gcsCreateResp3, err = c.CreateGCS(&CreateGCSInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-gcs-3"),
 			ProjectID:        ToPointer("logging-project"),
@@ -89,7 +89,7 @@ func TestClient_GCSs(t *testing.T) {
 	// GzipLevel are present.
 	record(t, "gcses/create4", func(c *Client) {
 		_, err = c.CreateGCS(&CreateGCSInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-gcs-4"),
 			ProjectID:        ToPointer("logging-project"),
@@ -115,25 +115,25 @@ func TestClient_GCSs(t *testing.T) {
 	defer func() {
 		record(t, "gcses/cleanup", func(c *Client) {
 			_ = c.DeleteGCS(&DeleteGCSInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gcs",
 			})
 
 			_ = c.DeleteGCS(&DeleteGCSInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gcs-2",
 			})
 
 			_ = c.DeleteGCS(&DeleteGCSInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gcs-3",
 			})
 
 			_ = c.DeleteGCS(&DeleteGCSInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-gcs",
 			})
@@ -202,7 +202,7 @@ func TestClient_GCSs(t *testing.T) {
 	var gcses []*GCS
 	record(t, "gcses/list", func(c *Client) {
 		gcses, err = c.ListGCSs(&ListGCSsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -217,7 +217,7 @@ func TestClient_GCSs(t *testing.T) {
 	var gcsGetResp *GCS
 	record(t, "gcses/get", func(c *Client) {
 		gcsGetResp, err = c.GetGCS(&GetGCSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-gcs",
 		})
@@ -272,7 +272,7 @@ func TestClient_GCSs(t *testing.T) {
 	var gcsUpdateResp1, gcsUpdateResp2, gcsUpdateResp3 *GCS
 	record(t, "gcses/update", func(c *Client) {
 		gcsUpdateResp1, err = c.UpdateGCS(&UpdateGCSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-gcs",
 			NewName:        ToPointer("new-test-gcs"),
@@ -286,7 +286,7 @@ func TestClient_GCSs(t *testing.T) {
 
 	record(t, "gcses/update2", func(c *Client) {
 		gcsUpdateResp2, err = c.UpdateGCS(&UpdateGCSInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-gcs-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -298,7 +298,7 @@ func TestClient_GCSs(t *testing.T) {
 
 	record(t, "gcses/update3", func(c *Client) {
 		gcsUpdateResp3, err = c.UpdateGCS(&UpdateGCSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-gcs-3",
 			GzipLevel:      ToPointer(9),
@@ -336,7 +336,7 @@ func TestClient_GCSs(t *testing.T) {
 	// Delete
 	record(t, "gcses/delete", func(c *Client) {
 		err = c.DeleteGCS(&DeleteGCSInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-gcs",
 		})

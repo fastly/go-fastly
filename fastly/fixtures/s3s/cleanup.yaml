@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/157/logging/s3/test-s3
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3/test-s3
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-s3, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      0000-00-00 00:00:00, name =\u003e test-s3, service =\u003e kKJb5bOFI47uHeBVluGfX1,
       version =\u003e 157 }''"}'
     headers:
       Accept-Ranges:
@@ -51,7 +51,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/157/logging/s3/test-s3-3
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3/test-s3-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -93,7 +93,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/157/logging/s3/test-s3-4
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3/test-s3-4
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -135,11 +135,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/157/logging/s3/new-test-s3
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3/new-test-s3
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-s3, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      0000-00-00 00:00:00, name =\u003e new-test-s3, service =\u003e kKJb5bOFI47uHeBVluGfX1,
       version =\u003e 157 }''"}'
     headers:
       Accept-Ranges:

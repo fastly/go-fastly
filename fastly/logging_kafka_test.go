@@ -35,7 +35,7 @@ func TestClient_Kafkas(t *testing.T) {
 			Placement:        ToPointer("waf_debug"),
 			RequestMaxBytes:  ToPointer(requestMaxBytes),
 			RequiredACKs:     ToPointer("-1"),
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			TLSCACert:        ToPointer(caCert),
 			TLSClientCert:    ToPointer(clientCert),
@@ -54,13 +54,13 @@ func TestClient_Kafkas(t *testing.T) {
 	defer func() {
 		record(t, "kafkas/cleanup", func(c *Client) {
 			_ = c.DeleteKafka(&DeleteKafkaInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-kafka",
 			})
 
 			_ = c.DeleteKafka(&DeleteKafkaInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-kafka",
 			})
@@ -126,7 +126,7 @@ func TestClient_Kafkas(t *testing.T) {
 	var ks []*Kafka
 	record(t, "kafkas/list", func(c *Client) {
 		ks, err = c.ListKafkas(&ListKafkasInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -141,7 +141,7 @@ func TestClient_Kafkas(t *testing.T) {
 	var nk *Kafka
 	record(t, "kafkas/get", func(c *Client) {
 		nk, err = c.GetKafka(&GetKafkaInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-kafka",
 		})
@@ -208,7 +208,7 @@ func TestClient_Kafkas(t *testing.T) {
 	var uk *Kafka
 	record(t, "kafkas/update", func(c *Client) {
 		uk, err = c.UpdateKafka(&UpdateKafkaInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-kafka",
 			NewName:        ToPointer("new-test-kafka"),
@@ -228,7 +228,7 @@ func TestClient_Kafkas(t *testing.T) {
 	// Delete
 	record(t, "kafkas/delete", func(c *Client) {
 		err = c.DeleteKafka(&DeleteKafkaInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-kafka",
 		})

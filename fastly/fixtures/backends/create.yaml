@@ -23,10 +23,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/123/backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","connect_timeout":1500,"name":"test-backend","override_host":"origin.example.com","ssl_check_cert":false,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","ssl_sni_hostname":"ssl-hostname.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":123,"first_byte_timeout":15000,"hostname":"integ-test.go-fastly.com","created_at":"2023-08-07T10:02:07Z","ssl_client_cert":null,"ipv4":null,"ssl_hostname":null,"deleted_at":null,"ssl_cert_hostname":null,"auto_loadbalance":false,"comment":"","ssl_ca_cert":null,"max_conn":200,"request_condition":"","updated_at":"2023-08-07T10:02:07Z","share_key":null,"weight":100,"healthcheck":null,"min_tls_version":null,"max_tls_version":null,"port":80,"use_ssl":false,"between_bytes_timeout":10000,"ssl_client_key":null,"keepalive_time":null,"client_cert":null,"shield":null,"error_threshold":0,"ipv6":null}'
+    body: '{"address":"integ-test.go-fastly.com","connect_timeout":1500,"name":"test-backend","override_host":"origin.example.com","ssl_check_cert":false,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","ssl_sni_hostname":"ssl-hostname.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":123,"first_byte_timeout":15000,"hostname":"integ-test.go-fastly.com","created_at":"2023-08-07T10:02:07Z","ssl_client_cert":null,"ipv4":null,"ssl_hostname":null,"deleted_at":null,"ssl_cert_hostname":null,"auto_loadbalance":false,"comment":"","ssl_ca_cert":null,"max_conn":200,"request_condition":"","updated_at":"2023-08-07T10:02:07Z","share_key":null,"weight":100,"healthcheck":null,"min_tls_version":null,"max_tls_version":null,"port":80,"use_ssl":false,"between_bytes_timeout":10000,"ssl_client_key":null,"keepalive_time":null,"client_cert":null,"shield":null,"error_threshold":0,"ipv6":null}'
     headers:
       Accept-Ranges:
       - bytes

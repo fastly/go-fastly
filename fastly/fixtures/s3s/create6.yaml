@@ -71,7 +71,7 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/157/logging/s3
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3
     method: POST
   response:
     body: '{"msg":"Duplicate record","detail":"Duplicate logging_syslog: ''test-s3''"}'

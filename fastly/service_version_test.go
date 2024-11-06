@@ -16,7 +16,7 @@ func TestClient_Versions(t *testing.T) {
 	var v *Version
 	record(t, "versions/create", func(c *Client) {
 		v, err = c.CreateVersion(&CreateVersionInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			Comment:   ToPointer("test comment"),
 		})
 	})
@@ -37,7 +37,7 @@ func TestClient_Versions(t *testing.T) {
 	var vs []*Version
 	record(t, "versions/list", func(c *Client) {
 		vs, err = c.ListVersions(&ListVersionsInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -51,7 +51,7 @@ func TestClient_Versions(t *testing.T) {
 	var nv *Version
 	record(t, "versions/get", func(c *Client) {
 		nv, err = c.GetVersion(&GetVersionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *v.Number,
 		})
 	})
@@ -69,7 +69,7 @@ func TestClient_Versions(t *testing.T) {
 	var uv *Version
 	record(t, "versions/update", func(c *Client) {
 		uv, err = c.UpdateVersion(&UpdateVersionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Comment:        ToPointer("new comment"),
 		})
@@ -85,7 +85,7 @@ func TestClient_Versions(t *testing.T) {
 	var vl *Version
 	record(t, "versions/lock", func(c *Client) {
 		vl, err = c.LockVersion(&LockVersionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *v.Number,
 		})
 	})
@@ -100,7 +100,7 @@ func TestClient_Versions(t *testing.T) {
 	var cv *Version
 	record(t, "versions/clone", func(c *Client) {
 		cv, err = c.CloneVersion(&CloneVersionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *v.Number,
 		})
 	})

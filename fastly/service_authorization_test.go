@@ -15,7 +15,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 	var sa *ServiceAuthorization
 	record(t, fixtureBase+"create", func(c *Client) {
 		sa, err = c.CreateServiceAuthorization(&CreateServiceAuthorizationInput{
-			Service:    &SAService{ID: testServiceID},
+			Service:    &SAService{ID: testDeliveryServiceID},
 			User:       &SAUser{ID: "1pnpEMCscfjqgvH7Qofda6"},
 			Permission: "full",
 		})
@@ -47,7 +47,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		})
 	}()
 
-	if sa.Service.ID != testServiceID {
+	if sa.Service.ID != testDeliveryServiceID {
 		t.Errorf("bad service id: %v", sa.Service.ID)
 	}
 
@@ -70,7 +70,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if nsa.Service.ID != testServiceID {
+	if nsa.Service.ID != testDeliveryServiceID {
 		t.Errorf("bad service id: %v", nsa.Service)
 	}
 
@@ -86,7 +86,7 @@ func TestClient_ServiceAuthorizations(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	if usa.Service.ID != testServiceID {
+	if usa.Service.ID != testDeliveryServiceID {
 		t.Errorf("bad service id: %v", usa.Service)
 	}
 	if usa.Permission != "purge_select" {

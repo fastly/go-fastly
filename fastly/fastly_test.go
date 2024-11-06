@@ -16,11 +16,21 @@ var testClient = DefaultClient()
 // testStatsClient is the test client for realtime stats.
 var testStatsClient = NewRealtimeStatsClient()
 
-// testServiceID is the ID of the testing service.
-var testServiceID = serviceIDForTest()
+// ID of the Delivery service for testing.
+var testDeliveryServiceID = deliveryServiceIDForTest()
 
-// Default ID of the testing service.
-var defaultTestServiceID = "7i6HN3TK9wS159v2gPAZ8A"
+// ID of the Compute service for testing.
+//
+//lint:ignore U1000 this will be used in an upcoming commit
+var testComputeServiceID = computeServiceIDForTest()
+
+// ID of the default Delivery service for testing.
+var defaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
+
+// ID of the default Compute service for testing.
+//
+//lint:ignore U1000 this will be used in an upcoming commit
+var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
 
 const (
 	// ServiceTypeVCL is the type for VCL services.
@@ -33,14 +43,21 @@ const (
 // kinda dies on concurrent requests to create a version.
 var testVersionLock sync.Mutex
 
-func serviceIDForTest() string {
-	tsid := os.Getenv("FASTLY_TEST_SERVICE_ID")
-
-	if tsid != "" {
+func deliveryServiceIDForTest() string {
+	if tsid := os.Getenv("FASTLY_TEST_DELIVERY_SERVICE_ID"); tsid != "" {
 		return tsid
 	}
 
-	return defaultTestServiceID
+	return defaultDeliveryTestServiceID
+}
+
+//lint:ignore U1000 this will be used in an upcoming commit
+func computeServiceIDForTest() string {
+	if tsid := os.Getenv("FASTLY_TEST_COMPUTE_SERVICE_ID"); tsid != "" {
+		return tsid
+	}
+
+	return defaultComputeTestServiceID
 }
 
 func vcrDisabled() bool {
@@ -161,7 +178,7 @@ func testVersion(t *testing.T, c *Client) *Version {
 	defer testVersionLock.Unlock()
 
 	v, err := c.CreateVersion(&CreateVersionInput{
-		ServiceID: testServiceID,
+		ServiceID: testDeliveryServiceID,
 	})
 	if err != nil {
 		t.Fatal(err)

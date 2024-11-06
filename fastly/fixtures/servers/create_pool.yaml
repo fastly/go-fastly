@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=71&name=test_pool_servers22
+    body: ServiceID=kKJb5bOFI47uHeBVluGfX1&ServiceVersion=71&name=test_pool_servers22
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - kKJb5bOFI47uHeBVluGfX1
       ServiceVersion:
       - "71"
       name:
@@ -15,10 +15,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/71/pool
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/71/pool
     method: POST
   response:
-    body: '{"name":"test_pool_servers22","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"71","max_tls_version":null,"type":"random","tls_client_key":null,"created_at":"2022-11-04T17:20:29Z","healthcheck":null,"tls_cert_hostname":null,"first_byte_timeout":"15000","connect_timeout":"1000","id":"QjPTIOyTtgCuj99szEHJE6","max_conn_default":"200","quorum":75,"tls_client_cert":null,"comment":"","shield":null,"between_bytes_timeout":"10000","tls_ciphers":null,"tls_check_cert":"1","deleted_at":null,"tls_sni_hostname":null,"tls_ca_cert":null,"min_tls_version":null,"request_condition":null,"override_host":null,"use_tls":"0","updated_at":"2022-11-04T17:20:29Z"}'
+    body: '{"name":"test_pool_servers22","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"71","max_tls_version":null,"type":"random","tls_client_key":null,"created_at":"2022-11-04T17:20:29Z","healthcheck":null,"tls_cert_hostname":null,"first_byte_timeout":"15000","connect_timeout":"1000","id":"QjPTIOyTtgCuj99szEHJE6","max_conn_default":"200","quorum":75,"tls_client_cert":null,"comment":"","shield":null,"between_bytes_timeout":"10000","tls_ciphers":null,"tls_check_cert":"1","deleted_at":null,"tls_sni_hostname":null,"tls_ca_cert":null,"min_tls_version":null,"request_condition":null,"override_host":null,"use_tls":"0","updated_at":"2022-11-04T17:20:29Z"}'
     headers:
       Accept-Ranges:
       - bytes

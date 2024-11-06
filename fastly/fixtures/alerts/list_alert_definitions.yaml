@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/alerts/definitions?cursor=&limit=10&name=test+name&service_id=7i6HN3TK9wS159v2gPAZ8A&sort=name
+    url: https://api.fastly.com/alerts/definitions?cursor=&limit=10&name=test+name&service_id=kKJb5bOFI47uHeBVluGfX1&sort=name
     method: GET
   response:
-    body: '{"data":[{"id":"7eoZPghUve49laTwDZgBDG","object":"definition","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test
+    body: '{"data":[{"id":"7eoZPghUve49laTwDZgBDG","object":"definition","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test
       name","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m0s","threshold":10},"integration_ids":[],"updated_at":"2024-01-17T04:07:28Z","created_at":"2024-01-17T04:07:28Z"}],"meta":{"next_cursor":"","limit":10,"sort":"name","total":1}}'
     headers:
       Accept-Ranges:

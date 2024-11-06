@@ -11,10 +11,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/92/response_object/test-response-object
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/92/response_object/test-response-object
     method: PUT
   response:
-    body: '{"deleted_at":null,"service_id":"7i6HN3TK9wS159v2gPAZ8A","response":"Ok","name":"new-test-response-object","content_type":"text/plain","content":"abcd","updated_at":"2022-11-07T14:05:22Z","version":"92","status":"200","request_condition":"","cache_condition":"","created_at":"2022-11-07T14:05:22Z"}'
+    body: '{"deleted_at":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","response":"Ok","name":"new-test-response-object","content_type":"text/plain","content":"abcd","updated_at":"2022-11-07T14:05:22Z","version":"92","status":"200","request_condition":"","cache_condition":"","created_at":"2022-11-07T14:05:22Z"}'
     headers:
       Accept-Ranges:
       - bytes

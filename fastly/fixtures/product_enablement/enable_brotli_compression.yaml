@@ -2,35 +2,37 @@
 version: 1
 interactions:
 - request:
-    body: ProductID=brotli_compression&ServiceID=7i6HN3TK9wS159v2gPAZ8A
+    body: ProductID=brotli_compression&ServiceID=kKJb5bOFI47uHeBVluGfX1
     form:
       ProductID:
       - brotli_compression
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - kKJb5bOFI47uHeBVluGfX1
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/7.2.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/enabled-products/brotli_compression/services/7i6HN3TK9wS159v2gPAZ8A
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/enabled-products/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1
     method: PUT
   response:
     body: |
-      {"product":{"id":"brotli_compression","object":"product"},"service":{"id":"7i6HN3TK9wS159v2gPAZ8A","object":"service"},"_links":{"self":"/enabled-products/brotli_compression/services/7i6HN3TK9wS159v2gPAZ8A"}}
+      {"product":{"id":"brotli_compression","object":"product"},"service":{"id":"kKJb5bOFI47uHeBVluGfX1","object":"service"},"_links":{"self":"/enabled-products/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1"}}
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "209"
       Content-Type:
       - application/json
       Date:
-      - Fri, 17 Feb 2023 15:08:01 GMT
-      Fastly-Ratelimit-Remaining:
-      - "999"
-      Fastly-Ratelimit-Reset:
-      - "1676649600"
+      - Tue, 05 Nov 2024 20:38:22 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -44,9 +46,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-1-CONTROL-AWS-UE2, cache-lhr7368-LHR
+      - cache-chi-kigq8000119-CHI, cache-nyc-kteb1890054-NYC
       X-Timer:
-      - S1676646481.093534,VS0,VE491
+      - S1730839102.088178,VS0,VE332
     status: 200 OK
     code: 200
     duration: ""

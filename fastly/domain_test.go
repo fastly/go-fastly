@@ -24,7 +24,7 @@ func TestClient_Domains(t *testing.T) {
 	var d *Domain
 	record(t, "domains/create", func(c *Client) {
 		d, err = c.CreateDomain(&CreateDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain1),
 			Comment:        ToPointer("comment"),
@@ -37,7 +37,7 @@ func TestClient_Domains(t *testing.T) {
 	var d2 *Domain
 	record(t, "domains/create2", func(c *Client) {
 		d2, err = c.CreateDomain(&CreateDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain2),
 			Comment:        ToPointer("comment"),
@@ -51,13 +51,13 @@ func TestClient_Domains(t *testing.T) {
 	defer func() {
 		record(t, "domains/cleanup", func(c *Client) {
 			_ = c.DeleteDomain(&DeleteDomainInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           domain1,
 			})
 
 			_ = c.DeleteDomain(&DeleteDomainInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           domain3,
 			})
@@ -78,7 +78,7 @@ func TestClient_Domains(t *testing.T) {
 	var ds []*Domain
 	record(t, "domains/list", func(c *Client) {
 		ds, err = c.ListDomains(&ListDomainsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -93,7 +93,7 @@ func TestClient_Domains(t *testing.T) {
 	var nd *Domain
 	record(t, "domains/get", func(c *Client) {
 		nd, err = c.GetDomain(&GetDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain1,
 		})
@@ -112,7 +112,7 @@ func TestClient_Domains(t *testing.T) {
 	var ud *Domain
 	record(t, "domains/update", func(c *Client) {
 		ud, err = c.UpdateDomain(&UpdateDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain1,
 			NewName:        ToPointer(domain3),
@@ -129,7 +129,7 @@ func TestClient_Domains(t *testing.T) {
 	var vd *DomainValidationResult
 	record(t, "domains/validation", func(c *Client) {
 		vd, err = c.ValidateDomain(&ValidateDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain3,
 		})
@@ -144,7 +144,7 @@ func TestClient_Domains(t *testing.T) {
 	var vds []*DomainValidationResult
 	record(t, "domains/validate-all", func(c *Client) {
 		vds, err = c.ValidateAllDomains(&ValidateAllDomainsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -163,7 +163,7 @@ func TestClient_Domains(t *testing.T) {
 	// Delete
 	record(t, "domains/delete", func(c *Client) {
 		err = c.DeleteDomain(&DeleteDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           domain3,
 		})

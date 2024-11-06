@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/123/backend/test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/test-backend
     method: GET
   response:
-    body: '{"use_ssl":false,"comment":"","address":"integ-test.go-fastly.com","between_bytes_timeout":10000,"auto_loadbalance":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","ssl_hostname":null,"ipv6":null,"ssl_sni_hostname":"ssl-hostname.com","ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","created_at":"2023-08-07T10:02:07Z","override_host":"origin.example.com","version":123,"client_cert":null,"request_condition":"","ssl_ca_cert":null,"share_key":null,"port":80,"ipv4":null,"ssl_cert_hostname":null,"weight":100,"ssl_check_cert":false,"ssl_client_key":null,"healthcheck":null,"keepalive_time":null,"error_threshold":0,"min_tls_version":null,"max_conn":200,"deleted_at":null,"hostname":"integ-test.go-fastly.com","shield":null,"connect_timeout":1500,"updated_at":"2023-08-07T10:02:07Z","first_byte_timeout":15000,"ssl_client_cert":null,"name":"test-backend","max_tls_version":null}'
+    body: '{"use_ssl":false,"comment":"","address":"integ-test.go-fastly.com","between_bytes_timeout":10000,"auto_loadbalance":false,"service_id":"kKJb5bOFI47uHeBVluGfX1","ssl_hostname":null,"ipv6":null,"ssl_sni_hostname":"ssl-hostname.com","ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","created_at":"2023-08-07T10:02:07Z","override_host":"origin.example.com","version":123,"client_cert":null,"request_condition":"","ssl_ca_cert":null,"share_key":null,"port":80,"ipv4":null,"ssl_cert_hostname":null,"weight":100,"ssl_check_cert":false,"ssl_client_key":null,"healthcheck":null,"keepalive_time":null,"error_threshold":0,"min_tls_version":null,"max_conn":200,"deleted_at":null,"hostname":"integ-test.go-fastly.com","shield":null,"connect_timeout":1500,"updated_at":"2023-08-07T10:02:07Z","first_byte_timeout":15000,"ssl_client_cert":null,"name":"test-backend","max_tls_version":null}'
     headers:
       Accept-Ranges:
       - bytes

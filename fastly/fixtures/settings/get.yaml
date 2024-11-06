@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/90/settings
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/90/settings
     method: GET
   response:
-    body: '{"general.stale_if_error_ttl":43200,"general.default_ttl":3600,"general.default_pci":0,"version":90,"service_id":"7i6HN3TK9wS159v2gPAZ8A","general.stale_if_error":false,"general.default_host":""}'
+    body: '{"general.stale_if_error_ttl":43200,"general.default_ttl":3600,"general.default_pci":0,"version":90,"service_id":"kKJb5bOFI47uHeBVluGfX1","general.stale_if_error":false,"general.default_host":""}'
     headers:
       Accept-Ranges:
       - bytes

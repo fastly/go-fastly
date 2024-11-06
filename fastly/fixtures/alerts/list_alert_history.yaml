@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/alerts/history?after=2006-01-02T15%3A04%3A05Z&before=2056-01-02T15%3A04%3A05Z&cursor=&definition_id=7eoZPghUve49laTwDZgBDG&limit=10&service_id=7i6HN3TK9wS159v2gPAZ8A&sort=-start&status=
+    url: https://api.fastly.com/alerts/history?after=2006-01-02T15%3A04%3A05Z&before=2056-01-02T15%3A04%3A05Z&cursor=&definition_id=7eoZPghUve49laTwDZgBDG&limit=10&service_id=kKJb5bOFI47uHeBVluGfX1&sort=-start&status=
     method: GET
   response:
     body: '{"data":[],"meta":{"next_cursor":"","limit":10,"sort":"-start","total":0}}'

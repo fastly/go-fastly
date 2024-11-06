@@ -22,7 +22,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"version", func(c *Client) {
 			_ = c.DeleteService(&DeleteServiceInput{
-				ServiceID: testServiceID,
+				ServiceID: testDeliveryServiceID,
 			})
 		})
 	}()
@@ -38,7 +38,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 
 	record(t, fixtureBase+"domains/create", func(c *Client) {
 		_, err = c.CreateDomain(&CreateDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain1),
 			Comment:        ToPointer("comment"),
@@ -50,7 +50,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 
 	record(t, fixtureBase+"domains/create2", func(c *Client) {
 		_, err = c.CreateDomain(&CreateDomainInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain2),
 			Comment:        ToPointer("comment"),
@@ -65,7 +65,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 
 	record(t, fixtureBase+"activate_version", func(c *Client) {
 		_, err = c.ActivateVersion(&ActivateVersionInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})

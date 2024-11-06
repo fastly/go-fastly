@@ -33,11 +33,11 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/healthcheck
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/80/healthcheck
     method: POST
   response:
     body: '{"check_interval":2500,"expected_response":200,"host":"example.com","http_version":"1.1","initial":10,"method":"HEAD","name":"test-healthcheck","path":"/foo","threshold":10,"timeout":1500,"window":5000,"headers":["Baz:
-      Qux","Foo: Bar"],"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":80,"comment":"","deleted_at":null,"updated_at":"2022-11-07T11:07:40Z","created_at":"2022-11-07T11:07:40Z"}'
+      Qux","Foo: Bar"],"service_id":"kKJb5bOFI47uHeBVluGfX1","version":80,"comment":"","deleted_at":null,"updated_at":"2022-11-07T11:07:40Z","created_at":"2022-11-07T11:07:40Z"}'
     headers:
       Accept-Ranges:
       - bytes

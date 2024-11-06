@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/57/logging/heroku
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/57/logging/heroku
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-heroku","placement":"waf_debug","token":"super-secure-token","url":"https://1.us.logplex.io/logs","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"57","deleted_at":null,"response_condition":"","updated_at":"2022-11-04T15:22:52Z","created_at":"2022-11-04T15:22:52Z"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-heroku","placement":"waf_debug","token":"super-secure-token","url":"https://1.us.logplex.io/logs","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"57","deleted_at":null,"response_condition":"","updated_at":"2022-11-04T15:22:52Z","created_at":"2022-11-04T15:22:52Z"}'
     headers:
       Accept-Ranges:
       - bytes

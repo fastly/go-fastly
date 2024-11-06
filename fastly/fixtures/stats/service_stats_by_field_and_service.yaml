@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.0.1 (+github.com/fastly/go-fastly; go1.17.2)
-    url: https://api.fastly.com/stats/service/7i6HN3TK9wS159v2gPAZ8A/field/bandwidth?by=day&from=10+days+ago&region=usa&to=now
+    url: https://api.fastly.com/stats/service/kKJb5bOFI47uHeBVluGfX1/field/bandwidth?by=day&from=10+days+ago&region=usa&to=now
     method: GET
   response:
     body: |
-      {"data":[{"bandwidth":1845740,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644019200},{"bandwidth":1841819,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644105600},{"bandwidth":1842228,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644192000},{"bandwidth":1843147,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644278400},{"bandwidth":1839636,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644364800},{"bandwidth":1840603,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644451200},{"bandwidth":1842864,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644537600},{"bandwidth":1845754,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644624000},{"bandwidth":1842504,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644710400},{"bandwidth":77255,"service_id":"7i6HN3TK9wS159v2gPAZ8A","start_time":1644796800}],"meta":{"to":"2022-02-14 16:50:48 UTC","from":"2022-02-04 16:50:48 UTC","by":"day","region":"usa"},"status":"success","msg":null}
+      {"data":[{"bandwidth":1845740,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644019200},{"bandwidth":1841819,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644105600},{"bandwidth":1842228,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644192000},{"bandwidth":1843147,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644278400},{"bandwidth":1839636,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644364800},{"bandwidth":1840603,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644451200},{"bandwidth":1842864,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644537600},{"bandwidth":1845754,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644624000},{"bandwidth":1842504,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644710400},{"bandwidth":77255,"service_id":"kKJb5bOFI47uHeBVluGfX1","start_time":1644796800}],"meta":{"to":"2022-02-14 16:50:48 UTC","from":"2022-02-04 16:50:48 UTC","by":"day","region":"usa"},"status":"success","msg":null}
     headers:
       Accept-Ranges:
       - bytes

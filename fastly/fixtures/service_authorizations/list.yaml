@@ -10,7 +10,7 @@ interactions:
     url: https://api.fastly.com/service-authorizations?page%5Bsize%5D=10
     method: GET
   response:
-    body: '{"data":[{"id":"6lxMq0qXIaSCLqrch0azvx","type":"service_authorization","attributes":{"created_at":"2022-06-22T18:07:20Z","updated_at":"2022-06-22T18:07:20Z","deleted_at":null,"permission":"full"},"relationships":{"service":{"data":{"id":"7i6HN3TK9wS159v2gPAZ8A","type":"service"}},"user":{"data":{"id":"1pnpEMCscfjqgvH7Qofda6","type":"user"}}}}],"links":{"last":"https://api.fastly.com/service-authorizations?page%5Bnumber%5D=1\u0026page%5Bsize%5D=10"},"meta":{"current_page":1,"per_page":10,"record_count":1,"total_pages":1}}'
+    body: '{"data":[{"id":"6lxMq0qXIaSCLqrch0azvx","type":"service_authorization","attributes":{"created_at":"2022-06-22T18:07:20Z","updated_at":"2022-06-22T18:07:20Z","deleted_at":null,"permission":"full"},"relationships":{"service":{"data":{"id":"kKJb5bOFI47uHeBVluGfX1","type":"service"}},"user":{"data":{"id":"1pnpEMCscfjqgvH7Qofda6","type":"user"}}}}],"links":{"last":"https://api.fastly.com/service-authorizations?page%5Bnumber%5D=1\u0026page%5Bsize%5D=10"},"meta":{"current_page":1,"per_page":10,"record_count":1,"total_pages":1}}'
     headers:
       Accept-Ranges:
       - bytes

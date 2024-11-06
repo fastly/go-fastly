@@ -21,7 +21,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	var bsCreateResp1, bsCreateResp2, bsCreateResp3 *BlobStorage
 	record(t, "blobstorages/create", func(c *Client) {
 		bsCreateResp1, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-blobstorage"),
 			Path:             ToPointer("/logs"),
@@ -45,7 +45,7 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	record(t, "blobstorages/create2", func(c *Client) {
 		bsCreateResp2, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:       testServiceID,
+			ServiceID:       testDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-blobstorage-2"),
 			Path:            ToPointer("/logs"),
@@ -69,7 +69,7 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	record(t, "blobstorages/create3", func(c *Client) {
 		bsCreateResp3, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-blobstorage-3"),
 			Path:             ToPointer("/logs"),
@@ -94,7 +94,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	// GzipLevel are present.
 	record(t, "blobstorages/create4", func(c *Client) {
 		_, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-blobstorage-4"),
 			Path:             ToPointer("/logs"),
@@ -121,25 +121,25 @@ func TestClient_BlobStorages(t *testing.T) {
 	defer func() {
 		record(t, "blobstorages/cleanup", func(c *Client) {
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-blobstorage",
 			})
 
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-blobstorage-2",
 			})
 
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-blobstorage-3",
 			})
 
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-blobstorage",
 			})
@@ -214,7 +214,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	var bsl []*BlobStorage
 	record(t, "blobstorages/list", func(c *Client) {
 		bsl, err = c.ListBlobStorages(&ListBlobStoragesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -229,7 +229,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	var bsGetResp *BlobStorage
 	record(t, "blobstorages/get", func(c *Client) {
 		bsGetResp, err = c.GetBlobStorage(&GetBlobStorageInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-blobstorage",
 		})
@@ -284,7 +284,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	var bsUpdateResp1, bsUpdateResp2, bsUpdateResp3 *BlobStorage
 	record(t, "blobstorages/update", func(c *Client) {
 		bsUpdateResp1, err = c.UpdateBlobStorage(&UpdateBlobStorageInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-blobstorage",
 			NewName:          ToPointer("new-test-blobstorage"),
@@ -300,7 +300,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	// GzipLevel was specified at creation time.
 	record(t, "blobstorages/update2", func(c *Client) {
 		bsUpdateResp2, err = c.UpdateBlobStorage(&UpdateBlobStorageInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-blobstorage-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -314,7 +314,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	// was set at creation time.
 	record(t, "blobstorages/update3", func(c *Client) {
 		bsUpdateResp3, err = c.UpdateBlobStorage(&UpdateBlobStorageInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-blobstorage-3",
 			GzipLevel:      ToPointer(9),
@@ -349,7 +349,7 @@ func TestClient_BlobStorages(t *testing.T) {
 	// Delete
 	record(t, "blobstorages/delete", func(c *Client) {
 		err = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-blobstorage",
 		})

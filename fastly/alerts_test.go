@@ -24,7 +24,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		IntegrationIDs:     []string{},
 		Metric:             ToPointer("status_5xx"),
 		Name:               ToPointer("test name"),
-		ServiceID:          ToPointer(testServiceID),
+		ServiceID:          ToPointer(testDeliveryServiceID),
 		Source:             ToPointer("domains"),
 	}
 
@@ -68,7 +68,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		t.Errorf("bad name: %v", ad.Name)
 	}
 
-	if ad.ServiceID != testServiceID {
+	if ad.ServiceID != testDeliveryServiceID {
 		t.Errorf("bad service_id: %v", ad.ServiceID)
 	}
 
@@ -91,7 +91,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 			Cursor:    ToPointer(""),
 			Limit:     ToPointer(10),
 			Name:      ToPointer(ad.Name),
-			ServiceID: ToPointer(testServiceID),
+			ServiceID: ToPointer(testDeliveryServiceID),
 			Sort:      ToPointer("name"),
 		})
 	})
@@ -154,7 +154,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 			Cursor:       ToPointer(""),
 			DefinitionID: ToPointer(ad.ID),
 			Limit:        ToPointer(10),
-			ServiceID:    ToPointer(testServiceID),
+			ServiceID:    ToPointer(testDeliveryServiceID),
 			Sort:         ToPointer("-start"),
 			Status:       ToPointer(""),
 		})
@@ -181,7 +181,7 @@ func TestClient_FastlyPercentAlerts(t *testing.T) {
 		IntegrationIDs:     []string{},
 		Metric:             ToPointer("status_5xx"),
 		Name:               ToPointer("test name"),
-		ServiceID:          ToPointer(testServiceID),
+		ServiceID:          ToPointer(testDeliveryServiceID),
 		Source:             ToPointer("stats"),
 	}
 
@@ -216,7 +216,7 @@ func TestClient_FastlyPercentAlerts(t *testing.T) {
 		t.Errorf("bad name: %v", ad.Name)
 	}
 
-	if ad.ServiceID != testServiceID {
+	if ad.ServiceID != testDeliveryServiceID {
 		t.Errorf("bad service_id: %v", ad.ServiceID)
 	}
 

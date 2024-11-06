@@ -30,7 +30,7 @@ func TestClient_Snippets(t *testing.T) {
 			Content:        ToPointer(vclContent),
 			Dynamic:        ToPointer(0),
 			Name:           ToPointer(svName),
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Type:           ToPointer(SnippetTypeFetch),
 		})
@@ -39,8 +39,8 @@ func TestClient_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *cs.ServiceID != testServiceID {
-		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *cs.ServiceID)
+	if *cs.ServiceID != testDeliveryServiceID {
+		t.Errorf("incorrect ServiceID: want %v, have %q", testDeliveryServiceID, *cs.ServiceID)
 	}
 	if *cs.Name != svName {
 		t.Errorf("incorrect Name: want %v, have %q", svName, *cs.Name)
@@ -63,7 +63,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/create_with_all_fields", func(c *Client) {
 		cs, err = c.CreateSnippet(&CreateSnippetInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(sdName),
 			Content:        ToPointer(vclContent),
@@ -76,8 +76,8 @@ func TestClient_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *cs.ServiceID != testServiceID {
-		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *cs.ServiceID)
+	if *cs.ServiceID != testDeliveryServiceID {
+		t.Errorf("incorrect ServiceID: want %v, have %q", testDeliveryServiceID, *cs.ServiceID)
 	}
 	if *cs.Name != sdName {
 		t.Errorf("incorrect Name: want %v, have %q", sdName, *cs.Name)
@@ -99,7 +99,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/list", func(c *Client) {
 		ls, err = c.ListSnippets(&ListSnippetsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -109,8 +109,8 @@ func TestClient_Snippets(t *testing.T) {
 	}
 
 	for _, s := range ls {
-		if *s.ServiceID != testServiceID {
-			t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *s.ServiceID)
+		if *s.ServiceID != testDeliveryServiceID {
+			t.Errorf("incorrect ServiceID: want %v, have %q", testDeliveryServiceID, *s.ServiceID)
 		}
 		if *s.Type != SnippetTypeFetch {
 			t.Errorf("incorrect Name: want %v, have %q", SnippetTypeFetch, *s.Type)
@@ -142,7 +142,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/get_versioned", func(c *Client) {
 		vs, err = c.GetSnippet(&GetSnippetInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           svName,
 		})
@@ -151,8 +151,8 @@ func TestClient_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *vs.ServiceID != testServiceID {
-		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *vs.ServiceID)
+	if *vs.ServiceID != testDeliveryServiceID {
+		t.Errorf("incorrect ServiceID: want %v, have %q", testDeliveryServiceID, *vs.ServiceID)
 	}
 	if *vs.Name != svName {
 		t.Errorf("incorrect Name: want %v, have %q", svName, *vs.Name)
@@ -174,7 +174,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/get_dynamic", func(c *Client) {
 		ds, err = c.GetDynamicSnippet(&GetDynamicSnippetInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			SnippetID: *cs.SnippetID,
 		})
 	})
@@ -182,8 +182,8 @@ func TestClient_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *ds.ServiceID != testServiceID {
-		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *ds.ServiceID)
+	if *ds.ServiceID != testDeliveryServiceID {
+		t.Errorf("incorrect ServiceID: want %v, have %q", testDeliveryServiceID, *ds.ServiceID)
 	}
 	if *ds.SnippetID != *cs.SnippetID {
 		t.Errorf("incorrect ID: want %v, have %q", *cs.SnippetID, *ds.SnippetID)
@@ -197,7 +197,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/update_versioned", func(c *Client) {
 		vs, err = c.UpdateSnippet(&UpdateSnippetInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           svName,
 			NewName:        ToPointer(svNameUpdated),
@@ -210,8 +210,8 @@ func TestClient_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *vs.ServiceID != testServiceID {
-		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *vs.ServiceID)
+	if *vs.ServiceID != testDeliveryServiceID {
+		t.Errorf("incorrect ServiceID: want %v, have %q", testDeliveryServiceID, *vs.ServiceID)
 	}
 	if *vs.Name != svNameUpdated {
 		t.Errorf("incorrect Name: want %v, have %q", svNameUpdated, *vs.Name)
@@ -231,7 +231,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/update_dynamic", func(c *Client) {
 		ds, err = c.UpdateDynamicSnippet(&UpdateDynamicSnippetInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			SnippetID: *cs.SnippetID,
 			Content:   ToPointer(vclContentUpdated),
 		})
@@ -240,8 +240,8 @@ func TestClient_Snippets(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *ds.ServiceID != testServiceID {
-		t.Errorf("incorrect ServiceID: want %v, have %q", testServiceID, *ds.ServiceID)
+	if *ds.ServiceID != testDeliveryServiceID {
+		t.Errorf("incorrect ServiceID: want %v, have %q", testDeliveryServiceID, *ds.ServiceID)
 	}
 	if *ds.SnippetID != *cs.SnippetID {
 		t.Errorf("incorrect ID: want %v, have %q", cs.SnippetID, *ds.SnippetID)
@@ -252,7 +252,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/delete_versioned", func(c *Client) {
 		err = c.DeleteSnippet(&DeleteSnippetInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           svNameUpdated,
 		})
@@ -264,7 +264,7 @@ func TestClient_Snippets(t *testing.T) {
 
 	record(t, "vcl_snippets/delete_dynamic", func(c *Client) {
 		err = c.DeleteSnippet(&DeleteSnippetInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           sdName,
 		})

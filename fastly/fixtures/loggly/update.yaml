@@ -13,10 +13,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/37/logging/loggly/test-loggly
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/37/logging/loggly/test-loggly
     method: PUT
   response:
-    body: '{"public_key":null,"token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2022-11-04T10:32:22Z","deleted_at":null,"created_at":"2022-11-04T10:32:22Z","placement":"waf_debug","response_condition":"","format":"format","version":"37","name":"new-test-loggly","format_version":"2"}'
+    body: '{"public_key":null,"token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","updated_at":"2022-11-04T10:32:22Z","deleted_at":null,"created_at":"2022-11-04T10:32:22Z","placement":"waf_debug","response_condition":"","format":"format","version":"37","name":"new-test-loggly","format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes

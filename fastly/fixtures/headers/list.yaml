@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/67/header
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/67/header
     method: GET
   response:
-    body: '[{"dst":"http.foo","name":"test-header","response_condition":null,"action":"set","src":"client.ip","updated_at":"2022-11-04T16:38:21Z","cache_condition":null,"ignore_if_set":"0","substitution":"123","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"67","priority":"50","type":"request","created_at":"2022-11-04T16:38:21Z","regex":"foobar","deleted_at":null,"request_condition":null}]'
+    body: '[{"dst":"http.foo","name":"test-header","response_condition":null,"action":"set","src":"client.ip","updated_at":"2022-11-04T16:38:21Z","cache_condition":null,"ignore_if_set":"0","substitution":"123","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"67","priority":"50","type":"request","created_at":"2022-11-04T16:38:21Z","regex":"foobar","deleted_at":null,"request_condition":null}]'
     headers:
       Accept-Ranges:
       - bytes

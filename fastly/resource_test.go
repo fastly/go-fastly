@@ -45,7 +45,7 @@ func TestClient_Resources(t *testing.T) {
 	var r *Resource
 	record(t, "resources/create", func(c *Client) {
 		r, err = c.CreateResource(&CreateResourceInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(kvStoreNameForServiceLinking),
 			ResourceID:     ToPointer(o.StoreID),
@@ -60,7 +60,7 @@ func TestClient_Resources(t *testing.T) {
 		record(t, "resources/cleanup", func(c *Client) {
 			_ = c.DeleteResource(&DeleteResourceInput{
 				ResourceID:     *r.LinkID,
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 			})
 		})
@@ -74,7 +74,7 @@ func TestClient_Resources(t *testing.T) {
 	var rs []*Resource
 	record(t, "resources/list", func(c *Client) {
 		rs, err = c.ListResources(&ListResourcesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -90,7 +90,7 @@ func TestClient_Resources(t *testing.T) {
 	record(t, "resources/get", func(c *Client) {
 		gr, err = c.GetResource(&GetResourceInput{
 			ResourceID:     *r.LinkID,
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -106,7 +106,7 @@ func TestClient_Resources(t *testing.T) {
 	record(t, "resources/update", func(c *Client) {
 		ur, err = c.UpdateResource(&UpdateResourceInput{
 			ResourceID:     *r.LinkID,
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("new-kv-store-alias-for-my-service"),
 		})
@@ -122,7 +122,7 @@ func TestClient_Resources(t *testing.T) {
 	record(t, "resources/delete", func(c *Client) {
 		err = c.DeleteResource(&DeleteResourceInput{
 			ResourceID:     *ur.LinkID,
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})

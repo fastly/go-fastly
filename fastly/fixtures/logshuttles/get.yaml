@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/logshuttle/test-logshuttle
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/45/logging/logshuttle/test-logshuttle
     method: GET
   response:
-    body: '{"deleted_at":null,"format":"%h %l %u %t \"%r\" %\u003es %b","token":"super-secure-token","created_at":"2022-11-04T13:45:16Z","url":"https://logs.example.com","response_condition":"","format_version":"2","updated_at":"2022-11-04T13:45:16Z","version":"45","service_id":"7i6HN3TK9wS159v2gPAZ8A","placement":"waf_debug","name":"test-logshuttle"}'
+    body: '{"deleted_at":null,"format":"%h %l %u %t \"%r\" %\u003es %b","token":"super-secure-token","created_at":"2022-11-04T13:45:16Z","url":"https://logs.example.com","response_condition":"","format_version":"2","updated_at":"2022-11-04T13:45:16Z","version":"45","service_id":"kKJb5bOFI47uHeBVluGfX1","placement":"waf_debug","name":"test-logshuttle"}'
     headers:
       Accept-Ranges:
       - bytes

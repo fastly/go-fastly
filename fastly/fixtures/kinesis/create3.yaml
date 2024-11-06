@@ -27,7 +27,7 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/kinesis
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/62/logging/kinesis
     method: POST
   response:
     body: '{"msg":"''iam_role'' can''t be used when ''access_key'' or ''secret_key''

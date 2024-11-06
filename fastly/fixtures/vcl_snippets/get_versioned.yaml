@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/88/snippet/snipver
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/88/snippet/snipver
     method: GET
   response:
-    body: '{"version":"88","updated_at":"2022-11-07T12:19:34Z","priority":"100","id":"WT2ibuLy1IEgBOgN7ZvtI4","created_at":"2022-11-07T12:19:34Z","type":"fetch","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"dynamic":"0","name":"snipver","content":"#vcl"}'
+    body: '{"version":"88","updated_at":"2022-11-07T12:19:34Z","priority":"100","id":"WT2ibuLy1IEgBOgN7ZvtI4","created_at":"2022-11-07T12:19:34Z","type":"fetch","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"dynamic":"0","name":"snipver","content":"#vcl"}'
     headers:
       Accept-Ranges:
       - bytes
