@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.2)
     url: https://api.fastly.com/enabled-products/log_explorer_insights/services/kKJb5bOFI47uHeBVluGfX1
     method: GET
   response:
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 Nov 2024 20:38:42 GMT
+      - Wed, 06 Nov 2024 20:18:24 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100124-CHI, cache-nyc-kteb1890072-NYC
+      - cache-chi-klot8100124-CHI, cache-ewr-kewr1740064-EWR
       X-Timer:
-      - S1730839122.985337,VS0,VE128
+      - S1730924305.814337,VS0,VE111
     status: 200 OK
     code: 200
     duration: ""

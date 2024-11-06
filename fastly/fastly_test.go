@@ -20,16 +20,12 @@ var testStatsClient = NewRealtimeStatsClient()
 var testDeliveryServiceID = deliveryServiceIDForTest()
 
 // ID of the Compute service for testing.
-//
-//lint:ignore U1000 this will be used in an upcoming commit
 var testComputeServiceID = computeServiceIDForTest()
 
 // ID of the default Delivery service for testing.
 var defaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
 
 // ID of the default Compute service for testing.
-//
-//lint:ignore U1000 this will be used in an upcoming commit
 var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
 
 const (
@@ -51,7 +47,6 @@ func deliveryServiceIDForTest() string {
 	return defaultDeliveryTestServiceID
 }
 
-//lint:ignore U1000 this will be used in an upcoming commit
 func computeServiceIDForTest() string {
 	if tsid := os.Getenv("FASTLY_TEST_COMPUTE_SERVICE_ID"); tsid != "" {
 		return tsid

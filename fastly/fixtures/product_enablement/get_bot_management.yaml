@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.2)
     url: https://api.fastly.com/enabled-products/bot_management/services/kKJb5bOFI47uHeBVluGfX1
     method: GET
   response:
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 Nov 2024 20:38:53 GMT
+      - Wed, 06 Nov 2024 20:18:23 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000069-CHI, cache-nyc-kteb1890025-NYC
+      - cache-chi-kigq8000069-CHI, cache-ewr-kewr1740064-EWR
       X-Timer:
-      - S1730839134.697110,VS0,VE116
+      - S1730924303.290433,VS0,VE106
     status: 200 OK
     code: 200
     duration: ""

@@ -2,17 +2,15 @@
 version: 1
 interactions:
 - request:
-    body: ProductID=log_explorer_insights&ServiceID=kKJb5bOFI47uHeBVluGfX1
-    form:
-      ProductID:
-      - log_explorer_insights
-      ServiceID:
-      - kKJb5bOFI47uHeBVluGfX1
+    body: '{"ProductID":6,"ServiceID":"kKJb5bOFI47uHeBVluGfX1"}'
+    form: {}
     headers:
+      Accept:
+      - application/json
       Content-Type:
-      - application/x-www-form-urlencoded
+      - application/json
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.2)
     url: https://api.fastly.com/enabled-products/log_explorer_insights/services/kKJb5bOFI47uHeBVluGfX1
     method: PUT
   response:
@@ -28,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 Nov 2024 20:38:41 GMT
+      - Wed, 06 Nov 2024 20:18:24 GMT
       Pragma:
       - no-cache
       Server:
@@ -46,9 +44,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100124-CHI, cache-nyc-kteb1890072-NYC
+      - cache-chi-klot8100124-CHI, cache-ewr-kewr1740064-EWR
       X-Timer:
-      - S1730839120.324995,VS0,VE1651
+      - S1730924301.151447,VS0,VE3654
     status: 200 OK
     code: 200
     duration: ""

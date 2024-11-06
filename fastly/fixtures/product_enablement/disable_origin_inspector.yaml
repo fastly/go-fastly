@@ -7,28 +7,25 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/enabled-products/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1
-    method: GET
+    url: https://api.fastly.com/enabled-products/origin_inspector/services/kKJb5bOFI47uHeBVluGfX1
+    method: DELETE
   response:
-    body: |
-      {"type":"","title":"no product on service","status":400,"errors":null,"detail":""}
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "83"
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 Nov 2024 20:18:21 GMT
+      - Wed, 06 Nov 2024 20:18:25 GMT
       Pragma:
       - no-cache
       Server:
       - control-gateway
       Status:
-      - 400 Bad Request
+      - 204 No Content
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -40,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000119-CHI, cache-ewr-kewr1740064-EWR
+      - cache-chi-klot8100125-CHI, cache-ewr-kewr1740064-EWR
       X-Timer:
-      - S1730924302.790192,VS0,VE105
-    status: 400 Bad Request
-    code: 400
+      - S1730924304.959599,VS0,VE1155
+    status: 204 No Content
+    code: 204
     duration: ""

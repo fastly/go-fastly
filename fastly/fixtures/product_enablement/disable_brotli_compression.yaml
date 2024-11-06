@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.2)
     url: https://api.fastly.com/enabled-products/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1
     method: DELETE
   response:
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 05 Nov 2024 20:38:22 GMT
+      - Wed, 06 Nov 2024 20:18:21 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000119-CHI, cache-nyc-kteb1890054-NYC
+      - cache-chi-kigq8000119-CHI, cache-ewr-kewr1740064-EWR
       X-Timer:
-      - S1730839103.536201,VS0,VE231
+      - S1730924302.575396,VS0,VE210
     status: 204 No Content
     code: 204
     duration: ""

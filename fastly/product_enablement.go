@@ -1,7 +1,5 @@
 package fastly
 
-import "fmt"
-
 // ProductEnablement represents a response from the Fastly API.
 type ProductEnablement struct {
 	Product *ProductEnablementNested `mapstructure:"product"`
@@ -69,7 +67,7 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 		return nil, ErrMissingServiceID
 	}
 
-	path := ToSafeURL("enabled-products", fmt.Sprint(i.ProductID), "services", i.ServiceID)
+	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -94,9 +92,9 @@ func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, e
 		return nil, ErrMissingServiceID
 	}
 
-	path := ToSafeURL("enabled-products", fmt.Sprint(i.ProductID), "services", i.ServiceID)
+	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutJSON(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
@@ -118,7 +116,7 @@ func (c *Client) DisableProduct(i *ProductEnablementInput) error {
 		return ErrMissingServiceID
 	}
 
-	path := ToSafeURL("enabled-products", fmt.Sprint(i.ProductID), "services", i.ServiceID)
+	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
 	_, err := c.Delete(path, nil)
 	return err
