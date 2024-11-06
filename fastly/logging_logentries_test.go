@@ -17,7 +17,7 @@ func TestClient_Logentries(t *testing.T) {
 	var le *Logentries
 	record(t, "logentries/create", func(c *Client) {
 		le, err = c.CreateLogentries(&CreateLogentriesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-logentries"),
 			Port:           ToPointer(0),
@@ -36,13 +36,13 @@ func TestClient_Logentries(t *testing.T) {
 	defer func() {
 		record(t, "logentries/delete", func(c *Client) {
 			_ = c.DeleteLogentries(&DeleteLogentriesInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-logentries",
 			})
 
 			_ = c.DeleteLogentries(&DeleteLogentriesInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-logentries",
 			})
@@ -78,7 +78,7 @@ func TestClient_Logentries(t *testing.T) {
 	var les []*Logentries
 	record(t, "logentries/list", func(c *Client) {
 		les, err = c.ListLogentries(&ListLogentriesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -93,7 +93,7 @@ func TestClient_Logentries(t *testing.T) {
 	var nle *Logentries
 	record(t, "logentries/get", func(c *Client) {
 		nle, err = c.GetLogentries(&GetLogentriesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-logentries",
 		})
@@ -127,7 +127,7 @@ func TestClient_Logentries(t *testing.T) {
 	var ule *Logentries
 	record(t, "logentries/update", func(c *Client) {
 		ule, err = c.UpdateLogentries(&UpdateLogentriesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-logentries",
 			NewName:        ToPointer("new-test-logentries"),
@@ -151,7 +151,7 @@ func TestClient_Logentries(t *testing.T) {
 	// Delete
 	record(t, "logentries/delete", func(c *Client) {
 		err = c.DeleteLogentries(&DeleteLogentriesInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-logentries",
 		})

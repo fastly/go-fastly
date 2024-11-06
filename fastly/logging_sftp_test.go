@@ -19,7 +19,7 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftpCreateResp1, sftpCreateResp2, sftpCreateResp3 *SFTP
 	record(t, "sftps/create", func(c *Client) {
 		sftpCreateResp1, err = c.CreateSFTP(&CreateSFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp"),
 			Address:          ToPointer("example.com"),
@@ -45,7 +45,7 @@ func TestClient_SFTPs(t *testing.T) {
 
 	record(t, "sftps/create2", func(c *Client) {
 		sftpCreateResp2, err = c.CreateSFTP(&CreateSFTPInput{
-			ServiceID:       testServiceID,
+			ServiceID:       testDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-sftp-2"),
 			Address:         ToPointer("example.com"),
@@ -71,7 +71,7 @@ func TestClient_SFTPs(t *testing.T) {
 
 	record(t, "sftps/create3", func(c *Client) {
 		sftpCreateResp3, err = c.CreateSFTP(&CreateSFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp-3"),
 			Address:          ToPointer("example.com"),
@@ -99,7 +99,7 @@ func TestClient_SFTPs(t *testing.T) {
 	// GzipLevel are present.
 	record(t, "sftps/create4", func(c *Client) {
 		_, err = c.CreateSFTP(&CreateSFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp-4"),
 			Address:          ToPointer("example.com"),
@@ -128,25 +128,25 @@ func TestClient_SFTPs(t *testing.T) {
 	defer func() {
 		record(t, "sftps/cleanup", func(c *Client) {
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-sftp",
 			})
 
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-sftp-2",
 			})
 
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-sftp-3",
 			})
 
 			_ = c.DeleteSFTP(&DeleteSFTPInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-sftp",
 			})
@@ -221,7 +221,7 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftps []*SFTP
 	record(t, "sftps/list", func(c *Client) {
 		sftps, err = c.ListSFTPs(&ListSFTPsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -236,7 +236,7 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftpGetResp *SFTP
 	record(t, "sftps/get", func(c *Client) {
 		sftpGetResp, err = c.GetSFTP(&GetSFTPInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-sftp",
 		})
@@ -301,7 +301,7 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftpUpdateResp1, sftpUpdateResp2, sftpUpdateResp3 *SFTP
 	record(t, "sftps/update", func(c *Client) {
 		sftpUpdateResp1, err = c.UpdateSFTP(&UpdateSFTPInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-sftp",
 			NewName:        ToPointer("new-test-sftp"),
@@ -315,7 +315,7 @@ func TestClient_SFTPs(t *testing.T) {
 
 	record(t, "sftps/update2", func(c *Client) {
 		sftpUpdateResp2, err = c.UpdateSFTP(&UpdateSFTPInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-sftp-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -327,7 +327,7 @@ func TestClient_SFTPs(t *testing.T) {
 
 	record(t, "sftps/update3", func(c *Client) {
 		sftpUpdateResp3, err = c.UpdateSFTP(&UpdateSFTPInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-sftp-3",
 			GzipLevel:      ToPointer(9),
@@ -365,7 +365,7 @@ func TestClient_SFTPs(t *testing.T) {
 	// Delete
 	record(t, "sftps/delete", func(c *Client) {
 		err = c.DeleteSFTP(&DeleteSFTPInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-sftp",
 		})

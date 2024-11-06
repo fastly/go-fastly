@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/123/backend/test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
-      =\u003e 0000-00-00 00:00:00, name =\u003e test-backend, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      =\u003e 0000-00-00 00:00:00, name =\u003e test-backend, service =\u003e kKJb5bOFI47uHeBVluGfX1,
       version =\u003e 123 }''"}'
     headers:
       Accept-Ranges:
@@ -51,12 +51,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/123/backend/new-test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/new-test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-backend, service =\u003e
-      7i6HN3TK9wS159v2gPAZ8A, version =\u003e 123 }''"}'
+      kKJb5bOFI47uHeBVluGfX1, version =\u003e 123 }''"}'
     headers:
       Accept-Ranges:
       - bytes

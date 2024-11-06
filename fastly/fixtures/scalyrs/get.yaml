@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.1.0 (+github.com/fastly/go-fastly; go1.22.1)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/2/logging/scalyr/test-scalyr
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/2/logging/scalyr/test-scalyr
     method: GET
   response:
-    body: '{"placement":"waf_debug","token":"super-secure-token","region":"US","response_condition":"","name":"test-scalyr","updated_at":"2024-03-14T23:05:45Z","project_id":"logplex","format_version":"2","created_at":"2024-03-14T23:05:45Z","version":"2","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"format":"%h
+    body: '{"placement":"waf_debug","token":"super-secure-token","region":"US","response_condition":"","name":"test-scalyr","updated_at":"2024-03-14T23:05:45Z","project_id":"logplex","format_version":"2","created_at":"2024-03-14T23:05:45Z","version":"2","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"format":"%h
       %l %u %t \"%r\" %\u003es %b"}'
     headers:
       Accept-Ranges:

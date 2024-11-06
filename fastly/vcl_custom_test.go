@@ -38,7 +38,7 @@ sub vcl_hash {
 	var vcl *VCL
 	record(t, "vcls/create", func(c *Client) {
 		vcl, err = c.CreateVCL(&CreateVCLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-vcl"),
 			Content:        ToPointer(content),
@@ -52,13 +52,13 @@ sub vcl_hash {
 	defer func() {
 		record(t, "vcls/cleanup", func(c *Client) {
 			_ = c.DeleteVCL(&DeleteVCLInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-vcl",
 			})
 
 			_ = c.DeleteVCL(&DeleteVCLInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-vcl",
 			})
@@ -76,7 +76,7 @@ sub vcl_hash {
 	var vcls []*VCL
 	record(t, "vcls/list", func(c *Client) {
 		vcls, err = c.ListVCLs(&ListVCLsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -91,7 +91,7 @@ sub vcl_hash {
 	var nvcl *VCL
 	record(t, "vcls/get", func(c *Client) {
 		nvcl, err = c.GetVCL(&GetVCLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 		})
@@ -110,7 +110,7 @@ sub vcl_hash {
 	var uvcl *VCL
 	record(t, "vcls/update", func(c *Client) {
 		uvcl, err = c.UpdateVCL(&UpdateVCLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 			NewName:        ToPointer("new-test-vcl"),
@@ -127,7 +127,7 @@ sub vcl_hash {
 	var avcl *VCL
 	record(t, "vcls/activate", func(c *Client) {
 		avcl, err = c.ActivateVCL(&ActivateVCLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})
@@ -142,7 +142,7 @@ sub vcl_hash {
 	// Delete
 	record(t, "vcls/delete", func(c *Client) {
 		err = c.DeleteVCL(&DeleteVCLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})

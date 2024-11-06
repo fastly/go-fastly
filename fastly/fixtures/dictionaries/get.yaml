@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/95/dictionary/test_dictionary
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/95/dictionary/test_dictionary
     method: GET
   response:
-    body: '{"id":"BPnIdK8OFZePTGgSuZN0x6","updated_at":"2022-11-07T14:45:33Z","version":95,"name":"test_dictionary","created_at":"2022-11-07T14:45:33Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"write_only":false}'
+    body: '{"id":"BPnIdK8OFZePTGgSuZN0x6","updated_at":"2022-11-07T14:45:33Z","version":95,"name":"test_dictionary","created_at":"2022-11-07T14:45:33Z","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"write_only":false}'
     headers:
       Accept-Ranges:
       - bytes

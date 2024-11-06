@@ -17,7 +17,7 @@ func TestClient_CacheSettings(t *testing.T) {
 	var cacheSetting *CacheSetting
 	record(t, "cache_settings/create", func(c *Client) {
 		cacheSetting, err = c.CreateCacheSetting(&CreateCacheSettingInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-cache-setting"),
 			Action:         ToPointer(CacheSettingActionCache),
@@ -33,13 +33,13 @@ func TestClient_CacheSettings(t *testing.T) {
 	defer func() {
 		record(t, "cache_settings/cleanup", func(c *Client) {
 			_ = c.DeleteCacheSetting(&DeleteCacheSettingInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-cache-setting",
 			})
 
 			_ = c.DeleteCacheSetting(&DeleteCacheSettingInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-cache-setting",
 			})
@@ -63,7 +63,7 @@ func TestClient_CacheSettings(t *testing.T) {
 	var cacheSettings []*CacheSetting
 	record(t, "cache_settings/list", func(c *Client) {
 		cacheSettings, err = c.ListCacheSettings(&ListCacheSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -78,7 +78,7 @@ func TestClient_CacheSettings(t *testing.T) {
 	var newCacheSetting *CacheSetting
 	record(t, "cache_settings/get", func(c *Client) {
 		newCacheSetting, err = c.GetCacheSetting(&GetCacheSettingInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-cache-setting",
 		})
@@ -103,7 +103,7 @@ func TestClient_CacheSettings(t *testing.T) {
 	var updatedCacheSetting *CacheSetting
 	record(t, "cache_settings/update", func(c *Client) {
 		updatedCacheSetting, err = c.UpdateCacheSetting(&UpdateCacheSettingInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-cache-setting",
 			NewName:        ToPointer("new-test-cache-setting"),
@@ -119,7 +119,7 @@ func TestClient_CacheSettings(t *testing.T) {
 	// Delete
 	record(t, "cache_settings/delete", func(c *Client) {
 		err = c.DeleteCacheSetting(&DeleteCacheSettingInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-cache-setting",
 		})

@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/73/domain/check_all
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/73/domain/check_all
     method: GET
   response:
-    body: '[[{"updated_at":"2022-11-04T17:36:56Z","created_at":"2022-11-04T17:36:56Z","name":"integ-test-20221104.go-fastly-2.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":73,"deleted_at":null,"comment":"comment"},null,false],[{"created_at":"2022-11-04T17:36:56Z","updated_at":"2022-11-04T17:36:57Z","name":"integ-test-20221104.go-fastly-3.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":73,"deleted_at":null,"comment":"comment"},null,false]]'
+    body: '[[{"updated_at":"2022-11-04T17:36:56Z","created_at":"2022-11-04T17:36:56Z","name":"integ-test-20221104.go-fastly-2.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":73,"deleted_at":null,"comment":"comment"},null,false],[{"created_at":"2022-11-04T17:36:56Z","updated_at":"2022-11-04T17:36:57Z","name":"integ-test-20221104.go-fastly-3.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":73,"deleted_at":null,"comment":"comment"},null,false]]'
     headers:
       Accept-Ranges:
       - bytes

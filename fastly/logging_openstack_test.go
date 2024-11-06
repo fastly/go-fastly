@@ -17,7 +17,7 @@ func TestClient_Openstack(t *testing.T) {
 	var osCreateResp1, osCreateResp2, osCreateResp3 *Openstack
 	record(t, "openstack/create", func(c *Client) {
 		osCreateResp1, err = c.CreateOpenstack(&CreateOpenstackInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-openstack"),
 			User:             ToPointer("user"),
@@ -41,7 +41,7 @@ func TestClient_Openstack(t *testing.T) {
 
 	record(t, "openstack/create2", func(c *Client) {
 		osCreateResp2, err = c.CreateOpenstack(&CreateOpenstackInput{
-			ServiceID:       testServiceID,
+			ServiceID:       testDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-openstack-2"),
 			User:            ToPointer("user"),
@@ -65,7 +65,7 @@ func TestClient_Openstack(t *testing.T) {
 
 	record(t, "openstack/create3", func(c *Client) {
 		osCreateResp3, err = c.CreateOpenstack(&CreateOpenstackInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-openstack-3"),
 			User:             ToPointer("user"),
@@ -91,7 +91,7 @@ func TestClient_Openstack(t *testing.T) {
 	// GzipLevel are present.
 	record(t, "openstack/create4", func(c *Client) {
 		_, err = c.CreateOpenstack(&CreateOpenstackInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-openstack-4"),
 			User:             ToPointer("user"),
@@ -118,25 +118,25 @@ func TestClient_Openstack(t *testing.T) {
 	defer func() {
 		record(t, "openstack/cleanup", func(c *Client) {
 			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-openstack",
 			})
 
 			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-openstack-2",
 			})
 
 			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-openstack-3",
 			})
 
 			_ = c.DeleteOpenstack(&DeleteOpenstackInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-openstack",
 			})
@@ -205,7 +205,7 @@ func TestClient_Openstack(t *testing.T) {
 	var lc []*Openstack
 	record(t, "openstack/list", func(c *Client) {
 		lc, err = c.ListOpenstack(&ListOpenstackInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -220,7 +220,7 @@ func TestClient_Openstack(t *testing.T) {
 	var osGetResp *Openstack
 	record(t, "openstack/get", func(c *Client) {
 		osGetResp, err = c.GetOpenstack(&GetOpenstackInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-openstack",
 		})
@@ -278,7 +278,7 @@ func TestClient_Openstack(t *testing.T) {
 	var osUpdateResp1, osUpdateResp2, osUpdateResp3 *Openstack
 	record(t, "openstack/update", func(c *Client) {
 		osUpdateResp1, err = c.UpdateOpenstack(&UpdateOpenstackInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-openstack",
 			User:             ToPointer("new-user"),
@@ -292,7 +292,7 @@ func TestClient_Openstack(t *testing.T) {
 
 	record(t, "openstack/update2", func(c *Client) {
 		osUpdateResp2, err = c.UpdateOpenstack(&UpdateOpenstackInput{
-			ServiceID:        testServiceID,
+			ServiceID:        testDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-openstack-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -304,7 +304,7 @@ func TestClient_Openstack(t *testing.T) {
 
 	record(t, "openstack/update3", func(c *Client) {
 		osUpdateResp3, err = c.UpdateOpenstack(&UpdateOpenstackInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-openstack-3",
 			GzipLevel:      ToPointer(9),
@@ -342,7 +342,7 @@ func TestClient_Openstack(t *testing.T) {
 	// Delete
 	record(t, "openstack/delete", func(c *Client) {
 		err = c.DeleteOpenstack(&DeleteOpenstackInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-openstack",
 		})

@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx","name":"test
-      name","service_id":"7i6HN3TK9wS159v2gPAZ8A","source":"domains"}'
+      name","service_id":"kKJb5bOFI47uHeBVluGfX1","source":"domains"}'
     form: {}
     headers:
       Accept:
@@ -15,7 +15,7 @@ interactions:
     url: https://api.fastly.com/alerts/definitions
     method: POST
   response:
-    body: '{"id":"7eoZPghUve49laTwDZgBDG","object":"definition","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test
+    body: '{"id":"7eoZPghUve49laTwDZgBDG","object":"definition","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test
       name","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m0s","threshold":10},"integration_ids":[],"updated_at":"2024-01-17T04:07:28Z","created_at":"2024-01-17T04:07:28Z"}'
     headers:
       Accept-Ranges:

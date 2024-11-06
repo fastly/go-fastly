@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/52/logging/newrelic
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/52/logging/newrelic
     method: GET
   response:
-    body: '[{"format_version":"2","format":"format","response_condition":"","version":"52","token":"abcd1234","placement":"waf_debug","deleted_at":null,"updated_at":"2022-11-04T14:57:13Z","name":"test-newrelic","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-04T14:57:13Z","region":"us"},{"deleted_at":null,"updated_at":"2022-11-04T14:57:13Z","name":"test-newrelic-2","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-04T14:57:13Z","region":"eu","format_version":"2","format":"format","response_condition":"","version":"52","token":"abcd1234","placement":"waf_debug"}]'
+    body: '[{"format_version":"2","format":"format","response_condition":"","version":"52","token":"abcd1234","placement":"waf_debug","deleted_at":null,"updated_at":"2022-11-04T14:57:13Z","name":"test-newrelic","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2022-11-04T14:57:13Z","region":"us"},{"deleted_at":null,"updated_at":"2022-11-04T14:57:13Z","name":"test-newrelic-2","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2022-11-04T14:57:13Z","region":"eu","format_version":"2","format":"format","response_condition":"","version":"52","token":"abcd1234","placement":"waf_debug"}]'
     headers:
       Accept-Ranges:
       - bytes

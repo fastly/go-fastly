@@ -17,7 +17,7 @@ func TestClient_Papertrails(t *testing.T) {
 	var p *Papertrail
 	record(t, "papertrails/create", func(c *Client) {
 		p, err = c.CreatePapertrail(&CreatePapertrailInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-papertrail"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
@@ -35,13 +35,13 @@ func TestClient_Papertrails(t *testing.T) {
 	defer func() {
 		record(t, "papertrails/cleanup", func(c *Client) {
 			_ = c.DeletePapertrail(&DeletePapertrailInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-papertrail",
 			})
 
 			_ = c.DeletePapertrail(&DeletePapertrailInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-papertrail",
 			})
@@ -71,7 +71,7 @@ func TestClient_Papertrails(t *testing.T) {
 	var ps []*Papertrail
 	record(t, "papertrails/list", func(c *Client) {
 		ps, err = c.ListPapertrails(&ListPapertrailsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -86,7 +86,7 @@ func TestClient_Papertrails(t *testing.T) {
 	var np *Papertrail
 	record(t, "papertrails/get", func(c *Client) {
 		np, err = c.GetPapertrail(&GetPapertrailInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-papertrail",
 		})
@@ -117,7 +117,7 @@ func TestClient_Papertrails(t *testing.T) {
 	var up *Papertrail
 	record(t, "papertrails/update", func(c *Client) {
 		up, err = c.UpdatePapertrail(&UpdatePapertrailInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-papertrail",
 			NewName:        ToPointer("new-test-papertrail"),
@@ -133,7 +133,7 @@ func TestClient_Papertrails(t *testing.T) {
 	// Delete
 	record(t, "papertrails/delete", func(c *Client) {
 		err = c.DeletePapertrail(&DeletePapertrailInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-papertrail",
 		})

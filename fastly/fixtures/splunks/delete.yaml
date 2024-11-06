@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/54/logging/splunk/new-test-splunk
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/54/logging/splunk/new-test-splunk
     method: DELETE
   response:
     body: '{"status":"ok"}'

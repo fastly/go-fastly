@@ -24,7 +24,7 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 			Hosts:       []string{"host01"},
 			Metrics:     []string{"responses", "status_2xx"},
 			Regions:     []string{"europe", "usa"},
-			ServiceID:   testServiceID,
+			ServiceID:   testDeliveryServiceID,
 			Start:       &start,
 		})
 	})

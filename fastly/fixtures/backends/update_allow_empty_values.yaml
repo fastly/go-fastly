@@ -13,10 +13,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/123/backend/new-test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/new-test-backend
     method: PUT
   response:
-    body: '{"ssl_hostname":null,"ssl_ca_cert":null,"first_byte_timeout":15000,"override_host":null,"ssl_sni_hostname":"ssl-hostname-updated.com","weight":100,"min_tls_version":null,"version":123,"between_bytes_timeout":10000,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","ssl_client_cert":null,"updated_at":"2023-08-07T10:02:08Z","ipv6":null,"auto_loadbalance":false,"connect_timeout":1500,"keepalive_time":null,"share_key":"shared-key","error_threshold":0,"ipv4":null,"max_tls_version":null,"healthcheck":null,"deleted_at":null,"ssl_cert_hostname":null,"request_condition":"","client_cert":null,"created_at":"2023-08-07T10:02:07Z","hostname":"integ-test.go-fastly.com","shield":null,"use_ssl":false,"ssl_client_key":null,"max_conn":200,"ssl_check_cert":false,"name":"new-test-backend","comment":"","port":0,"address":"integ-test.go-fastly.com","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+    body: '{"ssl_hostname":null,"ssl_ca_cert":null,"first_byte_timeout":15000,"override_host":null,"ssl_sni_hostname":"ssl-hostname-updated.com","weight":100,"min_tls_version":null,"version":123,"between_bytes_timeout":10000,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","ssl_client_cert":null,"updated_at":"2023-08-07T10:02:08Z","ipv6":null,"auto_loadbalance":false,"connect_timeout":1500,"keepalive_time":null,"share_key":"shared-key","error_threshold":0,"ipv4":null,"max_tls_version":null,"healthcheck":null,"deleted_at":null,"ssl_cert_hostname":null,"request_condition":"","client_cert":null,"created_at":"2023-08-07T10:02:07Z","hostname":"integ-test.go-fastly.com","shield":null,"use_ssl":false,"ssl_client_key":null,"max_conn":200,"ssl_check_cert":false,"name":"new-test-backend","comment":"","port":0,"address":"integ-test.go-fastly.com","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes

@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.5.7 (+github.com/fastly/go-fastly; go1.20.6)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/162/logging/newrelicotlp/test-newrelicotlp
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/162/logging/newrelicotlp/test-newrelicotlp
     method: GET
   response:
-    body: '{"region":null,"token":"abcd1234","response_condition":"","deleted_at":null,"placement":"waf_debug","updated_at":"2023-07-27T16:58:48Z","name":"test-newrelicotlp","url":"https://example.nr-data.net","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"162","created_at":"2023-07-27T16:58:48Z","format":"format","format_version":"2"}'
+    body: '{"region":null,"token":"abcd1234","response_condition":"","deleted_at":null,"placement":"waf_debug","updated_at":"2023-07-27T16:58:48Z","name":"test-newrelicotlp","url":"https://example.nr-data.net","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"162","created_at":"2023-07-27T16:58:48Z","format":"format","format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes

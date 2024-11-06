@@ -13,10 +13,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/domain
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/3/domain
     method: POST
   response:
-    body: '{"comment":"comment","name":"integ-test1.go-fastly-1.com","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":3,"updated_at":"2024-05-07T12:51:56Z","created_at":"2024-05-07T12:51:56Z","deleted_at":null}'
+    body: '{"comment":"comment","name":"integ-test1.go-fastly-1.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":3,"updated_at":"2024-05-07T12:51:56Z","created_at":"2024-05-07T12:51:56Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes

@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/91/pool
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/91/pool
     method: POST
   response:
-    body: '{"comment":"test pool","name":"test_pool","quorum":"50","tls_cert_hostname":"example.com","type":"random","use_tls":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"91","max_tls_version":null,"healthcheck":null,"updated_at":"2022-11-07T13:45:41Z","between_bytes_timeout":"10000","id":"cXnqibjoY1ORjKtbrWhSS5","override_host":null,"max_conn_default":"200","tls_check_cert":"1","deleted_at":null,"tls_ca_cert":null,"connect_timeout":"1000","first_byte_timeout":"15000","tls_client_cert":null,"tls_client_key":null,"shield":null,"min_tls_version":null,"request_condition":null,"created_at":"2022-11-07T13:45:41Z","tls_ciphers":null,"tls_sni_hostname":null}'
+    body: '{"comment":"test pool","name":"test_pool","quorum":"50","tls_cert_hostname":"example.com","type":"random","use_tls":"1","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"91","max_tls_version":null,"healthcheck":null,"updated_at":"2022-11-07T13:45:41Z","between_bytes_timeout":"10000","id":"cXnqibjoY1ORjKtbrWhSS5","override_host":null,"max_conn_default":"200","tls_check_cert":"1","deleted_at":null,"tls_ca_cert":null,"connect_timeout":"1000","first_byte_timeout":"15000","tls_client_cert":null,"tls_client_key":null,"shield":null,"min_tls_version":null,"request_condition":null,"created_at":"2022-11-07T13:45:41Z","tls_ciphers":null,"tls_sni_hostname":null}'
     headers:
       Accept-Ranges:
       - bytes

@@ -10,7 +10,7 @@ func TestClient_GetStats(t *testing.T) {
 	var err error
 	record(t, "stats/service_stats", func(c *Client) {
 		_, err = c.GetStats(&GetStatsInput{
-			Service: ToPointer(testServiceID),
+			Service: ToPointer(testDeliveryServiceID),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
 			By:      ToPointer("minute"),
@@ -46,7 +46,7 @@ func TestClient_GetStats_ByFieldAndService(t *testing.T) {
 	var err error
 	record(t, "stats/service_stats_by_field_and_service", func(c *Client) {
 		_, err = c.GetStats(&GetStatsInput{
-			Service: ToPointer(testServiceID),
+			Service: ToPointer(testDeliveryServiceID),
 			Field:   ToPointer("bandwidth"),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
@@ -69,7 +69,7 @@ func TestClient_GetStatsJSON(t *testing.T) {
 	var err error
 	record(t, "stats/service_stats", func(c *Client) {
 		err = c.GetStatsJSON(&GetStatsInput{
-			Service: ToPointer(testServiceID),
+			Service: ToPointer(testDeliveryServiceID),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
 			By:      ToPointer("minute"),

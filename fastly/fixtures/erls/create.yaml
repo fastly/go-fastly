@@ -30,11 +30,11 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/7.5.0 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/116/rate-limiters
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/116/rate-limiters
     method: POST
   response:
     body: '{"feature_revision":1,"feature_update_available":false,"name":"test_erl","uri_dictionary_name":null,"http_methods":["GET","POST"],"rps_limit":20,"window_size":10,"client_key":["req.http.Fastly-Client-IP"],"penalty_box_duration":30,"action":"response","response":{"content":"Too
-      many requests","content_type":"application/json","status":429},"response_object_name":null,"logger_type":null,"id":"RjnOPBDtKW2VSit8PWB9g","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":116,"created_at":"2023-03-28T11:17:42Z","updated_at":"2023-03-28T11:17:42Z"}'
+      many requests","content_type":"application/json","status":429},"response_object_name":null,"logger_type":null,"id":"RjnOPBDtKW2VSit8PWB9g","service_id":"kKJb5bOFI47uHeBVluGfX1","version":116,"created_at":"2023-03-28T11:17:42Z","updated_at":"2023-03-28T11:17:42Z"}'
     headers:
       Accept-Ranges:
       - bytes

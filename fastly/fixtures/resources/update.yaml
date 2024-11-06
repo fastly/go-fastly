@@ -11,10 +11,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/7.0.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/5/resource/rn6c7YSyRxBJMejpyvoQa1
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/5/resource/rn6c7YSyRxBJMejpyvoQa1
     method: PUT
   response:
-    body: '{"id":"rn6c7YSyRxBJMejpyvoQa1","name":"new-kv-store-alias-for-my-service","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":5,"created_at":"2023-01-19T11:28:14Z","updated_at":"2023-01-19T11:28:14Z","deleted_at":null,"resource_id":"2dem3bjbpie7k1vyy70fh5","resource_type":"object-store","href":null}'
+    body: '{"id":"rn6c7YSyRxBJMejpyvoQa1","name":"new-kv-store-alias-for-my-service","service_id":"kKJb5bOFI47uHeBVluGfX1","version":5,"created_at":"2023-01-19T11:28:14Z","updated_at":"2023-01-19T11:28:14Z","deleted_at":null,"resource_id":"2dem3bjbpie7k1vyy70fh5","resource_type":"object-store","href":null}'
     headers:
       Accept-Ranges:
       - bytes

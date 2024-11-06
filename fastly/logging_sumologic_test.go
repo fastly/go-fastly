@@ -17,7 +17,7 @@ func TestClient_Sumologics(t *testing.T) {
 	var s *Sumologic
 	record(t, "sumologics/create", func(c *Client) {
 		s, err = c.CreateSumologic(&CreateSumologicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-sumologic"),
 			URL:            ToPointer("https://foo.sumologic.com"),
@@ -35,13 +35,13 @@ func TestClient_Sumologics(t *testing.T) {
 	defer func() {
 		record(t, "sumologics/cleanup", func(c *Client) {
 			_ = c.DeleteSumologic(&DeleteSumologicInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-sumologic",
 			})
 
 			_ = c.DeleteSumologic(&DeleteSumologicInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-sumologic",
 			})
@@ -71,7 +71,7 @@ func TestClient_Sumologics(t *testing.T) {
 	var ss []*Sumologic
 	record(t, "sumologics/list", func(c *Client) {
 		ss, err = c.ListSumologics(&ListSumologicsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -86,7 +86,7 @@ func TestClient_Sumologics(t *testing.T) {
 	var ns *Sumologic
 	record(t, "sumologics/get", func(c *Client) {
 		ns, err = c.GetSumologic(&GetSumologicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-sumologic",
 		})
@@ -117,7 +117,7 @@ func TestClient_Sumologics(t *testing.T) {
 	var us *Sumologic
 	record(t, "sumologics/update", func(c *Client) {
 		us, err = c.UpdateSumologic(&UpdateSumologicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-sumologic",
 			NewName:        ToPointer("new-test-sumologic"),
@@ -133,7 +133,7 @@ func TestClient_Sumologics(t *testing.T) {
 	// Delete
 	record(t, "sumologics/delete", func(c *Client) {
 		err = c.DeleteSumologic(&DeleteSumologicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-sumologic",
 		})

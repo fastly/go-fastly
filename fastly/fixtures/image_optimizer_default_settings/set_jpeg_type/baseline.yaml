@@ -11,7 +11,7 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/9.3.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/87/image_optimizer_default_settings
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/87/image_optimizer_default_settings
     method: PATCH
   response:
     body: '{"resize_filter":"nearest","webp":true,"webp_quality":42,"jpeg_type":"baseline","jpeg_quality":85,"upscale":true,"allow_video":false}'

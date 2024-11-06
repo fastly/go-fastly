@@ -2,10 +2,10 @@
 version: 1
 interactions:
 - request:
-    body: ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=90&general.default_ttl=1800&general.stale_if_error=true&general.stale_if_error_ttl=57600
+    body: ServiceID=kKJb5bOFI47uHeBVluGfX1&ServiceVersion=90&general.default_ttl=1800&general.stale_if_error=true&general.stale_if_error_ttl=57600
     form:
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - kKJb5bOFI47uHeBVluGfX1
       ServiceVersion:
       - "90"
       general.default_ttl:
@@ -19,10 +19,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/90/settings
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/90/settings
     method: PUT
   response:
-    body: '{"general.default_host":"","general.default_ttl":1800,"general.stale_if_error_ttl":57600,"general.default_pci":0,"service_id":"7i6HN3TK9wS159v2gPAZ8A","general.stale_if_error":true,"version":90}'
+    body: '{"general.default_host":"","general.default_ttl":1800,"general.stale_if_error_ttl":57600,"general.default_pci":0,"service_id":"kKJb5bOFI47uHeBVluGfX1","general.stale_if_error":true,"version":90}'
     headers:
       Accept-Ranges:
       - bytes

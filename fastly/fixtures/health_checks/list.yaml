@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/healthcheck
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/80/healthcheck
     method: GET
   response:
-    body: '[{"headers":["Baz: Qux","Foo: Bar"],"expected_response":200,"host":"example.com","http_version":"1.1","name":"test-healthcheck","method":"HEAD","service_id":"7i6HN3TK9wS159v2gPAZ8A","threshold":10,"timeout":1500,"created_at":"2022-11-07T11:07:40Z","comment":"","path":"/foo","version":80,"deleted_at":null,"check_interval":2500,"window":5000,"initial":10,"updated_at":"2022-11-07T11:07:40Z"}]'
+    body: '[{"headers":["Baz: Qux","Foo: Bar"],"expected_response":200,"host":"example.com","http_version":"1.1","name":"test-healthcheck","method":"HEAD","service_id":"kKJb5bOFI47uHeBVluGfX1","threshold":10,"timeout":1500,"created_at":"2022-11-07T11:07:40Z","comment":"","path":"/foo","version":80,"deleted_at":null,"check_interval":2500,"window":5000,"initial":10,"updated_at":"2022-11-07T11:07:40Z"}]'
     headers:
       Accept-Ranges:
       - bytes

@@ -17,7 +17,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	var h *Honeycomb
 	record(t, "honeycombs/create", func(c *Client) {
 		h, err = c.CreateHoneycomb(&CreateHoneycombInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-honeycomb"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
@@ -35,13 +35,13 @@ func TestClient_Honeycombs(t *testing.T) {
 	defer func() {
 		record(t, "honeycombs/cleanup", func(c *Client) {
 			_ = c.DeleteHoneycomb(&DeleteHoneycombInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-honeycomb",
 			})
 
 			_ = c.DeleteHoneycomb(&DeleteHoneycombInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-honeycomb",
 			})
@@ -71,7 +71,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	var hs []*Honeycomb
 	record(t, "honeycombs/list", func(c *Client) {
 		hs, err = c.ListHoneycombs(&ListHoneycombsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -86,7 +86,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	var nh *Honeycomb
 	record(t, "honeycombs/get", func(c *Client) {
 		nh, err = c.GetHoneycomb(&GetHoneycombInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-honeycomb",
 		})
@@ -117,7 +117,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	var us *Honeycomb
 	record(t, "honeycombs/update", func(c *Client) {
 		us, err = c.UpdateHoneycomb(&UpdateHoneycombInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-honeycomb",
 			NewName:        ToPointer("new-test-honeycomb"),
@@ -141,7 +141,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	// Delete
 	record(t, "honeycombs/delete", func(c *Client) {
 		err = c.DeleteHoneycomb(&DeleteHoneycombInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-honeycomb",
 		})

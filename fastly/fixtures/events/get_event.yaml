@@ -12,7 +12,7 @@ interactions:
   response:
     body: '{"data":{"id":"5ThmATeNYLVLXcHYTpb4G1","type":"event","attributes":{"customer_id":"51MumwLiSJyFTWhtbByYgR","description":"Logging
       ''new-test-elasticsearch'' was updated on Version ''63''","event_type":"logging.update","ip":"92.238.40.48,
-      92.238.40.48","metadata":{"old":{"name":"test-elasticsearch","pipeline":"my_pipeline_id"},"new":{"name":"new-test-elasticsearch","pipeline":"my_new_pipeline_id"}},"service_id":"7i6HN3TK9wS159v2gPAZ8A","user_id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2021-11-03T16:29:29Z","admin":false}}}'
+      92.238.40.48","metadata":{"old":{"name":"test-elasticsearch","pipeline":"my_pipeline_id"},"new":{"name":"new-test-elasticsearch","pipeline":"my_new_pipeline_id"}},"service_id":"kKJb5bOFI47uHeBVluGfX1","user_id":"1tSCjJnpQYBBCAsIfI6pX0","created_at":"2021-11-03T16:29:29Z","admin":false}}}'
     headers:
       Accept-Ranges:
       - bytes

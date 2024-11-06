@@ -17,7 +17,7 @@ func TestClient_NewRelic(t *testing.T) {
 	var newRelicResp1, newRelicResp2 *NewRelic
 	record(t, "newrelic/create", func(c *Client) {
 		newRelicResp1, err = c.CreateNewRelic(&CreateNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic"),
 			Token:          ToPointer("abcd1234"),
@@ -32,7 +32,7 @@ func TestClient_NewRelic(t *testing.T) {
 
 	record(t, "newrelic/create2", func(c *Client) {
 		newRelicResp2, err = c.CreateNewRelic(&CreateNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic-2"),
 			Token:          ToPointer("abcd1234"),
@@ -48,7 +48,7 @@ func TestClient_NewRelic(t *testing.T) {
 	// This case is expected to fail due to an invalid region
 	record(t, "newrelic/create3", func(c *Client) {
 		_, err = c.CreateNewRelic(&CreateNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-newrelic-3"),
 			Token:          ToPointer("abcd1234"),
@@ -65,19 +65,19 @@ func TestClient_NewRelic(t *testing.T) {
 	defer func() {
 		record(t, "newrelic/delete", func(c *Client) {
 			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-newrelic",
 			})
 
 			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-newrelic-2",
 			})
 
 			_ = c.DeleteNewRelic(&DeleteNewRelicInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-newrelic",
 			})
@@ -125,7 +125,7 @@ func TestClient_NewRelic(t *testing.T) {
 	var ln []*NewRelic
 	record(t, "newrelic/list", func(c *Client) {
 		ln, err = c.ListNewRelic(&ListNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -140,7 +140,7 @@ func TestClient_NewRelic(t *testing.T) {
 	var newRelicGetResp, newRelicGetResp2 *NewRelic
 	record(t, "newrelic/get", func(c *Client) {
 		newRelicGetResp, err = c.GetNewRelic(&GetNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic",
 		})
@@ -151,7 +151,7 @@ func TestClient_NewRelic(t *testing.T) {
 
 	record(t, "newrelic/get2", func(c *Client) {
 		newRelicGetResp2, err = c.GetNewRelic(&GetNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic-2",
 		})
@@ -201,7 +201,7 @@ func TestClient_NewRelic(t *testing.T) {
 	var newRelicUpdateResp1 *NewRelic
 	record(t, "newrelic/update", func(c *Client) {
 		newRelicUpdateResp1, err = c.UpdateNewRelic(&UpdateNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-newrelic",
 			NewName:        ToPointer("new-test-newrelic"),
@@ -216,7 +216,7 @@ func TestClient_NewRelic(t *testing.T) {
 	// This case is expected to fail due to an invalid region.
 	record(t, "newrelic/update2", func(c *Client) {
 		_, err = c.UpdateNewRelic(&UpdateNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
 			Region:         ToPointer("zz"),
@@ -239,7 +239,7 @@ func TestClient_NewRelic(t *testing.T) {
 	// Delete
 	record(t, "newrelic/delete", func(c *Client) {
 		err = c.DeleteNewRelic(&DeleteNewRelicInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-newrelic",
 		})

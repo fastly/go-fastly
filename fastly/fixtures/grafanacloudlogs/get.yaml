@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/138/logging/grafanacloudlogs/test-grafanacloudlogs
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/138/logging/grafanacloudlogs/test-grafanacloudlogs
     method: GET
   response:
     body: '{"placement":"waf_debug","name":"test-grafanacloudlogs","response_condition":"","user":"123456","updated_at":"2024-10-24T19:43:58Z","format_version":"2","format":"format","token":"abcd1234","deleted_at":null,"created_at":"2024-10-24T19:43:58Z","url":"https://test123.grafana.net","index":"{\"env\":
-      \"prod\"}","version":"138","service_id":"7i6HN3TK9wS159v2gPAZ8A"}'
+      \"prod\"}","version":"138","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes

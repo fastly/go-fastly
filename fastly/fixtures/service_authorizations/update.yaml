@@ -15,7 +15,7 @@ interactions:
     url: https://api.fastly.com/service-authorizations/6lxMq0qXIaSCLqrch0azvx
     method: PATCH
   response:
-    body: '{"data":{"id":"6lxMq0qXIaSCLqrch0azvx","type":"service_authorization","attributes":{"created_at":"2022-06-22T18:07:20Z","updated_at":"2022-06-22T18:07:23Z","deleted_at":null,"permission":"purge_select"},"relationships":{"service":{"data":{"id":"7i6HN3TK9wS159v2gPAZ8A","type":"service"}},"user":{"data":{"id":"1pnpEMCscfjqgvH7Qofda6","type":"user"}}}}}'
+    body: '{"data":{"id":"6lxMq0qXIaSCLqrch0azvx","type":"service_authorization","attributes":{"created_at":"2022-06-22T18:07:20Z","updated_at":"2022-06-22T18:07:23Z","deleted_at":null,"permission":"purge_select"},"relationships":{"service":{"data":{"id":"kKJb5bOFI47uHeBVluGfX1","type":"service"}},"user":{"data":{"id":"1pnpEMCscfjqgvH7Qofda6","type":"user"}}}}}'
     headers:
       Accept-Ranges:
       - bytes

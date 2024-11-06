@@ -17,7 +17,7 @@ func TestClient_Headers(t *testing.T) {
 	var h *Header
 	record(t, "headers/create", func(c *Client) {
 		h, err = c.CreateHeader(&CreateHeaderInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-header"),
 			Action:         ToPointer(HeaderActionSet),
@@ -38,13 +38,13 @@ func TestClient_Headers(t *testing.T) {
 	defer func() {
 		record(t, "headers/cleanup", func(c *Client) {
 			_ = c.DeleteHeader(&DeleteHeaderInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-header",
 			})
 
 			_ = c.DeleteHeader(&DeleteHeaderInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-header",
 			})
@@ -83,7 +83,7 @@ func TestClient_Headers(t *testing.T) {
 	var hs []*Header
 	record(t, "headers/list", func(c *Client) {
 		hs, err = c.ListHeaders(&ListHeadersInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -98,7 +98,7 @@ func TestClient_Headers(t *testing.T) {
 	var nh *Header
 	record(t, "headers/get", func(c *Client) {
 		nh, err = c.GetHeader(&GetHeaderInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-header",
 		})
@@ -138,7 +138,7 @@ func TestClient_Headers(t *testing.T) {
 	var uh *Header
 	record(t, "headers/update", func(c *Client) {
 		uh, err = c.UpdateHeader(&UpdateHeaderInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-header",
 			NewName:        ToPointer("new-test-header"),
@@ -156,7 +156,7 @@ func TestClient_Headers(t *testing.T) {
 	// Delete
 	record(t, "headers/delete", func(c *Client) {
 		err = c.DeleteHeader(&DeleteHeaderInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-header",
 		})

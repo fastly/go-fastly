@@ -20,7 +20,7 @@ func TestClient_Pools(t *testing.T) {
 			Comment:         ToPointer("test pool"),
 			Name:            ToPointer("test_pool"),
 			Quorum:          ToPointer(50),
-			ServiceID:       testServiceID,
+			ServiceID:       testDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			TLSCertHostname: ToPointer("example.com"),
 			Type:            ToPointer(PoolTypeRandom),
@@ -35,13 +35,13 @@ func TestClient_Pools(t *testing.T) {
 	defer func() {
 		record(t, "pools/cleanup", func(c *Client) {
 			_ = c.DeletePool(&DeletePoolInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test_pool",
 			})
 
 			_ = c.DeletePool(&DeletePoolInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new_test_pool",
 			})
@@ -68,7 +68,7 @@ func TestClient_Pools(t *testing.T) {
 	var ps []*Pool
 	record(t, "pools/list", func(c *Client) {
 		ps, err = c.ListPools(&ListPoolsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -83,7 +83,7 @@ func TestClient_Pools(t *testing.T) {
 	var np *Pool
 	record(t, "pools/get", func(c *Client) {
 		np, err = c.GetPool(&GetPoolInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test_pool",
 		})
@@ -105,7 +105,7 @@ func TestClient_Pools(t *testing.T) {
 	var up *Pool
 	record(t, "pools/update", func(c *Client) {
 		up, err = c.UpdatePool(&UpdatePoolInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test_pool",
 			NewName:        ToPointer("new_test_pool"),
@@ -126,7 +126,7 @@ func TestClient_Pools(t *testing.T) {
 	// Delete
 	record(t, "pools/delete", func(c *Client) {
 		err = c.DeletePool(&DeletePoolInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new_test_pool",
 		})

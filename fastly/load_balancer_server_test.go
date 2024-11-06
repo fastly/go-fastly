@@ -11,14 +11,14 @@ func TestClient_Servers(t *testing.T) {
 		tv = testVersion(t, c)
 	})
 
-	testPool := createTestPool(t, "servers/create_pool", testServiceID, *tv.Number, "servers22")
+	testPool := createTestPool(t, "servers/create_pool", testDeliveryServiceID, *tv.Number, "servers22")
 
 	// Create
 	var server *Server
 	var altServer *Server
 	record(t, "servers/create", func(c *Client) {
 		server, err = c.CreateServer(&CreateServerInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Address:   ToPointer("127.0.0.1"),
 		})
@@ -28,7 +28,7 @@ func TestClient_Servers(t *testing.T) {
 
 		// additional pool server for DeleteServer usage
 		altServer, err = c.CreateServer(&CreateServerInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Address:   ToPointer("altserver.example.com"),
 		})
@@ -45,7 +45,7 @@ func TestClient_Servers(t *testing.T) {
 		record(t, "servers/cleanup", func(c *Client) {
 			// Expected to fail as this was explicitly deleted in the test.
 			_ = c.DeleteServer(&DeleteServerInput{
-				ServiceID: testServiceID,
+				ServiceID: testDeliveryServiceID,
 				PoolID:    *testPool.PoolID,
 				Server:    *altServer.ServerID,
 			})
@@ -54,14 +54,14 @@ func TestClient_Servers(t *testing.T) {
 			// the pool. The pool is deleted from this version but it still
 			// exists as it may be associated with other versions.
 			_ = c.DeleteServer(&DeleteServerInput{
-				ServiceID: testServiceID,
+				ServiceID: testDeliveryServiceID,
 				PoolID:    *testPool.PoolID,
 				Server:    *server.ServerID,
 			})
 		})
 	}()
 
-	if *server.ServiceID != testServiceID {
+	if *server.ServiceID != testDeliveryServiceID {
 		t.Errorf("bad server service: %q", *server.ServiceID)
 	}
 	if *server.PoolID != *testPool.PoolID {
@@ -75,7 +75,7 @@ func TestClient_Servers(t *testing.T) {
 	var ss []*Server
 	record(t, "servers/list", func(c *Client) {
 		ss, err = c.ListServers(&ListServersInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 		})
 	})
@@ -90,7 +90,7 @@ func TestClient_Servers(t *testing.T) {
 	var ns *Server
 	record(t, "servers/get", func(c *Client) {
 		ns, err = c.GetServer(&GetServerInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Server:    *server.ServerID,
 		})
@@ -106,7 +106,7 @@ func TestClient_Servers(t *testing.T) {
 	var us *Server
 	record(t, "servers/update", func(c *Client) {
 		us, err = c.UpdateServer(&UpdateServerInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Server:    *server.ServerID,
 			Address:   ToPointer("0.0.0.0"),
@@ -126,7 +126,7 @@ func TestClient_Servers(t *testing.T) {
 	// Delete
 	record(t, "servers/delete", func(c *Client) {
 		err = c.DeleteServer(&DeleteServerInput{
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Server:    *altServer.ServerID,
 		})

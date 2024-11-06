@@ -14,7 +14,7 @@ func TestClient_ProductEnablement_brotli_compression(t *testing.T) {
 	record(t, "product_enablement/enable_brotli_compression", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -30,7 +30,7 @@ func TestClient_ProductEnablement_brotli_compression(t *testing.T) {
 	record(t, "product_enablement/get_brotli_compression", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -45,7 +45,7 @@ func TestClient_ProductEnablement_brotli_compression(t *testing.T) {
 	record(t, "product_enablement/disable_brotli_compression", func(c *Client) {
 		err = c.DisableProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -56,7 +56,7 @@ func TestClient_ProductEnablement_brotli_compression(t *testing.T) {
 	record(t, "product_enablement/get-disabled_brotli_compression", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBrotliCompression,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 

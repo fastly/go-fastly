@@ -17,7 +17,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	var s *Scalyr
 	record(t, "scalyrs/create", func(c *Client) {
 		s, err = c.CreateScalyr(&CreateScalyrInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-scalyr"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
@@ -36,13 +36,13 @@ func TestClient_Scalyrs(t *testing.T) {
 	defer func() {
 		record(t, "scalyrs/cleanup", func(c *Client) {
 			_ = c.DeleteScalyr(&DeleteScalyrInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-scalyr",
 			})
 
 			_ = c.DeleteScalyr(&DeleteScalyrInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-scalyr",
 			})
@@ -75,7 +75,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	var ss []*Scalyr
 	record(t, "scalyrs/list", func(c *Client) {
 		ss, err = c.ListScalyrs(&ListScalyrsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -90,7 +90,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	var ns *Scalyr
 	record(t, "scalyrs/get", func(c *Client) {
 		ns, err = c.GetScalyr(&GetScalyrInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
 		})
@@ -124,7 +124,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	var us *Scalyr
 	record(t, "scalyrs/update", func(c *Client) {
 		us, err = c.UpdateScalyr(&UpdateScalyrInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
 			NewName:        ToPointer("new-test-scalyr"),
@@ -152,7 +152,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	// Delete
 	record(t, "scalyrs/delete", func(c *Client) {
 		err = c.DeleteScalyr(&DeleteScalyrInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-scalyr",
 		})

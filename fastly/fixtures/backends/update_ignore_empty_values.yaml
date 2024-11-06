@@ -9,10 +9,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/123/backend/new-test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/new-test-backend
     method: PUT
   response:
-    body: '{"min_tls_version":null,"healthcheck":null,"weight":100,"ssl_check_cert":false,"share_key":"shared-key","updated_at":"2023-08-07T10:02:08Z","connect_timeout":1500,"request_condition":"","error_threshold":0,"shield":null,"ipv6":null,"version":123,"keepalive_time":null,"ssl_sni_hostname":"ssl-hostname-updated.com","client_cert":null,"ssl_client_key":null,"between_bytes_timeout":10000,"use_ssl":false,"max_tls_version":null,"port":1234,"ipv4":null,"ssl_hostname":null,"override_host":"www.example.com","ssl_client_cert":null,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","name":"new-test-backend","hostname":"integ-test.go-fastly.com","first_byte_timeout":15000,"created_at":"2023-08-07T10:02:07Z","address":"integ-test.go-fastly.com","max_conn":200,"ssl_ca_cert":null,"auto_loadbalance":false,"comment":"","service_id":"7i6HN3TK9wS159v2gPAZ8A","deleted_at":null,"ssl_cert_hostname":null}'
+    body: '{"min_tls_version":null,"healthcheck":null,"weight":100,"ssl_check_cert":false,"share_key":"shared-key","updated_at":"2023-08-07T10:02:08Z","connect_timeout":1500,"request_condition":"","error_threshold":0,"shield":null,"ipv6":null,"version":123,"keepalive_time":null,"ssl_sni_hostname":"ssl-hostname-updated.com","client_cert":null,"ssl_client_key":null,"between_bytes_timeout":10000,"use_ssl":false,"max_tls_version":null,"port":1234,"ipv4":null,"ssl_hostname":null,"override_host":"www.example.com","ssl_client_cert":null,"ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","name":"new-test-backend","hostname":"integ-test.go-fastly.com","first_byte_timeout":15000,"created_at":"2023-08-07T10:02:07Z","address":"integ-test.go-fastly.com","max_conn":200,"ssl_ca_cert":null,"auto_loadbalance":false,"comment":"","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"ssl_cert_hostname":null}'
     headers:
       Accept-Ranges:
       - bytes

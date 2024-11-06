@@ -19,10 +19,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/44/logging/datadog
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/44/logging/datadog
     method: POST
   response:
-    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"44","format_version":"2","created_at":"2022-11-04T13:29:41Z","deleted_at":null,"response_condition":"","updated_at":"2022-11-04T13:29:41Z"}'
+    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"44","format_version":"2","created_at":"2022-11-04T13:29:41Z","deleted_at":null,"response_condition":"","updated_at":"2022-11-04T13:29:41Z"}'
     headers:
       Accept-Ranges:
       - bytes

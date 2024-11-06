@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.3.1 (+github.com/fastly/go-fastly; go1.20.14)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/3/activate
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/3/activate
     method: PUT
   response:
-    body: '{"staging":false,"deployed":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","locked":true,"comment":"","testing":false,"deleted_at":null,"created_at":"2024-05-07T12:51:55Z","active":true,"updated_at":"2024-05-07T12:51:56Z","number":3,"msg":"Warning:
+    body: '{"staging":false,"deployed":false,"service_id":"kKJb5bOFI47uHeBVluGfX1","locked":true,"comment":"","testing":false,"deleted_at":null,"created_at":"2024-05-07T12:51:55Z","active":true,"updated_at":"2024-05-07T12:51:56Z","number":3,"msg":"Warning:
       No default director found\nat: (default Line 174 Pos 1)\n#--FASTLY BEREQ BEGIN\n---------------------"}'
     headers:
       Accept-Ranges:

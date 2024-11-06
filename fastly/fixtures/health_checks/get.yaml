@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/80/healthcheck/test-healthcheck
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/80/healthcheck/test-healthcheck
     method: GET
   response:
-    body: '{"window":5000,"name":"test-healthcheck","version":80,"initial":10,"service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2022-11-07T11:07:40Z","expected_response":200,"deleted_at":null,"path":"/foo","method":"HEAD","comment":"","host":"example.com","threshold":10,"timeout":1500,"headers":["Baz:
+    body: '{"window":5000,"name":"test-healthcheck","version":80,"initial":10,"service_id":"kKJb5bOFI47uHeBVluGfX1","updated_at":"2022-11-07T11:07:40Z","expected_response":200,"deleted_at":null,"path":"/foo","method":"HEAD","comment":"","host":"example.com","threshold":10,"timeout":1500,"headers":["Baz:
       Qux","Foo: Bar"],"check_interval":2500,"created_at":"2022-11-07T11:07:40Z","http_version":"1.1"}'
     headers:
       Accept-Ranges:

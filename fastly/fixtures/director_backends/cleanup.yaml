@@ -7,12 +7,12 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/60/director/director/backend/backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/60/director/director/backend/backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find DirectorBackend ''{
       backend =\u003e backend, deleted =\u003e 0000-00-00 00:00:00, director =\u003e
-      director, service =\u003e 7i6HN3TK9wS159v2gPAZ8A, version =\u003e 60 }''"}'
+      director, service =\u003e kKJb5bOFI47uHeBVluGfX1, version =\u003e 60 }''"}'
     headers:
       Accept-Ranges:
       - bytes

@@ -9,14 +9,14 @@ func TestClient_ACLs(t *testing.T) {
 
 	fixtureBase := "acls/"
 
-	testVersion := createTestVersion(t, fixtureBase+"version", testServiceID)
+	testVersion := createTestVersion(t, fixtureBase+"version", testDeliveryServiceID)
 
 	// Create
 	var err error
 	var a *ACL
 	record(t, fixtureBase+"create", func(c *Client) {
 		a, err = c.CreateACL(&CreateACLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           ToPointer("test_acl"),
 		})
@@ -29,7 +29,7 @@ func TestClient_ACLs(t *testing.T) {
 	var errExpected error
 	record(t, fixtureBase+"create_expected_error", func(c *Client) {
 		_, errExpected = c.CreateACL(&CreateACLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -41,13 +41,13 @@ func TestClient_ACLs(t *testing.T) {
 	defer func() {
 		record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteACL(&DeleteACLInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *testVersion.Number,
 				Name:           "test_acl",
 			})
 
 			_ = c.DeleteACL(&DeleteACLInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *testVersion.Number,
 				Name:           "new_test_acl",
 			})
@@ -62,7 +62,7 @@ func TestClient_ACLs(t *testing.T) {
 	var as []*ACL
 	record(t, fixtureBase+"list", func(c *Client) {
 		as, err = c.ListACLs(&ListACLsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -77,7 +77,7 @@ func TestClient_ACLs(t *testing.T) {
 	var na *ACL
 	record(t, fixtureBase+"get", func(c *Client) {
 		na, err = c.GetACL(&GetACLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           "test_acl",
 		})
@@ -93,7 +93,7 @@ func TestClient_ACLs(t *testing.T) {
 	var ua *ACL
 	record(t, fixtureBase+"update", func(c *Client) {
 		ua, err = c.UpdateACL(&UpdateACLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           "test_acl",
 			NewName:        ToPointer("new_test_acl"),
@@ -113,7 +113,7 @@ func TestClient_ACLs(t *testing.T) {
 	// Delete
 	record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteACL(&DeleteACLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           "new_test_acl",
 		})

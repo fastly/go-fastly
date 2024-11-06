@@ -17,7 +17,7 @@ func TestClient_Datadog(t *testing.T) {
 	var d *Datadog
 	record(t, "datadog/create", func(c *Client) {
 		d, err = c.CreateDatadog(&CreateDatadogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-datadog"),
 			Region:         ToPointer("US"),
@@ -34,13 +34,13 @@ func TestClient_Datadog(t *testing.T) {
 	defer func() {
 		record(t, "datadog/delete", func(c *Client) {
 			_ = c.DeleteDatadog(&DeleteDatadogInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-datadog",
 			})
 
 			_ = c.DeleteDatadog(&DeleteDatadogInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-datadog",
 			})
@@ -70,7 +70,7 @@ func TestClient_Datadog(t *testing.T) {
 	var ld []*Datadog
 	record(t, "datadog/list", func(c *Client) {
 		ld, err = c.ListDatadog(&ListDatadogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -85,7 +85,7 @@ func TestClient_Datadog(t *testing.T) {
 	var nd *Datadog
 	record(t, "datadog/get", func(c *Client) {
 		nd, err = c.GetDatadog(&GetDatadogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-datadog",
 		})
@@ -113,7 +113,7 @@ func TestClient_Datadog(t *testing.T) {
 	var ud *Datadog
 	record(t, "datadog/update", func(c *Client) {
 		ud, err = c.UpdateDatadog(&UpdateDatadogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-datadog",
 			NewName:        ToPointer("new-test-datadog"),
@@ -137,7 +137,7 @@ func TestClient_Datadog(t *testing.T) {
 	// Delete
 	record(t, "datadog/delete", func(c *Client) {
 		err = c.DeleteDatadog(&DeleteDatadogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-datadog",
 		})

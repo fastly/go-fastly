@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx","name":"test
-      name","service_id":"7i6HN3TK9wS159v2gPAZ8A","source":"domains"}'
+      name","service_id":"kKJb5bOFI47uHeBVluGfX1","source":"domains"}'
     form: {}
     headers:
       Accept:

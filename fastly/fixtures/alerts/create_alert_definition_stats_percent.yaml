@@ -3,7 +3,7 @@ version: 1
 interactions:
 - request:
     body: '{"description":"test description","dimensions":{},"evaluation_strategy":{"ignore_below":5,"period":"2m","threshold":0.1,"type":"percent_increase"},"integration_ids":[],"metric":"status_5xx","name":"test
-      name","service_id":"7i6HN3TK9wS159v2gPAZ8A","source":"stats"}'
+      name","service_id":"kKJb5bOFI47uHeBVluGfX1","source":"stats"}'
     form: {}
     headers:
       Accept:
@@ -15,7 +15,7 @@ interactions:
     url: https://api.fastly.com/alerts/definitions
     method: POST
   response:
-    body: '{"id":"6v7dRqITNUwcbMoIg3UHiT","object":"definition","service_id":"7i6HN3TK9wS159v2gPAZ8A","name":"test
+    body: '{"id":"6v7dRqITNUwcbMoIg3UHiT","object":"definition","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test
       name","description":"test description","dimensions":{},"metric":"status_5xx","source":"stats","evaluation_strategy":{"ignore_below":5,"period":"2m","threshold":0.1,"type":"percent_increase"},"integration_ids":[],"updated_at":"2024-04-16T13:11:27Z","created_at":"2024-04-16T13:11:27Z"}'
     headers:
       Accept-Ranges:

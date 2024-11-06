@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/metrics/domains/services/7i6HN3TK9wS159v2gPAZ8A?cursor=&datacenter=SJC%2CSTP&domain=domain_1.com%2Cdomain_2.com&downsample=hour&end=1699315200&group_by=domain&limit=10&metric=resp_body_bytes%2Cstatus_2xx&region=usa&start=1699286400
+    url: https://api.fastly.com/metrics/domains/services/kKJb5bOFI47uHeBVluGfX1?cursor=&datacenter=SJC%2CSTP&domain=domain_1.com%2Cdomain_2.com&downsample=hour&end=1699315200&group_by=domain&limit=10&metric=resp_body_bytes%2Cstatus_2xx&region=usa&start=1699286400
     method: GET
   response:
     body: |

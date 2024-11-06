@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/5.1.1 (+github.com/fastly/go-fastly; go1.17)
-    url: https://api.fastly.com/stats/service/7i6HN3TK9wS159v2gPAZ8A?by=minute&from=10+days+ago&region=europe&to=now
+    url: https://api.fastly.com/stats/service/kKJb5bOFI47uHeBVluGfX1?by=minute&from=10+days+ago&region=europe&to=now
     method: GET
   response:
     body: |

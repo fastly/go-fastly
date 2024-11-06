@@ -17,7 +17,7 @@ func TestClient_Backends(t *testing.T) {
 	var b *Backend
 	record(t, "backends/create", func(c *Client) {
 		b, err = c.CreateBackend(&CreateBackendInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-backend"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
@@ -36,13 +36,13 @@ func TestClient_Backends(t *testing.T) {
 	defer func() {
 		record(t, "backends/cleanup", func(c *Client) {
 			_ = c.DeleteBackend(&DeleteBackendInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-backend",
 			})
 
 			_ = c.DeleteBackend(&DeleteBackendInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-backend",
 			})
@@ -78,7 +78,7 @@ func TestClient_Backends(t *testing.T) {
 	var bs []*Backend
 	record(t, "backends/list", func(c *Client) {
 		bs, err = c.ListBackends(&ListBackendsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -93,7 +93,7 @@ func TestClient_Backends(t *testing.T) {
 	var nb *Backend
 	record(t, "backends/get", func(c *Client) {
 		nb, err = c.GetBackend(&GetBackendInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
 		})
@@ -121,7 +121,7 @@ func TestClient_Backends(t *testing.T) {
 	var ub *Backend
 	record(t, "backends/update", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
 			NewName:        ToPointer("new-test-backend"),
@@ -158,7 +158,7 @@ func TestClient_Backends(t *testing.T) {
 	// NOTE: The following test validates empty values are NOT sent.
 	record(t, "backends/update_ignore_empty_values", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
 		})
@@ -180,7 +180,7 @@ func TestClient_Backends(t *testing.T) {
 	// and so the JSON unmarshal recognises that empty values are allowed.
 	record(t, "backends/update_allow_empty_values", func(c *Client) {
 		ub, err = c.UpdateBackend(&UpdateBackendInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
 			OverrideHost:   ToPointer(""),
@@ -200,7 +200,7 @@ func TestClient_Backends(t *testing.T) {
 	// Delete
 	record(t, "backends/delete", func(c *Client) {
 		err = c.DeleteBackend(&DeleteBackendInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
 		})

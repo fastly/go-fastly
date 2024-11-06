@@ -11,10 +11,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/4/request_settings/new-test-request-setting
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/4/request_settings/new-test-request-setting
     method: PUT
   response:
-    body: '{"action":"","geo_headers":"1","version":"4","request_condition":"","deleted_at":null,"xff":"leave","created_at":"2023-11-16T15:53:54Z","timer_support":"1","service_id":"7i6HN3TK9wS159v2gPAZ8A","updated_at":"2023-11-16T15:53:55Z","max_stale_age":"30","bypass_busy_wait":"1","force_ssl":"1","name":"new-test-request-setting","hash_keys":"a,b,c","default_host":"example.com","force_miss":"1"}'
+    body: '{"action":"","geo_headers":"1","version":"4","request_condition":"","deleted_at":null,"xff":"leave","created_at":"2023-11-16T15:53:54Z","timer_support":"1","service_id":"kKJb5bOFI47uHeBVluGfX1","updated_at":"2023-11-16T15:53:55Z","max_stale_age":"30","bypass_busy_wait":"1","force_ssl":"1","name":"new-test-request-setting","hash_keys":"a,b,c","default_host":"example.com","force_miss":"1"}'
     headers:
       Accept-Ranges:
       - bytes

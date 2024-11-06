@@ -6,10 +6,10 @@ interactions:
       headers:
         User-Agent:
           - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-      url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/servers
+      url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/pool/QjPTIOyTtgCuj99szEHJE6/servers
       method: GET
     response:
-      body: '[{"deleted_at":null,"weight":"100","comment":"","override_host":null,"port":"80","updated_at":"2022-11-04T17:20:29Z","id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","disabled":false,"address":"127.0.0.1","service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-04T17:20:29Z"},{"override_host":null,"weight":"100","deleted_at":null,"comment":"","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","address":"altserver.example.com","disabled":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-04T17:20:30Z","port":"80","updated_at":"2022-11-04T17:20:30Z","id":"UOJwfuyz8YokOWK4u1GJ54"},{"override_host":null,"weight":"100","deleted_at":null,"comment":"","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","address":"altserver.example.com","disabled":false,"service_id":"7i6HN3TK9wS159v2gPAZ8A","created_at":"2022-11-04T17:20:30Z","port":"80","updated_at":"2022-11-04T17:20:30Z","id":"UOJwfuyz8YokOWK4u1GJ52"}]'
+      body: '[{"deleted_at":null,"weight":"100","comment":"","override_host":null,"port":"80","updated_at":"2022-11-04T17:20:29Z","id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","disabled":false,"address":"127.0.0.1","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2022-11-04T17:20:29Z"},{"override_host":null,"weight":"100","deleted_at":null,"comment":"","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","address":"altserver.example.com","disabled":false,"service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2022-11-04T17:20:30Z","port":"80","updated_at":"2022-11-04T17:20:30Z","id":"UOJwfuyz8YokOWK4u1GJ54"},{"override_host":null,"weight":"100","deleted_at":null,"comment":"","max_conn":"0","pool_id":"QjPTIOyTtgCuj99szEHJE6","address":"altserver.example.com","disabled":false,"service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2022-11-04T17:20:30Z","port":"80","updated_at":"2022-11-04T17:20:30Z","id":"UOJwfuyz8YokOWK4u1GJ52"}]'
       headers:
         Accept-Ranges:
           - bytes

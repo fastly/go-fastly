@@ -17,10 +17,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/93/cache_settings
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/93/cache_settings
     method: POST
   response:
-    body: '{"action":"cache","name":"test-cache-setting","stale_ttl":"1500","ttl":"1234","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":"93","updated_at":"2022-11-07T14:12:23Z","deleted_at":null,"created_at":"2022-11-07T14:12:23Z","cache_condition":""}'
+    body: '{"action":"cache","name":"test-cache-setting","stale_ttl":"1500","ttl":"1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"93","updated_at":"2022-11-07T14:12:23Z","deleted_at":null,"created_at":"2022-11-07T14:12:23Z","cache_condition":""}'
     headers:
       Accept-Ranges:
       - bytes

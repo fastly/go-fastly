@@ -38,7 +38,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var s *Syslog
 	record(t, "syslogs/create", func(c *Client) {
 		s, err = c.CreateSyslog(&CreateSyslogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-syslog"),
 			Address:        ToPointer("example.com"),
@@ -64,13 +64,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	defer func() {
 		record(t, "syslogs/cleanup", func(c *Client) {
 			_ = c.DeleteSyslog(&DeleteSyslogInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-syslog",
 			})
 
 			_ = c.DeleteSyslog(&DeleteSyslogInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-syslog",
 			})
@@ -124,7 +124,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var ss []*Syslog
 	record(t, "syslogs/list", func(c *Client) {
 		ss, err = c.ListSyslogs(&ListSyslogsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -139,7 +139,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var ns *Syslog
 	record(t, "syslogs/get", func(c *Client) {
 		ns, err = c.GetSyslog(&GetSyslogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-syslog",
 		})
@@ -194,7 +194,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var us *Syslog
 	record(t, "syslogs/update", func(c *Client) {
 		us, err = c.UpdateSyslog(&UpdateSyslogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-syslog",
 			NewName:        ToPointer("new-test-syslog"),
@@ -215,7 +215,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Delete
 	record(t, "syslogs/delete", func(c *Client) {
 		err = c.DeleteSyslog(&DeleteSyslogInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-syslog",
 		})

@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/69/backend
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","connect_timeout":1500,"name":"test-backend","override_host":"origin.example.com","port":1234,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","service_id":"7i6HN3TK9wS159v2gPAZ8A","version":69,"first_byte_timeout":15000,"healthcheck":null,"ssl_client_key":null,"deleted_at":null,"use_ssl":false,"ssl_client_cert":null,"shield":null,"weight":100,"ipv6":null,"max_conn":200,"between_bytes_timeout":10000,"error_threshold":0,"max_tls_version":null,"ssl_sni_hostname":null,"updated_at":"2022-11-04T17:04:01Z","client_cert":null,"hostname":"integ-test.go-fastly.com","comment":"","ssl_cert_hostname":null,"min_tls_version":null,"ssl_check_cert":true,"auto_loadbalance":false,"created_at":"2022-11-04T17:04:01Z","ipv4":null,"ssl_ca_cert":null,"request_condition":"","ssl_hostname":null}'
+    body: '{"address":"integ-test.go-fastly.com","connect_timeout":1500,"name":"test-backend","override_host":"origin.example.com","port":1234,"ssl_ciphers":"DHE-RSA-AES256-SHA:DHE-RSA-CAMELLIA256-SHA:AES256-GCM-SHA384","service_id":"kKJb5bOFI47uHeBVluGfX1","version":69,"first_byte_timeout":15000,"healthcheck":null,"ssl_client_key":null,"deleted_at":null,"use_ssl":false,"ssl_client_cert":null,"shield":null,"weight":100,"ipv6":null,"max_conn":200,"between_bytes_timeout":10000,"error_threshold":0,"max_tls_version":null,"ssl_sni_hostname":null,"updated_at":"2022-11-04T17:04:01Z","client_cert":null,"hostname":"integ-test.go-fastly.com","comment":"","ssl_cert_hostname":null,"min_tls_version":null,"ssl_check_cert":true,"auto_loadbalance":false,"created_at":"2022-11-04T17:04:01Z","ipv4":null,"ssl_ca_cert":null,"request_condition":"","ssl_hostname":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -73,10 +73,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/69/director
     method: POST
   response:
-    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":69,"updated_at":"2022-11-04T17:04:01Z","deleted_at":null,"capacity":100,"shield":null,"backends":[],"comment":"","created_at":"2022-11-04T17:04:01Z"}'
+    body: '{"name":"test-director","quorum":50,"retries":5,"type":1,"service_id":"kKJb5bOFI47uHeBVluGfX1","version":69,"updated_at":"2022-11-04T17:04:01Z","deleted_at":null,"capacity":100,"shield":null,"backends":[],"comment":"","created_at":"2022-11-04T17:04:01Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -110,14 +110,14 @@ interactions:
     code: 200
     duration: ""
 - request:
-    body: Backend=test-backend&Director=test-director&ServiceID=7i6HN3TK9wS159v2gPAZ8A&ServiceVersion=69
+    body: Backend=test-backend&Director=test-director&ServiceID=kKJb5bOFI47uHeBVluGfX1&ServiceVersion=69
     form:
       Backend:
       - test-backend
       Director:
       - test-director
       ServiceID:
-      - 7i6HN3TK9wS159v2gPAZ8A
+      - kKJb5bOFI47uHeBVluGfX1
       ServiceVersion:
       - "69"
     headers:
@@ -125,10 +125,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/69/director/test-director/backend/test-backend
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/69/director/test-director/backend/test-backend
     method: POST
   response:
-    body: '{"service_id":"7i6HN3TK9wS159v2gPAZ8A","version":69,"director_name":"test-director","backend_name":"test-backend","updated_at":"2022-11-04T17:04:02Z","created_at":"2022-11-04T17:04:02Z","deleted_at":null}'
+    body: '{"service_id":"kKJb5bOFI47uHeBVluGfX1","version":69,"director_name":"test-director","backend_name":"test-backend","updated_at":"2022-11-04T17:04:02Z","created_at":"2022-11-04T17:04:02Z","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes

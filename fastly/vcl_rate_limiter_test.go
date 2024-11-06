@@ -9,7 +9,7 @@ func TestClient_ERL(t *testing.T) {
 	t.Parallel()
 
 	fixtureBase := "erls/"
-	testVersion := createTestVersion(t, fixtureBase+"version", testServiceID)
+	testVersion := createTestVersion(t, fixtureBase+"version", testDeliveryServiceID)
 
 	// Create
 	var (
@@ -18,7 +18,7 @@ func TestClient_ERL(t *testing.T) {
 	)
 	record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateERL(&CreateERLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           ToPointer("test_erl"),
 			Action:         ToPointer(ERLActionResponse),
@@ -72,7 +72,7 @@ func TestClient_ERL(t *testing.T) {
 	var es []*ERL
 	record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListERLs(&ListERLsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -130,7 +130,7 @@ func TestClient_ERL(t *testing.T) {
 	var elog *ERL
 	record(t, fixtureBase+"logger_create", func(c *Client) {
 		elog, err = c.CreateERL(&CreateERLInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Name:           ToPointer("test_erl"),
 			Action:         ToPointer(ERLActionLogOnly),

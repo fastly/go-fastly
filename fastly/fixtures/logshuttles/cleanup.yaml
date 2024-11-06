@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/logshuttle/test-logshuttle
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/45/logging/logshuttle/test-logshuttle
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e test-logshuttle, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      0000-00-00 00:00:00, name =\u003e test-logshuttle, service =\u003e kKJb5bOFI47uHeBVluGfX1,
       version =\u003e 45 }''"}'
     headers:
       Accept-Ranges:
@@ -51,11 +51,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/45/logging/logshuttle/new-test-logshuttle
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/45/logging/logshuttle/new-test-logshuttle
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
-      0000-00-00 00:00:00, name =\u003e new-test-logshuttle, service =\u003e 7i6HN3TK9wS159v2gPAZ8A,
+      0000-00-00 00:00:00, name =\u003e new-test-logshuttle, service =\u003e kKJb5bOFI47uHeBVluGfX1,
       version =\u003e 45 }''"}'
     headers:
       Accept-Ranges:

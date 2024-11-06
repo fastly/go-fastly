@@ -14,7 +14,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 	record(t, "product_enablement/enable_bot_management", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -30,7 +30,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 	record(t, "product_enablement/get_bot_management", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -45,7 +45,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 	record(t, "product_enablement/disable_bot_management", func(c *Client) {
 		err = c.DisableProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -56,7 +56,7 @@ func TestClient_ProductEnablement_bot_management(t *testing.T) {
 	record(t, "product_enablement/get-disabled_bot_management", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductBotManagement,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 

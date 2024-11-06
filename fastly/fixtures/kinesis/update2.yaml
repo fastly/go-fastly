@@ -15,10 +15,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/62/logging/kinesis/new-test-kinesis
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/62/logging/kinesis/new-test-kinesis
     method: PUT
   response:
-    body: '{"format":"format","format_version":"2","iam_role":"arn:aws:iam::123456789012:role/S3Access","service_id":"7i6HN3TK9wS159v2gPAZ8A","region":"us-east-1","deleted_at":null,"topic":"stream-name","updated_at":"2022-11-04T16:12:00Z","name":"new-test-kinesis","response_condition":"","version":"62","created_at":"2022-11-04T16:11:57Z","secret_key":"","placement":"waf_debug","access_key":""}'
+    body: '{"format":"format","format_version":"2","iam_role":"arn:aws:iam::123456789012:role/S3Access","service_id":"kKJb5bOFI47uHeBVluGfX1","region":"us-east-1","deleted_at":null,"topic":"stream-name","updated_at":"2022-11-04T16:12:00Z","name":"new-test-kinesis","response_condition":"","version":"62","created_at":"2022-11-04T16:11:57Z","secret_key":"","placement":"waf_debug","access_key":""}'
     headers:
       Accept-Ranges:
       - bytes

@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/4/request_settings
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/4/request_settings
     method: GET
   response:
-    body: '[{"name":"test-request-setting","bypass_busy_wait":"1","action":"lookup","request_condition":"","default_host":"example.com","hash_keys":"a,b,c","xff":"leave","created_at":"2023-11-16T15:53:54Z","force_miss":"1","max_stale_age":"30","service_id":"7i6HN3TK9wS159v2gPAZ8A","force_ssl":"1","geo_headers":"1","version":"4","updated_at":"2023-11-16T15:53:54Z","timer_support":"1","deleted_at":null}]'
+    body: '[{"name":"test-request-setting","bypass_busy_wait":"1","action":"lookup","request_condition":"","default_host":"example.com","hash_keys":"a,b,c","xff":"leave","created_at":"2023-11-16T15:53:54Z","force_miss":"1","max_stale_age":"30","service_id":"kKJb5bOFI47uHeBVluGfX1","force_ssl":"1","geo_headers":"1","version":"4","updated_at":"2023-11-16T15:53:54Z","timer_support":"1","deleted_at":null}]'
     headers:
       Accept-Ranges:
       - bytes

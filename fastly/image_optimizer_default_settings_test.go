@@ -14,7 +14,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 
 	fixtureBase := "image_optimizer_default_settings/"
 
-	testVersion := createTestVersion(t, fixtureBase+"version", testServiceID)
+	testVersion := createTestVersion(t, fixtureBase+"version", testDeliveryServiceID)
 
 	var err error
 
@@ -22,7 +22,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	record(t, fixtureBase+"enable_product", func(c *Client) {
 		_, err = c.EnableProduct(&ProductEnablementInput{
 			ProductID: ProductImageOptimizer,
-			ServiceID: testServiceID,
+			ServiceID: testDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -34,7 +34,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		record(t, fixtureBase+"disable_product", func(c *Client) {
 			err = c.DisableProduct(&ProductEnablementInput{
 				ProductID: ProductImageOptimizer,
-				ServiceID: testServiceID,
+				ServiceID: testDeliveryServiceID,
 			})
 		})
 
@@ -48,7 +48,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Fetch
 	record(t, fixtureBase+"original_fetch", func(c *Client) {
 		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -63,7 +63,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		record(t, fixtureBase+"final_reset", func(c *Client) {
 			if originalSettings != nil {
 				_, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-					ServiceID:      testServiceID,
+					ServiceID:      testDeliveryServiceID,
 					ServiceVersion: *testVersion.Number,
 					// just use default resizefilter & jpegtype since it doesn't matter much, and it's annoying
 					// to parse the API output strings back into enums.
@@ -89,7 +89,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Change some stuff
 	record(t, fixtureBase+"update_1_patch", func(c *Client) {
 		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Webp:           &newWebp,
 			WebpQuality:    &newWebpQuality,
@@ -113,7 +113,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Confirm our changes were applied permanently
 	record(t, fixtureBase+"update_1_get", func(c *Client) {
 		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -138,7 +138,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 
 	record(t, fixtureBase+"update_2_patch", func(c *Client) {
 		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Webp:           &newWebp,
 			WebpQuality:    &newWebpQuality,
@@ -162,7 +162,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Confirm our changes were applied permanently (again)
 	record(t, fixtureBase+"update_2_get", func(c *Client) {
 		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -185,7 +185,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 
 	record(t, fixtureBase+"incorrect_fetch", func(c *Client) {
 		_, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			WebpQuality:    &newWebpQuality,
 		})
@@ -202,7 +202,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	for _, resizeFilter := range []ImageOptimizerResizeFilter{ImageOptimizerLanczos3, ImageOptimizerLanczos2, ImageOptimizerBicubic, ImageOptimizerBilinear, ImageOptimizerNearest} {
 		record(t, fixtureBase+"set_resize_filter/"+resizeFilter.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *testVersion.Number,
 				ResizeFilter:   &resizeFilter,
 			})
@@ -215,7 +215,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	for _, jpegType := range []ImageOptimizerJpegType{ImageOptimizerAuto, ImageOptimizerBaseline, ImageOptimizerProgressive} {
 		record(t, fixtureBase+"set_jpeg_type/"+jpegType.String(), func(c *Client) {
 			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *testVersion.Number,
 				JpegType:       &jpegType,
 			})
@@ -228,7 +228,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Confirm a full request is accepted - that all parameters in our library match the API's expectations
 	record(t, fixtureBase+"set_full", func(c *Client) {
 		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			ResizeFilter:   ToPointer(ImageOptimizerLanczos3),
 			Webp:           ToPointer(false),

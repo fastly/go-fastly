@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/pool/QjPTIOyTtgCuj99szEHJE6/server/AKS7g8tMd4ADhulOLnFhf3
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/pool/QjPTIOyTtgCuj99szEHJE6/server/AKS7g8tMd4ADhulOLnFhf3
     method: GET
   response:
-    body: '{"weight":"100","id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","created_at":"2022-11-04T17:20:29Z","port":"80","comment":"","pool_id":"QjPTIOyTtgCuj99szEHJE6","deleted_at":null,"disabled":false,"updated_at":"2022-11-04T17:20:29Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","override_host":null,"address":"127.0.0.1"}'
+    body: '{"weight":"100","id":"AKS7g8tMd4ADhulOLnFhf3","max_conn":"0","created_at":"2022-11-04T17:20:29Z","port":"80","comment":"","pool_id":"QjPTIOyTtgCuj99szEHJE6","deleted_at":null,"disabled":false,"updated_at":"2022-11-04T17:20:29Z","service_id":"kKJb5bOFI47uHeBVluGfX1","override_host":null,"address":"127.0.0.1"}'
     headers:
       Accept-Ranges:
       - bytes

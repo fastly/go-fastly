@@ -21,10 +21,10 @@ interactions:
       - application/x-www-form-urlencoded
       User-Agent:
       - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/service/7i6HN3TK9wS159v2gPAZ8A/version/138/logging/grafanacloudlogs/test-grafanacloudlogs
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/138/logging/grafanacloudlogs/test-grafanacloudlogs
     method: PUT
   response:
-    body: '{"deleted_at":null,"token":"abcd6789","name":"new-test-grafanacloudlogs","version":"138","user":"123456","updated_at":"2024-10-24T19:43:58Z","service_id":"7i6HN3TK9wS159v2gPAZ8A","format":"format","created_at":"2024-10-24T19:43:58Z","format_version":"2","response_condition":"","placement":"waf_debug","url":"https://test456.grafana.net","index":"{\"env\":
+    body: '{"deleted_at":null,"token":"abcd6789","name":"new-test-grafanacloudlogs","version":"138","user":"123456","updated_at":"2024-10-24T19:43:58Z","service_id":"kKJb5bOFI47uHeBVluGfX1","format":"format","created_at":"2024-10-24T19:43:58Z","format_version":"2","response_condition":"","placement":"waf_debug","url":"https://test456.grafana.net","index":"{\"env\":
       \"staging\"}"}'
     headers:
       Accept-Ranges:

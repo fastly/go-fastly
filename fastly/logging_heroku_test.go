@@ -17,7 +17,7 @@ func TestClient_Herokus(t *testing.T) {
 	var h *Heroku
 	record(t, "herokus/create", func(c *Client) {
 		h, err = c.CreateHeroku(&CreateHerokuInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-heroku"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
@@ -35,13 +35,13 @@ func TestClient_Herokus(t *testing.T) {
 	defer func() {
 		record(t, "herokus/cleanup", func(c *Client) {
 			_ = c.DeleteHeroku(&DeleteHerokuInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-heroku",
 			})
 
 			_ = c.DeleteHeroku(&DeleteHerokuInput{
-				ServiceID:      testServiceID,
+				ServiceID:      testDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-heroku",
 			})
@@ -71,7 +71,7 @@ func TestClient_Herokus(t *testing.T) {
 	var hs []*Heroku
 	record(t, "herokus/list", func(c *Client) {
 		hs, err = c.ListHerokus(&ListHerokusInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -86,7 +86,7 @@ func TestClient_Herokus(t *testing.T) {
 	var nh *Heroku
 	record(t, "herokus/get", func(c *Client) {
 		nh, err = c.GetHeroku(&GetHerokuInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-heroku",
 		})
@@ -117,7 +117,7 @@ func TestClient_Herokus(t *testing.T) {
 	var uh *Heroku
 	record(t, "herokus/update", func(c *Client) {
 		uh, err = c.UpdateHeroku(&UpdateHerokuInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-heroku",
 			NewName:        ToPointer("new-test-heroku"),
@@ -137,7 +137,7 @@ func TestClient_Herokus(t *testing.T) {
 	// Delete
 	record(t, "herokus/delete", func(c *Client) {
 		err = c.DeleteHeroku(&DeleteHerokuInput{
-			ServiceID:      testServiceID,
+			ServiceID:      testDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-heroku",
 		})
