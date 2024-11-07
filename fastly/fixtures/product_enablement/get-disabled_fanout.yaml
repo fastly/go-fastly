@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/enabled-products/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1
+    url: https://api.fastly.com/enabled-products/fanout/services/XsjdElScZGjmfCcTwsYRC1
     method: GET
   response:
     body: |
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 06 Nov 2024 20:18:21 GMT
+      - Wed, 06 Nov 2024 20:18:23 GMT
       Pragma:
       - no-cache
       Server:
@@ -40,9 +40,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000119-CHI, cache-ewr-kewr1740064-EWR
+      - cache-chi-kigq8000137-CHI, cache-ewr-kewr1740064-EWR
       X-Timer:
-      - S1730924302.790192,VS0,VE105
+      - S1730924303.183636,VS0,VE89
     status: 400 Bad Request
     code: 400
     duration: ""
