@@ -1,5 +1,36 @@
 # Changelog
 
+## [v9.12.0](https://github.com/fastly/go-fastly/releases/tag/v9.12.0) (2024-11-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.11.0...v9.12.0)
+
+**Breaking:**
+
+Note that in spite of this *breaking* change, the major version number
+of the package was not incremented, as the feature which was removed
+did not work and no users of the package could have been relying on
+it.
+
+- breaking(product_enablement): Remove support for NGWAF product. [#560](https://github.com/fastly/go-fastly/pull/560)
+
+**Enhancements:**
+
+- feat(stats_historical): add origin statistics [#552](https://github.com/fastly/go-fastly/pull/552)
+- feat(stats_historical): add fields with all prefix [#553](https://github.com/fastly/go-fastly/pull/553)
+- Add GrafanaCloudLogs as an logging enpoint [#556](https://github.com/fastly/go-fastly/pull/556)
+- feat(product_enablement): Add support for Log Explorer & Insights product. [#558](https://github.com/fastly/go-fastly/pull/558)
+
+**Bug fixes:**
+
+- fix(logging_grafanacloudlogs): Fix Grafana Cloud Logs errors [#559](https://github.com/fastly/go-fastly/pull/559)
+- fix(debug_mode): Fix FASTLY_DEBUG_MODE when used in combination with go-vcr. [#561](https://github.com/fastly/go-fastly/pull/561)
+- test(infrastructure): Add support for testing against both Delivery and Compute services. [#562](https://github.com/fastly/go-fastly/pull/562)
+- test(product_enablement): Add test suites for all supported products. [#563](https://github.com/fastly/go-fastly/pull/563)
+
+**Dependencies:**
+
+- build(deps): Unpin staticcheck, 'latest' version is acceptable. [#549](https://github.com/fastly/go-fastly/pull/549)
+
 ## [v9.11.0](https://github.com/fastly/go-fastly/releases/tag/v9.11.0) (2024-10-01)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.10.0...v9.11.0)
