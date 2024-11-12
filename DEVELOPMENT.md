@@ -1,14 +1,31 @@
 # Development
 
 1. Clone the project to your preferred directory, using your preferred method.
-2. Download the module and accompanying developer tooling.
+
+2. This package requires Go 1.22, specifically.
+   1. If you have only Go 1.22 installed, then no further steps are needed.
+   2. If you have Go 1.22 and other versions installed, and are using
+      any form of Go version manager to select the 'default' version
+      to be used, then select Go 1.22 and proceed.
+   3. If you have Go 1.22 and other versions installed, and are using
+      Go's built-in support for multiple versions, and Go 1.22 is not
+      the highest-numbered version installed, then you need to set the
+      `GO_FOR_BUILD` environment variable to ensure that Go 1.22 is
+      used to build and test the package.
+
+	  ```bash
+	  $ export GO_FOR_BUILD=go1.22.9
+	  ```
+
+3. Download the modules that this package depends on, and necessary developer tooling.
 
   ```bash
-  $ go mod download
+  $ make mod-download dev-dependencies
   ```
 
-3. Make changes.
-4. Verify those changes.
+4. Make changes.
+
+5. Verify those changes.
 
   ```bash
   $ make all

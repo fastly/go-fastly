@@ -1,5 +1,7 @@
 module github.com/fastly/go-fastly/v9
 
+go 1.22
+
 require (
 	github.com/dnaeon/go-vcr v1.2.0
 	github.com/google/go-cmp v0.5.8
@@ -20,5 +22,3 @@ require (
 	golang.org/x/sys v0.15.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8 // indirect
 )
-
-go 1.20

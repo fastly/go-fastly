@@ -1,11 +1,12 @@
 SHELL := /bin/bash -o pipefail
-GO ?= go
+GO_FOR_BUILD ?= go ## Allows overriding Go executable to be used for building and testing.
+GO_FOR_TOOLS ?= go ## Allows overriding Go executable to be used for development tools.
 
 # List of tests to run
 FILES ?= ./...
 
 # List all our actual files, excluding vendor
-GOPKGS ?= $(shell $(GO) list $(FILES) | grep -v /vendor/)
+GOPKGS ?= $(shell $(GO_FOR_BUILD) list $(FILES) | grep -v /vendor/)
 GOFILES ?= $(shell find . -name '*.go' | grep -v /vendor/)
 
 # Tags specific for building
@@ -24,25 +25,25 @@ DEFAULT_FASTLY_TEST_COMPUTE_SERVICE_ID = XsjdElScZGjmfCcTwsYRC1
 FASTLY_API_KEY ?=
 #
 # Enables support for tools such as https://github.com/rakyll/gotest
-TEST_COMMAND ?= $(GO) test
+TEST_COMMAND ?= $(GO_FOR_BUILD) test
 
 all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck semgrep ## Runs all of the required cleaning and verification targets.
 .PHONY: all
 
 tidy: ## Cleans the Go module.
 	@echo "==> Tidying module"
-	@$(GO) mod tidy
+	@$(GO_FOR_BUILD) mod tidy
 .PHONY: tidy
 
 mod-download: ## Downloads the Go module.
 	@echo "==> Downloading Go module"
-	@$(GO) mod download
+	@$(GO_FOR_BUILD) mod download
 .PHONY: mod-download
 
 dev-dependencies: ## Downloads the necessary dev dependencies.
 	@echo "==> Downloading development dependencies"
-	@$(GO) install honnef.co/go/tools/cmd/staticcheck@latest
-	@$(GO) install golang.org/x/tools/cmd/goimports
+	@$(GO_FOR_TOOLS) install honnef.co/go/tools/cmd/staticcheck@latest
+	@$(GO_FOR_TOOLS) install golang.org/x/tools/cmd/goimports
 	@if [[ "$$(uname)" == 'Darwin' ]]; then brew install semgrep; fi
 .PHONY: dev-dependencies
 
@@ -82,7 +83,7 @@ check-fmt: ## A check which lists improperly-formatted files, if they exist.
 .PHONY: check-fmt
 
 check-mod: ## A check which lists extraneous dependencies, if they exist.
-	@$(shell pwd)/scripts/check-mod.sh
+	@$(shell pwd)/scripts/check-mod.sh $(GO_FOR_BUILD)
 .PHONY: check-mod
 
 fiximports: ## Properly formats and orders imports.
@@ -97,7 +98,7 @@ fmt: ## Properly formats Go files and orders dependencies.
 
 vet: ## Identifies common errors.
 	@echo "==> Running go vet"
-	@$(GO) vet ./...
+	@$(GO_FOR_BUILD) vet ./...
 .PHONY: vet
 
 staticcheck: ## Runs the staticcheck linter.
