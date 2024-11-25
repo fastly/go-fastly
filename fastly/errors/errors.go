@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/fastly/go-fastly/v9/pkg/decodebody"
+	"github.com/fastly/go-fastly/v9/fastly/decodebody"
 	"github.com/google/jsonapi"
 )
 

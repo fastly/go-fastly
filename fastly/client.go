@@ -18,7 +18,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/fastly/go-fastly/v9/pkg/decodebody"
+	"github.com/fastly/go-fastly/v9/fastly/decodebody"
 	"github.com/google/go-querystring/query"
 	"github.com/google/jsonapi"
 	"github.com/hashicorp/go-cleanhttp"

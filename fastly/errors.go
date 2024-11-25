@@ -3,7 +3,7 @@ package fastly
 import (
 	"net/http"
 
-	fsterr "github.com/fastly/go-fastly/v9/pkg/errors"
+	fsterr "github.com/fastly/go-fastly/v9/fastly/errors"
 )
 
 // The contents of this file are intended to provide backwards

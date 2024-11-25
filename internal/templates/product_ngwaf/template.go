@@ -3,7 +3,7 @@
 package product_ngwaf
 
 import (
-	fsterr "github.com/fastly/go-fastly/v9/pkg/errors"
+	fsterr "github.com/fastly/go-fastly/v9/fastly/errors"
 )
 
 const (
