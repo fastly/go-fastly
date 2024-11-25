@@ -25,7 +25,6 @@ _testmain.go
 *.prof
 
 bin/
-pkg/
 RELEASE_CHANGELOG.md
 
 .envrc

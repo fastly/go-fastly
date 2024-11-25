@@ -26,13 +26,8 @@ FASTLY_API_KEY ?=
 # Enables support for tools such as https://github.com/rakyll/gotest
 TEST_COMMAND ?= $(GO) test
 
-all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck semgrep ## Runs all of the required cleaning and verification targets.
+all: mod-download dev-dependencies tidy generate fmt fiximports test vet staticcheck semgrep ## Runs all of the required cleaning and verification targets.
 .PHONY: all
-
-tidy: ## Cleans the Go module.
-	@echo "==> Tidying module"
-	@$(GO) mod tidy
-.PHONY: tidy
 
 mod-download: ## Downloads the Go module.
 	@echo "==> Downloading Go module"
@@ -46,10 +41,46 @@ dev-dependencies: ## Downloads the necessary dev dependencies.
 	@if [[ "$$(uname)" == 'Darwin' ]]; then brew install semgrep; fi
 .PHONY: dev-dependencies
 
+tidy: ## Cleans the Go module.
+	@echo "==> Tidying module"
+	@$(GO) mod tidy
+.PHONY: tidy
+
+generate: ## Builds and runs generators, to generate code for API endpoints and tests.
+	@echo "==> Building generators"
+	@$(GO) build -o generators ./internal/generators/...
+	@echo "==> Generating code from templates"
+	@PATH=${PATH}:$(shell pwd)/generators $(GO) generate -v ./internal/templates/...
+
+fmt: ## Properly formats Go files and orders dependencies.
+	@echo "==> Running gofmt"
+	@gofmt -s -w ${GOFILES}
+.PHONY: fmt
+
+fiximports: ## Properly formats and orders imports.
+	@echo "==> Fixing imports"
+	@goimports -w {fastly,tools}
+.PHONY: fiximports
+
 test: ## Runs the test suite with VCR mocks enabled.
 	@echo "==> Testing ${NAME}"
 	@$(TEST_COMMAND) -timeout=30s -parallel=20 -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test
+
+vet: ## Identifies common errors.
+	@echo "==> Running go vet"
+	@$(GO) vet ./...
+.PHONY: vet
+
+staticcheck: ## Runs the staticcheck linter.
+	@echo "==> Running staticcheck"
+	@staticcheck -version
+	@staticcheck ./...
+.PHONY: staticcheck
+
+semgrep: ## Run semgrep checker.
+	if command -v semgrep &> /dev/null; then semgrep ci --config auto --exclude-rule generic.secrets.security.detected-private-key.detected-private-key $(SEMGREP_ARGS); fi
+.PHONY: semgrep
 
 test-race: ## Runs the test suite with the -race flag to identify race conditions, if they exist.
 	@echo "==> Testing ${NAME} (race)"
@@ -85,34 +116,8 @@ check-mod: ## A check which lists extraneous dependencies, if they exist.
 	@$(shell pwd)/scripts/check-mod.sh
 .PHONY: check-mod
 
-fiximports: ## Properly formats and orders imports.
-	@echo "==> Fixing imports"
-	@goimports -w {fastly,tools}
-.PHONY: fiximports
-
-fmt: ## Properly formats Go files and orders dependencies.
-	@echo "==> Running gofmt"
-	@gofmt -s -w ${GOFILES}
-.PHONY: fmt
-
-vet: ## Identifies common errors.
-	@echo "==> Running go vet"
-	@$(GO) vet ./...
-.PHONY: vet
-
-staticcheck: ## Runs the staticcheck linter.
-	@echo "==> Running staticcheck"
-	@staticcheck -version
-	@staticcheck ./...
-.PHONY: staticcheck
-
 nilaway: ## Run nilaway
 	@nilaway ./...
-
-# Run semgrep checker.
-.PHONY: semgrep
-semgrep:
-	if command -v semgrep &> /dev/null; then semgrep ci --config auto --exclude-rule generic.secrets.security.detected-private-key.detected-private-key $(SEMGREP_ARGS); fi
 
 .PHONY: help
 help: ## Prints this help menu.

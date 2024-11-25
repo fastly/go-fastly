@@ -1,4 +1,4 @@
-package fastly
+package errors
 
 import (
 	"bytes"
