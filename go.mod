@@ -1,6 +1,7 @@
 module github.com/fastly/go-fastly/v9
 
 require (
+	github.com/dave/jennifer v1.7.1
 	github.com/dnaeon/go-vcr v1.2.0
 	github.com/google/go-cmp v0.5.8
 	github.com/google/go-querystring v1.1.0
