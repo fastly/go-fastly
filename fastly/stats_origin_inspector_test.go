@@ -11,8 +11,9 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 	// NOTE: Update this to a recent time when regenerating the test fixtures,
 	// otherwise the data may be outside of retention and an error will be
 	// returned.
-	end := time.Date(2022, 2, 14, 0, 0, 0, 0, time.UTC)
+	end := time.Date(2024, 11, 26, 0, 0, 0, 0, time.UTC)
 	start := end.Add(-2 * 24 * time.Hour)
+	limit := 150
 	var err error
 	record(t, "origin_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetOriginMetricsForService(&GetOriginMetricsInput{
@@ -26,6 +27,7 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 			Regions:     []string{"europe", "usa"},
 			ServiceID:   testDeliveryServiceID,
 			Start:       &start,
+			Limit:       &limit,
 		})
 	})
 	if err != nil {
