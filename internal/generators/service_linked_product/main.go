@@ -28,7 +28,11 @@ func main() {
 		generators.FailErr(err)
 	}
 
-	if err = generateAPI(&g); err != nil {
+	if err = generate_api(&g); err != nil {
+		generators.FailErr(err)
+	}
+
+	if err = generate_api_tests(&g); err != nil {
 		generators.FailErr(err)
 	}
 }

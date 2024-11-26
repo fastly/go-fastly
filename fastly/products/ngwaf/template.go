@@ -7,12 +7,13 @@ import (
 )
 
 const (
-	ProductName = "NextGenWAF"
+	ProductName = "Next-Gen WAF"
 	ProductID   = "ngwaf"
 )
 
-// ErrMissingWorkspaceID is an error that is returned when an input struct
-// requires a "WorkspaceID" key, but one was not set.
+// ErrMissingWorkspaceID is the error returned by the Enable function
+// when it is passed an EnableInput struct with a WorkspaceID field
+// that is empty.
 var ErrMissingWorkspaceID = fastly.NewFieldError("WorkspaceID")
 
 type EnableInput struct {
@@ -24,6 +25,21 @@ func (i *EnableInput) Validate() error {
 		return ErrMissingWorkspaceID
 	}
 	return nil
+}
+
+type EnableInputTestCase struct {
+	Name      string
+	Input     EnableInput
+	WantError *error
+}
+
+var EnableInputTestCases = map[string][]EnableInputTestCase{
+	"valid": {
+		{
+			Name:  "valid",
+			Input: EnableInput{WorkspaceID: "xyz123"},
+		},
+	},
 }
 
 type ConfigureInput struct {

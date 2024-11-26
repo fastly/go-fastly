@@ -49,6 +49,7 @@ tidy: ## Cleans the Go module.
 .PHONY: tidy
 
 generate: ## Builds and runs generators, to generate code for API endpoints and tests.
+# Existing code must be removed in case it is broken and stops the generation process.
 	@echo "==> Removing existing generated code"
 	@rm -f fastly/products/*/api.go fastly/products/*/api_test.go
 	@echo "==> Building generators"

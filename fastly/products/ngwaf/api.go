@@ -4,7 +4,7 @@ package ngwaf
 
 import fastly "github.com/fastly/go-fastly/v9/fastly"
 
-// Get gets the status of the NextGenWAF product on the service.
+// Get gets the status of the Next-Gen WAF product on the service.
 func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) {
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
@@ -25,7 +25,7 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 	return h, nil
 }
 
-// Enable enables the NextGenWAF product on the service.
+// Enable enables the Next-Gen WAF product on the service.
 func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*fastly.ProductEnablement, error) {
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
@@ -49,7 +49,7 @@ func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*fastly.Product
 	return h, nil
 }
 
-// Disable disables the NextGenWAF product on the service.
+// Disable disables the Next-Gen WAF product on the service.
 func Disable(c *fastly.Client, serviceID string) error {
 	if serviceID == "" {
 		return fastly.ErrMissingServiceID
@@ -66,7 +66,7 @@ func Disable(c *fastly.Client, serviceID string) error {
 	return nil
 }
 
-// GetConfiguration gets the configuration of the NextGenWAF product on the service.
+// GetConfiguration gets the configuration of the Next-Gen WAF product on the service.
 func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, error) {
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
@@ -87,7 +87,7 @@ func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, err
 	return h, nil
 }
 
-// UpdateConfiguration updates the configuration of the NextGenWAF product on the service.
+// UpdateConfiguration updates the configuration of the Next-Gen WAF product on the service.
 func UpdateConfiguration(c *fastly.Client, serviceID string, i *ConfigureInput) (*ConfigureOutput, error) {
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID

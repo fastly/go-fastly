@@ -5,10 +5,10 @@ import (
 	"github.com/fastly/go-fastly/v9/internal/generators"
 )
 
-func generateAPI(g *Generator) error {
+func generate_api(g *Generator) error {
 	var err error
 
-	f := NewFilePath(g.base.PackageName)
+	f := NewFile(g.base.Package.Name)
 
 	g.base.Header(f)
 

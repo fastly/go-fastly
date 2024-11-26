@@ -1,8 +1,8 @@
 //go:generate service_linked_product
 
-package brotlicompression
+package brotli_compression
 
 const (
-	ProductName = "BrotliCompression"
+	ProductName = "Brotli Compression"
 	ProductID   = "brotli_compression"
 )

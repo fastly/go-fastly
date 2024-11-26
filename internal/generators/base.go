@@ -13,7 +13,6 @@ var ClientParameter = Id("c").Op("*").Qual(FastlyPackagePath, "Client")
 
 type Generator struct {
 	ThisGenerator string
-	PackageName   string
 	Package       *packages.Package
 }
 
@@ -22,9 +21,9 @@ func Setup(generatorName string) (*Generator, error) {
 
 	g.ThisGenerator = generatorName
 
-	g.PackageName = os.Getenv("GOPACKAGE")
+	packageName := os.Getenv("GOPACKAGE")
 
-	cfg := &packages.Config{Mode: packages.NeedTypes}
+	cfg := &packages.Config{Mode: packages.NeedTypes | packages.NeedName}
 	pkgs, err := packages.Load(cfg, ".")
 	if err != nil {
 		return nil, fmt.Errorf("loading template for inspection: %w", err)
@@ -34,7 +33,15 @@ func Setup(generatorName string) (*Generator, error) {
 		os.Exit(1)
 	}
 
-	g.Package = pkgs[0]
+	for i, pkg := range pkgs {
+		if pkg.Name == packageName {
+			g.Package = pkgs[i]
+		}
+	}
+
+	if g.Package == nil {
+		return nil, fmt.Errorf("failure loading package '%s' from the template", packageName)
+	}
 
 	return &g, nil
 }
