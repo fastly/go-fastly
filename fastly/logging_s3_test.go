@@ -9,7 +9,7 @@ func TestClient_S3s(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "s3s/version", func(c *Client) {
+	Record(t, "s3s/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
@@ -17,9 +17,9 @@ func TestClient_S3s(t *testing.T) {
 	//
 	// NOTE: You can't send the API and empty ResponseCondition.
 	var s3CreateResp1, s3CreateResp2, s3CreateResp3, s3CreateResp4 *S3
-	record(t, "s3s/create", func(c *Client) {
+	Record(t, "s3s/create", func(c *Client) {
 		s3CreateResp1, err = c.CreateS3(&CreateS3Input{
-			ServiceID:                    testDeliveryServiceID,
+			ServiceID:                    TestDeliveryServiceID,
 			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3"),
 			BucketName:                   ToPointer("bucket-name"),
@@ -46,9 +46,9 @@ func TestClient_S3s(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "s3s/create2", func(c *Client) {
+	Record(t, "s3s/create2", func(c *Client) {
 		s3CreateResp2, err = c.CreateS3(&CreateS3Input{
-			ServiceID:                    testDeliveryServiceID,
+			ServiceID:                    TestDeliveryServiceID,
 			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-2"),
 			BucketName:                   ToPointer("bucket-name"),
@@ -74,9 +74,9 @@ func TestClient_S3s(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	record(t, "s3s/create3", func(c *Client) {
+	Record(t, "s3s/create3", func(c *Client) {
 		s3CreateResp3, err = c.CreateS3(&CreateS3Input{
-			ServiceID:                    testDeliveryServiceID,
+			ServiceID:                    TestDeliveryServiceID,
 			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-3"),
 			BucketName:                   ToPointer("bucket-name"),
@@ -102,9 +102,9 @@ func TestClient_S3s(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "s3s/create4", func(c *Client) {
+	Record(t, "s3s/create4", func(c *Client) {
 		s3CreateResp4, err = c.CreateS3(&CreateS3Input{
-			ServiceID:                    testDeliveryServiceID,
+			ServiceID:                    TestDeliveryServiceID,
 			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-4"),
 			BucketName:                   ToPointer("bucket-name"),
@@ -130,9 +130,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// This case is expected to fail
-	record(t, "s3s/create5", func(c *Client) {
+	Record(t, "s3s/create5", func(c *Client) {
 		_, err = c.CreateS3(&CreateS3Input{
-			ServiceID:                    testDeliveryServiceID,
+			ServiceID:                    TestDeliveryServiceID,
 			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3"),
 			BucketName:                   ToPointer("bucket-name"),
@@ -159,9 +159,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// This case is expected to fail
-	record(t, "s3s/create6", func(c *Client) {
+	Record(t, "s3s/create6", func(c *Client) {
 		_, err = c.CreateS3(&CreateS3Input{
-			ServiceID:                    testDeliveryServiceID,
+			ServiceID:                    TestDeliveryServiceID,
 			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3"),
 			BucketName:                   ToPointer("bucket-name"),
@@ -187,9 +187,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
-	record(t, "s3s/create7", func(c *Client) {
+	Record(t, "s3s/create7", func(c *Client) {
 		_, err = c.CreateS3(&CreateS3Input{
-			ServiceID:                    testDeliveryServiceID,
+			ServiceID:                    TestDeliveryServiceID,
 			ServiceVersion:               *tv.Number,
 			Name:                         ToPointer("test-s3-2"),
 			BucketName:                   ToPointer("bucket-name"),
@@ -217,27 +217,27 @@ func TestClient_S3s(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "s3s/cleanup", func(c *Client) {
+		Record(t, "s3s/cleanup", func(c *Client) {
 			_ = c.DeleteS3(&DeleteS3Input{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-s3",
 			})
 
 			_ = c.DeleteS3(&DeleteS3Input{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-s3-3",
 			})
 
 			_ = c.DeleteS3(&DeleteS3Input{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-s3-4",
 			})
 
 			_ = c.DeleteS3(&DeleteS3Input{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-s3",
 			})
@@ -349,9 +349,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// List
 	var s3s []*S3
-	record(t, "s3s/list", func(c *Client) {
+	Record(t, "s3s/list", func(c *Client) {
 		s3s, err = c.ListS3s(&ListS3sInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -364,9 +364,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// Get
 	var s3GetResp, s3GetResp2 *S3
-	record(t, "s3s/get", func(c *Client) {
+	Record(t, "s3s/get", func(c *Client) {
 		s3GetResp, err = c.GetS3(&GetS3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
 		})
@@ -376,9 +376,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// Request the configuration using the IAM role
-	record(t, "s3s/get2", func(c *Client) {
+	Record(t, "s3s/get2", func(c *Client) {
 		s3GetResp2, err = c.GetS3(&GetS3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3-4",
 		})
@@ -465,9 +465,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// Update
 	var s3UpdateResp1, s3UpdateResp2, s3UpdateResp3, s3UpdateResp4, s3UpdateResp5 *S3
-	record(t, "s3s/update", func(c *Client) {
+	Record(t, "s3s/update", func(c *Client) {
 		s3UpdateResp1, err = c.UpdateS3(&UpdateS3Input{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-s3",
 			NewName:          ToPointer("new-test-s3"),
@@ -482,9 +482,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// Test that CompressionCodec can be set for a an endpoint where
 	// GzipLevel was specified at creation time.
-	record(t, "s3s/update2", func(c *Client) {
+	Record(t, "s3s/update2", func(c *Client) {
 		s3UpdateResp2, err = c.UpdateS3(&UpdateS3Input{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-s3-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -496,9 +496,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// Test that GzipLevel can be set for an endpoint where CompressionCodec
 	// was set at creation time.
-	record(t, "s3s/update3", func(c *Client) {
+	Record(t, "s3s/update3", func(c *Client) {
 		s3UpdateResp3, err = c.UpdateS3(&UpdateS3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3-3",
 			GzipLevel:      ToPointer(9),
@@ -510,9 +510,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// Test that a configuration using an access key/secret key can be
 	// updated to use IAM role.
-	record(t, "s3s/update4", func(c *Client) {
+	Record(t, "s3s/update4", func(c *Client) {
 		s3UpdateResp4, err = c.UpdateS3(&UpdateS3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-s3",
 			AccessKey:      ToPointer(""),
@@ -526,9 +526,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// Test that a configuration using an IAM role can be updated to use
 	// access key/secret key.
-	record(t, "s3s/update5", func(c *Client) {
+	Record(t, "s3s/update5", func(c *Client) {
 		s3UpdateResp5, err = c.UpdateS3(&UpdateS3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3-4",
 			AccessKey:      ToPointer("AKIAIOSFODNN7EXAMPLE"),
@@ -542,9 +542,9 @@ func TestClient_S3s(t *testing.T) {
 
 	// Test that an invalid IAM role ARN is rejected. This case is expected
 	// to fail.
-	record(t, "s3s/update6", func(c *Client) {
+	Record(t, "s3s/update6", func(c *Client) {
 		_, err = c.UpdateS3(&UpdateS3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-s3",
 			IAMRole:        ToPointer("badarn"),
@@ -601,9 +601,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "s3s/delete", func(c *Client) {
+	Record(t, "s3s/delete", func(c *Client) {
 		err = c.DeleteS3(&DeleteS3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-s3",
 		})
@@ -616,14 +616,14 @@ func TestClient_S3s(t *testing.T) {
 func TestClient_ListS3s_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.ListS3s(&ListS3sInput{
+	_, err = TestClient.ListS3s(&ListS3sInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListS3s(&ListS3sInput{
+	_, err = TestClient.ListS3s(&ListS3sInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -635,7 +635,7 @@ func TestClient_ListS3s_validation(t *testing.T) {
 func TestClient_CreateS3_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.CreateS3(&CreateS3Input{
+	_, err = TestClient.CreateS3(&CreateS3Input{
 		Name:                         ToPointer("test-service"),
 		ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
 		ServerSideEncryptionKMSKeyID: ToPointer("1234"),
@@ -645,7 +645,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateS3(&CreateS3Input{
+	_, err = TestClient.CreateS3(&CreateS3Input{
 		Name:                         ToPointer("test-service"),
 		ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
 		ServerSideEncryptionKMSKeyID: ToPointer("1234"),
@@ -655,7 +655,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateS3(&CreateS3Input{
+	_, err = TestClient.CreateS3(&CreateS3Input{
 		Name:                         ToPointer("test-service"),
 		ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
 		ServerSideEncryptionKMSKeyID: ToPointer(""),
@@ -670,7 +670,7 @@ func TestClient_CreateS3_validation(t *testing.T) {
 func TestClient_GetS3_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetS3(&GetS3Input{
+	_, err = TestClient.GetS3(&GetS3Input{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -678,7 +678,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetS3(&GetS3Input{
+	_, err = TestClient.GetS3(&GetS3Input{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -686,7 +686,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetS3(&GetS3Input{
+	_, err = TestClient.GetS3(&GetS3Input{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -698,7 +698,7 @@ func TestClient_GetS3_validation(t *testing.T) {
 func TestClient_UpdateS3_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateS3(&UpdateS3Input{
+	_, err = TestClient.UpdateS3(&UpdateS3Input{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -706,7 +706,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateS3(&UpdateS3Input{
+	_, err = TestClient.UpdateS3(&UpdateS3Input{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -714,7 +714,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateS3(&UpdateS3Input{
+	_, err = TestClient.UpdateS3(&UpdateS3Input{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -722,7 +722,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateS3(&UpdateS3Input{
+	_, err = TestClient.UpdateS3(&UpdateS3Input{
 		Name:                         "test-service",
 		ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
 		ServerSideEncryptionKMSKeyID: ToPointer(""),
@@ -737,7 +737,7 @@ func TestClient_UpdateS3_validation(t *testing.T) {
 func TestClient_DeleteS3_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteS3(&DeleteS3Input{
+	err = TestClient.DeleteS3(&DeleteS3Input{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -745,7 +745,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteS3(&DeleteS3Input{
+	err = TestClient.DeleteS3(&DeleteS3Input{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -753,7 +753,7 @@ func TestClient_DeleteS3_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteS3(&DeleteS3Input{
+	err = TestClient.DeleteS3(&DeleteS3Input{
 		Name:      "test",
 		ServiceID: "foo",
 	})

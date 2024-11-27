@@ -13,15 +13,15 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "blobstorages/version", func(c *Client) {
+	Record(t, "blobstorages/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
 	var bsCreateResp1, bsCreateResp2, bsCreateResp3 *BlobStorage
-	record(t, "blobstorages/create", func(c *Client) {
+	Record(t, "blobstorages/create", func(c *Client) {
 		bsCreateResp1, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-blobstorage"),
 			Path:             ToPointer("/logs"),
@@ -43,9 +43,9 @@ func TestClient_BlobStorages(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "blobstorages/create2", func(c *Client) {
+	Record(t, "blobstorages/create2", func(c *Client) {
 		bsCreateResp2, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:       testDeliveryServiceID,
+			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-blobstorage-2"),
 			Path:            ToPointer("/logs"),
@@ -67,9 +67,9 @@ func TestClient_BlobStorages(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "blobstorages/create3", func(c *Client) {
+	Record(t, "blobstorages/create3", func(c *Client) {
 		bsCreateResp3, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-blobstorage-3"),
 			Path:             ToPointer("/logs"),
@@ -92,9 +92,9 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
-	record(t, "blobstorages/create4", func(c *Client) {
+	Record(t, "blobstorages/create4", func(c *Client) {
 		_, err = c.CreateBlobStorage(&CreateBlobStorageInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-blobstorage-4"),
 			Path:             ToPointer("/logs"),
@@ -119,27 +119,27 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "blobstorages/cleanup", func(c *Client) {
+		Record(t, "blobstorages/cleanup", func(c *Client) {
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-blobstorage",
 			})
 
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-blobstorage-2",
 			})
 
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-blobstorage-3",
 			})
 
 			_ = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-blobstorage",
 			})
@@ -212,9 +212,9 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	// List
 	var bsl []*BlobStorage
-	record(t, "blobstorages/list", func(c *Client) {
+	Record(t, "blobstorages/list", func(c *Client) {
 		bsl, err = c.ListBlobStorages(&ListBlobStoragesInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -227,9 +227,9 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	// Get
 	var bsGetResp *BlobStorage
-	record(t, "blobstorages/get", func(c *Client) {
+	Record(t, "blobstorages/get", func(c *Client) {
 		bsGetResp, err = c.GetBlobStorage(&GetBlobStorageInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-blobstorage",
 		})
@@ -282,9 +282,9 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	// Update
 	var bsUpdateResp1, bsUpdateResp2, bsUpdateResp3 *BlobStorage
-	record(t, "blobstorages/update", func(c *Client) {
+	Record(t, "blobstorages/update", func(c *Client) {
 		bsUpdateResp1, err = c.UpdateBlobStorage(&UpdateBlobStorageInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-blobstorage",
 			NewName:          ToPointer("new-test-blobstorage"),
@@ -298,9 +298,9 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	// Test that CompressionCodec can be set for a an endpoint where
 	// GzipLevel was specified at creation time.
-	record(t, "blobstorages/update2", func(c *Client) {
+	Record(t, "blobstorages/update2", func(c *Client) {
 		bsUpdateResp2, err = c.UpdateBlobStorage(&UpdateBlobStorageInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-blobstorage-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -312,9 +312,9 @@ func TestClient_BlobStorages(t *testing.T) {
 
 	// Test that GzipLevel can be set for an endpoint where CompressionCodec
 	// was set at creation time.
-	record(t, "blobstorages/update3", func(c *Client) {
+	Record(t, "blobstorages/update3", func(c *Client) {
 		bsUpdateResp3, err = c.UpdateBlobStorage(&UpdateBlobStorageInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-blobstorage-3",
 			GzipLevel:      ToPointer(9),
@@ -347,9 +347,9 @@ func TestClient_BlobStorages(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "blobstorages/delete", func(c *Client) {
+	Record(t, "blobstorages/delete", func(c *Client) {
 		err = c.DeleteBlobStorage(&DeleteBlobStorageInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-blobstorage",
 		})
@@ -362,14 +362,14 @@ func TestClient_BlobStorages(t *testing.T) {
 func TestClient_ListBlobStorages_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.ListBlobStorages(&ListBlobStoragesInput{
+	_, err = TestClient.ListBlobStorages(&ListBlobStoragesInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListBlobStorages(&ListBlobStoragesInput{
+	_, err = TestClient.ListBlobStorages(&ListBlobStoragesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -381,14 +381,14 @@ func TestClient_ListBlobStorages_validation(t *testing.T) {
 func TestClient_CreateBlobStorage_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.CreateBlobStorage(&CreateBlobStorageInput{
+	_, err = TestClient.CreateBlobStorage(&CreateBlobStorageInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateBlobStorage(&CreateBlobStorageInput{
+	_, err = TestClient.CreateBlobStorage(&CreateBlobStorageInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -400,7 +400,7 @@ func TestClient_CreateBlobStorage_validation(t *testing.T) {
 func TestClient_GetBlobStorage_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
+	_, err = TestClient.GetBlobStorage(&GetBlobStorageInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -408,7 +408,7 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
+	_, err = TestClient.GetBlobStorage(&GetBlobStorageInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -416,7 +416,7 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetBlobStorage(&GetBlobStorageInput{
+	_, err = TestClient.GetBlobStorage(&GetBlobStorageInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -428,7 +428,7 @@ func TestClient_GetBlobStorage_validation(t *testing.T) {
 func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
+	_, err = TestClient.UpdateBlobStorage(&UpdateBlobStorageInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -436,7 +436,7 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
+	_, err = TestClient.UpdateBlobStorage(&UpdateBlobStorageInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -444,7 +444,7 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateBlobStorage(&UpdateBlobStorageInput{
+	_, err = TestClient.UpdateBlobStorage(&UpdateBlobStorageInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -456,7 +456,7 @@ func TestClient_UpdateBlobStorage_validation(t *testing.T) {
 func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
+	err = TestClient.DeleteBlobStorage(&DeleteBlobStorageInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -464,7 +464,7 @@ func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
+	err = TestClient.DeleteBlobStorage(&DeleteBlobStorageInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -472,7 +472,7 @@ func TestClient_DeleteBlobStorage_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteBlobStorage(&DeleteBlobStorageInput{
+	err = TestClient.DeleteBlobStorage(&DeleteBlobStorageInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

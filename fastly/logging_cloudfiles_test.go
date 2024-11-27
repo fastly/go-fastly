@@ -9,15 +9,15 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "cloudfiles/version", func(c *Client) {
+	Record(t, "cloudfiles/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
 	var cloudfilesCreateResp1, cloudfilesCreateResp2, cloudfilesCreateResp3 *Cloudfiles
-	record(t, "cloudfiles/create", func(c *Client) {
+	Record(t, "cloudfiles/create", func(c *Client) {
 		cloudfilesCreateResp1, err = c.CreateCloudfiles(&CreateCloudfilesInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles"),
 			User:             ToPointer("user"),
@@ -39,9 +39,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "cloudfiles/create2", func(c *Client) {
+	Record(t, "cloudfiles/create2", func(c *Client) {
 		cloudfilesCreateResp2, err = c.CreateCloudfiles(&CreateCloudfilesInput{
-			ServiceID:       testDeliveryServiceID,
+			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-cloudfiles-2"),
 			User:            ToPointer("user"),
@@ -63,9 +63,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "cloudfiles/create3", func(c *Client) {
+	Record(t, "cloudfiles/create3", func(c *Client) {
 		cloudfilesCreateResp3, err = c.CreateCloudfiles(&CreateCloudfilesInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles-3"),
 			User:             ToPointer("user"),
@@ -89,9 +89,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
-	record(t, "cloudfiles/create4", func(c *Client) {
+	Record(t, "cloudfiles/create4", func(c *Client) {
 		_, err = c.CreateCloudfiles(&CreateCloudfilesInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-cloudfiles-4"),
 			User:             ToPointer("user"),
@@ -116,27 +116,27 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "cloudfiles/cleanup", func(c *Client) {
+		Record(t, "cloudfiles/cleanup", func(c *Client) {
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles",
 			})
 
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles-2",
 			})
 
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-cloudfiles-3",
 			})
 
 			_ = c.DeleteCloudfiles(&DeleteCloudfilesInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-cloudfiles",
 			})
@@ -200,9 +200,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	// List
 	var lc []*Cloudfiles
-	record(t, "cloudfiles/list", func(c *Client) {
+	Record(t, "cloudfiles/list", func(c *Client) {
 		lc, err = c.ListCloudfiles(&ListCloudfilesInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -215,9 +215,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	// Get
 	var cloudfilesGetResp *Cloudfiles
-	record(t, "cloudfiles/get", func(c *Client) {
+	Record(t, "cloudfiles/get", func(c *Client) {
 		cloudfilesGetResp, err = c.GetCloudfiles(&GetCloudfilesInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles",
 		})
@@ -273,9 +273,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 	// Update
 	var cloudfilesUpdateResp1, cloudfilesUpdateResp2, cloudfilesUpdateResp3 *Cloudfiles
-	record(t, "cloudfiles/update", func(c *Client) {
+	Record(t, "cloudfiles/update", func(c *Client) {
 		cloudfilesUpdateResp1, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles",
 			NewName:          ToPointer("new-test-cloudfiles"),
@@ -289,9 +289,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "cloudfiles/update2", func(c *Client) {
+	Record(t, "cloudfiles/update2", func(c *Client) {
 		cloudfilesUpdateResp2, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
-			ServiceID:        testDeliveryServiceID,
+			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-cloudfiles-2",
 			CompressionCodec: ToPointer("zstd"),
@@ -301,9 +301,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, "cloudfiles/update3", func(c *Client) {
+	Record(t, "cloudfiles/update3", func(c *Client) {
 		cloudfilesUpdateResp3, err = c.UpdateCloudfiles(&UpdateCloudfilesInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-cloudfiles-3",
 			GzipLevel:      ToPointer(9),
@@ -348,9 +348,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "cloudfiles/delete", func(c *Client) {
+	Record(t, "cloudfiles/delete", func(c *Client) {
 		err = c.DeleteCloudfiles(&DeleteCloudfilesInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-cloudfiles",
 		})
@@ -362,14 +362,14 @@ func TestClient_Cloudfiles(t *testing.T) {
 
 func TestClient_ListCloudfiles_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListCloudfiles(&ListCloudfilesInput{
+	_, err = TestClient.ListCloudfiles(&ListCloudfilesInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListCloudfiles(&ListCloudfilesInput{
+	_, err = TestClient.ListCloudfiles(&ListCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -380,14 +380,14 @@ func TestClient_ListCloudfiles_validation(t *testing.T) {
 
 func TestClient_CreateCloudfiles_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateCloudfiles(&CreateCloudfilesInput{
+	_, err = TestClient.CreateCloudfiles(&CreateCloudfilesInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateCloudfiles(&CreateCloudfilesInput{
+	_, err = TestClient.CreateCloudfiles(&CreateCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -399,7 +399,7 @@ func TestClient_CreateCloudfiles_validation(t *testing.T) {
 func TestClient_GetCloudfiles_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
+	_, err = TestClient.GetCloudfiles(&GetCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -407,7 +407,7 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
+	_, err = TestClient.GetCloudfiles(&GetCloudfilesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -415,7 +415,7 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetCloudfiles(&GetCloudfilesInput{
+	_, err = TestClient.GetCloudfiles(&GetCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -427,7 +427,7 @@ func TestClient_GetCloudfiles_validation(t *testing.T) {
 func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
+	_, err = TestClient.UpdateCloudfiles(&UpdateCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -435,7 +435,7 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
+	_, err = TestClient.UpdateCloudfiles(&UpdateCloudfilesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -443,7 +443,7 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateCloudfiles(&UpdateCloudfilesInput{
+	_, err = TestClient.UpdateCloudfiles(&UpdateCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -455,7 +455,7 @@ func TestClient_UpdateCloudfiles_validation(t *testing.T) {
 func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
+	err = TestClient.DeleteCloudfiles(&DeleteCloudfilesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -463,7 +463,7 @@ func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
+	err = TestClient.DeleteCloudfiles(&DeleteCloudfilesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -471,7 +471,7 @@ func TestClient_DeleteCloudfiles_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteCloudfiles(&DeleteCloudfilesInput{
+	err = TestClient.DeleteCloudfiles(&DeleteCloudfilesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

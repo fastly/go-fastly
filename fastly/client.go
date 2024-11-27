@@ -651,8 +651,8 @@ func checkResp(resp *http.Response, err error) (*http.Response, error) {
 	}
 }
 
-// decodeBodyMap is used to decode an HTTP response body into a mapstructure struct.
-func decodeBodyMap(body io.Reader, out any) error {
+// DecodeBodyMap is used to decode an HTTP response body into a mapstructure struct.
+func DecodeBodyMap(body io.Reader, out any) error {
 	var parsed any
 	dec := json.NewDecoder(body)
 	if err := dec.Decode(&parsed); err != nil {

@@ -9,16 +9,16 @@ func TestClient_HTTP3(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "http3/version", func(c *Client) {
+	Record(t, "http3/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Enable HTTP3
 	var h *HTTP3
-	record(t, "http3/enable", func(c *Client) {
+	Record(t, "http3/enable", func(c *Client) {
 		h, err = c.EnableHTTP3(&EnableHTTP3Input{
 			FeatureRevision: ToPointer(1),
-			ServiceID:       testDeliveryServiceID,
+			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 		})
 	})
@@ -32,9 +32,9 @@ func TestClient_HTTP3(t *testing.T) {
 
 	// Get HTTP3 status
 	var gh *HTTP3
-	record(t, "http3/get", func(c *Client) {
+	Record(t, "http3/get", func(c *Client) {
 		gh, err = c.GetHTTP3(&GetHTTP3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -47,9 +47,9 @@ func TestClient_HTTP3(t *testing.T) {
 	}
 
 	// Disable HTTP3
-	record(t, "http3/disable", func(c *Client) {
+	Record(t, "http3/disable", func(c *Client) {
 		err = c.DisableHTTP3(&DisableHTTP3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -58,9 +58,9 @@ func TestClient_HTTP3(t *testing.T) {
 	}
 
 	// Get HTTP3 status again to check disabled
-	record(t, "http3/get-disabled", func(c *Client) {
+	Record(t, "http3/get-disabled", func(c *Client) {
 		gh, err = c.GetHTTP3(&GetHTTP3Input{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -75,14 +75,14 @@ func TestClient_HTTP3(t *testing.T) {
 func TestClient_GetHTTP3_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetHTTP3(&GetHTTP3Input{
+	_, err = TestClient.GetHTTP3(&GetHTTP3Input{
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetHTTP3(&GetHTTP3Input{
+	_, err = TestClient.GetHTTP3(&GetHTTP3Input{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {
@@ -92,14 +92,14 @@ func TestClient_GetHTTP3_validation(t *testing.T) {
 
 func TestClient_CreateHTTP3_validation(t *testing.T) {
 	var err error
-	_, err = testClient.EnableHTTP3(&EnableHTTP3Input{
+	_, err = TestClient.EnableHTTP3(&EnableHTTP3Input{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.EnableHTTP3(&EnableHTTP3Input{
+	_, err = TestClient.EnableHTTP3(&EnableHTTP3Input{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -111,14 +111,14 @@ func TestClient_CreateHTTP3_validation(t *testing.T) {
 func TestClient_DeleteHTTP3_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DisableHTTP3(&DisableHTTP3Input{
+	err = TestClient.DisableHTTP3(&DisableHTTP3Input{
 		ServiceVersion: 1,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DisableHTTP3(&DisableHTTP3Input{
+	err = TestClient.DisableHTTP3(&DisableHTTP3Input{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingServiceVersion {

@@ -49,7 +49,7 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	defer resp.Body.Close()
 
 	var pubsubs []*Pubsub
-	if err := decodeBodyMap(resp.Body, &pubsubs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &pubsubs); err != nil {
 		return nil, err
 	}
 	return pubsubs, nil
@@ -100,7 +100,7 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	defer resp.Body.Close()
 
 	var pubsub *Pubsub
-	if err := decodeBodyMap(resp.Body, &pubsub); err != nil {
+	if err := DecodeBodyMap(resp.Body, &pubsub); err != nil {
 		return nil, err
 	}
 	return pubsub, nil
@@ -136,7 +136,7 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	defer resp.Body.Close()
 
 	var b *Pubsub
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -192,7 +192,7 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	defer resp.Body.Close()
 
 	var b *Pubsub
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -228,7 +228,7 @@ func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

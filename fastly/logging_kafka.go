@@ -58,7 +58,7 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	defer resp.Body.Close()
 
 	var k []*Kafka
-	if err := decodeBodyMap(resp.Body, &k); err != nil {
+	if err := DecodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	return k, nil
@@ -127,7 +127,7 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 	defer resp.Body.Close()
 
 	var k *Kafka
-	if err := decodeBodyMap(resp.Body, &k); err != nil {
+	if err := DecodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	return k, nil
@@ -163,7 +163,7 @@ func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
 	defer resp.Body.Close()
 
 	var k *Kafka
-	if err := decodeBodyMap(resp.Body, &k); err != nil {
+	if err := DecodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	return k, nil
@@ -237,7 +237,7 @@ func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
 	defer resp.Body.Close()
 
 	var k *Kafka
-	if err := decodeBodyMap(resp.Body, &k); err != nil {
+	if err := DecodeBodyMap(resp.Body, &k); err != nil {
 		return nil, err
 	}
 	return k, nil
@@ -273,7 +273,7 @@ func (c *Client) DeleteKafka(i *DeleteKafkaInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

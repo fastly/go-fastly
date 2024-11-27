@@ -109,7 +109,7 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	defer resp.Body.Close()
 
 	var s3s []*S3
-	if err := decodeBodyMap(resp.Body, &s3s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s3s); err != nil {
 		return nil, err
 	}
 	return s3s, nil
@@ -190,7 +190,7 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	defer resp.Body.Close()
 
 	var s3 *S3
-	if err := decodeBodyMap(resp.Body, &s3); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s3); err != nil {
 		return nil, err
 	}
 	return s3, nil
@@ -226,7 +226,7 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	defer resp.Body.Close()
 
 	var s3 *S3
-	if err := decodeBodyMap(resp.Body, &s3); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s3); err != nil {
 		return nil, err
 	}
 	return s3, nil
@@ -312,7 +312,7 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	defer resp.Body.Close()
 
 	var s3 *S3
-	if err := decodeBodyMap(resp.Body, &s3); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s3); err != nil {
 		return nil, err
 	}
 	return s3, nil
@@ -348,7 +348,7 @@ func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

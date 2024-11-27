@@ -29,7 +29,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	var err error
 
 	var rulesResp *WAFActiveRuleResponse
-	record(t, fixtureBase+"/list_empty", func(c *Client) {
+	Record(t, fixtureBase+"/list_empty", func(c *Client) {
 		rulesResp, err = c.ListWAFActiveRules(&ListWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -44,7 +44,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 
 	rulesIn := buildWAFRules("log")
 	var rulesOut []*WAFActiveRule
-	record(t, fixtureBase+"/create", func(c *Client) {
+	Record(t, fixtureBase+"/create", func(c *Client) {
 		rulesOut, err = c.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -59,7 +59,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 		t.Errorf("expected 0 waf version: got %d", len(rulesOut))
 	}
 
-	record(t, fixtureBase+"/list_not_empty", func(c *Client) {
+	Record(t, fixtureBase+"/list_not_empty", func(c *Client) {
 		rulesResp, err = c.ListWAFActiveRules(&ListWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -81,7 +81,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	}
 
 	rulesIn = buildWAFRules("block")
-	record(t, fixtureBase+"/update", func(c *Client) {
+	Record(t, fixtureBase+"/update", func(c *Client) {
 		rulesOut, err = c.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -96,7 +96,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 		t.Errorf("expected 0 waf version: got %d", len(rulesOut))
 	}
 
-	record(t, fixtureBase+"/list_not_empty2", func(c *Client) {
+	Record(t, fixtureBase+"/list_not_empty2", func(c *Client) {
 		rulesResp, err = c.ListWAFActiveRules(&ListWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -120,7 +120,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 	rules := []*WAFActiveRule{{
 		ModSecID: 1010070,
 	}}
-	record(t, fixtureBase+"/delete_one", func(c *Client) {
+	Record(t, fixtureBase+"/delete_one", func(c *Client) {
 		rulesOut, err = c.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -132,7 +132,7 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, fixtureBase+"/list_after_delete", func(c *Client) {
+	Record(t, fixtureBase+"/list_after_delete", func(c *Client) {
 		rulesResp, err = c.ListWAFActiveRules(&ListWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -148,14 +148,14 @@ func TestClient_WAF_Active_Rules(t *testing.T) {
 
 func TestClient_ListWAFActiveRules_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListWAFActiveRules(&ListWAFActiveRulesInput{
+	_, err = TestClient.ListWAFActiveRules(&ListWAFActiveRulesInput{
 		WAFID: "",
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListWAFActiveRules(&ListWAFActiveRulesInput{
+	_, err = TestClient.ListWAFActiveRules(&ListWAFActiveRulesInput{
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
@@ -166,14 +166,14 @@ func TestClient_ListWAFActiveRules_validation(t *testing.T) {
 
 func TestClient_ListAllWAFActiveRules_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListAllWAFActiveRules(&ListAllWAFActiveRulesInput{
+	_, err = TestClient.ListAllWAFActiveRules(&ListAllWAFActiveRulesInput{
 		WAFID: "",
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListAllWAFActiveRules(&ListAllWAFActiveRulesInput{
+	_, err = TestClient.ListAllWAFActiveRules(&ListAllWAFActiveRulesInput{
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
@@ -184,14 +184,14 @@ func TestClient_ListAllWAFActiveRules_validation(t *testing.T) {
 
 func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
+	_, err = TestClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
 		WAFID: "",
 	})
 	if err != ErrMissingWAFID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
+	_, err = TestClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
@@ -199,7 +199,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
+	_, err = TestClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
 		WAFID:            "1",
 		WAFVersionNumber: 1,
 		Rules:            []*WAFActiveRule{},
@@ -211,7 +211,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 
 func TestClient_BatchModificationWAFActiveRules_validation(t *testing.T) {
 	var err error
-	_, err = testClient.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{})
+	_, err = TestClient.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{})
 	if err == nil {
 		t.Errorf("error expected")
 	}
@@ -220,7 +220,7 @@ func TestClient_BatchModificationWAFActiveRules_validation(t *testing.T) {
 	for i := 0; i <= BatchModifyMaximumOperations; i++ {
 		rules = append(rules, &WAFActiveRule{})
 	}
-	_, err = testClient.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
+	_, err = TestClient.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
 		Rules: rules,
 	})
 	if err != ErrMaxExceededRules {
@@ -230,7 +230,7 @@ func TestClient_BatchModificationWAFActiveRules_validation(t *testing.T) {
 
 func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 	var err error
-	err = testClient.DeleteWAFActiveRules(&DeleteWAFActiveRulesInput{
+	err = TestClient.DeleteWAFActiveRules(&DeleteWAFActiveRulesInput{
 		WAFID: "",
 	})
 
@@ -238,7 +238,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteWAFActiveRules(&DeleteWAFActiveRulesInput{
+	err = TestClient.DeleteWAFActiveRules(&DeleteWAFActiveRulesInput{
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
@@ -247,7 +247,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteWAFActiveRules(&DeleteWAFActiveRulesInput{
+	err = TestClient.DeleteWAFActiveRules(&DeleteWAFActiveRulesInput{
 		WAFID:            "1",
 		WAFVersionNumber: 1,
 		Rules:            []*WAFActiveRule{},

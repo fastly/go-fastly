@@ -113,7 +113,7 @@ func MakePackagePath(serviceID string, serviceVersion int) (string, error) {
 // PopulatePackage encapsulates the decoding of returned package data.
 func PopulatePackage(body io.ReadCloser) (*Package, error) {
 	var p *Package
-	if err := decodeBodyMap(body, &p); err != nil {
+	if err := DecodeBodyMap(body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil

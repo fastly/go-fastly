@@ -71,9 +71,9 @@ func TestClient_PurgeKey(t *testing.T) {
 
 	var err error
 	var purge *Purge
-	record(t, "purges/purge_by_key", func(c *Client) {
+	Record(t, "purges/purge_by_key", func(c *Client) {
 		purge, err = c.PurgeKey(&PurgeKeyInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			Key:       "foo",
 		})
 	})
@@ -94,9 +94,9 @@ func TestClient_PurgeKeys(t *testing.T) {
 
 	var err error
 	var purges map[string]string
-	record(t, "purges/purge_by_keys", func(c *Client) {
+	Record(t, "purges/purge_by_keys", func(c *Client) {
 		purges, err = c.PurgeKeys(&PurgeKeysInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			Keys:      []string{"foo", "bar", "baz"},
 		})
 	})
@@ -114,9 +114,9 @@ func TestClient_PurgeAll(t *testing.T) {
 
 	var err error
 	var purge *Purge
-	record(t, "purges/purge_all", func(c *Client) {
+	Record(t, "purges/purge_all", func(c *Client) {
 		purge, err = c.PurgeAll(&PurgeAllInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 		})
 	})
 	if err != nil {

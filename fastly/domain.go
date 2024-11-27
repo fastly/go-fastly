@@ -45,7 +45,7 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	defer resp.Body.Close()
 
 	var ds []*Domain
-	if err := decodeBodyMap(resp.Body, &ds); err != nil {
+	if err := DecodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
 	return ds, nil
@@ -81,7 +81,7 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	defer resp.Body.Close()
 
 	var d *Domain
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -118,7 +118,7 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	defer resp.Body.Close()
 
 	var d *Domain
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -159,7 +159,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	defer resp.Body.Close()
 
 	var d *Domain
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil

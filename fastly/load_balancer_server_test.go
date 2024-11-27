@@ -7,18 +7,18 @@ import (
 func TestClient_Servers(t *testing.T) {
 	var err error
 	var tv *Version
-	record(t, "servers/version", func(c *Client) {
+	Record(t, "servers/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
-	testPool := createTestPool(t, "servers/create_pool", testDeliveryServiceID, *tv.Number, "servers22")
+	testPool := createTestPool(t, "servers/create_pool", TestDeliveryServiceID, *tv.Number, "servers22")
 
 	// Create
 	var server *Server
 	var altServer *Server
-	record(t, "servers/create", func(c *Client) {
+	Record(t, "servers/create", func(c *Client) {
 		server, err = c.CreateServer(&CreateServerInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Address:   ToPointer("127.0.0.1"),
 		})
@@ -28,7 +28,7 @@ func TestClient_Servers(t *testing.T) {
 
 		// additional pool server for DeleteServer usage
 		altServer, err = c.CreateServer(&CreateServerInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Address:   ToPointer("altserver.example.com"),
 		})
@@ -42,10 +42,10 @@ func TestClient_Servers(t *testing.T) {
 		// Delete the pool from this version.
 		deleteTestPool(t, testPool, "servers/delete_pool")
 
-		record(t, "servers/cleanup", func(c *Client) {
+		Record(t, "servers/cleanup", func(c *Client) {
 			// Expected to fail as this was explicitly deleted in the test.
 			_ = c.DeleteServer(&DeleteServerInput{
-				ServiceID: testDeliveryServiceID,
+				ServiceID: TestDeliveryServiceID,
 				PoolID:    *testPool.PoolID,
 				Server:    *altServer.ServerID,
 			})
@@ -54,14 +54,14 @@ func TestClient_Servers(t *testing.T) {
 			// the pool. The pool is deleted from this version but it still
 			// exists as it may be associated with other versions.
 			_ = c.DeleteServer(&DeleteServerInput{
-				ServiceID: testDeliveryServiceID,
+				ServiceID: TestDeliveryServiceID,
 				PoolID:    *testPool.PoolID,
 				Server:    *server.ServerID,
 			})
 		})
 	}()
 
-	if *server.ServiceID != testDeliveryServiceID {
+	if *server.ServiceID != TestDeliveryServiceID {
 		t.Errorf("bad server service: %q", *server.ServiceID)
 	}
 	if *server.PoolID != *testPool.PoolID {
@@ -73,9 +73,9 @@ func TestClient_Servers(t *testing.T) {
 
 	// List
 	var ss []*Server
-	record(t, "servers/list", func(c *Client) {
+	Record(t, "servers/list", func(c *Client) {
 		ss, err = c.ListServers(&ListServersInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 		})
 	})
@@ -88,9 +88,9 @@ func TestClient_Servers(t *testing.T) {
 
 	// Get
 	var ns *Server
-	record(t, "servers/get", func(c *Client) {
+	Record(t, "servers/get", func(c *Client) {
 		ns, err = c.GetServer(&GetServerInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Server:    *server.ServerID,
 		})
@@ -104,9 +104,9 @@ func TestClient_Servers(t *testing.T) {
 
 	// Update
 	var us *Server
-	record(t, "servers/update", func(c *Client) {
+	Record(t, "servers/update", func(c *Client) {
 		us, err = c.UpdateServer(&UpdateServerInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Server:    *server.ServerID,
 			Address:   ToPointer("0.0.0.0"),
@@ -124,9 +124,9 @@ func TestClient_Servers(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "servers/delete", func(c *Client) {
+	Record(t, "servers/delete", func(c *Client) {
 		err = c.DeleteServer(&DeleteServerInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			PoolID:    *testPool.PoolID,
 			Server:    *altServer.ServerID,
 		})
@@ -139,14 +139,14 @@ func TestClient_Servers(t *testing.T) {
 func TestClient_ListServers_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.ListServers(&ListServersInput{
+	_, err = TestClient.ListServers(&ListServersInput{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 
-	_, err = testClient.ListServers(&ListServersInput{
+	_, err = TestClient.ListServers(&ListServersInput{
 		PoolID: "123",
 	})
 	if err != ErrMissingServiceID {
@@ -157,14 +157,14 @@ func TestClient_ListServers_validation(t *testing.T) {
 func TestClient_CreateServer_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.CreateServer(&CreateServerInput{
+	_, err = TestClient.CreateServer(&CreateServerInput{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingPoolID {
 		t.Errorf("bad error: %q", err)
 	}
 
-	_, err = testClient.CreateServer(&CreateServerInput{
+	_, err = TestClient.CreateServer(&CreateServerInput{
 		PoolID: "123",
 	})
 	if err != ErrMissingServiceID {
@@ -175,7 +175,7 @@ func TestClient_CreateServer_validation(t *testing.T) {
 func TestClient_GetServer_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetServer(&GetServerInput{
+	_, err = TestClient.GetServer(&GetServerInput{
 		Server:    "test",
 		ServiceID: "foo",
 	})
@@ -183,7 +183,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		t.Errorf("bad error: %q", err)
 	}
 
-	_, err = testClient.GetServer(&GetServerInput{
+	_, err = TestClient.GetServer(&GetServerInput{
 		PoolID:    "bar",
 		ServiceID: "foo",
 	})
@@ -191,7 +191,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		t.Errorf("bad error: %q", err)
 	}
 
-	_, err = testClient.GetServer(&GetServerInput{
+	_, err = TestClient.GetServer(&GetServerInput{
 		PoolID: "bar",
 		Server: "test",
 	})
@@ -203,7 +203,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 func TestClient_UpdateServer_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateServer(&UpdateServerInput{
+	_, err = TestClient.UpdateServer(&UpdateServerInput{
 		Server:    "test",
 		ServiceID: "foo",
 	})
@@ -211,7 +211,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		t.Errorf("bad error: %q", err)
 	}
 
-	_, err = testClient.UpdateServer(&UpdateServerInput{
+	_, err = TestClient.UpdateServer(&UpdateServerInput{
 		PoolID:    "bar",
 		ServiceID: "foo",
 	})
@@ -219,7 +219,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		t.Errorf("bad error: %q", err)
 	}
 
-	_, err = testClient.UpdateServer(&UpdateServerInput{
+	_, err = TestClient.UpdateServer(&UpdateServerInput{
 		PoolID: "bar",
 		Server: "test",
 	})
@@ -231,7 +231,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 func TestClient_DeleteServer_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteServer(&DeleteServerInput{
+	err = TestClient.DeleteServer(&DeleteServerInput{
 		Server:    "test",
 		ServiceID: "foo",
 	})
@@ -239,7 +239,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		t.Errorf("bad error: %q", err)
 	}
 
-	err = testClient.DeleteServer(&DeleteServerInput{
+	err = TestClient.DeleteServer(&DeleteServerInput{
 		PoolID:    "bar",
 		ServiceID: "foo",
 	})
@@ -247,7 +247,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		t.Errorf("bad error: %q", err)
 	}
 
-	err = testClient.DeleteServer(&DeleteServerInput{
+	err = TestClient.DeleteServer(&DeleteServerInput{
 		PoolID: "bar",
 		Server: "test",
 	})

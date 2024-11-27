@@ -125,7 +125,7 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 	defer resp.Body.Close()
 
 	var s *Service
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -154,7 +154,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 	defer resp.Body.Close()
 
 	var s *Service
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 
@@ -190,7 +190,7 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 	defer resp.Body.Close()
 
 	var s *ServiceDetail
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 
@@ -222,7 +222,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 	defer resp.Body.Close()
 
 	var s *Service
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -249,7 +249,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
@@ -283,7 +283,7 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 	defer resp.Body.Close()
 
 	var s *Service
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 
@@ -313,7 +313,7 @@ func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsLi
 
 	var ds ServiceDomainsList
 
-	if err := decodeBodyMap(resp.Body, &ds); err != nil {
+	if err := DecodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
 

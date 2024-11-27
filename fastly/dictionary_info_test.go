@@ -21,7 +21,7 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 		info *DictionaryInfo
 	)
 
-	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
@@ -43,7 +43,7 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	record(t, fixtureBase+"get", func(c *Client) {
+	Record(t, fixtureBase+"get", func(c *Client) {
 		info, err = c.GetDictionaryInfo(&GetDictionaryInfoInput{
 			ServiceID:      *testService.ServiceID,
 			ServiceVersion: *testVersion.Number,
@@ -61,19 +61,19 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 
 func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	var err error
-	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{})
+	_, err = TestClient.GetDictionaryInfo(&GetDictionaryInfoInput{})
 	if err != ErrMissingDictionaryID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
+	_, err = TestClient.GetDictionaryInfo(&GetDictionaryInfoInput{
 		DictionaryID: "123",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetDictionaryInfo(&GetDictionaryInfoInput{
+	_, err = TestClient.GetDictionaryInfo(&GetDictionaryInfoInput{
 		DictionaryID:   "123",
 		ServiceID:      "foo",
 		ServiceVersion: 0,

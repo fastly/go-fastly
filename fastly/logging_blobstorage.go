@@ -55,7 +55,7 @@ func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, err
 	defer resp.Body.Close()
 
 	var as []*BlobStorage
-	if err := decodeBodyMap(resp.Body, &as); err != nil {
+	if err := DecodeBodyMap(resp.Body, &as); err != nil {
 		return nil, err
 	}
 	return as, nil
@@ -118,7 +118,7 @@ func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, err
 	defer resp.Body.Close()
 
 	var a *BlobStorage
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	if err := DecodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -154,7 +154,7 @@ func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 	defer resp.Body.Close()
 
 	var a *BlobStorage
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	if err := DecodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -222,7 +222,7 @@ func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, err
 	defer resp.Body.Close()
 
 	var a *BlobStorage
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	if err := DecodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -258,7 +258,7 @@ func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
