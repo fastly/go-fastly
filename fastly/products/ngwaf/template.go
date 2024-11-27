@@ -1,3 +1,4 @@
+//go:generate rm -f api.go api_test.go
 //go:generate service_linked_product
 
 package ngwaf
@@ -30,7 +31,7 @@ func (i *EnableInput) Validate() error {
 type EnableInputTestCase struct {
 	Name      string
 	Input     EnableInput
-	WantError *error
+	WantError error
 }
 
 var EnableInputTestCases = map[string][]EnableInputTestCase{
@@ -38,6 +39,12 @@ var EnableInputTestCases = map[string][]EnableInputTestCase{
 		{
 			Name:  "valid",
 			Input: EnableInput{WorkspaceID: "xyz123"},
+		},
+	},
+	"invalid": {
+		{
+			Name:      "empty WorkspaceID",
+			WantError: ErrMissingWorkspaceID,
 		},
 	},
 }
