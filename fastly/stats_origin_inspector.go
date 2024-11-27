@@ -91,7 +91,7 @@ type GetOriginMetricsInput struct {
 	End *time.Time
 	// GroupBy is the dimensions to return in the query.
 	GroupBy []string
-	// Limit is the limit of entries requested
+	// Limit specifies the maximum number of entries to be returned
 	Limit *int
 	// Hosts limits query to one or more specific origin hosts.
 	Hosts []string
