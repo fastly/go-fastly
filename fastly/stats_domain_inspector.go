@@ -117,7 +117,7 @@ type GetDomainMetricsInput struct {
 	End *time.Time
 	// GroupBy is the dimensions to return in the query.
 	GroupBy []string
-	// Limit is the limit of returned data
+	// Limit specifies the maximum number of entries to be returned
 	Limit *int
 	// Metrics is the metric to retrieve. Up to ten metrics are accepted.
 	Metrics []string

@@ -91,6 +91,8 @@ type GetOriginMetricsInput struct {
 	End *time.Time
 	// GroupBy is the dimensions to return in the query.
 	GroupBy []string
+	// Limit specifies the maximum number of entries to be returned
+	Limit *int
 	// Hosts limits query to one or more specific origin hosts.
 	Hosts []string
 	// Metrics is the metric to retrieve. Up to ten metrics are accepted.
@@ -145,6 +147,9 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 	}
 	if i.Start != nil {
 		ro.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
+	}
+	if i.Limit != nil {
+		ro.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 
 	resp, err := c.Get(path, ro)
