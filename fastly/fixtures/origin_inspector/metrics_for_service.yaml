@@ -16,7 +16,7 @@ interactions:
       Accept-Ranges:
       - bytes
       Age:
-      - "56"
+      - "0"
       Cache-Control:
       - no-store
       Content-Length:
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 26 Nov 2024 19:51:41 GMT
+      - Tue, 26 Nov 2024 20:19:08 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,13 +38,13 @@ interactions:
       Via:
       - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS, HIT
+      - MISS, MISS
       X-Cache-Hits:
-      - 0, 1
+      - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000107-CHI, cache-yul1970082-YUL
+      - cache-chi-kigq8000107-CHI, cache-yul1970076-YUL
       X-Timer:
-      - S1732650701.244207,VS0,VE1
+      - S1732652349.659616,VS0,VE223
     status: 200 OK
     code: 200
     duration: ""
