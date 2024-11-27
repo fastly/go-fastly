@@ -21,10 +21,36 @@ func Test_Enable_validation(t *testing.T) {
 			t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
 		}
 	}
+	for _, tc := range ngwaf.EnableInputTestCases["invalid"] {
+		_, err := ngwaf.Enable(fastly.TestClient, fastly.TestDeliveryServiceID, &tc.Input)
+		if tc.WantError != nil && err != tc.WantError {
+			t.Fatalf("expected '%s', got: '%s'", tc.WantError, err)
+		}
+	}
 }
 
 func Test_Disable_validation(t *testing.T) {
 	if err := ngwaf.Disable(fastly.TestClient, ""); err != fastly.ErrMissingServiceID {
 		t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
+	}
+}
+
+func Test_GetConfiguration_validation(t *testing.T) {
+	if _, err := ngwaf.GetConfiguration(fastly.TestClient, ""); err != fastly.ErrMissingServiceID {
+		t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
+	}
+}
+
+func Test_UpdateConfiguration_validation(t *testing.T) {
+	for _, tc := range ngwaf.ConfigureInputTestCases["valid"] {
+		if _, err := ngwaf.UpdateConfiguration(fastly.TestClient, "", &tc.Input); err != fastly.ErrMissingServiceID {
+			t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
+		}
+	}
+	for _, tc := range ngwaf.ConfigureInputTestCases["invalid"] {
+		_, err := ngwaf.UpdateConfiguration(fastly.TestClient, fastly.TestDeliveryServiceID, &tc.Input)
+		if tc.WantError != nil && err != tc.WantError {
+			t.Fatalf("expected '%s', got: '%s'", tc.WantError, err)
+		}
 	}
 }

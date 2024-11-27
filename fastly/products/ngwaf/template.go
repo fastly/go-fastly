@@ -38,7 +38,7 @@ var EnableInputTestCases = map[string][]EnableInputTestCase{
 	"valid": {
 		{
 			Name:  "valid",
-			Input: EnableInput{WorkspaceID: "xyz123"},
+			Input: EnableInput{WorkspaceID: fastly.TestNGWAFWorkspaceID},
 		},
 	},
 	"invalid": {
@@ -66,4 +66,21 @@ type ConfigureOutput struct {
 type ConfigureOutputNested struct {
 	WorkspaceID *string `mapstructure:"workspace_id,omitempty"`
 	TrafficRamp *string `mapstructure:"traffic_ramp,omitempty"`
+}
+
+type ConfigureInputTestCase struct {
+	Name      string
+	Input     ConfigureInput
+	WantError error
+}
+
+var ConfigureInputTestCases = map[string][]ConfigureInputTestCase{
+	"valid": {
+		{
+			Name:  "valid",
+			Input: ConfigureInput{},
+		},
+	},
+	// there are no 'invalid' cases here, as all of the fields in
+	// the ConfigureInput structure are optional
 }

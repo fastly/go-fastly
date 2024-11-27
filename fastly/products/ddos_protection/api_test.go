@@ -26,3 +26,23 @@ func Test_Disable_validation(t *testing.T) {
 		t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
 	}
 }
+
+func Test_GetConfiguration_validation(t *testing.T) {
+	if _, err := ddosprotection.GetConfiguration(fastly.TestClient, ""); err != fastly.ErrMissingServiceID {
+		t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
+	}
+}
+
+func Test_UpdateConfiguration_validation(t *testing.T) {
+	for _, tc := range ddosprotection.ConfigureInputTestCases["valid"] {
+		if _, err := ddosprotection.UpdateConfiguration(fastly.TestClient, "", &tc.Input); err != fastly.ErrMissingServiceID {
+			t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
+		}
+	}
+	for _, tc := range ddosprotection.ConfigureInputTestCases["invalid"] {
+		_, err := ddosprotection.UpdateConfiguration(fastly.TestClient, fastly.TestDeliveryServiceID, &tc.Input)
+		if tc.WantError != nil && err != tc.WantError {
+			t.Fatalf("expected '%s', got: '%s'", tc.WantError, err)
+		}
+	}
+}

@@ -62,3 +62,48 @@ func Disable(c *fastly.Client, serviceID string) error {
 
 	return nil
 }
+
+// GetConfiguration gets the configuration of the DDOS Protection product on the service.
+func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, error) {
+	if serviceID == "" {
+		return nil, fastly.ErrMissingServiceID
+	}
+
+	path := fastly.ToSafeURL("enabled-products", "ddos_protection", "services", serviceID, "configuration")
+
+	resp, err := c.Get(path, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var h *ConfigureOutput
+	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+		return nil, err
+	}
+	return h, nil
+}
+
+// UpdateConfiguration updates the configuration of the DDOS Protection product on the service.
+func UpdateConfiguration(c *fastly.Client, serviceID string, i *ConfigureInput) (*ConfigureOutput, error) {
+	if serviceID == "" {
+		return nil, fastly.ErrMissingServiceID
+	}
+	if err := i.Validate(); err != nil {
+		return nil, err
+	}
+
+	path := fastly.ToSafeURL("enabled-products", "ddos_protection", "services", serviceID, "configuration")
+
+	resp, err := c.PutJSON(path, i, nil)
+	if err != nil {
+		return nil, err
+	}
+	defer resp.Body.Close()
+
+	var h *ConfigureOutput
+	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+		return nil, err
+	}
+	return h, nil
+}
