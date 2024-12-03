@@ -10,7 +10,7 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 		return nil, fastly.ErrMissingServiceID
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "log_explorer_insights", "services", serviceID)
+	path := fastly.ToSafeURL("enabled-products", "v1", "log_explorer_insights", "services", serviceID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -31,7 +31,7 @@ func Enable(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, erro
 		return nil, fastly.ErrMissingServiceID
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "log_explorer_insights", "services", serviceID)
+	path := fastly.ToSafeURL("enabled-products", "v1", "log_explorer_insights", "services", serviceID)
 
 	resp, err := c.Put(path, nil)
 	if err != nil {
@@ -52,7 +52,7 @@ func Disable(c *fastly.Client, serviceID string) error {
 		return fastly.ErrMissingServiceID
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "log_explorer_insights", "services", serviceID)
+	path := fastly.ToSafeURL("enabled-products", "v1", "log_explorer_insights", "services", serviceID)
 
 	resp, err := c.Delete(path, nil)
 	if err != nil {

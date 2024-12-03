@@ -12,8 +12,9 @@ const FastlyPackagePath = "github.com/fastly/go-fastly/v9/fastly"
 var ClientParameter = Id("c").Op("*").Qual(FastlyPackagePath, "Client")
 
 type Generator struct {
-	ThisGenerator string
-	Package       *packages.Package
+	ThisGenerator  string
+	APIPackage     *packages.Package
+	APITestPackage *packages.Package
 }
 
 func Setup(generatorName string) (*Generator, error) {
@@ -23,7 +24,7 @@ func Setup(generatorName string) (*Generator, error) {
 
 	packageName := os.Getenv("GOPACKAGE")
 
-	cfg := &packages.Config{Mode: packages.NeedTypes | packages.NeedName}
+	cfg := &packages.Config{Mode: packages.NeedTypes | packages.NeedName, Tests: true}
 	pkgs, err := packages.Load(cfg, ".")
 	if err != nil {
 		return nil, fmt.Errorf("loading template for inspection: %w", err)
@@ -35,11 +36,14 @@ func Setup(generatorName string) (*Generator, error) {
 
 	for i, pkg := range pkgs {
 		if pkg.Name == packageName {
-			g.Package = pkgs[i]
+			g.APIPackage = pkgs[i]
+		}
+		if pkg.Name == packageName+"_test" {
+			g.APITestPackage = pkgs[i]
 		}
 	}
 
-	if g.Package == nil {
+	if g.APIPackage == nil {
 		return nil, fmt.Errorf("failure loading package '%s' from the template", packageName)
 	}
 

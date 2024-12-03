@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"go/constant"
 	"go/types"
+	"golang.org/x/tools/go/packages"
 	"os"
 )
 
@@ -12,8 +13,8 @@ func FailErr(err error) {
 	os.Exit(1)
 }
 
-func (g *Generator) GetDeclaredString(name string) (string, error) {
-	obj := g.Package.Types.Scope().Lookup(name)
+func (g *Generator) GetDeclaredString(pkg *packages.Package, name string) (string, error) {
+	obj := pkg.Types.Scope().Lookup(name)
 	if obj == nil {
 		return "", fmt.Errorf("no declaration named '%s' was found in template", name)
 	}
@@ -30,8 +31,8 @@ func (g *Generator) GetDeclaredString(name string) (string, error) {
 	return "", fmt.Errorf("declaration '%s' must be a constant string", name)
 }
 
-func (g *Generator) FindDefinedTypeStruct(name string) bool {
-	obj := g.Package.Types.Scope().Lookup(name)
+func (g *Generator) FindDefinedTypeStruct(pkg *packages.Package, name string) bool {
+	obj := pkg.Types.Scope().Lookup(name)
 	if obj == nil {
 		return false
 	}

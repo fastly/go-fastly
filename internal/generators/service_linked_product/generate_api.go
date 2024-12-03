@@ -8,7 +8,7 @@ import (
 func generate_api(g *Generator) error {
 	var err error
 
-	f := NewFile(g.base.Package.Name)
+	f := NewFile(g.base.APIPackage.Name)
 
 	g.base.Header(f)
 
@@ -16,11 +16,11 @@ func generate_api(g *Generator) error {
 
 	generateGetFunction(g, f)
 
-	generateEnableFunction(g, f, g.base.FindDefinedTypeStruct("EnableInput"))
+	generateEnableFunction(g, f, g.base.FindDefinedTypeStruct(g.base.APIPackage, "EnableInput"))
 
 	generateDisableFunction(g, f)
 
-	if g.base.FindDefinedTypeStruct("ConfigureInput") {
+	if g.base.FindDefinedTypeStruct(g.base.APIPackage, "ConfigureInput") {
 		generateGetConfigurationFunction(g, f)
 		generateUpdateConfigurationFunction(g, f)
 	}
@@ -61,7 +61,7 @@ func generateFunction(g *Generator, i *generateFunctionInput) {
 	body = append(body, If(Id("serviceID").Op("==").Lit("")).Block(Return(errReturn(Qual(generators.FastlyPackagePath, "ErrMissingServiceID"))...)))
 	body = append(body, i.inputValidator...)
 	body = append(body, Line())
-	urlComponents := []Code{Lit("enabled-products"), Lit(g.productID), Lit("services"), Id("serviceID")}
+	urlComponents := []Code{Lit("enabled-products"), Lit("v1"), Lit(g.productID), Lit("services"), Id("serviceID")}
 	urlComponents = append(urlComponents, i.urlComponents...)
 	body = append(body, Id("path").Op(":=").Qual(generators.FastlyPackagePath, "ToSafeURL").Params(urlComponents...))
 	body = append(body, Line())

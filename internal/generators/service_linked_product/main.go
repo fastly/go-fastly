@@ -20,11 +20,11 @@ func main() {
 		generators.FailErr(err)
 	}
 
-	if g.productID, err = g.base.GetDeclaredString("ProductID"); err != nil {
+	if g.productID, err = g.base.GetDeclaredString(g.base.APIPackage, "ProductID"); err != nil {
 		generators.FailErr(err)
 	}
 
-	if g.productName, err = g.base.GetDeclaredString("ProductName"); err != nil {
+	if g.productName, err = g.base.GetDeclaredString(g.base.APIPackage, "ProductName"); err != nil {
 		generators.FailErr(err)
 	}
 

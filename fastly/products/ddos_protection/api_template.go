@@ -36,24 +36,3 @@ type ConfigureOutput struct {
 type ConfigureOutputNested struct {
 	Mode *string `mapstructure:"mode"`
 }
-
-type ConfigureInputTestCase struct {
-	Name      string
-	Input     ConfigureInput
-	WantError error
-}
-
-var ConfigureInputTestCases = map[string][]ConfigureInputTestCase{
-	"valid": {
-		{
-			Name:  "valid",
-			Input: ConfigureInput{Mode: "off"},
-		},
-	},
-	"invalid": {
-		{
-			Name:      "empty Mode",
-			WantError: ErrMissingMode,
-		},
-	},
-}

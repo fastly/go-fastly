@@ -10,7 +10,7 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 		return nil, fastly.ErrMissingServiceID
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "ngwaf", "services", serviceID)
+	path := fastly.ToSafeURL("enabled-products", "v1", "ngwaf", "services", serviceID)
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -34,7 +34,7 @@ func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*fastly.Product
 		return nil, err
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "ngwaf", "services", serviceID)
+	path := fastly.ToSafeURL("enabled-products", "v1", "ngwaf", "services", serviceID)
 
 	resp, err := c.PutJSON(path, i, nil)
 	if err != nil {
@@ -55,7 +55,7 @@ func Disable(c *fastly.Client, serviceID string) error {
 		return fastly.ErrMissingServiceID
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "ngwaf", "services", serviceID)
+	path := fastly.ToSafeURL("enabled-products", "v1", "ngwaf", "services", serviceID)
 
 	resp, err := c.Delete(path, nil)
 	if err != nil {
@@ -72,7 +72,7 @@ func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, err
 		return nil, fastly.ErrMissingServiceID
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "ngwaf", "services", serviceID, "configuration")
+	path := fastly.ToSafeURL("enabled-products", "v1", "ngwaf", "services", serviceID, "configuration")
 
 	resp, err := c.Get(path, nil)
 	if err != nil {
@@ -96,7 +96,7 @@ func UpdateConfiguration(c *fastly.Client, serviceID string, i *ConfigureInput) 
 		return nil, err
 	}
 
-	path := fastly.ToSafeURL("enabled-products", "ngwaf", "services", serviceID, "configuration")
+	path := fastly.ToSafeURL("enabled-products", "v1", "ngwaf", "services", serviceID, "configuration")
 
 	resp, err := c.PutJSON(path, i, nil)
 	if err != nil {
