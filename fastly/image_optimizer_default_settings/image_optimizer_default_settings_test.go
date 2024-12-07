@@ -1,8 +1,11 @@
-package fastly
+package image_optimizer_default_settings_test
 
 import (
 	"strings"
 	"testing"
+
+	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/fastly/products/image_optimizer"
 )
 
 // TestClient_ImageOptimizerDefaultSettings tests the Image Optimizer Default Settings API
@@ -12,18 +15,15 @@ import (
 func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	t.Parallel()
 
-	fixtureBase := "image_optimizer_default_settings/"
+	fixtureBase := ""
 
-	testVersion := CreateTestVersion(t, fixtureBase+"version", TestDeliveryServiceID)
+	testVersion := fastly.CreateTestVersion(t, fixtureBase+"version", fastly.TestDeliveryServiceID)
 
 	var err error
 
 	// Enable IO
-	Record(t, fixtureBase+"enable_product", func(c *Client) {
-		_, err = c.EnableProduct(&ProductEnablementInput{
-			ProductID: ProductImageOptimizer,
-			ServiceID: TestDeliveryServiceID,
-		})
+	fastly.Record(t, fixtureBase+"enable_product", func(c *fastly.Client) {
+		_, err = image_optimizer.Enable(c, fastly.TestDeliveryServiceID)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -31,24 +31,21 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 
 	// Ensure we disable IO on the service after the test
 	defer func() {
-		Record(t, fixtureBase+"disable_product", func(c *Client) {
-			err = c.DisableProduct(&ProductEnablementInput{
-				ProductID: ProductImageOptimizer,
-				ServiceID: TestDeliveryServiceID,
-			})
-		})
+		fastly.Record(t, fixtureBase+"disable_product", func(c *fastly.Client) {
+			_, err = image_optimizer.Enable(c, fastly.TestDeliveryServiceID)
 
-		if err != nil {
-			t.Fatal(err)
-		}
+			if err != nil {
+				t.Fatal(err)
+			}
+		})
 	}()
 
-	var defaultSettings *ImageOptimizerDefaultSettings
+	var defaultSettings *fastly.ImageOptimizerDefaultSettings
 
 	// Fetch
-	Record(t, fixtureBase+"original_fetch", func(c *Client) {
-		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
-			ServiceID:      TestDeliveryServiceID,
+	fastly.Record(t, fixtureBase+"original_fetch", func(c *fastly.Client) {
+		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&fastly.GetImageOptimizerDefaultSettingsInput{
+			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -60,17 +57,17 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 
 	// Reset our settings back to the original
 	defer func() {
-		Record(t, fixtureBase+"final_reset", func(c *Client) {
+		fastly.Record(t, fixtureBase+"final_reset", func(c *fastly.Client) {
 			if originalSettings != nil {
-				_, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-					ServiceID:      TestDeliveryServiceID,
+				_, err = c.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
+					ServiceID:      fastly.TestDeliveryServiceID,
 					ServiceVersion: *testVersion.Number,
 					// just use default resizefilter & jpegtype since it doesn't matter much, and it's annoying
 					// to parse the API output strings back into enums.
-					ResizeFilter: ToPointer(ImageOptimizerNearest),
+					ResizeFilter: fastly.ToPointer(fastly.ImageOptimizerNearest),
 					Webp:         &originalSettings.Webp,
 					WebpQuality:  &originalSettings.WebpQuality,
-					JpegType:     ToPointer(ImageOptimizerAuto),
+					JpegType:     fastly.ToPointer(fastly.ImageOptimizerAuto),
 					JpegQuality:  &originalSettings.JpegQuality,
 					Upscale:      &originalSettings.Upscale,
 					AllowVideo:   &originalSettings.AllowVideo,
@@ -87,9 +84,9 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	newUpscale := false
 
 	// Change some stuff
-	Record(t, fixtureBase+"update_1_patch", func(c *Client) {
-		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      TestDeliveryServiceID,
+	fastly.Record(t, fixtureBase+"update_1_patch", func(c *fastly.Client) {
+		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
+			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Webp:           &newWebp,
 			WebpQuality:    &newWebpQuality,
@@ -111,9 +108,9 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	}
 
 	// Confirm our changes were applied permanently
-	Record(t, fixtureBase+"update_1_get", func(c *Client) {
-		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
-			ServiceID:      TestDeliveryServiceID,
+	fastly.Record(t, fixtureBase+"update_1_get", func(c *fastly.Client) {
+		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&fastly.GetImageOptimizerDefaultSettingsInput{
+			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -136,9 +133,9 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	newWebpQuality = 42
 	newUpscale = true
 
-	Record(t, fixtureBase+"update_2_patch", func(c *Client) {
-		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      TestDeliveryServiceID,
+	fastly.Record(t, fixtureBase+"update_2_patch", func(c *fastly.Client) {
+		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
+			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			Webp:           &newWebp,
 			WebpQuality:    &newWebpQuality,
@@ -160,9 +157,9 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	}
 
 	// Confirm our changes were applied permanently (again)
-	Record(t, fixtureBase+"update_2_get", func(c *Client) {
-		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
-			ServiceID:      TestDeliveryServiceID,
+	fastly.Record(t, fixtureBase+"update_2_get", func(c *fastly.Client) {
+		defaultSettings, err = c.GetImageOptimizerDefaultSettings(&fastly.GetImageOptimizerDefaultSettingsInput{
+			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 		})
 	})
@@ -183,9 +180,9 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Apply a setting that produces a server-side error, and confirm it's handled well.
 	newWebpQuality = 105
 
-	Record(t, fixtureBase+"incorrect_fetch", func(c *Client) {
-		_, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      TestDeliveryServiceID,
+	fastly.Record(t, fixtureBase+"incorrect_fetch", func(c *fastly.Client) {
+		_, err = c.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
+			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
 			WebpQuality:    &newWebpQuality,
 		})
@@ -199,10 +196,10 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	}
 
 	// Confirm all resize_filter & jpeg_type values are accepted
-	for _, resizeFilter := range []ImageOptimizerResizeFilter{ImageOptimizerLanczos3, ImageOptimizerLanczos2, ImageOptimizerBicubic, ImageOptimizerBilinear, ImageOptimizerNearest} {
-		Record(t, fixtureBase+"set_resize_filter/"+resizeFilter.String(), func(c *Client) {
-			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-				ServiceID:      TestDeliveryServiceID,
+	for _, resizeFilter := range []fastly.ImageOptimizerResizeFilter{fastly.ImageOptimizerLanczos3, fastly.ImageOptimizerLanczos2, fastly.ImageOptimizerBicubic, fastly.ImageOptimizerBilinear, fastly.ImageOptimizerNearest} {
+		fastly.Record(t, fixtureBase+"set_resize_filter/"+resizeFilter.String(), func(c *fastly.Client) {
+			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
+				ServiceID:      fastly.TestDeliveryServiceID,
 				ServiceVersion: *testVersion.Number,
 				ResizeFilter:   &resizeFilter,
 			})
@@ -212,10 +209,10 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 		}
 	}
 
-	for _, jpegType := range []ImageOptimizerJpegType{ImageOptimizerAuto, ImageOptimizerBaseline, ImageOptimizerProgressive} {
-		Record(t, fixtureBase+"set_jpeg_type/"+jpegType.String(), func(c *Client) {
-			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-				ServiceID:      TestDeliveryServiceID,
+	for _, jpegType := range []fastly.ImageOptimizerJpegType{fastly.ImageOptimizerAuto, fastly.ImageOptimizerBaseline, fastly.ImageOptimizerProgressive} {
+		fastly.Record(t, fixtureBase+"set_jpeg_type/"+jpegType.String(), func(c *fastly.Client) {
+			defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
+				ServiceID:      fastly.TestDeliveryServiceID,
 				ServiceVersion: *testVersion.Number,
 				JpegType:       &jpegType,
 			})
@@ -226,37 +223,37 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	}
 
 	// Confirm a full request is accepted - that all parameters in our library match the API's expectations
-	Record(t, fixtureBase+"set_full", func(c *Client) {
-		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
-			ServiceID:      TestDeliveryServiceID,
+	fastly.Record(t, fixtureBase+"set_full", func(c *fastly.Client) {
+		defaultSettings, err = c.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
+			ServiceID:      fastly.TestDeliveryServiceID,
 			ServiceVersion: *testVersion.Number,
-			ResizeFilter:   ToPointer(ImageOptimizerLanczos3),
-			Webp:           ToPointer(false),
-			WebpQuality:    ToPointer(85),
-			JpegType:       ToPointer(ImageOptimizerAuto),
-			JpegQuality:    ToPointer(85),
-			Upscale:        ToPointer(false),
-			AllowVideo:     ToPointer(false),
+			ResizeFilter:   fastly.ToPointer(fastly.ImageOptimizerLanczos3),
+			Webp:           fastly.ToPointer(false),
+			WebpQuality:    fastly.ToPointer(85),
+			JpegType:       fastly.ToPointer(fastly.ImageOptimizerAuto),
+			JpegQuality:    fastly.ToPointer(85),
+			Upscale:        fastly.ToPointer(false),
+			AllowVideo:     fastly.ToPointer(false),
 		})
 	})
 }
 
 func TestClient_GetImageOptimizerDefaultSettings_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
+	_, err = fastly.TestClient.GetImageOptimizerDefaultSettings(&fastly.GetImageOptimizerDefaultSettingsInput{
 		ServiceID:      "",
 		ServiceVersion: 3,
 	})
-	if err != ErrMissingServiceID {
-		t.Errorf("expected error %v; got: %v", ErrMissingServiceID, err)
+	if err != fastly.ErrMissingServiceID {
+		t.Errorf("expected error %v; got: %v", fastly.ErrMissingServiceID, err)
 	}
 
-	_, err = TestClient.GetImageOptimizerDefaultSettings(&GetImageOptimizerDefaultSettingsInput{
+	_, err = fastly.TestClient.GetImageOptimizerDefaultSettings(&fastly.GetImageOptimizerDefaultSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
-		t.Errorf("expected error %v; got: %v", ErrMissingServiceVersion, err)
+	if err != fastly.ErrMissingServiceVersion {
+		t.Errorf("expected error %v; got: %v", fastly.ErrMissingServiceVersion, err)
 	}
 }
 
@@ -264,29 +261,29 @@ func TestClient_UpdateImageOptimizerDefaultSettings_validation(t *testing.T) {
 	newUpscale := true
 
 	var err error
-	_, err = TestClient.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+	_, err = fastly.TestClient.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
 		ServiceID:      "",
 		ServiceVersion: 3,
 		Upscale:        &newUpscale,
 	})
-	if err != ErrMissingServiceID {
-		t.Errorf("expected error %v; got: %v", ErrMissingServiceID, err)
+	if err != fastly.ErrMissingServiceID {
+		t.Errorf("expected error %v; got: %v", fastly.ErrMissingServiceID, err)
 	}
 
-	_, err = TestClient.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+	_, err = fastly.TestClient.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 		Upscale:        &newUpscale,
 	})
-	if err != ErrMissingServiceVersion {
-		t.Errorf("expected error %v; got: %v", ErrMissingServiceVersion, err)
+	if err != fastly.ErrMissingServiceVersion {
+		t.Errorf("expected error %v; got: %v", fastly.ErrMissingServiceVersion, err)
 	}
 
-	_, err = TestClient.UpdateImageOptimizerDefaultSettings(&UpdateImageOptimizerDefaultSettingsInput{
+	_, err = fastly.TestClient.UpdateImageOptimizerDefaultSettings(&fastly.UpdateImageOptimizerDefaultSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 3,
 	})
-	if err != ErrMissingImageOptimizerDefaultSetting {
-		t.Errorf("expected error: %v, got: %v", ErrMissingImageOptimizerDefaultSetting, err)
+	if err != fastly.ErrMissingImageOptimizerDefaultSetting {
+		t.Errorf("expected error: %v, got: %v", fastly.ErrMissingImageOptimizerDefaultSetting, err)
 	}
 }

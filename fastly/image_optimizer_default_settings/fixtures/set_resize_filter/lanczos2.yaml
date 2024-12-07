@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"jpeg_type":"baseline"}'
+    body: '{"resize_filter":"lanczos2"}'
     form: {}
     headers:
       Accept:
@@ -10,11 +10,11 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.3.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/87/image_optimizer_default_settings
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/6/image_optimizer_default_settings
     method: PATCH
   response:
-    body: '{"resize_filter":"nearest","webp":true,"webp_quality":42,"jpeg_type":"baseline","jpeg_quality":85,"upscale":true,"allow_video":false}'
+    body: '{"resize_filter":"lanczos2","webp":true,"webp_quality":42,"jpeg_type":"auto","jpeg_quality":85,"upscale":true,"allow_video":false}'
     headers:
       Accept-Ranges:
       - bytes
@@ -23,15 +23,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 May 2024 16:16:33 GMT
+      - Sat, 07 Dec 2024 16:56:47 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "980"
       Fastly-Ratelimit-Reset:
-      - "1715706000"
+      - "1733590800"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,15 +39,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-bfi-krnt7300110-BFI
+      - cache-chi-klot8100033-CHI, cache-nyc-kteb1890026-NYC
       X-Timer:
-      - S1715703393.270782,VS0,VE295
+      - S1733590607.203404,VS0,VE243
     status: 200 OK
     code: 200
     duration: ""
