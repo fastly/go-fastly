@@ -526,7 +526,28 @@ func (e *HTTPError) String() string {
 	return e.Error()
 }
 
+// IsBadRequest returns true if the HTTP error code is a 400, false otherwise.
+func (e *HTTPError) IsBadRequest() bool {
+	return e.StatusCode == 400
+}
+
 // IsNotFound returns true if the HTTP error code is a 404, false otherwise.
 func (e *HTTPError) IsNotFound() bool {
 	return e.StatusCode == 404
+}
+
+// MatchError compares an actual error (which may be nil) against an
+// expected error. The actual error can be a wrapped or joined error.
+// The function will return true if:
+// - the actual error is nil and so is the expected error
+// - the actual error is non-nil and the expected error can be found
+// within the actual error
+func ErrorMatch(actual, expected error) bool {
+	if expected == nil && actual == nil {
+		return true
+	}
+	if expected != nil && errors.Is(actual, expected) {
+		return true
+	}
+	return false
 }

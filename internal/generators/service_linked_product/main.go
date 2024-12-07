@@ -5,9 +5,11 @@ import (
 )
 
 type Generator struct {
-	base        *generators.Generator
-	productID   string
-	productName string
+	generators.Generator
+	productID             string
+	productName           string
+	requiresEnableInput   bool
+	supportsConfiguration bool
 }
 
 func main() {
@@ -16,23 +18,32 @@ func main() {
 		g   Generator
 	)
 
-	if g.base, err = generators.Setup("service_linked_product"); err != nil {
-		generators.FailErr(err)
+	g.ThisGenerator = "service_linked_product"
+
+	if err = g.Setup(); err != nil {
+		g.FailErr(err)
 	}
 
-	if g.productID, err = g.base.GetDeclaredString(g.base.APIPackage, "ProductID"); err != nil {
-		generators.FailErr(err)
+	if g.productID, err = g.GetDeclaredString("ProductID"); err != nil {
+		g.FailErr(err)
 	}
 
-	if g.productName, err = g.base.GetDeclaredString(g.base.APIPackage, "ProductName"); err != nil {
-		generators.FailErr(err)
+	if g.productName, err = g.GetDeclaredString("ProductName"); err != nil {
+		g.FailErr(err)
 	}
 
-	if err = generate_api(&g); err != nil {
-		generators.FailErr(err)
+	g.requiresEnableInput = g.FindDefinedTypeStruct("EnableInput")
+	g.supportsConfiguration = g.FindDefinedTypeStruct("ConfigureInput")
+
+	if g.GenerateAPI {
+		if err = generate_api(&g); err != nil {
+			g.FailErr(err)
+		}
 	}
 
-	if err = generate_api_tests(&g); err != nil {
-		generators.FailErr(err)
+	if g.GenerateAPITests {
+		if err = generate_api_tests(&g); err != nil {
+			g.FailErr(err)
+		}
 	}
 }

@@ -8,6 +8,7 @@ import (
 
 	"github.com/dnaeon/go-vcr/cassette"
 	"github.com/dnaeon/go-vcr/recorder"
+	"github.com/stretchr/testify/require"
 )
 
 // TestClient is the test client.
@@ -666,4 +667,34 @@ BQADQQA/ugzBrjjK9jcWnDVfGHlk3icNRq0oV7Ri32z/+HQX67aRfgZu7KWdI+Ju
 Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 -----END CERTIFICATE-----
 `
+}
+
+type FunctionalTestInput struct {
+	Name          string
+	Operation     string
+	Execute       func(*Client) error
+	WantNoError   bool
+	WantError     error
+	CheckError    func(string, *testing.T, error)
+}
+
+func ExecuteFunctionalTests(t *testing.T, tests []*FunctionalTestInput) {
+	t.Parallel()
+
+	var err error
+
+	for _, tc := range tests {
+		Record(t, tc.Operation, func(c *Client) {
+			err = tc.Execute(c)
+		})
+		if tc.WantNoError {
+			require.NoErrorf(t, err, "test '%s'", tc.Name)
+		}
+		if tc.WantError != nil {
+			require.ErrorIsf(t, err, tc.WantError, "test '%s'", tc.Name)
+		}
+		if tc.CheckError != nil {
+			tc.CheckError(fmt.Sprintf("test '%s", tc.Name), t, err)
+		}
+	}
 }

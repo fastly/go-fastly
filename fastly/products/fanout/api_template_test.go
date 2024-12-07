@@ -1,1 +1,0 @@
-package fanout_test

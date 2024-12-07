@@ -2,10 +2,14 @@
 
 package ngwaf
 
-import fastly "github.com/fastly/go-fastly/v9/fastly"
+import (
+	"errors"
+	fastly "github.com/fastly/go-fastly/v9/fastly"
+)
 
 // Get gets the status of the Next-Gen WAF product on the service.
 func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) {
+	var err error
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
 	}
@@ -19,7 +23,7 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 	defer resp.Body.Close()
 
 	var h *fastly.ProductEnablement
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -27,11 +31,20 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 
 // Enable enables the Next-Gen WAF product on the service.
 func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*fastly.ProductEnablement, error) {
+	var err error
+	var pendingErrors []error
 	if serviceID == "" {
-		return nil, fastly.ErrMissingServiceID
+		pendingErrors = append(pendingErrors, fastly.ErrMissingServiceID)
 	}
-	if err := i.Validate(); err != nil {
-		return nil, err
+	if err = i.Validate(); err != nil {
+		pendingErrors = append(pendingErrors, err)
+	}
+	switch len(pendingErrors) {
+	case 0:
+	case 1:
+		return nil, pendingErrors[0]
+	default:
+		return nil, errors.Join(pendingErrors...)
 	}
 
 	path := fastly.ToSafeURL("enabled-products", "v1", "ngwaf", "services", serviceID)
@@ -43,7 +56,7 @@ func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*fastly.Product
 	defer resp.Body.Close()
 
 	var h *fastly.ProductEnablement
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -51,6 +64,7 @@ func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*fastly.Product
 
 // Disable disables the Next-Gen WAF product on the service.
 func Disable(c *fastly.Client, serviceID string) error {
+	var err error
 	if serviceID == "" {
 		return fastly.ErrMissingServiceID
 	}
@@ -68,6 +82,7 @@ func Disable(c *fastly.Client, serviceID string) error {
 
 // GetConfiguration gets the configuration of the Next-Gen WAF product on the service.
 func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, error) {
+	var err error
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
 	}
@@ -81,7 +96,7 @@ func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, err
 	defer resp.Body.Close()
 
 	var h *ConfigureOutput
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -89,23 +104,32 @@ func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, err
 
 // UpdateConfiguration updates the configuration of the Next-Gen WAF product on the service.
 func UpdateConfiguration(c *fastly.Client, serviceID string, i *ConfigureInput) (*ConfigureOutput, error) {
+	var err error
+	var pendingErrors []error
 	if serviceID == "" {
-		return nil, fastly.ErrMissingServiceID
+		pendingErrors = append(pendingErrors, fastly.ErrMissingServiceID)
 	}
-	if err := i.Validate(); err != nil {
-		return nil, err
+	if err = i.Validate(); err != nil {
+		pendingErrors = append(pendingErrors, err)
+	}
+	switch len(pendingErrors) {
+	case 0:
+	case 1:
+		return nil, pendingErrors[0]
+	default:
+		return nil, errors.Join(pendingErrors...)
 	}
 
 	path := fastly.ToSafeURL("enabled-products", "v1", "ngwaf", "services", serviceID, "configuration")
 
-	resp, err := c.PutJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
 	var h *ConfigureOutput
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil

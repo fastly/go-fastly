@@ -1,5 +1,5 @@
-//go:generate rm -f api.go api_test.go
-//go:generate service_linked_product
+//go:generate rm -f api.go
+//go:generate service_linked_product -api
 
 package ngwaf
 
@@ -39,10 +39,10 @@ func (i *ConfigureInput) Validate() error {
 
 type ConfigureOutput struct {
 	fastly.ProductConfiguration
-	Configuration *ConfigureOutputNested `mapstructure:"configuration"`
+	Configuration *configureOutputNested `mapstructure:"configuration"`
 }
 
-type ConfigureOutputNested struct {
+type configureOutputNested struct {
 	WorkspaceID *string `mapstructure:"workspace_id,omitempty"`
 	TrafficRamp *string `mapstructure:"traffic_ramp,omitempty"`
 }

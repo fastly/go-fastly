@@ -8,22 +8,32 @@ import (
 func generate_api_tests(g *Generator) error {
 	var err error
 
-	f := NewFile(g.base.APITestPackage.Name)
+	f := NewFile(g.APIPackage.Name + "_test")
 
-	g.base.Header(f)
+	g.Header(f)
 
 	f.Line()
 
 	validateGetFunction(g, f)
 
-	validateEnableFunction(g, f, g.base.FindDefinedTypeStruct(g.base.APIPackage, "EnableInput"))
+	if g.requiresEnableInput {
+		generateValidationTestEnableInput(g, f)
+	}
+	validateEnableFunction(g, f)
 
 	validateDisableFunction(g, f)
 
-	if g.base.FindDefinedTypeStruct(g.base.APIPackage, "ConfigureInput") {
+	if g.supportsConfiguration {
 		validateGetConfigurationFunction(g, f)
+
+		generateValidationTestConfigureInput(g, f)
+
 		validateUpdateConfigurationFunction(g, f)
 	}
+
+	generateFunctionalTestInput(g, f)
+
+	generateFunctionalTests(g, f)
 
 	if err = f.Save("api_test.go"); err != nil {
 		return err
@@ -32,26 +42,47 @@ func generate_api_tests(g *Generator) error {
 	return nil
 }
 
+func generateValidationTestEnableInput(g *Generator, f *File) {
+	var fields Statement
+
+	fields = append(fields, Id("name").String())
+	fields = append(fields, Id("input").Add(g.APIPackageId("EnableInput")))
+	fields = append(fields, Id("wantError").Id("error"))
+
+	f.Type().Id("validateEnableInput").Struct(fields...)
+	f.Line()
+}
+
+func generateValidationTestConfigureInput(g *Generator, f *File) {
+	var fields Statement
+
+	fields = append(fields, Id("name").String())
+	fields = append(fields, Id("input").Add(g.APIPackageId("ConfigureInput")))
+	fields = append(fields, Id("wantError").Id("error"))
+
+	f.Type().Id("validateConfigureInput").Struct(fields...)
+	f.Line()
+}
+
 type validateFunctionInput struct {
 	f           *File
-	method      string
-	returnsBody bool
+	operation   string
 	needsInput  bool
-	testCaseMap string
+	returnsBody bool
 }
 
 func validateFunction(g *Generator, i *validateFunctionInput) {
 	parameter := Id("t").Op("*").Qual("testing", "T")
 
-	var returnVals []Code
+	var returnVals Statement
 
 	if i.returnsBody {
-		returnVals = []Code{Id("_"), Err()}
+		returnVals = Statement{Id("_"), Err()}
 	} else {
-		returnVals = []Code{Err()}
+		returnVals = Statement{Err()}
 	}
 
-	var body []Code
+	var body Statement
 	var getResult Code
 	var testResult Code
 	var generateError Code
@@ -60,59 +91,59 @@ func validateFunction(g *Generator, i *validateFunctionInput) {
 		// generate a single test case which validates that
 		// an empty 'serviceID' parameter produces an
 		// 'ErrMissingServiceID' error
-		getResult = List(returnVals...).Op(":=").Qual(g.base.APIPackage.PkgPath, i.method).Call(Qual(generators.FastlyPackagePath, "TestClient"), Lit(""))
-		testResult = Err().Op("!=").Qual(generators.FastlyPackagePath, "ErrMissingServiceID")
-		generateError = Id("t").Dot("Fatalf").Call(Lit("expected '%s', got: '%s'"), Qual(generators.FastlyPackagePath, "ErrMissingServiceID"), Err())
+		getResult = List(returnVals...).Op(":=").Add(g.APIPackageId(i.operation)).Call(generators.FastlyPackageId("TestClient"), Lit(""))
+		testResult = Op("!").Add(generators.FastlyPackageId("ErrorMatch")).Call(Err(), generators.FastlyPackageId("ErrMissingServiceID"))
+		generateError = Id("t").Dot("Fatalf").Call(Lit("expected '%s', got: '%s'"), generators.FastlyPackageId("ErrMissingServiceID"), Err())
 
 		body = append(body, If(getResult, testResult).Block(generateError))
 	} else {
-		// generate test cases based on the 'valid' slice in
-		// the TestCases map in the template, which validate
-		// that an empty 'serviceID' parameter produces an
+		// generate a test case loop which uses the 'valid'
+		// field in the validationTest<operation> variable in
+		// the input file, which validate that an empty
+		// 'serviceID' parameter produces an
 		// 'ErrMissingServiceID' error; each case in the slice
 		// must provide a valid input structure for the
 		// function being validated, so that the only error
 		// generated will be for the missing service ID
-		getResult = List(returnVals...).Op(":=").Qual(g.base.APIPackage.PkgPath, i.method).Call(Qual(generators.FastlyPackagePath, "TestClient"), Lit(""), Op("&").Id("tc").Dot("Input"))
-		testResult = Err().Op("!=").Qual(generators.FastlyPackagePath, "ErrMissingServiceID")
-		generateError = Id("t").Dot("Fatalf").Call(Lit("expected '%s', got: '%s'"), Qual(generators.FastlyPackagePath, "ErrMissingServiceID"), Err())
-		body = append(body, For(List(Id("_"), Id("tc")).Op(":=").Range().Id(i.testCaseMap).Index(Lit("valid"))).Block(If(getResult, testResult).Block(generateError)))
+		getResult = List(returnVals...).Op(":=").Add(g.APIPackageId(i.operation)).Call(generators.FastlyPackageId("TestClient"), Lit(""), Op("&").Id("tc").Dot("input"))
+		testResult = Op("!").Add(generators.FastlyPackageId("ErrorMatch")).Call(Err(), generators.FastlyPackageId("ErrMissingServiceID"))
+		generateError = Id("t").Dot("Fatalf").Call(Lit("test '%s' expected '%s', got: '%s'"), Id("tc").Dot("name"), generators.FastlyPackageId("ErrMissingServiceID"), Err())
+		body = append(body, For(List(Id("_"), Id("tc")).Op(":=").Range().Id("valid"+i.operation)).Block(If(getResult, testResult).Block(generateError)))
 
-		// generate test cases based on the 'invalid' slice in
-		// the TestCases map in the template, which produce
-		// validation errors based on the specific needs of
-		// the template; each case in the slice must provide an
-		// invalid input structure for the function being
-		// validated, and the error which should be expected
-		// for that case. the 'serviceID' parameter to the
-		// function will be populated so that the only error
-		// generated will be the one generated by the case's
-		// input structure.
-		getResult = List(returnVals...).Op(":=").Qual(g.base.APIPackage.PkgPath, i.method).Call(Qual(generators.FastlyPackagePath, "TestClient"), Qual(generators.FastlyPackagePath, "TestDeliveryServiceID"), Op("&").Id("tc").Dot("Input"))
-		testResult = Id("tc").Dot("WantError").Op("!=").Nil().Op("&&").Err().Op("!=").Id("tc").Dot("WantError")
-		generateError = Id("t").Dot("Fatalf").Call(Lit("expected '%s', got: '%s'"), Id("tc").Dot("WantError"), Err())
-		body = append(body, For(List(Id("_"), Id("tc")).Op(":=").Range().Id(i.testCaseMap).Index(Lit("invalid"))).Block(getResult, If(testResult).Block(generateError)))
+		// generate a test case loop which uses the 'invalid'
+		// field in the validationTest<operation> variable in
+		// the input file, which produce validation errors
+		// based on the specific needs of the product; each
+		// case in the slice must provide an invalid input
+		// structure for the function being validated, and the
+		// error which should be expected for that case. the
+		// 'serviceID' parameter to the function will be
+		// populated so that the only error generated will be
+		// the one generated by the case's input structure.
+		getResult = List(returnVals...).Op(":=").Add(g.APIPackageId(i.operation)).Call(generators.FastlyPackageId("TestClient"), generators.FastlyPackageId("TestDeliveryServiceID"), Op("&").Id("tc").Dot("input"))
+		testResult = Op("!").Add(generators.FastlyPackageId("ErrorMatch")).Call(Err(), Id("tc").Dot("wantError"))
+		generateError = Id("t").Dot("Fatalf").Call(Lit("test '%s' expected '%s', got: '%s'"), Id("tc").Dot("name"), Id("tc").Dot("wantError"), Err())
+		body = append(body, For(List(Id("_"), Id("tc")).Op(":=").Range().Id("invalid"+i.operation)).Block(getResult, If(testResult).Block(generateError)))
 	}
 
-	i.f.Func().Id("Test_" + i.method + "_validation").Add(Params(parameter)).Block(body...)
+	i.f.Func().Id("Test_" + i.operation + "_validation").Params(parameter).Block(body...)
 	i.f.Line()
 }
 
 func validateGetFunction(g *Generator, f *File) {
 	validateFunction(g, &validateFunctionInput{
 		f:           f,
-		method:      "Get",
+		operation:   "Get",
 		returnsBody: true,
 	})
 }
 
-func validateEnableFunction(g *Generator, f *File, needsInput bool) {
+func validateEnableFunction(g *Generator, f *File) {
 	i := validateFunctionInput{
 		f:           f,
-		method:      "Enable",
+		operation:   "Enable",
 		returnsBody: true,
-		needsInput:  needsInput,
-		testCaseMap: "EnableInputTestCases",
+		needsInput:  g.requiresEnableInput,
 	}
 
 	validateFunction(g, &i)
@@ -120,15 +151,15 @@ func validateEnableFunction(g *Generator, f *File, needsInput bool) {
 
 func validateDisableFunction(g *Generator, f *File) {
 	validateFunction(g, &validateFunctionInput{
-		f:      f,
-		method: "Disable",
+		f:         f,
+		operation: "Disable",
 	})
 }
 
 func validateGetConfigurationFunction(g *Generator, f *File) {
 	validateFunction(g, &validateFunctionInput{
 		f:           f,
-		method:      "GetConfiguration",
+		operation:   "GetConfiguration",
 		returnsBody: true,
 	})
 }
@@ -136,11 +167,100 @@ func validateGetConfigurationFunction(g *Generator, f *File) {
 func validateUpdateConfigurationFunction(g *Generator, f *File) {
 	i := validateFunctionInput{
 		f:           f,
-		method:      "UpdateConfiguration",
+		operation:   "UpdateConfiguration",
 		returnsBody: true,
 		needsInput:  true,
-		testCaseMap: "ConfigureInputTestCases",
 	}
 
 	validateFunction(g, &i)
+}
+
+func generateFunctionalTestInput(g *Generator, f *File) {
+	var fields Statement
+
+	fields = append(fields, Id("name").String())
+	fields = append(fields, Id("operation").String())
+	fields = append(fields, Id("fixtureSuffix").String())
+	fields = append(fields, Id("execute").Func().Params(generators.FastlyClientParameter).Id("error"))
+	fields = append(fields, Id("serviceID").String())
+	if g.requiresEnableInput {
+		fields = append(fields, Id("enableInput").Add(g.APIPackageId("EnableInput")))
+	}
+	if g.supportsConfiguration {
+		fields = append(fields, Id("configureInput").Add(g.APIPackageId("ConfigureInput")))
+	}
+	fields = append(fields, Id("wantNoError").Bool())
+	fields = append(fields, Id("wantError").Id("error"))
+	fields = append(fields, Id("checkError").Func().Params(Id("error")).Params(Bool(), String()))
+
+	f.Type().Id("functionalTestInput").Struct(fields...)
+	f.Line()
+}
+
+func generateFunctionalTests(g *Generator, f *File) {
+
+	var funcName = "Test_enablement"
+
+	if g.supportsConfiguration {
+		funcName += "_and_configuration"
+	}
+
+	parameter := Id("t").Op("*").Qual("testing", "T")
+
+	var body Statement
+
+	body = append(body, Id("t").Dot("Parallel").Call())
+	body = append(body, Line())
+	body = append(body, Var().Err().Id("error"))
+	// this will be needed once the functional tests start
+	// validating the response itself, as opposed to just checking
+	// for errors; something similar will be required for the
+	// ConfigureOutput struct of configurable products
+	// body = append(body, Var().Id("pe").Op("*").Add(generators.FastlyPackageId("ProductEnablement")))
+	body = append(body, Line())
+
+	var fixturePath Statement
+
+	fixturePath = append(fixturePath, Id("fixturePath").Op(":=").Id("tc").Dot("operation"))
+
+	fixturePath = append(fixturePath, If(Id("tc").Dot("fixtureSuffix").Op("!=").Lit("")).Block(Id("fixturePath").Op("+=").Lit("-").Op("+").Id("tc").Dot("fixtureSuffix")))
+
+	var cases Statement
+
+	cases = append(cases, Case(Lit("get")).Block(List(Id("_"), Err()).Op("=").Add(g.APIPackageId("Get")).Call(Id("c"), Id("tc").Dot("serviceID"))))
+
+	if g.requiresEnableInput {
+		cases = append(cases, Case(Lit("enable")).Block(List(Id("_"), Err()).Op("=").Add(g.APIPackageId("Enable")).Call(Id("c"), Id("tc").Dot("serviceID"), Op("&").Id("tc").Dot("enableInput"))))
+	} else {
+		cases = append(cases, Case(Lit("enable")).Block(List(Id("_"), Err()).Op("=").Add(g.APIPackageId("Enable")).Call(Id("c"), Id("tc").Dot("serviceID"))))
+	}
+
+	cases = append(cases, Case(Lit("disable")).Block(Err().Op("=").Add(g.APIPackageId("Disable")).Call(Id("c"), Id("tc").Dot("serviceID"))))
+
+	if g.supportsConfiguration {
+		cases = append(cases, Case(Lit("get_configuration")).Block(List(Id("_"), Err()).Op("=").Add(g.APIPackageId("GetConfiguration")).Call(Id("c"), Id("tc").Dot("serviceID"))))
+		cases = append(cases, Case(Lit("update_configuration")).Block(List(Id("_"), Err()).Op("=").Add(g.APIPackageId("UpdateConfiguration")).Call(Id("c"), Id("tc").Dot("serviceID"), Op("&").Id("tc").Dot("configureInput"))))
+	}
+
+	cases = append(cases, Default().Block(Id("t").Dot("Fatalf").Call(Lit("test '%s' requests an unsupported operation: '%s'"), Id("tc").Dot("name"), Id("tc").Dot("operation"))))
+
+	operationSwitch := Switch(Id("tc").Dot("operation")).Block(cases...)
+
+	record := Add(generators.FastlyPackageId("Record")).Call(Id("t"), Id("fixturePath"), Func().Params(generators.FastlyClientParameter).Block(operationSwitch))
+
+	generateError := Id("t").Dot("Fatalf").Call(Lit("test '%s' expected '%s', got: '%s'"), Id("tc").Dot("name"), Id("tc").Dot("wantError"), Err())
+
+	var loopBody Statement
+
+	loopBody.Add(fixturePath...)
+	loopBody = append(loopBody, record)
+
+	loopBody = append(loopBody, If(Id("tc").Dot("wantNoError")).Block(If(Err().Op("==").Nil()).Block(Continue()).Else().Block(generateError)))
+	loopBody = append(loopBody, If(Id("tc").Dot("wantError").Op("!=").Nil().Op("&&").Op("!").Qual("errors", "Is").Call(Err(), Id("tc").Dot("wantError"))).Block(generateError))
+	loopBody = append(loopBody, If(Id("tc").Dot("checkError").Op("!=").Nil()).Block(If(List(Id("ok"), Id("reason")).Op(":=").Id("tc").Dot("checkError").Call(Err()), Op("!").Id("ok")).Block(Id("t").Dot("Fatalf").Call(Lit("test '%s' %s, got: '%s'"), Id("tc").Dot("name"), Id("reason"), Err()))))
+
+	body = append(body, For(List(Id("_"), Id("tc")).Op(":=").Range().Id("functionalTest")).Block(loopBody...))
+
+	f.Func().Id(funcName).Params(parameter).Block(body...)
+	f.Line()
 }

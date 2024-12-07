@@ -6,6 +6,7 @@ import fastly "github.com/fastly/go-fastly/v9/fastly"
 
 // Get gets the status of the Origin Inspector product on the service.
 func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) {
+	var err error
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
 	}
@@ -19,7 +20,7 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 	defer resp.Body.Close()
 
 	var h *fastly.ProductEnablement
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -27,6 +28,7 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 
 // Enable enables the Origin Inspector product on the service.
 func Enable(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) {
+	var err error
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
 	}
@@ -40,7 +42,7 @@ func Enable(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, erro
 	defer resp.Body.Close()
 
 	var h *fastly.ProductEnablement
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -48,6 +50,7 @@ func Enable(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, erro
 
 // Disable disables the Origin Inspector product on the service.
 func Disable(c *fastly.Client, serviceID string) error {
+	var err error
 	if serviceID == "" {
 		return fastly.ErrMissingServiceID
 	}

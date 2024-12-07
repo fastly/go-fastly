@@ -2,10 +2,14 @@
 
 package ddos_protection
 
-import fastly "github.com/fastly/go-fastly/v9/fastly"
+import (
+	"errors"
+	fastly "github.com/fastly/go-fastly/v9/fastly"
+)
 
-// Get gets the status of the DDOS Protection product on the service.
+// Get gets the status of the DDoS Protection product on the service.
 func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) {
+	var err error
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
 	}
@@ -19,14 +23,15 @@ func Get(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) 
 	defer resp.Body.Close()
 
 	var h *fastly.ProductEnablement
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
 }
 
-// Enable enables the DDOS Protection product on the service.
+// Enable enables the DDoS Protection product on the service.
 func Enable(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, error) {
+	var err error
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
 	}
@@ -40,14 +45,15 @@ func Enable(c *fastly.Client, serviceID string) (*fastly.ProductEnablement, erro
 	defer resp.Body.Close()
 
 	var h *fastly.ProductEnablement
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
 }
 
-// Disable disables the DDOS Protection product on the service.
+// Disable disables the DDoS Protection product on the service.
 func Disable(c *fastly.Client, serviceID string) error {
+	var err error
 	if serviceID == "" {
 		return fastly.ErrMissingServiceID
 	}
@@ -63,8 +69,9 @@ func Disable(c *fastly.Client, serviceID string) error {
 	return nil
 }
 
-// GetConfiguration gets the configuration of the DDOS Protection product on the service.
+// GetConfiguration gets the configuration of the DDoS Protection product on the service.
 func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, error) {
+	var err error
 	if serviceID == "" {
 		return nil, fastly.ErrMissingServiceID
 	}
@@ -78,31 +85,40 @@ func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, err
 	defer resp.Body.Close()
 
 	var h *ConfigureOutput
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
 }
 
-// UpdateConfiguration updates the configuration of the DDOS Protection product on the service.
+// UpdateConfiguration updates the configuration of the DDoS Protection product on the service.
 func UpdateConfiguration(c *fastly.Client, serviceID string, i *ConfigureInput) (*ConfigureOutput, error) {
+	var err error
+	var pendingErrors []error
 	if serviceID == "" {
-		return nil, fastly.ErrMissingServiceID
+		pendingErrors = append(pendingErrors, fastly.ErrMissingServiceID)
 	}
-	if err := i.Validate(); err != nil {
-		return nil, err
+	if err = i.Validate(); err != nil {
+		pendingErrors = append(pendingErrors, err)
+	}
+	switch len(pendingErrors) {
+	case 0:
+	case 1:
+		return nil, pendingErrors[0]
+	default:
+		return nil, errors.Join(pendingErrors...)
 	}
 
 	path := fastly.ToSafeURL("enabled-products", "v1", "ddos_protection", "services", serviceID, "configuration")
 
-	resp, err := c.PutJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
 	var h *ConfigureOutput
-	if err := fastly.DecodeBodyMap(resp.Body, &h); err != nil {
+	if err = fastly.DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil

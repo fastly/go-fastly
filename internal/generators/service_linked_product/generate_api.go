@@ -8,19 +8,19 @@ import (
 func generate_api(g *Generator) error {
 	var err error
 
-	f := NewFile(g.base.APIPackage.Name)
+	f := NewFile(g.APIPackage.Name)
 
-	g.base.Header(f)
+	g.Header(f)
 
 	f.Line()
 
 	generateGetFunction(g, f)
 
-	generateEnableFunction(g, f, g.base.FindDefinedTypeStruct(g.base.APIPackage, "EnableInput"))
+	generateEnableFunction(g, f, g.requiresEnableInput)
 
 	generateDisableFunction(g, f)
 
-	if g.base.FindDefinedTypeStruct(g.base.APIPackage, "ConfigureInput") {
+	if g.supportsConfiguration {
 		generateGetConfigurationFunction(g, f)
 		generateUpdateConfigurationFunction(g, f)
 	}
@@ -34,36 +34,54 @@ func generate_api(g *Generator) error {
 
 type generateFunctionInput struct {
 	f              *File
-	method         string
-	urlComponents  []Code
+	operation      string
+	urlComponents  Statement
 	commentAction  string
-	parameters     []Code
-	inputValidator []Code
-	returns        []Code
+	parameters     Statement
+	inputValidator Code
+	returns        Statement
 	apiCall        Code
-	bodyHandler    []Code
+	bodyHandler    Statement
 }
 
 func generateFunction(g *Generator, i *generateFunctionInput) {
-	parameters := []Code{generators.ClientParameter, Id("serviceID").String()}
+	parameters := Statement{generators.FastlyClientParameter, Id("serviceID").String()}
 	parameters = append(parameters, i.parameters...)
 
-	errReturn := func(exp Code) []Code {
+	errReturn := func(exp Code) Statement {
 		if len(i.bodyHandler) > 0 {
-			return []Code{Nil(), exp}
+			return Statement{Nil(), exp}
 		} else {
-			return []Code{exp}
+			return Statement{exp}
 		}
 	}
 
-	var body []Code
+	var body Statement
 
-	body = append(body, If(Id("serviceID").Op("==").Lit("")).Block(Return(errReturn(Qual(generators.FastlyPackagePath, "ErrMissingServiceID"))...)))
-	body = append(body, i.inputValidator...)
+	body = append(body, Var().Err().Id("error"))
+
+	if i.inputValidator != nil {
+		body = append(body, Var().Id("pendingErrors").Index().Id("error"))
+		body = append(body, If(Id("serviceID").Op("==").Lit("")).Block(Id("pendingErrors").Op("=").Id("append").Call(Id("pendingErrors"), generators.FastlyPackageId("ErrMissingServiceID"))))
+
+		body = append(body, If(i.inputValidator, Err().Op("!=").Nil()).Block(Id("pendingErrors").Op("=").Id("append").Call(Id("pendingErrors"), Err())))
+
+		var cases Statement
+
+		cases = append(cases, Case(Lit(0)).Block())
+		cases = append(cases, Case(Lit(1)).Block(Return(errReturn(Id("pendingErrors").Index(Lit(0)))...)))
+		cases = append(cases, Default().Block(Return(errReturn(Qual("errors", "Join").Call(Id("pendingErrors").Op("...")))...)))
+
+		body = append(body, Switch(Id("len").Call(Id("pendingErrors"))).Block(cases...))
+	} else {
+		body = append(body, If(Id("serviceID").Op("==").Lit("")).Block(Return(errReturn(generators.FastlyPackageId("ErrMissingServiceID"))...)))
+	}
+
 	body = append(body, Line())
-	urlComponents := []Code{Lit("enabled-products"), Lit("v1"), Lit(g.productID), Lit("services"), Id("serviceID")}
+
+	urlComponents := Statement{Lit("enabled-products"), Lit("v1"), Lit(g.productID), Lit("services"), Id("serviceID")}
 	urlComponents = append(urlComponents, i.urlComponents...)
-	body = append(body, Id("path").Op(":=").Qual(generators.FastlyPackagePath, "ToSafeURL").Params(urlComponents...))
+	body = append(body, Id("path").Op(":=").Add(generators.FastlyPackageId("ToSafeURL")).Params(urlComponents...))
 	body = append(body, Line())
 
 	body = append(body, i.apiCall)
@@ -77,21 +95,21 @@ func generateFunction(g *Generator, i *generateFunctionInput) {
 		body = append(body, Return(Nil()))
 	}
 
-	i.f.Commentf("%s %s the %s product on the service.", i.method, i.commentAction, g.productName)
-	i.f.Func().Id(i.method).Add(Params(parameters...)).Add(Params(i.returns...)).Block(body...)
+	i.f.Commentf("%s %s the %s product on the service.", i.operation, i.commentAction, g.productName)
+	i.f.Func().Id(i.operation).Add(Params(parameters...)).Add(Params(i.returns...)).Block(body...)
 	i.f.Line()
 }
 
 func generateGetFunction(g *Generator, f *File) {
 	generateFunction(g, &generateFunctionInput{
 		f:             f,
-		method:        "Get",
+		operation:     "Get",
 		commentAction: "gets the status of",
-		returns:       []Code{Op("*").Qual(generators.FastlyPackagePath, "ProductEnablement"), Error()},
+		returns:       Statement{Op("*").Add(generators.FastlyPackageId("ProductEnablement")), Error()},
 		apiCall:       List(Id("resp"), Err()).Op(":=").Id("c").Dot("Get").Params(Id("path"), Nil()),
-		bodyHandler: []Code{
-			Var().Id("h").Op("*").Qual(generators.FastlyPackagePath, "ProductEnablement"),
-			If(Err().Op(":=").Qual(generators.FastlyPackagePath, "DecodeBodyMap").Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
+		bodyHandler: Statement{
+			Var().Id("h").Op("*").Add(generators.FastlyPackageId("ProductEnablement")),
+			If(Err().Op("=").Add(generators.FastlyPackageId("DecodeBodyMap")).Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
 			Return(Id("h"), Nil()),
 		},
 	})
@@ -100,22 +118,20 @@ func generateGetFunction(g *Generator, f *File) {
 func generateEnableFunction(g *Generator, f *File, needsEnableInput bool) {
 	i := generateFunctionInput{
 		f:             f,
-		method:        "Enable",
+		operation:     "Enable",
 		commentAction: "enables",
-		returns:       []Code{Op("*").Qual(generators.FastlyPackagePath, "ProductEnablement"), Error()},
+		returns:       Statement{Op("*").Add(generators.FastlyPackageId("ProductEnablement")), Error()},
 		apiCall:       List(Id("resp"), Err()).Op(":=").Id("c").Dot("Put").Params(Id("path"), Nil()),
-		bodyHandler: []Code{
-			Var().Id("h").Op("*").Qual(generators.FastlyPackagePath, "ProductEnablement"),
-			If(Err().Op(":=").Qual(generators.FastlyPackagePath, "DecodeBodyMap").Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
+		bodyHandler: Statement{
+			Var().Id("h").Op("*").Add(generators.FastlyPackageId("ProductEnablement")),
+			If(Err().Op("=").Add(generators.FastlyPackageId("DecodeBodyMap")).Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
 			Return(Id("h"), Nil()),
 		},
 	}
 
 	if needsEnableInput {
-		i.parameters = []Code{Id("i").Op("*").Id("EnableInput")}
-		i.inputValidator = []Code{
-			If(Err().Op(":=").Id("i").Dot("Validate").Call(), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
-		}
+		i.parameters = Statement{Id("i").Op("*").Id("EnableInput")}
+		i.inputValidator = Err().Op("=").Id("i").Dot("Validate").Call()
 		i.apiCall = List(Id("resp"), Err()).Op(":=").Id("c").Dot("PutJSON").Params(Id("path"), Id("i"), Nil())
 	}
 
@@ -125,25 +141,25 @@ func generateEnableFunction(g *Generator, f *File, needsEnableInput bool) {
 func generateDisableFunction(g *Generator, f *File) {
 	generateFunction(g, &generateFunctionInput{
 		f:             f,
-		method:        "Disable",
+		operation:     "Disable",
 		commentAction: "disables",
-		returns:       []Code{Error()},
+		returns:       Statement{Error()},
 		apiCall:       List(Id("resp"), Err()).Op(":=").Id("c").Dot("Delete").Params(Id("path"), Nil()),
-		bodyHandler:   []Code{},
+		bodyHandler:   Statement{},
 	})
 }
 
 func generateGetConfigurationFunction(g *Generator, f *File) {
 	generateFunction(g, &generateFunctionInput{
 		f:             f,
-		method:        "GetConfiguration",
-		urlComponents: []Code{Lit("configuration")},
+		operation:     "GetConfiguration",
+		urlComponents: Statement{Lit("configuration")},
 		commentAction: "gets the configuration of",
-		returns:       []Code{Op("*").Id("ConfigureOutput"), Error()},
+		returns:       Statement{Op("*").Id("ConfigureOutput"), Error()},
 		apiCall:       List(Id("resp"), Err()).Op(":=").Id("c").Dot("Get").Params(Id("path"), Nil()),
-		bodyHandler: []Code{
+		bodyHandler: Statement{
 			Var().Id("h").Op("*").Id("ConfigureOutput"),
-			If(Err().Op(":=").Qual(generators.FastlyPackagePath, "DecodeBodyMap").Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
+			If(Err().Op("=").Add(generators.FastlyPackageId("DecodeBodyMap")).Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
 			Return(Id("h"), Nil()),
 		},
 	})
@@ -151,19 +167,17 @@ func generateGetConfigurationFunction(g *Generator, f *File) {
 
 func generateUpdateConfigurationFunction(g *Generator, f *File) {
 	i := generateFunctionInput{
-		f:             f,
-		method:        "UpdateConfiguration",
-		urlComponents: []Code{Lit("configuration")},
-		commentAction: "updates the configuration of",
-		parameters:    []Code{Id("i").Op("*").Id("ConfigureInput")},
-		inputValidator: []Code{
-			If(Err().Op(":=").Id("i").Dot("Validate").Call(), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
-		},
-		returns: []Code{Op("*").Id("ConfigureOutput"), Error()},
-		apiCall: List(Id("resp"), Err()).Op(":=").Id("c").Dot("PutJSON").Params(Id("path"), Id("i"), Nil()),
-		bodyHandler: []Code{
+		f:              f,
+		operation:      "UpdateConfiguration",
+		urlComponents:  Statement{Lit("configuration")},
+		commentAction:  "updates the configuration of",
+		parameters:     Statement{Id("i").Op("*").Id("ConfigureInput")},
+		inputValidator: Err().Op("=").Id("i").Dot("Validate").Call(),
+		returns:        Statement{Op("*").Id("ConfigureOutput"), Error()},
+		apiCall:        List(Id("resp"), Err()).Op(":=").Id("c").Dot("PatchJSON").Params(Id("path"), Id("i"), Nil()),
+		bodyHandler: Statement{
 			Var().Id("h").Op("*").Id("ConfigureOutput"),
-			If(Err().Op(":=").Qual(generators.FastlyPackagePath, "DecodeBodyMap").Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
+			If(Err().Op("=").Add(generators.FastlyPackageId("DecodeBodyMap")).Call(Id("resp").Dot("Body"), Op("&").Id("h")), Err().Op("!=").Nil()).Block(Return(Nil(), Err())),
 			Return(Id("h"), Nil()),
 		},
 	}

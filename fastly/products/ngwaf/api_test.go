@@ -3,54 +3,69 @@
 package ngwaf_test
 
 import (
-	"testing"
-
 	fastly "github.com/fastly/go-fastly/v9/fastly"
 	ngwaf "github.com/fastly/go-fastly/v9/fastly/products/ngwaf"
+	"testing"
 )
 
 func Test_Get_validation(t *testing.T) {
-	if _, err := ngwaf.Get(fastly.TestClient, ""); err != fastly.ErrMissingServiceID {
+	if _, err := ngwaf.Get(fastly.TestClient, ""); !fastly.ErrorMatch(err, fastly.ErrMissingServiceID) {
 		t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
 	}
 }
 
-func Test_Enable_validation(t *testing.T) {
-	for _, tc := range EnableInputTestCases["valid"] {
-		if _, err := ngwaf.Enable(fastly.TestClient, "", &tc.Input); err != fastly.ErrMissingServiceID {
-			t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
+type validateEnableInput struct {
+	name      string
+	input     ngwaf.EnableInput
+	wantError error
+}
+
+func TestEnable_validation(t *testing.T) {
+	for _, tc := range validEnable {
+		if _, err := ngwaf.Enable(fastly.TestClient, "", &tc.input); !fastly.ErrorMatch(err, fastly.ErrMissingServiceID) {
+			t.Fatalf("test '%s' expected '%s', got: '%s'", tc.name, fastly.ErrMissingServiceID, err)
 		}
 	}
-	for _, tc := range EnableInputTestCases["invalid"] {
-		_, err := ngwaf.Enable(fastly.TestClient, fastly.TestDeliveryServiceID, &tc.Input)
-		if tc.WantError != nil && err != tc.WantError {
-			t.Fatalf("expected '%s', got: '%s'", tc.WantError, err)
+	for _, tc := range invalidEnable {
+		_, err := ngwaf.Enable(fastly.TestClient, fastly.TestDeliveryServiceID, &tc.input)
+		if !fastly.ErrorMatch(err, tc.wantError) {
+			t.Fatalf("test '%s' expected '%s', got: '%s'", tc.name, tc.wantError, err)
 		}
 	}
 }
 
 func Test_Disable_validation(t *testing.T) {
-	if err := ngwaf.Disable(fastly.TestClient, ""); err != fastly.ErrMissingServiceID {
+	if err := ngwaf.Disable(fastly.TestClient, ""); !fastly.ErrorMatch(err, fastly.ErrMissingServiceID) {
 		t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
 	}
 }
 
 func Test_GetConfiguration_validation(t *testing.T) {
-	if _, err := ngwaf.GetConfiguration(fastly.TestClient, ""); err != fastly.ErrMissingServiceID {
+	if _, err := ngwaf.GetConfiguration(fastly.TestClient, ""); !fastly.ErrorMatch(err, fastly.ErrMissingServiceID) {
 		t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
 	}
 }
 
+type validateConfigureInput struct {
+	name      string
+	input     ngwaf.ConfigureInput
+	wantError error
+}
+
 func Test_UpdateConfiguration_validation(t *testing.T) {
-	for _, tc := range ConfigureInputTestCases["valid"] {
-		if _, err := ngwaf.UpdateConfiguration(fastly.TestClient, "", &tc.Input); err != fastly.ErrMissingServiceID {
-			t.Fatalf("expected '%s', got: '%s'", fastly.ErrMissingServiceID, err)
+	for _, tc := range validUpdateConfiguration {
+		if _, err := ngwaf.UpdateConfiguration(fastly.TestClient, "", &tc.input); !fastly.ErrorMatch(err, fastly.ErrMissingServiceID) {
+			t.Fatalf("test '%s' expected '%s', got: '%s'", tc.name, fastly.ErrMissingServiceID, err)
 		}
 	}
-	for _, tc := range ConfigureInputTestCases["invalid"] {
-		_, err := ngwaf.UpdateConfiguration(fastly.TestClient, fastly.TestDeliveryServiceID, &tc.Input)
-		if tc.WantError != nil && err != tc.WantError {
-			t.Fatalf("expected '%s', got: '%s'", tc.WantError, err)
+	for _, tc := range invalidUpdateConfiguration {
+		_, err := ngwaf.UpdateConfiguration(fastly.TestClient, fastly.TestDeliveryServiceID, &tc.input)
+		if !fastly.ErrorMatch(err, tc.wantError) {
+			t.Fatalf("test '%s' expected '%s', got: '%s'", tc.name, tc.wantError, err)
 		}
 	}
+}
+
+func Test_enablement_and_configuration(t *testing.T) {
+	fastly.ExecuteFunctionalTests(t, functionalTests)
 }

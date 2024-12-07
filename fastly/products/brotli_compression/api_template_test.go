@@ -1,1 +1,0 @@
-package brotli_compression_test

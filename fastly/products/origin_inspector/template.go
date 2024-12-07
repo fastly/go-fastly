@@ -1,5 +1,5 @@
-//go:generate rm -f api.go api_test.go
-//go:generate service_linked_product
+//go:generate rm -f api.go
+//go:generate service_linked_product -api
 
 package origin_inspector
 

@@ -1,5 +1,5 @@
-//go:generate rm -f api.go api_test.go
-//go:generate service_linked_product
+//go:generate rm -f api.go
+//go:generate service_linked_product -api
 
 package ddos_protection
 
@@ -8,7 +8,7 @@ import (
 )
 
 const (
-	ProductName = "DDOS Protection"
+	ProductName = "DDoS Protection"
 	ProductID   = "ddos_protection"
 )
 
@@ -30,9 +30,9 @@ func (i *ConfigureInput) Validate() error {
 
 type ConfigureOutput struct {
 	fastly.ProductConfiguration
-	Configuration *ConfigureOutputNested `mapstructure:"configuration"`
+	Configuration *configureOutputNested `mapstructure:"configuration"`
 }
 
-type ConfigureOutputNested struct {
+type configureOutputNested struct {
 	Mode *string `mapstructure:"mode"`
 }

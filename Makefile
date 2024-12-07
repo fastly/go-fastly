@@ -6,7 +6,6 @@ FILES ?= ./...
 
 # List all our actual files, excluding vendor
 GOPKGS ?= $(shell $(GO) list $(FILES) | grep -v /vendor/)
-GOFILES ?= $(shell find . -name '*.go' | grep -v /vendor/)
 
 # Tags specific for building
 GOTAGS ?=
@@ -56,12 +55,12 @@ generate: ## Builds and runs generators, to generate code for API endpoints and 
 
 fmt: ## Properly formats Go files and orders dependencies.
 	@echo "==> Running gofmt"
-	@gofmt -s -w ${GOFILES}
+	@gofmt -s -w fastly internal tools
 .PHONY: fmt
 
 fiximports: ## Properly formats and orders imports.
 	@echo "==> Fixing imports"
-	@goimports -w {fastly,tools}
+	@goimports -w fastly internal tools
 .PHONY: fiximports
 
 test: ## Runs the test suite with VCR mocks enabled.
