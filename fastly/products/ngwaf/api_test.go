@@ -3,9 +3,10 @@
 package ngwaf_test
 
 import (
+	"testing"
+
 	fastly "github.com/fastly/go-fastly/v9/fastly"
 	ngwaf "github.com/fastly/go-fastly/v9/fastly/products/ngwaf"
-	"testing"
 )
 
 func Test_Get_validation(t *testing.T) {

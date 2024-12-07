@@ -2,17 +2,18 @@ package products
 
 import (
 	"strings"
+
 	"github.com/fastly/go-fastly/v9/fastly"
 )
 
 type TestGetConfigurationInput[O any] struct {
-	Phase string
-	Executor func(*fastly.Client, string) (*O, error)
-	ServiceID string
+	Phase         string
+	Executor      func(*fastly.Client, string) (*O, error)
+	ServiceID     string
 	ExpectFailure bool
 }
 
-func TestGetConfiguration[O any] (i *TestGetConfigurationInput[O]) *fastly.FunctionalTestInput {
+func TestGetConfiguration[O any](i *TestGetConfigurationInput[O]) *fastly.FunctionalTestInput {
 	r := fastly.FunctionalTestInput{}
 
 	if i.Phase != "" {

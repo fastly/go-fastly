@@ -2,18 +2,19 @@ package products
 
 import (
 	"strings"
+
 	"github.com/fastly/go-fastly/v9/fastly"
 )
 
 type TestUpdateConfigurationInput[I, O any] struct {
-	Phase string
-	Executor func(*fastly.Client, string, *I) (*O, error)
-	Input *I
-	ServiceID string
+	Phase         string
+	Executor      func(*fastly.Client, string, *I) (*O, error)
+	Input         *I
+	ServiceID     string
 	ExpectFailure bool
 }
 
-func TestUpdateConfiguration[I, O any] (i *TestUpdateConfigurationInput[I, O]) *fastly.FunctionalTestInput {
+func TestUpdateConfiguration[I, O any](i *TestUpdateConfigurationInput[I, O]) *fastly.FunctionalTestInput {
 	r := fastly.FunctionalTestInput{}
 
 	if i.Phase != "" {

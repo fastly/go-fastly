@@ -4,6 +4,7 @@ package ngwaf
 
 import (
 	"errors"
+
 	fastly "github.com/fastly/go-fastly/v9/fastly"
 )
 

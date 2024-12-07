@@ -2,17 +2,18 @@ package products
 
 import (
 	"strings"
+
 	"github.com/fastly/go-fastly/v9/fastly"
 )
 
 type TestDisableInput struct {
-	Phase string
-	Executor func(*fastly.Client, string) error
-	ServiceID string
+	Phase         string
+	Executor      func(*fastly.Client, string) error
+	ServiceID     string
 	ExpectFailure bool
 }
 
-func TestDisable (i *TestDisableInput) *fastly.FunctionalTestInput {
+func TestDisable(i *TestDisableInput) *fastly.FunctionalTestInput {
 	r := fastly.FunctionalTestInput{}
 
 	if i.Phase != "" {

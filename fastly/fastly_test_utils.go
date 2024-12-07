@@ -670,12 +670,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 }
 
 type FunctionalTestInput struct {
-	Name          string
-	Operation     string
-	Execute       func(*Client) error
-	WantNoError   bool
-	WantError     error
-	CheckError    func(string, *testing.T, error)
+	Name        string
+	Operation   string
+	Execute     func(*Client) error
+	WantNoError bool
+	WantError   error
+	CheckError  func(string, *testing.T, error)
 }
 
 func ExecuteFunctionalTests(t *testing.T, tests []*FunctionalTestInput) {

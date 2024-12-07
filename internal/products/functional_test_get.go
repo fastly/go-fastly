@@ -3,18 +3,19 @@ package products
 import (
 	"strings"
 	"testing"
+
 	"github.com/fastly/go-fastly/v9/fastly"
 	"github.com/stretchr/testify/require"
 )
 
 type TestGetInput[O any] struct {
-	Phase string
-	Executor func(*fastly.Client, string) (*O, error)
-	ServiceID string
+	Phase         string
+	Executor      func(*fastly.Client, string) (*O, error)
+	ServiceID     string
 	ExpectFailure bool
 }
 
-func TestGet[O any] (i *TestGetInput[O]) *fastly.FunctionalTestInput {
+func TestGet[O any](i *TestGetInput[O]) *fastly.FunctionalTestInput {
 	r := fastly.FunctionalTestInput{}
 
 	if i.Phase != "" {
