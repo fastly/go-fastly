@@ -10,15 +10,15 @@ func TestClient_Pubsubs(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "pubsubs/version", func(c *Client) {
+	Record(t, "pubsubs/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
 	var pubsub *Pubsub
-	record(t, "pubsubs/create", func(c *Client) {
+	Record(t, "pubsubs/create", func(c *Client) {
 		pubsub, err = c.CreatePubsub(&CreatePubsubInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-pubsub"),
 			Topic:          ToPointer("topic"),
@@ -37,15 +37,15 @@ func TestClient_Pubsubs(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "pubsubs/cleanup", func(c *Client) {
+		Record(t, "pubsubs/cleanup", func(c *Client) {
 			_ = c.DeletePubsub(&DeletePubsubInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-pubsub",
 			})
 
 			_ = c.DeletePubsub(&DeletePubsubInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-pubsub",
 			})
@@ -109,9 +109,9 @@ bv1KwcKoQbNVXwauH79JKc0=
 
 	// List
 	var pubsubs []*Pubsub
-	record(t, "pubsubs/list", func(c *Client) {
+	Record(t, "pubsubs/list", func(c *Client) {
 		pubsubs, err = c.ListPubsubs(&ListPubsubsInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -124,9 +124,9 @@ bv1KwcKoQbNVXwauH79JKc0=
 
 	// Get
 	var npubsub *Pubsub
-	record(t, "pubsubs/get", func(c *Client) {
+	Record(t, "pubsubs/get", func(c *Client) {
 		npubsub, err = c.GetPubsub(&GetPubsubInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 		})
@@ -161,9 +161,9 @@ bv1KwcKoQbNVXwauH79JKc0=
 
 	// Update
 	var upubsub *Pubsub
-	record(t, "pubsubs/update", func(c *Client) {
+	Record(t, "pubsubs/update", func(c *Client) {
 		upubsub, err = c.UpdatePubsub(&UpdatePubsubInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-pubsub",
 			NewName:        ToPointer("new-test-pubsub"),
@@ -181,9 +181,9 @@ bv1KwcKoQbNVXwauH79JKc0=
 	}
 
 	// Delete
-	record(t, "pubsubs/delete", func(c *Client) {
+	Record(t, "pubsubs/delete", func(c *Client) {
 		err = c.DeletePubsub(&DeletePubsubInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-pubsub",
 		})
@@ -195,14 +195,14 @@ bv1KwcKoQbNVXwauH79JKc0=
 
 func TestClient_ListPubsubs_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListPubsubs(&ListPubsubsInput{
+	_, err = TestClient.ListPubsubs(&ListPubsubsInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListPubsubs(&ListPubsubsInput{
+	_, err = TestClient.ListPubsubs(&ListPubsubsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -213,14 +213,14 @@ func TestClient_ListPubsubs_validation(t *testing.T) {
 
 func TestClient_CreatePubsub_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreatePubsub(&CreatePubsubInput{
+	_, err = TestClient.CreatePubsub(&CreatePubsubInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreatePubsub(&CreatePubsubInput{
+	_, err = TestClient.CreatePubsub(&CreatePubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -232,7 +232,7 @@ func TestClient_CreatePubsub_validation(t *testing.T) {
 func TestClient_GetPubsub_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetPubsub(&GetPubsubInput{
+	_, err = TestClient.GetPubsub(&GetPubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -240,7 +240,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetPubsub(&GetPubsubInput{
+	_, err = TestClient.GetPubsub(&GetPubsubInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -248,7 +248,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetPubsub(&GetPubsubInput{
+	_, err = TestClient.GetPubsub(&GetPubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -260,7 +260,7 @@ func TestClient_GetPubsub_validation(t *testing.T) {
 func TestClient_UpdatePubsub_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdatePubsub(&UpdatePubsubInput{
+	_, err = TestClient.UpdatePubsub(&UpdatePubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -268,7 +268,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdatePubsub(&UpdatePubsubInput{
+	_, err = TestClient.UpdatePubsub(&UpdatePubsubInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -276,7 +276,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdatePubsub(&UpdatePubsubInput{
+	_, err = TestClient.UpdatePubsub(&UpdatePubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -288,7 +288,7 @@ func TestClient_UpdatePubsub_validation(t *testing.T) {
 func TestClient_DeletePubsub_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeletePubsub(&DeletePubsubInput{
+	err = TestClient.DeletePubsub(&DeletePubsubInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -296,7 +296,7 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeletePubsub(&DeletePubsubInput{
+	err = TestClient.DeletePubsub(&DeletePubsubInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -304,7 +304,7 @@ func TestClient_DeletePubsub_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeletePubsub(&DeletePubsubInput{
+	err = TestClient.DeletePubsub(&DeletePubsubInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

@@ -6,7 +6,7 @@ import (
 
 func TestClient_GetRealtimeStats_validation(t *testing.T) {
 	var err error
-	_, err = testStatsClient.GetRealtimeStats(&GetRealtimeStatsInput{
+	_, err = TestStatsClient.GetRealtimeStats(&GetRealtimeStatsInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
@@ -20,9 +20,9 @@ func TestStatsClient_GetRealtimeStats(t *testing.T) {
 	var err error
 
 	// Get
-	recordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
+	RecordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
 		_, err = c.GetRealtimeStats(&GetRealtimeStatsInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			Timestamp: 0,
 			Limit:     ToPointer(uint32(3)),
 		})
@@ -40,9 +40,9 @@ func TestStatsClient_GetRealtimeStatsJSON(t *testing.T) {
 	}
 
 	var err error
-	recordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
+	RecordRealtimeStats(t, "realtime_stats/get", func(c *RTSClient) {
 		err = c.GetRealtimeStatsJSON(&GetRealtimeStatsInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			Timestamp: 0,
 			Limit:     ToPointer(uint32(3)),
 		}, &ret)

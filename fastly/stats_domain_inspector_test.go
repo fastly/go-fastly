@@ -14,9 +14,9 @@ func TestClient_GetDomainMetricsForService(t *testing.T) {
 	end := time.Date(2023, 11, 7, 0, 0, 0, 0, time.UTC)
 	start := end.Add(-8 * time.Hour)
 	var err error
-	record(t, "domain_inspector/metrics_for_service", func(c *Client) {
+	Record(t, "domain_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetDomainMetricsForService(&GetDomainMetricsInput{
-			ServiceID:   testDeliveryServiceID,
+			ServiceID:   TestDeliveryServiceID,
 			Start:       &start,
 			End:         &end,
 			Domains:     []string{"domain_1.com", "domain_2.com"},

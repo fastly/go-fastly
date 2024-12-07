@@ -170,7 +170,7 @@ func TestClient_WAF_Rule_Exclusion_list_validation(t *testing.T) {
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.ListWAFRuleExclusions(c.input); err.Error() != c.expectedError {
+		if _, err := TestClient.ListWAFRuleExclusions(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -198,7 +198,7 @@ func TestClient_WAF_Rule_Exclusion_list_all_validation(t *testing.T) {
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.ListAllWAFRuleExclusions(c.input); err.Error() != c.expectedError {
+		if _, err := TestClient.ListAllWAFRuleExclusions(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -233,7 +233,7 @@ func TestClient_WAF_Rule_Exclusion_create_validation(t *testing.T) {
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.CreateWAFRuleExclusion(c.input); err.Error() != c.expectedError {
+		if _, err := TestClient.CreateWAFRuleExclusion(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -276,7 +276,7 @@ func TestClient_WAF_Rule_Exclusion_update_validation(t *testing.T) {
 		},
 	}
 	for _, c := range cases {
-		if _, err := testClient.UpdateWAFRuleExclusion(c.input); err.Error() != c.expectedError {
+		if _, err := TestClient.UpdateWAFRuleExclusion(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -311,7 +311,7 @@ func TestClient_WAF_Rule_Exclusion_delete_validation(t *testing.T) {
 		},
 	}
 	for _, c := range cases {
-		if err := testClient.DeleteWAFRuleExclusion(c.input); err.Error() != c.expectedError {
+		if err := TestClient.DeleteWAFRuleExclusion(c.input); err.Error() != c.expectedError {
 			t.Errorf("bad error: %s", err)
 		}
 	}
@@ -347,7 +347,7 @@ func createWAFWithRulesForExclusion(t *testing.T, fixtureBase string, testServic
 
 	var err error
 	rulesIn := buildWAFRulesForExclusion("log")
-	record(t, fixtureBase+"active_rules/create", func(c *Client) {
+	Record(t, fixtureBase+"active_rules/create", func(c *Client) {
 		_, err = c.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -387,7 +387,7 @@ func createServiceForWAF(t *testing.T, fixtureBase string) (*Service, *Version, 
 		return nil, nil, "", err
 	}
 	service := createTestService(t, fixtureBase+"service/create", "service-"+strconv.Itoa(int(n.Int64())))
-	version := createTestVersion(t, fixtureBase+"service/version", *service.ServiceID)
+	version := CreateTestVersion(t, fixtureBase+"service/version", *service.ServiceID)
 	responseName := "WAf_Response"
 	createTestWAFResponseObject(t, fixtureBase+"response_object/create", *service.ServiceID, responseName, *version.Number)
 	return service, version, responseName, nil
@@ -396,7 +396,7 @@ func createServiceForWAF(t *testing.T, fixtureBase string) (*Service, *Version, 
 func createWAFRuleExclusion(t *testing.T, fixture string, excl1In *CreateWAFRuleExclusionInput) *WAFRuleExclusion {
 	var excl1Out *WAFRuleExclusion
 	var err error
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		excl1Out, err = c.CreateWAFRuleExclusion(excl1In)
 	})
 	if err != nil {
@@ -408,7 +408,7 @@ func createWAFRuleExclusion(t *testing.T, fixture string, excl1In *CreateWAFRule
 func updateWAFExclusion(t *testing.T, fixture string, updateExcl *UpdateWAFRuleExclusionInput) *WAFRuleExclusion {
 	var err error
 	var out *WAFRuleExclusion
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		out, err = c.UpdateWAFRuleExclusion(updateExcl)
 	})
 	if err != nil {
@@ -419,7 +419,7 @@ func updateWAFExclusion(t *testing.T, fixture string, updateExcl *UpdateWAFRuleE
 
 func deleteWAFExclusion(t *testing.T, fixture string, updateExcl *DeleteWAFRuleExclusionInput) {
 	var err error
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		err = c.DeleteWAFRuleExclusion(updateExcl)
 	})
 	if err != nil {
@@ -430,7 +430,7 @@ func deleteWAFExclusion(t *testing.T, fixture string, updateExcl *DeleteWAFRuleE
 func listWAFRuleExclusions(t *testing.T, fixture string, waf *WAF) *WAFRuleExclusionResponse {
 	var err error
 	var exclResp *WAFRuleExclusionResponse
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		exclResp, err = c.ListAllWAFRuleExclusions(&ListAllWAFRuleExclusionsInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -446,7 +446,7 @@ func listWAFRuleExclusions(t *testing.T, fixture string, waf *WAF) *WAFRuleExclu
 func listWAFExclusionsWithFilters(t *testing.T, fixture string, request *ListAllWAFRuleExclusionsInput) *WAFRuleExclusionResponse {
 	var err error
 	var exclResp *WAFRuleExclusionResponse
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		exclResp, err = c.ListAllWAFRuleExclusions(request)
 	})
 	if err != nil {

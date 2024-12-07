@@ -13,7 +13,7 @@ func TestClient_WAFs(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"service/create", "service2")
 	defer deleteTestService(t, fixtureBase+"/service/delete", *testService.ServiceID)
 
-	tv := createTestVersion(t, fixtureBase+"/service/version", *testService.ServiceID)
+	tv := CreateTestVersion(t, fixtureBase+"/service/version", *testService.ServiceID)
 
 	prefetch := "WAF_Prefetch"
 	condition := createTestWAFCondition(t, fixtureBase+"/condition/create", *testService.ServiceID, prefetch, *tv.Number)
@@ -29,7 +29,7 @@ func TestClient_WAFs(t *testing.T) {
 
 	var err error
 	var waf *WAF
-	record(t, fixtureBase+"/create", func(c *Client) {
+	Record(t, fixtureBase+"/create", func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
 			ServiceID:         *testService.ServiceID,
 			ServiceVersion:    *tv.Number,
@@ -43,7 +43,7 @@ func TestClient_WAFs(t *testing.T) {
 
 	// List
 	var wafsResp *WAFResponse
-	record(t, fixtureBase+"/list", func(c *Client) {
+	Record(t, fixtureBase+"/list", func(c *Client) {
 		wafsResp, err = c.ListWAFs(&ListWAFsInput{
 			FilterService: *testService.ServiceID,
 			FilterVersion: *tv.Number,
@@ -58,7 +58,7 @@ func TestClient_WAFs(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, fixtureBase+"/cleanup", func(c *Client) {
+		Record(t, fixtureBase+"/cleanup", func(c *Client) {
 			_ = c.DeleteWAF(&DeleteWAFInput{
 				ServiceVersion: *tv.Number,
 				ID:             waf.ID,
@@ -66,7 +66,7 @@ func TestClient_WAFs(t *testing.T) {
 		})
 	}()
 
-	record(t, fixtureBase+"/deploy", func(c *Client) {
+	Record(t, fixtureBase+"/deploy", func(c *Client) {
 		err = c.DeployWAFVersion(&DeployWAFVersionInput{
 			WAFID:            waf.ID,
 			WAFVersionNumber: 1,
@@ -78,7 +78,7 @@ func TestClient_WAFs(t *testing.T) {
 
 	// Get
 	var nwaf *WAF
-	record(t, fixtureBase+"/get", func(c *Client) {
+	Record(t, fixtureBase+"/get", func(c *Client) {
 		nwaf, err = c.GetWAF(&GetWAFInput{
 			ServiceID:      *testService.ServiceID,
 			ServiceVersion: *tv.Number,
@@ -96,7 +96,7 @@ func TestClient_WAFs(t *testing.T) {
 	}
 
 	var uwaf *WAF
-	record(t, fixtureBase+"/update", func(c *Client) {
+	Record(t, fixtureBase+"/update", func(c *Client) {
 		uwaf, err = c.UpdateWAF(&UpdateWAFInput{
 			ServiceID:      testService.ServiceID,
 			ServiceVersion: tv.Number,
@@ -112,7 +112,7 @@ func TestClient_WAFs(t *testing.T) {
 	}
 
 	var dwaf *WAF
-	record(t, fixtureBase+"/disable", func(c *Client) {
+	Record(t, fixtureBase+"/disable", func(c *Client) {
 		dwaf, err = c.UpdateWAF(&UpdateWAFInput{
 			ID:       waf.ID,
 			Disabled: ToPointer(true),
@@ -126,7 +126,7 @@ func TestClient_WAFs(t *testing.T) {
 	}
 
 	var ewaf *WAF
-	record(t, fixtureBase+"/enable", func(c *Client) {
+	Record(t, fixtureBase+"/enable", func(c *Client) {
 		ewaf, err = c.UpdateWAF(&UpdateWAFInput{
 			ID:       waf.ID,
 			Disabled: ToPointer(false),
@@ -140,7 +140,7 @@ func TestClient_WAFs(t *testing.T) {
 	}
 
 	// Delete
-	record(t, fixtureBase+"/delete", func(c *Client) {
+	Record(t, fixtureBase+"/delete", func(c *Client) {
 		err = c.DeleteWAF(&DeleteWAFInput{
 			ServiceVersion: *tv.Number,
 			ID:             waf.ID,
@@ -153,14 +153,14 @@ func TestClient_WAFs(t *testing.T) {
 
 func TestClient_CreateWAF_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateWAF(&CreateWAFInput{
+	_, err = TestClient.CreateWAF(&CreateWAFInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateWAF(&CreateWAFInput{
+	_, err = TestClient.CreateWAF(&CreateWAFInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -171,14 +171,14 @@ func TestClient_CreateWAF_validation(t *testing.T) {
 
 func TestClient_GetWAF_validation(t *testing.T) {
 	var err error
-	_, err = testClient.GetWAF(&GetWAFInput{
+	_, err = TestClient.GetWAF(&GetWAFInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetWAF(&GetWAFInput{
+	_, err = TestClient.GetWAF(&GetWAFInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -186,7 +186,7 @@ func TestClient_GetWAF_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetWAF(&GetWAFInput{
+	_, err = TestClient.GetWAF(&GetWAFInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -198,14 +198,14 @@ func TestClient_GetWAF_validation(t *testing.T) {
 func TestClient_UpdateWAF_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+	_, err = TestClient.UpdateWAF(&UpdateWAFInput{
 		ID: "",
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+	_, err = TestClient.UpdateWAF(&UpdateWAFInput{
 		ID: "123999",
 	})
 	if err != ErrMissingServiceID {
@@ -214,7 +214,7 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 
 	serviceID := "foo"
 
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+	_, err = TestClient.UpdateWAF(&UpdateWAFInput{
 		ID:        "123",
 		ServiceID: &serviceID,
 	})
@@ -225,14 +225,14 @@ func TestClient_UpdateWAF_validation(t *testing.T) {
 
 func TestClient_DeleteWAF_validation(t *testing.T) {
 	var err error
-	err = testClient.DeleteWAF(&DeleteWAFInput{
+	err = TestClient.DeleteWAF(&DeleteWAFInput{
 		ServiceVersion: 0,
 	})
 	if err != ErrMissingServiceVersion {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteWAF(&DeleteWAFInput{
+	err = TestClient.DeleteWAF(&DeleteWAFInput{
 		ServiceVersion: 1,
 		ID:             "",
 	})
@@ -243,7 +243,7 @@ func TestClient_DeleteWAF_validation(t *testing.T) {
 
 func TestClient_UpdateWAF_Enable_validation(t *testing.T) {
 	var err error
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+	_, err = TestClient.UpdateWAF(&UpdateWAFInput{
 		ID:       "",
 		Disabled: ToPointer(false),
 	})
@@ -254,7 +254,7 @@ func TestClient_UpdateWAF_Enable_validation(t *testing.T) {
 
 func TestClient_UpdateWAF_Disable_validation(t *testing.T) {
 	var err error
-	_, err = testClient.UpdateWAF(&UpdateWAFInput{
+	_, err = TestClient.UpdateWAF(&UpdateWAFInput{
 		ID:       "",
 		Disabled: ToPointer(true),
 	})

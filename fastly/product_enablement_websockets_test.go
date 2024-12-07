@@ -11,10 +11,10 @@ func TestClient_ProductEnablement_websockets(t *testing.T) {
 
 	// Enable Product - Bot Management
 	var pe *ProductEnablement
-	record(t, "product_enablement/enable_websockets", func(c *Client) {
+	Record(t, "product_enablement/enable_websockets", func(c *Client) {
 		pe, err = c.EnableProduct(&ProductEnablementInput{
 			ProductID: ProductWebSockets,
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -27,10 +27,10 @@ func TestClient_ProductEnablement_websockets(t *testing.T) {
 
 	// Get Product status
 	var gpe *ProductEnablement
-	record(t, "product_enablement/get_websockets", func(c *Client) {
+	Record(t, "product_enablement/get_websockets", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductWebSockets,
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -42,10 +42,10 @@ func TestClient_ProductEnablement_websockets(t *testing.T) {
 	}
 
 	// Disable Product
-	record(t, "product_enablement/disable_websockets", func(c *Client) {
+	Record(t, "product_enablement/disable_websockets", func(c *Client) {
 		err = c.DisableProduct(&ProductEnablementInput{
 			ProductID: ProductWebSockets,
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 		})
 	})
 	if err != nil {
@@ -53,10 +53,10 @@ func TestClient_ProductEnablement_websockets(t *testing.T) {
 	}
 
 	// Get Product status again to check disabled
-	record(t, "product_enablement/get-disabled_websockets", func(c *Client) {
+	Record(t, "product_enablement/get-disabled_websockets", func(c *Client) {
 		gpe, err = c.GetProduct(&ProductEnablementInput{
 			ProductID: ProductWebSockets,
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 		})
 	})
 
@@ -70,14 +70,14 @@ func TestClient_ProductEnablement_websockets(t *testing.T) {
 func TestClient_GetProduct_validation_websockets(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetProduct(&ProductEnablementInput{
+	_, err = TestClient.GetProduct(&ProductEnablementInput{
 		ProductID: ProductWebSockets,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetProduct(&ProductEnablementInput{
+	_, err = TestClient.GetProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingProductID {
@@ -87,14 +87,14 @@ func TestClient_GetProduct_validation_websockets(t *testing.T) {
 
 func TestClient_EnableProduct_validation_websockets(t *testing.T) {
 	var err error
-	_, err = testClient.EnableProduct(&ProductEnablementInput{
+	_, err = TestClient.EnableProduct(&ProductEnablementInput{
 		ProductID: ProductWebSockets,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.EnableProduct(&ProductEnablementInput{
+	_, err = TestClient.EnableProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingProductID {
@@ -105,14 +105,14 @@ func TestClient_EnableProduct_validation_websockets(t *testing.T) {
 func TestClient_DisableProduct_validation_websockets(t *testing.T) {
 	var err error
 
-	err = testClient.DisableProduct(&ProductEnablementInput{
+	err = TestClient.DisableProduct(&ProductEnablementInput{
 		ProductID: ProductWebSockets,
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DisableProduct(&ProductEnablementInput{
+	err = TestClient.DisableProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
 	if err != ErrMissingProductID {

@@ -9,7 +9,7 @@ func TestClient_VCLs(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "vcls/version", func(c *Client) {
+	Record(t, "vcls/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
@@ -36,9 +36,9 @@ sub vcl_hash {
 
 	// Create
 	var vcl *VCL
-	record(t, "vcls/create", func(c *Client) {
+	Record(t, "vcls/create", func(c *Client) {
 		vcl, err = c.CreateVCL(&CreateVCLInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-vcl"),
 			Content:        ToPointer(content),
@@ -50,15 +50,15 @@ sub vcl_hash {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "vcls/cleanup", func(c *Client) {
+		Record(t, "vcls/cleanup", func(c *Client) {
 			_ = c.DeleteVCL(&DeleteVCLInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-vcl",
 			})
 
 			_ = c.DeleteVCL(&DeleteVCLInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-vcl",
 			})
@@ -74,9 +74,9 @@ sub vcl_hash {
 
 	// List
 	var vcls []*VCL
-	record(t, "vcls/list", func(c *Client) {
+	Record(t, "vcls/list", func(c *Client) {
 		vcls, err = c.ListVCLs(&ListVCLsInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -89,9 +89,9 @@ sub vcl_hash {
 
 	// Get
 	var nvcl *VCL
-	record(t, "vcls/get", func(c *Client) {
+	Record(t, "vcls/get", func(c *Client) {
 		nvcl, err = c.GetVCL(&GetVCLInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 		})
@@ -108,9 +108,9 @@ sub vcl_hash {
 
 	// Update
 	var uvcl *VCL
-	record(t, "vcls/update", func(c *Client) {
+	Record(t, "vcls/update", func(c *Client) {
 		uvcl, err = c.UpdateVCL(&UpdateVCLInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-vcl",
 			NewName:        ToPointer("new-test-vcl"),
@@ -125,9 +125,9 @@ sub vcl_hash {
 
 	// Activate
 	var avcl *VCL
-	record(t, "vcls/activate", func(c *Client) {
+	Record(t, "vcls/activate", func(c *Client) {
 		avcl, err = c.ActivateVCL(&ActivateVCLInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})
@@ -140,9 +140,9 @@ sub vcl_hash {
 	}
 
 	// Delete
-	record(t, "vcls/delete", func(c *Client) {
+	Record(t, "vcls/delete", func(c *Client) {
 		err = c.DeleteVCL(&DeleteVCLInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-vcl",
 		})
@@ -154,14 +154,14 @@ sub vcl_hash {
 
 func TestClient_ListVCLs_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListVCLs(&ListVCLsInput{
+	_, err = TestClient.ListVCLs(&ListVCLsInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListVCLs(&ListVCLsInput{
+	_, err = TestClient.ListVCLs(&ListVCLsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -172,14 +172,14 @@ func TestClient_ListVCLs_validation(t *testing.T) {
 
 func TestClient_CreateVCL_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateVCL(&CreateVCLInput{
+	_, err = TestClient.CreateVCL(&CreateVCLInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateVCL(&CreateVCLInput{
+	_, err = TestClient.CreateVCL(&CreateVCLInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -191,7 +191,7 @@ func TestClient_CreateVCL_validation(t *testing.T) {
 func TestClient_GetVCL_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetVCL(&GetVCLInput{
+	_, err = TestClient.GetVCL(&GetVCLInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -199,7 +199,7 @@ func TestClient_GetVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetVCL(&GetVCLInput{
+	_, err = TestClient.GetVCL(&GetVCLInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -207,7 +207,7 @@ func TestClient_GetVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetVCL(&GetVCLInput{
+	_, err = TestClient.GetVCL(&GetVCLInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -219,7 +219,7 @@ func TestClient_GetVCL_validation(t *testing.T) {
 func TestClient_UpdateVCL_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateVCL(&UpdateVCLInput{
+	_, err = TestClient.UpdateVCL(&UpdateVCLInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -227,7 +227,7 @@ func TestClient_UpdateVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateVCL(&UpdateVCLInput{
+	_, err = TestClient.UpdateVCL(&UpdateVCLInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -235,7 +235,7 @@ func TestClient_UpdateVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateVCL(&UpdateVCLInput{
+	_, err = TestClient.UpdateVCL(&UpdateVCLInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -247,7 +247,7 @@ func TestClient_UpdateVCL_validation(t *testing.T) {
 func TestClient_ActivateVCL_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.ActivateVCL(&ActivateVCLInput{
+	_, err = TestClient.ActivateVCL(&ActivateVCLInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -255,7 +255,7 @@ func TestClient_ActivateVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ActivateVCL(&ActivateVCLInput{
+	_, err = TestClient.ActivateVCL(&ActivateVCLInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -263,7 +263,7 @@ func TestClient_ActivateVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ActivateVCL(&ActivateVCLInput{
+	_, err = TestClient.ActivateVCL(&ActivateVCLInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -275,7 +275,7 @@ func TestClient_ActivateVCL_validation(t *testing.T) {
 func TestClient_DeleteVCL_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteVCL(&DeleteVCLInput{
+	err = TestClient.DeleteVCL(&DeleteVCLInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -283,7 +283,7 @@ func TestClient_DeleteVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteVCL(&DeleteVCLInput{
+	err = TestClient.DeleteVCL(&DeleteVCLInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -291,7 +291,7 @@ func TestClient_DeleteVCL_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteVCL(&DeleteVCLInput{
+	err = TestClient.DeleteVCL(&DeleteVCLInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

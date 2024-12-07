@@ -12,7 +12,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 
 	var err error
 
-	record(t, "config_store_batch/create_and_upsert", func(c *Client) {
+	Record(t, "config_store_batch/create_and_upsert", func(c *Client) {
 		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
 			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
@@ -33,7 +33,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 		t.Fatalf("error batch creating config store items: %v", err)
 	}
 
-	record(t, "config_store_batch/update_and_upsert", func(c *Client) {
+	Record(t, "config_store_batch/update_and_upsert", func(c *Client) {
 		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
 			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
@@ -54,7 +54,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 		t.Fatalf("error batch updating config store items: %v", err)
 	}
 
-	record(t, "config_store_batch/delete", func(c *Client) {
+	Record(t, "config_store_batch/delete", func(c *Client) {
 		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
 			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
@@ -81,7 +81,7 @@ func createConfigStoreForBatch(t *testing.T) *ConfigStore {
 		cs  *ConfigStore
 		err error
 	)
-	record(t, fmt.Sprintf("config_store_batch/%s/create_store", t.Name()), func(c *Client) {
+	Record(t, fmt.Sprintf("config_store_batch/%s/create_store", t.Name()), func(c *Client) {
 		cs, err = c.CreateConfigStore(&CreateConfigStoreInput{
 			Name: t.Name(),
 		})
@@ -92,7 +92,7 @@ func createConfigStoreForBatch(t *testing.T) *ConfigStore {
 
 	// Ensure Config Store is cleaned up.
 	t.Cleanup(func() {
-		record(t, fmt.Sprintf("config_store_batch/%s/delete_store", t.Name()), func(c *Client) {
+		Record(t, fmt.Sprintf("config_store_batch/%s/delete_store", t.Name()), func(c *Client) {
 			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
 				StoreID: cs.StoreID,
 			})

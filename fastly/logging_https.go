@@ -57,7 +57,7 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	defer resp.Body.Close()
 
 	var https []*HTTPS
-	if err := decodeBodyMap(resp.Body, &https); err != nil {
+	if err := DecodeBodyMap(resp.Body, &https); err != nil {
 		return nil, err
 	}
 	return https, nil
@@ -124,7 +124,7 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 	defer resp.Body.Close()
 
 	var https *HTTPS
-	if err := decodeBodyMap(resp.Body, &https); err != nil {
+	if err := DecodeBodyMap(resp.Body, &https); err != nil {
 		return nil, err
 	}
 	return https, nil
@@ -160,7 +160,7 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	defer resp.Body.Close()
 
 	var h *HTTPS
-	if err := decodeBodyMap(resp.Body, &h); err != nil {
+	if err := DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 
@@ -233,7 +233,7 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	defer resp.Body.Close()
 
 	var h *HTTPS
-	if err := decodeBodyMap(resp.Body, &h); err != nil {
+	if err := DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -269,7 +269,7 @@ func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

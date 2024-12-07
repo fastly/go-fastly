@@ -10,7 +10,7 @@ func TestClient_Splunks(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "splunks/version", func(c *Client) {
+	Record(t, "splunks/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
@@ -36,9 +36,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Create
 	var s *Splunk
-	record(t, "splunks/create", func(c *Client) {
+	Record(t, "splunks/create", func(c *Client) {
 		s, err = c.CreateSplunk(&CreateSplunkInput{
-			ServiceID:         testDeliveryServiceID,
+			ServiceID:         TestDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-splunk"),
 			URL:               ToPointer("https://mysplunkendpoint.example.com/services/collector/event"),
@@ -61,15 +61,15 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Ensure deleted
 	defer func() {
-		record(t, "splunks/cleanup", func(c *Client) {
+		Record(t, "splunks/cleanup", func(c *Client) {
 			_ = c.DeleteSplunk(&DeleteSplunkInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-splunk",
 			})
 
 			_ = c.DeleteSplunk(&DeleteSplunkInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-splunk",
 			})
@@ -118,9 +118,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// List
 	var ss []*Splunk
-	record(t, "splunks/list", func(c *Client) {
+	Record(t, "splunks/list", func(c *Client) {
 		ss, err = c.ListSplunks(&ListSplunksInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -133,9 +133,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Get
 	var ns *Splunk
-	record(t, "splunks/get", func(c *Client) {
+	Record(t, "splunks/get", func(c *Client) {
 		ns, err = c.GetSplunk(&GetSplunkInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-splunk",
 		})
@@ -185,9 +185,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Update
 	var us *Splunk
-	record(t, "splunks/update", func(c *Client) {
+	Record(t, "splunks/update", func(c *Client) {
 		us, err = c.UpdateSplunk(&UpdateSplunkInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-splunk",
 			NewName:        ToPointer("new-test-splunk"),
@@ -201,9 +201,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 
 	// Delete
-	record(t, "splunks/delete", func(c *Client) {
+	Record(t, "splunks/delete", func(c *Client) {
 		err = c.DeleteSplunk(&DeleteSplunkInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-splunk",
 		})
@@ -215,14 +215,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 func TestClient_ListSplunks_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListSplunks(&ListSplunksInput{
+	_, err = TestClient.ListSplunks(&ListSplunksInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListSplunks(&ListSplunksInput{
+	_, err = TestClient.ListSplunks(&ListSplunksInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -233,14 +233,14 @@ func TestClient_ListSplunks_validation(t *testing.T) {
 
 func TestClient_CreateSplunk_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateSplunk(&CreateSplunkInput{
+	_, err = TestClient.CreateSplunk(&CreateSplunkInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateSplunk(&CreateSplunkInput{
+	_, err = TestClient.CreateSplunk(&CreateSplunkInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -252,7 +252,7 @@ func TestClient_CreateSplunk_validation(t *testing.T) {
 func TestClient_GetSplunk_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetSplunk(&GetSplunkInput{
+	_, err = TestClient.GetSplunk(&GetSplunkInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -260,7 +260,7 @@ func TestClient_GetSplunk_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetSplunk(&GetSplunkInput{
+	_, err = TestClient.GetSplunk(&GetSplunkInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -268,7 +268,7 @@ func TestClient_GetSplunk_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetSplunk(&GetSplunkInput{
+	_, err = TestClient.GetSplunk(&GetSplunkInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -280,7 +280,7 @@ func TestClient_GetSplunk_validation(t *testing.T) {
 func TestClient_UpdateSplunk_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
+	_, err = TestClient.UpdateSplunk(&UpdateSplunkInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -288,7 +288,7 @@ func TestClient_UpdateSplunk_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
+	_, err = TestClient.UpdateSplunk(&UpdateSplunkInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -296,7 +296,7 @@ func TestClient_UpdateSplunk_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateSplunk(&UpdateSplunkInput{
+	_, err = TestClient.UpdateSplunk(&UpdateSplunkInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -308,7 +308,7 @@ func TestClient_UpdateSplunk_validation(t *testing.T) {
 func TestClient_DeleteSplunk_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteSplunk(&DeleteSplunkInput{
+	err = TestClient.DeleteSplunk(&DeleteSplunkInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -316,7 +316,7 @@ func TestClient_DeleteSplunk_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteSplunk(&DeleteSplunkInput{
+	err = TestClient.DeleteSplunk(&DeleteSplunkInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -324,7 +324,7 @@ func TestClient_DeleteSplunk_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteSplunk(&DeleteSplunkInput{
+	err = TestClient.DeleteSplunk(&DeleteSplunkInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

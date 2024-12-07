@@ -11,7 +11,7 @@ func TestClient_Services(t *testing.T) {
 
 	// Create
 	var s *Service
-	record(t, "services/create", func(c *Client) {
+	Record(t, "services/create", func(c *Client) {
 		s, err = c.CreateService(&CreateServiceInput{
 			Name:    ToPointer("test-service"),
 			Comment: ToPointer("comment"),
@@ -23,7 +23,7 @@ func TestClient_Services(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "services/cleanup", func(c *Client) {
+		Record(t, "services/cleanup", func(c *Client) {
 			_ = c.DeleteService(&DeleteServiceInput{
 				ServiceID: *s.ServiceID,
 			})
@@ -43,7 +43,7 @@ func TestClient_Services(t *testing.T) {
 
 	// List
 	var ss []*Service
-	record(t, "services/list", func(c *Client) {
+	Record(t, "services/list", func(c *Client) {
 		ss, err = c.ListServices(&ListServicesInput{
 			Direction: ToPointer("descend"),
 			Sort:      ToPointer("created"),
@@ -59,7 +59,7 @@ func TestClient_Services(t *testing.T) {
 	// List with paginator
 	var ss2 []*Service
 	var paginator *ListPaginator[Service]
-	record(t, "services/list_paginator", func(c *Client) {
+	Record(t, "services/list_paginator", func(c *Client) {
 		paginator = c.GetServices(&GetServicesInput{
 			Direction: ToPointer("descend"),
 			PerPage:   ToPointer(200),
@@ -84,7 +84,7 @@ func TestClient_Services(t *testing.T) {
 
 	// Get
 	var ns *Service
-	record(t, "services/get", func(c *Client) {
+	Record(t, "services/get", func(c *Client) {
 		ns, err = c.GetService(&GetServiceInput{
 			ServiceID: *s.ServiceID,
 		})
@@ -110,7 +110,7 @@ func TestClient_Services(t *testing.T) {
 
 	// Get Details
 	var nsd *ServiceDetail
-	record(t, "services/details", func(c *Client) {
+	Record(t, "services/details", func(c *Client) {
 		nsd, err = c.GetServiceDetails(&GetServiceInput{
 			ServiceID: *s.ServiceID,
 		})
@@ -131,7 +131,7 @@ func TestClient_Services(t *testing.T) {
 
 	// Search
 	var fs *Service
-	record(t, "services/search", func(c *Client) {
+	Record(t, "services/search", func(c *Client) {
 		fs, err = c.SearchService(&SearchServiceInput{
 			Name: "test-service",
 		})
@@ -148,7 +148,7 @@ func TestClient_Services(t *testing.T) {
 
 	// Update
 	var us *Service
-	record(t, "services/update", func(c *Client) {
+	Record(t, "services/update", func(c *Client) {
 		us, err = c.UpdateService(&UpdateServiceInput{
 			ServiceID: *s.ServiceID,
 			Name:      ToPointer("new-test-service"),
@@ -162,7 +162,7 @@ func TestClient_Services(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "services/delete", func(c *Client) {
+	Record(t, "services/delete", func(c *Client) {
 		err = c.DeleteService(&DeleteServiceInput{
 			ServiceID: *s.ServiceID,
 		})
@@ -173,7 +173,7 @@ func TestClient_Services(t *testing.T) {
 
 	//	List Domains
 	var ds ServiceDomainsList
-	record(t, "services/domain", func(c *Client) {
+	Record(t, "services/domain", func(c *Client) {
 		ds, err = c.ListServiceDomains(&ListServiceDomainInput{
 			ServiceID: *s.ServiceID,
 		})
@@ -187,21 +187,21 @@ func TestClient_Services(t *testing.T) {
 }
 
 func TestClient_GetService_validation(t *testing.T) {
-	_, err := testClient.GetService(&GetServiceInput{})
+	_, err := TestClient.GetService(&GetServiceInput{})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateService_validation(t *testing.T) {
-	_, err := testClient.UpdateService(&UpdateServiceInput{})
+	_, err := TestClient.UpdateService(&UpdateServiceInput{})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
-	err := testClient.DeleteService(&DeleteServiceInput{})
+	err := TestClient.DeleteService(&DeleteServiceInput{})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}

@@ -9,20 +9,20 @@ func TestClient_Diff(t *testing.T) {
 
 	var err error
 	var tv1 *Version
-	record(t, "diff/version_1", func(c *Client) {
+	Record(t, "diff/version_1", func(c *Client) {
 		tv1 = testVersion(t, c)
 	})
 
 	var tv2 *Version
-	record(t, "diff/version_2", func(c *Client) {
+	Record(t, "diff/version_2", func(c *Client) {
 		tv2 = testVersion(t, c)
 	})
 
 	// Diff should be empty
 	var d *Diff
-	record(t, "diff/get", func(c *Client) {
+	Record(t, "diff/get", func(c *Client) {
 		d, err = c.GetDiff(&GetDiffInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			From:      *tv1.Number,
 			To:        *tv2.Number,
 		})
@@ -32,9 +32,9 @@ func TestClient_Diff(t *testing.T) {
 	}
 
 	// Create a diff
-	record(t, "diff/create_backend", func(c *Client) {
+	Record(t, "diff/create_backend", func(c *Client) {
 		_, err = c.CreateBackend(&CreateBackendInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv2.Number,
 			Name:           ToPointer("test-backend"),
 			Address:        ToPointer("integ-test.go-fastly.com"),
@@ -46,9 +46,9 @@ func TestClient_Diff(t *testing.T) {
 
 	// Ensure we delete the backend we just created
 	defer func() {
-		record(t, "diff/cleanup", func(c *Client) {
+		Record(t, "diff/cleanup", func(c *Client) {
 			_ = c.DeleteBackend(&DeleteBackendInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv2.Number,
 				Name:           "test-backend",
 			})
@@ -56,9 +56,9 @@ func TestClient_Diff(t *testing.T) {
 	}()
 
 	// Diff should mot be empty
-	record(t, "diff/get_again", func(c *Client) {
+	Record(t, "diff/get_again", func(c *Client) {
 		d, err = c.GetDiff(&GetDiffInput{
-			ServiceID: testDeliveryServiceID,
+			ServiceID: TestDeliveryServiceID,
 			From:      *tv1.Number,
 			To:        *tv2.Number,
 		})
@@ -73,14 +73,14 @@ func TestClient_Diff(t *testing.T) {
 
 func TestClient_Diff_validation(t *testing.T) {
 	var err error
-	_, err = testClient.GetDiff(&GetDiffInput{
+	_, err = TestClient.GetDiff(&GetDiffInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetDiff(&GetDiffInput{
+	_, err = TestClient.GetDiff(&GetDiffInput{
 		ServiceID: "foo",
 		From:      0,
 	})
@@ -88,7 +88,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetDiff(&GetDiffInput{
+	_, err = TestClient.GetDiff(&GetDiffInput{
 		ServiceID: "foo",
 		From:      1,
 		To:        0,

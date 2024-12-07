@@ -61,7 +61,7 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 	defer resp.Body.Close()
 
 	var m *ManagedLogging
-	if err := decodeBodyMap(resp.Body, &m); err != nil {
+	if err := DecodeBodyMap(resp.Body, &m); err != nil {
 		return nil, err
 	}
 	return m, nil

@@ -26,7 +26,7 @@ func (c *Client) AllDatacenters() (datacenters []Datacenter, err error) {
 	defer resp.Body.Close()
 
 	var m []Datacenter
-	if err := decodeBodyMap(resp.Body, &m); err != nil {
+	if err := DecodeBodyMap(resp.Body, &m); err != nil {
 		return nil, err
 	}
 

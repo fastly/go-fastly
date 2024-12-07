@@ -13,7 +13,7 @@ func TestClient_ListTLSDomains(t *testing.T) {
 
 	// List
 	var ldom []*TLSDomain
-	record(t, fixtureBase+"list", func(c *Client) {
+	Record(t, fixtureBase+"list", func(c *Client) {
 		ldom, err = c.ListTLSDomains(&ListTLSDomainsInput{
 			PageSize: 10,
 		})
@@ -35,7 +35,7 @@ func TestClient_ListTLSDomainsFilterCertificates(t *testing.T) {
 
 	// List
 	var ldom []*TLSDomain
-	record(t, fixtureBase+"list", func(c *Client) {
+	Record(t, fixtureBase+"list", func(c *Client) {
 		ldom, err = c.ListTLSDomains(&ListTLSDomainsInput{
 			FilterTLSCertificateID: "6RltCYkOfFfzPVitOyLCnV",
 		})

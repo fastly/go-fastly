@@ -46,7 +46,7 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 	defer resp.Body.Close()
 
 	var ps []*Papertrail
-	if err := decodeBodyMap(resp.Body, &ps); err != nil {
+	if err := DecodeBodyMap(resp.Body, &ps); err != nil {
 		return nil, err
 	}
 	return ps, nil
@@ -91,7 +91,7 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 	defer resp.Body.Close()
 
 	var p *Papertrail
-	if err := decodeBodyMap(resp.Body, &p); err != nil {
+	if err := DecodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -127,7 +127,7 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	defer resp.Body.Close()
 
 	var p *Papertrail
-	if err := decodeBodyMap(resp.Body, &p); err != nil {
+	if err := DecodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -177,7 +177,7 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 	defer resp.Body.Close()
 
 	var p *Papertrail
-	if err := decodeBodyMap(resp.Body, &p); err != nil {
+	if err := DecodeBodyMap(resp.Body, &p); err != nil {
 		return nil, err
 	}
 	return p, nil
@@ -213,7 +213,7 @@ func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

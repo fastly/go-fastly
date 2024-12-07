@@ -46,7 +46,7 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	defer resp.Body.Close()
 
 	var n []*NewRelic
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -91,7 +91,7 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 	defer resp.Body.Close()
 
 	var n *NewRelic
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -127,7 +127,7 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	defer resp.Body.Close()
 
 	var n *NewRelic
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -177,7 +177,7 @@ func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 	defer resp.Body.Close()
 
 	var n *NewRelic
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -213,7 +213,7 @@ func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

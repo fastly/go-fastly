@@ -9,15 +9,15 @@ func TestClient_DirectorBackends(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "director_backends/version", func(c *Client) {
+	Record(t, "director_backends/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
 	var b *DirectorBackend
-	record(t, "director_backends/create", func(c *Client) {
+	Record(t, "director_backends/create", func(c *Client) {
 		b, err = c.CreateDirectorBackend(&CreateDirectorBackendInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Director:       "director",
 			Backend:        "backend",
@@ -29,9 +29,9 @@ func TestClient_DirectorBackends(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "director_backends/cleanup", func(c *Client) {
+		Record(t, "director_backends/cleanup", func(c *Client) {
 			_ = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Director:       "director",
 				Backend:        "backend",
@@ -48,9 +48,9 @@ func TestClient_DirectorBackends(t *testing.T) {
 
 	// Get
 	var nb *DirectorBackend
-	record(t, "director_backends/get", func(c *Client) {
+	Record(t, "director_backends/get", func(c *Client) {
 		nb, err = c.GetDirectorBackend(&GetDirectorBackendInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Director:       "director",
 			Backend:        "backend",
@@ -68,9 +68,9 @@ func TestClient_DirectorBackends(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "director_backends/delete", func(c *Client) {
+	Record(t, "director_backends/delete", func(c *Client) {
 		err = c.DeleteDirectorBackend(&DeleteDirectorBackendInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Director:       "director",
 			Backend:        "backend",
@@ -83,24 +83,24 @@ func TestClient_DirectorBackends(t *testing.T) {
 
 func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateDirectorBackend(&CreateDirectorBackendInput{})
+	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{})
 	if err != ErrMissingBackend {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.CreateDirectorBackend(&CreateDirectorBackendInput{
+	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{
 		Backend: "foo",
 	})
 	if err != ErrMissingDirector {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.CreateDirectorBackend(&CreateDirectorBackendInput{
+	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{
 		Backend:  "foo",
 		Director: "bar",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.CreateDirectorBackend(&CreateDirectorBackendInput{
+	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{
 		Backend:   "foo",
 		Director:  "bar",
 		ServiceID: "baz",
@@ -112,24 +112,24 @@ func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 
 func TestClient_GetDirectorBackend_validation(t *testing.T) {
 	var err error
-	_, err = testClient.GetDirectorBackend(&GetDirectorBackendInput{})
+	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{})
 	if err != ErrMissingBackend {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.GetDirectorBackend(&GetDirectorBackendInput{
+	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{
 		Backend: "foo",
 	})
 	if err != ErrMissingDirector {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.GetDirectorBackend(&GetDirectorBackendInput{
+	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{
 		Backend:  "foo",
 		Director: "bar",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-	_, err = testClient.GetDirectorBackend(&GetDirectorBackendInput{
+	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{
 		Backend:   "foo",
 		Director:  "bar",
 		ServiceID: "baz",
@@ -141,24 +141,24 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 
 func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 	var err error
-	err = testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{})
+	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{})
 	if err != ErrMissingBackend {
 		t.Errorf("bad error: %s", err)
 	}
-	err = testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 		Backend: "foo",
 	})
 	if err != ErrMissingDirector {
 		t.Errorf("bad error: %s", err)
 	}
-	err = testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 		Backend:  "foo",
 		Director: "bar",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
-	err = testClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
+	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 		Backend:   "foo",
 		Director:  "bar",
 		ServiceID: "baz",

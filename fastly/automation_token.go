@@ -111,7 +111,7 @@ func (c *Client) GetAutomationToken(i *GetAutomationTokenInput) (*AutomationToke
 	defer resp.Body.Close()
 
 	var t *AutomationToken
-	if err := decodeBodyMap(resp.Body, &t); err != nil {
+	if err := DecodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	return t, nil
@@ -154,7 +154,7 @@ func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*Automati
 	defer resp.Body.Close()
 
 	var t *AutomationToken
-	if err := decodeBodyMap(resp.Body, &t); err != nil {
+	if err := DecodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	return t, nil

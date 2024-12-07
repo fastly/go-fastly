@@ -49,7 +49,7 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 	defer resp.Body.Close()
 
 	var store *KVStore
-	if err := decodeBodyMap(resp.Body, &store); err != nil {
+	if err := DecodeBodyMap(resp.Body, &store); err != nil {
 		return nil, err
 	}
 	return store, nil
@@ -107,7 +107,7 @@ func (c *Client) ListKVStores(i *ListKVStoresInput) (*ListKVStoresResponse, erro
 	defer resp.Body.Close()
 
 	var output *ListKVStoresResponse
-	if err := decodeBodyMap(resp.Body, &output); err != nil {
+	if err := DecodeBodyMap(resp.Body, &output); err != nil {
 		return nil, err
 	}
 	return output, nil
@@ -187,7 +187,7 @@ func (c *Client) GetKVStore(i *GetKVStoreInput) (*KVStore, error) {
 	defer resp.Body.Close()
 
 	var output *KVStore
-	if err := decodeBodyMap(resp.Body, &output); err != nil {
+	if err := DecodeBodyMap(resp.Body, &output); err != nil {
 		return nil, err
 	}
 	return output, nil
@@ -296,7 +296,7 @@ func (c *Client) ListKVStoreKeys(i *ListKVStoreKeysInput) (*ListKVStoreKeysRespo
 	defer resp.Body.Close()
 
 	var output *ListKVStoreKeysResponse
-	if err := decodeBodyMap(resp.Body, &output); err != nil {
+	if err := DecodeBodyMap(resp.Body, &output); err != nil {
 		return nil, err
 	}
 	return output, nil
