@@ -7,7 +7,7 @@ func TestClient_IPs(t *testing.T) {
 
 	var err error
 	var ips IPAddrs
-	record(t, "ips/list", func(c *Client) {
+	Record(t, "ips/list", func(c *Client) {
 		ips, err = c.IPs()
 	})
 	if err != nil {
@@ -23,7 +23,7 @@ func TestClient_IPsV6(t *testing.T) {
 
 	var err error
 	var ips IPAddrs
-	record(t, "ips/list", func(c *Client) {
+	Record(t, "ips/list", func(c *Client) {
 		ips, err = c.IPsV6()
 	})
 	if err != nil {
@@ -40,7 +40,7 @@ func TestClient_AllIPs(t *testing.T) {
 	var err error
 	var v4 IPAddrs
 	var v6 IPAddrs
-	record(t, "ips/list", func(c *Client) {
+	Record(t, "ips/list", func(c *Client) {
 		v4, v6, err = c.AllIPs()
 	})
 	if err != nil {

@@ -7,7 +7,7 @@ func TestClient_EdgeCheck(t *testing.T) {
 
 	var err error
 	var edges []*EdgeCheck
-	record(t, "content/check", func(c *Client) {
+	Record(t, "content/check", func(c *Client) {
 		edges, err = c.EdgeCheck(&EdgeCheckInput{
 			URL: "releases.hashicorp.com",
 		})

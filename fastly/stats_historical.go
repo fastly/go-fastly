@@ -262,7 +262,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 	defer resp.Body.Close()
 
 	var sr *UsageResponse
-	if err := decodeBodyMap(resp.Body, &sr); err != nil {
+	if err := DecodeBodyMap(resp.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -309,7 +309,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 	defer resp.Body.Close()
 
 	var sr *UsageByServiceResponse
-	if err := decodeBodyMap(resp.Body, &sr); err != nil {
+	if err := DecodeBodyMap(resp.Body, &sr); err != nil {
 		return nil, err
 	}
 
@@ -352,7 +352,7 @@ func (c *Client) GetAggregateJSON(i *GetAggregateInput, dst any) error {
 		return err
 	}
 
-	if err = decodeBodyMap(resp.Body, &dst); err != nil {
+	if err = DecodeBodyMap(resp.Body, &dst); err != nil {
 		return err
 	}
 
@@ -376,7 +376,7 @@ func (c *Client) GetRegions() (*RegionsResponse, error) {
 	defer resp.Body.Close()
 
 	var rr *RegionsResponse
-	if err := decodeBodyMap(resp.Body, &rr); err != nil {
+	if err := DecodeBodyMap(resp.Body, &rr); err != nil {
 		return nil, err
 	}
 

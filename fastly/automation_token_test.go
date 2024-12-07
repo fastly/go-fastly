@@ -9,7 +9,7 @@ func TestClient_ListAutomationTokens(t *testing.T) {
 
 	var tokens []*AutomationToken
 	var err error
-	record(t, "automation_tokens/list", func(c *Client) {
+	Record(t, "automation_tokens/list", func(c *Client) {
 		tokens, err = c.ListAutomationTokens()
 	})
 	if err != nil {
@@ -29,7 +29,7 @@ func TestClient_GetAutomationToken(t *testing.T) {
 
 	var token *AutomationToken
 	var err error
-	record(t, "automation_tokens/get", func(c *Client) {
+	Record(t, "automation_tokens/get", func(c *Client) {
 		token, err = c.GetAutomationToken(input)
 	})
 	if err != nil {
@@ -51,7 +51,7 @@ func TestClient_CreateAutomationToken(t *testing.T) {
 
 	var token *AutomationToken
 	var err error
-	record(t, "automation_tokens/create", func(c *Client) {
+	Record(t, "automation_tokens/create", func(c *Client) {
 		token, err = c.CreateAutomationToken(input)
 	})
 	if err != nil {
@@ -74,7 +74,7 @@ func TestClient_DeleteAutomationToken(t *testing.T) {
 	}
 
 	var err error
-	record(t, "automation_tokens/delete", func(c *Client) {
+	Record(t, "automation_tokens/delete", func(c *Client) {
 		err = c.DeleteAutomationToken(input)
 	})
 	if err != nil {

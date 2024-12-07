@@ -50,7 +50,7 @@ func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaC
 	defer resp.Body.Close()
 
 	var d []*GrafanaCloudLogs
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -101,7 +101,7 @@ func (c *Client) CreateGrafanaCloudLogs(i *CreateGrafanaCloudLogsInput) (*Grafan
 	defer resp.Body.Close()
 
 	var d *GrafanaCloudLogs
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -137,7 +137,7 @@ func (c *Client) GetGrafanaCloudLogs(i *GetGrafanaCloudLogsInput) (*GrafanaCloud
 	defer resp.Body.Close()
 
 	var d *GrafanaCloudLogs
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -193,7 +193,7 @@ func (c *Client) UpdateGrafanaCloudLogs(i *UpdateGrafanaCloudLogsInput) (*Grafan
 	defer resp.Body.Close()
 
 	var d *GrafanaCloudLogs
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -229,7 +229,7 @@ func (c *Client) DeleteGrafanaCloudLogs(i *DeleteGrafanaCloudLogsInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

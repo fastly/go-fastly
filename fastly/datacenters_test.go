@@ -7,7 +7,7 @@ func TestDatacenters(t *testing.T) {
 
 	var err error
 	var datacenters []Datacenter
-	record(t, "datacenters/list", func(c *Client) {
+	Record(t, "datacenters/list", func(c *Client) {
 		datacenters, err = c.AllDatacenters()
 	})
 	if err != nil {

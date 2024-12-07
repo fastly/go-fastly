@@ -15,7 +15,7 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 	start := end.Add(-2 * 24 * time.Hour)
 	limit := 150
 	var err error
-	record(t, "origin_inspector/metrics_for_service", func(c *Client) {
+	Record(t, "origin_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetOriginMetricsForService(&GetOriginMetricsInput{
 			Cursor:      ToPointer(""),
 			Datacenters: []string{"LHR", "JFK"},
@@ -25,7 +25,7 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 			Hosts:       []string{"host01"},
 			Metrics:     []string{"responses", "status_2xx"},
 			Regions:     []string{"europe", "usa"},
-			ServiceID:   testDeliveryServiceID,
+			ServiceID:   TestDeliveryServiceID,
 			Start:       &start,
 			Limit:       &limit,
 		})

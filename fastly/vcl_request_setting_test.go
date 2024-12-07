@@ -9,15 +9,15 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "request_settings/version", func(c *Client) {
+	Record(t, "request_settings/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
 	var rs *RequestSetting
-	record(t, "request_settings/create", func(c *Client) {
+	Record(t, "request_settings/create", func(c *Client) {
 		rs, err = c.CreateRequestSetting(&CreateRequestSettingInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-request-setting"),
 			ForceMiss:      ToPointer(Compatibool(true)),
@@ -38,15 +38,15 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "request_settings/cleanup", func(c *Client) {
+		Record(t, "request_settings/cleanup", func(c *Client) {
 			_ = c.DeleteRequestSetting(&DeleteRequestSettingInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-request-setting",
 			})
 
 			_ = c.DeleteRequestSetting(&DeleteRequestSettingInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-request-setting",
 			})
@@ -89,9 +89,9 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	// List
 	var rss []*RequestSetting
-	record(t, "request_settings/list", func(c *Client) {
+	Record(t, "request_settings/list", func(c *Client) {
 		rss, err = c.ListRequestSettings(&ListRequestSettingsInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -104,9 +104,9 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	// Get
 	var nrs *RequestSetting
-	record(t, "request_settings/get", func(c *Client) {
+	Record(t, "request_settings/get", func(c *Client) {
 		nrs, err = c.GetRequestSetting(&GetRequestSettingInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-request-setting",
 		})
@@ -150,9 +150,9 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	// Update
 	var urs *RequestSetting
-	record(t, "request_settings/update", func(c *Client) {
+	Record(t, "request_settings/update", func(c *Client) {
 		urs, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-request-setting",
 			NewName:        ToPointer("new-test-request-setting"),
@@ -171,9 +171,9 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	// Update 2 (wrap empty string with RequestSettingAction)
 	var urs2 *RequestSetting
-	record(t, "request_settings/update-2", func(c *Client) {
+	Record(t, "request_settings/update-2", func(c *Client) {
 		urs2, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
 			Action:         ToPointer(RequestSettingAction("")),
@@ -188,9 +188,9 @@ func TestClient_RequestSettings(t *testing.T) {
 
 	// Update 3 (use explicit RequestSettingActionUnset type)
 	var urs3 *RequestSetting
-	record(t, "request_settings/update-3", func(c *Client) {
+	Record(t, "request_settings/update-3", func(c *Client) {
 		urs3, err = c.UpdateRequestSetting(&UpdateRequestSettingInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
 			Action:         ToPointer(RequestSettingActionUnset),
@@ -204,9 +204,9 @@ func TestClient_RequestSettings(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "request_settings/delete", func(c *Client) {
+	Record(t, "request_settings/delete", func(c *Client) {
 		err = c.DeleteRequestSetting(&DeleteRequestSettingInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-request-setting",
 		})
@@ -218,14 +218,14 @@ func TestClient_RequestSettings(t *testing.T) {
 
 func TestClient_ListRequestSettings_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListRequestSettings(&ListRequestSettingsInput{
+	_, err = TestClient.ListRequestSettings(&ListRequestSettingsInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListRequestSettings(&ListRequestSettingsInput{
+	_, err = TestClient.ListRequestSettings(&ListRequestSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -236,14 +236,14 @@ func TestClient_ListRequestSettings_validation(t *testing.T) {
 
 func TestClient_CreateRequestSetting_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateRequestSetting(&CreateRequestSettingInput{
+	_, err = TestClient.CreateRequestSetting(&CreateRequestSettingInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateRequestSetting(&CreateRequestSettingInput{
+	_, err = TestClient.CreateRequestSetting(&CreateRequestSettingInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -255,7 +255,7 @@ func TestClient_CreateRequestSetting_validation(t *testing.T) {
 func TestClient_GetRequestSetting_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
+	_, err = TestClient.GetRequestSetting(&GetRequestSettingInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -263,7 +263,7 @@ func TestClient_GetRequestSetting_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
+	_, err = TestClient.GetRequestSetting(&GetRequestSettingInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -271,7 +271,7 @@ func TestClient_GetRequestSetting_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetRequestSetting(&GetRequestSettingInput{
+	_, err = TestClient.GetRequestSetting(&GetRequestSettingInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -283,7 +283,7 @@ func TestClient_GetRequestSetting_validation(t *testing.T) {
 func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
+	_, err = TestClient.UpdateRequestSetting(&UpdateRequestSettingInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -291,7 +291,7 @@ func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
+	_, err = TestClient.UpdateRequestSetting(&UpdateRequestSettingInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -299,7 +299,7 @@ func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateRequestSetting(&UpdateRequestSettingInput{
+	_, err = TestClient.UpdateRequestSetting(&UpdateRequestSettingInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -311,7 +311,7 @@ func TestClient_UpdateRequestSetting_validation(t *testing.T) {
 func TestClient_DeleteRequestSetting_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
+	err = TestClient.DeleteRequestSetting(&DeleteRequestSettingInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -319,7 +319,7 @@ func TestClient_DeleteRequestSetting_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
+	err = TestClient.DeleteRequestSetting(&DeleteRequestSettingInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -327,7 +327,7 @@ func TestClient_DeleteRequestSetting_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteRequestSetting(&DeleteRequestSettingInput{
+	err = TestClient.DeleteRequestSetting(&DeleteRequestSettingInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

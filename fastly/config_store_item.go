@@ -251,5 +251,5 @@ func (c *Client) BatchModifyConfigStoreItems(i *BatchModifyConfigStoreItemsInput
 	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
-	return decodeBodyMap(resp.Body, &batchModifyResult)
+	return DecodeBodyMap(resp.Body, &batchModifyResult)
 }

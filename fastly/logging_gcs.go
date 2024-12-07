@@ -55,7 +55,7 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	defer resp.Body.Close()
 
 	var gcses []*GCS
-	if err := decodeBodyMap(resp.Body, &gcses); err != nil {
+	if err := DecodeBodyMap(resp.Body, &gcses); err != nil {
 		return nil, err
 	}
 	return gcses, nil
@@ -118,7 +118,7 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 	defer resp.Body.Close()
 
 	var gcs *GCS
-	if err := decodeBodyMap(resp.Body, &gcs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &gcs); err != nil {
 		return nil, err
 	}
 	return gcs, nil
@@ -154,7 +154,7 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	defer resp.Body.Close()
 
 	var b *GCS
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -222,7 +222,7 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	defer resp.Body.Close()
 
 	var b *GCS
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -258,7 +258,7 @@ func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

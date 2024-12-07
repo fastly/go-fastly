@@ -76,7 +76,7 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 	defer resp.Body.Close()
 
 	var h *ProductEnablement
-	if err := decodeBodyMap(resp.Body, &h); err != nil {
+	if err := DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 
@@ -101,7 +101,7 @@ func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, e
 	defer resp.Body.Close()
 
 	var http3 *ProductEnablement
-	if err := decodeBodyMap(resp.Body, &http3); err != nil {
+	if err := DecodeBodyMap(resp.Body, &http3); err != nil {
 		return nil, err
 	}
 	return http3, nil

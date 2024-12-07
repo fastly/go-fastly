@@ -87,7 +87,7 @@ func (c *Client) ListRequestSettings(i *ListRequestSettingsInput) ([]*RequestSet
 	defer resp.Body.Close()
 
 	var bs []*RequestSetting
-	if err := decodeBodyMap(resp.Body, &bs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
 	return bs, nil
@@ -143,7 +143,7 @@ func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSet
 	defer resp.Body.Close()
 
 	var b *RequestSetting
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -179,7 +179,7 @@ func (c *Client) GetRequestSetting(i *GetRequestSettingInput) (*RequestSetting, 
 	defer resp.Body.Close()
 
 	var b *RequestSetting
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -240,7 +240,7 @@ func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSet
 	defer resp.Body.Close()
 
 	var b *RequestSetting
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -276,7 +276,7 @@ func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

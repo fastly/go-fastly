@@ -46,7 +46,7 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	defer resp.Body.Close()
 
 	var hs []*Heroku
-	if err := decodeBodyMap(resp.Body, &hs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &hs); err != nil {
 		return nil, err
 	}
 	return hs, nil
@@ -91,7 +91,7 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	defer resp.Body.Close()
 
 	var h *Heroku
-	if err := decodeBodyMap(resp.Body, &h); err != nil {
+	if err := DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -127,7 +127,7 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	defer resp.Body.Close()
 
 	var h *Heroku
-	if err := decodeBodyMap(resp.Body, &h); err != nil {
+	if err := DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -177,7 +177,7 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	defer resp.Body.Close()
 
 	var h *Heroku
-	if err := decodeBodyMap(resp.Body, &h); err != nil {
+	if err := DecodeBodyMap(resp.Body, &h); err != nil {
 		return nil, err
 	}
 	return h, nil
@@ -213,7 +213,7 @@ func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

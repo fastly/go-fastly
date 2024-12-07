@@ -21,7 +21,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 
 	// Create private key required to generate a custom certificate.
 	var pk *PrivateKey
-	record(t, fixtureBase+"create-key", func(c *Client) {
+	Record(t, fixtureBase+"create-key", func(c *Client) {
 		pk, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
 			Key:  key,
 			Name: "My private key",
@@ -33,7 +33,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 
 	// Create a customer TLS certificate to pass to the mutual authentication endpoint.
 	var cc *CustomTLSCertificate
-	record(t, fixtureBase+"create-cert", func(c *Client) {
+	Record(t, fixtureBase+"create-cert", func(c *Client) {
 		cc, err = c.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 			CertBlob: cert,
 			Name:     "My custom certificate",
@@ -45,17 +45,17 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		_ = testClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
+		_ = TestClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
 			ID: cc.ID,
 		})
-		_ = testClient.DeletePrivateKey(&DeletePrivateKeyInput{
+		_ = TestClient.DeletePrivateKey(&DeletePrivateKeyInput{
 			ID: pk.ID,
 		})
 	}()
 
 	// Create mutual authentication using the custom TLS certificate above.
 	var tma *TLSMutualAuthentication
-	record(t, fixtureBase+"create-tma", func(c *Client) {
+	Record(t, fixtureBase+"create-tma", func(c *Client) {
 		tma, err = c.CreateTLSMutualAuthentication(&CreateTLSMutualAuthenticationInput{
 			CertBundle: cert,
 			Enforced:   false,
@@ -68,7 +68,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		_ = testClient.DeleteTLSMutualAuthentication(&DeleteTLSMutualAuthenticationInput{
+		_ = TestClient.DeleteTLSMutualAuthentication(&DeleteTLSMutualAuthenticationInput{
 			ID: tma.ID,
 		})
 	}()
@@ -79,7 +79,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 
 	// List
 	var tmas []*TLSMutualAuthentication
-	record(t, fixtureBase+"list", func(c *Client) {
+	Record(t, fixtureBase+"list", func(c *Client) {
 		tmas, err = c.ListTLSMutualAuthentication(&ListTLSMutualAuthenticationsInput{})
 	})
 	if err != nil {
@@ -91,7 +91,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 
 	// Get
 	var gtma *TLSMutualAuthentication
-	record(t, fixtureBase+"get", func(c *Client) {
+	Record(t, fixtureBase+"get", func(c *Client) {
 		gtma, err = c.GetTLSMutualAuthentication(&GetTLSMutualAuthenticationInput{
 			ID: tma.ID,
 		})
@@ -105,7 +105,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 
 	// Update
 	var utma *TLSMutualAuthentication
-	record(t, fixtureBase+"update", func(c *Client) {
+	Record(t, fixtureBase+"update", func(c *Client) {
 		utma, err = c.UpdateTLSMutualAuthentication(&UpdateTLSMutualAuthenticationInput{
 			CertBundle: cert,
 			Enforced:   true,
@@ -121,7 +121,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 	}
 
 	// Delete
-	record(t, fixtureBase+"delete-tma", func(c *Client) {
+	Record(t, fixtureBase+"delete-tma", func(c *Client) {
 		err = c.DeleteTLSMutualAuthentication(&DeleteTLSMutualAuthenticationInput{
 			ID: tma.ID,
 		})
@@ -129,7 +129,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	record(t, fixtureBase+"delete-cert", func(c *Client) {
+	Record(t, fixtureBase+"delete-cert", func(c *Client) {
 		err = c.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{
 			ID: cc.ID,
 		})
@@ -137,7 +137,7 @@ func TestClient_TLSMutualAuthentication(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	record(t, fixtureBase+"delete-key", func(c *Client) {
+	Record(t, fixtureBase+"delete-key", func(c *Client) {
 		err = c.DeletePrivateKey(&DeletePrivateKeyInput{
 			ID: pk.ID,
 		})
@@ -151,7 +151,7 @@ func TestClient_CreateTLSMutualAuthentication_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	_, err = testClient.CreateTLSMutualAuthentication(&CreateTLSMutualAuthenticationInput{
+	_, err = TestClient.CreateTLSMutualAuthentication(&CreateTLSMutualAuthenticationInput{
 		Name: "My certificate",
 	})
 	if err != ErrMissingCertBundle {
@@ -162,7 +162,7 @@ func TestClient_CreateTLSMutualAuthentication_validation(t *testing.T) {
 func TestClient_DeleteTLSMutualAuthentication_validation(t *testing.T) {
 	t.Parallel()
 
-	err := testClient.DeleteTLSMutualAuthentication(&DeleteTLSMutualAuthenticationInput{})
+	err := TestClient.DeleteTLSMutualAuthentication(&DeleteTLSMutualAuthenticationInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
@@ -172,7 +172,7 @@ func TestClient_ListTLSMutualAuthentication_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "mutual_authentication/list", func(c *Client) {
+	Record(t, "mutual_authentication/list", func(c *Client) {
 		_, err = c.ListTLSMutualAuthentication(&ListTLSMutualAuthenticationsInput{})
 	})
 	if err != nil {
@@ -184,7 +184,7 @@ func TestClient_GetTLSMutualAuthentication_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	_, err = testClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
+	_, err = TestClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
@@ -194,7 +194,7 @@ func TestClient_UpdateTLSMutualAuthentication_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	_, err = testClient.UpdateTLSMutualAuthentication(&UpdateTLSMutualAuthenticationInput{
+	_, err = TestClient.UpdateTLSMutualAuthentication(&UpdateTLSMutualAuthenticationInput{
 		ID:   "example",
 		Name: "My certificate",
 	})
@@ -202,7 +202,7 @@ func TestClient_UpdateTLSMutualAuthentication_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateTLSMutualAuthentication(&UpdateTLSMutualAuthenticationInput{
+	_, err = TestClient.UpdateTLSMutualAuthentication(&UpdateTLSMutualAuthenticationInput{
 		CertBundle: "example",
 		Name:       "My certificate",
 	})

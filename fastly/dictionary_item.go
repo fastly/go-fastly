@@ -121,7 +121,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	defer resp.Body.Close()
 
 	var b *DictionaryItem
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -175,7 +175,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 	defer resp.Body.Close()
 
 	var b *DictionaryItem
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -214,7 +214,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	defer resp.Body.Close()
 
 	var b *DictionaryItem
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -262,7 +262,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
-	return decodeBodyMap(resp.Body, &batchModifyResult)
+	return DecodeBodyMap(resp.Body, &batchModifyResult)
 }
 
 // DeleteDictionaryItemInput is the input parameter to DeleteDictionaryItem.

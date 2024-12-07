@@ -26,7 +26,7 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	// Create
 	var pk *PrivateKey
-	record(t, fixtureBase+"create", func(c *Client) {
+	Record(t, fixtureBase+"create", func(c *Client) {
 		pk, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
 			Key:  key,
 			Name: "My private key",
@@ -38,14 +38,14 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		_ = testClient.DeletePrivateKey(&DeletePrivateKeyInput{
+		_ = TestClient.DeletePrivateKey(&DeletePrivateKeyInput{
 			ID: pk.ID,
 		})
 	}()
 
 	// List
 	var lpk []*PrivateKey
-	record(t, fixtureBase+"list", func(c *Client) {
+	Record(t, fixtureBase+"list", func(c *Client) {
 		lpk, err = c.ListPrivateKeys(&ListPrivateKeysInput{})
 	})
 	if err != nil {
@@ -57,7 +57,7 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	// Get
 	var gpk *PrivateKey
-	record(t, fixtureBase+"get", func(c *Client) {
+	Record(t, fixtureBase+"get", func(c *Client) {
 		gpk, err = c.GetPrivateKey(&GetPrivateKeyInput{
 			ID: pk.ID,
 		})
@@ -70,7 +70,7 @@ func TestClient_PrivateKey(t *testing.T) {
 	}
 
 	// Delete
-	record(t, fixtureBase+"delete", func(c *Client) {
+	Record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeletePrivateKey(&DeletePrivateKeyInput{
 			ID: pk.ID,
 		})

@@ -284,7 +284,7 @@ func (c *Client) UpdateWAFRuleExclusion(i *UpdateWAFRuleExclusionInput) (*WAFRul
 	defer resp.Body.Close()
 
 	var exc *WAFRuleExclusion
-	if err := decodeBodyMap(resp.Body, &exc); err != nil {
+	if err := DecodeBodyMap(resp.Body, &exc); err != nil {
 		return nil, err
 	}
 	return exc, nil

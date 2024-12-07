@@ -49,7 +49,7 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 	defer resp.Body.Close()
 
 	var n []*NewRelicOTLP
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -97,7 +97,7 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 	defer resp.Body.Close()
 
 	var n *NewRelicOTLP
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -133,7 +133,7 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 	defer resp.Body.Close()
 
 	var n *NewRelicOTLP
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -186,7 +186,7 @@ func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, 
 	defer resp.Body.Close()
 
 	var n *NewRelicOTLP
-	if err := decodeBodyMap(resp.Body, &n); err != nil {
+	if err := DecodeBodyMap(resp.Body, &n); err != nil {
 		return nil, err
 	}
 	return n, nil
@@ -222,7 +222,7 @@ func (c *Client) DeleteNewRelicOTLP(i *DeleteNewRelicOTLPInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

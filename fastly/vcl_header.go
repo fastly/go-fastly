@@ -94,7 +94,7 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	defer resp.Body.Close()
 
 	var bs []*Header
-	if err := decodeBodyMap(resp.Body, &bs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &bs); err != nil {
 		return nil, err
 	}
 	return bs, nil
@@ -149,7 +149,7 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 	defer resp.Body.Close()
 
 	var b *Header
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -185,7 +185,7 @@ func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	defer resp.Body.Close()
 
 	var b *Header
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -245,7 +245,7 @@ func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 	defer resp.Body.Close()
 
 	var b *Header
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -281,7 +281,7 @@ func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

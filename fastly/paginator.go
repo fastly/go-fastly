@@ -133,7 +133,7 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 	p.consumed = true
 
 	var s []*T
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 

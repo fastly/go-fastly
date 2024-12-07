@@ -58,7 +58,7 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 	defer resp.Body.Close()
 
 	var cs []*CacheSetting
-	if err := decodeBodyMap(resp.Body, &cs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	return cs, nil
@@ -99,7 +99,7 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 	defer resp.Body.Close()
 
 	var cs *CacheSetting
-	if err := decodeBodyMap(resp.Body, &cs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	return cs, nil
@@ -135,7 +135,7 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 	defer resp.Body.Close()
 
 	var cs *CacheSetting
-	if err := decodeBodyMap(resp.Body, &cs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	return cs, nil
@@ -181,7 +181,7 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 	defer resp.Body.Close()
 
 	var cs *CacheSetting
-	if err := decodeBodyMap(resp.Body, &cs); err != nil {
+	if err := DecodeBodyMap(resp.Body, &cs); err != nil {
 		return nil, err
 	}
 	return cs, nil
@@ -217,7 +217,7 @@ func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

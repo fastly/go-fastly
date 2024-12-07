@@ -9,15 +9,15 @@ func TestClient_HealthChecks(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "health_checks/version", func(c *Client) {
+	Record(t, "health_checks/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
 	var hc *HealthCheck
-	record(t, "health_checks/create", func(c *Client) {
+	Record(t, "health_checks/create", func(c *Client) {
 		hc, err = c.CreateHealthCheck(&CreateHealthCheckInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-healthcheck"),
 			Method:         ToPointer("HEAD"),
@@ -42,15 +42,15 @@ func TestClient_HealthChecks(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "health_checks/cleanup", func(c *Client) {
+		Record(t, "health_checks/cleanup", func(c *Client) {
 			_ = c.DeleteHealthCheck(&DeleteHealthCheckInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-healthcheck",
 			})
 
 			_ = c.DeleteHealthCheck(&DeleteHealthCheckInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-healthcheck",
 			})
@@ -96,9 +96,9 @@ func TestClient_HealthChecks(t *testing.T) {
 
 	// List
 	var hcs []*HealthCheck
-	record(t, "health_checks/list", func(c *Client) {
+	Record(t, "health_checks/list", func(c *Client) {
 		hcs, err = c.ListHealthChecks(&ListHealthChecksInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -111,9 +111,9 @@ func TestClient_HealthChecks(t *testing.T) {
 
 	// Get
 	var nhc *HealthCheck
-	record(t, "health_checks/get", func(c *Client) {
+	Record(t, "health_checks/get", func(c *Client) {
 		nhc, err = c.GetHealthCheck(&GetHealthCheckInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-healthcheck",
 		})
@@ -163,9 +163,9 @@ func TestClient_HealthChecks(t *testing.T) {
 
 	// Update
 	var uhc *HealthCheck
-	record(t, "health_checks/update", func(c *Client) {
+	Record(t, "health_checks/update", func(c *Client) {
 		uhc, err = c.UpdateHealthCheck(&UpdateHealthCheckInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-healthcheck",
 			NewName:        ToPointer("new-test-healthcheck"),
@@ -183,9 +183,9 @@ func TestClient_HealthChecks(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "health_checks/delete", func(c *Client) {
+	Record(t, "health_checks/delete", func(c *Client) {
 		err = c.DeleteHealthCheck(&DeleteHealthCheckInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-healthcheck",
 		})
@@ -197,14 +197,14 @@ func TestClient_HealthChecks(t *testing.T) {
 
 func TestClient_ListHealthChecks_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListHealthChecks(&ListHealthChecksInput{
+	_, err = TestClient.ListHealthChecks(&ListHealthChecksInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListHealthChecks(&ListHealthChecksInput{
+	_, err = TestClient.ListHealthChecks(&ListHealthChecksInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -215,14 +215,14 @@ func TestClient_ListHealthChecks_validation(t *testing.T) {
 
 func TestClient_CreateHealthCheck_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateHealthCheck(&CreateHealthCheckInput{
+	_, err = TestClient.CreateHealthCheck(&CreateHealthCheckInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateHealthCheck(&CreateHealthCheckInput{
+	_, err = TestClient.CreateHealthCheck(&CreateHealthCheckInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -234,7 +234,7 @@ func TestClient_CreateHealthCheck_validation(t *testing.T) {
 func TestClient_GetHealthCheck_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
+	_, err = TestClient.GetHealthCheck(&GetHealthCheckInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -242,7 +242,7 @@ func TestClient_GetHealthCheck_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
+	_, err = TestClient.GetHealthCheck(&GetHealthCheckInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -250,7 +250,7 @@ func TestClient_GetHealthCheck_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetHealthCheck(&GetHealthCheckInput{
+	_, err = TestClient.GetHealthCheck(&GetHealthCheckInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -262,7 +262,7 @@ func TestClient_GetHealthCheck_validation(t *testing.T) {
 func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
+	_, err = TestClient.UpdateHealthCheck(&UpdateHealthCheckInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -270,7 +270,7 @@ func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
+	_, err = TestClient.UpdateHealthCheck(&UpdateHealthCheckInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -278,7 +278,7 @@ func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateHealthCheck(&UpdateHealthCheckInput{
+	_, err = TestClient.UpdateHealthCheck(&UpdateHealthCheckInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -290,7 +290,7 @@ func TestClient_UpdateHealthCheck_validation(t *testing.T) {
 func TestClient_DeleteHealthCheck_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
+	err = TestClient.DeleteHealthCheck(&DeleteHealthCheckInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -298,7 +298,7 @@ func TestClient_DeleteHealthCheck_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
+	err = TestClient.DeleteHealthCheck(&DeleteHealthCheckInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -306,7 +306,7 @@ func TestClient_DeleteHealthCheck_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteHealthCheck(&DeleteHealthCheckInput{
+	err = TestClient.DeleteHealthCheck(&DeleteHealthCheckInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

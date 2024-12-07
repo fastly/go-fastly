@@ -207,7 +207,7 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 	defer resp.Body.Close()
 
 	var erls []*ERL
-	if err := decodeBodyMap(resp.Body, &erls); err != nil {
+	if err := DecodeBodyMap(resp.Body, &erls); err != nil {
 		return nil, err
 	}
 
@@ -263,7 +263,7 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 	defer resp.Body.Close()
 
 	var erl *ERL
-	if err := decodeBodyMap(resp.Body, &erl); err != nil {
+	if err := DecodeBodyMap(resp.Body, &erl); err != nil {
 		return nil, err
 	}
 
@@ -291,7 +291,7 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
@@ -322,7 +322,7 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 	defer resp.Body.Close()
 
 	var erl *ERL
-	if err := decodeBodyMap(resp.Body, &erl); err != nil {
+	if err := DecodeBodyMap(resp.Body, &erl); err != nil {
 		return nil, err
 	}
 
@@ -374,7 +374,7 @@ func (c *Client) UpdateERL(i *UpdateERLInput) (*ERL, error) {
 	defer resp.Body.Close()
 
 	var erl *ERL
-	if err := decodeBodyMap(resp.Body, &erl); err != nil {
+	if err := DecodeBodyMap(resp.Body, &erl); err != nil {
 		return nil, err
 	}
 

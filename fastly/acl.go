@@ -43,7 +43,7 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 	defer resp.Body.Close()
 
 	var as []*ACL
-	if err := decodeBodyMap(resp.Body, &as); err != nil {
+	if err := DecodeBodyMap(resp.Body, &as); err != nil {
 		return nil, err
 	}
 	return as, nil
@@ -77,7 +77,7 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 	defer resp.Body.Close()
 
 	var a *ACL
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	if err := DecodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -114,7 +114,7 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {
@@ -154,7 +154,7 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 	defer resp.Body.Close()
 
 	var a *ACL
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	if err := DecodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 	return a, nil
@@ -193,7 +193,7 @@ func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 	defer resp.Body.Close()
 
 	var a *ACL
-	if err := decodeBodyMap(resp.Body, &a); err != nil {
+	if err := DecodeBodyMap(resp.Body, &a); err != nil {
 		return nil, err
 	}
 

@@ -48,7 +48,7 @@ func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
 	defer resp.Body.Close()
 
 	var t []*Token
-	if err := decodeBodyMap(resp.Body, &t); err != nil {
+	if err := DecodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	return t, nil
@@ -75,7 +75,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 	defer resp.Body.Close()
 
 	var t []*Token
-	if err := decodeBodyMap(resp.Body, &t); err != nil {
+	if err := DecodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	return t, nil
@@ -93,7 +93,7 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 	defer resp.Body.Close()
 
 	var t *Token
-	if err := decodeBodyMap(resp.Body, &t); err != nil {
+	if err := DecodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 
@@ -130,7 +130,7 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 	defer resp.Body.Close()
 
 	var t *Token
-	if err := decodeBodyMap(resp.Body, &t); err != nil {
+	if err := DecodeBodyMap(resp.Body, &t); err != nil {
 		return nil, err
 	}
 	return t, nil

@@ -9,7 +9,7 @@ func TestClient_ListTokens(t *testing.T) {
 
 	var tokens []*Token
 	var err error
-	record(t, "tokens/list", func(c *Client) {
+	Record(t, "tokens/list", func(c *Client) {
 		tokens, err = c.ListTokens(&ListTokensInput{})
 	})
 	if err != nil {
@@ -25,7 +25,7 @@ func TestClient_ListCustomerTokens(t *testing.T) {
 
 	var tokens []*Token
 	var err error
-	record(t, "tokens/list_customer", func(c *Client) {
+	Record(t, "tokens/list_customer", func(c *Client) {
 		tokens, err = c.ListCustomerTokens(&ListCustomerTokensInput{
 			CustomerID: "XXXXXXXXXXXXXXXXXXXXXX",
 		})
@@ -43,7 +43,7 @@ func TestClient_GetTokenSelf(t *testing.T) {
 
 	var token *Token
 	var err error
-	record(t, "tokens/get_self", func(c *Client) {
+	Record(t, "tokens/get_self", func(c *Client) {
 		token, err = c.GetTokenSelf()
 	})
 	if err != nil {
@@ -64,7 +64,7 @@ func TestClient_CreateToken(t *testing.T) {
 
 	var token *Token
 	var err error
-	record(t, "tokens/create", func(c *Client) {
+	Record(t, "tokens/create", func(c *Client) {
 		token, err = c.CreateToken(input)
 	})
 	if err != nil {
@@ -87,7 +87,7 @@ func TestClient_DeleteToken(t *testing.T) {
 	}
 
 	var err error
-	record(t, "tokens/delete", func(c *Client) {
+	Record(t, "tokens/delete", func(c *Client) {
 		err = c.DeleteToken(input)
 	})
 	if err != nil {
@@ -99,7 +99,7 @@ func TestClient_DeleteTokenSelf(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "tokens/delete_self", func(c *Client) {
+	Record(t, "tokens/delete_self", func(c *Client) {
 		err = c.DeleteTokenSelf()
 	})
 	if err != nil {
@@ -112,7 +112,7 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 
 	var deleteErr error
 
-	record(t, "tokens/create_and_bulk_delete", func(c *Client) {
+	Record(t, "tokens/create_and_bulk_delete", func(c *Client) {
 		token1, err := c.CreateToken(&CreateTokenInput{
 			Name:     ToPointer("my-test-token-1"),
 			Scope:    ToPointer(GlobalScope),
