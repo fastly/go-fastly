@@ -59,6 +59,9 @@ type ProductEnablementInput struct {
 }
 
 // GetProduct retrieves the details of the product enabled on the service.
+//
+// Deprecated: The 'Get' functions in the product-specific packages
+// should be used instead of this function.
 func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, error) {
 	if i.ProductID == ProductUndefined {
 		return nil, ErrMissingProductID
@@ -84,6 +87,9 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 }
 
 // EnableProduct enables the specified product on the service.
+//
+// Deprecated: The 'Enable' functions in the product-specific packages
+// should be used instead of this function.
 func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, error) {
 	if i.ProductID == ProductUndefined {
 		return nil, ErrMissingProductID
@@ -108,6 +114,9 @@ func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, e
 }
 
 // DisableProduct disables the specified product on the service.
+//
+// Deprecated: The 'Disable' functions in the product-specific packages
+// should be used instead of this function.
 func (c *Client) DisableProduct(i *ProductEnablementInput) error {
 	if i.ProductID == ProductUndefined {
 		return ErrMissingProductID

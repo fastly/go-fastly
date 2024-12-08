@@ -2,7 +2,7 @@
 
 echo "==> Checking that code complies with goimports requirements..."
 
-goimports_files=$(goimports -d -l {fastly,tools})
+goimports_files=$(goimports -d -l ./...)
 if [[ -n ${goimports_files} ]]; then
     echo 'goimports needs to be run on the following files:'
     echo " ===== "
