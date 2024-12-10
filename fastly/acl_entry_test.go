@@ -11,7 +11,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"version", *testService.ServiceID)
 
 	testACL := createTestACL(t, fixtureBase+"acl", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
@@ -19,7 +19,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	// Create
 	var err error
 	var e *ACLEntry
-	record(t, fixtureBase+"create", func(c *Client) {
+	Record(t, fixtureBase+"create", func(c *Client) {
 		e, err = c.CreateACLEntry(&CreateACLEntryInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -51,7 +51,7 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	// List
 	var es []*ACLEntry
-	record(t, fixtureBase+"list", func(c *Client) {
+	Record(t, fixtureBase+"list", func(c *Client) {
 		es, err = c.ListACLEntries(&ListACLEntriesInput{
 			ACLID:     *testACL.ACLID,
 			Direction: ToPointer("descend"),
@@ -70,7 +70,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	// List with paginator
 	var es2 []*ACLEntry
 	var paginator *ListPaginator[ACLEntry]
-	record(t, fixtureBase+"list2", func(c *Client) {
+	Record(t, fixtureBase+"list2", func(c *Client) {
 		paginator = c.GetACLEntries(&GetACLEntriesInput{
 			ACLID:     *testACL.ACLID,
 			Direction: ToPointer("ascend"),
@@ -100,7 +100,7 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	// Get
 	var ne *ACLEntry
-	record(t, fixtureBase+"get", func(c *Client) {
+	Record(t, fixtureBase+"get", func(c *Client) {
 		ne, err = c.GetACLEntry(&GetACLEntryInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -126,7 +126,7 @@ func TestClient_ACLEntries(t *testing.T) {
 
 	// Update
 	var ue *ACLEntry
-	record(t, fixtureBase+"update", func(c *Client) {
+	Record(t, fixtureBase+"update", func(c *Client) {
 		ue, err = c.UpdateACLEntry(&UpdateACLEntryInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -155,7 +155,7 @@ func TestClient_ACLEntries(t *testing.T) {
 	}
 
 	// Delete
-	record(t, fixtureBase+"delete", func(c *Client) {
+	Record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteACLEntry(&DeleteACLEntryInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -170,12 +170,12 @@ func TestClient_ACLEntries(t *testing.T) {
 func TestClient_ListACLEntries_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.ListACLEntries(&ListACLEntriesInput{})
+	_, err = TestClient.ListACLEntries(&ListACLEntriesInput{})
 	if err != ErrMissingACLID {
 		t.Errorf("bad ACL ID: %s", err)
 	}
 
-	_, err = testClient.ListACLEntries(&ListACLEntriesInput{
+	_, err = TestClient.ListACLEntries(&ListACLEntriesInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingServiceID {
@@ -186,12 +186,12 @@ func TestClient_ListACLEntries_validation(t *testing.T) {
 func TestClient_CreateACLEntry_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{})
+	_, err = TestClient.CreateACLEntry(&CreateACLEntryInput{})
 	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateACLEntry(&CreateACLEntryInput{
+	_, err = TestClient.CreateACLEntry(&CreateACLEntryInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingServiceID {
@@ -202,19 +202,19 @@ func TestClient_CreateACLEntry_validation(t *testing.T) {
 func TestClient_GetACLEntry_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetACLEntry(&GetACLEntryInput{})
+	_, err = TestClient.GetACLEntry(&GetACLEntryInput{})
 	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetACLEntry(&GetACLEntryInput{
+	_, err = TestClient.GetACLEntry(&GetACLEntryInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetACLEntry(&GetACLEntryInput{
+	_, err = TestClient.GetACLEntry(&GetACLEntryInput{
 		ACLID:   "123",
 		EntryID: "456",
 	})
@@ -226,19 +226,19 @@ func TestClient_GetACLEntry_validation(t *testing.T) {
 func TestClient_UpdateACLEntry_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{})
+	_, err = TestClient.UpdateACLEntry(&UpdateACLEntryInput{})
 	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
+	_, err = TestClient.UpdateACLEntry(&UpdateACLEntryInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateACLEntry(&UpdateACLEntryInput{
+	_, err = TestClient.UpdateACLEntry(&UpdateACLEntryInput{
 		ACLID:   "123",
 		EntryID: "456",
 	})
@@ -250,19 +250,19 @@ func TestClient_UpdateACLEntry_validation(t *testing.T) {
 func TestClient_DeleteACLEntry_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{})
+	err = TestClient.DeleteACLEntry(&DeleteACLEntryInput{})
 	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
+	err = TestClient.DeleteACLEntry(&DeleteACLEntryInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingEntryID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteACLEntry(&DeleteACLEntryInput{
+	err = TestClient.DeleteACLEntry(&DeleteACLEntryInput{
 		ACLID:   "123",
 		EntryID: "456",
 	})
@@ -274,12 +274,12 @@ func TestClient_DeleteACLEntry_validation(t *testing.T) {
 func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 	var err error
 
-	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{})
+	err = TestClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{})
 	if err != ErrMissingACLID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
+	err = TestClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
 		ACLID: "123",
 	})
 	if err != ErrMissingServiceID {
@@ -287,7 +287,7 @@ func TestClient_BatchModifyACLEntries_validation(t *testing.T) {
 	}
 
 	oversizedACLEntries := make([]*BatchACLEntry, BatchModifyMaximumOperations+1)
-	err = testClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
+	err = TestClient.BatchModifyACLEntries(&BatchModifyACLEntriesInput{
 		ACLID:     "123",
 		ServiceID: "456",
 		Entries:   oversizedACLEntries,

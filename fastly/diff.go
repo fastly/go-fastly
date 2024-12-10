@@ -49,7 +49,7 @@ func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 	defer resp.Body.Close()
 
 	var d *Diff
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil

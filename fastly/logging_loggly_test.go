@@ -9,15 +9,15 @@ func TestClient_Loggly(t *testing.T) {
 
 	var err error
 	var tv *Version
-	record(t, "loggly/version", func(c *Client) {
+	Record(t, "loggly/version", func(c *Client) {
 		tv = testVersion(t, c)
 	})
 
 	// Create
 	var lg *Loggly
-	record(t, "loggly/create", func(c *Client) {
+	Record(t, "loggly/create", func(c *Client) {
 		lg, err = c.CreateLoggly(&CreateLogglyInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-loggly"),
 			Token:          ToPointer("abcd1234"),
@@ -31,15 +31,15 @@ func TestClient_Loggly(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, "loggly/delete", func(c *Client) {
+		Record(t, "loggly/delete", func(c *Client) {
 			_ = c.DeleteLoggly(&DeleteLogglyInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-loggly",
 			})
 
 			_ = c.DeleteLoggly(&DeleteLogglyInput{
-				ServiceID:      testDeliveryServiceID,
+				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-loggly",
 			})
@@ -64,9 +64,9 @@ func TestClient_Loggly(t *testing.T) {
 
 	// List
 	var les []*Loggly
-	record(t, "loggly/list", func(c *Client) {
+	Record(t, "loggly/list", func(c *Client) {
 		les, err = c.ListLoggly(&ListLogglyInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
 	})
@@ -79,9 +79,9 @@ func TestClient_Loggly(t *testing.T) {
 
 	// Get
 	var nlg *Loggly
-	record(t, "loggly/get", func(c *Client) {
+	Record(t, "loggly/get", func(c *Client) {
 		nlg, err = c.GetLoggly(&GetLogglyInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-loggly",
 		})
@@ -107,9 +107,9 @@ func TestClient_Loggly(t *testing.T) {
 
 	// Update
 	var ulg *Loggly
-	record(t, "loggly/update", func(c *Client) {
+	Record(t, "loggly/update", func(c *Client) {
 		ulg, err = c.UpdateLoggly(&UpdateLogglyInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-loggly",
 			NewName:        ToPointer("new-test-loggly"),
@@ -127,9 +127,9 @@ func TestClient_Loggly(t *testing.T) {
 	}
 
 	// Delete
-	record(t, "loggly/delete", func(c *Client) {
+	Record(t, "loggly/delete", func(c *Client) {
 		err = c.DeleteLoggly(&DeleteLogglyInput{
-			ServiceID:      testDeliveryServiceID,
+			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-loggly",
 		})
@@ -141,14 +141,14 @@ func TestClient_Loggly(t *testing.T) {
 
 func TestClient_ListLoggly_validation(t *testing.T) {
 	var err error
-	_, err = testClient.ListLoggly(&ListLogglyInput{
+	_, err = TestClient.ListLoggly(&ListLogglyInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.ListLoggly(&ListLogglyInput{
+	_, err = TestClient.ListLoggly(&ListLogglyInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -159,14 +159,14 @@ func TestClient_ListLoggly_validation(t *testing.T) {
 
 func TestClient_CreateLoggly_validation(t *testing.T) {
 	var err error
-	_, err = testClient.CreateLoggly(&CreateLogglyInput{
+	_, err = TestClient.CreateLoggly(&CreateLogglyInput{
 		ServiceID: "",
 	})
 	if err != ErrMissingServiceID {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.CreateLoggly(&CreateLogglyInput{
+	_, err = TestClient.CreateLoggly(&CreateLogglyInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -178,7 +178,7 @@ func TestClient_CreateLoggly_validation(t *testing.T) {
 func TestClient_GetLoggly_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.GetLoggly(&GetLogglyInput{
+	_, err = TestClient.GetLoggly(&GetLogglyInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -186,7 +186,7 @@ func TestClient_GetLoggly_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetLoggly(&GetLogglyInput{
+	_, err = TestClient.GetLoggly(&GetLogglyInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -194,7 +194,7 @@ func TestClient_GetLoggly_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.GetLoggly(&GetLogglyInput{
+	_, err = TestClient.GetLoggly(&GetLogglyInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -206,7 +206,7 @@ func TestClient_GetLoggly_validation(t *testing.T) {
 func TestClient_UpdateLoggly_validation(t *testing.T) {
 	var err error
 
-	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
+	_, err = TestClient.UpdateLoggly(&UpdateLogglyInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -214,7 +214,7 @@ func TestClient_UpdateLoggly_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
+	_, err = TestClient.UpdateLoggly(&UpdateLogglyInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -222,7 +222,7 @@ func TestClient_UpdateLoggly_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = testClient.UpdateLoggly(&UpdateLogglyInput{
+	_, err = TestClient.UpdateLoggly(&UpdateLogglyInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -234,7 +234,7 @@ func TestClient_UpdateLoggly_validation(t *testing.T) {
 func TestClient_DeleteLoggly_validation(t *testing.T) {
 	var err error
 
-	err = testClient.DeleteLoggly(&DeleteLogglyInput{
+	err = TestClient.DeleteLoggly(&DeleteLogglyInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -242,7 +242,7 @@ func TestClient_DeleteLoggly_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteLoggly(&DeleteLogglyInput{
+	err = TestClient.DeleteLoggly(&DeleteLogglyInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -250,7 +250,7 @@ func TestClient_DeleteLoggly_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = testClient.DeleteLoggly(&DeleteLogglyInput{
+	err = TestClient.DeleteLoggly(&DeleteLogglyInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

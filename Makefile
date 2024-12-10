@@ -16,11 +16,13 @@ GOMAXPROCS ?= 4
 
 NAME := $(notdir $(shell pwd))
 
-# Test Service IDs
+# Test Resource IDs
 FASTLY_TEST_DELIVERY_SERVICE_ID ?=
 DEFAULT_FASTLY_TEST_DELIVERY_SERVICE_ID = kKJb5bOFI47uHeBVluGfX1
 FASTLY_TEST_COMPUTE_SERVICE_ID ?=
 DEFAULT_FASTLY_TEST_COMPUTE_SERVICE_ID = XsjdElScZGjmfCcTwsYRC1
+FASTLY_TEST_NGWAF_WORKSPACE_ID ?=
+DEFAULT_FASTLY_TEST_NGWAF_WORKSPACE_ID = alk6DTsYKHKucJCOIavaJM
 FASTLY_API_KEY ?=
 #
 # Enables support for tools such as https://github.com/rakyll/gotest
@@ -72,6 +74,11 @@ fix-compute-fixtures: ## Updates test fixtures with a specified default Compute 
 	@echo "==> Updating fixtures"
 	@$(shell pwd)/scripts/fixFixtures.sh ${FASTLY_TEST_COMPUTE_SERVICE_ID} ${DEFAULT_FASTLY_TEST_COMPUTE_SERVICE_ID}
 .PHONY: fix-compute-fixtures
+
+fix-ngwaf-fixtures: ## Updates test fixtures with a specified default Next-Gen WAF workspace ID.
+	@echo "==> Updating fixtures"
+	@$(shell pwd)/scripts/fixFixtures.sh ${FASTLY_TEST_NGWAF_WORKSPACE_ID} ${DEFAULT_FASTLY_TEST_NGWAF_WORKSPACE_ID}
+.PHONY: fix-ngwaf-fixtures
 
 check-imports: ## A check which lists improperly-formatted imports, if they exist.
 	@$(shell pwd)/scripts/check-imports.sh

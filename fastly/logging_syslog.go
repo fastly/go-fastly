@@ -55,7 +55,7 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	defer resp.Body.Close()
 
 	var ss []*Syslog
-	if err := decodeBodyMap(resp.Body, &ss); err != nil {
+	if err := DecodeBodyMap(resp.Body, &ss); err != nil {
 		return nil, err
 	}
 	return ss, nil
@@ -118,7 +118,7 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 	defer resp.Body.Close()
 
 	var s *Syslog
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -154,7 +154,7 @@ func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 	defer resp.Body.Close()
 
 	var s *Syslog
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -222,7 +222,7 @@ func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
 	defer resp.Body.Close()
 
 	var s *Syslog
-	if err := decodeBodyMap(resp.Body, &s); err != nil {
+	if err := DecodeBodyMap(resp.Body, &s); err != nil {
 		return nil, err
 	}
 	return s, nil
@@ -258,7 +258,7 @@ func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

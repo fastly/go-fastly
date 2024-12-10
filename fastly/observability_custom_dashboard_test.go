@@ -34,7 +34,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 
 	// Create
 	var ocd *ObservabilityCustomDashboard
-	record(t, "observability_custom_dashboards/create_custom_dashboard", func(c *Client) {
+	Record(t, "observability_custom_dashboards/create_custom_dashboard", func(c *Client) {
 		ocd, err = c.CreateObservabilityCustomDashboard(cocd)
 	})
 	if err != nil {
@@ -42,7 +42,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 	}
 	// Ensure deleted
 	defer func() {
-		record(t, "observability_custom_dashboards/delete_custom_dashboard", func(c *Client) {
+		Record(t, "observability_custom_dashboards/delete_custom_dashboard", func(c *Client) {
 			err = c.DeleteObservabilityCustomDashboard(&DeleteObservabilityCustomDashboardInput{
 				ID: &ocd.ID,
 			})
@@ -63,7 +63,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 
 	// List Dashboards
 	var ldr *ListDashboardsResponse
-	record(t, "observability_custom_dashboards/list_custom_dashboards", func(c *Client) {
+	Record(t, "observability_custom_dashboards/list_custom_dashboards", func(c *Client) {
 		ldr, err = c.ListObservabilityCustomDashboards(&ListObservabilityCustomDashboardsInput{})
 	})
 	if err != nil {
@@ -75,7 +75,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 
 	// Get
 	var gocd *ObservabilityCustomDashboard
-	record(t, "observability_custom_dashboards/get_custom_dashboard", func(c *Client) {
+	Record(t, "observability_custom_dashboards/get_custom_dashboard", func(c *Client) {
 		gocd, err = c.GetObservabilityCustomDashboard(&GetObservabilityCustomDashboardInput{
 			ID: &ocd.ID,
 		})
@@ -109,7 +109,7 @@ func TestClient_ObservabilityCustomDashboards(t *testing.T) {
 			Type:   VisualizationTypeChart,
 		},
 	})
-	record(t, "observability_custom_dashboards/update_custom_dashboard", func(c *Client) {
+	Record(t, "observability_custom_dashboards/update_custom_dashboard", func(c *Client) {
 		ucd, err = c.UpdateObservabilityCustomDashboard(&UpdateObservabilityCustomDashboardInput{
 			Description: ToPointer("My dashboard just got even cooler."),
 			ID:          &ocd.ID,

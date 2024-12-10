@@ -8,9 +8,9 @@ func TestClient_GetStats(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "stats/service_stats", func(c *Client) {
+	Record(t, "stats/service_stats", func(c *Client) {
 		_, err = c.GetStats(&GetStatsInput{
-			Service: ToPointer(testDeliveryServiceID),
+			Service: ToPointer(TestDeliveryServiceID),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
 			By:      ToPointer("minute"),
@@ -26,7 +26,7 @@ func TestClient_GetStats_ByField(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "stats/service_stats_by_field", func(c *Client) {
+	Record(t, "stats/service_stats_by_field", func(c *Client) {
 		_, err = c.GetStatsField(&GetStatsInput{
 			Field:  ToPointer("bandwidth"),
 			From:   ToPointer("1 hour ago"),
@@ -44,9 +44,9 @@ func TestClient_GetStats_ByFieldAndService(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "stats/service_stats_by_field_and_service", func(c *Client) {
+	Record(t, "stats/service_stats_by_field_and_service", func(c *Client) {
 		_, err = c.GetStats(&GetStatsInput{
-			Service: ToPointer(testDeliveryServiceID),
+			Service: ToPointer(TestDeliveryServiceID),
 			Field:   ToPointer("bandwidth"),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
@@ -67,9 +67,9 @@ func TestClient_GetStatsJSON(t *testing.T) {
 	}
 
 	var err error
-	record(t, "stats/service_stats", func(c *Client) {
+	Record(t, "stats/service_stats", func(c *Client) {
 		err = c.GetStatsJSON(&GetStatsInput{
-			Service: ToPointer(testDeliveryServiceID),
+			Service: ToPointer(TestDeliveryServiceID),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
 			By:      ToPointer("minute"),
@@ -93,7 +93,7 @@ func TestClient_GetAggregateJSON(t *testing.T) {
 	}
 
 	var err error
-	record(t, "stats/aggregate", func(c *Client) {
+	Record(t, "stats/aggregate", func(c *Client) {
 		err = c.GetAggregateJSON(&GetAggregateInput{
 			From:   ToPointer("15 minutes ago"),
 			To:     ToPointer("now"),
@@ -114,7 +114,7 @@ func TestClient_GetRegions(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "stats/regions", func(c *Client) {
+	Record(t, "stats/regions", func(c *Client) {
 		_, err = c.GetRegions()
 	})
 	if err != nil {
@@ -126,7 +126,7 @@ func TestClient_GetRegionsUsage(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "stats/regions_usage", func(c *Client) {
+	Record(t, "stats/regions_usage", func(c *Client) {
 		_, err = c.GetUsage(&GetUsageInput{
 			From:   ToPointer("10 days ago"),
 			To:     ToPointer("now"),
@@ -143,7 +143,7 @@ func TestClient_GetServicesByRegionsUsage(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "stats/services_usage", func(c *Client) {
+	Record(t, "stats/services_usage", func(c *Client) {
 		_, err = c.GetUsageByService(&GetUsageInput{
 			From:   ToPointer("10 days ago"),
 			To:     ToPointer("now"),

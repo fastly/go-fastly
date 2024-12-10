@@ -46,7 +46,7 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	defer resp.Body.Close()
 
 	var d []*Datadog
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -91,7 +91,7 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	defer resp.Body.Close()
 
 	var d *Datadog
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -127,7 +127,7 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	defer resp.Body.Close()
 
 	var d *Datadog
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -177,7 +177,7 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	defer resp.Body.Close()
 
 	var d *Datadog
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -213,7 +213,7 @@ func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

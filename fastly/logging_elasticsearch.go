@@ -55,7 +55,7 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 	defer resp.Body.Close()
 
 	var elasticsearch []*Elasticsearch
-	if err := decodeBodyMap(resp.Body, &elasticsearch); err != nil {
+	if err := DecodeBodyMap(resp.Body, &elasticsearch); err != nil {
 		return nil, err
 	}
 	return elasticsearch, nil
@@ -118,7 +118,7 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 	defer resp.Body.Close()
 
 	var elasticsearch *Elasticsearch
-	if err := decodeBodyMap(resp.Body, &elasticsearch); err != nil {
+	if err := DecodeBodyMap(resp.Body, &elasticsearch); err != nil {
 		return nil, err
 	}
 	return elasticsearch, nil
@@ -154,7 +154,7 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 	defer resp.Body.Close()
 
 	var es *Elasticsearch
-	if err := decodeBodyMap(resp.Body, &es); err != nil {
+	if err := DecodeBodyMap(resp.Body, &es); err != nil {
 		return nil, err
 	}
 
@@ -224,7 +224,7 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 	defer resp.Body.Close()
 
 	var es *Elasticsearch
-	if err := decodeBodyMap(resp.Body, &es); err != nil {
+	if err := DecodeBodyMap(resp.Body, &es); err != nil {
 		return nil, err
 	}
 	return es, nil
@@ -261,7 +261,7 @@ func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

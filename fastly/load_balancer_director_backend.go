@@ -54,7 +54,7 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 	defer resp.Body.Close()
 
 	var b *DirectorBackend
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -96,7 +96,7 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 	defer resp.Body.Close()
 
 	var b *DirectorBackend
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -138,7 +138,7 @@ func (c *Client) DeleteDirectorBackend(i *DeleteDirectorBackendInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

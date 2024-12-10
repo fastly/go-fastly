@@ -46,7 +46,7 @@ func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, 
 	defer resp.Body.Close()
 
 	var b *DictionaryInfo
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil

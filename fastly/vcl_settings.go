@@ -37,7 +37,7 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 	defer resp.Body.Close()
 
 	var b *Settings
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil
@@ -76,7 +76,7 @@ func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 	defer resp.Body.Close()
 
 	var b *Settings
-	if err := decodeBodyMap(resp.Body, &b); err != nil {
+	if err := DecodeBodyMap(resp.Body, &b); err != nil {
 		return nil, err
 	}
 	return b, nil

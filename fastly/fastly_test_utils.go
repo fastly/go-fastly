@@ -10,23 +10,29 @@ import (
 	"github.com/dnaeon/go-vcr/recorder"
 )
 
-// testClient is the test client.
-var testClient = DefaultClient()
+// TestClient is the test client.
+var TestClient = DefaultClient()
 
-// testStatsClient is the test client for realtime stats.
-var testStatsClient = NewRealtimeStatsClient()
+// TestStatsClient is the test client for realtime stats.
+var TestStatsClient = NewRealtimeStatsClient()
 
 // ID of the Delivery service for testing.
-var testDeliveryServiceID = deliveryServiceIDForTest()
+var TestDeliveryServiceID = deliveryServiceIDForTest()
 
 // ID of the Compute service for testing.
-var testComputeServiceID = computeServiceIDForTest()
+var TestComputeServiceID = computeServiceIDForTest()
+
+// ID of the NGWAF workspace for testing.
+var TestNGWAFWorkspaceID = ngwafWorkspaceIDForTest()
 
 // ID of the default Delivery service for testing.
 var defaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
 
 // ID of the default Compute service for testing.
 var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
+
+// ID of the default NGWAF workspace for testing.
+var defaultNGWAFWorkspaceID = "alk6DTsYKHKucJCOIavaJM"
 
 const (
 	// ServiceTypeVCL is the type for VCL services.
@@ -55,13 +61,20 @@ func computeServiceIDForTest() string {
 	return defaultComputeTestServiceID
 }
 
+func ngwafWorkspaceIDForTest() string {
+	if tsid := os.Getenv("FASTLY_TEST_NGWAF_WORKSPACE_ID"); tsid != "" {
+		return tsid
+	}
+	return defaultNGWAFWorkspaceID
+}
+
 func vcrDisabled() bool {
 	vcrDisable := os.Getenv("VCR_DISABLE")
 
 	return vcrDisable != ""
 }
 
-func record(t *testing.T, fixture string, f func(*Client)) {
+func Record(t *testing.T, fixture string, f func(*Client)) {
 	client := DefaultClient()
 
 	if vcrDisabled() {
@@ -74,7 +87,7 @@ func record(t *testing.T, fixture string, f func(*Client)) {
 	}
 }
 
-func recordIgnoreBody(t *testing.T, fixture string, f func(*Client)) {
+func RecordIgnoreBody(t *testing.T, fixture string, f func(*Client)) {
 	client := DefaultClient()
 
 	if vcrDisabled() {
@@ -114,7 +127,7 @@ func stopRecorder(t *testing.T, r *recorder.Recorder) {
 	}
 }
 
-func recordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
+func RecordRealtimeStats(t *testing.T, fixture string, f func(*RTSClient)) {
 	r, err := recorder.New("fixtures/" + fixture)
 	if err != nil {
 		t.Fatal(err)
@@ -135,7 +148,7 @@ func createTestService(t *testing.T, serviceFixture, serviceNameSuffix string) *
 	var err error
 	var service *Service
 
-	record(t, serviceFixture, func(client *Client) {
+	Record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
 			Name:    ToPointer(fmt.Sprintf("test_service_%s", serviceNameSuffix)),
 			Comment: ToPointer("go-fastly client test"),
@@ -153,7 +166,7 @@ func createTestServiceWasm(t *testing.T, serviceFixture, serviceNameSuffix strin
 	var err error
 	var service *Service
 
-	record(t, serviceFixture, func(client *Client) {
+	Record(t, serviceFixture, func(client *Client) {
 		service, err = client.CreateService(&CreateServiceInput{
 			Name:    ToPointer(fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix)),
 			Comment: ToPointer("go-fastly wasm client test"),
@@ -173,7 +186,7 @@ func testVersion(t *testing.T, c *Client) *Version {
 	defer testVersionLock.Unlock()
 
 	v, err := c.CreateVersion(&CreateVersionInput{
-		ServiceID: testDeliveryServiceID,
+		ServiceID: TestDeliveryServiceID,
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -181,11 +194,11 @@ func testVersion(t *testing.T, c *Client) *Version {
 	return v
 }
 
-func createTestVersion(t *testing.T, versionFixture, serviceID string) *Version {
+func CreateTestVersion(t *testing.T, versionFixture, serviceID string) *Version {
 	var err error
 	var version *Version
 
-	record(t, versionFixture, func(client *Client) {
+	Record(t, versionFixture, func(client *Client) {
 		testVersionLock.Lock()
 		defer testVersionLock.Unlock()
 
@@ -204,7 +217,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture, serviceID string, ver
 	var err error
 	var dictionary *Dictionary
 
-	record(t, dictionaryFixture, func(client *Client) {
+	Record(t, dictionaryFixture, func(client *Client) {
 		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
@@ -220,7 +233,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture, serviceID string, ver
 func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture string) {
 	var err error
 
-	record(t, deleteFixture, func(client *Client) {
+	Record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteDictionary(&DeleteDictionaryInput{
 			ServiceID:      *dictionary.ServiceID,
 			ServiceVersion: *dictionary.ServiceVersion,
@@ -236,7 +249,7 @@ func createTestACL(t *testing.T, createFixture, serviceID string, version int, a
 	var err error
 	var acl *ACL
 
-	record(t, createFixture, func(client *Client) {
+	Record(t, createFixture, func(client *Client) {
 		acl, err = client.CreateACL(&CreateACLInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
@@ -252,7 +265,7 @@ func createTestACL(t *testing.T, createFixture, serviceID string, version int, a
 func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 	var err error
 
-	record(t, deleteFixture, func(client *Client) {
+	Record(t, deleteFixture, func(client *Client) {
 		err = client.DeleteACL(&DeleteACLInput{
 			ServiceID:      *acl.ServiceID,
 			ServiceVersion: *acl.ServiceVersion,
@@ -268,7 +281,7 @@ func createTestPool(t *testing.T, createFixture, serviceID string, version int, 
 	var err error
 	var pool *Pool
 
-	record(t, createFixture, func(client *Client) {
+	Record(t, createFixture, func(client *Client) {
 		pool, err = client.CreatePool(&CreatePoolInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
@@ -284,7 +297,7 @@ func createTestPool(t *testing.T, createFixture, serviceID string, version int, 
 func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
 	var err error
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		_, err = c.CreateSyslog(&CreateSyslogInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
@@ -306,7 +319,7 @@ func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber in
 func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 	var err error
 
-	record(t, deleteFixture, func(client *Client) {
+	Record(t, deleteFixture, func(client *Client) {
 		err = client.DeletePool(&DeletePoolInput{
 			ServiceID:      *pool.ServiceID,
 			ServiceVersion: *pool.ServiceVersion,
@@ -321,7 +334,7 @@ func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 func deleteTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
 	var err error
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		err = c.DeleteSyslog(&DeleteSyslogInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
@@ -337,7 +350,7 @@ func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 	var err error
 	var condition *Condition
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		condition, err = c.CreateCondition(&CreateConditionInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
@@ -356,7 +369,7 @@ func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, servi
 func deleteTestCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
 	var err error
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		err = c.DeleteCondition(&DeleteConditionInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
@@ -372,7 +385,7 @@ func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, 
 	var err error
 	var ro *ResponseObject
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
@@ -389,7 +402,7 @@ func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, 
 func deleteTestResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
 	var err error
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		err = c.DeleteResponseObject(&DeleteResponseObjectInput{
 			ServiceID:      serviceID,
 			ServiceVersion: serviceNumber,
@@ -405,7 +418,7 @@ func createWAF(t *testing.T, fixture, serviceID, condition, response string, ser
 	var err error
 	var waf *WAF
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		waf, err = c.CreateWAF(&CreateWAFInput{
 			ServiceID:         serviceID,
 			ServiceVersion:    serviceNumber,
@@ -422,7 +435,7 @@ func createWAF(t *testing.T, fixture, serviceID, condition, response string, ser
 func deleteWAF(t *testing.T, fixture, wafID string) {
 	var err error
 
-	record(t, fixture, func(c *Client) {
+	Record(t, fixture, func(c *Client) {
 		err = c.DeleteWAF(&DeleteWAFInput{
 			ID:             wafID,
 			ServiceVersion: 1,
@@ -436,7 +449,7 @@ func deleteWAF(t *testing.T, fixture, wafID string) {
 func deleteTestService(t *testing.T, cleanupFixture, serviceID string) {
 	var err error
 
-	record(t, cleanupFixture, func(client *Client) {
+	Record(t, cleanupFixture, func(client *Client) {
 		err = client.DeleteService(&DeleteServiceInput{
 			ServiceID: serviceID,
 		})

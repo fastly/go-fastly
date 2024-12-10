@@ -13,7 +13,7 @@ func TestClient_WAF_Rules(t *testing.T) {
 	var err error
 	var rulesResp *WAFRuleResponse
 	publisher := "owasp"
-	record(t, fixtureBase+"/list_owasp", func(c *Client) {
+	Record(t, fixtureBase+"/list_owasp", func(c *Client) {
 		rulesResp, err = c.ListWAFRules(&ListWAFRulesInput{
 			FilterPublishers: []string{publisher},
 		})
@@ -33,7 +33,7 @@ func TestClient_WAF_Rules(t *testing.T) {
 
 	publisher = "fastly"
 	var fastlyRulesNumber int
-	record(t, fixtureBase+"/list_all_fastly", func(c *Client) {
+	Record(t, fixtureBase+"/list_all_fastly", func(c *Client) {
 		rulesResp, err = c.ListAllWAFRules(&ListAllWAFRulesInput{
 			FilterPublishers: []string{publisher},
 		})
@@ -52,7 +52,7 @@ func TestClient_WAF_Rules(t *testing.T) {
 	}
 	fastlyRulesNumber = len(rulesResp.Items)
 
-	record(t, fixtureBase+"/list_all_fastly_exclusion", func(c *Client) {
+	Record(t, fixtureBase+"/list_all_fastly_exclusion", func(c *Client) {
 		rulesResp, err = c.ListAllWAFRules(&ListAllWAFRulesInput{
 			FilterPublishers: []string{publisher},
 			ExcludeMocSecIDs: []int{4170020},
@@ -75,7 +75,7 @@ func TestClient_WAF_Rules(t *testing.T) {
 		t.Errorf("expected %d rules: got %d", fastlyRulesNumber-1, len(rulesResp.Items))
 	}
 
-	record(t, fixtureBase+"/list_all_fastly_filter_by_rule_ids", func(c *Client) {
+	Record(t, fixtureBase+"/list_all_fastly_filter_by_rule_ids", func(c *Client) {
 		rulesResp, err = c.ListAllWAFRules(&ListAllWAFRulesInput{
 			FilterModSecIDs: []int{1010060, 1010070},
 		})

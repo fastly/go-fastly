@@ -12,7 +12,7 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
 	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
@@ -36,7 +36,7 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 
 	// When: I execute the batch create operations against the Fastly API,
 	var err error
-	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -45,7 +45,7 @@ func TestClient_BatchModifyDictionaryItems_Create(t *testing.T) {
 
 	// Then: I expect to be able to list all of the created dictionary items.
 	var actualDictionaryItems []*DictionaryItem
-	record(t, fixtureBase+"list_after_create", func(c *Client) {
+	Record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
@@ -84,7 +84,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
 	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
@@ -107,7 +107,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 	}
 
 	var err error
-	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -127,7 +127,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 		},
 	}
 
-	record(t, fixtureBase+"delete_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"delete_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(batchDeleteOperations)
 	})
 	if err != nil {
@@ -136,7 +136,7 @@ func TestClient_BatchModifyDictionaryItems_Delete(t *testing.T) {
 
 	// Then: I expect to be able to list a single dictionary item.
 	var actualDictionaryItems []*DictionaryItem
-	record(t, fixtureBase+"list_after_delete", func(client *Client) {
+	Record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualDictionaryItems, err = client.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
@@ -161,7 +161,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
 	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
@@ -184,7 +184,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 	}
 
 	var err error
-	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -204,7 +204,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 		},
 	}
 
-	record(t, fixtureBase+"update_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"update_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(batchUpdateOperations)
 	})
 	if err != nil {
@@ -213,7 +213,7 @@ func TestClient_BatchModifyDictionaryItems_Update(t *testing.T) {
 
 	// Then: I expect to be able to list all of the dictionary items with modifications applied to a single item.
 	var actualDictionaryItems []*DictionaryItem
-	record(t, fixtureBase+"list_after_update", func(c *Client) {
+	Record(t, fixtureBase+"list_after_update", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
@@ -267,7 +267,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
 	testDictionary := createTestDictionary(t, fixtureBase+"create_dictionary", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestDictionary(t, testDictionary, fixtureBase+"delete_dictionary")
@@ -285,7 +285,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 	}
 
 	var err error
-	record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(batchCreateOperations)
 	})
 	if err != nil {
@@ -310,7 +310,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 		},
 	}
 
-	record(t, fixtureBase+"upsert_dictionary_items", func(c *Client) {
+	Record(t, fixtureBase+"upsert_dictionary_items", func(c *Client) {
 		err = c.BatchModifyDictionaryItems(batchUpsertOperations)
 	})
 	if err != nil {
@@ -319,7 +319,7 @@ func TestClient_BatchModifyDictionaryItems_Upsert(t *testing.T) {
 
 	// Then: I expect to be able to list all of the dictionary items with the modification present.
 	var actualDictionaryItems []*DictionaryItem
-	record(t, fixtureBase+"list_after_upsert", func(c *Client) {
+	Record(t, fixtureBase+"list_after_upsert", func(c *Client) {
 		actualDictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,

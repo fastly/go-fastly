@@ -64,7 +64,7 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	defer resp.Body.Close()
 
 	var ds []*Director
-	if err := decodeBodyMap(resp.Body, &ds); err != nil {
+	if err := DecodeBodyMap(resp.Body, &ds); err != nil {
 		return nil, err
 	}
 	return ds, nil
@@ -107,7 +107,7 @@ func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 	defer resp.Body.Close()
 
 	var d *Director
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -143,7 +143,7 @@ func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 	defer resp.Body.Close()
 
 	var d *Director
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -191,7 +191,7 @@ func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 	defer resp.Body.Close()
 
 	var d *Director
-	if err := decodeBodyMap(resp.Body, &d); err != nil {
+	if err := DecodeBodyMap(resp.Body, &d); err != nil {
 		return nil, err
 	}
 	return d, nil
@@ -227,7 +227,7 @@ func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
 	defer resp.Body.Close()
 
 	var r *statusResp
-	if err := decodeBodyMap(resp.Body, &r); err != nil {
+	if err := DecodeBodyMap(resp.Body, &r); err != nil {
 		return err
 	}
 	if !r.Ok() {

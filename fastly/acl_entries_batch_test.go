@@ -13,7 +13,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
 	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
@@ -41,7 +41,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 
 	// When: I execute the batch create operations against the Fastly API,
 	var err error
-	record(t, fixtureBase+"create_acl_entries", func(c *Client) {
+	Record(t, fixtureBase+"create_acl_entries", func(c *Client) {
 		err = c.BatchModifyACLEntries(batchCreateOperations)
 	})
 	if err != nil {
@@ -50,7 +50,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 
 	// Then: I expect to be able to list all of the created ACL entries.
 	var actualACLEntries []*ACLEntry
-	record(t, fixtureBase+"list_after_create", func(c *Client) {
+	Record(t, fixtureBase+"list_after_create", func(c *Client) {
 		actualACLEntries, err = c.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -109,7 +109,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
 	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
@@ -136,7 +136,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	}
 
 	var err error
-	record(t, fixtureBase+"create_acl_entries", func(c *Client) {
+	Record(t, fixtureBase+"create_acl_entries", func(c *Client) {
 		err = c.BatchModifyACLEntries(batchCreateOperations)
 	})
 	if err != nil {
@@ -144,7 +144,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	}
 
 	var createdACLEntries []*ACLEntry
-	record(t, fixtureBase+"list_before_delete", func(client *Client) {
+	Record(t, fixtureBase+"list_before_delete", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -170,7 +170,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 		},
 	}
 
-	record(t, fixtureBase+"delete_acl_entries", func(c *Client) {
+	Record(t, fixtureBase+"delete_acl_entries", func(c *Client) {
 		err = c.BatchModifyACLEntries(batchDeleteOperations)
 	})
 	if err != nil {
@@ -179,7 +179,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 
 	// Then: I expect to be able to list a single ACL entry.
 	var actualACLEntries []*ACLEntry
-	record(t, fixtureBase+"list_after_delete", func(client *Client) {
+	Record(t, fixtureBase+"list_after_delete", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -208,7 +208,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	testService := createTestService(t, fixtureBase+"create_service", nameSuffix)
 	defer deleteTestService(t, fixtureBase+"delete_service", *testService.ServiceID)
 
-	testVersion := createTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
+	testVersion := CreateTestVersion(t, fixtureBase+"create_version", *testService.ServiceID)
 
 	testACL := createTestACL(t, fixtureBase+"create_acl", *testService.ServiceID, *testVersion.Number, nameSuffix)
 	defer deleteTestACL(t, testACL, fixtureBase+"delete_acl")
@@ -235,7 +235,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	}
 
 	var err error
-	record(t, fixtureBase+"create_acl_entries", func(c *Client) {
+	Record(t, fixtureBase+"create_acl_entries", func(c *Client) {
 		err = c.BatchModifyACLEntries(batchCreateOperations)
 	})
 	if err != nil {
@@ -243,7 +243,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	}
 
 	var createdACLEntries []*ACLEntry
-	record(t, fixtureBase+"list_before_update", func(client *Client) {
+	Record(t, fixtureBase+"list_before_update", func(client *Client) {
 		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
@@ -273,7 +273,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 		},
 	}
 
-	record(t, fixtureBase+"update_acl_entries", func(c *Client) {
+	Record(t, fixtureBase+"update_acl_entries", func(c *Client) {
 		err = c.BatchModifyACLEntries(batchUpdateOperations)
 	})
 	if err != nil {
@@ -282,7 +282,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 
 	// Then: I expect to be able to list all of the ACL entries with modifications applied to a single item.
 	var actualACLEntries []*ACLEntry
-	record(t, fixtureBase+"list_after_update", func(client *Client) {
+	Record(t, fixtureBase+"list_after_update", func(client *Client) {
 		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,

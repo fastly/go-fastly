@@ -3,12 +3,13 @@
 Go Fastly uses [go-vcr](https://github.com/dnaeon/go-vcr) to "record"
 and "replay" API request fixtures to improve the speed and portability
 of integration tests. The test suite uses a pair of service IDs (one
-for Delivery, one for Compute) for its test cases.
+for Delivery, one for Compute) for its test cases. It also uses one
+Next-Gen WAF workspace ID for various test cases.
 
-Contributors without access to the test services can still update the
-fixtures but with some additional steps required. Below is an example
-workflow for updating a set of fixture files (where `...` should be
-replaced with an appropriate value):
+Contributors without access to the test services or workspace can
+still update the fixtures but with some additional steps
+required. Below is an example workflow for updating a set of fixture
+files (where `...` should be replaced with an appropriate value):
 
 ```sh
 # Remove all YAML fixture files from the specified directory.
@@ -20,10 +21,11 @@ rm -r fastly/fixtures/.../*
 #
 # FASTLY_TEST_DELIVERY_SERVICE_ID: should correspond to a real Delivery service you control.
 # FASTLY_TEST_COMPUTE_SERVICE_ID: should correspond to a real Compute service you control.
+# FASTLY_TEST_NGWAF_WORKSPACE_ID: should correspond to a real Next-Gen WAF workspace you control.
 # FASTLY_API_KEY: should be a real token associated with the services you control.
 # TESTARGS: allows you to use the -run flag of the 'go test' command.
 #
-make test FASTLY_TEST_DELIVERY_SERVICE_ID="..." FASTLY_TEST_COMPUTE_SERVICE_ID="..." FASTLY_API_KEY="..." TESTARGS="-run=..."
+make test FASTLY_TEST_DELIVERY_SERVICE_ID="..." FASTLY_TEST_COMPUTE_SERVICE_ID="..." FASTLY_TEST_NGWAF_WORKSPACE_ID="..." FASTLY_API_KEY="..." TESTARGS="-run=..."
 ```
 
 > **NOTE**: to run the tests with go-vcr disabled, set `VCR_DISABLE=1` (`make test-full` does this).
@@ -31,7 +33,8 @@ make test FASTLY_TEST_DELIVERY_SERVICE_ID="..." FASTLY_TEST_COMPUTE_SERVICE_ID="
 When adding or updating client code and integration tests,
 contributors should record a new set of fixtures. Before submitting a
 pull request with new or updated fixtures, we ask that contributors
-update them to use the default service IDs by running two commands:
+update them to use the default service IDs and workspace ID by running
+three commands:
 
 ```sh
 make fix-delivery-fixtures FASTLY_TEST_DELIVERY_SERVICE_ID=<your Delivery SID>
@@ -39,6 +42,10 @@ make fix-delivery-fixtures FASTLY_TEST_DELIVERY_SERVICE_ID=<your Delivery SID>
 
 ```sh
 make fix-compute-fixtures FASTLY_TEST_COMPUTE_SERVICE_ID=<your Compute SID>
+```
+
+```sh
+make fix-ngwaf-fixtures FASTLY_TEST_NGWAF_WORKSPACE_ID=<your Next-Gen WAF workspace ID>
 ```
 
 ### Important Test Tips!

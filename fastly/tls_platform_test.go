@@ -12,7 +12,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 	// Create
 	var err error
 	var bc *BulkCertificate
-	record(t, fixtureBase+"create", func(c *Client) {
+	Record(t, fixtureBase+"create", func(c *Client) {
 		bc, err = c.CreateBulkCertificate(&CreateBulkCertificateInput{
 			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 			IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
@@ -29,7 +29,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		record(t, fixtureBase+"cleanup", func(c *Client) {
+		Record(t, fixtureBase+"cleanup", func(c *Client) {
 			_ = c.DeleteBulkCertificate(&DeleteBulkCertificateInput{
 				ID: bc.ID,
 			})
@@ -38,7 +38,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 
 	// List
 	var lbc []*BulkCertificate
-	record(t, fixtureBase+"list", func(c *Client) {
+	Record(t, fixtureBase+"list", func(c *Client) {
 		lbc, err = c.ListBulkCertificates(&ListBulkCertificatesInput{})
 	})
 	if err != nil {
@@ -50,7 +50,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 
 	// Get
 	var gbc *BulkCertificate
-	record(t, fixtureBase+"get", func(c *Client) {
+	Record(t, fixtureBase+"get", func(c *Client) {
 		gbc, err = c.GetBulkCertificate(&GetBulkCertificateInput{
 			ID: bc.ID,
 		})
@@ -64,7 +64,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 
 	// Update
 	var ubc *BulkCertificate
-	record(t, fixtureBase+"update", func(c *Client) {
+	Record(t, fixtureBase+"update", func(c *Client) {
 		ubc, err = c.UpdateBulkCertificate(&UpdateBulkCertificateInput{
 			ID:                "CERTIFICATE_ID",
 			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
@@ -79,7 +79,7 @@ func TestClient_BulkCertificate(t *testing.T) {
 	}
 
 	// Delete
-	record(t, fixtureBase+"delete", func(c *Client) {
+	Record(t, fixtureBase+"delete", func(c *Client) {
 		err = c.DeleteBulkCertificate(&DeleteBulkCertificateInput{
 			ID: bc.ID,
 		})
@@ -93,7 +93,7 @@ func TestClient_CreateBulkCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "platform_tls/create", func(c *Client) {
+	Record(t, "platform_tls/create", func(c *Client) {
 		_, err = c.CreateBulkCertificate(&CreateBulkCertificateInput{
 			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 			IntermediatesBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
@@ -113,7 +113,7 @@ func TestClient_DeleteBulkCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "platform_tls/delete", func(c *Client) {
+	Record(t, "platform_tls/delete", func(c *Client) {
 		err = c.DeleteBulkCertificate(&DeleteBulkCertificateInput{
 			ID: "CERTIFICATE_ID",
 		})
@@ -127,7 +127,7 @@ func TestClient_ListBulkCertificates_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "platform_tls/list", func(c *Client) {
+	Record(t, "platform_tls/list", func(c *Client) {
 		_, err = c.ListBulkCertificates(&ListBulkCertificatesInput{})
 	})
 	if err != nil {
@@ -139,7 +139,7 @@ func TestClient_GetBulkCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "platform_tls/get", func(c *Client) {
+	Record(t, "platform_tls/get", func(c *Client) {
 		_, err = c.GetBulkCertificate(&GetBulkCertificateInput{
 			ID: "CERTIFICATE_ID",
 		})
@@ -153,7 +153,7 @@ func TestClient_UpdateBulkCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	var err error
-	record(t, "platform_tls/update", func(c *Client) {
+	Record(t, "platform_tls/update", func(c *Client) {
 		_, err = c.UpdateBulkCertificate(&UpdateBulkCertificateInput{
 			ID:                "CERTIFICATE_ID",
 			CertBlob:          "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",

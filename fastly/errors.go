@@ -411,7 +411,7 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 	switch resp.Header.Get("Content-Type") {
 	case jsonapi.MediaType:
 		// If this is a jsonapi response, decode it accordingly.
-		if err := decodeBodyMap(body, &e); err != nil {
+		if err := DecodeBodyMap(body, &e); err != nil {
 			addDecodeErr()
 		}
 
@@ -435,7 +435,7 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 
 	default:
 		var lerr *legacyError
-		if err := decodeBodyMap(body, &lerr); err != nil {
+		if err := DecodeBodyMap(body, &lerr); err != nil {
 			addDecodeErr()
 		} else if lerr != nil {
 			// This is for better handling the KV Store Bulk Insert endpoint.
