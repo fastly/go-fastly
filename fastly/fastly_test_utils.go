@@ -65,7 +65,6 @@ func ngwafWorkspaceIDForTest() string {
 	if tsid := os.Getenv("FASTLY_TEST_NGWAF_WORKSPACE_ID"); tsid != "" {
 		return tsid
 	}
-
 	return defaultNGWAFWorkspaceID
 }
 
