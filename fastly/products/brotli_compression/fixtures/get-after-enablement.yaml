@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+    url: https://api.fastly.com/enabled-products/v1/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1
+    method: GET
+  response:
+    body: |
+      {"product":{"id":"brotli_compression","object":"product"},"service":{"id":"kKJb5bOFI47uHeBVluGfX1","object":"service"},"_links":{"self":"/enabled-products/v1/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "212"
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 07 Dec 2024 17:05:04 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740076-EWR
+      X-Timer:
+      - S1733591104.382753,VS0,VE69
+    status: 200 OK
+    code: 200
+    duration: ""

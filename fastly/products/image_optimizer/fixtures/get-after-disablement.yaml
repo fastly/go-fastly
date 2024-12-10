@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+    url: https://api.fastly.com/enabled-products/v1/image_optimizer/services/kKJb5bOFI47uHeBVluGfX1
+    method: GET
+  response:
+    body: |
+      {"type":"","title":"no product on service","status":400,"errors":null,"detail":""}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "83"
+      Content-Type:
+      - application/json
+      Date:
+      - Sat, 07 Dec 2024 17:05:07 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Status:
+      - 400 Bad Request
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100132-CHI, cache-ewr-kewr1740044-EWR
+      X-Timer:
+      - S1733591107.931923,VS0,VE90
+    status: 400 Bad Request
+    code: 400
+    duration: ""

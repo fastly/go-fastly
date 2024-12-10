@@ -210,6 +210,20 @@ func (c *Client) Get(p string, ro *RequestOptions) (*http.Response, error) {
 	return c.Request("GET", p, ro)
 }
 
+// GetJSON issues an HTTP GET request and indicates that the response
+// should be JSON encoded.
+func (c *Client) GetJSON(p string, ro *RequestOptions) (*http.Response, error) {
+	if ro == nil {
+		ro = new(RequestOptions)
+	}
+	if ro.Headers == nil {
+		ro.Headers = make(map[string]string)
+	}
+	ro.Parallel = true
+	ro.Headers["Accept"] = JSONMimeType
+	return c.Request("GET", p, ro)
+}
+
 // Head issues an HTTP HEAD request.
 func (c *Client) Head(p string, ro *RequestOptions) (*http.Response, error) {
 	if ro == nil {
