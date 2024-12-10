@@ -21,10 +21,10 @@ type ConfigureInput struct {
 
 type ConfigureOutput struct {
 	fp.ConfigureOutput `mapstructure:",squash"`
-	Configuration      *ConfigureOutputNested `mapstructure:"configuration"`
+	Configuration      *configureOutputNested `mapstructure:"configuration"`
 }
 
-type ConfigureOutputNested struct {
+type configureOutputNested struct {
 	Mode *string `mapstructure:"mode"`
 }
 
