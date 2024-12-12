@@ -10,7 +10,7 @@ import "github.com/fastly/go-fastly/v9/fastly"
 // not used within this structure, but specifying it at this level
 // makes type inference simpler when the caller invokes the Get()
 // function.
-type GetInput[O any] struct {
+type GetInput[O ProductOutput] struct {
 	Client        *fastly.Client
 	ProductID     string
 	ServiceID     string
@@ -22,7 +22,7 @@ type GetInput[O any] struct {
 // This function requires the same type parameter as the GetInput
 // struct, and that type is used to construct, populate, and return
 // the output present in the response body.
-func Get[O any](i *GetInput[O]) (*O, error) {
+func Get[O ProductOutput](i *GetInput[O]) (*O, error) {
 	var err error
 	if i.ServiceID == "" {
 		return nil, fastly.ErrMissingServiceID

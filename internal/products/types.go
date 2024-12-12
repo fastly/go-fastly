@@ -18,3 +18,16 @@ type ProductOutput interface {
 // constructors that the operation being tested does not accept an
 // Input struct
 type NullInput struct{}
+
+// NullOutput is used to indicate to the generic FunctionalTest
+// constructors that the operation being tested does not produce an
+// Output struct
+type NullOutput struct{}
+
+func (o NullOutput) ProductID() *string {
+	return nil
+}
+
+func (o NullOutput) ServiceID() *string {
+	return nil
+}

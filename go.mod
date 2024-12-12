@@ -8,8 +8,8 @@ require (
 	github.com/hashicorp/go-cleanhttp v0.5.2
 	github.com/mitchellh/mapstructure v1.4.3
 	github.com/peterhellberg/link v1.1.0
-	golang.org/x/crypto v0.31.0
 	github.com/stretchr/testify v1.10.0
+	golang.org/x/crypto v0.31.0
 	golang.org/x/tools v0.15.0
 	honnef.co/go/tools v0.3.3
 )

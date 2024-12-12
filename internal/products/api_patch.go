@@ -10,7 +10,7 @@ import "github.com/fastly/go-fastly/v9/fastly"
 // output; the output parameter is not used within this structure, but
 // specifying it at this level makes type inference simpler when the
 // caller invokes the Patch() function.
-type PatchInput[I, O any] struct {
+type PatchInput[I any, O ProductOutput] struct {
 	Client        *fastly.Client
 	ProductID     string
 	ServiceID     string
@@ -25,7 +25,7 @@ type PatchInput[I, O any] struct {
 // into the request body (encoded as JSON), and the output type
 // parameter is used to construct, populate, and return the output
 // present in the response body.
-func Patch[I, O any](i *PatchInput[I, O]) (*O, error) {
+func Patch[I any, O ProductOutput](i *PatchInput[I, O]) (*O, error) {
 	var err error
 	if i.ServiceID == "" {
 		return nil, fastly.ErrMissingServiceID

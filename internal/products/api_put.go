@@ -10,7 +10,7 @@ import "github.com/fastly/go-fastly/v9/fastly"
 // output; the output parameter is not used within this structure, but
 // specifying it at this level makes type inference simpler when the
 // caller invokes the Put() function.
-type PutInput[I, O any] struct {
+type PutInput[I any, O ProductOutput] struct {
 	Client        *fastly.Client
 	ProductID     string
 	ServiceID     string
@@ -25,7 +25,7 @@ type PutInput[I, O any] struct {
 // into the request body (encoded as JSON), and the output type
 // parameter is used to construct, populate, and return the output
 // present in the response body.
-func Put[I, O any](i *PutInput[I, O]) (*O, error) {
+func Put[I any, O ProductOutput](i *PutInput[I, O]) (*O, error) {
 	var err error
 	if i.ServiceID == "" {
 		return nil, fastly.ErrMissingServiceID

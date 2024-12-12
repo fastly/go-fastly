@@ -18,7 +18,7 @@ type enableOutputNested struct {
 // This method is required, even though the field in the structure is
 // exported, because there is an interface in an internal package
 // which expects 'output' types to provide this method.
-func (o *EnableOutput) ProductID() *string {
+func (o EnableOutput) ProductID() *string {
 	return o.Product.ID
 }
 
@@ -27,7 +27,7 @@ func (o *EnableOutput) ProductID() *string {
 // This method is required, even though the field in the structure is
 // exported, because there is an interface in an internal package
 // which expects 'output' types to provide this method.
-func (o *EnableOutput) ServiceID() *string {
+func (o EnableOutput) ServiceID() *string {
 	return o.Service.ID
 }
 

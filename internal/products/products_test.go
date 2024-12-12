@@ -21,7 +21,7 @@ func TestDeleteMissingServiceID(t *testing.T) {
 func TestGetMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := p.Get(&p.GetInput[fastly.ProductEnablement]{
+	_, err := p.Get(&p.GetInput[p.NullOutput]{
 		ServiceID: "",
 	})
 
@@ -31,7 +31,7 @@ func TestGetMissingServiceID(t *testing.T) {
 func TestPatchMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := p.Patch(&p.PatchInput[p.NullInput, fastly.ProductEnablement]{
+	_, err := p.Patch(&p.PatchInput[p.NullInput, p.NullOutput]{
 		ServiceID: "",
 	})
 
@@ -41,7 +41,7 @@ func TestPatchMissingServiceID(t *testing.T) {
 func TestPutMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := p.Put(&p.PutInput[p.NullInput, fastly.ProductEnablement]{
+	_, err := p.Put(&p.PutInput[p.NullInput, p.NullOutput]{
 		ServiceID: "",
 	})
 
