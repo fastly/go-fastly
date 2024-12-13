@@ -4,49 +4,46 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	// tp is 'this product' package
-	tp "github.com/fastly/go-fastly/v9/fastly/products/websockets"
-	// fp is 'fastly products' package
-	fp "github.com/fastly/go-fastly/v9/fastly/products"
-	// ip is 'internal products' package
-	ip "github.com/fastly/go-fastly/v9/internal/products"
+	"github.com/fastly/go-fastly/v9/fastly/products"
+	"github.com/fastly/go-fastly/v9/fastly/products/websockets"
+	"github.com/fastly/go-fastly/v9/internal/productcore"
 )
 
 var serviceID = fastly.TestDeliveryServiceID
 
 var functionalTests = []*fastly.FunctionalTest{
-	ip.NewDisableTest(&ip.DisableTestInput{
+	productcore.NewDisableTest(&productcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
-		OpFn:          tp.Disable,
+		OpFn:          websockets.Disable,
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	ip.NewGetTest(&ip.GetTestInput[*fp.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
 		Phase:         "before enablement",
-		OpFn:          tp.Get,
-		ProductID:     tp.ProductID,
+		OpFn:          websockets.Get,
+		ProductID:     websockets.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	ip.NewEnableTest(&ip.EnableTestInput[*ip.NullInput, *fp.EnableOutput]{
-		OpNoInputFn: tp.Enable,
-		ProductID:   tp.ProductID,
+	productcore.NewEnableTest(&productcore.EnableTestInput[*productcore.NullInput, *products.EnableOutput]{
+		OpNoInputFn: websockets.Enable,
+		ProductID:   websockets.ProductID,
 		ServiceID:   serviceID,
 	}),
-	ip.NewGetTest(&ip.GetTestInput[*fp.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
 		Phase:     "after enablement",
-		OpFn:      tp.Get,
-		ProductID: tp.ProductID,
+		OpFn:      websockets.Get,
+		ProductID: websockets.ProductID,
 		ServiceID: serviceID,
 	}),
-	ip.NewDisableTest(&ip.DisableTestInput{
-		OpFn:      tp.Disable,
+	productcore.NewDisableTest(&productcore.DisableTestInput{
+		OpFn:      websockets.Disable,
 		ServiceID: serviceID,
 	}),
-	ip.NewGetTest(&ip.GetTestInput[*fp.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
 		Phase:         "after disablement",
-		OpFn:          tp.Get,
-		ProductID:     tp.ProductID,
+		OpFn:          websockets.Get,
+		ProductID:     websockets.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),

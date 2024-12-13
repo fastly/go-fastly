@@ -1,4 +1,4 @@
-package products
+package productcore
 
 import "github.com/fastly/go-fastly/v9/fastly"
 

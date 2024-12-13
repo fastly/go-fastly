@@ -1,11 +1,12 @@
-package products
+package productcore
 
 // ProductOutput is an interface used to constrain the 'O' type
-// parameter of the FunctionalTest constructors in this package. Use
-// of this interface allows those constructors to apply common
-// validation steps to the output received from an API operation,
-// eliminating the need to duplicate that validation in every
-// FunctionalTest case.
+// parameter of the functions in this package. Use of this interface
+// allows the FunctionalTest constructors to apply common validation
+// steps to the output received from an API operation, eliminating the
+// need to duplicate that validation in every FunctionalTest case, and
+// ensures that the API operation functions only accept types which
+// would also be accepted by the FunctionalTest constructors.
 //
 // This interface matches the methods of the EnableOutput and
 // ConfigureOutput structs in the fastly/products package.
@@ -24,10 +25,10 @@ type NullInput struct{}
 // Output struct
 type NullOutput struct{}
 
-func (o NullOutput) ProductID() *string {
+func (o *NullOutput) ProductID() *string {
 	return nil
 }
 
-func (o NullOutput) ServiceID() *string {
+func (o *NullOutput) ServiceID() *string {
 	return nil
 }

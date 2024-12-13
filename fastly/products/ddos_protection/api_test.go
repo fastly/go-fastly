@@ -4,12 +4,9 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	// tp is 'this product' package
-	tp "github.com/fastly/go-fastly/v9/fastly/products/ddos_protection"
-	// fp is 'fastly products' package
-	fp "github.com/fastly/go-fastly/v9/fastly/products"
-	// ip is 'internal products' package
-	ip "github.com/fastly/go-fastly/v9/internal/products"
+	"github.com/fastly/go-fastly/v9/fastly/products"
+	"github.com/fastly/go-fastly/v9/fastly/products/ddos_protection"
+	"github.com/fastly/go-fastly/v9/internal/productcore"
 
 	"github.com/stretchr/testify/require"
 )
@@ -19,74 +16,74 @@ var serviceID = fastly.TestDeliveryServiceID
 func TestUpdateConfigurationMissingMode(t *testing.T) {
 	t.Parallel()
 
-	_, err := tp.UpdateConfiguration(nil, serviceID, &tp.ConfigureInput{Mode: ""})
+	_, err := ddos_protection.UpdateConfiguration(nil, serviceID, &ddos_protection.ConfigureInput{Mode: ""})
 
-	require.ErrorIs(t, err, tp.ErrMissingMode)
+	require.ErrorIs(t, err, ddos_protection.ErrMissingMode)
 }
 
 var functionalTests = []*fastly.FunctionalTest{
-	ip.NewDisableTest(&ip.DisableTestInput{
+	productcore.NewDisableTest(&productcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
-		OpFn:          tp.Disable,
+		OpFn:          ddos_protection.Disable,
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	ip.NewGetTest(&ip.GetTestInput[*fp.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
 		Phase:         "before enablement",
-		OpFn:          tp.Get,
-		ProductID:     tp.ProductID,
+		OpFn:          ddos_protection.Get,
+		ProductID:     ddos_protection.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	ip.NewEnableTest(&ip.EnableTestInput[*ip.NullInput, *fp.EnableOutput]{
-		OpNoInputFn: tp.Enable,
-		ProductID:   tp.ProductID,
+	productcore.NewEnableTest(&productcore.EnableTestInput[*productcore.NullInput, *products.EnableOutput]{
+		OpNoInputFn: ddos_protection.Enable,
+		ProductID:   ddos_protection.ProductID,
 		ServiceID:   serviceID,
 	}),
-	ip.NewGetTest(&ip.GetTestInput[*fp.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
 		Phase:     "after enablement",
-		OpFn:      tp.Get,
-		ProductID: tp.ProductID,
+		OpFn:      ddos_protection.Get,
+		ProductID: ddos_protection.ProductID,
 		ServiceID: serviceID,
 	}),
-	ip.NewGetConfigurationTest(&ip.GetConfigurationTestInput[*tp.ConfigureOutput]{
+	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[*ddos_protection.ConfigureOutput]{
 		Phase:     "default",
-		OpFn:      tp.GetConfiguration,
-		ProductID: tp.ProductID,
+		OpFn:      ddos_protection.GetConfiguration,
+		ProductID: ddos_protection.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, output *tp.ConfigureOutput) {
-			require.NotNilf(t, output.Configuration.Mode, "test '%s'", tc.Name)
-			require.Equalf(t, "log", *output.Configuration.Mode, "test '%s'", tc.Name)
+		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, o *ddos_protection.ConfigureOutput) {
+			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
+			require.Equalf(t, "log", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	ip.NewUpdateConfigurationTest(&ip.UpdateConfigurationTestInput[*tp.ConfigureInput, *tp.ConfigureOutput]{
-		OpFn:      tp.UpdateConfiguration,
-		Input:     &tp.ConfigureInput{Mode: "block"},
-		ProductID: tp.ProductID,
+	productcore.NewUpdateConfigurationTest(&productcore.UpdateConfigurationTestInput[*ddos_protection.ConfigureInput, *ddos_protection.ConfigureOutput]{
+		OpFn:      ddos_protection.UpdateConfiguration,
+		Input:     &ddos_protection.ConfigureInput{Mode: "block"},
+		ProductID: ddos_protection.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, output *tp.ConfigureOutput) {
-			require.NotNilf(t, output.Configuration.Mode, "test '%s'", tc.Name)
-			require.Equalf(t, "block", *output.Configuration.Mode, "test '%s'", tc.Name)
+		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, o *ddos_protection.ConfigureOutput) {
+			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
+			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	ip.NewGetConfigurationTest(&ip.GetConfigurationTestInput[*tp.ConfigureOutput]{
+	productcore.NewGetConfigurationTest(&productcore.GetConfigurationTestInput[*ddos_protection.ConfigureOutput]{
 		Phase:     "after update",
-		OpFn:      tp.GetConfiguration,
-		ProductID: tp.ProductID,
+		OpFn:      ddos_protection.GetConfiguration,
+		ProductID: ddos_protection.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, output *tp.ConfigureOutput) {
-			require.NotNilf(t, output.Configuration.Mode, "test '%s'", tc.Name)
-			require.Equalf(t, "block", *output.Configuration.Mode, "test '%s'", tc.Name)
+		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, o *ddos_protection.ConfigureOutput) {
+			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
+			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	ip.NewDisableTest(&ip.DisableTestInput{
-		OpFn:      tp.Disable,
+	productcore.NewDisableTest(&productcore.DisableTestInput{
+		OpFn:      ddos_protection.Disable,
 		ServiceID: serviceID,
 	}),
-	ip.NewGetTest(&ip.GetTestInput[*fp.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
 		Phase:         "after disablement",
-		OpFn:          tp.Get,
-		ProductID:     tp.ProductID,
+		OpFn:          ddos_protection.Get,
+		ProductID:     ddos_protection.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
