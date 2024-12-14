@@ -47,7 +47,7 @@ func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*products.Enabl
 		return nil, ErrMissingWorkspaceID
 	}
 
-	return productcore.Put[*EnableInput, *products.EnableOutput](&productcore.PutInput[*EnableInput]{
+	return productcore.Put[*products.EnableOutput](&productcore.PutInput[*EnableInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -76,7 +76,7 @@ func GetConfiguration(c *fastly.Client, serviceID string) (*ConfigureOutput, err
 
 // UpdateConfiguration updates the configuration of the Next-Gen WAF product on the service.
 func UpdateConfiguration(c *fastly.Client, serviceID string, i *ConfigureInput) (*ConfigureOutput, error) {
-	return productcore.Patch[*ConfigureInput, *ConfigureOutput](&productcore.PatchInput[*ConfigureInput]{
+	return productcore.Patch[*ConfigureOutput](&productcore.PatchInput[*ConfigureInput]{
 		Client:        c,
 		ProductID:     ProductID,
 		ServiceID:     serviceID,

@@ -31,7 +31,7 @@ func TestGetMissingServiceID(t *testing.T) {
 func TestPatchMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Patch[*productcore.NullInput, *productcore.NullOutput](&productcore.PatchInput[*productcore.NullInput]{
+	_, err := productcore.Patch[*productcore.NullOutput](&productcore.PatchInput[*productcore.NullInput]{
 		ServiceID: "",
 	})
 
@@ -41,7 +41,7 @@ func TestPatchMissingServiceID(t *testing.T) {
 func TestPutMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Put[*productcore.NullInput, *productcore.NullOutput](&productcore.PutInput[*productcore.NullInput]{
+	_, err := productcore.Put[*productcore.NullOutput](&productcore.PutInput[*productcore.NullInput]{
 		ServiceID: "",
 	})
 

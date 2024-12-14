@@ -25,7 +25,7 @@ type PatchInput[I any] struct {
 // interface which matches the ProductOutput interface, and that type
 // is used to construct, populate, and return the output present in
 // the response body.
-func Patch[I any, O ProductOutput](i *PatchInput[I]) (o O, err error) {
+func Patch[O ProductOutput, I any](i *PatchInput[I]) (o O, err error) {
 	if i.ServiceID == "" {
 		err = fastly.ErrMissingServiceID
 		return

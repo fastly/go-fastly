@@ -25,7 +25,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*productcore.NullInput, *products.EnableOutput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *productcore.NullInput]{
 		OpNoInputFn: domain_inspector.Enable,
 		ProductID:   domain_inspector.ProductID,
 		ServiceID:   serviceID,

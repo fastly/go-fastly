@@ -35,7 +35,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*ngwaf.EnableInput, *products.EnableOutput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *ngwaf.EnableInput]{
 		OpWithInputFn: ngwaf.Enable,
 		Input:         &ngwaf.EnableInput{WorkspaceID: fastly.TestNGWAFWorkspaceID},
 		ProductID:     ngwaf.ProductID,
@@ -57,7 +57,7 @@ var functionalTests = []*fastly.FunctionalTest{
 			require.Equalf(t, "100", *output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewUpdateConfigurationTest(&productcore.UpdateConfigurationTestInput[*ngwaf.ConfigureInput, *ngwaf.ConfigureOutput]{
+	productcore.NewUpdateConfigurationTest(&productcore.UpdateConfigurationTestInput[*ngwaf.ConfigureOutput, *ngwaf.ConfigureInput]{
 		OpFn:      ngwaf.UpdateConfiguration,
 		Input:     &ngwaf.ConfigureInput{TrafficRamp: "45"},
 		ProductID: ngwaf.ProductID,

@@ -25,7 +25,7 @@ type PutInput[I any] struct {
 // interface which matches the ProductOutput interface, and that type
 // is used to construct, populate, and return the output present in
 // the response body.
-func Put[I any, O ProductOutput](i *PutInput[I]) (o O, err error) {
+func Put[O ProductOutput, I any](i *PutInput[I]) (o O, err error) {
 	if i.ServiceID == "" {
 		err = fastly.ErrMissingServiceID
 		return

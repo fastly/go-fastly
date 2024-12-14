@@ -37,7 +37,7 @@ func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
 
 // Enable enables the DDoS Protection product on the service.
 func Enable(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
-	return productcore.Put[*productcore.NullInput, *products.EnableOutput](&productcore.PutInput[*productcore.NullInput]{
+	return productcore.Put[*products.EnableOutput](&productcore.PutInput[*productcore.NullInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -69,7 +69,7 @@ func UpdateConfiguration(c *fastly.Client, serviceID string, i *ConfigureInput) 
 		return nil, ErrMissingMode
 	}
 
-	return productcore.Patch[*ConfigureInput, *ConfigureOutput](&productcore.PatchInput[*ConfigureInput]{
+	return productcore.Patch[*ConfigureOutput](&productcore.PatchInput[*ConfigureInput]{
 		Client:        c,
 		ProductID:     ProductID,
 		ServiceID:     serviceID,

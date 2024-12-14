@@ -19,7 +19,7 @@ func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
 
 // Enable enables the Fanout product on the service.
 func Enable(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
-	return productcore.Put[*productcore.NullInput, *products.EnableOutput](&productcore.PutInput[*productcore.NullInput]{
+	return productcore.Put[*products.EnableOutput](&productcore.PutInput[*productcore.NullInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,

@@ -17,7 +17,7 @@ import (
 // constrained to match the ProductOutput interface (in this package)
 // so that the test case can validate the common portions of the
 // output.
-type UpdateConfigurationTestInput[I any, O ProductOutput] struct {
+type UpdateConfigurationTestInput[O ProductOutput, I any] struct {
 	// Phase is used to distinguish between multiple Enable test
 	// cases in a sequence of test cases; it is included in the
 	// test case's Name and Operation fields
@@ -57,7 +57,7 @@ type UpdateConfigurationTestInput[I any, O ProductOutput] struct {
 // UpdateConfigurationTestInput struct, and that type is used to
 // construct, populate, and validate the output present in the
 // response body.
-func NewUpdateConfigurationTest[I any, O ProductOutput](i *UpdateConfigurationTestInput[I, O]) *fastly.FunctionalTest {
+func NewUpdateConfigurationTest[O ProductOutput, I any](i *UpdateConfigurationTestInput[O, I]) *fastly.FunctionalTest {
 	r := fastly.FunctionalTest{}
 
 	if i.Phase != "" {

@@ -35,7 +35,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*productcore.NullInput, *products.EnableOutput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *productcore.NullInput]{
 		OpNoInputFn: ddos_protection.Enable,
 		ProductID:   ddos_protection.ProductID,
 		ServiceID:   serviceID,
@@ -56,7 +56,7 @@ var functionalTests = []*fastly.FunctionalTest{
 			require.Equalf(t, "log", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
 	}),
-	productcore.NewUpdateConfigurationTest(&productcore.UpdateConfigurationTestInput[*ddos_protection.ConfigureInput, *ddos_protection.ConfigureOutput]{
+	productcore.NewUpdateConfigurationTest(&productcore.UpdateConfigurationTestInput[*ddos_protection.ConfigureOutput, *ddos_protection.ConfigureInput]{
 		OpFn:      ddos_protection.UpdateConfiguration,
 		Input:     &ddos_protection.ConfigureInput{Mode: "block"},
 		ProductID: ddos_protection.ProductID,
