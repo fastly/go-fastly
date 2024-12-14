@@ -7,6 +7,7 @@ import (
 	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/ngwaf"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 
 	"github.com/stretchr/testify/require"
 )
@@ -21,7 +22,7 @@ func TestEnableMissingWorkspaceID(t *testing.T) {
 	require.ErrorIs(t, err, ngwaf.ErrMissingWorkspaceID)
 }
 
-var functionalTests = []*fastly.FunctionalTest{
+var functionalTests = []*test_utils.FunctionalTest{
 	productcore.NewDisableTest(&productcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          ngwaf.Disable,
@@ -52,7 +53,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		OpFn:      ngwaf.GetConfiguration,
 		ProductID: ngwaf.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, output *ngwaf.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, output *ngwaf.ConfigureOutput) {
 			require.NotNilf(t, output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 			require.Equalf(t, "100", *output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 		},
@@ -62,7 +63,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		Input:     &ngwaf.ConfigureInput{TrafficRamp: "45"},
 		ProductID: ngwaf.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, output *ngwaf.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, output *ngwaf.ConfigureOutput) {
 			require.NotNilf(t, output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 			require.Equalf(t, "45", *output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 		},
@@ -72,7 +73,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		OpFn:      ngwaf.GetConfiguration,
 		ProductID: ngwaf.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, output *ngwaf.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, output *ngwaf.ConfigureOutput) {
 			require.NotNilf(t, output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 			require.Equalf(t, "45", *output.Configuration.TrafficRamp, "test '%s'", tc.Name)
 		},
@@ -91,5 +92,5 @@ var functionalTests = []*fastly.FunctionalTest{
 }
 
 func TestEnablementAndConfiguration(t *testing.T) {
-	fastly.ExecuteFunctionalTests(t, functionalTests)
+	test_utils.ExecuteFunctionalTests(t, functionalTests)
 }

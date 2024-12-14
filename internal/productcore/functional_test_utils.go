@@ -3,7 +3,7 @@ package productcore
 import (
 	"testing"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -14,7 +14,7 @@ import (
 // and ServiceID on which the operation was invoked; this function
 // confirms that they were returned and that they have the expected
 // values.
-func validateOutput(t *testing.T, tc *fastly.FunctionalTest, o ProductOutput, productID, serviceID string) {
+func validateOutput(t *testing.T, tc *test_utils.FunctionalTest, o ProductOutput, productID, serviceID string) {
 	require.NotNilf(t, o, "test '%s'", tc.Name)
 	require.NotNilf(t, o.ProductID(), "test '%s'", tc.Name)
 	require.NotNilf(t, o.ServiceID(), "test '%s'", tc.Name)

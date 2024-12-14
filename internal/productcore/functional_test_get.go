@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -41,7 +42,7 @@ type GetTestInput[O ProductOutput] struct {
 	// CheckOutputFn specifies a function whch will be invoked if
 	// the OpFn returns normally; it can be used to perform
 	// validation of the contents of the output
-	CheckOutputFn func(*testing.T, *fastly.FunctionalTest, O)
+	CheckOutputFn func(*testing.T, *test_utils.FunctionalTest, O)
 }
 
 // NewGetTest constructs a FunctionalTest object as specified by its
@@ -56,8 +57,8 @@ type GetTestInput[O ProductOutput] struct {
 // error returned when a product is not enabled on a service. If any
 // other error is returned by the API, the test case will report
 // failure.
-func NewGetTest[O ProductOutput](i *GetTestInput[O]) *fastly.FunctionalTest {
-	r := fastly.FunctionalTest{}
+func NewGetTest[O ProductOutput](i *GetTestInput[O]) *test_utils.FunctionalTest {
+	r := test_utils.FunctionalTest{}
 
 	if i.Phase != "" {
 		r.Name = "get status " + i.Phase
@@ -67,7 +68,7 @@ func NewGetTest[O ProductOutput](i *GetTestInput[O]) *fastly.FunctionalTest {
 		r.Operation = "get"
 	}
 
-	r.TestFn = func(t *testing.T, tc *fastly.FunctionalTest, c *fastly.Client) error {
+	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
 		result, err := i.OpFn(c, i.ServiceID)
 		if err == nil {
 			validateOutput(t, tc, result, i.ProductID, i.ServiceID)

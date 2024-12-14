@@ -7,11 +7,12 @@ import (
 	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/origin_inspector"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 )
 
 var serviceID = fastly.TestDeliveryServiceID
 
-var functionalTests = []*fastly.FunctionalTest{
+var functionalTests = []*test_utils.FunctionalTest{
 	productcore.NewDisableTest(&productcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          origin_inspector.Disable,
@@ -50,5 +51,5 @@ var functionalTests = []*fastly.FunctionalTest{
 }
 
 func TestEnablement(t *testing.T) {
-	fastly.ExecuteFunctionalTests(t, functionalTests)
+	test_utils.ExecuteFunctionalTests(t, functionalTests)
 }

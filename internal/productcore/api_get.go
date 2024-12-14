@@ -14,7 +14,7 @@ type GetInput struct {
 // Get implements a product-specific 'get' operation.
 //
 // This function requires a type parameter which is a pointer to an
-// interface which matches the ProductOutput interface, and that type
+// struct which matches the ProductOutput interface, and that type
 // is used to construct, populate, and return the output present in
 // the response body.
 func Get[O ProductOutput](i *GetInput) (o O, err error) {

@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 )
 
 // DisableTestInput specifies the information needed for the
@@ -30,8 +31,8 @@ type DisableTestInput struct {
 
 // NewDisableTest constructs a FunctionalTest object as specified by
 // its input.
-func NewDisableTest(i *DisableTestInput) *fastly.FunctionalTest {
-	r := fastly.FunctionalTest{}
+func NewDisableTest(i *DisableTestInput) *test_utils.FunctionalTest {
+	r := test_utils.FunctionalTest{}
 
 	if i.Phase != "" {
 		r.Name = "disable " + i.Phase
@@ -41,7 +42,7 @@ func NewDisableTest(i *DisableTestInput) *fastly.FunctionalTest {
 		r.Operation = "disable"
 	}
 
-	r.TestFn = func(_ *testing.T, _ *fastly.FunctionalTest, c *fastly.Client) error {
+	r.TestFn = func(_ *testing.T, _ *test_utils.FunctionalTest, c *fastly.Client) error {
 		err := i.OpFn(c, i.ServiceID)
 		return err
 	}

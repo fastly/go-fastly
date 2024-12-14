@@ -7,6 +7,7 @@ import (
 	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/ddos_protection"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 
 	"github.com/stretchr/testify/require"
 )
@@ -21,7 +22,7 @@ func TestUpdateConfigurationMissingMode(t *testing.T) {
 	require.ErrorIs(t, err, ddos_protection.ErrMissingMode)
 }
 
-var functionalTests = []*fastly.FunctionalTest{
+var functionalTests = []*test_utils.FunctionalTest{
 	productcore.NewDisableTest(&productcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
 		OpFn:          ddos_protection.Disable,
@@ -51,7 +52,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		OpFn:      ddos_protection.GetConfiguration,
 		ProductID: ddos_protection.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, o *ddos_protection.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o *ddos_protection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "log", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
@@ -61,7 +62,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		Input:     &ddos_protection.ConfigureInput{Mode: "block"},
 		ProductID: ddos_protection.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, o *ddos_protection.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o *ddos_protection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
@@ -71,7 +72,7 @@ var functionalTests = []*fastly.FunctionalTest{
 		OpFn:      ddos_protection.GetConfiguration,
 		ProductID: ddos_protection.ProductID,
 		ServiceID: serviceID,
-		CheckOutputFn: func(t *testing.T, tc *fastly.FunctionalTest, o *ddos_protection.ConfigureOutput) {
+		CheckOutputFn: func(t *testing.T, tc *test_utils.FunctionalTest, o *ddos_protection.ConfigureOutput) {
 			require.NotNilf(t, o.Configuration.Mode, "test '%s'", tc.Name)
 			require.Equalf(t, "block", *o.Configuration.Mode, "test '%s'", tc.Name)
 		},
@@ -90,5 +91,5 @@ var functionalTests = []*fastly.FunctionalTest{
 }
 
 func TestEnablementAndConfiguration(t *testing.T) {
-	fastly.ExecuteFunctionalTests(t, functionalTests)
+	test_utils.ExecuteFunctionalTests(t, functionalTests)
 }

@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 )
 
 // UpdateConfigurationTestInput specifies the information needed for
@@ -44,7 +45,7 @@ type UpdateConfigurationTestInput[O ProductOutput, I any] struct {
 	// CheckOutputFn specifies a function whch will be invoked if
 	// the OpFn returns normally; it can be used to perform
 	// validation of the contents of the output
-	CheckOutputFn func(*testing.T, *fastly.FunctionalTest, O)
+	CheckOutputFn func(*testing.T, *test_utils.FunctionalTest, O)
 }
 
 // NewUpdateConfigurationTest constructs a FunctionalTest object as
@@ -57,8 +58,8 @@ type UpdateConfigurationTestInput[O ProductOutput, I any] struct {
 // UpdateConfigurationTestInput struct, and that type is used to
 // construct, populate, and validate the output present in the
 // response body.
-func NewUpdateConfigurationTest[O ProductOutput, I any](i *UpdateConfigurationTestInput[O, I]) *fastly.FunctionalTest {
-	r := fastly.FunctionalTest{}
+func NewUpdateConfigurationTest[O ProductOutput, I any](i *UpdateConfigurationTestInput[O, I]) *test_utils.FunctionalTest {
+	r := test_utils.FunctionalTest{}
 
 	if i.Phase != "" {
 		r.Name = "update configuration " + i.Phase
@@ -68,7 +69,7 @@ func NewUpdateConfigurationTest[O ProductOutput, I any](i *UpdateConfigurationTe
 		r.Operation = "update-configuration"
 	}
 
-	r.TestFn = func(t *testing.T, tc *fastly.FunctionalTest, c *fastly.Client) error {
+	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
 		result, err := i.OpFn(c, i.ServiceID, i.Input)
 		if err == nil {
 			validateOutput(t, tc, result, i.ProductID, i.ServiceID)

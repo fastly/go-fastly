@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 )
 
 // GetConfigurationTestInput specifies the information needed for the
@@ -41,13 +42,13 @@ type GetConfigurationTestInput[O ProductOutput] struct {
 	// CheckOutputFn specifies a function whch will be invoked if
 	// the OpFn returns normally; it can be used to perform
 	// validation of the contents of the output
-	CheckOutputFn func(*testing.T, *fastly.FunctionalTest, O)
+	CheckOutputFn func(*testing.T, *test_utils.FunctionalTest, O)
 }
 
 // NewGetConfigurationTest constructs a FunctionalTest object as
 // specified by its input.
-func NewGetConfigurationTest[O ProductOutput](i *GetConfigurationTestInput[O]) *fastly.FunctionalTest {
-	r := fastly.FunctionalTest{}
+func NewGetConfigurationTest[O ProductOutput](i *GetConfigurationTestInput[O]) *test_utils.FunctionalTest {
+	r := test_utils.FunctionalTest{}
 
 	if i.Phase != "" {
 		r.Name = "get configuration " + i.Phase
@@ -57,7 +58,7 @@ func NewGetConfigurationTest[O ProductOutput](i *GetConfigurationTestInput[O]) *
 		r.Operation = "get-configuration"
 	}
 
-	r.TestFn = func(t *testing.T, tc *fastly.FunctionalTest, c *fastly.Client) error {
+	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
 		result, err := i.OpFn(c, i.ServiceID)
 		if err == nil {
 			validateOutput(t, tc, result, i.ProductID, i.ServiceID)

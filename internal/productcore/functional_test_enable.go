@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/internal/test_utils"
 )
 
 // EnableTestInput specifies the information needed for the
@@ -45,7 +46,7 @@ type EnableTestInput[O ProductOutput, I any] struct {
 	// CheckOutputFn specifies a function whch will be invoked if
 	// OpNoInputFn/OpWithInputFn return normally; it can be used
 	// to perform validation of the contents of the output
-	CheckOutputFn func(*testing.T, *fastly.FunctionalTest, O)
+	CheckOutputFn func(*testing.T, *test_utils.FunctionalTest, O)
 }
 
 // NewEnableTest constructs a FunctionalTest object as specified by its
@@ -58,8 +59,8 @@ type EnableTestInput[O ProductOutput, I any] struct {
 // This function requires the same output type parameter as the
 // EnableTestInput struct, and that type is used to construct,
 // populate, and validate the output present in the response body.
-func NewEnableTest[O ProductOutput, I any](i *EnableTestInput[O, I]) *fastly.FunctionalTest {
-	r := fastly.FunctionalTest{}
+func NewEnableTest[O ProductOutput, I any](i *EnableTestInput[O, I]) *test_utils.FunctionalTest {
+	r := test_utils.FunctionalTest{}
 
 	if i.Phase != "" {
 		r.Name = "enable " + i.Phase
@@ -71,7 +72,7 @@ func NewEnableTest[O ProductOutput, I any](i *EnableTestInput[O, I]) *fastly.Fun
 
 	switch any(i.Input).(type) {
 	case *NullInput:
-		r.TestFn = func(t *testing.T, tc *fastly.FunctionalTest, c *fastly.Client) error {
+		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
 			result, err := i.OpNoInputFn(c, i.ServiceID)
 			if err == nil {
 				validateOutput(t, tc, result, i.ProductID, i.ServiceID)
@@ -82,7 +83,7 @@ func NewEnableTest[O ProductOutput, I any](i *EnableTestInput[O, I]) *fastly.Fun
 			return err
 		}
 	default:
-		r.TestFn = func(t *testing.T, tc *fastly.FunctionalTest, c *fastly.Client) error {
+		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
 			result, err := i.OpWithInputFn(c, i.ServiceID, i.Input)
 			if err == nil {
 				validateOutput(t, tc, result, i.ProductID, i.ServiceID)
