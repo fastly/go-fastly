@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/brotli_compression"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
@@ -19,19 +18,19 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*brotli_compression.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          brotli_compression.Get,
 		ProductID:     brotli_compression.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *productcore.NullInput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*brotli_compression.EnableOutput, *productcore.NullInput]{
 		OpNoInputFn: brotli_compression.Enable,
 		ProductID:   brotli_compression.ProductID,
 		ServiceID:   serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*brotli_compression.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      brotli_compression.Get,
 		ProductID: brotli_compression.ProductID,
@@ -41,7 +40,7 @@ var functionalTests = []*test_utils.FunctionalTest{
 		OpFn:      brotli_compression.Disable,
 		ServiceID: serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*brotli_compression.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          brotli_compression.Get,
 		ProductID:     brotli_compression.ProductID,

@@ -2,11 +2,15 @@ package ddos_protection
 
 import (
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 )
 
-const ProductID = "ddos_protection"
+const (
+	ProductID   = "ddos_protection"
+	ProductName = "DDoS Protection"
+)
+
+type EnableOutput = productcore.EnableOutput
 
 // ErrMissingMode is the error returned by the UpdateConfiguration
 // function when it is passed a ConfigureInput struct with a mode
@@ -18,8 +22,8 @@ type ConfigureInput struct {
 }
 
 type ConfigureOutput struct {
-	products.ConfigureOutput `mapstructure:",squash"`
-	Configuration            *configureOutputNested `mapstructure:"configuration"`
+	productcore.ConfigureOutput `mapstructure:",squash"`
+	Configuration               *configureOutputNested `mapstructure:"configuration"`
 }
 
 type configureOutputNested struct {
@@ -27,8 +31,8 @@ type configureOutputNested struct {
 }
 
 // Get gets the status of the DDoS Protection product on the service.
-func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
-	return productcore.Get[*products.EnableOutput](&productcore.GetInput{
+func Get(c *fastly.Client, serviceID string) (*EnableOutput, error) {
+	return productcore.Get[*EnableOutput](&productcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -36,8 +40,8 @@ func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
 }
 
 // Enable enables the DDoS Protection product on the service.
-func Enable(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
-	return productcore.Put[*products.EnableOutput](&productcore.PutInput[*productcore.NullInput]{
+func Enable(c *fastly.Client, serviceID string) (*EnableOutput, error) {
+	return productcore.Put[*EnableOutput](&productcore.PutInput[*productcore.NullInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,

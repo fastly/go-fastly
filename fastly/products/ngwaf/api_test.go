@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/ngwaf"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
@@ -29,20 +28,20 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*ngwaf.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          ngwaf.Get,
 		ProductID:     ngwaf.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *ngwaf.EnableInput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*ngwaf.EnableOutput, *ngwaf.EnableInput]{
 		OpWithInputFn: ngwaf.Enable,
 		Input:         &ngwaf.EnableInput{WorkspaceID: fastly.TestNGWAFWorkspaceID},
 		ProductID:     ngwaf.ProductID,
 		ServiceID:     serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*ngwaf.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      ngwaf.Get,
 		ProductID: ngwaf.ProductID,
@@ -82,7 +81,7 @@ var functionalTests = []*test_utils.FunctionalTest{
 		OpFn:      ngwaf.Disable,
 		ServiceID: serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*ngwaf.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          ngwaf.Get,
 		ProductID:     ngwaf.ProductID,
