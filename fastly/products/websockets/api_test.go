@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/websockets"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
@@ -19,19 +18,19 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*websockets.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          websockets.Get,
 		ProductID:     websockets.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *productcore.NullInput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*websockets.EnableOutput, *productcore.NullInput]{
 		OpNoInputFn: websockets.Enable,
 		ProductID:   websockets.ProductID,
 		ServiceID:   serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*websockets.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      websockets.Get,
 		ProductID: websockets.ProductID,
@@ -41,7 +40,7 @@ var functionalTests = []*test_utils.FunctionalTest{
 		OpFn:      websockets.Disable,
 		ServiceID: serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*websockets.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          websockets.Get,
 		ProductID:     websockets.ProductID,

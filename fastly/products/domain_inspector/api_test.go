@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/domain_inspector"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
@@ -19,19 +18,19 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*domain_inspector.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          domain_inspector.Get,
 		ProductID:     domain_inspector.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *productcore.NullInput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*domain_inspector.EnableOutput, *productcore.NullInput]{
 		OpNoInputFn: domain_inspector.Enable,
 		ProductID:   domain_inspector.ProductID,
 		ServiceID:   serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*domain_inspector.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      domain_inspector.Get,
 		ProductID: domain_inspector.ProductID,
@@ -41,7 +40,7 @@ var functionalTests = []*test_utils.FunctionalTest{
 		OpFn:      domain_inspector.Disable,
 		ServiceID: serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*domain_inspector.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          domain_inspector.Get,
 		ProductID:     domain_inspector.ProductID,

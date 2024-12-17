@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/ddos_protection"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
@@ -29,19 +28,19 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*ddos_protection.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          ddos_protection.Get,
 		ProductID:     ddos_protection.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *productcore.NullInput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*ddos_protection.EnableOutput, *productcore.NullInput]{
 		OpNoInputFn: ddos_protection.Enable,
 		ProductID:   ddos_protection.ProductID,
 		ServiceID:   serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*ddos_protection.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      ddos_protection.Get,
 		ProductID: ddos_protection.ProductID,
@@ -81,7 +80,7 @@ var functionalTests = []*test_utils.FunctionalTest{
 		OpFn:      ddos_protection.Disable,
 		ServiceID: serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*ddos_protection.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          ddos_protection.Get,
 		ProductID:     ddos_protection.ProductID,

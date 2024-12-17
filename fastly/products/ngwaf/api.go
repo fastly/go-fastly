@@ -2,11 +2,15 @@ package ngwaf
 
 import (
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 )
 
-const ProductID = "ngwaf"
+const (
+	ProductID   = "ngwaf"
+	ProductName = "Next-Gen WAF"
+)
+
+type EnableOutput = productcore.EnableOutput
 
 // ErrMissingWorkspaceID is the error returned by the Enable function
 // when it is passed an EnableInput struct with a WorkspaceID field
@@ -23,8 +27,8 @@ type ConfigureInput struct {
 }
 
 type ConfigureOutput struct {
-	products.ConfigureOutput `mapstructure:",squash"`
-	Configuration            *configureOutputNested `mapstructure:"configuration"`
+	productcore.ConfigureOutput `mapstructure:",squash"`
+	Configuration               *configureOutputNested `mapstructure:"configuration"`
 }
 
 type configureOutputNested struct {
@@ -33,8 +37,8 @@ type configureOutputNested struct {
 }
 
 // Get gets the status of the Next-Gen WAF product on the service.
-func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
-	return productcore.Get[*products.EnableOutput](&productcore.GetInput{
+func Get(c *fastly.Client, serviceID string) (*EnableOutput, error) {
+	return productcore.Get[*EnableOutput](&productcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -42,12 +46,12 @@ func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
 }
 
 // Enable enables the Next-Gen WAF product on the service.
-func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*products.EnableOutput, error) {
+func Enable(c *fastly.Client, serviceID string, i *EnableInput) (*EnableOutput, error) {
 	if i.WorkspaceID == "" {
 		return nil, ErrMissingWorkspaceID
 	}
 
-	return productcore.Put[*products.EnableOutput](&productcore.PutInput[*EnableInput]{
+	return productcore.Put[*EnableOutput](&productcore.PutInput[*EnableInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,

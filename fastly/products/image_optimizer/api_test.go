@@ -4,7 +4,6 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/fastly/products/image_optimizer"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
@@ -19,19 +18,19 @@ var functionalTests = []*test_utils.FunctionalTest{
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*image_optimizer.EnableOutput]{
 		Phase:         "before enablement",
 		OpFn:          image_optimizer.Get,
 		ProductID:     image_optimizer.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[*products.EnableOutput, *productcore.NullInput]{
+	productcore.NewEnableTest(&productcore.EnableTestInput[*image_optimizer.EnableOutput, *productcore.NullInput]{
 		OpNoInputFn: image_optimizer.Enable,
 		ProductID:   image_optimizer.ProductID,
 		ServiceID:   serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*image_optimizer.EnableOutput]{
 		Phase:     "after enablement",
 		OpFn:      image_optimizer.Get,
 		ProductID: image_optimizer.ProductID,
@@ -41,7 +40,7 @@ var functionalTests = []*test_utils.FunctionalTest{
 		OpFn:      image_optimizer.Disable,
 		ServiceID: serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[*products.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[*image_optimizer.EnableOutput]{
 		Phase:         "after disablement",
 		OpFn:          image_optimizer.Get,
 		ProductID:     image_optimizer.ProductID,
