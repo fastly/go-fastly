@@ -521,12 +521,17 @@ func (e *HTTPError) Error() string {
 }
 
 // String implements the stringer interface and returns the string representing
-// the string text that includes the status code and corresponding status text.
+// the error text that includes the status code and corresponding status text.
 func (e *HTTPError) String() string {
 	return e.Error()
 }
 
-// IsNotFound returns true if the HTTP error code is a 404, false otherwise.
+// IsBadRequest returns true if the HTTP status code is 400, false otherwise.
+func (e *HTTPError) IsBadRequest() bool {
+	return e.StatusCode == 400
+}
+
+// IsNotFound returns true if the HTTP status code is 404, false otherwise.
 func (e *HTTPError) IsNotFound() bool {
 	return e.StatusCode == 404
 }
