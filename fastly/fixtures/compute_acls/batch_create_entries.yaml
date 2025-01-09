@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"entries":[{"op":"create","prefix":"1.2.3.0/24","action":"BLOCK"},{"op":"update","prefix":"1.2.3.4/32","action":"ALLOW"},{"op":"create","prefix":"23.23.23.23/32","action":"ALLOW"},{"op":"update","prefix":"192.168.0.0/16","action":"BLOCK"}]}'
+    form: {}
+    headers:
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/TMNYyT6R6uktJcasJwEvkY/entries
+    method: PATCH
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "0"
+      Date:
+      - Thu, 09 Jan 2025 15:49:51 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-lga21943-LGA, cache-lga21943-LGA
+      X-Timer:
+      - S1736437791.047830,VS0,VE296
+    status: 202 Accepted
+    code: 202
+    duration: ""
