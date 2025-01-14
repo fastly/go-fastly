@@ -14,7 +14,7 @@ interactions:
     url: https://api.fastly.com/resources/acls
     method: POST
   response:
-    body: '{"name":"test-compute-acl","id":"TMNYyT6R6uktJcasJwEvkY"}'
+    body: '{"name":"test-compute-acl","id":"f26YgXxNICJlOKgTXLcJed"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 Jan 2025 15:49:50 GMT
+      - Tue, 14 Jan 2025 15:46:32 GMT
       Pragma:
       - no-cache
       Server:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21943-LGA, cache-lga21943-LGA
+      - cache-chi-klot8100077-CHI, cache-chi-klot8100077-CHI
       X-Timer:
-      - S1736437790.795081,VS0,VE508
+      - S1736869592.369701,VS0,VE390
     status: 200 OK
     code: 200
     duration: ""

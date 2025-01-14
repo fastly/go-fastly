@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/TMNYyT6R6uktJcasJwEvkY/entries?limit=1
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?limit=1
     method: GET
   response:
     body: '{"entries":[{"prefix":"1.2.3.0/24","action":"BLOCK"}],"meta":{"next_cursor":"LDE=","limit":1}}'
@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 Jan 2025 15:49:52 GMT
+      - Tue, 14 Jan 2025 15:46:34 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21962-LGA, cache-lga21943-LGA
+      - cache-chi-kigq8000138-CHI, cache-chi-klot8100077-CHI
       X-Timer:
-      - S1736437792.137811,VS0,VE356
+      - S1736869595.524159,VS0,VE283
     status: 200 OK
     code: 200
     duration: ""
@@ -47,7 +47,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/TMNYyT6R6uktJcasJwEvkY/entry/1.2.3.0
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/1.2.3.0
     method: GET
   response:
     body: '{"prefix":"1.2.3.0/24","action":"BLOCK"}'
@@ -61,7 +61,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 Jan 2025 15:49:52 GMT
+      - Tue, 14 Jan 2025 15:46:35 GMT
       Pragma:
       - no-cache
       Server:
@@ -75,9 +75,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21979-LGA, cache-lga21943-LGA
+      - cache-chi-kigq8000152-CHI, cache-chi-klot8100077-CHI
       X-Timer:
-      - S1736437793.583911,VS0,VE190
+      - S1736869595.847160,VS0,VE312
     status: 200 OK
     code: 200
     duration: ""
@@ -87,21 +87,21 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/TMNYyT6R6uktJcasJwEvkY/entries?cursor=LDE%3D&limit=1
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?cursor=LDE%3D&limit=1
     method: GET
   response:
-    body: '{"title":"invalid cursor","status":400}'
+    body: '{"entries":[{"prefix":"1.2.3.4/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01EQXgsMA==","limit":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "39"
+      - "154"
       Content-Type:
-      - application/problem+json
+      - application/json
       Date:
-      - Thu, 09 Jan 2025 15:49:52 GMT
+      - Tue, 14 Jan 2025 15:46:35 GMT
       Pragma:
       - no-cache
       Server:
@@ -115,9 +115,209 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21986-LGA, cache-lga21943-LGA
+      - cache-chi-kigq8000127-CHI, cache-chi-klot8100077-CHI
       X-Timer:
-      - S1736437793.891539,VS0,VE61
-    status: 400 Bad Request
-    code: 400
+      - S1736869595.241084,VS0,VE310
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/1.2.3.4
+    method: GET
+  response:
+    body: '{"prefix":"1.2.3.4/32","action":"ALLOW"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "40"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 Jan 2025 15:46:35 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-chi-kigq8000032-CHI, cache-chi-klot8100077-CHI
+      X-Timer:
+      - S1736869596.589855,VS0,VE192
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?cursor=Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01EQXgsMA%3D%3D&limit=1
+    method: GET
+  response:
+    body: '{"entries":[{"prefix":"23.23.23.23/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01ERTMsMA==","limit":1}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "158"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 Jan 2025 15:46:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-chi-kigq8000059-CHI, cache-chi-klot8100077-CHI
+      X-Timer:
+      - S1736869596.855595,VS0,VE299
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/23.23.23.23
+    method: GET
+  response:
+    body: '{"prefix":"23.23.23.23/32","action":"ALLOW"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "44"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 Jan 2025 15:46:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-chi-klot8100088-CHI, cache-chi-klot8100077-CHI
+      X-Timer:
+      - S1736869596.265763,VS0,VE159
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?cursor=Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01ERTMsMA%3D%3D&limit=1
+    method: GET
+  response:
+    body: '{"entries":[{"prefix":"192.168.0.0/16","action":"BLOCK"}],"meta":{"limit":1}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "77"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 Jan 2025 15:46:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-chi-klot8100081-CHI, cache-chi-klot8100077-CHI
+      X-Timer:
+      - S1736869597.577792,VS0,VE139
+    status: 200 OK
+    code: 200
+    duration: ""
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/192.168.0.0
+    method: GET
+  response:
+    body: '{"prefix":"192.168.0.0/16","action":"BLOCK"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "44"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 Jan 2025 15:46:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-chi-kigq8000028-CHI, cache-chi-klot8100077-CHI
+      X-Timer:
+      - S1736869597.752994,VS0,VE182
+    status: 200 OK
+    code: 200
     duration: ""

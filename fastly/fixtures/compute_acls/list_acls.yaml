@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 09 Jan 2025 15:49:49 GMT
+      - Tue, 14 Jan 2025 15:46:32 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21978-LGA, cache-lga21943-LGA
+      - cache-chi-klot8100078-CHI, cache-chi-klot8100077-CHI
       X-Timer:
-      - S1736437790.590229,VS0,VE175
+      - S1736869592.027476,VS0,VE162
     status: 200 OK
     code: 200
     duration: ""

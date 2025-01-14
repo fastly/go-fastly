@@ -176,7 +176,7 @@ func TestClient_ComputeACL(t *testing.T) {
 				t.Errorf("wrong number of entries for page %d: got %d, requested %d", page, numberOfEntries, Limit)
 			}
 
-			ip, ipNet, err := net.ParseCIDR(p.Entries()[page].Prefix)
+			ip, ipNet, err := net.ParseCIDR(p.Entries()[0].Prefix)
 			if err != nil {
 				t.Errorf("error parsing IP: %v", err)
 			}
