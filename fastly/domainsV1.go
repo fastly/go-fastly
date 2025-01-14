@@ -21,11 +21,11 @@ type DomainsV1Response struct {
 type DomainsV1Data struct {
 	// CreatedAt is the date and time in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
+	// ID is the domain identifier (UUID).
+	DomainID string `json:"id"`
 	// FQDN is the fully-qualified domain name for your domain. Can be created,
 	// but not updated.
 	FQDN string `json:"fqdn"`
-	// ID is the domain identifier (UUID).
-	DomainID string `json:"id"`
 	// ServiceID is the service_id associated with your domain or null if there
 	// is no association.
 	ServiceID *string `json:"service_id"`
