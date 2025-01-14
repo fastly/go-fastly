@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/stretchr/testify/require"
 )
@@ -21,7 +22,7 @@ func TestDeleteMissingServiceID(t *testing.T) {
 func TestGetMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Get[*productcore.NullOutput](&productcore.GetInput{
+	_, err := productcore.Get[*products.NullOutput](&productcore.GetInput{
 		ServiceID: "",
 	})
 
@@ -31,7 +32,7 @@ func TestGetMissingServiceID(t *testing.T) {
 func TestPatchMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Patch[*productcore.NullOutput](&productcore.PatchInput[*productcore.NullInput]{
+	_, err := productcore.Patch[*products.NullOutput](&productcore.PatchInput[*products.NullInput]{
 		ServiceID: "",
 	})
 
@@ -41,7 +42,7 @@ func TestPatchMissingServiceID(t *testing.T) {
 func TestPutMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Put[*productcore.NullOutput](&productcore.PutInput[*productcore.NullInput]{
+	_, err := productcore.Put[*products.NullOutput](&productcore.PutInput[*products.NullInput]{
 		ServiceID: "",
 	})
 

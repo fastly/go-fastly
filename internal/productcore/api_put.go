@@ -1,6 +1,9 @@
 package productcore
 
-import "github.com/fastly/go-fastly/v9/fastly"
+import (
+	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/fastly/products"
+)
 
 // PutInput specifies the information needed for the Put()
 // function to perform the operation.
@@ -25,7 +28,7 @@ type PutInput[I any] struct {
 // struct which matches the ProductOutput interface, and that type
 // is used to construct, populate, and return the output present in
 // the response body.
-func Put[O ProductOutput, I any](i *PutInput[I]) (o O, err error) {
+func Put[O products.ProductOutput, I any](i *PutInput[I]) (o O, err error) {
 	if i.ServiceID == "" {
 		err = fastly.ErrMissingServiceID
 		return

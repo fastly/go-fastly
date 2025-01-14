@@ -1,4 +1,4 @@
-package websockets
+package brotlicompression
 
 import (
 	"github.com/fastly/go-fastly/v9/fastly"
@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	ProductID   = "websockets"
-	ProductName = "WebSockets"
+	ProductID   = "brotli_compression"
+	ProductName = "Brotli Compression"
 )
 
 // EnableOutput holds the details returned by the API from 'Get' and
@@ -16,7 +16,7 @@ const (
 // package will have a stable name to reference.
 type EnableOutput = products.EnableOutput
 
-// Get gets the status of the WebSockets product on the service.
+// Get gets the status of the Brotli Compression product on the service.
 func Get(c *fastly.Client, serviceID string) (EnableOutput, error) {
 	return productcore.Get[EnableOutput](&productcore.GetInput{
 		Client:    c,
@@ -25,7 +25,7 @@ func Get(c *fastly.Client, serviceID string) (EnableOutput, error) {
 	})
 }
 
-// Enable enables the WebSockets product on the service.
+// Enable enables the Brotli Compression product on the service.
 func Enable(c *fastly.Client, serviceID string) (EnableOutput, error) {
 	return productcore.Put[EnableOutput](&productcore.PutInput[products.NullInput]{
 		Client:    c,
@@ -34,7 +34,7 @@ func Enable(c *fastly.Client, serviceID string) (EnableOutput, error) {
 	})
 }
 
-// Disable disables the WebSockets product on the service.
+// Disable disables the Brotli Compression product on the service.
 func Disable(c *fastly.Client, serviceID string) error {
 	return productcore.Delete(&productcore.DeleteInput{
 		Client:    c,
