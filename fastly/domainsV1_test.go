@@ -69,18 +69,17 @@ func TestClient_DomainsV1(t *testing.T) {
 	}
 
 	// Update
-	serviceID := "3QSsca5ilwNVpceZ2HJIAH"
 	var udd *DomainsV1Data
 	Record(t, "domains_v1/update_domain", func(c *Client) {
 		udd, err = c.UpdateDomainsV1(&UpdateDomainsV1Input{
 			DomainID:  ToPointer(dd.DomainID),
-			ServiceID: ToPointer(serviceID),
+			ServiceID: ToPointer(defaultDeliveryTestServiceID),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if udd.ServiceID == nil || *udd.ServiceID != serviceID {
+	if udd.ServiceID == nil || *udd.ServiceID != defaultDeliveryTestServiceID {
 		t.Errorf("bad service id: %v", udd.ServiceID)
 	}
 
