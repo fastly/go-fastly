@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/domains/v1/hbRABkI8yvSnUbCLRiqUbQ
+    method: DELETE
+  response:
+    body: '{"errors":[{"title":"Not found","detail":"The domain you requested was
+      not found"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "84"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 Jan 2025 14:21:10 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-chi-kigq8000030-CHI, cache-lon420121-LON
+      X-Timer:
+      - S1736864470.058911,VS0,VE170
+    status: 404 Not Found
+    code: 404
+    duration: ""

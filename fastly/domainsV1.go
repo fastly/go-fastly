@@ -28,7 +28,7 @@ type DomainsV1Data struct {
 	DomainID string `json:"id"`
 	// ServiceID is the service_id associated with your domain or null if there
 	// is no association.
-	ServiceID string `json:"service_id"`
+	ServiceID *string `json:"service_id"`
 	// UpdatedAt is the date and time in ISO 8601 format.
 	UpdatedAt time.Time `json:"updated_at"`
 }
