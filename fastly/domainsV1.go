@@ -26,7 +26,7 @@ type DomainsV1Data struct {
 	// FQDN is the fully-qualified domain name of the domain. Read-only
 	// after creation.
 	FQDN string `json:"fqdn"`
-	// ServiceID is the service_id associated with your domain or null if there
+	// ServiceID is the service_id associated with the domain or nil if there
 	// is no association.
 	ServiceID *string `json:"service_id"`
 	// UpdatedAt is the date and time in ISO 8601 format.
