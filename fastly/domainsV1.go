@@ -54,7 +54,7 @@ type ListDomainsV1Input struct {
 	Cursor *string
 	// FQDN filters results by the FQDN using a fuzzy/partial match (optional).
 	FQDN *string
-	// Limit is how many results are returned (optional).
+	// Limit is the maximum number of results to return (optional).
 	Limit *int
 	// ServiceID filter results based on a service_id (optional).
 	ServiceID *string
