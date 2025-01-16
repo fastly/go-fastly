@@ -99,8 +99,7 @@ func (c *Client) ListDomainsV1(i *ListDomainsV1Input) (*DomainsV1Response, error
 
 // CreateDomainsV1Input is used as input to the CreateDomainsV1 function.
 type CreateDomainsV1Input struct {
-	// FQDN is the fully-qualified domain name for your domain. Can be created,
-	// but not updated (required).
+	// FQDN is the fully-qualified domain name of the domain (required).
 	FQDN *string `json:"fqdn"`
 	// ServiceID is the service_id associated with your domain or null if there
 	// is no association (optional)
