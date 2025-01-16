@@ -50,7 +50,7 @@ type DomainsV1Meta struct {
 type ListDomainsV1Input struct {
 	// Cursor is the cursor value from the next_cursor field of a previous
 	// response, used to retrieve the next page. To request the first page, this
-	// should be empty (optional).
+	// should be an empty string or nil.
 	Cursor *string
 	// FQDN filters results by the FQDN using a fuzzy/partial match (optional).
 	FQDN *string
