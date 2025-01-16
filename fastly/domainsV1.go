@@ -36,7 +36,7 @@ type DomainsV1Data struct {
 // DomainsV1Meta is a subset of the API response structure containing metadata
 // related to paginating the full dataset.
 type DomainsV1Meta struct {
-	// Limit is how many results are returned.
+	// Limit is how many results are included in this response.
 	Limit int `json:"limit"`
 	// NextCursor is the cursor value used to retrieve the next page.
 	NextCursor string `json:"next_cursor"`
