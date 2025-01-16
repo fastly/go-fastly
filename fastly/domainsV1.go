@@ -62,7 +62,7 @@ type ListDomainsV1Input struct {
 	Sort *string
 }
 
-// ListDomainsV1 retrieves filtered, paginated domains.
+// ListDomainsV1 retrieves a list of domains, with optional filtering and pagination.
 func (c *Client) ListDomainsV1(i *ListDomainsV1Input) (*DomainsV1Response, error) {
 	ro := &RequestOptions{
 		Params: map[string]string{},
