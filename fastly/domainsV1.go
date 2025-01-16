@@ -181,7 +181,7 @@ func (c *Client) UpdateDomainsV1(i *UpdateDomainsV1Input) (*DomainsV1Data, error
 
 // DeleteDomainsV1Input is used as input to the DeleteDomainsV1 function.
 type DeleteDomainsV1Input struct {
-	// DomainID of definition to delete (required).
+	// DomainID of the domain to delete (required).
 	DomainID *string
 }
 
