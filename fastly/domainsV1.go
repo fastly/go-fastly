@@ -23,8 +23,8 @@ type DomainsV1Data struct {
 	CreatedAt time.Time `json:"created_at"`
 	// ID is the domain identifier (UUID).
 	DomainID string `json:"id"`
-	// FQDN is the fully-qualified domain name for your domain. Can be created,
-	// but not updated.
+	// FQDN is the fully-qualified domain name of the domain. Read-only
+	// after creation.
 	FQDN string `json:"fqdn"`
 	// ServiceID is the service_id associated with your domain or null if there
 	// is no association.
