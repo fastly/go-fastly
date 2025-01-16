@@ -40,7 +40,7 @@ type DomainsV1Meta struct {
 	Limit int `json:"limit"`
 	// NextCursor is the cursor value used to retrieve the next page.
 	NextCursor string `json:"next_cursor"`
-	// Sort is the order in which to list the results.
+	// Sort is the field used to order the response by.
 	Sort string `json:"sort"`
 	// Total is the total number of results.
 	Total int `json:"total"`
