@@ -153,7 +153,7 @@ func (c *Client) GetDomainsV1(i *GetDomainsV1Input) (*DomainsV1Data, error) {
 type UpdateDomainsV1Input struct {
 	// DomainID is the domain identifier (required).
 	DomainID *string `json:"-"`
-	// ServiceID is the service_id associated with your domain or null if there
+	// ServiceID is the service_id associated with the domain or nil if there
 	// is no association (optional)
 	ServiceID *string `json:"service_id"`
 }
