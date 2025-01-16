@@ -14,7 +14,7 @@ func TestClient_DomainsV1(t *testing.T) {
 	// Create
 	var dd *DomainsV1Data
 	Record(t, "domains_v1/create_domain", func(c *Client) {
-		dd, err = c.CreateDomainsV1(&CreateDomainsV1Input{
+		dd, err = c.CreateDomainV1(&CreateDomainV1Input{
 			FQDN: ToPointer(fqdn),
 		})
 	})
@@ -24,7 +24,7 @@ func TestClient_DomainsV1(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "domains_v1/cleanup_domains", func(c *Client) {
-			err = c.DeleteDomainsV1(&DeleteDomainsV1Input{
+			err = c.DeleteDomainV1(&DeleteDomainV1Input{
 				DomainID: &dd.DomainID,
 			})
 		})
@@ -57,7 +57,7 @@ func TestClient_DomainsV1(t *testing.T) {
 	// Get
 	var gdd *DomainsV1Data
 	Record(t, "domains_v1/get_domain", func(c *Client) {
-		gdd, err = c.GetDomainsV1(&GetDomainsV1Input{
+		gdd, err = c.GetDomainV1(&GetDomainV1Input{
 			DomainID: &dd.DomainID,
 		})
 	})
@@ -71,7 +71,7 @@ func TestClient_DomainsV1(t *testing.T) {
 	// Update
 	var udd *DomainsV1Data
 	Record(t, "domains_v1/update_domain", func(c *Client) {
-		udd, err = c.UpdateDomainsV1(&UpdateDomainsV1Input{
+		udd, err = c.UpdateDomainV1(&UpdateDomainV1Input{
 			DomainID:  ToPointer(dd.DomainID),
 			ServiceID: ToPointer(defaultDeliveryTestServiceID),
 		})
@@ -85,7 +85,7 @@ func TestClient_DomainsV1(t *testing.T) {
 
 	// Delete
 	Record(t, "domains_v1/delete_domain", func(c *Client) {
-		err = c.DeleteDomainsV1(&DeleteDomainsV1Input{
+		err = c.DeleteDomainV1(&DeleteDomainV1Input{
 			DomainID: &dd.DomainID,
 		})
 	})
@@ -96,7 +96,7 @@ func TestClient_DomainsV1(t *testing.T) {
 
 func TestClient_GetDomainsV1_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetDomainsV1(&GetDomainsV1Input{
+	_, err = TestClient.GetDomainV1(&GetDomainV1Input{
 		DomainID: nil,
 	})
 	if !errors.Is(err, ErrMissingDomainID) {
@@ -106,7 +106,7 @@ func TestClient_GetDomainsV1_validation(t *testing.T) {
 
 func TestClient_UpdateDomainsV1_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.UpdateDomainsV1(&UpdateDomainsV1Input{
+	_, err = TestClient.UpdateDomainV1(&UpdateDomainV1Input{
 		DomainID: nil,
 	})
 	if !errors.Is(err, ErrMissingDomainID) {
@@ -115,7 +115,7 @@ func TestClient_UpdateDomainsV1_validation(t *testing.T) {
 }
 
 func TestClient_DeleteDomainsV1_validation(t *testing.T) {
-	err := TestClient.DeleteDomainsV1(&DeleteDomainsV1Input{
+	err := TestClient.DeleteDomainV1(&DeleteDomainV1Input{
 		DomainID: nil,
 	})
 	if !errors.Is(err, ErrMissingDomainID) {

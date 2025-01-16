@@ -97,8 +97,8 @@ func (c *Client) ListDomainsV1(i *ListDomainsV1Input) (*DomainsV1Response, error
 	return dr, nil
 }
 
-// CreateDomainsV1Input is used as input to the CreateDomainsV1 function.
-type CreateDomainsV1Input struct {
+// CreateDomainV1Input is used as input to the CreateDomainsV1 function.
+type CreateDomainV1Input struct {
 	// FQDN is the fully-qualified domain name of the domain (required).
 	FQDN *string `json:"fqdn"`
 	// ServiceID is the service_id associated with the domain or nil if there
@@ -106,8 +106,8 @@ type CreateDomainsV1Input struct {
 	ServiceID *string `json:"service_id"`
 }
 
-// CreateDomainsV1 creates a new domain.
-func (c *Client) CreateDomainsV1(i *CreateDomainsV1Input) (*DomainsV1Data, error) {
+// CreateDomainV1 creates a new domain.
+func (c *Client) CreateDomainV1(i *CreateDomainV1Input) (*DomainsV1Data, error) {
 	resp, err := c.PostJSON("/domains/v1", i, nil)
 	if err != nil {
 		return nil, err
@@ -121,14 +121,14 @@ func (c *Client) CreateDomainsV1(i *CreateDomainsV1Input) (*DomainsV1Data, error
 	return dd, nil
 }
 
-// GetDomainsV1Input is used as input to the GetDomainsV1 function.
-type GetDomainsV1Input struct {
+// GetDomainV1Input is used as input to the GetDomainsV1 function.
+type GetDomainV1Input struct {
 	// DomainID is the domain identifier (required).
 	DomainID *string
 }
 
-// GetDomainsV1 retrieves a specified domain.
-func (c *Client) GetDomainsV1(i *GetDomainsV1Input) (*DomainsV1Data, error) {
+// GetDomainV1 retrieves a specified domain.
+func (c *Client) GetDomainV1(i *GetDomainV1Input) (*DomainsV1Data, error) {
 	if i.DomainID == nil {
 		return nil, ErrMissingDomainID
 	}
@@ -149,8 +149,8 @@ func (c *Client) GetDomainsV1(i *GetDomainsV1Input) (*DomainsV1Data, error) {
 	return dd, nil
 }
 
-// UpdateDomainsV1Input is used as input to the UpdateDomainsV1 function.
-type UpdateDomainsV1Input struct {
+// UpdateDomainV1Input is used as input to the UpdateDomainsV1 function.
+type UpdateDomainV1Input struct {
 	// DomainID is the domain identifier (required).
 	DomainID *string `json:"-"`
 	// ServiceID is the service_id associated with the domain or nil if there
@@ -158,8 +158,8 @@ type UpdateDomainsV1Input struct {
 	ServiceID *string `json:"service_id"`
 }
 
-// UpdateDomainsV1 updates the specified domain.
-func (c *Client) UpdateDomainsV1(i *UpdateDomainsV1Input) (*DomainsV1Data, error) {
+// UpdateDomainV1 updates the specified domain.
+func (c *Client) UpdateDomainV1(i *UpdateDomainV1Input) (*DomainsV1Data, error) {
 	if i.DomainID == nil {
 		return nil, ErrMissingDomainID
 	}
@@ -179,14 +179,14 @@ func (c *Client) UpdateDomainsV1(i *UpdateDomainsV1Input) (*DomainsV1Data, error
 	return dd, nil
 }
 
-// DeleteDomainsV1Input is used as input to the DeleteDomainsV1 function.
-type DeleteDomainsV1Input struct {
+// DeleteDomainV1Input is used as input to the DeleteDomainsV1 function.
+type DeleteDomainV1Input struct {
 	// DomainID of the domain to delete (required).
 	DomainID *string
 }
 
-// DeleteDomainsV1 deletes the specified domain.
-func (c *Client) DeleteDomainsV1(i *DeleteDomainsV1Input) error {
+// DeleteDomainV1 deletes the specified domain.
+func (c *Client) DeleteDomainV1(i *DeleteDomainV1Input) error {
 	if i.DomainID == nil {
 		return ErrMissingDomainID
 	}
