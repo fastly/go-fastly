@@ -7,7 +7,7 @@ import (
 	"github.com/fastly/go-fastly/v9/fastly"
 )
 
-func TestClient_DomainsV1(t *testing.T) {
+func TestClient_Domain(t *testing.T) {
 	t.Parallel()
 
 	var err error
@@ -95,7 +95,7 @@ func TestClient_DomainsV1(t *testing.T) {
 	}
 }
 
-func TestClient_GetDomainsV1_validation(t *testing.T) {
+func TestClient_GetDomain_validation(t *testing.T) {
 	var err error
 	_, err = Get(fastly.TestClient, &GetInput{
 		DomainID: nil,
@@ -105,7 +105,7 @@ func TestClient_GetDomainsV1_validation(t *testing.T) {
 	}
 }
 
-func TestClient_UpdateDomainsV1_validation(t *testing.T) {
+func TestClient_UpdateDomain_validation(t *testing.T) {
 	var err error
 	_, err = Update(fastly.TestClient, &UpdateInput{
 		DomainID: nil,
@@ -115,7 +115,7 @@ func TestClient_UpdateDomainsV1_validation(t *testing.T) {
 	}
 }
 
-func TestClient_DeleteDomainsV1_validation(t *testing.T) {
+func TestClient_DeleteDomain_validation(t *testing.T) {
 	err := Delete(fastly.TestClient, &DeleteInput{
 		DomainID: nil,
 	})
