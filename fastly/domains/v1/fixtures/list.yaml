@@ -1,0 +1,45 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/domains/v1?fqdn=fastly-sdk-gofastly-testing.com&limit=10&sort=fqdn
+    method: GET
+  response:
+    body: '{"data":[{"id":"hbRABkI8yvSnUbCLRiqUbQ","created_at":"2025-01-14T14:21:09.000Z","fqdn":"fastly-sdk-gofastly-testing.com","updated_at":"2025-01-14T14:21:09.000Z","service_id":null}],"meta":{"total":1,"limit":10}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "211"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 14 Jan 2025 14:21:09 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-chi-kigq8000022-CHI, cache-lon420121-LON
+      X-Timer:
+      - S1736864469.103643,VS0,VE174
+    status: 200 OK
+    code: 200
+    duration: ""
