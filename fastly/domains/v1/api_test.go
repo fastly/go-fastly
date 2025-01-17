@@ -23,15 +23,6 @@ func TestClient_Domain(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	// Ensure deleted
-	defer func() {
-		fastly.Record(t, "cleanup", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
-				DomainID: &d.DomainID,
-			})
-		})
-	}()
-
 	if d.FQDN != fqdn {
 		t.Errorf("bad fqdn: %v", d.FQDN)
 	}
