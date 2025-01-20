@@ -30,6 +30,30 @@ func TestClient_Domain(t *testing.T) {
 		t.Errorf("bad service_id: %v", d.ServiceID)
 	}
 
+	fastly.Record(t, "create_duplicate", func(c *fastly.Client) {
+		_, err = Create(c, &CreateInput{
+			FQDN: fastly.ToPointer(fqdn),
+		})
+	})
+	if err == nil {
+		t.Fatal("expected an error and got nil")
+	}
+	var httpError *fastly.HTTPError
+	if !errors.As(err, &httpError) {
+		t.Fatalf("unexpected error type: %T", err)
+	} else {
+		var okErr bool
+		for _, he := range httpError.Errors {
+			if he.Detail == "fqdn has already been taken" {
+				okErr = true
+				break
+			}
+		}
+		if !okErr {
+			t.Errorf("bad error: %v", err)
+		}
+	}
+
 	// List Definitions
 	var cl *Collection
 	fastly.Record(t, "list", func(c *fastly.Client) {
@@ -72,7 +96,7 @@ func TestClient_Domain(t *testing.T) {
 		t.Fatal(err)
 	}
 	if ud.ServiceID == nil || *ud.ServiceID != fastly.DefaultDeliveryTestServiceID {
-		t.Errorf("bad service id: %v", ud.ServiceID)
+		t.Errorf("bad service id: %v", *ud.ServiceID)
 	}
 
 	// Delete
