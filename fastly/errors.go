@@ -458,13 +458,21 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 					if r, ok := le["reason"]; ok {
 						detail, _ = r.(string)
 					}
+					if d, ok := le["detail"]; ok {
+						detail, _ = d.(string)
+					}
+					var title string
 					if i, ok := le["index"]; ok {
 						index, _ = i.(float64)
+						title = fmt.Sprintf("error at index: %v", index)
+					}
+					if t, ok := le["title"]; ok {
+						title, _ = t.(string)
 					}
 					e.Errors = append(e.Errors, &ErrorObject{
 						Code:   code,
 						Detail: detail,
-						Title:  fmt.Sprintf("error at index: %v", index),
+						Title:  title,
 					})
 				}
 			} else {
