@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"fqdn":"fastly-sdk-gofastly-testing.com","service_id":null}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+    url: https://api.fastly.com/domains/v1
+    method: POST
+  response:
+    body: '{"errors":[{"title":"Invalid value for fqdn","detail":"fqdn has already
+      been taken"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "86"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 20 Jan 2025 18:11:45 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Content-Type-Options:
+      - nosniff
+      X-Served-By:
+      - cache-chi-kigq8000095-CHI, cache-lon420104-LON
+      X-Timer:
+      - S1737396705.304617,VS0,VE193
+    status: 400 Bad Request
+    code: 400
+    duration: ""
