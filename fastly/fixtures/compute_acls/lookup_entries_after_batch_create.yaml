@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?limit=1
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entries?limit=1
     method: GET
   response:
     body: '{"entries":[{"prefix":"1.2.3.0/24","action":"BLOCK"}],"meta":{"next_cursor":"LDE=","limit":1}}'
@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:34 GMT
+      - Tue, 21 Jan 2025 21:11:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-kigq8000138-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kiad7000138-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869595.524159,VS0,VE283
+      - S1737493876.849873,VS0,VE304
     status: 200 OK
     code: 200
     duration: ""
@@ -47,7 +47,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/1.2.3.0
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entry/1.2.3.0
     method: GET
   response:
     body: '{"prefix":"1.2.3.0/24","action":"BLOCK"}'
@@ -61,7 +61,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:35 GMT
+      - Tue, 21 Jan 2025 21:11:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -75,9 +75,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-kigq8000152-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kiad7000027-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869595.847160,VS0,VE312
+      - S1737493876.257596,VS0,VE339
     status: 200 OK
     code: 200
     duration: ""
@@ -87,10 +87,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?cursor=LDE%3D&limit=1
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entries?cursor=LDE%3D&limit=1
     method: GET
   response:
-    body: '{"entries":[{"prefix":"1.2.3.4/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01EQXgsMA==","limit":1}}'
+    body: '{"entries":[{"prefix":"1.2.3.4/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5SE5qTlJTa3BVUm1wcWJHazRhRkZGVDNaVlRHaDFYMjUyTkY4d01EQXgsMA==","limit":1}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -101,7 +101,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:35 GMT
+      - Tue, 21 Jan 2025 21:11:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -115,9 +115,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-kigq8000127-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kjyo7100164-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869595.241084,VS0,VE310
+      - S1737493877.634237,VS0,VE314
     status: 200 OK
     code: 200
     duration: ""
@@ -127,7 +127,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/1.2.3.4
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entry/1.2.3.4
     method: GET
   response:
     body: '{"prefix":"1.2.3.4/32","action":"ALLOW"}'
@@ -141,7 +141,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:35 GMT
+      - Tue, 21 Jan 2025 21:11:17 GMT
       Pragma:
       - no-cache
       Server:
@@ -155,9 +155,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-kigq8000032-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kcgs7200178-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869596.589855,VS0,VE192
+      - S1737493877.074474,VS0,VE607
     status: 200 OK
     code: 200
     duration: ""
@@ -167,10 +167,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?cursor=Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01EQXgsMA%3D%3D&limit=1
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entries?cursor=Q2g5SE5qTlJTa3BVUm1wcWJHazRhRkZGVDNaVlRHaDFYMjUyTkY4d01EQXgsMA%3D%3D&limit=1
     method: GET
   response:
-    body: '{"entries":[{"prefix":"23.23.23.23/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01ERTMsMA==","limit":1}}'
+    body: '{"entries":[{"prefix":"23.23.23.23/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5SE5qTlJTa3BVUm1wcWJHazRhRkZGVDNaVlRHaDFYMjUyTkY4d01ERTMsMA==","limit":1}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -181,7 +181,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:36 GMT
+      - Tue, 21 Jan 2025 21:11:18 GMT
       Pragma:
       - no-cache
       Server:
@@ -195,9 +195,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-kigq8000059-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kcgs7200088-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869596.855595,VS0,VE299
+      - S1737493878.796049,VS0,VE736
     status: 200 OK
     code: 200
     duration: ""
@@ -207,7 +207,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/23.23.23.23
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entry/23.23.23.23
     method: GET
   response:
     body: '{"prefix":"23.23.23.23/32","action":"ALLOW"}'
@@ -221,7 +221,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:36 GMT
+      - Tue, 21 Jan 2025 21:11:18 GMT
       Pragma:
       - no-cache
       Server:
@@ -235,9 +235,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-klot8100088-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kiad7000084-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869596.265763,VS0,VE159
+      - S1737493879.611303,VS0,VE241
     status: 200 OK
     code: 200
     duration: ""
@@ -247,7 +247,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entries?cursor=Q2g5bU1qWlpaMWg0VGtsRFNteFBTMmRVV0V4alNtVmtYMjUyTkY4d01ERTMsMA%3D%3D&limit=1
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entries?cursor=Q2g5SE5qTlJTa3BVUm1wcWJHazRhRkZGVDNaVlRHaDFYMjUyTkY4d01ERTMsMA%3D%3D&limit=1
     method: GET
   response:
     body: '{"entries":[{"prefix":"192.168.0.0/16","action":"BLOCK"}],"meta":{"limit":1}}'
@@ -261,7 +261,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:36 GMT
+      - Tue, 21 Jan 2025 21:11:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -275,9 +275,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-klot8100081-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kcgs7200054-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869597.577792,VS0,VE139
+      - S1737493879.944130,VS0,VE1086
     status: 200 OK
     code: 200
     duration: ""
@@ -287,7 +287,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/f26YgXxNICJlOKgTXLcJed/entry/192.168.0.0
+    url: https://api.fastly.com/resources/acls/G63QJJTFjjli8hQEOvULhu/entry/192.168.0.0
     method: GET
   response:
     body: '{"prefix":"192.168.0.0/16","action":"BLOCK"}'
@@ -301,7 +301,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 14 Jan 2025 15:46:36 GMT
+      - Tue, 21 Jan 2025 21:11:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -315,9 +315,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-chi-kigq8000028-CHI, cache-chi-klot8100077-CHI
+      - cache-iad-kiad7000027-IAD, cache-iad-kcgs7200100-IAD
       X-Timer:
-      - S1736869597.752994,VS0,VE182
+      - S1737493880.151928,VS0,VE70
     status: 200 OK
     code: 200
     duration: ""

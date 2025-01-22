@@ -1,9 +1,7 @@
 package fastly
 
 import (
-	"encoding/json"
 	"net"
-	"strings"
 	"testing"
 )
 
@@ -76,52 +74,34 @@ func TestClient_ComputeACL(t *testing.T) {
 		t.Errorf("unexpected acl ID: got %q, expected %q", describeComputeACLResponse.ComputeACLID, acl.ComputeACLID)
 	}
 
-	// Add a bunch of entries to the test compute ACL.
-	batchCreateEntries := struct {
-		Entries []struct {
-			Operation string `json:"op"`
-			Prefix    string `json:"prefix"`
-			Action    string `json:"action"`
-		} `json:"entries"`
-	}{
-		Entries: []struct {
-			Operation string `json:"op"`
-			Prefix    string `json:"prefix"`
-			Action    string `json:"action"`
-		}{
-			{
-				Operation: "create",
-				Prefix:    "1.2.3.0/24",
-				Action:    "BLOCK",
-			},
-			{
-				Operation: "update",
-				Prefix:    "1.2.3.4/32",
-				Action:    "ALLOW",
-			},
-			{
-				Operation: "create",
-				Prefix:    "23.23.23.23/32",
-				Action:    "ALLOW",
-			},
-			{
-				Operation: "update",
-				Prefix:    "192.168.0.0/16",
-				Action:    "BLOCK",
-			},
+	batchCreateEntries := []*BatchComputeACLEntry{
+		{
+			Operation: ToPointer("create"),
+			Prefix:    ToPointer("1.2.3.0/24"),
+			Action:    ToPointer("BLOCK"),
 		},
-	}
-
-	body, err := json.Marshal(batchCreateEntries)
-	if err != nil {
-		t.Fatal(err)
+		{
+			Operation: ToPointer("update"),
+			Prefix:    ToPointer("1.2.3.4/32"),
+			Action:    ToPointer("ALLOW"),
+		},
+		{
+			Operation: ToPointer("create"),
+			Prefix:    ToPointer("23.23.23.23/32"),
+			Action:    ToPointer("ALLOW"),
+		},
+		{
+			Operation: ToPointer("update"),
+			Prefix:    ToPointer("192.168.0.0/16"),
+			Action:    ToPointer("BLOCK"),
+		},
 	}
 
 	// Add the entries to the test compute ACL.
 	Record(t, "compute_acls/batch_create_entries", func(c *Client) {
 		err = c.BatchModifyComputeACLEntries(&BatchModifyComputeACLEntriesInput{
 			ComputeACLID: acl.ComputeACLID,
-			Body:         strings.NewReader(string(body)),
+			Entries:      batchCreateEntries,
 		})
 	})
 	if err != nil {
@@ -140,23 +120,23 @@ func TestClient_ComputeACL(t *testing.T) {
 	}
 
 	actualNumberOfComputeACLEntries := len(actualComputeACLEntries.Entries)
-	expectedNumberOfComputeACLEntries := len(batchCreateEntries.Entries)
+	expectedNumberOfComputeACLEntries := len(batchCreateEntries)
 	if actualNumberOfComputeACLEntries != expectedNumberOfComputeACLEntries {
 		t.Errorf("incorrect number of compute ACL entries returned, expected: %d, got %d", expectedNumberOfComputeACLEntries, actualNumberOfComputeACLEntries)
 	}
 
 	for i, entry := range actualComputeACLEntries.Entries {
 		actualPrefix := entry.Prefix
-		expectedPrefix := batchCreateEntries.Entries[i].Prefix
+		expectedPrefix := batchCreateEntries[i].Prefix
 
-		if actualPrefix != expectedPrefix {
+		if actualPrefix != *expectedPrefix {
 			t.Errorf("prefix does not match, expected %v, got %v", expectedPrefix, actualPrefix)
 		}
 
 		actualAction := entry.Action
-		expectedAction := batchCreateEntries.Entries[i].Action
+		expectedAction := batchCreateEntries[i].Action
 
-		if actualAction != expectedAction {
+		if actualAction != *expectedAction {
 			t.Errorf("action does not match, expected %v, got %v", expectedAction, actualAction)
 		}
 	}
@@ -190,16 +170,16 @@ func TestClient_ComputeACL(t *testing.T) {
 			}
 
 			actualPrefix := entry.Prefix
-			expectedPrefix := batchCreateEntries.Entries[page].Prefix
+			expectedPrefix := batchCreateEntries[page].Prefix
 
-			if actualPrefix != expectedPrefix {
+			if actualPrefix != *expectedPrefix {
 				t.Errorf("prefix does not match, expected %v, got %v", expectedPrefix, actualPrefix)
 			}
 
 			actualAction := entry.Action
-			expectedAction := batchCreateEntries.Entries[page].Action
+			expectedAction := batchCreateEntries[page].Action
 
-			if actualAction != expectedAction {
+			if actualAction != *expectedAction {
 				t.Errorf("action does not match, expected %v, got %v", expectedAction, actualAction)
 			}
 

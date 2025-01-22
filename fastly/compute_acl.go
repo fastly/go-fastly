@@ -1,8 +1,6 @@
 package fastly
 
 import (
-	"bufio"
-	"io"
 	"net/http"
 	"strconv"
 )
@@ -274,9 +272,16 @@ func (l *ListComputeACLEntriesPaginator) Entries() []ComputeACLEntry {
 // BatchModifyComputeACLEntriesInput is the input to the BatchModifyComputeACLEntries function.
 type BatchModifyComputeACLEntriesInput struct {
 	// ACL Identifier (UUID). Required.
-	ComputeACLID string
-	// Body is the HTTP request body containing a JSON object of entries. Required.
-	Body io.Reader
+	ComputeACLID string `json:"-"`
+	// Entries is a list of ACL entries.
+	Entries []*BatchComputeACLEntry `json:"entries"`
+}
+
+// BatchACLEntry represents a single ACL entry.
+type BatchComputeACLEntry struct {
+	Prefix    *string `json:"prefix"`
+	Action    *string `json:"action"`
+	Operation *string `json:"op"`
 }
 
 // BatchModifyComputeACLEntries streams an entries JSON object into a compute ACL.
@@ -288,13 +293,7 @@ func (c *Client) BatchModifyComputeACLEntries(i *BatchModifyComputeACLEntriesInp
 
 	path := ToSafeURL("resources", "acls", i.ComputeACLID, "entries")
 
-	resp, err := c.Patch(path, &RequestOptions{
-		Body: bufio.NewReader(i.Body),
-		Headers: map[string]string{
-			"Content-Type": "application/json",
-		},
-		Parallel: true,
-	})
+	resp, err := c.PatchJSON(path, i, nil)
 	if err != nil {
 		return err
 	}
