@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"os"
 	"testing"
 )
@@ -177,7 +178,7 @@ func TestClient_GetPackage_validation(t *testing.T) {
 	_, err = TestClient.GetPackage(&GetPackageInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -185,7 +186,7 @@ func TestClient_GetPackage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -195,7 +196,7 @@ func TestClient_UpdatePackage_validation(t *testing.T) {
 	_, err = TestClient.UpdatePackage(&UpdatePackageInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -203,7 +204,7 @@ func TestClient_UpdatePackage_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

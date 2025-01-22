@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -215,7 +216,7 @@ func TestClient_ListBackends_validation(t *testing.T) {
 	_, err = TestClient.ListBackends(&ListBackendsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -223,7 +224,7 @@ func TestClient_ListBackends_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -233,7 +234,7 @@ func TestClient_CreateBackend_validation(t *testing.T) {
 	_, err = TestClient.CreateBackend(&CreateBackendInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -241,7 +242,7 @@ func TestClient_CreateBackend_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -253,7 +254,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -261,7 +262,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -269,7 +270,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -281,7 +282,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -289,7 +290,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -297,7 +298,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -309,7 +310,7 @@ func TestClient_DeleteBackend_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -317,7 +318,7 @@ func TestClient_DeleteBackend_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -325,7 +326,7 @@ func TestClient_DeleteBackend_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"net/http"
 	"testing"
 )
@@ -174,7 +175,7 @@ func TestClient_ListERLs_validation(t *testing.T) {
 	_, err = TestClient.ListERLs(&ListERLsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("error: %s", err)
 	}
 
@@ -182,7 +183,7 @@ func TestClient_ListERLs_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("error: %s", err)
 	}
 }
@@ -192,7 +193,7 @@ func TestClient_CreateERL_validation(t *testing.T) {
 	_, err = TestClient.CreateERL(&CreateERLInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("error: %s", err)
 	}
 
@@ -200,7 +201,7 @@ func TestClient_CreateERL_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("error: %s", err)
 	}
 }
@@ -209,7 +210,7 @@ func TestClient_GetERL_validation(t *testing.T) {
 	_, err := TestClient.GetERL(&GetERLInput{
 		ERLID: "",
 	})
-	if err != ErrMissingERLID {
+	if !errors.Is(err, ErrMissingERLID) {
 		t.Errorf("error: %s", err)
 	}
 }
@@ -218,7 +219,7 @@ func TestClient_UpdateERL_validation(t *testing.T) {
 	_, err := TestClient.UpdateERL(&UpdateERLInput{
 		ERLID: "",
 	})
-	if err != ErrMissingERLID {
+	if !errors.Is(err, ErrMissingERLID) {
 		t.Errorf("error: %s", err)
 	}
 }
@@ -227,7 +228,7 @@ func TestClient_DeleteERL_validation(t *testing.T) {
 	err := TestClient.DeleteERL(&DeleteERLInput{
 		ERLID: "",
 	})
-	if err != ErrMissingERLID {
+	if !errors.Is(err, ErrMissingERLID) {
 		t.Errorf("error: %s", err)
 	}
 }
