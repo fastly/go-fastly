@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"net/http"
 	"testing"
 )
 
@@ -20,7 +21,7 @@ func TestClient_HealthChecks(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-healthcheck"),
-			Method:         ToPointer("HEAD"),
+			Method:         ToPointer(http.MethodHead),
 			Headers: ToPointer([]string{
 				"Foo: Bar",
 				"Baz: Qux",
@@ -30,7 +31,7 @@ func TestClient_HealthChecks(t *testing.T) {
 			HTTPVersion:      ToPointer("1.1"),
 			Timeout:          ToPointer(1500),
 			CheckInterval:    ToPointer(2500),
-			ExpectedResponse: ToPointer(200),
+			ExpectedResponse: ToPointer(http.StatusOK),
 			Window:           ToPointer(5000),
 			Threshold:        ToPointer(10),
 			Initial:          ToPointer(10),
@@ -60,7 +61,7 @@ func TestClient_HealthChecks(t *testing.T) {
 	if *hc.Name != "test-healthcheck" {
 		t.Errorf("bad name: %q", *hc.Name)
 	}
-	if *hc.Method != "HEAD" {
+	if *hc.Method != http.MethodHead {
 		t.Errorf("bad address: %q", *hc.Method)
 	}
 	if *hc.Host != "example.com" {
@@ -78,7 +79,7 @@ func TestClient_HealthChecks(t *testing.T) {
 	if *hc.CheckInterval != 2500 {
 		t.Errorf("bad check_interval: %q", *hc.CheckInterval)
 	}
-	if *hc.ExpectedResponse != 200 {
+	if *hc.ExpectedResponse != http.StatusOK {
 		t.Errorf("bad timeout: %q", *hc.ExpectedResponse)
 	}
 	if *hc.Window != 5000 {

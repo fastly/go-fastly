@@ -5,6 +5,8 @@ import (
 	"reflect"
 	"testing"
 	"time"
+
+	"github.com/google/jsonapi"
 )
 
 func TestClient_WAF_Versions(t *testing.T) {
@@ -367,9 +369,9 @@ func TestClient_listWAFVersions_formatFilters(t *testing.T) {
 				Include:    "included",
 			},
 			local: map[string]string{
-				"page[size]":   "2",
-				"page[number]": "2",
-				"include":      "included",
+				jsonapi.QueryParamPageSize:   "2",
+				jsonapi.QueryParamPageNumber: "2",
+				"include":                    "included",
 			},
 		},
 	}

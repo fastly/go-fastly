@@ -105,9 +105,9 @@ type ListWAFVersionsInput struct {
 func (i *ListWAFVersionsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]any{
-		"page[size]":   i.PageSize,
-		"page[number]": i.PageNumber,
-		"include":      i.Include,
+		jsonapi.QueryParamPageSize:   i.PageSize,
+		jsonapi.QueryParamPageNumber: i.PageNumber,
+		"include":                    i.Include,
 	}
 
 	for key, value := range pairings {

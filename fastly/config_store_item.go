@@ -41,7 +41,7 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 	resp, err := c.PostForm(path, i, &RequestOptions{
 		Headers: map[string]string{
 			// PostForm adds the appropriate Content-Type header.
-			"Accept": "application/json",
+			"Accept": JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -79,7 +79,7 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 
 	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
-			"Accept": "application/json",
+			"Accept": JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -114,7 +114,7 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
-			"Accept": "application/json",
+			"Accept": JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -197,7 +197,7 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 	resp, err := c.RequestForm(httpMethod, path, i, &RequestOptions{
 		Headers: map[string]string{
 			// RequestForm adds the appropriate Content-Type header.
-			"Accept": "application/json",
+			"Accept": JSONMimeType,
 		},
 		Parallel: true,
 	})

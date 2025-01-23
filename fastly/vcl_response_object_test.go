@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"net/http"
 	"testing"
 )
 
@@ -20,7 +21,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-response-object"),
-			Status:         ToPointer(200),
+			Status:         ToPointer(http.StatusOK),
 			Response:       ToPointer("Ok"),
 			Content:        ToPointer("abcd"),
 			ContentType:    ToPointer("text/plain"),
@@ -50,7 +51,7 @@ func TestClient_ResponseObjects(t *testing.T) {
 	if *ro.Name != "test-response-object" {
 		t.Errorf("bad name: %q", *ro.Name)
 	}
-	if *ro.Status != 200 {
+	if *ro.Status != http.StatusOK {
 		t.Errorf("bad status: %q", *ro.Status)
 	}
 	if *ro.Response != "Ok" {

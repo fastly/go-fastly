@@ -3,6 +3,8 @@ package fastly
 import (
 	"reflect"
 	"testing"
+
+	"github.com/google/jsonapi"
 )
 
 func TestClient_ServiceAuthorizations(t *testing.T) {
@@ -172,8 +174,8 @@ func TestClient_listServiceAuthorizations_formatFilters(t *testing.T) {
 				PageNumber: 2,
 			},
 			local: map[string]string{
-				"page[size]":   "2",
-				"page[number]": "2",
+				jsonapi.QueryParamPageSize:   "2",
+				jsonapi.QueryParamPageNumber: "2",
 			},
 		},
 	}

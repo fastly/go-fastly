@@ -114,7 +114,7 @@ func getRecorder(t *testing.T, fixture string) *recorder.Recorder {
 
 	// Add a filter which removes Fastly-Key header from all recorded requests.
 	r.AddFilter(func(i *cassette.Interaction) error {
-		delete(i.Request.Headers, "Fastly-Key")
+		delete(i.Request.Headers, APIKeyHeader)
 		return nil
 	})
 

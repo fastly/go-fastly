@@ -43,8 +43,8 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 		"filter[tls_configuration.id]": i.FilterTLSConfigurationID,
 		"filter[tls_domain.id]":        i.FilterTLSDomainID,
 		"include":                      i.Include,
-		"page[number]":                 i.PageNumber,
-		"page[size]":                   i.PageSize,
+		jsonapi.QueryParamPageNumber:   i.PageNumber,
+		jsonapi.QueryParamPageSize:     i.PageSize,
 	}
 
 	for key, value := range pairings {
@@ -71,7 +71,7 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 
@@ -116,7 +116,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 
 	ro := &RequestOptions{
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the params don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
 		},
 	}
 

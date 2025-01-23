@@ -37,10 +37,10 @@ func (i *ListTLSMutualAuthenticationsInput) formatFilters() map[string]string {
 		result["include"] = strings.Join(i.Include, ",")
 	}
 	if i.PageSize > 0 {
-		result["page[size]"] = strconv.Itoa(i.PageSize)
+		result[jsonapi.QueryParamPageSize] = strconv.Itoa(i.PageSize)
 	}
 	if i.PageNumber > 0 {
-		result["page[number]"] = strconv.Itoa(i.PageNumber)
+		result[jsonapi.QueryParamPageNumber] = strconv.Itoa(i.PageNumber)
 	}
 	return result
 }
@@ -51,7 +51,7 @@ func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInpu
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 
@@ -99,7 +99,7 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 				"include": i.Include,
 			},
 			Headers: map[string]string{
-				"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+				"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 			},
 		}
 	}

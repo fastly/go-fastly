@@ -55,8 +55,8 @@ type ListServiceAuthorizationsInput struct {
 func (i *ListServiceAuthorizationsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]int{
-		"page[size]":   i.PageSize,
-		"page[number]": i.PageNumber,
+		jsonapi.QueryParamPageSize:   i.PageSize,
+		jsonapi.QueryParamPageNumber: i.PageNumber,
 	}
 
 	for key, value := range pairings {

@@ -31,8 +31,8 @@ func TestClient_ERL(t *testing.T) {
 			},
 			PenaltyBoxDuration: ToPointer(30),
 			Response: &ERLResponseType{
-				ERLStatus:      ToPointer(429),
-				ERLContentType: ToPointer("application/json"),
+				ERLStatus:      ToPointer(http.StatusTooManyRequests),
+				ERLContentType: ToPointer(JSONMimeType),
 				ERLContent:     ToPointer("Too many requests"),
 			},
 			RpsLimit:   ToPointer(20),
@@ -61,10 +61,10 @@ func TestClient_ERL(t *testing.T) {
 	if *e.Response.ERLContent != "Too many requests" {
 		t.Errorf("want 'Too many requests', got %q", *e.Response.ERLContent)
 	}
-	if *e.Response.ERLContentType != "application/json" {
+	if *e.Response.ERLContentType != JSONMimeType {
 		t.Errorf("want 'application/json', got %q", *e.Response.ERLContentType)
 	}
-	if *e.Response.ERLStatus != 429 {
+	if *e.Response.ERLStatus != http.StatusTooManyRequests {
 		t.Errorf("want 429, got %q", *e.Response.ERLStatus)
 	}
 
