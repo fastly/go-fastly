@@ -3,6 +3,7 @@ package v1
 // ComputeACL is the API response structure for the create and describe operations.
 type ComputeACL struct {
 	Name         string `json:"name"`
+	// ComputeACLID is an ACL Identifier.
 	ComputeACLID string `json:"id"`
 }
 
