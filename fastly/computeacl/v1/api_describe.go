@@ -10,7 +10,7 @@ import (
 // DescribeInput specifies the information needed for the Describe() function to perform
 // the operation.
 type DescribeInput struct {
-	// ACL Identifier (required).
+	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
 }
 
