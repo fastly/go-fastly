@@ -12,7 +12,7 @@ import (
 type LookupInput struct {
 	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
-	// Valid IPv4 or IPv6 address (required).
+	// ComputeACLIP is a valid IPv4 or IPv6 address (required).
 	ComputeACLIP *string
 }
 
