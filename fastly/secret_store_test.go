@@ -3,6 +3,7 @@ package fastly
 import (
 	"bytes"
 	"crypto/ed25519"
+	"errors"
 	"fmt"
 	"net/http"
 	"sort"
@@ -473,21 +474,21 @@ func TestClient_SecretStore_validation(t *testing.T) {
 	_, err = TestClient.CreateSecretStore(&CreateSecretStoreInput{
 		Name: "",
 	})
-	if want := ErrMissingName; err != want {
+	if want := ErrMissingName; !errors.Is(want, err) {
 		t.Errorf("CreateSecretStore: got error %v, want %v", err, want)
 	}
 
 	_, err = TestClient.GetSecretStore(&GetSecretStoreInput{
 		StoreID: "",
 	})
-	if want := ErrMissingStoreID; err != want {
+	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("GetSecretStore: got error %v, want %v", err, want)
 	}
 
 	err = TestClient.DeleteSecretStore(&DeleteSecretStoreInput{
 		StoreID: "",
 	})
-	if want := ErrMissingStoreID; err != want {
+	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("DeleteSecretStore: got error %v, want %v", err, want)
 	}
 
@@ -496,7 +497,7 @@ func TestClient_SecretStore_validation(t *testing.T) {
 		Name:    "name",
 		Secret:  []byte("secret"),
 	})
-	if want := ErrMissingStoreID; err != want {
+	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
 	_, err = TestClient.CreateSecret(&CreateSecretInput{
@@ -504,7 +505,7 @@ func TestClient_SecretStore_validation(t *testing.T) {
 		Name:    "",
 		Secret:  []byte("secret"),
 	})
-	if want := ErrMissingName; err != want {
+	if want := ErrMissingName; !errors.Is(want, err) {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
 	_, err = TestClient.CreateSecret(&CreateSecretInput{
@@ -512,14 +513,14 @@ func TestClient_SecretStore_validation(t *testing.T) {
 		Name:    "name",
 		Secret:  []byte(nil),
 	})
-	if want := ErrMissingSecret; err != want {
+	if want := ErrMissingSecret; !errors.Is(want, err) {
 		t.Errorf("CreateSecret: got error %v, want %v", err, want)
 	}
 
 	_, err = TestClient.ListSecrets(&ListSecretsInput{
 		StoreID: "",
 	})
-	if want := ErrMissingStoreID; err != want {
+	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("ListSecrets: got error %v, want %v", err, want)
 	}
 
@@ -527,14 +528,14 @@ func TestClient_SecretStore_validation(t *testing.T) {
 		StoreID: "",
 		Name:    "name",
 	})
-	if want := ErrMissingStoreID; err != want {
+	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("GetSecret: got error %v, want %v", err, want)
 	}
 	_, err = TestClient.GetSecret(&GetSecretInput{
 		StoreID: "id",
 		Name:    "",
 	})
-	if want := ErrMissingName; err != want {
+	if want := ErrMissingName; !errors.Is(want, err) {
 		t.Errorf("GetSecret: got error %v, want %v", err, want)
 	}
 
@@ -542,14 +543,14 @@ func TestClient_SecretStore_validation(t *testing.T) {
 		StoreID: "",
 		Name:    "name",
 	})
-	if want := ErrMissingStoreID; err != want {
+	if want := ErrMissingStoreID; !errors.Is(want, err) {
 		t.Errorf("DeleteSecret: got error %v, want %v", err, want)
 	}
 	err = TestClient.DeleteSecret(&DeleteSecretInput{
 		StoreID: "id",
 		Name:    "",
 	})
-	if want := ErrMissingName; err != want {
+	if want := ErrMissingName; !errors.Is(want, err) {
 		t.Errorf("DeleteSecret: got error %v, want %v", err, want)
 	}
 }

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -156,7 +157,7 @@ func TestClient_ListHoneycombs_validation(t *testing.T) {
 	_, err = TestClient.ListHoneycombs(&ListHoneycombsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -164,7 +165,7 @@ func TestClient_ListHoneycombs_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -174,7 +175,7 @@ func TestClient_CreateHoneycomb_validation(t *testing.T) {
 	_, err = TestClient.CreateHoneycomb(&CreateHoneycombInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -182,7 +183,7 @@ func TestClient_CreateHoneycomb_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -194,7 +195,7 @@ func TestClient_GetHoneycomb_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -202,7 +203,7 @@ func TestClient_GetHoneycomb_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -210,7 +211,7 @@ func TestClient_GetHoneycomb_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -222,7 +223,7 @@ func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -230,7 +231,7 @@ func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -238,7 +239,7 @@ func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -250,7 +251,7 @@ func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -258,7 +259,7 @@ func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -266,7 +267,7 @@ func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

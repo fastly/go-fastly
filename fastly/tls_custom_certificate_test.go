@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -142,7 +143,7 @@ func TestClient_CreateCustomTLSCertificate_validation(t *testing.T) {
 	_, err = TestClient.CreateCustomTLSCertificate(&CreateCustomTLSCertificateInput{
 		Name: "My certificate",
 	})
-	if err != ErrMissingCertBlob {
+	if !errors.Is(err, ErrMissingCertBlob) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -151,7 +152,7 @@ func TestClient_DeleteCustomTLSCertificate_validation(t *testing.T) {
 	t.Parallel()
 
 	err := TestClient.DeleteCustomTLSCertificate(&DeleteCustomTLSCertificateInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -175,7 +176,7 @@ func TestClient_GetCustomTLSCertificate_validation(t *testing.T) {
 
 	var err error
 	_, err = TestClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -188,7 +189,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		CertBlob: "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----\n",
 		Name:     "My certificate",
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -196,7 +197,7 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		ID:   "CERTIFICATE_ID",
 		Name: "My certificate",
 	})
-	if err != ErrMissingCertBlob {
+	if !errors.Is(err, ErrMissingCertBlob) {
 		t.Errorf("bad error: %s", err)
 	}
 }

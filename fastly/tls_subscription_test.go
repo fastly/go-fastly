@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -207,7 +208,7 @@ func TestClient_CreateTLSSubscription_validation(t *testing.T) {
 	}
 
 	_, err = TestClient.CreateTLSSubscription(&CreateTLSSubscriptionInput{})
-	if err != ErrMissingTLSDomain {
+	if !errors.Is(err, ErrMissingTLSDomain) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -218,7 +219,7 @@ func TestClient_CreateTLSSubscription_validation(t *testing.T) {
 		},
 		CommonName: &TLSDomain{ID: "DN3"},
 	})
-	if err != ErrCommonNameNotInDomains {
+	if !errors.Is(err, ErrCommonNameNotInDomains) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -227,7 +228,7 @@ func TestClient_GetTLSSubscription_validation(t *testing.T) {
 	t.Parallel()
 
 	_, err := TestClient.GetTLSSubscription(&GetTLSSubscriptionInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -236,7 +237,7 @@ func TestClient_UpdateTLSSubscription_validation(t *testing.T) {
 	t.Parallel()
 
 	_, err := TestClient.UpdateTLSSubscription(&UpdateTLSSubscriptionInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -245,7 +246,7 @@ func TestClient_DeleteTLSSubscription_validation(t *testing.T) {
 	t.Parallel()
 
 	err := TestClient.DeleteTLSSubscription(&DeleteTLSSubscriptionInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

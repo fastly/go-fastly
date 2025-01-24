@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -188,21 +189,21 @@ func TestClient_Services(t *testing.T) {
 
 func TestClient_GetService_validation(t *testing.T) {
 	_, err := TestClient.GetService(&GetServiceInput{})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateService_validation(t *testing.T) {
 	_, err := TestClient.UpdateService(&UpdateServiceInput{})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
 	err := TestClient.DeleteService(&DeleteServiceInput{})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

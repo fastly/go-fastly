@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -84,20 +85,20 @@ func TestClient_DirectorBackends(t *testing.T) {
 func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{})
-	if err != ErrMissingBackend {
+	if !errors.Is(err, ErrMissingBackend) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{
 		Backend: "foo",
 	})
-	if err != ErrMissingDirector {
+	if !errors.Is(err, ErrMissingDirector) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{
 		Backend:  "foo",
 		Director: "bar",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = TestClient.CreateDirectorBackend(&CreateDirectorBackendInput{
@@ -105,7 +106,7 @@ func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 		Director:  "bar",
 		ServiceID: "baz",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -113,20 +114,20 @@ func TestClient_CreateDirectorBackend_validation(t *testing.T) {
 func TestClient_GetDirectorBackend_validation(t *testing.T) {
 	var err error
 	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{})
-	if err != ErrMissingBackend {
+	if !errors.Is(err, ErrMissingBackend) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{
 		Backend: "foo",
 	})
-	if err != ErrMissingDirector {
+	if !errors.Is(err, ErrMissingDirector) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{
 		Backend:  "foo",
 		Director: "bar",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 	_, err = TestClient.GetDirectorBackend(&GetDirectorBackendInput{
@@ -134,7 +135,7 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 		Director:  "bar",
 		ServiceID: "baz",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -142,20 +143,20 @@ func TestClient_GetDirectorBackend_validation(t *testing.T) {
 func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 	var err error
 	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{})
-	if err != ErrMissingBackend {
+	if !errors.Is(err, ErrMissingBackend) {
 		t.Errorf("bad error: %s", err)
 	}
 	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 		Backend: "foo",
 	})
-	if err != ErrMissingDirector {
+	if !errors.Is(err, ErrMissingDirector) {
 		t.Errorf("bad error: %s", err)
 	}
 	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
 		Backend:  "foo",
 		Director: "bar",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 	err = TestClient.DeleteDirectorBackend(&DeleteDirectorBackendInput{
@@ -163,7 +164,7 @@ func TestClient_DeleteDirectorBackend_validation(t *testing.T) {
 		Director:  "bar",
 		ServiceID: "baz",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

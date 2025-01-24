@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -142,14 +143,14 @@ func TestClient_ListServers_validation(t *testing.T) {
 	_, err = TestClient.ListServers(&ListServersInput{
 		ServiceID: "foo",
 	})
-	if err != ErrMissingPoolID {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
 	_, err = TestClient.ListServers(&ListServersInput{
 		PoolID: "123",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -160,14 +161,14 @@ func TestClient_CreateServer_validation(t *testing.T) {
 	_, err = TestClient.CreateServer(&CreateServerInput{
 		ServiceID: "foo",
 	})
-	if err != ErrMissingPoolID {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
 	_, err = TestClient.CreateServer(&CreateServerInput{
 		PoolID: "123",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -179,7 +180,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		Server:    "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingPoolID {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -187,7 +188,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		PoolID:    "bar",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServer {
+	if !errors.Is(err, ErrMissingServer) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -195,7 +196,7 @@ func TestClient_GetServer_validation(t *testing.T) {
 		PoolID: "bar",
 		Server: "test",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -207,7 +208,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		Server:    "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingPoolID {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -215,7 +216,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		PoolID:    "bar",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServer {
+	if !errors.Is(err, ErrMissingServer) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -223,7 +224,7 @@ func TestClient_UpdateServer_validation(t *testing.T) {
 		PoolID: "bar",
 		Server: "test",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -235,7 +236,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		Server:    "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingPoolID {
+	if !errors.Is(err, ErrMissingPoolID) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -243,7 +244,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		PoolID:    "bar",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServer {
+	if !errors.Is(err, ErrMissingServer) {
 		t.Errorf("bad error: %q", err)
 	}
 
@@ -251,7 +252,7 @@ func TestClient_DeleteServer_validation(t *testing.T) {
 		PoolID: "bar",
 		Server: "test",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"reflect"
 	"testing"
 )
@@ -109,7 +110,7 @@ func TestClient_GetServiceAuthorization_validation(t *testing.T) {
 	_, err = TestClient.GetServiceAuthorization(&GetServiceAuthorizationInput{
 		ID: "",
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -120,7 +121,7 @@ func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 		Service: &SAService{ID: ""},
 		User:    &SAUser{ID: ""},
 	})
-	if err != ErrMissingServiceAuthorizationsService {
+	if !errors.Is(err, ErrMissingServiceAuthorizationsService) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -128,7 +129,7 @@ func TestClient_CreateServiceAuthorization_validation(t *testing.T) {
 		Service: &SAService{ID: "my-service-id"},
 		User:    &SAUser{ID: ""},
 	})
-	if err != ErrMissingServiceAuthorizationsUser {
+	if !errors.Is(err, ErrMissingServiceAuthorizationsUser) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -139,7 +140,7 @@ func TestClient_UpdateServiceAuthorization_validation(t *testing.T) {
 		ID:         "",
 		Permission: "",
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -147,7 +148,7 @@ func TestClient_UpdateServiceAuthorization_validation(t *testing.T) {
 		ID:         "my-service-authorization-id",
 		Permission: "",
 	})
-	if err != ErrMissingPermission {
+	if !errors.Is(err, ErrMissingPermission) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -156,7 +157,7 @@ func TestClient_DeleteServiceAuthorization_validation(t *testing.T) {
 	err := TestClient.DeleteServiceAuthorization(&DeleteServiceAuthorizationInput{
 		ID: "",
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
