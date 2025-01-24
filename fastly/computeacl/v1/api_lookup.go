@@ -10,7 +10,7 @@ import (
 // LookupInput specifies the information needed for the Lookup() function to perform
 // the operation.
 type LookupInput struct {
-	// ACL Identifier (required).
+	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
 	// Valid IPv4 or IPv6 address (required).
 	ComputeACLIP *string
