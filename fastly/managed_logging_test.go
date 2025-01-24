@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"errors"
+	"testing"
+)
 
 func TestClient_ManagedLogging(t *testing.T) {
 	t.Parallel()
@@ -26,7 +29,7 @@ func TestClient_ManagedLogging(t *testing.T) {
 			Kind:      ManagedLoggingInstanceOutput,
 		})
 	})
-	if err != ErrManagedLoggingEnabled {
+	if !errors.Is(err, ErrManagedLoggingEnabled) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
@@ -47,14 +50,14 @@ func TestClient_CreateManagedLogging_validation(t *testing.T) {
 		ServiceID: "",
 		Kind:      ManagedLoggingInstanceOutput,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
 	_, err = TestClient.CreateManagedLogging(&CreateManagedLoggingInput{
 		ServiceID: TestDeliveryServiceID,
 	})
-	if err != ErrMissingKind {
+	if !errors.Is(err, ErrMissingKind) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
@@ -62,7 +65,7 @@ func TestClient_CreateManagedLogging_validation(t *testing.T) {
 		ServiceID: TestDeliveryServiceID,
 		Kind:      999,
 	})
-	if err != ErrNotImplemented {
+	if !errors.Is(err, ErrNotImplemented) {
 		t.Errorf("unexpected error: %s", err)
 	}
 }
@@ -72,14 +75,14 @@ func TestClient_DeleteManagedLogging_validation(t *testing.T) {
 		ServiceID: "",
 		Kind:      ManagedLoggingInstanceOutput,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
 	err = TestClient.DeleteManagedLogging(&DeleteManagedLoggingInput{
 		ServiceID: TestDeliveryServiceID,
 	})
-	if err != ErrMissingKind {
+	if !errors.Is(err, ErrMissingKind) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
@@ -87,7 +90,7 @@ func TestClient_DeleteManagedLogging_validation(t *testing.T) {
 		ServiceID: TestDeliveryServiceID,
 		Kind:      999,
 	})
-	if err != ErrNotImplemented {
+	if !errors.Is(err, ErrNotImplemented) {
 		t.Errorf("unexpected error: %s", err)
 	}
 }

@@ -6,11 +6,19 @@ import (
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 )
 
-const ProductID = "fanout"
+const (
+	ProductID   = "fanout"
+	ProductName = "Fanout"
+)
+
+// EnableOutput holds the details returned by the API from 'Get' and
+// 'Enable' operations; this alias exists to ensure that users of this
+// package will have a stable name to reference.
+type EnableOutput = products.EnableOutput
 
 // Get gets the status of the Fanout product on the service.
-func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
-	return productcore.Get[*products.EnableOutput](&productcore.GetInput{
+func Get(c *fastly.Client, serviceID string) (EnableOutput, error) {
+	return productcore.Get[EnableOutput](&productcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -18,8 +26,8 @@ func Get(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
 }
 
 // Enable enables the Fanout product on the service.
-func Enable(c *fastly.Client, serviceID string) (*products.EnableOutput, error) {
-	return productcore.Put[*products.EnableOutput](&productcore.PutInput[*productcore.NullInput]{
+func Enable(c *fastly.Client, serviceID string) (EnableOutput, error) {
+	return productcore.Put[EnableOutput](&productcore.PutInput[products.NullInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -33,4 +41,10 @@ func Disable(c *fastly.Client, serviceID string) error {
 		ProductID: ProductID,
 		ServiceID: serviceID,
 	})
+}
+
+// NewEnableOutput is used to construct mock API output structures for
+// use in tests.
+func NewEnableOutput(serviceID string) EnableOutput {
+	return products.NewEnableOutput(ProductID, serviceID)
 }
