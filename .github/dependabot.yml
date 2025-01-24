@@ -1,0 +1,9 @@
+version: 2
+updates:
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    ignore:
+      - dependency-name: "staticcheck"
+        versions: [">=0.4.7"] # Ignore versions above 0.4.7, as it requires Go 1.22
