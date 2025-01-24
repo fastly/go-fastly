@@ -19,7 +19,8 @@ type UpdateInput struct {
 type BatchComputeACLEntry struct {
 	// Prefix is an IP prefix defined in Classless Inter-Domain Routing (CIDR) format.
 	Prefix *string `json:"prefix"`
-	Action    *string `json:"action"`
+	// Action is one of "ALLOW" or "BLOCK".
+	Action *string `json:"action"`
 	Operation *string `json:"op"`
 }
 
