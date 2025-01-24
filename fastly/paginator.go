@@ -15,13 +15,6 @@ type PaginatorKVStoreEntries interface {
 	Err() error
 }
 
-// PaginatorComputeACLEntries represents a paginator for compute ACL entries.
-type PaginatorComputeACLEntries interface {
-	Next() bool
-	Entries() []ComputeACLEntry
-	Err() error
-}
-
 // PaginationClient represents a HTTP client.
 type PaginationClient interface {
 	Get(p string, ro *RequestOptions) (*http.Response, error)

@@ -1,0 +1,43 @@
+package v1
+
+// ComputeACL is the API response structure for the create and describe operations.
+type ComputeACL struct {
+	Name         string `json:"name"`
+	ComputeACLID string `json:"id"`
+}
+
+// ComputeACLs is the API response structure for the list compute ACLs operation.
+type ComputeACLs struct {
+	// Data is the list of returned cumpute ACLs.
+	Data []ComputeACL `json:"data"`
+	// Meta is the information for total compute ACLs.
+	Meta MetaACLs `json:"meta"`
+}
+
+// MetaACLs is a subset of the ComputeACLs response structure.
+type MetaACLs struct {
+	// Total is the sum of compute ACLs.
+	Total int `json:"total"`
+}
+
+// ComputeACLEntry is the API response structure for the lookup operation.
+type ComputeACLEntry struct {
+	Prefix string `json:"prefix"`
+	Action string `json:"action"`
+}
+
+// ComputeACLEntries is the API response structure for the list compute ACL entries operation.
+type ComputeACLEntries struct {
+	// Entries is the list of returned cumpute ACL entries.
+	Entries []ComputeACLEntry
+	// Meta is the information for pagination.
+	Meta MetaEntries `json:"meta"`
+}
+
+// MetaEntries is a subset of the ComputeACLs response structure.
+type MetaEntries struct {
+	// Limit is how many results are included in this response.
+	Limit int `json:"limit"`
+	// NextCursor is the cursor value used to retrieve the next page.
+	NextCursor string `json:"next_cursor"`
+}
