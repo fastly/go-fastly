@@ -1,11 +1,11 @@
-package image_optimizer_default_settings_test
+package imageoptimizerdefaultsettings_test
 
 import (
 	"strings"
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products/image_optimizer"
+	"github.com/fastly/go-fastly/v9/fastly/products/imageoptimizer"
 )
 
 // TestClient_ImageOptimizerDefaultSettings tests the Image Optimizer Default Settings API
@@ -23,7 +23,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 
 	// Enable IO
 	fastly.Record(t, fixtureBase+"enable_product", func(c *fastly.Client) {
-		_, err = image_optimizer.Enable(c, fastly.TestDeliveryServiceID)
+		_, err = imageoptimizer.Enable(c, fastly.TestDeliveryServiceID)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -32,7 +32,7 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	// Ensure we disable IO on the service after the test
 	defer func() {
 		fastly.Record(t, fixtureBase+"disable_product", func(c *fastly.Client) {
-			_, err = image_optimizer.Enable(c, fastly.TestDeliveryServiceID)
+			_, err = imageoptimizer.Enable(c, fastly.TestDeliveryServiceID)
 
 			if err != nil {
 				t.Fatal(err)

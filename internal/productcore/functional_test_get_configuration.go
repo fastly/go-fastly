@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
 )
 
@@ -14,10 +15,9 @@ import (
 //
 // Because GetConfiguration operations produce output, this struct has
 // a type parameter used to specify the type of the output. The type
-// parameter is constrained to match the ProductOutput interface (in
-// this package) so that the test case can validate the common
-// portions of the output.
-type GetConfigurationTestInput[O ProductOutput] struct {
+// parameter is constrained to match the ProductOutput interface so
+// that the test case can validate the common portions of the output.
+type GetConfigurationTestInput[O products.ProductOutput] struct {
 	// Phase is used to distinguish between multiple
 	// GetConfiguration test cases in a sequence of test cases; it
 	// is included in the test case's Name and Operation fields
@@ -47,7 +47,7 @@ type GetConfigurationTestInput[O ProductOutput] struct {
 
 // NewGetConfigurationTest constructs a FunctionalTest object as
 // specified by its input.
-func NewGetConfigurationTest[O ProductOutput](i *GetConfigurationTestInput[O]) *test_utils.FunctionalTest {
+func NewGetConfigurationTest[O products.ProductOutput](i *GetConfigurationTestInput[O]) *test_utils.FunctionalTest {
 	r := test_utils.FunctionalTest{}
 
 	if i.Phase != "" {
