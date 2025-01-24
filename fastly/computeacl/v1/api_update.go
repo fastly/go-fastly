@@ -21,6 +21,7 @@ type BatchComputeACLEntry struct {
 	Prefix *string `json:"prefix"`
 	// Action is one of "ALLOW" or "BLOCK".
 	Action *string `json:"action"`
+	// Operation is one of "create" or "update".
 	Operation *string `json:"op"`
 }
 
