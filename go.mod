@@ -10,8 +10,8 @@ require (
 	github.com/peterhellberg/link v1.2.0
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/crypto v0.32.0
-	golang.org/x/tools v0.15.0
-	honnef.co/go/tools v0.4.7
+	golang.org/x/tools v0.21.1-0.20240531212143-b6235391adb3
+	honnef.co/go/tools v0.5.1
 )
 
 require (
