@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
@@ -238,7 +239,7 @@ func TestClient_GetAlertDefinition_validation(t *testing.T) {
 	_, err = TestClient.GetAlertDefinition(&GetAlertDefinitionInput{
 		ID: nil,
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -248,7 +249,7 @@ func TestClient_UpdateAlertDefinition_validation(t *testing.T) {
 	_, err = TestClient.UpdateAlertDefinition(&UpdateAlertDefinitionInput{
 		ID: nil,
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -257,7 +258,7 @@ func TestClient_DeleteAlertDefinition_validation(t *testing.T) {
 	err := TestClient.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
 		ID: nil,
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

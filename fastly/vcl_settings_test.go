@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 
 	"github.com/google/go-querystring/query"
@@ -80,7 +81,7 @@ func TestClient_GetSettings_validation(t *testing.T) {
 	_, err = TestClient.GetSettings(&GetSettingsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -88,7 +89,7 @@ func TestClient_GetSettings_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -98,7 +99,7 @@ func TestClient_UpdateSettings_validation(t *testing.T) {
 	_, err = TestClient.UpdateSettings(&UpdateSettingsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -106,7 +107,7 @@ func TestClient_UpdateSettings_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

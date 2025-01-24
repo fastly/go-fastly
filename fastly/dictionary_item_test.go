@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -148,14 +149,14 @@ func TestClient_ListDictionaryItems_validation(t *testing.T) {
 	var err error
 
 	_, err = TestClient.ListDictionaryItems(&ListDictionaryItemsInput{})
-	if err != ErrMissingDictionaryID {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = TestClient.ListDictionaryItems(&ListDictionaryItemsInput{
 		DictionaryID: "123",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -164,14 +165,14 @@ func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 	var err error
 
 	_, err = TestClient.CreateDictionaryItem(&CreateDictionaryItemInput{})
-	if err != ErrMissingDictionaryID {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = TestClient.CreateDictionaryItem(&CreateDictionaryItemInput{
 		DictionaryID: "123",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -180,14 +181,14 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 	var err error
 
 	_, err = TestClient.GetDictionaryItem(&GetDictionaryItemInput{})
-	if err != ErrMissingDictionaryID {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = TestClient.GetDictionaryItem(&GetDictionaryItemInput{
 		DictionaryID: "test",
 	})
-	if err != ErrMissingItemKey {
+	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -195,7 +196,7 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "123",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -204,14 +205,14 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 	var err error
 
 	_, err = TestClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{})
-	if err != ErrMissingDictionaryID {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = TestClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{
 		DictionaryID: "test",
 	})
-	if err != ErrMissingItemKey {
+	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -219,7 +220,7 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "123",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -228,14 +229,14 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 	var err error
 
 	err = TestClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{})
-	if err != ErrMissingDictionaryID {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = TestClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
 		DictionaryID: "test",
 	})
-	if err != ErrMissingItemKey {
+	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -243,7 +244,7 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "test",
 		ItemKey:      "123",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -252,7 +253,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 	var err error
 
 	err = TestClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{})
-	if err != ErrMissingDictionaryID {
+	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -261,7 +262,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "bar",
 		Items:        oversizedDictionaryItems,
 	})
-	if err != ErrMaxExceededItems {
+	if !errors.Is(err, ErrMaxExceededItems) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -270,7 +271,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 		DictionaryID: "bar",
 		Items:        validDictionaryItems,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
