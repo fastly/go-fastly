@@ -11,7 +11,7 @@ import (
 // ListEntriesInput specifies the information needed for the ListEntries() function to perform
 // the operation.
 type ListEntriesInput struct {
-	// ACL Identifier (required).
+	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
 	// Cursor is used for paginating through results.
 	Cursor *string
