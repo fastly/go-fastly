@@ -1,4 +1,4 @@
-package v1
+package computeacls
 
 // ComputeACL is the API response structure for the create and describe operations.
 type ComputeACL struct {
