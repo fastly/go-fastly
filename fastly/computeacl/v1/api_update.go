@@ -9,7 +9,7 @@ import (
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
-	// ACL Identifier (required).
+	// ComputeACLID  is an ACL Identifier (required).
 	ComputeACLID *string
 	// Entries is a list of ACL entries.
 	Entries []*BatchComputeACLEntry `json:"entries"`
