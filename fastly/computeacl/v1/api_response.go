@@ -24,6 +24,7 @@ type MetaACLs struct {
 // ComputeACLEntry is the API response structure for the lookup operation.
 type ComputeACLEntry struct {
 	Prefix string `json:"prefix"`
+	// Action is one of "ALLOW" or "BLOCK".
 	Action string `json:"action"`
 }
 
