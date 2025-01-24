@@ -9,7 +9,7 @@ import (
 // DeleteInput specifies the information needed for the Delete() function to
 // perform the operation.
 type DeleteInput struct {
-	// ACL Identifier (required).
+	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
 }
 
