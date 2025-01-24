@@ -17,7 +17,8 @@ type UpdateInput struct {
 
 // BatchComputeACLEntry is a subset of the UpdateInput input structure.
 type BatchComputeACLEntry struct {
-	Prefix    *string `json:"prefix"`
+	// Prefix is an IP prefix defined in Classless Inter-Domain Routing (CIDR) format.
+	Prefix *string `json:"prefix"`
 	Action    *string `json:"action"`
 	Operation *string `json:"op"`
 }
