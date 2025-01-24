@@ -17,5 +17,5 @@ fi
 
 for file in $(grep --recursive --files-with-matches "${FASTLY_TEST_RESOURCE_ID}" "${FIXTURESDIR}")
 do
-  sed -i "s/${FASTLY_TEST_RESOURCE_ID}/${DEFAULT_TEST_RESOURCE_ID}/g" "${file}"
+  sed -i.bak "s/${FASTLY_TEST_RESOURCE_ID}/${DEFAULT_TEST_RESOURCE_ID}/g" "$file" && rm "${file}.bak"
 done

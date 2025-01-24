@@ -1,6 +1,9 @@
 package productcore
 
-import "github.com/fastly/go-fastly/v9/fastly"
+import (
+	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/fastly/products"
+)
 
 // GetInput specifies the information needed for the Get()
 // function to perform the operation.
@@ -17,7 +20,7 @@ type GetInput struct {
 // struct which matches the ProductOutput interface, and that type
 // is used to construct, populate, and return the output present in
 // the response body.
-func Get[O ProductOutput](i *GetInput) (o O, err error) {
+func Get[O products.ProductOutput](i *GetInput) (o O, err error) {
 	if i.ServiceID == "" {
 		err = fastly.ErrMissingServiceID
 		return

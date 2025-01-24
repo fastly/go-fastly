@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v9/fastly/products"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
 	"github.com/stretchr/testify/require"
 )
@@ -14,10 +15,9 @@ import (
 //
 // Because Get operations produce output, this struct has a type
 // parameter used to specify the type of the output. The type
-// parameter is constrained to match the ProductOutput interface (in
-// this package) so that the test case can validate the common
-// portions of the output.
-type GetTestInput[O ProductOutput] struct {
+// parameter is constrained to match the ProductOutput interface so
+// that the test case can validate the common portions of the output.
+type GetTestInput[O products.ProductOutput] struct {
 	// Phase is used to distinguish between multiple Get test
 	// cases in a sequence of test cases; it is included in the
 	// test case's Name and Operation fields
@@ -57,7 +57,7 @@ type GetTestInput[O ProductOutput] struct {
 // error returned when a product is not enabled on a service. If any
 // other error is returned by the API, the test case will report
 // failure.
-func NewGetTest[O ProductOutput](i *GetTestInput[O]) *test_utils.FunctionalTest {
+func NewGetTest[O products.ProductOutput](i *GetTestInput[O]) *test_utils.FunctionalTest {
 	r := test_utils.FunctionalTest{}
 
 	if i.Phase != "" {

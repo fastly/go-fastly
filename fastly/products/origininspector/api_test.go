@@ -1,50 +1,50 @@
-package fanout_test
+package origininspector_test
 
 import (
 	"testing"
 
 	"github.com/fastly/go-fastly/v9/fastly"
 	"github.com/fastly/go-fastly/v9/fastly/products"
-	"github.com/fastly/go-fastly/v9/fastly/products/fanout"
+	"github.com/fastly/go-fastly/v9/fastly/products/origininspector"
 	"github.com/fastly/go-fastly/v9/internal/productcore"
 	"github.com/fastly/go-fastly/v9/internal/test_utils"
 )
 
-var serviceID = fastly.TestComputeServiceID
+var serviceID = fastly.TestDeliveryServiceID
 
 var functionalTests = []*test_utils.FunctionalTest{
 	productcore.NewDisableTest(&productcore.DisableTestInput{
 		Phase:         "ensure disabled before testing",
-		OpFn:          fanout.Disable,
+		OpFn:          origininspector.Disable,
 		ServiceID:     serviceID,
 		IgnoreFailure: true,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[fanout.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[origininspector.EnableOutput]{
 		Phase:         "before enablement",
-		OpFn:          fanout.Get,
-		ProductID:     fanout.ProductID,
+		OpFn:          origininspector.Get,
+		ProductID:     origininspector.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
-	productcore.NewEnableTest(&productcore.EnableTestInput[fanout.EnableOutput, products.NullInput]{
-		OpNoInputFn: fanout.Enable,
-		ProductID:   fanout.ProductID,
+	productcore.NewEnableTest(&productcore.EnableTestInput[origininspector.EnableOutput, products.NullInput]{
+		OpNoInputFn: origininspector.Enable,
+		ProductID:   origininspector.ProductID,
 		ServiceID:   serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[fanout.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[origininspector.EnableOutput]{
 		Phase:     "after enablement",
-		OpFn:      fanout.Get,
-		ProductID: fanout.ProductID,
+		OpFn:      origininspector.Get,
+		ProductID: origininspector.ProductID,
 		ServiceID: serviceID,
 	}),
 	productcore.NewDisableTest(&productcore.DisableTestInput{
-		OpFn:      fanout.Disable,
+		OpFn:      origininspector.Disable,
 		ServiceID: serviceID,
 	}),
-	productcore.NewGetTest(&productcore.GetTestInput[fanout.EnableOutput]{
+	productcore.NewGetTest(&productcore.GetTestInput[origininspector.EnableOutput]{
 		Phase:         "after disablement",
-		OpFn:          fanout.Get,
-		ProductID:     fanout.ProductID,
+		OpFn:          origininspector.Get,
+		ProductID:     origininspector.ProductID,
 		ServiceID:     serviceID,
 		ExpectFailure: true,
 	}),
