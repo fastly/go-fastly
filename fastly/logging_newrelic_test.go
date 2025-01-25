@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -255,7 +256,7 @@ func TestClient_ListNewRelic_validation(t *testing.T) {
 	_, err = TestClient.ListNewRelic(&ListNewRelicInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -263,7 +264,7 @@ func TestClient_ListNewRelic_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -274,7 +275,7 @@ func TestClient_CreateNewRelic_validation(t *testing.T) {
 	_, err = TestClient.CreateNewRelic(&CreateNewRelicInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -282,7 +283,7 @@ func TestClient_CreateNewRelic_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -294,7 +295,7 @@ func TestClient_GetNewRelic_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -302,7 +303,7 @@ func TestClient_GetNewRelic_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -310,7 +311,7 @@ func TestClient_GetNewRelic_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -322,7 +323,7 @@ func TestClient_UpdateNewRelic_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -330,7 +331,7 @@ func TestClient_UpdateNewRelic_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -338,7 +339,7 @@ func TestClient_UpdateNewRelic_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -350,7 +351,7 @@ func TestClient_DeleteNewRelic_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -358,7 +359,7 @@ func TestClient_DeleteNewRelic_validation(t *testing.T) {
 		Name:           "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -366,7 +367,7 @@ func TestClient_DeleteNewRelic_validation(t *testing.T) {
 		Name:      "test",
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

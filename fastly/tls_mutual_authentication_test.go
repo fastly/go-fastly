@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -154,7 +155,7 @@ func TestClient_CreateTLSMutualAuthentication_validation(t *testing.T) {
 	_, err = TestClient.CreateTLSMutualAuthentication(&CreateTLSMutualAuthenticationInput{
 		Name: "My certificate",
 	})
-	if err != ErrMissingCertBundle {
+	if !errors.Is(err, ErrMissingCertBundle) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -163,7 +164,7 @@ func TestClient_DeleteTLSMutualAuthentication_validation(t *testing.T) {
 	t.Parallel()
 
 	err := TestClient.DeleteTLSMutualAuthentication(&DeleteTLSMutualAuthenticationInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -185,7 +186,7 @@ func TestClient_GetTLSMutualAuthentication_validation(t *testing.T) {
 
 	var err error
 	_, err = TestClient.GetCustomTLSCertificate(&GetCustomTLSCertificateInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -198,7 +199,7 @@ func TestClient_UpdateTLSMutualAuthentication_validation(t *testing.T) {
 		ID:   "example",
 		Name: "My certificate",
 	})
-	if err != ErrMissingCertBundle {
+	if !errors.Is(err, ErrMissingCertBundle) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -206,7 +207,7 @@ func TestClient_UpdateTLSMutualAuthentication_validation(t *testing.T) {
 		CertBundle: "example",
 		Name:       "My certificate",
 	})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
