@@ -89,6 +89,14 @@ var ErrMissingCertBlob = NewFieldError("CertBlob")
 // requires a "CertBundle" key, but one was not set.
 var ErrMissingCertBundle = NewFieldError("CertBundle")
 
+// ErrMissingComputeACLID is an error that is returned when an input struct
+// requires a "ComputeACLID" key, but one was not set.
+var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
+
+// ErrMissingComputeACLIP is an error that is returned when an input struct
+// requires a "ComputeACLIP" key, but one was not set.
+var ErrMissingComputeACLIP = NewFieldError("ComputeACLIP")
+
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
 var ErrMissingContent = NewFieldError("Content")
