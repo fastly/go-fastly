@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -137,7 +138,7 @@ func TestClient_ListCustomerUsers_validation(t *testing.T) {
 	_, err = TestClient.ListCustomerUsers(&ListCustomerUsersInput{
 		CustomerID: "",
 	})
-	if err != ErrMissingCustomerID {
+	if !errors.Is(err, ErrMissingCustomerID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -147,7 +148,7 @@ func TestClient_GetUser_validation(t *testing.T) {
 	_, err = TestClient.GetUser(&GetUserInput{
 		UserID: "",
 	})
-	if err != ErrMissingUserID {
+	if !errors.Is(err, ErrMissingUserID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -157,7 +158,7 @@ func TestClient_UpdateUser_validation(t *testing.T) {
 	_, err = TestClient.UpdateUser(&UpdateUserInput{
 		UserID: "",
 	})
-	if err != ErrMissingUserID {
+	if !errors.Is(err, ErrMissingUserID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -166,7 +167,7 @@ func TestClient_DeleteUser_validation(t *testing.T) {
 	err := TestClient.DeleteUser(&DeleteUserInput{
 		UserID: "",
 	})
-	if err != ErrMissingUserID {
+	if !errors.Is(err, ErrMissingUserID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -175,7 +176,7 @@ func TestClient_ResetUser_validation(t *testing.T) {
 	err := TestClient.ResetUserPassword(&ResetUserPasswordInput{
 		Login: "",
 	})
-	if err != ErrMissingLogin {
+	if !errors.Is(err, ErrMissingLogin) {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -185,15 +185,13 @@ func (i *GetAPIEventsFilterInput) formatEventFilters() map[string]string {
 	// of any of these filters. It doesn't appear we would need to at present.
 
 	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
-			if value != "" {
-				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+		switch v := value.(type) {
+		case string:
+			if v != "" {
 				result[key] = v
 			}
-		case "int":
-			if value != 0 {
-				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+		case int:
+			if v != 0 {
 				result[key] = strconv.Itoa(v)
 			}
 		}

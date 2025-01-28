@@ -74,24 +74,20 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 	}
 
 	for key, value := range pairings {
-		switch t := reflect.TypeOf(value).String(); t {
-		case "string":
-			if value != "" {
-				v, _ := value.(string) // type assert to avoid runtime panic (v will have zero value for its type)
+		switch v := value.(type) {
+		case string:
+			if v != "" {
 				result[key] = v
 			}
-		case "int":
-			if value != 0 {
-				v, _ := value.(int) // type assert to avoid runtime panic (v will have zero value for its type)
+		case int:
+			if v != 0 {
 				result[key] = strconv.Itoa(v)
 			}
-		case "[]string":
-			v, _ := value.([]string) // type assert to avoid runtime panic (v will have zero value for its type)
+		case []string:
 			if len(v) > 0 {
 				result[key] = strings.Join(v, ",")
 			}
-		case "[]int":
-			v, _ := value.([]int) // type assert to avoid runtime panic (v will have zero value for its type)
+		case []int:
 			if len(v) > 0 {
 				stringSlice := make([]string, len(v))
 				for i, id := range v {

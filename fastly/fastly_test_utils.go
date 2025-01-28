@@ -26,7 +26,7 @@ var TestComputeServiceID = computeServiceIDForTest()
 var TestNGWAFWorkspaceID = ngwafWorkspaceIDForTest()
 
 // ID of the default Delivery service for testing.
-var defaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
+var DefaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
 
 // ID of the default Compute service for testing.
 var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
@@ -50,7 +50,7 @@ func deliveryServiceIDForTest() string {
 		return tsid
 	}
 
-	return defaultDeliveryTestServiceID
+	return DefaultDeliveryTestServiceID
 }
 
 func computeServiceIDForTest() string {

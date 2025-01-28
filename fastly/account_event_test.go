@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"errors"
 	"io"
 	"testing"
 
@@ -45,7 +46,7 @@ func TestClient_GetAPIEvent_validation(t *testing.T) {
 	_, err = TestClient.GetAPIEvent(&GetAPIEventInput{
 		EventID: "",
 	})
-	if err != ErrMissingEventID {
+	if !errors.Is(err, ErrMissingEventID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

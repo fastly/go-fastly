@@ -1,5 +1,30 @@
 # Changelog
 
+## [v9.13.0](https://github.com/fastly/go-fastly/releases/tag/v9.13.0) (2025-01-27)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.12.0...v9.13.0)
+
+**Enhancements:**
+
+- feat(origin_inspector): Add `limit` query parameter [#568](https://github.com/fastly/go-fastly/pull/568)
+- feat(products): Product-specific enablement and configuration [#570](https://github.com/fastly/go-fastly/pull/570)
+- feat(domains_v1): Add support for new UDM endpoints [#577](https://github.com/fastly/go-fastly/pull/577)
+- feat(computeacls): Add support for compute platform ACLs [#574](https://github.com/fastly/go-fastly/pull/574)
+
+**Bug fixes:**
+
+- fix(domains): Parse error response correctly [#579](https://github.com/fastly/go-fastly/pull/579)
+- fix(products): Improve API usability [#572](https://github.com/fastly/go-fastly/pull/572)
+
+**Dependencies:**
+
+- build(deps): bump github.com/google/go-cmp from 0.5.8 to 0.6.0 [#580](https://github.com/fastly/go-fastly/pull/580)
+- build(deps): bump github.com/mitchellh/mapstructure from 1.4.3 to 1.5.0 [#580](https://github.com/fastly/go-fastly/pull/580)
+- build(deps): bump github.com/peterhellberg/link from 1.1.0 to 1.2.0 [#580](https://github.com/fastly/go-fastly/pull/580)
+- build(deps): bump golang.org/x/crypto from 0.31.0 to 0.32.0 [#580](https://github.com/fastly/go-fastly/pull/580)
+- build(deps): bump honnef.co/go/tools from 0.4.7 to 0.5.1 [#586](https://github.com/fastly/go-fastly/pull/586)
+- build(deps): bump golang.org/x/tools from 0.15.0 to 0.29.0 [#587](https://github.com/fastly/go-fastly/pull/587)
+
 ## [v9.12.0](https://github.com/fastly/go-fastly/releases/tag/v9.12.0) (2024-11-07)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.11.0...v9.12.0)

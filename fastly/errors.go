@@ -89,6 +89,14 @@ var ErrMissingCertBlob = NewFieldError("CertBlob")
 // requires a "CertBundle" key, but one was not set.
 var ErrMissingCertBundle = NewFieldError("CertBundle")
 
+// ErrMissingComputeACLID is an error that is returned when an input struct
+// requires a "ComputeACLID" key, but one was not set.
+var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
+
+// ErrMissingComputeACLIP is an error that is returned when an input struct
+// requires a "ComputeACLIP" key, but one was not set.
+var ErrMissingComputeACLIP = NewFieldError("ComputeACLIP")
+
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
 var ErrMissingContent = NewFieldError("Content")
@@ -124,6 +132,10 @@ var ErrMissingTokenID = errors.New("missing required field 'TokenID'")
 // ErrMissingID is an error that is returned when an input struct
 // requires a "ID" key, but one was not set.
 var ErrMissingID = NewFieldError("ID")
+
+// ErrMissingDomainID is an error that is returned when an input struct
+// requires a "DomainID" key, but one was not set.
+var ErrMissingDomainID = NewFieldError("DomainID")
 
 // ErrMissingEntryID is an error that is returned when an input struct
 // requires a "EntryID" key, but one was not set.
@@ -454,13 +466,21 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 					if r, ok := le["reason"]; ok {
 						detail, _ = r.(string)
 					}
+					if d, ok := le["detail"]; ok {
+						detail, _ = d.(string)
+					}
+					var title string
 					if i, ok := le["index"]; ok {
 						index, _ = i.(float64)
+						title = fmt.Sprintf("error at index: %v", index)
+					}
+					if t, ok := le["title"]; ok {
+						title, _ = t.(string)
 					}
 					e.Errors = append(e.Errors, &ErrorObject{
 						Code:   code,
 						Detail: detail,
-						Title:  fmt.Sprintf("error at index: %v", index),
+						Title:  title,
 					})
 				}
 			} else {

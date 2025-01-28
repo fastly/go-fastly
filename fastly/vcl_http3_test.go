@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -78,14 +79,14 @@ func TestClient_GetHTTP3_validation(t *testing.T) {
 	_, err = TestClient.GetHTTP3(&GetHTTP3Input{
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = TestClient.GetHTTP3(&GetHTTP3Input{
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -95,7 +96,7 @@ func TestClient_CreateHTTP3_validation(t *testing.T) {
 	_, err = TestClient.EnableHTTP3(&EnableHTTP3Input{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -103,7 +104,7 @@ func TestClient_CreateHTTP3_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -114,14 +115,14 @@ func TestClient_DeleteHTTP3_validation(t *testing.T) {
 	err = TestClient.DisableHTTP3(&DisableHTTP3Input{
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = TestClient.DisableHTTP3(&DisableHTTP3Input{
 		ServiceID: "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -171,35 +172,35 @@ func TestClient_Notifications(t *testing.T) {
 
 func TestClient_GetIntegration_validation(t *testing.T) {
 	_, err := TestClient.GetIntegration(&GetIntegrationInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateIntegration_validation(t *testing.T) {
 	err := TestClient.UpdateIntegration(&UpdateIntegrationInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteIntegration_validation(t *testing.T) {
 	err := TestClient.DeleteIntegration(&DeleteIntegrationInput{})
-	if err != ErrMissingID {
+	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_GetWebhookSigningKey_validation(t *testing.T) {
 	_, err := TestClient.GetWebhookSigningKey(&GetWebhookSigningKeyInput{})
-	if err != ErrMissingIntegrationID {
+	if !errors.Is(err, ErrMissingIntegrationID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_RotateWebhookSigningKey_validation(t *testing.T) {
 	_, err := TestClient.RotateWebhookSigningKey(&RotateWebhookSigningKeyInput{})
-	if err != ErrMissingIntegrationID {
+	if !errors.Is(err, ErrMissingIntegrationID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
