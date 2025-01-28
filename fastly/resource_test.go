@@ -3,6 +3,7 @@ package fastly
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"testing"
 	"time"
 )
@@ -136,7 +137,7 @@ func TestClient_ListResources_validation(t *testing.T) {
 	_, err = TestClient.ListResources(&ListResourcesInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -144,7 +145,7 @@ func TestClient_ListResources_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -154,7 +155,7 @@ func TestClient_CreateResource_validation(t *testing.T) {
 	_, err = TestClient.CreateResource(&CreateResourceInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -162,7 +163,7 @@ func TestClient_CreateResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -174,7 +175,7 @@ func TestClient_GetResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingResourceID {
+	if !errors.Is(err, ErrMissingResourceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -182,7 +183,7 @@ func TestClient_GetResource_validation(t *testing.T) {
 		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -190,7 +191,7 @@ func TestClient_GetResource_validation(t *testing.T) {
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -202,7 +203,7 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingResourceID {
+	if !errors.Is(err, ErrMissingResourceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -210,7 +211,7 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -218,7 +219,7 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -230,7 +231,7 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingResourceID {
+	if !errors.Is(err, ErrMissingResourceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -238,7 +239,7 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -246,7 +247,7 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

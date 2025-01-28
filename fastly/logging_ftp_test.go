@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -353,7 +354,7 @@ func TestClient_ListFTPs_validation(t *testing.T) {
 	_, err = TestClient.ListFTPs(&ListFTPsInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -361,7 +362,7 @@ func TestClient_ListFTPs_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -372,7 +373,7 @@ func TestClient_CreateFTP_validation(t *testing.T) {
 	_, err = TestClient.CreateFTP(&CreateFTPInput{
 		ServiceID: "",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -380,7 +381,7 @@ func TestClient_CreateFTP_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -392,7 +393,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -400,7 +401,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "test",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -408,7 +409,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 		ServiceID: "foo",
 		Name:      "test",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -420,7 +421,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -428,7 +429,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "test",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -436,7 +437,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 		ServiceID: "foo",
 		Name:      "test",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -448,7 +449,7 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
-	if err != ErrMissingName {
+	if !errors.Is(err, ErrMissingName) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -456,7 +457,7 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 		ServiceVersion: 1,
 		Name:           "test",
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -464,7 +465,7 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 		ServiceID: "foo",
 		Name:      "test",
 	})
-	if err != ErrMissingServiceVersion {
+	if !errors.Is(err, ErrMissingServiceVersion) {
 		t.Errorf("bad error: %s", err)
 	}
 }

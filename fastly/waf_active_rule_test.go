@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -151,7 +152,7 @@ func TestClient_ListWAFActiveRules_validation(t *testing.T) {
 	_, err = TestClient.ListWAFActiveRules(&ListWAFActiveRulesInput{
 		WAFID: "",
 	})
-	if err != ErrMissingWAFID {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -159,7 +160,7 @@ func TestClient_ListWAFActiveRules_validation(t *testing.T) {
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
-	if err != ErrMissingWAFVersionNumber {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -169,7 +170,7 @@ func TestClient_ListAllWAFActiveRules_validation(t *testing.T) {
 	_, err = TestClient.ListAllWAFActiveRules(&ListAllWAFActiveRulesInput{
 		WAFID: "",
 	})
-	if err != ErrMissingWAFID {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -177,7 +178,7 @@ func TestClient_ListAllWAFActiveRules_validation(t *testing.T) {
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
-	if err != ErrMissingWAFVersionNumber {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -187,7 +188,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 	_, err = TestClient.CreateWAFActiveRules(&CreateWAFActiveRulesInput{
 		WAFID: "",
 	})
-	if err != ErrMissingWAFID {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -195,7 +196,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 		WAFID:            "1",
 		WAFVersionNumber: 0,
 	})
-	if err != ErrMissingWAFVersionNumber {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -204,7 +205,7 @@ func TestClient_CreateWAFActiveRules_validation(t *testing.T) {
 		WAFVersionNumber: 1,
 		Rules:            []*WAFActiveRule{},
 	})
-	if err != ErrMissingWAFActiveRule {
+	if !errors.Is(err, ErrMissingWAFActiveRule) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -223,7 +224,7 @@ func TestClient_BatchModificationWAFActiveRules_validation(t *testing.T) {
 	_, err = TestClient.BatchModificationWAFActiveRules(&BatchModificationWAFActiveRulesInput{
 		Rules: rules,
 	})
-	if err != ErrMaxExceededRules {
+	if !errors.Is(err, ErrMaxExceededRules) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -234,7 +235,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		WAFID: "",
 	})
 
-	if err != ErrMissingWAFID {
+	if !errors.Is(err, ErrMissingWAFID) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -243,7 +244,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		WAFVersionNumber: 0,
 	})
 
-	if err != ErrMissingWAFVersionNumber {
+	if !errors.Is(err, ErrMissingWAFVersionNumber) {
 		t.Errorf("bad error: %s", err)
 	}
 
@@ -253,7 +254,7 @@ func TestClient_DeleteWAFActiveRules_validation(t *testing.T) {
 		Rules:            []*WAFActiveRule{},
 	})
 
-	if err != ErrMissingWAFActiveRule {
+	if !errors.Is(err, ErrMissingWAFActiveRule) {
 		t.Errorf("bad error: %s", err)
 	}
 }

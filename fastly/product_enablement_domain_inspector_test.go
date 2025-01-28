@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"errors"
 	"testing"
 )
 
@@ -73,14 +74,14 @@ func TestClient_GetProduct_validation_domain_inspector(t *testing.T) {
 	_, err = TestClient.GetProduct(&ProductEnablementInput{
 		ProductID: ProductDomainInspector,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = TestClient.GetProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
-	if err != ErrMissingProductID {
+	if !errors.Is(err, ErrMissingProductID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -90,14 +91,14 @@ func TestClient_EnableProduct_validation_domain_inspector(t *testing.T) {
 	_, err = TestClient.EnableProduct(&ProductEnablementInput{
 		ProductID: ProductDomainInspector,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	_, err = TestClient.EnableProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
-	if err != ErrMissingProductID {
+	if !errors.Is(err, ErrMissingProductID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
@@ -108,14 +109,14 @@ func TestClient_DisableProduct_validation_domain_inspector(t *testing.T) {
 	err = TestClient.DisableProduct(&ProductEnablementInput{
 		ProductID: ProductDomainInspector,
 	})
-	if err != ErrMissingServiceID {
+	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	err = TestClient.DisableProduct(&ProductEnablementInput{
 		ServiceID: "foo",
 	})
-	if err != ErrMissingProductID {
+	if !errors.Is(err, ErrMissingProductID) {
 		t.Errorf("bad error: %s", err)
 	}
 }

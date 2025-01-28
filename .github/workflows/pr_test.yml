@@ -5,26 +5,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
-        go-version: 1.22.x
-    - name: Restore cache
-      id: cache
-      uses: actions/cache@v2
-      with:
-        path: ~/go/bin
-        key: ${{ runner.os }}-go-bin-${{ hashFiles('**/go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-go-bin-
-    - name: Restore cache
-      uses: actions/cache@v2
-      with:
-        path: ~/go/pkg/mod
-        key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-go-mod-
+        go-version: 1.20.x
     - name: Installing necessary tools
       run: make dev-dependencies
       shell: bash
@@ -51,18 +36,11 @@ jobs:
     runs-on: ${{ matrix.platform }}
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
     - name: Install Go
-      uses: actions/setup-go@v2
+      uses: actions/setup-go@v5
       with:
         go-version: ${{ matrix.go-version }}
-    - name: Restore cache
-      uses: actions/cache@v2
-      with:
-        path: ~/go/pkg/mod
-        key: ${{ runner.os }}-go-mod-${{ hashFiles('**/go.sum') }}
-        restore-keys: |
-          ${{ runner.os }}-go-mod-
     - name: Test
       run: make test
       shell: bash
