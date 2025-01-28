@@ -751,6 +751,7 @@ func stringToTimeHookFunc() mapstructure.DecodeHookFunc {
 
 		// Fallback to "2006-01-02 15:04:05" format
 		if v, err := time.Parse("2006-01-02 15:04:05", str); err == nil {
+			// DictionaryInfo#get uses it's own special time format for now.
 			return v, nil
 		}
 
