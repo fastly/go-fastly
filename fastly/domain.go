@@ -189,8 +189,12 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
 
-	_, err := c.Delete(path, nil)
-	return err
+	ignored, err := c.Delete(path, nil)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }
 
 // ValidateDomainInput is used as input to the ValidateDomain function.
