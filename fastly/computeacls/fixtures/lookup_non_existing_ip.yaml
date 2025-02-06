@@ -7,21 +7,17 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls
+    url: https://api.fastly.com/resources/acls/toqKhc0lcufDSAGiDUkzG5/entry/73.49.184.0
     method: GET
   response:
-    body: '{"data":[{"id":"vwdrpX4pClvZlcksxFno4n","name":"世界"}],"meta":{"total":1}}'
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "77"
-      Content-Type:
-      - application/json
       Date:
-      - Thu, 06 Feb 2025 04:20:02 GMT
+      - Thu, 06 Feb 2025 04:20:07 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +31,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760066-MIA, cache-mia-kmia1760035-MIA
+      - cache-mia-kmia1760046-MIA, cache-mia-kmia1760035-MIA
       X-Timer:
-      - S1738815603.617802,VS0,VE335
-    status: 200 OK
-    code: 200
+      - S1738815607.218292,VS0,VE169
+    status: 204 No Content
+    code: 204
     duration: ""
