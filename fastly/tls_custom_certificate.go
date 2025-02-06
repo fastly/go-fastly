@@ -145,6 +145,11 @@ type CreateCustomTLSCertificateInput struct {
 	ID string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	// Name is a customizable name for your certificate.
 	Name string `jsonapi:"attr,name,omitempty"`
+	// AllowUntrustedRoot enables the upload of a certificate signed by a self-signing CA as the root.
+	// The main use case for enabling this setting is to enable a fully localized development setup where you are generating your own certificates.
+	// In most cases, this setting should never be turned on since it makes it possible for the uploading of conflicting certificates that may interfere with production traffic.
+	// If you are going to enable this feature make sure to take proper precaution and only upload self-signed certificates that certify "dummy" domains that do not overlap with the actual domains you own.
+	AllowUntrustedRoot `jsonapi:"attr,allow_untrusted_root,omitempty"`
 }
 
 // CreateCustomTLSCertificate creates a new resource.
