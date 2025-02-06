@@ -142,10 +142,11 @@ type CreateAutomationTokenInput struct {
 //
 // Requires sudo capability for the token being used.
 func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*AutomationToken, error) {
-	_, err := c.PostForm("/sudo", i, nil)
+	ignored, err := c.PostForm("/sudo", i, nil)
 	if err != nil {
 		return nil, err
 	}
+	defer ignored.Body.Close()
 
 	resp, err := c.PostJSON("/automation-tokens", i, nil)
 	if err != nil {
