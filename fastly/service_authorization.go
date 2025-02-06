@@ -219,7 +219,10 @@ func (c *Client) DeleteServiceAuthorization(i *DeleteServiceAuthorizationInput) 
 
 	path := ToSafeURL("service-authorizations", i.ID)
 
-	_, err := c.Delete(path, nil)
-
-	return err
+	ignored, err := c.Delete(path, nil)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }
