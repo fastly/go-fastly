@@ -2,11 +2,12 @@ package fastly
 
 import (
 	"errors"
+	"net/http"
 	"testing"
 )
 
 const (
-	MiB = 1048576
+	MiB = http.DefaultMaxHeaderBytes
 )
 
 func TestClient_BlobStorages(t *testing.T) {

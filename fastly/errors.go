@@ -548,10 +548,10 @@ func (e *HTTPError) String() string {
 
 // IsBadRequest returns true if the HTTP status code is 400, false otherwise.
 func (e *HTTPError) IsBadRequest() bool {
-	return e.StatusCode == 400
+	return e.StatusCode == http.StatusBadRequest
 }
 
 // IsNotFound returns true if the HTTP status code is 404, false otherwise.
 func (e *HTTPError) IsNotFound() bool {
-	return e.StatusCode == 404
+	return e.StatusCode == http.StatusNotFound
 }

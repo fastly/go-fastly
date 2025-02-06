@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"encoding/json"
+	"net/http"
 	"strconv"
 )
 
@@ -137,7 +138,7 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 	resp, err := c.Get(path, nil)
 	if err != nil {
 		if herr, ok := err.(*HTTPError); ok {
-			if herr.StatusCode == 404 {
+			if herr.StatusCode == http.StatusNotFound {
 				// API endpoint returns 404 for services without Image Optimizer settings set.
 				return nil, nil
 			}

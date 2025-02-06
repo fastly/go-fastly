@@ -100,8 +100,8 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 	resp, err := c.Get(path, &RequestOptions{
 		Params: params,
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -134,8 +134,8 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -168,8 +168,8 @@ func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 
 	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -253,8 +253,8 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 
 	resp, err := c.Request(method, path, &RequestOptions{
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Body:     &body,
 		Parallel: true,
@@ -312,8 +312,8 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 	resp, err := c.Get(path, &RequestOptions{
 		Params: params,
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -351,8 +351,8 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -390,8 +390,8 @@ func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 
 	resp, err := c.Delete(path, &RequestOptions{
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -443,8 +443,8 @@ func (c *Client) CreateClientKey() (*ClientKey, error) {
 
 	resp, err := c.Post(path, &RequestOptions{
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
@@ -469,8 +469,8 @@ func (c *Client) GetSigningKey() (ed25519.PublicKey, error) {
 
 	resp, err := c.Get(path, &RequestOptions{
 		Headers: map[string]string{
-			"Content-Type": "application/json",
-			"Accept":       "application/json",
+			"Content-Type": JSONMimeType,
+			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
 	})
