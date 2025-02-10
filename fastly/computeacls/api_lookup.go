@@ -35,7 +35,7 @@ func Lookup(c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		return nil, fmt.Errorf("204 - No Content")
+		return nil, fmt.Errorf("%d - %s", resp.StatusCode, http.StatusText(resp.StatusCode))
 	}
 
 	var entry *ComputeACLEntry
