@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/toqKhc0lcufDSAGiDUkzG5/entries
+    url: https://api.fastly.com/resources/acls/FoEyuc1sZIXnY61eCWYlUo/entries
     method: GET
   response:
     body: '{"entries":[{"prefix":"1.2.3.0/24","action":"BLOCK"},{"prefix":"1.2.3.4/32","action":"ALLOW"},{"prefix":"23.23.23.23/32","action":"ALLOW"},{"prefix":"192.168.0.0/16","action":"BLOCK"}],"meta":{"limit":100}}'
@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Feb 2025 04:20:04 GMT
+      - Mon, 10 Feb 2025 21:14:59 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760020-MIA, cache-mia-kmia1760035-MIA
+      - cache-pdk-katl1840031-PDK, cache-pdk-katl1840037-PDK
       X-Timer:
-      - S1738815604.190072,VS0,VE767
+      - S1739222099.156442,VS0,VE837
     status: 200 OK
     code: 200
     duration: ""

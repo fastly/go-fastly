@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/toqKhc0lcufDSAGiDUkzG5/entry/73.49.184.0
+    url: https://api.fastly.com/resources/acls/FoEyuc1sZIXnY61eCWYlUo/entry/73.49.184.42
     method: GET
   response:
     body: ""
@@ -17,7 +17,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Thu, 06 Feb 2025 04:20:07 GMT
+      - Mon, 10 Feb 2025 21:15:02 GMT
       Pragma:
       - no-cache
       Server:
@@ -31,9 +31,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760046-MIA, cache-mia-kmia1760035-MIA
+      - cache-pdk-katl1840091-PDK, cache-pdk-katl1840037-PDK
       X-Timer:
-      - S1738815607.218292,VS0,VE169
+      - S1739222102.008948,VS0,VE293
     status: 204 No Content
     code: 204
     duration: ""

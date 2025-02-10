@@ -10,18 +10,18 @@ interactions:
     url: https://api.fastly.com/resources/acls
     method: GET
   response:
-    body: '{"data":[{"id":"vwdrpX4pClvZlcksxFno4n","name":"世界"}],"meta":{"total":1}}'
+    body: '{"data":[{"id":"P3Z6xZXOcbt3l5C3CUxWh0","name":"my-compute-acl"}],"meta":{"total":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "77"
+      - "85"
       Content-Type:
       - application/json
       Date:
-      - Thu, 06 Feb 2025 04:20:02 GMT
+      - Mon, 10 Feb 2025 21:14:58 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760066-MIA, cache-mia-kmia1760035-MIA
+      - cache-pdk-kpdk1780059-PDK, cache-pdk-katl1840037-PDK
       X-Timer:
-      - S1738815603.617802,VS0,VE335
+      - S1739222098.756315,VS0,VE324
     status: 200 OK
     code: 200
     duration: ""

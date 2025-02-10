@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"ComputeACLID":"toqKhc0lcufDSAGiDUkzG5","entries":[{"prefix":"1.2.3.0/24","action":"BLOCK","op":"create"},{"prefix":"1.2.3.4/32","action":"ALLOW","op":"update"},{"prefix":"23.23.23.23/32","action":"ALLOW","op":"create"},{"prefix":"192.168.0.0/16","action":"BLOCK","op":"update"}]}'
+    body: '{"ComputeACLID":"FoEyuc1sZIXnY61eCWYlUo","entries":[{"prefix":"1.2.3.0/24","action":"BLOCK","op":"create"},{"prefix":"1.2.3.4/32","action":"ALLOW","op":"update"},{"prefix":"23.23.23.23/32","action":"ALLOW","op":"create"},{"prefix":"192.168.0.0/16","action":"BLOCK","op":"update"}]}'
     form: {}
     headers:
       Accept:
@@ -11,7 +11,7 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/toqKhc0lcufDSAGiDUkzG5/entries
+    url: https://api.fastly.com/resources/acls/FoEyuc1sZIXnY61eCWYlUo/entries
     method: PATCH
   response:
     body: ""
@@ -23,7 +23,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Thu, 06 Feb 2025 04:20:04 GMT
+      - Mon, 10 Feb 2025 21:14:59 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760035-MIA, cache-mia-kmia1760035-MIA
+      - cache-pdk-katl1840037-PDK, cache-pdk-katl1840037-PDK
       X-Timer:
-      - S1738815604.841581,VS0,VE328
+      - S1739222099.881966,VS0,VE243
     status: 202 Accepted
     code: 202
     duration: ""

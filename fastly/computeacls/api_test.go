@@ -197,14 +197,9 @@ func TestClient_ComputeACL(t *testing.T) {
 
 	// Lookup a non-existing IP in the test compute ACL
 	fastly.Record(t, "lookup_non_existing_ip", func(c *fastly.Client) {
-		ip, ipNet, err := net.ParseCIDR("73.49.184.42/24")
-		if err != nil {
-			t.Fatal(err)
-		}
-
 		entry, err := Lookup(c, &LookupInput{
 			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
-			ComputeACLIP: fastly.ToPointer(ip.Mask(ipNet.Mask).String()),
+			ComputeACLIP: fastly.ToPointer("73.49.184.42"),
 		})
 		if entry != nil {
 			t.Errorf("error looking up a non-existing IP: %+v", entry)
