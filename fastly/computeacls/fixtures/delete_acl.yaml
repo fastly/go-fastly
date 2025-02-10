@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/toqKhc0lcufDSAGiDUkzG5
     method: DELETE
   response:
     body: ""
@@ -19,7 +19,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Fri, 24 Jan 2025 01:23:07 GMT
+      - Thu, 06 Feb 2025 04:20:07 GMT
       Pragma:
       - no-cache
       Server:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760041-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760035-MIA, cache-mia-kmia1760035-MIA
       X-Timer:
-      - S1737681787.850150,VS0,VE413
+      - S1738815608.516154,VS0,VE354
     status: 200 OK
     code: 200
     duration: ""

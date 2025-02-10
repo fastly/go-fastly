@@ -162,7 +162,7 @@ func TestClient_ComputeACL(t *testing.T) {
 
 			ip, ipNet, err := net.ParseCIDR(actualACLEntries.Entries[0].Prefix)
 			if err != nil {
-				t.Errorf("error parsing IP: %v", err)
+				t.Fatal(err)
 			}
 
 			entry, err := Lookup(c, &LookupInput{
@@ -192,6 +192,25 @@ func TestClient_ComputeACL(t *testing.T) {
 			input.Cursor = fastly.ToPointer(cursor)
 
 			page++
+		}
+	})
+
+	// Lookup a non-existing IP in the test compute ACL
+	fastly.Record(t, "lookup_non_existing_ip", func(c *fastly.Client) {
+		ip, ipNet, err := net.ParseCIDR("73.49.184.42/24")
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		entry, err := Lookup(c, &LookupInput{
+			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+			ComputeACLIP: fastly.ToPointer(ip.Mask(ipNet.Mask).String()),
+		})
+		if entry != nil {
+			t.Errorf("error looking up a non-existing IP: %+v", entry)
+		}
+		if err.Error() != "204 - No Content" {
+			t.Errorf("unexpected error message: got %s, expected %s", err.Error(), "204 - No Content")
 		}
 	})
 }
