@@ -273,8 +273,12 @@ func (c *Client) DeleteWAF(i *DeleteWAFInput) error {
 
 	path := ToSafeURL("waf", "firewalls", i.ID)
 
-	_, err := c.DeleteJSONAPI(path, i, nil)
-	return err
+	ignored, err := c.DeleteJSONAPI(path, i, nil)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }
 
 // infoResponse is used to pull the links and meta from the result.

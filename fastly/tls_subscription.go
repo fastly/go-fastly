@@ -319,6 +319,10 @@ func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
 
 	path := ToSafeURL("tls", "subscriptions", i.ID)
 
-	_, err := c.Delete(path, &ro)
-	return err
+	ignored, err := c.Delete(path, &ro)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }

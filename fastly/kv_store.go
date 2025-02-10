@@ -463,8 +463,12 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 	}
 	defer resp.Body.Close()
 
-	_, err = checkResp(resp, err)
-	return err
+	ignored, err := checkResp(resp, err)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }
 
 // DeleteKVStoreKeyInput is the input to the DeleteKVStoreKey function.
@@ -534,6 +538,10 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 	}
 	defer resp.Body.Close()
 
-	_, err = checkResp(resp, err)
-	return err
+	ignored, err := checkResp(resp, err)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }

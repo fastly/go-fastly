@@ -298,6 +298,10 @@ func (c *Client) DeleteWAFActiveRules(i *DeleteWAFActiveRulesInput) error {
 
 	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "active-rules")
 
-	_, err := c.DeleteJSONAPIBulk(path, i.Rules, nil)
-	return err
+	ignored, err := c.DeleteJSONAPIBulk(path, i.Rules, nil)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }

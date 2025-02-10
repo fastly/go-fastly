@@ -437,8 +437,12 @@ func (c *Client) DeployWAFVersion(i *DeployWAFVersionInput) error {
 
 	path := ToSafeURL("waf", "firewalls", i.WAFID, "versions", strconv.Itoa(i.WAFVersionNumber), "activate")
 
-	_, err := c.PutJSONAPI(path, &DeployWAFVersionInput{}, nil)
-	return err
+	ignored, err := c.PutJSONAPI(path, &DeployWAFVersionInput{}, nil)
+	if err != nil {
+		return err
+	}
+	defer ignored.Body.Close()
+	return nil
 }
 
 // CreateEmptyWAFVersionInput creates a new resource.
