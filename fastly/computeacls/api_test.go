@@ -162,7 +162,7 @@ func TestClient_ComputeACL(t *testing.T) {
 
 			ip, ipNet, err := net.ParseCIDR(actualACLEntries.Entries[0].Prefix)
 			if err != nil {
-				t.Errorf("error parsing IP: %v", err)
+				t.Fatal(err)
 			}
 
 			entry, err := Lookup(c, &LookupInput{
@@ -199,7 +199,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	fastly.Record(t, "lookup_non_existing_ip", func(c *fastly.Client) {
 		ip, ipNet, err := net.ParseCIDR("73.49.184.42/24")
 		if err != nil {
-			t.Errorf("error parsing IP: %v", err)
+			t.Fatal(err)
 		}
 
 		entry, err := Lookup(c, &LookupInput{
