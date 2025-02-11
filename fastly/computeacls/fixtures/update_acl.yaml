@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"ComputeACLID":"txVGyFOCzyFBvjJMqENpwA","entries":[{"prefix":"1.2.3.0/24","action":"BLOCK","op":"create"},{"prefix":"1.2.3.4/32","action":"ALLOW","op":"update"},{"prefix":"23.23.23.23/32","action":"ALLOW","op":"create"},{"prefix":"192.168.0.0/16","action":"BLOCK","op":"update"}]}'
+    body: '{"ComputeACLID":"mmbLY5kS2kcgu6MkbUteZR","entries":[{"prefix":"1.2.3.0/24","action":"BLOCK","op":"create"},{"prefix":"1.2.3.4/32","action":"ALLOW","op":"update"},{"prefix":"23.23.23.23/32","action":"ALLOW","op":"create"},{"prefix":"192.168.0.0/16","action":"BLOCK","op":"update"}]}'
     form: {}
     headers:
       Accept:
@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entries
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/mmbLY5kS2kcgu6MkbUteZR/entries
     method: PATCH
   response:
     body: ""
@@ -23,7 +23,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Fri, 24 Jan 2025 01:23:01 GMT
+      - Tue, 11 Feb 2025 15:26:34 GMT
       Pragma:
       - no-cache
       Server:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760041-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760031-MIA, cache-mia-kmia1760031-MIA
       X-Timer:
-      - S1737681780.216525,VS0,VE820
+      - S1739287594.998360,VS0,VE269
     status: 202 Accepted
     code: 202
     duration: ""
