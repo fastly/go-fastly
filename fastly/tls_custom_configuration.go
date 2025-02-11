@@ -45,10 +45,10 @@ type ListCustomTLSConfigurationsInput struct {
 func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]any{
-		"filter[bulk]": i.FilterBulk,
-		"include":      i.Include,
-		"page[size]":   i.PageSize,
-		"page[number]": i.PageNumber,
+		"filter[bulk]":               i.FilterBulk,
+		"include":                    i.Include,
+		jsonapi.QueryParamPageSize:   i.PageSize,
+		jsonapi.QueryParamPageNumber: i.PageNumber,
 	}
 
 	for key, value := range pairings {
@@ -73,7 +73,7 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 	ro := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 
@@ -118,7 +118,7 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 
 	ro := &RequestOptions{
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the params don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
 		},
 	}
 

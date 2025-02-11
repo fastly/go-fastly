@@ -41,9 +41,9 @@ type ListPrivateKeysInput struct {
 func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]any{
-		"filter[in_use]": i.FilterInUse,
-		"page[size]":     i.PageSize,
-		"page[number]":   i.PageNumber,
+		"filter[in_use]":             i.FilterInUse,
+		jsonapi.QueryParamPageSize:   i.PageSize,
+		jsonapi.QueryParamPageNumber: i.PageNumber,
 	}
 
 	for key, value := range pairings {
@@ -67,7 +67,7 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 

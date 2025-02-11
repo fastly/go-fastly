@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"net/http"
 	"net/url"
 	"strings"
 	"testing"
@@ -8,7 +9,7 @@ import (
 
 func TestClient_RawRequest(t *testing.T) {
 	validAPIHosts := []string{
-		"https://api.fastly.com",
+		DefaultEndpoint,
 		"https://api.fastly.com/",
 	}
 	purgeAPIPaths := []string{
@@ -29,7 +30,7 @@ func TestClient_RawRequest(t *testing.T) {
 		}
 		for _, p := range purgeAPIPaths {
 			for _, k := range cacheKeys {
-				r, err := c.RawRequest("GET", p+url.PathEscape(k), nil)
+				r, err := c.RawRequest(http.MethodGet, p+url.PathEscape(k), nil)
 				// Cannot test results for success if we get an error
 				if err != nil {
 					t.Fatal("Could not make RawRequest for ", h, p, k)

@@ -47,13 +47,13 @@ type ListCustomTLSCertificatesInput struct {
 func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]any{
-		"filter[in_use]":         i.FilterInUse,
-		"filter[not_after]":      i.FilterNotAfter,
-		"filter[tls_domains.id]": i.FilterTLSDomainsID,
-		"include":                i.Include,
-		"page[size]":             i.PageSize,
-		"page[number]":           i.PageNumber,
-		"sort":                   i.Sort,
+		"filter[in_use]":             i.FilterInUse,
+		"filter[not_after]":          i.FilterNotAfter,
+		"filter[tls_domains.id]":     i.FilterTLSDomainsID,
+		"include":                    i.Include,
+		jsonapi.QueryParamPageSize:   i.PageSize,
+		jsonapi.QueryParamPageNumber: i.PageNumber,
+		"sort":                       i.Sort,
 	}
 
 	for key, value := range pairings {
@@ -82,7 +82,7 @@ func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 
