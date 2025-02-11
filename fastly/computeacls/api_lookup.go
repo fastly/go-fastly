@@ -3,6 +3,7 @@ package computeacls
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/fastly/go-fastly/v9/fastly"
 )
@@ -32,6 +33,10 @@ func Lookup(c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+
+	if resp.StatusCode != http.StatusOK {
+		return nil, fmt.Errorf("%d - %s", resp.StatusCode, http.StatusText(resp.StatusCode))
+	}
 
 	var entry *ComputeACLEntry
 	if err := json.NewDecoder(resp.Body).Decode(&entry); err != nil {
