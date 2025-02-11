@@ -5,6 +5,8 @@ import (
 	"errors"
 	"io"
 	"testing"
+
+	"github.com/google/jsonapi"
 )
 
 func TestClient_APIEvents(t *testing.T) {
@@ -66,12 +68,12 @@ func TestGetAPIEventsFilterInput_formatFilters(t *testing.T) {
 				PageNumber: 2,
 			},
 			expected: map[string]string{
-				"filter[customer_id]": "65135846153687547",
-				"filter[service_id]":  "5343548168357658",
-				"filter[event_type]":  "version.activate",
-				"filter[user_id]":     "654681384354746951",
-				"page[size]":          "1",
-				"page[number]":        "2",
+				"filter[customer_id]":        "65135846153687547",
+				"filter[service_id]":         "5343548168357658",
+				"filter[event_type]":         "version.activate",
+				"filter[user_id]":            "654681384354746951",
+				jsonapi.QueryParamPageSize:   "1",
+				jsonapi.QueryParamPageNumber: "2",
 			},
 		},
 	}

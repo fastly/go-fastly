@@ -68,8 +68,8 @@ func (i *ListWAFRulesInput) formatFilters() map[string]string {
 		"filter[publisher][in]":       i.FilterPublishers,
 		"filter[modsec_rule_id][in]":  i.FilterModSecIDs,
 		"filter[modsec_rule_id][not]": i.ExcludeModSecIDs,
-		"page[size]":                  i.PageSize,
-		"page[number]":                i.PageNumber,
+		jsonapi.QueryParamPageSize:    i.PageSize,
+		jsonapi.QueryParamPageNumber:  i.PageNumber,
 		"include":                     i.Include,
 	}
 

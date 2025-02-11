@@ -59,8 +59,8 @@ func (i *ListWAFActiveRulesInput) formatFilters() map[string]string {
 		"filter[status]":                            i.FilterStatus,
 		"filter[waf_rule_revision][message]":        i.FilterMessage,
 		"filter[waf_rule_revision][modsec_rule_id]": i.FilterModSedID,
-		"page[size]":                                i.PageSize,
-		"page[number]":                              i.PageNumber,
+		jsonapi.QueryParamPageSize:                  i.PageSize,
+		jsonapi.QueryParamPageNumber:                i.PageNumber,
 		"include":                                   i.Include,
 	}
 

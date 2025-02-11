@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"fmt"
+	"net/http"
 	"time"
 )
 
@@ -244,7 +245,7 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
-	resp, err := c.RequestForm("PATCH", path, i, nil)
+	resp, err := c.RequestForm(http.MethodPatch, path, i, nil)
 	if err != nil {
 		return nil, err
 	}

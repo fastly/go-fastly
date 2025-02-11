@@ -4,6 +4,8 @@ import (
 	"errors"
 	"reflect"
 	"testing"
+
+	"github.com/google/jsonapi"
 )
 
 func TestClient_WAFs(t *testing.T) {
@@ -290,8 +292,8 @@ func TestClient_listWAFs_formatFilters(t *testing.T) {
 			local: map[string]string{
 				"filter[service_id]":             "service1",
 				"filter[service_version_number]": "1",
-				"page[size]":                     "2",
-				"page[number]":                   "2",
+				jsonapi.QueryParamPageSize:       "2",
+				jsonapi.QueryParamPageNumber:     "2",
 				"include":                        "included",
 			},
 		},

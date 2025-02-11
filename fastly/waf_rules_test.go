@@ -3,6 +3,8 @@ package fastly
 import (
 	"reflect"
 	"testing"
+
+	"github.com/google/jsonapi"
 )
 
 func TestClient_WAF_Rules(t *testing.T) {
@@ -108,8 +110,8 @@ func TestClient_listWAFRules_formatFilters(t *testing.T) {
 				"filter[publisher][in]":       "owasp,trustwave",
 				"filter[modsec_rule_id][in]":  "1010060,1010070",
 				"filter[modsec_rule_id][not]": "123456,1234567",
-				"page[size]":                  "2",
-				"page[number]":                "2",
+				jsonapi.QueryParamPageSize:    "2",
+				jsonapi.QueryParamPageNumber:  "2",
 				"include":                     "included",
 			},
 		},
