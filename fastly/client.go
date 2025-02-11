@@ -577,73 +577,71 @@ func (c *Client) RequestFormFileFromReader(verb, urlPath, fileName string, fileB
 	return c.Request(verb, urlPath, ro)
 }
 
-// RequestJSON constructs JSON HTTP request.
-func (c *Client) RequestJSON(verb, p string, i any, ro *RequestOptions) (*http.Response, error) {
+// setHeaders ensures that RequestOptions has headers set and applies the given content type and accept headers.
+func setHeaders(ro *RequestOptions, contentType, accept string) *RequestOptions {
 	if ro == nil {
 		ro = new(RequestOptions)
 	}
-
 	if ro.Headers == nil {
 		ro.Headers = make(map[string]string)
 	}
-	ro.Headers["Content-Type"] = JSONMimeType
-	ro.Headers["Accept"] = JSONMimeType
+	ro.Headers["Content-Type"] = contentType
+	ro.Headers["Accept"] = accept
+	return ro
+}
 
+// marshalBodyJSON marshals the input into JSON format and sets it in RequestOptions.
+func marshalBodyJSON(i any, ro *RequestOptions) error {
+	if i == nil {
+		return nil
+	}
 	body, err := json.Marshal(i)
 	if err != nil {
-		return nil, err
+		return err
 	}
-
 	ro.Body = bytes.NewReader(body)
 	ro.BodyLength = int64(len(body))
-
-	return c.Request(verb, p, ro)
+	return nil
 }
 
-// RequestJSONAPI constructs JSON API HTTP request.
-func (c *Client) RequestJSONAPI(verb, p string, i any, ro *RequestOptions) (*http.Response, error) {
-	if ro == nil {
-		ro = new(RequestOptions)
+// marshalBodyJSONAPI marshals the input into JSON API format and sets it in RequestOptions.
+func marshalBodyJSONAPI(i any, ro *RequestOptions) error {
+	if i == nil {
+		return nil
 	}
-
-	if ro.Headers == nil {
-		ro.Headers = make(map[string]string)
-	}
-	ro.Headers["Content-Type"] = jsonapi.MediaType
-	ro.Headers["Accept"] = jsonapi.MediaType
-
-	if i != nil {
-		var buf bytes.Buffer
-		if err := jsonapi.MarshalPayload(&buf, i); err != nil {
-			return nil, err
-		}
-
-		ro.Body = &buf
-		ro.BodyLength = int64(buf.Len())
-	}
-	return c.Request(verb, p, ro)
-}
-
-// RequestJSONAPIBulk constructs bulk JSON API HTTP request.
-func (c *Client) RequestJSONAPIBulk(verb, p string, i any, ro *RequestOptions) (*http.Response, error) {
-	if ro == nil {
-		ro = new(RequestOptions)
-	}
-
-	if ro.Headers == nil {
-		ro.Headers = make(map[string]string)
-	}
-	ro.Headers["Content-Type"] = jsonapi.MediaType + "; ext=bulk"
-	ro.Headers["Accept"] = jsonapi.MediaType + "; ext=bulk"
-
 	var buf bytes.Buffer
 	if err := jsonapi.MarshalPayload(&buf, i); err != nil {
-		return nil, err
+		return err
 	}
-
 	ro.Body = &buf
 	ro.BodyLength = int64(buf.Len())
+	return nil
+}
 
+// RequestJSON constructs a JSON HTTP request.
+func (c *Client) RequestJSON(verb, p string, i any, ro *RequestOptions) (*http.Response, error) {
+	ro = setHeaders(ro, JSONMimeType, JSONMimeType)
+	if err := marshalBodyJSON(i, ro); err != nil {
+		return nil, err
+	}
+	return c.Request(verb, p, ro)
+}
+
+// RequestJSONAPI constructs a JSON API HTTP request.
+func (c *Client) RequestJSONAPI(verb, p string, i any, ro *RequestOptions) (*http.Response, error) {
+	ro = setHeaders(ro, jsonapi.MediaType, jsonapi.MediaType)
+	if err := marshalBodyJSONAPI(i, ro); err != nil {
+		return nil, err
+	}
+	return c.Request(verb, p, ro)
+}
+
+// RequestJSONAPIBulk constructs a bulk JSON API HTTP request.
+func (c *Client) RequestJSONAPIBulk(verb, p string, i any, ro *RequestOptions) (*http.Response, error) {
+	ro = setHeaders(ro, jsonapi.MediaType+"; ext=bulk", jsonapi.MediaType+"; ext=bulk")
+	if err := marshalBodyJSONAPI(i, ro); err != nil {
+		return nil, err
+	}
 	return c.Request(verb, p, ro)
 }
 
@@ -702,10 +700,8 @@ func mapToHTTPHeaderHookFunc() mapstructure.DecodeHookFunc {
 		t reflect.Type,
 		data any,
 	) (any, error) {
-		if f.Kind() != reflect.Map {
-			return data, nil
-		}
-		if t != reflect.TypeOf(new(http.Header)) {
+		// Ensure source is a map and target is http.Header
+		if f.Kind() != reflect.Map || t != reflect.TypeOf(new(http.Header)) {
 			return data, nil
 		}
 
@@ -742,20 +738,23 @@ func stringToTimeHookFunc() mapstructure.DecodeHookFunc {
 		t reflect.Type,
 		data any,
 	) (any, error) {
-		if f.Kind() != reflect.String {
-			return data, nil
-		}
-		if t != reflect.TypeOf(time.Now()) {
+		// Ensure the source is a string and the target is time.Time
+		if f.Kind() != reflect.String || t != reflect.TypeOf(time.Time{}) {
 			return data, nil
 		}
 
-		// Convert it by parsing
-		v, err := time.Parse(time.RFC3339, data.(string))
-		if err != nil {
-			// DictionaryInfo#get uses it's own special time format for now.
-			v, _ := data.(string) // type assert to avoid runtime panic (v will have zero value for its type)
-			return time.Parse("2006-01-02 15:04:05", v)
+		// Attempt parsing in RFC3339 format
+		str, _ := data.(string) // Safe type assertion; guaranteed by f.Kind()
+		if v, err := time.Parse(time.RFC3339, str); err == nil {
+			return v, nil
 		}
-		return v, err
+
+		// Fallback to "2006-01-02 15:04:05" format
+		if v, err := time.Parse("2006-01-02 15:04:05", str); err == nil {
+			// DictionaryInfo#get uses it's own special time format for now.
+			return v, nil
+		}
+
+		return nil, fmt.Errorf("unable to parse time string: %q", str)
 	}
 }
