@@ -6,11 +6,13 @@
 
 **Enhancements:**
 
-- build(pr_test.yml): add changelog diff check to pr flow
+- build(pr_test.yml): add changelog diff check to pr flow [#604](https://github.com/fastly/go-fastly/pull/604)
 
 **Bug fixes:**
 
 **Dependencies:**
+
+- build(deps): upgrade Go from 1.20 to 1.22 [#606](https://github.com/fastly/go-fastly/pull/606)
 
 ## [v9.13.0](https://github.com/fastly/go-fastly/releases/tag/v9.13.0) (2025-01-27)
 
