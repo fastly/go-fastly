@@ -1,6 +1,10 @@
 on: pull_request
 name: Test
 jobs:
+  changelog:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: dangoslen/changelog-enforcer@v3
   lint:
     runs-on: ubuntu-latest
     steps:
