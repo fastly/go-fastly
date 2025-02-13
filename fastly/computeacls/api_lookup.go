@@ -3,6 +3,7 @@ package computeacls
 import (
 	"encoding/json"
 	"fmt"
+	"net/http"
 
 	"github.com/fastly/go-fastly/v9/fastly"
 )
@@ -32,6 +33,11 @@ func Lookup(c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
 		return nil, err
 	}
 	defer resp.Body.Close()
+
+	// In the case that no matching IP was found, the API will return a 204 No Content. This is not an error condition, rather a lack of results.
+	if resp.StatusCode == http.StatusNoContent {
+		return nil, nil
+	}
 
 	var entry *ComputeACLEntry
 	if err := json.NewDecoder(resp.Body).Decode(&entry); err != nil {
