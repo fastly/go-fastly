@@ -12,15 +12,12 @@ jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          # Depending on your needs, you can use a token that will re-trigger workflows
-          # See https://github.com/stefanzweifel/git-auto-commit-action#commits-of-this-action-do-not-trigger-new-workflow-runs
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
       - uses: dangoslen/dependabot-changelog-helper@v3
         with:
           activationLabels: dependencies
           changelogPath: './CHANGELOG.md'
+          entryPrefix: 'build(deps): '
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "Updated Changelog"
+          commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
