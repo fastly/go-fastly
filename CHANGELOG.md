@@ -10,6 +10,8 @@
 
 **Bug fixes:**
 
+- fix(computeacls): lookup call to treat status 204 properly [#605](https://github.com/fastly/go-fastly/pull/605)
+
 **Dependencies:**
 
 - build(deps): upgrade Go from 1.20 to 1.22 [#606](https://github.com/fastly/go-fastly/pull/606)
