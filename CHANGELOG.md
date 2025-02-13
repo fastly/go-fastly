@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.0...main)
+
+**Enhancements:**
+
+- build(pr_test.yml): add changelog diff check to pr flow
+
+**Bug fixes:**
+
+**Dependencies:**
+
 ## [v9.13.0](https://github.com/fastly/go-fastly/releases/tag/v9.13.0) (2025-01-27)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.12.0...v9.13.0)
