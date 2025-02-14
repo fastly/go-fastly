@@ -2,19 +2,23 @@
 
 ## Unreleased
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.0...main)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.1...main)
 
-**Enhancements:**
+## [v9.13.1](https://github.com/fastly/go-fastly/releases/tag/v9.13.1) (2025-02-14)
 
-- build(pr_test.yml): add changelog diff check to pr flow [#604](https://github.com/fastly/go-fastly/pull/604)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.0...v9.13.1)
 
 **Bug fixes:**
 
 - fix(computeacls): lookup call to treat status 204 properly [#605](https://github.com/fastly/go-fastly/pull/605)
+- fix(fastly): ensure that HTTP response body objects are always closed [#592](https://github.com/fastly/go-fastly/pull/592)
 
 **Dependencies:**
 
 - build(deps): upgrade Go from 1.20 to 1.22 [#606](https://github.com/fastly/go-fastly/pull/606)
+- build(deps): bump golang.org/x/crypto from 0.32.0 to 0.33.0 [#601](https://github.com/fastly/go-fastly/pull/601)
+- build(deps): bump golang.org/x/tools from 0.29.0 to 0.30.0 [#598](https://github.com/fastly/go-fastly/pull/598)
+- build(deps): bump golang.org/x/sys from 0.29.0 to 0.30.0 [#597](https://github.com/fastly/go-fastly/pull/597)
 
 ## [v9.13.0](https://github.com/fastly/go-fastly/releases/tag/v9.13.0) (2025-01-27)
 
