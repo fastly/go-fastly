@@ -11,7 +11,7 @@ require (
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/crypto v0.33.0
 	golang.org/x/tools v0.30.0
-	honnef.co/go/tools v0.5.1
+	honnef.co/go/tools v0.6.0
 )
 
 require (
@@ -27,3 +27,4 @@ require (
 )
 
 go 1.22.0
+toolchain go1.23.6
