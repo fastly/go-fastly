@@ -1,5 +1,17 @@
 # Changelog
 
+## Unreleased
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.1...)
+
+**Enhancements:**
+
+ - feat(fastly/objectstorage): adds crud operations for access keys in object storage [#612](https://github.com/fastly/go-fastly/pull/612)
+
+**Bug fixes:**
+
+**Dependencies:**
+
 ## [v9.13.1](https://github.com/fastly/go-fastly/releases/tag/v9.13.1) (2025-02-14)
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.0...v9.13.1)

@@ -1,0 +1,43 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.5)
+    url: https://api.fastly.com/resources/object-storage/access-keys
+    method: GET
+  response:
+    body: '{"meta":{},"data":[]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "21"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 20 Feb 2025 19:42:16 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-lga21989-LGA, cache-lga21943-LGA
+      X-Timer:
+      - S1740080537.766705,VS0,VE180
+    status: 200 OK
+    code: 200
+    duration: ""

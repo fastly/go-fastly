@@ -109,6 +109,18 @@ var ErrMissingType = NewFieldError("Type")
 // requires a "CustomerID" key, but one was not set.
 var ErrMissingCustomerID = NewFieldError("CustomerID")
 
+// ErrMissingAccessKeyID is an error that is returned when an input struct
+// requires a "AccessKeyID" key, but one was not set.
+var ErrMissingAccessKeyID = NewFieldError("AccessKeyID")
+
+// ErrMissingBuckets is an error that is returned when an input struct
+// requires a "Buckets" key, but one was not set.
+var ErrMissingBuckets = NewFieldError("Buckets")
+
+// ErrMissingDescription is an error that is returned when an input struct
+// requires a "Description" key, but one was not set.
+var ErrMissingDescription = NewFieldError("Description")
+
 // ErrMissingDictionaryID is an error that is returned when an input struct
 // requires a "DictionaryID" key, but one was not set.
 var ErrMissingDictionaryID = NewFieldError("DictionaryID")
