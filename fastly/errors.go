@@ -245,6 +245,10 @@ var ErrMissingUserID = NewFieldError("UserID")
 // requires a "Permission" key, but one was not set.
 var ErrMissingPermission = NewFieldError("Permission")
 
+// ErrInvalidPermission is an error that is returned when an input struct
+// has a "Permission" key, but the one provided is invalid.
+var ErrInvalidPermission = NewFieldError("Permission").Message("invalid")
+
 // ErrMissingServiceVersion is an error that is returned when an input struct
 // requires a "ServiceVersion" key, but one was not set.
 var ErrMissingServiceVersion = NewFieldError("ServiceVersion")

@@ -146,6 +146,14 @@ func TestClient_Create_validation(t *testing.T) {
 	if err != fastly.ErrMissingPermission {
 		t.Errorf("expected ErrMissingPermission: got %s", err)
 	}
+
+	_, err = Create(fastly.TestClient, &CreateInput{
+		Description: fastly.ToPointer("description"),
+		Permission:  fastly.ToPointer("bad-permission"),
+	})
+	if err != fastly.ErrInvalidPermission {
+		t.Errorf("expected ErrInvalidPermission: got %s", err)
+	}
 }
 
 func TestClient_Get_validation(t *testing.T) {
