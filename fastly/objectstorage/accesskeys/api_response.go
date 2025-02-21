@@ -1,5 +1,7 @@
 package accesskeys
 
+import "time"
+
 // AccessKey is the API response structure for the create and describe operations.
 type AccessKey struct {
 	// AccessKey is an AccessKey identifier.
@@ -13,7 +15,7 @@ type AccessKey struct {
 	// Buckets is the list of buckets associated with the access key.
 	Buckets []string `json:"buckets"`
 	// CreatedAt is the timestamp associated with the creation of the access key.
-	CreatedAt string `json:"created_at"`
+	CreatedAt time.Time `json:"created_at"`
 }
 
 // AccessKeys is the API response structure for the list access keys operation.
