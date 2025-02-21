@@ -1,0 +1,44 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.5)
+    url: https://api.fastly.com/resources/object-storage/access-keys
+    method: GET
+  response:
+    body: '{"meta":{},"data":[{"access_key":"CRvgRCBkTK2axrXluvrq3V","description":"My
+      access key","permission":"read-write-objects","buckets":["my-bucket"],"created_at":"2025-02-21T04:17:48.102Z"}]}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "188"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 21 Feb 2025 14:51:16 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-ewr-kewr1740027-EWR, cache-ewr-kewr1740063-EWR
+      X-Timer:
+      - S1740149476.603794,VS0,VE493
+    status: 200 OK
+    code: 200
+    duration: ""

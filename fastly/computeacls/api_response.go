@@ -10,7 +10,7 @@ type ComputeACL struct {
 
 // ComputeACLs is the API response structure for the list compute ACLs operation.
 type ComputeACLs struct {
-	// Data is the list of returned cumpute ACLs.
+	// Data is the list of returned compute ACLs.
 	Data []ComputeACL `json:"data"`
 	// Meta is the information for total compute ACLs.
 	Meta MetaACLs `json:"meta"`
@@ -32,7 +32,7 @@ type ComputeACLEntry struct {
 
 // ComputeACLEntries is the API response structure for the list compute ACL entries operation.
 type ComputeACLEntries struct {
-	// Entries is the list of returned cumpute ACL entries.
+	// Entries is the list of returned compute ACL entries.
 	Entries []ComputeACLEntry
 	// Meta is the information for pagination.
 	Meta MetaEntries `json:"meta"`
