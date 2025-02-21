@@ -17,7 +17,7 @@ func TestClient_AccessKey(t *testing.T) {
 	var err error
 
 	// List all AccessKeys.
-	fastly.Record(t, "list_accesskeys", func(c *fastly.Client) {
+	fastly.Record(t, "list", func(c *fastly.Client) {
 		accessKeys, err = ListAccessKeys(c)
 	})
 	if err != nil {
@@ -36,7 +36,7 @@ func TestClient_AccessKey(t *testing.T) {
 
 	// Create a AccessKey for testing.
 	var accessKey *AccessKey
-	fastly.Record(t, "create_AccessKey", func(c *fastly.Client) {
+	fastly.Record(t, "create", func(c *fastly.Client) {
 		accessKey, err = Create(c, &CreateInput{
 			Description: fastly.ToPointer(TestAccessKeyDescription),
 			Permission:  fastly.ToPointer(TestAccessKeyPermission),
@@ -45,6 +45,12 @@ func TestClient_AccessKey(t *testing.T) {
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if accessKey.AccessKeyID == "" {
+		t.Errorf("no access key ID was returned")
+	}
+	if accessKey.SecretKey == "" {
+		t.Errorf("no access key secret was returned")
 	}
 	if accessKey.Description != TestAccessKeyDescription {
 		t.Errorf("unexpected AccessKey name: got %q, expected %q", accessKey.Description, TestAccessKeyDescription)
@@ -61,7 +67,7 @@ func TestClient_AccessKey(t *testing.T) {
 
 	// Ensure we delete the test AccessKey at the end.
 	defer func() {
-		fastly.Record(t, "delete_AccessKey", func(c *fastly.Client) {
+		fastly.Record(t, "delete", func(c *fastly.Client) {
 			err = Delete(c, &DeleteInput{
 				AccessKeyID: fastly.ToPointer(accessKey.AccessKeyID),
 			})
@@ -72,31 +78,31 @@ func TestClient_AccessKey(t *testing.T) {
 	}()
 
 	// Get the test AccessKey.
-	var ac *AccessKey
-	fastly.Record(t, "get_AccessKey", func(c *fastly.Client) {
-		ac, err = Get(c, &GetInput{
+	var ak *AccessKey
+	fastly.Record(t, "get", func(c *fastly.Client) {
+		ak, err = Get(c, &GetInput{
 			AccessKeyID: fastly.ToPointer(accessKey.AccessKeyID),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ac.Description != accessKey.Description {
-		t.Errorf("unexpected AccessKey Description: got %q, expected %q", ac.Description, accessKey.Description)
+	if ak.Description != accessKey.Description {
+		t.Errorf("unexpected AccessKey Description: got %q, expected %q", ak.Description, accessKey.Description)
 	}
-	if ac.Permission != accessKey.Permission {
-		t.Errorf("unexpected AccessKey Permissions: got %q, expected %q", ac.Permission, accessKey.Permission)
+	if ak.Permission != accessKey.Permission {
+		t.Errorf("unexpected AccessKey Permissions: got %q, expected %q", ak.Permission, accessKey.Permission)
 	}
-	if len(ac.Buckets) != len(accessKey.Buckets) {
-		t.Errorf("unexpected AccessKey Buckets length: got %q, expected %q", len(ac.Buckets), len(accessKey.Buckets))
+	if len(ak.Buckets) != len(accessKey.Buckets) {
+		t.Errorf("unexpected AccessKey Buckets length: got %q, expected %q", len(ak.Buckets), len(accessKey.Buckets))
 	}
-	if ac.Buckets[0] != accessKey.Buckets[0] {
-		t.Errorf("unexpected AccessKey Buckets contents: got %q, expected %q", ac.Buckets[0], accessKey.Buckets[0])
+	if ak.Buckets[0] != accessKey.Buckets[0] {
+		t.Errorf("unexpected AccessKey Buckets contents: got %q, expected %q", ak.Buckets[0], accessKey.Buckets[0])
 	}
 
 	// List all entries of the test AccessKey and compare it to the input.
 	var actualAccessKeys *AccessKeys
-	fastly.Record(t, "list_accesskeys_with_new", func(c *fastly.Client) {
+	fastly.Record(t, "list_with_new", func(c *fastly.Client) {
 		actualAccessKeys, err = ListAccessKeys(c)
 	})
 	if err != nil {

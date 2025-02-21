@@ -10,18 +10,19 @@ interactions:
     url: https://api.fastly.com/resources/object-storage/access-keys
     method: GET
   response:
-    body: '{"meta":{},"data":[]}'
+    body: '{"meta":{},"data":[{"access_key":"CRvgRCBkTK2axrXluvrq3V","description":"My
+      access key","permission":"read-write-objects","buckets":["my-bucket"],"created_at":"2025-02-21T04:17:48.102Z"}]}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "21"
+      - "188"
       Content-Type:
       - application/json
       Date:
-      - Thu, 20 Feb 2025 19:42:16 GMT
+      - Fri, 21 Feb 2025 14:51:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21989-LGA, cache-lga21943-LGA
+      - cache-ewr-kewr1740027-EWR, cache-ewr-kewr1740063-EWR
       X-Timer:
-      - S1740080537.766705,VS0,VE180
+      - S1740149476.603794,VS0,VE493
     status: 200 OK
     code: 200
     duration: ""

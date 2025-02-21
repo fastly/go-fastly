@@ -7,7 +7,7 @@ import (
 	"github.com/fastly/go-fastly/v9/fastly"
 )
 
-// ListAccessKeys retrieves all access keys within object storage that this Fastly api key has access to.
+// ListAccessKeys retrieves all access keys within object storage.
 func ListAccessKeys(c *fastly.Client) (*AccessKeys, error) {
 	resp, err := c.Get("/resources/object-storage/access-keys", nil)
 	if err != nil {

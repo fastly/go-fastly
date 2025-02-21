@@ -4,6 +4,8 @@ package accesskeys
 type AccessKey struct {
 	// AccessKey is an AccessKey identifier.
 	AccessKeyID string `json:"access_key"`
+	// SecretKey is the secret for the access key
+	SecretKey string `json:"secret_key"`
 	// Description is human readable description for the access key.
 	Description string `json:"description"`
 	// Permission is the permissions the key has.

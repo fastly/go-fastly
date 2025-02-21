@@ -14,7 +14,7 @@ type GetInput struct {
 	AccessKeyID *string
 }
 
-// GetAccessKey finds an access key with the given ID if the user has the correct permisssions
+// GetAccessKey finds an access key with the given ID if the user has the correct permisssions.
 func Get(c *fastly.Client, i *GetInput) (*AccessKey, error) {
 	if i.AccessKeyID == nil {
 		return nil, fastly.ErrMissingAccessKeyID
@@ -28,10 +28,10 @@ func Get(c *fastly.Client, i *GetInput) (*AccessKey, error) {
 	}
 	defer resp.Body.Close()
 
-	var entry *AccessKey
-	if err := json.NewDecoder(resp.Body).Decode(&entry); err != nil {
+	var accessKey *AccessKey
+	if err := json.NewDecoder(resp.Body).Decode(&accessKey); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}
 
-	return entry, nil
+	return accessKey, nil
 }

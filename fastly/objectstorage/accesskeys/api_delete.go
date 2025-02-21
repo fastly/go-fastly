@@ -13,7 +13,7 @@ type DeleteInput struct {
 	AccessKeyID *string
 }
 
-// DeleteAccessKey deletes an access key
+// DeleteAccessKey deletes an access key.
 func Delete(c *fastly.Client, i *DeleteInput) error {
 	if i.AccessKeyID == nil {
 		return fastly.ErrMissingAccessKeyID
