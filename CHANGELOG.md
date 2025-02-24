@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## UNRELEASED
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.1...)
 

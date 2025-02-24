@@ -1,4 +1,4 @@
-name: 'pull-request'
+name: 'dependabot-pull-request'
 on:
   pull_request:
     types:
