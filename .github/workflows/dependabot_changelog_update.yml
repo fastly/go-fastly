@@ -1,22 +1,23 @@
 name: 'dependabot-pull-request'
-on:
-  pull_request:
-    types:
-      - opened
-      - synchronize
-      - reopened
-      - ready_for_review
-      - labeled
-      - unlabeled
+on: pull_request
+  # pull_request:
+  #   types:
+  #     - opened
+  #     - synchronize
+  #     - reopened
+  #     - ready_for_review
+  #     - labeled
+  #     - unlabeled
 jobs:
   changelog:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
       - uses: dangoslen/dependabot-changelog-helper@v3
         with:
           activationLabels: dependencies
-          changelogPath: './CHANGELOG.md'
+          changelogPath: 'CHANGELOG.md'
           entryPrefix: 'build(deps): '
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
