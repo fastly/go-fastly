@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: name=my-test-token&password=XXXXXXXXXXXXXXXXXXXXXX&role=engineer&scope=global&username=XXXXXXXXXXXXXXXXXXXXXX
+    body: name=my-test-token&password=XXXXXXXXXXXXXXXXXXXXXX&role=engineer&scope=global&services%5B%5D=XXXXXXXXXXXXXXXXXXXXXX&username=XXXXXXXXXXXXXXXXXXXXXX
     form:
       name:
       - my-test-token
@@ -12,6 +12,8 @@ interactions:
       - engineer
       scope:
       - global
+      services[]:
+      - XXXXXXXXXXXXXXXXXXXXXX
       username:
       - XXXXXXXXXXXXXXXXXXXXXX
     headers:
@@ -22,7 +24,7 @@ interactions:
     url: https://api.fastly.com/sudo
     method: POST
   response:
-    body: '{"expiry_time":"2025-02-25T05:17:56+00:00"}'
+    body: '{"expiry_time":"2025-02-25T12:06:38+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,11 +33,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 25 Feb 2025 05:12:56 GMT
+      - Tue, 25 Feb 2025 12:01:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "978"
+      - "993"
       Fastly-Ratelimit-Reset:
-      - "1740463200"
+      - "1740488400"
       Pragma:
       - no-cache
       Server:
@@ -53,14 +55,14 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000020-CHI, cache-per12626-PER
+      - cache-chi-kigq8000020-CHI, cache-per12621-PER
       X-Timer:
-      - S1740460377.510933,VS0,VE487
+      - S1740484898.443480,VS0,VE471
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: '{"name":"my-test-token","role":"engineer","scope":"global","services":null,"tls_access":false}'
+    body: '{"name":"my-test-token","role":"engineer","scope":"global","services":["XXXXXXXXXXXXXXXXXXXXXX"],"tls_access":false}'
     form: {}
     headers:
       Accept:
@@ -73,18 +75,18 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"XXXXXXXXXXXXXXXXXXXXXX","services":[],"name":"my-test-token","role":"engineer","access_token":"XXXXXXXXXXXXXXXXXXXXXX","scope":"global","ip":"","created_at":"2025-02-25T05:12:57Z","last_used_at":"","expires_at":"","user_agent":"","tls_access":false,"customer_id":"XXXXXXXXXXXXXXXXXXXXXX"}
+      {"id":"XXXXXXXXXXXXXXXXXXXXXX","services":["XXXXXXXXXXXXXXXXXXXXXX"],"name":"my-test-token","role":"engineer","access_token":"XXXXXXXXXXXXXXXXXXXXXX","scope":"global","ip":"","created_at":"2025-02-25T12:01:39Z","last_used_at":"","expires_at":"","user_agent":"","tls_access":false,"customer_id":"XXXXXXXXXXXXXXXXXXXXXX"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "304"
+      - "329"
       Content-Type:
       - application/json
       Date:
-      - Tue, 25 Feb 2025 05:12:57 GMT
+      - Tue, 25 Feb 2025 12:01:39 GMT
       Pragma:
       - no-cache
       Server:
@@ -102,9 +104,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000135-CHI, cache-per12626-PER
+      - cache-chi-kigq8000135-CHI, cache-per12621-PER
       X-Timer:
-      - S1740460377.012887,VS0,VE685
+      - S1740484899.929537,VS0,VE681
     status: 200 OK
     code: 200
     duration: ""

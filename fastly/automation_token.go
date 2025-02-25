@@ -123,7 +123,7 @@ type CreateAutomationTokenInput struct {
 	ExpiresAt *time.Time `json:"expires_at,omitempty" url:"expires_at,omitempty"`
 	// Name is the name of the token.
 	Name string `json:"name" url:"name,omitempty"`
-	// Password is the token password.
+	// Password is the password of the user the token is assigned to.
 	Password *string `json:"-" url:"password,omitempty"`
 	// Role is the role on the token (billing, engineer, user).
 	Role AutomationTokenRole `json:"role" url:"role,omitempty"`
