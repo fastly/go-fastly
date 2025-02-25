@@ -2,7 +2,7 @@ module github.com/fastly/go-fastly/v9
 
 require (
 	github.com/dnaeon/go-vcr v1.2.0
-	github.com/google/go-cmp v0.6.0
+	github.com/google/go-cmp v0.7.0
 	github.com/google/go-querystring v1.1.0
 	github.com/google/jsonapi v1.0.0
 	github.com/hashicorp/go-cleanhttp v0.5.2
@@ -27,3 +27,4 @@ require (
 )
 
 go 1.22.0
+toolchain go1.22.5
