@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -97,7 +98,7 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 	ro := new(RequestOptions)
 	ro.Parallel = true
-	req, err := c.RawRequest("POST", path, ro)
+	req, err := c.RawRequest(http.MethodPost, path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -142,7 +143,7 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 	ro := new(RequestOptions)
 	ro.Parallel = true
-	req, err := c.RawRequest("POST", path, ro)
+	req, err := c.RawRequest(http.MethodPost, path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -180,7 +181,7 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge_all")
 
-	req, err := c.RawRequest("POST", path, nil)
+	req, err := c.RawRequest(http.MethodPost, path, nil)
 	if err != nil {
 		return nil, err
 	}

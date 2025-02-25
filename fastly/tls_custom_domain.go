@@ -34,8 +34,8 @@ func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 		"filter[tls_certificates.id]":  l.FilterTLSCertificateID,
 		"filter[tls_subscriptions.id]": l.FilterTLSSubscriptionID,
 		"include":                      l.Include,
-		"page[number]":                 l.PageNumber,
-		"page[size]":                   l.PageSize,
+		jsonapi.QueryParamPageNumber:   l.PageNumber,
+		jsonapi.QueryParamPageSize:     l.PageSize,
 		"sort":                         l.Sort,
 	}
 
@@ -65,7 +65,7 @@ func (c *Client) ListTLSDomains(i *ListTLSDomainsInput) ([]*TLSDomain, error) {
 	filters := &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 

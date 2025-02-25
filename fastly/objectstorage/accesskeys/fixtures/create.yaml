@@ -1,0 +1,48 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"description":"THIS IS A TEST ACCESS KEY","permission":"read-write-objects","buckets":["test-bucket"]}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.5)
+    url: https://api.fastly.com/resources/object-storage/access-keys
+    method: POST
+  response:
+    body: '{"access_key":"lh3QRZvBI80OaaaAsmBz3Z","secret_key":"ToWoJkLsk0UZsbmSVnvn7v5yTy1394x9jZmEo6jkoB8fo4Rc5HX7bm8VBFv8iW8c","description":"THIS
+      IS A TEST ACCESS KEY","permission":"read-write-objects","buckets":["test-bucket"],"created_at":"2025-02-21T14:51:16.286Z"}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "261"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 21 Feb 2025 14:51:16 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-ewr-kewr1740063-EWR, cache-ewr-kewr1740063-EWR
+      X-Timer:
+      - S1740149476.188278,VS0,VE491
+    status: 201 Created
+    code: 201
+    duration: ""

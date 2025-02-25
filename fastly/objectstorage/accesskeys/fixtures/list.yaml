@@ -6,22 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.5)
+    url: https://api.fastly.com/resources/object-storage/access-keys
     method: GET
   response:
-    body: '{"data":[{"id":"P3Z6xZXOcbt3l5C3CUxWh0","name":"my-compute-acl"}],"meta":{"total":1}}'
+    body: '{"meta":{},"data":[{"access_key":"CRvgRCBkTK2axrXluvrq3V","description":"My
+      access key","permission":"read-write-objects","buckets":["my-bucket"],"created_at":"2025-02-21T04:17:48.102Z"}]}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "85"
+      - "188"
       Content-Type:
       - application/json
       Date:
-      - Wed, 12 Feb 2025 23:49:32 GMT
+      - Fri, 21 Feb 2025 14:51:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760066-MIA, cache-mia-kmia1760066-MIA
+      - cache-ewr-kewr1740027-EWR, cache-ewr-kewr1740063-EWR
       X-Timer:
-      - S1739404172.032133,VS0,VE475
+      - S1740149476.603794,VS0,VE493
     status: 200 OK
     code: 200
     duration: ""

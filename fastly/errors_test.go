@@ -15,13 +15,13 @@ func TestNewHTTPError(t *testing.T) {
 
 	t.Run("legacy", func(t *testing.T) {
 		resp := &http.Response{
-			StatusCode: 404,
+			StatusCode: http.StatusNotFound,
 			Body: io.NopCloser(bytes.NewBufferString(
 				`{"msg": "hello", "detail": "nope"}`)),
 		}
 		e := NewHTTPError(resp)
 
-		if e.StatusCode != 404 {
+		if e.StatusCode != http.StatusNotFound {
 			t.Errorf("bad status code: %d", e.StatusCode)
 		}
 
@@ -45,15 +45,15 @@ func TestNewHTTPError(t *testing.T) {
 
 	t.Run("jsonapi", func(t *testing.T) {
 		resp := &http.Response{
-			StatusCode: 404,
+			StatusCode: http.StatusNotFound,
 			Header:     http.Header(map[string][]string{"Content-Type": {jsonapi.MediaType}}),
 			Body: io.NopCloser(bytes.NewBufferString(
 				`{"errors":[{"id":"abc123", "title":"Not found", "detail":"That resource does not exist"}]}`)),
 		}
 		e := NewHTTPError(resp)
 
-		if e.StatusCode != 404 {
-			t.Errorf("expected %d to be %d", e.StatusCode, 404)
+		if e.StatusCode != http.StatusNotFound {
+			t.Errorf("expected %d to be %d", e.StatusCode, http.StatusNotFound)
 		}
 
 		expected := strings.TrimSpace(`
@@ -77,7 +77,7 @@ func TestNewHTTPError(t *testing.T) {
 
 	t.Run("problem detail", func(t *testing.T) {
 		resp := &http.Response{
-			StatusCode: 404,
+			StatusCode: http.StatusNotFound,
 			Header:     http.Header(map[string][]string{"Content-Type": {"application/problem+json"}}),
 			Body: io.NopCloser(bytes.NewBufferString(
 				`{"title": "Error", "detail": "this was an error", "status": 404}`,
@@ -85,8 +85,8 @@ func TestNewHTTPError(t *testing.T) {
 		}
 		e := NewHTTPError(resp)
 
-		if e.StatusCode != 404 {
-			t.Errorf("expected %d to be %d", e.StatusCode, 404)
+		if e.StatusCode != http.StatusNotFound {
+			t.Errorf("expected %d to be %d", e.StatusCode, http.StatusNotFound)
 		}
 
 		expected := strings.TrimSpace(`
@@ -116,14 +116,14 @@ func TestNewHTTPError(t *testing.T) {
 
 		for _, ct := range contentTypes {
 			resp := &http.Response{
-				StatusCode: 404,
+				StatusCode: http.StatusNotFound,
 				Header:     http.Header(map[string][]string{"Content-Type": {ct}}),
 				Body:       io.NopCloser(bytes.NewBufferString(`THIS IS NOT JSON`)),
 			}
 			e := NewHTTPError(resp)
 
-			if e.StatusCode != 404 {
-				t.Errorf("expected %d to be %d", e.StatusCode, 404)
+			if e.StatusCode != http.StatusNotFound {
+				t.Errorf("expected %d to be %d", e.StatusCode, http.StatusNotFound)
 			}
 
 			expected := strings.TrimSpace(`

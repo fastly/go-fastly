@@ -90,13 +90,13 @@ type ListTLSSubscriptionsInput struct {
 func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]any{
-		"filter[has_active_order]": s.FilterActiveOrders,
-		"filter[state]":            s.FilterState,
-		"filter[tls_domains.id]":   s.FilterTLSDomainsID,
-		"include":                  s.Include,
-		"page[number]":             s.PageNumber,
-		"page[size]":               s.PageSize,
-		"sort":                     s.Sort,
+		"filter[has_active_order]":   s.FilterActiveOrders,
+		"filter[state]":              s.FilterState,
+		"filter[tls_domains.id]":     s.FilterTLSDomainsID,
+		"include":                    s.Include,
+		jsonapi.QueryParamPageNumber: s.PageNumber,
+		jsonapi.QueryParamPageSize:   s.PageSize,
+		"sort":                       s.Sort,
 	}
 
 	for key, v := range pairings {
@@ -130,7 +130,7 @@ func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubsc
 	resp, err := c.Get("/tls/subscriptions", &RequestOptions{
 		Params: i.formatFilters(),
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // Needed for "include" but seemingly not the other fields
+			"Accept": jsonapi.MediaType, // Needed for "include" but seemingly not the other fields
 		},
 	})
 	if err != nil {
@@ -225,7 +225,7 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 
 	requestOptions := &RequestOptions{
 		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the params don't work
+			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
 		},
 	}
 
