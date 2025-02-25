@@ -120,7 +120,7 @@ func (c *Client) GetAutomationToken(i *GetAutomationTokenInput) (*AutomationToke
 // CreateAutomationTokenInput is used as input to the CreateAutomationToken function.
 type CreateAutomationTokenInput struct {
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire.
-	ExpiresAt time.Time `json:"expires_at" url:"expires_at,omitempty"`
+	ExpiresAt *time.Time `json:"expires_at,omitempty" url:"expires_at,omitempty"`
 	// Name is the name of the token.
 	Name string `json:"name" url:"name,omitempty"`
 	// Password is the token password.
