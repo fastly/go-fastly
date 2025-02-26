@@ -201,3 +201,21 @@ func TestClient_UpdateCustomTLSCertificate_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 }
+
+func TestClient_CreateCustomTLSCertificateInput_default_values(t *testing.T) {
+	t.Parallel()
+
+	certificateInput := CreateCustomTLSCertificateInput{}
+	if certificateInput.AllowUntrustedRoot {
+		t.Errorf("allow untrusted root attribute cannot be enabled by default")
+	}
+}
+
+func TestClient_UpdateCustomTLSCertificateInput_default_values(t *testing.T) {
+	t.Parallel()
+
+	certificateInput := UpdateCustomTLSCertificateInput{}
+	if certificateInput.AllowUntrustedRoot {
+		t.Errorf("allow untrusted root attribute cannot be enabled by default")
+	}
+}
