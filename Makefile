@@ -37,8 +37,8 @@ mod-download: ## Downloads the Go module.
 
 dev-dependencies: ## Downloads the necessary dev dependencies.
 	@echo "==> Downloading development dependencies"
-	@$(GO) install honnef.co/go/tools/cmd/staticcheck@v0.4.7
-	@$(GO) install golang.org/x/tools/cmd/goimports@v0.24.0
+	@$(GO) install honnef.co/go/tools/cmd/staticcheck@v0.6.0
+	@$(GO) install golang.org/x/tools/cmd/goimports@v0.30.0
 	@if [[ "$$(uname)" == 'Darwin' ]]; then brew install semgrep; fi
 .PHONY: dev-dependencies
 
