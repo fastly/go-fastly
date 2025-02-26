@@ -12,6 +12,7 @@
 
 ### Dependencies:
 - build(deps): `github.com/google/go-cmp` from 0.6.0 to 0.7.0 ([#617](https://github.com/fastly/go-fastly/pull/617))
+- build(deps): upgrade go to 1.23.6
 
 ## [v9.13.1](https://github.com/fastly/go-fastly/releases/tag/v9.13.1) (2025-02-14)
 
