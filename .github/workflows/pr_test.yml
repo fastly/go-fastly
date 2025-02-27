@@ -1,7 +1,23 @@
 on: pull_request
 name: Test
 jobs:
+  dependabot-changelog-update:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - uses: dangoslen/dependabot-changelog-helper@v3
+        with:
+          activationLabels: dependencies
+          changelogPath: './CHANGELOG.md'
+          entryPrefix: 'build(deps): '
+      - uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
   changelog:
+    needs: dependabot-changelog-update
     runs-on: ubuntu-latest
     steps:
     - uses: dangoslen/changelog-enforcer@v3
@@ -13,7 +29,7 @@ jobs:
     - name: Install Go
       uses: actions/setup-go@v5
       with:
-        go-version: 1.22.x
+        go-version: 1.23.x
     - name: Installing necessary tools
       run: make dev-dependencies
       shell: bash
@@ -35,7 +51,7 @@ jobs:
   test:
     strategy:
       matrix:
-        go-version: [1.22.x, 1.23.x, 1.24.x]
+        go-version: [1.23.x, 1.24.x]
         platform: [ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:

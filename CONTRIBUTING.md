@@ -14,4 +14,5 @@ $ git remote add upstream git@github.com:fastly/go-fastly.git
 1. Write tests.
 1. Validate your change via the steps documented [in the README](./README.md#testing).
 1. Open a pull request against `upstream main`.
+1. Add an entry in `CHANGELOG.md` in the `UNRELEASED` section under the appropriate heading with a link to the PR.
 1. Celebrate :tada:!

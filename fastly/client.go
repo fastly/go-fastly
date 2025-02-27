@@ -743,8 +743,13 @@ func stringToTimeHookFunc() mapstructure.DecodeHookFunc {
 			return data, nil
 		}
 
-		// Attempt parsing in RFC3339 format
+		// Fallback to time.Time zero value for empty string
 		str, _ := data.(string) // Safe type assertion; guaranteed by f.Kind()
+		if str == "" {
+			return time.Time{}, nil
+		}
+
+		// Attempt parsing in RFC3339 format
 		if v, err := time.Parse(time.RFC3339, str); err == nil {
 			return v, nil
 		}
