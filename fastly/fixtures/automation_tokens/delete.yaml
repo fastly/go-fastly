@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
     url: https://api.fastly.com/tokens/XXXXXXXXXXXXXXXXXXXXXX
     method: DELETE
   response:
@@ -17,15 +17,15 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Sat, 21 Sep 2024 03:56:00 GMT
+      - Tue, 25 Feb 2025 05:15:04 GMT
       Fastly-Ratelimit-Remaining:
       - "976"
       Fastly-Ratelimit-Reset:
-      - "1726891200"
+      - "1740463200"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 204 No Content
       Strict-Transport-Security:
@@ -37,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100064-CHI, cache-per12629-PER
+      - cache-chi-kigq8000084-CHI, cache-per12627-PER
       X-Timer:
-      - S1726890960.858157,VS0,VE659
+      - S1740460504.631124,VS0,VE503
     status: 204 No Content
     code: 204
     duration: ""
