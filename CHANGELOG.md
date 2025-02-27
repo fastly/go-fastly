@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+ - fix(automation_tokens): Fix decodeBodyMap for string to time.Time [#619](https://github.com/fastly/go-fastly/pull/619)
+
 ### Dependencies:
 
 - build(deps): `github.com/google/go-cmp` from 0.6.0 to 0.7.0 ([#617](https://github.com/fastly/go-fastly/pull/617))
