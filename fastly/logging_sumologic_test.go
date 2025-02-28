@@ -25,7 +25,6 @@ func TestClient_Sumologics(t *testing.T) {
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(1),
 			MessageType:    ToPointer("classic"),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -63,9 +62,6 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 	if *s.MessageType != "classic" {
 		t.Errorf("bad message type: %q", *s.MessageType)
-	}
-	if *s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// List
@@ -109,9 +105,6 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 	if *s.MessageType != *ns.MessageType {
 		t.Errorf("bad message type: %q", *s.MessageType)
-	}
-	if *s.Placement != *ns.Placement {
-		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// Update

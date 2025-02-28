@@ -24,7 +24,6 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 			Token:          ToPointer("abcd1234"),
 			URL:            ToPointer("https://example.nr-data.net"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -62,9 +61,6 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	}
 	if *n.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *n.FormatVersion)
-	}
-	if *n.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *n.Placement)
 	}
 
 	// List
@@ -108,9 +104,6 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	}
 	if *n.FormatVersion != *nn.FormatVersion {
 		t.Errorf("bad format_version: %q", *n.FormatVersion)
-	}
-	if *n.Placement != *nn.Placement {
-		t.Errorf("bad placement: %q", *n.Placement)
 	}
 
 	// Update

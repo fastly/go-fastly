@@ -12,7 +12,6 @@ type NewRelic struct {
 	Format            *string    `mapstructure:"format"`
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
-	Placement         *string    `mapstructure:"placement"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -60,8 +59,6 @@ type CreateNewRelicInput struct {
 	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Region is the region to which to stream logs.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -143,8 +140,6 @@ type UpdateNewRelicInput struct {
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Region is the region to which to stream logs.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.

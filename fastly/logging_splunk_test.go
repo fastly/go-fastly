@@ -47,7 +47,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			RequestMaxBytes:   ToPointer(1000),
 			Format:            ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:     ToPointer(2),
-			Placement:         ToPointer("waf_debug"),
 			Token:             ToPointer("super-secure-token"),
 			UseTLS:            ToPointer(Compatibool(true)),
 			TLSCACert:         ToPointer(caCert),
@@ -94,9 +93,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *s.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *s.FormatVersion)
-	}
-	if *s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *s.Placement)
 	}
 	if *s.Token != "super-secure-token" {
 		t.Errorf("bad token: %q", *s.Token)
@@ -161,9 +157,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
 		t.Errorf("bad format_version: %q", *s.FormatVersion)
-	}
-	if *s.Placement != *ns.Placement {
-		t.Errorf("bad placement: %q", *s.Placement)
 	}
 	if *s.Token != *ns.Token {
 		t.Errorf("bad token: %q", *s.Token)

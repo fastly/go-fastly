@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/62/logging/kinesis
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/24/logging/kinesis
     method: GET
   response:
-    body: '[{"access_key":"AKIAIOSFODNN7EXAMPLE","created_at":"2022-11-04T16:11:57Z","format_version":"2","topic":"stream-name","updated_at":"2022-11-04T16:11:57Z","response_condition":"","deleted_at":null,"version":"62","region":"us-east-1","service_id":"kKJb5bOFI47uHeBVluGfX1","format":"format","placement":"waf_debug","iam_role":null,"secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","name":"test-kinesis"},{"placement":"waf_debug","secret_key":null,"iam_role":"arn:aws:iam::123456789012:role/S3Access","name":"test-kinesis-2","version":"62","service_id":"kKJb5bOFI47uHeBVluGfX1","region":"us-east-1","format":"format","topic":"stream-name","updated_at":"2022-11-04T16:11:58Z","response_condition":"","deleted_at":null,"access_key":null,"created_at":"2022-11-04T16:11:58Z","format_version":"2"}]'
+    body: '[{"deleted_at":null,"updated_at":"2025-02-28T21:34:00Z","format":"format","iam_role":null,"name":"test-kinesis","version":"24","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","placement":null,"created_at":"2025-02-28T21:34:00Z","region":"us-east-1","service_id":"kKJb5bOFI47uHeBVluGfX1","format_version":"2","access_key":"AKIAIOSFODNN7EXAMPLE","response_condition":"","topic":"stream-name"},{"version":"24","placement":null,"secret_key":null,"format":"format","updated_at":"2025-02-28T21:34:00Z","deleted_at":null,"iam_role":"arn:aws:iam::123456789012:role/S3Access","name":"test-kinesis-2","access_key":null,"topic":"stream-name","response_condition":"","region":"us-east-1","created_at":"2025-02-28T21:34:00Z","service_id":"kKJb5bOFI47uHeBVluGfX1","format_version":"2"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:11:59 GMT
+      - Fri, 28 Feb 2025 21:34:01 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4139-MAN
+      - cache-chi-klot8100117-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667578319.954677,VS0,VE136
+      - S1740778441.276015,VS0,VE100
     status: 200 OK
     code: 200
     duration: ""

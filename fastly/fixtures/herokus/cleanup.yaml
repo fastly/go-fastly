@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/57/logging/heroku/test-heroku
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/21/logging/heroku/test-heroku
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-heroku, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 57 }''"}'
+      version =\u003e 21 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:22:54 GMT
+      - Fri, 28 Feb 2025 21:34:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "9966"
+      - "9856"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4132-MAN
+      - cache-chi-kigq8000047-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667575375.706336,VS0,VE150
+      - S1740778441.848428,VS0,VE104
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/57/logging/heroku/new-test-heroku
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/21/logging/heroku/new-test-heroku
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-heroku, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 57 }''"}'
+      version =\u003e 21 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:22:55 GMT
+      - Fri, 28 Feb 2025 21:34:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "9965"
+      - "9850"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4132-MAN
+      - cache-chi-kigq8000109-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667575375.878272,VS0,VE144
+      - S1740778441.961077,VS0,VE144
     status: 404 Not Found
     code: 404
     duration: ""

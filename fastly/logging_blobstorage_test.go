@@ -37,7 +37,6 @@ func TestClient_BlobStorages(t *testing.T) {
 			Format:           ToPointer("%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V"),
 			FormatVersion:    ToPointer(2),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			FileMaxBytes:     ToPointer(MiB),
 		})
 	})
@@ -61,7 +60,6 @@ func TestClient_BlobStorages(t *testing.T) {
 			Format:          ToPointer("%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V"),
 			FormatVersion:   ToPointer(2),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
 			FileMaxBytes:    ToPointer(10 * MiB),
 		})
 	})
@@ -85,7 +83,6 @@ func TestClient_BlobStorages(t *testing.T) {
 			Format:           ToPointer("%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V"),
 			FormatVersion:    ToPointer(2),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -111,7 +108,6 @@ func TestClient_BlobStorages(t *testing.T) {
 			Format:           ToPointer("%h %l %u %{now}V %{req.method}V %{req.url}V %>s %{resp.http.Content-Length}V"),
 			FormatVersion:    ToPointer(2),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			FileMaxBytes:     ToPointer(10 * MiB),
 		})
 	})
@@ -186,9 +182,6 @@ func TestClient_BlobStorages(t *testing.T) {
 	}
 	if *bsCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *bsCreateResp1.MessageType)
-	}
-	if *bsCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *bsCreateResp1.Placement)
 	}
 	if *bsCreateResp1.FileMaxBytes != MiB {
 		t.Errorf("bad file_max_bytes: %q", *bsCreateResp1.FileMaxBytes)
@@ -277,9 +270,6 @@ func TestClient_BlobStorages(t *testing.T) {
 	}
 	if *bsCreateResp1.MessageType != *bsGetResp.MessageType {
 		t.Errorf("bad message_type: %q", *bsCreateResp1.MessageType)
-	}
-	if *bsCreateResp1.Placement != *bsGetResp.Placement {
-		t.Errorf("bad placement: %q", *bsCreateResp1.Placement)
 	}
 
 	// Update

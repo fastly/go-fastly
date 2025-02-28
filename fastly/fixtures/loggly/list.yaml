@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/37/logging/loggly
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/20/logging/loggly
     method: GET
   response:
-    body: '[{"name":"test-loggly","created_at":"2022-11-04T10:32:22Z","public_key":null,"version":"37","deleted_at":null,"response_condition":"","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","updated_at":"2022-11-04T10:32:22Z","placement":"waf_debug","format_version":"2","format":"format"}]'
+    body: '[{"updated_at":"2025-02-28T21:33:59Z","format":"format","token":"abcd1234","response_condition":"","name":"test-loggly","public_key":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2025-02-28T21:33:59Z","version":"20","deleted_at":null,"placement":null,"format_version":"2"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 10:32:23 GMT
+      - Fri, 28 Feb 2025 21:33:59 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4122-MAN
+      - cache-chi-kigq8000118-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667557943.043876,VS0,VE393
+      - S1740778440.668234,VS0,VE144
     status: 200 OK
     code: 200
     duration: ""

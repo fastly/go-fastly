@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/57/logging/heroku/test-heroku
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/21/logging/heroku/test-heroku
     method: GET
   response:
-    body: '{"placement":"waf_debug","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","updated_at":"2022-11-04T15:22:52Z","service_id":"kKJb5bOFI47uHeBVluGfX1","token":"super-secure-token","response_condition":"","deleted_at":null,"version":"57","url":"https://1.us.logplex.io/logs","created_at":"2022-11-04T15:22:52Z","name":"test-heroku"}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","updated_at":"2025-02-28T21:33:59Z","token":"super-secure-token","name":"test-heroku","response_condition":"","placement":null,"deleted_at":null,"format_version":"2","url":"https://1.us.logplex.io/logs","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2025-02-28T21:33:59Z","version":"21"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:22:53 GMT
+      - Fri, 28 Feb 2025 21:34:00 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4132-MAN
+      - cache-chi-kigq8000047-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667575374.502790,VS0,VE398
+      - S1740778440.986155,VS0,VE126
     status: 200 OK
     code: 200
     duration: ""

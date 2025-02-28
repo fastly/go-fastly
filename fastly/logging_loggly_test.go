@@ -23,7 +23,6 @@ func TestClient_Loggly(t *testing.T) {
 			Name:           ToPointer("test-loggly"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -58,9 +57,6 @@ func TestClient_Loggly(t *testing.T) {
 	}
 	if *lg.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *lg.FormatVersion)
-	}
-	if *lg.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *lg.Placement)
 	}
 
 	// List
@@ -101,9 +97,6 @@ func TestClient_Loggly(t *testing.T) {
 	}
 	if *lg.FormatVersion != *nlg.FormatVersion {
 		t.Errorf("bad format_version: %q", *lg.FormatVersion)
-	}
-	if *lg.Placement != *nlg.Placement {
-		t.Errorf("bad placement: %q", *lg.Placement)
 	}
 
 	// Update

@@ -29,7 +29,6 @@ func TestClient_Kinesis(t *testing.T) {
 			SecretKey:      ToPointer("wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -46,7 +45,6 @@ func TestClient_Kinesis(t *testing.T) {
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -66,7 +64,6 @@ func TestClient_Kinesis(t *testing.T) {
 			IAMRole:        ToPointer("arn:aws:iam::123456789012:role/S3Access"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err == nil {
@@ -84,7 +81,6 @@ func TestClient_Kinesis(t *testing.T) {
 			IAMRole:        ToPointer("badarn"),
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err == nil {
@@ -137,9 +133,6 @@ func TestClient_Kinesis(t *testing.T) {
 	}
 	if *kinesisCreateResp1.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
-	}
-	if *kinesisCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
 	}
 	if *kinesisCreateResp1.ResponseCondition != "" {
 		t.Errorf("bad response_condition: %q", *kinesisCreateResp1.ResponseCondition)
@@ -218,9 +211,6 @@ func TestClient_Kinesis(t *testing.T) {
 	}
 	if *kinesisCreateResp1.FormatVersion != *kinesisGetResp.FormatVersion {
 		t.Errorf("bad format_version: %q", *kinesisCreateResp1.FormatVersion)
-	}
-	if *kinesisCreateResp1.Placement != *kinesisGetResp.Placement {
-		t.Errorf("bad placement: %q", *kinesisCreateResp1.Placement)
 	}
 	if *kinesisCreateResp1.ResponseCondition != "" {
 		t.Errorf("bad response_condition: %q", *kinesisCreateResp1.ResponseCondition)

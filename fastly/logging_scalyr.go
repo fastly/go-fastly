@@ -12,7 +12,6 @@ type Scalyr struct {
 	Format            *string    `mapstructure:"format"`
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
-	Placement         *string    `mapstructure:"placement"`
 	ProjectID         *string    `mapstructure:"project_id"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -61,8 +60,6 @@ type CreateScalyrInput struct {
 	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// ProjectID hold the name of the logfile field sent to Scalyr.
 	ProjectID *string `url:"project_id,omitempty"`
 	// Region is the region that log data will be sent to.
@@ -146,8 +143,6 @@ type UpdateScalyrInput struct {
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// ProjectID hold the name of the logfile field sent to Scalyr.
 	ProjectID *string `url:"project_id,omitempty"`
 	// Region is the region that log data will be sent to.

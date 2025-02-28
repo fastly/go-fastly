@@ -12,7 +12,6 @@ type Splunk struct {
 	Format            *string    `mapstructure:"format"`
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
-	Placement         *string    `mapstructure:"placement"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequestMaxEntries *int       `mapstructure:"request_max_entries"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -67,8 +66,6 @@ type CreateSplunkInput struct {
 	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 for unbounded.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 for unbounded.
@@ -164,8 +161,6 @@ type UpdateSplunkInput struct {
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 for unbounded.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 for unbounded.

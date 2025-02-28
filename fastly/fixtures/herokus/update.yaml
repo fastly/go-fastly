@@ -12,12 +12,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/57/logging/heroku/test-heroku
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/21/logging/heroku/test-heroku
     method: PUT
   response:
-    body: '{"response_condition":"","placement":"waf_debug","format_version":"2","token":"new-token","format":"%h
-      %l %u %t \"%r\" %\u003es %b","service_id":"kKJb5bOFI47uHeBVluGfX1","updated_at":"2022-11-04T15:22:52Z","deleted_at":null,"version":"57","url":"https://1.us.logplex.io/logs","name":"new-test-heroku","created_at":"2022-11-04T15:22:52Z"}'
+    body: '{"url":"https://1.us.logplex.io/logs","format_version":"2","placement":null,"deleted_at":null,"version":"21","created_at":"2025-02-28T21:33:59Z","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"new-test-heroku","response_condition":"","token":"new-token","format":"%h
+      %l %u %t \"%r\" %\u003es %b","updated_at":"2025-02-28T21:33:59Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -26,11 +26,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:22:54 GMT
+      - Fri, 28 Feb 2025 21:34:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "9968"
+      - "9868"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -44,9 +48,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4132-MAN
+      - cache-chi-kigq8000047-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667575374.932998,VS0,VE341
+      - S1740778440.119294,VS0,VE490
     status: 200 OK
     code: 200
     duration: ""

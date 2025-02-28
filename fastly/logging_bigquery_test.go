@@ -32,7 +32,6 @@ func TestClient_Bigqueries(t *testing.T) {
 			AccountName:    ToPointer("service-account"),
 			SecretKey:      ToPointer(secretKey),
 			Format:         ToPointer("{\n \"timestamp\":\"%{begin:%Y-%m-%dT%H:%M:%S}t\",\n  \"time_elapsed\":%{time.elapsed.usec}V,\n  \"is_tls\":%{if(req.is_ssl, \"true\", \"false\")}V,\n  \"client_ip\":\"%{req.http.Fastly-Client-IP}V\",\n  \"geo_city\":\"%{client.geo.city}V\",\n  \"geo_country_code\":\"%{client.geo.country_code}V\",\n  \"request\":\"%{req.request}V\",\n  \"host\":\"%{req.http.Fastly-Orig-Host}V\",\n  \"url\":\"%{json.escape(req.url)}V\",\n  \"request_referer\":\"%{json.escape(req.http.Referer)}V\",\n  \"request_user_agent\":\"%{json.escape(req.http.User-Agent)}V\",\n  \"request_accept_language\":\"%{json.escape(req.http.Accept-Language)}V\",\n  \"request_accept_charset\":\"%{json.escape(req.http.Accept-Charset)}V\",\n  \"cache_status\":\"%{regsub(fastly_info.state, \"^(HIT-(SYNTH)|(HITPASS|HIT|MISS|PASS|ERROR|PIPE)).*\", \"\\\\2\\\\3\") }V\"\n}"),
-			Placement:      ToPointer("waf_debug"),
 			FormatVersion:  ToPointer(2),
 		})
 	})
@@ -86,9 +85,6 @@ func TestClient_Bigqueries(t *testing.T) {
 	}
 	if *bq.ResponseCondition != "" {
 		t.Errorf("bad response_condition: %q", *bq.ResponseCondition)
-	}
-	if *bq.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *bq.Placement)
 	}
 	if *bq.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *bq.FormatVersion)
@@ -147,9 +143,6 @@ func TestClient_Bigqueries(t *testing.T) {
 	}
 	if *bq.ResponseCondition != *nbq.ResponseCondition {
 		t.Errorf("bad response_condition: %q", *bq.ResponseCondition)
-	}
-	if *bq.Placement != *nbq.Placement {
-		t.Errorf("bad placement: %q", *bq.Placement)
 	}
 	if *bq.FormatVersion != *nbq.FormatVersion {
 		t.Errorf("bad format_version: %q", *bq.FormatVersion)

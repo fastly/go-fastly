@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/138/logging/grafanacloudlogs/new-test-grafanacloudlogs
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/23/logging/grafanacloudlogs/new-test-grafanacloudlogs
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -19,15 +19,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 24 Oct 2024 19:43:59 GMT
+      - Fri, 28 Feb 2025 21:34:01 GMT
       Fastly-Ratelimit-Remaining:
-      - "989"
+      - "9849"
       Fastly-Ratelimit-Reset:
-      - "1729800000"
+      - "1740780000"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -41,9 +41,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000154-CHI, cache-bos4679-BOS
+      - cache-chi-klot8100118-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1729799039.017911,VS0,VE270
+      - S1740778441.976938,VS0,VE255
     status: 200 OK
     code: 200
     duration: ""

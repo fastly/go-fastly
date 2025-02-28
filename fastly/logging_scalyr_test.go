@@ -23,7 +23,6 @@ func TestClient_Scalyrs(t *testing.T) {
 			Name:           ToPointer("test-scalyr"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
 			ProjectID:      ToPointer("logplex"),
 			Region:         ToPointer("US"),
 			Token:          ToPointer("super-secure-token"),
@@ -59,11 +58,8 @@ func TestClient_Scalyrs(t *testing.T) {
 	if *s.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *s.FormatVersion)
 	}
-	if *s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *s.Placement)
-	}
 	if *s.ProjectID != "logplex" {
-		t.Errorf("bad project_id: %q", *s.Placement)
+		t.Errorf("bad project_id: %q", *s.ProjectID)
 	}
 	if *s.Region != "US" {
 		t.Errorf("bad region: %q", *s.Region)
@@ -107,9 +103,6 @@ func TestClient_Scalyrs(t *testing.T) {
 	}
 	if *s.FormatVersion != *ns.FormatVersion {
 		t.Errorf("bad format_version: %q", *s.FormatVersion)
-	}
-	if *s.Placement != *ns.Placement {
-		t.Errorf("bad placement: %q", *s.Placement)
 	}
 	if *s.ProjectID != *ns.ProjectID {
 		t.Errorf("bad project_id: %q", *s.ProjectID)

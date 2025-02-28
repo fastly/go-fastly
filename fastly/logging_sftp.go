@@ -19,7 +19,6 @@ type SFTP struct {
 	Password          *string    `mapstructure:"password"`
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
-	Placement         *string    `mapstructure:"placement"`
 	Port              *int       `mapstructure:"port"`
 	PublicKey         *string    `mapstructure:"public_key"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -85,8 +84,6 @@ type CreateSFTPInput struct {
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
@@ -190,8 +187,6 @@ type UpdateSFTPInput struct {
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.

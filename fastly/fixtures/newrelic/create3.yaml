@@ -2,14 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: format=format&name=test-newrelic-3&placement=waf_debug&region=abc&token=abcd1234
+    body: format=format&name=test-newrelic-3&region=abc&token=abcd1234
     form:
       format:
       - format
       name:
       - test-newrelic-3
-      placement:
-      - waf_debug
       region:
       - abc
       token:
@@ -18,8 +16,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/52/logging/newrelic
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/15/logging/newrelic
     method: POST
   response:
     body: '{"msg":"Bad request","detail":"unrecognized region abc"}'
@@ -31,11 +29,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:57:14 GMT
+      - Fri, 28 Feb 2025 21:33:58 GMT
       Fastly-Ratelimit-Remaining:
-      - "9951"
+      - "9916"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -49,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4120-MAN
+      - cache-chi-klot8100063-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573834.223418,VS0,VE253
+      - S1740778439.611958,VS0,VE222
     status: 400 Bad Request
     code: 400
     duration: ""

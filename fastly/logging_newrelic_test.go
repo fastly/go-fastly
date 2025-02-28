@@ -23,7 +23,6 @@ func TestClient_NewRelic(t *testing.T) {
 			Name:           ToPointer("test-newrelic"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 			Region:         ToPointer("us"),
 		})
 	})
@@ -38,7 +37,6 @@ func TestClient_NewRelic(t *testing.T) {
 			Name:           ToPointer("test-newrelic-2"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 			Region:         ToPointer("eu"),
 		})
 	})
@@ -54,7 +52,6 @@ func TestClient_NewRelic(t *testing.T) {
 			Name:           ToPointer("test-newrelic-3"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 			Region:         ToPointer("abc"),
 		})
 	})
@@ -97,9 +94,6 @@ func TestClient_NewRelic(t *testing.T) {
 	if *newRelicResp1.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
 	}
-	if *newRelicResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
-	}
 	if *newRelicResp1.Region != "us" {
 		t.Errorf("bad region: %q", *newRelicResp1.Region)
 	}
@@ -114,9 +108,6 @@ func TestClient_NewRelic(t *testing.T) {
 	}
 	if *newRelicResp2.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
-	}
-	if *newRelicResp2.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
 	}
 	if *newRelicResp2.Region != "eu" {
 		t.Errorf("bad region: %q", *newRelicResp2.Region)
@@ -173,9 +164,6 @@ func TestClient_NewRelic(t *testing.T) {
 	if *newRelicResp1.FormatVersion != *newRelicGetResp.FormatVersion {
 		t.Errorf("bad format_version: %q", *newRelicResp1.FormatVersion)
 	}
-	if *newRelicResp1.Placement != *newRelicGetResp.Placement {
-		t.Errorf("bad placement: %q", *newRelicResp1.Placement)
-	}
 	if *newRelicResp1.Region != *newRelicGetResp.Region {
 		t.Errorf("bad region: %q", *newRelicResp1.Region)
 	}
@@ -190,9 +178,6 @@ func TestClient_NewRelic(t *testing.T) {
 	}
 	if *newRelicResp2.FormatVersion != *newRelicGetResp2.FormatVersion {
 		t.Errorf("bad format_version: %q", *newRelicResp2.FormatVersion)
-	}
-	if *newRelicResp2.Placement != *newRelicGetResp2.Placement {
-		t.Errorf("bad placement: %q", *newRelicResp2.Placement)
 	}
 	if *newRelicResp2.Region != *newRelicGetResp2.Region {
 		t.Errorf("bad region: %q", *newRelicResp2.Region)

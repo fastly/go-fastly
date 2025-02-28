@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: format=format&format_version=1&message_type=classic&name=test-sumologic&placement=waf_debug&url=https%3A%2F%2Ffoo.sumologic.com
+    body: format=format&format_version=1&message_type=classic&name=test-sumologic&url=https%3A%2F%2Ffoo.sumologic.com
     form:
       format:
       - format
@@ -12,19 +12,17 @@ interactions:
       - classic
       name:
       - test-sumologic
-      placement:
-      - waf_debug
       url:
       - https://foo.sumologic.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/56/logging/sumologic
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/16/logging/sumologic
     method: POST
   response:
-    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","placement":"waf_debug","url":"https://foo.sumologic.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"56","deleted_at":null,"created_at":"2022-11-04T15:16:57Z","updated_at":"2022-11-04T15:16:57Z","response_condition":""}'
+    body: '{"format":"format","format_version":"1","message_type":"classic","name":"test-sumologic","url":"https://foo.sumologic.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"16","updated_at":"2025-02-28T21:33:58Z","created_at":"2025-02-28T21:33:58Z","deleted_at":null,"placement":null,"response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +31,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:16:57 GMT
+      - Fri, 28 Feb 2025 21:33:58 GMT
       Fastly-Ratelimit-Remaining:
-      - "9975"
+      - "9927"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4130-MAN
+      - cache-chi-klot8100037-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667575017.871120,VS0,VE504
+      - S1740778438.294550,VS0,VE241
     status: 200 OK
     code: 200
     duration: ""
