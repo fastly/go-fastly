@@ -2,6 +2,7 @@ on: pull_request
 name: Test
 jobs:
   dependabot-changelog-update:
+    if: github.actor == 'dependabot[bot]'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -17,7 +18,7 @@ jobs:
         with:
           commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
   changelog:
-    needs: dependabot-changelog-update
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
     - uses: dangoslen/changelog-enforcer@v3
