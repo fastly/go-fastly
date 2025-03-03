@@ -5,9 +5,6 @@ on:
       - opened
       - synchronize
       - reopened
-      - ready_for_review
-      - labeled
-      - unlabeled
 jobs:
     dependabot-changelog-update:
         if: github.actor == 'dependabot[bot]'
