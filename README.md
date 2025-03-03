@@ -21,7 +21,7 @@ second version component (`minor`), and bug fixes which do not affect
 compatibility will increment the third version component (`patch`).
 
 On the first Wednesday of each month, a release will be published
-including all breaking, feature, and bug fix changes which are ready
+including all breaking, feature, and bug-fix changes that are ready
 for release. If that Wednesday should happen to be a US holiday, the
 release will be delayed until the next available working day.
 
