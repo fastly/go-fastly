@@ -1,23 +1,15 @@
-on: pull_request
+on: 
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
 name: Test
 jobs:
-  dependabot-changelog-update:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-      - uses: dangoslen/dependabot-changelog-helper@v3
-        with:
-          activationLabels: dependencies
-          changelogPath: './CHANGELOG.md'
-          entryPrefix: 'build(deps): '
-      - uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
   changelog:
-    needs: dependabot-changelog-update
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
     - uses: dangoslen/changelog-enforcer@v3
