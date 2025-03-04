@@ -2,46 +2,54 @@
 version: 1
 interactions:
 - request:
-    body: |-
-      {"key":"batch-1","value":"VkFMVUU="}
-          {"key":"batch-2","value":"VkFMVUU="}
+    body: ""
     form: {}
     headers:
-      Content-Type:
-      - application/x-ndjson
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/batch
-    method: PUT
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/apple
+    method: GET
   response:
-    body: '{"type":"","title":"success","errors":[]}'
+    body: apple0
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "41"
+      - "6"
       Content-Type:
-      - application/json
+      - application/octet-stream
       Date:
       - Tue, 04 Mar 2025 15:41:23 GMT
+      Generation:
+      - "1741102880207881"
+      Last-Modified:
+      - Tue, 04 Mar 2025 15:41:20 GMT
+      Metadata:
+      - ""
       Pragma:
       - no-cache
       Server:
       - fastly
+      Server-Timing-Get-Key:
+      - transaction_lookup_ok;dur=1302, lookup_handle_status_status_USABLE;dur=20,
+        handle_usable;dur=2, lookup_handle_get_body;dur=123, user_metadata_json;dur=78,
+        total;dur=1
+      Stored-Content-Length:
+      - "6"
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - HIT, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
       - cache-nyc-kteb1890089-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1741102883.992345,VS0,VE175
+      - S1741102884.755953,VS0,VE9
     status: 200 OK
     code: 200
     duration: ""

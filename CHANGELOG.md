@@ -7,6 +7,7 @@
 ### Enhancements:
 
  - feat(fastly/objectstorage): adds crud operations for access keys in object storage [#612](https://github.com/fastly/go-fastly/pull/612)
+ - feat(kv_store): Adds support for all documented KV Store API features.
 
 ### Bug fixes:
 

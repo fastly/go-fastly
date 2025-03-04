@@ -6,31 +6,36 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/apple
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/apple
     method: GET
   response:
     body: apple0
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "6"
       Content-Type:
       - application/octet-stream
       Date:
-      - Tue, 31 Oct 2023 13:11:20 GMT
+      - Tue, 04 Mar 2025 15:41:21 GMT
       Generation:
-      - "1698757878618566"
+      - "1741102880207881"
       Last-Modified:
-      - Tue, 31 Oct 2023 13:11:18 GMT
+      - Tue, 04 Mar 2025 15:41:20 GMT
       Metadata:
       - ""
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Server-Timing-Get-Key:
-      - transaction_lookup_ok;dur=1352, lookup_handle_status_status_fetch;dur=8, backend_request;dur=201723,
-        res_ok;dur=5, finish_write;dur=1868, cache_handle_status_USABLE;dur=2750,
-        handle_usable;dur=5, lookup_handle_get_body;dur=125, user_metadata_json;dur=41,
-        total;dur=207
+      - transaction_lookup_ok;dur=821, lookup_handle_status_status_fetch;dur=10, backend_request;dur=144597,
+        res_ok;dur=2, finish_write;dur=990, cache_handle_status_USABLE;dur=2062, handle_usable;dur=6,
+        lookup_handle_get_body;dur=96, user_metadata_json;dur=27, total;dur=148
       Stored-Content-Length:
       - "6"
       Strict-Transport-Security:
@@ -42,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lhr7368-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890068-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1698757880.987979,VS0,VE217
+      - S1741102881.489427,VS0,VE157
     status: 200 OK
     code: 200
     duration: ""
@@ -53,31 +58,36 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/banana
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/banana
     method: GET
   response:
     body: banana1
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "7"
       Content-Type:
       - application/octet-stream
       Date:
-      - Tue, 31 Oct 2023 13:11:20 GMT
+      - Tue, 04 Mar 2025 15:41:21 GMT
       Generation:
-      - "1698757878853478"
+      - "1741102880382542"
       Last-Modified:
-      - Tue, 31 Oct 2023 13:11:18 GMT
+      - Tue, 04 Mar 2025 15:41:20 GMT
       Metadata:
       - ""
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Server-Timing-Get-Key:
-      - transaction_lookup_ok;dur=1460, lookup_handle_status_status_fetch;dur=7, backend_request;dur=193729,
-        res_ok;dur=6, finish_write;dur=1480, cache_handle_status_USABLE;dur=4360,
-        handle_usable;dur=4, lookup_handle_get_body;dur=91, user_metadata_json;dur=42,
-        total;dur=201
+      - transaction_lookup_ok;dur=777, lookup_handle_status_status_fetch;dur=8, backend_request;dur=144694,
+        res_ok;dur=2, finish_write;dur=976, cache_handle_status_USABLE;dur=2036, handle_usable;dur=3,
+        lookup_handle_get_body;dur=189, user_metadata_json;dur=35, total;dur=148
       Stored-Content-Length:
       - "7"
       Strict-Transport-Security:
@@ -89,9 +99,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lhr7352-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890021-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1698757880.222547,VS0,VE218
+      - S1741102882.651879,VS0,VE157
     status: 200 OK
     code: 200
     duration: ""
@@ -100,31 +110,37 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/carrot
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/carrot
     method: GET
   response:
     body: carrot2
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "7"
       Content-Type:
       - application/octet-stream
       Date:
-      - Tue, 31 Oct 2023 13:11:20 GMT
+      - Tue, 04 Mar 2025 15:41:22 GMT
       Generation:
-      - "1698757879427302"
+      - "1741102880549527"
       Last-Modified:
-      - Tue, 31 Oct 2023 13:11:19 GMT
+      - Tue, 04 Mar 2025 15:41:20 GMT
       Metadata:
       - ""
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Server-Timing-Get-Key:
-      - transaction_lookup_ok;dur=1585, lookup_handle_status_status_fetch;dur=14,
-        backend_request;dur=189034, res_ok;dur=5, finish_write;dur=2282, cache_handle_status_USABLE;dur=3184,
-        handle_usable;dur=6, lookup_handle_get_body;dur=167, user_metadata_json;dur=40,
-        total;dur=196
+      - transaction_lookup_ok;dur=744, lookup_handle_status_status_fetch;dur=4, backend_request;dur=439255,
+        res_ok;dur=4, finish_write;dur=4947, cache_handle_status_USABLE;dur=6327,
+        handle_usable;dur=4, lookup_handle_get_body;dur=183, user_metadata_json;dur=23,
+        total;dur=451
       Stored-Content-Length:
       - "7"
       Strict-Transport-Security:
@@ -136,9 +152,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lhr7354-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890094-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1698757880.471917,VS0,VE207
+      - S1741102882.813389,VS0,VE460
     status: 200 OK
     code: 200
     duration: ""
@@ -147,31 +163,37 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/dragonfruit
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/dragonfruit
     method: GET
   response:
     body: dragonfruit3
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "12"
       Content-Type:
       - application/octet-stream
       Date:
-      - Tue, 31 Oct 2023 13:11:20 GMT
+      - Tue, 04 Mar 2025 15:41:22 GMT
       Generation:
-      - "1698757879663259"
+      - "1741102881247828"
       Last-Modified:
-      - Tue, 31 Oct 2023 13:11:19 GMT
+      - Tue, 04 Mar 2025 15:41:21 GMT
       Metadata:
       - ""
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Server-Timing-Get-Key:
-      - transaction_lookup_ok;dur=1426, lookup_handle_status_status_fetch;dur=7, backend_request;dur=184584,
-        res_ok;dur=5, finish_write;dur=1509, cache_handle_status_USABLE;dur=2817,
-        handle_usable;dur=6, lookup_handle_get_body;dur=179, user_metadata_json;dur=57,
-        total;dur=190
+      - transaction_lookup_ok;dur=2217, lookup_handle_status_status_fetch;dur=6, backend_request;dur=142728,
+        res_ok;dur=3, finish_write;dur=1158, cache_handle_status_USABLE;dur=2758,
+        handle_usable;dur=3, lookup_handle_get_body;dur=230, user_metadata_json;dur=28,
+        total;dur=149
       Stored-Content-Length:
       - "12"
       Strict-Transport-Security:
@@ -183,9 +205,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lhr7357-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890080-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1698757881.703868,VS0,VE200
+      - S1741102882.279818,VS0,VE160
     status: 200 OK
     code: 200
     duration: ""
@@ -194,31 +216,37 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/eggplant
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/eggplant
     method: GET
   response:
     body: eggplant4
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Length:
       - "9"
       Content-Type:
       - application/octet-stream
       Date:
-      - Tue, 31 Oct 2023 13:11:21 GMT
+      - Tue, 04 Mar 2025 15:41:22 GMT
       Generation:
-      - "1698757879885728"
+      - "1741102881421927"
       Last-Modified:
-      - Tue, 31 Oct 2023 13:11:19 GMT
+      - Tue, 04 Mar 2025 15:41:21 GMT
       Metadata:
       - ""
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Server-Timing-Get-Key:
-      - transaction_lookup_ok;dur=1840, lookup_handle_status_status_fetch;dur=9, backend_request;dur=221409,
-        res_ok;dur=7, finish_write;dur=13591, cache_handle_status_USABLE;dur=12627,
-        handle_usable;dur=7, lookup_handle_get_body;dur=131, user_metadata_json;dur=31,
-        total;dur=249
+      - transaction_lookup_ok;dur=735, lookup_handle_status_status_fetch;dur=8, backend_request;dur=529722,
+        res_ok;dur=3, finish_write;dur=1282, cache_handle_status_USABLE;dur=2210,
+        handle_usable;dur=2, lookup_handle_get_body;dur=71, user_metadata_json;dur=38,
+        total;dur=534
       Stored-Content-Length:
       - "9"
       Strict-Transport-Security:
@@ -230,9 +258,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lhr7359-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890032-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1698757881.928701,VS0,VE261
+      - S1741102882.444067,VS0,VE543
     status: 200 OK
     code: 200
     duration: ""
