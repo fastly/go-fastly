@@ -6,11 +6,12 @@
 
 ### Enhancements:
 
- - feat(fastly/objectstorage): adds crud operations for access keys in object storage [#612](https://github.com/fastly/go-fastly/pull/612)
+- feat(tls_custom_certificate): Add support for the 'allow_untrusted_root' attribute. [#596](https://github.com/fastly/go-fastly/pull/596)
+- feat(fastly/objectstorage): adds crud operations for access keys in object storage [#612](https://github.com/fastly/go-fastly/pull/612)
 
 ### Bug fixes:
 
- - fix(automation_tokens): Fix decodeBodyMap for string to time.Time [#619](https://github.com/fastly/go-fastly/pull/619)
+- fix(automation_tokens): Fix decodeBodyMap for string to time.Time [#619](https://github.com/fastly/go-fastly/pull/619)
 
 ### Dependencies:
 
