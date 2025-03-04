@@ -19,7 +19,6 @@ type Openstack struct {
 	Name              *string    `mapstructure:"name"`
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
-	Placement         *string    `mapstructure:"placement"`
 	PublicKey         *string    `mapstructure:"public_key"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -83,8 +82,6 @@ type CreateOpenstackInput struct {
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -184,8 +181,6 @@ type UpdateOpenstackInput struct {
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.

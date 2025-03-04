@@ -12,7 +12,6 @@ type Logentries struct {
 	Format            *string    `mapstructure:"format"`
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
-	Placement         *string    `mapstructure:"placement"`
 	Port              *int       `mapstructure:"port"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -62,8 +61,6 @@ type CreateLogentriesInput struct {
 	FormatVersion *int `url:"format_version,omitempty"`
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
 	// Region is the region to which to stream logs.
@@ -149,8 +146,6 @@ type UpdateLogentriesInput struct {
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
 	// Region is the region to which to stream logs.

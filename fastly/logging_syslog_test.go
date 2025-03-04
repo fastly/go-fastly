@@ -54,7 +54,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Format:         ToPointer("format"),
 			FormatVersion:  ToPointer(2),
 			MessageType:    ToPointer("classic"),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -116,9 +115,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *s.MessageType != "classic" {
 		t.Errorf("bad message_type: %s", *s.MessageType)
-	}
-	if *s.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// List
@@ -186,9 +182,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *s.MessageType != *ns.MessageType {
 		t.Errorf("bad message_type: %q", *s.MessageType)
-	}
-	if *s.Placement != *ns.Placement {
-		t.Errorf("bad placement: %q", *s.Placement)
 	}
 
 	// Update

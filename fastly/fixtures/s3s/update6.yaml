@@ -10,13 +10,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3/test-s3
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/9/logging/s3/test-s3
     method: PUT
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-s3, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 157 }''"}'
+      version =\u003e 9 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -25,11 +25,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 13:18:16 GMT
+      - Fri, 28 Feb 2025 21:34:00 GMT
       Fastly-Ratelimit-Remaining:
-      - "984"
+      - "9866"
       Fastly-Ratelimit-Reset:
-      - "1686578400"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -43,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-5-CONTROL-AWS-UE2, cache-dal2120127-DAL
+      - cache-chi-klot8100093-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1686575896.997700,VS0,VE99
+      - S1740778440.386438,VS0,VE133
     status: 404 Not Found
     code: 404
     duration: ""

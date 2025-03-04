@@ -35,7 +35,6 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -64,7 +63,6 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyOneZoneIA),
-			Placement:                    ToPointer("waf_debug"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -92,7 +90,6 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyStandardIA),
-			Placement:                    ToPointer("waf_debug"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -118,7 +115,6 @@ func TestClient_S3s(t *testing.T) {
 			FormatVersion:                ToPointer(2),
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
-			Placement:                    ToPointer("waf_debug"),
 			Redundancy:                   ToPointer(S3RedundancyStandard),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
@@ -149,7 +145,6 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -176,7 +171,6 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -206,7 +200,6 @@ func TestClient_S3s(t *testing.T) {
 			TimestampFormat:              ToPointer("%Y"),
 			MessageType:                  ToPointer("classic"),
 			Redundancy:                   ToPointer(S3RedundancyReduced),
-			Placement:                    ToPointer("waf_debug"),
 			PublicKey:                    ToPointer(pgpPublicKey()),
 			ServerSideEncryptionKMSKeyID: ToPointer("1234"),
 			ServerSideEncryption:         ToPointer(S3ServerSideEncryptionKMS),
@@ -289,9 +282,6 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if *s3CreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *s3CreateResp1.MessageType)
-	}
-	if *s3CreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *s3CreateResp1.Placement)
 	}
 	if *s3CreateResp1.ResponseCondition != "" {
 		t.Errorf("bad response_condition: %q", *s3CreateResp1.ResponseCondition)
@@ -429,9 +419,6 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if *s3CreateResp1.Redundancy != *s3GetResp.Redundancy {
 		t.Errorf("bad redundancy: %q", *s3CreateResp1.Redundancy)
-	}
-	if *s3CreateResp1.Placement != *s3GetResp.Placement {
-		t.Errorf("bad placement: %q", *s3CreateResp1.Placement)
 	}
 	if *s3CreateResp1.ResponseCondition != "" {
 		t.Errorf("bad response_condition: %q", *s3CreateResp1.ResponseCondition)

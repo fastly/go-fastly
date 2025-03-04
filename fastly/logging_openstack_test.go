@@ -32,7 +32,6 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 		})
 	})
@@ -56,7 +55,6 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:   ToPointer(2),
 			TimestampFormat: ToPointer("%Y"),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
 			PublicKey:       ToPointer(pgpPublicKey()),
 		})
 	})
@@ -80,7 +78,6 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 		})
 	})
@@ -107,7 +104,6 @@ func TestClient_Openstack(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 		})
 	})
@@ -182,9 +178,6 @@ func TestClient_Openstack(t *testing.T) {
 	}
 	if *osCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *osCreateResp1.MessageType)
-	}
-	if *osCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *osCreateResp1.Placement)
 	}
 	if *osCreateResp1.PublicKey != pgpPublicKey() {
 		t.Errorf("bad public_key: %q", *osCreateResp1.PublicKey)
@@ -267,9 +260,6 @@ func TestClient_Openstack(t *testing.T) {
 	}
 	if *osCreateResp1.MessageType != *osGetResp.MessageType {
 		t.Errorf("bad message_type: %q", *osCreateResp1.MessageType)
-	}
-	if *osCreateResp1.Placement != *osGetResp.Placement {
-		t.Errorf("bad placement: %q", *osCreateResp1.Placement)
 	}
 	if *osCreateResp1.PublicKey != *osGetResp.PublicKey {
 		t.Errorf("bad public_key: %q", *osCreateResp1.PublicKey)

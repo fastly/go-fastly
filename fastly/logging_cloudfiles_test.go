@@ -31,7 +31,6 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:    ToPointer(1),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -56,7 +55,6 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:   ToPointer(1),
 			TimestampFormat: ToPointer("%Y"),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
 			PublicKey:       ToPointer(pgpPublicKey()),
 		})
 	})
@@ -79,7 +77,6 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:    ToPointer(1),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -106,7 +103,6 @@ func TestClient_Cloudfiles(t *testing.T) {
 			FormatVersion:    ToPointer(1),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -179,9 +175,6 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 	if *cloudfilesCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *cloudfilesCreateResp1.MessageType)
-	}
-	if *cloudfilesCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *cloudfilesCreateResp1.Placement)
 	}
 	if *cloudfilesCreateResp1.PublicKey != pgpPublicKey() {
 		t.Errorf("bad public_key: %q", *cloudfilesCreateResp1.PublicKey)
@@ -261,9 +254,6 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 	if *cloudfilesCreateResp1.MessageType != *cloudfilesGetResp.MessageType {
 		t.Errorf("bad message_type: %q", *cloudfilesCreateResp1.MessageType)
-	}
-	if *cloudfilesCreateResp1.Placement != *cloudfilesGetResp.Placement {
-		t.Errorf("bad placement: %q", *cloudfilesCreateResp1.Placement)
 	}
 	if *cloudfilesCreateResp1.PublicKey != *cloudfilesGetResp.PublicKey {
 		t.Errorf("bad public_key: %q", *cloudfilesCreateResp1.PublicKey)

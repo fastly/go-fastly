@@ -31,7 +31,6 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Format:           ToPointer("format"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 			MessageType:      ToPointer("classic"),
 		})
 	})
@@ -55,7 +54,6 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:   ToPointer(2),
 			Format:          ToPointer("format"),
 			TimestampFormat: ToPointer("%Y"),
-			Placement:       ToPointer("waf_debug"),
 			MessageType:     ToPointer("classic"),
 		})
 	})
@@ -79,7 +77,6 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Format:           ToPointer("format"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 			MessageType:      ToPointer("classic"),
 		})
 	})
@@ -106,7 +103,6 @@ func TestClient_FTPs(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			Format:           ToPointer("format"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 			MessageType:      ToPointer("classic"),
 		})
 	})
@@ -181,9 +177,6 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if *ftpCreateResp1.TimestampFormat != "%Y" {
 		t.Errorf("bad timestamp_format: %q", *ftpCreateResp1.TimestampFormat)
-	}
-	if *ftpCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *ftpCreateResp1.Placement)
 	}
 	if *ftpCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message type: %q", *ftpCreateResp1.MessageType)
@@ -266,9 +259,6 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if *ftpCreateResp1.TimestampFormat != *ftpGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *ftpCreateResp1.TimestampFormat)
-	}
-	if *ftpCreateResp1.Placement != *ftpGetResp.Placement {
-		t.Errorf("bad placement: %q", *ftpCreateResp1.Placement)
 	}
 	if *ftpCreateResp1.MessageType != *ftpGetResp.MessageType {
 		t.Errorf("bad message type: %q", *ftpCreateResp1.MessageType)

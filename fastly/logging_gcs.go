@@ -19,7 +19,6 @@ type GCS struct {
 	Name              *string    `mapstructure:"name"`
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
-	Placement         *string    `mapstructure:"placement"`
 	ProjectID         *string    `mapstructure:"project_id"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	SecretKey         *string    `mapstructure:"secret_key"`
@@ -83,8 +82,6 @@ type CreateGCSInput struct {
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID. Not required if user and secret_key are present.
 	ProjectID *string `url:"project_id,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -184,8 +181,6 @@ type UpdateGCSInput struct {
 	Path *string `url:"path,omitempty"`
 	// Period is how frequently log files are finalized so they can be available for reading (in seconds).
 	Period *int `url:"period,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID. Not required if user and secret_key are provided.
 	ProjectID *string `url:"project_id,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.

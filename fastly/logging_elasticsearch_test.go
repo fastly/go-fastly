@@ -50,7 +50,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			Password:          ToPointer("password"),
 			RequestMaxEntries: ToPointer(1),
 			RequestMaxBytes:   ToPointer(1000),
-			Placement:         ToPointer("waf_debug"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
 			TLSClientKey:      ToPointer(clientKey),
@@ -106,9 +105,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *es.RequestMaxBytes != 1000 {
 		t.Errorf("bad request_max_bytes: %q", *es.RequestMaxBytes)
-	}
-	if *es.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *es.Placement)
 	}
 	if *es.TLSCACert != caCert {
 		t.Errorf("bad tls_ca_cert: %q", *es.TLSCACert)
@@ -179,9 +175,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *es.RequestMaxBytes != *nes.RequestMaxBytes {
 		t.Errorf("bad request_max_bytes: %q", *es.RequestMaxBytes)
-	}
-	if *es.Placement != *nes.Placement {
-		t.Errorf("bad placement: %q", *es.Placement)
 	}
 	if *es.TLSCACert != *nes.TLSCACert {
 		t.Errorf("bad tls_ca_cert: %q", *es.TLSCACert)

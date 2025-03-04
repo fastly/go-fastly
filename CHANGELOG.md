@@ -2,6 +2,18 @@
 
 ## [UNRELEASED]
 
+### Breaking:
+
+- breaking(waf): Support for the Fastly WAF (legacy, not Next-Gen WAF)
+  product has been removed. The product passed its End-of-Life date
+  quite some time ago, and it is no longer in use by customers.
+  [#626](https://github.com/fastly/go-fastly/pull/626)
+
+- breaking(logging): The 'placement' field in all of the logging input
+  structures has been removed; it was only used in combination with
+  the Fastly WAF, which is no longer supported.
+  [#626](https://github.com/fastly/go-fastly/pull/626)
+
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.1...)
 
 ### Enhancements:

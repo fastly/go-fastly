@@ -16,7 +16,6 @@ type Syslog struct {
 	IPV4              *string    `mapstructure:"ipv4"`
 	MessageType       *string    `mapstructure:"message_type"`
 	Name              *string    `mapstructure:"name"`
-	Placement         *string    `mapstructure:"placement"`
 	Port              *int       `mapstructure:"port"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -77,8 +76,6 @@ type CreateSyslogInput struct {
 	MessageType *string `url:"message_type,omitempty"`
 	// Name is the name for the real-time logging configuration.
 	Name *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -178,8 +175,6 @@ type UpdateSyslogInput struct {
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.

@@ -33,7 +33,6 @@ func TestClient_GCSs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -56,7 +55,6 @@ func TestClient_GCSs(t *testing.T) {
 			Format:          ToPointer("format"),
 			MessageType:     ToPointer("blank"),
 			TimestampFormat: ToPointer("%Y"),
-			Placement:       ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -79,7 +77,6 @@ func TestClient_GCSs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -105,7 +102,6 @@ func TestClient_GCSs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 		})
 	})
 	if err == nil {
@@ -182,9 +178,6 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if *gcsCreateResp1.MessageType != "blank" {
 		t.Errorf("bad message_type: %q", *gcsCreateResp1.MessageType)
-	}
-	if *gcsCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *gcsCreateResp1.Placement)
 	}
 	if gcsCreateResp2.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *gcsCreateResp1.CompressionCodec)
@@ -264,9 +257,6 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if *gcsCreateResp1.MessageType != *gcsGetResp.MessageType {
 		t.Errorf("bad message_type: %q", *gcsCreateResp1.MessageType)
-	}
-	if *gcsCreateResp1.Placement != *gcsGetResp.Placement {
-		t.Errorf("bad placement: %q", *gcsCreateResp1.Placement)
 	}
 
 	// Update

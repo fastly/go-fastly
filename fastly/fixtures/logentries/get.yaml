@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/53/logging/logentries/test-logentries
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/22/logging/logentries/test-logentries
     method: GET
   response:
-    body: '{"version":"53","created_at":"2022-11-04T15:03:05Z","port":"0","response_condition":"","format_version":"2","name":"test-logentries","deleted_at":null,"format":"format","public_key":null,"token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","region":"us","updated_at":"2022-11-04T15:03:05Z","hostname":null,"placement":"waf_debug","use_tls":"1"}'
+    body: '{"updated_at":"2025-02-28T21:33:59Z","format":"format","use_tls":"1","token":"abcd1234","hostname":null,"response_condition":"","name":"test-logentries","port":"0","public_key":null,"created_at":"2025-02-28T21:33:59Z","service_id":"kKJb5bOFI47uHeBVluGfX1","region":"us","version":"22","placement":null,"deleted_at":null,"format_version":"2"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:03:05 GMT
+      - Fri, 28 Feb 2025 21:34:00 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4122-MAN
+      - cache-chi-klot8100101-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667574186.676876,VS0,VE306
+      - S1740778440.275024,VS0,VE152
     status: 200 OK
     code: 200
     duration: ""

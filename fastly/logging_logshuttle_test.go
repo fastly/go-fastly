@@ -23,7 +23,6 @@ func TestClient_Logshuttles(t *testing.T) {
 			Name:           ToPointer("test-logshuttle"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
 			Token:          ToPointer("super-secure-token"),
 			URL:            ToPointer("https://logs.example.com"),
 		})
@@ -57,9 +56,6 @@ func TestClient_Logshuttles(t *testing.T) {
 	}
 	if *l.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *l.FormatVersion)
-	}
-	if *l.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *l.Placement)
 	}
 	if *l.Token != "super-secure-token" {
 		t.Errorf("bad token: %q", *l.Token)
@@ -103,9 +99,6 @@ func TestClient_Logshuttles(t *testing.T) {
 	}
 	if *l.FormatVersion != *nl.FormatVersion {
 		t.Errorf("bad format_version: %q", *l.FormatVersion)
-	}
-	if *l.Placement != *nl.Placement {
-		t.Errorf("bad placement: %q", *l.Placement)
 	}
 	if *l.Token != *nl.Token {
 		t.Errorf("bad token: %q", *l.Token)

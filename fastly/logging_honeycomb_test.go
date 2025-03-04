@@ -23,7 +23,6 @@ func TestClient_Honeycombs(t *testing.T) {
 			Name:           ToPointer("test-honeycomb"),
 			Format:         ToPointer("%h %l %u %t \"%r\" %>s %b"),
 			FormatVersion:  ToPointer(2),
-			Placement:      ToPointer("waf_debug"),
 			Token:          ToPointer("super-secure-token"),
 			Dataset:        ToPointer("testDataset"),
 		})
@@ -57,9 +56,6 @@ func TestClient_Honeycombs(t *testing.T) {
 	}
 	if *h.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *h.FormatVersion)
-	}
-	if *h.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *h.Placement)
 	}
 	if *h.Token != "super-secure-token" {
 		t.Errorf("bad token: %q", *h.Token)
@@ -103,9 +99,6 @@ func TestClient_Honeycombs(t *testing.T) {
 	}
 	if *h.FormatVersion != *nh.FormatVersion {
 		t.Errorf("bad format_version: %q", *h.FormatVersion)
-	}
-	if *h.Placement != *nh.Placement {
-		t.Errorf("bad placement: %q", *h.Placement)
 	}
 	if *h.Token != *nh.Token {
 		t.Errorf("bad token: %q", *h.Token)

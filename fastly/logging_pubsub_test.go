@@ -29,7 +29,6 @@ func TestClient_Pubsubs(t *testing.T) {
 			ProjectID:      ToPointer("project-id"),
 			FormatVersion:  ToPointer(2),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -104,9 +103,6 @@ bv1KwcKoQbNVXwauH79JKc0=
 	if *pubsub.Format != "format" {
 		t.Errorf("bad format: %q", *pubsub.Format)
 	}
-	if *pubsub.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *pubsub.Placement)
-	}
 
 	// List
 	var pubsubs []*Pubsub
@@ -155,9 +151,6 @@ bv1KwcKoQbNVXwauH79JKc0=
 	}
 	if *pubsub.Format != *npubsub.Format {
 		t.Errorf("bad format: %q", *pubsub.Format)
-	}
-	if *pubsub.Placement != *npubsub.Placement {
-		t.Errorf("bad placement: %q", *pubsub.Placement)
 	}
 
 	// Update

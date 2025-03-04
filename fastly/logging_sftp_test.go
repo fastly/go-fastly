@@ -37,7 +37,6 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -63,7 +62,6 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:          ToPointer("format"),
 			MessageType:     ToPointer("blank"),
 			TimestampFormat: ToPointer("%Y"),
-			Placement:       ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -89,7 +87,6 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -118,7 +115,6 @@ func TestClient_SFTPs(t *testing.T) {
 			Format:           ToPointer("format"),
 			MessageType:      ToPointer("blank"),
 			TimestampFormat:  ToPointer("%Y"),
-			Placement:        ToPointer("waf_debug"),
 		})
 	})
 	if err == nil {
@@ -201,9 +197,6 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 	if *sftpCreateResp1.MessageType != "blank" {
 		t.Errorf("bad message_type: %q", *sftpCreateResp1.MessageType)
-	}
-	if *sftpCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *sftpCreateResp1.Placement)
 	}
 	if sftpCreateResp2.CompressionCodec != nil {
 		t.Errorf("bad compression_codec: %q", *sftpCreateResp2.CompressionCodec)
@@ -293,9 +286,6 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 	if *sftpCreateResp1.MessageType != "blank" {
 		t.Errorf("bad message_type: %q", *sftpCreateResp1.MessageType)
-	}
-	if *sftpCreateResp1.Placement != *sftpGetResp.Placement {
-		t.Errorf("bad placement: %q", *sftpCreateResp1.Placement)
 	}
 
 	// Update

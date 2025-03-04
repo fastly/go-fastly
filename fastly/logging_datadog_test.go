@@ -24,7 +24,6 @@ func TestClient_Datadog(t *testing.T) {
 			Region:         ToPointer("US"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 		})
 	})
 	if err != nil {
@@ -62,9 +61,6 @@ func TestClient_Datadog(t *testing.T) {
 	}
 	if *d.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *d.FormatVersion)
-	}
-	if *d.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
 	// List
@@ -105,9 +101,6 @@ func TestClient_Datadog(t *testing.T) {
 	}
 	if *d.FormatVersion != *nd.FormatVersion {
 		t.Errorf("bad format_version: %q", *d.FormatVersion)
-	}
-	if *d.Placement != *nd.Placement {
-		t.Errorf("bad placement: %q", *d.Placement)
 	}
 
 	// Update

@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: dataset=testDataset&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-honeycomb&placement=waf_debug&token=super-secure-token
+    body: dataset=testDataset&format=%25h+%25l+%25u+%25t+%22%25r%22+%25%3Es+%25b&format_version=2&name=test-honeycomb&token=super-secure-token
     form:
       dataset:
       - testDataset
@@ -12,19 +12,17 @@ interactions:
       - "2"
       name:
       - test-honeycomb
-      placement:
-      - waf_debug
       token:
       - super-secure-token
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/49/logging/honeycomb
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/18/logging/honeycomb
     method: POST
   response:
-    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"49","response_condition":"","created_at":"2022-11-04T14:43:37Z","updated_at":"2022-11-04T14:43:37Z","deleted_at":null}'
+    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","token":"super-secure-token","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"18","updated_at":"2025-02-28T21:33:58Z","response_condition":"","deleted_at":null,"placement":null,"created_at":"2025-02-28T21:33:58Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +31,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:43:37 GMT
+      - Fri, 28 Feb 2025 21:33:59 GMT
       Fastly-Ratelimit-Remaining:
-      - "9973"
+      - "9910"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4148-MAN
+      - cache-chi-klot8100145-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573017.995185,VS0,VE529
+      - S1740778439.838703,VS0,VE285
     status: 200 OK
     code: 200
     duration: ""

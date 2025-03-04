@@ -2,14 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: format=format&name=test-newrelic-2&placement=waf_debug&region=eu&token=abcd1234
+    body: format=format&name=test-newrelic-2&region=eu&token=abcd1234
     form:
       format:
       - format
       name:
       - test-newrelic-2
-      placement:
-      - waf_debug
       region:
       - eu
       token:
@@ -18,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/52/logging/newrelic
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/15/logging/newrelic
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelic-2","placement":"waf_debug","region":"eu","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"52","created_at":"2022-11-04T14:57:13Z","updated_at":"2022-11-04T14:57:13Z","deleted_at":null,"response_condition":"","format_version":"2"}'
+    body: '{"format":"format","name":"test-newrelic-2","region":"eu","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"15","response_condition":"","placement":null,"deleted_at":null,"created_at":"2025-02-28T21:33:58Z","format_version":"2","updated_at":"2025-02-28T21:33:58Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,11 +29,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:57:14 GMT
+      - Fri, 28 Feb 2025 21:33:58 GMT
       Fastly-Ratelimit-Remaining:
-      - "9952"
+      - "9925"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4120-MAN
+      - cache-chi-klot8100063-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573834.881434,VS0,VE313
+      - S1740778438.294548,VS0,VE311
     status: 200 OK
     code: 200
     duration: ""

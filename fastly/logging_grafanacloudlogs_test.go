@@ -25,7 +25,6 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 			User:           ToPointer("123456"),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 			Index:          ToPointer("{\"env\": \"prod\"}"),
 		})
 	})
@@ -68,9 +67,6 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	if *d.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if *d.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *d.Placement)
-	}
 
 	// List
 	var ld []*GrafanaCloudLogs
@@ -111,9 +107,6 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	if *d.FormatVersion != *nd.FormatVersion {
 		t.Errorf("bad format_version: %q", *d.FormatVersion)
 	}
-	if *d.Placement != *nd.Placement {
-		t.Errorf("bad placement: %q", *d.Placement)
-	}
 
 	// Update
 	var ud *GrafanaCloudLogs
@@ -126,7 +119,6 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 			FormatVersion:  ToPointer(2),
 			URL:            ToPointer("https://test456.grafana.net"),
 			Token:          ToPointer("abcd6789"),
-			Placement:      ToPointer("waf_debug"),
 			Index:          ToPointer("{\"env\": \"staging\"}"),
 		})
 	})

@@ -33,7 +33,6 @@ func TestClient_Kafkas(t *testing.T) {
 			Name:             ToPointer("test-kafka"),
 			ParseLogKeyvals:  ToPointer(Compatibool(true)),
 			Password:         ToPointer("deadbeef"),
-			Placement:        ToPointer("waf_debug"),
 			RequestMaxBytes:  ToPointer(requestMaxBytes),
 			RequiredACKs:     ToPointer("-1"),
 			ServiceID:        TestDeliveryServiceID,
@@ -91,9 +90,6 @@ func TestClient_Kafkas(t *testing.T) {
 	}
 	if *k.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *k.FormatVersion)
-	}
-	if *k.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *k.Placement)
 	}
 	if *k.TLSCACert != caCert {
 		t.Errorf("bad tls_ca_cert: %q", *k.TLSCACert)
@@ -173,9 +169,6 @@ func TestClient_Kafkas(t *testing.T) {
 	}
 	if *k.FormatVersion != *nk.FormatVersion {
 		t.Errorf("bad format_version: %q", *k.FormatVersion)
-	}
-	if *k.Placement != *nk.Placement {
-		t.Errorf("bad placement: %q", *k.Placement)
 	}
 	if *k.TLSCACert != *nk.TLSCACert {
 		t.Errorf("bad tls_ca_cert: %q", *k.TLSCACert)

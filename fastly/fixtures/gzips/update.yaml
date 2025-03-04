@@ -10,12 +10,13 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/51/gzip/test-gzip
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/33/gzip/test-gzip
     method: PUT
   response:
-    body: '{"name":"new-test-gzip","content_types":"text/html text/css","version":"51","extensions":"html
-      css","updated_at":"2022-11-04T14:53:12Z","created_at":"2022-11-04T14:53:12Z","service_id":"kKJb5bOFI47uHeBVluGfX1","cache_condition":"","deleted_at":null}'
+    body: '{"cache_condition":"","updated_at":"2025-02-28T21:34:02Z","deleted_at":null,"name":"new-test-gzip","extensions":"html
+      css","version":"33","service_id":"kKJb5bOFI47uHeBVluGfX1","content_types":"text/html
+      text/css","created_at":"2025-02-28T21:34:02Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,11 +25,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:53:13 GMT
+      - Fri, 28 Feb 2025 21:34:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "9959"
+      - "9793"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -42,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4134-MAN
+      - cache-chi-klot8100073-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573593.415365,VS0,VE201
+      - S1740778443.194211,VS0,VE262
     status: 200 OK
     code: 200
     duration: ""

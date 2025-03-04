@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/138/logging/grafanacloudlogs/test-grafanacloudlogs
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/23/logging/grafanacloudlogs/test-grafanacloudlogs
     method: GET
   response:
-    body: '{"placement":"waf_debug","name":"test-grafanacloudlogs","response_condition":"","user":"123456","updated_at":"2024-10-24T19:43:58Z","format_version":"2","format":"format","token":"abcd1234","deleted_at":null,"created_at":"2024-10-24T19:43:58Z","url":"https://test123.grafana.net","index":"{\"env\":
-      \"prod\"}","version":"138","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
+    body: '{"service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test-grafanacloudlogs","user":"123456","placement":null,"updated_at":"2025-02-28T21:34:00Z","created_at":"2025-02-28T21:34:00Z","token":"abcd1234","url":"https://test123.grafana.net","response_condition":"","deleted_at":null,"index":"{\"env\":
+      \"prod\"}","format_version":"2","format":"format","version":"23"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 24 Oct 2024 19:43:58 GMT
+      - Fri, 28 Feb 2025 21:34:00 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000134-CHI, cache-bos4679-BOS
+      - cache-chi-kigq8000137-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1729799039.526983,VS0,VE107
+      - S1740778441.536578,VS0,VE125
     status: 200 OK
     code: 200
     duration: ""

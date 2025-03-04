@@ -6,18 +6,17 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/51/gzip
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/33/gzip
     method: GET
   response:
-    body: '[{"updated_at":"2022-11-04T14:53:12Z","cache_condition":"","extensions":"html
-      css","deleted_at":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","content_types":"text/html
-      text/css","created_at":"2022-11-04T14:53:12Z","version":"51","name":"test-gzip"},{"updated_at":"2022-11-04T14:53:12Z","cache_condition":"","extensions":"css
-      js html eot ico otf ttf json","content_types":"text/html application/x-javascript
+    body: '[{"version":"33","deleted_at":null,"extensions":"html css","name":"test-gzip","cache_condition":"","updated_at":"2025-02-28T21:34:02Z","service_id":"kKJb5bOFI47uHeBVluGfX1","content_types":"text/html
+      text/css","created_at":"2025-02-28T21:34:02Z"},{"content_types":"text/html application/x-javascript
       text/css application/javascript text/javascript application/json application/vnd.ms-fontobject
       application/x-font-opentype application/x-font-truetype application/x-font-ttf
       application/xml font/eot font/opentype font/otf image/svg+xml image/vnd.microsoft.icon
-      text/plain text/xml","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"created_at":"2022-11-04T14:53:12Z","version":"51","name":"test-gzip-omit"}]'
+      text/plain text/xml","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2025-02-28T21:34:02Z","updated_at":"2025-02-28T21:34:02Z","cache_condition":"","name":"test-gzip-omit","extensions":"css
+      js html eot ico otf ttf json","deleted_at":null,"version":"33"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +25,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:53:13 GMT
+      - Fri, 28 Feb 2025 21:34:03 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -40,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4134-MAN
+      - cache-chi-kigq8000153-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573593.711737,VS0,VE315
+      - S1740778443.946290,VS0,VE105
     status: 200 OK
     code: 200
     duration: ""

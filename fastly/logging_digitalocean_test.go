@@ -31,7 +31,6 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -56,7 +55,6 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:   ToPointer(2),
 			TimestampFormat: ToPointer("%Y"),
 			MessageType:     ToPointer("classic"),
-			Placement:       ToPointer("waf_debug"),
 			PublicKey:       ToPointer(pgpPublicKey()),
 		})
 	})
@@ -79,7 +77,6 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -106,7 +103,6 @@ func TestClient_DigitalOceans(t *testing.T) {
 			FormatVersion:    ToPointer(2),
 			TimestampFormat:  ToPointer("%Y"),
 			MessageType:      ToPointer("classic"),
-			Placement:        ToPointer("waf_debug"),
 			PublicKey:        ToPointer(pgpPublicKey()),
 			CompressionCodec: ToPointer("snappy"),
 		})
@@ -179,9 +175,6 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 	if *digitaloceanCreateResp1.MessageType != "classic" {
 		t.Errorf("bad message_type: %q", *digitaloceanCreateResp1.MessageType)
-	}
-	if *digitaloceanCreateResp1.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *digitaloceanCreateResp1.Placement)
 	}
 	if *digitaloceanCreateResp1.PublicKey != pgpPublicKey() {
 		t.Errorf("bad public_key: %q", *digitaloceanCreateResp1.PublicKey)
@@ -258,9 +251,6 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 	if *digitaloceanCreateResp1.TimestampFormat != *digitaloceanGetResp.TimestampFormat {
 		t.Errorf("bad timestamp_format: %q", *digitaloceanCreateResp1.TimestampFormat)
-	}
-	if *digitaloceanCreateResp1.Placement != *digitaloceanGetResp.Placement {
-		t.Errorf("bad placement: %q", *digitaloceanCreateResp1.Placement)
 	}
 	if *digitaloceanCreateResp1.PublicKey != *digitaloceanGetResp.PublicKey {
 		t.Errorf("bad public_key: %q", *digitaloceanCreateResp1.PublicKey)

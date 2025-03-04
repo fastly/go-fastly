@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: address=integ-test.go-fastly.com&format=format&format_version=2&name=test-papertrail&placement=waf_debug&port=1234
+    body: address=integ-test.go-fastly.com&format=format&format_version=2&name=test-papertrail&port=1234
     form:
       address:
       - integ-test.go-fastly.com
@@ -12,19 +12,17 @@ interactions:
       - "2"
       name:
       - test-papertrail
-      placement:
-      - waf_debug
       port:
       - "1234"
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/46/logging/papertrail
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/12/logging/papertrail
     method: POST
   response:
-    body: '{"address":"integ-test.go-fastly.com","format":"format","format_version":"2","name":"test-papertrail","placement":"waf_debug","port":"1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"46","created_at":"2022-11-04T14:20:05Z","public_key":null,"deleted_at":null,"updated_at":"2022-11-04T14:20:05Z","response_condition":""}'
+    body: '{"address":"integ-test.go-fastly.com","format":"format","format_version":"2","name":"test-papertrail","port":"1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"12","response_condition":"","updated_at":"2025-02-28T21:33:57Z","placement":null,"created_at":"2025-02-28T21:33:57Z","public_key":null,"deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +31,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:20:05 GMT
+      - Fri, 28 Feb 2025 21:33:57 GMT
       Fastly-Ratelimit-Remaining:
-      - "9998"
+      - "9951"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4150-MAN
+      - cache-chi-kigq8000126-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667571605.423146,VS0,VE334
+      - S1740778437.302151,VS0,VE273
     status: 200 OK
     code: 200
     duration: ""

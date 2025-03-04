@@ -14,11 +14,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/62/logging/kinesis/test-kinesis-2
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/24/logging/kinesis/test-kinesis-2
     method: PUT
   response:
-    body: '{"response_condition":"","deleted_at":null,"updated_at":"2022-11-04T16:11:58Z","topic":"stream-name","format_version":"2","created_at":"2022-11-04T16:11:58Z","access_key":"AKIAIOSFODNN7EXAMPLE","name":"test-kinesis-2","iam_role":"","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","placement":"waf_debug","format":"format","version":"62","service_id":"kKJb5bOFI47uHeBVluGfX1","region":"us-east-1"}'
+    body: '{"iam_role":"","topic":"stream-name","placement":null,"version":"24","region":"us-east-1","format":"format","format_version":"2","service_id":"kKJb5bOFI47uHeBVluGfX1","updated_at":"2025-02-28T21:34:00Z","access_key":"AKIAIOSFODNN7EXAMPLE","name":"test-kinesis-2","deleted_at":null,"created_at":"2025-02-28T21:34:00Z","secret_key":"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +27,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:12:01 GMT
+      - Fri, 28 Feb 2025 21:34:02 GMT
       Fastly-Ratelimit-Remaining:
-      - "9984"
+      - "9818"
       Fastly-Ratelimit-Reset:
-      - "1667581200"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +49,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4139-MAN
+      - cache-chi-klot8100136-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667578321.705153,VS0,VE339
+      - S1740778442.303745,VS0,VE349
     status: 200 OK
     code: 200
     duration: ""

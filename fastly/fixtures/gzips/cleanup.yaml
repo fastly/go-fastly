@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/51/gzip/test-gzip
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/33/gzip/test-gzip
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-gzip, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 51 }''"}'
+      version =\u003e 33 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:53:14 GMT
+      - Fri, 28 Feb 2025 21:34:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "9957"
+      - "9778"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4134-MAN
+      - cache-chi-klot8100073-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573594.873128,VS0,VE134
+      - S1740778444.661811,VS0,VE137
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,8 +54,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/51/gzip/test-gzip-omit
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/33/gzip/test-gzip-omit
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -63,11 +67,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:53:14 GMT
+      - Fri, 28 Feb 2025 21:34:03 GMT
       Fastly-Ratelimit-Remaining:
-      - "9956"
+      - "9775"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -81,9 +89,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4134-MAN
+      - cache-chi-klot8100126-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573594.032952,VS0,VE204
+      - S1740778444.806120,VS0,VE176
     status: 200 OK
     code: 200
     duration: ""
@@ -92,13 +100,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/51/gzip/new-test-gzip
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.23.6)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/33/gzip/new-test-gzip
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Gzip ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-gzip, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 51 }''"}'
+      version =\u003e 33 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -107,11 +115,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:53:14 GMT
+      - Fri, 28 Feb 2025 21:34:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9955"
+      - "9769"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1740780000"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -125,9 +137,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4134-MAN
+      - cache-chi-kigq8000103-CHI, cache-ewr-kewr1740021-EWR
       X-Timer:
-      - S1667573594.272861,VS0,VE140
+      - S1740778444.989871,VS0,VE137
     status: 404 Not Found
     code: 404
     duration: ""

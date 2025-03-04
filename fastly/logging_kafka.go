@@ -17,7 +17,6 @@ type Kafka struct {
 	Name              *string    `mapstructure:"name"`
 	ParseLogKeyvals   *bool      `mapstructure:"parse_log_keyvals"`
 	Password          *string    `mapstructure:"password"`
-	Placement         *string    `mapstructure:"placement"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequiredACKs      *string    `mapstructure:"required_acks"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -82,8 +81,6 @@ type CreateKafkaInput struct {
 	ParseLogKeyvals *Compatibool `url:"parse_log_keyvals,omitempty"`
 	// Password is the SASL password.
 	Password *string `url:"password,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.
@@ -189,8 +186,6 @@ type UpdateKafkaInput struct {
 	ParseLogKeyvals *Compatibool `url:"parse_log_keyvals,omitempty"`
 	// Password is the SASL password.
 	Password *string `url:"password,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.

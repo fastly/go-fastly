@@ -25,7 +25,6 @@ func TestClient_Logentries(t *testing.T) {
 			UseTLS:         ToPointer(Compatibool(true)),
 			Token:          ToPointer("abcd1234"),
 			Format:         ToPointer("format"),
-			Placement:      ToPointer("waf_debug"),
 			Region:         ToPointer("us"),
 		})
 	})
@@ -67,9 +66,6 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if *le.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *le.FormatVersion)
-	}
-	if *le.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *le.Placement)
 	}
 	if *le.Region != "us" {
 		t.Errorf("bad region: %q", *le.Region)
@@ -119,9 +115,6 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if *le.FormatVersion != *nle.FormatVersion {
 		t.Errorf("bad format_version: %q", *le.FormatVersion)
-	}
-	if *le.Placement != *nle.Placement {
-		t.Errorf("bad placement: %q", *le.Placement)
 	}
 
 	// Update

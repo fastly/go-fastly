@@ -13,7 +13,6 @@ type GrafanaCloudLogs struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	MessageType       *string    `mapstructure:"message_type"`
-	Placement         *string    `mapstructure:"placement"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
 	ServiceVersion    *int       `mapstructure:"version"`
@@ -66,8 +65,6 @@ type CreateGrafanaCloudLogsInput struct {
 	Name *string `url:"name,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -155,8 +152,6 @@ type UpdateGrafanaCloudLogsInput struct {
 	NewName *string `url:"name,omitempty"`
 	// MessageType is how the message should be formatted (classic, loggly, logplex, blank).
 	MessageType *string `url:"message_type,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).

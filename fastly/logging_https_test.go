@@ -52,7 +52,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			HeaderValue:       ToPointer("ExampleValue"),
 			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
-			Placement:         ToPointer("waf_debug"),
 			TLSCACert:         ToPointer(caCert),
 			TLSClientCert:     ToPointer(clientCert),
 			TLSClientKey:      ToPointer(clientKey),
@@ -112,9 +111,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *h.JSONFormat != "2" {
 		t.Errorf("bad json_format: %q", *h.JSONFormat)
-	}
-	if *h.Placement != "waf_debug" {
-		t.Errorf("bad placement: %q", *h.Placement)
 	}
 	if *h.TLSCACert != caCert {
 		t.Errorf("bad tls_ca_cert: %q", *h.TLSCACert)
@@ -191,9 +187,6 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *h.JSONFormat != *nh.JSONFormat {
 		t.Errorf("bad json_format: %q", *h.JSONFormat)
-	}
-	if *h.Placement != *nh.Placement {
-		t.Errorf("bad placement: %q", *h.Placement)
 	}
 	if *h.TLSCACert != *nh.TLSCACert {
 		t.Errorf("bad tls_ca_cert: %q", *h.TLSCACert)

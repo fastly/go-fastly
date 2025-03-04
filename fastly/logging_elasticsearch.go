@@ -15,7 +15,6 @@ type Elasticsearch struct {
 	Name              *string    `mapstructure:"name"`
 	Password          *string    `mapstructure:"password"`
 	Pipeline          *string    `mapstructure:"pipeline"`
-	Placement         *string    `mapstructure:"placement"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequestMaxEntries *int       `mapstructure:"request_max_entries"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -75,8 +74,6 @@ type CreateElasticsearchInput struct {
 	Password *string `url:"password,omitempty"`
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
 	Pipeline *string `url:"pipeline,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request.
@@ -178,8 +175,6 @@ type UpdateElasticsearchInput struct {
 	Password *string `url:"password,omitempty"`
 	// Pipeline is the ID of the Elasticsearch ingest pipeline to apply pre-process transformations to before indexing.
 	Pipeline *string `url:"pipeline,omitempty"`
-	// Placement is where in the generated VCL the logging call should be placed.
-	Placement *string `url:"placement,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request.
