@@ -6,38 +6,93 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
     url: https://api.fastly.com/resources/stores/kv
     method: GET
   response:
-    body: '{"data":[{"id":"6nf0xnixc9ergkjzy88cjz","name":"bulk_import_testing","created_at":"2023-10-31
-      12:23:31","updated_at":"2023-10-31 12:23:31"},{"id":"zqitd9olpo6ejskl25wh8x","name":"KV
-      Store hg6ouxq32z","created_at":"2023-05-26 15:45:54","updated_at":"2023-05-26
-      15:45:54"},{"id":"tttas4647let0pgv8jx1mq","name":"KV Store kgjctbazl7","created_at":"2023-05-26
-      15:42:39","updated_at":"2023-05-26 15:42:39"},{"id":"yo6lr37o3t52no52yt2c8m","name":"KV
-      Store u1p1y0yonr","created_at":"2023-05-26 15:36:36","updated_at":"2023-05-26
-      15:36:36"},{"id":"i4wa7okjbd39ldzqavt032","name":"my_kv_store_tf_testing","created_at":"2023-08-18
-      14:42:25","updated_at":"2023-08-18 14:42:25"},{"id":"12gc9ydwyqfkzpnjeui3nh","name":"test_store","created_at":"2021-09-21
-      18:53:44","updated_at":"2021-09-21 18:53:44"}],"meta":{"limit":1000,"total":6}}'
+    body: '{"data":[{"id":"gqcvmq6gdtu0gi17gim5pi","name":"abetts-test","created_at":"2023-02-13
+      13:55:42","updated_at":"2023-02-13 13:55:42"},{"id":"9co46hs8ms9ohlksa9hxyg","name":"acls-M4HCwJxJPGCIBSlRd5ETh","created_at":"2024-07-10
+      14:05:38","updated_at":"2024-07-10 14:05:38"},{"id":"bqoo4k6f4hl5x8n2999ook","name":"alfonce-test","created_at":"2025-01-07
+      20:25:17","updated_at":"2025-01-07 20:25:17"},{"id":"lerwiobec4e92e83m0oc7e","name":"banks","created_at":"2023-04-26
+      14:56:02","updated_at":"2023-04-26 14:56:02"},{"id":"vb7qjxywm278mq5cittfk4","name":"byounglocationtest","created_at":"2023-03-20
+      15:47:02","updated_at":"2023-03-20 15:47:02"},{"id":"peh58i0ohyr4z0c21rxbr3","name":"byoungtest","created_at":"2023-01-31
+      21:23:40","updated_at":"2023-01-31 21:23:40"},{"id":"qumx81asbq5ofnp853wwyq","name":"byoungtest0858","created_at":"2023-02-07
+      14:58:28","updated_at":"2023-02-07 14:58:28"},{"id":"1vq9gthmiryr6okwhpj5g6","name":"byoungtest1010","created_at":"2023-02-03
+      16:09:51","updated_at":"2023-02-03 16:13:07"},{"id":"i0fj1n47fs3qgw6moql5wj","name":"byoungtest1538","created_at":"2023-02-02
+      21:38:41","updated_at":"2023-02-02 21:38:41"},{"id":"noliwpcg405xw6oz8jehxa","name":"byoungtest1539","created_at":"2023-02-27
+      21:39:08","updated_at":"2023-02-27 21:39:08"},{"id":"p8nykejxb890sv5mq3p7jm","name":"captcha_configs","created_at":"2023-03-10
+      12:54:53","updated_at":"2023-03-10 12:54:53"},{"id":"qincak5vrotloimulbhgxc","name":"config","created_at":"2024-11-25
+      09:33:28","updated_at":"2024-11-25 09:33:28"},{"id":"zmw2ibez3eod0mu9n36y54","name":"coverity-test-store","created_at":"2024-01-11
+      23:57:58","updated_at":"2024-01-11 23:57:58"},{"id":"hju5b0ful09fi3wljoi86y","name":"curro","created_at":"2023-02-15
+      16:46:18","updated_at":"2023-02-15 16:46:18"},{"id":"171p16j53aq71dw9vvoy72","name":"Dani
+      Test","created_at":"2023-04-24 16:19:06","updated_at":"2023-04-24 16:19:06"},{"id":"zkb2z27q6p8rrio2das45h","name":"dt_s3_config","created_at":"2023-04-27
+      16:11:07","updated_at":"2023-04-27 16:11:07"},{"id":"no6p2885jx2ap5gweaauhx","name":"eu-store","created_at":"2023-07-24
+      11:26:59","updated_at":"2023-07-24 11:26:59"},{"id":"m50wqtxzrks7uqmbp096pc","name":"fanout-store","created_at":"2023-04-13
+      22:45:23","updated_at":"2023-04-13 22:45:23"},{"id":"oguaqgfpypocja6hsdnc8v","name":"fgs_foo","created_at":"2023-02-06
+      15:56:28","updated_at":"2023-02-06 15:56:28"},{"id":"kd8oo641mztfusjqs7mxb7","name":"Gaylin
+      Test","created_at":"2023-04-10 20:11:56","updated_at":"2023-04-10 20:11:56"},{"id":"mtpvk4wo266qbva8s8wkip","name":"Inditex_Catalog","created_at":"2023-04-27
+      12:08:57","updated_at":"2023-04-27 12:08:57"},{"id":"bjd380yspb2r95bgay05ji","name":"INDITEX_STORE2","created_at":"2023-05-03
+      12:59:25","updated_at":"2023-05-03 12:59:25"},{"id":"0hgy5wigxbdjuuri8rjjgq","name":"jaksdflkasjklfaslkfsdf","created_at":"2023-05-04
+      20:32:23","updated_at":"2023-05-04 20:32:23"},{"id":"d08zbdo9i5g07vxy3o52q9","name":"joetest","created_at":"2024-06-24
+      18:53:20","updated_at":"2024-06-24 18:53:20"},{"id":"8v9j8ap8f2g1ikwpkbr8qi","name":"Kevin
+      Test","created_at":"2023-03-16 23:03:02","updated_at":"2023-03-16 23:04:03"},{"id":"dje3jzvst46eeubl97w9an","name":"kljaskdfjsalkfsadasfsdfsdf","created_at":"2023-05-04
+      20:32:43","updated_at":"2023-05-04 20:32:43"},{"id":"sv2wjpnfmi83q6ca00q7yv","name":"KsongObjStore","created_at":"2023-04-27
+      02:51:42","updated_at":"2023-04-27 02:51:42"},{"id":"mdq8wtf6kdl1bn2jgoeipf","name":"kv-store","created_at":"2023-05-15
+      22:36:19","updated_at":"2023-05-15 22:36:19"},{"id":"n7qmns07943ihf29aqwsb4","name":"kv-store1","created_at":"2023-05-15
+      22:40:03","updated_at":"2023-05-15 22:40:03"},{"id":"dzb85z45ka9ofm9qscnt4t","name":"Landing_resources","created_at":"2023-05-12
+      11:18:59","updated_at":"2023-05-12 11:18:59"},{"id":"fx8y7qrmm2va40dv6ywzsd","name":"location-test-store-eu","created_at":"2023-01-18
+      14:13:03","updated_at":"2023-01-18 14:13:03"},{"id":"7cp6lqmz6w3jcewqi296u3","name":"location-test-store-us","created_at":"2023-01-18
+      13:57:03","updated_at":"2023-01-18 13:57:03"},{"id":"3d3wnsn8tpwnwwqvhwoo97","name":"mhp-test-store","created_at":"2023-08-31
+      10:24:09","updated_at":"2023-08-31 10:24:09"},{"id":"crcx5murqrt5vzedm9en88","name":"my-store","created_at":"2022-10-11
+      07:27:02","updated_at":"2022-10-11 07:27:02"},{"id":"t2t2tb1ogbhqy0bc4mx6f1","name":"my-store-purge-test","created_at":"2023-02-27
+      19:12:25","updated_at":"2023-02-27 19:12:25"},{"id":"zzo0x6ikiyjxadf15pcrzu","name":"mynewstore","created_at":"2023-01-30
+      03:06:09","updated_at":"2023-01-30 03:06:09"},{"id":"r5j1ec7ym8ke4mbgnjybd2","name":"My_first_store","created_at":"2023-04-14
+      14:16:12","updated_at":"2023-04-14 14:16:12"},{"id":"ybioxw97tidol1ucpprz2z","name":"my_new_store","created_at":"2024-11-04
+      17:15:14","updated_at":"2024-11-04 17:15:14"},{"id":"ui2lhxs0xtgzoa5ioodr3d","name":"my_test_store","created_at":"2024-11-04
+      17:15:53","updated_at":"2024-11-04 17:15:53"},{"id":"uad6p5nj7d4qi8o0fbrgwv","name":"new_store","created_at":"2023-01-30
+      02:54:02","updated_at":"2023-01-30 02:54:02"},{"id":"9ighpd24huge29v03s6593","name":"novitum","created_at":"2023-02-08
+      01:41:18","updated_at":"2023-02-08 01:41:18"},{"id":"qdk8eyr789bpaon5016ow3","name":"object
+      store 3","created_at":"2022-08-12 20:27:11","updated_at":"2022-08-12 20:27:11"},{"id":"9spa2wrnw8xbq3b6uyjwr5","name":"passkey-store","created_at":"2023-11-04
+      03:04:26","updated_at":"2023-11-04 03:04:26"},{"id":"dveim48vz6utd0wlydfo4f","name":"polyfill-library","created_at":"2024-02-22
+      23:13:17","updated_at":"2024-02-22 23:13:17"},{"id":"wh9x7flp6ukjtbidj7go2v","name":"ramy-sko-2024","created_at":"2024-01-23
+      22:41:03","updated_at":"2024-01-23 22:41:03"},{"id":"kq0eutyrxroaq3h045ki5e","name":"ramy_test","created_at":"2023-03-27
+      20:20:58","updated_at":"2023-03-27 20:20:58"},{"id":"ipwmvj4o253hzz3h1cztv2","name":"s3-object-store","created_at":"2023-01-14
+      14:47:56","updated_at":"2023-01-14 14:47:56"},{"id":"zp4imzjdfhetakejtoafbv","name":"s3-store","created_at":"2023-01-14
+      14:20:51","updated_at":"2023-01-14 14:20:51"},{"id":"S5XR6AthVNJ2ZGtxA4Q9xl","name":"S5XR6AthVNJ2ZGtxA4Q9xl","created_at":"2024-09-03
+      19:30:43","updated_at":"2024-09-03 19:30:43"},{"id":"t3br7a8a4eqva77quy738a","name":"test-1713984068-12125397237994691419-~`!@#$%^&*()=+[]{};:''\"<>,./?","created_at":"2024-04-24
+      18:41:18","updated_at":"2024-04-24 18:41:19"},{"id":"nc30uxf4l4jpbzz48rpn0y","name":"test-1726593903-2378133951225153441","created_at":"2024-09-17
+      17:25:06","updated_at":"2024-09-17 17:25:06"},{"id":"uns6v689gfnr20tj4mjufn","name":"test-store","created_at":"2022-08-24
+      21:18:46","updated_at":"2022-08-24 21:18:46"},{"id":"7a8ih41x4oky45by49eds4","name":"test-store1","created_at":"2022-08-24
+      21:19:54","updated_at":"2022-08-24 21:19:54"},{"id":"rcip728ghfwki42uw4jam8","name":"TestStoreA","created_at":"2023-04-13
+      14:20:17","updated_at":"2023-04-13 14:20:17"},{"id":"y35p4zv8wqdq868yqbw5de","name":"test_store","created_at":"2021-10-13
+      17:31:52","updated_at":"2021-10-13 17:31:52"},{"id":"97dazpstaalbijudhr7grt","name":"tickers","created_at":"2023-04-24
+      13:53:22","updated_at":"2023-04-24 13:53:22"},{"id":"51yhq2cstxddgw7mc9uzub","name":"tipranks","created_at":"2023-04-24
+      14:49:45","updated_at":"2023-04-24 14:49:45"}],"meta":{"limit":1000,"total":57}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Oct 2023 13:11:16 GMT
+      - Tue, 04 Mar 2025 15:41:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-lhr7393-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890033-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1698757875.403947,VS0,VE1160
+      - S1741102876.649377,VS0,VE105
     status: 200 OK
     code: 200
     duration: ""

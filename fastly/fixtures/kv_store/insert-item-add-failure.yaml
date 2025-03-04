@@ -7,17 +7,17 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys?consistency=strong
-    method: GET
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/apple?add=true
+    method: PUT
   response:
-    body: '{"data":["apple","banana","batch-1","batch-2","carrot","dragonfruit","eggplant"],"meta":{"limit":1000}}'
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Type:
-      - application/json
+      Content-Length:
+      - "0"
       Date:
       - Tue, 04 Mar 2025 15:41:23 GMT
       Pragma:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890053-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890089-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1741102883.172990,VS0,VE139
-    status: 200 OK
-    code: 200
+      - S1741102884.769459,VS0,VE205
+    status: 412 Precondition Failed
+    code: 412
     duration: ""

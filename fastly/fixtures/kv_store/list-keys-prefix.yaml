@@ -7,10 +7,10 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys?consistency=strong
+    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys?consistency=strong&prefix=ba
     method: GET
   response:
-    body: '{"data":["apple","banana","batch-1","batch-2","carrot","dragonfruit","eggplant"],"meta":{"limit":1000}}'
+    body: '{"data":["banana","batch-1","batch-2"],"meta":{"limit":1000,"prefix":"ba"}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890053-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890077-NYC, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1741102883.172990,VS0,VE139
+      - S1741102884.612430,VS0,VE138
     status: 200 OK
     code: 200
     duration: ""
