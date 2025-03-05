@@ -2,7 +2,7 @@
 
 ## ## [v9.13.2](https://github.com/fastly/go-fastly/releases/tag/v9.13.2) (2025-03-05)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.2...v9.13.1)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.1...v9.13.2)
 
 ### Enhancements:
 
