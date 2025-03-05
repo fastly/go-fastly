@@ -1,8 +1,9 @@
 # Changelog
 
 ## [UNRELEASED]
+## ## [v9.14.0](https://github.com/fastly/go-fastly/releases/tag/v9.14.0) (2025-03-05)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.13.1...v9.14.0)
 
 ### Enhancements:
 
