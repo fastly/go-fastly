@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/apple
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple
     method: GET
   response:
     body: apple0
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/octet-stream
       Date:
-      - Tue, 04 Mar 2025 15:41:23 GMT
+      - Wed, 05 Mar 2025 16:46:14 GMT
       Generation:
-      - "1741102880207881"
+      - "1741193172795230"
       Last-Modified:
-      - Tue, 04 Mar 2025 15:41:20 GMT
+      - Wed, 05 Mar 2025 16:46:12 GMT
       Metadata:
       - ""
       Pragma:
@@ -33,8 +33,8 @@ interactions:
       Server:
       - fastly
       Server-Timing-Get-Key:
-      - transaction_lookup_ok;dur=1302, lookup_handle_status_status_USABLE;dur=20,
-        handle_usable;dur=2, lookup_handle_get_body;dur=123, user_metadata_json;dur=78,
+      - transaction_lookup_ok;dur=985, lookup_handle_status_status_USABLE;dur=15,
+        handle_usable;dur=3, lookup_handle_get_body;dur=117, user_metadata_json;dur=22,
         total;dur=1
       Stored-Content-Length:
       - "6"
@@ -47,9 +47,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890089-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741102884.755953,VS0,VE9
+      - S1741193174.346822,VS0,VE5
     status: 200 OK
     code: 200
     duration: ""

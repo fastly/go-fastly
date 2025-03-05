@@ -406,11 +406,25 @@ type GetKVStoreItemInput struct {
 // GetKVStoreItemOutput is the output of the GetKVStoreItem function.
 type GetKVStoreItemOutput struct {
 	// Value is the value stored in the item.
-	Value string
+	Value io.ReadCloser
 	// Metadata is the metadata stored in the item, if any.
 	Metadata string
 	// Generation is the generation marker of the item.
 	Generation uint64
+}
+
+func (o *GetKVStoreItemOutput) ValueAsBytes() ([]byte, error) {
+	defer o.Value.Close()
+
+	return io.ReadAll(o.Value)
+}
+
+func (o *GetKVStoreItemOutput) ValueAsString() (string, error) {
+	if result, err := o.ValueAsBytes(); err != nil {
+		return "", err
+	} else {
+		return string(result), nil
+	}
 }
 
 // GetKVStoreItem retrieves the specified item.
@@ -428,19 +442,14 @@ func (c *Client) GetKVStoreItem(i *GetKVStoreItemInput) (GetKVStoreItemOutput, e
 	if err != nil {
 		return GetKVStoreItemOutput{}, err
 	}
-	defer resp.Body.Close()
 
-	value, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return GetKVStoreItemOutput{}, err
-	}
-
-	output := GetKVStoreItemOutput{Value: string(value)}
+	output := GetKVStoreItemOutput{Value: resp.Body}
 
 	output.Metadata = resp.Header.Get("metadata")
 
 	output.Generation, err = strconv.ParseUint(resp.Header.Get("generation"), 10, 64)
 	if err != nil {
+		resp.Body.Close()
 		return GetKVStoreItemOutput{}, err
 	}
 

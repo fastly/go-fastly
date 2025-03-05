@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys?consistency=strong&limit=4
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys?consistency=strong&limit=4
     method: GET
   response:
     body: '{"data":["apple","banana","batch-1","batch-2"],"meta":{"limit":4,"next_cursor":"CgdiYXRjaC0y"}}'
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 04 Mar 2025 15:41:23 GMT
+      - Wed, 05 Mar 2025 16:46:14 GMT
       Pragma:
       - no-cache
       Server:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890047-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890094-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741102883.319263,VS0,VE138
+      - S1741193174.085427,VS0,VE83
     status: 200 OK
     code: 200
     duration: ""
@@ -45,7 +45,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys?consistency=strong&cursor=CgdiYXRjaC0y&limit=4
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys?consistency=strong&cursor=CgdiYXRjaC0y&limit=4
     method: GET
   response:
     body: '{"data":["carrot","dragonfruit","eggplant"],"meta":{"limit":4}}'
@@ -57,7 +57,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 04 Mar 2025 15:41:23 GMT
+      - Wed, 05 Mar 2025 16:46:14 GMT
       Pragma:
       - no-cache
       Server:
@@ -71,9 +71,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890091-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890068-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741102883.462759,VS0,VE142
+      - S1741193174.174503,VS0,VE81
     status: 200 OK
     code: 200
     duration: ""

@@ -6,10 +6,10 @@ interactions:
     form: {}
     headers:
       If-Generation-Match:
-      - "1741102884640991"
+      - "1741193174560495"
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/apple
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple
     method: PUT
   response:
     body: ""
@@ -21,7 +21,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Tue, 04 Mar 2025 15:41:25 GMT
+      - Wed, 05 Mar 2025 16:46:14 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890089-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741102885.887636,VS0,VE161
+      - S1741193175.708982,VS0,VE109
     status: 412 Precondition Failed
     code: 412
     duration: ""

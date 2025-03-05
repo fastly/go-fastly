@@ -2,50 +2,42 @@ package fastly
 
 import (
 	"fmt"
-	"reflect"
 	"sort"
 	"strconv"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 )
 
 func TestClient_KVStore(t *testing.T) {
+	assert := assert.New(t)
+	require := require.New(t)
+
 	t.Parallel()
+
+	var err error
 
 	const createStoreName = "kv-store-test-store"
 
 	// List
 	var kvStoreListResp1 *ListKVStoresResponse
-	var err error
 	Record(t, "kv_store/list-store", func(c *Client) {
 		kvStoreListResp1, err = c.ListKVStores(nil)
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// make sure our test store we're going to create isn't among them
-	for _, store := range kvStoreListResp1.Data {
-		if store.Name == createStoreName {
-			t.Errorf("Found test store %q, aborting", createStoreName)
-		}
-	}
+	require.NoError(err)
+	require.NotContains(kvStoreListResp1.Data, createStoreName)
 
 	// Create
 	var kvStore *KVStore
-	input := &CreateKVStoreInput{
-		Name: createStoreName,
-	}
 	Record(t, "kv_store/create-store", func(c *Client) {
-		kvStore, err = c.CreateKVStore(input)
+		kvStore, err = c.CreateKVStore(&CreateKVStoreInput{
+			Name: createStoreName,
+		})
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if kvStore.Name != createStoreName {
-		t.Errorf("CreateKVStores: unexpected store name: got %q, want %q", kvStore.Name, createStoreName)
-	}
+	require.NoError(err)
+	require.Equal(createStoreName, kvStore.Name, "unexpected store name")
 
 	// ensure we delete it
 	defer func() {
@@ -60,19 +52,13 @@ func TestClient_KVStore(t *testing.T) {
 				sort.Strings(keys)
 				for _, key := range keys {
 					err = c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key})
-					if err != nil {
-						t.Errorf("error during key cleanup: %v", err)
-					}
+					require.NoError(err, "key cleanup")
 				}
 			}
-			if err := p.Err(); err != nil {
-				t.Errorf("error during cleanup pagination: %v", err)
-			}
+			require.NoError(p.Err(), "cleanup pagination")
 
 			err = c.DeleteKVStore(&DeleteKVStoreInput{StoreID: kvStore.StoreID})
-			if err != nil {
-				t.Errorf("error during store cleanup: %v", err)
-			}
+			require.NoError(err, "store cleanup")
 		})
 	}()
 
@@ -81,13 +67,9 @@ func TestClient_KVStore(t *testing.T) {
 	Record(t, "kv_store/get-store", func(c *Client) {
 		getKVStoreResponse, err = c.GetKVStore(&GetKVStoreInput{StoreID: kvStore.StoreID})
 	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	if getKVStoreResponse.Name != kvStore.Name || getKVStoreResponse.StoreID != kvStore.StoreID {
-		t.Errorf("error fetching info for store %q: got %q, want %q", createStoreName, getKVStoreResponse, kvStore)
-	}
+	require.NoError(err)
+	require.Equal(kvStore.Name, getKVStoreResponse.Name, "error fetching info for store")
+	require.Equal(kvStore.StoreID, getKVStoreResponse.StoreID, "error fetching info for store")
 
 	// create a bunch of keys in our kv store
 	keys := []string{"apple", "banana", "carrot", "dragonfruit", "eggplant"}
@@ -95,22 +77,16 @@ func TestClient_KVStore(t *testing.T) {
 	Record(t, "kv_store/create-keys", func(c *Client) {
 		for i, key := range keys {
 			err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key, Value: key + strconv.Itoa(i)})
-			if err != nil {
-				t.Fatalf("error inserting key %q: %v", key, err)
-			}
+			require.NoErrorf(err, "inserting key %q", key)
 		}
 	})
 
 	Record(t, "kv_store/check-keys", func(c *Client) {
 		for i, key := range keys {
 			got, err := c.GetKVStoreKey(&GetKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key})
-			if err != nil {
-				t.Errorf("error fetching key %q: %v", key, err)
-			}
+			assert.NoErrorf(err, "fetching key %q", key)
 			want := key + strconv.Itoa(i)
-			if got != want {
-				t.Errorf("mismatch fetching key %q: got %q, want %q", key, got, want)
-			}
+			assert.Equalf(want, got, "incorrect value key %q", key)
 		}
 	})
 
@@ -121,14 +97,11 @@ func TestClient_KVStore(t *testing.T) {
 			StoreID: kvStore.StoreID,
 			Body:    strings.NewReader(keys),
 		})
-		if err != nil {
-			t.Fatalf("error inserting keys %q: %v", keys, err)
-		}
+		require.NoError(err, "batch inserting keys")
 	})
 
 	allKeys := []string{"batch-1", "batch-2"}
 	allKeys = append(allKeys, keys...)
-	sort.Strings(allKeys)
 
 	// fetch all keys and validate they match our input data
 	var kvStoreListKeys *ListKVStoreKeysResponse
@@ -139,14 +112,8 @@ func TestClient_KVStore(t *testing.T) {
 		})
 	})
 
-	if err != nil {
-		t.Fatalf("error listing keys: %v", err)
-	}
-
-	sort.Strings(kvStoreListKeys.Data)
-	if !reflect.DeepEqual(allKeys, kvStoreListKeys.Data) {
-		t.Errorf("mismatch listing keys: got %q, want %q", kvStoreListKeys.Data, allKeys)
-	}
+	require.NoError(err, "listing keys")
+	assert.ElementsMatch(allKeys, kvStoreListKeys.Data, "mismatch listing keys")
 
 	Record(t, "kv_store/list-keys-pagination", func(c *Client) {
 		p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{
@@ -158,19 +125,12 @@ func TestClient_KVStore(t *testing.T) {
 		var page int
 		for p.Next() {
 			keys := p.Keys()
-			if len(keys) != expected[page] {
-				t.Errorf("wrong number of keys for page %d: got %d, want %d", page, len(keys), expected[page])
-			}
+			assert.Equalf(expected[page], len(keys), "wrong number of keys for page %d", page)
 			page++
 			listed = append(listed, keys...)
 		}
-		if err := p.Err(); err != nil {
-			t.Errorf("error during keys pagination: %v", err)
-		}
-		sort.Strings(listed)
-		if !reflect.DeepEqual(allKeys, listed) {
-			t.Errorf("mismatch listing paginated keys: got %q, want %q", kvStoreListKeys.Data, allKeys)
-		}
+		assert.NoError(p.Err(), "keys pagination")
+		assert.ElementsMatch(allKeys, listed, "mismatch listing paginated keys")
 	})
 
 	Record(t, "kv_store/list-keys-prefix", func(c *Client) {
@@ -183,19 +143,12 @@ func TestClient_KVStore(t *testing.T) {
 		var page int
 		for p.Next() {
 			keys := p.Keys()
-			if len(keys) != len(expectedKeys) {
-				t.Errorf("wrong number of keys for page %d: got %d, want %d", page, len(keys), len(expectedKeys))
-			}
+			assert.Equalf(len(expectedKeys), len(keys), "wrong number of keys for page %d", page)
 			page++
 			listed = append(listed, keys...)
 		}
-		if err := p.Err(); err != nil {
-			t.Errorf("error during keys pagination: %v", err)
-		}
-		sort.Strings(listed)
-		if !reflect.DeepEqual(expectedKeys, listed) {
-			t.Errorf("mismatch listing prefixed keys: got %q, want %q", listed, expectedKeys)
-		}
+		assert.NoError(p.Err(), "keys pagination")
+		assert.ElementsMatch(expectedKeys, listed, "mismatch listing prefixed keys")
 	})
 
 	testKey := "apple"
@@ -205,91 +158,111 @@ func TestClient_KVStore(t *testing.T) {
 	var item GetKVStoreItemOutput
 
 	Record(t, "kv_store/get-item-round-1", func(c *Client) {
-		item, err = c.GetKVStoreItem(&GetKVStoreItemInput{StoreID: kvStore.StoreID, Key: testKey})
-		if err != nil {
-			t.Fatalf("error fetching key %q: %v", testKey, err)
-		}
+		item, err = c.GetKVStoreItem(&GetKVStoreItemInput{
+			StoreID: kvStore.StoreID,
+			Key:     testKey,
+		})
+		require.NoErrorf(err, "fetching key %q", testKey)
 	})
 
 	Record(t, "kv_store/insert-item-add-failure", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{StoreID: kvStore.StoreID, Key: testKey, Add: true})
-		if err == nil {
-			t.Errorf("adding existing key %q should have failed", testKey)
-		}
+		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+			StoreID: kvStore.StoreID,
+			Key:     testKey,
+			Add:     true,
+		})
+		assert.Errorf(err, "adding existing key %q should have failed", testKey)
 	})
 
 	Record(t, "kv_store/insert-item-prepend-set-metadata", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{StoreID: kvStore.StoreID, Key: testKey, Prepend: true, Value: "prefix", Metadata: ToPointer("meta")})
-		if err != nil {
-			t.Fatalf("error updating key %q: %v", testKey, err)
-		}
+		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+			StoreID:  kvStore.StoreID,
+			Key:      testKey,
+			Prepend:  true,
+			Value:    "prefix",
+			Metadata: ToPointer("meta"),
+		})
+		require.NoErrorf(err, "updating key %q", testKey)
 
 		expectedValue = "prefix" + expectedValue
 		expectedMetadata = "meta"
 	})
 
 	Record(t, "kv_store/get-item-round-2", func(c *Client) {
-		updatedItem, err := c.GetKVStoreItem(&GetKVStoreItemInput{StoreID: kvStore.StoreID, Key: testKey})
-		if err != nil {
-			t.Fatalf("error fetching key %q: %v", testKey, err)
-		}
+		updatedItem, err := c.GetKVStoreItem(&GetKVStoreItemInput{
+			StoreID: kvStore.StoreID,
+			Key:     testKey,
+		})
+		require.NoErrorf(err, "fetching key %q", testKey)
 
-		if updatedItem.Value != expectedValue {
-			t.Errorf("mismatched item value, expected %q but got %q", expectedValue, updatedItem.Value)
-		}
+		updatedValue, err := updatedItem.ValueAsString()
+		require.NoError(err, "reading updated value")
 
-		if updatedItem.Metadata != expectedMetadata {
-			t.Errorf("mismatched item metadata, expected %q but got %q", expectedMetadata, updatedItem.Metadata)
-		}
-
-		if updatedItem.Generation == item.Generation {
-			t.Errorf("generation marker did not change")
-		}
+		assert.Equal(expectedValue, updatedValue, "mismatch of updated value")
+		assert.Equal(expectedMetadata, updatedItem.Metadata, "mismatch of updated metadata")
+		assert.NotEqual(item.Generation, updatedItem.Generation, "generation marker change")
 
 		item = updatedItem
 	})
 
 	Record(t, "kv_store/insert-item-generation-match-failure", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{StoreID: kvStore.StoreID, Key: testKey, IfGenerationMatch: item.Generation + 1})
-		if err == nil {
-			t.Errorf("update with if-generation-match should have failed, generation %q", item.Generation+1)
-		}
+		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+			StoreID:           kvStore.StoreID,
+			Key:               testKey,
+			IfGenerationMatch: item.Generation + 1,
+		})
+		testName := "insert-item-generation-match-failure"
+		var herr *HTTPError
+		require.ErrorAs(err, &herr, testName)
+		require.Truef(herr.IsPreconditionFailed(), testName+" expected HTTP 'Precondition Failed'")
 	})
 
 	Record(t, "kv_store/insert-item-append", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{StoreID: kvStore.StoreID, Key: testKey, Append: true, Value: "suffix"})
-		if err != nil {
-			t.Fatalf("error updating key %q: %v", testKey, err)
-		}
+		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+			StoreID: kvStore.StoreID,
+			Key:     testKey,
+			Append:  true,
+			Value:   "suffix",
+		})
+		require.NoErrorf(err, "updating key %q", testKey)
 
 		expectedValue = expectedValue + "suffix"
 	})
 
 	Record(t, "kv_store/get-item-round-3", func(c *Client) {
-		updatedItem, err := c.GetKVStoreItem(&GetKVStoreItemInput{StoreID: kvStore.StoreID, Key: testKey})
-		if err != nil {
-			t.Fatalf("error fetching key %q: %v", testKey, err)
-		}
+		updatedItem, err := c.GetKVStoreItem(&GetKVStoreItemInput{
+			StoreID: kvStore.StoreID,
+			Key:     testKey,
+		})
+		require.NoErrorf(err, "fetching key %q", testKey)
 
-		if updatedItem.Value != expectedValue {
-			t.Errorf("mismatched item value, expected %q but got %q", expectedValue, updatedItem.Value)
-		}
+		updatedValue, err := updatedItem.ValueAsString()
+		require.NoError(err, "reading updated value")
+
+		assert.Equal(expectedValue, updatedValue, "mismatch of updated value")
 
 		item = updatedItem
 	})
 
 	Record(t, "kv_store/delete-item-nonexistent-suppress-error", func(c *Client) {
-		err := c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{StoreID: kvStore.StoreID, Key: testKey + "23", Force: true})
-		if err != nil {
-			t.Errorf("error for deleting non-existent key should have been suppressed: %v", err)
-		}
+		err := c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{
+			StoreID: kvStore.StoreID,
+			Key:     testKey + "23",
+			Force:   true,
+		})
+		assert.NoError(err, "error for deleting non-existent key should have been suppressed")
 	})
 
 	Record(t, "kv_store/delete-item-generation-match-failure", func(c *Client) {
-		err := c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{StoreID: kvStore.StoreID, Key: testKey, IfGenerationMatch: item.Generation + 1})
-		if err == nil {
-			t.Errorf("delete with if-generation-match should have failed, generation %q", item.Generation+1)
-		}
+		err := c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{
+			StoreID:           kvStore.StoreID,
+			Key:               testKey,
+			IfGenerationMatch: item.Generation + 1,
+		})
+		testName := "delete-item-generation-match-failure"
+		var herr *HTTPError
+		require.ErrorAs(err, &herr, testName)
+		require.Truef(herr.IsPreconditionFailed(), testName+" expected HTTP 'Precondition Failed'")
 	})
 }
 

@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb/keys/apple?append=true
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple?append=true
     method: PUT
   response:
     body: ""
@@ -19,7 +19,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Tue, 04 Mar 2025 15:41:25 GMT
+      - Wed, 05 Mar 2025 16:46:14 GMT
       Pragma:
       - no-cache
       Server:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890089-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741102885.054429,VS0,VE711
+      - S1741193175.825478,VS0,VE137
     status: 200 OK
     code: 200
     duration: ""

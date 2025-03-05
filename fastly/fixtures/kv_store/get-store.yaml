@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/96kudketjdkdp0k5ya8nvb
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh
     method: GET
   response:
-    body: '{"id":"96kudketjdkdp0k5ya8nvb","name":"kv-store-test-store","created_at":"2025-03-04
-      15:41:18","updated_at":"2025-03-04 15:41:18"}'
+    body: '{"id":"g8wfs2hiqenfzg1l9ibtdh","name":"kv-store-test-store","created_at":"2025-03-05
+      16:46:11","updated_at":"2025-03-05 16:46:11"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 04 Mar 2025 15:41:19 GMT
+      - Wed, 05 Mar 2025 16:46:12 GMT
       Pragma:
       - no-cache
       Server:
@@ -34,9 +34,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890072-NYC, cache-nyc-kteb1890089-NYC
+      - cache-nyc-kteb1890043-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741102879.424925,VS0,VE135
+      - S1741193173.604956,VS0,VE112
     status: 200 OK
     code: 200
     duration: ""
