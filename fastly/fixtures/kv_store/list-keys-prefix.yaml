@@ -2,30 +2,24 @@
 version: 1
 interactions:
 - request:
-    body: |-
-      {"key":"batch-1","value":"VkFMVUU="}
-          {"key":"batch-2","value":"VkFMVUU="}
+    body: ""
     form: {}
     headers:
-      Content-Type:
-      - application/x-ndjson
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/batch
-    method: PUT
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys?consistency=strong&prefix=ba
+    method: GET
   response:
-    body: '{"type":"","title":"success","errors":[]}'
+    body: '{"data":["banana","batch-1","batch-2"],"meta":{"limit":1000,"prefix":"ba"}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "41"
       Content-Type:
       - application/json
       Date:
-      - Wed, 05 Mar 2025 16:46:13 GMT
+      - Wed, 05 Mar 2025 16:46:14 GMT
       Pragma:
       - no-cache
       Server:
@@ -39,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-nyc-kteb1890062-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741193174.868660,VS0,VE118
+      - S1741193174.263396,VS0,VE79
     status: 200 OK
     code: 200
     duration: ""

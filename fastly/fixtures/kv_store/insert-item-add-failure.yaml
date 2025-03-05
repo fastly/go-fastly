@@ -2,30 +2,24 @@
 version: 1
 interactions:
 - request:
-    body: |-
-      {"key":"batch-1","value":"VkFMVUU="}
-          {"key":"batch-2","value":"VkFMVUU="}
+    body: ""
     form: {}
     headers:
-      Content-Type:
-      - application/x-ndjson
       User-Agent:
       - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/batch
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple?add=true
     method: PUT
   response:
-    body: '{"type":"","title":"success","errors":[]}'
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "41"
-      Content-Type:
-      - application/json
+      - "0"
       Date:
-      - Wed, 05 Mar 2025 16:46:13 GMT
+      - Wed, 05 Mar 2025 16:46:14 GMT
       Pragma:
       - no-cache
       Server:
@@ -41,7 +35,7 @@ interactions:
       X-Served-By:
       - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1741193174.868660,VS0,VE118
-    status: 200 OK
-    code: 200
+      - S1741193174.358081,VS0,VE102
+    status: 412 Precondition Failed
+    code: 412
     duration: ""

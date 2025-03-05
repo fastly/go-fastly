@@ -1,0 +1,56 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple
+    method: GET
+  response:
+    body: prefixapple0suffix
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "18"
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Generation:
+      - "1741193174927101"
+      Last-Modified:
+      - Wed, 05 Mar 2025 16:46:14 GMT
+      Metadata:
+      - ""
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Server-Timing-Get-Key:
+      - transaction_lookup_ok;dur=1206, lookup_handle_status_status_fetch;dur=14,
+        backend_request;dur=100072, res_ok;dur=3, finish_write;dur=3157, cache_handle_status_USABLE;dur=2483,
+        handle_usable;dur=3, lookup_handle_get_body;dur=164, user_metadata_json;dur=47,
+        total;dur=107
+      Stored-Content-Length:
+      - "18"
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      X-Timer:
+      - S1741193175.970225,VS0,VE112
+    status: 200 OK
+    code: 200
+    duration: ""

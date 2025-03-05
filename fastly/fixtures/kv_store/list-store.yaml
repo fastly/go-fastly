@@ -6,38 +6,37 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
     url: https://api.fastly.com/resources/stores/kv
     method: GET
   response:
-    body: '{"data":[{"id":"6nf0xnixc9ergkjzy88cjz","name":"bulk_import_testing","created_at":"2023-10-31
-      12:23:31","updated_at":"2023-10-31 12:23:31"},{"id":"zqitd9olpo6ejskl25wh8x","name":"KV
-      Store hg6ouxq32z","created_at":"2023-05-26 15:45:54","updated_at":"2023-05-26
-      15:45:54"},{"id":"tttas4647let0pgv8jx1mq","name":"KV Store kgjctbazl7","created_at":"2023-05-26
-      15:42:39","updated_at":"2023-05-26 15:42:39"},{"id":"yo6lr37o3t52no52yt2c8m","name":"KV
-      Store u1p1y0yonr","created_at":"2023-05-26 15:36:36","updated_at":"2023-05-26
-      15:36:36"},{"id":"i4wa7okjbd39ldzqavt032","name":"my_kv_store_tf_testing","created_at":"2023-08-18
-      14:42:25","updated_at":"2023-08-18 14:42:25"},{"id":"12gc9ydwyqfkzpnjeui3nh","name":"test_store","created_at":"2021-09-21
-      18:53:44","updated_at":"2021-09-21 18:53:44"}],"meta":{"limit":1000,"total":6}}'
+    body: '{"data":[{"id":"c4x6pkaqxw2usd5suu0tcx","name":"my-store","created_at":"2025-01-07
+      16:12:37","updated_at":"2025-01-07 16:12:37"}],"meta":{"limit":1000,"total":1}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Oct 2023 13:11:16 GMT
+      - Wed, 05 Mar 2025 16:46:10 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-lhr7393-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890036-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757875.403947,VS0,VE1160
+      - S1741193171.623970,VS0,VE145
     status: 200 OK
     code: 200
     duration: ""

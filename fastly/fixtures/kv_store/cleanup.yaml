@@ -6,20 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys?consistency=eventual
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys?consistency=eventual
     method: GET
   response:
-    body: '{"data":["apple","banana","batch-1","batch-2","carrot","dragonfruit","eggplant"],"meta":{"limit":1000}}'
+    body: '{"data":["apple","banana","batch-1","batch-2","carrot","dragonfruit","eggplant"],"meta":{"limit":1000,"consistency":"eventual"}}'
     headers:
       Accept-Ranges:
       - bytes
       Age:
       - "1"
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Oct 2023 13:11:22 GMT
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7329-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890041-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757883.528611,VS0,VE181
+      - S1741193175.248634,VS0,VE85
     status: 200 OK
     code: 200
     duration: ""
@@ -40,16 +46,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/apple
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:22 GMT
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -59,9 +71,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757883.746879,VS0,VE193
+      - S1741193175.337560,VS0,VE105
     status: 204 No Content
     code: 204
     duration: ""
@@ -70,16 +82,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/banana
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/banana
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:23 GMT
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -89,9 +107,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757883.970840,VS0,VE539
+      - S1741193175.448825,VS0,VE98
     status: 204 No Content
     code: 204
     duration: ""
@@ -100,16 +118,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/batch-1
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/batch-1
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:23 GMT
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -119,9 +143,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757884.535333,VS0,VE186
+      - S1741193176.554620,VS0,VE90
     status: 204 No Content
     code: 204
     duration: ""
@@ -130,16 +154,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/batch-2
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/batch-2
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:23 GMT
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -149,9 +179,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757884.746435,VS0,VE206
+      - S1741193176.653484,VS0,VE97
     status: 204 No Content
     code: 204
     duration: ""
@@ -160,16 +190,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/carrot
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/carrot
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:24 GMT
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -179,9 +215,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757884.972758,VS0,VE189
+      - S1741193176.753701,VS0,VE98
     status: 204 No Content
     code: 204
     duration: ""
@@ -190,16 +226,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/dragonfruit
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/dragonfruit
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:24 GMT
+      - Wed, 05 Mar 2025 16:46:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -209,9 +251,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757884.183506,VS0,VE191
+      - S1741193176.859193,VS0,VE104
     status: 204 No Content
     code: 204
     duration: ""
@@ -220,16 +262,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys/eggplant
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/eggplant
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:24 GMT
+      - Wed, 05 Mar 2025 16:46:16 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -239,9 +287,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757884.390752,VS0,VE190
+      - S1741193176.970717,VS0,VE90
     status: 204 No Content
     code: 204
     duration: ""
@@ -250,16 +298,22 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh
     method: DELETE
   response:
     body: ""
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Date:
-      - Tue, 31 Oct 2023 13:11:25 GMT
+      - Wed, 05 Mar 2025 16:46:16 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -269,9 +323,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-lhr7355-LHR, cache-lhr7355-LHR
+      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
       X-Timer:
-      - S1698757885.604491,VS0,VE633
+      - S1741193176.065076,VS0,VE195
     status: 204 No Content
     code: 204
     duration: ""

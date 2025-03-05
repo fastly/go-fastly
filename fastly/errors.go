@@ -567,3 +567,8 @@ func (e *HTTPError) IsBadRequest() bool {
 func (e *HTTPError) IsNotFound() bool {
 	return e.StatusCode == http.StatusNotFound
 }
+
+// IsPreconditionFailed returns true if the HTTP status code is 412, false otherwise.
+func (e *HTTPError) IsPreconditionFailed() bool {
+	return e.StatusCode == http.StatusPreconditionFailed
+}
