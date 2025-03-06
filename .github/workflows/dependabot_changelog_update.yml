@@ -1,4 +1,5 @@
-name: 'dependabot-pull-request'
+name: Generate changelog entry for Dependabot
+
 on:
   pull_request:
     types:
@@ -6,19 +7,29 @@ on:
       - synchronize
       - reopened
 jobs:
-    dependabot-changelog-update:
-        if: github.actor == 'dependabot[bot]'
-        runs-on: ubuntu-latest
-        permissions:
-          contents: write
-        steps:
-          - name: Checkout code
-            uses: actions/checkout@v4
-          - uses: dangoslen/dependabot-changelog-helper@v4
-            with:
-              activationLabels: dependencies
-              changelogPath: './CHANGELOG.md'
-              entryPrefix: 'build(deps): '
-          - uses: stefanzweifel/git-auto-commit-action@v5
-            with:
-              commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
+  dependabot-changelog-update:
+    if: github.actor == 'dependabot[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Generate a GitHub token
+        id: github-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ vars.GH_APP_ID }}
+          private-key: ${{ secrets.GH_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+          repositories: "cli"
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          token: ${{ steps.github-token.outputs.token }}
+      - name: Generate changelog entry
+        uses: dangoslen/dependabot-changelog-helper@v4
+        with:
+          activationLabels: dependencies
+          changelogPath: './CHANGELOG.md'
+          entryPrefix: 'build(deps): '
+      - name: Commit changelog entry
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
