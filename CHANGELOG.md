@@ -9,6 +9,7 @@
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `golang.org/x/sys` from 0.30.0 to 0.31.0 ([#638](https://github.com/fastly/go-fastly/pull/638))
 
 ## [v9.14.0](https://github.com/fastly/go-fastly/releases/tag/v9.14.0) (2025-03-05)
 
