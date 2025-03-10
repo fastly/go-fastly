@@ -405,7 +405,9 @@ type GetKVStoreItemInput struct {
 
 // GetKVStoreItemOutput is the output of the GetKVStoreItem function.
 type GetKVStoreItemOutput struct {
-	// Value is the value stored in the item.
+	// Value is the value stored in the item. The caller of
+	// 'GetKVStoreItem' must ensure that 'Value.Close()' is
+	// executed if this field is non-nil.
 	Value io.ReadCloser
 	// Metadata is the metadata stored in the item, if any.
 	Metadata string
@@ -413,12 +415,20 @@ type GetKVStoreItemOutput struct {
 	Generation uint64
 }
 
+// ValueAsBytes obtains the value of a KV Store Item, as a slice of
+// bytes, by reading the 'Value' field in the structure returned by
+// 'GetKVStoreItem'. It also ensures that 'Close()' is executed on the
+// 'Value' field, so the caller does not need to do so.
 func (o *GetKVStoreItemOutput) ValueAsBytes() ([]byte, error) {
 	defer o.Value.Close()
 
 	return io.ReadAll(o.Value)
 }
 
+// ValueAsString obtains the value of a KV Store Item, as a string, by
+// reading the 'Value' field in the structure returned by
+// 'GetKVStoreItem'. It also ensures that 'Close()' is executed on the
+// 'Value' field, so the caller does not need to do so.
 func (o *GetKVStoreItemOutput) ValueAsString() (string, error) {
 	if result, err := o.ValueAsBytes(); err != nil {
 		return "", err
@@ -427,7 +437,9 @@ func (o *GetKVStoreItemOutput) ValueAsString() (string, error) {
 	}
 }
 
-// GetKVStoreItem retrieves the specified item.
+// GetKVStoreItem retrieves the specified item. The returned structure
+// contains a 'Value' field which the caller must clean up by
+// executing its 'Close' function if the field is non-nil.
 func (c *Client) GetKVStoreItem(i *GetKVStoreItemInput) (GetKVStoreItemOutput, error) {
 	if i.StoreID == "" {
 		return GetKVStoreItemOutput{}, ErrMissingStoreID
