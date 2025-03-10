@@ -9,6 +9,7 @@
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `golang.org/x/crypto` from 0.35.0 to 0.36.0 ([#639](https://github.com/fastly/go-fastly/pull/639))
 
 ## [v9.14.0](https://github.com/fastly/go-fastly/releases/tag/v9.14.0) (2025-03-05)
 
