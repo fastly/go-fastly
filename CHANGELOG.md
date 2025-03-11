@@ -11,6 +11,7 @@
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.35.0 to 0.36.0 ([#639](https://github.com/fastly/go-fastly/pull/639))
 - build(deps): `golang.org/x/mod` from 0.23.0 to 0.24.0 ([#642](https://github.com/fastly/go-fastly/pull/642))
+- build(deps): `golang.org/x/tools` from 0.30.0 to 0.31.0 ([#640](https://github.com/fastly/go-fastly/pull/640))
 
 ## [v9.14.0](https://github.com/fastly/go-fastly/releases/tag/v9.14.0) (2025-03-05)
 
