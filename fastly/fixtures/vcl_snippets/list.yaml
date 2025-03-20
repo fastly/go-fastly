@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/88/snippet
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/36/snippet
     method: GET
   response:
-    body: '[{"name":"snipdyn","version":"88","created_at":"2022-11-07T12:19:34Z","dynamic":"1","type":"fetch","deleted_at":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","priority":"123","content":null,"id":"ZoMomE3AaTnyJjM4cslCA1","updated_at":"2022-11-07T12:19:34Z"},{"priority":"100","updated_at":"2022-11-07T12:19:34Z","id":"WT2ibuLy1IEgBOgN7ZvtI4","content":"#vcl","version":"88","name":"snipver","created_at":"2022-11-07T12:19:34Z","deleted_at":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","dynamic":"0","type":"fetch"}]'
+    body: '[{"version":"36","id":"lE4es0twkrfKltSI0nU1k0","updated_at":"2025-03-20T18:15:36Z","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"content":null,"dynamic":"1","name":"snipdyn","created_at":"2025-03-20T18:15:36Z","type":"fetch","priority":"123"},{"version":"36","id":"i33J0p7U8HIVZDGqxncM92","updated_at":"2025-03-20T18:15:36Z","service_id":"kKJb5bOFI47uHeBVluGfX1","dynamic":"0","deleted_at":null,"content":"#vcl","name":"snipver","created_at":"2025-03-20T18:15:36Z","type":"fetch","priority":"100"}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 12:19:35 GMT
+      - Thu, 20 Mar 2025 18:15:37 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4131-MAN
+      - cache-chi-kigq8000082-CHI, cache-lga21986-LGA
       X-Timer:
-      - S1667823575.008395,VS0,VE332
+      - S1742494537.027726,VS0,VE138
     status: 200 OK
     code: 200
     duration: ""

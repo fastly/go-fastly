@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/snippet/ZoMomE3AaTnyJjM4cslCA1
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/snippet/lE4es0twkrfKltSI0nU1k0
     method: GET
   response:
-    body: '{"snippet_id":"ZoMomE3AaTnyJjM4cslCA1","created_at":"2022-11-07T12:19:34Z","updated_at":"2022-11-07T12:19:34Z","service_id":"kKJb5bOFI47uHeBVluGfX1","content":"#vcl"}'
+    body: '{"content":"#vcl","snippet_id":"lE4es0twkrfKltSI0nU1k0","created_at":"2025-03-20T18:15:36Z","updated_at":"2025-03-20T18:15:36Z","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 12:19:36 GMT
+      - Thu, 20 Mar 2025 18:15:37 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4131-MAN
+      - cache-chi-klot8100153-CHI, cache-lga21986-LGA
       X-Timer:
-      - S1667823576.712839,VS0,VE301
+      - S1742494537.283106,VS0,VE118
     status: 200 OK
     code: 200
     duration: ""

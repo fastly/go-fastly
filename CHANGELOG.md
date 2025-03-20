@@ -4,6 +4,10 @@
 
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v9.14.0...)
 
+### Breaking:
+
+- fix(vcl_snippets): Correct type of 'Priority' field from integer to string. [#644](https://github.com/fastly/go-fastly/pull/644)
+
 ### Enhancements:
 
 ### Bug fixes:
