@@ -51,7 +51,7 @@ type Snippet struct {
 	Dynamic        *int         `mapstructure:"dynamic"`
 	SnippetID      *string      `mapstructure:"id"`
 	Name           *string      `mapstructure:"name"`
-	Priority       *int         `mapstructure:"priority"`
+	Priority       *string      `mapstructure:"priority"`
 	ServiceID      *string      `mapstructure:"service_id"`
 	ServiceVersion *int         `mapstructure:"version"`
 	Type           *SnippetType `mapstructure:"type"`
@@ -67,7 +67,7 @@ type CreateSnippetInput struct {
 	// Name is the name for the snippet (required).
 	Name *string `url:"name,omitempty"`
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority *int `url:"priority,omitempty"`
+	Priority *string `url:"priority,omitempty"`
 	// ServiceID is the ID of the service to add the snippet to (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the editable configuration version (required).
@@ -108,7 +108,7 @@ type UpdateSnippetInput struct {
 	// NewName is the new name for the resource.
 	NewName *string `url:"name,omitempty"`
 	// Priority determines the ordering for multiple snippets. Lower numbers execute first.
-	Priority *int `url:"priority,omitempty"`
+	Priority *string `url:"priority,omitempty"`
 	// ServiceID is the ID of the service to add the snippet to (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the editable configuration version (required).

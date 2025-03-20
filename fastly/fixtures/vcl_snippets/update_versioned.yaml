@@ -16,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/88/snippet/snipver
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/36/snippet/snipver
     method: PUT
   response:
-    body: '{"id":"WT2ibuLy1IEgBOgN7ZvtI4","version":"88","deleted_at":null,"content":"#vclUpdated","name":"snipverUpdated","service_id":"kKJb5bOFI47uHeBVluGfX1","type":"hit","priority":"456","created_at":"2022-11-07T12:19:34Z","updated_at":"2022-11-07T12:19:34Z","dynamic":"0"}'
+    body: '{"updated_at":"2025-03-20T18:15:36Z","content":"#vclUpdated","deleted_at":null,"priority":"456","type":"hit","id":"i33J0p7U8HIVZDGqxncM92","dynamic":"0","name":"snipverUpdated","created_at":"2025-03-20T18:15:36Z","version":"36","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -29,11 +29,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Nov 2022 12:19:36 GMT
+      - Thu, 20 Mar 2025 18:15:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "9989"
+      - "9996"
       Fastly-Ratelimit-Reset:
-      - "1667826000"
+      - "1742497200"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -47,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4131-MAN
+      - cache-chi-kigq8000175-CHI, cache-lga21986-LGA
       X-Timer:
-      - S1667823576.047992,VS0,VE176
+      - S1742494537.406117,VS0,VE196
     status: 200 OK
     code: 200
     duration: ""
