@@ -7,6 +7,7 @@
 ### Breaking:
 
 - fix(vcl_snippets): Correct type of 'Priority' field from integer to string. [#644](https://github.com/fastly/go-fastly/pull/644)
+- fix(datacenters): fix spelling of `Longitude` field [#646](https://github.com/fastly/go-fastly/pull/646)
 
 ### Enhancements:
 
