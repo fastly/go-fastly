@@ -2,10 +2,10 @@ package fastly
 
 // Coordinates represent the location of a datacenter.
 type Coordinates struct {
-	Latitude   *float64 `mapstructure:"latitude"`
-	Longtitude *float64 `mapstructure:"longitude"`
-	X          *float64 `mapstructure:"x"`
-	Y          *float64 `mapstructure:"y"`
+	Latitude  *float64 `mapstructure:"latitude"`
+	Longitude *float64 `mapstructure:"longitude"`
+	X         *float64 `mapstructure:"x"`
+	Y         *float64 `mapstructure:"y"`
 }
 
 // Datacenter is a list of Datacenters returned by the Fastly API.
