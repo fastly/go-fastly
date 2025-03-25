@@ -17,6 +17,7 @@
 - build(deps): `golang.org/x/mod` from 0.23.0 to 0.24.0 ([#642](https://github.com/fastly/go-fastly/pull/642))
 - build(deps): `golang.org/x/tools` from 0.30.0 to 0.31.0 ([#640](https://github.com/fastly/go-fastly/pull/640))
 - build(deps): `honnef.co/go/tools` from 0.6.0 to 0.6.1 ([#641](https://github.com/fastly/go-fastly/pull/641))
+- build(deps): `github.com/BurntSushi/toml` from 1.4.1-0.20240526193622-a339e1f7089c to 1.5.0 ([#645](https://github.com/fastly/go-fastly/pull/645))
 
 ## [v9.14.0](https://github.com/fastly/go-fastly/releases/tag/v9.14.0) (2025-03-05)
 
