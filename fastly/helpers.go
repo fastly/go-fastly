@@ -1,6 +1,10 @@
 package fastly
 
-import "net/url"
+import (
+	"encoding/json"
+	"io"
+	"net/url"
+)
 
 // MultiConstraint is a generic constraint for ToPointer/ToValue.
 type MultiConstraint interface {
@@ -55,4 +59,40 @@ func ToSafeURL(unsafeComponents ...string) string {
 	// a constant "/" string
 	result, _ := url.JoinPath("/", safeComponents...)
 	return result
+}
+
+// infoResponse is used to pull the links and meta from the result.
+type infoResponse struct {
+	Links paginationInfo `json:"links"`
+	Meta  metaInfo       `json:"meta"`
+}
+
+// paginationInfo stores links to searches related to the current one, showing
+// any information about additional results being stored on another page.
+type paginationInfo struct {
+	First string `json:"first,omitempty"`
+	Last  string `json:"last,omitempty"`
+	Next  string `json:"next,omitempty"`
+}
+
+// metaInfo stores information about the result returned by the server.
+type metaInfo struct {
+	CurrentPage int `json:"current_page,omitempty"`
+	PerPage     int `json:"per_page,omitempty"`
+	RecordCount int `json:"record_count,omitempty"`
+	TotalPages  int `json:"total_pages,omitempty"`
+}
+
+// getResponseInfo parses a response to get the pagination and metadata info.
+func getResponseInfo(body io.Reader) (infoResponse, error) {
+	bodyBytes, err := io.ReadAll(body)
+	if err != nil {
+		return infoResponse{}, err
+	}
+
+	var info infoResponse
+	if err := json.Unmarshal(bodyBytes, &info); err != nil {
+		return infoResponse{}, err
+	}
+	return info, nil
 }
