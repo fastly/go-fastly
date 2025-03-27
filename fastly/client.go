@@ -336,8 +336,18 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 		defer c.updateLock.Unlock()
 	}
 
+	// if a context is provided, set the context on the request
+	if ro != nil && ro.Context != nil {
+		req = req.WithContext(ro.Context)
+	}
+
 	if c.DebugMode {
-		r := req.Clone(context.Background())
+		var r *http.Request
+		if ro != nil && ro.Context != nil {
+			r = req.Clone(ro.Context)
+		} else {
+			r = req.Clone(context.Background())
+		}
 		// 'r' and 'req' both have a reference to a Body that
 		// is an io.Reader, but only one of them can read its
 		// contents since io.Reader is not seekable and cannot
@@ -406,6 +416,8 @@ type RequestOptions struct {
 	Parallel bool
 	// Params is a map of key-value pairs that will be added to the Request.
 	Params map[string]string
+	// Context is a context.Context object that will be set to the Request's context.
+	Context context.Context
 }
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the
