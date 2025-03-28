@@ -6,6 +6,10 @@
 
 ### Breaking:
 
+- breaking(waf): Support for the Fastly WAF (legacy, not Next-Gen WAF)
+  product has been removed. The product passed its End-of-Life date
+  quite some time ago, and it is no longer in use by customers.
+  [#626](https://github.com/fastly/go-fastly/pull/626)
 - fix(vcl_snippets): Correct type of 'Priority' field from integer to string. [#644](https://github.com/fastly/go-fastly/pull/644)
 - fix(datacenters): fix spelling of `Longitude` field [#646](https://github.com/fastly/go-fastly/pull/646)
 
