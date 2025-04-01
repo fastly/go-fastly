@@ -3,7 +3,7 @@ package v1
 import (
 	"net/http"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 // DeleteInput specifies the information needed for the Delete() function to

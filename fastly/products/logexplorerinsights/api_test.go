@@ -3,11 +3,11 @@ package logexplorerinsights_test
 import (
 	"testing"
 
-	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
-	"github.com/fastly/go-fastly/v9/fastly/products/logexplorerinsights"
-	"github.com/fastly/go-fastly/v9/internal/productcore"
-	"github.com/fastly/go-fastly/v9/internal/test_utils"
+	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/products"
+	"github.com/fastly/go-fastly/v10/fastly/products/logexplorerinsights"
+	"github.com/fastly/go-fastly/v10/internal/productcore"
+	"github.com/fastly/go-fastly/v10/internal/test_utils"
 )
 
 var serviceID = fastly.TestDeliveryServiceID
