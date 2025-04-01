@@ -2,7 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.14.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.0.0...)
+
+### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v10.0.0](https://github.com/fastly/go-fastly/releases/tag/v10.0.0) (2025-04-02)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v9.14.0...v10.0.0)
 
 ### Breaking:
 
@@ -15,8 +27,6 @@
 
 ### Enhancements:
 - fix(client): add ability to pass context into the client [#647](https://github.com/fastly/go-fastly/pull/647)
-
-### Bug fixes:
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.35.0 to 0.36.0 ([#639](https://github.com/fastly/go-fastly/pull/639))
