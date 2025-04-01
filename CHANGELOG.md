@@ -14,6 +14,7 @@
 - fix(datacenters): fix spelling of `Longitude` field [#646](https://github.com/fastly/go-fastly/pull/646)
 
 ### Enhancements:
+- fix(client): add ability to pass context into the client [#647](https://github.com/fastly/go-fastly/pull/647)
 
 ### Bug fixes:
 
