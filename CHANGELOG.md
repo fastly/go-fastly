@@ -24,6 +24,7 @@
   [#626](https://github.com/fastly/go-fastly/pull/626)
 - fix(vcl_snippets): Correct type of 'Priority' field from integer to string. [#644](https://github.com/fastly/go-fastly/pull/644)
 - fix(datacenters): fix spelling of `Longitude` field [#646](https://github.com/fastly/go-fastly/pull/646)
+- breaking(go.mod): upgrade to version 10 [#648](https://github.com/fastly/go-fastly/pull/648)
 
 ### Enhancements:
 - fix(client): add ability to pass context into the client [#647](https://github.com/fastly/go-fastly/pull/647)
