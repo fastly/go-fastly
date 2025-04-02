@@ -42,6 +42,7 @@ type Stats struct {
 	IPv6                            *uint64     `mapstructure:"ipv6"`                                 // Number of requests that were received over IPv6.
 	ImageOptimizer                  *uint64     `mapstructure:"imgopto"`                              // Number of responses that came from the Fastly Image Optimizer service.
 	Log                             *uint64     `mapstructure:"log"`                                  // Number of log lines sent.
+	LogBytes                        *uint64     `mapstructure:"log_bytes"`                            // Total log bytes sent.
 	Miss                            *uint64     `mapstructure:"miss"`                                 // Number of cache misses.
 	MissHistogram                   map[int]int `mapstructure:"miss_histogram"`                       // Number of requests to origin in time buckets of 10s of milliseconds
 	MissTime                        *float64    `mapstructure:"miss_time"`                            // Amount of time spent processing cache misses (in seconds).
