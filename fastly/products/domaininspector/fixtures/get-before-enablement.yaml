@@ -8,7 +8,7 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
     url: https://api.fastly.com/enabled-products/v1/domain_inspector/services/kKJb5bOFI47uHeBVluGfX1
     method: GET
   response:
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 07 Dec 2024 17:05:04 GMT
+      - Wed, 02 Apr 2025 20:31:24 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100151-CHI, cache-ewr-kewr1740037-EWR
+      - cache-chi-klot8100143-CHI, cache-mia-kmia1760091-MIA
       X-Timer:
-      - S1733591104.014854,VS0,VE133
+      - S1743625884.135074,VS0,VE144
     status: 400 Bad Request
     code: 400
     duration: ""

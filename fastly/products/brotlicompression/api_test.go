@@ -14,10 +14,9 @@ var serviceID = fastly.TestDeliveryServiceID
 
 var functionalTests = []*test_utils.FunctionalTest{
 	productcore.NewDisableTest(&productcore.DisableTestInput{
-		Phase:         "ensure disabled before testing",
-		OpFn:          brotlicompression.Disable,
-		ServiceID:     serviceID,
-		IgnoreFailure: true,
+		Phase:     "ensure disabled before testing",
+		OpFn:      brotlicompression.Disable,
+		ServiceID: serviceID,
 	}),
 	productcore.NewGetTest(&productcore.GetTestInput[brotlicompression.EnableOutput]{
 		Phase:         "before enablement",
