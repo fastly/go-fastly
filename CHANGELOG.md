@@ -5,6 +5,7 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v10.0.0...)
 
 ### Breaking:
+- fix(vcl_condition): Correct type of 'Priority' field from integer to string. [#650](https://github.com/fastly/go-fastly/pull/650)
 
 ### Enhancements:
 
