@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: "null"
+    body: '{}'
     form: {}
     headers:
       Accept:
@@ -10,7 +10,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
     url: https://api.fastly.com/enabled-products/v1/origin_inspector/services/kKJb5bOFI47uHeBVluGfX1
     method: PUT
   response:
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 07 Dec 2024 17:05:07 GMT
+      - Thu, 03 Apr 2025 16:13:26 GMT
       Pragma:
       - no-cache
       Server:
@@ -44,9 +44,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000079-CHI, cache-ewr-kewr1740069-EWR
+      - cache-chi-klot8100045-CHI, cache-mia-kmia1760101-MIA
       X-Timer:
-      - S1733591106.846744,VS0,VE2046
+      - S1743696806.640999,VS0,VE777
     status: 200 OK
     code: 200
     duration: ""

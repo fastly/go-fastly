@@ -6,29 +6,26 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
     url: https://api.fastly.com/enabled-products/v1/bot_management/services/kKJb5bOFI47uHeBVluGfX1
     method: DELETE
   response:
-    body: |
-      {"type":"","title":"You are not authorized to perform this action","status":401,"errors":null,"detail":""}
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "107"
       Content-Type:
       - application/json
       Date:
-      - Mon, 09 Dec 2024 19:12:08 GMT
+      - Wed, 02 Apr 2025 20:34:12 GMT
       Pragma:
       - no-cache
       Server:
       - fastly control-gateway
       Status:
-      - 401 Unauthorized
+      - 204 No Content
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -40,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000078-CHI, cache-nyc-kteb1890085-NYC
+      - cache-chi-kigq8000053-CHI, cache-mia-kmia1760048-MIA
       X-Timer:
-      - S1733771529.589696,VS0,VE113
-    status: 401 Unauthorized
-    code: 401
+      - S1743626051.166359,VS0,VE1186
+    status: 204 No Content
+    code: 204
     duration: ""
