@@ -55,7 +55,7 @@ type CreateConditionInput struct {
 	// Name is the name of the condition.
 	Name *string `url:"name,omitempty"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
-	Priority *int `url:"priority,omitempty"`
+	Priority *string `url:"priority,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).

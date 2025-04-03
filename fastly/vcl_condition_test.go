@@ -23,7 +23,7 @@ func TestClient_Conditions(t *testing.T) {
 			Name:           ToPointer("test/condition"),
 			Statement:      ToPointer("req.url~+\"index.html\""),
 			Type:           ToPointer("REQUEST"),
-			Priority:       ToPointer(1),
+			Priority:       ToPointer("1"),
 		})
 	})
 	if err != nil {
