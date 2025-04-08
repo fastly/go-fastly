@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx","name":"test
+    body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx_rate","name":"test
       name","service_id":"kKJb5bOFI47uHeBVluGfX1","source":"domains"}'
     form: {}
     headers:
@@ -11,7 +11,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
     url: https://api.fastly.com/alerts/definitions/test
     method: POST
   response:
@@ -24,11 +24,11 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Wed, 17 Jan 2024 04:07:27 GMT
+      - Tue, 08 Apr 2025 15:32:28 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 202 Accepted
       Strict-Transport-Security:
@@ -36,15 +36,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-pao-kpao1770036-PAO
+      - cache-chi-kigq8000150-CHI, cache-pdk-katl1840026-PDK
       X-Timer:
-      - S1705464447.142396,VS0,VE426
+      - S1744126348.564624,VS0,VE485
     status: 202 Accepted
     code: 202
     duration: ""

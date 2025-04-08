@@ -14,7 +14,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		"domains": {"example.com", "fastly.com"},
 	}
 	testEvaluationStrategy := map[string]any{
-		"period":    "5m0s",
+		"period":    "5m",
 		"threshold": float64(10),
 		"type":      "above_threshold",
 	}
@@ -23,14 +23,26 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		Dimensions:         testDimensions,
 		EvaluationStrategy: testEvaluationStrategy,
 		IntegrationIDs:     []string{},
-		Metric:             ToPointer("status_5xx"),
+		Metric:             ToPointer("status_5xx_rate"),
 		Name:               ToPointer("test name"),
 		ServiceID:          ToPointer(TestDeliveryServiceID),
 		Source:             ToPointer("domains"),
 	}
 
-	// Test
 	var err error
+
+	// Enable Product - Domain Inspector
+	Record(t, "alerts/enable_required_product", func(c *Client) {
+		_, err = c.EnableProduct(&ProductEnablementInput{
+			ProductID: ProductDomainInspector,
+			ServiceID: TestDeliveryServiceID,
+		})
+	})
+	if err != nil {
+		t.Fatal(err)
+	}
+
+	// Test
 	Record(t, "alerts/test_alert_definition", func(c *Client) {
 		err = c.TestAlertDefinition(&TestAlertDefinitionInput{
 			CreateAlertDefinitionInput: *cadi,
@@ -51,8 +63,15 @@ func TestClient_FastlyAlerts(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "alerts/cleanup_alert_definition", func(c *Client) {
-			err = c.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
+			_ = c.DeleteAlertDefinition(&DeleteAlertDefinitionInput{
 				ID: &ad.ID,
+			})
+		})
+
+		Record(t, "alerts/disable_required_product", func(c *Client) {
+			_ = c.DisableProduct(&ProductEnablementInput{
+				ProductID: ProductDomainInspector,
+				ServiceID: TestDeliveryServiceID,
 			})
 		})
 	}()
@@ -61,7 +80,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		t.Errorf("bad description: %v", ad.Description)
 	}
 
-	if ad.Metric != "status_5xx" {
+	if ad.Metric != "status_5xx_rate" {
 		t.Errorf("bad metric: %v", ad.Metric)
 	}
 
