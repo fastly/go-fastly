@@ -7,27 +7,25 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
-    url: https://api.fastly.com/alerts/history?after=2006-01-02T15%3A04%3A05Z&before=2056-01-02T15%3A04%3A05Z&cursor=&definition_id=5ihYWKFmUaRI5PVRNivo7Z&limit=10&service_id=kKJb5bOFI47uHeBVluGfX1&sort=-start&status=
-    method: GET
+    url: https://api.fastly.com/enabled-products/domain_inspector/services/kKJb5bOFI47uHeBVluGfX1
+    method: DELETE
   response:
-    body: '{"data":[],"meta":{"next_cursor":"","limit":10,"sort":"-start","total":0}}'
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "74"
       Content-Type:
       - application/json
       Date:
-      - Tue, 08 Apr 2025 15:32:30 GMT
+      - Tue, 08 Apr 2025 15:32:31 GMT
       Pragma:
       - no-cache
       Server:
       - fastly control-gateway
       Status:
-      - 200 OK
+      - 204 No Content
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
@@ -39,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100035-CHI, cache-pdk-katl1840026-PDK
+      - cache-chi-klot8100024-CHI, cache-pdk-katl1840026-PDK
       X-Timer:
-      - S1744126350.967504,VS0,VE302
-    status: 200 OK
-    code: 200
+      - S1744126351.591506,VS0,VE1306
+    status: 204 No Content
+    code: 204
     duration: ""

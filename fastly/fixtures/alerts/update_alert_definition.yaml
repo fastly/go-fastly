@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m0s","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx","name":"test
+    body: '{"description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"evaluation_strategy":{"period":"5m","threshold":10,"type":"above_threshold"},"integration_ids":[],"metric":"status_5xx","name":"test
       name updated"}'
     form: {}
     headers:
@@ -11,27 +11,27 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/alerts/definitions/7eoZPghUve49laTwDZgBDG
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
+    url: https://api.fastly.com/alerts/definitions/5ihYWKFmUaRI5PVRNivo7Z
     method: PUT
   response:
-    body: '{"id":"7eoZPghUve49laTwDZgBDG","object":"definition","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test
-      name updated","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m0s","threshold":10},"integration_ids":[],"updated_at":"2024-01-17T04:07:29Z","created_at":"2024-01-17T04:07:28Z"}'
+    body: '{"id":"5ihYWKFmUaRI5PVRNivo7Z","object":"definition","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test
+      name updated","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m","threshold":10},"integration_ids":[],"updated_at":"2025-04-08T15:32:29Z","created_at":"2025-04-08T15:32:28Z"}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "419"
+      - "417"
       Content-Type:
       - application/json
       Date:
-      - Wed, 17 Jan 2024 04:07:29 GMT
+      - Tue, 08 Apr 2025 15:32:29 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -39,15 +39,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-pao-kpao1770036-PAO
+      - cache-chi-klot8100021-CHI, cache-pdk-katl1840026-PDK
       X-Timer:
-      - S1705464449.211398,VS0,VE390
+      - S1744126349.243293,VS0,VE302
     status: 200 OK
     code: 200
     duration: ""
