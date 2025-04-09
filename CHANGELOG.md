@@ -11,6 +11,10 @@
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `actions/create-github-app-token` from 1 to 2 ([#654](https://github.com/fastly/go-fastly/pull/654))
+- build(deps): `golang.org/x/sys` from 0.31.0 to 0.32.0 ([#652](https://github.com/fastly/go-fastly/pull/652))
+- build(deps): `golang.org/x/crypto` from 0.36.0 to 0.37.0 ([#655](https://github.com/fastly/go-fastly/pull/655))
+- build(deps): `golang.org/x/sync` from 0.12.0 to 0.13.0 ([#653](https://github.com/fastly/go-fastly/pull/653))
 
 ## [v10.0.0](https://github.com/fastly/go-fastly/releases/tag/v10.0.0) (2025-04-02)
 
