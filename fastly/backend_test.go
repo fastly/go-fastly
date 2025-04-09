@@ -128,7 +128,7 @@ func TestClient_Backends(t *testing.T) {
 			NewName:        ToPointer("new-test-backend"),
 			OverrideHost:   ToPointer("www.example.com"),
 			Port:           ToPointer(1234),
-			ShareKey:       ToPointer("shared-key"),
+			ShareKey:       ToPointer("sharedkey"),
 			SSLCiphers:     ToPointer("RC4:!COMPLEMENTOFDEFAULT"),
 			SSLCheckCert:   ToPointer(Compatibool(false)),
 			SSLSNIHostname: ToPointer("ssl-hostname-updated.com"),
@@ -146,7 +146,7 @@ func TestClient_Backends(t *testing.T) {
 	if *ub.Port != 1234 {
 		t.Errorf("bad port: %d", *ub.Port)
 	}
-	if *ub.ShareKey == "" || *ub.ShareKey != "shared-key" {
+	if *ub.ShareKey == "" || *ub.ShareKey != "sharedkey" {
 		t.Errorf("bad share_key: %s", *ub.ShareKey)
 	}
 	if *ub.SSLCheckCert {
