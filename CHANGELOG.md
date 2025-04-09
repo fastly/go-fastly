@@ -32,6 +32,7 @@
 
 ### Enhancements:
 - fix(client): add ability to pass context into the client [#647](https://github.com/fastly/go-fastly/pull/647)
+- feat(stats): Add LogBytes to Stats structure. [#649](https://github.com/fastly/go-fastly/pull/649)
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.35.0 to 0.36.0 ([#639](https://github.com/fastly/go-fastly/pull/639))
