@@ -15,6 +15,7 @@
 
 ### Enhancements:
 - fix(client): add ability to pass context into the client [#647](https://github.com/fastly/go-fastly/pull/647)
+- feat(stats): Add LogBytes to Stats structure. [#649](https://github.com/fastly/go-fastly/pull/649)
 
 ### Bug fixes:
 
