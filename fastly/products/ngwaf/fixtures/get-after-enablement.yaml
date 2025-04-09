@@ -8,7 +8,7 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
     url: https://api.fastly.com/enabled-products/v1/ngwaf/services/kKJb5bOFI47uHeBVluGfX1
     method: GET
   response:
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 08 Dec 2024 18:16:05 GMT
+      - Wed, 02 Apr 2025 20:31:29 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100133-CHI, cache-ewr-kewr1740067-EWR
+      - cache-chi-kigq8000142-CHI, cache-mia-kmia1760107-MIA
       X-Timer:
-      - S1733681766.701640,VS0,VE119
+      - S1743625889.260732,VS0,VE143
     status: 200 OK
     code: 200
     duration: ""
