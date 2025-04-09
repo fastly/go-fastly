@@ -1,6 +1,6 @@
 package productcore
 
-import "github.com/fastly/go-fastly/v9/fastly"
+import "github.com/fastly/go-fastly/v10/fastly"
 
 // DeleteInput specifies the information needed for the Delete
 // function to perform the operation.

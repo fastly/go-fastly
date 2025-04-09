@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 func TestClient_Domain(t *testing.T) {

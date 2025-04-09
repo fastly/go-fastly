@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 // LookupInput specifies the information needed for the Lookup() function to perform

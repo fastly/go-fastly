@@ -8,7 +8,7 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.4)
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
     url: https://api.fastly.com/enabled-products/v1/brotli_compression/services/kKJb5bOFI47uHeBVluGfX1
     method: GET
   response:
@@ -24,7 +24,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 07 Dec 2024 17:05:04 GMT
+      - Wed, 02 Apr 2025 20:31:24 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740076-EWR
+      - cache-chi-kigq8000020-CHI, cache-mia-kmia1760070-MIA
       X-Timer:
-      - S1733591104.382753,VS0,VE69
+      - S1743625884.059008,VS0,VE214
     status: 200 OK
     code: 200
     duration: ""
