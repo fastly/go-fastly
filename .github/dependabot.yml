@@ -10,7 +10,7 @@ updates:
     groups:
       go-dependencies:
         patterns:
-          "*"
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
@@ -18,4 +18,4 @@ updates:
     groups:
       gha-dependencies:
         patterns:
-          "*"
+          - "*"
