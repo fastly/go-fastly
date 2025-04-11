@@ -8,12 +8,12 @@ import (
 func TestClient_GetDomainMetricsForService(t *testing.T) {
 	t.Parallel()
 
-	now := time.Now()
-	year, month, day := now.Date()
-	end := time.Date(year, month, day, 0, 0, 0, 0, time.UTC)
-	start := end.AddDate(0, 0, -1)
+	// NOTE: Update this to a recent time when regenerating the test fixtures,
+	// otherwise the data may be outside of retention and an error will be
+	// returned.
+	end := time.Date(2023, 11, 7, 0, 0, 0, 0, time.UTC)
+	start := end.Add(-8 * time.Hour)
 	var err error
-
 	Record(t, "domain_inspector/metrics_for_service", func(c *Client) {
 		_, err = c.GetDomainMetricsForService(&GetDomainMetricsInput{
 			ServiceID:   TestDeliveryServiceID,
