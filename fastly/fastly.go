@@ -26,7 +26,7 @@ const (
 
 	// MaximumDictionarySize represents the maximum number of items that can be
 	// placed within an Edge Dictionary.
-	MaximumDictionarySize = 10000
+	MaximumDictionarySize = 25000
 
 	// MaximumACLSize represents the maximum number of entries that can be placed
 	// within an ACL.

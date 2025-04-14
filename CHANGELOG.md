@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+- fix(fastly): Increase maximum dictionary size to 25,000 items. ([#666](https://github.com/fastly/go-fastly/pull/666))
+
 ### Dependencies:
 - build(deps): `actions/create-github-app-token` from 1 to 2 ([#654](https://github.com/fastly/go-fastly/pull/654))
 - build(deps): `golang.org/x/sys` from 0.31.0 to 0.32.0 ([#652](https://github.com/fastly/go-fastly/pull/652))
