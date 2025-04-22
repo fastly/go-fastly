@@ -27,20 +27,13 @@ FASTLY_API_KEY ?=
 # Enables support for tools such as https://github.com/rakyll/gotest
 TEST_COMMAND ?= $(GO) test
 
-all: mod-download dev-dependencies tidy fmt fiximports test vet staticcheck semgrep ## Runs all of the required cleaning and verification targets.
+all: mod-download tidy fmt fiximports test vet staticcheck semgrep ## Runs all of the required cleaning and verification targets.
 .PHONY: all
 
 mod-download: ## Downloads the Go module.
 	@echo "==> Downloading Go module"
 	@$(GO) mod download
 .PHONY: mod-download
-
-dev-dependencies: ## Downloads the necessary dev dependencies.
-	@echo "==> Downloading development dependencies"
-	@$(GO) install honnef.co/go/tools/cmd/staticcheck@v0.6.0
-	@$(GO) install golang.org/x/tools/cmd/goimports@v0.30.0
-	@if [[ "$$(uname)" == 'Darwin' ]]; then brew install semgrep; fi
-.PHONY: dev-dependencies
 
 tidy: ## Cleans the Go module.
 	@echo "==> Tidying module"
@@ -49,12 +42,12 @@ tidy: ## Cleans the Go module.
 
 fmt: ## Properly formats Go files and orders dependencies.
 	@echo "==> Running gofmt"
-	@gofmt -s -w fastly internal tools
+	@gofmt -s -w fastly internal
 .PHONY: fmt
 
 fiximports: ## Properly formats and orders imports.
 	@echo "==> Fixing imports"
-	@goimports -w fastly internal tools
+	@$(GO) tool goimports -w fastly internal
 .PHONY: fiximports
 
 test: ## Runs the test suite with VCR mocks enabled.
@@ -69,12 +62,13 @@ vet: ## Identifies common errors.
 
 staticcheck: ## Runs the staticcheck linter.
 	@echo "==> Running staticcheck"
-	@staticcheck -version
-	@staticcheck ./...
+	@$(GO) tool staticcheck -version
+	@$(GO) tool staticcheck ./...
 .PHONY: staticcheck
 
 semgrep: ## Run semgrep checker.
-	if command -v semgrep &> /dev/null; then semgrep ci --config auto --exclude-rule generic.secrets.security.detected-private-key.detected-private-key $(SEMGREP_ARGS); fi
+	@if [[ "$$(uname)" == 'Darwin' ]]; then brew install semgrep; fi
+	@if command -v semgrep &> /dev/null; then semgrep ci --config auto --exclude-rule generic.secrets.security.detected-private-key.detected-private-key $(SEMGREP_ARGS); fi
 .PHONY: semgrep
 
 test-race: ## Runs the test suite with the -race flag to identify race conditions, if they exist.
