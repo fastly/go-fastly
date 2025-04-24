@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -191,6 +192,8 @@ type DashboardMeta struct {
 
 // ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function
 type ListObservabilityCustomDashboardsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional)
 	Cursor *string
 	// Limit is the maximum number of items included in each response (optional)
@@ -202,7 +205,8 @@ type ListObservabilityCustomDashboardsInput struct {
 func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDashboardsInput) (*ListDashboardsResponse, error) {
 	path := ToSafeURL("observability", "dashboards")
 	ro := &RequestOptions{
-		Params: map[string]string{},
+		Context: i.Context,
+		Params:  map[string]string{},
 	}
 	if i.Cursor != nil {
 		ro.Params["cursor"] = *i.Cursor

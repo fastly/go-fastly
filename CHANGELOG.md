@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(fastly): adds context param to most inputs, allowing users of the library to pass context to a request ([#670](https://github.com/fastly/go-fastly/pull/670))
+
 ### Bug fixes:
 
 ### Dependencies:

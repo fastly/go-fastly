@@ -1,6 +1,7 @@
 package computeacls
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"strconv"
@@ -13,6 +14,8 @@ import (
 type ListEntriesInput struct {
 	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is used for paginating through results.
 	Cursor *string
 	// Limit is the maximum number of entries included the response.
@@ -26,7 +29,8 @@ func ListEntries(c *fastly.Client, i *ListEntriesInput) (*ComputeACLEntries, err
 	}
 
 	ro := &fastly.RequestOptions{
-		Params: map[string]string{},
+		Context: i.Context,
+		Params:  map[string]string{},
 	}
 	if i.Cursor != nil {
 		ro.Params["cursor"] = *i.Cursor

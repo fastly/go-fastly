@@ -97,7 +97,7 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 		}
 	}
 
-	requestOptions := &RequestOptions{
+	ro := &RequestOptions{
 		Params: map[string]string{
 			"per_page": strconv.Itoa(perPage),
 			"page":     strconv.Itoa(p.CurrentPage),
@@ -105,13 +105,13 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 	}
 
 	if p.opts.Direction != "" {
-		requestOptions.Params["direction"] = p.opts.Direction
+		ro.Params["direction"] = p.opts.Direction
 	}
 	if p.opts.Sort != "" {
-		requestOptions.Params["sort"] = p.opts.Sort
+		ro.Params["sort"] = p.opts.Sort
 	}
 
-	resp, err := p.client.Get(p.path, requestOptions)
+	resp, err := p.client.Get(p.path, ro)
 	if err != nil {
 		return nil, err
 	}

@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bufio"
+	"context"
 	"io"
 	"net/http"
 	"os"
@@ -23,6 +24,8 @@ type KVStore struct {
 
 // CreateKVStoreInput is used as an input to the CreateKVStore function.
 type CreateKVStoreInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Name is the name of the store to create (required).
 	Name string `json:"name"`
 	// Location is the regional location of the store (optional).
@@ -36,7 +39,8 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 	}
 
 	ro := &RequestOptions{
-		Params: map[string]string{},
+		Context: i.Context,
+		Params:  map[string]string{},
 	}
 	if i.Location != "" {
 		ro.Params["location"] = i.Location
@@ -58,6 +62,8 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 
 // ListKVStoresInput is used as an input to the ListKVStores function.
 type ListKVStoresInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is used for paginating through results.
 	Cursor string
 	// Limit is the maximum number of items included the response.
@@ -98,8 +104,12 @@ type ListKVStoresResponse struct {
 func (c *Client) ListKVStores(i *ListKVStoresInput) (*ListKVStoresResponse, error) {
 	const path = "/resources/stores/kv"
 
-	ro := new(RequestOptions)
-	ro.Params = i.formatFilters()
+	ro := &RequestOptions{
+		Params: i.formatFilters(),
+	}
+	if i != nil {
+		ro.Context = i.Context
+	}
 
 	resp, err := c.Get(path, ro)
 	if err != nil {
@@ -242,6 +252,8 @@ const (
 
 // ListKVStoreKeysInput is the input to the ListKVStoreKeys function.
 type ListKVStoreKeysInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Consistency determines accuracy of results (values: eventual, strong). i.e. 'eventual' uses caching to improve performance (default: strong)
 	Consistency Consistency
 	// Prefix limits the results to keys which begin with the specified string.
@@ -293,8 +305,10 @@ func (c *Client) ListKVStoreKeys(i *ListKVStoreKeysInput) (*ListKVStoreKeysRespo
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys")
 
-	ro := new(RequestOptions)
-	ro.Params = i.formatFilters()
+	ro := &RequestOptions{
+		Context: i.Context,
+		Params:  i.formatFilters(),
+	}
 
 	resp, err := c.Get(path, ro)
 	if err != nil {
@@ -506,6 +520,8 @@ type InsertKVStoreKeyInput struct {
 	// This is for users who are passing very large files.
 	// Otherwise use the 'Value' field instead.
 	Body LengthReader
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// StoreID is the StoreID of the kv store (required).
 	StoreID string
 	// Key is the key to add (required).
@@ -549,10 +565,11 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 		return ErrMissingKey
 	}
 
-	ro := RequestOptions{
+	ro := &RequestOptions{
+		Context:  i.Context,
+		Headers:  map[string]string{},
 		Parallel: true, // This will allow the Fastly CLI to make bulk inserts.
 		Params:   map[string]string{},
-		Headers:  map[string]string{},
 	}
 
 	if i.IfGenerationMatch != 0 {
@@ -593,7 +610,7 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
 
-	resp, err := c.Put(path, &ro)
+	resp, err := c.Put(path, ro)
 	if err != nil {
 		return err
 	}
@@ -609,10 +626,8 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 
 // DeleteKVStoreKeyInput is the input to the DeleteKVStoreKey function.
 type DeleteKVStoreKeyInput struct {
-	// StoreID is the StoreID of the kv store (required).
-	StoreID string
-	// Key is the key to delete (required).
-	Key string
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Force is a flag to ignore a failure if the specified key
 	// was not found.
 	Force bool
@@ -620,6 +635,10 @@ type DeleteKVStoreKeyInput struct {
 	// which must match the value on the specified key for the
 	// deletion to proceed.
 	IfGenerationMatch uint64
+	// Key is the key to delete (required).
+	Key string
+	// StoreID is the StoreID of the kv store (required).
+	StoreID string
 }
 
 // DeleteKVStoreKey deletes the specified resource.
@@ -631,10 +650,11 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 		return ErrMissingKey
 	}
 
-	ro := RequestOptions{
+	ro := &RequestOptions{
+		Context:  i.Context,
+		Headers:  map[string]string{},
 		Parallel: true, // This will allow the Fastly CLI to make bulk deletes.
 		Params:   map[string]string{},
-		Headers:  map[string]string{},
 	}
 
 	if i.Force {
@@ -647,7 +667,7 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
 
-	resp, err := c.Delete(path, &ro)
+	resp, err := c.Delete(path, ro)
 	if err != nil {
 		return err
 	}
@@ -662,12 +682,14 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 
 // BatchModifyKVStoreKeyInput is the input to the BatchModifyKVStoreKey function.
 type BatchModifyKVStoreKeyInput struct {
-	// StoreID is the StoreID of the kv store (required).
-	StoreID string
 	// Body is the HTTP request body containing a collection of JSON objects
 	// separated by a new line. {"key": "example","value": "<base64-encoded>"}
 	// (required).
 	Body io.Reader
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
+	// StoreID is the StoreID of the kv store (required).
+	StoreID string
 }
 
 // BatchModifyKVStoreKey streams key/value JSON objects into an kv store.
@@ -677,15 +699,18 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 		return ErrMissingStoreID
 	}
 
-	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "batch")
-
-	resp, err := c.Put(path, &RequestOptions{
-		Body: bufio.NewReader(i.Body),
+	ro := &RequestOptions{
+		Body:    bufio.NewReader(i.Body),
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": "application/x-ndjson",
 		},
 		Parallel: true,
-	})
+	}
+
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "batch")
+
+	resp, err := c.Put(path, ro)
 	if err != nil {
 		return err
 	}

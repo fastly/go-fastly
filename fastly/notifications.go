@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -21,6 +22,8 @@ type Integration struct {
 
 // SearchIntegrationsInput is used as input to the SearchIntegrations function.
 type SearchIntegrationsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta.
 	Cursor *string
 	// Limit is the maximum number of items included in each response.
@@ -51,7 +54,8 @@ func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrat
 	p := "/notifications/integrations"
 
 	ro := &RequestOptions{
-		Params: map[string]string{},
+		Context: i.Context,
+		Params:  map[string]string{},
 	}
 	if i.Cursor != nil {
 		ro.Params["cursor"] = *i.Cursor

@@ -338,13 +338,13 @@ func (c *Client) Request(verb, p string, ro *RequestOptions) (*http.Response, er
 
 	// if a context is provided, set the context on the request
 	if ro != nil && ro.Context != nil {
-		req = req.WithContext(ro.Context)
+		req = req.WithContext(*ro.Context)
 	}
 
 	if c.DebugMode {
 		var r *http.Request
 		if ro != nil && ro.Context != nil {
-			r = req.Clone(ro.Context)
+			r = req.Clone(*ro.Context)
 		} else {
 			r = req.Clone(context.Background())
 		}
@@ -417,7 +417,7 @@ type RequestOptions struct {
 	// Params is a map of key-value pairs that will be added to the Request.
 	Params map[string]string
 	// Context is a context.Context object that will be set to the Request's context.
-	Context context.Context
+	Context *context.Context
 }
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the

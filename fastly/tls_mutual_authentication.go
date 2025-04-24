@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -22,6 +23,8 @@ type TLSMutualAuthentication struct {
 
 // ListTLSMutualAuthenticationsInput is used as input to the Client.ListTLSMutualAuthentication function.
 type ListTLSMutualAuthenticationsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Include is a list of related objects to include (optional).
 	Include []string
 	// PageNumber is the required page index for pagination.
@@ -48,14 +51,15 @@ func (i *ListTLSMutualAuthenticationsInput) formatFilters() map[string]string {
 // ListTLSMutualAuthentication retrieves all resources.
 func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInput) ([]*TLSMutualAuthentication, error) {
 	path := "/tls/mutual_authentications"
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
+		Params: i.formatFilters(),
 	}
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -80,6 +84,8 @@ func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInpu
 
 // GetTLSMutualAuthenticationInput is used as input to the GetTLSMutualAuthentication function.
 type GetTLSMutualAuthenticationInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a mutual authentication (required).
 	ID string
 	// Include is a comma-separated list of related objects to include (optional).
@@ -92,15 +98,14 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 		return nil, ErrMissingID
 	}
 
-	var ro *RequestOptions
+	ro := &RequestOptions{
+		Context: i.Context,
+	}
+
 	if i.Include != "" {
-		ro = &RequestOptions{
-			Params: map[string]string{
-				"include": i.Include,
-			},
-			Headers: map[string]string{
-				"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
-			},
+		ro.Params = map[string]string{"include": i.Include}
+		ro.Headers = map[string]string{
+			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		}
 	}
 

@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"strconv"
@@ -11,6 +12,8 @@ import (
 // ListInput specifies the information needed for the List() function to perform
 // the operation.
 type ListInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the cursor value from the next_cursor field of a previous
 	// response, used to retrieve the next page. To request the first page, this
 	// should be an empty string or nil.
@@ -28,7 +31,8 @@ type ListInput struct {
 // List retrieves a list of domains, with optional filtering and pagination.
 func List(c *fastly.Client, i *ListInput) (*Collection, error) {
 	ro := &fastly.RequestOptions{
-		Params: map[string]string{},
+		Context: i.Context,
+		Params:  map[string]string{},
 	}
 	if i.Cursor != nil {
 		ro.Params["cursor"] = *i.Cursor

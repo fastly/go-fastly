@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -54,6 +55,8 @@ type AlertsMeta struct {
 
 // ListAlertDefinitionsInput is used as input to the ListAlertDefinitions function.
 type ListAlertDefinitionsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string
 	// Limit is the maximum number of items included in each response (optional).
@@ -71,7 +74,8 @@ func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefin
 	p := "/alerts/definitions"
 
 	ro := &RequestOptions{
-		Params: map[string]string{},
+		Context: i.Context,
+		Params:  map[string]string{},
 	}
 	if i.Cursor != nil {
 		ro.Params["cursor"] = *i.Cursor
@@ -259,6 +263,8 @@ type ListAlertHistoryInput struct {
 	After *string
 	// Before filters history having start or end on or before the provided timestamp (optional).
 	Before *string
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string
 	// DefinitionID filters history by definition (optional).
@@ -278,7 +284,8 @@ func (c *Client) ListAlertHistory(i *ListAlertHistoryInput) (*AlertHistoryRespon
 	p := "/alerts/history"
 
 	ro := &RequestOptions{
-		Params: map[string]string{},
+		Context: i.Context,
+		Params:  map[string]string{},
 	}
 	if i.After != nil {
 		ro.Params["after"] = *i.After

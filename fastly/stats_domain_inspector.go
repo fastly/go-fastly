@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"strconv"
 	"strings"
@@ -105,6 +106,8 @@ type DomainMeta struct {
 
 // GetDomainMetricsInput is the input to a DomainMetrics request.
 type GetDomainMetricsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
 	Cursor *string
 	// Datacenters limits query to one or more specific POPs.
@@ -152,6 +155,7 @@ func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst an
 	path := ToSafeURL("metrics", "domains", "services", i.ServiceID)
 
 	ro := &RequestOptions{
+		Context: i.Context,
 		Params: map[string]string{
 			"group_by":   strings.Join(i.GroupBy, ","),
 			"metric":     strings.Join(i.Metrics, ","),

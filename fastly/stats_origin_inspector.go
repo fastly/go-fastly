@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"strconv"
 	"strings"
@@ -81,6 +82,8 @@ type OriginMeta struct {
 
 // GetOriginMetricsInput is the input to an OriginMetrics request.
 type GetOriginMetricsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
 	Cursor *string
 	// Datacenters limits query to one or more specific POPs.
@@ -128,6 +131,7 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 	path := ToSafeURL("metrics", "origins", "services", i.ServiceID)
 
 	ro := &RequestOptions{
+		Context: i.Context,
 		Params: map[string]string{
 			"datacenter": strings.Join(i.Datacenters, ","),
 			"group_by":   strings.Join(i.GroupBy, ","),

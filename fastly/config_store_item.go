@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"sort"
@@ -22,6 +23,8 @@ type ConfigStoreItem struct {
 
 // CreateConfigStoreItemInput is the input to the CreateConfigStoreItem.
 type CreateConfigStoreItemInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// StoreID is the ID of the config store (required).
 	StoreID string
 	// Key is the item's name (required).
@@ -38,13 +41,15 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item")
 
-	resp, err := c.PostForm(path, i, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
-			// PostForm adds the appropriate Content-Type header.
 			"Accept": JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.PostForm(path, i, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -60,6 +65,8 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 
 // DeleteConfigStoreItemInput is the input to DeleteConfigStoreItem.
 type DeleteConfigStoreItemInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// StoreID is the ID of the item's config store (required).
 	StoreID string
 	// Key is the name of the config store item to delete (required).
@@ -77,12 +84,15 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
 
-	resp, err := c.Delete(path, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.Delete(path, ro)
 	if err != nil {
 		return err
 	}
@@ -95,6 +105,8 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 
 // GetConfigStoreItemInput is the input to the GetConfigStoreItem.
 type GetConfigStoreItemInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// StoreID is the ID of the item's config store (required).
 	StoreID string
 	// Key is the name of the config store item to fetch (required).
@@ -112,12 +124,15 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
 
-	resp, err := c.Get(path, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -164,12 +179,14 @@ func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigSt
 
 // UpdateConfigStoreItemInput is the input to the UpdateConfigStoreItem.
 type UpdateConfigStoreItemInput struct {
-	// Upsert, if true, will insert or update an item. Otherwise, update an item which must already exist.
-	Upsert bool
-	// StoreID is the ID of the item's config store (required).
-	StoreID string
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Key is the name of the config store item to update (required).
 	Key string
+	// StoreID is the ID of the item's config store (required).
+	StoreID string
+	// Upsert, if true, will insert or update an item. Otherwise, update an item which must already exist.
+	Upsert bool
 	// Value is the new item's value (required).
 	Value string `url:"item_value"`
 }
@@ -194,13 +211,15 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 		httpMethod = http.MethodPatch
 	}
 
-	resp, err := c.RequestForm(httpMethod, path, i, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
-			// RequestForm adds the appropriate Content-Type header.
 			"Accept": JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.RequestForm(httpMethod, path, i, ro)
 	if err != nil {
 		return nil, err
 	}

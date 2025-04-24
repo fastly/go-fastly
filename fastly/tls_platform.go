@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -45,6 +46,8 @@ type TLSDomain struct {
 
 // ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
 type ListBulkCertificatesInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// FilterTLSDomainsIDMatch filters certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
 	FilterTLSDomainsIDMatch string
 	// PageNumber is the page index for pagination.
@@ -82,14 +85,15 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 // ListBulkCertificates retrieves all resources.
 func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCertificate, error) {
 	path := "/tls/bulk/certificates"
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
+		Params: i.formatFilters(),
 	}
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}

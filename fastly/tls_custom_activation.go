@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -21,6 +22,8 @@ type TLSActivation struct {
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
 type ListTLSActivationsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// FilterTLSCertificateID limits the returned activations to a specific certificate.
 	FilterTLSCertificateID string
 	// FilterTLSConfigurationID limits the returned activations to a specific TLS configuration.
@@ -66,14 +69,15 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 // ListTLSActivations retrieves all resources.
 func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivation, error) {
 	path := "/tls/activations"
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
+	ro := &RequestOptions{
+		Context: i.Context,
+		Params:  i.formatFilters(),
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -98,6 +102,8 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 
 // GetTLSActivationInput is used as input to the GetTLSActivation function.
 type GetTLSActivationInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS activation.
 	ID string
 	// Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
@@ -113,6 +119,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 	path := ToSafeURL("tls", "activations", i.ID)
 
 	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
 		},

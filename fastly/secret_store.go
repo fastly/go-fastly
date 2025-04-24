@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"crypto/ed25519"
 	"crypto/rand"
 	"encoding/json"
@@ -34,6 +35,8 @@ type SecretStore struct {
 
 // CreateSecretStoreInput is used as input to the CreateSecretStore function.
 type CreateSecretStoreInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Name of the Secret Store (required).
 	Name string `json:"name"`
 }
@@ -44,10 +47,13 @@ func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, err
 		return nil, ErrMissingName
 	}
 
-	path := "/resources/stores/secret"
-	resp, err := c.PostJSON(path, i, &RequestOptions{
+	ro := &RequestOptions{
+		Context:  i.Context,
 		Parallel: true,
-	})
+	}
+
+	path := "/resources/stores/secret"
+	resp, err := c.PostJSON(path, i, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -71,6 +77,8 @@ type SecretStores struct {
 
 // ListSecretStoresInput is used as input to the ListSecretStores function.
 type ListSecretStoresInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor (optional).
 	Cursor string
 	// Limit is the desired number of Secret Stores (optional).
@@ -86,25 +94,26 @@ type ListSecretStoresInput struct {
 func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, error) {
 	path := "/resources/stores/secret"
 
-	params := make(map[string]string, 2)
-	if i.Limit > 0 {
-		params["limit"] = strconv.Itoa(i.Limit)
-	}
-	if i.Cursor != "" {
-		params["cursor"] = i.Cursor
-	}
-	if i.Name != "" {
-		params["name"] = i.Name
-	}
-
-	resp, err := c.Get(path, &RequestOptions{
-		Params: params,
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+		Params:   map[string]string{},
+	}
+	if i.Limit > 0 {
+		ro.Params["limit"] = strconv.Itoa(i.Limit)
+	}
+	if i.Cursor != "" {
+		ro.Params["cursor"] = i.Cursor
+	}
+	if i.Name != "" {
+		ro.Params["name"] = i.Name
+	}
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -120,6 +129,8 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 
 // GetSecretStoreInput is used as input to the GetSecretStore function.
 type GetSecretStoreInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// StoreID of the Secret Store (required).
 	StoreID string
 }
@@ -130,15 +141,18 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 		return nil, ErrMissingStoreID
 	}
 
-	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
-
-	resp, err := c.Get(path, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -154,6 +168,8 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 
 // DeleteSecretStoreInput is used as input to the DeleteSecretStore function.
 type DeleteSecretStoreInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// StoreID of the Secret Store (required).
 	StoreID string
 }
@@ -164,15 +180,18 @@ func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 		return ErrMissingStoreID
 	}
 
-	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
-
-	resp, err := c.Delete(path, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
+
+	resp, err := c.Delete(path, ro)
 	if err != nil {
 		return err
 	}
@@ -191,6 +210,8 @@ type Secret struct {
 type CreateSecretInput struct {
 	// ClientKey is the public key used to encrypt the secret with (optional).
 	ClientKey []byte
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Method is the HTTP request method used to create the secret.
 	//
 	// Secret names must be unique within a store.
@@ -251,14 +272,17 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 		return nil, ErrInvalidMethod
 	}
 
-	resp, err := c.Request(method, path, &RequestOptions{
+	ro := &RequestOptions{
+		Body:    &body,
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
-		Body:     &body,
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.Request(method, path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -282,6 +306,8 @@ type Secrets struct {
 
 // ListSecretsInput is used as input to the ListSecrets function.
 type ListSecretsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor (optional).
 	Cursor string
 	// Limit is the desired number of Secrets (optional).
@@ -301,22 +327,23 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets")
 
-	params := make(map[string]string, 2)
-	if i.Limit > 0 {
-		params["limit"] = strconv.Itoa(i.Limit)
-	}
-	if i.Cursor != "" {
-		params["cursor"] = i.Cursor
-	}
-
-	resp, err := c.Get(path, &RequestOptions{
-		Params: params,
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+		Params:   map[string]string{},
+	}
+	if i.Limit > 0 {
+		ro.Params["limit"] = strconv.Itoa(i.Limit)
+	}
+	if i.Cursor != "" {
+		ro.Params["cursor"] = i.Cursor
+	}
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -332,6 +359,8 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 
 // GetSecretInput is used as input to the GetSecret function.
 type GetSecretInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Name of the Secret (required).
 	Name string
 	// StoreID of the Secret Store (required).
@@ -349,13 +378,16 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	resp, err := c.Get(path, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -371,6 +403,8 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 // DeleteSecretInput is used as input to the DeleteSecret function.
 type DeleteSecretInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Name of the secret (required).
 	Name string
 	// StoreID of the Secret Store (required).
@@ -388,13 +422,16 @@ func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	resp, err := c.Delete(path, &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.Delete(path, ro)
 	if err != nil {
 		return err
 	}
@@ -441,13 +478,15 @@ func (ck *ClientKey) Encrypt(plaintext []byte) ([]byte, error) {
 func (c *Client) CreateClientKey() (*ClientKey, error) {
 	path := "/resources/stores/secret/client-key"
 
-	resp, err := c.Post(path, &RequestOptions{
+	ro := &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.Post(path, ro)
 	if err != nil {
 		return nil, err
 	}
@@ -467,13 +506,15 @@ func (c *Client) CreateClientKey() (*ClientKey, error) {
 func (c *Client) GetSigningKey() (ed25519.PublicKey, error) {
 	path := "/resources/stores/secret/signing-key"
 
-	resp, err := c.Get(path, &RequestOptions{
+	ro := &RequestOptions{
 		Headers: map[string]string{
 			"Content-Type": JSONMimeType,
 			"Accept":       JSONMimeType,
 		},
 		Parallel: true,
-	})
+	}
+
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}

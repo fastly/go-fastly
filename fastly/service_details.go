@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"time"
 )
@@ -260,6 +261,8 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 // SearchServiceInput is used as input to the SearchService function.
 type SearchServiceInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Name is the name of the service (required).
 	Name string
 }
@@ -272,11 +275,14 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 		return nil, ErrMissingName
 	}
 
-	resp, err := c.Get("/service/search", &RequestOptions{
+	ro := &RequestOptions{
+		Context: i.Context,
 		Params: map[string]string{
 			"name": i.Name,
 		},
-	})
+	}
+
+	resp, err := c.Get("/service/search", ro)
 	if err != nil {
 		return nil, err
 	}

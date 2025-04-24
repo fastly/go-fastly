@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -29,6 +30,8 @@ type PrivateKey struct {
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// FilterInUse is the returned keys to those without any matching TLS certificates.
 	FilterInUse string
 	// PageNumber is the page index for pagination.
@@ -64,14 +67,15 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 // ListPrivateKeys retrieves all resources.
 func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
 	path := "/tls/private_keys"
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
+	ro := &RequestOptions{
+		Context: i.Context,
+		Params:  i.formatFilters(),
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
 	}
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}

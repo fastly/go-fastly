@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 	"strings"
@@ -16,6 +17,8 @@ type Purge struct {
 
 // PurgeInput is used as input to the Purge function.
 type PurgeInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Soft performs a soft purge.
 	Soft bool
 	// URL is the URL to purge (required).
@@ -29,6 +32,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 	}
 
 	ro := &RequestOptions{
+		Context:  i.Context,
 		Parallel: true,
 	}
 	if i.Soft {
@@ -77,6 +81,8 @@ func constructRequestOptionsParam(us string) (map[string]string, error) {
 
 // PurgeKeyInput is used as input to the PurgeKey function.
 type PurgeKeyInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Key is the key to purge (required).
 	Key string
 	// ServiceID is the ID of the service (required).
@@ -96,8 +102,10 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge", i.Key)
 
-	ro := new(RequestOptions)
-	ro.Parallel = true
+	ro := &RequestOptions{
+		Context:  i.Context,
+		Parallel: true,
+	}
 	req, err := c.RawRequest(http.MethodPost, path, ro)
 	if err != nil {
 		return nil, err
@@ -122,6 +130,8 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 // PurgeKeysInput is used as input to the PurgeKeys function.
 type PurgeKeysInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Keys are the keys to purge (required).
 	Keys []string
 	// ServiceID is the ID of the service (required).
@@ -141,8 +151,10 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge")
 
-	ro := new(RequestOptions)
-	ro.Parallel = true
+	ro := &RequestOptions{
+		Context:  i.Context,
+		Parallel: true,
+	}
 	req, err := c.RawRequest(http.MethodPost, path, ro)
 	if err != nil {
 		return nil, err

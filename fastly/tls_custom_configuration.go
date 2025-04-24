@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -31,6 +32,8 @@ type DNSRecord struct {
 
 // ListCustomTLSConfigurationsInput is used as input to the ListCustomTLSConfigurationsInput function.
 type ListCustomTLSConfigurationsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// FilterBulk is whether or not to only include bulk=true configurations
 	FilterBulk bool
 	// Include captures related objects. Optional, comma-separated values. Permitted values: dns_records.
@@ -71,10 +74,11 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
 	path := "/tls/configurations"
 	ro := &RequestOptions{
-		Params: i.formatFilters(),
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
+		Params: i.formatFilters(),
 	}
 
 	resp, err := c.Get(path, ro)
@@ -102,6 +106,8 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 
 // GetCustomTLSConfigurationInput is used as input to the GetCustomTLSConfiguration function.
 type GetCustomTLSConfigurationInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS configuration.
 	ID string
 	// Include captures related objects. Optional, comma-separated values. Permitted values: dns_records.
@@ -117,13 +123,15 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 	path := ToSafeURL("tls", "configurations", i.ID)
 
 	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
 		},
+		Params: map[string]string{},
 	}
 
 	if i.Include != "" {
-		ro.Params = map[string]string{"include": i.Include}
+		ro.Params["include"] = i.Include
 	}
 
 	resp, err := c.Get(path, ro)

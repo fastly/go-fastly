@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -65,6 +66,8 @@ type CreateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
@@ -102,8 +105,10 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	ro := new(RequestOptions)
-	ro.HealthCheckHeaders = true
+	ro := &RequestOptions{
+		Context:            i.Context,
+		HealthCheckHeaders: true,
+	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck")
 
@@ -163,6 +168,8 @@ type UpdateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
@@ -205,8 +212,10 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	ro := new(RequestOptions)
-	ro.HealthCheckHeaders = true
+	ro := &RequestOptions{
+		Context:            i.Context,
+		HealthCheckHeaders: true,
+	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 

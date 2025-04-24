@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -27,6 +28,8 @@ type CustomTLSCertificate struct {
 
 // ListCustomTLSCertificatesInput is used as input to the Client.ListCustomTLSCertificates function.
 type ListCustomTLSCertificatesInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// FilterInUse limits the returned certificates to those currently using Fastly to terminate TLS (that is, certificates associated with an activation). Permitted values: true, false.
 	FilterInUse *bool
 	// FilterNotAfter limits the returned certificates to those that expire prior to the specified date in UTC. Accepts parameters: lte (e.g., filter[not_after][lte]=2020-05-05).
@@ -79,14 +82,15 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 // ListCustomTLSCertificates retrieves all resources.
 func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([]*CustomTLSCertificate, error) {
 	path := "/tls/certificates"
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
+	ro := &RequestOptions{
+		Context: i.Context,
 		Headers: map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		},
+		Params: i.formatFilters(),
 	}
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err
 	}

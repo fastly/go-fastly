@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -29,6 +30,8 @@ type Event struct {
 
 // GetAPIEventsFilterInput is used as input to the GetAPIEvents function.
 type GetAPIEventsFilterInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// CustomerID to Limit the returned events to a specific customer.
 	CustomerID string
 	// EventType to limit the returned events to a specific event type. See above for event codes.
@@ -67,7 +70,10 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 
 	path := "/events"
 
-	filters := &RequestOptions{Params: i.formatEventFilters()}
+	filters := &RequestOptions{
+		Context: i.Context,
+		Params:  i.formatEventFilters(),
+	}
 
 	resp, err := c.Get(path, filters)
 	if err != nil {

@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"fmt"
 	"io"
 	"reflect"
@@ -44,6 +45,8 @@ var saType = reflect.TypeOf(new(ServiceAuthorization))
 
 // ListServiceAuthorizationsInput is used as input to the ListServiceAuthorizations function.
 type ListServiceAuthorizationsInput struct {
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// PageNumber requests a specific page of service authorizations.
 	PageNumber int
 	// PageSize limits the number of returned service authorizations.
@@ -69,9 +72,11 @@ func (i *ListServiceAuthorizationsInput) formatFilters() map[string]string {
 
 // ListServiceAuthorizations retrieves all resources.
 func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*ServiceAuthorizations, error) {
-	resp, err := c.Get("/service-authorizations", &RequestOptions{
-		Params: i.formatFilters(),
-	})
+	ro := &RequestOptions{
+		Context: i.Context,
+		Params:  i.formatFilters(),
+	}
+	resp, err := c.Get("/service-authorizations", ro)
 	if err != nil {
 		return nil, err
 	}
