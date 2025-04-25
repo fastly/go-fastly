@@ -38,16 +38,13 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 		return nil, ErrMissingName
 	}
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Location != "" {
-		ro.Params["location"] = i.Location
+		requestOptions.Params["location"] = i.Location
 	}
 
 	const path = "/resources/stores/kv"
-	resp, err := c.PostJSON(path, i, ro)
+	resp, err := c.PostJSON(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -565,52 +562,48 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 		return ErrMissingKey
 	}
 
-	ro := &RequestOptions{
-		Context:  i.Context,
-		Headers:  map[string]string{},
-		Parallel: true, // This will allow the Fastly CLI to make bulk inserts.
-		Params:   map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true // This will allow the Fastly CLI to make bulk inserts.
 
 	if i.IfGenerationMatch != 0 {
-		ro.Headers["if-generation-match"] = strconv.FormatUint(i.IfGenerationMatch, 10)
+		requestOptions.Headers["if-generation-match"] = strconv.FormatUint(i.IfGenerationMatch, 10)
 	}
 
 	if i.Add {
-		ro.Params["add"] = "true"
+		requestOptions.Params["add"] = "true"
 	}
 
 	if i.Append {
-		ro.Params["append"] = "true"
+		requestOptions.Params["append"] = "true"
 	}
 
 	if i.Prepend {
-		ro.Params["prepend"] = "true"
+		requestOptions.Params["prepend"] = "true"
 	}
 
 	if i.BackgroundFetch {
-		ro.Params["background_fetch"] = "true"
+		requestOptions.Params["background_fetch"] = "true"
 	}
 
 	if i.Metadata != nil {
-		ro.Headers["metadata"] = *i.Metadata
+		requestOptions.Headers["metadata"] = *i.Metadata
 	}
 
 	if i.TimeToLiveSec != 0 {
-		ro.Headers["time_to_live_sec"] = strconv.Itoa(i.TimeToLiveSec)
+		requestOptions.Headers["time_to_live_sec"] = strconv.Itoa(i.TimeToLiveSec)
 	}
 
 	if i.Body != nil {
-		ro.Body = bufio.NewReader(i.Body)
-		ro.BodyLength = int64(i.Body.Len())
+		requestOptions.Body = bufio.NewReader(i.Body)
+		requestOptions.BodyLength = int64(i.Body.Len())
 	} else {
-		ro.Body = strings.NewReader(i.Value)
-		ro.BodyLength = int64(len(i.Value))
+		requestOptions.Body = strings.NewReader(i.Value)
+		requestOptions.BodyLength = int64(len(i.Value))
 	}
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
 
-	resp, err := c.Put(path, ro)
+	resp, err := c.Put(path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -650,24 +643,20 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 		return ErrMissingKey
 	}
 
-	ro := &RequestOptions{
-		Context:  i.Context,
-		Headers:  map[string]string{},
-		Parallel: true, // This will allow the Fastly CLI to make bulk deletes.
-		Params:   map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true // This will allow the Fastly CLI to make bulk inserts.
 
 	if i.Force {
-		ro.Params["force"] = "true"
+		requestOptions.Params["force"] = "true"
 	}
 
 	if i.IfGenerationMatch != 0 {
-		ro.Headers["if-generation-match"] = strconv.FormatUint(i.IfGenerationMatch, 10)
+		requestOptions.Headers["if-generation-match"] = strconv.FormatUint(i.IfGenerationMatch, 10)
 	}
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
 
-	resp, err := c.Delete(path, ro)
+	resp, err := c.Delete(path, requestOptions)
 	if err != nil {
 		return err
 	}

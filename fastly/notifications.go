@@ -53,24 +53,21 @@ type IntegrationsMeta struct {
 func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrationsResponse, error) {
 	p := "/notifications/integrations"
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 	if i.Type != nil {
-		ro.Params["type"] = *i.Type
+		requestOptions.Params["type"] = *i.Type
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}

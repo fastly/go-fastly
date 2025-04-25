@@ -73,27 +73,24 @@ type ListAlertDefinitionsInput struct {
 func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefinitionsResponse, error) {
 	p := "/alerts/definitions"
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Name != nil {
-		ro.Params["name"] = *i.Name
+		requestOptions.Params["name"] = *i.Name
 	}
 	if i.ServiceID != nil {
-		ro.Params["service_id"] = *i.ServiceID
+		requestOptions.Params["service_id"] = *i.ServiceID
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -283,36 +280,33 @@ type ListAlertHistoryInput struct {
 func (c *Client) ListAlertHistory(i *ListAlertHistoryInput) (*AlertHistoryResponse, error) {
 	p := "/alerts/history"
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.After != nil {
-		ro.Params["after"] = *i.After
+		requestOptions.Params["after"] = *i.After
 	}
 	if i.Before != nil {
-		ro.Params["before"] = *i.Before
+		requestOptions.Params["before"] = *i.Before
 	}
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.DefinitionID != nil {
-		ro.Params["definition_id"] = *i.DefinitionID
+		requestOptions.Params["definition_id"] = *i.DefinitionID
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.ServiceID != nil {
-		ro.Params["service_id"] = *i.ServiceID
+		requestOptions.Params["service_id"] = *i.ServiceID
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 	if i.Status != nil {
-		ro.Params["status"] = *i.Status
+		requestOptions.Params["status"] = *i.Status
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}

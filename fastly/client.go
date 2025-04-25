@@ -404,6 +404,8 @@ type RequestOptions struct {
 	Body io.Reader
 	// BodyLength is the final size of the Body.
 	BodyLength int64
+	// Context is a context.Context object that will be set to the Request's context.
+	Context *context.Context
 	// Headers is a map of key-value pairs that will be added to the Request.
 	Headers map[string]string
 	// HealthCheckHeaders indicates if there is any special parsing required to
@@ -416,8 +418,16 @@ type RequestOptions struct {
 	Parallel bool
 	// Params is a map of key-value pairs that will be added to the Request.
 	Params map[string]string
-	// Context is a context.Context object that will be set to the Request's context.
-	Context *context.Context
+}
+
+func CreateRequestOptions(cxt *context.Context) *RequestOptions {
+	requestOptions := &RequestOptions{
+		Context: cxt,
+		Headers: map[string]string{},
+		Params:  map[string]string{},
+	}
+
+	return requestOptions
 }
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the

@@ -284,15 +284,12 @@ func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubsc
 
 	path := ToSafeURL("tls", "subscriptions", i.ID)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Force {
-		ro.Params["force"] = "true"
+		requestOptions.Params["force"] = "true"
 	}
 
-	resp, err := c.PatchJSONAPI(path, i, ro)
+	resp, err := c.PatchJSONAPI(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -324,17 +321,14 @@ func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
 		return ErrMissingID
 	}
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Force {
-		ro.Params["force"] = "true"
+		requestOptions.Params["force"] = "true"
 	}
 
 	path := ToSafeURL("tls", "subscriptions", i.ID)
 
-	ignored, err := c.Delete(path, ro)
+	ignored, err := c.Delete(path, requestOptions)
 	if err != nil {
 		return err
 	}

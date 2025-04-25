@@ -98,20 +98,18 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 		return nil, ErrMissingID
 	}
 
-	ro := &RequestOptions{
-		Context: i.Context,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 
 	if i.Include != "" {
-		ro.Params = map[string]string{"include": i.Include}
-		ro.Headers = map[string]string{
+		requestOptions.Params = map[string]string{"include": i.Include}
+		requestOptions.Headers = map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		}
 	}
 
 	path := ToSafeURL("tls", "mutual_authentications", i.ID)
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

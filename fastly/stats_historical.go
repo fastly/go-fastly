@@ -185,24 +185,21 @@ func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
 
 	path := ToSafeURL(components...)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.By != nil {
-		ro.Params["by"] = *i.By
+		requestOptions.Params["by"] = *i.By
 	}
 	if i.From != nil {
-		ro.Params["from"] = *i.From
+		requestOptions.Params["from"] = *i.From
 	}
 	if i.Region != nil {
-		ro.Params["region"] = *i.Region
+		requestOptions.Params["region"] = *i.Region
 	}
 	if i.To != nil {
-		ro.Params["to"] = *i.To
+		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -246,24 +243,21 @@ type GetUsageInput struct {
 
 // GetUsage returns usage information aggregated across all Fastly services and grouped by region.
 func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.By != nil {
-		ro.Params["by"] = *i.By
+		requestOptions.Params["by"] = *i.By
 	}
 	if i.From != nil {
-		ro.Params["from"] = *i.From
+		requestOptions.Params["from"] = *i.From
 	}
 	if i.Region != nil {
-		ro.Params["region"] = *i.Region
+		requestOptions.Params["region"] = *i.Region
 	}
 	if i.To != nil {
-		ro.Params["to"] = *i.To
+		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get("/stats/usage", ro)
+	resp, err := c.Get("/stats/usage", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -294,24 +288,21 @@ type ServicesByRegionsUsage map[string]*ServicesUsage
 // GetUsageByService returns usage information aggregated by service and
 // grouped by service and region.
 func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, error) {
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.By != nil {
-		ro.Params["by"] = *i.By
+		requestOptions.Params["by"] = *i.By
 	}
 	if i.From != nil {
-		ro.Params["from"] = *i.From
+		requestOptions.Params["from"] = *i.From
 	}
 	if i.Region != nil {
-		ro.Params["region"] = *i.Region
+		requestOptions.Params["region"] = *i.Region
 	}
 	if i.To != nil {
-		ro.Params["to"] = *i.To
+		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get("/stats/usage_by_service", ro)
+	resp, err := c.Get("/stats/usage_by_service", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -342,27 +333,24 @@ type GetAggregateInput struct {
 
 // GetAggregateJSON returns all aggregated stats and decodes the response directly to the JSON struct dst
 func (c *Client) GetAggregateJSON(i *GetAggregateInput, dst any) error {
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.By != nil {
-		ro.Params["by"] = *i.By
+		requestOptions.Params["by"] = *i.By
 	}
 	if i.Context != nil {
-		ro.Context = i.Context
+		requestOptions.Context = i.Context
 	}
 	if i.From != nil {
-		ro.Params["from"] = *i.From
+		requestOptions.Params["from"] = *i.From
 	}
 	if i.Region != nil {
-		ro.Params["region"] = *i.Region
+		requestOptions.Params["region"] = *i.Region
 	}
 	if i.To != nil {
-		ro.Params["to"] = *i.To
+		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get("/stats/aggregate", ro)
+	resp, err := c.Get("/stats/aggregate", requestOptions)
 	if err != nil {
 		return err
 	}
