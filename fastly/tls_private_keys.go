@@ -30,7 +30,7 @@ type PrivateKey struct {
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// FilterInUse is the returned keys to those without any matching TLS certificates.
 	FilterInUse string

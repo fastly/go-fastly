@@ -11,7 +11,7 @@ import (
 
 // ListTLSDomainsInput is used as input to Client.ListTLSDomains.
 type ListTLSDomainsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// FilterInUse limits the returned domains to those currently using Fastly to terminate TLS with SNI (that is, domains considered "in use")
 	FilterInUse *bool

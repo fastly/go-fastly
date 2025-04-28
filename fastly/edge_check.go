@@ -29,7 +29,7 @@ type EdgeCheckResponse struct {
 
 // EdgeCheckInput is used as input to the EdgeCheck function.
 type EdgeCheckInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// URL is the full URL (host and path) to check on all nodes.
 	// If protocol is omitted, http will be assumed (required).

@@ -55,7 +55,7 @@ type AlertsMeta struct {
 
 // ListAlertDefinitionsInput is used as input to the ListAlertDefinitions function.
 type ListAlertDefinitionsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string
@@ -260,7 +260,7 @@ type ListAlertHistoryInput struct {
 	After *string
 	// Before filters history having start or end on or before the provided timestamp (optional).
 	Before *string
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string

@@ -22,7 +22,7 @@ type TLSActivation struct {
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
 type ListTLSActivationsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// FilterTLSCertificateID limits the returned activations to a specific certificate.
 	FilterTLSCertificateID string
@@ -102,7 +102,7 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 
 // GetTLSActivationInput is used as input to the GetTLSActivation function.
 type GetTLSActivationInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS activation.
 	ID string

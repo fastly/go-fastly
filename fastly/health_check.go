@@ -66,7 +66,7 @@ type CreateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
@@ -168,7 +168,7 @@ type UpdateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`

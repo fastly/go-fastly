@@ -12,7 +12,7 @@ import (
 // ListInput specifies the information needed for the List() function to perform
 // the operation.
 type ListInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is the cursor value from the next_cursor field of a previous
 	// response, used to retrieve the next page. To request the first page, this

@@ -120,7 +120,7 @@ type Stats struct {
 type GetStatsInput struct {
 	// By is the duration of sample windows.
 	By *string
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Field is the name of the stats field.
 	Field *string
@@ -231,7 +231,7 @@ type RegionsUsage map[string]*Usage
 type GetUsageInput struct {
 	// By is the duration of sample windows.
 	By *string
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
 	From *string
@@ -322,7 +322,7 @@ type GetAggregateInput struct {
 	// By is the duration of sample windows.
 	By *string
 	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	From    *string
 	// Region limits query to a specific geographic region.

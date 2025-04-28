@@ -261,7 +261,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 // SearchServiceInput is used as input to the SearchService function.
 type SearchServiceInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name is the name of the service (required).
 	Name string

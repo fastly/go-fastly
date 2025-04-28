@@ -29,7 +29,7 @@ type ConfigStoreMetadata struct {
 
 // CreateConfigStoreInput is the input to CreateConfigStore.
 type CreateConfigStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name is the name of the store to create (required).
 	Name string `url:"name"`
@@ -63,7 +63,7 @@ func (c *Client) CreateConfigStore(i *CreateConfigStoreInput) (*ConfigStore, err
 
 // DeleteConfigStoreInput is the input parameter to DeleteConfigStore.
 type DeleteConfigStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the StoreID of the config store to delete (required).
 	StoreID string
@@ -98,7 +98,7 @@ func (c *Client) DeleteConfigStore(i *DeleteConfigStoreInput) error {
 
 // GetConfigStoreInput is the input to GetConfigStore.
 type GetConfigStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the StoreID of the config store (required).
 	StoreID string
@@ -136,7 +136,7 @@ func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
 
 // GetConfigStoreMetadataInput is the input to GetConfigStoreMetadata.
 type GetConfigStoreMetadataInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the StoreID of the config store (required).
 	StoreID string
@@ -174,7 +174,7 @@ func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*Config
 
 // ListConfigStoreServicesInput is the input to ListConfigStoreServices.
 type ListConfigStoresInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name is the name of a config store (optional).
 	Name string
@@ -215,7 +215,7 @@ func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, err
 
 // ListConfigStoreServicesInput is the input to ListConfigStoreServices.
 type ListConfigStoreServicesInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the StoreID of the config store (required).
 	StoreID string
@@ -254,7 +254,7 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 
 // UpdateConfigStoreInput is the input to UpdateConfigStore.
 type UpdateConfigStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name is the new name of the config store (required).
 	Name string `url:"name"`

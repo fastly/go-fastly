@@ -24,7 +24,7 @@ type KVStore struct {
 
 // CreateKVStoreInput is used as an input to the CreateKVStore function.
 type CreateKVStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name is the name of the store to create (required).
 	Name string `json:"name"`
@@ -59,7 +59,7 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 
 // ListKVStoresInput is used as an input to the ListKVStores function.
 type ListKVStoresInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is used for paginating through results.
 	Cursor string
@@ -249,7 +249,7 @@ const (
 
 // ListKVStoreKeysInput is the input to the ListKVStoreKeys function.
 type ListKVStoreKeysInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Consistency determines accuracy of results (values: eventual, strong). i.e. 'eventual' uses caching to improve performance (default: strong)
 	Consistency Consistency
@@ -517,7 +517,7 @@ type InsertKVStoreKeyInput struct {
 	// This is for users who are passing very large files.
 	// Otherwise use the 'Value' field instead.
 	Body LengthReader
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the StoreID of the kv store (required).
 	StoreID string
@@ -619,7 +619,7 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 
 // DeleteKVStoreKeyInput is the input to the DeleteKVStoreKey function.
 type DeleteKVStoreKeyInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Force is a flag to ignore a failure if the specified key
 	// was not found.
@@ -675,7 +675,7 @@ type BatchModifyKVStoreKeyInput struct {
 	// separated by a new line. {"key": "example","value": "<base64-encoded>"}
 	// (required).
 	Body io.Reader
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the StoreID of the kv store (required).
 	StoreID string

@@ -22,7 +22,7 @@ type Integration struct {
 
 // SearchIntegrationsInput is used as input to the SearchIntegrations function.
 type SearchIntegrationsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta.
 	Cursor *string

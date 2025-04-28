@@ -30,7 +30,7 @@ type Event struct {
 
 // GetAPIEventsFilterInput is used as input to the GetAPIEvents function.
 type GetAPIEventsFilterInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// CustomerID to Limit the returned events to a specific customer.
 	CustomerID string

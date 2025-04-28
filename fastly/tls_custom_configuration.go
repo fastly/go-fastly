@@ -32,7 +32,7 @@ type DNSRecord struct {
 
 // ListCustomTLSConfigurationsInput is used as input to the ListCustomTLSConfigurationsInput function.
 type ListCustomTLSConfigurationsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// FilterBulk is whether or not to only include bulk=true configurations
 	FilterBulk bool
@@ -106,7 +106,7 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 
 // GetCustomTLSConfigurationInput is used as input to the GetCustomTLSConfiguration function.
 type GetCustomTLSConfigurationInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS configuration.
 	ID string

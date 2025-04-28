@@ -23,7 +23,7 @@ type TLSMutualAuthentication struct {
 
 // ListTLSMutualAuthenticationsInput is used as input to the Client.ListTLSMutualAuthentication function.
 type ListTLSMutualAuthenticationsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Include is a list of related objects to include (optional).
 	Include []string
@@ -84,7 +84,7 @@ func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInpu
 
 // GetTLSMutualAuthenticationInput is used as input to the GetTLSMutualAuthentication function.
 type GetTLSMutualAuthenticationInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// ID is an alphanumeric string identifying a mutual authentication (required).
 	ID string

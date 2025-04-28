@@ -404,7 +404,7 @@ type RequestOptions struct {
 	Body io.Reader
 	// BodyLength is the final size of the Body.
 	BodyLength int64
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Headers is a map of key-value pairs that will be added to the Request.
 	Headers map[string]string

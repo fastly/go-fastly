@@ -17,7 +17,7 @@ type Purge struct {
 
 // PurgeInput is used as input to the Purge function.
 type PurgeInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Soft performs a soft purge.
 	Soft bool
@@ -81,7 +81,7 @@ func constructRequestOptionsParam(us string) (map[string]string, error) {
 
 // PurgeKeyInput is used as input to the PurgeKey function.
 type PurgeKeyInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Key is the key to purge (required).
 	Key string
@@ -130,7 +130,7 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 // PurgeKeysInput is used as input to the PurgeKeys function.
 type PurgeKeysInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Keys are the keys to purge (required).
 	Keys []string

@@ -45,7 +45,7 @@ var saType = reflect.TypeOf(new(ServiceAuthorization))
 
 // ListServiceAuthorizationsInput is used as input to the ListServiceAuthorizations function.
 type ListServiceAuthorizationsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// PageNumber requests a specific page of service authorizations.
 	PageNumber int

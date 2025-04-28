@@ -23,7 +23,7 @@ type ConfigStoreItem struct {
 
 // CreateConfigStoreItemInput is the input to the CreateConfigStoreItem.
 type CreateConfigStoreItemInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the ID of the config store (required).
 	StoreID string
@@ -65,7 +65,7 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 
 // DeleteConfigStoreItemInput is the input to DeleteConfigStoreItem.
 type DeleteConfigStoreItemInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the ID of the item's config store (required).
 	StoreID string
@@ -105,7 +105,7 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 
 // GetConfigStoreItemInput is the input to the GetConfigStoreItem.
 type GetConfigStoreItemInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID is the ID of the item's config store (required).
 	StoreID string
@@ -179,7 +179,7 @@ func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigSt
 
 // UpdateConfigStoreItemInput is the input to the UpdateConfigStoreItem.
 type UpdateConfigStoreItemInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Key is the name of the config store item to update (required).
 	Key string

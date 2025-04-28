@@ -46,7 +46,7 @@ type TLSDomain struct {
 
 // ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
 type ListBulkCertificatesInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// FilterTLSDomainsIDMatch filters certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
 	FilterTLSDomainsIDMatch string

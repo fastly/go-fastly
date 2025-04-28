@@ -106,7 +106,7 @@ type DomainMeta struct {
 
 // GetDomainMetricsInput is the input to a DomainMetrics request.
 type GetDomainMetricsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
 	Cursor *string

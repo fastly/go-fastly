@@ -14,7 +14,7 @@ import (
 type ListEntriesInput struct {
 	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is used for paginating through results.
 	Cursor *string

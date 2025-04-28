@@ -35,7 +35,7 @@ type SecretStore struct {
 
 // CreateSecretStoreInput is used as input to the CreateSecretStore function.
 type CreateSecretStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name of the Secret Store (required).
 	Name string `json:"name"`
@@ -77,7 +77,7 @@ type SecretStores struct {
 
 // ListSecretStoresInput is used as input to the ListSecretStores function.
 type ListSecretStoresInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is the pagination cursor (optional).
 	Cursor string
@@ -129,7 +129,7 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 
 // GetSecretStoreInput is used as input to the GetSecretStore function.
 type GetSecretStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID of the Secret Store (required).
 	StoreID string
@@ -168,7 +168,7 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 
 // DeleteSecretStoreInput is used as input to the DeleteSecretStore function.
 type DeleteSecretStoreInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// StoreID of the Secret Store (required).
 	StoreID string
@@ -210,7 +210,7 @@ type Secret struct {
 type CreateSecretInput struct {
 	// ClientKey is the public key used to encrypt the secret with (optional).
 	ClientKey []byte
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Method is the HTTP request method used to create the secret.
 	//
@@ -306,7 +306,7 @@ type Secrets struct {
 
 // ListSecretsInput is used as input to the ListSecrets function.
 type ListSecretsInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Cursor is the pagination cursor (optional).
 	Cursor string
@@ -359,7 +359,7 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 
 // GetSecretInput is used as input to the GetSecret function.
 type GetSecretInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name of the Secret (required).
 	Name string
@@ -403,7 +403,7 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 // DeleteSecretInput is used as input to the DeleteSecret function.
 type DeleteSecretInput struct {
-	// Context is a context.Context object that will be set to the Request's context.
+	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Name of the secret (required).
 	Name string
