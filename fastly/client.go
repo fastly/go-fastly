@@ -421,13 +421,11 @@ type RequestOptions struct {
 }
 
 func CreateRequestOptions(cxt *context.Context) *RequestOptions {
-	requestOptions := &RequestOptions{
+	return &RequestOptions{
 		Context: cxt,
 		Headers: map[string]string{},
 		Params:  map[string]string{},
 	}
-
-	return requestOptions
 }
 
 // RawRequest accepts a verb, URL, and RequestOptions struct and returns the
