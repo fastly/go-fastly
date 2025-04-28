@@ -102,8 +102,7 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 
 	if i.Include != "" {
 		requestOptions.Params["include"] = i.Include
-		requestOptions.Headers["Accept"] = jsonapi.MediaType, // this is required otherwise the filters don't work
-		}
+		requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 	}
 
 	path := ToSafeURL("tls", "mutual_authentications", i.ID)
