@@ -39,14 +39,17 @@ type EdgeCheckInput struct {
 // EdgeCheck queries the edge cache for all of Fastly's servers for the given
 // URL.
 func (c *Client) EdgeCheck(i *EdgeCheckInput) ([]*EdgeCheck, error) {
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params: map[string]string{
-			"url": i.URL,
-		},
-	}
 
-	resp, err := c.Get("/content/edge_check", ro)
+	var requestOptions *RequestOptions
+	if i != nil {
+		requestOptions = CreateRequestOptions(i.Context)
+		requestOptions.Params["url"] = i.URL
+	} else {
+		requestOptions = CreateRequestOptions(nil)
+	}
+	requestOptions.Parallel = true
+
+	resp, err := c.Get("/content/edge_check", requestOptions)
 	if err != nil {
 		return nil, err
 	}

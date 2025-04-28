@@ -65,15 +65,11 @@ func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 // ListTLSDomains retrieves all resources.
 func (c *Client) ListTLSDomains(i *ListTLSDomainsInput) ([]*TLSDomain, error) {
 	p := "/tls/domains"
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
-		},
-		Params: i.formatFilters(),
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}

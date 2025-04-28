@@ -73,15 +73,11 @@ func (i *ListCustomTLSConfigurationsInput) formatFilters() map[string]string {
 // ListCustomTLSConfigurations retrieves all resources.
 func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput) ([]*CustomTLSConfiguration, error) {
 	path := "/tls/configurations"
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
-		},
-		Params: i.formatFilters(),
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -122,19 +118,14 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 
 	path := ToSafeURL("tls", "configurations", i.ID)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
-		},
-		Params: map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
 	if i.Include != "" {
-		ro.Params["include"] = i.Include
+		requestOptions.Params["include"] = i.Include
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

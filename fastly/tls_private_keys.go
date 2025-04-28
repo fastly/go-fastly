@@ -67,15 +67,11 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 // ListPrivateKeys retrieves all resources.
 func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
 	path := "/tls/private_keys"
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  i.formatFilters(),
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
-		},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

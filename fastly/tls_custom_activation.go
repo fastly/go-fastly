@@ -69,15 +69,12 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 // ListTLSActivations retrieves all resources.
 func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivation, error) {
 	path := "/tls/activations"
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  i.formatFilters(),
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
-		},
-	}
 
-	resp, err := c.Get(path, ro)
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
+
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -118,18 +115,14 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 
 	path := ToSafeURL("tls", "activations", i.ID)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
-		},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
 	if i.Include != nil {
-		ro.Params = map[string]string{"include": *i.Include}
+		requestOptions.Params = map[string]string{"include": *i.Include}
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

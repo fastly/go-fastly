@@ -51,15 +51,11 @@ func (i *ListTLSMutualAuthenticationsInput) formatFilters() map[string]string {
 // ListTLSMutualAuthentication retrieves all resources.
 func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInput) ([]*TLSMutualAuthentication, error) {
 	path := "/tls/mutual_authentications"
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
-		},
-		Params: i.formatFilters(),
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

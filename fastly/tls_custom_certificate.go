@@ -82,15 +82,11 @@ func (i *ListCustomTLSCertificatesInput) formatFilters() map[string]string {
 // ListCustomTLSCertificates retrieves all resources.
 func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([]*CustomTLSCertificate, error) {
 	path := "/tls/certificates"
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
-		},
-		Params: i.formatFilters(),
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

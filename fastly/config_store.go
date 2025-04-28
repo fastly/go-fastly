@@ -39,15 +39,11 @@ type CreateConfigStoreInput struct {
 func (c *Client) CreateConfigStore(i *CreateConfigStoreInput) (*ConfigStore, error) {
 	path := "/resources/stores/config"
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.PostForm(path, i, ro)
+	resp, err := c.PostForm(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -77,15 +73,11 @@ func (c *Client) DeleteConfigStore(i *DeleteConfigStoreInput) error {
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.Delete(path, ro)
+	resp, err := c.Delete(path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -112,15 +104,11 @@ func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -150,15 +138,11 @@ func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*Config
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "info")
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -184,19 +168,15 @@ type ListConfigStoresInput struct {
 func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, error) {
 	path := "/resources/stores/config"
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
 	if i.Name != "" {
-		ro.Params = map[string]string{"name": i.Name}
+		requestOptions.Params = map[string]string{"name": i.Name}
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -230,15 +210,11 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "services")
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -270,15 +246,11 @@ func (c *Client) UpdateConfigStore(i *UpdateConfigStoreInput) (*ConfigStore, err
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.PutForm(path, i, ro)
+	resp, err := c.PutForm(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}

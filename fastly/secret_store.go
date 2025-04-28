@@ -47,13 +47,11 @@ func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, err
 		return nil, ErrMissingName
 	}
 
-	ro := &RequestOptions{
-		Context:  i.Context,
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true
 
 	path := "/resources/stores/secret"
-	resp, err := c.PostJSON(path, i, ro)
+	resp, err := c.PostJSON(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -94,26 +92,24 @@ type ListSecretStoresInput struct {
 func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, error) {
 	path := "/resources/stores/secret"
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
-		Params:   map[string]string{},
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
+
 	if i.Limit > 0 {
-		ro.Params["limit"] = strconv.Itoa(i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(i.Limit)
 	}
 	if i.Cursor != "" {
-		ro.Params["cursor"] = i.Cursor
+		requestOptions.Params["cursor"] = i.Cursor
 	}
 	if i.Name != "" {
-		ro.Params["name"] = i.Name
+		requestOptions.Params["name"] = i.Name
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -141,18 +137,16 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 		return nil, ErrMissingStoreID
 	}
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -180,18 +174,16 @@ func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
 		return ErrMissingStoreID
 	}
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
 
-	resp, err := c.Delete(path, ro)
+	resp, err := c.Delete(path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -271,18 +263,15 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 	default:
 		return nil, ErrInvalidMethod
 	}
-
-	ro := &RequestOptions{
-		Body:    &body,
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Body = &body
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 
-	resp, err := c.Request(method, path, ro)
+	resp, err := c.Request(method, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -327,23 +316,20 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets")
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
-		Params:   map[string]string{},
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 	if i.Limit > 0 {
-		ro.Params["limit"] = strconv.Itoa(i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(i.Limit)
 	}
 	if i.Cursor != "" {
-		ro.Params["cursor"] = i.Cursor
+		requestOptions.Params["cursor"] = i.Cursor
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -378,16 +364,14 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -422,16 +406,14 @@ func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 
-	resp, err := c.Delete(path, ro)
+	resp, err := c.Delete(path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -478,15 +460,14 @@ func (ck *ClientKey) Encrypt(plaintext []byte) ([]byte, error) {
 func (c *Client) CreateClientKey() (*ClientKey, error) {
 	path := "/resources/stores/secret/client-key"
 
-	ro := &RequestOptions{
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
+	requestOptions := CreateRequestOptions(nil)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 
-	resp, err := c.Post(path, ro)
+	resp, err := c.Post(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -506,15 +487,14 @@ func (c *Client) CreateClientKey() (*ClientKey, error) {
 func (c *Client) GetSigningKey() (ed25519.PublicKey, error) {
 	path := "/resources/stores/secret/signing-key"
 
-	ro := &RequestOptions{
-		Headers: map[string]string{
-			"Content-Type": JSONMimeType,
-			"Accept":       JSONMimeType,
-		},
-		Parallel: true,
+	requestOptions := CreateRequestOptions(nil)
+	requestOptions.Headers = map[string]string{
+		"Content-Type": JSONMimeType,
+		"Accept":       JSONMimeType,
 	}
+	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

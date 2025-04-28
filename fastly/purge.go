@@ -31,24 +31,22 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, ErrMissingURL
 	}
 
-	ro := &RequestOptions{
-		Context:  i.Context,
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true
 	if i.Soft {
-		ro.Headers = map[string]string{
+		requestOptions.Headers = map[string]string{
 			"Fastly-Soft-Purge": "1",
 		}
 	}
 
 	var err error
 	// nosemgrep: trailofbits.go.questionable-assignment.questionable-assignment
-	ro.Params, err = constructRequestOptionsParam(i.URL)
+	requestOptions.Params, err = constructRequestOptionsParam(i.URL)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := c.Post("purge/"+i.URL, ro)
+	resp, err := c.Post("purge/"+i.URL, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -102,11 +100,10 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge", i.Key)
 
-	ro := &RequestOptions{
-		Context:  i.Context,
-		Parallel: true,
-	}
-	req, err := c.RawRequest(http.MethodPost, path, ro)
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true
+
+	req, err := c.RawRequest(http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -151,11 +148,10 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge")
 
-	ro := &RequestOptions{
-		Context:  i.Context,
-		Parallel: true,
-	}
-	req, err := c.RawRequest(http.MethodPost, path, ro)
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true
+
+	req, err := c.RawRequest(http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

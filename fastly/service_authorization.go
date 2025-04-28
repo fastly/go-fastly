@@ -72,11 +72,9 @@ func (i *ListServiceAuthorizationsInput) formatFilters() map[string]string {
 
 // ListServiceAuthorizations retrieves all resources.
 func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*ServiceAuthorizations, error) {
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  i.formatFilters(),
-	}
-	resp, err := c.Get("/service-authorizations", ro)
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	resp, err := c.Get("/service-authorizations", requestOptions)
 	if err != nil {
 		return nil, err
 	}

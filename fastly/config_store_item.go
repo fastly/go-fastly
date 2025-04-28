@@ -41,15 +41,11 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item")
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.PostForm(path, i, ro)
+	resp, err := c.PostForm(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -84,15 +80,11 @@ func (c *Client) DeleteConfigStoreItem(i *DeleteConfigStoreItemInput) error {
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.Delete(path, ro)
+	resp, err := c.Delete(path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -124,15 +116,11 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "item", i.Key)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -211,15 +199,11 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 		httpMethod = http.MethodPatch
 	}
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": JSONMimeType,
-		},
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = JSONMimeType
+	requestOptions.Parallel = true
 
-	resp, err := c.RequestForm(httpMethod, path, i, ro)
+	resp, err := c.RequestForm(httpMethod, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}

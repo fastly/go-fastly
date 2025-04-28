@@ -101,14 +101,15 @@ type ListKVStoresResponse struct {
 func (c *Client) ListKVStores(i *ListKVStoresInput) (*ListKVStoresResponse, error) {
 	const path = "/resources/stores/kv"
 
-	ro := &RequestOptions{
-		Params: i.formatFilters(),
-	}
+	var requestOptions *RequestOptions
 	if i != nil {
-		ro.Context = i.Context
+		requestOptions = CreateRequestOptions(i.Context)
+		requestOptions.Params = i.formatFilters()
+	} else {
+		requestOptions = CreateRequestOptions(nil)
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -300,14 +301,17 @@ func (c *Client) ListKVStoreKeys(i *ListKVStoreKeysInput) (*ListKVStoreKeysRespo
 		return nil, ErrMissingStoreID
 	}
 
-	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys")
-
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params:  i.formatFilters(),
+	var requestOptions *RequestOptions
+	if i != nil {
+		requestOptions = CreateRequestOptions(i.Context)
+		requestOptions.Params = i.formatFilters()
+	} else {
+		requestOptions = CreateRequestOptions(nil)
 	}
 
-	resp, err := c.Get(path, ro)
+	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys")
+
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -688,18 +692,19 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 		return ErrMissingStoreID
 	}
 
-	ro := &RequestOptions{
-		Body:    bufio.NewReader(i.Body),
-		Context: i.Context,
-		Headers: map[string]string{
-			"Content-Type": "application/x-ndjson",
-		},
-		Parallel: true,
+	var requestOptions *RequestOptions
+	if i != nil {
+		requestOptions = CreateRequestOptions(i.Context)
+		requestOptions.Body = bufio.NewReader(i.Body)
+	} else {
+		requestOptions = CreateRequestOptions(nil)
 	}
+	requestOptions.Headers["Content-Type"] = "application/x-ndjson"
+	requestOptions.Parallel = true
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "batch")
 
-	resp, err := c.Put(path, ro)
+	resp, err := c.Put(path, requestOptions)
 	if err != nil {
 		return err
 	}

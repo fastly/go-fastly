@@ -275,14 +275,10 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 		return nil, ErrMissingName
 	}
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Params: map[string]string{
-			"name": i.Name,
-		},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params["name"] = i.Name
 
-	resp, err := c.Get("/service/search", ro)
+	resp, err := c.Get("/service/search", requestOptions)
 	if err != nil {
 		return nil, err
 	}

@@ -105,14 +105,12 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	ro := &RequestOptions{
-		Context:            i.Context,
-		HealthCheckHeaders: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.HealthCheckHeaders = true
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck")
 
-	resp, err := c.PostForm(path, i, ro)
+	resp, err := c.PostForm(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -212,14 +210,12 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	ro := &RequestOptions{
-		Context:            i.Context,
-		HealthCheckHeaders: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.HealthCheckHeaders = true
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.PutForm(path, i, ro)
+	resp, err := c.PutForm(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}

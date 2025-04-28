@@ -130,14 +130,11 @@ func (s *ListTLSSubscriptionsInput) formatFilters() map[string]string {
 
 // ListTLSSubscriptions retrieves all resources.
 func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubscription, error) {
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // Needed for "include" but seemingly not the other fields
-		},
-		Params: i.formatFilters(),
-	}
-	resp, err := c.Get("/tls/subscriptions", ro)
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
+
+	resp, err := c.Get("/tls/subscriptions", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -230,19 +227,14 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 
 	path := ToSafeURL("tls", "subscriptions", i.ID)
 
-	ro := &RequestOptions{
-		Context: i.Context,
-		Headers: map[string]string{
-			"Accept": jsonapi.MediaType, // this is required otherwise the params don't work
-		},
-		Params: map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
 	if i.Include != nil {
-		ro.Params["include"] = *i.Include
+		requestOptions.Params["include"] = *i.Include
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
