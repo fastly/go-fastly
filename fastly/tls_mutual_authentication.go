@@ -101,7 +101,7 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 	requestOptions := CreateRequestOptions(i.Context)
 
 	if i.Include != "" {
-		requestOptions.Params = map[string]string{"include": i.Include}
+		requestOptions.Params["include"] = i.Include
 		requestOptions.Headers = map[string]string{
 			"Accept": jsonapi.MediaType, // this is required otherwise the filters don't work
 		}
