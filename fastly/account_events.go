@@ -70,12 +70,10 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 
 	path := "/events"
 
-	filters := &RequestOptions{
-		Context: i.Context,
-		Params:  i.formatEventFilters(),
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatEventFilters()
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return eventsResponse, err
 	}

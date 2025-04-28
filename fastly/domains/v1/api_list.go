@@ -30,27 +30,24 @@ type ListInput struct {
 
 // List retrieves a list of domains, with optional filtering and pagination.
 func List(c *fastly.Client, i *ListInput) (*Collection, error) {
-	ro := &fastly.RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := fastly.CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.FQDN != nil {
-		ro.Params["fqdn"] = *i.FQDN
+		requestOptions.Params["fqdn"] = *i.FQDN
 	}
 	if i.ServiceID != nil {
-		ro.Params["service_id"] = *i.ServiceID
+		requestOptions.Params["service_id"] = *i.ServiceID
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get("/domains/v1", ro)
+	resp, err := c.Get("/domains/v1", requestOptions)
 	if err != nil {
 		return nil, err
 	}

@@ -28,20 +28,17 @@ func ListEntries(c *fastly.Client, i *ListEntriesInput) (*ComputeACLEntries, err
 		return nil, fastly.ErrMissingComputeACLID
 	}
 
-	ro := &fastly.RequestOptions{
-		Context: i.Context,
-		Params:  map[string]string{},
-	}
+	requestOptions := fastly.CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID, "entries")
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
