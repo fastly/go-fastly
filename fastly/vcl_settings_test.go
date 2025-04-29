@@ -71,7 +71,7 @@ func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	}
 	body := v.Encode()
 
-	if body != "ServiceID=foo&ServiceVersion=1&general.default_ttl=0" {
+	if body != "Context=&ServiceID=foo&ServiceVersion=1&general.default_ttl=0" {
 		t.Errorf("Update request should contain a default_ttl. Got: %s", body)
 	}
 }
