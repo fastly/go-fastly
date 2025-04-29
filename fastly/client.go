@@ -518,6 +518,9 @@ func (c *Client) RequestForm(verb, p string, i any, ro RequestOptions) (*http.Re
 		return nil, err
 	}
 
+	//since context is now part of a lot of the input objects, we need to remove it from the body
+	v.Del("Context")
+
 	body := v.Encode()
 	if ro.HealthCheckHeaders {
 		body = parseHealthCheckHeaders(body)
