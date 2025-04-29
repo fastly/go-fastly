@@ -143,6 +143,8 @@ func (c *Client) CreateAlertDefinition(i *CreateAlertDefinitionInput) (*AlertDef
 
 // GetAlertDefinitionInput is used as input to the GetAlertDefinition function.
 type GetAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of definition to fetch (required).
 	ID *string
 }
@@ -155,7 +157,7 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

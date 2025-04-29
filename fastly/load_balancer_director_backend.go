@@ -67,6 +67,8 @@ func (c *Client) CreateDirectorBackend(i *CreateDirectorBackendInput) (*Director
 type GetDirectorBackendInput struct {
 	// Backend is the name of the backend (required).
 	Backend string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Director is the name of the director (required).
 	Director string
 	// ServiceID is the ID of the service (required).
@@ -92,7 +94,7 @@ func (c *Client) GetDirectorBackend(i *GetDirectorBackendInput) (*DirectorBacken
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Director, "backend", i.Backend)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

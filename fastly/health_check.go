@@ -30,6 +30,8 @@ type HealthCheck struct {
 
 // ListHealthChecksInput is used as input to the ListHealthChecks function.
 type ListHealthChecksInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -47,7 +49,7 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -125,6 +127,8 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 
 // GetHealthCheckInput is used as input to the GetHealthCheck function.
 type GetHealthCheckInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the health check to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +151,7 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

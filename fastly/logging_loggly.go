@@ -23,6 +23,8 @@ type Loggly struct {
 
 // ListLogglyInput is used as input to the ListLoggly function.
 type ListLogglyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -39,7 +41,7 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "loggly")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -99,6 +101,8 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 
 // GetLogglyInput is used as input to the GetLoggly function.
 type GetLogglyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the loggly to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -120,7 +124,7 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "loggly", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

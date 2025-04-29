@@ -20,6 +20,8 @@ type Dictionary struct {
 
 // ListDictionariesInput is used as input to the ListDictionaries function.
 type ListDictionariesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -37,7 +39,7 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -90,6 +92,8 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 
 // GetDictionaryInput is used as input to the GetDictionary function.
 type GetDictionaryInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the dictionary to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -112,7 +116,7 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

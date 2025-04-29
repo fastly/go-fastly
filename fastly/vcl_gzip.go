@@ -21,6 +21,8 @@ type Gzip struct {
 
 // ListGzipsInput is used as input to the ListGzips function.
 type ListGzipsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -37,7 +39,7 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -93,6 +95,8 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 
 // GetGzipInput is used as input to the GetGzip function.
 type GetGzipInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Gzip to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -114,7 +118,7 @@ func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

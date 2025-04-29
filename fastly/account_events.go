@@ -89,6 +89,8 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 
 // GetAPIEventInput is used as input to the GetAPIEvent function.
 type GetAPIEventInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// EventID is the ID of the event and is required.
 	EventID string
 }
@@ -101,7 +103,7 @@ func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 
 	path := ToSafeURL("events", i.EventID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -25,6 +25,8 @@ type Scalyr struct {
 
 // ListScalyrsInput is used as input to the ListScalyrs function.
 type ListScalyrsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -41,7 +43,7 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +107,8 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 
 // GetScalyrInput is used as input to the GetScalyr function.
 type GetScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the scalyr to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -126,7 +130,7 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

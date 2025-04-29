@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"io"
 	"strconv"
@@ -35,6 +36,8 @@ type PackageMetadata struct {
 
 // GetPackageInput is used as input to the GetPackage function.
 type GetPackageInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string `mapstructure:"service_id"`
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +51,7 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 		return nil, err
 	}
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

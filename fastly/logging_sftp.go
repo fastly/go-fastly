@@ -35,6 +35,8 @@ type SFTP struct {
 
 // ListSFTPsInput is used as input to the ListSFTPs function.
 type ListSFTPsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -51,7 +53,7 @@ func (c *Client) ListSFTPs(i *ListSFTPsInput) ([]*SFTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +137,8 @@ func (c *Client) CreateSFTP(i *CreateSFTPInput) (*SFTP, error) {
 
 // GetSFTPInput is used as input to the GetSFTP function.
 type GetSFTPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the SFTP to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -156,7 +160,7 @@ func (c *Client) GetSFTP(i *GetSFTPInput) (*SFTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sftp", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

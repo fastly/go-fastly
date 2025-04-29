@@ -53,6 +53,8 @@ type Pool struct {
 
 // ListPoolsInput is used as input to the ListPools function.
 type ListPoolsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -70,7 +72,7 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "pool")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -160,6 +162,8 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 
 // GetPoolInput is used as input to the GetPool function.
 type GetPoolInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the pool of interest (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -182,7 +186,7 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "pool", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

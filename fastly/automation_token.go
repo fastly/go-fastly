@@ -93,6 +93,8 @@ func (c *Client) ListAutomationTokens() ([]*AutomationToken, error) {
 
 // GetAutomationTokenInput is used as input to the GetAutomationToken function.
 type GetAutomationTokenInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// TokenID is an alphanumeric string identifying the token (required).
 	TokenID string
 }
@@ -105,7 +107,7 @@ func (c *Client) GetAutomationToken(i *GetAutomationTokenInput) (*AutomationToke
 
 	path := ToSafeURL("automation-tokens", i.TokenID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

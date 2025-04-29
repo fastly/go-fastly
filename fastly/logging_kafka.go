@@ -36,6 +36,8 @@ type Kafka struct {
 
 // ListKafkasInput is used as input to the ListKafkas function.
 type ListKafkasInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -52,7 +54,7 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -138,6 +140,8 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 
 // GetKafkaInput is used as input to the GetKafka function.
 type GetKafkaInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the kafka to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -159,7 +163,7 @@ func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

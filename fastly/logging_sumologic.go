@@ -25,6 +25,8 @@ type Sumologic struct {
 
 // ListSumologicsInput is used as input to the ListSumologics function.
 type ListSumologicsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -41,7 +43,7 @@ func (c *Client) ListSumologics(i *ListSumologicsInput) ([]*Sumologic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -103,6 +105,8 @@ func (c *Client) CreateSumologic(i *CreateSumologicInput) (*Sumologic, error) {
 
 // GetSumologicInput is used as input to the GetSumologic function.
 type GetSumologicInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the sumologic to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -124,7 +128,7 @@ func (c *Client) GetSumologic(i *GetSumologicInput) (*Sumologic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "sumologic", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

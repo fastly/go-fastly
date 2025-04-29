@@ -185,6 +185,8 @@ var ERLWindowSizes = []ERLWindowSize{
 
 // ListERLsInput is used as input to the ListERLs function.
 type ListERLsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the version number to fetch (required).
@@ -201,7 +203,7 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "rate-limiters")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -308,6 +310,8 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 
 // GetERLInput is used as input to the GetERL function.
 type GetERLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
 	ERLID string
 }
@@ -320,7 +324,7 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 
 	path := ToSafeURL("rate-limiters", i.ERLID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

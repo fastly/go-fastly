@@ -177,6 +177,8 @@ func (l *ListKVStoresPaginator) Err() error {
 
 // GetKVStoreInput is the input to the GetKVStore function.
 type GetKVStoreInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// StoreID is the StoreID of the store to fetch (required).
 	StoreID string
 }
@@ -189,7 +191,7 @@ func (c *Client) GetKVStore(i *GetKVStoreInput) (*KVStore, error) {
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -381,10 +383,12 @@ func (l *ListKVStoreKeysPaginator) Keys() []string {
 
 // GetKVStoreKeyInput is the input to the GetKVStoreKey function.
 type GetKVStoreKeyInput struct {
-	// StoreID is the StoreID of the kv store (required).
-	StoreID string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Key is the key to fetch (required).
 	Key string
+	// StoreID is the StoreID of the kv store (required).
+	StoreID string
 }
 
 // GetKVStoreKey retrieves the specified resource.
@@ -398,7 +402,7 @@ func (c *Client) GetKVStoreKey(i *GetKVStoreKeyInput) (string, error) {
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return "", err
 	}
@@ -414,10 +418,12 @@ func (c *Client) GetKVStoreKey(i *GetKVStoreKeyInput) (string, error) {
 
 // GetKVStoreItemInput is the input to the GetKVStoreItem function.
 type GetKVStoreItemInput struct {
-	// StoreID is the StoreID of the kv store (required).
-	StoreID string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Key is the key of the item to fetch (required).
 	Key string
+	// StoreID is the StoreID of the kv store (required).
+	StoreID string
 }
 
 // GetKVStoreItemOutput is the output of the GetKVStoreItem function.
@@ -467,7 +473,7 @@ func (c *Client) GetKVStoreItem(i *GetKVStoreItemInput) (GetKVStoreItemOutput, e
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID, "keys", i.Key)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return GetKVStoreItemOutput{}, err
 	}

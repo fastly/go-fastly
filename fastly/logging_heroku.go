@@ -24,6 +24,8 @@ type Heroku struct {
 
 // ListHerokusInput is used as input to the ListHerokus function.
 type ListHerokusInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -40,7 +42,7 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -102,6 +104,8 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 
 // GetHerokuInput is used as input to the GetHeroku function.
 type GetHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the heroku to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -123,7 +127,7 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

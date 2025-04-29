@@ -24,6 +24,8 @@ type Honeycomb struct {
 
 // ListHoneycombsInput is used as input to the ListHoneycombs function.
 type ListHoneycombsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -40,7 +42,7 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -102,6 +104,8 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 
 // GetHoneycombInput is used as input to the GetHoneycomb function.
 type GetHoneycombInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name for the real-time logging configuration (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -123,7 +127,7 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

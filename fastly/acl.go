@@ -132,6 +132,8 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 
 // GetACLInput is the input parameter to GetACL function.
 type GetACLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the ACL to get (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -154,7 +156,7 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

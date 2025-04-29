@@ -33,6 +33,8 @@ type BlobStorage struct {
 
 // ListBlobStoragesInput is used as input to the ListBlobStorages function.
 type ListBlobStoragesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -49,7 +51,7 @@ func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -129,6 +131,8 @@ func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, err
 
 // GetBlobStorageInput is used as input to the GetBlobStorage function.
 type GetBlobStorageInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the blob storage to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -150,7 +154,7 @@ func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

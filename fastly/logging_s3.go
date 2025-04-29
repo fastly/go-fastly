@@ -87,6 +87,8 @@ type S3 struct {
 
 // ListS3sInput is used as input to the ListS3s function.
 type ListS3sInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -103,7 +105,7 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -201,6 +203,8 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 
 // GetS3Input is used as input to the GetS3 function.
 type GetS3Input struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the S3 to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -222,7 +226,7 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -253,6 +253,8 @@ func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustom
 }
 
 type GetObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of the dashboard to fetch (required)
 	ID *string
 }
@@ -263,7 +265,7 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -57,6 +57,8 @@ func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
@@ -69,7 +71,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 
 	path := ToSafeURL("customer", i.CustomerID, "tokens")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

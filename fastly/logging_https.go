@@ -35,6 +35,8 @@ type HTTPS struct {
 
 // ListHTTPSInput is used as input to the ListHTTPS function.
 type ListHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -51,7 +53,7 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +137,8 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 
 // GetHTTPSInput is used as input to the GetHTTPS function.
 type GetHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the HTTPS endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -156,7 +160,7 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -17,6 +18,8 @@ type DictionaryInfo struct {
 
 // GetDictionaryInfoInput is used as input to the GetDictionary function.
 type GetDictionaryInfoInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DictionaryID is the alphanumeric string identifying a dictionary (required).
 	DictionaryID string
 	// ServiceID is the ID of the service Dictionary belongs to (required).
@@ -39,7 +42,7 @@ func (c *Client) GetDictionaryInfo(i *GetDictionaryInfoInput) (*DictionaryInfo, 
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.DictionaryID, "info")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -26,6 +26,8 @@ type User struct {
 
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
 type ListCustomerUsersInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
@@ -38,7 +40,7 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 
 	path := ToSafeURL("customer", i.CustomerID, "users")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -69,6 +71,8 @@ func (c *Client) GetCurrentUser() (*User, error) {
 
 // GetUserInput is used as input to the GetUser function.
 type GetUserInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// UserID is an alphanumeric string identifying the user (required).
 	UserID string
 }
@@ -83,7 +87,7 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

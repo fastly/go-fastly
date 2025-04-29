@@ -24,6 +24,8 @@ type Papertrail struct {
 
 // ListPapertrailsInput is used as input to the ListPapertrails function.
 type ListPapertrailsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -40,7 +42,7 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -102,6 +104,8 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 
 // GetPapertrailInput is used as input to the GetPapertrail function.
 type GetPapertrailInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the papertrail to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -123,7 +127,7 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

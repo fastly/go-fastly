@@ -13,6 +13,8 @@ import (
 // GetPrivateKeyInput is an input to the GetPrivateKey function.
 // Allowed values for the fields are described at https://developer.fastly.com/reference/api/tls/platform/.
 type GetPrivateKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
@@ -102,7 +104,7 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 	path := ToSafeURL("tls", "private_keys", i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -18,6 +18,8 @@ type HTTP3 struct {
 
 // GetHTTP3Input is used as input to the GetHTTP3 function.
 type GetHTTP3Input struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +36,7 @@ func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

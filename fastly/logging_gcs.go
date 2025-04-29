@@ -33,6 +33,8 @@ type GCS struct {
 
 // ListGCSsInput is used as input to the ListGCSs function.
 type ListGCSsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -49,7 +51,7 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "gcs")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -129,6 +131,8 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 
 // GetGCSInput is used as input to the GetGCS function.
 type GetGCSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the GCS to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -150,7 +154,7 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "gcs", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

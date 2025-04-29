@@ -237,6 +237,8 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 
 // ListSnippetsInput is used as input to the ListSnippets function.
 type ListSnippetsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -256,7 +258,7 @@ func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -271,6 +273,8 @@ func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 
 // GetSnippetInput is used as input to the GetSnippet function.
 type GetSnippetInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Snippet to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -295,7 +299,7 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -310,6 +314,8 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 
 // GetDynamicSnippetInput is used as input to the GetDynamicSnippet function.
 type GetDynamicSnippetInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// SnippetID is the SnippetID of the Snippet to fetch (required).
 	SnippetID string
 	// ServiceID is the ID of the service (required).
@@ -329,7 +335,7 @@ func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, 
 
 	path := ToSafeURL("service", i.ServiceID, "snippet", i.SnippetID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

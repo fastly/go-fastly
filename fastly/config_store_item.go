@@ -136,6 +136,8 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 
 // ListConfigStoreItemsInput is the input to ListConfigStoreItems.
 type ListConfigStoreItemsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// StoreID is the ID of the config store to retrieve items for (required).
 	StoreID string
 }
@@ -148,7 +150,7 @@ func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigSt
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "items")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

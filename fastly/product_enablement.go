@@ -76,7 +76,7 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 
 	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

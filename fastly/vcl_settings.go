@@ -17,6 +17,8 @@ type Settings struct {
 
 // GetSettingsInput is used as input to the GetSettings function.
 type GetSettingsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -33,7 +35,7 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "settings")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

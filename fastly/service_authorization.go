@@ -109,6 +109,8 @@ func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*
 
 // GetServiceAuthorizationInput is used as input to the GetServiceAuthorization function.
 type GetServiceAuthorizationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of the service authorization to retrieve (required).
 	ID string
 }
@@ -121,7 +123,7 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 
 	path := ToSafeURL("service-authorizations", i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -22,6 +22,8 @@ type Condition struct {
 
 // ListConditionsInput is used as input to the ListConditions function.
 type ListConditionsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -38,7 +40,7 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -94,6 +96,8 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 
 // GetConditionInput is used as input to the GetCondition function.
 type GetConditionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the condition to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -115,7 +119,7 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

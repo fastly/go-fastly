@@ -33,6 +33,8 @@ type Elasticsearch struct {
 
 // ListElasticsearchInput is used as input to the ListElasticsearch function.
 type ListElasticsearchInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -49,7 +51,7 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -129,6 +131,8 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 
 // GetElasticsearchInput is used as input to the GetElasticsearch function.
 type GetElasticsearchInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Elasticsearch endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -150,7 +154,7 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

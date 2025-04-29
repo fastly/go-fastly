@@ -24,6 +24,8 @@ type NewRelic struct {
 
 // ListNewRelicInput is used as input to the ListNewRelic function.
 type ListNewRelicInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -40,7 +42,7 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelic")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -102,6 +104,8 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 
 // GetNewRelicInput is used as input to the GetNewRelic function.
 type GetNewRelicInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the newrelic to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -123,7 +127,7 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelic", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

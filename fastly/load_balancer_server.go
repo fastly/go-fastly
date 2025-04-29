@@ -24,6 +24,8 @@ type Server struct {
 
 // ListServersInput is used as input to the ListServers function.
 type ListServersInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// PoolID is the ID of the pool (required).
 	PoolID string
 	// ServiceID is the ID of the service (required).
@@ -41,7 +43,7 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "servers")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +107,8 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 
 // GetServerInput is used as input to the GetServer function.
 type GetServerInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// PoolID is the ID of the pool (required).
 	PoolID string
 	// Server is an alphanumeric string identifying a Server (required).
@@ -127,7 +131,7 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

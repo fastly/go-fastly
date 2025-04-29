@@ -136,6 +136,8 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 
 // GetServiceInput is used as input to the GetService function.
 type GetServiceInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
@@ -150,7 +152,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -186,7 +188,7 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "details")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -301,6 +303,8 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 // ListServiceDomainInput is the input parameter to the ListServiceDomains
 // function.
 type ListServiceDomainInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
@@ -313,7 +317,7 @@ func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsLi
 
 	path := ToSafeURL("service", i.ServiceID, "domain")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

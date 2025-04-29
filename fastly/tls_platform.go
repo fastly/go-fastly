@@ -114,6 +114,8 @@ func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCert
 
 // GetBulkCertificateInput is used as input to the GetBulkCertificate function.
 type GetBulkCertificateInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS bulk certificate.
 	ID string
 }
@@ -126,7 +128,7 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 
 	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

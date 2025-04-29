@@ -50,6 +50,8 @@ type Backend struct {
 
 // ListBackendsInput is used as input to the ListBackends function.
 type ListBackendsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -67,7 +69,7 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -178,6 +180,8 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 // GetBackendInput is used as input to the GetBackend function.
 type GetBackendInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the backend to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -200,7 +204,7 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

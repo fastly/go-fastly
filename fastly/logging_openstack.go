@@ -33,6 +33,8 @@ type Openstack struct {
 
 // ListOpenstackInput is used as input to the ListOpenstack function.
 type ListOpenstackInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -49,7 +51,7 @@ func (c *Client) ListOpenstack(i *ListOpenstackInput) ([]*Openstack, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -129,6 +131,8 @@ func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
 
 // GetOpenstackInput is used as input to the GetOpenstack function.
 type GetOpenstackInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Openstack to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -150,7 +154,7 @@ func (c *Client) GetOpenstack(i *GetOpenstackInput) (*Openstack, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

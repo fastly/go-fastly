@@ -97,6 +97,8 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 type GetACLEntryInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// EntryID is an alphanumeric string identifying an ACL Entry (required).
 	EntryID string
 	// ServiceID is an alphanumeric string identifying the service (required).
@@ -117,7 +119,7 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

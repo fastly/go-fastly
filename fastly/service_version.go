@@ -31,6 +31,8 @@ type Environment struct {
 
 // ListVersionsInput is the input to the ListVersions function.
 type ListVersionsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
@@ -43,7 +45,7 @@ func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -119,6 +121,8 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 
 // GetVersionInput is the input to the GetVersion function.
 type GetVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the version number to fetch (required).
@@ -135,7 +139,7 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion))
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -297,6 +301,8 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 
 // ValidateVersionInput is the input to the ValidateVersion function.
 type ValidateVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -315,7 +321,7 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "validate")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return false, msg, err
 	}

@@ -149,6 +149,8 @@ func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]Diction
 
 // GetDictionaryItemInput is used as input to the GetDictionaryItem function.
 type GetDictionaryItemInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// ItemKey is the name of the dictionary item to fetch (required).
@@ -171,7 +173,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

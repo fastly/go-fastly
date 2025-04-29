@@ -118,6 +118,8 @@ func (c *Client) CreateIntegration(i *CreateIntegrationInput) (*CreateIntegratio
 
 // GetIntegrationInput is used as input to the GetIntegration function.
 type GetIntegrationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of integration to fetch (required).
 	ID string
 }
@@ -130,7 +132,7 @@ func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
 
 	path := ToSafeURL("notifications", "integrations", i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -242,6 +244,8 @@ func (c *Client) GetIntegrationTypes() (*[]IntegrationType, error) {
 
 // GetWebhookSigningKeyInput is used as input to the GetWebhookSigningKey function.
 type GetWebhookSigningKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// IntegrationID is the ID of the webhook integration which signing key to get (required).
 	IntegrationID string
 }
@@ -259,7 +263,7 @@ func (c *Client) GetWebhookSigningKey(i *GetWebhookSigningKeyInput) (*WebhookSig
 
 	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "signingKey")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

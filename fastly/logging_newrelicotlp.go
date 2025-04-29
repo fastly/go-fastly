@@ -25,9 +25,10 @@ type NewRelicOTLP struct {
 
 // ListNewRelicOTLPInput is used as input to the ListNewRelicOTLP function.
 type ListNewRelicOTLPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -43,7 +44,7 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -108,12 +109,14 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 
 // GetNewRelicOTLPInput is used as input to the GetNewRelicOTLP function.
 type GetNewRelicOTLPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
+	// Name is the name of the newrelic to fetch.
+	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// Name is the name of the newrelic to fetch.
-	Name string
 }
 
 // GetNewRelicOTLP gets the newrelic configuration with the given parameters.
@@ -129,7 +132,7 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

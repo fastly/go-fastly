@@ -31,6 +31,8 @@ type Splunk struct {
 
 // ListSplunksInput is used as input to the ListSplunks function.
 type ListSplunksInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -47,7 +49,7 @@ func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -123,6 +125,8 @@ func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 
 // GetSplunkInput is used as input to the GetSplunk function.
 type GetSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the splunk to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -144,7 +148,7 @@ func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

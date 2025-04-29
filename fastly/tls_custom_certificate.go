@@ -111,6 +111,8 @@ func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([
 
 // GetCustomTLSCertificateInput is used as input to the GetCustomTLSCertificate function.
 type GetCustomTLSCertificateInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string
 }
@@ -123,7 +125,7 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 
 	path := ToSafeURL("tls", "certificates", i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

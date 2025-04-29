@@ -33,6 +33,8 @@ type Syslog struct {
 
 // ListSyslogsInput is used as input to the ListSyslogs function.
 type ListSyslogsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -49,7 +51,7 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "syslog")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -129,6 +131,8 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 
 // GetSyslogInput is used as input to the GetSyslog function.
 type GetSyslogInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the syslog to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -150,7 +154,7 @@ func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "syslog", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

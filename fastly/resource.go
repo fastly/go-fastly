@@ -33,6 +33,8 @@ type Resource struct {
 
 // ListResourcesInput is used as input to the ListResources function.
 type ListResourcesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -49,7 +51,7 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -106,6 +108,8 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 
 // GetResourceInput is used as input to the GetResource function.
 type GetResourceInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ResourceID is an alphanumeric string identifying the resource link (required).
 	ResourceID string
 	// ServiceID is the ID of the service (required).
@@ -127,7 +131,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource", i.ResourceID)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

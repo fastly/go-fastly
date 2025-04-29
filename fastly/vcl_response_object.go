@@ -25,6 +25,8 @@ type ResponseObject struct {
 // ListResponseObjectsInput is used as input to the ListResponseObjects
 // function.
 type ListResponseObjectsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -41,7 +43,7 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -104,6 +106,8 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 
 // GetResponseObjectInput is used as input to the GetResponseObject function.
 type GetResponseObjectInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the response object to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -125,7 +129,7 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

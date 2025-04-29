@@ -27,6 +27,8 @@ type Pubsub struct {
 
 // ListPubsubsInput is used as input to the ListPubsubs function.
 type ListPubsubsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -43,7 +45,7 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -111,6 +113,8 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 
 // GetPubsubInput is used as input to the GetPubsub function.
 type GetPubsubInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Pubsub to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -132,7 +136,7 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

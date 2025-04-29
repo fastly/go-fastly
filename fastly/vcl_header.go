@@ -72,6 +72,8 @@ type Header struct {
 
 // ListHeadersInput is used as input to the ListHeaders function.
 type ListHeadersInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -88,7 +90,7 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "header")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -160,6 +162,8 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 
 // GetHeaderInput is used as input to the GetHeader function.
 type GetHeaderInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the header to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -181,7 +185,7 @@ func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "header", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
