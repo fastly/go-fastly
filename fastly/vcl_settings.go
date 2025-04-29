@@ -1,6 +1,9 @@
 package fastly
 
-import "strconv"
+import (
+	"context"
+	"strconv"
+)
 
 // Settings represents a backend response from the Fastly API.
 type Settings struct {
@@ -45,6 +48,8 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 
 // UpdateSettingsInput is used as input to the UpdateSettings function.
 type UpdateSettingsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DefaultHost is the default host name for the version.
 	DefaultHost *string `url:"general.default_host,omitempty"`
 	// DefaultTTL is the default time-to-live (TTL) for the version.
@@ -69,7 +74,7 @@ func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "settings")
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

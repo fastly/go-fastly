@@ -230,14 +230,16 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 }
 
 type CreateObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context     *context.Context
 	Description *string         `json:"description,omitempty"`
-	Items       []DashboardItem `json:"items"`
 	Name        string          `json:"name"`
+	Items       []DashboardItem `json:"items"`
 }
 
 func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
 	path := ToSafeURL("observability", "dashboards")
-	resp, err := c.PostJSON(path, i, nil)
+	resp, err := c.PostJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -275,6 +277,8 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 }
 
 type UpdateObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context     *context.Context
 	Description *string `json:"description,omitempty"`
 	// ID of the dashboard to fetch (required)
 	ID    *string          `json:"-"`
@@ -288,7 +292,7 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -302,6 +306,8 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 }
 
 type DeleteObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of the dashboard to delete (required)
 	ID *string
 }
@@ -311,7 +317,7 @@ func (c *Client) DeleteObservabilityCustomDashboard(i *DeleteObservabilityCustom
 		return ErrMissingID
 	}
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

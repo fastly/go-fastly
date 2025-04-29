@@ -167,6 +167,8 @@ type CreateTLSSubscriptionInput struct {
 	CommonName *TLSDomain `jsonapi:"relation,common_name,omitempty"`
 	// Configuration options that apply to the enabled domains on this subscription. Only ID needs to be populated
 	Configuration *TLSConfiguration `jsonapi:"relation,tls_configuration,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Domains list to enable TLS for. Only the ID fields of each one need to be set.
 	Domains []*TLSDomain `jsonapi:"relation,tls_domain"`
 	// ID value is ignored and should not be set, needed to make JSONAPI work correctly.
@@ -182,7 +184,7 @@ func (c *Client) CreateTLSSubscription(i *CreateTLSSubscriptionInput) (*TLSSubsc
 		return nil, ErrCommonNameNotInDomains
 	}
 
-	resp, err := c.PostJSONAPI("/tls/subscriptions", i, nil)
+	resp, err := c.PostJSONAPI("/tls/subscriptions", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

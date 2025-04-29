@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -69,6 +70,8 @@ type CreateDigitalOceanInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
@@ -111,7 +114,7 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +171,8 @@ type UpdateDigitalOceanInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
@@ -215,7 +220,7 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +235,8 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 
 // DeleteDigitalOceanInput is the input parameter to DeleteDigitalOcean.
 type DeleteDigitalOceanInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the DigitalOcean to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +258,7 @@ func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

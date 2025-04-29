@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -86,6 +87,8 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 type CreateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 }
@@ -101,7 +104,7 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -149,6 +152,8 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 type UpdateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -165,7 +170,7 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion))
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

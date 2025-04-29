@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -67,6 +68,8 @@ type CreateBlobStorageInput struct {
 	AccountName *string `url:"account_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (valid values are zstd, snappy, and gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Container is the name of the Azure Blob Storage container in which to store logs.
 	Container *string `url:"container,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
@@ -111,7 +114,7 @@ func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +171,8 @@ type UpdateBlobStorageInput struct {
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Container is the name of the Azure Blob Storage container in which to store logs.
 	Container *string `url:"container,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
 	FileMaxBytes *int `url:"file_max_bytes,omitempty"`
 	// Format is a Fastly log format string.
@@ -215,7 +220,7 @@ func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +235,8 @@ func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, err
 
 // DeleteBlobStorageInput is the input parameter to DeleteBlobStorage.
 type DeleteBlobStorageInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the blob storage to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +258,7 @@ func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

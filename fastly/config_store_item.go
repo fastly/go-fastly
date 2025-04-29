@@ -220,10 +220,12 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 // BatchModifyConfigStoreItemsInput is the input parameter to the
 // BatchModifyConfigStoreItems function.
 type BatchModifyConfigStoreItemsInput struct {
-	// StoreID is the ID of the Config Store to modify items for (required).
-	StoreID string `json:"-"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Items is a list of Config Store items.
 	Items []*BatchConfigStoreItem `json:"items"`
+	// StoreID is the ID of the Config Store to modify items for (required).
+	StoreID string `json:"-"`
 }
 
 // BatchDictionaryItem represents a dictionary item.
@@ -247,7 +249,7 @@ func (c *Client) BatchModifyConfigStoreItems(i *BatchModifyConfigStoreItemsInput
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "items")
 
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -56,6 +57,8 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 
 // CreateLogentriesInput is used as input to the CreateLogentries function.
 type CreateLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -90,7 +93,7 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -141,6 +144,8 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 
 // UpdateLogentriesInput is used as input to the UpdateLogentries function.
 type UpdateLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -180,7 +185,7 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -195,6 +200,8 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 
 // DeleteLogentriesInput is the input parameter to DeleteLogentries.
 type DeleteLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the logentries to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -216,7 +223,7 @@ func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

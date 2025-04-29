@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -119,6 +120,8 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 type CreateVCLInput struct {
 	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Main is set to true when this is the main VCL, otherwise false.
 	Main *bool `url:"main,omitempty"`
 	// Name is the name of this VCL.
@@ -139,7 +142,7 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -156,6 +159,8 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 type UpdateVCLInput struct {
 	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the VCL to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -179,7 +184,7 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +235,8 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 
 // DeleteVCLInput is the input parameter to DeleteVCL.
 type DeleteVCLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the VCL to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +258,7 @@ func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

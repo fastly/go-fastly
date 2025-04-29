@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"time"
 )
 
@@ -98,6 +99,8 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Login is the login associated with the user (typically, an email address).
 	Login *string `url:"login,omitempty"`
 	// Name is the real life name of the user.
@@ -108,7 +111,7 @@ type CreateUserInput struct {
 
 // CreateUser creates a new resource.
 func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
-	resp, err := c.PostForm("/user", i, nil)
+	resp, err := c.PostForm("/user", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -123,12 +126,14 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 
 // UpdateUserInput is used as input to the UpdateUser function.
 type UpdateUserInput struct {
-	// UserID is an alphanumeric string identifying the user (required).
-	UserID string `url:"-"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the real life name of the user.
 	Name *string `url:"name,omitempty"`
 	// Role is the permissions role assigned to the user. Can be user, billing, engineer, or superuser.
 	Role *string `url:"role,omitempty"`
+	// UserID is an alphanumeric string identifying the user (required).
+	UserID string `url:"-"`
 }
 
 // UpdateUser updates the specified resource.
@@ -139,7 +144,7 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -154,6 +159,8 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 
 // DeleteUserInput is used as input to the DeleteUser function.
 type DeleteUserInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// UserID is an alphanumeric string identifying the user (required).
 	UserID string
 }
@@ -166,7 +173,7 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -55,6 +56,8 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 
 // CreateScalyrInput is used as input to the CreateScalyr function.
 type CreateScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -87,7 +90,7 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -138,6 +141,8 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 
 // UpdateScalyrInput is used as input to the UpdateScalyr function.
 type UpdateScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -175,7 +180,7 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -190,6 +195,8 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 
 // DeleteScalyrInput is the input parameter to DeleteScalyr.
 type DeleteScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the scalyr to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -211,7 +218,7 @@ func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

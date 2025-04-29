@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -62,6 +63,8 @@ type Snippet struct {
 type CreateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic *int `url:"dynamic,omitempty"`
 	// Name is the name for the snippet (required).
@@ -86,7 +89,7 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -103,6 +106,8 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 type UpdateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name for the snippet (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -130,7 +135,7 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -157,6 +162,8 @@ type DynamicSnippet struct {
 type UpdateDynamicSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// SnippetID is the SnippetID of the Snippet to modify (required)
 	SnippetID string `url:"-"`
 	// ServiceID is the ID of the Service to add the snippet to (required).
@@ -174,7 +181,7 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 
 	path := ToSafeURL("service", i.ServiceID, "snippet", i.SnippetID)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -189,6 +196,8 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 
 // DeleteSnippetInput is the input parameter to the DeleteSnippet function.
 type DeleteSnippetInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the Name of the Snippet to Delete (required).
 	Name string
 	// ServiceID is the ID of the Service to add the snippet to (required).
@@ -210,7 +219,7 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "snippet", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

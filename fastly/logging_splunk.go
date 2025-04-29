@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -61,6 +62,8 @@ func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 
 // CreateSplunkInput is used as input to the CreateSplunk function.
 type CreateSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -105,7 +108,7 @@ func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -156,6 +159,8 @@ func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 
 // UpdateSplunkInput is used as input to the UpdateSplunk function.
 type UpdateSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -205,7 +210,7 @@ func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -220,6 +225,8 @@ func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 
 // DeleteSplunkInput is the input parameter to DeleteSplunk.
 type DeleteSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the splunk to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -241,7 +248,7 @@ func (c *Client) DeleteSplunk(i *DeleteSplunkInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

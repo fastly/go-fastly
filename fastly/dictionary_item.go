@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"time"
 )
@@ -93,14 +94,16 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.
 type CreateDictionaryItemInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
+	// DictionaryID is the ID of the dictionary to retrieve items for (required).
+	DictionaryID string `url:"-"`
 	// ItemKey is the dictionary item key, maximum 256 characters.
 	ItemKey *string `url:"item_key,omitempty"`
 	// ItemValue is the dictionary item value, maximum 8000 characters.
 	ItemValue *string `url:"item_value,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
-	// DictionaryID is the ID of the dictionary to retrieve items for (required).
-	DictionaryID string `url:"-"`
 }
 
 // CreateDictionaryItem creates a new resource.
@@ -114,7 +117,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -183,6 +186,8 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 
 // UpdateDictionaryItemInput is used as input to the UpdateDictionaryItem function.
 type UpdateDictionaryItemInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// ItemKey is the name of the dictionary item to fetch (required).
@@ -207,7 +212,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -223,6 +228,8 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 // BatchModifyDictionaryItemsInput is the input parameter to the
 // BatchModifyDictionaryItems function.
 type BatchModifyDictionaryItemsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DictionaryID is the ID of the dictionary to modify items for (required).
 	DictionaryID string `json:"-"`
 	// Items is a list of dictionary items.
@@ -255,7 +262,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "items")
 
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -267,6 +274,8 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 
 // DeleteDictionaryItemInput is the input parameter to DeleteDictionaryItem.
 type DeleteDictionaryItemInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// ItemKey is the name of the dictionary item to delete (required).
@@ -289,7 +298,7 @@ func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

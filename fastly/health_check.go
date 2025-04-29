@@ -230,6 +230,8 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 
 // DeleteHealthCheckInput is the input parameter to DeleteHealthCheck.
 type DeleteHealthCheckInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the health check to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -252,7 +254,7 @@ func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

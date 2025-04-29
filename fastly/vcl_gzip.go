@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -55,6 +56,8 @@ type CreateGzipInput struct {
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// ContentTypes is a space-separated list of content types to compress.
 	ContentTypes *string `url:"content_types,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Extensions is a space-separated list of file extensions to compress.
 	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the gzip configuration.
@@ -75,7 +78,7 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -130,6 +133,8 @@ type UpdateGzipInput struct {
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// ContentTypes is a space-separated list of content types to compress.
 	ContentTypes *string `url:"content_types,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Extensions is a space-separated list of file extensions to compress.
 	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the Gzip to update (required).
@@ -155,7 +160,7 @@ func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -170,6 +175,8 @@ func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 
 // DeleteGzipInput is the input parameter to DeleteGzip.
 type DeleteGzipInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Gzip to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -191,7 +198,7 @@ func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

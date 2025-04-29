@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"net/http"
 	"time"
@@ -119,6 +120,8 @@ func (c *Client) GetAutomationToken(i *GetAutomationTokenInput) (*AutomationToke
 
 // CreateAutomationTokenInput is used as input to the CreateAutomationToken function.
 type CreateAutomationTokenInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire.
 	ExpiresAt *time.Time `json:"expires_at,omitempty" url:"expires_at,omitempty"`
 	// Name is the name of the token.
@@ -142,13 +145,13 @@ type CreateAutomationTokenInput struct {
 //
 // Requires sudo capability for the token being used.
 func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*AutomationToken, error) {
-	ignored, err := c.PostForm("/sudo", i, nil)
+	ignored, err := c.PostForm("/sudo", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
 	defer ignored.Body.Close()
 
-	resp, err := c.PostJSON("/automation-tokens", i, nil)
+	resp, err := c.PostJSON("/automation-tokens", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -163,6 +166,8 @@ func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*Automati
 
 // DeleteAutomationTokenInput is used as input to the DeleteAutomationToken function.
 type DeleteAutomationTokenInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// TokenID is an alphanumeric string identifying a token (required).
 	TokenID string
 }
@@ -175,7 +180,7 @@ func (c *Client) DeleteAutomationToken(i *DeleteAutomationTokenInput) error {
 
 	path := ToSafeURL("tokens", i.TokenID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

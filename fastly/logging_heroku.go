@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -54,6 +55,8 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 
 // CreateHerokuInput is used as input to the CreateHeroku function.
 type CreateHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -84,7 +87,7 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +138,8 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 
 // UpdateHerokuInput is used as input to the UpdateHeroku function.
 type UpdateHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -170,7 +175,7 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -185,6 +190,8 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 
 // DeleteHerokuInput is the input parameter to DeleteHeroku.
 type DeleteHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the heroku to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -206,7 +213,7 @@ func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

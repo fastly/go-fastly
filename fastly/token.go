@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"net/http"
 	"time"
 )
@@ -102,6 +103,8 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
 	// Name is the name of the token.
@@ -118,13 +121,13 @@ type CreateTokenInput struct {
 
 // CreateToken creates a new resource.
 func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
-	ignored, err := c.PostForm("/sudo", i, nil)
+	ignored, err := c.PostForm("/sudo", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
 	defer ignored.Body.Close()
 
-	resp, err := c.PostForm("/tokens", i, nil)
+	resp, err := c.PostForm("/tokens", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -139,6 +142,8 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// TokenID is an alphanumeric string identifying a token (required).
 	TokenID string
 }
@@ -151,7 +156,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 
 	path := ToSafeURL("tokens", i.TokenID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

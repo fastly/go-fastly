@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -91,6 +92,8 @@ type ImageOptimizerDefaultSettings struct {
 // GetImageOptimizerDefaultSettingsInput is used as input to the
 // GetImageOptimizerDefaultSettings function.
 type GetImageOptimizerDefaultSettingsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -102,24 +105,26 @@ type GetImageOptimizerDefaultSettingsInput struct {
 //
 // A minimum of one optional field is required.
 type UpdateImageOptimizerDefaultSettingsInput struct {
+	// Enables GIF to MP4 transformations on this service.
+	AllowVideo *bool `json:"allow_video,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
+	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
+	JpegQuality *int `json:"jpeg_quality,omitempty"`
+	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
+	JpegType *ImageOptimizerJpegType `json:"jpeg_type,omitempty"`
+	// The type of filter to use while resizing an image.
+	ResizeFilter *ImageOptimizerResizeFilter `json:"resize_filter,omitempty"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `json:"-"`
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int `json:"-"`
-	// The type of filter to use while resizing an image.
-	ResizeFilter *ImageOptimizerResizeFilter `json:"resize_filter,omitempty"`
+	// Whether or not we should allow output images to render at sizes larger than input.
+	Upscale *bool `json:"upscale,omitempty"`
 	// Controls whether or not to default to WebP output when the client supports it. This is equivalent to adding "auto=webp" to all image optimizer requests.
 	Webp *bool `json:"webp,omitempty"`
 	// The default quality to use with WebP output. This can be overridden with the second option in the "quality" URL parameter on specific image optimizer requests.
 	WebpQuality *int `json:"webp_quality,omitempty"`
-	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.
-	JpegType *ImageOptimizerJpegType `json:"jpeg_type,omitempty"`
-	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
-	JpegQuality *int `json:"jpeg_quality,omitempty"`
-	// Whether or not we should allow output images to render at sizes larger than input.
-	Upscale *bool `json:"upscale,omitempty"`
-	// Enables GIF to MP4 transformations on this service.
-	AllowVideo *bool `json:"allow_video,omitempty"`
 }
 
 // GetImageOptimizerDefaultSettings retrives the current Image Optimizer default settings on a given service version.
@@ -135,7 +140,7 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "image_optimizer_default_settings")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		if herr, ok := err.(*HTTPError); ok {
 			if herr.StatusCode == http.StatusNotFound {
@@ -173,7 +178,7 @@ func (c *Client) UpdateImageOptimizerDefaultSettings(i *UpdateImageOptimizerDefa
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "image_optimizer_default_settings")
 
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

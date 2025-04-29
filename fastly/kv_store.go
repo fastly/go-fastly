@@ -204,6 +204,8 @@ func (c *Client) GetKVStore(i *GetKVStoreInput) (*KVStore, error) {
 
 // DeleteKVStoreInput is the input to the DeleteKVStore function.
 type DeleteKVStoreInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// StoreID is the StoreID of the kv store to delete (required).
 	StoreID string
 }
@@ -216,7 +218,7 @@ func (c *Client) DeleteKVStore(i *DeleteKVStoreInput) error {
 
 	path := ToSafeURL("resources", "stores", "kv", i.StoreID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

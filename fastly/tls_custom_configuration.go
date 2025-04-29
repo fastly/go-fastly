@@ -141,6 +141,8 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 
 // UpdateCustomTLSConfigurationInput is used as input to the UpdateCustomTLSConfiguration function.
 type UpdateCustomTLSConfigurationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS configuration.
 	ID string
 	// Name is a custom name for your TLS configuration.
@@ -159,7 +161,7 @@ func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInp
 
 	path := ToSafeURL("tls", "configurations", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, nil)
+	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

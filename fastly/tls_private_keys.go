@@ -118,6 +118,8 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 // CreatePrivateKeyInput is used as input to the CreatePrivateKey function.
 type CreatePrivateKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Key is the contents of the private key. Must be a PEM-formatted key.
 	Key string `jsonapi:"attr,key,omitempty"`
 	// Name is a customizable name for your private key.
@@ -136,7 +138,7 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 		return nil, ErrMissingName
 	}
 
-	resp, err := c.PostJSONAPI(path, i, nil)
+	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -152,6 +154,8 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 
 // DeletePrivateKeyInput used for deleting a private key.
 type DeletePrivateKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
@@ -164,7 +168,7 @@ func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 
 	path := ToSafeURL("tls", "private_keys", i.ID)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

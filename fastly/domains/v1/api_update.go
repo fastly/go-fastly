@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -10,6 +11,8 @@ import (
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DomainID is the domain identifier (required).
 	DomainID *string `json:"-"`
 	// ServiceID is the service_id associated with the domain or nil if there
@@ -25,7 +28,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Data, error) {
 
 	path := fastly.ToSafeURL("domains", "v1", *i.DomainID)
 
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

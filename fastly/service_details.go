@@ -111,6 +111,8 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 type CreateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// Type is the type of this service (vcl, wasm).
@@ -119,7 +121,7 @@ type CreateServiceInput struct {
 
 // CreateService creates a new resource.
 func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
-	resp, err := c.PostForm("/service", i, nil)
+	resp, err := c.PostForm("/service", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -202,6 +204,8 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 type UpdateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -216,7 +220,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -231,6 +235,8 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 // DeleteServiceInput is used as input to the DeleteService function.
 type DeleteServiceInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
@@ -243,7 +249,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

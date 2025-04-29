@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -100,6 +101,8 @@ type CreateRequestSettingInput struct {
 	Action *RequestSettingAction `url:"action,omitempty"`
 	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
 	BypassBusyWait *Compatibool `url:"bypass_busy_wait,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DefaultHost sets the host header.
 	DefaultHost *string `url:"default_host,omitempty"`
 	// ForceMiss allows you to force a cache miss for the request. Replaces the item in the cache if the content is cacheable.
@@ -136,7 +139,7 @@ func (c *Client) CreateRequestSetting(i *CreateRequestSettingInput) (*RequestSet
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "request_settings")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -192,6 +195,8 @@ type UpdateRequestSettingInput struct {
 	Action *RequestSettingAction `url:"action,omitempty"`
 	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
 	BypassBusyWait *Compatibool `url:"bypass_busy_wait,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DefaultHost sets the host header.
 	DefaultHost *string `url:"default_host,omitempty"`
 	// ForceMiss allows you to force a cache miss for the request. Replaces the item in the cache if the content is cacheable.
@@ -233,7 +238,7 @@ func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSet
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "request_settings", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -248,6 +253,8 @@ func (c *Client) UpdateRequestSetting(i *UpdateRequestSettingInput) (*RequestSet
 
 // DeleteRequestSettingInput is the input parameter to DeleteRequestSetting.
 type DeleteRequestSettingInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the request settings to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -269,7 +276,7 @@ func (c *Client) DeleteRequestSetting(i *DeleteRequestSettingInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "request_settings", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

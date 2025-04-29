@@ -1,6 +1,7 @@
 package computeacls
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -12,6 +13,8 @@ import (
 type DescribeInput struct {
 	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 }
 
 // Describe describes a specified compute ACL.
@@ -22,7 +25,7 @@ func Describe(c *fastly.Client, i *DescribeInput) (*ComputeACL, error) {
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

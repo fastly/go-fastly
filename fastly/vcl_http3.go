@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -49,6 +50,8 @@ func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
 
 // EnableHTTP3Input is used as input to the EnableHTTP3 function.
 type EnableHTTP3Input struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// FeatureRevision is the revision number of the HTTP/3 feature implementation.
 	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -67,7 +70,7 @@ func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -82,6 +85,8 @@ func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
 
 // DisableHTTP3Input is the input parameter to the DisableHTTP3 function.
 type DisableHTTP3Input struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -98,7 +103,7 @@ func (c *Client) DisableHTTP3(i *DisableHTTP3Input) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

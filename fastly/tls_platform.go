@@ -148,6 +148,8 @@ type CreateBulkCertificateInput struct {
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	// Configurations is a list of TLS configurations.
 	Configurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// IntermediatesBlob is the PEM-formatted chain of intermediate blobs.
 	IntermediatesBlob string `jsonapi:"attr,intermediates_blob"`
 }
@@ -163,7 +165,7 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 
 	path := "/tls/bulk/certificates"
 
-	resp, err := c.PostJSONAPI(path, i, nil)
+	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -183,6 +185,8 @@ type UpdateBulkCertificateInput struct {
 	AllowUntrusted bool `jsonapi:"attr,allow_untrusted_root"`
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS bulk certificate.
 	ID string `jsonapi:"attr,id"`
 	// IntermediatesBlob is the PEM-formatted chain of intermediate blobs.
@@ -209,7 +213,7 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCert
 
 	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, nil)
+	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -224,6 +228,8 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCert
 
 // DeleteBulkCertificateInput used for deleting a certificate.
 type DeleteBulkCertificateInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS bulk certificate.
 	ID string
 }
@@ -236,7 +242,7 @@ func (c *Client) DeleteBulkCertificate(i *DeleteBulkCertificateInput) error {
 
 	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

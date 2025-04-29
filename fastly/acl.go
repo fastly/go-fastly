@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"time"
@@ -19,6 +20,8 @@ type ACL struct {
 
 // ListACLsInput is used as input to the ListACLs function.
 type ListACLsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -36,7 +39,7 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -51,6 +54,8 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 
 // CreateACLInput is used as input to the CreateACL function.
 type CreateACLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the ACL to create.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -70,7 +75,7 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -85,6 +90,8 @@ func (c *Client) CreateACL(i *CreateACLInput) (*ACL, error) {
 
 // DeleteACLInput is the input parameter to DeleteACL function.
 type DeleteACLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the ACL to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -107,7 +114,7 @@ func (c *Client) DeleteACL(i *DeleteACLInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl", i.Name)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -162,6 +169,8 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 
 // UpdateACLInput is the input parameter to UpdateACL function.
 type UpdateACLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the ACL to update (required).
 	Name string
 	// NewName is the new name of the ACL to update.
@@ -186,7 +195,7 @@ func (c *Client) UpdateACL(i *UpdateACLInput) (*ACL, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "acl", i.Name)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

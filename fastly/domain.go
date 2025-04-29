@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -55,6 +56,8 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 type CreateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the domain that the service will respond to.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -74,7 +77,7 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -128,6 +131,8 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 type UpdateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the domain that the service will respond to (required).
 	Name string `url:"-"`
 	// NewName is the updated name of the domain
@@ -152,7 +157,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -167,6 +172,8 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 
 // DeleteDomainInput is used as input to the DeleteDomain function.
 type DeleteDomainInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the domain that the service will respond to (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -189,7 +196,7 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "domain", i.Name)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

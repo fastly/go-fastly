@@ -141,6 +141,8 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 type CreateCustomTLSCertificateInput struct {
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	// Name is a customizable name for your certificate.
@@ -155,7 +157,7 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 
 	path := "/tls/certificates"
 
-	resp, err := c.PostJSONAPI(path, i, nil)
+	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -173,6 +175,8 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 type UpdateCustomTLSCertificateInput struct {
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string `jsonapi:"primary,tls_certificate"`
 	// Name is a customizable name for your certificate.
@@ -195,7 +199,7 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 
 	path := ToSafeURL("tls", "certificates", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, nil)
+	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -210,6 +214,8 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 
 // DeleteCustomTLSCertificateInput used for deleting a certificate.
 type DeleteCustomTLSCertificateInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string
 }
@@ -222,7 +228,7 @@ func (c *Client) DeleteCustomTLSCertificate(i *DeleteCustomTLSCertificateInput) 
 
 	path := ToSafeURL("tls", "certificates", i.ID)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

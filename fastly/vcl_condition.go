@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -52,6 +53,8 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 
 // CreateConditionInput is used as input to the CreateCondition function.
 type CreateConditionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the condition.
 	Name *string `url:"name,omitempty"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
@@ -76,7 +79,7 @@ func (c *Client) CreateCondition(i *CreateConditionInput) (*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -129,6 +132,8 @@ func (c *Client) GetCondition(i *GetConditionInput) (*Condition, error) {
 type UpdateConditionInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the condition to update (required).
 	Name string `url:"-"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
@@ -156,7 +161,7 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -171,6 +176,8 @@ func (c *Client) UpdateCondition(i *UpdateConditionInput) (*Condition, error) {
 
 // DeleteConditionInput is the input parameter to DeleteCondition.
 type DeleteConditionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the condition to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -192,7 +199,7 @@ func (c *Client) DeleteCondition(i *DeleteConditionInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "condition", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

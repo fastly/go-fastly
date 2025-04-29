@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"net/http"
 )
 
@@ -69,6 +70,8 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 
 // DeleteManagedLoggingInput is used as input to the DeleteManagedLogging function.
 type DeleteManagedLoggingInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Kind is the kind of managed logging we are removing (required).
 	Kind ManagedLoggingKind
 	// ServiceID is the ID of the service (required).
@@ -92,7 +95,7 @@ func (c *Client) DeleteManagedLogging(i *DeleteManagedLoggingInput) error {
 		return ErrNotImplemented
 	}
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

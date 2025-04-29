@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -54,6 +55,8 @@ func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error)
 
 // CreateLogshuttleInput is used as input to the CreateLogshuttle function.
 type CreateLogshuttleInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -84,7 +87,7 @@ func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +138,8 @@ func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 
 // UpdateLogshuttleInput is used as input to the UpdateLogshuttle function.
 type UpdateLogshuttleInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -170,7 +175,7 @@ func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -185,6 +190,8 @@ func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error)
 
 // DeleteLogshuttleInput is the input parameter to DeleteLogshuttle.
 type DeleteLogshuttleInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the logshuttle to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -206,7 +213,7 @@ func (c *Client) DeleteLogshuttle(i *DeleteLogshuttleInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

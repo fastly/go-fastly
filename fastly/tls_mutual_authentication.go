@@ -121,6 +121,8 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 type CreateTLSMutualAuthenticationInput struct {
 	// CertBundle is one or more certificates. Enter each individual certificate blob on a new line. Must be PEM-formatted (required).
 	CertBundle string `jsonapi:"attr,cert_bundle"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Enforced determines whether Mutual TLS will fail closed (enforced) or fail open.
 	Enforced bool `jsonapi:"attr,enforced"`
 	// ID should not be set (it's internally used to help marshal the JSONAPI request data).
@@ -137,7 +139,7 @@ func (c *Client) CreateTLSMutualAuthentication(i *CreateTLSMutualAuthenticationI
 
 	path := "/tls/mutual_authentications"
 
-	resp, err := c.PostJSONAPI(path, i, nil)
+	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -155,6 +157,8 @@ func (c *Client) CreateTLSMutualAuthentication(i *CreateTLSMutualAuthenticationI
 type UpdateTLSMutualAuthenticationInput struct {
 	// CertBundle is one or more certificates. Enter each individual certificate blob on a new line. Must be PEM-formatted (required).
 	CertBundle string `jsonapi:"attr,cert_bundle"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Enforced determines whether Mutual TLS will fail closed (enforced) or fail open.
 	Enforced bool `jsonapi:"attr,enforced"`
 	// ID is an alphanumeric string identifying a mutual authentication (required).
@@ -174,7 +178,7 @@ func (c *Client) UpdateTLSMutualAuthentication(i *UpdateTLSMutualAuthenticationI
 
 	path := ToSafeURL("tls", "mutual_authentications", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, nil)
+	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -189,6 +193,8 @@ func (c *Client) UpdateTLSMutualAuthentication(i *UpdateTLSMutualAuthenticationI
 
 // DeleteTLSMutualAuthenticationInput used for deleting a certificate.
 type DeleteTLSMutualAuthenticationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a mutual authentication (required).
 	ID string
 }
@@ -201,7 +207,7 @@ func (c *Client) DeleteTLSMutualAuthentication(i *DeleteTLSMutualAuthenticationI
 
 	path := ToSafeURL("tls", "mutual_authentications", i.ID)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

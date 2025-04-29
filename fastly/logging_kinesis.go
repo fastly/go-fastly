@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -59,6 +60,8 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 type CreateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
 	AccessKey *string `url:"access_key,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -93,7 +96,7 @@ func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -146,6 +149,8 @@ func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 type UpdateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
 	AccessKey *string `url:"access_key,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -185,7 +190,7 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -200,6 +205,8 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 
 // DeleteKinesisInput is the input parameter to DeleteKinesis.
 type DeleteKinesisInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Kinesis logging object to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -221,7 +228,7 @@ func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

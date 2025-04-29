@@ -106,6 +106,8 @@ func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefin
 
 // CreateAlertDefinitionInput is used as input to the CreateAlertDefinition function.
 type CreateAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -126,7 +128,7 @@ type CreateAlertDefinitionInput struct {
 
 // CreateAlertDefinition creates a new alert definition.
 func (c *Client) CreateAlertDefinition(i *CreateAlertDefinitionInput) (*AlertDefinition, error) {
-	resp, err := c.PostJSON("/alerts/definitions", i, nil)
+	resp, err := c.PostJSON("/alerts/definitions", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -169,6 +171,8 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 
 // UpdateAlertDefinitionInput is used as input to the UpdateAlertDefinition function.
 type UpdateAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -193,7 +197,7 @@ func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDef
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.PutJSON(path, i, nil)
+	resp, err := c.PutJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -208,6 +212,8 @@ func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDef
 
 // DeleteAlertDefinitionInput is used as input to the DeleteAlertDefinition function.
 type DeleteAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of definition to delete (required).
 	ID *string
 }
@@ -220,7 +226,7 @@ func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -241,7 +247,7 @@ type TestAlertDefinitionInput struct {
 
 // TestAlertDefinition validates alert definition and sends test notifications without creating.
 func (c *Client) TestAlertDefinition(i *TestAlertDefinitionInput) error {
-	resp, err := c.PostJSON("/alerts/definitions/test", i, nil)
+	resp, err := c.PostJSON("/alerts/definitions/test", i, CreateRequestOptions(i.CreateAlertDefinitionInput.Context))
 	if err != nil {
 		return err
 	}

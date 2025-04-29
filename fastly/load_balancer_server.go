@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"time"
 )
 
@@ -59,6 +60,8 @@ type CreateServerInput struct {
 	Address *string `url:"address,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Disabled allows servers to be enabled and disabled in a pool.
 	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.
@@ -87,7 +90,7 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -143,6 +146,8 @@ type UpdateServerInput struct {
 	Address *string `url:"address,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Disabled allows servers to be enabled and disabled in a pool.
 	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.
@@ -175,7 +180,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -190,6 +195,8 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 
 // DeleteServerInput is used as input to the DeleteServer function.
 type DeleteServerInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// PoolID is the ID of the pool (required).
 	PoolID string
 	// Server is an alphanumeric string identifying a Server (required).
@@ -212,7 +219,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "pool", i.PoolID, "server", i.Server)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

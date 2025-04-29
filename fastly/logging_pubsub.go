@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -59,6 +60,8 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 type CreatePubsubInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
 	AccountName *string `url:"account_name,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -93,7 +96,7 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -146,6 +149,8 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 type UpdatePubsubInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
 	AccountName *string `url:"account_name,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -185,7 +190,7 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -200,6 +205,8 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 
 // DeletePubsubInput is the input parameter to DeletePubsub.
 type DeletePubsubInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Pubsub to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -221,7 +228,7 @@ func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

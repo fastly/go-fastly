@@ -142,6 +142,8 @@ type CreateTLSActivationInput struct {
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
 	// Configuration is an alphanumeric string identifying a TLS configuration.
 	Configuration *TLSConfiguration `jsonapi:"relation,tls_configuration,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Domain is the domain name.
 	Domain *TLSDomain `jsonapi:"relation,tls_domain"`
 	// ID is an aphanumeric string identifying a TLS activation.
@@ -159,7 +161,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 
 	path := "/tls/activations"
 
-	resp, err := c.PostJSONAPI(path, i, nil)
+	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -177,6 +179,8 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 type UpdateTLSActivationInput struct {
 	// Certificate is an alphanumeric string identifying a TLS certificate.
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an aphanumeric string identifying a TLS activation.
 	ID string `jsonapi:"primary,tls_activation"`
 	// MutualAuthentication is an alphanumeric string identifying a mutual authentication.
@@ -194,7 +198,7 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 
 	path := ToSafeURL("tls", "activations", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, nil)
+	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -209,6 +213,8 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 
 // DeleteTLSActivationInput used for deleting a certificate.
 type DeleteTLSActivationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS activation.
 	ID string
 }
@@ -221,7 +227,7 @@ func (c *Client) DeleteTLSActivation(i *DeleteTLSActivationInput) error {
 
 	path := ToSafeURL("tls", "activations", i.ID)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
