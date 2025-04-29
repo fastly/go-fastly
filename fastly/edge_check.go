@@ -40,7 +40,7 @@ type EdgeCheckInput struct {
 // URL.
 func (c *Client) EdgeCheck(i *EdgeCheckInput) ([]*EdgeCheck, error) {
 
-	var requestOptions *RequestOptions
+	var requestOptions RequestOptions
 	if i != nil {
 		requestOptions = CreateRequestOptions(i.Context)
 		requestOptions.Params["url"] = i.URL

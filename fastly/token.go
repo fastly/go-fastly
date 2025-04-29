@@ -42,7 +42,7 @@ type ListTokensInput struct {
 
 // ListTokens retrieves all resources.
 func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
-	resp, err := c.Get("/tokens", nil)
+	resp, err := c.Get("/tokens", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -89,7 +89,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 //
 // Returns a 401 if the token has expired and a 403 for invalid access token.
 func (c *Client) GetTokenSelf() (*Token, error) {
-	resp, err := c.Get("/tokens/self", nil)
+	resp, err := c.Get("/tokens/self", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -172,7 +172,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 
 // DeleteTokenSelf deletes the specified resource.
 func (c *Client) DeleteTokenSelf() error {
-	resp, err := c.Delete("/tokens/self", nil)
+	resp, err := c.Delete("/tokens/self", CreateRequestOptions(nil))
 	if err != nil {
 		return err
 	}
@@ -186,6 +186,8 @@ func (c *Client) DeleteTokenSelf() error {
 
 // BatchDeleteTokensInput is used as input to BatchDeleteTokens.
 type BatchDeleteTokensInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Tokens is a list of alphanumeric strings, each identifying a token.
 	Tokens []*BatchToken
 }
@@ -202,7 +204,7 @@ func (c *Client) BatchDeleteTokens(i *BatchDeleteTokensInput) error {
 	if len(i.Tokens) == 0 {
 		return ErrMissingTokensValue
 	}
-	ignored, err := c.DeleteJSONAPIBulk("/tokens", i.Tokens, nil)
+	ignored, err := c.DeleteJSONAPIBulk("/tokens", i.Tokens, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

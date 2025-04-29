@@ -101,7 +101,7 @@ type ListKVStoresResponse struct {
 func (c *Client) ListKVStores(i *ListKVStoresInput) (*ListKVStoresResponse, error) {
 	const path = "/resources/stores/kv"
 
-	var requestOptions *RequestOptions
+	var requestOptions RequestOptions
 	if i != nil {
 		requestOptions = CreateRequestOptions(i.Context)
 		requestOptions.Params = i.formatFilters()
@@ -305,7 +305,7 @@ func (c *Client) ListKVStoreKeys(i *ListKVStoreKeysInput) (*ListKVStoreKeysRespo
 		return nil, ErrMissingStoreID
 	}
 
-	var requestOptions *RequestOptions
+	var requestOptions RequestOptions
 	if i != nil {
 		requestOptions = CreateRequestOptions(i.Context)
 		requestOptions.Params = i.formatFilters()
@@ -700,7 +700,7 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 		return ErrMissingStoreID
 	}
 
-	var requestOptions *RequestOptions
+	var requestOptions RequestOptions
 	if i != nil {
 		requestOptions = CreateRequestOptions(i.Context)
 		requestOptions.Body = bufio.NewReader(i.Body)

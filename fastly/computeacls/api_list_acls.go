@@ -9,7 +9,7 @@ import (
 
 // ListACLs retrieves all compute ACLs.
 func ListACLs(c *fastly.Client) (*ComputeACLs, error) {
-	resp, err := c.Get("/resources/acls", nil)
+	resp, err := c.Get("/resources/acls", fastly.CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}

@@ -19,7 +19,7 @@ type PaginatorKVStoreEntries interface {
 
 // PaginationClient represents a HTTP client.
 type PaginationClient interface {
-	Get(p string, ro *RequestOptions) (*http.Response, error)
+	Get(p string, ro RequestOptions) (*http.Response, error)
 }
 
 // NewPaginator returns a *ListPaginator[T].

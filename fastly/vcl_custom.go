@@ -205,6 +205,8 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 
 // ActivateVCLInput is used as input to the ActivateVCL function.
 type ActivateVCLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the VCL to mark as main (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -226,7 +228,7 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl", i.Name, "main")
-	resp, err := c.Put(path, nil)
+	resp, err := c.Put(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

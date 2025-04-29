@@ -17,6 +17,8 @@ type (
 
 	// CreateManagedLoggingInput is used as input to the CreateManagedLogging function.
 	CreateManagedLoggingInput struct {
+		// Context, if supplied, will be used as the Request's context.
+		Context *context.Context
 		// Kind is the kind of managed logging we are creating (required).
 		Kind ManagedLoggingKind
 		// ServiceID is the ID of the service (required).
@@ -49,7 +51,7 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 	}
 
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
-	resp, err := c.Post(path, nil)
+	resp, err := c.Post(path, CreateRequestOptions(i.Context))
 	// If the service already has managed logging enabled, it will respond
 	// with a 409. Handle this case specially so users can decide if this is
 	// truly an error.

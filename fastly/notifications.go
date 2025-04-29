@@ -229,7 +229,7 @@ type CustomField struct {
 // GetIntegrationTypes retrieves the supported integration types and what configuration they require.
 func (c *Client) GetIntegrationTypes() (*[]IntegrationType, error) {
 	path := "/notifications/integration-types"
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -290,7 +290,7 @@ func (c *Client) RotateWebhookSigningKey(i *RotateWebhookSigningKeyInput) (*Webh
 
 	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "rotateSigningKey")
 
-	resp, err := c.Post(path, nil)
+	resp, err := c.Post(path, CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}

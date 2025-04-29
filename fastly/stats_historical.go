@@ -372,7 +372,7 @@ type RegionsResponse struct {
 
 // GetRegions returns a list of Fastly regions.
 func (c *Client) GetRegions() (*RegionsResponse, error) {
-	resp, err := c.Get("stats/regions", nil)
+	resp, err := c.Get("stats/regions", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}

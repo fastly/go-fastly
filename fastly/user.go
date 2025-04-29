@@ -55,7 +55,7 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 
 // GetCurrentUser retrieves the user information for the authenticated user.
 func (c *Client) GetCurrentUser() (*User, error) {
-	resp, err := c.Get("/current_user", nil)
+	resp, err := c.Get("/current_user", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -207,7 +207,7 @@ func (c *Client) ResetUserPassword(i *ResetUserPasswordInput) error {
 
 	path := ToSafeURL("user", i.Login, "password", "request_reset")
 
-	resp, err := c.Post(path, nil)
+	resp, err := c.Post(path, CreateRequestOptions(nil))
 	if err != nil {
 		return err
 	}

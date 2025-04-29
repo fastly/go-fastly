@@ -177,6 +177,8 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 // PurgeAllInput is used as input to the Purge function.
 type PurgeAllInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
@@ -189,7 +191,7 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge_all")
 
-	req, err := c.RawRequest(http.MethodPost, path, nil)
+	req, err := c.RawRequest(http.MethodPost, path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
