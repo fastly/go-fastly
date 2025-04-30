@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(go.mod): upgrade to go 1.24.0 minimum version ([#668](https://github.com/fastly/go-fastly/pull/668))
+
 ### Bug fixes:
 
 ### Dependencies:
