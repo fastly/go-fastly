@@ -144,7 +144,7 @@ type CreateCustomTLSCertificateInput struct {
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	// Name is a customizable name for your certificate.
@@ -178,7 +178,7 @@ type UpdateCustomTLSCertificateInput struct {
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// ID is an alphanumeric string identifying a TLS certificate.
 	ID string `jsonapi:"primary,tls_certificate"`
 	// Name is a customizable name for your certificate.

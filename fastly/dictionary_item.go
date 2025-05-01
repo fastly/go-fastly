@@ -95,7 +95,7 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.
 type CreateDictionaryItemInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string `url:"-"`
 	// ItemKey is the dictionary item key, maximum 256 characters.
@@ -189,7 +189,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 // UpdateDictionaryItemInput is used as input to the UpdateDictionaryItem function.
 type UpdateDictionaryItemInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// ItemKey is the name of the dictionary item to fetch (required).
@@ -231,7 +231,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 // BatchModifyDictionaryItems function.
 type BatchModifyDictionaryItemsInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// DictionaryID is the ID of the dictionary to modify items for (required).
 	DictionaryID string `json:"-"`
 	// Items is a list of dictionary items.

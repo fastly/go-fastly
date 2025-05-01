@@ -122,7 +122,7 @@ type CreateTLSMutualAuthenticationInput struct {
 	// CertBundle is one or more certificates. Enter each individual certificate blob on a new line. Must be PEM-formatted (required).
 	CertBundle string `jsonapi:"attr,cert_bundle"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// Enforced determines whether Mutual TLS will fail closed (enforced) or fail open.
 	Enforced bool `jsonapi:"attr,enforced"`
 	// ID should not be set (it's internally used to help marshal the JSONAPI request data).
@@ -158,7 +158,7 @@ type UpdateTLSMutualAuthenticationInput struct {
 	// CertBundle is one or more certificates. Enter each individual certificate blob on a new line. Must be PEM-formatted (required).
 	CertBundle string `jsonapi:"attr,cert_bundle"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// Enforced determines whether Mutual TLS will fail closed (enforced) or fail open.
 	Enforced bool `jsonapi:"attr,enforced"`
 	// ID is an alphanumeric string identifying a mutual authentication (required).

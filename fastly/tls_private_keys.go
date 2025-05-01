@@ -121,7 +121,7 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 // CreatePrivateKeyInput is used as input to the CreatePrivateKey function.
 type CreatePrivateKeyInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// Key is the contents of the private key. Must be a PEM-formatted key.
 	Key string `jsonapi:"attr,key,omitempty"`
 	// Name is a customizable name for your private key.

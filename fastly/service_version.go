@@ -90,7 +90,7 @@ type CreateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 }
@@ -157,7 +157,7 @@ type UpdateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).

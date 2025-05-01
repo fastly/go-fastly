@@ -53,7 +53,7 @@ func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
 // EnableHTTP3Input is used as input to the EnableHTTP3 function.
 type EnableHTTP3Input struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// FeatureRevision is the revision number of the HTTP/3 feature implementation.
 	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// ServiceID is the ID of the service (required).

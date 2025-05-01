@@ -60,7 +60,7 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 // CreateNewRelicOTLPInput is used as input to the CreateNewRelicOTLP function.
 type CreateNewRelicOTLPInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -148,7 +148,7 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 // UpdateNewRelicOTLPInput is used as input to the UpdateNewRelicOTLP function.
 type UpdateNewRelicOTLPInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

@@ -12,7 +12,7 @@ import (
 // perform the operation.
 type CreateInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// Name is the name of the compute ACL to create (required).
 	Name *string `json:"name"`
 }

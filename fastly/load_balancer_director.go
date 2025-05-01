@@ -78,7 +78,7 @@ type CreateDirectorInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name for the Director.
 	Name *string `url:"name,omitempty"`
 	// Quorum is the percentage of capacity that needs to be up for a director to be considered up. 0 to 100.
@@ -161,7 +161,7 @@ type UpdateDirectorInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the director to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.

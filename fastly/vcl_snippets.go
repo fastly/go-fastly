@@ -64,7 +64,7 @@ type CreateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Dynamic sets the snippet version to regular (0) or dynamic (1).
 	Dynamic *int `url:"dynamic,omitempty"`
 	// Name is the name for the snippet (required).
@@ -107,7 +107,7 @@ type UpdateSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name for the snippet (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -163,7 +163,7 @@ type UpdateDynamicSnippetInput struct {
 	// Content is the VCL code that specifies exactly what the snippet does.
 	Content *string `url:"content,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// SnippetID is the SnippetID of the Snippet to modify (required)
 	SnippetID string `url:"-"`
 	// ServiceID is the ID of the Service to add the snippet to (required).

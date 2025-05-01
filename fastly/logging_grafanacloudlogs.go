@@ -62,7 +62,7 @@ func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaC
 // CreateGrafanaCloudLogsInput is used as input to the CreateGrafanaCloudLogs function.
 type CreateGrafanaCloudLogsInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that GrafanaCloudLogs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -153,7 +153,7 @@ func (c *Client) GetGrafanaCloudLogs(i *GetGrafanaCloudLogsInput) (*GrafanaCloud
 // UpdateGrafanaCloudLogsInput is used as input to the UpdateGrafanaCloudLogs function.
 type UpdateGrafanaCloudLogsInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that GrafanaCloudLogs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

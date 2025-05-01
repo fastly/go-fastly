@@ -71,7 +71,7 @@ type CreateBlobStorageInput struct {
 	// CompressionCodec is the codec used for compressing your logs (valid values are zstd, snappy, and gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Container is the name of the Azure Blob Storage container in which to store logs.
 	Container *string `url:"container,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
@@ -176,7 +176,7 @@ type UpdateBlobStorageInput struct {
 	// Container is the name of the Azure Blob Storage container in which to store logs.
 	Container *string `url:"container,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
 	FileMaxBytes *int `url:"file_max_bytes,omitempty"`
 	// Format is a Fastly log format string.

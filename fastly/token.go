@@ -106,7 +106,7 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
 	// Name is the name of the token.
@@ -187,7 +187,7 @@ func (c *Client) DeleteTokenSelf() error {
 // BatchDeleteTokensInput is used as input to BatchDeleteTokens.
 type BatchDeleteTokensInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// Tokens is a list of alphanumeric strings, each identifying a token.
 	Tokens []*BatchToken
 }

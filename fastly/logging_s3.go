@@ -129,7 +129,7 @@ type CreateS3Input struct {
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Domain is the domain of the Amazon S3 endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
@@ -250,7 +250,7 @@ type UpdateS3Input struct {
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Domain is the domain of the Amazon S3 endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).

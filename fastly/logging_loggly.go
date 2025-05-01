@@ -57,7 +57,7 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 // CreateLogglyInput is used as input to the CreateLoggly function.
 type CreateLogglyInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -140,7 +140,7 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 // UpdateLogglyInput is used as input to the UpdateLoggly function.
 type UpdateLogglyInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

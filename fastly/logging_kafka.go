@@ -76,7 +76,7 @@ type CreateKafkaInput struct {
 	// CompressionCodec is the codec used for compression of your logs (gzip, snappy, lz4, null).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -185,7 +185,7 @@ type UpdateKafkaInput struct {
 	// CompressionCodec is the codec used for compression of your logs (gzip, snappy, lz4, null).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

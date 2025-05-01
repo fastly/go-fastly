@@ -58,7 +58,7 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 // CreateDatadogInput is used as input to the CreateDatadog function.
 type CreateDatadogInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -143,7 +143,7 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 // UpdateDatadogInput is used as input to the UpdateDatadog function.
 type UpdateDatadogInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

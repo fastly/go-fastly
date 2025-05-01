@@ -151,7 +151,7 @@ type CreateBulkCertificateInput struct {
 	// Configurations is a list of TLS configurations.
 	Configurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// IntermediatesBlob is the PEM-formatted chain of intermediate blobs.
 	IntermediatesBlob string `jsonapi:"attr,intermediates_blob"`
 }
@@ -188,7 +188,7 @@ type UpdateBulkCertificateInput struct {
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `jsonapi:"-"`
 	// ID is an alphanumeric string identifying a TLS bulk certificate.
 	ID string `jsonapi:"attr,id"`
 	// IntermediatesBlob is the PEM-formatted chain of intermediate blobs.

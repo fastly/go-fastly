@@ -63,7 +63,7 @@ type CreateServerInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Disabled allows servers to be enabled and disabled in a pool.
 	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.
@@ -151,7 +151,7 @@ type UpdateServerInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Disabled allows servers to be enabled and disabled in a pool.
 	Disabled *bool `url:"disabled,omitempty"`
 	// MaxConn is the maximum number of connections. If the value is 0, it inherits the value from pool's max_conn_default.

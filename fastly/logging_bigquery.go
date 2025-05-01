@@ -66,7 +66,7 @@ type CreateBigQueryInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service.
 	AccountName *string `url:"account_name,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Dataset is your BigQuery dataset.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce JSON that matches the schema of your BigQuery table.
@@ -161,7 +161,7 @@ type UpdateBigQueryInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service.
 	AccountName *string `url:"account_name,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Dataset is your BigQuery dataset.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce JSON that matches the schema of your BigQuery table.

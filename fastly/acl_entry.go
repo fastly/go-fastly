@@ -140,7 +140,7 @@ type CreateACLEntryInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// IP is an IP address.
 	IP *string `url:"ip,omitempty"`
 	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
@@ -227,7 +227,7 @@ type UpdateACLEntryInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// EntryID is an alphanumeric string identifying an ACL Entry (required).
 	EntryID string `url:"-"`
 	// IP is an IP address.
@@ -274,7 +274,7 @@ type BatchModifyACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string `json:"-"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// Entries is a list of ACL entries.
 	Entries []*BatchACLEntry `json:"entries"`
 	// ServiceID is an alphanumeric string identifying the service (required).

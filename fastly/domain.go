@@ -59,7 +59,7 @@ type CreateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the domain that the service will respond to.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -136,7 +136,7 @@ type UpdateDomainInput struct {
 	// Comment is a personal, freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the domain that the service will respond to (required).
 	Name string `url:"-"`
 	// NewName is the updated name of the domain
