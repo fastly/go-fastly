@@ -119,7 +119,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
 	if i.Include != nil {
-		requestOptions.Params = map[string]string{"include": *i.Include}
+		requestOptions.Params["include"] = *i.Include
 	}
 
 	resp, err := c.Get(path, requestOptions)

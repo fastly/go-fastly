@@ -98,10 +98,8 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 	}
 
 	requestOptions := CreateRequestOptions(nil)
-	requestOptions.Params = map[string]string{
-		"per_page": strconv.Itoa(perPage),
-		"page":     strconv.Itoa(p.CurrentPage),
-	}
+	requestOptions.Params["per_page"] = strconv.Itoa(perPage)
+	requestOptions.Params["per_page"] = strconv.Itoa(p.CurrentPage)
 
 	if p.opts.Direction != "" {
 		requestOptions.Params["direction"] = p.opts.Direction

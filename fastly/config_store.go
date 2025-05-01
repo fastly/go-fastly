@@ -173,7 +173,7 @@ func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, err
 	requestOptions.Parallel = true
 
 	if i.Name != "" {
-		requestOptions.Params = map[string]string{"name": i.Name}
+		requestOptions.Params["name"] = i.Name
 	}
 
 	resp, err := c.Get(path, requestOptions)

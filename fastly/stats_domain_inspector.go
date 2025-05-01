@@ -155,13 +155,13 @@ func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst an
 	path := ToSafeURL("metrics", "domains", "services", i.ServiceID)
 
 	requestOptions := CreateRequestOptions(i.Context)
-	requestOptions.Params = map[string]string{
-		"group_by":   strings.Join(i.GroupBy, ","),
-		"metric":     strings.Join(i.Metrics, ","),
-		"domain":     strings.Join(i.Domains, ","),
-		"datacenter": strings.Join(i.Datacenters, ","),
-		"region":     strings.Join(i.Regions, ","),
-	}
+
+	requestOptions.Params["datacenter"] = strings.Join(i.Datacenters, ",")
+	requestOptions.Params["domain"] = strings.Join(i.Domains, ",")
+	requestOptions.Params["group_by"] = strings.Join(i.GroupBy, ",")
+	requestOptions.Params["metric"] = strings.Join(i.Metrics, ",")
+	requestOptions.Params["region"] = strings.Join(i.Regions, ",")
+
 	if i.Cursor != nil {
 		requestOptions.Params["cursor"] = *i.Cursor
 	}

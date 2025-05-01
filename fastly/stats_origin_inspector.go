@@ -131,13 +131,12 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 	path := ToSafeURL("metrics", "origins", "services", i.ServiceID)
 
 	requestOptions := CreateRequestOptions(i.Context)
-	requestOptions.Params = map[string]string{
-		"datacenter": strings.Join(i.Datacenters, ","),
-		"group_by":   strings.Join(i.GroupBy, ","),
-		"host":       strings.Join(i.Hosts, ","),
-		"metric":     strings.Join(i.Metrics, ","),
-		"region":     strings.Join(i.Regions, ","),
-	}
+	requestOptions.Params["datacenter"] = strings.Join(i.Datacenters, ",")
+	requestOptions.Params["group_by"] = strings.Join(i.GroupBy, ",")
+	requestOptions.Params["host"] = strings.Join(i.Hosts, ",")
+	requestOptions.Params["metric"] = strings.Join(i.Metrics, ",")
+	requestOptions.Params["region"] = strings.Join(i.Regions, ",")
+
 	if i.Cursor != nil {
 		requestOptions.Params["cursor"] = *i.Cursor
 	}
