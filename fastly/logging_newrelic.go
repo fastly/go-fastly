@@ -58,7 +58,7 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 // CreateNewRelicInput is used as input to the CreateNewRelic function.
 type CreateNewRelicInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -143,7 +143,7 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 // UpdateNewRelicInput is used as input to the UpdateNewRelic function.
 type UpdateNewRelicInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

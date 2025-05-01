@@ -108,7 +108,7 @@ type UpdateImageOptimizerDefaultSettingsInput struct {
 	// Enables GIF to MP4 transformations on this service.
 	AllowVideo *bool `json:"allow_video,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
+	Context *context.Context
 	// The default quality to use with JPEG output. This can be overridden with the "quality" parameter on specific image optimizer requests.
 	JpegQuality *int `json:"jpeg_quality,omitempty"`
 	// The default type of JPEG output to use. This can be overridden with "format=bjpeg" and "format=pjpeg" on specific image optimizer requests.

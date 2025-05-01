@@ -104,7 +104,7 @@ type CreateRequestSettingInput struct {
 	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
 	BypassBusyWait *Compatibool `url:"bypass_busy_wait,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// DefaultHost sets the host header.
 	DefaultHost *string `url:"default_host,omitempty"`
 	// ForceMiss allows you to force a cache miss for the request. Replaces the item in the cache if the content is cacheable.
@@ -200,7 +200,7 @@ type UpdateRequestSettingInput struct {
 	// BypassBusyWait disables collapsed forwarding, so you don't wait for other objects to origin.
 	BypassBusyWait *Compatibool `url:"bypass_busy_wait,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// DefaultHost sets the host header.
 	DefaultHost *string `url:"default_host,omitempty"`
 	// ForceMiss allows you to force a cache miss for the request. Replaces the item in the cache if the content is cacheable.

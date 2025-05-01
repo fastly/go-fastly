@@ -25,7 +25,7 @@ type KVStore struct {
 // CreateKVStoreInput is used as an input to the CreateKVStore function.
 type CreateKVStoreInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
+	Context *context.Context
 	// Name is the name of the store to create (required).
 	Name string `json:"name"`
 	// Location is the regional location of the store (optional).

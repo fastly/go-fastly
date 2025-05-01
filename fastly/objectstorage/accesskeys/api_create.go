@@ -23,7 +23,7 @@ var PERMISSONS = []string{READ_WRITE_ADMIN, READ_ONLY_ADMIN, READ_WRITE_OBJECTS,
 // perform the operation.
 type CreateInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
+	Context *context.Context
 	// Description is a description of the access key (required).
 	Description *string `json:"description"`
 	// Permission is the permissions the access key will have (required).

@@ -59,7 +59,7 @@ type CreateGzipInput struct {
 	// ContentTypes is a space-separated list of content types to compress.
 	ContentTypes *string `url:"content_types,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Extensions is a space-separated list of file extensions to compress.
 	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the gzip configuration.
@@ -138,7 +138,7 @@ type UpdateGzipInput struct {
 	// ContentTypes is a space-separated list of content types to compress.
 	ContentTypes *string `url:"content_types,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Extensions is a space-separated list of file extensions to compress.
 	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the Gzip to update (required).

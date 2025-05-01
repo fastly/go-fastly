@@ -92,7 +92,7 @@ type CreatePoolInput struct {
 	// ConnectTimeout is how long to wait for a timeout in milliseconds.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// FirstByteTimeout is how long to wait for the first byte in milliseconds.
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// Healthcheck is the name of the healthcheck to use with this pool.
@@ -206,7 +206,7 @@ type UpdatePoolInput struct {
 	// ConnectTimeout is how long to wait for a timeout in milliseconds.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// FirstByteTimeout is how long to wait for the first byte in milliseconds.
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// Healthcheck is the name of the healthcheck to use with this pool.

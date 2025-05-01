@@ -63,7 +63,7 @@ type CreateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
 	AccessKey *string `url:"access_key,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -154,7 +154,7 @@ type UpdateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
 	AccessKey *string `url:"access_key,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

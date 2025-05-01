@@ -143,7 +143,7 @@ type CreateTLSActivationInput struct {
 	// Configuration is an alphanumeric string identifying a TLS configuration.
 	Configuration *TLSConfiguration `jsonapi:"relation,tls_configuration,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Domain is the domain name.
 	Domain *TLSDomain `jsonapi:"relation,tls_domain"`
 	// ID is an aphanumeric string identifying a TLS activation.
@@ -180,7 +180,7 @@ type UpdateTLSActivationInput struct {
 	// Certificate is an alphanumeric string identifying a TLS certificate.
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// ID is an aphanumeric string identifying a TLS activation.
 	ID string `jsonapi:"primary,tls_activation"`
 	// MutualAuthentication is an alphanumeric string identifying a mutual authentication.

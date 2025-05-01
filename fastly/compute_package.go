@@ -37,7 +37,7 @@ type PackageMetadata struct {
 // GetPackageInput is used as input to the GetPackage function.
 type GetPackageInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `mapstructure:"-"`
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string `mapstructure:"service_id"`
 	// ServiceVersion is the specific configuration version (required).
@@ -63,7 +63,7 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 // UpdatePackageInput is used as input to the UpdatePackage function.
 type UpdatePackageInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `mapstructure:"-"`
+	Context *context.Context
 	// PackagePath is the local filesystem path to the package to upload.
 	PackagePath *string
 	// PackageContent is the data in raw of the package to upload.

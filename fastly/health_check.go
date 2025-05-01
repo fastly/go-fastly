@@ -69,7 +69,7 @@ type CreateHealthCheckInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
@@ -171,7 +171,7 @@ type UpdateHealthCheckInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.

@@ -95,7 +95,7 @@ type CreateBackendInput struct {
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
@@ -230,7 +230,7 @@ type UpdateBackendInput struct {
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.

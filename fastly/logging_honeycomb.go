@@ -58,7 +58,7 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 // CreateHoneycombInput is used as input to the CreateHoneycomb function.
 type CreateHoneycombInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Dataset is the Honeycomb Dataset you want to log to.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Honeycomb can ingest.
@@ -143,7 +143,7 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 // UpdateHoneycombInput is used as input to the UpdateHoneycomb function.
 type UpdateHoneycombInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Dataset is the Honeycomb Dataset you want to log to.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Honeycomb can ingest.

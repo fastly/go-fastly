@@ -74,7 +74,7 @@ type CreateCacheSettingInput struct {
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Name is the name for the cache settings object.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -155,7 +155,7 @@ type UpdateCacheSettingInput struct {
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Name is the name of the cache setting to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.

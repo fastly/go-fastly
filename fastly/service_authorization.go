@@ -140,7 +140,7 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 // CreateServiceAuthorizationInput is used as input to the CreateServiceAuthorization function.
 type CreateServiceAuthorizationInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `jsonapi:"-"`
+	Context *context.Context
 	// ID value is ignored and should not be set, needed to make JSONAPI work correctly.
 	ID string `jsonapi:"primary,service_authorization"`
 	// Permission is the level of permissions to grant the user to the service. Valid values are "full", "read_only", "purge_select" or "purge_all".
@@ -177,7 +177,7 @@ func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) 
 // UpdateServiceAuthorizationInput is used as input to the UpdateServiceAuthorization function.
 type UpdateServiceAuthorizationInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `jsonapi:"-"`
+	Context *context.Context
 	// ID uniquely identifies the service authorization (service and user pair) to be updated.
 	ID string `jsonapi:"primary,service_authorization"`
 	// The permission to grant the user to the service referenced by this service authorization.

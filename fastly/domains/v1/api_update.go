@@ -12,7 +12,7 @@ import (
 // perform the operation.
 type UpdateInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
+	Context *context.Context
 	// DomainID is the domain identifier (required).
 	DomainID *string `json:"-"`
 	// ServiceID is the service_id associated with the domain or nil if there

@@ -13,7 +13,7 @@ type UpdateInput struct {
 	// ComputeACLID  is an ACL Identifier (required).
 	ComputeACLID *string
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
+	Context *context.Context
 	// Entries is a list of ACL entries.
 	Entries []*BatchComputeACLEntry `json:"entries"`
 }

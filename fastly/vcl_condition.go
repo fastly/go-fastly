@@ -56,7 +56,7 @@ func (c *Client) ListConditions(i *ListConditionsInput) ([]*Condition, error) {
 // CreateConditionInput is used as input to the CreateCondition function.
 type CreateConditionInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Name is the name of the condition.
 	Name *string `url:"name,omitempty"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.
@@ -137,7 +137,7 @@ type UpdateConditionInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Name is the name of the condition to update (required).
 	Name string `url:"-"`
 	// Priority is a numeric string. Priority determines execution order. Lower numbers execute first.

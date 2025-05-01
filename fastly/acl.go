@@ -55,7 +55,7 @@ func (c *Client) ListACLs(i *ListACLsInput) ([]*ACL, error) {
 // CreateACLInput is used as input to the CreateACL function.
 type CreateACLInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Name is the name of the ACL to create.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -172,7 +172,7 @@ func (c *Client) GetACL(i *GetACLInput) (*ACL, error) {
 // UpdateACLInput is the input parameter to UpdateACL function.
 type UpdateACLInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Name is the name of the ACL to update (required).
 	Name string
 	// NewName is the new name of the ACL to update.

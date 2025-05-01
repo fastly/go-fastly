@@ -73,7 +73,7 @@ type CreateDigitalOceanInput struct {
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
@@ -176,7 +176,7 @@ type UpdateDigitalOceanInput struct {
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
+	Context *context.Context
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
