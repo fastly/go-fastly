@@ -69,9 +69,11 @@ func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
+	//remove Context like we do in the code
+	v.Del("Context")
 	body := v.Encode()
 
-	if body != "Context=&ServiceID=foo&ServiceVersion=1&general.default_ttl=0" {
+	if body != "ServiceID=foo&ServiceVersion=1&general.default_ttl=0" {
 		t.Errorf("Update request should contain a default_ttl. Got: %s", body)
 	}
 }
