@@ -187,7 +187,7 @@ func (c *Client) DeleteTokenSelf() error {
 // BatchDeleteTokensInput is used as input to BatchDeleteTokens.
 type BatchDeleteTokensInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `jsonapi:"-"`
+	Context *context.Context
 	// Tokens is a list of alphanumeric strings, each identifying a token.
 	Tokens []*BatchToken
 }
