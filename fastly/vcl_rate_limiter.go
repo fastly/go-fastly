@@ -224,7 +224,7 @@ type CreateERLInput struct {
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
 	ClientKey *[]string `url:"client_key,brackets,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.
 	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
@@ -345,7 +345,7 @@ type UpdateERLInput struct {
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
 	ClientKey *[]string `url:"client_key,omitempty,brackets,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
 	ERLID string `url:"-"`
 	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.

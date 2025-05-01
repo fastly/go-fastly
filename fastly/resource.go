@@ -67,7 +67,7 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 // CreateResourceInput is used as input to the CreateResource function.
 type CreateResourceInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the resource being linked to (e.g. a kv store).
 	//
 	// NOTE: This doesn't have to match the actual resource name, i.e. the name
@@ -147,7 +147,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 // UpdateResourceInput is used as input to the UpdateResource function.
 type UpdateResourceInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the resource being linked to (e.g. a kv store).
 	Name *string `url:"name,omitempty"`
 	// ResourceID is an alphanumeric string identifying the resource link (required).
@@ -187,7 +187,7 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 // DeleteResourceInput is the input parameter to DeleteResource.
 type DeleteResourceInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// ResourceID is an alphanumeric string identifying the resource link (required).
 	ResourceID string `url:"-"`
 	// ServiceID is the ID of the service (required).

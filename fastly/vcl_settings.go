@@ -51,7 +51,7 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 // UpdateSettingsInput is used as input to the UpdateSettings function.
 type UpdateSettingsInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// DefaultHost is the default host name for the version.
 	DefaultHost *string `url:"general.default_host,omitempty"`
 	// DefaultTTL is the default time-to-live (TTL) for the version.

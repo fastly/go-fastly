@@ -36,7 +36,7 @@ type SecretStore struct {
 // CreateSecretStoreInput is used as input to the CreateSecretStore function.
 type CreateSecretStoreInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// Name of the Secret Store (required).
 	Name string `json:"name"`
 }

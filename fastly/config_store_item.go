@@ -24,7 +24,7 @@ type ConfigStoreItem struct {
 // CreateConfigStoreItemInput is the input to the CreateConfigStoreItem.
 type CreateConfigStoreItemInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// StoreID is the ID of the config store (required).
 	StoreID string
 	// Key is the item's name (required).
@@ -170,7 +170,7 @@ func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigSt
 // UpdateConfigStoreItemInput is the input to the UpdateConfigStoreItem.
 type UpdateConfigStoreItemInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Key is the name of the config store item to update (required).
 	Key string
 	// StoreID is the ID of the item's config store (required).
@@ -223,7 +223,7 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 // BatchModifyConfigStoreItems function.
 type BatchModifyConfigStoreItemsInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// Items is a list of Config Store items.
 	Items []*BatchConfigStoreItem `json:"items"`
 	// StoreID is the ID of the Config Store to modify items for (required).

@@ -112,7 +112,7 @@ type CreateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// Type is the type of this service (vcl, wasm).
@@ -207,7 +207,7 @@ type UpdateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).

@@ -60,7 +60,7 @@ type CreatePapertrailInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -145,7 +145,7 @@ type UpdatePapertrailInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.

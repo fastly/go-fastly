@@ -30,7 +30,7 @@ type ConfigStoreMetadata struct {
 // CreateConfigStoreInput is the input to CreateConfigStore.
 type CreateConfigStoreInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the store to create (required).
 	Name string `url:"name"`
 }
@@ -231,7 +231,7 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 // UpdateConfigStoreInput is the input to UpdateConfigStore.
 type UpdateConfigStoreInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the new name of the config store (required).
 	Name string `url:"name"`
 	// StoreID is the StoreID of the config store to update (required).

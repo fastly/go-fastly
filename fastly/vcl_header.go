@@ -110,7 +110,7 @@ type CreateHeaderInput struct {
 	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Destination is the header to set.
 	Destination *string `url:"dst,omitempty"`
 	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.
@@ -205,7 +205,7 @@ type UpdateHeaderInput struct {
 	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Destination is the header to set.
 	Destination *string `url:"dst,omitempty"`
 	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.

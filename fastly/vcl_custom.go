@@ -127,7 +127,7 @@ type CreateVCLInput struct {
 	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Main is set to true when this is the main VCL, otherwise false.
 	Main *bool `url:"main,omitempty"`
 	// Name is the name of this VCL.
@@ -166,7 +166,7 @@ type UpdateVCLInput struct {
 	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the VCL to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.

@@ -107,7 +107,7 @@ func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefin
 // CreateAlertDefinitionInput is used as input to the CreateAlertDefinition function.
 type CreateAlertDefinitionInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -174,7 +174,7 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 // UpdateAlertDefinitionInput is used as input to the UpdateAlertDefinition function.
 type UpdateAlertDefinitionInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.

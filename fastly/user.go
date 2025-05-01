@@ -104,7 +104,7 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Login is the login associated with the user (typically, an email address).
 	Login *string `url:"login,omitempty"`
 	// Name is the real life name of the user.
@@ -131,7 +131,7 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 // UpdateUserInput is used as input to the UpdateUser function.
 type UpdateUserInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the real life name of the user.
 	Name *string `url:"name,omitempty"`
 	// Role is the permissions role assigned to the user. Can be user, billing, engineer, or superuser.

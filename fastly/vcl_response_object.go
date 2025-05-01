@@ -66,7 +66,7 @@ type CreateResponseObjectInput struct {
 	// ContentType is the MIME type of the content, can be empty.
 	ContentType *string `url:"content_type,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name for the request settings.
 	Name *string `url:"name,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
@@ -152,7 +152,7 @@ type UpdateResponseObjectInput struct {
 	// ContentType is the MIME type of the content, can be empty.
 	ContentType *string `url:"content_type,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `url:"-"`
 	// Name is the name of the response object to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
