@@ -7,9 +7,9 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// Input specifies the various search terms to perform real time queries
+// Input specifies the various parameters for performing real-time queries against the known zones database.
 type Input struct {
-	// Query are the Term(s) to search against
+	// Query are the term(s) to search against.
 	Query string
 	// Defaults is a comma-separated list of default zones to include in the search results response (optional).
 	Defaults *string
@@ -19,11 +19,13 @@ type Input struct {
 	Keywords *string
 	// Location overrides the IP location detection for country-code zones, with a two-character country code (optional).
 	Location *string
-	// Vendor is the domain name of a specific registrar or vendor,
-	// for filtering results by the zones supported by the vendor.
+	// Vendor is the domain name of a specific registrar or vendor (optional).
+	// Vendor is used to filter results by the zones supported by the vendor.
 	Vendor *string
 }
 
+// Get retrieves domain suggestions based on the provided input parameters.
+// Get returns a list of domain suggestions matching the query criteria.
 func Get(c *fastly.Client, i *Input) (*Suggestions, error) {
 	if i.Query == "" {
 		return nil, fastly.ErrMissingDomainQuery
@@ -52,7 +54,6 @@ func Get(c *fastly.Client, i *Input) (*Suggestions, error) {
 	}
 
 	path := fastly.ToSafeURL("domains", "v1", "tools", "suggest")
-
 	resp, err := c.Get(path, ro)
 	if err != nil {
 		return nil, err

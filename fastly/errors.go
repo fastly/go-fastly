@@ -149,6 +149,10 @@ var ErrMissingDomainID = NewFieldError("DomainID")
 // requires a "Query" key, but one was not set.
 var ErrMissingDomainQuery = NewFieldError("Query")
 
+// ErrMissingDomain is an error that is returned when an input struct
+// requires a "Domain" key, but one was not set.
+var ErrMissingDomain = NewFieldError("Domain")
+
 // ErrMissingEntryID is an error that is returned when an input struct
 // requires a "EntryID" key, but one was not set.
 var ErrMissingEntryID = NewFieldError("EntryID")

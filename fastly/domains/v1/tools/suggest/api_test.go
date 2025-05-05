@@ -2,12 +2,13 @@ package suggest
 
 import (
 	"errors"
+	"slices"
 	"testing"
 
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-func TestClient_Suggestion(t *testing.T) {
+func TestClient_DomainToolsSuggestion(t *testing.T) {
 	t.Parallel()
 
 	var err error
@@ -28,18 +29,15 @@ func TestClient_Suggestion(t *testing.T) {
 		t.Error("no suggestions found")
 	}
 
-	var comFound bool
+	zoneFound := slices.ContainsFunc(suggestions.Results, func(s Suggestion) bool {
+		return s.Zone == "com"
+	})
 
-	for i := 0; i < len(suggestions.Results); i++ {
-		if suggestions.Results[i].Zone == "com" {
-			comFound = true
-		}
+	if !zoneFound {
+		t.Errorf("no com zone suggestion found in %d suggestions", len(suggestions.Results))
 	}
 
-	if !comFound {
-		t.Errorf("no .com zone suggestion found in %d results", len(suggestions.Results))
-	}
-
+	// omit Query from Input
 	fastly.Record(t, "get", func(client *fastly.Client) {
 		suggestions, err = Get(client, &Input{})
 	})
