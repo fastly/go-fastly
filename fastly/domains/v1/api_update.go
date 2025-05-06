@@ -10,6 +10,8 @@ import (
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
+	// Description is the description for the domain.
+	Description *string `json:"description"`
 	// DomainID is the domain identifier (required).
 	DomainID *string `json:"-"`
 	// ServiceID is the service_id associated with the domain or nil if there

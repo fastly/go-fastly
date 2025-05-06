@@ -6,6 +6,8 @@
 
 ### Enhancements:
 
+- feat(domains): add description field ([#673](https://github.com/fastly/go-fastly/pull/673))
+
 ### Bug fixes:
 
 ### Dependencies:
