@@ -1,6 +1,7 @@
 package status
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -17,8 +18,10 @@ const (
 	ScopeEstimate Scope = "estimate"
 )
 
-// Input specifies the parameters for a domain status check request.
-type Input struct {
+// GetInput specifies the parameters for a domain status check request.
+type GetInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
 	// Domain is the domain name being checked for availability.
 	Domain string
 	// Scope determines the availability check to perform, defaulting to precise (optional).
@@ -26,19 +29,16 @@ type Input struct {
 }
 
 // Get performs a domain status check for a given domain.
-func Get(c *fastly.Client, i *Input) (*Status, error) {
-	if i.Domain == "" {
+func Get(c *fastly.Client, g *GetInput) (*Status, error) {
+	if g.Domain == "" {
 		return nil, fastly.ErrMissingDomain
 	}
 
-	ro := &fastly.RequestOptions{
-		Params: map[string]string{
-			"domain": i.Domain,
-		},
-	}
+	ro := fastly.CreateRequestOptions(g.Context)
+	ro.Params["domain"] = g.Domain
 
-	if i.Scope != nil {
-		ro.Params["scope"] = string(*i.Scope)
+	if g.Scope != nil {
+		ro.Params["scope"] = string(*g.Scope)
 	}
 
 	path := fastly.ToSafeURL("domains", "v1", "tools", "status")
