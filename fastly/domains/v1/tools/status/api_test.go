@@ -13,7 +13,7 @@ func TestClient_DomainToolsStatus(t *testing.T) {
 	var err error
 	var status *Status
 	domain := "fastly-sdk-gofastly-testing.com"
-	fastly.Record(t, "get_precise", func(client *fastly.Client) {
+	fastly.Record(t, "get", func(client *fastly.Client) {
 		status, err = Get(client, &GetInput{
 			Domain: domain,
 		})
@@ -42,6 +42,10 @@ func TestClient_DomainToolsStatus(t *testing.T) {
 	if !strings.Contains(status.Tags, "generic") {
 		t.Errorf("incorrect tags, expected %s within tags, got %s", "generic", status.Tags)
 	}
+
+	if status.Scope != nil {
+		t.Errorf("incorrect scope, unexpected presence of scope, got %s", *status.Scope)
+	}
 }
 
 func TestClient_DomainToolsStatusEstimate(t *testing.T) {
@@ -69,8 +73,8 @@ func TestClient_DomainToolsStatusEstimate(t *testing.T) {
 		t.Errorf("incorrect zone, expected %s, got %s", "com", status.Zone)
 	}
 
-	if status.Scope != ScopeEstimate {
-		t.Errorf("incorrect scope, expected %s, got %s", ScopeEstimate, status.Scope)
+	if status.Scope == nil || *status.Scope != ScopeEstimate {
+		t.Errorf("incorrect scope, expected %s, got %v", ScopeEstimate, status.Scope)
 	}
 }
 
@@ -99,8 +103,8 @@ func TestClient_DomainToolsStatusOffers(t *testing.T) {
 		t.Errorf("incorrect zone, expected %s, got %s", "com", status.Zone)
 	}
 
-	if status.Scope != ScopeEstimate {
-		t.Errorf("incorrect scope, expected %s, got %s", ScopeEstimate, status.Scope)
+	if status.Scope == nil || *status.Scope != ScopeEstimate {
+		t.Errorf("incorrect scope, expected %s, got %v", ScopeEstimate, status.Scope)
 	}
 
 	if !strings.Contains(status.Status, "parked") {

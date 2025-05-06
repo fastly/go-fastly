@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 06 May 2025 15:05:22 GMT
+      - Tue, 06 May 2025 16:45:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-ewr-kewr1740028-EWR, cache-ewr-kewr1740086-EWR
+      - cache-lga21990-LGA, cache-lga21977-LGA
       X-Timer:
-      - S1746543922.321134,VS0,VE279
+      - S1746549936.938739,VS0,VE574
     status: 200 OK
     code: 200
     duration: ""

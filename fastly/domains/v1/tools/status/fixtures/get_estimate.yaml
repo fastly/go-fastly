@@ -16,13 +16,13 @@ interactions:
       Accept-Ranges:
       - bytes
       Age:
-      - "56"
+      - "1"
       Cache-Control:
       - no-store
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 06 May 2025 14:52:55 GMT
+      - Tue, 06 May 2025 16:45:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -34,13 +34,13 @@ interactions:
       Via:
       - 1.1 varnish
       X-Cache:
-      - HIT, MISS
+      - MISS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-ewr-kewr1740036-EWR, cache-ewr-kewr1740050-EWR
+      - cache-lga21990-LGA, cache-lga21977-LGA
       X-Timer:
-      - S1746543175.237500,VS0,VE227
+      - S1746549936.938774,VS0,VE545
     status: 200 OK
     code: 200
     duration: ""

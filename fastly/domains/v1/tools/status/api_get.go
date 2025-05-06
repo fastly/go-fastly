@@ -12,8 +12,6 @@ import (
 type Scope string
 
 const (
-	// ScopePrecise checks domain registry-level availability.
-	ScopePrecise Scope = "precise"
 	// ScopeEstimate checks DNS and aftermarket level availability.
 	ScopeEstimate Scope = "estimate"
 )
@@ -24,7 +22,8 @@ type GetInput struct {
 	Context *context.Context `json:"-"`
 	// Domain is the domain name being checked for availability.
 	Domain string
-	// Scope determines the availability check to perform, defaulting to precise (optional).
+	// Scope determines the availability check to perform (optional).
+	// Scope defaults to a precise status check, specify ScopeEstimate for an estimated check.
 	Scope *Scope
 }
 
