@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/domains/v1/tools/status?domain=sparkgate.com&scope=estimate
+    url: https://api.fastly.com/domains/v1/tools/status?domain=domainr-testing.org&scope=estimate
     method: GET
   response:
     body: |
-      {"scope":"estimate","domain":"sparkgate.com","zone":"com","status":"marketed priced active parked","tags":"generic","offers":[{"vendor":"sedo.com","price":"3495.00","currency":"USD"}]}
+      {"scope":"estimate","domain":"domainr-testing.org","zone":"org","status":"marketed priced transferable active","tags":"generic","offers":[{"vendor":"am.godaddy.com","price":"25000.00","currency":"USD"}]}
     headers:
       Accept-Ranges:
       - bytes
       Age:
-      - "1"
+      - "77"
       Cache-Control:
       - no-store
       Content-Type:
       - application/json; charset=utf-8
       Date:
-      - Tue, 06 May 2025 16:45:36 GMT
+      - Tue, 06 May 2025 20:14:22 GMT
       Pragma:
       - no-cache
       Server:
@@ -34,13 +34,13 @@ interactions:
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - HIT, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21990-LGA, cache-lga21977-LGA
+      - cache-lga21962-LGA, cache-lga21961-LGA
       X-Timer:
-      - S1746549936.938739,VS0,VE574
+      - S1746562462.242932,VS0,VE174
     status: 200 OK
     code: 200
     duration: ""

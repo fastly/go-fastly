@@ -83,7 +83,7 @@ func TestClient_DomainToolsStatusOffers(t *testing.T) {
 
 	var err error
 	var status *Status
-	domain := "sparkgate.com"
+	domain := "domainr-testing.org"
 	fastly.Record(t, "get_offers", func(client *fastly.Client) {
 		status, err = Get(client, &GetInput{
 			Domain: domain,
@@ -99,16 +99,16 @@ func TestClient_DomainToolsStatusOffers(t *testing.T) {
 		t.Errorf("incorrect domain, expected %s, got %s", domain, status.Domain)
 	}
 
-	if status.Zone != "com" {
-		t.Errorf("incorrect zone, expected %s, got %s", "com", status.Zone)
+	if status.Zone != "org" {
+		t.Errorf("incorrect zone, expected %s, got %s", "org", status.Zone)
 	}
 
 	if status.Scope == nil || *status.Scope != ScopeEstimate {
 		t.Errorf("incorrect scope, expected %s, got %v", ScopeEstimate, status.Scope)
 	}
 
-	if !strings.Contains(status.Status, "parked") {
-		t.Errorf("incorrect status, expected %s within status, got %s", "parked", status.Status)
+	if !strings.Contains(status.Status, "priced") {
+		t.Errorf("incorrect status, expected %s within status, got %s", "priced", status.Status)
 	}
 
 	if len(status.Offers) == 0 {
