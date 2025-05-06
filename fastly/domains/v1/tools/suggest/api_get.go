@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// GetInput specifies the various parameters for performing real-time queries against the known zones database.
-type GetInput struct {
+// GetDomainSuggestionsInput specifies the various parameters for performing real-time queries against the known zones database.
+type GetDomainSuggestionsInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Query are the term(s) to search against.
@@ -28,7 +28,7 @@ type GetInput struct {
 }
 
 // Get returns a list of domain suggestions matching the query criteria.
-func Get(c *fastly.Client, g *GetInput) (*Suggestions, error) {
+func Get(c *fastly.Client, g *GetDomainSuggestionsInput) (*Suggestions, error) {
 	if g.Query == "" {
 		return nil, fastly.ErrMissingDomainQuery
 	}

@@ -14,7 +14,7 @@ func TestClient_DomainToolsStatus(t *testing.T) {
 	var status *Status
 	domain := "fastly-sdk-gofastly-testing.com"
 	fastly.Record(t, "get", func(client *fastly.Client) {
-		status, err = Get(client, &GetInput{
+		status, err = Get(client, &GetDomainStatusCheckInput{
 			Domain: domain,
 		})
 	})
@@ -55,7 +55,7 @@ func TestClient_DomainToolsStatusEstimate(t *testing.T) {
 	var status *Status
 	domain := "fastly-sdk-gofastly-testing.com"
 	fastly.Record(t, "get_estimate", func(client *fastly.Client) {
-		status, err = Get(client, &GetInput{
+		status, err = Get(client, &GetDomainStatusCheckInput{
 			Domain: domain,
 			Scope:  fastly.ToPointer(ScopeEstimate),
 		})
@@ -85,7 +85,7 @@ func TestClient_DomainToolsStatusOffers(t *testing.T) {
 	var status *Status
 	domain := "sparkgate.com"
 	fastly.Record(t, "get_offers", func(client *fastly.Client) {
-		status, err = Get(client, &GetInput{
+		status, err = Get(client, &GetDomainStatusCheckInput{
 			Domain: domain,
 			Scope:  fastly.ToPointer(ScopeEstimate),
 		})

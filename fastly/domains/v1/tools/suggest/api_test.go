@@ -14,7 +14,7 @@ func TestClient_DomainToolsSuggestion(t *testing.T) {
 	var err error
 	var suggestions *Suggestions
 	fastly.Record(t, "get", func(client *fastly.Client) {
-		suggestions, err = Get(client, &GetInput{
+		suggestions, err = Get(client, &GetDomainSuggestionsInput{
 			Query:    "fastly testing",
 			Defaults: fastly.ToPointer("com"),
 			Keywords: fastly.ToPointer("testing"),
@@ -37,9 +37,9 @@ func TestClient_DomainToolsSuggestion(t *testing.T) {
 		t.Errorf("no com zone suggestion found in %d suggestions", len(suggestions.Results))
 	}
 
-	// omit Query from GetInput
+	// omit Query from GetDomainSuggestionsInput
 	fastly.Record(t, "get", func(client *fastly.Client) {
-		suggestions, err = Get(client, &GetInput{})
+		suggestions, err = Get(client, &GetDomainSuggestionsInput{})
 	})
 
 	if !errors.Is(err, fastly.ErrMissingDomainQuery) {
