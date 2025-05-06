@@ -24,7 +24,6 @@ type Input struct {
 	Vendor *string
 }
 
-// Get retrieves domain suggestions based on the provided input parameters.
 // Get returns a list of domain suggestions matching the query criteria.
 func Get(c *fastly.Client, i *Input) (*Suggestions, error) {
 	if i.Query == "" {

@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/domains/v1/tools/status?domain=fastly-sdk-gofastly-testing.com&scope=estimate
+    method: GET
+  response:
+    body: |
+      {"scope":"estimate","domain":"fastly-sdk-gofastly-testing.com","zone":"com","status":"undelegated","tags":"generic"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Age:
+      - "56"
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json; charset=utf-8
+      Date:
+      - Tue, 06 May 2025 14:52:55 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - HIT, MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-ewr-kewr1740036-EWR, cache-ewr-kewr1740050-EWR
+      X-Timer:
+      - S1746543175.237500,VS0,VE227
+    status: 200 OK
+    code: 200
+    duration: ""

@@ -11,9 +11,9 @@ type Status struct {
 	// The right-most value can be considered the most important value.
 	Status string `json:"status"`
 	// Scope determines the type of availability check that was performed:
-	// Precise provides registry-level availability,
-	// Estimated provides DNS and aftermarket availability.
-	Scope string `json:"scope"`
+	// `precise` provides registry-level availability,
+	// `estimate` provides DNS and aftermarket availability.
+	Scope Scope `json:"scope"`
 	// Tags is a space-delimited string containing the varying tags associated with the domain.
 	Tags string `json:"tags"`
 	// Offers if present, contains a list of offers from domain aftermarket vendors.

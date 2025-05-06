@@ -7,13 +7,22 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
+// Scope determines the depth of availability checking.
+type Scope string
+
+const (
+	// ScopePrecise checks domain registry-level availability.
+	ScopePrecise Scope = "precise"
+	// ScopeEstimate checks DNS and aftermarket level availability.
+	ScopeEstimate Scope = "estimate"
+)
+
 // Input specifies the parameters for a domain status check request.
 type Input struct {
 	// Domain is the domain name being checked for availability.
 	Domain string
-	// Scope determines the depth of availability checking (optional).
-	// Precise for registry level checks, and Estimated for DNS and Aftermarket availability.
-	Scope *string
+	// Scope determines the availability check to perform, defaulting to precise (optional).
+	Scope *Scope
 }
 
 // Get performs a domain status check for a given domain.
@@ -29,7 +38,7 @@ func Get(c *fastly.Client, i *Input) (*Status, error) {
 	}
 
 	if i.Scope != nil {
-		ro.Params["scope"] = *i.Scope
+		ro.Params["scope"] = string(*i.Scope)
 	}
 
 	path := fastly.ToSafeURL("domains", "v1", "tools", "status")
