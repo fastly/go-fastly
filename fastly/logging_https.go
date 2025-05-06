@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -34,6 +35,8 @@ type HTTPS struct {
 
 // ListHTTPSInput is used as input to the ListHTTPS function.
 type ListHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -50,7 +53,7 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -67,6 +70,8 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 type CreateHTTPSInput struct {
 	// ContentType is the content type of the header sent with the request.
 	ContentType *string `url:"content_type,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -117,7 +122,7 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -132,6 +137,8 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 
 // GetHTTPSInput is used as input to the GetHTTPS function.
 type GetHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the HTTPS endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -153,7 +160,7 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -171,6 +178,8 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 type UpdateHTTPSInput struct {
 	// ContentType is the content type of the header sent with the request.
 	ContentType *string `url:"content_type,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -226,7 +235,7 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -241,6 +250,8 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 
 // DeleteHTTPSInput is the input parameter to the DeleteHTTPS function.
 type DeleteHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the HTTPS endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -262,7 +273,7 @@ func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

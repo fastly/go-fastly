@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -191,6 +192,8 @@ type DashboardMeta struct {
 
 // ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function
 type ListObservabilityCustomDashboardsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional)
 	Cursor *string
 	// Limit is the maximum number of items included in each response (optional)
@@ -201,20 +204,18 @@ type ListObservabilityCustomDashboardsInput struct {
 
 func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDashboardsInput) (*ListDashboardsResponse, error) {
 	path := ToSafeURL("observability", "dashboards")
-	ro := &RequestOptions{
-		Params: map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -229,14 +230,16 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 }
 
 type CreateObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context     *context.Context
 	Description *string         `json:"description,omitempty"`
-	Items       []DashboardItem `json:"items"`
 	Name        string          `json:"name"`
+	Items       []DashboardItem `json:"items"`
 }
 
 func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
 	path := ToSafeURL("observability", "dashboards")
-	resp, err := c.PostJSON(path, i, nil)
+	resp, err := c.PostJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -250,6 +253,8 @@ func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustom
 }
 
 type GetObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of the dashboard to fetch (required)
 	ID *string
 }
@@ -260,7 +265,7 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -274,6 +279,8 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 }
 
 type UpdateObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context     *context.Context
 	Description *string `json:"description,omitempty"`
 	// ID of the dashboard to fetch (required)
 	ID    *string          `json:"-"`
@@ -287,7 +294,7 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -301,6 +308,8 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 }
 
 type DeleteObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of the dashboard to delete (required)
 	ID *string
 }
@@ -310,7 +319,7 @@ func (c *Client) DeleteObservabilityCustomDashboard(i *DeleteObservabilityCustom
 		return ErrMissingID
 	}
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

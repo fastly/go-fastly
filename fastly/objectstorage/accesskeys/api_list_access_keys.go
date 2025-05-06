@@ -9,7 +9,7 @@ import (
 
 // ListAccessKeys retrieves all access keys within object storage.
 func ListAccessKeys(c *fastly.Client) (*AccessKeys, error) {
-	resp, err := c.Get("/resources/object-storage/access-keys", nil)
+	resp, err := c.Get("/resources/object-storage/access-keys", fastly.CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}

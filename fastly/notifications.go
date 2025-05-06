@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -21,6 +22,8 @@ type Integration struct {
 
 // SearchIntegrationsInput is used as input to the SearchIntegrations function.
 type SearchIntegrationsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta.
 	Cursor *string
 	// Limit is the maximum number of items included in each response.
@@ -50,23 +53,21 @@ type IntegrationsMeta struct {
 func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrationsResponse, error) {
 	p := "/notifications/integrations"
 
-	ro := &RequestOptions{
-		Params: map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 	if i.Type != nil {
-		ro.Params["type"] = *i.Type
+		requestOptions.Params["type"] = *i.Type
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -84,6 +85,8 @@ func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrat
 type CreateIntegrationInput struct {
 	// Config is configuration specific to the integration type.
 	Config map[string]string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Description is the user submitted description of the integration.
 	Description *string
 	// Name is the user submitted name of the integration.
@@ -100,7 +103,7 @@ type CreateIntegrationResponse struct {
 
 // CreateIntegration creates a new integration.
 func (c *Client) CreateIntegration(i *CreateIntegrationInput) (*CreateIntegrationResponse, error) {
-	resp, err := c.PostJSON("/notifications/integrations", i, nil)
+	resp, err := c.PostJSON("/notifications/integrations", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -115,6 +118,8 @@ func (c *Client) CreateIntegration(i *CreateIntegrationInput) (*CreateIntegratio
 
 // GetIntegrationInput is used as input to the GetIntegration function.
 type GetIntegrationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of integration to fetch (required).
 	ID string
 }
@@ -127,7 +132,7 @@ func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
 
 	path := ToSafeURL("notifications", "integrations", i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -145,6 +150,8 @@ func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
 type UpdateIntegrationInput struct {
 	// Config is configuration specific to the integration type.
 	Config map[string]string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Description is the user submitted description of the integration.
 	Description *string
 	// ID of integration to update (required).
@@ -163,7 +170,7 @@ func (c *Client) UpdateIntegration(i *UpdateIntegrationInput) error {
 
 	path := ToSafeURL("notifications", "integrations", i.ID)
 
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -178,6 +185,8 @@ func (c *Client) UpdateIntegration(i *UpdateIntegrationInput) error {
 
 // DeleteIntegrationInput is used as input to the DeleteIntegration function.
 type DeleteIntegrationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of integration to delete (required).
 	ID string
 }
@@ -190,7 +199,7 @@ func (c *Client) DeleteIntegration(i *DeleteIntegrationInput) error {
 
 	path := ToSafeURL("notifications", "integrations", i.ID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -220,7 +229,7 @@ type CustomField struct {
 // GetIntegrationTypes retrieves the supported integration types and what configuration they require.
 func (c *Client) GetIntegrationTypes() (*[]IntegrationType, error) {
 	path := "/notifications/integration-types"
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -235,6 +244,8 @@ func (c *Client) GetIntegrationTypes() (*[]IntegrationType, error) {
 
 // GetWebhookSigningKeyInput is used as input to the GetWebhookSigningKey function.
 type GetWebhookSigningKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// IntegrationID is the ID of the webhook integration which signing key to get (required).
 	IntegrationID string
 }
@@ -252,7 +263,7 @@ func (c *Client) GetWebhookSigningKey(i *GetWebhookSigningKeyInput) (*WebhookSig
 
 	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "signingKey")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -279,7 +290,7 @@ func (c *Client) RotateWebhookSigningKey(i *RotateWebhookSigningKeyInput) (*Webh
 
 	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "rotateSigningKey")
 
-	resp, err := c.Post(path, nil)
+	resp, err := c.Post(path, CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -294,6 +305,8 @@ func (c *Client) RotateWebhookSigningKey(i *RotateWebhookSigningKeyInput) (*Webh
 
 // CreateMailinglistConfirmationInput is used as input to the CreateMailinglistConfirmation function.
 type CreateMailinglistConfirmationInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Email is the mailinglist address.
 	Email *string
 }
@@ -301,7 +314,7 @@ type CreateMailinglistConfirmationInput struct {
 // CreateMailinglistConfirmation sends a mailing list confirmation email.
 func (c *Client) CreateMailinglistConfirmation(i *CreateMailinglistConfirmationInput) error {
 	path := "/notifications/mailinglist-confirmations"
-	resp, err := c.PostJSON(path, i, nil)
+	resp, err := c.PostJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

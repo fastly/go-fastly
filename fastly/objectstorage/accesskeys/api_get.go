@@ -1,6 +1,7 @@
 package accesskeys
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -12,6 +13,8 @@ import (
 type GetInput struct {
 	// AccessKeyID is an AccessKey Identifier (required).
 	AccessKeyID *string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 }
 
 // GetAccessKey finds an access key with the given ID if the user has the correct permisssions.
@@ -22,7 +25,7 @@ func Get(c *fastly.Client, i *GetInput) (*AccessKey, error) {
 
 	path := fastly.ToSafeURL("resources", "object-storage", "access-keys", *i.AccessKeyID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

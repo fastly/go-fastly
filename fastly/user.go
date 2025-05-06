@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type User struct {
 
 // ListCustomerUsersInput is used as input to the ListCustomerUsers function.
 type ListCustomerUsersInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
@@ -37,7 +40,7 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 
 	path := ToSafeURL("customer", i.CustomerID, "users")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -52,7 +55,7 @@ func (c *Client) ListCustomerUsers(i *ListCustomerUsersInput) ([]*User, error) {
 
 // GetCurrentUser retrieves the user information for the authenticated user.
 func (c *Client) GetCurrentUser() (*User, error) {
-	resp, err := c.Get("/current_user", nil)
+	resp, err := c.Get("/current_user", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -68,6 +71,8 @@ func (c *Client) GetCurrentUser() (*User, error) {
 
 // GetUserInput is used as input to the GetUser function.
 type GetUserInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// UserID is an alphanumeric string identifying the user (required).
 	UserID string
 }
@@ -82,7 +87,7 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -98,6 +103,8 @@ func (c *Client) GetUser(i *GetUserInput) (*User, error) {
 
 // CreateUserInput is used as input to the CreateUser function.
 type CreateUserInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Login is the login associated with the user (typically, an email address).
 	Login *string `url:"login,omitempty"`
 	// Name is the real life name of the user.
@@ -108,7 +115,7 @@ type CreateUserInput struct {
 
 // CreateUser creates a new resource.
 func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
-	resp, err := c.PostForm("/user", i, nil)
+	resp, err := c.PostForm("/user", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -123,12 +130,14 @@ func (c *Client) CreateUser(i *CreateUserInput) (*User, error) {
 
 // UpdateUserInput is used as input to the UpdateUser function.
 type UpdateUserInput struct {
-	// UserID is an alphanumeric string identifying the user (required).
-	UserID string `url:"-"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Name is the real life name of the user.
 	Name *string `url:"name,omitempty"`
 	// Role is the permissions role assigned to the user. Can be user, billing, engineer, or superuser.
 	Role *string `url:"role,omitempty"`
+	// UserID is an alphanumeric string identifying the user (required).
+	UserID string `url:"-"`
 }
 
 // UpdateUser updates the specified resource.
@@ -139,7 +148,7 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -154,6 +163,8 @@ func (c *Client) UpdateUser(i *UpdateUserInput) (*User, error) {
 
 // DeleteUserInput is used as input to the DeleteUser function.
 type DeleteUserInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// UserID is an alphanumeric string identifying the user (required).
 	UserID string
 }
@@ -166,7 +177,7 @@ func (c *Client) DeleteUser(i *DeleteUserInput) error {
 
 	path := ToSafeURL("user", i.UserID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -196,7 +207,7 @@ func (c *Client) ResetUserPassword(i *ResetUserPasswordInput) error {
 
 	path := ToSafeURL("user", i.Login, "password", "request_reset")
 
-	resp, err := c.Post(path, nil)
+	resp, err := c.Post(path, CreateRequestOptions(nil))
 	if err != nil {
 		return err
 	}

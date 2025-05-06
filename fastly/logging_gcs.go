@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -32,6 +33,8 @@ type GCS struct {
 
 // ListGCSsInput is used as input to the ListGCSs function.
 type ListGCSsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +51,7 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "gcs")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -69,6 +72,8 @@ type CreateGCSInput struct {
 	Bucket *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -111,7 +116,7 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "gcs")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +131,8 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 
 // GetGCSInput is used as input to the GetGCS function.
 type GetGCSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the GCS to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +154,7 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "gcs", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +175,8 @@ type UpdateGCSInput struct {
 	Bucket *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -215,7 +224,7 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "gcs", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +239,8 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 
 // DeleteGCSInput is the input parameter to DeleteGCS.
 type DeleteGCSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the GCS to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +262,7 @@ func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "gcs", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"strconv"
 	"strings"
@@ -81,6 +82,8 @@ type OriginMeta struct {
 
 // GetOriginMetricsInput is the input to an OriginMetrics request.
 type GetOriginMetricsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
 	Cursor *string
 	// Datacenters limits query to one or more specific POPs.
@@ -127,32 +130,30 @@ func (c *Client) GetOriginMetricsForServiceJSON(i *GetOriginMetricsInput, dst an
 
 	path := ToSafeURL("metrics", "origins", "services", i.ServiceID)
 
-	ro := &RequestOptions{
-		Params: map[string]string{
-			"datacenter": strings.Join(i.Datacenters, ","),
-			"group_by":   strings.Join(i.GroupBy, ","),
-			"host":       strings.Join(i.Hosts, ","),
-			"metric":     strings.Join(i.Metrics, ","),
-			"region":     strings.Join(i.Regions, ","),
-		},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params["datacenter"] = strings.Join(i.Datacenters, ",")
+	requestOptions.Params["group_by"] = strings.Join(i.GroupBy, ",")
+	requestOptions.Params["host"] = strings.Join(i.Hosts, ",")
+	requestOptions.Params["metric"] = strings.Join(i.Metrics, ",")
+	requestOptions.Params["region"] = strings.Join(i.Regions, ",")
+
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Downsample != nil {
-		ro.Params["downsample"] = *i.Downsample
+		requestOptions.Params["downsample"] = *i.Downsample
 	}
 	if i.End != nil {
-		ro.Params["end"] = strconv.FormatInt(i.End.Unix(), 10)
+		requestOptions.Params["end"] = strconv.FormatInt(i.End.Unix(), 10)
 	}
 	if i.Start != nil {
-		ro.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
+		requestOptions.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return err
 	}

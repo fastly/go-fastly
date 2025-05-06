@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -29,6 +30,8 @@ type Event struct {
 
 // GetAPIEventsFilterInput is used as input to the GetAPIEvents function.
 type GetAPIEventsFilterInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// CustomerID to Limit the returned events to a specific customer.
 	CustomerID string
 	// EventType to limit the returned events to a specific event type. See above for event codes.
@@ -67,9 +70,10 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 
 	path := "/events"
 
-	filters := &RequestOptions{Params: i.formatEventFilters()}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatEventFilters()
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return eventsResponse, err
 	}
@@ -85,6 +89,8 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 
 // GetAPIEventInput is used as input to the GetAPIEvent function.
 type GetAPIEventInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// EventID is the ID of the event and is required.
 	EventID string
 }
@@ -97,7 +103,7 @@ func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 
 	path := ToSafeURL("events", i.EventID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -22,6 +23,8 @@ type Loggly struct {
 
 // ListLogglyInput is used as input to the ListLoggly function.
 type ListLogglyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -38,7 +41,7 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "loggly")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -53,6 +56,8 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 
 // CreateLogglyInput is used as input to the CreateLoggly function.
 type CreateLogglyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -81,7 +86,7 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "loggly")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -96,6 +101,8 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 
 // GetLogglyInput is used as input to the GetLoggly function.
 type GetLogglyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the loggly to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -117,7 +124,7 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "loggly", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -132,6 +139,8 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 
 // UpdateLogglyInput is used as input to the UpdateLoggly function.
 type UpdateLogglyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -165,7 +174,7 @@ func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "loggly", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -180,6 +189,8 @@ func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 
 // DeleteLogglyInput is the input parameter to DeleteLoggly.
 type DeleteLogglyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the loggly to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -201,7 +212,7 @@ func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "loggly", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
