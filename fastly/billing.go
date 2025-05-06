@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"time"
@@ -54,6 +55,8 @@ type BillingExtra struct {
 
 // GetBillingInput is used as input to the GetBilling function.
 type GetBillingInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Month is a 2-digit month (required).
 	Month uint8
 	// Year is a 4-digit year (required).
@@ -71,7 +74,7 @@ func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
 
 	path := ToSafeURL("billing", "year", strconv.Itoa(int(i.Year)), "month", fmt.Sprintf("%02d", i.Month))
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

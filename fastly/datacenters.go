@@ -19,7 +19,7 @@ type Datacenter struct {
 
 // AllDatacenters returns the lists of datacenters for Fastly's network.
 func (c *Client) AllDatacenters() (datacenters []Datacenter, err error) {
-	resp, err := c.Get("/datacenters", nil)
+	resp, err := c.Get("/datacenters", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}

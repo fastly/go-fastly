@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -29,6 +30,8 @@ type HealthCheck struct {
 
 // ListHealthChecksInput is used as input to the ListHealthChecks function.
 type ListHealthChecksInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -46,7 +49,7 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -65,6 +68,8 @@ type CreateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
@@ -102,12 +107,12 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	ro := new(RequestOptions)
-	ro.HealthCheckHeaders = true
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.HealthCheckHeaders = true
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck")
 
-	resp, err := c.PostForm(path, i, ro)
+	resp, err := c.PostForm(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -122,6 +127,8 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 
 // GetHealthCheckInput is used as input to the GetHealthCheck function.
 type GetHealthCheckInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the health check to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -144,7 +151,7 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -163,6 +170,8 @@ type UpdateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
@@ -205,12 +214,12 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	ro := new(RequestOptions)
-	ro.HealthCheckHeaders = true
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.HealthCheckHeaders = true
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.PutForm(path, i, ro)
+	resp, err := c.PutForm(path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -225,6 +234,8 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 
 // DeleteHealthCheckInput is the input parameter to DeleteHealthCheck.
 type DeleteHealthCheckInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the health check to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -247,7 +258,7 @@ func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

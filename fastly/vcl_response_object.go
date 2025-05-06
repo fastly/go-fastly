@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -24,6 +25,8 @@ type ResponseObject struct {
 // ListResponseObjectsInput is used as input to the ListResponseObjects
 // function.
 type ListResponseObjectsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -40,7 +43,7 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -62,6 +65,8 @@ type CreateResponseObjectInput struct {
 	Content *string `url:"content,omitempty"`
 	// ContentType is the MIME type of the content, can be empty.
 	ContentType *string `url:"content_type,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Name is the name for the request settings.
 	Name *string `url:"name,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
@@ -86,7 +91,7 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -101,6 +106,8 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 
 // GetResponseObjectInput is used as input to the GetResponseObject function.
 type GetResponseObjectInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the response object to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -122,7 +129,7 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -144,6 +151,8 @@ type UpdateResponseObjectInput struct {
 	Content *string `url:"content,omitempty"`
 	// ContentType is the MIME type of the content, can be empty.
 	ContentType *string `url:"content_type,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Name is the name of the response object to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -173,7 +182,7 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -188,6 +197,8 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 
 // DeleteResponseObjectInput is the input parameter to DeleteResponseObject.
 type DeleteResponseObjectInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the response object to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -209,7 +220,7 @@ func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

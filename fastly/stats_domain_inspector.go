@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"strconv"
 	"strings"
@@ -105,6 +106,8 @@ type DomainMeta struct {
 
 // GetDomainMetricsInput is the input to a DomainMetrics request.
 type GetDomainMetricsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
 	Cursor *string
 	// Datacenters limits query to one or more specific POPs.
@@ -151,32 +154,31 @@ func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst an
 
 	path := ToSafeURL("metrics", "domains", "services", i.ServiceID)
 
-	ro := &RequestOptions{
-		Params: map[string]string{
-			"group_by":   strings.Join(i.GroupBy, ","),
-			"metric":     strings.Join(i.Metrics, ","),
-			"domain":     strings.Join(i.Domains, ","),
-			"datacenter": strings.Join(i.Datacenters, ","),
-			"region":     strings.Join(i.Regions, ","),
-		},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+
+	requestOptions.Params["datacenter"] = strings.Join(i.Datacenters, ",")
+	requestOptions.Params["domain"] = strings.Join(i.Domains, ",")
+	requestOptions.Params["group_by"] = strings.Join(i.GroupBy, ",")
+	requestOptions.Params["metric"] = strings.Join(i.Metrics, ",")
+	requestOptions.Params["region"] = strings.Join(i.Regions, ",")
+
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Downsample != nil {
-		ro.Params["downsample"] = *i.Downsample
+		requestOptions.Params["downsample"] = *i.Downsample
 	}
 	if i.End != nil {
-		ro.Params["end"] = strconv.FormatInt(i.End.Unix(), 10)
+		requestOptions.Params["end"] = strconv.FormatInt(i.End.Unix(), 10)
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Start != nil {
-		ro.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
+		requestOptions.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return err
 	}

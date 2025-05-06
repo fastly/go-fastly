@@ -19,7 +19,7 @@ type PaginatorKVStoreEntries interface {
 
 // PaginationClient represents a HTTP client.
 type PaginationClient interface {
-	Get(p string, ro *RequestOptions) (*http.Response, error)
+	Get(p string, ro RequestOptions) (*http.Response, error)
 }
 
 // NewPaginator returns a *ListPaginator[T].
@@ -97,12 +97,9 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 		}
 	}
 
-	requestOptions := &RequestOptions{
-		Params: map[string]string{
-			"per_page": strconv.Itoa(perPage),
-			"page":     strconv.Itoa(p.CurrentPage),
-		},
-	}
+	requestOptions := CreateRequestOptions(nil)
+	requestOptions.Params["per_page"] = strconv.Itoa(perPage)
+	requestOptions.Params["page"] = strconv.Itoa(p.CurrentPage)
 
 	if p.opts.Direction != "" {
 		requestOptions.Params["direction"] = p.opts.Direction

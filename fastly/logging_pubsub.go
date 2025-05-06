@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -26,6 +27,8 @@ type Pubsub struct {
 
 // ListPubsubsInput is used as input to the ListPubsubs function.
 type ListPubsubsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -42,7 +45,7 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -59,6 +62,8 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 type CreatePubsubInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
 	AccountName *string `url:"account_name,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -93,7 +98,7 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -108,6 +113,8 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 
 // GetPubsubInput is used as input to the GetPubsub function.
 type GetPubsubInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Pubsub to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -129,7 +136,7 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -146,6 +153,8 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 type UpdatePubsubInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service. Not required if user and secret_key are provided.
 	AccountName *string `url:"account_name,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -185,7 +194,7 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -200,6 +209,8 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 
 // DeletePubsubInput is the input parameter to DeletePubsub.
 type DeletePubsubInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Pubsub to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -221,7 +232,7 @@ func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "pubsub", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

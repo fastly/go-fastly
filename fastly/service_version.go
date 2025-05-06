@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -30,6 +31,8 @@ type Environment struct {
 
 // ListVersionsInput is the input to the ListVersions function.
 type ListVersionsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
@@ -42,7 +45,7 @@ func (c *Client) ListVersions(i *ListVersionsInput) ([]*Version, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -86,6 +89,8 @@ func (c *Client) LatestVersion(i *LatestVersionInput) (*Version, error) {
 type CreateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 }
@@ -101,7 +106,7 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -116,6 +121,8 @@ func (c *Client) CreateVersion(i *CreateVersionInput) (*Version, error) {
 
 // GetVersionInput is the input to the GetVersion function.
 type GetVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the version number to fetch (required).
@@ -132,7 +139,7 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion))
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -149,6 +156,8 @@ func (c *Client) GetVersion(i *GetVersionInput) (*Version, error) {
 type UpdateVersionInput struct {
 	// Comment is a personal freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `url:"-"`
 	// ServiceVersion is the specific configuration version (required).
@@ -165,7 +174,7 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion))
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -180,12 +189,14 @@ func (c *Client) UpdateVersion(i *UpdateVersionInput) (*Version, error) {
 
 // ActivateVersionInput is the input to the ActivateVersion function.
 type ActivateVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
+	// Environment is the Fastly environment to activate this version to (optional).
+	Environment string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// Environment is the Fastly environment to activate this version to (optional).
-	Environment string
 }
 
 // ActivateVersion activates the given version.
@@ -204,7 +215,7 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 
 	path := ToSafeURL(components...)
 
-	resp, err := c.Put(path, nil)
+	resp, err := c.Put(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -219,12 +230,14 @@ func (c *Client) ActivateVersion(i *ActivateVersionInput) (*Version, error) {
 
 // DeactivateVersionInput is the input to the DeactivateVersion function.
 type DeactivateVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
+	// Environment is the Fastly environment to deactivate this version from (optional).
+	Environment string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// Environment is the Fastly environment to deactivate this version from (optional).
-	Environment string
 }
 
 // DeactivateVersion deactivates the given version.
@@ -243,7 +256,7 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 
 	path := ToSafeURL(components...)
 
-	resp, err := c.Put(path, nil)
+	resp, err := c.Put(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -258,6 +271,8 @@ func (c *Client) DeactivateVersion(i *DeactivateVersionInput) (*Version, error) 
 
 // CloneVersionInput is the input to the CloneVersion function.
 type CloneVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -277,7 +292,7 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "clone")
-	resp, err := c.Put(path, nil)
+	resp, err := c.Put(path, CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -292,6 +307,8 @@ func (c *Client) CloneVersion(i *CloneVersionInput) (*Version, error) {
 
 // ValidateVersionInput is the input to the ValidateVersion function.
 type ValidateVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -310,7 +327,7 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "validate")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return false, msg, err
 	}
@@ -327,6 +344,8 @@ func (c *Client) ValidateVersion(i *ValidateVersionInput) (bool, string, error) 
 
 // LockVersionInput is the input to the LockVersion function.
 type LockVersionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -343,7 +362,7 @@ func (c *Client) LockVersion(i *LockVersionInput) (*Version, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "lock")
-	resp, err := c.Put(path, nil)
+	resp, err := c.Put(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

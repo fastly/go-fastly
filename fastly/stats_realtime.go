@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"strconv"
 )
@@ -30,7 +31,9 @@ type RealtimeData struct {
 
 // GetRealtimeStatsInput is an input parameter to GetRealtimeStats function.
 type GetRealtimeStatsInput struct {
-	Limit *uint32
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
+	Limit   *uint32
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// Timestamp is a value to use for subsequent requests (required).
@@ -68,7 +71,7 @@ func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) erro
 
 	path := ToSafeURL(components...)
 
-	resp, err := c.client.Get(path, nil)
+	resp, err := c.client.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

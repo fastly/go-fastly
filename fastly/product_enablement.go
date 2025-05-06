@@ -1,5 +1,7 @@
 package fastly
 
+import "context"
+
 // ProductEnablement represents a response from the Fastly API.
 type ProductEnablement struct {
 	Product *ProductEnablementNested `mapstructure:"product"`
@@ -52,6 +54,8 @@ const (
 
 // ProductEnablementInput is used as input to the various product API functions.
 type ProductEnablementInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ProductID is the ID of the product and is constrained by the Product type (required).
 	ProductID Product
 	// ServiceID is the ID of the service (required).
@@ -72,7 +76,7 @@ func (c *Client) GetProduct(i *ProductEnablementInput) (*ProductEnablement, erro
 
 	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -100,7 +104,7 @@ func (c *Client) EnableProduct(i *ProductEnablementInput) (*ProductEnablement, e
 
 	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	resp, err := c.PutJSON(path, i, nil)
+	resp, err := c.PutJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -127,7 +131,7 @@ func (c *Client) DisableProduct(i *ProductEnablementInput) error {
 
 	path := ToSafeURL("enabled-products", i.ProductID.String(), "services", i.ServiceID)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

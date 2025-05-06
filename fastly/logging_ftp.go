@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -32,6 +33,8 @@ type FTP struct {
 
 // ListFTPsInput is used as input to the ListFTPs function.
 type ListFTPsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +51,7 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -63,10 +66,12 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 
 // CreateFTPInput is used as input to the CreateFTP function.
 type CreateFTPInput struct {
-	// Address is an hostname or IPv4 address.
+	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -111,7 +116,7 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +131,8 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 
 // GetFTPInput is used as input to the GetFTP function.
 type GetFTPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the FTP to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +154,7 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -162,10 +169,12 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 
 // UpdateFTPInput is used as input to the UpdateFTP function.
 type UpdateFTPInput struct {
-	// Address is an hostname or IPv4 address.
+	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -215,7 +224,7 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +239,8 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 
 // DeleteFTPInput is the input parameter to DeleteFTP.
 type DeleteFTPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the FTP to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +262,7 @@ func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"time"
@@ -29,6 +30,8 @@ type BigQuery struct {
 
 // ListBigQueriesInput is used as input to the ListBigQueries function.
 type ListBigQueriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -45,7 +48,7 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "bigquery")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -62,6 +65,8 @@ func (c *Client) ListBigQueries(i *ListBigQueriesInput) ([]*BigQuery, error) {
 type CreateBigQueryInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service.
 	AccountName *string `url:"account_name,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Dataset is your BigQuery dataset.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce JSON that matches the schema of your BigQuery table.
@@ -100,7 +105,7 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "bigquery")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -115,6 +120,8 @@ func (c *Client) CreateBigQuery(i *CreateBigQueryInput) (*BigQuery, error) {
 
 // GetBigQueryInput is used as input to the GetBigQuery function.
 type GetBigQueryInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the BigQuery to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -136,7 +143,7 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "bigquery", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -153,6 +160,8 @@ func (c *Client) GetBigQuery(i *GetBigQueryInput) (*BigQuery, error) {
 type UpdateBigQueryInput struct {
 	// AccountName is the name of the Google Cloud Platform service account associated with the target log collection service.
 	AccountName *string `url:"account_name,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Dataset is your BigQuery dataset.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce JSON that matches the schema of your BigQuery table.
@@ -196,7 +205,7 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "bigquery", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -211,6 +220,8 @@ func (c *Client) UpdateBigQuery(i *UpdateBigQueryInput) (*BigQuery, error) {
 
 // DeleteBigQueryInput is the input parameter to DeleteBigQuery.
 type DeleteBigQueryInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the BigQuery to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -232,7 +243,7 @@ func (c *Client) DeleteBigQuery(i *DeleteBigQueryInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "bigquery", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

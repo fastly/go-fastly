@@ -1,6 +1,9 @@
 package fastly
 
-import "strconv"
+import (
+	"context"
+	"strconv"
+)
 
 // Diff represents a diff of two versions as a response from the Fastly API.
 type Diff struct {
@@ -12,6 +15,8 @@ type Diff struct {
 
 // GetDiffInput is used as input to the GetDiff function.
 type GetDiffInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Format is an optional field to specify the format with which the diff will
 	// be returned. Acceptable values are "text" (default), "html", or
 	// "html_simple".
@@ -42,7 +47,7 @@ func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "diff", "from", strconv.Itoa(i.From), "to", strconv.Itoa(i.To))
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

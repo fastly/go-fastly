@@ -1,6 +1,7 @@
 package accesskeys
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"slices"
@@ -21,6 +22,8 @@ var PERMISSONS = []string{READ_WRITE_ADMIN, READ_ONLY_ADMIN, READ_WRITE_OBJECTS,
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
 type CreateInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
 	// Description is a description of the access key (required).
 	Description *string `json:"description"`
 	// Permission is the permissions the access key will have (required).
@@ -44,7 +47,7 @@ func Create(c *fastly.Client, i *CreateInput) (*AccessKey, error) {
 		return nil, fastly.ErrInvalidPermission
 	}
 
-	resp, err := c.PostJSON("/resources/object-storage/access-keys", i, nil)
+	resp, err := c.PostJSON("/resources/object-storage/access-keys", i, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

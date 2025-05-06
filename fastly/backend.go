@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"time"
@@ -49,6 +50,8 @@ type Backend struct {
 
 // ListBackendsInput is used as input to the ListBackends function.
 type ListBackendsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -66,7 +69,7 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -91,6 +94,8 @@ type CreateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
@@ -160,7 +165,7 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -175,6 +180,8 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 // GetBackendInput is used as input to the GetBackend function.
 type GetBackendInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the backend to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -197,7 +204,7 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -222,6 +229,8 @@ type UpdateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
@@ -296,7 +305,7 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -311,6 +320,8 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 
 // DeleteBackendInput is the input parameter to DeleteBackend.
 type DeleteBackendInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the backend to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -333,7 +344,7 @@ func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
