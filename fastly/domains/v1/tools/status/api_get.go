@@ -16,8 +16,8 @@ const (
 	ScopeEstimate Scope = "estimate"
 )
 
-// GetDomainStatusCheckInput specifies the parameters for a domain status check request.
-type GetDomainStatusCheckInput struct {
+// GetInput specifies the parameters for a domain status check request.
+type GetInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Domain is the domain name being checked for availability.
@@ -28,7 +28,7 @@ type GetDomainStatusCheckInput struct {
 }
 
 // Get performs a domain status check for a given domain.
-func Get(c *fastly.Client, g *GetDomainStatusCheckInput) (*Status, error) {
+func Get(c *fastly.Client, g *GetInput) (*Status, error) {
 	if g.Domain == "" {
 		return nil, fastly.ErrMissingDomain
 	}

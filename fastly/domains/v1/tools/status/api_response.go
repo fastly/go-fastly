@@ -13,11 +13,11 @@ type Status struct {
 	// Scope reflects the type of availability check that was performed.
 	// Scope will only be present if an estimated status check was performed.
 	// `estimate` provides DNS and aftermarket availability.
-	Scope *Scope `json:"scope,omitempty"`
+	Scope *Scope `json:"scope"`
 	// Tags is a space-delimited string containing the varying tags associated with the domain.
 	Tags string `json:"tags"`
 	// Offers if present, contains a list of offers from domain aftermarket vendors.
-	Offers []Offer `json:"offers,omitempty"`
+	Offers []Offer `json:"offers"`
 }
 
 // Offer represents an offer from an aftermarket vendor for a given domain.
