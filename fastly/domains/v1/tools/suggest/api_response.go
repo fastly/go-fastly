@@ -13,4 +13,6 @@ type Suggestion struct {
 	Subdomain string `json:"subdomain"`
 	// Zone is the top level domain or registered domain portion (e.g ".com").
 	Zone string `json:"zone"`
+	// Path if present, is the path is to be appended to the domain to complete the suggestion.
+	Path *string `json:"path"`
 }
