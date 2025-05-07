@@ -2,17 +2,25 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.0.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.1.0...)
 
 ### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v10.1.0](https://github.com/fastly/go-fastly/releases/tag/v10.1.0) (2025-05-07)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.0.1...v10.1.0)
 
 ### Enhancements:
 - feat(Domain Discovery): add `suggest` and `status` domain tools endpoints ([#672](https://github.com/fastly/go-fastly/pull/672))
 - feat(fastly): adds context param to most inputs, allowing users of the library to pass context to a request ([#670](https://github.com/fastly/go-fastly/pull/670))
 - feat(go.mod): upgrade to go 1.24.0 minimum version ([#668](https://github.com/fastly/go-fastly/pull/668))
-- feat(backend): adds support for 'prefer_ipv6' attribute on backends
-
-### Bug fixes:
+- feat(backend): adds support for 'prefer_ipv6' attribute on backends ([#674](https://github.com/fastly/go-fastly/pull/674))
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.37.0 to 0.38.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
