@@ -15,6 +15,10 @@
 ### Bug fixes:
 
 ### Dependencies:
+- build(deps): `golang.org/x/crypto` from 0.37.0 to 0.38.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
+- build(deps): `golang.org/x/sync` from 0.13.0 to 0.14.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
+- build(deps): `golang.org/x/sys` from 0.32.0 to 0.33.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
+- build(deps): `golang.org/x/tools` from 0.32.0 to 0.33.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
 
 ## [v10.0.1](https://github.com/fastly/go-fastly/releases/tag/v10.0.1) (2025-04-14)
 
