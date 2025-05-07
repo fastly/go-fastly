@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/45/backend/test-backend
+      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/102/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-backend, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 45 }''"}'
+      version =\u003e 102 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Apr 2025 14:18:21 GMT
+      - Wed, 07 May 2025 15:03:14 GMT
       Fastly-Ratelimit-Remaining:
       - "9988"
       Fastly-Ratelimit-Reset:
-      - "1744210800"
+      - "1746633600"
       Pragma:
       - no-cache
       Server:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100032-CHI, cache-mia-kmia1760061-MIA
+      - cache-chi-klot8100020-CHI, cache-ewr-kewr1740090-EWR
       X-Timer:
-      - S1744208301.334695,VS0,VE125
+      - S1746630195.678194,VS0,VE110
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/45/backend/new-test-backend
+      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/102/backend/new-test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-backend, service =\u003e
-      kKJb5bOFI47uHeBVluGfX1, version =\u003e 45 }''"}'
+      kKJb5bOFI47uHeBVluGfX1, version =\u003e 102 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,11 +69,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 09 Apr 2025 14:18:21 GMT
+      - Wed, 07 May 2025 15:03:14 GMT
       Fastly-Ratelimit-Remaining:
       - "9987"
       Fastly-Ratelimit-Reset:
-      - "1744210800"
+      - "1746633600"
       Pragma:
       - no-cache
       Server:
@@ -91,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100166-CHI, cache-mia-kmia1760061-MIA
+      - cache-chi-klot8100159-CHI, cache-ewr-kewr1740090-EWR
       X-Timer:
-      - S1744208301.484338,VS0,VE148
+      - S1746630195.795885,VS0,VE117
     status: 404 Not Found
     code: 404
     duration: ""

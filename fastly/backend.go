@@ -27,6 +27,7 @@ type Backend struct {
 	Name                *string    `mapstructure:"name"`
 	OverrideHost        *string    `mapstructure:"override_host"`
 	Port                *int       `mapstructure:"port"`
+	PreferIPv6          *bool      `mapstructure:"prefer_ipv6"`
 	RequestCondition    *string    `mapstructure:"request_condition"`
 	ShareKey            *string    `mapstructure:"share_key"`
 	SSLCACert           *string    `mapstructure:"ssl_ca_cert"`
@@ -116,6 +117,8 @@ type CreateBackendInput struct {
 	OverrideHost *string `url:"override_host,omitempty"`
 	// Port is the port on which the backend server is listening for connections from Fastly.
 	Port *int `url:"port,omitempty"`
+	// PreferIPv6 indicates whether IPv6 results should be preferred when DNS is used to obtain addresses for the backend.
+	PreferIPv6 *Compatibool `url:"prefer_ipv6,omitempty"`
 	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
 	// ShareKey is a value that when shared across backends will enable those backends to share the same health check.
@@ -253,6 +256,8 @@ type UpdateBackendInput struct {
 	OverrideHost *string `url:"override_host,omitempty"`
 	// Port is the port on which the backend server is listening for connections from Fastly.
 	Port *int `url:"port,omitempty"`
+	// PreferIPv6 indicates whether IPv6 results should be preferred when DNS is used to obtain addresses for the backend.
+	PreferIPv6 *Compatibool `url:"prefer_ipv6,omitempty"`
 	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
 	// ShareKey is a value that when shared across backends will enable those backends to share the same health check.

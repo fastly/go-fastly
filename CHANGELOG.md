@@ -10,6 +10,7 @@
 
 - feat(fastly): adds context param to most inputs, allowing users of the library to pass context to a request ([#670](https://github.com/fastly/go-fastly/pull/670))
 - feat(go.mod): upgrade to go 1.24.0 minimum version ([#668](https://github.com/fastly/go-fastly/pull/668))
+- feat(backend): adds support for 'prefer_ipv6' attribute on backends
 
 ### Bug fixes:
 
