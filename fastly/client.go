@@ -408,9 +408,9 @@ type RequestOptions struct {
 	Params map[string]string
 }
 
-func CreateRequestOptions(cxt *context.Context) RequestOptions {
+func CreateRequestOptions(ctx *context.Context) RequestOptions {
 	return RequestOptions{
-		Context: cxt,
+		Context: ctx,
 		Headers: map[string]string{},
 		Params:  map[string]string{},
 	}
