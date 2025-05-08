@@ -13,7 +13,9 @@ $ git remote add upstream git@github.com:fastly/go-fastly.git
 4. Make changes.
 5. Write tests.
 6. Validate your change via the steps documented [in the README](./README.md#testing).
-7. Open a pull request against `upstream main`.
+7. Run the linter and formatter `make all`. 
+    1. You may need to install [golangci-lint](https://golangci-lint.run/welcome/install/) if you don't have it installed
+8. Open a pull request against `upstream main`.
     1. Once you have marked your PR as `Ready for Review` please do not force push to the branch
-8. Add an entry in `CHANGELOG.md` in the `UNRELEASED` section under the appropriate heading with a link to the PR.
-9. Celebrate :tada:!
+9. Add an entry in `CHANGELOG.md` in the `UNRELEASED` section under the appropriate heading with a link to the PR.
+10. Celebrate :tada:!
