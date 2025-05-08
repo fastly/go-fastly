@@ -27,10 +27,10 @@ import (
 
 // APIKeyEnvVar is the name of the environment variable where the Fastly API
 // key should be read from.
-const APIKeyEnvVar = "FASTLY_API_KEY" // #nosec G101
+const APIKeyEnvVar = "FASTLY_API_KEY" //nolint: gosec
 
 // APIKeyHeader is the name of the header that contains the Fastly API key.
-const APIKeyHeader = "Fastly-Key" // #nosec G101
+const APIKeyHeader = "Fastly-Key" //nolint: gosec
 
 // EndpointEnvVar is the name of an environment variable that can be used
 // to change the URL of API requests.
