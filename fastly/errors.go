@@ -89,6 +89,10 @@ var ErrMissingCertBlob = NewFieldError("CertBlob")
 // requires a "CertBundle" key, but one was not set.
 var ErrMissingCertBundle = NewFieldError("CertBundle")
 
+// ErrMissingConditions is an error that is returned when an input struct
+// requires a "Conditions" key, but one was not set.
+var ErrMissingConditions = NewFieldError("Conditions")
+
 // ErrMissingComputeACLID is an error that is returned when an input struct
 // requires a "ComputeACLID" key, but one was not set.
 var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
@@ -108,6 +112,10 @@ var ErrMissingIsExpired = NewFieldError("IsExpired")
 // ErrMissingRedactionID is an error that is returned when an input struct
 // requires a "RedactionID" key, but one was not set.
 var ErrMissingRedactionID = NewFieldError("RedactionID")
+
+// ErrMissingRuleID is an error that is returned when an input struct
+// requires a "RuleID" key, but one was not set.
+var ErrMissingRuleID = NewFieldError("RuleID")
 
 // ErrMissingField is an error that is returned when an input struct
 // requires a "Field" key, but one was not set.
