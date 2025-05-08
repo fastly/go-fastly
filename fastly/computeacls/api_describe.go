@@ -29,7 +29,7 @@ func Describe(c *fastly.Client, i *DescribeInput) (*ComputeACL, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var acl *ComputeACL
 	if err := json.NewDecoder(resp.Body).Decode(&acl); err != nil {

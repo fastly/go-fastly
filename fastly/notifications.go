@@ -71,7 +71,7 @@ func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrat
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var sir *SearchIntegrationsResponse
 	if err := json.NewDecoder(resp.Body).Decode(&sir); err != nil {
@@ -107,7 +107,7 @@ func (c *Client) CreateIntegration(i *CreateIntegrationInput) (*CreateIntegratio
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var cir *CreateIntegrationResponse
 	if err := json.NewDecoder(resp.Body).Decode(&cir); err != nil {
@@ -136,7 +136,7 @@ func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var integration *Integration
 	if err := json.NewDecoder(resp.Body).Decode(&integration); err != nil {
@@ -174,7 +174,7 @@ func (c *Client) UpdateIntegration(i *UpdateIntegrationInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)
@@ -203,7 +203,7 @@ func (c *Client) DeleteIntegration(i *DeleteIntegrationInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)
@@ -233,7 +233,7 @@ func (c *Client) GetIntegrationTypes() (*[]IntegrationType, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var its *[]IntegrationType
 	if err := json.NewDecoder(resp.Body).Decode(&its); err != nil {
@@ -267,7 +267,7 @@ func (c *Client) GetWebhookSigningKey(i *GetWebhookSigningKeyInput) (*WebhookSig
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var wskr *WebhookSigningKeyResponse
 	if err := json.NewDecoder(resp.Body).Decode(&wskr); err != nil {
@@ -294,7 +294,7 @@ func (c *Client) RotateWebhookSigningKey(i *RotateWebhookSigningKeyInput) (*Webh
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var wskr *WebhookSigningKeyResponse
 	if err := json.NewDecoder(resp.Body).Decode(&wskr); err != nil {
@@ -318,7 +318,7 @@ func (c *Client) CreateMailinglistConfirmation(i *CreateMailinglistConfirmationI
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)

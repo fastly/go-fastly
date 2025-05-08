@@ -111,7 +111,7 @@ func (c *Client) GetAutomationToken(i *GetAutomationTokenInput) (*AutomationToke
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var t *AutomationToken
 	if err := DecodeBodyMap(resp.Body, &t); err != nil {
@@ -151,13 +151,13 @@ func (c *Client) CreateAutomationToken(i *CreateAutomationTokenInput) (*Automati
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 
 	resp, err := c.PostJSON("/automation-tokens", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var t *AutomationToken
 	if err := DecodeBodyMap(resp.Body, &t); err != nil {
@@ -186,7 +186,7 @@ func (c *Client) DeleteAutomationToken(i *DeleteAutomationTokenInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return ErrNotOK

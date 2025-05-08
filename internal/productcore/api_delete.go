@@ -32,7 +32,7 @@ func Delete(i *DeleteInput) error {
 	if err != nil {
 		return err
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	return nil
 }

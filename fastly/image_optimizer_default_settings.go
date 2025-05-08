@@ -150,7 +150,7 @@ func (c *Client) GetImageOptimizerDefaultSettings(i *GetImageOptimizerDefaultSet
 		}
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var iods *ImageOptimizerDefaultSettings
 	if err := json.NewDecoder(resp.Body).Decode(&iods); err != nil {
@@ -182,7 +182,7 @@ func (c *Client) UpdateImageOptimizerDefaultSettings(i *UpdateImageOptimizerDefa
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var iods *ImageOptimizerDefaultSettings
 	if err := json.NewDecoder(resp.Body).Decode(&iods); err != nil {

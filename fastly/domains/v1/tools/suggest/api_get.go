@@ -57,7 +57,7 @@ func Get(c *fastly.Client, g *GetInput) (*Suggestions, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var suggestions *Suggestions
 	if err := json.NewDecoder(resp.Body).Decode(&suggestions); err != nil {

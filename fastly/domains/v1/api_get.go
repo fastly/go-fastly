@@ -29,7 +29,7 @@ func Get(c *fastly.Client, i *GetInput) (*Data, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var d *Data
 	if err := json.NewDecoder(resp.Body).Decode(&d); err != nil {

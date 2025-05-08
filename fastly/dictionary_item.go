@@ -121,7 +121,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -177,7 +177,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -218,7 +218,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *DictionaryItem
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -268,7 +268,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
 	return DecodeBodyMap(resp.Body, &batchModifyResult)
@@ -304,7 +304,7 @@ func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	// Unlike other endpoints, the dictionary endpoint does not return a status
 	// response - it just returns a 200 OK.

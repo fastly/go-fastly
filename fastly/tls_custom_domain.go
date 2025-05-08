@@ -73,7 +73,7 @@ func (c *Client) ListTLSDomains(i *ListTLSDomainsInput) ([]*TLSDomain, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(TLSDomain)))
 	if err != nil {

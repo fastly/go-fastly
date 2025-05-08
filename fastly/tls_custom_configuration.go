@@ -81,7 +81,7 @@ func (c *Client) ListCustomTLSConfigurations(i *ListCustomTLSConfigurationsInput
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomTLSConfiguration)))
 	if err != nil {
@@ -129,7 +129,7 @@ func (c *Client) GetCustomTLSConfiguration(i *GetCustomTLSConfigurationInput) (*
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var con CustomTLSConfiguration
 	if err := jsonapi.UnmarshalPayload(resp.Body, &con); err != nil {
@@ -165,7 +165,7 @@ func (c *Client) UpdateCustomTLSConfiguration(i *UpdateCustomTLSConfigurationInp
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var con CustomTLSConfiguration
 	if err := jsonapi.UnmarshalPayload(resp.Body, &con); err != nil {

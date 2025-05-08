@@ -47,7 +47,7 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var bs []*ResponseObject
 	if err := DecodeBodyMap(resp.Body, &bs); err != nil {
@@ -95,7 +95,7 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -133,7 +133,7 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -186,7 +186,7 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *ResponseObject
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -224,7 +224,7 @@ func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

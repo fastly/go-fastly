@@ -123,7 +123,7 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var e *ACLEntry
 	if err := DecodeBodyMap(resp.Body, &e); err != nil {
@@ -166,7 +166,7 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var e *ACLEntry
 	if err := DecodeBodyMap(resp.Body, &e); err != nil {
@@ -206,7 +206,7 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {
@@ -258,7 +258,7 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var e *ACLEntry
 	if err := DecodeBodyMap(resp.Body, &e); err != nil {
@@ -315,7 +315,7 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
 

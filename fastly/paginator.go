@@ -112,7 +112,7 @@ func (p *ListPaginator[T]) GetNext() ([]*T, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	for _, l := range link.ParseResponse(resp) {
 		// Indicates the Link response header contained the next page instruction

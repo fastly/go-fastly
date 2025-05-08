@@ -40,7 +40,7 @@ func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var h *HTTP3
 	if err := DecodeBodyMap(resp.Body, &h); err != nil {
@@ -76,7 +76,7 @@ func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var http3 *HTTP3
 	if err := DecodeBodyMap(resp.Body, &http3); err != nil {
@@ -109,7 +109,7 @@ func (c *Client) DisableHTTP3(i *DisableHTTP3Input) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

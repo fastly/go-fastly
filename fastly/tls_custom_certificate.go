@@ -90,7 +90,7 @@ func (c *Client) ListCustomTLSCertificates(i *ListCustomTLSCertificatesInput) ([
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(CustomTLSCertificate)))
 	if err != nil {
@@ -129,7 +129,7 @@ func (c *Client) GetCustomTLSCertificate(i *GetCustomTLSCertificateInput) (*Cust
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var cc CustomTLSCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {
@@ -163,7 +163,7 @@ func (c *Client) CreateCustomTLSCertificate(i *CreateCustomTLSCertificateInput) 
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var cc CustomTLSCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {
@@ -205,7 +205,7 @@ func (c *Client) UpdateCustomTLSCertificate(i *UpdateCustomTLSCertificateInput) 
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var cc CustomTLSCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &cc); err != nil {
@@ -234,6 +234,6 @@ func (c *Client) DeleteCustomTLSCertificate(i *DeleteCustomTLSCertificateInput) 
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 	return nil
 }

@@ -77,7 +77,7 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(PrivateKey)))
 	if err != nil {
@@ -108,7 +108,7 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ppk PrivateKey
 	if err := jsonapi.UnmarshalPayload(resp.Body, &ppk); err != nil {
@@ -144,7 +144,7 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ppk PrivateKey
 	if err := jsonapi.UnmarshalPayload(resp.Body, &ppk); err != nil {
@@ -174,6 +174,6 @@ func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 	return nil
 }

@@ -93,7 +93,7 @@ func (c *Client) CreateSnippet(i *CreateSnippetInput) (*Snippet, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var snippet *Snippet
 	if err := DecodeBodyMap(resp.Body, &snippet); err != nil {
@@ -139,7 +139,7 @@ func (c *Client) UpdateSnippet(i *UpdateSnippetInput) (*Snippet, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var snippet *Snippet
 	if err := DecodeBodyMap(resp.Body, &snippet); err != nil {
@@ -185,7 +185,7 @@ func (c *Client) UpdateDynamicSnippet(i *UpdateDynamicSnippetInput) (*DynamicSni
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var updateSnippet *DynamicSnippet
 	if err := DecodeBodyMap(resp.Body, &updateSnippet); err != nil {
@@ -223,7 +223,7 @@ func (c *Client) DeleteSnippet(i *DeleteSnippetInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {
@@ -262,7 +262,7 @@ func (c *Client) ListSnippets(i *ListSnippetsInput) ([]*Snippet, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var snippets []*Snippet
 	if err := DecodeBodyMap(resp.Body, &snippets); err != nil {
@@ -303,7 +303,7 @@ func (c *Client) GetSnippet(i *GetSnippetInput) (*Snippet, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var snippet *Snippet
 	if err := DecodeBodyMap(resp.Body, &snippet); err != nil {
@@ -339,7 +339,7 @@ func (c *Client) GetDynamicSnippet(i *GetDynamicSnippetInput) (*DynamicSnippet, 
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var snippet *DynamicSnippet
 	if err := DecodeBodyMap(resp.Body, &snippet); err != nil {

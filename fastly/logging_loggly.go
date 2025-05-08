@@ -45,7 +45,7 @@ func (c *Client) ListLoggly(i *ListLogglyInput) ([]*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ls []*Loggly
 	if err := DecodeBodyMap(resp.Body, &ls); err != nil {
@@ -90,7 +90,7 @@ func (c *Client) CreateLoggly(i *CreateLogglyInput) (*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var l *Loggly
 	if err := DecodeBodyMap(resp.Body, &l); err != nil {
@@ -128,7 +128,7 @@ func (c *Client) GetLoggly(i *GetLogglyInput) (*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var l *Loggly
 	if err := DecodeBodyMap(resp.Body, &l); err != nil {
@@ -178,7 +178,7 @@ func (c *Client) UpdateLoggly(i *UpdateLogglyInput) (*Loggly, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var l *Loggly
 	if err := DecodeBodyMap(resp.Body, &l); err != nil {
@@ -216,7 +216,7 @@ func (c *Client) DeleteLoggly(i *DeleteLogglyInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

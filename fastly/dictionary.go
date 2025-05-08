@@ -43,7 +43,7 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var bs []*Dictionary
 	if err := DecodeBodyMap(resp.Body, &bs); err != nil {
@@ -81,7 +81,7 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *Dictionary
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -120,7 +120,7 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *Dictionary
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -163,7 +163,7 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *Dictionary
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -202,7 +202,7 @@ func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	// Unlike other endpoints, the dictionary endpoint does not return a status
 	// response - it just returns a 200 OK.

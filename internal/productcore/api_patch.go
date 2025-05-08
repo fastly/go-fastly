@@ -44,7 +44,7 @@ func Patch[O products.ProductOutput, I any](i *PatchInput[I]) (o O, err error) {
 	if err != nil {
 		return
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	err = fastly.DecodeBodyMap(resp.Body, &o)
 	return

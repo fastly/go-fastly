@@ -94,7 +94,7 @@ func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefin
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var adr *AlertDefinitionsResponse
 	if err := json.NewDecoder(resp.Body).Decode(&adr); err != nil {
@@ -132,7 +132,7 @@ func (c *Client) CreateAlertDefinition(i *CreateAlertDefinitionInput) (*AlertDef
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ad *AlertDefinition
 	if err := json.NewDecoder(resp.Body).Decode(&ad); err != nil {
@@ -161,7 +161,7 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ad *AlertDefinition
 	if err := json.NewDecoder(resp.Body).Decode(&ad); err != nil {
@@ -203,7 +203,7 @@ func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDef
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ad *AlertDefinition
 	if err := json.NewDecoder(resp.Body).Decode(&ad); err != nil {
@@ -232,7 +232,7 @@ func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)
@@ -269,7 +269,7 @@ func (c *Client) TestAlertDefinition(i *TestAlertDefinitionInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusAccepted {
 		return NewHTTPError(resp)
@@ -334,7 +334,7 @@ func (c *Client) ListAlertHistory(i *ListAlertHistoryInput) (*AlertHistoryRespon
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ahr *AlertHistoryResponse
 	if err := json.NewDecoder(resp.Body).Decode(&ahr); err != nil {

@@ -77,7 +77,7 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 	if err != nil {
 		return eventsResponse, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	err = c.interpretAPIEventsPage(&eventsResponse, i.PageNumber, resp)
 	// NOTE: It's possible for eventsResponse to be partially completed before an error
@@ -107,7 +107,7 @@ func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var event Event
 	if err := jsonapi.UnmarshalPayload(resp.Body, &event); err != nil {
@@ -148,7 +148,7 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum in
 			if err != nil {
 				return err
 			}
-			defer CheckCloseForErr(resp.Body.Close)
+			defer resp.Body.Close()
 			return c.interpretAPIEventsPage(answer, pageNum, resp)
 		}
 	}

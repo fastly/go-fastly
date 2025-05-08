@@ -223,7 +223,7 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ldr *ListDashboardsResponse
 	if err := json.NewDecoder(resp.Body).Decode(&ldr); err != nil {
@@ -247,7 +247,7 @@ func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustom
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ocd *ObservabilityCustomDashboard
 	if err := json.NewDecoder(resp.Body).Decode(&ocd); err != nil {
@@ -273,7 +273,7 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ocd *ObservabilityCustomDashboard
 	if err := json.NewDecoder(resp.Body).Decode(&ocd); err != nil {
@@ -302,7 +302,7 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ocd *ObservabilityCustomDashboard
 	if err := json.NewDecoder(resp.Body).Decode(&ocd); err != nil {
@@ -327,7 +327,7 @@ func (c *Client) DeleteObservabilityCustomDashboard(i *DeleteObservabilityCustom
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)

@@ -45,7 +45,7 @@ func (c *Client) ListDomains(i *ListDomainsInput) ([]*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ds []*Domain
 	if err := DecodeBodyMap(resp.Body, &ds); err != nil {
@@ -83,7 +83,7 @@ func (c *Client) CreateDomain(i *CreateDomainInput) (*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var d *Domain
 	if err := DecodeBodyMap(resp.Body, &d); err != nil {
@@ -122,7 +122,7 @@ func (c *Client) GetDomain(i *GetDomainInput) (*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var d *Domain
 	if err := DecodeBodyMap(resp.Body, &d); err != nil {
@@ -165,7 +165,7 @@ func (c *Client) UpdateDomain(i *UpdateDomainInput) (*Domain, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var d *Domain
 	if err := DecodeBodyMap(resp.Body, &d); err != nil {
@@ -204,7 +204,7 @@ func (c *Client) DeleteDomain(i *DeleteDomainInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 	return nil
 }
 
@@ -238,7 +238,7 @@ func (c *Client) ValidateDomain(i *ValidateDomainInput) (*DomainValidationResult
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -325,7 +325,7 @@ func (c *Client) ValidateAllDomains(i *ValidateAllDomainsInput) (results []*Doma
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := io.ReadAll(resp.Body)
 	if err != nil {

@@ -51,7 +51,7 @@ func Create(c *fastly.Client, i *CreateInput) (*AccessKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var accessKey *AccessKey
 	if err := json.NewDecoder(resp.Body).Decode(&accessKey); err != nil {

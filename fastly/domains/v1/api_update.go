@@ -32,7 +32,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Data, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var d *Data
 	if err := json.NewDecoder(resp.Body).Decode(&d); err != nil {

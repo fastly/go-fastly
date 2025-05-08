@@ -48,7 +48,7 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var ls []*Logentries
 	if err := DecodeBodyMap(resp.Body, &ls); err != nil {
@@ -99,7 +99,7 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := DecodeBodyMap(resp.Body, &l); err != nil {
@@ -137,7 +137,7 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := DecodeBodyMap(resp.Body, &l); err != nil {
@@ -193,7 +193,7 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var l *Logentries
 	if err := DecodeBodyMap(resp.Body, &l); err != nil {
@@ -231,7 +231,7 @@ func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

@@ -49,7 +49,7 @@ func (c *Client) CreateConfigStoreItem(i *CreateConfigStoreItemInput) (*ConfigSt
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var csi *ConfigStoreItem
 	if err = json.NewDecoder(resp.Body).Decode(&csi); err != nil {
@@ -124,7 +124,7 @@ func (c *Client) GetConfigStoreItem(i *GetConfigStoreItemInput) (*ConfigStoreIte
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var csi *ConfigStoreItem
 	if err = json.NewDecoder(resp.Body).Decode(&csi); err != nil {
@@ -154,7 +154,7 @@ func (c *Client) ListConfigStoreItems(i *ListConfigStoreItemsInput) ([]*ConfigSt
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var csi []*ConfigStoreItem
 	if err = json.NewDecoder(resp.Body).Decode(&csi); err != nil {
@@ -209,7 +209,7 @@ func (c *Client) UpdateConfigStoreItem(i *UpdateConfigStoreItemInput) (*ConfigSt
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var csi *ConfigStoreItem
 	if err = json.NewDecoder(resp.Body).Decode(&csi); err != nil {
@@ -255,7 +255,7 @@ func (c *Client) BatchModifyConfigStoreItems(i *BatchModifyConfigStoreItemsInput
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var batchModifyResult map[string]string
 	return DecodeBodyMap(resp.Body, &batchModifyResult)

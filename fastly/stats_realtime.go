@@ -75,7 +75,7 @@ func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) erro
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	return json.NewDecoder(resp.Body).Decode(dst)
 }

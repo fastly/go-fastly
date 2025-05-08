@@ -40,7 +40,7 @@ func Update(c *fastly.Client, i *UpdateInput) error {
 	if err != nil {
 		return err
 	}
-	defer fastly.CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusAccepted {
 		return fastly.NewHTTPError(resp)

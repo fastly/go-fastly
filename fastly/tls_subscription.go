@@ -138,7 +138,7 @@ func (c *Client) ListTLSSubscriptions(i *ListTLSSubscriptionsInput) ([]*TLSSubsc
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(TLSSubscription)))
 	if err != nil {
@@ -188,7 +188,7 @@ func (c *Client) CreateTLSSubscription(i *CreateTLSSubscriptionInput) (*TLSSubsc
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var subscription TLSSubscription
 	err = jsonapi.UnmarshalPayload(resp.Body, &subscription)
@@ -240,7 +240,7 @@ func (c *Client) GetTLSSubscription(i *GetTLSSubscriptionInput) (*TLSSubscriptio
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var subscription TLSSubscription
 	err = jsonapi.UnmarshalPayload(resp.Body, &subscription)
@@ -287,7 +287,7 @@ func (c *Client) UpdateTLSSubscription(i *UpdateTLSSubscriptionInput) (*TLSSubsc
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var subscription TLSSubscription
 	err = jsonapi.UnmarshalPayload(resp.Body, &subscription)
@@ -326,6 +326,6 @@ func (c *Client) DeleteTLSSubscription(i *DeleteTLSSubscriptionInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 	return nil
 }

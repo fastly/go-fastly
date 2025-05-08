@@ -49,7 +49,7 @@ func (c *Client) ListPubsubs(i *ListPubsubsInput) ([]*Pubsub, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var pubsubs []*Pubsub
 	if err := DecodeBodyMap(resp.Body, &pubsubs); err != nil {
@@ -102,7 +102,7 @@ func (c *Client) CreatePubsub(i *CreatePubsubInput) (*Pubsub, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var pubsub *Pubsub
 	if err := DecodeBodyMap(resp.Body, &pubsub); err != nil {
@@ -140,7 +140,7 @@ func (c *Client) GetPubsub(i *GetPubsubInput) (*Pubsub, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *Pubsub
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -198,7 +198,7 @@ func (c *Client) UpdatePubsub(i *UpdatePubsubInput) (*Pubsub, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *Pubsub
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -236,7 +236,7 @@ func (c *Client) DeletePubsub(i *DeletePubsubInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

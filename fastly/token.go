@@ -46,7 +46,7 @@ func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var t []*Token
 	if err := DecodeBodyMap(resp.Body, &t); err != nil {
@@ -75,7 +75,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var t []*Token
 	if err := DecodeBodyMap(resp.Body, &t); err != nil {
@@ -93,7 +93,7 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var t *Token
 	if err := DecodeBodyMap(resp.Body, &t); err != nil {
@@ -127,13 +127,13 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 
 	resp, err := c.PostForm("/tokens", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var t *Token
 	if err := DecodeBodyMap(resp.Body, &t); err != nil {
@@ -162,7 +162,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return ErrNotOK
@@ -176,7 +176,7 @@ func (c *Client) DeleteTokenSelf() error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusNoContent {
 		return ErrNotOK
@@ -208,6 +208,6 @@ func (c *Client) BatchDeleteTokens(i *BatchDeleteTokensInput) error {
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 	return nil
 }

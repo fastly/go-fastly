@@ -78,7 +78,7 @@ func (c *Client) GetBilling(i *GetBillingInput) (*Billing, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var b *Billing
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {

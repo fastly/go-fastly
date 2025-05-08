@@ -59,7 +59,7 @@ func (c *Client) ListTLSMutualAuthentication(i *ListTLSMutualAuthenticationsInpu
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(TLSMutualAuthentication)))
 	if err != nil {
@@ -107,7 +107,7 @@ func (c *Client) GetTLSMutualAuthentication(i *GetTLSMutualAuthenticationInput) 
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var o TLSMutualAuthentication
 	if err := jsonapi.UnmarshalPayload(resp.Body, &o); err != nil {
@@ -143,7 +143,7 @@ func (c *Client) CreateTLSMutualAuthentication(i *CreateTLSMutualAuthenticationI
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var o TLSMutualAuthentication
 	if err := jsonapi.UnmarshalPayload(resp.Body, &o); err != nil {
@@ -182,7 +182,7 @@ func (c *Client) UpdateTLSMutualAuthentication(i *UpdateTLSMutualAuthenticationI
 	if err != nil {
 		return nil, err
 	}
-	defer CheckCloseForErr(resp.Body.Close)
+	defer resp.Body.Close()
 
 	var o TLSMutualAuthentication
 	if err := jsonapi.UnmarshalPayload(resp.Body, &o); err != nil {
@@ -211,6 +211,6 @@ func (c *Client) DeleteTLSMutualAuthentication(i *DeleteTLSMutualAuthenticationI
 	if err != nil {
 		return err
 	}
-	defer CheckCloseForErr(ignored.Body.Close)
+	defer ignored.Body.Close()
 	return nil
 }
