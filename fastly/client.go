@@ -539,11 +539,7 @@ func (c *Client) RequestFormFile(verb, urlPath, filePath, fieldName string, ro R
 	if err != nil {
 		return nil, fmt.Errorf("error reading file: %w", err)
 	}
-	defer func() {
-		if err := file.Close(); err != nil {
-			fmt.Println("Error when closing:", err)
-		}
-	}()
+	defer CheckCloseForErr(file.Close)
 
 	return c.RequestFormFileFromReader(verb, urlPath, filepath.Base(filePath), file, fieldName, ro)
 }
