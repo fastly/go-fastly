@@ -13,33 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: dangoslen/changelog-enforcer@v3
-  lint:
+  golangci:
+    name: lint
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Install Go
-      uses: actions/setup-go@v5
-      with:
-        go-version: 1.24.x
-    - name: Check Module
-      run: make check-mod
-      shell: bash
-    - name: Installing necessary tools
-      run: make mod-download
-      shell: bash
-    - name: Check Imports
-      run: make check-imports
-      shell: bash
-    - name: Check Fmt
-      run: make check-fmt
-      shell: bash
-    - name: Vet
-      run: make vet
-      shell: bash
-    - name: Staticcheck
-      run: make staticcheck
-      shell: bash
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.1
   test:
     strategy:
       matrix:

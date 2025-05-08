@@ -42,7 +42,7 @@ func ListEntries(c *fastly.Client, i *ListEntriesInput) (*ComputeACLEntries, err
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var entries *ComputeACLEntries
 	if err := json.NewDecoder(resp.Body).Decode(&entries); err != nil {

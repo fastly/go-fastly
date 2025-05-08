@@ -11,13 +11,13 @@ import (
 
 // Permissions can be one of these values only
 const (
-	READ_WRITE_ADMIN   = "read-write-admin"
-	READ_ONLY_ADMIN    = "read-only-admin"
-	READ_WRITE_OBJECTS = "read-write-objects"
-	READ_ONLY_OBJECTS  = "read-only-objects"
+	ReadWriteAdmin  = "read-write-admin"
+	ReadOnlyAdmin   = "read-only-admin"
+	ReadWriteObject = "read-write-objects"
+	ReadOnlyObjects = "read-only-objects"
 )
 
-var PERMISSONS = []string{READ_WRITE_ADMIN, READ_ONLY_ADMIN, READ_WRITE_OBJECTS, READ_ONLY_OBJECTS}
+var PERMISSONS = []string{ReadWriteAdmin, ReadOnlyAdmin, ReadWriteObject, ReadOnlyObjects}
 
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
@@ -51,7 +51,7 @@ func Create(c *fastly.Client, i *CreateInput) (*AccessKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var accessKey *AccessKey
 	if err := json.NewDecoder(resp.Body).Decode(&accessKey); err != nil {

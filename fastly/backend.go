@@ -74,7 +74,7 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var bs []*Backend
 	if err := DecodeBodyMap(resp.Body, &bs); err != nil {
@@ -172,7 +172,7 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *Backend
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -211,7 +211,7 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *Backend
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -314,7 +314,7 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *Backend
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -353,7 +353,7 @@ func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

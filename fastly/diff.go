@@ -51,7 +51,7 @@ func (c *Client) GetDiff(i *GetDiffInput) (*Diff, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var d *Diff
 	if err := DecodeBodyMap(resp.Body, &d); err != nil {

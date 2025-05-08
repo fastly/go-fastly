@@ -55,7 +55,7 @@ func (c *Client) ListGCSs(i *ListGCSsInput) ([]*GCS, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var gcses []*GCS
 	if err := DecodeBodyMap(resp.Body, &gcses); err != nil {
@@ -120,7 +120,7 @@ func (c *Client) CreateGCS(i *CreateGCSInput) (*GCS, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var gcs *GCS
 	if err := DecodeBodyMap(resp.Body, &gcs); err != nil {
@@ -158,7 +158,7 @@ func (c *Client) GetGCS(i *GetGCSInput) (*GCS, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *GCS
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -228,7 +228,7 @@ func (c *Client) UpdateGCS(i *UpdateGCSInput) (*GCS, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *GCS
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -266,7 +266,7 @@ func (c *Client) DeleteGCS(i *DeleteGCSInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

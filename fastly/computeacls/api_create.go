@@ -27,7 +27,7 @@ func Create(c *fastly.Client, i *CreateInput) (*ComputeACL, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var acl *ComputeACL
 	if err := json.NewDecoder(resp.Body).Decode(&acl); err != nil {

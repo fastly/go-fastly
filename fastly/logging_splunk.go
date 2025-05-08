@@ -53,7 +53,7 @@ func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ss []*Splunk
 	if err := DecodeBodyMap(resp.Body, &ss); err != nil {
@@ -114,7 +114,7 @@ func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Splunk
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -152,7 +152,7 @@ func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Splunk
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -218,7 +218,7 @@ func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Splunk
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -256,7 +256,7 @@ func (c *Client) DeleteSplunk(i *DeleteSplunkInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

@@ -47,7 +47,7 @@ func (c *Client) ListServers(i *ListServersInput) ([]*Server, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ss []*Server
 	if err := DecodeBodyMap(resp.Body, &ss); err != nil {
@@ -96,7 +96,7 @@ func (c *Client) CreateServer(i *CreateServerInput) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Server
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -135,7 +135,7 @@ func (c *Client) GetServer(i *GetServerInput) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Server
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -188,7 +188,7 @@ func (c *Client) UpdateServer(i *UpdateServerInput) (*Server, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Server
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -227,7 +227,7 @@ func (c *Client) DeleteServer(i *DeleteServerInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

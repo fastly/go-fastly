@@ -1,0 +1,39 @@
+version: "2"
+run:
+  modules-download-mode: readonly
+linters:
+  enable:
+    - govet
+    - gosec
+    - ineffassign
+    - revive
+    - staticcheck
+  settings:
+    govet:
+      enable:
+        - nilness
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofumpt
+    - goimports
+  settings:
+    goimports:
+      local-prefixes:
+        - github.com/fastly
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$

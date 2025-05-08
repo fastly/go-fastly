@@ -13,7 +13,7 @@ func ListAccessKeys(c *fastly.Client) (*AccessKeys, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var accessKeys *AccessKeys
 

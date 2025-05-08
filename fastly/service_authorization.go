@@ -78,7 +78,7 @@ func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var buf bytes.Buffer
 	tee := io.TeeReader(resp.Body, &buf)
@@ -127,7 +127,7 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var sa ServiceAuthorization
 	if err := jsonapi.UnmarshalPayload(resp.Body, &sa); err != nil {
@@ -164,7 +164,7 @@ func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) 
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var sa ServiceAuthorization
 	if err := jsonapi.UnmarshalPayload(resp.Body, &sa); err != nil {
@@ -200,7 +200,7 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var sa ServiceAuthorization
 	if err := jsonapi.UnmarshalPayload(resp.Body, &sa); err != nil {
@@ -230,6 +230,6 @@ func (c *Client) DeleteServiceAuthorization(i *DeleteServiceAuthorizationInput) 
 	if err != nil {
 		return err
 	}
-	defer ignored.Body.Close()
+	defer CheckCloseForErr(ignored.Body.Close)
 	return nil
 }

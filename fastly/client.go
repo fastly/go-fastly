@@ -539,7 +539,11 @@ func (c *Client) RequestFormFile(verb, urlPath, filePath, fieldName string, ro R
 	if err != nil {
 		return nil, fmt.Errorf("error reading file: %w", err)
 	}
-	defer file.Close() // #nosec G307
+	defer func() {
+		if err := file.Close(); err != nil {
+			fmt.Println("Error when closing:", err)
+		}
+	}()
 
 	return c.RequestFormFileFromReader(verb, urlPath, filepath.Base(filePath), file, fieldName, ro)
 }
@@ -752,5 +756,11 @@ func stringToTimeHookFunc() mapstructure.DecodeHookFunc {
 		}
 
 		return nil, fmt.Errorf("unable to parse time string: %q", str)
+	}
+}
+
+func CheckCloseForErr(f func() error) {
+	if err := f(); err != nil {
+		fmt.Println("Received error:", err)
 	}
 }

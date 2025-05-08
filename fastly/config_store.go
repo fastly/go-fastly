@@ -47,7 +47,7 @@ func (c *Client) CreateConfigStore(i *CreateConfigStoreInput) (*ConfigStore, err
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var cs *ConfigStore
 	if err = json.NewDecoder(resp.Body).Decode(&cs); err != nil {
@@ -112,7 +112,7 @@ func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var cs *ConfigStore
 	if err = json.NewDecoder(resp.Body).Decode(&cs); err != nil {
@@ -146,7 +146,7 @@ func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*Config
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var csm *ConfigStoreMetadata
 	if err = json.NewDecoder(resp.Body).Decode(&csm); err != nil {
@@ -180,7 +180,7 @@ func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, err
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var css []*ConfigStore
 	if err = json.NewDecoder(resp.Body).Decode(&css); err != nil {
@@ -218,7 +218,7 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ss []*Service
 	if err = DecodeBodyMap(resp.Body, &ss); err != nil {
@@ -254,7 +254,7 @@ func (c *Client) UpdateConfigStore(i *UpdateConfigStoreInput) (*ConfigStore, err
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var cs *ConfigStore
 	if err = json.NewDecoder(resp.Body).Decode(&cs); err != nil {

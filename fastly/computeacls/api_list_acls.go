@@ -13,7 +13,7 @@ func ListACLs(c *fastly.Client) (*ComputeACLs, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var acls *ComputeACLs
 

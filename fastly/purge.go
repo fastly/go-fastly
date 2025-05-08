@@ -50,7 +50,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *Purge
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {
@@ -116,7 +116,7 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *Purge
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {
@@ -166,7 +166,7 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r map[string]string
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {
@@ -200,7 +200,7 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *Purge
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

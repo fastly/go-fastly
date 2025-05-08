@@ -55,7 +55,7 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var rs []*Resource
 	if err := DecodeBodyMap(resp.Body, &rs); err != nil {
@@ -97,7 +97,7 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *Resource
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {
@@ -135,7 +135,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *Resource
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {
@@ -175,7 +175,7 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *Resource
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -213,7 +213,7 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

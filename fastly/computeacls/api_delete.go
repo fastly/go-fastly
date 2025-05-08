@@ -28,7 +28,7 @@ func Delete(c *fastly.Client, i *DeleteInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	if resp.StatusCode != http.StatusOK {
 		return fastly.NewHTTPError(resp)

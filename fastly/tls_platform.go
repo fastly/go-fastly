@@ -93,7 +93,7 @@ func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCert
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(BulkCertificate)))
 	if err != nil {
@@ -132,7 +132,7 @@ func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificat
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var bc BulkCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &bc); err != nil {
@@ -171,7 +171,7 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var bc BulkCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &bc); err != nil {
@@ -219,7 +219,7 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCert
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var bc BulkCertificate
 	if err := jsonapi.UnmarshalPayload(resp.Body, &bc); err != nil {
@@ -248,6 +248,6 @@ func (c *Client) DeleteBulkCertificate(i *DeleteBulkCertificateInput) error {
 	if err != nil {
 		return err
 	}
-	defer ignored.Body.Close()
+	defer CheckCloseForErr(ignored.Body.Close)
 	return nil
 }

@@ -36,7 +36,7 @@ func Get[O products.ProductOutput](i *GetInput) (o O, err error) {
 	if err != nil {
 		return
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	err = fastly.DecodeBodyMap(resp.Body, &o)
 	return

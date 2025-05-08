@@ -29,7 +29,7 @@ func Get(c *fastly.Client, i *GetInput) (*AccessKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var accessKey *AccessKey
 	if err := json.NewDecoder(resp.Body).Decode(&accessKey); err != nil {

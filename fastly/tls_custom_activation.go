@@ -78,7 +78,7 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	data, err := jsonapi.UnmarshalManyPayload(resp.Body, reflect.TypeOf(new(TLSActivation)))
 	if err != nil {
@@ -126,7 +126,7 @@ func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, err
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var a TLSActivation
 	if err := jsonapi.UnmarshalPayload(resp.Body, &a); err != nil {
@@ -165,7 +165,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var a TLSActivation
 	if err := jsonapi.UnmarshalPayload(resp.Body, &a); err != nil {
@@ -202,7 +202,7 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ta TLSActivation
 	if err := jsonapi.UnmarshalPayload(resp.Body, &ta); err != nil {
@@ -231,6 +231,6 @@ func (c *Client) DeleteTLSActivation(i *DeleteTLSActivationInput) error {
 	if err != nil {
 		return err
 	}
-	defer ignored.Body.Close()
+	defer CheckCloseForErr(ignored.Body.Close)
 	return nil
 }

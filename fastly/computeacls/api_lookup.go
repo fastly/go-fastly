@@ -35,7 +35,7 @@ func Lookup(c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	// In the case that no matching IP was found, the API will return a 204 No Content. This is not an error condition, rather a lack of results.
 	if resp.StatusCode == http.StatusNoContent {

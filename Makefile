@@ -27,7 +27,7 @@ FASTLY_API_KEY ?=
 # Enables support for tools such as https://github.com/rakyll/gotest
 TEST_COMMAND ?= $(GO) test
 
-all: mod-download tidy fmt fiximports test vet staticcheck semgrep ## Runs all of the required cleaning and verification targets.
+all: mod-download tidy fmt lint test semgrep ## Runs all of the required cleaning and verification targets.
 .PHONY: all
 
 mod-download: ## Downloads the Go module.
@@ -41,30 +41,20 @@ tidy: ## Cleans the Go module.
 .PHONY: tidy
 
 fmt: ## Properly formats Go files and orders dependencies.
-	@echo "==> Running gofmt"
-	@gofmt -s -w fastly internal
+	@echo "==> Running golangci-lint fmt"
+	@golangci-lint fmt
 .PHONY: fmt
-
-fiximports: ## Properly formats and orders imports.
-	@echo "==> Fixing imports"
-	@$(GO) tool goimports -w fastly internal
-.PHONY: fiximports
 
 test: ## Runs the test suite with VCR mocks enabled.
 	@echo "==> Testing ${NAME}"
 	@$(TEST_COMMAND) -timeout=30s -parallel=20 -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test
 
-vet: ## Identifies common errors.
-	@echo "==> Running go vet"
-	@$(GO) vet ./...
-.PHONY: vet
 
-staticcheck: ## Runs the staticcheck linter.
-	@echo "==> Running staticcheck"
-	@$(GO) tool staticcheck -version
-	@$(GO) tool staticcheck ./...
-.PHONY: staticcheck
+lint: ## Runs golangci lint
+	@echo "==> Running golangci-lint"
+	@golangci-lint run
+.PHONY: lint
 
 semgrep: ## Run semgrep checker.
 	@if [[ "$$(uname)" == 'Darwin' ]]; then brew install semgrep; fi
@@ -97,14 +87,6 @@ fix-ngwaf-fixtures: ## Updates test fixtures with a specified default Next-Gen W
 	@echo "==> Updating fixtures"
 	@$(shell pwd)/scripts/fixFixtures.sh ${FASTLY_TEST_NGWAF_WORKSPACE_ID} ${DEFAULT_FASTLY_TEST_NGWAF_WORKSPACE_ID}
 .PHONY: fix-ngwaf-fixtures
-
-check-imports: ## A check which lists improperly-formatted imports, if they exist.
-	@$(shell pwd)/scripts/check-imports.sh
-.PHONY: check-imports
-
-check-fmt: ## A check which lists improperly-formatted files, if they exist.
-	@$(shell pwd)/scripts/check-gofmt.sh
-.PHONY: check-fmt
 
 check-mod: ## A check which lists extraneous dependencies, if they exist.
 	@$(shell pwd)/scripts/check-mod.sh

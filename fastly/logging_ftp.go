@@ -55,7 +55,7 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ftps []*FTP
 	if err := DecodeBodyMap(resp.Body, &ftps); err != nil {
@@ -120,7 +120,7 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ftp *FTP
 	if err := DecodeBodyMap(resp.Body, &ftp); err != nil {
@@ -158,7 +158,7 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *FTP
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -228,7 +228,7 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var b *FTP
 	if err := DecodeBodyMap(resp.Body, &b); err != nil {
@@ -266,7 +266,7 @@ func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

@@ -117,7 +117,7 @@ func TestClient_AccessKey(t *testing.T) {
 	}
 
 	// Make sure the test AccessKey we've created is among them.
-	var newKeyPresent = false
+	newKeyPresent := false
 	for _, rak := range actualAccessKeys.Data {
 		if rak.Description == TestAccessKeyDescription &&
 			rak.Permission == TestAccessKeyPermission &&

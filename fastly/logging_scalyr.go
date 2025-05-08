@@ -47,7 +47,7 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ss []*Scalyr
 	if err := DecodeBodyMap(resp.Body, &ss); err != nil {
@@ -96,7 +96,7 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Scalyr
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -134,7 +134,7 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Scalyr
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -188,7 +188,7 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var s *Scalyr
 	if err := DecodeBodyMap(resp.Body, &s); err != nil {
@@ -226,7 +226,7 @@ func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

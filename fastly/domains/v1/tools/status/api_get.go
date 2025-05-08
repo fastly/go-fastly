@@ -45,7 +45,7 @@ func Get(c *fastly.Client, g *GetInput) (*Status, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var status *Status
 	if err := json.NewDecoder(resp.Body).Decode(&status); err != nil {

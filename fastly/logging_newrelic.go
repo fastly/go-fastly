@@ -46,7 +46,7 @@ func (c *Client) ListNewRelic(i *ListNewRelicInput) ([]*NewRelic, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var n []*NewRelic
 	if err := DecodeBodyMap(resp.Body, &n); err != nil {
@@ -93,7 +93,7 @@ func (c *Client) CreateNewRelic(i *CreateNewRelicInput) (*NewRelic, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var n *NewRelic
 	if err := DecodeBodyMap(resp.Body, &n); err != nil {
@@ -131,7 +131,7 @@ func (c *Client) GetNewRelic(i *GetNewRelicInput) (*NewRelic, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var n *NewRelic
 	if err := DecodeBodyMap(resp.Body, &n); err != nil {
@@ -183,7 +183,7 @@ func (c *Client) UpdateNewRelic(i *UpdateNewRelicInput) (*NewRelic, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var n *NewRelic
 	if err := DecodeBodyMap(resp.Body, &n); err != nil {
@@ -221,7 +221,7 @@ func (c *Client) DeleteNewRelic(i *DeleteNewRelicInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

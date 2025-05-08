@@ -51,7 +51,7 @@ func List(c *fastly.Client, i *ListInput) (*Collection, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var cl *Collection
 	if err := json.NewDecoder(resp.Body).Decode(&cl); err != nil {

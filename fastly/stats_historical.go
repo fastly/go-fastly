@@ -203,7 +203,7 @@ func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	return json.NewDecoder(resp.Body).Decode(dst)
 }
@@ -261,7 +261,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var sr *UsageResponse
 	if err := DecodeBodyMap(resp.Body, &sr); err != nil {
@@ -306,7 +306,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var sr *UsageByServiceResponse
 	if err := DecodeBodyMap(resp.Body, &sr); err != nil {
@@ -376,7 +376,7 @@ func (c *Client) GetRegions() (*RegionsResponse, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var rr *RegionsResponse
 	if err := DecodeBodyMap(resp.Body, &rr); err != nil {

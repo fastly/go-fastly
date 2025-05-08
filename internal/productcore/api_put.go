@@ -44,7 +44,7 @@ func Put[O products.ProductOutput, I any](i *PutInput[I]) (o O, err error) {
 	if err != nil {
 		return
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	err = fastly.DecodeBodyMap(resp.Body, &o)
 	return

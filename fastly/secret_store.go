@@ -55,7 +55,7 @@ func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, err
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output SecretStore
 	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
@@ -111,7 +111,7 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output SecretStores
 	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
@@ -146,7 +146,7 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output SecretStore
 	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
@@ -267,7 +267,7 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output Secret
 	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
@@ -324,7 +324,7 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output Secrets
 	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
@@ -364,7 +364,7 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output Secret
 	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
@@ -456,7 +456,7 @@ func (c *Client) CreateClientKey() (*ClientKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output ClientKey
 	if err := json.NewDecoder(resp.Body).Decode(&output); err != nil {
@@ -481,7 +481,7 @@ func (c *Client) GetSigningKey() (ed25519.PublicKey, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output struct {
 		SigningKey []byte `json:"signing_key"`

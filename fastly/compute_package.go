@@ -55,7 +55,7 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	return PopulatePackage(resp.Body)
 }
@@ -88,14 +88,14 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 		if err != nil {
 			return nil, err
 		}
-		defer resp.Body.Close()
+		defer CheckCloseForErr(resp.Body.Close)
 		body = resp.Body
 	case len(i.PackageContent) != 0:
 		resp, err := c.PutFormFileFromReader(urlPath, "package.tar.gz", bytes.NewReader(i.PackageContent), "package", CreateRequestOptions(i.Context))
 		if err != nil {
 			return nil, err
 		}
-		defer resp.Body.Close()
+		defer CheckCloseForErr(resp.Body.Close)
 		body = resp.Body
 	default:
 		return nil, errors.New("missing package file path or content")

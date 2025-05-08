@@ -26,7 +26,7 @@ func Create(c *fastly.Client, i *CreateInput) (*Data, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer fastly.CheckCloseForErr(resp.Body.Close)
 
 	var d *Data
 	if err := json.NewDecoder(resp.Body).Decode(&d); err != nil {

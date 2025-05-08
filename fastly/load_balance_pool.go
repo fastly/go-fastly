@@ -76,7 +76,7 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var ps []*Pool
 	if err := DecodeBodyMap(resp.Body, &ps); err != nil {
@@ -151,7 +151,7 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var p *Pool
 	if err := DecodeBodyMap(resp.Body, &p); err != nil {
@@ -190,7 +190,7 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var p *Pool
 	if err := DecodeBodyMap(resp.Body, &p); err != nil {
@@ -271,7 +271,7 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var p *Pool
 	if err := DecodeBodyMap(resp.Body, &p); err != nil {
@@ -310,7 +310,7 @@ func (c *Client) DeletePool(i *DeletePoolInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

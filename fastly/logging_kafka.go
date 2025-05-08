@@ -58,7 +58,7 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var k []*Kafka
 	if err := DecodeBodyMap(resp.Body, &k); err != nil {
@@ -129,7 +129,7 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var k *Kafka
 	if err := DecodeBodyMap(resp.Body, &k); err != nil {
@@ -167,7 +167,7 @@ func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var k *Kafka
 	if err := DecodeBodyMap(resp.Body, &k); err != nil {
@@ -243,7 +243,7 @@ func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var k *Kafka
 	if err := DecodeBodyMap(resp.Body, &k); err != nil {
@@ -281,7 +281,7 @@ func (c *Client) DeleteKafka(i *DeleteKafkaInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var r *statusResp
 	if err := DecodeBodyMap(resp.Body, &r); err != nil {

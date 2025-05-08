@@ -48,7 +48,7 @@ func (c *Client) CreateKVStore(i *CreateKVStoreInput) (*KVStore, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var store *KVStore
 	if err := DecodeBodyMap(resp.Body, &store); err != nil {
@@ -113,7 +113,7 @@ func (c *Client) ListKVStores(i *ListKVStoresInput) (*ListKVStoresResponse, erro
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output *ListKVStoresResponse
 	if err := DecodeBodyMap(resp.Body, &output); err != nil {
@@ -195,7 +195,7 @@ func (c *Client) GetKVStore(i *GetKVStoreInput) (*KVStore, error) {
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output *KVStore
 	if err := DecodeBodyMap(resp.Body, &output); err != nil {
@@ -224,7 +224,7 @@ func (c *Client) DeleteKVStore(i *DeleteKVStoreInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)
@@ -319,7 +319,7 @@ func (c *Client) ListKVStoreKeys(i *ListKVStoreKeysInput) (*ListKVStoreKeysRespo
 	if err != nil {
 		return nil, err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	var output *ListKVStoreKeysResponse
 	if err := DecodeBodyMap(resp.Body, &output); err != nil {
@@ -406,7 +406,7 @@ func (c *Client) GetKVStoreKey(i *GetKVStoreKeyInput) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	output, err := io.ReadAll(resp.Body)
 	if err != nil {
@@ -443,7 +443,7 @@ type GetKVStoreItemOutput struct {
 // 'GetKVStoreItem'. It also ensures that 'Close()' is executed on the
 // 'Value' field, so the caller does not need to do so.
 func (o *GetKVStoreItemOutput) ValueAsBytes() ([]byte, error) {
-	defer o.Value.Close()
+	defer CheckCloseForErr(o.Value.Close)
 
 	return io.ReadAll(o.Value)
 }
@@ -453,11 +453,11 @@ func (o *GetKVStoreItemOutput) ValueAsBytes() ([]byte, error) {
 // 'GetKVStoreItem'. It also ensures that 'Close()' is executed on the
 // 'Value' field, so the caller does not need to do so.
 func (o *GetKVStoreItemOutput) ValueAsString() (string, error) {
-	if result, err := o.ValueAsBytes(); err != nil {
+	result, err := o.ValueAsBytes()
+	if err != nil {
 		return "", err
-	} else {
-		return string(result), nil
 	}
+	return string(result), nil
 }
 
 // GetKVStoreItem retrieves the specified item. The returned structure
@@ -484,7 +484,10 @@ func (c *Client) GetKVStoreItem(i *GetKVStoreItemInput) (GetKVStoreItemOutput, e
 
 	output.Generation, err = strconv.ParseUint(resp.Header.Get("generation"), 10, 64)
 	if err != nil {
-		resp.Body.Close()
+		err = resp.Body.Close()
+		if err != nil {
+			return GetKVStoreItemOutput{}, err
+		}
 		return GetKVStoreItemOutput{}, err
 	}
 
@@ -619,13 +622,13 @@ func (c *Client) InsertKVStoreKey(i *InsertKVStoreKeyInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	ignored, err := checkResp(resp, err)
 	if err != nil {
 		return err
 	}
-	defer ignored.Body.Close()
+	defer CheckCloseForErr(ignored.Body.Close)
 	return nil
 }
 
@@ -672,7 +675,7 @@ func (c *Client) DeleteKVStoreKey(i *DeleteKVStoreKeyInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	if resp.StatusCode != http.StatusNoContent {
 		return NewHTTPError(resp)
@@ -716,12 +719,12 @@ func (c *Client) BatchModifyKVStoreKey(i *BatchModifyKVStoreKeyInput) error {
 	if err != nil {
 		return err
 	}
-	defer resp.Body.Close()
+	defer CheckCloseForErr(resp.Body.Close)
 
 	ignored, err := checkResp(resp, err)
 	if err != nil {
 		return err
 	}
-	defer ignored.Body.Close()
+	defer CheckCloseForErr(ignored.Body.Close)
 	return nil
 }
