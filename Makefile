@@ -50,7 +50,6 @@ test: ## Runs the test suite with VCR mocks enabled.
 	@$(TEST_COMMAND) -timeout=30s -parallel=20 -tags="${GOTAGS}" ${GOPKGS} ${TESTARGS}
 .PHONY: test
 
-
 lint: ## Runs golangci lint
 	@echo "==> Running golangci-lint"
 	@golangci-lint run
@@ -87,10 +86,6 @@ fix-ngwaf-fixtures: ## Updates test fixtures with a specified default Next-Gen W
 	@echo "==> Updating fixtures"
 	@$(shell pwd)/scripts/fixFixtures.sh ${FASTLY_TEST_NGWAF_WORKSPACE_ID} ${DEFAULT_FASTLY_TEST_NGWAF_WORKSPACE_ID}
 .PHONY: fix-ngwaf-fixtures
-
-check-mod: ## A check which lists extraneous dependencies, if they exist.
-	@$(shell pwd)/scripts/check-mod.sh
-.PHONY: check-mod
 
 nilaway: ## Run nilaway
 	@nilaway ./...
