@@ -3,11 +3,24 @@ run:
   modules-download-mode: readonly
 linters:
   enable:
-    - govet
+    - durationcheck
+    - errcheck
+    - exhaustive
+    - forcetypeassert
+    - gocritic
+    - godot
     - gosec
+    - govet
     - ineffassign
+    - makezero
+    - misspell
+    - nilerr
+    - predeclared
     - revive
     - staticcheck
+    - unconvert
+    - unparam
+    - unused
   settings:
     govet:
       enable:

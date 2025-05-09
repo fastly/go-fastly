@@ -226,7 +226,7 @@ func TestClient_KVStore(t *testing.T) {
 		})
 		require.NoErrorf(err, "updating key %q", testKey)
 
-		expectedValue = expectedValue + "suffix"
+		expectedValue += "suffix"
 	})
 
 	Record(t, "kv_store/get-item-round-3", func(c *Client) {

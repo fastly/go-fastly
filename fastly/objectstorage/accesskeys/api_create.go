@@ -9,7 +9,7 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// Permissions can be one of these values only
+// Permissions can be one of these values only.
 const (
 	ReadWriteAdmin  = "read-write-admin"
 	ReadOnlyAdmin   = "read-only-admin"
@@ -17,7 +17,7 @@ const (
 	ReadOnlyObjects = "read-only-objects"
 )
 
-var PERMISSONS = []string{ReadWriteAdmin, ReadOnlyAdmin, ReadWriteObject, ReadOnlyObjects}
+var PERMISSIONS = []string{ReadWriteAdmin, ReadOnlyAdmin, ReadWriteObject, ReadOnlyObjects}
 
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
@@ -43,7 +43,7 @@ func Create(c *fastly.Client, i *CreateInput) (*AccessKey, error) {
 	}
 
 	// Check if the provided permission is in the set of valid permissions
-	if !slices.Contains(PERMISSONS, *i.Permission) {
+	if !slices.Contains(PERMISSIONS, *i.Permission) {
 		return nil, fastly.ErrInvalidPermission
 	}
 

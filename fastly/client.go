@@ -55,7 +55,7 @@ const DefaultRealtimeStatsEndpoint = "https://rt.fastly.com"
 const JSONMimeType = "application/json"
 
 // UserAgentEnvVar is the name of an environment variable that can be used
-// to change the User-Agent of the http requests
+// to change the User-Agent of the http requests.
 const UserAgentEnvVar = "FASTLY_USER_AGENT"
 
 // ProjectURL is the url for this library.

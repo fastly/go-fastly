@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-// ObservabilityCustomDashboard is a named container for a custom dashboard configuration
+// ObservabilityCustomDashboard is a named container for a custom dashboard configuration.
 type ObservabilityCustomDashboard struct {
 	// The date and time the dashboard was created
 	CreatedAt time.Time `json:"created_at"`
@@ -28,7 +28,7 @@ type ObservabilityCustomDashboard struct {
 	UpdatedBy string `json:"updated_by"`
 }
 
-// DashboardItem describes an item (or "widget") of a dashboard
+// DashboardItem describes an item (or "widget") of a dashboard.
 type DashboardItem struct {
 	// DataSource describes the source of the metrics to be displayed (required)
 	DataSource DashboardDataSource `json:"data_source"`
@@ -52,7 +52,7 @@ const (
 	SourceTypeStatsOrigin = "stats.origin"
 )
 
-// DashboardDataSource describes the data to display in a DashboardItem
+// DashboardDataSource describes the data to display in a DashboardItem.
 type DashboardDataSource struct {
 	// Config describes configuration options for the selected data source (required)
 	Config DashboardSourceConfig `json:"config"`
@@ -186,7 +186,7 @@ type ListDashboardsResponse struct {
 	Meta DashboardMeta                  `json:"meta"`
 }
 
-// DashboardMeta holds metadata about a dashboards query
+// DashboardMeta holds metadata about a dashboards query.
 type DashboardMeta struct {
 	Limit      int    `json:"limit"`
 	NextCursor string `json:"next_cursor"`
@@ -194,7 +194,7 @@ type DashboardMeta struct {
 	Total      int    `json:"total"`
 }
 
-// ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function
+// ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function.
 type ListObservabilityCustomDashboardsInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context

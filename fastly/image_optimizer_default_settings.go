@@ -43,7 +43,7 @@ const (
 	ImageOptimizerNearest
 )
 
-// ImageOptimizerJpegType is a base for different ImageOptimizerJpegType variants
+// ImageOptimizerJpegType is a base for different ImageOptimizerJpegType variants.
 type ImageOptimizerJpegType int64
 
 func (r ImageOptimizerJpegType) String() string {
@@ -65,9 +65,9 @@ func (r ImageOptimizerJpegType) MarshalJSON() ([]byte, error) {
 const (
 	// Match the input JPEG type, or baseline if transforming from a non-JPEG input.
 	ImageOptimizerAuto ImageOptimizerJpegType = iota
-	// Output baseline JPEG images
+	// Output baseline JPEG images.
 	ImageOptimizerBaseline
-	// Output progressive JPEG images
+	// Output progressive JPEG images.
 	ImageOptimizerProgressive
 )
 
