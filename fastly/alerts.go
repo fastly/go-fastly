@@ -243,13 +243,29 @@ func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
 
 // TestAlertDefinitionInput is used as input to the TestAlertDefinition function.
 type TestAlertDefinitionInput struct {
-	// Same as CreateAlertDefinitionInput
-	CreateAlertDefinitionInput
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
+	// Description is additional text included in an alert notification (optional, limit 4096).
+	Description *string `json:"description"`
+	// Dimensions are a list of origins or domains that the alert is restricted to.
+	Dimensions map[string][]string `json:"dimensions"`
+	// EvaluationStrategy is the evaluation strategy for the alert (required).
+	EvaluationStrategy map[string]any `json:"evaluation_strategy"`
+	// IntegrationIDs are IDs of integrations that notifications will be sent to.
+	IntegrationIDs []string `json:"integration_ids"`
+	// Metric is the name of the metric being monitored for alert evaluation (required).
+	Metric *string `json:"metric"`
+	// Name is the summary text of the alert (required, limit 255).
+	Name *string `json:"name"`
+	// ServiceID is the ID of the service that the alert is monitoring (required).
+	ServiceID *string `json:"service_id"`
+	// Source is the metric source (required). Options are: 'stats', 'origins', 'domains'.
+	Source *string `json:"source"`
 }
 
 // TestAlertDefinition validates alert definition and sends test notifications without creating.
 func (c *Client) TestAlertDefinition(i *TestAlertDefinitionInput) error {
-	resp, err := c.PostJSON("/alerts/definitions/test", i, CreateRequestOptions(i.CreateAlertDefinitionInput.Context))
+	resp, err := c.PostJSON("/alerts/definitions/test", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

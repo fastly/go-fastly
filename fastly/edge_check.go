@@ -39,7 +39,6 @@ type EdgeCheckInput struct {
 // EdgeCheck queries the edge cache for all of Fastly's servers for the given
 // URL.
 func (c *Client) EdgeCheck(i *EdgeCheckInput) ([]*EdgeCheck, error) {
-
 	var requestOptions RequestOptions
 	if i != nil {
 		requestOptions = CreateRequestOptions(i.Context)

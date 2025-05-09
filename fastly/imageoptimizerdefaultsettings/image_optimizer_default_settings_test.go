@@ -33,7 +33,6 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	defer func() {
 		fastly.Record(t, fixtureBase+"disable_product", func(c *fastly.Client) {
 			_, err = imageoptimizer.Enable(c, fastly.TestDeliveryServiceID)
-
 			if err != nil {
 				t.Fatal(err)
 			}

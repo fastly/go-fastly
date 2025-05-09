@@ -29,6 +29,17 @@ func TestClient_FastlyAlerts(t *testing.T) {
 		Source:             ToPointer("domains"),
 	}
 
+	tadi := &TestAlertDefinitionInput{
+		Description:        ToPointer("test description"),
+		Dimensions:         testDimensions,
+		EvaluationStrategy: testEvaluationStrategy,
+		IntegrationIDs:     []string{},
+		Metric:             ToPointer("status_5xx_rate"),
+		Name:               ToPointer("test name"),
+		ServiceID:          ToPointer(TestDeliveryServiceID),
+		Source:             ToPointer("domains"),
+	}
+
 	var err error
 
 	// Enable Product - Domain Inspector
@@ -44,9 +55,7 @@ func TestClient_FastlyAlerts(t *testing.T) {
 
 	// Test
 	Record(t, "alerts/test_alert_definition", func(c *Client) {
-		err = c.TestAlertDefinition(&TestAlertDefinitionInput{
-			CreateAlertDefinitionInput: *cadi,
-		})
+		err = c.TestAlertDefinition(tadi)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -210,7 +219,6 @@ func TestClient_FastlyPercentAlerts(t *testing.T) {
 	var err error
 	Record(t, "alerts/create_alert_definition_stats_percent", func(c *Client) {
 		ad, err = c.CreateAlertDefinition(cadi)
-
 	})
 	if err != nil {
 		t.Fatal(err)

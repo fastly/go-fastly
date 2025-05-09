@@ -251,7 +251,7 @@ func TestClient_S3s(t *testing.T) {
 	if *s3CreateResp1.BucketName != "bucket-name" {
 		t.Errorf("bad bucket_name: %q", *s3CreateResp1.BucketName)
 	}
-	if *s3CreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
+	if *s3CreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { //nolint: gosec
 		t.Errorf("bad access_key: %q", *s3CreateResp1.AccessKey)
 	}
 	if *s3CreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
@@ -591,7 +591,7 @@ func TestClient_S3s(t *testing.T) {
 	if *s3UpdateResp4.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
 		t.Errorf("bad iam_role: %q", *s3UpdateResp4.IAMRole)
 	}
-	if *s3UpdateResp5.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
+	if *s3UpdateResp5.AccessKey != "AKIAIOSFODNN7EXAMPLE" { //nolint: gosec
 		t.Errorf("bad access_key: %q", *s3UpdateResp5.AccessKey)
 	}
 	if *s3UpdateResp5.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {

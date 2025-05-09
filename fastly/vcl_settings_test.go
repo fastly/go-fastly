@@ -69,7 +69,7 @@ func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 	if err != nil {
 		t.Errorf("Unexpected error: %v", err)
 	}
-	//remove Context like we do in the code
+	// remove Context like we do in the code
 	v.Del("Context")
 	body := v.Encode()
 

@@ -120,7 +120,7 @@ func TestClient_Kinesis(t *testing.T) {
 	if *kinesisCreateResp1.StreamName != "stream-name" {
 		t.Errorf("bad bucket_name: %q", *kinesisCreateResp1.StreamName)
 	}
-	if *kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
+	if *kinesisCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { //nolint: gosec
 		t.Errorf("bad access_key: %q", *kinesisCreateResp1.AccessKey)
 	}
 	if *kinesisCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
@@ -311,7 +311,7 @@ func TestClient_Kinesis(t *testing.T) {
 	if *kinesisUpdateResp2.IAMRole != "arn:aws:iam::123456789012:role/S3Access" {
 		t.Errorf("bad iam_role: %q", *kinesisUpdateResp2.IAMRole)
 	}
-	if *kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
+	if *kinesisUpdateResp3.AccessKey != "AKIAIOSFODNN7EXAMPLE" { //nolint: gosec
 		t.Errorf("bad access_key: %q", *kinesisUpdateResp3.AccessKey)
 	}
 	if *kinesisUpdateResp3.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {

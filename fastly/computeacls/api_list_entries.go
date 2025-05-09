@@ -22,7 +22,7 @@ type ListEntriesInput struct {
 	Limit *int
 }
 
-// ListEntries
+// ListEntries.
 func ListEntries(c *fastly.Client, i *ListEntriesInput) (*ComputeACLEntries, error) {
 	if i.ComputeACLID == nil {
 		return nil, fastly.ErrMissingComputeACLID

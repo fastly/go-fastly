@@ -331,7 +331,7 @@ type GetAggregateInput struct {
 	To *string
 }
 
-// GetAggregateJSON returns all aggregated stats and decodes the response directly to the JSON struct dst
+// GetAggregateJSON returns all aggregated stats and decodes the response directly to the JSON struct dst.
 func (c *Client) GetAggregateJSON(i *GetAggregateInput, dst any) error {
 	requestOptions := CreateRequestOptions(i.Context)
 	if i.By != nil {

@@ -3,10 +3,11 @@ package productcore_test
 import (
 	"testing"
 
+	"github.com/stretchr/testify/require"
+
 	"github.com/fastly/go-fastly/v10/fastly"
 	"github.com/fastly/go-fastly/v10/fastly/products"
 	"github.com/fastly/go-fastly/v10/internal/productcore"
-	"github.com/stretchr/testify/require"
 )
 
 func TestDeleteMissingServiceID(t *testing.T) {
