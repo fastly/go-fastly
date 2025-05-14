@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"6gzmZa1Qcil2kMOa41KBkY","name":"Fastly (TF testing) Workspace","description":"","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2024-11-01T19:00:29Z","updated_at":"2025-05-07T17:08:07.348Z"},{"id":"NpRmlxJi2MDHVXMTO6HUuv","name":"foo","description":"bar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-04T14:33:44Z","updated_at":"2025-05-05T17:27:01.861Z"},{"id":"alk6DTsYKHKucJCOIavaJM","name":"go-fastly testing workspace","description":"","mode":"off","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2024-11-27T14:51:17Z","updated_at":"2025-01-21T21:50:38.262Z"},{"id":"HOOtCTHWliNzu03maajU0K","name":"k_p_test","description":"foobar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-09T15:38:03Z","updated_at":"2025-05-09T15:39:49.583Z"},{"id":"t54VsHxiQANXaTzmbDM3Ip","name":"k_p_test","description":"foo","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-09T15:38:21Z","updated_at":"2025-05-09T15:40:20.545Z"}],"meta":{"limit":100,"total":5}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "1264"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 14 May 2025 18:52:19 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000105-CHI, cache-lga21958-LGA
+      X-Timer:
+      - S1747248739.038898,VS0,VE338
+    status: 200 OK
+    code: 200
+    duration: ""
