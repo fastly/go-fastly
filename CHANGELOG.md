@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(ngwaf): add support for workspaces ([#679](https://github.com/fastly/go-fastly/pull/679))
 
 ### Bug fixes:
 
