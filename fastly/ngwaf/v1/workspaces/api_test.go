@@ -134,10 +134,10 @@ func TestClient_Workspace(t *testing.T) {
 	const uwsIPAnonymization = "hashed"
 
 	uwsAttackSignalThresholds := new(AttackSignalThresholdsInput)
-	uwsAttackSignalThresholds.OneMinute = fastly.ToPointer(10000)
-	uwsAttackSignalThresholds.TenMinutes = fastly.ToPointer(10000)
-	uwsAttackSignalThresholds.OneHour = fastly.ToPointer(10000)
-	uwsAttackSignalThresholds.Immediate = fastly.ToPointer(true)
+	uwsAttackSignalThresholds.OneMinute = fastly.ToPointer(5000)
+	uwsAttackSignalThresholds.TenMinutes = fastly.ToPointer(5000)
+	uwsAttackSignalThresholds.OneHour = fastly.ToPointer(5000)
+	uwsAttackSignalThresholds.Immediate = fastly.ToPointer(false)
 
 	var uws *Workspace
 	fastly.Record(t, "update_workspace", func(c *fastly.Client) {

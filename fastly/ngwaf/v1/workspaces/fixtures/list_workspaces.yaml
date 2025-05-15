@@ -22,25 +22,25 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 14 May 2025 18:52:19 GMT
+      - Thu, 15 May 2025 14:04:52 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly control-gateway
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-chi-kigq8000105-CHI, cache-lga21958-LGA
+      - cache-lga21974-LGA
       X-Timer:
-      - S1747248739.038898,VS0,VE338
+      - S1747317892.781226,VS0,VE352
     status: 200 OK
     code: 200
     duration: ""

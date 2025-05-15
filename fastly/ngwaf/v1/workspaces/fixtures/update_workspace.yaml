@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"name":"test-workspace","description":"test-description","mode":"log","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed"}'
+    body: '{"name":"test-workspace","description":"test-description","mode":"log","attack_signal_thresholds":{"one_minute":5000,"ten_minutes":5000,"one_hour":5000,"immediate":false},"ip_anonymization":"hashed"}'
     form: {}
     headers:
       Accept:
@@ -11,22 +11,22 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/bjr85duNV9apZrb9aUhnf8
+    url: https://api.fastly.com/ngwaf/v1/workspaces/1ZxmBhEF6b3PCBXarHgpbF
     method: PATCH
   response:
     body: |
-      {"id":"bjr85duNV9apZrb9aUhnf8","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","created_at":"2025-05-14T18:52:19Z","updated_at":"2025-05-14T18:52:19.735Z"}
+      {"id":"1ZxmBhEF6b3PCBXarHgpbF","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":5000,"ten_minutes":5000,"one_hour":5000},"ip_anonymization":"hashed","created_at":"2025-05-15T14:04:52Z","updated_at":"2025-05-15T14:04:52.666Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "333"
+      - "313"
       Content-Type:
       - application/json
       Date:
-      - Wed, 14 May 2025 18:52:21 GMT
+      - Thu, 15 May 2025 14:04:53 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-lga21958-LGA
+      - cache-lga21974-LGA
       X-Timer:
-      - S1747248741.994317,VS0,VE218
+      - S1747317894.778280,VS0,VE217
     status: 200 OK
     code: 200
     duration: ""

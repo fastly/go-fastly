@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/bjr85duNV9apZrb9aUhnf8
+    url: https://api.fastly.com/ngwaf/v1/workspaces/1ZxmBhEF6b3PCBXarHgpbF
     method: GET
   response:
     body: |
-      {"id":"bjr85duNV9apZrb9aUhnf8","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":"hashed","created_at":"2025-05-14T18:52:19Z","updated_at":"2025-05-14T18:52:19.735Z"}
+      {"id":"1ZxmBhEF6b3PCBXarHgpbF","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":"hashed","created_at":"2025-05-15T14:04:52Z","updated_at":"2025-05-15T14:04:52.666Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,25 +22,25 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 14 May 2025 18:52:20 GMT
+      - Thu, 15 May 2025 14:04:53 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly control-gateway
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-chi-klot8100079-CHI, cache-lga21958-LGA
+      - cache-lga21974-LGA
       X-Timer:
-      - S1747248741.857575,VS0,VE104
+      - S1747317894.643902,VS0,VE93
     status: 200 OK
     code: 200
     duration: ""
