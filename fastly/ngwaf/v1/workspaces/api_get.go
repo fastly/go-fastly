@@ -12,9 +12,9 @@ import (
 // the operation.
 type GetInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
+	Context *context.Context
 	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string `json:"-"`
+	WorkspaceID *string
 }
 
 // Get retrieves the specified workspace.

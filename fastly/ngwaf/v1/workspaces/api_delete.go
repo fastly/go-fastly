@@ -11,9 +11,9 @@ import (
 // perform the operation.
 type DeleteInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
+	Context *context.Context
 	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string `json:"-"`
+	WorkspaceID *string
 }
 
 // Delete deletes the specified workspace.
