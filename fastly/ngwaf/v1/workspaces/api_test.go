@@ -15,7 +15,7 @@ func TestClient_Workspace(t *testing.T) {
 	const wsMode = "log"
 	const wsIPAnonymization = "hashed"
 
-	wsAttackSignalThresholds := new(AttackSignalThresholdsInput)
+	wsAttackSignalThresholds := new(AttackSignalThresholdsCreateInput)
 	wsAttackSignalThresholds.OneMinute = fastly.ToPointer(10000)
 	wsAttackSignalThresholds.TenMinutes = fastly.ToPointer(10000)
 	wsAttackSignalThresholds.OneHour = fastly.ToPointer(10000)
@@ -133,7 +133,7 @@ func TestClient_Workspace(t *testing.T) {
 	const uwsMode = "log"
 	const uwsIPAnonymization = "hashed"
 
-	uwsAttackSignalThresholds := new(AttackSignalThresholdsInput)
+	uwsAttackSignalThresholds := new(AttackSignalThresholdsUpdateInput)
 	uwsAttackSignalThresholds.OneMinute = fastly.ToPointer(5000)
 	uwsAttackSignalThresholds.TenMinutes = fastly.ToPointer(5000)
 	uwsAttackSignalThresholds.OneHour = fastly.ToPointer(5000)

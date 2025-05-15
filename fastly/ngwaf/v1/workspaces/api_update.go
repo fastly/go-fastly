@@ -8,6 +8,14 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
+// AttackSignalThresholdsUpdateInput are the parameters for system site alerts.
+type AttackSignalThresholdsUpdateInput struct {
+	OneMinute  *int  `json:"one_minute,omitempty"`
+	TenMinutes *int  `json:"ten_minutes,omitempty"`
+	OneHour    *int  `json:"one_hour,omitempty"`
+	Immediate  *bool `json:"immediate,omitempty"`
+}
+
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
@@ -22,7 +30,7 @@ type UpdateInput struct {
 	// Mode is the mode of a workspace.
 	Mode *string `json:"mode"`
 	// AttackSignalThresholds are the parameters for system site alerts.
-	AttackSignalThresholds *AttackSignalThresholdsInput `json:"attack_signal_thresholds"`
+	AttackSignalThresholds *AttackSignalThresholdsUpdateInput `json:"attack_signal_thresholds"`
 	// IPAnonymization is the selected option to anonymize IP addresses.
 	IPAnonymization *string `json:"ip_anonymization"`
 }
