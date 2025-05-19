@@ -2,6 +2,8 @@
 
 ## [UNRELEASED]
 
+- feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
+
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v10.1.0...)
 
 ### Breaking:
