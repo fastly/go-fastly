@@ -99,7 +99,7 @@ func TestClient_Domain(t *testing.T) {
 		ud, err = Update(c, &UpdateInput{
 			Description: fastly.ToPointer(descUpdated),
 			DomainID:    fastly.ToPointer(d.DomainID),
-			ServiceID:   fastly.ToPointer(fastly.DefaultDeliveryTestServiceID),
+			ServiceID:   fastly.ToPointer(fastly.TestDeliveryServiceID),
 		})
 	})
 	if err != nil {
@@ -108,7 +108,7 @@ func TestClient_Domain(t *testing.T) {
 	if ud.Description != descUpdated {
 		t.Errorf("bad description: %q (%q)", descUpdated, ud.Description)
 	}
-	if ud.ServiceID == nil || *ud.ServiceID != fastly.DefaultDeliveryTestServiceID {
+	if ud.ServiceID == nil || *ud.ServiceID != fastly.TestDeliveryServiceID {
 		t.Errorf("bad service id: %v", *ud.ServiceID)
 	}
 

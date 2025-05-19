@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"fqdn":"fastly-sdk-gofastly-testing.com","service_id":null}'
+    body: '{"description":null,"fqdn":"fastly-sdk-gofastly-testing.com","service_id":null}'
     form: {}
     headers:
       Accept:
@@ -10,7 +10,7 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.20.14)
+      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.3)
     url: https://api.fastly.com/domains/v1
     method: POST
   response:
@@ -26,25 +26,25 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 20 Jan 2025 18:11:45 GMT
+      - Mon, 19 May 2025 10:40:19 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly control-gateway
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Content-Type-Options:
       - nosniff
       X-Served-By:
-      - cache-chi-kigq8000095-CHI, cache-lon420104-LON
+      - cache-lon420130-LON
       X-Timer:
-      - S1737396705.304617,VS0,VE193
+      - S1747651219.137696,VS0,VE377
     status: 400 Bad Request
     code: 400
     duration: ""
