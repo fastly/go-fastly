@@ -14,11 +14,11 @@ import (
 type ListInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
-	// Limit how many results are returned.
+	// Limit how many results are returned (optional).
 	Limit *int
-	// Mode filter results based on mode.
+	// Mode filter results based on mode (optional).
 	WorkspaceID *string
-	// Page number of the collection to request.
+	// Page number of the collection to request (required).
 	Page *int
 }
 
