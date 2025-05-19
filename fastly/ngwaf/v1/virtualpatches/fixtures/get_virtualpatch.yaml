@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/1ZxmBhEF6b3PCBXarHgpbF/virtual-patches/CVE-2017-5638
+    method: GET
+  response:
+    body: |
+      {"id":"CVE-2017-5638","description":""description": "Apache Struts 2.3.5 - 2.3.31 and 2.5 - 2.5.10",","enabled":"true","mode":"block"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "114"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 19 May 2025 14:04:53 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-lga21974-LGA
+      X-Timer:
+      - S1747317894.643902,VS0,VE93
+    status: 200 OK
+    code: 200
+    duration: ""
