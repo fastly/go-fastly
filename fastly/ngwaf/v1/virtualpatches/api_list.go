@@ -16,20 +16,20 @@ type ListInput struct {
 	Context *context.Context
 	// Limit how many results are returned (optional).
 	Limit *int
-	// Mode filter results based on mode (optional).
+	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
-	// Page number of the collection to request (required).
+	// Page number of the collection to request (optional).
 	Page *int
 }
 
 // List retrieves a list of workspaces, with optional filtering and pagination.
 func List(c *fastly.Client, i *ListInput) (*VirtualPatch, error) {
 	requestOptions := fastly.CreateRequestOptions(i.Context)
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
 	if i.Page != nil {
 		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
+	}
+	if i.Limit != nil {
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

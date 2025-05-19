@@ -2,14 +2,13 @@
 
 ## [UNRELEASED]
 
-- feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
-
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v10.1.0...)
 
 ### Breaking:
 
 ### Enhancements:
 - feat(ngwaf): add support for workspaces ([#679](https://github.com/fastly/go-fastly/pull/679))
+- feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
 
 ### Bug fixes:
 
