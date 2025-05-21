@@ -17,6 +17,8 @@ type Collection struct {
 type Data struct {
 	// CreatedAt is the date and time in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
+	// Description is the description for the domain.
+	Description string `json:"description"`
 	// ID is the domain identifier (UUID).
 	DomainID string `json:"id"`
 	// FQDN is the fully-qualified domain name of the domain. Read-only

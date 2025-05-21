@@ -15,13 +15,18 @@ func TestClient_Domain(t *testing.T) {
 
 	// Create
 	var d *Data
+	desc := "my description"
 	fastly.Record(t, "create", func(c *fastly.Client) {
 		d, err = Create(c, &CreateInput{
-			FQDN: fastly.ToPointer(fqdn),
+			Description: fastly.ToPointer(desc),
+			FQDN:        fastly.ToPointer(fqdn),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if d.Description != desc {
+		t.Errorf("bad description: %v", d.Description)
 	}
 	if d.FQDN != fqdn {
 		t.Errorf("bad fqdn: %v", d.FQDN)
@@ -80,22 +85,30 @@ func TestClient_Domain(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
+	if d.Description != gd.Description {
+		t.Errorf("bad description: %q (%q)", d.Description, gd.Description)
+	}
 	if d.FQDN != gd.FQDN {
 		t.Errorf("bad fqdn: %q (%q)", d.FQDN, gd.FQDN)
 	}
 
 	// Update
 	var ud *Data
+	descUpdated := "updated description"
 	fastly.Record(t, "update", func(c *fastly.Client) {
 		ud, err = Update(c, &UpdateInput{
-			DomainID:  fastly.ToPointer(d.DomainID),
-			ServiceID: fastly.ToPointer(fastly.DefaultDeliveryTestServiceID),
+			Description: fastly.ToPointer(descUpdated),
+			DomainID:    fastly.ToPointer(d.DomainID),
+			ServiceID:   fastly.ToPointer(fastly.TestDeliveryServiceID),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if ud.ServiceID == nil || *ud.ServiceID != fastly.DefaultDeliveryTestServiceID {
+	if ud.Description != descUpdated {
+		t.Errorf("bad description: %q (%q)", descUpdated, ud.Description)
+	}
+	if ud.ServiceID == nil || *ud.ServiceID != fastly.TestDeliveryServiceID {
 		t.Errorf("bad service id: %v", *ud.ServiceID)
 	}
 

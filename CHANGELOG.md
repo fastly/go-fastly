@@ -7,6 +7,8 @@
 ### Breaking:
 
 ### Enhancements:
+
+- feat(domains): add description field ([#673](https://github.com/fastly/go-fastly/pull/673))
 - feat(ngwaf): add support for workspaces ([#679](https://github.com/fastly/go-fastly/pull/679))
 
 ### Bug fixes:
@@ -19,12 +21,14 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v10.0.1...v10.1.0)
 
 ### Enhancements:
+
 - feat(Domain Discovery): add `suggest` and `status` domain tools endpoints ([#672](https://github.com/fastly/go-fastly/pull/672))
 - feat(fastly): adds context param to most inputs, allowing users of the library to pass context to a request ([#670](https://github.com/fastly/go-fastly/pull/670))
 - feat(go.mod): upgrade to go 1.24.0 minimum version ([#668](https://github.com/fastly/go-fastly/pull/668))
 - feat(backend): adds support for 'prefer_ipv6' attribute on backends ([#674](https://github.com/fastly/go-fastly/pull/674))
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.37.0 to 0.38.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
 - build(deps): `golang.org/x/sync` from 0.13.0 to 0.14.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
 - build(deps): `golang.org/x/sys` from 0.32.0 to 0.33.0 ([#676](https://github.com/fastly/go-fastly/pull/676))
@@ -39,6 +43,7 @@
 - fix(fastly): Increase maximum dictionary size to 25,000 items. ([#666](https://github.com/fastly/go-fastly/pull/666))
 
 ### Dependencies:
+
 - build(deps): `actions/create-github-app-token` from 1 to 2 ([#654](https://github.com/fastly/go-fastly/pull/654))
 - build(deps): `golang.org/x/sys` from 0.31.0 to 0.32.0 ([#652](https://github.com/fastly/go-fastly/pull/652))
 - build(deps): `golang.org/x/crypto` from 0.36.0 to 0.37.0 ([#655](https://github.com/fastly/go-fastly/pull/655))
@@ -60,10 +65,12 @@
 - breaking(go.mod): upgrade to version 10 [#648](https://github.com/fastly/go-fastly/pull/648)
 
 ### Enhancements:
+
 - fix(client): add ability to pass context into the client [#647](https://github.com/fastly/go-fastly/pull/647)
 - feat(stats): Add LogBytes to Stats structure. [#649](https://github.com/fastly/go-fastly/pull/649)
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.35.0 to 0.36.0 ([#639](https://github.com/fastly/go-fastly/pull/639))
 - build(deps): `golang.org/x/mod` from 0.23.0 to 0.24.0 ([#642](https://github.com/fastly/go-fastly/pull/642))
 - build(deps): `golang.org/x/tools` from 0.30.0 to 0.31.0 ([#640](https://github.com/fastly/go-fastly/pull/640))
@@ -76,12 +83,12 @@
 
 ### Enhancements:
 
- - feat(fastly/objectstorage): adds crud operations for access keys in object storage [#612](https://github.com/fastly/go-fastly/pull/612)
- - feat(kv_store): Adds support for all documented KV Store API features. [#630](https://github.com/fastly/go-fastly/pull/630)
+- feat(fastly/objectstorage): adds crud operations for access keys in object storage [#612](https://github.com/fastly/go-fastly/pull/612)
+- feat(kv_store): Adds support for all documented KV Store API features. [#630](https://github.com/fastly/go-fastly/pull/630)
 
 ### Bug fixes:
 
- - fix(automation_tokens): Fix decodeBodyMap for string to time.Time [#619](https://github.com/fastly/go-fastly/pull/619)
+- fix(automation_tokens): Fix decodeBodyMap for string to time.Time [#619](https://github.com/fastly/go-fastly/pull/619)
 
 ### Dependencies:
 
