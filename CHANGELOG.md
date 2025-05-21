@@ -12,6 +12,7 @@
 - feat(ngwaf): add support for workspaces ([#679](https://github.com/fastly/go-fastly/pull/679))
 
 ### Bug fixes:
+- fix(Domain Discovery): add `omitempty` tag to response types for `suggest` and `status` endpoints.
 
 - fix(fastly/observability_custom_dashboard): add tag to omit context from the json request for observability dashboards([#682](https://github.com/fastly/go-fastly/pull/682))
 
