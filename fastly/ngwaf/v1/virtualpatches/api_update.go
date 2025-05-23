@@ -8,18 +8,23 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to perform
+// UpdateInput specifies the information needed for the Put() function to perform
 // the operation.
 type UpdateInput struct {
+	// Action
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
+	// Enabled is the toggle status indicator of the VirtualPatch (optional).
+	Enabled *string
+	// Mode is action to take when a signal for virtual patch is detected (optional).
+	Mode *string
 	// VirtualPatchID is the virtual patch identifier (required).
 	VirtualPatchID *string
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
-// Get retrieves the specified workspace.
+// Update updates the specified virtual patch.
 func Update(c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
@@ -31,7 +36,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "virtual-patches", *i.VirtualPatchID)
 
-	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

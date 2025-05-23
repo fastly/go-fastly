@@ -23,7 +23,7 @@ type ListInput struct {
 }
 
 // List retrieves a list of workspaces, with optional filtering and pagination.
-func List(c *fastly.Client, i *ListInput) (*VirtualPatch, error) {
+func List(c *fastly.Client, i *ListInput) (*VirtualPatches, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -38,16 +38,16 @@ func List(c *fastly.Client, i *ListInput) (*VirtualPatch, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "virtual-patches")
 
-	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
 
-	var vp *VirtualPatch
-	if err := json.NewDecoder(resp.Body).Decode(&vp); err != nil {
+	var vps *VirtualPatches
+	if err := json.NewDecoder(resp.Body).Decode(&vps); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}
 
-	return vp, nil
+	return vps, nil
 }
