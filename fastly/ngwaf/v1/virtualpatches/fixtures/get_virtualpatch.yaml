@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/bUaP7PHIeqJHISoFBFSuag/virtual-patches/CVE-2017-5638
+    method: GET
+  response:
+    body: |
+      {"id":"CVE-2017-5638","description":"Apache Struts multipart/form remote execution","enabled":true,"mode":"block"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "115"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 23 May 2025 20:55:02 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100036-CHI, cache-ewr-kewr1740038-EWR
+      X-Timer:
+      - S1748033702.076478,VS0,VE172
+    status: 200 OK
+    code: 200
+    duration: ""

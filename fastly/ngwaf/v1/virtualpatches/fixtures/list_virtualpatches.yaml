@@ -1,0 +1,44 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/bUaP7PHIeqJHISoFBFSuag/virtual-patches
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"CVE-2017-5638","description":"Apache Struts multipart/form remote execution","enabled":true,"mode":"block"},{"id":"CVE-2017-7269","description":"IIS 6.0 WebDAV buffer overflow","enabled":false,"mode":"log"},{"id":"CVE-2017-9805","description":"Apache Struts REST plugin remote execution","enabled":false,"mode":"log"},{"id":"CVE-2018-11776","description":"2018 Apache Struts remote code execution","enabled":false,"mode":"log"},{"id":"CVE-2018-9206","description":"jQuery-File-Upload \u003c= v9.22.0 unauthenticated arbitrary file upload vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2019-6340","description":"Drupal core - Highly critical - Remote Code Execution - SA-CORE-2019-003","enabled":false,"mode":"log"},{"id":"CVE-2019-5418","description":"File Content Disclosure vulnerability in Rails Action View","enabled":false,"mode":"log"},{"id":"CVE-2019-0192","description":"Apache Solr Deserialization Remote Code Execution Vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2019-0232","description":"Apache Tomcat Remote Code Execution on Windows","enabled":false,"mode":"log"},{"id":"CVE-2019-3396","description":"Atlassian Confluence SSTI Remote Code Execution","enabled":false,"mode":"log"},{"id":"CVE-2019-2725","description":"RCE vulnerability in the Oracle WebLogic Server component of Oracle Fusion Middleware","enabled":false,"mode":"log"},{"id":"CVE-2019-14234","description":"JSON SQL Injection in the Django Framework","enabled":false,"mode":"log"},{"id":"CVE-2019-0193","description":"Apache Solr Remote Code Execution via dataImportHandler","enabled":false,"mode":"log"},{"id":"CVE-2019-16759","description":"vBulletin 5.x through 5.5.4 allows remote command execution","enabled":false,"mode":"log"},{"id":"CVE-2019-8451","description":"SSRF in Jira \u003c 8.4.0 on resource /plugins/servlet/gadgets/makeRequest","enabled":false,"mode":"log"},{"id":"CVE-2021-26084","description":"Confluence Server and Data Center OGNL Injection Vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2021-44228","description":"Apache Log4j JNDI remote code execution","enabled":false,"mode":"log"},{"id":"CVE-2021-44228-STRICT","description":"Apache Log4j JNDI remote code execution vulnerability - strict coverage, though it increases the risk of false positives","enabled":false,"mode":"log"},{"id":"CVE-2021-26855","description":"Microsoft Exchange Server Remote Code Execution Vulnerability","enabled":true,"mode":"log"},{"id":"CVE-2021-40438","description":"Apache HTTP Server 2.4.48 SSRF","enabled":false,"mode":"log"},{"id":"CVE-2018-15961","description":"Adobe ColdFusion Arbitrary File Upload Vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2019-11580","description":"Atlassian Crowd and Crowd Data Center arbitrary plugins permit remote code execution","enabled":false,"mode":"log"},{"id":"CVE-2019-3398","description":"Confluence Server and Data Center path traversal vulnerability leads to remote code execution","enabled":false,"mode":"log"},{"id":"CVE-2019-8394","description":"Zoho ManageEngine ServiceDesk Plus unrestricted file upload vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2022-22963","description":"Remote code execution in Spring Cloud Function by malicious Spring Expression","enabled":false,"mode":"log"},{"id":"CVE-2022-22965","description":"Spring Framework RCE via Data Binding on JDK 9+","enabled":false,"mode":"log"},{"id":"CVE-2022-26134","description":"Unauthenticated RCE via OGNL template injection in Confluence","enabled":false,"mode":"log"},{"id":"CVE-2022-42889","description":"Vulnerability in Apache Commons Text Library that can result in code execution","enabled":false,"mode":"log"},{"id":"CVE-2023-34362","description":"Progress MOVEit Transfer SQL Injection Vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2023-38218","description":"Adobe Commerce and Magento Open Source insecure direct object reference in V1/customers/me","enabled":false,"mode":"log"},{"id":"CVE-2023-50164","description":"Apache Struts File Upload Directory Traversal Vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2024-5806","description":"Progress MOVEit Transfer Authentication Bypass Vulnerability","enabled":false,"mode":"log"},{"id":"CVE-2024-34102","description":"Adobe Commerce and Magento Open Source Unauthenticated XML Entity Injection","enabled":false,"mode":"log"},{"id":"CVE-2024-45115","description":"Adobe Commerce and Magento Open Source Improper Authentication and Privilege Escalation","enabled":false,"mode":"log"},{"id":"CVE-2024-53677","description":"Apache Struts File Upload Directory Traversal Vulnerability S2-067","enabled":false,"mode":"log"},{"id":"CVE-2025-29927","description":"Authorization Bypass in Next.js Middleware","enabled":false,"mode":"log"}],"meta":{"limit":100,"total":36}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 23 May 2025 20:55:02 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-ewr-kewr1740038-EWR
+      X-Timer:
+      - S1748033702.847702,VS0,VE216
+    status: 200 OK
+    code: 200
+    duration: ""
