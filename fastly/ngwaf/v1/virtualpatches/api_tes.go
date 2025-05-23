@@ -16,7 +16,6 @@ func TestVirtual_Patches(t *testing.T) {
 	const vpMode = "block"
 	const vpWorkspaceID = "S7ql67y0WTogAAWhhvMlF7"
 
-	//var vps *VirtualPatches
 	var err error
 
 	// List all virtual patches.
