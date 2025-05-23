@@ -235,10 +235,10 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 
 type CreateObservabilityCustomDashboardInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context     *context.Context
-	Description *string         `json:"description,omitempty"`
-	Name        string          `json:"name"`
-	Items       []DashboardItem `json:"items"`
+	Context     *context.Context `json:"-"`
+	Description *string          `json:"description,omitempty"`
+	Name        string           `json:"name"`
+	Items       []DashboardItem  `json:"items"`
 }
 
 func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
