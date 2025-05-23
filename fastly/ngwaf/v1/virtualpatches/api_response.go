@@ -5,7 +5,7 @@ type VirtualPatch struct {
 	// Description is the description of the workspace.
 	Description string `json:"description"`
 	// Enabled is the toggle status indicator of the VirtualPatch.
-	Enabled string `json:"enabled"`
+	Enabled bool `json:"enabled"`
 	// ID is the virtual patch identifier.
 	ID string `json:"id"`
 	// Mode is action to take when a signal for virtual patch is detected.

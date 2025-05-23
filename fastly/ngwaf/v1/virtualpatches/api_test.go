@@ -11,10 +11,10 @@ func TestVirtual_Patches(t *testing.T) {
 	t.Parallel()
 
 	const vpDescription = "Apache Struts multipart/form remote execution"
-	const vpEnabled = "true"
+	const vpEnabled = true
 	const vpID = "CVE-2017-5638"
 	const vpMode = "block"
-	const vpWorkspaceID = "S7ql67y0WTogAAWhhvMlF7"
+	const vpWorkspaceID = "bUaP7PHIeqJHISoFBFSuag"
 
 	var err error
 
@@ -43,7 +43,7 @@ func TestVirtual_Patches(t *testing.T) {
 		t.Errorf("unexpected workspace description: got %q, expected %q", gvp.Description, vpDescription)
 	}
 	if gvp.Enabled != vpEnabled {
-		t.Errorf("unexpected virtual patch status: got %q, expected %q", gvp.Enabled, vpEnabled)
+		t.Errorf("unexpected virtual patch status: got %t, expected %t", gvp.Enabled, vpEnabled)
 	}
 	if gvp.ID != vpID {
 		t.Errorf("unexpected virtual patch ID: got  %q, expected %q", gvp.ID, vpID)
@@ -54,15 +54,15 @@ func TestVirtual_Patches(t *testing.T) {
 
 	// Update the virtual patch
 	const uvpDescription = "Apache Struts multipart/form remote execution"
-	const uvpEnabled = "false"
+	const uvpEnabled = false
 	const uvpID = "CVE-2017-5638"
 	const uvpMode = "log"
-	const uvpWorkspaceID = "S7ql67y0WTogAAWhhvMlF7"
+	const uvpWorkspaceID = "bUaP7PHIeqJHISoFBFSuag"
 
 	var uvp *VirtualPatch
 	fastly.Record(t, "update_virtualpatch", func(c *fastly.Client) {
 		uvp, err = Update(c, &UpdateInput{
-			Enabled:        fastly.ToPointer(uvp.Enabled),
+			Enabled:        fastly.ToPointer(uvpEnabled),
 			Mode:           fastly.ToPointer(uvpMode),
 			VirtualPatchID: fastly.ToPointer(uvpID),
 			WorkspaceID:    fastly.ToPointer(uvpWorkspaceID),
@@ -72,7 +72,7 @@ func TestVirtual_Patches(t *testing.T) {
 		t.Fatal(err)
 	}
 	if uvp.Enabled != uvpEnabled {
-		t.Errorf("unexpected virtual patch status: got %q, expected %q", uvp.Enabled, uvpEnabled)
+		t.Errorf("unexpected virtual patch status: got %t, expected %t", uvp.Enabled, uvpEnabled)
 	}
 	if uvp.Mode != uvpMode {
 		t.Errorf("unexpected virtual patch mode: got %q, expected %q", uvp.Mode, uvpMode)

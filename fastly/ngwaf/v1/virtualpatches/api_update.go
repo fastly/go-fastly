@@ -15,7 +15,7 @@ type UpdateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Enabled is the toggle status indicator of the VirtualPatch (optional).
-	Enabled *string
+	Enabled *bool
 	// Mode is action to take when a signal for virtual patch is detected (optional).
 	Mode *string
 	// VirtualPatchID is the virtual patch identifier (required).
