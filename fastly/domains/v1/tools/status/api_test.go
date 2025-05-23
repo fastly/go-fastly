@@ -1,6 +1,7 @@
 package status
 
 import (
+	"errors"
 	"strings"
 	"testing"
 
@@ -117,5 +118,42 @@ func TestClient_DomainToolsStatusOffers(t *testing.T) {
 
 	if status.Offers[0].Currency != "USD" {
 		t.Errorf("incorrect currency, expected %s, got %s", "USD", status.Offers[0].Currency)
+	}
+}
+
+func TestClient_DomainToolsStatusErrorHandling(t *testing.T) {
+	t.Parallel()
+
+	var err error
+	domain := "fastly-sdk-gofastly-testing"
+	fastly.Record(t, "get_error", func(client *fastly.Client) {
+		_, err = Get(client, &GetInput{
+			Domain: domain,
+		})
+	})
+
+	if err == nil {
+		t.Errorf("no error returned")
+	}
+
+	httpErr := &fastly.HTTPError{}
+	if !errors.As(err, &httpErr) {
+		t.Errorf("wrong error returned")
+	}
+
+	if len(httpErr.Errors) != 1 {
+		t.Errorf("wrong number of errors returned")
+	}
+
+	if httpErr.Errors[0].Status != "400" {
+		t.Errorf("bad error status, expected %s, got %s", "400", httpErr.Errors[0].Status)
+	}
+
+	if httpErr.Errors[0].Title != "Domain not found" {
+		t.Errorf("bad error message, expected %s, got %s", "domain not found", httpErr.Errors[0].Title)
+	}
+
+	if httpErr.Errors[0].Detail != "fastly-sdk-gofastly-testing" {
+		t.Errorf("bad detail, expected %s, got %s", "fastly-sdk-gofastly-testing", httpErr.Errors[0].Detail)
 	}
 }
