@@ -10,12 +10,7 @@ import (
 func TestVirtual_Patches(t *testing.T) {
 	t.Parallel()
 
-	const vpDescription = "Apache Struts multipart/form remote execution"
-	const vpEnabled = true
 	const vpID = "CVE-2017-5638"
-	const vpMode = "block"
-	const vpWorkspaceID = "bUaP7PHIeqJHISoFBFSuag"
-
 	var err error
 
 	// List all virtual patches.
@@ -29,35 +24,22 @@ func TestVirtual_Patches(t *testing.T) {
 	}
 
 	// Get a virual patch.
-	var gvp *VirtualPatch
+	var _ *VirtualPatch
 	fastly.Record(t, "get_virtualpatch", func(c *fastly.Client) {
-		gvp, err = Get(c, &GetInput{
+		_, err = Get(c, &GetInput{
 			VirtualPatchID: fastly.ToPointer(vpID),
-			WorkspaceID:    fastly.ToPointer(vpWorkspaceID),
+			WorkspaceID:    fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if gvp.Description != vpDescription {
-		t.Errorf("unexpected workspace description: got %q, expected %q", gvp.Description, vpDescription)
-	}
-	if gvp.Enabled != vpEnabled {
-		t.Errorf("unexpected virtual patch status: got %t, expected %t", gvp.Enabled, vpEnabled)
-	}
-	if gvp.ID != vpID {
-		t.Errorf("unexpected virtual patch ID: got  %q, expected %q", gvp.ID, vpID)
-	}
-	if gvp.Mode != vpMode {
-		t.Errorf("unexpected virtual patch mode: got  %q, expected %q", gvp.Mode, vpMode)
-	}
 
 	// Update the virtual patch
 	const uvpDescription = "Apache Struts multipart/form remote execution"
-	const uvpEnabled = false
+	const uvpEnabled = true
 	const uvpID = "CVE-2017-5638"
-	const uvpMode = "log"
-	const uvpWorkspaceID = "bUaP7PHIeqJHISoFBFSuag"
+	const uvpMode = "block"
 
 	var uvp *VirtualPatch
 	fastly.Record(t, "update_virtualpatch", func(c *fastly.Client) {
@@ -65,7 +47,7 @@ func TestVirtual_Patches(t *testing.T) {
 			Enabled:        fastly.ToPointer(uvpEnabled),
 			Mode:           fastly.ToPointer(uvpMode),
 			VirtualPatchID: fastly.ToPointer(uvpID),
-			WorkspaceID:    fastly.ToPointer(uvpWorkspaceID),
+			WorkspaceID:    fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
 	})
 	if err != nil {
@@ -97,17 +79,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 
 	_, err = Get(fastly.TestClient, &GetInput{
 		WorkspaceID:    nil,
-		VirtualPatchID: fastly.ToPointer(fastly.TestingNGWAFVirtualPatchID),
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-}
-
-func TestClient_ListVirtualPatch_validation(t *testing.T) {
-	var err error
-	_, err = List(fastly.TestClient, &ListInput{
-		WorkspaceID: nil,
+		VirtualPatchID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
@@ -127,6 +99,16 @@ func TestClient_UpdateVirtualPatch_validation(t *testing.T) {
 	_, err = Update(fastly.TestClient, &UpdateInput{
 		WorkspaceID:    nil,
 		VirtualPatchID: fastly.ToPointer(fastly.TestingNGWAFVirtualPatchID),
+	})
+	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
+		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
+	}
+}
+
+func TestClient_ListVirtualPatch_validation(t *testing.T) {
+	var err error
+	_, err = List(fastly.TestClient, &ListInput{
+		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)

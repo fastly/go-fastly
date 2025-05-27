@@ -6,7 +6,7 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/ngwaf/v1/workspaces/bUaP7PHIeqJHISoFBFSuag/virtual-patches
     method: GET
   response:
@@ -20,25 +20,25 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 23 May 2025 20:55:02 GMT
+      - Tue, 27 May 2025 17:41:18 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly
+      - fastly control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-ewr-kewr1740038-EWR
+      - cache-chi-klot8100036-CHI, cache-ewr-kewr1740096-EWR
       X-Timer:
-      - S1748033702.847702,VS0,VE216
+      - S1748367678.489454,VS0,VE172
     status: 200 OK
     code: 200
     duration: ""

@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"Context":null,"Enabled":false,"Mode":"log","VirtualPatchID":"CVE-2017-5638","WorkspaceID":"bUaP7PHIeqJHISoFBFSuag"}'
+    body: '{"Context":null,"Enabled":true,"Mode":"block","VirtualPatchID":"CVE-2017-5638","WorkspaceID":"bUaP7PHIeqJHISoFBFSuag"}'
     form: {}
     headers:
       Accept:
@@ -10,23 +10,23 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/ngwaf/v1/workspaces/bUaP7PHIeqJHISoFBFSuag/virtual-patches/CVE-2017-5638
     method: PATCH
   response:
     body: |
-      {"id":"CVE-2017-5638","description":"Apache Struts multipart/form remote execution","enabled":false,"mode":"log"}
+      {"id":"CVE-2017-5638","description":"Apache Struts multipart/form remote execution","enabled":true,"mode":"block"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "114"
+      - "115"
       Content-Type:
       - application/json
       Date:
-      - Fri, 23 May 2025 20:57:31 GMT
+      - Tue, 27 May 2025 17:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-ewr-kewr1740040-EWR
+      - cache-ewr-kewr1740096-EWR
       X-Timer:
-      - S1748033850.352639,VS0,VE805
+      - S1748367680.297140,VS0,VE327
     status: 200 OK
     code: 200
     duration: ""
