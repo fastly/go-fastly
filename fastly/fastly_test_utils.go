@@ -25,7 +25,7 @@ var TestComputeServiceID = computeServiceIDForTest()
 // ID of the NGWAF workspace for testing.
 var TestNGWAFWorkspaceID = ngwafWorkspaceIDForTest()
 
-// ID of the NGWAF virtual patch for testing
+// ID of the NGWAF virtual patch for testing.
 var TestingNGWAFVirtualPatchID = ngwafVirtualPatchIDForTest()
 
 // ID of the default Delivery service for testing.
