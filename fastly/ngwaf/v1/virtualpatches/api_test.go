@@ -86,6 +86,16 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 	}
 }
 
+func TestClient_ListVirtualPatch_validation(t *testing.T) {
+	var err error
+	_, err = List(fastly.TestClient, &ListInput{
+		WorkspaceID: nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
+		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
+	}
+}
+
 func TestClient_UpdateVirtualPatch_validation(t *testing.T) {
 	var err error
 	_, err = Update(fastly.TestClient, &UpdateInput{
@@ -99,16 +109,6 @@ func TestClient_UpdateVirtualPatch_validation(t *testing.T) {
 	_, err = Update(fastly.TestClient, &UpdateInput{
 		WorkspaceID:    nil,
 		VirtualPatchID: fastly.ToPointer(fastly.TestingNGWAFVirtualPatchID),
-	})
-	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-	}
-}
-
-func TestClient_ListVirtualPatch_validation(t *testing.T) {
-	var err error
-	_, err = List(fastly.TestClient, &ListInput{
-		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
