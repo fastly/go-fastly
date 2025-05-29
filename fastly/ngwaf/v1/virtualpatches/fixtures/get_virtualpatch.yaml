@@ -7,40 +7,40 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/bUaP7PHIeqJHISoFBFSuag/virtual-patches/CVE-2017-5638
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Hubznd8IQBqyHVK9YC0lwm/virtual-patches/CVE-2017-5638
     method: GET
   response:
     body: |
-      {"id":"CVE-2017-5638","description":"Apache Struts multipart/form remote execution","enabled":true,"mode":"block"}
+      {"id":"CVE-2017-5638","description":"Apache Struts multipart/form remote execution","enabled":false,"mode":"log"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "115"
+      - "114"
       Content-Type:
       - application/json
       Date:
-      - Tue, 27 May 2025 17:41:20 GMT
+      - Thu, 29 May 2025 15:22:10 GMT
       Pragma:
       - no-cache
       Server:
-      - fastly control-gateway
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish, 1.1 varnish
+      - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-chi-klot8100179-CHI, cache-ewr-kewr1740096-EWR
+      - cache-ewr-kewr1740093-EWR
       X-Timer:
-      - S1748367679.672638,VS0,VE1611
+      - S1748532131.767618,VS0,VE156
     status: 200 OK
     code: 200
     duration: ""

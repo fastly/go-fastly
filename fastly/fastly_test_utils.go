@@ -25,9 +25,6 @@ var TestComputeServiceID = computeServiceIDForTest()
 // ID of the NGWAF workspace for testing.
 var TestNGWAFWorkspaceID = ngwafWorkspaceIDForTest()
 
-// ID of the NGWAF virtual patch for testing.
-var TestingNGWAFVirtualPatchID = ngwafVirtualPatchIDForTest()
-
 // ID of the default Delivery service for testing.
 var DefaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
 
@@ -36,9 +33,6 @@ var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
 
 // ID of the default NGWAF workspace for testing.
 var defaultNGWAFWorkspaceID = "alk6DTsYKHKucJCOIavaJM"
-
-// ID of the default NGWAF virtual patch for testing.
-var defaultNGWAFVirtualPatchID = "CVE-2017-5638"
 
 const (
 	// ServiceTypeVCL is the type for VCL services.
@@ -72,13 +66,6 @@ func ngwafWorkspaceIDForTest() string {
 		return tsid
 	}
 	return defaultNGWAFWorkspaceID
-}
-
-func ngwafVirtualPatchIDForTest() string {
-	if tsid := os.Getenv("FASTLY_TEST_NGWAF_VIRTUALPATCH_ID"); tsid != "" {
-		return tsid
-	}
-	return defaultNGWAFVirtualPatchID
 }
 
 func vcrDisabled() bool {
