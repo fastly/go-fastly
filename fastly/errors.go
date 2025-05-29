@@ -101,6 +101,14 @@ var ErrMissingComputeACLIP = NewFieldError("ComputeACLIP")
 // requires a "WorkspaceID" key, but one was not set.
 var ErrMissingWorkspaceID = NewFieldError("WorkspaceID")
 
+// ErrMissingRedactionID is an error that is returned when an input struct
+// requires a "RedactionID" key, but one was not set.
+var ErrMissingRedactionID = NewFieldError("RedactionID")
+
+// ErrMissingField is an error that is returned when an input struct
+// requires a "Field" key, but one was not set.
+var ErrMissingField = NewFieldError("Field")
+
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
 var ErrMissingContent = NewFieldError("Content")
