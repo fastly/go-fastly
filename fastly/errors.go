@@ -105,6 +105,14 @@ var ErrMissingWorkspaceID = NewFieldError("WorkspaceID")
 // requires an "IsExpired" key, but one was not set.
 var ErrMissingIsExpired = NewFieldError("IsExpired")
 
+// ErrMissingRedactionID is an error that is returned when an input struct
+// requires a "RedactionID" key, but one was not set.
+var ErrMissingRedactionID = NewFieldError("RedactionID")
+
+// ErrMissingField is an error that is returned when an input struct
+// requires a "Field" key, but one was not set.
+var ErrMissingField = NewFieldError("Field")
+
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
 var ErrMissingContent = NewFieldError("Content")
