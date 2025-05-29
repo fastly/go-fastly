@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
 
 ### Bug fixes:
 
