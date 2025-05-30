@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/redactions
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"6839f562ce0b68dbd0c4274e","field":"some-other-field","type":"response_header","created_at":"2025-05-30T18:13:54Z"}],"meta":{"limit":10,"total":1}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "163"
+      Content-Type:
+      - application/json
+      Date:
+      - Fri, 30 May 2025 18:13:56 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-ewr-kewr1740095-EWR
+      X-Timer:
+      - S1748628836.968157,VS0,VE95
+    status: 200 OK
+    code: 200
+    duration: ""
