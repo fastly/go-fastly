@@ -8,6 +8,8 @@
 
 ### Enhancements:
 
+- feat(ngwaf/events): add support for the events portion of the ngwaf api ([#684](https://github.com/fastly/go-fastly/pull/684))
+
 ### Bug fixes:
 
 ### Dependencies:
@@ -24,7 +26,6 @@
 ### Bug fixes:
 
 - fix(Domain Discovery): add `omitempty` tag to response types for `suggest` and `status` endpoints.
-
 - fix(fastly/observability_custom_dashboard): add tag to omit context from the json request for observability dashboards([#682](https://github.com/fastly/go-fastly/pull/682))
 
 ## [v10.1.0](https://github.com/fastly/go-fastly/releases/tag/v10.1.0) (2025-05-07)
