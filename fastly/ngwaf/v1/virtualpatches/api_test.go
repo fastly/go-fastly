@@ -8,7 +8,7 @@ import (
 )
 
 // Global value for the test workspace ID.
-var testWorkspaceID string
+var testWorkspaceID = fastly.TestNGWAFWorkspaceID
 
 // ID of Virtual Patch to test against.
 const vpID = "CVE-2017-5638"
@@ -16,60 +16,65 @@ const vpID = "CVE-2017-5638"
 func TestVirtual_Patches(t *testing.T) {
 	t.Parallel()
 
-	const wsName = "!!vp-workspace"
-	const wsDescription = "vp-workspace"
-	const wsMode = "block"
-
-	// Create a test workspace.
-	var ws *Workspace
 	var err error
-
-	fastly.Record(t, "create_workspace", func(c *fastly.Client) {
-		ws, err = Create(c, &CreateWorkspace{
-			Name:        fastly.ToPointer(wsName),
-			Description: fastly.ToPointer(wsDescription),
-			Mode:        fastly.ToPointer(wsMode),
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-
-	// Store the test workspace ID globally.
-	testWorkspaceID = ws.WorkspaceID
-
-	// Ensure we delete the test workspace at the end.
-	defer func() {
-		fastly.Record(t, "delete_workspace", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
-				WorkspaceID: &testWorkspaceID,
-			})
-		})
-		if err != nil {
-			t.Errorf("error during workspace cleanup: %v", err)
-		}
-	}()
+	var vps *VirtualPatches
 
 	// List all virtual patches.
 	fastly.Record(t, "list_virtualpatches", func(c *fastly.Client) {
-		_, err = List(c, &ListInput{
+		vps, err = List(c, &ListInput{
 			WorkspaceID: &testWorkspaceID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
+	if vps == nil {
+		t.Fatal("expected VirtualPatches response, got nil")
+	}
+
+	// Sample a few listed virtual patches.
+	expectedPatches := map[string]string{
+		"CVE-2017-5638":  "Apache Struts multipart/form remote execution",
+		"CVE-2021-26855": "Microsoft Exchange Server Remote Code Execution Vulnerability",
+		"CVE-2017-7269":  "IIS 6.0 WebDAV buffer overflow",
+	}
+
+	// Create a map for quick lookup of listed virtual patches.
+	returnedPatches := make(map[string]VirtualPatch)
+	for _, patch := range vps.Data {
+		returnedPatches[patch.ID] = patch
+	}
+
+	// Virtual Patch sample validation.
+	for expectedID, expectedDescription := range expectedPatches {
+		patch, found := returnedPatches[expectedID]
+		if !found {
+			t.Errorf("expected virtual patch %q not found in response", expectedID)
+			continue
+		}
+
+		if patch.Description != expectedDescription {
+			t.Errorf("virtual patch %q: unexpected description: got %q, expected %q",
+				expectedID, patch.Description, expectedDescription)
+		}
+	}
 
 	// Get a virual patch.
-	var _ *VirtualPatch
+	var vp *VirtualPatch
 	fastly.Record(t, "get_virtualpatch", func(c *fastly.Client) {
-		_, err = Get(c, &GetInput{
+		vp, err = Get(c, &GetInput{
 			VirtualPatchID: fastly.ToPointer(vpID),
 			WorkspaceID:    &testWorkspaceID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
+	}
+	if vp == nil {
+		t.Fatal("expected VirtualPatch response, got nil")
+	}
+	if vp.ID != vpID {
+		t.Errorf("unexpected virtual patch ID: got %q, expected %q", vp.ID, vpID)
 	}
 
 	// Update the virtual patch

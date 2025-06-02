@@ -1,7 +1,5 @@
 package virtualpatches
 
-import "time"
-
 // VirtualPatch is the API response structure for the patch virtial patch operations.
 type VirtualPatch struct {
 	// Description is the description of the workspace.
@@ -36,24 +34,4 @@ type AttackSignalThresholds struct {
 	TenMinutes int  `json:"ten_minutes"`
 	OneHour    int  `json:"one_hour"`
 	Immediate  bool `json:"immediate"`
-}
-
-// Workspace is the API response structure for the create operation.
-type Workspace struct {
-	// WorkspaceID is the workspace identifier (UUID).
-	WorkspaceID string `json:"id"`
-	// Name is the name of the workspace.
-	Name string `json:"name"`
-	// Description is the description of the workspace.
-	Description string `json:"description"`
-	// Mode is the mode of the workspace.
-	Mode string `json:"mode"`
-	// AttackSignalThresholds are the parameters for system site alerts.
-	AttackSignalThresholds AttackSignalThresholds `json:"attack_signal_thresholds"`
-	// IPAnonymization is the selected option to anonymize IP addresses.
-	IPAnonymization string `json:"ip_anonymization"`
-	// CreatedAt is the date and time in ISO 8601 format.
-	CreatedAt time.Time `json:"created_at"`
-	// UpdatedAt is the date and time in ISO 8601 format.
-	UpdatedAt time.Time `json:"updated_at"`
 }
