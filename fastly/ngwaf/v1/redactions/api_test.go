@@ -11,7 +11,7 @@ func TestClient_Redactions(t *testing.T) {
 	t.Parallel()
 	var err error
 	testField := "somefield"
-	testType := RequestParameter
+	testType := "request_parameter"
 	var redactionID string
 
 	// Create a test redaction.
@@ -67,7 +67,7 @@ func TestClient_Redactions(t *testing.T) {
 	}
 
 	// Update the test redaction.
-	const updatedRedactionType = ResponseHeader
+	const updatedRedactionType = "response_header"
 	const updatedRedactionField string = "some-other-field"
 
 	var updatedRedaction *Redaction

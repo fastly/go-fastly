@@ -16,7 +16,7 @@ type CreateInput struct {
 	// Field is the name of the field to redact (required).  Will be converted to lowercase.
 	Field *string `json:"field"`
 	// Type is the type of field being redacted. Must be one of `request_parameter`, `request_header`, or `response_header`.
-	Type *FieldType `json:"type"`
+	Type *string `json:"type"`
 	// WorkspaceID is the ID of the workspace that the redaction is being created in
 	WorkspaceID *string `json:"-"`
 }

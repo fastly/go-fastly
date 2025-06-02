@@ -2,14 +2,6 @@ package redactions
 
 import "time"
 
-type FieldType string
-
-const (
-	RequestParameter FieldType = "request_parameter"
-	RequestHeader    FieldType = "request_header"
-	ResponseHeader   FieldType = "response_header"
-)
-
 // Workspace is the API response structure for the create, update, and get operations.
 type Redaction struct {
 	// CreatedAt is the date and time in ISO 8601 format.
@@ -17,7 +9,7 @@ type Redaction struct {
 	// Field is the field being redacted. You cannot create multiple
 	Field string `json:"field"`
 	// Type is the type of field being redacted. One of `request_parameter`, `request_header`, or `response_header`.
-	Type FieldType `json:"type"`
+	Type string `json:"type"`
 	// RedactionID is the redaction identifier (UUID).
 	RedactionID string `json:"id"`
 }
