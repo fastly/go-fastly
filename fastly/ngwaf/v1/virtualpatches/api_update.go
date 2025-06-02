@@ -13,15 +13,15 @@ import (
 type UpdateInput struct {
 	// Action
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
+	Context *context.Context `json:"-"`
 	// Enabled is the toggle status indicator of the VirtualPatch (optional).
-	Enabled *bool
+	Enabled *bool `json:"enabled"`
 	// Mode is action to take when a signal for virtual patch is detected (optional).
-	Mode *string
+	Mode *string `json:"mode"`
 	// VirtualPatchID is the virtual patch identifier (required).
-	VirtualPatchID *string
+	VirtualPatchID *string `json:"-"`
 	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string
+	WorkspaceID *string `json:"-"`
 }
 
 // Update updates the specified virtual patch.
@@ -29,7 +29,6 @@ func Update(c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-
 	if i.VirtualPatchID == nil {
 		return nil, fastly.ErrMissingVirtualPatchID
 	}
