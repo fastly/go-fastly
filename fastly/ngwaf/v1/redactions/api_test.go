@@ -27,7 +27,7 @@ func TestClient_Redactions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if string(redaction.Type) != string(testType) {
+	if redaction.Type != testType {
 		t.Errorf("unexpected redaction type: got %q, expected %q", redaction.Type, testType)
 	}
 	if redaction.Field != testField {
@@ -59,7 +59,7 @@ func TestClient_Redactions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if string(getTestRedaction.Type) != string(testType) {
+	if getTestRedaction.Type != testType {
 		t.Errorf("unexpected redaction type: got %q, expected %q", getTestRedaction.Type, testType)
 	}
 	if getTestRedaction.Field != testField {
@@ -82,7 +82,7 @@ func TestClient_Redactions(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if string(updatedRedaction.Type) != string(updatedRedactionType) {
+	if updatedRedaction.Type != updatedRedactionType {
 		t.Errorf("unexpected redaction type: got %q, expected %q", updatedRedaction.Type, updatedRedactionType)
 	}
 	if updatedRedaction.Field != updatedRedactionField {
@@ -102,7 +102,7 @@ func TestClient_Redactions(t *testing.T) {
 	if len(listedRedactions.Data) != 1 {
 		t.Errorf("unexpected redaction list length: got %q, expected %q", len(listedRedactions.Data), 1)
 	}
-	if string(listedRedactions.Data[0].Type) != string(updatedRedactionType) {
+	if listedRedactions.Data[0].Type != updatedRedactionType {
 		t.Errorf("unexpected redaction type: got %q, expected %q", listedRedactions.Data[0].Type, updatedRedactionType)
 	}
 	if listedRedactions.Data[0].Field != updatedRedactionField {
