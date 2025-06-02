@@ -9,7 +9,7 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to perform
+// ListInput specifies the information needed for the List() function to perform
 // the operation.
 type ListInput struct {
 	// Context, if supplied, will be used as the Request's context.
