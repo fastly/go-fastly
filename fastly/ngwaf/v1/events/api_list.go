@@ -13,23 +13,23 @@ import (
 // the operation.
 type ListInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context 
+	Context *context.Context
 	// From represents the start of a date-time range, expressed in RFC 3339 format (required).
-	From *string 
+	From *string
 	// IP filters the list of events based on IP.
-	IP *string 
+	IP *string
 	// Limit is the limit on how many results are returned. [Default 100]
-	Limit *int 
+	Limit *int
 	// Page is the page number of the collection to request. [Default 0]
-	Page *int 
+	Page *int
 	// Signal filters the list of events based on signal.
-	Signal *string 
+	Signal *string
 	// Status filters the list of events based on status. Must be one of `active` or `expired`.
-	Status *string 
+	Status *string
 	// To represents the end of a date-time range and must be older than from, expressed in RFC 3339 format.
-	To *string 
+	To *string
 	// WorkspaceID is the workspace identifier (required).
-	WorkspaceID *string 
+	WorkspaceID *string
 }
 
 // Get retrieves the specified workspace.
