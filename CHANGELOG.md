@@ -9,6 +9,7 @@
 ### Enhancements:
 
 - feat(ngwaf/events): add support for the events portion of the ngwaf api ([#684](https://github.com/fastly/go-fastly/pull/684))
+- feat(fastly/ngwaf/v1/redactions): adds CRUD operations for the redactions portion of the ngwaf API ([#685](https://github.com/fastly/go-fastly/pull/685))
 
 ### Bug fixes:
 
