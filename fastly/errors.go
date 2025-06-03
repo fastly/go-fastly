@@ -384,6 +384,10 @@ var ErrMissingIntegrationID = NewFieldError("IntegrationID")
 // requires one of the optional Image Optimizer default settings, but none are set.
 var ErrMissingImageOptimizerDefaultSetting = NewFieldError("ResizeFilter, Webp, WebpQuality, JpegType, JpegQuality, Upscale, AllowVideo").Message("at least one of the available optional fields is required")
 
+// ErrMissingVirtualPatchID is an error that is returned when an input struct
+// requires a "VirtualPatchID" key, but one was not set.
+var ErrMissingVirtualPatchID = NewFieldError("Virtual Patch")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
