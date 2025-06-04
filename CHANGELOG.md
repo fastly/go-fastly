@@ -2,7 +2,7 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.2.1...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...)
 
 ### Breaking:
 
