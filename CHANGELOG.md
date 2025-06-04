@@ -16,6 +16,8 @@
 
 ### Bug fixes:
 
+- fix(client): Implement new mechanism for serializing mutating requests. ([#7](https://github.com/fastly/go-fastly/pull/7))
+
 ### Dependencies:
 
 ## [v10.5.1](https://github.com/fastly/go-fastly/releases/tag/v10.5.1) (2025-06-30)
