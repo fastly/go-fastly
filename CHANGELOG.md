@@ -12,9 +12,9 @@
 
 ### Dependencies:
 
-## [v10.2.1](https://github.com/fastly/go-fastly/releases/tag/v10.2.1) (2025-05-21)
+## [v10.3.0](https://github.com/fastly/go-fastly/releases/tag/v10.3.1) (2025-06-04)
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.2.0...v10.2.1)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.2.0...v10.3.0)
 
 ### Enhancements:
 - feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
