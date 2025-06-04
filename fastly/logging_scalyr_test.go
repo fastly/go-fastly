@@ -125,13 +125,14 @@ func TestClient_Scalyrs(t *testing.T) {
 	var us *Scalyr
 	Record(t, "scalyrs/update", func(c *Client) {
 		us, err = c.UpdateScalyr(&UpdateScalyrInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-scalyr",
-			NewName:        ToPointer("new-test-scalyr"),
-			ProjectID:      ToPointer("app-name"),
-			Region:         ToPointer("EU"),
-			Token:          ToPointer("new-token"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-scalyr",
+			NewName:          ToPointer("new-test-scalyr"),
+			ProjectID:        ToPointer("app-name"),
+			Region:           ToPointer("EU"),
+			Token:            ToPointer("new-token"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -148,6 +149,9 @@ func TestClient_Scalyrs(t *testing.T) {
 	}
 	if *us.Token != "new-token" {
 		t.Errorf("bad token: %q", *us.Token)
+	}
+	if *us.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *us.ProcessingRegion)
 	}
 
 	// Delete

@@ -218,11 +218,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var uh *HTTPS
 	Record(t, "https/update", func(c *Client) {
 		uh, err = c.UpdateHTTPS(&UpdateHTTPSInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-https",
-			NewName:        ToPointer("new-test-https"),
-			Method:         ToPointer(http.MethodPost),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-https",
+			NewName:          ToPointer("new-test-https"),
+			Method:           ToPointer(http.MethodPost),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -233,6 +234,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *uh.Method != http.MethodPost {
 		t.Errorf("bad method: %q", *uh.Method)
+	}
+	if *uh.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *uh.ProcessingRegion)
 	}
 
 	// Delete

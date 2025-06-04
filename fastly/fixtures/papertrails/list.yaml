@@ -6,11 +6,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/46/logging/papertrail
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/125/logging/papertrail
     method: GET
   response:
-    body: '[{"placement":"waf_debug","format_version":"2","service_id":"kKJb5bOFI47uHeBVluGfX1","address":"integ-test.go-fastly.com","response_condition":"","version":"46","deleted_at":null,"public_key":null,"created_at":"2022-11-04T14:20:05Z","name":"test-papertrail","format":"format","updated_at":"2022-11-04T14:20:05Z","port":"1234"}]'
+    body: '[{"deleted_at":null,"name":"test-papertrail","service_id":"kKJb5bOFI47uHeBVluGfX1","address":"integ-test.go-fastly.com","public_key":null,"port":"1234","updated_at":"2025-06-04T15:28:35Z","created_at":"2025-06-04T15:28:35Z","format_version":"2","format":"format","version":"125","placement":"waf_debug","log_processing_region":"none","response_condition":""}]'
     headers:
       Accept-Ranges:
       - bytes
@@ -19,7 +19,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:20:06 GMT
+      - Wed, 04 Jun 2025 15:28:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,9 +37,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4150-MAN
+      - cache-chi-klot8100063-CHI, cache-nyc-kteb1890093-NYC
       X-Timer:
-      - S1667571606.787245,VS0,VE307
+      - S1749050916.865238,VS0,VE151
     status: 200 OK
     code: 200
     duration: ""

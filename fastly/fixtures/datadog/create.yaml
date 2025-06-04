@@ -18,11 +18,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/44/logging/datadog
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/108/logging/datadog
     method: POST
   response:
-    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"44","format_version":"2","created_at":"2022-11-04T13:29:41Z","deleted_at":null,"response_condition":"","updated_at":"2022-11-04T13:29:41Z"}'
+    body: '{"format":"format","name":"test-datadog","placement":"waf_debug","region":"US","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"108","updated_at":"2025-06-04T15:04:12Z","deleted_at":null,"log_processing_region":"none","format_version":"2","created_at":"2025-06-04T15:04:12Z","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,11 +31,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 13:29:41 GMT
+      - Wed, 04 Jun 2025 15:04:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "9985"
+      - "9972"
       Fastly-Ratelimit-Reset:
-      - "1667570400"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4136-MAN
+      - cache-chi-klot8100086-CHI, cache-nyc-kteb1890088-NYC
       X-Timer:
-      - S1667568581.906735,VS0,VE332
+      - S1749049453.864782,VS0,VE371
     status: 200 OK
     code: 200
     duration: ""

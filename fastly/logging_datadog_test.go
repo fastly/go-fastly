@@ -114,12 +114,13 @@ func TestClient_Datadog(t *testing.T) {
 	var ud *Datadog
 	Record(t, "datadog/update", func(c *Client) {
 		ud, err = c.UpdateDatadog(&UpdateDatadogInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-datadog",
-			NewName:        ToPointer("new-test-datadog"),
-			Region:         ToPointer("EU"),
-			FormatVersion:  ToPointer(2),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-datadog",
+			NewName:          ToPointer("new-test-datadog"),
+			Region:           ToPointer("EU"),
+			FormatVersion:    ToPointer(2),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -133,6 +134,9 @@ func TestClient_Datadog(t *testing.T) {
 	}
 	if *ud.Region != "EU" {
 		t.Errorf("bad region: %q", *ud.Region)
+	}
+	if *ud.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ud.ProcessingRegion)
 	}
 
 	// Delete

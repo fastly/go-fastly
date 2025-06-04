@@ -202,12 +202,13 @@ func TestClient_NewRelic(t *testing.T) {
 	var newRelicUpdateResp1 *NewRelic
 	Record(t, "newrelic/update", func(c *Client) {
 		newRelicUpdateResp1, err = c.UpdateNewRelic(&UpdateNewRelicInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-newrelic",
-			NewName:        ToPointer("new-test-newrelic"),
-			FormatVersion:  ToPointer(2),
-			Region:         ToPointer("eu"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-newrelic",
+			NewName:          ToPointer("new-test-newrelic"),
+			FormatVersion:    ToPointer(2),
+			Region:           ToPointer("eu"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -235,6 +236,9 @@ func TestClient_NewRelic(t *testing.T) {
 	}
 	if *newRelicUpdateResp1.Region != "eu" {
 		t.Errorf("bad region: %q", *newRelicUpdateResp1.Region)
+	}
+	if *newRelicUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *newRelicUpdateResp1.ProcessingRegion)
 	}
 
 	// Delete

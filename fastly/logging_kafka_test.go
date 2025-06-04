@@ -209,11 +209,12 @@ func TestClient_Kafkas(t *testing.T) {
 	var uk *Kafka
 	Record(t, "kafkas/update", func(c *Client) {
 		uk, err = c.UpdateKafka(&UpdateKafkaInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-kafka",
-			NewName:        ToPointer("new-test-kafka"),
-			Topic:          ToPointer("new-kafka-topic"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-kafka",
+			NewName:          ToPointer("new-test-kafka"),
+			Topic:            ToPointer("new-kafka-topic"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -224,6 +225,9 @@ func TestClient_Kafkas(t *testing.T) {
 	}
 	if *uk.Topic != "new-kafka-topic" {
 		t.Errorf("bad topic: %q", *uk.Topic)
+	}
+	if *uk.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *uk.ProcessingRegion)
 	}
 
 	// Delete

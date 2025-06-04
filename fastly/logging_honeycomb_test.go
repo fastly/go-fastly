@@ -118,12 +118,13 @@ func TestClient_Honeycombs(t *testing.T) {
 	var us *Honeycomb
 	Record(t, "honeycombs/update", func(c *Client) {
 		us, err = c.UpdateHoneycomb(&UpdateHoneycombInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-honeycomb",
-			NewName:        ToPointer("new-test-honeycomb"),
-			Token:          ToPointer("new-token"),
-			Dataset:        ToPointer("newDataset"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-honeycomb",
+			NewName:          ToPointer("new-test-honeycomb"),
+			Token:            ToPointer("new-token"),
+			Dataset:          ToPointer("newDataset"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -137,6 +138,9 @@ func TestClient_Honeycombs(t *testing.T) {
 	}
 	if *us.Dataset != "newDataset" {
 		t.Errorf("bad dataset: %q", *us.Dataset)
+	}
+	if *us.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *us.ProcessingRegion)
 	}
 
 	// Delete

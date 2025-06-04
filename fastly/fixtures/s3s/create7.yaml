@@ -74,8 +74,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/127/logging/s3
     method: POST
   response:
     body: '{"msg":"''compression_codec'' and ''gzip_level'' cannot be set simultaneously"}'
@@ -87,11 +87,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 13:18:11 GMT
+      - Wed, 04 Jun 2025 15:30:23 GMT
       Fastly-Ratelimit-Remaining:
-      - "990"
+      - "9826"
       Fastly-Ratelimit-Reset:
-      - "1686578400"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -105,9 +109,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-5-CONTROL-AWS-UE2, cache-dal2120127-DAL
+      - cache-chi-kigq8000043-CHI, cache-nyc-kteb1890042-NYC
       X-Timer:
-      - S1686575892.902196,VS0,VE75
+      - S1749051023.109923,VS0,VE117
     status: 400 Bad Request
     code: 400
     duration: ""

@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/54/logging/splunk/test-splunk
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/130/logging/splunk/test-splunk
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-splunk, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 54 }''"}'
+      version =\u003e 130 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:06:34 GMT
+      - Wed, 04 Jun 2025 15:32:34 GMT
       Fastly-Ratelimit-Remaining:
-      - "9991"
+      - "9791"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4136-MAN
+      - cache-chi-kigq8000075-CHI, cache-nyc-kteb1890058-NYC
       X-Timer:
-      - S1667574394.437607,VS0,VE138
+      - S1749051154.109612,VS0,VE124
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/54/logging/splunk/new-test-splunk
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/130/logging/splunk/new-test-splunk
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-splunk, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 54 }''"}'
+      version =\u003e 130 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:06:34 GMT
+      - Wed, 04 Jun 2025 15:32:34 GMT
       Fastly-Ratelimit-Remaining:
-      - "9990"
+      - "9790"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4136-MAN
+      - cache-chi-kigq8000041-CHI, cache-nyc-kteb1890058-NYC
       X-Timer:
-      - S1667574395.599865,VS0,VE150
+      - S1749051154.239157,VS0,VE125
     status: 404 Not Found
     code: 404
     duration: ""

@@ -203,11 +203,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var ues *Elasticsearch
 	Record(t, "elasticsearch/update", func(c *Client) {
 		ues, err = c.UpdateElasticsearch(&UpdateElasticsearchInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-elasticsearch",
-			NewName:        ToPointer("new-test-elasticsearch"),
-			Pipeline:       ToPointer("my_new_pipeline_id"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-elasticsearch",
+			NewName:          ToPointer("new-test-elasticsearch"),
+			Pipeline:         ToPointer("my_new_pipeline_id"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -218,6 +219,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *ues.Pipeline != "my_new_pipeline_id" {
 		t.Errorf("bad pipeline: %q", *ues.Pipeline)
+	}
+	if *ues.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ues.ProcessingRegion)
 	}
 
 	// Delete

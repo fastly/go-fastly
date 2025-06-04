@@ -117,11 +117,12 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	var un *NewRelicOTLP
 	Record(t, "newrelicotlp/update", func(c *Client) {
 		un, err = c.UpdateNewRelicOTLP(&UpdateNewRelicOTLPInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-newrelicotlp",
-			NewName:        ToPointer("new-test-newrelicotlp"),
-			FormatVersion:  ToPointer(2),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-newrelicotlp",
+			NewName:          ToPointer("new-test-newrelicotlp"),
+			FormatVersion:    ToPointer(2),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -132,6 +133,9 @@ func TestClient_NewRelicOTLP(t *testing.T) {
 	}
 	if *un.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *un.FormatVersion)
+	}
+	if *un.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *un.ProcessingRegion)
 	}
 
 	// Delete

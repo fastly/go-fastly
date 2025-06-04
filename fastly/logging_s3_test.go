@@ -475,6 +475,7 @@ func TestClient_S3s(t *testing.T) {
 			PublicKey:        ToPointer(pgpPublicKeyUpdate()),
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -569,6 +570,9 @@ func TestClient_S3s(t *testing.T) {
 	}
 	if *s3UpdateResp1.FileMaxBytes != 5*MiB {
 		t.Errorf("bad file_max_bytes: %q", *s3UpdateResp1.FileMaxBytes)
+	}
+	if *s3UpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *s3UpdateResp1.ProcessingRegion)
 	}
 	if *s3UpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *s3UpdateResp2.CompressionCodec)

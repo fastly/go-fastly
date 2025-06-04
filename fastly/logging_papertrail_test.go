@@ -118,10 +118,11 @@ func TestClient_Papertrails(t *testing.T) {
 	var up *Papertrail
 	Record(t, "papertrails/update", func(c *Client) {
 		up, err = c.UpdatePapertrail(&UpdatePapertrailInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-papertrail",
-			NewName:        ToPointer("new-test-papertrail"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-papertrail",
+			NewName:          ToPointer("new-test-papertrail"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -129,6 +130,9 @@ func TestClient_Papertrails(t *testing.T) {
 	}
 	if *up.Name != "new-test-papertrail" {
 		t.Errorf("bad name: %q", *up.Name)
+	}
+	if *up.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *up.ProcessingRegion)
 	}
 
 	// Delete

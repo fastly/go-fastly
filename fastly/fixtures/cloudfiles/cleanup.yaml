@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/66/logging/cloudfiles/test-cloudfiles
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/107/logging/cloudfiles/test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-cloudfiles, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 66 }''"}'
+      version =\u003e 107 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:25:51 GMT
+      - Wed, 04 Jun 2025 15:03:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "9944"
+      - "9977"
       Fastly-Ratelimit-Reset:
-      - "1667581200"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4146-MAN
+      - cache-chi-klot8100088-CHI, cache-nyc-kteb1890026-NYC
       X-Timer:
-      - S1667579151.197519,VS0,VE151
+      - S1749049385.497819,VS0,VE139
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,8 +54,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/66/logging/cloudfiles/test-cloudfiles-2
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/107/logging/cloudfiles/test-cloudfiles-2
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -63,11 +67,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:25:51 GMT
+      - Wed, 04 Jun 2025 15:03:05 GMT
       Fastly-Ratelimit-Remaining:
-      - "9943"
+      - "9976"
       Fastly-Ratelimit-Reset:
-      - "1667581200"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -81,9 +89,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4146-MAN
+      - cache-chi-kigq8000147-CHI, cache-nyc-kteb1890026-NYC
       X-Timer:
-      - S1667579151.377837,VS0,VE232
+      - S1749049386.642293,VS0,VE287
     status: 200 OK
     code: 200
     duration: ""
@@ -92,8 +100,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/66/logging/cloudfiles/test-cloudfiles-3
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/107/logging/cloudfiles/test-cloudfiles-3
     method: DELETE
   response:
     body: '{"status":"ok"}'
@@ -105,11 +113,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:25:51 GMT
+      - Wed, 04 Jun 2025 15:03:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "9942"
+      - "9975"
       Fastly-Ratelimit-Reset:
-      - "1667581200"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -123,9 +135,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4146-MAN
+      - cache-chi-klot8100108-CHI, cache-nyc-kteb1890026-NYC
       X-Timer:
-      - S1667579152.639828,VS0,VE204
+      - S1749049386.937448,VS0,VE272
     status: 200 OK
     code: 200
     duration: ""
@@ -134,13 +146,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/66/logging/cloudfiles/new-test-cloudfiles
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/107/logging/cloudfiles/new-test-cloudfiles
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-cloudfiles, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 66 }''"}'
+      version =\u003e 107 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -149,11 +161,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:25:52 GMT
+      - Wed, 04 Jun 2025 15:03:06 GMT
       Fastly-Ratelimit-Remaining:
-      - "9941"
+      - "9974"
       Fastly-Ratelimit-Reset:
-      - "1667581200"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -167,9 +183,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4146-MAN
+      - cache-chi-kigq8000124-CHI, cache-nyc-kteb1890026-NYC
       X-Timer:
-      - S1667579152.868612,VS0,VE147
+      - S1749049386.215612,VS0,VE187
     status: 404 Not Found
     code: 404
     duration: ""

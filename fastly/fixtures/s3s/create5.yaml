@@ -74,8 +74,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/8.4.1 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/157/logging/s3
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/127/logging/s3
     method: POST
   response:
     body: '{"msg":"''iam_role'' can''t be used when ''access_key'' or ''secret_key''
@@ -88,11 +88,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 12 Jun 2023 13:18:11 GMT
+      - Wed, 04 Jun 2025 15:30:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "992"
+      - "9828"
       Fastly-Ratelimit-Reset:
-      - "1686578400"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -106,9 +110,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-4-CONTROL-AWS-UE2, cache-dal2120127-DAL
+      - cache-chi-kigq8000043-CHI, cache-nyc-kteb1890042-NYC
       X-Timer:
-      - S1686575891.252088,VS0,VE74
+      - S1749051023.848379,VS0,VE91
     status: 400 Bad Request
     code: 400
     duration: ""

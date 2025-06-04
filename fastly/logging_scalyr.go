@@ -15,6 +15,7 @@ type Scalyr struct {
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
 	ProjectID         *string    `mapstructure:"project_id"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -68,6 +69,8 @@ type CreateScalyrInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ProjectID hold the name of the logfile field sent to Scalyr.
 	ProjectID *string `url:"project_id,omitempty"`
 	// Region is the region that log data will be sent to.
@@ -157,6 +160,8 @@ type UpdateScalyrInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ProjectID hold the name of the logfile field sent to Scalyr.
 	ProjectID *string `url:"project_id,omitempty"`
 	// Region is the region that log data will be sent to.

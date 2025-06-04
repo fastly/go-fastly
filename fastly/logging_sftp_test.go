@@ -302,12 +302,13 @@ func TestClient_SFTPs(t *testing.T) {
 	var sftpUpdateResp1, sftpUpdateResp2, sftpUpdateResp3 *SFTP
 	Record(t, "sftps/update", func(c *Client) {
 		sftpUpdateResp1, err = c.UpdateSFTP(&UpdateSFTPInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-sftp",
-			NewName:        ToPointer("new-test-sftp"),
-			GzipLevel:      ToPointer(8),
-			MessageType:    ToPointer("classic"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-sftp",
+			NewName:          ToPointer("new-test-sftp"),
+			GzipLevel:        ToPointer(8),
+			MessageType:      ToPointer("classic"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -349,6 +350,9 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 	if *sftpUpdateResp1.GzipLevel != 8 {
 		t.Errorf("bad gzip_level: %q", *sftpUpdateResp1.GzipLevel)
+	}
+	if *sftpUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *sftpUpdateResp1.ProcessingRegion)
 	}
 	if *sftpUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *sftpUpdateResp2.CompressionCodec)

@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.23.2)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/138/logging/grafanacloudlogs
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/113/logging/grafanacloudlogs
     method: POST
   response:
-    body: '{"format":"format","index":"{\"env\": \"prod\"}","name":"test-grafanacloudlogs","placement":"waf_debug","token":"abcd1234","url":"https://test123.grafana.net","user":"123456","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"138","updated_at":"2024-10-24T19:43:58Z","deleted_at":null,"format_version":"2","created_at":"2024-10-24T19:43:58Z","response_condition":""}'
+    body: '{"format":"format","index":"{\"env\": \"prod\"}","name":"test-grafanacloudlogs","placement":"waf_debug","token":"abcd1234","url":"https://test123.grafana.net","user":"123456","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"113","log_processing_region":"none","created_at":"2025-06-04T15:09:27Z","updated_at":"2025-06-04T15:09:27Z","response_condition":"","format_version":"2","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,15 +35,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 24 Oct 2024 19:43:58 GMT
+      - Wed, 04 Jun 2025 15:09:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "991"
+      - "9923"
       Fastly-Ratelimit-Reset:
-      - "1729800000"
+      - "1749052800"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -57,9 +57,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100074-CHI, cache-bos4679-BOS
+      - cache-chi-klot8100039-CHI, cache-nyc-kteb1890054-NYC
       X-Timer:
-      - S1729799038.016898,VS0,VE338
+      - S1749049767.487698,VS0,VE362
     status: 200 OK
     code: 200
     duration: ""
