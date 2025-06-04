@@ -2,21 +2,25 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.2.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...)
 
 ### Breaking:
 
 ### Enhancements:
-- feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
-
-- feat(ngwaf/events): add support for the events portion of the ngwaf api ([#684](https://github.com/fastly/go-fastly/pull/684))
-- feat(fastly/ngwaf/v1/redactions): adds CRUD operations for the redactions portion of the ngwaf API ([#685](https://github.com/fastly/go-fastly/pull/685))
-
-- feat(logging): Add support for 'ProcessingRegion' attribute for all logging endpoints. ([#686](https://github.com/fastly/go-fastly/pull/686))
 
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v10.3.0](https://github.com/fastly/go-fastly/releases/tag/v10.3.0) (2025-06-04)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.2.0...v10.3.0)
+
+### Enhancements:
+- feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
+- feat(ngwaf): add support for the events portion of the ngwaf api ([#684](https://github.com/fastly/go-fastly/pull/684))
+- feat(ngwaf): adds CRUD operations for the redactions portion of the ngwaf API ([#685](https://github.com/fastly/go-fastly/pull/685))
+- feat(logging): Add support for 'ProcessingRegion' attribute for all logging endpoints. ([#686](https://github.com/fastly/go-fastly/pull/686))
 
 ## [v10.2.0](https://github.com/fastly/go-fastly/releases/tag/v10.2.0) (2025-05-21)
 
