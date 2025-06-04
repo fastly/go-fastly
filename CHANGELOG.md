@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(ngwaf): add support for requests ([#688](https://github.com/fastly/go-fastly/pull/688))
 
 ### Bug fixes:
 

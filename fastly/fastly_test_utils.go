@@ -25,6 +25,9 @@ var TestComputeServiceID = computeServiceIDForTest()
 // ID of the NGWAF workspace for testing.
 var TestNGWAFWorkspaceID = ngwafWorkspaceIDForTest()
 
+// ID of the NGWAF workspace for testing events and requests.
+var TestNGWAFEventsAndRequestsWorkspaceID = ngwafWorkspaceIDForEventsAndRequestsTest()
+
 // ID of the default Delivery service for testing.
 var DefaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
 
@@ -33,6 +36,9 @@ var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
 
 // ID of the default NGWAF workspace for testing.
 var defaultNGWAFWorkspaceID = "alk6DTsYKHKucJCOIavaJM"
+
+// ID of the default NGWAF workspace for testing Events and Requests.
+var defaultNGWAFEventsAndREquestsWorkspaceID = "WI90k86caQU0u7frYeRgsP"
 
 const (
 	// ServiceTypeVCL is the type for VCL services.
@@ -66,6 +72,13 @@ func ngwafWorkspaceIDForTest() string {
 		return tsid
 	}
 	return defaultNGWAFWorkspaceID
+}
+
+func ngwafWorkspaceIDForEventsAndRequestsTest() string {
+	if tsid := os.Getenv("FASTLY_TEST_NGWAF_EVENTS_WORKSPACE_ID"); tsid != "" {
+		return tsid
+	}
+	return defaultNGWAFEventsAndREquestsWorkspaceID
 }
 
 func vcrDisabled() bool {
