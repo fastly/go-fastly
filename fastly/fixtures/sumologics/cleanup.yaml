@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/56/logging/sumologic/test-sumologic
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/131/logging/sumologic/test-sumologic
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-sumologic, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 56 }''"}'
+      version =\u003e 131 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:16:58 GMT
+      - Wed, 04 Jun 2025 15:33:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9972"
+      - "9785"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4130-MAN
+      - cache-chi-kigq8000113-CHI, cache-nyc-kteb1890063-NYC
       X-Timer:
-      - S1667575019.678997,VS0,VE141
+      - S1749051184.172795,VS0,VE133
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/56/logging/sumologic/new-test-sumologic
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/131/logging/sumologic/new-test-sumologic
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-sumologic, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 56 }''"}'
+      version =\u003e 131 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:16:58 GMT
+      - Wed, 04 Jun 2025 15:33:04 GMT
       Fastly-Ratelimit-Remaining:
-      - "9971"
+      - "9784"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4130-MAN
+      - cache-chi-kigq8000171-CHI, cache-nyc-kteb1890063-NYC
       X-Timer:
-      - S1667575019.847190,VS0,VE140
+      - S1749051184.311939,VS0,VE122
     status: 404 Not Found
     code: 404
     duration: ""

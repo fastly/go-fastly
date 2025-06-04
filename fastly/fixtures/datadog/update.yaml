@@ -2,10 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: format_version=2&name=new-test-datadog&region=EU
+    body: format_version=2&log_processing_region=eu&name=new-test-datadog&region=EU
     form:
       format_version:
       - "2"
+      log_processing_region:
+      - eu
       name:
       - new-test-datadog
       region:
@@ -14,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/44/logging/datadog/test-datadog
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/108/logging/datadog/test-datadog
     method: PUT
   response:
-    body: '{"response_condition":"","token":"abcd1234","updated_at":"2022-11-04T13:29:41Z","service_id":"kKJb5bOFI47uHeBVluGfX1","placement":"waf_debug","format_version":"2","format":"format","name":"new-test-datadog","created_at":"2022-11-04T13:29:41Z","version":"44","deleted_at":null,"region":"EU"}'
+    body: '{"version":"108","format_version":"2","token":"abcd1234","created_at":"2025-06-04T15:04:12Z","format":"format","name":"new-test-datadog","placement":"waf_debug","service_id":"kKJb5bOFI47uHeBVluGfX1","log_processing_region":"eu","region":"EU","updated_at":"2025-06-04T15:04:12Z","deleted_at":null,"response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +29,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 13:29:42 GMT
+      - Wed, 04 Jun 2025 15:04:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "9984"
+      - "9971"
       Fastly-Ratelimit-Reset:
-      - "1667570400"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4136-MAN
+      - cache-chi-klot8100061-CHI, cache-nyc-kteb1890088-NYC
       X-Timer:
-      - S1667568582.980280,VS0,VE339
+      - S1749049454.547369,VS0,VE407
     status: 200 OK
     code: 200
     duration: ""

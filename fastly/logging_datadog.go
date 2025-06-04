@@ -14,6 +14,7 @@ type Datadog struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -67,6 +68,8 @@ type CreateDatadogInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// Region is the region that log data will be sent to.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -154,6 +157,8 @@ type UpdateDatadogInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// Region is the region that log data will be sent to.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.

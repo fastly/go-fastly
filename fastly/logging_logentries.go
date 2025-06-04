@@ -15,6 +15,7 @@ type Logentries struct {
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
 	Port              *int       `mapstructure:"port"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -71,6 +72,8 @@ type CreateLogentriesInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// Region is the region to which to stream logs.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -162,6 +165,8 @@ type UpdateLogentriesInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// Region is the region to which to stream logs.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.

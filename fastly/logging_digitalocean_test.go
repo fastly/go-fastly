@@ -279,6 +279,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			NewName:          ToPointer("new-test-digitalocean"),
 			Domain:           ToPointer("nyc3.digitaloceanspaces.com"),
 			CompressionCodec: ToPointer("zstd"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -320,6 +321,9 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 	if digitaloceanUpdateResp1.GzipLevel != nil {
 		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp1.GzipLevel)
+	}
+	if *digitaloceanUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *digitaloceanUpdateResp1.ProcessingRegion)
 	}
 	if *digitaloceanUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp2.CompressionCodec)

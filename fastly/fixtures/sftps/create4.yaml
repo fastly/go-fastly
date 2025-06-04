@@ -124,8 +124,8 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/38/logging/sftp
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/129/logging/sftp
     method: POST
   response:
     body: '{"msg":"''compression_codec'' and ''gzip_level'' cannot be set simultaneously"}'
@@ -137,11 +137,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 11:08:07 GMT
+      - Wed, 04 Jun 2025 15:32:02 GMT
       Fastly-Ratelimit-Remaining:
-      - "9995"
+      - "9804"
       Fastly-Ratelimit-Reset:
-      - "1667563200"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 400 Bad Request
       Strict-Transport-Security:
@@ -155,9 +159,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4147-MAN
+      - cache-chi-klot8100064-CHI, cache-nyc-kteb1890089-NYC
       X-Timer:
-      - S1667560087.099994,VS0,VE300
+      - S1749051122.961896,VS0,VE117
     status: 400 Bad Request
     code: 400
     duration: ""

@@ -14,6 +14,7 @@ type Loggly struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
 	ServiceVersion    *int       `mapstructure:"version"`
@@ -66,6 +67,8 @@ type CreateLogglyInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -151,6 +154,8 @@ type UpdateLogglyInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).

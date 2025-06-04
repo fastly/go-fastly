@@ -283,6 +283,7 @@ func TestClient_FTPs(t *testing.T) {
 			Name:             "test-ftp",
 			NewName:          ToPointer("new-test-ftp"),
 			CompressionCodec: ToPointer("zstd"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -321,6 +322,9 @@ func TestClient_FTPs(t *testing.T) {
 	}
 	if ftpUpdateResp1.GzipLevel != nil {
 		t.Errorf("bad gzip_level: %q", *ftpUpdateResp1.GzipLevel)
+	}
+	if *ftpUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ftpUpdateResp1.ProcessingRegion)
 	}
 	if *ftpUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *ftpUpdateResp2.CompressionCodec)

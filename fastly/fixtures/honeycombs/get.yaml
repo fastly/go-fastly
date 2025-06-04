@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/49/logging/honeycomb/test-honeycomb
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb/test-honeycomb
     method: GET
   response:
-    body: '{"dataset":"testDataset","placement":"waf_debug","response_condition":"","service_id":"kKJb5bOFI47uHeBVluGfX1","format":"%h
-      %l %u %t \"%r\" %\u003es %b","token":"super-secure-token","format_version":"2","updated_at":"2022-11-04T14:43:37Z","deleted_at":null,"version":"49","created_at":"2022-11-04T14:43:37Z","name":"test-honeycomb"}'
+    body: '{"placement":"waf_debug","response_condition":"","dataset":"testDataset","log_processing_region":"none","created_at":"2025-06-04T15:10:36Z","version":"115","token":"super-secure-token","deleted_at":null,"updated_at":"2025-06-04T15:10:36Z","format_version":"2","name":"test-honeycomb","format":"%h
+      %l %u %t \"%r\" %\u003es %b","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +20,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:43:37 GMT
+      - Wed, 04 Jun 2025 15:10:36 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4148-MAN
+      - cache-chi-klot8100042-CHI, cache-nyc-kteb1890025-NYC
       X-Timer:
-      - S1667573018.719420,VS0,VE142
+      - S1749049836.421479,VS0,VE120
     status: 200 OK
     code: 200
     duration: ""

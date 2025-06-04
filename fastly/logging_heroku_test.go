@@ -118,11 +118,12 @@ func TestClient_Herokus(t *testing.T) {
 	var uh *Heroku
 	Record(t, "herokus/update", func(c *Client) {
 		uh, err = c.UpdateHeroku(&UpdateHerokuInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-heroku",
-			NewName:        ToPointer("new-test-heroku"),
-			Token:          ToPointer("new-token"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-heroku",
+			NewName:          ToPointer("new-test-heroku"),
+			Token:            ToPointer("new-token"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -133,6 +134,9 @@ func TestClient_Herokus(t *testing.T) {
 	}
 	if *uh.Token != "new-token" {
 		t.Errorf("bad token: %q", *uh.Token)
+	}
+	if *uh.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *uh.ProcessingRegion)
 	}
 
 	// Delete

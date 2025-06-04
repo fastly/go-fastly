@@ -284,6 +284,7 @@ func TestClient_Cloudfiles(t *testing.T) {
 			Period:           ToPointer(0),
 			FormatVersion:    ToPointer(2),
 			CompressionCodec: ToPointer("zstd"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -334,6 +335,9 @@ func TestClient_Cloudfiles(t *testing.T) {
 	}
 	if cloudfilesUpdateResp1.GzipLevel != nil {
 		t.Errorf("bad gzip_level: %q", *cloudfilesUpdateResp1.GzipLevel)
+	}
+	if *cloudfilesUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *cloudfilesUpdateResp1.ProcessingRegion)
 	}
 	if *cloudfilesUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *cloudfilesUpdateResp2.CompressionCodec)

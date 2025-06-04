@@ -188,10 +188,11 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var us *Splunk
 	Record(t, "splunks/update", func(c *Client) {
 		us, err = c.UpdateSplunk(&UpdateSplunkInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-splunk",
-			NewName:        ToPointer("new-test-splunk"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-splunk",
+			NewName:          ToPointer("new-test-splunk"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -199,6 +200,9 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	}
 	if *us.Name != "new-test-splunk" {
 		t.Errorf("bad name: %q", *us.Name)
+	}
+	if *us.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *us.ProcessingRegion)
 	}
 
 	// Delete

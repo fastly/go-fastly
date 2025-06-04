@@ -243,10 +243,11 @@ func TestClient_Kinesis(t *testing.T) {
 	var kinesisUpdateResp1, kinesisUpdateResp2, kinesisUpdateResp3 *Kinesis
 	Record(t, "kinesis/update", func(c *Client) {
 		kinesisUpdateResp1, err = c.UpdateKinesis(&UpdateKinesisInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *v.Number,
-			Name:           "test-kinesis",
-			NewName:        ToPointer("new-test-kinesis"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *v.Number,
+			Name:             "test-kinesis",
+			NewName:          ToPointer("new-test-kinesis"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -301,6 +302,9 @@ func TestClient_Kinesis(t *testing.T) {
 
 	if *kinesisUpdateResp1.Name != "new-test-kinesis" {
 		t.Errorf("bad name: %q", *kinesisUpdateResp1.Name)
+	}
+	if *kinesisUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *kinesisUpdateResp1.ProcessingRegion)
 	}
 	if *kinesisUpdateResp2.AccessKey != "" {
 		t.Errorf("bad access_key: %q", *kinesisUpdateResp2.AccessKey)

@@ -195,11 +195,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var us *Syslog
 	Record(t, "syslogs/update", func(c *Client) {
 		us, err = c.UpdateSyslog(&UpdateSyslogInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-syslog",
-			NewName:        ToPointer("new-test-syslog"),
-			FormatVersion:  ToPointer(2),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-syslog",
+			NewName:          ToPointer("new-test-syslog"),
+			FormatVersion:    ToPointer(2),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -211,6 +212,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	if *us.FormatVersion != 2 {
 		t.Errorf("bad format_version: %d", *us.FormatVersion)
+	}
+
+	if *us.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *us.ProcessingRegion)
 	}
 
 	// Delete

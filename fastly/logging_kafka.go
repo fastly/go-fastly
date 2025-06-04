@@ -19,6 +19,7 @@ type Kafka struct {
 	ParseLogKeyvals   *bool      `mapstructure:"parse_log_keyvals"`
 	Password          *string    `mapstructure:"password"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequiredACKs      *string    `mapstructure:"required_acks"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -89,6 +90,8 @@ type CreateKafkaInput struct {
 	Password *string `url:"password,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.
@@ -200,6 +203,8 @@ type UpdateKafkaInput struct {
 	Password *string `url:"password,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.

@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/50/logging/elasticsearch/test-elasticsearch
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/110/logging/elasticsearch/test-elasticsearch
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-elasticsearch, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 50 }''"}'
+      version =\u003e 110 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:49:16 GMT
+      - Wed, 04 Jun 2025 15:06:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "9964"
+      - "9952"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4120-MAN
+      - cache-chi-klot8100099-CHI, cache-nyc-kteb1890040-NYC
       X-Timer:
-      - S1667573356.467375,VS0,VE141
+      - S1749049614.611650,VS0,VE110
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/50/logging/elasticsearch/new-test-elasticsearch
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/110/logging/elasticsearch/new-test-elasticsearch
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-elasticsearch, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 50 }''"}'
+      version =\u003e 110 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:49:16 GMT
+      - Wed, 04 Jun 2025 15:06:53 GMT
       Fastly-Ratelimit-Remaining:
-      - "9963"
+      - "9951"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4120-MAN
+      - cache-chi-kigq8000067-CHI, cache-nyc-kteb1890040-NYC
       X-Timer:
-      - S1667573357.633498,VS0,VE139
+      - S1749049614.728576,VS0,VE101
     status: 404 Not Found
     code: 404
     duration: ""

@@ -22,11 +22,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/62/logging/kinesis
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/118/logging/kinesis
     method: POST
   response:
-    body: '{"format":"format","format_version":"2","iam_role":"arn:aws:iam::123456789012:role/S3Access","name":"test-kinesis-2","placement":"waf_debug","region":"us-east-1","topic":"stream-name","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"62","created_at":"2022-11-04T16:11:58Z","secret_key":null,"access_key":null,"updated_at":"2022-11-04T16:11:58Z","deleted_at":null,"response_condition":""}'
+    body: '{"format":"format","format_version":"2","iam_role":"arn:aws:iam::123456789012:role/S3Access","name":"test-kinesis-2","placement":"waf_debug","region":"us-east-1","topic":"stream-name","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"118","access_key":null,"response_condition":"","log_processing_region":"none","created_at":"2025-06-04T15:17:27Z","deleted_at":null,"secret_key":null,"updated_at":"2025-06-04T15:17:27Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +35,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 16:11:58 GMT
+      - Wed, 04 Jun 2025 15:17:27 GMT
       Fastly-Ratelimit-Remaining:
-      - "9989"
+      - "9894"
       Fastly-Ratelimit-Reset:
-      - "1667581200"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +57,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4139-MAN
+      - cache-chi-klot8100111-CHI, cache-ewr-kewr1740070-EWR
       X-Timer:
-      - S1667578318.148328,VS0,VE337
+      - S1749050247.008232,VS0,VE436
     status: 200 OK
     code: 200
     duration: ""

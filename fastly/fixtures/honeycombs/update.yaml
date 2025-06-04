@@ -2,10 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: dataset=newDataset&name=new-test-honeycomb&token=new-token
+    body: dataset=newDataset&log_processing_region=eu&name=new-test-honeycomb&token=new-token
     form:
       dataset:
       - newDataset
+      log_processing_region:
+      - eu
       name:
       - new-test-honeycomb
       token:
@@ -14,12 +16,12 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/49/logging/honeycomb/test-honeycomb
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb/test-honeycomb
     method: PUT
   response:
-    body: '{"version":"49","token":"new-token","placement":"waf_debug","dataset":"newDataset","format_version":"2","format":"%h
-      %l %u %t \"%r\" %\u003es %b","response_condition":"","service_id":"kKJb5bOFI47uHeBVluGfX1","created_at":"2022-11-04T14:43:37Z","deleted_at":null,"updated_at":"2022-11-04T14:43:37Z","name":"new-test-honeycomb"}'
+    body: '{"placement":"waf_debug","log_processing_region":"eu","created_at":"2025-06-04T15:10:36Z","response_condition":"","dataset":"newDataset","updated_at":"2025-06-04T15:10:36Z","name":"new-test-honeycomb","format_version":"2","version":"115","token":"new-token","deleted_at":null,"format":"%h
+      %l %u %t \"%r\" %\u003es %b","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -28,11 +30,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:43:38 GMT
+      - Wed, 04 Jun 2025 15:10:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "9972"
+      - "9912"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -46,9 +52,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4148-MAN
+      - cache-chi-klot8100042-CHI, cache-nyc-kteb1890025-NYC
       X-Timer:
-      - S1667573018.888124,VS0,VE343
+      - S1749049837.546568,VS0,VE355
     status: 200 OK
     code: 200
     duration: ""

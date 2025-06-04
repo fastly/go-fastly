@@ -119,15 +119,16 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	var ud *GrafanaCloudLogs
 	Record(t, "grafanacloudlogs/update", func(c *Client) {
 		ud, err = c.UpdateGrafanaCloudLogs(&UpdateGrafanaCloudLogsInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-grafanacloudlogs",
-			NewName:        ToPointer("new-test-grafanacloudlogs"),
-			FormatVersion:  ToPointer(2),
-			URL:            ToPointer("https://test456.grafana.net"),
-			Token:          ToPointer("abcd6789"),
-			Placement:      ToPointer("waf_debug"),
-			Index:          ToPointer("{\"env\": \"staging\"}"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-grafanacloudlogs",
+			NewName:          ToPointer("new-test-grafanacloudlogs"),
+			FormatVersion:    ToPointer(2),
+			URL:              ToPointer("https://test456.grafana.net"),
+			Token:            ToPointer("abcd6789"),
+			Placement:        ToPointer("waf_debug"),
+			Index:            ToPointer("{\"env\": \"staging\"}"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -144,6 +145,9 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	}
 	if *ud.Index != "{\"env\": \"staging\"}" {
 		t.Errorf("bad index: %q", *d.Index)
+	}
+	if *ud.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ud.ProcessingRegion)
 	}
 
 	// Delete

@@ -21,6 +21,7 @@ type Cloudfiles struct {
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	PublicKey         *string    `mapstructure:"public_key"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -90,6 +91,8 @@ type CreateCloudfilesInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// Region is the region to stream logs to.
@@ -195,6 +198,8 @@ type UpdateCloudfilesInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// Region is the region to stream logs to.

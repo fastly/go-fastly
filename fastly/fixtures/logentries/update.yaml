@@ -2,10 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: format_version=2&name=new-test-logentries&region=ap
+    body: format_version=2&log_processing_region=eu&name=new-test-logentries&region=ap
     form:
       format_version:
       - "2"
+      log_processing_region:
+      - eu
       name:
       - new-test-logentries
       region:
@@ -14,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/53/logging/logentries/test-logentries
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/119/logging/logentries/test-logentries
     method: PUT
   response:
-    body: '{"format":"format","updated_at":"2022-11-04T15:03:05Z","port":0,"created_at":"2022-11-04T15:03:05Z","name":"new-test-logentries","deleted_at":null,"public_key":null,"token":"abcd1234","use_tls":"1","version":"53","hostname":"","response_condition":"","format_version":"2","region":"ap","placement":"waf_debug","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
+    body: '{"format":"format","region":"ap","format_version":"2","deleted_at":null,"created_at":"2025-06-04T15:19:34Z","token":"abcd1234","name":"new-test-logentries","public_key":null,"hostname":"","port":0,"log_processing_region":"eu","version":"119","updated_at":"2025-06-04T15:19:34Z","placement":"waf_debug","use_tls":"1","service_id":"kKJb5bOFI47uHeBVluGfX1","response_condition":""}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +29,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 15:03:06 GMT
+      - Wed, 04 Jun 2025 15:19:35 GMT
       Fastly-Ratelimit-Remaining:
-      - "9997"
+      - "9881"
       Fastly-Ratelimit-Reset:
-      - "1667577600"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4122-MAN
+      - cache-chi-klot8100057-CHI, cache-ewr-kewr1740041-EWR
       X-Timer:
-      - S1667574186.016499,VS0,VE343
+      - S1749050375.242054,VS0,VE384
     status: 200 OK
     code: 200
     duration: ""

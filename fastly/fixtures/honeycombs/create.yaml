@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/49/logging/honeycomb
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb
     method: POST
   response:
-    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"49","response_condition":"","created_at":"2022-11-04T14:43:37Z","updated_at":"2022-11-04T14:43:37Z","deleted_at":null}'
+    body: '{"dataset":"testDataset","format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-honeycomb","placement":"waf_debug","token":"super-secure-token","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"115","response_condition":"","updated_at":"2025-06-04T15:10:36Z","created_at":"2025-06-04T15:10:36Z","log_processing_region":"none","deleted_at":null}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:43:37 GMT
+      - Wed, 04 Jun 2025 15:10:36 GMT
       Fastly-Ratelimit-Remaining:
-      - "9973"
+      - "9913"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +55,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4148-MAN
+      - cache-chi-kigq8000149-CHI, cache-nyc-kteb1890025-NYC
       X-Timer:
-      - S1667573017.995185,VS0,VE529
+      - S1749049836.949075,VS0,VE321
     status: 200 OK
     code: 200
     duration: ""
