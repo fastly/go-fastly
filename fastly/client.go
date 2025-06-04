@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"log"
 	"mime/multipart"
 	"net/http"
 	"net/http/httputil"
@@ -67,6 +68,11 @@ var ProjectVersion = "10.3.0"
 // UserAgent is the user agent for this particular client.
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 	ProjectVersion, ProjectURL, runtime.Version())
+
+var clientLogger = sync.OnceValue(func() *log.Logger {
+	f, _ := os.Create("client.log")
+	return log.New(f, "", log.Ldate|log.Ltime|log.Lmicroseconds|log.Lmsgprefix)
+})()
 
 // Client is the main entrypoint to the Fastly golang API library.
 type Client struct {
@@ -136,6 +142,7 @@ func NewClientForEndpoint(key, endpoint string) (*Client, error) {
 		UserAgent = fmt.Sprintf("%s, %s", customUserAgent, UserAgent)
 	}
 
+	clientLogger.Printf("client created - %p", client)
 	return client.init()
 }
 
@@ -321,7 +328,11 @@ func (c *Client) Request(verb, p string, ro RequestOptions) (*http.Response, err
 
 	if !ro.Parallel {
 		c.updateLock.Lock()
-		defer c.updateLock.Unlock()
+		clientLogger.Printf("client locked - %p", c)
+		defer func() {
+			c.updateLock.Unlock()
+			clientLogger.Printf("client unlocked - %p", c)
+		}()
 	}
 
 	// if a context is provided, set the context on the request
