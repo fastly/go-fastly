@@ -34,9 +34,7 @@ func List(c *fastly.Client, i *ListInput) (*Requests, error) {
 		return nil, fastly.ErrMissingLimit
 	}
 	requestOptions := fastly.CreateRequestOptions(i.Context)
-	if i.Limit != nil {
-		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
+	requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	if i.Page != nil {
 		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
 	}
