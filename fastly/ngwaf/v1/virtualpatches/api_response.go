@@ -27,11 +27,3 @@ type VirtualPatches struct {
 	// Meta is the information for total virtual patches.
 	Meta MetaVirtualPatches `json:"meta"`
 }
-
-// AttackSignalThresholds are the parameters for system site alerts.
-type AttackSignalThresholds struct {
-	OneMinute  int  `json:"one_minute"`
-	TenMinutes int  `json:"ten_minutes"`
-	OneHour    int  `json:"one_hour"`
-	Immediate  bool `json:"immediate"`
-}
