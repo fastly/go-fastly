@@ -13,9 +13,11 @@ var testWorkspaceID = fastly.TestNGWAFWorkspaceID
 
 const tsMetrics = "XSS,SQLI,HTTP404"
 
-var tsStart = time.Now().Add(-24 * time.Hour).UTC().Format(time.RFC3339)
-var tsEnd = time.Now().UTC().Format(time.RFC3339)
-var tsGranularity = 60
+var (
+	tsStart       = time.Now().Add(-24 * time.Hour).UTC().Format(time.RFC3339)
+	tsEnd         = time.Now().UTC().Format(time.RFC3339)
+	tsGranularity = 60
+)
 
 func TestTime_Series(t *testing.T) {
 	t.Parallel()
