@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/WI90k86caQU0u7frYeRgsP/requests/1fb963ef0bae42889b00000000000001
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/requests/1b34db183e374ea7880f000000000001
     method: GET
   response:
     body: |
-      {"id":"1fb963ef0bae42889b00000000000001","timestamp":"2025-06-03T20:47:50Z","server_hostname":"ff3eb80ddda467d3d9fc2c6cbfb9fb95.com","server_name":"ff3eb80ddda467d3d9fc2c6cbfb9fb95.com","uri":"/","path":"/","user_agent":"curl/8.7.1","remote_ip":"96.224.50.187","remote_hostname":"pool-96-224-50-187.nycmny.fios.verizon.net","country":"US","method":"POST","protocol":"HTTP/1.1","tls_protocol":"","tls_cipher":"","scheme":"http","response_code":503,"response_size":19,"response_time":7,"agent_response_code":200,"request_headers":[{"name":"Accept","value":"*/*"},{"name":"Cdn-Loop","value":"Fastly"},{"name":"Content-Length","value":"23"},{"name":"Fastly-Client-Ip","value":"96.224.50.187"},{"name":"Fastly-Ff","value":"jjtNGp3COE7Cf2N9cZIJxo8uJocXdwD8AsyHr2Ir3HA=!NYC!cache-nyc-kteb1890034-NYC"},{"name":"Host","value":"ff3eb80ddda467d3d9fc2c6cbfb9fb95.com"},{"name":"User-Agent","value":"curl/8.7.1"},{"name":"X-Sigsci-Edgemodule","value":"vcl 3.1.0"},{"name":"Content-Type","value":"application/x-www-form-urlencoded"},{"name":"X-Timer","value":"S1748983670.229711, VS0"},{"name":"X-Uat-Ip","value":"10.2.3.4"},{"name":"X-Sigsci-Client-Geo-Country-Code","value":"US"},{"name":"X-Varnish","value":"1146044231"},{"name":"X-Sigsci-Client-Geo-City","value":"ossining"},{"name":"X-Sigsci-Requestid","value":"1fb963ef0bae42889b00000000000001"},{"name":"X-Sigsci-Serviceid-Prod","value":"5bHVNvR3QwYBtF59iFkL72"}],"response_headers":[{"name":"Connection","value":"keep-alive"},{"name":"Date","value":"Tue, 03 Jun 2025 20:47:49 GMT"},{"name":"Content-Type","value":"text/plain"},{"name":"Transfer-Encoding","value":"chunked"},{"name":"X-Cache","value":"MISS"},{"name":"X-Cache-Hits","value":"0"},{"name":"X-Served-By","value":"cache-nyc-kteb1890043-NYC"}],"signals":[{"id":"CMDEXE","location":"POST","value":"bar200=;cat /etc/passwd","detector":"CmdExeRule"},{"id":"HTTP503","location":"","value":"503","detector":"HTTPErrorRule"}],"ja3":"","ja4":"","summation":{"attrs":{"AgentServiceVersion":"3","AllPreSignalsInformational":"false","PostBodyContentType":"form","RuleID":"6835c1a09c123b07dcd440ed","country":"US"},"attacks":[]}}
+      {"id":"1b34db183e374ea7880f000000000001","timestamp":"2025-06-05T16:15:31Z","server_hostname":"fastlydevtoolstesting.com","server_name":"fastlydevtoolstesting.com","uri":"/","path":"/","user_agent":"curl/8.7.1","remote_ip":"96.224.50.187","remote_hostname":"pool-96-224-50-187.nycmny.fios.verizon.net","country":"US","method":"POST","protocol":"HTTP/1.1","tls_protocol":"","tls_cipher":"","scheme":"http","response_code":401,"response_size":4696,"response_time":28,"agent_response_code":200,"request_headers":[{"name":"X-Uat-Ip","value":"10.2.3.4"},{"name":"Fastly-Ff","value":"7rhL8T7Um/0khntXIHgopW0fTXKYvcj2vPpd1I+60Rc=!EWR!cache-ewr-kewr1740025-EWR"},{"name":"X-Sigsci-Client-Geo-City","value":"ossining"},{"name":"X-Timer","value":"S1749140131.063312, VS0"},{"name":"X-Sigsci-Requestid","value":"1b34db183e374ea7880f000000000001"},{"name":"Content-Length","value":"23"},{"name":"Content-Type","value":"application/x-www-form-urlencoded"},{"name":"Fastly-Client-Ip","value":"96.224.50.187"},{"name":"User-Agent","value":"curl/8.7.1"},{"name":"X-Sigsci-Client-Geo-Country-Code","value":"US"},{"name":"X-Sigsci-Edgemodule","value":"vcl 3.1.0"},{"name":"X-Sigsci-Serviceid-Prod","value":"kKJb5bOFI47uHeBVluGfX1"},{"name":"X-Varnish","value":"3020601334"},{"name":"Accept","value":"*/*"},{"name":"Cdn-Loop","value":"Fastly"},{"name":"Host","value":"fastlydevtoolstesting.com"}],"response_headers":[{"name":"X-Glitch-Proxy","value":"true"},{"name":"Date","value":"Thu, 05 Jun 2025 16:15:31 GMT"},{"name":"Content-Type","value":"text/html; charset=utf-8"},{"name":"X-Cache","value":"MISS"},{"name":"Content-Length","value":"4696"},{"name":"Connection","value":"keep-alive"},{"name":"X-Cache-Hits","value":"0"},{"name":"X-Served-By","value":"cache-ewr-kewr1740079-EWR"},{"name":"Cache-Control","value":"no-cache"},{"name":"Etag","value":"W/\"1258-CRcGKaD3eZqNFrAdjmcK04t9o4g\""}],"signals":[{"id":"CMDEXE","location":"POST","value":"bar192=;cat /etc/passwd","detector":"CmdExeRule"},{"id":"HTTP4XX","location":"","value":"401","detector":"HTTPErrorRule"}],"ja3":"","ja4":"","summation":{"attrs":{"AgentServiceVersion":"57","AllPreSignalsInformational":"false","PostBodyContentType":"form","RuleID":"ExcludeCVEs","country":"US"},"attacks":[]}}
     headers:
       Accept-Ranges:
       - bytes
@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 05 Jun 2025 15:21:35 GMT
+      - Thu, 05 Jun 2025 16:24:04 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100134-CHI, cache-ewr-kewr1740042-EWR
+      - cache-chi-kigq8000126-CHI, cache-ewr-kewr1740054-EWR
       X-Timer:
-      - S1749136891.529097,VS0,VE4712
+      - S1749140644.913362,VS0,VE865
     status: 200 OK
     code: 200
     duration: ""

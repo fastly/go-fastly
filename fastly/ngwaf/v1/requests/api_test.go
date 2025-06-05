@@ -11,7 +11,7 @@ import (
 )
 
 const (
-	TestRequestID = "1fb963ef0bae42889b00000000000001"
+	TestRequestID = "1b34db183e374ea7880f000000000001"
 )
 
 func TestClient_requests(t *testing.T) {
@@ -19,15 +19,15 @@ func TestClient_requests(t *testing.T) {
 
 	getrequestInput := new(GetInput)
 	getrequestInput.RequestID = fastly.ToPointer(string(TestRequestID))
-	getrequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID)
+	getrequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
 
 	var request *Request
 	var err error
-	timestamp, _ := time.Parse(time.RFC3339, "2025-06-03T20:47:50Z")
+	timestamp, _ := time.Parse(time.RFC3339, "2025-06-05T16:15:31Z")
 	testRequest := Request{
 		AgentResponseCode: 200,
 		Country:           "US",
-		ID:                "1fb963ef0bae42889b00000000000001",
+		ID:                "1b34db183e374ea7880f000000000001",
 		Method:            "POST",
 		Path:              "/",
 		Protocol:          "HTTP/1.1",
@@ -35,24 +35,40 @@ func TestClient_requests(t *testing.T) {
 		RemoteIPAddress:   "96.224.50.187",
 		RequestHeaders: []Header{
 			{
-				Name:  "Content-Type",
-				Value: "application/x-www-form-urlencoded",
+				Name:  "X-Uat-Ip",
+				Value: "10.2.3.4",
 			},
 			{
-				Name:  "User-Agent",
-				Value: "curl/8.7.1",
+				Name:  "Fastly-Ff",
+				Value: "7rhL8T7Um/0khntXIHgopW0fTXKYvcj2vPpd1I+60Rc=!EWR!cache-ewr-kewr1740025-EWR",
 			},
 			{
-				Name:  "X-Sigsci-Serviceid-Prod",
-				Value: "5bHVNvR3QwYBtF59iFkL72",
+				Name:  "X-Sigsci-Client-Geo-City",
+				Value: "ossining",
 			},
 			{
 				Name:  "X-Timer",
-				Value: "S1748983670.229711, VS0",
+				Value: "S1749140131.063312, VS0",
+			},
+			{
+				Name:  "X-Sigsci-Requestid",
+				Value: "1b34db183e374ea7880f000000000001",
 			},
 			{
 				Name:  "Content-Length",
 				Value: "23",
+			},
+			{
+				Name:  "Content-Type",
+				Value: "application/x-www-form-urlencoded",
+			},
+			{
+				Name:  "Fastly-Client-Ip",
+				Value: "96.224.50.187",
+			},
+			{
+				Name:  "User-Agent",
+				Value: "curl/8.7.1",
 			},
 			{
 				Name:  "X-Sigsci-Client-Geo-Country-Code",
@@ -63,6 +79,14 @@ func TestClient_requests(t *testing.T) {
 				Value: "vcl 3.1.0",
 			},
 			{
+				Name:  "X-Sigsci-Serviceid-Prod",
+				Value: "kKJb5bOFI47uHeBVluGfX1",
+			},
+			{
+				Name:  "X-Varnish",
+				Value: "3020601334",
+			},
+			{
 				Name:  "Accept",
 				Value: "*/*",
 			},
@@ -71,55 +95,35 @@ func TestClient_requests(t *testing.T) {
 				Value: "Fastly",
 			},
 			{
-				Name:  "Fastly-Client-Ip",
-				Value: "96.224.50.187",
-			},
-			{
-				Name:  "Fastly-Ff",
-				Value: "jjtNGp3COE7Cf2N9cZIJxo8uJocXdwD8AsyHr2Ir3HA=!NYC!cache-nyc-kteb1890034-NYC",
-			},
-			{
-				Name:  "X-Sigsci-Client-Geo-City",
-				Value: "ossining",
-			},
-			{
-				Name:  "X-Sigsci-Requestid",
-				Value: "1fb963ef0bae42889b00000000000001",
-			},
-			{
 				Name:  "Host",
-				Value: "ff3eb80ddda467d3d9fc2c6cbfb9fb95.com",
-			},
-			{
-				Name:  "X-Uat-Ip",
-				Value: "10.2.3.4",
-			},
-			{
-				Name:  "X-Varnish",
-				Value: "1146044231",
+				Value: "fastlydevtoolstesting.com",
 			},
 		},
-		ResponseCode: 503,
+		ResponseCode: 401,
 		ResponseHeaders: []Header{
 			{
-				Name:  "Connection",
-				Value: "keep-alive",
+				Name:  "X-Glitch-Proxy",
+				Value: "true",
 			},
 			{
 				Name:  "Date",
-				Value: "Tue, 03 Jun 2025 20:47:49 GMT",
+				Value: "Thu, 05 Jun 2025 16:15:31 GMT",
 			},
 			{
 				Name:  "Content-Type",
-				Value: "text/plain",
-			},
-			{
-				Name:  "Transfer-Encoding",
-				Value: "chunked",
+				Value: "text/html; charset=utf-8",
 			},
 			{
 				Name:  "X-Cache",
 				Value: "MISS",
+			},
+			{
+				Name:  "Content-Length",
+				Value: "4696",
+			},
+			{
+				Name:  "Connection",
+				Value: "keep-alive",
 			},
 			{
 				Name:  "X-Cache-Hits",
@@ -127,25 +131,33 @@ func TestClient_requests(t *testing.T) {
 			},
 			{
 				Name:  "X-Served-By",
-				Value: "cache-nyc-kteb1890043-NYC",
+				Value: "cache-ewr-kewr1740079-EWR",
+			},
+			{
+				Name:  "Cache-Control",
+				Value: "no-cache",
+			},
+			{
+				Name:  "Etag",
+				Value: "W/\"1258-CRcGKaD3eZqNFrAdjmcK04t9o4g\"",
 			},
 		},
-		ResponseSize:   19,
-		ResponseTime:   7,
+		ResponseSize:   4696,
+		ResponseTime:   28,
 		Scheme:         "http",
-		ServerHostname: "ff3eb80ddda467d3d9fc2c6cbfb9fb95.com",
-		ServerName:     "ff3eb80ddda467d3d9fc2c6cbfb9fb95.com",
+		ServerHostname: "fastlydevtoolstesting.com",
+		ServerName:     "fastlydevtoolstesting.com",
 		Signals: []Signal{
 			{
 				ID:       "CMDEXE",
 				Location: "POST",
-				Value:    "bar200=;cat /etc/passwd",
+				Value:    "bar192=;cat /etc/passwd",
 				Detector: "CmdExeRule",
 			},
 			{
-				ID:       "HTTP503",
+				ID:       "HTTP4XX",
 				Location: "",
-				Value:    "503",
+				Value:    "401",
 				Detector: "HTTPErrorRule",
 			},
 		},
@@ -226,7 +238,7 @@ func TestClient_requests(t *testing.T) {
 
 	var Requests *Requests
 	listRequestInput := new(ListInput)
-	listRequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID)
+	listRequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
 	listRequestInput.Limit = fastly.ToPointer(100)
 	listRequestInput.Query = fastly.ToPointer("from:-2d")
 
@@ -234,7 +246,7 @@ func TestClient_requests(t *testing.T) {
 	fastly.Record(t, "list_request", func(c *fastly.Client) {
 		Requests, err = List(c, listRequestInput)
 	})
-	request = &Requests.Data[0]
+	request = &Requests.Data[7]
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -309,7 +321,7 @@ func TestClient_Getrequest_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Get(fastly.TestClient, &GetInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID),
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		RequestID:   nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingRequestID) {
@@ -326,7 +338,7 @@ func TestClient_Listrequest_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = List(fastly.TestClient, &ListInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID),
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		Limit:       nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingLimit) {

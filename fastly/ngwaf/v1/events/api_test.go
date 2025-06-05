@@ -10,7 +10,7 @@ import (
 )
 
 const (
-	TestEventID = "6835c746dedf49b89d19db33"
+	TestEventID = "6841c2c07d3691b0f5b95130"
 )
 
 func TestClient_GetEvent(t *testing.T) {
@@ -18,13 +18,13 @@ func TestClient_GetEvent(t *testing.T) {
 
 	getEventInput := new(GetInput)
 	getEventInput.EventID = fastly.ToPointer(TestEventID)
-	getEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID)
+	getEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
 
 	var event *Event
 	var err error
-	createdAt, _ := time.Parse(time.RFC3339, "2025-05-27T14:08:03Z")
-	detectedAt, _ := time.Parse(time.RFC3339, "2025-05-27T14:08:06Z")
-	expiresAt, _ := time.Parse(time.RFC3339, "2025-05-27T18:42:47Z")
+	createdAt, _ := time.Parse(time.RFC3339, "2025-06-05T16:15:58Z")
+	detectedAt, _ := time.Parse(time.RFC3339, "2025-06-05T16:16:00Z")
+	expiresAt, _ := time.Parse(time.RFC3339, "2025-06-05T16:20:02Z")
 	testEvent := Event{
 		Action:              "flagged",
 		BlockSignals:        nil,
@@ -34,16 +34,16 @@ func TestClient_GetEvent(t *testing.T) {
 		DetectedAt:          detectedAt,
 		ExpiresAt:           expiresAt,
 		EventID:             TestEventID,
-		FlaggedRequestCount: 200,
+		FlaggedRequestCount: 0,
 		IsExpired:           true,
 		Reasons: []signals.Reason{
 			{
 				SignalID: "CMDEXE",
-				Count:    139,
+				Count:    97,
 			},
 		},
 		RemoteHostname: "pool-96-224-50-187.nycmny.fios.verizon.net",
-		RequestCount:   139,
+		RequestCount:   97,
 		Source:         "96.224.50.187",
 		Type:           "attack",
 		UserAgents: []string{
@@ -119,7 +119,7 @@ func TestClient_GetEvent(t *testing.T) {
 
 	var events *Events
 	listEventInput := new(ListInput)
-	listEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID)
+	listEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
 	listEventInput.From = fastly.ToPointer("2024-05-27T14:08:03Z")
 
 	// get a list of events
@@ -189,7 +189,7 @@ func TestClient_GetEvent(t *testing.T) {
 	}
 
 	expireEventInput := new(ExpireInput)
-	expireEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID)
+	expireEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
 	expireEventInput.EventID = fastly.ToPointer(TestEventID)
 	expireEventInput.IsExpired = fastly.ToPointer(true)
 
@@ -269,7 +269,7 @@ func TestClient_GetEvent_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Get(fastly.TestClient, &GetInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID),
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		EventID:     nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingEventID) {
@@ -286,7 +286,7 @@ func TestClient_ListEvent_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = List(fastly.TestClient, &ListInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID),
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		From:        nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingFrom) {
@@ -303,7 +303,7 @@ func TestClient_ExpireEvent_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Expire(fastly.TestClient, &ExpireInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID),
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		EventID:     nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingEventID) {
@@ -311,7 +311,7 @@ func TestClient_ExpireEvent_validation(t *testing.T) {
 	}
 
 	_, err = Expire(fastly.TestClient, &ExpireInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFEventsAndRequestsWorkspaceID),
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		EventID:     fastly.ToPointer(string(TestEventID)),
 		IsExpired:   nil,
 	})
