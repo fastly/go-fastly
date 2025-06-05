@@ -14,8 +14,12 @@ var testWorkspaceID = fastly.TestNGWAFWorkspaceID
 const tsMetrics = "XSS,SQLI,HTTP404"
 
 var (
-	tsStart       = time.Now().Add(-24 * time.Hour).UTC().Format(time.RFC3339)
-	tsEnd         = time.Now().UTC().Format(time.RFC3339)
+	// NOTE: Update this to a recent timestamp when regenerating the test fixtures,
+	// otherwise the data may be outside of retention and an error will be
+	// returned.
+	tsEnd   = time.Date(2025, 06, 06, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
+	tsStart = time.Date(2025, 06, 04, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
+
 	tsGranularity = 60
 )
 
