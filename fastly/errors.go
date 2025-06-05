@@ -109,6 +109,14 @@ var ErrMissingIsExpired = NewFieldError("IsExpired")
 // requires a "RedactionID" key, but one was not set.
 var ErrMissingRedactionID = NewFieldError("RedactionID")
 
+// ErrMissingRequestID is an error that is returned when an input struct
+// requires a "RequestID" key, but one was not set.
+var ErrMissingRequestID = NewFieldError("RequestID")
+
+// ErrMissingLimit is an error that is returned when an input struct
+// requires a "Limit" key, but one was not set.
+var ErrMissingLimit = NewFieldError("Limit")
+
 // ErrMissingField is an error that is returned when an input struct
 // requires a "Field" key, but one was not set.
 var ErrMissingField = NewFieldError("Field")
