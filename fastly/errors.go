@@ -205,6 +205,10 @@ var ErrMissingKey = NewFieldError("Key")
 // requires a "Keys" key, but one was not set.
 var ErrMissingKeys = NewFieldError("Keys")
 
+// ErrMissingMetrics is an error that is returned when an input struct
+// requires a "Metrics" key, but one was not set.
+var ErrMissingMetrics = NewFieldError("Metrics")
+
 // ErrMissingLogin is an error that is returned when an input struct
 // requires a "Login" key, but one was not set.
 var ErrMissingLogin = NewFieldError("Login")
@@ -256,6 +260,10 @@ var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("S
 // ErrMissingServiceAuthorizationsUser is an error that is returned when an input struct
 // requires a "User" key of type SAUser, but one was not set or was misconfigured.
 var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser requires an ID")
+
+// ErrMissingStart is an error that is returned when an input struct
+// requires a "Start" key, but one was not set.
+var ErrMissingStart = NewFieldError("Start")
 
 // ErrMissingStoreID is an error that is returned when an input struct
 // requires a "StoreID" key, but one was not set.
