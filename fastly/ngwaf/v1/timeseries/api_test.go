@@ -17,8 +17,8 @@ var (
 	// NOTE: Update this to a recent timestamp when regenerating the test fixtures,
 	// otherwise the data may be outside of retention and an error will be
 	// returned.
-	tsEnd   = time.Date(2025, 06, 06, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
-	tsStart = time.Date(2025, 06, 04, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
+	tsEnd   = time.Date(2025, 6, 6, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
+	tsStart = time.Date(2025, 6, 4, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
 
 	tsGranularity = 60
 )
