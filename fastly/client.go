@@ -74,6 +74,8 @@ var clientLogger = sync.OnceValue(func() *log.Logger {
 	return log.New(f, "", log.Ldate|log.Ltime|log.Lmicroseconds|log.Lmsgprefix)
 })()
 
+var resourceLocks = sync.OnceValue(NewResourceLockManager)()
+
 // Client is the main entrypoint to the Fastly golang API library.
 type Client struct {
 	// Address is the address of Fastly's API endpoint.
@@ -90,9 +92,6 @@ type Client struct {
 	remaining int
 	// reset is last observed value of http header Fastly-RateLimit-Reset
 	reset int64
-	// updateLock forces serialization of calls that modify a service.
-	// Concurrent modifications have undefined semantics.
-	updateLock sync.Mutex
 	// url is the parsed URL from Address
 	url *url.URL
 }
@@ -327,11 +326,18 @@ func (c *Client) Request(verb, p string, ro RequestOptions) (*http.Response, err
 	}
 
 	if !ro.Parallel {
-		c.updateLock.Lock()
-		clientLogger.Printf("client locked - %p", c)
+		resourceID := "unknown"
+		if ro.Context != nil {
+			if id, ok := resourceIDFromContext(*ro.Context); ok {
+				resourceID = id
+			}
+		}
+		l := resourceLocks.Get(resourceID)
+		l.Lock()
+		clientLogger.Printf("client locked - %p for resource - %s", c, resourceID)
 		defer func() {
-			c.updateLock.Unlock()
-			clientLogger.Printf("client unlocked - %p", c)
+			l.Unlock()
+			clientLogger.Printf("client unlocked - %p for resource - %s", c, resourceID)
 		}()
 	}
 
