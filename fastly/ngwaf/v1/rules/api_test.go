@@ -190,12 +190,14 @@ func TestClient_Rule(t *testing.T) {
 
 	assert.Len(rule.Conditions, 5) // 3 single + 2 group top-level
 
-	// Validate single conditions
 	var singleConditions []SingleCondition
 	for _, cond := range rule.Conditions {
 		if cond.Type == conditionType {
-			sc := cond.Fields.(SingleCondition)
-			singleConditions = append(singleConditions, sc)
+			if sc, ok := cond.Fields.(SingleCondition); ok {
+				singleConditions = append(singleConditions, sc)
+			} else {
+				t.Errorf("expected SingleCondition, got %T", cond.Fields)
+			}
 		}
 	}
 
@@ -208,8 +210,11 @@ func TestClient_Rule(t *testing.T) {
 	var groupConditions []GroupCondition
 	for _, cond := range rule.Conditions {
 		if cond.Type == groupConditionType {
-			gc := cond.Fields.(GroupCondition)
-			groupConditions = append(groupConditions, gc)
+			if gc, ok := cond.Fields.(GroupCondition); ok {
+				groupConditions = append(groupConditions, gc)
+			} else {
+				t.Errorf("expected SingleCondition, got %T", cond.Fields)
+			}
 		}
 	}
 
@@ -271,8 +276,11 @@ func TestClient_Rule(t *testing.T) {
 	var testRuleSingleConditions []SingleCondition
 	for _, cond := range rule.Conditions {
 		if cond.Type == conditionType {
-			sc := cond.Fields.(SingleCondition)
-			testRuleSingleConditions = append(testRuleSingleConditions, sc)
+			if sc, ok := cond.Fields.(SingleCondition); ok {
+				testRuleSingleConditions = append(testRuleSingleConditions, sc)
+			} else {
+				t.Errorf("expected SingleCondition, got %T", cond.Fields)
+			}
 		}
 	}
 
@@ -285,8 +293,11 @@ func TestClient_Rule(t *testing.T) {
 	var testRuleGroupConditions []GroupCondition
 	for _, cond := range rule.Conditions {
 		if cond.Type == groupConditionType {
-			gc := cond.Fields.(GroupCondition)
-			testRuleGroupConditions = append(testRuleGroupConditions, gc)
+			if gc, ok := cond.Fields.(GroupCondition); ok {
+				testRuleGroupConditions = append(testRuleGroupConditions, gc)
+			} else {
+				t.Errorf("expected SingleCondition, got %T", cond.Fields)
+			}
 		}
 	}
 
@@ -449,10 +460,13 @@ func TestClient_Rule(t *testing.T) {
 
 	// Validate single conditions
 	var updatedSingleConditions []SingleCondition
-	for _, cond := range updatedRule.Conditions {
+	for _, cond := range rule.Conditions {
 		if cond.Type == conditionType {
-			sc := cond.Fields.(SingleCondition)
-			updatedSingleConditions = append(updatedSingleConditions, sc)
+			if sc, ok := cond.Fields.(SingleCondition); ok {
+				updatedSingleConditions = append(updatedSingleConditions, sc)
+			} else {
+				t.Errorf("expected SingleCondition, got %T", cond.Fields)
+			}
 		}
 	}
 
@@ -463,12 +477,16 @@ func TestClient_Rule(t *testing.T) {
 
 	// Validate group conditions
 	var updatedGroupConditions []GroupCondition
-	for _, cond := range updatedRule.Conditions {
+	for _, cond := range rule.Conditions {
 		if cond.Type == groupConditionType {
-			gc := cond.Fields.(GroupCondition)
-			updatedGroupConditions = append(updatedGroupConditions, gc)
+			if gc, ok := cond.Fields.(GroupCondition); ok {
+				updatedGroupConditions = append(updatedGroupConditions, gc)
+			} else {
+				t.Errorf("expected SingleCondition, got %T", cond.Fields)
+			}
 		}
 	}
+
 	assert.Len(updatedGroupConditions, 2)
 
 	// First group condition
