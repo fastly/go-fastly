@@ -91,7 +91,7 @@ type CreateOpenstackInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to OpenStack.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
@@ -198,7 +198,7 @@ type UpdateOpenstackInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to OpenStack.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`

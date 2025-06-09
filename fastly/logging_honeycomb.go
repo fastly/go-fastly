@@ -70,7 +70,7 @@ type CreateHoneycombInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to Honeycomb.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -159,7 +159,7 @@ type UpdateHoneycombInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to Honeycomb.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
