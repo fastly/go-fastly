@@ -7,9 +7,12 @@
 ### Breaking:
 
 ### Enhancements:
+
 - feat(ngwaf): add support for timeseries ([#689](https://github.com/fastly/go-fastly/pull/689))
+- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
 
 ### Bug fixes:
+
 - fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
 
 ### Dependencies:
@@ -19,6 +22,7 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v10.2.0...v10.3.0)
 
 ### Enhancements:
+
 - feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
 - feat(ngwaf): add support for the events portion of the ngwaf api ([#684](https://github.com/fastly/go-fastly/pull/684))
 - feat(ngwaf): adds CRUD operations for the redactions portion of the ngwaf API ([#685](https://github.com/fastly/go-fastly/pull/685))
@@ -166,7 +170,7 @@
 
 **Breaking:**
 
-Note that in spite of this *breaking* change, the major version number
+Note that in spite of this _breaking_ change, the major version number
 of the package was not incremented, as the feature which was removed
 did not work and no users of the package could have been relying on
 it.
@@ -1144,7 +1148,7 @@ There were a few breaking changes introduced in v3:
 - Add support for compression_codec to logging file sink endpoints [#235](https://github.com/fastly/go-fastly/pull/235)
 - Add support for Kinesis logging endpoint [#234](https://github.com/fastly/go-fastly/pull/234)
 - Add SASL fields support for Kafka Logging Endpoint [#226](https://github.com/fastly/go-fastly/pull/226)
-- Custom TLS API  [#225](https://github.com/fastly/go-fastly/pull/225)
+- Custom TLS API [#225](https://github.com/fastly/go-fastly/pull/225)
 
 **Closed issues:**
 
