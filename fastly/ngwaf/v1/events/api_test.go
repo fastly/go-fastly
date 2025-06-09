@@ -6,7 +6,6 @@ import (
 	"time"
 
 	"github.com/fastly/go-fastly/v10/fastly"
-	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/signals"
 )
 
 const (
@@ -36,7 +35,7 @@ func TestClient_GetEvent(t *testing.T) {
 		EventID:             TestEventID,
 		FlaggedRequestCount: 0,
 		IsExpired:           true,
-		Reasons: []signals.Reason{
+		Reasons: []Reason{
 			{
 				SignalID: "CMDEXE",
 				Count:    97,

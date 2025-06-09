@@ -4,7 +4,6 @@ import (
 	"time"
 
 	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/requests"
-	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/signals"
 )
 
 // Event is the API response structure for the get, list, and expire operations.
@@ -30,7 +29,7 @@ type Event struct {
 	// IsExpired if true, the event should be set to expired.
 	IsExpired bool `json:"is_expired"`
 	// Reasons is a list of signals and their counts.
-	Reasons []signals.Reason `json:"reasons"`
+	Reasons []Reason `json:"reasons"`
 	// RemoteHostname is the hostname of the event
 	RemoteHostname string `json:"remote_hostname"`
 	// RequestCount is the total numer of requests.
@@ -45,6 +44,14 @@ type Event struct {
 	UserAgents []string `json:"user_agents"`
 	// Window is the time in seconds where the items were detected.
 	Window int `json:"window"`
+}
+
+// Reason is the signal that corresponds to the reason an event was triggered.
+type Reason struct {
+	// Signal ID is the ID of the signal that triggered the event
+	SignalID string `json:"signal_id"`
+	// Count is the number of times this signal was detected
+	Count int `json:"count"`
 }
 
 // Events is the API response structure for the list events operation.
