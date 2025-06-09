@@ -10,6 +10,7 @@
 - feat(ngwaf): add support for timeseries ([#689](https://github.com/fastly/go-fastly/pull/689))
 
 ### Bug fixes:
+- fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
 
 ### Dependencies:
 
