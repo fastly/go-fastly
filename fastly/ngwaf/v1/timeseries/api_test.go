@@ -17,8 +17,8 @@ var (
 	// NOTE: Update this to a recent timestamp when regenerating the test fixtures,
 	// otherwise the data may be outside of retention and an error will be
 	// returned.
-	tsEnd   = time.Date(2025, 6, 6, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
-	tsStart = time.Date(2025, 6, 4, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
+	tsFrom = time.Date(2025, 6, 4, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
+	tsTo   = time.Date(2025, 6, 6, 0, 0, 0, 0, time.UTC).Format(time.RFC3339)
 
 	tsGranularity = 60
 )
@@ -32,10 +32,10 @@ func TestTime_Series(t *testing.T) {
 	// Get request timeseries metrics for given workspace
 	fastly.Record(t, "get_timeseries", func(c *fastly.Client) {
 		ts, err = Get(c, &GetInput{
-			End:         &tsEnd,
+			From:        &tsFrom,
 			Granularity: &tsGranularity,
-			Start:       &tsStart,
 			Metrics:     fastly.ToPointer(tsMetrics),
+			To:          &tsTo,
 			WorkspaceID: &testWorkspaceID,
 		})
 	})
@@ -50,7 +50,7 @@ func TestTime_Series(t *testing.T) {
 func TestClient_GetVirtualPatch_validation(t *testing.T) {
 	var err error
 	_, err = Get(fastly.TestClient, &GetInput{
-		Start:       nil,
+		From:        nil,
 		Metrics:     fastly.ToPointer(tsMetrics),
 		WorkspaceID: &testWorkspaceID,
 	})
@@ -59,7 +59,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 	}
 
 	_, err = Get(fastly.TestClient, &GetInput{
-		Start:       &tsStart,
+		From:        &tsFrom,
 		Metrics:     nil,
 		WorkspaceID: &testWorkspaceID,
 	})
@@ -67,7 +67,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingMetrics: got %s", err)
 
 		_, err = Get(fastly.TestClient, &GetInput{
-			Start:       &tsStart,
+			From:        &tsFrom,
 			Metrics:     fastly.ToPointer(tsMetrics),
 			WorkspaceID: nil,
 		})

@@ -14,14 +14,14 @@ import (
 type GetInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
-	// End is a time range and is the older of the two dates in RFC 3339 format (optional).
-	End *string
+	// From is a time range and is the older of the two dates in RFC 3339 format (required).
+	From *string
 	// Granularity is the sample size in seconds (optional).
 	Granularity *int
 	// Metrics are comma separated list of metrics to be included in the timeseries (required).
 	Metrics *string
-	// Start is a time range and is the older of the two dates in RFC 3339 format (required).
-	Start *string
+	// To is a time range and is the older of the two dates in RFC 3339 format (optional).
+	To *string
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
@@ -36,18 +36,18 @@ func Get(c *fastly.Client, i *GetInput) (*TimeSeries, error) {
 		return nil, fastly.ErrMissingMetrics
 	}
 
-	if i.Start == nil {
-		return nil, fastly.ErrMissingStart
+	if i.From == nil {
+		return nil, fastly.ErrMissingFrom
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "timeseries")
 
 	requestOptions := fastly.CreateRequestOptions(i.Context)
-	if i.Start != nil {
-		requestOptions.Params["start"] = *i.Start
+	if i.From != nil {
+		requestOptions.Params["from"] = *i.From
 	}
-	if i.End != nil {
-		requestOptions.Params["end"] = *i.End
+	if i.To != nil {
+		requestOptions.Params["to"] = *i.To
 	}
 	if i.Metrics != nil {
 		requestOptions.Params["metrics"] = *i.Metrics
