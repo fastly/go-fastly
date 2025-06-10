@@ -13,6 +13,7 @@
 - fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
 
 ### Dependencies:
+- build(deps): `golang.org/x/crypto` from 0.38.0 to 0.39.0 ([#693](https://github.com/fastly/go-fastly/pull/693))
 
 ## [v10.3.0](https://github.com/fastly/go-fastly/releases/tag/v10.3.0) (2025-06-04)
 
