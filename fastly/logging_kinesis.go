@@ -75,9 +75,9 @@ type CreateKinesisInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to Kinesis.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
-	// Region is a named set of AWS resources that's in the same geographical area.
+	// Region is the region where logs are received and stored by Kinesis.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -170,9 +170,9 @@ type UpdateKinesisInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to Kinesis.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
-	// Region is a named set of AWS resources that's in the same geographical area.
+	// Region is the region where logs are received and stored by Kinesis.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`

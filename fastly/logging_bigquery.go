@@ -78,7 +78,7 @@ type CreateBigQueryInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to BigQuery.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID.
 	ProjectID *string `url:"project_id,omitempty"`
@@ -177,7 +177,7 @@ type UpdateBigQueryInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to BigQuery.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ProjectID is your Google Cloud Platform project ID.
 	ProjectID *string `url:"project_id,omitempty"`

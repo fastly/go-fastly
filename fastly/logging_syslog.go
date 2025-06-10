@@ -87,7 +87,7 @@ type CreateSyslogInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to syslog.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -194,7 +194,7 @@ type UpdateSyslogInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
-	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	// ProcessingRegion is the region where logs will be processed before streaming to syslog.
 	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
