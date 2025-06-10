@@ -16,37 +16,37 @@ type Request struct {
 	Path string `json:"path"`
 	// Protocol is the HTTP protocol of the request.
 	Protocol string `json:"protocol"`
-	// Remote Hostname is the Remote hostname of the request.
+	// RemoteHostname is the Remote hostname of the request.
 	RemoteHostname string `json:"remote_hostname"`
-	// Remote IP Address is the remote IP address of the request.
+	// RemoteIPAddress is the remote IP address of the request.
 	RemoteIPAddress string `json:"remote_ip"`
-	// Request Headers are the request's headers.
+	// RequestHeaders are the request's headers.
 	RequestHeaders []Header `json:"request_headers"`
-	// Response Code is the response code of the request.
+	// ResponseCode is the response code of the request.
 	ResponseCode int `json:"response_code"`
-	// Response Headers are the response's headers.
+	// ResponseHeaders are the response's headers.
 	ResponseHeaders []Header `json:"response_headers"`
-	// Response size is the HTTP response size.
+	// ResponseSize is the HTTP response size.
 	ResponseSize int `json:"response_size"`
-	// Response time is the HTTP response time in milliseconds.
+	// ResponseTime is the HTTP response time in milliseconds.
 	ResponseTime int `json:"response_time"`
 	// Scheme is the request scheme.
 	Scheme string `json:"scheme"`
-	// Server hostname is the hostname of the server.
+	// ServerHostname is the hostname of the server.
 	ServerHostname string `json:"server_hostname"`
-	// Server name is the server name.
+	// ServerName is the server name.
 	ServerName string `json:"server_name"`
 	// Signals is the list of signals the request matched.
 	Signals []Signal `json:"signals"`
 	// Timestamp is the time when the request was made.
 	Timestamp time.Time `json:"timestamp"`
-	// TLS cipher is the TLS cipher of the request.
+	// TLSCipher is the TLS cipher of the request.
 	TLSCipher string `json:"tls_cipher"`
-	// TLS protocol is the TLS protocol of the request.
+	// TLSProtocol is the TLS protocol of the request.
 	TLSProtocol string `json:"tls_protocol"`
 	// URI is the request URI.
 	URI string `json:"uri"`
-	// User Agent is the request's user agent.
+	// UserAgent is the request's user agent.
 	UserAgent string `json:"user_agent"`
 }
 

@@ -18,14 +18,14 @@ type ListInput struct {
 	Limit *int
 	// Page is the page number of the collection to request (Default 0).
 	Page *int
-	// Q is a search query string. Please read the Search Syntax for help. Required.
+	// Query is a search query string. Please read the Search Syntax for help. Required.
 	// https://www.fastly.com/documentation/guides/next-gen-waf/reference/searching-for-requests/
 	Query *string
-	// Signal filters the list of events based on signal.
+	// WorkspaceID is the workspace identifier (UUID).
 	WorkspaceID *string
 }
 
-// Get retrieves the specified workspace.
+// List retrieves all requests in the specified workspace.
 func List(c *fastly.Client, i *ListInput) (*Requests, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
