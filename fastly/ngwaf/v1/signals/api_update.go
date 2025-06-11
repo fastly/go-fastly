@@ -21,7 +21,7 @@ type UpdateInput struct {
 	WorkspaceID *string `json:"-"`
 }
 
-// Update updates the specified workspace.
+// Update updates the specified signal.
 func Update(c *fastly.Client, i *UpdateInput) (*Signal, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

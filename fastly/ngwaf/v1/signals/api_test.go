@@ -146,39 +146,30 @@ func TestClient_CreateSignal_validation(t *testing.T) {
 	}
 }
 
-// func TestClient_UpdateSignal_validation(t *testing.T) {
-// 	var err error
-// 	_, err = Update(fastly.TestClient, &UpdateInput{
-// 		WorkspaceID: nil,
-// 	})
-// 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
-// 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
-// 	}
-// 	_, err = Update(fastly.TestClient, &UpdateInput{
-// 		SignalID: nil,
-// 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-// 	})
-// 	if !errors.Is(err, fastly.ErrMissingSignalID) {
-// 		t.Errorf("expected ErrMissingSignalID: got %s", err)
-// 	}
-// 	_, err = Update(fastly.TestClient, &UpdateInput{
-// 		SignalID: fastly.ToPointer("someID"),
-// 		Field:       nil,
-// 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-// 	})
-// 	if !errors.Is(err, fastly.ErrMissingField) {
-// 		t.Errorf("expected ErrMissingField: got %s", err)
-// 	}
-// 	_, err = Update(fastly.TestClient, &UpdateInput{
-// 		SignalID: fastly.ToPointer("someID"),
-// 		Field:       fastly.ToPointer("somefield"),
-// 		Type:        nil,
-// 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-// 	})
-// 	if !errors.Is(err, fastly.ErrMissingType) {
-// 		t.Errorf("expected ErrMissingType: got %s", err)
-// 	}
-// }
+func TestClient_UpdateSignal_validation(t *testing.T) {
+	var err error
+	_, err = Update(fastly.TestClient, &UpdateInput{
+		WorkspaceID: nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
+		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
+	}
+	_, err = Update(fastly.TestClient, &UpdateInput{
+		SignalID: nil,
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+	})
+	if !errors.Is(err, fastly.ErrMissingSignalID) {
+		t.Errorf("expected ErrMissingSignalID: got %s", err)
+	}
+	_, err = Update(fastly.TestClient, &UpdateInput{
+		Description: nil,
+		SignalID: fastly.ToPointer("someID"),
+		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
+	})
+	if !errors.Is(err, fastly.ErrMissingDescription) {
+		t.Errorf("expected ErrMissingField: got %s", err)
+	}
+}
 
 func TestClient_DeleteSignal_validation(t *testing.T) {
 	var err error
