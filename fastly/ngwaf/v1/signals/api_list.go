@@ -24,7 +24,7 @@ type ListInput struct {
 	WorkspaceID *string
 }
 
-// List retrieves a list of workspaces, with optional filtering and pagination.
+// List retrieves a list of signals for the given workspace, with optional filtering and pagination.
 func List(c *fastly.Client, i *ListInput) (*Signals, error) {
 	requestOptions := fastly.CreateRequestOptions(i.Context)
 	if i.Limit != nil {

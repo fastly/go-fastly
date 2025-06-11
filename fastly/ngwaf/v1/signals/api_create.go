@@ -21,7 +21,7 @@ type CreateInput struct {
 	WorkspaceID *string `json:"-"`
 }
 
-// Create creates a new workspace.
+// Create creates a new signal in the given workspace.
 func Create(c *fastly.Client, i *CreateInput) (*Signal, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

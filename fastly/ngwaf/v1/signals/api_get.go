@@ -19,7 +19,7 @@ type GetInput struct {
 	WorkspaceID *string
 }
 
-// Get retrieves the specified workspace.
+// Get retrieves the specified signal for the given workspace.
 func Get(c *fastly.Client, i *GetInput) (*Signal, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

@@ -18,7 +18,7 @@ type DeleteInput struct {
 	WorkspaceID *string
 }
 
-// Delete deletes the specified workspace.
+// Delete deletes the specified signal.
 func Delete(c *fastly.Client, i *DeleteInput) error {
 	if i.WorkspaceID == nil {
 		return fastly.ErrMissingWorkspaceID
