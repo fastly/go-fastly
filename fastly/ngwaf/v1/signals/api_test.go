@@ -155,7 +155,7 @@ func TestClient_UpdateSignal_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Update(fastly.TestClient, &UpdateInput{
-		SignalID: nil,
+		SignalID:    nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingSignalID) {
@@ -163,7 +163,7 @@ func TestClient_UpdateSignal_validation(t *testing.T) {
 	}
 	_, err = Update(fastly.TestClient, &UpdateInput{
 		Description: nil,
-		SignalID: fastly.ToPointer("someID"),
+		SignalID:    fastly.ToPointer("someID"),
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingDescription) {
