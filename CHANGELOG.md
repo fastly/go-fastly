@@ -9,6 +9,7 @@
 ### Enhancements:
 - feat(ngwaf): add support for requests ([#688](https://github.com/fastly/go-fastly/pull/688))
 - feat(ngwaf): add support for timeseries ([#689](https://github.com/fastly/go-fastly/pull/689))
+- feat(ngwaf): add support for signals ([#692](https://github.com/fastly/go-fastly/pull/692))
 
 ### Bug fixes:
 - fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
