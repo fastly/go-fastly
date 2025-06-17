@@ -30,6 +30,6 @@ jobs:
           changelogPath: './CHANGELOG.md'
           entryPrefix: 'build(deps): '
       - name: Commit changelog entry
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@v6
         with:
           commit_message: "docs(CHANGELOG.md): add dependency bump from dependabot"
