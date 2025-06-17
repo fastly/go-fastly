@@ -404,8 +404,12 @@ var ErrMissingIntegrationID = NewFieldError("IntegrationID")
 // requires one of the optional Image Optimizer default settings, but none are set.
 var ErrMissingImageOptimizerDefaultSetting = NewFieldError("ResizeFilter, Webp, WebpQuality, JpegType, JpegQuality, Upscale, AllowVideo").Message("at least one of the available optional fields is required")
 
+// ErrMissingThresholdID is an error that is returned when an input struct
+// requires a required "ThresholdID" key, but one was not set.
+var ErrMissingThresholdID = NewFieldError("Workspace Thresholds")
+
 // ErrMissingVirtualPatchID is an error that is returned when an input struct
-// requires a "VirtualPatchID" key, but one was not set.
+// requires a required "VirtualPatchID" key, but one was not set.
 var ErrMissingVirtualPatchID = NewFieldError("Virtual Patch")
 
 // Ensure HTTPError is, in fact, an error.

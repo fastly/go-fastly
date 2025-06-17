@@ -1,6 +1,6 @@
 package virtualpatches
 
-// VirtualPatch is the API response structure for the patch virtial patch operations.
+// VirtualPatch is the API response structure for the update virtial patch operations.
 type VirtualPatch struct {
 	// Description is the description of the workspace.
 	Description string `json:"description"`
