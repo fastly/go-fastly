@@ -2,20 +2,32 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.4.0...)
 
 ### Breaking:
+
+### Enhancements:
+
+- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v10.4.0](https://github.com/fastly/go-fastly/releases/tag/v10.4.0) (2025-06-20)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...v10.4.0)
 
 ### Enhancements:
 
 - feat(ngwaf): add support for requests ([#688](https://github.com/fastly/go-fastly/pull/688))
 - feat(ngwaf): add support for timeseries ([#689](https://github.com/fastly/go-fastly/pull/689))
 - feat(ngwaf): add support for signals ([#692](https://github.com/fastly/go-fastly/pull/692))
-- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
 
 ### Bug fixes:
 
 - fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
+- fix(observability_custom_dashboard): add json descriptor to update field ([#696](https://github.com/fastly/go-fastly/pull/696))
 
 ### Dependencies:
 
