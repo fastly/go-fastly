@@ -7,6 +7,7 @@
 ### Breaking:
 
 ### Enhancements:
+- feat(kv-store): add optional Name parameter to ListKVStoresInput ([#1417](https://github.com/fastly/go-fastly/pull/1417))
 
 - feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
 
