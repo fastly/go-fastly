@@ -116,6 +116,7 @@ var ErrMissingRedactionID = NewFieldError("RedactionID")
 // ErrMissingRuleID is an error that is returned when an input struct
 // requires a "RuleID" key, but one was not set.
 var ErrMissingRuleID = NewFieldError("RuleID")
+
 // ErrMissingSignalID is an error that is returned when an input struct
 // requires a "SignalID" key, but one was not set.
 var ErrMissingSignalID = NewFieldError("SignalID")
