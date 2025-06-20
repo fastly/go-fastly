@@ -11,6 +11,7 @@
 - feat(ngwaf): add support for requests ([#688](https://github.com/fastly/go-fastly/pull/688))
 - feat(ngwaf): add support for timeseries ([#689](https://github.com/fastly/go-fastly/pull/689))
 - feat(ngwaf): add support for signals ([#692](https://github.com/fastly/go-fastly/pull/692))
+- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
 
 ### Bug fixes:
 
@@ -173,7 +174,7 @@
 
 **Breaking:**
 
-Note that in spite of this _breaking_ change, the major version number
+Note that in spite of this *breaking* change, the major version number
 of the package was not incremented, as the feature which was removed
 did not work and no users of the package could have been relying on
 it.
@@ -1151,7 +1152,7 @@ There were a few breaking changes introduced in v3:
 - Add support for compression_codec to logging file sink endpoints [#235](https://github.com/fastly/go-fastly/pull/235)
 - Add support for Kinesis logging endpoint [#234](https://github.com/fastly/go-fastly/pull/234)
 - Add SASL fields support for Kafka Logging Endpoint [#226](https://github.com/fastly/go-fastly/pull/226)
-- Custom TLS API [#225](https://github.com/fastly/go-fastly/pull/225)
+- Custom TLS API  [#225](https://github.com/fastly/go-fastly/pull/225)
 
 **Closed issues:**
 
