@@ -8,14 +8,17 @@
 
 ### Enhancements:
 
+- feat(ngwaf): add support for requests ([#688](https://github.com/fastly/go-fastly/pull/688))
 - feat(ngwaf): add support for timeseries ([#689](https://github.com/fastly/go-fastly/pull/689))
-- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
+- feat(ngwaf): add support for signals ([#692](https://github.com/fastly/go-fastly/pull/692))
 
 ### Bug fixes:
 
 - fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
 
 ### Dependencies:
+
+- build(deps): `golang.org/x/crypto` from 0.38.0 to 0.39.0 ([#693](https://github.com/fastly/go-fastly/pull/693))
 
 ## [v10.3.0](https://github.com/fastly/go-fastly/releases/tag/v10.3.0) (2025-06-04)
 

@@ -2,7 +2,7 @@ package redactions
 
 import "time"
 
-// Workspace is the API response structure for the create, update, and get operations.
+// Redaction is the API response structure for the create, update, and get operations.
 type Redaction struct {
 	// CreatedAt is the date and time in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
@@ -14,7 +14,7 @@ type Redaction struct {
 	RedactionID string `json:"id"`
 }
 
-// WorkspRedactionsaces is the API response structure for the list Redactions operation.
+// Redactions is the API response structure for the list Redactions operation.
 type Redactions struct {
 	// Data is the list of returned redactions.
 	Data []Redaction `json:"data"`

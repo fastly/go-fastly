@@ -1,6 +1,10 @@
 package events
 
-import "time"
+import (
+	"time"
+
+	"github.com/fastly/go-fastly/v10/fastly/ngwaf/v1/requests"
+)
 
 // Event is the API response structure for the get, list, and expire operations.
 type Event struct {
@@ -31,7 +35,7 @@ type Event struct {
 	// RequestCount is the total numer of requests.
 	RequestCount int `json:"request_count"`
 	// SampleRequest is an example of a request that triggered the event.
-	SampleRequest map[string]any `json:"sample_request"`
+	SampleRequest requests.Request `json:"sample_request"`
 	// Source is the IP address of the source of the event.
 	Source string `json:"source"`
 	// Type is the type of event
@@ -42,7 +46,7 @@ type Event struct {
 	Window int `json:"window"`
 }
 
-// Reason is the reason an event was triggered.
+// Reason is the signal that corresponds to the reason an event was triggered.
 type Reason struct {
 	// Signal ID is the ID of the signal that triggered the event
 	SignalID string `json:"signal_id"`
