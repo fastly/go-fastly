@@ -13,6 +13,7 @@
 
 ### Bug fixes:
 - fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
+- fix(observability_custom_dashboard): add json descriptor to update field ([#696](https://github.com/fastly/go-fastly/pull/696))
 
 ### Dependencies:
 - build(deps): `golang.org/x/crypto` from 0.38.0 to 0.39.0 ([#693](https://github.com/fastly/go-fastly/pull/693))
