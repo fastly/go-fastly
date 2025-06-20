@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/rules/6847110cb1420e33e056e8fb
+    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/rules/68556feeda75eb73c25a8fcd
     method: DELETE
   response:
     body: ""
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 09 Jun 2025 16:51:26 GMT
+      - Fri, 20 Jun 2025 14:28:00 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100108-CHI, cache-mia-kmia1760050-MIA
+      - cache-chi-kigq8000064-CHI, cache-pdk-katl1840095-PDK
       X-Timer:
-      - S1749487886.075426,VS0,VE525
+      - S1750429680.134609,VS0,VE577
     status: 204 No Content
     code: 204
     duration: ""

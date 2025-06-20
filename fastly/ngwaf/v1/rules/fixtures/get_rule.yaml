@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/rules/6847110cb1420e33e056e8fb
+    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/rules/68556feeda75eb73c25a8fcd
     method: GET
   response:
     body: |
-      {"id":"6847110cb1420e33e056e8fb","type":"request","scope":{"type":"workspace","applies_to":["alk6DTsYKHKucJCOIavaJM"]},"enabled":true,"description":"test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"actions":[{"type":"block","response_code":301,"redirect_url":"https://test.com"}],"created_at":"2025-06-09T16:51:24Z","updated_at":"2025-06-09T16:51:24Z"}
+      {"id":"68556feeda75eb73c25a8fcd","type":"request","scope":{"type":"workspace","applies_to":["alk6DTsYKHKucJCOIavaJM"]},"enabled":true,"description":"test","group_operator":"all","request_logging":"sampled","conditions":[{"type":"single","field":"ip","operator":"equals","value":"127.0.0.1"},{"type":"single","field":"path","operator":"equals","value":"/login"},{"type":"single","field":"agent_name","operator":"equals","value":"host-001"},{"type":"group","group_operator":"all","conditions":[{"type":"single","field":"country","operator":"equals","value":"AD"},{"type":"single","field":"method","operator":"equals","value":"POST"}]},{"type":"group","group_operator":"any","conditions":[{"type":"single","field":"protocol_version","operator":"equals","value":"HTTP/1.0"},{"type":"single","field":"method","operator":"equals","value":"HEAD"},{"type":"single","field":"domain","operator":"equals","value":"example.com"}]}],"actions":[{"type":"block","response_code":301,"redirect_url":"https://test.com"}],"created_at":"2025-06-20T14:27:58Z","updated_at":"2025-06-20T14:27:58Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 09 Jun 2025 16:51:25 GMT
+      - Fri, 20 Jun 2025 14:27:59 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100108-CHI, cache-mia-kmia1760050-MIA
+      - cache-chi-kigq8000064-CHI, cache-pdk-katl1840095-PDK
       X-Timer:
-      - S1749487885.303597,VS0,VE122
+      - S1750429679.378698,VS0,VE95
     status: 200 OK
     code: 200
     duration: ""

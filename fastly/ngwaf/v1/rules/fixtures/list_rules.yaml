@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 09 Jun 2025 16:51:24 GMT
+      - Fri, 20 Jun 2025 14:27:58 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100060-CHI, cache-mia-kmia1760050-MIA
+      - cache-chi-klot8100060-CHI, cache-pdk-katl1840095-PDK
       X-Timer:
-      - S1749487884.392988,VS0,VE125
+      - S1750429679.588572,VS0,VE100
     status: 200 OK
     code: 200
     duration: ""
