@@ -284,8 +284,8 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 
 type UpdateObservabilityCustomDashboardInput struct {
 	// Context, if supplied, will be used as the Request's context.
-	Context     *context.Context
-	Description *string `json:"description,omitempty"`
+	Context     *context.Context `json:"-"`
+	Description *string          `json:"description,omitempty"`
 	// ID of the dashboard to fetch (required)
 	ID    *string          `json:"-"`
 	Items *[]DashboardItem `json:"items,omitempty"`
