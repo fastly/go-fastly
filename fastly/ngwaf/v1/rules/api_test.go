@@ -324,8 +324,8 @@ func TestClient_Rule(t *testing.T) {
 
 	// Updated Action
 	updatedActionType := "allow"
-	// updatedRedirectURL := "https://updated.com"
-	// updatedResponseCode := 302
+	updatedRedirectURL := ""
+	updatedResponseCode := 0
 
 	// Updated Single Conditions
 	updatedOperator1 := "does_not_equal"
@@ -369,8 +369,8 @@ func TestClient_Rule(t *testing.T) {
 			Actions: []*UpdateAction{
 				{
 					Type:         &updatedActionType,
-					// RedirectURL:  &updatedRedirectURL,
-					// ResponseCode: &updatedResponseCode,
+					RedirectURL:  &updatedRedirectURL,
+					ResponseCode: &updatedResponseCode,
 				},
 			},
 			Conditions: []*UpdateCondition{
@@ -453,8 +453,8 @@ func TestClient_Rule(t *testing.T) {
 	assert.Len(updatedRule.Actions, 1)
 	updatedAction := updatedRule.Actions[0]
 	assert.Equal(updatedActionType, updatedAction.Type)
-	// assert.Equal(updatedRedirectURL, updatedAction.RedirectURL)
-	// assert.Equal(updatedResponseCode, updatedAction.ResponseCode)
+	assert.Equal(updatedRedirectURL, updatedAction.RedirectURL)
+	assert.Equal(updatedResponseCode, updatedAction.ResponseCode)
 
 	assert.Len(updatedRule.Conditions, 5) // 3 single + 2 group top-level
 
