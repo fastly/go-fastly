@@ -2,9 +2,19 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.4.0...)
 
 ### Breaking:
+
+### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v10.4.0](https://github.com/fastly/go-fastly/releases/tag/v10.4.0) (2025-06-20)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...v10.4.0)
 
 ### Enhancements:
 - feat(ngwaf): add support for requests ([#688](https://github.com/fastly/go-fastly/pull/688))
