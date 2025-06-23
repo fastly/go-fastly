@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.4.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/lists
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"8zFOdiUgZIzRota2zVVl76","type":"string","reference_id":"site.list-name","name":"List Name","description":"This is an updated list","entries":["127.0.0.1"],"created_at":"2025-06-23T18:22:50Z","updated_at":"2025-06-23T18:22:50Z","scope":{"type":"workspace"}}],"meta":{"total":1}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "294"
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 23 Jun 2025 18:22:51 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100098-CHI, cache-nyc-kteb1890061-NYC
+      X-Timer:
+      - S1750702972.579513,VS0,VE103
+    status: 200 OK
+    code: 200
+    duration: ""
