@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/1ZxmBhEF6b3PCBXarHgpbF
+      - FastlyGo/10.4.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/tI3gQ2limlBvTNrEnEGOvG
     method: GET
   response:
     body: |
-      {"id":"1ZxmBhEF6b3PCBXarHgpbF","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":"hashed","created_at":"2025-05-15T14:04:52Z","updated_at":"2025-05-15T14:04:52.666Z"}
+      {"id":"tI3gQ2limlBvTNrEnEGOvG","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"created_at":"2025-06-23T19:45:51Z","updated_at":"2025-06-23T19:45:51.67Z"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "261"
+      - "421"
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 May 2025 14:04:53 GMT
+      - Mon, 23 Jun 2025 19:45:53 GMT
       Pragma:
       - no-cache
       Server:
@@ -32,15 +32,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-lga21974-LGA
+      - cache-chi-klot8100104-CHI, cache-mia-kmia1760084-MIA
       X-Timer:
-      - S1747317894.643902,VS0,VE93
+      - S1750707953.303590,VS0,VE125
     status: 200 OK
     code: 200
     duration: ""
