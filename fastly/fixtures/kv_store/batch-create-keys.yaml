@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/x-ndjson
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/batch
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/batch
     method: PUT
   response:
     body: '{"type":"","title":"success","errors":[]}'
@@ -25,7 +25,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 05 Mar 2025 16:46:13 GMT
+      - Mon, 23 Jun 2025 19:41:18 GMT
       Pragma:
       - no-cache
       Server:
@@ -39,9 +39,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193174.868660,VS0,VE118
+      - S1750707678.036046,VS0,VE135
     status: 200 OK
     code: 200
     duration: ""

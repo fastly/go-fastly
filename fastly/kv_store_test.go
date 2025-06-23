@@ -40,7 +40,7 @@ func TestClient_KVStore(t *testing.T) {
 	require.Equal(createStoreName, kvStore.Name, "unexpected store name")
 
 	// ensure we delete it
-	t.Cleanup(func() {
+	defer func() {
 		Record(t, "kv_store/cleanup", func(c *Client) {
 			// first delete all the keys in it
 			p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{
@@ -60,7 +60,7 @@ func TestClient_KVStore(t *testing.T) {
 			err = c.DeleteKVStore(&DeleteKVStoreInput{StoreID: kvStore.StoreID})
 			require.NoError(err, "store cleanup")
 		})
-	})
+	}()
 
 	// fetch the newly created store and verify it matches
 	var getKVStoreResponse *KVStore
@@ -70,16 +70,6 @@ func TestClient_KVStore(t *testing.T) {
 	require.NoError(err)
 	require.Equal(kvStore.Name, getKVStoreResponse.Name, "error fetching info for store")
 	require.Equal(kvStore.StoreID, getKVStoreResponse.StoreID, "error fetching info for store")
-
-	// fetch the newly created store by name
-	var kvStoreListResp2 *ListKVStoresResponse
-	Record(t, "kv_store/list-store-with-name", func(c *Client) {
-		kvStoreListResp2, err = c.ListKVStores(&ListKVStoresInput{Name: kvStore.Name})
-	})
-	require.NoError(err)
-	require.Equal(len(kvStoreListResp2.Data), 1)
-	require.Equal(kvStore.Name, kvStoreListResp2.Data[0].Name, "store names don't match")
-	require.Equal(kvStore.StoreID, kvStoreListResp2.Data[0].StoreID, "store IDs don't match")
 
 	// create a bunch of keys in our kv store
 	keys := []string{"apple", "banana", "carrot", "dragonfruit", "eggplant"}

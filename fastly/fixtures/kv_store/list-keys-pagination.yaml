@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys?consistency=strong&limit=4
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys?consistency=strong&limit=4
     method: GET
   response:
     body: '{"data":["apple","banana","batch-1","batch-2"],"meta":{"limit":4,"next_cursor":"CgdiYXRjaC0y"}}'
@@ -19,7 +19,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 05 Mar 2025 16:46:14 GMT
+      - Mon, 23 Jun 2025 19:41:18 GMT
       Pragma:
       - no-cache
       Server:
@@ -29,13 +29,13 @@ interactions:
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - PASS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890094-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740071-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193174.085427,VS0,VE83
+      - S1750707678.375300,VS0,VE98
     status: 200 OK
     code: 200
     duration: ""
@@ -44,8 +44,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys?consistency=strong&cursor=CgdiYXRjaC0y&limit=4
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys?consistency=strong&cursor=CgdiYXRjaC0y&limit=4
     method: GET
   response:
     body: '{"data":["carrot","dragonfruit","eggplant"],"meta":{"limit":4}}'
@@ -57,7 +57,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 05 Mar 2025 16:46:14 GMT
+      - Mon, 23 Jun 2025 19:41:18 GMT
       Pragma:
       - no-cache
       Server:
@@ -67,13 +67,13 @@ interactions:
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS
+      - PASS, MISS
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890068-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740053-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193174.174503,VS0,VE81
+      - S1750707678.494105,VS0,VE77
     status: 200 OK
     code: 200
     duration: ""
