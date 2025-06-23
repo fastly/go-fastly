@@ -9,6 +9,7 @@
 ### Enhancements:
 
 - feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
+- feat(ngwaf): add missing fields to workspaces ([#701](https://github.com/fastly/go-fastly/pull/701))
 
 ### Bug fixes:
 
