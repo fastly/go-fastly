@@ -6,8 +6,12 @@ import "time"
 type Workspace struct {
 	// AttackSignalThresholds are the parameters for system site alerts.
 	AttackSignalThresholds AttackSignalThresholds `json:"attack_signal_thresholds"`
+	// ClientIPHeaders lists the request headers containing the client IP address.
+	ClientIPHeaders []string `json:"client_ip_headers"`
 	// CreatedAt is the date and time in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
+	// DefaultBlockingResponseCode is the default response code.
+	DefaultBlockingResponseCode int `json:"default_blocking_response_code"`
 	// Description is the description of the workspace.
 	Description string `json:"description"`
 	// IPAnonymization is the selected option to anonymize IP addresses.
