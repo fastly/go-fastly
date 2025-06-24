@@ -10,6 +10,8 @@
 - feat(kv-store): add optional Name parameter to ListKVStoresInput ([#1417](https://github.com/fastly/go-fastly/pull/1417))
 
 - feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
+- feat(ngwaf): add missing fields to workspaces ([#701](https://github.com/fastly/go-fastly/pull/701))
+- feat(ngwaf): add support for lists ([#700](https://github.com/fastly/go-fastly/pull/700))
 
 ### Bug fixes:
 
@@ -187,7 +189,7 @@
 
 **Breaking:**
 
-Note that in spite of this *breaking* change, the major version number
+Note that in spite of this _breaking_ change, the major version number
 of the package was not incremented, as the feature which was removed
 did not work and no users of the package could have been relying on
 it.
@@ -1165,7 +1167,7 @@ There were a few breaking changes introduced in v3:
 - Add support for compression_codec to logging file sink endpoints [#235](https://github.com/fastly/go-fastly/pull/235)
 - Add support for Kinesis logging endpoint [#234](https://github.com/fastly/go-fastly/pull/234)
 - Add SASL fields support for Kafka Logging Endpoint [#226](https://github.com/fastly/go-fastly/pull/226)
-- Custom TLS API  [#225](https://github.com/fastly/go-fastly/pull/225)
+- Custom TLS API [#225](https://github.com/fastly/go-fastly/pull/225)
 
 **Closed issues:**
 

@@ -6,23 +6,21 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/10.4.0 (+github.com/fastly/go-fastly; go1.24.3)
     url: https://api.fastly.com/ngwaf/v1/workspaces
     method: GET
   response:
     body: |
-      {"data":[{"id":"6gzmZa1Qcil2kMOa41KBkY","name":"Fastly (TF testing) Workspace","description":"","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2024-11-01T19:00:29Z","updated_at":"2025-05-07T17:08:07.348Z"},{"id":"NpRmlxJi2MDHVXMTO6HUuv","name":"foo","description":"bar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-04T14:33:44Z","updated_at":"2025-05-05T17:27:01.861Z"},{"id":"alk6DTsYKHKucJCOIavaJM","name":"go-fastly testing workspace","description":"","mode":"off","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2024-11-27T14:51:17Z","updated_at":"2025-01-21T21:50:38.262Z"},{"id":"HOOtCTHWliNzu03maajU0K","name":"k_p_test","description":"foobar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-09T15:38:03Z","updated_at":"2025-05-09T15:39:49.583Z"},{"id":"t54VsHxiQANXaTzmbDM3Ip","name":"k_p_test","description":"foo","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-09T15:38:21Z","updated_at":"2025-05-09T15:40:20.545Z"}],"meta":{"limit":100,"total":5}}
+      {"data":[{"id":"6gzmZa1Qcil2kMOa41KBkY","name":"Fastly (TF testing) Workspace","description":"","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2024-11-01T19:00:29Z","updated_at":"2025-05-07T17:08:07.348Z"},{"id":"0tKzfmq6pE5fXMeBOuY7yV","name":"VP-Workspaces!","description":"Workspace test description","mode":"off","deployment_type":"edge","attack_signal_thresholds":{"one_minute":20},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-29T13:59:37Z","updated_at":"2025-06-17T13:50:08.777Z"},{"id":"N4cSWIpmDUcwxzfULxMaRR","name":"Workspace 2","description":"Workspace test description","mode":"off","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-29T13:56:11Z","updated_at":"2025-05-29T13:57:30.543Z"},{"id":"m1oHhLwHj7qZIgMkrBN6Xh","name":"Workspace 3","description":"Workspace test description","mode":"off","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-29T13:57:03Z","updated_at":"2025-05-29T13:59:15.027Z"},{"id":"s9fVc3ONFqiHiHQK8tCSDi","name":"Workspace 4","description":"Workspace test description","mode":"off","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-29T13:57:56Z","updated_at":"2025-05-29T13:58:39.233Z"},{"id":"2JiAy6Nb0mA6xOrVmQQT3E","name":"Workspace test name","description":"Workspace test description","mode":"off","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":"hashed","default_blocking_response_code":301,"default_redirect_url":"string","client_ip_headers":["string"],"created_at":"2025-05-29T13:54:35Z","updated_at":"2025-05-29T13:56:11.024Z"},{"id":"WI90k86caQU0u7frYeRgsP","name":"agomez-sigsci-test","description":"test WAF","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-27T13:39:53Z","updated_at":"2025-06-03T20:48:10.868Z"},{"id":"X7Oxo8D9dbeqfDgWRpu9k5","name":"boomboomboom","description":"rules testing","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":99,"ten_minutes":99,"one_hour":9,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-06-23T16:03:52Z","updated_at":"2025-06-23T16:04:29.828Z"},{"id":"D73mLelff7RAuduODxHZ2m","name":"boomschakalka","description":"rules testing","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":99,"ten_minutes":99,"one_hour":9,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-06-18T13:00:11Z","updated_at":"2025-06-18T13:01:01.206Z"},{"id":"OfoqfCwiKwfwByYEWaVqoI","name":"boooooooom","description":"rules testing","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":99,"ten_minutes":99,"one_hour":9,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["foo","bar"],"created_at":"2025-06-23T17:40:01Z","updated_at":"2025-06-23T17:41:19.428Z"},{"id":"NpRmlxJi2MDHVXMTO6HUuv","name":"foo","description":"bar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-04T14:33:44Z","updated_at":"2025-05-05T17:27:01.861Z"},{"id":"alk6DTsYKHKucJCOIavaJM","name":"go-fastly test workspace","description":"Test Workspace for go fastly(DO NOT DELETE)","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2024-11-27T14:51:17Z","updated_at":"2025-06-23T18:22:51.132Z"},{"id":"HOOtCTHWliNzu03maajU0K","name":"k_p_test","description":"foobar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-09T15:38:03Z","updated_at":"2025-05-09T15:39:49.583Z"},{"id":"t54VsHxiQANXaTzmbDM3Ip","name":"k_p_test","description":"foo","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-09T15:38:21Z","updated_at":"2025-05-09T15:40:20.545Z"},{"id":"q9aIJuksfupjCP8b63dvnW","name":"mambojambo","description":"rules testing","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-06-18T15:20:35Z","updated_at":"2025-06-23T15:43:57.916Z"},{"id":"ViktzQHiPKBprdBRodA5X6","name":"miau","description":"rules testing","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":99,"ten_minutes":99,"one_hour":9,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":404,"client_ip_headers":["foo","bar"],"created_at":"2025-06-23T18:20:26Z","updated_at":"2025-06-23T18:22:03.078Z"},{"id":"APXvbNgs5ZIs2ZcRaRs7mu","name":"pr_review_test","description":"foobar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-28T20:26:26Z","updated_at":"2025-05-28T20:27:01.864Z"},{"id":"0XiyrjqwAbO4lswQIeAZNT","name":"ps_local_test","description":"foobar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-20T01:00:48Z","updated_at":"2025-05-28T16:43:41.864Z"},{"id":"yh6bwSvykOJTgEqbFRwZ81","name":"ps_rules_testing","description":"rules testing","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":100,"ten_minutes":100,"one_hour":10,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-05-31T17:35:52Z","updated_at":"2025-06-23T15:46:14.837Z"}],"meta":{"limit":100,"total":19}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "1264"
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 May 2025 14:04:52 GMT
+      - Mon, 23 Jun 2025 19:45:51 GMT
       Pragma:
       - no-cache
       Server:
@@ -32,15 +30,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-lga21974-LGA
+      - cache-chi-kigq8000105-CHI, cache-mia-kmia1760084-MIA
       X-Timer:
-      - S1747317892.781226,VS0,VE352
+      - S1750707951.783439,VS0,VE334
     status: 200 OK
     code: 200
     duration: ""

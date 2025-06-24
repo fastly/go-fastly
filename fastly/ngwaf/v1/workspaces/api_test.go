@@ -14,12 +14,15 @@ func TestClient_Workspace(t *testing.T) {
 	const wsDescription = "test-description"
 	const wsMode = "log"
 	const wsIPAnonymization = "hashed"
+	const wsDefaultBlockingResponseCode = 406
 
 	wsAttackSignalThresholds := new(AttackSignalThresholdsCreateInput)
 	wsAttackSignalThresholds.OneMinute = fastly.ToPointer(10000)
 	wsAttackSignalThresholds.TenMinutes = fastly.ToPointer(10000)
 	wsAttackSignalThresholds.OneHour = fastly.ToPointer(10000)
 	wsAttackSignalThresholds.Immediate = fastly.ToPointer(true)
+
+	wsClientIPHeaders := []string{"X-Forwarded-For", "X-Real-IP"}
 
 	var wss *Workspaces
 	var err error
@@ -48,6 +51,7 @@ func TestClient_Workspace(t *testing.T) {
 			Mode:                   fastly.ToPointer(wsMode),
 			IPAnonymization:        fastly.ToPointer(wsIPAnonymization),
 			AttackSignalThresholds: wsAttackSignalThresholds,
+			ClientIPHeaders:        wsClientIPHeaders,
 		})
 	})
 	if err != nil {
@@ -65,19 +69,28 @@ func TestClient_Workspace(t *testing.T) {
 	if ws.IPAnonymization != wsIPAnonymization {
 		t.Errorf("unexpected workspace IP anonymization: got %q, expected %q", ws.IPAnonymization, wsIPAnonymization)
 	}
-	// TODO: Update the following assertions for the AttackSignalThresholds settings once CDTOOL-1072 has been resolved and deployed.
-	// Note: At present, the API does not honor the AttackSignalThresholds settings when making a POST request to /ngwaf/v1/workspaces.
-	if ws.AttackSignalThresholds.Immediate != false {
+	if ws.AttackSignalThresholds.Immediate != true {
 		t.Errorf("unexpected workspace attack signal thresholds immediate parameter: got %t, expected %t", ws.AttackSignalThresholds.Immediate, *wsAttackSignalThresholds.Immediate)
 	}
-	if ws.AttackSignalThresholds.OneMinute != 0 {
+	if ws.AttackSignalThresholds.OneMinute != 10000 {
 		t.Errorf("unexpected workspace attack signal thresholds one_minute parameter: got %v, expected %v", ws.AttackSignalThresholds.OneMinute, *wsAttackSignalThresholds.OneMinute)
 	}
-	if ws.AttackSignalThresholds.TenMinutes != 0 {
+	if ws.AttackSignalThresholds.TenMinutes != 10000 {
 		t.Errorf("unexpected workspace attack signal thresholds ten_minutes parameter: got %v, expected %v", ws.AttackSignalThresholds.TenMinutes, *wsAttackSignalThresholds.TenMinutes)
 	}
-	if ws.AttackSignalThresholds.OneHour != 0 {
+	if ws.AttackSignalThresholds.OneHour != 10000 {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", ws.AttackSignalThresholds.OneHour, *wsAttackSignalThresholds.OneHour)
+	}
+	if len(ws.ClientIPHeaders) != len(wsClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(ws.ClientIPHeaders), len(wsClientIPHeaders))
+	}
+	for i, v := range ws.ClientIPHeaders {
+		if v != wsClientIPHeaders[i] {
+			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, wsClientIPHeaders[i])
+		}
+	}
+	if ws.DefaultBlockingResponseCode != wsDefaultBlockingResponseCode {
+		t.Errorf("unexpected default blocking response code: got %d, expected %d", ws.DefaultBlockingResponseCode, wsDefaultBlockingResponseCode)
 	}
 
 	// Ensure we delete the test workspace at the end.
@@ -126,12 +139,24 @@ func TestClient_Workspace(t *testing.T) {
 	if gws.AttackSignalThresholds.OneHour != ws.AttackSignalThresholds.OneHour {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", gws.AttackSignalThresholds.OneHour, ws.AttackSignalThresholds.OneHour)
 	}
+	if len(gws.ClientIPHeaders) != len(ws.ClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(gws.ClientIPHeaders), len(ws.ClientIPHeaders))
+	}
+	for i, v := range gws.ClientIPHeaders {
+		if v != ws.ClientIPHeaders[i] {
+			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, ws.ClientIPHeaders[i])
+		}
+	}
+	if gws.DefaultBlockingResponseCode != ws.DefaultBlockingResponseCode {
+		t.Errorf("unexpected default blocking response code: got %d, expected %d", gws.DefaultBlockingResponseCode, ws.DefaultBlockingResponseCode)
+	}
 
 	// Update the test workspace.
 	const uwsName = "test-workspace"
 	const uwsDescription = "test-description"
 	const uwsMode = "log"
 	const uwsIPAnonymization = "hashed"
+	const uwsDefaultBlockingResponseCode = 429
 
 	uwsAttackSignalThresholds := new(AttackSignalThresholdsUpdateInput)
 	uwsAttackSignalThresholds.OneMinute = fastly.ToPointer(5000)
@@ -139,15 +164,19 @@ func TestClient_Workspace(t *testing.T) {
 	uwsAttackSignalThresholds.OneHour = fastly.ToPointer(5000)
 	uwsAttackSignalThresholds.Immediate = fastly.ToPointer(false)
 
+	uwsClientIPHeaders := []string{"X-Forwarded-For"}
+
 	var uws *Workspace
 	fastly.Record(t, "update_workspace", func(c *fastly.Client) {
 		uws, err = Update(c, &UpdateInput{
-			WorkspaceID:            fastly.ToPointer(ws.WorkspaceID),
-			Name:                   fastly.ToPointer(uwsName),
-			Description:            fastly.ToPointer(uwsDescription),
-			Mode:                   fastly.ToPointer(uwsMode),
-			IPAnonymization:        fastly.ToPointer(uwsIPAnonymization),
-			AttackSignalThresholds: uwsAttackSignalThresholds,
+			WorkspaceID:                 fastly.ToPointer(ws.WorkspaceID),
+			Name:                        fastly.ToPointer(uwsName),
+			Description:                 fastly.ToPointer(uwsDescription),
+			Mode:                        fastly.ToPointer(uwsMode),
+			IPAnonymization:             fastly.ToPointer(uwsIPAnonymization),
+			AttackSignalThresholds:      uwsAttackSignalThresholds,
+			DefaultBlockingResponseCode: fastly.ToPointer(uwsDefaultBlockingResponseCode),
+			ClientIPHeaders:             uwsClientIPHeaders,
 		})
 	})
 	if err != nil {
@@ -176,6 +205,17 @@ func TestClient_Workspace(t *testing.T) {
 	}
 	if uws.AttackSignalThresholds.OneHour != *uwsAttackSignalThresholds.OneHour {
 		t.Errorf("unexpected workspace attack signal thresholds one_hour parameter: got %v, expected %v", uws.AttackSignalThresholds.OneHour, *uwsAttackSignalThresholds.OneHour)
+	}
+	if len(uws.ClientIPHeaders) != len(uwsClientIPHeaders) {
+		t.Errorf("unexpected client_ip_headers length: got %d, expected %d", len(uws.ClientIPHeaders), len(uwsClientIPHeaders))
+	}
+	for i, v := range uws.ClientIPHeaders {
+		if v != uwsClientIPHeaders[i] {
+			t.Errorf("unexpected client_ip_headers[%d]: got %q, expected %q", i, v, uwsClientIPHeaders[i])
+		}
+	}
+	if uws.DefaultBlockingResponseCode != uwsDefaultBlockingResponseCode {
+		t.Errorf("unexpected default blocking response code: got %d, expected %d", uws.DefaultBlockingResponseCode, uwsDefaultBlockingResponseCode)
 	}
 }
 
