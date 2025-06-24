@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys?consistency=eventual
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys?consistency=eventual
     method: GET
   response:
     body: '{"data":["apple","banana","batch-1","batch-2","carrot","dragonfruit","eggplant"],"meta":{"limit":1000,"consistency":"eventual"}}'
@@ -15,13 +15,13 @@ interactions:
       Accept-Ranges:
       - bytes
       Age:
-      - "1"
+      - "2"
       Cache-Control:
       - no-store
       Content-Type:
       - application/json
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890041-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740039-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193175.248634,VS0,VE85
+      - S1750707680.020784,VS0,VE83
     status: 200 OK
     code: 200
     duration: ""
@@ -46,8 +46,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/apple
     method: DELETE
   response:
     body: ""
@@ -57,7 +57,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -71,9 +71,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193175.337560,VS0,VE105
+      - S1750707680.143287,VS0,VE100
     status: 204 No Content
     code: 204
     duration: ""
@@ -82,8 +82,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/banana
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/banana
     method: DELETE
   response:
     body: ""
@@ -93,7 +93,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -107,9 +107,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193175.448825,VS0,VE98
+      - S1750707680.290305,VS0,VE93
     status: 204 No Content
     code: 204
     duration: ""
@@ -118,8 +118,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/batch-1
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/batch-1
     method: DELETE
   response:
     body: ""
@@ -129,7 +129,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -143,9 +143,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193176.554620,VS0,VE90
+      - S1750707680.415770,VS0,VE97
     status: 204 No Content
     code: 204
     duration: ""
@@ -154,8 +154,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/batch-2
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/batch-2
     method: DELETE
   response:
     body: ""
@@ -165,7 +165,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -179,9 +179,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193176.653484,VS0,VE97
+      - S1750707681.548614,VS0,VE111
     status: 204 No Content
     code: 204
     duration: ""
@@ -190,8 +190,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/carrot
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/carrot
     method: DELETE
   response:
     body: ""
@@ -201,7 +201,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -215,9 +215,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193176.753701,VS0,VE98
+      - S1750707681.691972,VS0,VE96
     status: 204 No Content
     code: 204
     duration: ""
@@ -226,8 +226,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/dragonfruit
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/dragonfruit
     method: DELETE
   response:
     body: ""
@@ -237,7 +237,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:20 GMT
       Pragma:
       - no-cache
       Server:
@@ -251,9 +251,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193176.859193,VS0,VE104
+      - S1750707681.809365,VS0,VE99
     status: 204 No Content
     code: 204
     duration: ""
@@ -262,8 +262,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/eggplant
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/eggplant
     method: DELETE
   response:
     body: ""
@@ -273,7 +273,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:16 GMT
+      - Mon, 23 Jun 2025 19:41:21 GMT
       Pragma:
       - no-cache
       Server:
@@ -287,9 +287,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193176.970717,VS0,VE90
+      - S1750707681.947947,VS0,VE96
     status: 204 No Content
     code: 204
     duration: ""
@@ -298,8 +298,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9
     method: DELETE
   response:
     body: ""
@@ -309,7 +309,7 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Wed, 05 Mar 2025 16:46:16 GMT
+      - Mon, 23 Jun 2025 19:41:21 GMT
       Pragma:
       - no-cache
       Server:
@@ -323,9 +323,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193176.065076,VS0,VE195
+      - S1750707681.067548,VS0,VE191
     status: 204 No Content
     code: 204
     duration: ""

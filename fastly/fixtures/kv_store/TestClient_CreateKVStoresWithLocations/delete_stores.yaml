@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/resources/stores/kv/by19id44okrxf9ui4nr93j
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/f2d218va6ej3q4h8hl8o11
     method: DELETE
   response:
     body: ""
@@ -17,9 +17,11 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Tue, 16 Apr 2024 14:10:18 GMT
+      - Mon, 23 Jun 2025 19:41:10 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -29,9 +31,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276618.697733,VS0,VE1138
+      - S1750707671.692275,VS0,VE218
     status: 204 No Content
     code: 204
     duration: ""
@@ -40,8 +42,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/resources/stores/kv/kkowf43t9yqupo6r7kh0cs
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/x2by6k4r9xjh9pcvy7dcgk
     method: DELETE
   response:
     body: ""
@@ -51,9 +53,11 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Tue, 16 Apr 2024 14:10:20 GMT
+      - Mon, 23 Jun 2025 19:41:11 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -63,9 +67,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276619.847370,VS0,VE1528
+      - S1750707671.965099,VS0,VE246
     status: 204 No Content
     code: 204
     duration: ""
@@ -74,8 +78,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/resources/stores/kv/afd1ypidt5tyh4e6ammjn8
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/fbqzbegmluwx4jdg4z6ntd
     method: DELETE
   response:
     body: ""
@@ -85,9 +89,11 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Tue, 16 Apr 2024 14:10:20 GMT
+      - Mon, 23 Jun 2025 19:41:12 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -97,9 +103,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276620.387394,VS0,VE480
+      - S1750707671.236949,VS0,VE1405
     status: 204 No Content
     code: 204
     duration: ""
@@ -108,8 +114,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
-    url: https://api.fastly.com/resources/stores/kv/r2an4zjgv6vm7o14aqm4qt
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/evzdapufg1m95noqo7i45p
     method: DELETE
   response:
     body: ""
@@ -119,9 +125,11 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Tue, 16 Apr 2024 14:10:22 GMT
+      - Mon, 23 Jun 2025 19:41:14 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -131,9 +139,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276621.969488,VS0,VE1111
+      - S1750707673.663682,VS0,VE1747
     status: 204 No Content
     code: 204
     duration: ""

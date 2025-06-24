@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/apple
     method: PUT
   response:
     body: ""
@@ -19,7 +19,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Wed, 05 Mar 2025 16:46:12 GMT
+      - Mon, 23 Jun 2025 19:41:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -33,9 +33,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193173.721879,VS0,VE104
+      - S1750707676.251785,VS0,VE139
     status: 200 OK
     code: 200
     duration: ""
@@ -44,8 +44,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/banana
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/banana
     method: PUT
   response:
     body: ""
@@ -57,7 +57,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Wed, 05 Mar 2025 16:46:12 GMT
+      - Mon, 23 Jun 2025 19:41:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -71,9 +71,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193173.833077,VS0,VE105
+      - S1750707677.517938,VS0,VE121
     status: 200 OK
     code: 200
     duration: ""
@@ -82,8 +82,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/carrot
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/carrot
     method: PUT
   response:
     body: ""
@@ -95,7 +95,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Wed, 05 Mar 2025 16:46:13 GMT
+      - Mon, 23 Jun 2025 19:41:16 GMT
       Pragma:
       - no-cache
       Server:
@@ -109,9 +109,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193173.944552,VS0,VE102
+      - S1750707677.787868,VS0,VE160
     status: 200 OK
     code: 200
     duration: ""
@@ -120,8 +120,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/dragonfruit
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/dragonfruit
     method: PUT
   response:
     body: ""
@@ -133,7 +133,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Wed, 05 Mar 2025 16:46:13 GMT
+      - Mon, 23 Jun 2025 19:41:17 GMT
       Pragma:
       - no-cache
       Server:
@@ -147,9 +147,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193173.050208,VS0,VE99
+      - S1750707677.985550,VS0,VE121
     status: 200 OK
     code: 200
     duration: ""
@@ -158,8 +158,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/eggplant
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/eggplant
     method: PUT
   response:
     body: ""
@@ -171,7 +171,7 @@ interactions:
       Content-Length:
       - "0"
       Date:
-      - Wed, 05 Mar 2025 16:46:13 GMT
+      - Mon, 23 Jun 2025 19:41:17 GMT
       Pragma:
       - no-cache
       Server:
@@ -185,9 +185,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193173.155969,VS0,VE115
+      - S1750707677.154332,VS0,VE111
     status: 200 OK
     code: 200
     duration: ""

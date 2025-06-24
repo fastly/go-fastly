@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/resources/stores/kv?location=US
     method: POST
   response:
-    body: '{"id":"by19id44okrxf9ui4nr93j","name":"TestClient_CreateKVStoresWithLocations_US","created_at":"2024-04-16
-      14:10:02","updated_at":"2024-04-16 14:10:02"}'
+    body: '{"id":"f2d218va6ej3q4h8hl8o11","name":"TestClient_CreateKVStoresWithLocations_US","created_at":"2025-06-23
+      19:40:58","updated_at":"2025-06-23 19:40:58"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -24,9 +24,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Apr 2024 14:10:03 GMT
+      - Mon, 23 Jun 2025 19:40:59 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -36,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276598.002687,VS0,VE5008
+      - S1750707658.591214,VS0,VE1981
     status: 201 Created
     code: 201
     duration: ""
@@ -51,12 +53,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/resources/stores/kv?location=EU
     method: POST
   response:
-    body: '{"id":"kkowf43t9yqupo6r7kh0cs","name":"TestClient_CreateKVStoresWithLocations_EU","created_at":"2024-04-16
-      14:10:08","updated_at":"2024-04-16 14:10:08"}'
+    body: '{"id":"x2by6k4r9xjh9pcvy7dcgk","name":"TestClient_CreateKVStoresWithLocations_EU","created_at":"2025-06-23
+      19:41:02","updated_at":"2025-06-23 19:41:02"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,9 +67,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Apr 2024 14:10:09 GMT
+      - Mon, 23 Jun 2025 19:41:02 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -77,9 +81,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276603.026026,VS0,VE6079
+      - S1750707660.597185,VS0,VE2761
     status: 201 Created
     code: 201
     duration: ""
@@ -92,12 +96,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/resources/stores/kv?location=ASIA
     method: POST
   response:
-    body: '{"id":"afd1ypidt5tyh4e6ammjn8","name":"TestClient_CreateKVStoresWithLocations_ASIA","created_at":"2024-04-16
-      14:10:12","updated_at":"2024-04-16 14:10:12"}'
+    body: '{"id":"fbqzbegmluwx4jdg4z6ntd","name":"TestClient_CreateKVStoresWithLocations_ASIA","created_at":"2025-06-23
+      19:41:06","updated_at":"2025-06-23 19:41:06"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -106,9 +110,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Apr 2024 14:10:12 GMT
+      - Mon, 23 Jun 2025 19:41:06 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -118,9 +124,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276609.114936,VS0,VE3619
+      - S1750707662.391489,VS0,VE3996
     status: 201 Created
     code: 201
     duration: ""
@@ -133,12 +139,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/resources/stores/kv?location=AUS
     method: POST
   response:
-    body: '{"id":"r2an4zjgv6vm7o14aqm4qt","name":"TestClient_CreateKVStoresWithLocations_AUS","created_at":"2024-04-16
-      14:10:17","updated_at":"2024-04-16 14:10:17"}'
+    body: '{"id":"evzdapufg1m95noqo7i45p","name":"TestClient_CreateKVStoresWithLocations_AUS","created_at":"2025-06-23
+      19:41:10","updated_at":"2025-06-23 19:41:10"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -147,9 +153,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Tue, 16 Apr 2024 14:10:17 GMT
+      - Mon, 23 Jun 2025 19:41:10 GMT
       Pragma:
       - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -159,9 +167,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-nrt-rjtf7700035-NRT, cache-nrt-rjtf7700035-NRT
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1713276613.743388,VS0,VE4917
+      - S1750707666.413487,VS0,VE4125
     status: 201 Created
     code: 201
     duration: ""

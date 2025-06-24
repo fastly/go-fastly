@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
-    url: https://api.fastly.com/resources/stores/kv/g8wfs2hiqenfzg1l9ibtdh/keys/apple
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/apple
     method: GET
   response:
     body: prefixapple0suffix
@@ -21,22 +21,17 @@ interactions:
       Content-Type:
       - application/octet-stream
       Date:
-      - Wed, 05 Mar 2025 16:46:15 GMT
+      - Mon, 23 Jun 2025 19:41:19 GMT
       Generation:
-      - "1741193174927101"
+      - "1750707679477773"
       Last-Modified:
-      - Wed, 05 Mar 2025 16:46:14 GMT
+      - Mon, 23 Jun 2025 19:41:19 GMT
       Metadata:
       - ""
       Pragma:
       - no-cache
       Server:
       - fastly
-      Server-Timing-Get-Key:
-      - transaction_lookup_ok;dur=1206, lookup_handle_status_status_fetch;dur=14,
-        backend_request;dur=100072, res_ok;dur=3, finish_write;dur=3157, cache_handle_status_USABLE;dur=2483,
-        handle_usable;dur=3, lookup_handle_get_body;dur=164, user_metadata_json;dur=47,
-        total;dur=107
       Stored-Content-Length:
       - "18"
       Strict-Transport-Security:
@@ -48,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-nyc-kteb1890078-NYC, cache-nyc-kteb1890078-NYC
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1741193175.970225,VS0,VE112
+      - S1750707680.548439,VS0,VE244
     status: 200 OK
     code: 200
     duration: ""
