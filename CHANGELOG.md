@@ -2,20 +2,26 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.4.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.0...)
 
 ### Breaking:
 
 ### Enhancements:
-- feat(kv-store): add optional Name parameter to ListKVStoresInput ([#1417](https://github.com/fastly/go-fastly/pull/1417))
-
-- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
-- feat(ngwaf): add missing fields to workspaces ([#701](https://github.com/fastly/go-fastly/pull/701))
-- feat(ngwaf): add support for lists ([#700](https://github.com/fastly/go-fastly/pull/700))
 
 ### Bug fixes:
 
 ### Dependencies:
+
+## [v10.5.0](https://github.com/fastly/go-fastly/releases/tag/v10.5.0) (2025-06-24)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.4.0...v10.5.0)
+
+### Enhancements:
+
+- feat(kv-store): add optional Name parameter to ListKVStoresInput ([#699](https://github.com/fastly/go-fastly/pull/699))
+- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
+- feat(ngwaf): add missing fields to workspaces ([#701](https://github.com/fastly/go-fastly/pull/701))
+- feat(ngwaf): add support for lists ([#700](https://github.com/fastly/go-fastly/pull/700))
 
 ## [v10.4.0](https://github.com/fastly/go-fastly/releases/tag/v10.4.0) (2025-06-20)
 
