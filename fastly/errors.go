@@ -105,6 +105,14 @@ var ErrMissingComputeACLIP = NewFieldError("ComputeACLIP")
 // requires a "WorkspaceID" key, but one was not set.
 var ErrMissingWorkspaceID = NewFieldError("WorkspaceID")
 
+// ErrMissingListID is an error that is returned when an input struct
+// requires a "ListID" key, but one was not set.
+var ErrMissingListID = NewFieldError("ListID")
+
+// ErrMissingEntries is an error that is returned when an input struct
+// requires a "Entries" key, but one was not set.
+var ErrMissingEntries = NewFieldError("Entries")
+
 // ErrMissingIsExpired is an error that is returned when an input struct
 // requires an "IsExpired" key, but one was not set.
 var ErrMissingIsExpired = NewFieldError("IsExpired")

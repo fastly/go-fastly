@@ -9,6 +9,7 @@
 ### Enhancements:
 
 - feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
+- feat(ngwaf): add support for lists ([#700](https://github.com/fastly/go-fastly/pull/700))
 
 ### Bug fixes:
 
