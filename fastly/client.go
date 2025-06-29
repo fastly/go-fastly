@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"mime/multipart"
@@ -342,7 +343,7 @@ func (c *Client) Request(verb, p string, ro RequestOptions) (*http.Response, err
 		// be rewound
 
 		r.Header.Del(APIKeyHeader)
-		dump, _ := httputil.DumpRequest(r, true)
+		dump, _ := httputil.DumpRequestOut(r, true)
 
 		// httputil.DumpRequest has read the Body from 'r',
 		// and set r.Body to an io.ReadCloser that will return
@@ -359,8 +360,20 @@ func (c *Client) Request(verb, p string, ro RequestOptions) (*http.Response, err
 	resp, err := checkResp(c.HTTPClient.Do(req))
 
 	if c.DebugMode && resp != nil {
-		dump, _ := httputil.DumpResponse(resp, true)
-		fmt.Printf("http.Response (dump): %q\n", dump)
+		if err != nil {
+			var httpErr *HTTPError
+			if errors.As(err, &httpErr) {
+				fmt.Printf("http.Response (HTTPError): %s\n", httpErr.String())
+			} else {
+				fmt.Printf("http.Response (error): %s\n", err)
+			}
+		} else {
+			dump, dumpErr := httputil.DumpResponse(resp, true)
+			if dumpErr != nil {
+				fmt.Printf("http.Response dump error: %v\n", dumpErr)
+			}
+			fmt.Printf("http.Response (length, dump): %d - %q\n\n", resp.ContentLength, dump)
+		}
 	}
 
 	if err != nil {

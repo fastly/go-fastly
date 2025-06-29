@@ -528,7 +528,7 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		} else if lerr != nil {
 			// This is for better handling the KV Store Bulk Insert endpoint.
 			// https://developer.fastly.com/reference/api/services/resources/kv-store-item/#batch-create-keys
-			if lerr.Errors != nil {
+			if len(lerr.Errors) != 0 {
 				for _, le := range lerr.Errors {
 					var (
 						code, detail string
