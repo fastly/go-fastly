@@ -7,7 +7,7 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/requests?limit=100&q=from%3A-2d
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/requests?limit=100&q=from%3A-2d
     method: GET
   response:
     body: |

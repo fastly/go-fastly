@@ -14,7 +14,7 @@ type CreateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Description is the description of the list.
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// Entries are the entries of the list (required).
 	Entries *[]string `json:"entries"`
 	// Name is the name of the list (required).

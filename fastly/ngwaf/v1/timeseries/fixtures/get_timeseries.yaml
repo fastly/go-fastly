@@ -8,8 +8,8 @@ interactions:
       Accept:
       - application/json
       User-Agent:
-      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/timeseries?end=2025-06-06T00%3A00%3A00Z&granularity=60&metrics=XSS%2CSQLI%2CHTTP404&start=2025-06-04T00%3A00%3A00Z
+      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/timeseries?end=2025-06-06T00%3A00%3A00Z&granularity=60&metrics=XSS%2CSQLI%2CHTTP404&start=2025-06-04T00%3A00%3A00Z
     method: GET
   response:
     body: |
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 05 Jun 2025 20:43:07 GMT
+      - Sun, 29 Jun 2025 15:20:03 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000028-CHI, cache-ewr-kewr1740058-EWR
+      - cache-chi-klot8100079-CHI, cache-nyc-kteb1890053-NYC
       X-Timer:
-      - S1749156187.855063,VS0,VE191
+      - S1751210403.902432,VS0,VE345
     status: 200 OK
     code: 200
     duration: ""

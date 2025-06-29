@@ -14,7 +14,7 @@ type CreateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Description is a description of the signal (optional).
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// Name is the name of the signal. Must be between 3 and 25 characters. Letters, numbers, hyphens, and spaces are accepted. Special characters and periods are not accepted.
 	Name *string `json:"name"`
 	// WorkspaceID is the ID of the workspace that the signal is being created in.

@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+- fix(ngwaf): Address various issues in NGWAF APIs. ([#705](https://github.com/fastly/go-fastly/pull/705))
+
 ### Dependencies:
 
 ## [v10.5.0](https://github.com/fastly/go-fastly/releases/tag/v10.5.0) (2025-06-24)

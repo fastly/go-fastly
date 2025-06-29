@@ -97,9 +97,9 @@ func Create(c *fastly.Client, i *CreateInput) (*Rule, error) {
 		Type           *string         `json:"type"`
 		Description    *string         `json:"description"`
 		GroupOperator  *string         `json:"group_operator,omitempty"`
-		Enabled        *bool           `json:"enabled"`
+		Enabled        *bool           `json:"enabled,omitempty"`
 		ExpiresAt      *time.Time      `json:"expires_at,omitempty"`
-		Actions        []*CreateAction `json:"actions"`
+		Actions        []*CreateAction `json:"actions,omitempty"`
 		Conditions     []any           `json:"conditions"`
 		RequestLogging *string         `json:"request_logging,omitempty"`
 	}{

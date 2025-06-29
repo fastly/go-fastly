@@ -10,8 +10,8 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/virtual-patches/CVE-2017-5638
+      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/virtual-patches/CVE-2017-5638
     method: PATCH
   response:
     body: |
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 02 Jun 2025 19:43:28 GMT
+      - Sun, 29 Jun 2025 15:20:04 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000081-CHI, cache-ewr-kewr1740042-EWR
+      - cache-chi-kigq8000174-CHI, cache-nyc-kteb1890090-NYC
       X-Timer:
-      - S1748893408.496645,VS0,VE327
+      - S1751210404.605738,VS0,VE1055
     status: 200 OK
     code: 200
     duration: ""

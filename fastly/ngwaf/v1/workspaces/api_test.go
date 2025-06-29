@@ -152,9 +152,9 @@ func TestClient_Workspace(t *testing.T) {
 	}
 
 	// Update the test workspace.
-	const uwsName = "test-workspace"
-	const uwsDescription = "test-description"
-	const uwsMode = "log"
+	const uwsName = "test-workspace-updated"
+	const uwsDescription = "test-description-updated"
+	const uwsMode = "block"
 	const uwsIPAnonymization = "hashed"
 	const uwsDefaultBlockingResponseCode = 429
 
@@ -226,6 +226,23 @@ func TestClient_GetWorkspace_validation(t *testing.T) {
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
+	}
+}
+
+func TestClient_CreateWorkspace_validation(t *testing.T) {
+	var err error
+	_, err = Create(fastly.TestClient, &CreateInput{
+		Name: nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingName) {
+		t.Errorf("expected ErrMissingName: got %s", err)
+	}
+	_, err = Create(fastly.TestClient, &CreateInput{
+		Name: fastly.ToPointer("test"),
+		Mode: nil,
+	})
+	if !errors.Is(err, fastly.ErrMissingMode) {
+		t.Errorf("expected ErrMissingMode: got %s", err)
 	}
 }
 
