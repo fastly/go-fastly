@@ -152,9 +152,9 @@ func TestClient_Workspace(t *testing.T) {
 	}
 
 	// Update the test workspace.
-	const uwsName = "test-workspace"
-	const uwsDescription = "test-description"
-	const uwsMode = "log"
+	const uwsName = "test-workspace-updated"
+	const uwsDescription = "test-description-updated"
+	const uwsMode = "block"
 	const uwsIPAnonymization = "hashed"
 	const uwsDefaultBlockingResponseCode = 429
 
