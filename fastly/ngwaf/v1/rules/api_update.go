@@ -88,9 +88,6 @@ func Update(c *fastly.Client, i *UpdateInput) (*Rule, error) {
 	for _, gc := range i.GroupConditions {
 		mergedConditions = append(mergedConditions, gc)
 	}
-	if len(mergedConditions) == 0 {
-		return nil, fastly.ErrMissingConditions
-	}
 
 	v := struct {
 		Type           *string         `json:"type,omitempty"`
