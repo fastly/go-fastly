@@ -10,6 +10,8 @@
 
 ### Bug fixes:
 
+- fix(debug mode): Ensure that HTTP errors are displayed in debug mode. ([#704](https://github.com/fastly/go-fastly/pull/704))
+
 ### Dependencies:
 
 ## [v10.5.0](https://github.com/fastly/go-fastly/releases/tag/v10.5.0) (2025-06-24)
