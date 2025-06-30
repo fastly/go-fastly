@@ -14,9 +14,9 @@ type UpdateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
 	// Description is the description of the list.
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// Entries are the entries of the list.
-	Entries *[]string `json:"entries"`
+	Entries *[]string `json:"entries,omitempty"`
 	// ListID is the ID of the list to update (required).
 	ListID *string
 	// WorkspaceID is the workspace identifier (required).

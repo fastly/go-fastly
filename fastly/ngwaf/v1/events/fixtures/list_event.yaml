@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/alk6DTsYKHKucJCOIavaJM/events?from=2024-05-27T14%3A08%3A03Z
+      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/events?from=2024-05-27T14%3A08%3A03Z
     method: GET
   response:
     body: |
@@ -20,7 +20,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 05 Jun 2025 16:33:05 GMT
+      - Sun, 29 Jun 2025 12:37:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -36,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000166-CHI, cache-nyc-kteb1890056-NYC
+      - cache-chi-kigq8000044-CHI, cache-nyc-kteb1890037-NYC
       X-Timer:
-      - S1749141185.019855,VS0,VE528
+      - S1751200656.241412,VS0,VE129
     status: 200 OK
     code: 200
     duration: ""

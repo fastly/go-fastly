@@ -424,6 +424,10 @@ var ErrMissingImageOptimizerDefaultSetting = NewFieldError("ResizeFilter, Webp, 
 // requires a "VirtualPatchID" key, but one was not set.
 var ErrMissingVirtualPatchID = NewFieldError("Virtual Patch")
 
+// ErrMissingMode is an error that is returned when an input struct
+// requires a "Mode" key, but one was not set.
+var ErrMissingMode = NewFieldError("Mode")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 

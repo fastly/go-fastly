@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"default_blocking_response_code":null,"description":"test-description","ip_anonymization":"hashed","mode":"log","name":"test-workspace"}'
+    body: '{"attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"description":"test-description","ip_anonymization":"hashed","mode":"log","name":"test-workspace"}'
     form: {}
     headers:
       Accept:
@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.4.0 (+github.com/fastly/go-fastly; go1.24.3)
+      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
     url: https://api.fastly.com/ngwaf/v1/workspaces
     method: POST
   response:
     body: |
-      {"id":"tI3gQ2limlBvTNrEnEGOvG","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"created_at":"2025-06-23T19:45:51Z","updated_at":"2025-06-23T19:45:51.670920659Z"}
+      {"id":"CiNMlVEOE05WCwVijSCE9L","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"created_at":"2025-06-29T15:20:04Z","updated_at":"2025-06-29T15:20:04.468526862Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 23 Jun 2025 19:45:53 GMT
+      - Sun, 29 Jun 2025 15:20:05 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000105-CHI, cache-mia-kmia1760084-MIA
+      - cache-chi-kigq8000038-CHI, cache-nyc-kteb1890035-NYC
       X-Timer:
-      - S1750707951.164919,VS0,VE2112
+      - S1751210404.918885,VS0,VE1613
     status: 201 Created
     code: 201
     duration: ""
