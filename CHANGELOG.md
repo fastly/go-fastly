@@ -10,6 +10,7 @@
 
 ### Bug fixes:
 
+- fix(debug mode): Ensure that HTTP errors are displayed in debug mode. ([#704](https://github.com/fastly/go-fastly/pull/704))
 - fix(ngwaf): Address various issues in NGWAF APIs. ([#705](https://github.com/fastly/go-fastly/pull/705))
 
 ### Dependencies:
