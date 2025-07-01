@@ -77,6 +77,10 @@ var ErrMissingACLID = NewFieldError("ACLID")
 // requires a "Address" key, but one was not set.
 var ErrMissingAddress = NewFieldError("Address")
 
+// ErrMissingAlertID is an error that is returned when an input struct
+// requires a "AlertID" key, but one was not set.
+var ErrMissingAlertID = NewFieldError("AlertID")
+
 // ErrMissingBackend is an error that is returned when an input struct
 // requires a "Backend" key, but one was not set.
 var ErrMissingBackend = NewFieldError("Backend")
@@ -96,6 +100,10 @@ var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
 // ErrMissingComputeACLIP is an error that is returned when an input struct
 // requires a "ComputeACLIP" key, but one was not set.
 var ErrMissingComputeACLIP = NewFieldError("ComputeACLIP")
+
+// ErrMissingConfig is an error that is returned when an input struct
+// requires a "Config" key, but one was not set.
+var ErrMissingConfig = NewFieldError("Config")
 
 // ErrMissingWorkspaceID is an error that is returned when an input struct
 // requires a "WorkspaceID" key, but one was not set.
