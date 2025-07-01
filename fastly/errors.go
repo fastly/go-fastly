@@ -205,6 +205,10 @@ var ErrMissingResourceID = NewFieldError("ResourceID")
 // requires an "ERLID" key, but one was not set.
 var ErrMissingERLID = NewFieldError("ERLID")
 
+// ErrMissingHost is an error that is returned when an input struct
+// requires an "Host" key, but one was not set.
+var ErrMissingHost = NewFieldError("Host")
+
 // ErrMissingIP is an error that is returned when an input struct
 // requires a "IP" key, but one was not set.
 var ErrMissingIP = NewFieldError("IP")
@@ -253,6 +257,10 @@ var ErrMissingNewName = NewFieldError("NewName")
 // requires a "Number" key, but one was not set.
 var ErrMissingNumber = NewFieldError("Number")
 
+// ErrMissingProject is an error that is returned when an input struct
+// requires a "Project" key, but one was not set.
+var ErrMissingProject = NewFieldError("Project")
+
 // ErrMissingPoolID is an error that is returned when an input struct
 // requires a "PoolID" key, but one was not set.
 var ErrMissingPoolID = NewFieldError("PoolID")
@@ -280,6 +288,10 @@ var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("S
 // ErrMissingServiceAuthorizationsUser is an error that is returned when an input struct
 // requires a "User" key of type SAUser, but one was not set or was misconfigured.
 var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser requires an ID")
+
+// ErrMissingSite is an error that is returned when an input struct
+// requires a "Site" key, but one was not set.
+var ErrMissingSite = NewFieldError("Site")
 
 // ErrMissingStart is an error that is returned when an input struct
 // requires a "Start" key, but one was not set.
@@ -332,6 +344,10 @@ var ErrMissingKind = NewFieldError("Kind")
 // ErrMissingURL is an error that is returned when an input struct
 // requires a "URL" key, but one was not set.
 var ErrMissingURL = NewFieldError("URL")
+
+// ErrMissingUserName is an error that is returned when an input struct
+// requires a "UserName" key, but one was not set.
+var ErrMissingUserName = NewFieldError("UserName")
 
 // ErrMissingValue is an error that is returned when an input struct
 // requires a "Value" key, but one was not set.

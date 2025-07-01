@@ -126,7 +126,38 @@ func Update(c *fastly.Client, i *UpdateInput) (*WorkspaceAlert, error) {
 			return nil, fastly.ErrMissingSite
 		}
 	}
+	if i.Config.Jira != nil {
+		if i.Config.Jira.Host == nil {
+			return nil, fastly.ErrMissingHost
+		}
+		if i.Config.Jira.Key == nil {
+			return nil, fastly.ErrMissingKey
+		}
+		if i.Config.Jira.Project == nil {
+			return nil, fastly.ErrMissingProject
+			}
+		if i.Config.Jira.Username == nil {
+			return nil, fastly.ErrMissingUserName
+		}
+	}
+	if i.Config.MailingList != nil {
+		if i.Config.MailingList.Address == nil {
+			return nil, fastly.ErrMissingAddress
+		}
+	}
+	if i.Config.MicrosoftTeams != nil {
+		if i.Config.MicrosoftTeams.Webhook == nil {
+			return nil, fastly.ErrMissingWebhook
+		}
+	}
+	if i.Config.Opsgenie != nil {
+		if i.Config.Opsgenie.Key == nil {
+			return nil, fastly.ErrMissingKey
+		}
+	}
 
+}
+	// To-Do - update rest of the below code
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "virtual-patches", *i.VirtualPatchID)
 
 	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
