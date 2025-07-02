@@ -16,8 +16,6 @@ const (
 )
 
 func TestClient_List(t *testing.T) {
-	t.Parallel()
-
 	var err error
 	listEntries := []string{listEntry}
 

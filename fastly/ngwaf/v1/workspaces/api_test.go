@@ -8,8 +8,6 @@ import (
 )
 
 func TestClient_Workspace(t *testing.T) {
-	t.Parallel()
-
 	const wsName = "test-workspace"
 	const wsDescription = "test-description"
 	const wsMode = "log"

@@ -14,8 +14,6 @@ var testWorkspaceID = fastly.TestNGWAFWorkspaceID
 const vpID = "CVE-2017-5638"
 
 func TestVirtual_Patches(t *testing.T) {
-	t.Parallel()
-
 	var err error
 	var vps *VirtualPatches
 
