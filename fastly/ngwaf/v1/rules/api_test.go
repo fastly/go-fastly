@@ -12,8 +12,6 @@ import (
 func TestClient_Rule(t *testing.T) {
 	assert := require.New(t)
 
-	t.Parallel()
-
 	var err error
 
 	ruleType := "request"

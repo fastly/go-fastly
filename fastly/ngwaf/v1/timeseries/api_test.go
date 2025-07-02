@@ -24,8 +24,6 @@ var (
 )
 
 func TestTime_Series(t *testing.T) {
-	t.Parallel()
-
 	var err error
 	var ts *TimeSeries
 

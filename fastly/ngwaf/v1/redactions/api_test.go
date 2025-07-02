@@ -8,7 +8,6 @@ import (
 )
 
 func TestClient_Redactions(t *testing.T) {
-	t.Parallel()
 	var err error
 	testField := "somefield"
 	testType := "request_parameter"

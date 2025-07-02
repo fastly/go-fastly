@@ -13,8 +13,6 @@ const (
 )
 
 func TestClient_GetEvent(t *testing.T) {
-	t.Parallel()
-
 	getEventInput := new(GetInput)
 	getEventInput.EventID = fastly.ToPointer(TestEventID)
 	getEventInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)

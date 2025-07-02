@@ -15,8 +15,6 @@ const (
 )
 
 func TestClient_requests(t *testing.T) {
-	t.Parallel()
-
 	getrequestInput := new(GetInput)
 	getrequestInput.RequestID = fastly.ToPointer(string(TestRequestID))
 	getrequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)

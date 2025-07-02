@@ -14,7 +14,6 @@ const (
 )
 
 func TestClient_Signals(t *testing.T) {
-	t.Parallel()
 	var err error
 	var signalID string
 
