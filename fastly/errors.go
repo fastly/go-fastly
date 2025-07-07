@@ -57,6 +57,10 @@ var ErrTokenEmpty = NewFieldError("Token").Message(emptyTokenInvalid)
 
 const batchModifyMaxExceeded string = "batch modify maximum operations exceeded"
 
+// ErrInvalidConfigType is an error that is returned when a config struct
+// requires a "Config" key, but the value of the key was not expected.
+var ErrInvalidConfigType = NewFieldError("Config")
+
 // ErrMaxExceededEntries is an error that is returned when an input struct
 // specifies an "Entries" key value exceeding the maximum allowed.
 var ErrMaxExceededEntries = NewFieldError("Entries").Message(batchModifyMaxExceeded)
@@ -376,6 +380,10 @@ var ErrMissingWAFVersionID = NewFieldError("WAFVersionID")
 // ErrMissingWAFVersionNumber is an error that is returned when an input
 // struct requires a "WAFVersionNumber" key, but one was not set.
 var ErrMissingWAFVersionNumber = NewFieldError("WAFVersionNumber")
+
+// ErrMissingWebhook is an error that is returned when an input
+// struct requires a "Webhook" key, but one was not set.
+var ErrMissingWebhook = NewFieldError("Webhook")
 
 // ErrMissingYear is an error that is returned when an input struct requires a
 // "Year" key, but one was not set.

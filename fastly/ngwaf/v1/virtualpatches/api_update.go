@@ -11,7 +11,8 @@ import (
 // UpdateInput specifies the information needed for the Put() function to perform
 // the operation.
 type UpdateInput struct {
-	// Action
+	// Action is the action to take when signal for virtual patch is detected (optional).
+	Action *string `json:"action"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Enabled is the toggle status indicator of the VirtualPatch (optional).
