@@ -335,11 +335,4 @@ func TestClient_Listrequest_validation(t *testing.T) {
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = List(fastly.TestClient, &ListInput{
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-		Limit:       nil,
-	})
-	if !errors.Is(err, fastly.ErrMissingLimit) {
-		t.Errorf("expected ErrMissingLimit: got %s", err)
-	}
 }
