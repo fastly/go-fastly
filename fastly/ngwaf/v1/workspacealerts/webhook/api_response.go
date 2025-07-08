@@ -1,5 +1,11 @@
 package webhook
 
+// ResponseConfig is the config object for integration type webhook in API responses.
+type ResponseConfig struct {
+	// Webhook is the Webhook URL (required).
+	Webhook *string `json:"webhook"`
+}
+
 // MetaWorkspaceAlerts is a subset of the WorkspaceAlerts response structure.
 type MetaWorkspaceAlerts struct {
 	// Limit is the limit of WorkspaceAlert.
@@ -18,7 +24,7 @@ type WorkspaceAlert struct {
 	// Type is the type of workspace integration.
 	Type string `json:"type"`
 	// Config is the configuration associated with the workspace integration.
-	Config Config `json:"config"`
+	Config ResponseConfig `json:"config"`
 	// Events are the list of event types that trigger this webhook.
 	Events []WorkspaceAlertEvent `json:"events"`
 	// CreatedAt is a time stamp of when the alert was created.

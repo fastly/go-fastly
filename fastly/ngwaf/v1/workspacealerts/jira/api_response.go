@@ -1,5 +1,19 @@
 package jira
 
+// ResponseConfig is the config object for integration type jira in API responses.
+type ResponseConfig struct {
+	// Host is the name of the Jira instance (required).
+	Host *string `json:"host"`
+	// IssueType is the Jira issue type associated with the ticket (optional).
+	IssueType *string `json:"issue_type"`
+	// Key is the Jira API key / secret field (required).
+	Key *string `json:"key"`
+	// Project specifies the Jira project where the issue will be created (required).
+	Project *string `json:"project"`
+	// Username is the Jira username of the user who created the ticket (required).
+	Username *string `json:"username"`
+}
+
 // MetaWorkspaceAlerts is a subset of the WorkspaceAlerts response structure.
 type MetaWorkspaceAlerts struct {
 	// Limit is the limit of WorkspaceAlert.
@@ -18,7 +32,7 @@ type WorkspaceAlert struct {
 	// Type is the type of workspace integration.
 	Type string `json:"type"`
 	// Config is the configuration associated with the workspace integration.
-	Config Config `json:"config"`
+	Config ResponseConfig `json:"config"`
 	// Events are the list of event types that trigger this webhook.
 	Events []WorkspaceAlertEvent `json:"events"`
 	// CreatedAt is a time stamp of when the alert was created.
@@ -43,9 +57,3 @@ type WorkspaceAlerts struct {
 	Meta MetaWorkspaceAlerts `json:"meta"`
 }
 
-// WorkspaceAlertsKey is the API response structure for the get and rotate workspace alert
-// signing key operations.
-type WorkspaceAlertsKey struct {
-	// SigningKey is the details of a workspace alert signing key.
-	SigningKey string `json:"signing_key"`
-}

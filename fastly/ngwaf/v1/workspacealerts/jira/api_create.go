@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// UpdateConfig is the config object for integration type jira.
-type UpdateConfig struct {
+// CreateConfig is the config object for integration type jira.
+type CreateConfig struct {
 	// Host is the name of the Jira instance (required).
 	Host *string `json:"host"`
 	// IssueType is the Jira issue type associated with the ticket (optional).
@@ -22,48 +22,36 @@ type UpdateConfig struct {
 	Username *string `json:"username"`
 }
 
-// UpdateInput specifies the information needed for the Update() function to perform
+// CreateInput specifies the information needed for the Create() function to perform
 // the operation.
-type UpdateInput struct {
-	// AlertID is The unique identifier of the workspace alert (required).
-	AlertID *string `json:"-"`
+type CreateInput struct {
 	// Config is the configuration associated with the workspace integration (required).
-	Config UpdateConfig `json:"config"`
+	Config CreateConfig `json:"config"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
+	// Description is an optional description for the alert (optional).
+	Description *string `json:"description"`
 	// Events is a list of event types (required).
 	Events *string `json:"events"`
+	// Type is the type of the workspace integration (required).
+	Type *string `json:"type"`
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string `json:"-"`
 }
 
-// Update updates the specified workspace alert.
-func Update(c *fastly.Client, i *UpdateInput) (*WorkspaceAlert, error) {
-	if i.AlertID == nil {
-		return nil, fastly.ErrMissingAlertID
-	}
-
+// Create creates a new workspace alert.
+func Create(c *fastly.Client, i *CreateInput) (*WorkspaceAlert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-
-	// Get the current alert to validate the integration type.
-	currentAlert, err := Get(c, &GetInput{
-		AlertID:     i.AlertID,
-		WorkspaceID: i.WorkspaceID,
-		Context:     i.Context,
-	})
-	if err != nil {
-		return nil, err
-	}
-
-	// Validate that this is a jira integration
-	if currentAlert.Type != IntegrationType {
+	if i.Type == nil || *i.Type != IntegrationType {
 		return nil, fastly.ErrInvalidConfigType
 	}
-
-	if (i.Config == UpdateConfig{}) {
+	if (i.Config == CreateConfig{}) {
 		return nil, fastly.ErrMissingConfig
+	}
+	if i.Events == nil {
+		return nil, fastly.ErrMissingEvents
 	}
 
 	// Validate jira integration configuration
@@ -80,9 +68,9 @@ func Update(c *fastly.Client, i *UpdateInput) (*WorkspaceAlert, error) {
 		return nil, fastly.ErrMissingUserName
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts", *i.AlertID)
+	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts")
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(path, i, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

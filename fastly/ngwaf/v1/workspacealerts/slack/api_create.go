@@ -1,4 +1,4 @@
-package datadog
+package slack
 
 import (
 	"context"
@@ -8,19 +8,17 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// Config is the config object for integration type datadog.
+// CreateConfig is the config object for integration type slack.
 type CreateConfig struct {
-	// Key is the Datadog integration key (required).
-	Key *string `json:"key"`
-	// Site is the Datadog site (required).
-	Site *string `json:"site"`
+	// Webhook is the Slack webhook (required).
+	Webhook *string `json:"webhook"`
 }
 
 // CreateInput specifies the information needed for the Create() function to perform
 // the operation.
 type CreateInput struct {
 	// Config is the configuration associated with the workspace integration (required).
-	Config CreateConfig `json:"-"`
+	Config CreateConfig `json:"config"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Description is an optional description for the alert (optional).
@@ -48,12 +46,9 @@ func Create(c *fastly.Client, i *CreateInput) (*WorkspaceAlert, error) {
 		return nil, fastly.ErrMissingEvents
 	}
 
-	// Validate datadog integration configuration
-	if i.Config.Key == nil {
-		return nil, fastly.ErrMissingKey
-	}
-	if i.Config.Site == nil {
-		return nil, fastly.ErrMissingSite
+	// Validate slack integration configuration
+	if i.Config.Webhook == nil {
+		return nil, fastly.ErrMissingWebhook
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts")

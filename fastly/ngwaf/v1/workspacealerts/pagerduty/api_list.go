@@ -44,5 +44,15 @@ func List(c *fastly.Client, i *ListInput) (*WorkspaceAlerts, error) {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}
 
+	// Parse the alerts to only include the desired type of integration.
+	var parsedAlerts []WorkspaceAlert
+	for _, alert := range was.Data {
+		if alert.Type == IntegrationType {
+			parsedAlerts = append(parsedAlerts, alert)
+		}
+	}
+	was.Data = parsedAlerts
+	was.Meta.Total = len(parsedAlerts)
+
 	return was, nil
 }

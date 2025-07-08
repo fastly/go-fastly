@@ -9,11 +9,11 @@ import (
 )
 
 // Config is the config object for integration type datadog.
-type Config struct {
+type UpdateConfig struct {
 	// Key is the Datadog integration key (required).
-	Key *string `json:"key,omitempty"`
+	Key *string `json:"key"`
 	// Site is the Datadog site (required).
-	Site *string `json:"site,omitempty"`
+	Site *string `json:"site"`
 }
 
 // UpdateInput specifies the information needed for the Update() function to perform
@@ -22,7 +22,7 @@ type UpdateInput struct {
 	// AlertID is The unique identifier of the workspace alert (required).
 	AlertID *string `json:"-"`
 	// Config is the configuration associated with the workspace integration (required).
-	Config Config `json:"config"`
+	Config UpdateConfig `json:"config"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Events is a list of event types (required).
@@ -56,7 +56,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*WorkspaceAlert, error) {
 		return nil, fastly.ErrInvalidConfigType
 	}
 
-	if (i.Config == Config{}) {
+	if (i.Config == UpdateConfig{}) {
 		return nil, fastly.ErrMissingConfig
 	}
 

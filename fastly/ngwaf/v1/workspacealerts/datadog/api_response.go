@@ -1,5 +1,13 @@
 package datadog
 
+// ResponseConfig is the config object for integration type datadog in API responses.
+type ResponseConfig struct {
+	// Key is the Datadog integration key (required).
+	Key *string `json:"key"`
+	// Site is the Datadog site (required).
+	Site *string `json:"site"`
+}
+
 // MetaWorkspaceAlerts is a subset of the WorkspaceAlerts response structure.
 type MetaWorkspaceAlerts struct {
 	// Limit is the limit of WorkspaceAlert.
@@ -18,7 +26,7 @@ type WorkspaceAlert struct {
 	// Type is the type of workspace integration.
 	Type string `json:"type"`
 	// Config is the configuration associated with the workspace integration.
-	Config Config `json:"config"`
+	Config ResponseConfig `json:"config"`
 	// Events are the list of event types that trigger this webhook.
 	Events []WorkspaceAlertEvent `json:"events"`
 	// CreatedAt is a time stamp of when the alert was created.
@@ -43,9 +51,3 @@ type WorkspaceAlerts struct {
 	Meta MetaWorkspaceAlerts `json:"meta"`
 }
 
-// WorkspaceAlertsKey is the API response structure for the get and rotate workspace alert
-// signing key operations.
-type WorkspaceAlertsKey struct {
-	// SigningKey is the details of a workspace alert signing key.
-	SigningKey string `json:"signing_key"`
-}

@@ -8,10 +8,10 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// Config is the config object for integration type slack.
-type Config struct {
+// UpdateConfig is the config object for integration type slack.
+type UpdateConfig struct {
 	// Webhook is the Slack webhook (required).
-	Webhook *string `json:"webhook,omitempty"`
+	Webhook *string `json:"webhook"`
 }
 
 // UpdateInput specifies the information needed for the Update() function to perform
@@ -20,7 +20,7 @@ type UpdateInput struct {
 	// AlertID is The unique identifier of the workspace alert (required).
 	AlertID *string `json:"-"`
 	// Config is the configuration associated with the workspace integration (required).
-	Config Config `json:"config"`
+	Config UpdateConfig `json:"config"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Events is a list of event types (required).
@@ -54,7 +54,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*WorkspaceAlert, error) {
 		return nil, fastly.ErrInvalidConfigType
 	}
 
-	if (i.Config == Config{}) {
+	if (i.Config == UpdateConfig{}) {
 		return nil, fastly.ErrMissingConfig
 	}
 

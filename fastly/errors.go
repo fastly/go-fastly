@@ -169,6 +169,10 @@ var ErrMissingDirector = NewFieldError("Director")
 // requires a "EventID" key, but one was not set.
 var ErrMissingEventID = NewFieldError("EventID")
 
+// ErrMissingEvents is an error that is returned when an input struct
+// requires a "Events" key, but one was not set.
+var ErrMissingEvents = NewFieldError("Events")
+
 // ErrMissingFrom is an error that is returned when an input struct
 // requires a "From" key, but one was not set.
 var ErrMissingFrom = NewFieldError("From")
