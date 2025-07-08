@@ -31,12 +31,6 @@ func Update(c *fastly.Client, i *UpdateInput) (*Redaction, error) {
 	if i.RedactionID == nil {
 		return nil, fastly.ErrMissingRedactionID
 	}
-	if i.Field == nil {
-		return nil, fastly.ErrMissingField
-	}
-	if i.Type == nil {
-		return nil, fastly.ErrMissingType
-	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "redactions", *i.RedactionID)
 
