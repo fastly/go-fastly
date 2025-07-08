@@ -16,7 +16,7 @@ type ListInput struct {
 	Context *context.Context
 	// Limit is the limit on how many results are returned. Required.
 	Limit *int
-	// Page is the page number of the collection to request (Default 0).
+	// Page is the page number of the collection to request (Default 100). Optional.
 	Page *int
 	// Query is a search query string. Please read the Search Syntax for help. Required.
 	// https://www.fastly.com/documentation/guides/next-gen-waf/reference/searching-for-requests/
@@ -30,11 +30,10 @@ func List(c *fastly.Client, i *ListInput) (*Requests, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-	if i.Limit == nil {
-		return nil, fastly.ErrMissingLimit
-	}
 	requestOptions := fastly.CreateRequestOptions(i.Context)
-	requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+	if i.Limit != nil {
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+	}
 	if i.Page != nil {
 		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
 	}
