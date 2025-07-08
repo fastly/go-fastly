@@ -6,6 +6,8 @@
 
 ### Breaking:
 
+- refactor(ngwaf/v1/workspaces): move all workspace specific endpoints into the appropriate folder ([#708](https://github.com/fastly/go-fastly/pull/708))
+
 ### Enhancements:
 
 ### Bug fixes:
