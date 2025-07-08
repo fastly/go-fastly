@@ -82,6 +82,8 @@ type Requests struct {
 type MetaRequests struct {
 	// Limit is the limit of requests.
 	Limit int `json:"limit"`
+	// NextCursor is the next set of requests if paginated
+	NextCursor string `json:"next_cursor"`
 	// Total is the sum of requests.
 	Total int `json:"total"`
 }
