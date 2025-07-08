@@ -7,6 +7,7 @@
 ### Breaking:
 
 - refactor(ngwaf/v1/workspaces): move all workspace specific endpoints into the appropriate folder ([#708](https://github.com/fastly/go-fastly/pull/708))
+- fix(ngwaf/v1/workpsaces/requests): add missing field to metadata struct and update documentation around limits ([#711](https://github.com/fastly/go-fastly/pull/711))
 
 ### Enhancements:
 
