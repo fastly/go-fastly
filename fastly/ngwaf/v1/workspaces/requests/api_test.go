@@ -237,7 +237,6 @@ func TestClient_requests(t *testing.T) {
 	var Requests *Requests
 	listRequestInput := new(ListInput)
 	listRequestInput.WorkspaceID = fastly.ToPointer(fastly.TestNGWAFWorkspaceID)
-	listRequestInput.Limit = fastly.ToPointer(100)
 	listRequestInput.Query = fastly.ToPointer("from:-2d")
 
 	// get a list of requests

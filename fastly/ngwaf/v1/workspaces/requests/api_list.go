@@ -31,7 +31,9 @@ func List(c *fastly.Client, i *ListInput) (*Requests, error) {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 	requestOptions := fastly.CreateRequestOptions(i.Context)
-	requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+	if i.Limit != nil {
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
+	}
 	if i.Page != nil {
 		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
 	}
