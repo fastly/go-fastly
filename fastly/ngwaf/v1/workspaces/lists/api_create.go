@@ -25,7 +25,7 @@ type CreateInput struct {
 	WorkspaceID *string
 }
 
-// Create creates a new workspace.
+// Create creates a new list.
 func Create(c *fastly.Client, i *CreateInput) (*List, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

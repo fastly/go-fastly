@@ -1,4 +1,4 @@
-package redactions
+package thresholds
 
 import (
 	"context"
@@ -16,28 +16,18 @@ type ListInput struct {
 	Context *context.Context
 	// Limit how many results are returned.
 	Limit *int
-	// Mode filter results based on mode.
-	Mode *string
-	// Page number of the collection to request.
-	Page *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
-// List retrieves a list of redactions, with optional filtering and pagination.
-func List(c *fastly.Client, i *ListInput) (*Redactions, error) {
+// List retrieves a list of thresholds, with optional limiting.
+func List(c *fastly.Client, i *ListInput) (*Thresholds, error) {
 	requestOptions := fastly.CreateRequestOptions(i.Context)
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
-	if i.Mode != nil {
-		requestOptions.Params["mode"] = *i.Mode
-	}
-	if i.Page != nil {
-		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
-	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "redactions")
+	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "thresholds")
 
 	resp, err := c.Get(path, requestOptions)
 	if err != nil {
@@ -45,10 +35,10 @@ func List(c *fastly.Client, i *ListInput) (*Redactions, error) {
 	}
 	defer resp.Body.Close()
 
-	var redactions *Redactions
-	if err := json.NewDecoder(resp.Body).Decode(&redactions); err != nil {
+	var thresholds *Thresholds
+	if err := json.NewDecoder(resp.Body).Decode(&thresholds); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}
 
-	return redactions, nil
+	return thresholds, nil
 }

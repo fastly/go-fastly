@@ -11,6 +11,8 @@
 
 ### Enhancements:
 
+- feat(ngwaf/v1/workspaces/thresholds): adds CRUD support for NGWAF Thresholds ([#713](https://github.com/fastly/go-fastly/pull/713))
+
 ### Bug fixes:
 
 ### Dependencies:
