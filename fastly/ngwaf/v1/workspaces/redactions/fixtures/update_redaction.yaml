@@ -10,12 +10,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/redactions/68615bf5b4e1b345f4355c17
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/redactions/686ed67510cae6d32d9e4e7b
     method: PATCH
   response:
     body: |
-      {"id":"68615bf5b4e1b345f4355c17","field":"some-other-field","type":"response_header","created_at":"2025-06-29T15:29:57Z"}
+      {"id":"686ed67510cae6d32d9e4e7b","field":"some-other-field","type":"response_header","created_at":"2025-07-09T20:52:05Z"}
     headers:
       Accept-Ranges:
       - bytes
@@ -26,7 +26,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sun, 29 Jun 2025 15:29:58 GMT
+      - Wed, 09 Jul 2025 20:52:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -42,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000055-CHI, cache-ewr-kewr1740069-EWR
+      - cache-chi-klot8100077-CHI, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1751210998.831208,VS0,VE339
+      - S1752094326.027768,VS0,VE341
     status: 200 OK
     code: 200
     duration: ""

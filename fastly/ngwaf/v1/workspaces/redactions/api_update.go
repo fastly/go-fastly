@@ -14,11 +14,11 @@ type UpdateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Field is the name of the field to redact. Will be converted to lowercase.
-	Field *string `json:"field"`
+	Field *string `json:"field,omitempty"`
 	// RedactionID is the id of the redaction that's being updated (required).
 	RedactionID *string `json:"-"`
 	// Type is the type of field being redacted. Must be one of `request_parameter`, `request_header`, or `response_header`.
-	Type *string `json:"type"`
+	Type *string `json:"type,omitempty"`
 	// WorkspaceID is the ID of the workspace that the redaction belongs to.
 	WorkspaceID *string `json:"-"`
 }
