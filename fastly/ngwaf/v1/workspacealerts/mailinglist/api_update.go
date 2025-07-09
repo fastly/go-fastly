@@ -24,7 +24,7 @@ type UpdateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Events is a list of event types (required).
-	Events *string `json:"events"`
+	Events []string `json:"events"`
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string `json:"-"`
 }

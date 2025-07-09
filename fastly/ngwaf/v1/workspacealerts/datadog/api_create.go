@@ -20,13 +20,13 @@ type CreateConfig struct {
 // the operation.
 type CreateInput struct {
 	// Config is the configuration associated with the workspace integration (required).
-	Config CreateConfig `json:"-"`
+	Config CreateConfig `json:"config"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Description is an optional description for the alert (optional).
 	Description *string `json:"description"`
 	// Events is a list of event types (required).
-	Events *string `json:"events"`
+	Events []string `json:"events"`
 	// Type is the type of the workspace integration (required).
 	Type *string `json:"type"`
 	// WorkspaceID is the workspace identifier (required).

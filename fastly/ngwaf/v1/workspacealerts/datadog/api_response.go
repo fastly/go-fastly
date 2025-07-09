@@ -28,13 +28,13 @@ type WorkspaceAlert struct {
 	// Config is the configuration associated with the workspace integration.
 	Config ResponseConfig `json:"config"`
 	// Events are the list of event types that trigger this webhook.
-	Events []WorkspaceAlertEvent `json:"events"`
+	Events []string `json:"events"`
 	// CreatedAt is a time stamp of when the alert was created.
 	CreatedAt string `json:"created_at"`
 	// CreatedBy is the email of the user who created the alert.
 	CreatedBy string `json:"created_by"`
 	// LastStatusCode is the HTTP status code received during that last webhook attempt.
-	LastStatusCode string `json:"last_status_code"`
+	LastStatusCode int `json:"last_status_code"`
 }
 
 // WorkspaceAlertEvent is a subset of the WorkspaceAlert response structure.

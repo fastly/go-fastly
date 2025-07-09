@@ -2,8 +2,7 @@ package microsoftteams
 
 import (
 	"context"
-	"encoding/json"
-	"fmt"
+	"net/http"
 
 	"github.com/fastly/go-fastly/v10/fastly"
 )
@@ -20,26 +19,25 @@ type DeleteInput struct {
 }
 
 // Delete deletes the workspace alert.
-func Delete(c *fastly.Client, i *DeleteInput) (*WorkspaceAlert, error) {
+func Delete(c *fastly.Client, i *DeleteInput) error {
 	if i.WorkspaceID == nil {
-		return nil, fastly.ErrMissingWorkspaceID
+		return fastly.ErrMissingWorkspaceID
 	}
 	if i.AlertID == nil {
-		return nil, fastly.ErrMissingAlertID
+		return fastly.ErrMissingAlertID
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts", *i.AlertID)
 
 	resp, err := c.Delete(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer resp.Body.Close()
 
-	var wa *WorkspaceAlert
-	if err := json.NewDecoder(resp.Body).Decode(&wa); err != nil {
-		return nil, fmt.Errorf("failed to decode json response: %w", err)
+	if resp.StatusCode != http.StatusNoContent {
+		return fastly.NewHTTPError(resp)
 	}
 
-	return wa, nil
+	return nil
 }
