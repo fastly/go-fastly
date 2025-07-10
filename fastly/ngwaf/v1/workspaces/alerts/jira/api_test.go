@@ -16,7 +16,7 @@ func Test_Alerts(t *testing.T) {
 	var AlertID string
 	var err error
 	var WorkSpaceAlert *Alert
-	testConfig := CreateConfig{
+	testConfig := &CreateConfig{
 		Host:      fastly.ToPointer("https://mycompany.atlassian.net"),
 		Key:       fastly.ToPointer("a1b2c3d4e5f6789012345678901234567"),
 		Project:   fastly.ToPointer("test"),
@@ -32,7 +32,7 @@ func Test_Alerts(t *testing.T) {
 		WorkSpaceAlert, err = Create(c, &CreateInput{
 			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
-			Events:      []string{testEvent},
+			Events:      &[]string{testEvent},
 			Description: fastly.ToPointer(testDescription),
 			WorkspaceID: &testWorkspaceID,
 		})
@@ -95,7 +95,7 @@ func Test_Alerts(t *testing.T) {
 	}
 
 	// Update the test workspace alert.
-	updatedConfig := UpdateConfig{
+	updatedConfig := &UpdateConfig{
 		Host:      fastly.ToPointer("https://host.jira.com"),
 		Key:       fastly.ToPointer("b1b2c3d4e5f6789012345678901234567"),
 		Project:   fastly.ToPointer("test_updated"),
@@ -109,7 +109,7 @@ func Test_Alerts(t *testing.T) {
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			Config:      updatedConfig,
-			Events:      []string{updatedEvent},
+			Events:      &[]string{updatedEvent},
 		})
 	})
 	if err != nil {
@@ -196,7 +196,7 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Host: fastly.ToPointer("test.atlassian.net"), Key: fastly.ToPointer("111222333"), Project: fastly.ToPointer("TEST"), Username: fastly.ToPointer("user")},
+		Config:      &CreateConfig{Host: fastly.ToPointer("test.atlassian.net"), Key: fastly.ToPointer("111222333"), Project: fastly.ToPointer("TEST"), Username: fastly.ToPointer("user")},
 		Events:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})

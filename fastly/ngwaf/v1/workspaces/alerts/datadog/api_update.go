@@ -22,11 +22,11 @@ type UpdateInput struct {
 	// AlertID is The unique identifier of the workspace alert (required).
 	AlertID *string `json:"-"`
 	// Config is the configuration associated with the workspace integration (required).
-	Config UpdateConfig `json:"config"`
+	Config *UpdateConfig `json:"config"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Events is a list of event types (required).
-	Events []string `json:"events"`
+	Events *[]string `json:"events"`
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string `json:"-"`
 }
@@ -56,7 +56,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
 		return nil, fastly.ErrInvalidConfigType
 	}
 
-	if (i.Config == UpdateConfig{}) {
+	if i.Config == nil {
 		return nil, fastly.ErrMissingConfig
 	}
 

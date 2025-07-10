@@ -16,7 +16,7 @@ func Test_Alerts(t *testing.T) {
 	var alertID string
 	var err error
 	var alert *Alert
-	testConfig := CreateConfig{
+	testConfig := &CreateConfig{
 		Key:  fastly.ToPointer("123456789"),
 		Site: fastly.ToPointer("us1"),
 	}
@@ -29,7 +29,7 @@ func Test_Alerts(t *testing.T) {
 		alert, err = Create(c, &CreateInput{
 			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
-			Events:      []string{testEvent},
+			Events:      &[]string{testEvent},
 			Description: fastly.ToPointer(testDescription),
 			WorkspaceID: &testWorkspaceID,
 		})
@@ -87,7 +87,7 @@ func Test_Alerts(t *testing.T) {
 	}
 
 	// Update the test workspace alert.
-	updatedConfig := UpdateConfig{
+	updatedConfig := &UpdateConfig{
 		Key:  fastly.ToPointer("987654321"),
 		Site: fastly.ToPointer("us3"),
 	}
@@ -98,7 +98,7 @@ func Test_Alerts(t *testing.T) {
 			AlertID:     fastly.ToPointer(alertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			Config:      updatedConfig,
-			Events:      []string{updatedEvent},
+			Events:      &[]string{updatedEvent},
 		})
 	})
 	if err != nil {
@@ -173,7 +173,7 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Key: fastly.ToPointer("111222333"), Site: fastly.ToPointer("us1")},
+		Config:      &CreateConfig{Key: fastly.ToPointer("111222333"), Site: fastly.ToPointer("us1")},
 		Events:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -182,8 +182,8 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Site: fastly.ToPointer("us1")},
-		Events:      []string{"flag"},
+		Config:      &CreateConfig{Site: fastly.ToPointer("us1")},
+		Events:      &[]string{"flag"},
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingKey) {
@@ -191,8 +191,8 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Key: fastly.ToPointer("444555666")},
-		Events:      []string{"flag"},
+		Config:      &CreateConfig{Key: fastly.ToPointer("444555666")},
+		Events:      &[]string{"flag"},
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingSite) {

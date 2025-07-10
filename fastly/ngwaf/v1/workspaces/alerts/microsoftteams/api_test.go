@@ -16,7 +16,7 @@ func Test_Alerts(t *testing.T) {
 	var AlertID string
 	var err error
 	var WorkSpaceAlert *Alert
-	testConfig := CreateConfig{
+	testConfig := &CreateConfig{
 		Webhook: fastly.ToPointer("https://example.webhook.office.com/webhookb2/test"),
 	}
 	testDescription := "This is a test alert."
@@ -28,7 +28,7 @@ func Test_Alerts(t *testing.T) {
 		WorkSpaceAlert, err = Create(c, &CreateInput{
 			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
-			Events:      []string{testEvent},
+			Events:      &[]string{testEvent},
 			Description: fastly.ToPointer(testDescription),
 			WorkspaceID: &testWorkspaceID,
 		})
@@ -82,7 +82,7 @@ func Test_Alerts(t *testing.T) {
 	}
 
 	// Update the test workspace alert.
-	updatedConfig := UpdateConfig{
+	updatedConfig := &UpdateConfig{
 		Webhook: fastly.ToPointer("https://updated.webhook.office.com/webhookb2/test"),
 	}
 	updatedEvent := "flag"
@@ -92,7 +92,7 @@ func Test_Alerts(t *testing.T) {
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			Config:      updatedConfig,
-			Events:      []string{updatedEvent},
+			Events:      &[]string{updatedEvent},
 		})
 	})
 	if err != nil {
@@ -161,7 +161,7 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Webhook: fastly.ToPointer("https://example.webhook.office.com/webhookb2/...")},
+		Config:      &CreateConfig{Webhook: fastly.ToPointer("https://example.webhook.office.com/webhookb2/...")},
 		Events:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
