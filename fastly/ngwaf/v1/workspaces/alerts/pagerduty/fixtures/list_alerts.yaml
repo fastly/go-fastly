@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts
+    method: GET
+  response:
+    body: |
+      {"data":[{"id":"6870052c35979da87e61a2b9","description":"This is a test alert.","type":"pagerduty","config":{"key":"987654321"},"events":["flag"],"created_at":"2025-07-10T18:23:40Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}],"meta":{"limit":100,"total":1}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "276"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 10 Jul 2025 18:23:41 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740084-EWR
+      X-Timer:
+      - S1752171822.634604,VS0,VE109
+    status: 200 OK
+    code: 200
+    duration: ""

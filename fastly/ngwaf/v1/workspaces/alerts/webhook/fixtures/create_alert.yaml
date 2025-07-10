@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"config":{"webhook":"https://example.com/webhook"},"description":"This
+      is a test alert.","events":["flag"],"type":"webhook"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts
+    method: POST
+  response:
+    body: |
+      {"id":"68700db8288bd7678ff2b488","description":"This is a test alert.","type":"webhook","config":{"webhook":"https://example.com/webhook"},"events":["flag"],"created_at":"2025-07-10T19:00:08Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "254"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 10 Jul 2025 19:00:09 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740054-EWR
+      X-Timer:
+      - S1752174009.867944,VS0,VE357
+    status: 201 Created
+    code: 201
+    duration: ""

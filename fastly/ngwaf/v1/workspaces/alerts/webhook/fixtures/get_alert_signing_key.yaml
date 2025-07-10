@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/68700db8288bd7678ff2b488/signing-key
+    method: GET
+  response:
+    body: |
+      {"signing_key":"e592a009-facc-4fd9-a626-7f826ac14d06"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "55"
+      Content-Type:
+      - application/json
+      Date:
+      - Thu, 10 Jul 2025 19:00:09 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000040-CHI, cache-ewr-kewr1740054-EWR
+      X-Timer:
+      - S1752174009.356404,VS0,VE108
+    status: 200 OK
+    code: 200
+    duration: ""
