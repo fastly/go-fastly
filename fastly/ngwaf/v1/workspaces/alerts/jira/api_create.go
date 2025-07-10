@@ -40,7 +40,7 @@ type CreateInput struct {
 }
 
 // Create creates a new workspace alert.
-func Create(c *fastly.Client, i *CreateInput) (*WorkspaceAlert, error) {
+func Create(c *fastly.Client, i *CreateInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -76,7 +76,7 @@ func Create(c *fastly.Client, i *CreateInput) (*WorkspaceAlert, error) {
 	}
 	defer resp.Body.Close()
 
-	var wa *WorkspaceAlert
+	var wa *Alert
 	if err := json.NewDecoder(resp.Body).Decode(&wa); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}

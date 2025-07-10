@@ -21,7 +21,7 @@ type ListInput struct {
 }
 
 // List retrieves a list of workspaces alerts.
-func List(c *fastly.Client, i *ListInput) (*WorkspaceAlerts, error) {
+func List(c *fastly.Client, i *ListInput) (*Alerts, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -39,13 +39,13 @@ func List(c *fastly.Client, i *ListInput) (*WorkspaceAlerts, error) {
 	}
 	defer resp.Body.Close()
 
-	var was *WorkspaceAlerts
+	var was *Alerts
 	if err := json.NewDecoder(resp.Body).Decode(&was); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}
 
 	// Parse the alerts to only include the desired type of integration.
-	var parsedAlerts []WorkspaceAlert
+	var parsedAlerts []Alert
 	for _, alert := range was.Data {
 		if alert.Type == IntegrationType {
 			parsedAlerts = append(parsedAlerts, alert)

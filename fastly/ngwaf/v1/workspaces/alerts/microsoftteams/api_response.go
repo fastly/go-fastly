@@ -6,17 +6,17 @@ type ResponseConfig struct {
 	Webhook *string `json:"webhook"`
 }
 
-// MetaWorkspaceAlerts is a subset of the WorkspaceAlerts response structure.
-type MetaWorkspaceAlerts struct {
-	// Limit is the limit of WorkspaceAlert.
+// MetaAlerts is a subset of the Alerts response structure.
+type MetaAlerts struct {
+	// Limit is the limit of Alert.
 	Limit int `json:"limit"`
-	// Total is the sum of WorkspaceAlert.
+	// Total is the sum of Alert.
 	Total int `json:"total"`
 }
 
-// WorkspaceAlert is the API response structure for the create, get and update
+// Alert is the API response structure for the create, get and update
 // workspace alert operations.
-type WorkspaceAlert struct {
+type Alert struct {
 	// Description is an optional description for the alert.
 	Description string `json:"description"`
 	// ID is the workspace alert identifier.
@@ -35,17 +35,17 @@ type WorkspaceAlert struct {
 	LastStatusCode int `json:"last_status_code"`
 }
 
-// WorkspaceAlertEvent is a subset of the WorkspaceAlert response structure.
-type WorkspaceAlertEvent struct {
+// AlertEvent is a subset of the Alert response structure.
+type AlertEvent struct {
 	// Flag is the event flag.
 	Flag string `json:"flag"`
 }
 
-// WorkspaceAlerts is the API response structure for the list workspace alert operation.
-type WorkspaceAlerts struct {
+// Alerts is the API response structure for the list workspace alert operation.
+type Alerts struct {
 	// Data is the list of returned workspace alerts.
-	Data []WorkspaceAlert `json:"data"`
+	Data []Alert `json:"data"`
 	// Meta is the information for total workspace alerts.
-	Meta MetaWorkspaceAlerts `json:"meta"`
+	Meta MetaAlerts `json:"meta"`
 }
 

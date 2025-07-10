@@ -20,7 +20,7 @@ type RotateKeyInput struct {
 }
 
 // RotateKey rotates the alert signing key.
-func RotateKey(c *fastly.Client, i *RotateKeyInput) (*WorkspaceAlertsKey, error) {
+func RotateKey(c *fastly.Client, i *RotateKeyInput) (*AlertsKey, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -37,7 +37,7 @@ func RotateKey(c *fastly.Client, i *RotateKeyInput) (*WorkspaceAlertsKey, error)
 	}
 	defer resp.Body.Close()
 
-	var wak *WorkspaceAlertsKey
+	var wak *AlertsKey
 	if err := json.NewDecoder(resp.Body).Decode(&wak); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}

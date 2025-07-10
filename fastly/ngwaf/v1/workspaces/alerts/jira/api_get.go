@@ -20,7 +20,7 @@ type GetInput struct {
 }
 
 // Get retrieves the workspace alert.
-func Get(c *fastly.Client, i *GetInput) (*WorkspaceAlert, error) {
+func Get(c *fastly.Client, i *GetInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -37,7 +37,7 @@ func Get(c *fastly.Client, i *GetInput) (*WorkspaceAlert, error) {
 	}
 	defer resp.Body.Close()
 
-	var wa *WorkspaceAlert
+	var wa *Alert
 	if err := json.NewDecoder(resp.Body).Decode(&wa); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}

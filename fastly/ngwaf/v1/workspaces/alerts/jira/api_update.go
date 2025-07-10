@@ -38,7 +38,7 @@ type UpdateInput struct {
 }
 
 // Update updates the specified workspace alert.
-func Update(c *fastly.Client, i *UpdateInput) (*WorkspaceAlert, error) {
+func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}
@@ -88,7 +88,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*WorkspaceAlert, error) {
 	}
 	defer resp.Body.Close()
 
-	var wa *WorkspaceAlert
+	var wa *Alert
 	if err := json.NewDecoder(resp.Body).Decode(&wa); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}

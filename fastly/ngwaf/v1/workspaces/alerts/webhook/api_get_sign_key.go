@@ -20,7 +20,7 @@ type GetKeyInput struct {
 }
 
 // GetKey gets the alert signing key.
-func GetKey(c *fastly.Client, i *GetKeyInput) (*WorkspaceAlertsKey, error) {
+func GetKey(c *fastly.Client, i *GetKeyInput) (*AlertsKey, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -37,7 +37,7 @@ func GetKey(c *fastly.Client, i *GetKeyInput) (*WorkspaceAlertsKey, error) {
 	}
 	defer resp.Body.Close()
 
-	var wak *WorkspaceAlertsKey
+	var wak *AlertsKey
 	if err := json.NewDecoder(resp.Body).Decode(&wak); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}

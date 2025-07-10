@@ -10,12 +10,12 @@ import (
 // Global workspace value for the tests.
 var testWorkspaceID = fastly.TestNGWAFWorkspaceID
 
-func Test_WorkspaceAlerts(t *testing.T) {
+func Test_Alerts(t *testing.T) {
 	t.Parallel()
 
 	var AlertID string
 	var err error
-	var WorkSpaceAlert *WorkspaceAlert
+	var WorkSpaceAlert *Alert
 	testConfig := CreateConfig{
 		Webhook: fastly.ToPointer("https://example.com/webhook"),
 	}
@@ -55,9 +55,9 @@ func Test_WorkspaceAlerts(t *testing.T) {
 	}()
 
 	// Get the test workspace alert.
-	var getTestWorkspaceAlert *WorkspaceAlert
+	var getTestAlert *Alert
 	fastly.Record(t, "get_workspacealert", func(c *fastly.Client) {
-		getTestWorkspaceAlert, err = Get(c, &GetInput{
+		getTestAlert, err = Get(c, &GetInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
@@ -65,24 +65,24 @@ func Test_WorkspaceAlerts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *getTestWorkspaceAlert.Config.Webhook != *testConfig.Webhook {
-		t.Errorf("unexpected workspace alert config webhook: got %v, expected %v", *getTestWorkspaceAlert.Config.Webhook, *testConfig.Webhook)
+	if *getTestAlert.Config.Webhook != *testConfig.Webhook {
+		t.Errorf("unexpected workspace alert config webhook: got %v, expected %v", *getTestAlert.Config.Webhook, *testConfig.Webhook)
 	}
-	if getTestWorkspaceAlert.Type != testType {
-		t.Errorf("unexpected workspace alert type: got %+v, expected %+v", getTestWorkspaceAlert.Type, testType)
+	if getTestAlert.Type != testType {
+		t.Errorf("unexpected workspace alert type: got %+v, expected %+v", getTestAlert.Type, testType)
 	}
-	if len(getTestWorkspaceAlert.Events) != 1 {
-		t.Errorf("unexpected workspace alerts event length: got %d, expected %d", len(getTestWorkspaceAlert.Events), 1)
+	if len(getTestAlert.Events) != 1 {
+		t.Errorf("unexpected workspace alerts event length: got %d, expected %d", len(getTestAlert.Events), 1)
 	}
-	if getTestWorkspaceAlert.Events[0] != testEvent {
-		t.Errorf("unexpected workspace alert events: got %+v, expected %+v", getTestWorkspaceAlert.Events[0], testEvent)
+	if getTestAlert.Events[0] != testEvent {
+		t.Errorf("unexpected workspace alert events: got %+v, expected %+v", getTestAlert.Events[0], testEvent)
 	}
-	if getTestWorkspaceAlert.Description != testDescription {
-		t.Errorf("unexpected workspace alert description: got %+v, expected %+v", getTestWorkspaceAlert.Description, testDescription)
+	if getTestAlert.Description != testDescription {
+		t.Errorf("unexpected workspace alert description: got %+v, expected %+v", getTestAlert.Description, testDescription)
 	}
 
 	// Get the signing key for the webhook alert.
-	var signingKey *WorkspaceAlertsKey
+	var signingKey *AlertsKey
 	fastly.Record(t, "get_workspacealert_signing_key", func(c *fastly.Client) {
 		signingKey, err = GetKey(c, &GetKeyInput{
 			AlertID:     fastly.ToPointer(AlertID),
@@ -98,7 +98,7 @@ func Test_WorkspaceAlerts(t *testing.T) {
 	originalKey := signingKey.SigningKey
 
 	// Rotate the signing key.
-	var rotatedKey *WorkspaceAlertsKey
+	var rotatedKey *AlertsKey
 	fastly.Record(t, "rotate_workspacealert_signing_key", func(c *fastly.Client) {
 		rotatedKey, err = RotateKey(c, &RotateKeyInput{
 			AlertID:     fastly.ToPointer(AlertID),
@@ -120,9 +120,9 @@ func Test_WorkspaceAlerts(t *testing.T) {
 		Webhook: fastly.ToPointer("https://updated.example.com/webhook"),
 	}
 	updatedEvent := "flag"
-	var updateWorkspaceAlert *WorkspaceAlert
+	var updateAlert *Alert
 	fastly.Record(t, "update_workspacealert", func(c *fastly.Client) {
-		updateWorkspaceAlert, err = Update(c, &UpdateInput{
+		updateAlert, err = Update(c, &UpdateInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			Config:      updatedConfig,
@@ -132,34 +132,34 @@ func Test_WorkspaceAlerts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if *updateWorkspaceAlert.Config.Webhook != *updatedConfig.Webhook {
-		t.Errorf("unexpected updated workspace alert config webhook: got %v, expected %v", *updateWorkspaceAlert.Config.Webhook, *updatedConfig.Webhook)
+	if *updateAlert.Config.Webhook != *updatedConfig.Webhook {
+		t.Errorf("unexpected updated workspace alert config webhook: got %v, expected %v", *updateAlert.Config.Webhook, *updatedConfig.Webhook)
 	}
-	if len(updateWorkspaceAlert.Events) != 1 {
-		t.Errorf("unexpected updated workspace alerts event length: got %d, expected %d", len(updateWorkspaceAlert.Events), 1)
+	if len(updateAlert.Events) != 1 {
+		t.Errorf("unexpected updated workspace alerts event length: got %d, expected %d", len(updateAlert.Events), 1)
 	}
-	if updateWorkspaceAlert.Events[0] != updatedEvent {
-		t.Errorf("unexpected updated workspace alert events: got %+v, expected %+v", updateWorkspaceAlert.Events[0], updatedEvent)
+	if updateAlert.Events[0] != updatedEvent {
+		t.Errorf("unexpected updated workspace alert events: got %+v, expected %+v", updateAlert.Events[0], updatedEvent)
 	}
 
 	// List the workspace alerts for the test workspace and check the updated one is the only entry.
-	var WorkspaceAlerts *WorkspaceAlerts
+	var Alerts *Alerts
 	fastly.Record(t, "list_workspacealerts", func(c *fastly.Client) {
-		WorkspaceAlerts, err = List(c, &ListInput{
+		Alerts, err = List(c, &ListInput{
 			WorkspaceID: &testWorkspaceID,
 		})
 	})
 	if err != nil {
 		t.Fatal(err)
 	}
-	if WorkspaceAlerts == nil {
+	if Alerts == nil {
 		t.Fatal("expected workspace alert response, got nil")
 	}
-	if len(WorkspaceAlerts.Data) != 1 {
-		t.Errorf("unexpected workspace alerts list length: got %d, expected %d", len(WorkspaceAlerts.Data), 1)
+	if len(Alerts.Data) != 1 {
+		t.Errorf("unexpected workspace alerts list length: got %d, expected %d", len(Alerts.Data), 1)
 	}
 	// Validate the listed alert matches the updated values
-	listedAlert := WorkspaceAlerts.Data[0]
+	listedAlert := Alerts.Data[0]
 	if *listedAlert.Config.Webhook != *updatedConfig.Webhook {
 		t.Errorf("unexpected listed workspace alert config webhook: got %v, expected %v", *listedAlert.Config.Webhook, *updatedConfig.Webhook)
 	}
@@ -171,7 +171,7 @@ func Test_WorkspaceAlerts(t *testing.T) {
 	}
 }
 
-func TestClient_CreateWorkspaceAlert_validation(t *testing.T) {
+func TestClient_CreateAlert_validation(t *testing.T) {
 	var err error
 	_, err = Create(fastly.TestClient, &CreateInput{
 		WorkspaceID: nil,
@@ -204,7 +204,7 @@ func TestClient_CreateWorkspaceAlert_validation(t *testing.T) {
 	}
 }
 
-func TestClient_GetWorkspaceAlert_validation(t *testing.T) {
+func TestClient_GetAlert_validation(t *testing.T) {
 	var err error
 	_, err = Get(fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
@@ -221,7 +221,7 @@ func TestClient_GetWorkspaceAlert_validation(t *testing.T) {
 	}
 }
 
-func TestClient_UpdateWorkspaceAlert_validation(t *testing.T) {
+func TestClient_UpdateAlert_validation(t *testing.T) {
 	var err error
 	_, err = Update(fastly.TestClient, &UpdateInput{
 		AlertID: nil,
@@ -238,7 +238,7 @@ func TestClient_UpdateWorkspaceAlert_validation(t *testing.T) {
 	}
 }
 
-func TestClient_DeleteWorkspaceAlert_validation(t *testing.T) {
+func TestClient_DeleteAlert_validation(t *testing.T) {
 	var err error
 	err = Delete(fastly.TestClient, &DeleteInput{
 		WorkspaceID: nil,
@@ -255,7 +255,7 @@ func TestClient_DeleteWorkspaceAlert_validation(t *testing.T) {
 	}
 }
 
-func TestClient_ListWorkspaceAlerts_validation(t *testing.T) {
+func TestClient_ListAlerts_validation(t *testing.T) {
 	var err error
 	_, err = List(fastly.TestClient, &ListInput{
 		WorkspaceID: nil,
