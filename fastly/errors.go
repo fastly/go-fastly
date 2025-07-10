@@ -89,6 +89,10 @@ var ErrMissingCertBlob = NewFieldError("CertBlob")
 // requires a "CertBundle" key, but one was not set.
 var ErrMissingCertBundle = NewFieldError("CertBundle")
 
+// ErrMissingConditions is an error that is returned when an input struct
+// requires a "Conditions" key, but one was not set.
+var ErrMissingConditions = NewFieldError("Conditions")
+
 // ErrMissingComputeACLID is an error that is returned when an input struct
 // requires a "ComputeACLID" key, but one was not set.
 var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
@@ -96,6 +100,42 @@ var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
 // ErrMissingComputeACLIP is an error that is returned when an input struct
 // requires a "ComputeACLIP" key, but one was not set.
 var ErrMissingComputeACLIP = NewFieldError("ComputeACLIP")
+
+// ErrMissingWorkspaceID is an error that is returned when an input struct
+// requires a "WorkspaceID" key, but one was not set.
+var ErrMissingWorkspaceID = NewFieldError("WorkspaceID")
+
+// ErrMissingListID is an error that is returned when an input struct
+// requires a "ListID" key, but one was not set.
+var ErrMissingListID = NewFieldError("ListID")
+
+// ErrMissingEntries is an error that is returned when an input struct
+// requires a "Entries" key, but one was not set.
+var ErrMissingEntries = NewFieldError("Entries")
+
+// ErrMissingIsExpired is an error that is returned when an input struct
+// requires an "IsExpired" key, but one was not set.
+var ErrMissingIsExpired = NewFieldError("IsExpired")
+
+// ErrMissingRedactionID is an error that is returned when an input struct
+// requires a "RedactionID" key, but one was not set.
+var ErrMissingRedactionID = NewFieldError("RedactionID")
+
+// ErrMissingRuleID is an error that is returned when an input struct
+// requires a "RuleID" key, but one was not set.
+var ErrMissingRuleID = NewFieldError("RuleID")
+
+// ErrMissingSignalID is an error that is returned when an input struct
+// requires a "SignalID" key, but one was not set.
+var ErrMissingSignalID = NewFieldError("SignalID")
+
+// ErrMissingRequestID is an error that is returned when an input struct
+// requires a "RequestID" key, but one was not set.
+var ErrMissingRequestID = NewFieldError("RequestID")
+
+// ErrMissingField is an error that is returned when an input struct
+// requires a "Field" key, but one was not set.
+var ErrMissingField = NewFieldError("Field")
 
 // ErrMissingContent is an error that is returned when an input struct
 // requires a "Content" key, but one was not set.
@@ -108,6 +148,14 @@ var ErrMissingType = NewFieldError("Type")
 // ErrMissingCustomerID is an error that is returned when an input struct
 // requires a "CustomerID" key, but one was not set.
 var ErrMissingCustomerID = NewFieldError("CustomerID")
+
+// ErrMissingAccessKeyID is an error that is returned when an input struct
+// requires a "AccessKeyID" key, but one was not set.
+var ErrMissingAccessKeyID = NewFieldError("AccessKeyID")
+
+// ErrMissingDescription is an error that is returned when an input struct
+// requires a "Description" key, but one was not set.
+var ErrMissingDescription = NewFieldError("Description")
 
 // ErrMissingDictionaryID is an error that is returned when an input struct
 // requires a "DictionaryID" key, but one was not set.
@@ -136,6 +184,14 @@ var ErrMissingID = NewFieldError("ID")
 // ErrMissingDomainID is an error that is returned when an input struct
 // requires a "DomainID" key, but one was not set.
 var ErrMissingDomainID = NewFieldError("DomainID")
+
+// ErrMissingDomainQuery is an error that is returned when an input struct
+// requires a "Query" key, but one was not set.
+var ErrMissingDomainQuery = NewFieldError("Query")
+
+// ErrMissingDomain is an error that is returned when an input struct
+// requires a "Domain" key, but one was not set.
+var ErrMissingDomain = NewFieldError("Domain")
 
 // ErrMissingEntryID is an error that is returned when an input struct
 // requires a "EntryID" key, but one was not set.
@@ -172,6 +228,10 @@ var ErrMissingKey = NewFieldError("Key")
 // ErrMissingKeys is an error that is returned when an input struct
 // requires a "Keys" key, but one was not set.
 var ErrMissingKeys = NewFieldError("Keys")
+
+// ErrMissingMetrics is an error that is returned when an input struct
+// requires a "Metrics" key, but one was not set.
+var ErrMissingMetrics = NewFieldError("Metrics")
 
 // ErrMissingLogin is an error that is returned when an input struct
 // requires a "Login" key, but one was not set.
@@ -225,6 +285,10 @@ var ErrMissingServiceAuthorizationsService = NewFieldError("Service").Message("S
 // requires a "User" key of type SAUser, but one was not set or was misconfigured.
 var ErrMissingServiceAuthorizationsUser = NewFieldError("User").Message("SAUser requires an ID")
 
+// ErrMissingStart is an error that is returned when an input struct
+// requires a "Start" key, but one was not set.
+var ErrMissingStart = NewFieldError("Start")
+
 // ErrMissingStoreID is an error that is returned when an input struct
 // requires a "StoreID" key, but one was not set.
 var ErrMissingStoreID = NewFieldError("StoreID")
@@ -236,6 +300,10 @@ var ErrMissingUserID = NewFieldError("UserID")
 // ErrMissingPermission is an error that is returned when an input struct
 // requires a "Permission" key, but one was not set.
 var ErrMissingPermission = NewFieldError("Permission")
+
+// ErrInvalidPermission is an error that is returned when an input struct
+// has a "Permission" key, but the one provided is invalid.
+var ErrInvalidPermission = NewFieldError("Permission").Message("invalid")
 
 // ErrMissingServiceVersion is an error that is returned when an input struct
 // requires a "ServiceVersion" key, but one was not set.
@@ -348,6 +416,14 @@ var ErrMissingIntegrationID = NewFieldError("IntegrationID")
 // requires one of the optional Image Optimizer default settings, but none are set.
 var ErrMissingImageOptimizerDefaultSetting = NewFieldError("ResizeFilter, Webp, WebpQuality, JpegType, JpegQuality, Upscale, AllowVideo").Message("at least one of the available optional fields is required")
 
+// ErrMissingVirtualPatchID is an error that is returned when an input struct
+// requires a "VirtualPatchID" key, but one was not set.
+var ErrMissingVirtualPatchID = NewFieldError("Virtual Patch")
+
+// ErrMissingMode is an error that is returned when an input struct
+// requires a "Mode" key, but one was not set.
+var ErrMissingMode = NewFieldError("Mode")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
@@ -452,7 +528,7 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		} else if lerr != nil {
 			// This is for better handling the KV Store Bulk Insert endpoint.
 			// https://developer.fastly.com/reference/api/services/resources/kv-store-item/#batch-create-keys
-			if lerr.Errors != nil {
+			if len(lerr.Errors) != 0 {
 				for _, le := range lerr.Errors {
 					var (
 						code, detail string
@@ -548,10 +624,15 @@ func (e *HTTPError) String() string {
 
 // IsBadRequest returns true if the HTTP status code is 400, false otherwise.
 func (e *HTTPError) IsBadRequest() bool {
-	return e.StatusCode == 400
+	return e.StatusCode == http.StatusBadRequest
 }
 
 // IsNotFound returns true if the HTTP status code is 404, false otherwise.
 func (e *HTTPError) IsNotFound() bool {
-	return e.StatusCode == 404
+	return e.StatusCode == http.StatusNotFound
+}
+
+// IsPreconditionFailed returns true if the HTTP status code is 412, false otherwise.
+func (e *HTTPError) IsPreconditionFailed() bool {
+	return e.StatusCode == http.StatusPreconditionFailed
 }

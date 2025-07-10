@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"net/http"
 	"time"
 )
@@ -41,7 +42,7 @@ type ListTokensInput struct {
 
 // ListTokens retrieves all resources.
 func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
-	resp, err := c.Get("/tokens", nil)
+	resp, err := c.Get("/tokens", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +57,8 @@ func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
@@ -68,7 +71,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 
 	path := ToSafeURL("customer", i.CustomerID, "tokens")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -86,7 +89,7 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 //
 // Returns a 401 if the token has expired and a 403 for invalid access token.
 func (c *Client) GetTokenSelf() (*Token, error) {
-	resp, err := c.Get("/tokens/self", nil)
+	resp, err := c.Get("/tokens/self", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, err
 	}
@@ -102,6 +105,8 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
 	// Name is the name of the token.
@@ -118,13 +123,13 @@ type CreateTokenInput struct {
 
 // CreateToken creates a new resource.
 func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
-	ignored, err := c.PostForm("/sudo", i, nil)
+	ignored, err := c.PostForm("/sudo", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
 	defer ignored.Body.Close()
 
-	resp, err := c.PostForm("/tokens", i, nil)
+	resp, err := c.PostForm("/tokens", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -139,6 +144,8 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// TokenID is an alphanumeric string identifying a token (required).
 	TokenID string
 }
@@ -151,7 +158,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 
 	path := ToSafeURL("tokens", i.TokenID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -165,7 +172,7 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 
 // DeleteTokenSelf deletes the specified resource.
 func (c *Client) DeleteTokenSelf() error {
-	resp, err := c.Delete("/tokens/self", nil)
+	resp, err := c.Delete("/tokens/self", CreateRequestOptions(nil))
 	if err != nil {
 		return err
 	}
@@ -179,6 +186,8 @@ func (c *Client) DeleteTokenSelf() error {
 
 // BatchDeleteTokensInput is used as input to BatchDeleteTokens.
 type BatchDeleteTokensInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Tokens is a list of alphanumeric strings, each identifying a token.
 	Tokens []*BatchToken
 }
@@ -195,7 +204,7 @@ func (c *Client) BatchDeleteTokens(i *BatchDeleteTokensInput) error {
 	if len(i.Tokens) == 0 {
 		return ErrMissingTokensValue
 	}
-	ignored, err := c.DeleteJSONAPIBulk("/tokens", i.Tokens, nil)
+	ignored, err := c.DeleteJSONAPIBulk("/tokens", i.Tokens, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

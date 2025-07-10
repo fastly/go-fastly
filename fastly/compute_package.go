@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"io"
 	"strconv"
@@ -35,6 +36,8 @@ type PackageMetadata struct {
 
 // GetPackageInput is used as input to the GetPackage function.
 type GetPackageInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `mapstructure:"-"`
 	// ServiceID is the ID of the service (required).
 	ServiceID string `mapstructure:"service_id"`
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +51,7 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 		return nil, err
 	}
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -59,6 +62,8 @@ func (c *Client) GetPackage(i *GetPackageInput) (*Package, error) {
 
 // UpdatePackageInput is used as input to the UpdatePackage function.
 type UpdatePackageInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `mapstructure:"-"`
 	// PackagePath is the local filesystem path to the package to upload.
 	PackagePath *string
 	// PackageContent is the data in raw of the package to upload.
@@ -79,14 +84,14 @@ func (c *Client) UpdatePackage(i *UpdatePackageInput) (*Package, error) {
 	var body io.ReadCloser
 	switch {
 	case i.PackagePath != nil:
-		resp, err := c.PutFormFile(urlPath, *i.PackagePath, "package", nil)
+		resp, err := c.PutFormFile(urlPath, *i.PackagePath, "package", CreateRequestOptions(i.Context))
 		if err != nil {
 			return nil, err
 		}
 		defer resp.Body.Close()
 		body = resp.Body
 	case len(i.PackageContent) != 0:
-		resp, err := c.PutFormFileFromReader(urlPath, "package.tar.gz", bytes.NewReader(i.PackageContent), "package", nil)
+		resp, err := c.PutFormFileFromReader(urlPath, "package.tar.gz", bytes.NewReader(i.PackageContent), "package", CreateRequestOptions(i.Context))
 		if err != nil {
 			return nil, err
 		}

@@ -32,7 +32,7 @@ var DefaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
 var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
 
 // ID of the default NGWAF workspace for testing.
-var defaultNGWAFWorkspaceID = "alk6DTsYKHKucJCOIavaJM"
+var defaultNGWAFWorkspaceID = "Am2qjXkgamuYp3u54rQkLD"
 
 const (
 	// ServiceTypeVCL is the type for VCL services.
@@ -114,7 +114,7 @@ func getRecorder(t *testing.T, fixture string) *recorder.Recorder {
 
 	// Add a filter which removes Fastly-Key header from all recorded requests.
 	r.AddFilter(func(i *cassette.Interaction) error {
-		delete(i.Request.Headers, "Fastly-Key")
+		delete(i.Request.Headers, APIKeyHeader)
 		return nil
 	})
 
@@ -294,28 +294,6 @@ func createTestPool(t *testing.T, createFixture, serviceID string, version int, 
 	return pool
 }
 
-func createTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
-	var err error
-
-	Record(t, fixture, func(c *Client) {
-		_, err = c.CreateSyslog(&CreateSyslogInput{
-			ServiceID:      serviceID,
-			ServiceVersion: serviceNumber,
-			Name:           ToPointer("test-syslog"),
-			Address:        ToPointer("example.com"),
-			Hostname:       ToPointer("example.com"),
-			Port:           ToPointer(1234),
-			Token:          ToPointer("abcd1234"),
-			Format:         ToPointer("format"),
-			FormatVersion:  ToPointer(2),
-			MessageType:    ToPointer("classic"),
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
 func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 	var err error
 
@@ -324,121 +302,6 @@ func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 			ServiceID:      *pool.ServiceID,
 			ServiceVersion: *pool.ServiceVersion,
 			Name:           *pool.Name,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func deleteTestLogging(t *testing.T, fixture, serviceID string, serviceNumber int) {
-	var err error
-
-	Record(t, fixture, func(c *Client) {
-		err = c.DeleteSyslog(&DeleteSyslogInput{
-			ServiceID:      serviceID,
-			ServiceVersion: serviceNumber,
-			Name:           "test-syslog",
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func createTestWAFCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) *Condition {
-	var err error
-	var condition *Condition
-
-	Record(t, fixture, func(c *Client) {
-		condition, err = c.CreateCondition(&CreateConditionInput{
-			ServiceID:      serviceID,
-			ServiceVersion: serviceNumber,
-			Name:           ToPointer(name),
-			Statement:      ToPointer("req.url~+\"index.html\""),
-			Type:           ToPointer("PREFETCH"), // This must be a prefetch condition
-			Priority:       ToPointer(1),
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return condition
-}
-
-func deleteTestCondition(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
-	var err error
-
-	Record(t, fixture, func(c *Client) {
-		err = c.DeleteCondition(&DeleteConditionInput{
-			ServiceID:      serviceID,
-			ServiceVersion: serviceNumber,
-			Name:           name,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func createTestWAFResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) *ResponseObject {
-	var err error
-	var ro *ResponseObject
-
-	Record(t, fixture, func(c *Client) {
-		ro, err = c.CreateResponseObject(&CreateResponseObjectInput{
-			ServiceID:      serviceID,
-			ServiceVersion: serviceNumber,
-			Name:           ToPointer(name),
-			Status:         ToPointer(403),
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return ro
-}
-
-func deleteTestResponseObject(t *testing.T, fixture, serviceID, name string, serviceNumber int) {
-	var err error
-
-	Record(t, fixture, func(c *Client) {
-		err = c.DeleteResponseObject(&DeleteResponseObjectInput{
-			ServiceID:      serviceID,
-			ServiceVersion: serviceNumber,
-			Name:           name,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-}
-
-func createWAF(t *testing.T, fixture, serviceID, condition, response string, serviceNumber int) *WAF {
-	var err error
-	var waf *WAF
-
-	Record(t, fixture, func(c *Client) {
-		waf, err = c.CreateWAF(&CreateWAFInput{
-			ServiceID:         serviceID,
-			ServiceVersion:    serviceNumber,
-			PrefetchCondition: condition,
-			Response:          response,
-		})
-	})
-	if err != nil {
-		t.Fatal(err)
-	}
-	return waf
-}
-
-func deleteWAF(t *testing.T, fixture, wafID string) {
-	var err error
-
-	Record(t, fixture, func(c *Client) {
-		err = c.DeleteWAF(&DeleteWAFInput{
-			ID:             wafID,
-			ServiceVersion: 1,
 		})
 	})
 	if err != nil {

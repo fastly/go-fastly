@@ -1,37 +1,34 @@
-on: pull_request
+on: 
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - main
 name: Test
 jobs:
-  lint:
+  changelog:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-    - name: Install Go
-      uses: actions/setup-go@v5
-      with:
-        go-version: 1.20.x
-    - name: Installing necessary tools
-      run: make dev-dependencies
-      shell: bash
-    - name: Check Module
-      run: make check-mod
-      shell: bash
-    - name: Check Imports
-      run: make check-imports
-      shell: bash
-    - name: Check Fmt
-      run: make check-fmt
-      shell: bash
-    - name: Vet
-      run: make vet
-      shell: bash
-    - name: Staticcheck
-      run: make staticcheck
-      shell: bash
+    - uses: dangoslen/changelog-enforcer@v3
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-go@v5
+        with:
+          go-version: stable
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v8
+        with:
+          version: v2.1
   test:
     strategy:
       matrix:
-        go-version: [1.20.x, 1.22.x]
+        go-version: [1.24.x]
         platform: [ubuntu-latest]
     runs-on: ${{ matrix.platform }}
     steps:

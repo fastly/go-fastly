@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -20,6 +21,7 @@ type Openstack struct {
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	PublicKey         *string    `mapstructure:"public_key"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -32,6 +34,8 @@ type Openstack struct {
 
 // ListOpenstackInput is used as input to the ListOpenstack function.
 type ListOpenstackInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +52,7 @@ func (c *Client) ListOpenstack(i *ListOpenstackInput) ([]*Openstack, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -69,6 +73,8 @@ type CreateOpenstackInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -85,6 +91,8 @@ type CreateOpenstackInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to OpenStack.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -111,7 +119,7 @@ func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +134,8 @@ func (c *Client) CreateOpenstack(i *CreateOpenstackInput) (*Openstack, error) {
 
 // GetOpenstackInput is used as input to the GetOpenstack function.
 type GetOpenstackInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Openstack to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +157,7 @@ func (c *Client) GetOpenstack(i *GetOpenstackInput) (*Openstack, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +178,8 @@ type UpdateOpenstackInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is he codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -186,6 +198,8 @@ type UpdateOpenstackInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to OpenStack.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -215,7 +229,7 @@ func (c *Client) UpdateOpenstack(i *UpdateOpenstackInput) (*Openstack, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +244,8 @@ func (c *Client) UpdateOpenstack(i *UpdateOpenstackInput) (*Openstack, error) {
 
 // DeleteOpenstackInput is the input parameter to DeleteOpenstack.
 type DeleteOpenstackInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Openstack to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +267,7 @@ func (c *Client) DeleteOpenstack(i *DeleteOpenstackInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "openstack", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

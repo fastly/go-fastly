@@ -2,10 +2,12 @@
 version: 1
 interactions:
 - request:
-    body: format_version=2&name=new-test-newrelic&region=eu
+    body: format_version=2&log_processing_region=eu&name=new-test-newrelic&region=eu
     form:
       format_version:
       - "2"
+      log_processing_region:
+      - eu
       name:
       - new-test-newrelic
       region:
@@ -14,11 +16,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/52/logging/newrelic/test-newrelic
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/logging/newrelic/test-newrelic
     method: PUT
   response:
-    body: '{"format":"format","format_version":"2","region":"eu","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","deleted_at":null,"name":"new-test-newrelic","updated_at":"2022-11-04T14:57:13Z","version":"52","response_condition":"","placement":"waf_debug","created_at":"2022-11-04T14:57:13Z"}'
+    body: '{"placement":"waf_debug","log_processing_region":"eu","created_at":"2025-06-04T15:26:20Z","response_condition":"","updated_at":"2025-06-04T15:26:20Z","region":"eu","format_version":"2","name":"new-test-newrelic","token":"abcd1234","version":"123","deleted_at":null,"format":"format","service_id":"kKJb5bOFI47uHeBVluGfX1"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -27,11 +29,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:57:15 GMT
+      - Wed, 04 Jun 2025 15:26:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "9950"
+      - "9861"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -45,9 +51,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4120-MAN
+      - cache-chi-klot8100106-CHI, cache-nyc-kteb1890058-NYC
       X-Timer:
-      - S1667573835.045204,VS0,VE352
+      - S1749050782.937679,VS0,VE417
     status: 200 OK
     code: 200
     duration: ""

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -13,6 +14,7 @@ type Splunk struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequestMaxEntries *int       `mapstructure:"request_max_entries"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -30,6 +32,8 @@ type Splunk struct {
 
 // ListSplunksInput is used as input to the ListSplunks function.
 type ListSplunksInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -46,7 +50,7 @@ func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -61,6 +65,8 @@ func (c *Client) ListSplunks(i *ListSplunksInput) ([]*Splunk, error) {
 
 // CreateSplunkInput is used as input to the CreateSplunk function.
 type CreateSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -69,6 +75,8 @@ type CreateSplunkInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Splunk.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 for unbounded.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 for unbounded.
@@ -105,7 +113,7 @@ func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -120,6 +128,8 @@ func (c *Client) CreateSplunk(i *CreateSplunkInput) (*Splunk, error) {
 
 // GetSplunkInput is used as input to the GetSplunk function.
 type GetSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the splunk to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -141,7 +151,7 @@ func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -156,6 +166,8 @@ func (c *Client) GetSplunk(i *GetSplunkInput) (*Splunk, error) {
 
 // UpdateSplunkInput is used as input to the UpdateSplunk function.
 type UpdateSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -166,6 +178,8 @@ type UpdateSplunkInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Splunk.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 for unbounded.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 for unbounded.
@@ -205,7 +219,7 @@ func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -220,6 +234,8 @@ func (c *Client) UpdateSplunk(i *UpdateSplunkInput) (*Splunk, error) {
 
 // DeleteSplunkInput is the input parameter to DeleteSplunk.
 type DeleteSplunkInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the splunk to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -241,7 +257,7 @@ func (c *Client) DeleteSplunk(i *DeleteSplunkInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "splunk", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

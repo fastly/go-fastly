@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entries?limit=1
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entries?limit=1
     method: GET
   response:
     body: '{"entries":[{"prefix":"1.2.3.0/24","action":"BLOCK"}],"meta":{"next_cursor":"LDE=","limit":1}}'
@@ -21,7 +21,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:03 GMT
+      - Wed, 12 Feb 2025 23:49:35 GMT
       Pragma:
       - no-cache
       Server:
@@ -35,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760047-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760034-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681783.586270,VS0,VE539
+      - S1739404175.587710,VS0,VE482
     status: 200 OK
     code: 200
     duration: ""
@@ -46,8 +46,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entry/1.2.3.0
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entry/1.2.3.0
     method: GET
   response:
     body: '{"prefix":"1.2.3.0/24","action":"BLOCK"}'
@@ -61,7 +61,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:03 GMT
+      - Wed, 12 Feb 2025 23:49:35 GMT
       Pragma:
       - no-cache
       Server:
@@ -75,9 +75,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760062-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760036-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681783.221603,VS0,VE762
+      - S1739404175.143855,VS0,VE322
     status: 200 OK
     code: 200
     duration: ""
@@ -86,11 +86,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entries?cursor=LDE%3D&limit=1
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entries?cursor=LDE%3D&limit=1
     method: GET
   response:
-    body: '{"entries":[{"prefix":"1.2.3.4/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5MGVGWkhlVVpQUTNwNVJrSjJha3BOY1VWT2NIZEJYMjUyTkY4d01EQXgsMA==","limit":1}}'
+    body: '{"entries":[{"prefix":"1.2.3.4/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5MGQyZGpWVFZPVG5CWk1FZHpWbVp6UTJGMk5HODJYMjUyTkY4d01EQXgsMA==","limit":1}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -101,7 +101,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:04 GMT
+      - Wed, 12 Feb 2025 23:49:35 GMT
       Pragma:
       - no-cache
       Server:
@@ -115,9 +115,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760039-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760031-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681784.046183,VS0,VE529
+      - S1739404176.555740,VS0,VE184
     status: 200 OK
     code: 200
     duration: ""
@@ -126,8 +126,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entry/1.2.3.4
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entry/1.2.3.4
     method: GET
   response:
     body: '{"prefix":"1.2.3.4/32","action":"ALLOW"}'
@@ -141,7 +141,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:04 GMT
+      - Wed, 12 Feb 2025 23:49:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -155,9 +155,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760022-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760089-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681785.679071,VS0,VE104
+      - S1739404176.759977,VS0,VE386
     status: 200 OK
     code: 200
     duration: ""
@@ -166,11 +166,11 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entries?cursor=Q2g5MGVGWkhlVVpQUTNwNVJrSjJha3BOY1VWT2NIZEJYMjUyTkY4d01EQXgsMA%3D%3D&limit=1
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entries?cursor=Q2g5MGQyZGpWVFZPVG5CWk1FZHpWbVp6UTJGMk5HODJYMjUyTkY4d01EQXgsMA%3D%3D&limit=1
     method: GET
   response:
-    body: '{"entries":[{"prefix":"23.23.23.23/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5MGVGWkhlVVpQUTNwNVJrSjJha3BOY1VWT2NIZEJYMjUyTkY4d01ERTMsMA==","limit":1}}'
+    body: '{"entries":[{"prefix":"23.23.23.23/32","action":"ALLOW"}],"meta":{"next_cursor":"Q2g5MGQyZGpWVFZPVG5CWk1FZHpWbVp6UTJGMk5HODJYMjUyTkY4d01ERTMsMA==","limit":1}}'
     headers:
       Accept-Ranges:
       - bytes
@@ -181,7 +181,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:05 GMT
+      - Wed, 12 Feb 2025 23:49:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -195,9 +195,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760056-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760050-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681785.852586,VS0,VE634
+      - S1739404176.267881,VS0,VE312
     status: 200 OK
     code: 200
     duration: ""
@@ -206,8 +206,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entry/23.23.23.23
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entry/23.23.23.23
     method: GET
   response:
     body: '{"prefix":"23.23.23.23/32","action":"ALLOW"}'
@@ -221,7 +221,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:05 GMT
+      - Wed, 12 Feb 2025 23:49:36 GMT
       Pragma:
       - no-cache
       Server:
@@ -235,9 +235,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760070-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760085-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681786.523491,VS0,VE280
+      - S1739404177.680044,VS0,VE216
     status: 200 OK
     code: 200
     duration: ""
@@ -246,8 +246,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entries?cursor=Q2g5MGVGWkhlVVpQUTNwNVJrSjJha3BOY1VWT2NIZEJYMjUyTkY4d01ERTMsMA%3D%3D&limit=1
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entries?cursor=Q2g5MGQyZGpWVFZPVG5CWk1FZHpWbVp6UTJGMk5HODJYMjUyTkY4d01ERTMsMA%3D%3D&limit=1
     method: GET
   response:
     body: '{"entries":[{"prefix":"192.168.0.0/16","action":"BLOCK"}],"meta":{"limit":1}}'
@@ -261,7 +261,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:06 GMT
+      - Wed, 12 Feb 2025 23:49:37 GMT
       Pragma:
       - no-cache
       Server:
@@ -275,9 +275,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760024-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760055-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681786.880080,VS0,VE562
+      - S1739404177.913090,VS0,VE331
     status: 200 OK
     code: 200
     duration: ""
@@ -286,8 +286,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.11.0 (+github.com/fastly/go-fastly; go1.23.3)
-    url: https://api.fastly.com/resources/acls/txVGyFOCzyFBvjJMqENpwA/entry/192.168.0.0
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entry/192.168.0.0
     method: GET
   response:
     body: '{"prefix":"192.168.0.0/16","action":"BLOCK"}'
@@ -301,7 +301,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 24 Jan 2025 01:23:06 GMT
+      - Wed, 12 Feb 2025 23:49:37 GMT
       Pragma:
       - no-cache
       Server:
@@ -315,9 +315,9 @@ interactions:
       X-Cache-Hits:
       - "0"
       X-Served-By:
-      - cache-mia-kmia1760059-MIA, cache-mia-kmia1760041-MIA
+      - cache-mia-kmia1760052-MIA, cache-mia-kmia1760066-MIA
       X-Timer:
-      - S1737681786.488836,VS0,VE295
+      - S1739404177.261046,VS0,VE90
     status: 200 OK
     code: 200
     duration: ""

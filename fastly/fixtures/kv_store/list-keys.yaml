@@ -6,30 +6,36 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys?consistency=strong
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys?consistency=strong
     method: GET
   response:
     body: '{"data":["apple","banana","batch-1","batch-2","carrot","dragonfruit","eggplant"],"meta":{"limit":1000}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Oct 2023 13:11:21 GMT
+      - Mon, 23 Jun 2025 19:41:18 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - PASS, MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-lhr7341-LHR, cache-lhr7355-LHR
+      - cache-ewr-kewr1740077-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1698757882.799757,VS0,VE190
+      - S1750707678.198222,VS0,VE153
     status: 200 OK
     code: 200
     duration: ""

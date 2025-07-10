@@ -2,11 +2,12 @@ package fastly
 
 import (
 	"errors"
+	"net/http"
 	"testing"
 )
 
 const (
-	MiB = 1048576
+	MiB = http.DefaultMaxHeaderBytes
 )
 
 func TestClient_BlobStorages(t *testing.T) {
@@ -291,6 +292,7 @@ func TestClient_BlobStorages(t *testing.T) {
 			NewName:          ToPointer("new-test-blobstorage"),
 			CompressionCodec: ToPointer("zstd"),
 			FileMaxBytes:     ToPointer(5 * MiB),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -333,6 +335,9 @@ func TestClient_BlobStorages(t *testing.T) {
 	}
 	if *bsUpdateResp1.FileMaxBytes != 5*MiB {
 		t.Errorf("bad file_max_bytes: %q", *bsUpdateResp1.FileMaxBytes)
+	}
+	if *bsUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *bsUpdateResp1.ProcessingRegion)
 	}
 	if *bsUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *bsUpdateResp2.CompressionCodec)

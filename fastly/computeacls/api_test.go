@@ -4,7 +4,7 @@ import (
 	"net"
 	"testing"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 func TestClient_ComputeACL(t *testing.T) {
@@ -162,7 +162,7 @@ func TestClient_ComputeACL(t *testing.T) {
 
 			ip, ipNet, err := net.ParseCIDR(actualACLEntries.Entries[0].Prefix)
 			if err != nil {
-				t.Errorf("error parsing IP: %v", err)
+				t.Fatal(err)
 			}
 
 			entry, err := Lookup(c, &LookupInput{
@@ -192,6 +192,20 @@ func TestClient_ComputeACL(t *testing.T) {
 			input.Cursor = fastly.ToPointer(cursor)
 
 			page++
+		}
+	})
+
+	// Lookup a non-existing IP in the test compute ACL
+	fastly.Record(t, "lookup_non_existing_ip", func(c *fastly.Client) {
+		entry, err := Lookup(c, &LookupInput{
+			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
+			ComputeACLIP: fastly.ToPointer("73.49.184.42"),
+		})
+		if entry != nil {
+			t.Errorf("unexpected lookup result: got %+v, expected 'nil'", entry)
+		}
+		if err != nil {
+			t.Errorf("unexpected error: %v", err)
 		}
 	})
 }

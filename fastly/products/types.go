@@ -1,6 +1,6 @@
 package products
 
-import "github.com/fastly/go-fastly/v9/fastly"
+import "github.com/fastly/go-fastly/v10/fastly"
 
 // ProductOutput is an interface used to constrain the 'O' type
 // parameters of API operation functions. Use of this interface allows
@@ -19,12 +19,12 @@ type ProductOutput interface {
 
 // NullInput is used to indicate to the generic FunctionalTest
 // constructors that the operation being tested does not accept an
-// Input struct
+// Input struct.
 type NullInput struct{}
 
 // NullOutput is used to indicate to the generic FunctionalTest
 // constructors that the operation being tested does not produce an
-// Output struct
+// Output struct.
 type NullOutput struct{}
 
 func (o NullOutput) ProductID() string {

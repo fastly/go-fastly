@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -14,6 +15,7 @@ type Scalyr struct {
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
 	ProjectID         *string    `mapstructure:"project_id"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -24,6 +26,8 @@ type Scalyr struct {
 
 // ListScalyrsInput is used as input to the ListScalyrs function.
 type ListScalyrsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -40,7 +44,7 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -55,6 +59,8 @@ func (c *Client) ListScalyrs(i *ListScalyrsInput) ([]*Scalyr, error) {
 
 // CreateScalyrInput is used as input to the CreateScalyr function.
 type CreateScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -63,9 +69,11 @@ type CreateScalyrInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Scalyr.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ProjectID hold the name of the logfile field sent to Scalyr.
 	ProjectID *string `url:"project_id,omitempty"`
-	// Region is the region that log data will be sent to.
+	// Region is the region where logs are received and stored by Scalyr.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -87,7 +95,7 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -102,6 +110,8 @@ func (c *Client) CreateScalyr(i *CreateScalyrInput) (*Scalyr, error) {
 
 // GetScalyrInput is used as input to the GetScalyr function.
 type GetScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the scalyr to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -123,7 +133,7 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -138,6 +148,8 @@ func (c *Client) GetScalyr(i *GetScalyrInput) (*Scalyr, error) {
 
 // UpdateScalyrInput is used as input to the UpdateScalyr function.
 type UpdateScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -148,6 +160,8 @@ type UpdateScalyrInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ProjectID hold the name of the logfile field sent to Scalyr.
 	ProjectID *string `url:"project_id,omitempty"`
 	// Region is the region that log data will be sent to.
@@ -175,7 +189,7 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -190,6 +204,8 @@ func (c *Client) UpdateScalyr(i *UpdateScalyrInput) (*Scalyr, error) {
 
 // DeleteScalyrInput is the input parameter to DeleteScalyr.
 type DeleteScalyrInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the scalyr to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -211,7 +227,7 @@ func (c *Client) DeleteScalyr(i *DeleteScalyrInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "scalyr", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

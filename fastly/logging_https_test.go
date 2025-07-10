@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"errors"
+	"net/http"
 	"strings"
 	"testing"
 )
@@ -46,10 +47,10 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 			URL:               ToPointer("https://example.com/"),
 			RequestMaxEntries: ToPointer(1),
 			RequestMaxBytes:   ToPointer(1000),
-			ContentType:       ToPointer("application/json"),
+			ContentType:       ToPointer(JSONMimeType),
 			HeaderName:        ToPointer("X-Example-Header"),
 			HeaderValue:       ToPointer("ExampleValue"),
-			Method:            ToPointer("PUT"),
+			Method:            ToPointer(http.MethodPut),
 			JSONFormat:        ToPointer("2"),
 			Placement:         ToPointer("waf_debug"),
 			TLSCACert:         ToPointer(caCert),
@@ -97,7 +98,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if *h.RequestMaxBytes != 1000 {
 		t.Errorf("bad request_max_bytes: %q", *h.RequestMaxBytes)
 	}
-	if *h.ContentType != "application/json" {
+	if *h.ContentType != JSONMimeType {
 		t.Errorf("bad content_type: %q", *h.ContentType)
 	}
 	if *h.HeaderName != "X-Example-Header" {
@@ -106,7 +107,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if *h.HeaderValue != "ExampleValue" {
 		t.Errorf("bad *h.ader_value: %q", *h.HeaderValue)
 	}
-	if *h.Method != "PUT" {
+	if *h.Method != http.MethodPut {
 		t.Errorf("bad met*h.d: %q", *h.Method)
 	}
 	if *h.JSONFormat != "2" {
@@ -217,11 +218,12 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	var uh *HTTPS
 	Record(t, "https/update", func(c *Client) {
 		uh, err = c.UpdateHTTPS(&UpdateHTTPSInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-https",
-			NewName:        ToPointer("new-test-https"),
-			Method:         ToPointer("POST"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-https",
+			NewName:          ToPointer("new-test-https"),
+			Method:           ToPointer(http.MethodPost),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -230,8 +232,11 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	if *uh.Name != "new-test-https" {
 		t.Errorf("bad name: %q", *uh.Name)
 	}
-	if *uh.Method != "POST" {
+	if *uh.Method != http.MethodPost {
 		t.Errorf("bad method: %q", *uh.Method)
+	}
+	if *uh.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *uh.ProcessingRegion)
 	}
 
 	// Delete

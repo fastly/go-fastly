@@ -5,7 +5,7 @@ type IPAddrs []string
 
 // AllIPs returns the lists of public IPv4 and IPv6 addresses for Fastly's network.
 func (c *Client) AllIPs() (v4, v6 IPAddrs, err error) {
-	resp, err := c.Get("/public-ip-list", nil)
+	resp, err := c.Get("/public-ip-list", CreateRequestOptions(nil))
 	if err != nil {
 		return nil, nil, err
 	}

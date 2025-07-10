@@ -1,16 +1,19 @@
 package v1
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"strconv"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 // ListInput specifies the information needed for the List() function to perform
 // the operation.
 type ListInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the cursor value from the next_cursor field of a previous
 	// response, used to retrieve the next page. To request the first page, this
 	// should be an empty string or nil.
@@ -27,26 +30,24 @@ type ListInput struct {
 
 // List retrieves a list of domains, with optional filtering and pagination.
 func List(c *fastly.Client, i *ListInput) (*Collection, error) {
-	ro := &fastly.RequestOptions{
-		Params: map[string]string{},
-	}
+	requestOptions := fastly.CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.FQDN != nil {
-		ro.Params["fqdn"] = *i.FQDN
+		requestOptions.Params["fqdn"] = *i.FQDN
 	}
 	if i.ServiceID != nil {
-		ro.Params["service_id"] = *i.ServiceID
+		requestOptions.Params["service_id"] = *i.ServiceID
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get("/domains/v1", ro)
+	resp, err := c.Get("/domains/v1", requestOptions)
 	if err != nil {
 		return nil, err
 	}

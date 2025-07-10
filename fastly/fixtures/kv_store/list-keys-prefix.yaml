@@ -1,0 +1,41 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys?consistency=strong&prefix=ba
+    method: GET
+  response:
+    body: '{"data":["banana","batch-1","batch-2"],"meta":{"limit":1000,"prefix":"ba"}}'
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Type:
+      - application/json
+      Date:
+      - Mon, 23 Jun 2025 19:41:18 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - PASS, MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-ewr-kewr1740071-EWR, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1750707679.598026,VS0,VE74
+    status: 200 OK
+    code: 200
+    duration: ""

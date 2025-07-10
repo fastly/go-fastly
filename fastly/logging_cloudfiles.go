@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -20,6 +21,7 @@ type Cloudfiles struct {
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	PublicKey         *string    `mapstructure:"public_key"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -32,6 +34,8 @@ type Cloudfiles struct {
 
 // ListCloudfilesInput is used as input to the ListCloudfiles function.
 type ListCloudfilesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +52,7 @@ func (c *Client) ListCloudfiles(i *ListCloudfilesInput) ([]*Cloudfiles, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -69,6 +73,8 @@ type CreateCloudfilesInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -85,9 +91,11 @@ type CreateCloudfilesInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Cloud Files.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
-	// Region is the region to stream logs to.
+	// Region is the region where logs are received and stored by Cloud Files.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -111,7 +119,7 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +134,8 @@ func (c *Client) CreateCloudfiles(i *CreateCloudfilesInput) (*Cloudfiles, error)
 
 // GetCloudfilesInput is used as input to the GetCloudfiles function.
 type GetCloudfilesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Cloudfiles to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +157,7 @@ func (c *Client) GetCloudfiles(i *GetCloudfilesInput) (*Cloudfiles, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +178,8 @@ type UpdateCloudfilesInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -186,9 +198,11 @@ type UpdateCloudfilesInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to Cloud Files.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
-	// Region is the region to stream logs to.
+	// Region is the region where logs are received and stored by Cloud Files.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -215,7 +229,7 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +244,8 @@ func (c *Client) UpdateCloudfiles(i *UpdateCloudfilesInput) (*Cloudfiles, error)
 
 // DeleteCloudfilesInput is the input parameter to DeleteCloudfiles.
 type DeleteCloudfilesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Cloudfiles to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +267,7 @@ func (c *Client) DeleteCloudfiles(i *DeleteCloudfilesInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "cloudfiles", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

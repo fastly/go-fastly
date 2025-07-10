@@ -1,11 +1,12 @@
-package test_utils
+package test_utils //nolint: revive
 
 import (
 	"fmt"
 	"testing"
 
-	"github.com/fastly/go-fastly/v9/fastly"
 	"github.com/stretchr/testify/require"
+
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 type FunctionalTest struct {

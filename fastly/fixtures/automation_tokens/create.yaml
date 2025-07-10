@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: name=my-test-token&password=XXXXXXXXXXXXXXXXXXXXXX&role=engineer&scope=global&username=XXXXXXXXXXXXXXXXXXXXXX
+    body: name=my-test-token&password=XXXXXXXXXXXXXXXXXXXXXX&role=engineer&scope=global&services%5B%5D=XXXXXXXXXXXXXXXXXXXXXX&username=XXXXXXXXXXXXXXXXXXXXXX
     form:
       name:
       - my-test-token
@@ -12,17 +12,19 @@ interactions:
       - engineer
       scope:
       - global
+      services[]:
+      - XXXXXXXXXXXXXXXXXXXXXX
       username:
       - XXXXXXXXXXXXXXXXXXXXXX
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
     url: https://api.fastly.com/sudo
     method: POST
   response:
-    body: '{"expiry_time":"2024-09-21T04:01:00+00:00"}'
+    body: '{"expiry_time":"2025-02-25T12:06:38+00:00"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,15 +33,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Sat, 21 Sep 2024 03:56:00 GMT
+      - Tue, 25 Feb 2025 12:01:38 GMT
       Fastly-Ratelimit-Remaining:
-      - "975"
+      - "993"
       Fastly-Ratelimit-Reset:
-      - "1726891200"
+      - "1740488400"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,14 +55,14 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000058-CHI, cache-per12629-PER
+      - cache-chi-kigq8000020-CHI, cache-per12621-PER
       X-Timer:
-      - S1726890960.858190,VS0,VE534
+      - S1740484898.443480,VS0,VE471
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: '{"expires_at":"0001-01-01T00:00:00Z","name":"my-test-token","role":"engineer","scope":"global","services":null,"tls_access":false}'
+    body: '{"name":"my-test-token","role":"engineer","scope":"global","services":["XXXXXXXXXXXXXXXXXXXXXX"],"tls_access":false}'
     form: {}
     headers:
       Accept:
@@ -68,33 +70,33 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
     url: https://api.fastly.com/automation-tokens
     method: POST
   response:
     body: |
-      {"id":"XXXXXXXXXXXXXXXXXXXXXX","services":[],"name":"my-test-token","role":"engineer","access_token":"XXXXXXXXXXXXXXXXXXXXXX","scope":"global","ip":"","created_at":"2024-09-21T03:56:00Z","last_used_at":"0001-01-01T00:00:00Z","expires_at":null,"user_agent":""}
+      {"id":"XXXXXXXXXXXXXXXXXXXXXX","services":["XXXXXXXXXXXXXXXXXXXXXX"],"name":"my-test-token","role":"engineer","access_token":"XXXXXXXXXXXXXXXXXXXXXX","scope":"global","ip":"","created_at":"2025-02-25T12:01:39Z","last_used_at":"","expires_at":"","user_agent":"","tls_access":false,"customer_id":"XXXXXXXXXXXXXXXXXXXXXX"}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "270"
+      - "329"
       Content-Type:
       - application/json
       Date:
-      - Sat, 21 Sep 2024 03:56:01 GMT
-      Fastly-Ratelimit-Remaining:
-      - "993"
-      Fastly-Ratelimit-Reset:
-      - "1726891200"
+      - Tue, 25 Feb 2025 12:01:39 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
+      Status:
+      - 200 OK
       Strict-Transport-Security:
       - max-age=31536000
+      Vary:
+      - Accept-Encoding
       Via:
       - 1.1 varnish, 1.1 varnish
       X-Cache:
@@ -102,9 +104,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000082-CHI, cache-per12629-PER
+      - cache-chi-kigq8000135-CHI, cache-per12621-PER
       X-Timer:
-      - S1726890960.404951,VS0,VE753
+      - S1740484899.929537,VS0,VE681
     status: 200 OK
     code: 200
     duration: ""

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -10,6 +11,8 @@ import (
 
 // ListTLSDomainsInput is used as input to Client.ListTLSDomains.
 type ListTLSDomainsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// FilterInUse limits the returned domains to those currently using Fastly to terminate TLS with SNI (that is, domains considered "in use")
 	FilterInUse *bool
 	// FilterTLSCertificateID Limits the returned domains to those listed in the given TLS certificate's SAN list
@@ -34,8 +37,8 @@ func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 		"filter[tls_certificates.id]":  l.FilterTLSCertificateID,
 		"filter[tls_subscriptions.id]": l.FilterTLSSubscriptionID,
 		"include":                      l.Include,
-		"page[number]":                 l.PageNumber,
-		"page[size]":                   l.PageSize,
+		jsonapi.QueryParamPageNumber:   l.PageNumber,
+		jsonapi.QueryParamPageSize:     l.PageSize,
 		"sort":                         l.Sort,
 	}
 
@@ -62,14 +65,11 @@ func (l *ListTLSDomainsInput) formatFilters() map[string]string {
 // ListTLSDomains retrieves all resources.
 func (c *Client) ListTLSDomains(i *ListTLSDomainsInput) ([]*TLSDomain, error) {
 	p := "/tls/domains"
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
-		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
-		},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(p, filters)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}

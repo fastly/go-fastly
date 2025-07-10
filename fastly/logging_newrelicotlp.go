@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -13,6 +14,7 @@ type NewRelicOTLP struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -24,9 +26,10 @@ type NewRelicOTLP struct {
 
 // ListNewRelicOTLPInput is used as input to the ListNewRelicOTLP function.
 type ListNewRelicOTLPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
-
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
 }
@@ -42,7 +45,7 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -57,6 +60,8 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 
 // CreateNewRelicOTLPInput is used as input to the CreateNewRelicOTLP function.
 type CreateNewRelicOTLPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -65,7 +70,9 @@ type CreateNewRelicOTLPInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// Region is the region to which to stream logs.
+	// ProcessingRegion is the region where logs will be processed before streaming to New Relic.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	// Region is the region where logs are received and stored by New Relic.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -90,7 +97,7 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -105,12 +112,14 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 
 // GetNewRelicOTLPInput is used as input to the GetNewRelicOTLP function.
 type GetNewRelicOTLPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
+	// Name is the name of the newrelic to fetch.
+	Name string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
 	ServiceVersion int
-	// Name is the name of the newrelic to fetch.
-	Name string
 }
 
 // GetNewRelicOTLP gets the newrelic configuration with the given parameters.
@@ -126,7 +135,7 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -141,6 +150,8 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 
 // UpdateNewRelicOTLPInput is used as input to the UpdateNewRelicOTLP function.
 type UpdateNewRelicOTLPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -151,6 +162,8 @@ type UpdateNewRelicOTLPInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// Region is the region to which to stream logs.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -179,7 +192,7 @@ func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -194,6 +207,8 @@ func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, 
 
 // DeleteNewRelicOTLPInput is the input parameter to DeleteNewRelicOTLP.
 type DeleteNewRelicOTLPInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the newrelicotlp to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -215,7 +230,7 @@ func (c *Client) DeleteNewRelicOTLP(i *DeleteNewRelicOTLPInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

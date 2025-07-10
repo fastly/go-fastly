@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -21,6 +22,7 @@ type DigitalOcean struct {
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	PublicKey         *string    `mapstructure:"public_key"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	SecretKey         *string    `mapstructure:"secret_key"`
@@ -32,6 +34,8 @@ type DigitalOcean struct {
 
 // ListDigitalOceansInput is used as input to the ListDigitalOceans function.
 type ListDigitalOceansInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +52,7 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -69,6 +73,8 @@ type CreateDigitalOceanInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
@@ -87,6 +93,8 @@ type CreateDigitalOceanInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Digital Ocean.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -111,7 +119,7 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +134,8 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 
 // GetDigitalOceanInput is used as input to the GetDigitalOcean function.
 type GetDigitalOceanInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the DigitalOcean to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +157,7 @@ func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +178,8 @@ type UpdateDigitalOceanInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
@@ -188,6 +200,8 @@ type UpdateDigitalOceanInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Digital Ocean.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -215,7 +229,7 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +244,8 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 
 // DeleteDigitalOceanInput is the input parameter to DeleteDigitalOcean.
 type DeleteDigitalOceanInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the DigitalOcean to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +267,7 @@ func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -20,11 +20,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/45/logging/logshuttle
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/121/logging/logshuttle
     method: POST
   response:
-    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-logshuttle","placement":"waf_debug","token":"super-secure-token","url":"https://logs.example.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"45","updated_at":"2022-11-04T13:45:16Z","created_at":"2022-11-04T13:45:16Z","deleted_at":null,"response_condition":""}'
+    body: '{"format":"%h %l %u %t \"%r\" %\u003es %b","format_version":"2","name":"test-logshuttle","placement":"waf_debug","token":"super-secure-token","url":"https://logs.example.com","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"121","deleted_at":null,"response_condition":"","log_processing_region":"none","updated_at":"2025-06-04T15:22:31Z","created_at":"2025-06-04T15:22:31Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -33,11 +33,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 13:45:17 GMT
+      - Wed, 04 Jun 2025 15:22:31 GMT
       Fastly-Ratelimit-Remaining:
-      - "9981"
+      - "9874"
       Fastly-Ratelimit-Reset:
-      - "1667570400"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -51,9 +55,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-5-CONTROL-AWS, cache-man4135-MAN
+      - cache-chi-kigq8000069-CHI, cache-ewr-kewr1740089-EWR
       X-Timer:
-      - S1667569517.779601,VS0,VE311
+      - S1749050551.269547,VS0,VE367
     status: 200 OK
     code: 200
     duration: ""

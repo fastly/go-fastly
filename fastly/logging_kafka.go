@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -18,6 +19,7 @@ type Kafka struct {
 	ParseLogKeyvals   *bool      `mapstructure:"parse_log_keyvals"`
 	Password          *string    `mapstructure:"password"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequiredACKs      *string    `mapstructure:"required_acks"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -35,6 +37,8 @@ type Kafka struct {
 
 // ListKafkasInput is used as input to the ListKafkas function.
 type ListKafkasInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -51,7 +55,7 @@ func (c *Client) ListKafkas(i *ListKafkasInput) ([]*Kafka, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -72,6 +76,8 @@ type CreateKafkaInput struct {
 	Brokers *string `url:"brokers,omitempty"`
 	// CompressionCodec is the codec used for compression of your logs (gzip, snappy, lz4, null).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -84,6 +90,8 @@ type CreateKafkaInput struct {
 	Password *string `url:"password,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Kafka.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.
@@ -120,7 +128,7 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +143,8 @@ func (c *Client) CreateKafka(i *CreateKafkaInput) (*Kafka, error) {
 
 // GetKafkaInput is used as input to the GetKafka function.
 type GetKafkaInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the kafka to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -156,7 +166,7 @@ func (c *Client) GetKafka(i *GetKafkaInput) (*Kafka, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -177,6 +187,8 @@ type UpdateKafkaInput struct {
 	Brokers *string `url:"brokers,omitempty"`
 	// CompressionCodec is the codec used for compression of your logs (gzip, snappy, lz4, null).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -191,6 +203,8 @@ type UpdateKafkaInput struct {
 	Password *string `url:"password,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Kafka.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (no limit).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequiredACKs is the number of acknowledgements a leader must receive before a write is considered successful.
@@ -230,7 +244,7 @@ func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -245,6 +259,8 @@ func (c *Client) UpdateKafka(i *UpdateKafkaInput) (*Kafka, error) {
 
 // DeleteKafkaInput is the input parameter to DeleteKafka.
 type DeleteKafkaInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the kafka to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -266,7 +282,7 @@ func (c *Client) DeleteKafka(i *DeleteKafkaInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kafka", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

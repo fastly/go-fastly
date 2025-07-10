@@ -273,12 +273,13 @@ func TestClient_GCSs(t *testing.T) {
 	var gcsUpdateResp1, gcsUpdateResp2, gcsUpdateResp3 *GCS
 	Record(t, "gcses/update", func(c *Client) {
 		gcsUpdateResp1, err = c.UpdateGCS(&UpdateGCSInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-gcs",
-			NewName:        ToPointer("new-test-gcs"),
-			MessageType:    ToPointer("classic"),
-			GzipLevel:      ToPointer(9),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-gcs",
+			NewName:          ToPointer("new-test-gcs"),
+			MessageType:      ToPointer("classic"),
+			GzipLevel:        ToPointer(9),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -320,6 +321,9 @@ func TestClient_GCSs(t *testing.T) {
 	}
 	if *gcsUpdateResp1.GzipLevel != 9 {
 		t.Errorf("bad gzip_level: %q", *gcsUpdateResp1.GzipLevel)
+	}
+	if *gcsUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *gcsUpdateResp1.ProcessingRegion)
 	}
 	if *gcsUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *gcsUpdateResp2.CompressionCodec)

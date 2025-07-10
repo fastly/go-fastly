@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"time"
@@ -26,6 +27,7 @@ type Backend struct {
 	Name                *string    `mapstructure:"name"`
 	OverrideHost        *string    `mapstructure:"override_host"`
 	Port                *int       `mapstructure:"port"`
+	PreferIPv6          *bool      `mapstructure:"prefer_ipv6"`
 	RequestCondition    *string    `mapstructure:"request_condition"`
 	ShareKey            *string    `mapstructure:"share_key"`
 	SSLCACert           *string    `mapstructure:"ssl_ca_cert"`
@@ -49,6 +51,8 @@ type Backend struct {
 
 // ListBackendsInput is used as input to the ListBackends function.
 type ListBackendsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -66,7 +70,7 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -91,6 +95,8 @@ type CreateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
@@ -111,6 +117,8 @@ type CreateBackendInput struct {
 	OverrideHost *string `url:"override_host,omitempty"`
 	// Port is the port on which the backend server is listening for connections from Fastly.
 	Port *int `url:"port,omitempty"`
+	// PreferIPv6 indicates whether IPv6 results should be preferred when DNS is used to obtain addresses for the backend.
+	PreferIPv6 *Compatibool `url:"prefer_ipv6,omitempty"`
 	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
 	// ShareKey is a value that when shared across backends will enable those backends to share the same health check.
@@ -160,7 +168,7 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend")
 
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -175,6 +183,8 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 // GetBackendInput is used as input to the GetBackend function.
 type GetBackendInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the backend to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -197,7 +207,7 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -222,6 +232,8 @@ type UpdateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
@@ -244,6 +256,8 @@ type UpdateBackendInput struct {
 	OverrideHost *string `url:"override_host,omitempty"`
 	// Port is the port on which the backend server is listening for connections from Fastly.
 	Port *int `url:"port,omitempty"`
+	// PreferIPv6 indicates whether IPv6 results should be preferred when DNS is used to obtain addresses for the backend.
+	PreferIPv6 *Compatibool `url:"prefer_ipv6,omitempty"`
 	// RequestCondition is the name of a Condition, which if satisfied, will select this backend during a request.
 	RequestCondition *string `url:"request_condition,omitempty"`
 	// ShareKey is a value that when shared across backends will enable those backends to share the same health check.
@@ -296,7 +310,7 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -311,6 +325,8 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 
 // DeleteBackendInput is the input parameter to DeleteBackend.
 type DeleteBackendInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the backend to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -333,7 +349,7 @@ func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/49/logging/honeycomb/test-honeycomb
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb/test-honeycomb
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-honeycomb, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 49 }''"}'
+      version =\u003e 115 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:43:38 GMT
+      - Wed, 04 Jun 2025 15:10:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "9970"
+      - "9910"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-4-CONTROL-AWS, cache-man4148-MAN
+      - cache-chi-klot8100042-CHI, cache-nyc-kteb1890025-NYC
       X-Timer:
-      - S1667573019.511449,VS0,VE147
+      - S1749049837.164591,VS0,VE122
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/49/logging/honeycomb/new-test-honeycomb
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/115/logging/honeycomb/new-test-honeycomb
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-honeycomb, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 49 }''"}'
+      version =\u003e 115 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:43:38 GMT
+      - Wed, 04 Jun 2025 15:10:37 GMT
       Fastly-Ratelimit-Remaining:
-      - "9969"
+      - "9909"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-2-CONTROL-AWS, cache-man4148-MAN
+      - cache-chi-klot8100145-CHI, cache-nyc-kteb1890025-NYC
       X-Timer:
-      - S1667573019.701806,VS0,VE147
+      - S1749049837.292471,VS0,VE129
     status: 404 Not Found
     code: 404
     duration: ""

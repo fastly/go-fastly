@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -14,6 +15,7 @@ type GrafanaCloudLogs struct {
 	Name              *string    `mapstructure:"name"`
 	MessageType       *string    `mapstructure:"message_type"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
 	ServiceVersion    *int       `mapstructure:"version"`
@@ -27,6 +29,8 @@ type GrafanaCloudLogs struct {
 
 // ListGrafanaCloudLogsInput is used as input to the ListGrafanaCloudLogs function.
 type ListGrafanaCloudLogsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -43,7 +47,7 @@ func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaC
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -58,6 +62,8 @@ func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaC
 
 // CreateGrafanaCloudLogsInput is used as input to the CreateGrafanaCloudLogs function.
 type CreateGrafanaCloudLogsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that GrafanaCloudLogs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -68,6 +74,8 @@ type CreateGrafanaCloudLogsInput struct {
 	MessageType *string `url:"message_type,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Grafana Cloud Logs.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -94,7 +102,7 @@ func (c *Client) CreateGrafanaCloudLogs(i *CreateGrafanaCloudLogsInput) (*Grafan
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -109,6 +117,8 @@ func (c *Client) CreateGrafanaCloudLogs(i *CreateGrafanaCloudLogsInput) (*Grafan
 
 // GetGrafanaCloudLogsInput is used as input to the GetGrafanaCloudLogs function.
 type GetGrafanaCloudLogsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the GrafanaCloudLogs to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -130,7 +140,7 @@ func (c *Client) GetGrafanaCloudLogs(i *GetGrafanaCloudLogsInput) (*GrafanaCloud
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -145,6 +155,8 @@ func (c *Client) GetGrafanaCloudLogs(i *GetGrafanaCloudLogsInput) (*GrafanaCloud
 
 // UpdateGrafanaCloudLogsInput is used as input to the UpdateGrafanaCloudLogs function.
 type UpdateGrafanaCloudLogsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that GrafanaCloudLogs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -157,6 +169,8 @@ type UpdateGrafanaCloudLogsInput struct {
 	MessageType *string `url:"message_type,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Grafana Cloud Logs.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -186,7 +200,7 @@ func (c *Client) UpdateGrafanaCloudLogs(i *UpdateGrafanaCloudLogsInput) (*Grafan
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -201,6 +215,8 @@ func (c *Client) UpdateGrafanaCloudLogs(i *UpdateGrafanaCloudLogsInput) (*Grafan
 
 // DeleteGrafanaCloudLogsInput is the input parameter to DeleteGrafanaCloudLogs.
 type DeleteGrafanaCloudLogsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the GrafanaCloudLogs to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -222,7 +238,7 @@ func (c *Client) DeleteGrafanaCloudLogs(i *DeleteGrafanaCloudLogsInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

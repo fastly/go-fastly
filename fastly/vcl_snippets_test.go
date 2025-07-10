@@ -11,7 +11,7 @@ func TestClient_Snippets(t *testing.T) {
 		svName            = "snipver"
 		sdName            = "snipdyn"
 		svNameUpdated     = "snipverUpdated"
-		defaultPriority   = 100
+		defaultPriority   = "100"
 		defaultDynamic    = 0
 		vclContent        = "#vcl"
 		vclContentUpdated = "#vclUpdated"
@@ -59,7 +59,7 @@ func TestClient_Snippets(t *testing.T) {
 	}
 
 	dynamic := 1
-	priority := 123
+	priority := "123"
 
 	Record(t, "vcl_snippets/create_with_all_fields", func(c *Client) {
 		cs, err = c.CreateSnippet(&CreateSnippetInput{
@@ -192,7 +192,7 @@ func TestClient_Snippets(t *testing.T) {
 		t.Errorf("incorrect Content: want %v, have %q", vclContent, *ds.Content)
 	}
 
-	priority = 456
+	priority = "456"
 	hit := SnippetTypeHit
 
 	Record(t, "vcl_snippets/update_versioned", func(c *Client) {

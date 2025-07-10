@@ -6,31 +6,37 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9
     method: GET
   response:
-    body: '{"id":"d72zy1njx9v7ilgvgm6qy9","name":"kv-store-test-store","created_at":"2023-10-31
-      13:11:18","updated_at":"2023-10-31 13:11:18"}'
+    body: '{"id":"iaa48y0oxw13s12xpfdkk9","name":"kv-store-test-store","created_at":"2025-06-23
+      19:41:15","updated_at":"2025-06-23 19:41:15"}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Oct 2023 13:11:18 GMT
+      - Mon, 23 Jun 2025 19:41:16 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-lhr7339-LHR, cache-lhr7355-LHR
+      - cache-ewr-kewr1740043-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1698757878.221201,VS0,VE240
+      - S1750707676.063801,VS0,VE162
     status: 200 OK
     code: 200
     duration: ""

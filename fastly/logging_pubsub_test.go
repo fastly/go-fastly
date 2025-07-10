@@ -164,11 +164,12 @@ bv1KwcKoQbNVXwauH79JKc0=
 	var upubsub *Pubsub
 	Record(t, "pubsubs/update", func(c *Client) {
 		upubsub, err = c.UpdatePubsub(&UpdatePubsubInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-pubsub",
-			NewName:        ToPointer("new-test-pubsub"),
-			Topic:          ToPointer("new-topic"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-pubsub",
+			NewName:          ToPointer("new-test-pubsub"),
+			Topic:            ToPointer("new-topic"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -179,6 +180,9 @@ bv1KwcKoQbNVXwauH79JKc0=
 	}
 	if *upubsub.Topic != "new-topic" {
 		t.Errorf("bad topic: %q", *upubsub.Topic)
+	}
+	if *upubsub.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *upubsub.ProcessingRegion)
 	}
 
 	// Delete

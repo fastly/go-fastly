@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -13,6 +14,7 @@ type Heroku struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
 	ServiceVersion    *int       `mapstructure:"version"`
@@ -23,6 +25,8 @@ type Heroku struct {
 
 // ListHerokusInput is used as input to the ListHerokus function.
 type ListHerokusInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -39,7 +43,7 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -54,6 +58,8 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 
 // CreateHerokuInput is used as input to the CreateHeroku function.
 type CreateHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -62,6 +68,8 @@ type CreateHerokuInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Heroku.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -84,7 +92,7 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -99,6 +107,8 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 
 // GetHerokuInput is used as input to the GetHeroku function.
 type GetHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the heroku to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -120,7 +130,7 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +145,8 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 
 // UpdateHerokuInput is used as input to the UpdateHeroku function.
 type UpdateHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -145,6 +157,8 @@ type UpdateHerokuInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Heroku.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -170,7 +184,7 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -185,6 +199,8 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 
 // DeleteHerokuInput is the input parameter to DeleteHeroku.
 type DeleteHerokuInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the heroku to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -206,7 +222,7 @@ func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

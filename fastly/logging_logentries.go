@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -14,6 +15,7 @@ type Logentries struct {
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
 	Port              *int       `mapstructure:"port"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -25,6 +27,8 @@ type Logentries struct {
 
 // ListLogentriesInput is used as input to the ListLogentries function.
 type ListLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -41,7 +45,7 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +60,8 @@ func (c *Client) ListLogentries(i *ListLogentriesInput) ([]*Logentries, error) {
 
 // CreateLogentriesInput is used as input to the CreateLogentries function.
 type CreateLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -66,6 +72,8 @@ type CreateLogentriesInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// Region is the region to which to stream logs.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -90,7 +98,7 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +113,8 @@ func (c *Client) CreateLogentries(i *CreateLogentriesInput) (*Logentries, error)
 
 // GetLogentriesInput is used as input to the GetLogentries function.
 type GetLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the logentries to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -126,7 +136,7 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -141,6 +151,8 @@ func (c *Client) GetLogentries(i *GetLogentriesInput) (*Logentries, error) {
 
 // UpdateLogentriesInput is used as input to the UpdateLogentries function.
 type UpdateLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -153,6 +165,8 @@ type UpdateLogentriesInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
+	// ProcessingRegion is the Fastly region where logs will be processed before streaming to the endpoint.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// Region is the region to which to stream logs.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -180,7 +194,7 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -195,6 +209,8 @@ func (c *Client) UpdateLogentries(i *UpdateLogentriesInput) (*Logentries, error)
 
 // DeleteLogentriesInput is the input parameter to DeleteLogentries.
 type DeleteLogentriesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the logentries to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -216,7 +232,7 @@ func (c *Client) DeleteLogentries(i *DeleteLogentriesInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logentries", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

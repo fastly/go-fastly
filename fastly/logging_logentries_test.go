@@ -128,12 +128,13 @@ func TestClient_Logentries(t *testing.T) {
 	var ule *Logentries
 	Record(t, "logentries/update", func(c *Client) {
 		ule, err = c.UpdateLogentries(&UpdateLogentriesInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-logentries",
-			NewName:        ToPointer("new-test-logentries"),
-			FormatVersion:  ToPointer(2),
-			Region:         ToPointer("ap"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-logentries",
+			NewName:          ToPointer("new-test-logentries"),
+			FormatVersion:    ToPointer(2),
+			Region:           ToPointer("ap"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -147,6 +148,9 @@ func TestClient_Logentries(t *testing.T) {
 	}
 	if *ule.Region != "ap" {
 		t.Errorf("bad region: %q", *ule.Region)
+	}
+	if *ule.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ule.ProcessingRegion)
 	}
 
 	// Delete

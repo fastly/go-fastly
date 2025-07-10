@@ -1,15 +1,18 @@
 package v1
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 // GetInput specifies the information needed for the Get() function to perform
 // the operation.
 type GetInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// DomainID is the domain identifier (required).
 	DomainID *string
 }
@@ -22,7 +25,7 @@ func Get(c *fastly.Client, i *GetInput) (*Data, error) {
 
 	path := fastly.ToSafeURL("domains", "v1", *i.DomainID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

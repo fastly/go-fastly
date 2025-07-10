@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: name=new-test-backend&override_host=www.example.com&port=1234&share_key=shared-key&ssl_check_cert=0&ssl_ciphers=RC4%3A%21COMPLEMENTOFDEFAULT&ssl_sni_hostname=ssl-hostname-updated.com
+    body: name=new-test-backend&override_host=www.example.com&port=1234&prefer_ipv6=1&share_key=sharedkey&ssl_check_cert=0&ssl_ciphers=HIGH&ssl_sni_hostname=ssl-hostname-updated.com
     form:
       name:
       - new-test-backend
@@ -10,23 +10,25 @@ interactions:
       - www.example.com
       port:
       - "1234"
+      prefer_ipv6:
+      - "1"
       share_key:
-      - shared-key
+      - sharedkey
       ssl_check_cert:
       - "0"
       ssl_ciphers:
-      - RC4:!COMPLEMENTOFDEFAULT
+      - HIGH
       ssl_sni_hostname:
       - ssl-hostname-updated.com
     headers:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/test-backend
+      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/102/backend/test-backend
     method: PUT
   response:
-    body: '{"created_at":"2023-08-07T10:02:07Z","shield":null,"first_byte_timeout":15000,"ssl_cert_hostname":null,"ssl_client_cert":null,"max_conn":200,"ssl_sni_hostname":"ssl-hostname-updated.com","service_id":"kKJb5bOFI47uHeBVluGfX1","ipv4":null,"between_bytes_timeout":10000,"override_host":"www.example.com","keepalive_time":null,"ssl_hostname":null,"port":1234,"auto_loadbalance":false,"ssl_check_cert":false,"use_ssl":false,"hostname":"integ-test.go-fastly.com","ssl_ciphers":"RC4:!COMPLEMENTOFDEFAULT","deleted_at":null,"weight":100,"min_tls_version":null,"error_threshold":0,"ipv6":null,"name":"new-test-backend","updated_at":"2023-08-07T10:02:07Z","ssl_ca_cert":null,"share_key":"shared-key","connect_timeout":1500,"max_tls_version":null,"comment":"","client_cert":null,"ssl_client_key":null,"healthcheck":null,"request_condition":"","address":"integ-test.go-fastly.com","version":123}'
+    body: '{"tcp_keepalive_time":null,"prefer_ipv6":true,"first_byte_timeout":15000,"ssl_ciphers":"HIGH","updated_at":"2025-05-07T15:03:13Z","ssl_hostname":null,"service_id":"kKJb5bOFI47uHeBVluGfX1","tcp_keepalive_interval":null,"version":102,"use_ssl":false,"ipv4":null,"port":1234,"name":"new-test-backend","ssl_sni_hostname":"ssl-hostname-updated.com","between_bytes_timeout":10000,"deleted_at":null,"ssl_check_cert":false,"hostname":"integ-test.go-fastly.com","client_cert":null,"healthcheck":null,"override_host":"www.example.com","error_threshold":0,"ssl_cert_hostname":null,"tcp_keepalive_enable":null,"max_tls_version":null,"weight":100,"request_condition":"","comment":"","ssl_client_cert":null,"share_key":"sharedkey","connect_timeout":1500,"ipv6":null,"ssl_client_key":null,"address":"integ-test.go-fastly.com","auto_loadbalance":false,"keepalive_time":null,"tcp_keepalive_probes":null,"shield":null,"min_tls_version":null,"max_conn":200,"ssl_ca_cert":null,"created_at":"2025-05-07T15:03:13Z"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -35,11 +37,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Aug 2023 10:02:08 GMT
+      - Wed, 07 May 2025 15:03:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "9997"
+      - "9992"
       Fastly-Ratelimit-Reset:
-      - "1691406000"
+      - "1746633600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -53,9 +59,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lhr7321-LHR
+      - cache-chi-klot8100020-CHI, cache-ewr-kewr1740090-EWR
       X-Timer:
-      - S1691402529.633661,VS0,VE263
+      - S1746630194.577579,VS0,VE290
     status: 200 OK
     code: 200
     duration: ""

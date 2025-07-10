@@ -159,10 +159,11 @@ func TestClient_Bigqueries(t *testing.T) {
 	var ubq *BigQuery
 	Record(t, "bigqueries/update", func(c *Client) {
 		ubq, err = c.UpdateBigQuery(&UpdateBigQueryInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-bigquery",
-			NewName:        ToPointer("new-test-bigquery"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-bigquery",
+			NewName:          ToPointer("new-test-bigquery"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -170,6 +171,9 @@ func TestClient_Bigqueries(t *testing.T) {
 	}
 	if *ubq.Name != "new-test-bigquery" {
 		t.Errorf("bad name: %q", *ubq.Name)
+	}
+	if *ubq.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ubq.ProcessingRegion)
 	}
 
 	// Delete

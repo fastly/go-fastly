@@ -6,27 +6,27 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/alerts/definitions/7eoZPghUve49laTwDZgBDG
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
+    url: https://api.fastly.com/alerts/definitions/5ihYWKFmUaRI5PVRNivo7Z
     method: DELETE
   response:
     body: |
-      {"type":"https://fastly.help/metrics/not-found","title":"The content you requested could not be found","status":404,"errors":null,"detail":""}
+      {"type":"https://fastly.help/alerts/not-found","title":"The content you requested could not be found","status":404,"errors":null,"detail":""}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "143"
+      - "142"
       Content-Type:
       - application/problem+json
       Date:
-      - Wed, 17 Jan 2024 04:07:30 GMT
+      - Tue, 08 Apr 2025 15:32:30 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -34,15 +34,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-pao-kpao1770036-PAO
+      - cache-chi-klot8100021-CHI, cache-pdk-katl1840026-PDK
       X-Timer:
-      - S1705464450.236272,VS0,VE99
+      - S1744126350.298602,VS0,VE267
     status: 404 Not Found
     code: 404
     duration: ""

@@ -6,30 +6,36 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys?consistency=strong&limit=4
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys?consistency=strong&limit=4
     method: GET
   response:
     body: '{"data":["apple","banana","batch-1","batch-2"],"meta":{"limit":4,"next_cursor":"CgdiYXRjaC0y"}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Oct 2023 13:11:22 GMT
+      - Mon, 23 Jun 2025 19:41:18 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - PASS, MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-lhr7342-LHR, cache-lhr7355-LHR
+      - cache-ewr-kewr1740071-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1698757882.016470,VS0,VE229
+      - S1750707678.375300,VS0,VE98
     status: 200 OK
     code: 200
     duration: ""
@@ -38,30 +44,36 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.2 (+github.com/fastly/go-fastly; go1.19.12)
-    url: https://api.fastly.com/resources/stores/kv/d72zy1njx9v7ilgvgm6qy9/keys?consistency=strong&cursor=CgdiYXRjaC0y&limit=4
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys?consistency=strong&cursor=CgdiYXRjaC0y&limit=4
     method: GET
   response:
     body: '{"data":["carrot","dragonfruit","eggplant"],"meta":{"limit":4}}'
     headers:
       Accept-Ranges:
       - bytes
+      Cache-Control:
+      - no-store
       Content-Type:
       - application/json
       Date:
-      - Tue, 31 Oct 2023 13:11:22 GMT
+      - Mon, 23 Jun 2025 19:41:18 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Strict-Transport-Security:
       - max-age=31536000
       Via:
       - 1.1 varnish
       X-Cache:
-      - MISS, MISS
+      - PASS, MISS
       X-Cache-Hits:
-      - 0, 0
+      - "0"
       X-Served-By:
-      - cache-lhr7361-LHR, cache-lhr7355-LHR
+      - cache-ewr-kewr1740053-EWR, cache-ewr-kewr1740030-EWR
       X-Timer:
-      - S1698757882.266440,VS0,VE233
+      - S1750707678.494105,VS0,VE77
     status: 200 OK
     code: 200
     duration: ""

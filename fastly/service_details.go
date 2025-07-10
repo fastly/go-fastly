@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"time"
 )
@@ -110,6 +111,8 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 type CreateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// Type is the type of this service (vcl, wasm).
@@ -118,7 +121,7 @@ type CreateServiceInput struct {
 
 // CreateService creates a new resource.
 func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
-	resp, err := c.PostForm("/service", i, nil)
+	resp, err := c.PostForm("/service", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -133,6 +136,8 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 
 // GetServiceInput is used as input to the GetService function.
 type GetServiceInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
@@ -147,7 +152,7 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -183,7 +188,7 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "details")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -201,6 +206,8 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 type UpdateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -215,7 +222,7 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +237,8 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 // DeleteServiceInput is used as input to the DeleteService function.
 type DeleteServiceInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
@@ -242,7 +251,7 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -260,6 +269,8 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 // SearchServiceInput is used as input to the SearchService function.
 type SearchServiceInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the service (required).
 	Name string
 }
@@ -272,11 +283,10 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 		return nil, ErrMissingName
 	}
 
-	resp, err := c.Get("/service/search", &RequestOptions{
-		Params: map[string]string{
-			"name": i.Name,
-		},
-	})
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params["name"] = i.Name
+
+	resp, err := c.Get("/service/search", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -293,6 +303,8 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 // ListServiceDomainInput is the input parameter to the ListServiceDomains
 // function.
 type ListServiceDomainInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
@@ -305,7 +317,7 @@ func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsLi
 
 	path := ToSafeURL("service", i.ServiceID, "domain")
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

@@ -1,9 +1,10 @@
 package computeacls
 
 import (
+	"context"
 	"net/http"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 // UpdateInput specifies the information needed for the Update() function to
@@ -11,6 +12,8 @@ import (
 type UpdateInput struct {
 	// ComputeACLID  is an ACL Identifier (required).
 	ComputeACLID *string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
 	// Entries is a list of ACL entries.
 	Entries []*BatchComputeACLEntry `json:"entries"`
 }
@@ -33,7 +36,7 @@ func Update(c *fastly.Client, i *UpdateInput) error {
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID, "entries")
 
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

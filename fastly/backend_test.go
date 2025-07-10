@@ -128,8 +128,9 @@ func TestClient_Backends(t *testing.T) {
 			NewName:        ToPointer("new-test-backend"),
 			OverrideHost:   ToPointer("www.example.com"),
 			Port:           ToPointer(1234),
-			ShareKey:       ToPointer("shared-key"),
-			SSLCiphers:     ToPointer("RC4:!COMPLEMENTOFDEFAULT"),
+			PreferIPv6:     ToPointer(Compatibool(true)),
+			ShareKey:       ToPointer("sharedkey"),
+			SSLCiphers:     ToPointer("HIGH"),
 			SSLCheckCert:   ToPointer(Compatibool(false)),
 			SSLSNIHostname: ToPointer("ssl-hostname-updated.com"),
 		})
@@ -146,7 +147,10 @@ func TestClient_Backends(t *testing.T) {
 	if *ub.Port != 1234 {
 		t.Errorf("bad port: %d", *ub.Port)
 	}
-	if *ub.ShareKey == "" || *ub.ShareKey != "shared-key" {
+	if !*ub.PreferIPv6 {
+		t.Errorf("bad prefer_ipv6: %t", *ub.PreferIPv6) // API defaults to false and we want to allow setting to true
+	}
+	if *ub.ShareKey == "" || *ub.ShareKey != "sharedkey" {
 		t.Errorf("bad share_key: %s", *ub.ShareKey)
 	}
 	if *ub.SSLCheckCert {

@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/test-backend
+      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/102/backend/test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e test-backend, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 123 }''"}'
+      version =\u003e 102 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Aug 2023 10:02:10 GMT
+      - Wed, 07 May 2025 15:03:14 GMT
       Fastly-Ratelimit-Remaining:
-      - "9993"
+      - "9988"
       Fastly-Ratelimit-Reset:
-      - "1691406000"
+      - "1746633600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lhr7321-LHR
+      - cache-chi-klot8100020-CHI, cache-ewr-kewr1740090-EWR
       X-Timer:
-      - S1691402530.907614,VS0,VE165
+      - S1746630195.678194,VS0,VE110
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.5.8 (+github.com/fastly/go-fastly; go1.18.5)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/backend/new-test-backend
+      - FastlyGo/10.0.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/102/backend/new-test-backend
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find Backend ''{ deleted
       =\u003e 0000-00-00 00:00:00, name =\u003e new-test-backend, service =\u003e
-      kKJb5bOFI47uHeBVluGfX1, version =\u003e 123 }''"}'
+      kKJb5bOFI47uHeBVluGfX1, version =\u003e 102 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Mon, 07 Aug 2023 10:02:10 GMT
+      - Wed, 07 May 2025 15:03:14 GMT
       Fastly-Ratelimit-Remaining:
-      - "9992"
+      - "9987"
       Fastly-Ratelimit-Reset:
-      - "1691406000"
+      - "1746633600"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-2-prod-2-CONTROL-AWS-UE2, cache-lhr7321-LHR
+      - cache-chi-klot8100159-CHI, cache-ewr-kewr1740090-EWR
       X-Timer:
-      - S1691402530.472495,VS0,VE170
+      - S1746630195.795885,VS0,VE117
     status: 404 Not Found
     code: 404
     duration: ""

@@ -18,11 +18,11 @@ interactions:
       Content-Type:
       - application/x-www-form-urlencoded
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/52/logging/newrelic
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/123/logging/newrelic
     method: POST
   response:
-    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","region":"us","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"52","response_condition":"","updated_at":"2022-11-04T14:57:13Z","format_version":"2","created_at":"2022-11-04T14:57:13Z","deleted_at":null}'
+    body: '{"format":"format","name":"test-newrelic","placement":"waf_debug","region":"us","token":"abcd1234","service_id":"kKJb5bOFI47uHeBVluGfX1","version":"123","format_version":"2","created_at":"2025-06-04T15:26:20Z","response_condition":"","updated_at":"2025-06-04T15:26:20Z","deleted_at":null,"log_processing_region":"none"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -31,11 +31,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:57:13 GMT
+      - Wed, 04 Jun 2025 15:26:20 GMT
       Fastly-Ratelimit-Remaining:
-      - "9953"
+      - "9864"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -49,9 +53,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-7-CONTROL-AWS, cache-man4120-MAN
+      - cache-chi-kigq8000150-CHI, cache-nyc-kteb1890058-NYC
       X-Timer:
-      - S1667573833.499245,VS0,VE355
+      - S1749050780.100279,VS0,VE800
     status: 200 OK
     code: 200
     duration: ""

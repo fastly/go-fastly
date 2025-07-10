@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -15,6 +16,7 @@ type Papertrail struct {
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
 	Port              *int       `mapstructure:"port"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
 	ServiceVersion    *int       `mapstructure:"version"`
@@ -23,6 +25,8 @@ type Papertrail struct {
 
 // ListPapertrailsInput is used as input to the ListPapertrails function.
 type ListPapertrailsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -39,7 +43,7 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -56,6 +60,8 @@ func (c *Client) ListPapertrails(i *ListPapertrailsInput) ([]*Papertrail, error)
 type CreatePapertrailInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -66,6 +72,8 @@ type CreatePapertrailInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Papertrail.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -84,7 +92,7 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -99,6 +107,8 @@ func (c *Client) CreatePapertrail(i *CreatePapertrailInput) (*Papertrail, error)
 
 // GetPapertrailInput is used as input to the GetPapertrail function.
 type GetPapertrailInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the papertrail to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -120,7 +130,7 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -137,6 +147,8 @@ func (c *Client) GetPapertrail(i *GetPapertrailInput) (*Papertrail, error) {
 type UpdatePapertrailInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -149,6 +161,8 @@ type UpdatePapertrailInput struct {
 	Placement *string `url:"placement,omitempty"`
 	// Port is the port number.
 	Port *int `url:"port,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Papertrail.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -170,7 +184,7 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -185,6 +199,8 @@ func (c *Client) UpdatePapertrail(i *UpdatePapertrailInput) (*Papertrail, error)
 
 // DeletePapertrailInput is the input parameter to DeletePapertrail.
 type DeletePapertrailInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the papertrail to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -206,7 +222,7 @@ func (c *Client) DeletePapertrail(i *DeletePapertrailInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "papertrail", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

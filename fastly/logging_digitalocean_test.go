@@ -150,7 +150,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	if *digitaloceanCreateResp1.BucketName != "bucket-name" {
 		t.Errorf("bad bucket_name: %q", *digitaloceanCreateResp1.BucketName)
 	}
-	if *digitaloceanCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { // #nosec G101
+	if *digitaloceanCreateResp1.AccessKey != "AKIAIOSFODNN7EXAMPLE" { //nolint: gosec
 		t.Errorf("bad access_key: %q", *digitaloceanCreateResp1.AccessKey)
 	}
 	if *digitaloceanCreateResp1.SecretKey != "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY" {
@@ -279,6 +279,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 			NewName:          ToPointer("new-test-digitalocean"),
 			Domain:           ToPointer("nyc3.digitaloceanspaces.com"),
 			CompressionCodec: ToPointer("zstd"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -320,6 +321,9 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 	if digitaloceanUpdateResp1.GzipLevel != nil {
 		t.Errorf("bad gzip_level: %q", *digitaloceanUpdateResp1.GzipLevel)
+	}
+	if *digitaloceanUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *digitaloceanUpdateResp1.ProcessingRegion)
 	}
 	if *digitaloceanUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *digitaloceanUpdateResp2.CompressionCodec)

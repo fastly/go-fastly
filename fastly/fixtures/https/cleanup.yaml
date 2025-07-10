@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/48/logging/https/test-https
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/116/logging/https/test-https
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-https, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 48 }''"}'
+      version =\u003e 116 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,11 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:39:41 GMT
+      - Wed, 04 Jun 2025 15:11:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "9976"
+      - "9904"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -39,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-1-CONTROL-AWS, cache-man4137-MAN
+      - cache-chi-klot8100175-CHI, cache-nyc-kteb1890054-NYC
       X-Timer:
-      - S1667572781.299157,VS0,VE146
+      - S1749049882.928914,VS0,VE108
     status: 404 Not Found
     code: 404
     duration: ""
@@ -50,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/6.8.0 (+github.com/fastly/go-fastly; go1.16.15)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/48/logging/https/new-test-https
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/116/logging/https/new-test-https
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-https, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 48 }''"}'
+      version =\u003e 116 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -65,11 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Fri, 04 Nov 2022 14:39:41 GMT
+      - Wed, 04 Jun 2025 15:11:22 GMT
       Fastly-Ratelimit-Remaining:
-      - "9975"
+      - "9903"
       Fastly-Ratelimit-Reset:
-      - "1667574000"
+      - "1749052800"
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -83,9 +91,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-control-cp-aws-us-east-1-prod-6-CONTROL-AWS, cache-man4137-MAN
+      - cache-chi-kigq8000122-CHI, cache-nyc-kteb1890054-NYC
       X-Timer:
-      - S1667572781.472757,VS0,VE143
+      - S1749049882.047103,VS0,VE112
     status: 404 Not Found
     code: 404
     duration: ""

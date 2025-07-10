@@ -4,6 +4,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"strconv"
 	"time"
@@ -184,6 +185,8 @@ var ERLWindowSizes = []ERLWindowSize{
 
 // ListERLsInput is used as input to the ListERLs function.
 type ListERLsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the version number to fetch (required).
@@ -200,7 +203,7 @@ func (c *Client) ListERLs(i *ListERLsInput) ([]*ERL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "rate-limiters")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -220,6 +223,8 @@ type CreateERLInput struct {
 	Action *ERLAction `url:"action,omitempty"`
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
 	ClientKey *[]string `url:"client_key,brackets,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.
 	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// HTTPMethods is an array of HTTP methods to apply rate limiting to.
@@ -256,7 +261,7 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "rate-limiters")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -272,6 +277,8 @@ func (c *Client) CreateERL(i *CreateERLInput) (*ERL, error) {
 
 // DeleteERLInput is used as input to the DeleteERL function.
 type DeleteERLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
 	ERLID string
 }
@@ -284,7 +291,7 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 
 	path := ToSafeURL("rate-limiters", i.ERLID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -303,6 +310,8 @@ func (c *Client) DeleteERL(i *DeleteERLInput) error {
 
 // GetERLInput is used as input to the GetERL function.
 type GetERLInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
 	ERLID string
 }
@@ -315,7 +324,7 @@ func (c *Client) GetERL(i *GetERLInput) (*ERL, error) {
 
 	path := ToSafeURL("rate-limiters", i.ERLID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -335,6 +344,8 @@ type UpdateERLInput struct {
 	Action *ERLAction `url:"action,omitempty"`
 	// ClientKey is an array of VCL variables used to generate a counter key to identify a client.
 	ClientKey *[]string `url:"client_key,omitempty,brackets,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// ERLID is an alphanumeric string identifying the rate limiter (required).
 	ERLID string `url:"-"`
 	// FeatureRevision is the number of the rate limiting feature implementation. Defaults to the most recent revision.
@@ -367,7 +378,7 @@ func (c *Client) UpdateERL(i *UpdateERLInput) (*ERL, error) {
 
 	path := ToSafeURL("rate-limiters", i.ERLID)
 
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

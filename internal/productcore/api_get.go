@@ -1,14 +1,18 @@
 package productcore
 
 import (
-	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
+	"context"
+
+	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/products"
 )
 
 // GetInput specifies the information needed for the Get()
 // function to perform the operation.
 type GetInput struct {
-	Client        *fastly.Client
+	Client *fastly.Client
+	// Context, if supplied, will be used as the Request's context.
+	Context       *context.Context
 	ProductID     string
 	ServiceID     string
 	URLComponents []string
@@ -28,7 +32,7 @@ func Get[O products.ProductOutput](i *GetInput) (o O, err error) {
 
 	path := makeURL(i.ProductID, i.ServiceID, i.URLComponents)
 
-	resp, err := i.Client.GetJSON(path, nil)
+	resp, err := i.Client.GetJSON(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return
 	}

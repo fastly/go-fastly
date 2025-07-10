@@ -1,0 +1,39 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/apple23?force=true
+    method: DELETE
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Mon, 23 Jun 2025 19:41:19 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1750707680.830947,VS0,VE69
+    status: 204 No Content
+    code: 204
+    duration: ""

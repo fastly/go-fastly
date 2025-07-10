@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -21,6 +22,7 @@ type BlobStorage struct {
 	Path              *string    `mapstructure:"path"`
 	Period            *int       `mapstructure:"period"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	PublicKey         *string    `mapstructure:"public_key"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	SASToken          *string    `mapstructure:"sas_token"`
@@ -32,6 +34,8 @@ type BlobStorage struct {
 
 // ListBlobStoragesInput is used as input to the ListBlobStorages function.
 type ListBlobStoragesInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +52,7 @@ func (c *Client) ListBlobStorages(i *ListBlobStoragesInput) ([]*BlobStorage, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -67,6 +71,8 @@ type CreateBlobStorageInput struct {
 	AccountName *string `url:"account_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (valid values are zstd, snappy, and gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Container is the name of the Azure Blob Storage container in which to store logs.
 	Container *string `url:"container,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
@@ -87,6 +93,8 @@ type CreateBlobStorageInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Azure Blob Storage.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -111,7 +119,7 @@ func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +134,8 @@ func (c *Client) CreateBlobStorage(i *CreateBlobStorageInput) (*BlobStorage, err
 
 // GetBlobStorageInput is used as input to the GetBlobStorage function.
 type GetBlobStorageInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the blob storage to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +157,7 @@ func (c *Client) GetBlobStorage(i *GetBlobStorageInput) (*BlobStorage, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +178,8 @@ type UpdateBlobStorageInput struct {
 	CompressionCodec *string `url:"compression_codec,omitempty"`
 	// Container is the name of the Azure Blob Storage container in which to store logs.
 	Container *string `url:"container,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
 	FileMaxBytes *int `url:"file_max_bytes,omitempty"`
 	// Format is a Fastly log format string.
@@ -188,6 +200,8 @@ type UpdateBlobStorageInput struct {
 	Period *int `url:"period,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Azure Blob Storage.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// PublicKey is a PGP public key that Fastly will use to encrypt your log files before writing them to disk.
 	PublicKey *string `url:"public_key,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
@@ -215,7 +229,7 @@ func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -230,6 +244,8 @@ func (c *Client) UpdateBlobStorage(i *UpdateBlobStorageInput) (*BlobStorage, err
 
 // DeleteBlobStorageInput is the input parameter to DeleteBlobStorage.
 type DeleteBlobStorageInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the blob storage to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -251,7 +267,7 @@ func (c *Client) DeleteBlobStorage(i *DeleteBlobStorageInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "azureblob", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

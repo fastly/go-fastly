@@ -1,11 +1,17 @@
 package productcore
 
-import "github.com/fastly/go-fastly/v9/fastly"
+import (
+	"context"
+
+	"github.com/fastly/go-fastly/v10/fastly"
+)
 
 // DeleteInput specifies the information needed for the Delete
 // function to perform the operation.
 type DeleteInput struct {
-	Client        *fastly.Client
+	Client *fastly.Client
+	// Context, if supplied, will be used as the Request's context.
+	Context       *context.Context
 	ProductID     string
 	ServiceID     string
 	URLComponents []string
@@ -22,7 +28,7 @@ func Delete(i *DeleteInput) error {
 
 	path := makeURL(i.ProductID, i.ServiceID, i.URLComponents)
 
-	resp, err := i.Client.Delete(path, nil)
+	resp, err := i.Client.Delete(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

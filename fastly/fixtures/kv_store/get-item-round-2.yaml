@@ -1,0 +1,51 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/resources/stores/kv/iaa48y0oxw13s12xpfdkk9/keys/apple
+    method: GET
+  response:
+    body: prefixapple0
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "12"
+      Content-Type:
+      - application/octet-stream
+      Date:
+      - Mon, 23 Jun 2025 19:41:19 GMT
+      Generation:
+      - "1750707679010222"
+      Last-Modified:
+      - Mon, 23 Jun 2025 19:41:19 GMT
+      Metadata:
+      - meta
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Stored-Content-Length:
+      - "12"
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-ewr-kewr1740030-EWR, cache-ewr-kewr1740030-EWR
+      X-Timer:
+      - S1750707679.072228,VS0,VE127
+    status: 200 OK
+    code: 200
+    duration: ""

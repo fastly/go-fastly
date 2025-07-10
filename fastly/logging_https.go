@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -19,6 +20,7 @@ type HTTPS struct {
 	Method            *string    `mapstructure:"method"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequestMaxEntries *int       `mapstructure:"request_max_entries"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -34,6 +36,8 @@ type HTTPS struct {
 
 // ListHTTPSInput is used as input to the ListHTTPS function.
 type ListHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -50,7 +54,7 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -67,6 +71,8 @@ func (c *Client) ListHTTPS(i *ListHTTPSInput) ([]*HTTPS, error) {
 type CreateHTTPSInput struct {
 	// ContentType is the content type of the header sent with the request.
 	ContentType *string `url:"content_type,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -85,6 +91,8 @@ type CreateHTTPSInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to the HTTPS server.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (100MB).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 (10k).
@@ -117,7 +125,7 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -132,6 +140,8 @@ func (c *Client) CreateHTTPS(i *CreateHTTPSInput) (*HTTPS, error) {
 
 // GetHTTPSInput is used as input to the GetHTTPS function.
 type GetHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the HTTPS endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -153,7 +163,7 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -171,6 +181,8 @@ func (c *Client) GetHTTPS(i *GetHTTPSInput) (*HTTPS, error) {
 type UpdateHTTPSInput struct {
 	// ContentType is the content type of the header sent with the request.
 	ContentType *string `url:"content_type,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -191,6 +203,8 @@ type UpdateHTTPSInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to the HTTPS server.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request. Defaults 0 (100MB).
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request. Defaults 0 (10k).
@@ -226,7 +240,7 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -241,6 +255,8 @@ func (c *Client) UpdateHTTPS(i *UpdateHTTPSInput) (*HTTPS, error) {
 
 // DeleteHTTPSInput is the input parameter to the DeleteHTTPS function.
 type DeleteHTTPSInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the HTTPS endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -262,7 +278,7 @@ func (c *Client) DeleteHTTPS(i *DeleteHTTPSInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "https", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

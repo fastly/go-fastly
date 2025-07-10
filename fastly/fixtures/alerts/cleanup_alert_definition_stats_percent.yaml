@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.2.2 (+github.com/fastly/go-fastly; go1.22.1)
-    url: https://api.fastly.com/alerts/definitions/6v7dRqITNUwcbMoIg3UHiT
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
+    url: https://api.fastly.com/alerts/definitions/5gO8WEt1Yc9XqaZK4Iz3AH
     method: DELETE
   response:
     body: ""
@@ -17,11 +17,11 @@ interactions:
       Cache-Control:
       - no-store
       Date:
-      - Tue, 16 Apr 2024 13:11:28 GMT
+      - Tue, 08 Apr 2025 15:32:27 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 204 No Content
       Strict-Transport-Security:
@@ -29,15 +29,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-yul1970048-YUL
+      - cache-chi-klot8100036-CHI, cache-pdk-katl1840026-PDK
       X-Timer:
-      - S1713273088.055584,VS0,VE167
+      - S1744126347.298927,VS0,VE283
     status: 204 No Content
     code: 204
     duration: ""

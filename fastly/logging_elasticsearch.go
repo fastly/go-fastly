@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -16,6 +17,7 @@ type Elasticsearch struct {
 	Password          *string    `mapstructure:"password"`
 	Pipeline          *string    `mapstructure:"pipeline"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	RequestMaxBytes   *int       `mapstructure:"request_max_bytes"`
 	RequestMaxEntries *int       `mapstructure:"request_max_entries"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
@@ -32,6 +34,8 @@ type Elasticsearch struct {
 
 // ListElasticsearchInput is used as input to the ListElasticsearch function.
 type ListElasticsearchInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -48,7 +52,7 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -63,6 +67,8 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 
 // CreateElasticsearchInput is used as input to the CreateElasticsearch function.
 type CreateElasticsearchInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Elasticsearch can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -77,6 +83,8 @@ type CreateElasticsearchInput struct {
 	Pipeline *string `url:"pipeline,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Elasticsearch.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request.
@@ -111,7 +119,7 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -126,6 +134,8 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 
 // GetElasticsearchInput is used as input to the GetElasticsearch function.
 type GetElasticsearchInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Elasticsearch endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -147,7 +157,7 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -164,6 +174,8 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 // UpdateElasticsearchInput is the input parameter to the UpdateElasticsearch
 // function.
 type UpdateElasticsearchInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Elasticsearch can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -180,6 +192,8 @@ type UpdateElasticsearchInput struct {
 	Pipeline *string `url:"pipeline,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Elasticsearch.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// RequestMaxBytes is the maximum number of bytes sent in one request.
 	RequestMaxBytes *int `url:"request_max_bytes,omitempty"`
 	// RequestMaxEntries is the maximum number of logs sent in one request.
@@ -217,7 +231,7 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -233,6 +247,8 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 // DeleteElasticsearchInput is the input parameter to the DeleteElasticsearch
 // function.
 type DeleteElasticsearchInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Elasticsearch endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -254,7 +270,7 @@ func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

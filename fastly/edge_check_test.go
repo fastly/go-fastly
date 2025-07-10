@@ -9,7 +9,7 @@ func TestClient_EdgeCheck(t *testing.T) {
 	var edges []*EdgeCheck
 	Record(t, "content/check", func(c *Client) {
 		edges, err = c.EdgeCheck(&EdgeCheckInput{
-			URL: "releases.hashicorp.com",
+			URL: "go-fastly-deliver-test.global.ssl.fastly.net",
 		})
 	})
 	if err != nil {

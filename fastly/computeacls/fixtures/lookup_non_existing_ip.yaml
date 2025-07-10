@@ -1,0 +1,39 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/9.13.0 (+github.com/fastly/go-fastly; go1.23.3)
+    url: https://api.fastly.com/resources/acls/twgcU5NNpY0GsVfsCav4o6/entry/73.49.184.42
+    method: GET
+  response:
+    body: ""
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Date:
+      - Wed, 12 Feb 2025 23:49:37 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish
+      X-Cache:
+      - MISS
+      X-Cache-Hits:
+      - "0"
+      X-Served-By:
+      - cache-mia-kmia1760028-MIA, cache-mia-kmia1760066-MIA
+      X-Timer:
+      - S1739404177.368123,VS0,VE329
+    status: 204 No Content
+    code: 204
+    duration: ""

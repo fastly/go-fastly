@@ -1,15 +1,18 @@
 package computeacls
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
 type CreateInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
 	// Name is the name of the compute ACL to create (required).
 	Name *string `json:"name"`
 }
@@ -20,7 +23,7 @@ func Create(c *fastly.Client, i *CreateInput) (*ComputeACL, error) {
 		return nil, fastly.ErrMissingName
 	}
 
-	resp, err := c.PostJSON("/resources/acls", i, nil)
+	resp, err := c.PostJSON("/resources/acls", i, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

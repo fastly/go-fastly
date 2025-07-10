@@ -285,6 +285,7 @@ func TestClient_Openstack(t *testing.T) {
 			User:             ToPointer("new-user"),
 			NewName:          ToPointer("new-test-openstack"),
 			CompressionCodec: ToPointer("zstd"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -326,6 +327,9 @@ func TestClient_Openstack(t *testing.T) {
 	}
 	if osUpdateResp1.GzipLevel != nil {
 		t.Errorf("bad gzip_level: %q", *osUpdateResp1.GzipLevel)
+	}
+	if *osUpdateResp1.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *osUpdateResp1.ProcessingRegion)
 	}
 	if *osUpdateResp2.CompressionCodec != "zstd" {
 		t.Errorf("bad compression_codec: %q", *osUpdateResp2.CompressionCodec)

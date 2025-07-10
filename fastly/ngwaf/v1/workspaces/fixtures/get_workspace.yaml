@@ -1,0 +1,46 @@
+---
+version: 1
+interactions:
+- request:
+    body: ""
+    form: {}
+    headers:
+      User-Agent:
+      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/CiNMlVEOE05WCwVijSCE9L
+    method: GET
+  response:
+    body: |
+      {"id":"CiNMlVEOE05WCwVijSCE9L","name":"test-workspace","description":"test-description","mode":"log","deployment_type":"edge","attack_signal_thresholds":{"one_minute":10000,"ten_minutes":10000,"one_hour":10000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":["X-Forwarded-For","X-Real-IP"],"created_at":"2025-06-29T15:20:04Z","updated_at":"2025-06-29T15:20:04.468Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "422"
+      Content-Type:
+      - application/json
+      Date:
+      - Sun, 29 Jun 2025 15:20:05 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-kigq8000126-CHI, cache-nyc-kteb1890035-NYC
+      X-Timer:
+      - S1751210406.551620,VS0,VE93
+    status: 200 OK
+    code: 200
+    duration: ""

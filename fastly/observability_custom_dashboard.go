@@ -1,13 +1,14 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
 	"time"
 )
 
-// ObservabilityCustomDashboard is a named container for a custom dashboard configuration
+// ObservabilityCustomDashboard is a named container for a custom dashboard configuration.
 type ObservabilityCustomDashboard struct {
 	// The date and time the dashboard was created
 	CreatedAt time.Time `json:"created_at"`
@@ -27,7 +28,7 @@ type ObservabilityCustomDashboard struct {
 	UpdatedBy string `json:"updated_by"`
 }
 
-// DashboardItem describes an item (or "widget") of a dashboard
+// DashboardItem describes an item (or "widget") of a dashboard.
 type DashboardItem struct {
 	// DataSource describes the source of the metrics to be displayed (required)
 	DataSource DashboardDataSource `json:"data_source"`
@@ -51,7 +52,7 @@ const (
 	SourceTypeStatsOrigin = "stats.origin"
 )
 
-// DashboardDataSource describes the data to display in a DashboardItem
+// DashboardDataSource describes the data to display in a DashboardItem.
 type DashboardDataSource struct {
 	// Config describes configuration options for the selected data source (required)
 	Config DashboardSourceConfig `json:"config"`
@@ -132,21 +133,25 @@ func WithTitle(title string) dashboardItemOption {
 		di.Title = title
 	})
 }
+
 func WithSubtitle(subtitle string) dashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Subtitle = subtitle
 	})
 }
+
 func WithSpan(span uint8) dashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Span = span
 	})
 }
+
 func WithCalculationMethod(calculationMethod CalculationMethod) dashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Visualization.Config.CalculationMethod = &calculationMethod
 	})
 }
+
 func WithFormat(format VisualizationFormat) dashboardItemOption {
 	return optionFunc(func(di *DashboardItem) {
 		di.Visualization.Config.Format = &format
@@ -181,7 +186,7 @@ type ListDashboardsResponse struct {
 	Meta DashboardMeta                  `json:"meta"`
 }
 
-// DashboardMeta holds metadata about a dashboards query
+// DashboardMeta holds metadata about a dashboards query.
 type DashboardMeta struct {
 	Limit      int    `json:"limit"`
 	NextCursor string `json:"next_cursor"`
@@ -189,8 +194,10 @@ type DashboardMeta struct {
 	Total      int    `json:"total"`
 }
 
-// ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function
+// ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function.
 type ListObservabilityCustomDashboardsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional)
 	Cursor *string
 	// Limit is the maximum number of items included in each response (optional)
@@ -201,20 +208,18 @@ type ListObservabilityCustomDashboardsInput struct {
 
 func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDashboardsInput) (*ListDashboardsResponse, error) {
 	path := ToSafeURL("observability", "dashboards")
-	ro := &RequestOptions{
-		Params: map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -229,14 +234,16 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 }
 
 type CreateObservabilityCustomDashboardInput struct {
-	Description *string         `json:"description,omitempty"`
-	Items       []DashboardItem `json:"items"`
-	Name        string          `json:"name"`
+	// Context, if supplied, will be used as the Request's context.
+	Context     *context.Context `json:"-"`
+	Description *string          `json:"description,omitempty"`
+	Name        string           `json:"name"`
+	Items       []DashboardItem  `json:"items"`
 }
 
 func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
 	path := ToSafeURL("observability", "dashboards")
-	resp, err := c.PostJSON(path, i, nil)
+	resp, err := c.PostJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -250,6 +257,8 @@ func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustom
 }
 
 type GetObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of the dashboard to fetch (required)
 	ID *string
 }
@@ -260,7 +269,7 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -274,7 +283,9 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 }
 
 type UpdateObservabilityCustomDashboardInput struct {
-	Description *string `json:"description,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context     *context.Context `json:"-"`
+	Description *string          `json:"description,omitempty"`
 	// ID of the dashboard to fetch (required)
 	ID    *string          `json:"-"`
 	Items *[]DashboardItem `json:"items,omitempty"`
@@ -287,7 +298,7 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.PatchJSON(path, i, nil)
+	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -301,6 +312,8 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 }
 
 type DeleteObservabilityCustomDashboardInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of the dashboard to delete (required)
 	ID *string
 }
@@ -310,7 +323,7 @@ func (c *Client) DeleteObservabilityCustomDashboard(i *DeleteObservabilityCustom
 		return ErrMissingID
 	}
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

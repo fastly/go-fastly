@@ -1,8 +1,10 @@
 package productcore
 
 import (
-	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products"
+	"context"
+
+	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/products"
 )
 
 // PatchInput specifies the information needed for the Patch()
@@ -11,7 +13,9 @@ import (
 // Because Patch operations accept input, this struct has a type
 // parameter used to specify the type of the input structure.
 type PatchInput[I any] struct {
-	Client        *fastly.Client
+	Client *fastly.Client
+	// Context, if supplied, will be used as the Request's context.
+	Context       *context.Context
 	ProductID     string
 	ServiceID     string
 	URLComponents []string
@@ -36,7 +40,7 @@ func Patch[O products.ProductOutput, I any](i *PatchInput[I]) (o O, err error) {
 
 	path := makeURL(i.ProductID, i.ServiceID, i.URLComponents)
 
-	resp, err := i.Client.PatchJSON(path, i.Input, nil)
+	resp, err := i.Client.PatchJSON(path, i.Input, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return
 	}

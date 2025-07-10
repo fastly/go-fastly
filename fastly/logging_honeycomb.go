@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -14,6 +15,7 @@ type Honeycomb struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
 	ServiceVersion    *int       `mapstructure:"version"`
@@ -23,6 +25,8 @@ type Honeycomb struct {
 
 // ListHoneycombsInput is used as input to the ListHoneycombs function.
 type ListHoneycombsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -39,7 +43,7 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -54,6 +58,8 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 
 // CreateHoneycombInput is used as input to the CreateHoneycomb function.
 type CreateHoneycombInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Dataset is the Honeycomb Dataset you want to log to.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Honeycomb can ingest.
@@ -64,6 +70,8 @@ type CreateHoneycombInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Honeycomb.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -84,7 +92,7 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -99,6 +107,8 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 
 // GetHoneycombInput is used as input to the GetHoneycomb function.
 type GetHoneycombInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name for the real-time logging configuration (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -120,7 +130,7 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +145,8 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 
 // UpdateHoneycombInput is used as input to the UpdateHoneycomb function.
 type UpdateHoneycombInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Dataset is the Honeycomb Dataset you want to log to.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Honeycomb can ingest.
@@ -147,6 +159,8 @@ type UpdateHoneycombInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
+	// ProcessingRegion is the region where logs will be processed before streaming to Honeycomb.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -170,7 +184,7 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -185,6 +199,8 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 
 // DeleteHoneycombInput is the input parameter to DeleteHoneycomb.
 type DeleteHoneycombInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the honeycomb to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -206,7 +222,7 @@ func (c *Client) DeleteHoneycomb(i *DeleteHoneycombInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -35,6 +36,8 @@ type CacheSetting struct {
 
 // ListCacheSettingsInput is used as input to the ListCacheSettings function.
 type ListCacheSettingsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -51,7 +54,7 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -70,6 +73,8 @@ type CreateCacheSettingInput struct {
 	Action *CacheSettingAction `url:"action,omitempty"`
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Name is the name for the cache settings object.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -92,7 +97,7 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -107,6 +112,8 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 
 // GetCacheSettingInput is used as input to the GetCacheSetting function.
 type GetCacheSettingInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the cache setting to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -128,7 +135,7 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -147,6 +154,8 @@ type UpdateCacheSettingInput struct {
 	Action *CacheSettingAction `url:"action,omitempty"`
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Name is the name of the cache setting to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -174,7 +183,7 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -189,6 +198,8 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 
 // DeleteCacheSettingInput is the input parameter to DeleteCacheSetting.
 type DeleteCacheSettingInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the cache setting to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -210,7 +221,7 @@ func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

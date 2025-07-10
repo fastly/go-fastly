@@ -1,6 +1,8 @@
 package fastly
 
 import (
+	"context"
+	"net/http"
 	"net/url"
 	"strings"
 )
@@ -15,6 +17,8 @@ type Purge struct {
 
 // PurgeInput is used as input to the Purge function.
 type PurgeInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Soft performs a soft purge.
 	Soft bool
 	// URL is the URL to purge (required).
@@ -27,23 +31,22 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, ErrMissingURL
 	}
 
-	ro := &RequestOptions{
-		Parallel: true,
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true
 	if i.Soft {
-		ro.Headers = map[string]string{
+		requestOptions.Headers = map[string]string{
 			"Fastly-Soft-Purge": "1",
 		}
 	}
 
 	var err error
 	// nosemgrep: trailofbits.go.questionable-assignment.questionable-assignment
-	ro.Params, err = constructRequestOptionsParam(i.URL)
+	requestOptions.Params, err = constructRequestOptionsParam(i.URL)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := c.Post("purge/"+i.URL, ro)
+	resp, err := c.Post("purge/"+i.URL, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -76,6 +79,8 @@ func constructRequestOptionsParam(us string) (map[string]string, error) {
 
 // PurgeKeyInput is used as input to the PurgeKey function.
 type PurgeKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Key is the key to purge (required).
 	Key string
 	// ServiceID is the ID of the service (required).
@@ -95,9 +100,10 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge", i.Key)
 
-	ro := new(RequestOptions)
-	ro.Parallel = true
-	req, err := c.RawRequest("POST", path, ro)
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true
+
+	req, err := c.RawRequest(http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -121,6 +127,8 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 // PurgeKeysInput is used as input to the PurgeKeys function.
 type PurgeKeysInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Keys are the keys to purge (required).
 	Keys []string
 	// ServiceID is the ID of the service (required).
@@ -140,9 +148,10 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge")
 
-	ro := new(RequestOptions)
-	ro.Parallel = true
-	req, err := c.RawRequest("POST", path, ro)
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Parallel = true
+
+	req, err := c.RawRequest(http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +177,8 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 // PurgeAllInput is used as input to the Purge function.
 type PurgeAllInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
@@ -180,7 +191,7 @@ func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge_all")
 
-	req, err := c.RawRequest("POST", path, nil)
+	req, err := c.RawRequest(http.MethodPost, path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}

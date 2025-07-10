@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"encoding/json"
 	"net/http"
 	"strconv"
@@ -54,6 +55,8 @@ type AlertsMeta struct {
 
 // ListAlertDefinitionsInput is used as input to the ListAlertDefinitions function.
 type ListAlertDefinitionsInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string
 	// Limit is the maximum number of items included in each response (optional).
@@ -70,26 +73,24 @@ type ListAlertDefinitionsInput struct {
 func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefinitionsResponse, error) {
 	p := "/alerts/definitions"
 
-	ro := &RequestOptions{
-		Params: map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.Name != nil {
-		ro.Params["name"] = *i.Name
+		requestOptions.Params["name"] = *i.Name
 	}
 	if i.ServiceID != nil {
-		ro.Params["service_id"] = *i.ServiceID
+		requestOptions.Params["service_id"] = *i.ServiceID
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -105,6 +106,8 @@ func (c *Client) ListAlertDefinitions(i *ListAlertDefinitionsInput) (*AlertDefin
 
 // CreateAlertDefinitionInput is used as input to the CreateAlertDefinition function.
 type CreateAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -125,7 +128,7 @@ type CreateAlertDefinitionInput struct {
 
 // CreateAlertDefinition creates a new alert definition.
 func (c *Client) CreateAlertDefinition(i *CreateAlertDefinitionInput) (*AlertDefinition, error) {
-	resp, err := c.PostJSON("/alerts/definitions", i, nil)
+	resp, err := c.PostJSON("/alerts/definitions", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -140,6 +143,8 @@ func (c *Client) CreateAlertDefinition(i *CreateAlertDefinitionInput) (*AlertDef
 
 // GetAlertDefinitionInput is used as input to the GetAlertDefinition function.
 type GetAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of definition to fetch (required).
 	ID *string
 }
@@ -152,7 +157,7 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -168,6 +173,8 @@ func (c *Client) GetAlertDefinition(i *GetAlertDefinitionInput) (*AlertDefinitio
 
 // UpdateAlertDefinitionInput is used as input to the UpdateAlertDefinition function.
 type UpdateAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
 	// Description is additional text included in an alert notification (optional, limit 4096).
 	Description *string `json:"description"`
 	// Dimensions are a list of origins or domains that the alert is restricted to.
@@ -192,7 +199,7 @@ func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDef
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.PutJSON(path, i, nil)
+	resp, err := c.PutJSON(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -207,6 +214,8 @@ func (c *Client) UpdateAlertDefinition(i *UpdateAlertDefinitionInput) (*AlertDef
 
 // DeleteAlertDefinitionInput is used as input to the DeleteAlertDefinition function.
 type DeleteAlertDefinitionInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID of definition to delete (required).
 	ID *string
 }
@@ -219,7 +228,7 @@ func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
 
 	path := ToSafeURL("alerts", "definitions", *i.ID)
 
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -234,13 +243,29 @@ func (c *Client) DeleteAlertDefinition(i *DeleteAlertDefinitionInput) error {
 
 // TestAlertDefinitionInput is used as input to the TestAlertDefinition function.
 type TestAlertDefinitionInput struct {
-	// Same as CreateAlertDefinitionInput
-	CreateAlertDefinitionInput
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `json:"-"`
+	// Description is additional text included in an alert notification (optional, limit 4096).
+	Description *string `json:"description"`
+	// Dimensions are a list of origins or domains that the alert is restricted to.
+	Dimensions map[string][]string `json:"dimensions"`
+	// EvaluationStrategy is the evaluation strategy for the alert (required).
+	EvaluationStrategy map[string]any `json:"evaluation_strategy"`
+	// IntegrationIDs are IDs of integrations that notifications will be sent to.
+	IntegrationIDs []string `json:"integration_ids"`
+	// Metric is the name of the metric being monitored for alert evaluation (required).
+	Metric *string `json:"metric"`
+	// Name is the summary text of the alert (required, limit 255).
+	Name *string `json:"name"`
+	// ServiceID is the ID of the service that the alert is monitoring (required).
+	ServiceID *string `json:"service_id"`
+	// Source is the metric source (required). Options are: 'stats', 'origins', 'domains'.
+	Source *string `json:"source"`
 }
 
 // TestAlertDefinition validates alert definition and sends test notifications without creating.
 func (c *Client) TestAlertDefinition(i *TestAlertDefinitionInput) error {
-	resp, err := c.PostJSON("/alerts/definitions/test", i, nil)
+	resp, err := c.PostJSON("/alerts/definitions/test", i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}
@@ -259,6 +284,8 @@ type ListAlertHistoryInput struct {
 	After *string
 	// Before filters history having start or end on or before the provided timestamp (optional).
 	Before *string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional).
 	Cursor *string
 	// DefinitionID filters history by definition (optional).
@@ -277,35 +304,33 @@ type ListAlertHistoryInput struct {
 func (c *Client) ListAlertHistory(i *ListAlertHistoryInput) (*AlertHistoryResponse, error) {
 	p := "/alerts/history"
 
-	ro := &RequestOptions{
-		Params: map[string]string{},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
 	if i.After != nil {
-		ro.Params["after"] = *i.After
+		requestOptions.Params["after"] = *i.After
 	}
 	if i.Before != nil {
-		ro.Params["before"] = *i.Before
+		requestOptions.Params["before"] = *i.Before
 	}
 	if i.Cursor != nil {
-		ro.Params["cursor"] = *i.Cursor
+		requestOptions.Params["cursor"] = *i.Cursor
 	}
 	if i.DefinitionID != nil {
-		ro.Params["definition_id"] = *i.DefinitionID
+		requestOptions.Params["definition_id"] = *i.DefinitionID
 	}
 	if i.Limit != nil {
-		ro.Params["limit"] = strconv.Itoa(*i.Limit)
+		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 	if i.ServiceID != nil {
-		ro.Params["service_id"] = *i.ServiceID
+		requestOptions.Params["service_id"] = *i.ServiceID
 	}
 	if i.Sort != nil {
-		ro.Params["sort"] = *i.Sort
+		requestOptions.Params["sort"] = *i.Sort
 	}
 	if i.Status != nil {
-		ro.Params["status"] = *i.Status
+		requestOptions.Params["status"] = *i.Status
 	}
 
-	resp, err := c.Get(p, ro)
+	resp, err := c.Get(p, requestOptions)
 	if err != nil {
 		return nil, err
 	}

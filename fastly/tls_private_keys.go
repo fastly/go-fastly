@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"reflect"
 	"strconv"
@@ -12,6 +13,8 @@ import (
 // GetPrivateKeyInput is an input to the GetPrivateKey function.
 // Allowed values for the fields are described at https://developer.fastly.com/reference/api/tls/platform/.
 type GetPrivateKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
@@ -29,6 +32,8 @@ type PrivateKey struct {
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// FilterInUse is the returned keys to those without any matching TLS certificates.
 	FilterInUse string
 	// PageNumber is the page index for pagination.
@@ -41,9 +46,9 @@ type ListPrivateKeysInput struct {
 func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 	result := map[string]string{}
 	pairings := map[string]any{
-		"filter[in_use]": i.FilterInUse,
-		"page[size]":     i.PageSize,
-		"page[number]":   i.PageNumber,
+		"filter[in_use]":             i.FilterInUse,
+		jsonapi.QueryParamPageSize:   i.PageSize,
+		jsonapi.QueryParamPageNumber: i.PageNumber,
 	}
 
 	for key, value := range pairings {
@@ -64,14 +69,11 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 // ListPrivateKeys retrieves all resources.
 func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
 	path := "/tls/private_keys"
-	filters := &RequestOptions{
-		Params: i.formatFilters(),
-		Headers: map[string]string{
-			"Accept": "application/vnd.api+json", // this is required otherwise the filters don't work
-		},
-	}
+	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions.Params = i.formatFilters()
+	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, filters)
+	resp, err := c.Get(path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -102,7 +104,7 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 	path := ToSafeURL("tls", "private_keys", i.ID)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -118,6 +120,8 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 // CreatePrivateKeyInput is used as input to the CreatePrivateKey function.
 type CreatePrivateKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Key is the contents of the private key. Must be a PEM-formatted key.
 	Key string `jsonapi:"attr,key,omitempty"`
 	// Name is a customizable name for your private key.
@@ -136,7 +140,7 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 		return nil, ErrMissingName
 	}
 
-	resp, err := c.PostJSONAPI(path, i, nil)
+	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -152,6 +156,8 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 
 // DeletePrivateKeyInput used for deleting a private key.
 type DeletePrivateKeyInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
@@ -164,7 +170,7 @@ func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
 
 	path := ToSafeURL("tls", "private_keys", i.ID)
 
-	ignored, err := c.Delete(path, nil)
+	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

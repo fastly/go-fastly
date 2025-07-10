@@ -1,10 +1,12 @@
 package computeacls
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
+	"net/http"
 
-	"github.com/fastly/go-fastly/v9/fastly"
+	"github.com/fastly/go-fastly/v10/fastly"
 )
 
 // LookupInput specifies the information needed for the Lookup() function to perform
@@ -14,6 +16,8 @@ type LookupInput struct {
 	ComputeACLID *string
 	// ComputeACLIP is a valid IPv4 or IPv6 address (required).
 	ComputeACLIP *string
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 }
 
 // Lookup finds a matching ACL entry for an IP address.
@@ -27,11 +31,16 @@ func Lookup(c *fastly.Client, i *LookupInput) (*ComputeACLEntry, error) {
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID, "entry", *i.ComputeACLIP)
 
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
 	defer resp.Body.Close()
+
+	// In the case that no matching IP was found, the API will return a 204 No Content. This is not an error condition, rather a lack of results.
+	if resp.StatusCode == http.StatusNoContent {
+		return nil, nil
+	}
 
 	var entry *ComputeACLEntry
 	if err := json.NewDecoder(resp.Body).Decode(&entry); err != nil {

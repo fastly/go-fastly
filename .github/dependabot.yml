@@ -7,7 +7,15 @@ updates:
     allow:
       # Allow both direct and indirect updates for all packages.
       - dependency-type: "all"
+    groups:
+      go-dependencies:
+        patterns:
+          - "*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
       interval: "weekly"
+    groups:
+      gha-dependencies:
+        patterns:
+          - "*"

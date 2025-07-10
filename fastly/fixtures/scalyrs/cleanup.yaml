@@ -6,13 +6,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.1.0 (+github.com/fastly/go-fastly; go1.22.1)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/2/logging/scalyr/test-scalyr
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/128/logging/scalyr/test-scalyr
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e test-scalyr, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 2 }''"}'
+      version =\u003e 128 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -21,15 +21,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Mar 2024 23:05:46 GMT
+      - Wed, 04 Jun 2025 15:31:12 GMT
       Fastly-Ratelimit-Remaining:
-      - "995"
+      - "9810"
       Fastly-Ratelimit-Reset:
-      - "1710460800"
+      - "1749052800"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -37,15 +37,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-sjc1000122-SJC
+      - cache-chi-klot8100022-CHI, cache-nyc-kteb1890056-NYC
       X-Timer:
-      - S1710457547.514627,VS0,VE208
+      - S1749051073.895502,VS0,VE103
     status: 404 Not Found
     code: 404
     duration: ""
@@ -54,13 +54,13 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.1.0 (+github.com/fastly/go-fastly; go1.22.1)
-    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/2/logging/scalyr/new-test-scalyr
+      - FastlyGo/10.2.0 (+github.com/fastly/go-fastly; go1.24.3)
+    url: https://api.fastly.com/service/kKJb5bOFI47uHeBVluGfX1/version/128/logging/scalyr/new-test-scalyr
     method: DELETE
   response:
     body: '{"msg":"Record not found","detail":"Couldn''t find syslog ''{ deleted =\u003e
       0000-00-00 00:00:00, name =\u003e new-test-scalyr, service =\u003e kKJb5bOFI47uHeBVluGfX1,
-      version =\u003e 2 }''"}'
+      version =\u003e 128 }''"}'
     headers:
       Accept-Ranges:
       - bytes
@@ -69,15 +69,15 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 14 Mar 2024 23:05:46 GMT
+      - Wed, 04 Jun 2025 15:31:13 GMT
       Fastly-Ratelimit-Remaining:
-      - "994"
+      - "9809"
       Fastly-Ratelimit-Reset:
-      - "1710460800"
+      - "1749052800"
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly
       Status:
       - 404 Not Found
       Strict-Transport-Security:
@@ -85,15 +85,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-sjc1000122-SJC
+      - cache-chi-kigq8000176-CHI, cache-nyc-kteb1890056-NYC
       X-Timer:
-      - S1710457547.731162,VS0,VE158
+      - S1749051073.006327,VS0,VE117
     status: 404 Not Found
     code: 404
     duration: ""

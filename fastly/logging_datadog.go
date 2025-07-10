@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -13,6 +14,7 @@ type Datadog struct {
 	FormatVersion     *int       `mapstructure:"format_version"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	ServiceID         *string    `mapstructure:"service_id"`
@@ -23,6 +25,8 @@ type Datadog struct {
 
 // ListDatadogInput is used as input to the ListDatadog function.
 type ListDatadogInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -39,7 +43,7 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -54,6 +58,8 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 
 // CreateDatadogInput is used as input to the CreateDatadog function.
 type CreateDatadogInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -62,7 +68,9 @@ type CreateDatadogInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// Region is the region that log data will be sent to.
+	// ProcessingRegion is the region where logs will be processed before streaming to Datadog.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	// Region is the region where logs are received and stored by Datadog.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -84,7 +92,7 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -99,6 +107,8 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 
 // GetDatadogInput is used as input to the GetDatadog function.
 type GetDatadogInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Datadog to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -120,7 +130,7 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -135,6 +145,8 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 
 // UpdateDatadogInput is used as input to the UpdateDatadog function.
 type UpdateDatadogInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -145,7 +157,9 @@ type UpdateDatadogInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// Region is the region that log data will be sent to.
+	// ProcessingRegion is the region where logs will be processed before streaming to Datadog.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	// Region is the region where logs are received and stored by Datadog.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -170,7 +184,7 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -185,6 +199,8 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 
 // DeleteDatadogInput is the input parameter to DeleteDatadog.
 type DeleteDatadogInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Datadog to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -206,7 +222,7 @@ func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

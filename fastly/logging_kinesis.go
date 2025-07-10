@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"strconv"
 	"time"
 )
@@ -15,6 +16,7 @@ type Kinesis struct {
 	IAMRole           *string    `mapstructure:"iam_role"`
 	Name              *string    `mapstructure:"name"`
 	Placement         *string    `mapstructure:"placement"`
+	ProcessingRegion  *string    `mapstructure:"log_processing_region"`
 	Region            *string    `mapstructure:"region"`
 	ResponseCondition *string    `mapstructure:"response_condition"`
 	SecretKey         *string    `mapstructure:"secret_key"`
@@ -26,6 +28,8 @@ type Kinesis struct {
 
 // ListKinesisInput is used as input to the ListKinesis function.
 type ListKinesisInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -42,7 +46,7 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis")
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -59,6 +63,8 @@ func (c *Client) ListKinesis(i *ListKinesisInput) ([]*Kinesis, error) {
 type CreateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
 	AccessKey *string `url:"access_key,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -69,7 +75,9 @@ type CreateKinesisInput struct {
 	Name *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// Region is a named set of AWS resources that's in the same geographical area.
+	// ProcessingRegion is the region where logs will be processed before streaming to Kinesis.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	// Region is the region where logs are received and stored by Kinesis.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -93,7 +101,7 @@ func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis")
-	resp, err := c.PostForm(path, i, nil)
+	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -108,6 +116,8 @@ func (c *Client) CreateKinesis(i *CreateKinesisInput) (*Kinesis, error) {
 
 // GetKinesisInput is used as input to the GetKinesis function.
 type GetKinesisInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Kinesis logging object to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -129,7 +139,7 @@ func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis", i.Name)
-	resp, err := c.Get(path, nil)
+	resp, err := c.Get(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -146,6 +156,8 @@ func (c *Client) GetKinesis(i *GetKinesisInput) (*Kinesis, error) {
 type UpdateKinesisInput struct {
 	// AccessKey is the access key associated with the target Amazon Kinesis stream. Not required if iam_role is specified.
 	AccessKey *string `url:"access_key,omitempty"`
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Kinesis can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -158,7 +170,9 @@ type UpdateKinesisInput struct {
 	NewName *string `url:"name,omitempty"`
 	// Placement is where in the generated VCL the logging call should be placed.
 	Placement *string `url:"placement,omitempty"`
-	// Region is a named set of AWS resources that's in the same geographical area.
+	// ProcessingRegion is the region where logs will be processed before streaming to Kinesis.
+	ProcessingRegion *string `url:"log_processing_region,omitempty"`
+	// Region is the region where logs are received and stored by Kinesis.
 	Region *string `url:"region,omitempty"`
 	// ResponseCondition is the name of an existing condition in the configured endpoint, or leave blank to always execute.
 	ResponseCondition *string `url:"response_condition,omitempty"`
@@ -185,7 +199,7 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis", i.Name)
-	resp, err := c.PutForm(path, i, nil)
+	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
 	if err != nil {
 		return nil, err
 	}
@@ -200,6 +214,8 @@ func (c *Client) UpdateKinesis(i *UpdateKinesisInput) (*Kinesis, error) {
 
 // DeleteKinesisInput is the input parameter to DeleteKinesis.
 type DeleteKinesisInput struct {
+	// Context, if supplied, will be used as the Request's context.
+	Context *context.Context
 	// Name is the name of the Kinesis logging object to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -221,7 +237,7 @@ func (c *Client) DeleteKinesis(i *DeleteKinesisInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "kinesis", i.Name)
-	resp, err := c.Delete(path, nil)
+	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
 	if err != nil {
 		return err
 	}

@@ -110,11 +110,12 @@ func TestClient_Loggly(t *testing.T) {
 	var ulg *Loggly
 	Record(t, "loggly/update", func(c *Client) {
 		ulg, err = c.UpdateLoggly(&UpdateLogglyInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-loggly",
-			NewName:        ToPointer("new-test-loggly"),
-			FormatVersion:  ToPointer(2),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-loggly",
+			NewName:          ToPointer("new-test-loggly"),
+			FormatVersion:    ToPointer(2),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -125,6 +126,9 @@ func TestClient_Loggly(t *testing.T) {
 	}
 	if *ulg.FormatVersion != 2 {
 		t.Errorf("bad format_version: %q", *ulg.FormatVersion)
+	}
+	if *ulg.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ulg.ProcessingRegion)
 	}
 
 	// Delete

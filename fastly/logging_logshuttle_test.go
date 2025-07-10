@@ -118,12 +118,13 @@ func TestClient_Logshuttles(t *testing.T) {
 	var ul *Logshuttle
 	Record(t, "logshuttles/update", func(c *Client) {
 		ul, err = c.UpdateLogshuttle(&UpdateLogshuttleInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-logshuttle",
-			NewName:        ToPointer("new-test-logshuttle"),
-			Token:          ToPointer("new-token"),
-			URL:            ToPointer("https://logs2.example.com"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-logshuttle",
+			NewName:          ToPointer("new-test-logshuttle"),
+			Token:            ToPointer("new-token"),
+			URL:              ToPointer("https://logs2.example.com"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -137,6 +138,9 @@ func TestClient_Logshuttles(t *testing.T) {
 	}
 	if *ul.URL != "https://logs2.example.com" {
 		t.Errorf("bad url: %q", *ul.URL)
+	}
+	if *ul.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *ul.ProcessingRegion)
 	}
 
 	// Delete

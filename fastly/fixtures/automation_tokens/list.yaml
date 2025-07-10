@@ -6,27 +6,27 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/9.8.0 (+github.com/fastly/go-fastly; go1.22.2)
+      - FastlyGo/9.13.1 (+github.com/fastly/go-fastly; go1.24.0)
     url: https://api.fastly.com/automation-tokens?page=1&per_page=100
     method: GET
   response:
     body: |
-      {"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","creator_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"my-test-token","access_token":"","role":"engineer","ip":null,"user_agent":null,"scopes":"global","services":[],"service_id":null,"sudo_expires_at":null,"last_used_at":null,"created_at":"2024-09-21T03:56:00Z","expires_at":null,"tls_access":false}],"meta":{"per_page":100,"current_page":1,"record_count":1,"total_pages":1}}
+      {"data":[{"id":"XXXXXXXXXXXXXXXXXXXXXX","creator_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"fastly-exporter","access_token":"","role":"engineer","ip":"116.255.31.196","user_agent":"Fastly-Exporter (9.0.0)","scopes":"global:read","services":[],"service_id":null,"sudo_expires_at":null,"last_used_at":"2025-02-22T03:27:50Z","created_at":"2024-10-15T11:51:55Z","expires_at":null,"tls_access":false},{"id":"XXXXXXXXXXXXXXXXXXXXXX","creator_id":"XXXXXXXXXXXXXXXXXXXXXX","customer_id":"XXXXXXXXXXXXXXXXXXXXXX","name":"my-test-token","access_token":"","role":"engineer","ip":null,"user_agent":null,"scopes":"global","services":null,"service_id":null,"sudo_expires_at":null,"last_used_at":null,"created_at":"2025-02-25T05:12:57Z","expires_at":null,"tls_access":false}],"meta":{"per_page":100,"current_page":1,"record_count":2,"total_pages":1}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "445"
+      - "864"
       Content-Type:
       - application/json
       Date:
-      - Sat, 21 Sep 2024 04:30:21 GMT
+      - Tue, 25 Feb 2025 05:14:22 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Strict-Transport-Security:
       - max-age=31536000
       Via:
@@ -36,9 +36,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100166-CHI, cache-per12624-PER
+      - cache-chi-klot8100115-CHI, cache-per12625-PER
       X-Timer:
-      - S1726893021.414551,VS0,VE346
+      - S1740460462.015453,VS0,VE317
     status: 200 OK
     code: 200
     duration: ""

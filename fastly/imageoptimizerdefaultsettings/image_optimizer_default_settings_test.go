@@ -4,8 +4,8 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/fastly/go-fastly/v9/fastly"
-	"github.com/fastly/go-fastly/v9/fastly/products/imageoptimizer"
+	"github.com/fastly/go-fastly/v10/fastly"
+	"github.com/fastly/go-fastly/v10/fastly/products/imageoptimizer"
 )
 
 // TestClient_ImageOptimizerDefaultSettings tests the Image Optimizer Default Settings API
@@ -33,7 +33,6 @@ func TestClient_ImageOptimizerDefaultSettings(t *testing.T) {
 	defer func() {
 		fastly.Record(t, fixtureBase+"disable_product", func(c *fastly.Client) {
 			_, err = imageoptimizer.Enable(c, fastly.TestDeliveryServiceID)
-
 			if err != nil {
 				t.Fatal(err)
 			}

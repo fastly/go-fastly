@@ -6,8 +6,8 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
-    url: https://api.fastly.com/alerts/history?after=2006-01-02T15%3A04%3A05Z&before=2056-01-02T15%3A04%3A05Z&cursor=&definition_id=7eoZPghUve49laTwDZgBDG&limit=10&service_id=kKJb5bOFI47uHeBVluGfX1&sort=-start&status=
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
+    url: https://api.fastly.com/alerts/history?after=2006-01-02T15%3A04%3A05Z&before=2056-01-02T15%3A04%3A05Z&cursor=&definition_id=5ihYWKFmUaRI5PVRNivo7Z&limit=10&service_id=kKJb5bOFI47uHeBVluGfX1&sort=-start&status=
     method: GET
   response:
     body: '{"data":[],"meta":{"next_cursor":"","limit":10,"sort":"-start","total":0}}'
@@ -21,11 +21,11 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Wed, 17 Jan 2024 04:07:30 GMT
+      - Tue, 08 Apr 2025 15:32:30 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -33,15 +33,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-pao-kpao1770036-PAO
+      - cache-chi-klot8100035-CHI, cache-pdk-katl1840026-PDK
       X-Timer:
-      - S1705464450.858643,VS0,VE291
+      - S1744126350.967504,VS0,VE302
     status: 200 OK
     code: 200
     duration: ""

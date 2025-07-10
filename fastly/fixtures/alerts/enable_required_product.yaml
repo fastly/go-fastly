@@ -1,0 +1,52 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"ProductID":3,"ServiceID":"kKJb5bOFI47uHeBVluGfX1"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
+    url: https://api.fastly.com/enabled-products/domain_inspector/services/kKJb5bOFI47uHeBVluGfX1
+    method: PUT
+  response:
+    body: |
+      {"product":{"id":"domain_inspector","object":"product"},"service":{"id":"kKJb5bOFI47uHeBVluGfX1","object":"service"},"_links":{"self":"/enabled-products/domain_inspector/services/kKJb5bOFI47uHeBVluGfX1"}}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "205"
+      Content-Type:
+      - application/json
+      Date:
+      - Tue, 08 Apr 2025 15:32:27 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly control-gateway
+      Status:
+      - 200 OK
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100024-CHI, cache-pdk-katl1840026-PDK
+      X-Timer:
+      - S1744126346.373539,VS0,VE1154
+    status: 200 OK
+    code: 200
+    duration: ""

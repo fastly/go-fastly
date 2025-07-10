@@ -118,10 +118,11 @@ func TestClient_Sumologics(t *testing.T) {
 	var us *Sumologic
 	Record(t, "sumologics/update", func(c *Client) {
 		us, err = c.UpdateSumologic(&UpdateSumologicInput{
-			ServiceID:      TestDeliveryServiceID,
-			ServiceVersion: *tv.Number,
-			Name:           "test-sumologic",
-			NewName:        ToPointer("new-test-sumologic"),
+			ServiceID:        TestDeliveryServiceID,
+			ServiceVersion:   *tv.Number,
+			Name:             "test-sumologic",
+			NewName:          ToPointer("new-test-sumologic"),
+			ProcessingRegion: ToPointer("eu"),
 		})
 	})
 	if err != nil {
@@ -129,6 +130,9 @@ func TestClient_Sumologics(t *testing.T) {
 	}
 	if *us.Name != "new-test-sumologic" {
 		t.Errorf("bad name: %q", *us.Name)
+	}
+	if *us.ProcessingRegion != "eu" {
+		t.Errorf("bad log_processing_region: %q", *us.ProcessingRegion)
 	}
 
 	// Delete

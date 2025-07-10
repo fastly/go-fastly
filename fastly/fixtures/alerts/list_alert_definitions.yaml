@@ -6,27 +6,27 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/8.6.4 (+github.com/fastly/go-fastly; go1.20.4)
+      - FastlyGo/10.0.0 (+github.com/fastly/go-fastly; go1.23.7)
     url: https://api.fastly.com/alerts/definitions?cursor=&limit=10&name=test+name&service_id=kKJb5bOFI47uHeBVluGfX1&sort=name
     method: GET
   response:
-    body: '{"data":[{"id":"7eoZPghUve49laTwDZgBDG","object":"definition","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test
-      name","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m0s","threshold":10},"integration_ids":[],"updated_at":"2024-01-17T04:07:28Z","created_at":"2024-01-17T04:07:28Z"}],"meta":{"next_cursor":"","limit":10,"sort":"name","total":1}}'
+    body: '{"data":[{"id":"5ihYWKFmUaRI5PVRNivo7Z","object":"definition","service_id":"kKJb5bOFI47uHeBVluGfX1","name":"test
+      name","description":"test description","dimensions":{"domains":["example.com","fastly.com"]},"metric":"status_5xx_rate","source":"domains","evaluation_strategy":{"type":"above_threshold","period":"5m","threshold":10},"integration_ids":[],"updated_at":"2025-04-08T15:32:28Z","created_at":"2025-04-08T15:32:28Z"}],"meta":{"next_cursor":"","limit":10,"sort":"name","total":1}}'
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "483"
+      - "486"
       Content-Type:
       - application/json
       Date:
-      - Wed, 17 Jan 2024 04:07:28 GMT
+      - Tue, 08 Apr 2025 15:32:28 GMT
       Pragma:
       - no-cache
       Server:
-      - control-gateway
+      - fastly control-gateway
       Status:
       - 200 OK
       Strict-Transport-Security:
@@ -34,15 +34,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-pao-kpao1770036-PAO
+      - cache-chi-kigq8000092-CHI, cache-pdk-katl1840026-PDK
       X-Timer:
-      - S1705464448.392416,VS0,VE325
+      - S1744126349.598120,VS0,VE251
     status: 200 OK
     code: 200
     duration: ""
