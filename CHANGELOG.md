@@ -12,6 +12,8 @@
 
 ### Enhancements:
 
+- feat(tls_custom_certificate): Add support for allow_untrusted_root attribute
+
 ### Bug fixes:
 
 ### Dependencies:
