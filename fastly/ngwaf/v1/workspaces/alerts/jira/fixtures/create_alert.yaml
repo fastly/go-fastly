@@ -1,0 +1,52 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"config":{"host":"mycompany.atlassian.net","issue_type":null,"key":"123456789","project":"TEST","username":"testuser"},"description":"This
+      is a test alert.","events":["flag"],"type":"jira"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts
+    method: POST
+  response:
+    body: ' { "errors" : [{ "title" : "Unknown Error Occurred" , "detail" : "Something
+      went wrong - please try again or contact support@fastly.com if it persists"
+      }] } '
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "157"
+      Content-Type:
+      - text/json
+      Date:
+      - Thu, 10 Jul 2025 18:10:07 GMT
+      Pragma:
+      - no-cache
+      Retry-After:
+      - "0"
+      Server:
+      - fastly Varnish
+      Strict-Transport-Security:
+      - max-age=31536000
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740054-EWR
+      X-Timer:
+      - S1752171007.347224,VS0,VE42
+    status: 503 Service Unavailable
+    code: 503
+    duration: ""

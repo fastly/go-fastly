@@ -365,9 +365,9 @@ var ErrMissingKind = NewFieldError("Kind")
 // requires a "URL" key, but one was not set.
 var ErrMissingURL = NewFieldError("URL")
 
-// ErrMissingUserName is an error that is returned when an input struct
-// requires a "UserName" key, but one was not set.
-var ErrMissingUserName = NewFieldError("Username")
+// ErrMissingUsername is an error that is returned when an input struct
+// requires a "Username" key, but one was not set.
+var ErrMissingUsername = NewFieldError("Username")
 
 // ErrMissingValue is an error that is returned when an input struct
 // requires a "Value" key, but one was not set.

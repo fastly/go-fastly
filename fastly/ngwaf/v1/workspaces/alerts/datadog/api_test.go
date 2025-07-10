@@ -13,11 +13,11 @@ var testWorkspaceID = fastly.TestNGWAFWorkspaceID
 func Test_Alerts(t *testing.T) {
 	t.Parallel()
 
-	var AlertID string
+	var alertID string
 	var err error
-	var Alert *Alert
+	var alert *Alert
 	testConfig := CreateConfig{
-		Key:  fastly.ToPointer("a1b2c3d4e5f6789012345678901234567"),
+		Key:  fastly.ToPointer("123456789"),
 		Site: fastly.ToPointer("us1"),
 	}
 	testDescription := "This is a test alert."
@@ -25,8 +25,8 @@ func Test_Alerts(t *testing.T) {
 	testType := IntegrationType
 
 	// Create a workspace alert.
-	fastly.Record(t, "create_workspacealerts", func(c *fastly.Client) {
-		Alert, err = Create(c, &CreateInput{
+	fastly.Record(t, "create_alert", func(c *fastly.Client) {
+		alert, err = Create(c, &CreateInput{
 			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
 			Events:      []string{testEvent},
@@ -37,16 +37,16 @@ func Test_Alerts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if Alert == nil {
+	if alert == nil {
 		t.Fatal("expected alert response, got nil")
 	}
-	AlertID = Alert.ID
+	alertID = alert.ID
 
 	// Ensure that we delete the test workspace alert after use.
 	defer func() {
-		fastly.Record(t, "delete_workspaceAlert", func(c *fastly.Client) {
+		fastly.Record(t, "delete_alert", func(c *fastly.Client) {
 			err = Delete(c, &DeleteInput{
-				AlertID:     fastly.ToPointer(AlertID),
+				AlertID:     fastly.ToPointer(alertID),
 				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			})
 		})
@@ -57,9 +57,9 @@ func Test_Alerts(t *testing.T) {
 
 	// Get the test workspace alert.
 	var getTestAlert *Alert
-	fastly.Record(t, "get_workspacealert", func(c *fastly.Client) {
+	fastly.Record(t, "get_alert", func(c *fastly.Client) {
 		getTestAlert, err = Get(c, &GetInput{
-			AlertID:     fastly.ToPointer(AlertID),
+			AlertID:     fastly.ToPointer(alertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
 
@@ -89,14 +89,14 @@ func Test_Alerts(t *testing.T) {
 
 	// Update the test workspace alert.
 	updatedConfig := UpdateConfig{
-		Key:  fastly.ToPointer("a1b2c3d4e5f6789012345678901234599"),
+		Key:  fastly.ToPointer("987654321"),
 		Site: fastly.ToPointer("us3"),
 	}
 	updatedEvent := "flag"
 	var updateAlert *Alert
-	fastly.Record(t, "update_workspacealert", func(c *fastly.Client) {
+	fastly.Record(t, "update_alert", func(c *fastly.Client) {
 		updateAlert, err = Update(c, &UpdateInput{
-			AlertID:     fastly.ToPointer(AlertID),
+			AlertID:     fastly.ToPointer(alertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			Config:      updatedConfig,
 			Events:      []string{updatedEvent},
@@ -120,7 +120,7 @@ func Test_Alerts(t *testing.T) {
 
 	// List the workspace alerts for the test workspace and check the updated one is the only entry.
 	var Alerts *Alerts
-	fastly.Record(t, "list_workspacealerts", func(c *fastly.Client) {
+	fastly.Record(t, "list_alerts", func(c *fastly.Client) {
 		Alerts, err = List(c, &ListInput{
 			WorkspaceID: &testWorkspaceID,
 		})
@@ -174,7 +174,7 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Key: fastly.ToPointer("test"), Site: fastly.ToPointer("us1")},
+		Config:      CreateConfig{Key: fastly.ToPointer("111222333"), Site: fastly.ToPointer("us1")},
 		Events:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -192,7 +192,7 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Key: fastly.ToPointer("test")},
+		Config:      CreateConfig{Key: fastly.ToPointer("444555666")},
 		Events:      []string{"flag"},
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})

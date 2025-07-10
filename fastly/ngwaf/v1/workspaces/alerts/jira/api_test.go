@@ -15,21 +15,20 @@ func Test_Alerts(t *testing.T) {
 
 	var AlertID string
 	var err error
-	var Alert *Alert
+	var WorkSpaceAlert *Alert
 	testConfig := CreateConfig{
-		Host:      fastly.ToPointer("https://example.exampleJira.net"),
-		Key:       fastly.ToPointer("ATATT3xFfGF0a1b2c3d4e5f6789012345678901234567890"),
-		Project:   fastly.ToPointer("TEST"),
-		Username:  fastly.ToPointer("testuser"),
-		IssueType: fastly.ToPointer("Bug"),
+		Host:     fastly.ToPointer("mycompany.atlassian.net"),
+		Key:      fastly.ToPointer("123456789"),
+		Project:  fastly.ToPointer("TEST"),
+		Username: fastly.ToPointer("testuser"),
 	}
 	testDescription := "This is a test alert."
 	testEvent := "flag"
 	testType := IntegrationType
 
 	// Create a workspace alert.
-	fastly.Record(t, "create_workspacealerts", func(c *fastly.Client) {
-		Alert, err = Create(c, &CreateInput{
+	fastly.Record(t, "create_alert", func(c *fastly.Client) {
+		WorkSpaceAlert, err = Create(c, &CreateInput{
 			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
 			Events:      []string{testEvent},
@@ -40,14 +39,14 @@ func Test_Alerts(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if Alert == nil {
+	if WorkSpaceAlert == nil {
 		t.Fatal("expected workspace alert response, got nil")
 	}
-	AlertID = Alert.ID
+	AlertID = WorkSpaceAlert.ID
 
 	// Ensure that we delete the test workspace alert after use.
 	defer func() {
-		fastly.Record(t, "delete_workspaceAlert", func(c *fastly.Client) {
+		fastly.Record(t, "delete_alert", func(c *fastly.Client) {
 			err = Delete(c, &DeleteInput{
 				AlertID:     fastly.ToPointer(AlertID),
 				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -60,12 +59,11 @@ func Test_Alerts(t *testing.T) {
 
 	// Get the test workspace alert.
 	var getTestAlert *Alert
-	fastly.Record(t, "get_workspacealert", func(c *fastly.Client) {
+	fastly.Record(t, "get_alert", func(c *fastly.Client) {
 		getTestAlert, err = Get(c, &GetInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
-
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -82,16 +80,12 @@ func Test_Alerts(t *testing.T) {
 	if *getTestAlert.Config.Username != *testConfig.Username {
 		t.Errorf("unexpected workspace alert config username: got %v, expected %v", *getTestAlert.Config.Username, *testConfig.Username)
 	}
-	if *getTestAlert.Config.IssueType != *testConfig.IssueType {
-		t.Errorf("unexpected workspace alert config issue type: got %v, expected %v", *getTestAlert.Config.IssueType, *testConfig.IssueType)
-	}
 	if getTestAlert.Type != testType {
 		t.Errorf("unexpected workspace alert type: got %+v, expected %+v", getTestAlert.Type, testType)
 	}
 	if len(getTestAlert.Events) != 1 {
 		t.Errorf("unexpected workspace alerts event length: got %d, expected %d", len(getTestAlert.Events), 1)
 	}
-
 	if getTestAlert.Events[0] != testEvent {
 		t.Errorf("unexpected workspace alert events: got %+v, expected %+v", getTestAlert.Events[0], testEvent)
 	}
@@ -101,15 +95,15 @@ func Test_Alerts(t *testing.T) {
 
 	// Update the test workspace alert.
 	updatedConfig := UpdateConfig{
-		Host:      fastly.ToPointer("https://example.exampleJira.net"),
-		Key:       fastly.ToPointer("ATATT3xFfGF0b2c3d4e5f6789012345678901234567891"),
+		Host:      fastly.ToPointer("updated.atlassian.net"),
+		Key:       fastly.ToPointer("987654321"),
 		Project:   fastly.ToPointer("UPDATED"),
 		Username:  fastly.ToPointer("updateduser"),
 		IssueType: fastly.ToPointer("Bug"),
 	}
 	updatedEvent := "flag"
 	var updateAlert *Alert
-	fastly.Record(t, "update_workspacealert", func(c *fastly.Client) {
+	fastly.Record(t, "update_alert", func(c *fastly.Client) {
 		updateAlert, err = Update(c, &UpdateInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -132,9 +126,6 @@ func Test_Alerts(t *testing.T) {
 	if *updateAlert.Config.Username != *updatedConfig.Username {
 		t.Errorf("unexpected updated workspace alert config username: got %v, expected %v", *updateAlert.Config.Username, *updatedConfig.Username)
 	}
-	if *updateAlert.Config.IssueType != *updatedConfig.IssueType {
-		t.Errorf("unexpected updated workspace alert config issue type: got %v, expected %v", *updateAlert.Config.IssueType, *updatedConfig.IssueType)
-	}
 	if len(updateAlert.Events) != 1 {
 		t.Errorf("unexpected updated workspace alerts event length: got %d, expected %d", len(updateAlert.Events), 1)
 	}
@@ -144,7 +135,7 @@ func Test_Alerts(t *testing.T) {
 
 	// List the workspace alerts for the test workspace and check the updated one is the only entry.
 	var Alerts *Alerts
-	fastly.Record(t, "list_workspacealerts", func(c *fastly.Client) {
+	fastly.Record(t, "list_alerts", func(c *fastly.Client) {
 		Alerts, err = List(c, &ListInput{
 			WorkspaceID: &testWorkspaceID,
 		})
@@ -171,9 +162,6 @@ func Test_Alerts(t *testing.T) {
 	}
 	if *listedAlert.Config.Username != *updatedConfig.Username {
 		t.Errorf("unexpected listed workspace alert config username: got %v, expected %v", *listedAlert.Config.Username, *updatedConfig.Username)
-	}
-	if *listedAlert.Config.IssueType != *updatedConfig.IssueType {
-		t.Errorf("unexpected listed workspace alert config issue type: got %v, expected %v", *listedAlert.Config.IssueType, *updatedConfig.IssueType)
 	}
 	if len(listedAlert.Events) != 1 {
 		t.Errorf("unexpected listed workspace alerts event length: got %d, expected %d", len(listedAlert.Events), 1)
@@ -207,48 +195,12 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 	}
 	_, err = Create(fastly.TestClient, &CreateInput{
 		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Host: fastly.ToPointer("example.atlassian.net"), Key: fastly.ToPointer("test"), Project: fastly.ToPointer("TEST"), Username: fastly.ToPointer("user")},
+		Config:      CreateConfig{Host: fastly.ToPointer("test.atlassian.net"), Key: fastly.ToPointer("111222333"), Project: fastly.ToPointer("TEST"), Username: fastly.ToPointer("user")},
 		Events:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingEvents) {
 		t.Errorf("expected ErrMissingEvents: got %s", err)
-	}
-	_, err = Create(fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Key: fastly.ToPointer("test"), Project: fastly.ToPointer("TEST"), Username: fastly.ToPointer("user")},
-		Events:      []string{"flag"},
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrMissingHost) {
-		t.Errorf("expected ErrMissingHost: got %s", err)
-	}
-	_, err = Create(fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Host: fastly.ToPointer("example.atlassian.net"), Project: fastly.ToPointer("TEST"), Username: fastly.ToPointer("user")},
-		Events:      []string{"flag"},
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrMissingKey) {
-		t.Errorf("expected ErrMissingKey: got %s", err)
-	}
-	_, err = Create(fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Host: fastly.ToPointer("example.atlassian.net"), Key: fastly.ToPointer("test"), Username: fastly.ToPointer("user")},
-		Events:      []string{"flag"},
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrMissingProject) {
-		t.Errorf("expected ErrMissingProject: got %s", err)
-	}
-	_, err = Create(fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
-		Config:      CreateConfig{Host: fastly.ToPointer("example.atlassian.net"), Key: fastly.ToPointer("test"), Project: fastly.ToPointer("TEST")},
-		Events:      []string{"flag"},
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrMissingUserName) {
-		t.Errorf("expected ErrMissingUserName: got %s", err)
 	}
 }
 

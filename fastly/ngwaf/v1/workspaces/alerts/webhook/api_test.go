@@ -24,7 +24,7 @@ func Test_Alerts(t *testing.T) {
 	testType := IntegrationType
 
 	// Create a workspace alert.
-	fastly.Record(t, "create_workspacealerts", func(c *fastly.Client) {
+	fastly.Record(t, "create_alert", func(c *fastly.Client) {
 		WorkSpaceAlert, err = Create(c, &CreateInput{
 			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
@@ -43,7 +43,7 @@ func Test_Alerts(t *testing.T) {
 
 	// Ensure that we delete the test workspace alert after use.
 	defer func() {
-		fastly.Record(t, "delete_workspaceAlert", func(c *fastly.Client) {
+		fastly.Record(t, "delete_alert", func(c *fastly.Client) {
 			err = Delete(c, &DeleteInput{
 				AlertID:     fastly.ToPointer(AlertID),
 				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -56,7 +56,7 @@ func Test_Alerts(t *testing.T) {
 
 	// Get the test workspace alert.
 	var getTestAlert *Alert
-	fastly.Record(t, "get_workspacealert", func(c *fastly.Client) {
+	fastly.Record(t, "get_alert", func(c *fastly.Client) {
 		getTestAlert, err = Get(c, &GetInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -83,7 +83,7 @@ func Test_Alerts(t *testing.T) {
 
 	// Get the signing key for the webhook alert.
 	var signingKey *AlertsKey
-	fastly.Record(t, "get_workspacealert_signing_key", func(c *fastly.Client) {
+	fastly.Record(t, "get_alert_signing_key", func(c *fastly.Client) {
 		signingKey, err = GetKey(c, &GetKeyInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -99,7 +99,7 @@ func Test_Alerts(t *testing.T) {
 
 	// Rotate the signing key.
 	var rotatedKey *AlertsKey
-	fastly.Record(t, "rotate_workspacealert_signing_key", func(c *fastly.Client) {
+	fastly.Record(t, "rotate_alert_signing_key", func(c *fastly.Client) {
 		rotatedKey, err = RotateKey(c, &RotateKeyInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -121,7 +121,7 @@ func Test_Alerts(t *testing.T) {
 	}
 	updatedEvent := "flag"
 	var updateAlert *Alert
-	fastly.Record(t, "update_workspacealert", func(c *fastly.Client) {
+	fastly.Record(t, "update_alert", func(c *fastly.Client) {
 		updateAlert, err = Update(c, &UpdateInput{
 			AlertID:     fastly.ToPointer(AlertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -144,7 +144,7 @@ func Test_Alerts(t *testing.T) {
 
 	// List the workspace alerts for the test workspace and check the updated one is the only entry.
 	var Alerts *Alerts
-	fastly.Record(t, "list_workspacealerts", func(c *fastly.Client) {
+	fastly.Record(t, "list_alerts", func(c *fastly.Client) {
 		Alerts, err = List(c, &ListInput{
 			WorkspaceID: &testWorkspaceID,
 		})

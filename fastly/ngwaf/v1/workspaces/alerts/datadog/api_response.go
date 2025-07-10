@@ -37,7 +37,6 @@ type Alert struct {
 	LastStatusCode int `json:"last_status_code"`
 }
 
-
 // AlertEvent is a subset of the Alert response structure.
 type AlertEvent struct {
 	// Flag is the event flag.
@@ -51,4 +50,3 @@ type Alerts struct {
 	// Meta is the information for total alerts.
 	Meta MetaAlerts `json:"meta"`
 }
-
