@@ -2,32 +2,27 @@
 version: 1
 interactions:
 - request:
-    body: '{"config":{"webhook":"https://hooks.slack.com/services/test/webhook"},"description":"This
-      is a test alert.","events":["flag"],"type":"slack"}'
+    body: ""
     form: {}
     headers:
-      Accept:
-      - application/json
-      Content-Type:
-      - application/json
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts
-    method: POST
+    method: GET
   response:
     body: |
-      {"id":"686febb3701d4d294b42320e","description":"This is a test alert.","type":"slack","config":{"webhook":"https://hooks.slack.com/services/test/webhook"},"events":["flag"],"created_at":"2025-07-10T16:34:59Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"data":[{"id":"6870054d35979da87e61a488","description":"This is a test alert.","type":"slack","config":{"webhook":"https://hooks.slack.com/services/updated/webhook"},"events":["flag"],"created_at":"2025-07-10T18:24:13Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}],"meta":{"limit":100,"total":1}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "270"
+      - "315"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:34:59 GMT
+      - Thu, 10 Jul 2025 18:24:18 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740091-EWR
+      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740057-EWR
       X-Timer:
-      - S1752165300.622791,VS0,VE310
-    status: 201 Created
-    code: 201
+      - S1752171855.918404,VS0,VE3377
+    status: 200 OK
+    code: 200
     duration: ""

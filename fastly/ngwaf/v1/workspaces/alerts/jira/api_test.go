@@ -17,10 +17,11 @@ func Test_Alerts(t *testing.T) {
 	var err error
 	var WorkSpaceAlert *Alert
 	testConfig := CreateConfig{
-		Host:     fastly.ToPointer("mycompany.atlassian.net"),
-		Key:      fastly.ToPointer("123456789"),
-		Project:  fastly.ToPointer("TEST"),
-		Username: fastly.ToPointer("testuser"),
+		Host:      fastly.ToPointer("https://mycompany.atlassian.net"),
+		Key:       fastly.ToPointer("a1b2c3d4e5f6789012345678901234567"),
+		Project:   fastly.ToPointer("test"),
+		Username:  fastly.ToPointer("testuser"),
+		IssueType: fastly.ToPointer("task"),
 	}
 	testDescription := "This is a test alert."
 	testEvent := "flag"
@@ -95,11 +96,11 @@ func Test_Alerts(t *testing.T) {
 
 	// Update the test workspace alert.
 	updatedConfig := UpdateConfig{
-		Host:      fastly.ToPointer("updated.atlassian.net"),
-		Key:       fastly.ToPointer("987654321"),
-		Project:   fastly.ToPointer("UPDATED"),
+		Host:      fastly.ToPointer("https://host.jira.com"),
+		Key:       fastly.ToPointer("b1b2c3d4e5f6789012345678901234567"),
+		Project:   fastly.ToPointer("test_updated"),
 		Username:  fastly.ToPointer("updateduser"),
-		IssueType: fastly.ToPointer("Bug"),
+		IssueType: fastly.ToPointer("bug"),
 	}
 	updatedEvent := "flag"
 	var updateAlert *Alert

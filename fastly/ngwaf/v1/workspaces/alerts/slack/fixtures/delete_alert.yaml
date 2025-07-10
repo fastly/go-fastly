@@ -7,22 +7,19 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686feba2941f26e44ade730c
-    method: GET
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/6870054d35979da87e61a488
+    method: DELETE
   response:
-    body: |
-      {"id":"686feba2941f26e44ade730c","description":"This is a test alert.","type":"opsgenie","config":{"key":"a1b2c3d4e5f6789012345678901234567"},"events":["flag"],"created_at":"2025-07-10T16:34:42Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+    body: ""
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
-      Content-Length:
-      - "257"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:34:42 GMT
+      - Thu, 10 Jul 2025 18:24:19 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +35,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000107-CHI, cache-ewr-kewr1740052-EWR
+      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740057-EWR
       X-Timer:
-      - S1752165283.562228,VS0,VE104
-    status: 200 OK
-    code: 200
+      - S1752171858.310100,VS0,VE1632
+    status: 204 No Content
+    code: 204
     duration: ""

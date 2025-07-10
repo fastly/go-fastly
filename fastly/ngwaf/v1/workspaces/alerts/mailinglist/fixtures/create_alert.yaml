@@ -2,8 +2,8 @@
 version: 1
 interactions:
 - request:
-    body: '{"config":{"webhook":"https://example.webhook.office.com/webhookb2/test"},"description":"This
-      is a test alert.","events":["flag"],"type":"microsoftteams"}'
+    body: '{"config":{"address":"test@example.com"},"description":"This is a test
+      alert.","events":["flag"],"type":"mailinglist"}'
     form: {}
     headers:
       Accept:
@@ -16,18 +16,18 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"686feb98288bd7678ff0d197","description":"This is a test alert.","type":"microsoftteams","config":{"webhook":"https://example.webhook.office.com/webhookb2/test"},"events":["flag"],"created_at":"2025-07-10T16:34:32Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"687004cbb7498159a0cb0884","description":"This is a test alert.","type":"mailinglist","config":{"address":"test@example.com"},"events":["flag"],"created_at":"2025-07-10T18:22:03Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "283"
+      - "247"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:34:32 GMT
+      - Thu, 10 Jul 2025 18:22:03 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +43,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740085-EWR
+      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740050-EWR
       X-Timer:
-      - S1752165272.990428,VS0,VE306
+      - S1752171723.169996,VS0,VE335
     status: 201 Created
     code: 201
     duration: ""

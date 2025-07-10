@@ -77,7 +77,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
 		return nil, fastly.ErrMissingProject
 	}
 	if i.Config.Username == nil {
-		return nil, fastly.ErrMissingUserName
+		return nil, fastly.ErrMissingUsername
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts", *i.AlertID)

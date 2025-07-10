@@ -2,32 +2,27 @@
 version: 1
 interactions:
 - request:
-    body: '{"config":{"address":"test@example.com"},"description":"This is a test
-      alert.","events":["flag"],"type":"mailinglist"}'
+    body: ""
     form: {}
     headers:
-      Accept:
-      - application/json
-      Content-Type:
-      - application/json
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
     url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts
-    method: POST
+    method: GET
   response:
     body: |
-      {"id":"686feb8d04375881fedb46fd","description":"This is a test alert.","type":"mailinglist","config":{"address":"test@example.com"},"events":["flag"],"created_at":"2025-07-10T16:34:21Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"data":[{"id":"6870052c35979da87e61a2b9","description":"This is a test alert.","type":"pagerduty","config":{"key":"987654321"},"events":["flag"],"created_at":"2025-07-10T18:23:40Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}],"meta":{"limit":100,"total":1}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "247"
+      - "276"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:34:21 GMT
+      - Thu, 10 Jul 2025 18:23:41 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740057-EWR
+      - cache-chi-klot8100119-CHI, cache-ewr-kewr1740084-EWR
       X-Timer:
-      - S1752165262.676437,VS0,VE309
-    status: 201 Created
-    code: 201
+      - S1752171822.634604,VS0,VE109
+    status: 200 OK
+    code: 200
     duration: ""

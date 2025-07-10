@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686febab701d4d294b42317f
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/687004eb584b2ef2916e12ff
     method: GET
   response:
     body: |
-      {"id":"686febab701d4d294b42317f","description":"This is a test alert.","type":"pagerduty","config":{"key":"a1b2c3d4e5f6789012345678901234567"},"events":["flag"],"created_at":"2025-07-10T16:34:51Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"687004eb584b2ef2916e12ff","description":"This is a test alert.","type":"microsoftteams","config":{"webhook":"https://example.webhook.office.com/webhookb2/test"},"events":["flag"],"created_at":"2025-07-10T18:22:35Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "258"
+      - "283"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:34:51 GMT
+      - Thu, 10 Jul 2025 18:22:43 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,14 +38,14 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100038-CHI, cache-ewr-kewr1740050-EWR
+      - cache-chi-klot8100175-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1752165291.446920,VS0,VE104
+      - S1752171756.879927,VS0,VE7409
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: '{"config":{"key":"b2c3d4e5f6789012345678901234567a"},"events":["flag"]}'
+    body: '{"config":{"webhook":"https://updated.webhook.office.com/webhookb2/test"},"events":["flag"]}'
     form: {}
     headers:
       Accept:
@@ -54,22 +54,22 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686febab701d4d294b42317f
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/687004eb584b2ef2916e12ff
     method: PATCH
   response:
     body: |
-      {"id":"686febab701d4d294b42317f","description":"This is a test alert.","type":"pagerduty","config":{"key":"b2c3d4e5f6789012345678901234567a"},"events":["flag"],"created_at":"2025-07-10T16:34:51Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"687004eb584b2ef2916e12ff","description":"This is a test alert.","type":"microsoftteams","config":{"webhook":"https://updated.webhook.office.com/webhookb2/test"},"events":["flag"],"created_at":"2025-07-10T18:22:35Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "257"
+      - "283"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:34:51 GMT
+      - Thu, 10 Jul 2025 18:22:43 GMT
       Pragma:
       - no-cache
       Server:
@@ -85,9 +85,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100038-CHI, cache-ewr-kewr1740050-EWR
+      - cache-chi-klot8100175-CHI, cache-ewr-kewr1740023-EWR
       X-Timer:
-      - S1752165292.572233,VS0,VE399
+      - S1752171763.303032,VS0,VE408
     status: 200 OK
     code: 200
     duration: ""
