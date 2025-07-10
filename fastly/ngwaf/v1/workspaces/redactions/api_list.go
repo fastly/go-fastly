@@ -16,10 +16,6 @@ type ListInput struct {
 	Context *context.Context
 	// Limit how many results are returned.
 	Limit *int
-	// Mode filter results based on mode.
-	Mode *string
-	// Page number of the collection to request.
-	Page *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
@@ -29,12 +25,6 @@ func List(c *fastly.Client, i *ListInput) (*Redactions, error) {
 	requestOptions := fastly.CreateRequestOptions(i.Context)
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
-	}
-	if i.Mode != nil {
-		requestOptions.Params["mode"] = *i.Mode
-	}
-	if i.Page != nil {
-		requestOptions.Params["page"] = strconv.Itoa(*i.Page)
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "redactions")
