@@ -32,7 +32,7 @@ type ListInput struct {
 	WorkspaceID *string
 }
 
-// Get retrieves the specified workspace.
+// List retrieves a list of events, with optional filtering and pagination.
 func List(c *fastly.Client, i *ListInput) (*Events, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

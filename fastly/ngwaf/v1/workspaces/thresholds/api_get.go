@@ -1,4 +1,4 @@
-package redactions
+package thresholds
 
 import (
 	"context"
@@ -13,22 +13,22 @@ import (
 type GetInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
-	// RedactionID is the redaction identifier (required).
-	RedactionID *string
-	// WorkspaceID is the workspace identifier (required).
+	// ThresholdID is the threshold identifier. Required.
+	ThresholdID *string
+	// WorkspaceID is the workspace identifier. Required.
 	WorkspaceID *string
 }
 
-// Get retrieves the specified redaction.
-func Get(c *fastly.Client, i *GetInput) (*Redaction, error) {
+// Get retrieves the specified threshold.
+func Get(c *fastly.Client, i *GetInput) (*Threshold, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-	if i.RedactionID == nil {
-		return nil, fastly.ErrMissingRedactionID
+	if i.ThresholdID == nil {
+		return nil, fastly.ErrMissingThresholdID
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "redactions", *i.RedactionID)
+	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "thresholds", *i.ThresholdID)
 
 	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {
@@ -36,10 +36,10 @@ func Get(c *fastly.Client, i *GetInput) (*Redaction, error) {
 	}
 	defer resp.Body.Close()
 
-	var redaction *Redaction
-	if err := json.NewDecoder(resp.Body).Decode(&redaction); err != nil {
+	var threshold *Threshold
+	if err := json.NewDecoder(resp.Body).Decode(&threshold); err != nil {
 		return nil, fmt.Errorf("failed to decode json response: %w", err)
 	}
 
-	return redaction, nil
+	return threshold, nil
 }

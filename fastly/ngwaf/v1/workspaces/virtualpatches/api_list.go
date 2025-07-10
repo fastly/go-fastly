@@ -22,7 +22,7 @@ type ListInput struct {
 	WorkspaceID *string
 }
 
-// List retrieves a list of workspaces, with optional filtering and pagination.
+// List retrieves a list of virtual patches, with optional filtering and pagination.
 func List(c *fastly.Client, i *ListInput) (*VirtualPatches, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

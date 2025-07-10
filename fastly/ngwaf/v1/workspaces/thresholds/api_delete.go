@@ -1,4 +1,4 @@
-package redactions
+package thresholds
 
 import (
 	"context"
@@ -12,22 +12,22 @@ import (
 type DeleteInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
-	// RedactionID is the redaction identifier (required).
-	RedactionID *string
-	// WorkspaceID is the workspace identifier (required).
+	// ThresholdID is the threshold identifier. Required.
+	ThresholdID *string
+	// WorkspaceID is the workspace identifier. Required.
 	WorkspaceID *string
 }
 
-// Delete deletes the specified redaction.
+// Delete deletes the specified threshold.
 func Delete(c *fastly.Client, i *DeleteInput) error {
 	if i.WorkspaceID == nil {
 		return fastly.ErrMissingWorkspaceID
 	}
-	if i.RedactionID == nil {
-		return fastly.ErrMissingRedactionID
+	if i.ThresholdID == nil {
+		return fastly.ErrMissingThresholdID
 	}
 
-	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "redactions", *i.RedactionID)
+	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "thresholds", *i.ThresholdID)
 
 	resp, err := c.Delete(path, fastly.CreateRequestOptions(i.Context))
 	if err != nil {

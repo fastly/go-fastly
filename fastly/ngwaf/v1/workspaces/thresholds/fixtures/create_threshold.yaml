@@ -1,0 +1,50 @@
+---
+version: 1
+interactions:
+- request:
+    body: '{"action":"block","limit":1,"interval":60,"name":"Test Threshold","signal":"SQLI"}'
+    form: {}
+    headers:
+      Accept:
+      - application/json
+      Content-Type:
+      - application/json
+      User-Agent:
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/thresholds
+    method: POST
+  response:
+    body: |
+      {"id":"xZFgIs65pi9RZHLqz73lr7","name":"Test Threshold","enabled":false,"signal":"SQLI","action":"block","interval":60,"limit":1,"duration":0,"dont_notify":false,"created_at":"2025-07-09T20:29:15Z"}
+    headers:
+      Accept-Ranges:
+      - bytes
+      Cache-Control:
+      - no-store
+      Content-Length:
+      - "198"
+      Content-Type:
+      - application/json
+      Date:
+      - Wed, 09 Jul 2025 20:29:15 GMT
+      Pragma:
+      - no-cache
+      Server:
+      - fastly
+      Strict-Transport-Security:
+      - max-age=31536000
+      Vary:
+      - Accept-Encoding
+      Via:
+      - 1.1 varnish, 1.1 varnish
+      X-Cache:
+      - MISS, MISS
+      X-Cache-Hits:
+      - 0, 0
+      X-Served-By:
+      - cache-chi-klot8100028-CHI, cache-ewr-kewr1740096-EWR
+      X-Timer:
+      - S1752092955.368906,VS0,VE493
+    status: 201 Created
+    code: 201
+    duration: ""
