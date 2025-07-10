@@ -32,9 +32,14 @@ For example, creating a backend named `test` for `example.com` on a
 service with SID `1234abcd` might look like this:
 
 ```go
+  import (
+	"context"
+	"github.com/fastly/go-fastly/v10/fastly"
+  )
+
   client := fastly.DefaultClient()
   serviceID := '1234abcd'
-  requestContext := fastly.NewContextForResourceID(serviceID)
+  requestContext := fastly.NewContextForResourceID(context.TODO(), serviceID)
   client.CreateBackend(&fastly.CreateBackendInput {
     ServiceID: serviceID,
     ServiceVersion: 5,

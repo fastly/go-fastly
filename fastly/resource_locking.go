@@ -44,23 +44,16 @@ func (rlm *ResourceLockManager) Get(key string) *sync.Mutex {
 	defer rlm.m.Unlock()
 
 	ptr, exists := rlm.locks[key]
-	if !exists {
+	if !exists || ptr.Value() == nil {
 		l := sync.Mutex{}
 		rlm.locks[key] = weak.Make(&l)
 		return &l
 	}
 
-	val := ptr.Value()
-	if val == nil {
-		l := sync.Mutex{}
-		rlm.locks[key] = weak.Make(&l)
-		return &l
-	}
-
-	return val
+	return ptr.Value()
 }
 
-type key string
+type key struct{}
 
 var contextKey key
 

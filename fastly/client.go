@@ -17,7 +17,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/google/go-querystring/query"
@@ -69,7 +68,7 @@ var ProjectVersion = "10.5.1"
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 	ProjectVersion, ProjectURL, runtime.Version())
 
-var resourceLocks = sync.OnceValue(NewResourceLockManager)()
+var resourceLocks = NewResourceLockManager()
 
 // Client is the main entrypoint to the Fastly golang API library.
 type Client struct {
@@ -328,9 +327,7 @@ func (c *Client) Request(verb, p string, ro RequestOptions) (*http.Response, err
 		}
 		l := resourceLocks.Get(resourceID)
 		l.Lock()
-		defer func() {
-			l.Unlock()
-		}()
+		defer l.Unlock()
 	}
 
 	// if a context is provided, set the context on the request
