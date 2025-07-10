@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/oIb247xKeTGgwPoVPA2PJ3/alerts/686fdccf941f26e44adda5ff
+    url: https://api.fastly.com/ngwaf/v1/workspaces/oIb247xKeTGgwPoVPA2PJ3/alerts/686fe5a120b5651f04d04a27
     method: GET
   response:
     body: |
-      {"id":"686fdccf941f26e44adda5ff","description":"This is a test alert.","type":"datadog","config":{"key":"a1b2c3d4e5f6789012345678901234567","site":"us1"},"events":["flag"],"created_at":"2025-07-10T15:31:27Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"686fe5a120b5651f04d04a27","description":"This is a test alert.","type":"slack","config":{"webhook":"https://hooks.slack.com/services/test/webhook"},"events":["flag"],"created_at":"2025-07-10T16:09:05Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "269"
+      - "270"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 15:31:27 GMT
+      - Thu, 10 Jul 2025 16:09:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,14 +38,14 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000158-CHI, cache-ewr-kewr1740080-EWR
+      - cache-chi-kigq8000030-CHI, cache-ewr-kewr1740038-EWR
       X-Timer:
-      - S1752161488.880308,VS0,VE103
+      - S1752163746.293868,VS0,VE95
     status: 200 OK
     code: 200
     duration: ""
 - request:
-    body: '{"config":{"key":"a1b2c3d4e5f6789012345678901234599","site":"us3"},"events":["flag"]}'
+    body: '{"config":{"webhook":"https://hooks.slack.com/services/updated/webhook"},"events":["flag"]}'
     form: {}
     headers:
       Accept:
@@ -54,22 +54,22 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/oIb247xKeTGgwPoVPA2PJ3/alerts/686fdccf941f26e44adda5ff
+    url: https://api.fastly.com/ngwaf/v1/workspaces/oIb247xKeTGgwPoVPA2PJ3/alerts/686fe5a120b5651f04d04a27
     method: PATCH
   response:
     body: |
-      {"id":"686fdccf941f26e44adda5ff","description":"This is a test alert.","type":"datadog","config":{"key":"a1b2c3d4e5f6789012345678901234599","site":"us3"},"events":["flag"],"created_at":"2025-07-10T15:31:27Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"686fe5a120b5651f04d04a27","description":"This is a test alert.","type":"slack","config":{"webhook":"https://hooks.slack.com/services/updated/webhook"},"events":["flag"],"created_at":"2025-07-10T16:09:05Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "269"
+      - "273"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 15:31:28 GMT
+      - Thu, 10 Jul 2025 16:09:06 GMT
       Pragma:
       - no-cache
       Server:
@@ -85,9 +85,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000158-CHI, cache-ewr-kewr1740080-EWR
+      - cache-chi-kigq8000030-CHI, cache-ewr-kewr1740038-EWR
       X-Timer:
-      - S1752161488.996470,VS0,VE409
+      - S1752163746.404545,VS0,VE396
     status: 200 OK
     code: 200
     duration: ""

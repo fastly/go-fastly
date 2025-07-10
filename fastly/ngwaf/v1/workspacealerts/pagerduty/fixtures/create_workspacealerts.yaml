@@ -2,8 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"config":{"key":"a1b2c3d4e5f6789012345678901234567","site":"us1"},"description":"This
-      is a test alert.","events":["flag"],"type":"datadog"}'
+    body: '{"config":{"key":"test-pagerduty-key"},"description":"This is a test alert.","events":["flag"],"type":"pagerduty"}'
     form: {}
     headers:
       Accept:
@@ -16,18 +15,18 @@ interactions:
     method: POST
   response:
     body: |
-      {"id":"686fdccf941f26e44adda5ff","description":"This is a test alert.","type":"datadog","config":{"key":"a1b2c3d4e5f6789012345678901234567","site":"us1"},"events":["flag"],"created_at":"2025-07-10T15:31:27Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"686fe4f0b7498159a0c9494f","description":"This is a test alert.","type":"pagerduty","config":{"key":"test-pagerduty-key"},"events":["flag"],"created_at":"2025-07-10T16:06:08Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "269"
+      - "243"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 15:31:27 GMT
+      - Thu, 10 Jul 2025 16:06:08 GMT
       Pragma:
       - no-cache
       Server:
@@ -43,9 +42,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100108-CHI, cache-ewr-kewr1740080-EWR
+      - cache-chi-kigq8000127-CHI, cache-ewr-kewr1740084-EWR
       X-Timer:
-      - S1752161487.456915,VS0,VE291
+      - S1752163568.975216,VS0,VE333
     status: 201 Created
     code: 201
     duration: ""
