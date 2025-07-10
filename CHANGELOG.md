@@ -2,19 +2,57 @@
 
 ## [UNRELEASED]
 
-[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...)
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.1...)
 
 ### Breaking:
 
+- refactor(ngwaf/v1/workspaces): move all workspace specific endpoints into the appropriate folder ([#708](https://github.com/fastly/go-fastly/pull/708))
+- fix(ngwaf/v1/workpsaces/requests): add missing field to metadata struct and update documentation around limits ([#711](https://github.com/fastly/go-fastly/pull/711))
+- fix(ngwaf/v1/workspaces/redactions): remove mode and page params and remove requirement for both field and type for update ([#712](https://github.com/fastly/go-fastly/pull/712))
+
 ### Enhancements:
+
+### Bug fixes:
+
+### Dependencies:
+
+## [v10.5.1](https://github.com/fastly/go-fastly/releases/tag/v10.5.1) (2025-06-30)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.5.1...)
+
+### Bug fixes:
+
+- fix(debug mode): ensure that HTTP errors are displayed in debug mode ([#704](https://github.com/fastly/go-fastly/pull/704))
+- fix(ngwaf): address various issues in NGWAF APIs ([#705](https://github.com/fastly/go-fastly/pull/705))
+
+## [v10.5.0](https://github.com/fastly/go-fastly/releases/tag/v10.5.0) (2025-06-24)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.4.0...v10.5.0)
+
+### Enhancements:
+
+- feat(kv-store): add optional Name parameter to ListKVStoresInput ([#699](https://github.com/fastly/go-fastly/pull/699))
+- feat(ngwaf): add support for rules ([#691](https://github.com/fastly/go-fastly/pull/691))
+- feat(ngwaf): add missing fields to workspaces ([#701](https://github.com/fastly/go-fastly/pull/701))
+- feat(ngwaf): add support for lists ([#700](https://github.com/fastly/go-fastly/pull/700))
+
+## [v10.4.0](https://github.com/fastly/go-fastly/releases/tag/v10.4.0) (2025-06-20)
+
+[Full Changelog](https://github.com/fastly/go-fastly/compare/v10.3.0...v10.4.0)
+
+### Enhancements:
+
 - feat(ngwaf): add support for requests ([#688](https://github.com/fastly/go-fastly/pull/688))
 - feat(ngwaf): add support for timeseries ([#689](https://github.com/fastly/go-fastly/pull/689))
 - feat(ngwaf): add support for signals ([#692](https://github.com/fastly/go-fastly/pull/692))
 
 ### Bug fixes:
+
 - fix(logging): Improve documentation of Region and ProcessingRegion fields. ([#690](https://github.com/fastly/go-fastly/pull/690))
+- fix(observability_custom_dashboard): add json descriptor to update field ([#696](https://github.com/fastly/go-fastly/pull/696))
 
 ### Dependencies:
+
 - build(deps): `golang.org/x/crypto` from 0.38.0 to 0.39.0 ([#693](https://github.com/fastly/go-fastly/pull/693))
 
 ## [v10.3.0](https://github.com/fastly/go-fastly/releases/tag/v10.3.0) (2025-06-04)
@@ -22,6 +60,7 @@
 [Full Changelog](https://github.com/fastly/go-fastly/compare/v10.2.0...v10.3.0)
 
 ### Enhancements:
+
 - feat(ngwaf): add support for virtualpatches ([#680](https://github.com/fastly/go-fastly/pull/680))
 - feat(ngwaf): add support for the events portion of the ngwaf api ([#684](https://github.com/fastly/go-fastly/pull/684))
 - feat(ngwaf): adds CRUD operations for the redactions portion of the ngwaf API ([#685](https://github.com/fastly/go-fastly/pull/685))
@@ -169,7 +208,7 @@
 
 **Breaking:**
 
-Note that in spite of this *breaking* change, the major version number
+Note that in spite of this _breaking_ change, the major version number
 of the package was not incremented, as the feature which was removed
 did not work and no users of the package could have been relying on
 it.
@@ -1147,7 +1186,7 @@ There were a few breaking changes introduced in v3:
 - Add support for compression_codec to logging file sink endpoints [#235](https://github.com/fastly/go-fastly/pull/235)
 - Add support for Kinesis logging endpoint [#234](https://github.com/fastly/go-fastly/pull/234)
 - Add SASL fields support for Kafka Logging Endpoint [#226](https://github.com/fastly/go-fastly/pull/226)
-- Custom TLS API  [#225](https://github.com/fastly/go-fastly/pull/225)
+- Custom TLS API [#225](https://github.com/fastly/go-fastly/pull/225)
 
 **Closed issues:**
 

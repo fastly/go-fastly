@@ -32,7 +32,7 @@ var DefaultDeliveryTestServiceID = "kKJb5bOFI47uHeBVluGfX1"
 var defaultComputeTestServiceID = "XsjdElScZGjmfCcTwsYRC1"
 
 // ID of the default NGWAF workspace for testing.
-var defaultNGWAFWorkspaceID = "alk6DTsYKHKucJCOIavaJM"
+var defaultNGWAFWorkspaceID = "Am2qjXkgamuYp3u54rQkLD"
 
 const (
 	// ServiceTypeVCL is the type for VCL services.

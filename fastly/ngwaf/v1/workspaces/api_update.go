@@ -19,20 +19,24 @@ type AttackSignalThresholdsUpdateInput struct {
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
+	// AttackSignalThresholds are the parameters for system site alerts.
+	AttackSignalThresholds *AttackSignalThresholdsUpdateInput `json:"attack_signal_thresholds,omitempty"`
+	// ClientIPHeaders lists the request headers containing the client IP address.
+	ClientIPHeaders []string `json:"client_ip_headers,omitempty"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
+	// DefaultBlockingResponseCode is the default response code.
+	DefaultBlockingResponseCode *int `json:"default_blocking_response_code,omitempty"`
+	// Description is the description of a workspace.
+	Description *string `json:"description,omitempty"`
+	// IPAnonymization is the selected option to anonymize IP addresses.
+	IPAnonymization *string `json:"ip_anonymization,omitempty"`
+	// Mode is the mode of a workspace.
+	Mode *string `json:"mode,omitempty"`
+	// Name is the new name of the workspace.
+	Name *string `json:"name,omitempty"`
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string `json:"-"`
-	// Name is the name of a workspace to create (required).
-	Name *string `json:"name"`
-	// Description is the description of a workspace.
-	Description *string `json:"description"`
-	// Mode is the mode of a workspace.
-	Mode *string `json:"mode"`
-	// AttackSignalThresholds are the parameters for system site alerts.
-	AttackSignalThresholds *AttackSignalThresholdsUpdateInput `json:"attack_signal_thresholds"`
-	// IPAnonymization is the selected option to anonymize IP addresses.
-	IPAnonymization *string `json:"ip_anonymization"`
 }
 
 // Update updates the specified workspace.

@@ -65,6 +65,8 @@ type ListKVStoresInput struct {
 	Cursor string
 	// Limit is the maximum number of items included the response.
 	Limit int
+	// Name is the name of the KV store (optional).
+	Name string
 }
 
 func (l *ListKVStoresInput) formatFilters() map[string]string {
@@ -84,6 +86,10 @@ func (l *ListKVStoresInput) formatFilters() map[string]string {
 
 	if l.Cursor != "" {
 		m["cursor"] = l.Cursor
+	}
+
+	if l.Name != "" {
+		m["name"] = l.Name
 	}
 
 	return m

@@ -2,7 +2,7 @@
 version: 1
 interactions:
 - request:
-    body: '{"workspace_id":"alk6DTsYKHKucJCOIavaJM"}'
+    body: '{"workspace_id":"Am2qjXkgamuYp3u54rQkLD"}'
     form: {}
     headers:
       Accept:

@@ -97,6 +97,10 @@ var ErrMissingCertBlob = NewFieldError("CertBlob")
 // requires a "CertBundle" key, but one was not set.
 var ErrMissingCertBundle = NewFieldError("CertBundle")
 
+// ErrMissingConditions is an error that is returned when an input struct
+// requires a "Conditions" key, but one was not set.
+var ErrMissingConditions = NewFieldError("Conditions")
+
 // ErrMissingComputeACLID is an error that is returned when an input struct
 // requires a "ComputeACLID" key, but one was not set.
 var ErrMissingComputeACLID = NewFieldError("ComputeACLID")
@@ -113,6 +117,14 @@ var ErrMissingConfig = NewFieldError("Config")
 // requires a "WorkspaceID" key, but one was not set.
 var ErrMissingWorkspaceID = NewFieldError("WorkspaceID")
 
+// ErrMissingListID is an error that is returned when an input struct
+// requires a "ListID" key, but one was not set.
+var ErrMissingListID = NewFieldError("ListID")
+
+// ErrMissingEntries is an error that is returned when an input struct
+// requires a "Entries" key, but one was not set.
+var ErrMissingEntries = NewFieldError("Entries")
+
 // ErrMissingIsExpired is an error that is returned when an input struct
 // requires an "IsExpired" key, but one was not set.
 var ErrMissingIsExpired = NewFieldError("IsExpired")
@@ -121,6 +133,10 @@ var ErrMissingIsExpired = NewFieldError("IsExpired")
 // requires a "RedactionID" key, but one was not set.
 var ErrMissingRedactionID = NewFieldError("RedactionID")
 
+// ErrMissingRuleID is an error that is returned when an input struct
+// requires a "RuleID" key, but one was not set.
+var ErrMissingRuleID = NewFieldError("RuleID")
+
 // ErrMissingSignalID is an error that is returned when an input struct
 // requires a "SignalID" key, but one was not set.
 var ErrMissingSignalID = NewFieldError("SignalID")
@@ -128,10 +144,6 @@ var ErrMissingSignalID = NewFieldError("SignalID")
 // ErrMissingRequestID is an error that is returned when an input struct
 // requires a "RequestID" key, but one was not set.
 var ErrMissingRequestID = NewFieldError("RequestID")
-
-// ErrMissingLimit is an error that is returned when an input struct
-// requires a "Limit" key, but one was not set.
-var ErrMissingLimit = NewFieldError("Limit")
 
 // ErrMissingField is an error that is returned when an input struct
 // requires a "Field" key, but one was not set.
@@ -444,6 +456,10 @@ var ErrMissingImageOptimizerDefaultSetting = NewFieldError("ResizeFilter, Webp, 
 // requires a "VirtualPatchID" key, but one was not set.
 var ErrMissingVirtualPatchID = NewFieldError("Virtual Patch")
 
+// ErrMissingMode is an error that is returned when an input struct
+// requires a "Mode" key, but one was not set.
+var ErrMissingMode = NewFieldError("Mode")
+
 // Ensure HTTPError is, in fact, an error.
 var _ error = (*HTTPError)(nil)
 
@@ -548,7 +564,7 @@ func NewHTTPError(resp *http.Response) *HTTPError {
 		} else if lerr != nil {
 			// This is for better handling the KV Store Bulk Insert endpoint.
 			// https://developer.fastly.com/reference/api/services/resources/kv-store-item/#batch-create-keys
-			if lerr.Errors != nil {
+			if len(lerr.Errors) != 0 {
 				for _, le := range lerr.Errors {
 					var (
 						code, detail string

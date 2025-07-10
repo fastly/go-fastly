@@ -6,23 +6,23 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.1.0 (+github.com/fastly/go-fastly; go1.24.2)
+      - FastlyGo/10.5.0 (+github.com/fastly/go-fastly; go1.24.3)
     url: https://api.fastly.com/ngwaf/v1/workspaces
     method: GET
   response:
     body: |
-      {"data":[{"id":"6gzmZa1Qcil2kMOa41KBkY","name":"Fastly (TF testing) Workspace","description":"","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2024-11-01T19:00:29Z","updated_at":"2025-05-07T17:08:07.348Z"},{"id":"NpRmlxJi2MDHVXMTO6HUuv","name":"foo","description":"bar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-04T14:33:44Z","updated_at":"2025-05-05T17:27:01.861Z"},{"id":"alk6DTsYKHKucJCOIavaJM","name":"go-fastly testing workspace","description":"","mode":"off","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2024-11-27T14:51:17Z","updated_at":"2025-01-21T21:50:38.262Z"},{"id":"HOOtCTHWliNzu03maajU0K","name":"k_p_test","description":"foobar","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-09T15:38:03Z","updated_at":"2025-05-09T15:39:49.583Z"},{"id":"t54VsHxiQANXaTzmbDM3Ip","name":"k_p_test","description":"foo","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"created_at":"2025-05-09T15:38:21Z","updated_at":"2025-05-09T15:40:20.545Z"}],"meta":{"limit":100,"total":5}}
+      {"data":[{"id":"AYAHkxy8DOTLoccK6uNllM","name":"Fastly DevEx Engineering 2 Workspace","description":"","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-06-25T18:27:44Z","updated_at":"2025-06-25T18:28:45.383Z"},{"id":"Am2qjXkgamuYp3u54rQkLD","name":"go-fastly Testing Workspace (DO NOT DELETE)","description":"","mode":"log","deployment_type":"edge","attack_signal_thresholds":{},"ip_anonymization":null,"default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-06-29T15:16:45Z","updated_at":"2025-06-29T15:20:03.24Z"},{"id":"LD9NphxDt26cZ1UA8n8L4C","name":"tf_ceea5e4b241b4b35f6f3b3f77117fe78_1","description":"Test NGWAF Workspace 1","mode":"block","deployment_type":"edge","attack_signal_thresholds":{"one_minute":100,"ten_minutes":500,"one_hour":1000,"immediate":true},"ip_anonymization":"hashed","default_blocking_response_code":406,"client_ip_headers":[],"created_at":"2025-06-27T17:40:33Z","updated_at":"2025-06-27T17:42:23.48Z"}],"meta":{"limit":100,"total":3}}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "1264"
+      - "1112"
       Content-Type:
       - application/json
       Date:
-      - Thu, 15 May 2025 14:04:52 GMT
+      - Sun, 29 Jun 2025 15:20:03 GMT
       Pragma:
       - no-cache
       Server:
@@ -32,15 +32,15 @@ interactions:
       Vary:
       - Accept-Encoding
       Via:
-      - 1.1 varnish
+      - 1.1 varnish, 1.1 varnish
       X-Cache:
-      - MISS
+      - MISS, MISS
       X-Cache-Hits:
-      - "0"
+      - 0, 0
       X-Served-By:
-      - cache-lga21974-LGA
+      - cache-chi-kigq8000038-CHI, cache-nyc-kteb1890035-NYC
       X-Timer:
-      - S1747317892.781226,VS0,VE352
+      - S1751210404.654043,VS0,VE257
     status: 200 OK
     code: 200
     duration: ""
