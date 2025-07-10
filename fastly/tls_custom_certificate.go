@@ -149,6 +149,8 @@ type CreateCustomTLSCertificateInput struct {
 	ID string `jsonapi:"primary,tls_certificate"` // ID value does not need to be set.
 	// Name is a customizable name for your certificate.
 	Name string `jsonapi:"attr,name,omitempty"`
+	// LIMITED AVAILABILITY: Indicates that the supplied certificate was not signed by a trusted CA.
+	AllowUntrustedRoot bool `jsonapi:"attr,allow_untrusted_root,omitempty"`
 }
 
 // CreateCustomTLSCertificate creates a new resource.
@@ -183,6 +185,8 @@ type UpdateCustomTLSCertificateInput struct {
 	ID string `jsonapi:"primary,tls_certificate"`
 	// Name is a customizable name for your certificate.
 	Name string `jsonapi:"attr,name,omitempty"`
+	// LIMITED AVAILABILITY: Indicates that the supplied certificate was not signed by a trusted CA.
+	AllowUntrustedRoot bool `jsonapi:"attr,allow_untrusted_root,omitempty"`
 }
 
 // UpdateCustomTLSCertificate updates the specified resource.
