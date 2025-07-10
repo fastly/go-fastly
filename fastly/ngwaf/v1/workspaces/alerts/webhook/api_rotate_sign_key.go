@@ -19,7 +19,7 @@ type RotateKeyInput struct {
 	WorkspaceID *string
 }
 
-// RotateKey rotates the alert signing key.
+// RotateKey rotates the webhook alert signing key.
 func RotateKey(c *fastly.Client, i *RotateKeyInput) (*AlertsKey, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

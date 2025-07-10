@@ -18,7 +18,7 @@ type DeleteInput struct {
 	WorkspaceID *string
 }
 
-// Delete deletes the workspace alert.
+// Delete deletes the microsoftteams workspace alert.
 func Delete(c *fastly.Client, i *DeleteInput) error {
 	if i.WorkspaceID == nil {
 		return fastly.ErrMissingWorkspaceID

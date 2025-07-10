@@ -22,7 +22,7 @@ type CreateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Description is an optional description for the alert (optional).
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// Events is a list of event types (required).
 	Events []string `json:"events"`
 	// Type is the type of the workspace integration (required).
@@ -31,7 +31,7 @@ type CreateInput struct {
 	WorkspaceID *string `json:"-"`
 }
 
-// Create creates a new workspace alert.
+// Create creates a new slack alert.
 func Create(c *fastly.Client, i *CreateInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

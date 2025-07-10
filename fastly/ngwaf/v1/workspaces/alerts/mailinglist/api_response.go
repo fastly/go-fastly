@@ -18,7 +18,7 @@ type MetaAlerts struct {
 // alert operations.
 type Alert struct {
 	// Description is an optional description for the alert.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	// ID is the workspace alert identifier.
 	ID string `json:"id"`
 	// Type is the type of workspace integration.

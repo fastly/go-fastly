@@ -19,7 +19,7 @@ type GetKeyInput struct {
 	WorkspaceID *string
 }
 
-// GetKey gets the alert signing key.
+// GetKey gets the webhook alert signing key.
 func GetKey(c *fastly.Client, i *GetKeyInput) (*AlertsKey, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

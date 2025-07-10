@@ -5,7 +5,7 @@ type ResponseConfig struct {
 	// Host is the name of the Jira instance (required).
 	Host *string `json:"host"`
 	// IssueType is the Jira issue type associated with the ticket (optional).
-	IssueType *string `json:"issue_type"`
+	IssueType *string `json:"issue_type,omitempty"`
 	// Key is the Jira API key / secret field (required).
 	Key *string `json:"key"`
 	// Project specifies the Jira project where the issue will be created (required).
@@ -26,7 +26,7 @@ type MetaAlerts struct {
 // alert operations.
 type Alert struct {
 	// Description is an optional description for the alert.
-	Description string `json:"description"`
+	Description string `json:"description,omitempty"`
 	// ID is the workspace alert identifier.
 	ID string `json:"id"`
 	// Type is the type of workspace integration.

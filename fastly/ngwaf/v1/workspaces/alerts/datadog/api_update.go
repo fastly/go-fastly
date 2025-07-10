@@ -31,7 +31,7 @@ type UpdateInput struct {
 	WorkspaceID *string `json:"-"`
 }
 
-// Update updates the specified workspace alert.
+// Update updates the specified datadog alert.
 func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID

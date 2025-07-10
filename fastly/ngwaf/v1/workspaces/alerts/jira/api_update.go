@@ -13,7 +13,7 @@ type UpdateConfig struct {
 	// Host is the name of the Jira instance (required).
 	Host *string `json:"host"`
 	// IssueType is the Jira issue type associated with the ticket (optional).
-	IssueType *string `json:"issue_type"`
+	IssueType *string `json:"issue_type,omitempty"`
 	// Key is the Jira API key / secret field (required).
 	Key *string `json:"key"`
 	// Project specifies the Jira project where the issue will be created (required).
@@ -37,7 +37,7 @@ type UpdateInput struct {
 	WorkspaceID *string `json:"-"`
 }
 
-// Update updates the specified workspace alert.
+// Update updates the specified jira alert.
 func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID

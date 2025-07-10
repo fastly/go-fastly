@@ -19,7 +19,7 @@ type GetInput struct {
 	WorkspaceID *string
 }
 
-// Get retrieves the workspace alert.
+// Get retrieves the opsgenie workspace alert.
 func Get(c *fastly.Client, i *GetInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

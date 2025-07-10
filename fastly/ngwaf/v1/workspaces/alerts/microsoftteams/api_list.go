@@ -20,7 +20,7 @@ type ListInput struct {
 	WorkspaceID *string
 }
 
-// List retrieves a list of workspaces alerts.
+// List retrieves a list of microsoftteams workspace alerts.
 func List(c *fastly.Client, i *ListInput) (*Alerts, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

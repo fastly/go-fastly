@@ -13,7 +13,7 @@ type CreateConfig struct {
 	// Host is the name of the Jira instance (required).
 	Host *string `json:"host"`
 	// IssueType is the Jira issue type associated with the ticket (optional).
-	IssueType *string `json:"issue_type"`
+	IssueType *string `json:"issue_type,omitempty"`
 	// Key is the Jira API key / secret field (required).
 	Key *string `json:"key"`
 	// Project specifies the Jira project where the issue will be created (required).
@@ -30,7 +30,7 @@ type CreateInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
 	// Description is an optional description for the alert (optional).
-	Description *string `json:"description"`
+	Description *string `json:"description,omitempty"`
 	// Events is a list of event types (required).
 	Events []string `json:"events"`
 	// Type is the type of the workspace integration (required).
@@ -39,7 +39,7 @@ type CreateInput struct {
 	WorkspaceID *string `json:"-"`
 }
 
-// Create creates a new workspace alert.
+// Create creates a new jira alert.
 func Create(c *fastly.Client, i *CreateInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
