@@ -48,4 +48,3 @@ type Alerts struct {
 	// Meta is the information for total workspace alerts.
 	Meta MetaAlerts `json:"meta"`
 }
-
