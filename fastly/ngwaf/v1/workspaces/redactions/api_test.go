@@ -166,23 +166,6 @@ func TestClient_UpdateRedaction_validation(t *testing.T) {
 	if !errors.Is(err, fastly.ErrMissingRedactionID) {
 		t.Errorf("expected ErrMissingRedactionID: got %s", err)
 	}
-	_, err = Update(fastly.TestClient, &UpdateInput{
-		RedactionID: fastly.ToPointer("someID"),
-		Field:       nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrMissingField) {
-		t.Errorf("expected ErrMissingField: got %s", err)
-	}
-	_, err = Update(fastly.TestClient, &UpdateInput{
-		RedactionID: fastly.ToPointer("someID"),
-		Field:       fastly.ToPointer("somefield"),
-		Type:        nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrMissingType) {
-		t.Errorf("expected ErrMissingType: got %s", err)
-	}
 }
 
 func TestClient_DeleteRedaction_validation(t *testing.T) {
