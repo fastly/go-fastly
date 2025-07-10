@@ -6,12 +6,12 @@ interactions:
     form: {}
     headers:
       User-Agent:
-      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/oIb247xKeTGgwPoVPA2PJ3/alerts/686fe585941f26e44ade1785
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686feb8235979da87e604280
     method: GET
   response:
     body: |
-      {"id":"686fe585941f26e44ade1785","description":"This is a test alert.","type":"jira","config":{"host":"https://example.exampleJira.net","issue_type":"Bug","key":"ATATT3xFfGF0a1b2c3d4e5f6789012345678901234567890","project":"TEST","username":"testuser"},"events":["flag"],"created_at":"2025-07-10T16:08:37Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"686feb8235979da87e604280","description":"This is a test alert.","type":"jira","config":{"host":"https://example.exampleJira.net","issue_type":"Bug","key":"ATATT3xFfGF0a1b2c3d4e5f6789012345678901234567890","project":"TEST","username":"testuser"},"events":["flag"],"created_at":"2025-07-10T16:34:10Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:08:38 GMT
+      - Thu, 10 Jul 2025 16:34:10 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100050-CHI, cache-ewr-kewr1740052-EWR
+      - cache-chi-kigq8000167-CHI, cache-ewr-kewr1740057-EWR
       X-Timer:
-      - S1752163718.019570,VS0,VE99
+      - S1752165250.425966,VS0,VE102
     status: 200 OK
     code: 200
     duration: ""
@@ -53,12 +53,12 @@ interactions:
       Content-Type:
       - application/json
       User-Agent:
-      - FastlyGo/10.3.0 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/oIb247xKeTGgwPoVPA2PJ3/alerts/686fe585941f26e44ade1785
+      - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686feb8235979da87e604280
     method: PATCH
   response:
     body: |
-      {"id":"686fe585941f26e44ade1785","description":"This is a test alert.","type":"jira","config":{"host":"https://example.exampleJira.net","issue_type":"Bug","key":"ATATT3xFfGF0b2c3d4e5f6789012345678901234567891","project":"UPDATED","username":"updateduser"},"events":["flag"],"created_at":"2025-07-10T16:08:37Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"686feb8235979da87e604280","description":"This is a test alert.","type":"jira","config":{"host":"https://example.exampleJira.net","issue_type":"Bug","key":"ATATT3xFfGF0b2c3d4e5f6789012345678901234567891","project":"UPDATED","username":"updateduser"},"events":["flag"],"created_at":"2025-07-10T16:34:10Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
@@ -69,7 +69,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:08:38 GMT
+      - Thu, 10 Jul 2025 16:34:10 GMT
       Pragma:
       - no-cache
       Server:
@@ -85,9 +85,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100050-CHI, cache-ewr-kewr1740052-EWR
+      - cache-chi-kigq8000167-CHI, cache-ewr-kewr1740057-EWR
       X-Timer:
-      - S1752163718.130608,VS0,VE417
+      - S1752165251.543546,VS0,VE399
     status: 200 OK
     code: 200
     duration: ""
