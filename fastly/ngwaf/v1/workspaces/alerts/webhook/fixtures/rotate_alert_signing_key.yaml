@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686febc220b5651f04d0a763/signing-key
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/68700db8288bd7678ff2b488/signing-key
     method: POST
   response:
     body: |
-      {"signing_key":"045767e3-d310-41db-97c5-36675dcf60bd"}
+      {"signing_key":"d6618501-9380-4d5f-86cd-2df1106af4b3"}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:35:14 GMT
+      - Thu, 10 Jul 2025 19:00:09 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100088-CHI, cache-ewr-kewr1740054-EWR
+      - cache-chi-kigq8000040-CHI, cache-ewr-kewr1740054-EWR
       X-Timer:
-      - S1752165315.776354,VS0,VE212
+      - S1752174009.483749,VS0,VE251
     status: 200 OK
     code: 200
     duration: ""

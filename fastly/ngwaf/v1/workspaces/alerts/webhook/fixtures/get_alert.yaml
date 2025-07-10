@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686febc220b5651f04d0a763/signing-key
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/68700db8288bd7678ff2b488
     method: GET
   response:
     body: |
-      {"signing_key":"8b18c96c-2068-4462-9578-69c7bac1fb0e"}
+      {"id":"68700db8288bd7678ff2b488","description":"This is a test alert.","type":"webhook","config":{"webhook":"https://example.com/webhook"},"events":["flag"],"created_at":"2025-07-10T19:00:08Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "55"
+      - "254"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:35:14 GMT
+      - Thu, 10 Jul 2025 19:00:09 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-klot8100088-CHI, cache-ewr-kewr1740054-EWR
+      - cache-chi-kigq8000037-CHI, cache-ewr-kewr1740054-EWR
       X-Timer:
-      - S1752165315.652723,VS0,VE105
+      - S1752174009.242268,VS0,VE103
     status: 200 OK
     code: 200
     duration: ""
