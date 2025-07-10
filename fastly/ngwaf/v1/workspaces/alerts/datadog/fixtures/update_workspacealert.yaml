@@ -7,11 +7,11 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686feb76701d4d294b422e57
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686fee1920b5651f04d0c701
     method: GET
   response:
     body: |
-      {"id":"686feb76701d4d294b422e57","description":"This is a test alert.","type":"datadog","config":{"key":"a1b2c3d4e5f6789012345678901234567","site":"us1"},"events":["flag"],"created_at":"2025-07-10T16:33:58Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"686fee1920b5651f04d0c701","description":"This is a test alert.","type":"datadog","config":{"key":"a1b2c3d4e5f6789012345678901234567","site":"us1"},"events":["flag"],"created_at":"2025-07-10T16:45:13Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
@@ -22,7 +22,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:33:58 GMT
+      - Thu, 10 Jul 2025 16:45:13 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740021-EWR
+      - cache-chi-kigq8000052-CHI, cache-ewr-kewr1740072-EWR
       X-Timer:
-      - S1752165239.823349,VS0,VE103
+      - S1752165914.581844,VS0,VE105
     status: 200 OK
     code: 200
     duration: ""
@@ -54,11 +54,11 @@ interactions:
       - application/json
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686feb76701d4d294b422e57
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/686fee1920b5651f04d0c701
     method: PATCH
   response:
     body: |
-      {"id":"686feb76701d4d294b422e57","description":"This is a test alert.","type":"datadog","config":{"key":"a1b2c3d4e5f6789012345678901234599","site":"us3"},"events":["flag"],"created_at":"2025-07-10T16:33:58Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"686fee1920b5651f04d0c701","description":"This is a test alert.","type":"datadog","config":{"key":"a1b2c3d4e5f6789012345678901234599","site":"us3"},"events":["flag"],"created_at":"2025-07-10T16:45:13Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
@@ -69,7 +69,7 @@ interactions:
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 16:33:59 GMT
+      - Thu, 10 Jul 2025 16:45:14 GMT
       Pragma:
       - no-cache
       Server:
@@ -85,9 +85,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000053-CHI, cache-ewr-kewr1740021-EWR
+      - cache-chi-kigq8000052-CHI, cache-ewr-kewr1740072-EWR
       X-Timer:
-      - S1752165239.938929,VS0,VE464
+      - S1752165914.699586,VS0,VE400
     status: 200 OK
     code: 200
     duration: ""
