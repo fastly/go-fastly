@@ -62,7 +62,6 @@ func Test_Alerts(t *testing.T) {
 			AlertID:     fastly.ToPointer(alertID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
-
 	})
 	if err != nil {
 		t.Fatal(err)
