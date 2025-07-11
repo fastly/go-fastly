@@ -17,7 +17,6 @@ import (
 	"runtime"
 	"strconv"
 	"strings"
-	"sync"
 	"time"
 
 	"github.com/google/go-querystring/query"
@@ -69,6 +68,8 @@ var ProjectVersion = "10.5.1"
 var UserAgent = fmt.Sprintf("FastlyGo/%s (+%s; %s)",
 	ProjectVersion, ProjectURL, runtime.Version())
 
+var resourceLocks = NewResourceLockManager()
+
 // Client is the main entrypoint to the Fastly golang API library.
 type Client struct {
 	// Address is the address of Fastly's API endpoint.
@@ -85,9 +86,6 @@ type Client struct {
 	remaining int
 	// reset is last observed value of http header Fastly-RateLimit-Reset
 	reset int64
-	// updateLock forces serialization of calls that modify a service.
-	// Concurrent modifications have undefined semantics.
-	updateLock sync.Mutex
 	// url is the parsed URL from Address
 	url *url.URL
 }
@@ -321,8 +319,13 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 	}
 
 	if !ro.Parallel {
-		c.updateLock.Lock()
-		defer c.updateLock.Unlock()
+		resourceID := "unknown"
+		if id, ok := resourceIDFromContext(ctx); ok {
+			resourceID = id
+		}
+		l := resourceLocks.Get(resourceID)
+		l.Lock()
+		defer l.Unlock()
 	}
 
 	if c.DebugMode {
