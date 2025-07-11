@@ -19,7 +19,7 @@ type GetInput struct {
 	WorkspaceID *string
 }
 
-// Get retrieves the specified workspace.
+// Get retrieves the specified event.
 func Get(c *fastly.Client, i *GetInput) (*Event, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

@@ -121,6 +121,26 @@ var ErrMissingIsExpired = NewFieldError("IsExpired")
 // requires a "RedactionID" key, but one was not set.
 var ErrMissingRedactionID = NewFieldError("RedactionID")
 
+// ErrMissingThresholdID is an error that is returned when an input struct
+// requires a "ThresholdID" key, but one was not set.
+var ErrMissingThresholdID = NewFieldError("ThresholdID")
+
+// ErrMissingAction is an error that is returned when an input struct
+// requires a "Action" key, but one was not set.
+var ErrMissingAction = NewFieldError("Action")
+
+// ErrMissingLimit is an error that is returned when an input struct
+// requires a "Limit" key, but one was not set.
+var ErrMissingLimit = NewFieldError("Limit")
+
+// ErrMissingInterval is an error that is returned when an input struct
+// requires a "Interval" key, but one was not set.
+var ErrMissingInterval = NewFieldError("Interval")
+
+// ErrMissingSignal is an error that is returned when an input struct
+// requires a "Signal" key, but one was not set.
+var ErrMissingSignal = NewFieldError("Signal")
+
 // ErrMissingRuleID is an error that is returned when an input struct
 // requires a "RuleID" key, but one was not set.
 var ErrMissingRuleID = NewFieldError("RuleID")

@@ -21,7 +21,7 @@ type CreateInput struct {
 	WorkspaceID *string `json:"-"`
 }
 
-// Create creates a new workspace.
+// Create creates a new redaction.
 func Create(c *fastly.Client, i *CreateInput) (*Redaction, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

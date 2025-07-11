@@ -26,7 +26,7 @@ type GetInput struct {
 	WorkspaceID *string
 }
 
-// Get retrieves the specified workspace.
+// Get retrieves the specified timeseries.
 func Get(c *fastly.Client, i *GetInput) (*TimeSeries, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
