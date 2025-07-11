@@ -320,10 +320,8 @@ func (c *Client) Request(ctx context.Context, verb, p string, ro RequestOptions)
 
 	if !ro.Parallel {
 		resourceID := "unknown"
-		if ro.Context != nil {
-			if id, ok := resourceIDFromContext(*ro.Context); ok {
-				resourceID = id
-			}
+		if id, ok := resourceIDFromContext(ctx); ok {
+			resourceID = id
 		}
 		l := resourceLocks.Get(resourceID)
 		l.Lock()
