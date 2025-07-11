@@ -196,8 +196,6 @@ type DashboardMeta struct {
 
 // ListObservabilityCustomDashboardsInput is used as input to the ListObservabilityCustomDashboards function.
 type ListObservabilityCustomDashboardsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta (optional)
 	Cursor *string
 	// Limit is the maximum number of items included in each response (optional)
@@ -206,9 +204,9 @@ type ListObservabilityCustomDashboardsInput struct {
 	Sort *string
 }
 
-func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDashboardsInput) (*ListDashboardsResponse, error) {
+func (c *Client) ListObservabilityCustomDashboards(ctx context.Context, i *ListObservabilityCustomDashboardsInput) (*ListDashboardsResponse, error) {
 	path := ToSafeURL("observability", "dashboards")
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	if i.Cursor != nil {
 		requestOptions.Params["cursor"] = *i.Cursor
 	}
@@ -219,7 +217,7 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 		requestOptions.Params["sort"] = *i.Sort
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -234,16 +232,15 @@ func (c *Client) ListObservabilityCustomDashboards(i *ListObservabilityCustomDas
 }
 
 type CreateObservabilityCustomDashboardInput struct {
-	// Context, if supplied, will be used as the Request's context.
 	Context     *context.Context `json:"-"`
 	Description *string          `json:"description,omitempty"`
 	Name        string           `json:"name"`
 	Items       []DashboardItem  `json:"items"`
 }
 
-func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
+func (c *Client) CreateObservabilityCustomDashboard(ctx context.Context, i *CreateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
 	path := ToSafeURL("observability", "dashboards")
-	resp, err := c.PostJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -257,19 +254,17 @@ func (c *Client) CreateObservabilityCustomDashboard(i *CreateObservabilityCustom
 }
 
 type GetObservabilityCustomDashboardInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of the dashboard to fetch (required)
 	ID *string
 }
 
-func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
+func (c *Client) GetObservabilityCustomDashboard(ctx context.Context, i *GetObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
 	if i.ID == nil {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -283,7 +278,6 @@ func (c *Client) GetObservabilityCustomDashboard(i *GetObservabilityCustomDashbo
 }
 
 type UpdateObservabilityCustomDashboardInput struct {
-	// Context, if supplied, will be used as the Request's context.
 	Context     *context.Context `json:"-"`
 	Description *string          `json:"description,omitempty"`
 	// ID of the dashboard to fetch (required)
@@ -292,13 +286,13 @@ type UpdateObservabilityCustomDashboardInput struct {
 	Name  *string          `json:"name,omitempty"`
 }
 
-func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
+func (c *Client) UpdateObservabilityCustomDashboard(ctx context.Context, i *UpdateObservabilityCustomDashboardInput) (*ObservabilityCustomDashboard, error) {
 	if i.ID == nil {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -312,18 +306,16 @@ func (c *Client) UpdateObservabilityCustomDashboard(i *UpdateObservabilityCustom
 }
 
 type DeleteObservabilityCustomDashboardInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of the dashboard to delete (required)
 	ID *string
 }
 
-func (c *Client) DeleteObservabilityCustomDashboard(i *DeleteObservabilityCustomDashboardInput) error {
+func (c *Client) DeleteObservabilityCustomDashboard(ctx context.Context, i *DeleteObservabilityCustomDashboardInput) error {
 	if i.ID == nil {
 		return ErrMissingID
 	}
 	path := ToSafeURL("observability", "dashboards", *i.ID)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

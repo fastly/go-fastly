@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	// Create
 	var l *Logshuttle
 	Record(t, "logshuttles/create", func(c *Client) {
-		l, err = c.CreateLogshuttle(&CreateLogshuttleInput{
+		l, err = c.CreateLogshuttle(context.TODO(), &CreateLogshuttleInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-logshuttle"),
@@ -35,13 +36,13 @@ func TestClient_Logshuttles(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "logshuttles/cleanup", func(c *Client) {
-			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
+			_ = c.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-logshuttle",
 			})
 
-			_ = c.DeleteLogshuttle(&DeleteLogshuttleInput{
+			_ = c.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-logshuttle",
@@ -71,7 +72,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	// List
 	var ls []*Logshuttle
 	Record(t, "logshuttles/list", func(c *Client) {
-		ls, err = c.ListLogshuttles(&ListLogshuttlesInput{
+		ls, err = c.ListLogshuttles(context.TODO(), &ListLogshuttlesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -86,7 +87,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	// Get
 	var nl *Logshuttle
 	Record(t, "logshuttles/get", func(c *Client) {
-		nl, err = c.GetLogshuttle(&GetLogshuttleInput{
+		nl, err = c.GetLogshuttle(context.TODO(), &GetLogshuttleInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-logshuttle",
@@ -117,7 +118,7 @@ func TestClient_Logshuttles(t *testing.T) {
 	// Update
 	var ul *Logshuttle
 	Record(t, "logshuttles/update", func(c *Client) {
-		ul, err = c.UpdateLogshuttle(&UpdateLogshuttleInput{
+		ul, err = c.UpdateLogshuttle(context.TODO(), &UpdateLogshuttleInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-logshuttle",
@@ -145,7 +146,7 @@ func TestClient_Logshuttles(t *testing.T) {
 
 	// Delete
 	Record(t, "logshuttles/delete", func(c *Client) {
-		err = c.DeleteLogshuttle(&DeleteLogshuttleInput{
+		err = c.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-logshuttle",
@@ -159,14 +160,14 @@ func TestClient_Logshuttles(t *testing.T) {
 func TestClient_ListLogshuttles_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListLogshuttles(&ListLogshuttlesInput{
+	_, err = TestClient.ListLogshuttles(context.TODO(), &ListLogshuttlesInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListLogshuttles(&ListLogshuttlesInput{
+	_, err = TestClient.ListLogshuttles(context.TODO(), &ListLogshuttlesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -178,14 +179,14 @@ func TestClient_ListLogshuttles_validation(t *testing.T) {
 func TestClient_CreateLogshuttle_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateLogshuttle(&CreateLogshuttleInput{
+	_, err = TestClient.CreateLogshuttle(context.TODO(), &CreateLogshuttleInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateLogshuttle(&CreateLogshuttleInput{
+	_, err = TestClient.CreateLogshuttle(context.TODO(), &CreateLogshuttleInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -197,7 +198,7 @@ func TestClient_CreateLogshuttle_validation(t *testing.T) {
 func TestClient_GetLogshuttle_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetLogshuttle(&GetLogshuttleInput{
+	_, err = TestClient.GetLogshuttle(context.TODO(), &GetLogshuttleInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -205,7 +206,7 @@ func TestClient_GetLogshuttle_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetLogshuttle(&GetLogshuttleInput{
+	_, err = TestClient.GetLogshuttle(context.TODO(), &GetLogshuttleInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -213,7 +214,7 @@ func TestClient_GetLogshuttle_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetLogshuttle(&GetLogshuttleInput{
+	_, err = TestClient.GetLogshuttle(context.TODO(), &GetLogshuttleInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -225,7 +226,7 @@ func TestClient_GetLogshuttle_validation(t *testing.T) {
 func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateLogshuttle(&UpdateLogshuttleInput{
+	_, err = TestClient.UpdateLogshuttle(context.TODO(), &UpdateLogshuttleInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -233,7 +234,7 @@ func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateLogshuttle(&UpdateLogshuttleInput{
+	_, err = TestClient.UpdateLogshuttle(context.TODO(), &UpdateLogshuttleInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -241,7 +242,7 @@ func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateLogshuttle(&UpdateLogshuttleInput{
+	_, err = TestClient.UpdateLogshuttle(context.TODO(), &UpdateLogshuttleInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -253,7 +254,7 @@ func TestClient_UpdateLogshuttle_validation(t *testing.T) {
 func TestClient_DeleteLogshuttle_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteLogshuttle(&DeleteLogshuttleInput{
+	err = TestClient.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -261,7 +262,7 @@ func TestClient_DeleteLogshuttle_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteLogshuttle(&DeleteLogshuttleInput{
+	err = TestClient.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -269,7 +270,7 @@ func TestClient_DeleteLogshuttle_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteLogshuttle(&DeleteLogshuttleInput{
+	err = TestClient.DeleteLogshuttle(context.TODO(), &DeleteLogshuttleInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 )
 
@@ -14,7 +15,7 @@ func TestClient_ListTLSDomains(t *testing.T) {
 	// List
 	var ldom []*TLSDomain
 	Record(t, fixtureBase+"list", func(c *Client) {
-		ldom, err = c.ListTLSDomains(&ListTLSDomainsInput{
+		ldom, err = c.ListTLSDomains(context.TODO(), &ListTLSDomainsInput{
 			PageSize: 10,
 		})
 	})
@@ -36,7 +37,7 @@ func TestClient_ListTLSDomainsFilterCertificates(t *testing.T) {
 	// List
 	var ldom []*TLSDomain
 	Record(t, fixtureBase+"list", func(c *Client) {
-		ldom, err = c.ListTLSDomains(&ListTLSDomainsInput{
+		ldom, err = c.ListTLSDomains(context.TODO(), &ListTLSDomainsInput{
 			FilterTLSCertificateID: "6RltCYkOfFfzPVitOyLCnV",
 		})
 	})

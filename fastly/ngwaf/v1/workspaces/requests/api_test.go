@@ -1,6 +1,7 @@
 package requests
 
 import (
+	"context"
 	"errors"
 	"testing"
 	"time"
@@ -168,7 +169,7 @@ func TestClient_requests(t *testing.T) {
 
 	// get an request
 	fastly.Record(t, "get_request", func(c *fastly.Client) {
-		request, err = Get(c, getrequestInput)
+		request, err = Get(context.TODO(), c, getrequestInput)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -242,7 +243,7 @@ func TestClient_requests(t *testing.T) {
 
 	// get a list of requests
 	fastly.Record(t, "list_request", func(c *fastly.Client) {
-		Requests, err = List(c, listRequestInput)
+		Requests, err = List(context.TODO(), c, listRequestInput)
 	})
 	request = &Requests.Data[7]
 	if err != nil {
@@ -312,13 +313,13 @@ func TestClient_requests(t *testing.T) {
 
 func TestClient_Getrequest_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		RequestID:   nil,
 	})
@@ -329,7 +330,7 @@ func TestClient_Getrequest_validation(t *testing.T) {
 
 func TestClient_Listrequest_validation(t *testing.T) {
 	var err error
-	_, err = List(fastly.TestClient, &ListInput{
+	_, err = List(context.TODO(), fastly.TestClient, &ListInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {

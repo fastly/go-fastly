@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Conditions(t *testing.T) {
 	// Create
 	var condition *Condition
 	Record(t, "conditions/create", func(c *Client) {
-		condition, err = c.CreateCondition(&CreateConditionInput{
+		condition, err = c.CreateCondition(context.TODO(), &CreateConditionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test/condition"),
@@ -33,7 +34,7 @@ func TestClient_Conditions(t *testing.T) {
 	// // Ensure deleted
 	defer func() {
 		Record(t, "conditions/cleanup", func(c *Client) {
-			_ = c.DeleteCondition(&DeleteConditionInput{
+			_ = c.DeleteCondition(context.TODO(), &DeleteConditionInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test/condition",
@@ -57,7 +58,7 @@ func TestClient_Conditions(t *testing.T) {
 	// List
 	var conditions []*Condition
 	Record(t, "conditions/list", func(c *Client) {
-		conditions, err = c.ListConditions(&ListConditionsInput{
+		conditions, err = c.ListConditions(context.TODO(), &ListConditionsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -72,7 +73,7 @@ func TestClient_Conditions(t *testing.T) {
 	// Get
 	var newCondition *Condition
 	Record(t, "conditions/get", func(c *Client) {
-		newCondition, err = c.GetCondition(&GetConditionInput{
+		newCondition, err = c.GetCondition(context.TODO(), &GetConditionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
@@ -97,7 +98,7 @@ func TestClient_Conditions(t *testing.T) {
 	// Update
 	var updatedCondition *Condition
 	Record(t, "conditions/update", func(c *Client) {
-		updatedCondition, err = c.UpdateCondition(&UpdateConditionInput{
+		updatedCondition, err = c.UpdateCondition(context.TODO(), &UpdateConditionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
@@ -113,7 +114,7 @@ func TestClient_Conditions(t *testing.T) {
 
 	// Delete
 	Record(t, "conditions/delete", func(c *Client) {
-		err = c.DeleteCondition(&DeleteConditionInput{
+		err = c.DeleteCondition(context.TODO(), &DeleteConditionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test/condition",
@@ -126,14 +127,14 @@ func TestClient_Conditions(t *testing.T) {
 
 func TestClient_ListConditions_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListConditions(&ListConditionsInput{
+	_, err = TestClient.ListConditions(context.TODO(), &ListConditionsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListConditions(&ListConditionsInput{
+	_, err = TestClient.ListConditions(context.TODO(), &ListConditionsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -144,14 +145,14 @@ func TestClient_ListConditions_validation(t *testing.T) {
 
 func TestClient_CreateCondition_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateCondition(&CreateConditionInput{
+	_, err = TestClient.CreateCondition(context.TODO(), &CreateConditionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateCondition(&CreateConditionInput{
+	_, err = TestClient.CreateCondition(context.TODO(), &CreateConditionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -163,7 +164,7 @@ func TestClient_CreateCondition_validation(t *testing.T) {
 func TestClient_GetCondition_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetCondition(&GetConditionInput{
+	_, err = TestClient.GetCondition(context.TODO(), &GetConditionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -171,7 +172,7 @@ func TestClient_GetCondition_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetCondition(&GetConditionInput{
+	_, err = TestClient.GetCondition(context.TODO(), &GetConditionInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -179,7 +180,7 @@ func TestClient_GetCondition_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetCondition(&GetConditionInput{
+	_, err = TestClient.GetCondition(context.TODO(), &GetConditionInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -191,7 +192,7 @@ func TestClient_GetCondition_validation(t *testing.T) {
 func TestClient_UpdateCondition_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateCondition(&UpdateConditionInput{
+	_, err = TestClient.UpdateCondition(context.TODO(), &UpdateConditionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -199,7 +200,7 @@ func TestClient_UpdateCondition_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateCondition(&UpdateConditionInput{
+	_, err = TestClient.UpdateCondition(context.TODO(), &UpdateConditionInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -207,7 +208,7 @@ func TestClient_UpdateCondition_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateCondition(&UpdateConditionInput{
+	_, err = TestClient.UpdateCondition(context.TODO(), &UpdateConditionInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -219,7 +220,7 @@ func TestClient_UpdateCondition_validation(t *testing.T) {
 func TestClient_DeleteCondition_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteCondition(&DeleteConditionInput{
+	err = TestClient.DeleteCondition(context.TODO(), &DeleteConditionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -227,7 +228,7 @@ func TestClient_DeleteCondition_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteCondition(&DeleteConditionInput{
+	err = TestClient.DeleteCondition(context.TODO(), &DeleteConditionInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -235,7 +236,7 @@ func TestClient_DeleteCondition_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteCondition(&DeleteConditionInput{
+	err = TestClient.DeleteCondition(context.TODO(), &DeleteConditionInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

@@ -34,8 +34,6 @@ type Syslog struct {
 
 // ListSyslogsInput is used as input to the ListSyslogs function.
 type ListSyslogsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -43,7 +41,7 @@ type ListSyslogsInput struct {
 }
 
 // ListSyslogs retrieves all resources.
-func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
+func (c *Client) ListSyslogs(ctx context.Context, i *ListSyslogsInput) ([]*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -52,7 +50,7 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "syslog")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -69,8 +67,6 @@ func (c *Client) ListSyslogs(i *ListSyslogsInput) ([]*Syslog, error) {
 type CreateSyslogInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -110,7 +106,7 @@ type CreateSyslogInput struct {
 }
 
 // CreateSyslog creates a new resource.
-func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
+func (c *Client) CreateSyslog(ctx context.Context, i *CreateSyslogInput) (*Syslog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -119,7 +115,7 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "syslog")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -134,8 +130,6 @@ func (c *Client) CreateSyslog(i *CreateSyslogInput) (*Syslog, error) {
 
 // GetSyslogInput is used as input to the GetSyslog function.
 type GetSyslogInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the syslog to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -145,7 +139,7 @@ type GetSyslogInput struct {
 }
 
 // GetSyslog retrieves the specified resource.
-func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
+func (c *Client) GetSyslog(ctx context.Context, i *GetSyslogInput) (*Syslog, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -157,7 +151,7 @@ func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "syslog", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -174,8 +168,6 @@ func (c *Client) GetSyslog(i *GetSyslogInput) (*Syslog, error) {
 type UpdateSyslogInput struct {
 	// Address is a hostname or IPv4 address.
 	Address *string `url:"address,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -217,7 +209,7 @@ type UpdateSyslogInput struct {
 }
 
 // UpdateSyslog updates the specified resource.
-func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
+func (c *Client) UpdateSyslog(ctx context.Context, i *UpdateSyslogInput) (*Syslog, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -229,7 +221,7 @@ func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "syslog", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -244,8 +236,6 @@ func (c *Client) UpdateSyslog(i *UpdateSyslogInput) (*Syslog, error) {
 
 // DeleteSyslogInput is the input parameter to DeleteSyslog.
 type DeleteSyslogInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the syslog to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -255,7 +245,7 @@ type DeleteSyslogInput struct {
 }
 
 // DeleteSyslog deletes the specified resource.
-func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
+func (c *Client) DeleteSyslog(ctx context.Context, i *DeleteSyslogInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -267,7 +257,7 @@ func (c *Client) DeleteSyslog(i *DeleteSyslogInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "syslog", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

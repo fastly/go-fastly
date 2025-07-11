@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 )
 
@@ -9,7 +10,7 @@ func TestClient_GetStats(t *testing.T) {
 
 	var err error
 	Record(t, "stats/service_stats", func(c *Client) {
-		_, err = c.GetStats(&GetStatsInput{
+		_, err = c.GetStats(context.TODO(), &GetStatsInput{
 			Service: ToPointer(TestDeliveryServiceID),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
@@ -27,7 +28,7 @@ func TestClient_GetStats_ByField(t *testing.T) {
 
 	var err error
 	Record(t, "stats/service_stats_by_field", func(c *Client) {
-		_, err = c.GetStatsField(&GetStatsInput{
+		_, err = c.GetStatsField(context.TODO(), &GetStatsInput{
 			Field:  ToPointer("bandwidth"),
 			From:   ToPointer("1 hour ago"),
 			To:     ToPointer("now"),
@@ -45,7 +46,7 @@ func TestClient_GetStats_ByFieldAndService(t *testing.T) {
 
 	var err error
 	Record(t, "stats/service_stats_by_field_and_service", func(c *Client) {
-		_, err = c.GetStats(&GetStatsInput{
+		_, err = c.GetStats(context.TODO(), &GetStatsInput{
 			Service: ToPointer(TestDeliveryServiceID),
 			Field:   ToPointer("bandwidth"),
 			From:    ToPointer("10 days ago"),
@@ -68,7 +69,7 @@ func TestClient_GetStatsJSON(t *testing.T) {
 
 	var err error
 	Record(t, "stats/service_stats", func(c *Client) {
-		err = c.GetStatsJSON(&GetStatsInput{
+		err = c.GetStatsJSON(context.TODO(), &GetStatsInput{
 			Service: ToPointer(TestDeliveryServiceID),
 			From:    ToPointer("10 days ago"),
 			To:      ToPointer("now"),
@@ -94,7 +95,7 @@ func TestClient_GetAggregateJSON(t *testing.T) {
 
 	var err error
 	Record(t, "stats/aggregate", func(c *Client) {
-		err = c.GetAggregateJSON(&GetAggregateInput{
+		err = c.GetAggregateJSON(context.TODO(), &GetAggregateInput{
 			From:   ToPointer("15 minutes ago"),
 			To:     ToPointer("now"),
 			By:     ToPointer("minute"),
@@ -115,7 +116,7 @@ func TestClient_GetRegions(t *testing.T) {
 
 	var err error
 	Record(t, "stats/regions", func(c *Client) {
-		_, err = c.GetRegions()
+		_, err = c.GetRegions(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -127,7 +128,7 @@ func TestClient_GetRegionsUsage(t *testing.T) {
 
 	var err error
 	Record(t, "stats/regions_usage", func(c *Client) {
-		_, err = c.GetUsage(&GetUsageInput{
+		_, err = c.GetUsage(context.TODO(), &GetUsageInput{
 			From:   ToPointer("10 days ago"),
 			To:     ToPointer("now"),
 			By:     ToPointer("minute"),
@@ -144,7 +145,7 @@ func TestClient_GetServicesByRegionsUsage(t *testing.T) {
 
 	var err error
 	Record(t, "stats/services_usage", func(c *Client) {
-		_, err = c.GetUsageByService(&GetUsageInput{
+		_, err = c.GetUsageByService(context.TODO(), &GetUsageInput{
 			From:   ToPointer("10 days ago"),
 			To:     ToPointer("now"),
 			By:     ToPointer("minute"),

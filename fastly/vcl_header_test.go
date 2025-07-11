@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Headers(t *testing.T) {
 	// Create
 	var h *Header
 	Record(t, "headers/create", func(c *Client) {
-		h, err = c.CreateHeader(&CreateHeaderInput{
+		h, err = c.CreateHeader(context.TODO(), &CreateHeaderInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-header"),
@@ -38,13 +39,13 @@ func TestClient_Headers(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "headers/cleanup", func(c *Client) {
-			_ = c.DeleteHeader(&DeleteHeaderInput{
+			_ = c.DeleteHeader(context.TODO(), &DeleteHeaderInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-header",
 			})
 
-			_ = c.DeleteHeader(&DeleteHeaderInput{
+			_ = c.DeleteHeader(context.TODO(), &DeleteHeaderInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-header",
@@ -83,7 +84,7 @@ func TestClient_Headers(t *testing.T) {
 	// List
 	var hs []*Header
 	Record(t, "headers/list", func(c *Client) {
-		hs, err = c.ListHeaders(&ListHeadersInput{
+		hs, err = c.ListHeaders(context.TODO(), &ListHeadersInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -98,7 +99,7 @@ func TestClient_Headers(t *testing.T) {
 	// Get
 	var nh *Header
 	Record(t, "headers/get", func(c *Client) {
-		nh, err = c.GetHeader(&GetHeaderInput{
+		nh, err = c.GetHeader(context.TODO(), &GetHeaderInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-header",
@@ -138,7 +139,7 @@ func TestClient_Headers(t *testing.T) {
 	// Update
 	var uh *Header
 	Record(t, "headers/update", func(c *Client) {
-		uh, err = c.UpdateHeader(&UpdateHeaderInput{
+		uh, err = c.UpdateHeader(context.TODO(), &UpdateHeaderInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-header",
@@ -156,7 +157,7 @@ func TestClient_Headers(t *testing.T) {
 
 	// Delete
 	Record(t, "headers/delete", func(c *Client) {
-		err = c.DeleteHeader(&DeleteHeaderInput{
+		err = c.DeleteHeader(context.TODO(), &DeleteHeaderInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-header",
@@ -169,14 +170,14 @@ func TestClient_Headers(t *testing.T) {
 
 func TestClient_ListHeaders_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListHeaders(&ListHeadersInput{
+	_, err = TestClient.ListHeaders(context.TODO(), &ListHeadersInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListHeaders(&ListHeadersInput{
+	_, err = TestClient.ListHeaders(context.TODO(), &ListHeadersInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -187,14 +188,14 @@ func TestClient_ListHeaders_validation(t *testing.T) {
 
 func TestClient_CreateHeader_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateHeader(&CreateHeaderInput{
+	_, err = TestClient.CreateHeader(context.TODO(), &CreateHeaderInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateHeader(&CreateHeaderInput{
+	_, err = TestClient.CreateHeader(context.TODO(), &CreateHeaderInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -206,7 +207,7 @@ func TestClient_CreateHeader_validation(t *testing.T) {
 func TestClient_GetHeader_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetHeader(&GetHeaderInput{
+	_, err = TestClient.GetHeader(context.TODO(), &GetHeaderInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -214,7 +215,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHeader(&GetHeaderInput{
+	_, err = TestClient.GetHeader(context.TODO(), &GetHeaderInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -222,7 +223,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHeader(&GetHeaderInput{
+	_, err = TestClient.GetHeader(context.TODO(), &GetHeaderInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -234,7 +235,7 @@ func TestClient_GetHeader_validation(t *testing.T) {
 func TestClient_UpdateHeader_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateHeader(&UpdateHeaderInput{
+	_, err = TestClient.UpdateHeader(context.TODO(), &UpdateHeaderInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -242,7 +243,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHeader(&UpdateHeaderInput{
+	_, err = TestClient.UpdateHeader(context.TODO(), &UpdateHeaderInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -250,7 +251,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHeader(&UpdateHeaderInput{
+	_, err = TestClient.UpdateHeader(context.TODO(), &UpdateHeaderInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -262,7 +263,7 @@ func TestClient_UpdateHeader_validation(t *testing.T) {
 func TestClient_DeleteHeader_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteHeader(&DeleteHeaderInput{
+	err = TestClient.DeleteHeader(context.TODO(), &DeleteHeaderInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -270,7 +271,7 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHeader(&DeleteHeaderInput{
+	err = TestClient.DeleteHeader(context.TODO(), &DeleteHeaderInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -278,7 +279,7 @@ func TestClient_DeleteHeader_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHeader(&DeleteHeaderInput{
+	err = TestClient.DeleteHeader(context.TODO(), &DeleteHeaderInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

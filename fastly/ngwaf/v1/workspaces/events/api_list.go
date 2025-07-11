@@ -12,8 +12,6 @@ import (
 // ListInput specifies the information needed for the List() function to perform
 // the operation.
 type ListInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// From represents the start of a date-time range, expressed in RFC 3339 format (required).
 	From *string
 	// IP filters the list of events based on IP.
@@ -33,14 +31,14 @@ type ListInput struct {
 }
 
 // List retrieves a list of events, with optional filtering and pagination.
-func List(c *fastly.Client, i *ListInput) (*Events, error) {
+func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Events, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 	if i.From == nil {
 		return nil, fastly.ErrMissingFrom
 	}
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+	requestOptions := fastly.CreateRequestOptions()
 	requestOptions.Params["from"] = *i.From
 	if i.IP != nil {
 		requestOptions.Params["ip"] = *i.IP
@@ -60,7 +58,7 @@ func List(c *fastly.Client, i *ListInput) (*Events, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "events")
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

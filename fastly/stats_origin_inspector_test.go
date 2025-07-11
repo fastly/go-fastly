@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 	"time"
 )
@@ -16,7 +17,7 @@ func TestClient_GetOriginMetricsForService(t *testing.T) {
 	limit := 150
 	var err error
 	Record(t, "origin_inspector/metrics_for_service", func(c *Client) {
-		_, err = c.GetOriginMetricsForService(&GetOriginMetricsInput{
+		_, err = c.GetOriginMetricsForService(context.TODO(), &GetOriginMetricsInput{
 			Cursor:      ToPointer(""),
 			Datacenters: []string{"LHR", "JFK"},
 			Downsample:  ToPointer("day"),

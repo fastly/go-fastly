@@ -11,8 +11,6 @@ import (
 // GetInput specifies the information needed for the Get() function to perform
 // the operation.
 type GetInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// RequestID is the request identifier (required).
 	RequestID *string
 	// WorkspaceID is the workspace identifier (required).
@@ -20,7 +18,7 @@ type GetInput struct {
 }
 
 // Get retrieves the specified reqest.
-func Get(c *fastly.Client, i *GetInput) (*Request, error) {
+func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Request, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -30,7 +28,7 @@ func Get(c *fastly.Client, i *GetInput) (*Request, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "requests", *i.RequestID)
 
-	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

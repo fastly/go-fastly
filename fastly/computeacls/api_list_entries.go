@@ -14,8 +14,6 @@ import (
 type ListEntriesInput struct {
 	// ComputeACLID is an ACL Identifier (required).
 	ComputeACLID *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is used for paginating through results.
 	Cursor *string
 	// Limit is the maximum number of entries included the response.
@@ -23,12 +21,12 @@ type ListEntriesInput struct {
 }
 
 // ListEntries.
-func ListEntries(c *fastly.Client, i *ListEntriesInput) (*ComputeACLEntries, error) {
+func ListEntries(ctx context.Context, c *fastly.Client, i *ListEntriesInput) (*ComputeACLEntries, error) {
 	if i.ComputeACLID == nil {
 		return nil, fastly.ErrMissingComputeACLID
 	}
 
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+	requestOptions := fastly.CreateRequestOptions()
 	if i.Cursor != nil {
 		requestOptions.Params["cursor"] = *i.Cursor
 	}
@@ -38,7 +36,7 @@ func ListEntries(c *fastly.Client, i *ListEntriesInput) (*ComputeACLEntries, err
 
 	path := fastly.ToSafeURL("resources", "acls", *i.ComputeACLID, "entries")
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

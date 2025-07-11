@@ -11,8 +11,6 @@ import (
 // ExpireInput specifies the information needed for the Expire() function to
 // perform the operation.
 type ExpireInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// EventID is the event identifier (required).
 	EventID *string `json:"-"`
 	// IsExpired sets the value of IsExpired on the event (required).
@@ -22,7 +20,7 @@ type ExpireInput struct {
 }
 
 // Expire expires the specified event.
-func Expire(c *fastly.Client, i *ExpireInput) (*Event, error) {
+func Expire(ctx context.Context, c *fastly.Client, i *ExpireInput) (*Event, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -35,7 +33,7 @@ func Expire(c *fastly.Client, i *ExpireInput) (*Event, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "events", *i.EventID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

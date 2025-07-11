@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -12,7 +13,7 @@ func TestClient_ManagedLogging(t *testing.T) {
 
 	// Create
 	Record(t, "managed_logging/create", func(c *Client) {
-		_, err = c.CreateManagedLogging(&CreateManagedLoggingInput{
+		_, err = c.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
 			ServiceID: TestDeliveryServiceID,
 			Kind:      ManagedLoggingInstanceOutput,
 		})
@@ -24,7 +25,7 @@ func TestClient_ManagedLogging(t *testing.T) {
 	// Test that enabling managed logging on a service with it already
 	// enabled results in a 409.
 	Record(t, "managed_logging/recreate", func(c *Client) {
-		_, err = c.CreateManagedLogging(&CreateManagedLoggingInput{
+		_, err = c.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
 			ServiceID: TestDeliveryServiceID,
 			Kind:      ManagedLoggingInstanceOutput,
 		})
@@ -35,7 +36,7 @@ func TestClient_ManagedLogging(t *testing.T) {
 
 	// Delete
 	Record(t, "managed_logging/delete", func(c *Client) {
-		err = c.DeleteManagedLogging(&DeleteManagedLoggingInput{
+		err = c.DeleteManagedLogging(context.TODO(), &DeleteManagedLoggingInput{
 			ServiceID: TestDeliveryServiceID,
 			Kind:      ManagedLoggingInstanceOutput,
 		})
@@ -46,7 +47,7 @@ func TestClient_ManagedLogging(t *testing.T) {
 }
 
 func TestClient_CreateManagedLogging_validation(t *testing.T) {
-	_, err := TestClient.CreateManagedLogging(&CreateManagedLoggingInput{
+	_, err := TestClient.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
 		ServiceID: "",
 		Kind:      ManagedLoggingInstanceOutput,
 	})
@@ -54,14 +55,14 @@ func TestClient_CreateManagedLogging_validation(t *testing.T) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	_, err = TestClient.CreateManagedLogging(&CreateManagedLoggingInput{
+	_, err = TestClient.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
 		ServiceID: TestDeliveryServiceID,
 	})
 	if !errors.Is(err, ErrMissingKind) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	_, err = TestClient.CreateManagedLogging(&CreateManagedLoggingInput{
+	_, err = TestClient.CreateManagedLogging(context.TODO(), &CreateManagedLoggingInput{
 		ServiceID: TestDeliveryServiceID,
 		Kind:      999,
 	})
@@ -71,7 +72,7 @@ func TestClient_CreateManagedLogging_validation(t *testing.T) {
 }
 
 func TestClient_DeleteManagedLogging_validation(t *testing.T) {
-	err := TestClient.DeleteManagedLogging(&DeleteManagedLoggingInput{
+	err := TestClient.DeleteManagedLogging(context.TODO(), &DeleteManagedLoggingInput{
 		ServiceID: "",
 		Kind:      ManagedLoggingInstanceOutput,
 	})
@@ -79,14 +80,14 @@ func TestClient_DeleteManagedLogging_validation(t *testing.T) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	err = TestClient.DeleteManagedLogging(&DeleteManagedLoggingInput{
+	err = TestClient.DeleteManagedLogging(context.TODO(), &DeleteManagedLoggingInput{
 		ServiceID: TestDeliveryServiceID,
 	})
 	if !errors.Is(err, ErrMissingKind) {
 		t.Errorf("unexpected error: %s", err)
 	}
 
-	err = TestClient.DeleteManagedLogging(&DeleteManagedLoggingInput{
+	err = TestClient.DeleteManagedLogging(context.TODO(), &DeleteManagedLoggingInput{
 		ServiceID: TestDeliveryServiceID,
 		Kind:      999,
 	})

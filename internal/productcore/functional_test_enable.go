@@ -1,6 +1,7 @@
 package productcore
 
 import (
+	"context"
 	"strings"
 	"testing"
 
@@ -24,10 +25,10 @@ type EnableTestInput[O products.ProductOutput, I any] struct {
 	Phase string
 	// OpNoInputFn is the function to be invoked to perform the
 	// enable operation, when no input is required (I == NulInput)
-	OpNoInputFn func(*fastly.Client, string) (O, error)
+	OpNoInputFn func(context.Context, *fastly.Client, string) (O, error)
 	// OpWithInputFn is the function to be invoked to perform the
 	// enable operation, when input is required (I != NulInput)
-	OpWithInputFn func(*fastly.Client, string, I) (O, error)
+	OpWithInputFn func(context.Context, *fastly.Client, string, I) (O, error)
 	// Input is the input to be provided to OpWithInputFn
 	Input I
 	// ProductID identifies the product for which information
@@ -74,7 +75,7 @@ func NewEnableTest[O products.ProductOutput, I any](i *EnableTestInput[O, I]) *t
 	switch any(i.Input).(type) {
 	case products.NullInput:
 		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
-			result, err := i.OpNoInputFn(c, i.ServiceID)
+			result, err := i.OpNoInputFn(context.TODO(), c, i.ServiceID)
 			if err == nil {
 				validateOutput(t, tc, result, i.ProductID, i.ServiceID)
 				if i.CheckOutputFn != nil {
@@ -85,7 +86,7 @@ func NewEnableTest[O products.ProductOutput, I any](i *EnableTestInput[O, I]) *t
 		}
 	default:
 		r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
-			result, err := i.OpWithInputFn(c, i.ServiceID, i.Input)
+			result, err := i.OpWithInputFn(context.TODO(), c, i.ServiceID, i.Input)
 			if err == nil {
 				validateOutput(t, tc, result, i.ProductID, i.ServiceID)
 				if i.CheckOutputFn != nil {

@@ -29,21 +29,19 @@ type ConfigStoreMetadata struct {
 
 // CreateConfigStoreInput is the input to CreateConfigStore.
 type CreateConfigStoreInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the store to create (required).
 	Name string `url:"name"`
 }
 
 // CreateConfigStore creates a new Fastly config store.
-func (c *Client) CreateConfigStore(i *CreateConfigStoreInput) (*ConfigStore, error) {
+func (c *Client) CreateConfigStore(ctx context.Context, i *CreateConfigStoreInput) (*ConfigStore, error) {
 	path := "/resources/stores/config"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.PostForm(path, i, requestOptions)
+	resp, err := c.PostForm(ctx, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -59,25 +57,23 @@ func (c *Client) CreateConfigStore(i *CreateConfigStoreInput) (*ConfigStore, err
 
 // DeleteConfigStoreInput is the input parameter to DeleteConfigStore.
 type DeleteConfigStoreInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID is the StoreID of the config store to delete (required).
 	StoreID string
 }
 
 // DeleteConfigStore deletes the given config store version.
-func (c *Client) DeleteConfigStore(i *DeleteConfigStoreInput) error {
+func (c *Client) DeleteConfigStore(ctx context.Context, i *DeleteConfigStoreInput) error {
 	if i.StoreID == "" {
 		return ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Delete(path, requestOptions)
+	resp, err := c.Delete(ctx, path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -90,25 +86,23 @@ func (c *Client) DeleteConfigStore(i *DeleteConfigStoreInput) error {
 
 // GetConfigStoreInput is the input to GetConfigStore.
 type GetConfigStoreInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID is the StoreID of the config store (required).
 	StoreID string
 }
 
 // GetConfigStore returns the config store for the given input parameters.
-func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
+func (c *Client) GetConfigStore(ctx context.Context, i *GetConfigStoreInput) (*ConfigStore, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -124,25 +118,23 @@ func (c *Client) GetConfigStore(i *GetConfigStoreInput) (*ConfigStore, error) {
 
 // GetConfigStoreMetadataInput is the input to GetConfigStoreMetadata.
 type GetConfigStoreMetadataInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID is the StoreID of the config store (required).
 	StoreID string
 }
 
 // GetConfigStoreMetadata returns the config store's metadata for the given input parameters.
-func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*ConfigStoreMetadata, error) {
+func (c *Client) GetConfigStoreMetadata(ctx context.Context, i *GetConfigStoreMetadataInput) (*ConfigStoreMetadata, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "info")
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -158,17 +150,15 @@ func (c *Client) GetConfigStoreMetadata(i *GetConfigStoreMetadataInput) (*Config
 
 // ListConfigStoreServicesInput is the input to ListConfigStoreServices.
 type ListConfigStoresInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of a config store (optional).
 	Name string
 }
 
 // ListConfigStores returns a list of config stores sorted by name.
-func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, error) {
+func (c *Client) ListConfigStores(ctx context.Context, i *ListConfigStoresInput) ([]*ConfigStore, error) {
 	path := "/resources/stores/config"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
@@ -176,7 +166,7 @@ func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, err
 		requestOptions.Params["name"] = i.Name
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -195,26 +185,24 @@ func (c *Client) ListConfigStores(i *ListConfigStoresInput) ([]*ConfigStore, err
 
 // ListConfigStoreServicesInput is the input to ListConfigStoreServices.
 type ListConfigStoreServicesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID is the StoreID of the config store (required).
 	StoreID string
 }
 
 // ListConfigStoreServices returns the list of services that are associated with
 // a given config store.
-func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Service, error) {
+func (c *Client) ListConfigStoreServices(ctx context.Context, i *ListConfigStoreServicesInput) ([]*Service, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID, "services")
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -230,8 +218,6 @@ func (c *Client) ListConfigStoreServices(i *ListConfigStoreServicesInput) ([]*Se
 
 // UpdateConfigStoreInput is the input to UpdateConfigStore.
 type UpdateConfigStoreInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the new name of the config store (required).
 	Name string `url:"name"`
 	// StoreID is the StoreID of the config store to update (required).
@@ -239,18 +225,18 @@ type UpdateConfigStoreInput struct {
 }
 
 // UpdateConfigStore updates a specific config store.
-func (c *Client) UpdateConfigStore(i *UpdateConfigStoreInput) (*ConfigStore, error) {
+func (c *Client) UpdateConfigStore(ctx context.Context, i *UpdateConfigStoreInput) (*ConfigStore, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "config", i.StoreID)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.PutForm(path, i, requestOptions)
+	resp, err := c.PutForm(ctx, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}

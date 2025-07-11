@@ -1,6 +1,8 @@
 package websockets
 
 import (
+	"context"
+
 	"github.com/fastly/go-fastly/v10/fastly"
 	"github.com/fastly/go-fastly/v10/fastly/products"
 	"github.com/fastly/go-fastly/v10/internal/productcore"
@@ -17,8 +19,8 @@ const (
 type EnableOutput = products.EnableOutput
 
 // Get gets the status of the WebSockets product on the service.
-func Get(c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Get[EnableOutput](&productcore.GetInput{
+func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
+	return productcore.Get[EnableOutput](ctx, &productcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -26,8 +28,8 @@ func Get(c *fastly.Client, serviceID string) (EnableOutput, error) {
 }
 
 // Enable enables the WebSockets product on the service.
-func Enable(c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Put[EnableOutput](&productcore.PutInput[products.NullInput]{
+func Enable(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
+	return productcore.Put[EnableOutput](ctx, &productcore.PutInput[products.NullInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -35,8 +37,8 @@ func Enable(c *fastly.Client, serviceID string) (EnableOutput, error) {
 }
 
 // Disable disables the WebSockets product on the service.
-func Disable(c *fastly.Client, serviceID string) error {
-	return productcore.Delete(&productcore.DeleteInput{
+func Disable(ctx context.Context, c *fastly.Client, serviceID string) error {
+	return productcore.Delete(ctx, &productcore.DeleteInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,

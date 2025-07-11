@@ -11,8 +11,6 @@ import (
 // UpdateInput specifies the information needed for the Update() function to
 // perform the operation.
 type UpdateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Action to take when threshold is exceeded. Must be one of `block` or `log`. Required.
 	Action *string `json:"action"`
 	// DontNotify indicates whether to silence notifications when action is taken.
@@ -36,7 +34,7 @@ type UpdateInput struct {
 }
 
 // Update updates the specified workspace.
-func Update(c *fastly.Client, i *UpdateInput) (*Threshold, error) {
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Threshold, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -49,7 +47,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Threshold, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "thresholds", *i.ThresholdID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -25,8 +25,6 @@ type ResponseObject struct {
 // ListResponseObjectsInput is used as input to the ListResponseObjects
 // function.
 type ListResponseObjectsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +32,7 @@ type ListResponseObjectsInput struct {
 }
 
 // ListResponseObjects retrieves all resources.
-func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseObject, error) {
+func (c *Client) ListResponseObjects(ctx context.Context, i *ListResponseObjectsInput) ([]*ResponseObject, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -43,7 +41,7 @@ func (c *Client) ListResponseObjects(i *ListResponseObjectsInput) ([]*ResponseOb
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -65,8 +63,6 @@ type CreateResponseObjectInput struct {
 	Content *string `url:"content,omitempty"`
 	// ContentType is the MIME type of the content, can be empty.
 	ContentType *string `url:"content_type,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name for the request settings.
 	Name *string `url:"name,omitempty"`
 	// RequestCondition is the condition which, if met, will select this configuration during a request.
@@ -82,7 +78,7 @@ type CreateResponseObjectInput struct {
 }
 
 // CreateResponseObject creates a new resource.
-func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseObject, error) {
+func (c *Client) CreateResponseObject(ctx context.Context, i *CreateResponseObjectInput) (*ResponseObject, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -91,7 +87,7 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -106,8 +102,6 @@ func (c *Client) CreateResponseObject(i *CreateResponseObjectInput) (*ResponseOb
 
 // GetResponseObjectInput is used as input to the GetResponseObject function.
 type GetResponseObjectInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the response object to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -117,7 +111,7 @@ type GetResponseObjectInput struct {
 }
 
 // GetResponseObject retrieves the specified resource.
-func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, error) {
+func (c *Client) GetResponseObject(ctx context.Context, i *GetResponseObjectInput) (*ResponseObject, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -129,7 +123,7 @@ func (c *Client) GetResponseObject(i *GetResponseObjectInput) (*ResponseObject, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -151,8 +145,6 @@ type UpdateResponseObjectInput struct {
 	Content *string `url:"content,omitempty"`
 	// ContentType is the MIME type of the content, can be empty.
 	ContentType *string `url:"content_type,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the response object to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -170,7 +162,7 @@ type UpdateResponseObjectInput struct {
 }
 
 // UpdateResponseObject updates the specified resource.
-func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseObject, error) {
+func (c *Client) UpdateResponseObject(ctx context.Context, i *UpdateResponseObjectInput) (*ResponseObject, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -182,7 +174,7 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -197,8 +189,6 @@ func (c *Client) UpdateResponseObject(i *UpdateResponseObjectInput) (*ResponseOb
 
 // DeleteResponseObjectInput is the input parameter to DeleteResponseObject.
 type DeleteResponseObjectInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the response object to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -208,7 +198,7 @@ type DeleteResponseObjectInput struct {
 }
 
 // DeleteResponseObject deletes the specified resource.
-func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
+func (c *Client) DeleteResponseObject(ctx context.Context, i *DeleteResponseObjectInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -220,7 +210,7 @@ func (c *Client) DeleteResponseObject(i *DeleteResponseObjectInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "response_object", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

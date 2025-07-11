@@ -72,8 +72,6 @@ type Header struct {
 
 // ListHeadersInput is used as input to the ListHeaders function.
 type ListHeadersInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -81,7 +79,7 @@ type ListHeadersInput struct {
 }
 
 // ListHeaders retrieves all resources.
-func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
+func (c *Client) ListHeaders(ctx context.Context, i *ListHeadersInput) ([]*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -90,7 +88,7 @@ func (c *Client) ListHeaders(i *ListHeadersInput) ([]*Header, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "header")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -109,8 +107,6 @@ type CreateHeaderInput struct {
 	Action *HeaderAction `url:"action,omitempty"`
 	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Destination is the header to set.
 	Destination *string `url:"dst,omitempty"`
 	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.
@@ -138,7 +134,7 @@ type CreateHeaderInput struct {
 }
 
 // CreateHeader creates a new resource.
-func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
+func (c *Client) CreateHeader(ctx context.Context, i *CreateHeaderInput) (*Header, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -147,7 +143,7 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "header")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -162,8 +158,6 @@ func (c *Client) CreateHeader(i *CreateHeaderInput) (*Header, error) {
 
 // GetHeaderInput is used as input to the GetHeader function.
 type GetHeaderInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the header to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -173,7 +167,7 @@ type GetHeaderInput struct {
 }
 
 // GetHeader retrieves the specified resource.
-func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
+func (c *Client) GetHeader(ctx context.Context, i *GetHeaderInput) (*Header, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -185,7 +179,7 @@ func (c *Client) GetHeader(i *GetHeaderInput) (*Header, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "header", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -204,8 +198,6 @@ type UpdateHeaderInput struct {
 	Action *HeaderAction `url:"action,omitempty"`
 	// CacheCondition is the name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Destination is the header to set.
 	Destination *string `url:"dst,omitempty"`
 	// IgnoreIfSet prevents adding the header if it is added already. Only applies to 'set' action.
@@ -235,7 +227,7 @@ type UpdateHeaderInput struct {
 }
 
 // UpdateHeader updates the specified resource.
-func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
+func (c *Client) UpdateHeader(ctx context.Context, i *UpdateHeaderInput) (*Header, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -247,7 +239,7 @@ func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "header", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -262,8 +254,6 @@ func (c *Client) UpdateHeader(i *UpdateHeaderInput) (*Header, error) {
 
 // DeleteHeaderInput is the input parameter to DeleteHeader.
 type DeleteHeaderInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the header to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -273,7 +263,7 @@ type DeleteHeaderInput struct {
 }
 
 // DeleteHeader deletes the specified resource.
-func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
+func (c *Client) DeleteHeader(ctx context.Context, i *DeleteHeaderInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -285,7 +275,7 @@ func (c *Client) DeleteHeader(i *DeleteHeaderInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "header", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

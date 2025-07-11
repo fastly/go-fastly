@@ -11,8 +11,6 @@ import (
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
 type CreateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Description is a description of the signal (optional).
 	Description *string `json:"description,omitempty"`
 	// Name is the name of the signal. Must be between 3 and 25 characters. Letters, numbers, hyphens, and spaces are accepted. Special characters and periods are not accepted.
@@ -22,7 +20,7 @@ type CreateInput struct {
 }
 
 // Create creates a new signal in the given workspace.
-func Create(c *fastly.Client, i *CreateInput) (*Signal, error) {
+func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Signal, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -32,7 +30,7 @@ func Create(c *fastly.Client, i *CreateInput) (*Signal, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "signals")
 
-	resp, err := c.PostJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

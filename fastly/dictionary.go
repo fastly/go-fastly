@@ -20,8 +20,6 @@ type Dictionary struct {
 
 // ListDictionariesInput is used as input to the ListDictionaries function.
 type ListDictionariesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -29,7 +27,7 @@ type ListDictionariesInput struct {
 }
 
 // ListDictionaries retrieves all resources.
-func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, error) {
+func (c *Client) ListDictionaries(ctx context.Context, i *ListDictionariesInput) ([]*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -39,7 +37,7 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -54,8 +52,6 @@ func (c *Client) ListDictionaries(i *ListDictionariesInput) ([]*Dictionary, erro
 
 // CreateDictionaryInput is used as input to the CreateDictionary function.
 type CreateDictionaryInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the dictionary to create.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -67,7 +63,7 @@ type CreateDictionaryInput struct {
 }
 
 // CreateDictionary creates a new resource.
-func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error) {
+func (c *Client) CreateDictionary(ctx context.Context, i *CreateDictionaryInput) (*Dictionary, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -77,7 +73,7 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary")
 
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -92,8 +88,6 @@ func (c *Client) CreateDictionary(i *CreateDictionaryInput) (*Dictionary, error)
 
 // GetDictionaryInput is used as input to the GetDictionary function.
 type GetDictionaryInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the dictionary to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -103,7 +97,7 @@ type GetDictionaryInput struct {
 }
 
 // GetDictionary retrieves the specified resource.
-func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
+func (c *Client) GetDictionary(ctx context.Context, i *GetDictionaryInput) (*Dictionary, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -116,7 +110,7 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.Name)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -131,8 +125,6 @@ func (c *Client) GetDictionary(i *GetDictionaryInput) (*Dictionary, error) {
 
 // UpdateDictionaryInput is used as input to the UpdateDictionary function.
 type UpdateDictionaryInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the dictionary to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -146,7 +138,7 @@ type UpdateDictionaryInput struct {
 }
 
 // UpdateDictionary updates the specified resource.
-func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error) {
+func (c *Client) UpdateDictionary(ctx context.Context, i *UpdateDictionaryInput) (*Dictionary, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -159,7 +151,7 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.Name)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -174,8 +166,6 @@ func (c *Client) UpdateDictionary(i *UpdateDictionaryInput) (*Dictionary, error)
 
 // DeleteDictionaryInput is the input parameter to DeleteDictionary.
 type DeleteDictionaryInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the dictionary to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -185,7 +175,7 @@ type DeleteDictionaryInput struct {
 }
 
 // DeleteDictionary deletes the specified resource.
-func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
+func (c *Client) DeleteDictionary(ctx context.Context, i *DeleteDictionaryInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -198,7 +188,7 @@ func (c *Client) DeleteDictionary(i *DeleteDictionaryInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "dictionary", i.Name)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

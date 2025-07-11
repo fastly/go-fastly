@@ -10,8 +10,6 @@ import (
 
 // GetInput specifies the various parameters for performing real-time queries against the known zones database.
 type GetInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Query are the term(s) to search against.
 	Query string
 	// Defaults is a comma-separated list of default zones to include in the search results response (optional).
@@ -28,12 +26,12 @@ type GetInput struct {
 }
 
 // Get returns a list of domain suggestions matching the query criteria.
-func Get(c *fastly.Client, g *GetInput) (*Suggestions, error) {
+func Get(ctx context.Context, c *fastly.Client, g *GetInput) (*Suggestions, error) {
 	if g.Query == "" {
 		return nil, fastly.ErrMissingDomainQuery
 	}
 
-	ro := fastly.CreateRequestOptions(g.Context)
+	ro := fastly.CreateRequestOptions()
 	ro.Params["query"] = g.Query
 
 	if g.Defaults != nil {
@@ -53,7 +51,7 @@ func Get(c *fastly.Client, g *GetInput) (*Suggestions, error) {
 	}
 
 	path := fastly.ToSafeURL("domains", "v1", "tools", "suggest")
-	resp, err := c.Get(path, ro)
+	resp, err := c.Get(ctx, path, ro)
 	if err != nil {
 		return nil, err
 	}

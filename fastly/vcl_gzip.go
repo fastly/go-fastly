@@ -21,8 +21,6 @@ type Gzip struct {
 
 // ListGzipsInput is used as input to the ListGzips function.
 type ListGzipsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -30,7 +28,7 @@ type ListGzipsInput struct {
 }
 
 // ListGzips retrieves all resources.
-func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
+func (c *Client) ListGzips(ctx context.Context, i *ListGzipsInput) ([]*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -39,7 +37,7 @@ func (c *Client) ListGzips(i *ListGzipsInput) ([]*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +56,6 @@ type CreateGzipInput struct {
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// ContentTypes is a space-separated list of content types to compress.
 	ContentTypes *string `url:"content_types,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Extensions is a space-separated list of file extensions to compress.
 	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the gzip configuration.
@@ -71,7 +67,7 @@ type CreateGzipInput struct {
 }
 
 // CreateGzip creates a new resource.
-func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
+func (c *Client) CreateGzip(ctx context.Context, i *CreateGzipInput) (*Gzip, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -80,7 +76,7 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -95,8 +91,6 @@ func (c *Client) CreateGzip(i *CreateGzipInput) (*Gzip, error) {
 
 // GetGzipInput is used as input to the GetGzip function.
 type GetGzipInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Gzip to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -106,7 +100,7 @@ type GetGzipInput struct {
 }
 
 // GetGzip retrieves the specified resource.
-func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
+func (c *Client) GetGzip(ctx context.Context, i *GetGzipInput) (*Gzip, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -118,7 +112,7 @@ func (c *Client) GetGzip(i *GetGzipInput) (*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -137,8 +131,6 @@ type UpdateGzipInput struct {
 	CacheCondition *string `url:"cache_condition,omitempty"`
 	// ContentTypes is a space-separated list of content types to compress.
 	ContentTypes *string `url:"content_types,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Extensions is a space-separated list of file extensions to compress.
 	Extensions *string `url:"extensions,omitempty"`
 	// Name is the name of the Gzip to update (required).
@@ -152,7 +144,7 @@ type UpdateGzipInput struct {
 }
 
 // UpdateGzip updates the specified resource.
-func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
+func (c *Client) UpdateGzip(ctx context.Context, i *UpdateGzipInput) (*Gzip, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -164,7 +156,7 @@ func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -179,8 +171,6 @@ func (c *Client) UpdateGzip(i *UpdateGzipInput) (*Gzip, error) {
 
 // DeleteGzipInput is the input parameter to DeleteGzip.
 type DeleteGzipInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Gzip to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -190,7 +180,7 @@ type DeleteGzipInput struct {
 }
 
 // DeleteGzip deletes the specified resource.
-func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
+func (c *Client) DeleteGzip(ctx context.Context, i *DeleteGzipInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -202,7 +192,7 @@ func (c *Client) DeleteGzip(i *DeleteGzipInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "gzip", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

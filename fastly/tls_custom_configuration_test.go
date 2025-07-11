@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -16,7 +17,7 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	// Get
 	var gcon *CustomTLSConfiguration
 	Record(t, fixtureBase+"get", func(c *Client) {
-		gcon, err = c.GetCustomTLSConfiguration(&GetCustomTLSConfigurationInput{
+		gcon, err = c.GetCustomTLSConfiguration(context.TODO(), &GetCustomTLSConfigurationInput{
 			ID: conID,
 		})
 	})
@@ -30,7 +31,7 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	// List
 	var lcon []*CustomTLSConfiguration
 	Record(t, fixtureBase+"list", func(c *Client) {
-		lcon, err = c.ListCustomTLSConfigurations(&ListCustomTLSConfigurationsInput{})
+		lcon, err = c.ListCustomTLSConfigurations(context.TODO(), &ListCustomTLSConfigurationsInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -43,7 +44,7 @@ func TestClient_CustomTLSConfiguration(t *testing.T) {
 	var ucon *CustomTLSConfiguration
 	newName := "My configuration v2"
 	Record(t, fixtureBase+"update", func(c *Client) {
-		ucon, err = c.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
+		ucon, err = c.UpdateCustomTLSConfiguration(context.TODO(), &UpdateCustomTLSConfigurationInput{
 			ID:   "TLS_CONFIGURATION_ID",
 			Name: newName,
 		})
@@ -64,7 +65,7 @@ func TestClient_ListCustomTLSConfigurations_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_configuration/list", func(c *Client) {
-		_, err = c.ListCustomTLSConfigurations(&ListCustomTLSConfigurationsInput{})
+		_, err = c.ListCustomTLSConfigurations(context.TODO(), &ListCustomTLSConfigurationsInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -76,7 +77,7 @@ func TestClient_GetCustomTLSConfiguration_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_configuration/get", func(c *Client) {
-		_, err = c.GetCustomTLSConfiguration(&GetCustomTLSConfigurationInput{
+		_, err = c.GetCustomTLSConfiguration(context.TODO(), &GetCustomTLSConfigurationInput{
 			ID: "TLS_CONFIGURATION_ID",
 		})
 	})
@@ -84,7 +85,7 @@ func TestClient_GetCustomTLSConfiguration_validation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = TestClient.GetCustomTLSConfiguration(&GetCustomTLSConfigurationInput{})
+	_, err = TestClient.GetCustomTLSConfiguration(context.TODO(), &GetCustomTLSConfigurationInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
@@ -95,7 +96,7 @@ func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_configuration/update", func(c *Client) {
-		_, err = c.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
+		_, err = c.UpdateCustomTLSConfiguration(context.TODO(), &UpdateCustomTLSConfigurationInput{
 			ID:   "TLS_CONFIGURATION_ID",
 			Name: "My configuration v2",
 		})
@@ -104,14 +105,14 @@ func TestClient_UpdateCustomTLSConfiguration_validation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = TestClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
+	_, err = TestClient.UpdateCustomTLSConfiguration(context.TODO(), &UpdateCustomTLSConfigurationInput{
 		Name: "My configuration v2",
 	})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateCustomTLSConfiguration(&UpdateCustomTLSConfigurationInput{
+	_, err = TestClient.UpdateCustomTLSConfiguration(context.TODO(), &UpdateCustomTLSConfigurationInput{
 		ID: "CONFIGURATION_ID",
 	})
 	if !errors.Is(err, ErrMissingName) {

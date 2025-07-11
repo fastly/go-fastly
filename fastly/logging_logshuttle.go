@@ -25,8 +25,6 @@ type Logshuttle struct {
 
 // ListLogshuttlesInput is used as input to the ListLogshuttles function.
 type ListLogshuttlesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +32,7 @@ type ListLogshuttlesInput struct {
 }
 
 // ListLogshuttles retrieves all resources.
-func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error) {
+func (c *Client) ListLogshuttles(ctx context.Context, i *ListLogshuttlesInput) ([]*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -43,7 +41,7 @@ func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +56,6 @@ func (c *Client) ListLogshuttles(i *ListLogshuttlesInput) ([]*Logshuttle, error)
 
 // CreateLogshuttleInput is used as input to the CreateLogshuttle function.
 type CreateLogshuttleInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -83,7 +79,7 @@ type CreateLogshuttleInput struct {
 }
 
 // CreateLogshuttle creates a new resource.
-func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error) {
+func (c *Client) CreateLogshuttle(ctx context.Context, i *CreateLogshuttleInput) (*Logshuttle, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -92,7 +88,7 @@ func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +103,6 @@ func (c *Client) CreateLogshuttle(i *CreateLogshuttleInput) (*Logshuttle, error)
 
 // GetLogshuttleInput is used as input to the GetLogshuttle function.
 type GetLogshuttleInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the logshuttle to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -118,7 +112,7 @@ type GetLogshuttleInput struct {
 }
 
 // GetLogshuttle retrieves the specified resource.
-func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
+func (c *Client) GetLogshuttle(ctx context.Context, i *GetLogshuttleInput) (*Logshuttle, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -130,7 +124,7 @@ func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -145,8 +139,6 @@ func (c *Client) GetLogshuttle(i *GetLogshuttleInput) (*Logshuttle, error) {
 
 // UpdateLogshuttleInput is used as input to the UpdateLogshuttle function.
 type UpdateLogshuttleInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -172,7 +164,7 @@ type UpdateLogshuttleInput struct {
 }
 
 // UpdateLogshuttle updates the specified resource.
-func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error) {
+func (c *Client) UpdateLogshuttle(ctx context.Context, i *UpdateLogshuttleInput) (*Logshuttle, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -184,7 +176,7 @@ func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -199,8 +191,6 @@ func (c *Client) UpdateLogshuttle(i *UpdateLogshuttleInput) (*Logshuttle, error)
 
 // DeleteLogshuttleInput is the input parameter to DeleteLogshuttle.
 type DeleteLogshuttleInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the logshuttle to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -210,7 +200,7 @@ type DeleteLogshuttleInput struct {
 }
 
 // DeleteLogshuttle deletes the specified resource.
-func (c *Client) DeleteLogshuttle(i *DeleteLogshuttleInput) error {
+func (c *Client) DeleteLogshuttle(ctx context.Context, i *DeleteLogshuttleInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -222,7 +212,7 @@ func (c *Client) DeleteLogshuttle(i *DeleteLogshuttleInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "logshuttle", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

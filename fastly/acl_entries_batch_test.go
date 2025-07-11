@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"sort"
 	"testing"
 )
@@ -42,7 +43,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 	// When: I execute the batch create operations against the Fastly API,
 	var err error
 	Record(t, fixtureBase+"create_acl_entries", func(c *Client) {
-		err = c.BatchModifyACLEntries(batchCreateOperations)
+		err = c.BatchModifyACLEntries(context.TODO(), batchCreateOperations)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -51,7 +52,7 @@ func TestClient_BatchModifyACLEntries_Create(t *testing.T) {
 	// Then: I expect to be able to list all of the created ACL entries.
 	var actualACLEntries []*ACLEntry
 	Record(t, fixtureBase+"list_after_create", func(c *Client) {
-		actualACLEntries, err = c.ListACLEntries(&ListACLEntriesInput{
+		actualACLEntries, err = c.ListACLEntries(context.TODO(), &ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
 		})
@@ -137,7 +138,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 
 	var err error
 	Record(t, fixtureBase+"create_acl_entries", func(c *Client) {
-		err = c.BatchModifyACLEntries(batchCreateOperations)
+		err = c.BatchModifyACLEntries(context.TODO(), batchCreateOperations)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -145,7 +146,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 
 	var createdACLEntries []*ACLEntry
 	Record(t, fixtureBase+"list_before_delete", func(client *Client) {
-		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
+		createdACLEntries, err = client.ListACLEntries(context.TODO(), &ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
 		})
@@ -171,7 +172,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	}
 
 	Record(t, fixtureBase+"delete_acl_entries", func(c *Client) {
-		err = c.BatchModifyACLEntries(batchDeleteOperations)
+		err = c.BatchModifyACLEntries(context.TODO(), batchDeleteOperations)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -180,7 +181,7 @@ func TestClient_BatchModifyACLEntries_Delete(t *testing.T) {
 	// Then: I expect to be able to list a single ACL entry.
 	var actualACLEntries []*ACLEntry
 	Record(t, fixtureBase+"list_after_delete", func(client *Client) {
-		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
+		actualACLEntries, err = client.ListACLEntries(context.TODO(), &ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
 		})
@@ -236,7 +237,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 
 	var err error
 	Record(t, fixtureBase+"create_acl_entries", func(c *Client) {
-		err = c.BatchModifyACLEntries(batchCreateOperations)
+		err = c.BatchModifyACLEntries(context.TODO(), batchCreateOperations)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -244,7 +245,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 
 	var createdACLEntries []*ACLEntry
 	Record(t, fixtureBase+"list_before_update", func(client *Client) {
-		createdACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
+		createdACLEntries, err = client.ListACLEntries(context.TODO(), &ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
 		})
@@ -274,7 +275,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	}
 
 	Record(t, fixtureBase+"update_acl_entries", func(c *Client) {
-		err = c.BatchModifyACLEntries(batchUpdateOperations)
+		err = c.BatchModifyACLEntries(context.TODO(), batchUpdateOperations)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -283,7 +284,7 @@ func TestClient_BatchModifyACLEntries_Update(t *testing.T) {
 	// Then: I expect to be able to list all of the ACL entries with modifications applied to a single item.
 	var actualACLEntries []*ACLEntry
 	Record(t, fixtureBase+"list_after_update", func(client *Client) {
-		actualACLEntries, err = client.ListACLEntries(&ListACLEntriesInput{
+		actualACLEntries, err = client.ListACLEntries(context.TODO(), &ListACLEntriesInput{
 			ServiceID: *testService.ServiceID,
 			ACLID:     *testACL.ACLID,
 		})

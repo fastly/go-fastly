@@ -1,6 +1,7 @@
 package fastly_test
 
 import (
+	"context"
 	"fmt"
 	"log"
 
@@ -17,12 +18,12 @@ func ExampleClient_RateLimitRemaining() {
 		log.Fatal(err)
 	}
 
-	v, err := c.LatestVersion(&fastly.LatestVersionInput{ServiceID: sid})
+	v, err := c.LatestVersion(context.TODO(), &fastly.LatestVersionInput{ServiceID: sid})
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	dict, err := c.GetDictionary(&fastly.GetDictionaryInput{
+	dict, err := c.GetDictionary(context.TODO(), &fastly.GetDictionaryInput{
 		ServiceID:      sid,
 		ServiceVersion: *v.Number,
 		Name:           dictName,
@@ -31,7 +32,7 @@ func ExampleClient_RateLimitRemaining() {
 		log.Fatal(err)
 	}
 
-	_, err = c.CreateDictionaryItem(&fastly.CreateDictionaryItemInput{
+	_, err = c.CreateDictionaryItem(context.TODO(), &fastly.CreateDictionaryItemInput{
 		ServiceID:    sid,
 		DictionaryID: *dict.DictionaryID,
 		ItemKey:      fastly.ToPointer("test-dictionary-item"),
@@ -44,7 +45,7 @@ func ExampleClient_RateLimitRemaining() {
 	fmt.Printf("Next rate limit reset expected at %v\n", c.RateLimitReset())
 
 	for i := 1; i < 10; i++ {
-		_, err := c.UpdateDictionaryItem(&fastly.UpdateDictionaryItemInput{
+		_, err := c.UpdateDictionaryItem(context.TODO(), &fastly.UpdateDictionaryItemInput{
 			ServiceID:    sid,
 			DictionaryID: *dict.DictionaryID,
 			ItemKey:      "test-dictionary-item",

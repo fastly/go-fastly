@@ -6,6 +6,7 @@
 
 ### Breaking:
 
+- feat(context): context.Context support has been added to all exported functions. ([#7](https://github.com/fastly/go-fastly/pull/7))
 - refactor(ngwaf/v1/workspaces): move all workspace specific endpoints into the appropriate folder ([#708](https://github.com/fastly/go-fastly/pull/708))
 - fix(ngwaf/v1/workpsaces/requests): add missing field to metadata struct and update documentation around limits ([#711](https://github.com/fastly/go-fastly/pull/711))
 - fix(ngwaf/v1/workspaces/redactions): remove mode and page params and remove requirement for both field and type for update ([#712](https://github.com/fastly/go-fastly/pull/712))

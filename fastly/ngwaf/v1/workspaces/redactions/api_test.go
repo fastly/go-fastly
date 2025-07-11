@@ -1,6 +1,7 @@
 package redactions
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -17,7 +18,7 @@ func TestClient_Redactions(t *testing.T) {
 	var redaction *Redaction
 
 	fastly.Record(t, "create_redaction", func(c *fastly.Client) {
-		redaction, err = Create(c, &CreateInput{
+		redaction, err = Create(context.TODO(), c, &CreateInput{
 			Field:       fastly.ToPointer(testField),
 			Type:        fastly.ToPointer(testType),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -37,7 +38,7 @@ func TestClient_Redactions(t *testing.T) {
 	// Ensure we delete the test redaction at the end.
 	defer func() {
 		fastly.Record(t, "delete_redaction", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
+			err = Delete(context.TODO(), c, &DeleteInput{
 				RedactionID: fastly.ToPointer(redactionID),
 				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			})
@@ -50,7 +51,7 @@ func TestClient_Redactions(t *testing.T) {
 	// Get the test redaction.
 	var getTestRedaction *Redaction
 	fastly.Record(t, "get_redaction", func(c *fastly.Client) {
-		getTestRedaction, err = Get(c, &GetInput{
+		getTestRedaction, err = Get(context.TODO(), c, &GetInput{
 			RedactionID: fastly.ToPointer(redactionID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
@@ -71,7 +72,7 @@ func TestClient_Redactions(t *testing.T) {
 
 	var updatedRedaction *Redaction
 	fastly.Record(t, "update_redaction", func(c *fastly.Client) {
-		updatedRedaction, err = Update(c, &UpdateInput{
+		updatedRedaction, err = Update(context.TODO(), c, &UpdateInput{
 			Field:       fastly.ToPointer(updatedRedactionField),
 			RedactionID: fastly.ToPointer(redactionID),
 			Type:        fastly.ToPointer(updatedRedactionType),
@@ -91,7 +92,7 @@ func TestClient_Redactions(t *testing.T) {
 	// List the redactions for the test workspace and check the updated one is the only entry
 	var listedRedactions *Redactions
 	fastly.Record(t, "list_redaction", func(c *fastly.Client) {
-		listedRedactions, err = List(c, &ListInput{
+		listedRedactions, err = List(context.TODO(), c, &ListInput{
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
 	})
@@ -111,13 +112,13 @@ func TestClient_Redactions(t *testing.T) {
 
 func TestClient_GetRedaction_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		RedactionID: nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -128,20 +129,20 @@ func TestClient_GetRedaction_validation(t *testing.T) {
 
 func TestClient_CreateRedaction_validation(t *testing.T) {
 	var err error
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Field:       nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingField) {
 		t.Errorf("expected ErrMissingField: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Field:       fastly.ToPointer("somefield"),
 		Type:        nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -153,13 +154,13 @@ func TestClient_CreateRedaction_validation(t *testing.T) {
 
 func TestClient_UpdateRedaction_validation(t *testing.T) {
 	var err error
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		RedactionID: nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -170,13 +171,13 @@ func TestClient_UpdateRedaction_validation(t *testing.T) {
 
 func TestClient_DeleteRedaction_validation(t *testing.T) {
 	var err error
-	err = Delete(fastly.TestClient, &DeleteInput{
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	err = Delete(fastly.TestClient, &DeleteInput{
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		RedactionID: nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})

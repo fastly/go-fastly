@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Gzips(t *testing.T) {
 	// Create
 	var gzip *Gzip
 	Record(t, "gzips/create", func(c *Client) {
-		gzip, err = c.CreateGzip(&CreateGzipInput{
+		gzip, err = c.CreateGzip(context.TODO(), &CreateGzipInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-gzip"),
@@ -33,7 +34,7 @@ func TestClient_Gzips(t *testing.T) {
 	// NOTE: API should return defaults.
 	var gzipomit *Gzip
 	Record(t, "gzips/create_omissions", func(c *Client) {
-		gzipomit, err = c.CreateGzip(&CreateGzipInput{
+		gzipomit, err = c.CreateGzip(context.TODO(), &CreateGzipInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-gzip-omit"),
@@ -52,19 +53,19 @@ func TestClient_Gzips(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "gzips/cleanup", func(c *Client) {
-			_ = c.DeleteGzip(&DeleteGzipInput{
+			_ = c.DeleteGzip(context.TODO(), &DeleteGzipInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gzip",
 			})
 
-			_ = c.DeleteGzip(&DeleteGzipInput{
+			_ = c.DeleteGzip(context.TODO(), &DeleteGzipInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gzip-omit",
 			})
 
-			_ = c.DeleteGzip(&DeleteGzipInput{
+			_ = c.DeleteGzip(context.TODO(), &DeleteGzipInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-gzip",
@@ -85,7 +86,7 @@ func TestClient_Gzips(t *testing.T) {
 	// List
 	var gzips []*Gzip
 	Record(t, "gzips/list", func(c *Client) {
-		gzips, err = c.ListGzips(&ListGzipsInput{
+		gzips, err = c.ListGzips(context.TODO(), &ListGzipsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -100,7 +101,7 @@ func TestClient_Gzips(t *testing.T) {
 	// Get
 	var ngzip *Gzip
 	Record(t, "gzips/get", func(c *Client) {
-		ngzip, err = c.GetGzip(&GetGzipInput{
+		ngzip, err = c.GetGzip(context.TODO(), &GetGzipInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-gzip",
@@ -122,7 +123,7 @@ func TestClient_Gzips(t *testing.T) {
 	// Update
 	var ugzip *Gzip
 	Record(t, "gzips/update", func(c *Client) {
-		ugzip, err = c.UpdateGzip(&UpdateGzipInput{
+		ugzip, err = c.UpdateGzip(context.TODO(), &UpdateGzipInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-gzip",
@@ -138,7 +139,7 @@ func TestClient_Gzips(t *testing.T) {
 
 	// Delete
 	Record(t, "gzips/delete", func(c *Client) {
-		err = c.DeleteGzip(&DeleteGzipInput{
+		err = c.DeleteGzip(context.TODO(), &DeleteGzipInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-gzip",
@@ -152,14 +153,14 @@ func TestClient_Gzips(t *testing.T) {
 func TestClient_ListGzips_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListGzips(&ListGzipsInput{
+	_, err = TestClient.ListGzips(context.TODO(), &ListGzipsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListGzips(&ListGzipsInput{
+	_, err = TestClient.ListGzips(context.TODO(), &ListGzipsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -171,14 +172,14 @@ func TestClient_ListGzips_validation(t *testing.T) {
 func TestClient_CreateGzip_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateGzip(&CreateGzipInput{
+	_, err = TestClient.CreateGzip(context.TODO(), &CreateGzipInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateGzip(&CreateGzipInput{
+	_, err = TestClient.CreateGzip(context.TODO(), &CreateGzipInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -190,7 +191,7 @@ func TestClient_CreateGzip_validation(t *testing.T) {
 func TestClient_GetGzip_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetGzip(&GetGzipInput{
+	_, err = TestClient.GetGzip(context.TODO(), &GetGzipInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -198,7 +199,7 @@ func TestClient_GetGzip_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetGzip(&GetGzipInput{
+	_, err = TestClient.GetGzip(context.TODO(), &GetGzipInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -206,7 +207,7 @@ func TestClient_GetGzip_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetGzip(&GetGzipInput{
+	_, err = TestClient.GetGzip(context.TODO(), &GetGzipInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -218,7 +219,7 @@ func TestClient_GetGzip_validation(t *testing.T) {
 func TestClient_UpdateGzip_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateGzip(&UpdateGzipInput{
+	_, err = TestClient.UpdateGzip(context.TODO(), &UpdateGzipInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -226,7 +227,7 @@ func TestClient_UpdateGzip_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateGzip(&UpdateGzipInput{
+	_, err = TestClient.UpdateGzip(context.TODO(), &UpdateGzipInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -234,7 +235,7 @@ func TestClient_UpdateGzip_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateGzip(&UpdateGzipInput{
+	_, err = TestClient.UpdateGzip(context.TODO(), &UpdateGzipInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -246,7 +247,7 @@ func TestClient_UpdateGzip_validation(t *testing.T) {
 func TestClient_DeleteGzip_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteGzip(&DeleteGzipInput{
+	err = TestClient.DeleteGzip(context.TODO(), &DeleteGzipInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -254,7 +255,7 @@ func TestClient_DeleteGzip_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteGzip(&DeleteGzipInput{
+	err = TestClient.DeleteGzip(context.TODO(), &DeleteGzipInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -262,7 +263,7 @@ func TestClient_DeleteGzip_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteGzip(&DeleteGzipInput{
+	err = TestClient.DeleteGzip(context.TODO(), &DeleteGzipInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

@@ -12,8 +12,6 @@ import (
 // the operation.
 type UpdateInput struct {
 	// Action
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Enabled is the toggle status indicator of the VirtualPatch (optional).
 	Enabled *bool `json:"enabled"`
 	// Mode is action to take when a signal for virtual patch is detected (optional).
@@ -25,7 +23,7 @@ type UpdateInput struct {
 }
 
 // Update updates the specified virtual patch.
-func Update(c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -35,7 +33,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*VirtualPatch, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "virtual-patches", *i.VirtualPatchID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -29,8 +29,6 @@ type GrafanaCloudLogs struct {
 
 // ListGrafanaCloudLogsInput is used as input to the ListGrafanaCloudLogs function.
 type ListGrafanaCloudLogsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -38,7 +36,7 @@ type ListGrafanaCloudLogsInput struct {
 }
 
 // ListGrafanaCloudLogs retrieves all resources.
-func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaCloudLogs, error) {
+func (c *Client) ListGrafanaCloudLogs(ctx context.Context, i *ListGrafanaCloudLogsInput) ([]*GrafanaCloudLogs, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -47,7 +45,7 @@ func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaC
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -62,8 +60,6 @@ func (c *Client) ListGrafanaCloudLogs(i *ListGrafanaCloudLogsInput) ([]*GrafanaC
 
 // CreateGrafanaCloudLogsInput is used as input to the CreateGrafanaCloudLogs function.
 type CreateGrafanaCloudLogsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that GrafanaCloudLogs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -93,7 +89,7 @@ type CreateGrafanaCloudLogsInput struct {
 }
 
 // CreateGrafanaCloudLogs creates a new resource.
-func (c *Client) CreateGrafanaCloudLogs(i *CreateGrafanaCloudLogsInput) (*GrafanaCloudLogs, error) {
+func (c *Client) CreateGrafanaCloudLogs(ctx context.Context, i *CreateGrafanaCloudLogsInput) (*GrafanaCloudLogs, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -102,7 +98,7 @@ func (c *Client) CreateGrafanaCloudLogs(i *CreateGrafanaCloudLogsInput) (*Grafan
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -117,8 +113,6 @@ func (c *Client) CreateGrafanaCloudLogs(i *CreateGrafanaCloudLogsInput) (*Grafan
 
 // GetGrafanaCloudLogsInput is used as input to the GetGrafanaCloudLogs function.
 type GetGrafanaCloudLogsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the GrafanaCloudLogs to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -128,7 +122,7 @@ type GetGrafanaCloudLogsInput struct {
 }
 
 // GetGrafanaCloudLogs retrieves the specified resource.
-func (c *Client) GetGrafanaCloudLogs(i *GetGrafanaCloudLogsInput) (*GrafanaCloudLogs, error) {
+func (c *Client) GetGrafanaCloudLogs(ctx context.Context, i *GetGrafanaCloudLogsInput) (*GrafanaCloudLogs, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -140,7 +134,7 @@ func (c *Client) GetGrafanaCloudLogs(i *GetGrafanaCloudLogsInput) (*GrafanaCloud
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -155,8 +149,6 @@ func (c *Client) GetGrafanaCloudLogs(i *GetGrafanaCloudLogsInput) (*GrafanaCloud
 
 // UpdateGrafanaCloudLogsInput is used as input to the UpdateGrafanaCloudLogs function.
 type UpdateGrafanaCloudLogsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that GrafanaCloudLogs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -188,7 +180,7 @@ type UpdateGrafanaCloudLogsInput struct {
 }
 
 // UpdateGrafanaCloudLogs updates the specified resource.
-func (c *Client) UpdateGrafanaCloudLogs(i *UpdateGrafanaCloudLogsInput) (*GrafanaCloudLogs, error) {
+func (c *Client) UpdateGrafanaCloudLogs(ctx context.Context, i *UpdateGrafanaCloudLogsInput) (*GrafanaCloudLogs, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -200,7 +192,7 @@ func (c *Client) UpdateGrafanaCloudLogs(i *UpdateGrafanaCloudLogsInput) (*Grafan
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -215,8 +207,6 @@ func (c *Client) UpdateGrafanaCloudLogs(i *UpdateGrafanaCloudLogsInput) (*Grafan
 
 // DeleteGrafanaCloudLogsInput is the input parameter to DeleteGrafanaCloudLogs.
 type DeleteGrafanaCloudLogsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the GrafanaCloudLogs to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -226,7 +216,7 @@ type DeleteGrafanaCloudLogsInput struct {
 }
 
 // DeleteGrafanaCloudLogs deletes the specified resource.
-func (c *Client) DeleteGrafanaCloudLogs(i *DeleteGrafanaCloudLogsInput) error {
+func (c *Client) DeleteGrafanaCloudLogs(ctx context.Context, i *DeleteGrafanaCloudLogsInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -238,7 +228,7 @@ func (c *Client) DeleteGrafanaCloudLogs(i *DeleteGrafanaCloudLogsInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "grafanacloudlogs", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

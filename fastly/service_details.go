@@ -65,7 +65,7 @@ type GetServicesInput struct {
 }
 
 // GetServices returns a ListPaginator for paginating through the resources.
-func (c *Client) GetServices(i *GetServicesInput) *ListPaginator[Service] {
+func (c *Client) GetServices(ctx context.Context, i *GetServicesInput) *ListPaginator[Service] {
 	input := ListOpts{}
 	if i.Direction != nil {
 		input.Direction = *i.Direction
@@ -79,7 +79,7 @@ func (c *Client) GetServices(i *GetServicesInput) *ListPaginator[Service] {
 	if i.PerPage != nil {
 		input.PerPage = *i.PerPage
 	}
-	return NewPaginator[Service](c, input, "/service")
+	return NewPaginator[Service](ctx, c, input, "/service")
 }
 
 // ListServicesInput is used as input to the ListServices function.
@@ -91,8 +91,8 @@ type ListServicesInput struct {
 }
 
 // ListServices retrieves all resources. Not suitable for large collections.
-func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
-	p := c.GetServices(&GetServicesInput{
+func (c *Client) ListServices(ctx context.Context, i *ListServicesInput) ([]*Service, error) {
+	p := c.GetServices(ctx, &GetServicesInput{
 		Direction: i.Direction,
 		Sort:      i.Sort,
 	})
@@ -111,8 +111,6 @@ func (c *Client) ListServices(i *ListServicesInput) ([]*Service, error) {
 type CreateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// Type is the type of this service (vcl, wasm).
@@ -120,8 +118,8 @@ type CreateServiceInput struct {
 }
 
 // CreateService creates a new resource.
-func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
-	resp, err := c.PostForm("/service", i, CreateRequestOptions(i.Context))
+func (c *Client) CreateService(ctx context.Context, i *CreateServiceInput) (*Service, error) {
+	resp, err := c.PostForm(ctx, "/service", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -136,8 +134,6 @@ func (c *Client) CreateService(i *CreateServiceInput) (*Service, error) {
 
 // GetServiceInput is used as input to the GetService function.
 type GetServiceInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
@@ -145,14 +141,14 @@ type GetServiceInput struct {
 // GetService retrieves the specified resource.
 //
 // If no service exists for the given id, the API returns a 400 response not 404.
-func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
+func (c *Client) GetService(ctx context.Context, i *GetServiceInput) (*Service, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -181,14 +177,14 @@ func (c *Client) GetService(i *GetServiceInput) (*Service, error) {
 // GetServiceDetails retrieves the specified resource.
 //
 // If no service exists for the given id, the API returns a 400 response not 404.
-func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
+func (c *Client) GetServiceDetails(ctx context.Context, i *GetServiceInput) (*ServiceDetail, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "details")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -206,8 +202,6 @@ func (c *Client) GetServiceDetails(i *GetServiceInput) (*ServiceDetail, error) {
 type UpdateServiceInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the service.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -215,14 +209,14 @@ type UpdateServiceInput struct {
 }
 
 // UpdateService updates the specified resource.
-func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
+func (c *Client) UpdateService(ctx context.Context, i *UpdateServiceInput) (*Service, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -237,21 +231,19 @@ func (c *Client) UpdateService(i *UpdateServiceInput) (*Service, error) {
 
 // DeleteServiceInput is used as input to the DeleteService function.
 type DeleteServiceInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is an alphanumeric string identifying the service (required).
 	ServiceID string
 }
 
 // DeleteService deletes the specified resource.
-func (c *Client) DeleteService(i *DeleteServiceInput) error {
+func (c *Client) DeleteService(ctx context.Context, i *DeleteServiceInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
 
 	path := ToSafeURL("service", i.ServiceID)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -269,8 +261,6 @@ func (c *Client) DeleteService(i *DeleteServiceInput) error {
 
 // SearchServiceInput is used as input to the SearchService function.
 type SearchServiceInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the service (required).
 	Name string
 }
@@ -278,15 +268,15 @@ type SearchServiceInput struct {
 // SearchService retrieves the specified resource.
 //
 // If no service exists by that name, the API returns a 400 response not a 404.
-func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
+func (c *Client) SearchService(ctx context.Context, i *SearchServiceInput) (*Service, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params["name"] = i.Name
 
-	resp, err := c.Get("/service/search", requestOptions)
+	resp, err := c.Get(ctx, "/service/search", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -303,21 +293,19 @@ func (c *Client) SearchService(i *SearchServiceInput) (*Service, error) {
 // ListServiceDomainInput is the input parameter to the ListServiceDomains
 // function.
 type ListServiceDomainInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
 
 // ListServiceDomains retrieves all resources.
-func (c *Client) ListServiceDomains(i *ListServiceDomainInput) (ServiceDomainsList, error) {
+func (c *Client) ListServiceDomains(ctx context.Context, i *ListServiceDomainInput) (ServiceDomainsList, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "domain")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

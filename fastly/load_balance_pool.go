@@ -53,8 +53,6 @@ type Pool struct {
 
 // ListPoolsInput is used as input to the ListPools function.
 type ListPoolsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -62,7 +60,7 @@ type ListPoolsInput struct {
 }
 
 // ListPools retrieves all resources.
-func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
+func (c *Client) ListPools(ctx context.Context, i *ListPoolsInput) ([]*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -72,7 +70,7 @@ func (c *Client) ListPools(i *ListPoolsInput) ([]*Pool, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "pool")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -91,8 +89,6 @@ type CreatePoolInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is how long to wait for a timeout in milliseconds.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// FirstByteTimeout is how long to wait for the first byte in milliseconds.
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// Healthcheck is the name of the healthcheck to use with this pool.
@@ -138,7 +134,7 @@ type CreatePoolInput struct {
 }
 
 // CreatePool creates a new resource.
-func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
+func (c *Client) CreatePool(ctx context.Context, i *CreatePoolInput) (*Pool, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -147,7 +143,7 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "pool")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -162,8 +158,6 @@ func (c *Client) CreatePool(i *CreatePoolInput) (*Pool, error) {
 
 // GetPoolInput is used as input to the GetPool function.
 type GetPoolInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the pool of interest (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -173,7 +167,7 @@ type GetPoolInput struct {
 }
 
 // GetPool retrieves the specified resource.
-func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
+func (c *Client) GetPool(ctx context.Context, i *GetPoolInput) (*Pool, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -186,7 +180,7 @@ func (c *Client) GetPool(i *GetPoolInput) (*Pool, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "pool", i.Name)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -205,8 +199,6 @@ type UpdatePoolInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is how long to wait for a timeout in milliseconds.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// FirstByteTimeout is how long to wait for the first byte in milliseconds.
 	FirstByteTimeout *int `url:"first_byte_timeout,omitempty"`
 	// Healthcheck is the name of the healthcheck to use with this pool.
@@ -254,7 +246,7 @@ type UpdatePoolInput struct {
 }
 
 // UpdatePool updates the specified resource.
-func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
+func (c *Client) UpdatePool(ctx context.Context, i *UpdatePoolInput) (*Pool, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -267,7 +259,7 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "pool", i.Name)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -282,8 +274,6 @@ func (c *Client) UpdatePool(i *UpdatePoolInput) (*Pool, error) {
 
 // DeletePoolInput is used as input to the DeletePool function.
 type DeletePoolInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the pool to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -293,7 +283,7 @@ type DeletePoolInput struct {
 }
 
 // DeletePool deletes the specified resource.
-func (c *Client) DeletePool(i *DeletePoolInput) error {
+func (c *Client) DeletePool(ctx context.Context, i *DeletePoolInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -306,7 +296,7 @@ func (c *Client) DeletePool(i *DeletePoolInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "pool", i.Name)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

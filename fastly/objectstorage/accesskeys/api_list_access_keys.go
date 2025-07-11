@@ -1,6 +1,7 @@
 package accesskeys
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -8,8 +9,8 @@ import (
 )
 
 // ListAccessKeys retrieves all access keys within object storage.
-func ListAccessKeys(c *fastly.Client) (*AccessKeys, error) {
-	resp, err := c.Get("/resources/object-storage/access-keys", fastly.CreateRequestOptions(nil))
+func ListAccessKeys(ctx context.Context, c *fastly.Client) (*AccessKeys, error) {
+	resp, err := c.Get(ctx, "/resources/object-storage/access-keys", fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

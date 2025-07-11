@@ -23,8 +23,6 @@ type CreateInput struct {
 	AttackSignalThresholds *AttackSignalThresholdsCreateInput `json:"attack_signal_thresholds,omitempty"`
 	// ClientIPHeaders lists the request headers containing the client IP address.
 	ClientIPHeaders []string `json:"client_ip_headers,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// DefaultBlockingResponseCode is the default response code.
 	DefaultBlockingResponseCode *int `json:"default_blocking_response_code,omitempty"`
 	// Description is the description of a workspace.
@@ -38,7 +36,7 @@ type CreateInput struct {
 }
 
 // Create creates a new workspace.
-func Create(c *fastly.Client, i *CreateInput) (*Workspace, error) {
+func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Workspace, error) {
 	if i.Name == nil {
 		return nil, fastly.ErrMissingName
 	}
@@ -47,7 +45,7 @@ func Create(c *fastly.Client, i *CreateInput) (*Workspace, error) {
 		return nil, fastly.ErrMissingMode
 	}
 
-	resp, err := c.PostJSON("/ngwaf/v1/workspaces", i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, "/ngwaf/v1/workspaces", i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

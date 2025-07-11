@@ -26,8 +26,6 @@ type NewRelicOTLP struct {
 
 // ListNewRelicOTLPInput is used as input to the ListNewRelicOTLP function.
 type ListNewRelicOTLPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -35,7 +33,7 @@ type ListNewRelicOTLPInput struct {
 }
 
 // ListNewRelicOTLP returns the list of newrelic for the configuration version.
-func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, error) {
+func (c *Client) ListNewRelicOTLP(ctx context.Context, i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -45,7 +43,7 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -60,8 +58,6 @@ func (c *Client) ListNewRelicOTLP(i *ListNewRelicOTLPInput) ([]*NewRelicOTLP, er
 
 // CreateNewRelicOTLPInput is used as input to the CreateNewRelicOTLP function.
 type CreateNewRelicOTLPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -88,7 +84,7 @@ type CreateNewRelicOTLPInput struct {
 }
 
 // CreateNewRelicOTLP creates a new Fastly newrelic.
-func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, error) {
+func (c *Client) CreateNewRelicOTLP(ctx context.Context, i *CreateNewRelicOTLPInput) (*NewRelicOTLP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -97,7 +93,7 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -112,8 +108,6 @@ func (c *Client) CreateNewRelicOTLP(i *CreateNewRelicOTLPInput) (*NewRelicOTLP, 
 
 // GetNewRelicOTLPInput is used as input to the GetNewRelicOTLP function.
 type GetNewRelicOTLPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the newrelic to fetch.
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -123,7 +117,7 @@ type GetNewRelicOTLPInput struct {
 }
 
 // GetNewRelicOTLP gets the newrelic configuration with the given parameters.
-func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error) {
+func (c *Client) GetNewRelicOTLP(ctx context.Context, i *GetNewRelicOTLPInput) (*NewRelicOTLP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -135,7 +129,7 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -150,8 +144,6 @@ func (c *Client) GetNewRelicOTLP(i *GetNewRelicOTLPInput) (*NewRelicOTLP, error)
 
 // UpdateNewRelicOTLPInput is used as input to the UpdateNewRelicOTLP function.
 type UpdateNewRelicOTLPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that New Relic Logs can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -180,7 +172,7 @@ type UpdateNewRelicOTLPInput struct {
 }
 
 // UpdateNewRelicOTLP updates a specific newrelic.
-func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, error) {
+func (c *Client) UpdateNewRelicOTLP(ctx context.Context, i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -192,7 +184,7 @@ func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -207,8 +199,6 @@ func (c *Client) UpdateNewRelicOTLP(i *UpdateNewRelicOTLPInput) (*NewRelicOTLP, 
 
 // DeleteNewRelicOTLPInput is the input parameter to DeleteNewRelicOTLP.
 type DeleteNewRelicOTLPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the newrelicotlp to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -218,7 +208,7 @@ type DeleteNewRelicOTLPInput struct {
 }
 
 // DeleteNewRelicOTLP deletes the given newrelic version.
-func (c *Client) DeleteNewRelicOTLP(i *DeleteNewRelicOTLPInput) error {
+func (c *Client) DeleteNewRelicOTLP(ctx context.Context, i *DeleteNewRelicOTLPInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
@@ -230,7 +220,7 @@ func (c *Client) DeleteNewRelicOTLP(i *DeleteNewRelicOTLPInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "newrelicotlp", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

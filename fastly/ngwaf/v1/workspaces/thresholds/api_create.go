@@ -11,8 +11,6 @@ import (
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
 type CreateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Action to take when threshold is exceeded. Must be one of `block` or `log`. Required.
 	Action *string `json:"action"`
 	// DontNotify indicates whether to silence notifications when action is taken. Defaults to false.
@@ -34,7 +32,7 @@ type CreateInput struct {
 }
 
 // Create creates a new threshold.
-func Create(c *fastly.Client, i *CreateInput) (*Threshold, error) {
+func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Threshold, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -56,7 +54,7 @@ func Create(c *fastly.Client, i *CreateInput) (*Threshold, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "thresholds")
 
-	resp, err := c.PostJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

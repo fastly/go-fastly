@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"context"
+	"testing"
+)
 
 func TestDatacenters(t *testing.T) {
 	t.Parallel()
@@ -8,7 +11,7 @@ func TestDatacenters(t *testing.T) {
 	var err error
 	var datacenters []Datacenter
 	Record(t, "datacenters/list", func(c *Client) {
-		datacenters, err = c.AllDatacenters()
+		datacenters, err = c.AllDatacenters(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)

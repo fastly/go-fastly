@@ -42,8 +42,6 @@ type Director struct {
 
 // ListDirectorsInput is used as input to the ListDirectors function.
 type ListDirectorsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -51,7 +49,7 @@ type ListDirectorsInput struct {
 }
 
 // ListDirectors retrieves all resources.
-func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
+func (c *Client) ListDirectors(ctx context.Context, i *ListDirectorsInput) ([]*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -60,7 +58,7 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -77,8 +75,6 @@ func (c *Client) ListDirectors(i *ListDirectorsInput) ([]*Director, error) {
 type CreateDirectorInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name for the Director.
 	Name *string `url:"name,omitempty"`
 	// Quorum is the percentage of capacity that needs to be up for a director to be considered up. 0 to 100.
@@ -96,7 +92,7 @@ type CreateDirectorInput struct {
 }
 
 // CreateDirector creates a new resource.
-func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
+func (c *Client) CreateDirector(ctx context.Context, i *CreateDirectorInput) (*Director, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -105,7 +101,7 @@ func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -120,8 +116,6 @@ func (c *Client) CreateDirector(i *CreateDirectorInput) (*Director, error) {
 
 // GetDirectorInput is used as input to the GetDirector function.
 type GetDirectorInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the director to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -131,7 +125,7 @@ type GetDirectorInput struct {
 }
 
 // GetDirector retrieves the specified resource.
-func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
+func (c *Client) GetDirector(ctx context.Context, i *GetDirectorInput) (*Director, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -143,7 +137,7 @@ func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -160,8 +154,6 @@ func (c *Client) GetDirector(i *GetDirectorInput) (*Director, error) {
 type UpdateDirectorInput struct {
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the director to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -181,7 +173,7 @@ type UpdateDirectorInput struct {
 }
 
 // UpdateDirector updates the specified resource.
-func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
+func (c *Client) UpdateDirector(ctx context.Context, i *UpdateDirectorInput) (*Director, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -193,7 +185,7 @@ func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -208,8 +200,6 @@ func (c *Client) UpdateDirector(i *UpdateDirectorInput) (*Director, error) {
 
 // DeleteDirectorInput is the input parameter to DeleteDirector.
 type DeleteDirectorInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the director to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -219,7 +209,7 @@ type DeleteDirectorInput struct {
 }
 
 // DeleteDirector deletes the specified resource.
-func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
+func (c *Client) DeleteDirector(ctx context.Context, i *DeleteDirectorInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -231,7 +221,7 @@ func (c *Client) DeleteDirector(i *DeleteDirectorInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "director", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

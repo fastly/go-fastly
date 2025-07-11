@@ -34,8 +34,6 @@ type DigitalOcean struct {
 
 // ListDigitalOceansInput is used as input to the ListDigitalOceans function.
 type ListDigitalOceansInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -43,7 +41,7 @@ type ListDigitalOceansInput struct {
 }
 
 // ListDigitalOceans retrieves all resources.
-func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, error) {
+func (c *Client) ListDigitalOceans(ctx context.Context, i *ListDigitalOceansInput) ([]*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -52,7 +50,7 @@ func (c *Client) ListDigitalOceans(i *ListDigitalOceansInput) ([]*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +71,6 @@ type CreateDigitalOceanInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
@@ -110,7 +106,7 @@ type CreateDigitalOceanInput struct {
 }
 
 // CreateDigitalOcean creates a new resource.
-func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, error) {
+func (c *Client) CreateDigitalOcean(ctx context.Context, i *CreateDigitalOceanInput) (*DigitalOcean, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -119,7 +115,7 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -134,8 +130,6 @@ func (c *Client) CreateDigitalOcean(i *CreateDigitalOceanInput) (*DigitalOcean, 
 
 // GetDigitalOceanInput is used as input to the GetDigitalOcean function.
 type GetDigitalOceanInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the DigitalOcean to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -145,7 +139,7 @@ type GetDigitalOceanInput struct {
 }
 
 // GetDigitalOcean retrieves the specified resource.
-func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error) {
+func (c *Client) GetDigitalOcean(ctx context.Context, i *GetDigitalOceanInput) (*DigitalOcean, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -157,7 +151,7 @@ func (c *Client) GetDigitalOcean(i *GetDigitalOceanInput) (*DigitalOcean, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -178,8 +172,6 @@ type UpdateDigitalOceanInput struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Domain is the domain of the DigitalOcean Spaces endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// Format is aFastly log format string.
@@ -217,7 +209,7 @@ type UpdateDigitalOceanInput struct {
 }
 
 // UpdateDigitalOcean updates the specified resource.
-func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, error) {
+func (c *Client) UpdateDigitalOcean(ctx context.Context, i *UpdateDigitalOceanInput) (*DigitalOcean, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -229,7 +221,7 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -244,8 +236,6 @@ func (c *Client) UpdateDigitalOcean(i *UpdateDigitalOceanInput) (*DigitalOcean, 
 
 // DeleteDigitalOceanInput is the input parameter to DeleteDigitalOcean.
 type DeleteDigitalOceanInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the DigitalOcean to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -255,7 +245,7 @@ type DeleteDigitalOceanInput struct {
 }
 
 // DeleteDigitalOcean deletes the specified resource.
-func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
+func (c *Client) DeleteDigitalOcean(ctx context.Context, i *DeleteDigitalOceanInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -267,7 +257,7 @@ func (c *Client) DeleteDigitalOcean(i *DeleteDigitalOceanInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "digitalocean", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
