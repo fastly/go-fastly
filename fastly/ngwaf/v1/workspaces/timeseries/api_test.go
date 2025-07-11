@@ -1,6 +1,7 @@
 package timeseries
 
 import (
+	"context"
 	"errors"
 	"testing"
 	"time"
@@ -29,7 +30,7 @@ func TestTime_Series(t *testing.T) {
 
 	// Get request timeseries metrics for given workspace
 	fastly.Record(t, "get_timeseries", func(c *fastly.Client) {
-		ts, err = Get(c, &GetInput{
+		ts, err = Get(context.TODO(), c, &GetInput{
 			End:         &tsEnd,
 			Granularity: &tsGranularity,
 			Start:       &tsStart,
@@ -47,7 +48,7 @@ func TestTime_Series(t *testing.T) {
 
 func TestClient_GetVirtualPatch_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		Start:       nil,
 		Metrics:     fastly.ToPointer(tsMetrics),
 		WorkspaceID: &testWorkspaceID,
@@ -56,7 +57,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingStart: got %s", err)
 	}
 
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		Start:       &tsStart,
 		Metrics:     nil,
 		WorkspaceID: &testWorkspaceID,
@@ -64,7 +65,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 	if !errors.Is(err, fastly.ErrMissingMetrics) {
 		t.Errorf("expected ErrMissingMetrics: got %s", err)
 
-		_, err = Get(fastly.TestClient, &GetInput{
+		_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 			Start:       &tsStart,
 			Metrics:     fastly.ToPointer(tsMetrics),
 			WorkspaceID: nil,

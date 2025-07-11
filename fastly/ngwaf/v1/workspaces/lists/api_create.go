@@ -11,8 +11,6 @@ import (
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
 type CreateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Description is the description of the list.
 	Description *string `json:"description,omitempty"`
 	// Entries are the entries of the list (required).
@@ -26,7 +24,7 @@ type CreateInput struct {
 }
 
 // Create creates a new list.
-func Create(c *fastly.Client, i *CreateInput) (*List, error) {
+func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*List, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -42,7 +40,7 @@ func Create(c *fastly.Client, i *CreateInput) (*List, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "lists")
 
-	resp, err := c.PostJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

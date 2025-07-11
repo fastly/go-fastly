@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -21,7 +22,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var err error
 	var createdDictionaryItem *DictionaryItem
 	Record(t, fixtureBase+"create", func(c *Client) {
-		createdDictionaryItem, err = c.CreateDictionaryItem(&CreateDictionaryItemInput{
+		createdDictionaryItem, err = c.CreateDictionaryItem(context.TODO(), &CreateDictionaryItemInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
 			ItemKey:      ToPointer("test-dictionary-item"),
@@ -35,7 +36,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, fixtureBase+"cleanup", func(c *Client) {
-			_ = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+			_ = c.DeleteDictionaryItem(context.TODO(), &DeleteDictionaryItemInput{
 				ServiceID:    *testService.ServiceID,
 				DictionaryID: *testDictionary.DictionaryID,
 				ItemKey:      "test-dictionary-item",
@@ -53,7 +54,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	// List
 	var dictionaryItems []*DictionaryItem
 	Record(t, fixtureBase+"list", func(c *Client) {
-		dictionaryItems, err = c.ListDictionaryItems(&ListDictionaryItemsInput{
+		dictionaryItems, err = c.ListDictionaryItems(context.TODO(), &ListDictionaryItemsInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
 		})
@@ -69,7 +70,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	var dictionaryItems2 []*DictionaryItem
 	var paginator *ListPaginator[DictionaryItem]
 	Record(t, fixtureBase+"list2", func(c *Client) {
-		paginator = c.GetDictionaryItems(&GetDictionaryItemsInput{
+		paginator = c.GetDictionaryItems(context.TODO(), &GetDictionaryItemsInput{
 			DictionaryID: *testDictionary.DictionaryID,
 			Direction:    ToPointer("ascend"),
 			PerPage:      ToPointer(50),
@@ -99,7 +100,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	// Get
 	var retrievedDictionaryItem *DictionaryItem
 	Record(t, fixtureBase+"get", func(c *Client) {
-		retrievedDictionaryItem, err = c.GetDictionaryItem(&GetDictionaryItemInput{
+		retrievedDictionaryItem, err = c.GetDictionaryItem(context.TODO(), &GetDictionaryItemInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
 			ItemKey:      "test-dictionary-item",
@@ -118,7 +119,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 	// Update
 	var updatedDictionaryItem *DictionaryItem
 	Record(t, fixtureBase+"update", func(c *Client) {
-		updatedDictionaryItem, err = c.UpdateDictionaryItem(&UpdateDictionaryItemInput{
+		updatedDictionaryItem, err = c.UpdateDictionaryItem(context.TODO(), &UpdateDictionaryItemInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
 			ItemKey:      "test-dictionary-item",
@@ -134,7 +135,7 @@ func TestClient_DictionaryItems(t *testing.T) {
 
 	// Delete
 	Record(t, fixtureBase+"delete", func(c *Client) {
-		err = c.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+		err = c.DeleteDictionaryItem(context.TODO(), &DeleteDictionaryItemInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
 			ItemKey:      "test-dictionary-item",
@@ -148,12 +149,12 @@ func TestClient_DictionaryItems(t *testing.T) {
 func TestClient_ListDictionaryItems_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListDictionaryItems(&ListDictionaryItemsInput{})
+	_, err = TestClient.ListDictionaryItems(context.TODO(), &ListDictionaryItemsInput{})
 	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListDictionaryItems(&ListDictionaryItemsInput{
+	_, err = TestClient.ListDictionaryItems(context.TODO(), &ListDictionaryItemsInput{
 		DictionaryID: "123",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
@@ -164,12 +165,12 @@ func TestClient_ListDictionaryItems_validation(t *testing.T) {
 func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateDictionaryItem(&CreateDictionaryItemInput{})
+	_, err = TestClient.CreateDictionaryItem(context.TODO(), &CreateDictionaryItemInput{})
 	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateDictionaryItem(&CreateDictionaryItemInput{
+	_, err = TestClient.CreateDictionaryItem(context.TODO(), &CreateDictionaryItemInput{
 		DictionaryID: "123",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
@@ -180,19 +181,19 @@ func TestClient_CreateDictionaryItem_validation(t *testing.T) {
 func TestClient_GetDictionaryItem_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetDictionaryItem(&GetDictionaryItemInput{})
+	_, err = TestClient.GetDictionaryItem(context.TODO(), &GetDictionaryItemInput{})
 	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDictionaryItem(&GetDictionaryItemInput{
+	_, err = TestClient.GetDictionaryItem(context.TODO(), &GetDictionaryItemInput{
 		DictionaryID: "test",
 	})
 	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDictionaryItem(&GetDictionaryItemInput{
+	_, err = TestClient.GetDictionaryItem(context.TODO(), &GetDictionaryItemInput{
 		DictionaryID: "test",
 		ItemKey:      "123",
 	})
@@ -204,19 +205,19 @@ func TestClient_GetDictionaryItem_validation(t *testing.T) {
 func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{})
+	_, err = TestClient.UpdateDictionaryItem(context.TODO(), &UpdateDictionaryItemInput{})
 	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{
+	_, err = TestClient.UpdateDictionaryItem(context.TODO(), &UpdateDictionaryItemInput{
 		DictionaryID: "test",
 	})
 	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDictionaryItem(&UpdateDictionaryItemInput{
+	_, err = TestClient.UpdateDictionaryItem(context.TODO(), &UpdateDictionaryItemInput{
 		DictionaryID: "test",
 		ItemKey:      "123",
 	})
@@ -228,19 +229,19 @@ func TestClient_UpdateDictionaryItem_validation(t *testing.T) {
 func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{})
+	err = TestClient.DeleteDictionaryItem(context.TODO(), &DeleteDictionaryItemInput{})
 	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+	err = TestClient.DeleteDictionaryItem(context.TODO(), &DeleteDictionaryItemInput{
 		DictionaryID: "test",
 	})
 	if !errors.Is(err, ErrMissingItemKey) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDictionaryItem(&DeleteDictionaryItemInput{
+	err = TestClient.DeleteDictionaryItem(context.TODO(), &DeleteDictionaryItemInput{
 		DictionaryID: "test",
 		ItemKey:      "123",
 	})
@@ -252,13 +253,13 @@ func TestClient_DeleteDictionaryItem_validation(t *testing.T) {
 func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{})
+	err = TestClient.BatchModifyDictionaryItems(context.TODO(), &BatchModifyDictionaryItemsInput{})
 	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
 	oversizedDictionaryItems := make([]*BatchDictionaryItem, BatchModifyMaximumOperations+1)
-	err = TestClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
+	err = TestClient.BatchModifyDictionaryItems(context.TODO(), &BatchModifyDictionaryItemsInput{
 		DictionaryID: "bar",
 		Items:        oversizedDictionaryItems,
 	})
@@ -267,7 +268,7 @@ func TestClient_BatchModifyDictionaryItem_validation(t *testing.T) {
 	}
 
 	validDictionaryItems := make([]*BatchDictionaryItem, BatchModifyMaximumOperations)
-	err = TestClient.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
+	err = TestClient.BatchModifyDictionaryItems(context.TODO(), &BatchModifyDictionaryItemsInput{
 		DictionaryID: "bar",
 		Items:        validDictionaryItems,
 	})

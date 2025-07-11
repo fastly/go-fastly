@@ -45,8 +45,6 @@ var saType = reflect.TypeOf(new(ServiceAuthorization))
 
 // ListServiceAuthorizationsInput is used as input to the ListServiceAuthorizations function.
 type ListServiceAuthorizationsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// PageNumber requests a specific page of service authorizations.
 	PageNumber int
 	// PageSize limits the number of returned service authorizations.
@@ -71,10 +69,10 @@ func (i *ListServiceAuthorizationsInput) formatFilters() map[string]string {
 }
 
 // ListServiceAuthorizations retrieves all resources.
-func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*ServiceAuthorizations, error) {
-	requestOptions := CreateRequestOptions(i.Context)
+func (c *Client) ListServiceAuthorizations(ctx context.Context, i *ListServiceAuthorizationsInput) (*ServiceAuthorizations, error) {
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params = i.formatFilters()
-	resp, err := c.Get("/service-authorizations", requestOptions)
+	resp, err := c.Get(ctx, "/service-authorizations", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -109,21 +107,19 @@ func (c *Client) ListServiceAuthorizations(i *ListServiceAuthorizationsInput) (*
 
 // GetServiceAuthorizationInput is used as input to the GetServiceAuthorization function.
 type GetServiceAuthorizationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of the service authorization to retrieve (required).
 	ID string
 }
 
 // GetServiceAuthorization retrieves the specified resource.
-func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*ServiceAuthorization, error) {
+func (c *Client) GetServiceAuthorization(ctx context.Context, i *GetServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("service-authorizations", i.ID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -139,8 +135,6 @@ func (c *Client) GetServiceAuthorization(i *GetServiceAuthorizationInput) (*Serv
 
 // CreateServiceAuthorizationInput is used as input to the CreateServiceAuthorization function.
 type CreateServiceAuthorizationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID value is ignored and should not be set, needed to make JSONAPI work correctly.
 	ID string `jsonapi:"primary,service_authorization"`
 	// Permission is the level of permissions to grant the user to the service. Valid values are "full", "read_only", "purge_select" or "purge_all".
@@ -152,7 +146,7 @@ type CreateServiceAuthorizationInput struct {
 }
 
 // CreateServiceAuthorization creates a new resource.
-func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
+func (c *Client) CreateServiceAuthorization(ctx context.Context, i *CreateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.Service == nil || i.Service.ID == "" {
 		return nil, ErrMissingServiceAuthorizationsService
 	}
@@ -160,7 +154,7 @@ func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) 
 		return nil, ErrMissingServiceAuthorizationsUser
 	}
 
-	resp, err := c.PostJSONAPI("/service-authorizations", i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSONAPI(ctx, "/service-authorizations", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -176,8 +170,6 @@ func (c *Client) CreateServiceAuthorization(i *CreateServiceAuthorizationInput) 
 
 // UpdateServiceAuthorizationInput is used as input to the UpdateServiceAuthorization function.
 type UpdateServiceAuthorizationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID uniquely identifies the service authorization (service and user pair) to be updated.
 	ID string `jsonapi:"primary,service_authorization"`
 	// The permission to grant the user to the service referenced by this service authorization.
@@ -185,7 +177,7 @@ type UpdateServiceAuthorizationInput struct {
 }
 
 // UpdateServiceAuthorization updates the specified resource.
-func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) (*ServiceAuthorization, error) {
+func (c *Client) UpdateServiceAuthorization(ctx context.Context, i *UpdateServiceAuthorizationInput) (*ServiceAuthorization, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -196,7 +188,7 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 
 	path := ToSafeURL("service-authorizations", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -212,21 +204,19 @@ func (c *Client) UpdateServiceAuthorization(i *UpdateServiceAuthorizationInput) 
 
 // DeleteServiceAuthorizationInput is used as input to the DeleteServiceAuthorization function.
 type DeleteServiceAuthorizationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of the service authorization to delete (required).
 	ID string
 }
 
 // DeleteServiceAuthorization deletes the specified resource.
-func (c *Client) DeleteServiceAuthorization(i *DeleteServiceAuthorizationInput) error {
+func (c *Client) DeleteServiceAuthorization(ctx context.Context, i *DeleteServiceAuthorizationInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("service-authorizations", i.ID)
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

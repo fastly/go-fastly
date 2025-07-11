@@ -88,8 +88,6 @@ type S3 struct {
 
 // ListS3sInput is used as input to the ListS3s function.
 type ListS3sInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -97,7 +95,7 @@ type ListS3sInput struct {
 }
 
 // ListS3s retrieves all resources.
-func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
+func (c *Client) ListS3s(ctx context.Context, i *ListS3sInput) ([]*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -106,7 +104,7 @@ func (c *Client) ListS3s(i *ListS3sInput) ([]*S3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -129,8 +127,6 @@ type CreateS3Input struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Domain is the domain of the Amazon S3 endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
@@ -176,7 +172,7 @@ type CreateS3Input struct {
 }
 
 // CreateS3 creates a new resource.
-func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
+func (c *Client) CreateS3(ctx context.Context, i *CreateS3Input) (*S3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -191,7 +187,7 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -206,8 +202,6 @@ func (c *Client) CreateS3(i *CreateS3Input) (*S3, error) {
 
 // GetS3Input is used as input to the GetS3 function.
 type GetS3Input struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the S3 to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -217,7 +211,7 @@ type GetS3Input struct {
 }
 
 // GetS3 retrieves the specified resource.
-func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
+func (c *Client) GetS3(ctx context.Context, i *GetS3Input) (*S3, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -229,7 +223,7 @@ func (c *Client) GetS3(i *GetS3Input) (*S3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -252,8 +246,6 @@ type UpdateS3Input struct {
 	BucketName *string `url:"bucket_name,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs. Valid values are zstd, snappy, and gzip.
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Domain is the domain of the Amazon S3 endpoint.
 	Domain *string `url:"domain,omitempty"`
 	// FileMaxBytes is the maximum number of bytes for each uploaded file. A value of 0 can be used to indicate there is no limit on the size of uploaded files, otherwise the minimum value is 1048576 bytes (1 MiB.).
@@ -301,7 +293,7 @@ type UpdateS3Input struct {
 }
 
 // UpdateS3 updates the specified resource.
-func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
+func (c *Client) UpdateS3(ctx context.Context, i *UpdateS3Input) (*S3, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -319,7 +311,7 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -334,8 +326,6 @@ func (c *Client) UpdateS3(i *UpdateS3Input) (*S3, error) {
 
 // DeleteS3Input is the input parameter to DeleteS3.
 type DeleteS3Input struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the S3 to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -345,7 +335,7 @@ type DeleteS3Input struct {
 }
 
 // DeleteS3 deletes the specified resource.
-func (c *Client) DeleteS3(i *DeleteS3Input) error {
+func (c *Client) DeleteS3(ctx context.Context, i *DeleteS3Input) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -357,7 +347,7 @@ func (c *Client) DeleteS3(i *DeleteS3Input) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "s3", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

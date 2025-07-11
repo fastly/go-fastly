@@ -34,8 +34,6 @@ type FTP struct {
 
 // ListFTPsInput is used as input to the ListFTPs function.
 type ListFTPsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -43,7 +41,7 @@ type ListFTPsInput struct {
 }
 
 // ListFTPs retrieves all resources.
-func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
+func (c *Client) ListFTPs(ctx context.Context, i *ListFTPsInput) ([]*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -52,7 +50,7 @@ func (c *Client) ListFTPs(i *ListFTPsInput) ([]*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -71,8 +69,6 @@ type CreateFTPInput struct {
 	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -110,7 +106,7 @@ type CreateFTPInput struct {
 }
 
 // CreateFTP creates a new resource.
-func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
+func (c *Client) CreateFTP(ctx context.Context, i *CreateFTPInput) (*FTP, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -119,7 +115,7 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -134,8 +130,6 @@ func (c *Client) CreateFTP(i *CreateFTPInput) (*FTP, error) {
 
 // GetFTPInput is used as input to the GetFTP function.
 type GetFTPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the FTP to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -145,7 +139,7 @@ type GetFTPInput struct {
 }
 
 // GetFTP retrieves the specified resource.
-func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
+func (c *Client) GetFTP(ctx context.Context, i *GetFTPInput) (*FTP, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -157,7 +151,7 @@ func (c *Client) GetFTP(i *GetFTPInput) (*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -176,8 +170,6 @@ type UpdateFTPInput struct {
 	Address *string `url:"address,omitempty"`
 	// CompressionCodec is the codec used for compressing your logs (zstd, snappy, gzip).
 	CompressionCodec *string `url:"compression_codec,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -217,7 +209,7 @@ type UpdateFTPInput struct {
 }
 
 // UpdateFTP updates the specified resource.
-func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
+func (c *Client) UpdateFTP(ctx context.Context, i *UpdateFTPInput) (*FTP, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -229,7 +221,7 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -244,8 +236,6 @@ func (c *Client) UpdateFTP(i *UpdateFTPInput) (*FTP, error) {
 
 // DeleteFTPInput is the input parameter to DeleteFTP.
 type DeleteFTPInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the FTP to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -255,7 +245,7 @@ type DeleteFTPInput struct {
 }
 
 // DeleteFTP deletes the specified resource.
-func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
+func (c *Client) DeleteFTP(ctx context.Context, i *DeleteFTPInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -267,7 +257,7 @@ func (c *Client) DeleteFTP(i *DeleteFTPInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "ftp", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

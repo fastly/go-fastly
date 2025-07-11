@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_GCSs(t *testing.T) {
 	// Create
 	var gcsCreateResp1, gcsCreateResp2, gcsCreateResp3 *GCS
 	Record(t, "gcses/create", func(c *Client) {
-		gcsCreateResp1, err = c.CreateGCS(&CreateGCSInput{
+		gcsCreateResp1, err = c.CreateGCS(context.TODO(), &CreateGCSInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-gcs"),
@@ -41,7 +42,7 @@ func TestClient_GCSs(t *testing.T) {
 	}
 
 	Record(t, "gcses/create2", func(c *Client) {
-		gcsCreateResp2, err = c.CreateGCS(&CreateGCSInput{
+		gcsCreateResp2, err = c.CreateGCS(context.TODO(), &CreateGCSInput{
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-gcs-2"),
@@ -64,7 +65,7 @@ func TestClient_GCSs(t *testing.T) {
 	}
 
 	Record(t, "gcses/create3", func(c *Client) {
-		gcsCreateResp3, err = c.CreateGCS(&CreateGCSInput{
+		gcsCreateResp3, err = c.CreateGCS(context.TODO(), &CreateGCSInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-gcs-3"),
@@ -89,7 +90,7 @@ func TestClient_GCSs(t *testing.T) {
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
 	Record(t, "gcses/create4", func(c *Client) {
-		_, err = c.CreateGCS(&CreateGCSInput{
+		_, err = c.CreateGCS(context.TODO(), &CreateGCSInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-gcs-4"),
@@ -115,25 +116,25 @@ func TestClient_GCSs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "gcses/cleanup", func(c *Client) {
-			_ = c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(context.TODO(), &DeleteGCSInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gcs",
 			})
 
-			_ = c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(context.TODO(), &DeleteGCSInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gcs-2",
 			})
 
-			_ = c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(context.TODO(), &DeleteGCSInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-gcs-3",
 			})
 
-			_ = c.DeleteGCS(&DeleteGCSInput{
+			_ = c.DeleteGCS(context.TODO(), &DeleteGCSInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-gcs",
@@ -202,7 +203,7 @@ func TestClient_GCSs(t *testing.T) {
 	// List
 	var gcses []*GCS
 	Record(t, "gcses/list", func(c *Client) {
-		gcses, err = c.ListGCSs(&ListGCSsInput{
+		gcses, err = c.ListGCSs(context.TODO(), &ListGCSsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -217,7 +218,7 @@ func TestClient_GCSs(t *testing.T) {
 	// Get
 	var gcsGetResp *GCS
 	Record(t, "gcses/get", func(c *Client) {
-		gcsGetResp, err = c.GetGCS(&GetGCSInput{
+		gcsGetResp, err = c.GetGCS(context.TODO(), &GetGCSInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-gcs",
@@ -272,7 +273,7 @@ func TestClient_GCSs(t *testing.T) {
 	// Update
 	var gcsUpdateResp1, gcsUpdateResp2, gcsUpdateResp3 *GCS
 	Record(t, "gcses/update", func(c *Client) {
-		gcsUpdateResp1, err = c.UpdateGCS(&UpdateGCSInput{
+		gcsUpdateResp1, err = c.UpdateGCS(context.TODO(), &UpdateGCSInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-gcs",
@@ -287,7 +288,7 @@ func TestClient_GCSs(t *testing.T) {
 	}
 
 	Record(t, "gcses/update2", func(c *Client) {
-		gcsUpdateResp2, err = c.UpdateGCS(&UpdateGCSInput{
+		gcsUpdateResp2, err = c.UpdateGCS(context.TODO(), &UpdateGCSInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-gcs-2",
@@ -299,7 +300,7 @@ func TestClient_GCSs(t *testing.T) {
 	}
 
 	Record(t, "gcses/update3", func(c *Client) {
-		gcsUpdateResp3, err = c.UpdateGCS(&UpdateGCSInput{
+		gcsUpdateResp3, err = c.UpdateGCS(context.TODO(), &UpdateGCSInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-gcs-3",
@@ -340,7 +341,7 @@ func TestClient_GCSs(t *testing.T) {
 
 	// Delete
 	Record(t, "gcses/delete", func(c *Client) {
-		err = c.DeleteGCS(&DeleteGCSInput{
+		err = c.DeleteGCS(context.TODO(), &DeleteGCSInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-gcs",
@@ -354,14 +355,14 @@ func TestClient_GCSs(t *testing.T) {
 func TestClient_ListGCSs_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListGCSs(&ListGCSsInput{
+	_, err = TestClient.ListGCSs(context.TODO(), &ListGCSsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListGCSs(&ListGCSsInput{
+	_, err = TestClient.ListGCSs(context.TODO(), &ListGCSsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -373,14 +374,14 @@ func TestClient_ListGCSs_validation(t *testing.T) {
 func TestClient_CreateGCS_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateGCS(&CreateGCSInput{
+	_, err = TestClient.CreateGCS(context.TODO(), &CreateGCSInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateGCS(&CreateGCSInput{
+	_, err = TestClient.CreateGCS(context.TODO(), &CreateGCSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -392,7 +393,7 @@ func TestClient_CreateGCS_validation(t *testing.T) {
 func TestClient_GetGCS_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetGCS(&GetGCSInput{
+	_, err = TestClient.GetGCS(context.TODO(), &GetGCSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -400,7 +401,7 @@ func TestClient_GetGCS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetGCS(&GetGCSInput{
+	_, err = TestClient.GetGCS(context.TODO(), &GetGCSInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -408,7 +409,7 @@ func TestClient_GetGCS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetGCS(&GetGCSInput{
+	_, err = TestClient.GetGCS(context.TODO(), &GetGCSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -420,7 +421,7 @@ func TestClient_GetGCS_validation(t *testing.T) {
 func TestClient_UpdateGCS_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateGCS(&UpdateGCSInput{
+	_, err = TestClient.UpdateGCS(context.TODO(), &UpdateGCSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -428,7 +429,7 @@ func TestClient_UpdateGCS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateGCS(&UpdateGCSInput{
+	_, err = TestClient.UpdateGCS(context.TODO(), &UpdateGCSInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -436,7 +437,7 @@ func TestClient_UpdateGCS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateGCS(&UpdateGCSInput{
+	_, err = TestClient.UpdateGCS(context.TODO(), &UpdateGCSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -448,7 +449,7 @@ func TestClient_UpdateGCS_validation(t *testing.T) {
 func TestClient_DeleteGCS_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteGCS(&DeleteGCSInput{
+	err = TestClient.DeleteGCS(context.TODO(), &DeleteGCSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -456,7 +457,7 @@ func TestClient_DeleteGCS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteGCS(&DeleteGCSInput{
+	err = TestClient.DeleteGCS(context.TODO(), &DeleteGCSInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -464,7 +465,7 @@ func TestClient_DeleteGCS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteGCS(&DeleteGCSInput{
+	err = TestClient.DeleteGCS(context.TODO(), &DeleteGCSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

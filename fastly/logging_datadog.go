@@ -25,8 +25,6 @@ type Datadog struct {
 
 // ListDatadogInput is used as input to the ListDatadog function.
 type ListDatadogInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +32,7 @@ type ListDatadogInput struct {
 }
 
 // ListDatadog retrieves all resources.
-func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
+func (c *Client) ListDatadog(ctx context.Context, i *ListDatadogInput) ([]*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -43,7 +41,7 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +56,6 @@ func (c *Client) ListDatadog(i *ListDatadogInput) ([]*Datadog, error) {
 
 // CreateDatadogInput is used as input to the CreateDatadog function.
 type CreateDatadogInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -83,7 +79,7 @@ type CreateDatadogInput struct {
 }
 
 // CreateDatadog creates a new resource.
-func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
+func (c *Client) CreateDatadog(ctx context.Context, i *CreateDatadogInput) (*Datadog, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -92,7 +88,7 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +103,6 @@ func (c *Client) CreateDatadog(i *CreateDatadogInput) (*Datadog, error) {
 
 // GetDatadogInput is used as input to the GetDatadog function.
 type GetDatadogInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Datadog to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -118,7 +112,7 @@ type GetDatadogInput struct {
 }
 
 // GetDatadog retrieves the specified resource.
-func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
+func (c *Client) GetDatadog(ctx context.Context, i *GetDatadogInput) (*Datadog, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -130,7 +124,7 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -145,8 +139,6 @@ func (c *Client) GetDatadog(i *GetDatadogInput) (*Datadog, error) {
 
 // UpdateDatadogInput is used as input to the UpdateDatadog function.
 type UpdateDatadogInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Datadog can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -172,7 +164,7 @@ type UpdateDatadogInput struct {
 }
 
 // UpdateDatadog updates the specified resource.
-func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
+func (c *Client) UpdateDatadog(ctx context.Context, i *UpdateDatadogInput) (*Datadog, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -184,7 +176,7 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -199,8 +191,6 @@ func (c *Client) UpdateDatadog(i *UpdateDatadogInput) (*Datadog, error) {
 
 // DeleteDatadogInput is the input parameter to DeleteDatadog.
 type DeleteDatadogInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Datadog to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -210,7 +200,7 @@ type DeleteDatadogInput struct {
 }
 
 // DeleteDatadog deletes the specified resource.
-func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
+func (c *Client) DeleteDatadog(ctx context.Context, i *DeleteDatadogInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -222,7 +212,7 @@ func (c *Client) DeleteDatadog(i *DeleteDatadogInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "datadog", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

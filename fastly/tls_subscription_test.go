@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -22,7 +23,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	// Ensure service (and all domains within it) are deleted
 	defer func() {
 		Record(t, fixtureBase+"version", func(c *Client) {
-			_ = c.DeleteService(&DeleteServiceInput{
+			_ = c.DeleteService(context.TODO(), &DeleteServiceInput{
 				ServiceID: TestDeliveryServiceID,
 			})
 		})
@@ -38,7 +39,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	domain2 := "integ-test2.go-fastly-2.com"
 
 	Record(t, fixtureBase+"domains/create", func(c *Client) {
-		_, err = c.CreateDomain(&CreateDomainInput{
+		_, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain1),
@@ -50,7 +51,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	}
 
 	Record(t, fixtureBase+"domains/create2", func(c *Client) {
-		_, err = c.CreateDomain(&CreateDomainInput{
+		_, err = c.CreateDomain(context.TODO(), &CreateDomainInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(domain2),
@@ -65,7 +66,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	// the specified domains and the API will return an error.
 
 	Record(t, fixtureBase+"activate_version", func(c *Client) {
-		_, err = c.ActivateVersion(&ActivateVersionInput{
+		_, err = c.ActivateVersion(context.TODO(), &ActivateVersionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -77,7 +78,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	// Create
 	var subscription *TLSSubscription
 	Record(t, fixtureBase+"create", func(c *Client) {
-		subscription, err = c.CreateTLSSubscription(&CreateTLSSubscriptionInput{
+		subscription, err = c.CreateTLSSubscription(context.TODO(), &CreateTLSSubscriptionInput{
 			Domains: []*TLSDomain{
 				{ID: domain1},
 			},
@@ -97,7 +98,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 			// function is here to ensure the subscription is deleted, just in case
 			// any of the other API calls unexpectedly fail before the "delete" step
 			// at the end of the test.
-			_ = c.DeleteTLSSubscription(&DeleteTLSSubscriptionInput{
+			_ = c.DeleteTLSSubscription(context.TODO(), &DeleteTLSSubscriptionInput{
 				ID: subscription.ID,
 			})
 		})
@@ -106,7 +107,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	// List
 	var listSubscriptions []*TLSSubscription
 	Record(t, fixtureBase+"list", func(c *Client) {
-		listSubscriptions, err = c.ListTLSSubscriptions(&ListTLSSubscriptionsInput{
+		listSubscriptions, err = c.ListTLSSubscriptions(context.TODO(), &ListTLSSubscriptionsInput{
 			// NOTE: Added this filter so I could manually verify that the filter is
 			// only added to the API request query parameters when set to `true`. See
 			// notes in formatFilters for input struct for details of a possible API
@@ -135,7 +136,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 
 	var retrievedSubscription *TLSSubscription
 	Record(t, fixtureBase+"get", func(c *Client) {
-		retrievedSubscription, err = c.GetTLSSubscription(&GetTLSSubscriptionInput{
+		retrievedSubscription, err = c.GetTLSSubscription(context.TODO(), &GetTLSSubscriptionInput{
 			ID: subscription.ID,
 		})
 	})
@@ -148,7 +149,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 
 	var updatedSubscription *TLSSubscription
 	Record(t, fixtureBase+"update", func(c *Client) {
-		updatedSubscription, err = c.UpdateTLSSubscription(&UpdateTLSSubscriptionInput{
+		updatedSubscription, err = c.UpdateTLSSubscription(context.TODO(), &UpdateTLSSubscriptionInput{
 			ID: subscription.ID,
 			Domains: []*TLSDomain{
 				{ID: domain1},
@@ -166,7 +167,7 @@ func TestClient_TLSSubscription(t *testing.T) {
 	}
 
 	Record(t, fixtureBase+"delete", func(c *Client) {
-		err = c.DeleteTLSSubscription(&DeleteTLSSubscriptionInput{
+		err = c.DeleteTLSSubscription(context.TODO(), &DeleteTLSSubscriptionInput{
 			ID: subscription.ID,
 		})
 	})
@@ -181,7 +182,7 @@ func TestClient_ListTLSSubscriptions_validation(t *testing.T) {
 	var tlsSubscriptions []*TLSSubscription
 	var err error
 	Record(t, fixtureBase+"list", func(c *Client) {
-		tlsSubscriptions, err = c.ListTLSSubscriptions(&ListTLSSubscriptionsInput{})
+		tlsSubscriptions, err = c.ListTLSSubscriptions(context.TODO(), &ListTLSSubscriptionsInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -196,7 +197,7 @@ func TestClient_CreateTLSSubscription_validation(t *testing.T) {
 
 	var err error
 	Record(t, fixtureBase+"create", func(c *Client) {
-		_, err = c.CreateTLSSubscription(&CreateTLSSubscriptionInput{
+		_, err = c.CreateTLSSubscription(context.TODO(), &CreateTLSSubscriptionInput{
 			Domains: []*TLSDomain{
 				{ID: "DOMAIN_NAME"},
 			},
@@ -207,12 +208,12 @@ func TestClient_CreateTLSSubscription_validation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = TestClient.CreateTLSSubscription(&CreateTLSSubscriptionInput{})
+	_, err = TestClient.CreateTLSSubscription(context.TODO(), &CreateTLSSubscriptionInput{})
 	if !errors.Is(err, ErrMissingTLSDomain) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateTLSSubscription(&CreateTLSSubscriptionInput{
+	_, err = TestClient.CreateTLSSubscription(context.TODO(), &CreateTLSSubscriptionInput{
 		Domains: []*TLSDomain{
 			{ID: "DN1"},
 			{ID: "DN2"},
@@ -227,7 +228,7 @@ func TestClient_CreateTLSSubscription_validation(t *testing.T) {
 func TestClient_GetTLSSubscription_validation(t *testing.T) {
 	t.Parallel()
 
-	_, err := TestClient.GetTLSSubscription(&GetTLSSubscriptionInput{})
+	_, err := TestClient.GetTLSSubscription(context.TODO(), &GetTLSSubscriptionInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
@@ -236,7 +237,7 @@ func TestClient_GetTLSSubscription_validation(t *testing.T) {
 func TestClient_UpdateTLSSubscription_validation(t *testing.T) {
 	t.Parallel()
 
-	_, err := TestClient.UpdateTLSSubscription(&UpdateTLSSubscriptionInput{})
+	_, err := TestClient.UpdateTLSSubscription(context.TODO(), &UpdateTLSSubscriptionInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
@@ -245,7 +246,7 @@ func TestClient_UpdateTLSSubscription_validation(t *testing.T) {
 func TestClient_DeleteTLSSubscription_validation(t *testing.T) {
 	t.Parallel()
 
-	err := TestClient.DeleteTLSSubscription(&DeleteTLSSubscriptionInput{})
+	err := TestClient.DeleteTLSSubscription(context.TODO(), &DeleteTLSSubscriptionInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}

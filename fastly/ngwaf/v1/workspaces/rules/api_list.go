@@ -14,8 +14,6 @@ import (
 type ListInput struct {
 	// Action filter results based on action.
 	Action *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Enabled filter results based on enabled.
 	Enabled *bool
 	// Limit how many results are returned.
@@ -29,12 +27,12 @@ type ListInput struct {
 }
 
 // List retrieves a list of rules, with optional filtering and pagination.
-func List(c *fastly.Client, i *ListInput) (*Rules, error) {
+func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Rules, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+	requestOptions := fastly.CreateRequestOptions()
 	if i.Action != nil {
 		requestOptions.Params["action"] = *i.Action
 	}
@@ -53,7 +51,7 @@ func List(c *fastly.Client, i *ListInput) (*Rules, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "rules")
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

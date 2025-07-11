@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Backends(t *testing.T) {
 	// Create
 	var b *Backend
 	Record(t, "backends/create", func(c *Client) {
-		b, err = c.CreateBackend(&CreateBackendInput{
+		b, err = c.CreateBackend(context.TODO(), &CreateBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-backend"),
@@ -36,13 +37,13 @@ func TestClient_Backends(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "backends/cleanup", func(c *Client) {
-			_ = c.DeleteBackend(&DeleteBackendInput{
+			_ = c.DeleteBackend(context.TODO(), &DeleteBackendInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-backend",
 			})
 
-			_ = c.DeleteBackend(&DeleteBackendInput{
+			_ = c.DeleteBackend(context.TODO(), &DeleteBackendInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-backend",
@@ -78,7 +79,7 @@ func TestClient_Backends(t *testing.T) {
 	// List
 	var bs []*Backend
 	Record(t, "backends/list", func(c *Client) {
-		bs, err = c.ListBackends(&ListBackendsInput{
+		bs, err = c.ListBackends(context.TODO(), &ListBackendsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -93,7 +94,7 @@ func TestClient_Backends(t *testing.T) {
 	// Get
 	var nb *Backend
 	Record(t, "backends/get", func(c *Client) {
-		nb, err = c.GetBackend(&GetBackendInput{
+		nb, err = c.GetBackend(context.TODO(), &GetBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
@@ -121,7 +122,7 @@ func TestClient_Backends(t *testing.T) {
 	// Update
 	var ub *Backend
 	Record(t, "backends/update", func(c *Client) {
-		ub, err = c.UpdateBackend(&UpdateBackendInput{
+		ub, err = c.UpdateBackend(context.TODO(), &UpdateBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-backend",
@@ -162,7 +163,7 @@ func TestClient_Backends(t *testing.T) {
 
 	// NOTE: The following test validates empty values are NOT sent.
 	Record(t, "backends/update_ignore_empty_values", func(c *Client) {
-		ub, err = c.UpdateBackend(&UpdateBackendInput{
+		ub, err = c.UpdateBackend(context.TODO(), &UpdateBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
@@ -184,7 +185,7 @@ func TestClient_Backends(t *testing.T) {
 	// the UpdateBackendInput struct fields set omitempty, they're pointer types
 	// and so the JSON unmarshal recognises that empty values are allowed.
 	Record(t, "backends/update_allow_empty_values", func(c *Client) {
-		ub, err = c.UpdateBackend(&UpdateBackendInput{
+		ub, err = c.UpdateBackend(context.TODO(), &UpdateBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
@@ -204,7 +205,7 @@ func TestClient_Backends(t *testing.T) {
 
 	// Delete
 	Record(t, "backends/delete", func(c *Client) {
-		err = c.DeleteBackend(&DeleteBackendInput{
+		err = c.DeleteBackend(context.TODO(), &DeleteBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-backend",
@@ -217,14 +218,14 @@ func TestClient_Backends(t *testing.T) {
 
 func TestClient_ListBackends_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListBackends(&ListBackendsInput{
+	_, err = TestClient.ListBackends(context.TODO(), &ListBackendsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListBackends(&ListBackendsInput{
+	_, err = TestClient.ListBackends(context.TODO(), &ListBackendsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -235,14 +236,14 @@ func TestClient_ListBackends_validation(t *testing.T) {
 
 func TestClient_CreateBackend_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateBackend(&CreateBackendInput{
+	_, err = TestClient.CreateBackend(context.TODO(), &CreateBackendInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateBackend(&CreateBackendInput{
+	_, err = TestClient.CreateBackend(context.TODO(), &CreateBackendInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -254,7 +255,7 @@ func TestClient_CreateBackend_validation(t *testing.T) {
 func TestClient_GetBackend_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetBackend(&GetBackendInput{
+	_, err = TestClient.GetBackend(context.TODO(), &GetBackendInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -262,7 +263,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetBackend(&GetBackendInput{
+	_, err = TestClient.GetBackend(context.TODO(), &GetBackendInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -270,7 +271,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetBackend(&GetBackendInput{
+	_, err = TestClient.GetBackend(context.TODO(), &GetBackendInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -282,7 +283,7 @@ func TestClient_GetBackend_validation(t *testing.T) {
 func TestClient_UpdateBackend_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateBackend(&UpdateBackendInput{
+	_, err = TestClient.UpdateBackend(context.TODO(), &UpdateBackendInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -290,7 +291,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateBackend(&UpdateBackendInput{
+	_, err = TestClient.UpdateBackend(context.TODO(), &UpdateBackendInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -298,7 +299,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateBackend(&UpdateBackendInput{
+	_, err = TestClient.UpdateBackend(context.TODO(), &UpdateBackendInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -310,7 +311,7 @@ func TestClient_UpdateBackend_validation(t *testing.T) {
 func TestClient_DeleteBackend_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteBackend(&DeleteBackendInput{
+	err = TestClient.DeleteBackend(context.TODO(), &DeleteBackendInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -318,7 +319,7 @@ func TestClient_DeleteBackend_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteBackend(&DeleteBackendInput{
+	err = TestClient.DeleteBackend(context.TODO(), &DeleteBackendInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -326,7 +327,7 @@ func TestClient_DeleteBackend_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteBackend(&DeleteBackendInput{
+	err = TestClient.DeleteBackend(context.TODO(), &DeleteBackendInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

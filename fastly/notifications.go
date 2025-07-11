@@ -22,8 +22,6 @@ type Integration struct {
 
 // SearchIntegrationsInput is used as input to the SearchIntegrations function.
 type SearchIntegrationsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the pagination cursor from a previous request's meta.
 	Cursor *string
 	// Limit is the maximum number of items included in each response.
@@ -50,10 +48,10 @@ type IntegrationsMeta struct {
 }
 
 // SearchIntegrations retrieves filtered, paginated integrations.
-func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrationsResponse, error) {
+func (c *Client) SearchIntegrations(ctx context.Context, i *SearchIntegrationsInput) (*SearchIntegrationsResponse, error) {
 	p := "/notifications/integrations"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	if i.Cursor != nil {
 		requestOptions.Params["cursor"] = *i.Cursor
 	}
@@ -67,7 +65,7 @@ func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrat
 		requestOptions.Params["type"] = *i.Type
 	}
 
-	resp, err := c.Get(p, requestOptions)
+	resp, err := c.Get(ctx, p, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -85,8 +83,6 @@ func (c *Client) SearchIntegrations(i *SearchIntegrationsInput) (*SearchIntegrat
 type CreateIntegrationInput struct {
 	// Config is configuration specific to the integration type.
 	Config map[string]string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Description is the user submitted description of the integration.
 	Description *string
 	// Name is the user submitted name of the integration.
@@ -102,8 +98,8 @@ type CreateIntegrationResponse struct {
 }
 
 // CreateIntegration creates a new integration.
-func (c *Client) CreateIntegration(i *CreateIntegrationInput) (*CreateIntegrationResponse, error) {
-	resp, err := c.PostJSON("/notifications/integrations", i, CreateRequestOptions(i.Context))
+func (c *Client) CreateIntegration(ctx context.Context, i *CreateIntegrationInput) (*CreateIntegrationResponse, error) {
+	resp, err := c.PostJSON(ctx, "/notifications/integrations", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -118,21 +114,19 @@ func (c *Client) CreateIntegration(i *CreateIntegrationInput) (*CreateIntegratio
 
 // GetIntegrationInput is used as input to the GetIntegration function.
 type GetIntegrationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of integration to fetch (required).
 	ID string
 }
 
 // GetIntegration retrieves a specified integration.
-func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
+func (c *Client) GetIntegration(ctx context.Context, i *GetIntegrationInput) (*Integration, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("notifications", "integrations", i.ID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -150,8 +144,6 @@ func (c *Client) GetIntegration(i *GetIntegrationInput) (*Integration, error) {
 type UpdateIntegrationInput struct {
 	// Config is configuration specific to the integration type.
 	Config map[string]string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Description is the user submitted description of the integration.
 	Description *string
 	// ID of integration to update (required).
@@ -163,14 +155,14 @@ type UpdateIntegrationInput struct {
 }
 
 // UpdateIntegration updates the specified integration.
-func (c *Client) UpdateIntegration(i *UpdateIntegrationInput) error {
+func (c *Client) UpdateIntegration(ctx context.Context, i *UpdateIntegrationInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("notifications", "integrations", i.ID)
 
-	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -185,21 +177,19 @@ func (c *Client) UpdateIntegration(i *UpdateIntegrationInput) error {
 
 // DeleteIntegrationInput is used as input to the DeleteIntegration function.
 type DeleteIntegrationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID of integration to delete (required).
 	ID string
 }
 
 // DeleteIntegration deletes the specified integration.
-func (c *Client) DeleteIntegration(i *DeleteIntegrationInput) error {
+func (c *Client) DeleteIntegration(ctx context.Context, i *DeleteIntegrationInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("notifications", "integrations", i.ID)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -227,9 +217,9 @@ type CustomField struct {
 }
 
 // GetIntegrationTypes retrieves the supported integration types and what configuration they require.
-func (c *Client) GetIntegrationTypes() (*[]IntegrationType, error) {
+func (c *Client) GetIntegrationTypes(ctx context.Context) (*[]IntegrationType, error) {
 	path := "/notifications/integration-types"
-	resp, err := c.Get(path, CreateRequestOptions(nil))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -244,8 +234,6 @@ func (c *Client) GetIntegrationTypes() (*[]IntegrationType, error) {
 
 // GetWebhookSigningKeyInput is used as input to the GetWebhookSigningKey function.
 type GetWebhookSigningKeyInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// IntegrationID is the ID of the webhook integration which signing key to get (required).
 	IntegrationID string
 }
@@ -256,14 +244,14 @@ type WebhookSigningKeyResponse struct {
 }
 
 // GetWebhookSigningKey retrieves the signing key for a webhook integration.
-func (c *Client) GetWebhookSigningKey(i *GetWebhookSigningKeyInput) (*WebhookSigningKeyResponse, error) {
+func (c *Client) GetWebhookSigningKey(ctx context.Context, i *GetWebhookSigningKeyInput) (*WebhookSigningKeyResponse, error) {
 	if i.IntegrationID == "" {
 		return nil, ErrMissingIntegrationID
 	}
 
 	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "signingKey")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -283,14 +271,14 @@ type RotateWebhookSigningKeyInput struct {
 }
 
 // RotateWebhookSigningKey rotates the signing key for a webhook integration.
-func (c *Client) RotateWebhookSigningKey(i *RotateWebhookSigningKeyInput) (*WebhookSigningKeyResponse, error) {
+func (c *Client) RotateWebhookSigningKey(ctx context.Context, i *RotateWebhookSigningKeyInput) (*WebhookSigningKeyResponse, error) {
 	if i.IntegrationID == "" {
 		return nil, ErrMissingIntegrationID
 	}
 
 	path := ToSafeURL("notifications", "integrations", i.IntegrationID, "rotateSigningKey")
 
-	resp, err := c.Post(path, CreateRequestOptions(nil))
+	resp, err := c.Post(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -305,16 +293,14 @@ func (c *Client) RotateWebhookSigningKey(i *RotateWebhookSigningKeyInput) (*Webh
 
 // CreateMailinglistConfirmationInput is used as input to the CreateMailinglistConfirmation function.
 type CreateMailinglistConfirmationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Email is the mailinglist address.
 	Email *string
 }
 
 // CreateMailinglistConfirmation sends a mailing list confirmation email.
-func (c *Client) CreateMailinglistConfirmation(i *CreateMailinglistConfirmationInput) error {
+func (c *Client) CreateMailinglistConfirmation(ctx context.Context, i *CreateMailinglistConfirmationInput) error {
 	path := "/notifications/mailinglist-confirmations"
-	resp, err := c.PostJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

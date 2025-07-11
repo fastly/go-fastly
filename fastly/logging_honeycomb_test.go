@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	// Create
 	var h *Honeycomb
 	Record(t, "honeycombs/create", func(c *Client) {
-		h, err = c.CreateHoneycomb(&CreateHoneycombInput{
+		h, err = c.CreateHoneycomb(context.TODO(), &CreateHoneycombInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-honeycomb"),
@@ -35,13 +36,13 @@ func TestClient_Honeycombs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "honeycombs/cleanup", func(c *Client) {
-			_ = c.DeleteHoneycomb(&DeleteHoneycombInput{
+			_ = c.DeleteHoneycomb(context.TODO(), &DeleteHoneycombInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-honeycomb",
 			})
 
-			_ = c.DeleteHoneycomb(&DeleteHoneycombInput{
+			_ = c.DeleteHoneycomb(context.TODO(), &DeleteHoneycombInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-honeycomb",
@@ -71,7 +72,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	// List
 	var hs []*Honeycomb
 	Record(t, "honeycombs/list", func(c *Client) {
-		hs, err = c.ListHoneycombs(&ListHoneycombsInput{
+		hs, err = c.ListHoneycombs(context.TODO(), &ListHoneycombsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -86,7 +87,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	// Get
 	var nh *Honeycomb
 	Record(t, "honeycombs/get", func(c *Client) {
-		nh, err = c.GetHoneycomb(&GetHoneycombInput{
+		nh, err = c.GetHoneycomb(context.TODO(), &GetHoneycombInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-honeycomb",
@@ -117,7 +118,7 @@ func TestClient_Honeycombs(t *testing.T) {
 	// Update
 	var us *Honeycomb
 	Record(t, "honeycombs/update", func(c *Client) {
-		us, err = c.UpdateHoneycomb(&UpdateHoneycombInput{
+		us, err = c.UpdateHoneycomb(context.TODO(), &UpdateHoneycombInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-honeycomb",
@@ -145,7 +146,7 @@ func TestClient_Honeycombs(t *testing.T) {
 
 	// Delete
 	Record(t, "honeycombs/delete", func(c *Client) {
-		err = c.DeleteHoneycomb(&DeleteHoneycombInput{
+		err = c.DeleteHoneycomb(context.TODO(), &DeleteHoneycombInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-honeycomb",
@@ -158,14 +159,14 @@ func TestClient_Honeycombs(t *testing.T) {
 
 func TestClient_ListHoneycombs_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListHoneycombs(&ListHoneycombsInput{
+	_, err = TestClient.ListHoneycombs(context.TODO(), &ListHoneycombsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListHoneycombs(&ListHoneycombsInput{
+	_, err = TestClient.ListHoneycombs(context.TODO(), &ListHoneycombsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -176,14 +177,14 @@ func TestClient_ListHoneycombs_validation(t *testing.T) {
 
 func TestClient_CreateHoneycomb_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateHoneycomb(&CreateHoneycombInput{
+	_, err = TestClient.CreateHoneycomb(context.TODO(), &CreateHoneycombInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateHoneycomb(&CreateHoneycombInput{
+	_, err = TestClient.CreateHoneycomb(context.TODO(), &CreateHoneycombInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -195,7 +196,7 @@ func TestClient_CreateHoneycomb_validation(t *testing.T) {
 func TestClient_GetHoneycomb_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetHoneycomb(&GetHoneycombInput{
+	_, err = TestClient.GetHoneycomb(context.TODO(), &GetHoneycombInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -203,7 +204,7 @@ func TestClient_GetHoneycomb_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHoneycomb(&GetHoneycombInput{
+	_, err = TestClient.GetHoneycomb(context.TODO(), &GetHoneycombInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -211,7 +212,7 @@ func TestClient_GetHoneycomb_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHoneycomb(&GetHoneycombInput{
+	_, err = TestClient.GetHoneycomb(context.TODO(), &GetHoneycombInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -223,7 +224,7 @@ func TestClient_GetHoneycomb_validation(t *testing.T) {
 func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateHoneycomb(&UpdateHoneycombInput{
+	_, err = TestClient.UpdateHoneycomb(context.TODO(), &UpdateHoneycombInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -231,7 +232,7 @@ func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHoneycomb(&UpdateHoneycombInput{
+	_, err = TestClient.UpdateHoneycomb(context.TODO(), &UpdateHoneycombInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -239,7 +240,7 @@ func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHoneycomb(&UpdateHoneycombInput{
+	_, err = TestClient.UpdateHoneycomb(context.TODO(), &UpdateHoneycombInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -251,7 +252,7 @@ func TestClient_UpdateHoneycomb_validation(t *testing.T) {
 func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteHoneycomb(&DeleteHoneycombInput{
+	err = TestClient.DeleteHoneycomb(context.TODO(), &DeleteHoneycombInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -259,7 +260,7 @@ func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHoneycomb(&DeleteHoneycombInput{
+	err = TestClient.DeleteHoneycomb(context.TODO(), &DeleteHoneycombInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -267,7 +268,7 @@ func TestClient_DeleteHoneycomb_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHoneycomb(&DeleteHoneycombInput{
+	err = TestClient.DeleteHoneycomb(context.TODO(), &DeleteHoneycombInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

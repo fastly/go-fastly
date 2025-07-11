@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -12,7 +13,7 @@ func TestClient_Notifications(t *testing.T) {
 	// Get integration types
 	var its *[]IntegrationType
 	Record(t, "notifications/get_integration_types", func(c *Client) {
-		its, err = c.GetIntegrationTypes()
+		its, err = c.GetIntegrationTypes(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -33,12 +34,12 @@ func TestClient_Notifications(t *testing.T) {
 	// Create integration
 	var cir *CreateIntegrationResponse
 	Record(t, "notifications/create_integration", func(c *Client) {
-		cir, err = c.CreateIntegration(cii)
+		cir, err = c.CreateIntegration(context.TODO(), cii)
 	})
 	// Ensure integration deleted
 	defer func() {
 		Record(t, "notifications/cleanup_integration", func(c *Client) {
-			err = c.DeleteIntegration(&DeleteIntegrationInput{
+			err = c.DeleteIntegration(context.TODO(), &DeleteIntegrationInput{
 				ID: *cir.ID,
 			})
 		})
@@ -50,7 +51,7 @@ func TestClient_Notifications(t *testing.T) {
 	// Search integrations
 	var sir *SearchIntegrationsResponse
 	Record(t, "notifications/search_integrations", func(c *Client) {
-		sir, err = c.SearchIntegrations(&SearchIntegrationsInput{
+		sir, err = c.SearchIntegrations(context.TODO(), &SearchIntegrationsInput{
 			Cursor: ToPointer(""),
 			Limit:  ToPointer(3),
 			Sort:   ToPointer("-created_at"),
@@ -79,7 +80,7 @@ func TestClient_Notifications(t *testing.T) {
 	// Get integration
 	var gi *Integration
 	Record(t, "notifications/get_integration", func(c *Client) {
-		gi, err = c.GetIntegration(&GetIntegrationInput{
+		gi, err = c.GetIntegration(context.TODO(), &GetIntegrationInput{
 			ID: *cir.ID,
 		})
 	})
@@ -107,7 +108,7 @@ func TestClient_Notifications(t *testing.T) {
 
 	// Create mailinglist integration confirmation
 	Record(t, "notifications/create_mailinglist_confirmation", func(c *Client) {
-		err = c.CreateMailinglistConfirmation(&CreateMailinglistConfirmationInput{
+		err = c.CreateMailinglistConfirmation(context.TODO(), &CreateMailinglistConfirmationInput{
 			Email: ToPointer("noreply@fastly.com"),
 		})
 	})
@@ -117,7 +118,7 @@ func TestClient_Notifications(t *testing.T) {
 
 	// Update integration
 	Record(t, "notifications/update_integration", func(c *Client) {
-		err = c.UpdateIntegration(&UpdateIntegrationInput{
+		err = c.UpdateIntegration(context.TODO(), &UpdateIntegrationInput{
 			Config: map[string]string{
 				"url": "https://foo.com/bar",
 			},
@@ -134,7 +135,7 @@ func TestClient_Notifications(t *testing.T) {
 	// Rotate webhook integration signing key
 	var rwskr *WebhookSigningKeyResponse
 	Record(t, "notifications/rotate_webhook_signing_key", func(c *Client) {
-		rwskr, err = c.RotateWebhookSigningKey(&RotateWebhookSigningKeyInput{
+		rwskr, err = c.RotateWebhookSigningKey(context.TODO(), &RotateWebhookSigningKeyInput{
 			IntegrationID: *gi.ID,
 		})
 	})
@@ -148,7 +149,7 @@ func TestClient_Notifications(t *testing.T) {
 	// Get webhook integration signing key
 	var gwskr *WebhookSigningKeyResponse
 	Record(t, "notifications/get_webhook_signing_key", func(c *Client) {
-		gwskr, err = c.GetWebhookSigningKey(&GetWebhookSigningKeyInput{
+		gwskr, err = c.GetWebhookSigningKey(context.TODO(), &GetWebhookSigningKeyInput{
 			IntegrationID: *gi.ID,
 		})
 	})
@@ -161,7 +162,7 @@ func TestClient_Notifications(t *testing.T) {
 
 	// Delete integration
 	Record(t, "notifications/delete_integration", func(c *Client) {
-		err = c.DeleteIntegration(&DeleteIntegrationInput{
+		err = c.DeleteIntegration(context.TODO(), &DeleteIntegrationInput{
 			ID: *gi.ID,
 		})
 	})
@@ -171,35 +172,35 @@ func TestClient_Notifications(t *testing.T) {
 }
 
 func TestClient_GetIntegration_validation(t *testing.T) {
-	_, err := TestClient.GetIntegration(&GetIntegrationInput{})
+	_, err := TestClient.GetIntegration(context.TODO(), &GetIntegrationInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateIntegration_validation(t *testing.T) {
-	err := TestClient.UpdateIntegration(&UpdateIntegrationInput{})
+	err := TestClient.UpdateIntegration(context.TODO(), &UpdateIntegrationInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteIntegration_validation(t *testing.T) {
-	err := TestClient.DeleteIntegration(&DeleteIntegrationInput{})
+	err := TestClient.DeleteIntegration(context.TODO(), &DeleteIntegrationInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_GetWebhookSigningKey_validation(t *testing.T) {
-	_, err := TestClient.GetWebhookSigningKey(&GetWebhookSigningKeyInput{})
+	_, err := TestClient.GetWebhookSigningKey(context.TODO(), &GetWebhookSigningKeyInput{})
 	if !errors.Is(err, ErrMissingIntegrationID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_RotateWebhookSigningKey_validation(t *testing.T) {
-	_, err := TestClient.RotateWebhookSigningKey(&RotateWebhookSigningKeyInput{})
+	_, err := TestClient.RotateWebhookSigningKey(context.TODO(), &RotateWebhookSigningKeyInput{})
 	if !errors.Is(err, ErrMissingIntegrationID) {
 		t.Errorf("bad error: %s", err)
 	}

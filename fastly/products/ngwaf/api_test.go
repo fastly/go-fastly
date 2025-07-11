@@ -1,6 +1,7 @@
 package ngwaf_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/fastly/go-fastly/v10/fastly"
@@ -16,7 +17,7 @@ var serviceID = fastly.TestDeliveryServiceID
 func TestEnableMissingWorkspaceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := ngwaf.Enable(nil, serviceID, ngwaf.EnableInput{WorkspaceID: ""})
+	_, err := ngwaf.Enable(context.TODO(), nil, serviceID, ngwaf.EnableInput{WorkspaceID: ""})
 
 	require.ErrorIs(t, err, ngwaf.ErrMissingWorkspaceID)
 }

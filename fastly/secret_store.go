@@ -35,23 +35,21 @@ type SecretStore struct {
 
 // CreateSecretStoreInput is used as input to the CreateSecretStore function.
 type CreateSecretStoreInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Name of the Secret Store (required).
 	Name string `json:"name"`
 }
 
 // CreateSecretStore creates a new resource.
-func (c *Client) CreateSecretStore(i *CreateSecretStoreInput) (*SecretStore, error) {
+func (c *Client) CreateSecretStore(ctx context.Context, i *CreateSecretStoreInput) (*SecretStore, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Parallel = true
 
 	path := "/resources/stores/secret"
-	resp, err := c.PostJSON(path, i, requestOptions)
+	resp, err := c.PostJSON(ctx, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -75,8 +73,6 @@ type SecretStores struct {
 
 // ListSecretStoresInput is used as input to the ListSecretStores function.
 type ListSecretStoresInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the pagination cursor (optional).
 	Cursor string
 	// Limit is the desired number of Secret Stores (optional).
@@ -89,10 +85,10 @@ type ListSecretStoresInput struct {
 //
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
-func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, error) {
+func (c *Client) ListSecretStores(ctx context.Context, i *ListSecretStoresInput) (*SecretStores, error) {
 	path := "/resources/stores/secret"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
@@ -107,7 +103,7 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 		requestOptions.Params["name"] = i.Name
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -123,26 +119,24 @@ func (c *Client) ListSecretStores(i *ListSecretStoresInput) (*SecretStores, erro
 
 // GetSecretStoreInput is used as input to the GetSecretStore function.
 type GetSecretStoreInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID of the Secret Store (required).
 	StoreID string
 }
 
 // GetSecretStore retrieves the specified resource.
-func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
+func (c *Client) GetSecretStore(ctx context.Context, i *GetSecretStoreInput) (*SecretStore, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -158,26 +152,24 @@ func (c *Client) GetSecretStore(i *GetSecretStoreInput) (*SecretStore, error) {
 
 // DeleteSecretStoreInput is used as input to the DeleteSecretStore function.
 type DeleteSecretStoreInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// StoreID of the Secret Store (required).
 	StoreID string
 }
 
 // DeleteSecretStore deletes the specified resource.
-func (c *Client) DeleteSecretStore(i *DeleteSecretStoreInput) error {
+func (c *Client) DeleteSecretStore(ctx context.Context, i *DeleteSecretStoreInput) error {
 	if i.StoreID == "" {
 		return ErrMissingStoreID
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID)
 
-	resp, err := c.Delete(path, requestOptions)
+	resp, err := c.Delete(ctx, path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -196,8 +188,6 @@ type Secret struct {
 type CreateSecretInput struct {
 	// ClientKey is the public key used to encrypt the secret with (optional).
 	ClientKey []byte
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Method is the HTTP request method used to create the secret.
 	//
 	// Secret names must be unique within a store.
@@ -220,7 +210,7 @@ type CreateSecretInput struct {
 }
 
 // CreateSecret creates a new resource.
-func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
+func (c *Client) CreateSecret(ctx context.Context, i *CreateSecretInput) (*Secret, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
@@ -257,13 +247,13 @@ func (c *Client) CreateSecret(i *CreateSecretInput) (*Secret, error) {
 	default:
 		return nil, ErrInvalidMethod
 	}
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Body = &body
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Request(method, path, requestOptions)
+	resp, err := c.Request(ctx, method, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -287,8 +277,6 @@ type Secrets struct {
 
 // ListSecretsInput is used as input to the ListSecrets function.
 type ListSecretsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the pagination cursor (optional).
 	Cursor string
 	// Limit is the desired number of Secrets (optional).
@@ -301,14 +289,14 @@ type ListSecretsInput struct {
 //
 // The returned next cursor, if non-blank, can be used as input to a subsequent
 // request for the next page of results.
-func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
+func (c *Client) ListSecrets(ctx context.Context, i *ListSecretsInput) (*Secrets, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets")
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 
@@ -320,7 +308,7 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 		requestOptions.Params["cursor"] = i.Cursor
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -336,8 +324,6 @@ func (c *Client) ListSecrets(i *ListSecretsInput) (*Secrets, error) {
 
 // GetSecretInput is used as input to the GetSecret function.
 type GetSecretInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name of the Secret (required).
 	Name string
 	// StoreID of the Secret Store (required).
@@ -345,7 +331,7 @@ type GetSecretInput struct {
 }
 
 // GetSecret retrieves the specified resource.
-func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
+func (c *Client) GetSecret(ctx context.Context, i *GetSecretInput) (*Secret, error) {
 	if i.StoreID == "" {
 		return nil, ErrMissingStoreID
 	}
@@ -355,12 +341,12 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -376,8 +362,6 @@ func (c *Client) GetSecret(i *GetSecretInput) (*Secret, error) {
 
 // DeleteSecretInput is used as input to the DeleteSecret function.
 type DeleteSecretInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name of the secret (required).
 	Name string
 	// StoreID of the Secret Store (required).
@@ -385,7 +369,7 @@ type DeleteSecretInput struct {
 }
 
 // DeleteSecret deletes the specified resource.
-func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
+func (c *Client) DeleteSecret(ctx context.Context, i *DeleteSecretInput) error {
 	if i.StoreID == "" {
 		return ErrMissingStoreID
 	}
@@ -395,12 +379,12 @@ func (c *Client) DeleteSecret(i *DeleteSecretInput) error {
 
 	path := ToSafeURL("resources", "stores", "secret", i.StoreID, "secrets", i.Name)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Delete(path, requestOptions)
+	resp, err := c.Delete(ctx, path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -444,15 +428,15 @@ func (ck *ClientKey) Encrypt(plaintext []byte) ([]byte, error) {
 
 // CreateClientKey creates a new time-limited client key for locally
 // encrypting secrets before uploading them to the Fastly API.
-func (c *Client) CreateClientKey() (*ClientKey, error) {
+func (c *Client) CreateClientKey(ctx context.Context) (*ClientKey, error) {
 	path := "/resources/stores/secret/client-key"
 
-	requestOptions := CreateRequestOptions(nil)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Post(path, requestOptions)
+	resp, err := c.Post(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -469,15 +453,15 @@ func (c *Client) CreateClientKey() (*ClientKey, error) {
 // GetSigningKey returns the public signing key for client keys.  In
 // general the signing key changes very rarely, and it's recommended to
 // ship the signing key out-of-band from the API.
-func (c *Client) GetSigningKey() (ed25519.PublicKey, error) {
+func (c *Client) GetSigningKey(ctx context.Context) (ed25519.PublicKey, error) {
 	path := "/resources/stores/secret/signing-key"
 
-	requestOptions := CreateRequestOptions(nil)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Content-Type"] = JSONMimeType
 	requestOptions.Headers["Accept"] = JSONMimeType
 	requestOptions.Parallel = true
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

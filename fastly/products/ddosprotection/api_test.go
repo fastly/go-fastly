@@ -1,6 +1,7 @@
 package ddosprotection_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/fastly/go-fastly/v10/fastly"
@@ -17,7 +18,7 @@ var serviceID = fastly.TestDeliveryServiceID
 func TestUpdateConfigurationMissingMode(t *testing.T) {
 	t.Parallel()
 
-	_, err := ddosprotection.UpdateConfiguration(nil, serviceID, ddosprotection.ConfigureInput{Mode: ""})
+	_, err := ddosprotection.UpdateConfiguration(context.TODO(), nil, serviceID, ddosprotection.ConfigureInput{Mode: ""})
 
 	require.ErrorIs(t, err, ddosprotection.ErrMissingMode)
 }

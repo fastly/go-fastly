@@ -1,6 +1,7 @@
 package signals
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -21,7 +22,7 @@ func TestClient_Signals(t *testing.T) {
 	var signal *Signal
 
 	fastly.Record(t, "create_signal", func(c *fastly.Client) {
-		signal, err = Create(c, &CreateInput{
+		signal, err = Create(context.TODO(), c, &CreateInput{
 			Description: fastly.ToPointer(testDescription),
 			Name:        fastly.ToPointer(testName),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -44,7 +45,7 @@ func TestClient_Signals(t *testing.T) {
 	// Ensure we delete the test signal at the end.
 	defer func() {
 		fastly.Record(t, "delete_signal", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
+			err = Delete(context.TODO(), c, &DeleteInput{
 				SignalID:    fastly.ToPointer(signalID),
 				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			})
@@ -57,7 +58,7 @@ func TestClient_Signals(t *testing.T) {
 	// Get the test signal.
 	var getTestSignal *Signal
 	fastly.Record(t, "get_signal", func(c *fastly.Client) {
-		getTestSignal, err = Get(c, &GetInput{
+		getTestSignal, err = Get(context.TODO(), c, &GetInput{
 			SignalID:    fastly.ToPointer(signalID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
@@ -77,7 +78,7 @@ func TestClient_Signals(t *testing.T) {
 
 	var updatedSignal *Signal
 	fastly.Record(t, "update_signal", func(c *fastly.Client) {
-		updatedSignal, err = Update(c, &UpdateInput{
+		updatedSignal, err = Update(context.TODO(), c, &UpdateInput{
 			Description: fastly.ToPointer(string(updatedSignalDescription)),
 			SignalID:    fastly.ToPointer(signalID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -93,7 +94,7 @@ func TestClient_Signals(t *testing.T) {
 	// List the signals for the test workspace and check the updated one is the only entry
 	var listedSignals *Signals
 	fastly.Record(t, "list_signal", func(c *fastly.Client) {
-		listedSignals, err = List(c, &ListInput{
+		listedSignals, err = List(context.TODO(), c, &ListInput{
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
 	})
@@ -113,13 +114,13 @@ func TestClient_Signals(t *testing.T) {
 
 func TestClient_GetSignal_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		SignalID:    nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -130,13 +131,13 @@ func TestClient_GetSignal_validation(t *testing.T) {
 
 func TestClient_CreateSignal_validation(t *testing.T) {
 	var err error
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Name:        nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -147,20 +148,20 @@ func TestClient_CreateSignal_validation(t *testing.T) {
 
 func TestClient_UpdateSignal_validation(t *testing.T) {
 	var err error
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		SignalID:    nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingSignalID) {
 		t.Errorf("expected ErrMissingSignalID: got %s", err)
 	}
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		Description: nil,
 		SignalID:    fastly.ToPointer("someID"),
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -172,13 +173,13 @@ func TestClient_UpdateSignal_validation(t *testing.T) {
 
 func TestClient_DeleteSignal_validation(t *testing.T) {
 	var err error
-	err = Delete(fastly.TestClient, &DeleteInput{
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	err = Delete(fastly.TestClient, &DeleteInput{
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		SignalID:    nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})

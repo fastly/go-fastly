@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"sort"
 	"strconv"
@@ -24,7 +25,7 @@ func TestClient_KVStore(t *testing.T) {
 	// List
 	var kvStoreListResp1 *ListKVStoresResponse
 	Record(t, "kv_store/list-store", func(c *Client) {
-		kvStoreListResp1, err = c.ListKVStores(nil)
+		kvStoreListResp1, err = c.ListKVStores(context.TODO(), nil)
 	})
 	require.NoError(err)
 	require.NotContains(kvStoreListResp1.Data, createStoreName)
@@ -32,7 +33,7 @@ func TestClient_KVStore(t *testing.T) {
 	// Create
 	var kvStore *KVStore
 	Record(t, "kv_store/create-store", func(c *Client) {
-		kvStore, err = c.CreateKVStore(&CreateKVStoreInput{
+		kvStore, err = c.CreateKVStore(context.TODO(), &CreateKVStoreInput{
 			Name: createStoreName,
 		})
 	})
@@ -43,7 +44,7 @@ func TestClient_KVStore(t *testing.T) {
 	defer func() {
 		Record(t, "kv_store/cleanup", func(c *Client) {
 			// first delete all the keys in it
-			p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{
+			p := c.NewListKVStoreKeysPaginator(context.TODO(), &ListKVStoreKeysInput{
 				Consistency: ConsistencyEventual,
 				StoreID:     kvStore.StoreID,
 			})
@@ -51,13 +52,13 @@ func TestClient_KVStore(t *testing.T) {
 				keys := p.Keys()
 				sort.Strings(keys)
 				for _, key := range keys {
-					err = c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key})
+					err = c.DeleteKVStoreKey(context.TODO(), &DeleteKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key})
 					require.NoError(err, "key cleanup")
 				}
 			}
 			require.NoError(p.Err(), "cleanup pagination")
 
-			err = c.DeleteKVStore(&DeleteKVStoreInput{StoreID: kvStore.StoreID})
+			err = c.DeleteKVStore(context.TODO(), &DeleteKVStoreInput{StoreID: kvStore.StoreID})
 			require.NoError(err, "store cleanup")
 		})
 	}()
@@ -65,7 +66,7 @@ func TestClient_KVStore(t *testing.T) {
 	// fetch the newly created store and verify it matches
 	var getKVStoreResponse *KVStore
 	Record(t, "kv_store/get-store", func(c *Client) {
-		getKVStoreResponse, err = c.GetKVStore(&GetKVStoreInput{StoreID: kvStore.StoreID})
+		getKVStoreResponse, err = c.GetKVStore(context.TODO(), &GetKVStoreInput{StoreID: kvStore.StoreID})
 	})
 	require.NoError(err)
 	require.Equal(kvStore.Name, getKVStoreResponse.Name, "error fetching info for store")
@@ -76,14 +77,14 @@ func TestClient_KVStore(t *testing.T) {
 
 	Record(t, "kv_store/create-keys", func(c *Client) {
 		for i, key := range keys {
-			err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key, Value: key + strconv.Itoa(i)})
+			err := c.InsertKVStoreKey(context.TODO(), &InsertKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key, Value: key + strconv.Itoa(i)})
 			require.NoErrorf(err, "inserting key %q", key)
 		}
 	})
 
 	Record(t, "kv_store/check-keys", func(c *Client) {
 		for i, key := range keys {
-			got, err := c.GetKVStoreKey(&GetKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key})
+			got, err := c.GetKVStoreKey(context.TODO(), &GetKVStoreKeyInput{StoreID: kvStore.StoreID, Key: key})
 			assert.NoErrorf(err, "fetching key %q", key)
 			want := key + strconv.Itoa(i)
 			assert.Equalf(want, got, "incorrect value key %q", key)
@@ -93,7 +94,7 @@ func TestClient_KVStore(t *testing.T) {
 	Record(t, "kv_store/batch-create-keys", func(c *Client) {
 		keys := `{"key":"batch-1","value":"VkFMVUU="}
     {"key":"batch-2","value":"VkFMVUU="}`
-		err := c.BatchModifyKVStoreKey(&BatchModifyKVStoreKeyInput{
+		err := c.BatchModifyKVStoreKey(context.TODO(), &BatchModifyKVStoreKeyInput{
 			StoreID: kvStore.StoreID,
 			Body:    strings.NewReader(keys),
 		})
@@ -106,7 +107,7 @@ func TestClient_KVStore(t *testing.T) {
 	// fetch all keys and validate they match our input data
 	var kvStoreListKeys *ListKVStoreKeysResponse
 	Record(t, "kv_store/list-keys", func(c *Client) {
-		kvStoreListKeys, err = c.ListKVStoreKeys(&ListKVStoreKeysInput{
+		kvStoreListKeys, err = c.ListKVStoreKeys(context.TODO(), &ListKVStoreKeysInput{
 			Consistency: ConsistencyStrong,
 			StoreID:     kvStore.StoreID,
 		})
@@ -116,7 +117,7 @@ func TestClient_KVStore(t *testing.T) {
 	assert.ElementsMatch(allKeys, kvStoreListKeys.Data, "mismatch listing keys")
 
 	Record(t, "kv_store/list-keys-pagination", func(c *Client) {
-		p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{
+		p := c.NewListKVStoreKeysPaginator(context.TODO(), &ListKVStoreKeysInput{
 			StoreID: kvStore.StoreID,
 			Limit:   4,
 		})
@@ -134,7 +135,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/list-keys-prefix", func(c *Client) {
-		p := c.NewListKVStoreKeysPaginator(&ListKVStoreKeysInput{
+		p := c.NewListKVStoreKeysPaginator(context.TODO(), &ListKVStoreKeysInput{
 			StoreID: kvStore.StoreID,
 			Prefix:  "ba",
 		})
@@ -158,7 +159,7 @@ func TestClient_KVStore(t *testing.T) {
 	var item GetKVStoreItemOutput
 
 	Record(t, "kv_store/get-item-round-1", func(c *Client) {
-		item, err = c.GetKVStoreItem(&GetKVStoreItemInput{
+		item, err = c.GetKVStoreItem(context.TODO(), &GetKVStoreItemInput{
 			StoreID: kvStore.StoreID,
 			Key:     testKey,
 		})
@@ -166,7 +167,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/insert-item-add-failure", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+		err := c.InsertKVStoreKey(context.TODO(), &InsertKVStoreKeyInput{
 			StoreID: kvStore.StoreID,
 			Key:     testKey,
 			Add:     true,
@@ -175,7 +176,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/insert-item-prepend-set-metadata", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+		err := c.InsertKVStoreKey(context.TODO(), &InsertKVStoreKeyInput{
 			StoreID:  kvStore.StoreID,
 			Key:      testKey,
 			Prepend:  true,
@@ -189,7 +190,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/get-item-round-2", func(c *Client) {
-		updatedItem, err := c.GetKVStoreItem(&GetKVStoreItemInput{
+		updatedItem, err := c.GetKVStoreItem(context.TODO(), &GetKVStoreItemInput{
 			StoreID: kvStore.StoreID,
 			Key:     testKey,
 		})
@@ -206,7 +207,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/insert-item-generation-match-failure", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+		err := c.InsertKVStoreKey(context.TODO(), &InsertKVStoreKeyInput{
 			StoreID:           kvStore.StoreID,
 			Key:               testKey,
 			IfGenerationMatch: item.Generation + 1,
@@ -218,7 +219,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/insert-item-append", func(c *Client) {
-		err := c.InsertKVStoreKey(&InsertKVStoreKeyInput{
+		err := c.InsertKVStoreKey(context.TODO(), &InsertKVStoreKeyInput{
 			StoreID: kvStore.StoreID,
 			Key:     testKey,
 			Append:  true,
@@ -230,7 +231,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/get-item-round-3", func(c *Client) {
-		updatedItem, err := c.GetKVStoreItem(&GetKVStoreItemInput{
+		updatedItem, err := c.GetKVStoreItem(context.TODO(), &GetKVStoreItemInput{
 			StoreID: kvStore.StoreID,
 			Key:     testKey,
 		})
@@ -245,7 +246,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/delete-item-nonexistent-suppress-error", func(c *Client) {
-		err := c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{
+		err := c.DeleteKVStoreKey(context.TODO(), &DeleteKVStoreKeyInput{
 			StoreID: kvStore.StoreID,
 			Key:     testKey + "23",
 			Force:   true,
@@ -254,7 +255,7 @@ func TestClient_KVStore(t *testing.T) {
 	})
 
 	Record(t, "kv_store/delete-item-generation-match-failure", func(c *Client) {
-		err := c.DeleteKVStoreKey(&DeleteKVStoreKeyInput{
+		err := c.DeleteKVStoreKey(context.TODO(), &DeleteKVStoreKeyInput{
 			StoreID:           kvStore.StoreID,
 			Key:               testKey,
 			IfGenerationMatch: item.Generation + 1,
@@ -275,7 +276,7 @@ func TestClient_CreateKVStoresWithLocations(t *testing.T) {
 
 	Record(t, fmt.Sprintf("kv_store/%s/create_stores", t.Name()), func(c *Client) {
 		for _, location := range []string{"US", "EU", "ASIA", "AUS"} {
-			ks, err = c.CreateKVStore(&CreateKVStoreInput{
+			ks, err = c.CreateKVStore(context.TODO(), &CreateKVStoreInput{
 				Name:     fmt.Sprintf("%s_%s", t.Name(), location),
 				Location: location,
 			})
@@ -297,7 +298,7 @@ func TestClient_CreateKVStoresWithLocations(t *testing.T) {
 	t.Cleanup(func() {
 		Record(t, fmt.Sprintf("kv_store/%s/delete_stores", t.Name()), func(c *Client) {
 			for _, ks := range stores {
-				err = c.DeleteKVStore(&DeleteKVStoreInput{
+				err = c.DeleteKVStore(context.TODO(), &DeleteKVStoreInput{
 					StoreID: ks.StoreID,
 				})
 				if err != nil {

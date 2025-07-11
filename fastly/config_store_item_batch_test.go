@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"testing"
 )
@@ -13,7 +14,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 	var err error
 
 	Record(t, "config_store_batch/create_and_upsert", func(c *Client) {
-		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
+		err = c.BatchModifyConfigStoreItems(context.TODO(), &BatchModifyConfigStoreItemsInput{
 			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
 				{
@@ -34,7 +35,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 	}
 
 	Record(t, "config_store_batch/update_and_upsert", func(c *Client) {
-		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
+		err = c.BatchModifyConfigStoreItems(context.TODO(), &BatchModifyConfigStoreItemsInput{
 			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
 				{
@@ -55,7 +56,7 @@ func TestClient_ConfigStoreBatch(t *testing.T) {
 	}
 
 	Record(t, "config_store_batch/delete", func(c *Client) {
-		err = c.BatchModifyConfigStoreItems(&BatchModifyConfigStoreItemsInput{
+		err = c.BatchModifyConfigStoreItems(context.TODO(), &BatchModifyConfigStoreItemsInput{
 			StoreID: cs.StoreID,
 			Items: []*BatchConfigStoreItem{
 				{
@@ -82,7 +83,7 @@ func createConfigStoreForBatch(t *testing.T) *ConfigStore {
 		err error
 	)
 	Record(t, fmt.Sprintf("config_store_batch/%s/create_store", t.Name()), func(c *Client) {
-		cs, err = c.CreateConfigStore(&CreateConfigStoreInput{
+		cs, err = c.CreateConfigStore(context.TODO(), &CreateConfigStoreInput{
 			Name: t.Name(),
 		})
 	})
@@ -93,7 +94,7 @@ func createConfigStoreForBatch(t *testing.T) *ConfigStore {
 	// Ensure Config Store is cleaned up.
 	t.Cleanup(func() {
 		Record(t, fmt.Sprintf("config_store_batch/%s/delete_store", t.Name()), func(c *Client) {
-			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
+			err = c.DeleteConfigStore(context.TODO(), &DeleteConfigStoreInput{
 				StoreID: cs.StoreID,
 			})
 		})

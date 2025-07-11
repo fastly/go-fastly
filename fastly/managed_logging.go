@@ -17,8 +17,6 @@ type (
 
 	// CreateManagedLoggingInput is used as input to the CreateManagedLogging function.
 	CreateManagedLoggingInput struct {
-		// Context, if supplied, will be used as the Request's context.
-		Context *context.Context
 		// Kind is the kind of managed logging we are creating (required).
 		Kind ManagedLoggingKind
 		// ServiceID is the ID of the service (required).
@@ -34,7 +32,7 @@ const (
 )
 
 // CreateManagedLogging creates a new resource.
-func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLogging, error) {
+func (c *Client) CreateManagedLogging(ctx context.Context, i *CreateManagedLoggingInput) (*ManagedLogging, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -51,7 +49,7 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 	}
 
 	// nosemgrep: trailofbits.go.invalid-usage-of-modified-variable.invalid-usage-of-modified-variable
-	resp, err := c.Post(path, CreateRequestOptions(i.Context))
+	resp, err := c.Post(ctx, path, CreateRequestOptions())
 	// If the service already has managed logging enabled, it will respond
 	// with a 409. Handle this case specially so users can decide if this is
 	// truly an error.
@@ -72,8 +70,6 @@ func (c *Client) CreateManagedLogging(i *CreateManagedLoggingInput) (*ManagedLog
 
 // DeleteManagedLoggingInput is used as input to the DeleteManagedLogging function.
 type DeleteManagedLoggingInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Kind is the kind of managed logging we are removing (required).
 	Kind ManagedLoggingKind
 	// ServiceID is the ID of the service (required).
@@ -81,7 +77,7 @@ type DeleteManagedLoggingInput struct {
 }
 
 // DeleteManagedLogging deletes the specified resource.
-func (c *Client) DeleteManagedLogging(i *DeleteManagedLoggingInput) error {
+func (c *Client) DeleteManagedLogging(ctx context.Context, i *DeleteManagedLoggingInput) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
@@ -97,7 +93,7 @@ func (c *Client) DeleteManagedLogging(i *DeleteManagedLoggingInput) error {
 		return ErrNotImplemented
 	}
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

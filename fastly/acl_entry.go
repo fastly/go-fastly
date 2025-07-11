@@ -38,7 +38,7 @@ type GetACLEntriesInput struct {
 }
 
 // GetACLEntries returns a ListPaginator for paginating through the resources.
-func (c *Client) GetACLEntries(i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
+func (c *Client) GetACLEntries(ctx context.Context, i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
 	input := ListOpts{}
 	if i.Direction != nil {
 		input.Direction = *i.Direction
@@ -53,7 +53,7 @@ func (c *Client) GetACLEntries(i *GetACLEntriesInput) *ListPaginator[ACLEntry] {
 		input.PerPage = *i.PerPage
 	}
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entries")
-	return NewPaginator[ACLEntry](c, input, path)
+	return NewPaginator[ACLEntry](ctx, c, input, path)
 }
 
 // ListACLEntriesInput is the input parameter to ListACLEntries function.
@@ -69,14 +69,14 @@ type ListACLEntriesInput struct {
 }
 
 // ListACLEntries retrieves all resources. Not suitable for large collections.
-func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
+func (c *Client) ListACLEntries(ctx context.Context, i *ListACLEntriesInput) ([]*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-	p := c.GetACLEntries(&GetACLEntriesInput{
+	p := c.GetACLEntries(ctx, &GetACLEntriesInput{
 		ACLID:     i.ACLID,
 		Direction: i.Direction,
 		ServiceID: i.ServiceID,
@@ -97,8 +97,6 @@ func (c *Client) ListACLEntries(i *ListACLEntriesInput) ([]*ACLEntry, error) {
 type GetACLEntryInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// EntryID is an alphanumeric string identifying an ACL Entry (required).
 	EntryID string
 	// ServiceID is an alphanumeric string identifying the service (required).
@@ -106,7 +104,7 @@ type GetACLEntryInput struct {
 }
 
 // GetACLEntry retrieves the specified resource.
-func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
+func (c *Client) GetACLEntry(ctx context.Context, i *GetACLEntryInput) (*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
@@ -119,7 +117,7 @@ func (c *Client) GetACLEntry(i *GetACLEntryInput) (*ACLEntry, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -139,8 +137,6 @@ type CreateACLEntryInput struct {
 	ACLID string `url:"-"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// IP is an IP address.
 	IP *string `url:"ip,omitempty"`
 	// Negated is whether to negate the match. Useful primarily when creating individual exceptions to larger subnets.
@@ -152,7 +148,7 @@ type CreateACLEntryInput struct {
 }
 
 // CreateACLEntry creates a new resource.
-func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
+func (c *Client) CreateACLEntry(ctx context.Context, i *CreateACLEntryInput) (*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
@@ -162,7 +158,7 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry")
 
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -180,8 +176,6 @@ func (c *Client) CreateACLEntry(i *CreateACLEntryInput) (*ACLEntry, error) {
 type DeleteACLEntryInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// EntryID is an alphanumeric string identifying an ACL Entry (required).
 	EntryID string
 	// ServiceID is an alphanumeric string identifying the service (required).
@@ -189,7 +183,7 @@ type DeleteACLEntryInput struct {
 }
 
 // DeleteACLEntry deletes the specified resource.
-func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
+func (c *Client) DeleteACLEntry(ctx context.Context, i *DeleteACLEntryInput) error {
 	if i.ACLID == "" {
 		return ErrMissingACLID
 	}
@@ -202,7 +196,7 @@ func (c *Client) DeleteACLEntry(i *DeleteACLEntryInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -226,8 +220,6 @@ type UpdateACLEntryInput struct {
 	ACLID string `url:"-"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// EntryID is an alphanumeric string identifying an ACL Entry (required).
 	EntryID string `url:"-"`
 	// IP is an IP address.
@@ -241,7 +233,7 @@ type UpdateACLEntryInput struct {
 }
 
 // UpdateACLEntry updates the specified resource.
-func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
+func (c *Client) UpdateACLEntry(ctx context.Context, i *UpdateACLEntryInput) (*ACLEntry, error) {
 	if i.ACLID == "" {
 		return nil, ErrMissingACLID
 	}
@@ -254,7 +246,7 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entry", i.EntryID)
 
-	resp, err := c.RequestForm(http.MethodPatch, path, i, CreateRequestOptions(i.Context))
+	resp, err := c.RequestForm(ctx, http.MethodPatch, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -273,8 +265,6 @@ func (c *Client) UpdateACLEntry(i *UpdateACLEntryInput) (*ACLEntry, error) {
 type BatchModifyACLEntriesInput struct {
 	// ACLID is an alphanumeric string identifying a ACL (required).
 	ACLID string `json:"-"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Entries is a list of ACL entries.
 	Entries []*BatchACLEntry `json:"entries"`
 	// ServiceID is an alphanumeric string identifying the service (required).
@@ -298,7 +288,7 @@ type BatchACLEntry struct {
 }
 
 // BatchModifyACLEntries updates the specified resources.
-func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
+func (c *Client) BatchModifyACLEntries(ctx context.Context, i *BatchModifyACLEntriesInput) error {
 	if i.ACLID == "" {
 		return ErrMissingACLID
 	}
@@ -311,7 +301,7 @@ func (c *Client) BatchModifyACLEntries(i *BatchModifyACLEntriesInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "acl", i.ACLID, "entries")
 
-	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

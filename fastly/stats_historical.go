@@ -120,8 +120,6 @@ type Stats struct {
 type GetStatsInput struct {
 	// By is the duration of sample windows.
 	By *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Field is the name of the stats field.
 	Field *string
 	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
@@ -135,9 +133,9 @@ type GetStatsInput struct {
 }
 
 // GetStats retrieves the specified resource.
-func (c *Client) GetStats(i *GetStatsInput) (*StatsResponse, error) {
+func (c *Client) GetStats(ctx context.Context, i *GetStatsInput) (*StatsResponse, error) {
 	var resp any
-	if err := c.GetStatsJSON(i, &resp); err != nil {
+	if err := c.GetStatsJSON(ctx, i, &resp); err != nil {
 		return nil, err
 	}
 
@@ -157,9 +155,9 @@ type StatsFieldResponse struct {
 }
 
 // GetStatsField retrieves the specified resource.
-func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
+func (c *Client) GetStatsField(ctx context.Context, i *GetStatsInput) (*StatsFieldResponse, error) {
 	var resp any
-	if err := c.GetStatsJSON(i, &resp); err != nil {
+	if err := c.GetStatsJSON(ctx, i, &resp); err != nil {
 		return nil, err
 	}
 
@@ -171,7 +169,7 @@ func (c *Client) GetStatsField(i *GetStatsInput) (*StatsFieldResponse, error) {
 }
 
 // GetStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
-func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
+func (c *Client) GetStatsJSON(ctx context.Context, i *GetStatsInput, dst any) error {
 	components := make([]string, 1, 5)
 
 	components[0] = "stats"
@@ -185,7 +183,7 @@ func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
 
 	path := ToSafeURL(components...)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	if i.By != nil {
 		requestOptions.Params["by"] = *i.By
 	}
@@ -199,7 +197,7 @@ func (c *Client) GetStatsJSON(i *GetStatsInput, dst any) error {
 		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return err
 	}
@@ -231,8 +229,6 @@ type RegionsUsage map[string]*Usage
 type GetUsageInput struct {
 	// By is the duration of sample windows.
 	By *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
 	From *string
 	// Region limits query to a specific geographic region.
@@ -242,8 +238,8 @@ type GetUsageInput struct {
 }
 
 // GetUsage returns usage information aggregated across all Fastly services and grouped by region.
-func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
-	requestOptions := CreateRequestOptions(i.Context)
+func (c *Client) GetUsage(ctx context.Context, i *GetUsageInput) (*UsageResponse, error) {
+	requestOptions := CreateRequestOptions()
 	if i.By != nil {
 		requestOptions.Params["by"] = *i.By
 	}
@@ -257,7 +253,7 @@ func (c *Client) GetUsage(i *GetUsageInput) (*UsageResponse, error) {
 		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get("/stats/usage", requestOptions)
+	resp, err := c.Get(ctx, "/stats/usage", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -287,8 +283,8 @@ type ServicesByRegionsUsage map[string]*ServicesUsage
 
 // GetUsageByService returns usage information aggregated by service and
 // grouped by service and region.
-func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, error) {
-	requestOptions := CreateRequestOptions(i.Context)
+func (c *Client) GetUsageByService(ctx context.Context, i *GetUsageInput) (*UsageByServiceResponse, error) {
+	requestOptions := CreateRequestOptions()
 	if i.By != nil {
 		requestOptions.Params["by"] = *i.By
 	}
@@ -302,7 +298,7 @@ func (c *Client) GetUsageByService(i *GetUsageInput) (*UsageByServiceResponse, e
 		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get("/stats/usage_by_service", requestOptions)
+	resp, err := c.Get(ctx, "/stats/usage_by_service", requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -322,9 +318,7 @@ type GetAggregateInput struct {
 	// By is the duration of sample windows.
 	By *string
 	// From is the timestamp that defines the start of the window for which to fetch statistics, including the timestamp itself.
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
-	From    *string
+	From *string
 	// Region limits query to a specific geographic region.
 	Region *string
 	// To is the timestamp that defines the end of the window for which to fetch statistics.
@@ -332,13 +326,10 @@ type GetAggregateInput struct {
 }
 
 // GetAggregateJSON returns all aggregated stats and decodes the response directly to the JSON struct dst.
-func (c *Client) GetAggregateJSON(i *GetAggregateInput, dst any) error {
-	requestOptions := CreateRequestOptions(i.Context)
+func (c *Client) GetAggregateJSON(ctx context.Context, i *GetAggregateInput, dst any) error {
+	requestOptions := CreateRequestOptions()
 	if i.By != nil {
 		requestOptions.Params["by"] = *i.By
-	}
-	if i.Context != nil {
-		requestOptions.Context = i.Context
 	}
 	if i.From != nil {
 		requestOptions.Params["from"] = *i.From
@@ -350,7 +341,7 @@ func (c *Client) GetAggregateJSON(i *GetAggregateInput, dst any) error {
 		requestOptions.Params["to"] = *i.To
 	}
 
-	resp, err := c.Get("/stats/aggregate", requestOptions)
+	resp, err := c.Get(ctx, "/stats/aggregate", requestOptions)
 	if err != nil {
 		return err
 	}
@@ -371,8 +362,8 @@ type RegionsResponse struct {
 }
 
 // GetRegions returns a list of Fastly regions.
-func (c *Client) GetRegions() (*RegionsResponse, error) {
-	resp, err := c.Get("stats/regions", CreateRequestOptions(nil))
+func (c *Client) GetRegions(ctx context.Context) (*RegionsResponse, error) {
+	resp, err := c.Get(ctx, "stats/regions", CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

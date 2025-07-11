@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
@@ -19,7 +20,7 @@ func TestClient_SFTPs(t *testing.T) {
 	// Create
 	var sftpCreateResp1, sftpCreateResp2, sftpCreateResp3 *SFTP
 	Record(t, "sftps/create", func(c *Client) {
-		sftpCreateResp1, err = c.CreateSFTP(&CreateSFTPInput{
+		sftpCreateResp1, err = c.CreateSFTP(context.TODO(), &CreateSFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp"),
@@ -45,7 +46,7 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 
 	Record(t, "sftps/create2", func(c *Client) {
-		sftpCreateResp2, err = c.CreateSFTP(&CreateSFTPInput{
+		sftpCreateResp2, err = c.CreateSFTP(context.TODO(), &CreateSFTPInput{
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-sftp-2"),
@@ -71,7 +72,7 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 
 	Record(t, "sftps/create3", func(c *Client) {
-		sftpCreateResp3, err = c.CreateSFTP(&CreateSFTPInput{
+		sftpCreateResp3, err = c.CreateSFTP(context.TODO(), &CreateSFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp-3"),
@@ -99,7 +100,7 @@ func TestClient_SFTPs(t *testing.T) {
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
 	Record(t, "sftps/create4", func(c *Client) {
-		_, err = c.CreateSFTP(&CreateSFTPInput{
+		_, err = c.CreateSFTP(context.TODO(), &CreateSFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-sftp-4"),
@@ -128,25 +129,25 @@ func TestClient_SFTPs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "sftps/cleanup", func(c *Client) {
-			_ = c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-sftp",
 			})
 
-			_ = c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-sftp-2",
 			})
 
-			_ = c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-sftp-3",
 			})
 
-			_ = c.DeleteSFTP(&DeleteSFTPInput{
+			_ = c.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-sftp",
@@ -221,7 +222,7 @@ func TestClient_SFTPs(t *testing.T) {
 	// List
 	var sftps []*SFTP
 	Record(t, "sftps/list", func(c *Client) {
-		sftps, err = c.ListSFTPs(&ListSFTPsInput{
+		sftps, err = c.ListSFTPs(context.TODO(), &ListSFTPsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -236,7 +237,7 @@ func TestClient_SFTPs(t *testing.T) {
 	// Get
 	var sftpGetResp *SFTP
 	Record(t, "sftps/get", func(c *Client) {
-		sftpGetResp, err = c.GetSFTP(&GetSFTPInput{
+		sftpGetResp, err = c.GetSFTP(context.TODO(), &GetSFTPInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-sftp",
@@ -301,7 +302,7 @@ func TestClient_SFTPs(t *testing.T) {
 	// Update
 	var sftpUpdateResp1, sftpUpdateResp2, sftpUpdateResp3 *SFTP
 	Record(t, "sftps/update", func(c *Client) {
-		sftpUpdateResp1, err = c.UpdateSFTP(&UpdateSFTPInput{
+		sftpUpdateResp1, err = c.UpdateSFTP(context.TODO(), &UpdateSFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-sftp",
@@ -316,7 +317,7 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 
 	Record(t, "sftps/update2", func(c *Client) {
-		sftpUpdateResp2, err = c.UpdateSFTP(&UpdateSFTPInput{
+		sftpUpdateResp2, err = c.UpdateSFTP(context.TODO(), &UpdateSFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-sftp-2",
@@ -328,7 +329,7 @@ func TestClient_SFTPs(t *testing.T) {
 	}
 
 	Record(t, "sftps/update3", func(c *Client) {
-		sftpUpdateResp3, err = c.UpdateSFTP(&UpdateSFTPInput{
+		sftpUpdateResp3, err = c.UpdateSFTP(context.TODO(), &UpdateSFTPInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-sftp-3",
@@ -369,7 +370,7 @@ func TestClient_SFTPs(t *testing.T) {
 
 	// Delete
 	Record(t, "sftps/delete", func(c *Client) {
-		err = c.DeleteSFTP(&DeleteSFTPInput{
+		err = c.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-sftp",
@@ -383,14 +384,14 @@ func TestClient_SFTPs(t *testing.T) {
 func TestClient_ListSFTPs_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListSFTPs(&ListSFTPsInput{
+	_, err = TestClient.ListSFTPs(context.TODO(), &ListSFTPsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListSFTPs(&ListSFTPsInput{
+	_, err = TestClient.ListSFTPs(context.TODO(), &ListSFTPsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -402,14 +403,14 @@ func TestClient_ListSFTPs_validation(t *testing.T) {
 func TestClient_CreateSFTP_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateSFTP(&CreateSFTPInput{
+	_, err = TestClient.CreateSFTP(context.TODO(), &CreateSFTPInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateSFTP(&CreateSFTPInput{
+	_, err = TestClient.CreateSFTP(context.TODO(), &CreateSFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -421,7 +422,7 @@ func TestClient_CreateSFTP_validation(t *testing.T) {
 func TestClient_GetSFTP_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetSFTP(&GetSFTPInput{
+	_, err = TestClient.GetSFTP(context.TODO(), &GetSFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -429,7 +430,7 @@ func TestClient_GetSFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetSFTP(&GetSFTPInput{
+	_, err = TestClient.GetSFTP(context.TODO(), &GetSFTPInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -437,7 +438,7 @@ func TestClient_GetSFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetSFTP(&GetSFTPInput{
+	_, err = TestClient.GetSFTP(context.TODO(), &GetSFTPInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -449,7 +450,7 @@ func TestClient_GetSFTP_validation(t *testing.T) {
 func TestClient_UpdateSFTP_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateSFTP(&UpdateSFTPInput{
+	_, err = TestClient.UpdateSFTP(context.TODO(), &UpdateSFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -457,7 +458,7 @@ func TestClient_UpdateSFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateSFTP(&UpdateSFTPInput{
+	_, err = TestClient.UpdateSFTP(context.TODO(), &UpdateSFTPInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -465,7 +466,7 @@ func TestClient_UpdateSFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateSFTP(&UpdateSFTPInput{
+	_, err = TestClient.UpdateSFTP(context.TODO(), &UpdateSFTPInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -477,7 +478,7 @@ func TestClient_UpdateSFTP_validation(t *testing.T) {
 func TestClient_DeleteSFTP_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteSFTP(&DeleteSFTPInput{
+	err = TestClient.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -485,7 +486,7 @@ func TestClient_DeleteSFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteSFTP(&DeleteSFTPInput{
+	err = TestClient.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -493,7 +494,7 @@ func TestClient_DeleteSFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteSFTP(&DeleteSFTPInput{
+	err = TestClient.DeleteSFTP(context.TODO(), &DeleteSFTPInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

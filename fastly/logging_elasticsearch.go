@@ -34,8 +34,6 @@ type Elasticsearch struct {
 
 // ListElasticsearchInput is used as input to the ListElasticsearch function.
 type ListElasticsearchInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -43,7 +41,7 @@ type ListElasticsearchInput struct {
 }
 
 // ListElasticsearch retrieves all resources.
-func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch, error) {
+func (c *Client) ListElasticsearch(ctx context.Context, i *ListElasticsearchInput) ([]*Elasticsearch, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -52,7 +50,7 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -67,8 +65,6 @@ func (c *Client) ListElasticsearch(i *ListElasticsearchInput) ([]*Elasticsearch,
 
 // CreateElasticsearchInput is used as input to the CreateElasticsearch function.
 type CreateElasticsearchInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Elasticsearch can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -110,7 +106,7 @@ type CreateElasticsearchInput struct {
 }
 
 // CreateElasticsearch creates a new resource.
-func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearch, error) {
+func (c *Client) CreateElasticsearch(ctx context.Context, i *CreateElasticsearchInput) (*Elasticsearch, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -119,7 +115,7 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -134,8 +130,6 @@ func (c *Client) CreateElasticsearch(i *CreateElasticsearchInput) (*Elasticsearc
 
 // GetElasticsearchInput is used as input to the GetElasticsearch function.
 type GetElasticsearchInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Elasticsearch endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -145,7 +139,7 @@ type GetElasticsearchInput struct {
 }
 
 // GetElasticsearch retrieves the specified resource.
-func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, error) {
+func (c *Client) GetElasticsearch(ctx context.Context, i *GetElasticsearchInput) (*Elasticsearch, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -157,7 +151,7 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -174,8 +168,6 @@ func (c *Client) GetElasticsearch(i *GetElasticsearchInput) (*Elasticsearch, err
 // UpdateElasticsearchInput is the input parameter to the UpdateElasticsearch
 // function.
 type UpdateElasticsearchInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a Fastly log format string. Must produce valid JSON that Elasticsearch can ingest.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -219,7 +211,7 @@ type UpdateElasticsearchInput struct {
 }
 
 // UpdateElasticsearch updates the specified resource.
-func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearch, error) {
+func (c *Client) UpdateElasticsearch(ctx context.Context, i *UpdateElasticsearchInput) (*Elasticsearch, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -231,7 +223,7 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -247,8 +239,6 @@ func (c *Client) UpdateElasticsearch(i *UpdateElasticsearchInput) (*Elasticsearc
 // DeleteElasticsearchInput is the input parameter to the DeleteElasticsearch
 // function.
 type DeleteElasticsearchInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the Elasticsearch endpoint to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -258,7 +248,7 @@ type DeleteElasticsearchInput struct {
 }
 
 // DeleteElasticsearch deletes the specified resource.
-func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {
+func (c *Client) DeleteElasticsearch(ctx context.Context, i *DeleteElasticsearchInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -270,7 +260,7 @@ func (c *Client) DeleteElasticsearch(i *DeleteElasticsearchInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "elasticsearch", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

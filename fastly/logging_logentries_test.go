@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Logentries(t *testing.T) {
 	// Create
 	var le *Logentries
 	Record(t, "logentries/create", func(c *Client) {
-		le, err = c.CreateLogentries(&CreateLogentriesInput{
+		le, err = c.CreateLogentries(context.TODO(), &CreateLogentriesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-logentries"),
@@ -36,13 +37,13 @@ func TestClient_Logentries(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "logentries/delete", func(c *Client) {
-			_ = c.DeleteLogentries(&DeleteLogentriesInput{
+			_ = c.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-logentries",
 			})
 
-			_ = c.DeleteLogentries(&DeleteLogentriesInput{
+			_ = c.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-logentries",
@@ -78,7 +79,7 @@ func TestClient_Logentries(t *testing.T) {
 	// List
 	var les []*Logentries
 	Record(t, "logentries/list", func(c *Client) {
-		les, err = c.ListLogentries(&ListLogentriesInput{
+		les, err = c.ListLogentries(context.TODO(), &ListLogentriesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -93,7 +94,7 @@ func TestClient_Logentries(t *testing.T) {
 	// Get
 	var nle *Logentries
 	Record(t, "logentries/get", func(c *Client) {
-		nle, err = c.GetLogentries(&GetLogentriesInput{
+		nle, err = c.GetLogentries(context.TODO(), &GetLogentriesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-logentries",
@@ -127,7 +128,7 @@ func TestClient_Logentries(t *testing.T) {
 	// Update
 	var ule *Logentries
 	Record(t, "logentries/update", func(c *Client) {
-		ule, err = c.UpdateLogentries(&UpdateLogentriesInput{
+		ule, err = c.UpdateLogentries(context.TODO(), &UpdateLogentriesInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-logentries",
@@ -155,7 +156,7 @@ func TestClient_Logentries(t *testing.T) {
 
 	// Delete
 	Record(t, "logentries/delete", func(c *Client) {
-		err = c.DeleteLogentries(&DeleteLogentriesInput{
+		err = c.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-logentries",
@@ -168,14 +169,14 @@ func TestClient_Logentries(t *testing.T) {
 
 func TestClient_ListLogentries_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListLogentries(&ListLogentriesInput{
+	_, err = TestClient.ListLogentries(context.TODO(), &ListLogentriesInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListLogentries(&ListLogentriesInput{
+	_, err = TestClient.ListLogentries(context.TODO(), &ListLogentriesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -186,14 +187,14 @@ func TestClient_ListLogentries_validation(t *testing.T) {
 
 func TestClient_CreateLogentries_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateLogentries(&CreateLogentriesInput{
+	_, err = TestClient.CreateLogentries(context.TODO(), &CreateLogentriesInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateLogentries(&CreateLogentriesInput{
+	_, err = TestClient.CreateLogentries(context.TODO(), &CreateLogentriesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -205,7 +206,7 @@ func TestClient_CreateLogentries_validation(t *testing.T) {
 func TestClient_GetLogentries_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetLogentries(&GetLogentriesInput{
+	_, err = TestClient.GetLogentries(context.TODO(), &GetLogentriesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -213,7 +214,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetLogentries(&GetLogentriesInput{
+	_, err = TestClient.GetLogentries(context.TODO(), &GetLogentriesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -221,7 +222,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetLogentries(&GetLogentriesInput{
+	_, err = TestClient.GetLogentries(context.TODO(), &GetLogentriesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -233,7 +234,7 @@ func TestClient_GetLogentries_validation(t *testing.T) {
 func TestClient_UpdateLogentries_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateLogentries(&UpdateLogentriesInput{
+	_, err = TestClient.UpdateLogentries(context.TODO(), &UpdateLogentriesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -241,7 +242,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateLogentries(&UpdateLogentriesInput{
+	_, err = TestClient.UpdateLogentries(context.TODO(), &UpdateLogentriesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -249,7 +250,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateLogentries(&UpdateLogentriesInput{
+	_, err = TestClient.UpdateLogentries(context.TODO(), &UpdateLogentriesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -261,7 +262,7 @@ func TestClient_UpdateLogentries_validation(t *testing.T) {
 func TestClient_DeleteLogentries_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteLogentries(&DeleteLogentriesInput{
+	err = TestClient.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -269,7 +270,7 @@ func TestClient_DeleteLogentries_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteLogentries(&DeleteLogentriesInput{
+	err = TestClient.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -277,7 +278,7 @@ func TestClient_DeleteLogentries_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteLogentries(&DeleteLogentriesInput{
+	err = TestClient.DeleteLogentries(context.TODO(), &DeleteLogentriesInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

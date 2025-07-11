@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"encoding/json"
 	"errors"
 	"testing"
@@ -20,7 +21,7 @@ func TestClient_Resources(t *testing.T) {
 	// Create kv-store resource we want to link to via Resource API.
 	var o *KVStore
 	Record(t, "resources/create-kv-store", func(c *Client) {
-		o, err = c.CreateKVStore(&CreateKVStoreInput{
+		o, err = c.CreateKVStore(context.TODO(), &CreateKVStoreInput{
 			Name: "test-kv-store",
 		})
 	})
@@ -31,7 +32,7 @@ func TestClient_Resources(t *testing.T) {
 	// Ensure kv-store resource is deleted
 	defer func() {
 		Record(t, "resources/cleanup-kv-store", func(c *Client) {
-			_ = c.DeleteKVStore(&DeleteKVStoreInput{
+			_ = c.DeleteKVStore(context.TODO(), &DeleteKVStoreInput{
 				StoreID: o.StoreID,
 			})
 		})
@@ -45,7 +46,7 @@ func TestClient_Resources(t *testing.T) {
 	// Create
 	var r *Resource
 	Record(t, "resources/create", func(c *Client) {
-		r, err = c.CreateResource(&CreateResourceInput{
+		r, err = c.CreateResource(context.TODO(), &CreateResourceInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(kvStoreNameForServiceLinking),
@@ -59,7 +60,7 @@ func TestClient_Resources(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "resources/cleanup", func(c *Client) {
-			_ = c.DeleteResource(&DeleteResourceInput{
+			_ = c.DeleteResource(context.TODO(), &DeleteResourceInput{
 				ResourceID:     *r.LinkID,
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
@@ -74,7 +75,7 @@ func TestClient_Resources(t *testing.T) {
 	// List
 	var rs []*Resource
 	Record(t, "resources/list", func(c *Client) {
-		rs, err = c.ListResources(&ListResourcesInput{
+		rs, err = c.ListResources(context.TODO(), &ListResourcesInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -89,7 +90,7 @@ func TestClient_Resources(t *testing.T) {
 	// Get
 	var gr *Resource
 	Record(t, "resources/get", func(c *Client) {
-		gr, err = c.GetResource(&GetResourceInput{
+		gr, err = c.GetResource(context.TODO(), &GetResourceInput{
 			ResourceID:     *r.LinkID,
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
@@ -105,7 +106,7 @@ func TestClient_Resources(t *testing.T) {
 	// Update
 	var ur *Resource
 	Record(t, "resources/update", func(c *Client) {
-		ur, err = c.UpdateResource(&UpdateResourceInput{
+		ur, err = c.UpdateResource(context.TODO(), &UpdateResourceInput{
 			ResourceID:     *r.LinkID,
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
@@ -121,7 +122,7 @@ func TestClient_Resources(t *testing.T) {
 
 	// Delete
 	Record(t, "resources/delete", func(c *Client) {
-		err = c.DeleteResource(&DeleteResourceInput{
+		err = c.DeleteResource(context.TODO(), &DeleteResourceInput{
 			ResourceID:     *ur.LinkID,
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
@@ -134,14 +135,14 @@ func TestClient_Resources(t *testing.T) {
 
 func TestClient_ListResources_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListResources(&ListResourcesInput{
+	_, err = TestClient.ListResources(context.TODO(), &ListResourcesInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListResources(&ListResourcesInput{
+	_, err = TestClient.ListResources(context.TODO(), &ListResourcesInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -152,14 +153,14 @@ func TestClient_ListResources_validation(t *testing.T) {
 
 func TestClient_CreateResource_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateResource(&CreateResourceInput{
+	_, err = TestClient.CreateResource(context.TODO(), &CreateResourceInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateResource(&CreateResourceInput{
+	_, err = TestClient.CreateResource(context.TODO(), &CreateResourceInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -171,7 +172,7 @@ func TestClient_CreateResource_validation(t *testing.T) {
 func TestClient_GetResource_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetResource(&GetResourceInput{
+	_, err = TestClient.GetResource(context.TODO(), &GetResourceInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -179,7 +180,7 @@ func TestClient_GetResource_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetResource(&GetResourceInput{
+	_, err = TestClient.GetResource(context.TODO(), &GetResourceInput{
 		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
@@ -187,7 +188,7 @@ func TestClient_GetResource_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetResource(&GetResourceInput{
+	_, err = TestClient.GetResource(context.TODO(), &GetResourceInput{
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})
@@ -199,7 +200,7 @@ func TestClient_GetResource_validation(t *testing.T) {
 func TestClient_UpdateResource_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateResource(&UpdateResourceInput{
+	_, err = TestClient.UpdateResource(context.TODO(), &UpdateResourceInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -207,7 +208,7 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateResource(&UpdateResourceInput{
+	_, err = TestClient.UpdateResource(context.TODO(), &UpdateResourceInput{
 		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
@@ -215,7 +216,7 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateResource(&UpdateResourceInput{
+	_, err = TestClient.UpdateResource(context.TODO(), &UpdateResourceInput{
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})
@@ -227,7 +228,7 @@ func TestClient_UpdateResource_validation(t *testing.T) {
 func TestClient_DeleteResource_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteResource(&DeleteResourceInput{
+	err = TestClient.DeleteResource(context.TODO(), &DeleteResourceInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -235,7 +236,7 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteResource(&DeleteResourceInput{
+	err = TestClient.DeleteResource(context.TODO(), &DeleteResourceInput{
 		ResourceID:     "test",
 		ServiceVersion: 1,
 	})
@@ -243,7 +244,7 @@ func TestClient_DeleteResource_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteResource(&DeleteResourceInput{
+	err = TestClient.DeleteResource(context.TODO(), &DeleteResourceInput{
 		ResourceID: "test",
 		ServiceID:  "foo",
 	})

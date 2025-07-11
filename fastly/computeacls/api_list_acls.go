@@ -1,6 +1,7 @@
 package computeacls
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 
@@ -8,8 +9,8 @@ import (
 )
 
 // ListACLs retrieves all compute ACLs.
-func ListACLs(c *fastly.Client) (*ComputeACLs, error) {
-	resp, err := c.Get("/resources/acls", fastly.CreateRequestOptions(nil))
+func ListACLs(ctx context.Context, c *fastly.Client) (*ComputeACLs, error) {
+	resp, err := c.Get(ctx, "/resources/acls", fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

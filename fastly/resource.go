@@ -33,8 +33,6 @@ type Resource struct {
 
 // ListResourcesInput is used as input to the ListResources function.
 type ListResourcesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -42,7 +40,7 @@ type ListResourcesInput struct {
 }
 
 // ListResources retrieves all resources.
-func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
+func (c *Client) ListResources(ctx context.Context, i *ListResourcesInput) ([]*Resource, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -51,7 +49,7 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -66,8 +64,6 @@ func (c *Client) ListResources(i *ListResourcesInput) ([]*Resource, error) {
 
 // CreateResourceInput is used as input to the CreateResource function.
 type CreateResourceInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the resource being linked to (e.g. a kv store).
 	//
 	// NOTE: This doesn't have to match the actual resource name, i.e. the name
@@ -84,7 +80,7 @@ type CreateResourceInput struct {
 }
 
 // CreateResource creates a new resource.
-func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
+func (c *Client) CreateResource(ctx context.Context, i *CreateResourceInput) (*Resource, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -93,7 +89,7 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -108,8 +104,6 @@ func (c *Client) CreateResource(i *CreateResourceInput) (*Resource, error) {
 
 // GetResourceInput is used as input to the GetResource function.
 type GetResourceInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ResourceID is an alphanumeric string identifying the resource link (required).
 	ResourceID string
 	// ServiceID is the ID of the service (required).
@@ -119,7 +113,7 @@ type GetResourceInput struct {
 }
 
 // GetResource retrieves the specified resource.
-func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
+func (c *Client) GetResource(ctx context.Context, i *GetResourceInput) (*Resource, error) {
 	if i.ResourceID == "" {
 		return nil, ErrMissingResourceID
 	}
@@ -131,7 +125,7 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource", i.ResourceID)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -146,8 +140,6 @@ func (c *Client) GetResource(i *GetResourceInput) (*Resource, error) {
 
 // UpdateResourceInput is used as input to the UpdateResource function.
 type UpdateResourceInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the resource being linked to (e.g. a kv store).
 	Name *string `url:"name,omitempty"`
 	// ResourceID is an alphanumeric string identifying the resource link (required).
@@ -159,7 +151,7 @@ type UpdateResourceInput struct {
 }
 
 // UpdateResource updates the specified resource.
-func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
+func (c *Client) UpdateResource(ctx context.Context, i *UpdateResourceInput) (*Resource, error) {
 	if i.ResourceID == "" {
 		return nil, ErrMissingResourceID
 	}
@@ -171,7 +163,7 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource", i.ResourceID)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -186,8 +178,6 @@ func (c *Client) UpdateResource(i *UpdateResourceInput) (*Resource, error) {
 
 // DeleteResourceInput is the input parameter to DeleteResource.
 type DeleteResourceInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// ResourceID is an alphanumeric string identifying the resource link (required).
 	ResourceID string `url:"-"`
 	// ServiceID is the ID of the service (required).
@@ -197,7 +187,7 @@ type DeleteResourceInput struct {
 }
 
 // DeleteResource deletes the specified resource.
-func (c *Client) DeleteResource(i *DeleteResourceInput) error {
+func (c *Client) DeleteResource(ctx context.Context, i *DeleteResourceInput) error {
 	if i.ResourceID == "" {
 		return ErrMissingResourceID
 	}
@@ -209,7 +199,7 @@ func (c *Client) DeleteResource(i *DeleteResourceInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "resource", i.ResourceID)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

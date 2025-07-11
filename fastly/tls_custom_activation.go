@@ -22,8 +22,6 @@ type TLSActivation struct {
 
 // ListTLSActivationsInput is used as input to the ListTLSActivations function.
 type ListTLSActivationsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// FilterTLSCertificateID limits the returned activations to a specific certificate.
 	FilterTLSCertificateID string
 	// FilterTLSConfigurationID limits the returned activations to a specific TLS configuration.
@@ -67,14 +65,14 @@ func (i *ListTLSActivationsInput) formatFilters() map[string]string {
 }
 
 // ListTLSActivations retrieves all resources.
-func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivation, error) {
+func (c *Client) ListTLSActivations(ctx context.Context, i *ListTLSActivationsInput) ([]*TLSActivation, error) {
 	path := "/tls/activations"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params = i.formatFilters()
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -99,8 +97,6 @@ func (c *Client) ListTLSActivations(i *ListTLSActivationsInput) ([]*TLSActivatio
 
 // GetTLSActivationInput is used as input to the GetTLSActivation function.
 type GetTLSActivationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS activation.
 	ID string
 	// Include related objects. Optional, comma-separated values. Permitted values: tls_certificate, tls_configuration, and tls_domain.
@@ -108,21 +104,21 @@ type GetTLSActivationInput struct {
 }
 
 // GetTLSActivation retrieves the specified resource.
-func (c *Client) GetTLSActivation(i *GetTLSActivationInput) (*TLSActivation, error) {
+func (c *Client) GetTLSActivation(ctx context.Context, i *GetTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "activations", i.ID)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
 	if i.Include != nil {
 		requestOptions.Params["include"] = *i.Include
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -142,8 +138,6 @@ type CreateTLSActivationInput struct {
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
 	// Configuration is an alphanumeric string identifying a TLS configuration.
 	Configuration *TLSConfiguration `jsonapi:"relation,tls_configuration,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Domain is the domain name.
 	Domain *TLSDomain `jsonapi:"relation,tls_domain"`
 	// ID is an aphanumeric string identifying a TLS activation.
@@ -151,7 +145,7 @@ type CreateTLSActivationInput struct {
 }
 
 // CreateTLSActivation creates a new resource.
-func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivation, error) {
+func (c *Client) CreateTLSActivation(ctx context.Context, i *CreateTLSActivationInput) (*TLSActivation, error) {
 	if i.Certificate == nil {
 		return nil, ErrMissingTLSCertificate
 	}
@@ -161,7 +155,7 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 
 	path := "/tls/activations"
 
-	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -179,8 +173,6 @@ func (c *Client) CreateTLSActivation(i *CreateTLSActivationInput) (*TLSActivatio
 type UpdateTLSActivationInput struct {
 	// Certificate is an alphanumeric string identifying a TLS certificate.
 	Certificate *CustomTLSCertificate `jsonapi:"relation,tls_certificate"` // Only ID of CustomTLSCertificate needs to be set.
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// ID is an aphanumeric string identifying a TLS activation.
 	ID string `jsonapi:"primary,tls_activation"`
 	// MutualAuthentication is an alphanumeric string identifying a mutual authentication.
@@ -188,7 +180,7 @@ type UpdateTLSActivationInput struct {
 }
 
 // UpdateTLSActivation updates the specified resource.
-func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivation, error) {
+func (c *Client) UpdateTLSActivation(ctx context.Context, i *UpdateTLSActivationInput) (*TLSActivation, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -198,7 +190,7 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 
 	path := ToSafeURL("tls", "activations", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -213,21 +205,19 @@ func (c *Client) UpdateTLSActivation(i *UpdateTLSActivationInput) (*TLSActivatio
 
 // DeleteTLSActivationInput used for deleting a certificate.
 type DeleteTLSActivationInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS activation.
 	ID string
 }
 
 // DeleteTLSActivation deletes the specified resource.
-func (c *Client) DeleteTLSActivation(i *DeleteTLSActivationInput) error {
+func (c *Client) DeleteTLSActivation(ctx context.Context, i *DeleteTLSActivationInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "activations", i.ID)
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

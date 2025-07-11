@@ -13,8 +13,6 @@ import (
 // GetPrivateKeyInput is an input to the GetPrivateKey function.
 // Allowed values for the fields are described at https://developer.fastly.com/reference/api/tls/platform/.
 type GetPrivateKeyInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
@@ -32,8 +30,6 @@ type PrivateKey struct {
 
 // ListPrivateKeysInput is used as input to the ListPrivateKeys function.
 type ListPrivateKeysInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// FilterInUse is the returned keys to those without any matching TLS certificates.
 	FilterInUse string
 	// PageNumber is the page index for pagination.
@@ -67,13 +63,13 @@ func (i *ListPrivateKeysInput) formatFilters() map[string]string {
 }
 
 // ListPrivateKeys retrieves all resources.
-func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error) {
+func (c *Client) ListPrivateKeys(ctx context.Context, i *ListPrivateKeysInput) ([]*PrivateKey, error) {
 	path := "/tls/private_keys"
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params = i.formatFilters()
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -97,14 +93,14 @@ func (c *Client) ListPrivateKeys(i *ListPrivateKeysInput) ([]*PrivateKey, error)
 }
 
 // GetPrivateKey retrieves the specified resource.
-func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
+func (c *Client) GetPrivateKey(ctx context.Context, i *GetPrivateKeyInput) (*PrivateKey, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "private_keys", i.ID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -120,8 +116,6 @@ func (c *Client) GetPrivateKey(i *GetPrivateKeyInput) (*PrivateKey, error) {
 
 // CreatePrivateKeyInput is used as input to the CreatePrivateKey function.
 type CreatePrivateKeyInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Key is the contents of the private key. Must be a PEM-formatted key.
 	Key string `jsonapi:"attr,key,omitempty"`
 	// Name is a customizable name for your private key.
@@ -129,7 +123,7 @@ type CreatePrivateKeyInput struct {
 }
 
 // CreatePrivateKey creates a new resource.
-func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error) {
+func (c *Client) CreatePrivateKey(ctx context.Context, i *CreatePrivateKeyInput) (*PrivateKey, error) {
 	path := "/tls/private_keys"
 
 	if i.Key == "" {
@@ -140,7 +134,7 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 		return nil, ErrMissingName
 	}
 
-	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -156,21 +150,19 @@ func (c *Client) CreatePrivateKey(i *CreatePrivateKeyInput) (*PrivateKey, error)
 
 // DeletePrivateKeyInput used for deleting a private key.
 type DeletePrivateKeyInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a private Key.
 	ID string
 }
 
 // DeletePrivateKey deletes the specified resource.
-func (c *Client) DeletePrivateKey(i *DeletePrivateKeyInput) error {
+func (c *Client) DeletePrivateKey(ctx context.Context, i *DeletePrivateKeyInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "private_keys", i.ID)
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

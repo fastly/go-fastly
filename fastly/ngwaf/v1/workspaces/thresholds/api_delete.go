@@ -10,8 +10,6 @@ import (
 // DeleteInput specifies the information needed for the Delete() function to
 // perform the operation.
 type DeleteInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ThresholdID is the threshold identifier. Required.
 	ThresholdID *string
 	// WorkspaceID is the workspace identifier. Required.
@@ -19,7 +17,7 @@ type DeleteInput struct {
 }
 
 // Delete deletes the specified threshold.
-func Delete(c *fastly.Client, i *DeleteInput) error {
+func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 	if i.WorkspaceID == nil {
 		return fastly.ErrMissingWorkspaceID
 	}
@@ -29,7 +27,7 @@ func Delete(c *fastly.Client, i *DeleteInput) error {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "thresholds", *i.ThresholdID)
 
-	resp, err := c.Delete(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return err
 	}

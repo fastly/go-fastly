@@ -22,8 +22,6 @@ var PERMISSIONS = []string{ReadWriteAdmin, ReadOnlyAdmin, ReadWriteObject, ReadO
 // CreateInput specifies the information needed for the Create() function to
 // perform the operation.
 type CreateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// Description is a description of the access key (required).
 	Description *string `json:"description"`
 	// Permission is the permissions the access key will have (required).
@@ -33,7 +31,7 @@ type CreateInput struct {
 }
 
 // Create creates a new Object Storage Access Key.
-func Create(c *fastly.Client, i *CreateInput) (*AccessKey, error) {
+func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*AccessKey, error) {
 	if i.Description == nil {
 		return nil, fastly.ErrMissingDescription
 	}
@@ -47,7 +45,7 @@ func Create(c *fastly.Client, i *CreateInput) (*AccessKey, error) {
 		return nil, fastly.ErrInvalidPermission
 	}
 
-	resp, err := c.PostJSON("/resources/object-storage/access-keys", i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, "/resources/object-storage/access-keys", i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -13,7 +13,6 @@ import (
 // perform the operation.
 type UpdateInput struct {
 	// Context allows for cancellation and timeout control over the request lifecycle.
-	Context *context.Context
 	// Type specifies the category of the rule (e.g., "request") (required).
 	Type *string
 	// Description provides a human-readable explanation of what the rule does (required).
@@ -73,7 +72,7 @@ type UpdateGroupCondition struct {
 }
 
 // Update updates a rule.
-func Update(c *fastly.Client, i *UpdateInput) (*Rule, error) {
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Rule, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -111,7 +110,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Rule, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "rules", *i.RuleID)
 
-	resp, err := c.PatchJSON(path, v, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, v, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

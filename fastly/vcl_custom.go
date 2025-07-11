@@ -20,8 +20,6 @@ type VCL struct {
 
 // ListVCLsInput is used as input to the ListVCLs function.
 type ListVCLsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -29,7 +27,7 @@ type ListVCLsInput struct {
 }
 
 // ListVCLs retrieves all resources.
-func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
+func (c *Client) ListVCLs(ctx context.Context, i *ListVCLsInput) ([]*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -38,7 +36,7 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -53,8 +51,6 @@ func (c *Client) ListVCLs(i *ListVCLsInput) ([]*VCL, error) {
 
 // GetVCLInput is used as input to the GetVCL function.
 type GetVCLInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the VCL to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -64,7 +60,7 @@ type GetVCLInput struct {
 }
 
 // GetVCL retrieves the specified resource.
-func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
+func (c *Client) GetVCL(ctx context.Context, i *GetVCLInput) (*VCL, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -76,7 +72,7 @@ func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -91,8 +87,6 @@ func (c *Client) GetVCL(i *GetVCLInput) (*VCL, error) {
 
 // GetGeneratedVCLInput is used as input to the GetGeneratedVCL function.
 type GetGeneratedVCLInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -100,7 +94,7 @@ type GetGeneratedVCLInput struct {
 }
 
 // GetGeneratedVCL retrieves the specified resource.
-func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
+func (c *Client) GetGeneratedVCL(ctx context.Context, i *GetGeneratedVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -109,7 +103,7 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "generated_vcl")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -126,8 +120,6 @@ func (c *Client) GetGeneratedVCL(i *GetGeneratedVCLInput) (*VCL, error) {
 type CreateVCLInput struct {
 	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Main is set to true when this is the main VCL, otherwise false.
 	Main *bool `url:"main,omitempty"`
 	// Name is the name of this VCL.
@@ -139,7 +131,7 @@ type CreateVCLInput struct {
 }
 
 // CreateVCL creates a new resource.
-func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
+func (c *Client) CreateVCL(ctx context.Context, i *CreateVCLInput) (*VCL, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -148,7 +140,7 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -165,8 +157,6 @@ func (c *Client) CreateVCL(i *CreateVCLInput) (*VCL, error) {
 type UpdateVCLInput struct {
 	// Content is the VCL code to be included.
 	Content *string `url:"content,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the VCL to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -178,7 +168,7 @@ type UpdateVCLInput struct {
 }
 
 // UpdateVCL updates the specified resource.
-func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
+func (c *Client) UpdateVCL(ctx context.Context, i *UpdateVCLInput) (*VCL, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -190,7 +180,7 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -205,8 +195,6 @@ func (c *Client) UpdateVCL(i *UpdateVCLInput) (*VCL, error) {
 
 // ActivateVCLInput is used as input to the ActivateVCL function.
 type ActivateVCLInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the VCL to mark as main (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -216,7 +204,7 @@ type ActivateVCLInput struct {
 }
 
 // ActivateVCL creates a new Fastly VCL.
-func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
+func (c *Client) ActivateVCL(ctx context.Context, i *ActivateVCLInput) (*VCL, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -228,7 +216,7 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl", i.Name, "main")
-	resp, err := c.Put(path, CreateRequestOptions(i.Context))
+	resp, err := c.Put(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -243,8 +231,6 @@ func (c *Client) ActivateVCL(i *ActivateVCLInput) (*VCL, error) {
 
 // DeleteVCLInput is the input parameter to DeleteVCL.
 type DeleteVCLInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the VCL to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -254,7 +240,7 @@ type DeleteVCLInput struct {
 }
 
 // DeleteVCL deletes the specified resource.
-func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
+func (c *Client) DeleteVCL(ctx context.Context, i *DeleteVCLInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -266,7 +252,7 @@ func (c *Client) DeleteVCL(i *DeleteVCLInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "vcl", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

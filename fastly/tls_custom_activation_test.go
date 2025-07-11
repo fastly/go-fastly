@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -14,7 +15,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	var err error
 	var ta *TLSActivation
 	Record(t, fixtureBase+"create", func(c *Client) {
-		ta, err = c.CreateTLSActivation(&CreateTLSActivationInput{
+		ta, err = c.CreateTLSActivation(context.TODO(), &CreateTLSActivationInput{
 			Certificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 			Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 			Domain:        &TLSDomain{ID: "DOMAIN_NAME"},
@@ -27,7 +28,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, fixtureBase+"cleanup", func(c *Client) {
-			_ = c.DeleteTLSActivation(&DeleteTLSActivationInput{
+			_ = c.DeleteTLSActivation(context.TODO(), &DeleteTLSActivationInput{
 				ID: ta.ID,
 			})
 		})
@@ -36,7 +37,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	// List
 	var lta []*TLSActivation
 	Record(t, fixtureBase+"list", func(c *Client) {
-		lta, err = c.ListTLSActivations(&ListTLSActivationsInput{})
+		lta, err = c.ListTLSActivations(context.TODO(), &ListTLSActivationsInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -66,7 +67,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	// Get
 	var gta *TLSActivation
 	Record(t, fixtureBase+"get", func(c *Client) {
-		gta, err = c.GetTLSActivation(&GetTLSActivationInput{
+		gta, err = c.GetTLSActivation(context.TODO(), &GetTLSActivationInput{
 			ID: ta.ID,
 		})
 	})
@@ -80,7 +81,7 @@ func TestClient_TLSActivation(t *testing.T) {
 	// Update
 	var uta *TLSActivation
 	Record(t, fixtureBase+"update", func(c *Client) {
-		uta, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
+		uta, err = c.UpdateTLSActivation(context.TODO(), &UpdateTLSActivationInput{
 			ID:          "ACTIVATION_ID",
 			Certificate: &CustomTLSCertificate{},
 		})
@@ -94,7 +95,7 @@ func TestClient_TLSActivation(t *testing.T) {
 
 	// Delete
 	Record(t, fixtureBase+"delete", func(c *Client) {
-		err = c.DeleteTLSActivation(&DeleteTLSActivationInput{
+		err = c.DeleteTLSActivation(context.TODO(), &DeleteTLSActivationInput{
 			ID: ta.ID,
 		})
 	})
@@ -108,7 +109,7 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_activation/create", func(c *Client) {
-		_, err = c.CreateTLSActivation(&CreateTLSActivationInput{
+		_, err = c.CreateTLSActivation(context.TODO(), &CreateTLSActivationInput{
 			Certificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 			Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 			Domain:        &TLSDomain{ID: "DOMAIN_NAME"},
@@ -118,7 +119,7 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = TestClient.CreateTLSActivation(&CreateTLSActivationInput{
+	_, err = TestClient.CreateTLSActivation(context.TODO(), &CreateTLSActivationInput{
 		Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 		Domain:        &TLSDomain{ID: "DOMAIN_NAME"},
 	})
@@ -126,7 +127,7 @@ func TestClient_CreateTLSActivation_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateTLSActivation(&CreateTLSActivationInput{
+	_, err = TestClient.CreateTLSActivation(context.TODO(), &CreateTLSActivationInput{
 		Certificate:   &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 		Configuration: &TLSConfiguration{ID: "CONFIGURATION_ID"},
 	})
@@ -140,7 +141,7 @@ func TestClient_DeleteTLSActivation_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_activation/delete", func(c *Client) {
-		err = c.DeleteTLSActivation(&DeleteTLSActivationInput{
+		err = c.DeleteTLSActivation(context.TODO(), &DeleteTLSActivationInput{
 			ID: "ACTIVATION_ID",
 		})
 	})
@@ -148,7 +149,7 @@ func TestClient_DeleteTLSActivation_validation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	err = TestClient.DeleteTLSActivation(&DeleteTLSActivationInput{})
+	err = TestClient.DeleteTLSActivation(context.TODO(), &DeleteTLSActivationInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
@@ -159,7 +160,7 @@ func TestClient_ListTLSActivations_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_activation/list", func(c *Client) {
-		_, err = c.ListTLSActivations(&ListTLSActivationsInput{})
+		_, err = c.ListTLSActivations(context.TODO(), &ListTLSActivationsInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -171,7 +172,7 @@ func TestClient_GetTLSActivation_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_activation/get", func(c *Client) {
-		_, err = c.GetTLSActivation(&GetTLSActivationInput{
+		_, err = c.GetTLSActivation(context.TODO(), &GetTLSActivationInput{
 			ID: "ACTIVATION_ID",
 		})
 	})
@@ -179,7 +180,7 @@ func TestClient_GetTLSActivation_validation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = TestClient.GetTLSActivation(&GetTLSActivationInput{})
+	_, err = TestClient.GetTLSActivation(context.TODO(), &GetTLSActivationInput{})
 	if !errors.Is(err, ErrMissingID) {
 		t.Errorf("bad error: %s", err)
 	}
@@ -190,7 +191,7 @@ func TestClient_UpdateTLSActivation_validation(t *testing.T) {
 
 	var err error
 	Record(t, "custom_tls_activation/update", func(c *Client) {
-		_, err = c.UpdateTLSActivation(&UpdateTLSActivationInput{
+		_, err = c.UpdateTLSActivation(context.TODO(), &UpdateTLSActivationInput{
 			ID:          "ACTIVATION_ID",
 			Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 		})
@@ -199,14 +200,14 @@ func TestClient_UpdateTLSActivation_validation(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	_, err = TestClient.UpdateTLSActivation(&UpdateTLSActivationInput{
+	_, err = TestClient.UpdateTLSActivation(context.TODO(), &UpdateTLSActivationInput{
 		ID: "ACTIVATION_ID",
 	})
 	if !errors.Is(err, ErrMissingCertificateMTLS) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateTLSActivation(&UpdateTLSActivationInput{
+	_, err = TestClient.UpdateTLSActivation(context.TODO(), &UpdateTLSActivationInput{
 		Certificate: &CustomTLSCertificate{ID: "CERTIFICATE_ID"},
 	})
 	if !errors.Is(err, ErrMissingID) {

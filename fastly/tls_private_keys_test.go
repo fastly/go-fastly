@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
@@ -27,7 +28,7 @@ func TestClient_PrivateKey(t *testing.T) {
 	// Create
 	var pk *PrivateKey
 	Record(t, fixtureBase+"create", func(c *Client) {
-		pk, err = c.CreatePrivateKey(&CreatePrivateKeyInput{
+		pk, err = c.CreatePrivateKey(context.TODO(), &CreatePrivateKeyInput{
 			Key:  key,
 			Name: "My private key",
 		})
@@ -38,7 +39,7 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	// Ensure deleted
 	defer func() {
-		_ = TestClient.DeletePrivateKey(&DeletePrivateKeyInput{
+		_ = TestClient.DeletePrivateKey(context.TODO(), &DeletePrivateKeyInput{
 			ID: pk.ID,
 		})
 	}()
@@ -46,7 +47,7 @@ func TestClient_PrivateKey(t *testing.T) {
 	// List
 	var lpk []*PrivateKey
 	Record(t, fixtureBase+"list", func(c *Client) {
-		lpk, err = c.ListPrivateKeys(&ListPrivateKeysInput{})
+		lpk, err = c.ListPrivateKeys(context.TODO(), &ListPrivateKeysInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -58,7 +59,7 @@ func TestClient_PrivateKey(t *testing.T) {
 	// Get
 	var gpk *PrivateKey
 	Record(t, fixtureBase+"get", func(c *Client) {
-		gpk, err = c.GetPrivateKey(&GetPrivateKeyInput{
+		gpk, err = c.GetPrivateKey(context.TODO(), &GetPrivateKeyInput{
 			ID: pk.ID,
 		})
 	})
@@ -71,7 +72,7 @@ func TestClient_PrivateKey(t *testing.T) {
 
 	// Delete
 	Record(t, fixtureBase+"delete", func(c *Client) {
-		err = c.DeletePrivateKey(&DeletePrivateKeyInput{
+		err = c.DeletePrivateKey(context.TODO(), &DeletePrivateKeyInput{
 			ID: pk.ID,
 		})
 	})

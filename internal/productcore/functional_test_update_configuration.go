@@ -1,6 +1,7 @@
 package productcore
 
 import (
+	"context"
 	"strings"
 	"testing"
 
@@ -25,7 +26,7 @@ type UpdateConfigurationTestInput[O products.ProductOutput, I any] struct {
 	Phase string
 	// OpFn is the function to be invoked to perform the
 	// operation
-	OpFn func(*fastly.Client, string, I) (O, error)
+	OpFn func(context.Context, *fastly.Client, string, I) (O, error)
 	// Input is the input to be provided to OpFn
 	Input I
 	// ProductID identifies the product for which information
@@ -70,7 +71,7 @@ func NewUpdateConfigurationTest[O products.ProductOutput, I any](i *UpdateConfig
 	}
 
 	r.TestFn = func(t *testing.T, tc *test_utils.FunctionalTest, c *fastly.Client) error {
-		result, err := i.OpFn(c, i.ServiceID, i.Input)
+		result, err := i.OpFn(context.TODO(), c, i.ServiceID, i.Input)
 		if err == nil {
 			validateOutput(t, tc, result, i.ProductID, i.ServiceID)
 			if i.CheckOutputFn != nil {

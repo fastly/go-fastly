@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"sync"
@@ -149,7 +150,7 @@ func createTestService(t *testing.T, serviceFixture, serviceNameSuffix string) *
 	var service *Service
 
 	Record(t, serviceFixture, func(client *Client) {
-		service, err = client.CreateService(&CreateServiceInput{
+		service, err = client.CreateService(context.TODO(), &CreateServiceInput{
 			Name:    ToPointer(fmt.Sprintf("test_service_%s", serviceNameSuffix)),
 			Comment: ToPointer("go-fastly client test"),
 			Type:    ToPointer(ServiceTypeVCL),
@@ -167,7 +168,7 @@ func createTestServiceWasm(t *testing.T, serviceFixture, serviceNameSuffix strin
 	var service *Service
 
 	Record(t, serviceFixture, func(client *Client) {
-		service, err = client.CreateService(&CreateServiceInput{
+		service, err = client.CreateService(context.TODO(), &CreateServiceInput{
 			Name:    ToPointer(fmt.Sprintf("test_service_wasm_%s", serviceNameSuffix)),
 			Comment: ToPointer("go-fastly wasm client test"),
 			Type:    ToPointer(ServiceTypeWasm),
@@ -185,7 +186,7 @@ func testVersion(t *testing.T, c *Client) *Version {
 	testVersionLock.Lock()
 	defer testVersionLock.Unlock()
 
-	v, err := c.CreateVersion(&CreateVersionInput{
+	v, err := c.CreateVersion(context.TODO(), &CreateVersionInput{
 		ServiceID: TestDeliveryServiceID,
 	})
 	if err != nil {
@@ -202,7 +203,7 @@ func CreateTestVersion(t *testing.T, versionFixture, serviceID string) *Version 
 		testVersionLock.Lock()
 		defer testVersionLock.Unlock()
 
-		version, err = client.CreateVersion(&CreateVersionInput{
+		version, err = client.CreateVersion(context.TODO(), &CreateVersionInput{
 			ServiceID: serviceID,
 		})
 		if err != nil {
@@ -218,7 +219,7 @@ func createTestDictionary(t *testing.T, dictionaryFixture, serviceID string, ver
 	var dictionary *Dictionary
 
 	Record(t, dictionaryFixture, func(client *Client) {
-		dictionary, err = client.CreateDictionary(&CreateDictionaryInput{
+		dictionary, err = client.CreateDictionary(context.TODO(), &CreateDictionaryInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
 			Name:           ToPointer(fmt.Sprintf("test_dictionary_%s", dictionaryNameSuffix)),
@@ -234,7 +235,7 @@ func deleteTestDictionary(t *testing.T, dictionary *Dictionary, deleteFixture st
 	var err error
 
 	Record(t, deleteFixture, func(client *Client) {
-		err = client.DeleteDictionary(&DeleteDictionaryInput{
+		err = client.DeleteDictionary(context.TODO(), &DeleteDictionaryInput{
 			ServiceID:      *dictionary.ServiceID,
 			ServiceVersion: *dictionary.ServiceVersion,
 			Name:           *dictionary.Name,
@@ -250,7 +251,7 @@ func createTestACL(t *testing.T, createFixture, serviceID string, version int, a
 	var acl *ACL
 
 	Record(t, createFixture, func(client *Client) {
-		acl, err = client.CreateACL(&CreateACLInput{
+		acl, err = client.CreateACL(context.TODO(), &CreateACLInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
 			Name:           ToPointer(fmt.Sprintf("test_acl_%s", aclNameSuffix)),
@@ -266,7 +267,7 @@ func deleteTestACL(t *testing.T, acl *ACL, deleteFixture string) {
 	var err error
 
 	Record(t, deleteFixture, func(client *Client) {
-		err = client.DeleteACL(&DeleteACLInput{
+		err = client.DeleteACL(context.TODO(), &DeleteACLInput{
 			ServiceID:      *acl.ServiceID,
 			ServiceVersion: *acl.ServiceVersion,
 			Name:           *acl.Name,
@@ -282,7 +283,7 @@ func createTestPool(t *testing.T, createFixture, serviceID string, version int, 
 	var pool *Pool
 
 	Record(t, createFixture, func(client *Client) {
-		pool, err = client.CreatePool(&CreatePoolInput{
+		pool, err = client.CreatePool(context.TODO(), &CreatePoolInput{
 			ServiceID:      serviceID,
 			ServiceVersion: version,
 			Name:           ToPointer(fmt.Sprintf("test_pool_%s", poolNameSuffix)),
@@ -298,7 +299,7 @@ func deleteTestPool(t *testing.T, pool *Pool, deleteFixture string) {
 	var err error
 
 	Record(t, deleteFixture, func(client *Client) {
-		err = client.DeletePool(&DeletePoolInput{
+		err = client.DeletePool(context.TODO(), &DeletePoolInput{
 			ServiceID:      *pool.ServiceID,
 			ServiceVersion: *pool.ServiceVersion,
 			Name:           *pool.Name,
@@ -313,7 +314,7 @@ func deleteTestService(t *testing.T, cleanupFixture, serviceID string) {
 	var err error
 
 	Record(t, cleanupFixture, func(client *Client) {
-		err = client.DeleteService(&DeleteServiceInput{
+		err = client.DeleteService(context.TODO(), &DeleteServiceInput{
 			ServiceID: serviceID,
 		})
 	})

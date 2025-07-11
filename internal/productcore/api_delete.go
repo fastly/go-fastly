@@ -9,9 +9,7 @@ import (
 // DeleteInput specifies the information needed for the Delete
 // function to perform the operation.
 type DeleteInput struct {
-	Client *fastly.Client
-	// Context, if supplied, will be used as the Request's context.
-	Context       *context.Context
+	Client        *fastly.Client
 	ProductID     string
 	ServiceID     string
 	URLComponents []string
@@ -21,14 +19,14 @@ type DeleteInput struct {
 // operation does not accept any input or produce any output (other
 // than a potential error), this function does not have any type
 // parameters.
-func Delete(i *DeleteInput) error {
+func Delete(ctx context.Context, i *DeleteInput) error {
 	if i.ServiceID == "" {
 		return fastly.ErrMissingServiceID
 	}
 
 	path := makeURL(i.ProductID, i.ServiceID, i.URLComponents)
 
-	resp, err := i.Client.Delete(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := i.Client.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return err
 	}

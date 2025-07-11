@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Pools(t *testing.T) {
 	// Create
 	var p *Pool
 	Record(t, "pools/create", func(c *Client) {
-		p, err = c.CreatePool(&CreatePoolInput{
+		p, err = c.CreatePool(context.TODO(), &CreatePoolInput{
 			Comment:         ToPointer("test pool"),
 			Name:            ToPointer("test_pool"),
 			Quorum:          ToPointer(50),
@@ -35,13 +36,13 @@ func TestClient_Pools(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "pools/cleanup", func(c *Client) {
-			_ = c.DeletePool(&DeletePoolInput{
+			_ = c.DeletePool(context.TODO(), &DeletePoolInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test_pool",
 			})
 
-			_ = c.DeletePool(&DeletePoolInput{
+			_ = c.DeletePool(context.TODO(), &DeletePoolInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new_test_pool",
@@ -68,7 +69,7 @@ func TestClient_Pools(t *testing.T) {
 	// List
 	var ps []*Pool
 	Record(t, "pools/list", func(c *Client) {
-		ps, err = c.ListPools(&ListPoolsInput{
+		ps, err = c.ListPools(context.TODO(), &ListPoolsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -83,7 +84,7 @@ func TestClient_Pools(t *testing.T) {
 	// Get
 	var np *Pool
 	Record(t, "pools/get", func(c *Client) {
-		np, err = c.GetPool(&GetPoolInput{
+		np, err = c.GetPool(context.TODO(), &GetPoolInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test_pool",
@@ -105,7 +106,7 @@ func TestClient_Pools(t *testing.T) {
 	// Update
 	var up *Pool
 	Record(t, "pools/update", func(c *Client) {
-		up, err = c.UpdatePool(&UpdatePoolInput{
+		up, err = c.UpdatePool(context.TODO(), &UpdatePoolInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test_pool",
@@ -126,7 +127,7 @@ func TestClient_Pools(t *testing.T) {
 
 	// Delete
 	Record(t, "pools/delete", func(c *Client) {
-		err = c.DeletePool(&DeletePoolInput{
+		err = c.DeletePool(context.TODO(), &DeletePoolInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new_test_pool",
@@ -139,14 +140,14 @@ func TestClient_Pools(t *testing.T) {
 
 func TestClient_ListPools_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListPools(&ListPoolsInput{
+	_, err = TestClient.ListPools(context.TODO(), &ListPoolsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListPools(&ListPoolsInput{
+	_, err = TestClient.ListPools(context.TODO(), &ListPoolsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -158,7 +159,7 @@ func TestClient_ListPools_validation(t *testing.T) {
 func TestClient_CreatePool_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreatePool(&CreatePoolInput{
+	_, err = TestClient.CreatePool(context.TODO(), &CreatePoolInput{
 		Name:           ToPointer("test"),
 		ServiceVersion: 1,
 	})
@@ -166,7 +167,7 @@ func TestClient_CreatePool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreatePool(&CreatePoolInput{
+	_, err = TestClient.CreatePool(context.TODO(), &CreatePoolInput{
 		Name:      ToPointer("test"),
 		ServiceID: "foo",
 	})
@@ -178,7 +179,7 @@ func TestClient_CreatePool_validation(t *testing.T) {
 func TestClient_GetPool_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetPool(&GetPoolInput{
+	_, err = TestClient.GetPool(context.TODO(), &GetPoolInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -186,7 +187,7 @@ func TestClient_GetPool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetPool(&GetPoolInput{
+	_, err = TestClient.GetPool(context.TODO(), &GetPoolInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -194,7 +195,7 @@ func TestClient_GetPool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetPool(&GetPoolInput{
+	_, err = TestClient.GetPool(context.TODO(), &GetPoolInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -206,7 +207,7 @@ func TestClient_GetPool_validation(t *testing.T) {
 func TestClient_UpdatePool_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdatePool(&UpdatePoolInput{
+	_, err = TestClient.UpdatePool(context.TODO(), &UpdatePoolInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -214,7 +215,7 @@ func TestClient_UpdatePool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdatePool(&UpdatePoolInput{
+	_, err = TestClient.UpdatePool(context.TODO(), &UpdatePoolInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -222,7 +223,7 @@ func TestClient_UpdatePool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdatePool(&UpdatePoolInput{
+	_, err = TestClient.UpdatePool(context.TODO(), &UpdatePoolInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -234,7 +235,7 @@ func TestClient_UpdatePool_validation(t *testing.T) {
 func TestClient_DeletePool_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeletePool(&DeletePoolInput{
+	err = TestClient.DeletePool(context.TODO(), &DeletePoolInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -242,7 +243,7 @@ func TestClient_DeletePool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeletePool(&DeletePoolInput{
+	err = TestClient.DeletePool(context.TODO(), &DeletePoolInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -250,7 +251,7 @@ func TestClient_DeletePool_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeletePool(&DeletePoolInput{
+	err = TestClient.DeletePool(context.TODO(), &DeletePoolInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

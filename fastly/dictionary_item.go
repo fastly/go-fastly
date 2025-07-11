@@ -34,7 +34,7 @@ type GetDictionaryItemsInput struct {
 }
 
 // GetDictionaryItems returns a ListPaginator for paginating through the resources.
-func (c *Client) GetDictionaryItems(i *GetDictionaryItemsInput) *ListPaginator[DictionaryItem] {
+func (c *Client) GetDictionaryItems(ctx context.Context, i *GetDictionaryItemsInput) *ListPaginator[DictionaryItem] {
 	input := ListOpts{}
 	if i.Direction != nil {
 		input.Direction = *i.Direction
@@ -51,7 +51,7 @@ func (c *Client) GetDictionaryItems(i *GetDictionaryItemsInput) *ListPaginator[D
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "items")
 
-	return NewPaginator[DictionaryItem](c, input, path)
+	return NewPaginator[DictionaryItem](ctx, c, input, path)
 }
 
 // ListDictionaryItemsInput is used as input to the ListDictionaryItems function.
@@ -68,14 +68,14 @@ type ListDictionaryItemsInput struct {
 
 // ListDictionaryItems retrieves all resources. Not suitable for large
 // collections.
-func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
+func (c *Client) ListDictionaryItems(ctx context.Context, i *ListDictionaryItemsInput) ([]*DictionaryItem, error) {
 	if i.DictionaryID == "" {
 		return nil, ErrMissingDictionaryID
 	}
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
-	p := c.GetDictionaryItems(&GetDictionaryItemsInput{
+	p := c.GetDictionaryItems(ctx, &GetDictionaryItemsInput{
 		DictionaryID: i.DictionaryID,
 		Direction:    i.Direction,
 		ServiceID:    i.ServiceID,
@@ -94,8 +94,6 @@ func (c *Client) ListDictionaryItems(i *ListDictionaryItemsInput) ([]*Dictionary
 
 // CreateDictionaryItemInput is used as input to the CreateDictionaryItem function.
 type CreateDictionaryItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string `url:"-"`
 	// ItemKey is the dictionary item key, maximum 256 characters.
@@ -107,7 +105,7 @@ type CreateDictionaryItemInput struct {
 }
 
 // CreateDictionaryItem creates a new resource.
-func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*DictionaryItem, error) {
+func (c *Client) CreateDictionaryItem(ctx context.Context, i *CreateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.DictionaryID == "" {
 		return nil, ErrMissingDictionaryID
 	}
@@ -117,7 +115,7 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item")
 
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -131,11 +129,11 @@ func (c *Client) CreateDictionaryItem(i *CreateDictionaryItemInput) (*Dictionary
 }
 
 // CreateDictionaryItems creates a new resource.
-func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
+func (c *Client) CreateDictionaryItems(ctx context.Context, i []CreateDictionaryItemInput) ([]DictionaryItem, error) {
 	var b []DictionaryItem
 	for _, cdii := range i {
 		cdii := cdii // it's unlikely the underlying value will have changed but we avoid a gosec warning this way (ref: https://bit.ly/go-range-bug)
-		ptr, err := c.CreateDictionaryItem(&cdii)
+		ptr, err := c.CreateDictionaryItem(ctx, &cdii)
 		if err != nil {
 			return nil, err
 		}
@@ -149,8 +147,6 @@ func (c *Client) CreateDictionaryItems(i []CreateDictionaryItemInput) ([]Diction
 
 // GetDictionaryItemInput is used as input to the GetDictionaryItem function.
 type GetDictionaryItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// ItemKey is the name of the dictionary item to fetch (required).
@@ -160,7 +156,7 @@ type GetDictionaryItemInput struct {
 }
 
 // GetDictionaryItem retrieves the specified resource.
-func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, error) {
+func (c *Client) GetDictionaryItem(ctx context.Context, i *GetDictionaryItemInput) (*DictionaryItem, error) {
 	if i.DictionaryID == "" {
 		return nil, ErrMissingDictionaryID
 	}
@@ -173,7 +169,7 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -188,8 +184,6 @@ func (c *Client) GetDictionaryItem(i *GetDictionaryItemInput) (*DictionaryItem, 
 
 // UpdateDictionaryItemInput is used as input to the UpdateDictionaryItem function.
 type UpdateDictionaryItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// ItemKey is the name of the dictionary item to fetch (required).
@@ -201,7 +195,7 @@ type UpdateDictionaryItemInput struct {
 }
 
 // UpdateDictionaryItem updates the specified resource.
-func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*DictionaryItem, error) {
+func (c *Client) UpdateDictionaryItem(ctx context.Context, i *UpdateDictionaryItemInput) (*DictionaryItem, error) {
 	if i.DictionaryID == "" {
 		return nil, ErrMissingDictionaryID
 	}
@@ -214,7 +208,7 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -230,8 +224,6 @@ func (c *Client) UpdateDictionaryItem(i *UpdateDictionaryItemInput) (*Dictionary
 // BatchModifyDictionaryItemsInput is the input parameter to the
 // BatchModifyDictionaryItems function.
 type BatchModifyDictionaryItemsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `json:"-"`
 	// DictionaryID is the ID of the dictionary to modify items for (required).
 	DictionaryID string `json:"-"`
 	// Items is a list of dictionary items.
@@ -251,7 +243,7 @@ type BatchDictionaryItem struct {
 }
 
 // BatchModifyDictionaryItems bulk updates dictionary items.
-func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) error {
+func (c *Client) BatchModifyDictionaryItems(ctx context.Context, i *BatchModifyDictionaryItemsInput) error {
 	if i.DictionaryID == "" {
 		return ErrMissingDictionaryID
 	}
@@ -264,7 +256,7 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "items")
 
-	resp, err := c.PatchJSON(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -276,8 +268,6 @@ func (c *Client) BatchModifyDictionaryItems(i *BatchModifyDictionaryItemsInput) 
 
 // DeleteDictionaryItemInput is the input parameter to DeleteDictionaryItem.
 type DeleteDictionaryItemInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// DictionaryID is the ID of the dictionary to retrieve items for (required).
 	DictionaryID string
 	// ItemKey is the name of the dictionary item to delete (required).
@@ -287,7 +277,7 @@ type DeleteDictionaryItemInput struct {
 }
 
 // DeleteDictionaryItem deletes the specified resource.
-func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
+func (c *Client) DeleteDictionaryItem(ctx context.Context, i *DeleteDictionaryItemInput) error {
 	if i.DictionaryID == "" {
 		return ErrMissingDictionaryID
 	}
@@ -300,7 +290,7 @@ func (c *Client) DeleteDictionaryItem(i *DeleteDictionaryItemInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "dictionary", i.DictionaryID, "item", i.ItemKey)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

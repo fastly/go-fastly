@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	// Create
 	var d *GrafanaCloudLogs
 	Record(t, "grafanacloudlogs/create", func(c *Client) {
-		d, err = c.CreateGrafanaCloudLogs(&CreateGrafanaCloudLogsInput{
+		d, err = c.CreateGrafanaCloudLogs(context.TODO(), &CreateGrafanaCloudLogsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-grafanacloudlogs"),
@@ -36,13 +37,13 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "grafanacloudlogs/delete", func(c *Client) {
-			_ = c.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
+			_ = c.DeleteGrafanaCloudLogs(context.TODO(), &DeleteGrafanaCloudLogsInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-grafanacloudlogs",
 			})
 
-			_ = c.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
+			_ = c.DeleteGrafanaCloudLogs(context.TODO(), &DeleteGrafanaCloudLogsInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-grafanacloudlogs",
@@ -75,7 +76,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	// List
 	var ld []*GrafanaCloudLogs
 	Record(t, "grafanacloudlogs/list", func(c *Client) {
-		ld, err = c.ListGrafanaCloudLogs(&ListGrafanaCloudLogsInput{
+		ld, err = c.ListGrafanaCloudLogs(context.TODO(), &ListGrafanaCloudLogsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -90,7 +91,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	// Get
 	var nd *GrafanaCloudLogs
 	Record(t, "grafanacloudlogs/get", func(c *Client) {
-		nd, err = c.GetGrafanaCloudLogs(&GetGrafanaCloudLogsInput{
+		nd, err = c.GetGrafanaCloudLogs(context.TODO(), &GetGrafanaCloudLogsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-grafanacloudlogs",
@@ -118,7 +119,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 	// Update
 	var ud *GrafanaCloudLogs
 	Record(t, "grafanacloudlogs/update", func(c *Client) {
-		ud, err = c.UpdateGrafanaCloudLogs(&UpdateGrafanaCloudLogsInput{
+		ud, err = c.UpdateGrafanaCloudLogs(context.TODO(), &UpdateGrafanaCloudLogsInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-grafanacloudlogs",
@@ -152,7 +153,7 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 
 	// Delete
 	Record(t, "grafanacloudlogs/delete", func(c *Client) {
-		err = c.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
+		err = c.DeleteGrafanaCloudLogs(context.TODO(), &DeleteGrafanaCloudLogsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-grafanacloudlogs",
@@ -166,14 +167,14 @@ func TestClient_GrafanaCloudLogs(t *testing.T) {
 func TestClient_ListGrafanaCloudLogs_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListGrafanaCloudLogs(&ListGrafanaCloudLogsInput{
+	_, err = TestClient.ListGrafanaCloudLogs(context.TODO(), &ListGrafanaCloudLogsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListGrafanaCloudLogs(&ListGrafanaCloudLogsInput{
+	_, err = TestClient.ListGrafanaCloudLogs(context.TODO(), &ListGrafanaCloudLogsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -185,14 +186,14 @@ func TestClient_ListGrafanaCloudLogs_validation(t *testing.T) {
 func TestClient_CreateGrafanaCloudLogs_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateGrafanaCloudLogs(&CreateGrafanaCloudLogsInput{
+	_, err = TestClient.CreateGrafanaCloudLogs(context.TODO(), &CreateGrafanaCloudLogsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateGrafanaCloudLogs(&CreateGrafanaCloudLogsInput{
+	_, err = TestClient.CreateGrafanaCloudLogs(context.TODO(), &CreateGrafanaCloudLogsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -204,7 +205,7 @@ func TestClient_CreateGrafanaCloudLogs_validation(t *testing.T) {
 func TestClient_GetGrafanaCloudLogs_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetGrafanaCloudLogs(&GetGrafanaCloudLogsInput{
+	_, err = TestClient.GetGrafanaCloudLogs(context.TODO(), &GetGrafanaCloudLogsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -212,7 +213,7 @@ func TestClient_GetGrafanaCloudLogs_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetGrafanaCloudLogs(&GetGrafanaCloudLogsInput{
+	_, err = TestClient.GetGrafanaCloudLogs(context.TODO(), &GetGrafanaCloudLogsInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -220,7 +221,7 @@ func TestClient_GetGrafanaCloudLogs_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetGrafanaCloudLogs(&GetGrafanaCloudLogsInput{
+	_, err = TestClient.GetGrafanaCloudLogs(context.TODO(), &GetGrafanaCloudLogsInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -232,7 +233,7 @@ func TestClient_GetGrafanaCloudLogs_validation(t *testing.T) {
 func TestClient_UpdateGrafanaCloudLogs_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateGrafanaCloudLogs(&UpdateGrafanaCloudLogsInput{
+	_, err = TestClient.UpdateGrafanaCloudLogs(context.TODO(), &UpdateGrafanaCloudLogsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -240,7 +241,7 @@ func TestClient_UpdateGrafanaCloudLogs_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateGrafanaCloudLogs(&UpdateGrafanaCloudLogsInput{
+	_, err = TestClient.UpdateGrafanaCloudLogs(context.TODO(), &UpdateGrafanaCloudLogsInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -248,7 +249,7 @@ func TestClient_UpdateGrafanaCloudLogs_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateGrafanaCloudLogs(&UpdateGrafanaCloudLogsInput{
+	_, err = TestClient.UpdateGrafanaCloudLogs(context.TODO(), &UpdateGrafanaCloudLogsInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -260,7 +261,7 @@ func TestClient_UpdateGrafanaCloudLogs_validation(t *testing.T) {
 func TestClient_DeleteGrafanaCloudLogs_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
+	err = TestClient.DeleteGrafanaCloudLogs(context.TODO(), &DeleteGrafanaCloudLogsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -268,7 +269,7 @@ func TestClient_DeleteGrafanaCloudLogs_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
+	err = TestClient.DeleteGrafanaCloudLogs(context.TODO(), &DeleteGrafanaCloudLogsInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -276,7 +277,7 @@ func TestClient_DeleteGrafanaCloudLogs_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteGrafanaCloudLogs(&DeleteGrafanaCloudLogsInput{
+	err = TestClient.DeleteGrafanaCloudLogs(context.TODO(), &DeleteGrafanaCloudLogsInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"net/http"
 	"strings"
@@ -39,7 +40,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Create
 	var h *HTTPS
 	Record(t, "https/create", func(c *Client) {
-		h, err = c.CreateHTTPS(&CreateHTTPSInput{
+		h, err = c.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
 			ServiceID:         TestDeliveryServiceID,
 			ServiceVersion:    *tv.Number,
 			Name:              ToPointer("test-https"),
@@ -68,14 +69,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// ensure deleted
 	defer func() {
 		Record(t, "https/cleanup", func(c *Client) {
-			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
+			_ = c.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-https",
 			})
 
 			// ensure that renamed endpoint created in Update test is deleted
-			_ = c.DeleteHTTPS(&DeleteHTTPSInput{
+			_ = c.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-https",
@@ -138,7 +139,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// List
 	var hs []*HTTPS
 	Record(t, "https/list", func(c *Client) {
-		hs, err = c.ListHTTPS(&ListHTTPSInput{
+		hs, err = c.ListHTTPS(context.TODO(), &ListHTTPSInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -153,7 +154,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Get
 	var nh *HTTPS
 	Record(t, "https/get", func(c *Client) {
-		nh, err = c.GetHTTPS(&GetHTTPSInput{
+		nh, err = c.GetHTTPS(context.TODO(), &GetHTTPSInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-https",
@@ -217,7 +218,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Update
 	var uh *HTTPS
 	Record(t, "https/update", func(c *Client) {
-		uh, err = c.UpdateHTTPS(&UpdateHTTPSInput{
+		uh, err = c.UpdateHTTPS(context.TODO(), &UpdateHTTPSInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-https",
@@ -241,7 +242,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Delete
 	Record(t, "https/delete", func(c *Client) {
-		err = c.DeleteHTTPS(&DeleteHTTPSInput{
+		err = c.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-https",
@@ -254,7 +255,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 func TestClient_ListHTTPS_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListHTTPS(&ListHTTPSInput{
+	_, err = TestClient.ListHTTPS(context.TODO(), &ListHTTPSInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
@@ -264,14 +265,14 @@ func TestClient_ListHTTPS_validation(t *testing.T) {
 
 func TestClient_CreateHTTPS_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateHTTPS(&CreateHTTPSInput{
+	_, err = TestClient.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateHTTPS(&CreateHTTPSInput{
+	_, err = TestClient.CreateHTTPS(context.TODO(), &CreateHTTPSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -283,7 +284,7 @@ func TestClient_CreateHTTPS_validation(t *testing.T) {
 func TestClient_GetHTTPS_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetHTTPS(&GetHTTPSInput{
+	_, err = TestClient.GetHTTPS(context.TODO(), &GetHTTPSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -291,7 +292,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHTTPS(&GetHTTPSInput{
+	_, err = TestClient.GetHTTPS(context.TODO(), &GetHTTPSInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -299,7 +300,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHTTPS(&GetHTTPSInput{
+	_, err = TestClient.GetHTTPS(context.TODO(), &GetHTTPSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -311,7 +312,7 @@ func TestClient_GetHTTPS_validation(t *testing.T) {
 func TestClient_UpdateHTTPS_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateHTTPS(&UpdateHTTPSInput{
+	_, err = TestClient.UpdateHTTPS(context.TODO(), &UpdateHTTPSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -319,7 +320,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHTTPS(&UpdateHTTPSInput{
+	_, err = TestClient.UpdateHTTPS(context.TODO(), &UpdateHTTPSInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -327,7 +328,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHTTPS(&UpdateHTTPSInput{
+	_, err = TestClient.UpdateHTTPS(context.TODO(), &UpdateHTTPSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -339,7 +340,7 @@ func TestClient_UpdateHTTPS_validation(t *testing.T) {
 func TestClient_DeleteHTTPS_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteHTTPS(&DeleteHTTPSInput{
+	err = TestClient.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -347,7 +348,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHTTPS(&DeleteHTTPSInput{
+	err = TestClient.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -355,7 +356,7 @@ func TestClient_DeleteHTTPS_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHTTPS(&DeleteHTTPSInput{
+	err = TestClient.DeleteHTTPS(context.TODO(), &DeleteHTTPSInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

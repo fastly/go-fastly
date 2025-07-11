@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 	"time"
 )
@@ -15,7 +16,7 @@ func TestClient_GetDomainMetricsForService(t *testing.T) {
 	start := end.Add(-8 * time.Hour)
 	var err error
 	Record(t, "domain_inspector/metrics_for_service", func(c *Client) {
-		_, err = c.GetDomainMetricsForService(&GetDomainMetricsInput{
+		_, err = c.GetDomainMetricsForService(context.TODO(), &GetDomainMetricsInput{
 			ServiceID:   TestDeliveryServiceID,
 			Start:       &start,
 			End:         &end,

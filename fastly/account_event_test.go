@@ -2,6 +2,7 @@ package fastly
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"io"
 	"testing"
@@ -15,7 +16,7 @@ func TestClient_APIEvents(t *testing.T) {
 	var err error
 	var events GetAPIEventsResponse
 	Record(t, "events/get_events", func(c *Client) {
-		events, err = c.GetAPIEvents(&GetAPIEventsFilterInput{
+		events, err = c.GetAPIEvents(context.TODO(), &GetAPIEventsFilterInput{
 			PageNumber: 1,
 			MaxResults: 1,
 		})
@@ -29,7 +30,7 @@ func TestClient_APIEvents(t *testing.T) {
 
 	var event *Event
 	Record(t, "events/get_event", func(c *Client) {
-		event, err = c.GetAPIEvent(&GetAPIEventInput{
+		event, err = c.GetAPIEvent(context.TODO(), &GetAPIEventInput{
 			EventID: events.Events[0].ID,
 		})
 	})
@@ -43,7 +44,7 @@ func TestClient_APIEvents(t *testing.T) {
 
 func TestClient_GetAPIEvent_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetAPIEvent(&GetAPIEventInput{
+	_, err = TestClient.GetAPIEvent(context.TODO(), &GetAPIEventInput{
 		EventID: "",
 	})
 	if !errors.Is(err, ErrMissingEventID) {
