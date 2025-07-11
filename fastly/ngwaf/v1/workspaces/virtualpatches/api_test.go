@@ -1,6 +1,7 @@
 package virtualpatches
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -19,7 +20,7 @@ func TestVirtual_Patches(t *testing.T) {
 
 	// List all virtual patches.
 	fastly.Record(t, "list_virtualpatches", func(c *fastly.Client) {
-		vps, err = List(c, &ListInput{
+		vps, err = List(context.TODO(), c, &ListInput{
 			WorkspaceID: &testWorkspaceID,
 		})
 	})
@@ -60,7 +61,7 @@ func TestVirtual_Patches(t *testing.T) {
 	// Get a virual patch.
 	var vp *VirtualPatch
 	fastly.Record(t, "get_virtualpatch", func(c *fastly.Client) {
-		vp, err = Get(c, &GetInput{
+		vp, err = Get(context.TODO(), c, &GetInput{
 			VirtualPatchID: fastly.ToPointer(vpID),
 			WorkspaceID:    &testWorkspaceID,
 		})
@@ -82,7 +83,7 @@ func TestVirtual_Patches(t *testing.T) {
 
 	var uvp *VirtualPatch
 	fastly.Record(t, "update_virtualpatch", func(c *fastly.Client) {
-		uvp, err = Update(c, &UpdateInput{
+		uvp, err = Update(context.TODO(), c, &UpdateInput{
 			Enabled:        fastly.ToPointer(uvpEnabled),
 			Mode:           fastly.ToPointer(uvpMode),
 			VirtualPatchID: fastly.ToPointer(vpID),
@@ -108,7 +109,7 @@ func TestVirtual_Patches(t *testing.T) {
 
 func TestClient_GetVirtualPatch_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		VirtualPatchID: nil,
 		WorkspaceID:    &testWorkspaceID,
 	})
@@ -116,7 +117,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingVirtualPatchID: got %s", err)
 	}
 
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID:    nil,
 		VirtualPatchID: fastly.ToPointer(vpID),
 	})
@@ -127,7 +128,7 @@ func TestClient_GetVirtualPatch_validation(t *testing.T) {
 
 func TestClient_ListVirtualPatch_validation(t *testing.T) {
 	var err error
-	_, err = List(fastly.TestClient, &ListInput{
+	_, err = List(context.TODO(), fastly.TestClient, &ListInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
@@ -137,7 +138,7 @@ func TestClient_ListVirtualPatch_validation(t *testing.T) {
 
 func TestClient_UpdateVirtualPatch_validation(t *testing.T) {
 	var err error
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		VirtualPatchID: nil,
 		WorkspaceID:    &testWorkspaceID,
 	})
@@ -145,7 +146,7 @@ func TestClient_UpdateVirtualPatch_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingVirtualPatchID: got %s", err)
 	}
 
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		WorkspaceID:    nil,
 		VirtualPatchID: fastly.ToPointer(vpID),
 	})

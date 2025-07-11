@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
@@ -38,7 +39,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Create
 	var s *Syslog
 	Record(t, "syslogs/create", func(c *Client) {
-		s, err = c.CreateSyslog(&CreateSyslogInput{
+		s, err = c.CreateSyslog(context.TODO(), &CreateSyslogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-syslog"),
@@ -64,13 +65,13 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Ensure deleted
 	defer func() {
 		Record(t, "syslogs/cleanup", func(c *Client) {
-			_ = c.DeleteSyslog(&DeleteSyslogInput{
+			_ = c.DeleteSyslog(context.TODO(), &DeleteSyslogInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-syslog",
 			})
 
-			_ = c.DeleteSyslog(&DeleteSyslogInput{
+			_ = c.DeleteSyslog(context.TODO(), &DeleteSyslogInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-syslog",
@@ -124,7 +125,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// List
 	var ss []*Syslog
 	Record(t, "syslogs/list", func(c *Client) {
-		ss, err = c.ListSyslogs(&ListSyslogsInput{
+		ss, err = c.ListSyslogs(context.TODO(), &ListSyslogsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -139,7 +140,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Get
 	var ns *Syslog
 	Record(t, "syslogs/get", func(c *Client) {
-		ns, err = c.GetSyslog(&GetSyslogInput{
+		ns, err = c.GetSyslog(context.TODO(), &GetSyslogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-syslog",
@@ -194,7 +195,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 	// Update
 	var us *Syslog
 	Record(t, "syslogs/update", func(c *Client) {
-		us, err = c.UpdateSyslog(&UpdateSyslogInput{
+		us, err = c.UpdateSyslog(context.TODO(), &UpdateSyslogInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-syslog",
@@ -220,7 +221,7 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 	// Delete
 	Record(t, "syslogs/delete", func(c *Client) {
-		err = c.DeleteSyslog(&DeleteSyslogInput{
+		err = c.DeleteSyslog(context.TODO(), &DeleteSyslogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-syslog",
@@ -233,14 +234,14 @@ Wm7DCfrPNGVwFWUQOmsPue9rZBgO
 
 func TestClient_ListSyslogs_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListSyslogs(&ListSyslogsInput{
+	_, err = TestClient.ListSyslogs(context.TODO(), &ListSyslogsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListSyslogs(&ListSyslogsInput{
+	_, err = TestClient.ListSyslogs(context.TODO(), &ListSyslogsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -251,14 +252,14 @@ func TestClient_ListSyslogs_validation(t *testing.T) {
 
 func TestClient_CreateSyslog_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateSyslog(&CreateSyslogInput{
+	_, err = TestClient.CreateSyslog(context.TODO(), &CreateSyslogInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateSyslog(&CreateSyslogInput{
+	_, err = TestClient.CreateSyslog(context.TODO(), &CreateSyslogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -270,7 +271,7 @@ func TestClient_CreateSyslog_validation(t *testing.T) {
 func TestClient_GetSyslog_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetSyslog(&GetSyslogInput{
+	_, err = TestClient.GetSyslog(context.TODO(), &GetSyslogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -278,7 +279,7 @@ func TestClient_GetSyslog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetSyslog(&GetSyslogInput{
+	_, err = TestClient.GetSyslog(context.TODO(), &GetSyslogInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -286,7 +287,7 @@ func TestClient_GetSyslog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetSyslog(&GetSyslogInput{
+	_, err = TestClient.GetSyslog(context.TODO(), &GetSyslogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -298,7 +299,7 @@ func TestClient_GetSyslog_validation(t *testing.T) {
 func TestClient_UpdateSyslog_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateSyslog(&UpdateSyslogInput{
+	_, err = TestClient.UpdateSyslog(context.TODO(), &UpdateSyslogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -306,7 +307,7 @@ func TestClient_UpdateSyslog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateSyslog(&UpdateSyslogInput{
+	_, err = TestClient.UpdateSyslog(context.TODO(), &UpdateSyslogInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -314,7 +315,7 @@ func TestClient_UpdateSyslog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateSyslog(&UpdateSyslogInput{
+	_, err = TestClient.UpdateSyslog(context.TODO(), &UpdateSyslogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -326,7 +327,7 @@ func TestClient_UpdateSyslog_validation(t *testing.T) {
 func TestClient_DeleteSyslog_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteSyslog(&DeleteSyslogInput{
+	err = TestClient.DeleteSyslog(context.TODO(), &DeleteSyslogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -334,7 +335,7 @@ func TestClient_DeleteSyslog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteSyslog(&DeleteSyslogInput{
+	err = TestClient.DeleteSyslog(context.TODO(), &DeleteSyslogInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -342,7 +343,7 @@ func TestClient_DeleteSyslog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteSyslog(&DeleteSyslogInput{
+	err = TestClient.DeleteSyslog(context.TODO(), &DeleteSyslogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

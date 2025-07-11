@@ -1,6 +1,9 @@
 package fastly
 
-import "testing"
+import (
+	"context"
+	"testing"
+)
 
 func TestClient_IPs(t *testing.T) {
 	t.Parallel()
@@ -8,7 +11,7 @@ func TestClient_IPs(t *testing.T) {
 	var err error
 	var ips IPAddrs
 	Record(t, "ips/list", func(c *Client) {
-		ips, err = c.IPs()
+		ips, err = c.IPs(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -24,7 +27,7 @@ func TestClient_IPsV6(t *testing.T) {
 	var err error
 	var ips IPAddrs
 	Record(t, "ips/list", func(c *Client) {
-		ips, err = c.IPsV6()
+		ips, err = c.IPsV6(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -41,7 +44,7 @@ func TestClient_AllIPs(t *testing.T) {
 	var v4 IPAddrs
 	var v6 IPAddrs
 	Record(t, "ips/list", func(c *Client) {
-		v4, v6, err = c.AllIPs()
+		v4, v6, err = c.AllIPs(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)

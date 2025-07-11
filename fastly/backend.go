@@ -51,8 +51,6 @@ type Backend struct {
 
 // ListBackendsInput is used as input to the ListBackends function.
 type ListBackendsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -60,7 +58,7 @@ type ListBackendsInput struct {
 }
 
 // ListBackends retrieves all resources.
-func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
+func (c *Client) ListBackends(ctx context.Context, i *ListBackendsInput) ([]*Backend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -70,7 +68,7 @@ func (c *Client) ListBackends(i *ListBackendsInput) ([]*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -95,8 +93,6 @@ type CreateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
@@ -158,7 +154,7 @@ type CreateBackendInput struct {
 }
 
 // CreateBackend creates a new resource.
-func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
+func (c *Client) CreateBackend(ctx context.Context, i *CreateBackendInput) (*Backend, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -168,7 +164,7 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend")
 
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -183,8 +179,6 @@ func (c *Client) CreateBackend(i *CreateBackendInput) (*Backend, error) {
 
 // GetBackendInput is used as input to the GetBackend function.
 type GetBackendInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the backend to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -194,7 +188,7 @@ type GetBackendInput struct {
 }
 
 // GetBackend retrieves the specified resource.
-func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
+func (c *Client) GetBackend(ctx context.Context, i *GetBackendInput) (*Backend, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -207,7 +201,7 @@ func (c *Client) GetBackend(i *GetBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -232,8 +226,6 @@ type UpdateBackendInput struct {
 	Comment *string `url:"comment,omitempty"`
 	// ConnectTimeout is the maximum duration in milliseconds to wait for a connection to this backend to be established.
 	ConnectTimeout *int `url:"connect_timeout,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// ErrorThreshold is the number of errors to allow before the Backend is marked as down.
 	ErrorThreshold *int `url:"error_threshold,omitempty"`
 	// FirstByteTimeout is how long to wait for the first bytes in milliseconds.
@@ -297,7 +289,7 @@ type UpdateBackendInput struct {
 }
 
 // UpdateBackend updates the specified resource.
-func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
+func (c *Client) UpdateBackend(ctx context.Context, i *UpdateBackendInput) (*Backend, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -310,7 +302,7 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -325,8 +317,6 @@ func (c *Client) UpdateBackend(i *UpdateBackendInput) (*Backend, error) {
 
 // DeleteBackendInput is the input parameter to DeleteBackend.
 type DeleteBackendInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the backend to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -336,7 +326,7 @@ type DeleteBackendInput struct {
 }
 
 // DeleteBackend deletes the specified resource.
-func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
+func (c *Client) DeleteBackend(ctx context.Context, i *DeleteBackendInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -349,7 +339,7 @@ func (c *Client) DeleteBackend(i *DeleteBackendInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "backend", i.Name)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

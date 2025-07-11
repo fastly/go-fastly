@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 )
 
@@ -26,7 +27,7 @@ func TestClient_Snippets(t *testing.T) {
 	var cs *Snippet
 
 	Record(t, "vcl_snippets/create_with_required_fields_only", func(c *Client) {
-		cs, err = c.CreateSnippet(&CreateSnippetInput{
+		cs, err = c.CreateSnippet(context.TODO(), &CreateSnippetInput{
 			Content:        ToPointer(vclContent),
 			Dynamic:        ToPointer(0),
 			Name:           ToPointer(svName),
@@ -62,7 +63,7 @@ func TestClient_Snippets(t *testing.T) {
 	priority := "123"
 
 	Record(t, "vcl_snippets/create_with_all_fields", func(c *Client) {
-		cs, err = c.CreateSnippet(&CreateSnippetInput{
+		cs, err = c.CreateSnippet(context.TODO(), &CreateSnippetInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer(sdName),
@@ -98,7 +99,7 @@ func TestClient_Snippets(t *testing.T) {
 	var ls []*Snippet
 
 	Record(t, "vcl_snippets/list", func(c *Client) {
-		ls, err = c.ListSnippets(&ListSnippetsInput{
+		ls, err = c.ListSnippets(context.TODO(), &ListSnippetsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -141,7 +142,7 @@ func TestClient_Snippets(t *testing.T) {
 	var vs *Snippet
 
 	Record(t, "vcl_snippets/get_versioned", func(c *Client) {
-		vs, err = c.GetSnippet(&GetSnippetInput{
+		vs, err = c.GetSnippet(context.TODO(), &GetSnippetInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           svName,
@@ -173,7 +174,7 @@ func TestClient_Snippets(t *testing.T) {
 	var ds *DynamicSnippet
 
 	Record(t, "vcl_snippets/get_dynamic", func(c *Client) {
-		ds, err = c.GetDynamicSnippet(&GetDynamicSnippetInput{
+		ds, err = c.GetDynamicSnippet(context.TODO(), &GetDynamicSnippetInput{
 			ServiceID: TestDeliveryServiceID,
 			SnippetID: *cs.SnippetID,
 		})
@@ -196,7 +197,7 @@ func TestClient_Snippets(t *testing.T) {
 	hit := SnippetTypeHit
 
 	Record(t, "vcl_snippets/update_versioned", func(c *Client) {
-		vs, err = c.UpdateSnippet(&UpdateSnippetInput{
+		vs, err = c.UpdateSnippet(context.TODO(), &UpdateSnippetInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           svName,
@@ -230,7 +231,7 @@ func TestClient_Snippets(t *testing.T) {
 	}
 
 	Record(t, "vcl_snippets/update_dynamic", func(c *Client) {
-		ds, err = c.UpdateDynamicSnippet(&UpdateDynamicSnippetInput{
+		ds, err = c.UpdateDynamicSnippet(context.TODO(), &UpdateDynamicSnippetInput{
 			ServiceID: TestDeliveryServiceID,
 			SnippetID: *cs.SnippetID,
 			Content:   ToPointer(vclContentUpdated),
@@ -251,7 +252,7 @@ func TestClient_Snippets(t *testing.T) {
 	}
 
 	Record(t, "vcl_snippets/delete_versioned", func(c *Client) {
-		err = c.DeleteSnippet(&DeleteSnippetInput{
+		err = c.DeleteSnippet(context.TODO(), &DeleteSnippetInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           svNameUpdated,
@@ -263,7 +264,7 @@ func TestClient_Snippets(t *testing.T) {
 	}
 
 	Record(t, "vcl_snippets/delete_dynamic", func(c *Client) {
-		err = c.DeleteSnippet(&DeleteSnippetInput{
+		err = c.DeleteSnippet(context.TODO(), &DeleteSnippetInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           sdName,

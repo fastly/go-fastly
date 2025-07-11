@@ -30,8 +30,6 @@ type HealthCheck struct {
 
 // ListHealthChecksInput is used as input to the ListHealthChecks function.
 type ListHealthChecksInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -39,7 +37,7 @@ type ListHealthChecksInput struct {
 }
 
 // ListHealthChecks retrieves all resources.
-func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, error) {
+func (c *Client) ListHealthChecks(ctx context.Context, i *ListHealthChecksInput) ([]*HealthCheck, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -49,7 +47,7 @@ func (c *Client) ListHealthChecks(i *ListHealthChecksInput) ([]*HealthCheck, err
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -68,8 +66,6 @@ type CreateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
@@ -99,7 +95,7 @@ type CreateHealthCheckInput struct {
 }
 
 // CreateHealthCheck creates a new resource.
-func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, error) {
+func (c *Client) CreateHealthCheck(ctx context.Context, i *CreateHealthCheckInput) (*HealthCheck, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -107,12 +103,12 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.HealthCheckHeaders = true
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck")
 
-	resp, err := c.PostForm(path, i, requestOptions)
+	resp, err := c.PostForm(ctx, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -127,8 +123,6 @@ func (c *Client) CreateHealthCheck(i *CreateHealthCheckInput) (*HealthCheck, err
 
 // GetHealthCheckInput is used as input to the GetHealthCheck function.
 type GetHealthCheckInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the health check to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -138,7 +132,7 @@ type GetHealthCheckInput struct {
 }
 
 // GetHealthCheck retrieves the specified resource.
-func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
+func (c *Client) GetHealthCheck(ctx context.Context, i *GetHealthCheckInput) (*HealthCheck, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -151,7 +145,7 @@ func (c *Client) GetHealthCheck(i *GetHealthCheckInput) (*HealthCheck, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -170,8 +164,6 @@ type UpdateHealthCheckInput struct {
 	CheckInterval *int `url:"check_interval,omitempty"`
 	// Comment is a freeform descriptive note.
 	Comment *string `url:"comment,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// ExpectedResponse is the status code expected from the host.
 	ExpectedResponse *int `url:"expected_response,omitempty"`
 	// HTTPVersion is whether to use version 1.0 or 1.1 HTTP.
@@ -203,7 +195,7 @@ type UpdateHealthCheckInput struct {
 }
 
 // UpdateHealthCheck updates the specified resource.
-func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, error) {
+func (c *Client) UpdateHealthCheck(ctx context.Context, i *UpdateHealthCheckInput) (*HealthCheck, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -214,12 +206,12 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 		return nil, ErrMissingServiceVersion
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.HealthCheckHeaders = true
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.PutForm(path, i, requestOptions)
+	resp, err := c.PutForm(ctx, path, i, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -234,8 +226,6 @@ func (c *Client) UpdateHealthCheck(i *UpdateHealthCheckInput) (*HealthCheck, err
 
 // DeleteHealthCheckInput is the input parameter to DeleteHealthCheck.
 type DeleteHealthCheckInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the health check to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -245,7 +235,7 @@ type DeleteHealthCheckInput struct {
 }
 
 // DeleteHealthCheck deletes the specified resource.
-func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
+func (c *Client) DeleteHealthCheck(ctx context.Context, i *DeleteHealthCheckInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -258,7 +248,7 @@ func (c *Client) DeleteHealthCheck(i *DeleteHealthCheckInput) error {
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "healthcheck", i.Name)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

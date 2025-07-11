@@ -13,7 +13,6 @@ import (
 // perform the operation.
 type CreateInput struct {
 	// Context allows for cancellation and timeout control over the request lifecycle.
-	Context *context.Context
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 	// Type specifies the category of the rule (e.g., "request") (required).
@@ -71,7 +70,7 @@ type CreateGroupCondition struct {
 }
 
 // Create creates a new rule.
-func Create(c *fastly.Client, i *CreateInput) (*Rule, error) {
+func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Rule, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -115,7 +114,7 @@ func Create(c *fastly.Client, i *CreateInput) (*Rule, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "rules")
 
-	resp, err := c.PostJSON(path, v, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, path, v, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

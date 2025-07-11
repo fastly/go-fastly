@@ -12,8 +12,6 @@ import (
 // GetInput specifies the information needed for the Get() function to perform
 // the operation.
 type GetInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// End is a time range and is the older of the two dates in RFC 3339 format (optional).
 	End *string
 	// Granularity is the sample size in seconds (optional).
@@ -27,7 +25,7 @@ type GetInput struct {
 }
 
 // Get retrieves the specified timeseries.
-func Get(c *fastly.Client, i *GetInput) (*TimeSeries, error) {
+func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*TimeSeries, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -42,7 +40,7 @@ func Get(c *fastly.Client, i *GetInput) (*TimeSeries, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "timeseries")
 
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+	requestOptions := fastly.CreateRequestOptions()
 	if i.Start != nil {
 		requestOptions.Params["start"] = *i.Start
 	}
@@ -56,7 +54,7 @@ func Get(c *fastly.Client, i *GetInput) (*TimeSeries, error) {
 		requestOptions.Params["granularity"] = strconv.Itoa(*i.Granularity)
 	}
 
-	resp, err := c.GetJSON(path, requestOptions)
+	resp, err := c.GetJSON(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

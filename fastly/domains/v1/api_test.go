@@ -1,6 +1,7 @@
 package v1
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -17,7 +18,7 @@ func TestClient_Domain(t *testing.T) {
 	var d *Data
 	desc := "my description"
 	fastly.Record(t, "create", func(c *fastly.Client) {
-		d, err = Create(c, &CreateInput{
+		d, err = Create(context.TODO(), c, &CreateInput{
 			Description: fastly.ToPointer(desc),
 			FQDN:        fastly.ToPointer(fqdn),
 		})
@@ -36,7 +37,7 @@ func TestClient_Domain(t *testing.T) {
 	}
 
 	fastly.Record(t, "create_duplicate", func(c *fastly.Client) {
-		_, err = Create(c, &CreateInput{
+		_, err = Create(context.TODO(), c, &CreateInput{
 			FQDN: fastly.ToPointer(fqdn),
 		})
 	})
@@ -62,7 +63,7 @@ func TestClient_Domain(t *testing.T) {
 	// List Definitions
 	var cl *Collection
 	fastly.Record(t, "list", func(c *fastly.Client) {
-		cl, err = List(c, &ListInput{
+		cl, err = List(context.TODO(), c, &ListInput{
 			Limit: fastly.ToPointer(10),
 			FQDN:  fastly.ToPointer(d.FQDN),
 			Sort:  fastly.ToPointer("fqdn"),
@@ -78,7 +79,7 @@ func TestClient_Domain(t *testing.T) {
 	// Get
 	var gd *Data
 	fastly.Record(t, "get", func(c *fastly.Client) {
-		gd, err = Get(c, &GetInput{
+		gd, err = Get(context.TODO(), c, &GetInput{
 			DomainID: &d.DomainID,
 		})
 	})
@@ -96,7 +97,7 @@ func TestClient_Domain(t *testing.T) {
 	var ud *Data
 	descUpdated := "updated description"
 	fastly.Record(t, "update", func(c *fastly.Client) {
-		ud, err = Update(c, &UpdateInput{
+		ud, err = Update(context.TODO(), c, &UpdateInput{
 			Description: fastly.ToPointer(descUpdated),
 			DomainID:    fastly.ToPointer(d.DomainID),
 			ServiceID:   fastly.ToPointer(fastly.TestDeliveryServiceID),
@@ -114,7 +115,7 @@ func TestClient_Domain(t *testing.T) {
 
 	// Delete
 	fastly.Record(t, "delete", func(c *fastly.Client) {
-		err = Delete(c, &DeleteInput{
+		err = Delete(context.TODO(), c, &DeleteInput{
 			DomainID: &d.DomainID,
 		})
 	})
@@ -125,7 +126,7 @@ func TestClient_Domain(t *testing.T) {
 
 func TestClient_GetDomain_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		DomainID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingDomainID) {
@@ -135,7 +136,7 @@ func TestClient_GetDomain_validation(t *testing.T) {
 
 func TestClient_UpdateDomain_validation(t *testing.T) {
 	var err error
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		DomainID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingDomainID) {
@@ -144,7 +145,7 @@ func TestClient_UpdateDomain_validation(t *testing.T) {
 }
 
 func TestClient_DeleteDomain_validation(t *testing.T) {
-	err := Delete(fastly.TestClient, &DeleteInput{
+	err := Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		DomainID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingDomainID) {

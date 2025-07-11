@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -16,7 +17,7 @@ func TestClient_FTPs(t *testing.T) {
 	// Create
 	var ftpCreateResp1, ftpCreateResp2, ftpCreateResp3 *FTP
 	Record(t, "ftps/create", func(c *Client) {
-		ftpCreateResp1, err = c.CreateFTP(&CreateFTPInput{
+		ftpCreateResp1, err = c.CreateFTP(context.TODO(), &CreateFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp"),
@@ -40,7 +41,7 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	Record(t, "ftps/create2", func(c *Client) {
-		ftpCreateResp2, err = c.CreateFTP(&CreateFTPInput{
+		ftpCreateResp2, err = c.CreateFTP(context.TODO(), &CreateFTPInput{
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-ftp-2"),
@@ -64,7 +65,7 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	Record(t, "ftps/create3", func(c *Client) {
-		ftpCreateResp3, err = c.CreateFTP(&CreateFTPInput{
+		ftpCreateResp3, err = c.CreateFTP(context.TODO(), &CreateFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp-3"),
@@ -90,7 +91,7 @@ func TestClient_FTPs(t *testing.T) {
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
 	Record(t, "ftps/create4", func(c *Client) {
-		_, err = c.CreateFTP(&CreateFTPInput{
+		_, err = c.CreateFTP(context.TODO(), &CreateFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-ftp-4"),
@@ -117,25 +118,25 @@ func TestClient_FTPs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "ftps/cleanup", func(c *Client) {
-			_ = c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(context.TODO(), &DeleteFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-ftp",
 			})
 
-			_ = c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(context.TODO(), &DeleteFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-ftp-2",
 			})
 
-			_ = c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(context.TODO(), &DeleteFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-ftp-3",
 			})
 
-			_ = c.DeleteFTP(&DeleteFTPInput{
+			_ = c.DeleteFTP(context.TODO(), &DeleteFTPInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-ftp",
@@ -204,7 +205,7 @@ func TestClient_FTPs(t *testing.T) {
 	// List
 	var ftps []*FTP
 	Record(t, "ftps/list", func(c *Client) {
-		ftps, err = c.ListFTPs(&ListFTPsInput{
+		ftps, err = c.ListFTPs(context.TODO(), &ListFTPsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -219,7 +220,7 @@ func TestClient_FTPs(t *testing.T) {
 	// Get
 	var ftpGetResp *FTP
 	Record(t, "ftps/get", func(c *Client) {
-		ftpGetResp, err = c.GetFTP(&GetFTPInput{
+		ftpGetResp, err = c.GetFTP(context.TODO(), &GetFTPInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-ftp",
@@ -277,7 +278,7 @@ func TestClient_FTPs(t *testing.T) {
 	// Update
 	var ftpUpdateResp1, ftpUpdateResp2, ftpUpdateResp3 *FTP
 	Record(t, "ftps/update", func(c *Client) {
-		ftpUpdateResp1, err = c.UpdateFTP(&UpdateFTPInput{
+		ftpUpdateResp1, err = c.UpdateFTP(context.TODO(), &UpdateFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp",
@@ -291,7 +292,7 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	Record(t, "ftps/update2", func(c *Client) {
-		ftpUpdateResp2, err = c.UpdateFTP(&UpdateFTPInput{
+		ftpUpdateResp2, err = c.UpdateFTP(context.TODO(), &UpdateFTPInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-ftp-2",
@@ -303,7 +304,7 @@ func TestClient_FTPs(t *testing.T) {
 	}
 
 	Record(t, "ftps/update3", func(c *Client) {
-		ftpUpdateResp3, err = c.UpdateFTP(&UpdateFTPInput{
+		ftpUpdateResp3, err = c.UpdateFTP(context.TODO(), &UpdateFTPInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-ftp-3",
@@ -341,7 +342,7 @@ func TestClient_FTPs(t *testing.T) {
 
 	// Delete
 	Record(t, "ftps/delete", func(c *Client) {
-		err = c.DeleteFTP(&DeleteFTPInput{
+		err = c.DeleteFTP(context.TODO(), &DeleteFTPInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-ftp",
@@ -355,14 +356,14 @@ func TestClient_FTPs(t *testing.T) {
 func TestClient_ListFTPs_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListFTPs(&ListFTPsInput{
+	_, err = TestClient.ListFTPs(context.TODO(), &ListFTPsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListFTPs(&ListFTPsInput{
+	_, err = TestClient.ListFTPs(context.TODO(), &ListFTPsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -374,14 +375,14 @@ func TestClient_ListFTPs_validation(t *testing.T) {
 func TestClient_CreateFTP_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateFTP(&CreateFTPInput{
+	_, err = TestClient.CreateFTP(context.TODO(), &CreateFTPInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateFTP(&CreateFTPInput{
+	_, err = TestClient.CreateFTP(context.TODO(), &CreateFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -393,7 +394,7 @@ func TestClient_CreateFTP_validation(t *testing.T) {
 func TestClient_GetFTP_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetFTP(&GetFTPInput{
+	_, err = TestClient.GetFTP(context.TODO(), &GetFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -401,7 +402,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetFTP(&GetFTPInput{
+	_, err = TestClient.GetFTP(context.TODO(), &GetFTPInput{
 		ServiceVersion: 1,
 		Name:           "test",
 	})
@@ -409,7 +410,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetFTP(&GetFTPInput{
+	_, err = TestClient.GetFTP(context.TODO(), &GetFTPInput{
 		ServiceID: "foo",
 		Name:      "test",
 	})
@@ -421,7 +422,7 @@ func TestClient_GetFTP_validation(t *testing.T) {
 func TestClient_UpdateFTP_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateFTP(&UpdateFTPInput{
+	_, err = TestClient.UpdateFTP(context.TODO(), &UpdateFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -429,7 +430,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateFTP(&UpdateFTPInput{
+	_, err = TestClient.UpdateFTP(context.TODO(), &UpdateFTPInput{
 		ServiceVersion: 1,
 		Name:           "test",
 	})
@@ -437,7 +438,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateFTP(&UpdateFTPInput{
+	_, err = TestClient.UpdateFTP(context.TODO(), &UpdateFTPInput{
 		ServiceID: "foo",
 		Name:      "test",
 	})
@@ -449,7 +450,7 @@ func TestClient_UpdateFTP_validation(t *testing.T) {
 func TestClient_DeleteFTP_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteFTP(&DeleteFTPInput{
+	err = TestClient.DeleteFTP(context.TODO(), &DeleteFTPInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -457,7 +458,7 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteFTP(&DeleteFTPInput{
+	err = TestClient.DeleteFTP(context.TODO(), &DeleteFTPInput{
 		ServiceVersion: 1,
 		Name:           "test",
 	})
@@ -465,7 +466,7 @@ func TestClient_DeleteFTP_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteFTP(&DeleteFTPInput{
+	err = TestClient.DeleteFTP(context.TODO(), &DeleteFTPInput{
 		ServiceID: "foo",
 		Name:      "test",
 	})

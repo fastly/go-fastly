@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -16,7 +17,7 @@ func TestClient_Versions(t *testing.T) {
 	// Create
 	var v *Version
 	Record(t, "versions/create", func(c *Client) {
-		v, err = c.CreateVersion(&CreateVersionInput{
+		v, err = c.CreateVersion(context.TODO(), &CreateVersionInput{
 			ServiceID: TestDeliveryServiceID,
 			Comment:   ToPointer("test comment"),
 		})
@@ -37,7 +38,7 @@ func TestClient_Versions(t *testing.T) {
 	// List
 	var vs []*Version
 	Record(t, "versions/list", func(c *Client) {
-		vs, err = c.ListVersions(&ListVersionsInput{
+		vs, err = c.ListVersions(context.TODO(), &ListVersionsInput{
 			ServiceID: TestDeliveryServiceID,
 		})
 	})
@@ -51,7 +52,7 @@ func TestClient_Versions(t *testing.T) {
 	// Get
 	var nv *Version
 	Record(t, "versions/get", func(c *Client) {
-		nv, err = c.GetVersion(&GetVersionInput{
+		nv, err = c.GetVersion(context.TODO(), &GetVersionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 		})
@@ -69,7 +70,7 @@ func TestClient_Versions(t *testing.T) {
 	// Update
 	var uv *Version
 	Record(t, "versions/update", func(c *Client) {
-		uv, err = c.UpdateVersion(&UpdateVersionInput{
+		uv, err = c.UpdateVersion(context.TODO(), &UpdateVersionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 			Comment:        ToPointer("new comment"),
@@ -85,7 +86,7 @@ func TestClient_Versions(t *testing.T) {
 	// Lock
 	var vl *Version
 	Record(t, "versions/lock", func(c *Client) {
-		vl, err = c.LockVersion(&LockVersionInput{
+		vl, err = c.LockVersion(context.TODO(), &LockVersionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 		})
@@ -100,7 +101,7 @@ func TestClient_Versions(t *testing.T) {
 	// Clone
 	var cv *Version
 	Record(t, "versions/clone", func(c *Client) {
-		cv, err = c.CloneVersion(&CloneVersionInput{
+		cv, err = c.CloneVersion(context.TODO(), &CloneVersionInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *v.Number,
 		})
@@ -118,7 +119,7 @@ func TestClient_Versions(t *testing.T) {
 
 func TestClient_ListVersions_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListVersions(&ListVersionsInput{
+	_, err = TestClient.ListVersions(context.TODO(), &ListVersionsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
@@ -128,7 +129,7 @@ func TestClient_ListVersions_validation(t *testing.T) {
 
 func TestClient_CreateVersion_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateVersion(&CreateVersionInput{
+	_, err = TestClient.CreateVersion(context.TODO(), &CreateVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
@@ -138,14 +139,14 @@ func TestClient_CreateVersion_validation(t *testing.T) {
 
 func TestClient_GetVersion_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetVersion(&GetVersionInput{
+	_, err = TestClient.GetVersion(context.TODO(), &GetVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetVersion(&GetVersionInput{
+	_, err = TestClient.GetVersion(context.TODO(), &GetVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -156,14 +157,14 @@ func TestClient_GetVersion_validation(t *testing.T) {
 
 func TestClient_UpdateVersion_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.UpdateVersion(&UpdateVersionInput{
+	_, err = TestClient.UpdateVersion(context.TODO(), &UpdateVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateVersion(&UpdateVersionInput{
+	_, err = TestClient.UpdateVersion(context.TODO(), &UpdateVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -174,14 +175,14 @@ func TestClient_UpdateVersion_validation(t *testing.T) {
 
 func TestClient_ActivateVersion_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ActivateVersion(&ActivateVersionInput{
+	_, err = TestClient.ActivateVersion(context.TODO(), &ActivateVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ActivateVersion(&ActivateVersionInput{
+	_, err = TestClient.ActivateVersion(context.TODO(), &ActivateVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -192,14 +193,14 @@ func TestClient_ActivateVersion_validation(t *testing.T) {
 
 func TestClient_DeactivateVersion_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.DeactivateVersion(&DeactivateVersionInput{
+	_, err = TestClient.DeactivateVersion(context.TODO(), &DeactivateVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.DeactivateVersion(&DeactivateVersionInput{
+	_, err = TestClient.DeactivateVersion(context.TODO(), &DeactivateVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -210,14 +211,14 @@ func TestClient_DeactivateVersion_validation(t *testing.T) {
 
 func TestClient_CloneVersion_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CloneVersion(&CloneVersionInput{
+	_, err = TestClient.CloneVersion(context.TODO(), &CloneVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CloneVersion(&CloneVersionInput{
+	_, err = TestClient.CloneVersion(context.TODO(), &CloneVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -228,14 +229,14 @@ func TestClient_CloneVersion_validation(t *testing.T) {
 
 func TestClient_ValidateVersion_validation(t *testing.T) {
 	var err error
-	_, _, err = TestClient.ValidateVersion(&ValidateVersionInput{
+	_, _, err = TestClient.ValidateVersion(context.TODO(), &ValidateVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, _, err = TestClient.ValidateVersion(&ValidateVersionInput{
+	_, _, err = TestClient.ValidateVersion(context.TODO(), &ValidateVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -246,14 +247,14 @@ func TestClient_ValidateVersion_validation(t *testing.T) {
 
 func TestClient_LockVersion_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.LockVersion(&LockVersionInput{
+	_, err = TestClient.LockVersion(context.TODO(), &LockVersionInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.LockVersion(&LockVersionInput{
+	_, err = TestClient.LockVersion(context.TODO(), &LockVersionInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})

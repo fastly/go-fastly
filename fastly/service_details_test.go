@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -13,7 +14,7 @@ func TestClient_Services(t *testing.T) {
 	// Create
 	var s *Service
 	Record(t, "services/create", func(c *Client) {
-		s, err = c.CreateService(&CreateServiceInput{
+		s, err = c.CreateService(context.TODO(), &CreateServiceInput{
 			Name:    ToPointer("test-service"),
 			Comment: ToPointer("comment"),
 		})
@@ -25,11 +26,11 @@ func TestClient_Services(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "services/cleanup", func(c *Client) {
-			_ = c.DeleteService(&DeleteServiceInput{
+			_ = c.DeleteService(context.TODO(), &DeleteServiceInput{
 				ServiceID: *s.ServiceID,
 			})
 
-			_ = c.DeleteService(&DeleteServiceInput{
+			_ = c.DeleteService(context.TODO(), &DeleteServiceInput{
 				ServiceID: *s.ServiceID,
 			})
 		})
@@ -45,7 +46,7 @@ func TestClient_Services(t *testing.T) {
 	// List
 	var ss []*Service
 	Record(t, "services/list", func(c *Client) {
-		ss, err = c.ListServices(&ListServicesInput{
+		ss, err = c.ListServices(context.TODO(), &ListServicesInput{
 			Direction: ToPointer("descend"),
 			Sort:      ToPointer("created"),
 		})
@@ -61,7 +62,7 @@ func TestClient_Services(t *testing.T) {
 	var ss2 []*Service
 	var paginator *ListPaginator[Service]
 	Record(t, "services/list_paginator", func(c *Client) {
-		paginator = c.GetServices(&GetServicesInput{
+		paginator = c.GetServices(context.TODO(), &GetServicesInput{
 			Direction: ToPointer("descend"),
 			PerPage:   ToPointer(200),
 			Sort:      ToPointer("created"),
@@ -86,7 +87,7 @@ func TestClient_Services(t *testing.T) {
 	// Get
 	var ns *Service
 	Record(t, "services/get", func(c *Client) {
-		ns, err = c.GetService(&GetServiceInput{
+		ns, err = c.GetService(context.TODO(), &GetServiceInput{
 			ServiceID: *s.ServiceID,
 		})
 	})
@@ -112,7 +113,7 @@ func TestClient_Services(t *testing.T) {
 	// Get Details
 	var nsd *ServiceDetail
 	Record(t, "services/details", func(c *Client) {
-		nsd, err = c.GetServiceDetails(&GetServiceInput{
+		nsd, err = c.GetServiceDetails(context.TODO(), &GetServiceInput{
 			ServiceID: *s.ServiceID,
 		})
 	})
@@ -133,7 +134,7 @@ func TestClient_Services(t *testing.T) {
 	// Search
 	var fs *Service
 	Record(t, "services/search", func(c *Client) {
-		fs, err = c.SearchService(&SearchServiceInput{
+		fs, err = c.SearchService(context.TODO(), &SearchServiceInput{
 			Name: "test-service",
 		})
 	})
@@ -150,7 +151,7 @@ func TestClient_Services(t *testing.T) {
 	// Update
 	var us *Service
 	Record(t, "services/update", func(c *Client) {
-		us, err = c.UpdateService(&UpdateServiceInput{
+		us, err = c.UpdateService(context.TODO(), &UpdateServiceInput{
 			ServiceID: *s.ServiceID,
 			Name:      ToPointer("new-test-service"),
 		})
@@ -164,7 +165,7 @@ func TestClient_Services(t *testing.T) {
 
 	// Delete
 	Record(t, "services/delete", func(c *Client) {
-		err = c.DeleteService(&DeleteServiceInput{
+		err = c.DeleteService(context.TODO(), &DeleteServiceInput{
 			ServiceID: *s.ServiceID,
 		})
 	})
@@ -175,7 +176,7 @@ func TestClient_Services(t *testing.T) {
 	//	List Domains
 	var ds ServiceDomainsList
 	Record(t, "services/domain", func(c *Client) {
-		ds, err = c.ListServiceDomains(&ListServiceDomainInput{
+		ds, err = c.ListServiceDomains(context.TODO(), &ListServiceDomainInput{
 			ServiceID: *s.ServiceID,
 		})
 	})
@@ -188,21 +189,21 @@ func TestClient_Services(t *testing.T) {
 }
 
 func TestClient_GetService_validation(t *testing.T) {
-	_, err := TestClient.GetService(&GetServiceInput{})
+	_, err := TestClient.GetService(context.TODO(), &GetServiceInput{})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_UpdateService_validation(t *testing.T) {
-	_, err := TestClient.UpdateService(&UpdateServiceInput{})
+	_, err := TestClient.UpdateService(context.TODO(), &UpdateServiceInput{})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 }
 
 func TestClient_DeleteService_validation(t *testing.T) {
-	err := TestClient.DeleteService(&DeleteServiceInput{})
+	err := TestClient.DeleteService(context.TODO(), &DeleteServiceInput{})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}

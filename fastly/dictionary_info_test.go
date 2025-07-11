@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -23,7 +24,7 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 	)
 
 	Record(t, fixtureBase+"create_dictionary_items", func(c *Client) {
-		err = c.BatchModifyDictionaryItems(&BatchModifyDictionaryItemsInput{
+		err = c.BatchModifyDictionaryItems(context.TODO(), &BatchModifyDictionaryItemsInput{
 			ServiceID:    *testService.ServiceID,
 			DictionaryID: *testDictionary.DictionaryID,
 			Items: []*BatchDictionaryItem{
@@ -45,7 +46,7 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 	}
 
 	Record(t, fixtureBase+"get", func(c *Client) {
-		info, err = c.GetDictionaryInfo(&GetDictionaryInfoInput{
+		info, err = c.GetDictionaryInfo(context.TODO(), &GetDictionaryInfoInput{
 			ServiceID:      *testService.ServiceID,
 			ServiceVersion: *testVersion.Number,
 			DictionaryID:   *testDictionary.DictionaryID,
@@ -62,19 +63,19 @@ func TestClient_GetDictionaryInfo(t *testing.T) {
 
 func TestClient_GetDictionaryInfo_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetDictionaryInfo(&GetDictionaryInfoInput{})
+	_, err = TestClient.GetDictionaryInfo(context.TODO(), &GetDictionaryInfoInput{})
 	if !errors.Is(err, ErrMissingDictionaryID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDictionaryInfo(&GetDictionaryInfoInput{
+	_, err = TestClient.GetDictionaryInfo(context.TODO(), &GetDictionaryInfoInput{
 		DictionaryID: "123",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDictionaryInfo(&GetDictionaryInfoInput{
+	_, err = TestClient.GetDictionaryInfo(context.TODO(), &GetDictionaryInfoInput{
 		DictionaryID:   "123",
 		ServiceID:      "foo",
 		ServiceVersion: 0,

@@ -18,8 +18,6 @@ type HTTP3 struct {
 
 // GetHTTP3Input is used as input to the GetHTTP3 function.
 type GetHTTP3Input struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -27,7 +25,7 @@ type GetHTTP3Input struct {
 }
 
 // GetHTTP3 retrieves the specified resource.
-func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
+func (c *Client) GetHTTP3(ctx context.Context, i *GetHTTP3Input) (*HTTP3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -36,7 +34,7 @@ func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -52,8 +50,6 @@ func (c *Client) GetHTTP3(i *GetHTTP3Input) (*HTTP3, error) {
 
 // EnableHTTP3Input is used as input to the EnableHTTP3 function.
 type EnableHTTP3Input struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// FeatureRevision is the revision number of the HTTP/3 feature implementation.
 	FeatureRevision *int `url:"feature_revision,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -63,7 +59,7 @@ type EnableHTTP3Input struct {
 }
 
 // EnableHTTP3 creates a new resource.
-func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
+func (c *Client) EnableHTTP3(ctx context.Context, i *EnableHTTP3Input) (*HTTP3, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -72,7 +68,7 @@ func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -87,8 +83,6 @@ func (c *Client) EnableHTTP3(i *EnableHTTP3Input) (*HTTP3, error) {
 
 // DisableHTTP3Input is the input parameter to the DisableHTTP3 function.
 type DisableHTTP3Input struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -96,7 +90,7 @@ type DisableHTTP3Input struct {
 }
 
 // DisableHTTP3 deletes the specified resource.
-func (c *Client) DisableHTTP3(i *DisableHTTP3Input) error {
+func (c *Client) DisableHTTP3(ctx context.Context, i *DisableHTTP3Input) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
@@ -105,7 +99,7 @@ func (c *Client) DisableHTTP3(i *DisableHTTP3Input) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "http3")
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

@@ -30,8 +30,6 @@ type Event struct {
 
 // GetAPIEventsFilterInput is used as input to the GetAPIEvents function.
 type GetAPIEventsFilterInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// CustomerID to Limit the returned events to a specific customer.
 	CustomerID string
 	// EventType to limit the returned events to a specific event type. See above for event codes.
@@ -62,7 +60,7 @@ type GetAPIEventsResponse struct {
 }
 
 // GetAPIEvents lists all the events for a particular customer.
-func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
+func (c *Client) GetAPIEvents(ctx context.Context, i *GetAPIEventsFilterInput) (GetAPIEventsResponse, error) {
 	eventsResponse := GetAPIEventsResponse{
 		Events: []*Event{},
 		Links:  EventsPaginationInfo{},
@@ -70,16 +68,16 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 
 	path := "/events"
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params = i.formatEventFilters()
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return eventsResponse, err
 	}
 	defer resp.Body.Close()
 
-	err = c.interpretAPIEventsPage(&eventsResponse, i.PageNumber, resp)
+	err = c.interpretAPIEventsPage(ctx, &eventsResponse, i.PageNumber, resp)
 	// NOTE: It's possible for eventsResponse to be partially completed before an error
 	// was encountered, so the presence of a statusResponse doesn't preclude the presence of
 	// an error.
@@ -89,21 +87,19 @@ func (c *Client) GetAPIEvents(i *GetAPIEventsFilterInput) (GetAPIEventsResponse,
 
 // GetAPIEventInput is used as input to the GetAPIEvent function.
 type GetAPIEventInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// EventID is the ID of the event and is required.
 	EventID string
 }
 
 // GetAPIEvent retrieves the specified resource.
-func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
+func (c *Client) GetAPIEvent(ctx context.Context, i *GetAPIEventInput) (*Event, error) {
 	if i.EventID == "" {
 		return nil, ErrMissingEventID
 	}
 
 	path := ToSafeURL("events", i.EventID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -120,7 +116,7 @@ func (c *Client) GetAPIEvent(i *GetAPIEventInput) (*Event, error) {
 // and unmarshals the results. If there are more pages of results, it fetches the next
 // page, adds that response to the array of results, and repeats until all results have
 // been fetched.
-func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum int, received *http.Response) error {
+func (c *Client) interpretAPIEventsPage(ctx context.Context, answer *GetAPIEventsResponse, pageNum int, received *http.Response) error {
 	// before we pull the status info out of the response body, fetch
 	// pagination info from it:
 	pages, body, err := getEventsPages(received.Body)
@@ -144,12 +140,12 @@ func (c *Client) interpretAPIEventsPage(answer *GetAPIEventsResponse, pageNum in
 	if pageNum == 0 {
 		if pages.Next != "" {
 			// NOTE: pages.Next URL includes filters already
-			resp, err := c.SimpleGet(pages.Next)
+			resp, err := c.SimpleGet(ctx, pages.Next)
 			if err != nil {
 				return err
 			}
 			defer resp.Body.Close()
-			return c.interpretAPIEventsPage(answer, pageNum, resp)
+			return c.interpretAPIEventsPage(ctx, answer, pageNum, resp)
 		}
 	}
 	return nil

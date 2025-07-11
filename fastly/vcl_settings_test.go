@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -19,7 +20,7 @@ func TestClient_Settings(t *testing.T) {
 	// Get
 	var ns *Settings
 	Record(t, "settings/get", func(c *Client) {
-		ns, err = c.GetSettings(&GetSettingsInput{
+		ns, err = c.GetSettings(context.TODO(), &GetSettingsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -34,7 +35,7 @@ func TestClient_Settings(t *testing.T) {
 	// Update
 	var us *Settings
 	Record(t, "settings/update", func(c *Client) {
-		us, err = c.UpdateSettings(&UpdateSettingsInput{
+		us, err = c.UpdateSettings(context.TODO(), &UpdateSettingsInput{
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			DefaultTTL:      ToPointer(uint(1800)),
@@ -80,14 +81,14 @@ func TestClient_UpdateSettingsInput_default_ttl(t *testing.T) {
 
 func TestClient_GetSettings_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetSettings(&GetSettingsInput{
+	_, err = TestClient.GetSettings(context.TODO(), &GetSettingsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetSettings(&GetSettingsInput{
+	_, err = TestClient.GetSettings(context.TODO(), &GetSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -98,14 +99,14 @@ func TestClient_GetSettings_validation(t *testing.T) {
 
 func TestClient_UpdateSettings_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.UpdateSettings(&UpdateSettingsInput{
+	_, err = TestClient.UpdateSettings(context.TODO(), &UpdateSettingsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateSettings(&UpdateSettingsInput{
+	_, err = TestClient.UpdateSettings(context.TODO(), &UpdateSettingsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})

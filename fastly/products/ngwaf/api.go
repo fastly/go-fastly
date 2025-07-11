@@ -1,6 +1,8 @@
 package ngwaf
 
 import (
+	"context"
+
 	"github.com/fastly/go-fastly/v10/fastly"
 	"github.com/fastly/go-fastly/v10/fastly/products"
 	"github.com/fastly/go-fastly/v10/internal/productcore"
@@ -47,8 +49,8 @@ type configureOutputNested struct {
 }
 
 // Get gets the status of the Next-Gen WAF product on the service.
-func Get(c *fastly.Client, serviceID string) (EnableOutput, error) {
-	return productcore.Get[EnableOutput](&productcore.GetInput{
+func Get(ctx context.Context, c *fastly.Client, serviceID string) (EnableOutput, error) {
+	return productcore.Get[EnableOutput](ctx, &productcore.GetInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -56,12 +58,12 @@ func Get(c *fastly.Client, serviceID string) (EnableOutput, error) {
 }
 
 // Enable enables the Next-Gen WAF product on the service.
-func Enable(c *fastly.Client, serviceID string, i EnableInput) (EnableOutput, error) {
+func Enable(ctx context.Context, c *fastly.Client, serviceID string, i EnableInput) (EnableOutput, error) {
 	if i.WorkspaceID == "" {
 		return EnableOutput{}, ErrMissingWorkspaceID
 	}
 
-	return productcore.Put[EnableOutput](&productcore.PutInput[EnableInput]{
+	return productcore.Put[EnableOutput](ctx, &productcore.PutInput[EnableInput]{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -70,8 +72,8 @@ func Enable(c *fastly.Client, serviceID string, i EnableInput) (EnableOutput, er
 }
 
 // Disable disables the Next-Gen WAF product on the service.
-func Disable(c *fastly.Client, serviceID string) error {
-	return productcore.Delete(&productcore.DeleteInput{
+func Disable(ctx context.Context, c *fastly.Client, serviceID string) error {
+	return productcore.Delete(ctx, &productcore.DeleteInput{
 		Client:    c,
 		ProductID: ProductID,
 		ServiceID: serviceID,
@@ -79,8 +81,8 @@ func Disable(c *fastly.Client, serviceID string) error {
 }
 
 // GetConfiguration gets the configuration of the Next-Gen WAF product on the service.
-func GetConfiguration(c *fastly.Client, serviceID string) (ConfigureOutput, error) {
-	return productcore.Get[ConfigureOutput](&productcore.GetInput{
+func GetConfiguration(ctx context.Context, c *fastly.Client, serviceID string) (ConfigureOutput, error) {
+	return productcore.Get[ConfigureOutput](ctx, &productcore.GetInput{
 		Client:        c,
 		ProductID:     ProductID,
 		ServiceID:     serviceID,
@@ -89,8 +91,8 @@ func GetConfiguration(c *fastly.Client, serviceID string) (ConfigureOutput, erro
 }
 
 // UpdateConfiguration updates the configuration of the Next-Gen WAF product on the service.
-func UpdateConfiguration(c *fastly.Client, serviceID string, i ConfigureInput) (ConfigureOutput, error) {
-	return productcore.Patch[ConfigureOutput](&productcore.PatchInput[ConfigureInput]{
+func UpdateConfiguration(ctx context.Context, c *fastly.Client, serviceID string, i ConfigureInput) (ConfigureOutput, error) {
+	return productcore.Patch[ConfigureOutput](ctx, &productcore.PatchInput[ConfigureInput]{
 		Client:        c,
 		ProductID:     ProductID,
 		ServiceID:     serviceID,

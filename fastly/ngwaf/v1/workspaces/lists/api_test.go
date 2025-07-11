@@ -1,6 +1,7 @@
 package lists
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -22,7 +23,7 @@ func TestClient_List(t *testing.T) {
 	// Create a test list.
 	var list *List
 	fastly.Record(t, "create_list", func(c *fastly.Client) {
-		list, err = Create(c, &CreateInput{
+		list, err = Create(context.TODO(), c, &CreateInput{
 			Description: fastly.ToPointer(listDescription),
 			Entries:     fastly.ToPointer(listEntries),
 			Name:        fastly.ToPointer(listName),
@@ -59,7 +60,7 @@ func TestClient_List(t *testing.T) {
 	// Ensure we delete the test list at the end.
 	defer func() {
 		fastly.Record(t, "delete_list", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
+			err = Delete(context.TODO(), c, &DeleteInput{
 				ListID:      fastly.ToPointer(list.ListID),
 				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			})
@@ -72,7 +73,7 @@ func TestClient_List(t *testing.T) {
 	// Get the test list.
 	var getList *List
 	fastly.Record(t, "get_list", func(c *fastly.Client) {
-		getList, err = Get(c, &GetInput{
+		getList, err = Get(context.TODO(), c, &GetInput{
 			ListID:      fastly.ToPointer(list.ListID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
@@ -111,7 +112,7 @@ func TestClient_List(t *testing.T) {
 
 	var updateList *List
 	fastly.Record(t, "update_list", func(c *fastly.Client) {
-		updateList, err = Update(c, &UpdateInput{
+		updateList, err = Update(context.TODO(), c, &UpdateInput{
 			Description: fastly.ToPointer(updateListDescription),
 			Entries:     fastly.ToPointer(updateListEntries),
 			ListID:      fastly.ToPointer(list.ListID),
@@ -148,7 +149,7 @@ func TestClient_List(t *testing.T) {
 
 	// List all lists.
 	fastly.Record(t, "list_lists", func(c *fastly.Client) {
-		lists, err = ListLists(c, &ListInput{
+		lists, err = ListLists(context.TODO(), c, &ListInput{
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
 	})
@@ -185,20 +186,20 @@ func TestClient_List(t *testing.T) {
 
 func TestClient_CreateList_validation(t *testing.T) {
 	var err error
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		Entries:     nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingEntries) {
 		t.Errorf("expected ErrmissingEntries: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		Entries:     fastly.ToPointer([]string{listEntry}),
 		Name:        nil,
@@ -206,7 +207,7 @@ func TestClient_CreateList_validation(t *testing.T) {
 	if !errors.Is(err, fastly.ErrMissingName) {
 		t.Errorf("expected ErrMissingName: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		Entries:     fastly.ToPointer([]string{listEntry}),
 		Name:        fastly.ToPointer(listName),
@@ -219,13 +220,13 @@ func TestClient_CreateList_validation(t *testing.T) {
 
 func TestClient_GetList_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		ListID:      nil,
 	})
@@ -236,13 +237,13 @@ func TestClient_GetList_validation(t *testing.T) {
 
 func TestClient_UpdateList_validation(t *testing.T) {
 	var err error
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Update(fastly.TestClient, &UpdateInput{
+	_, err = Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		ListID:      nil,
 	})
@@ -253,13 +254,13 @@ func TestClient_UpdateList_validation(t *testing.T) {
 
 func TestClient_DeleteList_validation(t *testing.T) {
 	var err error
-	err = Delete(fastly.TestClient, &DeleteInput{
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	err = Delete(fastly.TestClient, &DeleteInput{
+	err = Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		ListID:      nil,
 	})

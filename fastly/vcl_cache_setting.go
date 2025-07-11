@@ -36,8 +36,6 @@ type CacheSetting struct {
 
 // ListCacheSettingsInput is used as input to the ListCacheSettings function.
 type ListCacheSettingsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -45,7 +43,7 @@ type ListCacheSettingsInput struct {
 }
 
 // ListCacheSettings retrieves all resources.
-func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, error) {
+func (c *Client) ListCacheSettings(ctx context.Context, i *ListCacheSettingsInput) ([]*CacheSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -54,7 +52,7 @@ func (c *Client) ListCacheSettings(i *ListCacheSettingsInput) ([]*CacheSetting, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -73,8 +71,6 @@ type CreateCacheSettingInput struct {
 	Action *CacheSettingAction `url:"action,omitempty"`
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name for the cache settings object.
 	Name *string `url:"name,omitempty"`
 	// ServiceID is the ID of the service (required).
@@ -88,7 +84,7 @@ type CreateCacheSettingInput struct {
 }
 
 // CreateCacheSetting creates a new resource.
-func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, error) {
+func (c *Client) CreateCacheSetting(ctx context.Context, i *CreateCacheSettingInput) (*CacheSetting, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -97,7 +93,7 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -112,8 +108,6 @@ func (c *Client) CreateCacheSetting(i *CreateCacheSettingInput) (*CacheSetting, 
 
 // GetCacheSettingInput is used as input to the GetCacheSetting function.
 type GetCacheSettingInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the cache setting to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -123,7 +117,7 @@ type GetCacheSettingInput struct {
 }
 
 // GetCacheSetting retrieves the specified resource.
-func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error) {
+func (c *Client) GetCacheSetting(ctx context.Context, i *GetCacheSettingInput) (*CacheSetting, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -135,7 +129,7 @@ func (c *Client) GetCacheSetting(i *GetCacheSettingInput) (*CacheSetting, error)
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -154,8 +148,6 @@ type UpdateCacheSettingInput struct {
 	Action *CacheSettingAction `url:"action,omitempty"`
 	// CacheCondition is name of the cache condition controlling when this configuration applies.
 	CacheCondition *string `url:"cache_condition,omitempty"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Name is the name of the cache setting to update (required).
 	Name string `url:"-"`
 	// NewName is the new name for the resource.
@@ -171,7 +163,7 @@ type UpdateCacheSettingInput struct {
 }
 
 // UpdateCacheSetting updates the specified resource.
-func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, error) {
+func (c *Client) UpdateCacheSetting(ctx context.Context, i *UpdateCacheSettingInput) (*CacheSetting, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -183,7 +175,7 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -198,8 +190,6 @@ func (c *Client) UpdateCacheSetting(i *UpdateCacheSettingInput) (*CacheSetting, 
 
 // DeleteCacheSettingInput is the input parameter to DeleteCacheSetting.
 type DeleteCacheSettingInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the cache setting to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -209,7 +199,7 @@ type DeleteCacheSettingInput struct {
 }
 
 // DeleteCacheSetting deletes the specified resource.
-func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
+func (c *Client) DeleteCacheSetting(ctx context.Context, i *DeleteCacheSettingInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -221,7 +211,7 @@ func (c *Client) DeleteCacheSetting(i *DeleteCacheSettingInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "cache_settings", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

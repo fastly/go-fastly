@@ -106,8 +106,6 @@ type DomainMeta struct {
 
 // GetDomainMetricsInput is the input to a DomainMetrics request.
 type GetDomainMetricsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Cursor is the value from a previous response to retrieve the next page. To request the first page, this should be empty.
 	Cursor *string
 	// Datacenters limits query to one or more specific POPs.
@@ -133,9 +131,9 @@ type GetDomainMetricsInput struct {
 }
 
 // GetDomainMetricsForService retrieves the specified resource.
-func (c *Client) GetDomainMetricsForService(i *GetDomainMetricsInput) (*DomainInspector, error) {
+func (c *Client) GetDomainMetricsForService(ctx context.Context, i *GetDomainMetricsInput) (*DomainInspector, error) {
 	var resp any
-	if err := c.GetDomainMetricsForServiceJSON(i, &resp); err != nil {
+	if err := c.GetDomainMetricsForServiceJSON(ctx, i, &resp); err != nil {
 		return nil, err
 	}
 
@@ -147,14 +145,14 @@ func (c *Client) GetDomainMetricsForService(i *GetDomainMetricsInput) (*DomainIn
 }
 
 // GetDomainMetricsForServiceJSON retrieves the specified resource.
-func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst any) error {
+func (c *Client) GetDomainMetricsForServiceJSON(ctx context.Context, i *GetDomainMetricsInput, dst any) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
 
 	path := ToSafeURL("metrics", "domains", "services", i.ServiceID)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 
 	requestOptions.Params["datacenter"] = strings.Join(i.Datacenters, ",")
 	requestOptions.Params["domain"] = strings.Join(i.Domains, ",")
@@ -178,7 +176,7 @@ func (c *Client) GetDomainMetricsForServiceJSON(i *GetDomainMetricsInput, dst an
 		requestOptions.Params["start"] = strconv.FormatInt(i.Start.Unix(), 10)
 	}
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return err
 	}

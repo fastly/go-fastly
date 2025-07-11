@@ -12,8 +12,6 @@ import (
 // ListInput specifies the information needed for the List() function to perform
 // the operation.
 type ListInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Limit is the limit on how many results are returned. Required.
 	Limit *int
 	// Page is the page number of the collection to request (Default 100). Optional.
@@ -26,11 +24,11 @@ type ListInput struct {
 }
 
 // List retrieves all requests in the specified workspace.
-func List(c *fastly.Client, i *ListInput) (*Requests, error) {
+func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Requests, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+	requestOptions := fastly.CreateRequestOptions()
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
@@ -43,7 +41,7 @@ func List(c *fastly.Client, i *ListInput) (*Requests, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "requests")
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}

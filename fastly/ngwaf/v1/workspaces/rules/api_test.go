@@ -1,6 +1,7 @@
 package rules
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -67,7 +68,7 @@ func TestClient_Rule(t *testing.T) {
 	// List all rules.
 	var rs *Rules
 	fastly.Record(t, "list_rules", func(c *fastly.Client) {
-		rs, err = List(c, &ListInput{
+		rs, err = List(context.TODO(), c, &ListInput{
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
 	})
@@ -90,7 +91,7 @@ func TestClient_Rule(t *testing.T) {
 	// Create a test rule.
 	var rule *Rule
 	fastly.Record(t, "create_rule", func(c *fastly.Client) {
-		rule, err = Create(c, &CreateInput{
+		rule, err = Create(context.TODO(), c, &CreateInput{
 			WorkspaceID:    fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			Type:           &ruleType,
 			Description:    &description,
@@ -234,7 +235,7 @@ func TestClient_Rule(t *testing.T) {
 	// Ensure we delete the test rule at the end.
 	defer func() {
 		fastly.Record(t, "delete_rule", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
+			err = Delete(context.TODO(), c, &DeleteInput{
 				RuleID:      fastly.ToPointer(rule.RuleID),
 				WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			})
@@ -247,7 +248,7 @@ func TestClient_Rule(t *testing.T) {
 	// Get the test rule.
 	var testRule *Rule
 	fastly.Record(t, "get_rule", func(c *fastly.Client) {
-		testRule, err = Get(c, &GetInput{
+		testRule, err = Get(context.TODO(), c, &GetInput{
 			RuleID:      fastly.ToPointer(rule.RuleID),
 			WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 		})
@@ -357,7 +358,7 @@ func TestClient_Rule(t *testing.T) {
 	// Update the test rule.
 	var updatedRule *Rule
 	fastly.Record(t, "update_rule", func(c *fastly.Client) {
-		updatedRule, err = Update(c, &UpdateInput{
+		updatedRule, err = Update(context.TODO(), c, &UpdateInput{
 			WorkspaceID:    fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 			RuleID:         fastly.ToPointer(rule.RuleID),
 			Description:    &updatedDescription,
@@ -503,20 +504,20 @@ func TestClient_Rule(t *testing.T) {
 
 func TestClient_CreateRule_validation(t *testing.T) {
 	var err error
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Type:        nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingType) {
 		t.Errorf("expected ErrMissingType: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Description: nil,
 		Type:        fastly.ToPointer("request"),
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -524,7 +525,7 @@ func TestClient_CreateRule_validation(t *testing.T) {
 	if !errors.Is(err, fastly.ErrMissingDescription) {
 		t.Errorf("expected ErrMissingDescription: got %s", err)
 	}
-	_, err = Create(fastly.TestClient, &CreateInput{
+	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Conditions:      []*CreateCondition{},
 		GroupConditions: []*CreateGroupCondition{},
 		Description:     fastly.ToPointer("test"),
@@ -538,13 +539,13 @@ func TestClient_CreateRule_validation(t *testing.T) {
 
 func TestClient_GetRule_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		RuleID:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -555,7 +556,7 @@ func TestClient_GetRule_validation(t *testing.T) {
 
 func TestClient_ListRules_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
@@ -565,13 +566,13 @@ func TestClient_ListRules_validation(t *testing.T) {
 
 func TestClient_UpdateRule_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		RuleID:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
@@ -582,13 +583,13 @@ func TestClient_UpdateRule_validation(t *testing.T) {
 
 func TestClient_DeleteRule_validation(t *testing.T) {
 	var err error
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		WorkspaceID: nil,
 	})
 	if !errors.Is(err, fastly.ErrMissingWorkspaceID) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
-	_, err = Get(fastly.TestClient, &GetInput{
+	_, err = Get(context.TODO(), fastly.TestClient, &GetInput{
 		RuleID:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})

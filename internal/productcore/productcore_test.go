@@ -1,6 +1,7 @@
 package productcore_test
 
 import (
+	"context"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -13,7 +14,7 @@ import (
 func TestDeleteMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	err := productcore.Delete(&productcore.DeleteInput{
+	err := productcore.Delete(context.TODO(), &productcore.DeleteInput{
 		ServiceID: "",
 	})
 
@@ -23,7 +24,7 @@ func TestDeleteMissingServiceID(t *testing.T) {
 func TestGetMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Get[*products.NullOutput](&productcore.GetInput{
+	_, err := productcore.Get[*products.NullOutput](context.TODO(), &productcore.GetInput{
 		ServiceID: "",
 	})
 
@@ -33,7 +34,7 @@ func TestGetMissingServiceID(t *testing.T) {
 func TestPatchMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Patch[*products.NullOutput](&productcore.PatchInput[*products.NullInput]{
+	_, err := productcore.Patch[*products.NullOutput](context.TODO(), &productcore.PatchInput[*products.NullInput]{
 		ServiceID: "",
 	})
 
@@ -43,7 +44,7 @@ func TestPatchMissingServiceID(t *testing.T) {
 func TestPutMissingServiceID(t *testing.T) {
 	t.Parallel()
 
-	_, err := productcore.Put[*products.NullOutput](&productcore.PutInput[*products.NullInput]{
+	_, err := productcore.Put[*products.NullOutput](context.TODO(), &productcore.PutInput[*products.NullInput]{
 		ServiceID: "",
 	})
 

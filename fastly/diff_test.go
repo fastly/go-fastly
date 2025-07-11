@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -22,7 +23,7 @@ func TestClient_Diff(t *testing.T) {
 	// Diff should be empty
 	var d *Diff
 	Record(t, "diff/get", func(c *Client) {
-		d, err = c.GetDiff(&GetDiffInput{
+		d, err = c.GetDiff(context.TODO(), &GetDiffInput{
 			ServiceID: TestDeliveryServiceID,
 			From:      *tv1.Number,
 			To:        *tv2.Number,
@@ -34,7 +35,7 @@ func TestClient_Diff(t *testing.T) {
 
 	// Create a diff
 	Record(t, "diff/create_backend", func(c *Client) {
-		_, err = c.CreateBackend(&CreateBackendInput{
+		_, err = c.CreateBackend(context.TODO(), &CreateBackendInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv2.Number,
 			Name:           ToPointer("test-backend"),
@@ -48,7 +49,7 @@ func TestClient_Diff(t *testing.T) {
 	// Ensure we delete the backend we just created
 	defer func() {
 		Record(t, "diff/cleanup", func(c *Client) {
-			_ = c.DeleteBackend(&DeleteBackendInput{
+			_ = c.DeleteBackend(context.TODO(), &DeleteBackendInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv2.Number,
 				Name:           "test-backend",
@@ -58,7 +59,7 @@ func TestClient_Diff(t *testing.T) {
 
 	// Diff should mot be empty
 	Record(t, "diff/get_again", func(c *Client) {
-		d, err = c.GetDiff(&GetDiffInput{
+		d, err = c.GetDiff(context.TODO(), &GetDiffInput{
 			ServiceID: TestDeliveryServiceID,
 			From:      *tv1.Number,
 			To:        *tv2.Number,
@@ -74,14 +75,14 @@ func TestClient_Diff(t *testing.T) {
 
 func TestClient_Diff_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.GetDiff(&GetDiffInput{
+	_, err = TestClient.GetDiff(context.TODO(), &GetDiffInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDiff(&GetDiffInput{
+	_, err = TestClient.GetDiff(context.TODO(), &GetDiffInput{
 		ServiceID: "foo",
 		From:      0,
 	})
@@ -89,7 +90,7 @@ func TestClient_Diff_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDiff(&GetDiffInput{
+	_, err = TestClient.GetDiff(context.TODO(), &GetDiffInput{
 		ServiceID: "foo",
 		From:      1,
 		To:        0,

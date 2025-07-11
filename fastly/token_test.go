@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"testing"
 )
 
@@ -10,7 +11,7 @@ func TestClient_ListTokens(t *testing.T) {
 	var tokens []*Token
 	var err error
 	Record(t, "tokens/list", func(c *Client) {
-		tokens, err = c.ListTokens(&ListTokensInput{})
+		tokens, err = c.ListTokens(context.TODO(), &ListTokensInput{})
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -26,7 +27,7 @@ func TestClient_ListCustomerTokens(t *testing.T) {
 	var tokens []*Token
 	var err error
 	Record(t, "tokens/list_customer", func(c *Client) {
-		tokens, err = c.ListCustomerTokens(&ListCustomerTokensInput{
+		tokens, err = c.ListCustomerTokens(context.TODO(), &ListCustomerTokensInput{
 			CustomerID: "XXXXXXXXXXXXXXXXXXXXXX",
 		})
 	})
@@ -44,7 +45,7 @@ func TestClient_GetTokenSelf(t *testing.T) {
 	var token *Token
 	var err error
 	Record(t, "tokens/get_self", func(c *Client) {
-		token, err = c.GetTokenSelf()
+		token, err = c.GetTokenSelf(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -65,7 +66,7 @@ func TestClient_CreateToken(t *testing.T) {
 	var token *Token
 	var err error
 	Record(t, "tokens/create", func(c *Client) {
-		token, err = c.CreateToken(input)
+		token, err = c.CreateToken(context.TODO(), input)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -88,7 +89,7 @@ func TestClient_DeleteToken(t *testing.T) {
 
 	var err error
 	Record(t, "tokens/delete", func(c *Client) {
-		err = c.DeleteToken(input)
+		err = c.DeleteToken(context.TODO(), input)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -100,7 +101,7 @@ func TestClient_DeleteTokenSelf(t *testing.T) {
 
 	var err error
 	Record(t, "tokens/delete_self", func(c *Client) {
-		err = c.DeleteTokenSelf()
+		err = c.DeleteTokenSelf(context.TODO())
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -113,7 +114,7 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 	var deleteErr error
 
 	Record(t, "tokens/create_and_bulk_delete", func(c *Client) {
-		token1, err := c.CreateToken(&CreateTokenInput{
+		token1, err := c.CreateToken(context.TODO(), &CreateTokenInput{
 			Name:     ToPointer("my-test-token-1"),
 			Scope:    ToPointer(GlobalScope),
 			Username: ToPointer("testing@fastly.com"),
@@ -124,7 +125,7 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		token2, err := c.CreateToken(&CreateTokenInput{
+		token2, err := c.CreateToken(context.TODO(), &CreateTokenInput{
 			Name:     ToPointer("my-test-token-2"),
 			Scope:    ToPointer(GlobalScope),
 			Username: ToPointer("testing@fastly.com"),
@@ -135,7 +136,7 @@ func TestClient_CreateAndBulkDeleteTokens(t *testing.T) {
 			t.Fatal(err)
 		}
 
-		deleteErr = c.BatchDeleteTokens(&BatchDeleteTokensInput{
+		deleteErr = c.BatchDeleteTokens(context.TODO(), &BatchDeleteTokensInput{
 			Tokens: []*BatchToken{
 				{ID: *token1.TokenID},
 				{ID: *token2.TokenID},

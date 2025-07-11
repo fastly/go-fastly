@@ -41,8 +41,8 @@ type ListTokensInput struct {
 }
 
 // ListTokens retrieves all resources.
-func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
-	resp, err := c.Get("/tokens", CreateRequestOptions(nil))
+func (c *Client) ListTokens(ctx context.Context, _ *ListTokensInput) ([]*Token, error) {
+	resp, err := c.Get(ctx, "/tokens", CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -57,21 +57,19 @@ func (c *Client) ListTokens(_ *ListTokensInput) ([]*Token, error) {
 
 // ListCustomerTokensInput is used as input to the ListCustomerTokens function.
 type ListCustomerTokensInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// CustomerID is an alphanumeric string identifying the customer (required).
 	CustomerID string
 }
 
 // ListCustomerTokens retrieves all resources.
-func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error) {
+func (c *Client) ListCustomerTokens(ctx context.Context, i *ListCustomerTokensInput) ([]*Token, error) {
 	if i.CustomerID == "" {
 		return nil, ErrMissingCustomerID
 	}
 
 	path := ToSafeURL("customer", i.CustomerID, "tokens")
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -88,8 +86,8 @@ func (c *Client) ListCustomerTokens(i *ListCustomerTokensInput) ([]*Token, error
 // used to authenticate the request.
 //
 // Returns a 401 if the token has expired and a 403 for invalid access token.
-func (c *Client) GetTokenSelf() (*Token, error) {
-	resp, err := c.Get("/tokens/self", CreateRequestOptions(nil))
+func (c *Client) GetTokenSelf(ctx context.Context) (*Token, error) {
+	resp, err := c.Get(ctx, "/tokens/self", CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -105,8 +103,6 @@ func (c *Client) GetTokenSelf() (*Token, error) {
 
 // CreateTokenInput is used as input to the Token function.
 type CreateTokenInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// ExpiresAt is a time-stamp (UTC) of when the token will expire
 	ExpiresAt *time.Time `url:"expires_at,omitempty"`
 	// Name is the name of the token.
@@ -122,14 +118,14 @@ type CreateTokenInput struct {
 }
 
 // CreateToken creates a new resource.
-func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
-	ignored, err := c.PostForm("/sudo", i, CreateRequestOptions(i.Context))
+func (c *Client) CreateToken(ctx context.Context, i *CreateTokenInput) (*Token, error) {
+	ignored, err := c.PostForm(ctx, "/sudo", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
 	defer ignored.Body.Close()
 
-	resp, err := c.PostForm("/tokens", i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, "/tokens", i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -144,21 +140,19 @@ func (c *Client) CreateToken(i *CreateTokenInput) (*Token, error) {
 
 // DeleteTokenInput is used as input to the DeleteToken function.
 type DeleteTokenInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// TokenID is an alphanumeric string identifying a token (required).
 	TokenID string
 }
 
 // DeleteToken deletes the specified resource.
-func (c *Client) DeleteToken(i *DeleteTokenInput) error {
+func (c *Client) DeleteToken(ctx context.Context, i *DeleteTokenInput) error {
 	if i.TokenID == "" {
 		return ErrMissingTokenID
 	}
 
 	path := ToSafeURL("tokens", i.TokenID)
 
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -171,8 +165,8 @@ func (c *Client) DeleteToken(i *DeleteTokenInput) error {
 }
 
 // DeleteTokenSelf deletes the specified resource.
-func (c *Client) DeleteTokenSelf() error {
-	resp, err := c.Delete("/tokens/self", CreateRequestOptions(nil))
+func (c *Client) DeleteTokenSelf(ctx context.Context) error {
+	resp, err := c.Delete(ctx, "/tokens/self", CreateRequestOptions())
 	if err != nil {
 		return err
 	}
@@ -186,8 +180,6 @@ func (c *Client) DeleteTokenSelf() error {
 
 // BatchDeleteTokensInput is used as input to BatchDeleteTokens.
 type BatchDeleteTokensInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Tokens is a list of alphanumeric strings, each identifying a token.
 	Tokens []*BatchToken
 }
@@ -200,11 +192,11 @@ type BatchToken struct {
 }
 
 // BatchDeleteTokens revokes multiple tokens.
-func (c *Client) BatchDeleteTokens(i *BatchDeleteTokensInput) error {
+func (c *Client) BatchDeleteTokens(ctx context.Context, i *BatchDeleteTokensInput) error {
 	if len(i.Tokens) == 0 {
 		return ErrMissingTokensValue
 	}
-	ignored, err := c.DeleteJSONAPIBulk("/tokens", i.Tokens, CreateRequestOptions(i.Context))
+	ignored, err := c.DeleteJSONAPIBulk(ctx, "/tokens", i.Tokens, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

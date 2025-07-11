@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	// Create
 	var digitaloceanCreateResp1, digitaloceanCreateResp2, digitaloceanCreateResp3 *DigitalOcean
 	Record(t, "digitaloceans/create", func(c *Client) {
-		digitaloceanCreateResp1, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
+		digitaloceanCreateResp1, err = c.CreateDigitalOcean(context.TODO(), &CreateDigitalOceanInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-digitalocean"),
@@ -41,7 +42,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 
 	Record(t, "digitaloceans/create2", func(c *Client) {
-		digitaloceanCreateResp2, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
+		digitaloceanCreateResp2, err = c.CreateDigitalOcean(context.TODO(), &CreateDigitalOceanInput{
 			ServiceID:       TestDeliveryServiceID,
 			ServiceVersion:  *tv.Number,
 			Name:            ToPointer("test-digitalocean-2"),
@@ -65,7 +66,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 
 	Record(t, "digitaloceans/create3", func(c *Client) {
-		digitaloceanCreateResp3, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
+		digitaloceanCreateResp3, err = c.CreateDigitalOcean(context.TODO(), &CreateDigitalOceanInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-digitalocean-3"),
@@ -91,7 +92,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	// This case is expected to fail because both CompressionCodec and
 	// GzipLevel are present.
 	Record(t, "digitaloceans/create4", func(c *Client) {
-		_, err = c.CreateDigitalOcean(&CreateDigitalOceanInput{
+		_, err = c.CreateDigitalOcean(context.TODO(), &CreateDigitalOceanInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             ToPointer("test-digitalocean-4"),
@@ -118,25 +119,25 @@ func TestClient_DigitalOceans(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "digitaloceans/cleanup", func(c *Client) {
-			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-digitalocean",
 			})
 
-			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-digitalocean-2",
 			})
 
-			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-digitalocean-3",
 			})
 
-			_ = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+			_ = c.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-digitalocean",
@@ -202,7 +203,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	// List
 	var digitaloceans []*DigitalOcean
 	Record(t, "digitaloceans/list", func(c *Client) {
-		digitaloceans, err = c.ListDigitalOceans(&ListDigitalOceansInput{
+		digitaloceans, err = c.ListDigitalOceans(context.TODO(), &ListDigitalOceansInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -217,7 +218,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	// Get
 	var digitaloceanGetResp *DigitalOcean
 	Record(t, "digitaloceans/get", func(c *Client) {
-		digitaloceanGetResp, err = c.GetDigitalOcean(&GetDigitalOceanInput{
+		digitaloceanGetResp, err = c.GetDigitalOcean(context.TODO(), &GetDigitalOceanInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-digitalocean",
@@ -272,7 +273,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	// Update
 	var digitaloceanUpdateResp1, digitaloceanUpdateResp2, digitaloceanUpdateResp3 *DigitalOcean
 	Record(t, "digitaloceans/update", func(c *Client) {
-		digitaloceanUpdateResp1, err = c.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+		digitaloceanUpdateResp1, err = c.UpdateDigitalOcean(context.TODO(), &UpdateDigitalOceanInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-digitalocean",
@@ -287,7 +288,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 
 	Record(t, "digitaloceans/update2", func(c *Client) {
-		digitaloceanUpdateResp2, err = c.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+		digitaloceanUpdateResp2, err = c.UpdateDigitalOcean(context.TODO(), &UpdateDigitalOceanInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-digitalocean-2",
@@ -299,7 +300,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 	}
 
 	Record(t, "digitaloceans/update3", func(c *Client) {
-		digitaloceanUpdateResp3, err = c.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+		digitaloceanUpdateResp3, err = c.UpdateDigitalOcean(context.TODO(), &UpdateDigitalOceanInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-digitalocean-3",
@@ -340,7 +341,7 @@ func TestClient_DigitalOceans(t *testing.T) {
 
 	// Delete
 	Record(t, "digitaloceans/delete", func(c *Client) {
-		err = c.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+		err = c.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-digitalocean",
@@ -353,14 +354,14 @@ func TestClient_DigitalOceans(t *testing.T) {
 
 func TestClient_ListDigitalOceans_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListDigitalOceans(&ListDigitalOceansInput{
+	_, err = TestClient.ListDigitalOceans(context.TODO(), &ListDigitalOceansInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListDigitalOceans(&ListDigitalOceansInput{
+	_, err = TestClient.ListDigitalOceans(context.TODO(), &ListDigitalOceansInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -371,14 +372,14 @@ func TestClient_ListDigitalOceans_validation(t *testing.T) {
 
 func TestClient_CreateDigitalOcean_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateDigitalOcean(&CreateDigitalOceanInput{
+	_, err = TestClient.CreateDigitalOcean(context.TODO(), &CreateDigitalOceanInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateDigitalOcean(&CreateDigitalOceanInput{
+	_, err = TestClient.CreateDigitalOcean(context.TODO(), &CreateDigitalOceanInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -390,7 +391,7 @@ func TestClient_CreateDigitalOcean_validation(t *testing.T) {
 func TestClient_GetDigitalOcean_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetDigitalOcean(&GetDigitalOceanInput{
+	_, err = TestClient.GetDigitalOcean(context.TODO(), &GetDigitalOceanInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -398,7 +399,7 @@ func TestClient_GetDigitalOcean_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDigitalOcean(&GetDigitalOceanInput{
+	_, err = TestClient.GetDigitalOcean(context.TODO(), &GetDigitalOceanInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -406,7 +407,7 @@ func TestClient_GetDigitalOcean_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDigitalOcean(&GetDigitalOceanInput{
+	_, err = TestClient.GetDigitalOcean(context.TODO(), &GetDigitalOceanInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -418,7 +419,7 @@ func TestClient_GetDigitalOcean_validation(t *testing.T) {
 func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+	_, err = TestClient.UpdateDigitalOcean(context.TODO(), &UpdateDigitalOceanInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -426,7 +427,7 @@ func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+	_, err = TestClient.UpdateDigitalOcean(context.TODO(), &UpdateDigitalOceanInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -434,7 +435,7 @@ func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDigitalOcean(&UpdateDigitalOceanInput{
+	_, err = TestClient.UpdateDigitalOcean(context.TODO(), &UpdateDigitalOceanInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -446,7 +447,7 @@ func TestClient_UpdateDigitalOcean_validation(t *testing.T) {
 func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+	err = TestClient.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -454,7 +455,7 @@ func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+	err = TestClient.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -462,7 +463,7 @@ func TestClient_DeleteDigitalOcean_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDigitalOcean(&DeleteDigitalOceanInput{
+	err = TestClient.DeleteDigitalOcean(context.TODO(), &DeleteDigitalOceanInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

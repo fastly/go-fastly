@@ -31,9 +31,7 @@ type RealtimeData struct {
 
 // GetRealtimeStatsInput is an input parameter to GetRealtimeStats function.
 type GetRealtimeStatsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
-	Limit   *uint32
+	Limit *uint32
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// Timestamp is a value to use for subsequent requests (required).
@@ -44,9 +42,9 @@ type GetRealtimeStatsInput struct {
 // parameter. The realtime stats work in a rolling fashion where first request will return
 // a timestamp which should be passed to the next call and so on.
 // More details at https://developer.fastly.com/reference/api/metrics-stats/realtime/
-func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
+func (c *RTSClient) GetRealtimeStats(ctx context.Context, i *GetRealtimeStatsInput) (*RealtimeStatsResponse, error) {
 	var resp any
-	if err := c.GetRealtimeStatsJSON(i, &resp); err != nil {
+	if err := c.GetRealtimeStatsJSON(ctx, i, &resp); err != nil {
 		return nil, err
 	}
 
@@ -58,7 +56,7 @@ func (c *RTSClient) GetRealtimeStats(i *GetRealtimeStatsInput) (*RealtimeStatsRe
 }
 
 // GetRealtimeStatsJSON fetches stats and decodes the response directly to the JSON struct dst.
-func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) error {
+func (c *RTSClient) GetRealtimeStatsJSON(ctx context.Context, i *GetRealtimeStatsInput, dst any) error {
 	if i.ServiceID == "" {
 		return ErrMissingServiceID
 	}
@@ -71,7 +69,7 @@ func (c *RTSClient) GetRealtimeStatsJSON(i *GetRealtimeStatsInput, dst any) erro
 
 	path := ToSafeURL(components...)
 
-	resp, err := c.client.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.client.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

@@ -25,8 +25,6 @@ type Honeycomb struct {
 
 // ListHoneycombsInput is used as input to the ListHoneycombs function.
 type ListHoneycombsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +32,7 @@ type ListHoneycombsInput struct {
 }
 
 // ListHoneycombs retrieves all resources.
-func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
+func (c *Client) ListHoneycombs(ctx context.Context, i *ListHoneycombsInput) ([]*Honeycomb, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -43,7 +41,7 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +56,6 @@ func (c *Client) ListHoneycombs(i *ListHoneycombsInput) ([]*Honeycomb, error) {
 
 // CreateHoneycombInput is used as input to the CreateHoneycomb function.
 type CreateHoneycombInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Dataset is the Honeycomb Dataset you want to log to.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Honeycomb can ingest.
@@ -83,7 +79,7 @@ type CreateHoneycombInput struct {
 }
 
 // CreateHoneycomb creates a new resource.
-func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
+func (c *Client) CreateHoneycomb(ctx context.Context, i *CreateHoneycombInput) (*Honeycomb, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -92,7 +88,7 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +103,6 @@ func (c *Client) CreateHoneycomb(i *CreateHoneycombInput) (*Honeycomb, error) {
 
 // GetHoneycombInput is used as input to the GetHoneycomb function.
 type GetHoneycombInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name for the real-time logging configuration (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -118,7 +112,7 @@ type GetHoneycombInput struct {
 }
 
 // GetHoneycomb retrieves the specified resource.
-func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
+func (c *Client) GetHoneycomb(ctx context.Context, i *GetHoneycombInput) (*Honeycomb, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -130,7 +124,7 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -145,8 +139,6 @@ func (c *Client) GetHoneycomb(i *GetHoneycombInput) (*Honeycomb, error) {
 
 // UpdateHoneycombInput is used as input to the UpdateHoneycomb function.
 type UpdateHoneycombInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Dataset is the Honeycomb Dataset you want to log to.
 	Dataset *string `url:"dataset,omitempty"`
 	// Format is a Fastly log format string. Must produce valid JSON that Honeycomb can ingest.
@@ -172,7 +164,7 @@ type UpdateHoneycombInput struct {
 }
 
 // UpdateHoneycomb updates the specified resource.
-func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
+func (c *Client) UpdateHoneycomb(ctx context.Context, i *UpdateHoneycombInput) (*Honeycomb, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -184,7 +176,7 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -199,8 +191,6 @@ func (c *Client) UpdateHoneycomb(i *UpdateHoneycombInput) (*Honeycomb, error) {
 
 // DeleteHoneycombInput is the input parameter to DeleteHoneycomb.
 type DeleteHoneycombInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the honeycomb to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -210,7 +200,7 @@ type DeleteHoneycombInput struct {
 }
 
 // DeleteHoneycomb deletes the specified resource.
-func (c *Client) DeleteHoneycomb(i *DeleteHoneycombInput) error {
+func (c *Client) DeleteHoneycomb(ctx context.Context, i *DeleteHoneycombInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -222,7 +212,7 @@ func (c *Client) DeleteHoneycomb(i *DeleteHoneycombInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "honeycomb", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

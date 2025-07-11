@@ -1,6 +1,7 @@
 package status
 
 import (
+	"context"
 	"errors"
 	"strings"
 	"testing"
@@ -15,7 +16,7 @@ func TestClient_DomainToolsStatus(t *testing.T) {
 	var status *Status
 	domain := "fastly-sdk-gofastly-testing.com"
 	fastly.Record(t, "get", func(client *fastly.Client) {
-		status, err = Get(client, &GetInput{
+		status, err = Get(context.TODO(), client, &GetInput{
 			Domain: domain,
 		})
 	})
@@ -56,7 +57,7 @@ func TestClient_DomainToolsStatusEstimate(t *testing.T) {
 	var status *Status
 	domain := "fastly-sdk-gofastly-testing.com"
 	fastly.Record(t, "get_estimate", func(client *fastly.Client) {
-		status, err = Get(client, &GetInput{
+		status, err = Get(context.TODO(), client, &GetInput{
 			Domain: domain,
 			Scope:  fastly.ToPointer(ScopeEstimate),
 		})
@@ -86,7 +87,7 @@ func TestClient_DomainToolsStatusOffers(t *testing.T) {
 	var status *Status
 	domain := "domainr-testing.org"
 	fastly.Record(t, "get_offers", func(client *fastly.Client) {
-		status, err = Get(client, &GetInput{
+		status, err = Get(context.TODO(), client, &GetInput{
 			Domain: domain,
 			Scope:  fastly.ToPointer(ScopeEstimate),
 		})
@@ -127,7 +128,7 @@ func TestClient_DomainToolsStatusErrorHandling(t *testing.T) {
 	var err error
 	domain := "fastly-sdk-gofastly-testing"
 	fastly.Record(t, "get_error", func(client *fastly.Client) {
-		_, err = Get(client, &GetInput{
+		_, err = Get(context.TODO(), client, &GetInput{
 			Domain: domain,
 		})
 	})

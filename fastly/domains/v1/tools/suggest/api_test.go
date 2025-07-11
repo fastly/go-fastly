@@ -1,6 +1,7 @@
 package suggest
 
 import (
+	"context"
 	"errors"
 	"slices"
 	"testing"
@@ -14,7 +15,7 @@ func TestClient_DomainToolsSuggestion(t *testing.T) {
 	var err error
 	var suggestions *Suggestions
 	fastly.Record(t, "get", func(client *fastly.Client) {
-		suggestions, err = Get(client, &GetInput{
+		suggestions, err = Get(context.TODO(), client, &GetInput{
 			Query:    "fastly testing",
 			Defaults: fastly.ToPointer("com"),
 			Keywords: fastly.ToPointer("testing"),
@@ -39,7 +40,7 @@ func TestClient_DomainToolsSuggestion(t *testing.T) {
 
 	// omit Query from GetInput
 	fastly.Record(t, "get", func(client *fastly.Client) {
-		suggestions, err = Get(client, &GetInput{})
+		suggestions, err = Get(context.TODO(), client, &GetInput{})
 	})
 
 	if !errors.Is(err, fastly.ErrMissingDomainQuery) {

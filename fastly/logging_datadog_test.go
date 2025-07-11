@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Datadog(t *testing.T) {
 	// Create
 	var d *Datadog
 	Record(t, "datadog/create", func(c *Client) {
-		d, err = c.CreateDatadog(&CreateDatadogInput{
+		d, err = c.CreateDatadog(context.TODO(), &CreateDatadogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-datadog"),
@@ -34,13 +35,13 @@ func TestClient_Datadog(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "datadog/delete", func(c *Client) {
-			_ = c.DeleteDatadog(&DeleteDatadogInput{
+			_ = c.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-datadog",
 			})
 
-			_ = c.DeleteDatadog(&DeleteDatadogInput{
+			_ = c.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-datadog",
@@ -70,7 +71,7 @@ func TestClient_Datadog(t *testing.T) {
 	// List
 	var ld []*Datadog
 	Record(t, "datadog/list", func(c *Client) {
-		ld, err = c.ListDatadog(&ListDatadogInput{
+		ld, err = c.ListDatadog(context.TODO(), &ListDatadogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -85,7 +86,7 @@ func TestClient_Datadog(t *testing.T) {
 	// Get
 	var nd *Datadog
 	Record(t, "datadog/get", func(c *Client) {
-		nd, err = c.GetDatadog(&GetDatadogInput{
+		nd, err = c.GetDatadog(context.TODO(), &GetDatadogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-datadog",
@@ -113,7 +114,7 @@ func TestClient_Datadog(t *testing.T) {
 	// Update
 	var ud *Datadog
 	Record(t, "datadog/update", func(c *Client) {
-		ud, err = c.UpdateDatadog(&UpdateDatadogInput{
+		ud, err = c.UpdateDatadog(context.TODO(), &UpdateDatadogInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-datadog",
@@ -141,7 +142,7 @@ func TestClient_Datadog(t *testing.T) {
 
 	// Delete
 	Record(t, "datadog/delete", func(c *Client) {
-		err = c.DeleteDatadog(&DeleteDatadogInput{
+		err = c.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-datadog",
@@ -155,14 +156,14 @@ func TestClient_Datadog(t *testing.T) {
 func TestClient_ListDatadog_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.ListDatadog(&ListDatadogInput{
+	_, err = TestClient.ListDatadog(context.TODO(), &ListDatadogInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListDatadog(&ListDatadogInput{
+	_, err = TestClient.ListDatadog(context.TODO(), &ListDatadogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -174,14 +175,14 @@ func TestClient_ListDatadog_validation(t *testing.T) {
 func TestClient_CreateDatadog_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.CreateDatadog(&CreateDatadogInput{
+	_, err = TestClient.CreateDatadog(context.TODO(), &CreateDatadogInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateDatadog(&CreateDatadogInput{
+	_, err = TestClient.CreateDatadog(context.TODO(), &CreateDatadogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -193,7 +194,7 @@ func TestClient_CreateDatadog_validation(t *testing.T) {
 func TestClient_GetDatadog_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetDatadog(&GetDatadogInput{
+	_, err = TestClient.GetDatadog(context.TODO(), &GetDatadogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -201,7 +202,7 @@ func TestClient_GetDatadog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDatadog(&GetDatadogInput{
+	_, err = TestClient.GetDatadog(context.TODO(), &GetDatadogInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -209,7 +210,7 @@ func TestClient_GetDatadog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetDatadog(&GetDatadogInput{
+	_, err = TestClient.GetDatadog(context.TODO(), &GetDatadogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -221,7 +222,7 @@ func TestClient_GetDatadog_validation(t *testing.T) {
 func TestClient_UpdateDatadog_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateDatadog(&UpdateDatadogInput{
+	_, err = TestClient.UpdateDatadog(context.TODO(), &UpdateDatadogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -229,7 +230,7 @@ func TestClient_UpdateDatadog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDatadog(&UpdateDatadogInput{
+	_, err = TestClient.UpdateDatadog(context.TODO(), &UpdateDatadogInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -237,7 +238,7 @@ func TestClient_UpdateDatadog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateDatadog(&UpdateDatadogInput{
+	_, err = TestClient.UpdateDatadog(context.TODO(), &UpdateDatadogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -249,7 +250,7 @@ func TestClient_UpdateDatadog_validation(t *testing.T) {
 func TestClient_DeleteDatadog_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteDatadog(&DeleteDatadogInput{
+	err = TestClient.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -257,7 +258,7 @@ func TestClient_DeleteDatadog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDatadog(&DeleteDatadogInput{
+	err = TestClient.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -265,7 +266,7 @@ func TestClient_DeleteDatadog_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteDatadog(&DeleteDatadogInput{
+	err = TestClient.DeleteDatadog(context.TODO(), &DeleteDatadogInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

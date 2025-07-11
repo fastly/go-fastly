@@ -12,19 +12,17 @@ import (
 type DeleteInput struct {
 	// AccessKeyID is an AccessKey Identifier (required).
 	AccessKeyID *string
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 }
 
 // DeleteAccessKey deletes an access key.
-func Delete(c *fastly.Client, i *DeleteInput) error {
+func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 	if i.AccessKeyID == nil {
 		return fastly.ErrMissingAccessKeyID
 	}
 
 	path := fastly.ToSafeURL("resources", "object-storage", "access-keys", *i.AccessKeyID)
 
-	resp, err := c.Delete(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return err
 	}

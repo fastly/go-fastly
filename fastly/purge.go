@@ -17,8 +17,6 @@ type Purge struct {
 
 // PurgeInput is used as input to the Purge function.
 type PurgeInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Soft performs a soft purge.
 	Soft bool
 	// URL is the URL to purge (required).
@@ -26,12 +24,12 @@ type PurgeInput struct {
 }
 
 // Purge instantly purges an individual URL.
-func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
+func (c *Client) Purge(ctx context.Context, i *PurgeInput) (*Purge, error) {
 	if i.URL == "" {
 		return nil, ErrMissingURL
 	}
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Parallel = true
 	if i.Soft {
 		requestOptions.Headers = map[string]string{
@@ -46,7 +44,7 @@ func (c *Client) Purge(i *PurgeInput) (*Purge, error) {
 		return nil, err
 	}
 
-	resp, err := c.Post("purge/"+i.URL, requestOptions)
+	resp, err := c.Post(ctx, "purge/"+i.URL, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -79,8 +77,6 @@ func constructRequestOptionsParam(us string) (map[string]string, error) {
 
 // PurgeKeyInput is used as input to the PurgeKey function.
 type PurgeKeyInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Key is the key to purge (required).
 	Key string
 	// ServiceID is the ID of the service (required).
@@ -90,7 +86,7 @@ type PurgeKeyInput struct {
 }
 
 // PurgeKey instantly purges a particular service of items tagged with a key.
-func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
+func (c *Client) PurgeKey(ctx context.Context, i *PurgeKeyInput) (*Purge, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -100,10 +96,10 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge", i.Key)
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Parallel = true
 
-	req, err := c.RawRequest(http.MethodPost, path, requestOptions)
+	req, err := c.RawRequest(ctx, http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -127,8 +123,6 @@ func (c *Client) PurgeKey(i *PurgeKeyInput) (*Purge, error) {
 
 // PurgeKeysInput is used as input to the PurgeKeys function.
 type PurgeKeysInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Keys are the keys to purge (required).
 	Keys []string
 	// ServiceID is the ID of the service (required).
@@ -138,7 +132,7 @@ type PurgeKeysInput struct {
 }
 
 // PurgeKeys instantly purges a particular service of items tagged with a key.
-func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
+func (c *Client) PurgeKeys(ctx context.Context, i *PurgeKeysInput) (map[string]string, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -148,10 +142,10 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 	path := ToSafeURL("service", i.ServiceID, "purge")
 
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Parallel = true
 
-	req, err := c.RawRequest(http.MethodPost, path, requestOptions)
+	req, err := c.RawRequest(ctx, http.MethodPost, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -177,21 +171,19 @@ func (c *Client) PurgeKeys(i *PurgeKeysInput) (map[string]string, error) {
 
 // PurgeAllInput is used as input to the Purge function.
 type PurgeAllInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 }
 
 // PurgeAll instantly purges everything from a service.
-func (c *Client) PurgeAll(i *PurgeAllInput) (*Purge, error) {
+func (c *Client) PurgeAll(ctx context.Context, i *PurgeAllInput) (*Purge, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "purge_all")
 
-	req, err := c.RawRequest(http.MethodPost, path, CreateRequestOptions(i.Context))
+	req, err := c.RawRequest(ctx, http.MethodPost, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

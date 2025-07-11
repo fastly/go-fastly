@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Herokus(t *testing.T) {
 	// Create
 	var h *Heroku
 	Record(t, "herokus/create", func(c *Client) {
-		h, err = c.CreateHeroku(&CreateHerokuInput{
+		h, err = c.CreateHeroku(context.TODO(), &CreateHerokuInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-heroku"),
@@ -35,13 +36,13 @@ func TestClient_Herokus(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "herokus/cleanup", func(c *Client) {
-			_ = c.DeleteHeroku(&DeleteHerokuInput{
+			_ = c.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-heroku",
 			})
 
-			_ = c.DeleteHeroku(&DeleteHerokuInput{
+			_ = c.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-heroku",
@@ -71,7 +72,7 @@ func TestClient_Herokus(t *testing.T) {
 	// List
 	var hs []*Heroku
 	Record(t, "herokus/list", func(c *Client) {
-		hs, err = c.ListHerokus(&ListHerokusInput{
+		hs, err = c.ListHerokus(context.TODO(), &ListHerokusInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -86,7 +87,7 @@ func TestClient_Herokus(t *testing.T) {
 	// Get
 	var nh *Heroku
 	Record(t, "herokus/get", func(c *Client) {
-		nh, err = c.GetHeroku(&GetHerokuInput{
+		nh, err = c.GetHeroku(context.TODO(), &GetHerokuInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-heroku",
@@ -117,7 +118,7 @@ func TestClient_Herokus(t *testing.T) {
 	// Update
 	var uh *Heroku
 	Record(t, "herokus/update", func(c *Client) {
-		uh, err = c.UpdateHeroku(&UpdateHerokuInput{
+		uh, err = c.UpdateHeroku(context.TODO(), &UpdateHerokuInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-heroku",
@@ -141,7 +142,7 @@ func TestClient_Herokus(t *testing.T) {
 
 	// Delete
 	Record(t, "herokus/delete", func(c *Client) {
-		err = c.DeleteHeroku(&DeleteHerokuInput{
+		err = c.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-heroku",
@@ -154,14 +155,14 @@ func TestClient_Herokus(t *testing.T) {
 
 func TestClient_ListHerokus_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListHerokus(&ListHerokusInput{
+	_, err = TestClient.ListHerokus(context.TODO(), &ListHerokusInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListHerokus(&ListHerokusInput{
+	_, err = TestClient.ListHerokus(context.TODO(), &ListHerokusInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -172,14 +173,14 @@ func TestClient_ListHerokus_validation(t *testing.T) {
 
 func TestClient_CreateHeroku_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateHeroku(&CreateHerokuInput{
+	_, err = TestClient.CreateHeroku(context.TODO(), &CreateHerokuInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateHeroku(&CreateHerokuInput{
+	_, err = TestClient.CreateHeroku(context.TODO(), &CreateHerokuInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -191,7 +192,7 @@ func TestClient_CreateHeroku_validation(t *testing.T) {
 func TestClient_GetHeroku_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetHeroku(&GetHerokuInput{
+	_, err = TestClient.GetHeroku(context.TODO(), &GetHerokuInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -199,7 +200,7 @@ func TestClient_GetHeroku_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHeroku(&GetHerokuInput{
+	_, err = TestClient.GetHeroku(context.TODO(), &GetHerokuInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -207,7 +208,7 @@ func TestClient_GetHeroku_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetHeroku(&GetHerokuInput{
+	_, err = TestClient.GetHeroku(context.TODO(), &GetHerokuInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -219,7 +220,7 @@ func TestClient_GetHeroku_validation(t *testing.T) {
 func TestClient_UpdateHeroku_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateHeroku(&UpdateHerokuInput{
+	_, err = TestClient.UpdateHeroku(context.TODO(), &UpdateHerokuInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -227,7 +228,7 @@ func TestClient_UpdateHeroku_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHeroku(&UpdateHerokuInput{
+	_, err = TestClient.UpdateHeroku(context.TODO(), &UpdateHerokuInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -235,7 +236,7 @@ func TestClient_UpdateHeroku_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateHeroku(&UpdateHerokuInput{
+	_, err = TestClient.UpdateHeroku(context.TODO(), &UpdateHerokuInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -247,7 +248,7 @@ func TestClient_UpdateHeroku_validation(t *testing.T) {
 func TestClient_DeleteHeroku_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteHeroku(&DeleteHerokuInput{
+	err = TestClient.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -255,7 +256,7 @@ func TestClient_DeleteHeroku_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHeroku(&DeleteHerokuInput{
+	err = TestClient.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -263,7 +264,7 @@ func TestClient_DeleteHeroku_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteHeroku(&DeleteHerokuInput{
+	err = TestClient.DeleteHeroku(context.TODO(), &DeleteHerokuInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

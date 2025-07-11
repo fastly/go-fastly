@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"fmt"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_CreateConfigStoreItem(t *testing.T) {
 	const value = "testing 123"
 
 	Record(t, fmt.Sprintf("config_store_item/%s/create_item", t.Name()), func(c *Client) {
-		item, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
+		item, err = c.CreateConfigStoreItem(context.TODO(), &CreateConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   value,
@@ -49,7 +50,7 @@ func TestClient_DeleteConfigStoreItem(t *testing.T) {
 	var err error
 
 	Record(t, fmt.Sprintf("config_store_item/%s/create_item", t.Name()), func(c *Client) {
-		_, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
+		_, err = c.CreateConfigStoreItem(context.TODO(), &CreateConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   "delete me",
@@ -60,7 +61,7 @@ func TestClient_DeleteConfigStoreItem(t *testing.T) {
 	}
 
 	Record(t, fmt.Sprintf("config_store_item/%s/delete_item", t.Name()), func(c *Client) {
-		err = c.DeleteConfigStoreItem(&DeleteConfigStoreItemInput{
+		err = c.DeleteConfigStoreItem(context.TODO(), &DeleteConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 		})
@@ -82,7 +83,7 @@ func TestClient_GetConfigStoreItem(t *testing.T) {
 	)
 
 	Record(t, fmt.Sprintf("config_store_item/%s/create_item", t.Name()), func(c *Client) {
-		item, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
+		item, err = c.CreateConfigStoreItem(context.TODO(), &CreateConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   "get me",
@@ -93,7 +94,7 @@ func TestClient_GetConfigStoreItem(t *testing.T) {
 	}
 
 	Record(t, fmt.Sprintf("config_store_item/%s/get_item", t.Name()), func(c *Client) {
-		gotItem, err = c.GetConfigStoreItem(&GetConfigStoreItemInput{
+		gotItem, err = c.GetConfigStoreItem(context.TODO(), &GetConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 		})
@@ -132,7 +133,7 @@ func TestClient_ListConfigStoreItems(t *testing.T) {
 
 	Record(t, fmt.Sprintf("config_store_item/%s/create_items", t.Name()), func(c *Client) {
 		for i, key := range keys {
-			_, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
+			_, err = c.CreateConfigStoreItem(context.TODO(), &CreateConfigStoreItemInput{
 				StoreID: cs.StoreID,
 				Key:     key,
 				Value:   fmt.Sprintf("value %02d", i),
@@ -148,7 +149,7 @@ func TestClient_ListConfigStoreItems(t *testing.T) {
 
 	var list []*ConfigStoreItem
 	Record(t, fmt.Sprintf("config_store_item/%s/list_items", t.Name()), func(c *Client) {
-		list, err = c.ListConfigStoreItems(&ListConfigStoreItemsInput{
+		list, err = c.ListConfigStoreItems(context.TODO(), &ListConfigStoreItemsInput{
 			StoreID: cs.StoreID,
 		})
 	})
@@ -182,7 +183,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 
 	const newValue = "I'm a new value"
 	Record(t, fmt.Sprintf("config_store_item/%s/create_and_update_item", t.Name()), func(c *Client) {
-		_, err = c.CreateConfigStoreItem(&CreateConfigStoreItemInput{
+		_, err = c.CreateConfigStoreItem(context.TODO(), &CreateConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   "OLD VALUE",
@@ -190,7 +191,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 		if err != nil {
 			return
 		}
-		_, err = c.UpdateConfigStoreItem(&UpdateConfigStoreItemInput{
+		_, err = c.UpdateConfigStoreItem(context.TODO(), &UpdateConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 			Value:   newValue,
@@ -198,7 +199,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 		if err != nil {
 			return
 		}
-		gotItem, err = c.GetConfigStoreItem(&GetConfigStoreItemInput{
+		gotItem, err = c.GetConfigStoreItem(context.TODO(), &GetConfigStoreItemInput{
 			StoreID: cs.StoreID,
 			Key:     t.Name(),
 		})
@@ -215,7 +216,7 @@ func TestClient_UpdateConfigStoreItem(t *testing.T) {
 
 	const upsertValue = "i was upserted"
 	Record(t, fmt.Sprintf("config_store_item/%s/upsert_item", t.Name()), func(c *Client) {
-		gotItem, err = c.UpdateConfigStoreItem(&UpdateConfigStoreItemInput{
+		gotItem, err = c.UpdateConfigStoreItem(context.TODO(), &UpdateConfigStoreItemInput{
 			Upsert:  true,
 			StoreID: cs.StoreID,
 			Key:     t.Name() + "-upsert",
@@ -243,7 +244,7 @@ func createConfigStore(t *testing.T) *ConfigStore {
 		err error
 	)
 	Record(t, fmt.Sprintf("config_store_item/%s/create_store", t.Name()), func(c *Client) {
-		cs, err = c.CreateConfigStore(&CreateConfigStoreInput{
+		cs, err = c.CreateConfigStore(context.TODO(), &CreateConfigStoreInput{
 			Name: t.Name(),
 		})
 	})
@@ -254,7 +255,7 @@ func createConfigStore(t *testing.T) *ConfigStore {
 	// Ensure Config Store is cleaned up.
 	t.Cleanup(func() {
 		Record(t, fmt.Sprintf("config_store_item/%s/delete_store", t.Name()), func(c *Client) {
-			err = c.DeleteConfigStore(&DeleteConfigStoreInput{
+			err = c.DeleteConfigStore(context.TODO(), &DeleteConfigStoreInput{
 				StoreID: cs.StoreID,
 			})
 		})

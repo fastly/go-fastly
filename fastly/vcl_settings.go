@@ -17,8 +17,6 @@ type Settings struct {
 
 // GetSettingsInput is used as input to the GetSettings function.
 type GetSettingsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -26,7 +24,7 @@ type GetSettingsInput struct {
 }
 
 // GetSettings retrieves the specified resource.
-func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
+func (c *Client) GetSettings(ctx context.Context, i *GetSettingsInput) (*Settings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -35,7 +33,7 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "settings")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -50,8 +48,6 @@ func (c *Client) GetSettings(i *GetSettingsInput) (*Settings, error) {
 
 // UpdateSettingsInput is used as input to the UpdateSettings function.
 type UpdateSettingsInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// DefaultHost is the default host name for the version.
 	DefaultHost *string `url:"general.default_host,omitempty"`
 	// DefaultTTL is the default time-to-live (TTL) for the version.
@@ -67,7 +63,7 @@ type UpdateSettingsInput struct {
 }
 
 // UpdateSettings updates the specified resource.
-func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
+func (c *Client) UpdateSettings(ctx context.Context, i *UpdateSettingsInput) (*Settings, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -76,7 +72,7 @@ func (c *Client) UpdateSettings(i *UpdateSettingsInput) (*Settings, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "settings")
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

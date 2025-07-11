@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"net/http"
 	"net/url"
 	"strings"
@@ -30,7 +31,7 @@ func TestClient_RawRequest(t *testing.T) {
 		}
 		for _, p := range purgeAPIPaths {
 			for _, k := range cacheKeys {
-				r, err := c.RawRequest(http.MethodGet, p+url.PathEscape(k), CreateRequestOptions(nil))
+				r, err := c.RawRequest(context.TODO(), http.MethodGet, p+url.PathEscape(k), CreateRequestOptions())
 				// Cannot test results for success if we get an error
 				if err != nil {
 					t.Fatal("Could not make RawRequest for ", h, p, k)

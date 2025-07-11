@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"errors"
 	"testing"
 )
@@ -17,7 +18,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	// Create
 	var s *Scalyr
 	Record(t, "scalyrs/create", func(c *Client) {
-		s, err = c.CreateScalyr(&CreateScalyrInput{
+		s, err = c.CreateScalyr(context.TODO(), &CreateScalyrInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           ToPointer("test-scalyr"),
@@ -36,13 +37,13 @@ func TestClient_Scalyrs(t *testing.T) {
 	// Ensure deleted
 	defer func() {
 		Record(t, "scalyrs/cleanup", func(c *Client) {
-			_ = c.DeleteScalyr(&DeleteScalyrInput{
+			_ = c.DeleteScalyr(context.TODO(), &DeleteScalyrInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "test-scalyr",
 			})
 
-			_ = c.DeleteScalyr(&DeleteScalyrInput{
+			_ = c.DeleteScalyr(context.TODO(), &DeleteScalyrInput{
 				ServiceID:      TestDeliveryServiceID,
 				ServiceVersion: *tv.Number,
 				Name:           "new-test-scalyr",
@@ -75,7 +76,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	// List
 	var ss []*Scalyr
 	Record(t, "scalyrs/list", func(c *Client) {
-		ss, err = c.ListScalyrs(&ListScalyrsInput{
+		ss, err = c.ListScalyrs(context.TODO(), &ListScalyrsInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 		})
@@ -90,7 +91,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	// Get
 	var ns *Scalyr
 	Record(t, "scalyrs/get", func(c *Client) {
-		ns, err = c.GetScalyr(&GetScalyrInput{
+		ns, err = c.GetScalyr(context.TODO(), &GetScalyrInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "test-scalyr",
@@ -124,7 +125,7 @@ func TestClient_Scalyrs(t *testing.T) {
 	// Update
 	var us *Scalyr
 	Record(t, "scalyrs/update", func(c *Client) {
-		us, err = c.UpdateScalyr(&UpdateScalyrInput{
+		us, err = c.UpdateScalyr(context.TODO(), &UpdateScalyrInput{
 			ServiceID:        TestDeliveryServiceID,
 			ServiceVersion:   *tv.Number,
 			Name:             "test-scalyr",
@@ -156,7 +157,7 @@ func TestClient_Scalyrs(t *testing.T) {
 
 	// Delete
 	Record(t, "scalyrs/delete", func(c *Client) {
-		err = c.DeleteScalyr(&DeleteScalyrInput{
+		err = c.DeleteScalyr(context.TODO(), &DeleteScalyrInput{
 			ServiceID:      TestDeliveryServiceID,
 			ServiceVersion: *tv.Number,
 			Name:           "new-test-scalyr",
@@ -169,14 +170,14 @@ func TestClient_Scalyrs(t *testing.T) {
 
 func TestClient_ListScalyrs_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.ListScalyrs(&ListScalyrsInput{
+	_, err = TestClient.ListScalyrs(context.TODO(), &ListScalyrsInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.ListScalyrs(&ListScalyrsInput{
+	_, err = TestClient.ListScalyrs(context.TODO(), &ListScalyrsInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -187,14 +188,14 @@ func TestClient_ListScalyrs_validation(t *testing.T) {
 
 func TestClient_CreateScalyr_validation(t *testing.T) {
 	var err error
-	_, err = TestClient.CreateScalyr(&CreateScalyrInput{
+	_, err = TestClient.CreateScalyr(context.TODO(), &CreateScalyrInput{
 		ServiceID: "",
 	})
 	if !errors.Is(err, ErrMissingServiceID) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.CreateScalyr(&CreateScalyrInput{
+	_, err = TestClient.CreateScalyr(context.TODO(), &CreateScalyrInput{
 		ServiceID:      "foo",
 		ServiceVersion: 0,
 	})
@@ -206,7 +207,7 @@ func TestClient_CreateScalyr_validation(t *testing.T) {
 func TestClient_GetScalyr_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.GetScalyr(&GetScalyrInput{
+	_, err = TestClient.GetScalyr(context.TODO(), &GetScalyrInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -214,7 +215,7 @@ func TestClient_GetScalyr_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetScalyr(&GetScalyrInput{
+	_, err = TestClient.GetScalyr(context.TODO(), &GetScalyrInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -222,7 +223,7 @@ func TestClient_GetScalyr_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.GetScalyr(&GetScalyrInput{
+	_, err = TestClient.GetScalyr(context.TODO(), &GetScalyrInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -234,7 +235,7 @@ func TestClient_GetScalyr_validation(t *testing.T) {
 func TestClient_UpdateScalyr_validation(t *testing.T) {
 	var err error
 
-	_, err = TestClient.UpdateScalyr(&UpdateScalyrInput{
+	_, err = TestClient.UpdateScalyr(context.TODO(), &UpdateScalyrInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -242,7 +243,7 @@ func TestClient_UpdateScalyr_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateScalyr(&UpdateScalyrInput{
+	_, err = TestClient.UpdateScalyr(context.TODO(), &UpdateScalyrInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -250,7 +251,7 @@ func TestClient_UpdateScalyr_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	_, err = TestClient.UpdateScalyr(&UpdateScalyrInput{
+	_, err = TestClient.UpdateScalyr(context.TODO(), &UpdateScalyrInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})
@@ -262,7 +263,7 @@ func TestClient_UpdateScalyr_validation(t *testing.T) {
 func TestClient_DeleteScalyr_validation(t *testing.T) {
 	var err error
 
-	err = TestClient.DeleteScalyr(&DeleteScalyrInput{
+	err = TestClient.DeleteScalyr(context.TODO(), &DeleteScalyrInput{
 		ServiceID:      "foo",
 		ServiceVersion: 1,
 	})
@@ -270,7 +271,7 @@ func TestClient_DeleteScalyr_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteScalyr(&DeleteScalyrInput{
+	err = TestClient.DeleteScalyr(context.TODO(), &DeleteScalyrInput{
 		Name:           "test",
 		ServiceVersion: 1,
 	})
@@ -278,7 +279,7 @@ func TestClient_DeleteScalyr_validation(t *testing.T) {
 		t.Errorf("bad error: %s", err)
 	}
 
-	err = TestClient.DeleteScalyr(&DeleteScalyrInput{
+	err = TestClient.DeleteScalyr(context.TODO(), &DeleteScalyrInput{
 		Name:      "test",
 		ServiceID: "foo",
 	})

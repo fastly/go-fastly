@@ -46,8 +46,6 @@ type TLSDomain struct {
 
 // ListBulkCertificatesInput is used as input to the ListBulkCertificates function.
 type ListBulkCertificatesInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// FilterTLSDomainsIDMatch filters certificates by their matching, fully-qualified domain name. Returns all partial matches. Must provide a value longer than 3 characters.
 	FilterTLSDomainsIDMatch string
 	// PageNumber is the page index for pagination.
@@ -83,13 +81,13 @@ func (i *ListBulkCertificatesInput) formatFilters() map[string]string {
 }
 
 // ListBulkCertificates retrieves all resources.
-func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCertificate, error) {
+func (c *Client) ListBulkCertificates(ctx context.Context, i *ListBulkCertificatesInput) ([]*BulkCertificate, error) {
 	path := "/tls/bulk/certificates"
-	requestOptions := CreateRequestOptions(i.Context)
+	requestOptions := CreateRequestOptions()
 	requestOptions.Params = i.formatFilters()
 	requestOptions.Headers["Accept"] = jsonapi.MediaType // this is required otherwise the filters don't work
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
@@ -114,21 +112,19 @@ func (c *Client) ListBulkCertificates(i *ListBulkCertificatesInput) ([]*BulkCert
 
 // GetBulkCertificateInput is used as input to the GetBulkCertificate function.
 type GetBulkCertificateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS bulk certificate.
 	ID string
 }
 
 // GetBulkCertificate retrieves the specified resource.
-func (c *Client) GetBulkCertificate(i *GetBulkCertificateInput) (*BulkCertificate, error) {
+func (c *Client) GetBulkCertificate(ctx context.Context, i *GetBulkCertificateInput) (*BulkCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
 
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -150,14 +146,12 @@ type CreateBulkCertificateInput struct {
 	CertBlob string `jsonapi:"attr,cert_blob"`
 	// Configurations is a list of TLS configurations.
 	Configurations []*TLSConfiguration `jsonapi:"relation,tls_configurations,tls_configuration"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// IntermediatesBlob is the PEM-formatted chain of intermediate blobs.
 	IntermediatesBlob string `jsonapi:"attr,intermediates_blob"`
 }
 
 // CreateBulkCertificate creates a new resource.
-func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCertificate, error) {
+func (c *Client) CreateBulkCertificate(ctx context.Context, i *CreateBulkCertificateInput) (*BulkCertificate, error) {
 	if i.CertBlob == "" {
 		return nil, ErrMissingCertBlob
 	}
@@ -167,7 +161,7 @@ func (c *Client) CreateBulkCertificate(i *CreateBulkCertificateInput) (*BulkCert
 
 	path := "/tls/bulk/certificates"
 
-	resp, err := c.PostJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -187,8 +181,6 @@ type UpdateBulkCertificateInput struct {
 	AllowUntrusted bool `jsonapi:"attr,allow_untrusted_root"`
 	// CertBlob is the PEM-formatted certificate blob.
 	CertBlob string `jsonapi:"attr,cert_blob"`
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS bulk certificate.
 	ID string `jsonapi:"attr,id"`
 	// IntermediatesBlob is the PEM-formatted chain of intermediate blobs.
@@ -200,7 +192,7 @@ type UpdateBulkCertificateInput struct {
 // By using this endpoint, the original certificate will cease to be used for future TLS handshakes.
 // Thus, only SAN entries that appear in the replacement certificate will become TLS enabled.
 // Any SAN entries that are missing in the replacement certificate will become disabled.
-func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCertificate, error) {
+func (c *Client) UpdateBulkCertificate(ctx context.Context, i *UpdateBulkCertificateInput) (*BulkCertificate, error) {
 	if i.ID == "" {
 		return nil, ErrMissingID
 	}
@@ -215,7 +207,7 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCert
 
 	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
 
-	resp, err := c.PatchJSONAPI(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSONAPI(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -230,21 +222,19 @@ func (c *Client) UpdateBulkCertificate(i *UpdateBulkCertificateInput) (*BulkCert
 
 // DeleteBulkCertificateInput used for deleting a certificate.
 type DeleteBulkCertificateInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ID is an alphanumeric string identifying a TLS bulk certificate.
 	ID string
 }
 
 // DeleteBulkCertificate deletes the specified resource.
-func (c *Client) DeleteBulkCertificate(i *DeleteBulkCertificateInput) error {
+func (c *Client) DeleteBulkCertificate(ctx context.Context, i *DeleteBulkCertificateInput) error {
 	if i.ID == "" {
 		return ErrMissingID
 	}
 
 	path := ToSafeURL("tls", "bulk", "certificates", i.ID)
 
-	ignored, err := c.Delete(path, CreateRequestOptions(i.Context))
+	ignored, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

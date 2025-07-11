@@ -25,8 +25,6 @@ type Heroku struct {
 
 // ListHerokusInput is used as input to the ListHerokus function.
 type ListHerokusInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// ServiceID is the ID of the service (required).
 	ServiceID string
 	// ServiceVersion is the specific configuration version (required).
@@ -34,7 +32,7 @@ type ListHerokusInput struct {
 }
 
 // ListHerokus retrieves all resources.
-func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
+func (c *Client) ListHerokus(ctx context.Context, i *ListHerokusInput) ([]*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -43,7 +41,7 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku")
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -58,8 +56,6 @@ func (c *Client) ListHerokus(i *ListHerokusInput) ([]*Heroku, error) {
 
 // CreateHerokuInput is used as input to the CreateHeroku function.
 type CreateHerokuInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -83,7 +79,7 @@ type CreateHerokuInput struct {
 }
 
 // CreateHeroku creates a new resource.
-func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
+func (c *Client) CreateHeroku(ctx context.Context, i *CreateHerokuInput) (*Heroku, error) {
 	if i.ServiceID == "" {
 		return nil, ErrMissingServiceID
 	}
@@ -92,7 +88,7 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku")
-	resp, err := c.PostForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PostForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -107,8 +103,6 @@ func (c *Client) CreateHeroku(i *CreateHerokuInput) (*Heroku, error) {
 
 // GetHerokuInput is used as input to the GetHeroku function.
 type GetHerokuInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the heroku to fetch (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -118,7 +112,7 @@ type GetHerokuInput struct {
 }
 
 // GetHeroku retrieves the specified resource.
-func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
+func (c *Client) GetHeroku(ctx context.Context, i *GetHerokuInput) (*Heroku, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -130,7 +124,7 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.Get(path, CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -145,8 +139,6 @@ func (c *Client) GetHeroku(i *GetHerokuInput) (*Heroku, error) {
 
 // UpdateHerokuInput is used as input to the UpdateHeroku function.
 type UpdateHerokuInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context `url:"-"`
 	// Format is a fastly log format string.
 	Format *string `url:"format,omitempty"`
 	// FormatVersion is the version of the custom logging format used for the configured endpoint.
@@ -172,7 +164,7 @@ type UpdateHerokuInput struct {
 }
 
 // UpdateHeroku updates the specified resource.
-func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
+func (c *Client) UpdateHeroku(ctx context.Context, i *UpdateHerokuInput) (*Heroku, error) {
 	if i.Name == "" {
 		return nil, ErrMissingName
 	}
@@ -184,7 +176,7 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.PutForm(path, i, CreateRequestOptions(i.Context))
+	resp, err := c.PutForm(ctx, path, i, CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}
@@ -199,8 +191,6 @@ func (c *Client) UpdateHeroku(i *UpdateHerokuInput) (*Heroku, error) {
 
 // DeleteHerokuInput is the input parameter to DeleteHeroku.
 type DeleteHerokuInput struct {
-	// Context, if supplied, will be used as the Request's context.
-	Context *context.Context
 	// Name is the name of the heroku to delete (required).
 	Name string
 	// ServiceID is the ID of the service (required).
@@ -210,7 +200,7 @@ type DeleteHerokuInput struct {
 }
 
 // DeleteHeroku deletes the specified resource.
-func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
+func (c *Client) DeleteHeroku(ctx context.Context, i *DeleteHerokuInput) error {
 	if i.Name == "" {
 		return ErrMissingName
 	}
@@ -222,7 +212,7 @@ func (c *Client) DeleteHeroku(i *DeleteHerokuInput) error {
 	}
 
 	path := ToSafeURL("service", i.ServiceID, "version", strconv.Itoa(i.ServiceVersion), "logging", "heroku", i.Name)
-	resp, err := c.Delete(path, CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, CreateRequestOptions())
 	if err != nil {
 		return err
 	}

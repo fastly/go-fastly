@@ -1,6 +1,7 @@
 package computeacls
 
 import (
+	"context"
 	"net"
 	"testing"
 
@@ -17,7 +18,7 @@ func TestClient_ComputeACL(t *testing.T) {
 
 	// List all compute ACLs.
 	fastly.Record(t, "list_acls", func(c *fastly.Client) {
-		acls, err = ListACLs(c)
+		acls, err = ListACLs(context.TODO(), c)
 	})
 	if err != nil {
 		t.Fatal(err)
@@ -33,7 +34,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	// Create a compute ACL for testing.
 	var acl *ComputeACL
 	fastly.Record(t, "create_acl", func(c *fastly.Client) {
-		acl, err = Create(c, &CreateInput{
+		acl, err = Create(context.TODO(), c, &CreateInput{
 			Name: fastly.ToPointer(aclName),
 		})
 	})
@@ -47,7 +48,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	// Ensure we delete the test compute ACL at the end.
 	defer func() {
 		fastly.Record(t, "delete_acl", func(c *fastly.Client) {
-			err = Delete(c, &DeleteInput{
+			err = Delete(context.TODO(), c, &DeleteInput{
 				ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
 			})
 		})
@@ -59,7 +60,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	// Describe the test compute ACL.
 	var da *ComputeACL
 	fastly.Record(t, "describe_acl", func(c *fastly.Client) {
-		da, err = Describe(c, &DescribeInput{
+		da, err = Describe(context.TODO(), c, &DescribeInput{
 			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
 		})
 	})
@@ -98,7 +99,7 @@ func TestClient_ComputeACL(t *testing.T) {
 
 	// Add the entries to the test compute ACL.
 	fastly.Record(t, "update_acl", func(c *fastly.Client) {
-		err = Update(c, &UpdateInput{
+		err = Update(context.TODO(), c, &UpdateInput{
 			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
 			Entries:      entries,
 		})
@@ -110,7 +111,7 @@ func TestClient_ComputeACL(t *testing.T) {
 	// List all entries of the test compute ACL and compare it to the input.
 	var actualACLEntries *ComputeACLEntries
 	fastly.Record(t, "list_entries", func(c *fastly.Client) {
-		actualACLEntries, err = ListEntries(c, &ListEntriesInput{
+		actualACLEntries, err = ListEntries(context.TODO(), c, &ListEntriesInput{
 			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
 		})
 	})
@@ -150,7 +151,7 @@ func TestClient_ComputeACL(t *testing.T) {
 			input.ComputeACLID = fastly.ToPointer(acl.ComputeACLID)
 			input.Limit = fastly.ToPointer(int(Limit))
 
-			actualACLEntries, err = ListEntries(c, input)
+			actualACLEntries, err = ListEntries(context.TODO(), c, input)
 			if err != nil {
 				t.Errorf("error fetching list of compute ACL entries: %v", err)
 			}
@@ -165,7 +166,7 @@ func TestClient_ComputeACL(t *testing.T) {
 				t.Fatal(err)
 			}
 
-			entry, err := Lookup(c, &LookupInput{
+			entry, err := Lookup(context.TODO(), c, &LookupInput{
 				ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
 				ComputeACLIP: fastly.ToPointer(ip.Mask(ipNet.Mask).String()),
 			})
@@ -197,7 +198,7 @@ func TestClient_ComputeACL(t *testing.T) {
 
 	// Lookup a non-existing IP in the test compute ACL
 	fastly.Record(t, "lookup_non_existing_ip", func(c *fastly.Client) {
-		entry, err := Lookup(c, &LookupInput{
+		entry, err := Lookup(context.TODO(), c, &LookupInput{
 			ComputeACLID: fastly.ToPointer(acl.ComputeACLID),
 			ComputeACLIP: fastly.ToPointer("73.49.184.42"),
 		})
@@ -211,7 +212,7 @@ func TestClient_ComputeACL(t *testing.T) {
 }
 
 func TestClient_Create_validation(t *testing.T) {
-	_, err := Create(fastly.TestClient, &CreateInput{
+	_, err := Create(context.TODO(), fastly.TestClient, &CreateInput{
 		Name: nil,
 	})
 	if err != fastly.ErrMissingName {
@@ -220,7 +221,7 @@ func TestClient_Create_validation(t *testing.T) {
 }
 
 func TestClient_Describe_validation(t *testing.T) {
-	_, err := Describe(fastly.TestClient, &DescribeInput{
+	_, err := Describe(context.TODO(), fastly.TestClient, &DescribeInput{
 		ComputeACLID: nil,
 	})
 	if err != fastly.ErrMissingComputeACLID {
@@ -229,7 +230,7 @@ func TestClient_Describe_validation(t *testing.T) {
 }
 
 func TestClient_Delete_validation(t *testing.T) {
-	err := Delete(fastly.TestClient, &DeleteInput{
+	err := Delete(context.TODO(), fastly.TestClient, &DeleteInput{
 		ComputeACLID: nil,
 	})
 	if err != fastly.ErrMissingComputeACLID {
@@ -239,7 +240,7 @@ func TestClient_Delete_validation(t *testing.T) {
 
 func TestClient_Lookup_validation(t *testing.T) {
 	var err error
-	_, err = Lookup(fastly.TestClient, &LookupInput{
+	_, err = Lookup(context.TODO(), fastly.TestClient, &LookupInput{
 		ComputeACLID: nil,
 		ComputeACLIP: fastly.ToPointer("1.2.3.4"),
 	})
@@ -247,7 +248,7 @@ func TestClient_Lookup_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingComputeACLID: got %s", err)
 	}
 
-	_, err = Lookup(fastly.TestClient, &LookupInput{
+	_, err = Lookup(context.TODO(), fastly.TestClient, &LookupInput{
 		ComputeACLID: fastly.ToPointer("foo"),
 		ComputeACLIP: nil,
 	})
@@ -257,7 +258,7 @@ func TestClient_Lookup_validation(t *testing.T) {
 }
 
 func TestClient_ListEntries_validation(t *testing.T) {
-	_, err := ListEntries(fastly.TestClient, &ListEntriesInput{
+	_, err := ListEntries(context.TODO(), fastly.TestClient, &ListEntriesInput{
 		ComputeACLID: nil,
 	})
 	if err != fastly.ErrMissingComputeACLID {
@@ -266,7 +267,7 @@ func TestClient_ListEntries_validation(t *testing.T) {
 }
 
 func TestClient_Update_validation(t *testing.T) {
-	err := Update(fastly.TestClient, &UpdateInput{
+	err := Update(context.TODO(), fastly.TestClient, &UpdateInput{
 		ComputeACLID: nil,
 	})
 	if err != fastly.ErrMissingComputeACLID {

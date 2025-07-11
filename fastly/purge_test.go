@@ -1,6 +1,7 @@
 package fastly
 
 import (
+	"context"
 	"reflect"
 	"testing"
 )
@@ -57,7 +58,7 @@ func TestClient_Purge(t *testing.T) {
 	client := DefaultClient()
 	url := "http://gofastly.fastly-testing.com/foo/bar"
 
-	_, err := client.Purge(&PurgeInput{
+	_, err := client.Purge(context.TODO(), &PurgeInput{
 		URL:  url,
 		Soft: true,
 	})
@@ -72,7 +73,7 @@ func TestClient_PurgeKey(t *testing.T) {
 	var err error
 	var purge *Purge
 	Record(t, "purges/purge_by_key", func(c *Client) {
-		purge, err = c.PurgeKey(&PurgeKeyInput{
+		purge, err = c.PurgeKey(context.TODO(), &PurgeKeyInput{
 			ServiceID: TestDeliveryServiceID,
 			Key:       "foo",
 		})
@@ -95,7 +96,7 @@ func TestClient_PurgeKeys(t *testing.T) {
 	var err error
 	var purges map[string]string
 	Record(t, "purges/purge_by_keys", func(c *Client) {
-		purges, err = c.PurgeKeys(&PurgeKeysInput{
+		purges, err = c.PurgeKeys(context.TODO(), &PurgeKeysInput{
 			ServiceID: TestDeliveryServiceID,
 			Keys:      []string{"foo", "bar", "baz"},
 		})
@@ -115,7 +116,7 @@ func TestClient_PurgeAll(t *testing.T) {
 	var err error
 	var purge *Purge
 	Record(t, "purges/purge_all", func(c *Client) {
-		purge, err = c.PurgeAll(&PurgeAllInput{
+		purge, err = c.PurgeAll(context.TODO(), &PurgeAllInput{
 			ServiceID: TestDeliveryServiceID,
 		})
 	})
