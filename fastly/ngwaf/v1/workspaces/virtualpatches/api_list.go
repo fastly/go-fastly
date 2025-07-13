@@ -9,18 +9,18 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// ListInput specifies the information needed for the List() function to perform
-// the operation.
+// ListInput specifies the information needed for the List() function
+// to perform the operation.
 type ListInput struct {
-	// Limit how many results are returned (optional).
+	// Limit how many results are returned.
 	Limit *int
-	// Page number of the collection to request (optional).
+	// Page number of the collection to request.
 	Page *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
-// List retrieves a list of virtual patches, with optional filtering and pagination.
+// List retrieves a list of virtual patches, with optional pagination.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*VirtualPatches, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

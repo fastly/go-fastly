@@ -8,14 +8,17 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// UpdateInput specifies the information needed for the Update() function to
-// perform the operation.
+// UpdateInput specifies the information needed for the Update()
+// function to perform the operation.
 type UpdateInput struct {
-	// Description is the new description for the signal (required).
+	// Description is the new description for the signal
+	// (required).
 	Description *string `json:"description"`
-	// SignalID is the id of the signal that's being updated (required).
+	// SignalID is the id of the signal that's being updated
+	// (required).
 	SignalID *string `json:"-"`
-	// WorkspaceID is the ID of the workspace that the signal belongs to.
+	// WorkspaceID is the ID of the workspace that the signal
+	// belongs to (required).
 	WorkspaceID *string `json:"-"`
 }
 

@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to perform
-// the operation.
+// GetInput specifies the information needed for the Get() function to
+// perform the operation.
 type GetInput struct {
 	// SignalID is the signal identifier (required).
 	SignalID *string
