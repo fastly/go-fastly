@@ -1,6 +1,6 @@
 package products
 
-import "github.com/fastly/go-fastly/v10/fastly"
+import "github.com/fastly/go-fastly/v11/fastly"
 
 // ProductOutput is an interface used to constrain the 'O' type
 // parameters of API operation functions. Use of this interface allows

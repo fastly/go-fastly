@@ -3,11 +3,11 @@ package brotlicompression_test
 import (
 	"testing"
 
-	"github.com/fastly/go-fastly/v10/fastly"
-	"github.com/fastly/go-fastly/v10/fastly/products"
-	"github.com/fastly/go-fastly/v10/fastly/products/brotlicompression"
-	"github.com/fastly/go-fastly/v10/internal/productcore"
-	"github.com/fastly/go-fastly/v10/internal/test_utils"
+	"github.com/fastly/go-fastly/v11/fastly"
+	"github.com/fastly/go-fastly/v11/fastly/products"
+	"github.com/fastly/go-fastly/v11/fastly/products/brotlicompression"
+	"github.com/fastly/go-fastly/v11/internal/productcore"
+	"github.com/fastly/go-fastly/v11/internal/test_utils"
 )
 
 var serviceID = fastly.TestDeliveryServiceID

@@ -6,9 +6,11 @@
 
 ### Breaking:
 
+- breaking(go.mod): Upgrade to version 11. [#7XX](https://github.com/fastly/go-fastly/pull/7XX)
+- fix(product_enablement): Remove deprecated functionality. ([#7XX](https://github.com/fastly/go-fastly/pull/7XX))
 - feat(context): context.Context support has been added to all exported functions. ([#717](https://github.com/fastly/go-fastly/pull/717))
 - refactor(ngwaf/v1/workspaces): move all workspace specific endpoints into the appropriate folder ([#708](https://github.com/fastly/go-fastly/pull/708))
-- fix(ngwaf/v1/workpsaces/requests): add missing field to metadata struct and update documentation around limits ([#711](https://github.com/fastly/go-fastly/pull/711))
+- fix(ngwaf/v1/workspaces/requests): add missing field to metadata struct and update documentation around limits ([#711](https://github.com/fastly/go-fastly/pull/711))
 - fix(ngwaf/v1/workspaces/redactions): remove mode and page params and remove requirement for both field and type for update ([#712](https://github.com/fastly/go-fastly/pull/712))
 
 ### Enhancements:
