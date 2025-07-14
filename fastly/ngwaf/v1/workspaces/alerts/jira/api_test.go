@@ -29,7 +29,6 @@ func Test_Alerts(t *testing.T) {
 	// Create a workspace alert.
 	fastly.Record(t, "create_alert", func(c *fastly.Client) {
 		WorkSpaceAlert, err = Create(context.TODO(), c, &CreateInput{
-			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
 			Events:      &[]string{testEvent},
 			Description: fastly.ToPointer(testDescription),
@@ -180,21 +179,12 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrInvalidConfigType) {
-		t.Errorf("expected ErrInvalidConfigType: got %s", err)
-	}
-	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingConfig) {
 		t.Errorf("expected ErrMissingConfig: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
 		Config:      &CreateConfig{Host: fastly.ToPointer("test.atlassian.net"), Key: fastly.ToPointer("111222333"), Project: fastly.ToPointer("TEST"), Username: fastly.ToPointer("user")},
 		Events:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),

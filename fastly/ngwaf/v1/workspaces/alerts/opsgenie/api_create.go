@@ -25,19 +25,24 @@ type CreateInput struct {
 	Description *string `json:"description,omitempty"`
 	// Events is a list of event types (required).
 	Events *[]string `json:"events"`
-	// Type is the type of the workspace integration (required).
-	Type *string `json:"type"`
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string `json:"-"`
+}
+
+// Private struct to ensure correct alert type.
+type privateOpsGenieInput struct {
+	Config      *CreateConfig    `json:"config"`
+	Context     *context.Context `json:"-"`
+	Description *string          `json:"description,omitempty"`
+	Events      *[]string        `json:"events"`
+	Type        *string          `json:"type"`
+	WorkspaceID *string          `json:"-"`
 }
 
 // Create creates a new opsgenie alert.
 func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
-	}
-	if i.Type == nil || *i.Type != IntegrationType {
-		return nil, fastly.ErrInvalidConfigType
 	}
 	if i.Config == nil {
 		return nil, fastly.ErrMissingConfig
@@ -53,7 +58,16 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Alert, erro
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts")
 
-	resp, err := c.PostJSON(ctx, path, i, fastly.CreateRequestOptions())
+	opsGenieInput := privateOpsGenieInput{
+		Config:      i.Config,
+		Context:     i.Context,
+		Description: i.Description,
+		Events:      i.Events,
+		Type:        fastly.ToPointer(IntegrationType),
+		WorkspaceID: i.WorkspaceID,
+	}
+
+	resp, err := c.PostJSON(ctx, path, opsGenieInput, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

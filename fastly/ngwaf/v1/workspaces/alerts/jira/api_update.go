@@ -59,7 +59,7 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Alert, erro
 
 	// Validate that this is a jira integration
 	if currentAlert.Type != IntegrationType {
-		return nil, fastly.ErrInvalidConfigType
+		return nil, fastly.ErrInvalidType
 	}
 
 	if i.Config == nil {

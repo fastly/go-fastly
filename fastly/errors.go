@@ -57,13 +57,15 @@ var ErrTokenEmpty = NewFieldError("Token").Message(emptyTokenInvalid)
 
 const batchModifyMaxExceeded string = "batch modify maximum operations exceeded"
 
-// ErrInvalidConfigType is an error that is returned when a config struct
-// requires a "Config" key, but the value of the key was not expected.
-var ErrInvalidConfigType = NewFieldError("Config")
-
 // ErrMaxExceededEntries is an error that is returned when an input struct
 // specifies an "Entries" key value exceeding the maximum allowed.
 var ErrMaxExceededEntries = NewFieldError("Entries").Message(batchModifyMaxExceeded)
+
+const alertTypeDoesNotMatch string = "alert type does not match"
+
+// ErrInvalidType is an error that is returned when an alert is being updated,
+// but the alert is not of the correct type.
+var ErrInvalidType = NewFieldError("Type").Message(alertTypeDoesNotMatch)
 
 // ErrMaxExceededItems is an error that is returned when an input struct
 // specifies an "Items" key value exceeding the maximum allowed.

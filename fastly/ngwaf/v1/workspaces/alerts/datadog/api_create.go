@@ -31,8 +31,8 @@ type CreateInput struct {
 	WorkspaceID *string
 }
 
-// Private type to ensure correct alert type.
-type createInput struct {
+// Private struct to ensure correct alert type.
+type privateDatadogInput struct {
 	Config      *CreateConfig    `json:"config"`
 	Context     *context.Context `json:"-"`
 	Description *string          `json:"description,omitempty"`
@@ -63,7 +63,7 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Alert, erro
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts")
 
-	datadogInput := createInput{
+	datadogInput := privateDatadogInput{
 		Config:      i.Config,
 		Context:     i.Context,
 		Description: i.Description,
