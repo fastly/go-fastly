@@ -12,7 +12,7 @@ import (
 type UpdateConfig struct {
 	// Host is the name of the Jira instance (required).
 	Host *string `json:"host"`
-	// IssueType is the Jira issue type associated with the ticket (optional).
+	// IssueType is the Jira issue type associated with the ticket.
 	IssueType *string `json:"issue_type,omitempty"`
 	// Key is the Jira API key / secret field (required).
 	Key *string `json:"key"`

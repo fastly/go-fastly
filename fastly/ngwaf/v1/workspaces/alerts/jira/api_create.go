@@ -12,7 +12,7 @@ import (
 type CreateConfig struct {
 	// Host is the name of the Jira instance (required).
 	Host *string `json:"host"`
-	// IssueType is the Jira issue type associated with the ticket (optional).
+	// IssueType is the Jira issue type associated with the ticket.
 	IssueType *string `json:"issue_type,omitempty"`
 	// Key is the Jira API key / secret field (required).
 	Key *string `json:"key"`
@@ -29,7 +29,7 @@ type CreateInput struct {
 	Config *CreateConfig `json:"config"`
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context `json:"-"`
-	// Description is an optional description for the alert (optional).
+	// Description is an optional description for the alert.
 	Description *string `json:"description,omitempty"`
 	// Events is a list of event types (required).
 	Events *[]string `json:"events"`

@@ -73,11 +73,11 @@ type SecretStores struct {
 
 // ListSecretStoresInput is used as input to the ListSecretStores function.
 type ListSecretStoresInput struct {
-	// Cursor is the pagination cursor (optional).
+	// Cursor is the pagination cursor.
 	Cursor string
-	// Limit is the desired number of Secret Stores (optional).
+	// Limit is the desired number of Secret Stores.
 	Limit int
-	// Name is the name of the secret store (optional).
+	// Name is the name of the secret store.
 	Name string
 }
 
@@ -186,7 +186,7 @@ type Secret struct {
 
 // CreateSecretInput is used as input to the CreateSecret function.
 type CreateSecretInput struct {
-	// ClientKey is the public key used to encrypt the secret with (optional).
+	// ClientKey is the public key used to encrypt the secret with.
 	ClientKey []byte
 	// Method is the HTTP request method used to create the secret.
 	//
@@ -277,9 +277,9 @@ type Secrets struct {
 
 // ListSecretsInput is used as input to the ListSecrets function.
 type ListSecretsInput struct {
-	// Cursor is the pagination cursor (optional).
+	// Cursor is the pagination cursor.
 	Cursor string
-	// Limit is the desired number of Secrets (optional).
+	// Limit is the desired number of Secrets.
 	Limit int
 	// StoreID of the Secret Store (required).
 	StoreID string

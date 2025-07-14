@@ -181,7 +181,7 @@ func (c *Client) UpdateVersion(ctx context.Context, i *UpdateVersionInput) (*Ver
 
 // ActivateVersionInput is the input to the ActivateVersion function.
 type ActivateVersionInput struct {
-	// Environment is the Fastly environment to activate this version to (optional).
+	// Environment is the Fastly environment to activate this version to.
 	Environment string
 	// ServiceID is the ID of the service (required).
 	ServiceID string
@@ -220,7 +220,7 @@ func (c *Client) ActivateVersion(ctx context.Context, i *ActivateVersionInput) (
 
 // DeactivateVersionInput is the input to the DeactivateVersion function.
 type DeactivateVersionInput struct {
-	// Environment is the Fastly environment to deactivate this version from (optional).
+	// Environment is the Fastly environment to deactivate this version from.
 	Environment string
 	// ServiceID is the ID of the service (required).
 	ServiceID string

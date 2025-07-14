@@ -14,7 +14,7 @@ import (
 type ListInput struct {
 	// Context, if supplied, will be used as the Request's context.
 	Context *context.Context
-	// Limit how many results are returned (optional).
+	// Limit how many results are returned.
 	Limit *int
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
