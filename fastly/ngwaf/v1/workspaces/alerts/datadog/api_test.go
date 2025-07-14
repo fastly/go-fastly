@@ -26,7 +26,6 @@ func Test_Alerts(t *testing.T) {
 	// Create a workspace alert.
 	fastly.Record(t, "create_alert", func(c *fastly.Client) {
 		alert, err = Create(context.TODO(), c, &CreateInput{
-			Type:        fastly.ToPointer(testType),
 			Config:      testConfig,
 			Events:      &[]string{testEvent},
 			Description: fastly.ToPointer(testDescription),
@@ -38,6 +37,25 @@ func Test_Alerts(t *testing.T) {
 	}
 	if alert == nil {
 		t.Fatal("expected alert response, got nil")
+	}
+	if *alert.Config.Key != *testConfig.Key {
+		t.Errorf("unexpected alert config key: got %v, expected %v", *alert.Config.Key, *testConfig.Key)
+	}
+	if *alert.Config.Site != *testConfig.Site {
+		t.Errorf("unexpected alert config site: got %v, expected %v", *alert.Config.Site, *testConfig.Site)
+	}
+	if alert.Type != testType {
+		t.Errorf("unexpected alert type: got %+v, expected %+v", alert.Type, testType)
+	}
+	if len(alert.Events) != 1 {
+		t.Errorf("unexpected alerts event length: got %d, expected %d", len(alert.Events), 1)
+	}
+
+	if alert.Events[0] != testEvent {
+		t.Errorf("unexpected alert events: got %+v, expected %+v", alert.Events[0], testEvent)
+	}
+	if alert.Description != testDescription {
+		t.Errorf("unexpected alert description: got %+v, expected %+v", alert.Description, testDescription)
 	}
 	alertID = alert.ID
 
@@ -157,21 +175,12 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingWorkspaceID: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        nil,
-		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
-	})
-	if !errors.Is(err, fastly.ErrInvalidConfigType) {
-		t.Errorf("expected ErrInvalidConfigType: got %s", err)
-	}
-	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
 	})
 	if !errors.Is(err, fastly.ErrMissingConfig) {
 		t.Errorf("expected ErrMissingConfig: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
 		Config:      &CreateConfig{Key: fastly.ToPointer("111222333"), Site: fastly.ToPointer("us1")},
 		Events:      nil,
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -180,7 +189,6 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingEvents: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
 		Config:      &CreateConfig{Site: fastly.ToPointer("us1")},
 		Events:      &[]string{"flag"},
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),
@@ -189,7 +197,6 @@ func TestClient_CreateAlert_validation(t *testing.T) {
 		t.Errorf("expected ErrMissingKey: got %s", err)
 	}
 	_, err = Create(context.TODO(), fastly.TestClient, &CreateInput{
-		Type:        fastly.ToPointer(IntegrationType),
 		Config:      &CreateConfig{Key: fastly.ToPointer("444555666")},
 		Events:      &[]string{"flag"},
 		WorkspaceID: fastly.ToPointer(fastly.TestNGWAFWorkspaceID),

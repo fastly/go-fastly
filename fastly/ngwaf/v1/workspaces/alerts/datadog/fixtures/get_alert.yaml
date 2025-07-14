@@ -7,22 +7,22 @@ interactions:
     headers:
       User-Agent:
       - FastlyGo/10.5.1 (+github.com/fastly/go-fastly; go1.24.2)
-    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/687001f2584b2ef2916de837
+    url: https://api.fastly.com/ngwaf/v1/workspaces/Am2qjXkgamuYp3u54rQkLD/alerts/68753c93d012c6d26fcca971
     method: GET
   response:
     body: |
-      {"id":"687001f2584b2ef2916de837","description":"This is a test alert.","type":"datadog","config":{"key":"123456789","site":"us1"},"events":["flag"],"created_at":"2025-07-10T18:09:54Z","created_by":"rcarillo+de2@fastly.com","last_status_code":0}
+      {"id":"68753c93d012c6d26fcca971","description":"This is a test alert.","type":"datadog","config":{"key":"123456789","site":"us1"},"events":["flag"],"created_at":"2025-07-14T17:21:23Z","created_by":"anthony.gomez+de2@fastly.com","last_status_code":0}
     headers:
       Accept-Ranges:
       - bytes
       Cache-Control:
       - no-store
       Content-Length:
-      - "245"
+      - "250"
       Content-Type:
       - application/json
       Date:
-      - Thu, 10 Jul 2025 18:09:54 GMT
+      - Mon, 14 Jul 2025 17:21:23 GMT
       Pragma:
       - no-cache
       Server:
@@ -38,9 +38,9 @@ interactions:
       X-Cache-Hits:
       - 0, 0
       X-Served-By:
-      - cache-chi-kigq8000099-CHI, cache-ewr-kewr1740050-EWR
+      - cache-chi-kigq8000063-CHI, cache-nyc-kteb1890084-NYC
       X-Timer:
-      - S1752170995.778560,VS0,VE112
+      - S1752513684.891886,VS0,VE107
     status: 200 OK
     code: 200
     duration: ""
