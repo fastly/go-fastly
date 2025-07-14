@@ -24,7 +24,6 @@ func RotateKey(ctx context.Context, c *fastly.Client, i *RotateKeyInput) (*Alert
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}

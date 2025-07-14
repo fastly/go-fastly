@@ -42,7 +42,6 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Alert, erro
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}
-
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -61,11 +60,9 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Alert, erro
 	if currentAlert.Type != IntegrationType {
 		return nil, fastly.ErrInvalidType
 	}
-
 	if i.Config == nil {
 		return nil, fastly.ErrMissingConfig
 	}
-
 	// Validate jira integration configuration
 	if i.Config.Host == nil {
 		return nil, fastly.ErrMissingHost

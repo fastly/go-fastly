@@ -24,7 +24,6 @@ func GetKey(ctx context.Context, c *fastly.Client, i *GetKeyInput) (*AlertsKey, 
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}

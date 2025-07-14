@@ -24,7 +24,6 @@ func Get(ctx context.Context, c *fastly.Client, i *GetInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
-
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}

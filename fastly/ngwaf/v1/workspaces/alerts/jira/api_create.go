@@ -58,7 +58,6 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Alert, erro
 	if i.Events == nil {
 		return nil, fastly.ErrMissingEvents
 	}
-
 	// Validate jira integration configuration
 	if i.Config.Host == nil {
 		return nil, fastly.ErrMissingHost

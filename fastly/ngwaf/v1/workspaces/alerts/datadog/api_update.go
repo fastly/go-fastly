@@ -36,7 +36,6 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Alert, erro
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}
-
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -55,11 +54,9 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Alert, erro
 	if currentAlert.Type != IntegrationType {
 		return nil, fastly.ErrInvalidType
 	}
-
 	if i.Config == nil {
 		return nil, fastly.ErrMissingConfig
 	}
-
 	// Validate datadog integration configuration
 	if i.Config.Key == nil {
 		return nil, fastly.ErrMissingKey

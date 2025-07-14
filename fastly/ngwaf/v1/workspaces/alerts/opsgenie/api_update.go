@@ -34,7 +34,6 @@ func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Alert, erro
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}
-
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}

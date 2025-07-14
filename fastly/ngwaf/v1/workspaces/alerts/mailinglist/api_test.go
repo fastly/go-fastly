@@ -46,7 +46,6 @@ func Test_Alerts(t *testing.T) {
 	if len(alert.Events) != 1 {
 		t.Errorf("unexpected alerts event length: got %d, expected %d", len(alert.Events), 1)
 	}
-
 	if alert.Events[0] != testEvent {
 		t.Errorf("unexpected alert events: got %+v, expected %+v", alert.Events[0], testEvent)
 	}

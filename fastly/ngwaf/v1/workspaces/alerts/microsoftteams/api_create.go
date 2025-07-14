@@ -50,7 +50,6 @@ func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Alert, erro
 	if i.Events == nil {
 		return nil, fastly.ErrMissingEvents
 	}
-
 	// Validate microsoftteams integration configuration
 	if i.Config.Webhook == nil {
 		return nil, fastly.ErrMissingWebhook
