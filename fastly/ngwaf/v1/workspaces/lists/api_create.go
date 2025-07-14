@@ -8,8 +8,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// CreateInput specifies the information needed for the Create() function to
-// perform the operation.
+// CreateInput specifies the information needed for the Create()
+// function to perform the operation.
 type CreateInput struct {
 	// Description is the description of the list.
 	Description *string `json:"description,omitempty"`
@@ -17,7 +17,8 @@ type CreateInput struct {
 	Entries *[]string `json:"entries"`
 	// Name is the name of the list (required).
 	Name *string `json:"name"`
-	// Type is the type of the list. Must be one of string | wildcard | ip | country | signal (required).
+	// Type is the type of the list. Must be one of `string` |
+	// `wildcard` | `ip` | `country` | `signal` (required).
 	Type *string `json:"type"`
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string

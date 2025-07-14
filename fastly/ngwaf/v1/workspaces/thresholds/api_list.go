@@ -9,8 +9,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// ListInput specifies the information needed for the List() function to perform
-// the operation.
+// ListInput specifies the information needed for the List() function
+// to perform the operation.
 type ListInput struct {
 	// Limit how many results are returned.
 	Limit *int

@@ -9,8 +9,8 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// ListInput specifies the information needed for the List() function to perform
-// the operation.
+// ListInput specifies the information needed for the List() function
+// to perform the operation.
 type ListInput struct {
 	// Action filter results based on action.
 	Action *string
@@ -20,13 +20,15 @@ type ListInput struct {
 	Limit *int
 	// Page number of the collection to request.
 	Page *int
-	// Types filter results based on types (accepts more than one value and performs a union across rules of given types).
+	// Types filter results based on types (accepts more than one
+	// value and performs a union across rules of given types).
 	Types *string
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
 }
 
-// List retrieves a list of rules, with optional filtering and pagination.
+// List retrieves a list of rules, with optional filtering and
+// pagination.
 func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Rules, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID

@@ -2,13 +2,14 @@ package requests
 
 import "time"
 
-// Request is the api response to requests and request operations.
+// Request is the API response to requests and request operations.
 type Request struct {
 	// AgentResponseCode is the Agent response code.
 	AgentResponseCode int `json:"agent_response_code"`
 	// Country is the origin country of the request.
 	Country string `json:"country"`
-	// ID is a base62-encoded representation of a UUID used to uniquely identify a request.
+	// ID is a base62-encoded representation of a UUID used to
+	// uniquely identify a request.
 	ID string `json:"id"`
 	// Method is the HTTP method of the request.
 	Method string `json:"method"`
@@ -64,13 +65,15 @@ type Signal struct {
 	Detector string `json:"detector"`
 	// ID is the signal ID.
 	ID string `json:"id"`
-	// Location is the location in the request that triggered the signal
+	// Location is the location in the request that triggered the
+	// signal
 	Location string `json:"location"`
 	// Value is the signal value
 	Value string `json:"value"`
 }
 
-// Requests is the API response structure for the list requests operation.
+// Requests is the API response structure for the list requests
+// operation.
 type Requests struct {
 	// Data is the list of returned workspaces.
 	Data []Request `json:"data"`

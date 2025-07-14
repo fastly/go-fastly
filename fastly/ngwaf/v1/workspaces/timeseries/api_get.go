@@ -9,16 +9,19 @@ import (
 	"github.com/fastly/go-fastly/v10/fastly"
 )
 
-// GetInput specifies the information needed for the Get() function to perform
-// the operation.
+// GetInput specifies the information needed for the Get() function to
+// perform the operation.
 type GetInput struct {
-	// End is a time range and is the older of the two dates in RFC 3339 format (optional).
+	// End is a time range and is the later of the two dates in
+	// RFC 3339 format.
 	End *string
-	// Granularity is the sample size in seconds (optional).
+	// Granularity is the sample size in seconds.
 	Granularity *int
-	// Metrics are comma separated list of metrics to be included in the timeseries (required).
+	// Metrics are comma separated list of metrics to be included
+	// in the timeseries (required).
 	Metrics *string
-	// Start is a time range and is the older of the two dates in RFC 3339 format (required).
+	// Start is a time range and is the earlier of the two dates in
+	// RFC 3339 format (required).
 	Start *string
 	// WorkspaceID is the workspace identifier (required).
 	WorkspaceID *string
