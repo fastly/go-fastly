@@ -12,8 +12,6 @@ import (
 var testWorkspaceID = fastly.TestNGWAFWorkspaceID
 
 func Test_Alerts(t *testing.T) {
-	t.Parallel()
-
 	var alertID string
 	var err error
 	var alert *Alert
