@@ -20,7 +20,7 @@ type RotateKeyInput struct {
 }
 
 // RotateKey rotates the webhook alert signing key.
-func RotateKey(c *fastly.Client, i *RotateKeyInput) (*AlertsKey, error) {
+func RotateKey(ctx context.Context, c *fastly.Client, i *RotateKeyInput) (*AlertsKey, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -31,7 +31,7 @@ func RotateKey(c *fastly.Client, i *RotateKeyInput) (*AlertsKey, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts", *i.AlertID, "signing-key")
 
-	resp, err := c.Post(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Post(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

@@ -19,7 +19,7 @@ type DeleteInput struct {
 }
 
 // Delete deletes the jira workspace alert.
-func Delete(c *fastly.Client, i *DeleteInput) error {
+func Delete(ctx context.Context, c *fastly.Client, i *DeleteInput) error {
 	if i.WorkspaceID == nil {
 		return fastly.ErrMissingWorkspaceID
 	}
@@ -29,7 +29,7 @@ func Delete(c *fastly.Client, i *DeleteInput) error {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts", *i.AlertID)
 
-	resp, err := c.Delete(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Delete(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return err
 	}

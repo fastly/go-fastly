@@ -32,7 +32,7 @@ type CreateInput struct {
 }
 
 // Create creates a new slack alert.
-func Create(c *fastly.Client, i *CreateInput) (*Alert, error) {
+func Create(ctx context.Context, c *fastly.Client, i *CreateInput) (*Alert, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -53,7 +53,7 @@ func Create(c *fastly.Client, i *CreateInput) (*Alert, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts")
 
-	resp, err := c.PostJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PostJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

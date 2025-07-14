@@ -20,7 +20,7 @@ type GetKeyInput struct {
 }
 
 // GetKey gets the webhook alert signing key.
-func GetKey(c *fastly.Client, i *GetKeyInput) (*AlertsKey, error) {
+func GetKey(ctx context.Context, c *fastly.Client, i *GetKeyInput) (*AlertsKey, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
@@ -31,7 +31,7 @@ func GetKey(c *fastly.Client, i *GetKeyInput) (*AlertsKey, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts", *i.AlertID, "signing-key")
 
-	resp, err := c.Get(path, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.Get(ctx, path, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

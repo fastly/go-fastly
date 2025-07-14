@@ -32,7 +32,7 @@ type UpdateInput struct {
 }
 
 // Update updates the specified datadog alert.
-func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
+func Update(ctx context.Context, c *fastly.Client, i *UpdateInput) (*Alert, error) {
 	if i.AlertID == nil {
 		return nil, fastly.ErrMissingAlertID
 	}
@@ -42,7 +42,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
 	}
 
 	// Get the current alert to validate the integration type.
-	currentAlert, err := Get(c, &GetInput{
+	currentAlert, err := Get(ctx, c, &GetInput{
 		AlertID:     i.AlertID,
 		WorkspaceID: i.WorkspaceID,
 		Context:     i.Context,
@@ -70,7 +70,7 @@ func Update(c *fastly.Client, i *UpdateInput) (*Alert, error) {
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts", *i.AlertID)
 
-	resp, err := c.PatchJSON(path, i, fastly.CreateRequestOptions(i.Context))
+	resp, err := c.PatchJSON(ctx, path, i, fastly.CreateRequestOptions())
 	if err != nil {
 		return nil, err
 	}

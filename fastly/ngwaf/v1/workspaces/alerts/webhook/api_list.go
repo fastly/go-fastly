@@ -21,19 +21,19 @@ type ListInput struct {
 }
 
 // List retrieves a list of webhook workspace alerts.
-func List(c *fastly.Client, i *ListInput) (*Alerts, error) {
+func List(ctx context.Context, c *fastly.Client, i *ListInput) (*Alerts, error) {
 	if i.WorkspaceID == nil {
 		return nil, fastly.ErrMissingWorkspaceID
 	}
 
-	requestOptions := fastly.CreateRequestOptions(i.Context)
+	requestOptions := fastly.CreateRequestOptions()
 	if i.Limit != nil {
 		requestOptions.Params["limit"] = strconv.Itoa(*i.Limit)
 	}
 
 	path := fastly.ToSafeURL("ngwaf", "v1", "workspaces", *i.WorkspaceID, "alerts")
 
-	resp, err := c.Get(path, requestOptions)
+	resp, err := c.Get(ctx, path, requestOptions)
 	if err != nil {
 		return nil, err
 	}
